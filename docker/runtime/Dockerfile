@@ -18,7 +18,7 @@ RUN apt-get update && apt-get install -y \
     findutils \
     && rm -rf /var/lib/apt/lists/*
 
-RUN useradd -m -u 1000 runner
+RUN useradd -m -s /bin/bash runner
 
 WORKDIR /workspace
 
