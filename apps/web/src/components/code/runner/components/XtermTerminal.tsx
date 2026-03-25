@@ -57,7 +57,9 @@ export default function XtermTerminal(props: {
 
     const hostRef = useRef<HTMLDivElement | null>(null);
     const termRef = useRef<Terminal | null>(null);
+    const fitRef = useRef<FitAddon | null>(null);
     const renderedCountRef = useRef(0);
+    const rafRef = useRef<number | null>(null);
 
     const isReadyForInput = inputEnabled && !disabled;
 
@@ -71,14 +73,14 @@ export default function XtermTerminal(props: {
 
     useEffect(() => {
         const host = hostRef.current;
-        if (!host) return;
+        if (!host || termRef.current) return;
 
         const isDark = document.documentElement.classList.contains("dark");
 
         const term = new Terminal({
             convertEol: false,
-            cursorBlink: isReadyForInput,
-            disableStdin: !isReadyForInput,
+            cursorBlink: false,
+            disableStdin: true,
             allowTransparency: true,
             fontFamily:
                 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
@@ -90,51 +92,94 @@ export default function XtermTerminal(props: {
 
         const fitAddon = new FitAddon();
         term.loadAddon(fitAddon);
+
         term.open(host);
 
-        const fitAndReport = () => {
+        termRef.current = term;
+        fitRef.current = fitAddon;
+
+        const safeFit = () => {
+            const el = hostRef.current;
+            const t = termRef.current;
+            const f = fitRef.current;
+            if (!el || !t || !f) return;
+
+            if (!document.body.contains(el)) return;
+
+            const width = el.clientWidth;
+            const height = el.clientHeight;
+
+            if (width < 20 || height < 20) return;
+
             try {
-                fitAddon.fit();
-                onResize(term.cols, term.rows);
-            } catch {}
+                f.fit();
+                if (t.cols > 0 && t.rows > 0) {
+                    onResize(t.cols, t.rows);
+                }
+            } catch (err) {
+                console.error("xterm fit failed", err);
+            }
         };
 
-        fitAndReport();
-
-        termRef.current = term;
+        rafRef.current = window.setTimeout(() => {
+            safeFit();
+        }, 0) as unknown as number;
 
         const ro = new ResizeObserver(() => {
-            fitAndReport();
+            if (rafRef.current != null) {
+                window.clearTimeout(rafRef.current);
+            }
+            rafRef.current = window.setTimeout(() => {
+                safeFit();
+            }, 0) as unknown as number;
         });
+
         ro.observe(host);
 
         const mo = new MutationObserver(() => {
+            const current = termRef.current;
+            if (!current) return;
             const dark = document.documentElement.classList.contains("dark");
-            term.options.theme = getTheme(dark);
+            current.options.theme = getTheme(dark);
         });
+
         mo.observe(document.documentElement, {
             attributes: true,
             attributeFilter: ["class"],
         });
 
-        const focusTerminal = () => term.focus();
+        const focusTerminal = () => termRef.current?.focus();
         host.addEventListener("click", focusTerminal);
 
         return () => {
             host.removeEventListener("click", focusTerminal);
             ro.disconnect();
             mo.disconnect();
-            term.dispose();
+
+            if (rafRef.current != null) {
+                window.clearTimeout(rafRef.current);
+                rafRef.current = null;
+            }
+
+            try {
+                term.dispose();
+            } catch {}
+
             termRef.current = null;
+            fitRef.current = null;
         };
-    }, [onResize, isReadyForInput]);
+    }, [onResize]);
 
     useEffect(() => {
         const term = termRef.current;
         if (!term) return;
+
         term.options.cursorBlink = isReadyForInput;
         term.options.disableStdin = !isReadyForInput;
-        if (isReadyForInput) term.focus();
+
+        if (isReadyForInput) {
+            term.focus();
+        }
     }, [isReadyForInput]);
 
     useEffect(() => {
@@ -156,6 +201,7 @@ export default function XtermTerminal(props: {
         if (!term) return;
 
         if (terminalFeed.length === 0 && renderedCountRef.current > 0) {
+            term.clear();
             term.reset();
             renderedCountRef.current = 0;
             return;
@@ -198,14 +244,14 @@ export default function XtermTerminal(props: {
 
             <div
                 className={[
-                    "mt-2 flex-1 overflow-hidden border-t py-2",
+                    "mt-2 flex-1 min-h-0 overflow-hidden border-t py-2",
                     "bg-white/60 dark:bg-black/30",
                     "border-neutral-200 dark:border-white/10",
                 ].join(" ")}
             >
                 <div
                     ref={hostRef}
-                    className="h-full w-full px-2"
+                    className="h-full w-full min-h-0 px-2"
                     aria-label="Interactive terminal"
                 />
             </div>

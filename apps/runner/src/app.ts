@@ -10,15 +10,41 @@ export const app = express();
 
 app.set("trust proxy", 1);
 
-const allowedOrigins = [env.webUrl].filter(Boolean) as string[];
+function normalizeOrigin(value?: string | null) {
+    if (!value) return null;
+    try {
+        return new URL(value).origin.toLowerCase();
+    } catch {
+        return null;
+    }
+}
+
+const allowedOrigins = new Set(
+    [env.webUrl]
+        .map((v) => normalizeOrigin(v))
+        .filter((v): v is string => Boolean(v)),
+);
 
 app.use(
     cors({
         origin(origin, callback) {
-            if (!origin) return callback(null, true);
-            if (allowedOrigins.length === 0) return callback(null, true);
-            if (allowedOrigins.includes(origin)) return callback(null, true);
-            return callback(new Error("Not allowed by CORS"));
+            if (!origin) {
+                return callback(null, true);
+            }
+
+            const normalized = normalizeOrigin(origin);
+
+            if (normalized && allowedOrigins.has(normalized)) {
+                return callback(null, true);
+            }
+
+            console.error("CORS reject", {
+                origin,
+                normalized,
+                allowedOrigins: [...allowedOrigins],
+            });
+
+            return callback(null, false);
         },
         credentials: true,
     }),

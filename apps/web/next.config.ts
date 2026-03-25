@@ -1,4 +1,3 @@
-// next.config.ts
 import type { NextConfig } from "next";
 import createNextIntlPlugin from "next-intl/plugin";
 
@@ -25,10 +24,8 @@ const nextConfig = {
     ],
   },
 
-  // keep pdfkit external so it can read its runtime files
   serverExternalPackages: ["pdfkit"],
 
-  // ✅ moved out of experimental in Next 16.1.1
   outputFileTracingIncludes: {
     "/api/certificates/subject/pdf": ["./node_modules/pdfkit/js/data/**"],
   },

@@ -23,10 +23,26 @@ function getSessionIdFromRequest(req: IncomingMessage) {
     return match?.[1] ? decodeURIComponent(match[1]) : null;
 }
 
+function normalizeOrigin(value?: string | null) {
+    if (!value) return null;
+    try {
+        return new URL(value).origin.toLowerCase();
+    } catch {
+        return null;
+    }
+}
+
+const allowedOrigins = new Set(
+    [env.webUrl]
+        .map((v?:string) => normalizeOrigin(v))
+        .filter((v:string|null): v is string => Boolean(v)),
+);
+
 function originAllowed(origin: string | undefined) {
     if (!origin) return true;
-    if (!env.webUrl) return true;
-    return origin === env.webUrl;
+
+    const normalized = normalizeOrigin(origin);
+    return !!normalized && allowedOrigins.has(normalized);
 }
 
 export function attachSessionWsServer(server: HttpServer) {
@@ -37,6 +53,10 @@ export function attachSessionWsServer(server: HttpServer) {
         const sessionId = getSessionIdFromRequest(req);
 
         if (!originAllowed(origin)) {
+            console.error("WS origin reject", {
+                origin,
+                allowedOrigins: [...allowedOrigins],
+            });
             socket.write("HTTP/1.1 403 Forbidden\r\n\r\n");
             socket.destroy();
             return;
@@ -55,7 +75,7 @@ export function attachSessionWsServer(server: HttpServer) {
             return;
         }
 
-        wss.handleUpgrade(req, socket, head, (ws:any) => {
+        wss.handleUpgrade(req, socket, head, (ws) => {
             wss.emit("connection", ws, req, sessionId);
         });
     });

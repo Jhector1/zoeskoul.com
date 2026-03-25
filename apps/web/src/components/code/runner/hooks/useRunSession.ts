@@ -46,9 +46,19 @@ function isFinalSessionState(state: string) {
 }
 
 function getWsBaseUrl() {
-    const explicit = process.env.NEXT_PUBLIC_RUNNER_WS_BASE_URL;
-    if (explicit) return explicit.replace(/\/+$/, "");
-    return "";
+    const explicit = process.env.NEXT_PUBLIC_RUNNER_WS_BASE_URL?.trim();
+    if (!explicit) {
+        throw new Error("Missing NEXT_PUBLIC_RUNNER_WS_BASE_URL");
+    }
+
+    const normalized = explicit.replace(/\/+$/, "");
+    if (!/^wss?:\/\//i.test(normalized)) {
+        throw new Error(
+            `NEXT_PUBLIC_RUNNER_WS_BASE_URL must start with ws:// or wss://. Got: ${normalized}`,
+        );
+    }
+
+    return normalized;
 }
 
 export function useRunSession() {
@@ -70,13 +80,9 @@ export function useRunSession() {
             setState(nextState);
 
             const base = getWsBaseUrl();
-            if (!base) {
-                throw new Error("NEXT_PUBLIC_RUNNER_WS_BASE_URL is not set.");
-            }
+            const wsUrl = `${base}/sessions/${encodeURIComponent(nextSessionId)}/ws`;
 
-            const ws = new WebSocket(
-                `${base}/sessions/${encodeURIComponent(nextSessionId)}/ws`,
-            );
+            const ws = new WebSocket(wsUrl);
 
             ws.onmessage = (ev) => {
                 const msg = JSON.parse(ev.data) as ServerToClientMessage;
@@ -105,10 +111,13 @@ export function useRunSession() {
 
                 if (msg.type === "error") {
                     setState("failed");
+                    console.error("Runner WS error:", msg.message);
                 }
             };
 
-            ws.onerror = () => {};
+            ws.onerror = (ev) => {
+                console.error("Runner WebSocket failed:", wsUrl, ev);
+            };
 
             ws.onclose = () => {
                 if (wsRef.current === ws) {
