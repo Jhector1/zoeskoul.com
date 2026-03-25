@@ -25,7 +25,7 @@ npx ts-node scripts/resetBilling.ts you@example.com
 # or with tsx
 npx dotenv -e .env.development.local -- npx tsx scripts/resetBilling.ts tutoring@student.learnoir.com
 
-
+docker build -f docker/runtime/Dockerfile -t zoeskoul-runtime:latest docker/runtime
 
 
 

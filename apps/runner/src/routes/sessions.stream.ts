@@ -14,7 +14,9 @@ export const streamSessionRoute: RequestHandler = async (req, res) => {
         const session = getSession(sessionId);
 
         if (!session) {
-            res.write(`event: error\ndata: ${JSON.stringify({ message: "Session not found." })}\n\n`);
+            res.write(
+                `event: error\ndata: ${JSON.stringify({ message: "Session not found." })}\n\n`,
+            );
             clearInterval(timer);
             res.end();
             return;

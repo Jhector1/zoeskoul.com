@@ -7,6 +7,9 @@ export const inputSessionRoute: RequestHandler = async (req, res) => {
         await writeInput(sessionId, String(req.body?.input ?? ""));
         res.status(200).json({ ok: true });
     } catch (e: any) {
-        res.status(500).json({ ok: false, error: e?.message ?? "Failed to send input." });
+        res.status(500).json({
+            ok: false,
+            error: e?.message ?? "Failed to send input.",
+        });
     }
 };

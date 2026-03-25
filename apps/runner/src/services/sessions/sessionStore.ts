@@ -1,4 +1,6 @@
 import type { RunEvent, RunSessionState } from "@zoeskoul/code-contracts";
+import type { NodeJSStream } from "../types";
+import {RunEventInput} from "@zoeskoul/code-contracts";
 
 type SessionRecord = {
     id: string;
@@ -7,12 +9,13 @@ type SessionRecord = {
     state: RunSessionState;
     seq: number;
     events: RunEvent[];
-    attachStream?: NodeJS.ReadWriteStream | null;
+    attachStream?: NodeJSStream | null;
+    lastActivityAt: number;
 };
 
 const sessions = new Map<string, SessionRecord>();
 
-function now() {
+function nowIso() {
     return new Date().toISOString();
 }
 
@@ -29,8 +32,8 @@ export function createSession(args: {
         seq: 0,
         events: [],
         attachStream: null,
+        lastActivityAt: Date.now(),
     };
-
     sessions.set(session.id, session);
     return session;
 }
@@ -39,7 +42,7 @@ export function getSession(id: string) {
     return sessions.get(id) ?? null;
 }
 
-export function setSessionStream(id: string, stream: NodeJS.ReadWriteStream) {
+export function setSessionStream(id: string, stream: NodeJSStream) {
     const s = sessions.get(id);
     if (!s) return null;
     s.attachStream = stream;
@@ -47,9 +50,16 @@ export function setSessionStream(id: string, stream: NodeJS.ReadWriteStream) {
     return s;
 }
 
+export function touchSession(id: string) {
+    const s = sessions.get(id);
+    if (!s) return;
+    s.lastActivityAt = Date.now();
+    sessions.set(id, s);
+}
+
 export function pushEvent(
     id: string,
-    event: Omit<RunEvent, "seq" | "ts">,
+    event: RunEventInput,
 ) {
     const s = sessions.get(id);
     if (!s) return null;
@@ -57,7 +67,7 @@ export function pushEvent(
     const full = {
         ...event,
         seq: ++s.seq,
-        ts: now(),
+        ts: nowIso(),
     } as RunEvent;
 
     if (event.type === "status") {
@@ -65,6 +75,11 @@ export function pushEvent(
     }
 
     s.events.push(full);
+    s.lastActivityAt = Date.now();
     sessions.set(id, s);
     return full;
+}
+
+export function deleteSession(id: string) {
+    sessions.delete(id);
 }

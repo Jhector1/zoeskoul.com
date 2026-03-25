@@ -1,5 +1,10 @@
-import type { RunEvent, RunSessionSummary } from "../types/session";
+import type {
+    RunEvent,
+    RunEventInput,
+    RunSessionSummary,
+} from "@zoeskoul/code-contracts";
 import type { ChildProcessWithoutNullStreams } from "node:child_process";
+// import {RunEventInput} from "@zoeskoul/code-contracts";
 
 type SessionRuntime = {
     proc?: ChildProcessWithoutNullStreams;
@@ -51,7 +56,7 @@ export function patchSession(id: string, patch: Partial<SessionRecord>) {
 
 export function pushEvent(
     id: string,
-    event: Omit<RunEvent, "seq" | "ts">,
+    event: RunEventInput,
 ) {
     const cur = sessions.get(id);
     if (!cur) return null;

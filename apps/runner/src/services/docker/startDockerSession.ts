@@ -5,8 +5,11 @@ import type {
     InteractiveRunReq,
     StartSessionResult,
 } from "@zoeskoul/code-contracts";
-import { createSession, pushEvent, setSessionStream } from "../sessions/sessionStore";
+import { env } from "../../lib/env";
+import { createSession, pushEvent, setSessionStream, touchSession } from "../sessions/sessionStore";
+import { armIdleTimeout, armWallTimeout, clearAllTimeouts } from "../sessions/timeoutManager";
 import { createWorkspace } from "../workspace/createWorkspace";
+import { cleanupWorkspace } from "../workspace/cleanupWorkspace";
 import { getExecutionPlan } from "../execution/executionPlan";
 import { docker } from "./dockerClient";
 
@@ -45,21 +48,26 @@ export async function startDockerSession(
 ): Promise<StartSessionResult> {
     const { files, entry } = normalizeFiles(req);
     const workspaceDir = await createWorkspace(files);
+
+    const plan = getExecutionPlan(req.language, entry);
     const sessionId = `sess_${crypto.randomUUID()}`;
     const containerName = `zoeskoul_${sessionId}`;
-    const plan = getExecutionPlan(req.language, entry);
 
     const container = await docker.createContainer({
-        Image: process.env.RUNNER_IMAGE || "zoeskoul-runtime:latest",
+        Image: env.runnerImage,
         name: containerName,
         Tty: false,
         OpenStdin: true,
         StdinOnce: false,
+        AttachStdin: true,
+        AttachStdout: true,
+        AttachStderr: true,
+        WorkingDir: "/workspace",
+        User: "1000:1000",
         Env: [
             `COMPILE_CMD=${plan.compileCmd ?? ""}`,
             `RUN_CMD=${plan.runCmd}`,
         ],
-        WorkingDir: "/workspace",
         HostConfig: {
             Binds: [`${workspaceDir}:/workspace`],
             NetworkMode: "none",
@@ -67,6 +75,10 @@ export async function startDockerSession(
             NanoCpus: 1_000_000_000,
             PidsLimit: 128,
             AutoRemove: true,
+            SecurityOpt: ["no-new-privileges"],
+            Tmpfs: {
+                "/tmp": "rw,noexec,nosuid,size=64m",
+            },
         },
     });
 
@@ -78,39 +90,62 @@ export async function startDockerSession(
 
     pushEvent(sessionId, { type: "status", state: "preparing" });
 
-    await container.start();
+    try {
+        await container.start();
 
-    const attach = await container.attach({
-        stream: true,
-        stdin: true,
-        stdout: true,
-        stderr: true,
-    });
-
-    setSessionStream(sessionId, attach);
-
-    pushEvent(sessionId, { type: "status", state: "running" });
-
-    attach.on("data", (chunk: Buffer) => {
-        const text = chunk.toString("utf8");
-        pushEvent(sessionId, { type: "stdout", chunk: text });
-    });
-
-    container.wait().then((result) => {
-        const code = result.StatusCode ?? 0;
-        pushEvent(sessionId, { type: "exit", code });
-        pushEvent(sessionId, {
-            type: "status",
-            state: code === 0 ? "completed" : "failed",
+        const attach = await container.attach({
+            stream: true,
+            stdin: true,
+            stdout: true,
+            stderr: true,
         });
-    }).catch((err: Error) => {
-        pushEvent(sessionId, { type: "error", message: err.message });
-        pushEvent(sessionId, { type: "status", state: "failed" });
-    });
 
-    return {
-        ok: true,
-        sessionId,
-        state: "running",
-    };
+        setSessionStream(sessionId, attach);
+
+        pushEvent(sessionId, { type: "status", state: "running" });
+
+        const wallTimeout = req.wallTimeoutMs ?? env.wallTimeoutMsDefault;
+        const idleTimeout = req.idleTimeoutMs ?? env.idleTimeoutMsDefault;
+
+        armWallTimeout(sessionId, wallTimeout);
+        armIdleTimeout(sessionId, idleTimeout);
+
+        attach.on("data", (chunk: Buffer) => {
+            const text = chunk.toString("utf8");
+            touchSession(sessionId);
+            pushEvent(sessionId, { type: "stdout", chunk: text });
+        });
+
+        container.wait().then(async (result) => {
+            const code = result.StatusCode ?? 0;
+            clearAllTimeouts(sessionId);
+            pushEvent(sessionId, { type: "exit", code });
+            pushEvent(sessionId, {
+                type: "status",
+                state: code === 0 ? "completed" : "failed",
+            });
+            await cleanupWorkspace(workspaceDir);
+        }).catch(async (err: Error) => {
+            clearAllTimeouts(sessionId);
+            pushEvent(sessionId, { type: "error", message: err.message });
+            pushEvent(sessionId, { type: "status", state: "failed" });
+            await cleanupWorkspace(workspaceDir);
+        });
+
+        return {
+            ok: true,
+            sessionId,
+            state: "running",
+        };
+    } catch (e: any) {
+        clearAllTimeouts(sessionId);
+        pushEvent(sessionId, { type: "error", message: e?.message ?? "Failed to start container." });
+        pushEvent(sessionId, { type: "status", state: "failed" });
+        await cleanupWorkspace(workspaceDir);
+
+        return {
+            ok: false,
+            error: e?.message ?? "Failed to start container.",
+        };
+    }
 }

@@ -7,6 +7,9 @@ export const cancelSessionRoute: RequestHandler = async (req, res) => {
         await killSession(sessionId);
         res.status(200).json({ ok: true });
     } catch (e: any) {
-        res.status(500).json({ ok: false, error: e?.message ?? "Failed to cancel session." });
+        res.status(500).json({
+            ok: false,
+            error: e?.message ?? "Failed to cancel session.",
+        });
     }
 };

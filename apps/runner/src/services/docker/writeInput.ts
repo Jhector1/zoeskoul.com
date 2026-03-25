@@ -1,4 +1,4 @@
-import { getSession } from "../sessions/sessionStore";
+import { getSession, pushEvent, touchSession } from "../sessions/sessionStore";
 
 export async function writeInput(sessionId: string, input: string) {
     const session = getSession(sessionId);
@@ -7,4 +7,9 @@ export async function writeInput(sessionId: string, input: string) {
     }
 
     session.attachStream.write(input);
+    touchSession(sessionId);
+
+    // Temporary heuristic for UI state.
+    // PTY later is better than this.
+    pushEvent(sessionId, { type: "status", state: "running" });
 }
