@@ -67,3 +67,8 @@ volumes:
   postgres-data:
   redis-data:
   runner-tmp:
+
+
+networks:
+  public:
+    external: true
