@@ -236,19 +236,7 @@ function CodeRunnerContent(props: CodeRunnerProps) {
         );
     }, []);
 
-    // const term = useTerminalRunner({
-    //     lang,
-    //     code,
-    //     sqlDialect,
-    //     sqlSchemaSql,
-    //     sqlSeedSql,
-    //     sqlSetupSql,
-    //     sqlDatasetId,
-    //     disabled,
-    //     allowRun,
-    //     resetTerminalOnRun,
-    //     onRun: onRun ?? defaultOnRun,
-    // });
+
     const term = useCodeRunnerController({
         lang,
         code,
@@ -259,7 +247,8 @@ function CodeRunnerContent(props: CodeRunnerProps) {
         sqlDatasetId,
         disabled,
         allowRun,
-        resetTerminalOnRun,onRun
+        resetTerminalOnRun,
+        onRun,
     });
     useEffect(() => {
         requestLayout();
@@ -361,6 +350,7 @@ function CodeRunnerContent(props: CodeRunnerProps) {
         term.busy ||
         term.inputEnabled ||
         term.terminalFeed.length > 0;
+
     const renderOutputPane = (panelHeight?: number, panelWidth?: number) => {
         if (lang === "sql") {
             return (
@@ -375,8 +365,8 @@ function CodeRunnerContent(props: CodeRunnerProps) {
                         <div className="rounded-2xl border border-rose-300/30 bg-rose-50/70 p-4 text-sm text-rose-700 dark:border-rose-300/20 dark:bg-rose-950/20 dark:text-rose-200">
                             <div className="font-black">SQL run error</div>
                             <pre className="mt-2 whitespace-pre-wrap font-mono text-xs">
-                                {genericSqlError.error ?? genericSqlError.status ?? "SQL run failed."}
-                            </pre>
+                            {genericSqlError.error ?? genericSqlError.status ?? "SQL run failed."}
+                        </pre>
                         </div>
                     ) : (
                         <SqlResultsPane result={sqlResult} busy={term.busy} />
@@ -393,43 +383,26 @@ function CodeRunnerContent(props: CodeRunnerProps) {
                     ...(typeof panelWidth === "number" ? { width: panelWidth } : {}),
                 }}
             >
-                {/*<TerminalPane*/}
-                {/*    terminal={term.terminal}*/}
-                {/*    stdinBuffer={term.stdinBuffer}*/}
-                {/*    awaitingInput={term.awaitingInput}*/}
-                {/*    inputPrompt={term.inputPrompt}*/}
-                {/*    inputLine={term.inputLine}*/}
-                {/*    setInputLine={term.setInputLine}*/}
-                {/*    inputRef={term.inputRef}*/}
-                {/*    busy={term.busy}*/}
-                {/*    disabled={disabled}*/}
-                {/*    lastResult={term.lastResult}*/}
-                {/*    onSubmitInput={term.submitInput}*/}
-                {/*    typedLines={term.typedLines}*/}
-                {/*/>*/}
-
-
-                return shouldShowXterm ? (
-                <XtermTerminal
-                    terminalFeed={term.terminalFeed}
-                    inputEnabled={term.inputEnabled}
-                    busy={term.busy}
-                    disabled={disabled}
-                    lastResult={term.lastResult}
-                    onSendData={term.sendTerminalData}
-                    onResize={term.sendTerminalResize}
-                />
+                {shouldShowXterm ? (
+                    <XtermTerminal
+                        terminalFeed={term.terminalFeed}
+                        inputEnabled={term.inputEnabled}
+                        busy={term.busy}
+                        disabled={disabled}
+                        lastResult={term.lastResult}
+                        onSendData={term.sendTerminalData}
+                        onResize={term.sendTerminalResize}
+                    />
                 ) : (
-                <div className="h-full rounded-2xl border-t p-3 bg-white/80 dark:bg-black/40 border-neutral-200 dark:border-white/10">
-                    <div className="text-[11px] font-extrabold text-neutral-500 dark:text-white/50">
-                        Terminal idle
+                    <div className="h-full rounded-2xl border-t p-3 bg-white/80 dark:bg-black/40 border-neutral-200 dark:border-white/10">
+                        <div className="text-[11px] font-extrabold text-neutral-500 dark:text-white/50">
+                            Terminal idle
+                        </div>
                     </div>
-                </div>
-                );
+                )}
             </div>
         );
     };
-
     const renderEditorPane = (editorHeight: number) => (
         <div
             className="h-full bg-white/70 dark:bg-black/10"
@@ -496,7 +469,7 @@ function CodeRunnerContent(props: CodeRunnerProps) {
                             }
 
                             await onBeforeRun?.();
-                            term.startRun();
+                            await term.startRun();
                         }}
                     />
                 </div>

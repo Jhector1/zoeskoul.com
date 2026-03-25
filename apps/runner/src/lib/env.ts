@@ -8,6 +8,7 @@ const envSchema = z.object({
     RUN_IDLE_TIMEOUT_MS: z.coerce.number().int().positive().default(20000),
     APP_URL: z.string().url().optional(),
     WEB_URL: z.string().url().optional(),
+    ALLOWED_WEB_ORIGINS: z.string().optional(),
     RUNNER_EXEC_UID: z.coerce.number().int().nonnegative().default(1000),
     RUNNER_EXEC_GID: z.coerce.number().int().nonnegative().default(1000),
 });
@@ -22,6 +23,7 @@ export const env = {
     idleTimeoutMsDefault: parsed.RUN_IDLE_TIMEOUT_MS,
     appUrl: parsed.APP_URL,
     webUrl: parsed.WEB_URL,
+    allowedWebOriginsRaw: parsed.ALLOWED_WEB_ORIGINS,
     execUid: parsed.RUNNER_EXEC_UID,
     execGid: parsed.RUNNER_EXEC_GID,
 } as const;

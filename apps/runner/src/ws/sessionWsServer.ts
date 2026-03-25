@@ -1,10 +1,10 @@
 import { WebSocketServer, type WebSocket } from "ws";
 import type { Server as HttpServer, IncomingMessage } from "node:http";
-import { env } from "../lib/env.js";
 import { getSession, subscribeSession } from "../services/sessions/sessionStore.js";
 import { writeInput } from "../services/docker/writeInput.js";
 import { killSession } from "../services/docker/killSession.js";
 import { resizeSession } from "../services/docker/resizeSession.js";
+import { isAllowedOrigin, getAllowedOrigins } from "../lib/allowedOrigins.js";
 
 type ClientToServerMessage =
     | { type: "input"; data: string }
@@ -23,30 +23,6 @@ function getSessionIdFromRequest(req: IncomingMessage) {
     return match?.[1] ? decodeURIComponent(match[1]) : null;
 }
 
-function normalizeOrigin(value?: string | null) {
-    if (!value) return null;
-    try {
-        return new URL(value).origin.toLowerCase();
-    } catch {
-        return null;
-    }
-}
-
-const allowedOrigins = new Set(
-    [env.webUrl]
-        .map((v?:string) => normalizeOrigin(v))
-        .filter((v:string|null): v is string => Boolean(v)),
-);
-
-// function originAllowed(origin: string | undefined) {
-//     if (!origin) return true;
-//
-//     const normalized = normalizeOrigin(origin);
-//     return !!normalized && allowedOrigins.has(normalized);
-// }
-function originAllowed(_origin: string | undefined) {
-    return true;
-}
 export function attachSessionWsServer(server: HttpServer) {
     const wss = new WebSocketServer({ noServer: true });
 
@@ -60,10 +36,10 @@ export function attachSessionWsServer(server: HttpServer) {
         const origin = req.headers.origin;
         const sessionId = getSessionIdFromRequest(req);
 
-        if (!originAllowed(origin)) {
+        if (!isAllowedOrigin(origin)) {
             console.error("WS origin reject", {
                 origin,
-                allowedOrigins: [...allowedOrigins],
+                allowedOrigins: [...getAllowedOrigins()],
             });
             socket.write("HTTP/1.1 403 Forbidden\r\n\r\n");
             socket.destroy();
@@ -93,7 +69,66 @@ export function attachSessionWsServer(server: HttpServer) {
 
     wss.on("connection", (ws: any, _req: any, sessionId: string) => {
         console.log("WS connected", { sessionId });
-        // existing code...
+
+        const session = getSession(sessionId);
+        if (!session) {
+            safeSend(ws, { type: "error", message: "Session not found." });
+            ws.close();
+            return;
+        }
+
+        safeSend(ws, {
+            type: "ready",
+            sessionId,
+            state: session.state,
+        });
+
+        for (const ev of session.events) {
+            safeSend(ws, { type: "event", event: ev });
+        }
+
+        const unsubscribe = subscribeSession(sessionId, (event) => {
+            safeSend(ws, { type: "event", event });
+        });
+
+        ws.on("message", async (raw: any) => {
+            try {
+                const msg = JSON.parse(String(raw)) as ClientToServerMessage;
+
+                if (msg.type === "ping") {
+                    safeSend(ws, { type: "pong" });
+                    return;
+                }
+
+                if (msg.type === "input") {
+                    await writeInput(sessionId, String(msg.data ?? ""));
+                    return;
+                }
+
+                if (msg.type === "cancel") {
+                    await killSession(sessionId, "canceled");
+                    return;
+                }
+
+                if (msg.type === "resize") {
+                    await resizeSession(sessionId, msg.cols, msg.rows);
+                    return;
+                }
+            } catch (e: any) {
+                safeSend(ws, {
+                    type: "error",
+                    message: e?.message ?? "Invalid websocket message.",
+                });
+            }
+        });
+
+        ws.on("close", () => {
+            unsubscribe();
+        });
+
+        ws.on("error", () => {
+            unsubscribe();
+        });
     });
 
     return wss;
