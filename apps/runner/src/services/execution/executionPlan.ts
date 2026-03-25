@@ -25,8 +25,9 @@ export function getExecutionPlan(
                 compileCmd: [
                     "set -euo pipefail",
                     "mkdir -p build",
-                    `INCLUDES="$(find . -type f \\( -name '*.h' \\) -not -path './build/*' -print0 | xargs -0 -n1 dirname | sort -u | sed 's#^#-I#' | tr '\\n' ' ')"`,
-                    `SRCS="$(find . -type f \\( -name '*.c' \\) -not -path './build/*' -print0 | xargs -0 printf '%s ')"`,
+                    `INCLUDES="$(find . -type f \\( -name '*.h' \\) -not -path './build/*' -print0 | xargs -0 -r -n1 dirname | sort -u | sed 's#^#-I#' | tr '\\n' ' ')"`,
+                    `SRCS="$(find . -type f \\( -name '*.c' \\) -not -path './build/*' -print0 | xargs -0 -r printf '%s ')"`,
+                    `[ -n "$SRCS" ]`,
                     `gcc -O2 -std=c11 $INCLUDES -o build/app $SRCS`,
                 ].join(" && "),
                 runCmd: "./build/app",
@@ -37,8 +38,9 @@ export function getExecutionPlan(
                 compileCmd: [
                     "set -euo pipefail",
                     "mkdir -p build",
-                    `INCLUDES="$(find . -type f \\( -name '*.h' -o -name '*.hpp' -o -name '*.hh' \\) -not -path './build/*' -print0 | xargs -0 -n1 dirname | sort -u | sed 's#^#-I#' | tr '\\n' ' ')"`,
-                    `SRCS="$(find . -type f \\( -name '*.cpp' -o -name '*.cc' -o -name '*.cxx' \\) -not -path './build/*' -print0 | xargs -0 printf '%s ')"`,
+                    `INCLUDES="$(find . -type f \\( -name '*.h' -o -name '*.hpp' -o -name '*.hh' \\) -not -path './build/*' -print0 | xargs -0 -r -n1 dirname | sort -u | sed 's#^#-I#' | tr '\\n' ' ')"`,
+                    `SRCS="$(find . -type f \\( -name '*.cpp' -o -name '*.cc' -o -name '*.cxx' \\) -not -path './build/*' -print0 | xargs -0 -r printf '%s ')"`,
+                    `[ -n "$SRCS" ]`,
                     `g++ -O2 -std=c++17 $INCLUDES -o build/app $SRCS`,
                 ].join(" && "),
                 runCmd: "./build/app",
@@ -55,7 +57,8 @@ export function getExecutionPlan(
                 compileCmd: [
                     "set -euo pipefail",
                     "mkdir -p build",
-                    `SRCS="$(find . -type f -name '*.java' -not -path './build/*' -print0 | xargs -0 printf '%s ')"`,
+                    `SRCS="$(find . -type f -name '*.java' -not -path './build/*' -print0 | xargs -0 -r printf '%s ')"`,
+                    `[ -n "$SRCS" ]`,
                     `javac -d build $SRCS`,
                 ].join(" && "),
                 runCmd: `java -cp build '${mainClass}'`,
