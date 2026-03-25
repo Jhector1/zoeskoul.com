@@ -31,6 +31,8 @@ export function attachSessionWsServer(server: HttpServer) {
             url: req.url,
             host: req.headers.host,
             origin: req.headers.origin,
+            upgrade: req.headers.upgrade,
+            connection: req.headers.connection,
         });
 
         const origin = req.headers.origin;

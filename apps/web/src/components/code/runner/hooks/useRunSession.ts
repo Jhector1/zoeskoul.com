@@ -115,14 +115,21 @@ export function useRunSession() {
                 }
             };
 
+            ws.onopen = () => {
+                console.log("Runner WebSocket opened:", wsUrl);
+            };
+
             ws.onerror = (ev) => {
                 console.error("Runner WebSocket failed:", wsUrl, ev);
             };
 
-            ws.onclose = () => {
-                if (wsRef.current === ws) {
-                    wsRef.current = null;
-                }
+            ws.onclose = (ev) => {
+                console.error("Runner WebSocket closed:", {
+                    url: wsUrl,
+                    code: ev.code,
+                    reason: ev.reason,
+                    wasClean: ev.wasClean,
+                });
             };
 
             wsRef.current = ws;
