@@ -18,15 +18,14 @@ RUN apt-get update && apt-get install -y \
     findutils \
     && rm -rf /var/lib/apt/lists/*
 
-RUN groupadd -g 1000 runner && useradd -m -u 1000 -g 1000 -s /bin/bash runner
-
 WORKDIR /workspace
 
 RUN mkdir -p /opt/runner
 COPY apps/runner/pty-runner.py /opt/runner/pty-runner.py
-RUN chmod 755 /opt/runner/pty-runner.py
+RUN chmod 755 /opt/runner/pty-runner.py \
+    && chown -R 1000:1000 /opt/runner /workspace
 
-USER runner
+USER 1000:1000
 
 ENTRYPOINT ["/usr/bin/tini", "--"]
 CMD ["python3", "/opt/runner/pty-runner.py"]
