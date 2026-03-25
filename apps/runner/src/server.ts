@@ -10,9 +10,15 @@ const app = express();
 
 app.set("trust proxy", 1);
 
+const allowedOrigins = [env.webUrl];
+
 app.use(
     cors({
-        origin: [env.webUrl],
+        origin(origin, callback) {
+            if (!origin) return callback(null, true); // server-to-server / curl / health checks
+            if (allowedOrigins.includes(origin)) return callback(null, true);
+            return callback(new Error("Not allowed by CORS"));
+        },
         credentials: true,
     })
 );
