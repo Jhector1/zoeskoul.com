@@ -12,7 +12,8 @@ import { createWorkspace } from "../workspace/createWorkspace.js";
 import { cleanupWorkspace } from "../workspace/cleanupWorkspace.js";
 import { getExecutionPlan } from "../execution/executionPlan.js";
 import { docker } from "./dockerClient.js";
-
+import fs from "node:fs/promises";
+import { spawnSync } from "node:child_process";
 function normalizeFiles(req: InteractiveRunReq): { files: FileEntry[]; entry: string } {
     if ("files" in req) {
         const files = Array.isArray(req.files)
@@ -58,7 +59,15 @@ export async function startDockerSession(
 ): Promise<StartSessionResult> {
     const { files, entry } = normalizeFiles(req);
     const workspaceDir = await createWorkspace(files);
+    const rootFiles = await fs.readdir(workspaceDir);
+    console.log("WORKSPACE DIR", workspaceDir);
+    console.log("WORKSPACE ROOT FILES", rootFiles);
 
+    const tree = spawnSync("bash", ["-lc", "find . -maxdepth 5 -type f | sort"], {
+        cwd: workspaceDir,
+        encoding: "utf8",
+    });
+    console.log("WORKSPACE TREE\n" + tree.stdout);
     const plan = getExecutionPlan(req.language, entry);
     const sessionId = `sess_${crypto.randomUUID()}`;
     const containerName = `zoeskoul_${sessionId}`;

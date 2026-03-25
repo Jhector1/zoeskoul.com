@@ -1,6 +1,6 @@
 import fs from "node:fs/promises";
-import os from "node:os";
 import path from "node:path";
+import crypto from "node:crypto";
 import type { FileEntry } from "@zoeskoul/code-contracts";
 
 function assertSafeRelPath(p: string) {
@@ -18,7 +18,13 @@ function assertSafeRelPath(p: string) {
 }
 
 export async function createWorkspace(files: FileEntry[]) {
-    const root = await fs.mkdtemp(path.join(os.tmpdir(), "zoeskoul-run-"));
+    const rootBase =
+        process.env.RUNNER_WORKSPACE_ROOT || "/opt/zoeskoul/workspaces";
+
+    await fs.mkdir(rootBase, { recursive: true });
+
+    const root = path.join(rootBase, `zoeskoul-run-${crypto.randomUUID()}`);
+    await fs.mkdir(root, { recursive: true });
 
     for (const file of files) {
         assertSafeRelPath(file.path);
