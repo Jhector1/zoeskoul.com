@@ -1,0 +1,157 @@
+import type { FSNode, FileNode, NodeId } from "./types";
+
+type FsIndex = {
+    byId: Map<NodeId, FSNode>;
+    childrenByParent: Map<NodeId | null, FSNode[]>;
+};
+
+function sortNodes(a: FSNode, b: FSNode) {
+    if (a.kind !== b.kind) return a.kind === "folder" ? -1 : 1;
+    return a.name.localeCompare(b.name, undefined, { sensitivity: "base" });
+}
+
+export function buildFsIndex(nodes: FSNode[]): FsIndex {
+    const byId = new Map<NodeId, FSNode>();
+    const childrenByParent = new Map<NodeId | null, FSNode[]>();
+
+    for (const node of nodes) {
+        byId.set(node.id, node);
+
+        const list = childrenByParent.get(node.parentId) ?? [];
+        list.push(node);
+        childrenByParent.set(node.parentId, list);
+    }
+
+    for (const list of childrenByParent.values()) {
+        list.sort(sortNodes);
+    }
+
+    return { byId, childrenByParent };
+}
+
+export function ensureUniqueSiblingName(
+    nodes: FSNode[],
+    parentId: NodeId | null,
+    desired: string,
+) {
+    const base = (desired ?? "").trim() || "untitled";
+
+    const siblingNames = new Set(
+        nodes
+            .filter((x) => x.parentId === parentId)
+            .map((x) => x.name.toLocaleLowerCase()),
+    );
+
+    if (!siblingNames.has(base.toLocaleLowerCase())) return base;
+
+    const dot = base.lastIndexOf(".");
+    const hasExt = dot > 0;
+    const stem = hasExt ? base.slice(0, dot) : base;
+    const ext = hasExt ? base.slice(dot) : "";
+
+    let i = 2;
+    while (siblingNames.has(`${stem}-${i}${ext}`.toLocaleLowerCase())) i++;
+    return `${stem}-${i}${ext}`;
+}
+
+export function childrenOf(nodes: FSNode[], parentId: NodeId | null) {
+    const { childrenByParent } = buildFsIndex(nodes);
+    return (childrenByParent.get(parentId) ?? []).slice();
+}
+
+export function findFile(nodes: FSNode[], id: NodeId) {
+    const n = nodes.find((x) => x.id === id);
+    return n && n.kind === "file" ? (n as FileNode) : undefined;
+}
+
+export function subtreeIds(nodes: FSNode[], rootId: NodeId) {
+    const { childrenByParent } = buildFsIndex(nodes);
+    const out = new Set<NodeId>();
+    const stack = [rootId];
+
+    while (stack.length) {
+        const cur = stack.pop()!;
+        if (out.has(cur)) continue;
+
+        out.add(cur);
+
+        for (const child of childrenByParent.get(cur) ?? []) {
+            stack.push(child.id);
+        }
+    }
+
+    return out;
+}
+
+export function isSafeRelPath(p: string) {
+    const normalized = String(p ?? "").replace(/\\/g, "/").trim();
+    if (!normalized) return false;
+    if (normalized.startsWith("/")) return false;
+    if (normalized.includes("\0")) return false;
+
+    const parts = normalized.split("/");
+    return parts.every((part) => !!part && part !== "." && part !== "..");
+}
+
+export function pathOf(nodes: FSNode[], id: NodeId): string {
+    const { byId } = buildFsIndex(nodes);
+    const parts: string[] = [];
+    const seen = new Set<NodeId>();
+
+    let cur = byId.get(id);
+
+    while (cur && !seen.has(cur.id)) {
+        seen.add(cur.id);
+        parts.push(cur.name);
+
+        if (!cur.parentId) break;
+        cur = byId.get(cur.parentId);
+    }
+
+    parts.reverse();
+    return parts.join("/");
+}
+
+// export function relativeProjectPathOf(nodes: FSNode[], id: NodeId): string {
+//     const full = pathOf(nodes, id);
+//     const parts = full.split("/").filter(Boolean);
+//
+//     if (parts.length > 1) {
+//         parts.shift();
+//     }
+//
+//     return parts.join("/");
+// }
+
+export function exportProjectFiles(
+    nodes: FSNode[],
+): Array<{ path: string; content: string }> {
+    const files = nodes.filter((n): n is FileNode => n.kind === "file");
+
+    const out = files.map((f) => ({
+        path: relativeProjectPathOf(nodes, f.id),
+        content: f.content ?? "",
+    }));
+
+    console.log("interactive files", out.map((f) => f.path));
+
+    for (const f of out) {
+        if (!isSafeRelPath(f.path)) {
+            throw new Error(`Unsafe file path: ${f.path}`);
+        }
+    }
+
+    return out;
+}
+
+export function relativeProjectPathOf(nodes: FSNode[], id: NodeId): string {
+    const full = pathOf(nodes, id);
+    const parts = full.split("/").filter(Boolean);
+
+    // drop synthetic project root folder if present
+    if (parts.length > 1) {
+        parts.shift();
+    }
+
+    return parts.join("/");
+}

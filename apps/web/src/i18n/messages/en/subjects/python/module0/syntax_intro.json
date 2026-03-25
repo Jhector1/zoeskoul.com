@@ -1,0 +1,62 @@
+{
+  "topics": {
+    "python": {
+      "python-0": {
+        "syntax_intro": {
+          "label": "Syntax: Rules Computers Require",
+          "summary": "Learn what syntax means and why breaking syntax causes errors like SyntaxError.",
+          "cards": {
+            "sketch": {
+              "title": "Syntax: Rules Computers Require"
+            },
+            "quiz": {
+              "title": "Quick check: syntax"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "py": {
+      "syntax": {
+        "intro": {
+          "title": "Syntax: The Rules of a Programming Language",
+          "bodyMarkdown": "Every programming language has a set of rules that determine **how instructions must be written**.\nThese rules are called **syntax**.\n\nJust like spoken languages have **grammar rules**, programming languages have **syntax rules** that define how code must be structured so the computer can understand it.\n\nEach programming language has its own syntax:\n\n- Python has its own syntax\n- Java has its own syntax\n- C has its own syntax\n\nEven though many languages share similar ideas, the **exact way you write instructions** can be different in each language.\n\nIf you break these syntax rules, Python will raise a **SyntaxError**, and the program will stop running because the **interpreter cannot understand the instruction**.\n\nIn this module, you will begin getting comfortable with Python syntax so you can write **clear and correct instructions** for the computer to execute."
+        }
+      }
+    }
+  },
+  "quiz": {
+    "m0_syntax_definition": {
+      "title": "Syntax meaning",
+      "prompt": "In programming, what does **syntax** mean?",
+      "options": {
+        "a": "The rules for how code must be written",
+        "b": "The speed of your computer fan",
+        "c": "A type of keyboard"
+      },
+      "hint": "Syntax = writing rules the language requires."
+    },
+    "m0_syntax_syntaxerror": {
+      "title": "SyntaxError",
+      "prompt": "If you break Python’s syntax rules, you often get:",
+      "options": {
+        "a": "SyntaxError",
+        "b": "WiFiError",
+        "c": "KeyboardError"
+      },
+      "hint": "SyntaxError means Python couldn’t understand your code structure."
+    },
+    "m0_syntax_indentation_rule": {
+      "title": "Indentation matters",
+      "prompt": "Why is indentation important in Python?",
+      "options": {
+        "a": "It makes the code run faster",
+        "b": "Python uses it as part of its syntax (structure)",
+        "c": "It changes your font size"
+      },
+      "hint": "Indentation is part of Python’s structure, not just style."
+    }
+  }
+}

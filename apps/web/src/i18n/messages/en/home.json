@@ -1,0 +1,243 @@
+{
+  "Home": {
+    "meta": {
+      "title": "{appName} — Learn by practicing, across any subject",
+      "description": "Practice-first learning across math, science, languages, and more: instant feedback, assignments, progress tracking, and multilingual study (English, French, Haitian Creole)."
+    },
+    "nav": {
+      "product": "Product",
+      "subjects": "Subjects",
+      "pricing": "Pricing",
+      "faq": "FAQ",
+      "signIn": "Sign in"
+    },
+    "hero": {
+      "badge": "Practice-first learning platform",
+      "title": "Learn by practicing — not just watching.",
+      "subtitle": "{appName} combines interactive exercises, targeted drills, and clear explanations so learners build real skills and confidence across any subject.",
+      "ctaPrimary": "Start learning",
+      "ctaSecondary": "Explore catalog",
+      "pills": ["Instant feedback", "Assignments & review", "Multilingual (EN/FR/HT)"]
+    },
+    "trust": {
+      "kicker": "Built for the way people actually learn",
+      "title": "Active recall. Immediate feedback. Real progress.",
+      "subtitle": "A practice-first platform designed to turn concepts into usable skills.",
+      "items": [
+        { "k": "Interactive", "v": "Hands-on questions with lightweight visuals when helpful" },
+        { "k": "Structured", "v": "Modules → sections → practice → mastery" },
+        { "k": "Practical", "v": "Skills that transfer to exams, work, and real projects" }
+      ]
+    },
+    "features": {
+      "kicker": "What you get",
+      "title": "A full practice loop, end-to-end",
+      "subtitle": "Everything you need to move from “I kind of get it” to “I can do it under pressure.”",
+      "items": [
+        {
+          "title": "Interactive exercises",
+          "desc": "Learn with questions that make you think—reorder, fill-in, multiple choice, and more."
+        },
+        {
+          "title": "Guided practice (with structure)",
+          "desc": "Clear prompts, steady progression, and explanations that help you correct fast."
+        },
+        {
+          "title": "Assignments & sessions",
+          "desc": "Run focused assignments, keep learners on track, and bring them back for review when it matters."
+        },
+        {
+          "title": "Progress that persists",
+          "desc": "Track completion, missed items, and momentum—so practice stays meaningful after reloads."
+        },
+        {
+          "title": "Multilingual learning",
+          "desc": "Teach and learn across English, French, and Haitian Creole with consistent structure."
+        },
+        {
+          "title": "Designed for clarity",
+          "desc": "Minimal, distraction-free UI: the goal is practice—not noise."
+        }
+      ]
+    },
+    "subjects": {
+      "kicker": "Subjects",
+      "title": "Explore what you want to learn",
+      "subtitle": "Math, science, languages, and more—organized into modules and sections so learners always know what to do next.",
+      "cards": [
+        {
+          "title": "Math",
+          "desc": "Build fundamentals and fluency through practice—step-by-step, with feedback.",
+          "bullets": ["Foundations & problem-solving", "Algebra & geometry", "Statistics basics", "Practice that sticks"],
+          "cta": "Explore Math"
+        },
+        {
+          "title": "Science",
+          "desc": "Learn concepts by applying them—definitions, patterns, and reasoning.",
+          "bullets": ["Core concepts", "Key vocabulary", "Cause & effect", "Quick checks + review"],
+          "cta": "Explore Science"
+        },
+        {
+          "title": "Languages",
+          "desc": "Train comprehension and production with structured repetition.",
+          "bullets": ["Vocabulary building", "Grammar practice", "Sentence patterns", "Recall + review"],
+          "cta": "Explore Languages"
+        },
+        {
+          "title": "Computing & Skills",
+          "desc": "Practice technical and professional skills with clear prompts and checks.",
+          "bullets": ["Fundamentals", "Applied exercises", "Debugging habits", "Project-style practice"],
+          "cta": "Explore Skills"
+        }
+      ]
+    },
+    "how": {
+      "kicker": "How it works",
+      "title": "A simple loop that actually works",
+      "steps": [
+        { "title": "Pick a module", "desc": "Start at the right level—no guessing, no overwhelm." },
+        { "title": "Practice with feedback", "desc": "Answer questions, learn from mistakes, and build momentum." },
+        { "title": "Review and lock it in", "desc": "Revisit missed concepts and build long-term retention through structured review." }
+      ]
+    },
+    "educators": {
+      "kicker": "For educators & teams",
+      "title": "Teach consistently, measure confidently",
+      "subtitle": "Use {appName} as a clean practice layer: assignments, progress signals, and a repeatable learner experience.",
+      "bullets": [
+        "Consistent curriculum structure across locales",
+        "Assignments that guide learners section-by-section",
+        "Clear outcomes: what learners can do after practice"
+      ],
+      "cta": "Talk to us"
+    },
+    "testimonials": {
+      "kicker": "Social proof",
+      "title": "Swap these with real quotes when ready",
+      "subtitle": "Safe placeholders to show layout. Replace with verified testimonials before launch.",
+      "items": [
+        {
+          "quote": "I like how it’s structured. I don’t waste time deciding what to do next — I just practice and improve.",
+          "who": "Learner (placeholder)"
+        },
+        {
+          "quote": "The instant feedback helps me correct mistakes fast. It’s simple, focused, and effective.",
+          "who": "Student (placeholder)"
+        },
+        {
+          "quote": "Great for tutoring: clean UI, quick checks, and progress tracking that keeps people accountable.",
+          "who": "Tutor (placeholder)"
+        }
+      ]
+    },
+    "pricing": {
+      "kicker": "Pricing",
+      "title": "Start free, upgrade when you need more",
+      "subtitle": "Use placeholders now; wire real Stripe pricing later. Designed to convert cleanly.",
+      "tiers": [
+        {
+          "name": "Free",
+          "price": "$0",
+          "desc": "Perfect for exploring the platform.",
+          "features": ["Access to core practice", "Progress tracking", "Multilingual UI"],
+          "cta": "Start free",
+          "highlight": false
+        },
+        {
+          "name": "Pro",
+          "price": "—",
+          "desc": "For serious learners who want deeper structure.",
+          "features": ["Assignments & review runs", "More practice depth", "Priority updates"],
+          "cta": "View pricing",
+          "highlight": true
+        },
+        {
+          "name": "Classroom",
+          "price": "—",
+          "desc": "For educators, cohorts, and teams.",
+          "features": ["Cohort workflows", "Reporting/export (optional)", "Custom rollout support"],
+          "cta": "Contact sales",
+          "highlight": false
+        }
+      ],
+      "note": "Tip: If you don’t have pricing yet, keep Pro and Classroom as “Contact us” until Stripe is wired."
+    },
+    "faq": {
+      "kicker": "FAQ",
+      "title": "Common questions",
+      "items": [
+        { "q": "Is this a course or practice platform?", "a": "{appName} is practice-first. It complements classes and videos by turning concepts into usable skills." },
+        { "q": "Does it work for beginners?", "a": "Yes—modules build from fundamentals and guide learners step-by-step with checks and feedback." },
+        { "q": "How does multilingual learning work?", "a": "{appName} keeps the same structure across locales so learners can study in English, French, or Haitian Creole." },
+        { "q": "Do you support assignments?", "a": "Yes—assignment runs keep learners focused and can return them to the right next step after completion." },
+        { "q": "Will my progress persist after reloads?", "a": "That’s a core goal: progress, missed items, and session outcomes should stay consistent over time." },
+        { "q": "What’s coming next?", "a": "More subjects, more question types, and deeper review flows—without sacrificing UI clarity." }
+      ]
+    },
+    "finalCta": {
+      "title": "Ready to build real skills?",
+      "subtitle": "Pick a module, practice with feedback, and turn learning into confidence.",
+      "primary": "Start learning",
+      "secondary": "Explore catalog"
+    },
+    "footer": {
+      "rights": "© {year} {appName}. All rights reserved.",
+      "links": {
+        "catalog": "Catalog",
+        "review": "Review",
+        "pricing": "Pricing",
+        "contact": "Contact",
+        "privacy": "Privacy",
+        "terms": "Terms"
+      }
+    },
+    "ui": {
+      "images": {
+        "hero": {
+          "alt1": "Smiling student learning",
+          "alt2": "Students studying together",
+          "alt3": "Laptop with notes and practice",
+          "badge1": "Learning made simple",
+          "badge2": "Practice + Review"
+        },
+        "educators": {
+          "alt": "Educator helping a student learn"
+        }},
+      "heroCard": {
+        "title": "Practice Preview",
+        "subtitle": "Exercises • Feedback • Progress",
+        "laLabel": "Quick check",
+        "laText": "Answer a short question and see what to fix right away.",
+        "assetNote": "Replace with a real screenshot/GIF later.",
+        "pyLabel": "Recall & apply",
+        "pyText": "Reorder, fill in blanks, or pick the best option to lock it in.",
+        "panels": [
+          { "label": "Quick check", "text": "Answer a short question and see what to fix right away.", "demo": "quiz" },
+          { "label": "Recall & apply", "text": "Reorder, fill in blanks, or pick the best option to lock it in.", "demo": "tokens" },
+          { "label": "Progress", "text": "Stay consistent with small sessions and visible momentum.", "demo": "progress" }
+        ]
+      },
+
+        "demos": {
+          "tokens": ["Arrange", "these", "words", "in", "order"],
+          "quiz": {
+            "options": ["A quick check", "A deeper dive", "Skip for now"],
+            "selectedIndex": 0
+          },
+          "progress": {
+            "rows": [
+              { "k": "Today", "v": 72 },
+              { "k": "This week", "v": 46 },
+              { "k": "Streak", "v": 60 }
+            ],
+            "suffix": "%"
+          }
+        }
+      ,
+      "tagline": "No fluff. No endless scrolling. Just practice that helps you improve.",
+      "recommended": "Recommended",
+      "browseModules": "Browse modules",
+      "tryReview": "Try review"
+    }
+  }
+}

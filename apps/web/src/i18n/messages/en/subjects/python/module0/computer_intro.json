@@ -1,0 +1,63 @@
+{
+  "topics": {
+    "python": {
+      "python-0": {
+        "computer_intro": {
+          "label": "The Input → Processing → Output Model",
+          "summary": "Understand how computers take input, process it, and produce output in everyday examples.",
+          "cards": {
+            "sketch0": { "title": "Input → Processing → Output" },
+            "sketch1": { "title": "How Computers Follow Instructions" },
+            "quiz": { "title": "Quick check: IPO model" }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "py": {
+      "computer": {
+        "ipo": {
+          "title": "Input, Processing, Output",
+          "bodyMarkdown": "At a very basic level, computers do three main things:\n\n- **Input**\n- **Processing**\n- **Output**\n\n### For example\n\nWhen you type in a Word document, your keyboard is an input device.\n\nThe computer processes what you typed.\n\nThen it displays the text on your screen, which is an output device.\n\n### Another example is a microphone\n\nYour voice is the input.\n\nThe computer processes it.\n\nThen produces an output, like text on the screen or audio through speakers.\n\nSo anytime you interact with a computer, you’re usually participating in this cycle:\n\n**Input → Processing → Output**"
+        },
+        "instructions": {
+          "title": "How Do Computers Follow Instructions?",
+          "bodyMarkdown": "Unlike humans, computers cannot “guess” what you mean (at least not in the basic, traditional programming sense). A computer only does what you tell it—exactly.\n\nThat’s why programming requires instructions that are:\n\n- clear\n- step-by-step\n- precise\n\nA step-by-step set of instructions is called an algorithm.\n\n### Algorithm (simple definition)\n\nAn algorithm is a sequence of steps that tells a computer how to complete a task.\n\nBut even if your steps make sense to a human, the computer still needs them written in a strict format."
+        }
+      }
+    }
+  },
+  "quiz": {
+    "m0_computer_ipo_order": {
+      "title": "IPO cycle order",
+      "prompt": "Which order matches the basic computer cycle?",
+      "options": {
+        "a": "Output → Input → Processing",
+        "b": "Input → Processing → Output",
+        "c": "Processing → Output → Input"
+      },
+      "hint": "First you give input, then it’s processed, then you see output."
+    },
+    "m0_computer_algorithm_definition": {
+      "title": "What is an algorithm?",
+      "prompt": "An **algorithm** is:",
+      "options": {
+        "a": "A step-by-step set of instructions to solve a task",
+        "b": "A type of monitor",
+        "c": "A programming mistake"
+      },
+      "hint": "Algorithm = step-by-step instructions to complete a task."
+    },
+    "m0_computer_input_examples": {
+      "title": "Input example",
+      "prompt": "Which is an example of **input** to a computer?",
+      "options": {
+        "a": "Typing on a keyboard",
+        "b": "Text showing on your screen",
+        "c": "Sound coming out of speakers"
+      },
+      "hint": "Input = what you give the computer (keyboard, mouse, mic)."
+    }
+  }
+}

@@ -1,0 +1,184 @@
+{
+  "billing": {
+    "header": {
+      "kicker": "Tarifs",
+      "title": "Débloquez les devoirs + la pratique premium",
+      "subtitle": "Choisissez une formule adaptée à votre rythme d’apprentissage. Annulez à tout moment depuis le portail.",
+      "manageBilling": "Gérer la facturation",
+      "signIn": "Se connecter",
+      "signedIn": "Connecté",
+      "signInRequired": "Connexion requise"
+    },
+    "paywall": {
+      "titleModule": "Ce module nécessite un paiement",
+      "titleAssignment": "Ce devoir nécessite un paiement",
+      "titleGeneric": "Ceci nécessite un paiement",
+      "goBack": "← Retour",
+      "body": "Abonnez-vous pour débloquer l’accès et continuer.",
+      "afterCheckout": "Après le paiement, vous serez redirigé automatiquement.",
+      "subjectLabel": "matière",
+      "moduleLabel": "module"
+    },
+    "plans": {
+      "sectionTitle": "Formules",
+      "trialInfo": "Essai disponible si vous êtes éligible.",
+      "trialInfoWithDays": "Essai gratuit de {days} jours si vous êtes éligible.",
+      "loading": "Chargement des formules…",
+
+      "monthly": {
+        "title": "Mensuel",
+        "subtitle": "Flexible mois par mois. Annulez à tout moment.",
+        "features": [
+          "Sessions de pratique illimitées",
+          "Accès aux devoirs",
+          "Suivi de progression",
+          "Modules de révision premium"
+        ],
+        "subscribe": "S’abonner au mensuel"
+      },
+
+      "yearly": {
+        "title": "Annuel",
+        "subtitle": "Meilleur rapport qualité-prix pour les apprenants réguliers.",
+        "features": [
+          "Tout ce qui est inclus dans Mensuel",
+          "Coût mensuel effectif plus bas",
+          "Moins d’interruptions de facturation",
+          "Idéal pour cohortes & écoles"
+        ],
+        "subscribe": "S’abonner à l’annuel"
+      },
+
+      "currentPlan": "Formule actuelle",
+      "priceKicker": "Prix",
+      "recommended": "Recommandé",
+
+      "startTrial": "Démarrer l’essai de {days} jours",
+      "trialActive": "Essai en cours",
+      "trialUnavailable": "Essai indisponible",
+
+      "trialNoteUsed": "L’essai a déjà été utilisé sur ce compte.",
+      "trialNoteEnded": "La période d’essai est terminée.",
+      "trialNoteDefault": "Aucun débit aujourd’hui. Annulez avant la fin de l’essai."
+    },
+    "sidebar": {
+      "title": "Ce que vous obtenez",
+      "subtitle": "Fonctionnalités premium incluses dans toutes les formules.",
+      "items": {
+        "assignments": {
+          "title": "Devoirs",
+          "desc": "Devoirs enseignant/admin avec suivi de session et parcours de validation."
+        },
+        "unlimitedPractice": {
+          "title": "Pratique illimitée",
+          "desc": "Générez des questions par thème et difficulté avec retour immédiat."
+        },
+        "progressHistory": {
+          "title": "Historique de progression",
+          "desc": "Suivez la précision, les erreurs et l’avancement par matière."
+        },
+        "multilanguage": {
+          "title": "Multilingue",
+          "desc": "Utilisez Learnoir en anglais, français et créole haïtien."
+        }
+      },
+      "tip": "Astuce : si un devoir est verrouillé, l’abonnement le déverrouille immédiatement."
+    },
+    "statusPanel": {
+      "statusPrefix": "Statut : {label}",
+      "planPrefix": "Formule : {label}",
+      "trialEnds": "Fin de l’essai : {when}",
+      "renews": "Renouvellement : {when}",
+      "cancelAtPeriodEnd": "Annulation à la fin de la période",
+
+      "planMonthly": "Mensuel",
+      "planYearly": "Annuel",
+      "planUnknown": "Abonnement",
+
+      "statuses": {
+        "trialing": "En essai",
+        "active": "Actif",
+        "past_due": "En retard",
+        "unpaid": "Impayé",
+        "canceled": "Annulé",
+        "incomplete": "Incomplet",
+        "incomplete_expired": "Incomplet expiré",
+        "paused": "En pause",
+        "none": "Aucun abonnement"
+      },
+
+      "ids": {
+        "priceId": "ID du prix",
+        "subscriptionId": "ID de l’abonnement"
+      }
+    },
+    "errors": {
+      "title": "⚠️ Une erreur est survenue"
+    },
+    "footer": {
+      "disclaimer": "Les paiements sont gérés par Stripe. Gérez ou annulez à tout moment depuis le portail de facturation."
+    }
+  }
+,
+  "success": {
+    "kicker": "Facturation",
+
+    "title": {
+      "busy": "Finalisation de l’abonnement…",
+      "ok": "✅ Abonnement actif",
+      "fail": "⚠️ Abonnement non confirmé"
+    },
+    "subtitle": {
+      "busy": "Un instant — nous synchronisons votre formule.",
+      "ok": "C’est bon. Nous vous redirigeons dans un instant.",
+      "fail": "Nous n’avons pas encore pu confirmer l’abonnement."
+    },
+
+    "pills": {
+      "plan": "Formule : {plan}",
+      "status": "Statut : {status}",
+      "trialEnds": "Fin de l’essai : {when}",
+      "renews": "Renouvellement : {when}"
+    },
+
+    "errors": {
+      "missingSession": "session_id manquant ou invalide dans l’URL.",
+      "confirmFailed": "Échec de la confirmation.",
+      "unknown": "Erreur inconnue."
+    },
+
+    "errorPanel": {
+      "title": "Erreur",
+      "retry": "Réessayer",
+      "goBilling": "Aller à la facturation"
+    },
+
+    "unlocked": {
+      "kicker": "Ce qui est maintenant débloqué",
+      "practiceTitle": "Pratique + retours",
+      "practiceDesc": "Exercices interactifs, vérifications instantanées et révision ciblée.",
+      "assignTitle": "Devoirs + progression",
+      "assignDesc": "Suivez la progression par matière et gardez un rythme régulier."
+    },
+
+    "next": {
+      "kicker": "Suite",
+      "auto": "Redirection dans {s}s…",
+      "manual": "Choisissez la suite."
+    },
+
+    "actions": {
+      "continue": "Continuer",
+      "stayHere": "Rester ici",
+      "manageBilling": "Gérer la facturation"
+    },
+
+    "sync": {
+      "title": "Synchronisation de votre formule…",
+      "desc": "Nous confirmons votre abonnement Stripe et activons les fonctionnalités premium.",
+      "note": "Cela prend généralement quelques secondes."
+    },
+
+    "tip": "Astuce : si vous voyez encore un verrou, actualisez une fois — la synchronisation vient peut-être de se terminer."
+  }
+}

@@ -1,0 +1,238 @@
+{
+  "seo": {
+    "site": {
+      "name": "{appName}",
+      "shortName": "{appName}",
+      "defaultOgAlt": "{appName} learning platform",
+      "defaultOgImage": "/og/default.png",
+      "twitterSite": "@zoeskoul"
+    },
+    "shared": {
+      "keywords": [
+        "{appName}",
+        "Learnoir",
+        "programming",
+        "python",
+        "linear algebra",
+        "math",
+        "AI",
+        "cybersecurity",
+        "languages",
+        "interactive learning",
+        "online learning",
+        "coding practice"
+      ]
+    },
+    "routes": {
+      "home": {
+        "title": "{appName} — Learn programming, math, AI, languages, and more",
+        "description": "{appName} is a multilingual learning platform for programming, math, AI, cybersecurity, and language practice with interactive lessons, practice modules, and guided learning paths.",
+        "ogTitle": "{appName} — Learn programming, math, AI, languages, and more",
+        "ogDescription": "Multilingual learning platform with interactive lessons, guided practice, and structured learning paths.",
+        "twitterTitle": "{appName} — Learn programming, math, AI, languages, and more",
+        "twitterDescription": "Interactive lessons, guided practice, and multilingual learning paths."
+      },
+      "billing": {
+        "title": "Pricing — {appName}",
+        "description": "Explore {appName} plans for learners and unlock guided learning paths, practice modules, and multilingual educational content.",
+        "ogTitle": "{appName} Pricing",
+        "ogDescription": "Compare {appName} plans and unlock guided learning paths and practice modules.",
+        "twitterTitle": "Pricing — {appName}",
+        "twitterDescription": "Explore {appName} plans for learners."
+      },
+      "sandbox": {
+        "title": "Sandbox — {appName}",
+        "description": "Explore public {appName} demos and experiments.",
+        "ogTitle": "Sandbox — {appName}",
+        "ogDescription": "Public demos and experiments from {appName}.",
+        "twitterTitle": "Sandbox — {appName}",
+        "twitterDescription": "Explore public demos and experiments."
+      },
+      "contact": {
+        "title": "Contact — {appName}",
+        "description": "Contact {appName} for support, partnerships, and questions about the learning platform.",
+        "ogTitle": "Contact {appName}",
+        "ogDescription": "Get in touch with {appName}.",
+        "twitterTitle": "Contact — {appName}",
+        "twitterDescription": "Reach out to {appName}."
+      },
+
+
+
+
+
+
+
+
+
+        "legal-index": {
+          "title": "Legal — {appName}",
+          "description": "Read the legal policies, privacy information, terms, and platform rules for {appName}.",
+          "ogTitle": "Legal — {appName}",
+          "ogDescription": "Legal policies and platform rules for {appName}.",
+          "twitterTitle": "Legal — {appName}",
+          "twitterDescription": "Legal policies and platform rules for {appName}."
+        },
+        "terms": {
+          "title": "Terms of Service — {appName}",
+          "description": "Read the {appName} terms of service for using the platform, content, subscriptions, and learning tools.",
+          "ogTitle": "Terms of Service — {appName}",
+          "ogDescription": "Read the terms for using {appName}.",
+          "twitterTitle": "Terms of Service — {appName}",
+          "twitterDescription": "Read the terms for using {appName}."
+        },
+        "privacy": {
+          "title": "Privacy Policy — {appName}",
+          "description": "Read the {appName} privacy policy and learn how personal data is collected, used, and protected.",
+          "ogTitle": "Privacy Policy — {appName}",
+          "ogDescription": "Learn how {appName} handles user data.",
+          "twitterTitle": "Privacy Policy — {appName}",
+          "twitterDescription": "Learn how {appName} handles user data."
+        },
+        "cookies": {
+          "title": "Cookie Policy — {appName}",
+          "description": "Learn how {appName} uses cookies, local storage, and similar technologies.",
+          "ogTitle": "Cookie Policy — {appName}",
+          "ogDescription": "Learn how cookies and similar technologies are used on {appName}.",
+          "twitterTitle": "Cookie Policy — {appName}",
+          "twitterDescription": "Learn how cookies are used on {appName}."
+        },
+        "refund": {
+          "title": "Refund Policy — {appName}",
+          "description": "Review cancellation, renewal, and refund rules for paid plans and purchases on {appName}.",
+          "ogTitle": "Refund Policy — {appName}",
+          "ogDescription": "Read the refund and cancellation policy for {appName}.",
+          "twitterTitle": "Refund Policy — {appName}",
+          "twitterDescription": "Read the refund and cancellation policy for {appName}."
+        },
+        "acceptable-use": {
+          "title": "Acceptable Use Policy — {appName}",
+          "description": "Review the rules for lawful and safe use of {appName}, including account, content, and system usage.",
+          "ogTitle": "Acceptable Use Policy — {appName}",
+          "ogDescription": "Read the acceptable use rules for {appName}.",
+          "twitterTitle": "Acceptable Use Policy — {appName}",
+          "twitterDescription": "Read the acceptable use rules for {appName}."
+        },
+        "community": {
+          "title": "Community Guidelines — {appName}",
+          "description": "Learn the community expectations for respectful and constructive participation on {appName}.",
+          "ogTitle": "Community Guidelines — {appName}",
+          "ogDescription": "Community rules and expectations for {appName}.",
+          "twitterTitle": "Community Guidelines — {appName}",
+          "twitterDescription": "Community rules and expectations for {appName}."
+        },
+        "dmca": {
+          "title": "Copyright and DMCA Policy — {appName}",
+          "description": "Read the copyright and DMCA policy for submitting notices and responding to infringement claims on {appName}.",
+          "ogTitle": "Copyright and DMCA Policy — {appName}",
+          "ogDescription": "Copyright and DMCA policy for {appName}.",
+          "twitterTitle": "Copyright and DMCA Policy — {appName}",
+          "twitterDescription": "Copyright and DMCA policy for {appName}."
+        },
+        "ai-policy": {
+          "title": "AI Usage Policy — {appName}",
+          "description": "Learn how AI-powered features on {appName} may be used and what limitations apply.",
+          "ogTitle": "AI Usage Policy — {appName}",
+          "ogDescription": "Rules for using AI-powered features on {appName}.",
+          "twitterTitle": "AI Usage Policy — {appName}",
+          "twitterDescription": "Rules for using AI-powered features on {appName}."
+        },
+        "academic-integrity": {
+          "title": "Academic Integrity Policy — {appName}",
+          "description": "Review honesty expectations for assessments, assignments, and certifications on {appName}.",
+          "ogTitle": "Academic Integrity Policy — {appName}",
+          "ogDescription": "Integrity expectations for learners on {appName}.",
+          "twitterTitle": "Academic Integrity Policy — {appName}",
+          "twitterDescription": "Integrity expectations for learners on {appName}."
+        },
+        "data-rights": {
+          "title": "Data Rights Policy — {appName}",
+          "description": "Learn about privacy rights, access requests, deletion requests, and data rights on {appName}.",
+          "ogTitle": "Data Rights Policy — {appName}",
+          "ogDescription": "Privacy and data rights information for {appName}.",
+          "twitterTitle": "Data Rights Policy — {appName}",
+          "twitterDescription": "Privacy and data rights information for {appName}."
+        },
+      "online-python-compiler": {
+        "title": "Online Python Compiler — {appName}",
+        "description": "Write, run, and test Python code online with {appName}.",
+        "ogTitle": "Online Python Compiler — {appName}",
+        "ogDescription": "Write, run, and test Python code online with {appName}.",
+        "twitterTitle": "Online Python Compiler — {appName}",
+        "twitterDescription": "Write, run, and test Python code online with {appName}."
+      },
+      "online-java-compiler": {
+        "title": "Online Java Compiler — {appName}",
+        "description": "Write, compile, and run Java code online with {appName}.",
+        "ogTitle": "Online Java Compiler — {appName}",
+        "ogDescription": "Write, compile, and run Java code online with {appName}.",
+        "twitterTitle": "Online Java Compiler — {appName}",
+        "twitterDescription": "Write, compile, and run Java code online with {appName}."
+      },
+      "online-javascript-editor": {
+        "title": "Online JavaScript Editor — {appName}",
+        "description": "Write and run JavaScript online with the {appName} code editor.",
+        "ogTitle": "Online JavaScript Editor — {appName}",
+        "ogDescription": "Write and run JavaScript online with the {appName} code editor.",
+        "twitterTitle": "Online JavaScript Editor — {appName}",
+        "twitterDescription": "Write and run JavaScript online with the {appName} code editor."
+      },
+      "online-c-compiler": {
+        "title": "Online C Compiler — {appName}",
+        "description": "Write, compile, and run C code online with {appName}.",
+        "ogTitle": "Online C Compiler — {appName}",
+        "ogDescription": "Write, compile, and run C code online with {appName}.",
+        "twitterTitle": "Online C Compiler — {appName}",
+        "twitterDescription": "Write, compile, and run C code online with {appName}."
+      },
+      "online-cpp-compiler": {
+        "title": "Online C++ Compiler — {appName}",
+        "description": "Write, compile, and run C++ code online with {appName}.",
+        "ogTitle": "Online C++ Compiler — {appName}",
+        "ogDescription": "Write, compile, and run C++ code online with {appName}.",
+        "twitterTitle": "Online C++ Compiler — {appName}",
+        "twitterDescription": "Write, compile, and run C++ code online with {appName}."
+      },
+      "online-sql-editor": {
+        "title": "Online SQL Editor — {appName}",
+        "description": "Write and run SQL queries online with the {appName} SQL editor.",
+        "ogTitle": "Online SQL Editor — {appName}",
+        "ogDescription": "Write and run SQL queries online with the {appName} SQL editor.",
+        "twitterTitle": "Online SQL Editor — {appName}",
+        "twitterDescription": "Write and run SQL queries online with the {appName} SQL editor."
+      }
+    },
+    "subjects": {
+      "python": {
+        "title": "Learn Python — {appName}",
+        "description": "Start learning Python with interactive lessons, guided practice, and structured beginner-friendly modules.",
+        "ogTitle": "Learn Python — {appName}",
+        "ogDescription": "Interactive Python learning with lessons and guided practice."
+      },
+      "linear-algebra": {
+        "title": "Learn Linear Algebra — {appName}",
+        "description": "Build strong foundations in vectors, matrices, transformations, and problem solving with guided lessons and practice.",
+        "ogTitle": "Learn Linear Algebra — {appName}",
+        "ogDescription": "Guided linear algebra lessons with structured practice."
+      },
+      "cybersecurity": {
+        "title": "Learn Cybersecurity — {appName}",
+        "description": "Explore cybersecurity foundations with structured lessons, guided practice, and practical learning paths.",
+        "ogTitle": "Learn Cybersecurity — {appName}",
+        "ogDescription": "Cybersecurity foundations with structured practice."
+      },
+      "haitian-creole": {
+        "title": "Learn Haitian Creole — {appName}",
+        "description": "Practice Haitian Creole with guided lessons, vocabulary, listening, and structured language learning paths.",
+        "ogTitle": "Learn Haitian Creole — {appName}",
+        "ogDescription": "Structured Haitian Creole learning with guided practice."
+      },
+      "ai-chatgpt-kickstart": {
+        "title": "Learn AI and ChatGPT — {appName}",
+        "description": "Build practical AI literacy with guided lessons on ChatGPT, prompting, safe use, and real-world workflows.",
+        "ogTitle": "Learn AI and ChatGPT — {appName}",
+        "ogDescription": "Practical AI learning with guided lessons and safe workflows."
+      }
+    }
+  }
+}

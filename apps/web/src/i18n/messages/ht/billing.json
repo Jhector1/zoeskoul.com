@@ -1,0 +1,184 @@
+{
+  "billing": {
+    "header": {
+      "kicker": "Pri",
+      "title": "Debloke devwa + pratik prim",
+      "subtitle": "Chwazi yon plan ki mache ak ritm aprantisaj ou. Ou ka anile nenpòt lè nan pòtal la.",
+      "manageBilling": "Jere bòdwo",
+      "signIn": "Konekte",
+      "signedIn": "Ou konekte",
+      "signInRequired": "Ou dwe konekte"
+    },
+    "paywall": {
+      "titleModule": "Modil sa a mande peman",
+      "titleAssignment": "Devywa sa a mande peman",
+      "titleGeneric": "Sa mande peman",
+      "goBack": "← Tounen",
+      "body": "Abòne pou debloke aksè epi kontinye.",
+      "afterCheckout": "Apre ou fin peye, ou pral retounen otomatikman.",
+      "subjectLabel": "sijè",
+      "moduleLabel": "modil"
+    },
+    "plans": {
+      "sectionTitle": "Plan yo",
+      "trialInfo": "Esè disponib si ou elijib.",
+      "trialInfoWithDays": "Esè gratis {days} jou si ou elijib.",
+      "loading": "Ap chaje plan yo…",
+
+      "monthly": {
+        "title": "Chak mwa",
+        "subtitle": "Fleksib chak mwa. Anile nenpòt lè.",
+        "features": [
+          "Sesyon pratik san limit",
+          "Aksè pou devwa",
+          "Swivi pwogrè",
+          "Modil revizyon prim"
+        ],
+        "subscribe": "Abòne chak mwa"
+      },
+
+      "yearly": {
+        "title": "Chak ane",
+        "subtitle": "Pi bon valè pou moun ki aprann regilyèman.",
+        "features": [
+          "Tout sa ki nan Chak mwa",
+          "Pi ba pri pa mwa (an mwayèn)",
+          "Mwens entèripsyon nan bòdwo",
+          "Bon pou gwoup & lekòl"
+        ],
+        "subscribe": "Abòne chak ane"
+      },
+
+      "currentPlan": "Plan aktyèl la",
+      "priceKicker": "Pri",
+      "recommended": "Rekòmande",
+
+      "startTrial": "Kòmanse esè {days} jou",
+      "trialActive": "Esè a ap mache",
+      "trialUnavailable": "Esè pa disponib",
+
+      "trialNoteUsed": "Ou deja itilize esè a sou kont sa a.",
+      "trialNoteEnded": "Peryòd esè a fini.",
+      "trialNoteDefault": "Pa gen chaj jodi a. Anile anvan esè a fini."
+    },
+    "sidebar": {
+      "title": "Sa ou jwenn",
+      "subtitle": "Tout plan gen karakteristik prim ladan.",
+      "items": {
+        "assignments": {
+          "title": "Devywa",
+          "desc": "Devywa pou pwofesè/admin ak swivi sesyon ak etap fini."
+        },
+        "unlimitedPractice": {
+          "title": "Pratik san limit",
+          "desc": "Jenere kestyon pa sijè ak difikilte, ak fidbak touswit."
+        },
+        "progressHistory": {
+          "title": "Istwa pwogrè",
+          "desc": "Swiv presizyon, sa ou rate, ak pwogrè pa sijè."
+        },
+        "multilanguage": {
+          "title": "Plizyè lang",
+          "desc": "Sèvi ak Learnoir an Anglè, Fransè, ak Kreyòl Ayisyen."
+        }
+      },
+      "tip": "Ti konsèy: Si yon devwa bloke, abònman ap debloke li touswit."
+    },
+    "statusPanel": {
+      "statusPrefix": "Estati: {label}",
+      "planPrefix": "Plan: {label}",
+      "trialEnds": "Esè fini: {when}",
+      "renews": "Renouvle: {when}",
+      "cancelAtPeriodEnd": "Ap anile nan fen peryòd la",
+
+      "planMonthly": "Chak mwa",
+      "planYearly": "Chak ane",
+      "planUnknown": "Abònman",
+
+      "statuses": {
+        "trialing": "Nan esè",
+        "active": "Aktif",
+        "past_due": "An reta",
+        "unpaid": "Pa peye",
+        "canceled": "Anile",
+        "incomplete": "Pa fini",
+        "incomplete_expired": "Pa fini (ekspire)",
+        "paused": "An poz",
+        "none": "Pa gen abònman"
+      },
+
+      "ids": {
+        "priceId": "ID pri",
+        "subscriptionId": "ID abònman"
+      }
+    },
+    "errors": {
+      "title": "⚠️ Gen yon pwoblèm"
+    },
+    "footer": {
+      "disclaimer": "Stripe jere peman yo. Ou ka jere oswa anile nenpòt lè nan pòtal bòdwo a."
+    }
+  }
+,
+  "success": {
+    "kicker": "Bòdwo",
+
+    "title": {
+      "busy": "N ap finalize abònman an…",
+      "ok": "✅ Abònman an aktif",
+      "fail": "⚠️ Nou pa konfime abònman an"
+    },
+    "subtitle": {
+      "busy": "Tann yon ti moman — n ap senkronize plan ou.",
+      "ok": "Tout anfòm. N ap mennen w tounen talè.",
+      "fail": "Nou poko rive konfime abònman an."
+    },
+
+    "pills": {
+      "plan": "Plan: {plan}",
+      "status": "Estati: {status}",
+      "trialEnds": "Esè fini: {when}",
+      "renews": "Renouvle: {when}"
+    },
+
+    "errors": {
+      "missingSession": "session_id pa la/oswa li pa bon nan lyen an.",
+      "confirmFailed": "Konfimasyon an echwe.",
+      "unknown": "Erè enkoni."
+    },
+
+    "errorPanel": {
+      "title": "Erè",
+      "retry": "Ese ankò",
+      "goBilling": "Ale nan Bòdwo"
+    },
+
+    "unlocked": {
+      "kicker": "Sa ki debloke kounye a",
+      "practiceTitle": "Pratik + Fidbak",
+      "practiceDesc": "Egzèsis entèaktif, tès touswit, ak revizyon ki vize.",
+      "assignTitle": "Devywa + Pwogrè",
+      "assignDesc": "Swiv pwogrè pa sijè epi kontinye aprann regilyèman."
+    },
+
+    "next": {
+      "kicker": "Pwochen etap",
+      "auto": "N ap kontinye nan {s}s…",
+      "manual": "Chwazi sa pou w fè apre."
+    },
+
+    "actions": {
+      "continue": "Kontinye",
+      "stayHere": "Rete isit",
+      "manageBilling": "Jere bòdwo"
+    },
+
+    "sync": {
+      "title": "N ap senkronize plan ou…",
+      "desc": "N ap konfime abònman Stripe ou epi n ap aktive fonksyon prim yo.",
+      "note": "Sa konn pran kèk segonn."
+    },
+
+    "tip": "Ti konsèy: Si w toujou wè yon kadna, rafrechi paj la yon fwa — senkronizasyon an ka fèk fini."
+  }
+}

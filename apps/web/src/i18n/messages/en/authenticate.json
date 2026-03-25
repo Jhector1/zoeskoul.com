@@ -1,0 +1,40 @@
+{
+  "auth": {
+    "brand": {
+      "name": "{appName}",
+      "tagline": "Secure sign-in"
+    },
+    "card": {
+      "title": "Sign in",
+      "subtitle": "Choose a sign-in method to continue."
+    },
+    "providers": {
+      "sso": "Continue with SSO",
+      "google": "Continue with Google",
+      "recommended": "Recommended"
+    },
+    "status": {
+      "redirecting": "Redirecting..."
+    },
+    "notes": {
+      "redirect": "You'll be redirected back after login.",
+      "trouble": "Having trouble?",
+      "support": "Contact support."
+    },
+    "legal": {
+      "prefix": "By continuing, you agree to our",
+      "terms": "Terms",
+      "and": "and",
+      "privacy": "Privacy Policy"
+    },
+    "errors": {
+      "title": "Sign-in issue",
+      "OAuthSignin": "Couldn't start the sign-in flow. Please try again.",
+      "OAuthCallback": "Sign-in failed while validating the response. Please try again.",
+      "OAuthAccountNotLinked": "That account is already linked to a different sign-in method. Use the originally linked method.",
+      "CredentialsSignin": "Invalid credentials. Please try again.",
+      "SessionRequired": "Please sign in to continue.",
+      "Default": "Something went wrong. Please try again."
+    }
+  }
+}

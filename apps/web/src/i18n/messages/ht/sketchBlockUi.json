@@ -1,0 +1,29 @@
+{
+  "sketchBlockUi": {
+    "finishPrereqs": "Fini atik “Make kòm li” yo anwo a anvan.",
+    "locked": "Fèmen.",
+    "autosave": "Pwogrè a sove otomatikman.",
+    "reset": "Rekòmanse",
+    "markRead": "Make kòm li",
+    "markedRead": "✓ Make kòm li",
+    "markReadTitle": "Make kat sa a kòm li",
+    "resetDialog": {
+      "title": "Rekòmanse sketch sa a?",
+      "confirm": "Rekòmanse",
+      "line1": "Sa ap efase sa ou te ekri sou kat sa a.",
+      "line2": "Ou pa ka defèt sa."
+    }
+  },
+  "cardUi": {
+    "kinds": { "quiz": "quiz", "project": "pwojè" },
+    "gateBanner": "Fini atik yo anwo a (lektiti, videyo, sketch) pou debloke {kind} sa a.",
+    "completed": "✓ Fini",
+    "loadingSaved": "N ap chaje eta {kind} ou te sove a…",
+    "actions": {
+      "read": "Make kòm li",
+      "readDone": "✓ Li",
+      "watched": "Make kòm gade",
+      "watchedDone": "✓ Gade"
+    }
+  }
+}

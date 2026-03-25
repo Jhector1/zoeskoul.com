@@ -1,0 +1,738 @@
+{
+  "LegalContent": {
+    "meta": {
+      "appName": "{appName}",
+      "dbaName": "{dbaName}",
+      "companyLegalName": "{companyLegalName}",
+      "companyAddress": "{companyAddress}",
+      "supportEmail": "{supportEmail}",
+      "privacyEmail": "{privacyEmail}",
+      "copyrightEmail": "{copyrightEmail}",
+      "dpoEmail": "{dpoEmail}",
+      "effectiveDate": "{effectiveDate}",
+      "lastUpdated": "{lastUpdated}"
+    },
+    "documents": {
+      "terms": {
+        "title": "Conditions d’utilisation",
+        "description": "Les présentes Conditions d’utilisation régissent l’accès et l’utilisation de {appName} ({dbaName}), y compris les comptes, les abonnements, le contenu pédagogique, les environnements de code et les services associés.",
+        "effectiveDate": "{effectiveDate}",
+        "lastUpdated": "{lastUpdated}",
+        "sections": {
+          "acceptance": {
+            "title": "1. Acceptation des présentes conditions",
+            "paragraphs": [
+              "Les présentes Conditions d’utilisation régissent votre accès à et votre utilisation de {appName} ({dbaName}), y compris nos sites web, applications, outils d’apprentissage, environnements de code, évaluations, abonnements, téléchargements numériques, certificats et services associés (collectivement, les « Services »).",
+              "En accédant aux Services ou en les utilisant, vous acceptez d’être lié par les présentes Conditions. Si vous utilisez les Services au nom d’une organisation, d’un établissement scolaire, d’un employeur ou d’une autre entité, vous déclarez avoir l’autorité nécessaire pour engager cette entité, et le terme « vous » désigne à la fois vous-même et cette entité."
+            ]
+          },
+          "company": {
+            "title": "2. Exploitant et coordonnées",
+            "paragraphs": [
+              "Les Services sont exploités par {companyLegalName}, exerçant sous le nom de {appName} ({dbaName}).",
+              "Adresse commerciale : {companyAddress}",
+              "Support général : {supportEmail}"
+            ]
+          },
+          "services": {
+            "title": "3. Description des Services",
+            "paragraphs": [
+              "{appName} ({dbaName}) fournit une plateforme éducative en ligne pouvant inclure des leçons interactives, des modules de pratique, des quiz, des outils de code et de sandbox, le suivi de progression, des ressources téléchargeables, des outils d’étude assistés par IA, des certificats et un accès par abonnement à du contenu premium.",
+              "Nous pouvons ajouter, retirer, améliorer, suspendre ou modifier toute partie des Services à tout moment, y compris le contenu, les prix, la disponibilité, les fonctionnalités, les intégrations ou les appareils pris en charge."
+            ]
+          },
+          "eligibility": {
+            "title": "4. Éligibilité et comptes",
+            "paragraphs": [
+              "Vous devez avoir au moins 13 ans, ou l’âge minimum requis par la loi dans votre juridiction, pour utiliser les Services. Si vous n’avez pas atteint l’âge de la majorité dans votre lieu de résidence, vous ne pouvez utiliser les Services qu’avec la permission et la supervision d’un parent, tuteur, enseignant ou autre adulte autorisé.",
+              "Pour accéder à certaines fonctionnalités, un compte peut être nécessaire. Vous acceptez de fournir des informations exactes, à jour et complètes, de garder vos identifiants en sécurité et de mettre rapidement à jour vos informations en cas de changement. Vous êtes responsable de toute activité effectuée sous votre compte."
+            ]
+          },
+          "subscriptions": {
+            "title": "5. Offres payantes, facturation et renouvellements",
+            "paragraphs": [
+              "Certains Services nécessitent un paiement, notamment les abonnements, les modules premium, les téléchargements ou d’autres fonctionnalités payantes. Nous pouvons utiliser des prestataires tiers de paiement tels que Stripe pour collecter et traiter les paiements."
+            ],
+            "list": [
+              "Les offres payantes peuvent se renouveler automatiquement sauf annulation avant le renouvellement.",
+              "Des taxes peuvent s’appliquer en fonction de votre adresse de facturation ou de la législation applicable.",
+              "Nous pouvons modifier les prix pour l’avenir avec un préavis raisonnable lorsque cela est requis.",
+              "Le défaut de paiement peut entraîner la suspension, la rétrogradation ou l’annulation de l’accès payant."
+            ]
+          },
+          "license": {
+            "title": "6. Licence limitée et propriété intellectuelle",
+            "paragraphs": [
+              "Les Services, y compris les supports de cours, les leçons, les exercices, les quiz, le contenu généré, les éditeurs de code, les mises en page, les designs, les textes, les graphismes, les logos, l’audio, la vidéo et les logiciels, appartiennent à {appName} ({dbaName}) ou lui sont concédés sous licence et sont protégés par les lois sur la propriété intellectuelle.",
+              "Sous réserve des présentes Conditions, nous vous accordons une licence limitée, non exclusive, non transférable et révocable pour accéder aux Services et les utiliser à des fins personnelles, internes, éducatives ou autrement autorisées. Vous ne pouvez pas reproduire, revendre, distribuer, modifier, afficher publiquement ou exploiter commercialement les Services sauf autorisation écrite expresse."
+            ]
+          },
+          "user-content": {
+            "title": "7. Contenu utilisateur",
+            "paragraphs": [
+              "Vous pouvez soumettre ou téléverser du contenu tel que du code, des réponses, des invites, des commentaires, des messages, des devoirs, des captures d’écran ou d’autres éléments (« Contenu utilisateur »). Vous conservez la propriété de votre Contenu utilisateur, sous réserve des droits que vous nous accordez ci-dessous.",
+              "Vous nous accordez une licence mondiale, non exclusive et libre de redevances pour héberger, stocker, reproduire, traiter, adapter, afficher et utiliser votre Contenu utilisateur uniquement dans la mesure nécessaire pour exploiter, sécuriser, améliorer et fournir les Services, y compris la modération, la sauvegarde, l’analyse et le support client.",
+              "Vous déclarez disposer de tous les droits nécessaires pour soumettre votre Contenu utilisateur et que celui-ci ne viole aucune loi ni aucun droit de tiers."
+            ]
+          },
+          "sandbox": {
+            "title": "8. Environnements de code et restrictions techniques",
+            "paragraphs": [
+              "Certaines parties des Services peuvent inclure des sandboxes de code, des terminaux, des environnements d’exécution, des outils de téléversement ou des intégrations. Ces outils sont fournis uniquement à des fins d’apprentissage et d’utilisation autorisée du produit.",
+              "Nous pouvons surveiller, limiter, suspendre ou résilier l’accès aux fonctionnalités techniques afin de protéger les utilisateurs, l’intégrité de la plateforme et la disponibilité du service."
+            ],
+            "list": [
+              "Vous ne pouvez pas téléverser de logiciels malveillants, ransomwares, spywares ou code destructeur.",
+              "Vous ne pouvez pas sonder, analyser, rétroconcevoir ou contourner la sécurité de la plateforme.",
+              "Vous ne pouvez pas abuser des ressources de calcul, de bande passante, de stockage ou d’exécution.",
+              "Vous ne pouvez pas utiliser les Services pour accéder à des systèmes, données ou réseaux sans autorisation."
+            ]
+          },
+          "acceptable-use": {
+            "title": "9. Utilisation acceptable",
+            "paragraphs": [
+              "Vous acceptez de ne pas faire un usage abusif des Services. Les comportements interdits comprennent :"
+            ],
+            "list": [
+              "la violation de la loi ou des droits de tiers ;",
+              "le harcèlement, les menaces, les abus ou l’usurpation d’identité ;",
+              "l’extraction ou la copie en masse de contenu sans autorisation ;",
+              "le contournement des accès payants ou des contrôles d’accès ;",
+              "l’utilisation de robots ou d’automatisation pour perturber la plateforme ;",
+              "le plagiat ou la fausse représentation de travaux dans des évaluations ;",
+              "la publication de contenu diffamatoire, haineux, obscène ou illégal."
+            ]
+          },
+          "disclaimers": {
+            "title": "10. Avis éducatifs et limitations du service",
+            "paragraphs": [
+              "Les Services sont fournis à des fins éducatives et informatives. Nous ne garantissons aucun résultat d’apprentissage particulier, aucune obtention de certification, aucun résultat d’examen, aucune insertion professionnelle, aucune opportunité d’emploi, aucun niveau de revenu ni aucun succès commercial.",
+              "Les Services peuvent contenir des erreurs, interruptions, retards, bogues, contenus inexacts ou réponses incomplètes, notamment lorsque le contenu est généré par des utilisateurs ou assisté par IA. Votre utilisation des Services se fait à vos propres risques."
+            ]
+          },
+          "termination": {
+            "title": "11. Suspension et résiliation",
+            "paragraphs": [
+              "Nous pouvons suspendre, restreindre ou résilier votre accès si nous pensons raisonnablement que vous avez violé les présentes Conditions, créé un risque ou une responsabilité, nui à d’autres utilisateurs ou abusé des Services. Nous pouvons également désactiver du contenu, des modules ou des fonctionnalités pour nous conformer à la loi, protéger la plateforme ou répondre à des préoccupations de sécurité.",
+              "Vous pouvez cesser d’utiliser les Services à tout moment. L’annulation d’un abonnement arrête les renouvellements futurs mais ne vous donne pas droit rétroactivement à un remboursement, sauf si la loi l’exige ou si notre politique de remboursement le prévoit."
+            ]
+          },
+          "liability": {
+            "title": "12. Limitation de responsabilité",
+            "paragraphs": [
+              "Dans toute la mesure permise par la loi, {appName} ({dbaName}) et ses sociétés affiliées, dirigeants, employés, prestataires, concédants et fournisseurs ne pourront être tenus responsables de dommages indirects, accessoires, consécutifs, spéciaux, exemplaires ou punitifs, ni de toute perte de profits, revenus, données, clientèle ou opportunités commerciales découlant des Services ou en relation avec ceux-ci.",
+              "Dans toute la mesure permise par la loi, notre responsabilité totale pour toute réclamation liée aux Services ne dépassera pas le montant le plus élevé entre : (a) le montant que vous nous avez versé au cours des 12 mois précédant l’événement à l’origine de la réclamation, ou (b) 100 USD."
+            ]
+          },
+          "indemnity": {
+            "title": "13. Indemnisation",
+            "paragraphs": [
+              "Vous acceptez de défendre, indemniser et dégager de toute responsabilité {appName} ({dbaName}) ainsi que ses sociétés affiliées, dirigeants, employés, agents, prestataires, concédants et fournisseurs contre toute réclamation, responsabilité, dommage, perte ou dépense découlant de votre utilisation des Services, de votre Contenu utilisateur, de votre violation des présentes Conditions ou de toute violation d’une loi ou d’un droit de tiers."
+            ]
+          },
+          "changes": {
+            "title": "14. Modifications des présentes Conditions",
+            "paragraphs": [
+              "Nous pouvons mettre à jour les présentes Conditions de temps à autre. Lorsque nous le faisons, nous révisons la date de « Dernière mise à jour » et, lorsque la loi l’exige, nous fournissons un avis complémentaire. Votre utilisation continue des Services après l’entrée en vigueur des Conditions mises à jour signifie que vous les acceptez."
+            ]
+          },
+          "governing-law": {
+            "title": "15. Droit applicable",
+            "paragraphs": [
+              "Les présentes Conditions sont régies par les lois de la juridiction dans laquelle {companyLegalName} est établi, sans égard aux principes de conflit de lois, sauf lorsque des lois impératives de protection du consommateur exigent le contraire."
+            ]
+          },
+          "contact": {
+            "title": "16. Contact",
+            "paragraphs": [
+              "Les questions relatives aux présentes Conditions peuvent être envoyées à {supportEmail}."
+            ]
+          }
+        }
+      },
+      "privacy": {
+        "title": "Politique de confidentialité",
+        "description": "La présente Politique de confidentialité explique comment {appName} ({dbaName}) collecte, utilise, partage, conserve et protège les informations personnelles.",
+        "effectiveDate": "{effectiveDate}",
+        "lastUpdated": "{lastUpdated}",
+        "sections": {
+          "scope": {
+            "title": "1. Portée",
+            "paragraphs": [
+              "La présente Politique de confidentialité explique comment {appName} ({dbaName}) collecte, utilise, stocke, partage et protège les informations personnelles lorsque vous accédez aux Services ou les utilisez.",
+              "Cette Politique s’applique aux informations collectées via nos sites web, applications, communications par e-mail, canaux de support client, flux de paiement et autres interactions avec nous."
+            ]
+          },
+          "information-we-collect": {
+            "title": "2. Informations que nous collectons",
+            "paragraphs": [
+              "Nous pouvons collecter les catégories d’informations suivantes :"
+            ],
+            "list": [
+              "Informations de compte : nom, adresse e-mail, nom d’utilisateur, image de profil, identifiants de compte, données liées au mot de passe ou à l’authentification, et préférences.",
+              "Informations d’apprentissage : inscriptions, progression dans les modules, statut d’achèvement, résultats de quiz, soumissions de code, horodatages d’activité, certificats, notes, éléments enregistrés et historique d’évaluation.",
+              "Données techniques et d’utilisation : adresse IP, identifiants d’appareil, type de navigateur, système d’exploitation, langue, fuseau horaire, pages consultées, clics, durée de session, informations de provenance, journaux de performance et événements de sécurité.",
+              "Données de paiement et de transaction : statut d’abonnement, offre de facturation, factures, pays de facturation, identifiants de transaction du prestataire de paiement et signaux de prévention contre la fraude. Nous ne stockons pas les numéros complets de carte bancaire.",
+              "Communications : demandes de support, réponses aux enquêtes, retours utilisateur et autres communications que vous nous envoyez.",
+              "Contenu généré et interactions avec l’IA : invites, réponses, modifications, commentaires et autres données liées aux fonctionnalités assistées par IA lorsqu’elles sont proposées."
+            ]
+          },
+          "sources": {
+            "title": "3. Comment nous collectons les informations",
+            "paragraphs": [
+              "Nous collectons des informations directement auprès de vous, automatiquement via les Services et auprès de tiers."
+            ],
+            "list": [
+              "Directement auprès de vous lorsque vous vous inscrivez, vous abonnez, téléversez du contenu ou contactez le support.",
+              "Automatiquement via les cookies, journaux, analyses et outils de sécurité.",
+              "Auprès de prestataires de services et d’intégrations tels que les processeurs de paiement, fournisseurs d’authentification, outils de messagerie, outils d’analyse, hébergeurs, outils de prévention de la fraude et administrateurs éducatifs ou organisationnels lorsque cela s’applique."
+            ]
+          },
+          "use-of-information": {
+            "title": "4. Comment nous utilisons les informations",
+            "paragraphs": [
+              "Nous pouvons utiliser les informations personnelles pour :"
+            ],
+            "list": [
+              "fournir, exploiter et améliorer les Services ;",
+              "créer et gérer les comptes et les abonnements ;",
+              "proposer des leçons, évaluations, outils de code et certificats ;",
+              "suivre la progression, personnaliser les expériences d’apprentissage et recommander du contenu ;",
+              "authentifier les utilisateurs et sécuriser les Services ;",
+              "traiter les paiements et prévenir la fraude ;",
+              "répondre aux demandes de support et communiquer avec vous ;",
+              "analyser la performance, l’usage et la qualité du produit ;",
+              "faire respecter nos Conditions et politiques ;",
+              "nous conformer à nos obligations légales et résoudre les litiges."
+            ]
+          },
+          "legal-bases": {
+            "title": "5. Bases juridiques du traitement",
+            "paragraphs": [
+              "Lorsque la loi applicable exige une base juridique pour le traitement, nous nous appuyons sur une ou plusieurs des bases suivantes :"
+            ],
+            "list": [
+              "l’exécution d’un contrat avec vous ;",
+              "nos intérêts légitimes à exploiter et améliorer les Services ;",
+              "votre consentement, lorsque cela est requis ;",
+              "le respect d’obligations légales ;",
+              "la protection d’intérêts vitaux et la prévention des abus ou de la fraude."
+            ]
+          },
+          "sharing": {
+            "title": "6. Comment nous partageons les informations",
+            "paragraphs": [
+              "Nous ne vendons pas les informations personnelles contre de l’argent. Nous pouvons partager des informations avec :"
+            ],
+            "list": [
+              "des fournisseurs et prestataires de services qui nous aident à exploiter les Services ;",
+              "des processeurs de paiement et fournisseurs de prévention de la fraude ;",
+              "des fournisseurs d’authentification et d’identité ;",
+              "des fournisseurs d’infrastructure cloud, de stockage, d’analyse et de communication ;",
+              "des conseillers professionnels, auditeurs et assureurs ;",
+              "des autorités judiciaires, réglementaires, tribunaux ou autres parties lorsque la loi l’exige ou lorsque cela est nécessaire pour protéger des droits, la sécurité ou la plateforme ;",
+              "des entités successeures dans le cadre d’une fusion, vente, financement, acquisition ou restructuration."
+            ]
+          },
+          "retention": {
+            "title": "7. Conservation des données",
+            "paragraphs": [
+              "Nous conservons les informations personnelles aussi longtemps que nécessaire pour fournir les Services, respecter les obligations légales, résoudre les litiges, faire respecter les accords, tenir des registres et protéger la plateforme. Les durées de conservation varient selon le type d’information, la raison de sa collecte, les exigences légales et les besoins opérationnels."
+            ]
+          },
+          "security": {
+            "title": "8. Sécurité",
+            "paragraphs": [
+              "Nous utilisons des mesures administratives, techniques et organisationnelles conçues pour protéger les informations personnelles, telles que des contrôles d’accès, des connexions chiffrées, la journalisation, la surveillance, la gestion des fournisseurs et des processus de revue de sécurité. Aucun système n’est totalement sécurisé et nous ne pouvons garantir une sécurité absolue."
+            ]
+          },
+          "international-transfers": {
+            "title": "9. Transferts internationaux de données",
+            "paragraphs": [
+              "Nous pouvons traiter ou stocker des informations dans des pays autres que celui où vous résidez. Lorsque cela est requis, nous utilisons des garanties appropriées pour les transferts internationaux, telles que des protections contractuelles ou d’autres mécanismes de transfert licites."
+            ]
+          },
+          "children": {
+            "title": "10. Enfants et mineurs",
+            "paragraphs": [
+              "Les Services ne sont pas destinés aux enfants n’ayant pas atteint l’âge minimum autorisé sans autorisation parentale, tutorale ou éducative appropriée. Si vous pensez qu’un enfant a fourni des informations personnelles en violation de la loi applicable, contactez-nous et nous prendrons les mesures appropriées."
+            ]
+          },
+          "rights": {
+            "title": "11. Vos droits en matière de confidentialité",
+            "paragraphs": [
+              "Selon votre juridiction, vous pouvez avoir des droits d’accès, de rectification, de suppression, de limitation, d’opposition ou d’exportation de vos informations personnelles, ainsi que le droit de retirer votre consentement lorsque le traitement repose sur celui-ci. Des détails supplémentaires figurent dans notre Politique relative aux droits sur les données."
+            ]
+          },
+          "cookies": {
+            "title": "12. Cookies et technologies similaires",
+            "paragraphs": [
+              "Nous utilisons des cookies et technologies similaires pour vous maintenir connecté, mémoriser vos préférences, sécuriser les Services, mesurer la performance, comprendre l’utilisation et améliorer l’expérience utilisateur. Consultez notre Politique relative aux cookies pour plus de détails."
+            ]
+          },
+          "changes": {
+            "title": "13. Modifications de cette Politique",
+            "paragraphs": [
+              "Nous pouvons mettre à jour la présente Politique de confidentialité de temps à autre. La date de « Dernière mise à jour » reflète la dernière révision. Si les modifications sont importantes, nous pouvons fournir un avis supplémentaire lorsque la loi l’exige."
+            ]
+          },
+          "contact": {
+            "title": "14. Contact",
+            "paragraphs": [
+              "Les questions et demandes liées à la confidentialité peuvent être envoyées à {privacyEmail}."
+            ]
+          }
+        }
+      },
+      "cookies": {
+        "title": "Politique relative aux cookies",
+        "description": "La présente Politique relative aux cookies explique comment {appName} ({dbaName}) utilise les cookies, le stockage local et des technologies similaires.",
+        "effectiveDate": "{effectiveDate}",
+        "lastUpdated": "{lastUpdated}",
+        "sections": {
+          "what-are-cookies": {
+            "title": "1. Que sont les cookies",
+            "paragraphs": [
+              "Les cookies sont de petits fichiers texte placés sur votre appareil lorsque vous visitez un site web. Des technologies similaires telles que le stockage local, les pixels, les SDK, les balises et les identifiants d’appareil peuvent être utilisées à des fins connexes. Dans cette Politique, nous désignons l’ensemble de ces technologies par le terme « cookies », sauf lorsque la distinction est nécessaire."
+            ]
+          },
+          "why-we-use-cookies": {
+            "title": "2. Pourquoi nous utilisons des cookies",
+            "paragraphs": [
+              "Nous utilisons des cookies pour :"
+            ],
+            "list": [
+              "maintenir les utilisateurs connectés et préserver les sessions ;",
+              "mémoriser les préférences telles que la langue, le thème et les paramètres d’accessibilité ;",
+              "améliorer la navigation, la performance et la fiabilité ;",
+              "mesurer l’utilisation, le trafic et l’adoption des fonctionnalités ;",
+              "aider à prévenir la fraude et les abus ;",
+              "prendre en charge la facturation, l’authentification et les flux de sécurité des comptes."
+            ]
+          },
+          "types": {
+            "title": "3. Types de cookies que nous pouvons utiliser",
+            "list": [
+              "Cookies strictement nécessaires : requis pour les fonctionnalités essentielles, la sécurité, la connexion, la navigation et la fourniture du service.",
+              "Cookies de préférence : utilisés pour mémoriser des paramètres tels que la langue, le thème, le son et les préférences d’accessibilité.",
+              "Cookies analytiques : utilisés pour comprendre l’utilisation, la performance, les erreurs et la qualité du produit.",
+              "Cookies de sécurité : utilisés pour détecter les comportements suspects, appliquer des contrôles et réduire les abus."
+            ]
+          },
+          "third-party": {
+            "title": "4. Cookies tiers",
+            "paragraphs": [
+              "Certains cookies peuvent être déposés par des services tiers que nous utilisons pour les paiements, l’authentification, l’analyse, l’hébergement, les communications ou la prévention de la fraude. Ces prestataires peuvent traiter des données conformément à leurs propres politiques de confidentialité."
+            ]
+          },
+          "choices": {
+            "title": "5. Vos choix",
+            "paragraphs": [
+              "Vous pouvez contrôler les cookies via les paramètres de votre navigateur, les paramètres de votre appareil ou tout outil de préférence en matière de cookies que nous mettons à disposition. Le blocage de certains cookies peut affecter le fonctionnement ou la performance des Services."
+            ]
+          },
+          "local-storage": {
+            "title": "6. Stockage local et technologies similaires",
+            "paragraphs": [
+              "Nous pouvons également stocker des préférences ou des valeurs liées à la session dans le stockage local ou des technologies similaires du navigateur, par exemple pour mémoriser les paramètres de l’interface ou améliorer la performance."
+            ]
+          },
+          "changes": {
+            "title": "7. Modifications de cette Politique",
+            "paragraphs": [
+              "Nous pouvons mettre à jour la présente Politique relative aux cookies périodiquement. Les modifications prennent effet lors de leur publication, sauf disposition contraire de la loi."
+            ]
+          },
+          "contact": {
+            "title": "8. Contact",
+            "paragraphs": [
+              "Les questions concernant les cookies peuvent être envoyées à {privacyEmail}."
+            ]
+          }
+        }
+      },
+      "refund": {
+        "title": "Politique de remboursement",
+        "description": "La présente Politique de remboursement explique les règles d’annulation, de renouvellement et de remboursement applicables aux offres payantes et achats sur {appName} ({dbaName}).",
+        "effectiveDate": "{effectiveDate}",
+        "lastUpdated": "{lastUpdated}",
+        "sections": {
+          "overview": {
+            "title": "1. Aperçu",
+            "paragraphs": [
+              "La présente Politique de remboursement s’applique aux abonnements, contenus premium, biens numériques et autres fonctionnalités payantes proposées via les Services, sauf si des conditions différentes sont présentées au moment de l’achat."
+            ]
+          },
+          "subscriptions": {
+            "title": "2. Annulation des abonnements",
+            "paragraphs": [
+              "Vous pouvez annuler un abonnement à tout moment. L’annulation met fin aux renouvellements futurs mais n’annule pas rétroactivement la période de facturation en cours. Sauf indication contraire, vous conservez l’accès jusqu’à la fin de la période payée."
+            ]
+          },
+          "refund-eligibility": {
+            "title": "3. Éligibilité au remboursement",
+            "paragraphs": [
+              "Des remboursements peuvent être accordés dans des cas limités tels que :"
+            ],
+            "list": [
+              "des frais facturés en double ;",
+              "des erreurs techniques de facturation causées par nous ou notre processeur de paiement ;",
+              "des frais prélevés après une annulation effectuée à temps ;",
+              "des droits au remboursement imposés par la loi applicable."
+            ]
+          },
+          "non-refundable": {
+            "title": "4. Situations non remboursables",
+            "paragraphs": [
+              "Sauf si la loi l’exige ou si cela est expressément promis au moment de l’achat, les éléments suivants sont généralement non remboursables :"
+            ],
+            "list": [
+              "les périodes d’abonnement partielles ;",
+              "le temps d’accès non utilisé ;",
+              "les cycles de facturation déjà terminés ;",
+              "les produits numériques téléchargeables déjà consultés ou livrés ;",
+              "les achats affectés par une suspension de compte due à une violation des politiques."
+            ]
+          },
+          "how-to-request": {
+            "title": "5. Comment demander un remboursement",
+            "paragraphs": [
+              "Pour demander l’examen d’un remboursement, contactez {supportEmail} et indiquez l’adresse e-mail de votre compte, la date de facturation, le montant et tout détail de transaction pertinent. Nous pouvons demander des informations supplémentaires pour vérifier votre demande."
+            ]
+          },
+          "chargebacks": {
+            "title": "6. Contestations de paiement",
+            "paragraphs": [
+              "Si vous pensez qu’un paiement n’est pas autorisé, contactez-nous d’abord afin que nous puissions enquêter. Nous nous réservons le droit de suspendre ou restreindre les comptes associés à des contestations abusives ou frauduleuses, sous réserve de la loi applicable."
+            ]
+          },
+          "changes": {
+            "title": "7. Modifications",
+            "paragraphs": [
+              "Nous pouvons réviser la présente Politique de remboursement de temps à autre. Les modifications s’appliquent pour l’avenir sauf disposition contraire de la loi."
+            ]
+          }
+        }
+      },
+      "acceptable-use": {
+        "title": "Politique d’utilisation acceptable",
+        "description": "La présente Politique d’utilisation acceptable décrit les utilisations interdites de {appName} ({dbaName}), y compris l’usage abusif des comptes, du contenu et des systèmes techniques.",
+        "effectiveDate": "{effectiveDate}",
+        "lastUpdated": "{lastUpdated}",
+        "sections": {
+          "purpose": {
+            "title": "1. Objet",
+            "paragraphs": [
+              "La présente Politique d’utilisation acceptable explique les règles d’utilisation des Services de manière licite, sécurisée, équitable et respectueuse. Elle complète nos Conditions d’utilisation et s’applique à tous les utilisateurs, y compris les apprenants, éducateurs, membres d’équipe, administrateurs et invités."
+            ]
+          },
+          "prohibited-activity": {
+            "title": "2. Activités interdites",
+            "paragraphs": [
+              "Vous ne pouvez pas utiliser les Services pour :"
+            ],
+            "list": [
+              "enfreindre la loi ou aider à une activité illégale ;",
+              "porter atteinte à la propriété intellectuelle, à la vie privée, au droit à l’image ou à des droits contractuels ;",
+              "harceler, menacer, maltraiter, traquer, exploiter ou divulguer les informations personnelles d’autrui ;",
+              "diffuser des logiciels malveillants, contenus de phishing ou code nuisible ;",
+              "extraire, collecter en masse ou reproduire du contenu sans autorisation ;",
+              "tenter un accès non autorisé à des systèmes, réseaux ou comptes ;",
+              "contourner l’authentification, les limites de débit, les autorisations ou les restrictions de facturation ;",
+              "usurper une identité, une affiliation ou des qualifications ;",
+              "utiliser les Services pour du spam, des arnaques, de la publicité trompeuse ou de la fraude ;",
+              "nuire à la performance, à la stabilité ou à la sécurité des Services."
+            ]
+          },
+          "technical-environments": {
+            "title": "3. Utilisation des environnements de code et techniques",
+            "paragraphs": [
+              "Si les Services fournissent des éditeurs, terminaux, environnements d’exécution, téléversements ou autres outils techniques, vous ne pouvez pas :"
+            ],
+            "list": [
+              "tenter une élévation de privilèges ou une sortie d’environnement ;",
+              "miner des cryptomonnaies ou consommer des ressources de calcul anormales ;",
+              "stocker, relayer ou distribuer des données non autorisées ;",
+              "tester des exploits ou vulnérabilités contre la plateforme ou des tiers ;",
+              "téléverser du matériel protégé par le droit d’auteur ou sensible sans autorisation."
+            ]
+          },
+          "enforcement": {
+            "title": "4. Application",
+            "paragraphs": [
+              "Nous pouvons enquêter sur les violations présumées et prendre des mesures comprenant des avertissements, la suppression de contenu, le ralentissement, une suspension temporaire, une résiliation permanente du compte ou une escalade juridique si nécessaire."
+            ]
+          },
+          "reporting": {
+            "title": "5. Signalement des abus",
+            "paragraphs": [
+              "Signalez les abus, usages suspects ou problèmes de sécurité à {supportEmail}."
+            ]
+          }
+        }
+      },
+      "community": {
+        "title": "Règles de la communauté",
+        "description": "Les présentes Règles de la communauté décrivent comment participer de manière respectueuse et constructive sur {appName} ({dbaName}).",
+        "effectiveDate": "{effectiveDate}",
+        "lastUpdated": "{lastUpdated}",
+        "sections": {
+          "principles": {
+            "title": "1. Principes",
+            "paragraphs": [
+              "Nous voulons que {appName} ({dbaName}) soit un environnement d’apprentissage bienveillant. Ces règles visent à protéger les apprenants, les éducateurs et le personnel, et à encourager la curiosité, l’honnêteté, la collaboration et le respect."
+            ]
+          },
+          "be-respectful": {
+            "title": "2. Être respectueux",
+            "paragraphs": [
+              "Traitez les autres avec respect. Ne harcelez pas, n’insultez pas, n’humiliez pas, ne menacez pas, n’intimidez pas, ne harcelez pas sexuellement, ne discriminez pas et ne ciblez pas des personnes en raison de leur identité, origine ou vulnérabilité."
+            ]
+          },
+          "be-constructive": {
+            "title": "3. Être constructif",
+            "paragraphs": [
+              "Fournissez des retours utiles. Posez des questions de bonne foi. Évitez de publier du contenu délibérément provocateur, trompeur, hors sujet ou destiné à perturber l’apprentissage."
+            ]
+          },
+          "do-not-spam": {
+            "title": "4. Pas de spam ni de promotion abusive",
+            "paragraphs": [
+              "N’utilisez pas la plateforme pour envoyer du spam, promouvoir des produits sans lien, manipuler l’engagement ou publier du contenu répétitif, de faible valeur ou trompeur."
+            ]
+          },
+          "sensitive-content": {
+            "title": "5. Contenu sensible et dangereux",
+            "paragraphs": [
+              "Ne publiez pas de contenu illégal, haineux, graphique, sexuellement explicite, encourageant l’automutilation ou autrement dangereux. Nous pouvons retirer un contenu qui crée un risque même s’il n’est pas manifestement illégal."
+            ]
+          },
+          "moderation": {
+            "title": "6. Modération",
+            "paragraphs": [
+              "Nous pouvons modérer le contenu et les comportements via une revue humaine, des systèmes automatisés, ou les deux. Les mesures d’application peuvent inclure la suppression de contenu, des restrictions ou des actions sur le compte."
+            ]
+          },
+          "reporting": {
+            "title": "7. Signaler un problème",
+            "paragraphs": [
+              "Si vous rencontrez un abus ou un comportement dangereux, contactez {supportEmail}."
+            ]
+          }
+        }
+      },
+      "dmca": {
+        "title": "Politique de droit d’auteur et DMCA",
+        "description": "La présente Politique de droit d’auteur et DMCA explique comment {appName} ({dbaName}) traite les réclamations en matière de droit d’auteur et les cas de récidive.",
+        "effectiveDate": "{effectiveDate}",
+        "lastUpdated": "{lastUpdated}",
+        "sections": {
+          "overview": {
+            "title": "1. Aperçu",
+            "paragraphs": [
+              "{appName} ({dbaName}) respecte les droits de propriété intellectuelle et attend des utilisateurs qu’ils fassent de même. Nous pouvons retirer ou désactiver l’accès à du contenu prétendument contrefaisant et résilier les récidivistes dans les circonstances appropriées."
+            ]
+          },
+          "submit-notice": {
+            "title": "2. Comment soumettre une notification de droit d’auteur",
+            "paragraphs": [
+              "Si vous pensez qu’un contenu des Services porte atteinte à votre droit d’auteur, envoyez une notification à {copyrightEmail} comprenant les éléments suivants :"
+            ],
+            "list": [
+              "votre nom complet et vos coordonnées ;",
+              "l’identification de l’œuvre protégée que vous estimez contrefaite ;",
+              "l’URL ou l’emplacement du contenu prétendument contrefaisant ;",
+              "une déclaration indiquant que vous avez une croyance de bonne foi que l’utilisation contestée n’est pas autorisée ;",
+              "une déclaration, sous peine de parjure lorsque cela s’applique, indiquant que les informations de la notification sont exactes et que vous êtes autorisé à agir au nom du titulaire ;",
+              "votre signature physique ou électronique."
+            ]
+          },
+          "counter-notice": {
+            "title": "3. Contre-notification",
+            "paragraphs": [
+              "Si vous pensez qu’un contenu a été retiré ou désactivé par erreur, vous pouvez envoyer une contre-notification lorsque la loi le permet. Votre contre-notification doit identifier le contenu retiré, son emplacement antérieur, vos coordonnées et toute déclaration requise par la loi."
+            ]
+          },
+          "repeat-infringers": {
+            "title": "4. Récidivistes",
+            "paragraphs": [
+              "Nous pouvons suspendre ou résilier les comptes des utilisateurs qui portent à plusieurs reprises atteinte aux droits de propriété intellectuelle ou soumettent de manière répétée des notifications invalides ou abusives."
+            ]
+          },
+          "good-faith": {
+            "title": "5. Utilisation de bonne foi",
+            "paragraphs": [
+              "Veuillez soumettre vos notifications de manière responsable. Les notifications fausses, trompeuses, abusives ou de mauvaise foi peuvent avoir des conséquences juridiques."
+            ]
+          }
+        }
+      },
+      "ai-policy": {
+        "title": "Politique d’utilisation de l’IA",
+        "description": "La présente Politique d’utilisation de l’IA explique comment les fonctionnalités d’IA sur {appName} ({dbaName}) peuvent être utilisées et quelles limites s’appliquent aux contenus générés par IA.",
+        "effectiveDate": "{effectiveDate}",
+        "lastUpdated": "{lastUpdated}",
+        "sections": {
+          "scope": {
+            "title": "1. Portée",
+            "paragraphs": [
+              "Les Services peuvent inclure des fonctionnalités assistées par IA telles que des indices, des explications, des retours, des résumés, de la traduction, du support de pratique ou de l’aide au code. La présente Politique régit l’utilisation de ces fonctionnalités."
+            ]
+          },
+          "limitations": {
+            "title": "2. Limites de l’IA",
+            "paragraphs": [
+              "Le contenu généré par IA peut être incorrect, incomplet, trompeur, biaisé, obsolète ou inadapté à votre cas d’usage. Les résultats de l’IA sont fournis à titre d’assistance éducative et ne remplacent pas votre propre jugement, votre relecture ni votre vérification indépendante."
+            ]
+          },
+          "allowed-uses": {
+            "title": "3. Utilisations autorisées",
+            "paragraphs": [
+              "Sauf restriction contraire, les fonctionnalités d’IA peuvent être utilisées pour :"
+            ],
+            "list": [
+              "obtenir des explications, exemples et un soutien d’apprentissage ;",
+              "comprendre des concepts et déboguer du code ;",
+              "pratiquer des langues ou revoir du contenu éducatif ;",
+              "améliorer l’écriture, la prise de notes ou les flux de travail d’étude."
+            ]
+          },
+          "prohibited-uses": {
+            "title": "4. Utilisations interdites",
+            "paragraphs": [
+              "Vous ne pouvez pas utiliser les fonctionnalités d’IA pour :"
+            ],
+            "list": [
+              "générer un contenu illégal, nuisible, trompeur ou abusif ;",
+              "tricher ou contourner des évaluations en violation des règles du cours ;",
+              "usurper l’identité d’autrui ou fabriquer des qualifications ;",
+              "traiter ou soumettre des données personnelles que vous n’êtes pas autorisé à partager ;",
+              "générer des logiciels malveillants, du phishing, des exploits ou autre code nuisible ;",
+              "violer nos Conditions, la Politique d’utilisation acceptable ou la Politique d’intégrité académique."
+            ]
+          },
+          "review": {
+            "title": "5. Revue humaine et garanties de la plateforme",
+            "paragraphs": [
+              "Nous pouvons examiner les interactions liées à l’IA et les données associées afin d’améliorer la sécurité, la qualité, la prévention des abus et la performance du service, sous réserve de la loi applicable et de notre Politique de confidentialité."
+            ]
+          },
+          "responsibility": {
+            "title": "6. Votre responsabilité",
+            "paragraphs": [
+              "Vous êtes responsable de la manière dont vous utilisez le contenu produit par l’IA. Avant de vous y fier pour l’éducation, le travail, le déploiement de code, des questions juridiques, des décisions financières, médicales ou d’autres contextes importants, vous devez le relire attentivement et le vérifier."
+            ]
+          }
+        }
+      },
+      "academic-integrity": {
+        "title": "Politique d’intégrité académique",
+        "description": "La présente Politique d’intégrité académique explique les attentes en matière d’honnêteté pour l’apprentissage, les évaluations et la certification sur {appName} ({dbaName}).",
+        "effectiveDate": "{effectiveDate}",
+        "lastUpdated": "{lastUpdated}",
+        "sections": {
+          "purpose": {
+            "title": "1. Objet",
+            "paragraphs": [
+              "L’apprentissage est plus efficace lorsque le travail est honnête. La présente Politique d’intégrité académique s’applique aux devoirs, quiz, tâches de code, projets, certifications, indicateurs de progression et autres activités éducatives fournies via les Services."
+            ]
+          },
+          "violations": {
+            "title": "2. Violations de l’intégrité",
+            "paragraphs": [
+              "Voici des exemples de violations :"
+            ],
+            "list": [
+              "soumettre un travail copié d’une autre personne sans autorisation ni attribution ;",
+              "présenter la solution d’une autre personne comme étant la vôtre ;",
+              "utiliser des outils ou automatisations non autorisés lors d’évaluations restreintes ;",
+              "partager de façon inappropriée des corrigés ou du matériel restreint ;",
+              "faussement représenter l’achèvement, la présence ou l’identité ;",
+              "collaborer lorsqu’un travail individuel est requis."
+            ]
+          },
+          "ai-and-integrity": {
+            "title": "3. IA et intégrité",
+            "paragraphs": [
+              "L’utilisation d’outils d’IA doit respecter les règles applicables à la leçon, au devoir, à l’évaluation, au programme ou à l’offre d’abonnement concerné. Si une activité exige un travail original ou sans assistance, l’usage de l’IA peut être interdit ou restreint même si l’IA est disponible ailleurs sur la plateforme."
+            ]
+          },
+          "consequences": {
+            "title": "4. Conséquences",
+            "paragraphs": [
+              "Les violations peuvent entraîner une ou plusieurs des conséquences suivantes :"
+            ],
+            "list": [
+              "réduction de note ou échec à l’évaluation ;",
+              "réinitialisation ou révocation de la progression ;",
+              "perte de l’éligibilité à une certification ;",
+              "restrictions temporaires ou permanentes du compte ;",
+              "signalement à un partenaire éducatif ou à une organisation lorsque cela s’applique."
+            ]
+          },
+          "appeals": {
+            "title": "5. Recours",
+            "paragraphs": [
+              "Si vous pensez qu’une mesure d’intégrité a été prise par erreur, contactez {supportEmail} avec les détails pertinents. Le dépôt d’un recours ne garantit pas son acceptation."
+            ]
+          }
+        }
+      },
+      "data-rights": {
+        "title": "Politique relative aux droits sur les données",
+        "description": "La présente Politique relative aux droits sur les données explique les droits de confidentialité disponibles pour les utilisateurs de {appName} ({dbaName}) en vertu de la loi applicable.",
+        "effectiveDate": "{effectiveDate}",
+        "lastUpdated": "{lastUpdated}",
+        "sections": {
+          "overview": {
+            "title": "1. Aperçu",
+            "paragraphs": [
+              "Selon l’endroit où vous vivez, vous pouvez avoir des droits concernant vos informations personnelles. La présente Politique résume les types de demandes que nous pouvons prendre en charge, sous réserve de la loi applicable, de la vérification d’identité, des considérations de sécurité et des exceptions autorisées."
+            ]
+          },
+          "rights-list": {
+            "title": "2. Droits dont vous pouvez disposer",
+            "list": [
+              "Accès : demander une copie de certaines informations personnelles que nous détenons à votre sujet.",
+              "Rectification : demander la correction d’informations personnelles inexactes ou incomplètes.",
+              "Suppression : demander la suppression d’informations personnelles, sous réserve d’exceptions légales, contractuelles, de sécurité et opérationnelles.",
+              "Portabilité : demander une copie portable de certaines informations lorsque cela s’applique.",
+              "Restriction ou opposition : demander des limitations sur certains traitements ou vous opposer à certaines utilisations lorsque la loi le permet.",
+              "Retrait du consentement : lorsque le traitement repose sur le consentement, vous pouvez le retirer à tout moment.",
+              "Non-discrimination : exercer vos droits applicables à la confidentialité sans discrimination illégale."
+            ]
+          },
+          "how-to-request": {
+            "title": "3. Comment faire une demande",
+            "paragraphs": [
+              "Envoyez vos demandes à {privacyEmail}. Afin de protéger les utilisateurs, nous pouvons demander des informations nécessaires pour vérifier votre identité et la portée de votre demande. Les mandataires autorisés peuvent devoir fournir une preuve d’autorité lorsque cela est requis."
+            ]
+          },
+          "timing": {
+            "title": "4. Délais et exceptions",
+            "paragraphs": [
+              "Nous répondons dans les délais exigés par la loi applicable. Dans certains cas, nous pouvons refuser tout ou partie d’une demande lorsqu’une exception s’applique, par exemple pour protéger d’autres utilisateurs, prévenir la fraude, respecter la loi, défendre des réclamations juridiques, compléter des transactions ou conserver des dossiers commerciaux nécessaires."
+            ]
+          },
+          "appeals": {
+            "title": "5. Recours et plaintes",
+            "paragraphs": [
+              "Si vous pensez qu’une demande liée à la confidentialité a été traitée de manière incorrecte, vous pouvez répondre à notre décision et demander un examen complémentaire. Vous pouvez également avoir le droit de déposer une plainte auprès d’une autorité de contrôle ou de régulation."
+            ]
+          },
+          "dpo": {
+            "title": "6. Contact confidentialité",
+            "paragraphs": [
+              "Les demandes liées à la confidentialité peuvent être envoyées à {privacyEmail} ou {dpoEmail}."
+            ]
+          }
+        }
+      }
+    }
+  }, "LegalUi": {
+  "indexIntro": "Consultez les politiques ci-dessous pour en savoir plus sur les abonnements, la confidentialité, les cookies, l’utilisation de l’IA, l’intégrité académique, le comportement dans la communauté, les notifications de droit d’auteur et vos droits sur les données.",
+  "view": "Voir",
+  "effective": "Entrée en vigueur",
+  "updated": "Mis à jour"
+}
+}

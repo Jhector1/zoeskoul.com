@@ -1,0 +1,136 @@
+{
+  "topics": {
+    "python": {
+      "python-1": {
+        "input_output_patterns": {
+          "label": "Input + Output Patterns: Real Mini-Programs",
+          "summary": "Combine input(), casting, operators, and f-strings into real mini-programs like age-next-year, a tip calculator, and a temperature converter.",
+          "cards": {
+            "sketch": {
+              "title": "Input + Output Patterns (Ask → Convert → Compute → Show)"
+            },
+            "quiz": {
+              "title": "Project: 3 mini-programs (Ask → Convert → Compute → Show)"
+            }
+          },
+          "projectSteps": {
+            "age_next_year": {
+              "title": "Age next year"
+            },
+            "tip_calc": {
+              "title": "Tip calculator"
+            },
+            "temp_convert": {
+              "title": "Temperature converter (C → F)"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "py": {
+      "io": {
+        "patterns": {
+          "title": "Input + Output Patterns: From Answers to Real Mini-Programs",
+          "bodyMarkdown": "So far you’ve learned the building blocks of Python:\n\n- **Variables** store values.\n- **Types** describe what those values are.\n- **Operators + expressions** compute new results.\n- **Strings** represent text (and `input()` returns strings).\n\nNow we combine everything into the basic structure of a program.\n\nMost beginner programs follow the same loop:\n\n### Ask → Convert → Compute → Show\n\n1. **Ask** the user for information\n2. **Convert** it into the correct type\n3. **Compute** something with it\n4. **Show** the result\n\nOnce you understand this pattern, you can build many small programs.\n\n---\n\n## The “Ask” tool: `input()`\n\n`input()` pauses the program and waits for the user to type something.\n\nExample:\n\n~~~python\nname = input(\"What is your name? \")\nprint(\"Hello\", name)\n~~~\n\nBut there is one important rule:\n\n> ✅ **`input()` always returns a string (`str`).**\n\nEven if the user types a number.\n\n---\n\n## Try it (prove it)\n\nRun this and type something like `25`.\n\n~~~python\nx = input(\"Type something: \")\n\nprint(\"You typed:\", x)\nprint(\"type:\", type(x))\n~~~\n\nEven when you type a number, Python still stores it as **text**.\n\n---\n\n## The “Convert” step: casting\n\nIf you want to do math, you must convert the text into a number.\n\nCommon conversions:\n\n- `int(...)` → whole numbers\n- `float(...)` → decimals\n\nExample:\n\n~~~python\nage = int(input(\"Age: \"))\nprint(\"Next year:\", age + 1)\n~~~\n\nNow Python can perform arithmetic.\n\n---\n\n## Try it\n\n~~~python\nage = int(input(\"Age: \"))\nprint(f\"Next year you will be {age + 1}.\")\n~~~\n\nRun it twice with different numbers.\n\n---\n\n## Quick warning: conversions can fail\n\nIf the user types something that is **not a number**, conversion fails.\n\n~~~python\nage = int(\"hello\")  # 🚫 ValueError\n~~~\n\nPython is saying:\n\n> “I tried to convert that text to a number, but it isn’t valid.”\n\nFor now, it’s enough to understand **why the error happens**.\nLater you’ll learn how to handle this safely.\n\n---\n\n## The “Show” step: clear output\n\nYou already saw **f-strings** in the strings lesson.\n\nThey are the cleanest way to display results.\n\n~~~python\nname = \"Maya\"\nage = 16\n\nprint(f\"Hi {name}, you are {age} years old.\")\n~~~\n\nF-strings combine **text + variables** naturally.\n\n---\n\n## Pattern 1: Ask → Convert → Compute → Show\n\nLet’s put the entire pattern together.\n\n~~~python\nvalue = float(input(\"Enter a number: \"))\nresult = value * 2\n\nprint(f\"Double is {result}\")\n~~~\n\nThe program does four things:\n\n1️⃣ Ask for input\n2️⃣ Convert it to a number\n3️⃣ Compute a result\n4️⃣ Show the result\n\n---\n\n## Try modifying the computation\n\nChange the math and run again.\n\n~~~python\nvalue = float(input(\"Enter a number: \"))\n\nprint(\"plus ten:\", value + 10)\nprint(\"times three:\", value * 3)\nprint(\"half:\", value / 2)\n~~~\n\nNotice how the same input can produce different results.\n\n---\n\n## A tiny calculator\n\nHere’s a small real program using the same pattern.\n\n~~~python\na = float(input(\"First number: \"))\nb = float(input(\"Second number: \"))\n\nsum_result = a + b\nprint(f\"The sum is {sum_result}\")\n~~~\n\nYou just built a **two-number calculator**.\n\n---\n\n## The key idea\n\nMany beginner programs follow the same structure:\n\n**Input → Process → Output**\n\nor more concretely:\n\n**Ask → Convert → Compute → Show**\n\nOnce this pattern feels natural, programming starts to feel much simpler.\n\n---\n\n## What comes next\n\nRight now your programs always run the same instructions.\n\nNext, we’ll unlock **conditionals**, so your program can decide:\n\n> *“If this happens… do that instead.”*"
+        }
+      }
+    }
+  },
+  "quiz": {
+    "m1_io_age_next_year": {
+      "title": "Age next year",
+      "prompt": "Read TWO inputs:\n1) name\n2) age\n\nPrint exactly:\nHi <name>! Next year you'll be <age+1>.",
+      "hint": "Convert age with int(...).",
+      "starterCode": "# TODO\n",
+      "runtime": {
+        "outputTemplate": "Hi {name}! Next year you'll be {age_next}."
+      }
+    },
+    "m1_io_tip_total": {
+      "title": "Tip + total",
+      "prompt": "Read TWO integers:\n1) bill\n2) tip percent\n\nCompute:\ntip = bill * pct // 100\ntotal = bill + tip\n\nPrint exactly:\nTip = <tip>\nTotal = <total>",
+      "hint": "Use integer math: // 100",
+      "starterCode": "bill = int(input())\npct = int(input())\n# TODO\n",
+      "runtime": {
+        "tipLineTemplate": "Tip = {tip}",
+        "totalLineTemplate": "Total = {total}"
+      }
+    },
+    "m1_io_c_to_f": {
+      "title": "Celsius → Fahrenheit",
+      "prompt": "Read ONE integer C.\n\nCompute:\nF = C * 9/5 + 32\n\nPrint ONLY F as an integer.",
+      "hint": "f = int(c * 9 / 5 + 32)",
+      "starterCode": "c = int(input())\n# TODO\n"
+    },
+    "m1_io_input_returns_str": {
+      "title": "What does input() return?",
+      "prompt": "Look at this code:\n\n~~~python\nx = input()\n~~~\n\nIf the user types `42`, what is the type of `x`?",
+      "hint": "`input()` always returns text.",
+      "options": {
+        "a": "int",
+        "b": "float",
+        "c": "str",
+        "d": "bool"
+      }
+    },
+    "m1_io_tip_integer_math": {
+      "title": "Integer math for tip",
+      "prompt": "Which line correctly computes the tip using integer math?",
+      "hint": "Use `//` for whole-number division.",
+      "options": {
+        "a": "tip = bill * pct / 100",
+        "b": "tip = bill * pct // 100",
+        "c": "tip = bill + pct // 100",
+        "d": "tip = pct - bill"
+      }
+    },
+    "m1_io_c_to_f_formula": {
+      "title": "Temperature formula",
+      "prompt": "Which expression matches the lesson’s Celsius → Fahrenheit computation for an integer `c`?",
+      "hint": "Multiply by 9, divide by 5, then add 32.",
+      "options": {
+        "a": "int(c * 9 / 5 + 32)",
+        "b": "int(c + 32 * 9 / 5)",
+        "c": "int(c * 5 / 9 + 32)",
+        "d": "int(c * 9 / (5 + 32))"
+      }
+    },
+    "m1_io_age_next_year_parts": {
+      "title": "Build the age-next-year solution",
+      "prompt": "Select all lines that belong in a correct solution for the **Age next year** program.",
+      "hint": "You need input, conversion, and exact output formatting.",
+      "options": {
+        "a": "name = input()",
+        "b": "age = int(input())",
+        "c": "print(f\"Hi {name}! Next year you'll be {age + 1}.\")",
+        "d": "age = input() + 1",
+        "e": "print(name, age, 1)"
+      }
+    },
+    "m1_io_tip_output_lines": {
+      "title": "Exact output lines",
+      "prompt": "After computing `tip` and `total`, select all lines that match the required output exactly.",
+      "hint": "The labels must match exactly: `Tip =` and `Total =`.",
+      "options": {
+        "a": "print(f\"Tip = {tip}\")",
+        "b": "print(f\"Total = {total}\")",
+        "c": "print(f\"Tip: {tip}\")",
+        "d": "print(f\"total = {total}\")"
+      }
+    },
+    "m1_io_convert_then_compute_truths": {
+      "title": "Convert, then compute",
+      "prompt": "Select all true statements about the temperature-converter program.",
+      "hint": "Think about the pattern: Ask → Convert → Compute → Show.",
+      "options": {
+        "a": "`input()` gives a string.",
+        "b": "`int(input())` can convert valid whole-number text into an integer.",
+        "c": "`print()` cannot show variables.",
+        "d": "`c * 9 / 5 + 32` is the computation step.",
+        "e": "You should keep `c` as raw text if you want to do math with it."
+      }
+    }
+  }
+}

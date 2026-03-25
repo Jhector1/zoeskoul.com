@@ -1,0 +1,46 @@
+{
+  "Footer": {
+    "tagline": "Aprantisaj entèaktif pou pwogramasyon, matematik, IA, lang, ak plis ankò.",
+    "badge": "Aprann • Pratike • Grandi",
+    "highlights": {
+      "practiceFirst": "Aprantisaj ki mete pratik an premye",
+      "multilingual": "Eksperyans plizyèl lang",
+      "legal": "Paj legal ak vi prive ki klè",
+      "paths": "Chemen aprantisaj ki byen estriktire"
+    },
+    "sections": {
+      "explore": "Eksplore",
+      "subjects": "Sijè yo",
+      "company": "Konpayi",
+      "legal": "Legal"
+    },
+    "links": {
+      "home": "Akèy",
+      "subjects": "Sijè yo",
+      "pricing": "Pri yo",
+      "sandbox": "Sandbox",
+      "python": "Python",
+      "linearAlgebra": "Aljèb lineyè",
+      "aiChatgpt": "IA ak ChatGPT",
+      "cybersecurity": "Sekirite siber",
+      "haitianCreole": "Kreyòl ayisyen",
+      "contact": "Kontakte",
+      "support": "Sipò",
+      "legalCenter": "Sant legal",
+      "terms": "Kondisyon yo",
+      "privacy": "Vi prive",
+      "cookies": "Bonbon yo",
+      "refunds": "Ranbousman",
+      "acceptableUse": "Itilizasyon akseptab"
+    },
+    "actions": {
+      "browseSubjects": "Gade sijè yo",
+      "legalCenter": "Sant legal"
+    },
+    "bottom": {
+      "rights": "Tout dwa rezève.",
+      "locale": "Lang",
+      "builtFor": "Fèt pou aprantisaj aksesib ak gid"
+    }
+  }
+}

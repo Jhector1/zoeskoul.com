@@ -1,0 +1,108 @@
+@layer components {
+  /* =========================
+   * Review Quiz tokens
+   * ========================= */
+  .ui-quiz-card {
+    @apply rounded-xl border p-3 border-neutral-200 bg-neutral-50;
+  }
+
+  .dark .ui-quiz-card {
+    @apply border-white/10 bg-white/[0.03];
+  }
+
+  .ui-quiz-card--locked {
+    @apply border-amber-300/50 bg-amber-50;
+  }
+
+  .dark .ui-quiz-card--locked {
+    @apply border-amber-300/25 bg-amber-300/10;
+  }
+
+  .ui-quiz-hint {
+    @apply mt-2 text-xs font-extrabold text-neutral-500;
+  }
+
+  .dark .ui-quiz-hint {
+    @apply text-white/50;
+  }
+
+  .ui-quiz-choice {
+    @apply text-left rounded-lg border px-3 py-2 text-xs font-extrabold transition;
+  }
+
+  .ui-quiz-choice--idle {
+    @apply border-neutral-200 bg-white text-neutral-900 hover:bg-neutral-50;
+  }
+
+  .dark .ui-quiz-choice--idle {
+    @apply border-white/10 bg-white/[0.06] text-white/90 hover:bg-white/[0.10];
+  }
+
+  .ui-quiz-choice--selected {
+    @apply border-sky-300/60 bg-sky-50 text-sky-950;
+  }
+
+  .dark .ui-quiz-choice--selected {
+    @apply border-sky-300/30 bg-sky-300/10 text-white/90;
+  }
+
+  .ui-quiz-input {
+    @apply w-40 rounded-lg border px-3 py-2 text-xs font-extrabold outline-none transition border-neutral-200 bg-white text-neutral-900 placeholder:text-neutral-400;
+  }
+
+  .dark .ui-quiz-input {
+    @apply border-white/10 bg-white/[0.06] text-white/90 placeholder:text-white/35;
+  }
+
+  .ui-quiz-action {
+    @apply rounded-xl border px-3 py-2 text-xs font-extrabold transition;
+  }
+
+  .ui-quiz-action--primary {
+    @apply border-neutral-200 bg-white text-neutral-900 hover:bg-neutral-50;
+  }
+
+  .dark .ui-quiz-action--primary {
+    @apply border-white/10 bg-white/10 text-white/80 hover:bg-white/[0.15];
+  }
+
+  .ui-quiz-action--ghost {
+    @apply border-neutral-200 bg-white/70 text-neutral-700 hover:bg-white;
+  }
+
+  .dark .ui-quiz-action--ghost {
+    @apply border-white/10 bg-white/[0.06] text-white/70 hover:bg-white/[0.10];
+  }
+
+  .ui-quiz-action--disabled {
+    @apply cursor-not-allowed border-neutral-200/70 bg-white/60 text-neutral-400;
+  }
+
+  .dark .ui-quiz-action--disabled {
+    @apply border-white/10 bg-white/[0.06] text-white/40;
+  }
+
+  .ui-quiz-explain {
+    @apply mt-2 rounded-lg border p-2 border-neutral-200 bg-white/70;
+  }
+
+  .dark .ui-quiz-explain {
+    @apply border-white/10 bg-black/30;
+  }
+
+  .ui-progress-track {
+    @apply h-2 w-40 overflow-hidden rounded-full bg-neutral-200;
+  }
+
+  .dark .ui-progress-track {
+    @apply bg-white/10;
+  }
+
+  .ui-progress-fill {
+    @apply h-full bg-emerald-500/70;
+  }
+
+  .dark .ui-progress-fill {
+    @apply bg-emerald-300/30;
+  }
+}

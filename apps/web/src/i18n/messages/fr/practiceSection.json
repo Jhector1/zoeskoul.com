@@ -1,0 +1,126 @@
+{
+  "VectorsLanding": {
+    "pageTitle": "Vecteurs",
+    "pageIntro": "Parcours en deux parties : la Partie 1 pose les bases ; la Partie 2 construit le cœur de l’algèbre linéaire (combinaisons → indépendance → engendré/sous-espace → base).",
+
+    "quickStartPart1Easy": "Démarrage rapide • Partie 1 • Facile",
+    "jumpPart2Easy": "Aller • Partie 2 • Facile",
+
+    "whatYouLearn": "Ce que tu vas apprendre",
+    "readMaterial": "Lire le cours",
+    "practiceNow": "S’entraîner",
+    "practiceNowHint": "“S’entraîner” ouvre une session d’exercices pré-filtrée pour cette partie.",
+
+    "recommendedPathTitle": "Parcours recommandé",
+    "recommended": {
+      "0": "Fais la Partie 1 jusqu’à ce que l’orientation, les formes, la norme/vecteurs unitaires et le produit scalaire soient automatiques.",
+      "1": "Passe à la Partie 2 pour maîtriser indépendance/engendré/base (ça débloque tout le reste).",
+      "2": "Reviens à la géométrie du produit scalaire quand la projection/décomposition semble “mystérieuse”."
+    },
+
+    "routeHint": "Si ton chemin de cours n’est pas /learn, remplace simplement les liens learnHref.",
+
+    "parts": {
+      "part1": {
+        "badge": "Commence ici",
+        "title": "Vecteurs — Partie 1",
+        "subtitle": "Bases, intuition géométrique, formes NumPy et opérations clés",
+        "bullets": {
+          "0": "Sens d’un vecteur (algèbre vs géométrie) et notation ℝⁿ",
+          "1": "Ligne vs colonne + transposée (pourquoi c’est important)",
+          "2": "Représentations NumPy : (n,), (1,n), (n,1) + intuition des shapes",
+          "3": "Addition/soustraction, multiplication scalaire (piège listes vs arrays)",
+          "4": "Norme (magnitude) + vecteurs unitaires",
+          "5": "Produit scalaire : calcul + interprétation signe/angle",
+          "6": "Hadamard vs scalaire vs produit externe (ce que tu obtiens)",
+          "7": "Idée de projection (prépare les décompositions)"
+        }
+      },
+      "part2": {
+        "badge": "Ensuite",
+        "title": "Vecteurs — Partie 2",
+        "subtitle": "Combinaisons linéaires → indépendance → engendré/sous-espace → base",
+        "bullets": {
+          "0": "Ensembles de vecteurs : fini / infini / vide",
+          "1": "Combinaisons linéaires pondérées (composante par composante)",
+          "2": "Indépendants vs dépendants (y compris la règle du vecteur nul)",
+          "3": "Engendré (droite vs tout ℝ²) + intuition de dimension",
+          "4": "Tests de sous-espace : vecteur nul + fermetures",
+          "5": "Vérifier une base (ℝ² : det ≠ 0)",
+          "6": "Coordonnées dans une base (résoudre c₁, c₂)",
+          "7": "Lien avec projection + décomposition orthogonale"
+        }
+      }
+    }
+  },
+
+  "MatricesPart1Landing": {
+    "pageTitle": "Matrices — Partie 1",
+    "pageIntro": "Apprends ce qu’est une matrice, comment lire sa forme, l’indexer/la découper comme en NumPy, et développe l’intuition pour la multiplication, la transposée et la symétrie.",
+    "quickStartEasy": "Démarrage rapide (Facile)",
+    "whatYouLearn": "Ce que tu vas apprendre",
+    "readMaterial": "Lire le cours",
+    "practiceNow": "S’entraîner",
+    "practiceNowHint": "Astuce : choisis une difficulté et répète jusqu’à ce que ça devienne automatique.",
+    "parts": {
+      "part1": {
+        "badge": "BASES",
+        "title": "Matrices : sens, forme et opérations de base",
+        "subtitle": "Des tableaux de données aux transformations : indexation, matrices spéciales, multiplication, transposée, symétrie",
+        "bullets": {
+          "0": "Lire la forme (lignes × colonnes) et compter le nombre total d’éléments",
+          "1": "Voir une matrice comme un tableau de données ou des vecteurs-colonnes empilés",
+          "2": "Passer de l’indexation mathématique à l’indexation NumPy (base 0)",
+          "3": "Déterminer la forme d’un slice avec les intervalles semi-ouverts de Python",
+          "4": "Reconnaître les matrices identité, diagonale et triangulaire",
+          "5": "Distinguer produit élément par élément et produit matriciel (* vs @), et le “shift” A + λI",
+          "6": "Trouver la forme de AB, vérifier si le produit est défini, et calculer une entrée via un produit scalaire",
+          "7": "Utiliser les règles de transposée (LIVE EVIL), les formes après transposée, et reconnaître les matrices symétriques"
+        }
+      }
+    },
+    "recommendedPathTitle": "Parcours recommandé",
+    "recommended": {
+      "0": "Commence par la forme + l’indexation jusqu’à répondre rapidement.",
+      "1": "Passe à la forme/validité de la multiplication, puis calcule des entrées.",
+      "2": "Termine avec les motifs transposée + symétrie."
+    },
+    "routeHint": "Routes : /practice/review/matrices_part1 (cours) • /practice?section=module-2-matrices (pratique)"
+  }
+  ,
+  "MatricesPart2Landing": {
+    "pageTitle": "Matrices — Partie 2",
+    "pageIntro": "Développe l’intuition sur les normes, le rang, la tolérance numérique et la stabilité. Comprends pourquoi un tout petit bruit peut changer les résultats et comment comparer des matrices correctement en pratique.",
+    "quickStartEasy": "Démarrage rapide (Facile)",
+    "whatYouLearn": "Ce que tu vas apprendre",
+    "readMaterial": "Lire le cours",
+    "practiceNow": "S’entraîner maintenant",
+    "practiceNowHint": "Astuce : commence avec de petites matrices, puis augmente la taille quand le schéma devient automatique.",
+    "parts": {
+      "part2": {
+        "badge": "INTUITION NUMÉRIQUE",
+        "title": "Matrices : normes, rang, tolérance et stabilité",
+        "subtitle": "Mesurer la taille, détecter la structure et gérer la réalité des nombres flottants avec ε",
+        "bullets": {
+          "0": "Calculer la norme de Frobenius à partir des entrées et interpréter ce qu’elle mesure",
+          "1": "Comprendre la norme 2 (norme spectrale) comme le facteur d’étirement maximal",
+          "2": "Comparer les normes et savoir quand chacune est utile (rapide vs sens géométrique)",
+          "3": "Calculer le rang via pivots / RREF et relier le rang à l’indépendance linéaire",
+          "4": "Utiliser une tolérance ε pour définir un rang effectif (rangε) avec du bruit",
+          "5": "Voir comment une petite perturbation peut changer le rang et pourquoi « presque dépendant » compte",
+          "6": "Reconnaître les matrices presque singulières / mal conditionnées et la sensibilité des solutions",
+          "7": "Pratiquer des workflows robustes : tolérances, arrondis et tests d’égalité sûrs"
+        }
+      }
+    },
+    "recommendedPathTitle": "Parcours recommandé",
+    "recommended": {
+      "0": "Commence par des exercices de norme de Frobenius jusqu’à calculer vite.",
+      "1": "Passe ensuite au rang et aux pivots, puis compare rang vs rangε sous bruit.",
+      "2": "Termine par l’intuition de stabilité/conditionnement avec des exemples presque singuliers."
+    },
+    "routeHint": "Routes : /practice/review/matrices_part2 (lire) • /practice?section=module-3-matrices (pratiquer)"
+  }
+
+
+}

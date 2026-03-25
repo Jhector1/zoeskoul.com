@@ -1,0 +1,56 @@
+/* modular UI tokens */
+@import "./ui/colors.css";
+@import "./ui/palette.css";
+
+@import "./ui/layout.css";
+@import "./ui/surfaces.css";
+@import "./ui/typography.css";
+@import "./ui/buttons.css";
+@import "./ui/header.css";
+@import "./ui/menus.css";
+@import "./ui/pills.css";
+@import "./ui/subjects.css";
+@import "./ui/quiz.css";
+@import "./ui/sketch.css";
+@import "./ui/drag.css";
+@import "./ui/ide.css";
+@import "./ui/codeRunner.css";
+@import "./ui/reviewModuleSkeleton.css";
+@import "./ui/tooltip.css";
+
+@layer base {
+    html { font-size: var(--app-font-size, 16px); }
+
+    :root {
+        --app-bg: #ffffff;
+        --app-bg-ink: #f6f7ff;
+    }
+
+    .dark {
+        --app-bg: #0b0d12;
+        --app-bg-ink: #151a2c;
+    }
+}
+@layer components {
+    .ui-playground-bg {
+        @apply min-h-screen p-3 md:p-4 text-neutral-900;
+        background: radial-gradient(1200px 700px at 20% 0%, #eef2ff 0%, #f8fafc 55%);
+    }
+    .dark .ui-playground-bg {
+        @apply text-white/90;
+        background: radial-gradient(1200px 700px at 20% 0%, #151a2c 0%, #0b0d12 55%);
+    }
+
+    .ui-app-shell {
+        min-height: 100dvh; /* nicer on mobile */
+        color: rgb(17 24 39);
+        background: radial-gradient(
+                1200px 700px at 20% 0%,
+                var(--app-bg-ink) 0%,
+                var(--app-bg) 55%
+        );
+    }
+    .dark .ui-app-shell {
+        color: rgba(255, 255, 255, 0.9);
+    }
+}

@@ -1,0 +1,108 @@
+{
+  "topics": {
+    "python": {
+      "python-1": {
+        "data_types_intro": {
+          "label": "Data Types + Conversion: What’s in the Box?",
+          "summary": "Learn core Python types (int/float/str/bool/None), how input() returns strings, and how to convert types safely.",
+          "cards": {
+            "sketch0": {
+              "title": "Data Types: What’s Inside the Box?"
+            },
+            "sketch1": {
+              "title": "Type Conversion: Turning Strings into Numbers"
+            },
+            "quiz": {
+              "title": "Project: Convert → Compute → Format"
+            }
+          },
+          "projectSteps": {
+            "convert_next_year": {
+              "title": "Convert age to int and compute next year"
+            },
+            "tip_total": {
+              "title": "Compute tip + total using integer math"
+            },
+            "c_to_f": {
+              "title": "Convert Celsius to Fahrenheit"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "py": {
+      "types": {
+        "basic": {
+          "title": "Data Types: What’s Inside the Box?",
+          "bodyMarkdown": "You already have labeled boxes (variables). Now the next question is:\n\n**What kind of thing is inside the box?**\n\nPython calls that a **data type**.\n\nA type tells Python what the value *is*, and what you’re allowed to do with it.\n\n---\n\n## 5 types you’ll use constantly\n\n(There are more than five, but these show up everywhere.)\n\n### 1) Integers (`int`) — whole numbers\n~~~python\nstudents = 28\n~~~\n\n### 2) Floats (`float`) — decimals\n~~~python\nprice = 3.75\n~~~\n\n### 3) Strings (`str`) — text\n~~~python\nmessage = \"Welcome!\"\n~~~\n\n### 4) Booleans (`bool`) — True/False\n~~~python\nis_logged_in = True\n~~~\n\n### 5) None (`NoneType`) — “empty on purpose”\n~~~python\nnickname = None\n~~~\n\n`None` means:\n> “There is no value here yet.”\n\n---\n\n## Try it (scan the boxes)\n\nPaste this code into the editor on the **right** and run it:\n\n~~~python\nstudents = 28\nprice = 3.75\nmessage = \"Welcome!\"\nis_logged_in = True\nnickname = None\n\nprint(\"students:\", students, \"| type:\", type(students))\nprint(\"price:\", price, \"| type:\", type(price))\nprint(\"message:\", message, \"| type:\", type(message))\nprint(\"is_logged_in:\", is_logged_in, \"| type:\", type(is_logged_in))\nprint(\"nickname:\", nickname, \"| type:\", type(nickname))\n~~~\n\n---\n\n## Why types matter\n\nTypes affect how operations behave:\n\n- numbers add like math\n- strings “add” by joining text (**concatenation**)\n- mixing incompatible types can cause errors\n\nNumbers add like math:\n\n~~~python\na = 10\nb = 5\nprint(a + b)  # 15\n~~~\n\nStrings join together:\n\n~~~python\na = \"10\"\nb = \"5\"\nprint(a + b)  # \"105\"\n~~~\n\nThat’s not math — it’s **string concatenation** (joining text with `+`).\n\n---\n\n## Try it (predict first)\n\nBefore you run this, guess the output:\n\n~~~python\nprint(10 + 5)\nprint(\"10\" + \"5\")\nprint(\"hi\" + \" there\")\n~~~\n\nThen run it and check your guesses."
+        },
+        "convert": {
+          "title": "Type Conversion: Turning Strings into Numbers",
+          "bodyMarkdown": "Here’s a classic beginner surprise.\n\n---\n\n## Heads-up: `input(...)` always returns text\n\n`input(\"...\")` asks the user a question, and the user types an answer.\n\nOne rule matters most:\n\n✅ **`input()` always returns a string (`str`).**\n\n---\n\n## Try it (see the type)\n\nRun this and type anything when prompted:\n\n~~~python\nage = input(\"Enter your age: \")\nprint(\"You typed:\", age)\nprint(\"type:\", type(age))\n~~~\n\nNo matter what you type, the type is still `str`.\n\n---\n\n## Convert the type (casting)\n\nIf you want Python to treat input as a number, you must convert it:\n\n- use `int(...)` for whole numbers\n- use `float(...)` for decimals\n\n### Convert to int (whole number)\n~~~python\nage = int(input(\"Enter your age: \"))\nprint(age + 1)\n~~~\n\n### Convert to float (decimal)\n~~~python\nprice = float(input(\"Enter price: \"))\nprint(price * 1.10)\n~~~\n\n### Convert to string (when you need text)\n~~~python\nscore = 95\nmsg = \"Your score is \" + str(score)\nprint(msg)\n~~~\n\n---\n\n## Try it (mini checkout)\n\n~~~python\nprice = float(input(\"Price: \"))\nqty = int(input(\"Quantity: \"))\ntotal = price * qty\nprint(\"Total =\", total)\n~~~\n\nRun it again with different numbers."
+        }
+      }
+    }
+  },
+  "quiz": {
+    "m1_types_string_vs_int_sc": {
+      "title": "Quotes change the type",
+      "prompt": "Which value is a string (`str`) in Python?",
+      "options": {
+        "a": "`42`",
+        "b": "`\"42\"`",
+        "c": "`3.14`"
+      },
+      "hint": "Quotes make it text (a string)."
+    },
+    "m1_types_int_vs_float_sc": {
+      "title": "int vs float",
+      "prompt": "Which value is a float (`float`)?",
+      "options": {
+        "a": "`7`",
+        "b": "`7.0`",
+        "c": "`\"7.0\"`"
+      },
+      "hint": "Decimals are floats (unless they’re quoted)."
+    },
+    "m1_types_bool_sc": {
+      "title": "Booleans are True/False",
+      "prompt": "Which value is a boolean (`bool`)?",
+      "options": {
+        "a": "`True`",
+        "b": "`\"True\"`",
+        "c": "`1.0`"
+      },
+      "hint": "Booleans are the keywords True or False (without quotes)."
+    },
+    "m1_types_none_sc": {
+      "title": "None means “no value yet”",
+      "prompt": "Which value represents “no value yet” in Python?",
+      "options": {
+        "a": "`0`",
+        "b": "`\"\"` (empty string)",
+        "c": "`None`"
+      },
+      "hint": "None is its own special value."
+    },
+    "m1_types_convert_next_year_code": {
+      "title": "Convert age to int and compute next year",
+      "prompt": "A signup form collects:\n1) name\n2) age\n\nRead TWO inputs:\n- name (text)\n- age (text, but it represents a number)\n\nConvert age to an integer, then print EXACTLY:\nHi <name>! Next year you'll be <age+1>.",
+      "hint": "age = int(age)",
+      "outputTemplate": "Hi {name}! Next year you'll be {age_next}."
+    },
+    "m1_types_tip_total_code": {
+      "title": "Restaurant tip + total (ints)",
+      "prompt": "A restaurant app asks for:\n1) bill (integer)\n2) tip percent (integer)\n\nCompute:\ntip = bill * pct // 100\ntotal = bill + tip\n\nPrint EXACTLY:\nTip = <tip>\nTotal = <total>",
+      "hint": "Use integer math: // 100",
+      "tipLineTemplate": "Tip = {tip}",
+      "totalLineTemplate": "Total = {total}"
+    },
+    "m1_types_c_to_f_code": {
+      "title": "Celsius → Fahrenheit",
+      "prompt": "A weather station gives Celsius as an integer C.\n\nRead ONE integer C.\nCompute:\nF = C * 9/5 + 32\n\nPrint ONLY F.",
+      "hint": "f = int(c * 9 / 5 + 32)"
+    }
+  }
+}

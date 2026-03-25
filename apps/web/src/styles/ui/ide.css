@@ -1,0 +1,37 @@
+@layer components {
+  .ui-ide-menubtn {
+    @apply grid place-items-center border px-2 py-2 transition rounded-none;
+    @apply border-neutral-200 bg-white text-neutral-700 hover:bg-neutral-50;
+    @apply opacity-100 md:opacity-0 md:group-hover:opacity-100;
+  }
+
+  .dark .ui-ide-menubtn {
+    @apply border-white/10 bg-white/[0.06] text-white/75 hover:bg-white/[0.10];
+  }
+
+  .ui-ide-menupanel {
+    @apply overflow-hidden border shadow-xl rounded-none;
+    @apply border-neutral-200 bg-white;
+  }
+
+  .dark .ui-ide-menupanel {
+    @apply border-white/10 bg-neutral-950;
+  }
+
+  .ui-ide-menuitem {
+    @apply flex w-full items-center gap-2 px-3 py-2 text-left text-sm font-bold transition;
+    @apply text-neutral-700 hover:bg-neutral-50 hover:text-neutral-950;
+  }
+
+  .dark .ui-ide-menuitem {
+    @apply text-white/80 hover:bg-white/[0.08] hover:text-white/95;
+  }
+
+  .ui-ide-menuitem--danger {
+    @apply text-rose-700 hover:bg-rose-50;
+  }
+
+  .dark .ui-ide-menuitem--danger {
+    @apply text-rose-200 hover:bg-rose-300/10;
+  }
+}

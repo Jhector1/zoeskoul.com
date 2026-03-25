@@ -1,0 +1,136 @@
+{
+  "topics": {
+    "python": {
+      "python-2": {
+        "loops_basics": {
+          "label": "Loops: Repeat Until It Works",
+          "summary": "Learn while loops for validation, for loops with range, and flow control with break and continue through mini-programs.",
+          "cards": {
+            "sketch": {
+              "title": "Loops (while, for, break, continue)"
+            },
+            "project": {
+              "title": "Project: Kiosk loop pack (guess → validate → command loop)"
+            }
+          },
+          "projectSteps": {
+            "guess_until_7": {
+              "title": "Guess until the secret is correct"
+            },
+            "validate_1_10": {
+              "title": "Keep asking until input is 1..10"
+            },
+            "echo_until_quit": {
+              "title": "Echo commands until quit"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "py": {
+      "loops": {
+        "basics": {
+          "title": "Loops: Teaching Your Program to Repeat",
+          "bodyMarkdown": "You can now make decisions using \\`if / elif / else\\`.\n\nNext question:\n\nWhat if you want to do something **more than once**?\n\nThat’s what **loops** are for.\n\nThink of a loop like a video game level:\n\n- you try\n- if you fail, the game says: “Try again.”\n- you repeat until you succeed (or quit)\n\nA loop is simply: **repeat a block of code**.\n\n---\n\n## \\`while\\`: repeat while a condition is True\n\n\\`while\\` means:\n\n> “Keep repeating this block as long as the condition stays True.”\n\n~~~python\ncount = 1\n\nwhile count <= 3:\n    print(\"count =\", count)\n    count = count + 1\n~~~\n\nKey idea: if you never change \\`count\\`, the loop may never stop.\n\n---\n\n## Try it (watch it count)\n\n~~~python\ncount = 1\n\nwhile count <= 5:\n    print(\"count =\", count)\n    count = count + 1\n~~~\n\nChange \\`5\\` to \\`10\\` and run again.\n\n---\n\n## Loops are perfect for “keep asking until valid”\n\nRemember: \\`input()\\` returns a string, and users can type anything.\n\nThink of your program like a bouncer:\n\n> “I need a number from 1 to 10. If it’s not valid, I’ll ask again.”\n\n~~~python\nn = int(input(\"Enter a number 1..10: \"))\n\nwhile n < 1 or n > 10:\n    print(\"⛔ Invalid. Try again.\")\n    n = int(input(\"Enter a number 1..10: \"))\n\nprint(\"✅ Thanks! You entered:\", n)\n~~~\n\n---\n\n## \\`break\\` and \\`continue\\`\n\nSometimes you want more control over a loop.\n\n### \\`break\\` = exit the loop immediately\n\n~~~python\nwhile True:\n    cmd = input(\"Type 'quit' to stop: \")\n    if cmd == \"quit\":\n        break\n    print(\"You typed:\", cmd)\n~~~\n\nHere, \\`while True\\` means “repeat forever” until \\`break\\` stops it.\n\n---\n\n### \\`continue\\` = skip to the next loop step\n\n~~~python\ncount = 0\n\nwhile count < 5:\n    count = count + 1\n\n    if count == 3:\n        continue  # skip printing 3\n\n    print(\"count =\", count)\n~~~\n\n---\n\n## Mini-Project 1: Guessing Game\n\n~~~python\nsecret = 7\nguess = int(input(\"Guess the number: \"))\n\nwhile guess != secret:\n    print(\"Nope. Try again.\")\n    guess = int(input(\"Guess the number: \"))\n\nprint(\"✅ You got it!\")\n~~~\n\nTry a few wrong guesses, then type \\`7\\`.\n\n---\n\n## \\`for\\`: repeat a specific number of times\n\nUse a \\`for\\` loop when you already know how many steps you want.\n\n~~~python\nfor i in range(5):\n    print(\"i =\", i)\n~~~\n\n\\`range(5)\\` produces 5 values: \\`0, 1, 2, 3, 4\\`\n\n---\n\n## Try it: sum of numbers\n\n~~~python\ntotal = 0\n\nfor i in range(1, 6):\n    total = total + i\n\nprint(\"sum 1..5 =\", total)\n~~~\n\nChange the range to sum \\`1..100\\`:\n\n- keep the start as \\`1\\`\n- change the end to \\`101\\` (because the end is not included)\n\n---\n\n## Mini-Project 2: Menu Loop\n\nThink of your program like a tiny kiosk that keeps running until the user chooses “Quit.”\n\n~~~python\nwhile True:\n    print(\"1) Say hello\")\n    print(\"2) Add two numbers\")\n    print(\"3) Quit\")\n\n    choice = input(\"Choose: \")\n\n    if choice == \"1\":\n        name = input(\"Name: \")\n        print(f\"Hello, {name}!\")\n    elif choice == \"2\":\n        a = float(input(\"a: \"))\n        b = float(input(\"b: \"))\n        print(f\"a + b = {a + b}\")\n    elif choice == \"3\":\n        print(\"Bye!\")\n        break\n    else:\n        print(\"Invalid option.\")\n~~~\n\n---\n\n## What you unlocked\n\nLoops let your program:\n\n- repeat actions automatically\n- keep asking until input is valid\n- run menus, games, and interactive programs\n\nNext up: **Lists** — because most programs don’t store just one value… they store many." }
+      }
+    }
+  },
+
+  "quiz": {
+    "m2_loop_guess_until_secret_code": {
+      "title": "Kiosk game: guess until correct",
+      "prompt": "The secret number is 7.\n\nRead guesses until the guess equals 7.\n\nWhen correct, print exactly:\nYou got it!",
+      "hint": "Use `while guess != 7:` and keep reading.",
+      "starterCode": "# secret is 7\nguess = int(input())\n# TODO: loop until guess == 7\n# TODO: print \"You got it!\"",
+      "runtime": {
+        "successText": "You got it!"
+      }
+    },
+    "m2_loop_keep_asking_valid_code": {
+      "title": "Input validator: keep asking until 1..10",
+      "prompt": "Read integers until you get one in the range 1..10 inclusive.\n\nWhen valid, print:\nOK: <value>",
+      "hint": "Use `while n < 1 or n > 10:`",
+      "starterCode": "n = int(input())\n# TODO: keep reading while n is not 1..10\n# TODO: when valid, print OK: <n>",
+      "runtime": {
+        "okLineTemplate": "OK: {value}"
+      }
+    },
+    "m2_loop_echo_until_quit_code": {
+      "title": "Command loop: echo until quit",
+      "prompt": "Read command lines until you read `quit`.\n\nFor each non-quit command, print:\nYou typed: <command>\n\nWhen you read `quit`, print:\nBye!",
+      "hint": "Use `while cmd != \"quit\":` then read again.",
+      "starterCode": "cmd = input().strip()\n# TODO: loop until cmd == \"quit\"\n# TODO: echo each non-quit command",
+      "runtime": {
+        "echoTemplate": "You typed: {command}",
+        "byeText": "Bye!"
+      }
+    },
+
+    "m2_loop_while_meaning_sc": {
+      "title": "What `while` means",
+      "prompt": "What does a `while` loop do?",
+      "hint": "It repeats as long as its condition stays True.",
+      "options": {
+        "a": "It runs only once, then stops forever",
+        "b": "It repeats a block while a condition is True",
+        "c": "It automatically sorts a list"
+      }
+    },
+    "m2_loop_break_sc": {
+      "title": "What `break` does",
+      "prompt": "What does `break` do inside a loop?",
+      "hint": "It exits the loop immediately.",
+      "options": {
+        "a": "It stops the loop right away",
+        "b": "It skips one line and keeps looping",
+        "c": "It resets the loop to the beginning"
+      }
+    },
+    "m2_loop_range_five_sc": {
+      "title": "`range(5)` values",
+      "prompt": "What values does `range(5)` produce in a `for` loop?",
+      "hint": "The end value is not included.",
+      "options": {
+        "a": "1, 2, 3, 4, 5",
+        "b": "0, 1, 2, 3, 4, 5",
+        "c": "0, 1, 2, 3, 4"
+      }
+    },
+
+    "m2_loop_continue_truths_mc": {
+      "title": "What `continue` does",
+      "prompt": "Choose all true statements about `continue`.",
+      "hint": "`continue` skips the rest of the current loop step and moves to the next one.",
+      "options": {
+        "a": "`continue` skips to the next loop iteration",
+        "b": "`continue` always ends the loop permanently",
+        "c": "`continue` can be used to skip printing one specific value",
+        "d": "`continue` means the same thing as `break`"
+      }
+    },
+    "m2_loop_validation_pattern_mc": {
+      "title": "Input-validation loop pattern",
+      "prompt": "Choose all parts that belong in a 'keep asking until valid' pattern.",
+      "hint": "You need an initial read, a condition that checks invalid input, and another read inside the loop.",
+      "options": {
+        "a": "Read an initial value before the loop",
+        "b": "Use a condition like `while n < 1 or n > 10:`",
+        "c": "Never read input again inside the loop",
+        "d": "Read the next value again inside the loop body"
+      }
+    },
+    "m2_loop_menu_loop_parts_mc": {
+      "title": "Menu loop parts",
+      "prompt": "Choose all parts that belong in a menu loop that runs until the user quits.",
+      "hint": "A menu loop usually shows options, reads a choice, and breaks when the user asks to quit.",
+      "options": {
+        "a": "Print the menu options",
+        "b": "Read the user's choice",
+        "c": "Use `break` when the quit option is chosen",
+        "d": "A menu loop can never use `if / elif / else`"
+      }
+    }
+  }
+}

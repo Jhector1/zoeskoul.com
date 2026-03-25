@@ -1,0 +1,12 @@
+{
+  "Playground": {
+    "title": "Linear Algebra Playground",
+    "subtitle": "Pick a tool, then switch between 2D/3D.",
+    "viewMode": "View mode:",
+    "tabs": {
+      "spanBasis": "Span / Basis",
+      "module0": "Dot / Projection (Module 0)"
+    },
+    "mode": { "2d": "2D", "3d": "3D" }
+  }
+}

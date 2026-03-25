@@ -1,0 +1,128 @@
+{
+  "VectorsLanding": {
+    "pageTitle": "Vektè",
+    "pageIntro": "Gen 2 pati: Pati 1 mete fondasyon yo; Pati 2 bati kè aljèb lineyè a (konbinezon → endepandans → span/sou-espas → baz).",
+
+    "quickStartPart1Easy": "Kòmanse vit • Pati 1 • Fasil",
+    "jumpPart2Easy": "Sote • Pati 2 • Fasil",
+
+    "whatYouLearn": "Sa w ap aprann",
+    "readMaterial": "Li materyèl la",
+    "practiceNow": "Pratike kounye a",
+    "practiceNowHint": "“Pratike kounye a” louvri yon sesyon pratike ki deja filtre pou pati sa a.",
+
+    "recommendedPathTitle": "Chemen rekòmande",
+    "recommended": {
+      "0": "Fè Pati 1 jiskaske oryantasyon, fòm yo, nòrm/vektè inite, ak dot product vin otomatik pou ou.",
+      "1": "Apre sa ale nan Pati 2 pou metrize endepandans/span/baz (sa yo ouvri pòt pou tout rès la).",
+      "2": "Retounen sou jeyometri dot product la chak fwa projèksyon/dekonpozisyon sanble “misterye”."
+    },
+
+    "routeHint": "Si chemen materyèl ou a pa /learn, jis chanje lyen learnHref yo.",
+
+    "parts": {
+      "part1": {
+        "badge": "Kòmanse la",
+        "title": "Vektè — Pati 1",
+        "subtitle": "Fondasyon, entwisyon jeyometrik, fòm NumPy, ak operasyon prensipal yo",
+        "bullets": {
+          "0": "Sa vektè vle di (aljèb vs jeyometri) ak notasyon ℝⁿ",
+          "1": "Fòm liy vs kolòn + transpoze (poukisa sa enpòtan)",
+          "2": "Reprezantasyon NumPy: (n,), (1,n), (n,1) + entwisyon sou shape",
+          "3": "Ajoute/soustrè, miltipliye pa skalè (pyèj lis vs array)",
+          "4": "Nòrm (grandè) + vektè inite",
+          "5": "Dot product: kalkile + entèprete siy/ang",
+          "6": "Hadamard vs dot vs outer product (sa ou jwenn)",
+          "7": "Lide projèksyon (prepare pou dekonpozisyon)"
+        }
+      },
+      "part2": {
+        "badge": "Apre sa",
+        "title": "Vektè — Pati 2",
+        "subtitle": "Konbinezon lineyè → endepandans → span/sou-espas → baz",
+        "bullets": {
+          "0": "Ansanm vektè: fini / enfini / vid",
+          "1": "Konbinezon lineyè ak pwa (pa konpozan)",
+          "2": "Endepandan vs depandan (enkli règ vektè zewo a)",
+          "3": "Span (liy vs tout ℝ²) + entwisyon dimansyon",
+          "4": "Tès sou-espas: vektè zewo + règ fèmti yo",
+          "5": "Tcheke baz (nan ℝ²: det ≠ 0)",
+          "6": "Kowòdone nan yon baz (rezoud pou c₁, c₂)",
+          "7": "Koneksyon ak projèksyon + dekonpozisyon òtogonal"
+        }
+      }
+    }
+  },
+
+  
+  "MatricesPart1Landing": {
+    "pageTitle": "Matris — Pati 1",
+    "pageIntro": "Aprann kisa yon matris ye, kijan pou li fòm li, kijan pou w fè endèks/koupe li tankou nan NumPy, epi bati entuisyon pou miltiplikasyon, transpoze, ak simetri.",
+    "quickStartEasy": "Kòmanse vit (Fasil)",
+    "whatYouLearn": "Sa w ap aprann",
+    "readMaterial": "Li materyèl la",
+    "practiceNow": "Pratike kounye a",
+    "practiceNowHint": "Konsèy: chwazi yon nivo difikilte epi repete jiskaske li vin otomatik.",
+    "parts": {
+      "part1": {
+        "badge": "BAZ",
+        "title": "Matris: sans, fòm, ak operasyon debaz",
+        "subtitle": "Soti nan tablo done rive nan transfòmasyon: endèks, matris espesyal, miltiplikasyon, transpoze, simetri",
+        "bullets": {
+          "0": "Li fòm matris la (liy × kolòn) epi konte kantite eleman total",
+          "1": "Wè matris la tankou yon tablo done oswa vektè-kolòn yo mete youn sou lòt",
+          "2": "Konvèti endèks nan matematik pou vin endèks NumPy (kòmanse a 0)",
+          "3": "Devine fòm yon slice ak règ Python (entèval ki pa enkli fen an)",
+          "4": "Idantifye matris idantite, dyagonal, ak triyangilè",
+          "5": "Konprann diferans ant miltiplikasyon eleman-pa-eleman ak miltiplikasyon matris (* vs @), epi shift A + λI",
+          "6": "Jwenn fòm AB, verifye si miltiplikasyon an posib, epi kalkile yon eleman ak dot product",
+          "7": "Sèvi ak règ transpoze (LIVE EVIL), fòm transpoze yo, epi rekonèt matris simetrik"
+        }
+      }
+    },
+    "recommendedPathTitle": "Chimen rekòmande",
+    "recommended": {
+      "0": "Kòmanse ak fòm + endèks jiskaske ou reponn vit.",
+      "1": "Ale sou fòm/validite miltiplikasyon, apre sa kalkile eleman yo.",
+      "2": "Fini ak modèl transpoze + simetri."
+    },
+    "routeHint": "Chemen: /practice/review/matrices_part1 (li) • /practice?section=module-2-matrices (pratike)"
+  },
+  
+  "MatricesPart2Landing": {
+    "pageTitle": "Matriks — Pati 2",
+    "pageIntro": "Bati bon entwisyon sou nòrm, ran (rank), tolerans nimerik, ak estabilite. Konprann poukisa yon ti bri (noise) ka chanje repons yo, epi kijan pou konpare matriks byen nan pratik.",
+    "quickStartEasy": "Kòmanse vit (Fasil)",
+    "whatYouLearn": "Sa w pral aprann",
+    "readMaterial": "Li materyèl la",
+    "practiceNow": "Pratike kounye a",
+    "practiceNowHint": "Konsèy : kòmanse ak ti matriks, epi ogmante dimansyon yo lè modèl la vin fasil.",
+    "parts": {
+      "part2": {
+        "badge": "ENTWISYON NIMERIK",
+        "title": "Matriks : nòrm, ran, tolerans, ak estabilite",
+        "subtitle": "Mezi ‘gwosè’, detekte estrikti, epi jere reyalite floating-point ak ε",
+        "bullets": {
+          "0": "Kalkile nòrm Frobenius la soti nan valè yo epi konprann sa li mezire",
+          "1": "Konprann nòrm 2 (nòrm espèktral) kòm pi gwo faktè detire (maximum stretch)",
+          "2": "Konpare nòrm yo epi konnen kilè pou w itilize chak (rapid vs sans jeyometrik)",
+          "3": "Kalkile ran (rank) ak pivò / RREF epi konekte ran ak endepandans lineyè",
+          "4": "Sèvi ak tolerans ε pou defini yon ran efikas (rankε) lè gen bri",
+          "5": "Wè kijan yon ti perturbasyon ka fè ran chanje, epi poukisa “prèske depandan” enpòtan",
+          "6": "Rekonèt matriks ki prèske singilye / mal kondisyone ak kijan solisyon yo sansib",
+          "7": "Pratike bon metòd : tolerans, awondi, ak tès egalite ki pi an sekirite"
+        }
+      }
+    },
+    "recommendedPathTitle": "Chemen rekòmande",
+    "recommended": {
+      "0": "Kòmanse ak egzèsis nòrm Frobenius jiskaske ou reponn vit.",
+      "1": "Apre sa, pase sou ran ak pivò, epi konpare ran vs rankε lè gen bri.",
+      "2": "Fini ak entwisyon sou estabilite/kondisyònman ak egzanp prèske singilye."
+    },
+    "routeHint": "Wout : /practice/review/matrices_part2 (li) • /practice?section=module-3-matrices (pratike)"
+  }
+
+
+
+}

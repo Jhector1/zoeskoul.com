@@ -1,0 +1,71 @@
+{
+  "SpanBasis": {
+    "title": "Basis • Subspace • Span ({mode})",
+    "subtitle": "Drag a and b, or type values. Then sculpt x = αa + βb.",
+    "buttons": {
+      "reset": "Reset",
+      "randomIndependent": "Random (independent)",
+      "makeDependent": "Make dependent",
+      "snap": "Snap α/β"
+    },
+    "toggles": {
+      "showSpan": "Show subspace (line/plane)",
+      "showCell": "Show cell (2D)",
+      "depthMode": "Depth mode (drag Z)"
+    },
+    "vectors": {
+      "title": "Set vectors",
+      "a": "a",
+      "b": "b",
+      "xyz": "x, y, z"
+    },
+    "mix": {
+      "title": "Mix coefficients",
+      "play": "Play",
+      "pause": "Pause",
+      "speed": "speed",
+      "alpha": "α",
+      "beta": "β"
+    },
+    "target": {
+      "title": "Target mode",
+      "subtitle": "Try to make x match t (watch the error).",
+      "on": "On",
+      "newTarget": "New target",
+      "setTargetEqualsX": "Set target = current x",
+      "error": "error ‖x − t‖ ="
+    },
+    "live": {
+      "title": "Live data",
+      "a": "a",
+      "b": "b",
+      "x": "x = αa + βb",
+      "independent": "Independent?",
+      "independentYes": "Yes (independent)",
+      "dependentNo": "No (dependent)",
+      "spanDim": "Span dimension",
+      "angle": "Angle(a,b)",
+      "det": "det(a,b)",
+      "area": "area={value}",
+      "crossMag": "‖a×b‖",
+      "normal": "normal n = a×b",
+      "tip": "Tip: if a and b become collinear, det (or a×b) → 0, and the span collapses to a line."
+    },
+    "overlay": {
+      "spanCollapses": "span collapses → a line (dimension 1)",
+      "cellLattice": "cell (parallelogram) = one “tile” of the lattice",
+      "combo": "x = αa + βb (α={alpha}, β={beta})",
+      "targetLabel": "target t",
+      "badgeDependent": "Span dim = 1 (line). det≈0 → not a basis for R².",
+      "badgeIndependent": "Span dim = 2. det={det} → {a,b} is a basis for R².",
+      "error": "error‖x−t‖={value}"
+    },
+    "overlay3d": {
+      "plane": "span{a,b} = a plane",
+      "combo": "x = αa + βb (α={alpha}, β={beta})",
+      "target": "target t (error={value})",
+      "badgeDependent": "Span dim = 1 (line) • basis = any nonzero direction vector",
+      "badgeIndependent": "Span dim = 2 (plane) • {a,b} is a basis for that plane"
+    }
+  }
+}

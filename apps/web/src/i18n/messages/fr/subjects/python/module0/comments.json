@@ -1,0 +1,122 @@
+{
+  "topics": {
+    "python": {
+      "python-0": {
+        "comments_intro": {
+          "label": "Commentaires : des notes pour les humains (Python les ignore)",
+          "summary": "Utilise les commentaires pour expliquer l’intention, nommer les étapes, et désactiver temporairement du code pendant le debug (y compris des notes sur plusieurs lignes).",
+          "cards": {
+            "sketch": { "title": "Commentaires en Python (#)" },
+            "quiz": { "title": "Vérification rapide : commentaires" }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "py": {
+      "syntax": {
+        "comments": {
+          "title": "Commentaires : des notes pour les humains (Python les ignore)",
+          "bodyMarkdown": "Quand tu écris du code, tu écris pour **deux publics** :\n\n1) L’ordinateur (Python)\n2) Ton futur toi (et les autres humains)\n\nUn **commentaire** est une note pour les humains que Python ignore complètement.\n\nPense aux commentaires comme à des post-its sur une recette :\nils t’aident à te rappeler *pourquoi* tu as fait quelque chose, pas seulement *quoi*.\n\n---\n\n## Deux façons d’écrire des commentaires en Python\n\nEn Python, tu utiliseras surtout :\n\n1) Les **commentaires sur une ligne** avec `#`\n2) Les **notes multi-lignes** (plusieurs lignes commençant par `#`, ou parfois des triples guillemets)\n\n---\n\n## Commentaire sur une ligne : `#`\n\nTout ce qui suit `#` sur une ligne est ignoré par Python.\n\n~~~python\n# Ceci est un commentaire.\nprint(\"Hello\")  # Ceci aussi est un commentaire\n~~~\n\n---\n\n## Commentaires multi-lignes (notes multi-lignes)\n\nPour écrire des notes sur plusieurs lignes, tu as deux options courantes :\n\n### Option A : plusieurs lignes `#` (recommandé)\n\n~~~python\n# Étape 1 : demander une entrée à l’utilisateur\n# Étape 2 : convertir en nombre\n# Étape 3 : faire le calcul\n# Étape 4 : afficher le résultat\n~~~\n\n### Option B : triples guillemets (`\"\"\" ... \"\"\"` ou `''' ... '''`)\n\nCela crée une **chaîne multi-ligne**. Si elle n’est pas assignée à une variable, Python l’ignore généralement à l’exécution, donc certains l’utilisent comme un commentaire de bloc.\n\n~~~python\n\"\"\"\nNote multi-ligne :\n- Ceci est un littéral de chaîne\n- Certains l’utilisent comme « commentaire de bloc »\n\"\"\"\n~~~\n\n> **Astuce :** Utilise les triples guillemets surtout pour les **docstrings** (documentation des fonctions/classes). Pour les commentaires « normaux », préfère les lignes `#`.\n\n---\n\n## Pourquoi les commentaires comptent (Module 0)\n\nUtilise les commentaires pour :\n- expliquer *pourquoi* une ligne existe\n- nommer les étapes d’un mini-programme (demander → convertir → calculer → afficher)\n- désactiver temporairement une ligne pendant le debug\n\n---\n\n## Essaie (éditeur à droite)\n\nExécute ceci :\n\n~~~python\n# Étape 1 : stocker des valeurs dans des variables\nprice = 4.99\nqty = 3\n\n# Étape 2 : calculer\ntotal = price * qty\n\n# Étape 3 : afficher\nprint(\"total =\", total)\n~~~\n\nMaintenant **commente** la ligne qui calcule `total` et relance :\n\n~~~python\nprice = 4.99\nqty = 3\n\n# total = price * qty\n\nprint(\"total =\", total)\n~~~\n\nTu devrais obtenir une erreur — c’est normal.\nÇa prouve que les commentaires « retirent » vraiment du code de l’exécution.\n\n---\n\n## Notes\n\n✅ Écris des commentaires pour expliquer **l’intention** (le *pourquoi*).\n❌ N’écris pas des commentaires qui ne font que répéter le code.\n\nCommentaire utile :\n~~~python\n# Convertir l’entrée (texte) en nombre pour pouvoir faire des calculs\nage = int(input(\"Age: \"))\n~~~\n\nPas utile (répète le code) :\n~~~python\n# Mettre age à l’entrée\nage = int(input(\"Age: \"))\n~~~\n\n---\n\nEnsuite : on utilisera les commentaires pour nommer nos étapes en apprenant les **variables** et les **types de données**."
+        }
+      }
+    }
+  },
+  "quiz": {
+    "m0_comments_symbol": {
+      "title": "Symbole de commentaire (#)",
+      "prompt": "Quel symbole démarre un commentaire sur une seule ligne en Python ?",
+      "options": {
+        "a": "`//`",
+        "b": "`#`",
+        "c": "`/* ... */`"
+      },
+      "hint": "Python utilise `#` pour les commentaires sur une ligne."
+    },
+    "m0_comments_ignored_by_python": {
+      "title": "Python ignore les commentaires",
+      "prompt": "Les commentaires servent surtout à :",
+      "options": {
+        "a": "Aider les humains à lire le code",
+        "b": "Faire tourner Python plus vite",
+        "c": "Changer automatiquement la sortie"
+      },
+      "hint": "Python ignore les commentaires ; ils aident les humains à comprendre le code."
+    },
+    "m0_comments_best_reason": {
+      "title": "Meilleure raison de commenter",
+      "prompt": "Quelle est la meilleure raison d’écrire un commentaire ?",
+      "options": {
+        "a": "Répéter exactement ce que le code dit déjà",
+        "b": "Expliquer l’intention ou une étape délicate",
+        "c": "Rendre le fichier plus long"
+      },
+      "hint": "Un bon commentaire explique l’intention (le pourquoi), pas l’évidence (le quoi)."
+    },
+    "m0_comments_multiline_true": {
+      "title": "Commentaires multi-lignes",
+      "prompt": "Quelle est la méthode recommandée pour écrire des notes multi-lignes en Python ?",
+      "options": {
+        "a": "Utiliser `/* ... */`",
+        "b": "Utiliser plusieurs lignes qui commencent par `#`",
+        "c": "Utiliser `//` sur chaque ligne"
+      },
+      "hint": "Python n’utilise pas `/* */` ni `//`. Pour des notes multi-lignes, utilise plusieurs lignes `#`."
+    },
+    "m0_comments_docstring_vs_comment": {
+      "title": "Docstring vs commentaire",
+      "prompt": "Quelle affirmation est vraie à propos des docstrings (triple guillemets) vs les commentaires ?",
+      "options": {
+        "a": "Les docstrings sont ignorées exactement comme les commentaires `#`",
+        "b": "Les docstrings ne fonctionnent qu’en haut d’un fichier, jamais ailleurs",
+        "c": "Les docstrings sont des chaînes utilisées pour la documentation ; `#` est le vrai symbole de commentaire",
+        "d": "Python ne supporte pas les docstrings"
+      },
+      "hint": "Les docstrings sont des chaînes pour la documentation (ex. doc d’une fonction). `#` est la syntaxe de commentaire."
+    },
+    "m0_comments_inline_comment": {
+      "title": "Commentaires en fin de ligne",
+      "prompt": "Quelle ligne utilise correctement un commentaire en fin de ligne en Python ?",
+      "options": {
+        "a": "`total = price * qty  # calculer le total`",
+        "b": "`total = price * qty  // calculer le total`",
+        "c": "`total = price * qty  /* calculer le total */`",
+        "d": "`total = price * qty  -- calculer le total`"
+      },
+      "hint": "Un commentaire en fin de ligne utilise `#` après le code : `value = ...  # explication`."
+    },
+    "m0_comments_multiline_valid_ways": {
+      "title": "Façons valides d’écrire des notes multi-lignes",
+      "prompt": "Quelles sont des façons valides d’écrire des notes/commentaires multi-lignes en Python ? (Choisis tout ce qui s’applique.)",
+      "options": {
+        "a": "Plusieurs lignes commençant par `#`",
+        "b": "Une chaîne multi-ligne avec triple guillemets utilisée comme note",
+        "c": "Des blocs `/* ... */`",
+        "d": "`//` au début de chaque ligne"
+      },
+      "hint": "Les vrais commentaires Python sont des lignes `#`. Les triples guillemets peuvent servir de docstrings/notes, mais `/* */` et `//` ne sont pas du Python."
+    },
+    "m0_comments_which_lines_are_comments": {
+      "title": "Trouver les lignes de commentaire",
+      "prompt": "Regarde les lignes ci-dessous. Quelles lignes sont des commentaires ? (Choisis tout ce qui s’applique.)\n\n1) `# Hello`\n2) `print(\"Hi\")`\n3) `x = 3  # set x`\n4) `#x = 10`\n",
+      "options": {
+        "a": "Ligne 1",
+        "b": "Ligne 2",
+        "c": "Ligne 3",
+        "d": "Ligne 4"
+      },
+      "hint": "Une ligne de commentaire commence par `#`. Du code peut aussi avoir un commentaire en fin de ligne."
+    },
+    "m0_comments_disable_error_line": {
+      "title": "Corriger en commentant une ligne",
+      "prompt": "Le programme plante à cause d’une mauvaise ligne.\n\nTa tâche :\n- Commente la ligne qui provoque l’erreur\n- Garde les autres lignes\n- La sortie doit être :\n  - `Start`\n  - `End`\n",
+      "hint": "Mets `#` au début de la ligne qui échoue (ou supprime la ligne)."
+    },
+    "m0_comments_disable_wrong_math_line": {
+      "title": "Désactiver la mauvaise ligne de calcul",
+      "prompt": "Le programme calcule un total correctement, puis une ligne en trop le casse.\n\nTa tâche :\n- Commente UNIQUEMENT la ligne incorrecte\n- Le programme doit afficher `12`\n",
+      "hint": "La ligne `total = total + 100` est le bug — commente-la."
+    }
+  }
+}

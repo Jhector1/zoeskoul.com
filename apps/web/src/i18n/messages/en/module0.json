@@ -1,0 +1,106 @@
+{
+  "Module0": {
+    "title": "Module 0 Visual Simulator",
+    "badges": { "meta": "{mode} • Vectors • Dot • Projection" },
+    "sections": {
+      "overlays": "Overlays",
+      "liveMath": "Live Math",
+      "practice": "Practice Mode"
+    },
+    "buttons": {
+      "randomize": "Randomize a & b",
+      "reset": "Reset",
+      "zeroA": "Zero a",
+      "zeroB": "Zero b",
+      "newQuestion": "New question",
+      "check": "Check",
+      "reveal": "Reveal"
+    },
+    "status": {
+      "idle": "Click “New question”. Use overlays to reason visually, then answer.",
+      "question": "Question: {prompt}. Enter a number (tolerance ±{tolerance}{unit}).",
+      "noQuestion": "No active question. Click “New question” first.",
+      "invalidNumber": "Please enter a valid number (e.g., 3.5 or -2).",
+      "correct": "✅ Correct. {value} is within tolerance.",
+      "incorrect": "❌ Not quite. You said {value}. Try again using the overlays.",
+      "noReveal": "No question to reveal. Click “New question” first.",
+      "answer": "Answer: {value}{unit}",
+      "randomized": "Randomized vectors. Drag tips to explore.",
+      "reset": "Reset to default vectors.",
+      "zeroA": "Set a = 0. Dot/projection becomes 0.",
+      "zeroB": "Set b = 0. Projection/angle becomes undefined."
+    },
+    "desc": {
+      "2d": "Drag vector tips. Projection shows proj₍b₎(a) and optional perpendicular.",
+      "3d": {
+        "beforeZ": "Orbit the camera. Drag spheres. Hold",
+        "afterZ": "while dragging (or enable Depth mode) to change depth."
+      }
+    },
+    "labels": {
+      "scale2d": "Scale (px per unit)",
+      "scale3d": "Visual scale",
+      "snapToGrid": "Snap to grid",
+      "depthMode": "Depth mode (force Z-drag)",
+      "zKeyDetected": "Z key detected:",
+      "on": "ON",
+      "off": "off",
+      "gridStep": "Grid step (units)"
+    },
+    "toggles": {
+      "gridAxes": "Show grid + axes",
+      "components": "Show components",
+      "angle": "Show angle θ",
+      "projection": "Show projection",
+      "unitB": "Show unit vector of b",
+      "perp": "Show perpendicular part"
+    },
+    "questions": {
+      "dot": "Compute the dot product a · b",
+      "angle": "Compute the angle θ between a and b (degrees)",
+      "scalarProj": "Compute the scalar projection of a on b (shadow length on b)",
+      "projX": "Compute the x-component of proj_b(a)",
+      "projY": "Compute the y-component of proj_b(a)",
+      "projZ": "Compute the z-component of proj_b(a)"
+    },
+    "live": {
+      "aLabel": "a = {dims}",
+      "bLabel": "b = {dims}",
+      "magA": "|a|",
+      "magB": "|b|",
+      "dot": "dot a·b",
+      "cos": "cos(θ)",
+      "thetaDeg": "θ (deg)",
+      "scalarProj": "shadow length on b",
+      "projLen": "proj_b(a) len",
+      "projVec": "proj_b(a)",
+      "perpVec": "a⊥",
+      "perpLen": "|a⊥|"
+    },
+    "practice": {
+      "questionType": "Question type",
+      "yourAnswer": "Your answer",
+      "placeholder": "e.g. 3.5",
+      "active": "Active:",
+      "options": {
+        "dot": "Dot product a·b",
+        "angle": "Angle θ (degrees)",
+        "scalarProj": "Shadow length on b",
+        "projX": "proj_b(a) x-component",
+        "projY": "proj_b(a) y-component",
+        "projZ": "proj_b(a) z-component (3D)"
+      }
+    },
+    "hud": {
+      "controlsTitle": "Controls",
+      "legendTitle": "Legend",
+      "shadow": "shadow",
+      "controls2d": "Drag tips. Use projection to see how a decomposes into proj₍b₎(a) + a⊥.",
+      "controls3d": {
+        "beforeZ": "Orbit: drag empty space. Pick sphere to drag. Hold",
+        "afterZ": "(or Depth mode) to move along z."
+      }
+    },
+    "footerTip": "If 3D picking feels hard: zoom in with wheel, then click directly on the sphere tip."
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "pageTitle": "Matrices — Part 2",
+  "pageIntro": "Go deeper with norms, rank, tolerance, and numerical stability. Interactive inputs help you see how small noise can change outcomes.",
+  "quickStartEasy": "Start (Easy)",
+  "jumpRankEasy": "Rank (Easy)",
+
+  "parts": {
+    "part2": {
+      "badge": "Part 2",
+      "title": "Matrices — Part 2",
+      "subtitle": "Norms, rank, tolerance, and numerical intuition",
+      "bullets": [
+        "Matrix norms (Frobenius vs spectral / 2-norm)",
+        "Compute norms from entries (and what they measure)",
+        "Rank vs “effective rank” with a tolerance ε",
+        "Why tiny noise can flip rank (stability intuition)",
+        "Near-singular matrices and sensitivity",
+        "Conditioning intuition (what ‘ill-conditioned’ means)",
+        "Practical tips: rounding, tolerance, and comparisons",
+        "Practice with full matrix input (A, B, Aᵀ, A·B, etc.)"
+      ]
+    }
+  },
+
+  "recommendedPathTitle": "Recommended path",
+  "routeHint": "Tip: Start with small noise / ε first, then increase it to see what changes."
+}

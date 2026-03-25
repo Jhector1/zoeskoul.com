@@ -1,0 +1,325 @@
+@layer components {
+  /* =========================
+   * SettingsMenu dropdown tokens
+   * ========================= */
+  .ui-gearbtn {
+    @apply grid place-items-center rounded-2xl border px-3 py-2 text-xs font-extrabold transition border-neutral-200 bg-white text-neutral-700 hover:bg-neutral-50;
+  }
+
+  .dark .ui-gearbtn {
+    @apply border-white/10 bg-white/[0.06] text-white/80 hover:bg-white/[0.10];
+  }
+
+  .ui-menu-panel {
+    @apply absolute right-0 mt-2 w-[300px] overflow-hidden rounded-2xl border shadow-xl border-neutral-200 bg-white;
+  }
+
+  .dark .ui-menu-panel {
+    @apply border-white/10 bg-neutral-950;
+  }
+
+  .ui-menu-section {
+    @apply rounded-xl border p-3 border-neutral-200 bg-neutral-50/60;
+  }
+
+  .dark .ui-menu-section {
+    @apply border-white/10 bg-white/[0.04];
+  }
+
+  .ui-menu-label {
+    @apply text-[11px] font-extrabold text-neutral-600;
+  }
+
+  .dark .ui-menu-label {
+    @apply text-white/60;
+  }
+
+  .ui-menu-closebtn {
+    @apply rounded-xl border border-neutral-200 bg-white px-3 py-2 text-xs font-extrabold text-neutral-700 hover:bg-neutral-50;
+  }
+
+  .dark .ui-menu-closebtn {
+    @apply border-white/10 bg-white/[0.06] text-white/80 hover:bg-white/[0.10];
+  }
+
+  /* =========================
+   * LocaleSwitcher tokens
+   * ========================= */
+  .ui-switcher {
+    @apply flex items-center gap-2 rounded-xl border p-1 border-neutral-200 bg-white;
+  }
+
+  .dark .ui-switcher {
+    @apply border-white/10 bg-white/[0.04];
+  }
+
+  .ui-switcher-btn {
+    @apply rounded-lg border px-3 py-2 text-xs font-extrabold transition;
+  }
+
+  .ui-switcher-btn--active {
+    @apply border-emerald-600/25 bg-emerald-500/10 text-emerald-950;
+  }
+
+  .dark .ui-switcher-btn--active {
+    @apply border-emerald-300/30 bg-emerald-300/10 text-white/90;
+  }
+
+  .ui-switcher-btn--idle {
+    @apply border-neutral-200 bg-white text-neutral-700 hover:bg-neutral-50;
+  }
+
+  .dark .ui-switcher-btn--idle {
+    @apply border-white/10 bg-white/[0.06] text-white/80 hover:bg-white/[0.10];
+  }
+
+  /* =========================
+   * ThemeToggle token
+   * ========================= */
+  .ui-theme-toggle {
+    @apply rounded-2xl px-3 py-2 text-xs font-extrabold transition border border-neutral-200 bg-white text-neutral-900 hover:bg-neutral-50;
+  }
+
+  .dark .ui-theme-toggle {
+    @apply border-white/10 bg-white/[0.06] text-white/85 hover:bg-white/[0.10];
+  }
+
+  /* =========================
+   * UserMenu tokens
+   * ========================= */
+  .ui-user-btn {
+    @apply inline-flex items-center gap-2 rounded-2xl border px-2.5 py-2 text-xs font-extrabold transition shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-300/40 border-neutral-200 bg-white text-neutral-800 hover:bg-neutral-50;
+  }
+
+  .dark .ui-user-btn {
+    @apply border-white/10 bg-white/[0.06] text-white/85 hover:bg-white/[0.10];
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.20);
+  }
+
+  .ui-avatar-wrap {
+    @apply relative grid h-8 w-8 place-items-center overflow-hidden rounded-2xl border border-neutral-200 bg-white;
+  }
+
+  .dark .ui-avatar-wrap {
+    @apply border-white/10 bg-white/[0.06];
+  }
+
+  .ui-user-name {
+    @apply hidden lg:block max-w-[140px] truncate text-neutral-800;
+  }
+
+  .dark .ui-user-name {
+    @apply text-white/85;
+  }
+
+  .ui-user-chevron {
+    @apply h-3 w-3 transition text-neutral-500 group-hover:text-neutral-700;
+  }
+
+  .dark .ui-user-chevron {
+    @apply text-white/60 group-hover:text-white/70;
+  }
+
+  /* ✅ FIX: no spaces inside [] in @apply */
+  .ui-user-panelwrap {
+    @apply absolute right-0 mt-2 w-64 origin-top-right transition-all duration-150;
+    transition-property: opacity, transform;
+  }
+
+  .ui-user-panel {
+    @apply rounded-2xl border shadow-xl overflow-hidden border-neutral-200 bg-white;
+  }
+
+  .dark .ui-user-panel {
+    @apply border-white/10 bg-neutral-950;
+  }
+
+  .ui-user-panelglow {
+    @apply pointer-events-none absolute inset-0;
+    background-image: radial-gradient(
+      900px 280px at 50% 0%,
+      rgba(0, 0, 0, 0.05) 0%,
+      transparent 60%
+    );
+  }
+
+  .dark .ui-user-panelglow {
+    background-image: radial-gradient(
+      900px 280px at 50% 0%,
+      rgba(255, 255, 255, 0.06) 0%,
+      transparent 60%
+    );
+  }
+
+  .ui-user-panelheader {
+    @apply px-4 py-3 border-b border-neutral-200;
+  }
+
+  .dark .ui-user-panelheader {
+    @apply border-white/10;
+  }
+
+  .ui-user-item {
+    @apply block rounded-xl px-3 py-2 text-sm font-bold transition text-neutral-700 hover:bg-neutral-50 hover:text-neutral-950;
+  }
+
+  .dark .ui-user-item {
+    @apply text-white/80 hover:bg-white/[0.08] hover:text-white/90;
+  }
+
+  .ui-user-logout {
+    @apply mt-1 w-full text-left rounded-xl px-3 py-2 text-sm font-bold transition text-neutral-700 hover:bg-neutral-50 hover:text-neutral-950;
+  }
+
+  .dark .ui-user-logout {
+    @apply text-white/80 hover:bg-white/[0.08] hover:text-white/90;
+  }
+}
+@layer components {
+  /* =========================
+   * Layout
+   * ========================= */
+  .ui-container {
+    @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
+  }
+}
+@layer components {
+  /* =========================
+   * Pill component tokens (tone)
+   * ========================= */
+  .ui-pill {
+    @apply inline-flex items-center rounded-full border px-2.5 py-1 text-[11px] font-extrabold;
+  }
+
+  .ui-pill--good {
+    @apply border-emerald-600/20 bg-emerald-500/10 text-emerald-900;
+  }
+
+  .dark .ui-pill--good {
+    @apply border-emerald-400/30 bg-emerald-300/10 text-emerald-100;
+  }
+
+  .ui-pill--warn {
+    @apply border-amber-600/20 bg-amber-500/10 text-amber-950;
+  }
+
+  .dark .ui-pill--warn {
+    @apply border-amber-400/30 bg-amber-300/10 text-amber-100;
+  }
+
+  .ui-pill--neutral {
+    @apply border-neutral-200/70 bg-white/70 text-neutral-700;
+  }
+
+  .dark .ui-pill--neutral {
+    @apply border-white/10 bg-white/[0.04] text-white/80;
+  }
+}
+@layer components {
+  /* =========================
+   * Review Quiz tokens
+   * ========================= */
+  .ui-quiz-card {
+    @apply rounded-xl border p-3 border-neutral-200 bg-neutral-50;
+  }
+
+  .dark .ui-quiz-card {
+    @apply border-white/10 bg-white/[0.03];
+  }
+
+  .ui-quiz-card--locked {
+    @apply border-amber-300/50 bg-amber-50;
+  }
+
+  .dark .ui-quiz-card--locked {
+    @apply border-amber-300/25 bg-amber-300/10;
+  }
+
+  .ui-quiz-hint {
+    @apply mt-2 text-xs font-extrabold text-neutral-500;
+  }
+
+  .dark .ui-quiz-hint {
+    @apply text-white/50;
+  }
+
+  .ui-quiz-choice {
+    @apply text-left rounded-lg border px-3 py-2 text-xs font-extrabold transition;
+  }
+
+  .ui-quiz-choice--idle {
+    @apply border-neutral-200 bg-white text-neutral-900 hover:bg-neutral-50;
+  }
+
+  .dark .ui-quiz-choice--idle {
+    @apply border-white/10 bg-white/[0.06] text-white/90 hover:bg-white/[0.10];
+  }
+
+  .ui-quiz-choice--selected {
+    @apply border-sky-300/60 bg-sky-50 text-sky-950;
+  }
+
+  .dark .ui-quiz-choice--selected {
+    @apply border-sky-300/30 bg-sky-300/10 text-white/90;
+  }
+
+  .ui-quiz-input {
+    @apply w-40 rounded-lg border px-3 py-2 text-xs font-extrabold outline-none transition border-neutral-200 bg-white text-neutral-900 placeholder:text-neutral-400;
+  }
+
+  .dark .ui-quiz-input {
+    @apply border-white/10 bg-white/[0.06] text-white/90 placeholder:text-white/35;
+  }
+
+  .ui-quiz-action {
+    @apply rounded-xl border px-3 py-2 text-xs font-extrabold transition;
+  }
+
+  .ui-quiz-action--primary {
+    @apply border-neutral-200 bg-white text-neutral-900 hover:bg-neutral-50;
+  }
+
+  .dark .ui-quiz-action--primary {
+    @apply border-white/10 bg-white/10 text-white/80 hover:bg-white/[0.15];
+  }
+
+  .ui-quiz-action--ghost {
+    @apply border-neutral-200 bg-white/70 text-neutral-700 hover:bg-white;
+  }
+
+  .dark .ui-quiz-action--ghost {
+    @apply border-white/10 bg-white/[0.06] text-white/70 hover:bg-white/[0.10];
+  }
+
+  .ui-quiz-action--disabled {
+    @apply cursor-not-allowed border-neutral-200/70 bg-white/60 text-neutral-400;
+  }
+
+  .dark .ui-quiz-action--disabled {
+    @apply border-white/10 bg-white/[0.06] text-white/40;
+  }
+
+  .ui-quiz-explain {
+    @apply mt-2 rounded-lg border p-2 border-neutral-200 bg-white/70;
+  }
+
+  .dark .ui-quiz-explain {
+    @apply border-white/10 bg-black/30;
+  }
+
+  .ui-progress-track {
+    @apply h-2 w-40 overflow-hidden rounded-full bg-neutral-200;
+  }
+
+  .dark .ui-progress-track {
+    @apply bg-white/10;
+  }
+
+  .ui-progress-fill {
+    @apply h-full bg-emerald-500/70;
+  }
+
+  .dark .ui-progress-fill {
+    @apply bg-emerald-300/30;
+  }
+}

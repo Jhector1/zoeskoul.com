@@ -1,0 +1,40 @@
+{
+  "auth": {
+    "brand": {
+      "name": "{appName}",
+      "tagline": "Koneksyon an sekirize"
+    },
+    "card": {
+      "title": "Antre",
+      "subtitle": "Chwazi yon metòd koneksyon pou kontinye."
+    },
+    "providers": {
+      "sso": "Kontinye ak SSO",
+      "google": "Kontinye ak Google",
+      "recommended": "Rekòmande"
+    },
+    "status": {
+      "redirecting": "N ap redirije w..."
+    },
+    "notes": {
+      "redirect": "N ap voye w tounen apre ou fin konekte.",
+      "trouble": "Gen pwoblèm?",
+      "support": "Kontakte sipò."
+    },
+    "legal": {
+      "prefix": "Lè w kontinye, ou dakò ak",
+      "terms": "Kondisyon yo",
+      "and": "ak",
+      "privacy": "Règleman Konfidansyalite"
+    },
+    "errors": {
+      "title": "Pwoblèm koneksyon",
+      "OAuthSignin": "Nou pa t kapab kòmanse koneksyon an. Tanpri eseye ankò.",
+      "OAuthCallback": "Koneksyon an echwe pandan verifikasyon an. Tanpri eseye ankò.",
+      "OAuthAccountNotLinked": "Kont sa a deja lye ak yon lòt fason pou konekte. Sèvi ak metòd ki te lye a okòmansman.",
+      "CredentialsSignin": "Enfòmasyon yo pa bon. Tanpri eseye ankò.",
+      "SessionRequired": "Tanpri konekte pou kontinye.",
+      "Default": "Gen yon bagay ki pa mache. Tanpri eseye ankò."
+    }
+  }
+}

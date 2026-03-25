@@ -1,0 +1,28 @@
+
+   {
+    "pageTitle": "Matris — Pati 2",
+    "pageIntro": "Ann al pi fon ak nòm, ran, tolerans, ak estabilite nimerik. Antre entèaktif yo ede w wè kijan ti bri (noise) ka chanje rezilta yo.",
+    "quickStartEasy": "Kòmanse (Fasil)",
+    "jumpRankEasy": "Ran (Fasil)",
+
+    "parts": {
+      "part2": {
+        "badge": "Pati 2",
+        "title": "Matris — Pati 2",
+        "subtitle": "Nòm, ran, tolerans, ak entwisyon nimerik",
+        "bullets": [
+          "Nòm matris (Frobenius vs nòm espèktral / nòm-2)",
+          "Kalkile nòm yo apati eleman yo (epi sa yo mezire)",
+          "Ran vs “ran efikas” ak yon tolerans ε",
+          "Poukisa yon ti bri ka fè ran chanje (entwisyon sou estabilite)",
+          "Matris prèske singilye ak sansiblite",
+          "Entwisyon sou kondisyonman (sa “mal kondisyonnen” vle di)",
+          "Konsèy pratik: awondi, tolerans, ak konparezon",
+          "Pratik ak antre matris konplè (A, B, Aᵀ, A·B, elatriye)"
+        ]
+      }
+    },
+
+    "recommendedPathTitle": "Chemen rekòmande",
+    "routeHint": "Konsèy: Kòmanse ak ti bri / ε piti an premye, epi ogmante li pou w wè sa ki chanje."
+  }

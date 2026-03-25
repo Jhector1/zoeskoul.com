@@ -1,0 +1,58 @@
+{
+  "reviewQuizUi": {
+    "unlockHint": "Answer the previous question correctly to unlock this one.",
+    "noQuestions": "No questions.",
+    "autoAdvance": "Auto-advance",
+
+    "buttons": {
+      "next": "Next →",
+      "finish": "Finish →",
+      "checkQuestion": "Check this question",
+      "checkAnswer": "Check this answer",
+      "reveal": "Reveal",
+      "resetQuiz": "Reset quiz",
+      "skip": "Skip",
+      "skipped": "Skipped",
+      "continue": "Continue",
+      "excused": "Excused"
+    },
+
+    "placeholders": {
+      "enterNumber": "Enter a number"
+    },
+
+    "status": {
+      "notChecked": "Not checked yet",
+      "correct": "✓ Correct",
+      "notCorrect": "✕ Not correct",
+      "skipped": "↷ Skipped",
+      "locked": "Locked",
+      "completed": "✓ Completed",
+      "passed": "✓ Passed"
+    },
+
+    "practice": {
+      "loadingExercise": "Loading exercise…",
+      "noExercise": "No exercise.",
+      "checking": "Checking…",
+      "attempts": "Attempts: {n}/{max}"
+    },
+
+    "footer": {
+      "summary": "Checked: {checked}/{total} • Correct: {correct}/{total} • Score: {score}%",
+      "progressAria": "Quiz progress",
+      "sequentialHint": "Check each question in order to pass",
+      "nonSequentialHint": "Check all questions to pass"
+    },
+
+    "resetDialog": {
+      "title": "Reset this quiz?",
+      "confirm": "Reset quiz",
+      "intro": "This will:",
+      "b1": "Clear your selected answers and checked status.",
+      "b2": "Clear practice attempts and local state for this quiz.",
+      "b3": "Reload the same question set (it does not generate a new set).",
+      "cannotUndo": "This can’t be undone."
+    }
+  }
+}

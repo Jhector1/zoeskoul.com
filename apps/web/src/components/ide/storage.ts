@@ -1,0 +1,375 @@
+import type { FSNode, FileNode, FolderNode, WorkspaceStateV2, NodeId } from "./types";
+import { uid } from "./utils";
+import {
+    defaultMainFile,
+    defaultMainCode,
+    defaultSqlSchemaCode,
+    defaultSqlSeedCode,
+} from "./languageDefaults";
+import type { CodeLanguage } from "@/lib/practice/types";
+
+export const STORAGE_KEY_V2 = `${process.env.NEXT_PUBLIC_APP_NAME}.ide.workspace.v2`;
+export const STORAGE_KEY_V1 = `${process.env.NEXT_PUBLIC_APP_NAME}.ide.workspace.v1`;
+
+const MIN_LEFT_PCT = 16;
+const MAX_LEFT_PCT = 40;
+
+export function storageKeyForLanguage(baseKey: string, language: CodeLanguage) {
+    return `${baseKey}:${language}`;
+}
+
+function now() {
+    return Date.now();
+}
+
+function isRecord(v: unknown): v is Record<string, unknown> {
+    return !!v && typeof v === "object" && !Array.isArray(v);
+}
+
+function asString(v: unknown, fallback = "") {
+    return typeof v === "string" ? v : fallback;
+}
+
+function asNumber(v: unknown, fallback: number) {
+    return typeof v === "number" && Number.isFinite(v) ? v : fallback;
+}
+
+function clamp(n: number, lo: number, hi: number) {
+    return Math.max(lo, Math.min(hi, n));
+}
+
+function buildDefaultCodeWorkspace(language: Exclude<CodeLanguage, "sql">): WorkspaceStateV2 {
+    const rootSrcId = uid();
+    const mainId = uid();
+    const t = now();
+
+    const nodes: FSNode[] = [
+        {
+            id: rootSrcId,
+            kind: "folder",
+            name: "src",
+            parentId: null,
+            createdAt: t,
+            updatedAt: t,
+        },
+        {
+            id: mainId,
+            kind: "file",
+            name: defaultMainFile(language),
+            parentId: rootSrcId,
+            content: defaultMainCode(language),
+            createdAt: t,
+            updatedAt: t,
+        },
+    ];
+
+    return {
+        version: 2,
+        language,
+        nodes,
+        openTabs: [mainId],
+        activeFileId: mainId,
+        entryFileId: mainId,
+        stdin: "",
+        expanded: [rootSrcId],
+        leftPct: 26,
+    };
+}
+
+function buildDefaultSqlWorkspace(): WorkspaceStateV2 {
+    const schemaId = uid();
+    const seedId = uid();
+    const queryId = uid();
+    const t = now();
+
+    const nodes: FSNode[] = [
+        {
+            id: schemaId,
+            kind: "file",
+            name: "schema.sql",
+            parentId: null,
+            content: defaultSqlSchemaCode(),
+            createdAt: t,
+            updatedAt: t,
+        },
+        {
+            id: seedId,
+            kind: "file",
+            name: "seed.sql",
+            parentId: null,
+            content: defaultSqlSeedCode(),
+            createdAt: t,
+            updatedAt: t,
+        },
+        {
+            id: queryId,
+            kind: "file",
+            name: "query.sql",
+            parentId: null,
+            content: defaultMainCode("sql"),
+            createdAt: t,
+            updatedAt: t,
+        },
+    ];
+
+    return {
+        version: 2,
+        language: "sql",
+        nodes,
+        openTabs: [queryId],
+        activeFileId: queryId,
+        entryFileId: queryId,
+        stdin: "",
+        expanded: [],
+        leftPct: 26,
+    };
+}
+
+export function buildDefaultWorkspace(language: CodeLanguage): WorkspaceStateV2 {
+    if (language === "sql") return buildDefaultSqlWorkspace();
+    return buildDefaultCodeWorkspace(language);
+}
+
+function normalizeNode(raw: unknown): FSNode | null {
+    if (!isRecord(raw)) return null;
+
+    const kind = raw.kind;
+    const id = asString(raw.id);
+    const name = asString(raw.name).trim();
+    const parentIdRaw = raw.parentId;
+    const parentId =
+        typeof parentIdRaw === "string" && parentIdRaw.trim()
+            ? parentIdRaw
+            : null;
+
+    if (!id || !name) return null;
+
+    const createdAt = asNumber(raw.createdAt, now());
+    const updatedAt = asNumber(raw.updatedAt, createdAt);
+
+    if (kind === "folder") {
+        const node: FolderNode = {
+            id,
+            kind: "folder",
+            name,
+            parentId,
+            createdAt,
+            updatedAt,
+        };
+        return node;
+    }
+
+    if (kind === "file") {
+        const node: FileNode = {
+            id,
+            kind: "file",
+            name,
+            parentId,
+            content: asString(raw.content),
+            createdAt,
+            updatedAt,
+        };
+        return node;
+    }
+
+    return null;
+}
+
+function dedupe<T extends string>(arr: T[]) {
+    const seen = new Set<T>();
+    const out: T[] = [];
+
+    for (const v of arr) {
+        if (seen.has(v)) continue;
+        seen.add(v);
+        out.push(v);
+    }
+
+    return out;
+}
+
+export function repairWorkspaceStateV2(
+    raw: unknown,
+    fallbackLanguage: CodeLanguage = "python",
+): WorkspaceStateV2 {
+    if (!isRecord(raw)) return buildDefaultWorkspace(fallbackLanguage);
+
+    const language = ((): CodeLanguage => {
+        const v = raw.language;
+        if (
+            v === "python" ||
+            v === "java" ||
+            v === "javascript" ||
+            v === "c" ||
+            v === "cpp" ||
+            v === "sql"
+        ) {
+            return v;
+        }
+        return fallbackLanguage;
+    })();
+
+    const normalizedNodes = Array.isArray(raw.nodes)
+        ? raw.nodes.map(normalizeNode).filter(Boolean) as FSNode[]
+        : [];
+
+    const seenIds = new Set<string>();
+    const uniqueNodes: FSNode[] = [];
+    for (const n of normalizedNodes) {
+        if (seenIds.has(n.id)) continue;
+        seenIds.add(n.id);
+        uniqueNodes.push(n);
+    }
+
+    const byId = new Map<NodeId, FSNode>(uniqueNodes.map((n) => [n.id, n]));
+    const repairedNodes = uniqueNodes.map((n) => {
+        const badParent =
+            n.parentId != null &&
+            (n.parentId === n.id || !byId.has(n.parentId));
+
+        return badParent ? { ...n, parentId: null } : n;
+    });
+
+    let nodes = repairedNodes;
+    let fileNodes = nodes.filter((n): n is FileNode => n.kind === "file");
+    let folderNodes = nodes.filter((n): n is FolderNode => n.kind === "folder");
+
+    if (fileNodes.length === 0) {
+        const fresh = buildDefaultWorkspace(language);
+        nodes = fresh.nodes;
+        fileNodes = fresh.nodes.filter((n): n is FileNode => n.kind === "file");
+        folderNodes = fresh.nodes.filter((n): n is FolderNode => n.kind === "folder");
+    }
+
+    const fileIds = new Set(fileNodes.map((n) => n.id));
+    const folderIds = new Set(folderNodes.map((n) => n.id));
+
+    const rawOpenTabs = Array.isArray(raw.openTabs) ? raw.openTabs : [];
+    const openTabs = dedupe(
+        rawOpenTabs.filter((id): id is NodeId => typeof id === "string" && fileIds.has(id)),
+    );
+
+    const fallbackActive = openTabs[0] ?? fileNodes[0].id;
+
+    const activeFileId =
+        typeof raw.activeFileId === "string" && fileIds.has(raw.activeFileId)
+            ? raw.activeFileId
+            : fallbackActive;
+
+    const entryFileId =
+        typeof raw.entryFileId === "string" && fileIds.has(raw.entryFileId)
+            ? raw.entryFileId
+            : activeFileId;
+
+    const finalOpenTabs = openTabs.length ? openTabs : [activeFileId];
+    if (!finalOpenTabs.includes(activeFileId)) finalOpenTabs.unshift(activeFileId);
+
+    const rawExpanded = Array.isArray(raw.expanded) ? raw.expanded : [];
+    const expanded = dedupe(
+        rawExpanded.filter((id): id is NodeId => typeof id === "string" && folderIds.has(id)),
+    );
+
+    return {
+        version: 2,
+        language,
+        nodes,
+        openTabs: finalOpenTabs,
+        activeFileId,
+        entryFileId,
+        stdin: asString(raw.stdin),
+        expanded,
+        leftPct: clamp(asNumber(raw.leftPct, 26), MIN_LEFT_PCT, MAX_LEFT_PCT),
+    };
+}
+
+export function loadV2(
+    storageKey: string,
+    fallbackLanguage: CodeLanguage = "python",
+): WorkspaceStateV2 | null {
+    try {
+        const raw = localStorage.getItem(storageKey);
+        if (!raw) return null;
+        return repairWorkspaceStateV2(JSON.parse(raw), fallbackLanguage);
+    } catch {
+        return null;
+    }
+}
+
+export function saveV2(storageKey: string, ws: WorkspaceStateV2) {
+    try {
+        const safe = repairWorkspaceStateV2(ws, ws.language);
+        localStorage.setItem(storageKey, JSON.stringify(safe));
+    } catch {}
+}
+
+function buildCodeWorkspaceFromV1(v1: any, language: Exclude<CodeLanguage, "sql">): WorkspaceStateV2 | null {
+    const rootSrcId = uid();
+    const t = now();
+
+    const files = Array.isArray(v1?.files) ? v1.files : [];
+    if (!files.length) return null;
+
+    const nodes: FSNode[] = [
+        {
+            id: rootSrcId,
+            kind: "folder",
+            name: "src",
+            parentId: null,
+            createdAt: t,
+            updatedAt: t,
+        },
+        ...files.map((f: any) => ({
+            id: uid(),
+            kind: "file" as const,
+            name: String(f?.name ?? defaultMainFile(language)),
+            parentId: rootSrcId,
+            content: String(f?.content ?? defaultMainCode(language)),
+            createdAt: t,
+            updatedAt: t,
+        })),
+    ];
+
+    const firstFile = nodes.find((n): n is FileNode => n.kind === "file");
+    if (!firstFile) return null;
+
+    return {
+        version: 2,
+        language,
+        nodes,
+        openTabs: [firstFile.id],
+        activeFileId: firstFile.id,
+        entryFileId: firstFile.id,
+        stdin: typeof v1?.stdin === "string" ? v1.stdin : "",
+        expanded: [rootSrcId],
+        leftPct: 26,
+    };
+}
+
+export function tryMigrateV1(
+    fallbackLanguage: CodeLanguage = "python",
+): WorkspaceStateV2 | null {
+    try {
+        const raw = localStorage.getItem(STORAGE_KEY_V1);
+        if (!raw) return null;
+
+        const v1 = JSON.parse(raw) as any;
+        const language: CodeLanguage =
+            v1?.language === "python" ||
+            v1?.language === "java" ||
+            v1?.language === "javascript" ||
+            v1?.language === "c" ||
+            v1?.language === "cpp" ||
+            v1?.language === "sql"
+                ? v1.language
+                : fallbackLanguage;
+
+        if (language === "sql") {
+            return buildDefaultSqlWorkspace();
+        }
+
+        const migrated = buildCodeWorkspaceFromV1(v1, language);
+        return migrated ? repairWorkspaceStateV2(migrated, language) : null;
+    } catch {
+        return null;
+    }
+}

@@ -1,0 +1,40 @@
+@layer components {
+  .ui-drag-chip {
+    @apply relative inline-flex items-center gap-2 rounded-xl border px-3 py-2;
+    @apply text-xs font-extrabold select-none transform-gpu transition duration-150;
+
+    /* replace @apply ui-border ui-surface ui-text */
+    border-color: rgb(var(--ui-border) / 1);
+    background-color: rgb(var(--ui-surface) / 0.90);
+    color: rgb(var(--ui-text) / 0.92);
+
+    box-shadow: var(--ui-shadow-soft);
+    transition-property: background-color, border-color, box-shadow, transform, opacity;
+  }
+
+  .ui-drag-chip:hover {
+    background-color: rgb(var(--ui-surface-3) / 0.85);
+  }
+
+  .ui-drag-chip:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px rgb(var(--ui-ring) / 0.35), var(--ui-shadow-soft);
+  }
+
+  .ui-drag-handle {
+    color: rgb(var(--ui-text-muted) / 0.70);
+  }
+
+  .ui-drag-actionbtn {
+    @apply rounded-md border px-2 py-1 text-[10px] font-black transition disabled:opacity-40;
+
+    border-color: rgb(var(--ui-border) / 1);
+    background-color: rgb(var(--ui-surface) / 0.90);
+    color: rgb(var(--ui-text-muted) / 0.70);
+  }
+
+  .ui-drag-actionbtn:hover {
+    background-color: rgb(var(--ui-surface-3) / 0.85);
+    color: rgb(var(--ui-text) / 0.88);
+  }
+}

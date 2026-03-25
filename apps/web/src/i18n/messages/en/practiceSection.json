@@ -1,0 +1,158 @@
+{
+  "VectorsLanding": {
+    "pageTitle": "Vectors",
+    "pageIntro": "Two-part track: Part 1 builds the fundamentals; Part 2 builds the linear algebra core (combinations → independence → span/subspace → basis).",
+
+    "quickStartPart1Easy": "Quick start • Part 1 • Easy",
+    "jumpPart2Easy": "Jump • Part 2 • Easy",
+
+    "whatYouLearn": "What you’ll learn",
+    "readMaterial": "Read material",
+    "practiceNow": "Practice now",
+    "practiceNowHint": "“Practice now” opens a pre-filtered practice session for this part.",
+
+    "recommendedPathTitle": "Recommended path",
+    "recommended": {
+      "0": "Do Part 1 until orientation, shapes, norm/unit vectors, and dot product feel automatic.",
+      "1": "Move to Part 2 to master independence/span/basis (these unlock everything later).",
+      "2": "Revisit dot-product geometry whenever projection/decomposition feels “mystical.”"
+    },
+
+    "routeHint": "If your material route isn’t /learn, just swap the learnHref links.",
+
+    "parts": {
+      "part1": {
+        "badge": "Start here",
+        "title": "Vectors — Part 1",
+        "subtitle": "Foundations, geometry intuition, NumPy shapes, and core operations",
+        "bullets": {
+          "0": "Vector meaning (algebra vs geometry) and ℝⁿ notation",
+          "1": "Row vs column orientation + transpose (why it matters)",
+          "2": "NumPy representations: (n,), (1,n), (n,1) + shape intuition",
+          "3": "Add/subtract, scalar multiply (lists vs arrays gotcha)",
+          "4": "Magnitude (norm) + unit vectors",
+          "5": "Dot product: compute + interpret sign/angle",
+          "6": "Hadamard vs dot vs outer product (what you get)",
+          "7": "Projection idea (setup for decompositions)"
+        }
+      },
+      "part2": {
+        "badge": "Next",
+        "title": "Vectors — Part 2",
+        "subtitle": "Linear combinations → independence → span/subspace → basis",
+        "bullets": {
+          "0": "Finite vs infinite vs empty vector sets",
+          "1": "Linear weighted combinations (component-wise)",
+          "2": "Independent vs dependent (including zero-vector rule)",
+          "3": "Span (line vs all of ℝ²) and dimension intuition",
+          "4": "Subspace tests: 0 vector + closure rules",
+          "5": "Basis checks (ℝ² det ≠ 0 intuition)",
+          "6": "Coordinates in a basis (solve for c₁, c₂)",
+          "7": "Connect to projection + orthogonal decomposition"
+        }
+      }
+    }
+  },
+
+  "MatricesPart1Landing": {
+    "pageTitle": "Matrices — Part 1",
+    "pageIntro": "Learn what matrices are, how to read their shapes, index/slice them like NumPy, and build intuition for multiplication, transpose, and symmetry.",
+    "quickStartEasy": "Quick start (Easy)",
+    "whatYouLearn": "What you’ll learn",
+    "readMaterial": "Read material",
+    "practiceNow": "Practice now",
+    "practiceNowHint": "Tip: choose a difficulty and repeat until it feels automatic.",
+    "parts": {
+      "part1": {
+        "badge": "FOUNDATIONS",
+        "title": "Matrices: meaning, shape, and core operations",
+        "subtitle": "From data tables to transformations: indexing, special matrices, multiplication, transpose, symmetry",
+        "bullets": {
+          "0": "Read matrix shape (rows × columns) and count total entries",
+          "1": "Interpret a matrix as a data table or stacked column vectors",
+          "2": "Convert between math indexing and NumPy (0-based) indexing",
+          "3": "Predict slice shapes using Python’s half-open intervals",
+          "4": "Identify identity, diagonal, and triangular matrices",
+          "5": "Understand element-wise vs matrix multiplication (* vs @), plus shifting A + λI",
+          "6": "Find AB shapes, validate multiplication, and compute a single entry via dot product",
+          "7": "Use transpose rules (LIVE EVIL), transpose shapes, and recognize symmetric matrices"
+        }
+      }
+    },
+    "recommendedPathTitle": "Recommended path",
+    "recommended": {
+      "0": "Start with shape + indexing questions until you answer fast.",
+      "1": "Move to multiplication shape/validity, then compute entries.",
+      "2": "Finish with transpose and symmetry patterns."
+    },
+    "routeHint": "Routes: /practice/review/matrices_part1 (read) • /practice?section=module-2-matrices (practice)"
+  },
+  "MatricesPart2Landing": {
+  "pageTitle": "Matrices — Part 2",
+  "pageIntro": "Build intuition for norms, rank, numerical tolerance, and stability. Learn why tiny noise can change answers and how to compare matrices safely in practice.",
+  "quickStartEasy": "Quick start (Easy)",
+  "whatYouLearn": "What you’ll learn",
+  "readMaterial": "Read material",
+  "practiceNow": "Practice now",
+  "practiceNowHint": "Tip: start with small matrices, then increase size once the pattern feels automatic.",
+  "parts": {
+    "part2": {
+      "badge": "NUMERICAL INTUITION",
+      "title": "Matrices: norms, rank, tolerance, and stability",
+      "subtitle": "Measure size, detect structure, and handle floating-point reality with ε",
+      "bullets": {
+        "0": "Compute the Frobenius norm from entries and interpret what it measures",
+        "1": "Understand the 2-norm (spectral norm) as the maximum stretch factor",
+        "2": "Compare norms and know when each is useful (fast vs geometric meaning)",
+        "3": "Compute rank from pivots / RREF and connect rank to independence",
+        "4": "Use an ε tolerance to define an effective rank (rankε) for noisy data",
+        "5": "See how small perturbations can flip rank and why ‘nearly dependent’ matters",
+        "6": "Recognize near-singular / ill-conditioned matrices and sensitivity of solutions",
+        "7": "Practice robust workflows: tolerances, rounding, and safe equality checks"
+      }
+    }
+  },
+  "recommendedPathTitle": "Recommended path",
+  "recommended": {
+    "0": "Start with Frobenius norm drills until you can compute quickly.",
+    "1": "Move to rank and pivots, then compare rank vs rankε under noise.",
+    "2": "Finish with stability/conditioning intuition using near-singular examples."
+  },
+  "routeHint": "Routes: /practice/review/matrices_part2 (read) • /practice?section=module-3-matrices (practice)"
+},
+
+"PythonBasicsLanding": {
+  "pageTitle": "Python — Basics",
+  "pageIntro": "Start here: printing, input, variables, strings, math, and common errors.",
+  "quickStartEasy": "Quick start (Easy)",
+  "jumpStringsEasy": "Jump to Strings (Easy)",
+  "whatYouLearn": "What you’ll learn",
+  "readMaterial": "Read material",
+  "practiceNow": "Practice now",
+  "practiceNowHint": "Tip: repeat easy until it feels automatic.",
+  "recommendedPathTitle": "Recommended path",
+  "recommended": {
+    "0": "Finish Part 1 basics (print, input, strings).",
+    "1": "Do 10 easy problems, then move to medium.",
+    "2": "Come back and retry quizzes after a day."
+  },
+  "routeHint": "Tip: You can always change subject from the top.",
+  "parts": {
+    "part1": {
+      "badge": "FOUNDATIONS",
+      "title": "Python — Part 1",
+      "subtitle": "print/input, variables, strings, math, comments, common errors",
+      "bullets": {
+        "0": "Use print() with sep/end to format output",
+        "1": "Read user input and store values in variables",
+        "2": "Work with strings and len()",
+        "3": "Do arithmetic and understand precedence",
+        "4": "Write comments/docstrings for readability",
+        "5": "Recognize common beginner error messages"
+      }
+    }
+  }
+}
+
+
+}

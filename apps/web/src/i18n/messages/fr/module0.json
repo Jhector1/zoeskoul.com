@@ -1,0 +1,107 @@
+{
+ "Module0": {
+    "title": "Simulateur visuel — Module 0",
+    "badges": { "meta": "{mode} • Vecteurs • Produit scalaire • Projection" },
+    "sections": {
+      "overlays": "Superpositions",
+      "liveMath": "Maths en direct",
+      "practice": "Mode entraînement"
+    },
+    "buttons": {
+      "randomize": "Aléatoiriser a & b",
+      "reset": "Réinitialiser",
+      "zeroA": "Mettre a à 0",
+      "zeroB": "Mettre b à 0",
+      "newQuestion": "Nouvelle question",
+      "check": "Vérifier",
+      "reveal": "Révéler"
+    },
+    "status": {
+      "idle": "Clique sur « Nouvelle question ». Utilise les superpositions pour raisonner visuellement, puis réponds.",
+      "question": "Question : {prompt}. Entre un nombre (tolérance ±{tolerance}{unit}).",
+      "noQuestion": "Aucune question active. Clique d’abord sur « Nouvelle question ».",
+      "invalidNumber": "Veuillez entrer un nombre valide (ex. 3,5 ou -2).",
+      "correct": "✅ Correct. {value} est dans la tolérance.",
+      "incorrect": "❌ Pas tout à fait. Tu as répondu {value}. Réessaie en utilisant les superpositions.",
+      "noReveal": "Aucune question à révéler. Clique d’abord sur « Nouvelle question ».",
+      "answer": "Réponse : {value}{unit}",
+      "randomized": "Vecteurs aléatoires. Fais glisser les pointes pour explorer.",
+      "reset": "Réinitialisé aux vecteurs par défaut.",
+      "zeroA": "a = 0. Le produit scalaire/la projection devient 0.",
+      "zeroB": "b = 0. La projection/l’angle devient indéfini."
+    },
+    "desc": {
+      "2d": "Fais glisser les pointes des vecteurs. La projection affiche proj₍b₎(a) et la partie perpendiculaire optionnelle.",
+      "3d": {
+        "beforeZ": "Orbite la caméra. Fais glisser les sphères. Maintiens",
+        "afterZ": "pendant le déplacement (ou active le Mode profondeur) pour changer la profondeur."
+      }
+    },
+    "labels": {
+      "scale2d": "Échelle (px par unité)",
+      "scale3d": "Échelle visuelle",
+      "snapToGrid": "Aimanter à la grille",
+      "depthMode": "Mode profondeur (forcer le glissement en Z)",
+      "zKeyDetected": "Touche Z détectée :",
+      "on": "ACTIVÉ",
+      "off": "désactivé",
+      "gridStep": "Pas de grille (unités)"
+    },
+    "toggles": {
+      "gridAxes": "Afficher la grille + axes",
+      "components": "Afficher les composantes",
+      "angle": "Afficher l’angle θ",
+      "projection": "Afficher la projection",
+      "unitB": "Afficher le vecteur unitaire de b",
+      "perp": "Afficher la partie perpendiculaire"
+    },
+    "questions": {
+      "dot": "Calcule le produit scalaire a · b",
+      "angle": "Calcule l’angle θ entre a et b (degrés)",
+      "scalarProj": "Calcule la projection scalaire de a sur b (longueur de l’ombre sur b)",
+      "projX": "Calcule la composante x de proj_b(a)",
+      "projY": "Calcule la composante y de proj_b(a)",
+      "projZ": "Calcule la composante z de proj_b(a)"
+    },
+    "live": {
+      "aLabel": "a = {dims}",
+      "bLabel": "b = {dims}",
+      "magA": "|a|",
+      "magB": "|b|",
+      "dot": "a·b",
+      "cos": "cos(θ)",
+      "thetaDeg": "θ (°)",
+      "scalarProj": "longueur de l’ombre sur b",
+      "projLen": "longueur de proj_b(a)",
+      "projVec": "proj_b(a)",
+      "perpVec": "a⊥",
+      "perpLen": "|a⊥|"
+    },
+    "practice": {
+      "questionType": "Type de question",
+      "yourAnswer": "Ta réponse",
+      "placeholder": "ex. 3,5",
+      "active": "Active :",
+      "options": {
+        "dot": "Produit scalaire a·b",
+        "angle": "Angle θ (degrés)",
+        "scalarProj": "Longueur de l’ombre sur b",
+        "projX": "proj_b(a) composante x",
+        "projY": "proj_b(a) composante y",
+        "projZ": "proj_b(a) composante z (3D)"
+      }
+    },
+    "hud": {
+      "controlsTitle": "Commandes",
+      "legendTitle": "Légende",
+      "shadow": "ombre",
+      "controls2d": "Fais glisser les pointes. Utilise la projection pour voir comment a se décompose en proj₍b₎(a) + a⊥.",
+      "controls3d": {
+        "beforeZ": "Orbite : fais glisser l’espace vide. Clique une sphère pour la déplacer. Maintiens",
+        "afterZ": "(ou Mode profondeur) pour bouger sur z."
+      }
+    },
+    "footerTip": "Si la sélection en 3D est difficile : zoome avec la molette, puis clique directement sur la sphère (la pointe)."
+  }
+
+}

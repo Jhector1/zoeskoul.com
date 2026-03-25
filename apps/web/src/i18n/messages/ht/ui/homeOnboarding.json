@@ -1,0 +1,152 @@
+{
+  "homeOnboarding": {
+    "common": {
+      "notSet": "Pa defini",
+      "featured": "Mete an avan",
+      "guide": "Gid",
+      "mvp": "MVP"
+    },
+    "labels": {
+      "language": {
+        "english": "English",
+        "french": "Français",
+        "haitian-creole": "Kreyòl"
+      },
+      "level": {
+        "beginner": "Debitan",
+        "intermediate": "Entèmedyè",
+        "advanced": "Avanse"
+      },
+      "studyTime": {
+        "1-2-hours": "1 a 2 èdtan",
+        "3-5-hours": "3 a 5 èdtan",
+        "6-plus-hours": "6+ èdtan"
+      },
+      "theme": {
+        "light": "Klè",
+        "dark": "Fonse"
+      }
+    },
+    "welcome": {
+      "fallbackGoals": "objektif aprantisaj ou yo",
+      "new": "Byenveni. M ap òganize paj dakèy {appName} ou a selon {interestText}, an {language}, ak yon ritm ki reyalis depi premye jou a.",
+      "returning": "Byen retounen. Paj dakèy {appName} ou a toujou santre sou {interestText}, ak yon chemen {level}, yon ritm etid {studyTime}, ak yon tèm {theme}."
+    },
+    "interestSummary": {
+      "empty": "Chwazi yon sijè epi {appName} ap montre w pwochen leson an, bon seri pratik la, ak yon esè ki adapte pou ou.",
+      "focused": "Konsantre sou {interests}. Kòmanse kote sa pi enpòtan."
+    },
+    "gate": {
+      "kicker": "Byenveni",
+      "title": "Ann konfigire paj dakèy {appName} ou a.",
+      "description": "Reponn kèk kestyon rapid pou pèsonalize lang, sijè, nivo, ritm, ak tèm nan. Ou ka chanje tout bagay pita."
+    },
+    "hero": {
+      "kicker": "Aprantisaj pèsonalize",
+      "title": "{appName} òganize paj dakèy ou selon sijè ou vle metrize yo.",
+      "descriptionFresh": "{appName} kòmanse ak yon ti konfigirasyon gide, epi li rekòmande bon sijè yo, bon pwen depa yo, ak kestyon esè selon lang ou, nivo ou, ak ritm etid ou chak semèn.",
+      "chooseSubject": "Chwazi yon sijè pou eseye",
+      "continueLearning": "Kontinye aprann",
+      "try3Questions": "Eseye 3 kestyon",
+      "startingTrial": "N ap kòmanse esè a...",
+      "openGuide": "Louvri gid byenvini an",
+      "exploreSubjects": "Eksplore sijè yo",
+      "editPreferences": "Modifye preferans yo",
+      "editAnswers": "Modifye repons yo",
+      "currentTheme": "Tèm aktyèl la: {theme}"
+    },
+    "steps": {
+      "preferredLanguage": {
+        "title": "Ki lang {appName} dwe itilize pou eksperyans ou a?",
+        "description": "Sa fikse lang pa default pou akey, navigasyon, ak tèks pratik yo kote tradiksyon disponib."
+      },
+      "learningInterests": {
+        "title": "Sou ki sa ou vle konsantre an premye?",
+        "description": "{appName} ap bay priyorite a bon sijè yo, bon pwen depa yo, ak bon sijesyon pratik sou paj dakèy ou."
+      },
+      "level": {
+        "title": "Ki nivo ou ye kounye a?",
+        "description": "Sa ede {appName} deside si l ap kòmanse ak baz yo, pratik melanje, oswa materyèl ki pi avanse."
+      },
+      "studyTime": {
+        "title": "Konbyen tan ou vle etidye chak semèn?",
+        "description": "Ritm etid ou chak semèn ede rekòmandasyon yo rete reyalis epi pa twò chaje."
+      },
+      "discoverySource": {
+        "title": "Kijan ou te tande pale de {appName}?",
+        "description": "Sa ede nou konprann ki chanèl k ap mennen bon aprenan yo vin jwenn nou epi amelyore onboarding la sou tan."
+      },
+      "themePreference": {
+        "title": "Ki tèm ou ta renmen itilize?",
+        "description": "Chwazi aparans ki pi konfòtab pou lekti, kòd, ak pratik chak jou."
+      },
+      "trialIntent": {
+        "title": "Èske ou ta renmen eseye 3 kestyon apre sa?",
+        "description": "Kòmanse yon ti esè kounye a, oswa retounen sou li pita depi paj dakèy la."
+      },
+      "choices": {
+        "themeLightHint": "Klè ak pwòp pou etid lajounen.",
+        "themeDarkHint": "Pi dous pou je yo nan limyè fèb oswa pandan sesyon ki long.",
+        "trialNowLabel": "Wi, kite m eseye kounye a",
+        "trialNowHint": "N ap lanse yon ti esè pratik 3 kestyon apre konfigirasyon an.",
+        "trialLaterLabel": "Pita",
+        "trialLaterHint": "Ou ka kòmanse depi paj dakèy la nenpòt lè ou pare.",
+        "search": "Rechèch",
+        "friend": "Zanmi oswa kolèg",
+        "social": "Rezo sosyal",
+        "school-work": "Lekòl oswa travay",
+        "other": "Lòt"
+      }
+    },
+    "panel": {
+      "title": "Pèsonalize espas ou a",
+      "description": "Reponn kèk kestyon rapid. Ou ka modifye tout bagay pita.",
+      "skip": "Sote",
+      "step": "Etap {current} sou {total}",
+      "back": "Retounen",
+      "continue": "Kontinye",
+      "finish": "Fini konfigirasyon an"
+    },
+    "guideCard": {
+      "personalized": "Espas ou a pèsonalize",
+      "ready": "Gid byenvini an pare",
+      "start": "Kòmanse",
+      "updatePreferences": "Mete preferans yo ajou"
+    },
+    "highlights": {
+      "kicker": "Paj dakèy pèsonalize",
+      "title": "Senp nan kòmansman. Pi entelijan ak pwogrè ou.",
+      "description": "{appName} kòmanse ak yon tablodbò ki pwòp, epi li adapte l selon enterè ou, enskripsyon ou, ak aktivite pratik ou pou pwochen etap la toujou klè.",
+      "cards": {
+        "language": {
+          "title": "Lang",
+          "text": "Sèvi ak lang ki pi natirèl pou ou pandan w ap eksplore sijè yo epi kòmanse pratik la."
+        },
+        "level": {
+          "title": "Nivo",
+          "text": "Premye rekòmandasyon yo ka pi fondamantal oswa pi avanse selon nivo konfò ou genyen kounye a."
+        },
+        "pace": {
+          "title": "Ritm chak semèn",
+          "text": "{appName} ka kenbe pwochen etap la reyalis pou paj dakèy la rete itil olye li twò chaje."
+        }
+      }
+    },
+    "recommended": {
+      "kicker": "Chemen rekòmande",
+      "title": "Kòmanse ak sijè ou vrèman vle aprann yo.",
+      "viewAll": "Gade tout sijè yo",
+      "exploreSubject": "Eksplore sijè a"
+    },
+    "floatingAssistant": {
+      "title": "Ou bezwen ajiste konfigirasyon ou a?",
+      "subtitle": "Mete preferans yo ajou"
+    },
+    "trial": {
+      "chooseSubjectError": "Chwazi yon sijè anvan.",
+      "startError": "Nou pa t ka kòmanse esè a kounye a.",
+      "overlayTitle": "N ap prepare premye sesyon pratik ou a.",
+      "overlayDescription": "Sa ap pran yon ti moman sèlman."
+    }
+  }
+}

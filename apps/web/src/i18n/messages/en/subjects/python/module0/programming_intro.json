@@ -1,0 +1,62 @@
+{
+  "topics": {
+    "python": {
+      "python-0": {
+        "programming_intro": {
+          "label": "Programming Languages: Talking to Computers",
+          "summary": "Learn what a programming language is and why Python is a great first language.",
+          "cards": {
+            "sketch": {
+              "title": "Programming Languages: Talking to Computers"
+            },
+            "quiz": {
+              "title": "Quick check: programming languages"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "py": {
+      "programming": {
+        "intro": {
+          "title": "Programming Languages: Talking to Computers",
+          "bodyMarkdown": "Just like humans communicate with each other using language, we also communicate with computers using programming languages. Computer scientists designed these languages so we can give instructions to a computer in a way it can understand.\n\nThere are many programming languages—such as Python, Java, and C—and each one has its own strengths. In this lesson, we’ll focus on Python, one of the most widely used programming languages in the world today."
+        }
+      }
+    }
+  },
+  "quiz": {
+    "m0_prog_language_definition": {
+      "title": "Programming language",
+      "prompt": "A **programming language** is best described as:",
+      "options": {
+        "a": "A way to give instructions to a computer",
+        "b": "A type of internet browser",
+        "c": "A folder on your desktop"
+      },
+      "hint": "We use programming languages to give computers instructions."
+    },
+    "m0_prog_python_is_language": {
+      "title": "Python",
+      "prompt": "Python is a:",
+      "options": {
+        "a": "Programming language",
+        "b": "Computer brand",
+        "c": "Keyboard shortcut"
+      },
+      "hint": "Python is a language used to write programs."
+    },
+    "m0_prog_instructions_precise": {
+      "title": "Precision matters",
+      "prompt": "Computers usually need instructions that are:",
+      "options": {
+        "a": "Vague so they can guess what you mean",
+        "b": "Clear and precise (step-by-step)",
+        "c": "Written only in emojis"
+      },
+      "hint": "Computers follow exact instructions."
+    }
+  }
+}

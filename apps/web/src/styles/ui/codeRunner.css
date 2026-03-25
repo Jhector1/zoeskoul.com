@@ -1,0 +1,20 @@
+/* put keyframes at top-level (outside @layer) */
+@keyframes ui-term-blink {
+    0%, 49% { opacity: 1; }
+    50%, 100% { opacity: 0; }
+}
+
+@layer components {
+    .ui-term-cursor {
+        display: inline-block;
+        margin-left: 1px;
+        opacity: 0.75;
+        will-change: opacity;
+        animation: ui-term-blink 1s step-end infinite;
+    }
+
+    /* OPTIONAL: only keep this if you truly want to disable blinking for reduced motion */
+    /* @media (prefers-reduced-motion: reduce) {
+      .ui-term-cursor { animation: none; opacity: 0.85; }
+    } */
+}

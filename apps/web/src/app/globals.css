@@ -1,0 +1,7 @@
+/* src/app/globals.css */
+@import "tailwindcss";
+
+/* put custom variant AFTER tailwind import */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@import "../styles/ui.css";

@@ -1,0 +1,59 @@
+prisma migrate reset --force&&prisma migrate deploy && prisma generate&&
+
+
+npx dotenv-cli -e .env.production.local -- npx prisma migrate deploy
+npx dotenv-cli -e .env.production.local -- npx prisma db seed
+
+
+
+
+# 1) format + validate schema
+npx prisma format
+npx prisma validate
+
+# 2) create + apply migration (pick a good name)
+npx prisma migrate dev --name access-policy
+
+# 3) regenerate Prisma client (usually happens automatically, but safe)
+npx prisma generate
+
+
+
+# if you have ts-node
+npx ts-node scripts/resetBilling.ts you@example.com
+
+# or with tsx
+npx dotenv -e .env.development.local -- npx tsx scripts/resetBilling.ts tutoring@student.learnoir.com
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Error Type
+Console Error
+
+## Error Message
+Cannot update a component (`V`) while rendering a different component (`HomePageAvatarOnboardingClient`). To locate the bad setState() call inside `HomePageAvatarOnboardingClient`, follow the stack trace as described in https://react.dev/link/setstate-in-render
+
+Next.js version: 16.1.1 (Turbopack)
+
+
+
+
+
+
+
+
+
+
+
+
+

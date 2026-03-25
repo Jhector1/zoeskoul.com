@@ -1,0 +1,12 @@
+{
+   "Playground": {
+    "title": "Aire de jeu d’algèbre linéaire",
+    "subtitle": "Choisissez un outil, puis basculez entre 2D/3D.",
+    "viewMode": "Mode d’affichage :",
+    "tabs": {
+      "spanBasis": "Engendrement / Base",
+      "module0": "Produit scalaire / Projection (Module 0)"
+    },
+    "mode": { "2d": "2D", "3d": "3D" }
+  }
+}

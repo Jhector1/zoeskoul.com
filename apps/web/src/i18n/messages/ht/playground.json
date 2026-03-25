@@ -1,0 +1,12 @@
+{
+   "Playground": {
+    "title": "Zòn Pratik Aljèb Lineyè",
+    "subtitle": "Chwazi yon zouti, epi pase ant 2D/3D.",
+    "viewMode": "Mòd afichaj:",
+    "tabs": {
+      "spanBasis": "Span / Baz",
+      "module0": "Dot / Pwojeksyon (Modil 0)"
+    },
+    "mode": { "2d": "2D", "3d": "3D" }
+  }
+}

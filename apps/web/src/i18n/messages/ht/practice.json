@@ -1,0 +1,148 @@
+{
+  "Practice": {
+    "ai": {
+      "explainConcept": "Eksplike konsèp",
+      "explaining": "Ap eksplike…",
+      "helperLine": "Li eksplike lide a + metòd la — li pa bay repons final la."
+    },
+    "review": {
+      "emptyAll": "Pa gen kesyon ankò.",
+      "emptyIncorrect": "Pa gen kesyon ki pa kòrèk.",
+      "status": {
+        "revealed": "Montre",
+        "correct": "✓ Kòrèk",
+        "incorrect": "✕ Pa kòrèk",
+        "notChecked": "Pa verifye"
+      },
+      "card": {
+        "question": "Kesyon {n}",
+        "attempts": "Tantativ:",
+        "notCheckedYet": "Poko verifye",
+        "hiddenNote": "Repons kòrèk la kache pou kous sa a.",
+        "showDetails": "Montre sa yo te atann / eksplikasyon"
+      }
+    },
+    "title": "Jeneratè Pratik",
+    "subtitle": "Refresh kenbe pwogrè • ←/→ pou navige • Antre pou soumèt",
+    "progress": {
+      "attempts": "Tantativ",
+      "label": "Pwogrè",
+      "correct": "Kòrèk",
+      "question": "K"
+    },
+    "filters": {
+      "sessionLocked": "Mòd sesyon • filtè yo bloke",
+      "topic": "Sijè",
+      "difficulty": "Nivo",
+      "assignmentLocked": "Mòd devwa • filtè yo bloke"
+    },
+    "buttons": {
+      "prev": "Anvan",
+      "next": "Apre",
+      "submit": "Soumèt",
+      "reveal": "Montre repons",
+      "retry": "Re-eseye",
+      "auto": "Oto"
+    },
+    "status": {
+      "clickNextToStart": "Peze Next pou kòmanse.",
+      "revealDisabled": "Montre repons dezaktive pou kous sa a.",
+      "loading": "Ap chaje…",
+      "loadingDots": "Ap chaje...",
+      "dash": "—"
+    },
+    "confirm": {
+      "progressLine": "Pwogrè kounye a: {answered}/{sessionSize} reponn.",
+      "title": "Rekòmanse sesyon an?",
+      "subtitle": "Chanje sijè oswa nivo ap rekòmanse sesyon w ap fè a.",
+      "loseProgress": "Ou pral pèdi pwogrè w:",
+      "keep": "Kenbe sesyon aktyèl la",
+      "restart": "Wi, rekòmanse",
+      "esc": "Peze Esc pou fèmen."
+    },
+    "result": {
+      "attemptsLeft": "Tantativ ki rete: {count}",
+      "title": "Rezilta",
+      "submitToValidate": "Soumèt repons ou pou w jwenn koreksyon an.",
+      "errorTitle": "⚠️ Erè",
+      "revealed": "👁️ Montre (repons lan parèt)",
+      "correct": "✅ Kòrèk",
+      "incorrect": "❌ Pa fin sa"
+    },
+    "loadError": {
+      "title": "Nou pa t ka chaje yon kesyon"
+    },
+    "questionPanel": {
+      "footerTip": "← / → pou deplase • Next chaje yon nouvo kesyon nan fen lis la • Antre pou soumèt"
+    },
+    "answer": {
+      "yourAnswer": "Repons ou",
+      "placeholder": "eg. 3.5",
+      "details": "Detay"
+    },
+    "vectorPad": {
+      "title": "Vector Pad",
+      "gridBadge": "Griy: 1 kare = {step} inite{mode}",
+      "gridModeAuto": " • Oto",
+      "gridModeLocked": " • Fikse",
+      "gridSelectOption": "1 kare = {step}"
+    },
+    "exercises": {
+      "vectorDragTarget": {
+        "instructions": "Trennen a (ble) pou l matche ak sib a* = ({x}, {y}) nan tolerans {tolerance}."
+      },
+      "vectorDragDot": {
+        "instructions": "Trennen a pou a · b ≈ {targetDot} (tolerans {tolerance}).",
+        "bFixed": "b fikse: ({x}, {y})",
+        "cards": {
+          "aCurrent": "a (kounye a)",
+          "dotCurrent": "a · b (kounye a)"
+        }
+      }
+    },
+    "summary": {
+      "return": "Retounen",
+      "title": "Sesyon fini",
+      "subtitle": "Ou fini {answered}/{sessionSize} egzèsis",
+      "scoreLine": "{correct} kòrèk • {missed} rate • {pct}%",
+      "reviewTitle": "Revizyon & pwochen etap",
+      "reviewSubtitle": "Refresh pa efase pwogrè • Ou ka retounen sou kesyon yo tou.",
+      "toggleMissedHide": "Kache sa w rate yo",
+      "toggleMissedShow": "Montre sa w rate yo",
+      "backToQuestions": "Tounen sou kesyon yo",
+      "missedHidden": "Lis sa w rate yo kache.",
+      "urlTip": "Ti konsèy: chanje sijè/nivo mete ajou paramèt URL la."
+    },
+    "summaryCards": {
+      "score": "Nòt",
+      "niceWork": "Bon travay. Revize kesyon ou rate yo (anba) pou w fikse sa w aprann.",
+      "perfectRunTitle": "San fot ✅",
+      "perfectRunSubtitle": "Ou pa rate okenn kesyon nan sesyon sa a.",
+      "missedLabel": "Rate ({count})",
+      "yourAnswer": "Repons ou",
+      "expected": "Sa yo te atann",
+      "explanation": "Eksplikasyon"
+    },
+    "expectedSummary": {
+      "expected": "Atann",
+      "you": "Ou",
+      "delta": "Δ",
+      "chosen": "Ou chwazi",
+      "correct": "Kòrèk",
+      "missing": "Manke:",
+      "extra": "Anplis:",
+      "targetAStar": "Sib a*",
+      "tolerance": "Tolerans",
+      "targetDot": "Sib a·b",
+      "yourDot": "a·b pa ou",
+      "aMag": "|a|",
+      "min": "min",
+      "generic": "Gen done atann disponib."
+    },
+    "errors": {
+      "incompleteAnswer": "Repons lan pa konplè oswa li pa valab.",
+      "failedToSubmit": "Nou pa t ka soumèt",
+      "failedToLoad": "Nou pa t ka chaje kesyon an"
+    }
+  }
+}

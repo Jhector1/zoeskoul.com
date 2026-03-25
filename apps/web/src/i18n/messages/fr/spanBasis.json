@@ -1,0 +1,72 @@
+{
+
+"SpanBasis": {
+    "title": "Base • Sous-espace • Enveloppe ({mode})",
+    "subtitle": "Fais glisser a et b, ou saisis des valeurs. Puis façonne x = αa + βb.",
+    "buttons": {
+      "reset": "Réinitialiser",
+      "randomIndependent": "Aléatoire (indépendants)",
+      "makeDependent": "Rendre dépendants",
+      "snap": "Aimanter α/β"
+    },
+    "toggles": {
+      "showSpan": "Afficher le sous-espace (droite/plan)",
+      "showCell": "Afficher la cellule (2D)",
+      "depthMode": "Mode profondeur (glisser Z)"
+    },
+    "vectors": {
+      "title": "Définir les vecteurs",
+      "a": "a",
+      "b": "b",
+      "xyz": "x, y, z"
+    },
+    "mix": {
+      "title": "Coefficients de combinaison",
+      "play": "Lecture",
+      "pause": "Pause",
+      "speed": "vitesse",
+      "alpha": "α",
+      "beta": "β"
+    },
+    "target": {
+      "title": "Mode cible",
+      "subtitle": "Essaie de faire correspondre x à t (surveille l’erreur).",
+      "on": "On",
+      "newTarget": "Nouvelle cible",
+      "setTargetEqualsX": "Définir la cible = x actuel",
+      "error": "erreur ‖x − t‖ ="
+    },
+    "live": {
+      "title": "Données en direct",
+      "a": "a",
+      "b": "b",
+      "x": "x = αa + βb",
+      "independent": "Indépendants ?",
+      "independentYes": "Oui (indépendants)",
+      "dependentNo": "Non (dépendants)",
+      "spanDim": "Dimension de l’enveloppe",
+      "angle": "Angle(a,b)",
+      "det": "det(a,b)",
+      "area": "aire={value}",
+      "crossMag": "‖a×b‖",
+      "normal": "normale n = a×b",
+      "tip": "Astuce : si a et b deviennent colinéaires, det (ou a×b) → 0, et l’enveloppe se réduit à une droite."
+    },
+    "overlay": {
+      "spanCollapses": "l’enveloppe s’effondre → une droite (dimension 1)",
+      "cellLattice": "cellule (parallélogramme) = une “tuile” du réseau",
+      "combo": "x = αa + βb (α={alpha}, β={beta})",
+      "targetLabel": "cible t",
+      "badgeDependent": "Dim(enveloppe) = 1 (droite). det≈0 → pas une base de R².",
+      "badgeIndependent": "Dim(enveloppe) = 2. det={det} → {a,b} est une base de R².",
+      "error": "erreur‖x−t‖={value}"
+    },
+    "overlay3d": {
+      "plane": "span{a,b} = un plan",
+      "combo": "x = αa + βb (α={alpha}, β={beta})",
+      "target": "cible t (erreur={value})",
+      "badgeDependent": "Dim(enveloppe) = 1 (droite) • base = n’importe quel vecteur direction non nul",
+      "badgeIndependent": "Dim(enveloppe) = 2 (plan) • {a,b} est une base de ce plan"
+    }
+  }
+}

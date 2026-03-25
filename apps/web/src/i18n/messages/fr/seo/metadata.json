@@ -1,0 +1,227 @@
+{
+  "seo": {
+    "site": {
+      "name": "{appName}",
+      "shortName": "{appName}",
+      "defaultOgAlt": "Plateforme d’apprentissage {appName}"
+    },
+    "shared": {
+      "keywords": [
+        "{appName}",
+        "Learnoir",
+        "programmation",
+        "python",
+        "algèbre linéaire",
+        "mathématiques",
+        "IA",
+        "cybersécurité",
+        "langues",
+        "apprentissage interactif",
+        "apprentissage en ligne",
+        "exercices de code"
+      ]
+    },
+    "routes": {
+      "home": {
+        "title": "{appName} — Apprenez la programmation, les maths, l’IA, les langues et plus encore",
+        "description": "{appName} est une plateforme d’apprentissage multilingue pour la programmation, les mathématiques, l’IA, la cybersécurité et les langues, avec des leçons interactives, des modules de pratique et des parcours guidés.",
+        "ogTitle": "{appName} — Apprenez la programmation, les maths, l’IA, les langues et plus encore",
+        "ogDescription": "Plateforme d’apprentissage multilingue avec leçons interactives, pratique guidée et parcours structurés.",
+        "twitterTitle": "{appName} — Apprenez la programmation, les maths, l’IA, les langues et plus encore",
+        "twitterDescription": "Leçons interactives, pratique guidée et parcours d’apprentissage multilingues."
+      },
+      "billing": {
+        "title": "Tarifs — {appName}",
+        "description": "Découvrez les offres {appName} et débloquez des parcours guidés, des modules de pratique et du contenu éducatif multilingue.",
+        "ogTitle": "Tarifs {appName}",
+        "ogDescription": "Comparez les offres {appName} et débloquez des parcours guidés et des modules de pratique.",
+        "twitterTitle": "Tarifs — {appName}",
+        "twitterDescription": "Découvrez les offres {appName} pour les apprenants."
+      },
+      "sandbox": {
+        "title": "Sandbox — {appName}",
+        "description": "Découvrez des démos et expériences publiques de {appName}.",
+        "ogTitle": "Sandbox — {appName}",
+        "ogDescription": "Démos et expériences publiques de {appName}.",
+        "twitterTitle": "Sandbox — {appName}",
+        "twitterDescription": "Découvrez des démos et expériences publiques."
+      },
+      "contact": {
+        "title": "Contact — {appName}",
+        "description": "Contactez {appName} pour l’assistance, les partenariats et vos questions sur la plateforme d’apprentissage.",
+        "ogTitle": "Contacter {appName}",
+        "ogDescription": "Prenez contact avec {appName}.",
+        "twitterTitle": "Contact — {appName}",
+        "twitterDescription": "Contactez {appName}."
+      },
+      "legal-index": {
+        "title": "Paj legal — {appName}",
+        "description": "Li règleman legal yo, enfòmasyon sou vi prive, kondisyon yo, ak règ platfòm {appName}.",
+        "ogTitle": "Paj legal — {appName}",
+        "ogDescription": "Règleman legal ak règ platfòm {appName}.",
+        "twitterTitle": "Paj legal — {appName}",
+        "twitterDescription": "Règleman legal ak règ platfòm {appName}."
+      },
+      "terms": {
+        "title": "Kondisyon sèvis — {appName}",
+        "description": "Li kondisyon sèvis {appName} pou itilizasyon platfòm nan, kontni an, abònman yo, ak zouti aprantisaj yo.",
+        "ogTitle": "Kondisyon sèvis — {appName}",
+        "ogDescription": "Li kondisyon pou itilize {appName}.",
+        "twitterTitle": "Kondisyon sèvis — {appName}",
+        "twitterDescription": "Li kondisyon pou itilize {appName}."
+      },
+      "privacy": {
+        "title": "Règleman sou vi prive — {appName}",
+        "description": "Li règleman sou vi prive {appName} epi aprann kijan done pèsonèl yo ranmase, itilize, epi pwoteje.",
+        "ogTitle": "Règleman sou vi prive — {appName}",
+        "ogDescription": "Aprann kijan {appName} jere done itilizatè yo.",
+        "twitterTitle": "Règleman sou vi prive — {appName}",
+        "twitterDescription": "Aprann kijan {appName} jere done itilizatè yo."
+      },
+      "cookies": {
+        "title": "Règleman sou bonbon yo — {appName}",
+        "description": "Aprann kijan {appName} itilize bonbon, depo lokal, ak lòt teknoloji ki sanble.",
+        "ogTitle": "Règleman sou bonbon yo — {appName}",
+        "ogDescription": "Aprann kijan bonbon ak lòt teknoloji ki sanble yo itilize sou {appName}.",
+        "twitterTitle": "Règleman sou bonbon yo — {appName}",
+        "twitterDescription": "Aprann kijan bonbon yo itilize sou {appName}."
+      },
+      "refund": {
+        "title": "Règleman ranbousman — {appName}",
+        "description": "Gade règ pou anilasyon, renouvèlman, ak ranbousman pou plan peye ak acha sou {appName}.",
+        "ogTitle": "Règleman ranbousman — {appName}",
+        "ogDescription": "Li règleman ranbousman ak anilasyon {appName}.",
+        "twitterTitle": "Règleman ranbousman — {appName}",
+        "twitterDescription": "Li règleman ranbousman ak anilasyon {appName}."
+      },
+      "acceptable-use": {
+        "title": "Règleman itilizasyon akseptab — {appName}",
+        "description": "Gade règ pou itilize {appName} yon fason legal ak an sekirite, tankou itilizasyon kont, kontni, ak sistèm yo.",
+        "ogTitle": "Règleman itilizasyon akseptab — {appName}",
+        "ogDescription": "Li règ itilizasyon akseptab pou {appName}.",
+        "twitterTitle": "Règleman itilizasyon akseptab — {appName}",
+        "twitterDescription": "Li règ itilizasyon akseptab pou {appName}."
+      },
+      "community": {
+        "title": "Gid kominote a — {appName}",
+        "description": "Aprann sa kominote a atann pou patisipasyon ki respekte lòt moun epi ki konstriktif sou {appName}.",
+        "ogTitle": "Gid kominote a — {appName}",
+        "ogDescription": "Règ ak atant kominote a sou {appName}.",
+        "twitterTitle": "Gid kominote a — {appName}",
+        "twitterDescription": "Règ ak atant kominote a sou {appName}."
+      },
+      "dmca": {
+        "title": "Règleman dwa otè ak DMCA — {appName}",
+        "description": "Li règleman dwa otè ak DMCA pou voye avi epi reponn reklamasyon vyolasyon sou {appName}.",
+        "ogTitle": "Règleman dwa otè ak DMCA — {appName}",
+        "ogDescription": "Règleman dwa otè ak DMCA pou {appName}.",
+        "twitterTitle": "Règleman dwa otè ak DMCA — {appName}",
+        "twitterDescription": "Règleman dwa otè ak DMCA pou {appName}."
+      },
+      "ai-policy": {
+        "title": "Règleman itilizasyon IA — {appName}",
+        "description": "Aprann kijan fonksyon ki mache ak IA sou {appName} ka itilize ak ki limit ki aplikab.",
+        "ogTitle": "Règleman itilizasyon IA — {appName}",
+        "ogDescription": "Règ pou itilize fonksyon IA sou {appName}.",
+        "twitterTitle": "Règleman itilizasyon IA — {appName}",
+        "twitterDescription": "Règ pou itilize fonksyon IA sou {appName}."
+      },
+      "academic-integrity": {
+        "title": "Règleman entegrite akademik — {appName}",
+        "description": "Gade atant sou onètete pou evalyasyon, devwa, ak sètifikasyon sou {appName}.",
+        "ogTitle": "Règleman entegrite akademik — {appName}",
+        "ogDescription": "Atant entegrite pou aprenan yo sou {appName}.",
+        "twitterTitle": "Règleman entegrite akademik — {appName}",
+        "twitterDescription": "Atant entegrite pou aprenan yo sou {appName}."
+      },
+      "data-rights": {
+        "title": "Règleman sou dwa done — {appName}",
+        "description": "Aprann sou dwa vi prive, demann aksè, demann efasman, ak dwa sou done yo sou {appName}.",
+        "ogTitle": "Règleman sou dwa done — {appName}",
+        "ogDescription": "Enfòmasyon sou vi prive ak dwa done pou {appName}.",
+        "twitterTitle": "Règleman sou dwa done — {appName}",
+        "twitterDescription": "Enfòmasyon sou vi prive ak dwa done pou {appName}."
+      },
+      "online-python-compiler": {
+        "title": "Compilateur Python en ligne — {appName}",
+        "description": "Écrivez, exécutez et testez du code Python en ligne avec {appName}.",
+        "ogTitle": "Compilateur Python en ligne — {appName}",
+        "ogDescription": "Écrivez, exécutez et testez du code Python en ligne avec {appName}.",
+        "twitterTitle": "Compilateur Python en ligne — {appName}",
+        "twitterDescription": "Écrivez, exécutez et testez du code Python en ligne avec {appName}."
+      },
+      "online-java-compiler": {
+        "title": "Compilateur Java en ligne — {appName}",
+        "description": "Écrivez, compilez et exécutez du code Java en ligne avec {appName}.",
+        "ogTitle": "Compilateur Java en ligne — {appName}",
+        "ogDescription": "Écrivez, compilez et exécutez du code Java en ligne avec {appName}.",
+        "twitterTitle": "Compilateur Java en ligne — {appName}",
+        "twitterDescription": "Écrivez, compilez et exécutez du code Java en ligne avec {appName}."
+      },
+      "online-javascript-editor": {
+        "title": "Éditeur JavaScript en ligne — {appName}",
+        "description": "Écrivez et exécutez du JavaScript en ligne avec l’éditeur de code {appName}.",
+        "ogTitle": "Éditeur JavaScript en ligne — {appName}",
+        "ogDescription": "Écrivez et exécutez du JavaScript en ligne avec l’éditeur de code {appName}.",
+        "twitterTitle": "Éditeur JavaScript en ligne — {appName}",
+        "twitterDescription": "Écrivez et exécutez du JavaScript en ligne avec l’éditeur de code {appName}."
+      },
+      "online-c-compiler": {
+        "title": "Compilateur C en ligne — {appName}",
+        "description": "Écrivez, compilez et exécutez du code C en ligne avec {appName}.",
+        "ogTitle": "Compilateur C en ligne — {appName}",
+        "ogDescription": "Écrivez, compilez et exécutez du code C en ligne avec {appName}.",
+        "twitterTitle": "Compilateur C en ligne — {appName}",
+        "twitterDescription": "Écrivez, compilez et exécutez du code C en ligne avec {appName}."
+      },
+      "online-cpp-compiler": {
+        "title": "Compilateur C++ en ligne — {appName}",
+        "description": "Écrivez, compilez et exécutez du code C++ en ligne avec {appName}.",
+        "ogTitle": "Compilateur C++ en ligne — {appName}",
+        "ogDescription": "Écrivez, compilez et exécutez du code C++ en ligne avec {appName}.",
+        "twitterTitle": "Compilateur C++ en ligne — {appName}",
+        "twitterDescription": "Écrivez, compilez et exécutez du code C++ en ligne avec {appName}."
+      },
+      "online-sql-editor": {
+        "title": "Éditeur SQL en ligne — {appName}",
+        "description": "Écrivez et exécutez des requêtes SQL en ligne avec l’éditeur SQL {appName}.",
+        "ogTitle": "Éditeur SQL en ligne — {appName}",
+        "ogDescription": "Écrivez et exécutez des requêtes SQL en ligne avec l’éditeur SQL {appName}.",
+        "twitterTitle": "Éditeur SQL en ligne — {appName}",
+        "twitterDescription": "Écrivez et exécutez des requêtes SQL en ligne avec l’éditeur SQL {appName}."
+      }
+    },
+    "subjects": {
+      "python": {
+        "title": "Apprendre Python — {appName}",
+        "description": "Commencez à apprendre Python avec des leçons interactives, une pratique guidée et des modules structurés pour débutants.",
+        "ogTitle": "Apprendre Python — {appName}",
+        "ogDescription": "Apprentissage interactif de Python avec leçons et pratique guidée."
+      },
+      "linear-algebra": {
+        "title": "Apprendre l’algèbre linéaire — {appName}",
+        "description": "Développez des bases solides sur les vecteurs, matrices, transformations et la résolution de problèmes avec des leçons guidées et de la pratique.",
+        "ogTitle": "Apprendre l’algèbre linéaire — {appName}",
+        "ogDescription": "Leçons guidées d’algèbre linéaire avec pratique structurée."
+      },
+      "cybersecurity": {
+        "title": "Apprendre la cybersécurité — {appName}",
+        "description": "Découvrez les bases de la cybersécurité avec des leçons structurées, de la pratique guidée et des parcours d’apprentissage concrets.",
+        "ogTitle": "Apprendre la cybersécurité — {appName}",
+        "ogDescription": "Bases de la cybersécurité avec pratique structurée."
+      },
+      "haitian-creole": {
+        "title": "Apprendre le créole haïtien — {appName}",
+        "description": "Pratiquez le créole haïtien avec des leçons guidées, du vocabulaire, de l’écoute et des parcours d’apprentissage structurés.",
+        "ogTitle": "Apprendre le créole haïtien — {appName}",
+        "ogDescription": "Apprentissage structuré du créole haïtien avec pratique guidée."
+      },
+      "ai-chatgpt-kickstart": {
+        "title": "Apprendre l’IA et ChatGPT — {appName}",
+        "description": "Développez une culture pratique de l’IA avec des leçons guidées sur ChatGPT, le prompting, l’usage sûr et les workflows concrets.",
+        "ogTitle": "Apprendre l’IA et ChatGPT — {appName}",
+        "ogDescription": "Apprentissage pratique de l’IA avec leçons guidées et usages sûrs."
+      }
+    }
+  }
+}

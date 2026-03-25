@@ -1,0 +1,45 @@
+{
+  "Header": {
+    "language": "Language",
+    "home": "Home",
+    "billing": "Billing",
+    "settings": "Settings",
+    "practice": "Learn & Practice",
+    "assignments": "Assignments",
+    "subjects": "Subjects",
+    "tagline": "Visual • Practice • Progress",
+    "startSession": "Playground",
+    "signIn": "Sign in",
+    "profile": "Profile",
+    "logout": "Log out",
+    "menu": "Menu",
+    "close": "Close",
+    "openSettings": "Open settings",
+
+    "settingsSubtitle": "Appearance & language",
+    "theme": "Theme",
+    "themeHint": "Light / Dark",
+
+    "sound": "Sound",
+    "tip": "Tip: Use Practice to track attempts, correct answers, and missed questions.",
+
+
+
+    "toggleMenu": "Toggle menu",
+    "fontSize": "Font size",
+    "fontSizeHint": "Adjust text scale",
+    "fontSmall": "A-",
+    "fontNormal": "A",
+    "fontLarge": "A+",
+    "soundHint": "Turn interface sounds on or off"
+  },
+  "UserMenu": {
+    "ariaLabel": "User menu",
+    "avatarAlt": "{name} avatar",
+    "profile": "Profile",
+    "progress": "Progress",
+    "logout": "Log out"
+  }
+
+
+}

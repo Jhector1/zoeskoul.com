@@ -1,0 +1,109 @@
+{
+  "topics": {
+    "python": {
+      "python-1": {
+        "errors_intro": {
+          "label": "Common Errors + Debugging: Read the Message, Fix the Code",
+          "summary": "Learn to recognize NameError, TypeError, and ValueError, then practice quick debugging patterns and safe conversions.",
+          "cards": {
+            "sketch": {
+              "title": "Common Errors: NameError, TypeError, and Debug Tricks"
+            },
+            "project": {
+              "title": "Project: Identify → Fix → Validate"
+            }
+          },
+          "projectSteps": {
+            "identify_error": {
+              "title": "Identify the error type (NameError vs TypeError vs ValueError)"
+            },
+            "fix_type_mismatch": {
+              "title": "Fix a type mismatch (convert and add numbers)"
+            },
+            "avoid_valueerror": {
+              "title": "Avoid ValueError with basic validation"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "py": {
+      "types": {
+        "errors": {
+          "title": "Common Errors: NameError, TypeError, and Debug Tricks",
+          "bodyMarkdown": "Mistakes are a normal part of programming.\n\nWhen Python raises an error, it’s giving you **information about what went wrong**.\nLearning to read errors is one of the fastest ways to improve.\n\nHere are three common ones beginners encounter.\n\n---\n\n## 1) NameError — using a variable that doesn’t exist\n\n~~~python\nprint(score)\n~~~\n\nIf the variable `score` was never created, Python cannot use it.\n\nCommon causes:\n- a typo: `scroe` instead of `score`\n- using a variable before assigning a value\n\n---\n\n## Try it\n\nRun this (it works):\n\n~~~python\nscore = 10\nprint(score)\n~~~\n\nNow delete the line:\n\n~~~python\nscore = 10\n~~~\n\nRun the code again.\nYou should see a **NameError** because the variable no longer exists.\n\n---\n\n## 2) TypeError — incompatible types\n\nSometimes values exist, but they **cannot be combined the way you tried**.\n\n~~~python\nage = input(\"Age: \")   # string\nprint(age + 1)         # 🚫 string + int\n~~~\n\nThe variable `age` contains **text**, not a number.\n\nFix it by converting the type:\n\n~~~python\nage = int(input(\"Age: \"))\nprint(age + 1)\n~~~\n\n---\n\n## 3) ValueError — invalid value for a conversion\n\n~~~python\nage = int(\"twelve\")  # 🚫 ValueError\n~~~\n\nPython is trying to convert text into a number, but the text **does not represent a valid number**.\n\nValid examples:\n\n~~~python\nint(\"12\")\nfloat(\"3.5\")\n~~~\n\nInvalid examples:\n\n~~~python\nint(\"twelve\")\nfloat(\"hello\")\n~~~\n\n---\n\n## A simple debugging technique\n\nWhen something looks wrong, inspect the value and its type.\n\n### Print the value\n~~~python\nprint(\"value:\", x)\n~~~\n\n### Print the type\n~~~python\nprint(\"type:\", type(x))\n~~~\n\nThis quickly reveals many beginner mistakes.\n\n---\n\n## Quick mental model\n\n- **NameError** → the variable doesn't exist\n- **TypeError** → the types don’t work together\n- **ValueError** → the value is not in the expected format\n\nLearning to interpret these messages will save you a lot of time while programming."
+        }
+      }
+    }
+  },
+  "quiz": {
+    "m1_types_errors_sc": {
+      "title": "Match the error to the problem",
+      "prompt": "A student runs this code:\n\n~~~python\nage = input(\"Age: \")\nprint(age + 1)\n~~~\n\nWhat error will Python raise?",
+      "options": {
+        "a": "NameError",
+        "b": "TypeError",
+        "c": "ValueError"
+      },
+      "hint": "input() returns a string, and you can’t add a string and an int."
+    },
+    "m1_err_nameerror_sc": {
+      "title": "NameError: label doesn’t exist",
+      "prompt": "What error do you get if you run this?\n\n~~~python\nprint(score)\n~~~\n\n(Assume `score` was never created.)",
+      "options": {
+        "a": "NameError",
+        "b": "TypeError",
+        "c": "ValueError"
+      },
+      "hint": "NameError happens when you use a variable name that doesn’t exist yet."
+    },
+    "m1_err_typeerror_sc": {
+      "title": "TypeError: types don’t mix",
+      "prompt": "A shopping app stores the item count as a number:\n\n~~~python\ncount = 3\nprint(\"Items: \" + count)\n~~~\n\nWhat error will this cause?",
+      "options": {
+        "a": "NameError",
+        "b": "TypeError",
+        "c": "ValueError"
+      },
+      "hint": "You can’t concatenate a string and an int. Convert with str(count)."
+    },
+    "m1_err_valueerror_sc": {
+      "title": "ValueError: invalid conversion",
+      "prompt": "A user typed `twelve` for their age.\n\nWhat happens here?\n\n~~~python\nage = int(\"twelve\")\n~~~",
+      "options": {
+        "a": "NameError",
+        "b": "TypeError",
+        "c": "ValueError"
+      },
+      "hint": "ValueError happens when conversion fails because the text isn’t a valid number."
+    },
+    "m1_err_debug_combo_sc": {
+      "title": "Best quick debug combo",
+      "prompt": "When something behaves weirdly, what’s the best quick debug combo for beginners?",
+      "options": {
+        "a": "Print the value and print the type",
+        "b": "Restart the computer",
+        "c": "Delete the file and rewrite everything"
+      },
+      "hint": "Value + type solves most beginner confusion fast."
+    },
+    "m1_err_fix_type_mismatch_code": {
+      "title": "Fix the type mismatch (add two numbers)",
+      "prompt": "A calculator app reads two numbers from the user.\n\nRead TWO inputs.\nConvert them to integers.\nPrint ONLY their sum.\n",
+      "hint": "int(a) and int(b)",
+      "starterCode": "a = input()\nb = input()\n# TODO: convert and print sum\n"
+    },
+    "m1_err_parse_age_safely_code": {
+      "title": "Avoid ValueError (basic validation)",
+      "prompt": "A website asks for age as text.\n\nRead ONE input (a string).\n\nRules:\n- If it looks like a whole number (digits only), convert it to int and print:\n  Next year = <age+1>\n- Otherwise print:\n  Invalid age",
+      "hint": "Use text.isdigit() to check. Then int(text).",
+      "starterCode": "text = input().strip()\n# TODO\n",
+      "runtime": {
+        "nextYearTemplate": "Next year = {age_next}",
+        "invalidAgeText": "Invalid age"
+      }
+    }
+  }
+}

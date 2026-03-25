@@ -1,0 +1,738 @@
+{
+  "LegalContent": {
+    "meta": {
+      "appName": "{appName}",
+      "dbaName": "{dbaName}",
+      "companyLegalName": "{companyLegalName}",
+      "companyAddress": "{companyAddress}",
+      "supportEmail": "{supportEmail}",
+      "privacyEmail": "{privacyEmail}",
+      "copyrightEmail": "{copyrightEmail}",
+      "dpoEmail": "{dpoEmail}",
+      "effectiveDate": "{effectiveDate}",
+      "lastUpdated": "{lastUpdated}"
+    },
+    "documents": {
+      "terms": {
+        "title": "Kondisyon sèvis",
+        "description": "Kondisyon sèvis sa yo gouvène fason moun gen aksè ak fason yo itilize {appName} ({dbaName}), tankou kont, abònman, kontni aprantisaj, anviwònman kòd, ak sèvis ki mache ansanm ak yo.",
+        "effectiveDate": "{effectiveDate}",
+        "lastUpdated": "{lastUpdated}",
+        "sections": {
+          "acceptance": {
+            "title": "1. Akseptasyon kondisyon sa yo",
+            "paragraphs": [
+              "Kondisyon sèvis sa yo gouvène aksè ou ak itilizasyon ou fè nan {appName} ({dbaName}), ansanm ak sit entènèt nou yo, aplikasyon nou yo, zouti aprantisaj yo, anviwònman kòd yo, evalyasyon yo, abònman yo, telechajman dijital yo, sètifika yo, ak sèvis ki mache avèk yo (ansanm nou rele yo “Sèvis yo”).",
+              "Lè ou gen aksè ak Sèvis yo oswa lè ou itilize yo, sa vle di ou dakò pou w respekte kondisyon sa yo. Si w ap itilize Sèvis yo pou yon òganizasyon, yon lekòl, yon patwon, oswa yon lòt antite, ou deklare ou gen otorizasyon pou mare antite sa a ak kondisyon sa yo, epi mo “ou” a vle di ni ou menm ni antite sa a."
+            ]
+          },
+          "company": {
+            "title": "2. Moun oswa konpayi k ap opere sèvis yo ak fason pou kontakte nou",
+            "paragraphs": [
+              "Sèvis yo opere pa {companyLegalName}, ki ap fè biznis sou non {appName} ({dbaName}).",
+              "Adrès biznis: {companyAddress}",
+              "Sipò jeneral: {supportEmail}"
+            ]
+          },
+          "services": {
+            "title": "3. Deskripsyon Sèvis yo",
+            "paragraphs": [
+              "{appName} ({dbaName}) bay yon platfòm edikatif sou entènèt ki ka gen ladan leson entèaktif, modil pratik, kestyonè, zouti kòd ak sandbox, swivi pwogrè, resous ou ka telechaje, zouti etid ki ede ak IA, sètifika, ak aksè pa abònman pou kontni prim.",
+              "Nou ka ajoute, retire, amelyore, sispann, oswa modifye nenpòt pati nan Sèvis yo nenpòt ki lè, tankou kontni, pri, disponiblite, fonksyonalite, entegrasyon, oswa aparèy nou sipòte."
+            ]
+          },
+          "eligibility": {
+            "title": "4. Elijiblite ak kont",
+            "paragraphs": [
+              "Ou dwe gen omwen 13 an, oswa laj minimòm lalwa egzije nan kote w ap viv la, pou itilize Sèvis yo. Si ou poko rive nan laj majorite kote w ap viv la, ou ka itilize Sèvis yo sèlman avèk pèmisyon ak sipèvizyon yon paran, yon gadyen, yon pwofesè, oswa yon lòt granmoun otorize.",
+              "Pou jwenn aksè ak kèk fonksyonalite, ou ka bezwen yon kont. Ou dakò pou bay enfòmasyon ki egzak, ajou, ak konplè, pou kenbe idantifyan ou yo an sekirite, epi pou mete enfòmasyon ou yo ajou vit si yo chanje. Ou responsab pou tout aktivite ki fèt anba kont ou."
+            ]
+          },
+          "subscriptions": {
+            "title": "5. Plan peye, fakti, ak renouvèlman",
+            "paragraphs": [
+              "Gen kèk Sèvis ki mande peman, tankou abònman, modil prim, telechajman, oswa lòt fonksyonalite peye. Nou ka itilize sèvis peman twazyèm pati tankou Stripe pou kolekte ak trete peman yo."
+            ],
+            "list": [
+              "Plan peye yo ka renouvle otomatikman si yo pa anile anvan dat renouvèlman an.",
+              "Taks ka aplike selon adrès fakti ou oswa lwa ki aplikab yo.",
+              "Nou ka chanje pri yo pou lavni avèk yon avi rezonab lè sa nesesè.",
+              "Si peman pa fèt, sa ka lakòz sispansyon, desann nivo sèvis la, oswa anilasyon aksè peye a."
+            ]
+          },
+          "license": {
+            "title": "6. Lisans limite ak pwopriyete entelektyèl",
+            "paragraphs": [
+              "Sèvis yo, tankou materyèl kou yo, leson yo, egzèsis yo, kestyonè yo, kontni ki pwodwi, editè kòd yo, desen ak estrikti paj yo, tèks yo, grafik yo, logo yo, odyo, videyo, ak lojisyèl yo, se byen {appName} ({dbaName}) oswa yo itilize anba lisans, epi yo pwoteje pa lwa sou pwopriyete entelektyèl.",
+              "Anba kondisyon sa yo, nou ba ou yon lisans limite, ki pa eksklizif, ki pa transfere, epi nou ka revoke li, pou gen aksè ak itilize Sèvis yo pou itilizasyon pèsonèl, entèn, edikatif, oswa lòt itilizasyon otorize. Ou pa gen dwa repwodui, vann ankò, distribye, modifye, montre piblikman, oswa eksplwate komèsyalman Sèvis yo sof si nou bay pèmisyon alekri."
+            ]
+          },
+          "user-content": {
+            "title": "7. Kontni itilizatè",
+            "paragraphs": [
+              "Ou ka soumèt oswa telechaje kontni tankou kòd, repons, pwonpt, kòmantè, mesaj, devwa, kaptire ekran, oswa lòt materyèl (“Kontni itilizatè”). Ou rete pwopriyetè Kontni itilizatè ou a, anba dwa ou ban nou yo jan sa dekri anba a.",
+              "Ou ban nou yon lisans mondyal, ki pa eksklizif, san w pa mande redevans, pou òganize, estoke, repwodui, trete, adapte, montre, ak itilize Kontni itilizatè ou a sèlman nan mezi sa nesesè pou opere, sekirize, amelyore, epi bay Sèvis yo, tankou modération, sovgad, analiz, ak sipò kliyan.",
+              "Ou deklare ou gen tout dwa ki nesesè pou soumèt Kontni itilizatè ou a e ke kontni sa a pa vyole okenn lwa ni dwa okenn lòt moun."
+            ]
+          },
+          "sandbox": {
+            "title": "8. Anviwònman kòd ak restriksyon teknik",
+            "paragraphs": [
+              "Gen kèk pati nan Sèvis yo ki ka gen sandbox kòd, tèminal, anviwònman ekzekisyon, zouti telechajman, oswa entegrasyon. Zouti sa yo fèt sèlman pou aprantisaj ak itilizasyon pwodwi a ki otorize.",
+              "Nou ka siveye, limite, sispann, oswa mete fen nan aksè ak fonksyonalite teknik yo pou pwoteje itilizatè yo, entegrite platfòm nan, ak disponiblite sèvis la."
+            ],
+            "list": [
+              "Ou pa gen dwa telechaje malveyan, ransomware, spyware, oswa kòd destriktif.",
+              "Ou pa gen dwa fè tès, analize, reverse engineer, oswa kontoune sekirite platfòm nan.",
+              "Ou pa gen dwa abize resous kalkil, bandwidth, depo, oswa ekzekisyon.",
+              "Ou pa gen dwa itilize Sèvis yo pou jwenn aksè ak sistèm, done, oswa rezo san otorizasyon."
+            ]
+          },
+          "acceptable-use": {
+            "title": "9. Itilizasyon akseptab",
+            "paragraphs": [
+              "Ou dakò pou pa fè move itilizasyon Sèvis yo. Konpòtman sa yo entèdi:"
+            ],
+            "list": [
+              "vyole lalwa oswa dwa lòt moun;",
+              "anbete, menase, maltrete, oswa pran pòz lòt moun;",
+              "rale oswa kopye kontni an mas san pèmisyon;",
+              "kontoune pawa pou peye oswa kontwòl aksè;",
+              "itilize bots oswa automatisation pou deranje platfòm nan;",
+              "plagye oswa fè krwar travay pa ou nan evalyasyon;",
+              "poste kontni difamatwa, rayisab, obsèn, oswa ilegal."
+            ]
+          },
+          "disclaimers": {
+            "title": "10. Avètisman sou edikasyon ak sèvis la",
+            "paragraphs": [
+              "Sèvis yo disponib pou rezon edikatif ak enfòmasyon sèlman. Nou pa garanti okenn rezilta aprantisaj espesifik, okenn rezilta sètifikasyon, okenn rezilta egzamen, okenn opòtinite travay, okenn nivo revni, ni okenn siksè biznis.",
+              "Sèvis yo ka genyen erè, entèripsyon, reta, pinèz, kontni ki pa egzak, oswa repons ki pa konplè, sitou kote kontni an soti nan itilizatè oswa kote IA ede nan li. Itilizasyon ou fè nan Sèvis yo fèt sou pwòp risk ou."
+            ]
+          },
+          "termination": {
+            "title": "11. Sispansyon ak revokasyon",
+            "paragraphs": [
+              "Nou ka sispann, limite, oswa mete fen nan aksè ou si nou gen rezon pou kwè ou vyole kondisyon sa yo, kreye risk oswa responsablite, fè lòt itilizatè mal, oswa abize Sèvis yo. Nou ka tou dezaktive kontni, modil, oswa fonksyonalite pou respekte lalwa, pwoteje platfòm nan, oswa reponn a kestyon sekirite.",
+              "Ou ka sispann itilize Sèvis yo nenpòt ki lè. Lè ou anile yon abònman, sa sispann renouvèlman yo nan lavni men li pa ba ou dwa pou mande ranbousman sou peryòd ki deja kòmanse, sof si lalwa mande sa oswa si sa ekri nan politik ranbousman nou an."
+            ]
+          },
+          "liability": {
+            "title": "12. Limit responsablite",
+            "paragraphs": [
+              "Nan tout limit lalwa pèmèt, {appName} ({dbaName}) ansanm ak afilye li yo, responsab li yo, anplwaye li yo, kontraktè li yo, moun ki ba li lisans, ak founisè li yo pa responsab pou okenn domaj endirèk, aksidantèl, konsekansyèl, espesyal, egzanplè, oswa pinitif, ni pou okenn pèt pwofi, revni, done, kliyan, oswa opòtinite biznis ki soti oswa ki gen rapò ak Sèvis yo.",
+              "Nan tout limit lalwa pèmèt, responsablite total nou pou nenpòt reklamasyon ki gen rapò ak Sèvis yo pap depase kantite ki pi gwo ant: (a) kantite lajan ou te peye nou nan 12 mwa anvan evènman ki lakòz reklamasyon an, oswa (b) 100 dola ameriken."
+            ]
+          },
+          "indemnity": {
+            "title": "13. Endemnizasyon",
+            "paragraphs": [
+              "Ou dakò pou defann, dedomaje, epi pwoteje {appName} ({dbaName}) ansanm ak afilye li yo, responsab li yo, anplwaye li yo, ajan li yo, kontraktè li yo, moun ki ba li lisans, ak founisè li yo kont reklamasyon, responsablite, domaj, pèt, ak depans ki soti nan itilizasyon ou fè nan Sèvis yo, Kontni itilizatè ou a, vyolasyon ou fè sou kondisyon sa yo, oswa vyolasyon ou fè sou nenpòt lwa oswa dwa yon lòt moun."
+            ]
+          },
+          "changes": {
+            "title": "14. Chanjman nan kondisyon sa yo",
+            "paragraphs": [
+              "Nou ka mete ajou kondisyon sa yo detanzantan. Lè nou fè sa, nou pral mete ajou dat “Dènye mizajou” a epi, kote lalwa mande sa, nou ka bay plis avi. Si ou kontinye itilize Sèvis yo apre kondisyon yo vin an aplikasyon, sa vle di ou aksepte yo."
+            ]
+          },
+          "governing-law": {
+            "title": "15. Lwa ki gouvène yo",
+            "paragraphs": [
+              "Kondisyon sa yo gouvène pa lwa jiridiksyon kote {companyLegalName} tabli a, san konsidere prensip konfli lalwa yo, sof kote lwa pwoteksyon konsomatè obligatwa mande yon lòt rezilta."
+            ]
+          },
+          "contact": {
+            "title": "16. Kontak",
+            "paragraphs": [
+              "Kesyon sou kondisyon sa yo ka voye bay {supportEmail}."
+            ]
+          }
+        }
+      },
+      "privacy": {
+        "title": "Règleman sou vi prive",
+        "description": "Règleman sou vi prive sa a eksplike kijan {appName} ({dbaName}) kolekte, itilize, pataje, konsève, epi pwoteje enfòmasyon pèsonèl.",
+        "effectiveDate": "{effectiveDate}",
+        "lastUpdated": "{lastUpdated}",
+        "sections": {
+          "scope": {
+            "title": "1. Dimansyon",
+            "paragraphs": [
+              "Règleman sa a esplike kijan {appName} ({dbaName}) kolekte, itilize, estoke, pataje, epi pwoteje enfòmasyon pèsonèl lè ou antre sou Sèvis yo oswa lè ou itilize yo.",
+              "Règleman sa a aplike pou enfòmasyon nou kolekte atravè sit entènèt nou yo, aplikasyon nou yo, kominikasyon pa imèl, chanèl sipò kliyan yo, pwosesis peman yo, ak lòt fason ou kominike avèk nou."
+            ]
+          },
+          "information-we-collect": {
+            "title": "2. Enfòmasyon nou kolekte",
+            "paragraphs": [
+              "Nou ka kolekte kategori enfòmasyon sa yo:"
+            ],
+            "list": [
+              "Enfòmasyon sou kont: non, adrès imèl, non itilizatè, foto pwofil, idantifyan kont, done ki gen rapò ak modpas oswa otantifikasyon, ak preferans.",
+              "Enfòmasyon aprantisaj: enskripsyon, pwogrè nan modil yo, estati konplesyon, rezilta kestyonè, soumisyon kòd, lè aktivite fèt, sètifika, nòt, atik sove, ak istwa evalyasyon.",
+              "Done teknik ak done itilizasyon: adrès IP, idantifyan aparèy, kalite navigatè, sistèm operasyon, lang, zòn orè, paj yo te vizite, klik yo, dire sesyon, sous referans, jounal pèfòmans, ak evènman sekirite.",
+              "Done peman ak tranzaksyon: estati abònman, plan fakti, fakti yo, peyi pou fakti a, id tranzaksyon founisè peman an, ak siyal kont fwod. Nou pa estoke nimewo kat labank yo an antye.",
+              "Kominikasyon: demann sipò, repons sondaj, fidbak itilizatè, ak lòt kominikasyon ou voye ban nou.",
+              "Kontni ki pwodui ak entèraksyon ak IA: pwonpt, repons, modifikasyon, fidbak, ak lòt done ki gen rapò ak fonksyonalite IA lè yo disponib."
+            ]
+          },
+          "sources": {
+            "title": "3. Kijan nou kolekte enfòmasyon",
+            "paragraphs": [
+              "Nou kolekte enfòmasyon dirèkteman nan men ou, otomatikman atravè Sèvis yo, ak nan men twazyèm pati."
+            ],
+            "list": [
+              "Dirèkteman nan men ou lè ou enskri, lè ou pran abònman, lè ou telechaje kontni, oswa lè ou kontakte sipò.",
+              "Otomatikman atravè bonbon, jounal, analiz, ak zouti sekirite.",
+              "Nan men founisè sèvis ak entegrasyon tankou pwosesisè peman, founisè otantifikasyon, zouti imèl, zouti analiz, founisè hosting, zouti prevansyon fwod, ak administratè edikatif oswa òganizasyonèl kote sa aplikab."
+            ]
+          },
+          "use-of-information": {
+            "title": "4. Kijan nou itilize enfòmasyon yo",
+            "paragraphs": [
+              "Nou ka itilize enfòmasyon pèsonèl yo pou:"
+            ],
+            "list": [
+              "bay, opere, ak amelyore Sèvis yo;",
+              "kreye ak jere kont ak abònman yo;",
+              "bay leson, evalyasyon, zouti kòd, ak sètifika;",
+              "swiv pwogrè, pèsonalize eksperyans aprantisaj yo, ak rekòmande kontni;",
+              "otantifye itilizatè yo epi sekirize Sèvis yo;",
+              "trete peman yo epi anpeche fwod;",
+              "reponn a demann sipò epi kominike avèk ou;",
+              "analize pèfòmans, itilizasyon, ak kalite pwodwi a;",
+              "fè respekte kondisyon ak règleman nou yo;",
+              "respekte obligasyon legal yo epi rezoud konfli yo."
+            ]
+          },
+          "legal-bases": {
+            "title": "5. Baz legal pou tretman an",
+            "paragraphs": [
+              "Lè lwa aplikab la mande yon baz legal pou trete done, nou konte sou youn oswa plis nan baz sa yo:"
+            ],
+            "list": [
+              "ekzekisyon yon kontra avèk ou;",
+              "enterè lejitim nou genyen pou opere ak amelyore Sèvis yo;",
+              "konsantman ou, kote sa nesesè;",
+              "respè obligasyon legal yo;",
+              "pwoteksyon enterè vital ak prevansyon abi oswa fwod."
+            ]
+          },
+          "sharing": {
+            "title": "6. Kijan nou pataje enfòmasyon yo",
+            "paragraphs": [
+              "Nou pa vann enfòmasyon pèsonèl yo pou lajan. Nou ka pataje enfòmasyon ak:"
+            ],
+            "list": [
+              "vandè ak founisè sèvis ki ede opere Sèvis yo;",
+              "pwosesisè peman ak founisè prevansyon fwod;",
+              "founisè otantifikasyon ak idantite;",
+              "founisè enfrastrikti cloud, depo, analiz, ak kominikasyon;",
+              "konseye pwofesyonèl, oditè, ak asirè;",
+              "otorite lapolis, regilatè, tribinal, oswa lòt pati kote lalwa mande sa oswa kote sa nesesè pou pwoteje dwa, sekirite, oswa platfòm nan;",
+              "antite ki vin pran plas nou nan kad fizyon, vant, finansman, akizisyon, oswa restriktirasyon."
+            ]
+          },
+          "retention": {
+            "title": "7. Konbyen tan nou kenbe done yo",
+            "paragraphs": [
+              "Nou kenbe enfòmasyon pèsonèl yo pandan tan ki nesesè pou bay Sèvis yo, respekte obligasyon legal yo, rezoud konfli yo, fè respekte akò yo, kenbe dosye, epi pwoteje platfòm nan. Dire sa yo depann de kalite enfòmasyon an, rezon li te kolekte, egzijans legal yo, ak bezwen operasyonèl yo."
+            ]
+          },
+          "security": {
+            "title": "8. Sekirite",
+            "paragraphs": [
+              "Nou itilize mezi administratif, teknik, ak òganizasyonèl ki fèt pou pwoteje enfòmasyon pèsonèl yo, tankou kontwòl aksè, koneksyon chifre, jounal, siveyans, jesyon founisè, ak pwosesis revizyon sekirite. Pa gen okenn sistèm ki totalman an sekirite, epi nou pa ka garanti sekirite absoli."
+            ]
+          },
+          "international-transfers": {
+            "title": "9. Transfè done entènasyonal",
+            "paragraphs": [
+              "Nou ka trete oswa estoke enfòmasyon nan peyi ki pa peyi kote ou rete a. Lè sa nesesè, nou itilize mezi pwoteksyon ki apwopriye pou transfè entènasyonal yo, tankou pwoteksyon kontra oswa lòt mekanis legal."
+            ]
+          },
+          "children": {
+            "title": "10. Timoun ak minè",
+            "paragraphs": [
+              "Sèvis yo pa fèt pou timoun ki poko rive nan laj minimòm lalwa pèmèt san otorizasyon paran, gadyen, oswa responsab edikatif ki apwopriye. Si ou panse yon timoun te bay enfòmasyon pèsonèl an vyolasyon lalwa aplikab, kontakte nou epi n ap pran mezi ki apwopriye."
+            ]
+          },
+          "rights": {
+            "title": "11. Dwa ou sou vi prive",
+            "paragraphs": [
+              "Selon jiridiksyon ou, ou ka gen dwa pou jwenn aksè, korije, efase, limite, opoze ak, oswa ekspòte enfòmasyon pèsonèl ou yo, epi pou retire konsantman ou kote tretman an baze sou konsantman. Gade plis detay nan Règleman sou dwa done nou an."
+            ]
+          },
+          "cookies": {
+            "title": "12. Bonbon ak teknoloji ki sanble",
+            "paragraphs": [
+              "Nou itilize bonbon ak teknoloji ki sanble pou kenbe ou konekte, sonje preferans ou yo, sekirize Sèvis yo, mezire pèfòmans, konprann itilizasyon an, epi amelyore eksperyans itilizatè a. Gade Règleman sou bonbon nou an pou plis detay."
+            ]
+          },
+          "changes": {
+            "title": "13. Chanjman nan Règleman sa a",
+            "paragraphs": [
+              "Nou ka mete ajou Règleman sou vi prive sa a detanzantan. Dat “Dènye mizajou” a montre dènye revizyon an. Si chanjman yo enpòtan, nou ka bay plis avi kote lalwa mande sa."
+            ]
+          },
+          "contact": {
+            "title": "14. Kontak",
+            "paragraphs": [
+              "Kesyon ak demann sou vi prive ka voye bay {privacyEmail}."
+            ]
+          }
+        }
+      },
+      "cookies": {
+        "title": "Règleman sou bonbon yo",
+        "description": "Règleman sou bonbon sa a esplike kijan {appName} ({dbaName}) itilize bonbon, depo lokal, ak lòt teknoloji ki sanble.",
+        "effectiveDate": "{effectiveDate}",
+        "lastUpdated": "{lastUpdated}",
+        "sections": {
+          "what-are-cookies": {
+            "title": "1. Ki sa bonbon yo ye",
+            "paragraphs": [
+              "Bonbon yo se ti fichye tèks yo mete sou aparèy ou lè ou vizite yon sit entènèt. Gen lòt teknoloji ki sanble tankou depo lokal, pixel, SDK, tag, ak idantifyan aparèy ki ka sèvi pou menm objektif yo. Nan Règleman sa a, nou rele tout sa yo “bonbon” sof si gen bezwen fè yon diferans."
+            ]
+          },
+          "why-we-use-cookies": {
+            "title": "2. Poukisa nou itilize bonbon",
+            "paragraphs": [
+              "Nou itilize bonbon pou:"
+            ],
+            "list": [
+              "kenbe itilizatè yo konekte epi mentni sesyon yo;",
+              "sonje preferans tankou lang, tèm, ak paramèt aksè fasil;",
+              "amelyore navigasyon, pèfòmans, ak fyab;",
+              "mezire itilizasyon, trafik, ak fason moun itilize fonksyonalite yo;",
+              "ede anpeche fwod ak abi;",
+              "sipòte fakti, otantifikasyon, ak pwosesis sekirite kont yo."
+            ]
+          },
+          "types": {
+            "title": "3. Kalite bonbon nou ka itilize",
+            "list": [
+              "Bonbon ki estrikteman nesesè: yo nesesè pou fonksyonalite debaz, sekirite, koneksyon, navigasyon, ak livrezon sèvis la.",
+              "Bonbon preferans: yo sèvi pou sonje paramèt tankou lang, tèm, son, ak preferans aksè fasil.",
+              "Bonbon analiz: yo sèvi pou konprann itilizasyon, pèfòmans, erè, ak kalite pwodwi a.",
+              "Bonbon sekirite: yo sèvi pou detekte konpòtman sispèk, aplike kontwòl, epi diminye abi."
+            ]
+          },
+          "third-party": {
+            "title": "4. Bonbon twazyèm pati",
+            "paragraphs": [
+              "Gen kèk bonbon ki ka soti nan sèvis twazyèm pati nou itilize pou peman, otantifikasyon, analiz, hosting, kominikasyon, oswa prevansyon fwod. Founisè sa yo ka trete done dapre pwòp règleman sou vi prive pa yo."
+            ]
+          },
+          "choices": {
+            "title": "5. Chwa ou genyen",
+            "paragraphs": [
+              "Ou ka kontwole bonbon yo atravè paramèt navigatè ou, paramèt aparèy ou, oswa nenpòt zouti preferans bonbon nou mete disponib. Si ou bloke kèk bonbon, sa ka afekte fonksyònman oswa pèfòmans Sèvis yo."
+            ]
+          },
+          "local-storage": {
+            "title": "6. Depo lokal ak lòt teknoloji ki sanble",
+            "paragraphs": [
+              "Nou ka estoke preferans oswa kèk valè ki gen rapò ak sesyon nan depo lokal oswa lòt teknoloji navigatè ki sanble, pa egzanp pou sonje paramèt entèfas yo oswa amelyore pèfòmans."
+            ]
+          },
+          "changes": {
+            "title": "7. Chanjman nan Règleman sa a",
+            "paragraphs": [
+              "Nou ka mete ajou Règleman sou bonbon sa a detanzantan. Chanjman yo antre an vigè lè yo pibliye yo sof si lalwa mande yon lòt fason."
+            ]
+          },
+          "contact": {
+            "title": "8. Kontak",
+            "paragraphs": [
+              "Kesyon sou bonbon yo ka voye bay {privacyEmail}."
+            ]
+          }
+        }
+      },
+      "refund": {
+        "title": "Règleman ranbousman",
+        "description": "Règleman ranbousman sa a esplike règleman anilasyon, renouvèlman, ak ranbousman pou plan peye ak acha sou {appName} ({dbaName}).",
+        "effectiveDate": "{effectiveDate}",
+        "lastUpdated": "{lastUpdated}",
+        "sections": {
+          "overview": {
+            "title": "1. Apèsi",
+            "paragraphs": [
+              "Règleman ranbousman sa a aplike pou abònman, kontni prim, byen dijital, ak lòt fonksyonalite peye yo ofri atravè Sèvis yo, sof si gen lòt kondisyon yo prezante lè acha a fèt."
+            ]
+          },
+          "subscriptions": {
+            "title": "2. Anilasyon abònman",
+            "paragraphs": [
+              "Ou ka anile yon abònman nenpòt ki lè. Anilasyon an sispann renouvèlman nan lavni men li pa anile peryòd fakti ki deja kòmanse a. Sof si yo di yon lòt bagay, ou ap kenbe aksè a jouk peryòd peye a fini."
+            ]
+          },
+          "refund-eligibility": {
+            "title": "3. Kilè yon ranbousman posib",
+            "paragraphs": [
+              "Yo ka bay ranbousman nan kèk ka limite tankou:"
+            ],
+            "list": [
+              "fakti yo te pran de fwa pou menm bagay la;",
+              "erè teknik nan fakti ki soti nan bò pa nou oswa bò pwosesisè peman nou an;",
+              "fakti yo te pran apre yon anilasyon ki te fèt alè;",
+              "dwa pou ranbousman lalwa egzije."
+            ]
+          },
+          "non-refundable": {
+            "title": "4. Sitiyasyon ki pa ranbousab",
+            "paragraphs": [
+              "Sof si lalwa mande sa oswa si sa te pwomèt klèman lè acha a fèt, bagay sa yo jeneralman pa ranbousab:"
+            ],
+            "list": [
+              "pati nan peryòd abònman;",
+              "tan aksè ki pa t itilize;",
+              "sik fakti ki deja fini;",
+              "pwodwi dijital ki deja aksede oswa deja livre;",
+              "acha ki afekte pa sispansyon kont poutèt vyolasyon règleman yo."
+            ]
+          },
+          "how-to-request": {
+            "title": "5. Kijan pou mande yon ranbousman",
+            "paragraphs": [
+              "Pou mande revizyon yon ranbousman, kontakte {supportEmail} epi mete adrès imèl kont ou, dat fakti a, kantite lajan an, ak nenpòt detay tranzaksyon ki enpòtan. Nou ka mande plis enfòmasyon pou verifye demann ou an."
+            ]
+          },
+          "chargebacks": {
+            "title": "6. Kontestasyon peman",
+            "paragraphs": [
+              "Si ou panse yon chaj pa otorize, kontakte nou an premye pou nou ka mennen ankèt. Nou rezève dwa pou sispann oswa limite kont ki asosye ak kontestasyon peman ki fèt abusivman oswa avèk fwod, anba lwa ki aplikab yo."
+            ]
+          },
+          "changes": {
+            "title": "7. Chanjman",
+            "paragraphs": [
+              "Nou ka revize Règleman ranbousman sa a detanzantan. Chanjman yo ap aplike pou lavni sof si lalwa mande yon lòt bagay."
+            ]
+          }
+        }
+      },
+      "acceptable-use": {
+        "title": "Règleman itilizasyon akseptab",
+        "description": "Règleman itilizasyon akseptab sa a dekri itilizasyon ki entèdi sou {appName} ({dbaName}), tankou move itilizasyon kont, kontni, ak sistèm teknik yo.",
+        "effectiveDate": "{effectiveDate}",
+        "lastUpdated": "{lastUpdated}",
+        "sections": {
+          "purpose": {
+            "title": "1. Objektif",
+            "paragraphs": [
+              "Règleman itilizasyon akseptab sa a eksplike règ pou itilize Sèvis yo nan yon fason legal, an sekirite, jis, ak respè. Li konplete Kondisyon sèvis nou yo epi li aplike pou tout itilizatè yo, tankou elèv, edikatè, manm ekip, administratè, ak envite."
+            ]
+          },
+          "prohibited-activity": {
+            "title": "2. Aktivite ki entèdi",
+            "paragraphs": [
+              "Ou pa gen dwa itilize Sèvis yo pou:"
+            ],
+            "list": [
+              "vyole lalwa oswa ede nan aktivite ilegal;",
+              "vyole dwa pwopriyete entelektyèl, vi prive, dwa sou imaj, oswa dwa kontra;",
+              "anbete, menase, maltrete, swiv, eksplwate, oswa fè doxing lòt moun;",
+              "gaye malveyan, kontni phishing, oswa kòd danjere;",
+              "rale, kolekte an mas, oswa repwodui kontni san otorizasyon;",
+              "eseye jwenn aksè ki pa otorize a sistèm, rezo, oswa kont;",
+              "kontoune otantifikasyon, limit itilizasyon, pèmisyon, oswa restriksyon sou peman;",
+              "bay manti sou idantite, afilyasyon, oswa kalifikasyon;",
+              "itilize Sèvis yo pou spam, magouy, piblisite twonpe, oswa fwod;",
+              "deranje pèfòmans, estabilite, oswa sekirite Sèvis yo."
+            ]
+          },
+          "technical-environments": {
+            "title": "3. Itilizasyon anviwònman kòd ak zouti teknik yo",
+            "paragraphs": [
+              "Si Sèvis yo bay editè, tèminal, anviwònman ekzekisyon, telechajman, oswa lòt zouti teknik, ou pa gen dwa:"
+            ],
+            "list": [
+              "eseye monte privilèj oswa soti nan anviwònman an;",
+              "fè min kriptomonnen oswa konsome resous kalkil yon fason anòmal;",
+              "estoke, relaye, oswa distribye done san otorizasyon;",
+              "teste exploit oswa feblès sou platfòm nan oswa sou lòt pati;",
+              "telechaje materyèl ki pwoteje pa dwa otè oswa materyèl sansib san otorizasyon."
+            ]
+          },
+          "enforcement": {
+            "title": "4. Aplikasyon règ yo",
+            "paragraphs": [
+              "Nou ka fè ankèt sou vyolasyon yo sispèk epi pran mezi tankou avètisman, retire kontni, ralanti aksè, sispansyon tanporè, fèmen kont nèt, oswa pouswiv etap legal lè sa apwopriye."
+            ]
+          },
+          "reporting": {
+            "title": "5. Rapòte abi",
+            "paragraphs": [
+              "Rapòte abi, move itilizasyon yo sispèk, oswa kestyon sekirite bay {supportEmail}."
+            ]
+          }
+        }
+      },
+      "community": {
+        "title": "Gid kominote a",
+        "description": "Gid kominote sa yo esplike kijan pou patisipe yon fason ki respekte lòt moun epi ki konstriktif sou {appName} ({dbaName}).",
+        "effectiveDate": "{effectiveDate}",
+        "lastUpdated": "{lastUpdated}",
+        "sections": {
+          "principles": {
+            "title": "1. Prensip",
+            "paragraphs": [
+              "Nou vle {appName} ({dbaName}) rete yon anviwònman aprantisaj ki soutni moun. Gid sa yo fèt pou pwoteje aprenan yo, edikatè yo, ak anplwaye yo, epi pou ankouraje kiryozite, onètete, kolaborasyon, ak respè."
+            ]
+          },
+          "be-respectful": {
+            "title": "2. Fè moun respekte",
+            "paragraphs": [
+              "Trete lòt moun avèk respè. Pa anbete, pa joure, pa imilye, pa menase, pa entimide, pa fè asèlman seksyèl, pa diskrimine, epi pa vize moun poutèt idantite yo, orijin yo, oswa frajilite yo."
+            ]
+          },
+          "be-constructive": {
+            "title": "3. Fè kòmantè ki konstriktif",
+            "paragraphs": [
+              "Bay fidbak ki itil. Poze kestyon avèk bon lafwa. Evite poste kontni ki fèt espre pou pwovoke, twonpe, soti nan sijè a, oswa deranje aprantisaj la."
+            ]
+          },
+          "do-not-spam": {
+            "title": "4. Pa fè spam ni move pwomosyon",
+            "paragraphs": [
+              "Pa itilize platfòm nan pou fè spam, fè pwomosyon pou pwodwi ki pa gen rapò, manipile angajman, oswa poste kontni repete, ki pa gen valè, oswa ki twonpe moun."
+            ]
+          },
+          "sensitive-content": {
+            "title": "5. Kontni sansib ak kontni ki danjere",
+            "paragraphs": [
+              "Pa poste kontni ilegal, rayisab, grafik, seksyèlman eksplisit, ki ankouraje tèt fè mal, oswa lòt kontni ki danjere. Nou ka retire kontni ki kreye risk menm si li pa klèman ilegal."
+            ]
+          },
+          "moderation": {
+            "title": "6. Modération",
+            "paragraphs": [
+              "Nou ka modere kontni ak konpòtman atravè revizyon imen, sistèm otomatik, oswa toude ansanm. Aplikasyon règ yo ka gen ladan retire kontni, mete restriksyon, oswa pran mezi sou kont."
+            ]
+          },
+          "reporting": {
+            "title": "7. Rapòte pwoblèm",
+            "paragraphs": [
+              "Si ou rankontre abi oswa konpòtman ki pa an sekirite, kontakte {supportEmail}."
+            ]
+          }
+        }
+      },
+      "dmca": {
+        "title": "Règleman dwa otè ak DMCA",
+        "description": "Règleman dwa otè ak DMCA sa a esplike kijan {appName} ({dbaName}) jere plent dwa otè ak moun ki repete vyolasyon yo.",
+        "effectiveDate": "{effectiveDate}",
+        "lastUpdated": "{lastUpdated}",
+        "sections": {
+          "overview": {
+            "title": "1. Apèsi",
+            "paragraphs": [
+              "{appName} ({dbaName}) respekte dwa pwopriyete entelektyèl epi li atann pou itilizatè yo fè menm bagay la. Nou ka retire oswa bloke aksè ak materyèl yo di ki vyole dwa otè, epi nou ka fèmen kont moun ki repete vyolasyon yo lè sa apwopriye."
+            ]
+          },
+          "submit-notice": {
+            "title": "2. Kijan pou voye yon avi sou dwa otè",
+            "paragraphs": [
+              "Si ou kwè materyèl sou Sèvis yo vyole dwa otè ou, voye yon avi bay {copyrightEmail} avèk enfòmasyon sa yo:"
+            ],
+            "list": [
+              "non konplè ou ak enfòmasyon kontak ou;",
+              "idantifikasyon travay ki pwoteje pa dwa otè a ou di yo vyole;",
+              "URL oswa kote materyèl yo di ki vyole a ye;",
+              "yon deklarasyon ki di ou gen bon lafwa ke itilizasyon konteste a pa otorize;",
+              "yon deklarasyon, anba sanksyon pou fo deklarasyon kote sa aplikab, ki di enfòmasyon yo egzak epi ou gen otorizasyon pou aji pou mèt travay la;",
+              "siyati fizik oswa elektwonik ou."
+            ]
+          },
+          "counter-notice": {
+            "title": "3. Kont-avi",
+            "paragraphs": [
+              "Si ou kwè yo retire oswa bloke kontni an pa erè, ou ka voye yon kont-avi kote lalwa pèmèt sa. Kont-avi ou a dwe idantifye kontni yo te retire a, kote li te ye avan, enfòmasyon kontak ou, ak nenpòt deklarasyon lalwa mande."
+            ]
+          },
+          "repeat-infringers": {
+            "title": "4. Moun ki repete vyolasyon yo",
+            "paragraphs": [
+              "Nou ka sispann oswa fèmen kont itilizatè ki repete vyole dwa pwopriyete entelektyèl oswa ki repete voye avi ki pa valab oswa ki fèt abusivman."
+            ]
+          },
+          "good-faith": {
+            "title": "5. Itilizasyon avèk bon lafwa",
+            "paragraphs": [
+              "Tanpri voye avi yo yon fason responsab. Avi ki fo, ki twonpe, ki fèt abusivman, oswa avèk move lafwa ka pote konsekans legal."
+            ]
+          }
+        }
+      },
+      "ai-policy": {
+        "title": "Règleman itilizasyon IA",
+        "description": "Règleman itilizasyon IA sa a esplike kijan fonksyonalite IA sou {appName} ({dbaName}) ka itilize ak ki limit ki aplike pou rezilta IA yo pwodui.",
+        "effectiveDate": "{effectiveDate}",
+        "lastUpdated": "{lastUpdated}",
+        "sections": {
+          "scope": {
+            "title": "1. Dimansyon",
+            "paragraphs": [
+              "Sèvis yo ka gen ladan fonksyonalite IA ki ede tankou endis, esplikasyon, fidbak, rezime, tradiksyon, sipò pou pratike, oswa gid pou kòd. Règleman sa a gouvène itilizasyon fonksyonalite sa yo."
+            ]
+          },
+          "limitations": {
+            "title": "2. Limit IA yo",
+            "paragraphs": [
+              "Rezilta IA yo ka pa egzak, ka pa konplè, ka twonpe, ka gen patipri, ka demode, oswa ka pa adapte ak ka ou a. Rezilta IA yo disponib kòm yon asistans pou aprantisaj epi yo pa ranplase jijman pa ou, revizyon pa ou, oswa verifikasyon endepandan pa ou."
+            ]
+          },
+          "allowed-uses": {
+            "title": "3. Itilizasyon ki otorize",
+            "paragraphs": [
+              "Sof si gen lòt restriksyon, fonksyonalite IA yo ka itilize pou:"
+            ],
+            "list": [
+              "jwenn esplikasyon, egzanp, ak sipò pou aprantisaj;",
+              "konprann konsèp yo epi deboge kòd;",
+              "pratike lang oswa revize kontni edikatif;",
+              "amelyore ekriti, pran nòt, oswa fason ou òganize etid ou."
+            ]
+          },
+          "prohibited-uses": {
+            "title": "4. Itilizasyon ki entèdi",
+            "paragraphs": [
+              "Ou pa gen dwa itilize fonksyonalite IA yo pou:"
+            ],
+            "list": [
+              "pwodui kontni ilegal, danjere, twonpe, oswa abusif;",
+              "triche oswa kontoune evalyasyon yo an vyolasyon règ kou yo;",
+              "pran pòz lòt moun oswa envante kalifikasyon;",
+              "trete oswa soumèt done pèsonèl ou pa gen otorizasyon pou pataje;",
+              "pwodui malveyan, kontni phishing, exploit, oswa lòt kòd danjere;",
+              "vyole Kondisyon nou yo, Règleman itilizasyon akseptab nou an, oswa Règleman entegrite akademik nou an."
+            ]
+          },
+          "review": {
+            "title": "5. Revizyon imen ak pwoteksyon platfòm nan",
+            "paragraphs": [
+              "Nou ka revize entèraksyon IA yo ak done ki gen rapò ak yo pou amelyore sekirite, kalite, prevansyon abi, ak pèfòmans sèvis la, anba lwa ki aplikab yo ak anba Règleman sou vi prive nou an."
+            ]
+          },
+          "responsibility": {
+            "title": "6. Responsablite ou",
+            "paragraphs": [
+              "Ou responsab pou fason ou itilize rezilta IA yo. Anvan ou konte sou yo pou edikasyon, travay, deplwaman kòd, kestyon legal, desizyon finansye, desizyon medikal, oswa lòt kontèks enpòtan, ou dwe revize yo avèk anpil atansyon epi verifye yo."
+            ]
+          }
+        }
+      },
+      "academic-integrity": {
+        "title": "Règleman entegrite akademik",
+        "description": "Règleman entegrite akademik sa a esplike ki kalite onètete nou atann nan aprantisaj, evalyasyon, ak sètifikasyon sou {appName} ({dbaName}).",
+        "effectiveDate": "{effectiveDate}",
+        "lastUpdated": "{lastUpdated}",
+        "sections": {
+          "purpose": {
+            "title": "1. Objektif",
+            "paragraphs": [
+              "Aprantisaj mache pi byen lè travay la fèt avèk onètete. Règleman entegrite akademik sa a aplike pou devwa, kestyonè, travay kòd, pwojè, sètifikasyon, mezi pwogrè, ak lòt aktivite edikatif yo bay atravè Sèvis yo."
+            ]
+          },
+          "violations": {
+            "title": "2. Vyolasyon entegrite",
+            "paragraphs": [
+              "Men kèk egzanp sou vyolasyon:"
+            ],
+            "list": [
+              "soumèt travay ki soti nan yon lòt moun san otorizasyon oswa san atribisyon;",
+              "prezante solisyon yon lòt moun kòm pa ou;",
+              "itilize zouti oswa automatisation ki pa otorize pandan evalyasyon ki gen restriksyon;",
+              "pataje kle repons oswa materyèl ki restrenn yo yon fason ki pa kòrèk;",
+              "bay fo enfòmasyon sou konplesyon, prezans, oswa idantite;",
+              "kolabore kote yo mande travay endepandan."
+            ]
+          },
+          "ai-and-integrity": {
+            "title": "3. IA ak entegrite",
+            "paragraphs": [
+              "Itilizasyon zouti IA yo dwe respekte règ ki aplikab pou leson, devwa, evalyasyon, pwogram, oswa plan abònman ki konsène a. Si yon aktivite mande travay orijinal oswa travay san èd, itilize IA ka entèdi oswa limite menm si IA disponib lòt kote sou platfòm nan."
+            ]
+          },
+          "consequences": {
+            "title": "4. Konsekans",
+            "paragraphs": [
+              "Vyolasyon yo ka lakòz youn oswa plis nan konsekans sa yo:"
+            ],
+            "list": [
+              "diminisyon nòt oswa echèk nan evalyasyon;",
+              "reyinisyalizasyon oswa retrè pwogrè a;",
+              "pèt dwa pou jwenn sètifika;",
+              "restriksyon tanporè oswa pèmanan sou kont lan;",
+              "rapò bay yon patnè edikatif oswa yon òganizasyon kote sa aplikab."
+            ]
+          },
+          "appeals": {
+            "title": "5. Rekou",
+            "paragraphs": [
+              "Si ou kwè yo te pran yon mezi entegrite pa erè, kontakte {supportEmail} avèk detay ki enpòtan yo. Fè yon rekou pa garanti yo ap chanje desizyon an."
+            ]
+          }
+        }
+      },
+      "data-rights": {
+        "title": "Règleman sou dwa done",
+        "description": "Règleman sou dwa done sa a esplike dwa sou vi prive ki disponib pou itilizatè {appName} ({dbaName}) anba lwa ki aplikab yo.",
+        "effectiveDate": "{effectiveDate}",
+        "lastUpdated": "{lastUpdated}",
+        "sections": {
+          "overview": {
+            "title": "1. Apèsi",
+            "paragraphs": [
+              "Selon kote ou rete, ou ka gen dwa sou enfòmasyon pèsonèl ou yo. Règleman sa a rezime kalite demann nou ka sipòte yo, anba lwa ki aplikab yo, verifikasyon idantite, konsiderasyon sekirite, ak eksepsyon lalwa pèmèt."
+            ]
+          },
+          "rights-list": {
+            "title": "2. Dwa ou ka genyen",
+            "list": [
+              "Aksè: mande yon kopi kèk enfòmasyon pèsonèl nou kenbe sou ou.",
+              "Koreksyon: mande koreksyon enfòmasyon pèsonèl ki pa egzak oswa ki pa konplè.",
+              "Efase: mande efasman enfòmasyon pèsonèl yo, anba eksepsyon legal, kontra, sekirite, ak operasyon.",
+              "Pòtabilite: mande yon kopi pòtab kèk enfòmasyon kote sa aplikab.",
+              "Restriksyon oswa opozisyon: mande limit sou kèk tretman oswa opoze ak kèk itilizasyon kote lalwa pèmèt sa.",
+              "Retire konsantman: kote tretman an baze sou konsantman, ou ka retire li nenpòt ki lè.",
+              "Pa fè diskriminasyon: egzèse dwa sou vi prive ou genyen san diskriminasyon ilegal."
+            ]
+          },
+          "how-to-request": {
+            "title": "3. Kijan pou fè yon demann",
+            "paragraphs": [
+              "Voye demann yo bay {privacyEmail}. Pou pwoteje itilizatè yo, nou ka mande enfòmasyon ki nesesè pou verifye idantite ou ak limit demann ou an. Ajan otorize yo ka bezwen bay prèv otorizasyon kote sa nesesè."
+            ]
+          },
+          "timing": {
+            "title": "4. Delè ak eksepsyon",
+            "paragraphs": [
+              "Nou reponn nan delè lalwa aplikab la mande yo. Nan kèk ka, nou ka refize tout oswa yon pati nan yon demann lè gen yon eksepsyon ki aplikab, tankou pwoteksyon lòt itilizatè, prevansyon fwod, respè lalwa, defans reklamasyon legal, konplete tranzaksyon, oswa kenbe dosye biznis ki nesesè."
+            ]
+          },
+          "appeals": {
+            "title": "5. Rekou ak plent",
+            "paragraphs": [
+              "Si ou kwè yon demann sou vi prive te trete mal, ou ka reponn ak desizyon nou an epi mande yon lòt revizyon. Ou ka gen dwa tou pou pote plent devan yon otorite sipèvizyon oswa regilasyon."
+            ]
+          },
+          "dpo": {
+            "title": "6. Kontak sou vi prive",
+            "paragraphs": [
+              "Demann sou vi prive yo ka voye bay {privacyEmail} oswa {dpoEmail}."
+            ]
+          }
+        }
+      }
+    }
+  },"LegalUi": {
+  "indexIntro": "Gade règleman ki anba yo pou jwenn enfòmasyon sou abònman, vi prive, bonbon, itilizasyon IA, entegrite akademik, konpòtman nan kominote a, avi sou dwa otè, ak dwa ou sou done yo.",
+  "view": "Gade",
+  "effective": "An aplikasyon",
+  "updated": "Mizajou"
+}
+}

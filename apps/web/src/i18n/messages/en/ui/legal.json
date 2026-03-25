@@ -1,0 +1,738 @@
+{ "LegalUi": {
+  "indexIntro": "Review the policies below for information about subscriptions, privacy, cookies, AI usage, academic integrity, community behavior, copyright notices, and your data rights.",
+  "view": "View",
+  "effective": "Effective",
+  "updated": "Updated"
+},
+  "LegalContent": {
+    "meta": {
+      "appName": "{appName}",
+      "dbaName": "{dbaName}",
+      "companyLegalName": "{companyLegalName}",
+      "companyAddress": "{companyAddress}",
+      "supportEmail": "{supportEmail}",
+      "privacyEmail": "{privacyEmail}",
+      "copyrightEmail": "{copyrightEmail}",
+      "dpoEmail": "{dpoEmail}",
+      "effectiveDate": "{effectiveDate}",
+      "lastUpdated": "{lastUpdated}"
+    },
+    "documents": {
+      "terms": {
+        "title": "Terms of Service",
+        "description": "These Terms of Service govern access to and use of {appName} ({dbaName}), including accounts, subscriptions, learning content, coding environments, and related services.",
+        "effectiveDate": "{effectiveDate}",
+        "lastUpdated": "{lastUpdated}",
+        "sections": {
+          "acceptance": {
+            "title": "1. Acceptance of these Terms",
+            "paragraphs": [
+              "These Terms of Service govern your access to and use of {appName} ({dbaName}), including our websites, applications, learning tools, coding environments, assessments, subscriptions, digital downloads, certificates, and related services (collectively, the “Services”).",
+              "By accessing or using the Services, you agree to be bound by these Terms. If you use the Services on behalf of an organization, school, employer, or other entity, you represent that you have authority to bind that entity, and “you” includes both you and that entity."
+            ]
+          },
+          "company": {
+            "title": "2. Operator and Contact Information",
+            "paragraphs": [
+              "The Services are operated by {companyLegalName}, doing business as {appName} ({dbaName}).",
+              "Business address: {companyAddress}",
+              "General support: {supportEmail}"
+            ]
+          },
+          "services": {
+            "title": "3. Description of the Services",
+            "paragraphs": [
+              "{appName} ({dbaName}) provides an online educational platform that may include interactive lessons, practice modules, quizzes, coding and sandbox tools, progress tracking, downloadable resources, AI-assisted study tools, certificates, and subscription-based access to premium content.",
+              "We may add, remove, improve, suspend, or modify any part of the Services at any time, including content, pricing, availability, features, integrations, or supported devices."
+            ]
+          },
+          "eligibility": {
+            "title": "4. Eligibility and Accounts",
+            "paragraphs": [
+              "You must be at least 13 years old, or the minimum age required by law in your jurisdiction, to use the Services. If you are under the age of majority where you live, you may use the Services only with permission and supervision from a parent, guardian, teacher, or other authorized adult.",
+              "To access some features, you may need an account. You agree to provide accurate, current, and complete information, keep your credentials secure, and promptly update your information if it changes. You are responsible for all activity that occurs under your account."
+            ]
+          },
+          "subscriptions": {
+            "title": "5. Paid Plans, Billing, and Renewals",
+            "paragraphs": [
+              "Some Services require payment, including subscriptions, premium modules, downloads, or other paid features. We may use third-party payment processors such as Stripe to collect and process payments."
+            ],
+            "list": [
+              "Paid plans may renew automatically unless canceled before renewal.",
+              "Taxes may apply based on your billing address or applicable law.",
+              "We may change pricing prospectively with reasonable notice when required.",
+              "Failure to pay may result in suspension, downgrade, or cancellation of paid access."
+            ]
+          },
+          "license": {
+            "title": "6. Limited License and Intellectual Property",
+            "paragraphs": [
+              "The Services, including course materials, lessons, exercises, quizzes, generated content, code editors, layouts, designs, text, graphics, logos, audio, video, and software, are owned by or licensed to {appName} ({dbaName}) and are protected by intellectual property laws.",
+              "Subject to these Terms, we grant you a limited, non-exclusive, non-transferable, revocable license to access and use the Services for your personal, internal, educational, or otherwise authorized use. You may not reproduce, resell, distribute, modify, publicly display, or commercially exploit the Services except as expressly permitted in writing."
+            ]
+          },
+          "user-content": {
+            "title": "7. User Content",
+            "paragraphs": [
+              "You may submit or upload content such as code, answers, prompts, comments, messages, assignments, screenshots, or other materials (“User Content”). You retain ownership of your User Content, subject to the rights you grant below.",
+              "You grant us a worldwide, non-exclusive, royalty-free license to host, store, reproduce, process, adapt, display, and use your User Content solely as necessary to operate, secure, improve, and provide the Services, including moderation, backup, analytics, and customer support.",
+              "You represent that you have all rights needed to submit User Content and that your User Content does not violate law or third-party rights."
+            ]
+          },
+          "sandbox": {
+            "title": "8. Coding Environments and Technical Restrictions",
+            "paragraphs": [
+              "Certain parts of the Services may include coding sandboxes, terminals, execution environments, upload tools, or integrations. These tools are provided for learning and authorized product use only.",
+              "We may monitor, limit, suspend, or terminate access to technical features to protect users, platform integrity, and service availability."
+            ],
+            "list": [
+              "You may not upload malware, ransomware, spyware, or destructive code.",
+              "You may not probe, scan, reverse engineer, or bypass platform security.",
+              "You may not abuse compute, bandwidth, storage, or execution resources.",
+              "You may not use the Services to access systems, data, or networks without authorization."
+            ]
+          },
+          "acceptable-use": {
+            "title": "9. Acceptable Use",
+            "paragraphs": [
+              "You agree not to misuse the Services. Prohibited conduct includes:"
+            ],
+            "list": [
+              "violating law or third-party rights;",
+              "harassing, threatening, abusing, or impersonating others;",
+              "scraping or bulk-copying content without permission;",
+              "circumventing paywalls or access controls;",
+              "using bots or automation to disrupt the platform;",
+              "plagiarizing or misrepresenting work in assessments;",
+              "posting defamatory, hateful, obscene, or unlawful content."
+            ]
+          },
+          "disclaimers": {
+            "title": "10. Educational and Service Disclaimers",
+            "paragraphs": [
+              "The Services are provided for educational and informational purposes. We do not guarantee any specific learning outcome, certification outcome, exam result, career placement, employment opportunity, income level, or business success.",
+              "The Services may contain errors, interruptions, delays, bugs, inaccurate content, or incomplete answers, especially where content is user-generated or AI-assisted. Your use of the Services is at your own risk."
+            ]
+          },
+          "termination": {
+            "title": "11. Suspension and Termination",
+            "paragraphs": [
+              "We may suspend, restrict, or terminate your access if we reasonably believe you have violated these Terms, created risk or liability, harmed other users, or abused the Services. We may also disable content, modules, or features to comply with law, protect the platform, or address security concerns.",
+              "You may stop using the Services at any time. Cancellation of a subscription stops future renewals but does not retroactively entitle you to a refund except where required by law or stated in our refund policy."
+            ]
+          },
+          "liability": {
+            "title": "12. Limitation of Liability",
+            "paragraphs": [
+              "To the maximum extent permitted by law, {appName} ({dbaName}) and its affiliates, officers, employees, contractors, licensors, and suppliers will not be liable for any indirect, incidental, consequential, special, exemplary, or punitive damages, or for any loss of profits, revenues, data, goodwill, or business opportunities arising out of or related to the Services.",
+              "To the maximum extent permitted by law, our aggregate liability for any claim related to the Services will not exceed the greater of: (a) the amount you paid to us in the 12 months before the event giving rise to the claim, or (b) USD $100."
+            ]
+          },
+          "indemnity": {
+            "title": "13. Indemnification",
+            "paragraphs": [
+              "You agree to defend, indemnify, and hold harmless {appName} ({dbaName}) and its affiliates, officers, employees, agents, contractors, licensors, and suppliers from and against claims, liabilities, damages, losses, and expenses arising from your use of the Services, your User Content, your violation of these Terms, or your violation of any law or third-party right."
+            ]
+          },
+          "changes": {
+            "title": "14. Changes to these Terms",
+            "paragraphs": [
+              "We may update these Terms from time to time. When we do, we will revise the “Last Updated” date and, where required by law, provide additional notice. Your continued use of the Services after the updated Terms take effect means you accept them."
+            ]
+          },
+          "governing-law": {
+            "title": "15. Governing Law",
+            "paragraphs": [
+              "These Terms are governed by the laws of the jurisdiction where {companyLegalName} is established, without regard to conflict-of-law principles, except where mandatory consumer protection laws require otherwise."
+            ]
+          },
+          "contact": {
+            "title": "16. Contact",
+            "paragraphs": [
+              "Questions about these Terms may be sent to {supportEmail}."
+            ]
+          }
+        }
+      },
+      "privacy": {
+        "title": "Privacy Policy",
+        "description": "This Privacy Policy explains how {appName} ({dbaName}) collects, uses, shares, retains, and protects personal information.",
+        "effectiveDate": "{effectiveDate}",
+        "lastUpdated": "{lastUpdated}",
+        "sections": {
+          "scope": {
+            "title": "1. Scope",
+            "paragraphs": [
+              "This Privacy Policy explains how {appName} ({dbaName}) collects, uses, stores, shares, and protects personal information when you access or use the Services.",
+              "This Policy applies to information collected through our websites, apps, email communications, customer support channels, payment flows, and other interactions with us."
+            ]
+          },
+          "information-we-collect": {
+            "title": "2. Information We Collect",
+            "paragraphs": [
+              "We may collect the following categories of information:"
+            ],
+            "list": [
+              "Account information: name, email address, username, profile image, account identifiers, password or authentication-related data, and preferences.",
+              "Learning information: enrollments, module progress, completion status, quiz results, code submissions, activity timestamps, certificates, notes, saved items, and assessment history.",
+              "Technical and usage data: IP address, device identifiers, browser type, operating system, language, timezone, pages viewed, clicks, session duration, referrer information, performance logs, and security events.",
+              "Payment and transaction data: subscription status, billing plan, invoices, billing country, payment processor transaction identifiers, and fraud prevention signals. We do not store full payment card numbers.",
+              "Communications: support requests, survey responses, user feedback, and other communications you send to us.",
+              "Generated content and AI interactions: prompts, responses, edits, feedback, and other data related to AI-powered features when offered."
+            ]
+          },
+          "sources": {
+            "title": "3. How We Collect Information",
+            "paragraphs": [
+              "We collect information directly from you, automatically through the Services, and from third parties."
+            ],
+            "list": [
+              "Directly from you when you register, subscribe, upload content, or contact support.",
+              "Automatically through cookies, logs, analytics, and security tools.",
+              "From service providers and integrations such as payment processors, authentication providers, email tools, analytics tools, hosting providers, fraud prevention tools, and educational or organizational administrators where applicable."
+            ]
+          },
+          "use-of-information": {
+            "title": "4. How We Use Information",
+            "paragraphs": [
+              "We may use personal information to:"
+            ],
+            "list": [
+              "provide, operate, and improve the Services;",
+              "create and manage accounts and subscriptions;",
+              "deliver lessons, assessments, coding tools, and certificates;",
+              "track progress, personalize learning experiences, and recommend content;",
+              "authenticate users and secure the Services;",
+              "process payments and prevent fraud;",
+              "respond to support requests and communicate with you;",
+              "analyze performance, usage, and product quality;",
+              "enforce our Terms and policies;",
+              "comply with legal obligations and resolve disputes."
+            ]
+          },
+          "legal-bases": {
+            "title": "5. Legal Bases for Processing",
+            "paragraphs": [
+              "Where applicable law requires a legal basis for processing, we rely on one or more of the following:"
+            ],
+            "list": [
+              "performance of a contract with you;",
+              "our legitimate interests in operating and improving the Services;",
+              "your consent, where required;",
+              "compliance with legal obligations;",
+              "protection of vital interests and prevention of abuse or fraud."
+            ]
+          },
+          "sharing": {
+            "title": "6. How We Share Information",
+            "paragraphs": [
+              "We do not sell personal information for money. We may share information with:"
+            ],
+            "list": [
+              "vendors and service providers that help operate the Services;",
+              "payment processors and fraud prevention providers;",
+              "authentication and identity providers;",
+              "cloud infrastructure, storage, analytics, and communications providers;",
+              "professional advisers, auditors, and insurers;",
+              "law enforcement, regulators, courts, or other parties where required by law or necessary to protect rights, safety, or the platform;",
+              "successor entities in connection with a merger, sale, financing, acquisition, or restructuring."
+            ]
+          },
+          "retention": {
+            "title": "7. Data Retention",
+            "paragraphs": [
+              "We retain personal information for as long as needed to provide the Services, comply with legal obligations, resolve disputes, enforce agreements, maintain records, and protect the platform. Retention periods vary depending on the type of information, the reason it was collected, legal requirements, and operational needs."
+            ]
+          },
+          "security": {
+            "title": "8. Security",
+            "paragraphs": [
+              "We use administrative, technical, and organizational measures designed to protect personal information, such as access controls, encrypted connections, logging, monitoring, vendor management, and security review processes. No system is completely secure, and we cannot guarantee absolute security."
+            ]
+          },
+          "international-transfers": {
+            "title": "9. International Data Transfers",
+            "paragraphs": [
+              "We may process or store information in countries other than the country where you live. When required, we use appropriate safeguards for international transfers, such as contractual protections or other lawful transfer mechanisms."
+            ]
+          },
+          "children": {
+            "title": "10. Children and Minors",
+            "paragraphs": [
+              "The Services are not directed to children below the minimum permitted age without appropriate parental, guardian, or educational authorization. If you believe a child has provided personal information in violation of applicable law, contact us and we will take appropriate steps."
+            ]
+          },
+          "rights": {
+            "title": "11. Your Privacy Rights",
+            "paragraphs": [
+              "Depending on your jurisdiction, you may have rights to access, correct, delete, restrict, object to, or export your personal information, and to withdraw consent where processing is based on consent. Details are provided in our Data Rights policy."
+            ]
+          },
+          "cookies": {
+            "title": "12. Cookies and Similar Technologies",
+            "paragraphs": [
+              "We use cookies and similar technologies to keep you signed in, remember preferences, secure the Services, measure performance, understand usage, and improve user experience. See our Cookie Policy for more detail."
+            ]
+          },
+          "changes": {
+            "title": "13. Changes to this Policy",
+            "paragraphs": [
+              "We may update this Privacy Policy from time to time. The “Last Updated” date reflects the latest revision. If changes are material, we may provide additional notice where required by law."
+            ]
+          },
+          "contact": {
+            "title": "14. Contact",
+            "paragraphs": [
+              "Privacy questions and requests may be sent to {privacyEmail}."
+            ]
+          }
+        }
+      },
+      "cookies": {
+        "title": "Cookie Policy",
+        "description": "This Cookie Policy explains how {appName} ({dbaName}) uses cookies, local storage, and similar technologies.",
+        "effectiveDate": "{effectiveDate}",
+        "lastUpdated": "{lastUpdated}",
+        "sections": {
+          "what-are-cookies": {
+            "title": "1. What Cookies Are",
+            "paragraphs": [
+              "Cookies are small text files placed on your device when you visit a website. Similar technologies such as local storage, pixels, SDKs, tags, and device identifiers may be used for related purposes. In this Policy, we refer to all of these as “cookies” unless a distinction is needed."
+            ]
+          },
+          "why-we-use-cookies": {
+            "title": "2. Why We Use Cookies",
+            "paragraphs": [
+              "We use cookies to:"
+            ],
+            "list": [
+              "keep users signed in and maintain sessions;",
+              "remember preferences such as language, theme, and accessibility settings;",
+              "improve navigation, performance, and reliability;",
+              "measure usage, traffic, and feature adoption;",
+              "help prevent fraud and abuse;",
+              "support billing, authentication, and account security workflows."
+            ]
+          },
+          "types": {
+            "title": "3. Types of Cookies We May Use",
+            "list": [
+              "Strictly necessary cookies: required for core functionality, security, sign-in, navigation, and service delivery.",
+              "Preference cookies: used to remember settings such as locale, theme, sound, and accessibility preferences.",
+              "Analytics cookies: used to understand usage, performance, errors, and product quality.",
+              "Security cookies: used to detect suspicious behavior, enforce controls, and reduce abuse."
+            ]
+          },
+          "third-party": {
+            "title": "4. Third-Party Cookies",
+            "paragraphs": [
+              "Some cookies may be set by third-party services we use for payments, authentication, analytics, hosting, communications, or fraud prevention. Those providers may process data subject to their own privacy notices."
+            ]
+          },
+          "choices": {
+            "title": "5. Your Choices",
+            "paragraphs": [
+              "You can control cookies through your browser settings, device settings, or any cookie preference tools we make available. Blocking some cookies may affect the functionality or performance of the Services."
+            ]
+          },
+          "local-storage": {
+            "title": "6. Local Storage and Similar Technologies",
+            "paragraphs": [
+              "We may also store preferences or session-related values in local storage or similar browser technologies, for example to remember UI settings or enhance performance."
+            ]
+          },
+          "changes": {
+            "title": "7. Changes to this Policy",
+            "paragraphs": [
+              "We may update this Cookie Policy periodically. Changes take effect when posted unless otherwise required by law."
+            ]
+          },
+          "contact": {
+            "title": "8. Contact",
+            "paragraphs": [
+              "Questions about cookies may be sent to {privacyEmail}."
+            ]
+          }
+        }
+      },
+      "refund": {
+        "title": "Refund Policy",
+        "description": "This Refund Policy explains cancellation, renewal, and refund rules for paid plans and purchases on {appName} ({dbaName}).",
+        "effectiveDate": "{effectiveDate}",
+        "lastUpdated": "{lastUpdated}",
+        "sections": {
+          "overview": {
+            "title": "1. Overview",
+            "paragraphs": [
+              "This Refund Policy applies to subscriptions, premium content, digital goods, and other paid features offered through the Services, unless different terms are presented at the time of purchase."
+            ]
+          },
+          "subscriptions": {
+            "title": "2. Subscription Cancellations",
+            "paragraphs": [
+              "You may cancel a subscription at any time. Cancellation stops future renewals but does not retroactively cancel the current billing period. Unless stated otherwise, you will retain access through the end of the paid term."
+            ]
+          },
+          "refund-eligibility": {
+            "title": "3. Refund Eligibility",
+            "paragraphs": [
+              "Refunds may be granted in limited cases such as:"
+            ],
+            "list": [
+              "duplicate charges;",
+              "technical billing errors caused by us or our payment processor;",
+              "charges made after a timely cancellation;",
+              "refund rights required by applicable law."
+            ]
+          },
+          "non-refundable": {
+            "title": "4. Non-Refundable Situations",
+            "paragraphs": [
+              "Except where required by law or expressly promised at purchase, the following are generally non-refundable:"
+            ],
+            "list": [
+              "partial subscription periods;",
+              "unused access time;",
+              "completed billing cycles;",
+              "downloadable digital products that have already been accessed or delivered;",
+              "purchases affected by account suspension due to policy violations."
+            ]
+          },
+          "how-to-request": {
+            "title": "5. How to Request a Refund",
+            "paragraphs": [
+              "To request review of a refund, contact {supportEmail} and include your account email, billing date, amount, and any relevant transaction details. We may require additional information to verify your request."
+            ]
+          },
+          "chargebacks": {
+            "title": "6. Chargebacks",
+            "paragraphs": [
+              "If you believe a charge is unauthorized, contact us first so we can investigate. We reserve the right to suspend or restrict accounts associated with abusive or fraudulent chargebacks, subject to applicable law."
+            ]
+          },
+          "changes": {
+            "title": "7. Changes",
+            "paragraphs": [
+              "We may revise this Refund Policy from time to time. Changes apply prospectively unless otherwise required by law."
+            ]
+          }
+        }
+      },
+      "acceptable-use": {
+        "title": "Acceptable Use Policy",
+        "description": "This Acceptable Use Policy describes prohibited uses of {appName} ({dbaName}), including misuse of accounts, content, and technical systems.",
+        "effectiveDate": "{effectiveDate}",
+        "lastUpdated": "{lastUpdated}",
+        "sections": {
+          "purpose": {
+            "title": "1. Purpose",
+            "paragraphs": [
+              "This Acceptable Use Policy explains the rules for using the Services in a lawful, secure, fair, and respectful way. It supplements our Terms of Service and applies to all users, including students, educators, team members, administrators, and guests."
+            ]
+          },
+          "prohibited-activity": {
+            "title": "2. Prohibited Activity",
+            "paragraphs": [
+              "You may not use the Services to:"
+            ],
+            "list": [
+              "break the law or assist unlawful activity;",
+              "infringe intellectual property, privacy, publicity, or contractual rights;",
+              "harass, threaten, abuse, stalk, exploit, or dox others;",
+              "distribute malware, phishing content, or harmful code;",
+              "scrape, bulk harvest, or reproduce content without authorization;",
+              "attempt unauthorized access to systems, networks, or accounts;",
+              "circumvent authentication, rate limits, permissions, or billing restrictions;",
+              "misrepresent identity, affiliation, or credentials;",
+              "use the Services for spam, scams, deceptive advertising, or fraud;",
+              "interfere with the performance, stability, or security of the Services."
+            ]
+          },
+          "technical-environments": {
+            "title": "3. Use of Coding and Technical Environments",
+            "paragraphs": [
+              "If the Services provide editors, terminals, execution environments, uploads, or other technical tools, you may not:"
+            ],
+            "list": [
+              "attempt privilege escalation or environment escape;",
+              "mine cryptocurrency or consume abnormal compute resources;",
+              "store, relay, or distribute unauthorized data;",
+              "test exploits or vulnerabilities against the platform or third parties;",
+              "upload copyrighted or sensitive material without authorization."
+            ]
+          },
+          "enforcement": {
+            "title": "4. Enforcement",
+            "paragraphs": [
+              "We may investigate suspected violations and take action including warnings, content removal, throttling, temporary suspension, permanent account termination, or legal escalation where appropriate."
+            ]
+          },
+          "reporting": {
+            "title": "5. Reporting Abuse",
+            "paragraphs": [
+              "Report abuse, suspected misuse, or security concerns to {supportEmail}."
+            ]
+          }
+        }
+      },
+      "community": {
+        "title": "Community Guidelines",
+        "description": "These Community Guidelines describe how to participate respectfully and constructively on {appName} ({dbaName}).",
+        "effectiveDate": "{effectiveDate}",
+        "lastUpdated": "{lastUpdated}",
+        "sections": {
+          "principles": {
+            "title": "1. Principles",
+            "paragraphs": [
+              "We want {appName} ({dbaName}) to be a supportive learning environment. These Guidelines are intended to protect learners, educators, and staff and to encourage curiosity, honesty, collaboration, and respect."
+            ]
+          },
+          "be-respectful": {
+            "title": "2. Be Respectful",
+            "paragraphs": [
+              "Treat others with respect. Do not harass, insult, shame, threaten, intimidate, sexually harass, discriminate against, or target people on the basis of identity, background, or vulnerability."
+            ]
+          },
+          "be-constructive": {
+            "title": "3. Be Constructive",
+            "paragraphs": [
+              "Give helpful feedback. Ask questions in good faith. Avoid posting content that is deliberately inflammatory, misleading, off-topic, or intended to disrupt learning."
+            ]
+          },
+          "do-not-spam": {
+            "title": "4. No Spam or Promotion Abuse",
+            "paragraphs": [
+              "Do not use the platform to spam, promote unrelated products, manipulate engagement, or post repetitive, low-value, or deceptive content."
+            ]
+          },
+          "sensitive-content": {
+            "title": "5. Sensitive and Unsafe Content",
+            "paragraphs": [
+              "Do not post unlawful, hateful, graphic, sexually explicit, self-harm encouraging, or otherwise unsafe content. We may remove content that creates risk even if not clearly illegal."
+            ]
+          },
+          "moderation": {
+            "title": "6. Moderation",
+            "paragraphs": [
+              "We may moderate content and behavior using human review, automated systems, or both. Enforcement may include removal of content, restrictions, or account action."
+            ]
+          },
+          "reporting": {
+            "title": "7. Report Problems",
+            "paragraphs": [
+              "If you encounter abuse or unsafe behavior, contact {supportEmail}."
+            ]
+          }
+        }
+      },
+      "dmca": {
+        "title": "Copyright and DMCA Policy",
+        "description": "This Copyright and DMCA Policy explains how {appName} ({dbaName}) handles copyright complaints and repeat infringement.",
+        "effectiveDate": "{effectiveDate}",
+        "lastUpdated": "{lastUpdated}",
+        "sections": {
+          "overview": {
+            "title": "1. Overview",
+            "paragraphs": [
+              "{appName} ({dbaName}) respects intellectual property rights and expects users to do the same. We may remove or disable access to allegedly infringing material and may terminate repeat infringers in appropriate circumstances."
+            ]
+          },
+          "submit-notice": {
+            "title": "2. How to Submit a Copyright Notice",
+            "paragraphs": [
+              "If you believe material on the Services infringes your copyright, send a notice to {copyrightEmail} with the following:"
+            ],
+            "list": [
+              "your full name and contact information;",
+              "identification of the copyrighted work claimed to be infringed;",
+              "the URL or location of the allegedly infringing material;",
+              "a statement that you have a good-faith belief the disputed use is not authorized;",
+              "a statement, under penalty of perjury where applicable, that the information in the notice is accurate and that you are authorized to act on behalf of the owner;",
+              "your physical or electronic signature."
+            ]
+          },
+          "counter-notice": {
+            "title": "3. Counter-Notice",
+            "paragraphs": [
+              "If you believe content was removed or disabled in error, you may send a counter-notice where permitted by law. Your counter-notice should identify the removed material, its prior location, your contact information, and any statements required by law."
+            ]
+          },
+          "repeat-infringers": {
+            "title": "4. Repeat Infringers",
+            "paragraphs": [
+              "We may suspend or terminate accounts of users who repeatedly infringe intellectual property rights or repeatedly submit invalid or abusive notices."
+            ]
+          },
+          "good-faith": {
+            "title": "5. Good-Faith Use",
+            "paragraphs": [
+              "Please submit notices responsibly. False, misleading, abusive, or bad-faith notices may have legal consequences."
+            ]
+          }
+        }
+      },
+      "ai-policy": {
+        "title": "AI Usage Policy",
+        "description": "This AI Usage Policy explains how AI features on {appName} ({dbaName}) may be used and the limits that apply to AI-generated output.",
+        "effectiveDate": "{effectiveDate}",
+        "lastUpdated": "{lastUpdated}",
+        "sections": {
+          "scope": {
+            "title": "1. Scope",
+            "paragraphs": [
+              "The Services may include AI-assisted features such as hints, explanations, feedback, summarization, translation, practice support, or code guidance. This Policy governs the use of those features."
+            ]
+          },
+          "limitations": {
+            "title": "2. AI Limitations",
+            "paragraphs": [
+              "AI-generated output may be incorrect, incomplete, misleading, biased, outdated, or not appropriate for your use case. AI output is provided for educational assistance and does not replace your own judgment, review, or independent verification."
+            ]
+          },
+          "allowed-uses": {
+            "title": "3. Permitted Uses",
+            "paragraphs": [
+              "Unless otherwise restricted, AI features may be used to:"
+            ],
+            "list": [
+              "get explanations, examples, and learning support;",
+              "understand concepts and debug code;",
+              "practice languages or review educational material;",
+              "improve writing, note-taking, or study workflows."
+            ]
+          },
+          "prohibited-uses": {
+            "title": "4. Prohibited Uses",
+            "paragraphs": [
+              "You may not use AI features to:"
+            ],
+            "list": [
+              "generate unlawful, harmful, deceptive, or abusive content;",
+              "cheat or circumvent assessments in violation of course rules;",
+              "impersonate others or fabricate credentials;",
+              "process or submit personal data you are not authorized to share;",
+              "generate malware, phishing content, exploits, or other harmful code;",
+              "violate our Terms, Acceptable Use Policy, or Academic Integrity Policy."
+            ]
+          },
+          "review": {
+            "title": "5. Human Review and Platform Safeguards",
+            "paragraphs": [
+              "We may review AI interactions and related data to improve safety, quality, abuse prevention, and service performance, subject to applicable law and our Privacy Policy."
+            ]
+          },
+          "responsibility": {
+            "title": "6. Your Responsibility",
+            "paragraphs": [
+              "You are responsible for how you use AI output. Before relying on it for education, work, code deployment, legal matters, financial decisions, medical decisions, or other important contexts, you should carefully review and verify the output."
+            ]
+          }
+        }
+      },
+      "academic-integrity": {
+        "title": "Academic Integrity Policy",
+        "description": "This Academic Integrity Policy explains honesty expectations for learning, assessments, and certification on {appName} ({dbaName}).",
+        "effectiveDate": "{effectiveDate}",
+        "lastUpdated": "{lastUpdated}",
+        "sections": {
+          "purpose": {
+            "title": "1. Purpose",
+            "paragraphs": [
+              "Learning is most effective when work is honest. This Academic Integrity Policy applies to assignments, quizzes, coding tasks, projects, certifications, progress metrics, and other educational activities provided through the Services."
+            ]
+          },
+          "violations": {
+            "title": "2. Integrity Violations",
+            "paragraphs": [
+              "Examples of violations include:"
+            ],
+            "list": [
+              "submitting work copied from another person without authorization or attribution;",
+              "presenting another person’s solution as your own;",
+              "using unauthorized tools or automation during restricted assessments;",
+              "sharing answer keys or restricted materials improperly;",
+              "misrepresenting completion, attendance, or identity;",
+              "colluding where independent work is required."
+            ]
+          },
+          "ai-and-integrity": {
+            "title": "3. AI and Integrity",
+            "paragraphs": [
+              "Use of AI tools must comply with the rules for the relevant lesson, assignment, assessment, program, or subscription plan. If an activity requires original or unaided work, use of AI may be prohibited or restricted even if AI is available elsewhere on the platform."
+            ]
+          },
+          "consequences": {
+            "title": "4. Consequences",
+            "paragraphs": [
+              "Violations may lead to one or more of the following:"
+            ],
+            "list": [
+              "score reduction or failed assessment;",
+              "reset or revocation of progress;",
+              "loss of certificate eligibility;",
+              "temporary or permanent account restrictions;",
+              "reporting to an educational partner or organization where applicable."
+            ]
+          },
+          "appeals": {
+            "title": "5. Appeals",
+            "paragraphs": [
+              "If you believe an integrity action was taken in error, contact {supportEmail} with relevant details. Submission of an appeal does not guarantee reversal."
+            ]
+          }
+        }
+      },
+      "data-rights": {
+        "title": "Data Rights Policy",
+        "description": "This Data Rights Policy explains the privacy rights available to users of {appName} ({dbaName}) under applicable law.",
+        "effectiveDate": "{effectiveDate}",
+        "lastUpdated": "{lastUpdated}",
+        "sections": {
+          "overview": {
+            "title": "1. Overview",
+            "paragraphs": [
+              "Depending on where you live, you may have rights regarding your personal information. This Policy summarizes the types of requests we may support, subject to applicable law, identity verification, security considerations, and permitted exceptions."
+            ]
+          },
+          "rights-list": {
+            "title": "2. Rights You May Have",
+            "list": [
+              "Access: request a copy of certain personal information we hold about you.",
+              "Correction: request correction of inaccurate or incomplete personal information.",
+              "Deletion: request deletion of personal information, subject to legal, contractual, security, and operational exceptions.",
+              "Portability: request a portable copy of certain information where applicable.",
+              "Restriction or objection: request limits on certain processing or object to certain uses where permitted by law.",
+              "Withdraw consent: where processing is based on consent, you may withdraw it at any time.",
+              "Non-discrimination: exercise applicable privacy rights without unlawful discrimination."
+            ]
+          },
+          "how-to-request": {
+            "title": "3. How to Make a Request",
+            "paragraphs": [
+              "Send requests to {privacyEmail}. To protect users, we may ask for information needed to verify identity and the scope of the request. Authorized agents may need to provide proof of authority where required."
+            ]
+          },
+          "timing": {
+            "title": "4. Timing and Exceptions",
+            "paragraphs": [
+              "We respond within timelines required by applicable law. In some cases, we may decline part or all of a request where an exception applies, such as protecting other users, preventing fraud, complying with law, defending legal claims, completing transactions, or preserving necessary business records."
+            ]
+          },
+          "appeals": {
+            "title": "5. Appeals and Complaints",
+            "paragraphs": [
+              "If you believe a privacy request was handled incorrectly, you may reply to our decision and request further review. You may also have the right to complain to a supervisory or regulatory authority."
+            ]
+          },
+          "dpo": {
+            "title": "6. Privacy Contact",
+            "paragraphs": [
+              "Privacy requests may be sent to {privacyEmail} or {dpoEmail}."
+            ]
+          }
+        }
+      }
+    }
+  }
+}

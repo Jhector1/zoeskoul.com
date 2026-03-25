@@ -1,0 +1,135 @@
+@layer components {
+  /* =========================
+   * Base button
+   * ========================= */
+
+  .ui-btn {
+    @apply inline-flex items-center justify-center rounded-lg px-3 py-2 text-xs font-semibold transition;
+    color: rgb(var(--ui-text) / 1);
+  }
+
+  .ui-btn:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px rgb(var(--ui-ring) / 0.35);
+  }
+
+  .ui-btn:disabled,
+  .ui-btn-disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+  }
+
+  /* =========================
+   * Shape / emphasis
+   * ========================= */
+
+  .ui-btn-pill-strong {
+    @apply shrink-0 rounded-2xl font-extrabold;
+  }
+
+  /* =========================
+   * Primary Button
+   * ========================= */
+
+  .ui-btn-primary {
+    background-color: rgb(var(--ui-accent) / 1);
+    color: rgb(var(--ui-text-invert) / 1);
+  }
+
+  .ui-btn-primary:hover {
+    background-color: rgb(var(--ui-accent) / 0.85);
+  }
+
+  .ui-btn-primary:active {
+    transform: translateY(1px);
+  }
+
+  /* =========================
+   * Secondary Button
+   * ========================= */
+
+  .ui-btn-secondary {
+    border: 1px solid rgb(var(--ui-border) / 1);
+    background-color: rgb(var(--ui-surface) / 0.9);
+    color: rgb(var(--ui-text) / 0.92);
+  }
+
+  .ui-btn-secondary:hover {
+    background-color: rgb(var(--ui-surface) / 0.7);
+  }
+
+  .ui-btn-secondary:active {
+    transform: translateY(1px);
+  }
+
+  /* =========================
+   * Ghost Button
+   * ========================= */
+
+  .ui-btn-ghost {
+    color: rgb(var(--ui-text-muted) / 0.85);
+  }
+
+  .ui-btn-ghost:hover {
+    color: rgb(var(--ui-text) / 0.95);
+    background-color: rgb(var(--ui-surface-2) / 0.7);
+  }
+
+  .ui-btn-ghost:active {
+    transform: translateY(1px);
+  }
+
+  /* =========================
+   * Soft Button
+   * ========================= */
+
+  .ui-btn-soft {
+    border: 1px solid rgb(var(--ui-border-strong) / 0.35);
+    background-color: rgb(var(--ui-surface) / 0.9);
+    color: rgb(var(--ui-text) / 0.92);
+    box-shadow: var(--ui-shadow-soft);
+  }
+
+  .ui-btn-soft:hover {
+    background-color: rgb(var(--ui-surface) / 1);
+  }
+
+  .ui-btn-soft:active {
+    transform: translateY(1px);
+  }
+
+  .dark .ui-btn-soft {
+    border-color: rgb(var(--ui-border) / 0.12);
+    background-color: rgb(255 255 255 / 0.06);
+    color: rgb(var(--ui-text) / 0.92);
+    box-shadow: none;
+  }
+
+  .dark .ui-btn-soft:hover {
+    background-color: rgb(255 255 255 / 0.09);
+  }
+
+  /* =========================
+   * Premium Button
+   * ========================= */
+
+  .ui-btn-premium {
+    border: 1px solid rgb(245 158 11 / 0.28);
+    background-color: rgb(251 191 36 / 0.18);
+    color: rgb(146 64 14 / 1);
+  }
+
+  .ui-btn-premium:hover {
+    background-color: rgb(251 191 36 / 0.26);
+  }
+
+  .dark .ui-btn-premium {
+    border-color: rgb(252 211 77 / 0.18);
+    background-color: rgb(251 191 36 / 0.14);
+    color: rgb(254 243 199 / 1);
+  }
+
+  .dark .ui-btn-premium:hover {
+    background-color: rgb(251 191 36 / 0.2);
+  }
+}

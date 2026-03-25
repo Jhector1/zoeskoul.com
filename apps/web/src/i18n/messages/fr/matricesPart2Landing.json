@@ -1,0 +1,28 @@
+ {
+    "pageTitle": "Matrices — Partie 2",
+    "pageIntro": "Approfondissez les normes, le rang, la tolérance et la stabilité numérique. Des entrées interactives vous aident à voir comment un faible bruit peut modifier les résultats.",
+    "quickStartEasy": "Commencer (Facile)",
+    "jumpRankEasy": "Rang (Facile)",
+
+    "parts": {
+      "part2": {
+        "badge": "Partie 2",
+        "title": "Matrices — Partie 2",
+        "subtitle": "Normes, rang, tolérance et intuition numérique",
+        "bullets": [
+          "Normes de matrices (Frobenius vs norme spectrale / norme 2)",
+          "Calculer les normes à partir des coefficients (et ce qu’elles mesurent)",
+          "Rang vs « rang effectif » avec une tolérance ε",
+          "Pourquoi un bruit minime peut faire basculer le rang (intuition de stabilité)",
+          "Matrices quasi singulières et sensibilité",
+          "Intuition du conditionnement (ce que signifie « mal conditionné »)",
+          "Conseils pratiques : arrondis, tolérance et comparaisons",
+          "Entraînement avec saisie complète de matrices (A, B, Aᵀ, A·B, etc.)"
+        ]
+      }
+    },
+
+    "recommendedPathTitle": "Parcours recommandé",
+    "routeHint": "Astuce : commencez avec un faible bruit / une petite ε, puis augmentez-la pour voir ce qui change."
+  }
+

@@ -1,0 +1,14 @@
+{
+  "LocaleSwitcher": {
+    "changing": "Changement...",
+    "changingTo": "Passage à {locale}...",
+    "ariaLabel": "Sélecteur de langue",
+    "switchTo": "Passer en {locale}",
+    "confirm": {
+      "title": "Changer de langue ?",
+      "description": "Votre progression actuelle est enregistrée pour {from}, mais vous commencerez une progression/session séparée pour {to}. Vous pouvez revenir à tout moment.",
+      "confirmText": "Changer",
+      "cancelText": "Rester"
+    }
+  }
+}

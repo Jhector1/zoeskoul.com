@@ -1,0 +1,153 @@
+{
+  "topics": {
+    "python": {
+      "python-2": {
+        "conditionals_basics": {
+          "label": "Conditionals: Teaching Your Program to Make Decisions",
+          "summary": "Use if/elif/else with comparisons and boolean logic (and/or/not) to control program flow, including truthy/falsey checks.",
+          "cards": {
+            "sketch": {
+              "title": "Conditionals (if / elif / else + boolean logic)"
+            },
+            "project": {
+              "title": "Project: Kiosk decisions (gate → discount → login)"
+            },
+            "quiz": {
+              "title": "Quick check: conditionals"
+            }
+          },
+          "projectSteps": {
+            "age_gate": {
+              "title": "Age gate (ALLOWED / DENIED)"
+            },
+            "member_discount": {
+              "title": "Member discount (10% off)"
+            },
+            "password_check": {
+              "title": "Admin login (password check)"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "py": {
+      "cond": {
+        "basics": {
+          "title": "Conditionals: Teaching Your Program to Make Decisions",
+          "bodyMarkdown": "So far you can:\n\n- store values in **variables**\n- understand **types**\n- compute using **operators + expressions**\n- work with **strings**\n- build mini-programs with **input → convert → compute → show**\n\nNow we add something that makes programs feel *intelligent*:\n\n✅ **Decision making**\n\nThink of your program like a **security guard at a door**.\n\nThe guard checks conditions:\n\n- “Are you on the list?”\n- “Are you old enough?”\n- “Do you have the correct password?”\n\nDepending on the answer, the guard decides what to do next.\n\nThat’s exactly what **conditionals** do.\n\nThey allow a program to **choose between different paths**.\n\n---\n\n## The `if` statement\n\n`if` means:\n\n> “Run this block only if the condition is **True**.”\n\nExample:\n\n~~~python\nage = 16\n\nif age >= 18:\n    print(\"Access granted.\")\n~~~\n\nHere the condition is:\n\n`age >= 18`\n\nIf it evaluates to **True**, the code runs.  \nIf it evaluates to **False**, Python skips the block.\n\n---\n\n## Indentation matters\n\nNotice the space before `print()`.\n\nPython uses **indentation** to mark blocks of code.\n\nEverything indented under `if` belongs to that decision.\n\n~~~python\nif condition:\n    do_this()\n    do_that()\n~~~\n\n---\n\n## `if` / `else`\n\nOften you want **two possible outcomes**.\n\n~~~python\nage = 16\n\nif age >= 18:\n    print(\"Access granted.\")\nelse:\n    print(\"Access denied.\")\n~~~\n\nNow the program always chooses **one of two paths**.\n\n---\n\n## Try it\n\n~~~python\nage = int(input(\"Age: \"))\n\nif age >= 18:\n    print(\"✅ You can enter.\")\nelse:\n    print(\"⛔ Not yet.\")\n~~~\n\nRun it twice:\n\n- once with **18 or higher**\n- once with a **smaller number**\n\nNotice how the program behaves differently.\n\n---\n\n## `elif`: more than two choices\n\nSometimes you need more than two possible paths.\n\n`elif` means **“else if.”**\n\n~~~python\nscore = 82\n\nif score >= 90:\n    print(\"A\")\nelif score >= 80:\n    print(\"B\")\nelif score >= 70:\n    print(\"C\")\nelse:\n    print(\"Needs improvement\")\n~~~\n\nPython checks conditions **from top to bottom** and stops at the first match.\n\n---\n\n## Example: Grade Checker\n\n~~~python\nscore = int(input(\"Score (0-100): \"))\n\nif score >= 90:\n    print(\"Grade: A\")\nelif score >= 80:\n    print(\"Grade: B\")\nelif score >= 70:\n    print(\"Grade: C\")\nelif score >= 60:\n    print(\"Grade: D\")\nelse:\n    print(\"Grade: F\")\n~~~\n\nTry different scores and see what happens.\n\n---\n\n## Boolean logic: combining conditions\n\nSometimes decisions depend on **multiple conditions**.\n\nPython provides logical operators:\n\n### `and` (both must be True)\n\n~~~python\nage = 20\nhas_id = True\n\nif age >= 18 and has_id:\n    print(\"✅ Allowed\")\nelse:\n    print(\"⛔ Not allowed\")\n~~~\n\n---\n\n### `or` (at least one must be True)\n\n~~~python\nis_member = False\nhas_coupon = True\n\nif is_member or has_coupon:\n    print(\"Discount applied!\")\n~~~\n\n---\n\n### `not` (reverse True / False)\n\n~~~python\nis_banned = False\n\nif not is_banned:\n    print(\"Welcome!\")\n~~~\n\n---\n\n## Example: Login Check\n\nImagine your program acting like the guard checking a password.\n\n~~~python\npassword = input(\"Password: \")\n\nif password == \"letmein\":\n    print(\"✅ Logged in\")\nelse:\n    print(\"⛔ Wrong password\")\n~~~\n\nTry:\n\n- `letmein`\n- anything else\n\n---\n\n## Truthy and Falsey values\n\nSome values behave like **False** even if they aren’t literally `False`.\n\nCommon falsey values:\n\n- `False`\n- `0`\n- `\"\"` (empty string)\n- `None`\n\nExample:\n\n~~~python\nname = input(\"Name (press Enter to skip): \")\n\nif name:\n    print(f\"Hello, {name}!\")\nelse:\n    print(\"Hello, stranger!\")\n~~~\n\nIf the user presses **Enter**, the string is empty and the program runs the `else` branch.\n\n---\n\n## Example: Shipping Rules\n\n~~~python\ntotal = float(input(\"Cart total: \"))\n\nif total >= 50:\n    print(\"✅ Free shipping!\")\nelse:\n    print(\"Shipping cost: $6.99\")\n~~~\n\nTry entering different totals.\n\n---\n\n## What you unlocked\n\nConditionals allow your program to:\n\n- **decide**\n- **branch**\n- respond differently to different inputs\n\nWithout conditionals, programs can only follow a **single path**.\n\nWith conditionals, programs can **adapt to the situation**.\n\n---\n\n## Next step\n\nNow that your program can **decide**, the next step is teaching it to **repeat actions**.\n\nNext topic: **Loops**.\n\nLoops allow programs to repeat tasks, such as:\n\n- asking for input again\n- processing lists of data\n- running until a condition is satisfied"
+        }
+      }
+    }
+  },
+  "common": {
+    "terminalInputLabel": "input",
+    "terminalOutputLabel": "output"
+  },
+  "quiz": {
+    "m2_cond_age_gate_code": {
+      "title": "Snack Shop Gate: adult or minor",
+      "prompt": "Story: you’re building a kiosk at a snack shop. Some items are 18+.\n\nRead ONE integer age.\n\nIf age >= 18 print:\nALLOWED\n\nElse print:\nDENIED",
+      "hint": "Use `if age >= 18:` and an `else:` block.",
+      "starterCode": "# TODO\n",
+      "runtime": {
+        "allowedText": "ALLOWED",
+        "deniedText": "DENIED"
+      }
+    },
+    "m2_cond_member_discount_code": {
+      "title": "Snack Shop Discount: member saves 10%",
+      "prompt": "Story: the snack shop gives members a 10% discount.\n\nRead TWO inputs:\n1) subtotal (integer dollars)\n2) member flag (y/n)\n\nRules:\n- if member is y (or Y), apply 10% discount using integer math\n- otherwise no discount\n\nPrint exactly:\nTotal = <total>",
+      "hint": "Use: `member.lower() == \"y\"` and compute `subtotal * 10 // 100`.",
+      "starterCode": "# TODO\n",
+      "runtime": {
+        "totalLineTemplate": "Total = {total}"
+      }
+    },
+    "m2_cond_password_check_code": {
+      "title": "Kiosk Login: password check",
+      "prompt": "Story: the kiosk has an admin mode.\n\nRead ONE input password.\n\nIf password == \"letmein\" print:\nLogged in\n\nElse print:\nWrong password",
+      "hint": "Use `==` (comparison), not `=` (assignment).",
+      "starterCode": "# TODO\n",
+      "runtime": {
+        "loggedInText": "Logged in",
+        "wrongPasswordText": "Wrong password"
+      }
+    },
+    "m2_cond_elif_meaning_sc": {
+      "title": "`elif` meaning",
+      "prompt": "In Python, `elif` is best described as:",
+      "options": {
+        "a": "A loop that repeats code",
+        "b": "An “else if” branch (another condition to test)",
+        "c": "A way to import libraries"
+      },
+      "hint": "`elif` = else if (check another condition)."
+    },
+    "m2_cond_indent_matters_sc": {
+      "title": "Indentation defines the block",
+      "prompt": "Which statement is true about indentation in Python `if` blocks?",
+      "options": {
+        "a": "Indentation is optional; Python uses braces `{}` instead",
+        "b": "Indentation only matters inside functions, not `if` statements",
+        "c": "Indented lines under `if` belong to that decision block",
+        "d": "Indentation is only for making code look pretty"
+      },
+      "hint": "Python uses indentation to group lines into a block."
+    },
+    "m2_cond_elif_order_sc": {
+      "title": "`elif` order",
+      "prompt": "When Python evaluates an `if / elif / else` chain, it:",
+      "options": {
+        "a": "Checks all branches and runs every matching one",
+        "b": "Checks from top to bottom and stops at the first match",
+        "c": "Always runs the `else` block first"
+      },
+      "hint": "Only the first matching condition runs."
+    },
+    "m2_cond_comparison_vs_assignment_sc": {
+      "title": "`==` vs `=`",
+      "prompt": "Which operator compares two values for equality in Python?",
+      "options": {
+        "a": "`==`",
+        "b": "`=`",
+        "c": "`=>`",
+        "d": "`:=`"
+      },
+      "hint": "`==` checks equality. `=` assigns a value."
+    },
+    "m2_cond_and_or_sc": {
+      "title": "`and` vs `or`",
+      "prompt": "If you need both conditions to be True, you should use:",
+      "options": {
+        "a": "`or`",
+        "b": "`and`",
+        "c": "`not`"
+      },
+      "hint": "`and` requires both sides to be True."
+    },
+    "m2_cond_falsey_values_mc": {
+      "title": "Falsey values",
+      "prompt": "Which of these are considered falsey in Python? (Choose all that apply.)",
+      "options": {
+        "a": "`0`",
+        "b": "`\"\"` (empty string)",
+        "c": "`[]` (empty list)",
+        "d": "`5`"
+      },
+      "hint": "Empty/zero/None-like values behave as False in conditions."
+    },
+    "m2_cond_logical_ops_mc": {
+      "title": "Logical operators",
+      "prompt": "Which of these are Python logical operators? (Choose all that apply.)",
+      "options": {
+        "a": "`and`",
+        "b": "`or`",
+        "c": "`not`",
+        "d": "`elif`"
+      },
+      "hint": "`elif` is a branch keyword. `and/or/not` are logical operators."
+    }
+  }
+}

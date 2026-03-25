@@ -1,0 +1,29 @@
+{
+  "name": "@zoeskoul/runner",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc -p tsconfig.json --outDir dist",
+    "start": "node dist/server.js",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "keywords": [],
+  "author": "info@zoeskoul.com",
+  "license": "ISC",
+  "packageManager": "pnpm@10.33.0",
+  "dependencies": {
+    "@zoeskoul/code-contracts": "workspace:*",
+    "cors": "^2.8.6",
+    "dockerode": "^4.0.10",
+    "express": "^5.2.1",
+    "uuid": "^13.0.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.6",
+    "@types/node": "^20.19.37",
+    "tsx": "^4.21.0",
+    "typescript": "^6.0.2"
+  }
+}

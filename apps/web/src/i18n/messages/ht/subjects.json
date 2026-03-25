@@ -1,0 +1,22 @@
+{
+  "subjects": {
+    "python": {
+      "title": "Python",
+      "description": "Pratik pwogramasyon Python.",
+      "imageAlt": "Kouvèti sijè Python"
+    }
+  },
+  "subjectsUi": {
+    "headerTitle": "Chwazi yon sijè",
+    "headerSubtitle": "Kòmanse aprann nan kèk minit. Chwazi yon sijè pou ouvri modil li yo.",
+    "searchPlaceholder": "Chèche sijè yo…",
+    "searchClear": "Efase",
+    "resultsCount": "{count, plural, =0 {Pa gen sijè} one {# sijè} other {# sijè}}",
+    "noSubjectsFound": "Nou pa jwenn okenn sijè.",
+    "enrolled": "Ou enskri",
+    "enrolling": "N ap enskri…",
+    "continue": "Kontinye",
+    "openModules": "Ouvri modil yo",
+    "noModulesYet": "Pa gen modil ankò"
+  }
+}

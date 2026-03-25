@@ -1,0 +1,77 @@
+{
+  "topics": {
+    "python": {
+      "python-0": {
+        "editor_workspace_overview": {
+          "label": "Understanding the editor, Run button, and terminal",
+          "summary": "A quick tour of the workspace, then a short hands-on exercise to run code and verify output in the terminal.",
+          "cards": {
+            "sketch0": {
+              "title": "Workspace overview"
+            },
+            "sketch1": {
+              "title": "Run your first edits"
+            },
+            "quiz": {
+              "title": "Quick check: the workspace"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "py": {
+      "workspace": {
+        "intro": {
+          "title": "Your Workspace: Where You’ll Write and Run Code",
+          "alt": "{appName} code workspace showing the module sidebar, code editor, run button, and terminal output.",
+          "caption": "**Quick tour**\n\n- **Left:** Module sidebar (navigate sections/topics)\n- **Center:** Code editor (where you write Python)\n- **Top-right:** **Run** button (executes your code)\n- **Bottom:** Terminal / console (shows output + errors)",
+          "markers": {
+            "sidebar": "Module sidebar",
+            "editor": "Code editor",
+            "run": "Run",
+            "terminal": "Terminal output"
+          }
+        },
+        "instructions_intro": {
+          "title": "Input, Processing, Output (Using Your Workspace)",
+          "bodyMarkdown": "Before we go further, I want to take a moment to make you familiar with your workspace.\n\n> **Note:** These instructions are written for **desktop** users. If you’re on a **phone or tablet**, the layout may look a little different.\n\nLet’s start on the **left side**: this is your **module sidebar**. You can navigate between sections by selecting one of the tiles.\n\nOn the **right**, you have your **code editor**.\n\nNow take a look at the layout. Click the **Run** button (the triangle icon) in the **top-right corner** of your code editor and confirm the text inside the quotes is printed in the terminal.\n\nCongratulations — you just learned how to execute your code and display the output in the terminal.\n\nNow copy this code, erase the current one, and run it again:\n\n~~~python\nprint(\"I am learning Python\")\n~~~\n\nVerify that it also displays in the terminal.\n\nWhen you finish, move on to the next topic and make sure you mark everything as read."
+        }
+      }
+    }
+  },
+
+  "quiz": {
+    "m0_workspace_run_button": {
+      "title": "Workspace: Run button",
+      "prompt": "What does the **Run** button do in your workspace?",
+      "options": {
+        "a": "Deletes your code so you can start over",
+        "b": "Executes your code and shows results in the terminal",
+        "c": "Only checks spelling and grammar"
+      },
+      "hint": "Run executes code; output appears in the terminal."
+    },
+    "m0_workspace_terminal_output": {
+      "title": "Workspace: Terminal output",
+      "prompt": "Where do **print() output** and **errors** usually appear?",
+      "options": {
+        "a": "In the module sidebar",
+        "b": "In the terminal / console area",
+        "c": "Inside your keyboard"
+      },
+      "hint": "The terminal shows printed output and error messages."
+    },
+    "m0_workspace_editor_area": {
+      "title": "Workspace: Code editor",
+      "prompt": "Where do you type Python code before running it?",
+      "options": {
+        "a": "In the code editor area",
+        "b": "In the terminal output area",
+        "c": "In the browser address bar"
+      },
+      "hint": "You write code in the editor, then run it."
+    }
+  }
+}

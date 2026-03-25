@@ -1,0 +1,49 @@
+{
+  "ExerciseRenderer": {
+    "singleChoice": {
+      "chooseOne": "Choose one"
+    },
+    "review": {
+      "emptyAll": "No questions yet.",
+      "emptyIncorrect": "No incorrect questions.",
+      "status": {
+        "revealed": "Revealed",
+        "correct": "✓ Correct",
+        "incorrect": "✕ Not correct",
+        "notChecked": "Not checked"
+      },
+      "card": {
+        "question": "Question {n}",
+        "attempts": "Attempts:",
+        "notCheckedYet": "Not checked yet",
+        "hiddenNote": "Correct answer is hidden for this run.",
+        "showDetails": "Show expected / explanation"
+      }
+    }
+  },
+
+  "practiceUi": {
+    "singleChoice": {
+      "chooseOne": "Choose one",
+      "storedAsPrefix": "Stored as",
+      "storedAsSuffix": "for submit."
+    },
+    "codeInput": {
+      "tools": {
+        "title": "Edit & run in Tools",
+        "language": "Language",
+        "stdin": "Stdin",
+        "bindTitle": "Bind this question to the Tools panel",
+        "bound": "Bound ✓",
+        "open": "Open in Tools",
+        "codeSnapshot": "Your code (snapshot)",
+        "stdinSnapshot": "Stdin (snapshot)",
+        "emptyCode": "// Open Tools → to write code"
+      },
+      "correctSolution": "Correct solution",
+      "yes": "yes",
+      "no": "no"
+    }
+  }
+
+}

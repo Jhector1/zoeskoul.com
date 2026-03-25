@@ -1,0 +1,106 @@
+{
+"Module0": {
+    "title": "Similatè vizyèl — Modil 0",
+    "badges": { "meta": "{mode} • Vektè • Dot • Projeksyon" },
+    "sections": {
+      "overlays": "Kouch yo",
+      "liveMath": "Matematik an dirèk",
+      "practice": "Mòd pratik"
+    },
+    "buttons": {
+      "randomize": "Mete a & b o aza",
+      "reset": "Reyinisyalize",
+      "zeroA": "Mete a = 0",
+      "zeroB": "Mete b = 0",
+      "newQuestion": "Nouvo kesyon",
+      "check": "Verifye",
+      "reveal": "Montre repons lan"
+    },
+    "status": {
+      "idle": "Klike sou « Nouvo kesyon ». Sèvi ak kouch yo pou w reflechi vizyèlman, epi reponn.",
+      "question": "Kesyon: {prompt}. Antre yon nimewo (tolerans ±{tolerance}{unit}).",
+      "noQuestion": "Pa gen kesyon ki aktif. Klike sou « Nouvo kesyon » anvan.",
+      "invalidNumber": "Tanpri antre yon nimewo ki valab (eg. 3.5 oswa -2).",
+      "correct": "✅ Kòrèk. {value} anndan tolerans lan.",
+      "incorrect": "❌ Pa twò lwen, men li pa bon. Ou di {value}. Eseye ankò ak kouch yo.",
+      "noReveal": "Pa gen kesyon pou revele. Klike sou « Nouvo kesyon » anvan.",
+      "answer": "Repons: {value}{unit}",
+      "randomized": "Mete vektè yo o aza. Trennen pwent yo pou w eksplore.",
+      "reset": "Retounen sou vektè default yo.",
+      "zeroA": "Mete a = 0. Dot/projeksyon vin 0.",
+      "zeroB": "Mete b = 0. Projeksyon/ang lan vin endefini."
+    },
+    "desc": {
+      "2d": "Trennen pwent vektè yo. Projeksyon an montre proj₍b₎(a) epi ou ka montre pati pèpandikilè a si w vle.",
+      "3d": {
+        "beforeZ": "Fè kamera a vire (orbit). Trennen boul yo. Kenbe",
+        "afterZ": "pandan w ap trennen (oswa aktive Mode Pwofondè) pou chanje pwofondè."
+      }
+    },
+    "labels": {
+      "scale2d": "Echèl (px pa inite)",
+      "scale3d": "Echèl vizyèl",
+      "snapToGrid": "Kole sou griy la",
+      "depthMode": "Mode pwofondè (fòse trennen sou Z)",
+      "zKeyDetected": "Touche Z detekte:",
+      "on": "LIMEN",
+      "off": "etenn",
+      "gridStep": "Pa griy (inite)"
+    },
+    "toggles": {
+      "gridAxes": "Montre griy + aks yo",
+      "components": "Montre konpozan yo",
+      "angle": "Montre ang θ",
+      "projection": "Montre projeksyon",
+      "unitB": "Montre vektè inite b",
+      "perp": "Montre pati pèpandikilè a"
+    },
+    "questions": {
+      "dot": "Kalkile dot product a · b",
+      "angle": "Kalkile ang θ ant a ak b (degre)",
+      "scalarProj": "Kalkile projeksyon eskelè a sou b (longè lonbraj sou b)",
+      "projX": "Kalkile konpozan x nan proj_b(a)",
+      "projY": "Kalkile konpozan y nan proj_b(a)",
+      "projZ": "Kalkile konpozan z nan proj_b(a)"
+    },
+    "live": {
+      "aLabel": "a = {dims}",
+      "bLabel": "b = {dims}",
+      "magA": "|a|",
+      "magB": "|b|",
+      "dot": "dot a·b",
+      "cos": "cos(θ)",
+      "thetaDeg": "θ (degre)",
+      "scalarProj": "longè lonbraj sou b",
+      "projLen": "longè proj_b(a)",
+      "projVec": "proj_b(a)",
+      "perpVec": "a⊥",
+      "perpLen": "|a⊥|"
+    },
+    "practice": {
+      "questionType": "Kalite kesyon",
+      "yourAnswer": "Repons ou",
+      "placeholder": "eg. 3.5",
+      "active": "Aktif:",
+      "options": {
+        "dot": "Dot product a·b",
+        "angle": "Ang θ (degre)",
+        "scalarProj": "Longè lonbraj sou b",
+        "projX": "proj_b(a) konpozan x",
+        "projY": "proj_b(a) konpozan y",
+        "projZ": "proj_b(a) konpozan z (3D)"
+      }
+    },
+    "hud": {
+      "controlsTitle": "Kontwòl",
+      "legendTitle": "Lejand",
+      "shadow": "lonbraj",
+      "controls2d": "Trennen pwent yo. Sèvi ak projeksyon pou w wè kijan a kraze an proj₍b₎(a) + a⊥.",
+      "controls3d": {
+        "beforeZ": "Orbit: trennen espas vid la. Chwazi boul la pou w trennen li. Kenbe",
+        "afterZ": "(oswa Mode pwofondè) pou w deplase sou z."
+      }
+    },
+    "footerTip": "Si chwazi an 3D la difisil: fè zoom ak wou sourit la, epi klike dirèk sou boul la (pwent la)."
+  }
+}

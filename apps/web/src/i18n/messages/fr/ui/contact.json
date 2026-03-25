@@ -1,0 +1,68 @@
+{  "contact": {
+  "meta": {
+    "title": "Contacter ZoeSkoul",
+    "description": "Contactez ZoeSkoul pour l’assistance, les démonstrations, les partenariats et les questions générales."
+  },
+  "eyebrow": "Contacter ZoeSkoul",
+  "hero": {
+    "title": "Parlez à l’équipe ZoeSkoul",
+    "description": "Besoin d’assistance, d’une démonstration ou envie de discuter d’un partenariat ? Choisissez le moyen le plus rapide pour nous joindre.",
+    "ctaEmail": "Nous écrire",
+    "ctaDemo": "Réserver une démo",
+    "ctaWhatsApp": "Ouvrir WhatsApp"
+  },
+  "cards": {
+    "general": {
+      "title": "Questions générales",
+      "description": "Des questions sur ZoeSkoul, l’intégration, les fonctionnalités ou le fonctionnement de la plateforme.",
+      "cta": "Envoyer un email"
+    },
+    "support": {
+      "title": "Assistance",
+      "description": "Besoin d’aide pour la connexion, l’accès, la facturation, les abonnements ou un problème technique ?",
+      "cta": "Contacter l’assistance"
+    },
+    "whatsapp": {
+      "title": "WhatsApp",
+      "description": "Vous préférez un échange rapide ? Démarrez une conversation WhatsApp avec notre équipe.",
+      "cta": "Discuter sur WhatsApp"
+    },
+    "demo": {
+      "title": "Réserver une démo",
+      "description": "Planifiez une présentation en direct pour votre école, organisation ou équipe.",
+      "cta": "Réserver un appel"
+    },
+    "partnerships": {
+      "title": "Partenariats",
+      "description": "Intéressé par une collaboration, une licence, un investissement ou un partenariat stratégique ?",
+      "cta": "Discuter d’un partenariat"
+    },
+    "help": {
+      "title": "Centre d’aide",
+      "description": "Consultez les guides, FAQ et ressources d’assistance de la plateforme.",
+      "cta": "Ouvrir le centre d’aide"
+    }
+  },
+  "quickHelp": {
+    "title": "Besoin de quelque chose de précis ?",
+    "description": "ZoeSkoul accompagne les apprenants, enseignants, écoles et organisations qui souhaitent proposer des expériences d’apprentissage autonomes.",
+    "ctaPricing": "Voir les tarifs",
+    "ctaHelp": "Centre d’aide",
+    "ctaPartnership": "Demande de partenariat"
+  },
+
+  "mailSubjects": {
+    "general": "Demande ZoeSkoul",
+    "support": "Assistance ZoeSkoul",
+    "partnership": "Demande de partenariat ZoeSkoul"
+  },
+  "availability": {
+    "title": "Meilleurs moyens de nous joindre",
+    "description": "Choisissez l’option qui correspond à votre besoin pour que nous puissions répondre plus rapidement.",
+    "items": [
+      "Pour les problèmes de compte ou de plateforme : Assistance",
+      "Pour les réunions et démonstrations : Réserver une démo",
+      "Pour les collaborations ou opportunités commerciales : Partenariats"
+    ]
+  }}
+},

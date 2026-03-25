@@ -1,0 +1,332 @@
+{
+  "topics": {
+    "linear-algebra": {
+      "linear-algebra-0": {
+        "vectors": {
+          "label": "Vectors: meaning, dimension, and basic operations",
+          "summary": "Start with what a vector really is, how dimension works, and how to add or scale vectors.",
+          "cards": {
+            "sketch": { "title": "Vectors as packets of information" },
+            "quiz": { "title": "Quick check: vectors" }
+          }
+        },
+        "numpy": {
+          "label": "NumPy shapes: 1D, row, column, broadcasting",
+          "summary": "Learn the difference between mathematical dimension and NumPy shape so your code behaves the way you expect.",
+          "cards": {
+            "sketch": { "title": "Why shape matters in Python" },
+            "quiz": { "title": "Quick check: NumPy vectors" }
+          }
+        },
+        "dot": {
+          "label": "Dot product: one number that measures alignment",
+          "summary": "Compute dot products and connect the sign of the result to geometry and angle.",
+          "cards": {
+            "sketch": { "title": "Dot product as alignment" },
+            "quiz": { "title": "Quick check: dot product" }
+          }
+        },
+        "products": {
+          "label": "Hadamard vs outer product",
+          "summary": "Separate element-wise multiplication from matrix-building multiplication.",
+          "cards": {
+            "sketch": { "title": "Two very different products" },
+            "quiz": { "title": "Quick check: products" }
+          }
+        },
+        "projection": {
+          "label": "Projection: the part that points along a direction",
+          "summary": "Use projection to isolate the along-the-line part of a vector and separate it from the perpendicular part.",
+          "cards": {
+            "sketch": { "title": "Projection as a shadow" },
+            "quiz": { "title": "Quick check: projection" }
+          }
+        }
+      }
+    }
+  },
+
+  "sketches": {
+    "la": {
+      "vec": {
+        "basics": {
+          "title": "Vectors: packets of numbers with meaning",
+          "bodyMarkdown": "A vector is an **ordered list of numbers** treated as one object.\n\nThink of a delivery drone:\n- one number tells how far east or west it moved\n- one number tells how far north or south it moved\n- maybe another number tells how far up or down it moved\n\nThat bundle of numbers is a **vector**.\n\n---\n\n## Two useful ways to think about a vector\n\n### 1) Data view\nA vector can store information like:\n- monthly sales\n- temperatures across cities\n- RGB color values\n\n### 2) Geometry view\nA vector can also be an **arrow**:\n- it has a **direction**\n- it has a **length**\n\n---\n\n## Dimension vs orientation\n\nIf a vector has 3 entries, it lives in $\\mathbb{R}^3$.\nThat is its **dimension**.\n\nBut it may be **written** as either:\n- a **column vector**\n- a **row vector**\n\nThose are different **layouts**, not different mathematical dimensions.\n\n---\n\n## Operations you should know first\n\n### Add vectors\nAdd entry by entry.\n\n### Scale a vector\nMultiply every entry by the same number.\n\nThat is why vectors are so useful: they let you move, measure, and transform information in a structured way."
+        },
+        "numpy": {
+          "title": "NumPy shapes: where coding meets linear algebra",
+          "bodyMarkdown": "In math, a vector is mostly about the **entries**.\nIn NumPy, a vector is also about **shape**.\n\nThat difference causes a lot of beginner confusion.\n\n---\n\n## Same numbers, different shapes\n\n~~~python\nnp.array([1,2,3])        # shape (3,)\nnp.array([[1,2,3]])      # shape (1,3)\nnp.array([[1],[2],[3]])  # shape (3,1)\n~~~\n\nAll of these contain the same values, but NumPy stores them differently.\n\n---\n\n## Why this matters\n\nWhen shapes differ, operations can behave very differently.\n\nFor example, broadcasting can turn what looks like “vector addition” into a whole matrix.\n\nSo in code, always ask:\n- how many entries are there?\n- what is the array shape?\n\nThose are not the same question."
+        },
+        "dot": {
+          "title": "Dot product: measuring alignment",
+          "bodyMarkdown": "The dot product takes **two vectors** and returns **one number**.\n\nThat number tells you how much the two vectors point in the same direction.\n\n---\n\n## Intuition\n\nImagine pushing a box across the floor.\nIf your force points mostly in the same direction as the motion, the effect is strong.\nIf your force points sideways, it contributes very little.\n\nThe dot product captures that idea of **alignment**.\n\n---\n\n## Sign meaning\n\n- positive dot product → mostly same direction\n- zero dot product → perpendicular\n- negative dot product → mostly opposite direction\n\n---\n\n## Algebra formula\n\n$$\na\\cdot b = a_1b_1 + a_2b_2 + \\cdots + a_nb_n\n$$\n\nSo the dot product is both:\n- a concrete computation\n- a geometric meaning"
+        },
+        "products": {
+          "title": "Hadamard vs outer product",
+          "bodyMarkdown": "Students often hear “multiply vectors” and assume there is only one meaning.\nThere isn’t.\n\n---\n\n## Hadamard product\n\nThis is **entry-by-entry multiplication**.\n\nIt only works when both vectors have the same number of entries.\n\n---\n\n## Outer product\n\nThis takes one vector and multiplies it against another to build a **matrix**.\n\nSo instead of returning a vector or a single number, it returns a rectangular grid of values.\n\n---\n\n## Why the distinction matters\n\nThese operations answer different questions:\n- Hadamard: compare entries pair by pair\n- Outer product: build all pairwise products into a matrix\n\nSame word “multiply,” very different result."
+        },
+        "projection": {
+          "title": "Projection: the shadow along a direction",
+          "bodyMarkdown": "Projection answers this question:\n\n> How much of one vector points along another direction?\n\nA good mental image is a flashlight.\nA vector casts a kind of **shadow** onto a line.\nThat shadow is the **projection**.\n\n---\n\n## Why this matters\n\nProjection lets you split a vector into two parts:\n- the part that lies **along** a chosen direction\n- the part that is **perpendicular** to it\n\nThat idea shows up everywhere:\n- physics\n- graphics\n- data science\n- least squares\n\n---\n\n## Core formula\n\n$$\n\\operatorname{proj}_a(b)=\\frac{a\\cdot b}{a\\cdot a}a\n$$\n\nThe scalar in front tells you **how far along** vector $a$ you should go."
+        }
+      }
+    }
+  },
+
+  "quiz": {
+    "la_vectors_dimension": {
+      "title": "Vector dimension",
+      "hint": "Count the number of entries. That tells you the vector space.",
+      "options": {
+        "a": "It belongs to the vector space matching its number of entries",
+        "b": "It belongs to a space with one fewer entry",
+        "c": "It belongs to a space with one extra entry",
+        "d": "There is not enough information"
+      }
+    },
+
+    "la_vectors_orientation": {
+      "title": "Row or column?",
+      "hint": "A row goes across. A column goes up and down.",
+      "options": {
+        "a": "Row vector",
+        "b": "Column vector",
+        "c": "Neither"
+      }
+    },
+
+    "la_vectors_membership": {
+      "title": "Membership in R^n",
+      "hint": "If there are n entries, the vector lives in R^n.",
+      "options": {
+        "d": "It cannot be determined"
+      }
+    },
+
+    "la_vectors_add_defined": {
+      "title": "When is addition defined?",
+      "hint": "Vector addition needs matching lengths.",
+      "options": {
+        "a": "Yes",
+        "b": "No"
+      }
+    },
+
+    "la_vectors_scalar_mult_input": {
+      "title": "Scale the vector",
+      "hint": "Multiply every component by the scalar."
+    },
+
+    "la_vectors_add_input": {
+      "title": "Add two vectors",
+      "hint": "Add component by component."
+    },
+
+    "la_numpy_shapes_basic": {
+      "title": "Basic NumPy shapes",
+      "prompt": "Which set of shapes is correct for `asArray`, `rowVec`, and `colVec`?",
+      "hint": "`np.array([1,2,3])` is `(3,)`, a row is `(1,3)`, and a column is `(3,1)`.",
+      "options": {
+        "a": "(3,), (1,3), (3,1)",
+        "b": "(1,3), (3,), (3,1)",
+        "c": "(3,1), (1,3), (3,)",
+        "d": "(3,), (3,1), (1,3)"
+      }
+    },
+
+    "la_numpy_column_shape": {
+      "title": "Column vector shape",
+      "prompt": "What is the NumPy shape of `np.array([[1],[2],[3]])`?",
+      "hint": "Three rows, one column.",
+      "options": {
+        "a": "(3,)",
+        "b": "(1,3)",
+        "c": "(3,1)",
+        "d": "(1,1)"
+      }
+    },
+
+    "la_numpy_transpose_shape": {
+      "title": "Transpose shape",
+      "prompt": "If `rowVec.shape == (1,3)`, what is `rowVec.T.shape`?",
+      "hint": "Transpose swaps rows and columns.",
+      "options": {
+        "a": "(1,3)",
+        "b": "(3,1)",
+        "c": "(3,)",
+        "d": "(1,1)"
+      }
+    },
+
+    "la_numpy_broadcast_shape": {
+      "title": "Broadcasting result",
+      "prompt": "If `v` has shape `(3,1)` and `w` has shape `(1,2)`, what shape does `v + w` have?",
+      "hint": "Broadcasting expands across both dimensions.",
+      "options": {
+        "a": "(3,1)",
+        "b": "(1,2)",
+        "c": "(3,2)",
+        "d": "(2,3)"
+      }
+    },
+
+    "la_numpy_list_vs_array": {
+      "title": "List vs array multiplication",
+      "prompt": "What is true about `a * 2` for a Python list and a NumPy array?",
+      "hint": "A Python list repeats. A NumPy array scales entry by entry.",
+      "options": {
+        "a": "Both do entry-wise multiplication",
+        "b": "List repeats; NumPy array scales",
+        "c": "List errors; NumPy array repeats",
+        "d": "Both repeat"
+      }
+    },
+
+    "la_dot_numeric": {
+      "title": "Compute the dot product",
+      "hint": "Multiply matching entries, then add."
+    },
+
+    "la_dot_sign_angle": {
+      "title": "Dot sign and angle",
+      "hint": "Positive means acute, zero means right, negative means obtuse.",
+      "options": {
+        "a": "Acute",
+        "b": "Right",
+        "c": "Obtuse"
+      }
+    },
+
+    "la_dot_zero_means": {
+      "title": "What does zero dot product mean?",
+      "prompt": "If `a · b = 0`, what is the usual geometric interpretation?",
+      "hint": "Zero dot product usually signals orthogonality.",
+      "options": {
+        "a": "The vectors are equal",
+        "b": "The vectors are perpendicular",
+        "c": "The vectors have length 1",
+        "d": "The vectors are parallel"
+      }
+    },
+
+    "la_dot_commutative": {
+      "title": "Commutative property",
+      "prompt": "Which statement is always true?",
+      "hint": "The dot product is commutative.",
+      "options": {
+        "a": "a · b = b · a",
+        "b": "a · b = a + b",
+        "c": "a · b is always positive",
+        "d": "a · b is a vector"
+      }
+    },
+
+    "la_dot_self_norm": {
+      "title": "Dot product with itself",
+      "prompt": "Which statement is true?",
+      "hint": "A vector dotted with itself gives the squared norm.",
+      "options": {
+        "a": "a · a = ||a||",
+        "b": "a · a = 1",
+        "c": "a · a = ||a||^2",
+        "d": "a · a = 0"
+      }
+    },
+
+    "la_products_hadamard_defined": {
+      "title": "Hadamard product defined?",
+      "hint": "Entry-wise multiplication needs matching lengths.",
+      "options": {
+        "a": "Yes",
+        "b": "No"
+      }
+    },
+
+    "la_products_outer_shape": {
+      "title": "Outer product shape",
+      "hint": "If a has m entries and b has n entries, `ab^T` is `m × n`."
+    },
+
+    "la_products_outer_entry": {
+      "title": "One entry of the outer product",
+      "hint": "Multiply the chosen entry from the left vector by the chosen entry from the right vector."
+    },
+
+    "la_products_hadamard_vs_dot": {
+      "title": "Hadamard vs dot",
+      "prompt": "Which statement is true?",
+      "hint": "Hadamard returns entry-wise products. Dot returns one number.",
+      "options": {
+        "a": "Both always return a single number",
+        "b": "Hadamard returns a vector-like array; dot returns one number",
+        "c": "Hadamard and dot are the same",
+        "d": "Outer product and dot are the same"
+      }
+    },
+
+    "la_products_hadamard_meaning": {
+      "title": "Meaning of Hadamard product",
+      "prompt": "What does the Hadamard product do?",
+      "hint": "It multiplies matching entries.",
+      "options": {
+        "a": "It multiplies entry by entry",
+        "b": "It makes a matrix from every pair",
+        "c": "It computes the angle directly",
+        "d": "It adds the vectors"
+      }
+    },
+
+    "la_projection_meaning": {
+      "title": "Meaning of projection",
+      "prompt": "What does projecting `b` onto `a` tell you?",
+      "hint": "Think of the shadow of `b` along the direction of `a`.",
+      "options": {
+        "a": "How long `a` is",
+        "b": "How much of `b` points along `a`",
+        "c": "Whether `a` equals `b`",
+        "d": "The determinant of a matrix"
+      }
+    },
+
+    "la_projection_formula": {
+      "title": "Projection formula",
+      "prompt": "Which formula gives the projection of `b` onto `a`?",
+      "hint": "Use `(a · b) / (a · a)` times `a`.",
+      "options": {
+        "a": "(a · b)b",
+        "b": "(a · a)b",
+        "c": "((a · b) / (a · a))a",
+        "d": "((b · b) / (a · b))a"
+      }
+    },
+
+    "la_projection_beta_numeric": {
+      "title": "Projection scalar beta",
+      "hint": "Use `beta = (a · b) / (a · a)`."
+    },
+
+    "la_projection_perp_zero": {
+      "title": "Projection of a perpendicular vector",
+      "prompt": "If `b` is perpendicular to `a`, what is the projection of `b` onto `a`?",
+      "hint": "Perpendicular means the dot product is zero.",
+      "options": {
+        "a": "The zero vector",
+        "b": "Exactly `a`",
+        "c": "Exactly `b`",
+        "d": "It is undefined"
+      }
+    },
+
+    "la_projection_split": {
+      "title": "Orthogonal decomposition",
+      "prompt": "A vector can be split into which two parts relative to a direction?",
+      "hint": "One part lies along the direction and the other is perpendicular.",
+      "options": {
+        "a": "Positive and negative parts",
+        "b": "Left and right parts",
+        "c": "Real and imaginary parts",
+        "d": "Parallel and perpendicular parts"
+      }
+    }
+  }
+}

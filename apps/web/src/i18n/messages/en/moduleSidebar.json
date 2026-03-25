@@ -1,0 +1,18 @@
+{
+  "moduleSidebarUi": {
+    "topicsLabel": "Topics",
+    "unlockEnabled": "UNLOCK ENABLED",
+    "collapseTitle": "Collapse sidebar",
+    "resetTitle": "Reset all progress in this module",
+    "reset": "Reset",
+    "current": "CURRENT",
+    "nextModule": {
+      "title": "Next module",
+      "loading": "Loading…",
+      "error": "Couldn’t load navigation.",
+      "unlocked": "Unlocked.",
+      "unlockedAfterAssignment": "Unlocked after assignment.",
+      "locked": "Finish topics + assignment to unlock."
+    }
+  }
+}

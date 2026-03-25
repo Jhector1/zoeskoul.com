@@ -1,0 +1,37 @@
+{
+  "Header": {
+    "language": "Langue",
+    "billing": "Prix",
+    "settings": "Parametres",
+    "home": "Accueil",
+    "practice": "Apprendre & Exercices",
+    "assignments": "Devoirs",
+    "subjects": "Matiere",
+    "tagline": "Visuelle • Exercices • Progrès",
+    "startSession": "Commencer",
+    "signIn": "Se connecter",
+    "profile": "Profil",
+    "logout": "Se déconnecter",
+    "menu": "Menu",
+    "close": "Fermer",
+    "openSettings": "Ouvrir les réglages",
+
+    "settingsSubtitle": "Apparence et langue",
+    "theme": "Thème",
+    "themeHint": "Clair / Sombre",
+
+    "sound": "Son",
+    "tip": "Astuce : utilisez Exercices pour suivre vos tentatives, vos bonnes réponses et vos questions manquées.",
+    "toggleMenu": "Afficher/masquer le menu",
+    "soundHint": "Activer ou désactiver les sons de l’interface"
+
+  },
+
+  "UserMenu": {
+    "ariaLabel": "Menu utilisateur",
+    "avatarAlt": "Avatar de {name}",
+    "profile": "Profil",
+    "progress": "Progrès",
+    "logout": "Se déconnecter"
+  }
+}

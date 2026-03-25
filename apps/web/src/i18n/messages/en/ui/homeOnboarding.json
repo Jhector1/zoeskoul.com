@@ -1,0 +1,151 @@
+{
+  "homeOnboarding": {
+    "common": {
+      "notSet": "Not set",
+      "featured": "Featured",
+      "guide": "Guide",
+      "mvp": "MVP"
+    },
+    "labels": {
+      "language": {
+        "english": "English",
+        "french": "Français",
+        "haitian-creole": "Kreyòl"
+      },
+      "level": {
+        "beginner": "Beginner",
+        "intermediate": "Intermediate",
+        "advanced": "Advanced"
+      },
+      "studyTime": {
+        "1-2-hours": "1–2 hours",
+        "3-5-hours": "3–5 hours",
+        "6-plus-hours": "6+ hours"
+      },
+      "theme": {
+        "light": "Light",
+        "dark": "Dark"
+      }
+    },
+    "welcome": {
+      "fallbackGoals": "your learning goals",
+      "new": "Welcome. I’ll shape your {appName} home around {interestText}, in {language}, with a pace that feels realistic from day one.",
+      "returning": "Welcome back. Your dashboard is still focused on {interestText}, with a {level} path, a {studyTime} study pace, and a {theme} theme."
+    },
+    "interestSummary": {
+      "empty": "Choose a subject and {appName} will surface the right next lesson, practice set, and trial.",
+      "focused": "Focused on {interests}. Start where it matters most."
+    },
+    "gate": {
+      "kicker": "Welcome",
+      "title": "Welcome to {appName}! Let’s set up your learning space.",      "description": "Answer a few quick questions to personalize language, subjects, level, pace, and theme. You can change everything later."
+    },
+    "hero": {
+      "kicker": "Personalized learning",
+      "title": "{appName} organizes your dashboard around the subjects you want to learn.",
+      "descriptionFresh": "{appName} starts with a short guided setup, then recommends the right subjects, practice entry points, and trial questions based on your language, level, and weekly pace.",
+      "chooseSubject": "Choose a subject to try",
+      "continueLearning": "Continue learning",
+      "try3Questions": "Try 3 questions",
+      "startingTrial": "Starting trial...",
+      "openGuide": "Open welcome guide",
+      "exploreSubjects": "Explore subjects",
+      "editPreferences": "Edit preferences",
+      "editAnswers": "Edit answers",
+      "currentTheme": "Current theme: {theme}"
+    },
+    "steps": {
+      "preferredLanguage": {
+        "title": "What language should {appName} use for your experience?",
+        "description": "This sets your default language for onboarding, navigation, and practice copy where translations are available."
+      },
+      "learningInterests": {
+        "title": "What do you want to focus on first?",
+        "description": "{appName} will prioritize the right subjects, entry points, and practice suggestions on your home."
+      },
+      "level": {
+        "title": "What best describes your current level?",
+        "description": "This helps {appName} decide whether to start you with foundations, mixed practice, or more advanced material."
+      },
+      "studyTime": {
+        "title": "How much time do you want to study each week?",
+        "description": "Your weekly pace helps keep recommendations realistic instead of overwhelming."
+      },
+      "discoverySource": {
+        "title": "How did you hear about {appName}?",
+        "description": "This helps us understand which channels bring in the right learners and improve onboarding over time."
+      },
+      "themePreference": {
+        "title": "Which theme would you like to use?",
+        "description": "Pick the look that feels best for reading, coding, and daily practice."
+      },
+      "trialIntent": {
+        "title": "Would you like to try 3 questions next?",
+        "description": "Start a short trial now, or come back to it from the homepage later."
+      },
+      "choices": {
+        "themeLightHint": "Bright and clean for daytime study.",
+        "themeDarkHint": "Softer for low light and longer sessions.",
+        "trialNowLabel": "Yes, let me try now",
+        "trialNowHint": "We’ll launch a short 3-question practice trial after setup.",
+        "trialLaterLabel": "Later",
+        "trialLaterHint": "You can start from the homepage whenever you’re ready.",
+        "search": "Search",
+        "friend": "Friend or colleague",
+        "social": "Social media",
+        "school-work": "School or work",
+        "other": "Other"
+      }
+    },
+    "panel": {
+      "title": "Personalize your space",
+      "description": "Answer a few quick questions. You can edit everything later.",
+      "skip": "Skip",
+      "step": "Step {current} of {total}",
+      "back": "Back",
+      "continue": "Continue",
+      "finish": "Finish setup"
+    },
+    "guideCard": {
+      "personalized": "Your space is personalized",
+      "ready": "Welcome guide is ready",
+      "start": "Start",
+      "updatePreferences": "Update preferences"
+    },
+    "highlights": {
+      "kicker": "Personalized home",
+      "title": "Minimal on day one. Smarter with progress.",
+      "description": "{appName} begins with a clean dashboard, then adapts using your interests, enrollments, and practice activity so the next step stays obvious.",
+      "cards": {
+        "language": {
+          "title": "Language",
+          "text": "Use the language that feels most natural while you browse subjects and start your learning journey."
+        },
+        "level": {
+          "title": "Level",
+          "text": "Your first recommendations can lean more foundational or more advanced based on your current comfort level."
+        },
+        "pace": {
+          "title": "Weekly pace",
+          "text": "Set a realistic weekly schedule and come back regularly. You’ll learn better and faster through consistent practice, so make it a habit."
+        }
+      }
+    },
+    "recommended": {
+      "kicker": "Recommended paths",
+      "title": "Start with the subjects you actually want to learn.",
+      "viewAll": "View all subjects",
+      "exploreSubject": "Explore subject"
+    },
+    "floatingAssistant": {
+      "title": "Need to adjust your setup?",
+      "subtitle": "Update your preferences"
+    },
+    "trial": {
+      "chooseSubjectError": "Choose a subject first.",
+      "startError": "Could not start the trial right now.",
+      "overlayTitle": "Preparing your first practice session.",
+      "overlayDescription": "This will only take a moment."
+    }
+  }
+}

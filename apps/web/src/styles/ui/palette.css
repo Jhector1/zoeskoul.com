@@ -1,0 +1,49 @@
+@layer utilities {
+    /* -------- text -------- */
+    .ui-text { color: rgb(var(--ui-text) / 0.92); }
+    .ui-text-muted { color: rgb(var(--ui-text-muted) / 0.70); }
+
+    /* semantic text */
+    .ui-text-accent { color: rgb(var(--ui-accent) / 0.95); }
+    .ui-text-info   { color: rgb(var(--ui-info) / 0.95); }
+    .ui-text-warn   { color: rgb(var(--ui-warn) / 0.95); }
+    .ui-text-danger { color: rgb(var(--ui-danger) / 0.95); }
+
+    /* -------- borders -------- */
+    .ui-border { border-color: rgb(var(--ui-border) / 1); }
+
+    /* semantic borders */
+    .ui-border-accent { border-color: rgb(var(--ui-accent) / 0.30); }
+    .ui-border-info   { border-color: rgb(var(--ui-info) / 0.30); }
+    .ui-border-warn   { border-color: rgb(var(--ui-warn) / 0.30); }
+    .ui-border-danger { border-color: rgb(var(--ui-danger) / 0.30); }
+
+    /* -------- surfaces -------- */
+    .ui-bg { background-color: rgb(var(--ui-bg) / 1); }
+    .ui-surface { background-color: rgb(var(--ui-surface) / 0.90); }
+    .ui-surface-2 { background-color: rgb(var(--ui-surface-2) / 0.75); }
+
+    /* semantic surface tints */
+    .ui-bg-accent-soft { background-color: rgb(var(--ui-accent) / 0.10); }
+    .ui-bg-info-soft   { background-color: rgb(var(--ui-info) / 0.10); }
+    .ui-bg-warn-soft   { background-color: rgb(var(--ui-warn) / 0.10); }
+    .ui-bg-danger-soft { background-color: rgb(var(--ui-danger) / 0.10); }
+
+    /* solid accents */
+    .ui-bg-accent { background-color: rgb(var(--ui-accent) / 1); }
+    .ui-bg-info   { background-color: rgb(var(--ui-info) / 1); }
+    .ui-bg-warn   { background-color: rgb(var(--ui-warn) / 1); }
+    .ui-bg-danger { background-color: rgb(var(--ui-danger) / 1); }
+
+    /* -------- focus ring -------- */
+    .ui-ring-focus {
+        outline: none;
+        box-shadow: 0 0 0 2px rgb(var(--ui-ring) / 0.35);
+    }
+
+    /* optional: only show ring on keyboard focus */
+    .ui-focus:focus-visible {
+        outline: none;
+        box-shadow: 0 0 0 2px rgb(var(--ui-ring) / 0.35);
+    }
+}

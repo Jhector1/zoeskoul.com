@@ -1,0 +1,24 @@
+{
+  "subjects": {
+    "python": {
+      "title": "Python",
+      "description": "Python programming practice.",
+      "imageAlt": "Python subject cover"
+    }
+  },
+  "subjectsUi": {
+    "headerTitle": "Choose a subject",
+    "headerSubtitle": "Start learning in minutes. Pick a subject to open its modules.",
+    "searchPlaceholder": "Search subjects…",
+    "searchClear": "Clear",
+    "resultsCount": "{count, plural, =0 {No subjects} one {# subject} other {# subjects}}",
+    "noSubjectsFound": "No subjects found.",
+    "enrolled": "Enrolled",
+    "enrolling": "Enrolling…",
+    "continue": "Continue",
+    "openModules": "Open modules",
+    "noModulesYet": "No modules yet",
+
+    "comingSoon": "Coming soon"
+  }
+}

@@ -1,0 +1,587 @@
+{
+  "topics": {
+    "linear-algebra": {
+      "linear-algebra-2": {
+        "vector_spaces": {
+          "label": "Vector spaces: the rules that make linear algebra work",
+          "summary": "Learn the axioms behind vector spaces and why closure, the zero vector, and scalar multiplication matter.",
+          "cards": {
+            "sketch": { "title": "What makes a set a vector space?" },
+            "quiz": { "title": "Quick check: vector spaces" }
+          }
+        },
+        "subspaces": {
+          "label": "Subspaces: smaller spaces living inside bigger ones",
+          "summary": "Understand when a subset of a vector space inherits the same structure and becomes a subspace.",
+          "cards": {
+            "sketch": { "title": "Subspaces inside larger spaces" },
+            "quiz": { "title": "Quick check: subspaces" }
+          }
+        },
+        "linear_combinations": {
+          "label": "Linear combinations and span",
+          "summary": "Build new vectors from old ones and understand how span describes everything you can reach.",
+          "cards": {
+            "sketch": { "title": "Building vectors from ingredients" },
+            "quiz": { "title": "Quick check: linear combinations" }
+          }
+        },
+        "linear_independence": {
+          "label": "Linear independence",
+          "summary": "Learn when vectors carry genuinely new information and when one vector is redundant.",
+          "cards": {
+            "sketch": { "title": "Redundancy vs independence" },
+            "quiz": { "title": "Quick check: linear independence" }
+          }
+        },
+        "basis_dimension": {
+          "label": "Basis and dimension",
+          "summary": "See how independence and span combine into basis, and how dimension measures the size of a space.",
+          "cards": {
+            "sketch": { "title": "The minimal building blocks of a space" },
+            "quiz": { "title": "Quick check: basis and dimension" }
+          }
+        },
+        "transpose": {
+          "label": "Transpose",
+          "summary": "Understand transpose as flipping rows and columns and learn the main algebra rules it obeys.",
+          "cards": {
+            "sketch": { "title": "Flipping rows into columns" },
+            "quiz": { "title": "Quick check: transpose" }
+          }
+        },
+        "determinant": {
+          "label": "Determinant",
+          "summary": "Compute determinants and connect them to area scaling, orientation, and invertibility.",
+          "cards": {
+            "sketch": { "title": "Determinant as scaling and orientation" },
+            "quiz": { "title": "Quick check: determinant" }
+          }
+        },
+        "inverse": {
+          "label": "Inverse",
+          "summary": "Learn what an inverse matrix does, when it exists, and how it undoes a transformation.",
+          "cards": {
+            "sketch": { "title": "Undoing a linear transformation" },
+            "quiz": { "title": "Quick check: inverse" }
+          }
+        },
+        "eigenvalues_eigenvectors": {
+          "label": "Eigenvalues and eigenvectors",
+          "summary": "Study the special directions a matrix only stretches or flips, and the scaling factors attached to them.",
+          "cards": {
+            "sketch": { "title": "Special directions that keep their line" },
+            "quiz": { "title": "Quick check: eigenvalues and eigenvectors" }
+          }
+        }
+      }
+    }
+  },
+
+  "sketches": {
+    "la": {
+      "mod2": {
+        "vector_spaces": {
+          "title": "Vector spaces: the rules behind the whole subject",
+          "bodyMarkdown": "A **vector space** is not just a pile of vectors. It is a set together with rules for **addition** and **scalar multiplication** that behave in a very controlled way.\n\nWhy do mathematicians care so much about these rules? Because once a set satisfies them, all the powerful tools of linear algebra become available.\n\n---\n\n## The big idea\n\nA vector space must let you:\n- add two vectors and stay inside the set\n- multiply a vector by a scalar and stay inside the set\n- use a zero vector\n- use negatives and algebra rules consistently\n\nThat means the space is stable under the operations you want to perform.\n\n---\n\n## Why this matters\n\nIf a collection is not a vector space, then many linear algebra methods break.\nYou lose closure, you lose structure, and formulas stop making sense.\n\nThat is why vector spaces are the first major abstraction of the subject:\nnot because they are fancy, but because they tell you **when the machinery is allowed to run**.\n\n---\n\n## Common examples\n\n- $\\mathbb{R}^n$\n- polynomials of degree at most $n$\n- continuous functions\n- matrices of a fixed size\n\nThe same theory works in all of them because they satisfy the same structural rules."
+        },
+        "subspaces": {
+          "title": "Subspaces: smaller vector spaces inside bigger ones",
+          "bodyMarkdown": "A **subspace** is a subset of a vector space that is itself still a vector space under the same operations.\n\nThat means you do **not** invent new addition or scalar multiplication. You inherit them from the larger space.\n\n---\n\n## The quick test\n\nTo check whether a subset is a subspace, you usually verify three things:\n\n1. it contains the zero vector\n2. it is closed under addition\n3. it is closed under scalar multiplication\n\nIf any one of these fails, it is not a subspace.\n\n---\n\n## Geometric intuition\n\nInside $\\mathbb{R}^2$, a line through the origin is a subspace.\nA line that does **not** pass through the origin is not.\n\nInside $\\mathbb{R}^3$:\n- the origin alone is a subspace\n- a line through the origin is a subspace\n- a plane through the origin is a subspace\n- the whole space is a subspace\n\n---\n\n## Why subspaces matter\n\nSubspaces are where solutions live.\nNull spaces, column spaces, row spaces, eigenspaces — all of these are subspaces.\n\nSo once you understand subspaces, you begin to understand where linear algebra stores its answers."
+        },
+        "linear_combinations": {
+          "title": "Linear combinations: building new vectors from old ones",
+          "bodyMarkdown": "A **linear combination** is what you get when you scale vectors and then add them.\n\n$$\na_1v_1 + a_2v_2 + \\cdots + a_kv_k\n$$\n\nThis is one of the deepest ideas in linear algebra because it tells you how vectors are **constructed**.\n\n---\n\n## Span\n\nThe **span** of a set of vectors is the collection of **all** linear combinations of those vectors.\n\nSo span answers a reachability question:\n\n> Starting from these vectors, what can I build?\n\n---\n\n## Geometry view\n\nIn $\\mathbb{R}^2$:\n- one nonzero vector spans a line through the origin\n- two nonparallel vectors span the whole plane\n\nIn $\\mathbb{R}^3$:\n- one vector spans a line\n- two independent vectors span a plane\n- three independent vectors span the whole space\n\n---\n\n## Why span matters\n\nSpan tells you whether your vectors are enough to describe a space.\nIt is one half of the basis idea.\nThe other half is independence."
+        },
+        "linear_independence": {
+          "title": "Linear independence: when no vector is redundant",
+          "bodyMarkdown": "A collection of vectors is **linearly independent** when none of them can be built from the others.\n\nEquivalently, the equation\n\n$$\na_1v_1 + a_2v_2 + \\cdots + a_kv_k = 0\n$$\n\nhas only the trivial solution\n\n$$\na_1 = a_2 = \\cdots = a_k = 0.\n$$\n\n---\n\n## Intuition\n\nIndependence means every vector contributes something new.\nDependence means at least one vector is redundant.\n\nSo independence is really about **information content**.\n\n---\n\n## Geometry view\n\nIn $\\mathbb{R}^2$:\n- two vectors are independent if they are not multiples of each other\n\nIn $\\mathbb{R}^3$:\n- three vectors are independent if none lies in the plane spanned by the other two\n\n---\n\n## Why it matters\n\nIf your vectors are dependent, you are carrying extra baggage.\nIf they are independent, you have a clean, efficient set of building blocks."
+        },
+        "basis_dimension": {
+          "title": "Basis and dimension: the smallest complete description",
+          "bodyMarkdown": "A **basis** is a set of vectors that is both:\n- linearly independent\n- spanning\n\nThat means the basis vectors are enough to build the whole space, but none of them is redundant.\n\n---\n\n## Why basis is so important\n\nA basis is the ideal coordinate system.\nIt gives you the smallest clean set of building blocks for the whole space.\n\nEvery vector in the space can be written uniquely as a combination of basis vectors.\n\n---\n\n## Dimension\n\nThe **dimension** of a vector space is the number of vectors in any basis.\n\nThat number measures how many independent directions the space has.\n\nExamples:\n- $\\mathbb{R}^2$ has dimension 2\n- $\\mathbb{R}^3$ has dimension 3\n- the space of polynomials of degree at most 2 has dimension 3\n\n---\n\n## Big picture\n\nSpan tells you whether your vectors are enough.\nIndependence tells you whether they are redundant.\nBasis is where those two ideas meet."
+        },
+        "transpose": {
+          "title": "Transpose: rows become columns",
+          "bodyMarkdown": "The **transpose** of a matrix flips its rows and columns.\n\nIf $A$ is an $m \\times n$ matrix, then $A^T$ is an $n \\times m$ matrix.\n\n---\n\n## Intuition\n\nTranspose is like viewing the same data from the other direction.\nWhat used to be a row becomes a column, and what used to be a column becomes a row.\n\n---\n\n## Why transpose matters\n\nTranspose appears everywhere:\n- dot products\n- symmetric matrices\n- least squares\n- orthogonality\n- matrix identities\n\n---\n\n## Important rules\n\n$$\n(A+B)^T = A^T + B^T\n$$\n\n$$\n(AB)^T = B^T A^T\n$$\n\nThat second rule is especially important: when transposing a product, the order reverses."
+        },
+        "determinant": {
+          "title": "Determinant: scaling, orientation, and invertibility",
+          "bodyMarkdown": "The **determinant** is a single number attached to a square matrix.\nIt tells you how the matrix scales area or volume and whether the transformation collapses space.\n\n---\n\n## Geometry meaning\n\nFor a $2 \\times 2$ matrix, the determinant tells you the signed area scaling.\nFor a $3 \\times 3$ matrix, it tells you signed volume scaling.\n\nIf the determinant is zero, the transformation squashes space into a lower dimension.\nThat means information is lost.\n\n---\n\n## Orientation\n\nA positive determinant keeps orientation.\nA negative determinant flips orientation.\n\n---\n\n## Why determinant matters\n\nA square matrix is invertible exactly when its determinant is nonzero.\nSo determinant is one of the fastest ways to test whether a matrix can be undone."
+        },
+        "inverse": {
+          "title": "Inverse: undoing what a matrix does",
+          "bodyMarkdown": "If a matrix $A$ has an inverse, then there exists a matrix $A^{-1}$ such that\n\n$$\nA^{-1}A = AA^{-1} = I.\n$$\n\nThat means applying $A$ and then $A^{-1}$ brings you back to where you started.\n\n---\n\n## Intuition\n\nThink of $A$ as a transformation.\nThe inverse is the transformation that perfectly undoes it.\n\nBut not every matrix has an inverse.\nIf a transformation crushes two different inputs to the same output, there is no way to uniquely reverse it.\n\n---\n\n## When does the inverse exist?\n\nFor square matrices:\n- inverse exists iff determinant is nonzero\n\n---\n\n## Why it matters\n\nInverses help solve systems, reverse transformations, and understand when information is preserved."
+        },
+        "eigenvalues_eigenvectors": {
+          "title": "Eigenvalues and eigenvectors: the special directions of a matrix",
+          "bodyMarkdown": "Most vectors change direction when a matrix acts on them.\nBut some special vectors keep their line.\nThey may stretch, shrink, or flip — but they do not turn away from that line.\n\nThose are **eigenvectors**.\nThe associated scale factors are **eigenvalues**.\n\n---\n\n## Definition\n\nA nonzero vector $v$ is an eigenvector of $A$ if\n\n$$\nAv = \\lambda v\n$$\n\nfor some scalar $\\lambda$.\n\n---\n\n## Why this matters\n\nEigenvectors reveal the natural directions of a transformation.\nEigenvalues reveal how strongly the matrix acts in those directions.\n\nThese ideas power:\n- differential equations\n- data science and PCA\n- quantum mechanics\n- network ranking\n- stability analysis\n\n---\n\n## Key intuition\n\nMost vectors get mixed.\nEigenvectors are the ones that do not get mixed — only scaled.\nThat is why they are so important."
+        }
+      }
+    }
+  },
+
+  "quiz": {
+    "la_m2_vector_space_axioms": {
+      "title": "Vector space axioms",
+      "prompt": "Which description best captures what a vector space must allow?",
+      "hint": "Think about closure, the zero vector, and scalar multiplication.",
+      "options": {
+        "a": "Only subtraction and division",
+        "b": "Only a notion of length",
+        "c": "Addition and scalar multiplication that satisfy the vector space rules",
+        "d": "Only matrix multiplication"
+      }
+    },
+    "la_m2_vector_space_zero_vector": {
+      "title": "Zero vector requirement",
+      "prompt": "Why must a vector space contain a zero vector?",
+      "hint": "The zero vector is part of the additive structure.",
+      "options": {
+        "a": "Because every vector space must have an additive identity",
+        "b": "Because every vector must have norm 0",
+        "c": "Because scalar multiplication is impossible otherwise",
+        "d": "Because bases always contain only the zero vector"
+      }
+    },
+    "la_m2_vector_space_not_every_set": {
+      "title": "Not every set is a vector space",
+      "prompt": "Why is not every collection of objects automatically a vector space?",
+      "hint": "The operations must stay inside the set and obey the rules.",
+      "options": {
+        "a": "Because vectors must always be arrows in 2D",
+        "b": "Because the set may fail closure or other axioms",
+        "c": "Because only matrices can form vector spaces",
+        "d": "Because scalar multiplication is never allowed"
+      }
+    },
+    "la_m2_vector_space_rn_example": {
+      "title": "A standard example",
+      "prompt": "Which of the following is a standard vector space?",
+      "hint": "Think of the most familiar example from linear algebra.",
+      "options": {
+        "a": "Only the positive vectors in R^n",
+        "b": "Only vectors of length 1 in R^n",
+        "c": "Only vectors with first coordinate 1",
+        "d": "All vectors in R^n"
+      }
+    },
+    "la_m2_vector_space_function_example": {
+      "title": "Functions as vectors",
+      "prompt": "Why can many sets of functions be treated as vector spaces?",
+      "hint": "Because you can add functions and scale them while staying in the set.",
+      "options": {
+        "a": "Because functions are always matrices",
+        "b": "Because addition and scalar multiplication can satisfy the axioms",
+        "c": "Because functions have determinants",
+        "d": "Because all functions are automatically eigenvectors"
+      }
+    },
+
+    "la_m2_subspace_definition": {
+      "title": "Subspace definition",
+      "prompt": "What is a subspace?",
+      "hint": "It is a subset that is still a vector space under the same operations.",
+      "options": {
+        "a": "Any subset with at least two vectors",
+        "b": "Any subset with nonzero vectors",
+        "c": "A subset that is itself a vector space under the inherited operations",
+        "d": "Any subset closed under subtraction only"
+      }
+    },
+    "la_m2_subspace_zero_required": {
+      "title": "Why zero matters",
+      "prompt": "Why must a subspace contain the zero vector?",
+      "hint": "A subspace is still a vector space.",
+      "options": {
+        "a": "Because every vector space must contain its additive identity",
+        "b": "Because zero is the only eigenvector",
+        "c": "Because dimension would be undefined otherwise",
+        "d": "Because it must contain every vector"
+      }
+    },
+    "la_m2_subspace_line_through_origin": {
+      "title": "Line through the origin",
+      "prompt": "Which line in R^2 is a subspace?",
+      "hint": "The origin is the deciding detail.",
+      "options": {
+        "a": "Any line at all",
+        "b": "A line through the origin",
+        "c": "A line parallel to the x-axis but not through the origin",
+        "d": "No line can be a subspace"
+      }
+    },
+    "la_m2_subspace_span_is_subspace": {
+      "title": "Span and subspaces",
+      "prompt": "What is always true about the span of a set of vectors?",
+      "hint": "Span collects all linear combinations.",
+      "options": {
+        "a": "It is never a subspace",
+        "b": "It is always one-dimensional",
+        "c": "It always equals the whole ambient space",
+        "d": "It is always a subspace"
+      }
+    },
+    "la_m2_subspace_polynomial_example": {
+      "title": "Polynomial example",
+      "prompt": "Which set is a subspace of the space of all polynomials?",
+      "hint": "Look for closure under addition and scalar multiplication.",
+      "options": {
+        "a": "Polynomials with constant term exactly 1",
+        "b": "Polynomials of degree at most 2",
+        "c": "Polynomials with leading coefficient exactly 5",
+        "d": "Polynomials with p(0)=1"
+      }
+    },
+
+    "la_m2_linear_combination_definition": {
+      "title": "Linear combination",
+      "prompt": "What is a linear combination of vectors?",
+      "hint": "Scale, then add.",
+      "options": {
+        "a": "A sum of scalar multiples of the vectors",
+        "b": "A determinant built from the vectors",
+        "c": "A transpose of the vectors",
+        "d": "A dot product only"
+      }
+    },
+    "la_m2_span_meaning": {
+      "title": "Meaning of span",
+      "prompt": "What does span tell you?",
+      "hint": "It answers a reachability question.",
+      "options": {
+        "a": "The determinant of a matrix",
+        "b": "Which vectors are longest",
+        "c": "All vectors obtainable as linear combinations",
+        "d": "Only the independent vectors"
+      }
+    },
+    "la_m2_linear_combination_compute_input": {
+      "title": "Compute a linear combination",
+      "hint": "Multiply first, then add component by component."
+    },
+    "la_m2_span_membership": {
+      "title": "Membership in a span",
+      "prompt": "To say a vector lies in the span of a set means:",
+      "hint": "Think about coefficients.",
+      "options": {
+        "a": "It is orthogonal to every vector in the set",
+        "b": "It can be written as a linear combination of the set",
+        "c": "It must be one of the original vectors exactly",
+        "d": "It has the same norm as the original vectors"
+      }
+    },
+    "la_m2_coefficients_role": {
+      "title": "Role of coefficients",
+      "prompt": "What do the coefficients in a linear combination do?",
+      "hint": "They control how much of each vector you use.",
+      "options": {
+        "a": "They always add to 1",
+        "b": "They must be positive",
+        "c": "They are always eigenvalues",
+        "d": "They scale the vectors before addition"
+      }
+    },
+
+    "la_m2_linear_independence_definition": {
+      "title": "Linear independence",
+      "prompt": "What does it mean for vectors to be linearly independent?",
+      "hint": "Look at the zero-combination equation.",
+      "options": {
+        "a": "They all have the same length",
+        "b": "They are pairwise orthogonal",
+        "c": "Only the trivial combination gives the zero vector",
+        "d": "They span the whole ambient space"
+      }
+    },
+    "la_m2_dependence_nontrivial_relation": {
+      "title": "Dependence and nontrivial relations",
+      "prompt": "A set of vectors is linearly dependent exactly when:",
+      "hint": "There exists a nontrivial relation.",
+      "options": {
+        "a": "A nonzero coefficient combination produces the zero vector",
+        "b": "The vectors are all nonzero",
+        "c": "Their dot products are positive",
+        "d": "They form a basis"
+      }
+    },
+    "la_m2_independence_geometric_r2": {
+      "title": "Geometric test in R^2",
+      "prompt": "When are two vectors in R^2 linearly independent?",
+      "hint": "Think multiples.",
+      "options": {
+        "a": "When they are equal",
+        "b": "When neither is a scalar multiple of the other",
+        "c": "When both have determinant zero",
+        "d": "When both have positive entries"
+      }
+    },
+    "la_m2_independence_matrix_example": {
+      "title": "Dependent or independent?",
+      "hint": "If one vector is a scalar multiple of the other, the set is dependent.",
+      "options": {
+        "a": "Yes",
+        "b": "No"
+      }
+    },
+    "la_m2_dependence_zero_vector": {
+      "title": "The zero vector and dependence",
+      "prompt": "What happens if a set contains the zero vector along with other vectors?",
+      "hint": "The zero vector creates an immediate nontrivial relation.",
+      "options": {
+        "a": "The set becomes orthogonal",
+        "b": "The set becomes a basis",
+        "c": "Nothing changes",
+        "d": "The set is automatically linearly dependent"
+      }
+    },
+
+    "la_m2_basis_definition": {
+      "title": "Basis definition",
+      "prompt": "What is a basis?",
+      "hint": "Basis combines span and independence.",
+      "options": {
+        "a": "A set that only spans",
+        "b": "A set that spans the space and is linearly independent",
+        "c": "Any set with n vectors",
+        "d": "Any orthogonal set"
+      }
+    },
+    "la_m2_dimension_meaning": {
+      "title": "Dimension",
+      "prompt": "What does the dimension of a vector space mean?",
+      "hint": "It is tied to basis size.",
+      "options": {
+        "a": "The number of vectors in any basis",
+        "b": "The determinant of the space",
+        "c": "The number of rows in any matrix",
+        "d": "The norm of the zero vector"
+      }
+    },
+    "la_m2_standard_basis_r3": {
+      "title": "Standard basis in R^3",
+      "prompt": "Which set is the standard basis for R^3?",
+      "hint": "Think unit directions.",
+      "options": {
+        "a": "{(1,1,1)}",
+        "b": "{(1,0,0),(1,1,0),(1,1,1)}",
+        "c": "{(1,0,0),(0,1,0),(0,0,1)}",
+        "d": "{(1,0),(0,1)}"
+      }
+    },
+    "la_m2_basis_count_plane": {
+      "title": "Basis size of a plane",
+      "prompt": "How many vectors are needed in a basis for a plane through the origin in R^3?",
+      "hint": "A plane has two independent directions.",
+      "options": {
+        "a": "0",
+        "b": "1",
+        "c": "3",
+        "d": "2"
+      }
+    },
+    "la_m2_basis_independent_spanning": {
+      "title": "Independent and spanning",
+      "prompt": "If a set both spans a space and is linearly independent, then it is:",
+      "hint": "That is exactly the definition.",
+      "options": {
+        "a": "A determinant",
+        "b": "A basis",
+        "c": "A subspace test",
+        "d": "An eigenvalue"
+      }
+    },
+
+    "la_m2_transpose_shape": {
+      "title": "Transpose shape",
+      "hint": "Transpose swaps rows and columns."
+    },
+    "la_m2_transpose_column_to_row": {
+      "title": "Column becomes row",
+      "prompt": "What does transpose do to a column vector?",
+      "hint": "It flips orientation.",
+      "options": {
+        "a": "It turns it into a row vector",
+        "b": "It multiplies it by -1",
+        "c": "It makes it square",
+        "d": "It becomes the zero vector"
+      }
+    },
+    "la_m2_transpose_sum": {
+      "title": "Transpose of a sum",
+      "prompt": "Which identity is true?",
+      "hint": "Transpose distributes over addition.",
+      "options": {
+        "a": "(A+B)^T = AB",
+        "b": "(A+B)^T = B^TA^T",
+        "c": "(A+B)^T = A^T + B^T",
+        "d": "(A+B)^T = A - B"
+      }
+    },
+    "la_m2_transpose_product_order": {
+      "title": "Transpose of a product",
+      "prompt": "Which identity is true?",
+      "hint": "The order reverses.",
+      "options": {
+        "a": "(AB)^T = A^TB^T",
+        "b": "(AB)^T = AB",
+        "c": "(AB)^T = BA",
+        "d": "(AB)^T = B^TA^T"
+      }
+    },
+    "la_m2_transpose_compute_input": {
+      "title": "Compute a transpose",
+      "hint": "Rows become columns."
+    },
+
+    "la_m2_determinant_2x2_numeric": {
+      "title": "2×2 determinant",
+      "hint": "For a 2×2 matrix, use ad - bc."
+    },
+    "la_m2_determinant_area_scaling": {
+      "title": "Determinant and area",
+      "prompt": "Geometrically, the determinant of a 2×2 matrix measures:",
+      "hint": "Think signed area scaling.",
+      "options": {
+        "a": "Only the trace",
+        "b": "The signed area scaling factor",
+        "c": "The length of the first column",
+        "d": "The number of basis vectors"
+      }
+    },
+    "la_m2_determinant_zero_noninvertible": {
+      "title": "Zero determinant",
+      "prompt": "If det(A)=0 for a square matrix A, what follows?",
+      "hint": "The matrix loses invertibility.",
+      "options": {
+        "a": "A is orthogonal",
+        "b": "A must equal the identity",
+        "c": "A is not invertible",
+        "d": "A has all positive eigenvalues"
+      }
+    },
+    "la_m2_determinant_triangular_numeric": {
+      "title": "Triangular determinant",
+      "hint": "For triangular matrices, multiply the diagonal entries."
+    },
+    "la_m2_determinant_swap_rows": {
+      "title": "Swapping rows",
+      "prompt": "What happens to the determinant when two rows are swapped?",
+      "hint": "Orientation flips.",
+      "options": {
+        "a": "It changes sign",
+        "b": "It stays the same",
+        "c": "It becomes zero",
+        "d": "It doubles"
+      }
+    },
+
+    "la_m2_inverse_definition": {
+      "title": "Inverse definition",
+      "prompt": "What makes a matrix B the inverse of A?",
+      "hint": "Composition should give the identity both ways.",
+      "options": {
+        "a": "AB = 0",
+        "b": "A+B = I",
+        "c": "det(B)=1",
+        "d": "AB = BA = I"
+      }
+    },
+    "la_m2_inverse_identity": {
+      "title": "Inverse of the identity",
+      "prompt": "What is the inverse of the identity matrix?",
+      "hint": "Undoing the identity changes nothing.",
+      "options": {
+        "a": "The identity itself",
+        "b": "The zero matrix",
+        "c": "Its transpose only",
+        "d": "It has no inverse"
+      }
+    },
+    "la_m2_inverse_exists_det": {
+      "title": "Existence of the inverse",
+      "prompt": "A square matrix is invertible exactly when:",
+      "hint": "This is the determinant test.",
+      "options": {
+        "a": "Its trace is zero",
+        "b": "All entries are positive",
+        "c": "Its determinant is nonzero",
+        "d": "It is symmetric"
+      }
+    },
+    "la_m2_inverse_2x2_input": {
+      "title": "Compute an inverse",
+      "hint": "You are entering A^{-1}, not A."
+    },
+    "la_m2_inverse_solve_system": {
+      "title": "Inverse and solving systems",
+      "prompt": "Why is an inverse useful in solving Ax=b?",
+      "hint": "Multiply by A^{-1} if it exists.",
+      "options": {
+        "a": "Because it makes determinants disappear",
+        "b": "Because x = A^{-1}b",
+        "c": "Because x = bA^{-1} for any shape",
+        "d": "Because inverses always exist"
+      }
+    },
+
+    "la_m2_eigenvalue_definition": {
+      "title": "Eigenvalue definition",
+      "prompt": "In the equation Av = λv, the scalar λ is called:",
+      "hint": "It is the scale factor attached to the special direction.",
+      "options": {
+        "a": "a determinant",
+        "b": "an eigenvalue",
+        "c": "a basis",
+        "d": "a transpose"
+      }
+    },
+    "la_m2_eigenvector_definition": {
+      "title": "Eigenvector definition",
+      "prompt": "What is an eigenvector?",
+      "hint": "It keeps its line under the matrix action.",
+      "options": {
+        "a": "Any vector in the space",
+        "b": "The zero vector only",
+        "c": "A nonzero vector whose image is just a scalar multiple of itself",
+        "d": "A vector orthogonal to every other vector"
+      }
+    },
+    "la_m2_eigen_diagonal_value_numeric": {
+      "title": "Eigenvalue of a diagonal matrix",
+      "hint": "For diagonal matrices, the standard basis vectors pick out the diagonal entries."
+    },
+    "la_m2_eigenvector_choice": {
+      "title": "Choose an eigenvector",
+      "hint": "For a diagonal matrix, the coordinate axes are the special directions.",
+      "options": {
+        "a": "[1,0]^T",
+        "b": "[0,1]^T",
+        "c": "[1,1]^T",
+        "d": "[0,0]^T"
+      }
+    },
+    "la_m2_eigen_triangular_values": {
+      "title": "Eigenvalues of a triangular matrix",
+      "prompt": "Where do the eigenvalues of a triangular matrix come from?",
+      "hint": "Look at the main diagonal.",
+      "options": {
+        "a": "From the first row only",
+        "b": "From the determinant alone",
+        "c": "From the transpose only",
+        "d": "From the diagonal entries"
+      }
+    },
+    "la_m2_eigenvector_not_zero": {
+      "title": "Why nonzero?",
+      "prompt": "Why is the zero vector excluded from the definition of an eigenvector?",
+      "hint": "Otherwise the definition would be trivial.",
+      "options": {
+        "a": "Because 0 would satisfy Av=λv for every λ and give no direction information",
+        "b": "Because 0 is never in a vector space",
+        "c": "Because matrices cannot multiply by 0",
+        "d": "Because eigenvalues require determinants only"
+      }
+    }
+  }
+}

@@ -1,0 +1,174 @@
+{
+  "modules": {
+    "python": {
+      "python-0": {
+        "title": "Module 0 — Fondations",
+        "description": "Espace de travail + bases de programmation : modèle IPO, syntaxe et commentaires.",
+        "meta": {
+          "prereqs": [
+            "Aucun — vous pouvez commencer ici"
+          ],
+          "outcomes": [
+            "Se repérer dans l’éditeur, le bouton Exécuter et le terminal",
+            "Expliquer Entrée → Traitement → Sortie",
+            "Comprendre ce qu’est la syntaxe et pourquoi une SyntaxError apparaît",
+            "Utiliser les commentaires # de manière intentionnelle pendant l’apprentissage"
+          ],
+          "why": [
+            "Met en place le modèle mental + les compétences d’environnement de travail",
+            "Évite la confusion des débutants avant d’écrire des programmes plus grands"
+          ]
+        }
+      },
+      "python-1": {
+        "title": "Module 1 — Blocs de base",
+        "description": "Variables/types, opérateurs/expressions, chaînes de caractères et patrons de mini-programmes.",
+        "meta": {
+          "prereqs": [
+            "Module 0 — Fondations"
+          ],
+          "outcomes": [
+            "Stocker des valeurs dans des variables et expliquer les types",
+            "Utiliser opérateurs + expressions pour calculer des résultats",
+            "Travailler avec les chaînes (print, f-strings, indexation, méthodes)",
+            "Construire des mini-programmes avec Demander → Convertir → Calculer → Afficher"
+          ],
+          "why": [
+            "Ce sont les briques derrière presque tous les programmes débutants",
+            "Rend les conditions/boucles plus naturelles dans le module suivant"
+          ]
+        }
+      },
+      "python-2": {
+        "title": "Module 2 — Contrôle du flux + Collections",
+        "description": "Conditions, boucles, listes et fonctions — assemblées dans des mini-projets scénarisés.",
+        "meta": {
+          "prereqs": [
+            "Module 1 — Blocs de base"
+          ],
+          "outcomes": [
+            "Utiliser if/elif/else avec comparaisons et logique booléenne",
+            "Écrire des boucles while pour valider et répéter des actions",
+            "Utiliser des boucles for pour parcourir des plages et des listes",
+            "Créer et utiliser des listes pour stocker plusieurs valeurs",
+            "Écrire des fonctions réutilisables avec paramètres et valeurs de retour"
+          ],
+          "why": [
+            "C’est ici que les programmes deviennent “vivants” (décisions + répétition)",
+            "Listes + fonctions débloquent une vraie structure de mini-app"
+          ]
+        }
+      }
+    }},
+
+
+
+
+
+
+
+
+
+
+
+  "moduleIntroUi": {
+    "kicker": "{subject} • Module {n}",
+    "introVideoKicker": "Vidéo d’introduction",
+    "introVideoHint": "Regardez d’abord si vous voulez une vue d’ensemble avant la pratique.",
+    "openLink": "Ouvrir ↗",
+
+    "labels": {
+      "sections": "Sections",
+      "topics": "Thèmes",
+      "weeks": "Semaines",
+      "est": "Est.",
+      "status": "Statut"
+    },
+
+    "status": {
+      "syncing": "Synchronisation…",
+      "completed": "Terminé",
+      "inProgress": "En cours",
+      "new": "Nouveau"
+    },
+
+    "cta": {
+      "review": "Revoir le module →",
+      "continue": "Continuer →",
+      "start": "Commencer →"
+    },
+
+    "actions": {
+      "back": "← Retour",
+      "practice": "Pratiquer →"
+    },
+
+    "sections": {
+      "prereqs": "Prérequis",
+      "whatLearn": "Ce que vous allez apprendre",
+      "whyMatters": "Pourquoi c’est important"
+    },
+
+    "defaults": {
+      "outcome1": "Comprendre les idées clés avec des exemples guidés",
+      "outcome2": "S’entraîner avec des questions interactives et un feedback immédiat",
+      "outcome3": "Gagner en confiance pour la suite des modules",
+
+      "why1": "Ce module débloque des compétences que vous réutiliserez souvent",
+      "why2": "Il améliore la vitesse et la précision sur de vrais problèmes",
+      "why3": "C’est une base pour les entretiens et les projets réels"
+    },
+
+    "videoTitle": "{module} — Introduction",
+    "minutesShort": "{n} min"
+  }
+,
+
+
+
+
+
+
+
+
+
+
+
+    "subjectModulesUi": {
+      "kickerSubject": "Sujet",
+      "unlockEnabled": "DÉVERROUILLAGE ACTIVÉ",
+      "overallProgress": "Progression globale",
+      "syncing": "Synchronisation…",
+      "topicsRatio": "{done}/{total} thèmes",
+      "modulesRatio": "• {done}/{total} modules",
+      "changeSubject": "← Changer de sujet",
+      "kickerModule": "Module",
+      "pillCompleted": "✓ Terminé",
+      "pillLocked": "🔒 Verrouillé",
+      "pillPremium": "💎 Premium",
+      "pillInProgress": "↻ En cours",
+      "pillNotStarted": "• Pas commencé",
+      "weeksLabel": "Semaines",
+      "sectionsLabel": "Sections",
+      "topicsLabel": "Thèmes",
+      "noTopics": "Aucun thème",
+      "topicsComplete": "{done}/{total} thèmes terminés",
+      "completedShort": "Terminé",
+      "cta": {
+        "signInToUnlock": "Se connecter pour déverrouiller →",
+        "unlock": "Déverrouiller →",
+        "review": "Revoir le module →",
+        "continue": "Continuer →",
+        "start": "Commencer →"
+      },
+      "empty": {
+        "title": "Aucun module pour l’instant",
+        "desc": "Ajoutez au moins un module pour ce sujet afin d’activer la navigation."
+      },
+      "errors": {
+        "missingSubjectTitle": "Sujet manquant",
+        "missingSubjectDesc": "Le paramètre subjectSlug est manquant.",
+        "notFoundTitle": "Sujet introuvable",
+        "notFoundDesc": "Aucun sujet avec le slug « {slug} »."
+      }
+    }}

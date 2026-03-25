@@ -1,0 +1,151 @@
+{
+  "topics": {
+    "python": {
+      "python-2": {
+        "functions_basics": {
+          "label": "Functions: Small Machines You Can Reuse",
+          "summary": "Create reusable functions with parameters and return values, and learn a simple scope rule to keep code clean.",
+          "cards": {
+            "sketch": {
+              "title": "Functions (def, parameters, return, scope)"
+            },
+            "project": {
+              "title": "Project: Reusable kiosk helpers (tip → shipping → sum_list)"
+            },
+            "quiz": {
+              "title": "Quick check: return vs print"
+            }
+          },
+          "projectSteps": {
+            "total_with_tip": {
+              "title": "Build total_with_tip(bill, pct)"
+            },
+            "shipping_cost": {
+              "title": "Build shipping_cost(total)"
+            },
+            "sum_list": {
+              "title": "Build sum_list(xs)"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "py": {
+      "func": {
+        "basics": {
+          "title": "Functions: Small Machines You Can Reuse",
+          "bodyMarkdown": "You’ve been building bigger and bigger programs:\n\n- variables + types  \n- expressions  \n- strings + clean output  \n- input patterns  \n- decisions (\\`if\\`)  \n- repetition (loops)  \n- collections (lists)\n\nAt some point you hit the same problem:\n\n> “I keep rewriting the same steps.”\n\nThat’s the moment functions become useful.\n\nA **function** is a small reusable machine:\n\n- it can take **inputs**\n- it performs a **job**\n- it can produce an **output**\n\nOnce the machine exists, you can run it as many times as you want without rewriting the logic.\n\n---\n\n## The problem: repeated code (hard to maintain)\n\nHere’s an example of code that repeats itself.\n\nIt works… but it’s not practical:\n\n~~~python\n# Calculate totals for 3 different customers\n\nbill1 = float(input(\"Customer 1 bill: \"))\ntip1 = bill1 * 0.15\ntotal1 = bill1 + tip1\nprint(\"Customer 1 total:\", total1)\n\nbill2 = float(input(\"Customer 2 bill: \"))\ntip2 = bill2 * 0.15\ntotal2 = bill2 + tip2\nprint(\"Customer 2 total:\", total2)\n\nbill3 = float(input(\"Customer 3 bill: \"))\ntip3 = bill3 * 0.15\ntotal3 = bill3 + tip3\nprint(\"Customer 3 total:\", total3)\n~~~\n\nWhy this is a problem:\n\n- it’s long and repetitive\n- if you want to change the tip rate, you must change it in multiple places\n- repeated logic increases bugs (you might fix one spot and forget another)\n\n---\n\n## The solution: one function, used many times\n\nInstead of repeating the same steps, build a reusable machine:\n\n~~~python\ndef total_with_tip(bill, tip_rate):\n    tip = bill * tip_rate\n    return bill + tip\n~~~\n\nNow the main program becomes clean:\n\n~~~python\nbill1 = float(input(\"Customer 1 bill: \"))\nprint(\"Customer 1 total:\", total_with_tip(bill1, 0.15))\n\nbill2 = float(input(\"Customer 2 bill: \"))\nprint(\"Customer 2 total:\", total_with_tip(bill2, 0.15))\n\nbill3 = float(input(\"Customer 3 bill: \"))\nprint(\"Customer 3 total:\", total_with_tip(bill3, 0.15))\n~~~\n\nNow if you change the tip rule, you change it **once** inside the function.\n\n---\n\n## You already used functions (built-in)\n\nYou’ve already been calling functions this whole time:\n\n- \\`print(...)\\` displays output\n- \\`input(...)\\` asks the user a question\n- \\`type(...)\\` reports a value’s type\n- \\`len(...)\\` counts items in a list or string\n\nThese are **built-in functions** (Python gives them to you).\n\nNow we’ll learn to write our own: **user-defined functions**.\n\n---\n\n## Defining a function\n\nA function definition includes:\n\n- the keyword \\`def\\`\n- a function **name**\n- parentheses \\`( )\\` for parameters\n- a colon \\`:\\`\n- an indented body (the steps the function runs)\n\n~~~python\ndef greet():\n    print(\"Hello!\")\n~~~\n\n### Calling a function\n\nTo run the function, write its name followed by parentheses:\n\n~~~python\ngreet()\ngreet()\n~~~\n\n---\n\n## Try it\n\n~~~python\ndef greet():\n    print(\"Hello!\")\n\ngreet()\ngreet()\n~~~\n\n---\n\n## Parameters vs. arguments (important)\n\nThis is a common confusion. Here’s the rule:\n\n- **Parameters** are the names inside the function definition.\n- **Arguments** are the real values you pass in when you call the function.\n\n~~~python\ndef greet(name):        # name is a PARAMETER\n    print(f\"Hello, {name}!\")\n\ngreet(\"Maya\")           # \"Maya\" is an ARGUMENT\ngreet(\"Ayo\")            # \"Ayo\" is an ARGUMENT\n~~~\n\nParameters make your function flexible instead of hard-coded.\n\n---\n\n## Try it (use input as an argument)\n\n~~~python\ndef greet(name):\n    print(f\"Hello, {name}!\")\n\nname = input(\"Name: \")\ngreet(name)\n~~~\n\n---\n\n## Return values: output you can *use*\n\nSometimes you want a function to produce a value for the rest of your program.\n\n- \\`print()\\` shows something to the user, but it does **not** give a usable value back.\n- \\`return\\` sends a value back to the caller.\n\n~~~python\ndef add(a, b):\n    return a + b\n\nresult = add(10, 5)\nprint(\"result =\", result)\n~~~\n\nWhen Python reaches \\`return\\`:\n\n1) the function stops immediately  \n2) the value is sent back to the line that called it  \n\n---\n\n## Try it (use the returned result)\n\n~~~python\ndef add(a, b):\n    return a + b\n\nx = float(input(\"x: \"))\ny = float(input(\"y: \"))\n\nprint(f\"x + y = {add(x, y)}\")\n~~~\n\n---\n\n## A practical refactor: tip calculator (full)\n\nHere’s the same idea using tip percent (like a real checkout):\n\n~~~python\ndef total_with_tip(bill, tip_percent):\n    tip = bill * (tip_percent / 100)\n    return bill + tip\n~~~\n\nUse it:\n\n~~~python\nbill = float(input(\"Bill: \"))\ntip_percent = float(input(\"Tip %: \"))\n\ntotal = total_with_tip(bill, tip_percent)\nprint(f\"Total = {total}\")\n~~~\n\n---\n\n## Scope (light but important)\n\nVariables created inside a function exist only inside that function.\n\n~~~python\ndef demo():\n    x = 10\n    print(\"inside:\", x)\n\ndemo()\n~~~\n\nThat \\`x\\` does not exist outside the function.\n\nFor now, remember:\n\n✅ What happens inside the function stays inside the function  \n(unless you \\`return\\` something).\n\n---\n\n## What you unlocked\n\nFunctions help you:\n\n- avoid repeating code\n- write cleaner programs\n- break big problems into smaller steps\n- build reusable tools you can call anytime\n\nNext, you’ll start combining:\n**lists + loops + conditionals + functions** into real mini-apps.\n"    }
+      }
+    }
+  },
+  "common": {
+    "terminalInputLabel": "input",
+    "terminalOutputLabel": "output"
+  },
+  "quiz": {
+    "m2_func_total_with_tip_code": {
+      "title": "Function: total_with_tip(bill, pct)",
+      "prompt": "Write a function `total_with_tip(bill, pct)`.\n\nRules:\n- bill and pct are integers\n- tip = bill * pct // 100\n- return bill + tip\n\nThen read bill and pct and print:\nTotal = <total>",
+      "hint": "Use `return`, not just print, inside the function.",
+      "starterCode": "def total_with_tip(bill, pct):\n    # TODO: compute tip using integer math\n    # TODO: return total\n    pass\n\nbill = int(input())\npct = int(input())\n# TODO: call the function and print Total = <total>",
+      "runtime": {
+        "totalLineTemplate": "Total = {total}"
+      }
+    },
+    "m2_func_shipping_rule_code": {
+      "title": "Function: shipping_cost(total)",
+      "prompt": "Write a function `shipping_cost(total)`.\n\nRule:\n- if total >= 50 return 0\n- else return 7\n\nThen read total and print:\nShipping = <cost>",
+      "hint": "Use if/else inside the function.",
+      "starterCode": "def shipping_cost(total):\n    # TODO: return 0 or 7\n    pass\n\ntotal = int(input())\n# TODO: print Shipping = <cost>",
+      "runtime": {
+        "shippingLineTemplate": "Shipping = {cost}"
+      }
+    },
+    "m2_func_sum_list_code": {
+      "title": "Function: sum_list(xs)",
+      "prompt": "Write a function `sum_list(xs)`.\n\nRules:\n- xs is a list of integers\n- return the sum using a loop\n\nThen read THREE integers, store them in a list, call `sum_list`, and print:\nsum = <value>",
+      "hint": "Start with total = 0, then loop through xs.",
+      "starterCode": "def sum_list(xs):\n    # TODO: loop and add\n    pass\n\na = int(input())\nb = int(input())\nc = int(input())\nxs = [a, b, c]\n# TODO: print sum = <sum_list(xs)>",
+      "runtime": {
+        "sumLineTemplate": "sum = {value}"
+      }
+    },
+
+    "m2_func_return_vs_print_sc": {
+      "title": "return vs print",
+      "prompt": "What does `return` do inside a function?",
+      "options": {
+        "a": "It shows text in the terminal",
+        "b": "It sends a value back to the caller and exits the function",
+        "c": "It repeats the function automatically"
+      },
+      "hint": "`return` gives back a value and ends the function."
+    },
+    "m2_func_parameters_vs_arguments_sc": {
+      "title": "Parameters vs arguments",
+      "prompt": "Which statement is correct?",
+      "options": {
+        "a": "Arguments are the names in the function definition",
+        "b": "Parameters are the values you type when calling the function",
+        "c": "Parameters are names in the definition; arguments are real values passed in"
+      },
+      "hint": "Definition = parameters. Call = arguments."
+    },
+    "m2_func_def_keyword_sc": {
+      "title": "The `def` keyword",
+      "prompt": "What is `def` used for in Python?",
+      "options": {
+        "a": "To define a function",
+        "b": "To repeat a loop",
+        "c": "To compare two values"
+      },
+      "hint": "`def` starts a function definition."
+    },
+    "m2_func_scope_rule_sc": {
+      "title": "Function scope",
+      "prompt": "Which statement best matches the basic scope rule?",
+      "options": {
+        "a": "Variables created inside a function always exist everywhere",
+        "b": "Variables created inside a function stay inside it unless you return something",
+        "c": "A function cannot create variables"
+      },
+      "hint": "Think: what happens inside the function stays inside the function."
+    },
+
+    "m2_func_return_stops_mc": {
+      "title": "What `return` does",
+      "prompt": "Choose all true statements about `return`.",
+      "options": {
+        "a": "`return` sends a value back to the caller",
+        "b": "`return` always prints the value automatically",
+        "c": "When Python reaches `return`, the function stops",
+        "d": "`return` can only be used with strings"
+      },
+      "hint": "`return` gives back a value and ends the function."
+    },
+    "m2_func_calls_and_arguments_mc": {
+      "title": "Calling functions",
+      "prompt": "Choose all true statements.",
+      "options": {
+        "a": "You call a function by writing its name followed by parentheses",
+        "b": "You can pass values into a function as arguments",
+        "c": "A function can never take more than one argument",
+        "d": "`greet(\"Maya\")` passes an argument to the function"
+      },
+      "hint": "Think about how you run a function and give it values."
+    },
+    "m2_func_sum_list_steps_mc": {
+      "title": "Building `sum_list(xs)`",
+      "prompt": "Choose all steps that belong in a correct `sum_list(xs)` function.",
+      "options": {
+        "a": "Start with `total = 0`",
+        "b": "Use `print()` inside the function instead of returning",
+        "c": "Loop through the items in `xs`",
+        "d": "Add each item into `total`, then return `total`"
+      },
+      "hint": "A reusable sum function should build a total and return it."
+    }
+  }
+}

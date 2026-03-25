@@ -1,0 +1,29 @@
+{
+  "sketchBlockUi": {
+    "finishPrereqs": "Terminez d’abord les éléments “Marquer comme lu” dans ce sujet.",
+    "locked": "Verrouillé.",
+    "autosave": "La progression est enregistrée automatiquement.",
+    "reset": "Réinitialiser",
+    "markRead": "Marquer comme lu",
+    "markedRead": "✓ Marqué comme lu",
+    "markReadTitle": "Marquer cette carte comme lue",
+    "resetDialog": {
+      "title": "Réinitialiser ce sketch ?",
+      "confirm": "Réinitialiser",
+      "line1": "Cela effacera vos saisies pour cette carte.",
+      "line2": "Action irréversible."
+    }
+  },
+  "cardUi": {
+    "kinds": { "quiz": "quiz", "project": "projet" },
+    "gateBanner": "Terminez les éléments ci-dessus (lectures, vidéos, sketches) pour déverrouiller ce {kind}.",
+    "completed": "✓ Terminé",
+    "loadingSaved": "Chargement de l’état enregistré ({kind})…",
+    "actions": {
+      "read": "Marquer comme lu",
+      "readDone": "✓ Lu",
+      "watched": "Marquer comme vu",
+      "watchedDone": "✓ Vu"
+    }
+  }
+}
