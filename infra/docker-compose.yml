@@ -23,7 +23,7 @@ services:
 
   runner:
     build:
-      context: .
+      context: ..
       dockerfile: apps/runner/Dockerfile
     container_name: zoeskoul-runner
     environment:
@@ -45,7 +45,7 @@ services:
 
   web:
     build:
-      context: .
+      context: ..
       dockerfile: apps/web/Dockerfile
     container_name: zoeskoul-web
     environment:
