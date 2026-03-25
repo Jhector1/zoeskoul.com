@@ -1,41 +1,43 @@
 import crypto from "node:crypto";
+import { PassThrough } from "node:stream";
+import fs from "node:fs/promises";
+import { spawnSync } from "node:child_process";
 import type {
     FileEntry,
     InteractiveLanguage,
     InteractiveRunReq,
     StartSessionResult,
 } from "@zoeskoul/code-contracts";
-import { env } from "../../lib/env.js";
-import { createSession, pushEvent, setSessionStream, touchSession } from "../sessions/sessionStore.js";
-import { armIdleTimeout, armWallTimeout, clearAllTimeouts } from "../sessions/timeoutManager.js";
-import { createWorkspace } from "../workspace/createWorkspace.js";
-import { cleanupWorkspace } from "../workspace/cleanupWorkspace.js";
-import { getExecutionPlan } from "../execution/executionPlan.js";
-import { docker } from "./dockerClient.js";
-import fs from "node:fs/promises";
-import { spawnSync } from "node:child_process";
+import { env } from "../../lib/env";
+import {
+    createSession,
+    pushEvent,
+    setSessionStream,
+    touchSession,
+    getSession,
+} from "../sessions/sessionStore";
+import {
+    armIdleTimeout,
+    armWallTimeout,
+    clearAllTimeouts,
+} from "../sessions/timeoutManager";
+import { createWorkspace } from "../workspace/createWorkspace";
+import { cleanupWorkspace } from "../workspace/cleanupWorkspace";
+import { getExecutionPlan } from "../execution/executionPlan";
+import { docker } from "./dockerClient";
+
 function normalizeFiles(req: InteractiveRunReq): { files: FileEntry[]; entry: string } {
     if ("files" in req) {
         const files = Array.isArray(req.files)
             ? req.files
             : Object.entries(req.files).map(([path, content]) => ({ path, content }));
-
-        return {
-            files,
-            entry: req.entry,
-        };
+        return { files, entry: req.entry };
     }
 
-    const entry = req.entry ?? defaultEntry(req.language);
-
+    const entry = defaultEntry(req.language);
     return {
+        files: [{ path: entry, content: req.code }],
         entry,
-        files: [
-            {
-                path: entry,
-                content: req.code,
-            },
-        ],
     };
 }
 
@@ -54,11 +56,28 @@ function defaultEntry(language: InteractiveLanguage) {
     }
 }
 
+function looksLikePromptTail(text: string) {
+    const t = String(text ?? "").trimEnd();
+    return /[:?]$/.test(t);
+}
+
+function maybeEmitInputRequest(sessionId: string, chunk: string) {
+    const session = getSession(sessionId);
+    if (!session) return;
+    if (session.state === "waiting_for_input") return;
+
+    if (looksLikePromptTail(chunk)) {
+        pushEvent(sessionId, { type: "status", state: "waiting_for_input" });
+        pushEvent(sessionId, { type: "input_request" });
+    }
+}
+
 export async function startDockerSession(
     req: InteractiveRunReq,
 ): Promise<StartSessionResult> {
     const { files, entry } = normalizeFiles(req);
     const workspaceDir = await createWorkspace(files);
+
     const rootFiles = await fs.readdir(workspaceDir);
     console.log("WORKSPACE DIR", workspaceDir);
     console.log("WORKSPACE ROOT FILES", rootFiles);
@@ -68,11 +87,11 @@ export async function startDockerSession(
         encoding: "utf8",
     });
     console.log("WORKSPACE TREE\n" + tree.stdout);
-    const plan = getExecutionPlan(req.language, entry);
-    const sessionId = `sess_${crypto.randomUUID()}`;
-    const containerName = `zoeskoul_${sessionId}`;
+
     console.log("NORMALIZED ENTRY", entry);
     console.log("NORMALIZED FILES", files.map((f) => f.path));
+
+    const plan = getExecutionPlan(req.language, entry);
     console.log("RUN PLAN", {
         language: req.language,
         entry,
@@ -80,6 +99,10 @@ export async function startDockerSession(
         compileCmd: plan.compileCmd,
         runCmd: plan.runCmd,
     });
+
+    const sessionId = `sess_${crypto.randomUUID()}`;
+    const containerName = `zoeskoul_${sessionId}`;
+
     const container = await docker.createContainer({
         Image: env.runnerImage,
         name: containerName,
@@ -127,7 +150,13 @@ export async function startDockerSession(
             stderr: true,
         });
 
+        // Keep raw attach stream for stdin writes later
         setSessionStream(sessionId, attach);
+
+        // Demux stdout/stderr so Docker framing bytes do not leak into terminal
+        const stdout = new PassThrough();
+        const stderr = new PassThrough();
+        docker.modem.demuxStream(attach, stdout, stderr);
 
         pushEvent(sessionId, { type: "status", state: "running" });
 
@@ -137,27 +166,37 @@ export async function startDockerSession(
         armWallTimeout(sessionId, wallTimeout);
         armIdleTimeout(sessionId, idleTimeout);
 
-        attach.on("data", (chunk: Buffer) => {
+        stdout.on("data", (chunk: Buffer) => {
             const text = chunk.toString("utf8");
             touchSession(sessionId);
             pushEvent(sessionId, { type: "stdout", chunk: text });
+            maybeEmitInputRequest(sessionId, text);
         });
 
-        container.wait().then(async (result) => {
-            const code = result.StatusCode ?? 0;
-            clearAllTimeouts(sessionId);
-            pushEvent(sessionId, { type: "exit", code });
-            pushEvent(sessionId, {
-                type: "status",
-                state: code === 0 ? "completed" : "failed",
-            });
-            await cleanupWorkspace(workspaceDir);
-        }).catch(async (err: Error) => {
-            clearAllTimeouts(sessionId);
-            pushEvent(sessionId, { type: "error", message: err.message });
-            pushEvent(sessionId, { type: "status", state: "failed" });
-            await cleanupWorkspace(workspaceDir);
+        stderr.on("data", (chunk: Buffer) => {
+            const text = chunk.toString("utf8");
+            touchSession(sessionId);
+            pushEvent(sessionId, { type: "stderr", chunk: text });
         });
+
+        container
+            .wait()
+            .then(async (result) => {
+                const code = result.StatusCode ?? 0;
+                clearAllTimeouts(sessionId);
+                pushEvent(sessionId, { type: "exit", code });
+                pushEvent(sessionId, {
+                    type: "status",
+                    state: code === 0 ? "completed" : "failed",
+                });
+                await cleanupWorkspace(workspaceDir);
+            })
+            .catch(async (err: Error) => {
+                clearAllTimeouts(sessionId);
+                pushEvent(sessionId, { type: "error", message: err.message });
+                pushEvent(sessionId, { type: "status", state: "failed" });
+                await cleanupWorkspace(workspaceDir);
+            });
 
         return {
             ok: true,
@@ -166,7 +205,10 @@ export async function startDockerSession(
         };
     } catch (e: any) {
         clearAllTimeouts(sessionId);
-        pushEvent(sessionId, { type: "error", message: e?.message ?? "Failed to start container." });
+        pushEvent(sessionId, {
+            type: "error",
+            message: e?.message ?? "Failed to start container.",
+        });
         pushEvent(sessionId, { type: "status", state: "failed" });
         await cleanupWorkspace(workspaceDir);
 
