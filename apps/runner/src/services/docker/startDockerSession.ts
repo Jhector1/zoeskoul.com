@@ -18,13 +18,23 @@ function normalizeFiles(req: InteractiveRunReq): { files: FileEntry[]; entry: st
         const files = Array.isArray(req.files)
             ? req.files
             : Object.entries(req.files).map(([path, content]) => ({ path, content }));
-        return { files, entry: req.entry };
+
+        return {
+            files,
+            entry: req.entry,
+        };
     }
 
-    const entry = defaultEntry(req.language);
+    const entry = req.entry ?? defaultEntry(req.language);
+
     return {
-        files: [{ path: entry, content: req.code }],
         entry,
+        files: [
+            {
+                path: entry,
+                content: req.code,
+            },
+        ],
     };
 }
 
@@ -54,6 +64,13 @@ export async function startDockerSession(
     const containerName = `zoeskoul_${sessionId}`;
     console.log("NORMALIZED ENTRY", entry);
     console.log("NORMALIZED FILES", files.map((f) => f.path));
+    console.log("RUN PLAN", {
+        language: req.language,
+        entry,
+        files: files.map((f) => f.path),
+        compileCmd: plan.compileCmd,
+        runCmd: plan.runCmd,
+    });
     const container = await docker.createContainer({
         Image: env.runnerImage,
         name: containerName,

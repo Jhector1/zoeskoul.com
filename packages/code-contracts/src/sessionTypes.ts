@@ -16,8 +16,10 @@ export type InteractiveRunReq =
     mode: "interactive";
     language: InteractiveLanguage;
     code: string;
+
     wallTimeoutMs?: number;
     idleTimeoutMs?: number;
+    entry?:string;
 }
     | {
     kind: "code";
