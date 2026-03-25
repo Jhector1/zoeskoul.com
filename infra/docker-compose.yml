@@ -1,13 +1,11 @@
-version: "3.9"
-
 services:
   postgres:
     image: postgres:16
     container_name: zoeskoul-postgres
     environment:
-      POSTGRES_USER: zoeskoul
-      POSTGRES_PASSWORD: zoeskoul
-      POSTGRES_DB: zoeskoul
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
     ports:
       - "5432:5432"
     volumes:
@@ -30,14 +28,14 @@ services:
     container_name: zoeskoul-runner
     environment:
       NODE_ENV: production
-      PORT: 4001
+      PORT: ${RUNNER_PORT}
       RUNNER_IMAGE: zoeskoul-runtime:latest
       DOCKER_SOCKET: /var/run/docker.sock
-      RUN_WALL_TIMEOUT_MS: 15000
-      RUN_IDLE_TIMEOUT_MS: 20000
-      REDIS_URL: redis://redis:6379
+      RUN_WALL_TIMEOUT_MS: ${RUN_WALL_TIMEOUT_MS}
+      RUN_IDLE_TIMEOUT_MS: ${RUN_IDLE_TIMEOUT_MS}
+      REDIS_URL: ${REDIS_URL}
     ports:
-      - "4001:4001"
+      - "${RUNNER_PORT}:4001"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - runner-tmp:/tmp
@@ -52,13 +50,13 @@ services:
     container_name: zoeskoul-web
     environment:
       NODE_ENV: production
-      RUNNER_BASE_URL: http://runner:4001
-      DATABASE_URL: postgresql://zoeskoul:zoeskoul@postgres:5432/zoeskoul
-      REDIS_URL: redis://redis:6379
-      NEXTAUTH_URL: http://localhost:3000
-      AUTH_SECRET: change-me-in-production
+      RUNNER_BASE_URL: ${RUNNER_BASE_URL}
+      DATABASE_URL: ${DATABASE_URL}
+      REDIS_URL: ${REDIS_URL}
+      NEXTAUTH_URL: ${NEXTAUTH_URL}
+      AUTH_SECRET: ${AUTH_SECRET}
     ports:
-      - "3000:3000"
+      - "${WEB_PORT}:3000"
     depends_on:
       - postgres
       - redis
