@@ -6,8 +6,8 @@ const envSchema = z.object({
     DOCKER_SOCKET: z.string().min(1).default("/var/run/docker.sock"),
     RUN_WALL_TIMEOUT_MS: z.coerce.number().int().positive().default(15000),
     RUN_IDLE_TIMEOUT_MS: z.coerce.number().int().positive().default(20000),
-    APP_URL: z.url(),
-    WEB_URL: z.url(),
+    APP_URL: z.url().optional(),
+    WEB_URL: z.url().optional(),
 });
 
 const parsed = envSchema.parse(process.env);
