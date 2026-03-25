@@ -1,4 +1,4 @@
-import { getSession, pushEvent, touchSession } from "../sessions/sessionStore";
+import { getSession, pushEvent, touchSession } from "../sessions/sessionStore.js";
 
 export async function writeInput(sessionId: string, input: string) {
     const session = getSession(sessionId);

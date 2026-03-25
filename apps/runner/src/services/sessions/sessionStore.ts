@@ -1,5 +1,5 @@
 import type { RunEvent, RunSessionState } from "@zoeskoul/code-contracts";
-import type { NodeJSStream } from "../types";
+import type { NodeJSStream } from "../types.js";
 import {RunEventInput} from "@zoeskoul/code-contracts";
 
 type SessionRecord = {

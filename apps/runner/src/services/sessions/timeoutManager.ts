@@ -1,5 +1,5 @@
-import { getSession, pushEvent } from "./sessionStore";
-import { killSession } from "../docker/killSession";
+import { getSession, pushEvent } from "./sessionStore.js";
+import { killSession } from "../docker/killSession.js";
 
 const wallTimers = new Map<string, NodeJS.Timeout>();
 const idleTimers = new Map<string, NodeJS.Timeout>();

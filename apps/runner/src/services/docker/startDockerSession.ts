@@ -5,13 +5,13 @@ import type {
     InteractiveRunReq,
     StartSessionResult,
 } from "@zoeskoul/code-contracts";
-import { env } from "../../lib/env";
-import { createSession, pushEvent, setSessionStream, touchSession } from "../sessions/sessionStore";
-import { armIdleTimeout, armWallTimeout, clearAllTimeouts } from "../sessions/timeoutManager";
-import { createWorkspace } from "../workspace/createWorkspace";
-import { cleanupWorkspace } from "../workspace/cleanupWorkspace";
-import { getExecutionPlan } from "../execution/executionPlan";
-import { docker } from "./dockerClient";
+import { env } from "../../lib/env.js";
+import { createSession, pushEvent, setSessionStream, touchSession } from "../sessions/sessionStore.js";
+import { armIdleTimeout, armWallTimeout, clearAllTimeouts } from "../sessions/timeoutManager.js";
+import { createWorkspace } from "../workspace/createWorkspace.js";
+import { cleanupWorkspace } from "../workspace/cleanupWorkspace.js";
+import { getExecutionPlan } from "../execution/executionPlan.js";
+import { docker } from "./dockerClient.js";
 
 function normalizeFiles(req: InteractiveRunReq): { files: FileEntry[]; entry: string } {
     if ("files" in req) {

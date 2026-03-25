@@ -1,6 +1,6 @@
 import type { RequestHandler } from "express";
 import { interactiveRunReqSchema } from "@zoeskoul/code-contracts";
-import { startDockerSession } from "../services/docker/startDockerSession";
+import { startDockerSession } from "../services/docker/startDockerSession.js";
 
 export const startSessionRoute: RequestHandler = async (req, res) => {
     try {

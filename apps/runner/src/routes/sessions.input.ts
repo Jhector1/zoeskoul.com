@@ -1,5 +1,5 @@
 import type { RequestHandler } from "express";
-import { writeInput } from "../services/docker/writeInput";
+import { writeInput } from "../services/docker/writeInput.js";
 
 export const inputSessionRoute: RequestHandler = async (req, res) => {
     try {

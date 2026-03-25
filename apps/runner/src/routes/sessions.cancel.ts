@@ -1,5 +1,5 @@
 import type { RequestHandler } from "express";
-import { killSession } from "../services/docker/killSession";
+import { killSession } from "../services/docker/killSession.js";
 
 export const cancelSessionRoute: RequestHandler = async (req, res) => {
     try {

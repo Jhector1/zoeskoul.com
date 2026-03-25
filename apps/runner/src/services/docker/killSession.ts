@@ -1,7 +1,7 @@
-import { getSession, pushEvent } from "../sessions/sessionStore";
-import { clearAllTimeouts } from "../sessions/timeoutManager";
-import { cleanupWorkspace } from "../workspace/cleanupWorkspace";
-import { docker } from "./dockerClient";
+import { getSession, pushEvent } from "../sessions/sessionStore.js";
+import { clearAllTimeouts } from "../sessions/timeoutManager.js";
+import { cleanupWorkspace } from "../workspace/cleanupWorkspace.js";
+import { docker } from "./dockerClient.js";
 
 export async function killSession(sessionId: string) {
     const session = getSession(sessionId);

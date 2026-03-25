@@ -1,5 +1,5 @@
 import type { RequestHandler } from "express";
-import { getSession } from "../services/sessions/sessionStore";
+import { getSession } from "../services/sessions/sessionStore.js";
 
 export const streamSessionRoute: RequestHandler = async (req, res) => {
     const sessionId = String(req.params.sessionId);
