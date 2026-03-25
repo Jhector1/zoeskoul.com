@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useMemo, useRef } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Terminal } from "xterm";
 import { FitAddon } from "@xterm/addon-fit";
 import type { RunResult } from "@/lib/code/types";
@@ -58,9 +58,11 @@ export default function XtermTerminal(props: {
     const hostRef = useRef<HTMLDivElement | null>(null);
     const termRef = useRef<Terminal | null>(null);
     const fitRef = useRef<FitAddon | null>(null);
+    const resizeObserverRef = useRef<ResizeObserver | null>(null);
+    const mutationObserverRef = useRef<MutationObserver | null>(null);
     const renderedCountRef = useRef(0);
-    const rafRef = useRef<number | null>(null);
 
+    const [readyToMount, setReadyToMount] = useState(false);
     const isReadyForInput = inputEnabled && !disabled;
 
     const statusText = useMemo(
@@ -72,8 +74,29 @@ export default function XtermTerminal(props: {
     );
 
     useEffect(() => {
+        let raf1 = 0;
+        let raf2 = 0;
+
+        raf1 = window.requestAnimationFrame(() => {
+            raf2 = window.requestAnimationFrame(() => {
+                setReadyToMount(true);
+            });
+        });
+
+        return () => {
+            if (raf1) window.cancelAnimationFrame(raf1);
+            if (raf2) window.cancelAnimationFrame(raf2);
+        };
+    }, []);
+
+    useEffect(() => {
+        if (!readyToMount) return;
+
         const host = hostRef.current;
         if (!host || termRef.current) return;
+
+        const { width, height } = host.getBoundingClientRect();
+        if (width < 20 || height < 20) return;
 
         const isDark = document.documentElement.classList.contains("dark");
 
@@ -93,23 +116,27 @@ export default function XtermTerminal(props: {
         const fitAddon = new FitAddon();
         term.loadAddon(fitAddon);
 
-        term.open(host);
+        try {
+            term.open(host);
+        } catch (err) {
+            console.error("xterm open failed", err);
+            try {
+                term.dispose();
+            } catch {}
+            return;
+        }
 
         termRef.current = term;
         fitRef.current = fitAddon;
 
-        const safeFit = () => {
+        const fitNow = () => {
             const el = hostRef.current;
             const t = termRef.current;
             const f = fitRef.current;
             if (!el || !t || !f) return;
 
-            if (!document.body.contains(el)) return;
-
-            const width = el.clientWidth;
-            const height = el.clientHeight;
-
-            if (width < 20 || height < 20) return;
+            const rect = el.getBoundingClientRect();
+            if (rect.width < 20 || rect.height < 20) return;
 
             try {
                 f.fit();
@@ -121,29 +148,24 @@ export default function XtermTerminal(props: {
             }
         };
 
-        rafRef.current = window.setTimeout(() => {
-            safeFit();
-        }, 0) as unknown as number;
+        const fitTimer = window.setTimeout(() => {
+            fitNow();
+        }, 50);
 
-        const ro = new ResizeObserver(() => {
-            if (rafRef.current != null) {
-                window.clearTimeout(rafRef.current);
-            }
-            rafRef.current = window.setTimeout(() => {
-                safeFit();
-            }, 0) as unknown as number;
+        resizeObserverRef.current = new ResizeObserver(() => {
+            window.requestAnimationFrame(() => {
+                fitNow();
+            });
         });
+        resizeObserverRef.current.observe(host);
 
-        ro.observe(host);
-
-        const mo = new MutationObserver(() => {
+        mutationObserverRef.current = new MutationObserver(() => {
+            const dark = document.documentElement.classList.contains("dark");
             const current = termRef.current;
             if (!current) return;
-            const dark = document.documentElement.classList.contains("dark");
             current.options.theme = getTheme(dark);
         });
-
-        mo.observe(document.documentElement, {
+        mutationObserverRef.current.observe(document.documentElement, {
             attributes: true,
             attributeFilter: ["class"],
         });
@@ -153,13 +175,11 @@ export default function XtermTerminal(props: {
 
         return () => {
             host.removeEventListener("click", focusTerminal);
-            ro.disconnect();
-            mo.disconnect();
-
-            if (rafRef.current != null) {
-                window.clearTimeout(rafRef.current);
-                rafRef.current = null;
-            }
+            window.clearTimeout(fitTimer);
+            resizeObserverRef.current?.disconnect();
+            mutationObserverRef.current?.disconnect();
+            resizeObserverRef.current = null;
+            mutationObserverRef.current = null;
 
             try {
                 term.dispose();
@@ -167,8 +187,9 @@ export default function XtermTerminal(props: {
 
             termRef.current = null;
             fitRef.current = null;
+            renderedCountRef.current = 0;
         };
-    }, [onResize]);
+    }, [readyToMount, onResize]);
 
     useEffect(() => {
         const term = termRef.current;
@@ -191,9 +212,7 @@ export default function XtermTerminal(props: {
             onSendData(data);
         });
 
-        return () => {
-            sub.dispose();
-        };
+        return () => sub.dispose();
     }, [isReadyForInput, onSendData]);
 
     useEffect(() => {
@@ -201,8 +220,10 @@ export default function XtermTerminal(props: {
         if (!term) return;
 
         if (terminalFeed.length === 0 && renderedCountRef.current > 0) {
-            term.clear();
-            term.reset();
+            try {
+                term.clear();
+                term.reset();
+            } catch {}
             renderedCountRef.current = 0;
             return;
         }
@@ -211,7 +232,6 @@ export default function XtermTerminal(props: {
 
         for (let i = renderedCountRef.current; i < terminalFeed.length; i++) {
             const chunk = terminalFeed[i];
-
             if (chunk.kind === "pty") {
                 term.write(chunk.data);
             } else if (chunk.kind === "err") {
@@ -244,14 +264,14 @@ export default function XtermTerminal(props: {
 
             <div
                 className={[
-                    "mt-2 flex-1 min-h-0 overflow-hidden border-t py-2",
+                    "mt-2 flex-1 min-h-[220px] overflow-hidden border-t py-2",
                     "bg-white/60 dark:bg-black/30",
                     "border-neutral-200 dark:border-white/10",
                 ].join(" ")}
             >
                 <div
                     ref={hostRef}
-                    className="h-full w-full min-h-0 px-2"
+                    className="h-full w-full min-h-[200px] px-2"
                     aria-label="Interactive terminal"
                 />
             </div>

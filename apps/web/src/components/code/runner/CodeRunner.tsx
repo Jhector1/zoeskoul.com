@@ -357,7 +357,10 @@ function CodeRunnerContent(props: CodeRunnerProps) {
     const outputLabel = lang === "sql" ? "Results" : "Terminal";
     const mobileTabAttention = term.runState !== "idle" || !!term.lastResult;
     const mobileBodyHeight = Math.max(240, (split.mainH || numericHeight) - 52);
-
+    const shouldShowXterm =
+        term.busy ||
+        term.inputEnabled ||
+        term.terminalFeed.length > 0;
     const renderOutputPane = (panelHeight?: number, panelWidth?: number) => {
         if (lang === "sql") {
             return (
@@ -404,6 +407,9 @@ function CodeRunnerContent(props: CodeRunnerProps) {
                 {/*    onSubmitInput={term.submitInput}*/}
                 {/*    typedLines={term.typedLines}*/}
                 {/*/>*/}
+
+
+                return shouldShowXterm ? (
                 <XtermTerminal
                     terminalFeed={term.terminalFeed}
                     inputEnabled={term.inputEnabled}
@@ -413,6 +419,13 @@ function CodeRunnerContent(props: CodeRunnerProps) {
                     onSendData={term.sendTerminalData}
                     onResize={term.sendTerminalResize}
                 />
+                ) : (
+                <div className="h-full rounded-2xl border-t p-3 bg-white/80 dark:bg-black/40 border-neutral-200 dark:border-white/10">
+                    <div className="text-[11px] font-extrabold text-neutral-500 dark:text-white/50">
+                        Terminal idle
+                    </div>
+                </div>
+                );
             </div>
         );
     };
