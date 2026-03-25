@@ -65,6 +65,14 @@ export function attachSessionWsServer(server: HttpServer) {
 
         wss.handleUpgrade(req, socket, head, (ws) => {
             console.log("WS upgraded", { sessionId });
+            console.log("WS upgrade incoming", {
+                url: req.url,
+                host: req.headers.host,
+                origin: req.headers.origin,
+            });
+
+            console.log("WS upgraded", { sessionId });
+            console.log("WS connected", { sessionId });
             wss.emit("connection", ws, req, sessionId);
         });
     });
