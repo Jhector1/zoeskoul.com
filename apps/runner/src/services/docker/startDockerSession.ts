@@ -1,30 +1,27 @@
 import crypto from "node:crypto";
-import { PassThrough } from "node:stream";
-import fs from "node:fs/promises";
-import { spawnSync } from "node:child_process";
 import type {
     FileEntry,
     InteractiveLanguage,
     InteractiveRunReq,
     StartSessionResult,
 } from "@zoeskoul/code-contracts";
-import { env } from "../../lib/env";
+import { env } from "../../lib/env.js";
 import {
     createSession,
+    getSession,
     pushEvent,
     setSessionStream,
     touchSession,
-    getSession,
-} from "../sessions/sessionStore";
+} from "../sessions/sessionStore.js";
 import {
     armIdleTimeout,
     armWallTimeout,
     clearAllTimeouts,
-} from "../sessions/timeoutManager";
-import { createWorkspace } from "../workspace/createWorkspace";
-import { cleanupWorkspace } from "../workspace/cleanupWorkspace";
-import { getExecutionPlan } from "../execution/executionPlan";
-import { docker } from "./dockerClient";
+} from "../sessions/timeoutManager.js";
+import { createWorkspace } from "../workspace/createWorkspace.js";
+import { cleanupWorkspace } from "../workspace/cleanupWorkspace.js";
+import { getExecutionPlan } from "../execution/executionPlan.js";
+import { docker } from "./dockerClient.js";
 
 function normalizeFiles(req: InteractiveRunReq): { files: FileEntry[]; entry: string } {
     if ("files" in req) {
@@ -56,20 +53,13 @@ function defaultEntry(language: InteractiveLanguage) {
     }
 }
 
-function looksLikePromptTail(text: string) {
-    const t = String(text ?? "").trimEnd();
-    return /[:?]$/.test(t);
-}
-
-function maybeEmitInputRequest(sessionId: string, chunk: string) {
-    const session = getSession(sessionId);
-    if (!session) return;
-    if (session.state === "waiting_for_input") return;
-
-    if (looksLikePromptTail(chunk)) {
-        pushEvent(sessionId, { type: "status", state: "waiting_for_input" });
-        pushEvent(sessionId, { type: "input_request" });
-    }
+function isTerminalState(state: string) {
+    return (
+        state === "completed" ||
+        state === "failed" ||
+        state === "canceled" ||
+        state === "timed_out"
+    );
 }
 
 export async function startDockerSession(
@@ -77,28 +67,7 @@ export async function startDockerSession(
 ): Promise<StartSessionResult> {
     const { files, entry } = normalizeFiles(req);
     const workspaceDir = await createWorkspace(files);
-
-    const rootFiles = await fs.readdir(workspaceDir);
-    console.log("WORKSPACE DIR", workspaceDir);
-    console.log("WORKSPACE ROOT FILES", rootFiles);
-
-    const tree = spawnSync("bash", ["-lc", "find . -maxdepth 5 -type f | sort"], {
-        cwd: workspaceDir,
-        encoding: "utf8",
-    });
-    console.log("WORKSPACE TREE\n" + tree.stdout);
-
-    console.log("NORMALIZED ENTRY", entry);
-    console.log("NORMALIZED FILES", files.map((f) => f.path));
-
     const plan = getExecutionPlan(req.language, entry);
-    console.log("RUN PLAN", {
-        language: req.language,
-        entry,
-        files: files.map((f) => f.path),
-        compileCmd: plan.compileCmd,
-        runCmd: plan.runCmd,
-    });
 
     const sessionId = `sess_${crypto.randomUUID()}`;
     const containerName = `zoeskoul_${sessionId}`;
@@ -106,18 +75,23 @@ export async function startDockerSession(
     const container = await docker.createContainer({
         Image: env.runnerImage,
         name: containerName,
-        Tty: false,
+        Tty: true,
         OpenStdin: true,
         StdinOnce: false,
         AttachStdin: true,
         AttachStdout: true,
         AttachStderr: true,
         WorkingDir: "/workspace",
-        User: "1000:1000",
+        User: "runner",
         Env: [
             `COMPILE_CMD=${plan.compileCmd ?? ""}`,
             `RUN_CMD=${plan.runCmd}`,
+            "TERM=xterm-256color",
+            "COLUMNS=120",
+            "LINES=30",
+            "PYTHONUNBUFFERED=1",
         ],
+        Cmd: ["python3", "/opt/runner/pty-runner.py"],
         HostConfig: {
             Binds: [`${workspaceDir}:/workspace`],
             NetworkMode: "none",
@@ -148,16 +122,10 @@ export async function startDockerSession(
             stdin: true,
             stdout: true,
             stderr: true,
+            hijack: true,
         });
 
-        // Keep raw attach stream for stdin writes later
         setSessionStream(sessionId, attach);
-
-        // Demux stdout/stderr so Docker framing bytes do not leak into terminal
-        const stdout = new PassThrough();
-        const stderr = new PassThrough();
-        docker.modem.demuxStream(attach, stdout, stderr);
-
         pushEvent(sessionId, { type: "status", state: "running" });
 
         const wallTimeout = req.wallTimeoutMs ?? env.wallTimeoutMsDefault;
@@ -166,35 +134,50 @@ export async function startDockerSession(
         armWallTimeout(sessionId, wallTimeout);
         armIdleTimeout(sessionId, idleTimeout);
 
-        stdout.on("data", (chunk: Buffer) => {
-            const text = chunk.toString("utf8");
+        attach.on("data", (chunk: Buffer | string) => {
+            const text = Buffer.isBuffer(chunk) ? chunk.toString("utf8") : String(chunk);
+            if (!text) return;
+
             touchSession(sessionId);
             pushEvent(sessionId, { type: "stdout", chunk: text });
-            maybeEmitInputRequest(sessionId, text);
         });
 
-        stderr.on("data", (chunk: Buffer) => {
-            const text = chunk.toString("utf8");
-            touchSession(sessionId);
-            pushEvent(sessionId, { type: "stderr", chunk: text });
+        attach.on("error", (err: Error) => {
+            const session = getSession(sessionId);
+            if (!session || isTerminalState(session.state)) return;
+
+            pushEvent(sessionId, { type: "error", message: err.message });
         });
 
-        container
+        void container
             .wait()
             .then(async (result) => {
                 const code = result.StatusCode ?? 0;
+
                 clearAllTimeouts(sessionId);
                 pushEvent(sessionId, { type: "exit", code });
-                pushEvent(sessionId, {
-                    type: "status",
-                    state: code === 0 ? "completed" : "failed",
-                });
+
+                const session = getSession(sessionId);
+                const alreadyFinal = session ? isTerminalState(session.state) : true;
+
+                if (!alreadyFinal || session?.state === "running" || session?.state === "preparing") {
+                    pushEvent(sessionId, {
+                        type: "status",
+                        state: code === 0 ? "completed" : "failed",
+                    });
+                }
+
                 await cleanupWorkspace(workspaceDir);
             })
             .catch(async (err: Error) => {
                 clearAllTimeouts(sessionId);
-                pushEvent(sessionId, { type: "error", message: err.message });
-                pushEvent(sessionId, { type: "status", state: "failed" });
+
+                const session = getSession(sessionId);
+                if (session && !isTerminalState(session.state)) {
+                    pushEvent(sessionId, { type: "error", message: err.message });
+                    pushEvent(sessionId, { type: "status", state: "failed" });
+                }
+
                 await cleanupWorkspace(workspaceDir);
             });
 
@@ -205,11 +188,13 @@ export async function startDockerSession(
         };
     } catch (e: any) {
         clearAllTimeouts(sessionId);
+
         pushEvent(sessionId, {
             type: "error",
             message: e?.message ?? "Failed to start container.",
         });
         pushEvent(sessionId, { type: "status", state: "failed" });
+
         await cleanupWorkspace(workspaceDir);
 
         return {

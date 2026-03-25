@@ -1,6 +1,6 @@
 import type { RunEvent, RunSessionState } from "@zoeskoul/code-contracts";
 import type { NodeJSStream } from "../types.js";
-import {RunEventInput} from "@zoeskoul/code-contracts";
+import { RunEventInput } from "@zoeskoul/code-contracts";
 
 type SessionRecord = {
     id: string;
@@ -34,6 +34,7 @@ export function createSession(args: {
         attachStream: null,
         lastActivityAt: Date.now(),
     };
+
     sessions.set(session.id, session);
     return session;
 }
@@ -43,40 +44,40 @@ export function getSession(id: string) {
 }
 
 export function setSessionStream(id: string, stream: NodeJSStream) {
-    const s = sessions.get(id);
-    if (!s) return null;
-    s.attachStream = stream;
-    sessions.set(id, s);
-    return s;
+    const session = sessions.get(id);
+    if (!session) return null;
+
+    session.attachStream = stream;
+    sessions.set(id, session);
+    return session;
 }
 
 export function touchSession(id: string) {
-    const s = sessions.get(id);
-    if (!s) return;
-    s.lastActivityAt = Date.now();
-    sessions.set(id, s);
+    const session = sessions.get(id);
+    if (!session) return;
+
+    session.lastActivityAt = Date.now();
+    sessions.set(id, session);
 }
 
-export function pushEvent(
-    id: string,
-    event: RunEventInput,
-) {
-    const s = sessions.get(id);
-    if (!s) return null;
+export function pushEvent(id: string, event: RunEventInput) {
+    const session = sessions.get(id);
+    if (!session) return null;
 
     const full = {
         ...event,
-        seq: ++s.seq,
+        seq: ++session.seq,
         ts: nowIso(),
     } as RunEvent;
 
     if (event.type === "status") {
-        s.state = event.state;
+        session.state = event.state;
     }
 
-    s.events.push(full);
-    s.lastActivityAt = Date.now();
-    sessions.set(id, s);
+    session.events.push(full);
+    session.lastActivityAt = Date.now();
+    sessions.set(id, session);
+
     return full;
 }
 

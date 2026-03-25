@@ -4,13 +4,24 @@ import { killSession } from "../docker/killSession.js";
 const wallTimers = new Map<string, NodeJS.Timeout>();
 const idleTimers = new Map<string, NodeJS.Timeout>();
 
+function isTerminalState(state: string) {
+    return (
+        state === "completed" ||
+        state === "failed" ||
+        state === "canceled" ||
+        state === "timed_out"
+    );
+}
+
 export function armWallTimeout(sessionId: string, ms: number) {
     clearWallTimeout(sessionId);
 
     const timer = setTimeout(async () => {
-        await killSession(sessionId);
+        const session = getSession(sessionId);
+        if (!session || isTerminalState(session.state)) return;
+
         pushEvent(sessionId, { type: "error", message: "Execution timed out." });
-        pushEvent(sessionId, { type: "status", state: "timed_out" });
+        await killSession(sessionId, "timed_out");
     }, ms);
 
     wallTimers.set(sessionId, timer);
@@ -26,18 +37,25 @@ export function armIdleTimeout(sessionId: string, ms: number) {
     clearIdleTimeout(sessionId);
 
     const timer = setInterval(async () => {
-        const s = getSession(sessionId);
-        if (!s) {
+        const session = getSession(sessionId);
+        if (!session) {
             clearIdleTimeout(sessionId);
             return;
         }
 
-        const idleFor = Date.now() - s.lastActivityAt;
+        if (isTerminalState(session.state)) {
+            clearIdleTimeout(sessionId);
+            return;
+        }
+
+        const idleFor = Date.now() - session.lastActivityAt;
         if (idleFor >= ms) {
             clearIdleTimeout(sessionId);
-            await killSession(sessionId);
-            pushEvent(sessionId, { type: "error", message: "Session timed out from inactivity." });
-            pushEvent(sessionId, { type: "status", state: "timed_out" });
+            pushEvent(sessionId, {
+                type: "error",
+                message: "Session timed out from inactivity.",
+            });
+            await killSession(sessionId, "timed_out");
         }
     }, 1000);
 

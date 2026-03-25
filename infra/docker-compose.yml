@@ -21,6 +21,13 @@ services:
       - redis-data:/data
     restart: unless-stopped
 
+  runtime-image:
+    image: zoeskoul-runtime:latest
+    build:
+      context: ..
+      dockerfile: apps/runner/runtime/Dockerfile
+    profiles: ["build-only"]
+
   runner:
     build:
       context: ..

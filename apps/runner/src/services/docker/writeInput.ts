@@ -1,4 +1,4 @@
-import { getSession, pushEvent, touchSession } from "../sessions/sessionStore";
+import { getSession, touchSession } from "../sessions/sessionStore.js";
 
 export async function writeInput(sessionId: string, input: string) {
     const session = getSession(sessionId);
@@ -8,5 +8,4 @@ export async function writeInput(sessionId: string, input: string) {
 
     session.attachStream.write(input);
     touchSession(sessionId);
-    pushEvent(sessionId, { type: "status", state: "running" });
 }

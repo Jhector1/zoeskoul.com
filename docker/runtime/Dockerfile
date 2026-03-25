@@ -22,9 +22,11 @@ RUN useradd -m -s /bin/bash runner
 
 WORKDIR /workspace
 
-COPY boot.sh /usr/local/bin/boot.sh
-RUN chmod +x /usr/local/bin/boot.sh
+RUN mkdir -p /opt/runner
+COPY apps/runner/runtime/pty-runner.py /opt/runner/pty-runner.py
+RUN chmod 755 /opt/runner/pty-runner.py
 
 USER runner
 
-ENTRYPOINT ["/usr/bin/tini", "--", "/usr/local/bin/boot.sh"]
+ENTRYPOINT ["/usr/bin/tini", "--"]
+CMD ["python3", "/opt/runner/pty-runner.py"]
