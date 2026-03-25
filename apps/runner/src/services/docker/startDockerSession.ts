@@ -52,7 +52,8 @@ export async function startDockerSession(
     const plan = getExecutionPlan(req.language, entry);
     const sessionId = `sess_${crypto.randomUUID()}`;
     const containerName = `zoeskoul_${sessionId}`;
-
+    console.log("NORMALIZED ENTRY", entry);
+    console.log("NORMALIZED FILES", files.map((f) => f.path));
     const container = await docker.createContainer({
         Image: env.runnerImage,
         name: containerName,
