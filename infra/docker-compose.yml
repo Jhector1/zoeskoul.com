@@ -25,7 +25,7 @@ services:
     image: zoeskoul-runtime:latest
     build:
       context: ..
-      dockerfile: apps/runner/runtime/Dockerfile
+      dockerfile: docker/runtime/Dockerfile
     profiles: ["build-only"]
 
   runner:

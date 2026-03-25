@@ -29,7 +29,8 @@ docker build -f docker/runtime/Dockerfile -t zoeskoul-runtime:latest docker/runt
 
 
 cd /opt/zoeskoul.com/infra
-docker compose build --no-cache runner
+git pull --ff-only
+docker compose --profile build-only build runtime-image
 docker compose up -d --force-recreate --no-deps runner
 docker logs -f zoeskoul-runner
 
