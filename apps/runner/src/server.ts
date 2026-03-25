@@ -1,10 +1,10 @@
 import express from "express";
 import cors from "cors";
-import { env } from "./lib/env";
-import { startSessionRoute } from "./routes/sessions.start";
-import { inputSessionRoute } from "./routes/sessions.input";
-import { cancelSessionRoute } from "./routes/sessions.cancel";
-import { streamSessionRoute } from "./routes/sessions.stream";
+import { env } from "./lib/env.js";
+import { startSessionRoute } from "./routes/sessions.start.js";
+import { inputSessionRoute } from "./routes/sessions.input.js";
+import { cancelSessionRoute } from "./routes/sessions.cancel.js";
+import { streamSessionRoute } from "./routes/sessions.stream.js";
 
 const app = express();
 
@@ -15,7 +15,7 @@ const allowedOrigins = [env.webUrl];
 app.use(
     cors({
         origin(origin, callback) {
-            if (!origin) return callback(null, true); // server-to-server / curl / health checks
+            if (!origin) return callback(null, true);
             if (allowedOrigins.includes(origin)) return callback(null, true);
             return callback(new Error("Not allowed by CORS"));
         },
