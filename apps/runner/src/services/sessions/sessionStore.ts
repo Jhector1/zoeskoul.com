@@ -13,7 +13,10 @@ type SessionRecord = {
     lastActivityAt: number;
 };
 
+type SessionListener = (event: RunEvent) => void;
+
 const sessions = new Map<string, SessionRecord>();
+const listeners = new Map<string, Set<SessionListener>>();
 
 function nowIso() {
     return new Date().toISOString();
@@ -60,6 +63,25 @@ export function touchSession(id: string) {
     sessions.set(id, session);
 }
 
+export function subscribeSession(id: string, listener: SessionListener) {
+    let set = listeners.get(id);
+    if (!set) {
+        set = new Set();
+        listeners.set(id, set);
+    }
+
+    set.add(listener);
+
+    return () => {
+        const current = listeners.get(id);
+        if (!current) return;
+        current.delete(listener);
+        if (current.size === 0) {
+            listeners.delete(id);
+        }
+    };
+}
+
 export function pushEvent(id: string, event: RunEventInput) {
     const session = sessions.get(id);
     if (!session) return null;
@@ -78,9 +100,19 @@ export function pushEvent(id: string, event: RunEventInput) {
     session.lastActivityAt = Date.now();
     sessions.set(id, session);
 
+    const subs = listeners.get(id);
+    if (subs) {
+        for (const fn of subs) {
+            try {
+                fn(full);
+            } catch {}
+        }
+    }
+
     return full;
 }
 
 export function deleteSession(id: string) {
     sessions.delete(id);
+    listeners.delete(id);
 }

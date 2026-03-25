@@ -21,6 +21,7 @@ import type { CodeLanguage, SqlDialect } from "@/lib/practice/types";
 import { isSqlRunResult } from "@/lib/code/types";
 import { runViaApi } from "@/lib/code/runClient";
 import {useCodeRunnerController} from "@/components/code/runner/hooks/useCodeRunnerController";
+import XtermTerminal from "@/components/code/runner/components/XtermTerminal";
 
 type MobilePane = "editor" | "output";
 
@@ -389,19 +390,28 @@ function CodeRunnerContent(props: CodeRunnerProps) {
                     ...(typeof panelWidth === "number" ? { width: panelWidth } : {}),
                 }}
             >
-                <TerminalPane
-                    terminal={term.terminal}
-                    stdinBuffer={term.stdinBuffer}
-                    awaitingInput={term.awaitingInput}
-                    inputPrompt={term.inputPrompt}
-                    inputLine={term.inputLine}
-                    setInputLine={term.setInputLine}
-                    inputRef={term.inputRef}
+                {/*<TerminalPane*/}
+                {/*    terminal={term.terminal}*/}
+                {/*    stdinBuffer={term.stdinBuffer}*/}
+                {/*    awaitingInput={term.awaitingInput}*/}
+                {/*    inputPrompt={term.inputPrompt}*/}
+                {/*    inputLine={term.inputLine}*/}
+                {/*    setInputLine={term.setInputLine}*/}
+                {/*    inputRef={term.inputRef}*/}
+                {/*    busy={term.busy}*/}
+                {/*    disabled={disabled}*/}
+                {/*    lastResult={term.lastResult}*/}
+                {/*    onSubmitInput={term.submitInput}*/}
+                {/*    typedLines={term.typedLines}*/}
+                {/*/>*/}
+                <XtermTerminal
+                    terminalFeed={term.terminalFeed}
+                    inputEnabled={term.inputEnabled}
                     busy={term.busy}
                     disabled={disabled}
                     lastResult={term.lastResult}
-                    onSubmitInput={term.submitInput}
-                    typedLines={term.typedLines}
+                    onSendData={term.sendTerminalData}
+                    onResize={term.sendTerminalResize}
                 />
             </div>
         );

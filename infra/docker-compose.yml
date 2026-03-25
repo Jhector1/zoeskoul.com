@@ -42,6 +42,8 @@ services:
       DOCKER_SOCKET: /var/run/docker.sock
       RUN_WALL_TIMEOUT_MS: ${RUN_WALL_TIMEOUT_MS}
       RUN_IDLE_TIMEOUT_MS: ${RUN_IDLE_TIMEOUT_MS}
+      RUNNER_EXEC_UID: 1000
+      RUNNER_EXEC_GID: 1000
       REDIS_URL: ${REDIS_URL}
       RUNNER_WORKSPACE_ROOT: /opt/zoeskoul/workspaces
     ports:
@@ -68,6 +70,7 @@ services:
       REDIS_URL: ${REDIS_URL}
       NEXTAUTH_URL: ${NEXTAUTH_URL}
       AUTH_SECRET: ${AUTH_SECRET}
+      NEXT_PUBLIC_RUNNER_WS_BASE_URL: ${NEXT_PUBLIC_RUNNER_WS_BASE_URL}
     ports:
       - "${WEB_PORT}:3000"
     depends_on:

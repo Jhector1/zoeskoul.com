@@ -82,7 +82,7 @@ export async function startDockerSession(
         AttachStdout: true,
         AttachStderr: true,
         WorkingDir: "/workspace",
-        User: "runner",
+        User: `${env.execUid}:${env.execGid}`,
         Env: [
             `COMPILE_CMD=${plan.compileCmd ?? ""}`,
             `RUN_CMD=${plan.runCmd}`,
@@ -122,7 +122,6 @@ export async function startDockerSession(
             stdin: true,
             stdout: true,
             stderr: true,
-            hijack: true,
         });
 
         setSessionStream(sessionId, attach);
@@ -145,7 +144,6 @@ export async function startDockerSession(
         attach.on("error", (err: Error) => {
             const session = getSession(sessionId);
             if (!session || isTerminalState(session.state)) return;
-
             pushEvent(sessionId, { type: "error", message: err.message });
         });
 
@@ -188,13 +186,11 @@ export async function startDockerSession(
         };
     } catch (e: any) {
         clearAllTimeouts(sessionId);
-
         pushEvent(sessionId, {
             type: "error",
             message: e?.message ?? "Failed to start container.",
         });
         pushEvent(sessionId, { type: "status", state: "failed" });
-
         await cleanupWorkspace(workspaceDir);
 
         return {

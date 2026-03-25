@@ -6,8 +6,10 @@ const envSchema = z.object({
     DOCKER_SOCKET: z.string().min(1).default("/var/run/docker.sock"),
     RUN_WALL_TIMEOUT_MS: z.coerce.number().int().positive().default(15000),
     RUN_IDLE_TIMEOUT_MS: z.coerce.number().int().positive().default(20000),
-    APP_URL: z.url().optional(),
-    WEB_URL: z.url().optional(),
+    APP_URL: z.string().url().optional(),
+    WEB_URL: z.string().url().optional(),
+    RUNNER_EXEC_UID: z.coerce.number().int().nonnegative().default(1000),
+    RUNNER_EXEC_GID: z.coerce.number().int().nonnegative().default(1000),
 });
 
 const parsed = envSchema.parse(process.env);
@@ -20,4 +22,6 @@ export const env = {
     idleTimeoutMsDefault: parsed.RUN_IDLE_TIMEOUT_MS,
     appUrl: parsed.APP_URL,
     webUrl: parsed.WEB_URL,
+    execUid: parsed.RUNNER_EXEC_UID,
+    execGid: parsed.RUNNER_EXEC_GID,
 } as const;

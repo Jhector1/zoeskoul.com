@@ -11,6 +11,12 @@ type StartResult =
     | { ok: true; sessionId: string; state: RunSessionState }
     | { ok: false; error: string };
 
+type ServerToClientMessage =
+    | { type: "ready"; sessionId: string; state: RunSessionState }
+    | { type: "event"; event: RunEvent }
+    | { type: "pong" }
+    | { type: "error"; message: string };
+
 async function parseJsonSafe<T>(
     res: Response,
     fallbackPrefix: string,
@@ -30,112 +36,147 @@ async function parseJsonSafe<T>(
     }
 }
 
+function isFinalSessionState(state: string) {
+    return (
+        state === "completed" ||
+        state === "failed" ||
+        state === "canceled" ||
+        state === "timed_out"
+    );
+}
+
+function getWsBaseUrl() {
+    const explicit = process.env.NEXT_PUBLIC_RUNNER_WS_BASE_URL;
+    if (explicit) return explicit.replace(/\/+$/, "");
+    return "";
+}
+
 export function useRunSession() {
     const [sessionId, setSessionId] = React.useState<string | null>(null);
     const [state, setState] = React.useState<RunSessionState>("queued");
     const [events, setEvents] = React.useState<RunEvent[]>([]);
-    const esRef = React.useRef<EventSource | null>(null);
+    const wsRef = React.useRef<WebSocket | null>(null);
 
-    const closeStream = React.useCallback(() => {
-        esRef.current?.close();
-        esRef.current = null;
+    const closeSocket = React.useCallback(() => {
+        wsRef.current?.close();
+        wsRef.current = null;
     }, []);
 
     const connect = React.useCallback(
         (nextSessionId: string, nextState: RunSessionState = "queued") => {
-            closeStream();
+            closeSocket();
             setEvents([]);
             setSessionId(nextSessionId);
             setState(nextState);
 
-            const es = new EventSource(
-                `/api/run/sessions/${encodeURIComponent(nextSessionId)}/stream`,
+            const base = getWsBaseUrl();
+            if (!base) {
+                throw new Error("NEXT_PUBLIC_RUNNER_WS_BASE_URL is not set.");
+            }
+
+            const ws = new WebSocket(
+                `${base}/sessions/${encodeURIComponent(nextSessionId)}/ws`,
             );
 
-            es.onmessage = (ev) => {
-                const parsedEvent = JSON.parse(ev.data) as RunEvent;
+            ws.onmessage = (ev) => {
+                const msg = JSON.parse(ev.data) as ServerToClientMessage;
 
-                setEvents((prev) => [...prev, parsedEvent]);
+                if (msg.type === "ready") {
+                    setState(msg.state);
+                    return;
+                }
 
-                if (parsedEvent.type === "status") {
-                    setState(parsedEvent.state);
-                } else if (parsedEvent.type === "input_request") {
-                    setState("waiting_for_input");
-                } else if (parsedEvent.type === "exit") {
-                    setState("completed");
-                } else if (parsedEvent.type === "error") {
+                if (msg.type === "event") {
+                    const parsedEvent = msg.event;
+                    setEvents((prev) => [...prev, parsedEvent]);
+
+                    if (parsedEvent.type === "status") {
+                        setState(parsedEvent.state);
+
+                        if (isFinalSessionState(parsedEvent.state)) {
+                            ws.close();
+                            if (wsRef.current === ws) {
+                                wsRef.current = null;
+                            }
+                        }
+                    }
+                    return;
+                }
+
+                if (msg.type === "error") {
                     setState("failed");
                 }
             };
 
-            es.onerror = () => {
-                es.close();
-                if (esRef.current === es) {
-                    esRef.current = null;
+            ws.onerror = () => {};
+
+            ws.onclose = () => {
+                if (wsRef.current === ws) {
+                    wsRef.current = null;
                 }
             };
 
-            esRef.current = es;
+            wsRef.current = ws;
         },
-        [closeStream],
+        [closeSocket],
     );
 
-    const start = React.useCallback(async (req: InteractiveRunReq) => {
-        const res = await fetch("/api/run/sessions/start", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(req),
-        });
-
-        const parsed = await parseJsonSafe<StartResult>(
-            res,
-            "Non-JSON interactive session response",
-        );
-
-        if (!parsed.ok) {
-            throw new Error(parsed.error);
-        }
-
-        const data = parsed.data;
-
-        if (!res.ok || !data.ok) {
-            throw new Error(
-                data.ok === false
-                    ? data.error
-                    : `Failed to start session (${res.status})`,
-            );
-        }
-
-        connect(data.sessionId, data.state);
-        return data.sessionId;
-    }, [connect]);
-
-    const sendInput = React.useCallback(
-        async (input: string) => {
-            if (!sessionId) return;
-
-            await fetch(`/api/run/sessions/${encodeURIComponent(sessionId)}/input`, {
+    const start = React.useCallback(
+        async (req: InteractiveRunReq) => {
+            const res = await fetch("/api/run/sessions/start", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ input }),
+                body: JSON.stringify(req),
             });
+
+            const parsed = await parseJsonSafe<StartResult>(
+                res,
+                "Non-JSON interactive session response",
+            );
+
+            if (!parsed.ok) {
+                throw new Error(parsed.error);
+            }
+
+            const data = parsed.data;
+
+            if (!res.ok || !data.ok) {
+                throw new Error(
+                    data.ok === false
+                        ? data.error
+                        : `Failed to start session (${res.status})`,
+                );
+            }
+
+            connect(data.sessionId, data.state);
+            return data.sessionId;
         },
-        [sessionId],
+        [connect],
     );
 
-    const cancel = React.useCallback(async () => {
-        if (!sessionId) return;
+    const sendInput = React.useCallback(async (input: string) => {
+        const ws = wsRef.current;
+        if (!ws || ws.readyState !== WebSocket.OPEN) return;
+        ws.send(JSON.stringify({ type: "input", data: input }));
+    }, []);
 
-        await fetch(`/api/run/sessions/${encodeURIComponent(sessionId)}/cancel`, {
-            method: "POST",
-        });
-    }, [sessionId]);
+    const resize = React.useCallback(async (cols: number, rows: number) => {
+        const ws = wsRef.current;
+        if (!ws || ws.readyState !== WebSocket.OPEN) return;
+        ws.send(JSON.stringify({ type: "resize", cols, rows }));
+    }, []);
+
+    const cancel = React.useCallback(async () => {
+        const ws = wsRef.current;
+        if (!ws || ws.readyState !== WebSocket.OPEN) return;
+        ws.send(JSON.stringify({ type: "cancel" }));
+    }, []);
 
     React.useEffect(() => {
         return () => {
-            closeStream();
+            closeSocket();
         };
-    }, [closeStream]);
+    }, [closeSocket]);
 
     return {
         sessionId,
@@ -144,7 +185,8 @@ export function useRunSession() {
         start,
         connect,
         sendInput,
+        resize,
         cancel,
-        closeStream,
+        closeSocket,
     };
 }

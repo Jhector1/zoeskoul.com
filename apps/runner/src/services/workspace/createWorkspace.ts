@@ -1,7 +1,9 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import crypto from "node:crypto";
+import { spawn } from "node:child_process";
 import type { FileEntry } from "@zoeskoul/code-contracts";
+import { env } from "../../lib/env.js";
 
 function assertSafeRelPath(p: string) {
     const normalized = String(p ?? "").replace(/\\/g, "/").trim();
@@ -15,6 +17,20 @@ function assertSafeRelPath(p: string) {
             throw new Error(`Unsafe path: ${p}`);
         }
     }
+}
+
+async function chownRecursive(target: string, uid: number, gid: number) {
+    await new Promise<void>((resolve, reject) => {
+        const child = spawn("chown", ["-R", `${uid}:${gid}`, target], {
+            stdio: "ignore",
+        });
+
+        child.on("error", reject);
+        child.on("exit", (code) => {
+            if (code === 0) resolve();
+            else reject(new Error(`chown failed with exit code ${code ?? "unknown"}`));
+        });
+    });
 }
 
 export async function createWorkspace(files: FileEntry[]) {
@@ -32,6 +48,8 @@ export async function createWorkspace(files: FileEntry[]) {
         await fs.mkdir(path.dirname(abs), { recursive: true });
         await fs.writeFile(abs, file.content ?? "", "utf8");
     }
+
+    await chownRecursive(root, env.execUid, env.execGid);
 
     return root;
 }

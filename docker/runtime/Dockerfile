@@ -18,12 +18,12 @@ RUN apt-get update && apt-get install -y \
     findutils \
     && rm -rf /var/lib/apt/lists/*
 
-RUN useradd -m -s /bin/bash runner
+RUN groupadd -g 1000 runner && useradd -m -u 1000 -g 1000 -s /bin/bash runner
 
 WORKDIR /workspace
 
 RUN mkdir -p /opt/runner
-COPY apps/runner/runtime/pty-runner.py /opt/runner/pty-runner.py
+COPY pty-runner.py /opt/runner/pty-runner.py
 RUN chmod 755 /opt/runner/pty-runner.py
 
 USER runner

@@ -1,129 +1,18 @@
-// src/components/code/runner/hooks/useCodeRunnerController.ts
 "use client";
 
 import * as React from "react";
 import type { CodeLanguage, SqlDialect } from "@/lib/practice/types";
 import type { BatchRunResult } from "@/lib/code/types/batch";
 import type { RunEvent } from "@/lib/code/types/session";
-import type {TermLine, RunnerState, OnRun} from "../types";
+import type { RunnerState, OnRun } from "../types";
 import { useRunSession } from "./useRunSession";
 import { runBatchClient } from "./useBatchRun";
 
-function appendChunk(
-    prev: TermLine[],
-    type: "out" | "err" | "sys",
-    chunk: string,
-): TermLine[] {
-    const text = String(chunk ?? "");
-    if (!text) return prev;
-
-    const normalized = text.replace(/\r\n/g, "\n").replace(/\r/g, "\n");
-
-    const next = [...prev];
-    if (next.length === 0) {
-        next.push({ type, text: "" });
-    }
-
-    for (const ch of normalized) {
-        const last = next[next.length - 1];
-
-        if (ch === "\n") {
-            next.push({ type, text: "" });
-            continue;
-        }
-
-        if (last.type === type) {
-            next[next.length - 1] = {
-                ...last,
-                text: last.text + ch,
-            };
-            continue;
-        }
-
-        if (last.text === "") {
-            next[next.length - 1] = {
-                type,
-                text: ch,
-            };
-            continue;
-        }
-
-        next.push({ type, text: ch });
-    }
-
-    return trimTrailingDuplicateEmpty(next);
-}
-
-function trimTrailingDuplicateEmpty(lines: TermLine[]) {
-    const next = [...lines];
-    while (next.length >= 2) {
-        const a = next[next.length - 1];
-        const b = next[next.length - 2];
-        if (a.text === "" && b.text === "") {
-            next.pop();
-            continue;
-        }
-        break;
-    }
-    return next;
-}
-
-function commitSubmittedInput(prev: TermLine[], value: string): TermLine[] {
-    const text = String(value ?? "");
-    const next = [...prev];
-
-    if (next.length === 0) {
-        next.push({ type: "out", text });
-        next.push({ type: "out", text: "" });
-        return next;
-    }
-
-    const last = next[next.length - 1];
-
-    next[next.length - 1] = {
-        ...last,
-        text: last.text + text,
-    };
-
-    // Simulate pressing Enter: move terminal to a fresh new line
-    next.push({ type: "out", text: "" });
-
-    return next;
-}
-
-function endsWithLineBreak(_text: string) {
-    return false;
-}
-
-function squashTrailingEmpty(lines: TermLine[]) {
-    const next = [...lines];
-    while (next.length >= 2) {
-        const a = next[next.length - 1];
-        const b = next[next.length - 2];
-        if (a.text === "" && b.text === "") {
-            next.pop();
-            continue;
-        }
-        break;
-    }
-    return next;
-}
-
-function appendInputEcho(prev: TermLine[], value: string): TermLine[] {
-    const text = String(value ?? "");
-    const next = [...prev];
-    const last = next[next.length - 1];
-
-    if (last) {
-        next[next.length - 1] = {
-            ...last,
-            text: last.text + text,
-        };
-        return next;
-    }
-
-    return [{ type: "in", text }];
-}
+export type TerminalChunk = {
+    id: number;
+    kind: "pty" | "err" | "sys";
+    data: string;
+};
 
 function isFinalSessionState(state: string) {
     return (
@@ -145,8 +34,7 @@ export function useCodeRunnerController(args: {
     disabled: boolean;
     allowRun: boolean;
     resetTerminalOnRun: boolean;
-    onRun?: OnRun; // ✅ ADD THIS
-
+    onRun?: OnRun;
 }) {
     const {
         lang,
@@ -164,35 +52,54 @@ export function useCodeRunnerController(args: {
 
     const session = useRunSession();
 
-    const [terminal, setTerminal] = React.useState<TermLine[]>([]);
-    const [stdinBuffer, setStdinBuffer] = React.useState("");
-    const [awaitingInput, setAwaitingInput] = React.useState(false);
-    const [inputPrompt, setInputPrompt] = React.useState("");
-    const [inputLine, setInputLine] = React.useState("");
+    const [terminalFeed, setTerminalFeed] = React.useState<TerminalChunk[]>([]);
+    const [inputEnabled, setInputEnabled] = React.useState(false);
     const [busy, setBusy] = React.useState(false);
     const [runState, setRunState] = React.useState<RunnerState>("idle");
     const [lastResult, setLastResult] = React.useState<BatchRunResult | null>(null);
     const [lastRunLanguage, setLastRunLanguage] = React.useState<CodeLanguage | null>(null);
-    const [typedLines, setTypedLines] = React.useState<string[]>([]);
-
-    const inputRef = React.useRef<HTMLTextAreaElement | null>(null);
-    const lastHandledSeqRef = React.useRef(0);
 
     const isSql = lang === "sql";
+    const lastHandledSeqRef = React.useRef(0);
+    const nextChunkIdRef = React.useRef(1);
+
+    const pushChunk = React.useCallback(
+        (kind: TerminalChunk["kind"], data: string) => {
+            if (!data) return;
+            setTerminalFeed((prev) => [
+                ...prev,
+                { id: nextChunkIdRef.current++, kind, data },
+            ]);
+        },
+        [],
+    );
 
     const resetTerminal = React.useCallback(() => {
         lastHandledSeqRef.current = 0;
-        setTerminal([]);
-        setStdinBuffer("");
-        setAwaitingInput(false);
-        setInputPrompt("");
-        setInputLine("");
+        nextChunkIdRef.current = 1;
+        setTerminalFeed([]);
+        setInputEnabled(false);
         setBusy(false);
         setRunState("idle");
         setLastResult(null);
         setLastRunLanguage(null);
-        setTypedLines([]);
     }, []);
+
+    const sendTerminalData = React.useCallback(
+        (data: string) => {
+            if (!data || !inputEnabled) return;
+            void session.sendInput(data);
+        },
+        [inputEnabled, session],
+    );
+
+    const sendTerminalResize = React.useCallback(
+        (cols: number, rows: number) => {
+            void session.resize(cols, rows);
+        },
+        [session],
+    );
+
     const startRun = React.useCallback(async () => {
         if (disabled || !allowRun || busy) return;
 
@@ -200,12 +107,8 @@ export function useCodeRunnerController(args: {
             resetTerminal();
         } else {
             lastHandledSeqRef.current = 0;
-            setAwaitingInput(false);
-            setInputPrompt("");
-            setInputLine("");
+            setInputEnabled(false);
             setLastResult(null);
-            setTypedLines([]);
-            setStdinBuffer("");
         }
 
         setLastRunLanguage(lang);
@@ -231,19 +134,16 @@ export function useCodeRunnerController(args: {
 
                 setLastResult(result);
             } catch (e: any) {
-                setTerminal((prev) => [
-                    ...prev,
-                    { type: "err", text: e?.message ?? "SQL run failed." },
-                ]);
+                pushChunk("err", `${e?.message ?? "SQL run failed."}\r\n`);
             } finally {
                 setBusy(false);
                 setRunState("idle");
+                setInputEnabled(false);
             }
 
             return;
         }
 
-        // IDE / custom runner path
         if (onRun) {
             setBusy(true);
             setRunState("starting");
@@ -254,7 +154,7 @@ export function useCodeRunnerController(args: {
                 const result = await onRun({
                     language: lang,
                     code,
-                    stdin: stdinBuffer,
+                    stdin: "",
                 });
 
                 if (result && typeof result === "object" && "sessionId" in result) {
@@ -265,21 +165,18 @@ export function useCodeRunnerController(args: {
 
                 setLastResult(result as BatchRunResult);
             } catch (e: any) {
-                setTerminal((prev) => [
-                    ...prev,
-                    { type: "err", text: e?.message ?? "Run failed." },
-                ]);
+                pushChunk("err", `${e?.message ?? "Run failed."}\r\n`);
             } finally {
                 if (!interactiveStarted) {
                     setBusy(false);
                     setRunState("idle");
+                    setInputEnabled(false);
                 }
             }
 
             return;
         }
 
-        // Standalone interactive fallback
         setBusy(true);
         setRunState("starting");
 
@@ -291,12 +188,10 @@ export function useCodeRunnerController(args: {
                 code,
             });
         } catch (e: any) {
-            setTerminal((prev) => [
-                ...prev,
-                { type: "err", text: e?.message ?? "Failed to start session." },
-            ]);
+            pushChunk("err", `${e?.message ?? "Failed to start session."}\r\n`);
             setBusy(false);
             setRunState("idle");
+            setInputEnabled(false);
         }
     }, [
         disabled,
@@ -313,54 +208,28 @@ export function useCodeRunnerController(args: {
         sqlSeedSql,
         sqlDatasetId,
         onRun,
-        stdinBuffer,
         session,
+        pushChunk,
     ]);
 
-    const submitInput = React.useCallback(async () => {
-        if (!awaitingInput || !session.sessionId) return;
-
-        const value = String(inputLine ?? "");
-
-        setTerminal((prev) => commitSubmittedInput(prev, value));
-        setTypedLines((prev) => [...prev, value]);
-        setStdinBuffer((prev) => prev + value + "\n");
-
-        setInputLine("");
-        setAwaitingInput(false);
-        setInputPrompt("");
-        setRunState("running");
-        setBusy(true);
-
-        try {
-            await session.sendInput(value + "\n");
-        } catch (e: any) {
-            setTerminal((prev) => [
-                ...prev,
-                { type: "err", text: e?.message ?? "Failed to send input." },
-            ]);
-            setBusy(false);
-            setRunState("idle");
-        }
-    }, [awaitingInput, session, inputLine]);
     const cancelRun = React.useCallback(async () => {
         if (isSql) {
             setBusy(false);
-            setAwaitingInput(false);
+            setInputEnabled(false);
             setRunState("idle");
+            pushChunk("sys", "\r\n[run canceled]\r\n");
             return;
         }
 
         try {
             await session.cancel();
+            pushChunk("sys", "\r\n[run canceled]\r\n");
         } finally {
             setBusy(false);
-            setAwaitingInput(false);
-            setInputPrompt("");
+            setInputEnabled(false);
             setRunState("idle");
-            setTerminal((prev) => [...prev, { type: "sys", text: "Run canceled." }]);
         }
-    }, [session, isSql]);
+    }, [session, isSql, pushChunk]);
 
     React.useEffect(() => {
         if (!session.events.length) return;
@@ -375,100 +244,70 @@ export function useCodeRunnerController(args: {
 
             handleSessionEvent({
                 ev,
-                setTerminal,
+                pushChunk,
                 setBusy,
-                setAwaitingInput,
-                setInputPrompt,
+                setInputEnabled,
                 setRunState,
             });
         }
-    }, [session.events]);
+    }, [session.events, pushChunk]);
 
     return {
-        stdinBuffer,
-        terminal,
-        awaitingInput,
-        inputPrompt,
-        inputLine,
-        setInputLine,
-        inputRef,
+        terminalFeed,
+        inputEnabled,
+        sendTerminalData,
+        sendTerminalResize,
         busy,
         runState,
         canCancel:
             runState === "starting" ||
             runState === "running" ||
-            runState === "awaiting_input",
+            inputEnabled,
         cancelRun,
         lastResult,
         lastRunLanguage,
         resetTerminal,
         startRun,
-        submitInput,
-        typedLines,
     };
 }
 
 function handleSessionEvent(args: {
     ev: RunEvent;
-    setTerminal: React.Dispatch<React.SetStateAction<TermLine[]>>;
+    pushChunk: (kind: TerminalChunk["kind"], data: string) => void;
     setBusy: React.Dispatch<React.SetStateAction<boolean>>;
-    setAwaitingInput: React.Dispatch<React.SetStateAction<boolean>>;
-    setInputPrompt: React.Dispatch<React.SetStateAction<string>>;
+    setInputEnabled: React.Dispatch<React.SetStateAction<boolean>>;
     setRunState: React.Dispatch<React.SetStateAction<RunnerState>>;
 }) {
-    const {
-        ev,
-        setTerminal,
-        setBusy,
-        setAwaitingInput,
-        setInputPrompt,
-        setRunState,
-    } = args;
+    const { ev, pushChunk, setBusy, setInputEnabled, setRunState } = args;
 
     if (ev.type === "stdout") {
-        setTerminal((prev) => appendChunk(prev, "out", ev.chunk));
+        pushChunk("pty", ev.chunk);
         return;
     }
 
     if (ev.type === "stderr") {
-        setTerminal((prev) => appendChunk(prev, "err", ev.chunk));
-        return;
-    }
-
-    if (ev.type === "input_request") {
-        setBusy(false);
-        setAwaitingInput(true);
-        setInputPrompt("");
-        setRunState("awaiting_input");
+        pushChunk("err", ev.chunk);
         return;
     }
 
     if (ev.type === "status") {
         if (ev.state === "preparing" || ev.state === "compiling") {
             setBusy(true);
-            setAwaitingInput(false);
+            setInputEnabled(false);
             setRunState("starting");
             return;
         }
 
         if (ev.state === "running") {
             setBusy(true);
-            setAwaitingInput(false);
+            setInputEnabled(true);
             setRunState("running");
-            return;
-        }
-
-        if (ev.state === "waiting_for_input") {
-            setBusy(false);
-            setAwaitingInput(true);
-            setRunState("awaiting_input");
             return;
         }
 
         if (isFinalSessionState(ev.state)) {
             setBusy(false);
-            setAwaitingInput(false);
-            setInputPrompt("");
+            setInputEnabled(false);
             setRunState("idle");
             return;
         }
@@ -477,36 +316,26 @@ function handleSessionEvent(args: {
     }
 
     if (ev.type === "compile_error") {
-        if (ev.stdout) {
-            setTerminal((prev) => appendChunk(prev, "out", ev.stdout));
-        }
-        if (ev.stderr) {
-            setTerminal((prev) => appendChunk(prev, "err", ev.stderr));
-        }
+        if (ev.stdout) pushChunk("pty", ev.stdout);
+        if (ev.stderr) pushChunk("err", ev.stderr);
         setBusy(false);
-        setAwaitingInput(false);
-        setInputPrompt("");
+        setInputEnabled(false);
         setRunState("idle");
         return;
     }
 
     if (ev.type === "exit") {
-        setTerminal((prev) => [
-            ...prev,
-            { type: "sys", text: `Process exited with code ${ev.code}` },
-        ]);
+        pushChunk("sys", `\r\n[process exited with code ${ev.code}]\r\n`);
         setBusy(false);
-        setAwaitingInput(false);
-        setInputPrompt("");
+        setInputEnabled(false);
         setRunState("idle");
         return;
     }
 
     if (ev.type === "error") {
-        setTerminal((prev) => [...prev, { type: "err", text: ev.message }]);
+        pushChunk("err", `\r\n${ev.message}\r\n`);
         setBusy(false);
-        setAwaitingInput(false);
-        setInputPrompt("");
+        setInputEnabled(false);
         setRunState("idle");
     }
 }
