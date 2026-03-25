@@ -27,13 +27,15 @@ services:
       dockerfile: apps/runner/Dockerfile
     container_name: zoeskoul-runner
     environment:
-      NODE_ENV: production
-      PORT: ${RUNNER_PORT}
-      RUNNER_IMAGE: zoeskoul-runtime:latest
-      DOCKER_SOCKET: /var/run/docker.sock
-      RUN_WALL_TIMEOUT_MS: ${RUN_WALL_TIMEOUT_MS}
-      RUN_IDLE_TIMEOUT_MS: ${RUN_IDLE_TIMEOUT_MS}
-      REDIS_URL: ${REDIS_URL}
+        NODE_ENV: production
+        PORT: ${RUNNER_PORT}
+        APP_URL: ${APP_URL}
+        WEB_URL: ${WEB_URL}
+        RUNNER_IMAGE: zoeskoul-runtime:latest
+        DOCKER_SOCKET: /var/run/docker.sock
+        RUN_WALL_TIMEOUT_MS: ${RUN_WALL_TIMEOUT_MS}
+        RUN_IDLE_TIMEOUT_MS: ${RUN_IDLE_TIMEOUT_MS}
+        REDIS_URL: ${REDIS_URL}
     ports:
       - "${RUNNER_PORT}:4001"
     volumes:
