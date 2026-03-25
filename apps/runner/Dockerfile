@@ -19,8 +19,8 @@ COPY --from=deps /app/packages/code-contracts/node_modules ./packages/code-contr
 
 COPY . .
 
+RUN pnpm --filter @zoeskoul/code-contracts build
 RUN pnpm --filter @zoeskoul/runner build
-
 FROM base AS runner
 WORKDIR /app
 ENV NODE_ENV=production
