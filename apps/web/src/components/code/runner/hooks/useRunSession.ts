@@ -122,14 +122,22 @@ export function useRunSession() {
             ws.onerror = (ev) => {
                 console.error("Runner WebSocket failed:", wsUrl, ev);
             };
-
             ws.onclose = (ev) => {
-                console.error("Runner WebSocket closed:", {
+                const info = {
                     url: wsUrl,
                     code: ev.code,
                     reason: ev.reason,
                     wasClean: ev.wasClean,
-                });
+                };
+
+                const finalStates = new Set(["completed", "failed", "canceled", "timed_out"]);
+
+                if (finalStates.has(state) || ev.wasClean || ev.code === 1000 || ev.code === 1005) {
+                    console.log("Runner WebSocket closed:", info);
+                    return;
+                }
+
+                console.error("Runner WebSocket closed unexpectedly:", info);
             };
 
             wsRef.current = ws;

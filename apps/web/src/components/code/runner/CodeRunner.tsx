@@ -13,15 +13,14 @@ import {
 import {isControlled, type CodeRunnerProps, type TerminalDock, CodeRunnerFrame} from "./types";
 import HeaderBar from "./components/HeaderBar";
 import EditorPane from "./components/EditorPane";
-import TerminalPane from "./components/TerminalPane";
 import SqlResultsPane from "./components/SqlResultsPane";
 import { useSplitSizing } from "./hooks/useSplitSizing";
-// import { useTerminalRunner } from "./hooks/useTerminalRunner";
 import type { CodeLanguage, SqlDialect } from "@/lib/practice/types";
 import { isSqlRunResult } from "@/lib/code/types";
 import { runViaApi } from "@/lib/code/runClient";
 import {useCodeRunnerController} from "@/components/code/runner/hooks/useCodeRunnerController";
 import XtermTerminal from "@/components/code/runner/components/XtermTerminal";
+import TerminalSurface from "@/components/code/runner/components/TerminalSurface";
 
 type MobilePane = "editor" | "output";
 
@@ -351,6 +350,9 @@ function CodeRunnerContent(props: CodeRunnerProps) {
         term.inputEnabled ||
         term.terminalFeed.length > 0;
 
+    const shouldShowTerminal =
+        term.busy || term.inputEnabled || term.terminalFeed.length > 0 || !!term.lastResult;
+
     const renderOutputPane = (panelHeight?: number, panelWidth?: number) => {
         if (lang === "sql") {
             return (
@@ -383,8 +385,8 @@ function CodeRunnerContent(props: CodeRunnerProps) {
                     ...(typeof panelWidth === "number" ? { width: panelWidth } : {}),
                 }}
             >
-                {shouldShowXterm ? (
-                    <XtermTerminal
+                {shouldShowTerminal ? (
+                    <TerminalSurface
                         terminalFeed={term.terminalFeed}
                         inputEnabled={term.inputEnabled}
                         busy={term.busy}
@@ -402,8 +404,7 @@ function CodeRunnerContent(props: CodeRunnerProps) {
                 )}
             </div>
         );
-    };
-    const renderEditorPane = (editorHeight: number) => (
+    };    const renderEditorPane = (editorHeight: number) => (
         <div
             className="h-full bg-white/70 dark:bg-black/10"
             style={{ touchAction: isNarrowScreen ? "pan-y" : "auto" }}

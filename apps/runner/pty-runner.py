@@ -8,6 +8,7 @@ import struct
 import subprocess
 import sys
 import termios
+import tty
 
 COMPILE_CMD = os.environ.get("COMPILE_CMD", "").strip()
 RUN_CMD = os.environ.get("RUN_CMD", "").strip()
@@ -22,9 +23,11 @@ if COMPILE_CMD:
 parts.append(RUN_CMD)
 FULL_CMD = " && ".join(parts)
 
+
 def set_winsize(fd: int, rows: int, cols: int) -> None:
     packed = struct.pack("HHHH", rows, cols, 0, 0)
     fcntl.ioctl(fd, termios.TIOCSWINSZ, packed)
+
 
 def main() -> int:
     master_fd, slave_fd = pty.openpty()
@@ -47,7 +50,13 @@ def main() -> int:
     stdin_fd = sys.stdin.fileno()
     stdout_fd = sys.stdout.fileno()
 
+    original_stdin_attrs = None
+
     try:
+        if os.isatty(stdin_fd):
+            original_stdin_attrs = termios.tcgetattr(stdin_fd)
+            tty.setraw(stdin_fd, when=termios.TCSANOW)
+
         while True:
             read_fds = [master_fd, stdin_fd]
             ready, _, _ = select.select(read_fds, [], [], 0.1)
@@ -85,10 +94,17 @@ def main() -> int:
 
         return proc.wait()
     finally:
+        if original_stdin_attrs is not None:
+            try:
+                termios.tcsetattr(stdin_fd, termios.TCSANOW, original_stdin_attrs)
+            except OSError:
+                pass
+
         try:
             os.close(master_fd)
         except OSError:
             pass
+
 
 if __name__ == "__main__":
     sys.exit(main())
