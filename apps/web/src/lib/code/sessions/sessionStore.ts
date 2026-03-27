@@ -6,20 +6,24 @@
 // import type { ChildProcessWithoutNullStreams } from "node:child_process";
 // // import {RunEventInput} from "@zoeskoul/code-contracts";
 //
-// type SessionRuntime = {
-//     proc?: ChildProcessWithoutNullStreams;
-//     cwd?: string;
-//     nextSeq: number;
-// };
+import {ChildProcessWithoutNullStreams} from "child_process";
+
+type SessionRuntime = {
+    proc?: ChildProcessWithoutNullStreams;
+    cwd?: string;
+    nextSeq: number;
+};
 //
-// type SessionRecord = RunSessionSummary & {
-//     actorKey: string;
-//     workspaceDir?: string;
-//     events: RunEvent[];
-//     runtime: SessionRuntime;
-// };
+import {RunEvent, RunSessionSummary} from "@/lib/code/types/session";
+
+type SessionRecord = RunSessionSummary & {
+    actorKey: string;
+    workspaceDir?: string;
+    events: RunEvent[];
+    runtime: SessionRuntime;
+};
 //
-// const sessions = new Map<string, SessionRecord>();
+const sessions = new Map<string, SessionRecord>();
 //
 // export function createSession(record: Omit<SessionRecord, "runtime">) {
 //     const full: SessionRecord = {
@@ -31,10 +35,10 @@
 //     sessions.set(full.id, full);
 //     return full;
 // }
-//
-// export function getSession(id: string) {
-//     return sessions.get(id) ?? null;
-// }
+
+export function getSession(id: string) {
+    return sessions.get(id) ?? null;
+}
 //
 // export function patchSession(id: string, patch: Partial<SessionRecord>) {
 //     const cur = sessions.get(id);
