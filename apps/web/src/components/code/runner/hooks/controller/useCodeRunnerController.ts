@@ -7,8 +7,9 @@ import { usePtyRunner } from "../pty/usePtyRunner";
 
 export function useCodeRunnerController(args: SharedRunnerArgs): CodeRunnerController {
     const runtime = resolveRuntime(args.runtime);
+    const { lang } = args;
 
-    if (args.lang === "sql") {
+    if (lang === "sql") {
         return useJudge0Runner({
             ...args,
             runtime: {
@@ -18,15 +19,15 @@ export function useCodeRunnerController(args: SharedRunnerArgs): CodeRunnerContr
         });
     }
 
+    const nonSqlArgs = {
+        ...args,
+        lang,
+        runtime,
+    };
+
     if (runtime.backend === "judge0") {
-        return useJudge0Runner({
-            ...args,
-            runtime,
-        });
+        return useJudge0Runner(nonSqlArgs);
     }
 
-    return usePtyRunner({
-        ...args,
-        runtime,
-    });
+    return usePtyRunner(nonSqlArgs);
 }

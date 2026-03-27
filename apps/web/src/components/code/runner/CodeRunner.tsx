@@ -356,7 +356,11 @@ function CodeRunnerContent(props: CodeRunnerProps) {
                     ...(typeof panelWidth === "number" ? { width: panelWidth } : {}),
                 }}
             >
-                <TerminalSurface controller={term} disabled={disabled} />
+                <TerminalSurface
+                    controller={term}
+                    disabled={disabled}
+                    sqlSchemaSql={sqlSchemaSql ?? sqlSetupSql ?? ""}
+                />
             </div>
         );
     };

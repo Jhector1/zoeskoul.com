@@ -10,11 +10,15 @@ import type {
 import type { RunnerState } from "../../types";
 import { useRunSession } from "../useRunSession";
 import { resolveRuntime } from "../controller/useResolvedRuntime";
+import {CodeLanguage} from "@/lib/practice/types";
 
 type StartedInteractiveSession = {
     ok?: true;
     sessionId: string;
     state: RunSessionState;
+};
+type PtyRunnerArgs = Omit<SharedRunnerArgs, "lang"> & {
+    lang: Exclude<CodeLanguage, "sql">;
 };
 
 function isFinalSessionState(state: string) {
@@ -104,7 +108,7 @@ function handleSessionEvent(args: {
     }
 }
 
-export function usePtyRunner(args: SharedRunnerArgs): CodeRunnerController {
+export function usePtyRunner(args: PtyRunnerArgs): CodeRunnerController {
     const {
         lang,
         code,

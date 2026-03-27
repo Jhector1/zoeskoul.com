@@ -2,7 +2,8 @@
 
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import type { RunResult } from "@/lib/code/types";
-import type { TerminalChunk } from "@/components/code/runner/hooks/controller/useCodeRunnerController";
+import {TerminalChunk} from "@/components/code/runner/runtime";
+// import type { TerminalChunk } from "@/components/code/runner/hooks/controller/useCodeRunnerController";
 
 function fmtMeta(r: RunResult) {
     const time = r.time ? ` • ${r.time}s` : "";

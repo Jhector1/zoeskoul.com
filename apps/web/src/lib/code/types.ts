@@ -77,11 +77,10 @@ export type CodeRunResult = {
     memory?: number | null;
     error?: string;
 };
-
-export type SqlRunResult = {
+export type SqlRunSuccess = {
     kind: "sql";
-    ok: boolean;
-    status: "Accepted" | "Error" | "Timeout" | "Canceled";
+    ok: true;
+    status: "Accepted";
     dialect: SqlDialect;
 
     columns?: SqlColumn[];
@@ -98,6 +97,29 @@ export type SqlRunResult = {
     memory?: number | null;
     error?: string;
 };
+
+export type SqlRunFailure = {
+    kind: "sql";
+    ok: false;
+    status: "Error" | "Timeout" | "Canceled";
+    dialect: SqlDialect;
+
+    columns?: SqlColumn[];
+    rows?: SqlScalar[][];
+    rowCount?: number;
+    affectedRows?: number;
+    notices?: string[];
+
+    stdout?: string | null;
+    stderr?: string | null;
+    compile_output?: string | null;
+    message?: string | null;
+    time?: string | null;
+    memory?: number | null;
+    error?: string;
+};
+
+export type SqlRunResult = SqlRunSuccess | SqlRunFailure;
 
 export type RunResult = CodeRunResult | SqlRunResult;
 export type RunPollResult = CodeRunResult & {
@@ -126,6 +148,6 @@ export function isSqlRunReq(req: RunReq): req is SqlRunReq {
     return req.language === "sql" || (req as any)?.kind === "sql";
 }
 
-export function isSqlRunResult(result: RunResult | null | undefined): result is SqlRunResult {
+export function isSqlRunResult(result: unknown | null | undefined): result is SqlRunResult {
     return !!result && (result as any).kind === "sql";
 }

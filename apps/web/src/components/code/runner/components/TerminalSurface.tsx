@@ -21,11 +21,7 @@ function IdlePane(props: { label: string }) {
 }
 
 function hasRenderableOutput(controller: CodeRunnerController) {
-    if (controller.backend === "sql") {
-        // Always render SQL surface so SqlResultsPane can show
-        // "No SQL result yet" before the first run.
-        return true;
-    }
+    if (controller.backend === "sql") return true;
 
     if (controller.backend === "judge0") {
         return (
@@ -47,8 +43,9 @@ function hasRenderableOutput(controller: CodeRunnerController) {
 export default function TerminalSurface(props: {
     controller: CodeRunnerController;
     disabled: boolean;
+    sqlSchemaSql?: string;
 }) {
-    const { controller, disabled } = props;
+    const { controller, disabled, sqlSchemaSql = "" } = props;
 
     const surface = resolveSurfaceKind(controller);
 
@@ -73,7 +70,7 @@ export default function TerminalSurface(props: {
                 </pre>
             </div>
         ) : (
-            <SqlResultsPane result={sqlResult} busy={controller.busy} />
+            <SqlResultsPane result={sqlResult} busy={controller.busy} schemaSql={sqlSchemaSql} />
         );
     }
 

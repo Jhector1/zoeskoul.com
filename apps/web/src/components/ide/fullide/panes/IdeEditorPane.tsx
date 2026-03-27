@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import CodeRunner from "@/components/code/CodeRunner";
 import type { CodeRunnerRuntime } from "@/components/code/runner/runtime";
 
@@ -48,6 +49,22 @@ export default function IdeEditorPane({
                                           closeTab,
                                           isDesktop,
                                       }: Props) {
+    const schemaSql = React.useMemo(() => {
+        const file = nodes.find(
+            (n: any) =>
+                n?.kind === "file" && String(n?.name ?? "").toLowerCase() === "schema.sql",
+        );
+        return file?.content ?? "";
+    }, [nodes]);
+
+    const seedSql = React.useMemo(() => {
+        const file = nodes.find(
+            (n: any) =>
+                n?.kind === "file" && String(n?.name ?? "").toLowerCase() === "seed.sql",
+        );
+        return file?.content ?? "";
+    }, [nodes]);
+
     return (
         <div className="flex h-full min-h-0 min-w-0 flex-col overflow-hidden p-1">
             <div className={PANEL_CARD_CLASS}>
@@ -73,6 +90,8 @@ export default function IdeEditorPane({
                             onChangeCode={onChangeCode}
                             sqlDialect={sqlDialect}
                             onChangeSqlDialect={onChangeSqlDialect}
+                            sqlSchemaSql={schemaSql}
+                            sqlSeedSql={seedSql}
                             showLanguagePicker={false}
                             showSqlDialectPicker
                             allowReset={isDesktop}

@@ -97,12 +97,21 @@ function buildProjectRunRequest(args: {
         const seedFile = files.find((f) =>
             f.path.toLowerCase().endsWith("seed.sql"),
         );
+        const queryFile = files.find((f) =>
+            f.path.toLowerCase().endsWith("query.sql"),
+        );
+
+        const activePath = String(
+            activeFile?.path ?? activeFile?.name ?? ""
+        ).toLowerCase();
+
+        const activeIsSchema = activePath.endsWith("schema.sql");
+        const activeIsSeed = activePath.endsWith("seed.sql");
 
         const activeQuery =
-            activeFile?.content ??
-            files.find((f) => f.path.toLowerCase().endsWith("query.sql"))?.content ??
-            code ??
-            "";
+            !activeIsSchema && !activeIsSeed
+                ? (activeFile?.content ?? "")
+                : (queryFile?.content ?? code ?? "");
 
         return {
             kind: "sql",
@@ -114,7 +123,6 @@ function buildProjectRunRequest(args: {
             seedSql: canUseMultiFile ? (seedFile?.content ?? "") : "",
         };
     }
-
     const shouldUseMultiFile = canUseMultiFile && files.length > 1;
 
     if (!shouldUseMultiFile) {
@@ -170,8 +178,8 @@ export function useIdeRunner({
                 code: args.code,
             });
 
-            if (req.kind === "sql") {
-                return runBatchClient(req as any, args.signal);
+            if (args.language === "sql") {
+                return runBatchClient(req as ProjectSqlReq, args.signal);
             }
 
             if (backend === "pty") {
@@ -184,7 +192,7 @@ export function useIdeRunner({
                 );
             }
 
-            return runViaApi(
+            return  runViaApi(
                 {
                     ...req,
                     stdin: args.stdin ?? "",
