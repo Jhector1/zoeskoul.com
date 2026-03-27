@@ -10,9 +10,7 @@
     "typecheck": "tsc --noEmit",
     "user:roles": "NODE_ENV=development tsx scripts/set-user-roles.ts",
     "postinstall": "prisma generate",
-    "cleanup:onboarding": "tsx scripts/cleanup-guest-onboarding.ts",
-    "build:web": "pnpm --filter @zoeskoul/web build"
-
+    "cleanup:onboarding": "tsx scripts/cleanup-guest-onboarding.ts"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.11.1",
