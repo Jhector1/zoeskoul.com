@@ -1,14 +1,31 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "tasks": {
-    "dev": {
-      "cache": false,
-      "persistent": true
-    },
     "build": {
       "dependsOn": ["^build"],
-      "outputs": ["dist/**", ".next/**"]
-    },
-    "typecheck": {}
+      "outputs": [".next/**", "dist/**"],
+      "env": [
+        "LEARNOIR_STRIPE_SECRET_KEY",
+
+        "NEXTAUTH_URL",
+        "APP_ORIGIN",
+        "STRIPE_ADAPTIVE_PRICING",
+        "GUEST_COOKIE_SECRET",
+        "UPSTASH_REDIS_REST_URL",
+        "UPSTASH_REDIS_REST_TOKEN",
+        "ZOESKOUL_GOOGLE_CLIENT_ID",
+        "ZOESKOUL_GOOGLE_CLIENT_SECRET",
+        "zoeskoul_DATABASE_URL",
+        "zoeskoul_DATABASE_URL_UNPOOLED",
+        "zoeskoul_POSTGRES_URL",
+        "zoeskoul_POSTGRES_URL_NO_SSL",
+        "zoeskoul_POSTGRES_PRISMA_URL",
+        "zoeskoul_POSTGRES_HOST",
+        "zoeskoul_POSTGRES_PASSWORD",
+        "zoeskoul_PGDATABASE",
+        "zoeskoul_PGPASSWORD",
+        "zoeskoul_NEON_PROJECT_ID"
+      ]
+    }
   }
 }
