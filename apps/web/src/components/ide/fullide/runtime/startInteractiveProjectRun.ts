@@ -4,7 +4,7 @@
 import type {
     InteractiveRunReq,
     StartSessionResult,
-} from "@/lib/code/types/session";
+} from "@zoeskoul/code-contracts";
 
 async function parseJsonSafe<T>(
     res: Response,

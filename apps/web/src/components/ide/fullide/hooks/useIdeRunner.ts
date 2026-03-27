@@ -3,12 +3,12 @@
 import { useCallback } from "react";
 import type { SqlDialect, CodeLanguage } from "@/lib/practice/types";
 import type { RunResult } from "@/lib/code/types";
-import type { StartSessionResult } from "@/lib/code/types/session";
 import type { ExecutionBackend } from "@/components/code/runner/runtime";
 import { runViaApi } from "@/lib/code/runClient";
 import { exportProjectFiles, relativeProjectPathOf } from "../../fsTree";
 import { runBatchClient } from "@/components/code/runner/hooks/useBatchRun";
 import { startInteractiveProjectRun } from "@/components/ide/fullide/runtime/startInteractiveProjectRun";
+import {StartSessionResult} from "@zoeskoul/code-contracts";
 
 type Args = {
     nodes: any[];

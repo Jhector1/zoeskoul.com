@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import type { RunEvent, RunSessionState } from "@/lib/code/types/session";
+import type { RunEvent, RunSessionState } from "@zoeskoul/code-contracts";
 import type {
     SharedRunnerArgs,
     CodeRunnerController,

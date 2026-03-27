@@ -1,10 +1,12 @@
-export type InteractiveLanguage =
+
+export type CodeLanguage =
     | "python"
+    | "java"
     | "javascript"
     | "c"
     | "cpp"
-    | "java";
-
+    | "sql";
+export type InteractiveLanguage = Exclude<CodeLanguage, "sql">;
 export type FileEntry = {
     path: string;
     content: string;
@@ -54,14 +56,13 @@ export type StartSessionResult =
 };
 
 export type RunEvent =
-    | { type: "status"; seq: number; ts: string; state: RunSessionState }
-    | { type: "stdout"; seq: number; ts: string; chunk: string }
-    | { type: "stderr"; seq: number; ts: string; chunk: string }
+    | { type: "status"; seq: number; state: RunSessionState; ts: string }
+    | { type: "stdout"; seq: number; chunk: string; ts: string }
+    | { type: "stderr"; seq: number; chunk: string; ts: string }
     | { type: "input_request"; seq: number; ts: string }
-    | { type: "exit"; seq: number; ts: string; code: number }
-    | { type: "error"; seq: number; ts: string; message: string };
-
-
+    | { type: "compile_error"; seq: number; stdout: string; stderr: string; ts: string }
+    | { type: "exit"; seq: number; code: number; ts: string }
+    | { type: "error"; seq: number; message: string; ts: string };
 
 type DistributiveOmit<T, K extends PropertyKey> =
     T extends unknown ? Omit<T, K> : never;
@@ -73,6 +74,8 @@ export type RunEventInput =
     | { type: "stderr"; chunk: string }
     | { type: "input_request" }
     | { type: "exit"; code: number }
+    | { type: "compile_error"; stdout: string; stderr: string }
+
     | { type: "error"; message: string };
 
 // export type RunEventInput = DistributiveOmit<RunEvent, "seq" | "ts">;

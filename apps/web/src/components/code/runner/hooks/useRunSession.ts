@@ -5,7 +5,7 @@ import type {
     RunEvent,
     RunSessionState,
     InteractiveRunReq,
-} from "@/lib/code/types/session";
+} from "@zoeskoul/code-contracts";
 
 type StartResult =
     | { ok: true; sessionId: string; state: RunSessionState }
