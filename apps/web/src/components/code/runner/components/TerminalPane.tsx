@@ -1,9 +1,8 @@
-// src/components/code/runner/components/TerminalPane.tsx
 "use client";
 
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import type { RunResult } from "@/lib/code/types";
-import type { TermLine } from "../types";
+import type { RunnerState, TermLine } from "../types";
 import { cleanTermText } from "../utils/text";
 
 const lineCls = (t: TermLine["type"]) => {
@@ -33,6 +32,14 @@ function clamp(n: number, lo: number, hi: number) {
     return Math.max(lo, Math.min(hi, n));
 }
 
+function focusWithoutScroll(el: HTMLTextAreaElement) {
+    try {
+        el.focus({ preventScroll: true });
+    } catch {
+        el.focus();
+    }
+}
+
 export default function TerminalPane(props: {
     terminal: TermLine[];
     stdinBuffer: string;
@@ -42,6 +49,7 @@ export default function TerminalPane(props: {
     setInputLine: (v: string) => void;
     inputRef: React.RefObject<HTMLTextAreaElement | null>;
     busy: boolean;
+    runState: RunnerState;
     disabled: boolean;
     lastResult: RunResult | null;
     onSubmitInput: () => void;
@@ -55,6 +63,7 @@ export default function TerminalPane(props: {
         setInputLine,
         inputRef,
         busy,
+        runState,
         disabled,
         lastResult,
         onSubmitInput,
@@ -108,16 +117,16 @@ export default function TerminalPane(props: {
         const el = scrollRef.current;
         if (!el) return;
         el.scrollTop = el.scrollHeight;
-    }, [terminal, awaitingInput, inputLine, useBottomPrompt]);
+    }, [terminal, awaitingInput, inputLine, useBottomPrompt, runState]);
 
     useEffect(() => {
-        if (!awaitingInput || disabled) return;
+        if (!awaitingInput || disabled || busy || useBottomPrompt) return;
 
         const id = window.setTimeout(() => {
             const el = inputRef.current;
             if (!el) return;
             const len = (inputLine ?? "").length;
-            el.focus();
+            focusWithoutScroll(el);
             try {
                 el.setSelectionRange(len, len);
             } catch {}
@@ -125,7 +134,7 @@ export default function TerminalPane(props: {
         }, 0);
 
         return () => window.clearTimeout(id);
-    }, [awaitingInput, disabled, inputRef, inputLine]);
+    }, [awaitingInput, disabled, busy, useBottomPrompt, inputRef, inputLine]);
 
     useEffect(() => {
         setCaret((c) => clamp(c, 0, (inputLine ?? "").length));
@@ -144,8 +153,12 @@ export default function TerminalPane(props: {
 
     const livePrompt = useMemo(() => {
         const p = String(inputPrompt ?? "");
-        return p;
+        if (!p) return "";
+        return p.endsWith(" ") ? p : p + " ";
     }, [inputPrompt]);
+
+    const showEphemeralProcessing =
+        !awaitingInput && (runState === "starting" || runState === "running");
 
     const syncCaretFromNative = () => {
         const el = inputRef.current;
@@ -158,7 +171,7 @@ export default function TerminalPane(props: {
         if (!el) return;
 
         requestAnimationFrame(() => {
-            el.focus();
+            focusWithoutScroll(el);
             try {
                 el.setSelectionRange(pos, pos);
             } catch {}
@@ -196,7 +209,7 @@ export default function TerminalPane(props: {
         setInputLine(next);
 
         requestAnimationFrame(() => {
-            el.focus();
+            focusWithoutScroll(el);
             const pos = start + text.length;
             try {
                 el.setSelectionRange(pos, pos);
@@ -329,25 +342,25 @@ export default function TerminalPane(props: {
     return (
         <>
             <style jsx global>{`
-        @keyframes ui-term-blink {
-          0%,
-          49% {
-            opacity: 1;
-          }
-          50%,
-          100% {
-            opacity: 0;
-          }
-        }
+              @keyframes ui-term-blink {
+                0%,
+                49% {
+                  opacity: 1;
+                }
+                50%,
+                100% {
+                  opacity: 0;
+                }
+              }
 
-        .ui-term-cursor {
-          display: inline-block;
-          margin-left: 1px;
-          opacity: 0.75;
-          animation: ui-term-blink 1s step-end infinite;
-          will-change: opacity;
-        }
-      `}</style>
+              .ui-term-cursor {
+                display: inline-block;
+                margin-left: 1px;
+                opacity: 0.75;
+                animation: ui-term-blink 1s step-end infinite;
+                will-change: opacity;
+              }
+            `}</style>
 
             <div
                 className={[
@@ -372,6 +385,7 @@ export default function TerminalPane(props: {
                     role="log"
                     aria-live="polite"
                     aria-relevant="additions text"
+                    style={{ overflowAnchor: "none" }}
                     className={[
                         "mt-2 flex-1 overflow-auto border-t py-2",
                         "bg-white/60 dark:bg-black/30",
@@ -380,48 +394,31 @@ export default function TerminalPane(props: {
                 >
                     <div
                         className={[
-                            "relative font-mono text-[11px] sm:text-xs leading-[1.35rem] sm:leading-5",
+                            "font-mono text-[11px] sm:text-xs leading-[1.35rem] sm:leading-5",
                             "whitespace-pre-wrap px-2 break-words",
                             "mx-1",
                         ].join(" ")}
                     >
                         {terminal.map((l, i) => {
                             const isLast = i === terminal.length - 1;
-                            const showInlineInput = awaitingInput && !useBottomPrompt && isLast;
-
                             return (
                                 <React.Fragment key={i}>
-                  <span className={`${lineCls(l.type)} pb-[10rem]`}>
-                    {cleanTermText(l.text)}
-                  </span>
-
-                                    {showInlineInput ? (
-                                        <>
-    <span
-        aria-hidden="true"
-        className={[
-            "pointer-events-none font-mono text-[11px] sm:text-xs leading-[1.35rem] sm:leading-5 whitespace-pre-wrap break-words",
-            lineCls("in"),
-        ].join(" ")}
-    >
-      {inputBefore}
-        <span className="ui-term-cursor">▋</span>
-        {inputAfter}
-    </span>
-
-                                            <textarea
-                                                {...sharedTextareaProps}
-                                                className="absolute inset-0 h-full w-full resize-none border-0 bg-transparent opacity-[0.01] text-[16px] text-transparent outline-none"
-                                            />
-                                        </>
-                                    ) : null}
-
+                                    <span className={`${lineCls(l.type)} pb-[10rem]`}>
+                                        {cleanTermText(l.text)}
+                                    </span>
                                     {!isLast ? "\n" : null}
                                 </React.Fragment>
                             );
                         })}
 
-                        {awaitingInput && !useBottomPrompt && terminal.length === 0 ? (
+                        {showEphemeralProcessing ? (
+                            <>
+                                {terminal.length > 0 ? "\n" : null}
+                                <span className={lineCls("sys")}>Processing...</span>
+                            </>
+                        ) : null}
+
+                        {awaitingInput && !useBottomPrompt ? (
                             <div className="relative min-h-[1.25rem]">
                                 <div
                                     aria-hidden="true"

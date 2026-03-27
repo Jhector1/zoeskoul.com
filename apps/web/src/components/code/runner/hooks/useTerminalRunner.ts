@@ -8,8 +8,6 @@ import { inferInputPlan } from "../utils/input";
 import { expandPrompts, prettyPrompt, splitStdoutByPrompts } from "../utils/prompts";
 import type { CodeLanguage, SqlDialect } from "@/lib/practice/types";
 
-type AbortKind = "none" | "silent" | "user";
-
 function needsMoreInput(lang: CodeLanguage, r: RunResult) {
     const blob = cleanTermText(
         (r.compile_output ?? "") +
@@ -22,13 +20,14 @@ function needsMoreInput(lang: CodeLanguage, r: RunResult) {
     );
 
     if (lang === "python") return /\bEOFError\b/.test(blob);
+    if (lang === "java") return /NoSuchElementException/.test(blob);
     return false;
 }
-
-function readAbortKind(ref: React.MutableRefObject<AbortKind>): AbortKind {
+function readAbortKind(
+    ref: React.MutableRefObject<AbortKind>,
+): AbortKind {
     return ref.current;
 }
-
 function isCanceledResult(r: RunResult | null | undefined) {
     return r?.status === "Canceled";
 }
@@ -60,7 +59,7 @@ function toOutTermLines(seg: string): TermLine[] {
         .map((t) => ({ type: "out" as const, text: t }));
 }
 
-function unescapeSourceString(x: string) {
+function unescapeCStringContent(x: string) {
     const s = String(x ?? "");
     let out = "";
 
@@ -110,11 +109,7 @@ function unescapeSourceString(x: string) {
     return out;
 }
 
-function extractPreInputPrintedPieces(
-    lang: CodeLanguage,
-    code: string,
-    prompts: string[],
-): string[] {
+function extractPreOutputForCCpp(lang: CodeLanguage, code: string, prompts: string[]) {
     const src = String(code ?? "");
 
     const firstInputIdx =
@@ -123,125 +118,39 @@ function extractPreInputPrintedPieces(
                 const i = src.search(/\bscanf\s*\(|\bgets\s*\(|\bfgets\s*\(/);
                 return i >= 0 ? i : src.length;
             })()
-            : lang === "cpp"
-                ? (() => {
-                    const i = src.search(/\b(?:std::)?cin\s*>>|\bgetline\s*\(/);
-                    return i >= 0 ? i : src.length;
-                })()
-                : lang === "java"
-                    ? (() => {
-                        const i = src.search(
-                            /\.\s*next(?:\s*\(|Line\s*\(|Int\s*\(|Long\s*\(|Double\s*\(|Float\s*\(|Boolean\s*\(|Short\s*\(|Byte\s*\()/,
-                        );
-                        return i >= 0 ? i : src.length;
-                    })()
-                    : src.length;
+            : (() => {
+                const i = src.search(/\b(?:std::)?cin\s*>>|\bgetline\s*\(/);
+                return i >= 0 ? i : src.length;
+            })();
 
     const pre = src.slice(0, firstInputIdx);
-    const pieces: string[] = [];
+    const rawStrings: string[] = [];
 
     if (lang === "c") {
-        const re = /\bprintf\s*\(\s*"((?:\\.|[^"\\])*)"/g;
-        for (const m of pre.matchAll(re)) {
-            pieces.push(unescapeSourceString(m[1] ?? ""));
-        }
+        const re = /\bprintf\s*\(\s*"([^"]*)"\s*(?:,|\))/g;
+        for (const m of pre.matchAll(re)) rawStrings.push(unescapeCStringContent(m[1] ?? ""));
     } else if (lang === "cpp") {
-        const re = /\b(?:std::)?cout\s*<<\s*"((?:\\.|[^"\\])*)"|<<\s*(?:std::)?endl\b/g;
-        for (const m of pre.matchAll(re)) {
-            if (typeof m[1] === "string") {
-                pieces.push(unescapeSourceString(m[1] ?? ""));
-            } else {
-                pieces.push("\n");
-            }
-        }
-    } else if (lang === "java") {
-        const re = /System\.out\.(print|println)\(\s*"((?:\\.|[^"\\])*)"\s*\)\s*;/g;
-        for (const m of pre.matchAll(re)) {
-            const kind = m[1] ?? "print";
-            const text = unescapeSourceString(m[2] ?? "");
-            pieces.push(kind === "println" ? `${text}\n` : text);
-        }
+        const re = /\b(?:std::)?cout\s*<<\s*"([^"]*)"/g;
+        for (const m of pre.matchAll(re)) rawStrings.push(unescapeCStringContent(m[1] ?? ""));
     }
 
     const promptSet = new Set(prompts.map((p) => String(p ?? "").trimEnd()));
-
-    return pieces.filter((piece) => {
-        const trimmed = String(piece ?? "").trimEnd();
-        if (!trimmed) return piece.includes("\n");
-        return !promptSet.has(trimmed);
-    });
-}
-
-function consumePrefixVariant(s: string, variants: string[]) {
-    for (const v of variants) {
-        if (!v) continue;
-        if (s.startsWith(v)) return s.slice(v.length);
-    }
-    return null;
-}
-
-function consumePieceIfPresent(s: string, piece: string, allowPromptSpace = false) {
-    const variants = allowPromptSpace && !piece.endsWith(" ") ? [`${piece} `, piece] : [piece];
-
-    let next = consumePrefixVariant(s, variants);
-    if (next != null) return next;
-
-    const strippedNl = s.replace(/^(?:\r\n|\r|\n)+/, "");
-    if (strippedNl !== s) {
-        next = consumePrefixVariant(strippedNl, variants);
-        if (next != null) return next;
-    }
-
-    return s;
-}
-
-function consumeEchoIfPresent(s: string, typed: string) {
-    const value = String(typed ?? "");
-    if (!value) return s;
-
-    const variants = [
-        `${value}\r\n`,
-        `${value}\n`,
-        value,
-        ` ${value}\r\n`,
-        ` ${value}\n`,
-        ` ${value}`,
-    ];
-
-    let next = consumePrefixVariant(s, variants);
-    if (next != null) return next;
-
-    const strippedNl = s.replace(/^(?:\r\n|\r|\n)+/, "");
-    if (strippedNl !== s) {
-        next = consumePrefixVariant(strippedNl, variants);
-        if (next != null) return next;
-    }
-
-    return s;
-}
-
-function stripKnownStaticPrefix(
-    stdout: string,
-    prePieces: string[],
-    prompts: string[],
-    typedInputs: string[],
-) {
-    let s = cleanTermText(stdout ?? "");
-
-    for (const piece of prePieces) {
-        s = consumePieceIfPresent(s, piece, false);
-    }
-
-    for (let i = 0; i < typedInputs.length; i++) {
-        const prompt = String(prompts[i] ?? "Input:").trimEnd();
-        if (prompt) {
-            s = consumePieceIfPresent(s, prompt, true);
+    const filtered = rawStrings.filter((s) => {
+        const t = String(s ?? "").trimEnd();
+        if (!t) return false;
+        if (promptSet.has(t)) return false;
+        for (const p of promptSet) {
+            if (p && t.startsWith(p)) return false;
         }
-        s = consumeEchoIfPresent(s, typedInputs[i] ?? "");
-    }
+        return true;
+    });
 
-    return s.replace(/^(?:\r\n|\r|\n)+/, "");
+    const lines: TermLine[] = [];
+    for (const s of filtered) lines.push(...toOutTermLines(s));
+    return lines;
 }
+
+type AbortKind = "none" | "silent" | "user";
 
 export function useTerminalRunner(args: {
     lang: CodeLanguage;
@@ -293,24 +202,6 @@ export function useTerminalRunner(args: {
     const abortKindRef = React.useRef<AbortKind>("none");
     const mountedRef = React.useRef(true);
 
-    const isSql = lang === "sql";
-    const isProbeMode = lang === "python";
-
-    const inputPlan = React.useMemo(() => inferInputPlan(lang, code), [lang, code]);
-
-    const staticPrePieces = React.useMemo(
-        () => extractPreInputPrintedPieces(lang, code, inputPlan.prompts),
-        [lang, code, inputPlan.prompts],
-    );
-
-    const staticPreLines = React.useMemo(
-        () => toOutTermLines(staticPrePieces.join("")),
-        [staticPrePieces],
-    );
-
-    const resolvedSqlDialect = sqlDialect ?? "sqlite";
-    const resolvedSchemaSql = sqlSchemaSql ?? sqlSetupSql ?? "";
-
     const abortActiveRun = React.useCallback((kind: AbortKind) => {
         if (!abortRef.current) return;
         abortKindRef.current = kind;
@@ -319,11 +210,17 @@ export function useTerminalRunner(args: {
 
     React.useEffect(() => {
         mountedRef.current = true;
+
         return () => {
             mountedRef.current = false;
             abortActiveRun("silent");
         };
     }, [abortActiveRun]);
+
+    const inputPlan = React.useMemo(() => inferInputPlan(lang, code), [lang, code]);
+    const isSql = lang === "sql";
+    const resolvedSqlDialect = sqlDialect ?? "sqlite";
+    const resolvedSchemaSql = sqlSchemaSql ?? sqlSetupSql ?? "";
 
     const replaceRunLines = React.useCallback((runId: number, lines: TermLine[]) => {
         const tagged = lines.map((l) => ({ ...l, runId }));
@@ -452,6 +349,7 @@ export function useTerminalRunner(args: {
                         } else {
                             setLastResult(null);
                         }
+
                         setRunState("idle");
                     }
 
@@ -501,16 +399,7 @@ export function useTerminalRunner(args: {
         ],
     );
 
-    const buildPromptInputLines = React.useCallback(
-        (lines: string[]): TermLine[] =>
-            lines.map((val, i) => ({
-                type: "in" as const,
-                text: `${prettyPrompt(inputPlan.prompts[i] || "Input:")} ${val}`,
-            })),
-        [inputPlan.prompts],
-    );
-
-    const rebuildProbeTranscript = React.useCallback(
+    const rebuildInteractiveTranscript = React.useCallback(
         (
             runId: number,
             lines: string[],
@@ -599,41 +488,8 @@ export function useTerminalRunner(args: {
         [inputPlan.prompts, replaceRunLines],
     );
 
-    const buildStaticTranscript = React.useCallback(
-        (runId: number, lines: string[], r: RunResult) => {
-            const stdoutText = cleanTermText(r.stdout ?? "");
-            const strippedStdout = stripKnownStaticPrefix(
-                stdoutText,
-                staticPrePieces,
-                inputPlan.prompts,
-                lines,
-            );
-
-            const rebuilt: TermLine[] = [
-                ...staticPreLines,
-                ...buildPromptInputLines(lines),
-                ...toOutTermLines(strippedStdout),
-            ];
-
-            if (r.compile_output) rebuilt.push({ type: "err", text: cleanTermText(r.compile_output) });
-            if (r.stderr) rebuilt.push({ type: "err", text: cleanTermText(r.stderr) });
-            if (r.message) rebuilt.push({ type: "err", text: cleanTermText(r.message) });
-            if (r.error && !isCanceledResult(r)) {
-                rebuilt.push({ type: "err", text: cleanTermText(r.error) });
-            }
-
-            replaceRunLines(runId, rebuilt);
-            setAwaitingInput(false);
-            setInputPrompt("");
-            setRunState("idle");
-        },
-        [staticPrePieces, staticPreLines, inputPlan.prompts, buildPromptInputLines, replaceRunLines],
-    );
-
     const cancelRun = React.useCallback(() => {
-        if (runState !== "running" && runState !== "awaiting_input" && runState !== "starting") {
-            return;
-        }
+        if (runState !== "running" && runState !== "awaiting_input") return;
 
         const runId = activeRunIdRef.current ?? runIdRef.current;
 
@@ -686,7 +542,6 @@ export function useTerminalRunner(args: {
             if (isSql) {
                 setTerminal([]);
                 clearInputUi();
-
                 const r = await runOnce("");
                 if (!r) {
                     setRunState("idle");
@@ -705,9 +560,13 @@ export function useTerminalRunner(args: {
             }
 
             const expectsInput = inputPlan.expected > 0;
+            const probeSafe = lang === "python" || lang === "java";
+
+            // No transcript "Processing..." here.
+            // TerminalPane now shows it ephemerally from runState.
 
             if (!expectsInput) {
-                replaceRunLines(runId, [{ type: "sys", text: "Processing...", runId }]);
+                replaceRunLines(runId, []);
 
                 const r = await runOnce("");
                 if (!r) {
@@ -721,16 +580,12 @@ export function useTerminalRunner(args: {
                     return;
                 }
 
-                if (isProbeMode) {
-                    rebuildProbeTranscript(runId, [], r, false);
-                } else {
-                    buildStaticTranscript(runId, [], r);
-                }
+                rebuildInteractiveTranscript(runId, [], r, false);
                 return;
             }
 
-            if (isProbeMode) {
-                replaceRunLines(runId, [{ type: "sys", text: "Processing...", runId }]);
+            if (probeSafe) {
+                replaceRunLines(runId, []);
 
                 const r = await runOnce("");
                 if (!r) {
@@ -746,16 +601,20 @@ export function useTerminalRunner(args: {
 
                 probeStdoutRef.current = cleanTermText(r.stdout ?? "");
                 const more = needsMoreInput(lang, r);
-                rebuildProbeTranscript(runId, [], r, more, probeStdoutRef.current);
+                rebuildInteractiveTranscript(runId, [], r, more, probeStdoutRef.current);
                 return;
             }
 
+            const preOut = extractPreOutputForCCpp(lang, code, inputPlan.prompts);
+            const firstPrompt = prettyPrompt(inputPlan.prompts[0] || "Input:");
+
             setAwaitingInput(true);
-            setInputPrompt(prettyPrompt(inputPlan.prompts[0] || "Input:"));
+            setInputPrompt(firstPrompt);
             setTypedLines([]);
             setStdinBuffer("");
             setRunState("awaiting_input");
-            replaceRunLines(runId, staticPreLines);
+
+            replaceRunLines(runId, preOut);
         } catch (e) {
             const msg = errorMessage(e);
             clearInputUi();
@@ -772,17 +631,13 @@ export function useTerminalRunner(args: {
         clearInputUi,
         isSql,
         lang,
-        inputPlan.expected,
-        inputPlan.prompts,
-        isProbeMode,
+        code,
+        inputPlan,
         runOnce,
         replaceRunLines,
-        rebuildProbeTranscript,
-        buildStaticTranscript,
+        rebuildInteractiveTranscript,
         appendErrLine,
-        staticPreLines,
     ]);
-
     const submitInput = React.useCallback(async () => {
         if (isSql || disabled || runLockRef.current || busy) return;
 
@@ -798,6 +653,8 @@ export function useTerminalRunner(args: {
             setStdinBuffer(next.join("\n") + "\n");
 
             const expectsInput = inputPlan.expected > 0;
+            const probeSafe = lang === "python" || lang === "java";
+
             const hasRealPrompts = !!inputPlan.prompts?.length;
             const promptForThisInput = hasRealPrompts
                 ? prettyPrompt(
@@ -807,12 +664,17 @@ export function useTerminalRunner(args: {
                 )
                 : "";
 
-            if (isProbeMode) {
+            if (probeSafe) {
+                appendImmediateInputLine(runId, typed, promptForThisInput);
+                setAwaitingInput(false);
+                setInputPrompt("");
+            } else {
                 appendImmediateInputLine(runId, typed, promptForThisInput);
                 appendProcessingLine(runId);
             }
 
-            if (expectsInput && !isProbeMode && next.length < inputPlan.expected) {
+            if (expectsInput && !probeSafe && next.length < inputPlan.expected) {
+                const preOut = extractPreOutputForCCpp(lang, code, inputPlan.prompts);
                 const nextPrompt = prettyPrompt(
                     inputPlan.prompts[next.length] || inputPlan.prompts[0] || "Input:",
                 );
@@ -821,28 +683,22 @@ export function useTerminalRunner(args: {
                 setInputPrompt(nextPrompt);
                 setRunState("awaiting_input");
 
-                replaceRunLines(runId, [
-                    ...staticPreLines,
-                    ...buildPromptInputLines(next),
-                ]);
+                replaceRunLines(
+                    runId,
+                    [
+                        ...preOut,
+                        ...next.map((val, i) => ({
+                            type: "in" as const,
+                            text: `${prettyPrompt(inputPlan.prompts[i] || "Input:")} ${val}`,
+                        })),
+                    ],
+                );
+
                 return;
             }
 
             const stdin = next.join("\n") + "\n";
-
-            if (!isProbeMode) {
-                clearInputUi();
-            }
-
             setRunState("starting");
-
-            if (!isProbeMode) {
-                replaceRunLines(runId, [
-                    ...staticPreLines,
-                    ...buildPromptInputLines(next),
-                    { type: "sys", text: "Processing...", runId },
-                ]);
-            }
 
             const r = await runOnce(stdin);
             if (!r) {
@@ -856,13 +712,9 @@ export function useTerminalRunner(args: {
                 return;
             }
 
-            if (isProbeMode) {
-                const more = needsMoreInput(lang, r);
-                rebuildProbeTranscript(runId, next, r, more, probeStdoutRef.current);
-                return;
-            }
-
-            buildStaticTranscript(runId, next, r);
+            const more = (probeSafe && needsMoreInput(lang, r)) || false;
+            const probePrefix = probeSafe ? probeStdoutRef.current : "";
+            rebuildInteractiveTranscript(runId, next, r, more, probePrefix);
         } catch (e) {
             const msg = errorMessage(e);
             clearInputUi();
@@ -876,19 +728,16 @@ export function useTerminalRunner(args: {
         busy,
         inputLine,
         typedLines,
-        inputPlan.expected,
-        inputPlan.prompts,
-        isProbeMode,
+        lang,
+        code,
+        inputPlan,
         runOnce,
-        rebuildProbeTranscript,
-        buildStaticTranscript,
-        buildPromptInputLines,
+        replaceRunLines,
+        rebuildInteractiveTranscript,
         appendErrLine,
         appendImmediateInputLine,
         appendProcessingLine,
         clearInputUi,
-        replaceRunLines,
-        staticPreLines,
     ]);
 
     return {
@@ -901,7 +750,7 @@ export function useTerminalRunner(args: {
         inputRef,
         busy,
         runState,
-        canCancel: runState === "running" || runState === "awaiting_input" || runState === "starting",
+        canCancel: runState === "running" || runState === "awaiting_input",
         cancelRun,
         lastResult,
         lastRunLanguage,

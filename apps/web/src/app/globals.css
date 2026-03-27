@@ -1,6 +1,5 @@
 /* src/app/globals.css */
 @import "tailwindcss";
-@import "xterm/css/xterm.css";
 
 /* put custom variant AFTER tailwind import */
 @custom-variant dark (&:where(.dark, .dark *));

@@ -2,6 +2,7 @@ import type { RunPollResult, RunReq, RunResult, RunSubmitResult } from "@/lib/co
 
 const POLL_INTERVAL_MS = 250;
 const MAX_POLLS = 120;
+const REQUEST_TIMEOUT_MS = 15000;
 
 function sleep(ms: number, signal?: AbortSignal) {
     return new Promise<void>((resolve, reject) => {
@@ -20,6 +21,54 @@ function sleep(ms: number, signal?: AbortSignal) {
 
         signal?.addEventListener("abort", onAbort);
     });
+}
+
+function anySignal(signals: (AbortSignal | undefined)[]) {
+    const ctrl = new AbortController();
+
+    const onAbort = () => {
+        if (!ctrl.signal.aborted) {
+            ctrl.abort();
+        }
+        cleanup();
+    };
+
+    const cleanup = () => {
+        for (const s of signals) {
+            s?.removeEventListener("abort", onAbort);
+        }
+    };
+
+    for (const s of signals) {
+        if (!s) continue;
+        if (s.aborted) {
+            ctrl.abort();
+            return ctrl.signal;
+        }
+        s.addEventListener("abort", onAbort);
+    }
+
+    return ctrl.signal;
+}
+
+async function fetchWithTimeout(
+    input: RequestInfo | URL,
+    init: RequestInit = {},
+    timeoutMs = REQUEST_TIMEOUT_MS,
+    outerSignal?: AbortSignal,
+): Promise<Response> {
+    const timeoutCtrl = new AbortController();
+    const timeoutId = globalThis.setTimeout(() => timeoutCtrl.abort(), timeoutMs);
+
+    try {
+        return await fetch(input, {
+            ...init,
+            signal: anySignal([outerSignal, init.signal as AbortSignal | undefined, timeoutCtrl.signal]),
+            cache: "no-store",
+        });
+    } finally {
+        globalThis.clearTimeout(timeoutId);
+    }
 }
 
 async function parseJsonResponse<T>(
@@ -43,12 +92,16 @@ async function parseJsonResponse<T>(
 
 export async function runViaApi(req: RunReq, signal?: AbortSignal): Promise<RunResult> {
     try {
-        const submitRes = await fetch("/api/run", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(req),
+        const submitRes = await fetchWithTimeout(
+            "/api/run/judge0",
+            {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(req),
+            },
+            REQUEST_TIMEOUT_MS,
             signal,
-        });
+        );
 
         const submitParsed = await parseJsonResponse<RunSubmitResult>(
             submitRes,
@@ -78,10 +131,14 @@ export async function runViaApi(req: RunReq, signal?: AbortSignal): Promise<RunR
         }
 
         for (let i = 0; i < MAX_POLLS; i++) {
-            const pollRes = await fetch(`/api/run/${encodeURIComponent(submitData.token)}`, {
-                method: "GET",
+            const pollRes = await fetchWithTimeout(
+                `/api/review/${encodeURIComponent(submitData.token)}`,
+                {
+                    method: "GET",
+                },
+                REQUEST_TIMEOUT_MS,
                 signal,
-            });
+            );
 
             const pollParsed = await parseJsonResponse<RunPollResult>(
                 pollRes,

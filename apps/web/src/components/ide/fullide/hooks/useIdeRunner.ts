@@ -4,7 +4,9 @@ import { useCallback } from "react";
 import type { SqlDialect, CodeLanguage } from "@/lib/practice/types";
 import type { RunResult } from "@/lib/code/types";
 import type { StartSessionResult } from "@/lib/code/types/session";
-import { exportProjectFiles, pathOf } from "../../fsTree";
+import type { ExecutionBackend } from "@/components/code/runner/runtime";
+import { runViaApi } from "@/lib/code/runClient";
+import { exportProjectFiles, relativeProjectPathOf } from "../../fsTree";
 import { runBatchClient } from "@/components/code/runner/hooks/useBatchRun";
 import { startInteractiveProjectRun } from "@/components/ide/fullide/runtime/startInteractiveProjectRun";
 
@@ -16,6 +18,7 @@ type Args = {
     entryFileId: string | null;
     sqlDialect: SqlDialect;
     canUseMultiFile: boolean;
+    backend: ExecutionBackend;
 };
 
 type IdeRunArgs =
@@ -34,6 +37,34 @@ type IdeRunArgs =
 
 type IdeRunResponse = RunResult | StartSessionResult;
 
+type ProjectFile = {
+    path: string;
+    content: string;
+};
+
+type ProjectSqlReq = {
+    kind: "sql";
+    mode: "batch";
+    language: "sql";
+    dialect: SqlDialect;
+    code: string;
+    schemaSql: string;
+    seedSql: string;
+};
+
+type ProjectCodeReq =
+    | {
+    kind: "code";
+    language: Exclude<CodeLanguage, "sql">;
+    code: string;
+}
+    | {
+    kind: "code";
+    language: Exclude<CodeLanguage, "sql">;
+    entry: string;
+    files: ProjectFile[];
+};
+
 function buildProjectRunRequest(args: {
     language: IdeRunArgs["language"];
     nodes: any[];
@@ -44,7 +75,7 @@ function buildProjectRunRequest(args: {
     sqlDialect: SqlDialect;
     canUseMultiFile: boolean;
     code?: string;
-}) {
+}): ProjectSqlReq | ProjectCodeReq {
     const {
         language,
         nodes,
@@ -57,12 +88,7 @@ function buildProjectRunRequest(args: {
         code,
     } = args;
 
-    const files = exportProjectFiles(nodes);
-
-    console.log("IDE canUseMultiFile", canUseMultiFile);
-    console.log("IDE exported files", files.map((f) => f.path));
-    console.log("IDE activeFileId", activeFileId);
-    console.log("IDE entryFileId", entryFileId);
+    const files = exportProjectFiles(nodes) as ProjectFile[];
 
     if (language === "sql") {
         const schemaFile = files.find((f) =>
@@ -79,9 +105,9 @@ function buildProjectRunRequest(args: {
             "";
 
         return {
-            kind: "sql" as const,
-            mode: "batch" as const,
-            language: "sql" as const,
+            kind: "sql",
+            mode: "batch",
+            language: "sql",
             dialect: sqlDialect,
             code: activeQuery,
             schemaSql: canUseMultiFile ? (schemaFile?.content ?? "") : "",
@@ -90,13 +116,10 @@ function buildProjectRunRequest(args: {
     }
 
     const shouldUseMultiFile = canUseMultiFile && files.length > 1;
-    console.log("IDE shouldUseMultiFile", shouldUseMultiFile);
 
     if (!shouldUseMultiFile) {
-        console.log("IDE using single-file fallback");
         return {
-            kind: "code" as const,
-            mode: "interactive" as const,
+            kind: "code",
             language,
             code: activeFile?.content ?? entryFile?.content ?? code ?? "",
         };
@@ -105,21 +128,17 @@ function buildProjectRunRequest(args: {
     const entryId = entryFileId ?? activeFileId;
 
     if (!entryId) {
-        console.log("IDE missing entryId, using single-file fallback");
         return {
-            kind: "code" as const,
-            mode: "interactive" as const,
+            kind: "code",
             language,
             code: activeFile?.content ?? entryFile?.content ?? code ?? "",
         };
     }
 
-    const entry = pathOf(nodes, entryId);
-    console.log("IDE using multi-file run with entry", entry);
+    const entry = relativeProjectPathOf(nodes, entryId);
 
     return {
-        kind: "code" as const,
-        mode: "interactive" as const,
+        kind: "code",
         language,
         entry,
         files,
@@ -134,6 +153,7 @@ export function useIdeRunner({
                                  entryFileId,
                                  sqlDialect,
                                  canUseMultiFile,
+                                 backend,
                              }: Args) {
     const onRunProject = useCallback(
         async (args: IdeRunArgs): Promise<IdeRunResponse> => {
@@ -151,10 +171,26 @@ export function useIdeRunner({
             });
 
             if (req.kind === "sql") {
-                return runBatchClient(req, args.signal);
+                return runBatchClient(req as any, args.signal);
             }
 
-            return startInteractiveProjectRun(req, args.signal);
+            if (backend === "pty") {
+                return startInteractiveProjectRun(
+                    {
+                        ...req,
+                        mode: "interactive",
+                    } as any,
+                    args.signal,
+                );
+            }
+
+            return runViaApi(
+                {
+                    ...req,
+                    stdin: args.stdin ?? "",
+                } as any,
+                args.signal,
+            ) as Promise<RunResult>;
         },
         [
             nodes,
@@ -164,6 +200,7 @@ export function useIdeRunner({
             entryFileId,
             sqlDialect,
             canUseMultiFile,
+            backend,
         ],
     );
 

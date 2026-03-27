@@ -23,6 +23,7 @@ import IdeProjectModals from "@/components/ide/fullide/modals/IdeProjectModals";
 import IdeEditorPane from "@/components/ide/fullide/panes/IdeEditorPane";
 import IdeExplorerPane from "@/components/ide/fullide/panes/IdeExplorerPane";
 import type { FullIDEProps } from "../types";
+import {CodeRunnerRuntime, ExecutionBackend} from "@/components/code/runner/runtime";
 
 type WorkspaceHookResult = ReturnType<typeof useIdeWorkspace>;
 
@@ -138,6 +139,31 @@ function FullIDEInner({
         onCloseMobileExplorer: () => setShowMobileExplorer(false),
     });
 
+
+
+
+
+
+
+
+
+
+
+    const isSql = language === "sql";
+
+    /**
+     * Change this in one place:
+     * - "pty" for full interactive terminal sessions
+     * - "judge0" for transcript/plain runner with multi-file batch compile/run
+     */
+    const codeBackend: ExecutionBackend = "pty";
+
+    const runnerRuntime: CodeRunnerRuntime = isSql
+        ? { backend: "judge0", terminalView: "plain" }
+        : codeBackend === "pty"
+            ? { backend: "pty", terminalView: "xterm" }
+            : { backend: "judge0", terminalView: "plain" };
+
     const runner = useIdeRunner({
         nodes,
         activeFile,
@@ -146,13 +172,19 @@ function FullIDEInner({
         entryFileId,
         sqlDialect,
         canUseMultiFile: access.canUseMultiFile,
+        backend: runnerRuntime.backend,
     });
 
-    const isSql = language === "sql";
     const runnerHeight = Math.max(
         viewport.isDesktop ? 360 : 320,
         viewport.editorHeight || height,
     );
+
+
+
+
+
+
 
     const upgradeText = !access.hasUser
         ? "Log in to unlock multiple files and cloud save."
@@ -212,7 +244,6 @@ function FullIDEInner({
             }}
         />
     );
-
     const editorPane = (
         <IdeEditorPane
             panelRef={editorHostRef}
@@ -225,7 +256,8 @@ function FullIDEInner({
             isSql={isSql}
             language={language}
             sqlDialect={sqlDialect}
-            onChangeLanguage={actions.switchLanguage}
+            runtime={runnerRuntime}
+            onChangeLanguage={setLangUI}
             onChangeCode={actions.onChangeCode}
             onChangeSqlDialect={setSqlDialect}
             onRun={runner.onRunProject}
@@ -234,6 +266,27 @@ function FullIDEInner({
             isDesktop={viewport.isDesktop}
         />
     );
+    // const editorPane = (
+    //     <IdeEditorPane
+    //         panelRef={editorHostRef}
+    //         nodes={nodes}
+    //         tabFiles={tabFiles}
+    //         activeFileId={activeFileId}
+    //         activeFile={activeFile}
+    //         runnerHeight={runnerHeight}
+    //         title={runnerTitle}
+    //         isSql={isSql}
+    //         language={language}
+    //         sqlDialect={sqlDialect}
+    //         onChangeLanguage={actions.switchLanguage}
+    //         onChangeCode={actions.onChangeCode}
+    //         onChangeSqlDialect={setSqlDialect}
+    //         onRun={runner.onRunProject}
+    //         setActiveFileId={(id) => actions.setActiveFileId(id ?? "")}
+    //         closeTab={actions.closeTab}
+    //         isDesktop={viewport.isDesktop}
+    //     />
+    // );
 
     const handleConfirmDelete = () => {
         if (!pendingDeleteId) return;

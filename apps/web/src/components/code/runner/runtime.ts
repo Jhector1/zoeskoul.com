@@ -1,0 +1,89 @@
+import type { RefObject } from "react";
+import type { RunResult } from "@/lib/code/types";
+import type { BatchRunResult } from "@/lib/code/types/batch";
+import type { CodeLanguage, SqlDialect } from "@/lib/practice/types";
+import type { OnRun, RunnerState, TermLine } from "./types";
+
+export type ExecutionBackend = "pty" | "judge0";
+export type TerminalView = "plain" | "xterm" | "auto";
+
+export type CodeRunnerRuntime = {
+    backend: ExecutionBackend;
+    terminalView?: TerminalView;
+};
+
+export type ResolvedCodeRunnerRuntime = {
+    backend: ExecutionBackend;
+    terminalView: Exclude<TerminalView, "auto">;
+};
+
+export type RunnerBackend = "pty" | "judge0" | "sql";
+export type SurfaceKind = "terminal-pane" | "plain" | "xterm" | "sql";
+
+export type TerminalChunk = {
+    id: number;
+    kind: "pty" | "err" | "sys";
+    data: string;
+};
+
+export type RunnerLastResult = RunResult | BatchRunResult | null;
+
+export type SharedRunnerArgs = {
+    runtime?: CodeRunnerRuntime | ResolvedCodeRunnerRuntime;
+    lang: CodeLanguage;
+    code: string;
+    sqlDialect?: SqlDialect;
+    sqlSchemaSql?: string;
+    sqlSeedSql?: string;
+    sqlSetupSql?: string;
+    sqlDatasetId?: string;
+    disabled: boolean;
+    allowRun: boolean;
+    resetTerminalOnRun: boolean;
+    onRun?: OnRun;
+};
+
+export type TranscriptState = {
+    terminal: TermLine[];
+    stdinBuffer: string;
+    awaitingInput: boolean;
+    inputPrompt: string;
+    inputLine: string;
+    setInputLine: (v: string) => void;
+    inputRef: RefObject<HTMLTextAreaElement | null>;
+    submitInput: () => Promise<void> | void;
+    typedLines: string[];
+};
+
+export type StreamState = {
+    terminalFeed: TerminalChunk[];
+    inputEnabled: boolean;
+    sendTerminalData: (data: string) => void;
+    sendTerminalResize: (cols: number, rows: number) => void;
+};
+
+export type CodeRunnerController = {
+    backend: RunnerBackend;
+    runtime: ResolvedCodeRunnerRuntime;
+
+    busy: boolean;
+    runState: RunnerState;
+    canCancel: boolean;
+    cancelRun: () => Promise<void> | void;
+
+    lastResult: RunnerLastResult;
+    lastRunLanguage: CodeLanguage | null;
+
+    resetTerminal: () => void;
+    startRun: () => Promise<void>;
+
+    transcript: TranscriptState | null;
+    stream: StreamState | null;
+};
+
+export function resolveSurfaceKind(controller: CodeRunnerController): SurfaceKind {
+    if (controller.backend === "sql") return "sql";
+    if (controller.backend === "judge0") return "terminal-pane";
+
+    return (controller.runtime?.terminalView ?? "plain") === "plain" ? "plain" : "xterm";
+}

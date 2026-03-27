@@ -30,7 +30,7 @@ export async function startInteractiveProjectRun(
     signal?: AbortSignal,
 ): Promise<StartSessionResult> {
     try {
-        const res = await fetch("/api/run/sessions/start", {
+        const res = await fetch("/api/run/pty/sessions/start", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

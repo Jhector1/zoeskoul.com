@@ -1,5 +1,6 @@
 import type { RunResult } from "@/lib/code/types";
 import type { CodeLanguage, SqlDialect } from "@/lib/practice/types";
+import {CodeRunnerRuntime} from "@/components/code/runner/runtime";
 
 export type TerminalDock = "bottom" | "right";
 
@@ -58,7 +59,7 @@ export type UncontrolledProps = {
 };
 
 export type CodeRunnerFrame = "card" | "plain";
-
+//
 export type RunnerState =
     | "idle"
     | "starting"
@@ -67,6 +68,12 @@ export type RunnerState =
     | "canceling";
 type BeforeRunFn = () => void | Promise<void>;
 export type CommonProps = {
+    runtime?: CodeRunnerRuntime;
+    language?: CodeLanguage;
+    code?: string;
+    stdin?: string;
+
+
     title?: string;
     height?: number | "auto";
     frame?: CodeRunnerFrame;
@@ -125,3 +132,42 @@ export function isControlled(
 ): p is CommonProps & ControlledProps {
     return (p as any).code !== undefined && typeof (p as any).onChangeCode === "function";
 }
+
+
+
+// export type ExecutionBackend = "pty" | "judge0";
+// export type TerminalView = "plain" | "xterm" | "auto";
+//
+// export type CodeRunnerRuntime = {
+//     backend: ExecutionBackend;
+//     terminalView?: TerminalView;
+// };
+
+// export type TerminalChunk = {
+//     id: number;
+//     kind: "pty" | "err" | "sys";
+//     data: string;
+// // };
+//
+// export type RunnerState =
+//     | "idle"
+//     | "starting"
+//     | "running"
+//     | "awaiting_input"
+//     | "canceling";
+//
+// export type RunnerController = {
+//     terminalFeed: TerminalChunk[];
+//     inputEnabled: boolean;
+//     busy: boolean;
+//     runState: RunnerState;
+//     lastResult: any | null;
+//     lastRunLanguage: string | null;
+//
+//     startRun: () => Promise<void>;
+//     cancelRun: () => Promise<void> | void;
+//     resetTerminal: () => void;
+//
+//     sendTerminalData: (data: string) => void;
+//     sendTerminalResize: (cols: number, rows: number) => void;
+// };

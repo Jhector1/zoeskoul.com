@@ -84,6 +84,26 @@ export function useSplitSizing(args: {
     );
 
     const userResizedRef = React.useRef(false);
+    const restoreFocusRef = React.useRef<HTMLElement | null>(null);
+    const layoutRafRef = React.useRef<number | null>(null);
+
+    const scheduleLayout = React.useCallback(() => {
+        if (layoutRafRef.current != null) return;
+
+        layoutRafRef.current = requestAnimationFrame(() => {
+            layoutRafRef.current = null;
+            requestLayout();
+        });
+    }, [requestLayout]);
+
+    React.useEffect(() => {
+        return () => {
+            if (layoutRafRef.current != null) {
+                cancelAnimationFrame(layoutRafRef.current);
+                layoutRafRef.current = null;
+            }
+        };
+    }, []);
 
     const bottomMaxTerm = hasSplit
         ? getBottomMaxTerm({
@@ -141,7 +161,7 @@ export function useSplitSizing(args: {
 
         userResizedRef.current = true;
         setTermH(clamp(next, hardMinTermH, maxTerm));
-        requestLayout();
+        scheduleLayout();
     }, [
         totalH,
         splitPx,
@@ -149,7 +169,7 @@ export function useSplitSizing(args: {
         minTermH,
         hardMinEditorH,
         hardMinTermH,
-        requestLayout,
+        scheduleLayout,
     ]);
 
     const resizeRightTo = React.useCallback((next: number) => {
@@ -164,7 +184,7 @@ export function useSplitSizing(args: {
 
         userResizedRef.current = true;
         setTermW(clamp(next, hardMinTermW, maxTerm));
-        requestLayout();
+        scheduleLayout();
     }, [
         totalW,
         splitPx,
@@ -172,7 +192,7 @@ export function useSplitSizing(args: {
         minTermW,
         hardMinEditorW,
         hardMinTermW,
-        requestLayout,
+        scheduleLayout,
     ]);
 
     const nudgeTerm = React.useCallback((delta: number) => {
@@ -196,6 +216,20 @@ export function useSplitSizing(args: {
             e.preventDefault();
 
             userResizedRef.current = true;
+
+            const active = document.activeElement as HTMLElement | null;
+            restoreFocusRef.current = active;
+
+            if (
+                active &&
+                (active.tagName === "INPUT" ||
+                    active.tagName === "TEXTAREA" ||
+                    active.getAttribute("contenteditable") === "true")
+            ) {
+                try {
+                    active.blur();
+                } catch {}
+            }
 
             splitDragRef.current = {
                 startX: e.clientX,
@@ -229,6 +263,19 @@ export function useSplitSizing(args: {
                 window.removeEventListener("pointerup", onUp);
                 document.body.style.userSelect = prevSelect;
                 document.body.style.cursor = prevCursor;
+
+                const toRestore = restoreFocusRef.current;
+                restoreFocusRef.current = null;
+
+                if (toRestore && typeof toRestore.focus === "function") {
+                    try {
+                        toRestore.focus({ preventScroll: true });
+                    } catch {
+                        try {
+                            toRestore.focus();
+                        } catch {}
+                    }
+                }
             };
 
             window.addEventListener("pointermove", onMove);
@@ -301,6 +348,7 @@ export function useSplitSizing(args: {
         "aria-valuemax": number;
         "aria-valuenow": number;
     };
+
     return {
         splitPx,
 
@@ -370,5 +418,5 @@ function getRightMaxTerm(args: {
     );
 
     const maxTerm = Math.max(hardMinTermW, totalW - splitPx - minEditorEff);
-    return Math.max(minTermEff, maxTerm || hardMinTermW);
+    return Math.max(minTermEff, maxTerm);
 }

@@ -147,7 +147,7 @@ export function useRunSession() {
 
     const start = React.useCallback(
         async (req: InteractiveRunReq) => {
-            const res = await fetch("/api/run/sessions/start", {
+            const res = await fetch("/api/run/pty/sessions/start", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(req),

@@ -3,14 +3,12 @@
 import React, {
     useCallback,
     useEffect,
-    useLayoutEffect,
     useMemo,
     useRef,
-    useState,
 } from "react";
 import "xterm/css/xterm.css";
 import type { RunResult } from "@/lib/code/types";
-import type { TerminalChunk } from "../hooks/useCodeRunnerController";
+import type { TerminalChunk } from "@/components/code/runner/runtime";
 
 type XTermModule = typeof import("xterm");
 type XTerm = import("xterm").Terminal;
@@ -72,17 +70,19 @@ function measureCell(probe: HTMLSpanElement | null) {
 }
 
 function writeChunk(term: XTerm, chunk: TerminalChunk) {
+    const text = String(chunk.data ?? "").replace(/\r?\n/g, "\r\n");
+
     if (chunk.kind === "pty") {
-        term.write(chunk.data);
+        term.write(text);
         return;
     }
 
     if (chunk.kind === "err") {
-        term.write(`\x1b[31m${chunk.data}\x1b[0m`);
+        term.write(`\x1b[31m${text}\x1b[0m`);
         return;
     }
 
-    term.write(`\x1b[90m${chunk.data}\x1b[0m`);
+    term.write(`\x1b[90m${text}\x1b[0m`);
 }
 
 export default function XtermTerminal(props: {
@@ -109,24 +109,23 @@ export default function XtermTerminal(props: {
 
     const termRef = useRef<XTerm | null>(null);
     const openedRef = useRef(false);
-    const renderedCountRef = useRef(0);
-    const lastSizeRef = useRef<{ cols: number; rows: number } | null>(null);
+    const inputReadyRef = useRef(false);
 
     const resizeObserverRef = useRef<ResizeObserver | null>(null);
+    const mutationObserverRef = useRef<MutationObserver | null>(null);
     const resizeTimerRef = useRef<number | null>(null);
     const openTimerRef = useRef<number | null>(null);
     const raf1Ref = useRef<number | null>(null);
     const raf2Ref = useRef<number | null>(null);
-    const inputDisposableRef = useRef<{ dispose: () => void } | null>(null);
+    const dataDisposableRef = useRef<{ dispose: () => void } | null>(null);
 
-    const feedRef = useRef<TerminalChunk[]>(terminalFeed);
+    const lastSizeRef = useRef<{ cols: number; rows: number } | null>(null);
+    const prevFeedRef = useRef<TerminalChunk[]>([]);
+
     const onSendDataRef = useRef(onSendData);
     const onResizeRef = useRef(onResize);
-    const inputReadyRef = useRef(inputEnabled && !disabled);
 
-    const [termCreated, setTermCreated] = useState(false);
-
-    feedRef.current = terminalFeed;
+    inputReadyRef.current = inputEnabled && !disabled;
 
     useEffect(() => {
         onSendDataRef.current = onSendData;
@@ -135,10 +134,6 @@ export default function XtermTerminal(props: {
     useEffect(() => {
         onResizeRef.current = onResize;
     }, [onResize]);
-
-    useEffect(() => {
-        inputReadyRef.current = inputEnabled && !disabled;
-    }, [inputEnabled, disabled]);
 
     const statusText = useMemo(
         () =>
@@ -150,10 +145,11 @@ export default function XtermTerminal(props: {
 
     const focusTerminal = useCallback(() => {
         if (!inputReadyRef.current) return;
-        const term = termRef.current;
-        if (!term || !openedRef.current) return;
 
         requestAnimationFrame(() => {
+            const term = termRef.current;
+            if (!term || !openedRef.current) return;
+
             try {
                 term.focus();
             } catch {}
@@ -162,92 +158,15 @@ export default function XtermTerminal(props: {
 
     useEffect(() => {
         let cancelled = false;
-        let created: XTerm | null = null;
-
-        async function createTerminal() {
-            const mod: XTermModule = await import("xterm");
-            if (cancelled) return;
-
-            const { Terminal } = mod;
-
-            created = new Terminal({
-                cols: 80,
-                rows: 24,
-                cursorBlink: false,
-                disableStdin: true,
-                allowTransparency: true,
-                convertEol: false,
-                scrollback: 5000,
-                fontFamily:
-                    'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
-                fontSize: 12,
-                lineHeight: 1.35,
-                theme: getTheme(document.documentElement.classList.contains("dark")),
-            });
-
-            termRef.current = created;
-            setTermCreated(true);
-        }
-
-        createTerminal();
-
-        return () => {
-            cancelled = true;
-            setTermCreated(false);
-            openedRef.current = false;
-            renderedCountRef.current = 0;
-            lastSizeRef.current = null;
-
-            inputDisposableRef.current?.dispose();
-            inputDisposableRef.current = null;
-
-            resizeObserverRef.current?.disconnect();
-            resizeObserverRef.current = null;
-
-            if (resizeTimerRef.current != null) {
-                window.clearTimeout(resizeTimerRef.current);
-                resizeTimerRef.current = null;
-            }
-
-            if (openTimerRef.current != null) {
-                window.clearTimeout(openTimerRef.current);
-                openTimerRef.current = null;
-            }
-
-            if (raf1Ref.current != null) {
-                cancelAnimationFrame(raf1Ref.current);
-                raf1Ref.current = null;
-            }
-
-            if (raf2Ref.current != null) {
-                cancelAnimationFrame(raf2Ref.current);
-                raf2Ref.current = null;
-            }
-
-            try {
-                created?.dispose();
-            } catch {}
-
-            termRef.current = null;
-        };
-    }, []);
-
-    useLayoutEffect(() => {
-        if (!termCreated) return;
-        if (openedRef.current) return;
-
-        let cancelled = false;
-        const term = termRef.current;
-        if (!term) return;
 
         const doResize = () => {
             const host = hostRef.current;
             const probe = probeRef.current;
-            const current = termRef.current;
+            const term = termRef.current;
 
-            if (!host || !current || !openedRef.current) return;
+            if (!host || !probe || !term || !openedRef.current) return;
             if (!isHostReady(host)) return;
-            if (!current.element || !current.textarea) return;
+            if (!term.element || !term.textarea) return;
 
             const rect = host.getBoundingClientRect();
             const cell = measureCell(probe);
@@ -261,7 +180,7 @@ export default function XtermTerminal(props: {
             lastSizeRef.current = { cols, rows };
 
             try {
-                current.resize(cols, rows);
+                term.resize(cols, rows);
                 onResizeRef.current(cols, rows);
             } catch {}
         };
@@ -277,83 +196,111 @@ export default function XtermTerminal(props: {
             }, 60);
         };
 
-        const flushBacklog = () => {
-            const current = termRef.current;
-            if (!current || !openedRef.current) return;
+        const openTerminal = async () => {
+            const mod: XTermModule = await import("xterm");
+            if (cancelled) return;
 
-            const feed = feedRef.current;
-            if (feed.length === 0) {
-                renderedCountRef.current = 0;
-                return;
-            }
+            const { Terminal } = mod;
 
-            for (let i = renderedCountRef.current; i < feed.length; i++) {
-                writeChunk(current, feed[i]);
-            }
+            const waitUntilVisible = () => {
+                if (cancelled || openedRef.current) return;
 
-            renderedCountRef.current = feed.length;
-        };
+                const el = hostRef.current;
+                if (!isHostReady(el)) {
+                    openTimerRef.current = window.setTimeout(waitUntilVisible, 80);
+                    return;
+                }
 
-        const openWhenReady = () => {
-            if (cancelled || openedRef.current) return;
+                raf1Ref.current = requestAnimationFrame(() => {
+                    raf2Ref.current = requestAnimationFrame(() => {
+                        if (cancelled || openedRef.current) return;
 
-            const host = hostRef.current;
-            if (!isHostReady(host)) {
-                openTimerRef.current = window.setTimeout(openWhenReady, 80);
-                return;
-            }
-
-            raf1Ref.current = requestAnimationFrame(() => {
-                raf2Ref.current = requestAnimationFrame(() => {
-                    if (cancelled || openedRef.current) return;
-                    const el = hostRef.current;
-                    if (!isHostReady(el)) {
-                        openTimerRef.current = window.setTimeout(openWhenReady, 80);
-                        return;
-                    }
-
-                    try {
-                        term.open(el!);
-                    } catch (err) {
-                        console.error("xterm open failed", err);
-                        return;
-                    }
-
-                    openedRef.current = true;
-
-                    inputDisposableRef.current = term.onData((data) => {
-                        if (!inputReadyRef.current) return;
-                        onSendDataRef.current(data);
-                    });
-
-                    resizeObserverRef.current = new ResizeObserver(() => {
-                        scheduleResize();
-                    });
-
-                    resizeObserverRef.current.observe(el!);
-
-                    window.setTimeout(() => {
-                        scheduleResize();
-                        flushBacklog();
-
-                        if (inputReadyRef.current) {
-                            focusTerminal();
+                        const node = hostRef.current;
+                        if (!isHostReady(node)) {
+                            openTimerRef.current = window.setTimeout(waitUntilVisible, 80);
+                            return;
                         }
-                    }, 0);
+
+                        const term = new Terminal({
+                            cols: 80,
+                            rows: 24,
+                            cursorBlink: inputReadyRef.current,
+                            disableStdin: !inputReadyRef.current,
+                            allowTransparency: true,
+                            convertEol: true,
+                            scrollback: 5000,
+                            fontFamily:
+                                'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
+                            fontSize: 12,
+                            lineHeight: 1.35,
+                            theme: getTheme(document.documentElement.classList.contains("dark")),
+                        });
+
+                        try {
+                            term.open(node!);
+                        } catch (err) {
+                            console.error("xterm open failed", err);
+                            try {
+                                term.dispose();
+                            } catch {}
+                            return;
+                        }
+
+                        termRef.current = term;
+                        openedRef.current = true;
+
+                        dataDisposableRef.current = term.onData((data) => {
+                            if (!inputReadyRef.current) return;
+                            onSendDataRef.current(data);
+                        });
+
+                        resizeObserverRef.current = new ResizeObserver(() => {
+                            scheduleResize();
+                        });
+                        resizeObserverRef.current.observe(node!);
+
+                        mutationObserverRef.current = new MutationObserver(() => {
+                            const current = termRef.current;
+                            if (!current) return;
+
+                            current.options.theme = {
+                                ...getTheme(document.documentElement.classList.contains("dark")),
+                            };
+                            scheduleResize();
+                        });
+
+                        mutationObserverRef.current.observe(document.documentElement, {
+                            attributes: true,
+                            attributeFilter: ["class"],
+                        });
+
+                        window.setTimeout(() => {
+                            scheduleResize();
+
+                            if (inputReadyRef.current) {
+                                focusTerminal();
+                            }
+                        }, 0);
+                    });
                 });
-            });
+            };
+
+            waitUntilVisible();
         };
 
-        openWhenReady();
+        void openTerminal();
 
         return () => {
             cancelled = true;
 
-            inputDisposableRef.current?.dispose();
-            inputDisposableRef.current = null;
+            dataDisposableRef.current?.dispose();
+            dataDisposableRef.current = null;
 
             resizeObserverRef.current?.disconnect();
             resizeObserverRef.current = null;
+
+            mutationObserverRef.current?.disconnect();
+            mutationObserverRef.current = null;
 
             if (resizeTimerRef.current != null) {
                 window.clearTimeout(resizeTimerRef.current);
@@ -377,8 +324,15 @@ export default function XtermTerminal(props: {
 
             openedRef.current = false;
             lastSizeRef.current = null;
+            prevFeedRef.current = [];
+
+            try {
+                termRef.current?.dispose();
+            } catch {}
+
+            termRef.current = null;
         };
-    }, [termCreated, focusTerminal]);
+    }, [focusTerminal]);
 
     useEffect(() => {
         const term = termRef.current;
@@ -400,22 +354,51 @@ export default function XtermTerminal(props: {
         if (!term || !openedRef.current) return;
 
         if (terminalFeed.length === 0) {
-            if (renderedCountRef.current > 0) {
+            try {
+                term.reset();
+            } catch {
                 try {
                     term.clear();
                 } catch {}
             }
-            renderedCountRef.current = 0;
+
+            prevFeedRef.current = [];
             return;
         }
 
-        if (terminalFeed.length <= renderedCountRef.current) return;
+        const prev = prevFeedRef.current;
 
-        for (let i = renderedCountRef.current; i < terminalFeed.length; i++) {
-            writeChunk(term, terminalFeed[i]);
+        const isAppendOnly =
+            prev.length <= terminalFeed.length &&
+            prev.every((oldChunk, i) => {
+                const nextChunk = terminalFeed[i];
+                return (
+                    !!nextChunk &&
+                    nextChunk.id === oldChunk.id &&
+                    nextChunk.kind === oldChunk.kind &&
+                    nextChunk.data === oldChunk.data
+                );
+            });
+
+        if (isAppendOnly) {
+            for (let i = prev.length; i < terminalFeed.length; i++) {
+                writeChunk(term, terminalFeed[i]);
+            }
+        } else {
+            try {
+                term.reset();
+            } catch {
+                try {
+                    term.clear();
+                } catch {}
+            }
+
+            for (const chunk of terminalFeed) {
+                writeChunk(term, chunk);
+            }
         }
 
-        renderedCountRef.current = terminalFeed.length;
+        prevFeedRef.current = terminalFeed;
     }, [terminalFeed]);
 
     return (

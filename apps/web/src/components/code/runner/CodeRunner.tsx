@@ -10,7 +10,7 @@ import {
     DEFAULT_SQL_DIALECT,
     DEFAULT_SQL_DIALECTS,
 } from "./constants";
-import {isControlled, type CodeRunnerProps, type TerminalDock, CodeRunnerFrame} from "./types";
+import { isControlled, type CodeRunnerProps, type TerminalDock, CodeRunnerFrame } from "./types";
 import HeaderBar from "./components/HeaderBar";
 import EditorPane from "./components/EditorPane";
 import SqlResultsPane from "./components/SqlResultsPane";
@@ -18,8 +18,8 @@ import { useSplitSizing } from "./hooks/useSplitSizing";
 import type { CodeLanguage, SqlDialect } from "@/lib/practice/types";
 import { isSqlRunResult } from "@/lib/code/types";
 import { runViaApi } from "@/lib/code/runClient";
-import {useCodeRunnerController} from "@/components/code/runner/hooks/useCodeRunnerController";
-import XtermTerminal from "@/components/code/runner/components/XtermTerminal";
+import { useCodeRunnerController } from "@/components/code/runner/hooks/controller/useCodeRunnerController";
+import { resolveRuntime } from "@/components/code/runner/hooks/controller/useResolvedRuntime";
 import TerminalSurface from "@/components/code/runner/components/TerminalSurface";
 
 type MobilePane = "editor" | "output";
@@ -65,6 +65,7 @@ function CodeRunnerContent(props: CodeRunnerProps) {
     } = props as any;
 
     const controlled = isControlled(props);
+    const runtime = resolveRuntime((props as any).runtime);
 
     const { resolvedTheme } = useTheme();
     const [editorTheme, setEditorTheme] = useState<"vs" | "vs-dark">("vs-dark");
@@ -235,8 +236,8 @@ function CodeRunnerContent(props: CodeRunnerProps) {
         );
     }, []);
 
-
     const term = useCodeRunnerController({
+        runtime,
         lang,
         code,
         sqlDialect,
@@ -247,8 +248,9 @@ function CodeRunnerContent(props: CodeRunnerProps) {
         disabled,
         allowRun,
         resetTerminalOnRun,
-        onRun,
+        onRun: onRun ?? defaultOnRun,
     });
+
     useEffect(() => {
         requestLayout();
     }, [effectiveDock, split.termW, split.bottomEditorH, split.bottomTermH, split.rightTotalH]);
@@ -293,12 +295,10 @@ function CodeRunnerContent(props: CodeRunnerProps) {
         lang,
         preserveCodeOnLanguageSwitch,
         controlled,
-        setLang,
-        setCode,
-        term,
         isNarrowScreen,
         showEditor,
         showTerminal,
+        term,
     ]);
 
     const showPickerUI = showLanguagePicker && !fixedLanguage && allowedLangs.length > 1;
@@ -342,41 +342,12 @@ function CodeRunnerContent(props: CodeRunnerProps) {
             ? term.lastResult
             : null;
 
-    const outputLabel = lang === "sql" ? "Results" : "Terminal";
+    const outputLabel = term.backend === "sql" ? "Results" : "Terminal";
     const mobileTabAttention = term.runState !== "idle" || !!term.lastResult;
-    const mobileBodyHeight = Math.max(240, (split.mainH || numericHeight) - 52);
-    const shouldShowXterm =
-        term.busy ||
-        term.inputEnabled ||
-        term.terminalFeed.length > 0;
 
-    const shouldShowTerminal =
-        term.busy || term.inputEnabled || term.terminalFeed.length > 0 || !!term.lastResult;
+    const mobileBodyHeight = Math.max(240, (split.mainH || numericHeight) - 52);
 
     const renderOutputPane = (panelHeight?: number, panelWidth?: number) => {
-        if (lang === "sql") {
-            return (
-                <div
-                    className="min-h-0 p-2 sm:p-3"
-                    style={{
-                        ...(typeof panelHeight === "number" ? { height: panelHeight } : {}),
-                        ...(typeof panelWidth === "number" ? { width: panelWidth } : {}),
-                    }}
-                >
-                    {genericSqlError ? (
-                        <div className="rounded-2xl border border-rose-300/30 bg-rose-50/70 p-4 text-sm text-rose-700 dark:border-rose-300/20 dark:bg-rose-950/20 dark:text-rose-200">
-                            <div className="font-black">SQL run error</div>
-                            <pre className="mt-2 whitespace-pre-wrap font-mono text-xs">
-                            {genericSqlError.error ?? genericSqlError.status ?? "SQL run failed."}
-                        </pre>
-                        </div>
-                    ) : (
-                        <SqlResultsPane result={sqlResult} busy={term.busy} />
-                    )}
-                </div>
-            );
-        }
-
         return (
             <div
                 className="min-h-0 p-2 sm:p-3"
@@ -385,26 +356,12 @@ function CodeRunnerContent(props: CodeRunnerProps) {
                     ...(typeof panelWidth === "number" ? { width: panelWidth } : {}),
                 }}
             >
-                {shouldShowTerminal ? (
-                    <TerminalSurface
-                        terminalFeed={term.terminalFeed}
-                        inputEnabled={term.inputEnabled}
-                        busy={term.busy}
-                        disabled={disabled}
-                        lastResult={term.lastResult}
-                        onSendData={term.sendTerminalData}
-                        onResize={term.sendTerminalResize}
-                    />
-                ) : (
-                    <div className="h-full rounded-2xl border-t p-3 bg-white/80 dark:bg-black/40 border-neutral-200 dark:border-white/10">
-                        <div className="text-[11px] font-extrabold text-neutral-500 dark:text-white/50">
-                            Terminal idle
-                        </div>
-                    </div>
-                )}
+                <TerminalSurface controller={term} disabled={disabled} />
             </div>
         );
-    };    const renderEditorPane = (editorHeight: number) => (
+    };
+
+    const renderEditorPane = (editorHeight: number) => (
         <div
             className="h-full bg-white/70 dark:bg-black/10"
             style={{ touchAction: isNarrowScreen ? "pan-y" : "auto" }}
