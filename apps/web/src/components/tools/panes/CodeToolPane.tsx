@@ -34,6 +34,8 @@ export default function CodeToolPane(props: {
                 showHint={false}
                 height={runnerH - 50}
                 showTerminalDockToggle
+                runtime={{ backend: "judge0", terminalView: "plain" }}
+
                 showEditorThemeToggle
                 fixedLanguage={toolLang}
                 showLanguagePicker={false}

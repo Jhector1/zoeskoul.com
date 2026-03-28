@@ -41,6 +41,7 @@ export type SharedRunnerArgs = {
     allowRun: boolean;
     resetTerminalOnRun: boolean;
     onRun?: OnRun;
+    isAuthenticated?: boolean;
 };
 
 export type TranscriptState = {
@@ -84,6 +85,5 @@ export type CodeRunnerController = {
 export function resolveSurfaceKind(controller: CodeRunnerController): SurfaceKind {
     if (controller.backend === "sql") return "sql";
     if (controller.backend === "judge0") return "terminal-pane";
-
-    return (controller.runtime?.terminalView ?? "plain") === "plain" ? "plain" : "xterm";
+    return controller.runtime.terminalView === "plain" ? "plain" : "xterm";
 }

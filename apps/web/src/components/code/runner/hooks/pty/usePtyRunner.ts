@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import type { RunEvent, RunSessionState } from "@zoeskoul/code-contracts";
+// import type { RunEvent, RunSessionState } from "@/lib/code/types/session";
 import type {
     SharedRunnerArgs,
     CodeRunnerController,
@@ -10,15 +10,12 @@ import type {
 import type { RunnerState } from "../../types";
 import { useRunSession } from "../useRunSession";
 import { resolveRuntime } from "../controller/useResolvedRuntime";
-import {CodeLanguage} from "@/lib/practice/types";
+import {RunEvent, RunSessionState} from "@zoeskoul/code-contracts";
 
 type StartedInteractiveSession = {
     ok?: true;
     sessionId: string;
     state: RunSessionState;
-};
-type PtyRunnerArgs = Omit<SharedRunnerArgs, "lang"> & {
-    lang: Exclude<CodeLanguage, "sql">;
 };
 
 function isFinalSessionState(state: string) {
@@ -34,10 +31,7 @@ function isStartedInteractiveSession(value: unknown): value is StartedInteractiv
     if (!value || typeof value !== "object") return false;
 
     const v = value as Record<string, unknown>;
-    return (
-        typeof v.sessionId === "string" &&
-        typeof v.state === "string"
-    );
+    return typeof v.sessionId === "string" && typeof v.state === "string";
 }
 
 function handleSessionEvent(args: {
@@ -108,7 +102,7 @@ function handleSessionEvent(args: {
     }
 }
 
-export function usePtyRunner(args: PtyRunnerArgs): CodeRunnerController {
+export function usePtyRunner(args: SharedRunnerArgs): CodeRunnerController {
     const {
         lang,
         code,

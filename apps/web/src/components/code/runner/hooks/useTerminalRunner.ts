@@ -421,28 +421,21 @@ export function useTerminalRunner(args: {
             const rebuilt: TermLine[] = [];
 
             if (syntheticPrompt) {
-                const prefixLines = toOutTermLines(prefix);
-                let startIdx = 0;
+                if (showWaiting) {
+                    // While still waiting for more input, keep a readable synthetic transcript.
+                    for (let i = 0; i < lines.length; i++) {
+                        rebuilt.push({
+                            type: "in",
+                            text: `Input: ${String(lines[i] ?? "")}`,
+                        });
+                    }
 
-                if (prefix && !prefix.endsWith("\n") && lines.length > 0 && prefixLines.length > 0) {
-                    const last = prefixLines[prefixLines.length - 1];
-                    const joiner = last.text.endsWith(" ") || last.text === "" ? "" : " ";
-
-                    prefixLines[prefixLines.length - 1] = {
-                        ...last,
-                        text: last.text + joiner + String(lines[0] ?? ""),
-                    };
-
-                    startIdx = 1;
+                    rebuilt.push(...toOutTermLines(stdoutText));
+                } else {
+                    // Final completed run for promptless programs:
+                    // show only the real stdout, not duplicated synthetic inputs.
+                    rebuilt.push(...toOutTermLines(stdoutText));
                 }
-
-                rebuilt.push(...prefixLines);
-
-                for (let i = startIdx; i < lines.length; i++) {
-                    rebuilt.push({ type: "in", text: String(lines[i] ?? "") });
-                }
-
-                rebuilt.push(...toOutTermLines(rest));
             } else {
                 const splitCount = showWaiting ? lines.length + 1 : lines.length;
                 const promptsForSplit = expandPrompts(promptsRaw, Math.max(splitCount, 1), "Input:");
@@ -487,7 +480,6 @@ export function useTerminalRunner(args: {
         },
         [inputPlan.prompts, replaceRunLines],
     );
-
     const cancelRun = React.useCallback(() => {
         if (runState !== "running" && runState !== "awaiting_input") return;
 
@@ -665,7 +657,11 @@ export function useTerminalRunner(args: {
                 : "";
 
             if (probeSafe) {
-                appendImmediateInputLine(runId, typed, promptForThisInput);
+                // For promptless Judge0 probe-safe flows, do not optimistically echo input.
+                // The final transcript will be rebuilt from stdout only.
+                if (hasRealPrompts) {
+                    appendImmediateInputLine(runId, typed, promptForThisInput);
+                }
                 setAwaitingInput(false);
                 setInputPrompt("");
             } else {

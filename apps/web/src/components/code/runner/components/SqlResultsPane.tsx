@@ -54,7 +54,14 @@ type Box = {
 };
 
 type DiagramTabKey = "tables" | "erd" | "chen";
+type DiagramMode = DiagramTabKey;
 type DiagramPositions = Record<string, { x: number; y: number }>;
+
+type DiagramScene = {
+    width: number;
+    height: number;
+    boxes: Box[];
+};
 
 function diagramPosKey(tab: DiagramTabKey, id: string) {
     return `${tab}:${id}`;
@@ -123,9 +130,99 @@ function syncTabDefaults(
     return next;
 }
 
+function getDiagramConfig(mode: DiagramMode) {
+    if (mode === "chen") {
+        return {
+            minX: 220,
+            minY: 120,
+            minWidth: 1500,
+            minHeight: 980,
+            rightPad: 320,
+            bottomPad: 260,
+            extraRight: 170,
+            extraBottom: 110,
+        };
+    }
+
+    if (mode === "erd") {
+        return {
+            minX: 120,
+            minY: 80,
+            minWidth: 1320,
+            minHeight: 860,
+            rightPad: 260,
+            bottomPad: 180,
+            extraRight: 70,
+            extraBottom: 40,
+        };
+    }
+
+    return {
+        minX: 40,
+        minY: 40,
+        minWidth: 1100,
+        minHeight: 760,
+        rightPad: 180,
+        bottomPad: 140,
+        extraRight: 0,
+        extraBottom: 0,
+    };
+}
+
+function clampDiagramNodePosition(mode: DiagramMode, x: number, y: number) {
+    const cfg = getDiagramConfig(mode);
+    return {
+        x: Math.max(cfg.minX, x),
+        y: Math.max(cfg.minY, y),
+    };
+}
+
+function clampDiagramBoxes(mode: DiagramMode, boxes: Box[]) {
+    return boxes.map((box) => {
+        const next = clampDiagramNodePosition(mode, box.x, box.y);
+        return { ...box, x: next.x, y: next.y };
+    });
+}
+
+function buildDiagramScene(rawBoxes: Box[], mode: DiagramMode): DiagramScene {
+    const cfg = getDiagramConfig(mode);
+
+    if (!rawBoxes.length) {
+        return {
+            width: cfg.minWidth,
+            height: cfg.minHeight,
+            boxes: [],
+        };
+    }
+
+    const maxX = Math.max(
+        ...rawBoxes.map((b) => b.x + b.w + cfg.extraRight),
+    );
+    const maxY = Math.max(
+        ...rawBoxes.map((b) => b.y + b.h + cfg.extraBottom),
+    );
+
+    return {
+        width: Math.max(cfg.minWidth, maxX + cfg.rightPad),
+        height: Math.max(cfg.minHeight, maxY + cfg.bottomPad),
+        boxes: rawBoxes,
+    };
+}
+
+function buildDiagramFitKey(mode: DiagramMode, schema: SchemaModel) {
+    const tablesKey = schema.tables
+        .map((t) => `${t.id}:${t.columns.length}`)
+        .join("|");
+    const relsKey = schema.relations.map((r) => r.id).join("|");
+    return `${mode}::${tablesKey}::${relsKey}`;
+}
+
+
+
 type PanZoomCanvasProps = {
     width: number;
     height: number;
+    fitKey?: string | number;
     children: (ctx: { scale: number }) => React.ReactNode;
 };
 
@@ -134,124 +231,370 @@ function clampScale(n: number) {
 }
 
 function PanZoomCanvas(props: PanZoomCanvasProps) {
-    const { width, height, children } = props;
+    const { width, height, fitKey, children } = props;
 
     const viewportRef = React.useRef<HTMLDivElement | null>(null);
-    const [scale, setScale] = React.useState(1);
-    const [offset, setOffset] = React.useState({ x: 24, y: 24 });
 
-    const panRef = React.useRef<{
+    const BOARD_PAD = 1400;
+    const OVERSCROLL = 180;
+
+    const stageWidth = width + BOARD_PAD * 2;
+    const stageHeight = height + BOARD_PAD * 2;
+
+    const [view, setView] = React.useState({
+        scale: 1,
+        x: 0,
+        y: 0,
+    });
+    const [isPanning, setIsPanning] = React.useState(false);
+
+    const viewRef = React.useRef(view);
+    React.useEffect(() => {
+        viewRef.current = view;
+    }, [view]);
+
+    const dragRef = React.useRef<{
+        pointerId: number;
         startClientX: number;
         startClientY: number;
         startX: number;
         startY: number;
     } | null>(null);
 
-    const zoomBy = React.useCallback((nextScale: number, clientX?: number, clientY?: number) => {
-        const el = viewportRef.current;
-        const clamped = clampScale(nextScale);
+    const rafRef = React.useRef<number | null>(null);
+    const pendingRef = React.useRef<{ x: number; y: number } | null>(null);
 
-        if (!el || clientX == null || clientY == null) {
-            setScale(clamped);
+    const getViewportSize = React.useCallback(() => {
+        const el = viewportRef.current;
+        if (!el) return { vw: 0, vh: 0 };
+        return { vw: el.clientWidth, vh: el.clientHeight };
+    }, []);
+
+    const clampOffset = React.useCallback(
+        (raw: { x: number; y: number }, nextScale: number) => {
+            const { vw, vh } = getViewportSize();
+            if (!vw || !vh) return raw;
+
+            const scaledStageW = stageWidth * nextScale;
+            const scaledStageH = stageHeight * nextScale;
+
+            const minX = vw - scaledStageW - OVERSCROLL;
+            const maxX = OVERSCROLL;
+            const minY = vh - scaledStageH - OVERSCROLL;
+            const maxY = OVERSCROLL;
+
+            return {
+                x: Math.min(maxX, Math.max(minX, raw.x)),
+                y: Math.min(maxY, Math.max(minY, raw.y)),
+            };
+        },
+        [getViewportSize, stageWidth, stageHeight],
+    );
+
+    const applyView = React.useCallback(
+        (next: { scale: number; x: number; y: number }) => {
+            viewRef.current = next;
+            setView(next);
+        },
+        [],
+    );
+
+    const getFitScale = React.useCallback(() => {
+        const { vw, vh } = getViewportSize();
+        if (!vw || !vh) return 1;
+
+        return clampScale(Math.min((vw - 48) / width, (vh - 48) / height));
+    }, [getViewportSize, width, height]);
+
+    const fitToView = React.useCallback(() => {
+        const { vw, vh } = getViewportSize();
+        const nextScale = getFitScale();
+
+        if (!vw || !vh) {
+            applyView({ scale: nextScale, x: 0, y: 0 });
             return;
         }
 
-        const rect = el.getBoundingClientRect();
-        const px = clientX - rect.left;
-        const py = clientY - rect.top;
+        const raw = {
+            x: (vw - width * nextScale) / 2 - BOARD_PAD * nextScale,
+            y: (vh - height * nextScale) / 2 - BOARD_PAD * nextScale,
+        };
 
-        setOffset((prev) => {
-            const worldX = (px - prev.x) / scale;
-            const worldY = (py - prev.y) / scale;
+        const clamped = clampOffset(raw, nextScale);
+        applyView({
+            scale: nextScale,
+            x: clamped.x,
+            y: clamped.y,
+        });
+    }, [getViewportSize, getFitScale, width, height, clampOffset, applyView]);
 
-            return {
-                x: px - worldX * clamped,
-                y: py - worldY * clamped,
-            };
+    const fitToViewRef = React.useRef(fitToView);
+    fitToViewRef.current = fitToView;
+
+    React.useLayoutEffect(() => {
+        fitToViewRef.current();
+    }, [fitKey]);
+
+    React.useEffect(() => {
+        const el = viewportRef.current;
+        if (!el || typeof ResizeObserver === "undefined") return;
+
+        const ro = new ResizeObserver(() => {
+            const current = viewRef.current;
+            const clamped = clampOffset(
+                { x: current.x, y: current.y },
+                current.scale,
+            );
+
+            if (clamped.x !== current.x || clamped.y !== current.y) {
+                applyView({
+                    ...current,
+                    x: clamped.x,
+                    y: clamped.y,
+                });
+            }
         });
 
-        setScale(clamped);
-    }, [scale]);
+        ro.observe(el);
+        return () => ro.disconnect();
+    }, [clampOffset, applyView]);
 
-    const resetView = React.useCallback(() => {
-        setScale(1);
-        setOffset({ x: 24, y: 24 });
+    React.useEffect(() => {
+        return () => {
+            if (rafRef.current != null) {
+                cancelAnimationFrame(rafRef.current);
+            }
+        };
     }, []);
 
-    const onWheel = React.useCallback((e: React.WheelEvent<HTMLDivElement>) => {
-        e.preventDefault();
+    const flushPendingPan = React.useCallback(() => {
+        rafRef.current = null;
+        const pending = pendingRef.current;
+        if (!pending) return;
 
-        const factor = e.deltaY < 0 ? 1.08 : 0.92;
-        zoomBy(scale * factor, e.clientX, e.clientY);
-    }, [scale, zoomBy]);
+        const current = viewRef.current;
+        applyView({
+            ...current,
+            x: pending.x,
+            y: pending.y,
+        });
+    }, [applyView]);
 
-    const onPointerDown = React.useCallback((e: React.PointerEvent<HTMLDivElement>) => {
-        if (e.button !== 0) return;
+    const zoomBy = React.useCallback(
+        (nextScale: number, clientX?: number, clientY?: number) => {
+            const el = viewportRef.current;
+            const current = viewRef.current;
+            const clampedScale = clampScale(nextScale);
 
-        panRef.current = {
-            startClientX: e.clientX,
-            startClientY: e.clientY,
-            startX: offset.x,
-            startY: offset.y,
-        };
+            if (!el || clientX == null || clientY == null) {
+                const clampedOffset = clampOffset(
+                    { x: current.x, y: current.y },
+                    clampedScale,
+                );
 
-        const move = (ev: PointerEvent) => {
-            const p = panRef.current;
-            if (!p) return;
+                applyView({
+                    scale: clampedScale,
+                    x: clampedOffset.x,
+                    y: clampedOffset.y,
+                });
+                return;
+            }
 
-            setOffset({
-                x: p.startX + (ev.clientX - p.startClientX),
-                y: p.startY + (ev.clientY - p.startClientY),
+            const rect = el.getBoundingClientRect();
+            const px = clientX - rect.left;
+            const py = clientY - rect.top;
+
+            const worldX = (px - current.x) / current.scale;
+            const worldY = (py - current.y) / current.scale;
+
+            const raw = {
+                x: px - worldX * clampedScale,
+                y: py - worldY * clampedScale,
+            };
+
+            const clampedOffset = clampOffset(raw, clampedScale);
+
+            applyView({
+                scale: clampedScale,
+                x: clampedOffset.x,
+                y: clampedOffset.y,
             });
-        };
+        },
+        [clampOffset, applyView],
+    );
 
-        const up = () => {
-            panRef.current = null;
-            window.removeEventListener("pointermove", move);
-            window.removeEventListener("pointerup", up);
-        };
+    const zoomCentered = React.useCallback(
+        (nextScale: number) => {
+            const el = viewportRef.current;
+            if (!el) {
+                const current = viewRef.current;
+                const clampedScale = clampScale(nextScale);
+                const clampedOffset = clampOffset(
+                    { x: current.x, y: current.y },
+                    clampedScale,
+                );
 
-        window.addEventListener("pointermove", move);
-        window.addEventListener("pointerup", up);
-    }, [offset.x, offset.y]);
+                applyView({
+                    scale: clampedScale,
+                    x: clampedOffset.x,
+                    y: clampedOffset.y,
+                });
+                return;
+            }
+
+            const rect = el.getBoundingClientRect();
+            zoomBy(
+                nextScale,
+                rect.left + rect.width / 2,
+                rect.top + rect.height / 2,
+            );
+        },
+        [zoomBy, clampOffset, applyView],
+    );
+
+    const resetView = React.useCallback(() => {
+        fitToView();
+    }, [fitToView]);
+
+    const onWheel = React.useCallback(
+        (e: React.WheelEvent<HTMLDivElement>) => {
+            e.preventDefault();
+            const factor = e.deltaY < 0 ? 1.08 : 0.92;
+            zoomBy(viewRef.current.scale * factor, e.clientX, e.clientY);
+        },
+        [zoomBy],
+    );
+
+    const onPointerDown = React.useCallback(
+        (e: React.PointerEvent<HTMLDivElement>) => {
+            if (e.button !== 0) return;
+
+            e.preventDefault();
+
+            dragRef.current = {
+                pointerId: e.pointerId,
+                startClientX: e.clientX,
+                startClientY: e.clientY,
+                startX: viewRef.current.x,
+                startY: viewRef.current.y,
+            };
+
+            setIsPanning(true);
+            e.currentTarget.setPointerCapture(e.pointerId);
+        },
+        [],
+    );
+
+    const onPointerMove = React.useCallback(
+        (e: React.PointerEvent<HTMLDivElement>) => {
+            const drag = dragRef.current;
+            if (!drag || drag.pointerId !== e.pointerId) return;
+
+            const raw = {
+                x: drag.startX + (e.clientX - drag.startClientX),
+                y: drag.startY + (e.clientY - drag.startClientY),
+            };
+
+            pendingRef.current = clampOffset(raw, viewRef.current.scale);
+
+            if (rafRef.current == null) {
+                rafRef.current = requestAnimationFrame(flushPendingPan);
+            }
+        },
+        [clampOffset, flushPendingPan],
+    );
+
+    const endPan = React.useCallback((pointerId: number, target: HTMLDivElement) => {
+        const drag = dragRef.current;
+        if (!drag || drag.pointerId !== pointerId) return;
+
+        dragRef.current = null;
+        pendingRef.current = null;
+
+        if (rafRef.current != null) {
+            cancelAnimationFrame(rafRef.current);
+            rafRef.current = null;
+        }
+
+        if (target.hasPointerCapture(pointerId)) {
+            target.releasePointerCapture(pointerId);
+        }
+
+        setIsPanning(false);
+    }, []);
+
+    const onPointerUp = React.useCallback(
+        (e: React.PointerEvent<HTMLDivElement>) => {
+            endPan(e.pointerId, e.currentTarget);
+        },
+        [endPan],
+    );
+
+    const onPointerCancel = React.useCallback(
+        (e: React.PointerEvent<HTMLDivElement>) => {
+            endPan(e.pointerId, e.currentTarget);
+        },
+        [endPan],
+    );
 
     return (
         <div className="relative h-full min-h-0 overflow-hidden rounded-2xl border border-neutral-200/70 bg-white/85 dark:border-white/10 dark:bg-black/20">
             <div
                 ref={viewportRef}
-                className="absolute inset-0 overflow-hidden touch-none"
+                className={cn(
+                    "absolute inset-0 overflow-hidden touch-none select-none",
+                    isPanning ? "cursor-grabbing" : "cursor-grab",
+                )}
                 onWheel={onWheel}
                 onPointerDown={onPointerDown}
+                onPointerMove={onPointerMove}
+                onPointerUp={onPointerUp}
+                onPointerCancel={onPointerCancel}
             >
                 <div
                     className="absolute left-0 top-0 will-change-transform"
                     style={{
-                        width,
-                        height,
-                        transform: `translate(${offset.x}px, ${offset.y}px) scale(${scale})`,
+                        width: stageWidth,
+                        height: stageHeight,
+                        transform: `translate(${view.x}px, ${view.y}px) scale(${view.scale})`,
                         transformOrigin: "0 0",
+                        backgroundImage: `
+                          linear-gradient(to right, rgba(148,163,184,0.12) 1px, transparent 1px),
+                          linear-gradient(to bottom, rgba(148,163,184,0.12) 1px, transparent 1px)
+                        `,
+                        backgroundSize: "40px 40px",
                     }}
                 >
-                    {children({ scale })}
+                    <div
+                        className="absolute"
+                        style={{
+                            left: BOARD_PAD,
+                            top: BOARD_PAD,
+                            width,
+                            height,
+                        }}
+                    >
+                        {children({ scale: view.scale })}
+                    </div>
                 </div>
             </div>
 
             <div className="absolute right-3 top-3 z-30 flex items-center gap-2 rounded-xl border border-neutral-200/70 bg-white/90 px-2 py-2 shadow-sm backdrop-blur dark:border-white/10 dark:bg-black/55">
                 <button
                     type="button"
-                    onClick={() => setScale((s) => clampScale(s * 0.9))}
+                    onClick={() => zoomCentered(view.scale * 0.9)}
                     className="rounded-lg border border-neutral-200 px-2 py-1 text-xs font-black text-neutral-700 hover:bg-neutral-50 dark:border-white/10 dark:text-white/80 dark:hover:bg-white/[0.08]"
                 >
                     −
                 </button>
 
                 <div className="min-w-[56px] text-center text-[11px] font-black text-neutral-600 dark:text-white/70">
-                    {Math.round(scale * 100)}%
+                    {Math.round(view.scale * 100)}%
                 </div>
 
                 <button
                     type="button"
-                    onClick={() => setScale((s) => clampScale(s * 1.1))}
+                    onClick={() => zoomCentered(view.scale * 1.1)}
                     className="rounded-lg border border-neutral-200 px-2 py-1 text-xs font-black text-neutral-700 hover:bg-neutral-50 dark:border-white/10 dark:text-white/80 dark:hover:bg-white/[0.08]"
                 >
                     +
@@ -267,11 +610,15 @@ function PanZoomCanvas(props: PanZoomCanvasProps) {
             </div>
 
             <div className="absolute bottom-3 left-3 z-30 rounded-xl border border-neutral-200/70 bg-white/90 px-3 py-2 text-[11px] font-semibold text-neutral-500 shadow-sm backdrop-blur dark:border-white/10 dark:bg-black/55 dark:text-white/50">
-                Drag background to pan • wheel to zoom • drag nodes to reposition
+                Drag anywhere on the board • wheel to zoom • drag nodes to reposition
             </div>
         </div>
     );
 }
+
+
+
+
 function Badge(props: { children: React.ReactNode; tone?: "neutral" | "good" | "warn" | "bad" }) {
     const { children, tone = "neutral" } = props;
 
@@ -849,13 +1196,25 @@ function TablesTab(props: {
     const { schema, positions, onMove } = props;
 
     const initialLayout = React.useMemo(() => buildTableLayout(schema.tables), [schema.tables]);
-    const boxes = React.useMemo(
-        () => applyStoredPositions("tables", initialLayout.boxes, positions),
+
+    const rawBoxes = React.useMemo(
+        () => clampDiagramBoxes("tables", applyStoredPositions("tables", initialLayout.boxes, positions)),
         [initialLayout, positions],
     );
+
+    const scene = React.useMemo(
+        () => buildDiagramScene(rawBoxes, "tables"),
+        [rawBoxes],
+    );
+
     const boxById = React.useMemo(
-        () => new Map(boxes.map((box) => [box.id, box])),
-        [boxes],
+        () => new Map(scene.boxes.map((box) => [box.id, box])),
+        [scene.boxes],
+    );
+
+    const fitKey = React.useMemo(
+        () => buildDiagramFitKey("tables", schema),
+        [schema],
     );
 
     if (!schema.tables.length) {
@@ -875,7 +1234,7 @@ function TablesTab(props: {
             </div>
 
             <div className="min-h-0 flex-1">
-                <PanZoomCanvas width={initialLayout.width} height={initialLayout.height}>
+                <PanZoomCanvas width={scene.width} height={scene.height} fitKey={fitKey}>
                     {({ scale }) => (
                         <div className="relative h-full w-full">
                             {schema.tables.map((table) => {
@@ -893,7 +1252,12 @@ function TablesTab(props: {
                                     const move = (ev: PointerEvent) => {
                                         const dx = (ev.clientX - startClientX) / scale;
                                         const dy = (ev.clientY - startClientY) / scale;
-                                        onMove("tables", box.id, startX + dx, startY + dy);
+                                        const next = clampDiagramNodePosition(
+                                            "tables",
+                                            startX + dx,
+                                            startY + dy,
+                                        );
+                                        onMove("tables", box.id, next.x, next.y);
                                     };
 
                                     const up = () => {
@@ -971,13 +1335,25 @@ function ErdTab(props: {
     const { schema, positions, onMove } = props;
 
     const initialLayout = React.useMemo(() => buildTableLayout(schema.tables), [schema.tables]);
-    const boxes = React.useMemo(
-        () => applyStoredPositions("erd", initialLayout.boxes, positions),
+
+    const rawBoxes = React.useMemo(
+        () => clampDiagramBoxes("erd", applyStoredPositions("erd", initialLayout.boxes, positions)),
         [initialLayout, positions],
     );
+
+    const scene = React.useMemo(
+        () => buildDiagramScene(rawBoxes, "erd"),
+        [rawBoxes],
+    );
+
     const boxById = React.useMemo(
-        () => new Map(boxes.map((box) => [box.id, box])),
-        [boxes],
+        () => new Map(scene.boxes.map((box) => [box.id, box])),
+        [scene.boxes],
+    );
+
+    const fitKey = React.useMemo(
+        () => buildDiagramFitKey("erd", schema),
+        [schema],
     );
 
     if (!schema.tables.length) {
@@ -997,14 +1373,14 @@ function ErdTab(props: {
             </div>
 
             <div className="min-h-0 flex-1">
-                <PanZoomCanvas width={initialLayout.width} height={initialLayout.height}>
+                <PanZoomCanvas width={scene.width} height={scene.height} fitKey={fitKey}>
                     {({ scale }) => (
                         <div className="relative h-full w-full">
                             <svg
-                                width={initialLayout.width}
-                                height={initialLayout.height}
+                                width={scene.width}
+                                height={scene.height}
                                 className="absolute inset-0 z-0"
-                                viewBox={`0 0 ${initialLayout.width} ${initialLayout.height}`}
+                                viewBox={`0 0 ${scene.width} ${scene.height}`}
                             >
                                 {schema.relations.map((rel) => {
                                     const from = boxById.get(rel.fromTable);
@@ -1084,7 +1460,12 @@ function ErdTab(props: {
                                     const move = (ev: PointerEvent) => {
                                         const dx = (ev.clientX - startClientX) / scale;
                                         const dy = (ev.clientY - startClientY) / scale;
-                                        onMove("erd", box.id, startX + dx, startY + dy);
+                                        const next = clampDiagramNodePosition(
+                                            "erd",
+                                            startX + dx,
+                                            startY + dy,
+                                        );
+                                        onMove("erd", box.id, next.x, next.y);
                                     };
 
                                     const up = () => {
@@ -1160,14 +1541,20 @@ function ChenTab(props: {
     const { schema, positions, onMove } = props;
 
     const initialLayout = React.useMemo(() => buildChenLayout(schema.tables), [schema.tables]);
-    const boxes = React.useMemo(
-        () => applyStoredPositions("chen", initialLayout.boxes, positions),
+
+    const rawBoxes = React.useMemo(
+        () => clampDiagramBoxes("chen", applyStoredPositions("chen", initialLayout.boxes, positions)),
         [initialLayout, positions],
     );
 
+    const scene = React.useMemo(
+        () => buildDiagramScene(rawBoxes, "chen"),
+        [rawBoxes],
+    );
+
     const boxById = React.useMemo(
-        () => new Map(boxes.map((box) => [box.id, box])),
-        [boxes],
+        () => new Map(scene.boxes.map((box) => [box.id, box])),
+        [scene.boxes],
     );
 
     const entities = React.useMemo(
@@ -1182,6 +1569,11 @@ function ChenTab(props: {
     const entityById = React.useMemo(
         () => new Map(entities.map((e) => [e.id, e])),
         [entities],
+    );
+
+    const fitKey = React.useMemo(
+        () => buildDiagramFitKey("chen", schema),
+        [schema],
     );
 
     if (!schema.tables.length) {
@@ -1201,12 +1593,12 @@ function ChenTab(props: {
             </div>
 
             <div className="min-h-0 flex-1">
-                <PanZoomCanvas width={initialLayout.width} height={initialLayout.height}>
+                <PanZoomCanvas width={scene.width} height={scene.height} fitKey={fitKey}>
                     {({ scale }) => (
                         <svg
-                            width={initialLayout.width}
-                            height={initialLayout.height}
-                            viewBox={`0 0 ${initialLayout.width} ${initialLayout.height}`}
+                            width={scene.width}
+                            height={scene.height}
+                            viewBox={`0 0 ${scene.width} ${scene.height}`}
                             className="block"
                         >
                             {schema.relations.map((rel) => {
@@ -1297,7 +1689,12 @@ function ChenTab(props: {
                                     const move = (ev: PointerEvent) => {
                                         const dx = (ev.clientX - startClientX) / scale;
                                         const dy = (ev.clientY - startClientY) / scale;
-                                        onMove("chen", entity.id, startX + dx, startY + dy);
+                                        const next = clampDiagramNodePosition(
+                                            "chen",
+                                            startX + dx,
+                                            startY + dy,
+                                        );
+                                        onMove("chen", entity.id, next.x, next.y);
                                     };
 
                                     const up = () => {
@@ -1419,6 +1816,7 @@ function ChenTab(props: {
         </div>
     );
 }
+
 export default function SqlResultsPane(props: {
     result: SqlRunResult | null;
     busy: boolean;
@@ -1427,8 +1825,8 @@ export default function SqlResultsPane(props: {
 }) {
     const { result, busy, className, schemaSql = "" } = props;
     const [tab, setTab] = React.useState<TabKey>("results");
-    // const [tab, setTab] = React.useState<TabKey>("results");
     const [positions, setPositions] = React.useState<DiagramPositions>({});
+
     React.useEffect(() => {
         if (busy) {
             setTab("results");
@@ -1457,6 +1855,7 @@ export default function SqlResultsPane(props: {
         },
         [],
     );
+
     if (busy) {
         return (
             <div
@@ -1497,9 +1896,9 @@ export default function SqlResultsPane(props: {
 
                 <div className="min-h-0 flex-1">
                     {tab === "tables" ? (
-                        <TablesTab schema={schema}  positions={positions} onMove={handleMove} />
+                        <TablesTab schema={schema} positions={positions} onMove={handleMove} />
                     ) : tab === "erd" ? (
-                        <ErdTab schema={schema}  positions={positions} onMove={handleMove} />
+                        <ErdTab schema={schema} positions={positions} onMove={handleMove} />
                     ) : tab === "chen" ? (
                         <ChenTab schema={schema} positions={positions} onMove={handleMove} />
                     ) : (
@@ -1547,11 +1946,11 @@ export default function SqlResultsPane(props: {
                             </div>
                         </div>
                     ) : tab === "tables" ? (
-                        <TablesTab schema={schema}  positions={positions} onMove={handleMove} />
+                        <TablesTab schema={schema} positions={positions} onMove={handleMove} />
                     ) : tab === "erd" ? (
-                        <ErdTab schema={schema}  positions={positions} onMove={handleMove} />
+                        <ErdTab schema={schema} positions={positions} onMove={handleMove} />
                     ) : (
-                        <ChenTab schema={schema}  positions={positions} onMove={handleMove}/>
+                        <ChenTab schema={schema} positions={positions} onMove={handleMove} />
                     )}
                 </div>
             </div>
@@ -1579,11 +1978,11 @@ export default function SqlResultsPane(props: {
                 {tab === "results" ? (
                     <ResultsTab result={result} />
                 ) : tab === "tables" ? (
-                    <TablesTab schema={schema}  positions={positions} onMove={handleMove}/>
+                    <TablesTab schema={schema} positions={positions} onMove={handleMove} />
                 ) : tab === "erd" ? (
                     <ErdTab schema={schema} positions={positions} onMove={handleMove} />
                 ) : (
-                    <ChenTab schema={schema}  positions={positions} onMove={handleMove}/>
+                    <ChenTab schema={schema} positions={positions} onMove={handleMove} />
                 )}
             </div>
         </div>

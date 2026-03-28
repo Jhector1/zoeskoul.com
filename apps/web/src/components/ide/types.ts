@@ -70,12 +70,7 @@ import type {
 
 // export type ToastKind = "info" | "success" | "error";
 
-export type ToastState =
-    | {
-    kind: ToastKind;
-    text: string;
-}
-    | null;
+export type ToastState = Toast;
 
 export type FullIDEProps = {
     title?: string;
@@ -100,6 +95,8 @@ export type FullIDEProps = {
     projectDescription?: string | null;
     projectScope?: ProjectScopeInput;
     draftStorageMode?: "off" | "local";
+    onReadyChange?: (ready: boolean) => void;
+
 };
 
 export type ProjectsHookResult = {

@@ -72,7 +72,7 @@ export type CommonProps = {
     language?: CodeLanguage;
     code?: string;
     stdin?: string;
-
+    isAuthenticated?: boolean;
 
     title?: string;
     height?: number | "auto";

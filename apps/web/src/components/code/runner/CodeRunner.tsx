@@ -62,6 +62,7 @@ function CodeRunnerContent(props: CodeRunnerProps) {
         onRun,
         editorModelKey,
         onBeforeRun,
+        isAuthenticated,
     } = props as any;
 
     const controlled = isControlled(props);
@@ -248,6 +249,7 @@ function CodeRunnerContent(props: CodeRunnerProps) {
         disabled,
         allowRun,
         resetTerminalOnRun,
+        isAuthenticated,
         onRun: onRun ?? defaultOnRun,
     });
 

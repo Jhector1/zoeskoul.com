@@ -39,483 +39,740 @@ docker logs -f zoeskoul-runner
 
 
 
-
-
 "use client";
 
-import React, {
-    useCallback,
-    useEffect,
-    useLayoutEffect,
-    useMemo,
-    useRef,
-    useState,
-} from "react";
-import "xterm/css/xterm.css";
-import type { RunResult } from "@/lib/code/types";
-import type { TerminalChunk } from "@/components/code/runner/hooks/controller/useCodeRunnerController";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import type { FSNode, InlineEdit, NodeId } from "../types";
+import { cn } from "../utils";
+import {
+    childrenOf,
+    folderHasMatchFactory,
+    nodeMatchesFilterFactory,
+    pathOf,
+    subtreeIds,
+} from "./ExplorerTreeHelpers";
+import NodeMenu, { type MenuAction } from "./NodeMenu";
+import {
+    IconChevronDown,
+    IconChevronRight,
+    IconFile,
+    IconFolder,
+    IconPlay,
+    IconPlus,
+    IconPencil,
+    IconTrash,
+} from "./icons";
 
-type XTermModule = typeof import("xterm");
-type XTerm = import("xterm").Terminal;
+function setInlineValuePreserveCaret(
+    setInlineEdit: React.Dispatch<React.SetStateAction<InlineEdit>>,
+    el: HTMLInputElement,
+    next: string,
+) {
+    const start = el.selectionStart ?? next.length;
+    const end = el.selectionEnd ?? next.length;
 
-function fmtMeta(r: RunResult) {
-    const time = r.time ? ` • ${r.time}s` : "";
-    const mem = r.memory ? ` • ${Math.round((Number(r.memory) || 0) / 1024)}MB` : "";
-    return `${r.status}${time}${mem}`;
-}
+    setInlineEdit((s) => (s ? { ...s, value: next } : s));
 
-function statusLabel(busy: boolean, inputEnabled: boolean) {
-    if (inputEnabled) return "Interactive";
-    if (busy) return "Running";
-    return "Idle";
-}
-
-function getTheme(isDark: boolean) {
-    return isDark
-        ? {
-            background: "rgba(0,0,0,0)",
-            foreground: "#f5f5f5",
-            cursor: "#34d399",
-            cursorAccent: "#0a0a0a",
-            selectionBackground: "rgba(255,255,255,0.18)",
-        }
-        : {
-            background: "rgba(0,0,0,0)",
-            foreground: "#171717",
-            cursor: "#059669",
-            cursorAccent: "#ffffff",
-            selectionBackground: "rgba(0,0,0,0.12)",
-        };
-}
-
-function isHostReady(el: HTMLDivElement | null) {
-    if (!el) return false;
-    if (!el.isConnected) return false;
-
-    const rect = el.getBoundingClientRect();
-    if (rect.width < 80 || rect.height < 120) return false;
-
-    const style = window.getComputedStyle(el);
-    if (style.display === "none" || style.visibility === "hidden") return false;
-
-    return true;
-}
-
-function measureCell(probe: HTMLSpanElement | null) {
-    if (!probe) return { width: 9, height: 18 };
-
-    const rect = probe.getBoundingClientRect();
-    const width = rect.width / 10;
-    const height = rect.height;
-
-    return {
-        width: Number.isFinite(width) && width > 0 ? width : 9,
-        height: Number.isFinite(height) && height > 0 ? height : 18,
-    };
-}
-
-function writeChunk(term: XTerm, chunk: TerminalChunk) {
-    if (chunk.kind === "pty") {
-        term.write(chunk.data);
-        return;
-    }
-
-    if (chunk.kind === "err") {
-        term.write(`\x1b[31m${chunk.data}\x1b[0m`);
-        return;
-    }
-
-    term.write(`\x1b[90m${chunk.data}\x1b[0m`);
-}
-
-export default function XtermTerminal(props: {
-    terminalFeed: TerminalChunk[];
-    inputEnabled: boolean;
-    busy: boolean;
-    disabled: boolean;
-    lastResult: RunResult | null;
-    onSendData: (data: string) => void;
-    onResize: (cols: number, rows: number) => void;
-}) {
-    const {
-        terminalFeed,
-        inputEnabled,
-        busy,
-        disabled,
-        lastResult,
-        onSendData,
-        onResize,
-    } = props;
-
-    const hostRef = useRef<HTMLDivElement | null>(null);
-    const probeRef = useRef<HTMLSpanElement | null>(null);
-
-    const termRef = useRef<XTerm | null>(null);
-    const openedRef = useRef(false);
-    const renderedCountRef = useRef(0);
-    const lastSizeRef = useRef<{ cols: number; rows: number } | null>(null);
-
-    const resizeObserverRef = useRef<ResizeObserver | null>(null);
-    const resizeTimerRef = useRef<number | null>(null);
-    const openTimerRef = useRef<number | null>(null);
-    const raf1Ref = useRef<number | null>(null);
-    const raf2Ref = useRef<number | null>(null);
-    const inputDisposableRef = useRef<{ dispose: () => void } | null>(null);
-
-    const feedRef = useRef<TerminalChunk[]>(terminalFeed);
-    const onSendDataRef = useRef(onSendData);
-    const onResizeRef = useRef(onResize);
-    const inputReadyRef = useRef(inputEnabled && !disabled);
-
-    const [termCreated, setTermCreated] = useState(false);
-
-    feedRef.current = terminalFeed;
-
-    useEffect(() => {
-        onSendDataRef.current = onSendData;
-    }, [onSendData]);
-
-    useEffect(() => {
-        onResizeRef.current = onResize;
-    }, [onResize]);
-
-    useEffect(() => {
-        inputReadyRef.current = inputEnabled && !disabled;
-    }, [inputEnabled, disabled]);
-
-    const statusText = useMemo(
-        () =>
-            `${statusLabel(busy, inputEnabled)}${
-                lastResult && !inputEnabled ? ` • ${fmtMeta(lastResult)}` : ""
-            }`,
-        [busy, inputEnabled, lastResult],
-    );
-
-    const focusTerminal = useCallback(() => {
-        if (!inputReadyRef.current) return;
-        const term = termRef.current;
-        if (!term || !openedRef.current) return;
-
-        requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+        if (document.activeElement === el) {
             try {
-                term.focus();
+                el.setSelectionRange(start, end);
             } catch {}
-        });
-    }, []);
-
-    useEffect(() => {
-        let cancelled = false;
-        let created: XTerm | null = null;
-
-        async function createTerminal() {
-            const mod: XTermModule = await import("xterm");
-            if (cancelled) return;
-
-            const { Terminal } = mod;
-
-            created = new Terminal({
-                cols: 80,
-                rows: 24,
-                cursorBlink: false,
-                disableStdin: true,
-                allowTransparency: true,
-                convertEol: false,
-                scrollback: 5000,
-                fontFamily:
-                    'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
-                fontSize: 12,
-                lineHeight: 1.35,
-                theme: getTheme(document.documentElement.classList.contains("dark")),
-            });
-
-            termRef.current = created;
-            setTermCreated(true);
         }
+    });
+}
 
-        createTerminal();
-
-        return () => {
-            cancelled = true;
-            setTermCreated(false);
-            openedRef.current = false;
-            renderedCountRef.current = 0;
-            lastSizeRef.current = null;
-
-            inputDisposableRef.current?.dispose();
-            inputDisposableRef.current = null;
-
-            resizeObserverRef.current?.disconnect();
-            resizeObserverRef.current = null;
-
-            if (resizeTimerRef.current != null) {
-                window.clearTimeout(resizeTimerRef.current);
-                resizeTimerRef.current = null;
-            }
-
-            if (openTimerRef.current != null) {
-                window.clearTimeout(openTimerRef.current);
-                openTimerRef.current = null;
-            }
-
-            if (raf1Ref.current != null) {
-                cancelAnimationFrame(raf1Ref.current);
-                raf1Ref.current = null;
-            }
-
-            if (raf2Ref.current != null) {
-                cancelAnimationFrame(raf2Ref.current);
-                raf2Ref.current = null;
-            }
-
-            try {
-                created?.dispose();
-            } catch {}
-
-            termRef.current = null;
-        };
-    }, []);
-
-    useLayoutEffect(() => {
-        if (!termCreated) return;
-        if (openedRef.current) return;
-
-        let cancelled = false;
-        const term = termRef.current;
-        if (!term) return;
-
-        const doResize = () => {
-            const host = hostRef.current;
-            const probe = probeRef.current;
-            const current = termRef.current;
-
-            if (!host || !current || !openedRef.current) return;
-            if (!isHostReady(host)) return;
-            if (!current.element || !current.textarea) return;
-
-            const rect = host.getBoundingClientRect();
-            const cell = measureCell(probe);
-
-            const cols = Math.max(20, Math.floor((rect.width - 16) / cell.width));
-            const rows = Math.max(8, Math.floor((rect.height - 8) / cell.height));
-
-            const prev = lastSizeRef.current;
-            if (prev && prev.cols === cols && prev.rows === rows) return;
-
-            lastSizeRef.current = { cols, rows };
-
-            try {
-                current.resize(cols, rows);
-                onResizeRef.current(cols, rows);
-            } catch {}
-        };
-
-        const scheduleResize = () => {
-            if (resizeTimerRef.current != null) {
-                window.clearTimeout(resizeTimerRef.current);
-            }
-
-            resizeTimerRef.current = window.setTimeout(() => {
-                resizeTimerRef.current = null;
-                doResize();
-            }, 60);
-        };
-
-        const flushBacklog = () => {
-            const current = termRef.current;
-            if (!current || !openedRef.current) return;
-
-            const feed = feedRef.current;
-            if (feed.length === 0) {
-                renderedCountRef.current = 0;
-                return;
-            }
-
-            for (let i = renderedCountRef.current; i < feed.length; i++) {
-                writeChunk(current, feed[i]);
-            }
-
-            renderedCountRef.current = feed.length;
-        };
-
-        const openWhenReady = () => {
-            if (cancelled || openedRef.current) return;
-
-            const host = hostRef.current;
-            if (!isHostReady(host)) {
-                openTimerRef.current = window.setTimeout(openWhenReady, 80);
-                return;
-            }
-
-            raf1Ref.current = requestAnimationFrame(() => {
-                raf2Ref.current = requestAnimationFrame(() => {
-                    if (cancelled || openedRef.current) return;
-                    const el = hostRef.current;
-                    if (!isHostReady(el)) {
-                        openTimerRef.current = window.setTimeout(openWhenReady, 80);
-                        return;
-                    }
-
-                    try {
-                        term.open(el!);
-                    } catch (err) {
-                        console.error("xterm open failed", err);
-                        return;
-                    }
-
-                    openedRef.current = true;
-
-                    inputDisposableRef.current = term.onData((data) => {
-                        if (!inputReadyRef.current) return;
-                        onSendDataRef.current(data);
-                    });
-
-                    resizeObserverRef.current = new ResizeObserver(() => {
-                        scheduleResize();
-                    });
-
-                    resizeObserverRef.current.observe(el!);
-
-                    window.setTimeout(() => {
-                        scheduleResize();
-                        flushBacklog();
-
-                        if (inputReadyRef.current) {
-                            focusTerminal();
-                        }
-                    }, 0);
-                });
-            });
-        };
-
-        openWhenReady();
-
-        return () => {
-            cancelled = true;
-
-            inputDisposableRef.current?.dispose();
-            inputDisposableRef.current = null;
-
-            resizeObserverRef.current?.disconnect();
-            resizeObserverRef.current = null;
-
-            if (resizeTimerRef.current != null) {
-                window.clearTimeout(resizeTimerRef.current);
-                resizeTimerRef.current = null;
-            }
-
-            if (openTimerRef.current != null) {
-                window.clearTimeout(openTimerRef.current);
-                openTimerRef.current = null;
-            }
-
-            if (raf1Ref.current != null) {
-                cancelAnimationFrame(raf1Ref.current);
-                raf1Ref.current = null;
-            }
-
-            if (raf2Ref.current != null) {
-                cancelAnimationFrame(raf2Ref.current);
-                raf2Ref.current = null;
-            }
-
-            openedRef.current = false;
-            lastSizeRef.current = null;
-        };
-    }, [termCreated, focusTerminal]);
-
-    useEffect(() => {
-        const term = termRef.current;
-        const ready = inputEnabled && !disabled;
-        inputReadyRef.current = ready;
-
-        if (!term || !openedRef.current) return;
-
-        term.options.cursorBlink = ready;
-        term.options.disableStdin = !ready;
-
-        if (ready) {
-            focusTerminal();
-        }
-    }, [inputEnabled, disabled, focusTerminal]);
-
-    useEffect(() => {
-        const term = termRef.current;
-        if (!term || !openedRef.current) return;
-
-        if (terminalFeed.length === 0) {
-            if (renderedCountRef.current > 0) {
-                try {
-                    term.clear();
-                } catch {}
-            }
-            renderedCountRef.current = 0;
-            return;
-        }
-
-        if (terminalFeed.length <= renderedCountRef.current) return;
-
-        for (let i = renderedCountRef.current; i < terminalFeed.length; i++) {
-            writeChunk(term, terminalFeed[i]);
-        }
-
-        renderedCountRef.current = terminalFeed.length;
-    }, [terminalFeed]);
-
+function IndentGuides({ depth }: { depth: number }) {
+    if (depth <= 0) return null;
     return (
-        <div
-            className={[
-                "h-full rounded-2xl border-t p-2 sm:p-3 flex flex-col",
-                "bg-white/80 dark:bg-black/40",
-                "border-neutral-200 dark:border-white/10",
-            ].join(" ")}
-        >
-            <div className="flex items-center justify-between gap-2">
-                <div className="text-[10px] sm:text-[11px] font-extrabold text-neutral-600 dark:text-white/60">
-                    Terminal
+        <div className="flex">
+            {Array.from({ length: depth }).map((_, i) => (
+                <div key={i} className="relative h-8 w-[14px]">
+                    <div className="absolute inset-y-0 left-1/2 w-px -translate-x-1/2 bg-neutral-200 dark:bg-white/10" />
                 </div>
-
-                <div className="text-[10px] sm:text-[11px] font-extrabold text-neutral-500 dark:text-white/50">
-                    {statusText}
-                </div>
-            </div>
-
-            <div
-                className={[
-                    "mt-2 flex-1 min-h-[260px] overflow-hidden border-t py-2",
-                    "bg-white/60 dark:bg-black/30",
-                    "border-neutral-200 dark:border-white/10",
-                ].join(" ")}
-            >
-                <div
-                    ref={hostRef}
-                    className="h-full w-full min-h-[240px] px-2"
-                    aria-label="Interactive terminal"
-                    onMouseDown={(e) => {
-                        e.preventDefault();
-                        focusTerminal();
-                    }}
-                />
-            </div>
-
-            <span
-                ref={probeRef}
-                aria-hidden="true"
-                className="pointer-events-none absolute -left-[9999px] -top-[9999px] whitespace-pre font-mono text-[12px] leading-[1.35]"
-            >
-                MMMMMMMMMM
-            </span>
+            ))}
         </div>
     );
 }
 
+function InlineNameRow(props: {
+    depth: number;
+    kind: "file" | "folder";
+    initialFocus?: boolean;
+    value: string;
+    setInlineEdit: React.Dispatch<React.SetStateAction<InlineEdit>>;
+    commitInlineEdit: () => void;
+    cancelInlineEdit: () => void;
+}) {
+    const {
+        depth,
+        kind,
+        initialFocus,
+        value,
+        setInlineEdit,
+        commitInlineEdit,
+        cancelInlineEdit,
+    } = props;
 
+    const inputRef = useRef<HTMLInputElement | null>(null);
 
+    useEffect(() => {
+        if (!initialFocus) return;
+        setTimeout(() => inputRef.current?.focus(), 0);
+    }, [initialFocus]);
 
+    return (
+        <div className="rounded-lg border border-neutral-200 bg-white px-2 py-2 dark:border-white/10 dark:bg-white/[0.06]">
+            <div className="flex min-h-[44px] items-center">
+                <IndentGuides depth={depth} />
+                <div className="grid h-6 w-6 place-items-center opacity-60" />
+                <div className="grid h-6 w-6 place-items-center text-neutral-700 dark:text-white/80">
+                    {kind === "folder" ? (
+                        <IconFolder className="h-4 w-4" />
+                    ) : (
+                        <IconFile className="h-4 w-4" />
+                    )}
+                </div>
 
+                <input
+                    ref={inputRef}
+                    value={value}
+                    onPointerDown={(e) => e.stopPropagation()}
+                    onMouseDown={(e) => e.stopPropagation()}
+                    onClick={(e) => e.stopPropagation()}
+                    onChange={(e) =>
+                        setInlineValuePreserveCaret(
+                            setInlineEdit,
+                            e.currentTarget,
+                            e.target.value,
+                        )
+                    }
+                    onKeyDown={(e) => {
+                        if (e.key === "Enter") commitInlineEdit();
+                        if (e.key === "Escape") cancelInlineEdit();
+                    }}
+                    className="h-9 w-full rounded-md border border-neutral-200 bg-white px-3 text-sm font-semibold text-neutral-900 outline-none dark:border-white/10 dark:bg-black/30 dark:text-white/90"
+                />
+            </div>
 
+            <div className="mt-2 flex flex-col gap-2 sm:ml-[28px] sm:flex-row sm:items-center">
+                <button
+                    type="button"
+                    onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        commitInlineEdit();
+                    }}
+                    className="ui-quiz-action ui-quiz-action--primary"
+                >
+                    Save
+                </button>
+                <button
+                    type="button"
+                    onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        cancelInlineEdit();
+                    }}
+                    className="ui-quiz-action ui-quiz-action--ghost"
+                >
+                    Cancel
+                </button>
+            </div>
+        </div>
+    );
+}
 
+function canMoveInto(args: {
+    nodes: FSNode[];
+    sourceId: NodeId;
+    targetParentId: NodeId | null;
+}) {
+    const { nodes, sourceId, targetParentId } = args;
 
+    if (sourceId === targetParentId) return false;
+    if (targetParentId == null) return true;
 
+    const source = nodes.find((n) => n.id === sourceId);
+    if (!source) return false;
 
+    if (source.kind === "folder") {
+        const descendants = subtreeIds(nodes, sourceId);
+        if (descendants.has(targetParentId)) return false;
+    }
 
+    return true;
+}
 
+type TreeProps = {
+    parentId: NodeId | null;
+    depth: number;
+
+    nodes: FSNode[];
+    expanded: Set<NodeId>;
+    activeFileId: NodeId;
+    entryFileId: NodeId;
+    isSql?: boolean;
+
+    filterLower: string;
+    nodeMatchesFilter: (id: NodeId) => boolean;
+    folderHasMatch: (id: NodeId) => boolean;
+
+    inlineEdit: InlineEdit;
+    setInlineEdit: React.Dispatch<React.SetStateAction<InlineEdit>>;
+
+    openFile: (id: NodeId) => void;
+    toggleFolder: (id: NodeId) => void;
+
+    startNewFile: (parentId: NodeId | null) => void;
+    startNewFolder: (parentId: NodeId | null) => void;
+    startRename: (id: NodeId) => void;
+
+    setEntry: (id: NodeId) => void;
+    requestDelete: (id: NodeId) => void;
+    moveNode: (id: NodeId, parentId: NodeId | null) => void;
+
+    commitInlineEdit: () => void;
+    cancelInlineEdit: () => void;
+
+    openContextMenu: (e: React.MouseEvent, actions: MenuAction[]) => void;
+
+    dragState: {
+        draggingId: NodeId | null;
+        dropParentId: NodeId | null;
+        setDraggingId: React.Dispatch<React.SetStateAction<NodeId | null>>;
+        setDropParentId: React.Dispatch<React.SetStateAction<NodeId | null>>;
+    };
+};
+
+function Tree(props: TreeProps) {
+    const {
+        parentId,
+        depth,
+        nodes,
+        expanded,
+        activeFileId,
+        entryFileId,
+        isSql = false,
+        filterLower,
+        nodeMatchesFilter,
+        folderHasMatch,
+        inlineEdit,
+        setInlineEdit,
+        openFile,
+        toggleFolder,
+        startNewFile,
+        startNewFolder,
+        startRename,
+        setEntry,
+        requestDelete,
+        moveNode,
+        commitInlineEdit,
+        cancelInlineEdit,
+        openContextMenu,
+        dragState,
+    } = props;
+
+    const { draggingId, dropParentId, setDraggingId, setDropParentId } = dragState;
+
+    const kids = childrenOf(nodes, parentId).filter((n) => {
+        if (!filterLower) return true;
+        if (n.kind === "file") return nodeMatchesFilter(n.id);
+        return nodeMatchesFilter(n.id) || folderHasMatch(n.id);
+    });
+
+    const showInlineNewHere =
+        inlineEdit &&
+        (inlineEdit.mode === "new-file" || inlineEdit.mode === "new-folder") &&
+        inlineEdit.parentId === parentId;
+
+    return (
+        <div className="space-y-[2px]">
+            {showInlineNewHere ? (
+                <InlineNameRow
+                    depth={depth}
+                    kind={inlineEdit.mode === "new-folder" ? "folder" : "file"}
+                    initialFocus
+                    value={inlineEdit?.value ?? ""}
+                    setInlineEdit={setInlineEdit as React.Dispatch<React.SetStateAction<InlineEdit>>}
+                    commitInlineEdit={commitInlineEdit}
+                    cancelInlineEdit={cancelInlineEdit}
+                />
+            ) : null}
+
+            {kids.map((n) => {
+                const isFolder = n.kind === "folder";
+                const isOpen = isFolder && expanded.has(n.id);
+                const isActive = n.kind === "file" && n.id === activeFileId;
+                const isEntry = !isSql && n.kind === "file" && n.id === entryFileId;
+
+                const hasChildren = isFolder && childrenOf(nodes, n.id).length > 0;
+                const isRenaming = inlineEdit?.mode === "rename" && inlineEdit?.targetId === n.id;
+
+                const disableDelete =
+                    !isSql &&
+                    ((n.kind === "file" && n.id === entryFileId) ||
+                        (n.kind === "folder" && subtreeIds(nodes, n.id).has(entryFileId)));
+
+                const fileActions: MenuAction[] = isSql
+                    ? [
+                        {
+                            label: "Rename",
+                            onClick: () => startRename(n.id),
+                            icon: <IconPencil className="h-4 w-4" />,
+                        },
+                        {
+                            label: "Delete",
+                            onClick: () => requestDelete(n.id),
+                            icon: <IconTrash className="h-4 w-4" />,
+                            danger: true,
+                            disabled: disableDelete,
+                        },
+                    ]
+                    : [
+                        {
+                            label: isEntry ? "Entry file" : "Set as Entry",
+                            onClick: () => setEntry(n.id),
+                            icon: <IconPlay className="h-4 w-4" />,
+                            disabled: isEntry,
+                        },
+                        {
+                            label: "Rename",
+                            onClick: () => startRename(n.id),
+                            icon: <IconPencil className="h-4 w-4" />,
+                        },
+                        {
+                            label: "Delete",
+                            onClick: () => requestDelete(n.id),
+                            icon: <IconTrash className="h-4 w-4" />,
+                            danger: true,
+                            disabled: disableDelete,
+                        },
+                    ];
+
+                const folderActions: MenuAction[] = [
+                    {
+                        label: "New file",
+                        onClick: () => startNewFile(n.id),
+                        icon: <IconPlus className="h-4 w-4" />,
+                    },
+                    {
+                        label: "New folder",
+                        onClick: () => startNewFolder(n.id),
+                        icon: <IconFolder className="h-4 w-4" />,
+                    },
+                    {
+                        label: "Rename",
+                        onClick: () => startRename(n.id),
+                        icon: <IconPencil className="h-4 w-4" />,
+                    },
+                    {
+                        label: "Delete",
+                        onClick: () => requestDelete(n.id),
+                        icon: <IconTrash className="h-4 w-4" />,
+                        danger: true,
+                        disabled: disableDelete,
+                    },
+                ];
+
+                const actions = isFolder ? folderActions : fileActions;
+
+                if (isRenaming) {
+                    return (
+                        <div key={n.id}>
+                            <InlineNameRow
+                                depth={depth}
+                                kind={isFolder ? "folder" : "file"}
+                                initialFocus
+                                value={inlineEdit?.value ?? ""}
+                                setInlineEdit={setInlineEdit as React.Dispatch<React.SetStateAction<InlineEdit>>}
+                                commitInlineEdit={commitInlineEdit}
+                                cancelInlineEdit={cancelInlineEdit}
+                            />
+
+                            {isFolder && isOpen ? (
+                                <div className="mt-[2px]">
+                                    <Tree
+                                        parentId={n.id}
+                                        depth={depth + 1}
+                                        nodes={nodes}
+                                        expanded={expanded}
+                                        activeFileId={activeFileId}
+                                        entryFileId={entryFileId}
+                                        isSql={isSql}
+                                        filterLower={filterLower}
+                                        nodeMatchesFilter={nodeMatchesFilter}
+                                        folderHasMatch={folderHasMatch}
+                                        inlineEdit={inlineEdit}
+                                        setInlineEdit={setInlineEdit}
+                                        openFile={openFile}
+                                        toggleFolder={toggleFolder}
+                                        startNewFile={startNewFile}
+                                        startNewFolder={startNewFolder}
+                                        startRename={startRename}
+                                        setEntry={setEntry}
+                                        requestDelete={requestDelete}
+                                        moveNode={moveNode}
+                                        commitInlineEdit={commitInlineEdit}
+                                        cancelInlineEdit={cancelInlineEdit}
+                                        openContextMenu={openContextMenu}
+                                        dragState={dragState}
+                                    />
+                                </div>
+                            ) : null}
+                        </div>
+                    );
+                }
+
+                const canDropHere =
+                    draggingId != null &&
+                    isFolder &&
+                    canMoveInto({
+                        nodes,
+                        sourceId: draggingId,
+                        targetParentId: n.id,
+                    });
+
+                const isDropTarget = canDropHere && dropParentId === n.id;
+
+                return (
+                    <div key={n.id}>
+                        <div
+                            data-tree-node-row="true"
+                            draggable
+                            onDragStart={(e) => {
+                                setDraggingId(n.id);
+                                e.dataTransfer.effectAllowed = "move";
+                                e.dataTransfer.setData("text/plain", String(n.id));
+                            }}
+                            onDragEnd={() => {
+                                setDraggingId(null);
+                                setDropParentId(null);
+                            }}
+                            onContextMenu={(e) => openContextMenu(e, actions)}
+                            onDragOver={(e) => {
+                                if (draggingId == null) return;
+
+                                e.stopPropagation();
+
+                                if (!canDropHere) return;
+
+                                e.preventDefault();
+                                e.dataTransfer.dropEffect = "move";
+                                setDropParentId(n.id);
+                            }}
+                            onDragLeave={(e) => {
+                                e.stopPropagation();
+                                if (dropParentId === n.id) {
+                                    setDropParentId(null);
+                                }
+                            }}
+                            onDrop={(e) => {
+                                e.stopPropagation();
+
+                                if (!canDropHere || draggingId == null) return;
+
+                                e.preventDefault();
+                                moveNode(draggingId, n.id);
+                                setDraggingId(null);
+                                setDropParentId(null);
+                            }}
+                            className={cn(
+                                "group flex min-h-[44px] items-center rounded-xl border border-transparent px-2 sm:min-h-[36px]",
+                                "hover:bg-neutral-50 hover:border-neutral-200 dark:hover:bg-white/[0.06] dark:hover:border-white/10",
+                                isActive && "bg-neutral-50 border-neutral-200 dark:bg-white/[0.08] dark:border-white/10",
+                                draggingId === n.id && "opacity-50",
+                                isDropTarget &&
+                                "border-emerald-400 bg-emerald-50/80 dark:border-emerald-300/50 dark:bg-emerald-400/10",
+                            )}
+                            title={pathOf(nodes, n.id)}
+                        >
+                            <IndentGuides depth={depth} />
+
+                            <button
+                                type="button"
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    e.stopPropagation();
+                                    if (isFolder) toggleFolder(n.id);
+                                    else openFile(n.id);
+                                }}
+                                className={cn(
+                                    "grid h-7 w-7 place-items-center rounded-lg",
+                                    "text-neutral-500 hover:text-neutral-900 hover:bg-neutral-100 dark:text-white/55 dark:hover:text-white/90 dark:hover:bg-white/[0.06]",
+                                    !isFolder && "pointer-events-none opacity-0",
+                                    isFolder && !hasChildren && "opacity-40",
+                                )}
+                                title={isFolder ? (isOpen ? "Collapse" : "Expand") : ""}
+                            >
+                                {isFolder ? (
+                                    isOpen ? (
+                                        <IconChevronDown className="h-4 w-4" />
+                                    ) : (
+                                        <IconChevronRight className="h-4 w-4" />
+                                    )
+                                ) : null}
+                            </button>
+
+                            <div className="grid h-7 w-7 place-items-center text-neutral-700 dark:text-white/80">
+                                {isFolder ? (
+                                    <IconFolder className="h-4 w-4" />
+                                ) : (
+                                    <IconFile className="h-4 w-4" />
+                                )}
+                            </div>
+
+                            <button
+                                type="button"
+                                className="min-w-0 flex-1 text-left"
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    e.stopPropagation();
+                                    if (isFolder) toggleFolder(n.id);
+                                    else openFile(n.id);
+                                }}
+                            >
+                                <div className="truncate text-[13px] font-semibold text-neutral-900 dark:text-white/85">
+                                    {n.name}
+                                </div>
+                            </button>
+
+                            {isEntry ? (
+                                <div className="mr-1 ui-pill ui-pill--good" title="Runs when you click Run">
+                                    <IconPlay className="h-3 w-3" />
+                                    ENTRY
+                                </div>
+                            ) : null}
+
+                            <div className="ml-1 flex items-center">
+                                <NodeMenu actions={actions} />
+                            </div>
+                        </div>
+
+                        {isFolder && isOpen ? (
+                            <div className="mt-[2px]">
+                                <Tree
+                                    parentId={n.id}
+                                    depth={depth + 1}
+                                    nodes={nodes}
+                                    expanded={expanded}
+                                    activeFileId={activeFileId}
+                                    entryFileId={entryFileId}
+                                    isSql={isSql}
+                                    filterLower={filterLower}
+                                    nodeMatchesFilter={nodeMatchesFilter}
+                                    folderHasMatch={folderHasMatch}
+                                    inlineEdit={inlineEdit}
+                                    setInlineEdit={setInlineEdit}
+                                    openFile={openFile}
+                                    toggleFolder={toggleFolder}
+                                    startNewFile={startNewFile}
+                                    startNewFolder={startNewFolder}
+                                    startRename={startRename}
+                                    setEntry={setEntry}
+                                    requestDelete={requestDelete}
+                                    moveNode={moveNode}
+                                    commitInlineEdit={commitInlineEdit}
+                                    cancelInlineEdit={cancelInlineEdit}
+                                    openContextMenu={openContextMenu}
+                                    dragState={dragState}
+                                />
+                            </div>
+                        ) : null}
+                    </div>
+                );
+            })}
+        </div>
+    );
+}
+
+export default function ExplorerTree(props: {
+    nodes: FSNode[];
+    expanded: Set<NodeId>;
+    activeFileId: NodeId;
+    entryFileId: NodeId;
+    isSql?: boolean;
+
+    filter: string;
+    inlineEdit: InlineEdit;
+    setInlineEdit: React.Dispatch<React.SetStateAction<InlineEdit>>;
+
+    openFile: (id: NodeId) => void;
+    toggleFolder: (id: NodeId) => void;
+
+    startNewFile: (parentId: NodeId | null) => void;
+    startNewFolder: (parentId: NodeId | null) => void;
+    startRename: (id: NodeId) => void;
+
+    setEntry: (id: NodeId) => void;
+    requestDelete: (id: NodeId) => void;
+    moveNode: (id: NodeId, parentId: NodeId | null) => void;
+
+    commitInlineEdit: () => void;
+    cancelInlineEdit: () => void;
+}) {
+    const {
+        nodes,
+        expanded,
+        activeFileId,
+        entryFileId,
+        isSql = false,
+        filter,
+        inlineEdit,
+        setInlineEdit,
+        openFile,
+        toggleFolder,
+        startNewFile,
+        startNewFolder,
+        startRename,
+        setEntry,
+        requestDelete,
+        moveNode,
+        commitInlineEdit,
+        cancelInlineEdit,
+    } = props;
+
+    const filterLower = filter.trim().toLowerCase();
+
+    const nodeMatchesFilter = useMemo(
+        () => nodeMatchesFilterFactory(nodes, filterLower),
+        [nodes, filterLower],
+    );
+
+    const folderHasMatch = useMemo(
+        () => folderHasMatchFactory(nodes, nodeMatchesFilter),
+        [nodes, nodeMatchesFilter],
+    );
+
+    const [contextMenu, setContextMenu] = useState<{
+        open: boolean;
+        x: number;
+        y: number;
+        actions: MenuAction[];
+    }>({
+        open: false,
+        x: 0,
+        y: 0,
+        actions: [],
+    });
+
+    const [draggingId, setDraggingId] = useState<NodeId | null>(null);
+    const [dropParentId, setDropParentId] = useState<NodeId | null>(null);
+
+    const openContextMenu = useCallback(
+        (e: React.MouseEvent, actions: MenuAction[]) => {
+            e.preventDefault();
+            e.stopPropagation();
+            setContextMenu({
+                open: true,
+                x: e.clientX,
+                y: e.clientY,
+                actions,
+            });
+        },
+        [],
+    );
+
+    const rootActions: MenuAction[] = useMemo(
+        () => [
+            {
+                label: "New file",
+                onClick: () => startNewFile(null),
+                icon: <IconPlus className="h-4 w-4" />,
+            },
+            {
+                label: "New folder",
+                onClick: () => startNewFolder(null),
+                icon: <IconFolder className="h-4 w-4" />,
+            },
+        ],
+        [startNewFile, startNewFolder],
+    );
+
+    const canDropToRoot =
+        draggingId != null &&
+        canMoveInto({
+            nodes,
+            sourceId: draggingId,
+            targetParentId: null,
+        });
+
+    return (
+        <>
+            <div
+                onContextMenu={(e) => {
+                    const target = e.target as HTMLElement | null;
+                    if (target?.closest("[data-tree-node-row='true']")) return;
+                    openContextMenu(e, rootActions);
+                }}
+                onDragOver={(e) => {
+                    if (!canDropToRoot) return;
+                    e.preventDefault();
+                    e.dataTransfer.dropEffect = "move";
+                    setDropParentId(null);
+                }}
+                onDrop={(e) => {
+                    if (!canDropToRoot || draggingId == null) return;
+                    e.preventDefault();
+                    moveNode(draggingId, null);
+                    setDraggingId(null);
+                    setDropParentId(null);
+                }}
+                className={cn(
+                    "min-h-full rounded-xl transition",
+                    canDropToRoot &&
+                    dropParentId === null &&
+                    "bg-emerald-50/70 ring-1 ring-emerald-300 dark:bg-emerald-400/10 dark:ring-emerald-300/40",
+                )}
+            >
+                <Tree
+                    parentId={null}
+                    depth={0}
+                    nodes={nodes}
+                    expanded={expanded}
+                    activeFileId={activeFileId}
+                    entryFileId={entryFileId}
+                    isSql={isSql}
+                    filterLower={filterLower}
+                    nodeMatchesFilter={nodeMatchesFilter}
+                    folderHasMatch={folderHasMatch}
+                    inlineEdit={inlineEdit}
+                    setInlineEdit={setInlineEdit}
+                    openFile={openFile}
+                    toggleFolder={toggleFolder}
+                    startNewFile={startNewFile}
+                    startNewFolder={startNewFolder}
+                    startRename={startRename}
+                    setEntry={setEntry}
+                    requestDelete={requestDelete}
+                    moveNode={moveNode}
+                    commitInlineEdit={commitInlineEdit}
+                    cancelInlineEdit={cancelInlineEdit}
+                    openContextMenu={openContextMenu}
+                    dragState={{
+                        draggingId,
+                        dropParentId,
+                        setDraggingId,
+                        setDropParentId,
+                    }}
+                />
+            </div>
+
+            <NodeMenu
+                trigger="none"
+                open={contextMenu.open}
+                onOpenChange={(next) => {
+                    if (!next) {
+                        setContextMenu((s) => ({ ...s, open: false }));
+                    }
+                }}
+                anchorPoint={
+                    contextMenu.open
+                        ? { x: contextMenu.x, y: contextMenu.y }
+                        : null
+                }
+                actions={contextMenu.actions}
+            />
+        </>
+    );
+}

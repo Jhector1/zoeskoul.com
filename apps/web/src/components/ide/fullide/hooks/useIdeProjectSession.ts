@@ -127,11 +127,20 @@ export function useIdeProjectSession({
     dismissConflict: () => void;
     reloadProjectFromCloud: () => Promise<void>;
 } {
+    /**
+     * This ref tracks the project whose remote workspace has actually been loaded
+     * into the editor, not merely a project the user clicked on.
+     */
     const loadedProjectIdRef = useRef<string | null>(null);
 
     const sessionKey = projectSessionStorageKey(projectScope, language);
     const browserInstanceKey = `${sessionKey}:browser-instance`;
 
+    /**
+     * projectId is the ACTIVE project currently represented by the editor workspace.
+     * Do not set this to a newly selected remote project until the workspace has
+     * actually been replaced with that project's cloud contents.
+     */
     const [projectId, setProjectId] = useState<string | null>(initialProjectId);
     const [currentProjectName, setCurrentProjectName] = useState(
         projectTitle ?? title,
@@ -199,6 +208,7 @@ export function useIdeProjectSession({
 
     const dismissConflict = useCallback(() => {
         setConflictInfo(null);
+        setSaveError(null);
     }, []);
 
     const handleProjectApiFailure = useCallback(
@@ -250,14 +260,17 @@ export function useIdeProjectSession({
     useEffect(() => {
         if (typeof window === "undefined") return;
 
-        // Pause persistence for the new language session
         setHydratedSessionKey(null);
 
         const ensuredBrowserId = ensureBrowserInstanceId(browserInstanceKey);
         setClientInstanceId(ensuredBrowserId);
 
         if (initialProjectId) {
-            loadedProjectIdRef.current = initialProjectId;
+            /**
+             * Do not mark this as already loaded. We only know the desired project id
+             * here, not that its workspace has actually been mounted in the editor.
+             */
+            loadedProjectIdRef.current = null;
             setProjectId(initialProjectId);
             setCurrentProjectName(projectTitle ?? title);
             setLastSavedAt(null);
@@ -270,7 +283,7 @@ export function useIdeProjectSession({
         const meta = readProjectSessionMeta(sessionKey);
 
         if (meta) {
-            loadedProjectIdRef.current = meta.projectId ?? null;
+            loadedProjectIdRef.current = null;
             setProjectId(meta.projectId ?? null);
             setCurrentProjectName(meta.currentProjectName || projectTitle || title);
             setLastSavedAt(meta.lastSavedAt ?? null);
@@ -280,7 +293,6 @@ export function useIdeProjectSession({
             resetLanguageScopedProjectState({ keepProjectsOpen: true });
         }
 
-        // Mark this language session hydrated only after the above state is scheduled
         setHydratedSessionKey(sessionKey);
     }, [
         initialProjectId,
@@ -292,7 +304,6 @@ export function useIdeProjectSession({
     ]);
 
     useEffect(() => {
-        // Do not write old project state into a new language session key
         if (hydratedSessionKey !== sessionKey) return;
 
         persistLocalMeta({
@@ -312,8 +323,14 @@ export function useIdeProjectSession({
     ]);
 
     const loadProjectFromCloud = useCallback(
-        async (targetProjectId: string, options?: { forceReplaceLocal?: boolean }) => {
-            if (!access.canSaveCloud) return;
+        async (
+            targetProjectId: string,
+            options?: {
+                forceReplaceLocal?: boolean;
+                preserveCurrentProjectOnConflict?: boolean;
+            },
+        ) => {
+            if (!access.canSaveCloud) return false;
 
             try {
                 setLoadingProject(true);
@@ -326,17 +343,25 @@ export function useIdeProjectSession({
 
                 if (!res.ok) {
                     await handleProjectApiFailure(res);
-                    return;
+                    return false;
                 }
 
                 const data = await res.json();
 
                 if (data?.project?.language && data.project.language !== language) {
-                    clearProjectSessionMeta(sessionKey);
-                    resetLanguageScopedProjectState({
-                        keepProjectsOpen: true,
-                        keepSaveError: true,
-                    });
+                    /**
+                     * Only clear active session metadata if the currently active project
+                     * is the one we are trying to load and its language mismatches.
+                     * Do not destroy the current session while merely preview-opening
+                     * another project.
+                     */
+                    if (projectId === targetProjectId) {
+                        clearProjectSessionMeta(sessionKey);
+                        resetLanguageScopedProjectState({
+                            keepProjectsOpen: true,
+                            keepSaveError: true,
+                        });
+                    }
 
                     setSaveError(
                         `"${data.project.title}" is a ${data.project.language} project. Switch to ${data.project.language} to open it.`,
@@ -347,7 +372,7 @@ export function useIdeProjectSession({
                         text: `This project belongs to ${data.project.language}.`,
                     });
 
-                    return;
+                    return false;
                 }
 
                 const remoteVersion =
@@ -360,6 +385,13 @@ export function useIdeProjectSession({
                     typeof baseVersion === "number" &&
                     remoteVersion > baseVersion;
 
+                /**
+                 * Critical fix:
+                 * If opening another project would conflict with the local dirty draft,
+                 * DO NOT switch the active project session to the remote target yet.
+                 * Keep the current project/editor intact and only show conflict info
+                 * for the requested target.
+                 */
                 if (!options?.forceReplaceLocal && isDirty && remoteIsNewer) {
                     setConflictInfo({
                         projectId: data.project.id,
@@ -369,37 +401,28 @@ export function useIdeProjectSession({
                         title: data.project.title,
                     });
 
-                    loadedProjectIdRef.current = data.project.id;
-                    setProjectId(data.project.id);
-                    setCurrentProjectName(data.project.title);
-                    setLastSavedAt(data.project.updatedAt);
-                    setBaseVersion(remoteVersion);
+                    setPendingProjectId(data.project.id);
 
-                    persistLocalMeta({
-                        projectId: data.project.id,
-                        currentProjectName: data.project.title,
-                        lastSavedAt: data.project.updatedAt,
-                        baseVersion: remoteVersion,
-                    });
-
-                    setSaveError(
-                        "A newer cloud version exists. Your local draft was kept.",
-                    );
+                    const message =
+                        "A newer cloud version exists. Your local draft was kept.";
+                    setSaveError(message);
                     setToast({
                         kind: "error",
                         text: "Cloud version is newer. Local draft kept.",
                     });
-                    return;
+                    return false;
                 }
 
                 replaceWorkspace(data.project.workspace);
                 markLoaded(data.project.workspace);
+
                 loadedProjectIdRef.current = data.project.id;
                 setProjectId(data.project.id);
                 setCurrentProjectName(data.project.title);
                 setLastSavedAt(data.project.updatedAt);
                 setBaseVersion(data.project.currentVersion ?? null);
                 setConflictInfo(null);
+                setPendingProjectId(null);
 
                 persistLocalMeta({
                     projectId: data.project.id,
@@ -407,10 +430,13 @@ export function useIdeProjectSession({
                     lastSavedAt: data.project.updatedAt,
                     baseVersion: data.project.currentVersion ?? null,
                 });
+
+                return true;
             } catch (e: any) {
                 const message = e?.message ?? "Failed to load project.";
                 setSaveError(message);
                 setToast({ kind: "error", text: message });
+                return false;
             } finally {
                 setLoadingProject(false);
             }
@@ -427,21 +453,31 @@ export function useIdeProjectSession({
             language,
             sessionKey,
             resetLanguageScopedProjectState,
+            projectId,
         ],
     );
 
     useEffect(() => {
         if (!projectId) return;
         if (!access.canSaveCloud) return;
+        if (hydratedSessionKey !== sessionKey) return;
         if (loadedProjectIdRef.current === projectId) return;
 
         void loadProjectFromCloud(projectId);
-    }, [projectId, access.canSaveCloud, loadProjectFromCloud]);
+    }, [
+        projectId,
+        access.canSaveCloud,
+        hydratedSessionKey,
+        sessionKey,
+        loadProjectFromCloud,
+    ]);
 
     const reloadProjectFromCloud = useCallback(async () => {
-        if (!projectId) return;
-        await loadProjectFromCloud(projectId, { forceReplaceLocal: true });
-    }, [projectId, loadProjectFromCloud]);
+        const targetProjectId = conflictInfo?.projectId ?? projectId;
+        if (!targetProjectId) return;
+
+        await loadProjectFromCloud(targetProjectId, { forceReplaceLocal: true });
+    }, [conflictInfo?.projectId, projectId, loadProjectFromCloud]);
 
     const persistProject = useCallback(
         async (args?: {
@@ -581,6 +617,7 @@ export function useIdeProjectSession({
         setLastSavedAt(data.project.updatedAt);
         setBaseVersion(nextVersion);
         setConflictInfo(null);
+        setPendingProjectId(null);
 
         persistLocalMeta({
             projectId: data.project.id,
@@ -636,6 +673,7 @@ export function useIdeProjectSession({
             setLastSavedAt(data.project.updatedAt);
             setBaseVersion(nextVersion);
             setConflictInfo(null);
+            setPendingProjectId(null);
 
             persistLocalMeta({
                 projectId: data.project.id,
@@ -758,10 +796,18 @@ export function useIdeProjectSession({
     const requestOpenProject = useCallback(
         (nextProjectId: string) => {
             if (nextProjectId === projectId) {
-                loadedProjectIdRef.current = null;
+                /**
+                 * Reload the current active project from cloud only when explicitly requested.
+                 * Do not break active identity first.
+                 */
+                if (isDirty) {
+                    setPendingProjectId(nextProjectId);
+                    setConfirmSwitchOpen(true);
+                    return;
+                }
+
+                void loadProjectFromCloud(nextProjectId, { forceReplaceLocal: true });
                 setProjectsOpen(false);
-                setProjectId(null);
-                window.setTimeout(() => setProjectId(nextProjectId), 0);
                 return;
             }
 
@@ -771,31 +817,40 @@ export function useIdeProjectSession({
                 return;
             }
 
-            loadedProjectIdRef.current = null;
-            setProjectId(nextProjectId);
+            void loadProjectFromCloud(nextProjectId);
             setProjectsOpen(false);
         },
-        [isDirty, projectId],
+        [isDirty, projectId, loadProjectFromCloud],
     );
 
-    const continueOpenPendingProject = useCallback(() => {
-        if (!pendingProjectId) return;
+    const continueOpenPendingProject = useCallback(
+        async (options?: { forceReplaceLocal?: boolean }) => {
+            if (!pendingProjectId) return;
 
-        loadedProjectIdRef.current = null;
-        setProjectId(pendingProjectId);
-        setPendingProjectId(null);
-        setConfirmSwitchOpen(false);
-        setProjectsOpen(false);
-    }, [pendingProjectId]);
+            const target = pendingProjectId;
+            setPendingProjectId(null);
+            setConfirmSwitchOpen(false);
+            setProjectsOpen(false);
+
+            await loadProjectFromCloud(target, {
+                forceReplaceLocal: options?.forceReplaceLocal ?? false,
+            });
+        },
+        [pendingProjectId, loadProjectFromCloud],
+    );
 
     const handleSaveAndContinue = useCallback(async () => {
         const ok = await saveProject();
         if (!ok) return;
-        continueOpenPendingProject();
+        await continueOpenPendingProject();
     }, [saveProject, continueOpenPendingProject]);
 
     const handleDiscardAndContinue = useCallback(() => {
-        continueOpenPendingProject();
+        /**
+         * Discard means: replace the editor with the target project's cloud version now.
+         * It should not leave the old local draft mounted while switching ids.
+         */
+        void continueOpenPendingProject({ forceReplaceLocal: true });
     }, [continueOpenPendingProject]);
 
     const cancelPendingSwitch = useCallback(() => {

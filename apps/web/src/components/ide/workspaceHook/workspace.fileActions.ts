@@ -38,7 +38,10 @@ function makeDenyMultiFile(access: IdeWorkspaceAccess, setToast: Setters["setToa
     });
   };
 }
-
+export type ImportedWorkspaceFile = {
+  path: string;
+  content: string;
+};
 export function openFile(args: {
   nodes: FSNode[];
   id: NodeId;
@@ -324,6 +327,68 @@ export function requestDelete(args: {
   setPendingDeleteId(id);
 }
 
+export function moveNode(args: {
+  access: IdeWorkspaceAccess;
+  nodes: FSNode[];
+  id: NodeId;
+  parentId: NodeId | null;
+  setNodes: Setters["setNodes"];
+  setExpanded: Setters["setExpanded"];
+  setToast: Setters["setToast"];
+}) {
+  const { access, nodes, id, parentId, setNodes, setExpanded, setToast } = args;
+
+  if (!access.canUseMultiFile) {
+    makeDenyMultiFile(access, setToast)();
+    return;
+  }
+
+  const source = nodes.find((n) => n.id === id);
+  if (!source) return;
+
+  if (source.parentId === parentId) return;
+  if (id === parentId) return;
+
+  if (parentId) {
+    const target = nodes.find((n) => n.id === parentId);
+    if (!target || target.kind !== "folder") return;
+  }
+
+  if (source.kind === "folder" && parentId) {
+    const descendants = subtreeIds(nodes, source.id);
+    if (descendants.has(parentId)) {
+      setToast({
+        kind: "error",
+        text: "A folder can’t be moved into itself or one of its children.",
+      });
+      return;
+    }
+  }
+
+  const safeName = ensureUniqueSiblingName(
+      nodes.filter((n) => n.id !== id),
+      parentId,
+      source.name,
+  );
+
+  setNodes((prev) =>
+      prev.map((n) =>
+          n.id === id
+              ? {
+                ...n,
+                parentId,
+                name: safeName,
+                updatedAt: Date.now(),
+              }
+              : n,
+      ),
+  );
+
+  if (parentId) {
+    setExpanded((prev) => new Set(prev).add(parentId));
+  }
+}
+
 export function performDelete(args: {
   nodes: FSNode[];
   id: NodeId;
@@ -392,5 +457,216 @@ export function performDelete(args: {
 
     setPendingDeleteId(null);
     return nextNodes;
+  });
+}
+
+
+function normalizeImportPath(input: string) {
+  return String(input ?? "")
+      .replace(/\\/g, "/")
+      .split("/")
+      .map((x) => x.trim())
+      .filter((x) => !!x && x !== "." && x !== "..");
+}
+
+function findFolderChild(
+    nodes: FSNode[],
+    parentId: NodeId | null,
+    name: string,
+): FolderNode | undefined {
+  const want = name.toLocaleLowerCase();
+
+  return nodes.find(
+      (n): n is FolderNode =>
+          n.kind === "folder" &&
+          n.parentId === parentId &&
+          n.name.toLocaleLowerCase() === want,
+  );
+}
+
+export function importExternalFiles(args: {
+  access: IdeWorkspaceAccess;
+  nodes: FSNode[];
+  activeFileId: NodeId;
+  files: ImportedWorkspaceFile[];
+  setNodes: Setters["setNodes"];
+  setOpenTabs: Setters["setOpenTabs"];
+  setActiveFileId: Setters["setActiveFileId"];
+  setExpanded: Setters["setExpanded"];
+  setToast: Setters["setToast"];
+}) {
+  const {
+    access,
+    nodes,
+    activeFileId,
+    files,
+    setNodes,
+    setOpenTabs,
+    setActiveFileId,
+    setExpanded,
+    setToast,
+  } = args;
+
+  const cleaned = files
+      .map((f) => ({
+        path: normalizeImportPath(f.path).join("/"),
+        content: String(f.content ?? ""),
+      }))
+      .filter((f) => !!f.path);
+
+  if (!cleaned.length) {
+    setToast({ kind: "error", text: "No files were imported." });
+    return;
+  }
+
+  if (!access.canUseMultiFile) {
+    if (cleaned.length !== 1) {
+      makeDenyMultiFile(
+          access,
+          setToast,
+      )("Log in to import folders or more than one file.");
+      return;
+    }
+
+    const imported = cleaned[0];
+    const parts = normalizeImportPath(imported.path);
+    const fileName = parts[parts.length - 1] ?? "file";
+
+    let chosenId = activeFileId;
+
+    setNodes((prev) => {
+      const target =
+          findFile(prev, activeFileId) ??
+          prev.find((n): n is FileNode => n.kind === "file");
+
+      if (target) {
+        chosenId = target.id;
+        return prev.map((n) =>
+            n.id === target.id && n.kind === "file"
+                ? {
+                  ...n,
+                  name: fileName,
+                  content: imported.content,
+                  updatedAt: Date.now(),
+                }
+                : n,
+        );
+      }
+
+      const newId = uid();
+      chosenId = newId;
+
+      const file: FileNode = {
+        id: newId,
+        kind: "file",
+        name: fileName,
+        parentId: null,
+        content: imported.content,
+        createdAt: Date.now(),
+        updatedAt: Date.now(),
+      };
+
+      return [file];
+    });
+
+    setActiveFileId(chosenId);
+    setOpenTabs([chosenId]);
+    setToast({ kind: "success", text: `Opened ${fileName}.` });
+    return;
+  }
+
+  const importedFileIds: NodeId[] = [];
+  const expandedIds = new Set<NodeId>();
+
+  const sorted = [...cleaned].sort(
+      (a, b) =>
+          normalizeImportPath(a.path).length - normalizeImportPath(b.path).length,
+  );
+
+  setNodes((prev) => {
+    let next = [...prev];
+
+    for (const imported of sorted) {
+      const parts = normalizeImportPath(imported.path);
+      if (!parts.length) continue;
+
+      const fileNameRaw = parts[parts.length - 1];
+      const folderParts = parts.slice(0, -1);
+
+      let parentId: NodeId | null = null;
+
+      for (const rawFolderName of folderParts) {
+        const existing = findFolderChild(next, parentId, rawFolderName);
+        if (existing) {
+          parentId = existing.id;
+          expandedIds.add(existing.id);
+          continue;
+        }
+
+        const safeFolderName = ensureUniqueSiblingName(
+            next,
+            parentId,
+            rawFolderName,
+        );
+
+        const folderId = uid();
+        const folder: FolderNode = {
+          id: folderId,
+          kind: "folder",
+          name: safeFolderName,
+          parentId,
+          createdAt: Date.now(),
+          updatedAt: Date.now(),
+        };
+
+        next = [...next, folder];
+        parentId = folderId;
+        expandedIds.add(folderId);
+      }
+
+      const safeFileName = ensureUniqueSiblingName(next, parentId, fileNameRaw);
+      const fileId = uid();
+
+      const file: FileNode = {
+        id: fileId,
+        kind: "file",
+        name: safeFileName,
+        parentId,
+        content: imported.content,
+        createdAt: Date.now(),
+        updatedAt: Date.now(),
+      };
+
+      next = [...next, file];
+      importedFileIds.push(fileId);
+    }
+
+    return next;
+  });
+
+  if (expandedIds.size) {
+    setExpanded((prev) => {
+      const next = new Set(prev);
+      for (const id of expandedIds) next.add(id);
+      return next;
+    });
+  }
+
+  if (importedFileIds.length) {
+    const firstId = importedFileIds[0];
+    setActiveFileId(firstId);
+    setOpenTabs((prev) => {
+      const next = new Set(prev);
+      for (const id of importedFileIds) next.add(id);
+      return Array.from(next);
+    });
+  }
+
+  setToast({
+    kind: "success",
+    text:
+        importedFileIds.length === 1
+            ? "Imported 1 file."
+            : `Imported ${importedFileIds.length} files.`,
   });
 }

@@ -192,6 +192,7 @@ frame="plain",
                 disabled={disabled || readOnly}
                 allowReset={!readOnly}
                 allowRun={!readOnly}
+                runtime={{ backend: "judge0", terminalView: "plain" }}
                 showHint
                 showEditorThemeToggle={!readOnly}
                 language={language}
@@ -230,6 +231,8 @@ frame="plain",
                             allowReset={false}
                             allowRun={false}
                             showHint={false}
+                            runtime={{ backend: "judge0", terminalView: "plain" }}
+
                             showEditorThemeToggle={false}
                             showLanguagePicker={false}
                             language={reviewCorrect!.language}

@@ -14,8 +14,52 @@ export type MenuAction = {
     disabled?: boolean;
 };
 
-export default function NodeMenu({ actions }: { actions: MenuAction[] }) {
-    const [open, setOpen] = useState(false);
+type NodeMenuProps = {
+    actions: MenuAction[];
+
+    /**
+     * Default mode: render the kebab trigger button and manage open internally.
+     */
+    trigger?: "button" | "none";
+
+    /**
+     * Controlled open state for context-menu usage.
+     */
+    open?: boolean;
+    onOpenChange?: (next: boolean) => void;
+
+    /**
+     * For context-menu usage, anchor the menu to a viewport point.
+     */
+    anchorPoint?: { x: number; y: number } | null;
+};
+
+export default function NodeMenu(props: NodeMenuProps) {
+    const {
+        actions,
+        trigger = "button",
+        open: controlledOpen,
+        onOpenChange,
+        anchorPoint = null,
+    } = props;
+
+    const isControlled = typeof controlledOpen === "boolean";
+    const [internalOpen, setInternalOpen] = useState(false);
+    const open = isControlled ? controlledOpen : internalOpen;
+
+    const setOpen = (next: boolean | ((prev: boolean) => boolean)) => {
+        const resolved =
+            typeof next === "function"
+                ? next(isControlled ? !!controlledOpen : internalOpen)
+                : next;
+
+        if (!isControlled) {
+            setInternalOpen(resolved);
+        }
+
+        onOpenChange?.(resolved);
+    };
+
     const [mounted, setMounted] = useState(false);
     const [pos, setPos] = useState<{
         top: number;
@@ -26,7 +70,6 @@ export default function NodeMenu({ actions }: { actions: MenuAction[] }) {
     const btnRef = useRef<HTMLButtonElement | null>(null);
     const panelRef = useRef<HTMLDivElement | null>(null);
     const itemRefs = useRef<Array<HTMLButtonElement | null>>([]);
-
     const menuId = useId();
 
     const enabledIndexes = useMemo(
@@ -46,10 +89,6 @@ export default function NodeMenu({ actions }: { actions: MenuAction[] }) {
         if (!open || !mounted) return;
 
         const update = () => {
-            const b = btnRef.current;
-            if (!b) return;
-
-            const r = b.getBoundingClientRect();
             const width =
                 window.innerWidth < 640
                     ? Math.min(208, window.innerWidth - 24)
@@ -60,6 +99,24 @@ export default function NodeMenu({ actions }: { actions: MenuAction[] }) {
                 320,
             );
 
+            if (anchorPoint) {
+                const left = Math.max(
+                    12,
+                    Math.min(window.innerWidth - width - 12, anchorPoint.x),
+                );
+                const top = Math.max(
+                    12,
+                    Math.min(window.innerHeight - estimatedHeight - 12, anchorPoint.y),
+                );
+
+                setPos({ top, left, width });
+                return;
+            }
+
+            const b = btnRef.current;
+            if (!b) return;
+
+            const r = b.getBoundingClientRect();
             const spaceBelow = window.innerHeight - r.bottom;
             const openUpward =
                 spaceBelow < estimatedHeight + 12 && r.top > estimatedHeight;
@@ -168,7 +225,7 @@ export default function NodeMenu({ actions }: { actions: MenuAction[] }) {
             document.removeEventListener("pointerdown", onPointerDown, true);
             window.removeEventListener("keydown", onKey);
         };
-    }, [open, mounted, enabledIndexes, actions.length]);
+    }, [open, mounted, enabledIndexes, actions.length, anchorPoint]);
 
     const panel =
         mounted && open && pos
@@ -214,9 +271,7 @@ export default function NodeMenu({ actions }: { actions: MenuAction[] }) {
                                   <span className="grid h-5 w-5 place-items-center">
                                       {a.icon}
                                   </span>
-                                <span className="flex-1 text-left">
-                                      {a.label}
-                                  </span>
+                                <span className="flex-1 text-left">{a.label}</span>
                             </button>
                         ))}
                     </div>
@@ -227,23 +282,25 @@ export default function NodeMenu({ actions }: { actions: MenuAction[] }) {
 
     return (
         <>
-            <button
-                ref={btnRef}
-                type="button"
-                aria-haspopup="menu"
-                aria-expanded={open}
-                aria-controls={open ? menuId : undefined}
-                aria-label="Open node actions"
-                onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    setOpen((v) => !v);
-                }}
-                className="ui-ide-menubtn"
-                title="Actions"
-            >
-                <IconDots className="h-4 w-4" />
-            </button>
+            {trigger === "button" ? (
+                <button
+                    ref={btnRef}
+                    type="button"
+                    aria-haspopup="menu"
+                    aria-expanded={open}
+                    aria-controls={open ? menuId : undefined}
+                    aria-label="Open node actions"
+                    onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        setOpen((v) => !v);
+                    }}
+                    className="ui-ide-menubtn"
+                    title="Actions"
+                >
+                    <IconDots className="h-4 w-4" />
+                </button>
+            ) : null}
 
             {panel}
         </>

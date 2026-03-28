@@ -18,6 +18,22 @@ export function storageKeyForLanguage(baseKey: string, language: CodeLanguage) {
     return `${baseKey}:${language}`;
 }
 
+export function storageKeyForWorkspace(args: {
+    baseKey: string;
+    language: CodeLanguage;
+    actorKey?: string | null;
+    projectId?: string | null;
+    scopeKey?: string | null;
+    localWorkspaceId?: string | null;
+}) {
+    const actorPart = args.actorKey?.trim() || "anonymous";
+    const scopePart = args.scopeKey?.trim() || "global";
+    const workspacePart =
+        args.projectId?.trim() || args.localWorkspaceId?.trim() || "local";
+
+    return `${args.baseKey}:${actorPart}:${scopePart}:${workspacePart}:${args.language}`;
+}
+
 function now() {
     return Date.now();
 }
@@ -210,7 +226,7 @@ export function repairWorkspaceStateV2(
     })();
 
     const normalizedNodes = Array.isArray(raw.nodes)
-        ? raw.nodes.map(normalizeNode).filter(Boolean) as FSNode[]
+        ? (raw.nodes.map(normalizeNode).filter(Boolean) as FSNode[])
         : [];
 
     const seenIds = new Set<string>();
@@ -302,7 +318,10 @@ export function saveV2(storageKey: string, ws: WorkspaceStateV2) {
     } catch {}
 }
 
-function buildCodeWorkspaceFromV1(v1: any, language: Exclude<CodeLanguage, "sql">): WorkspaceStateV2 | null {
+function buildCodeWorkspaceFromV1(
+    v1: any,
+    language: Exclude<CodeLanguage, "sql">,
+): WorkspaceStateV2 | null {
     const rootSrcId = uid();
     const t = now();
 

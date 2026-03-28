@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useMemo, useRef } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { FSNode, InlineEdit, NodeId } from "../types";
 import { cn } from "../utils";
 import {
@@ -10,7 +10,7 @@ import {
     pathOf,
     subtreeIds,
 } from "./ExplorerTreeHelpers";
-import NodeMenu from "./NodeMenu";
+import NodeMenu, { type MenuAction } from "./NodeMenu";
 import {
     IconChevronDown,
     IconChevronRight,
@@ -142,7 +142,28 @@ function InlineNameRow(props: {
     );
 }
 
-function Tree(props: {
+function canMoveInto(args: {
+    nodes: FSNode[];
+    sourceId: NodeId;
+    targetParentId: NodeId | null;
+}) {
+    const { nodes, sourceId, targetParentId } = args;
+
+    if (sourceId === targetParentId) return false;
+    if (targetParentId == null) return true;
+
+    const source = nodes.find((n) => n.id === sourceId);
+    if (!source) return false;
+
+    if (source.kind === "folder") {
+        const descendants = subtreeIds(nodes, sourceId);
+        if (descendants.has(targetParentId)) return false;
+    }
+
+    return true;
+}
+
+type TreeProps = {
     parentId: NodeId | null;
     depth: number;
 
@@ -168,10 +189,31 @@ function Tree(props: {
 
     setEntry: (id: NodeId) => void;
     requestDelete: (id: NodeId) => void;
+    moveNode: (id: NodeId, parentId: NodeId | null) => void;
 
     commitInlineEdit: () => void;
     cancelInlineEdit: () => void;
-}) {
+
+    openContextMenu: (e: React.MouseEvent, actions: MenuAction[]) => void;
+
+    dragState: {
+        draggingId: NodeId | null;
+        dropParentId: NodeId | null;
+        setDraggingId: React.Dispatch<React.SetStateAction<NodeId | null>>;
+        setDropParentId: React.Dispatch<React.SetStateAction<NodeId | null>>;
+        scheduleAutoExpand: (folderId: NodeId, isOpen: boolean) => void;
+        clearAutoExpand: (folderId?: NodeId) => void;
+    };
+
+    touchState: {
+        isTouchLike: boolean;
+        pendingMoveId: NodeId | null;
+        setPendingMoveId: React.Dispatch<React.SetStateAction<NodeId | null>>;
+        finishMove: (targetParentId: NodeId | null) => void;
+    };
+};
+
+function Tree(props: TreeProps) {
     const {
         parentId,
         depth,
@@ -192,9 +234,24 @@ function Tree(props: {
         startRename,
         setEntry,
         requestDelete,
+        moveNode,
         commitInlineEdit,
         cancelInlineEdit,
+        openContextMenu,
+        dragState,
+        touchState,
     } = props;
+
+    const {
+        draggingId,
+        dropParentId,
+        setDraggingId,
+        setDropParentId,
+        scheduleAutoExpand,
+        clearAutoExpand,
+    } = dragState;
+
+    const { isTouchLike, pendingMoveId, setPendingMoveId, finishMove } = touchState;
 
     const kids = childrenOf(nodes, parentId).filter((n) => {
         if (!filterLower) return true;
@@ -212,10 +269,10 @@ function Tree(props: {
             {showInlineNewHere ? (
                 <InlineNameRow
                     depth={depth}
-                    kind={inlineEdit!.mode === "new-folder" ? "folder" : "file"}
+                    kind={inlineEdit.mode === "new-folder" ? "folder" : "file"}
                     initialFocus
                     value={inlineEdit?.value ?? ""}
-                    setInlineEdit={setInlineEdit}
+                    setInlineEdit={setInlineEdit as React.Dispatch<React.SetStateAction<InlineEdit>>}
                     commitInlineEdit={commitInlineEdit}
                     cancelInlineEdit={cancelInlineEdit}
                 />
@@ -226,7 +283,6 @@ function Tree(props: {
                 const isOpen = isFolder && expanded.has(n.id);
                 const isActive = n.kind === "file" && n.id === activeFileId;
                 const isEntry = !isSql && n.kind === "file" && n.id === entryFileId;
-
                 const hasChildren = isFolder && childrenOf(nodes, n.id).length > 0;
                 const isRenaming = inlineEdit?.mode === "rename" && inlineEdit?.targetId === n.id;
 
@@ -235,64 +291,113 @@ function Tree(props: {
                     ((n.kind === "file" && n.id === entryFileId) ||
                         (n.kind === "folder" && subtreeIds(nodes, n.id).has(entryFileId)));
 
+                const canDropHere =
+                    draggingId != null &&
+                    isFolder &&
+                    canMoveInto({
+                        nodes,
+                        sourceId: draggingId,
+                        targetParentId: n.id,
+                    });
+
+                const isDropTarget = canDropHere && dropParentId === n.id;
+
+                const canTapMoveHere =
+                    pendingMoveId != null &&
+                    isFolder &&
+                    canMoveInto({
+                        nodes,
+                        sourceId: pendingMoveId,
+                        targetParentId: n.id,
+                    });
+
+                const baseFileActions: MenuAction[] = isSql
+                    ? [
+                        {
+                            label: "Rename",
+                            onClick: () => startRename(n.id),
+                            icon: <IconPencil className="h-4 w-4" />,
+                        },
+                        {
+                            label: "Delete",
+                            onClick: () => requestDelete(n.id),
+                            icon: <IconTrash className="h-4 w-4" />,
+                            danger: true,
+                            disabled: disableDelete,
+                        },
+                    ]
+                    : [
+                        {
+                            label: isEntry ? "Entry file" : "Set as Entry",
+                            onClick: () => setEntry(n.id),
+                            icon: <IconPlay className="h-4 w-4" />,
+                            disabled: isEntry,
+                        },
+                        {
+                            label: "Rename",
+                            onClick: () => startRename(n.id),
+                            icon: <IconPencil className="h-4 w-4" />,
+                        },
+                        {
+                            label: "Delete",
+                            onClick: () => requestDelete(n.id),
+                            icon: <IconTrash className="h-4 w-4" />,
+                            danger: true,
+                            disabled: disableDelete,
+                        },
+                    ];
+
+                const baseFolderActions: MenuAction[] = [
+                    {
+                        label: "New file",
+                        onClick: () => startNewFile(n.id),
+                        icon: <IconPlus className="h-4 w-4" />,
+                    },
+                    {
+                        label: "New folder",
+                        onClick: () => startNewFolder(n.id),
+                        icon: <IconFolder className="h-4 w-4" />,
+                    },
+                    {
+                        label: "Rename",
+                        onClick: () => startRename(n.id),
+                        icon: <IconPencil className="h-4 w-4" />,
+                    },
+                    {
+                        label: "Delete",
+                        onClick: () => requestDelete(n.id),
+                        icon: <IconTrash className="h-4 w-4" />,
+                        danger: true,
+                        disabled: disableDelete,
+                    },
+                ];
+
+                const moveAction: MenuAction[] = isTouchLike
+                    ? [
+                        {
+                            label: "Move to…",
+                            onClick: () => setPendingMoveId(n.id),
+                            icon: <IconFolder className="h-4 w-4" />,
+                        },
+                    ]
+                    : [];
+
+                const actions = isFolder
+                    ? [...moveAction, ...baseFolderActions]
+                    : [...moveAction, ...baseFileActions];
+
                 if (isRenaming) {
                     return (
                         <div key={n.id}>
-                            <div className="rounded-lg border border-neutral-200 bg-white px-2 py-2 dark:border-white/10 dark:bg-white/[0.06]">
-                                <IndentGuides depth={depth} />
-
-                                <div className="grid h-6 w-6 place-items-center text-neutral-500 dark:text-white/60">
-                                    {isFolder
-                                        ? isOpen
-                                            ? <IconChevronDown className="h-4 w-4" />
-                                            : <IconChevronRight className="h-4 w-4" />
-                                        : null}
-                                </div>
-
-                                <div className="grid h-6 w-6 place-items-center text-neutral-700 dark:text-white/80">
-                                    {isFolder ? <IconFolder className="h-4 w-4" /> : <IconFile className="h-4 w-4" />}
-                                </div>
-
-                                <input
-                                    autoFocus
-                                    value={inlineEdit?.value ?? ""}
-                                    onPointerDown={(e) => e.stopPropagation()}
-                                    onMouseDown={(e) => e.stopPropagation()}
-                                    onClick={(e) => e.stopPropagation()}
-                                    onChange={(e) =>
-                                        setInlineValuePreserveCaret(setInlineEdit, e.currentTarget, e.target.value)
-                                    }
-                                    onKeyDown={(e) => {
-                                        if (e.key === "Enter") commitInlineEdit();
-                                        if (e.key === "Escape") cancelInlineEdit();
-                                    }}
-                                    className="h-7 w-full rounded-md border border-neutral-200 bg-white px-2 text-[12px] font-semibold text-neutral-900 outline-none dark:border-white/10 dark:bg-black/30 dark:text-white/90"
-                                />
-
-                                <div className="mt-2 flex flex-col gap-2 sm:ml-2 sm:mt-0 sm:flex-row sm:items-center">                                    <button
-                                        type="button"
-                                        onClick={(e) => {
-                                            e.preventDefault();
-                                            e.stopPropagation();
-                                            commitInlineEdit();
-                                        }}
-                                        className="ui-quiz-action ui-quiz-action--primary"
-                                    >
-                                        Save
-                                    </button>
-                                    <button
-                                        type="button"
-                                        onClick={(e) => {
-                                            e.preventDefault();
-                                            e.stopPropagation();
-                                            cancelInlineEdit();
-                                        }}
-                                        className="ui-quiz-action ui-quiz-action--ghost"
-                                    >
-                                        Cancel
-                                    </button>
-                                </div>
-                            </div>
+                            <InlineNameRow
+                                depth={depth}
+                                kind={isFolder ? "folder" : "file"}
+                                initialFocus
+                                value={inlineEdit?.value ?? ""}
+                                setInlineEdit={setInlineEdit as React.Dispatch<React.SetStateAction<InlineEdit>>}
+                                commitInlineEdit={commitInlineEdit}
+                                cancelInlineEdit={cancelInlineEdit}
+                            />
 
                             {isFolder && isOpen ? (
                                 <div className="mt-[2px]">
@@ -316,8 +421,12 @@ function Tree(props: {
                                         startRename={startRename}
                                         setEntry={setEntry}
                                         requestDelete={requestDelete}
+                                        moveNode={moveNode}
                                         commitInlineEdit={commitInlineEdit}
                                         cancelInlineEdit={cancelInlineEdit}
+                                        openContextMenu={openContextMenu}
+                                        dragState={dragState}
+                                        touchState={touchState}
                                     />
                                 </div>
                             ) : null}
@@ -325,70 +434,119 @@ function Tree(props: {
                     );
                 }
 
-                const fileActions = isSql
-                    ? [
-                        { label: "Rename", onClick: () => startRename(n.id), icon: <IconPencil className="h-4 w-4" /> },
-                        {
-                            label: "Delete",
-                            onClick: () => requestDelete(n.id),
-                            icon: <IconTrash className="h-4 w-4" />,
-                            danger: true,
-                            disabled: disableDelete,
-                        },
-                    ]
-                    : [
-                        {
-                            label: isEntry ? "Entry file" : "Set as Entry",
-                            onClick: () => setEntry(n.id),
-                            icon: <IconPlay className="h-4 w-4" />,
-                            disabled: isEntry,
-                        },
-                        { label: "Rename", onClick: () => startRename(n.id), icon: <IconPencil className="h-4 w-4" /> },
-                        {
-                            label: "Delete",
-                            onClick: () => requestDelete(n.id),
-                            icon: <IconTrash className="h-4 w-4" />,
-                            danger: true,
-                            disabled: disableDelete,
-                        },
-                    ];
-
                 return (
                     <div key={n.id}>
                         <div
+                            data-tree-node-row="true"
+                            onContextMenu={(e) => openContextMenu(e, actions)}
+                            onDragOver={(e) => {
+                                if (draggingId == null) return;
+                                e.stopPropagation();
+
+                                if (!canDropHere) return;
+
+                                e.preventDefault();
+                                e.dataTransfer.dropEffect = "move";
+                                setDropParentId(n.id);
+                                scheduleAutoExpand(n.id, isOpen);
+                            }}
+                            onDragLeave={(e) => {
+                                e.stopPropagation();
+                                if (dropParentId === n.id) {
+                                    setDropParentId(null);
+                                }
+                                clearAutoExpand(n.id);
+                            }}
+                            onDrop={(e) => {
+                                e.stopPropagation();
+
+                                if (!canDropHere || draggingId == null) return;
+
+                                e.preventDefault();
+                                moveNode(draggingId, n.id);
+                                setDraggingId(null);
+                                setDropParentId(null);
+                                clearAutoExpand();
+                            }}
                             className={cn(
-                                "group flex min-h-[40px] items-center rounded-md px-2 border border-transparent sm:min-h-[32px]",                                "hover:bg-neutral-50 hover:border-neutral-200",
-                                "dark:hover:bg-white/[0.06] dark:hover:border-white/10",
+                                "group flex min-h-[44px] items-center rounded-xl border border-transparent px-2 sm:min-h-[36px]",
+                                "hover:bg-neutral-50 hover:border-neutral-200 dark:hover:bg-white/[0.06] dark:hover:border-white/10",
                                 isActive && "bg-neutral-50 border-neutral-200 dark:bg-white/[0.08] dark:border-white/10",
+                                isDropTarget &&
+                                "border-emerald-400 bg-emerald-50/80 dark:border-emerald-300/50 dark:bg-emerald-400/10",
+                                pendingMoveId === n.id &&
+                                "ring-1 ring-sky-300 bg-sky-50/70 dark:ring-sky-300/40 dark:bg-sky-400/10",
+                                canTapMoveHere &&
+                                "border-dashed border-emerald-400/80",
                             )}
                             title={pathOf(nodes, n.id)}
                         >
                             <IndentGuides depth={depth} />
+
+                            <div
+                                draggable={!isTouchLike}
+                                onDragStart={(e) => {
+                                    if (isTouchLike) return;
+                                    e.stopPropagation();
+                                    setDraggingId(n.id);
+                                    e.dataTransfer.effectAllowed = "move";
+                                    e.dataTransfer.setData("text/plain", String(n.id));
+                                }}
+                                onDragEnd={(e) => {
+                                    e.stopPropagation();
+                                    setDraggingId(null);
+                                    setDropParentId(null);
+                                    clearAutoExpand();
+                                }}
+                                className={cn(
+                                    "mr-1 grid h-7 w-7 shrink-0 place-items-center rounded-lg text-neutral-400",
+                                    "cursor-grab hover:bg-neutral-100 hover:text-neutral-700 active:cursor-grabbing dark:hover:bg-white/[0.06] dark:hover:text-white/80",
+                                    isTouchLike && "opacity-40",
+                                    draggingId === n.id && "opacity-50",
+                                )}
+                                title={isTouchLike ? "Use Move to… from the menu" : "Drag to move"}
+                                aria-label={isTouchLike ? "Use Move to action" : "Drag handle"}
+                            >
+                                <span className="select-none text-sm font-black leading-none">⋮⋮</span>
+                            </div>
 
                             <button
                                 type="button"
                                 onClick={(e) => {
                                     e.preventDefault();
                                     e.stopPropagation();
+
+                                    if (pendingMoveId != null && isFolder && canTapMoveHere) {
+                                        finishMove(n.id);
+                                        return;
+                                    }
+
                                     if (isFolder) toggleFolder(n.id);
                                     else openFile(n.id);
                                 }}
                                 className={cn(
-                                    "grid h-6 w-6 place-items-center rounded-md",
-                                    "text-neutral-500 hover:text-neutral-900 hover:bg-neutral-100",
-                                    "dark:text-white/55 dark:hover:text-white/90 dark:hover:bg-white/[0.06]",
-                                    !isFolder && "opacity-0 pointer-events-none",
+                                    "grid h-7 w-7 place-items-center rounded-lg",
+                                    "text-neutral-500 hover:text-neutral-900 hover:bg-neutral-100 dark:text-white/55 dark:hover:text-white/90 dark:hover:bg-white/[0.06]",
+                                    !isFolder && "pointer-events-none opacity-0",
                                     isFolder && !hasChildren && "opacity-40",
                                 )}
                                 title={isFolder ? (isOpen ? "Collapse" : "Expand") : ""}
                             >
                                 {isFolder ? (
-                                    isOpen ? <IconChevronDown className="h-4 w-4" /> : <IconChevronRight className="h-4 w-4" />
+                                    isOpen ? (
+                                        <IconChevronDown className="h-4 w-4" />
+                                    ) : (
+                                        <IconChevronRight className="h-4 w-4" />
+                                    )
                                 ) : null}
                             </button>
 
-                            <div className="grid h-6 w-6 place-items-center text-neutral-700 dark:text-white/80">
-                                {isFolder ? <IconFolder className="h-4 w-4" /> : <IconFile className="h-4 w-4" />}
+                            <div className="grid h-7 w-7 place-items-center text-neutral-700 dark:text-white/80">
+                                {isFolder ? (
+                                    <IconFolder className="h-4 w-4" />
+                                ) : (
+                                    <IconFile className="h-4 w-4" />
+                                )}
                             </div>
 
                             <button
@@ -397,11 +555,17 @@ function Tree(props: {
                                 onClick={(e) => {
                                     e.preventDefault();
                                     e.stopPropagation();
+
+                                    if (pendingMoveId != null && isFolder && canTapMoveHere) {
+                                        finishMove(n.id);
+                                        return;
+                                    }
+
                                     if (isFolder) toggleFolder(n.id);
                                     else openFile(n.id);
                                 }}
                             >
-                                <div className="truncate text-[12px] font-semibold text-neutral-900 dark:text-white/85">
+                                <div className="truncate text-[13px] font-semibold text-neutral-900 dark:text-white/85">
                                     {n.name}
                                 </div>
                             </button>
@@ -414,24 +578,7 @@ function Tree(props: {
                             ) : null}
 
                             <div className="ml-1 flex items-center">
-                                <NodeMenu
-                                    actions={
-                                        isFolder
-                                            ? [
-                                                { label: "New file", onClick: () => startNewFile(n.id), icon: <IconPlus className="h-4 w-4" /> },
-                                                { label: "New folder", onClick: () => startNewFolder(n.id), icon: <IconFolder className="h-4 w-4" /> },
-                                                { label: "Rename", onClick: () => startRename(n.id), icon: <IconPencil className="h-4 w-4" /> },
-                                                {
-                                                    label: "Delete",
-                                                    onClick: () => requestDelete(n.id),
-                                                    icon: <IconTrash className="h-4 w-4" />,
-                                                    danger: true,
-                                                    disabled: disableDelete,
-                                                },
-                                            ]
-                                            : fileActions
-                                    }
-                                />
+                                <NodeMenu actions={actions} />
                             </div>
                         </div>
 
@@ -457,8 +604,12 @@ function Tree(props: {
                                     startRename={startRename}
                                     setEntry={setEntry}
                                     requestDelete={requestDelete}
+                                    moveNode={moveNode}
                                     commitInlineEdit={commitInlineEdit}
                                     cancelInlineEdit={cancelInlineEdit}
+                                    openContextMenu={openContextMenu}
+                                    dragState={dragState}
+                                    touchState={touchState}
                                 />
                             </div>
                         ) : null}
@@ -489,6 +640,7 @@ export default function ExplorerTree(props: {
 
     setEntry: (id: NodeId) => void;
     requestDelete: (id: NodeId) => void;
+    moveNode: (id: NodeId, parentId: NodeId | null) => void;
 
     commitInlineEdit: () => void;
     cancelInlineEdit: () => void;
@@ -509,6 +661,7 @@ export default function ExplorerTree(props: {
         startRename,
         setEntry,
         requestDelete,
+        moveNode,
         commitInlineEdit,
         cancelInlineEdit,
     } = props;
@@ -525,29 +678,282 @@ export default function ExplorerTree(props: {
         [nodes, nodeMatchesFilter],
     );
 
+    const [contextMenu, setContextMenu] = useState<{
+        open: boolean;
+        x: number;
+        y: number;
+        actions: MenuAction[];
+    }>({
+        open: false,
+        x: 0,
+        y: 0,
+        actions: [],
+    });
+
+    const [draggingId, setDraggingId] = useState<NodeId | null>(null);
+    const [dropParentId, setDropParentId] = useState<NodeId | null>(null);
+
+    const hoverExpandTimerRef = useRef<number | null>(null);
+    const hoverExpandTargetRef = useRef<NodeId | null>(null);
+
+    const [isTouchLike, setIsTouchLike] = useState(false);
+    const [pendingMoveId, setPendingMoveId] = useState<NodeId | null>(null);
+
+    useEffect(() => {
+        if (typeof window === "undefined" || !window.matchMedia) return;
+
+        const coarseMq = window.matchMedia("(pointer: coarse)");
+        const narrowMq = window.matchMedia("(max-width: 767px)");
+
+        const update = () => {
+            setIsTouchLike(coarseMq.matches || narrowMq.matches);
+        };
+
+        update();
+
+        const add = (mq: MediaQueryList, fn: () => void) => {
+            if (typeof mq.addEventListener === "function") mq.addEventListener("change", fn);
+            else mq.addListener(fn);
+        };
+
+        const remove = (mq: MediaQueryList, fn: () => void) => {
+            if (typeof mq.removeEventListener === "function") mq.removeEventListener("change", fn);
+            else mq.removeListener(fn);
+        };
+
+        add(coarseMq, update);
+        add(narrowMq, update);
+
+        return () => {
+            remove(coarseMq, update);
+            remove(narrowMq, update);
+        };
+    }, []);
+
+    const clearAutoExpand = useCallback((folderId?: NodeId) => {
+        if (
+            folderId != null &&
+            hoverExpandTargetRef.current != null &&
+            hoverExpandTargetRef.current !== folderId
+        ) {
+            return;
+        }
+
+        if (hoverExpandTimerRef.current != null) {
+            window.clearTimeout(hoverExpandTimerRef.current);
+            hoverExpandTimerRef.current = null;
+        }
+
+        hoverExpandTargetRef.current = null;
+    }, []);
+
+    const scheduleAutoExpand = useCallback(
+        (folderId: NodeId, isOpen: boolean) => {
+            if (isOpen) {
+                clearAutoExpand(folderId);
+                return;
+            }
+
+            if (hoverExpandTargetRef.current === folderId && hoverExpandTimerRef.current != null) {
+                return;
+            }
+
+            clearAutoExpand();
+
+            hoverExpandTargetRef.current = folderId;
+            hoverExpandTimerRef.current = window.setTimeout(() => {
+                toggleFolder(folderId);
+                hoverExpandTimerRef.current = null;
+                hoverExpandTargetRef.current = null;
+            }, 500);
+        },
+        [toggleFolder, clearAutoExpand],
+    );
+
+    useEffect(() => {
+        return () => clearAutoExpand();
+    }, [clearAutoExpand]);
+
+    const finishMove = useCallback(
+        (targetParentId: NodeId | null) => {
+            if (pendingMoveId == null) return;
+
+            if (
+                !canMoveInto({
+                    nodes,
+                    sourceId: pendingMoveId,
+                    targetParentId,
+                })
+            ) {
+                return;
+            }
+
+            moveNode(pendingMoveId, targetParentId);
+            setPendingMoveId(null);
+        },
+        [pendingMoveId, nodes, moveNode],
+    );
+
+    const openContextMenu = useCallback(
+        (e: React.MouseEvent, actions: MenuAction[]) => {
+            e.preventDefault();
+            e.stopPropagation();
+            setContextMenu({
+                open: true,
+                x: e.clientX,
+                y: e.clientY,
+                actions,
+            });
+        },
+        [],
+    );
+
+    const rootActions: MenuAction[] = useMemo(
+        () => [
+            {
+                label: "New file",
+                onClick: () => startNewFile(null),
+                icon: <IconPlus className="h-4 w-4" />,
+            },
+            {
+                label: "New folder",
+                onClick: () => startNewFolder(null),
+                icon: <IconFolder className="h-4 w-4" />,
+            },
+        ],
+        [startNewFile, startNewFolder],
+    );
+
+    const canDropToRoot =
+        draggingId != null &&
+        canMoveInto({
+            nodes,
+            sourceId: draggingId,
+            targetParentId: null,
+        });
+
+    const movingNode = pendingMoveId
+        ? nodes.find((n) => n.id === pendingMoveId) ?? null
+        : null;
+
     return (
-        <Tree
-            parentId={null}
-            depth={0}
-            nodes={nodes}
-            expanded={expanded}
-            activeFileId={activeFileId}
-            entryFileId={entryFileId}
-            isSql={isSql}
-            filterLower={filterLower}
-            nodeMatchesFilter={nodeMatchesFilter}
-            folderHasMatch={folderHasMatch}
-            inlineEdit={inlineEdit}
-            setInlineEdit={setInlineEdit}
-            openFile={openFile}
-            toggleFolder={toggleFolder}
-            startNewFile={startNewFile}
-            startNewFolder={startNewFolder}
-            startRename={startRename}
-            setEntry={setEntry}
-            requestDelete={requestDelete}
-            commitInlineEdit={commitInlineEdit}
-            cancelInlineEdit={cancelInlineEdit}
-        />
+        <>
+            {pendingMoveId != null ? (
+                <div className="mb-2 rounded-2xl border border-sky-300/30 bg-sky-50/80 p-3 dark:border-sky-300/20 dark:bg-sky-400/10">
+                    <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                        <div className="min-w-0">
+                            <div className="text-sm font-black text-sky-950 dark:text-white/90">
+                                Move {movingNode?.name ?? "item"}
+                            </div>
+                            <div className="mt-1 text-xs font-semibold text-sky-800/80 dark:text-white/65">
+                                Tap a folder to move into it, or send it back to root.
+                            </div>
+                        </div>
+
+                        <div className="flex flex-wrap gap-2">
+                            <button
+                                type="button"
+                                onClick={() => finishMove(null)}
+                                className="rounded-xl border border-sky-300/30 bg-white px-3 py-2 text-xs font-black text-sky-900 dark:border-white/10 dark:bg-white/[0.08] dark:text-white/85"
+                            >
+                                Move to root
+                            </button>
+
+                            <button
+                                type="button"
+                                onClick={() => setPendingMoveId(null)}
+                                className="rounded-xl border border-neutral-200 bg-white px-3 py-2 text-xs font-black text-neutral-700 dark:border-white/10 dark:bg-white/[0.08] dark:text-white/80"
+                            >
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            ) : null}
+
+            <div
+                onContextMenu={(e) => {
+                    const target = e.target as HTMLElement | null;
+                    if (target?.closest("[data-tree-node-row='true']")) return;
+                    openContextMenu(e, rootActions);
+                }}
+                onDragOver={(e) => {
+                    if (!canDropToRoot) return;
+                    e.preventDefault();
+                    e.dataTransfer.dropEffect = "move";
+                    setDropParentId(null);
+                }}
+                onDrop={(e) => {
+                    if (!canDropToRoot || draggingId == null) return;
+                    e.preventDefault();
+                    moveNode(draggingId, null);
+                    setDraggingId(null);
+                    setDropParentId(null);
+                    clearAutoExpand();
+                }}
+                className={cn(
+                    "min-h-full rounded-xl transition",
+                    canDropToRoot &&
+                    dropParentId === null &&
+                    "bg-emerald-50/70 ring-1 ring-emerald-300 dark:bg-emerald-400/10 dark:ring-emerald-300/40",
+                )}
+            >
+                <Tree
+                    parentId={null}
+                    depth={0}
+                    nodes={nodes}
+                    expanded={expanded}
+                    activeFileId={activeFileId}
+                    entryFileId={entryFileId}
+                    isSql={isSql}
+                    filterLower={filterLower}
+                    nodeMatchesFilter={nodeMatchesFilter}
+                    folderHasMatch={folderHasMatch}
+                    inlineEdit={inlineEdit}
+                    setInlineEdit={setInlineEdit}
+                    openFile={openFile}
+                    toggleFolder={toggleFolder}
+                    startNewFile={startNewFile}
+                    startNewFolder={startNewFolder}
+                    startRename={startRename}
+                    setEntry={setEntry}
+                    requestDelete={requestDelete}
+                    moveNode={moveNode}
+                    commitInlineEdit={commitInlineEdit}
+                    cancelInlineEdit={cancelInlineEdit}
+                    openContextMenu={openContextMenu}
+                    dragState={{
+                        draggingId,
+                        dropParentId,
+                        setDraggingId,
+                        setDropParentId,
+                        scheduleAutoExpand,
+                        clearAutoExpand,
+                    }}
+                    touchState={{
+                        isTouchLike,
+                        pendingMoveId,
+                        setPendingMoveId,
+                        finishMove,
+                    }}
+                />
+            </div>
+
+            <NodeMenu
+                trigger="none"
+                open={contextMenu.open}
+                onOpenChange={(next) => {
+                    if (!next) {
+                        setContextMenu((s) => ({ ...s, open: false }));
+                    }
+                }}
+                anchorPoint={
+                    contextMenu.open
+                        ? { x: contextMenu.x, y: contextMenu.y }
+                        : null
+                }
+                actions={contextMenu.actions}
+            />
+        </>
     );
 }

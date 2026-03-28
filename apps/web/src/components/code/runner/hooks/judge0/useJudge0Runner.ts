@@ -2,11 +2,8 @@
 
 import type { SharedRunnerArgs, CodeRunnerController } from "../../runtime";
 import { useTerminalRunner } from "../useTerminalRunner";
-import { resolveRuntime } from "../controller/useResolvedRuntime";
 
 export function useJudge0Runner(args: SharedRunnerArgs): CodeRunnerController {
-    const runtime = resolveRuntime(args.runtime);
-
     const legacy = useTerminalRunner({
         lang: args.lang,
         code: args.code,

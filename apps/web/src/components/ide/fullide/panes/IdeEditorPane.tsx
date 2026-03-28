@@ -19,6 +19,7 @@ type Props = {
     isSql: boolean;
     language: any;
     sqlDialect: any;
+    isAuthenticated: boolean;
     runtime: CodeRunnerRuntime;
     onChangeLanguage: (language: any) => void;
     onChangeCode: (code: string) => void;
@@ -48,6 +49,7 @@ export default function IdeEditorPane({
                                           setActiveFileId,
                                           closeTab,
                                           isDesktop,
+                                          isAuthenticated,
                                       }: Props) {
     const schemaSql = React.useMemo(() => {
         const file = nodes.find(
@@ -100,8 +102,10 @@ export default function IdeEditorPane({
                             showEditorThemeToggle={false}
                             showTerminalDockToggle={isDesktop}
                             resetTerminalOnRun={true}
-                            onRun={onRun}
-                            editorModelKey={activeFileId ?? "no-file"}
+                            onRun={isAuthenticated?onRun: null}
+                            isAuthenticated={isAuthenticated}
+
+                        editorModelKey={activeFileId ?? "no-file"}
                         />
                     </div>
                 ) : (

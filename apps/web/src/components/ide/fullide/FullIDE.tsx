@@ -23,7 +23,7 @@ import IdeProjectModals from "@/components/ide/fullide/modals/IdeProjectModals";
 import IdeEditorPane from "@/components/ide/fullide/panes/IdeEditorPane";
 import IdeExplorerPane from "@/components/ide/fullide/panes/IdeExplorerPane";
 import type { FullIDEProps } from "../types";
-import {CodeRunnerRuntime, ExecutionBackend} from "@/components/code/runner/runtime";
+import { CodeRunnerRuntime, ExecutionBackend } from "@/components/code/runner/runtime";
 
 type WorkspaceHookResult = ReturnType<typeof useIdeWorkspace>;
 
@@ -48,6 +48,9 @@ type FullIDEInnerProps = {
     sqlDialect: any;
     setSqlDialect: React.Dispatch<React.SetStateAction<any>>;
     onChangeLanguage?: FullIDEProps["onChangeLanguage"];
+
+
+    history: WorkspaceHookResult["history"];
     state: WorkspaceHookResult["state"];
     derived: WorkspaceHookResult["derived"];
     actions: WorkspaceHookResult["actions"];
@@ -76,7 +79,9 @@ function FullIDEInner({
                           onChangeLanguage,
                           state,
                           derived,
+                          history,
                           actions,
+
                       }: FullIDEInnerProps) {
     const {
         language,
@@ -139,24 +144,9 @@ function FullIDEInner({
         onCloseMobileExplorer: () => setShowMobileExplorer(false),
     });
 
-
-
-
-
-
-
-
-
-
-
     const isSql = language === "sql";
 
-    /**
-     * Change this in one place:
-     * - "pty" for full interactive terminal sessions
-     * - "judge0" for transcript/plain runner with multi-file batch compile/run
-     */
-    const codeBackend: ExecutionBackend = "pty";
+    const codeBackend: ExecutionBackend = "judge0";
 
     const runnerRuntime: CodeRunnerRuntime = isSql
         ? { backend: "judge0", terminalView: "plain" }
@@ -179,12 +169,6 @@ function FullIDEInner({
         viewport.isDesktop ? 360 : 320,
         viewport.editorHeight || height,
     );
-
-
-
-
-
-
 
     const upgradeText = !access.hasUser
         ? "Log in to unlock multiple files and cloud save."
@@ -230,6 +214,10 @@ function FullIDEInner({
             onUpgrade={() => router.push(access.hasUser ? billingHref : loginHref)}
             onChangeFilter={actions.setFilter}
             onChangeStdin={actions.setStdin}
+            canUndo={history.canUndo}
+            canRedo={history.canRedo}
+            onUndo={actions.undo}
+            onRedo={actions.redo}
             actions={{
                 setInlineEdit: actions.setInlineEdit,
                 openFile: actions.openFile,
@@ -238,12 +226,15 @@ function FullIDEInner({
                 startNewFolder: actions.startNewFolder,
                 startRename: actions.startRename,
                 setEntry: actions.setEntry,
+                moveNode: actions.moveNode,
+                importExternalFiles: actions.importExternalFiles,
                 requestDelete: actions.requestDelete,
                 commitInlineEdit: actions.commitInlineEdit,
                 cancelInlineEdit: actions.cancelInlineEdit,
             }}
         />
     );
+
     const editorPane = (
         <IdeEditorPane
             panelRef={editorHostRef}
@@ -258,6 +249,7 @@ function FullIDEInner({
             sqlDialect={sqlDialect}
             runtime={runnerRuntime}
             onChangeLanguage={setLangUI}
+            isAuthenticated={access.hasUser}
             onChangeCode={actions.onChangeCode}
             onChangeSqlDialect={setSqlDialect}
             onRun={runner.onRunProject}
@@ -266,31 +258,10 @@ function FullIDEInner({
             isDesktop={viewport.isDesktop}
         />
     );
-    // const editorPane = (
-    //     <IdeEditorPane
-    //         panelRef={editorHostRef}
-    //         nodes={nodes}
-    //         tabFiles={tabFiles}
-    //         activeFileId={activeFileId}
-    //         activeFile={activeFile}
-    //         runnerHeight={runnerHeight}
-    //         title={runnerTitle}
-    //         isSql={isSql}
-    //         language={language}
-    //         sqlDialect={sqlDialect}
-    //         onChangeLanguage={actions.switchLanguage}
-    //         onChangeCode={actions.onChangeCode}
-    //         onChangeSqlDialect={setSqlDialect}
-    //         onRun={runner.onRunProject}
-    //         setActiveFileId={(id) => actions.setActiveFileId(id ?? "")}
-    //         closeTab={actions.closeTab}
-    //         isDesktop={viewport.isDesktop}
-    //     />
-    // );
 
     const handleConfirmDelete = () => {
         if (!pendingDeleteId) return;
-        actions.performDelete(pendingDeleteId);
+        actions.performDelete();
     };
 
     const handlePrimarySave = () => {
@@ -427,6 +398,27 @@ function FullIDEInner({
     );
 }
 
+function buildClientActorKey(access: FullIDEProps["access"]) {
+    return access.hasUser ? "user" : "anonymous";
+}
+
+function buildScopeKey(projectScope: FullIDEProps["projectScope"]) {
+    return projectScope?.scopeKey ?? null;
+}
+
+function buildLocalWorkspaceIdSeed(args: {
+    initialProjectId: string | null;
+    projectScope: FullIDEProps["projectScope"];
+    forcedLanguage?: FullIDEProps["language"];
+}) {
+    return [
+        "local",
+        args.initialProjectId ?? "draft",
+        args.projectScope?.scopeKey ?? args.projectScope?.kind ?? "global",
+        args.forcedLanguage ?? "any",
+    ].join("::");
+}
+
 export default function FullIDE(props: FullIDEProps) {
     const {
         title = "IDE",
@@ -457,17 +449,50 @@ export default function FullIDE(props: FullIDEProps) {
     const [showMobileExplorer, setShowMobileExplorer] = useState(false);
     const [sqlDialect, setSqlDialect] = useState(DEFAULT_SQL_DIALECT);
 
+    const actorKey = useMemo(() => buildClientActorKey(access), [access]);
+    const scopeKey = useMemo(() => buildScopeKey(projectScope), [projectScope]);
+
+
+
+
+
+    const localWorkspaceId = useMemo(
+        () =>
+            buildLocalWorkspaceIdSeed({
+                initialProjectId,
+                projectScope,
+                forcedLanguage,
+            }),
+        [initialProjectId, projectScope, forcedLanguage],
+    );
+
+    const scopedStorageKey = useMemo(() => {
+        const scopePart = scopeKey ?? "global";
+        const projectPart = initialProjectId ?? localWorkspaceId;
+        return `${storageKey}:${scopePart}:${projectPart}`;
+    }, [storageKey, scopeKey, initialProjectId, localWorkspaceId]);
+
     const workspace = useIdeWorkspace({
-        storageKey,
+        storageKey: scopedStorageKey,
         forcedLanguage,
         resetOnForcedLanguageChange,
         access,
-        draftStorageMode,
+        actorKey,
+        projectId: initialProjectId,
+        scopeKey,
+        draftStorageMode: (draftStorageMode ?? "off") as "off" | "local",
+
+        localWorkspaceId,
     });
 
     const sessionRemountKey = useMemo(
-        () => `${workspace.state.language}::${JSON.stringify(projectScope ?? null)}`,
-        [workspace.state.language, projectScope],
+        () =>
+            [
+                workspace.state.language,
+                initialProjectId ?? localWorkspaceId,
+                scopeKey ?? "global",
+            ].join("::"),
+        [workspace.state.language, initialProjectId, localWorkspaceId, scopeKey],
     );
 
     return (
@@ -500,6 +525,8 @@ export default function FullIDE(props: FullIDEProps) {
                 sqlDialect={sqlDialect}
                 setSqlDialect={setSqlDialect}
                 onChangeLanguage={onChangeLanguage}
+
+                history={workspace.history}
                 state={workspace.state}
                 derived={workspace.derived}
                 actions={workspace.actions}
