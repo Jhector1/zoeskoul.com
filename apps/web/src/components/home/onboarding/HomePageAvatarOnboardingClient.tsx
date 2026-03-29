@@ -24,7 +24,12 @@ import { Button } from "@/components/home/ui/button";
 import { CardContent } from "@/components/home/ui/card";
 import { Progress } from "@/components/home/ui/progress";
 import { cn } from "@/lib/cn";
-import { buildTrialHref, saveOnboarding, sleep, startTrialSession } from "@/lib/onboarding/client";
+import {
+    buildTrialHref,
+    saveOnboarding,
+    sleep,
+    startTrialSession,
+} from "@/lib/onboarding/client";
 import { persistLocale } from "@/lib/locale/persistLocale";
 import HeaderSlick from "@/components/HeaderSlick";
 import FooterSlick from "@/components/layout/FooterSlick";
@@ -44,7 +49,13 @@ type ThemePreference = "light" | "dark" | "";
 type TrialIntent = "now" | "later" | "";
 type Level = "beginner" | "intermediate" | "advanced" | "";
 type StudyTime = "1-2-hours" | "3-5-hours" | "6-plus-hours" | "";
-type DiscoverySource = "other" | "search" | "friend" | "social" | "school-work" | "";
+type DiscoverySource =
+    | "other"
+    | "search"
+    | "friend"
+    | "social"
+    | "school-work"
+    | "";
 
 type OnboardingData = {
     preferredLanguage: PreferredLanguage;
@@ -88,6 +99,7 @@ type ResolveText = ReturnType<typeof useTaggedT>["resolve"];
 
 type StoredOnboardingSnapshot = {
     completed: boolean;
+    open: boolean;
     stepIndex: number;
     data: OnboardingData;
 };
@@ -247,21 +259,25 @@ function SectionKicker({ children }: { children: React.ReactNode }) {
 
 function readStoredOnboarding(): StoredOnboardingSnapshot {
     if (typeof window === "undefined") {
-        return { completed: false, stepIndex: 0, data: DEFAULT_DATA };
+        return { completed: false, open: false, stepIndex: 0, data: DEFAULT_DATA };
     }
 
     try {
         const raw = window.localStorage.getItem(STORAGE_KEY);
-        if (!raw) return { completed: false, stepIndex: 0, data: DEFAULT_DATA };
+        if (!raw) {
+            return { completed: false, open: false, stepIndex: 0, data: DEFAULT_DATA };
+        }
 
         const parsed = JSON.parse(raw) as {
             completed?: boolean;
+            open?: boolean;
             stepIndex?: number;
             data?: Partial<OnboardingData>;
         };
 
         return {
             completed: Boolean(parsed?.completed),
+            open: Boolean(parsed?.open),
             stepIndex:
                 typeof parsed?.stepIndex === "number" && parsed.stepIndex >= 0
                     ? parsed.stepIndex
@@ -275,7 +291,7 @@ function readStoredOnboarding(): StoredOnboardingSnapshot {
             },
         };
     } catch {
-        return { completed: false, stepIndex: 0, data: DEFAULT_DATA };
+        return { completed: false, open: false, stepIndex: 0, data: DEFAULT_DATA };
     }
 }
 
@@ -283,11 +299,13 @@ function saveStoredOnboarding(
     completed: boolean,
     data: OnboardingData,
     stepIndex = 0,
+    open = false,
 ) {
     if (typeof window === "undefined") return;
+
     window.localStorage.setItem(
         STORAGE_KEY,
-        JSON.stringify({ completed, stepIndex, data }),
+        JSON.stringify({ completed, open, stepIndex, data }),
     );
 }
 
@@ -356,7 +374,11 @@ function mapThemeLabel(value: string, t: SafeT) {
     return t(`labels.theme.${value}` as any, undefined, value);
 }
 
-function titleFromSlug(slug: string, subjects: SubjectCard[], resolveText: ResolveText) {
+function titleFromSlug(
+    slug: string,
+    subjects: SubjectCard[],
+    resolveText: ResolveText,
+) {
     const subject = subjects.find((s) => s.slug === slug);
     if (!subject) return slug;
     return resolveText(subject.title, { appName: APP_NAME }, slug);
@@ -642,7 +664,11 @@ function SubjectImageStrip({ subjects }: { subjects: SubjectCard[] }) {
         <div className="grid gap-3 sm:grid-cols-3">
             {subjects.slice(0, 3).map((subject) => {
                 const title = resolve(subject.title, { appName: APP_NAME }, subject.slug);
-                const badge = resolve(subject.badge, { appName: APP_NAME }, t("common.featured"));
+                const badge = resolve(
+                    subject.badge,
+                    { appName: APP_NAME },
+                    t("common.featured"),
+                );
                 const alt = resolve(subject.imageAlt, { appName: APP_NAME }, title);
 
                 return (
@@ -755,7 +781,7 @@ function OnboardingPanel({
     }, [initialStepIndex]);
 
     useEffect(() => {
-        saveStoredOnboarding(false, data, stepIndex);
+        saveStoredOnboarding(false, data, stepIndex, true);
     }, [data, stepIndex]);
 
     const localizedStepMeta = useMemo(
@@ -898,7 +924,7 @@ function OnboardingPanel({
                 : ({ ...data, [step.id]: value } as OnboardingData);
 
         setData(next);
-        saveStoredOnboarding(false, next, stepIndex);
+        saveStoredOnboarding(false, next, stepIndex, true);
 
         if (step.id === "preferredLanguage" && step.mode === "single") {
             const nextLocale = mapNextLocale(value, locale);
@@ -947,14 +973,14 @@ function OnboardingPanel({
 
         const nextStepIndex = stepIndex + 1;
         setStepIndex(nextStepIndex);
-        saveStoredOnboarding(false, data, nextStepIndex);
+        saveStoredOnboarding(false, data, nextStepIndex, true);
     };
 
     const handleBack = () => {
         if (busy) return;
         const nextStepIndex = Math.max(0, stepIndex - 1);
         setStepIndex(nextStepIndex);
-        saveStoredOnboarding(false, data, nextStepIndex);
+        saveStoredOnboarding(false, data, nextStepIndex, true);
     };
 
     const side: "left" | "right" = stepIndex % 2 === 0 ? "right" : "left";
@@ -1122,7 +1148,11 @@ function SubjectGrid({
             {recommended.map((subject) => {
                 const title = resolve(subject.title, { appName: APP_NAME }, subject.slug);
                 const description = resolve(subject.description, { appName: APP_NAME }, "");
-                const badge = resolve(subject.badge, { appName: APP_NAME }, t("common.featured"));
+                const badge = resolve(
+                    subject.badge,
+                    { appName: APP_NAME },
+                    t("common.featured"),
+                );
                 const alt = resolve(subject.imageAlt, { appName: APP_NAME }, title);
 
                 return (
@@ -1200,7 +1230,7 @@ export default function HomePageAvatarOnboardingClient({
     const [resumeStepIndex, setResumeStepIndex] = useState(0);
 
     const [trialSubjectSlug, setTrialSubjectSlug] = useState<string | null>(null);
-
+    const [bootstrapped, setBootstrapped] = useState(false);
     const [trialBusy, setTrialBusy] = useState(false);
     const [trialErr, setTrialErr] = useState<string | null>(null);
     const [pendingLocaleSwitch, setPendingLocaleSwitch] = useState<null | {
@@ -1232,28 +1262,34 @@ export default function HomePageAvatarOnboardingClient({
 
     useEffect(() => {
         const stored = readStoredOnboarding();
-        setOnboardingData(stored.data);
-        setCompleted(stored.completed);
-        setResumeStepIndex(stored.stepIndex);
 
         const dismissed =
             typeof window !== "undefined" &&
             window.localStorage.getItem(DISMISSED_KEY) === "1";
 
+        const effectiveCompleted = stored.open ? false : stored.completed;
+        const effectiveSkipped = stored.open ? false : dismissed;
+
+        setOnboardingData(stored.data);
+        setCompleted(effectiveCompleted);
+        setSkipped(effectiveSkipped);
+        setResumeStepIndex(stored.stepIndex);
+
         const shouldAutoOpen =
-            !isAuthenticated && !stored.completed && !dismissed;
+            !isAuthenticated && !effectiveCompleted && !effectiveSkipped;
 
-        setSkipped(dismissed);
-        setShowOnboarding(shouldAutoOpen);
-        setBubbleCollapsed(Boolean(stored.completed || dismissed || isAuthenticated));
+// if onboarding was reopened/editing, keep it open even for authenticated users
+        const shouldShowOnboarding =
+            stored.open || shouldAutoOpen;
+
+        setShowOnboarding(shouldShowOnboarding);
+        setBubbleCollapsed(
+            !shouldShowOnboarding &&
+            Boolean(effectiveCompleted || effectiveSkipped || isAuthenticated),
+        );
         setHydrated(true);
+        setBootstrapped(true);
     }, [isAuthenticated]);
-
-    // useEffect(() => {
-    //     if (!hydrated) return;
-    //     if (!onboardingData.themePreference) return;
-    //     applyThemeChoice(onboardingData.themePreference);
-    // }, [hydrated, onboardingData.themePreference, applyThemeChoice]);
 
     useEffect(() => {
         const interests = onboardingData.learningInterests ?? [];
@@ -1273,7 +1309,9 @@ export default function HomePageAvatarOnboardingClient({
         if (!pendingLocaleSwitch?.locale || !pathname) return;
 
         const timer = window.setTimeout(() => {
-            router.replace(pathname as any, { locale: pendingLocaleSwitch.locale as any });
+            router.replace(pathname as any, {
+                locale: pendingLocaleSwitch.locale as any,
+            });
         }, 220);
 
         return () => window.clearTimeout(timer);
@@ -1285,7 +1323,15 @@ export default function HomePageAvatarOnboardingClient({
     }, [subjects, onboardingData.learningInterests]);
 
     const welcomeText = useMemo(
-        () => buildWelcomeMessage(onboardingData, completed, subjects, t, resolve, locale),
+        () =>
+            buildWelcomeMessage(
+                onboardingData,
+                completed,
+                subjects,
+                t,
+                resolve,
+                locale,
+            ),
         [onboardingData, completed, subjects, t, resolve, locale],
     );
 
@@ -1333,9 +1379,14 @@ export default function HomePageAvatarOnboardingClient({
         }) => {
             if (nextLocale === locale) return;
 
+            setCompleted(false);
+            setSkipped(false);
             setOnboardingData(nextData);
             setResumeStepIndex(stepIndex);
-            saveStoredOnboarding(false, nextData, stepIndex);
+            setShowOnboarding(true);
+            setBubbleCollapsed(false);
+
+            saveStoredOnboarding(false, nextData, stepIndex, true);
 
             setPendingLocaleSwitch({
                 locale: nextLocale,
@@ -1347,7 +1398,10 @@ export default function HomePageAvatarOnboardingClient({
 
     const TRIAL_LAST_SESSION_KEY = "zoeskoul.trial.lastSessionId";
 
-    const beginTrial = async (opts?: { subject?: string | null; level?: string | null }) => {
+    const beginTrial = async (opts?: {
+        subject?: string | null;
+        level?: string | null;
+    }) => {
         const subject = opts?.subject ?? trialSubjectSlug;
         const level = (opts?.level ?? onboardingData.level) || "beginner";
 
@@ -1379,15 +1433,14 @@ export default function HomePageAvatarOnboardingClient({
                 window.sessionStorage.setItem(TRIAL_LAST_SESSION_KEY, out.sessionId);
             }
 
-            const href =
-                buildTrialHref({
-                    locale: nextLocale,
-                    sessionId: out.sessionId,
-                    subject,
-                    level,
-                    status: out.status,
-                    completed: out.completed,
-                });
+            const href = buildTrialHref({
+                locale: nextLocale,
+                sessionId: out.sessionId,
+                subject,
+                level,
+                status: out.status,
+                completed: out.completed,
+            });
 
             await redirectToTrial({ href, delayMs: 1200 });
             return;
@@ -1405,9 +1458,7 @@ export default function HomePageAvatarOnboardingClient({
             : locale;
 
         const finishTrialSubject =
-            trialSubjectSlug ??
-            data.learningInterests[0] ??
-            null;
+            trialSubjectSlug ?? data.learningInterests[0] ?? null;
 
         setTrialErr(null);
         setSkipped(false);
@@ -1420,7 +1471,7 @@ export default function HomePageAvatarOnboardingClient({
             applyThemeChoice(data.themePreference);
         }
 
-        saveStoredOnboarding(true, data, 0);
+        saveStoredOnboarding(true, data, 0, false);
         setOnboardingData(data);
 
         try {
@@ -1469,7 +1520,6 @@ export default function HomePageAvatarOnboardingClient({
             setShowOnboarding(false);
             setBubbleCollapsed(true);
             setResumeStepIndex(0);
-
         } catch (err) {
             console.error("Failed to finish onboarding", err);
             setCompleted(true);
@@ -1488,6 +1538,7 @@ export default function HomePageAvatarOnboardingClient({
         setBubbleCollapsed(true);
         setResumeStepIndex(0);
         setSkipped(true);
+        saveStoredOnboarding(false, onboardingData, 0, false);
 
         if (typeof window !== "undefined") {
             window.localStorage.setItem(DISMISSED_KEY, "1");
@@ -1511,32 +1562,35 @@ export default function HomePageAvatarOnboardingClient({
     };
 
     const reopenAssistant = () => {
+        setCompleted(false);
         setShowOnboarding(true);
         setBubbleCollapsed(false);
         setPendingLocaleSwitch(null);
         setSkipped(false);
+        saveStoredOnboarding(false, onboardingData, resumeStepIndex, true);
 
         if (typeof window !== "undefined") {
             window.localStorage.removeItem(DISMISSED_KEY);
         }
     };
 
-    useEffect(() => {
-        if (!hydrated) return;
-        if (completed) saveStoredOnboarding(true, onboardingData, 0);
-    }, [hydrated, completed, onboardingData]);
+    const mustStayOnboarding =
+        !skipped && !completed;
 
-    const showOnboardingGate = hydrated && showOnboarding;
+    const showOnboardingGate =
+        bootstrapped &&
+        (mustStayOnboarding || showOnboarding || Boolean(pendingLocaleSwitch));
 
-// show header/footer whenever the onboarding gate is not open
-    const showChrome = hydrated && !showOnboarding;
+    const showHomeContent =
+        bootstrapped && !showOnboardingGate;
 
-// allow reopen/edit later after complete or skip
+    const showChrome = showHomeContent;
+
     const showFloatingAssistant =
-        hydrated &&
+        showHomeContent &&
         !isAuthenticated &&
-        !showOnboarding &&
         (completed || skipped);
+
     const activeOverlay = pendingLocaleSwitch
         ? {
             mode: "locale" as const,
@@ -1586,7 +1640,28 @@ export default function HomePageAvatarOnboardingClient({
                 <section className="relative overflow-hidden">
                     <div className="ui-container relative py-6 sm:py-8 lg:py-10">
                         <AnimatePresence mode="wait">
-                            {showOnboardingGate ? (
+                            {!bootstrapped ? (
+                                <motion.div
+                                    key="gate-loading"
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    exit={{ opacity: 0 }}
+                                    transition={{ duration: 0.2 }}
+                                    className="mx-auto max-w-[760px]"
+                                >
+                                    <Surface className="p-4 sm:p-5 lg:p-6">
+                                        <div className="mx-auto max-w-[520px] text-center">
+                                            <SectionKicker>{t("gate.kicker")}</SectionKicker>
+                                            <h1 className="mt-2 text-[26px] font-black tracking-tight sm:text-[34px]">
+                                                {t("gate.title", { appName: APP_NAME })}
+                                            </h1>
+                                            <p className="mt-3 text-sm leading-6 text-neutral-600 dark:text-white/70">
+                                                {t("gate.description", { appName: APP_NAME })}
+                                            </p>
+                                        </div>
+                                    </Surface>
+                                </motion.div>
+                            ) : showOnboardingGate ? (
                                 <motion.div
                                     key="gate-only"
                                     initial={{ opacity: 0, y: 10 }}
@@ -1598,11 +1673,9 @@ export default function HomePageAvatarOnboardingClient({
                                     <Surface className="p-4 sm:p-5 lg:p-6">
                                         <div className="mx-auto max-w-[520px] text-center">
                                             <SectionKicker>{t("gate.kicker")}</SectionKicker>
-
                                             <h1 className="mt-2 text-[26px] font-black tracking-tight sm:text-[34px]">
                                                 {t("gate.title", { appName: APP_NAME })}
                                             </h1>
-
                                             <p className="mt-3 text-sm leading-6 text-neutral-600 dark:text-white/70">
                                                 {t("gate.description", { appName: APP_NAME })}
                                             </p>
@@ -1625,7 +1698,7 @@ export default function HomePageAvatarOnboardingClient({
                                         </div>
                                     </Surface>
                                 </motion.div>
-                            ) : (
+                            ) : showHomeContent ? (
                                 <motion.div
                                     key="full-home"
                                     initial={{ opacity: 0, y: 10 }}
@@ -1659,7 +1732,9 @@ export default function HomePageAvatarOnboardingClient({
                                                         : t("hero.descriptionFresh", { appName: APP_NAME })}
                                                 </motion.p>
 
-                                                {completed && !isAuthenticated && selectedTrialSubjects.length > 0 ? (
+                                                {completed &&
+                                                !isAuthenticated &&
+                                                selectedTrialSubjects.length > 0 ? (
                                                     <motion.div
                                                         initial={{ opacity: 0, y: 14 }}
                                                         animate={{ opacity: 1, y: 0 }}
@@ -1705,7 +1780,9 @@ export default function HomePageAvatarOnboardingClient({
                                                                 onClick={handleStartTrial}
                                                                 disabled={!canStartTrial || trialBusy}
                                                             >
-                                                                {trialBusy ? t("hero.startingTrial") : t("hero.try3Questions")}
+                                                                {trialBusy
+                                                                    ? t("hero.startingTrial")
+                                                                    : t("hero.try3Questions")}
                                                                 <ArrowRight className="size-4" />
                                                             </Button>
                                                         )
@@ -1728,12 +1805,7 @@ export default function HomePageAvatarOnboardingClient({
                                                     )}
 
                                                     <Button size="lg" variant="outline" className="sm:w-auto" asChild>
-                                                        <Link
-                                                            href={
-
-                                                                    `/${encodeURIComponent(locale)}/subjects`
-                                                            }
-                                                        >
+                                                        <Link href={`/${encodeURIComponent(locale)}/subjects`}>
                                                             {t("hero.exploreSubjects")}
                                                         </Link>
                                                     </Button>
@@ -1823,7 +1895,9 @@ export default function HomePageAvatarOnboardingClient({
                                                                                     disabled={!canStartTrial || trialBusy}
                                                                                     className="w-full"
                                                                                 >
-                                                                                    {trialBusy ? t("hero.startingTrial") : t("hero.try3Questions")}
+                                                                                    {trialBusy
+                                                                                        ? t("hero.startingTrial")
+                                                                                        : t("hero.try3Questions")}
                                                                                 </Button>
 
                                                                                 <Button
@@ -1896,11 +1970,15 @@ export default function HomePageAvatarOnboardingClient({
                                         </div>
 
                                         <div className="mt-6">
-                                            <SubjectGrid data={onboardingData} subjects={subjects} locale={locale} />
+                                            <SubjectGrid
+                                                data={onboardingData}
+                                                subjects={subjects}
+                                                locale={locale}
+                                            />
                                         </div>
                                     </Surface>
                                 </motion.div>
-                            )}
+                            ) : null}
                         </AnimatePresence>
                     </div>
                 </section>

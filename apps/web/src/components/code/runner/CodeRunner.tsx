@@ -13,7 +13,6 @@ import {
 import { isControlled, type CodeRunnerProps, type TerminalDock, CodeRunnerFrame } from "./types";
 import HeaderBar from "./components/HeaderBar";
 import EditorPane from "./components/EditorPane";
-import SqlResultsPane from "./components/SqlResultsPane";
 import { useSplitSizing } from "./hooks/useSplitSizing";
 import type { CodeLanguage, SqlDialect } from "@/lib/practice/types";
 import { isSqlRunResult } from "@/lib/code/types";
@@ -21,8 +20,36 @@ import { runViaApi } from "@/lib/code/runClient";
 import { useCodeRunnerController } from "@/components/code/runner/hooks/controller/useCodeRunnerController";
 import { resolveRuntime } from "@/components/code/runner/hooks/controller/useResolvedRuntime";
 import TerminalSurface from "@/components/code/runner/components/TerminalSurface";
+import {cx} from "@/components/tools/utils/cx";
 
 type MobilePane = "editor" | "output";
+
+const RUNNER_SURFACE =
+    "overflow-hidden rounded-xl border border-neutral-200 bg-neutral-50/60 dark:border-white/10 dark:bg-black/20";
+
+const PANEL_EDITOR =
+    "bg-white/80 dark:bg-black/10";
+
+const PANEL_TABS =
+    "border-b border-neutral-200 bg-white/88 dark:border-white/10 dark:bg-black/25";
+
+const MOBILE_TAB_BASE =
+    "inline-flex h-8 items-center justify-center gap-1.5 rounded-md px-2.5 text-[11px] font-medium transition-colors";
+
+const MOBILE_TAB_IDLE =
+    "text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900 dark:text-white/65 dark:hover:bg-white/[0.06] dark:hover:text-white/90";
+
+const MOBILE_TAB_ACTIVE =
+    "border border-neutral-300 bg-neutral-100 text-neutral-900 dark:border-white/15 dark:bg-white/[0.08] dark:text-white/90";
+
+const MOBILE_TAB_OUTPUT_ACTIVE =
+    "border border-sky-300/20 bg-sky-300/10 text-sky-900 dark:border-sky-300/20 dark:bg-sky-300/10 dark:text-sky-100";
+
+const SPLIT_BAR_IDLE =
+    "bg-neutral-200/50 outline-none dark:bg-white/[0.04] dark:hover:bg-white/[0.09] dark:focus:bg-white/[0.09]";
+
+const SPLIT_BAR_ACTIVE =
+    "hover:bg-neutral-300/60 focus:bg-neutral-300/60";
 
 function CodeRunnerContent(props: CodeRunnerProps) {
     const {
@@ -336,18 +363,10 @@ function CodeRunnerContent(props: CodeRunnerProps) {
             ? term.lastResult
             : null;
 
-    const genericSqlError =
-        lang === "sql" &&
-        term.lastRunLanguage === "sql" &&
-        term.lastResult &&
-        !isSqlRunResult(term.lastResult)
-            ? term.lastResult
-            : null;
-
     const outputLabel = term.backend === "sql" ? "Results" : "Terminal";
     const mobileTabAttention = term.runState !== "idle" || !!term.lastResult;
 
-    const mobileBodyHeight = Math.max(240, (split.mainH || numericHeight) - 52);
+    const mobileBodyHeight = Math.max(240, (split.mainH || numericHeight) - 48);
 
     const renderOutputPane = (panelHeight?: number, panelWidth?: number) => {
         return (
@@ -369,8 +388,8 @@ function CodeRunnerContent(props: CodeRunnerProps) {
 
     const renderEditorPane = (editorHeight: number) => (
         <div
-            className="h-full bg-white/70 dark:bg-black/10"
-            style={{ touchAction: isNarrowScreen ? "pan-y" : "auto" }}
+            className={PANEL_EDITOR}
+            style={{ touchAction: isNarrowScreen ? "pan-y" : "auto", height: "100%" }}
         >
             <EditorPane
                 frame={frame}
@@ -450,11 +469,8 @@ function CodeRunnerContent(props: CodeRunnerProps) {
                     ref={mainRef}
                     style={regionStyle}
                     className={[
-                        "relative z-0",
-                        "mt-3 overflow-hidden rounded-xl border sm:rounded-2xl",
-                        "border-neutral-200 bg-neutral-50/60",
-                        "dark:border-white/10 dark:bg-black/20",
-                        "min-h-0",
+                        "relative z-0 mt-3 min-h-0",
+                        RUNNER_SURFACE,
                         isNarrowScreen ? "overscroll-y-auto touch-pan-y" : "overscroll-contain",
                         height === "auto" ? "h-auto" : "",
                     ].join(" ")}
@@ -466,17 +482,15 @@ function CodeRunnerContent(props: CodeRunnerProps) {
                     {showEditor && showTerminal ? (
                         isNarrowScreen ? (
                             <div className="flex h-full min-h-0 flex-col">
-                                <div className="border-b border-neutral-200 bg-white/85 p-2 dark:border-white/10 dark:bg-black/25">
+                                <div className={cx("p-2", PANEL_TABS)}>
                                     <div className="grid grid-cols-2 gap-2">
                                         <button
                                             type="button"
                                             onClick={() => setMobilePane("editor")}
-                                            className={[
-                                                "inline-flex items-center justify-center rounded-lg border px-3 py-2 text-xs font-extrabold transition",
-                                                mobilePane === "editor"
-                                                    ? "border-emerald-600/25 bg-emerald-500/10 text-emerald-950 dark:border-emerald-300/30 dark:bg-emerald-300/10 dark:text-white/90"
-                                                    : "border-neutral-200 bg-white text-neutral-700 hover:bg-neutral-50 dark:border-white/10 dark:bg-white/[0.06] dark:text-white/75 dark:hover:bg-white/[0.10]",
-                                            ].join(" ")}
+                                            className={cx(
+                                                MOBILE_TAB_BASE,
+                                                mobilePane === "editor" ? MOBILE_TAB_ACTIVE : MOBILE_TAB_IDLE,
+                                            )}
                                             aria-pressed={mobilePane === "editor"}
                                         >
                                             Editor
@@ -485,12 +499,10 @@ function CodeRunnerContent(props: CodeRunnerProps) {
                                         <button
                                             type="button"
                                             onClick={() => setMobilePane("output")}
-                                            className={[
-                                                "inline-flex items-center justify-center gap-2 rounded-lg border px-3 py-2 text-xs font-extrabold transition",
-                                                mobilePane === "output"
-                                                    ? "border-sky-300/30 bg-sky-300/10 text-neutral-900 dark:text-white/90"
-                                                    : "border-neutral-200 bg-white text-neutral-700 hover:bg-neutral-50 dark:border-white/10 dark:bg-white/[0.06] dark:text-white/75 dark:hover:bg-white/[0.10]",
-                                            ].join(" ")}
+                                            className={cx(
+                                                MOBILE_TAB_BASE,
+                                                mobilePane === "output" ? MOBILE_TAB_OUTPUT_ACTIVE : MOBILE_TAB_IDLE,
+                                            )}
                                             aria-pressed={mobilePane === "output"}
                                         >
                                             <span>{outputLabel}</span>
@@ -509,7 +521,7 @@ function CodeRunnerContent(props: CodeRunnerProps) {
                             </div>
                         ) : effectiveDock === "bottom" ? (
                             <div className="flex h-full min-h-0 flex-col">
-                                <div className="min-h-0 border-b border-neutral-200 bg-white/70 dark:border-white/10 dark:bg-black/10">
+                                <div className={cx("min-h-0 border-b border-neutral-200 dark:border-white/10", PANEL_EDITOR)}>
                                     {renderEditorPane(split.bottomEditorH)}
                                 </div>
 
@@ -527,10 +539,11 @@ function CodeRunnerContent(props: CodeRunnerProps) {
                                             : split.separatorProps.onKeyDown
                                     }
                                     className={[
-                                        "h-2 bg-neutral-200/60 outline-none dark:bg-white/5",
+                                        "h-[6px]",
+                                        SPLIT_BAR_IDLE,
                                         term.runState !== "idle"
                                             ? "cursor-not-allowed opacity-60"
-                                            : "cursor-row-resize hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-white/10 dark:focus:bg-white/10",
+                                            : `cursor-row-resize ${SPLIT_BAR_ACTIVE}`,
                                     ].join(" ")}
                                     title={
                                         term.runState !== "idle"
@@ -543,7 +556,7 @@ function CodeRunnerContent(props: CodeRunnerProps) {
                             </div>
                         ) : (
                             <div className="flex h-full min-h-0">
-                                <div className="min-w-0 flex-1 border-r border-neutral-200 bg-white/70 dark:border-white/10 dark:bg-black/10">
+                                <div className={cx("min-w-0 flex-1 border-r border-neutral-200 dark:border-white/10", PANEL_EDITOR)}>
                                     {renderEditorPane(split.rightTotalH)}
                                 </div>
 
@@ -561,10 +574,11 @@ function CodeRunnerContent(props: CodeRunnerProps) {
                                             : split.separatorProps.onKeyDown
                                     }
                                     className={[
-                                        "w-2 bg-neutral-200/60 outline-none dark:bg-white/5",
+                                        "w-[6px]",
+                                        SPLIT_BAR_IDLE,
                                         term.runState !== "idle"
                                             ? "cursor-not-allowed opacity-60"
-                                            : "cursor-col-resize hover:bg-neutral-200 focus:bg-neutral-200 dark:hover:bg-white/10 dark:focus:bg-white/10",
+                                            : `cursor-col-resize ${SPLIT_BAR_ACTIVE}`,
                                     ].join(" ")}
                                     title={
                                         term.runState !== "idle"

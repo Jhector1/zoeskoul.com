@@ -225,7 +225,8 @@ export default function ReviewModuleView({
         },
         [tool.setToolCode]
     );
-
+// add near your other refs
+    const restoreActivityKeyRef = useRef<string>("");
     const handleToolChangeStdin = useCallback(
         (stdin: string) => {
             tool.setToolStdin(stdin);
@@ -677,6 +678,27 @@ export default function ReviewModuleView({
         },
         [reduceMotion]
     );
+// add near scrollToCardId / scroll helpers
+    const findCurrentActivityCardId = useCallback(
+        (state: any) => {
+            const tp0 = state?.topics?.[viewTid] ?? {};
+            const prereqsAllQuizzes = unlockAll
+                ? true
+                : prereqsMetForAnyQuizOrProject(viewCards, tp0);
+
+            for (const c of viewCards) {
+                if (isCardDone(c, tp0)) continue;
+                if (isQuizLikeCard(c) && !prereqsAllQuizzes) continue;
+                return c.id;
+            }
+
+            // if everything is done, land near the end instead of jumping to top
+            return viewCards[viewCards.length - 1]?.id ?? null;
+        },
+        [viewTid, viewCards, unlockAll]
+    );
+
+
 
     function scrollToNextActionable(fromIndex: number, nextProgress: any) {
         const tp0 = nextProgress?.topics?.[viewTid] ?? {};
@@ -776,7 +798,36 @@ export default function ReviewModuleView({
         const t = window.setTimeout(() => setShowMask(false), 420);
         return () => window.clearTimeout(t);
     }, [showSkeleton, reduceMotion]);
+    // add this effect AFTER showSkeleton/swapKey are defined,
+// and AFTER scrollToCardId is defined
+    useEffect(() => {
+        if (!progressHydrated) return;
+        if (showSkeleton) return;
+        if (!viewTid) return;
+        if (userIsInteracting()) return;
 
+        const restoreKey = `${swapKey}:restore`;
+        if (restoreActivityKeyRef.current === restoreKey) return;
+        restoreActivityKeyRef.current = restoreKey;
+
+        const targetId = findCurrentActivityCardId(progress);
+        if (!targetId) return;
+
+        const run = () => scrollToCardId(targetId);
+
+        // wait for DOM + skeleton swap to finish
+        requestAnimationFrame(() => {
+            requestAnimationFrame(run);
+        });
+    }, [
+        progressHydrated,
+        showSkeleton,
+        swapKey,
+        viewTid,
+        progress,
+        findCurrentActivityCardId,
+        scrollToCardId,
+    ]);
     const footerPad = footerInsetPx ? footerInsetPx + 12 : 0;
     const padStyle = {
         paddingBottom: footerPad || undefined,

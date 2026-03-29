@@ -44,12 +44,12 @@ function cx(...xs: Array<string | false | null | undefined>) {
 function IconText({ icon, text }: { icon: React.ReactNode; text: React.ReactNode }) {
     return (
         <span className="inline-flex items-center">
-            <span className="inline-flex @lg:hidden">{icon}</span>
-            <span className="hidden @lg:inline-flex items-center gap-2">
-                {icon}
-                <span className="whitespace-nowrap">{text}</span>
-            </span>
-        </span>
+      <span className="inline-flex @lg:hidden">{icon}</span>
+      <span className="hidden @lg:inline-flex items-center gap-1.5">
+        {icon}
+          <span className="whitespace-nowrap">{text}</span>
+      </span>
+    </span>
     );
 }
 
@@ -88,28 +88,22 @@ export default function HeaderBar(props: {
         title,
         disabled,
         runState,
-
         editorTheme,
         onToggleTheme,
         showEditorThemeToggle,
-
         dock,
         onToggleDock,
         showDockToggle,
-
         showPicker,
         allowedLangs,
         lang,
         onSwitchLang,
-
         showSqlDialectPicker,
         allowedSqlDialects,
         sqlDialect,
         onSwitchSqlDialect,
-
         allowReset,
         onReset,
-
         allowRun,
         onRun,
         onCancel,
@@ -120,25 +114,6 @@ export default function HeaderBar(props: {
 
     const langMeta = LANG_META[lang] ?? { label: String(lang), Icon: FiCode };
     const LangIcon = langMeta.Icon;
-
-    const btnBase =
-        "inline-flex items-center justify-center rounded-xl border text-xs font-extrabold transition select-none";
-    const btnPad = "p-2 @lg:px-3 @lg:py-1.5";
-    const btnIdle =
-        "border-neutral-200 bg-white text-neutral-700 hover:bg-neutral-50 " +
-        "dark:border-white/10 dark:bg-white/[0.06] dark:text-white/80 dark:hover:bg-white/[0.10]";
-    const btnDisabled = "disabled:opacity-50 disabled:cursor-not-allowed";
-    const btnActive =
-        "border-emerald-300/30 bg-emerald-300/10 text-neutral-900 dark:text-white/90";
-    const btnRun =
-        "border-sky-300/30 bg-sky-300/10 text-neutral-900 hover:bg-sky-300/15 dark:text-white/90";
-    const btnStop =
-        "border-rose-300/30 bg-rose-300/10 text-neutral-900 hover:bg-rose-300/15 dark:text-white/90";
-
-    const selectCls =
-        "rounded-xl border border-neutral-200 bg-white px-3 py-2 text-xs font-extrabold " +
-        "text-neutral-700 outline-none transition hover:bg-neutral-50 " +
-        "dark:border-white/10 dark:bg-white/[0.06] dark:text-white/80 dark:hover:bg-white/[0.10]";
 
     const isStarting = runState === "starting";
     const isRunning = runState === "running";
@@ -158,32 +133,24 @@ export default function HeaderBar(props: {
                 ? "Stop"
                 : "Run";
 
-    const runTip = runLabel;
-
     return (
         <div className="flex flex-wrap items-center justify-between gap-2 sm:gap-3">
-            <div className="min-w-0 flex-1 truncate text-sm font-black text-neutral-900 dark:text-white/90">
+            <div className="min-w-0 flex-1 truncate text-sm font-medium text-neutral-900 dark:text-white/90">
                 {title}
             </div>
 
-            <div className="flex min-w-0 flex-wrap items-center gap-2 sm:ml-auto">
+            <div className="flex min-w-0 flex-wrap items-center gap-1.5 sm:ml-auto">
                 {showEditorThemeToggle ? (
                     <Tooltip tip={themeIsDark ? "Editor theme: Dark" : "Editor theme: Light"}>
                         <button
                             type="button"
                             onClick={onToggleTheme}
                             disabled={disabled}
-                            className={cx(btnBase, btnPad, btnIdle, btnDisabled)}
+                            className="ui-btn-ide-ghost"
                             aria-label={themeIsDark ? "Editor theme: Dark" : "Editor theme: Light"}
                         >
                             <IconText
-                                icon={
-                                    themeIsDark ? (
-                                        <FiMoon className="text-[14px]" />
-                                    ) : (
-                                        <FiSun className="text-[14px]" />
-                                    )
-                                }
+                                icon={themeIsDark ? <FiMoon className="text-[13px]" /> : <FiSun className="text-[13px]" />}
                                 text={themeIsDark ? "Dark" : "Light"}
                             />
                         </button>
@@ -196,17 +163,17 @@ export default function HeaderBar(props: {
                             type="button"
                             onClick={onToggleDock}
                             disabled={disabled || sessionActive}
-                            className={cx(btnBase, btnPad, btnIdle, btnDisabled)}
+                            className="ui-btn-ide-ghost"
                             aria-label={`Terminal dock: ${dockLabel}`}
                         >
-                            <IconText icon={<FiTerminal className="text-[14px]" />} text={dockLabel} />
+                            <IconText icon={<FiTerminal className="text-[13px]" />} text={dockLabel} />
                         </button>
                     </Tooltip>
                 ) : null}
 
                 {showPicker ? (
-                    <div className="flex min-w-0 flex-wrap items-center gap-2">
-                        <div className="hidden lg:block text-xs font-extrabold text-neutral-600 dark:text-white/60">
+                    <div className="flex min-w-0 flex-wrap items-center gap-1.5">
+                        <div className="hidden lg:block text-[11px] font-medium text-neutral-500 dark:text-white/45">
                             Language
                         </div>
 
@@ -221,10 +188,10 @@ export default function HeaderBar(props: {
                                         type="button"
                                         disabled={disabled || sessionActive}
                                         onClick={() => onSwitchLang(l)}
-                                        className={cx(btnBase, btnPad, active ? btnActive : btnIdle, btnDisabled)}
+                                        className={active ? "ui-btn-ide-active" : "ui-btn-ide-ghost"}
                                         aria-label={meta.label}
                                     >
-                                        <IconText icon={<Icon className="text-[14px]" />} text={meta.label} />
+                                        <IconText icon={<Icon className="text-[13px]" />} text={meta.label} />
                                     </button>
                                 </Tooltip>
                             );
@@ -232,22 +199,22 @@ export default function HeaderBar(props: {
                     </div>
                 ) : (
                     <Tooltip tip={`Language: ${langMeta.label}`}>
-                        <div className="text-xs font-extrabold text-neutral-500 dark:text-white/60">
-                            <IconText icon={<LangIcon className="text-[14px]" />} text={langMeta.label} />
+                        <div className="text-[11px] font-medium text-neutral-500 dark:text-white/50">
+                            <IconText icon={<LangIcon className="text-[13px]" />} text={langMeta.label} />
                         </div>
                     </Tooltip>
                 )}
 
                 {lang === "sql" && showSqlDialectPicker ? (
-                    <label className="flex items-center gap-2">
-                        <span className="hidden lg:block text-xs font-extrabold text-neutral-600 dark:text-white/60">
-                            Dialect
-                        </span>
+                    <label className="flex items-center gap-1.5">
+            <span className="hidden lg:block text-[11px] font-medium text-neutral-500 dark:text-white/45">
+              Dialect
+            </span>
                         <select
                             value={sqlDialect}
                             onChange={(e) => onSwitchSqlDialect(e.target.value as SqlDialect)}
                             disabled={disabled || sessionActive}
-                            className={cx(selectCls, btnDisabled)}
+                            className="ui-select-ide"
                             aria-label="SQL dialect"
                         >
                             {allowedSqlDialects.map((d) => (
@@ -261,7 +228,7 @@ export default function HeaderBar(props: {
 
                 {lang === "sql" && !showSqlDialectPicker ? (
                     <Tooltip tip={`Dialect: ${DIALECT_LABEL[sqlDialect]}`}>
-                        <div className="text-xs font-extrabold text-neutral-500 dark:text-white/60">
+                        <div className="text-[11px] font-medium text-neutral-500 dark:text-white/50">
                             {DIALECT_LABEL[sqlDialect]}
                         </div>
                     </Tooltip>
@@ -273,36 +240,31 @@ export default function HeaderBar(props: {
                             type="button"
                             disabled={disabled || sessionActive}
                             onClick={onReset}
-                            className={cx(btnBase, btnPad, btnIdle, btnDisabled)}
+                            className="ui-btn-ide-ghost"
                             aria-label="Reset"
                         >
-                            <IconText icon={<FiRefreshCw className="text-[14px]" />} text="Reset" />
+                            <IconText icon={<FiRefreshCw className="text-[13px]" />} text="Reset" />
                         </button>
                     </Tooltip>
                 ) : null}
 
                 {allowRun ? (
-                    <Tooltip tip={runTip}>
+                    <Tooltip tip={runLabel}>
                         <button
                             type="button"
                             disabled={disabled || showSpinner}
                             onClick={showStop ? onCancel : onRun}
-                            className={cx(
-                                btnBase,
-                                btnPad,
-                                showStop || showSpinner ? btnStop : btnRun,
-                                btnDisabled,
-                            )}
+                            className={cx(showStop || showSpinner ? "ui-btn-ide-danger" : "ui-btn-ide-success")}
                             aria-label={runLabel}
                         >
                             <IconText
                                 icon={
                                     showSpinner ? (
-                                        <FiLoader className="text-[14px] animate-spin" />
+                                        <FiLoader className="text-[13px] animate-spin" />
                                     ) : showStop ? (
-                                        <FiSquare className="text-[14px]" />
+                                        <FiSquare className="text-[13px]" />
                                     ) : (
-                                        <FiPlay className="text-[14px]" />
+                                        <FiPlay className="text-[13px]" />
                                     )
                                 }
                                 text={runLabel}

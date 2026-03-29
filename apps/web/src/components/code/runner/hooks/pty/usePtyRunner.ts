@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-// import type { RunEvent, RunSessionState } from "@/lib/code/types/session";
 import type {
     SharedRunnerArgs,
     CodeRunnerController,
@@ -10,7 +9,11 @@ import type {
 import type { RunnerState } from "../../types";
 import { useRunSession } from "../useRunSession";
 import { resolveRuntime } from "../controller/useResolvedRuntime";
-import {RunEvent, RunSessionState} from "@zoeskoul/code-contracts";
+import {
+    RunEvent,
+    RunSessionState,
+    type InteractiveLanguage,
+} from "@zoeskoul/code-contracts";
 
 type StartedInteractiveSession = {
     ok?: true;
@@ -32,6 +35,16 @@ function isStartedInteractiveSession(value: unknown): value is StartedInteractiv
 
     const v = value as Record<string, unknown>;
     return typeof v.sessionId === "string" && typeof v.state === "string";
+}
+
+function isInteractiveLanguage(lang: string): lang is InteractiveLanguage {
+    return (
+        lang === "python" ||
+        lang === "java" ||
+        lang === "javascript" ||
+        lang === "c" ||
+        lang === "cpp"
+    );
 }
 
 function handleSessionEvent(args: {
@@ -164,6 +177,14 @@ export function usePtyRunner(args: SharedRunnerArgs): CodeRunnerController {
     const startRun = React.useCallback(async () => {
         if (disabled || !allowRun || busy) return;
 
+        if (!isInteractiveLanguage(lang)) {
+            pushChunk("err", "PTY runner does not support SQL. Use the SQL runner instead.\r\n");
+            setBusy(false);
+            setRunState("idle");
+            setInputEnabled(false);
+            return;
+        }
+
         if (resetTerminalOnRun) {
             resetTerminal();
         } else {
@@ -178,7 +199,7 @@ export function usePtyRunner(args: SharedRunnerArgs): CodeRunnerController {
         try {
             if (onRun) {
                 const started = await onRun({
-                    language: lang as Exclude<typeof lang, "sql">,
+                    language: lang,
                     code,
                     stdin: "",
                 } as any);

@@ -102,7 +102,7 @@ export default function IdeEditorPane({
                             showEditorThemeToggle={false}
                             showTerminalDockToggle={isDesktop}
                             resetTerminalOnRun={true}
-                            onRun={isAuthenticated?onRun: null}
+                            onRun={isAuthenticated?onRun: undefined}
                             isAuthenticated={isAuthenticated}
 
                         editorModelKey={activeFileId ?? "no-file"}

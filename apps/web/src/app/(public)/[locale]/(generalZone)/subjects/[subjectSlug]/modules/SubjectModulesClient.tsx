@@ -1,14 +1,14 @@
 "use client";
 
-import React, {useMemo} from "react";
+import React, { useMemo } from "react";
 import Link from "next/link";
-import {useTranslations} from "next-intl";
-import {ArrowRight, CheckCircle2, Lock, Sparkles} from "lucide-react";
+import { useTranslations } from "next-intl";
+import { CheckCircle2, Lock, Sparkles } from "lucide-react";
 
-import {cn} from "@/lib/cn";
-import {useReviewProgressMany} from "@/components/review/module/hooks/useReviewProgressMany";
-import {ROUTES} from "@/utils";
-import {buildBillingHref} from "@/lib/billing/moduleAccess";
+import { cn } from "@/lib/cn";
+import { useReviewProgressMany } from "@/components/review/module/hooks/useReviewProgressMany";
+import { ROUTES } from "@/utils";
+import { buildBillingHref } from "@/lib/billing/moduleAccess";
 
 type ModuleRow = {
     id: string;
@@ -40,13 +40,10 @@ type Props = {
     subjectSlug: string;
     subjectTitle: string;
     subjectDescription: string | null;
-
     modules: ModuleRow[];
     sections: SectionRow[];
-
     topicIdsByModuleDbId: Record<string, string[]>;
     topicIdsBySectionId: Record<string, string[]>;
-
     canUnlockAll?: boolean;
     accessByModuleSlug?: Record<string, ModuleAccessView>;
 };
@@ -72,13 +69,8 @@ function countMatches(topicKeys: string[], completed?: Set<string> | null) {
     return n;
 }
 
-function Kicker({children}: { children: React.ReactNode }) {
-    return (
-        <div
-            className="text-[10px] sm:text-[11px] font-extrabold uppercase tracking-[0.18em] text-neutral-500 dark:text-white/45">
-            {children}
-        </div>
-    );
+function Kicker({ children }: { children: React.ReactNode }) {
+    return <div className="ui-kicker">{children}</div>;
 }
 
 function Surface({
@@ -88,18 +80,7 @@ function Surface({
     children: React.ReactNode;
     className?: string;
 }) {
-    return (
-        <div
-            className={cn(
-                "rounded-[28px]",
-                "bg-white/75 ring-1 ring-black/5 shadow-[0_18px_60px_-26px_rgba(0,0,0,0.24)] backdrop-blur-xl",
-                "dark:bg-white/[0.06] dark:ring-white/10 dark:shadow-none",
-                className
-            )}
-        >
-            {children}
-        </div>
-    );
+    return <div className={cn("ui-page-surface", className)}>{children}</div>;
 }
 
 function Pill({
@@ -109,15 +90,14 @@ function Pill({
     variant: "good" | "neutral" | "warn";
     children: React.ReactNode;
 }) {
-    const cls =
-        variant === "good"
-            ? "bg-emerald-500/12 text-emerald-800 ring-1 ring-emerald-500/20 dark:bg-emerald-300/10 dark:text-emerald-200 dark:ring-emerald-200/15"
-            : variant === "warn"
-                ? "bg-amber-500/12 text-amber-800 ring-1 ring-amber-500/20 dark:bg-amber-300/10 dark:text-amber-200 dark:ring-amber-200/15"
-                : "bg-neutral-500/10 text-neutral-700 ring-1 ring-neutral-500/15 dark:bg-white/8 dark:text-white/70 dark:ring-white/10";
-
     return (
-        <span className={cn("inline-flex items-center rounded-full px-2.5 py-1 text-[11px] font-extrabold", cls)}>
+        <span
+            className={cn(
+                variant === "good" && "ui-pill-good",
+                variant === "neutral" && "ui-pill-neutral",
+                variant === "warn" && "ui-pill-warn",
+            )}
+        >
       {children}
     </span>
     );
@@ -133,20 +113,15 @@ function StatCard({
     subvalue?: React.ReactNode;
 }) {
     return (
-        <div
-            className={cn(
-                "rounded-2xl p-3 sm:p-4",
-                "bg-white/70 ring-1 ring-black/5 shadow-[0_10px_30px_-20px_rgba(0,0,0,0.18)]",
-                "dark:bg-white/[0.05] dark:ring-white/10 dark:shadow-none"
-            )}
-        >
-            <div
-                className="text-[10px] sm:text-[11px] font-extrabold uppercase tracking-[0.14em] text-neutral-500 dark:text-white/45">
+        <div className="ui-stat-card">
+            <div className="text-[10px] font-medium uppercase tracking-[0.12em] text-neutral-500 dark:text-white/40">
                 {label}
             </div>
-            <div className="mt-1 text-lg sm:text-xl font-black tracking-tight tabular-nums">{value}</div>
+            <div className="mt-1 text-base font-semibold tracking-tight tabular-nums text-neutral-900 dark:text-white/90">
+                {value}
+            </div>
             {subvalue ? (
-                <div className="mt-1 text-xs font-semibold text-neutral-500 dark:text-white/50">
+                <div className="mt-1 text-[11px] font-medium text-neutral-500 dark:text-white/50">
                     {subvalue}
                 </div>
             ) : null}
@@ -162,27 +137,15 @@ function ProgressBar({ pct, label }: { pct: number; label?: React.ReactNode }) {
     return (
         <div className="grid gap-1.5">
             {label ? (
-                <div className="flex items-center justify-between gap-3 text-[11px] font-extrabold tracking-wide text-neutral-600 dark:text-white/60">
+                <div className="flex items-center justify-between gap-3 text-[11px] font-medium text-neutral-500 dark:text-white/50">
                     <div className="min-w-0">{label}</div>
-                    <span className="shrink-0 tabular-nums text-neutral-500 dark:text-white/45">{w}</span>
+                    <span className="shrink-0 tabular-nums">{w}</span>
                 </div>
             ) : null}
 
-            <div className="h-2.5 w-full overflow-hidden rounded-full bg-neutral-200 dark:bg-white/10">
+            <div className="ui-progress-track">
                 <div
-                    className={cn(
-                        "h-full rounded-full transition-[width] duration-300",
-                        showMin && "min-w-[10px]",
-                        "bg-emerald-600 dark:hidden"
-                    )}
-                    style={{ width: w }}
-                />
-                <div
-                    className={cn(
-                        "hidden h-full rounded-full transition-[width] duration-300 dark:block",
-                        showMin && "min-w-[10px]",
-                        "dark:bg-gradient-to-r dark:from-emerald-300 dark:via-emerald-400 dark:to-teal-300"
-                    )}
+                    className={cn("ui-progress-fill", showMin && "min-w-[10px]")}
                     style={{ width: w }}
                 />
             </div>
@@ -202,22 +165,18 @@ function IconCircle({
     return (
         <div
             className={cn(
-                "h-10 w-10 sm:h-11 sm:w-11 rounded-2xl grid place-items-center shrink-0",
-                "ring-1 shadow-sm",
-                completed
-                    ? "bg-emerald-500/10 text-emerald-700 ring-emerald-500/20 dark:bg-emerald-300/10 dark:text-emerald-200 dark:ring-emerald-200/15"
-                    : locked
-                        ? "bg-neutral-900/5 text-neutral-500 ring-black/5 dark:bg-white/5 dark:text-white/55 dark:ring-white/10"
-                        : "bg-white/75 text-neutral-900 ring-black/5 dark:bg-white/5 dark:text-white/90 dark:ring-white/10"
+                "ui-icon-box",
+                completed && "border-emerald-300/20 bg-emerald-300/10 text-emerald-700 dark:text-emerald-200",
+                locked && "bg-neutral-50 text-neutral-500 dark:bg-white/[0.04] dark:text-white/50",
             )}
             aria-hidden
         >
             {completed ? (
-                <CheckCircle2 className="h-5 w-5"/>
+                <CheckCircle2 className="h-4 w-4" />
             ) : locked ? (
-                <Lock className="h-4 w-4"/>
+                <Lock className="h-4 w-4" />
             ) : (
-                <span className="font-black tabular-nums">{idx + 1}</span>
+                <span className="font-medium tabular-nums">{idx + 1}</span>
             )}
         </div>
     );
@@ -236,35 +195,21 @@ function ActionLink({
 }) {
     const cls =
         variant === "primary"
-            ? "ui-btn ui-btn-primary"
+            ? "ui-btn-primary"
             : variant === "premium"
-                ? "ui-btn ui-btn-premium"
-                : "ui-btn ui-btn-secondary";
+                ? "ui-btn-premium"
+                : "ui-btn-secondary";
 
     return (
-        <Link
-            href={href}
-            className={cn(
-                cls,
-                "rounded-2xl px-4 py-2.5 text-sm font-extrabold",
-                fullWidth ? "w-full sm:w-auto" : ""
-            )}
-        >
+        <Link href={href} className={cn(cls, fullWidth ? "w-full sm:w-auto" : "")}>
             <span>{children}</span>
         </Link>
     );
 }
 
-function DisabledAction({children}: { children: React.ReactNode }) {
+function DisabledAction({ children }: { children: React.ReactNode }) {
     return (
-        <span
-            className={cn(
-                "ui-btn ui-btn-disabled rounded-2xl px-4 py-2.5 text-sm font-extrabold",
-                "w-full sm:w-auto",
-                "border border-black/5 bg-neutral-900/5 text-neutral-500",
-                "dark:border-white/10 dark:bg-white/5 dark:text-white/45"
-            )}
-        >
+        <span className="ui-btn-disabled w-full sm:w-auto">
       <span>{children}</span>
     </span>
     );
@@ -277,7 +222,7 @@ function getStatusText(args: {
     hasAnyProgress: boolean;
     t: ReturnType<typeof useTranslations>;
 }) {
-    const {completed, seqLocked, showPremium, hasAnyProgress, t} = args;
+    const { completed, seqLocked, showPremium, hasAnyProgress, t } = args;
 
     if (completed) return t("pillCompleted");
     if (seqLocked) return t("pillLocked");
@@ -291,7 +236,7 @@ function getAccessText(args: {
     showPremium: boolean;
     accessReason: string;
 }) {
-    const {seqLocked, showPremium, accessReason} = args;
+    const { seqLocked, showPremium, accessReason } = args;
 
     if (seqLocked) return "Sequential";
     if (showPremium && accessReason === "requires_login") return "Sign in required";
@@ -335,7 +280,7 @@ export default function SubjectModulesClient(props: Props) {
 
     const moduleIds = useMemo(() => sortedModules.map((m) => m.slug), [sortedModules]);
 
-    const {loading: progressLoading, byModuleId: progByModuleSlug} = useReviewProgressMany({
+    const { loading: progressLoading, byModuleId: progByModuleSlug } = useReviewProgressMany({
         subjectSlug,
         locale,
         moduleIds,
@@ -405,32 +350,10 @@ export default function SubjectModulesClient(props: Props) {
     const backHref = `/${encodeURIComponent(locale)}/subjects`;
 
     return (
-        <div
-            className={cn(
-                "min-h-screen text-neutral-900 dark:text-white/90",
-                "bg-[radial-gradient(1200px_700px_at_20%_0%,#eafff5_0%,#ffffff_52%,#f6f7ff_100%)]",
-                "dark:bg-[radial-gradient(1200px_700px_at_20%_0%,#151a2c_0%,#0b0d12_52%)]"
-            )}
-        >
-            <div
-                className={cn(
-                    "pointer-events-none absolute inset-x-0 top-0 h-56",
-                    "bg-[linear-gradient(90deg,rgba(16,185,129,0.10),rgba(59,130,246,0.06),rgba(236,72,153,0.05))]",
-                    "dark:bg-[linear-gradient(90deg,rgba(110,231,183,0.08),rgba(147,197,253,0.05),rgba(251,113,133,0.04))]",
-                    "opacity-70 blur-3xl"
-                )}
-                aria-hidden
-            />
-
-            <div className="ui-container relative grid gap-4 py-5 sm:gap-5 md:gap-6 md:py-8">
-                <Surface className="relative overflow-hidden p-4 sm:p-5 md:p-6">
-                    <div
-                        className="pointer-events-none absolute inset-y-0 right-0 w-1/2 bg-[radial-gradient(circle_at_80%_20%,rgba(16,185,129,0.12),transparent_45%)] dark:bg-[radial-gradient(circle_at_80%_20%,rgba(110,231,183,0.08),transparent_45%)]"
-                        aria-hidden
-                    />
-
-                    <div
-                        className="relative grid gap-5 lg:grid-cols-[minmax(0,1.5fr)_minmax(280px,0.8fr)] lg:items-start">
+        <div className="min-h-screen bg-neutral-50 text-neutral-900 dark:bg-[#0b0d12] dark:text-white/90">
+            <div className="ui-container grid gap-4 py-5 sm:gap-5 md:gap-6 md:py-8">
+                <Surface className="p-4 sm:p-5 md:p-6">
+                    <div className="grid gap-5 lg:grid-cols-[minmax(0,1.5fr)_minmax(280px,0.8fr)] lg:items-start">
                         <div className="min-w-0">
                             <div className="flex flex-wrap items-center gap-2">
                                 <Kicker>{t("kickerSubject")}</Kicker>
@@ -438,13 +361,12 @@ export default function SubjectModulesClient(props: Props) {
                                 {progressLoading ? <Pill variant="neutral">{t("syncing")}</Pill> : null}
                             </div>
 
-                            <div className="mt-2 text-2xl font-black tracking-tight sm:text-3xl md:text-4xl">
+                            <div className="mt-2 text-2xl font-semibold tracking-tight sm:text-3xl md:text-4xl">
                                 {subjectTitle}
                             </div>
 
                             {subjectDescription ? (
-                                <div
-                                    className="mt-3 max-w-3xl text-sm leading-6 text-neutral-600 dark:text-white/70 sm:text-base">
+                                <div className="mt-3 max-w-3xl text-sm leading-6 text-neutral-600 dark:text-white/70 sm:text-base">
                                     {subjectDescription}
                                 </div>
                             ) : null}
@@ -453,8 +375,7 @@ export default function SubjectModulesClient(props: Props) {
                                 <ProgressBar
                                     pct={subjectStats.pct}
                                     label={
-                                        <div
-                                            className="flex min-w-0 flex-col gap-0.5 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-3">
+                                        <div className="flex min-w-0 flex-col gap-0.5 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-3">
                                             <span>{t("overallProgress")}</span>
                                             <span className="tabular-nums">
                         {progressLoading
@@ -478,12 +399,12 @@ export default function SubjectModulesClient(props: Props) {
                             </div>
                         </div>
 
-                        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
+                        <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
                             <StatCard
                                 label={t("topicsLabel")}
                                 value={`${subjectStats.doneTopics}/${subjectStats.totalTopics}`}
                             />
-                            <StatCard label={t("sectionsLabel")} value={subjectStats.totalSections}/>
+                            <StatCard label={t("sectionsLabel")} value={subjectStats.totalSections} />
                             <StatCard
                                 label={t("kickerModule")}
                                 value={subjectStats.totalModules}
@@ -502,7 +423,7 @@ export default function SubjectModulesClient(props: Props) {
                 </Surface>
 
                 {sortedModules.length ? (
-                    <div className="grid gap-4">
+                    <div className="grid gap-3">
                         {sortedModules.map((m, idx) => {
                             const modSections = sectionsByModuleDbId.get(String(m.id)) ?? [];
                             const mp = progByModuleSlug[m.slug];
@@ -538,7 +459,7 @@ export default function SubjectModulesClient(props: Props) {
 
                             const moduleHref = `/${encodeURIComponent(locale)}/${ROUTES.moduleIntro(
                                 encodeURIComponent(subjectSlug),
-                                encodeURIComponent(m.slug)
+                                encodeURIComponent(m.slug),
                             )}`;
 
                             const modulesListPath = `/${encodeURIComponent(locale)}/subjects/${encodeURIComponent(subjectSlug)}/modules`;
@@ -580,40 +501,16 @@ export default function SubjectModulesClient(props: Props) {
                                 <Surface
                                     key={m.slug}
                                     className={cn(
-                                        "group relative overflow-hidden transition-all duration-200",
-                                        !seqLocked && "hover:-translate-y-[2px] hover:ring-emerald-400/20",
-                                        completed && "ring-emerald-500/15 dark:ring-emerald-300/12"
+                                        "transition-colors",
+                                        !seqLocked && "hover:border-neutral-300 dark:hover:border-white/15",
+                                        completed && "border-emerald-300/20 dark:border-emerald-300/15",
                                     )}
                                 >
-                                    <div
-                                        className={cn(
-                                            "pointer-events-none absolute inset-y-0 left-0 w-1.5 rounded-full",
-                                            completed
-                                                ? "bg-gradient-to-b from-emerald-400/90 via-emerald-500/70 to-teal-400/70"
-                                                : seqLocked
-                                                    ? "bg-neutral-300/70 dark:bg-white/10"
-                                                    : showPremium
-                                                        ? "bg-gradient-to-b from-amber-300/90 via-amber-400/70 to-yellow-300/70"
-                                                        : "bg-gradient-to-b from-emerald-300/70 via-sky-300/50 to-transparent"
-                                        )}
-                                        aria-hidden
-                                    />
-
-                                    <div
-                                        className={cn(
-                                            "pointer-events-none absolute -inset-24 opacity-0 transition-opacity group-hover:opacity-100",
-                                            "bg-[radial-gradient(circle_at_20%_20%,rgba(16,185,129,0.14),transparent_55%),radial-gradient(circle_at_80%_30%,rgba(59,130,246,0.10),transparent_55%)]",
-                                            "dark:bg-[radial-gradient(circle_at_20%_20%,rgba(110,231,183,0.10),transparent_55%),radial-gradient(circle_at_80%_30%,rgba(147,197,253,0.07),transparent_55%)]"
-                                        )}
-                                        aria-hidden
-                                    />
-
-                                    <div className="relative p-4 sm:p-5 md:p-6">
-                                        <div
-                                            className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+                                    <div className="p-4 sm:p-5">
+                                        <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
                                             <div className="min-w-0 flex-1">
-                                                <div className="flex min-w-0 gap-3 sm:gap-4">
-                                                    <IconCircle idx={idx} completed={completed} locked={seqLocked}/>
+                                                <div className="flex min-w-0 gap-3">
+                                                    <IconCircle idx={idx} completed={completed} locked={seqLocked} />
 
                                                     <div className="min-w-0 flex-1">
                                                         <div className="flex flex-wrap items-center gap-2">
@@ -631,18 +528,15 @@ export default function SubjectModulesClient(props: Props) {
                                                                 <Pill variant="neutral">{t("pillNotStarted")}</Pill>
                                                             )}
 
-                                                            {progressLoading ?
-                                                                <Pill variant="neutral">{t("syncing")}</Pill> : null}
+                                                            {progressLoading ? <Pill variant="neutral">{t("syncing")}</Pill> : null}
                                                         </div>
 
-                                                        <div
-                                                            className="mt-2 text-lg font-black tracking-tight sm:text-xl md:text-2xl">
+                                                        <div className="mt-2 text-lg font-semibold tracking-tight sm:text-xl">
                                                             {m.title}
                                                         </div>
 
                                                         {m.description ? (
-                                                            <div
-                                                                className="mt-2 max-w-3xl text-sm leading-6 text-neutral-600 dark:text-white/70">
+                                                            <div className="mt-2 max-w-3xl text-sm leading-6 text-neutral-600 dark:text-white/70">
                                                                 {m.description}
                                                             </div>
                                                         ) : null}
@@ -677,7 +571,7 @@ export default function SubjectModulesClient(props: Props) {
                                                 />
                                             )}
 
-                                            <StatCard label={t("sectionsLabel")} value={modSections.length}/>
+                                            <StatCard label={t("sectionsLabel")} value={modSections.length} />
 
                                             <StatCard
                                                 label={t("topicsLabel")}
@@ -697,11 +591,11 @@ export default function SubjectModulesClient(props: Props) {
                                                 value={
                                                     <span className="inline-flex items-center gap-1.5">
                             {completed ? (
-                                <CheckCircle2 className="h-4 w-4 text-emerald-600 dark:text-emerald-300"/>
+                                <CheckCircle2 className="h-4 w-4 text-emerald-600 dark:text-emerald-300" />
                             ) : showPremium ? (
-                                <Sparkles className="h-4 w-4 text-amber-600 dark:text-amber-300"/>
+                                <Sparkles className="h-4 w-4 text-amber-600 dark:text-amber-300" />
                             ) : seqLocked ? (
-                                <Lock className="h-4 w-4 text-neutral-500 dark:text-white/50"/>
+                                <Lock className="h-4 w-4 text-neutral-500 dark:text-white/50" />
                             ) : null}
                                                         <span>{statusText}</span>
                           </span>
@@ -716,7 +610,7 @@ export default function SubjectModulesClient(props: Props) {
                                                 label={
                                                     <span>
                             {totalTopics
-                                ? t("topicsComplete", {done: doneTopics, total: totalTopics})
+                                ? t("topicsComplete", { done: doneTopics, total: totalTopics })
                                 : completed
                                     ? t("completedShort")
                                     : t("noTopics")}
@@ -731,7 +625,7 @@ export default function SubjectModulesClient(props: Props) {
                     </div>
                 ) : (
                     <Surface className="p-4 sm:p-5 md:p-6">
-                        <div className="text-lg font-black tracking-tight">{t("empty.title")}</div>
+                        <div className="text-lg font-semibold tracking-tight">{t("empty.title")}</div>
                         <div className="mt-2 text-sm text-neutral-600 dark:text-white/70">
                             {t("empty.desc")}
                         </div>

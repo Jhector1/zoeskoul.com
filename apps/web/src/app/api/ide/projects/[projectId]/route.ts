@@ -15,8 +15,9 @@ import {
     requireProjectCapability,
     requireProjectScopeCapability,
     toPrismaJson,
-    toPrismaNullableJson,
+    toPrismaNullableJson, toWorkspaceAccessFromProjectGate,
 } from "@/lib/projects/projectRouteUtils";
+import {resolveWorkspacePolicy, validateWorkspaceNodes} from "@/components/ide/workspaceHook/workspace.policy";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -95,7 +96,13 @@ export async function PATCH(
 
         const { projectId } = await ctx.params;
         parsedBody = parseSaveProjectRequest(await req.json());
+        const access = toWorkspaceAccessFromProjectGate(gate);
+        const policy = resolveWorkspacePolicy(access);
+        const error = validateWorkspaceNodes(parsedBody.workspace.nodes, policy);
 
+        if (error) {
+            return jsonNoStore({ ok: false, error }, 400);
+        }
         const scopeRes = await requireProjectScopeCapability(parsedBody.scope);
         if (scopeRes) return scopeRes;
 

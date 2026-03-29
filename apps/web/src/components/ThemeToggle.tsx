@@ -24,15 +24,16 @@ export function ThemeToggle({
             type="button"
             onClick={() => setTheme(isDark ? "light" : "dark")}
             className={cn(
-                "inline-flex shrink-0 items-center justify-center gap-2 rounded-xl border border-neutral-200 bg-white shadow-sm transition",
-                "focus:outline-none focus:ring-2 focus:ring-neutral-400/40 dark:border-white/10 dark:bg-white/5 dark:focus:ring-white/20",
-                compact ? "h-9 px-3 text-xs font-semibold" : "h-10 px-4 text-sm font-semibold",
-                className
+                "ui-btn-ide-border gap-1.5",
+                compact ? "min-w-[72px]" : "h-9 px-3 text-xs",
+                className,
             )}
             aria-label="Toggle theme"
             aria-pressed={isDark}
         >
-            <span aria-hidden>{isDark ? "🌙" : "☀️"}</span>
+      <span aria-hidden className="text-[13px]">
+        {isDark ? "🌙" : "☀️"}
+      </span>
             <span>{isDark ? "Dark" : "Light"}</span>
         </button>
     );

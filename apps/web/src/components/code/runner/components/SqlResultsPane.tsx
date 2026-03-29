@@ -63,6 +63,23 @@ type DiagramScene = {
     boxes: Box[];
 };
 
+const SURFACE =
+    "rounded-xl border border-neutral-200/70 bg-white/90 dark:border-white/10 dark:bg-black/20";
+const SURFACE_SOFT =
+    "rounded-xl border border-neutral-200/70 bg-white/85 dark:border-white/10 dark:bg-black/20";
+
+const FLOAT_BAR =
+    "rounded-md border border-neutral-200/70 bg-white/92 shadow-sm backdrop-blur dark:border-white/10 dark:bg-black/55";
+
+const UI_BTN =
+    "inline-flex h-8 items-center justify-center rounded-md px-2.5 text-[11px] font-medium transition-colors";
+const UI_BTN_GHOST =
+    "text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900 dark:text-white/65 dark:hover:bg-white/[0.06] dark:hover:text-white/90";
+const UI_BTN_ACTIVE =
+    "border border-neutral-300 bg-neutral-100 text-neutral-900 dark:border-white/15 dark:bg-white/[0.08] dark:text-white/90";
+const UI_BTN_BORDER =
+    "border border-neutral-200 bg-white text-neutral-700 hover:bg-neutral-50 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/75 dark:hover:bg-white/[0.08]";
+
 function diagramPosKey(tab: DiagramTabKey, id: string) {
     return `${tab}:${id}`;
 }
@@ -195,12 +212,8 @@ function buildDiagramScene(rawBoxes: Box[], mode: DiagramMode): DiagramScene {
         };
     }
 
-    const maxX = Math.max(
-        ...rawBoxes.map((b) => b.x + b.w + cfg.extraRight),
-    );
-    const maxY = Math.max(
-        ...rawBoxes.map((b) => b.y + b.h + cfg.extraBottom),
-    );
+    const maxX = Math.max(...rawBoxes.map((b) => b.x + b.w + cfg.extraRight));
+    const maxY = Math.max(...rawBoxes.map((b) => b.y + b.h + cfg.extraBottom));
 
     return {
         width: Math.max(cfg.minWidth, maxX + cfg.rightPad),
@@ -210,14 +223,10 @@ function buildDiagramScene(rawBoxes: Box[], mode: DiagramMode): DiagramScene {
 }
 
 function buildDiagramFitKey(mode: DiagramMode, schema: SchemaModel) {
-    const tablesKey = schema.tables
-        .map((t) => `${t.id}:${t.columns.length}`)
-        .join("|");
+    const tablesKey = schema.tables.map((t) => `${t.id}:${t.columns.length}`).join("|");
     const relsKey = schema.relations.map((r) => r.id).join("|");
     return `${mode}::${tablesKey}::${relsKey}`;
 }
-
-
 
 type PanZoomCanvasProps = {
     width: number;
@@ -291,13 +300,10 @@ function PanZoomCanvas(props: PanZoomCanvasProps) {
         [getViewportSize, stageWidth, stageHeight],
     );
 
-    const applyView = React.useCallback(
-        (next: { scale: number; x: number; y: number }) => {
-            viewRef.current = next;
-            setView(next);
-        },
-        [],
-    );
+    const applyView = React.useCallback((next: { scale: number; x: number; y: number }) => {
+        viewRef.current = next;
+        setView(next);
+    }, []);
 
     const getFitScale = React.useCallback(() => {
         const { vw, vh } = getViewportSize();
@@ -341,10 +347,7 @@ function PanZoomCanvas(props: PanZoomCanvasProps) {
 
         const ro = new ResizeObserver(() => {
             const current = viewRef.current;
-            const clamped = clampOffset(
-                { x: current.x, y: current.y },
-                current.scale,
-            );
+            const clamped = clampOffset({ x: current.x, y: current.y }, current.scale);
 
             if (clamped.x !== current.x || clamped.y !== current.y) {
                 applyView({
@@ -361,9 +364,7 @@ function PanZoomCanvas(props: PanZoomCanvasProps) {
 
     React.useEffect(() => {
         return () => {
-            if (rafRef.current != null) {
-                cancelAnimationFrame(rafRef.current);
-            }
+            if (rafRef.current != null) cancelAnimationFrame(rafRef.current);
         };
     }, []);
 
@@ -387,10 +388,7 @@ function PanZoomCanvas(props: PanZoomCanvasProps) {
             const clampedScale = clampScale(nextScale);
 
             if (!el || clientX == null || clientY == null) {
-                const clampedOffset = clampOffset(
-                    { x: current.x, y: current.y },
-                    clampedScale,
-                );
+                const clampedOffset = clampOffset({ x: current.x, y: current.y }, clampedScale);
 
                 applyView({
                     scale: clampedScale,
@@ -429,10 +427,7 @@ function PanZoomCanvas(props: PanZoomCanvasProps) {
             if (!el) {
                 const current = viewRef.current;
                 const clampedScale = clampScale(nextScale);
-                const clampedOffset = clampOffset(
-                    { x: current.x, y: current.y },
-                    clampedScale,
-                );
+                const clampedOffset = clampOffset({ x: current.x, y: current.y }, clampedScale);
 
                 applyView({
                     scale: clampedScale,
@@ -443,11 +438,7 @@ function PanZoomCanvas(props: PanZoomCanvasProps) {
             }
 
             const rect = el.getBoundingClientRect();
-            zoomBy(
-                nextScale,
-                rect.left + rect.width / 2,
-                rect.top + rect.height / 2,
-            );
+            zoomBy(nextScale, rect.left + rect.width / 2, rect.top + rect.height / 2);
         },
         [zoomBy, clampOffset, applyView],
     );
@@ -465,25 +456,22 @@ function PanZoomCanvas(props: PanZoomCanvasProps) {
         [zoomBy],
     );
 
-    const onPointerDown = React.useCallback(
-        (e: React.PointerEvent<HTMLDivElement>) => {
-            if (e.button !== 0) return;
+    const onPointerDown = React.useCallback((e: React.PointerEvent<HTMLDivElement>) => {
+        if (e.button !== 0) return;
 
-            e.preventDefault();
+        e.preventDefault();
 
-            dragRef.current = {
-                pointerId: e.pointerId,
-                startClientX: e.clientX,
-                startClientY: e.clientY,
-                startX: viewRef.current.x,
-                startY: viewRef.current.y,
-            };
+        dragRef.current = {
+            pointerId: e.pointerId,
+            startClientX: e.clientX,
+            startClientY: e.clientY,
+            startX: viewRef.current.x,
+            startY: viewRef.current.y,
+        };
 
-            setIsPanning(true);
-            e.currentTarget.setPointerCapture(e.pointerId);
-        },
-        [],
-    );
+        setIsPanning(true);
+        e.currentTarget.setPointerCapture(e.pointerId);
+    }, []);
 
     const onPointerMove = React.useCallback(
         (e: React.PointerEvent<HTMLDivElement>) => {
@@ -538,7 +526,7 @@ function PanZoomCanvas(props: PanZoomCanvasProps) {
     );
 
     return (
-        <div className="relative h-full min-h-0 overflow-hidden rounded-2xl border border-neutral-200/70 bg-white/85 dark:border-white/10 dark:bg-black/20">
+        <div className={cn("relative h-full min-h-0 overflow-hidden", SURFACE)}>
             <div
                 ref={viewportRef}
                 className={cn(
@@ -559,9 +547,9 @@ function PanZoomCanvas(props: PanZoomCanvasProps) {
                         transform: `translate(${view.x}px, ${view.y}px) scale(${view.scale})`,
                         transformOrigin: "0 0",
                         backgroundImage: `
-                          linear-gradient(to right, rgba(148,163,184,0.12) 1px, transparent 1px),
-                          linear-gradient(to bottom, rgba(148,163,184,0.12) 1px, transparent 1px)
-                        `,
+              linear-gradient(to right, rgba(148,163,184,0.10) 1px, transparent 1px),
+              linear-gradient(to bottom, rgba(148,163,184,0.10) 1px, transparent 1px)
+            `,
                         backgroundSize: "40px 40px",
                     }}
                 >
@@ -579,23 +567,23 @@ function PanZoomCanvas(props: PanZoomCanvasProps) {
                 </div>
             </div>
 
-            <div className="absolute right-3 top-3 z-30 flex items-center gap-2 rounded-xl border border-neutral-200/70 bg-white/90 px-2 py-2 shadow-sm backdrop-blur dark:border-white/10 dark:bg-black/55">
+            <div className={cn("absolute right-3 top-3 z-30 flex items-center gap-1 px-1.5 py-1.5", FLOAT_BAR)}>
                 <button
                     type="button"
                     onClick={() => zoomCentered(view.scale * 0.9)}
-                    className="rounded-lg border border-neutral-200 px-2 py-1 text-xs font-black text-neutral-700 hover:bg-neutral-50 dark:border-white/10 dark:text-white/80 dark:hover:bg-white/[0.08]"
+                    className="inline-flex h-7 w-7 items-center justify-center rounded-md text-[11px] font-medium text-neutral-700 transition-colors hover:bg-neutral-100 dark:text-white/75 dark:hover:bg-white/[0.08]"
                 >
                     −
                 </button>
 
-                <div className="min-w-[56px] text-center text-[11px] font-black text-neutral-600 dark:text-white/70">
+                <div className="min-w-[48px] text-center text-[10px] font-medium text-neutral-500 dark:text-white/55">
                     {Math.round(view.scale * 100)}%
                 </div>
 
                 <button
                     type="button"
                     onClick={() => zoomCentered(view.scale * 1.1)}
-                    className="rounded-lg border border-neutral-200 px-2 py-1 text-xs font-black text-neutral-700 hover:bg-neutral-50 dark:border-white/10 dark:text-white/80 dark:hover:bg-white/[0.08]"
+                    className="inline-flex h-7 w-7 items-center justify-center rounded-md text-[11px] font-medium text-neutral-700 transition-colors hover:bg-neutral-100 dark:text-white/75 dark:hover:bg-white/[0.08]"
                 >
                     +
                 </button>
@@ -603,21 +591,18 @@ function PanZoomCanvas(props: PanZoomCanvasProps) {
                 <button
                     type="button"
                     onClick={resetView}
-                    className="rounded-lg border border-neutral-200 px-2 py-1 text-[11px] font-black text-neutral-700 hover:bg-neutral-50 dark:border-white/10 dark:text-white/80 dark:hover:bg-white/[0.08]"
+                    className="inline-flex h-7 items-center justify-center rounded-md px-2 text-[10px] font-medium text-neutral-700 transition-colors hover:bg-neutral-100 dark:text-white/75 dark:hover:bg-white/[0.08]"
                 >
                     Reset
                 </button>
             </div>
 
-            <div className="absolute bottom-3 left-3 z-30 rounded-xl border border-neutral-200/70 bg-white/90 px-3 py-2 text-[11px] font-semibold text-neutral-500 shadow-sm backdrop-blur dark:border-white/10 dark:bg-black/55 dark:text-white/50">
-                Drag anywhere on the board • wheel to zoom • drag nodes to reposition
+            <div className={cn("absolute bottom-3 left-3 z-30 px-2.5 py-1.5 text-[10px] font-medium text-neutral-500", FLOAT_BAR, "dark:text-white/45")}>
+                Drag board • wheel to zoom • drag nodes
             </div>
         </div>
     );
 }
-
-
-
 
 function Badge(props: { children: React.ReactNode; tone?: "neutral" | "good" | "warn" | "bad" }) {
     const { children, tone = "neutral" } = props;
@@ -625,19 +610,19 @@ function Badge(props: { children: React.ReactNode; tone?: "neutral" | "good" | "
     return (
         <span
             className={cn(
-                "inline-flex items-center rounded-full border px-2.5 py-1 text-[11px] font-black",
+                "inline-flex h-6 items-center rounded-md border px-2 text-[10px] font-medium",
                 tone === "neutral" &&
-                "border-neutral-200 bg-white text-neutral-700 dark:border-white/10 dark:bg-white/[0.06] dark:text-white/80",
+                "border-neutral-200 bg-white text-neutral-600 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/65",
                 tone === "good" &&
-                "border-emerald-300/30 bg-emerald-300/10 text-emerald-800 dark:text-emerald-200",
+                "border-emerald-300/20 bg-emerald-300/10 text-emerald-800 dark:text-emerald-200",
                 tone === "warn" &&
-                "border-amber-300/30 bg-amber-300/10 text-amber-800 dark:text-amber-200",
+                "border-amber-300/20 bg-amber-300/10 text-amber-800 dark:text-amber-200",
                 tone === "bad" &&
-                "border-rose-300/30 bg-rose-300/10 text-rose-800 dark:text-rose-200",
+                "border-rose-300/20 bg-rose-300/10 text-rose-800 dark:text-rose-200",
             )}
         >
-            {children}
-        </span>
+      {children}
+    </span>
     );
 }
 
@@ -653,10 +638,8 @@ function TabButton(props: {
             type="button"
             onClick={onClick}
             className={cn(
-                "inline-flex items-center rounded-xl border px-3 py-2 text-xs font-black transition",
-                active
-                    ? "border-sky-300/30 bg-sky-300/10 text-neutral-900 dark:text-white/90"
-                    : "border-neutral-200 bg-white text-neutral-700 hover:bg-neutral-50 dark:border-white/10 dark:bg-white/[0.06] dark:text-white/75 dark:hover:bg-white/[0.10]",
+                UI_BTN,
+                active ? UI_BTN_ACTIVE : UI_BTN_GHOST,
             )}
         >
             {children}
@@ -664,12 +647,36 @@ function TabButton(props: {
     );
 }
 
+function TabsRow(props: {
+    tab: TabKey;
+    setTab: (tab: TabKey) => void;
+}) {
+    const { tab, setTab } = props;
+
+    return (
+        <div className="flex flex-wrap items-center gap-1.5">
+            <TabButton active={tab === "results"} onClick={() => setTab("results")}>
+                Results
+            </TabButton>
+            <TabButton active={tab === "tables"} onClick={() => setTab("tables")}>
+                Tables
+            </TabButton>
+            <TabButton active={tab === "erd"} onClick={() => setTab("erd")}>
+                ERD
+            </TabButton>
+            <TabButton active={tab === "chen"} onClick={() => setTab("chen")}>
+                Chen
+            </TabButton>
+        </div>
+    );
+}
+
 function CellValue({ value }: { value: unknown }) {
     if (value == null) {
         return (
-            <span className="inline-flex rounded-md border border-neutral-200 bg-neutral-50 px-1.5 py-0.5 text-[11px] font-bold text-neutral-500 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/40">
-                NULL
-            </span>
+            <span className="inline-flex rounded-md border border-neutral-200 bg-neutral-50 px-1.5 py-0.5 text-[10px] font-medium text-neutral-500 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/40">
+        NULL
+      </span>
         );
     }
 
@@ -747,9 +754,7 @@ function parseType(def: string) {
 
 function parseSchemaSql(schemaSql?: string | null): SchemaModel {
     const text = String(schemaSql ?? "");
-    if (!text.trim()) {
-        return { tables: [], relations: [] };
-    }
+    if (!text.trim()) return { tables: [], relations: [] };
 
     const tableMap = new Map<string, TableModel>();
     const relations: RelationModel[] = [];
@@ -886,7 +891,7 @@ function parseSchemaSql(schemaSql?: string | null): SchemaModel {
 function buildTableLayout(tables: TableModel[]) {
     const cardW = 290;
     const rowH = 26;
-    const headerH = 44;
+    const headerH = 40;
     const gapX = 40;
     const gapY = 48;
     const cols = Math.max(1, Math.ceil(Math.sqrt(Math.max(1, tables.length))));
@@ -894,39 +899,27 @@ function buildTableLayout(tables: TableModel[]) {
     const boxes: Box[] = tables.map((table, i) => {
         const col = i % cols;
         const row = Math.floor(i / cols);
-        const h = headerH + Math.max(1, table.columns.length) * rowH + 20;
+        const h = headerH + Math.max(1, table.columns.length) * rowH + 16;
 
         return {
             id: table.id,
             x: 24 + col * (cardW + gapX),
-            y: 24 + row * (260 + gapY),
+            y: 24 + row * (248 + gapY),
             w: cardW,
             h,
         };
     });
 
-    const width =
-        boxes.length > 0
-            ? Math.max(...boxes.map((b) => b.x + b.w)) + 24
-            : 640;
-    const height =
-        boxes.length > 0
-            ? Math.max(...boxes.map((b) => b.y + b.h)) + 24
-            : 420;
+    const width = boxes.length > 0 ? Math.max(...boxes.map((b) => b.x + b.w)) + 24 : 640;
+    const height = boxes.length > 0 ? Math.max(...boxes.map((b) => b.y + b.h)) + 24 : 420;
 
     return { boxes, width, height };
 }
 
 function sideOf(box: Box, side: "left" | "right" | "top" | "bottom") {
-    if (side === "left") {
-        return { x: box.x, y: box.y + box.h / 2, dx: -1, dy: 0 };
-    }
-    if (side === "right") {
-        return { x: box.x + box.w, y: box.y + box.h / 2, dx: 1, dy: 0 };
-    }
-    if (side === "top") {
-        return { x: box.x + box.w / 2, y: box.y, dx: 0, dy: -1 };
-    }
+    if (side === "left") return { x: box.x, y: box.y + box.h / 2, dx: -1, dy: 0 };
+    if (side === "right") return { x: box.x + box.w, y: box.y + box.h / 2, dx: 1, dy: 0 };
+    if (side === "top") return { x: box.x + box.w / 2, y: box.y, dx: 0, dy: -1 };
     return { x: box.x + box.w / 2, y: box.y + box.h, dx: 0, dy: 1 };
 }
 
@@ -1056,6 +1049,21 @@ function CardinalityPill(props: { x: number; y: number; text: string }) {
     );
 }
 
+function EmptySchemaState(props: { title: string; subtitle: string }) {
+    return (
+        <div className="flex h-full min-h-0 items-center justify-center rounded-xl border border-dashed border-neutral-200/70 bg-white/90 p-6 dark:border-white/10 dark:bg-black/20">
+            <div className="text-center">
+                <div className="text-sm font-medium text-neutral-900 dark:text-white/90">
+                    {props.title}
+                </div>
+                <div className="mt-1 text-[11px] font-medium text-neutral-500 dark:text-white/50">
+                    {props.subtitle}
+                </div>
+            </div>
+        </div>
+    );
+}
+
 function ResultsTab(props: { result: Extract<SqlRunResult, { ok: true }> }) {
     const { result } = props;
     const columns = result.columns ?? [];
@@ -1067,29 +1075,25 @@ function ResultsTab(props: { result: Extract<SqlRunResult, { ok: true }> }) {
             <div className="flex flex-wrap items-center gap-2">
                 <Badge tone="good">{result.status}</Badge>
                 <Badge>{result.dialect}</Badge>
-
                 {typeof result.rowCount === "number" ? (
-                    <Badge>{result.rowCount} row{result.rowCount === 1 ? "" : "s"}</Badge>
+                    <Badge>
+                        {result.rowCount} row{result.rowCount === 1 ? "" : "s"}
+                    </Badge>
                 ) : null}
-
                 {typeof result.affectedRows === "number" ? (
                     <Badge>{result.affectedRows} affected</Badge>
                 ) : null}
-
                 {result.time ? <Badge>{result.time}s</Badge> : null}
             </div>
 
             {result.notices?.length ? (
-                <div className="rounded-2xl border border-amber-300/30 bg-amber-50/70 p-3 dark:border-amber-300/20 dark:bg-amber-950/20">
-                    <div className="mb-2 text-xs font-black uppercase tracking-[0.14em] text-amber-800 dark:text-amber-200">
+                <div className="rounded-xl border border-amber-300/20 bg-amber-50/70 p-3 dark:border-amber-300/15 dark:bg-amber-950/20">
+                    <div className="mb-2 text-[11px] font-medium uppercase tracking-[0.12em] text-amber-800 dark:text-amber-200">
                         Notices
                     </div>
                     <div className="space-y-1">
                         {result.notices.map((n, i) => (
-                            <div
-                                key={i}
-                                className="text-xs font-semibold text-amber-800 dark:text-amber-200"
-                            >
+                            <div key={i} className="text-[12px] font-medium text-amber-800 dark:text-amber-200">
                                 {n}
                             </div>
                         ))}
@@ -1098,7 +1102,7 @@ function ResultsTab(props: { result: Extract<SqlRunResult, { ok: true }> }) {
             ) : null}
 
             {hasGrid ? (
-                <div className="min-h-0 flex-1 overflow-hidden rounded-2xl border border-neutral-200/70 bg-white/85 dark:border-white/10 dark:bg-black/20">
+                <div className={cn("min-h-0 flex-1 overflow-hidden", SURFACE)}>
                     <div className="h-full overflow-auto">
                         <table className="min-w-full border-collapse">
                             <thead className="sticky top-0 z-10 bg-neutral-100/95 backdrop-blur dark:bg-neutral-900/95">
@@ -1106,14 +1110,14 @@ function ResultsTab(props: { result: Extract<SqlRunResult, { ok: true }> }) {
                                 {columns.map((col, i) => (
                                     <th
                                         key={`${col.name}-${i}`}
-                                        className="border-b border-neutral-200 px-3 py-2 text-left text-[11px] font-black uppercase tracking-[0.12em] text-neutral-600 dark:border-white/10 dark:text-white/55"
+                                        className="border-b border-neutral-200 px-3 py-2 text-left text-[10px] font-medium uppercase tracking-[0.12em] text-neutral-500 dark:border-white/10 dark:text-white/50"
                                     >
                                         <div className="flex min-w-[120px] items-center gap-2">
                                             <span className="truncate">{col.name}</span>
                                             {col.type ? (
-                                                <span className="rounded-md border border-neutral-200 bg-white px-1.5 py-0.5 text-[10px] font-bold normal-case tracking-normal text-neutral-500 dark:border-white/10 dark:bg-white/[0.06] dark:text-white/40">
-                                                        {col.type}
-                                                    </span>
+                                                <span className="rounded-md border border-neutral-200 bg-white px-1.5 py-0.5 text-[10px] font-medium normal-case tracking-normal text-neutral-500 dark:border-white/10 dark:bg-white/[0.06] dark:text-white/40">
+                            {col.type}
+                          </span>
                                             ) : null}
                                         </div>
                                     </th>
@@ -1149,7 +1153,7 @@ function ResultsTab(props: { result: Extract<SqlRunResult, { ok: true }> }) {
                                 <tr>
                                     <td
                                         colSpan={Math.max(1, columns.length)}
-                                        className="px-4 py-8 text-center text-sm font-semibold text-neutral-500 dark:text-white/45"
+                                        className="px-4 py-8 text-center text-sm font-medium text-neutral-500 dark:text-white/45"
                                     >
                                         Query returned no rows.
                                     </td>
@@ -1160,30 +1164,15 @@ function ResultsTab(props: { result: Extract<SqlRunResult, { ok: true }> }) {
                     </div>
                 </div>
             ) : (
-                <div className="rounded-2xl border border-neutral-200/70 bg-white/85 p-4 dark:border-white/10 dark:bg-black/20">
-                    <div className="text-[11px] font-black uppercase tracking-[0.14em] text-neutral-500 dark:text-white/45">
+                <div className={cn("p-4", SURFACE)}>
+                    <div className="text-[11px] font-medium uppercase tracking-[0.14em] text-neutral-500 dark:text-white/45">
                         Output
                     </div>
-                    <div className="mt-2 whitespace-pre-wrap break-words text-sm font-semibold text-neutral-800 dark:text-white/85">
+                    <div className="mt-2 whitespace-pre-wrap break-words text-sm font-medium text-neutral-800 dark:text-white/85">
                         {result.stdout ?? "Statement completed."}
                     </div>
                 </div>
             )}
-        </div>
-    );
-}
-
-function EmptySchemaState(props: { title: string; subtitle: string }) {
-    return (
-        <div className="flex h-full min-h-0 items-center justify-center rounded-2xl border border-dashed border-neutral-200/70 bg-white/80 p-6 dark:border-white/10 dark:bg-black/20">
-            <div className="text-center">
-                <div className="text-sm font-black text-neutral-900 dark:text-white/90">
-                    {props.title}
-                </div>
-                <div className="mt-1 text-xs font-semibold text-neutral-500 dark:text-white/50">
-                    {props.subtitle}
-                </div>
-            </div>
         </div>
     );
 }
@@ -1202,20 +1191,14 @@ function TablesTab(props: {
         [initialLayout, positions],
     );
 
-    const scene = React.useMemo(
-        () => buildDiagramScene(rawBoxes, "tables"),
-        [rawBoxes],
-    );
+    const scene = React.useMemo(() => buildDiagramScene(rawBoxes, "tables"), [rawBoxes]);
 
     const boxById = React.useMemo(
         () => new Map(scene.boxes.map((box) => [box.id, box])),
         [scene.boxes],
     );
 
-    const fitKey = React.useMemo(
-        () => buildDiagramFitKey("tables", schema),
-        [schema],
-    );
+    const fitKey = React.useMemo(() => buildDiagramFitKey("tables", schema), [schema]);
 
     if (!schema.tables.length) {
         return (
@@ -1252,11 +1235,7 @@ function TablesTab(props: {
                                     const move = (ev: PointerEvent) => {
                                         const dx = (ev.clientX - startClientX) / scale;
                                         const dy = (ev.clientY - startClientY) / scale;
-                                        const next = clampDiagramNodePosition(
-                                            "tables",
-                                            startX + dx,
-                                            startY + dy,
-                                        );
+                                        const next = clampDiagramNodePosition("tables", startX + dx, startY + dy);
                                         onMove("tables", box.id, next.x, next.y);
                                     };
 
@@ -1272,7 +1251,7 @@ function TablesTab(props: {
                                 return (
                                     <div
                                         key={table.id}
-                                        className="absolute overflow-hidden rounded-2xl border border-neutral-200/70 bg-white/90 shadow-sm dark:border-white/10 dark:bg-neutral-950/95"
+                                        className="absolute overflow-hidden rounded-xl border border-neutral-200/70 bg-white/92 shadow-sm dark:border-white/10 dark:bg-neutral-950/95"
                                         style={{
                                             left: box.x,
                                             top: box.y,
@@ -1282,12 +1261,12 @@ function TablesTab(props: {
                                     >
                                         <div
                                             onPointerDown={onPointerDown}
-                                            className="cursor-grab border-b border-neutral-200/70 bg-neutral-100/85 px-4 py-3 active:cursor-grabbing dark:border-white/10 dark:bg-white/[0.05]"
+                                            className="cursor-grab border-b border-neutral-200/70 bg-neutral-100/85 px-3 py-2.5 active:cursor-grabbing dark:border-white/10 dark:bg-white/[0.05]"
                                         >
-                                            <div className="text-sm font-black text-neutral-900 dark:text-white/90">
+                                            <div className="text-sm font-medium text-neutral-900 dark:text-white/90">
                                                 {table.name}
                                             </div>
-                                            <div className="mt-1 text-[11px] font-semibold text-neutral-500 dark:text-white/45">
+                                            <div className="mt-1 text-[11px] font-medium text-neutral-500 dark:text-white/45">
                                                 {table.columns.length} column{table.columns.length === 1 ? "" : "s"}
                                             </div>
                                         </div>
@@ -1296,13 +1275,13 @@ function TablesTab(props: {
                                             {table.columns.map((col) => (
                                                 <div
                                                     key={col.name}
-                                                    className="flex items-start justify-between gap-3 px-4 py-3"
+                                                    className="flex items-start justify-between gap-3 px-3 py-2.5"
                                                 >
                                                     <div className="min-w-0">
-                                                        <div className="truncate text-sm font-bold text-neutral-900 dark:text-white/90">
+                                                        <div className="truncate text-[12px] font-medium text-neutral-900 dark:text-white/90">
                                                             {col.name}
                                                         </div>
-                                                        <div className="mt-1 text-xs font-semibold text-neutral-500 dark:text-white/45">
+                                                        <div className="mt-1 text-[11px] font-medium text-neutral-500 dark:text-white/45">
                                                             {col.type || "type unknown"}
                                                         </div>
                                                     </div>
@@ -1341,20 +1320,14 @@ function ErdTab(props: {
         [initialLayout, positions],
     );
 
-    const scene = React.useMemo(
-        () => buildDiagramScene(rawBoxes, "erd"),
-        [rawBoxes],
-    );
+    const scene = React.useMemo(() => buildDiagramScene(rawBoxes, "erd"), [rawBoxes]);
 
     const boxById = React.useMemo(
         () => new Map(scene.boxes.map((box) => [box.id, box])),
         [scene.boxes],
     );
 
-    const fitKey = React.useMemo(
-        () => buildDiagramFitKey("erd", schema),
-        [schema],
-    );
+    const fitKey = React.useMemo(() => buildDiagramFitKey("erd", schema), [schema]);
 
     if (!schema.tables.length) {
         return (
@@ -1369,7 +1342,9 @@ function ErdTab(props: {
         <div className="flex h-full min-h-0 flex-col gap-3">
             <div className="flex flex-wrap items-center gap-2">
                 <Badge>{schema.tables.length} entity table{schema.tables.length === 1 ? "" : "s"}</Badge>
-                <Badge tone="warn">{schema.relations.length} crow’s-foot relation{schema.relations.length === 1 ? "" : "s"}</Badge>
+                <Badge tone="warn">
+                    {schema.relations.length} crow’s-foot relation{schema.relations.length === 1 ? "" : "s"}
+                </Badge>
             </div>
 
             <div className="min-h-0 flex-1">
@@ -1460,11 +1435,7 @@ function ErdTab(props: {
                                     const move = (ev: PointerEvent) => {
                                         const dx = (ev.clientX - startClientX) / scale;
                                         const dy = (ev.clientY - startClientY) / scale;
-                                        const next = clampDiagramNodePosition(
-                                            "erd",
-                                            startX + dx,
-                                            startY + dy,
-                                        );
+                                        const next = clampDiagramNodePosition("erd", startX + dx, startY + dy);
                                         onMove("erd", box.id, next.x, next.y);
                                     };
 
@@ -1480,7 +1451,7 @@ function ErdTab(props: {
                                 return (
                                     <div
                                         key={table.id}
-                                        className="absolute z-10 overflow-hidden rounded-2xl border border-neutral-200/80 bg-white shadow-sm dark:border-white/10 dark:bg-neutral-950"
+                                        className="absolute z-10 overflow-hidden rounded-xl border border-neutral-200/80 bg-white shadow-sm dark:border-white/10 dark:bg-neutral-950"
                                         style={{
                                             left: box.x,
                                             top: box.y,
@@ -1490,9 +1461,9 @@ function ErdTab(props: {
                                     >
                                         <div
                                             onPointerDown={onPointerDown}
-                                            className="cursor-grab border-b border-neutral-200/70 bg-neutral-100/90 px-4 py-3 active:cursor-grabbing dark:border-white/10 dark:bg-white/[0.05]"
+                                            className="cursor-grab border-b border-neutral-200/70 bg-neutral-100/90 px-3 py-2.5 active:cursor-grabbing dark:border-white/10 dark:bg-white/[0.05]"
                                         >
-                                            <div className="truncate text-sm font-black text-neutral-900 dark:text-white/90">
+                                            <div className="truncate text-sm font-medium text-neutral-900 dark:text-white/90">
                                                 {table.name}
                                             </div>
                                         </div>
@@ -1501,22 +1472,22 @@ function ErdTab(props: {
                                             {table.columns.map((col) => (
                                                 <div
                                                     key={col.name}
-                                                    className="flex items-center justify-between gap-2 px-4 py-1.5 text-xs"
+                                                    className="flex items-center justify-between gap-2 px-3 py-1.5 text-[12px]"
                                                 >
-                                                    <div className="min-w-0 truncate font-semibold text-neutral-800 dark:text-white/85">
+                                                    <div className="min-w-0 truncate font-medium text-neutral-800 dark:text-white/85">
                                                         {col.name}
                                                     </div>
 
                                                     <div className="flex items-center gap-1">
                                                         {col.isPk ? (
-                                                            <span className="rounded-md bg-emerald-500/10 px-1.5 py-0.5 text-[10px] font-black text-emerald-700 dark:text-emerald-200">
-                                                                PK
-                                                            </span>
+                                                            <span className="rounded-md bg-emerald-500/10 px-1.5 py-0.5 text-[10px] font-medium text-emerald-700 dark:text-emerald-200">
+                                PK
+                              </span>
                                                         ) : null}
                                                         {col.isFk ? (
-                                                            <span className="rounded-md bg-amber-500/10 px-1.5 py-0.5 text-[10px] font-black text-amber-700 dark:text-amber-200">
-                                                                FK
-                                                            </span>
+                                                            <span className="rounded-md bg-amber-500/10 px-1.5 py-0.5 text-[10px] font-medium text-amber-700 dark:text-amber-200">
+                                FK
+                              </span>
                                                         ) : null}
                                                     </div>
                                                 </div>
@@ -1547,10 +1518,7 @@ function ChenTab(props: {
         [initialLayout, positions],
     );
 
-    const scene = React.useMemo(
-        () => buildDiagramScene(rawBoxes, "chen"),
-        [rawBoxes],
-    );
+    const scene = React.useMemo(() => buildDiagramScene(rawBoxes, "chen"), [rawBoxes]);
 
     const boxById = React.useMemo(
         () => new Map(scene.boxes.map((box) => [box.id, box])),
@@ -1571,10 +1539,7 @@ function ChenTab(props: {
         [entities],
     );
 
-    const fitKey = React.useMemo(
-        () => buildDiagramFitKey("chen", schema),
-        [schema],
-    );
+    const fitKey = React.useMemo(() => buildDiagramFitKey("chen", schema), [schema]);
 
     if (!schema.tables.length) {
         return (
@@ -1689,11 +1654,7 @@ function ChenTab(props: {
                                     const move = (ev: PointerEvent) => {
                                         const dx = (ev.clientX - startClientX) / scale;
                                         const dy = (ev.clientY - startClientY) / scale;
-                                        const next = clampDiagramNodePosition(
-                                            "chen",
-                                            startX + dx,
-                                            startY + dy,
-                                        );
+                                        const next = clampDiagramNodePosition("chen", startX + dx, startY + dy);
                                         onMove("chen", entity.id, next.x, next.y);
                                     };
 
@@ -1714,7 +1675,7 @@ function ChenTab(props: {
                                                 y={entity.y}
                                                 width={entity.w}
                                                 height={entity.h}
-                                                rx={12}
+                                                rx={10}
                                                 fill="white"
                                                 stroke="#cbd5e1"
                                                 strokeWidth="1.5"
@@ -1724,7 +1685,7 @@ function ChenTab(props: {
                                                 y={entity.y + 29}
                                                 textAnchor="middle"
                                                 fontSize="13"
-                                                fontWeight="800"
+                                                fontWeight="700"
                                                 fill="#0f172a"
                                             >
                                                 {entity.table.name}
@@ -1734,13 +1695,9 @@ function ChenTab(props: {
                                         {attrs.map((col, i) => {
                                             const side = i % 2 === 0 ? "left" : "right";
                                             const row = Math.floor(i / 2);
-                                            const cx =
-                                                side === "left"
-                                                    ? entity.x - 90
-                                                    : entity.x + entity.w + 90;
+                                            const cx = side === "left" ? entity.x - 90 : entity.x + entity.w + 90;
                                             const cy = entity.y + 18 + row * 38;
-                                            const lineEndX =
-                                                side === "left" ? entity.x : entity.x + entity.w;
+                                            const lineEndX = side === "left" ? entity.x : entity.x + entity.w;
 
                                             return (
                                                 <g key={col.name}>
@@ -1766,7 +1723,7 @@ function ChenTab(props: {
                                                         y={cy + 4}
                                                         textAnchor="middle"
                                                         fontSize="11"
-                                                        fontWeight={col.isPk ? 800 : 600}
+                                                        fontWeight={col.isPk ? 700 : 600}
                                                         fill="#334155"
                                                     >
                                                         {col.name}
@@ -1828,9 +1785,7 @@ export default function SqlResultsPane(props: {
     const [positions, setPositions] = React.useState<DiagramPositions>({});
 
     React.useEffect(() => {
-        if (busy) {
-            setTab("results");
-        }
+        if (busy) setTab("results");
     }, [busy]);
 
     const schema = React.useMemo(() => parseSchemaSql(schemaSql), [schemaSql]);
@@ -1860,16 +1815,17 @@ export default function SqlResultsPane(props: {
         return (
             <div
                 className={cn(
-                    "flex h-full min-h-0 items-center justify-center rounded-2xl border border-neutral-200/70 bg-white/80 p-6 dark:border-white/10 dark:bg-black/20",
+                    "flex h-full min-h-0 items-center justify-center p-6",
+                    SURFACE,
                     className,
                 )}
             >
                 <div className="text-center">
-                    <div className="text-sm font-black text-neutral-900 dark:text-white/90">
+                    <div className="text-sm font-medium text-neutral-900 dark:text-white/90">
                         Running query…
                     </div>
-                    <div className="mt-1 text-xs font-semibold text-neutral-500 dark:text-white/50">
-                        Executing SQL and preparing result rows
+                    <div className="mt-1 text-[11px] font-medium text-neutral-500 dark:text-white/50">
+                        Executing SQL and preparing rows
                     </div>
                 </div>
             </div>
@@ -1879,21 +1835,7 @@ export default function SqlResultsPane(props: {
     if (!result) {
         return (
             <div className={cn("flex h-full min-h-0 flex-col gap-3", className)}>
-                <div className="flex flex-wrap items-center gap-2">
-                    <TabButton active={tab === "results"} onClick={() => setTab("results")}>
-                        Results
-                    </TabButton>
-                    <TabButton active={tab === "tables"} onClick={() => setTab("tables")}>
-                        Tables
-                    </TabButton>
-                    <TabButton active={tab === "erd"} onClick={() => setTab("erd")}>
-                        ERD
-                    </TabButton>
-                    <TabButton active={tab === "chen"} onClick={() => setTab("chen")}>
-                        Chen
-                    </TabButton>
-                </div>
-
+                <TabsRow tab={tab} setTab={setTab} />
                 <div className="min-h-0 flex-1">
                     {tab === "tables" ? (
                         <TablesTab schema={schema} positions={positions} onMove={handleMove} />
@@ -1915,34 +1857,20 @@ export default function SqlResultsPane(props: {
     if (!result.ok) {
         return (
             <div className={cn("flex h-full min-h-0 flex-col gap-3", className)}>
-                <div className="flex flex-wrap items-center gap-2">
-                    <TabButton active={tab === "results"} onClick={() => setTab("results")}>
-                        Results
-                    </TabButton>
-                    <TabButton active={tab === "tables"} onClick={() => setTab("tables")}>
-                        Tables
-                    </TabButton>
-                    <TabButton active={tab === "erd"} onClick={() => setTab("erd")}>
-                        ERD
-                    </TabButton>
-                    <TabButton active={tab === "chen"} onClick={() => setTab("chen")}>
-                        Chen
-                    </TabButton>
-                </div>
-
+                <TabsRow tab={tab} setTab={setTab} />
                 <div className="min-h-0 flex-1">
                     {tab === "results" ? (
-                        <div className="flex h-full min-h-0 flex-col rounded-2xl border border-rose-300/30 bg-rose-50/70 p-4 dark:border-rose-300/20 dark:bg-rose-950/20">
+                        <div className="flex h-full min-h-0 flex-col rounded-xl border border-rose-300/20 bg-rose-50/70 p-4 dark:border-rose-300/15 dark:bg-rose-950/20">
                             <div className="flex flex-wrap items-center gap-2">
                                 <Badge tone="bad">SQL error</Badge>
                                 <Badge>{result.dialect}</Badge>
                                 <Badge tone="bad">{result.status}</Badge>
                             </div>
 
-                            <div className="mt-3 rounded-xl border border-rose-300/25 bg-white/70 p-3 dark:border-rose-300/15 dark:bg-black/20">
-                                <pre className="whitespace-pre-wrap break-words text-xs font-semibold text-rose-800 dark:text-rose-200">
-                                    {result.error ?? result.stderr ?? result.message ?? "Query failed."}
-                                </pre>
+                            <div className="mt-3 rounded-lg border border-rose-300/20 bg-white/70 p-3 dark:border-rose-300/15 dark:bg-black/20">
+                <pre className="whitespace-pre-wrap break-words text-[12px] font-medium text-rose-800 dark:text-rose-200">
+                  {result.error ?? result.stderr ?? result.message ?? "Query failed."}
+                </pre>
                             </div>
                         </div>
                     ) : tab === "tables" ? (
@@ -1959,21 +1887,7 @@ export default function SqlResultsPane(props: {
 
     return (
         <div className={cn("flex h-full min-h-0 flex-col gap-3", className)}>
-            <div className="flex flex-wrap items-center gap-2">
-                <TabButton active={tab === "results"} onClick={() => setTab("results")}>
-                    Results
-                </TabButton>
-                <TabButton active={tab === "tables"} onClick={() => setTab("tables")}>
-                    Tables
-                </TabButton>
-                <TabButton active={tab === "erd"} onClick={() => setTab("erd")}>
-                    ERD
-                </TabButton>
-                <TabButton active={tab === "chen"} onClick={() => setTab("chen")}>
-                    Chen
-                </TabButton>
-            </div>
-
+            <TabsRow tab={tab} setTab={setTab} />
             <div className="min-h-0 flex-1">
                 {tab === "results" ? (
                     <ResultsTab result={result} />

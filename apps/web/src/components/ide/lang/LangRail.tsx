@@ -8,8 +8,8 @@ import {
     SiCplusplus,
 } from "react-icons/si";
 import { FaJava } from "react-icons/fa6";
+import { TbSql } from "react-icons/tb";
 import { CodeLanguage } from "@/lib/practice/types";
-import {TbSql} from "react-icons/tb";
 
 function cn(...cls: Array<string | false | undefined | null>) {
     return cls.filter(Boolean).join(" ");
@@ -41,48 +41,46 @@ export function LangRail(props: {
 
     return (
         <aside className="flex h-full w-full flex-col bg-white dark:bg-neutral-950">
-            {/* Header */}
-            <div className="border-b border-neutral-200 px-3 py-3 dark:border-white/10">
+            <div className="border-b border-neutral-200 px-3 py-2.5 dark:border-white/10">
                 <div className="flex items-center justify-between gap-2">
                     <div
                         className={cn(
-                            "min-w-0 overflow-hidden transition-all duration-300 ease-in-out",
+                            "min-w-0 overflow-hidden transition-all duration-200 ease-out",
                             collapsed ? "max-w-0 opacity-0" : "max-w-[180px] opacity-100",
                         )}
                     >
-                        <div className="text-[11px] font-black uppercase tracking-[0.16em] text-neutral-500 dark:text-white/40">
+                        <div className="text-[11px] font-medium uppercase tracking-[0.14em] text-neutral-500 dark:text-white/40">
                             Languages
                         </div>
-                        <div className="mt-1 text-sm font-black text-neutral-900 dark:text-white/90">
+                        <div className="mt-1 text-sm font-medium text-neutral-900 dark:text-white/90">
                             Programming IDE
                         </div>
-                        <div className="mt-1 text-xs font-semibold text-neutral-500 dark:text-white/50">
-                            Switch language workspace
+                        <div className="mt-1 text-[11px] font-medium text-neutral-500 dark:text-white/45">
+                            Switch workspace
                         </div>
                     </div>
 
                     <button
                         type="button"
                         onClick={onToggleCollapsed}
-                        className="grid h-10 w-10 shrink-0 place-items-center border border-neutral-200 bg-white text-neutral-700 transition hover:bg-neutral-50 rounded-none dark:border-white/10 dark:bg-neutral-950 dark:text-white/80 dark:hover:bg-white/[0.05]"
+                        className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-md text-neutral-600 transition-colors hover:bg-neutral-100 hover:text-neutral-900 dark:text-white/65 dark:hover:bg-white/[0.06] dark:hover:text-white/90"
                         title={collapsed ? "Expand sidebar" : "Collapse sidebar"}
                         aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
                     >
-                        <span
-                            className={cn(
-                                "text-base font-black transition-transform duration-300",
-                                collapsed ? "rotate-180" : "rotate-0",
-                            )}
-                        >
-                            ‹
-                        </span>
+            <span
+                className={cn(
+                    "text-sm font-medium transition-transform duration-200",
+                    collapsed ? "rotate-180" : "rotate-0",
+                )}
+            >
+              ‹
+            </span>
                     </button>
                 </div>
             </div>
 
-            {/* List */}
-            <div className="min-h-0 flex-1 overflow-y-auto p-3">
-                <div className="space-y-2">
+            <div className="min-h-0 flex-1 overflow-y-auto p-2">
+                <div className="space-y-1">
                     {LANGS.map((l) => {
                         const active = l.id === lang;
                         const Icon = l.Icon;
@@ -94,45 +92,37 @@ export function LangRail(props: {
                                 onClick={() => setLang(l.id)}
                                 title={collapsed ? l.label : `${l.label} — ${l.desc}`}
                                 className={cn(
-                                    "w-full border text-left transition-all duration-200 rounded-none",
-                                    "flex items-center gap-3",
-                                    collapsed ? "justify-center px-2 py-3" : "px-3 py-3",
+                                    "flex w-full items-center gap-2 rounded-md text-left transition-colors",
+                                    collapsed ? "justify-center px-2 py-2.5" : "px-2.5 py-2.5",
                                     active
-                                        ? "border-emerald-600/25 bg-emerald-500/10"
-                                        : "border-neutral-200 bg-white hover:bg-neutral-50 dark:border-white/10 dark:bg-neutral-950 dark:hover:bg-white/[0.05]",
+                                        ? "bg-neutral-100 text-neutral-900 dark:bg-white/[0.08] dark:text-white/90"
+                                        : "text-neutral-700 hover:bg-neutral-100 hover:text-neutral-900 dark:text-white/70 dark:hover:bg-white/[0.06] dark:hover:text-white/90",
                                 )}
                             >
-                                <div
-                                    className={cn(
-                                        "grid h-11 w-11 shrink-0 place-items-center border rounded-none",
-                                        active
-                                            ? "border-emerald-600/20 bg-emerald-500/10"
-                                            : "border-neutral-200 bg-neutral-50 dark:border-white/10 dark:bg-white/[0.04]",
-                                    )}
-                                >
+                                <div className="grid h-8 w-8 shrink-0 place-items-center">
                                     <Icon
                                         className={cn(
-                                            "h-5 w-5",
+                                            "h-4 w-4",
                                             active
-                                                ? "text-emerald-700 dark:text-emerald-300"
-                                                : "text-neutral-700 dark:text-white/75",
+                                                ? "text-neutral-900 dark:text-white/90"
+                                                : "text-neutral-600 dark:text-white/65",
                                         )}
                                     />
                                 </div>
 
                                 <div
                                     className={cn(
-                                        "min-w-0 flex-1 overflow-hidden transition-all duration-300 ease-in-out",
+                                        "min-w-0 flex-1 overflow-hidden transition-all duration-200 ease-out",
                                         collapsed ? "max-w-0 opacity-0" : "max-w-[160px] opacity-100",
                                     )}
                                 >
                                     <div className="flex items-center justify-between gap-2">
                                         <div
                                             className={cn(
-                                                "truncate text-sm font-black",
+                                                "truncate text-[12px] font-medium",
                                                 active
                                                     ? "text-neutral-900 dark:text-white/90"
-                                                    : "text-neutral-800 dark:text-white/80",
+                                                    : "text-neutral-800 dark:text-white/75",
                                             )}
                                         >
                                             {l.label}
@@ -140,10 +130,10 @@ export function LangRail(props: {
 
                                         <div
                                             className={cn(
-                                                "shrink-0 border px-2 py-[2px] text-[10px] font-black uppercase rounded-none",
+                                                "shrink-0 rounded-md px-1.5 py-0.5 text-[10px] font-medium uppercase",
                                                 active
-                                                    ? "border-emerald-600/20 bg-emerald-500/10 text-emerald-800 dark:text-emerald-200"
-                                                    : "border-neutral-200 bg-neutral-50 text-neutral-500 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/45",
+                                                    ? "bg-white text-neutral-600 dark:bg-white/[0.08] dark:text-white/60"
+                                                    : "text-neutral-400 dark:text-white/35",
                                             )}
                                         >
                                             {l.id}
@@ -152,10 +142,10 @@ export function LangRail(props: {
 
                                     <div
                                         className={cn(
-                                            "mt-1 truncate text-xs font-semibold",
+                                            "mt-0.5 truncate text-[11px] font-medium",
                                             active
-                                                ? "text-neutral-600 dark:text-white/65"
-                                                : "text-neutral-500 dark:text-white/45",
+                                                ? "text-neutral-500 dark:text-white/50"
+                                                : "text-neutral-500 dark:text-white/40",
                                         )}
                                     >
                                         {l.desc}
@@ -167,19 +157,15 @@ export function LangRail(props: {
                 </div>
             </div>
 
-            {/* Footer */}
             <div className="border-t border-neutral-200 dark:border-white/10">
                 <div
                     className={cn(
-                        "overflow-hidden px-4 transition-all duration-300 ease-in-out",
-                        collapsed ? "max-h-0 py-0 opacity-0" : "max-h-24 py-3 opacity-100",
+                        "overflow-hidden px-3 transition-all duration-200 ease-out",
+                        collapsed ? "max-h-0 py-0 opacity-0" : "max-h-20 py-2.5 opacity-100",
                     )}
                 >
-                    <div className="text-[11px] font-extrabold text-neutral-500 dark:text-white/45">
-                        Note
-                    </div>
-                    <div className="mt-1 text-xs font-semibold text-neutral-500 dark:text-white/45">
-                        Each language keeps its own saved workspace.
+                    <div className="text-[11px] font-medium text-neutral-500 dark:text-white/45">
+                        Each language keeps its own workspace.
                     </div>
                 </div>
             </div>

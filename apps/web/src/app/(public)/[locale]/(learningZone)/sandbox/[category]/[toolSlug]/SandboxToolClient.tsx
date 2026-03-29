@@ -21,7 +21,11 @@ const ProgrammingSandbox = dynamic(
     () => import("@/components/sandbox/ProgrammingSandbox"),
     {
         ssr: false,
-        loading: () => <ProgrammingSandboxSkeleton />,
+        loading: () => (
+            <div className="fixed inset-0 z-[100]">
+                <ProgrammingSandboxSkeleton />
+            </div>
+        ),
     },
 );
 

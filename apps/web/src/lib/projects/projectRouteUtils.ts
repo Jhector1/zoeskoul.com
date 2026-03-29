@@ -12,6 +12,7 @@ import type {
     ProjectSummary,
     SaveProjectRequest,
 } from "@/lib/projects/projectApiTypes";
+import {IdeWorkspaceAccess} from "@/components/ide/workspaceHook/workspace.types";
 
 type Capability = Parameters<typeof checkIdeCapability>[1]["capability"];
 
@@ -179,4 +180,30 @@ export async function requireProjectScopeCapability(
     }
 
     return null;
+}
+
+export function toWorkspaceAccessFromProjectGate(gate: {
+    actor: { userId?: string | null };
+    capabilities: unknown;
+}): IdeWorkspaceAccess {
+    const raw = gate.capabilities;
+
+    const hasCap = (name: string) => {
+        if (Array.isArray(raw)) {
+            return raw.includes(name);
+        }
+
+        if (raw && typeof raw === "object") {
+            return Boolean((raw as Record<string, unknown>)[name]);
+        }
+
+        return false;
+    };
+
+    return {
+        hasUser: !!gate.actor.userId,
+        canUseMultiFile: hasCap("multi_file"),
+        canSaveCloud: hasCap("save_cloud"),
+        canCreateProjects: hasCap("create_project"),
+    };
 }

@@ -16,23 +16,34 @@ export default function ProjectSwitcherButton(props: {
             type="button"
             onClick={onClick}
             disabled={disabled}
-            className={cn(
-                "inline-flex min-w-0 max-w-[280px] items-center gap-2 rounded-lg border px-3 py-2 text-left text-sm font-extrabold transition",
-                "border-neutral-200 bg-white text-neutral-900 hover:bg-neutral-50",
-                "dark:border-white/10 dark:bg-white/[0.04] dark:text-white/90 dark:hover:bg-white/[0.08]",
-                disabled && "cursor-not-allowed opacity-60",
-            )}
             title={title}
+            className={cn(
+                "inline-flex h-8 min-w-0 max-w-[240px] items-center gap-1.5 rounded-md px-2.5 text-[11px] font-medium transition-colors",
+                "text-neutral-700 hover:bg-neutral-100 hover:text-neutral-900",
+                "dark:text-white/75 dark:hover:bg-white/[0.06] dark:hover:text-white/90",
+                disabled && "cursor-not-allowed opacity-40",
+            )}
         >
+            {dirty ? (
+                <span
+                    aria-hidden="true"
+                    className="h-1.5 w-1.5 shrink-0 rounded-full bg-amber-500"
+                />
+            ) : (
+                <span
+                    aria-hidden="true"
+                    className="h-1.5 w-1.5 shrink-0 rounded-full bg-transparent"
+                />
+            )}
+
             <span className="truncate">{title}</span>
 
-            {dirty ? (
-                <span className="shrink-0 rounded-full bg-amber-500 px-2 py-0.5 text-[10px] font-black uppercase tracking-[0.12em] text-white">
-          Unsaved
-        </span>
-            ) : null}
-
-            <span className="shrink-0 text-xs opacity-70">▾</span>
+            <span
+                aria-hidden="true"
+                className="shrink-0 text-[10px] text-neutral-400 dark:text-white/35"
+            >
+        ▾
+      </span>
         </button>
     );
 }

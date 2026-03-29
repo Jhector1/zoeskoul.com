@@ -1,0 +1,215 @@
+@layer components {
+    .ui-surface {
+        @apply rounded-xl border border-neutral-200 bg-white/92 dark:border-white/10 dark:bg-white/[0.04];
+    }
+
+    .ui-surface-soft {
+        @apply rounded-xl border border-neutral-200/70 bg-white/90 dark:border-white/10 dark:bg-black/20;
+    }
+
+    .ui-surface-muted {
+        @apply rounded-md border border-neutral-200 bg-neutral-50 dark:border-white/10 dark:bg-white/[0.04];
+    }
+
+    .ui-surface-floating {
+        @apply rounded-md border border-neutral-200/70 bg-white/92 shadow-sm backdrop-blur dark:border-white/10 dark:bg-black/55;
+    }
+
+    .ui-surface-danger {
+        @apply rounded-xl border border-rose-300/20 bg-rose-50/70 dark:border-rose-300/15 dark:bg-rose-950/20;
+    }
+
+    .ui-surface-warn {
+        @apply rounded-xl border border-amber-300/20 bg-amber-50/70 dark:border-amber-300/15 dark:bg-amber-950/20;
+    }
+
+    .ui-surface-success {
+        @apply rounded-xl border border-emerald-300/20 bg-emerald-50/70 dark:border-emerald-300/15 dark:bg-emerald-950/20;
+    }
+
+    .ui-kicker {
+        @apply text-[10px] font-medium uppercase tracking-[0.16em] text-neutral-500 dark:text-white/40;
+    }
+
+    .ui-title-sm {
+        @apply text-sm font-medium text-neutral-900 dark:text-white/90;
+    }
+
+    .ui-title-md {
+        @apply text-lg font-semibold tracking-tight text-neutral-900 dark:text-white/90;
+    }
+
+    .ui-title-lg {
+        @apply text-2xl font-semibold tracking-tight text-neutral-900 dark:text-white/90;
+    }
+
+    .ui-meta {
+        @apply text-[11px] font-medium text-neutral-500 dark:text-white/50;
+    }
+
+    .ui-meta-strong {
+        @apply text-[11px] font-medium text-neutral-600 dark:text-white/60;
+    }
+
+    .ui-btn-ide {
+        @apply inline-flex h-8 items-center justify-center rounded-md px-2.5 text-[11px] font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-40;
+    }
+
+    .ui-btn-ide-ghost {
+        @apply inline-flex h-8 items-center justify-center rounded-md px-2.5 text-[11px] font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-40 text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900 dark:text-white/65 dark:hover:bg-white/[0.06] dark:hover:text-white/90;
+    }
+
+    .ui-btn-ide-border {
+        @apply inline-flex h-8 items-center justify-center rounded-md border border-neutral-200 bg-white px-2.5 text-[11px] font-medium text-neutral-700 transition-colors hover:bg-neutral-50 disabled:cursor-not-allowed disabled:opacity-40 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/75 dark:hover:bg-white/[0.08];
+    }
+
+    .ui-btn-ide-active {
+        @apply inline-flex h-8 items-center justify-center rounded-md border border-neutral-300 bg-neutral-100 px-2.5 text-[11px] font-medium text-neutral-900 transition-colors disabled:cursor-not-allowed disabled:opacity-40 dark:border-white/15 dark:bg-white/[0.08] dark:text-white/90;
+    }
+
+    .ui-btn-ide-primary {
+        @apply inline-flex h-8 items-center justify-center rounded-md border border-neutral-900 bg-neutral-900 px-2.5 text-[11px] font-medium text-white transition-colors hover:bg-neutral-800 disabled:cursor-not-allowed disabled:opacity-40 dark:border-white/10 dark:bg-white/10 dark:text-white dark:hover:bg-white/14;
+    }
+
+    .ui-btn-ide-success {
+        @apply inline-flex h-8 items-center justify-center rounded-md border border-emerald-300/20 bg-emerald-300/10 px-2.5 text-[11px] font-medium text-emerald-900 transition-colors hover:bg-emerald-300/15 disabled:cursor-not-allowed disabled:opacity-40 dark:border-emerald-300/20 dark:bg-emerald-300/10 dark:text-emerald-100 dark:hover:bg-emerald-300/15;
+    }
+
+    .ui-btn-ide-warn {
+        @apply inline-flex h-8 items-center justify-center rounded-md border border-amber-300/20 bg-amber-300/10 px-2.5 text-[11px] font-medium text-amber-900 transition-colors hover:bg-amber-300/15 disabled:cursor-not-allowed disabled:opacity-40 dark:border-amber-300/20 dark:bg-amber-300/10 dark:text-amber-100 dark:hover:bg-amber-300/15;
+    }
+
+    .ui-btn-ide-danger {
+        @apply inline-flex h-8 items-center justify-center rounded-md border border-rose-300/20 bg-rose-300/10 px-2.5 text-[11px] font-medium text-rose-900 transition-colors hover:bg-rose-300/15 disabled:cursor-not-allowed disabled:opacity-40 dark:border-rose-300/20 dark:bg-rose-300/10 dark:text-rose-100 dark:hover:bg-rose-300/15;
+    }
+
+    .ui-btn-ide-disabled {
+        @apply inline-flex h-9 items-center justify-center rounded-md border border-neutral-200 bg-neutral-100 px-3 text-sm font-medium text-neutral-400 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/40;
+    }
+
+    .ui-btn-secondary {
+        @apply inline-flex h-8 items-center justify-center rounded-md border border-neutral-200 bg-white px-2.5 text-[11px] font-medium text-neutral-700 transition-colors hover:bg-neutral-50 disabled:cursor-not-allowed disabled:opacity-40 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/75 dark:hover:bg-white/[0.08];
+    }
+
+    .ui-btn-primary {
+        @apply inline-flex h-9 items-center justify-center rounded-md border border-neutral-900 bg-neutral-900 px-3 text-sm font-medium text-white transition-colors bg-emerald-500 hover:bg-neutral-800 dark:border-white/10 dark:bg-white/10 dark:text-white dark:hover:bg-white/14;
+    }
+
+    .ui-btn-premium {
+        @apply inline-flex h-9 items-center justify-center rounded-md border border-amber-300/20 bg-amber-300/10 px-3 text-sm font-medium text-amber-900 transition-colors hover:bg-amber-300/15 dark:border-amber-300/20 dark:bg-amber-300/10 dark:text-amber-100 dark:hover:bg-amber-300/15;
+    }
+
+    .ui-btn-disabled {
+        @apply inline-flex h-9 items-center justify-center rounded-md border border-neutral-200 bg-neutral-100 px-3 text-sm font-medium text-neutral-400 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/40;
+    }
+
+    .ui-input-ide {
+        @apply h-9 rounded-md border border-neutral-200 bg-white px-3 text-[12px] font-medium text-neutral-900 outline-none transition-colors placeholder:text-neutral-400 focus:border-neutral-300 dark:border-white/10 dark:bg-black/25 dark:text-white/85 dark:focus:border-white/20;
+    }
+
+    .ui-select-ide {
+        @apply h-8 rounded-md border border-neutral-200 bg-white px-2.5 text-[11px] font-medium text-neutral-700 outline-none transition-colors hover:bg-neutral-50 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/75 dark:hover:bg-white/[0.08];
+    }
+
+    .ui-badge {
+        @apply inline-flex h-6 items-center rounded-md border px-2 text-[10px] font-medium;
+    }
+
+    .ui-badge-neutral {
+        @apply inline-flex h-6 items-center rounded-md border border-neutral-200 bg-white px-2 text-[10px] font-medium text-neutral-600 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/65;
+    }
+
+    .ui-badge-good {
+        @apply inline-flex h-6 items-center rounded-md border border-emerald-300/20 bg-emerald-300/10 px-2 text-[10px] font-medium text-emerald-800 dark:text-emerald-200;
+    }
+
+    .ui-badge-warn {
+        @apply inline-flex h-6 items-center rounded-md border border-amber-300/20 bg-amber-300/10 px-2 text-[10px] font-medium text-amber-800 dark:text-amber-200;
+    }
+
+    .ui-badge-bad {
+        @apply inline-flex h-6 items-center rounded-md border border-rose-300/20 bg-rose-300/10 px-2 text-[10px] font-medium text-rose-800 dark:text-rose-200;
+    }
+
+    .ui-pill {
+        @apply inline-flex h-6 items-center rounded-md border px-2 text-[10px] font-medium;
+    }
+
+    .ui-pill-neutral {
+        @apply inline-flex h-6 items-center rounded-md border border-neutral-200 bg-white px-2 text-[10px] font-medium text-neutral-600 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/65;
+    }
+
+    .ui-pill-good {
+        @apply inline-flex h-6 items-center rounded-md border border-emerald-300/20 bg-emerald-300/10 px-2 text-[10px] font-medium text-emerald-800 dark:text-emerald-200;
+    }
+
+    .ui-pill-warn {
+        @apply inline-flex h-6 items-center rounded-md border border-amber-300/20 bg-amber-300/10 px-2 text-[10px] font-medium text-amber-800 dark:text-amber-200;
+    }
+
+
+
+
+
+
+    .ui-stat-card {
+        @apply rounded-md border border-neutral-200 bg-white px-3 py-3 dark:border-white/10 dark:bg-white/[0.04];
+    }
+
+    .ui-progress-track {
+        @apply h-2 w-full overflow-hidden rounded-full bg-neutral-200 dark:bg-white/10;
+    }
+
+    .ui-progress-fill {
+        @apply h-full rounded-full bg-neutral-900 transition-[width] duration-300 dark:bg-white/80;
+    }
+
+    .ui-splitter-x {
+        @apply w-[6px] bg-neutral-200/50 outline-none dark:bg-white/[0.04];
+    }
+
+    .ui-splitter-y {
+        @apply h-[6px] bg-neutral-200/50 outline-none dark:bg-white/[0.04];
+    }
+
+    .ui-splitter-interactive {
+        @apply hover:bg-neutral-300/60 focus:bg-neutral-300/60 dark:hover:bg-white/[0.09] dark:focus:bg-white/[0.09];
+    }
+
+    .ui-ide-menubtn {
+        @apply inline-flex h-7 w-7 items-center justify-center rounded-md text-neutral-500 transition-colors hover:bg-neutral-100 hover:text-neutral-900 dark:text-white/55 dark:hover:bg-white/[0.06] dark:hover:text-white/90;
+    }
+
+    .ui-ide-menupanel {
+        @apply overflow-hidden rounded-md border border-neutral-200 bg-white/98 p-1 shadow-xl backdrop-blur dark:border-white/10 dark:bg-neutral-950/96;
+    }
+
+    .ui-ide-menuitem {
+        @apply flex h-8 w-full items-center gap-2 rounded-md px-2 text-[11px] font-medium text-neutral-700 transition-colors hover:bg-neutral-100 hover:text-neutral-900 dark:text-white/75 dark:hover:bg-white/[0.06] dark:hover:text-white/90;
+    }
+
+    .ui-ide-menuitem--danger {
+        @apply text-rose-700 hover:bg-rose-50 hover:text-rose-800 dark:text-rose-200 dark:hover:bg-rose-400/10;
+    }
+
+    .ui-terminal-surface {
+        @apply h-full rounded-xl border border-neutral-200/70 bg-white/90 dark:border-white/10 dark:bg-black/20;
+    }
+
+    .ui-terminal-log {
+        @apply mt-2 flex-1 overflow-auto border-t border-neutral-200/70 bg-white/70 py-2 dark:border-white/10 dark:bg-black/25;
+    }
+
+    .ui-terminal-prompt {
+        @apply relative mt-2 border-t border-neutral-200/70 bg-white/75 px-2.5 py-2 dark:border-white/10 dark:bg-black/25;
+    }
+
+    .ui-page-surface {
+        @apply rounded-xl border border-neutral-200 bg-white/92 dark:border-white/10 dark:bg-white/[0.04];
+    }
+
+    .ui-icon-box {
+        @apply grid h-10 w-10 shrink-0 place-items-center rounded-md border border-neutral-200 bg-white dark:border-white/10 dark:bg-white/[0.04];
+    }
+
+}

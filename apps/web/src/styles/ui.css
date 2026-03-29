@@ -17,6 +17,7 @@
 @import "./ui/codeRunner.css";
 @import "./ui/reviewModuleSkeleton.css";
 @import "./ui/tooltip.css";
+@import "./ui/ui-v2.css";
 
 @layer base {
     html { font-size: var(--app-font-size, 16px); }

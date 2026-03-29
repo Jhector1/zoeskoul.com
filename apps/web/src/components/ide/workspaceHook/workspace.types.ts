@@ -1,6 +1,5 @@
 import type React from "react";
 import type { CodeLanguage } from "@/lib/practice/types";
-
 import type {
   FileNode,
   FolderNode,
@@ -10,7 +9,7 @@ import type {
   Toast,
   WorkspaceStateV2,
 } from "../types";
-import type { ImportedWorkspaceFile } from "./workspace.fileActions";
+import type { IdeWorkspacePolicy, ImportedWorkspaceFile } from "./workspace.policy";
 
 export type IdeWorkspaceAccess = {
   hasUser: boolean;
@@ -35,6 +34,8 @@ export type UseIdeWorkspaceOpts = {
   projectId?: string | null;
   scopeKey?: string | null;
   localWorkspaceId?: string | null;
+
+  policy?: IdeWorkspacePolicy;
 };
 
 export type WorkspaceMeta = {
@@ -43,11 +44,6 @@ export type WorkspaceMeta = {
   projectId: string | null;
   scopeKey: string | null;
   localWorkspaceId: string | null;
-};
-
-export type IdeWorkspaceHistory = {
-  canUndo: boolean;
-  canRedo: boolean;
 };
 
 export type IdeWorkspaceState = {
@@ -64,6 +60,7 @@ export type IdeWorkspaceState = {
   pendingDeleteId: NodeId | null;
   toast: Toast;
   access: IdeWorkspaceAccess;
+  policy: IdeWorkspacePolicy;
 };
 
 export type IdeWorkspaceDerived = {
@@ -90,7 +87,6 @@ export type IdeWorkspaceActions = {
   setInlineEdit: React.Dispatch<React.SetStateAction<InlineEdit>>;
   setPendingDeleteId: React.Dispatch<React.SetStateAction<NodeId | null>>;
   setToast: React.Dispatch<React.SetStateAction<Toast>>;
-
   importExternalFiles: (files: ImportedWorkspaceFile[]) => void;
   replaceWorkspace: (ws: WorkspaceStateV2) => void;
   resetWorkspaceForLanguage: (next: CodeLanguage) => void;
@@ -104,20 +100,20 @@ export type IdeWorkspaceActions = {
   startNewFile: CreateNodeHandler;
   startNewFolder: CreateNodeHandler;
   startRename: (nodeId: NodeId) => void;
-  moveNode: (id: NodeId, parentId: NodeId | null) => void;
+  moveNode: (id: string, parentId: string | null) => void;
   commitInlineEdit: () => void;
   cancelInlineEdit: () => void;
 
-  undo: () => void;
-  redo: () => void;
-
   setEntry: (id: NodeId) => void;
   requestDelete: (id: NodeId) => void;
-  performDelete: () => void;
+  performDelete: (id: NodeId) => void;
 
   onMouseDownDivider: (e: React.MouseEvent, rootEl: DividerRootEl) => void;
   onPointerDownDivider: (e: React.PointerEvent, rootEl: DividerRootEl) => void;
   onKeyDownDivider: (e: React.KeyboardEvent, rootEl: DividerRootEl) => void;
+
+  undo: () => void;
+  redo: () => void;
 };
 
 export type IdeWorkspaceConstants = {
@@ -125,9 +121,12 @@ export type IdeWorkspaceConstants = {
 };
 
 export type UseIdeWorkspaceResult = {
-  history: IdeWorkspaceHistory;
   state: IdeWorkspaceState;
   derived: IdeWorkspaceDerived;
   actions: IdeWorkspaceActions;
   constants: IdeWorkspaceConstants;
+  history: {
+    canUndo: boolean;
+    canRedo: boolean;
+  };
 };

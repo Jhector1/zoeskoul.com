@@ -128,6 +128,8 @@ export default function QuizBlock({
     setExcusedById(initState?.excusedById ?? {});
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [resetKey]);
+  const restoreQuestionKeyRef = useRef<string>("");
+
 
   const isExcused = useCallback(
       (qid: string) => Boolean(excusedById[qid]),
@@ -337,7 +339,26 @@ export default function QuizBlock({
       },
       [],
   );
+  const findCurrentActivityQuestionId = useCallback(() => {
+    for (let i = 0; i < questions.length; i++) {
+      const q = questions[i];
+      if (!isUnlocked(i)) break;
+      if (!isFlowDone(q)) return q.id;
+    }
 
+    return questions[questions.length - 1]?.id ?? null;
+  }, [
+    questions,
+    local.checkedById,
+    local.answers,
+    practiceBank.practice,
+    excusedById,
+    strictSequential,
+    unlimitedAttempts,
+    prereqsMet,
+    locked,
+    isCompleted,
+  ]);
   const setExplainEl = useCallback(
       (qid: string) => (el: HTMLDivElement | null) => {
         explainRef.current.set(qid, el);
@@ -399,6 +420,69 @@ export default function QuizBlock({
   }, [pendingScrollQid, pendingScrollMode, reduceMotion]);
 
   /* ------------------------- flow helpers ------------------------ */
+  useEffect(() => {
+    if (quizLoading) return;
+    if (!questions.length) return;
+
+    const restoreKey = `${resetKey}:restore`;
+    if (restoreQuestionKeyRef.current === restoreKey) return;
+
+    let cancelled = false;
+    let tries = 0;
+    const MAX_TRIES = 12;
+
+    const tryRestore = () => {
+      if (cancelled) return;
+
+      const qid = findCurrentActivityQuestionId();
+      if (!qid) {
+        restoreQuestionKeyRef.current = restoreKey;
+        scrollToFooter();
+        return;
+      }
+
+      const el = qElRef.current.get(qid);
+
+      // question node not mounted yet → retry, do NOT consume the restore key yet
+      if (!el) {
+        if (tries < MAX_TRIES) {
+          tries += 1;
+          requestAnimationFrame(() => {
+            requestAnimationFrame(tryRestore);
+          });
+        }
+        return;
+      }
+
+      // consume the key only once we have the exact target
+      restoreQuestionKeyRef.current = restoreKey;
+
+      // run after parent card-level restore has had time to settle
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          if (cancelled) return;
+
+          scrollIntoViewSmart(el, {
+            reduceMotion,
+            block: "start",
+            force: true,
+            offsetPx: 12,
+            focus: false,
+          });
+        });
+      });
+    };
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(tryRestore);
+    });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [quizLoading, questions, resetKey, findCurrentActivityQuestionId, reduceMotion]);
+
+
 
   function scrollToFooter() {
     const el = footerElRef.current;

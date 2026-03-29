@@ -21,6 +21,7 @@ import {
     IconPencil,
     IconTrash,
 } from "./icons";
+import {IdeWorkspacePolicy} from "@/components/ide/workspaceHook/workspace.policy";
 
 function setInlineValuePreserveCaret(
     setInlineEdit: React.Dispatch<React.SetStateAction<InlineEdit>>,
@@ -81,15 +82,15 @@ function InlineNameRow(props: {
     }, [initialFocus]);
 
     return (
-        <div className="rounded-lg border border-neutral-200 bg-white px-2 py-2 dark:border-white/10 dark:bg-white/[0.06]">
-            <div className="flex min-h-[44px] items-center">
+        <div className="rounded-md border border-neutral-200 bg-white px-2 py-2 dark:border-white/10 dark:bg-white/[0.04]">
+            <div className="flex min-h-[36px] items-center">
                 <IndentGuides depth={depth} />
-                <div className="grid h-6 w-6 place-items-center opacity-60" />
-                <div className="grid h-6 w-6 place-items-center text-neutral-700 dark:text-white/80">
+                <div className="grid h-5 w-5 place-items-center opacity-50" />
+                <div className="grid h-5 w-5 place-items-center text-neutral-600 dark:text-white/70">
                     {kind === "folder" ? (
-                        <IconFolder className="h-4 w-4" />
+                        <IconFolder className="h-3.5 w-3.5" />
                     ) : (
-                        <IconFile className="h-4 w-4" />
+                        <IconFile className="h-3.5 w-3.5" />
                     )}
                 </div>
 
@@ -110,11 +111,11 @@ function InlineNameRow(props: {
                         if (e.key === "Enter") commitInlineEdit();
                         if (e.key === "Escape") cancelInlineEdit();
                     }}
-                    className="h-9 w-full rounded-md border border-neutral-200 bg-white px-3 text-sm font-semibold text-neutral-900 outline-none dark:border-white/10 dark:bg-black/30 dark:text-white/90"
+                    className="h-8 w-full rounded-md border border-neutral-200 bg-white px-2.5 text-[12px] font-medium text-neutral-900 outline-none transition-colors dark:border-white/10 dark:bg-black/20 dark:text-white/85"
                 />
             </div>
 
-            <div className="mt-2 flex flex-col gap-2 sm:ml-[28px] sm:flex-row sm:items-center">
+            <div className="mt-2 flex items-center gap-1.5 sm:ml-[24px]">
                 <button
                     type="button"
                     onClick={(e) => {
@@ -122,10 +123,11 @@ function InlineNameRow(props: {
                         e.stopPropagation();
                         commitInlineEdit();
                     }}
-                    className="ui-quiz-action ui-quiz-action--primary"
+                    className="inline-flex h-8 items-center justify-center rounded-md border border-emerald-600/20 bg-emerald-500/10 px-2.5 text-[11px] font-medium text-emerald-900 transition-colors hover:bg-emerald-500/15 dark:border-emerald-300/20 dark:bg-emerald-300/10 dark:text-emerald-100 dark:hover:bg-emerald-300/15"
                 >
                     Save
                 </button>
+
                 <button
                     type="button"
                     onClick={(e) => {
@@ -133,7 +135,7 @@ function InlineNameRow(props: {
                         e.stopPropagation();
                         cancelInlineEdit();
                     }}
-                    className="ui-quiz-action ui-quiz-action--ghost"
+                    className="inline-flex h-8 items-center justify-center rounded-md px-2.5 text-[11px] font-medium text-neutral-600 transition-colors hover:bg-neutral-100 hover:text-neutral-900 dark:text-white/65 dark:hover:bg-white/[0.06] dark:hover:text-white/90"
                 >
                     Cancel
                 </button>
@@ -195,7 +197,7 @@ type TreeProps = {
     cancelInlineEdit: () => void;
 
     openContextMenu: (e: React.MouseEvent, actions: MenuAction[]) => void;
-
+    policy: IdeWorkspacePolicy;
     dragState: {
         draggingId: NodeId | null;
         dropParentId: NodeId | null;
@@ -240,6 +242,7 @@ function Tree(props: TreeProps) {
         openContextMenu,
         dragState,
         touchState,
+        policy,
     } = props;
 
     const {
@@ -311,76 +314,92 @@ function Tree(props: TreeProps) {
                         targetParentId: n.id,
                     });
 
-                const baseFileActions: MenuAction[] = isSql
-                    ? [
-                        {
-                            label: "Rename",
-                            onClick: () => startRename(n.id),
-                            icon: <IconPencil className="h-4 w-4" />,
-                        },
-                        {
-                            label: "Delete",
-                            onClick: () => requestDelete(n.id),
-                            icon: <IconTrash className="h-4 w-4" />,
-                            danger: true,
-                            disabled: disableDelete,
-                        },
-                    ]
-                    : [
-                        {
-                            label: isEntry ? "Entry file" : "Set as Entry",
-                            onClick: () => setEntry(n.id),
-                            icon: <IconPlay className="h-4 w-4" />,
-                            disabled: isEntry,
-                        },
-                        {
-                            label: "Rename",
-                            onClick: () => startRename(n.id),
-                            icon: <IconPencil className="h-4 w-4" />,
-                        },
-                        {
-                            label: "Delete",
-                            onClick: () => requestDelete(n.id),
-                            icon: <IconTrash className="h-4 w-4" />,
-                            danger: true,
-                            disabled: disableDelete,
-                        },
-                    ];
-
-                const baseFolderActions: MenuAction[] = [
-                    {
-                        label: "New file",
-                        onClick: () => startNewFile(n.id),
-                        icon: <IconPlus className="h-4 w-4" />,
-                    },
-                    {
-                        label: "New folder",
-                        onClick: () => startNewFolder(n.id),
-                        icon: <IconFolder className="h-4 w-4" />,
-                    },
-                    {
-                        label: "Rename",
-                        onClick: () => startRename(n.id),
-                        icon: <IconPencil className="h-4 w-4" />,
-                    },
-                    {
-                        label: "Delete",
-                        onClick: () => requestDelete(n.id),
-                        icon: <IconTrash className="h-4 w-4" />,
-                        danger: true,
-                        disabled: disableDelete,
-                    },
+                const baseFileActions: MenuAction[] = [
+                    ...(!isSql
+                        ? [
+                            {
+                                label: isEntry ? "Entry file" : "Set as Entry",
+                                onClick: () => setEntry(n.id),
+                                icon: <IconPlay className="h-4 w-4" />,
+                                disabled: isEntry,
+                            },
+                        ]
+                        : []),
+                    ...(policy.canRenameNodes
+                        ? [
+                            {
+                                label: "Rename",
+                                onClick: () => startRename(n.id),
+                                icon: <IconPencil className="h-4 w-4" />,
+                            },
+                        ]
+                        : []),
+                    ...(policy.canDeleteNodes
+                        ? [
+                            {
+                                label: "Delete",
+                                onClick: () => requestDelete(n.id),
+                                icon: <IconTrash className="h-4 w-4" />,
+                                danger: true,
+                                disabled: disableDelete,
+                            },
+                        ]
+                        : []),
                 ];
 
-                const moveAction: MenuAction[] = isTouchLike
-                    ? [
-                        {
-                            label: "Move to…",
-                            onClick: () => setPendingMoveId(n.id),
-                            icon: <IconFolder className="h-4 w-4" />,
-                        },
-                    ]
-                    : [];
+                const baseFolderActions: MenuAction[] = [
+                    ...(policy.canCreateFiles
+                        ? [
+                            {
+                                label: "New file",
+                                onClick: () => startNewFile(n.id),
+                                icon: <IconPlus className="h-4 w-4" />,
+                            },
+                        ]
+                        : []),
+                    ...(policy.canCreateFolders
+                        ? [
+                            {
+                                label: "New folder",
+                                onClick: () => startNewFolder(n.id),
+                                icon: <IconFolder className="h-4 w-4" />,
+                            },
+                        ]
+                        : []),
+                    ...(policy.canRenameNodes
+                        ? [
+                            {
+                                label: "Rename",
+                                onClick: () => startRename(n.id),
+                                icon: <IconPencil className="h-4 w-4" />,
+                            },
+                        ]
+                        : []),
+                    ...(policy.canDeleteNodes
+                        ? [
+                            {
+                                label: "Delete",
+                                onClick: () => requestDelete(n.id),
+                                icon: <IconTrash className="h-4 w-4" />,
+                                danger: true,
+                                disabled: disableDelete,
+                            },
+                        ]
+                        : []),
+                ];
+
+
+
+                const moveAction: MenuAction[] =
+                    isTouchLike && policy.canMoveNodes
+                        ? [
+                            {
+                                label: "Move to…",
+                                onClick: () => setPendingMoveId(n.id),
+                                icon: <IconFolder className="h-4 w-4" />,
+                            },
+                        ]
+                        : [];
 
                 const actions = isFolder
                     ? [...moveAction, ...baseFolderActions]
@@ -420,6 +439,7 @@ function Tree(props: TreeProps) {
                                         startNewFolder={startNewFolder}
                                         startRename={startRename}
                                         setEntry={setEntry}
+                                        policy={policy}
                                         requestDelete={requestDelete}
                                         moveNode={moveNode}
                                         commitInlineEdit={commitInlineEdit}
@@ -469,8 +489,7 @@ function Tree(props: TreeProps) {
                                 clearAutoExpand();
                             }}
                             className={cn(
-                                "group flex min-h-[44px] items-center rounded-xl border border-transparent px-2 sm:min-h-[36px]",
-                                "hover:bg-neutral-50 hover:border-neutral-200 dark:hover:bg-white/[0.06] dark:hover:border-white/10",
+                                "group flex min-h-[36px] items-center rounded-md border border-transparent px-2",                                "hover:bg-neutral-50 hover:border-neutral-200 dark:hover:bg-white/[0.06] dark:hover:border-white/10",
                                 isActive && "bg-neutral-50 border-neutral-200 dark:bg-white/[0.08] dark:border-white/10",
                                 isDropTarget &&
                                 "border-emerald-400 bg-emerald-50/80 dark:border-emerald-300/50 dark:bg-emerald-400/10",
@@ -507,8 +526,7 @@ function Tree(props: TreeProps) {
                                 title={isTouchLike ? "Use Move to… from the menu" : "Drag to move"}
                                 aria-label={isTouchLike ? "Use Move to action" : "Drag handle"}
                             >
-                                <span className="select-none text-sm font-black leading-none">⋮⋮</span>
-                            </div>
+                                <span className="select-none text-[12px] font-medium leading-none">⋮⋮</span>                            </div>
 
                             <button
                                 type="button"
@@ -565,13 +583,12 @@ function Tree(props: TreeProps) {
                                     else openFile(n.id);
                                 }}
                             >
-                                <div className="truncate text-[13px] font-semibold text-neutral-900 dark:text-white/85">
-                                    {n.name}
+                                <div className="truncate text-[12px] font-medium text-neutral-900 dark:text-white/85">                                    {n.name}
                                 </div>
                             </button>
 
                             {isEntry ? (
-                                <div className="mr-1 ui-pill ui-pill--good" title="Runs when you click Run">
+                                <div className="mr-1 ui-pill-good" title="Runs when you click Run">
                                     <IconPlay className="h-3 w-3" />
                                     ENTRY
                                 </div>
@@ -609,6 +626,7 @@ function Tree(props: TreeProps) {
                                     cancelInlineEdit={cancelInlineEdit}
                                     openContextMenu={openContextMenu}
                                     dragState={dragState}
+                                    policy={policy}
                                     touchState={touchState}
                                 />
                             </div>
@@ -644,6 +662,8 @@ export default function ExplorerTree(props: {
 
     commitInlineEdit: () => void;
     cancelInlineEdit: () => void;
+    policy: IdeWorkspacePolicy;
+
 }) {
     const {
         nodes,
@@ -664,6 +684,7 @@ export default function ExplorerTree(props: {
         moveNode,
         commitInlineEdit,
         cancelInlineEdit,
+        policy
     } = props;
 
     const filterLower = filter.trim().toLowerCase();
@@ -807,24 +828,31 @@ export default function ExplorerTree(props: {
         },
         [],
     );
-
     const rootActions: MenuAction[] = useMemo(
         () => [
-            {
-                label: "New file",
-                onClick: () => startNewFile(null),
-                icon: <IconPlus className="h-4 w-4" />,
-            },
-            {
-                label: "New folder",
-                onClick: () => startNewFolder(null),
-                icon: <IconFolder className="h-4 w-4" />,
-            },
+            ...(policy.canCreateFiles
+                ? [
+                    {
+                        label: "New file",
+                        onClick: () => startNewFile(null),
+                        icon: <IconPlus className="h-4 w-4" />,
+                    },
+                ]
+                : []),
+            ...(policy.canCreateFolders
+                ? [
+                    {
+                        label: "New folder",
+                        onClick: () => startNewFolder(null),
+                        icon: <IconFolder className="h-4 w-4" />,
+                    },
+                ]
+                : []),
         ],
-        [startNewFile, startNewFolder],
+        [policy, startNewFile, startNewFolder],
     );
-
     const canDropToRoot =
+        policy.canMoveNodes &&
         draggingId != null &&
         canMoveInto({
             nodes,
@@ -839,22 +867,22 @@ export default function ExplorerTree(props: {
     return (
         <>
             {pendingMoveId != null ? (
-                <div className="mb-2 rounded-2xl border border-sky-300/30 bg-sky-50/80 p-3 dark:border-sky-300/20 dark:bg-sky-400/10">
+                <div className="mb-2 rounded-md border border-sky-300/30 bg-sky-50/80 p-3 dark:border-sky-300/20 dark:bg-sky-400/10">
                     <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
                         <div className="min-w-0">
-                            <div className="text-sm font-black text-sky-950 dark:text-white/90">
+                            <div className="text-sm font-medium text-sky-950 dark:text-white/90">
                                 Move {movingNode?.name ?? "item"}
                             </div>
-                            <div className="mt-1 text-xs font-semibold text-sky-800/80 dark:text-white/65">
-                                Tap a folder to move into it, or send it back to root.
+                            <div className="mt-1 text-[11px] font-medium text-sky-800/80 dark:text-white/60">
+                                Tap a folder to move into it, or move it back to root.
                             </div>
                         </div>
 
-                        <div className="flex flex-wrap gap-2">
+                        <div className="flex flex-wrap gap-1.5">
                             <button
                                 type="button"
                                 onClick={() => finishMove(null)}
-                                className="rounded-xl border border-sky-300/30 bg-white px-3 py-2 text-xs font-black text-sky-900 dark:border-white/10 dark:bg-white/[0.08] dark:text-white/85"
+                                className="inline-flex h-8 items-center justify-center rounded-md border border-sky-300/30 bg-white px-2.5 text-[11px] font-medium text-sky-900 transition-colors hover:bg-sky-50 dark:border-white/10 dark:bg-white/[0.06] dark:text-white/85 dark:hover:bg-white/[0.08]"
                             >
                                 Move to root
                             </button>
@@ -862,7 +890,7 @@ export default function ExplorerTree(props: {
                             <button
                                 type="button"
                                 onClick={() => setPendingMoveId(null)}
-                                className="rounded-xl border border-neutral-200 bg-white px-3 py-2 text-xs font-black text-neutral-700 dark:border-white/10 dark:bg-white/[0.08] dark:text-white/80"
+                                className="inline-flex h-8 items-center justify-center rounded-md px-2.5 text-[11px] font-medium text-neutral-600 transition-colors hover:bg-neutral-100 hover:text-neutral-900 dark:text-white/65 dark:hover:bg-white/[0.06] dark:hover:text-white/90"
                             >
                                 Cancel
                             </button>
@@ -875,6 +903,7 @@ export default function ExplorerTree(props: {
                 onContextMenu={(e) => {
                     const target = e.target as HTMLElement | null;
                     if (target?.closest("[data-tree-node-row='true']")) return;
+                    if (!rootActions.length) return;
                     openContextMenu(e, rootActions);
                 }}
                 onDragOver={(e) => {
@@ -902,6 +931,7 @@ export default function ExplorerTree(props: {
                     parentId={null}
                     depth={0}
                     nodes={nodes}
+                    policy={policy}
                     expanded={expanded}
                     activeFileId={activeFileId}
                     entryFileId={entryFileId}

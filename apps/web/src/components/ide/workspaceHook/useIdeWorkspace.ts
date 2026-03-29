@@ -42,9 +42,15 @@ import {
     startNewFolder as startNewFolderAction,
     startRename as startRenameAction,
     toggleFolder as toggleFolderAction,
-    type ImportedWorkspaceFile,
+
 } from "./workspace.fileActions";
+
 import { beginDividerDrag, handleDividerKeyDown } from "./workspace.splitter";
+import {
+    IdeWorkspacePolicy,
+    ImportedWorkspaceFile,
+    resolveWorkspacePolicy
+} from "@/components/ide/workspaceHook/workspace.policy";
 
 export { type IdeWorkspaceAccess, type UseIdeWorkspaceOpts, type UseIdeWorkspaceResult } from "./workspace.types";
 
@@ -97,6 +103,10 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
     const forcedLanguage = opts?.forcedLanguage;
     const resetOnForcedLanguageChange = !!opts?.resetOnForcedLanguageChange;
     const access = opts?.access ?? DEFAULT_ACCESS;
+    const policy = useMemo<IdeWorkspacePolicy>(
+        () => opts?.policy ?? resolveWorkspacePolicy(access),
+        [opts?.policy, access],
+    );
     const draftStorageMode = opts?.draftStorageMode ?? "local";
     const initialWorkspace = opts?.initialWorkspace ?? null;
 
@@ -273,21 +283,7 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
         restoreHistorySnapshot(next);
         syncHistoryFlags();
     }, [takeHistorySnapshot, restoreHistorySnapshot, syncHistoryFlags]);
-    const moveNode = useCallback(
-        (id: NodeId, parentId: NodeId | null) => {
-            pushUndoSnapshot();
-            return moveNodeAction({
-                access,
-                nodes,
-                id,
-                parentId,
-                setNodes,
-                setExpanded,
-                setToast,
-            });
-        },
-        [pushUndoSnapshot, access, nodes],
-    );
+
     useEffect(() => {
         const onKeyDown = (e: KeyboardEvent) => {
             const mod = e.metaKey || e.ctrlKey;
@@ -604,11 +600,15 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
             }),
         [],
     );
+
+
+
     const importExternalFiles = useCallback(
         (files: ImportedWorkspaceFile[]) => {
             pushUndoSnapshot();
             return importExternalFilesAction({
                 access,
+                policy,
                 nodes,
                 activeFileId,
                 files,
@@ -619,12 +619,14 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
                 setToast,
             });
         },
-        [pushUndoSnapshot, access, nodes, activeFileId],
+        [pushUndoSnapshot, access, policy, nodes, activeFileId],
     );
+
     const startNewFile = useCallback(
         (parentId: NodeId | null) =>
             startNewFileAction({
                 access,
+                policy,
                 language,
                 nodes,
                 parentId,
@@ -632,37 +634,40 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
                 setInlineEdit,
                 setToast,
             }),
-        [access, language, nodes],
+        [access, policy, language, nodes],
     );
 
     const startNewFolder = useCallback(
         (parentId?: NodeId | null) =>
             startNewFolderAction({
-                access,
+                policy,
                 nodes,
                 parentId: parentId ?? null,
                 setExpanded,
                 setInlineEdit,
                 setToast,
             }),
-        [access, nodes],
+        [policy, nodes],
     );
 
     const startRename = useCallback(
         (nodeId: NodeId) =>
             startRenameAction({
                 access,
+                policy,
                 nodes,
                 nodeId,
                 setInlineEdit,
                 setToast,
             }),
-        [access, nodes],
+        [access, policy, nodes],
     );
+
     const commitInlineEdit = useCallback(() => {
         pushUndoSnapshot();
         return commitInlineEditAction({
             access,
+            policy,
             language,
             inlineEdit,
             nodes,
@@ -677,11 +682,45 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
     }, [
         pushUndoSnapshot,
         access,
+        policy,
         language,
         inlineEdit,
         nodes,
         activeFileId,
     ]);
+
+    const requestDelete = useCallback(
+        (id: NodeId) =>
+            requestDeleteAction({
+                policy,
+                nodes,
+                id,
+                language,
+                entryFileId,
+                setPendingDeleteId,
+                setToast,
+            }),
+        [policy, nodes, language, entryFileId],
+    );
+
+    const moveNode = useCallback(
+        (id: NodeId, parentId: NodeId | null) => {
+            pushUndoSnapshot();
+            return moveNodeAction({
+                policy,
+                nodes,
+                id,
+                parentId,
+                setNodes,
+                setExpanded,
+                setToast,
+            });
+        },
+        [pushUndoSnapshot, policy, nodes],
+    );
+
+
+
 
     const cancelInlineEdit = useCallback(() => setInlineEdit(null), []);
     const setEntry = useCallback(
@@ -691,19 +730,7 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
         },
         [pushUndoSnapshot, setEntryFileId],
     );
-    const requestDelete = useCallback(
-        (id: NodeId) =>
-            requestDeleteAction({
-                access,
-                nodes,
-                id,
-                language,
-                entryFileId,
-                setPendingDeleteId,
-                setToast,
-            }),
-        [access, nodes, language, entryFileId],
-    );
+
 
     const performDelete = useCallback(() => {
         if (!pendingDeleteId) return;
@@ -772,6 +799,7 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
             pendingDeleteId,
             toast,
             access,
+            policy
         },
         derived: {
             activeFile,

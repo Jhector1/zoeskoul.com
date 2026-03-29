@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useMemo, useRef, useState } from "react";
+import React, {useCallback, useEffect, useMemo, useRef, useState} from "react";
 import { useRouter } from "next/navigation";
 
 import { DEFAULT_SQL_DIALECT } from "@/components/code/runner/constants";
@@ -143,14 +143,12 @@ function FullIDEInner({
         editorHostRef,
         onCloseMobileExplorer: () => setShowMobileExplorer(false),
     });
-
     const isSql = language === "sql";
 
-    const codeBackend: ExecutionBackend = "judge0";
+    const codeBackend: ExecutionBackend = isSql ? "judge0" : "pty";
 
-    const runnerRuntime: CodeRunnerRuntime = isSql
-        ? { backend: "judge0", terminalView: "plain" }
-        : codeBackend === "pty"
+    const runnerRuntime: CodeRunnerRuntime =
+        codeBackend === "pty"
             ? { backend: "pty", terminalView: "xterm" }
             : { backend: "judge0", terminalView: "plain" };
 
@@ -211,6 +209,8 @@ function FullIDEInner({
             language={language}
             inlineEdit={inlineEdit}
             stdin={stdin}
+            access={access}
+            policy={state.policy}
             onUpgrade={() => router.push(access.hasUser ? billingHref : loginHref)}
             onChangeFilter={actions.setFilter}
             onChangeStdin={actions.setStdin}
@@ -220,6 +220,7 @@ function FullIDEInner({
             onRedo={actions.redo}
             actions={{
                 setInlineEdit: actions.setInlineEdit,
+                setToast: actions.setToast,
                 openFile: actions.openFile,
                 toggleFolder: actions.toggleFolder,
                 startNewFile: actions.startNewFile,
@@ -261,7 +262,7 @@ function FullIDEInner({
 
     const handleConfirmDelete = () => {
         if (!pendingDeleteId) return;
-        actions.performDelete();
+        actions.performDelete(pendingDeleteId);
     };
 
     const handlePrimarySave = () => {
@@ -440,6 +441,7 @@ export default function FullIDE(props: FullIDEProps) {
         projectDescription = null,
         projectScope,
         draftStorageMode = "off",
+        onReadyChange,
     } = props;
 
     const router = useRouter();
@@ -451,6 +453,8 @@ export default function FullIDE(props: FullIDEProps) {
 
     const actorKey = useMemo(() => buildClientActorKey(access), [access]);
     const scopeKey = useMemo(() => buildScopeKey(projectScope), [projectScope]);
+
+
 
 
 
@@ -495,6 +499,36 @@ export default function FullIDE(props: FullIDEProps) {
         [workspace.state.language, initialProjectId, localWorkspaceId, scopeKey],
     );
 
+    const isIdeReady = !!(
+        workspace.derived.currentWorkspace &&
+        workspace.state.nodes.length > 0 &&
+        workspace.state.activeFileId &&
+        workspace.state.entryFileId
+    );
+
+    useEffect(() => {
+        if (!onReadyChange) return;
+
+        if (!isIdeReady) {
+            onReadyChange(false);
+            return;
+        }
+
+        let raf1 = 0;
+        let raf2 = 0;
+
+        raf1 = window.requestAnimationFrame(() => {
+            raf2 = window.requestAnimationFrame(() => {
+                onReadyChange(true);
+            });
+        });
+
+        return () => {
+            window.cancelAnimationFrame(raf1);
+            window.cancelAnimationFrame(raf2);
+        };
+    }, [isIdeReady, onReadyChange, workspace.state.language]);
+
     return (
         <div
             className={cn(
@@ -530,6 +564,7 @@ export default function FullIDE(props: FullIDEProps) {
                 state={workspace.state}
                 derived={workspace.derived}
                 actions={workspace.actions}
+
             />
         </div>
     );

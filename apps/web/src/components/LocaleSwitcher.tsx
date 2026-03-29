@@ -1,23 +1,21 @@
 "use client";
 
-import React, { useMemo, useState, useTransition } from "react";
+import * as React from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { useSearchParams } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { cn } from "@/lib/cn";
 import ConfirmResetModal from "./practice/ConfirmResetModal";
-import {persistLocale} from "@/lib/locale/persistLocale";
-
-
+import { persistLocale } from "@/lib/locale/persistLocale";
 
 function Spinner({ className }: { className?: string }) {
   return (
       <span
           aria-hidden="true"
           className={cn(
-              "inline-block h-4 w-4 animate-spin rounded-full border-2 border-current border-r-transparent",
-              className
+              "inline-block h-3.5 w-3.5 animate-spin rounded-full border-2 border-current border-r-transparent",
+              className,
           )}
       />
   );
@@ -36,15 +34,15 @@ export default function LocaleSwitcher({
   const router = useRouter();
   const sp = useSearchParams();
 
-  const [isPending, startTransition] = useTransition();
-  const [confirmOpen, setConfirmOpen] = useState(false);
-  const [pendingLocale, setPendingLocale] = useState<string | null>(null);
-  const [changingTo, setChangingTo] = useState<string | null>(null);
+  const [isPending, startTransition] = React.useTransition();
+  const [confirmOpen, setConfirmOpen] = React.useState(false);
+  const [pendingLocale, setPendingLocale] = React.useState<string | null>(null);
+  const [changingTo, setChangingTo] = React.useState<string | null>(null);
 
   const search = sp.toString();
   const href = search ? `${pathname}?${search}` : pathname;
 
-  const description = useMemo(() => {
+  const description = React.useMemo(() => {
     if (!pendingLocale) return "";
     return t("confirm.description", {
       from: String(locale).toUpperCase(),
@@ -70,7 +68,6 @@ export default function LocaleSwitcher({
     if (!pendingLocale) return cancel();
 
     const nextLocale = pendingLocale;
-
     setChangingTo(nextLocale);
     persistLocale(nextLocale);
     setConfirmOpen(false);
@@ -99,26 +96,21 @@ export default function LocaleSwitcher({
         <div className="relative max-w-full">
           {isPending ? (
               <div
-                  className={cn(
-                      "absolute inset-0 z-10 flex items-center justify-center gap-2 rounded-full",
-                      "bg-white/88 text-neutral-900 shadow-sm dark:bg-neutral-950/88 dark:text-white"
-                  )}
+                  className="absolute inset-0 z-10 flex items-center justify-center gap-2 rounded-md bg-white/92 text-neutral-900 dark:bg-neutral-950/92 dark:text-white"
                   aria-live="polite"
                   aria-busy="true"
               >
                 <Spinner />
-                <span className="text-xs font-semibold">
-{changingTo ? t("changingTo", { locale: changingTo.toUpperCase() }) : t("changing")}            </span>
+                <span className="text-[11px] font-medium">
+              {changingTo ? t("changingTo", { locale: changingTo.toUpperCase() }) : t("changing")}
+            </span>
               </div>
           ) : null}
 
           <div
               className={cn(
-                  "inline-flex max-w-full items-center gap-1 overflow-x-auto rounded-full border border-neutral-200 bg-white shadow-sm",
-                  "[-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden",
-                  compact ? "p-1" : "p-1.5",
-                  "dark:border-white/10 dark:bg-neutral-900 dark:shadow-none",
-                  isPending && "pointer-events-none"
+                  "inline-flex max-w-full items-center gap-1 overflow-x-auto rounded-md border border-neutral-200 bg-white p-1 shadow-sm [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden dark:border-white/10 dark:bg-neutral-900 dark:shadow-none",
+                  isPending && "pointer-events-none",
               )}
               aria-label={t("ariaLabel")}
               aria-busy={isPending}
@@ -134,17 +126,14 @@ export default function LocaleSwitcher({
                       disabled={isPending}
                       onClick={() => requestChangeTo(l)}
                       className={cn(
-                          "inline-flex shrink-0 items-center justify-center gap-1 rounded-full font-semibold leading-none transition",
-                          "focus:outline-none focus:ring-2 focus:ring-emerald-300/50 disabled:cursor-not-allowed disabled:opacity-70",
-                          compact ? "h-8 min-w-[2.75rem] px-2 text-[11px]" : "h-9 min-w-[3rem] px-3 text-xs",
-                          active
-                              ? "bg-neutral-950 text-white dark:bg-white dark:text-neutral-950"
-                              : "text-neutral-700 hover:bg-neutral-100 dark:text-white/80 dark:hover:bg-white/10"
+                          active ? "ui-btn-ide-active" : "ui-btn-ide-ghost",
+                          compact ? "min-w-[2.5rem] px-2" : "min-w-[2.75rem] px-2.5",
+                          "shrink-0 gap-1",
                       )}
                       aria-pressed={active}
                       aria-label={t("switchTo", { locale: l.toUpperCase() })}
                   >
-                    {loadingThis ? <Spinner className="h-3.5 w-3.5" /> : null}
+                    {loadingThis ? <Spinner /> : null}
                     <span>{l.toUpperCase()}</span>
                   </button>
               );

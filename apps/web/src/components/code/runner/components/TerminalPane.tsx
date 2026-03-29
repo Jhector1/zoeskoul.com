@@ -4,13 +4,14 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import type { RunResult } from "@/lib/code/types";
 import type { RunnerState, TermLine } from "../types";
 import { cleanTermText } from "../utils/text";
+import {cn} from "@/lib/cn";
 
 const lineCls = (t: TermLine["type"]) => {
     switch (t) {
         case "err":
-            return "font-semibold text-rose-600 dark:text-rose-300";
+            return "font-medium text-rose-600 dark:text-rose-300";
         case "sys":
-            return "text-neutral-500 dark:text-white/60";
+            return "text-neutral-500 dark:text-white/55";
         default:
             return "text-neutral-900 dark:text-white/85";
     }
@@ -342,39 +343,36 @@ export default function TerminalPane(props: {
     return (
         <>
             <style jsx global>{`
-              @keyframes ui-term-blink {
-                0%,
-                49% {
-                  opacity: 1;
-                }
-                50%,
-                100% {
-                  opacity: 0;
-                }
-              }
+        @keyframes ui-term-blink {
+          0%,
+          49% {
+            opacity: 1;
+          }
+          50%,
+          100% {
+            opacity: 0;
+          }
+        }
 
-              .ui-term-cursor {
-                display: inline-block;
-                margin-left: 1px;
-                opacity: 0.75;
-                animation: ui-term-blink 1s step-end infinite;
-                will-change: opacity;
-              }
-            `}</style>
+        .ui-term-cursor {
+          display: inline-block;
+          margin-left: 1px;
+          opacity: 0.75;
+          animation: ui-term-blink 1s step-end infinite;
+          will-change: opacity;
+        }
+      `}</style>
 
             <div
-                className={[
-                    "h-full rounded-2xl border-t p-2 sm:p-3 flex flex-col",
-                    "bg-white/80 dark:bg-black/40",
-                    terminalHasError ? "border-rose-300/30" : "border-neutral-200 dark:border-white/10",
-                ].join(" ")}
+                className={cn(
+                    "flex h-full flex-col p-2 sm:p-3 ui-terminal-surface",
+                    terminalHasError && "border-rose-300/20 dark:border-rose-300/15",
+                )}
             >
                 <div className="flex items-center justify-between gap-2">
-                    <div className="text-[10px] sm:text-[11px] font-extrabold text-neutral-600 dark:text-white/60">
-                        Terminal
-                    </div>
+                    <div className="ui-meta">Terminal</div>
 
-                    <div className="text-[10px] sm:text-[11px] font-extrabold text-neutral-500 dark:text-white/50">
+                    <div className="text-[10px] sm:text-[11px] font-medium text-neutral-500 dark:text-white/45">
                         {statusLabel(busy, awaitingInput)}
                         {lastResult && !awaitingInput ? ` • ${fmtMeta(lastResult)}` : ""}
                     </div>
@@ -386,26 +384,17 @@ export default function TerminalPane(props: {
                     aria-live="polite"
                     aria-relevant="additions text"
                     style={{ overflowAnchor: "none" }}
-                    className={[
-                        "mt-2 flex-1 overflow-auto border-t py-2",
-                        "bg-white/60 dark:bg-black/30",
-                        terminalHasError ? "border-rose-300/20" : "border-neutral-200 dark:border-white/10",
-                    ].join(" ")}
+                    className={cn(
+                        "ui-terminal-log",
+                        terminalHasError && "border-rose-300/20 dark:border-rose-300/15",
+                    )}
                 >
-                    <div
-                        className={[
-                            "font-mono text-[11px] sm:text-xs leading-[1.35rem] sm:leading-5",
-                            "whitespace-pre-wrap px-2 break-words",
-                            "mx-1",
-                        ].join(" ")}
-                    >
+                    <div className="mx-1 px-2 font-mono text-[11px] sm:text-xs leading-[1.35rem] sm:leading-5 whitespace-pre-wrap break-words">
                         {terminal.map((l, i) => {
                             const isLast = i === terminal.length - 1;
                             return (
                                 <React.Fragment key={i}>
-                                    <span className={`${lineCls(l.type)} pb-[10rem]`}>
-                                        {cleanTermText(l.text)}
-                                    </span>
+                                    <span className={lineCls(l.type)}>{cleanTermText(l.text)}</span>
                                     {!isLast ? "\n" : null}
                                 </React.Fragment>
                             );
@@ -422,10 +411,10 @@ export default function TerminalPane(props: {
                             <div className="relative min-h-[1.25rem]">
                                 <div
                                     aria-hidden="true"
-                                    className={[
+                                    className={cn(
                                         "pointer-events-none font-mono text-[11px] sm:text-xs leading-[1.35rem] sm:leading-5 whitespace-pre-wrap break-words",
                                         lineCls("in"),
-                                    ].join(" ")}
+                                    )}
                                 >
                                     {livePrompt}
                                     {inputBefore}
@@ -443,19 +432,13 @@ export default function TerminalPane(props: {
                 </div>
 
                 {awaitingInput && useBottomPrompt ? (
-                    <div
-                        className={[
-                            "relative mt-2 border-t px-2.5 py-2 sm:px-3",
-                            "bg-white/70 dark:bg-black/25",
-                            "border-neutral-200 dark:border-white/10",
-                        ].join(" ")}
-                    >
+                    <div className="ui-terminal-prompt">
                         <div
                             aria-hidden="true"
-                            className={[
+                            className={cn(
                                 "pointer-events-none font-mono text-[11px] sm:text-xs leading-[1.35rem] sm:leading-5 whitespace-pre-wrap break-words",
                                 lineCls("in"),
-                            ].join(" ")}
+                            )}
                         >
                             {livePrompt}
                             {inputBefore}

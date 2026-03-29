@@ -12,10 +12,22 @@ import TerminalPane from "./TerminalPane";
 
 function IdlePane(props: { label: string }) {
     return (
-        <div className="h-full rounded-2xl border-t p-3 bg-white/80 dark:bg-black/40 border-neutral-200 dark:border-white/10">
-            <div className="text-[11px] font-extrabold text-neutral-500 dark:text-white/50">
-                {props.label} idle
+        <div className="ui-terminal-surface p-3">
+            <div className="ui-meta">{props.label} idle</div>
+        </div>
+    );
+}
+
+function SqlErrorPane(props: { message: string }) {
+    return (
+        <div className="ui-surface-danger p-4">
+            <div className="text-sm font-medium text-rose-800 dark:text-rose-200">
+                SQL run error
             </div>
+
+            <pre className="mt-2 whitespace-pre-wrap break-words text-[12px] font-medium text-rose-800 dark:text-rose-200">
+        {props.message}
+      </pre>
         </div>
     );
 }
@@ -62,15 +74,20 @@ export default function TerminalSurface(props: {
                 ? controller.lastResult
                 : null;
 
-        return genericSqlError ? (
-            <div className="rounded-2xl border border-rose-300/30 bg-rose-50/70 p-4 text-sm text-rose-700 dark:border-rose-300/20 dark:bg-rose-950/20 dark:text-rose-200">
-                <div className="font-black">SQL run error</div>
-                <pre className="mt-2 whitespace-pre-wrap font-mono text-xs">
-                    {genericSqlError.error ?? genericSqlError.status ?? "SQL run failed."}
-                </pre>
-            </div>
-        ) : (
-            <SqlResultsPane result={sqlResult} busy={controller.busy} schemaSql={sqlSchemaSql} />
+        if (genericSqlError) {
+            return (
+                <SqlErrorPane
+                    message={genericSqlError.error ?? genericSqlError.status ?? "SQL run failed."}
+                />
+            );
+        }
+
+        return (
+            <SqlResultsPane
+                result={sqlResult}
+                busy={controller.busy}
+                schemaSql={sqlSchemaSql}
+            />
         );
     }
 

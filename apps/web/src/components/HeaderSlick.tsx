@@ -35,13 +35,14 @@ async function hardLogout(locale: string) {
 const FONT_SIZE_STORAGE_KEY = "APP_FONT_SIZE_PX";
 const FONT_SIZE_DEFAULT = 16;
 const FONT_SIZE_OPTIONS = [16, 20, 24] as const;
+const START_SESSION_HREF = "/sandbox";
 
 function clampFontPx(x: number) {
   if (x <= 16) return 16;
   if (x <= 20) return 20;
   return 24;
 }
-const START_SESSION_HREF="/sandbox"
+
 function readStoredFontSize() {
   if (typeof window === "undefined") return FONT_SIZE_DEFAULT;
 
@@ -58,11 +59,7 @@ function applyBaseFontSize(px: number) {
   if (typeof document === "undefined") return;
 
   const next = clampFontPx(px);
-
-  // for CSS that uses the custom variable
   document.documentElement.style.setProperty("--app-font-size", `${next}px`);
-
-  // for rem-based sizing across the whole app
   document.documentElement.style.fontSize = `${next}px`;
 }
 
@@ -83,10 +80,11 @@ function FontSizePicker(props: {
       <div
           role="radiogroup"
           aria-label="Font size"
-          className="grid w-full max-w-full grid-cols-3 gap-1 rounded-xl border border-neutral-200 bg-white p-1 shadow-sm dark:border-white/10 dark:bg-white/5 sm:w-auto"
+          className="grid w-full grid-cols-3 gap-1 rounded-lg border border-neutral-200 bg-white p-1 dark:border-white/10 dark:bg-white/[0.04]"
       >
         {items.map((it) => {
           const active = it.px === value;
+
           return (
               <button
                   key={it.px}
@@ -95,11 +93,11 @@ function FontSizePicker(props: {
                   aria-checked={active}
                   onClick={() => onChange(it.px)}
                   className={cn(
-                      "min-w-0 rounded-lg px-2 py-2 text-[11px] font-black tracking-tight transition sm:px-2.5 sm:py-1 sm:text-xs",
-                      "truncate focus:outline-none focus:ring-2 focus:ring-neutral-400/40 dark:focus:ring-white/20",
+                      "rounded-md px-2 py-2 text-[11px] font-medium transition-colors",
+                      "focus:outline-none focus:ring-2 focus:ring-neutral-400/30 dark:focus:ring-white/20",
                       active
                           ? "bg-neutral-900 text-white dark:bg-white dark:text-neutral-900"
-                          : "text-neutral-700 hover:bg-neutral-100 dark:text-white/70 dark:hover:bg-white/10"
+                          : "text-neutral-700 hover:bg-neutral-100 dark:text-white/70 dark:hover:bg-white/[0.08]",
                   )}
               >
                 {it.label}
@@ -114,7 +112,6 @@ function SettingsMenu() {
   const t = useTranslations("Header");
   const [open, setOpen] = useState(false);
   const wrapRef = useRef<HTMLDivElement | null>(null);
-  const panelRef = useRef<HTMLDivElement | null>(null);
 
   const [fontPx, setFontPx] = useState<number>(() => readStoredFontSize());
 
@@ -160,10 +157,10 @@ function SettingsMenu() {
   }, []);
 
   return (
-      <div ref={wrapRef} className="relative overflow-visible">
+      <div ref={wrapRef} className="relative">
         <button
             type="button"
-            className="ui-gearbtn"
+            className="ui-btn-ide-ghost !w-8 !px-0"
             aria-haspopup="menu"
             aria-expanded={open}
             aria-label={t("openSettings")}
@@ -175,24 +172,21 @@ function SettingsMenu() {
         {open ? (
             <>
               <div
-                  className="fixed inset-0 z-[69] bg-black/20 backdrop-blur-[1px] md:hidden"
+                  className="fixed inset-0 z-[69] bg-black/20 md:hidden"
                   onClick={() => setOpen(false)}
                   aria-hidden="true"
               />
 
               <div
-                  ref={panelRef}
                   role="menu"
                   className={cn(
-                      "fixed left-3 right-3 top-[4.5rem] z-[70]",
-                      "max-h-[calc(100dvh-5rem)] overflow-y-auto rounded-3xl border border-neutral-200 bg-white shadow-2xl",
-                      "dark:border-white/10 dark:bg-neutral-950",
-                      "md:absolute md:right-0 md:left-auto md:top-full md:mt-2",
-                      "md:w-[min(26rem,calc(100vw-2rem))] md:max-w-[calc(100vw-2rem)]"
+                      "fixed left-3 right-3 top-[4.25rem] z-[70]",
+                      "max-h-[calc(100dvh-5rem)] overflow-y-auto rounded-xl border border-neutral-200 bg-white shadow-xl dark:border-white/10 dark:bg-neutral-950",
+                      "md:absolute md:left-auto md:right-0 md:top-full md:mt-2 md:w-[24rem]",
                   )}
               >
                 <div className="border-b border-neutral-200 px-4 py-3 dark:border-white/10">
-                  <div className="text-sm font-black tracking-tight text-neutral-900 dark:text-white">
+                  <div className="text-sm font-semibold text-neutral-900 dark:text-white">
                     {t("settings")}
                   </div>
                   <div className="mt-0.5 text-xs text-neutral-600 dark:text-white/60">
@@ -201,10 +195,10 @@ function SettingsMenu() {
                 </div>
 
                 <div className="grid gap-3 p-3">
-                  <div className="ui-menu-section min-w-0">
-                    <div className="ui-menu-label">{t("theme")}</div>
-                    <div className="mt-2 flex min-w-0 flex-col items-start gap-3 md:flex-row md:items-center md:justify-between">
-                      <div className="min-w-0 text-xs text-neutral-600 dark:text-white/60">
+                  <div className="ui-surface-muted p-3">
+                    <div className="ui-kicker">{t("theme")}</div>
+                    <div className="mt-2 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+                      <div className="text-xs text-neutral-600 dark:text-white/60">
                         {t("themeHint")}
                       </div>
                       <div className="shrink-0">
@@ -213,12 +207,12 @@ function SettingsMenu() {
                     </div>
                   </div>
 
-                  <div className="ui-menu-section min-w-0">
-                    <div className="ui-menu-label">{t("fontSize")}</div>
-                    <div className="mt-2 flex min-w-0 flex-col items-start gap-3">
-                      <div className="min-w-0 text-xs text-neutral-600 dark:text-white/60">
-                        {t("fontSizeHint")}
-                      </div>
+                  <div className="ui-surface-muted p-3">
+                    <div className="ui-kicker">{t("fontSize")}</div>
+                    <div className="mt-2 text-xs text-neutral-600 dark:text-white/60">
+                      {t("fontSizeHint")}
+                    </div>
+                    <div className="mt-3">
                       <FontSizePicker
                           value={fontPx}
                           onChange={(px) => setFontPx(clampFontPx(px))}
@@ -231,17 +225,17 @@ function SettingsMenu() {
                     </div>
                   </div>
 
-                  <div className="ui-menu-section min-w-0">
-                    <div className="ui-menu-label">{t("language")}</div>
-                    <div className="mt-2 min-w-0">
+                  <div className="ui-surface-muted p-3">
+                    <div className="ui-kicker">{t("language")}</div>
+                    <div className="mt-3">
                       <LocaleSwitcher compact className="w-full min-w-0" />
                     </div>
                   </div>
 
-                  <div className="ui-menu-section min-w-0">
-                    <div className="ui-menu-label">{t("sound")}</div>
-                    <div className="mt-2 flex min-w-0 flex-col items-start gap-3 md:flex-row md:items-center md:justify-between">
-                      <div className="min-w-0 text-xs text-neutral-600 dark:text-white/60">
+                  <div className="ui-surface-muted p-3">
+                    <div className="ui-kicker">{t("sound")}</div>
+                    <div className="mt-2 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+                      <div className="text-xs text-neutral-600 dark:text-white/60">
                         {t("soundHint")}
                       </div>
                       <div className="shrink-0">
@@ -250,7 +244,7 @@ function SettingsMenu() {
                     </div>
                   </div>
 
-                  <button type="button" onClick={() => setOpen(false)} className="ui-menu-closebtn">
+                  <button type="button" onClick={() => setOpen(false)} className="ui-btn-secondary w-full">
                     {t("close")}
                   </button>
                 </div>
@@ -260,6 +254,7 @@ function SettingsMenu() {
       </div>
   );
 }
+
 export default function HeaderSlick({
                                       brand = "Learnoir",
                                       badge = "BETA",
@@ -289,7 +284,7 @@ export default function HeaderSlick({
 
   const slotCtx = useMemo<HeaderSlotCtx>(
       () => ({ locale, pathname, isAuthed, status, user }),
-      [locale, pathname, isAuthed, status, user]
+      [locale, pathname, isAuthed, status, user],
   );
 
   const slotNode = SlotComponent ? <SlotComponent {...slotCtx} /> : slot ?? null;
@@ -300,7 +295,7 @@ export default function HeaderSlick({
         { href: ROUTES.catalog, label: t("subjects") },
         { href: ROUTES.pricing, label: t("billing") },
       ],
-      [t]
+      [t],
   );
 
   const [open, setOpen] = useState(false);
@@ -315,67 +310,6 @@ export default function HeaderSlick({
 
   useEffect(() => setOpen(false), [pathname]);
 
-  const activeIndex = useMemo(() => {
-    const idx = NAV.findIndex((n) => (n.href === "/" ? pathname === "/" : pathname?.startsWith(n.href)));
-    return idx < 0 ? 0 : idx;
-  }, [pathname, NAV]);
-
-  const navWrapRef = useRef<HTMLDivElement | null>(null);
-  const labelRefs = useRef<Array<HTMLSpanElement | null>>([]);
-  const [marker, setMarker] = useState<{ left: number; width: number }>({ left: 0, width: 0 });
-
-  useEffect(() => {
-    if (!isNav) return;
-
-    const wrap = navWrapRef.current;
-    const labelEl = labelRefs.current[activeIndex];
-    if (!wrap || !labelEl) return;
-
-    let raf = 0;
-
-    const update = () => {
-      cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(() => {
-        const wrapNow = navWrapRef.current;
-        const labelNow = labelRefs.current[activeIndex];
-        if (!wrapNow || !labelNow) return;
-
-        const pill = labelNow.parentElement as HTMLElement | null;
-        if (!pill) return;
-
-        const left = pill.offsetLeft;
-        const width = pill.offsetWidth;
-        if (width > 0) setMarker({ left, width });
-      });
-    };
-
-    update();
-
-    const ro = new ResizeObserver(update);
-    ro.observe(wrap);
-    ro.observe(labelEl);
-
-    window.addEventListener("resize", update);
-
-    const fontSet: FontFaceSet | undefined = (document as any)?.fonts;
-    let cancelled = false;
-    if (fontSet?.ready) {
-      fontSet.ready.then(() => !cancelled && update()).catch(() => {});
-    }
-
-    return () => {
-      cancelled = true;
-      ro.disconnect();
-      window.removeEventListener("resize", update);
-      cancelAnimationFrame(raf);
-    };
-  }, [activeIndex, locale, pathname, NAV.length, isNav]);
-
-  const headerShell = cn("ui-header-shell overflow-visible", elevated && "ui-header-shell--elevated");
-
-  const mobileItem = (isActive: boolean) =>
-      cn("ui-mobileitem", isActive ? "ui-mobileitem--active" : "ui-mobileitem--idle");
-
   const { headlineBadge } = useBillingStatus();
   const searchParams = useSearchParams();
 
@@ -389,33 +323,51 @@ export default function HeaderSlick({
     return { pathname: "/authenticate", query: { callbackUrl } } as const;
   }, [callbackUrl]);
 
+  const navLinkClass = (active: boolean) =>
+      cn(
+          active ? "ui-btn-ide-active" : "ui-btn-ide-ghost",
+          "h-8",
+      );
+
+  const mobileItem = (isActive: boolean) =>
+      cn(
+          "flex h-10 items-center rounded-md px-3 text-sm font-medium transition-colors",
+          isActive
+              ? "bg-neutral-900 text-white dark:bg-white dark:text-neutral-900"
+              : "text-neutral-700 hover:bg-neutral-100 dark:text-white/75 dark:hover:bg-white/[0.08]",
+      );
+
   return (
-      <header className="sticky top-0 z-50 overflow-visible">
-        <div className={headerShell}>
-          <div className="mx-auto overflow-visible px-4 md:px-6">
-            <div className="flex h-16 min-w-0 items-center gap-2 overflow-visible sm:gap-3 lg:gap-4">
+      <header className="sticky top-0 z-50">
+        <div
+            className={cn(
+                "border-b border-neutral-200/80 bg-white/90 backdrop-blur dark:border-white/10 dark:bg-neutral-950/85",
+                elevated && "shadow-sm",
+            )}
+        >
+          <div className="mx-auto px-4 md:px-6">
+            <div className="flex h-16 min-w-0 items-center gap-2 sm:gap-3 lg:gap-4">
               <div className="flex min-w-0 shrink-0 items-center gap-2 sm:gap-3">
-                <Link href="/" className="group flex min-w-0 items-center gap-2 sm:gap-3">
-                  <div className="relative grid h-9 w-9 shrink-0 place-items-center rounded-2xl border border-neutral-200 bg-white shadow-sm dark:border-white/10 dark:bg-white/[0.06] dark:shadow-[0_12px_30px_rgba(0,0,0,0.35)]">
-                    <div className="absolute inset-0 rounded-2xl bg-[radial-gradient(120%_120%_at_30%_20%,rgba(122,162,255,0.18)_0%,rgba(255,107,214,0.08)_35%,transparent_70%)] opacity-80" />
-                    <span className="relative text-sm font-black tracking-tight text-neutral-900 dark:text-white">L</span>
+                <Link href="/" className="group flex min-w-0 items-center gap-2.5">
+                  <div className="ui-icon-box h-9 w-9 rounded-lg">
+                  <span className="text-sm font-semibold text-neutral-900 dark:text-white/90">
+                    L
+                  </span>
                   </div>
 
                   <div className="min-w-0 leading-tight">
                     <div className="flex min-w-0 items-center gap-2">
-          <span
-              className="min-w-0 truncate text-sm font-black tracking-tight text-neutral-900 dark:text-white/90"
-              title={brand}
-          >
-            {brand}
-          </span>
+                    <span
+                        className="min-w-0 truncate text-sm font-semibold tracking-tight text-neutral-900 dark:text-white/90"
+                        title={brand}
+                    >
+                      {brand}
+                    </span>
 
-                      <span className="hidden shrink-0 rounded-full border border-neutral-200 bg-neutral-50 px-2 py-[2px] text-[10px] font-extrabold text-neutral-700 dark:border-white/10 dark:bg-white/10 dark:text-white/70 sm:inline-flex">
-            {badge}
-          </span>
+                      <span className="hidden ui-pill-neutral sm:inline-flex">{badge}</span>
                     </div>
 
-                    <div className="hidden truncate text-[11px] font-semibold text-neutral-500 dark:text-white/55 sm:block">
+                    <div className="hidden truncate text-[11px] text-neutral-500 dark:text-white/55 sm:block">
                       {t("tagline")}
                     </div>
                   </div>
@@ -430,13 +382,7 @@ export default function HeaderSlick({
 
               {slotNode ? (
                   <div className="hidden min-w-0 flex-1 justify-center xl:flex">
-                    <div
-                        className={cn(
-                            "max-w-full min-w-0 px-2",
-                            "overflow-x-auto",
-                            "[-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-                        )}
-                    >
+                    <div className="max-w-full min-w-0 overflow-x-auto px-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
                       {slotNode}
                     </div>
                   </div>
@@ -445,51 +391,31 @@ export default function HeaderSlick({
               )}
 
               <nav className="ml-auto hidden shrink-0 items-center gap-2 lg:flex">
-                {isNav && (
-                    <div className="ui-navcard">
-                      <div className="ui-navglow" />
-                      <div ref={navWrapRef} className="relative flex items-center gap-1">
-                        <div
-                            className="ui-navmarker"
-                            style={{
-                              width: marker.width ? `${marker.width}px` : undefined,
-                              transform: `translate3d(${marker.left}px, 0, 0)`,
-                            }}
-                        />
-                        {NAV.map((n, i) => {
-                          const isActive = n.href === "/" ? pathname === "/" : pathname?.startsWith(n.href);
-                          return (
-                              <Link
-                                  key={n.href}
-                                  href={n.href}
-                                  className={cn("ui-navlink", isActive ? "ui-navlink--active" : "ui-navlink--inactive")}
-                              >
-                <span
-                    ref={(el) => {
-                      labelRefs.current[i] = el;
-                    }}
-                    className="inline-block"
-                >
-                  {n.label}
-                </span>
-                              </Link>
-                          );
-                        })}
-                      </div>
-                    </div>
-                )}
+                {isNav ? (
+                    <div className="flex items-center gap-1 rounded-lg border border-neutral-200 bg-white/80 p-1 dark:border-white/10 dark:bg-white/[0.04]">
+                      {NAV.map((n) => {
+                        const isActive =
+                            n.href === "/" ? pathname === "/" : pathname?.startsWith(n.href);
 
-                {isNav && (
-                    <Link href={START_SESSION_HREF} className="hidden xl:inline-flex ui-cta">
+                        return (
+                            <Link key={n.href} href={n.href} className={navLinkClass(Boolean(isActive))}>
+                              {n.label}
+                            </Link>
+                        );
+                      })}
+                    </div>
+                ) : null}
+
+                {isNav ? (
+                    <Link href={START_SESSION_HREF} className="ui-btn-primary">
                       {t("startSession")}
                     </Link>
-                )}
+                ) : null}
 
-                {isSetting && <SettingsMenu />}
+                {isSetting ? <SettingsMenu /> : null}
 
-                {isUser &&
-                    status !== "loading" &&
-                    (isAuthed ? (
+                {isUser && status !== "loading"
+                    ? isAuthed ? (
                         <UserMenuSlick
                             name={user?.name ?? "User"}
                             email={user?.email}
@@ -498,74 +424,83 @@ export default function HeaderSlick({
                             onSignOut={() => hardLogout(locale)}
                         />
                     ) : (
-                        <Link href={authHref} className="ui-authbtn">
+                        <Link href={authHref} className="ui-btn-secondary">
                           {t("signIn")}
                         </Link>
-                    ))}
+                    )
+                    : null}
               </nav>
 
               <div className="ml-auto flex shrink-0 items-center gap-2 lg:hidden">
-                {isSetting && <SettingsMenu />}
-                {(isNav || isUser) && (
+                {isSetting ? <SettingsMenu /> : null}
+
+                {(isNav || isUser) ? (
                     <button
-                        className="ui-mobilebtn"
+                        className="ui-btn-secondary"
                         onClick={() => setOpen((v) => !v)}
                         aria-expanded={open}
                         aria-label={t("toggleMenu")}
                     >
                       {open ? t("close") : t("menu")}
                     </button>
-                )}
+                ) : null}
               </div>
             </div>
+
             {slotNode ? (
                 <div className="xl:hidden -mt-1 pb-2">
-                  <div className="rounded-2xl border border-neutral-200/70 bg-white/60 px-2 py-2 backdrop-blur dark:border-white/10 dark:bg-white/[0.04]">
-                    <div
-                        className={cn(
-                            "flex items-center gap-2 overflow-x-auto",
-                            "[-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-                        )}
-                    >
+                  <div className="ui-surface-muted px-2 py-2">
+                    <div className="flex items-center gap-2 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
                       {slotNode}
                     </div>
                   </div>
                 </div>
             ) : null}
 
-            {(isNav || isUser) && (
+            {(isNav || isUser) ? (
                 <div
                     className={cn(
                         "overflow-hidden transition-[max-height,opacity] duration-300 lg:hidden",
-                        open ? "max-h-[520px] opacity-100" : "max-h-0 opacity-0"
+                        open ? "max-h-[520px] opacity-100" : "max-h-0 opacity-0",
                     )}
                 >
                   <div className="pb-4">
                     <div className="mt-2 grid gap-2">
-                      {isNav &&
-                          NAV.map((n) => {
-                            const isActive = n.href === "/" ? pathname === "/" : pathname?.startsWith(n.href);
+                      {isNav
+                          ? NAV.map((n) => {
+                            const isActive =
+                                n.href === "/"
+                                    ? pathname === "/"
+                                    : pathname?.startsWith(n.href);
+
                             return (
-                                <Link key={n.href} href={n.href} className={mobileItem(isActive)}>
+                                <Link key={n.href} href={n.href} className={mobileItem(Boolean(isActive))}>
                                   {n.label}
                                 </Link>
                             );
-                          })}
+                          })
+                          : null}
 
-                      {isNav && (
-                          <Link href={START_SESSION_HREF} className={cn("ui-cta", "px-3 py-3 text-sm")}>
+                      {isNav ? (
+                          <Link href={START_SESSION_HREF} className="ui-btn-primary w-full justify-center">
                             {t("startSession")}
                           </Link>
-                      )}
+                      ) : null}
 
-                      {isUser &&
-                          status !== "loading" &&
-                          (isAuthed ? (
+                      {isUser && status !== "loading"
+                          ? isAuthed ? (
                               <>
-                                <Link href="/profile" className={mobileItem(Boolean(pathname?.startsWith("/profile")))}>
+                                <Link
+                                    href="/profile"
+                                    className={mobileItem(Boolean(pathname?.startsWith("/profile")))}
+                                >
                                   {t("profile")}
                                 </Link>
-                                <button type="button" onClick={() => hardLogout(locale)} className={mobileItem(false)}>
+                                <button
+                                    type="button"
+                                    onClick={() => hardLogout(locale)}
+                                    className={mobileItem(false)}
+                                >
                                   {t("logout")}
                                 </button>
                               </>
@@ -573,19 +508,20 @@ export default function HeaderSlick({
                               <Link href={authHref} className={mobileItem(false)}>
                                 {t("signIn")}
                               </Link>
-                          ))}
+                          )
+                          : null}
 
-                      {(isNav || isUser) && (
-                          <div className="mt-3 text-[11px] text-neutral-500 dark:text-white/55">{t("tip")}</div>
-                      )}
+                      {(isNav || isUser) ? (
+                          <div className="mt-3 text-[11px] text-neutral-500 dark:text-white/55">
+                            {t("tip")}
+                          </div>
+                      ) : null}
                     </div>
                   </div>
                 </div>
-            )}
+            ) : null}
           </div>
         </div>
-
-        <div className="ui-bottomline" />
       </header>
   );
 }

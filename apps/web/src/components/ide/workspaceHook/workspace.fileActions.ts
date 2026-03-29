@@ -1,3 +1,5 @@
+"use client";
+
 import type React from "react";
 import type { CodeLanguage } from "@/lib/practice/types";
 
@@ -14,6 +16,12 @@ import { defaultExt } from "../languageDefaults";
 import { ensureUniqueSiblingName, findFile, subtreeIds } from "../fsTree";
 import { fileIdsOf, pickFirstRemainingFileId } from "./workspace.normalization";
 import type { IdeWorkspaceAccess } from "./workspace.types";
+import type { IdeWorkspacePolicy } from "./workspace.policy";
+import {
+  validateImportedFiles,
+  validateWorkspaceNodes,
+  type ImportedWorkspaceFile,
+} from "./workspace.policy";
 
 type Setters = {
   setNodes: React.Dispatch<React.SetStateAction<FSNode[]>>;
@@ -26,22 +34,33 @@ type Setters = {
   setToast: React.Dispatch<React.SetStateAction<Toast>>;
 };
 
-function makeDenyMultiFile(access: IdeWorkspaceAccess, setToast: Setters["setToast"]) {
-  return (message?: string) => {
-    setToast({
-      kind: "error",
-      text:
-        message ??
-        (access.hasUser
-          ? "Multiple files are not available for this user."
-          : "Log in to unlock multiple files."),
-    });
-  };
+function denyWithToast(setToast: Setters["setToast"], text: string) {
+  setToast({ kind: "error", text });
 }
-export type ImportedWorkspaceFile = {
-  path: string;
-  content: string;
-};
+
+function normalizeImportPath(input: string) {
+  return String(input ?? "")
+      .replace(/\\/g, "/")
+      .split("/")
+      .map((x) => x.trim())
+      .filter((x) => !!x && x !== "." && x !== "..");
+}
+
+function findFolderChild(
+    nodes: FSNode[],
+    parentId: NodeId | null,
+    name: string,
+): FolderNode | undefined {
+  const want = name.toLocaleLowerCase();
+
+  return nodes.find(
+      (n): n is FolderNode =>
+          n.kind === "folder" &&
+          n.parentId === parentId &&
+          n.name.toLocaleLowerCase() === want,
+  );
+}
+
 export function openFile(args: {
   nodes: FSNode[];
   id: NodeId;
@@ -84,11 +103,11 @@ export function onChangeCode(args: {
   if (!activeFile) return;
 
   setNodes((prev) =>
-    prev.map((n) =>
-      n.id === activeFile.id && n.kind === "file"
-        ? { ...n, content: code, updatedAt: Date.now() }
-        : n,
-    ),
+      prev.map((n) =>
+          n.id === activeFile.id && n.kind === "file"
+              ? { ...n, content: code, updatedAt: Date.now() }
+              : n,
+      ),
   );
 }
 
@@ -108,6 +127,7 @@ export function toggleFolder(args: {
 
 export function startNewFile(args: {
   access: IdeWorkspaceAccess;
+  policy: IdeWorkspacePolicy;
   language: CodeLanguage;
   nodes: FSNode[];
   parentId: NodeId | null;
@@ -115,32 +135,56 @@ export function startNewFile(args: {
   setInlineEdit: Setters["setInlineEdit"];
   setToast: Setters["setToast"];
 }) {
-  const { access, language, nodes, parentId, setExpanded, setInlineEdit, setToast } = args;
-  if (!access.canUseMultiFile) {
-    makeDenyMultiFile(access, setToast)();
+  const {
+    access,
+    policy,
+    language,
+    nodes,
+    parentId,
+    setExpanded,
+    setInlineEdit,
+    setToast,
+  } = args;
+
+  if (!policy.canCreateFiles) {
+    denyWithToast(
+        setToast,
+        access.hasUser
+            ? "Creating files is not available for this account."
+            : "Log in to create files.",
+    );
     return;
   }
 
-  const desired = ensureUniqueSiblingName(nodes, parentId, `untitled${defaultExt(language)}`);
+  const desired = ensureUniqueSiblingName(
+      nodes,
+      access.canUseMultiFile ? parentId : null,
+      `untitled${defaultExt(language)}`,
+  );
 
-  if (parentId) {
+  if (access.canUseMultiFile && parentId) {
     setExpanded((s) => new Set(s).add(parentId));
   }
 
-  setInlineEdit({ mode: "new-file", parentId, value: desired });
+  setInlineEdit({
+    mode: "new-file",
+    parentId: access.canUseMultiFile ? parentId : null,
+    value: desired,
+  });
 }
 
 export function startNewFolder(args: {
-  access: IdeWorkspaceAccess;
+  policy: IdeWorkspacePolicy;
   nodes: FSNode[];
   parentId: NodeId | null;
   setExpanded: Setters["setExpanded"];
   setInlineEdit: Setters["setInlineEdit"];
   setToast: Setters["setToast"];
 }) {
-  const { access, nodes, parentId, setExpanded, setInlineEdit, setToast } = args;
-  if (!access.canUseMultiFile) {
-    makeDenyMultiFile(access, setToast)();
+  const { policy, nodes, parentId, setExpanded, setInlineEdit, setToast } = args;
+
+  if (!policy.canCreateFolders) {
+    denyWithToast(setToast, "Folders are not available in this workspace.");
     return;
   }
 
@@ -155,14 +199,21 @@ export function startNewFolder(args: {
 
 export function startRename(args: {
   access: IdeWorkspaceAccess;
+  policy: IdeWorkspacePolicy;
   nodes: FSNode[];
   nodeId: NodeId;
   setInlineEdit: Setters["setInlineEdit"];
   setToast: Setters["setToast"];
 }) {
-  const { access, nodes, nodeId, setInlineEdit, setToast } = args;
-  if (!access.canUseMultiFile) {
-    makeDenyMultiFile(access, setToast)();
+  const { access, policy, nodes, nodeId, setInlineEdit, setToast } = args;
+
+  if (!policy.canRenameNodes) {
+    denyWithToast(
+        setToast,
+        access.hasUser
+            ? "Renaming is not available for this account."
+            : "Log in to rename files.",
+    );
     return;
   }
 
@@ -177,116 +228,8 @@ export function startRename(args: {
   });
 }
 
-export function commitInlineEdit(args: {
-  access: IdeWorkspaceAccess;
-  inlineEdit: InlineEdit;
-  language: CodeLanguage;
-  nodes: FSNode[];
-  setNodes: Setters["setNodes"];
-  setExpanded: Setters["setExpanded"];
-  setInlineEdit: Setters["setInlineEdit"];
-  setActiveFileId: Setters["setActiveFileId"];
-  setOpenTabs: Setters["setOpenTabs"];
-  setToast: Setters["setToast"];
-}) {
-  const {
-    access,
-    inlineEdit,
-    nodes,
-    setNodes,
-    setExpanded,
-    setInlineEdit,
-    setActiveFileId,
-    setOpenTabs,
-    setToast,
-  } = args;
-
-  if (!inlineEdit) return;
-
-  const raw = inlineEdit.value.trim();
-  if (!raw) {
-    setToast({ kind: "error", text: "Name can’t be empty." });
-    return;
-  }
-
-  if (!access.canUseMultiFile) {
-    makeDenyMultiFile(access, setToast)();
-    setInlineEdit(null);
-    return;
-  }
-
-  if (inlineEdit.mode === "rename") {
-    const id = inlineEdit.targetId!;
-
-    setNodes((prev) => {
-      const cur = prev.find((x) => x.id === id);
-      if (!cur) return prev;
-
-      const safe = ensureUniqueSiblingName(
-        prev.filter((x) => x.id !== id),
-        cur.parentId,
-        raw,
-      );
-
-      return prev.map((x) =>
-        x.id === id ? { ...x, name: safe, updatedAt: Date.now() } : x,
-      );
-    });
-
-    setInlineEdit(null);
-    return;
-  }
-
-  if (inlineEdit.mode === "new-folder") {
-    const newId = uid();
-
-    setNodes((prev) => {
-      const safe = ensureUniqueSiblingName(prev, inlineEdit.parentId, raw);
-
-      const folder: FolderNode = {
-        id: newId,
-        kind: "folder",
-        name: safe,
-        parentId: inlineEdit.parentId,
-        createdAt: Date.now(),
-        updatedAt: Date.now(),
-      };
-
-      return [...prev, folder];
-    });
-
-    setExpanded((s) => new Set(s).add(newId));
-    setInlineEdit(null);
-    return;
-  }
-
-  if (inlineEdit.mode === "new-file") {
-    const newId = uid();
-
-    setNodes((prev) => {
-      const safe = ensureUniqueSiblingName(prev, inlineEdit.parentId, raw);
-
-      const file: FileNode = {
-        id: newId,
-        kind: "file",
-        name: safe,
-        parentId: inlineEdit.parentId,
-        content: "",
-        createdAt: Date.now(),
-        updatedAt: Date.now(),
-      };
-
-      return [...prev, file];
-    });
-
-    setActiveFileId(newId);
-    setOpenTabs((tabs) => (tabs.includes(newId) ? tabs : [...tabs, newId]));
-    setInlineEdit(null);
-  }
-}
-
 export function requestDelete(args: {
-  access: IdeWorkspaceAccess;
+  policy: IdeWorkspacePolicy;
   nodes: FSNode[];
   id: NodeId;
   language: CodeLanguage;
@@ -294,9 +237,10 @@ export function requestDelete(args: {
   setPendingDeleteId: Setters["setPendingDeleteId"];
   setToast: Setters["setToast"];
 }) {
-  const { access, nodes, id, language, entryFileId, setPendingDeleteId, setToast } = args;
-  if (!access.canUseMultiFile) {
-    makeDenyMultiFile(access, setToast)();
+  const { policy, nodes, id, language, entryFileId, setPendingDeleteId, setToast } = args;
+
+  if (!policy.canDeleteNodes) {
+    denyWithToast(setToast, "Delete is not available in this workspace.");
     return;
   }
 
@@ -325,68 +269,6 @@ export function requestDelete(args: {
   }
 
   setPendingDeleteId(id);
-}
-
-export function moveNode(args: {
-  access: IdeWorkspaceAccess;
-  nodes: FSNode[];
-  id: NodeId;
-  parentId: NodeId | null;
-  setNodes: Setters["setNodes"];
-  setExpanded: Setters["setExpanded"];
-  setToast: Setters["setToast"];
-}) {
-  const { access, nodes, id, parentId, setNodes, setExpanded, setToast } = args;
-
-  if (!access.canUseMultiFile) {
-    makeDenyMultiFile(access, setToast)();
-    return;
-  }
-
-  const source = nodes.find((n) => n.id === id);
-  if (!source) return;
-
-  if (source.parentId === parentId) return;
-  if (id === parentId) return;
-
-  if (parentId) {
-    const target = nodes.find((n) => n.id === parentId);
-    if (!target || target.kind !== "folder") return;
-  }
-
-  if (source.kind === "folder" && parentId) {
-    const descendants = subtreeIds(nodes, source.id);
-    if (descendants.has(parentId)) {
-      setToast({
-        kind: "error",
-        text: "A folder can’t be moved into itself or one of its children.",
-      });
-      return;
-    }
-  }
-
-  const safeName = ensureUniqueSiblingName(
-      nodes.filter((n) => n.id !== id),
-      parentId,
-      source.name,
-  );
-
-  setNodes((prev) =>
-      prev.map((n) =>
-          n.id === id
-              ? {
-                ...n,
-                parentId,
-                name: safeName,
-                updatedAt: Date.now(),
-              }
-              : n,
-      ),
-  );
-
-  if (parentId) {
-    setExpanded((prev) => new Set(prev).add(parentId));
-  }
 }
 
 export function performDelete(args: {
@@ -419,9 +301,9 @@ export function performDelete(args: {
     if (!target) return prevNodes;
 
     const toDelete =
-      target.kind === "folder"
-        ? subtreeIds(prevNodes, target.id)
-        : new Set<NodeId>([target.id]);
+        target.kind === "folder"
+            ? subtreeIds(prevNodes, target.id)
+            : new Set<NodeId>([target.id]);
 
     if (language !== "sql" && toDelete.has(entryFileId)) {
       setToast({ kind: "error", text: "Delete blocked: contains Entry file." });
@@ -460,32 +342,245 @@ export function performDelete(args: {
   });
 }
 
+export function commitInlineEdit(args: {
+  access: IdeWorkspaceAccess;
+  policy: IdeWorkspacePolicy;
+  inlineEdit: InlineEdit;
+  language: CodeLanguage;
+  nodes: FSNode[];
+  activeFileId: NodeId;
+  setNodes: Setters["setNodes"];
+  setExpanded: Setters["setExpanded"];
+  setInlineEdit: Setters["setInlineEdit"];
+  setActiveFileId: Setters["setActiveFileId"];
+  setOpenTabs: Setters["setOpenTabs"];
+  setToast: Setters["setToast"];
+}) {
+  const {
+    access,
+    policy,
+    inlineEdit,
+    nodes,
+    activeFileId,
+    setNodes,
+    setExpanded,
+    setInlineEdit,
+    setActiveFileId,
+    setOpenTabs,
+    setToast,
+  } = args;
 
-function normalizeImportPath(input: string) {
-  return String(input ?? "")
-      .replace(/\\/g, "/")
-      .split("/")
-      .map((x) => x.trim())
-      .filter((x) => !!x && x !== "." && x !== "..");
+  if (!inlineEdit) return;
+
+  const raw = inlineEdit.value.trim();
+  if (!raw) {
+    setToast({ kind: "error", text: "Name can’t be empty." });
+    return;
+  }
+
+  if (inlineEdit.mode === "rename") {
+    if (!policy.canRenameNodes) {
+      denyWithToast(setToast, "Renaming is not available in this workspace.");
+      setInlineEdit(null);
+      return;
+    }
+
+    const id = inlineEdit.targetId!;
+
+    setNodes((prev) => {
+      const cur = prev.find((x) => x.id === id);
+      if (!cur) return prev;
+
+      const safe = ensureUniqueSiblingName(
+          prev.filter((x) => x.id !== id),
+          cur.parentId,
+          raw,
+      );
+
+      return prev.map((x) =>
+          x.id === id ? { ...x, name: safe, updatedAt: Date.now() } : x,
+      );
+    });
+
+    setInlineEdit(null);
+    return;
+  }
+
+  if (inlineEdit.mode === "new-folder") {
+    if (!policy.canCreateFolders) {
+      denyWithToast(setToast, "Folders are not available in this workspace.");
+      setInlineEdit(null);
+      return;
+    }
+
+    const folderId = uid();
+    const safe = ensureUniqueSiblingName(nodes, inlineEdit.parentId, raw);
+
+    const nextNodes: FSNode[] = [
+      ...nodes,
+      {
+        id: folderId,
+        kind: "folder",
+        name: safe,
+        parentId: inlineEdit.parentId,
+        createdAt: Date.now(),
+        updatedAt: Date.now(),
+      } as FolderNode,
+    ];
+
+    const quotaError = validateWorkspaceNodes(nextNodes, policy);
+    if (quotaError) {
+      setToast({ kind: "error", text: quotaError });
+      return;
+    }
+
+    setNodes(nextNodes);
+    if (inlineEdit.parentId) {
+      setExpanded((s) => new Set(s).add(inlineEdit.parentId!));
+    }
+    setInlineEdit(null);
+    return;
+  }
+
+  if (!policy.canCreateFiles) {
+    denyWithToast(
+        setToast,
+        access.hasUser
+            ? "Creating files is not available for this account."
+            : "Log in to create files.",
+    );
+    setInlineEdit(null);
+    return;
+  }
+
+  const safeName = ensureUniqueSiblingName(
+      nodes,
+      access.canUseMultiFile ? inlineEdit.parentId : null,
+      raw,
+  );
+
+  if (!access.canUseMultiFile) {
+    const target =
+        findFile(nodes, activeFileId) ??
+        nodes.find((n): n is FileNode => n.kind === "file");
+
+    const replacementId = target?.id ?? uid();
+
+    const nextNodes: FSNode[] = [
+      {
+        id: replacementId,
+        kind: "file",
+        name: safeName,
+        parentId: null,
+        content: target?.content ?? "",
+        createdAt: target?.createdAt ?? Date.now(),
+        updatedAt: Date.now(),
+      } as FileNode,
+    ];
+
+    const quotaError = validateWorkspaceNodes(nextNodes, policy);
+    if (quotaError) {
+      setToast({ kind: "error", text: quotaError });
+      return;
+    }
+
+    setNodes(nextNodes);
+    setOpenTabs([replacementId]);
+    setActiveFileId(replacementId);
+    setExpanded(new Set());
+    setInlineEdit(null);
+    return;
+  }
+
+  const fileId = uid();
+  const nextNodes: FSNode[] = [
+    ...nodes,
+    {
+      id: fileId,
+      kind: "file",
+      name: safeName,
+      parentId: inlineEdit.parentId,
+      content: "",
+      createdAt: Date.now(),
+      updatedAt: Date.now(),
+    } as FileNode,
+  ];
+
+  const quotaError = validateWorkspaceNodes(nextNodes, policy);
+  if (quotaError) {
+    setToast({ kind: "error", text: quotaError });
+    return;
+  }
+
+  setNodes(nextNodes);
+  setOpenTabs((prev) => (prev.includes(fileId) ? prev : [...prev, fileId]));
+  setActiveFileId(fileId);
+
+  if (inlineEdit.parentId) {
+    setExpanded((prev) => new Set(prev).add(inlineEdit.parentId!));
+  }
+
+  setInlineEdit(null);
 }
 
-function findFolderChild(
-    nodes: FSNode[],
-    parentId: NodeId | null,
-    name: string,
-): FolderNode | undefined {
-  const want = name.toLocaleLowerCase();
+export function moveNode(args: {
+  policy: IdeWorkspacePolicy;
+  nodes: FSNode[];
+  id: NodeId;
+  parentId: NodeId | null;
+  setNodes: Setters["setNodes"];
+  setExpanded: Setters["setExpanded"];
+  setToast: Setters["setToast"];
+}) {
+  const { policy, nodes, id, parentId, setNodes, setExpanded, setToast } = args;
 
-  return nodes.find(
-      (n): n is FolderNode =>
-          n.kind === "folder" &&
-          n.parentId === parentId &&
-          n.name.toLocaleLowerCase() === want,
-  );
+  if (!policy.canMoveNodes) {
+    denyWithToast(setToast, "Moving files is not available in this workspace.");
+    return;
+  }
+
+  const moving = nodes.find((n) => n.id === id);
+  if (!moving) return;
+  if (moving.id === parentId) return;
+
+  if (moving.kind === "folder" && parentId != null) {
+    const descendants = subtreeIds(nodes, moving.id);
+    if (descendants.has(parentId)) {
+      setToast({ kind: "error", text: "Folder cannot be moved into itself." });
+      return;
+    }
+  }
+
+  setNodes((prev) => {
+    const target = prev.find((n) => n.id === id);
+    if (!target) return prev;
+
+    const safeName = ensureUniqueSiblingName(
+        prev.filter((n) => n.id !== id),
+        parentId,
+        target.name,
+    );
+
+    return prev.map((n) =>
+        n.id === id
+            ? {
+              ...n,
+              parentId,
+              name: safeName,
+              updatedAt: Date.now(),
+            }
+            : n,
+    );
+  });
+
+  if (parentId) {
+    setExpanded((prev) => new Set(prev).add(parentId));
+  }
 }
 
 export function importExternalFiles(args: {
   access: IdeWorkspaceAccess;
+  policy: IdeWorkspacePolicy;
   nodes: FSNode[];
   activeFileId: NodeId;
   files: ImportedWorkspaceFile[];
@@ -497,6 +592,7 @@ export function importExternalFiles(args: {
 }) {
   const {
     access,
+    policy,
     nodes,
     activeFileId,
     files,
@@ -514,61 +610,43 @@ export function importExternalFiles(args: {
       }))
       .filter((f) => !!f.path);
 
-  if (!cleaned.length) {
-    setToast({ kind: "error", text: "No files were imported." });
+  const importError = validateImportedFiles(cleaned, policy);
+  if (importError) {
+    setToast({ kind: "error", text: importError });
     return;
   }
 
   if (!access.canUseMultiFile) {
-    if (cleaned.length !== 1) {
-      makeDenyMultiFile(
-          access,
-          setToast,
-      )("Log in to import folders or more than one file.");
-      return;
-    }
-
     const imported = cleaned[0];
     const parts = normalizeImportPath(imported.path);
     const fileName = parts[parts.length - 1] ?? "file";
 
-    let chosenId = activeFileId;
+    const target =
+        findFile(nodes, activeFileId) ??
+        nodes.find((n): n is FileNode => n.kind === "file");
 
-    setNodes((prev) => {
-      const target =
-          findFile(prev, activeFileId) ??
-          prev.find((n): n is FileNode => n.kind === "file");
+    const chosenId = target?.id ?? uid();
 
-      if (target) {
-        chosenId = target.id;
-        return prev.map((n) =>
-            n.id === target.id && n.kind === "file"
-                ? {
-                  ...n,
-                  name: fileName,
-                  content: imported.content,
-                  updatedAt: Date.now(),
-                }
-                : n,
-        );
-      }
-
-      const newId = uid();
-      chosenId = newId;
-
-      const file: FileNode = {
-        id: newId,
+    const nextNodes: FSNode[] = [
+      {
+        id: chosenId,
         kind: "file",
         name: fileName,
         parentId: null,
         content: imported.content,
-        createdAt: Date.now(),
+        createdAt: target?.createdAt ?? Date.now(),
         updatedAt: Date.now(),
-      };
+      } as FileNode,
+    ];
 
-      return [file];
-    });
+    const quotaError = validateWorkspaceNodes(nextNodes, policy);
+    if (quotaError) {
+      setToast({ kind: "error", text: quotaError });
+      return;
+    }
 
+    setNodes(nextNodes);
+    setExpanded(new Set());
     setActiveFileId(chosenId);
     setOpenTabs([chosenId]);
     setToast({ kind: "success", text: `Opened ${fileName}.` });
@@ -577,96 +655,81 @@ export function importExternalFiles(args: {
 
   const importedFileIds: NodeId[] = [];
   const expandedIds = new Set<NodeId>();
-
   const sorted = [...cleaned].sort(
-      (a, b) =>
-          normalizeImportPath(a.path).length - normalizeImportPath(b.path).length,
+      (a, b) => normalizeImportPath(a.path).length - normalizeImportPath(b.path).length,
   );
 
-  setNodes((prev) => {
-    let next = [...prev];
+  let next = [...nodes];
 
-    for (const imported of sorted) {
-      const parts = normalizeImportPath(imported.path);
-      if (!parts.length) continue;
+  for (const imported of sorted) {
+    const parts = normalizeImportPath(imported.path);
+    if (!parts.length) continue;
 
-      const fileNameRaw = parts[parts.length - 1];
-      const folderParts = parts.slice(0, -1);
+    const fileNameRaw = parts[parts.length - 1];
+    const folderParts = parts.slice(0, -1);
 
-      let parentId: NodeId | null = null;
+    let parentId: NodeId | null = null;
 
-      for (const rawFolderName of folderParts) {
-        const existing = findFolderChild(next, parentId, rawFolderName);
-        if (existing) {
-          parentId = existing.id;
-          expandedIds.add(existing.id);
-          continue;
-        }
-
-        const safeFolderName = ensureUniqueSiblingName(
-            next,
-            parentId,
-            rawFolderName,
-        );
-
-        const folderId = uid();
-        const folder: FolderNode = {
-          id: folderId,
-          kind: "folder",
-          name: safeFolderName,
-          parentId,
-          createdAt: Date.now(),
-          updatedAt: Date.now(),
-        };
-
-        next = [...next, folder];
-        parentId = folderId;
-        expandedIds.add(folderId);
+    for (const part of folderParts) {
+      const found = findFolderChild(next, parentId, part);
+      if (found) {
+        parentId = found.id;
+        expandedIds.add(found.id);
+        continue;
       }
 
-      const safeFileName = ensureUniqueSiblingName(next, parentId, fileNameRaw);
-      const fileId = uid();
-
-      const file: FileNode = {
-        id: fileId,
-        kind: "file",
-        name: safeFileName,
+      const folderId = uid();
+      next.push({
+        id: folderId,
+        kind: "folder",
+        name: part,
         parentId,
-        content: imported.content,
         createdAt: Date.now(),
         updatedAt: Date.now(),
-      };
+      } as FolderNode);
 
-      next = [...next, file];
-      importedFileIds.push(fileId);
+      expandedIds.add(folderId);
+      parentId = folderId;
     }
 
-    return next;
-  });
+    const fileName = ensureUniqueSiblingName(next, parentId, fileNameRaw);
+    const fileId = uid();
 
-  if (expandedIds.size) {
-    setExpanded((prev) => {
-      const next = new Set(prev);
-      for (const id of expandedIds) next.add(id);
-      return next;
-    });
+    next.push({
+      id: fileId,
+      kind: "file",
+      name: fileName,
+      parentId,
+      content: imported.content,
+      createdAt: Date.now(),
+      updatedAt: Date.now(),
+    } as FileNode);
+
+    importedFileIds.push(fileId);
   }
+
+  const quotaError = validateWorkspaceNodes(next, policy);
+  if (quotaError) {
+    setToast({ kind: "error", text: quotaError });
+    return;
+  }
+
+  setNodes(next);
+  setExpanded((prev) => {
+    const merged = new Set(prev);
+    for (const id of expandedIds) merged.add(id);
+    return merged;
+  });
 
   if (importedFileIds.length) {
-    const firstId = importedFileIds[0];
-    setActiveFileId(firstId);
-    setOpenTabs((prev) => {
-      const next = new Set(prev);
-      for (const id of importedFileIds) next.add(id);
-      return Array.from(next);
+    setOpenTabs((prev) => [...prev, ...importedFileIds.filter((id) => !prev.includes(id))]);
+    setActiveFileId(importedFileIds[0]);
+    setToast({
+      kind: "success",
+      text:
+          importedFileIds.length === 1
+              ? "Imported 1 file."
+              : `Imported ${importedFileIds.length} files.`,
     });
   }
-
-  setToast({
-    kind: "success",
-    text:
-        importedFileIds.length === 1
-            ? "Imported 1 file."
-            : `Imported ${importedFileIds.length} files.`,
-  });
 }
