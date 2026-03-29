@@ -187,7 +187,7 @@ export function toWorkspaceAccessFromProjectGate(gate: {
     capabilities: unknown;
 }): IdeWorkspaceAccess {
     const raw = gate.capabilities;
-    console.log(7899,raw,)
+
 
     const hasCap = (name: string) => {
         if (Array.isArray(raw)) {

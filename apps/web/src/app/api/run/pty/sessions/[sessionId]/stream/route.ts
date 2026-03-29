@@ -13,7 +13,7 @@ export async function GET(
             Accept: "text/event-stream",
         },
     });
-    console.log(res.body)
+
 
     return new Response(res.body, {
         status: res.status,
