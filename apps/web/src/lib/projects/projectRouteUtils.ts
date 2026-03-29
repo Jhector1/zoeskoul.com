@@ -187,6 +187,7 @@ export function toWorkspaceAccessFromProjectGate(gate: {
     capabilities: unknown;
 }): IdeWorkspaceAccess {
     const raw = gate.capabilities;
+    console.log(7899,raw,)
 
     const hasCap = (name: string) => {
         if (Array.isArray(raw)) {
@@ -202,8 +203,8 @@ export function toWorkspaceAccessFromProjectGate(gate: {
 
     return {
         hasUser: !!gate.actor.userId,
-        canUseMultiFile: hasCap("multi_file"),
-        canSaveCloud: hasCap("save_cloud"),
-        canCreateProjects: hasCap("create_project"),
+        canUseMultiFile: hasCap("canUseMultiFile"),
+        canSaveCloud: hasCap("canSaveCloud"),
+        canCreateProjects: hasCap("canCreateProjects"),
     };
 }

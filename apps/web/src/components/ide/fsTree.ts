@@ -133,7 +133,7 @@ export function exportProjectFiles(
         content: f.content ?? "",
     }));
 
-    console.log("interactive files", out.map((f) => f.path));
+
 
     for (const f of out) {
         if (!isSafeRelPath(f.path)) {

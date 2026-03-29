@@ -4,7 +4,7 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import type { RunResult } from "@/lib/code/types";
 import type { RunnerState, TermLine } from "../types";
 import { cleanTermText } from "../utils/text";
-import {cn} from "@/lib/cn";
+import { cn } from "@/lib/cn";
 
 const lineCls = (t: TermLine["type"]) => {
     switch (t) {
@@ -153,9 +153,8 @@ export default function TerminalPane(props: {
     const terminalHasError = !!lastResult && lastResult.ok === false && !awaitingInput;
 
     const livePrompt = useMemo(() => {
-        const p = String(inputPrompt ?? "");
-        if (!p) return "";
-        return p.endsWith(" ") ? p : p + " ";
+        const p = String(inputPrompt ?? "").trim();
+        return p ? `${p} ` : "";
     }, [inputPrompt]);
 
     const showEphemeralProcessing =
@@ -343,25 +342,25 @@ export default function TerminalPane(props: {
     return (
         <>
             <style jsx global>{`
-        @keyframes ui-term-blink {
-          0%,
-          49% {
-            opacity: 1;
-          }
-          50%,
-          100% {
-            opacity: 0;
-          }
-        }
+                @keyframes ui-term-blink {
+                  0%,
+                  49% {
+                    opacity: 1;
+                  }
+                  50%,
+                  100% {
+                    opacity: 0;
+                  }
+                }
 
-        .ui-term-cursor {
-          display: inline-block;
-          margin-left: 1px;
-          opacity: 0.75;
-          animation: ui-term-blink 1s step-end infinite;
-          will-change: opacity;
-        }
-      `}</style>
+                .ui-term-cursor {
+                  display: inline-block;
+                  margin-left: 1px;
+                  opacity: 0.75;
+                  animation: ui-term-blink 1s step-end infinite;
+                  will-change: opacity;
+                }
+            `}</style>
 
             <div
                 className={cn(

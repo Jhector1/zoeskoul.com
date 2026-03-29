@@ -17,7 +17,7 @@ export function extractCppCoutPrompts(code: string): string[] {
         }
 
         // saw cin >> or getline(
-        prompts.push((pendingPrompt ?? "Input:").trimEnd());
+        prompts.push((pendingPrompt ?? "").trimEnd());
         pendingPrompt = null;
     }
 

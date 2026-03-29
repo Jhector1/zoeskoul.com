@@ -4,7 +4,6 @@ import { startDockerSession } from "../services/docker/startDockerSession.js";
 
 export const startSessionRoute: RequestHandler = async (req, res) => {
     try {
-        console.log("RUNNER /sessions/start BODY", JSON.stringify(req.body, null, 2));
 
         const body = interactiveRunReqSchema.parse(req.body);
         const out = await startDockerSession(body);

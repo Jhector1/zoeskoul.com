@@ -10,8 +10,7 @@ const { loadedEnvFiles } = loadEnvConfig(process.cwd(), dev, console, true);
 
 const databaseUrl = process.env.DATABASE_URL;
 
-console.log("Loaded env files:");
-console.log("DATABASE_URL starts with:");
+
 
 if (!databaseUrl) {
     throw new Error(
@@ -90,7 +89,6 @@ async function main() {
         },
     });
 
-    console.log(JSON.stringify(updated, null, 2));
 }
 
 main()

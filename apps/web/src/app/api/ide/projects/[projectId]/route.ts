@@ -97,6 +97,7 @@ export async function PATCH(
         const { projectId } = await ctx.params;
         parsedBody = parseSaveProjectRequest(await req.json());
         const access = toWorkspaceAccessFromProjectGate(gate);
+        console.log(8989, access)
         const policy = resolveWorkspacePolicy(access);
         const error = validateWorkspaceNodes(parsedBody.workspace.nodes, policy);
 

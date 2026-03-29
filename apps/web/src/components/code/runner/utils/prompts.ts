@@ -1,17 +1,20 @@
 // src/components/code/runner/utils/prompts.ts
 export function prettyPrompt(p: string) {
-    return String(p ?? "Input:")
+    return String(p ?? "")
         .replace(/\r/g, "\\r")
         .replace(/\n/g, "\\n")
         .replace(/\t/g, "\\t")
         .trim();
 }
 
-export function expandPrompts(prompts: string[], count: number, fallback = "Input:") {
+export function expandPrompts(prompts: string[], count: number, fallback = "") {
     if (count <= 0) return [];
-    if (!prompts?.length) return Array(count).fill(fallback);
-    if (prompts.length >= count) return prompts.slice(0, count);
-    return [...prompts, ...Array(count - prompts.length).fill(prompts[prompts.length - 1] || fallback)];
+
+    const base = (prompts ?? []).map((p) => String(p ?? ""));
+
+    if (base.length >= count) return base.slice(0, count);
+
+    return [...base, ...Array(count - base.length).fill(fallback)];
 }
 
 // Key fix: when two variants match at the same index, pick the LONGEST variant.

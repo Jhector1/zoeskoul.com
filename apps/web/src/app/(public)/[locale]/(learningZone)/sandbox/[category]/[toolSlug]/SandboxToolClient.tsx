@@ -56,7 +56,7 @@ export default function SandboxToolClient({
             );
 
         const localizedLessonHref = `/${locale}${entry.lessonPath}`;
-
+console.log(908,access)
         return (
             <ProgrammingSandbox
                 initialLanguage={entry.initialLanguage}

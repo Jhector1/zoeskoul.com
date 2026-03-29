@@ -27,13 +27,7 @@ export function attachSessionWsServer(server: HttpServer) {
     const wss = new WebSocketServer({ noServer: true });
 
     server.on("upgrade", (req, socket, head) => {
-        console.log("WS upgrade incoming", {
-            url: req.url,
-            host: req.headers.host,
-            origin: req.headers.origin,
-            upgrade: req.headers.upgrade,
-            connection: req.headers.connection,
-        });
+
 
         const origin = req.headers.origin;
         const sessionId = getSessionIdFromRequest(req);
@@ -64,21 +58,14 @@ export function attachSessionWsServer(server: HttpServer) {
         }
 
         wss.handleUpgrade(req, socket, head, (ws) => {
-            console.log("WS upgraded", { sessionId });
-            console.log("WS upgrade incoming", {
-                url: req.url,
-                host: req.headers.host,
-                origin: req.headers.origin,
-            });
 
-            console.log("WS upgraded", { sessionId });
-            console.log("WS connected", { sessionId });
+
             wss.emit("connection", ws, req, sessionId);
         });
     });
 
     wss.on("connection", (ws: any, _req: any, sessionId: string) => {
-        console.log("WS connected", { sessionId });
+
 
         const session = getSession(sessionId);
         if (!session) {

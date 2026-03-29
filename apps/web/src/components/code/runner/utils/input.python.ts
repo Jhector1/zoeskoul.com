@@ -15,7 +15,7 @@ export function extractInputPromptsPython(code: string): string[] {
         const raw = m[2];
 
         if (!quote || typeof raw !== "string") {
-            prompts.push("Input:");
+            prompts.push("");
             continue;
         }
 

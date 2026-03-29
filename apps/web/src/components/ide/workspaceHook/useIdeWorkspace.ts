@@ -345,9 +345,7 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
     }, [language, nodes, openTabs, activeFileId, entryFileId, stdin, expanded, leftPct]);
 
     const currentWorkspaceRef = useRef<WorkspaceStateV2 | null>(null);
-    useEffect(() => {
-        currentWorkspaceRef.current = currentWorkspace;
-    }, [currentWorkspace]);
+    currentWorkspaceRef.current = currentWorkspace;
 
     const loadWorkspaceForLanguage = useCallback(
         (next: CodeLanguage) =>
@@ -517,6 +515,29 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
         return () => {
             window.removeEventListener("pagehide", flush);
             window.removeEventListener("beforeunload", flush);
+        };
+    }, [saveWorkspaceForLanguage, draftStorageMode]);
+    useEffect(() => {
+        if (draftStorageMode !== "local") return;
+
+        return () => {
+            saveWorkspaceForLanguage(currentWorkspaceRef.current);
+        };
+    }, [saveWorkspaceForLanguage, draftStorageMode]);
+    useEffect(() => {
+        if (!hydratedRef.current) return;
+        if (draftStorageMode !== "local") return;
+
+        const onVisibilityChange = () => {
+            if (document.visibilityState === "hidden") {
+                saveWorkspaceForLanguage(currentWorkspaceRef.current);
+            }
+        };
+
+        document.addEventListener("visibilitychange", onVisibilityChange);
+
+        return () => {
+            document.removeEventListener("visibilitychange", onVisibilityChange);
         };
     }, [saveWorkspaceForLanguage, draftStorageMode]);
 

@@ -60,7 +60,12 @@ async function getSandboxAccess(): Promise<SandboxAccess> {
             capability: "save_cloud",
         }),
     ]);
-
+console.log({
+    hasUser: Boolean(actor.userId),
+    canUseMultiFile: multiFileDecision.ok,
+    canSaveCloud: saveDecision.ok,
+    canCreateProjects: saveDecision.ok,
+})
     return {
         hasUser: Boolean(actor.userId),
         canUseMultiFile: multiFileDecision.ok,

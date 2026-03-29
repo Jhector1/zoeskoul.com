@@ -23,11 +23,13 @@ function needsMoreInput(lang: CodeLanguage, r: RunResult) {
     if (lang === "java") return /NoSuchElementException/.test(blob);
     return false;
 }
+
 function readAbortKind(
     ref: React.MutableRefObject<AbortKind>,
 ): AbortKind {
     return ref.current;
 }
+
 function isCanceledResult(r: RunResult | null | undefined) {
     return r?.status === "Canceled";
 }
@@ -57,6 +59,14 @@ function toOutTermLines(seg: string): TermLine[] {
     return lines
         .filter((l) => l === "" || l.trim().length > 0)
         .map((t) => ({ type: "out" as const, text: t }));
+}
+
+function normalizePromptText(value?: string | null) {
+    return String(value ?? "").trim();
+}
+
+function normalizePromptList(prompts?: string[] | null) {
+    return (prompts ?? []).map((p) => normalizePromptText(p));
 }
 
 function unescapeCStringContent(x: string) {
@@ -198,9 +208,15 @@ export function useTerminalRunner(args: {
     const [typedLines, setTypedLines] = React.useState<string[]>([]);
     const probeStdoutRef = React.useRef<string>("");
 
+    const terminalRef = React.useRef<TermLine[]>([]);
+
     const abortRef = React.useRef<AbortController | null>(null);
     const abortKindRef = React.useRef<AbortKind>("none");
     const mountedRef = React.useRef(true);
+
+    React.useEffect(() => {
+        terminalRef.current = terminal;
+    }, [terminal]);
 
     const abortActiveRun = React.useCallback((kind: AbortKind) => {
         if (!abortRef.current) return;
@@ -217,7 +233,14 @@ export function useTerminalRunner(args: {
         };
     }, [abortActiveRun]);
 
-    const inputPlan = React.useMemo(() => inferInputPlan(lang, code), [lang, code]);
+    const inputPlan = React.useMemo(() => {
+        const raw = inferInputPlan(lang, code);
+        return {
+            ...raw,
+            prompts: normalizePromptList(raw.prompts),
+        };
+    }, [lang, code]);
+
     const isSql = lang === "sql";
     const resolvedSqlDialect = sqlDialect ?? "sqlite";
     const resolvedSchemaSql = sqlSchemaSql ?? sqlSetupSql ?? "";
@@ -225,6 +248,22 @@ export function useTerminalRunner(args: {
     const replaceRunLines = React.useCallback((runId: number, lines: TermLine[]) => {
         const tagged = lines.map((l) => ({ ...l, runId }));
         setTerminal((prev) => [...prev.filter((l) => l.runId !== runId), ...tagged]);
+    }, []);
+
+    const getRunLines = React.useCallback((runId: number) => {
+        return terminalRef.current.filter((l) => l.runId === runId);
+    }, []);
+
+    const stripTrailingProcessing = React.useCallback((lines: TermLine[]) => {
+        const next = [...lines];
+        while (
+            next.length > 0 &&
+            next[next.length - 1]?.type === "sys" &&
+            next[next.length - 1]?.text === "Processing..."
+            ) {
+            next.pop();
+        }
+        return next;
     }, []);
 
     const appendImmediateInputLine = React.useCallback(
@@ -289,6 +328,7 @@ export function useTerminalRunner(args: {
 
         activeRunIdRef.current = null;
         probeStdoutRef.current = "";
+        terminalRef.current = [];
     }, [abortActiveRun, clearInputUi]);
 
     const runOnce = React.useCallback(
@@ -407,56 +447,13 @@ export function useTerminalRunner(args: {
             showWaiting: boolean,
             probePrefix?: string,
         ) => {
-            const hasRealPrompts = !!inputPlan.prompts?.length;
+            const promptSlots = normalizePromptList(inputPlan.prompts);
+            const hasRealPrompts = promptSlots.some((p) => p.length > 0);
             const syntheticPrompt = !hasRealPrompts;
-            const promptsRaw = hasRealPrompts ? inputPlan.prompts : ["Input:"];
 
             const stdoutText = cleanTermText(r.stdout ?? "");
-            const prefix =
-                syntheticPrompt && probePrefix && stdoutText.startsWith(probePrefix)
-                    ? probePrefix
-                    : "";
-            const rest = prefix ? stdoutText.slice(prefix.length) : stdoutText;
-
-            const rebuilt: TermLine[] = [];
-
-            if (syntheticPrompt) {
-                if (showWaiting) {
-                    // While still waiting for more input, keep a readable synthetic transcript.
-                    for (let i = 0; i < lines.length; i++) {
-                        rebuilt.push({
-                            type: "in",
-                            text: `Input: ${String(lines[i] ?? "")}`,
-                        });
-                    }
-
-                    rebuilt.push(...toOutTermLines(stdoutText));
-                } else {
-                    // Final completed run for promptless programs:
-                    // show only the real stdout, not duplicated synthetic inputs.
-                    rebuilt.push(...toOutTermLines(stdoutText));
-                }
-            } else {
-                const splitCount = showWaiting ? lines.length + 1 : lines.length;
-                const promptsForSplit = expandPrompts(promptsRaw, Math.max(splitCount, 1), "Input:");
-                const segs = splitStdoutByPrompts(stdoutText, promptsForSplit);
-
-                rebuilt.push(...toOutTermLines(segs[0] ?? ""));
-
-                for (let i = 0; i < lines.length; i++) {
-                    const pDisp = prettyPrompt(
-                        promptsForSplit[i] || promptsRaw[i] || promptsRaw[0] || "Input:",
-                    );
-
-                    rebuilt.push({ type: "in", text: `${pDisp} ${lines[i] ?? ""}` });
-
-                    let seg = segs[i + 1] ?? "";
-                    if (seg.startsWith(" ") && !seg.startsWith(" \n")) seg = seg.slice(1);
-                    rebuilt.push(...toOutTermLines(seg));
-                }
-            }
-
             const extraErrs: TermLine[] = [];
+
             if (r.compile_output) extraErrs.push({ type: "err", text: cleanTermText(r.compile_output) });
             if (r.stderr) extraErrs.push({ type: "err", text: cleanTermText(r.stderr) });
             if (r.message) extraErrs.push({ type: "err", text: cleanTermText(r.message) });
@@ -464,10 +461,75 @@ export function useTerminalRunner(args: {
                 extraErrs.push({ type: "err", text: cleanTermText(r.error) });
             }
 
+            if (syntheticPrompt) {
+                const prevRunLines = stripTrailingProcessing(getRunLines(runId));
+                const prevStdout = cleanTermText(probePrefix ?? "");
+
+                const deltaStdout =
+                    lines.length > 0 && prevStdout && stdoutText.startsWith(prevStdout)
+                        ? stdoutText.slice(prevStdout.length)
+                        : stdoutText;
+
+                const rebuilt: TermLine[] = [...prevRunLines];
+
+                const latestTyped = String(lines[lines.length - 1] ?? "");
+                const lastExisting = rebuilt[rebuilt.length - 1];
+
+                const alreadyEchoedLatestInput =
+                    !!latestTyped &&
+                    lastExisting?.type === "in" &&
+                    cleanTermText(lastExisting.text) === latestTyped;
+
+                if (lines.length > 0 && !alreadyEchoedLatestInput) {
+                    rebuilt.push({
+                        type: "in",
+                        text: latestTyped,
+                    });
+                }
+
+                rebuilt.push(...toOutTermLines(deltaStdout));
+
+                if (showWaiting) {
+                    setAwaitingInput(true);
+                    setInputPrompt("");
+                    setRunState("awaiting_input");
+                    replaceRunLines(runId, rebuilt);
+                    return;
+                }
+
+                replaceRunLines(runId, [...rebuilt, ...extraErrs]);
+                setAwaitingInput(false);
+                setInputPrompt("");
+                setRunState("idle");
+                return;
+            }
+
+            const promptsForSplit = expandPrompts(
+                promptSlots,
+                Math.max(showWaiting ? lines.length + 1 : lines.length, 1),
+                "",
+            );
+            const segs = splitStdoutByPrompts(stdoutText, promptsForSplit);
+
+            const rebuilt: TermLine[] = [];
+            rebuilt.push(...toOutTermLines(segs[0] ?? ""));
+
+            for (let i = 0; i < lines.length; i++) {
+                const rawPrompt = promptsForSplit[i] || promptSlots[i] || promptSlots[0] || "";
+                const pDisp = rawPrompt ? prettyPrompt(rawPrompt) : "";
+                const lineText = pDisp ? `${pDisp} ${lines[i] ?? ""}` : `${lines[i] ?? ""}`;
+
+                rebuilt.push({ type: "in", text: lineText });
+
+                let seg = segs[i + 1] ?? "";
+                if (seg.startsWith(" ") && !seg.startsWith(" \n")) seg = seg.slice(1);
+                rebuilt.push(...toOutTermLines(seg));
+            }
+
             if (showWaiting) {
                 setAwaitingInput(true);
-                const nextRaw = promptsRaw[lines.length] || promptsRaw[0] || "Input:";
-                setInputPrompt(syntheticPrompt ? "" : prettyPrompt(nextRaw));
+                const nextRaw = promptSlots[lines.length] || promptSlots[0] || "";
+                setInputPrompt(nextRaw ? prettyPrompt(nextRaw) : "");
                 setRunState("awaiting_input");
                 replaceRunLines(runId, rebuilt);
                 return;
@@ -478,8 +540,9 @@ export function useTerminalRunner(args: {
             setInputPrompt("");
             setRunState("idle");
         },
-        [inputPlan.prompts, replaceRunLines],
+        [getRunLines, inputPlan.prompts, replaceRunLines, stripTrailingProcessing],
     );
+
     const cancelRun = React.useCallback(() => {
         if (runState !== "running" && runState !== "awaiting_input") return;
 
@@ -554,9 +617,6 @@ export function useTerminalRunner(args: {
             const expectsInput = inputPlan.expected > 0;
             const probeSafe = lang === "python" || lang === "java";
 
-            // No transcript "Processing..." here.
-            // TerminalPane now shows it ephemerally from runState.
-
             if (!expectsInput) {
                 replaceRunLines(runId, []);
 
@@ -591,14 +651,16 @@ export function useTerminalRunner(args: {
                     return;
                 }
 
-                probeStdoutRef.current = cleanTermText(r.stdout ?? "");
                 const more = needsMoreInput(lang, r);
-                rebuildInteractiveTranscript(runId, [], r, more, probeStdoutRef.current);
+                rebuildInteractiveTranscript(runId, [], r, more, "");
+                probeStdoutRef.current = more ? cleanTermText(r.stdout ?? "") : "";
                 return;
             }
 
             const preOut = extractPreOutputForCCpp(lang, code, inputPlan.prompts);
-            const firstPrompt = prettyPrompt(inputPlan.prompts[0] || "Input:");
+            const firstPrompt = inputPlan.prompts[0]
+                ? prettyPrompt(inputPlan.prompts[0])
+                : "";
 
             setAwaitingInput(true);
             setInputPrompt(firstPrompt);
@@ -630,6 +692,7 @@ export function useTerminalRunner(args: {
         rebuildInteractiveTranscript,
         appendErrLine,
     ]);
+
     const submitInput = React.useCallback(async () => {
         if (isSql || disabled || runLockRef.current || busy) return;
 
@@ -647,21 +710,19 @@ export function useTerminalRunner(args: {
             const expectsInput = inputPlan.expected > 0;
             const probeSafe = lang === "python" || lang === "java";
 
-            const hasRealPrompts = !!inputPlan.prompts?.length;
-            const promptForThisInput = hasRealPrompts
-                ? prettyPrompt(
-                    inputPlan.prompts[Math.max(0, next.length - 1)] ||
-                    inputPlan.prompts[0] ||
-                    "Input:",
-                )
+            const promptSlots = normalizePromptList(inputPlan.prompts);
+            const hasRealPrompts = promptSlots.some((p) => p.length > 0);
+
+            const rawPromptForThisInput = hasRealPrompts
+                ? promptSlots[Math.max(0, next.length - 1)] || promptSlots[0] || ""
+                : "";
+
+            const promptForThisInput = rawPromptForThisInput
+                ? prettyPrompt(rawPromptForThisInput)
                 : "";
 
             if (probeSafe) {
-                // For promptless Judge0 probe-safe flows, do not optimistically echo input.
-                // The final transcript will be rebuilt from stdout only.
-                if (hasRealPrompts) {
-                    appendImmediateInputLine(runId, typed, promptForThisInput);
-                }
+                appendImmediateInputLine(runId, typed, promptForThisInput);
                 setAwaitingInput(false);
                 setInputPrompt("");
             } else {
@@ -671,9 +732,8 @@ export function useTerminalRunner(args: {
 
             if (expectsInput && !probeSafe && next.length < inputPlan.expected) {
                 const preOut = extractPreOutputForCCpp(lang, code, inputPlan.prompts);
-                const nextPrompt = prettyPrompt(
-                    inputPlan.prompts[next.length] || inputPlan.prompts[0] || "Input:",
-                );
+                const rawNextPrompt = promptSlots[next.length] || promptSlots[0] || "";
+                const nextPrompt = rawNextPrompt ? prettyPrompt(rawNextPrompt) : "";
 
                 setAwaitingInput(true);
                 setInputPrompt(nextPrompt);
@@ -683,10 +743,15 @@ export function useTerminalRunner(args: {
                     runId,
                     [
                         ...preOut,
-                        ...next.map((val, i) => ({
-                            type: "in" as const,
-                            text: `${prettyPrompt(inputPlan.prompts[i] || "Input:")} ${val}`,
-                        })),
+                        ...next.map((val, i) => {
+                            const rawPrompt = promptSlots[i] || "";
+                            const pretty = rawPrompt ? prettyPrompt(rawPrompt) : "";
+
+                            return {
+                                type: "in" as const,
+                                text: pretty ? `${pretty} ${val}` : `${val}`,
+                            };
+                        }),
                     ],
                 );
 
@@ -710,7 +775,9 @@ export function useTerminalRunner(args: {
 
             const more = (probeSafe && needsMoreInput(lang, r)) || false;
             const probePrefix = probeSafe ? probeStdoutRef.current : "";
+
             rebuildInteractiveTranscript(runId, next, r, more, probePrefix);
+            probeStdoutRef.current = probeSafe && more ? cleanTermText(r.stdout ?? "") : "";
         } catch (e) {
             const msg = errorMessage(e);
             clearInputUi();
@@ -725,7 +792,6 @@ export function useTerminalRunner(args: {
         inputLine,
         typedLines,
         lang,
-        code,
         inputPlan,
         runOnce,
         replaceRunLines,
@@ -734,6 +800,7 @@ export function useTerminalRunner(args: {
         appendImmediateInputLine,
         appendProcessingLine,
         clearInputUi,
+        code,
     ]);
 
     return {

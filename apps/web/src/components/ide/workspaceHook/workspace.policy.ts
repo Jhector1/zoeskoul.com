@@ -1,4 +1,3 @@
-"use client";
 
 import type { FSNode } from "../types";
 import type { IdeWorkspaceAccess } from "./workspace.types";

@@ -15,7 +15,7 @@ export function extractJavaPrintPrompts(code: string): string[] {
             continue;
         }
 
-        prompts.push((pendingPrompt ?? "Input:").trimEnd());
+        prompts.push((pendingPrompt ?? "").trimEnd());
         pendingPrompt = null;
     }
 

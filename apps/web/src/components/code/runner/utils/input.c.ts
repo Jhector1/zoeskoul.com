@@ -18,7 +18,7 @@ export function extractCPrintfPrompts(code: string): string[] {
         }
 
         // saw scanf( / gets( / fgets(
-        prompts.push((pendingPrompt ?? "Input:").trimEnd());
+        prompts.push((pendingPrompt ?? "").trimEnd());
         pendingPrompt = null;
     }
 
