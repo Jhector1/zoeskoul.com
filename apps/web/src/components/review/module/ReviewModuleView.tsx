@@ -830,7 +830,7 @@ export default function ReviewModuleView({
     ]);
     const footerPad = footerInsetPx ? footerInsetPx + 12 : 0;
     const padStyle = {
-        paddingBottom: footerPad || undefined,
+        paddingBottom:  undefined,
         scrollPaddingBottom: footerPad || undefined,
         ["--flow-bottom-inset" as any]: `${footerPad || 0}px`,
     } as React.CSSProperties;
@@ -1005,8 +1005,8 @@ export default function ReviewModuleView({
                                 />
                             </div>
 
-                            <div className="flex-1 min-h-0 w-full p-3 md:p-4">
-                                <div className="h-full min-h-0 flex gap-3">
+                            <div className="flex-1 min-h-0 w-full ">
+                                <div className="h-full min-h-0 flex">
                                     {/* LEFT (desktop only) */}
                                     {showDesktopLeft ? (
                                         <>
@@ -1188,7 +1188,7 @@ export default function ReviewModuleView({
                                         </TopicShell>
 
                                         {isLastModule ? (
-                                            <div className="mt-3 rounded-xl border border-emerald-600/25 bg-emerald-500/10 p-3 text-xs dark:border-emerald-300/30 dark:bg-emerald-300/10">
+                                            <div className="mt-3  border border-emerald-600/25 bg-emerald-500/10 p-3 text-xs dark:border-emerald-300/30 dark:bg-emerald-300/10">
                                                 <div className="font-black text-emerald-900 dark:text-emerald-100">
                                                     Course complete
                                                 </div>

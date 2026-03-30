@@ -72,7 +72,7 @@ export default function CardRenderer(props: {
         onSketchStateChange,
     } = props;
 
-    const wrapCls = "ui-surface-soft p-4";
+    const wrapCls = "ui-surface-soft rounded-none p-4";
 
     const actionBtn = done ? "ui-btn-ide-success px-3" : "ui-btn-secondary px-3";
 

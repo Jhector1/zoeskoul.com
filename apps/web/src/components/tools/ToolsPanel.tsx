@@ -69,7 +69,7 @@ export default function ToolsPanel(props: {
     const keepMounted = TOOL_SPECS.filter((t) => t.keepMounted);
 
     return (
-        <div className="flex h-full flex-col overflow-hidden ui-card">
+        <div className="flex h-full flex-col overflow-hidden ui-surface-muted rounded-none">
             <div className="shrink-0 border-b border-neutral-200 bg-white/80 p-3 backdrop-blur dark:border-white/10 dark:bg-black/30">
                 <div className="flex items-center justify-between gap-2">
                     <div className="min-w-0">

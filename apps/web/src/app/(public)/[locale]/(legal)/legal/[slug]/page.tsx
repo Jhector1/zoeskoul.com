@@ -1,59 +1,31 @@
-import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import {
-    LEGAL_DOCUMENTS,
     LEGAL_DOCS_BY_SLUG,
     LEGAL_VALUES,
-    type LegalSlug,
+    isLegalSlug,
 } from "@/lib/legal/content";
-import { AppLocale } from "@/lib/seo/types";
-import { getRouteSeo, getSharedSeo } from "@/lib/seo/getSeo";
-import { buildMetadata } from "@/lib/seo/buildMetadata";
 import LegalDocClient from "@/components/legal/LegalDocClient";
 
-type PageProps = {
+type Props = {
     params: Promise<{
         locale: string;
-        slug: LegalSlug;
+        slug: string;
     }>;
 };
 
-export async function generateStaticParams() {
-    return LEGAL_DOCUMENTS.map((doc) => ({
-        slug: doc.slug,
-    }));
-}
+export default async function LegalDocPage({ params }: Props) {
+    const { locale: l, slug } = await params;
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-    const { locale, slug } = await params;
-    const l = locale as AppLocale;
+    setRequestLocale(l);
+
+    if (!isLegalSlug(slug)) {
+        notFound();
+    }
 
     const doc = LEGAL_DOCS_BY_SLUG[slug];
-    if (!doc) return { title: "Legal" };
 
-    const seo = await getRouteSeo(l, slug);
-    const shared = await getSharedSeo(l);
-
-    return buildMetadata({
-        locale: l,
-        path: `/legal/${slug}`,
-        title: seo.title,
-        description: seo.description,
-        keywords: shared.keywords,
-        ogTitle: seo.ogTitle,
-        ogDescription: seo.ogDescription,
-        twitterTitle: seo.twitterTitle,
-        twitterDescription: seo.twitterDescription,
-        imageAlt: shared.defaultOgAlt,
-        noIndex: false,
-    });
-}
-
-export default async function LegalDocPage({ params }: PageProps) {
-    const { slug } = await params;
-    const doc = LEGAL_DOCS_BY_SLUG[slug];
-
-    if (!doc) notFound();
+    await getTranslations({ locale: l });
 
     return <LegalDocClient doc={doc} values={LEGAL_VALUES} />;
 }

@@ -1,20 +1,21 @@
 import type { Metadata } from "next";
 import { Link } from "@/i18n/navigation";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { LEGAL_INDEX, LEGAL_VALUES } from "@/lib/legal/content";
 import { getRouteSeo, getSharedSeo } from "@/lib/seo/getSeo";
 import { AppLocale } from "@/lib/seo/types";
 import { buildMetadata } from "@/lib/seo/buildMetadata";
-import {resolveDeepTagged} from "@/i18n/resolveDeepTagged";
-// import { resolveDeepTagged } from "@/lib/i18n/resolveDeepTagged";
+import { resolveDeepTagged } from "@/i18n/resolveDeepTagged";
 
 type PageProps = {
     params: Promise<{ locale: string }>;
 };
 
-export async function generateMetadata(
-    { params }: PageProps
-): Promise<Metadata> {
+export const dynamic = "force-static";
+export const dynamicParams = false;
+export const revalidate = false;
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
     const { locale } = await params;
     const l = locale as AppLocale;
 
@@ -40,12 +41,14 @@ export default async function LegalIndexPage({ params }: PageProps) {
     const { locale } = await params;
     const l = locale as AppLocale;
 
+    setRequestLocale(l);
+
     const t = await getTranslations({ locale: l });
 
     const docs = resolveDeepTagged(
         LEGAL_INDEX,
         (key, values) => t(key, values),
-        LEGAL_VALUES
+        LEGAL_VALUES,
     ) as Array<{
         slug: string;
         title: string;
@@ -56,8 +59,8 @@ export default async function LegalIndexPage({ params }: PageProps) {
 
     return (
         <div className="space-y-6">
-            <div className="rounded-2xl border border-neutral-200 bg-neutral-50 p-4 dark:border-white/10 dark:bg-white/[0.03]">
-                <p className="text-sm leading-6 text-neutral-700 dark:text-white/70">
+            <div className="ui-page-surface p-4">
+                <p className="text-sm leading-6 text-[rgb(var(--ui-text-muted)/0.88)]">
                     {t("LegalUi.indexIntro")}
                 </p>
             </div>
@@ -67,24 +70,24 @@ export default async function LegalIndexPage({ params }: PageProps) {
                     <Link
                         key={doc.slug}
                         href={`/legal/${doc.slug}`}
-                        className="group rounded-2xl border border-neutral-200 bg-white p-5 transition hover:-translate-y-0.5 hover:border-neutral-300 hover:shadow-sm dark:border-white/10 dark:bg-neutral-900 dark:hover:border-white/20"
+                        className="ui-page-surface group p-5 transition-colors hover:border-[rgb(var(--ui-border-strong)/1)] hover:bg-[rgb(var(--ui-surface)/1)]"
                     >
                         <div className="flex items-start justify-between gap-3">
                             <div>
-                                <h2 className="text-base font-black tracking-tight text-neutral-900 group-hover:text-neutral-700 dark:text-white dark:group-hover:text-white/85">
+                                <h2 className="ui-title-sm text-[rgb(var(--ui-text)/0.96)] group-hover:text-[rgb(var(--ui-text)/0.9)]">
                                     {doc.title}
                                 </h2>
-                                <p className="mt-2 text-sm leading-6 text-neutral-600 dark:text-white/65">
+                                <p className="mt-2 text-sm leading-6 text-[rgb(var(--ui-text-muted)/0.88)]">
                                     {doc.description}
                                 </p>
                             </div>
 
-                            <span className="rounded-full border border-neutral-200 px-2 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-neutral-500 dark:border-white/10 dark:text-white/50">
+                            <span className="ui-pill-neutral">
                 {t("LegalUi.view")}
               </span>
                         </div>
 
-                        <div className="mt-4 flex flex-wrap gap-x-4 gap-y-1 text-xs text-neutral-500 dark:text-white/45">
+                        <div className="mt-4 flex flex-wrap gap-x-4 gap-y-1 ui-meta">
               <span>
                 {t("LegalUi.effective")}: {doc.effectiveDate}
               </span>

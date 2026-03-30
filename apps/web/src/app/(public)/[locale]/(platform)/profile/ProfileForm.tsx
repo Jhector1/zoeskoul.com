@@ -1,10 +1,9 @@
-// src/app/profile/ProfileForm.tsx
 "use client";
 
 import React, { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
-import {ROUTES} from "@/utils";
+import { ROUTES } from "@/utils";
 
 type Me = {
     id: string;
@@ -26,7 +25,10 @@ async function jsonFetch<T>(url: string, init?: RequestInit): Promise<T> {
     });
     const data = await res.json().catch(() => ({}));
     if (!res.ok) {
-        throw Object.assign(new Error(data?.error ?? "Request failed"), { data, status: res.status });
+        throw Object.assign(new Error(data?.error ?? "Request failed"), {
+            data,
+            status: res.status,
+        });
     }
     return data as T;
 }
@@ -47,6 +49,52 @@ function initialsFrom(name?: string | null, email?: string | null) {
     return parts.map((p) => p[0]).join("").toUpperCase();
 }
 
+function FieldLabel({ children }: { children: React.ReactNode }) {
+    return <label className="ui-meta-strong">{children}</label>;
+}
+
+function StatusNotice({
+                          tone,
+                          children,
+                      }: {
+    tone: "success" | "danger";
+    children: React.ReactNode;
+}) {
+    return (
+        <div
+            className={cn(
+                "px-4 py-3 text-[12px] font-medium",
+                tone === "success" ? "ui-surface-success" : "ui-surface-danger",
+            )}
+        >
+            {children}
+        </div>
+    );
+}
+
+function NavCard({
+                     href,
+                     title,
+                     description,
+                 }: {
+    href: string;
+    title: string;
+    description: string;
+}) {
+    return (
+        <Link
+            href={href}
+            className="ui-page-surface flex items-center justify-between gap-3 p-5 transition-colors hover:border-[rgb(var(--ui-border-strong)/1)] hover:bg-[rgb(var(--ui-surface)/1)]"
+        >
+            <div>
+                <div className="ui-title-sm">{title}</div>
+                <div className="mt-1 ui-meta">{description}</div>
+            </div>
+            <div className="ui-meta-strong">→</div>
+        </Link>
+    );
+}
+
 export default function ProfileForm({ initialUser }: { initialUser: Me }) {
     const { data: session, status: sessionStatus, update } = useSession();
 
@@ -56,7 +104,7 @@ export default function ProfileForm({ initialUser }: { initialUser: Me }) {
             image: (initialUser.image ?? "").trim(),
             email: (initialUser.email ?? session?.user?.email ?? "").trim(),
         }),
-        [initialUser.name, initialUser.image, initialUser.email, session?.user?.email]
+        [initialUser.name, initialUser.image, initialUser.email, session?.user?.email],
     );
 
     const [name, setName] = useState(baseline.name);
@@ -66,12 +114,10 @@ export default function ProfileForm({ initialUser }: { initialUser: Me }) {
     const [msg, setMsg] = useState<string | null>(null);
     const [err, setErr] = useState<string | null>(null);
 
-    // If server page revalidated with a different user, sync form.
     useEffect(() => {
         setName(baseline.name);
         setImage(baseline.image);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [initialUser.id]);
+    }, [initialUser.id, baseline.name, baseline.image]);
 
     useEffect(() => {
         if (!msg) return;
@@ -101,15 +147,15 @@ export default function ProfileForm({ initialUser }: { initialUser: Me }) {
                     : null;
 
     const formError = nameError || imageError;
-
     const dirty = trimmedName !== baseline.name || trimmedImage !== baseline.image;
-
     const canSave = !saving && dirty && !formError;
 
     const previewImage =
         (trimmedImage && isValidHttpUrl(trimmedImage) ? trimmedImage : null) ??
         (baseline.image && isValidHttpUrl(baseline.image) ? baseline.image : null) ??
-        (typeof session?.user?.image === "string" && isValidHttpUrl(session.user.image) ? session.user.image : null);
+        (typeof session?.user?.image === "string" && isValidHttpUrl(session.user.image)
+            ? session.user.image
+            : null);
 
     function onReset() {
         setErr(null);
@@ -134,7 +180,6 @@ export default function ProfileForm({ initialUser }: { initialUser: Me }) {
                 body: JSON.stringify(payload),
             });
 
-            // Refresh NextAuth session so header/avatar updates immediately
             await update?.({
                 name: out.user.name ?? undefined,
                 image: out.user.image ?? undefined,
@@ -153,19 +198,17 @@ export default function ProfileForm({ initialUser }: { initialUser: Me }) {
 
     return (
         <div className="grid gap-4">
-            {/* Main profile card */}
-            <div className="ui-card overflow-hidden">
-                <div className="flex items-start justify-between gap-3 border-b border-neutral-200 p-5 dark:border-white/10">
+            <div className="ui-page-surface overflow-hidden">
+                <div className="flex items-start justify-between gap-4 border-b border-[rgb(var(--ui-border)/0.9)] bg-[rgb(var(--ui-surface-2)/0.72)] p-5">
                     <div>
-                        <div className="text-base font-black text-neutral-900 dark:text-white">Profile</div>
-                        <div className="mt-1 text-xs font-semibold text-neutral-600 dark:text-white/65">
+                        <div className="ui-title-sm">Profile</div>
+                        <div className="mt-1 ui-meta">
                             This appears on certificates, progress screens, and account UI.
                         </div>
                     </div>
 
-                    {/* Avatar preview */}
                     <div className="shrink-0">
-                        <div className="h-11 w-11 overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-sm dark:border-white/10 dark:bg-white/[0.06] dark:shadow-none grid place-items-center">
+                        <div className="grid h-11 w-11 place-items-center overflow-hidden rounded-lg border border-[rgb(var(--ui-border)/1)] bg-[rgb(var(--ui-surface)/1)]">
                             {previewImage ? (
                                 // eslint-disable-next-line @next/next/no-img-element
                                 <img
@@ -175,7 +218,7 @@ export default function ProfileForm({ initialUser }: { initialUser: Me }) {
                                     referrerPolicy="no-referrer"
                                 />
                             ) : (
-                                <span className="text-[12px] font-black text-neutral-700 dark:text-white/80">
+                                <span className="text-[12px] font-medium text-[rgb(var(--ui-text)/0.92)]">
                   {initialsFrom(trimmedName, email)}
                 </span>
                             )}
@@ -190,74 +233,78 @@ export default function ProfileForm({ initialUser }: { initialUser: Me }) {
                         if (canSave) onSave();
                     }}
                 >
-                    {/* Display name */}
                     <div className="grid gap-2">
-                        <label className="text-[11px] font-extrabold text-neutral-600 dark:text-white/60">
-                            Display name
-                        </label>
+                        <FieldLabel>Display name</FieldLabel>
                         <input
                             value={name}
                             onChange={(e) => setName(e.target.value)}
                             placeholder="Your name"
-                            className={cn("ui-search-input", nameError && "border-rose-300/60 dark:border-rose-300/30")}
+                            className={cn(
+                                "ui-search-input",
+                                nameError && "border-rose-300/60 dark:border-rose-300/30",
+                            )}
                             aria-invalid={!!nameError}
                         />
                         <div className="flex items-center justify-between gap-3">
-                            <div className={cn("text-[11px] font-semibold", nameError ? "text-rose-700 dark:text-rose-200/85" : "text-neutral-500 dark:text-white/50")}>
+                            <div
+                                className={cn(
+                                    "text-[11px] font-medium",
+                                    nameError
+                                        ? "text-rose-700 dark:text-rose-200/85"
+                                        : "text-[rgb(var(--ui-text-muted)/0.84)]",
+                                )}
+                            >
                                 {nameError ? nameError : "Used across Learnoir."}
                             </div>
-                            <div className="text-[11px] font-semibold text-neutral-400 dark:text-white/35 tabular-nums">
+                            <div className="tabular-nums text-[11px] font-medium text-[rgb(var(--ui-text-soft)/0.82)]">
                                 {trimmedName.length}/60
                             </div>
                         </div>
                     </div>
 
-                    {/* Email (read-only) */}
                     <div className="grid gap-2">
-                        <label className="text-[11px] font-extrabold text-neutral-600 dark:text-white/60">
-                            Email
-                        </label>
-                        <div className="ui-soft px-4 py-3 text-sm font-extrabold text-neutral-700 dark:text-white/75">
+                        <FieldLabel>Email</FieldLabel>
+                        <div className="ui-surface-soft px-4 py-3 text-sm font-medium text-[rgb(var(--ui-text)/0.88)]">
                             {email || "—"}
                         </div>
                     </div>
 
-                    {/* Avatar URL */}
                     <div className="grid gap-2">
-                        <label className="text-[11px] font-extrabold text-neutral-600 dark:text-white/60">
-                            Avatar URL (optional)
-                        </label>
+                        <FieldLabel>Avatar URL (optional)</FieldLabel>
                         <input
                             value={image}
                             onChange={(e) => setImage(e.target.value)}
                             placeholder="https://..."
-                            className={cn("ui-search-input", imageError && "border-rose-300/60 dark:border-rose-300/30")}
+                            className={cn(
+                                "ui-search-input",
+                                imageError && "border-rose-300/60 dark:border-rose-300/30",
+                            )}
                             aria-invalid={!!imageError}
                         />
-                        <div className={cn("text-[11px] font-semibold", imageError ? "text-rose-700 dark:text-rose-200/85" : "text-neutral-500 dark:text-white/50")}>
+                        <div
+                            className={cn(
+                                "text-[11px] font-medium",
+                                imageError
+                                    ? "text-rose-700 dark:text-rose-200/85"
+                                    : "text-[rgb(var(--ui-text-muted)/0.84)]",
+                            )}
+                        >
                             {imageError ? imageError : "Tip: Square images look best."}
                         </div>
                     </div>
 
-                    {/* Status */}
                     <div aria-live="polite" className="grid gap-2">
-                        {err ? (
-                            <div className="ui-soft border-rose-300/40 bg-rose-50 text-rose-800 dark:border-rose-300/20 dark:bg-rose-300/10 dark:text-rose-100 px-4 py-3 text-[12px] font-extrabold">
-                                {err}
-                            </div>
-                        ) : null}
-
-                        {msg ? (
-                            <div className="ui-soft border-emerald-300/40 bg-emerald-50 text-emerald-900 dark:border-emerald-300/20 dark:bg-emerald-300/10 dark:text-emerald-50 px-4 py-3 text-[12px] font-extrabold">
-                                {msg}
-                            </div>
-                        ) : null}
+                        {err ? <StatusNotice tone="danger">{err}</StatusNotice> : null}
+                        {msg ? <StatusNotice tone="success">{msg}</StatusNotice> : null}
                     </div>
 
-                    {/* Actions */}
                     <div className="flex items-center justify-between gap-3 pt-1">
-                        <div className="text-[12px] font-semibold text-neutral-500 dark:text-white/45">
-                            {sessionStatus === "loading" ? "Syncing…" : dirty ? "Unsaved changes" : "Up to date"}
+                        <div className="ui-meta">
+                            {sessionStatus === "loading"
+                                ? "Syncing…"
+                                : dirty
+                                    ? "Unsaved changes"
+                                    : "Up to date"}
                         </div>
 
                         <div className="flex items-center gap-2">
@@ -265,7 +312,10 @@ export default function ProfileForm({ initialUser }: { initialUser: Me }) {
                                 type="button"
                                 onClick={onReset}
                                 disabled={saving || !dirty}
-                                className={cn("ui-btn ui-btn-secondary", (saving || !dirty) && "opacity-60 cursor-not-allowed")}
+                                className={cn(
+                                    "ui-btn-secondary",
+                                    (saving || !dirty) && "cursor-not-allowed opacity-60",
+                                )}
                             >
                                 Reset
                             </button>
@@ -273,7 +323,10 @@ export default function ProfileForm({ initialUser }: { initialUser: Me }) {
                             <button
                                 type="submit"
                                 disabled={!canSave}
-                                className={cn("ui-btn ui-btn-primary", !canSave && "opacity-60 cursor-not-allowed")}
+                                className={cn(
+                                    "ui-btn-primary",
+                                    !canSave && "cursor-not-allowed opacity-60",
+                                )}
                                 title={formError ? formError : !dirty ? "No changes to save" : undefined}
                             >
                                 {saving ? "Saving…" : "Save changes"}
@@ -283,31 +336,17 @@ export default function ProfileForm({ initialUser }: { initialUser: Me }) {
                 </form>
             </div>
 
-            {/* Billing card */}
-            <Link href="/billing" className="ui-card p-5 hover:shadow-md transition">
-                <div className="flex items-center justify-between gap-3">
-                    <div>
-                        <div className="text-sm font-black text-neutral-900 dark:text-white">Billing</div>
-                        <div className="mt-1 text-xs font-semibold text-neutral-600 dark:text-white/65">
-                            Manage subscription, invoices, and payment method.
-                        </div>
-                    </div>
-                    <div className="text-neutral-500 dark:text-white/60">→</div>
-                </div>
-            </Link>
+            <NavCard
+                href="/billing"
+                title="Billing"
+                description="Manage subscription, invoices, and payment method."
+            />
 
-            {/* Optional polish link */}
-            <Link href={ROUTES.achievements} className="ui-card p-5 hover:shadow-md transition">
-                <div className="flex items-center justify-between gap-3">
-                    <div>
-                        <div className="text-sm font-black text-neutral-900 dark:text-white">Account</div>
-                        <div className="mt-1 text-xs font-semibold text-neutral-600 dark:text-white/65">
-                            Certificates, security, and data export.
-                        </div>
-                    </div>
-                    <div className="text-neutral-500 dark:text-white/60">→</div>
-                </div>
-            </Link>
+            <NavCard
+                href={ROUTES.achievements}
+                title="Account"
+                description="Certificates, security, and data export."
+            />
         </div>
     );
 }

@@ -12,15 +12,17 @@ type SectionItem = {
 export default function LegalSectionNav({
                                             docTitle,
                                             sections,
+                                            desktop = false,
                                         }: {
     docTitle: string;
     sections: SectionItem[];
+    desktop?: boolean;
 }) {
     const [activeId, setActiveId] = useState(sections[0]?.id ?? "");
     const [marker, setMarker] = useState({ top: 0, height: 0, ready: false });
 
-    const listRef = useRef<HTMLUListElement | null>(null);
-    const itemRefs = useRef<Record<string, HTMLAnchorElement | null>>({});
+    const listRef = useRef<HTMLDivElement | null>(null);
+    const itemRefs = useRef<Record<string, HTMLButtonElement | null>>({});
 
     const ids = useMemo(() => sections.map((s) => s.id), [sections]);
 
@@ -62,14 +64,13 @@ export default function LegalSectionNav({
         });
 
         const handleResize = () => updateMarker();
-
         window.addEventListener("resize", handleResize);
 
         return () => {
             ro.disconnect();
             window.removeEventListener("resize", handleResize);
         };
-    }, [activeId]);
+    }, [activeId, sections]);
 
     useEffect(() => {
         if (!ids.length) return;
@@ -100,12 +101,13 @@ export default function LegalSectionNav({
                     });
 
                 if (visible[0]?.target?.id) {
-                    const id = visible[0].target.id;
-                    setActiveId(id);
+                    setActiveId(visible[0].target.id);
                     return;
                 }
 
-                const passed = elements.filter((el) => el.getBoundingClientRect().top <= 140);
+                const passed = elements.filter(
+                    (el) => el.getBoundingClientRect().top <= 140,
+                );
                 if (passed.length) {
                     setActiveId(passed[passed.length - 1].id);
                 }
@@ -114,7 +116,7 @@ export default function LegalSectionNav({
                 root: null,
                 rootMargin: "-120px 0px -55% 0px",
                 threshold: [0, 0.1, 0.25, 0.5, 0.75],
-            }
+            },
         );
 
         elements.forEach((el) => observer.observe(el));
@@ -135,9 +137,7 @@ export default function LegalSectionNav({
         };
     }, [ids]);
 
-    function handleJump(e: React.MouseEvent<HTMLAnchorElement>, id: string) {
-        e.preventDefault();
-
+    function handleJump(id: string) {
         const el = document.getElementById(id);
         if (!el) return;
 
@@ -154,26 +154,30 @@ export default function LegalSectionNav({
     }
 
     return (
-        <aside className="sticky top-28 hidden self-start lg:block">
-            <nav aria-label="Breadcrumb" className="py-2 text-sm text-neutral-500 dark:text-white/45">
-                <Link href="/legal" className="hover:text-neutral-800 dark:hover:text-white">
+        <div className="self-start">
+            <div className="ui-meta pb-3">
+                <Link href="/legal" className="hover:text-[rgb(var(--ui-text)/0.96)]">
                     Legal
                 </Link>
                 <span className="mx-2">/</span>
-                <span className="text-neutral-900 dark:text-white">{docTitle}</span>
-            </nav>
+                <span className="text-[rgb(var(--ui-text)/0.96)]">{docTitle}</span>
+            </div>
 
-            <div className="rounded-2xl border border-neutral-200 bg-white p-4 shadow-sm dark:border-white/10 dark:bg-neutral-900">
-                <p className="text-xs font-bold uppercase tracking-[0.16em] text-neutral-500 dark:text-white/45">
-                    On this page
-                </p>
+            <div
+                className={cn(
+                    "ui-page-surface p-4",
+                    desktop && "max-h-[calc(100vh-7rem)] overflow-y-auto",
+                )}
+            >
+                <div className="ui-kicker">On this page</div>
+                <div className="mt-1 ui-title-sm">{docTitle}</div>
 
-                <div className="relative mt-3">
+                <div ref={listRef} className="relative mt-4">
                     <div
                         aria-hidden="true"
                         className={cn(
-                            "pointer-events-none absolute left-0 right-0 z-0 rounded-xl border border-neutral-200/80 bg-neutral-100/90 shadow-sm transition-[transform,height,opacity] duration-300 ease-out dark:border-white/10 dark:bg-white/10",
-                            marker.ready ? "opacity-100" : "opacity-0"
+                            "ui-surface-soft pointer-events-none absolute left-0 right-0 z-0 rounded-lg transition-[transform,height,opacity] duration-300 ease-out",
+                            marker.ready ? "opacity-100" : "opacity-0",
                         )}
                         style={{
                             transform: `translateY(${marker.top}px)`,
@@ -181,42 +185,41 @@ export default function LegalSectionNav({
                         }}
                     />
 
-                    <ul ref={listRef} className="relative space-y-1.5">
+                    <div className="relative z-10 space-y-1.5">
                         {sections.map((section) => {
                             const active = activeId === section.id;
 
                             return (
-                                <li key={section.id} className="relative z-10">
-                                    <a
-                                        ref={(el) => {
-                                            itemRefs.current[section.id] = el;
-                                        }}
-                                        href={`#${section.id}`}
-                                        aria-current={active ? "location" : undefined}
-                                        onClick={(e) => handleJump(e, section.id)}
-                                        className={cn(
-                                            "group relative flex min-h-10 items-center rounded-xl px-3 py-2 pl-5 text-sm leading-5 transition-colors duration-200",
-                                            active
-                                                ? "text-neutral-950 dark:text-white"
-                                                : "text-neutral-700 hover:text-neutral-900 dark:text-white/70 dark:hover:text-white"
-                                        )}
-                                    >
-                    <span
-                        className={cn(
-                            "absolute left-2 top-1/2 h-5 -translate-y-1/2 rounded-full transition-all duration-300 ease-out",
-                            active
-                                ? "w-1.5 bg-neutral-900 dark:bg-white"
-                                : "w-1 bg-neutral-300 group-hover:bg-neutral-400 dark:bg-white/15 dark:group-hover:bg-white/35"
-                        )}
-                    />
-                                        <span className="block">{section.title}</span>
-                                    </a>
-                                </li>
+                                <button
+                                    key={section.id}
+                                    ref={(el) => {
+                                        itemRefs.current[section.id] = el;
+                                    }}
+                                    type="button"
+                                    aria-current={active ? "location" : undefined}
+                                    onClick={() => handleJump(section.id)}
+                                    className={cn(
+                                        "relative flex min-h-10 w-full items-center rounded-lg px-3 py-2 pl-5 text-left text-sm leading-5 transition-colors duration-200",
+                                        active
+                                            ? "text-[rgb(var(--ui-text)/0.96)]"
+                                            : "text-[rgb(var(--ui-text-muted)/0.9)] hover:text-[rgb(var(--ui-text)/0.96)]",
+                                    )}
+                                >
+                  <span
+                      className={cn(
+                          "absolute left-2 top-1/2 h-5 -translate-y-1/2 rounded-full transition-all duration-300 ease-out",
+                          active
+                              ? "w-1.5 bg-[rgb(var(--ui-text)/0.96)]"
+                              : "w-1 bg-[rgb(var(--ui-border-strong)/1)]",
+                      )}
+                  />
+                                    <span>{section.title}</span>
+                                </button>
                             );
                         })}
-                    </ul>
+                    </div>
                 </div>
             </div>
-        </aside>
+        </div>
     );
 }

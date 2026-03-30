@@ -106,6 +106,7 @@ type HighlightCard = {
     icon: LucideIcon;
     title: string;
     text: string;
+    color:string;
 };
 
 const STORAGE_KEY = "zoeskoul.home.onboarding.v2";
@@ -211,18 +212,21 @@ const TAGGED_HIGHLIGHT_CARDS = [
         icon: Globe,
         title: "@:highlights.cards.language.title",
         text: "@:highlights.cards.language.text",
+        color: " text-[rgb(var(--ui-info)))]"
     },
     {
         key: "level",
         icon: GraduationCap,
         title: "@:highlights.cards.level.title",
         text: "@:highlights.cards.level.text",
+        color: " text-[rgb(var(--ui-accent)))]"
     },
     {
         key: "pace",
         icon: TimerReset,
         title: "@:highlights.cards.pace.title",
         text: "@:highlights.cards.pace.text",
+        color: " text-[rgb(var(--ui-warn)))]"
     },
 ] as const satisfies readonly HighlightCard[];
 
@@ -1135,6 +1139,7 @@ function PersonalizedHighlights({ data }: { data: OnboardingData }) {
                 icon: card.icon,
                 title: resolve(card.title, { appName: APP_NAME }, card.title),
                 text: resolve(card.text, { appName: APP_NAME }, card.text),
+                color: card.color
             })),
         [resolve],
     );
@@ -1160,7 +1165,7 @@ function PersonalizedHighlights({ data }: { data: OnboardingData }) {
                     <div key={card.key} className="ui-stat-card ui-surface p-4">
                         <div className="flex items-start gap-3">
                             <div className="rounded-xl border border-emerald-500/15 bg-emerald-500/10 p-2 text-emerald-700 dark:border-emerald-300/15 dark:bg-emerald-300/10 dark:text-emerald-200">
-                                <Icon className="size-4" />
+                                <Icon className={`${card.color} size-4`} />
                             </div>
 
                             <div className="min-w-0">

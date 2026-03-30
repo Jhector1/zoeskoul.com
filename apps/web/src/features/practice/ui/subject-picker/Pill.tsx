@@ -15,14 +15,14 @@ export default function Pill({
           className={cn(
               "ui-pill",
               tone === "good"
-                  ? "ui-pill--good"
+                  ? "ui-pill-good"
                   : tone === "warn"
-                      ? "ui-pill--warn"
+                      ? "ui-pill-warn"
                       : tone === "info"
-                          ? "ui-pill--info"
+                          ? "ui-pill-info"
                           : tone === "danger"
-                              ? "ui-pill--danger"
-                              : "ui-pill--neutral",
+                              ? "ui-pill-danger"
+                              : "ui-pill-neutral",
           )}
       >
       {children}

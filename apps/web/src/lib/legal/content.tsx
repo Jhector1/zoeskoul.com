@@ -881,3 +881,8 @@ export const LEGAL_INDEX = LEGAL_DOCUMENTS.map((doc) => ({
     effectiveDate: doc.effectiveDate,
     lastUpdated: doc.lastUpdated,
 }));
+// src/lib/legal/content.ts
+
+export function isLegalSlug(value: string): value is LegalSlug {
+    return Object.prototype.hasOwnProperty.call(LEGAL_DOCS_BY_SLUG, value);
+}

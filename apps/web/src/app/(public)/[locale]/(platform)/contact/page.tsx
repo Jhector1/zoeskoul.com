@@ -13,15 +13,15 @@ import {
 
 import { Link } from "@/i18n/navigation";
 import { getServerI18n } from "@/i18n/server";
-import {AppLocale} from "@/lib/seo/types";
-import {getRouteSeo, getSharedSeo} from "@/lib/seo/getSeo";
-import {buildMetadata} from "@/lib/seo/buildMetadata"; // adjust path if needed
+import { AppLocale } from "@/lib/seo/types";
+import { getRouteSeo, getSharedSeo } from "@/lib/seo/getSeo";
+import { buildMetadata } from "@/lib/seo/buildMetadata";
 
 const CONTACT_LINKS = {
     generalEmail: "hello@zoeskoul.com",
     supportEmail: "support@zoeskoul.com",
     partnershipEmail: "partners@zoeskoul.com",
-    whatsappNumber: "1234567890", // digits only
+    whatsappNumber: "1234567890",
     demoUrl: "https://calendly.com/sygmalink/30min",
     helpCenterUrl: "/help",
     pricingUrl: "/billing",
@@ -106,12 +106,10 @@ function ContactButton({
     external?: boolean;
     variant?: "primary" | "secondary";
 }) {
-    const base =
-        "inline-flex items-center justify-center gap-2 rounded-2xl px-4 py-3 text-sm font-semibold transition";
-    const styles =
+    const className =
         variant === "primary"
-            ? "bg-black text-white hover:opacity-90 dark:bg-white dark:text-black"
-            : "border border-black/10 bg-white text-black hover:bg-black hover:text-white dark:border-white/10 dark:bg-white/5 dark:text-white dark:hover:bg-white dark:hover:text-black";
+            ? "ui-btn-primary inline-flex gap-2"
+            : "ui-btn-secondary inline-flex gap-2";
 
     if (external || href.startsWith("mailto:")) {
         return (
@@ -119,7 +117,7 @@ function ContactButton({
                 href={href}
                 target={external ? "_blank" : undefined}
                 rel={external ? "noreferrer noopener" : undefined}
-                className={`${base} ${styles}`}
+                className={className}
             >
                 <span>{label}</span>
                 <ArrowRight className="h-4 w-4" />
@@ -128,7 +126,7 @@ function ContactButton({
     }
 
     return (
-        <Link href={href} className={`${base} ${styles}`}>
+        <Link href={href} className={className}>
             <span>{label}</span>
             <ArrowRight className="h-4 w-4" />
         </Link>
@@ -151,16 +149,14 @@ function ContactCard({
     external?: boolean;
 }) {
     return (
-        <div className="rounded-3xl border border-black/10 bg-white/80 p-6 shadow-sm backdrop-blur-sm transition hover:-translate-y-0.5 hover:shadow-lg dark:border-white/10 dark:bg-white/5">
-            <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-black/5 text-black dark:bg-white/10 dark:text-white">
+        <div className="ui-page-surface p-5">
+            <div className="ui-surface-soft inline-flex h-11 w-11 items-center justify-center rounded-lg">
                 {icon}
             </div>
 
-            <h3 className="text-lg font-bold tracking-tight text-black dark:text-white">
-                {title}
-            </h3>
+            <h3 className="mt-4 ui-title-sm">{title}</h3>
 
-            <p className="mt-2 text-sm leading-6 text-black/65 dark:text-white/65">
+            <p className="mt-2 ui-meta leading-6">
                 {description}
             </p>
 
@@ -177,7 +173,7 @@ function ContactCard({
 }
 
 export async function generateMetadata(
-    { params }: { params: Promise<{ locale: string }> }
+    { params }: { params: Promise<{ locale: string }> },
 ): Promise<Metadata> {
     const { locale } = await params;
     const l = locale as AppLocale;
@@ -195,7 +191,7 @@ export async function generateMetadata(
         ogDescription: seo.ogDescription,
         twitterTitle: seo.twitterTitle,
         twitterDescription: seo.twitterDescription,
-        imageAlt: shared.defaultOgAlt
+        imageAlt: shared.defaultOgAlt,
     });
 }
 
@@ -204,65 +200,62 @@ export default async function ContactPage() {
 
     const generalMailto = buildMailto(
         CONTACT_LINKS.generalEmail,
-        tMaybe("mailSubjects.general", FALLBACK.mailGeneral)
+        tMaybe("mailSubjects.general", FALLBACK.mailGeneral),
     );
 
     const supportMailto = buildMailto(
         CONTACT_LINKS.supportEmail,
-        tMaybe("mailSubjects.support", FALLBACK.mailSupport)
+        tMaybe("mailSubjects.support", FALLBACK.mailSupport),
     );
 
     const partnershipMailto = buildMailto(
         CONTACT_LINKS.partnershipEmail,
-        tMaybe("mailSubjects.partnership", FALLBACK.mailPartnership)
+        tMaybe("mailSubjects.partnership", FALLBACK.mailPartnership),
     );
 
     const whatsappHref = `https://wa.me/${CONTACT_LINKS.whatsappNumber}`;
 
-    // const whatsappHref = `https://wa.me/${CONTACT_LINKS.whatsappNumber}`;
-
     const availabilityItems = rawMaybe<readonly string[]>(
         "availability.items",
-        FALLBACK.availabilityItems
+        FALLBACK.availabilityItems,
     );
-
 
     const cards = [
         {
-            icon: <Mail className="h-6 w-6" />,
+            icon: <Mail className="h-5 w-5" />,
             title: tMaybe("cards.general.title", FALLBACK.generalTitle),
             description: tMaybe(
                 "cards.general.description",
-                FALLBACK.generalDescription
+                FALLBACK.generalDescription,
             ),
             href: generalMailto,
             cta: tMaybe("cards.general.cta", FALLBACK.generalCta),
             external: false,
         },
         {
-            icon: <LifeBuoy className="h-6 w-6" />,
+            icon: <LifeBuoy className="h-5 w-5" />,
             title: tMaybe("cards.support.title", FALLBACK.supportTitle),
             description: tMaybe(
                 "cards.support.description",
-                FALLBACK.supportDescription
+                FALLBACK.supportDescription,
             ),
             href: supportMailto,
             cta: tMaybe("cards.support.cta", FALLBACK.supportCta),
             external: false,
         },
         {
-            icon: <MessageCircle className="h-6 w-6" />,
+            icon: <MessageCircle className="h-5 w-5" />,
             title: tMaybe("cards.whatsapp.title", FALLBACK.whatsappTitle),
             description: tMaybe(
                 "cards.whatsapp.description",
-                FALLBACK.whatsappDescription
+                FALLBACK.whatsappDescription,
             ),
             href: whatsappHref,
             cta: tMaybe("cards.whatsapp.cta", FALLBACK.whatsappCta),
             external: true,
         },
         {
-            icon: <CalendarDays className="h-6 w-6" />,
+            icon: <CalendarDays className="h-5 w-5" />,
             title: tMaybe("cards.demo.title", FALLBACK.demoTitle),
             description: tMaybe("cards.demo.description", FALLBACK.demoDescription),
             href: CONTACT_LINKS.demoUrl,
@@ -270,18 +263,18 @@ export default async function ContactPage() {
             external: true,
         },
         {
-            icon: <Briefcase className="h-6 w-6" />,
+            icon: <Briefcase className="h-5 w-5" />,
             title: tMaybe("cards.partnerships.title", FALLBACK.partnershipsTitle),
             description: tMaybe(
                 "cards.partnerships.description",
-                FALLBACK.partnershipsDescription
+                FALLBACK.partnershipsDescription,
             ),
             href: partnershipMailto,
             cta: tMaybe("cards.partnerships.cta", FALLBACK.partnershipsCta),
             external: false,
         },
         {
-            icon: <BookOpen className="h-6 w-6" />,
+            icon: <BookOpen className="h-5 w-5" />,
             title: tMaybe("cards.help.title", FALLBACK.helpTitle),
             description: tMaybe("cards.help.description", FALLBACK.helpDescription),
             href: CONTACT_LINKS.helpCenterUrl,
@@ -291,19 +284,27 @@ export default async function ContactPage() {
     ];
 
     return (
-        <main className="min-h-screen bg-[radial-gradient(circle_at_top,rgba(99,102,241,0.08),transparent_35%),linear-gradient(to_bottom,#ffffff,#f8fafc)] text-black dark:bg-[radial-gradient(circle_at_top,rgba(99,102,241,0.12),transparent_30%),linear-gradient(to_bottom,#0b1020,#111827)] dark:text-white">
-            <section className="mx-auto max-w-7xl px-6 py-14 md:px-10 md:py-20">
+        <main
+            className="min-h-screen"
+            style={{
+                backgroundColor: "rgb(var(--ui-bg) / 1)",
+                color: "rgb(var(--ui-text) / 1)",
+            }}
+        >
+            <section className="mx-auto max-w-7xl px-4 py-12 md:px-6 md:py-16">
                 <div className="mx-auto max-w-3xl text-center">
-                    <div className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white/70 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-black/70 shadow-sm dark:border-white/10 dark:bg-white/10 dark:text-white/70">
-                        <Sparkles className="h-4 w-4" />
-                        <span>{tMaybe("eyebrow", FALLBACK.eyebrow)}</span>
+                    <div className="inline-flex items-center gap-2">
+            <span className="ui-pill-neutral inline-flex items-center gap-2">
+              <Sparkles className="h-4 w-4" />
+              <span>{tMaybe("eyebrow", FALLBACK.eyebrow)}</span>
+            </span>
                     </div>
 
-                    <h1 className="mt-6 text-4xl font-black tracking-tight text-black md:text-6xl dark:text-white">
+                    <h1 className="mt-5 text-4xl font-semibold tracking-tight md:text-5xl">
                         {tMaybe("hero.title", FALLBACK.heroTitle)}
                     </h1>
 
-                    <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-black/65 dark:text-white/65 md:text-lg">
+                    <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-[rgb(var(--ui-text-muted)/0.88)]">
                         {tMaybe("hero.description", FALLBACK.heroDescription)}
                     </p>
 
@@ -327,7 +328,7 @@ export default async function ContactPage() {
                     </div>
                 </div>
 
-                <div className="mt-14 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+                <div className="mt-12 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
                     {cards.map((card) => (
                         <ContactCard
                             key={card.title}
@@ -341,16 +342,16 @@ export default async function ContactPage() {
                     ))}
                 </div>
 
-                <div className="mt-16 grid gap-6 lg:grid-cols-[1.3fr_0.7fr]">
-                    <div className="rounded-3xl border border-black/10 bg-white/80 p-5 shadow-sm dark:border-white/10 dark:bg-white/5">
-                        <h2 className="text-2xl font-bold tracking-tight text-black dark:text-white">
+                <div className="mt-12 grid gap-4 lg:grid-cols-[1.3fr_0.7fr]">
+                    <div className="ui-page-surface p-5">
+                        <h2 className="text-2xl font-semibold tracking-tight">
                             {tMaybe("quickHelp.title", FALLBACK.quickHelpTitle)}
                         </h2>
 
-                        <p className="mt-3 text-sm leading-7 text-black/65 dark:text-white/65">
+                        <p className="mt-3 text-sm leading-7 text-[rgb(var(--ui-text-muted)/0.88)]">
                             {tMaybe(
                                 "quickHelp.description",
-                                FALLBACK.quickHelpDescription
+                                FALLBACK.quickHelpDescription,
                             )}
                         </p>
 
@@ -359,7 +360,7 @@ export default async function ContactPage() {
                                 href={CONTACT_LINKS.pricingUrl}
                                 label={tMaybe(
                                     "quickHelp.ctaPricing",
-                                    FALLBACK.quickHelpPricing
+                                    FALLBACK.quickHelpPricing,
                                 )}
                                 variant="secondary"
                             />
@@ -372,22 +373,22 @@ export default async function ContactPage() {
                                 href={partnershipMailto}
                                 label={tMaybe(
                                     "quickHelp.ctaPartnership",
-                                    FALLBACK.quickHelpPartnership
+                                    FALLBACK.quickHelpPartnership,
                                 )}
                                 variant="secondary"
                             />
                         </div>
                     </div>
 
-                    <div className="rounded-3xl p-5  border border-black/10 bg-white/80 shadow-sm dark:border-white/10 dark:bg-white/5">
-                        <h2 className="text-2xl font-bold tracking-tight text-black dark:text-white">
+                    <div className="ui-page-surface p-5">
+                        <h2 className="text-2xl font-semibold tracking-tight">
                             {tMaybe("availability.title", FALLBACK.availabilityTitle)}
                         </h2>
 
-                        <p className="mt-3 text-sm leading-7 text-black/65 dark:text-white/65">
+                        <p className="mt-3 text-sm leading-7 text-[rgb(var(--ui-text-muted)/0.88)]">
                             {tMaybe(
                                 "availability.description",
-                                FALLBACK.availabilityDescription
+                                FALLBACK.availabilityDescription,
                             )}
                         </p>
 
@@ -395,7 +396,7 @@ export default async function ContactPage() {
                             {availabilityItems.map((item) => (
                                 <div
                                     key={item}
-                                    className="rounded-2xl bg-black/5 px-4 py-3 text-black/80 dark:bg-white/10 dark:text-white/85"
+                                    className="ui-surface-soft px-4 py-3 text-[rgb(var(--ui-text)/0.9)]"
                                 >
                                     {item}
                                 </div>

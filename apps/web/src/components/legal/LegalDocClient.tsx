@@ -2,11 +2,10 @@
 
 import { useMemo } from "react";
 import { Link } from "@/i18n/navigation";
-// import { resolveDeepTagged } from "@/lib/i18n/resolveDeepTagged";
 import { useTaggedT } from "@/i18n/tagged";
 import type { LegalDocumentData } from "@/lib/legal/content";
 import LegalSectionNav from "@/components/legal/LegalSectionNav";
-import {resolveDeepTagged} from "@/i18n/resolveDeepTagged";
+import { resolveDeepTagged } from "@/i18n/resolveDeepTagged";
 
 type ResolvedSection = {
     id: string;
@@ -37,7 +36,7 @@ export default function LegalDocClient({
         return resolveDeepTagged(
             doc,
             (key, vals) => t(key, vals),
-            values
+            values,
         ) as ResolvedDoc;
     }, [doc, values, t]);
 
@@ -47,52 +46,76 @@ export default function LegalDocClient({
     }));
 
     return (
-        <article className="space-y-8">
-            <div className="grid grid-cols-1 gap-8 lg:grid-cols-[280px_minmax(0,1fr)] lg:items-start">
-                <LegalSectionNav docTitle={resolved.title} sections={sectionItems} />
+        <article className="space-y-6">
+            {/* Mobile / tablet: static in flow */}
+            <div className="lg:hidden">
+                <LegalSectionNav
+                    docTitle={resolved.title}
+                    sections={sectionItems}
+                />
+            </div>
 
-                <div className="min-w-0 rounded-3xl border border-neutral-200 bg-white shadow-sm dark:border-white/10 dark:bg-neutral-900">
-                    <div className="border-b border-neutral-200 px-5 py-5 dark:border-white/10 sm:px-8">
-                        <nav aria-label="Breadcrumb" className="text-sm text-neutral-500 dark:text-white/45">
-                            <Link href="/legal" className="hover:text-neutral-800 dark:hover:text-white">
+            <div className="grid grid-cols-1 gap-8 lg:grid-cols-[280px_minmax(0,1fr)] lg:items-start">
+                {/* Desktop: true sticky sidebar */}
+                <aside className="hidden lg:block lg:self-start">
+                    <div className="sticky top-24">
+                        <LegalSectionNav
+                            docTitle={resolved.title}
+                            sections={sectionItems}
+                            desktop
+                        />
+                    </div>
+                </aside>
+
+                <div className="min-w-0 ui-page-surface overflow-hidden">
+                    <div className="border-b border-[rgb(var(--ui-border)/0.9)] bg-[rgb(var(--ui-surface-2)/0.72)] px-5 py-5 sm:px-8">
+                        <nav aria-label="Breadcrumb" className="ui-meta">
+                            <Link
+                                href="/legal"
+                                className="hover:text-[rgb(var(--ui-text)/0.96)]"
+                            >
                                 Legal
                             </Link>
                             <span className="mx-2">/</span>
-                            <span className="text-neutral-900 dark:text-white">{resolved.title}</span>
+                            <span className="text-[rgb(var(--ui-text)/0.96)]">
+                {resolved.title}
+              </span>
                         </nav>
 
                         <div className="mt-4 flex flex-wrap items-center gap-2">
-              <span className="rounded-full border border-neutral-200 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-neutral-600 dark:border-white/10 dark:text-white/55">
-                {resolved.title}
-              </span>
+                            <span className="ui-pill-neutral">{resolved.title}</span>
                         </div>
 
                         <div className="mt-4">
-                            <h1 className="text-3xl font-black tracking-tight sm:text-4xl">
+                            <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
                                 {resolved.title}
                             </h1>
-                            <p className="mt-3 max-w-3xl text-sm leading-6 text-neutral-600 dark:text-white/65">
+                            <p className="mt-3 max-w-3xl text-sm leading-6 text-[rgb(var(--ui-text-muted)/0.88)]">
                                 {resolved.description}
                             </p>
                         </div>
 
-                        <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-xs text-neutral-500 dark:text-white/45">
+                        <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2 ui-meta">
                             <span>Effective Date: {resolved.effectiveDate}</span>
                             <span>Last Updated: {resolved.lastUpdated}</span>
                         </div>
                     </div>
 
-                    <div className="space-y-8 px-5 py-6 sm:px-8 sm:py-8">
+                    <div className="space-y-6 px-5 py-6 sm:px-8 sm:py-8">
                         {resolved.sections.map((section) => (
                             <section
                                 key={section.id}
                                 id={section.id}
-                                className="scroll-mt-32 rounded-2xl border border-neutral-200 bg-neutral-50 p-5 dark:border-white/10 dark:bg-white/[0.03]"
+                                className="ui-surface-soft scroll-mt-28 p-5"
                             >
-                                <h2 className="text-xl font-black tracking-tight">{section.title}</h2>
+                                <h2 className="text-xl font-semibold tracking-tight">
+                                    {section.title}
+                                </h2>
 
                                 <div className="prose prose-neutral mt-4 max-w-none text-sm leading-7 dark:prose-invert prose-p:my-3 prose-ul:my-3 prose-li:my-1">
-                                    {section.paragraphs?.map((p, i) => <p key={i}>{p}</p>)}
+                                    {section.paragraphs?.map((p, i) => (
+                                        <p key={i}>{p}</p>
+                                    ))}
 
                                     {section.list?.length ? (
                                         <ul>

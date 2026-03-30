@@ -21,6 +21,7 @@ import {
 
 import { useBillingStatus } from "@/components/billing/hooks/useBillingStatus";
 import { useBillingActions } from "@/components/billing/hooks/useBillingActions";
+import {ChartColumn, ClipboardCheck, InfinityIcon, Languages} from "lucide-react";
 
 type PaywallInfo = {
     reason?: string | null;
@@ -266,18 +267,27 @@ export default function BillingPageClient({
                         </BillingSectionHeader>
 
                         <div className="grid gap-3 p-5 text-sm">
-                            <InfoRow title={t("sidebar.items.assignments.title")} desc={t("sidebar.items.assignments.desc")} />
+                            <InfoRow title={t("sidebar.items.assignments.title")}
+                                     desc={t("sidebar.items.assignments.desc")}
+                                     icon={<ClipboardCheck className="h-5 w-5 text-[rgb(var(--ui-warn)))]" />}
+
+                            />
                             <InfoRow
                                 title={t("sidebar.items.unlimitedPractice.title")}
                                 desc={t("sidebar.items.unlimitedPractice.desc")}
+                                icon={<InfinityIcon className="h-5 w-5 text-[rgb(var(--ui-danger)))]" />}
                             />
                             <InfoRow
                                 title={t("sidebar.items.progressHistory.title")}
                                 desc={t("sidebar.items.progressHistory.desc")}
+                                icon={<ChartColumn className="h-5 w-5 text-[rgb(var(--ui-info)))]" />}
+
                             />
                             <InfoRow
                                 title={t("sidebar.items.multilanguage.title")}
                                 desc={t("sidebar.items.multilanguage.desc")}
+                                icon={<Languages className="h-5 w-5 text-[rgb(var(--ui-accent)))]" />}
+
                             />
 
                             <BillingSoftPanel className="p-4 text-xs text-neutral-600 dark:text-white/70">

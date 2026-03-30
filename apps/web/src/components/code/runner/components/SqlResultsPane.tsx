@@ -57,16 +57,37 @@ type DiagramTabKey = "tables" | "erd" | "chen";
 type DiagramMode = DiagramTabKey;
 type DiagramPositions = Record<string, { x: number; y: number }>;
 
+type DiagramBounds = {
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+};
+
 type DiagramScene = {
     width: number;
     height: number;
     boxes: Box[];
+    fitBounds: DiagramBounds;
+};
+
+type DiagramConfig = {
+    minWidth: number;
+    minHeight: number;
+    leftPad: number;
+    topPad: number;
+    rightPad: number;
+    bottomPad: number;
+    extraRight: number;
+    extraBottom: number;
+    minX: number;
+    minY: number;
+    maxX: number;
+    maxY: number;
 };
 
 const SURFACE =
     "rounded-xl border border-neutral-200/70 bg-white/90 dark:border-white/10 dark:bg-black/20";
-const SURFACE_SOFT =
-    "rounded-xl border border-neutral-200/70 bg-white/85 dark:border-white/10 dark:bg-black/20";
 
 const FLOAT_BAR =
     "rounded-md border border-neutral-200/70 bg-white/92 shadow-sm backdrop-blur dark:border-white/10 dark:bg-black/55";
@@ -77,8 +98,6 @@ const UI_BTN_GHOST =
     "text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900 dark:text-white/65 dark:hover:bg-white/[0.06] dark:hover:text-white/90";
 const UI_BTN_ACTIVE =
     "border border-neutral-300 bg-neutral-100 text-neutral-900 dark:border-white/15 dark:bg-white/[0.08] dark:text-white/90";
-const UI_BTN_BORDER =
-    "border border-neutral-200 bg-white text-neutral-700 hover:bg-neutral-50 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/75 dark:hover:bg-white/[0.08]";
 
 function diagramPosKey(tab: DiagramTabKey, id: string) {
     return `${tab}:${id}`;
@@ -108,6 +127,36 @@ function buildChenLayout(tables: TableModel[]) {
         boxes.length > 0 ? Math.max(...boxes.map((b) => b.x + b.w + 220)) : 900;
     const height =
         boxes.length > 0 ? Math.max(...boxes.map((b) => b.y + b.h + 220)) : 620;
+
+    return { boxes, width, height };
+}
+
+function buildTableLayout(tables: TableModel[]) {
+    const cardW = 290;
+    const rowH = 26;
+    const headerH = 40;
+    const gapX = 40;
+    const gapY = 48;
+    const cols = Math.max(1, Math.ceil(Math.sqrt(Math.max(1, tables.length))));
+
+    const boxes: Box[] = tables.map((table, i) => {
+        const col = i % cols;
+        const row = Math.floor(i / cols);
+        const h = headerH + Math.max(1, table.columns.length) * rowH + 16;
+
+        return {
+            id: table.id,
+            x: 24 + col * (cardW + gapX),
+            y: 24 + row * (248 + gapY),
+            w: cardW,
+            h,
+        };
+    });
+
+    const width =
+        boxes.length > 0 ? Math.max(...boxes.map((b) => b.x + b.w)) + 24 : 640;
+    const height =
+        boxes.length > 0 ? Math.max(...boxes.map((b) => b.y + b.h)) + 24 : 420;
 
     return { boxes, width, height };
 }
@@ -147,19 +196,17 @@ function syncTabDefaults(
     return next;
 }
 
-function getDiagramConfig(mode: DiagramMode) {
+function getDiagramConfig(mode: DiagramMode): DiagramConfig {
     if (mode === "chen") {
         return {
             minWidth: 1500,
             minHeight: 980,
-            leftPad: 900,
-            topPad: 820,
-            rightPad: 900,
-            bottomPad: 820,
+            leftPad: 280,
+            topPad: 220,
+            rightPad: 420,
+            bottomPad: 320,
             extraRight: 170,
             extraBottom: 110,
-
-            // much larger travel range
             minX: -2600,
             minY: -2200,
             maxX: 4200,
@@ -171,14 +218,12 @@ function getDiagramConfig(mode: DiagramMode) {
         return {
             minWidth: 1320,
             minHeight: 860,
-            leftPad: 680,
-            topPad: 620,
-            rightPad: 680,
-            bottomPad: 620,
+            leftPad: 220,
+            topPad: 180,
+            rightPad: 320,
+            bottomPad: 220,
             extraRight: 70,
             extraBottom: 40,
-
-            // much larger travel range
             minX: -2200,
             minY: -1800,
             maxX: 3800,
@@ -189,26 +234,114 @@ function getDiagramConfig(mode: DiagramMode) {
     return {
         minWidth: 1100,
         minHeight: 760,
-        leftPad: 560,
-        topPad: 520,
-        rightPad: 560,
-        bottomPad: 520,
+        leftPad: 180,
+        topPad: 160,
+        rightPad: 260,
+        bottomPad: 200,
         extraRight: 0,
         extraBottom: 0,
-
-        // this is the one affecting Tables the most
         minX: -2000,
         minY: -1600,
         maxX: 3200,
         maxY: 2600,
     };
-}function clampDiagramNodePosition(mode: DiagramMode, x: number, y: number) {
+}
+
+function clampDiagramNodePosition(mode: DiagramMode, x: number, y: number) {
     const cfg = getDiagramConfig(mode);
     return {
         x: Math.min(cfg.maxX, Math.max(cfg.minX, x)),
         y: Math.min(cfg.maxY, Math.max(cfg.minY, y)),
     };
 }
+
+function clampDiagramBoxes(mode: DiagramMode, boxes: Box[]) {
+    return boxes.map((box) => {
+        const next = clampDiagramNodePosition(mode, box.x, box.y);
+        return { ...box, x: next.x, y: next.y };
+    });
+}
+
+function buildDiagramScene(rawBoxes: Box[], mode: DiagramMode): DiagramScene {
+    const cfg = getDiagramConfig(mode);
+
+    if (!rawBoxes.length) {
+        return {
+            width: cfg.minWidth,
+            height: cfg.minHeight,
+            boxes: [],
+            fitBounds: {
+                x: 0,
+                y: 0,
+                width: cfg.minWidth,
+                height: cfg.minHeight,
+            },
+        };
+    }
+
+    const maxBoxW = Math.max(...rawBoxes.map((b) => b.w));
+    const maxBoxH = Math.max(...rawBoxes.map((b) => b.h));
+
+    const offsetX = cfg.leftPad - cfg.minX;
+    const offsetY = cfg.topPad - cfg.minY;
+
+    const boxes = rawBoxes.map((box) => ({
+        ...box,
+        x: box.x + offsetX,
+        y: box.y + offsetY,
+    }));
+
+    const worldWidth =
+        cfg.maxX - cfg.minX + maxBoxW + cfg.extraRight;
+    const worldHeight =
+        cfg.maxY - cfg.minY + maxBoxH + cfg.extraBottom;
+
+    const width = Math.max(
+        cfg.minWidth,
+        cfg.leftPad + worldWidth + cfg.rightPad,
+    );
+    const height = Math.max(
+        cfg.minHeight,
+        cfg.topPad + worldHeight + cfg.bottomPad,
+    );
+
+    const minRenderedX = Math.min(...boxes.map((b) => b.x));
+    const minRenderedY = Math.min(...boxes.map((b) => b.y));
+    const maxRenderedRight = Math.max(
+        ...boxes.map((b) => b.x + b.w + cfg.extraRight),
+    );
+    const maxRenderedBottom = Math.max(
+        ...boxes.map((b) => b.y + b.h + cfg.extraBottom),
+    );
+
+    const FIT_PAD = 96;
+
+    const fitX = Math.max(0, minRenderedX - FIT_PAD);
+    const fitY = Math.max(0, minRenderedY - FIT_PAD);
+    const fitRight = Math.min(width, maxRenderedRight + FIT_PAD);
+    const fitBottom = Math.min(height, maxRenderedBottom + FIT_PAD);
+
+    return {
+        width,
+        height,
+        boxes,
+        fitBounds: {
+            x: fitX,
+            y: fitY,
+            width: Math.max(1, fitRight - fitX),
+            height: Math.max(1, fitBottom - fitY),
+        },
+    };
+}
+
+function buildDiagramFitKey(mode: DiagramMode, schema: SchemaModel) {
+    const tablesKey = schema.tables
+        .map((t) => `${t.id}:${t.columns.length}`)
+        .join("|");
+    const relsKey = schema.relations.map((r) => r.id).join("|");
+    return `${mode}::${tablesKey}::${relsKey}`;
+}
+
 type DragTarget = (HTMLElement | SVGElement) & {
     setPointerCapture?: (pointerId: number) => void;
     releasePointerCapture?: (pointerId: number) => void;
@@ -249,6 +382,7 @@ function beginDiagramNodeDrag(args: {
         raf = null;
         if (!pending) return;
         onMove(tab, id, pending.x, pending.y);
+        pending = null;
     };
 
     const move = (ev: PointerEvent) => {
@@ -275,6 +409,11 @@ function beginDiagramNodeDrag(args: {
             raf = null;
         }
 
+        if (pending) {
+            onMove(tab, id, pending.x, pending.y);
+            pending = null;
+        }
+
         if (target.hasPointerCapture?.(pointerId)) {
             target.releasePointerCapture?.(pointerId);
         }
@@ -286,57 +425,7 @@ function beginDiagramNodeDrag(args: {
     window.addEventListener("pointerup", cleanup, { passive: true });
     window.addEventListener("pointercancel", cleanup, { passive: true });
 }
-function clampDiagramBoxes(mode: DiagramMode, boxes: Box[]) {
-    return boxes.map((box) => {
-        const next = clampDiagramNodePosition(mode, box.x, box.y);
-        return { ...box, x: next.x, y: next.y };
-    });
-}
 
-function buildDiagramScene(rawBoxes: Box[], mode: DiagramMode): DiagramScene {
-    const cfg = getDiagramConfig(mode);
-
-    if (!rawBoxes.length) {
-        return {
-            width: cfg.minWidth,
-            height: cfg.minHeight,
-            boxes: [],
-        };
-    }
-
-    const maxX = Math.max(...rawBoxes.map((b) => b.x + b.w + cfg.extraRight));
-    const maxY = Math.max(...rawBoxes.map((b) => b.y + b.h + cfg.extraBottom));
-
-    return {
-        width: Math.max(cfg.minWidth, maxX + cfg.leftPad + cfg.rightPad),
-        height: Math.max(cfg.minHeight, maxY + cfg.topPad + cfg.bottomPad),
-        boxes: rawBoxes.map((box) => ({
-            ...box,
-            x: box.x + cfg.leftPad,
-            y: box.y + cfg.topPad,
-        })),
-    };
-}
-
-function buildDiagramFitKey(mode: DiagramMode, schema: SchemaModel) {
-    const tablesKey = schema.tables.map((t) => `${t.id}:${t.columns.length}`).join("|");
-    const relsKey = schema.relations.map((r) => r.id).join("|");
-    return `${mode}::${tablesKey}::${relsKey}`;
-}
-
-type PanZoomCanvasProps = {
-    width: number;
-    height: number;
-    fitKey?: string | number;
-    children: (ctx: { scale: number }) => React.ReactNode;
-};
-
-const MIN_SCALE = 0.35;
-const MAX_SCALE = 2.5;
-
-function clampScale(n: number) {
-    return Math.max(MIN_SCALE, Math.min(MAX_SCALE, n));
-}
 function shouldIgnoreBoardPan(target: EventTarget | null) {
     const el = target as Element | null;
     if (!el || typeof el.closest !== "function") return false;
@@ -346,8 +435,24 @@ function shouldIgnoreBoardPan(target: EventTarget | null) {
         el.closest("[data-diagram-no-pan='true']"),
     );
 }
+
+type PanZoomCanvasProps = {
+    width: number;
+    height: number;
+    fitKey?: string | number;
+    fitBounds?: DiagramBounds;
+    children: (ctx: { scale: number }) => React.ReactNode;
+};
+
+const MIN_SCALE = 0.35;
+const MAX_SCALE = 2.5;
+
+function clampScale(n: number) {
+    return Math.max(MIN_SCALE, Math.min(MAX_SCALE, n));
+}
+
 function PanZoomCanvas(props: PanZoomCanvasProps) {
-    const { width, height, fitKey, children } = props;
+    const { width, height, fitKey, fitBounds, children } = props;
 
     const viewportRef = React.useRef<HTMLDivElement | null>(null);
 
@@ -365,6 +470,17 @@ function PanZoomCanvas(props: PanZoomCanvasProps) {
         y: 0,
     });
     const [isPanning, setIsPanning] = React.useState(false);
+
+    const activeFitBounds = React.useMemo(
+        () =>
+            fitBounds ?? {
+                x: 0,
+                y: 0,
+                width,
+                height,
+            },
+        [fitBounds, width, height],
+    );
 
     const viewRef = React.useRef(view);
     React.useEffect(() => {
@@ -435,10 +551,13 @@ function PanZoomCanvas(props: PanZoomCanvasProps) {
         [viewportSize.vw, viewportSize.vh, resolveStageMetrics],
     );
 
-    const applyView = React.useCallback((next: { scale: number; x: number; y: number }) => {
-        viewRef.current = next;
-        setView(next);
-    }, []);
+    const applyView = React.useCallback(
+        (next: { scale: number; x: number; y: number }) => {
+            viewRef.current = next;
+            setView(next);
+        },
+        [],
+    );
 
     const clampOffset = React.useCallback(
         (raw: { x: number; y: number }, nextScale: number) => {
@@ -475,8 +594,13 @@ function PanZoomCanvas(props: PanZoomCanvasProps) {
         const { vw, vh } = getViewportSize();
         if (!vw || !vh) return 1;
 
-        return clampScale(Math.min((vw - 48) / width, (vh - 48) / height));
-    }, [getViewportSize, width, height]);
+        return clampScale(
+            Math.min(
+                (vw - 48) / activeFitBounds.width,
+                (vh - 48) / activeFitBounds.height,
+            ),
+        );
+    }, [getViewportSize, activeFitBounds.width, activeFitBounds.height]);
 
     const fitToView = React.useCallback(() => {
         const { vw, vh } = getViewportSize();
@@ -490,8 +614,12 @@ function PanZoomCanvas(props: PanZoomCanvasProps) {
         const metrics = resolveStageMetrics(vw, vh);
 
         const raw = {
-            x: (vw - width * nextScale) / 2 - metrics.boardLeft * nextScale,
-            y: (vh - height * nextScale) / 2 - metrics.boardTop * nextScale,
+            x:
+                (vw - activeFitBounds.width * nextScale) / 2 -
+                (metrics.boardLeft + activeFitBounds.x) * nextScale,
+            y:
+                (vh - activeFitBounds.height * nextScale) / 2 -
+                (metrics.boardTop + activeFitBounds.y) * nextScale,
         };
 
         const clamped = clampOffset(raw, nextScale);
@@ -505,8 +633,10 @@ function PanZoomCanvas(props: PanZoomCanvasProps) {
         getViewportSize,
         getFitScale,
         resolveStageMetrics,
-        width,
-        height,
+        activeFitBounds.x,
+        activeFitBounds.y,
+        activeFitBounds.width,
+        activeFitBounds.height,
         clampOffset,
         applyView,
     ]);
@@ -763,7 +893,12 @@ function PanZoomCanvas(props: PanZoomCanvasProps) {
                 </div>
             </div>
 
-            <div className={cn("absolute right-3 top-3 z-30 flex items-center gap-1 px-1.5 py-1.5", FLOAT_BAR)}>
+            <div
+                className={cn(
+                    "absolute right-3 top-3 z-30 flex items-center gap-1 px-1.5 py-1.5",
+                    FLOAT_BAR,
+                )}
+            >
                 <button
                     type="button"
                     onClick={() => zoomCentered(view.scale * 0.9)}
@@ -793,14 +928,22 @@ function PanZoomCanvas(props: PanZoomCanvasProps) {
                 </button>
             </div>
 
-            <div className={cn("absolute bottom-3 left-3 z-30 px-2.5 py-1.5 text-[10px] font-medium text-neutral-500", FLOAT_BAR, "dark:text-white/45")}>
+            <div
+                className={cn(
+                    "absolute bottom-3 left-3 z-30 px-2.5 py-1.5 text-[10px] font-medium text-neutral-500 dark:text-white/45",
+                    FLOAT_BAR,
+                )}
+            >
                 Drag board • wheel to zoom • drag nodes
             </div>
         </div>
     );
 }
 
-function Badge(props: { children: React.ReactNode; tone?: "neutral" | "good" | "warn" | "bad" }) {
+function Badge(props: {
+    children: React.ReactNode;
+    tone?: "neutral" | "good" | "warn" | "bad";
+}) {
     const { children, tone = "neutral" } = props;
 
     return (
@@ -817,8 +960,8 @@ function Badge(props: { children: React.ReactNode; tone?: "neutral" | "good" | "
                 "border-rose-300/20 bg-rose-300/10 text-rose-800 dark:text-rose-200",
             )}
         >
-            {children}
-        </span>
+      {children}
+    </span>
     );
 }
 
@@ -833,10 +976,7 @@ function TabButton(props: {
         <button
             type="button"
             onClick={onClick}
-            className={cn(
-                UI_BTN,
-                active ? UI_BTN_ACTIVE : UI_BTN_GHOST,
-            )}
+            className={cn(UI_BTN, active ? UI_BTN_ACTIVE : UI_BTN_GHOST)}
         >
             {children}
         </button>
@@ -871,8 +1011,8 @@ function CellValue({ value }: { value: unknown }) {
     if (value == null) {
         return (
             <span className="inline-flex rounded-md border border-neutral-200 bg-neutral-50 px-1.5 py-0.5 text-[10px] font-medium text-neutral-500 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/40">
-                NULL
-            </span>
+        NULL
+      </span>
         );
     }
 
@@ -1007,7 +1147,9 @@ function parseSchemaSql(schemaSql?: string | null): SchemaModel {
                 continue;
             }
 
-            const columnMatch = part.match(/^("[^"]+"|`[^`]+`|\[[^\]]+\]|\w+)\s+([\s\S]+)$/);
+            const columnMatch = part.match(
+                /^("[^"]+"|`[^`]+`|\[[^\]]+\]|\w+)\s+([\s\S]+)$/,
+            );
             if (!columnMatch) continue;
 
             const colName = normalizeIdent(columnMatch[1]);
@@ -1017,7 +1159,9 @@ function parseSchemaSql(schemaSql?: string | null): SchemaModel {
             const nullable = !/\bnot\s+null\b/i.test(rest);
             const isUnique = /\bunique\b/i.test(rest);
 
-            const refMatch = rest.match(/\breferences\s+([^\s(]+)\s*\(([^)]+)\)/i);
+            const refMatch = rest.match(
+                /\breferences\s+([^\s(]+)\s*\(([^)]+)\)/i,
+            );
             const references = refMatch
                 ? {
                     table: normalizeIdent(refMatch[1]),
@@ -1084,34 +1228,6 @@ function parseSchemaSql(schemaSql?: string | null): SchemaModel {
     };
 }
 
-function buildTableLayout(tables: TableModel[]) {
-    const cardW = 290;
-    const rowH = 26;
-    const headerH = 40;
-    const gapX = 40;
-    const gapY = 48;
-    const cols = Math.max(1, Math.ceil(Math.sqrt(Math.max(1, tables.length))));
-
-    const boxes: Box[] = tables.map((table, i) => {
-        const col = i % cols;
-        const row = Math.floor(i / cols);
-        const h = headerH + Math.max(1, table.columns.length) * rowH + 16;
-
-        return {
-            id: table.id,
-            x: 24 + col * (cardW + gapX),
-            y: 24 + row * (248 + gapY),
-            w: cardW,
-            h,
-        };
-    });
-
-    const width = boxes.length > 0 ? Math.max(...boxes.map((b) => b.x + b.w)) + 24 : 640;
-    const height = boxes.length > 0 ? Math.max(...boxes.map((b) => b.y + b.h)) + 24 : 420;
-
-    return { boxes, width, height };
-}
-
 function sideOf(box: Box, side: "left" | "right" | "top" | "bottom") {
     if (side === "left") return { x: box.x, y: box.y + box.h / 2, dx: -1, dy: 0 };
     if (side === "right") return { x: box.x + box.w, y: box.y + box.h / 2, dx: 1, dy: 0 };
@@ -1164,7 +1280,13 @@ function EndpointMark(props: {
     const px = -dy;
     const py = dx;
 
-    const line = (x1: number, y1: number, x2: number, y2: number, key: string) => (
+    const line = (
+        x1: number,
+        y1: number,
+        x2: number,
+        y2: number,
+        key: string,
+    ) => (
         <line
             key={key}
             x1={x1}
@@ -1289,7 +1411,10 @@ function ResultsTab(props: { result: Extract<SqlRunResult, { ok: true }> }) {
                     </div>
                     <div className="space-y-1">
                         {result.notices.map((n, i) => (
-                            <div key={i} className="text-[12px] font-medium text-amber-800 dark:text-amber-200">
+                            <div
+                                key={i}
+                                className="text-[12px] font-medium text-amber-800 dark:text-amber-200"
+                            >
                                 {n}
                             </div>
                         ))}
@@ -1312,8 +1437,8 @@ function ResultsTab(props: { result: Extract<SqlRunResult, { ok: true }> }) {
                                             <span className="truncate">{col.name}</span>
                                             {col.type ? (
                                                 <span className="rounded-md border border-neutral-200 bg-white px-1.5 py-0.5 text-[10px] font-medium normal-case tracking-normal text-neutral-500 dark:border-white/10 dark:bg-white/[0.06] dark:text-white/40">
-                                                        {col.type}
-                                                    </span>
+                            {col.type}
+                          </span>
                                             ) : null}
                                         </div>
                                     </th>
@@ -1380,14 +1505,24 @@ function TablesTab(props: {
 }) {
     const { schema, positions, onMove } = props;
 
-    const initialLayout = React.useMemo(() => buildTableLayout(schema.tables), [schema.tables]);
+    const initialLayout = React.useMemo(
+        () => buildTableLayout(schema.tables),
+        [schema.tables],
+    );
 
     const rawBoxes = React.useMemo(
-        () => clampDiagramBoxes("tables", applyStoredPositions("tables", initialLayout.boxes, positions)),
+        () =>
+            clampDiagramBoxes(
+                "tables",
+                applyStoredPositions("tables", initialLayout.boxes, positions),
+            ),
         [initialLayout, positions],
     );
 
-    const scene = React.useMemo(() => buildDiagramScene(rawBoxes, "tables"), [rawBoxes]);
+    const scene = React.useMemo(
+        () => buildDiagramScene(rawBoxes, "tables"),
+        [rawBoxes],
+    );
 
     const rawBoxById = React.useMemo(
         () => new Map(rawBoxes.map((box) => [box.id, box])),
@@ -1399,7 +1534,10 @@ function TablesTab(props: {
         [scene.boxes],
     );
 
-    const fitKey = React.useMemo(() => buildDiagramFitKey("tables", schema), [schema]);
+    const fitKey = React.useMemo(
+        () => buildDiagramFitKey("tables", schema),
+        [schema],
+    );
 
     if (!schema.tables.length) {
         return (
@@ -1413,19 +1551,31 @@ function TablesTab(props: {
     return (
         <div className="flex h-full min-h-0 flex-col gap-3">
             <div className="flex flex-wrap items-center gap-2">
-                <Badge>{schema.tables.length} table{schema.tables.length === 1 ? "" : "s"}</Badge>
-                <Badge>{schema.relations.length} relation{schema.relations.length === 1 ? "" : "s"}</Badge>
+                <Badge>
+                    {schema.tables.length} table{schema.tables.length === 1 ? "" : "s"}
+                </Badge>
+                <Badge>
+                    {schema.relations.length} relation
+                    {schema.relations.length === 1 ? "" : "s"}
+                </Badge>
             </div>
 
             <div className="min-h-0 flex-1">
-                <PanZoomCanvas width={scene.width} height={scene.height} fitKey={fitKey}>
+                <PanZoomCanvas
+                    width={scene.width}
+                    height={scene.height}
+                    fitBounds={scene.fitBounds}
+                    fitKey={fitKey}
+                >
                     {({ scale }) => (
                         <div className="relative h-full w-full overflow-visible">
                             {schema.tables.map((table) => {
                                 const rawBox = rawBoxById.get(table.id)!;
                                 const box = boxById.get(table.id)!;
 
-                                const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+                                const onPointerDown = (
+                                    e: React.PointerEvent<HTMLDivElement>,
+                                ) => {
                                     e.preventDefault();
                                     e.stopPropagation();
 
@@ -1443,6 +1593,7 @@ function TablesTab(props: {
                                         onMove,
                                     });
                                 };
+
                                 return (
                                     <div
                                         key={table.id}
@@ -1457,13 +1608,14 @@ function TablesTab(props: {
                                         <div
                                             data-diagram-node-drag="true"
                                             onPointerDown={onPointerDown}
-                                            className="touch-none cursor-grab border-b border-neutral-200/70 bg-neutral-100/85 px-3 py-2.5 active:cursor-grabbing dark:border-white/10 dark:bg-white/[0.05]"
+                                            className="touch-none select-none cursor-grab border-b border-neutral-200/70 bg-neutral-100/85 px-3 py-2.5 active:cursor-grabbing dark:border-white/10 dark:bg-white/[0.05]"
                                         >
                                             <div className="text-sm font-medium text-neutral-900 dark:text-white/90">
                                                 {table.name}
                                             </div>
                                             <div className="mt-1 text-[11px] font-medium text-neutral-500 dark:text-white/45">
-                                                {table.columns.length} column{table.columns.length === 1 ? "" : "s"}
+                                                {table.columns.length} column
+                                                {table.columns.length === 1 ? "" : "s"}
                                             </div>
                                         </div>
 
@@ -1509,14 +1661,24 @@ function ErdTab(props: {
 }) {
     const { schema, positions, onMove } = props;
 
-    const initialLayout = React.useMemo(() => buildTableLayout(schema.tables), [schema.tables]);
+    const initialLayout = React.useMemo(
+        () => buildTableLayout(schema.tables),
+        [schema.tables],
+    );
 
     const rawBoxes = React.useMemo(
-        () => clampDiagramBoxes("erd", applyStoredPositions("erd", initialLayout.boxes, positions)),
+        () =>
+            clampDiagramBoxes(
+                "erd",
+                applyStoredPositions("erd", initialLayout.boxes, positions),
+            ),
         [initialLayout, positions],
     );
 
-    const scene = React.useMemo(() => buildDiagramScene(rawBoxes, "erd"), [rawBoxes]);
+    const scene = React.useMemo(
+        () => buildDiagramScene(rawBoxes, "erd"),
+        [rawBoxes],
+    );
 
     const rawBoxById = React.useMemo(
         () => new Map(rawBoxes.map((box) => [box.id, box])),
@@ -1528,7 +1690,10 @@ function ErdTab(props: {
         [scene.boxes],
     );
 
-    const fitKey = React.useMemo(() => buildDiagramFitKey("erd", schema), [schema]);
+    const fitKey = React.useMemo(
+        () => buildDiagramFitKey("erd", schema),
+        [schema],
+    );
 
     if (!schema.tables.length) {
         return (
@@ -1542,20 +1707,29 @@ function ErdTab(props: {
     return (
         <div className="flex h-full min-h-0 flex-col gap-3">
             <div className="flex flex-wrap items-center gap-2">
-                <Badge>{schema.tables.length} entity table{schema.tables.length === 1 ? "" : "s"}</Badge>
+                <Badge>
+                    {schema.tables.length} entity table
+                    {schema.tables.length === 1 ? "" : "s"}
+                </Badge>
                 <Badge tone="warn">
-                    {schema.relations.length} crow’s-foot relation{schema.relations.length === 1 ? "" : "s"}
+                    {schema.relations.length} crow’s-foot relation
+                    {schema.relations.length === 1 ? "" : "s"}
                 </Badge>
             </div>
 
             <div className="min-h-0 flex-1">
-                <PanZoomCanvas width={scene.width} height={scene.height} fitKey={fitKey}>
+                <PanZoomCanvas
+                    width={scene.width}
+                    height={scene.height}
+                    fitBounds={scene.fitBounds}
+                    fitKey={fitKey}
+                >
                     {({ scale }) => (
                         <div className="relative h-full w-full overflow-visible">
                             <svg
                                 width={scene.width}
                                 height={scene.height}
-                                className="absolute inset-0 z-0"
+                                className="absolute inset-0 z-0 overflow-visible"
                                 viewBox={`0 0 ${scene.width} ${scene.height}`}
                             >
                                 {schema.relations.map((rel) => {
@@ -1625,7 +1799,9 @@ function ErdTab(props: {
                                 const rawBox = rawBoxById.get(table.id)!;
                                 const box = boxById.get(table.id)!;
 
-                                const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+                                const onPointerDown = (
+                                    e: React.PointerEvent<HTMLDivElement>,
+                                ) => {
                                     e.preventDefault();
                                     e.stopPropagation();
 
@@ -1643,6 +1819,7 @@ function ErdTab(props: {
                                         onMove,
                                     });
                                 };
+
                                 return (
                                     <div
                                         key={table.id}
@@ -1657,7 +1834,7 @@ function ErdTab(props: {
                                         <div
                                             data-diagram-node-drag="true"
                                             onPointerDown={onPointerDown}
-                                            className="touch-none cursor-grab border-b border-neutral-200/70 bg-neutral-100/90 px-3 py-2.5 active:cursor-grabbing dark:border-white/10 dark:bg-white/[0.05]"
+                                            className="touch-none select-none cursor-grab border-b border-neutral-200/70 bg-neutral-100/90 px-3 py-2.5 active:cursor-grabbing dark:border-white/10 dark:bg-white/[0.05]"
                                         >
                                             <div className="truncate text-sm font-medium text-neutral-900 dark:text-white/90">
                                                 {table.name}
@@ -1677,13 +1854,13 @@ function ErdTab(props: {
                                                     <div className="flex items-center gap-1">
                                                         {col.isPk ? (
                                                             <span className="rounded-md bg-emerald-500/10 px-1.5 py-0.5 text-[10px] font-medium text-emerald-700 dark:text-emerald-200">
-                                                                PK
-                                                            </span>
+                                PK
+                              </span>
                                                         ) : null}
                                                         {col.isFk ? (
                                                             <span className="rounded-md bg-amber-500/10 px-1.5 py-0.5 text-[10px] font-medium text-amber-700 dark:text-amber-200">
-                                                                FK
-                                                            </span>
+                                FK
+                              </span>
                                                         ) : null}
                                                     </div>
                                                 </div>
@@ -1707,14 +1884,24 @@ function ChenTab(props: {
 }) {
     const { schema, positions, onMove } = props;
 
-    const initialLayout = React.useMemo(() => buildChenLayout(schema.tables), [schema.tables]);
+    const initialLayout = React.useMemo(
+        () => buildChenLayout(schema.tables),
+        [schema.tables],
+    );
 
     const rawBoxes = React.useMemo(
-        () => clampDiagramBoxes("chen", applyStoredPositions("chen", initialLayout.boxes, positions)),
+        () =>
+            clampDiagramBoxes(
+                "chen",
+                applyStoredPositions("chen", initialLayout.boxes, positions),
+            ),
         [initialLayout, positions],
     );
 
-    const scene = React.useMemo(() => buildDiagramScene(rawBoxes, "chen"), [rawBoxes]);
+    const scene = React.useMemo(
+        () => buildDiagramScene(rawBoxes, "chen"),
+        [rawBoxes],
+    );
 
     const rawBoxById = React.useMemo(
         () => new Map(rawBoxes.map((box) => [box.id, box])),
@@ -1740,7 +1927,10 @@ function ChenTab(props: {
         [entities],
     );
 
-    const fitKey = React.useMemo(() => buildDiagramFitKey("chen", schema), [schema]);
+    const fitKey = React.useMemo(
+        () => buildDiagramFitKey("chen", schema),
+        [schema],
+    );
 
     if (!schema.tables.length) {
         return (
@@ -1759,7 +1949,12 @@ function ChenTab(props: {
             </div>
 
             <div className="min-h-0 flex-1">
-                <PanZoomCanvas width={scene.width} height={scene.height} fitKey={fitKey}>
+                <PanZoomCanvas
+                    width={scene.width}
+                    height={scene.height}
+                    fitBounds={scene.fitBounds}
+                    fitKey={fitKey}
+                >
                     {({ scale }) => (
                         <svg
                             width={scene.width}
@@ -1842,7 +2037,10 @@ function ChenTab(props: {
                             {entities.map((entity) => {
                                 const rawBox = rawBoxById.get(entity.id)!;
                                 const attrs = entity.table.columns.slice(0, 10);
-                                const hiddenCount = Math.max(0, entity.table.columns.length - attrs.length);
+                                const hiddenCount = Math.max(
+                                    0,
+                                    entity.table.columns.length - attrs.length,
+                                );
 
                                 const onPointerDown = (e: React.PointerEvent<SVGGElement>) => {
                                     e.preventDefault();
@@ -1862,6 +2060,7 @@ function ChenTab(props: {
                                         onMove,
                                     });
                                 };
+
                                 return (
                                     <g key={entity.id}>
                                         <g
@@ -1869,7 +2068,8 @@ function ChenTab(props: {
                                             onPointerDown={onPointerDown}
                                             className="cursor-grab active:cursor-grabbing"
                                             style={{ touchAction: "none" }}
-                                        >                                          <rect
+                                        >
+                                            <rect
                                                 x={entity.x}
                                                 y={entity.y}
                                                 width={entity.w}
@@ -1894,9 +2094,13 @@ function ChenTab(props: {
                                         {attrs.map((col, i) => {
                                             const side = i % 2 === 0 ? "left" : "right";
                                             const row = Math.floor(i / 2);
-                                            const cx = side === "left" ? entity.x - 90 : entity.x + entity.w + 90;
+                                            const cx =
+                                                side === "left"
+                                                    ? entity.x - 90
+                                                    : entity.x + entity.w + 90;
                                             const cy = entity.y + 18 + row * 38;
-                                            const lineEndX = side === "left" ? entity.x : entity.x + entity.w;
+                                            const lineEndX =
+                                                side === "left" ? entity.x : entity.x + entity.w;
 
                                             return (
                                                 <g key={col.name}>
@@ -1988,8 +2192,14 @@ export default function SqlResultsPane(props: {
     }, [busy]);
 
     const schema = React.useMemo(() => parseSchemaSql(schemaSql), [schemaSql]);
-    const tableLayout = React.useMemo(() => buildTableLayout(schema.tables), [schema.tables]);
-    const chenLayout = React.useMemo(() => buildChenLayout(schema.tables), [schema.tables]);
+    const tableLayout = React.useMemo(
+        () => buildTableLayout(schema.tables),
+        [schema.tables],
+    );
+    const chenLayout = React.useMemo(
+        () => buildChenLayout(schema.tables),
+        [schema.tables],
+    );
 
     React.useEffect(() => {
         setPositions((prev) => {
@@ -2037,11 +2247,23 @@ export default function SqlResultsPane(props: {
                 <TabsRow tab={tab} setTab={setTab} />
                 <div className="min-h-0 flex-1">
                     {tab === "tables" ? (
-                        <TablesTab schema={schema} positions={positions} onMove={handleMove} />
+                        <TablesTab
+                            schema={schema}
+                            positions={positions}
+                            onMove={handleMove}
+                        />
                     ) : tab === "erd" ? (
-                        <ErdTab schema={schema} positions={positions} onMove={handleMove} />
+                        <ErdTab
+                            schema={schema}
+                            positions={positions}
+                            onMove={handleMove}
+                        />
                     ) : tab === "chen" ? (
-                        <ChenTab schema={schema} positions={positions} onMove={handleMove} />
+                        <ChenTab
+                            schema={schema}
+                            positions={positions}
+                            onMove={handleMove}
+                        />
                     ) : (
                         <EmptySchemaState
                             title="No SQL result yet"
@@ -2067,17 +2289,32 @@ export default function SqlResultsPane(props: {
                             </div>
 
                             <div className="mt-3 rounded-lg border border-rose-300/20 bg-white/70 p-3 dark:border-rose-300/15 dark:bg-black/20">
-                                <pre className="whitespace-pre-wrap break-words text-[12px] font-medium text-rose-800 dark:text-rose-200">
-                                    {result.error ?? result.stderr ?? result.message ?? "Query failed."}
-                                </pre>
+                <pre className="whitespace-pre-wrap break-words text-[12px] font-medium text-rose-800 dark:text-rose-200">
+                  {result.error ??
+                      result.stderr ??
+                      result.message ??
+                      "Query failed."}
+                </pre>
                             </div>
                         </div>
                     ) : tab === "tables" ? (
-                        <TablesTab schema={schema} positions={positions} onMove={handleMove} />
+                        <TablesTab
+                            schema={schema}
+                            positions={positions}
+                            onMove={handleMove}
+                        />
                     ) : tab === "erd" ? (
-                        <ErdTab schema={schema} positions={positions} onMove={handleMove} />
+                        <ErdTab
+                            schema={schema}
+                            positions={positions}
+                            onMove={handleMove}
+                        />
                     ) : (
-                        <ChenTab schema={schema} positions={positions} onMove={handleMove} />
+                        <ChenTab
+                            schema={schema}
+                            positions={positions}
+                            onMove={handleMove}
+                        />
                     )}
                 </div>
             </div>
@@ -2091,11 +2328,23 @@ export default function SqlResultsPane(props: {
                 {tab === "results" ? (
                     <ResultsTab result={result} />
                 ) : tab === "tables" ? (
-                    <TablesTab schema={schema} positions={positions} onMove={handleMove} />
+                    <TablesTab
+                        schema={schema}
+                        positions={positions}
+                        onMove={handleMove}
+                    />
                 ) : tab === "erd" ? (
-                    <ErdTab schema={schema} positions={positions} onMove={handleMove} />
+                    <ErdTab
+                        schema={schema}
+                        positions={positions}
+                        onMove={handleMove}
+                    />
                 ) : (
-                    <ChenTab schema={schema} positions={positions} onMove={handleMove} />
+                    <ChenTab
+                        schema={schema}
+                        positions={positions}
+                        onMove={handleMove}
+                    />
                 )}
             </div>
         </div>

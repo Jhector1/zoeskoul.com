@@ -185,6 +185,7 @@ export default function SketchBlock(props: {
             <SketchShell
                 title={shellTitle || undefined}
                 subtitle={subtitle || undefined}
+
                 tone={spec.tone}
                 height={height}
                 rightMarkdown={rightMarkdown || undefined}

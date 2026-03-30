@@ -118,7 +118,7 @@
     }
 
     .ui-surface-success {
-        @apply rounded-xl border;
+        @apply border;
         --ui-comp-bg: rgb(var(--ui-accent) / 0.1);
         --ui-comp-border: rgb(var(--ui-accent) / 0.2);
         --ui-comp-text: rgb(var(--ui-text) / 1);
@@ -615,7 +615,7 @@
        Review topic / banners
     ========================= */
     .ui-review-topic-shell {
-        @apply mb-3 rounded-xl border p-3;
+        @apply mb-3  border p-3;
         --ui-comp-bg: rgb(var(--ui-surface) / 1);
         --ui-comp-border: rgb(var(--ui-border) / 1);
         --ui-comp-text: rgb(var(--ui-text) / 1);

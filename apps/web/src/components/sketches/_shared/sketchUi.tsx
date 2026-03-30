@@ -12,7 +12,7 @@ export function cn(...cls: Array<string | false | null | undefined>) {
 ========================================================= */
 
 export const SKETCH_PANEL = cn(
-    "ui-page-surface",
+
     "p-4 md:p-5",
 );
 
