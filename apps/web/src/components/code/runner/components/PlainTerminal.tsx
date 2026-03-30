@@ -82,7 +82,7 @@ export default function PlainTerminal(props: {
     return (
         <div
             className={[
-                "h-full rounded-2xl border-t p-2 sm:p-3 flex flex-col",
+                "h-full  border-t p-2  flex flex-col",
                 "bg-white/80 dark:bg-black/40",
                 "border-neutral-200 dark:border-white/10",
             ].join(" ")}

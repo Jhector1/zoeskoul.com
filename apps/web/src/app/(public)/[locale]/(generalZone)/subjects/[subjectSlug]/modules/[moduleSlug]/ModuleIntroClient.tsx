@@ -54,7 +54,7 @@ function StatTile({
     subtle?: React.ReactNode;
 }) {
     return (
-        <div className="ui-stat-card">
+        <div className="ui-stat-card ui-surface">
             <div className="text-[10px] font-medium uppercase tracking-[0.12em] text-neutral-500 dark:text-white/40">
                 {label}
             </div>
@@ -334,14 +334,14 @@ export default function ModuleIntroClient({ locale, subject, module, stats }: Pr
                                     </div>
 
                                     <div className="mt-5 grid gap-2">
-                                        <div className="ui-stat-card">
+                                        <div className="ui-stat-card ui-surface">
                                             <div className="text-[10px] font-medium uppercase tracking-[0.12em] text-neutral-500 dark:text-white/40">
                                                 {t("labels.status")}
                                             </div>
                                             <div className="mt-1 text-base font-semibold">{statusText}</div>
                                         </div>
 
-                                        <div className="ui-stat-card">
+                                        <div className="ui-stat-card ui-surface">
                                             <div className="text-[10px] font-medium uppercase tracking-[0.12em] text-neutral-500 dark:text-white/40">
                                                 Module order
                                             </div>

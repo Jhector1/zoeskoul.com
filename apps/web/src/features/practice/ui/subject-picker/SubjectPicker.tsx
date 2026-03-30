@@ -129,7 +129,7 @@ export default function SubjectPicker({
                                 </div>
                             </div>
 
-                            <div className="ui-surface-muted p-4">
+                            <div className="ui-surface p-4">
                                 <SectionKicker>{t("searchPlaceholder")}</SectionKicker>
 
                                 <div className="mt-3">

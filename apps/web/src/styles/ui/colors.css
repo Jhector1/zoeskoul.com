@@ -1,100 +1,61 @@
 @layer base {
     :root {
-        /* =========================
-           BRAND COLORS
-        ========================= */
+        /* brand */
+        --ui-accent: 16 185 129;
+        --ui-info: 99 102 241;
+        --ui-warn: 245 158 11;
+        --ui-danger: 244 63 94;
 
-        --ui-accent: 16 185 129;   /* emerald */
-        --ui-info: 99 102 241;     /* indigo */
-        --ui-warn: 245 158 11;     /* amber/orange */
-        --ui-danger: 244 63 94;    /* rose/red */
-
-
-        /* =========================
-           TEXT
-        ========================= */
-
-        --ui-text: 17 24 39;       /* neutral-900 */
-        --ui-text-muted: 75 85 99; /* neutral-600 */
+        /* text */
+        --ui-text: 17 24 39;
+        --ui-text-muted: 75 85 99;
         --ui-text-soft: 107 114 128;
         --ui-text-invert: 255 255 255;
 
-
-        /* =========================
-           BACKGROUNDS
-        ========================= */
-
-        --ui-bg: 255 255 255;      /* page background */
-
-        --ui-surface: 255 255 255; /* cards */
-        --ui-surface-2: 248 250 252; /* soft panels */
-        --ui-surface-3: 241 245 249; /* hover surfaces */
-
+        /* backgrounds */
+        --ui-bg: 250 250 250;
+        --ui-surface: 255 255 255;
+        --ui-surface-2: 248 250 252;
+        --ui-surface-3: 241 245 249;
         --ui-hover: 241 245 249;
 
-
-        /* =========================
-           BORDERS
-        ========================= */
-
+        /* borders */
         --ui-border: 226 232 240;
         --ui-border-soft: 241 245 249;
         --ui-border-strong: 203 213 225;
 
+        /* shadows */
+        --ui-shadow-soft: 0 1px 2px rgba(15, 23, 42, 0.04);
+        --ui-shadow-md: 0 8px 24px rgba(15, 23, 42, 0.08);
+        --ui-shadow-lg: 0 16px 40px rgba(15, 23, 42, 0.12);
 
-        /* =========================
-           SHADOWS
-        ========================= */
-
-        --ui-shadow-soft: 0 1px 2px rgba(0,0,0,0.04);
-        --ui-shadow-md: 0 6px 16px rgba(0,0,0,0.08);
-        --ui-shadow-lg: 0 12px 30px rgba(0,0,0,0.12);
-
-
-        /* =========================
-           FOCUS
-        ========================= */
-
+        /* focus */
         --ui-ring: var(--ui-accent);
     }
 
-
-    /* =========================
-       DARK MODE
-    ========================= */
-
     .dark {
-
         /* text */
+        --ui-text: 241 245 249;
+        --ui-text-muted: 148 163 184;
+        --ui-text-soft: 100 116 139;
+        --ui-text-invert: 15 23 42;
 
-        --ui-text: 255 255 255;
-        --ui-text-muted: 255 255 255;
-        --ui-text-soft: 255 255 255;
-
-
-        /* surfaces */
-
+        /* backgrounds */
         --ui-bg: 11 13 18;
-        --ui-surface: 21 26 44;
-        --ui-surface-2: 28 35 55;
-        --ui-surface-3: 36 44 66;
-
-        --ui-hover: 255 255 255;
-
+        --ui-surface: 17 24 39;
+        --ui-surface-2: 20 28 43;
+        --ui-surface-3: 26 35 52;
+        --ui-hover: 38 48 64;
 
         /* borders */
-
-        --ui-border: 255 255 255;
-        --ui-border-soft: 255 255 255;
-        --ui-border-strong: 255 255 255;
-
+        --ui-border: 48 58 74;
+        --ui-border-soft: 36 46 60;
+        --ui-border-strong: 64 76 94;
 
         /* shadows */
-
-        --ui-shadow-soft: 0 0 0 1px rgba(255,255,255,0.05);
-        --ui-shadow-md: 0 8px 30px rgba(0,0,0,0.35);
-        --ui-shadow-lg: 0 12px 40px rgba(0,0,0,0.45);
-
+        --ui-shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.22);
+        --ui-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.3);
+        --ui-shadow-lg: 0 14px 36px rgba(0, 0, 0, 0.38);
 
         --ui-ring: var(--ui-accent);
     }

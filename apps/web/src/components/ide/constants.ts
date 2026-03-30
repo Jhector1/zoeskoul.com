@@ -20,4 +20,4 @@ export const ACTION_BTN_CLASS = "ui-btn ui-btn-secondary";
 export const CHIP_BTN_CLASS =
   "shrink-0 rounded-lg border px-3 py-1.5 text-xs font-extrabold transition";
 export const PANEL_CARD_CLASS =
-  "rounded-none border border-neutral-200 bg-white shadow-sm sm:rounded-xl dark:border-white/10 dark:bg-white/[0.04]";
+  "rounded-none border border-neutral-200 bg-white shadow-sm  dark:border-white/10 dark:bg-white/[0.04]";

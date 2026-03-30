@@ -1,11 +1,11 @@
 "use client";
 
 import React from "react";
-import type {ReviewQuestion} from "@/lib/subjects/types";
+import type { ReviewQuestion } from "@/lib/subjects/types";
 import MathMarkdown from "@/components/markdown/MathMarkdown";
-import {normalizeMath} from "@/lib/markdown/normalizeMath";
-import {cn} from "@/lib/cn";
-import {useTaggedT} from "@/i18n/tagged";
+import { normalizeMath } from "@/lib/markdown/normalizeMath";
+import { cn } from "@/lib/cn";
+import { useTaggedT } from "@/i18n/tagged";
 
 export default function QuizLocalCard(props: {
     q: Exclude<ReviewQuestion, { kind: "practice" }>;
@@ -22,31 +22,24 @@ export default function QuizLocalCard(props: {
     onPick: (val: any) => void;
     onCheck: () => void;
 
-    /** ✅ NEW: lets parent scroll precisely to explanation */
     explainRef?: React.Ref<HTMLDivElement>;
 }) {
-    const {q, unlocked, isCompleted, locked, skipped, onSkip, prereqsMet} = props;
+    const { q, unlocked, isCompleted, locked, skipped, onSkip, prereqsMet } = props;
     const disabled = !unlocked || isCompleted || locked || Boolean(skipped) || !prereqsMet;
-    const tt = useTaggedT(); // resolves "@:quiz...."
+    const tt = useTaggedT();
     const ui = useTaggedT("reviewQuizUi");
     const prompt = tt.resolve(String((q as any).prompt ?? ""), {}, "");
     const explain = tt.resolve(String((q as any).explain ?? ""), {}, "");
 
     return (
-        <div
-            className={cn("ui-quiz-card", locked && "ui-quiz-card--locked", !unlocked && "opacity-70")}
-        >
-            <MathMarkdown
-                className="
-          text-sm text-neutral-800 dark:text-white/80
-          [&_.katex]:text-neutral-900 dark:[&_.katex]:text-white/90
-          [&_.katex-display]:overflow-x-auto
-          [&_.katex-display]:py-2
-        "
-                content={normalizeMath(prompt)}
-            />
-            {!unlocked ? <div className="ui-quiz-hint">{ui.t("unlockHint", {}, "Answer the previous question correctly to unlock this one.")}</div> : null}
+        <div className={cn("ui-quiz-card", locked && "ui-quiz-card--locked", !unlocked && "opacity-70")}>
+            <MathMarkdown className="ui-quiz-markdown" content={normalizeMath(prompt)} />
 
+            {!unlocked ? (
+                <div className="ui-quiz-hint">
+                    {ui.t("unlockHint", {}, "Answer the previous question correctly to unlock this one.")}
+                </div>
+            ) : null}
 
             {q.kind === "mcq" ? (
                 <div className="mt-2 grid gap-2">
@@ -66,11 +59,11 @@ export default function QuizLocalCard(props: {
                             >
                                 <MathMarkdown
                                     inline
-                                    className="text-xs font-extrabold text-inherit [&_.katex]:text-inherit"
+                                    className="text-xs font-medium text-inherit [&_.katex]:text-inherit"
                                     content={normalizeMath(choiceLabel)}
                                 />
                             </button>
-                        )
+                        );
                     })}
                 </div>
             ) : (
@@ -82,8 +75,9 @@ export default function QuizLocalCard(props: {
                         value={props.value ?? ""}
                         onChange={(e) => !disabled && props.onPick(e.target.value)}
                     />
+
                     {(q as any).tolerance ? (
-                        <div className="text-xs text-neutral-500 dark:text-white/50">
+                        <div className="ui-quiz-status-soft">
                             {ui.t("tolerance", { n: (q as any).tolerance }, `± ${(q as any).tolerance}`)}
                         </div>
                     ) : null}
@@ -98,7 +92,8 @@ export default function QuizLocalCard(props: {
                     onClick={() => !disabled && props.onCheck()}
                     className={cn("ui-quiz-action", disabled ? "ui-quiz-action--disabled" : "ui-quiz-action--primary")}
                 >
-                    {ui.t("buttons.checkQuestion", {}, "Check this question")}                </button>
+                    {ui.t("buttons.checkQuestion", {}, "Check this question")}
+                </button>
 
                 {onSkip ? (
                     <button
@@ -116,30 +111,32 @@ export default function QuizLocalCard(props: {
                     </button>
                 ) : null}
 
-                <div className="text-xs font-extrabold text-neutral-600 dark:text-white/60 sm:text-right">
+                <div className="ui-quiz-checkrow-status">
                     {props.skipped ? (
-                        <span className="text-amber-700 dark:text-amber-300/80">
-    {ui.t("status.skipped", {}, "↷ Skipped")}
-  </span>
+                        <span className="ui-quiz-status-warn">
+              {ui.t("status.skipped", {}, "↷ Skipped")}
+            </span>
                     ) : props.checked ? (
                         props.ok === true ? (
-                            <span className="text-emerald-700 dark:text-emerald-300/80">{ui.t("status.correct", {}, "✓ Correct")} </span>
+                            <span className="ui-quiz-status-good">
+                {ui.t("status.correct", {}, "✓ Correct")}
+              </span>
                         ) : (
-                            <span className="text-rose-700 dark:text-rose-300/80">{ui.t("status.notCorrect", {}, "✕ Not correct")}</span>
+                            <span className="ui-quiz-status-danger">
+                {ui.t("status.notCorrect", {}, "✕ Not correct")}
+              </span>
                         )
                     ) : (
-                        <span className="text-neutral-500 dark:text-white/50">{ ui.t("status.notChecked", {}, "Not checked yet")}</span>
+                        <span className="ui-quiz-status-soft">
+              {ui.t("status.notChecked", {}, "Not checked yet")}
+            </span>
                     )}
                 </div>
             </div>
 
-            {/* ✅ explain section (anchor ref attached here) */}
             {props.checked && (q as any).explain ? (
                 <div className="ui-quiz-explain" ref={props.explainRef}>
-                    <MathMarkdown
-                        className="text-xs text-neutral-600 dark:text-white/70 [&_.katex]:text-neutral-900 dark:[&_.katex]:text-white/90"
-                        content={normalizeMath(explain)}
-                    />
+                    <MathMarkdown className="ui-quiz-markdown-sm" content={normalizeMath(explain)} />
                 </div>
             ) : null}
         </div>

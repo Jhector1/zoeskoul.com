@@ -25,9 +25,7 @@ import { emitSfx } from "@/lib/sfx/bus";
 import { QuizBlockSkeleton } from "@/components/review/quiz/components/QuizBlockSkeleton";
 
 import { scrollIntoViewSmart } from "@/lib/ui/flowScroll";
-import {useTaggedT} from "@/i18n/tagged";
-
-/* -------------------------------- settings -------------------------------- */
+import { useTaggedT } from "@/i18n/tagged";
 
 const LS_AUTO_ADV = "learnoir.quiz.autoAdvance";
 
@@ -52,8 +50,6 @@ function computeLocalOkNow(
   const tol = q.tolerance ?? 0;
   return Math.abs(v - q.answer) <= tol;
 }
-
-/* -------------------------------- component -------------------------------- */
 
 export default function QuizBlock({
                                     prereqsMet = true,
@@ -126,10 +122,9 @@ export default function QuizBlock({
 
   useEffect(() => {
     setExcusedById(initState?.excusedById ?? {});
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [resetKey]);
-  const restoreQuestionKeyRef = useRef<string>("");
+  }, [resetKey, initState?.excusedById]);
 
+  const restoreQuestionKeyRef = useRef<string>("");
 
   const isExcused = useCallback(
       (qid: string) => Boolean(excusedById[qid]),
@@ -150,8 +145,7 @@ export default function QuizBlock({
 
   useEffect(() => {
     local.hydrate(initState);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [resetKey]);
+  }, [resetKey]); // eslint-disable-line react-hooks/exhaustive-deps
 
   function getQuestionOk(q: ReviewQuestion): boolean | null {
     if (q.kind === "mcq") {
@@ -238,8 +232,7 @@ export default function QuizBlock({
       passed,
       excusedCount,
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [questions, local.checkedById, local.answers, practiceBank.practice, passScore, excusedById]);
+  }, [questions, local.checkedById, local.answers, practiceBank.practice, passScore, excusedById]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (!prereqsMet || locked || isCompleted) return;
@@ -285,8 +278,6 @@ export default function QuizBlock({
     };
   }, [questions, local.answers, local.checkedById, practiceBank.practice, initState, excusedById]);
 
-  /* ---------------------------- auto-advance setting ---------------------------- */
-
   const [autoAdvance, setAutoAdvance] = useState(true);
 
   useEffect(() => {
@@ -299,8 +290,6 @@ export default function QuizBlock({
       window.localStorage.setItem(LS_AUTO_ADV, autoAdvance ? "1" : "0");
     } catch {}
   }, [autoAdvance]);
-
-  /* ------------------------ reduced motion ------------------------ */
 
   const [reduceMotion, setReduceMotion] = useState(false);
 
@@ -318,8 +307,6 @@ export default function QuizBlock({
       else (mq as any).removeListener?.(apply);
     };
   }, []);
-
-  /* ------------------------ refs + anchors ------------------------ */
 
   const qElRef = useRef(new Map<string, HTMLDivElement | null>());
   const footerElRef = useRef<HTMLDivElement | null>(null);
@@ -339,6 +326,7 @@ export default function QuizBlock({
       },
       [],
   );
+
   const findCurrentActivityQuestionId = useCallback(() => {
     for (let i = 0; i < questions.length; i++) {
       const q = questions[i];
@@ -359,6 +347,7 @@ export default function QuizBlock({
     locked,
     isCompleted,
   ]);
+
   const setExplainEl = useCallback(
       (qid: string) => (el: HTMLDivElement | null) => {
         explainRef.current.set(qid, el);
@@ -380,8 +369,6 @@ export default function QuizBlock({
       if (advanceTimerRef.current) window.clearTimeout(advanceTimerRef.current);
     };
   }, []);
-
-  /* ------------------------ “reveal/answer” scrolling ------------------------ */
 
   const [pendingScrollQid, setPendingScrollQid] = useState<string | null>(null);
   const [pendingScrollMode, setPendingScrollMode] = useState<"explain" | "end">("end");
@@ -419,7 +406,6 @@ export default function QuizBlock({
     });
   }, [pendingScrollQid, pendingScrollMode, reduceMotion]);
 
-  /* ------------------------- flow helpers ------------------------ */
   useEffect(() => {
     if (quizLoading) return;
     if (!questions.length) return;
@@ -443,7 +429,6 @@ export default function QuizBlock({
 
       const el = qElRef.current.get(qid);
 
-      // question node not mounted yet → retry, do NOT consume the restore key yet
       if (!el) {
         if (tries < MAX_TRIES) {
           tries += 1;
@@ -454,10 +439,8 @@ export default function QuizBlock({
         return;
       }
 
-      // consume the key only once we have the exact target
       restoreQuestionKeyRef.current = restoreKey;
 
-      // run after parent card-level restore has had time to settle
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
           if (cancelled) return;
@@ -481,8 +464,6 @@ export default function QuizBlock({
       cancelled = true;
     };
   }, [quizLoading, questions, resetKey, findCurrentActivityQuestionId, reduceMotion]);
-
-
 
   function scrollToFooter() {
     const el = footerElRef.current;
@@ -509,7 +490,15 @@ export default function QuizBlock({
 
     const nextQ = questions[nextIdx];
     const el = qElRef.current.get(nextQ.id);
-    if (el) scrollIntoViewSmart(el, { reduceMotion, block: "start", force: true, offsetPx: 12, focus: true });
+    if (el) {
+      scrollIntoViewSmart(el, {
+        reduceMotion,
+        block: "start",
+        force: true,
+        offsetPx: 12,
+        focus: true,
+      });
+    }
   }
 
   function isFlowDone(q: ReviewQuestion): boolean {
@@ -539,8 +528,6 @@ export default function QuizBlock({
     return typeof ex === "string" && ex.trim().length > 0;
   }
 
-  /* ------------------------- auto-advance / next button ------------------------ */
-
   useEffect(() => {
     if (!prereqsMet || locked || isCompleted) return;
 
@@ -566,8 +553,6 @@ export default function QuizBlock({
       lastActionQidRef.current = null;
       advanceTimerRef.current = null;
     }, delay);
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     prereqsMet,
     locked,
@@ -580,9 +565,7 @@ export default function QuizBlock({
     strictSequential,
     unlimitedAttempts,
     autoAdvance,
-  ]);
-
-  /* ------------------------------- state emitter ------------------------------ */
+  ]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const emitState = useCallback((s: SavedQuizState) => onStateChange?.(s), [onStateChange]);
   const ui = useTaggedT("reviewQuizUi");
@@ -599,10 +582,7 @@ export default function QuizBlock({
       practiceMeta: initState?.practiceMeta ?? {},
       excusedById: initState?.excusedById ?? {},
     } as SavedQuizState);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [resetKey]);
-
-  /* --------------------------------- reset ---------------------------------- */
+  }, [resetKey]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const [confirmResetQuiz, setConfirmResetQuiz] = useState(false);
 
@@ -622,20 +602,14 @@ export default function QuizBlock({
     setReloadNonce((n) => n + 1);
   }
 
-  /* --------------------------------- UI ------------------------------------- */
-
   if (quizLoading) return <QuizBlockSkeleton />;
 
   if (quizError) {
-    return (
-        <div className="mt-2 rounded-lg border border-rose-300/20 bg-rose-300/10 p-2 text-xs text-rose-700 dark:text-rose-200/90">
-          {quizError}
-        </div>
-    );
+    return <div className="ui-quiz-note-danger">{quizError}</div>;
   }
 
   if (!questions.length) {
-    return <div className="mt-2 text-xs text-neutral-500 dark:text-white/60">{ui.t("noQuestions", {}, "No questions.")}</div>;
+    return <div className="mt-2 ui-quiz-status-soft">{ui.t("noQuestions", {}, "No questions.")}</div>;
   }
 
   return (
@@ -674,15 +648,11 @@ export default function QuizBlock({
 
                           setExcusedById((prev) => ({ ...prev, [q.id]: true }));
                           lastActionQidRef.current = q.id;
-
-                          // ✅ show the “continue/excused” effects clearly
                           scheduleScroll(q.id, "end");
                         }}
                         onUpdateItem={(patch) => practiceBank.updatePracticeItem(q.id, patch)}
                         onSubmit={() => {
                           lastActionQidRef.current = q.id;
-
-                          // ✅ result/reveal area expands under the card
                           scheduleScroll(q.id, "end");
                           void practiceBank.submitPractice(q);
                         }}
@@ -713,8 +683,6 @@ export default function QuizBlock({
 
                           local.check(q.id);
                           emitSfx(okNow ? "answer:correct" : "answer:wrong");
-
-                          // ✅ explain appears after render
                           scheduleScroll(q.id, "explain");
                         }}
                     />
@@ -737,15 +705,14 @@ export default function QuizBlock({
                     </div>
                 ) : null}
 
-                {/* ✅ required: end anchor so practice reveal always has a target */}
                 <div ref={setEndAnchor(q.id)} className="h-0" aria-hidden />
               </div>
           );
         })}
 
         <div ref={footerElRef}>
-          <div className="mb-2 flex items-center justify-end gap-2 text-xs font-extrabold text-neutral-600 dark:text-white/60">
-            <label className="inline-flex items-center gap-2 select-none">
+          <div className="ui-quiz-toggle-row">
+            <label className="ui-quiz-toggle-label">
               <input
                   type="checkbox"
                   checked={autoAdvance}
@@ -754,7 +721,8 @@ export default function QuizBlock({
                     setAutoAdvance(e.target.checked);
                   }}
               />
-              {ui.t("autoAdvance", {}, "Auto-advance")}            </label>
+              {ui.t("autoAdvance", {}, "Auto-advance")}
+            </label>
           </div>
 
           <QuizFooter
@@ -778,7 +746,7 @@ export default function QuizBlock({
             description={
               <div className="grid gap-2">
                 <div>{ui.t("resetDialog.intro", {}, "This will:")}</div>
-                <ul className="list-disc pl-5 space-y-1">
+                <ul className="list-disc space-y-1 pl-5">
                   <li>{ui.t("resetDialog.b1", {}, "Clear your selected answers and checked status.")}</li>
                   <li>{ui.t("resetDialog.b2", {}, "Clear practice attempts and local state for this quiz.")}</li>
                   <li>
@@ -789,7 +757,7 @@ export default function QuizBlock({
                     )}
                   </li>
                 </ul>
-                <div className="text-neutral-500 dark:text-white/60 text-xs font-extrabold">
+                <div className="ui-quiz-dialog-note">
                   {ui.t("resetDialog.cannotUndo", {}, "This can’t be undone.")}
                 </div>
               </div>

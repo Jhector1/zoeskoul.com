@@ -34,10 +34,11 @@ async function hardLogout(locale: string) {
 
 const FONT_SIZE_STORAGE_KEY = "APP_FONT_SIZE_PX";
 const FONT_SIZE_DEFAULT = 16;
-const FONT_SIZE_OPTIONS = [16, 20, 24] as const;
+const FONT_SIZE_OPTIONS = [14,16, 20, 24] as const;
 const START_SESSION_HREF = "/sandbox";
 
 function clampFontPx(x: number) {
+  if (x <= 14) return 14;
   if (x <= 16) return 16;
   if (x <= 20) return 20;
   return 24;
@@ -66,21 +67,22 @@ function applyBaseFontSize(px: number) {
 function FontSizePicker(props: {
   value: number;
   onChange: (px: number) => void;
-  labels: { small: string; normal: string; large: string };
+  labels: { small: string; normal: string; large: string; extraLarge: string};
 }) {
   const { value, onChange, labels } = props;
 
   const items: Array<{ px: (typeof FONT_SIZE_OPTIONS)[number]; label: string }> = [
-    { px: 16, label: labels.small },
-    { px: 20, label: labels.normal },
-    { px: 24, label: labels.large },
+    { px: 14, label: labels.small },
+      { px: 16, label: labels.normal },
+    { px: 20, label: labels.large },
+    { px: 24, label: labels.extraLarge },
   ];
 
   return (
       <div
           role="radiogroup"
           aria-label="Font size"
-          className="grid w-full grid-cols-3 gap-1 rounded-lg border border-neutral-200 bg-white p-1 dark:border-white/10 dark:bg-white/[0.04]"
+          className="grid w-full grid-cols-4 gap-1 rounded-lg border border-neutral-200 bg-white p-1 dark:border-white/10 dark:bg-white/[0.04]"
       >
         {items.map((it) => {
           const active = it.px === value;
@@ -220,6 +222,7 @@ function SettingsMenu() {
                             small: t("fontSmall"),
                             normal: t("fontNormal"),
                             large: t("fontLarge"),
+                            extraLarge:("fontExtraLarge")
                           }}
                       />
                     </div>

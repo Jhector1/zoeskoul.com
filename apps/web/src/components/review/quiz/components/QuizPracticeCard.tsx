@@ -24,7 +24,6 @@ export default function QuizPracticeCard(props: {
   unlimitedAttempts: boolean;
   strictSequential: boolean;
 
-  /** Global deterministic order across topic page */
   seqOrder: number;
 
   padRef: React.MutableRefObject<VectorPadState>;
@@ -56,43 +55,33 @@ export default function QuizPracticeCard(props: {
   const revealed = Boolean(ps?.item?.revealed);
 
   const ui = useTaggedT("reviewQuizUi");
-  const { raw } = useTaggedT(); // ✅ RAW resolver for deep-tagged exercise strings
+  const { raw } = useTaggedT();
 
-  // ✅ Resolve @: keys inside the whole exercise once (safe for {name}, <total>, etc.)
   const ex: Exercise | null = useMemo(() => {
     if (!ps?.exercise) return null;
     return resolveDeepTagged(ps.exercise, (key) => raw(key, "")) as Exercise;
   }, [ps?.exercise, raw]);
 
-  // ✅ desktop-only tools: provider exposes tools?.enabled
   const toolsEnabled = Boolean(tools?.enabled);
-
-  // ✅ only use tools mode when:
-  // - tools are enabled on this device/page
-  // - and this exercise is code_input
   const isCodeInput = ex?.kind === "code_input";
   const codeRunnerMode: "embedded" | "tools" = toolsEnabled && isCodeInput ? "tools" : "embedded";
 
-  // Structural typing: ReviewToolsValue includes CodeToolsApi members (+ extras).
-  // ExerciseRenderer expects CodeToolsApi; extra fields are fine, TS may need a cast.
   const codeTools = toolsEnabled && isCodeInput ? (tools as any) : null;
   const codeInputId = toolsEnabled && isCodeInput ? q.id : undefined;
 
-  // ✅ stable patch function (prevents register thrash downstream)
   const updateItemSafe = useCallback(
       (patch: any) => {
         if (!unlocked || isCompleted || locked || excused) return;
         onUpdateItem(patch);
       },
-      [unlocked, isCompleted, locked, excused, onUpdateItem]
+      [unlocked, isCompleted, locked, excused, onUpdateItem],
   );
 
-  // ✅ attempts cap that respects null(unlimited)
   const attemptsCapped = useMemo(() => {
     if (!ps) return false;
     if (unlimitedAttempts) return false;
 
-    const max = ps.maxAttempts; // number | null
+    const max = ps.maxAttempts;
     if (max == null) return false;
 
     return ps.attempts >= max;
@@ -103,8 +92,6 @@ export default function QuizPracticeCard(props: {
     return !isEmptyPracticeAnswer(ex, ps.item, padRef?.current);
   }, [ex, ps?.item, padRef]);
 
-  // ✅ Deterministic binding: report status to provider
-  // Only when Tools are enabled + this is code_input
   useEffect(() => {
     if (!toolsEnabled) return;
     if (!tools) return;
@@ -152,14 +139,13 @@ export default function QuizPracticeCard(props: {
 
   const btnLabel = ps?.busy ? (
       <span className="inline-flex items-center gap-2">
-      <span className="h-3 w-3 animate-spin rounded-full border-2 border-neutral-400 border-t-transparent dark:border-white/40" />
+      <span className="ui-quiz-spinner" />
         {ui.t("practice.checking", {}, "Checking…")}
     </span>
   ) : (
       ui.t("buttons.checkAnswer", {}, "Check this answer")
   );
 
-  // Keep renderer happy even if it expects number
   const maxForRenderer = ps?.maxAttempts ?? Number.POSITIVE_INFINITY;
 
   return (
@@ -171,29 +157,32 @@ export default function QuizPracticeCard(props: {
         ) : null}
 
         {ps?.loading ? (
-            <div className="mt-2 text-xs text-neutral-500 dark:text-white/60">
+            <div className="mt-2 ui-quiz-status-soft">
               {ui.t("practice.loadingExercise", {}, "Loading exercise…")}
             </div>
         ) : ps?.error ? (
-            <div className="mt-2 rounded-lg border border-rose-300/20 bg-rose-300/10 p-2 text-xs text-rose-700 dark:text-rose-200/90">
-              {ps.error}{" "}
+            <div className="ui-quiz-note-danger">
+              <div>{ps.error}</div>
+
               <button
                   type="button"
                   onClick={props.onExcused}
                   disabled={disableSkip}
                   className={[
-                    "ui-quiz-action",
+                    "mt-2 ui-quiz-action",
                     disableSkip ? "ui-quiz-action--disabled" : "ui-quiz-action--ghost",
                   ].join(" ")}
               >
-                {props.excused ? ui.t("buttons.excused", {}, "Excused") : ui.t("buttons.continue", {}, "Continue")}
+                {props.excused
+                    ? ui.t("buttons.excused", {}, "Excused")
+                    : ui.t("buttons.continue", {}, "Continue")}
               </button>
             </div>
         ) : ex && ps?.item ? (
             <div className="mt-1">
               <div className="mt-2">
                 <ExerciseRenderer
-                    exercise={ex} // ✅ resolved exercise (no @: keys)
+                    exercise={ex}
                     current={ps.item}
                     busy={ps.busy || !unlocked || isCompleted || locked}
                     isAssignmentRun={false}
@@ -235,19 +224,19 @@ export default function QuizPracticeCard(props: {
                   </button>
                 </div>
 
-                <div className="min-w-0 text-xs font-extrabold text-neutral-600 dark:text-white/60 sm:text-right">
+                <div className="ui-quiz-checkrow-status">
               <span className="whitespace-normal">
                 {ui.t(
                     "practice.attempts",
                     { n: ps.attempts, max: ps.maxAttempts == null ? "∞" : ps.maxAttempts },
-                    `Attempts: ${ps.attempts}/${ps.maxAttempts == null ? "∞" : ps.maxAttempts}`
+                    `Attempts: ${ps.attempts}/${ps.maxAttempts == null ? "∞" : ps.maxAttempts}`,
                 )}
               </span>
 
                   {ps.ok === true ? (
-                      <span className="ml-2 whitespace-nowrap text-emerald-700 dark:text-emerald-300/80">✓ Correct</span>
+                      <span className="ml-2 whitespace-nowrap ui-quiz-status-good">✓ Correct</span>
                   ) : ps.ok === false && ps.item?.result && !revealed ? (
-                      <span className="ml-2 whitespace-nowrap text-rose-700 dark:text-rose-300/80">✕ Not correct</span>
+                      <span className="ml-2 whitespace-nowrap ui-quiz-status-danger">✕ Not correct</span>
                   ) : null}
                 </div>
               </div>
@@ -255,7 +244,7 @@ export default function QuizPracticeCard(props: {
               {revealed && ps.item?.result ? (
                   <div className="mt-3">
                     <RevealAnswerCard
-                        exercise={ex} // ✅ resolved exercise (options text already translated)
+                        exercise={ex}
                         current={ps.item}
                         result={ps.item.result}
                         updateCurrent={updateItemSafe}
@@ -264,7 +253,7 @@ export default function QuizPracticeCard(props: {
               ) : null}
             </div>
         ) : (
-            <div className="mt-2 text-xs text-neutral-500 dark:text-white/60">
+            <div className="mt-2 ui-quiz-status-soft">
               {ui.t("practice.noExercise", {}, "No exercise.")}
             </div>
         )}

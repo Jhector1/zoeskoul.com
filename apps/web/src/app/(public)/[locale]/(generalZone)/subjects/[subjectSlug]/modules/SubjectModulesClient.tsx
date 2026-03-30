@@ -113,7 +113,7 @@ function StatCard({
     subvalue?: React.ReactNode;
 }) {
     return (
-        <div className="ui-stat-card">
+        <div className="ui-stat-card ui-surface">
             <div className="text-[10px] font-medium uppercase tracking-[0.12em] text-neutral-500 dark:text-white/40">
                 {label}
             </div>

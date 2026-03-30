@@ -371,7 +371,7 @@ function CodeRunnerContent(props: CodeRunnerProps) {
     const renderOutputPane = (panelHeight?: number, panelWidth?: number) => {
         return (
             <div
-                className="min-h-0 p-2 sm:p-3"
+                className="min-h-0"
                 style={{
                     ...(typeof panelHeight === "number" ? { height: panelHeight } : {}),
                     ...(typeof panelWidth === "number" ? { width: panelWidth } : {}),

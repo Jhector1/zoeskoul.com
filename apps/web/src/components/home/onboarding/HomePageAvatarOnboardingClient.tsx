@@ -20,9 +20,6 @@ import {
 import type { LucideIcon } from "lucide-react";
 
 import { useRouter, usePathname } from "@/i18n/navigation";
-import { Button } from "@/components/home/ui/button";
-import { CardContent } from "@/components/home/ui/card";
-import { Progress } from "@/components/home/ui/progress";
 import { cn } from "@/lib/cn";
 import {
     buildTrialHref,
@@ -104,8 +101,16 @@ type StoredOnboardingSnapshot = {
     data: OnboardingData;
 };
 
+type HighlightCard = {
+    key: string;
+    icon: LucideIcon;
+    title: string;
+    text: string;
+};
+
 const STORAGE_KEY = "zoeskoul.home.onboarding.v2";
 const DISMISSED_KEY = "zoeskoul.home.avatar.dismissed.v1";
+const TRIAL_LAST_SESSION_KEY = "zoeskoul.trial.lastSessionId";
 const APP_NAME = process.env.NEXT_PUBLIC_APP_NAME ?? "ZoeSkoul";
 
 const DEFAULT_DATA: OnboardingData = {
@@ -200,13 +205,6 @@ const TAGGED_TRIAL_CHOICES: Choice[] = [
     },
 ];
 
-type HighlightCard = {
-    key: string;
-    icon: LucideIcon;
-    title: string;
-    text: string;
-};
-
 const TAGGED_HIGHLIGHT_CARDS = [
     {
         key: "language",
@@ -228,6 +226,43 @@ const TAGGED_HIGHLIGHT_CARDS = [
     },
 ] as const satisfies readonly HighlightCard[];
 
+/* -------------------- small view primitives -------------------- */
+
+function PageShell({ children }: { children: React.ReactNode }) {
+    return (
+        <main
+            className="relative min-h-screen overflow-hidden pb-24 sm:pb-28"
+            style={{
+                backgroundColor: "rgb(var(--ui-bg) / 1)",
+                color: "rgb(var(--ui-text) / 1)",
+            }}
+        >
+            <div
+                aria-hidden
+                className="pointer-events-none absolute inset-0 opacity-[0.025] dark:opacity-[0.04]"
+                style={{
+                    backgroundImage:
+                        "radial-gradient(circle at 1px 1px, rgba(0,0,0,0.8) 1px, transparent 0)",
+                    backgroundSize: "18px 18px",
+                }}
+            />
+            <div
+                aria-hidden
+                className="pointer-events-none absolute -top-16 left-[-8%] h-56 w-56 rounded-full bg-emerald-400/10 blur-3xl dark:bg-emerald-300/8"
+            />
+            <div
+                aria-hidden
+                className="pointer-events-none absolute right-[-8%] top-8 h-64 w-64 rounded-full bg-sky-400/10 blur-3xl dark:bg-sky-300/8"
+            />
+            <div className="relative">{children}</div>
+        </main>
+    );
+}
+
+function PageContainer({ children }: { children: React.ReactNode }) {
+    return <div className="mx-auto max-w-6xl px-4 py-6 md:px-6 md:py-8">{children}</div>;
+}
+
 function Surface({
                      children,
                      className,
@@ -235,27 +270,76 @@ function Surface({
     children: React.ReactNode;
     className?: string;
 }) {
+    return <div className={cn("ui-page-surface", className)}>{children}</div>;
+}
+
+function SoftPanel({
+                       children,
+                       className,
+                   }: {
+    children: React.ReactNode;
+    className?: string;
+}) {
+    return <div className={cn("ui-surface-soft", className)}>{children}</div>;
+}
+
+function SectionKicker({ children }: { children: React.ReactNode }) {
+    return <div className="ui-kicker">{children}</div>;
+}
+
+function SectionTitle({
+                          children,
+                          className,
+                      }: {
+    children: React.ReactNode;
+    className?: string;
+}) {
     return (
-        <div
+        <h2
             className={cn(
-                "rounded-[18px] border p-3 sm:rounded-[20px] sm:p-4",
-                "bg-white/82 border-black/5 shadow-[0_18px_50px_-32px_rgba(0,0,0,0.24)] backdrop-blur-xl",
-                "dark:bg-white/[0.06] dark:border-white/10 dark:shadow-none",
+                "mt-2 text-2xl font-semibold tracking-tight sm:text-3xl",
                 className,
             )}
+            style={{ color: "rgb(var(--ui-text) / 0.96)" }}
         >
             {children}
+        </h2>
+    );
+}
+
+function SectionLead({ children }: { children: React.ReactNode }) {
+    return <p className="mt-3 text-sm leading-6 text-[rgb(var(--ui-text-muted)/0.88)] sm:text-[15px] sm:leading-7">{children}</p>;
+}
+
+function ProgressBar({ value }: { value: number }) {
+    const safe = Math.max(0, Math.min(100, value));
+    return (
+        <div className="ui-progress-track">
+            <div className="ui-progress-fill" style={{ width: `${safe}%` }} />
         </div>
     );
 }
 
-function SectionKicker({ children }: { children: React.ReactNode }) {
+function buttonClass(variant: "primary" | "secondary" | "ghost" = "secondary") {
+    if (variant === "primary") return "ui-btn-primary";
+    if (variant === "secondary") return "ui-btn-secondary";
+    return "ui-btn-secondary bg-transparent shadow-none";
+}
+
+function SparkDot({ className }: { className?: string }) {
     return (
-        <div className="text-[9px] font-extrabold uppercase tracking-[0.22em] text-neutral-500 dark:text-white/45">
-            {children}
-        </div>
+        <motion.div
+            className={cn(
+                "absolute size-1 rounded-full bg-emerald-400/35 dark:bg-emerald-300/20",
+                className,
+            )}
+            animate={{ y: [0, -5, 0], opacity: [0.35, 1, 0.35] }}
+            transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
+        />
     );
 }
+
+/* -------------------- storage / formatting -------------------- */
 
 function readStoredOnboarding(): StoredOnboardingSnapshot {
     if (typeof window === "undefined") {
@@ -428,18 +512,7 @@ function buildWelcomeMessage(
     });
 }
 
-function SparkDot({ className }: { className?: string }) {
-    return (
-        <motion.div
-            className={cn(
-                "absolute size-1 rounded-full bg-emerald-400/35 dark:bg-emerald-300/20",
-                className,
-            )}
-            animate={{ y: [0, -5, 0], opacity: [0.35, 1, 0.35] }}
-            transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
-        />
-    );
-}
+/* -------------------- avatar / speech -------------------- */
 
 function GuideAvatar({ speaking }: { speaking: boolean }) {
     const reduceMotion = useReducedMotion();
@@ -448,11 +521,11 @@ function GuideAvatar({ speaking }: { speaking: boolean }) {
     return (
         <div className="relative flex h-[78px] w-[78px] items-center justify-center sm:h-[86px] sm:w-[86px]">
             <motion.div
-                className="absolute inset-2 rounded-full bg-emerald-300/18 blur-xl dark:bg-emerald-300/10"
+                className="absolute inset-2 rounded-full bg-emerald-300/15 blur-xl dark:bg-emerald-300/8"
                 animate={
                     reduceMotion
                         ? undefined
-                        : { scale: [1, 1.05, 1], opacity: [0.4, 0.7, 0.4] }
+                        : { scale: [1, 1.05, 1], opacity: [0.35, 0.6, 0.35] }
                 }
                 transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
             />
@@ -463,24 +536,19 @@ function GuideAvatar({ speaking }: { speaking: boolean }) {
 
             <motion.div
                 className={cn(
-                    "relative flex h-[64px] w-[64px] items-center justify-center rounded-[1rem] border backdrop-blur-xl sm:h-[70px] sm:w-[70px]",
-                    "bg-[linear-gradient(180deg,rgba(255,255,255,0.97),rgba(246,248,250,0.9))] border-black/5 shadow-[0_14px_30px_-20px_rgba(0,0,0,0.28)]",
-                    "dark:bg-[linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.04))] dark:border-white/10 dark:shadow-none",
+                    "relative flex h-[64px] w-[64px] items-center justify-center sm:h-[70px] sm:w-[70px]",
+                    "ui-page-surface rounded-2xl p-1.5",
                 )}
                 animate={
                     reduceMotion ? undefined : { y: [0, -2, 0], rotate: [0, -1, 1, 0] }
                 }
                 transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
             >
-                <div className="absolute inset-1.5 rounded-[0.85rem] border border-black/5 dark:border-white/10" />
-
-                <div className="relative flex flex-col items-center gap-2">
+                <div className="ui-surface-muted flex h-full w-full flex-col items-center justify-center rounded-[14px] border p-2">
                     <div className="flex items-center gap-2.5">
                         <motion.div
-                            className="h-3.5 w-3.5 rounded-full bg-neutral-900 sm:h-4 sm:w-4 dark:bg-white/90"
-                            animate={
-                                reduceMotion ? undefined : { scaleY: [1, 1, 0.12, 1, 1] }
-                            }
+                            className="h-3.5 w-3.5 rounded-full bg-[rgb(var(--ui-text)/0.92)] sm:h-4 sm:w-4"
+                            animate={reduceMotion ? undefined : { scaleY: [1, 1, 0.12, 1, 1] }}
                             transition={{
                                 duration: 5,
                                 repeat: Infinity,
@@ -489,10 +557,8 @@ function GuideAvatar({ speaking }: { speaking: boolean }) {
                             style={{ transformOrigin: "center center" }}
                         />
                         <motion.div
-                            className="h-3.5 w-3.5 rounded-full bg-neutral-900 sm:h-4 sm:w-4 dark:bg-white/90"
-                            animate={
-                                reduceMotion ? undefined : { scaleY: [1, 1, 0.12, 1, 1] }
-                            }
+                            className="h-3.5 w-3.5 rounded-full bg-[rgb(var(--ui-text)/0.92)] sm:h-4 sm:w-4"
+                            animate={reduceMotion ? undefined : { scaleY: [1, 1, 0.12, 1, 1] }}
                             transition={{
                                 duration: 5,
                                 repeat: Infinity,
@@ -503,15 +569,12 @@ function GuideAvatar({ speaking }: { speaking: boolean }) {
                     </div>
 
                     <motion.div
-                        className="h-2 rounded-full bg-neutral-900/90 dark:bg-white/85"
+                        className="mt-2 h-2 rounded-full bg-[rgb(var(--ui-text)/0.88)]"
                         animate={
                             reduceMotion
                                 ? undefined
                                 : speaking
-                                    ? {
-                                        width: [12, 18, 10, 16, 12],
-                                        borderRadius: [999, 8, 999, 8, 999],
-                                    }
+                                    ? { width: [12, 18, 10, 16, 12], borderRadius: [999, 8, 999, 8, 999] }
                                     : { width: 14 }
                         }
                         transition={{
@@ -521,7 +584,7 @@ function GuideAvatar({ speaking }: { speaking: boolean }) {
                         }}
                     />
 
-                    <div className="flex items-center gap-1 rounded-full border border-emerald-500/15 bg-emerald-500/10 px-1.5 py-0.5 text-[8px] font-medium text-emerald-700 dark:border-emerald-300/15 dark:bg-emerald-300/10 dark:text-emerald-200">
+                    <div className="mt-2 inline-flex items-center gap-1 rounded-full border border-emerald-500/15 bg-emerald-500/10 px-1.5 py-0.5 text-[8px] font-medium text-emerald-700 dark:border-emerald-300/15 dark:bg-emerald-300/10 dark:text-emerald-200">
                         <Sparkles className="size-2" />
                         {t("common.guide")}
                     </div>
@@ -545,26 +608,18 @@ function SpeechBubble({
 
     return (
         <div className="relative w-[min(220px,62vw)] sm:w-[250px]">
-            <div
-                className={cn(
-                    "relative rounded-[16px] border px-3 py-2.5",
-                    "bg-[linear-gradient(180deg,rgba(255,255,255,0.985),rgba(247,248,250,0.955))]",
-                    "border-black/5 shadow-[0_14px_32px_-22px_rgba(0,0,0,0.24),0_6px_12px_-10px_rgba(0,0,0,0.15)]",
-                    "dark:bg-[linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.05))] dark:border-white/10 dark:shadow-none",
-                )}
-            >
+            <div className="ui-page-surface relative rounded-2xl px-3 py-2.5">
                 <div
                     className={cn(
-                        "absolute top-[18px] h-2.5 w-2.5 rotate-45 bg-[linear-gradient(180deg,rgba(247,248,250,0.98),rgba(241,243,246,0.95))] dark:bg-[linear-gradient(180deg,rgba(255,255,255,0.07),rgba(255,255,255,0.05))]",
+                        "absolute top-[18px] h-2.5 w-2.5 rotate-45 border",
                         side === "right"
-                            ? "-right-[5px] border-r border-t border-black/5 dark:border-white/10"
-                            : "-left-[5px] border-b border-l border-black/5 dark:border-white/10",
+                            ? "-right-[5px] border-r border-t border-[rgb(var(--ui-border)/1)] bg-[rgb(var(--ui-surface)/0.96)]"
+                            : "-left-[5px] border-b border-l border-[rgb(var(--ui-border)/1)] bg-[rgb(var(--ui-surface)/0.96)]",
                     )}
                 />
-
-                <p className="text-[12px] leading-5 text-neutral-700 dark:text-white/72 sm:text-[13px]">
+                <p className="text-[12px] leading-5 text-[rgb(var(--ui-text-muted)/0.9)] sm:text-[13px]">
                     {rendered}
-                    <span className="ml-0.5 inline-block h-3.5 w-[2px] animate-pulse bg-neutral-900/65 align-middle dark:bg-white/70" />
+                    <span className="ml-0.5 inline-block h-3.5 w-[2px] animate-pulse bg-[rgb(var(--ui-text)/0.65)] align-middle" />
                 </p>
             </div>
         </div>
@@ -599,6 +654,8 @@ function AvatarWithQuestion({
     );
 }
 
+/* -------------------- option / subject UI -------------------- */
+
 function ChoiceButton({
                           active,
                           label,
@@ -621,21 +678,21 @@ function ChoiceButton({
             disabled={disabled}
             onClick={onClick}
             className={cn(
-                "group flex w-full items-start justify-between gap-4 rounded-xl border px-3.5 py-3 text-left transition-all",
-                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/30",
+                "flex w-full items-start justify-between gap-4 rounded-xl border px-3.5 py-3 text-left transition-colors",
+                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--ui-ring)/0.22)]",
                 disabled && "cursor-not-allowed opacity-70",
                 active
-                    ? "border-emerald-500/30 bg-emerald-500/10 ring-1 ring-emerald-500/20 dark:border-emerald-300/20 dark:bg-emerald-300/10"
-                    : "border-black/5 bg-white/70 hover:border-emerald-500/20 hover:bg-white/90 dark:border-white/10 dark:bg-white/[0.03] dark:hover:border-emerald-300/20 dark:hover:bg-white/[0.05]",
+                    ? "border-[rgb(var(--ui-accent)/0.22)] bg-[rgb(var(--ui-accent)/0.08)]"
+                    : "bg-[rgb(var(--ui-surface-2)/1)] border-[rgb(var(--ui-border)/1)] hover:border-[rgb(var(--ui-accent)/0.16)] hover:bg-[rgb(var(--ui-surface)/1)]",
             )}
         >
             <div className="min-w-0">
-                <div className="flex items-center gap-2 text-sm font-medium text-neutral-900 dark:text-white/90">
+                <div className="flex items-center gap-2 text-sm font-medium text-[rgb(var(--ui-text)/0.96)]">
                     {Icon ? <Icon className="size-4" /> : null}
                     <span>{label}</span>
                 </div>
                 {hint ? (
-                    <div className="mt-1 text-xs text-neutral-500 dark:text-white/60">
+                    <div className="mt-1 text-xs text-[rgb(var(--ui-text-muted)/0.84)]">
                         {hint}
                     </div>
                 ) : null}
@@ -645,8 +702,8 @@ function ChoiceButton({
                 className={cn(
                     "mt-0.5 flex size-4.5 shrink-0 items-center justify-center rounded-full border transition-colors",
                     active
-                        ? "border-emerald-500 bg-emerald-600 text-white dark:border-emerald-300 dark:bg-emerald-300 dark:text-black"
-                        : "border-black/10 dark:border-white/15",
+                        ? "border-[rgb(var(--ui-accent)/1)] bg-[rgb(var(--ui-accent)/1)] text-[rgb(var(--ui-text-invert)/1)]"
+                        : "border-[rgb(var(--ui-border-strong)/1)]",
                 )}
             >
                 {active ? <Check className="size-3" /> : null}
@@ -674,7 +731,7 @@ function SubjectImageStrip({ subjects }: { subjects: SubjectCard[] }) {
                 return (
                     <div
                         key={subject.slug}
-                        className="group relative overflow-hidden rounded-2xl border border-black/5 bg-white/70 dark:border-white/10 dark:bg-white/[0.04]"
+                        className="ui-page-surface group relative overflow-hidden rounded-2xl"
                     >
                         <div className="relative aspect-[1.45/1]">
                             {subject.imageUrl ? (
@@ -686,16 +743,14 @@ function SubjectImageStrip({ subjects }: { subjects: SubjectCard[] }) {
                                     className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
                                 />
                             ) : (
-                                <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(16,185,129,0.18),rgba(59,130,246,0.14))]" />
+                                <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(16,185,129,0.14),rgba(59,130,246,0.10))]" />
                             )}
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent" />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/5 to-transparent" />
                             <div className="absolute inset-x-0 bottom-0 p-3">
-                                <div className="inline-flex rounded-full border border-white/15 bg-white/15 px-2 py-0.5 text-[10px] font-semibold text-white backdrop-blur-md">
+                                <div className="inline-flex rounded-full border border-white/15 bg-white/15 px-2 py-0.5 text-[10px] font-medium text-white backdrop-blur-md">
                                     {badge}
                                 </div>
-                                <div className="mt-1 text-sm font-semibold text-white">
-                                    {title}
-                                </div>
+                                <div className="mt-1 text-sm font-medium text-white">{title}</div>
                             </div>
                         </div>
                     </div>
@@ -730,10 +785,10 @@ function TrialSubjectChooser({
                         type="button"
                         onClick={() => onSelect(subject.slug)}
                         className={cn(
-                            "rounded-full border px-3 py-1.5 text-sm font-medium transition",
+                            "rounded-full border px-3 py-1.5 text-sm font-medium transition-colors",
                             active
-                                ? "border-emerald-500/30 bg-emerald-500/10 text-neutral-900 dark:border-emerald-300/20 dark:bg-emerald-300/10 dark:text-white"
-                                : "border-black/5 bg-white/70 text-neutral-700 hover:border-emerald-500/20 dark:border-white/10 dark:bg-white/[0.03] dark:text-white/75",
+                                ? "border-[rgb(var(--ui-accent)/0.22)] bg-[rgb(var(--ui-accent)/0.08)] text-[rgb(var(--ui-text)/0.96)]"
+                                : "border-[rgb(var(--ui-border)/1)] bg-[rgb(var(--ui-surface)/1)] text-[rgb(var(--ui-text-muted)/1)] hover:bg-[rgb(var(--ui-hover)/1)] hover:text-[rgb(var(--ui-text)/1)]",
                         )}
                     >
                         {title}
@@ -743,6 +798,8 @@ function TrialSubjectChooser({
         </div>
     );
 }
+
+/* -------------------- onboarding panel -------------------- */
 
 function OnboardingPanel({
                              data,
@@ -995,80 +1052,78 @@ function OnboardingPanel({
                 </div>
             ) : null}
 
-            <Surface className="mx-auto max-w-[520px] p-0">
-                <CardContent className="p-4">
-                    <div className="flex flex-col gap-2.5 sm:flex-row sm:items-start sm:justify-between">
-                        <div className="min-w-0">
-                            <div className="text-sm font-semibold text-neutral-900 dark:text-white/90">
-                                {t("panel.title")}
-                            </div>
-                            <div className="mt-1 text-sm leading-5.5 text-neutral-500 dark:text-white/60">
-                                {t("panel.description")}
-                            </div>
-                        </div>
-
-                        <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={onSkip}
-                            disabled={busy}
-                            className="h-8 w-full text-sm sm:w-auto dark:hover:bg-white/10"
-                        >
-                            {t("panel.skip")}
-                        </Button>
-                    </div>
-
-                    <div className="mt-4 space-y-2">
-                        <Progress value={progress} className="h-1.5" />
-                        <div className="text-[11px] text-neutral-500 dark:text-white/55">
-                            {t("panel.step", { current: stepIndex + 1, total })}
+            <Surface className="mx-auto max-w-[520px] p-4">
+                <div className="flex flex-col gap-2.5 sm:flex-row sm:items-start sm:justify-between">
+                    <div className="min-w-0">
+                        <div className="ui-title-sm">{t("panel.title")}</div>
+                        <div className="mt-1 text-sm leading-5.5 text-[rgb(var(--ui-text-muted)/0.84)]">
+                            {t("panel.description")}
                         </div>
                     </div>
 
-                    <div className="mt-4 grid gap-2.5">
-                        {step.choices.map((choice) => {
-                            const active = Array.isArray(currentValue)
-                                ? currentValue.includes(choice.value)
-                                : currentValue === choice.value;
+                    <button
+                        type="button"
+                        onClick={onSkip}
+                        disabled={busy}
+                        className={cn(buttonClass("ghost"), "h-8 w-full text-sm sm:w-auto")}
+                    >
+                        {t("panel.skip")}
+                    </button>
+                </div>
 
-                            return (
-                                <ChoiceButton
-                                    key={choice.value}
-                                    active={active}
-                                    label={choice.label}
-                                    hint={choice.hint}
-                                    onClick={() => handleToggle(choice.value)}
-                                    Icon={choice.icon}
-                                    disabled={busy}
-                                />
-                            );
-                        })}
+                <div className="mt-4 space-y-2">
+                    <ProgressBar value={progress} />
+                    <div className="ui-meta">
+                        {t("panel.step", { current: stepIndex + 1, total })}
                     </div>
+                </div>
 
-                    <div className="mt-5 flex flex-col-reverse gap-2.5 sm:flex-row sm:items-center sm:justify-between">
-                        <Button
-                            variant="ghost"
-                            onClick={handleBack}
-                            disabled={stepIndex === 0 || busy}
-                            className="h-8 w-full text-sm sm:w-auto dark:hover:bg-white/10"
-                        >
-                            {t("panel.back")}
-                        </Button>
+                <div className="mt-4 grid gap-2.5">
+                    {step.choices.map((choice) => {
+                        const active = Array.isArray(currentValue)
+                            ? currentValue.includes(choice.value)
+                            : currentValue === choice.value;
 
-                        <Button
-                            onClick={handleContinue}
-                            disabled={!canContinue || busy}
-                            className="h-8 w-full gap-1.5 text-sm sm:w-auto"
-                        >
-                            {stepIndex === total - 1 ? t("panel.finish") : t("panel.continue")}
-                            <ChevronRight className="size-3.5" />
-                        </Button>
-                    </div>
-                </CardContent>
+                        return (
+                            <ChoiceButton
+                                key={choice.value}
+                                active={active}
+                                label={choice.label}
+                                hint={choice.hint}
+                                onClick={() => handleToggle(choice.value)}
+                                Icon={choice.icon}
+                                disabled={busy}
+                            />
+                        );
+                    })}
+                </div>
+
+                <div className="mt-5 flex flex-col-reverse gap-2.5 sm:flex-row sm:items-center sm:justify-between">
+                    <button
+                        type="button"
+                        onClick={handleBack}
+                        disabled={stepIndex === 0 || busy}
+                        className={cn(buttonClass("ghost"), "h-8 w-full text-sm sm:w-auto")}
+                    >
+                        {t("panel.back")}
+                    </button>
+
+                    <button
+                        type="button"
+                        onClick={handleContinue}
+                        disabled={!canContinue || busy}
+                        className={cn(buttonClass("primary"), "h-8 w-full gap-1.5 text-sm sm:w-auto")}
+                    >
+                        {stepIndex === total - 1 ? t("panel.finish") : t("panel.continue")}
+                        <ChevronRight className="size-3.5" />
+                    </button>
+                </div>
             </Surface>
         </div>
     );
 }
+
+/* -------------------- personalized sections -------------------- */
 
 function PersonalizedHighlights({ data }: { data: OnboardingData }) {
     const { t, resolve } = useTaggedT("homeOnboarding");
@@ -1102,28 +1157,24 @@ function PersonalizedHighlights({ data }: { data: OnboardingData }) {
                             : valuesByKey.pace;
 
                 return (
-                    <Surface key={card.key} className="p-0">
-                        <CardContent className="p-4">
-                            <div className="flex items-start gap-3">
-                                <div className="rounded-xl border border-emerald-500/15 bg-emerald-500/10 p-2 text-emerald-700 dark:border-emerald-300/15 dark:bg-emerald-300/10 dark:text-emerald-200">
-                                    <Icon className="size-4" />
-                                </div>
-
-                                <div className="min-w-0">
-                                    <div className="text-sm text-neutral-500 dark:text-white/55">
-                                        {card.title}
-                                    </div>
-                                    <div className="mt-1 font-semibold text-neutral-900 dark:text-white/90">
-                                        {value}
-                                    </div>
-                                </div>
+                    <div key={card.key} className="ui-stat-card ui-surface p-4">
+                        <div className="flex items-start gap-3">
+                            <div className="rounded-xl border border-emerald-500/15 bg-emerald-500/10 p-2 text-emerald-700 dark:border-emerald-300/15 dark:bg-emerald-300/10 dark:text-emerald-200">
+                                <Icon className="size-4" />
                             </div>
 
-                            <p className="mt-3 text-sm leading-6 text-neutral-600 dark:text-white/65">
-                                {card.text}
-                            </p>
-                        </CardContent>
-                    </Surface>
+                            <div className="min-w-0">
+                                <div className="ui-meta">{card.title}</div>
+                                <div className="mt-1 text-sm font-medium text-[rgb(var(--ui-text)/0.96)]">
+                                    {value}
+                                </div>
+                            </div>
+                        </div>
+
+                        <p className="mt-3 text-sm leading-6 text-[rgb(var(--ui-text-muted)/0.84)]">
+                            {card.text}
+                        </p>
+                    </div>
                 );
             })}
         </div>
@@ -1162,7 +1213,7 @@ function SubjectGrid({
                         className="group block"
                     >
                         <motion.div whileHover={reduceMotion ? undefined : { y: -3 }}>
-                            <Surface className="h-full overflow-hidden p-0 transition-colors group-hover:border-emerald-500/20 dark:group-hover:border-emerald-300/20">
+                            <Surface className="h-full overflow-hidden p-0 transition-colors group-hover:border-[rgb(var(--ui-accent)/0.18)]">
                                 <div className="relative aspect-[1.5/1]">
                                     {subject.imageUrl ? (
                                         <Image
@@ -1173,28 +1224,28 @@ function SubjectGrid({
                                             className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
                                         />
                                     ) : (
-                                        <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(16,185,129,0.18),rgba(59,130,246,0.14))]" />
+                                        <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(16,185,129,0.14),rgba(59,130,246,0.10))]" />
                                     )}
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent" />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/5 to-transparent" />
                                     <div className="absolute left-3 top-3 rounded-full border border-white/15 bg-white/15 px-2 py-0.5 text-[11px] font-medium text-white backdrop-blur-md">
                                         {badge}
                                     </div>
                                 </div>
 
-                                <CardContent className="flex h-full flex-col p-4">
-                                    <div className="text-base font-semibold text-neutral-900 dark:text-white/90">
+                                <div className="p-4">
+                                    <div className="text-base font-medium text-[rgb(var(--ui-text)/0.96)]">
                                         {title}
                                     </div>
 
-                                    <p className="mt-2 text-sm leading-6 text-neutral-600 dark:text-white/65">
+                                    <p className="mt-2 text-sm leading-6 text-[rgb(var(--ui-text-muted)/0.84)]">
                                         {description}
                                     </p>
 
-                                    <div className="mt-5 flex items-center gap-2 text-sm font-medium text-neutral-900 dark:text-white/90">
+                                    <div className="mt-5 flex items-center gap-2 text-sm font-medium text-[rgb(var(--ui-text)/0.96)]">
                                         {t("recommended.exploreSubject")}
                                         <ChevronRight className="size-4" />
                                     </div>
-                                </CardContent>
+                                </div>
                             </Surface>
                         </motion.div>
                     </Link>
@@ -1203,6 +1254,8 @@ function SubjectGrid({
         </div>
     );
 }
+
+/* -------------------- main client -------------------- */
 
 export default function HomePageAvatarOnboardingClient({
                                                            initialSubjects,
@@ -1278,7 +1331,6 @@ export default function HomePageAvatarOnboardingClient({
         const shouldAutoOpen =
             !isAuthenticated && !effectiveCompleted && !effectiveSkipped;
 
-// if onboarding was reopened/editing, keep it open even for authenticated users
         const shouldShowOnboarding =
             stored.open || shouldAutoOpen;
 
@@ -1395,8 +1447,6 @@ export default function HomePageAvatarOnboardingClient({
         },
         [locale, t],
     );
-
-    const TRIAL_LAST_SESSION_KEY = "zoeskoul.trial.lastSessionId";
 
     const beginTrial = async (opts?: {
         subject?: string | null;
@@ -1621,24 +1671,9 @@ export default function HomePageAvatarOnboardingClient({
                 <HeaderSlick brand={APP_NAME} badge={t("common.mvp")} />
             ) : null}
 
-            <main
-                className={cn(
-                    "relative min-h-screen overflow-hidden pb-24 text-neutral-900 dark:text-white/90 sm:pb-28",
-                    "bg-[radial-gradient(1000px_500px_at_0%_0%,rgba(16,185,129,0.14),transparent_60%),radial-gradient(1000px_500px_at_100%_0%,rgba(59,130,246,0.10),transparent_58%),linear-gradient(180deg,#f8fffb_0%,#ffffff_40%,#f7f8ff_100%)]",
-                    "dark:bg-[radial-gradient(1000px_500px_at_0%_0%,rgba(16,185,129,0.12),transparent_55%),radial-gradient(1000px_500px_at_100%_0%,rgba(59,130,246,0.10),transparent_55%),linear-gradient(180deg,#0c1018_0%,#0b0d12_45%,#0b0d12_100%)]",
-                )}
-            >
-                <div
-                    className="pointer-events-none absolute -top-20 left-[-10%] h-64 w-64 rounded-full bg-emerald-300/25 blur-3xl dark:bg-emerald-300/10"
-                    aria-hidden
-                />
-                <div
-                    className="pointer-events-none absolute right-[-8%] top-10 h-72 w-72 rounded-full bg-sky-300/20 blur-3xl dark:bg-sky-300/10"
-                    aria-hidden
-                />
-
+            <PageShell>
                 <section className="relative overflow-hidden">
-                    <div className="ui-container relative py-6 sm:py-8 lg:py-10">
+                    <PageContainer>
                         <AnimatePresence mode="wait">
                             {!bootstrapped ? (
                                 <motion.div
@@ -1652,10 +1687,10 @@ export default function HomePageAvatarOnboardingClient({
                                     <Surface className="p-4 sm:p-5 lg:p-6">
                                         <div className="mx-auto max-w-[520px] text-center">
                                             <SectionKicker>{t("gate.kicker")}</SectionKicker>
-                                            <h1 className="mt-2 text-[26px] font-black tracking-tight sm:text-[34px]">
+                                            <h1 className="mt-2 text-[26px] font-semibold tracking-tight sm:text-[34px]">
                                                 {t("gate.title", { appName: APP_NAME })}
                                             </h1>
-                                            <p className="mt-3 text-sm leading-6 text-neutral-600 dark:text-white/70">
+                                            <p className="mt-3 text-sm leading-6 text-[rgb(var(--ui-text-muted)/0.86)]">
                                                 {t("gate.description", { appName: APP_NAME })}
                                             </p>
                                         </div>
@@ -1673,10 +1708,10 @@ export default function HomePageAvatarOnboardingClient({
                                     <Surface className="p-4 sm:p-5 lg:p-6">
                                         <div className="mx-auto max-w-[520px] text-center">
                                             <SectionKicker>{t("gate.kicker")}</SectionKicker>
-                                            <h1 className="mt-2 text-[26px] font-black tracking-tight sm:text-[34px]">
+                                            <h1 className="mt-2 text-[26px] font-semibold tracking-tight sm:text-[34px]">
                                                 {t("gate.title", { appName: APP_NAME })}
                                             </h1>
-                                            <p className="mt-3 text-sm leading-6 text-neutral-600 dark:text-white/70">
+                                            <p className="mt-3 text-sm leading-6 text-[rgb(var(--ui-text-muted)/0.86)]">
                                                 {t("gate.description", { appName: APP_NAME })}
                                             </p>
                                         </div>
@@ -1707,7 +1742,7 @@ export default function HomePageAvatarOnboardingClient({
                                     transition={{ duration: 0.32 }}
                                     className="grid gap-4 lg:gap-6"
                                 >
-                                    <Surface>
+                                    <Surface className="p-4 sm:p-5 lg:p-6">
                                         <div className="grid items-center gap-8 xl:grid-cols-[minmax(0,1.05fr)_minmax(220px,0.95fr)] xl:gap-10">
                                             <div className="order-2 min-w-0 xl:order-1">
                                                 <SectionKicker>{t("hero.kicker")}</SectionKicker>
@@ -1716,7 +1751,8 @@ export default function HomePageAvatarOnboardingClient({
                                                     initial={{ opacity: 0, y: 14 }}
                                                     animate={{ opacity: 1, y: 0 }}
                                                     transition={{ duration: 0.5 }}
-                                                    className="mt-2 max-w-4xl text-3xl font-black tracking-tight sm:text-4xl lg:text-5xl"
+                                                    className="mt-2 max-w-4xl text-3xl font-semibold tracking-tight sm:text-4xl lg:text-5xl"
+                                                    style={{ color: "rgb(var(--ui-text) / 0.96)" }}
                                                 >
                                                     {t("hero.title", { appName: APP_NAME })}
                                                 </motion.h1>
@@ -1725,7 +1761,7 @@ export default function HomePageAvatarOnboardingClient({
                                                     initial={{ opacity: 0, y: 14 }}
                                                     animate={{ opacity: 1, y: 0 }}
                                                     transition={{ delay: 0.08, duration: 0.5 }}
-                                                    className="mt-3 max-w-3xl text-sm leading-6 text-neutral-600 dark:text-white/70 sm:text-[15px] sm:leading-7"
+                                                    className="mt-3 max-w-3xl text-sm leading-6 text-[rgb(var(--ui-text-muted)/0.86)] sm:text-[15px] sm:leading-7"
                                                 >
                                                     {completed
                                                         ? welcomeText
@@ -1741,7 +1777,7 @@ export default function HomePageAvatarOnboardingClient({
                                                         transition={{ delay: 0.12, duration: 0.5 }}
                                                         className="mt-5 space-y-2"
                                                     >
-                                                        <div className="text-xs font-semibold uppercase tracking-[0.14em] text-neutral-500 dark:text-white/50">
+                                                        <div className="ui-kicker">
                                                             {t("hero.chooseSubject")}
                                                         </div>
 
@@ -1761,22 +1797,21 @@ export default function HomePageAvatarOnboardingClient({
                                                 >
                                                     {completed ? (
                                                         isAuthenticated ? (
-                                                            <Button size="lg" className="gap-2 sm:w-auto" asChild>
-                                                                <Link
-                                                                    href={
-                                                                        trialSubjectSlug
-                                                                            ? `/${encodeURIComponent(locale)}/subjects/${encodeURIComponent(trialSubjectSlug)}/modules`
-                                                                            : `/${encodeURIComponent(locale)}/subjects`
-                                                                    }
-                                                                >
-                                                                    {t("hero.continueLearning")}
-                                                                    <ArrowRight className="size-4" />
-                                                                </Link>
-                                                            </Button>
+                                                            <Link
+                                                                href={
+                                                                    trialSubjectSlug
+                                                                        ? `/${encodeURIComponent(locale)}/subjects/${encodeURIComponent(trialSubjectSlug)}/modules`
+                                                                        : `/${encodeURIComponent(locale)}/subjects`
+                                                                }
+                                                                className={cn(buttonClass("primary"), "h-9 gap-2 sm:w-auto")}
+                                                            >
+                                                                {t("hero.continueLearning")}
+                                                                <ArrowRight className="size-4" />
+                                                            </Link>
                                                         ) : (
-                                                            <Button
-                                                                size="lg"
-                                                                className="gap-2 sm:w-auto"
+                                                            <button
+                                                                type="button"
+                                                                className={cn(buttonClass("primary"), "h-9 gap-2 sm:w-auto")}
                                                                 onClick={handleStartTrial}
                                                                 disabled={!canStartTrial || trialBusy}
                                                             >
@@ -1784,52 +1819,53 @@ export default function HomePageAvatarOnboardingClient({
                                                                     ? t("hero.startingTrial")
                                                                     : t("hero.try3Questions")}
                                                                 <ArrowRight className="size-4" />
-                                                            </Button>
+                                                            </button>
                                                         )
                                                     ) : isAuthenticated ? (
-                                                        <Button size="lg" className="gap-2 sm:w-auto" asChild>
-                                                            <Link href={`/${encodeURIComponent(locale)}/subjects`}>
-                                                                {t("hero.continueLearning")}
-                                                                <ArrowRight className="size-4" />
-                                                            </Link>
-                                                        </Button>
+                                                        <Link
+                                                            href={`/${encodeURIComponent(locale)}/subjects`}
+                                                            className={cn(buttonClass("primary"), "h-9 gap-2 sm:w-auto")}
+                                                        >
+                                                            {t("hero.continueLearning")}
+                                                            <ArrowRight className="size-4" />
+                                                        </Link>
                                                     ) : (
-                                                        <Button
-                                                            size="lg"
-                                                            className="gap-2 sm:w-auto"
+                                                        <button
+                                                            type="button"
+                                                            className={cn(buttonClass("primary"), "h-9 gap-2 sm:w-auto")}
                                                             onClick={reopenAssistant}
                                                         >
                                                             {t("hero.openGuide")}
                                                             <ArrowRight className="size-4" />
-                                                        </Button>
+                                                        </button>
                                                     )}
 
-                                                    <Button size="lg" variant="outline" className="sm:w-auto" asChild>
-                                                        <Link href={`/${encodeURIComponent(locale)}/subjects`}>
-                                                            {t("hero.exploreSubjects")}
-                                                        </Link>
-                                                    </Button>
+                                                    <Link
+                                                        href={`/${encodeURIComponent(locale)}/subjects`}
+                                                        className={cn(buttonClass("secondary"), "h-9 sm:w-auto")}
+                                                    >
+                                                        {t("hero.exploreSubjects")}
+                                                    </Link>
 
-                                                    <Button
-                                                        size="lg"
-                                                        variant="outline"
+                                                    <button
+                                                        type="button"
                                                         onClick={reopenAssistant}
-                                                        className="sm:w-auto dark:bg-white/[0.05] dark:hover:bg-white/[0.08]"
+                                                        className={cn(buttonClass("secondary"), "h-9 sm:w-auto")}
                                                     >
                                                         {completed || skipped || isAuthenticated
                                                             ? t("hero.editPreferences")
                                                             : t("hero.editAnswers")}
-                                                    </Button>
+                                                    </button>
                                                 </motion.div>
 
                                                 {trialErr ? (
-                                                    <div className="mt-3 text-sm text-rose-700 dark:text-rose-200/80">
+                                                    <div className="mt-3 text-sm text-[rgb(var(--ui-danger)/1)]">
                                                         {trialErr}
                                                     </div>
                                                 ) : null}
 
                                                 {completed ? (
-                                                    <div className="mt-4 text-xs text-neutral-500 dark:text-white/55">
+                                                    <div className="mt-4 ui-meta">
                                                         {t("hero.currentTheme", {
                                                             theme: mapThemeLabel(
                                                                 onboardingData.themePreference || resolvedTheme || "",
@@ -1860,90 +1896,84 @@ export default function HomePageAvatarOnboardingClient({
                                                             </div>
                                                         )}
 
-                                                        <Surface className="p-0">
-                                                            <CardContent className="p-4">
-                                                                <div className="flex flex-col gap-3">
-                                                                    <div className="min-w-0">
-                                                                        <div className="text-sm font-semibold text-neutral-900 dark:text-white/90">
-                                                                            {completed
-                                                                                ? t("guideCard.personalized")
-                                                                                : t("guideCard.ready")}
-                                                                        </div>
-                                                                        <p className="mt-1 text-sm leading-6 text-neutral-600 dark:text-white/65">
-                                                                            {interestSummary}
-                                                                        </p>
+                                                        <SoftPanel className="ui-surface p-4">
+                                                            <div className="flex flex-col gap-3">
+                                                                <div className="min-w-0">
+                                                                    <div className="ui-title-sm">
+                                                                        {completed
+                                                                            ? t("guideCard.personalized")
+                                                                            : t("guideCard.ready")}
                                                                     </div>
-
-                                                                    {completed ? (
-                                                                        isAuthenticated ? (
-                                                                            <Button size="sm" asChild className="w-full">
-                                                                                <Link
-                                                                                    href={
-                                                                                        trialSubjectSlug
-                                                                                            ? `/${encodeURIComponent(locale)}/subjects/${encodeURIComponent(trialSubjectSlug)}/modules`
-                                                                                            : `/${encodeURIComponent(locale)}/subjects`
-                                                                                    }
-                                                                                >
-                                                                                    {t("hero.continueLearning")}
-                                                                                </Link>
-                                                                            </Button>
-                                                                        ) : (
-                                                                            <div className="flex flex-col gap-2">
-                                                                                <Button
-                                                                                    size="sm"
-                                                                                    onClick={handleStartTrial}
-                                                                                    disabled={!canStartTrial || trialBusy}
-                                                                                    className="w-full"
-                                                                                >
-                                                                                    {trialBusy
-                                                                                        ? t("hero.startingTrial")
-                                                                                        : t("hero.try3Questions")}
-                                                                                </Button>
-
-                                                                                <Button
-                                                                                    variant="ghost"
-                                                                                    size="sm"
-                                                                                    onClick={reopenAssistant}
-                                                                                    className="w-full dark:hover:bg-white/10"
-                                                                                >
-                                                                                    {t("guideCard.updatePreferences")}
-                                                                                </Button>
-                                                                            </div>
-                                                                        )
-                                                                    ) : isAuthenticated ? (
-                                                                        <Button size="sm" asChild className="w-full">
-                                                                            <Link href={`/${encodeURIComponent(locale)}/subjects`}>
-                                                                                {t("hero.continueLearning")}
-                                                                            </Link>
-                                                                        </Button>
-                                                                    ) : (
-                                                                        <Button
-                                                                            variant="ghost"
-                                                                            size="sm"
-                                                                            onClick={reopenAssistant}
-                                                                            className="w-full dark:hover:bg-white/10"
-                                                                        >
-                                                                            {t("guideCard.start")}
-                                                                        </Button>
-                                                                    )}
+                                                                    <p className="mt-1 text-sm leading-6 text-[rgb(var(--ui-text-muted)/0.84)]">
+                                                                        {interestSummary}
+                                                                    </p>
                                                                 </div>
-                                                            </CardContent>
-                                                        </Surface>
+
+                                                                {completed ? (
+                                                                    isAuthenticated ? (
+                                                                        <Link
+                                                                            href={
+                                                                                trialSubjectSlug
+                                                                                    ? `/${encodeURIComponent(locale)}/subjects/${encodeURIComponent(trialSubjectSlug)}/modules`
+                                                                                    : `/${encodeURIComponent(locale)}/subjects`
+                                                                            }
+                                                                            className={cn(buttonClass("primary"), "w-full")}
+                                                                        >
+                                                                            {t("hero.continueLearning")}
+                                                                        </Link>
+                                                                    ) : (
+                                                                        <div className="flex flex-col gap-2">
+                                                                            <button
+                                                                                type="button"
+                                                                                onClick={handleStartTrial}
+                                                                                disabled={!canStartTrial || trialBusy}
+                                                                                className={cn(buttonClass("primary"), "w-full")}
+                                                                            >
+                                                                                {trialBusy
+                                                                                    ? t("hero.startingTrial")
+                                                                                    : t("hero.try3Questions")}
+                                                                            </button>
+
+                                                                            <button
+                                                                                type="button"
+                                                                                onClick={reopenAssistant}
+                                                                                className={cn(buttonClass("secondary"), "w-full")}
+                                                                            >
+                                                                                {t("guideCard.updatePreferences")}
+                                                                            </button>
+                                                                        </div>
+                                                                    )
+                                                                ) : isAuthenticated ? (
+                                                                    <Link
+                                                                        href={`/${encodeURIComponent(locale)}/subjects`}
+                                                                        className={cn(buttonClass("primary"), "w-full")}
+                                                                    >
+                                                                        {t("hero.continueLearning")}
+                                                                    </Link>
+                                                                ) : (
+                                                                    <button
+                                                                        type="button"
+                                                                        onClick={reopenAssistant}
+                                                                        className={cn(buttonClass("secondary"), "w-full")}
+                                                                    >
+                                                                        {t("guideCard.start")}
+                                                                    </button>
+                                                                )}
+                                                            </div>
+                                                        </SoftPanel>
                                                     </div>
                                                 </motion.div>
                                             </div>
                                         </div>
                                     </Surface>
 
-                                    <Surface>
+                                    <Surface className="p-4 sm:p-5 lg:p-6">
                                         <div className="max-w-2xl">
                                             <SectionKicker>{t("highlights.kicker")}</SectionKicker>
-                                            <h2 className="mt-2 text-2xl font-black tracking-tight sm:text-3xl">
-                                                {t("highlights.title")}
-                                            </h2>
-                                            <p className="mt-3 text-sm leading-6 text-neutral-600 dark:text-white/70 sm:text-[15px] sm:leading-7">
+                                            <SectionTitle>{t("highlights.title")}</SectionTitle>
+                                            <SectionLead>
                                                 {t("highlights.description", { appName: APP_NAME })}
-                                            </p>
+                                            </SectionLead>
                                         </div>
 
                                         <div className="mt-6">
@@ -1951,18 +1981,16 @@ export default function HomePageAvatarOnboardingClient({
                                         </div>
                                     </Surface>
 
-                                    <Surface>
+                                    <Surface className="p-4 sm:p-5 lg:p-6">
                                         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
                                             <div>
                                                 <SectionKicker>{t("recommended.kicker")}</SectionKicker>
-                                                <h2 className="mt-2 text-2xl font-black tracking-tight sm:text-3xl">
-                                                    {t("recommended.title")}
-                                                </h2>
+                                                <SectionTitle>{t("recommended.title")}</SectionTitle>
                                             </div>
 
                                             <Link
                                                 href={`/${encodeURIComponent(locale)}/subjects`}
-                                                className="inline-flex items-center gap-2 text-sm font-extrabold text-neutral-900 transition-opacity hover:opacity-70 dark:text-white/90"
+                                                className="inline-flex items-center gap-2 text-sm font-medium text-[rgb(var(--ui-text)/0.96)] transition-opacity hover:opacity-70"
                                             >
                                                 {t("recommended.viewAll")}
                                                 <ChevronRight className="size-4" />
@@ -1980,7 +2008,7 @@ export default function HomePageAvatarOnboardingClient({
                                 </motion.div>
                             ) : null}
                         </AnimatePresence>
-                    </div>
+                    </PageContainer>
                 </section>
 
                 {showFloatingAssistant ? (
@@ -1991,28 +2019,24 @@ export default function HomePageAvatarOnboardingClient({
                             whileHover={reduceMotion ? undefined : { y: -2 }}
                             type="button"
                             onClick={reopenAssistant}
-                            className={cn(
-                                "flex items-center gap-3 rounded-full border px-3 py-3 sm:px-4",
-                                "border-black/5 bg-white/88 shadow-[0_20px_60px_-28px_rgba(0,0,0,0.28)] backdrop-blur-xl",
-                                "dark:border-white/10 dark:bg-white/[0.06] dark:shadow-none",
-                            )}
+                            className="ui-page-surface flex items-center gap-3 rounded-full px-3 py-3 sm:px-4"
                         >
                             <div className="flex size-9 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-700 dark:bg-emerald-300/10 dark:text-emerald-200">
                                 <MessageCircleMore className="size-4" />
                             </div>
 
                             <div className="hidden text-left sm:block">
-                                <div className="text-sm font-medium text-neutral-900 dark:text-white/90">
+                                <div className="text-sm font-medium text-[rgb(var(--ui-text)/0.96)]">
                                     {t("floatingAssistant.title")}
                                 </div>
-                                <div className="text-xs text-neutral-500 dark:text-white/55">
+                                <div className="ui-meta">
                                     {t("floatingAssistant.subtitle")}
                                 </div>
                             </div>
                         </motion.button>
                     </div>
                 ) : null}
-            </main>
+            </PageShell>
 
             <RedirectOverlay
                 open={Boolean(activeOverlay)}

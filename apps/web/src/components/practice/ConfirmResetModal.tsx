@@ -12,10 +12,12 @@ type Props = {
     danger?: boolean;
     onConfirm: () => void;
     onClose: () => void;
-
-    // optional: control panel width without breaking overlay
-    panelClassName?: string; // e.g. "max-w-[20rem]" or "max-w-md"
+    panelClassName?: string;
 };
+
+function cn(...cls: Array<string | false | null | undefined>) {
+    return cls.filter(Boolean).join(" ");
+}
 
 export default function ConfirmResetModal({
                                               open,
@@ -50,10 +52,6 @@ export default function ConfirmResetModal({
 
     if (!open || !mounted) return null;
 
-    const confirmCls = danger
-        ? "bg-rose-500/90 hover:bg-rose-500 text-white"
-        : "bg-emerald-500/90 hover:bg-emerald-500 text-white";
-
     const node = (
         <div
             data-modal-root="true"
@@ -61,37 +59,28 @@ export default function ConfirmResetModal({
             aria-modal="true"
             role="dialog"
         >
-            {/* Backdrop */}
             <div
-                className="absolute inset-0 bg-black/60"
+                className="absolute inset-0 bg-black/55 backdrop-blur-[2px]"
                 onClick={onClose}
                 aria-hidden="true"
             />
 
-            {/* Panel */}
             <div
                 ref={panelRef}
                 tabIndex={-1}
-                className={[
-                    "relative w-full overflow-visible rounded-2xl border border-white/10 bg-neutral-950 p-5 shadow-2xl outline-none",
-                    panelClassName,
-                ].join(" ")}
+                className={cn("relative w-full ui-surface-floating p-5 outline-none", panelClassName)}
             >
-                <div className="text-lg font-extrabold leading-tight text-white/90">
-                    {title}
-                </div>
+                <div className="ui-title-md">{title}</div>
 
                 {description ? (
-                    <div className="mt-2 text-sm leading-6 text-white/70">
-                        {description}
-                    </div>
+                    <div className="mt-2 text-sm leading-6 ui-text-muted">{description}</div>
                 ) : null}
 
                 <div className="mt-5 flex flex-wrap items-center justify-end gap-2">
                     <button
                         type="button"
                         onClick={onClose}
-                        className="h-10 rounded-xl border border-white/10 bg-white/5 px-4 text-sm font-bold text-white/80 hover:bg-white/10"
+                        className="ui-btn-secondary h-10 px-4 text-sm"
                     >
                         {cancelText}
                     </button>
@@ -99,7 +88,9 @@ export default function ConfirmResetModal({
                     <button
                         type="button"
                         onClick={onConfirm}
-                        className={["h-10 rounded-xl px-4 text-sm font-extrabold", confirmCls].join(" ")}
+                        className={cn(
+                            danger ? "ui-btn-ide-danger h-10 px-4 text-sm" : "ui-btn-primary h-10 px-4 text-sm",
+                        )}
                     >
                         {confirmText}
                     </button>

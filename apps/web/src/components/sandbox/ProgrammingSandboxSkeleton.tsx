@@ -240,7 +240,7 @@ export default function ProgrammingSandboxSkeleton() {
                     <Divider className="hidden lg:block" />
 
                     <main className="min-h-0 min-w-0 flex-1 overflow-hidden">
-                        <div className="flex h-full min-h-0 w-full flex-col overflow-hidden rounded-none border border-neutral-200 bg-white sm:rounded-xl dark:border-white/10 dark:bg-white/[0.04]">
+                        <div className="flex h-[100vh] min-h-0 w-full flex-col overflow-hidden rounded-none border border-neutral-200 bg-white sm:rounded-xl dark:border-white/10 dark:bg-white/[0.04]">
                             <ShellHeaderSkeleton />
                             <div className="min-h-0 flex-1">
                                 <RunnerSkeleton />

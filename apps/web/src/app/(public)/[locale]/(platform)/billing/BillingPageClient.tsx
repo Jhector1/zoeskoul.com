@@ -6,19 +6,24 @@ import { useTranslations } from "next-intl";
 import { StripeStatusPanel } from "@/components/billing/StripeStatusPanel";
 import { cn } from "@/lib/cn";
 
-import { CARD } from "@/components/billing/styles";
 import BillingShell from "@/components/billing/BillingShell";
 import BillingHeader from "@/components/billing/BillingHeader";
 import BillingError from "@/components/billing/BillingError";
 import PlanCard from "@/components/billing/PlanCard";
+import InfoRow from "@/components/billing/InfoRow";
+import BillingPageSkeleton from "@/components/billing/BillingPageSkeleton";
+import {
+    BillingCard,
+    BillingPanel,
+    BillingSectionHeader,
+    BillingSoftPanel,
+} from "@/components/billing/BillingPrimitives";
 
 import { useBillingStatus } from "@/components/billing/hooks/useBillingStatus";
 import { useBillingActions } from "@/components/billing/hooks/useBillingActions";
-import InfoRow from "@/components/billing/InfoRow";
-import BillingPageSkeleton from "@/components/billing/BillingPageSkeleton";
 
 type PaywallInfo = {
-    reason?: string | null; // "module" | "assignment" | ...
+    reason?: string | null;
     subject?: string | null;
     module?: string | null;
     next?: string | null;
@@ -62,13 +67,15 @@ export default function BillingPageClient({
                 : t("paywall.titleGeneric");
 
     const trialDays = status?.trialDays ?? 7;
+
     if (loading) {
         return <BillingPageSkeleton showPaywall={Boolean(paywall?.reason)} />;
     }
+
     return (
         <BillingShell>
-            <div className="relative mx-auto max-w-5xl grid gap-4">
-                <div className={CARD}>
+            <div className="relative mx-auto grid max-w-5xl gap-4">
+                <BillingCard>
                     <BillingHeader
                         busy={busy}
                         loading={loading}
@@ -80,25 +87,12 @@ export default function BillingPageClient({
 
                     {showPaywall ? (
                         <div className="px-5 pb-5">
-                            <div
-                                className={cn(
-                                    "rounded-2xl border border-amber-200/70 bg-amber-50/70 p-4 text-sm",
-                                    "dark:border-amber-300/15 dark:bg-amber-300/5",
-                                )}
-                            >
+                            <div className="ui-surface-warn p-4 text-sm">
                                 <div className="flex flex-wrap items-center justify-between gap-2">
-                                    <div className="font-black tracking-tight">{paywallTitle}</div>
+                                    <div className="ui-title-sm">{paywallTitle}</div>
 
                                     {backHref ? (
-                                        <Link
-                                            href={backHref}
-                                            className={cn(
-                                                "inline-flex items-center justify-center rounded-xl px-3 py-1.5 text-xs font-extrabold",
-                                                "bg-neutral-900 text-white shadow-sm hover:shadow-md active:scale-[0.99]",
-                                                "dark:bg-white/10 dark:text-white/90 dark:hover:bg-white/12",
-                                                "transition",
-                                            )}
-                                        >
+                                        <Link href={backHref} className={cn("ui-btn-secondary px-3")}>
                                             {t("paywall.goBack")}
                                         </Link>
                                     ) : null}
@@ -123,9 +117,7 @@ export default function BillingPageClient({
                                     ) : null}
                                 </div>
 
-                                <div className="mt-2 text-xs text-neutral-600 dark:text-white/60">
-                                    {t("paywall.afterCheckout")}
-                                </div>
+                                <div className="mt-2 ui-meta">{t("paywall.afterCheckout")}</div>
                             </div>
                         </div>
                     ) : null}
@@ -135,14 +127,14 @@ export default function BillingPageClient({
                             <BillingError message={error} />
                         </div>
                     ) : null}
-                </div>
+                </BillingCard>
 
                 <div className="grid gap-4 lg:grid-cols-3">
-                    <div className={cn(CARD, "lg:col-span-2")}>
-                        <div className="border-b border-neutral-200/70 bg-white/70 p-5 backdrop-blur-xl dark:border-white/10 dark:bg-black/20">
-                            <div className="text-sm font-black tracking-tight">{t("plans.sectionTitle")}</div>
+                    <BillingCard className="lg:col-span-2">
+                        <BillingSectionHeader>
+                            <div className="ui-title-sm">{t("plans.sectionTitle")}</div>
 
-                            <div className="mt-1 text-xs text-neutral-500 dark:text-white/60">
+                            <div className="mt-1 ui-meta">
                                 {status?.trialDays
                                     ? t("plans.trialInfoWithDays", { days: status.trialDays })
                                     : t("plans.trialInfo")}
@@ -166,10 +158,7 @@ export default function BillingPageClient({
                                             }
                                         }}
                                         className={cn(
-                                            "rounded-xl px-3 py-1.5 text-xs font-extrabold border transition",
-                                            status?.currency === cur
-                                                ? "bg-neutral-900 text-white border-neutral-900 dark:bg-white/10 dark:border-white/20"
-                                                : "bg-white/70 text-neutral-900 border-neutral-200/70 hover:bg-white dark:bg-white/[0.04] dark:text-white/80 dark:border-white/10",
+                                            status?.currency === cur ? "ui-btn-ide-active px-3" : "ui-btn-ide-border px-3",
                                         )}
                                         aria-pressed={status?.currency === cur}
                                     >
@@ -177,7 +166,7 @@ export default function BillingPageClient({
                                     </button>
                                 ))}
                             </div>
-                        </div>
+                        </BillingSectionHeader>
 
                         {!loading && status ? (
                             <div className="p-5 pt-4">
@@ -195,11 +184,9 @@ export default function BillingPageClient({
                         ) : null}
 
                         {loading || !status ? (
-                            <div className="p-5 text-sm text-neutral-600 dark:text-white/70">
-                                {t("plans.loading")}
-                            </div>
+                            <div className="p-5 ui-meta-strong">{t("plans.loading")}</div>
                         ) : (
-                            <div className="p-5 grid gap-3 md:grid-cols-2">
+                            <div className="grid gap-3 p-5 md:grid-cols-2">
                                 <PlanCard
                                     title={t("plans.monthly.title")}
                                     price={status.monthlyPriceLabel}
@@ -240,7 +227,7 @@ export default function BillingPageClient({
                                     subtitle={t("plans.yearly.subtitle")}
                                     recommended
                                     highlight={status.currentPlan === "yearly"}
-                                    savings={status.yearlySavingsLabel ?? "—"} // savings label comes from server; localize there if you want
+                                    savings={status.yearlySavingsLabel ?? "—"}
                                     priceKicker={t("plans.priceKicker")}
                                     recommendedLabel={t("plans.recommended")}
                                     features={t.raw("plans.yearly.features") as string[]}
@@ -270,30 +257,37 @@ export default function BillingPageClient({
                                 />
                             </div>
                         )}
-                    </div>
+                    </BillingCard>
 
-                    <div className={CARD}>
-                        <div className="border-b border-neutral-200/70 bg-white/70 p-5 backdrop-blur-xl dark:border-white/10 dark:bg-black/20">
-                            <div className="text-sm font-black tracking-tight">{t("sidebar.title")}</div>
-                            <div className="mt-1 text-xs text-neutral-500 dark:text-white/60">{t("sidebar.subtitle")}</div>
-                        </div>
+                    <BillingCard>
+                        <BillingSectionHeader>
+                            <div className="ui-title-sm">{t("sidebar.title")}</div>
+                            <div className="mt-1 ui-meta">{t("sidebar.subtitle")}</div>
+                        </BillingSectionHeader>
 
-                        <div className="p-5 grid gap-3 text-sm">
+                        <div className="grid gap-3 p-5 text-sm">
                             <InfoRow title={t("sidebar.items.assignments.title")} desc={t("sidebar.items.assignments.desc")} />
-                            <InfoRow title={t("sidebar.items.unlimitedPractice.title")} desc={t("sidebar.items.unlimitedPractice.desc")} />
-                            <InfoRow title={t("sidebar.items.progressHistory.title")} desc={t("sidebar.items.progressHistory.desc")} />
-                            <InfoRow title={t("sidebar.items.multilanguage.title")} desc={t("sidebar.items.multilanguage.desc")} />
+                            <InfoRow
+                                title={t("sidebar.items.unlimitedPractice.title")}
+                                desc={t("sidebar.items.unlimitedPractice.desc")}
+                            />
+                            <InfoRow
+                                title={t("sidebar.items.progressHistory.title")}
+                                desc={t("sidebar.items.progressHistory.desc")}
+                            />
+                            <InfoRow
+                                title={t("sidebar.items.multilanguage.title")}
+                                desc={t("sidebar.items.multilanguage.desc")}
+                            />
 
-                            <div className="rounded-2xl border border-neutral-200/70 bg-white/70 p-4 text-xs text-neutral-600 shadow-sm dark:border-white/10 dark:bg-white/[0.04] dark:text-white/70 dark:shadow-none">
+                            <BillingSoftPanel className="p-4 text-xs text-neutral-600 dark:text-white/70">
                                 {t("sidebar.tip")}
-                            </div>
+                            </BillingSoftPanel>
                         </div>
-                    </div>
+                    </BillingCard>
                 </div>
 
-                <div className="text-xs text-neutral-500 dark:text-white/55">
-                    {t("footer.disclaimer")}
-                </div>
+                <div className="ui-meta">{t("footer.disclaimer")}</div>
             </div>
         </BillingShell>
     );

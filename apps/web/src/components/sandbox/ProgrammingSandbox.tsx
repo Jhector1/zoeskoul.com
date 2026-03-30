@@ -136,7 +136,7 @@ export default function ProgrammingIdeSandbox({
         `${process.env.NEXT_PUBLIC_APP_NAME ?? "learnoir"}.ide.workspace.v2.sandbox.programming.${toolSlug}`;
 
     return (
-        <div className="h-dvh w-full min-w-0 overflow-hidden bg-transparent">
+        <div className="h-dvh  w-full min-w-0 overflow-hidden bg-transparent">
             <div className="grid h-full min-h-0 min-w-0 w-full grid-rows-[auto_1fr]">
                 <div className="border-b border-neutral-200 bg-white/95 backdrop-blur dark:border-white/10 dark:bg-neutral-950/95 lg:hidden">
                     <div className="w-full min-w-0 px-2 py-2">
@@ -177,7 +177,7 @@ export default function ProgrammingIdeSandbox({
                     </div>
                 </div>
 
-                <div className="min-h-0 min-w-0 lg:flex">
+                <div className="min-h-[100vh] min-w-0 lg:flex">
                     <aside
                         className={cn(
                             "hidden h-full min-h-0 shrink-0 overflow-hidden border-r border-neutral-200 bg-white transition-[width] duration-300 ease-in-out dark:border-white/10 dark:bg-neutral-950 lg:block",

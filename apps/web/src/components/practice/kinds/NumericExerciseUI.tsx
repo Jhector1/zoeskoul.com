@@ -2,69 +2,57 @@
 
 import React from "react";
 import type { Exercise } from "@/lib/practice/types";
-import MathMarkdown from "@/components/markdown/MathMarkdown";
-import {normalizeMath} from "@/lib/markdown/normalizeMath";
-import {ExercisePrompt} from "@/components/practice/kinds/KindHelper";
+import { ExercisePrompt } from "@/components/practice/kinds/KindHelper";
 
 export default function NumericExerciseUI({
-  exercise,
-  value,
-  onChange,
-  disabled,
-  checked,
-  ok,
-}: {
-  exercise: Exercise;
-  value: string;
-  onChange: (v: string) => void;
-  disabled: boolean;
-
-  checked: boolean; // current.submitted
-  ok: boolean | null; // current.result?.ok ?? null
+                                              exercise,
+                                              value,
+                                              onChange,
+                                              disabled,
+                                              checked,
+                                              ok,
+                                          }: {
+    exercise: Exercise;
+    value: string;
+    onChange: (v: string) => void;
+    disabled: boolean;
+    checked: boolean;
+    ok: boolean | null;
 }) {
-  const placeholder = (exercise as any).placeholder ?? "Enter a number…";
-  const hasDraft = String(value ?? "").trim().length > 0;
+    const placeholder = (exercise as any).placeholder ?? "Enter a number…";
+    const hasDraft = String(value ?? "").trim().length > 0;
 
-  // ✅ theme-aware using your ui tokens
-  const tone = checked
-    ? ok === true
-      ? "border-emerald-300/40 bg-emerald-300/10"
-      : "border-rose-300/40 bg-rose-300/10"
-    : hasDraft
-      ? "border-sky-300/30 bg-sky-300/10"
-      : "border-neutral-200 bg-white dark:border-white/10 dark:bg-white/[0.06]";
+    const tone = checked
+        ? ok === true
+            ? "border-[rgb(var(--ui-accent)/0.24)] bg-[rgb(var(--ui-accent)/0.08)] ui-text"
+            : "border-[rgb(var(--ui-danger)/0.24)] bg-[rgb(var(--ui-danger)/0.08)] ui-text"
+        : hasDraft
+            ? "border-[rgb(var(--ui-info)/0.24)] bg-[rgb(var(--ui-info)/0.08)] ui-text"
+            : "ui-border ui-bg-surface ui-text";
 
-  const focusTone = checked
-    ? ok === true
-      ? "focus:border-emerald-400/60"
-      : "focus:border-rose-400/60"
-    : "focus:border-sky-300/60";
+    return (
+        <div className="grid gap-2">
+            <ExercisePrompt exercise={exercise} />
 
-  return (
-    <div className="grid gap-2">
-        {/*<>{JSON.stringify(exercise)}</>*/}
-        <ExercisePrompt exercise={exercise} />
+            <div className="ui-meta-strong">Your answer</div>
 
-        <div className="ui-sketch-label">Your answer</div>
+            <input
+                className={[
+                    "h-11 w-full rounded-lg border px-3 text-sm font-medium outline-none transition-colors",
+                    tone,
+                    "placeholder:[color:rgb(var(--ui-text-soft)/0.82)]",
+                    "focus:border-[rgb(var(--ui-ring)/0.42)] focus:shadow-[0_0_0_3px_rgb(var(--ui-ring)/0.10)]",
+                    "disabled:cursor-not-allowed disabled:opacity-60",
+                ].join(" ")}
+                placeholder={placeholder}
+                value={value}
+                disabled={disabled}
+                onChange={(e) => onChange(e.target.value)}
+            />
 
-      <input
-        className={[
-          "h-11 w-full rounded-xl border px-3",
-          "text-sm font-extrabold text-neutral-900 outline-none transition",
-          "dark:text-white/90",
-          tone,
-          focusTone,
-          "disabled:opacity-60 disabled:cursor-not-allowed",
-        ].join(" ")}
-        placeholder={placeholder}
-        value={value}
-        disabled={disabled}
-        onChange={(e) => onChange(e.target.value)}
-      />
-
-      <div className="ui-sketch-muted">
-        Tip: decimals are allowed unless the prompt says “integer”.
-      </div>
-    </div>
-  );
+            <div className="ui-meta">
+                Tip: decimals are allowed unless the prompt says “integer”.
+            </div>
+        </div>
+    );
 }

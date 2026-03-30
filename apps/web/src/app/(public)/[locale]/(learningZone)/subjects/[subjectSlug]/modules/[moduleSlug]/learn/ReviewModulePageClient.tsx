@@ -129,9 +129,9 @@ export default function ReviewModulePageClient({ canUnlockAll }: { canUnlockAll:
                 {/*{nav?.prevModuleId}*/}
             </div>
 
-            {navLoading ? (
-                <ReviewModuleNavBarSkeleton ref={footerRef} />
-            ) : (
+            {/*{navLoading ? (*/}
+            {/*    <ReviewModuleNavBarSkeleton ref={footerRef} />*/}
+            {/*) : (*/}
                 <ReviewModuleNavBar
                     ref={footerRef}
                     locale={locale}
@@ -144,7 +144,7 @@ export default function ReviewModulePageClient({ canUnlockAll }: { canUnlockAll:
                     isLastModule={isLastModule}
                     canGetCertificate={canGetCertificate}
                 />
-            )}
+            {/*)}*/}
         </div>
     );
 }

@@ -1,215 +1,849 @@
+/* =========================
+   Base utilities
+========================= */
+@utility ui-btn-ide {
+    @apply inline-flex h-8 items-center justify-center rounded-md px-2.5 text-[11px] font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-40;
+}
+
+@utility ui-badge {
+    @apply inline-flex h-6 items-center rounded-md border px-2 text-[10px] font-medium;
+}
+
+@utility ui-pill {
+    @apply inline-flex h-6 items-center rounded-md border px-2 text-[10px] font-medium;
+}
+
 @layer components {
+    /* =========================
+       Shared vars
+    ========================= */
+    .ui-surface,
+    .ui-surface-soft,
+    .ui-surface-muted,
+    .ui-surface-floating,
+    .ui-surface-danger,
+    .ui-surface-warn,
+    .ui-surface-success,
+    .ui-stat-card,
+    .ui-page-surface,
+    .ui-icon-box,
+    .ui-review-topic-btn,
+    .ui-review-topic-btn-active,
+    .ui-review-note,
+    .ui-review-note-danger,
+    .ui-review-topic-shell {
+        background-color: var(--ui-comp-bg);
+        border-color: var(--ui-comp-border);
+        color: var(--ui-comp-text);
+        box-shadow: var(--ui-comp-shadow, none);
+    }
+
+    .ui-btn-ide-border,
+    .ui-btn-ide-active,
+    .ui-btn-ide-primary,
+    .ui-btn-ide-success,
+    .ui-btn-ide-warn,
+    .ui-btn-ide-danger,
+    .ui-btn-ide-disabled,
+    .ui-btn-secondary,
+    .ui-btn-primary,
+    .ui-btn-premium,
+    .ui-btn-disabled {
+        background-color: var(--ui-btn-bg);
+        border-color: var(--ui-btn-border);
+        color: var(--ui-btn-text);
+        box-shadow: var(--ui-btn-shadow, none);
+    }
+
+    .ui-badge-neutral,
+    .ui-badge-good,
+    .ui-badge-warn,
+    .ui-badge-bad,
+    .ui-pill-neutral,
+    .ui-pill-good,
+    .ui-pill-warn,
+    .ui-pill-info,
+    .ui-pill-danger {
+        background-color: var(--ui-chip-bg);
+        border-color: var(--ui-chip-border);
+        color: var(--ui-chip-text);
+    }
+
+    /* =========================
+       Surfaces
+    ========================= */
     .ui-surface {
-        @apply rounded-xl border border-neutral-200 bg-white/92 dark:border-white/10 dark:bg-white/[0.04];
+        @apply rounded-xl border;
+        --ui-comp-bg: rgb(var(--ui-surface) / 0.92);
+        --ui-comp-border: rgb(var(--ui-border) / 1);
+        --ui-comp-text: rgb(var(--ui-text) / 1);
+        --ui-comp-shadow: var(--ui-shadow-soft);
     }
 
     .ui-surface-soft {
-        @apply rounded-xl border border-neutral-200/70 bg-white/90 dark:border-white/10 dark:bg-black/20;
+        @apply rounded-xl border;
+        --ui-comp-bg: rgb(var(--ui-surface) / 0.90);
+        --ui-comp-border: rgb(var(--ui-border) / 0.7);
+        --ui-comp-text: rgb(var(--ui-text) / 1);
+        --ui-comp-shadow: var(--ui-shadow-soft);
     }
 
     .ui-surface-muted {
-        @apply rounded-md border border-neutral-200 bg-neutral-50 dark:border-white/10 dark:bg-white/[0.04];
+        @apply rounded-md border;
+        --ui-comp-bg: rgb(var(--ui-surface-2) / 1);
+        --ui-comp-border: rgb(var(--ui-border) / 1);
+        --ui-comp-text: rgb(var(--ui-text) / 1);
     }
 
     .ui-surface-floating {
-        @apply rounded-md border border-neutral-200/70 bg-white/92 shadow-sm backdrop-blur dark:border-white/10 dark:bg-black/55;
+        @apply rounded-md border backdrop-blur;
+        --ui-comp-bg: rgb(var(--ui-surface) / 0.94);
+        --ui-comp-border: rgb(var(--ui-border) / 0.7);
+        --ui-comp-text: rgb(var(--ui-text) / 1);
+        --ui-comp-shadow: var(--ui-shadow-md);
     }
 
     .ui-surface-danger {
-        @apply rounded-xl border border-rose-300/20 bg-rose-50/70 dark:border-rose-300/15 dark:bg-rose-950/20;
+        @apply rounded-xl border;
+        --ui-comp-bg: rgb(var(--ui-danger) / 0.1);
+        --ui-comp-border: rgb(var(--ui-danger) / 0.2);
+        --ui-comp-text: rgb(var(--ui-text) / 1);
     }
 
     .ui-surface-warn {
-        @apply rounded-xl border border-amber-300/20 bg-amber-50/70 dark:border-amber-300/15 dark:bg-amber-950/20;
+        @apply rounded-xl border;
+        --ui-comp-bg: rgb(var(--ui-warn) / 0.1);
+        --ui-comp-border: rgb(var(--ui-warn) / 0.2);
+        --ui-comp-text: rgb(var(--ui-text) / 1);
     }
 
     .ui-surface-success {
-        @apply rounded-xl border border-emerald-300/20 bg-emerald-50/70 dark:border-emerald-300/15 dark:bg-emerald-950/20;
+        @apply rounded-xl border;
+        --ui-comp-bg: rgb(var(--ui-accent) / 0.1);
+        --ui-comp-border: rgb(var(--ui-accent) / 0.2);
+        --ui-comp-text: rgb(var(--ui-text) / 1);
     }
 
+    /* =========================
+       Typography
+    ========================= */
     .ui-kicker {
-        @apply text-[10px] font-medium uppercase tracking-[0.16em] text-neutral-500 dark:text-white/40;
+        @apply text-[10px] font-medium uppercase tracking-[0.16em];
+        color: rgb(var(--ui-text-muted) / 0.9);
     }
 
     .ui-title-sm {
-        @apply text-sm font-medium text-neutral-900 dark:text-white/90;
+        @apply text-sm font-medium;
+        color: rgb(var(--ui-text) / 0.95);
     }
 
     .ui-title-md {
-        @apply text-lg font-semibold tracking-tight text-neutral-900 dark:text-white/90;
+        @apply text-lg font-semibold tracking-tight;
+        color: rgb(var(--ui-text) / 0.95);
     }
 
     .ui-title-lg {
-        @apply text-2xl font-semibold tracking-tight text-neutral-900 dark:text-white/90;
+        @apply text-2xl font-semibold tracking-tight;
+        color: rgb(var(--ui-text) / 0.95);
     }
 
     .ui-meta {
-        @apply text-[11px] font-medium text-neutral-500 dark:text-white/50;
+        @apply text-[11px] font-medium;
+        color: rgb(var(--ui-text-muted) / 0.85);
     }
 
     .ui-meta-strong {
-        @apply text-[11px] font-medium text-neutral-600 dark:text-white/60;
+        @apply text-[11px] font-medium;
+        color: rgb(var(--ui-text-muted) / 1);
     }
 
-    .ui-btn-ide {
-        @apply inline-flex h-8 items-center justify-center rounded-md px-2.5 text-[11px] font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-40;
-    }
-
+    /* =========================
+       IDE button variants
+    ========================= */
     .ui-btn-ide-ghost {
-        @apply inline-flex h-8 items-center justify-center rounded-md px-2.5 text-[11px] font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-40 text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900 dark:text-white/65 dark:hover:bg-white/[0.06] dark:hover:text-white/90;
+        @apply ui-btn-ide;
+        color: rgb(var(--ui-text-muted) / 1);
+    }
+
+    .ui-btn-ide-ghost:hover {
+        background-color: rgb(var(--ui-hover) / 1);
+        color: rgb(var(--ui-text) / 1);
     }
 
     .ui-btn-ide-border {
-        @apply inline-flex h-8 items-center justify-center rounded-md border border-neutral-200 bg-white px-2.5 text-[11px] font-medium text-neutral-700 transition-colors hover:bg-neutral-50 disabled:cursor-not-allowed disabled:opacity-40 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/75 dark:hover:bg-white/[0.08];
+        @apply ui-btn-ide border;
+        --ui-btn-bg: rgb(var(--ui-surface) / 1);
+        --ui-btn-border: rgb(var(--ui-border) / 1);
+        --ui-btn-text: rgb(var(--ui-text-muted) / 1);
+        --ui-btn-shadow: var(--ui-shadow-soft);
+        --ui-btn-hover-bg: rgb(var(--ui-hover) / 1);
+        --ui-btn-hover-text: rgb(var(--ui-text) / 1);
     }
 
     .ui-btn-ide-active {
-        @apply inline-flex h-8 items-center justify-center rounded-md border border-neutral-300 bg-neutral-100 px-2.5 text-[11px] font-medium text-neutral-900 transition-colors disabled:cursor-not-allowed disabled:opacity-40 dark:border-white/15 dark:bg-white/[0.08] dark:text-white/90;
+        @apply ui-btn-ide border;
+        --ui-btn-bg: rgb(var(--ui-surface-3) / 1);
+        --ui-btn-border: rgb(var(--ui-border-strong) / 1);
+        --ui-btn-text: rgb(var(--ui-text) / 1);
+        --ui-btn-hover-bg: rgb(var(--ui-hover) / 1);
+        --ui-btn-hover-text: rgb(var(--ui-text) / 1);
     }
 
     .ui-btn-ide-primary {
-        @apply inline-flex h-8 items-center justify-center rounded-md border border-neutral-900 bg-neutral-900 px-2.5 text-[11px] font-medium text-white transition-colors hover:bg-neutral-800 disabled:cursor-not-allowed disabled:opacity-40 dark:border-white/10 dark:bg-white/10 dark:text-white dark:hover:bg-white/14;
+        @apply ui-btn-ide border;
+        --ui-btn-bg: rgb(var(--ui-accent) / 1);
+        --ui-btn-border: rgb(var(--ui-accent) / 0.2);
+        --ui-btn-text: rgb(var(--ui-text-invert) / 1);
+        --ui-btn-hover-bg: rgb(var(--ui-accent) / 0.92);
+        --ui-btn-hover-text: rgb(var(--ui-text-invert) / 1);
     }
 
     .ui-btn-ide-success {
-        @apply inline-flex h-8 items-center justify-center rounded-md border border-emerald-300/20 bg-emerald-300/10 px-2.5 text-[11px] font-medium text-emerald-900 transition-colors hover:bg-emerald-300/15 disabled:cursor-not-allowed disabled:opacity-40 dark:border-emerald-300/20 dark:bg-emerald-300/10 dark:text-emerald-100 dark:hover:bg-emerald-300/15;
+        @apply ui-btn-ide border;
+        --ui-btn-bg: rgb(var(--ui-accent) / 0.1);
+        --ui-btn-border: rgb(var(--ui-accent) / 0.2);
+        --ui-btn-text: rgb(var(--ui-accent) / 1);
+        --ui-btn-hover-bg: rgb(var(--ui-accent) / 0.15);
+        --ui-btn-hover-text: rgb(var(--ui-accent) / 1);
     }
 
     .ui-btn-ide-warn {
-        @apply inline-flex h-8 items-center justify-center rounded-md border border-amber-300/20 bg-amber-300/10 px-2.5 text-[11px] font-medium text-amber-900 transition-colors hover:bg-amber-300/15 disabled:cursor-not-allowed disabled:opacity-40 dark:border-amber-300/20 dark:bg-amber-300/10 dark:text-amber-100 dark:hover:bg-amber-300/15;
+        @apply ui-btn-ide border;
+        --ui-btn-bg: rgb(var(--ui-warn) / 0.1);
+        --ui-btn-border: rgb(var(--ui-warn) / 0.2);
+        --ui-btn-text: rgb(var(--ui-warn) / 1);
+        --ui-btn-hover-bg: rgb(var(--ui-warn) / 0.15);
+        --ui-btn-hover-text: rgb(var(--ui-warn) / 1);
     }
 
     .ui-btn-ide-danger {
-        @apply inline-flex h-8 items-center justify-center rounded-md border border-rose-300/20 bg-rose-300/10 px-2.5 text-[11px] font-medium text-rose-900 transition-colors hover:bg-rose-300/15 disabled:cursor-not-allowed disabled:opacity-40 dark:border-rose-300/20 dark:bg-rose-300/10 dark:text-rose-100 dark:hover:bg-rose-300/15;
+        @apply ui-btn-ide border;
+        --ui-btn-bg: rgb(var(--ui-danger) / 0.1);
+        --ui-btn-border: rgb(var(--ui-danger) / 0.2);
+        --ui-btn-text: rgb(var(--ui-danger) / 1);
+        --ui-btn-hover-bg: rgb(var(--ui-danger) / 0.15);
+        --ui-btn-hover-text: rgb(var(--ui-danger) / 1);
     }
 
     .ui-btn-ide-disabled {
-        @apply inline-flex h-9 items-center justify-center rounded-md border border-neutral-200 bg-neutral-100 px-3 text-sm font-medium text-neutral-400 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/40;
+        @apply inline-flex h-9 items-center justify-center rounded-md border px-3 text-sm font-medium;
+        --ui-btn-bg: rgb(var(--ui-surface-2) / 1);
+        --ui-btn-border: rgb(var(--ui-border) / 1);
+        --ui-btn-text: rgb(var(--ui-text-soft) / 0.8);
     }
 
+    .ui-btn-ide-border:hover,
+    .ui-btn-ide-active:hover,
+    .ui-btn-ide-primary:hover,
+    .ui-btn-ide-success:hover,
+    .ui-btn-ide-warn:hover,
+    .ui-btn-ide-danger:hover {
+        background-color: var(--ui-btn-hover-bg);
+        color: var(--ui-btn-hover-text);
+    }
+
+    /* =========================
+       General buttons
+    ========================= */
     .ui-btn-secondary {
-        @apply inline-flex h-8 items-center justify-center rounded-md border border-neutral-200 bg-white px-2.5 text-[11px] font-medium text-neutral-700 transition-colors hover:bg-neutral-50 disabled:cursor-not-allowed disabled:opacity-40 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/75 dark:hover:bg-white/[0.08];
+        @apply inline-flex h-8 items-center justify-center rounded-md border px-2.5 text-[11px] font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-40;
+        --ui-btn-bg: rgb(var(--ui-surface) / 1);
+        --ui-btn-border: rgb(var(--ui-border) / 1);
+        --ui-btn-text: rgb(var(--ui-text-muted) / 1);
+        --ui-btn-shadow: var(--ui-shadow-soft);
+        --ui-btn-hover-bg: rgb(var(--ui-hover) / 1);
+        --ui-btn-hover-text: rgb(var(--ui-text) / 1);
     }
 
     .ui-btn-primary {
-        @apply inline-flex h-9 items-center justify-center rounded-md border border-neutral-900 bg-neutral-900 px-3 text-sm font-medium text-white transition-colors bg-emerald-500 hover:bg-neutral-800 dark:border-white/10 dark:bg-white/10 dark:text-white dark:hover:bg-white/14;
+        @apply inline-flex h-9 items-center justify-center rounded-md border px-3 text-sm font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-40;
+        --ui-btn-bg: rgb(var(--ui-accent) / 1);
+        --ui-btn-border: rgb(var(--ui-accent) / 0.2);
+        --ui-btn-text: rgb(var(--ui-text-invert) / 1);
+        --ui-btn-shadow: var(--ui-shadow-soft);
+        --ui-btn-hover-bg: rgb(var(--ui-accent) / 0.92);
+        --ui-btn-hover-text: rgb(var(--ui-text-invert) / 1);
     }
 
     .ui-btn-premium {
-        @apply inline-flex h-9 items-center justify-center rounded-md border border-amber-300/20 bg-amber-300/10 px-3 text-sm font-medium text-amber-900 transition-colors hover:bg-amber-300/15 dark:border-amber-300/20 dark:bg-amber-300/10 dark:text-amber-100 dark:hover:bg-amber-300/15;
+        @apply inline-flex h-9 items-center justify-center rounded-md border px-3 text-sm font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-40;
+        --ui-btn-bg: rgb(var(--ui-warn) / 0.1);
+        --ui-btn-border: rgb(var(--ui-warn) / 0.2);
+        --ui-btn-text: rgb(var(--ui-warn) / 1);
+        --ui-btn-hover-bg: rgb(var(--ui-warn) / 0.15);
+        --ui-btn-hover-text: rgb(var(--ui-warn) / 1);
     }
 
     .ui-btn-disabled {
-        @apply inline-flex h-9 items-center justify-center rounded-md border border-neutral-200 bg-neutral-100 px-3 text-sm font-medium text-neutral-400 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/40;
+        @apply inline-flex h-9 items-center justify-center rounded-md border px-3 text-sm font-medium;
+        --ui-btn-bg: rgb(var(--ui-surface-2) / 1);
+        --ui-btn-border: rgb(var(--ui-border) / 1);
+        --ui-btn-text: rgb(var(--ui-text-soft) / 0.8);
     }
 
+    .ui-btn-secondary:hover,
+    .ui-btn-primary:hover,
+    .ui-btn-premium:hover {
+        background-color: var(--ui-btn-hover-bg);
+        color: var(--ui-btn-hover-text);
+    }
+
+    /* =========================
+       Inputs
+    ========================= */
     .ui-input-ide {
-        @apply h-9 rounded-md border border-neutral-200 bg-white px-3 text-[12px] font-medium text-neutral-900 outline-none transition-colors placeholder:text-neutral-400 focus:border-neutral-300 dark:border-white/10 dark:bg-black/25 dark:text-white/85 dark:focus:border-white/20;
+        @apply h-9 rounded-md border px-3 text-[12px] font-medium outline-none transition-colors;
+        background-color: rgb(var(--ui-surface) / 1);
+        border-color: rgb(var(--ui-border) / 1);
+        color: rgb(var(--ui-text) / 1);
+    }
+
+    .ui-input-ide::placeholder {
+        color: rgb(var(--ui-text-soft) / 0.85);
+    }
+
+    .ui-input-ide:focus {
+        border-color: rgb(var(--ui-ring) / 0.45);
+        box-shadow: 0 0 0 3px rgb(var(--ui-ring) / 0.12);
     }
 
     .ui-select-ide {
-        @apply h-8 rounded-md border border-neutral-200 bg-white px-2.5 text-[11px] font-medium text-neutral-700 outline-none transition-colors hover:bg-neutral-50 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/75 dark:hover:bg-white/[0.08];
+        @apply h-8 rounded-md border px-2.5 text-[11px] font-medium outline-none transition-colors;
+        background-color: rgb(var(--ui-surface) / 1);
+        border-color: rgb(var(--ui-border) / 1);
+        color: rgb(var(--ui-text-muted) / 1);
     }
 
-    .ui-badge {
-        @apply inline-flex h-6 items-center rounded-md border px-2 text-[10px] font-medium;
+    .ui-select-ide:hover {
+        background-color: rgb(var(--ui-hover) / 1);
+        color: rgb(var(--ui-text) / 1);
     }
 
+    .ui-select-ide:focus {
+        border-color: rgb(var(--ui-ring) / 0.45);
+        box-shadow: 0 0 0 3px rgb(var(--ui-ring) / 0.12);
+    }
+
+    /* =========================
+       Badges
+    ========================= */
     .ui-badge-neutral {
-        @apply inline-flex h-6 items-center rounded-md border border-neutral-200 bg-white px-2 text-[10px] font-medium text-neutral-600 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/65;
+        @apply ui-badge;
+        --ui-chip-bg: rgb(var(--ui-surface) / 1);
+        --ui-chip-border: rgb(var(--ui-border) / 1);
+        --ui-chip-text: rgb(var(--ui-text-muted) / 1);
     }
 
     .ui-badge-good {
-        @apply inline-flex h-6 items-center rounded-md border border-emerald-300/20 bg-emerald-300/10 px-2 text-[10px] font-medium text-emerald-800 dark:text-emerald-200;
+        @apply ui-badge;
+        --ui-chip-bg: rgb(var(--ui-accent) / 0.1);
+        --ui-chip-border: rgb(var(--ui-accent) / 0.2);
+        --ui-chip-text: rgb(var(--ui-accent) / 1);
     }
 
     .ui-badge-warn {
-        @apply inline-flex h-6 items-center rounded-md border border-amber-300/20 bg-amber-300/10 px-2 text-[10px] font-medium text-amber-800 dark:text-amber-200;
+        @apply ui-badge;
+        --ui-chip-bg: rgb(var(--ui-warn) / 0.1);
+        --ui-chip-border: rgb(var(--ui-warn) / 0.2);
+        --ui-chip-text: rgb(var(--ui-warn) / 1);
     }
 
     .ui-badge-bad {
-        @apply inline-flex h-6 items-center rounded-md border border-rose-300/20 bg-rose-300/10 px-2 text-[10px] font-medium text-rose-800 dark:text-rose-200;
+        @apply ui-badge;
+        --ui-chip-bg: rgb(var(--ui-danger) / 0.1);
+        --ui-chip-border: rgb(var(--ui-danger) / 0.2);
+        --ui-chip-text: rgb(var(--ui-danger) / 1);
     }
 
-    .ui-pill {
-        @apply inline-flex h-6 items-center rounded-md border px-2 text-[10px] font-medium;
-    }
-
+    /* =========================
+       Pills
+    ========================= */
     .ui-pill-neutral {
-        @apply inline-flex h-6 items-center rounded-md border border-neutral-200 bg-white px-2 text-[10px] font-medium text-neutral-600 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/65;
+        @apply ui-pill;
+        --ui-chip-bg: rgb(var(--ui-surface) / 1);
+        --ui-chip-border: rgb(var(--ui-border) / 1);
+        --ui-chip-text: rgb(var(--ui-text-muted) / 1);
     }
 
     .ui-pill-good {
-        @apply inline-flex h-6 items-center rounded-md border border-emerald-300/20 bg-emerald-300/10 px-2 text-[10px] font-medium text-emerald-800 dark:text-emerald-200;
+        @apply ui-pill;
+        --ui-chip-bg: rgb(var(--ui-accent) / 0.1);
+        --ui-chip-border: rgb(var(--ui-accent) / 0.2);
+        --ui-chip-text: rgb(var(--ui-accent) / 1);
     }
 
     .ui-pill-warn {
-        @apply inline-flex h-6 items-center rounded-md border border-amber-300/20 bg-amber-300/10 px-2 text-[10px] font-medium text-amber-800 dark:text-amber-200;
+        @apply ui-pill;
+        --ui-chip-bg: rgb(var(--ui-warn) / 0.1);
+        --ui-chip-border: rgb(var(--ui-warn) / 0.2);
+        --ui-chip-text: rgb(var(--ui-warn) / 1);
     }
 
+    .ui-pill-info {
+        @apply ui-pill;
+        --ui-chip-bg: rgb(var(--ui-info) / 0.1);
+        --ui-chip-border: rgb(var(--ui-info) / 0.2);
+        --ui-chip-text: rgb(var(--ui-info) / 1);
+    }
 
+    .ui-pill-danger {
+        @apply ui-pill;
+        --ui-chip-bg: rgb(var(--ui-danger) / 0.1);
+        --ui-chip-border: rgb(var(--ui-danger) / 0.2);
+        --ui-chip-text: rgb(var(--ui-danger) / 1);
+    }
 
-
-
-
+    /* =========================
+       Stats / progress
+    ========================= */
     .ui-stat-card {
-        @apply rounded-md border border-neutral-200 bg-white px-3 py-3 dark:border-white/10 dark:bg-white/[0.04];
+        @apply rounded-md border px-3 py-3;
+        --ui-comp-bg: rgb(var(--ui-surface) / 1);
+        --ui-comp-border: rgb(var(--ui-border) / 1);
+        --ui-comp-text: rgb(var(--ui-text) / 1);
     }
 
     .ui-progress-track {
-        @apply h-2 w-full overflow-hidden rounded-full bg-neutral-200 dark:bg-white/10;
+        @apply h-2 w-full overflow-hidden rounded-full;
+        background-color: rgb(var(--ui-border-soft) / 1);
     }
 
     .ui-progress-fill {
-        @apply h-full rounded-full bg-neutral-900 transition-[width] duration-300 dark:bg-white/80;
+        @apply h-full rounded-full transition-[width] duration-300;
+        background-color: rgb(var(--ui-accent) / 1);
     }
 
+    /* =========================
+       Splitters
+    ========================= */
     .ui-splitter-x {
-        @apply w-[6px] bg-neutral-200/50 outline-none dark:bg-white/[0.04];
+        @apply w-[6px] outline-none;
+        background-color: rgb(var(--ui-border) / 0.5);
     }
 
     .ui-splitter-y {
-        @apply h-[6px] bg-neutral-200/50 outline-none dark:bg-white/[0.04];
+        @apply h-[6px] outline-none;
+        background-color: rgb(var(--ui-border) / 0.5);
     }
 
-    .ui-splitter-interactive {
-        @apply hover:bg-neutral-300/60 focus:bg-neutral-300/60 dark:hover:bg-white/[0.09] dark:focus:bg-white/[0.09];
+    .ui-splitter-interactive:hover,
+    .ui-splitter-interactive:focus {
+        background-color: rgb(var(--ui-border-strong) / 0.8);
     }
 
+    /* =========================
+       IDE menu
+    ========================= */
     .ui-ide-menubtn {
-        @apply inline-flex h-7 w-7 items-center justify-center rounded-md text-neutral-500 transition-colors hover:bg-neutral-100 hover:text-neutral-900 dark:text-white/55 dark:hover:bg-white/[0.06] dark:hover:text-white/90;
+        @apply inline-flex h-7 w-7 items-center justify-center rounded-md transition-colors;
+        color: rgb(var(--ui-text-muted) / 0.9);
+    }
+
+    .ui-ide-menubtn:hover {
+        background-color: rgb(var(--ui-hover) / 1);
+        color: rgb(var(--ui-text) / 1);
     }
 
     .ui-ide-menupanel {
-        @apply overflow-hidden rounded-md border border-neutral-200 bg-white/98 p-1 shadow-xl backdrop-blur dark:border-white/10 dark:bg-neutral-950/96;
+        @apply overflow-hidden rounded-md border p-1 backdrop-blur;
+        background-color: rgb(var(--ui-surface) / 0.98);
+        border-color: rgb(var(--ui-border) / 1);
+        box-shadow: var(--ui-shadow-lg);
     }
 
     .ui-ide-menuitem {
-        @apply flex h-8 w-full items-center gap-2 rounded-md px-2 text-[11px] font-medium text-neutral-700 transition-colors hover:bg-neutral-100 hover:text-neutral-900 dark:text-white/75 dark:hover:bg-white/[0.06] dark:hover:text-white/90;
+        @apply flex h-8 w-full items-center gap-2 rounded-md px-2 text-[11px] font-medium transition-colors;
+        color: rgb(var(--ui-text-muted) / 1);
+    }
+
+    .ui-ide-menuitem:hover {
+        background-color: rgb(var(--ui-hover) / 1);
+        color: rgb(var(--ui-text) / 1);
     }
 
     .ui-ide-menuitem--danger {
-        @apply text-rose-700 hover:bg-rose-50 hover:text-rose-800 dark:text-rose-200 dark:hover:bg-rose-400/10;
+        color: rgb(var(--ui-danger) / 1);
     }
 
+    .ui-ide-menuitem--danger:hover {
+        background-color: rgb(var(--ui-danger) / 0.08);
+        color: rgb(var(--ui-danger) / 1);
+    }
+
+    /* =========================
+       Terminal
+    ========================= */
     .ui-terminal-surface {
-        @apply h-full rounded-xl border border-neutral-200/70 bg-white/90 dark:border-white/10 dark:bg-black/20;
+        @apply h-full  border;
+        /*background-color: rgb(var(--ui-surface) / 0.9);*/
+        border-color: rgb(var(--ui-border) / 0.7);
+        color: rgb(var(--ui-text) / 1);
     }
 
     .ui-terminal-log {
-        @apply mt-2 flex-1 overflow-auto border-t border-neutral-200/70 bg-white/70 py-2 dark:border-white/10 dark:bg-black/25;
+        @apply mt-2 flex-1 overflow-auto border-t py-2;
+        /*background-color: rgb(var(--ui-surface-2) / 0.7);*/
+        border-color: rgb(var(--ui-border) / 0.7);
     }
 
     .ui-terminal-prompt {
-        @apply relative mt-2 border-t border-neutral-200/70 bg-white/75 px-2.5 py-2 dark:border-white/10 dark:bg-black/25;
+        @apply relative mt-2 border-t px-2.5 py-2;
+        background-color: rgb(var(--ui-surface-2) / 0.85);
+        border-color: rgb(var(--ui-border) / 0.7);
     }
 
+    /* =========================
+       Page helpers
+    ========================= */
     .ui-page-surface {
-        @apply rounded-xl border border-neutral-200 bg-white/92 dark:border-white/10 dark:bg-white/[0.04];
+        @apply rounded-xl border;
+        --ui-comp-bg: rgb(var(--ui-surface) / 0.92);
+        --ui-comp-border: rgb(var(--ui-border) / 1);
+        --ui-comp-text: rgb(var(--ui-text) / 1);
+        --ui-comp-shadow: var(--ui-shadow-soft);
     }
 
     .ui-icon-box {
-        @apply grid h-10 w-10 shrink-0 place-items-center rounded-md border border-neutral-200 bg-white dark:border-white/10 dark:bg-white/[0.04];
+        @apply grid h-10 w-10 shrink-0 place-items-center rounded-md border;
+        --ui-comp-bg: rgb(var(--ui-surface) / 1);
+        --ui-comp-border: rgb(var(--ui-border) / 1);
+        --ui-comp-text: rgb(var(--ui-text) / 1);
     }
 
+    /* =========================
+       Review / module
+    ========================= */
+    .ui-review-header {
+        @apply shrink-0 border-b p-3;
+        background-color: rgb(var(--ui-surface) / 0.82);
+        border-color: rgb(var(--ui-border) / 1);
+        color: rgb(var(--ui-text) / 1);
+        backdrop-filter: blur(12px);
+    }
+
+    .ui-review-progress-text {
+        @apply text-[11px] font-medium;
+        color: rgb(var(--ui-text-muted) / 0.9);
+    }
+
+    .ui-review-progress-value {
+        @apply text-[11px] font-medium tabular-nums;
+        color: rgb(var(--ui-text) / 0.9);
+    }
+
+    .ui-review-topic-btn,
+    .ui-review-topic-btn-active {
+        @apply w-full rounded-xl border px-3 py-2 text-left transition-colors disabled:cursor-not-allowed disabled:opacity-60;
+    }
+
+    .ui-review-topic-btn {
+        --ui-comp-bg: rgb(var(--ui-surface) / 1);
+        --ui-comp-border: rgb(var(--ui-border) / 1);
+        --ui-comp-text: rgb(var(--ui-text) / 1);
+    }
+
+    .ui-review-topic-btn:hover {
+        background-color: rgb(var(--ui-hover) / 1);
+    }
+
+    .ui-review-topic-btn-active {
+        --ui-comp-bg: rgb(var(--ui-accent) / 0.08);
+        --ui-comp-border: rgb(var(--ui-accent) / 0.22);
+        --ui-comp-text: rgb(var(--ui-text) / 1);
+    }
+
+    .ui-review-topic-summary {
+        @apply mt-1 text-xs;
+        color: rgb(var(--ui-text-muted) / 0.85);
+    }
+
+    .ui-review-note,
+    .ui-review-note-danger {
+        @apply mt-3 rounded-xl border p-3 text-xs;
+    }
+
+    .ui-review-note {
+        --ui-comp-bg: rgb(var(--ui-surface) / 1);
+        --ui-comp-border: rgb(var(--ui-border) / 1);
+        --ui-comp-text: rgb(var(--ui-text) / 1);
+    }
+
+    .ui-review-note-danger {
+        --ui-comp-bg: rgb(var(--ui-danger) / 0.1);
+        --ui-comp-border: rgb(var(--ui-danger) / 0.2);
+        --ui-comp-text: rgb(var(--ui-danger) / 1);
+    }
+
+    .ui-ring-button {
+        @apply mt-4 w-full rounded-xl border px-3 py-2 text-center transition-colors disabled:cursor-not-allowed disabled:opacity-50;
+        background-color: rgb(var(--ui-surface) / 1);
+        border-color: rgb(var(--ui-border) / 1);
+        color: rgb(var(--ui-text) / 1);
+        box-shadow: var(--ui-shadow-soft);
+    }
+
+    .ui-ring-button:hover {
+        background-color: rgb(var(--ui-hover) / 1);
+    }
+
+    .ui-ring-button-title {
+        @apply truncate text-xs font-medium;
+        color: rgb(var(--ui-text) / 1);
+    }
+
+    .ui-ring-button-subtitle {
+        @apply truncate text-[11px] font-medium;
+        color: rgb(var(--ui-text-muted) / 0.9);
+    }
+
+    .ui-ring-meter {
+        @apply relative inline-flex h-9 w-9 items-center justify-center rounded-full;
+    }
+
+    .ui-ring-meter-core {
+        @apply inline-grid h-7 w-7 place-items-center rounded-full border;
+        background-color: rgb(var(--ui-surface) / 1);
+        border-color: rgb(var(--ui-border) / 1);
+    }
+
+    .ui-ring-meter-value {
+        @apply tabular-nums text-[7px] leading-none;
+        color: rgb(var(--ui-text) / 1);
+    }
+
+    /* =========================
+       Review topic / banners
+    ========================= */
+    .ui-review-topic-shell {
+        @apply mb-3 rounded-xl border p-3;
+        --ui-comp-bg: rgb(var(--ui-surface) / 1);
+        --ui-comp-border: rgb(var(--ui-border) / 1);
+        --ui-comp-text: rgb(var(--ui-text) / 1);
+        --ui-comp-shadow: var(--ui-shadow-soft);
+    }
+
+    .ui-review-topic-shell-title {
+        @apply whitespace-normal break-words text-sm font-medium tracking-tight;
+        color: rgb(var(--ui-text) / 0.96);
+    }
+
+    .ui-review-topic-shell-subtitle {
+        @apply mt-1 whitespace-normal break-words text-xs font-medium;
+        color: rgb(var(--ui-text-muted) / 0.88);
+    }
+
+    .ui-review-topic-shell-right {
+        @apply shrink-0 flex items-center gap-2 whitespace-nowrap;
+    }
+
+    .ui-review-banner-list {
+        @apply mt-1 grid gap-1 text-sm;
+    }
+
+    .ui-review-banner-item {
+        @apply flex gap-2;
+    }
+
+    .ui-review-banner-mark {
+        @apply mt-[2px] font-medium;
+        color: rgb(var(--ui-text-muted) / 0.9);
+    }
+
+    .ui-review-footer-summary {
+        @apply text-xs font-medium;
+        color: rgb(var(--ui-text-muted) / 0.92);
+    }
+
+    .ui-review-footer-percent {
+        @apply text-[11px] font-medium;
+        color: rgb(var(--ui-text-muted) / 0.82);
+    }
+
+    .ui-review-footer-hint {
+        @apply text-xs font-medium;
+        color: rgb(var(--ui-text-muted) / 0.82);
+    }
+
+    /* =========================
+       Review page helpers
+    ========================= */
+    .ui-review-mobile-drawer {
+        @apply fixed top-0 bottom-0 z-[100] w-[min(92vw,380px)] border;
+        background-color: rgb(var(--ui-surface) / 0.94);
+        border-color: rgb(var(--ui-border) / 0.85);
+        color: rgb(var(--ui-text) / 1);
+        backdrop-filter: blur(14px);
+        box-shadow: var(--ui-shadow-lg);
+    }
+
+    .ui-review-mobile-drawer-header {
+        @apply shrink-0 flex items-center justify-between gap-2 border-b p-3;
+        border-color: rgb(var(--ui-border) / 1);
+        color: rgb(var(--ui-text) / 1);
+    }
+
+    .ui-review-bottom-bar {
+        @apply rounded-xl border py-2;
+        background-color: rgb(var(--ui-surface) / 0.84);
+        border-color: rgb(var(--ui-border) / 0.8);
+        color: rgb(var(--ui-text) / 1);
+        backdrop-filter: blur(14px);
+        box-shadow: var(--ui-shadow-soft);
+    }
+
+    .ui-review-bottom-hint {
+        @apply mt-2 text-xs font-medium;
+        color: rgb(var(--ui-text-muted) / 0.86);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /* =========================
+   Quiz helpers
+========================= */
+    .ui-quiz-copy {
+        color: rgb(var(--ui-text-muted) / 0.86);
+    }
+
+    .ui-quiz-copy-strong {
+        color: rgb(var(--ui-text-muted) / 1);
+    }
+
+    .ui-quiz-copy-soft {
+        color: rgb(var(--ui-text-muted) / 0.72);
+    }
+
+    .ui-quiz-markdown {
+        @apply text-sm;
+        color: rgb(var(--ui-text-muted) / 0.92);
+    }
+
+    .ui-quiz-markdown :where(.katex) {
+        color: rgb(var(--ui-text) / 0.96);
+    }
+
+    .ui-quiz-markdown :where(.katex-display) {
+        overflow-x: auto;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+    }
+
+    .ui-quiz-markdown-sm {
+        @apply text-xs;
+        color: rgb(var(--ui-text-muted) / 0.86);
+    }
+
+    .ui-quiz-markdown-sm :where(.katex) {
+        color: rgb(var(--ui-text) / 0.96);
+    }
+
+    .ui-quiz-status {
+        @apply text-xs font-medium;
+        color: rgb(var(--ui-text-muted) / 0.88);
+    }
+
+    .ui-quiz-status-strong {
+        @apply text-xs font-medium;
+        color: rgb(var(--ui-text-muted) / 1);
+    }
+
+    .ui-quiz-status-soft {
+        @apply text-xs font-medium;
+        color: rgb(var(--ui-text-muted) / 0.74);
+    }
+
+    .ui-quiz-status-good {
+        @apply text-xs font-medium;
+        color: rgb(var(--ui-accent) / 1);
+    }
+
+    .ui-quiz-status-warn {
+        @apply text-xs font-medium;
+        color: rgb(var(--ui-warn) / 1);
+    }
+
+    .ui-quiz-status-danger {
+        @apply text-xs font-medium;
+        color: rgb(var(--ui-danger) / 1);
+    }
+
+    .ui-quiz-note-inline {
+        @apply mt-2 rounded-md border p-2 text-xs;
+        background-color: rgb(var(--ui-surface-2) / 1);
+        border-color: rgb(var(--ui-border) / 1);
+        color: rgb(var(--ui-text-muted) / 0.94);
+    }
+
+    .ui-quiz-note-danger {
+        @apply mt-2 rounded-md border p-2 text-xs;
+        background-color: rgb(var(--ui-danger) / 0.10);
+        border-color: rgb(var(--ui-danger) / 0.20);
+        color: rgb(var(--ui-danger) / 1);
+    }
+
+    .ui-quiz-explain {
+        @apply mt-3 rounded-md border p-3;
+        background-color: rgb(var(--ui-surface-2) / 1);
+        border-color: rgb(var(--ui-border) / 1);
+        color: rgb(var(--ui-text) / 1);
+    }
+
+    .ui-quiz-checkrow-status {
+        @apply text-xs font-medium sm:text-right;
+        color: rgb(var(--ui-text-muted) / 0.9);
+    }
+
+    .ui-quiz-toggle-row {
+        @apply mb-2 flex items-center justify-end gap-2;
+    }
+
+    .ui-quiz-toggle-label {
+        @apply inline-flex items-center gap-2 select-none text-xs font-medium;
+        color: rgb(var(--ui-text-muted) / 0.92);
+    }
+
+    .ui-quiz-dialog-note {
+        @apply text-xs font-medium;
+        color: rgb(var(--ui-text-muted) / 0.78);
+    }
+
+    .ui-quiz-spinner {
+        @apply inline-flex h-3 w-3 animate-spin rounded-full border-2 border-current border-t-transparent;
+    }
+
+
+
+
+
+    .ui-textarea-ide {
+        @apply mt-1 min-h-[120px] w-full rounded-md border px-3 py-2 font-mono text-[12px] leading-5 outline-none transition-colors;
+        background-color: rgb(var(--ui-surface) / 1);
+        border-color: rgb(var(--ui-border) / 1);
+        color: rgb(var(--ui-text) / 1);
+    }
+
+    .ui-textarea-ide::placeholder {
+        color: rgb(var(--ui-text-soft) / 0.82);
+    }
+
+    .ui-textarea-ide:focus {
+        border-color: rgb(var(--ui-ring) / 0.45);
+        box-shadow: 0 0 0 3px rgb(var(--ui-ring) / 0.12);
+    }
 }

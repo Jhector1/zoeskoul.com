@@ -31,6 +31,7 @@
     "fontSmall": "A-",
     "fontNormal": "A",
     "fontLarge": "A+",
+    "fontExtraLarge": "A++",
     "soundHint": "Turn interface sounds on or off"
   },
   "UserMenu": {

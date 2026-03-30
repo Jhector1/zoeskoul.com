@@ -1,4 +1,3 @@
-// src/components/markdown/MathMarkdown.tsx
 "use client";
 
 import React from "react";
@@ -11,7 +10,6 @@ import rehypeHighlight from "rehype-highlight";
 type Props = {
     content: string;
     className?: string;
-    /** Use inline when rendering inside buttons/labels (no <p> wrappers). */
     inline?: boolean;
 };
 
@@ -90,22 +88,16 @@ function PreWithCopy({
     }
 
     const preClass = join(
-        // ✅ theme-aware code surface
-        "overflow-x-auto rounded-xl border p-3 pt-10 text-xs leading-relaxed font-mono",
-        "border-neutral-200 bg-neutral-50 text-neutral-900",
-        "dark:border-white/10 dark:bg-black/30 dark:text-white/85",
-
-        // ✅ ensure highlight.js doesn't paint its own bg
+        "overflow-x-auto rounded-md border p-3 pt-10 text-xs leading-relaxed font-mono",
+        "ui-border ui-bg-surface-2 ui-text",
         "[&_.hljs]:bg-transparent [&_.hljs]:p-0 [&_.hljs]:m-0",
-
         className,
     );
 
     const copyBtnClass = join(
-        "absolute z-10 top-2 right-2 inline-flex h-8 w-8 items-center justify-center rounded-lg border transition",
-        "border-neutral-200 bg-white text-neutral-700 hover:bg-neutral-50",
-        "dark:border-white/10 dark:bg-white/[0.06] dark:text-white/80 dark:hover:bg-white/[0.10]",
-        "focus:outline-none focus:ring-2 focus:ring-emerald-300/50",
+        "absolute z-10 top-2 right-2 inline-flex h-8 w-8 items-center justify-center rounded-md border transition-colors",
+        "ui-border ui-bg-surface ui-text-muted hover:ui-bg-hover hover:ui-text",
+        "focus:outline-none focus:ring-2 focus:ring-[rgb(var(--ui-ring)/0.35)]",
     );
 
     return (
@@ -125,9 +117,6 @@ function PreWithCopy({
     );
 }
 
-// ------------------------------------------------------------
-// ✅ Terminal-style markdown block renderer (~~~terminal)
-// ------------------------------------------------------------
 function TerminalExample({ raw }: { raw: string }) {
     const lines0 = String(raw ?? "").replace(/\n$/, "").split("\n");
 
@@ -144,47 +133,31 @@ function TerminalExample({ raw }: { raw: string }) {
     const isAccepted = metaLower.includes("accepted") || metaLower.includes("ok");
     const isError = metaLower.includes("error") || metaLower.includes("failed");
 
-    const outerBorder = isError
-        ? "border-rose-300/30"
+    const outerCls = isError
+        ? "ui-surface-danger"
         : isAccepted
-            ? "border-emerald-300/30"
-            : "border-neutral-200 dark:border-white/10";
+            ? "ui-surface-success"
+            : "ui-page-surface";
 
-    const innerBorder = isError
-        ? "border-rose-300/20"
+    const innerCls = isError
+        ? "ui-border-danger ui-bg-danger-soft"
         : isAccepted
-            ? "border-emerald-300/20"
-            : "border-neutral-200 dark:border-white/10";
+            ? "ui-border-accent ui-bg-accent-soft"
+            : "ui-border ui-bg-surface-soft";
 
-    const sysCls = "text-neutral-500 dark:text-white/60";
-    const errCls = "font-semibold text-rose-600 dark:text-rose-300";
-    const outCls = "text-neutral-900 dark:text-white/85";
+    const sysCls = "ui-text-soft";
+    const errCls = "ui-text-danger font-medium";
+    const outCls = "ui-text";
 
     return (
-        <div
-            className={join(
-                "relative z-0 my-3 w-full max-w-[760px] mx-auto",
-                "rounded-2xl border p-3 bg-white/80 dark:bg-black/40",
-                outerBorder,
-            )}
-        >
-            <div className="flex items-center justify-between">
-                <div className="text-[11px] font-extrabold text-neutral-600 dark:text-white/60">
-                    Terminal
-                </div>
-                <div className="text-[11px] font-extrabold text-neutral-500 dark:text-white/50">
-                    {meta}
-                </div>
+        <div className={join("relative z-0 my-3 mx-auto w-full max-w-[760px] p-3", outerCls)}>
+            <div className="flex items-center justify-between gap-2">
+                <div className="ui-meta-strong">Terminal</div>
+                <div className="ui-meta">{meta}</div>
             </div>
 
-            <div
-                className={join(
-                    "mt-2 rounded-xl border p-2 max-h-48 overflow-auto",
-                    "bg-white/60 dark:bg-black/30",
-                    innerBorder,
-                )}
-            >
-                <div className="font-mono text-xs leading-5 whitespace-pre-wrap px-2 break-words">
+            <div className={join("mt-2 max-h-48 overflow-auto rounded-md border p-2", innerCls)}>
+                <div className="whitespace-pre-wrap break-words px-2 font-mono text-xs leading-5">
                     {lines.map((l, i) => {
                         const line = String(l ?? "");
 
@@ -218,7 +191,6 @@ export default function MathMarkdown({ content, className, inline = false }: Pro
     const Wrapper: React.ElementType = inline ? "span" : "div";
 
     const wrapperClass = join(
-        // ✅ ensures KaTeX inherits the surrounding text color
         "[&_.katex]:text-inherit [&_.katex-display]:overflow-x-auto",
         className,
     );
@@ -236,18 +208,18 @@ export default function MathMarkdown({ content, className, inline = false }: Pro
                         inline ? (
                             <>{children}</>
                         ) : (
-                            <p className="my-2 leading-relaxed text-sm text-neutral-700 dark:text-white/80">
+                            <p className="my-2 text-sm leading-relaxed ui-text-muted">
                                 {children}
                             </p>
                         ),
 
-                    strong: ({ children }) => <strong className="font-extrabold">{children}</strong>,
+                    strong: ({ children }) => <strong className="font-semibold ui-text">{children}</strong>,
 
                     ul: ({ children }) =>
                         inline ? (
                             <>{children}</>
                         ) : (
-                            <ul className="my-2 ml-5 list-disc text-sm text-neutral-700 dark:text-white/80">
+                            <ul className="my-2 ml-5 list-disc text-sm ui-text-muted">
                                 {children}
                             </ul>
                         ),
@@ -256,7 +228,7 @@ export default function MathMarkdown({ content, className, inline = false }: Pro
                         inline ? (
                             <>{children}</>
                         ) : (
-                            <ol className="my-2 ml-5 list-decimal text-sm text-neutral-700 dark:text-white/80">
+                            <ol className="my-2 ml-5 list-decimal text-sm ui-text-muted">
                                 {children}
                             </ol>
                         ),
@@ -278,8 +250,7 @@ export default function MathMarkdown({ content, className, inline = false }: Pro
                                 <code
                                     className={join(
                                         "rounded-md border px-1.5 py-0.5 font-mono text-[0.85em]",
-                                        "border-neutral-200 bg-neutral-100 text-neutral-900",
-                                        "dark:border-white/10 dark:bg-white/[0.06] dark:text-white/90",
+                                        "ui-border ui-bg-surface-2 ui-text",
                                     )}
                                     {...props}
                                 >
@@ -298,7 +269,6 @@ export default function MathMarkdown({ content, className, inline = false }: Pro
                     pre: ({ children, className }) => {
                         if (inline) return <>{children}</>;
 
-                        // Detect language from inner <code class="language-...">
                         let lang = "";
                         let codeNode: any = null;
 
@@ -323,7 +293,7 @@ export default function MathMarkdown({ content, className, inline = false }: Pro
                     },
 
                     blockquote: ({ children }) => (
-                        <blockquote className="my-2 rounded-2xl border border-neutral-200 bg-neutral-50 p-3 text-sm text-neutral-700 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/80">
+                        <blockquote className="my-2 ui-surface-muted p-3 text-sm ui-text-muted">
                             {children}
                         </blockquote>
                     ),

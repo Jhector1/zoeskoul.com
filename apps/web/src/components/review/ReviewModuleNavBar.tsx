@@ -21,7 +21,6 @@ type Props = {
 const ReviewModuleNavBar = React.forwardRef<HTMLDivElement, Props>(
     function ReviewModuleNavBar(
         {
-            locale,
             subjectSlug,
             prevModuleId,
             nextModuleId,
@@ -59,25 +58,50 @@ const ReviewModuleNavBar = React.forwardRef<HTMLDivElement, Props>(
         const showNextCta = Boolean(nextModuleId) && !isLastModule;
         const nextLabel = nextLocked ? "Unlock next" : t("buttons.nextModule");
 
+        const showUnlockHint = !isLastModule && !canGoNext && Boolean(nextModuleId);
+        const showCertificateHint = isLastModule && !canGetCertificate;
+        const showHint = showUnlockHint || showCertificateHint;
+
         return (
-            <div ref={ref} className="fixed inset-x-0 bottom-0 z-50 text-neutral-900 dark:text-white/90">
-                <div className="mx-auto py-2 px-4 md:px-6 pb-[max(env(safe-area-inset-bottom),0px)]">
-                    <div
-                        className={cn(
-                            "ui-card",
-                            "bg-white/70 py-2 backdrop-blur-xl dark:bg-black/55",
-                            "!shadow-none !border-0",
-                        )}
-                    >
-                        <div className="flex items-center justify-end gap-3">
+            <div
+                ref={ref}
+                className={cn(
+                    "pointer-events-none fixed z-50",
+                    "left-4 right-4 bottom-4",
+                    "sm:left-auto sm:right-6",
+                )}
+                style={{
+                    bottom: "max(1rem, env(safe-area-inset-bottom))",
+                }}
+            >
+                <div className="pointer-events-auto ml-auto flex w-full max-w-[min(100%,28rem)] flex-col items-end gap-2">
+                    {showHint ? (
+                        <div className="ui-surface-floating max-w-full rounded-2xl px-3 py-2 text-right">
+                            <div className="ui-review-bottom-hint">
+                                {showUnlockHint
+                                    ? t.rich("hints.unlockNext", {
+                                        next: (chunks) => (
+                                            <span className="font-medium">{chunks}</span>
+                                        ),
+                                    })
+                                    : t.rich("hints.unlockCertificate", {
+                                        certificate: (chunks) => (
+                                            <span className="font-medium">{chunks}</span>
+                                        ),
+                                    })}
+                            </div>
+                        </div>
+                    ) : null}
+
+                    <div className="ui-surface-floating rounded-2xl p-2">
+                        <div className="flex flex-wrap items-center justify-end gap-2">
                             <button
                                 type="button"
                                 disabled={!prevModuleId}
                                 onClick={() => prevModuleId && goModule(prevModuleId)}
                                 className={cn(
-                                    "ui-btn ui-btn-secondary",
-                                    "px-2 py-2 text-sm font-extrabold",
-                                    !prevModuleId && "opacity-50 cursor-not-allowed",
+                                    "ui-btn-secondary px-2.5",
+                                    !prevModuleId && "cursor-not-allowed opacity-50",
                                 )}
                                 aria-label={t("buttons.prevModule")}
                                 title={!prevModuleId ? t("aria.noPrev") : t("buttons.prevModule")}
@@ -92,14 +116,16 @@ const ReviewModuleNavBar = React.forwardRef<HTMLDivElement, Props>(
                                     disabled={!canGetCertificate}
                                     onClick={goCertificate}
                                     className={cn(
-                                        "ui-btn",
-                                        "px-2 py-2 text-sm font-extrabold",
                                         canGetCertificate
-                                            ? "ui-btn ui-btn-primary"
-                                            : "ui-btn-secondary opacity-60 cursor-not-allowed",
+                                            ? "ui-btn-primary px-2.5"
+                                            : "ui-btn-secondary px-2.5 opacity-60 cursor-not-allowed",
                                     )}
                                     aria-label={t("buttons.getCertificate")}
-                                    title={!canGetCertificate ? t("aria.lockedCertificate") : t("buttons.getCertificate")}
+                                    title={
+                                        !canGetCertificate
+                                            ? t("aria.lockedCertificate")
+                                            : t("buttons.getCertificate")
+                                    }
                                 >
                                     <span>{t("buttons.getCertificate")}</span>
                                     <span aria-hidden>→</span>
@@ -114,17 +140,11 @@ const ReviewModuleNavBar = React.forwardRef<HTMLDivElement, Props>(
                                             goUnlockNext();
                                             return;
                                         }
-                                        if (nextModuleId) {
-                                            goModule(nextModuleId);
-                                        }
+                                        if (nextModuleId) goModule(nextModuleId);
                                     }}
                                     className={cn(
-                                        "ui-btn",
-                                        "px-2 py-2 text-sm font-extrabold",
-                                        nextLocked
-                                            ? "border border-amber-500/30 bg-amber-500/10 text-amber-900 hover:bg-amber-500/15 dark:border-amber-300/30 dark:bg-amber-300/10 dark:text-amber-100 dark:hover:bg-amber-300/15"
-                                            : "border border-emerald-600/25 bg-emerald-500/10 text-emerald-900 hover:bg-emerald-500/15 dark:border-emerald-300/30 dark:bg-emerald-300/10 dark:text-white/90 dark:hover:bg-emerald-300/15",
-                                        !canGoNext && "opacity-60 cursor-not-allowed",
+                                        nextLocked ? "ui-btn-premium px-2.5" : "ui-btn-primary px-2.5",
+                                        !canGoNext && "cursor-not-allowed opacity-60",
                                     )}
                                     aria-label={nextLabel}
                                     title={!canGoNext ? t("aria.lockedNext") : nextLabel}
@@ -134,22 +154,6 @@ const ReviewModuleNavBar = React.forwardRef<HTMLDivElement, Props>(
                                 </button>
                             ) : null}
                         </div>
-
-                        {!isLastModule && !canGoNext && nextModuleId ? (
-                            <div className="mt-2 text-xs text-neutral-600 dark:text-white/60">
-                                {t.rich("hints.unlockNext", {
-                                    next: (chunks) => <span className="font-black">{chunks}</span>,
-                                })}
-                            </div>
-                        ) : null}
-
-                        {isLastModule && !canGetCertificate ? (
-                            <div className="mt-2 text-xs text-neutral-600 dark:text-white/60">
-                                {t.rich("hints.unlockCertificate", {
-                                    certificate: (chunks) => <span className="font-black">{chunks}</span>,
-                                })}
-                            </div>
-                        ) : null}
                     </div>
                 </div>
             </div>
@@ -158,4 +162,5 @@ const ReviewModuleNavBar = React.forwardRef<HTMLDivElement, Props>(
 );
 
 ReviewModuleNavBar.displayName = "ReviewModuleNavBar";
+
 export default ReviewModuleNavBar;

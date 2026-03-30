@@ -179,7 +179,7 @@ export default function SandboxChooserClient({ locale }: { locale: string }) {
                                         isLast && "border-neutral-300 dark:border-white/15",
                                     )}
                                 >
-                                    <div className="flex items-start justify-between gap-3">
+                                    <div className=" flex items-start justify-between gap-3">
                                         <div className="flex min-w-0 items-start gap-3">
                                             <div className="ui-icon-box h-9 w-9">
                                                 <div className="text-neutral-700 dark:text-white/80">{opt.icon}</div>

@@ -68,7 +68,7 @@ export default function IdeEditorPane({
     }, [nodes]);
 
     return (
-        <div className="flex h-full min-h-0 min-w-0 flex-col overflow-hidden p-1">
+        <div className="flex h-full min-h-0 min-w-0 flex-col overflow-hidden">
             <div className={PANEL_CARD_CLASS}>
                 <TabsBar
                     nodes={nodes}

@@ -24,11 +24,12 @@ export default function TopicOutro({
                         {outro?.body ??
                             "You finished everything in this topic. You can move on or review anything you want."}
                     </div>
+
                     {bullets.length ? (
-                        <ul className="mt-1 grid gap-1 text-sm">
+                        <ul className="ui-review-banner-list">
                             {bullets.map((b) => (
-                                <li key={b} className="flex gap-2">
-                                    <span className="mt-[2px]">•</span>
+                                <li key={b} className="ui-review-banner-item">
+                                    <span className="ui-review-banner-mark">•</span>
                                     <span>{b}</span>
                                 </li>
                             ))}
@@ -41,7 +42,7 @@ export default function TopicOutro({
                     <button
                         type="button"
                         onClick={onContinue}
-                        className={cn("ui-btn ui-btn-primary", "px-4 py-2 text-sm font-extrabold")}
+                        className={cn("ui-btn-primary px-4")}
                     >
                         Next topic →
                     </button>

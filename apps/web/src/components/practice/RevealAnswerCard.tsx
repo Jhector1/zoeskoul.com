@@ -7,8 +7,6 @@ import type { QItem } from "./practiceType";
 import MathMarkdown from "@/components/markdown/MathMarkdown";
 import MatrixInputPanel from "./MatrixInputPanel";
 import { scrollIntoViewSmart } from "@/lib/ui/flowScroll";
-
-// ✅ NEW: resolve @: keys so reveal never shows raw keys
 import { useTaggedT } from "@/i18n/tagged";
 import { resolveDeepTagged } from "@/i18n/resolveDeepTagged";
 
@@ -52,6 +50,13 @@ type RevealModel = {
     node: React.ReactNode;
 };
 
+const REVEAL_PANEL = "ui-surface-muted p-3";
+const REVEAL_PANEL_SOFT = "ui-surface-soft p-3";
+const REVEAL_CHIP = "ui-pill-neutral";
+const REVEAL_PRE = "mt-1 overflow-x-auto rounded-md border p-3 font-mono text-xs leading-relaxed ui-border ui-bg-surface ui-text";
+const REVEAL_SMALL_LABEL = "ui-meta-strong";
+const REVEAL_COPY = "text-sm ui-text";
+
 export default function RevealAnswerCard({
                                              exercise,
                                              current,
@@ -63,15 +68,11 @@ export default function RevealAnswerCard({
     result: any;
     updateCurrent: (patch: Partial<QItem>) => void;
 }) {
-    // Prefer new API shape, fallback to old `expected`
     const reveal = (result?.revealAnswer ?? result?.reveal ?? result?.expected) as any;
 
     const [copied, setCopied] = useState(false);
-
-    // ✅ MUST be declared before any conditional returns (Rules of Hooks)
     const rootRef = useRef<HTMLDivElement | null>(null);
 
-    // ✅ Resolve @: keys inside exercise (options, prompt fragments, etc.)
     const { raw } = useTaggedT();
     const exT: Exercise | null = useMemo(() => {
         if (!exercise) return null;
@@ -91,10 +92,10 @@ export default function RevealAnswerCard({
                 copyText,
                 fillPatch: copyText ? ({ num: copyText } as Partial<QItem>) : null,
                 node: (
-                    <div className="rounded-2xl border border-white/10 bg-black/20 p-3">
+                    <div className={REVEAL_PANEL}>
                         <MathMarkdown
                             content={`$$${copyText || "\\text{(empty)}"}$$`}
-                            className="prose prose-invert max-w-none prose-p:my-2 prose-strong:text-white prose-code:text-white"
+                            className="max-w-none [&_.katex]:text-[rgb(var(--ui-text)/0.96)]"
                         />
                     </div>
                 ),
@@ -118,21 +119,20 @@ export default function RevealAnswerCard({
                     } as Partial<QItem>)
                     : null,
                 node: (
-                    <div className="rounded-2xl border border-white/10 bg-black/20 overflow-hidden">
-                        <div className="flex items-center justify-between gap-2 border-b border-white/10 bg-black/30 px-3 py-2">
-                            <div className="text-[11px] font-extrabold text-white/70">{lang.toUpperCase()}</div>
-                            <div className="text-[11px] text-white/45">Copy/paste into the editor, then Submit.</div>
+                    <div className="ui-surface-muted overflow-hidden">
+                        <div className="flex items-center justify-between gap-2 border-b px-3 py-2 ui-border ui-bg-surface-soft">
+                            <div className="ui-meta-strong">{lang.toUpperCase()}</div>
+                            <div className="ui-meta">Copy/paste into the editor, then Submit.</div>
                         </div>
 
-                        {/* ✅ render solution as plain text (no markdown parsing) */}
-                        <pre className="p-3 text-xs leading-relaxed text-white/85 overflow-x-auto">
+                        <pre className="p-3 overflow-x-auto font-mono text-xs leading-relaxed ui-text">
               <code>{code?.trim() ? code : "// (no solutionCode provided)"}</code>
             </pre>
 
                         {stdin ? (
-                            <div className="border-t border-white/10 px-3 py-2">
-                                <div className="text-[11px] font-extrabold text-white/60">stdin</div>
-                                <pre className="mt-1 text-xs text-white/80 overflow-x-auto">
+                            <div className="border-t px-3 py-2 ui-border">
+                                <div className={REVEAL_SMALL_LABEL}>stdin</div>
+                                <pre className={REVEAL_PRE}>
                   <code>{stdin}</code>
                 </pre>
                             </div>
@@ -160,7 +160,7 @@ export default function RevealAnswerCard({
                         } as Partial<QItem>)
                         : null,
                 node: (
-                    <div className="rounded-2xl border border-white/10 bg-black/20 p-3">
+                    <div className={REVEAL_PANEL}>
                         <MatrixInputPanel
                             labelLatex={(reveal.labelLatex as string) ?? String.raw`\mathbf{A}=`}
                             rows={rows}
@@ -191,19 +191,16 @@ export default function RevealAnswerCard({
                 copyText,
                 fillPatch: transcript ? ({ voiceTranscript: transcript } as Partial<QItem>) : null,
                 node: (
-                    <div className="rounded-2xl border border-white/10 bg-black/20 p-3">
-                        <div className="text-xs font-extrabold text-white/70">Transcript</div>
-                        <div className="mt-1 text-sm font-black text-white/90">{transcript || "—"}</div>
+                    <div className={REVEAL_PANEL}>
+                        <div className={REVEAL_SMALL_LABEL}>Transcript</div>
+                        <div className="mt-1 ui-title-sm">{transcript || "—"}</div>
 
                         {answers.length ? (
                             <>
-                                <div className="mt-3 text-xs font-extrabold text-white/60">Also accepted</div>
+                                <div className="mt-3 ui-meta">Also accepted</div>
                                 <div className="mt-2 flex flex-wrap gap-2">
                                     {answers.map((a: string) => (
-                                        <span
-                                            key={a}
-                                            className="rounded-xl border border-white/10 bg-white/10 px-3 py-1 text-xs font-extrabold text-white/85"
-                                        >
+                                        <span key={a} className={REVEAL_CHIP}>
                       {a}
                     </span>
                                     ))}
@@ -232,24 +229,21 @@ export default function RevealAnswerCard({
                 copyText,
                 fillPatch: order.length ? ({ reorder: order, reorderIds: order } as Partial<QItem>) : null,
                 node: (
-                    <div className="rounded-2xl border border-white/10 bg-black/20 p-3">
-                        <div className="text-xs font-extrabold text-white/70">Correct order</div>
+                    <div className={REVEAL_PANEL}>
+                        <div className={REVEAL_SMALL_LABEL}>Correct order</div>
                         <div className="mt-2 flex flex-wrap gap-2">
                             {order.length ? (
                                 order.map((raw: any) => {
                                     const sid = String(raw);
                                     const label = String(byId.get(sid) ?? sid);
                                     return (
-                                        <span
-                                            key={sid}
-                                            className="rounded-xl border border-white/10 bg-white/10 px-3 py-1 text-xs font-extrabold text-white/85"
-                                        >
+                                        <span key={sid} className={REVEAL_CHIP}>
                       {label}
                     </span>
                                     );
                                 })
                             ) : (
-                                <span className="text-xs text-white/60">—</span>
+                                <span className="ui-meta">—</span>
                             )}
                         </div>
                     </div>
@@ -257,7 +251,6 @@ export default function RevealAnswerCard({
             };
         }
 
-        // ✅ unified branch for text-like answers
         if (
             kind === "text_input" ||
             kind === "listen_build" ||
@@ -268,41 +261,34 @@ export default function RevealAnswerCard({
             const preferred = String(reveal.preferred ?? reveal.value ?? (answers[0] ?? "")).trim();
             const copyText = preferred || (answers[0] ?? "");
 
-            const title =
-                kind === "fill_blank_choice"
-                    ? "Correct choice"
-                    : kind === "listen_build"
-                        ? "Correct sentence"
-                        : kind === "word_bank_arrange"
-                            ? "Correct sentence"
-                            : "Accepted answers";
-
             return {
-                title,
+                title:
+                    kind === "fill_blank_choice"
+                        ? "Correct choice"
+                        : kind === "listen_build"
+                            ? "Correct sentence"
+                            : kind === "word_bank_arrange"
+                                ? "Correct sentence"
+                                : "Accepted answers",
                 copyText,
                 fillPatch: copyText ? ({ text: copyText, single: copyText } as Partial<QItem>) : null,
                 node: (
-                    <div className="rounded-2xl border border-white/10 bg-black/20 p-3">
-                        <div className="text-xs font-extrabold text-white/70">
+                    <div className={REVEAL_PANEL}>
+                        <div className={REVEAL_SMALL_LABEL}>
                             {kind === "text_input" ? "Accepted" : "Answer"}
                         </div>
 
                         <div className="mt-2 flex flex-wrap gap-2">
                             {answers.length ? (
                                 answers.map((a: string) => (
-                                    <span
-                                        key={a}
-                                        className="rounded-xl border border-white/10 bg-white/10 px-3 py-1 text-xs font-extrabold text-white/85"
-                                    >
+                                    <span key={a} className={REVEAL_CHIP}>
                     {a}
                   </span>
                                 ))
                             ) : copyText ? (
-                                <span className="rounded-xl border border-white/10 bg-white/10 px-3 py-1 text-xs font-extrabold text-white/85">
-                  {copyText}
-                </span>
+                                <span className={REVEAL_CHIP}>{copyText}</span>
                             ) : (
-                                <span className="text-xs text-white/60">—</span>
+                                <span className="ui-meta">—</span>
                             )}
                         </div>
                     </div>
@@ -321,15 +307,12 @@ export default function RevealAnswerCard({
                 copyText: optionId,
                 fillPatch: optionId ? ({ single: optionId } as Partial<QItem>) : null,
                 node: (
-                    <div className="rounded-2xl border border-white/10 bg-black/20 p-3">
-                        <div className="text-xs text-white/70 font-extrabold">Option</div>
-                        <div className="mt-1 text-sm text-white/90">
-                            <MathMarkdown
-                                content={String(label)}
-                                className="prose prose-invert max-w-none prose-p:my-2 prose-strong:text-white prose-code:text-white"
-                            />
+                    <div className={REVEAL_PANEL}>
+                        <div className={REVEAL_SMALL_LABEL}>Option</div>
+                        <div className="mt-1 text-sm ui-text">
+                            <MathMarkdown content={String(label)} className="max-w-none [&_.katex]:text-[rgb(var(--ui-text)/0.96)]" />
                         </div>
-                        <div className="mt-2 text-[11px] text-white/50">id: {optionId}</div>
+                        <div className="mt-2 ui-meta">id: {optionId}</div>
                     </div>
                 ),
             };
@@ -347,22 +330,19 @@ export default function RevealAnswerCard({
                 copyText,
                 fillPatch: optionIds.length ? ({ multi: optionIds } as Partial<QItem>) : null,
                 node: (
-                    <div className="rounded-2xl border border-white/10 bg-black/20 p-3">
-                        <div className="text-xs text-white/70 font-extrabold">Options</div>
+                    <div className={REVEAL_PANEL}>
+                        <div className={REVEAL_SMALL_LABEL}>Options</div>
 
                         {optionIds.length ? (
                             <div className="mt-2 flex flex-wrap gap-2">
                                 {optionIds.map((id: any) => (
-                                    <span
-                                        key={id}
-                                        className="rounded-xl border border-white/10 bg-white/10 px-3 py-1 text-xs font-extrabold text-white/85"
-                                    >
+                                    <span key={id} className={REVEAL_CHIP}>
                     {byId.get(id) ?? id}
                   </span>
                                 ))}
                             </div>
                         ) : (
-                            <div className="mt-1 text-sm text-white/60">—</div>
+                            <div className="mt-1 ui-meta">—</div>
                         )}
                     </div>
                 ),
@@ -379,13 +359,13 @@ export default function RevealAnswerCard({
                 copyText,
                 fillPatch: sol ? ({ dragA: sol, ...(b ? { dragB: b } : {}) } as Partial<QItem>) : null,
                 node: (
-                    <div className="rounded-2xl border border-white/10 bg-black/20 p-3 text-xs text-white/80">
-                        <div className="font-extrabold text-white/85">a</div>
-                        <pre className="mt-1 overflow-x-auto">{JSON.stringify(sol, null, 2)}</pre>
+                    <div className={REVEAL_PANEL}>
+                        <div className={REVEAL_SMALL_LABEL}>a</div>
+                        <pre className={REVEAL_PRE}>{JSON.stringify(sol, null, 2)}</pre>
                         {b ? (
                             <>
-                                <div className="mt-3 font-extrabold text-white/85">b</div>
-                                <pre className="mt-1 overflow-x-auto">{JSON.stringify(b, null, 2)}</pre>
+                                <div className="mt-3 ui-meta-strong">b</div>
+                                <pre className={REVEAL_PRE}>{JSON.stringify(b, null, 2)}</pre>
                             </>
                         ) : null}
                     </div>
@@ -396,7 +376,6 @@ export default function RevealAnswerCard({
         return null;
     }, [reveal, exT, exercise, current.codeLang]);
 
-    // ✅ scroll when the reveal block appears/changes
     useEffect(() => {
         if (!model) return;
         const el = rootRef.current;
@@ -430,15 +409,13 @@ export default function RevealAnswerCard({
     return (
         <div ref={rootRef} className="mt-3">
             <div className="flex flex-wrap items-center justify-between gap-2">
-                <div className="text-[11px] font-extrabold text-white/70">Revealed answer</div>
+                <div className="ui-meta-strong">Revealed answer</div>
 
                 <div className="flex flex-wrap gap-2">
                     <button
                         onClick={onCopy}
                         disabled={!m.copyText}
-                        className={cn(
-                            "rounded-xl border border-white/10 bg-white/10 px-3 py-2 text-[11px] font-extrabold hover:bg-white/15 disabled:opacity-50"
-                        )}
+                        className="ui-btn-secondary"
                     >
                         {copied ? "Copied ✓" : "Copy"}
                     </button>
@@ -446,7 +423,7 @@ export default function RevealAnswerCard({
                     <button
                         onClick={onFill}
                         disabled={!m.fillPatch}
-                        className="rounded-xl border border-white/10 bg-white/10 px-3 py-2 text-[11px] font-extrabold hover:bg-white/15 disabled:opacity-50"
+                        className="ui-btn-secondary"
                         title="Fill the input with the revealed answer"
                     >
                         Fill answer
