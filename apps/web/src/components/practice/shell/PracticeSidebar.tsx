@@ -1,8 +1,7 @@
-// src/components/practice/shell/PracticeSidebar.tsx
 "use client";
 
 import React from "react";
-import type { Difficulty, Exercise } from "@/lib/practice/types";
+import type { Exercise } from "@/lib/practice/types";
 import type { PracticeShellProps } from "../PracticeShell";
 import ResultPanel from "./ResultPanel";
 import type { UseConceptExplainResult } from "../hooks/useConceptExplain";
@@ -22,10 +21,10 @@ function SelectField<T extends string>({
 }) {
     return (
         <div className="grid gap-2">
-            <label className="ui-sketch-label">{label}</label>
+            <label className="ui-meta-strong">{label}</label>
             <select
                 disabled={disabled}
-                className="ui-sketch-input mt-0"
+                className="ui-select-ide mt-0 w-full"
                 value={value}
                 onChange={(e) => onChange(e.target.value as T)}
             >
@@ -51,12 +50,16 @@ export default function PracticeSidebar(
 ) {
     const {
         t,
+        returnUrl,
+        onReturn,
+
         isAssignmentRun,
         isSessionRun,
         isLockedRun,
         allowReveal,
         maxAttempts,
         busy,
+        submitBusy,
 
         topicLocked,
         difficultyLocked,
@@ -90,45 +93,59 @@ export default function PracticeSidebar(
     } = props;
 
     return (
-        <div className="ui-card overflow-hidden">
-            <div className="border-b border-neutral-200/70 bg-white/70 p-4 backdrop-blur-xl dark:border-white/10 dark:bg-black/20">
+        <div className="ui-page-surface overflow-hidden">
+
+            <div className="border-b border-[rgb(var(--ui-border)/0.9)] bg-[rgb(var(--ui-surface)/0.82)] p-4">
+                { onReturn ? (
+                    <div className="mb-3">
+                        <button
+                            type="button"
+                            onClick={onReturn}
+                            className="ui-btn-secondary px-3"
+                        >
+                            <span aria-hidden>←</span>
+                            <span>{t("summary.return")}</span>
+                        </button>
+                    </div>
+                ) : null}
+
                 <div className="flex items-center justify-between gap-3">
                     <div>
                         {isAssignmentRun ? (
-                            <div className="mt-2 inline-flex rounded-full border border-amber-600/25 bg-amber-500/10 px-2 py-1 text-[11px] font-extrabold text-amber-900 dark:border-amber-300/30 dark:bg-amber-300/10 dark:text-amber-200/90">
-                                {t("filters.assignmentLocked")}
+                            <div className="mt-2 inline-flex">
+                                <span className="ui-pill-warn">{t("filters.assignmentLocked")}</span>
                             </div>
                         ) : isSessionRun ? (
-                            <div className="mt-2 inline-flex rounded-full border border-sky-300/40 bg-sky-50/70 px-2 py-1 text-[11px] font-extrabold text-sky-900 dark:border-sky-300/25 dark:bg-sky-300/10 dark:text-sky-200/90">
-                                {t("filters.sessionLocked")}
+                            <div className="mt-2 inline-flex">
+                                <span className="ui-pill-info">{t("filters.sessionLocked")}</span>
                             </div>
                         ) : null}
 
-                        <div className="text-sm font-black tracking-tight">{t("title")}</div>
-                        <div className="mt-1 text-xs text-neutral-600 dark:text-white/70">{t("subtitle")}</div>
+                        <div className="ui-title-sm">{t("title")}</div>
+                        <div className="mt-1 ui-meta">{t("subtitle")}</div>
 
-                        <div className="mt-2 text-xs text-neutral-500 dark:text-white/60">
+                        <div className="mt-2 ui-meta">
                             {t("progress.label")}:{" "}
-                            <span className="font-extrabold text-neutral-800 dark:text-white/80">
+                            <span className="font-medium text-[rgb(var(--ui-text)/0.96)]">
                 {answeredCount}/{sessionSize}
               </span>{" "}
                             • {t("progress.correct")}:{" "}
-                            <span className="font-extrabold text-neutral-800 dark:text-white/80">{correctCount}</span>
+                            <span className="font-medium text-[rgb(var(--ui-text)/0.96)]">
+                {correctCount}
+              </span>
                         </div>
 
                         {current ? (
-                            <div className="mt-1 text-xs text-neutral-500 dark:text-white/60">
+                            <div className="mt-1 ui-meta">
                                 {t("progress.attempts")}:{" "}
-                                <span className="font-extrabold text-neutral-800 dark:text-white/80">
+                                <span className="font-medium text-[rgb(var(--ui-text)/0.96)]">
                   {attempts}/{isLockedRun ? maxAttempts : "∞"}
                 </span>
                             </div>
                         ) : null}
                     </div>
 
-                    <div className="rounded-full border border-neutral-200 bg-white/70 px-2 py-1 text-[11px] font-extrabold text-neutral-700 dark:border-white/10 dark:bg-white/[0.06] dark:text-white/70">
-                        {badge || t("status.dash")}
-                    </div>
+                    <span className="ui-pill-neutral">{badge || t("status.dash")}</span>
                 </div>
 
                 <div className="mt-3 grid gap-3">
@@ -150,7 +167,8 @@ export default function PracticeSidebar(
 
                     <div className="mt-2 flex flex-wrap gap-2">
                         <button
-                            className="ui-btn ui-btn-secondary px-3 py-2 text-xs font-extrabold disabled:opacity-50 disabled:cursor-not-allowed"
+                            type="button"
+                            className="ui-btn-secondary px-3 disabled:cursor-not-allowed disabled:opacity-50"
                             onClick={goPrev}
                             disabled={busy || !canGoPrev}
                         >
@@ -158,7 +176,8 @@ export default function PracticeSidebar(
                         </button>
 
                         <button
-                            className="ui-btn ui-btn-secondary px-3 py-2 text-xs font-extrabold disabled:opacity-50 disabled:cursor-not-allowed"
+                            type="button"
+                            className="ui-btn-secondary px-3 disabled:cursor-not-allowed disabled:opacity-50"
                             onClick={() => goNext()}
                             disabled={busy || !canGoNext}
                         >
@@ -166,15 +185,20 @@ export default function PracticeSidebar(
                         </button>
 
                         <button
-                            className="ui-btn ui-btn-primary px-3 py-2 text-xs font-extrabold disabled:opacity-50 disabled:cursor-not-allowed"
+                            type="button"
+                            className="ui-btn-primary px-3 disabled:cursor-not-allowed disabled:opacity-50"
                             onClick={() => submit()}
-                            disabled={busy || !props.exercise || finalized || outOfAttempts || !canSubmitNow}
+                            disabled={submitBusy || !props.exercise || finalized || outOfAttempts || !canSubmitNow}
                         >
-                            {t("buttons.submit")}
+              <span className="inline-flex items-center gap-2">
+                {submitBusy ? <span className="ui-quiz-spinner" aria-hidden /> : null}
+                  <span>{submitBusy ? "Submitting..." : t("buttons.submit")}</span>
+              </span>
                         </button>
 
                         <button
-                            className="ui-btn ui-btn-secondary px-3 py-2 text-xs font-extrabold disabled:opacity-50 disabled:cursor-not-allowed"
+                            type="button"
+                            className="ui-btn-secondary px-3 disabled:cursor-not-allowed disabled:opacity-50"
                             onClick={() => reveal()}
                             disabled={busy || !props.exercise || !allowReveal}
                         >
@@ -183,9 +207,7 @@ export default function PracticeSidebar(
                     </div>
 
                     {isLockedRun && !allowReveal ? (
-                        <div className="text-[11px] text-neutral-500 dark:text-white/45">
-                            {t("status.revealDisabled")}
-                        </div>
+                        <div className="ui-meta">{t("status.revealDisabled")}</div>
                     ) : null}
                 </div>
             </div>
@@ -203,7 +225,7 @@ export default function PracticeSidebar(
                 updateCurrent={props.updateCurrent}
                 resultBoxClass={resultBoxClass}
                 concept={concept}
-                excuseAndNext={props.excuseAndNext} // ✅ NEW
+                excuseAndNext={props.excuseAndNext}
             />
         </div>
     );

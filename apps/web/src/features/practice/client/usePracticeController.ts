@@ -399,10 +399,10 @@ export function usePracticeController(args: {
     setConfirmOpen(false);
     setPendingChange(null);
   }
-
+  const resolvedReturnUrl = completionReturnUrl || returnUrlFromQuery || null;
   const shellProps: React.ComponentProps<typeof PracticeShell> = useMemo(
     () => ({
-      returnUrl: completionReturnUrl,
+      returnUrl: resolvedReturnUrl,
       reviewStack: engine.reviewStack,
       isOnboardingTrial: isTrial, // ✅ add here
 
@@ -414,7 +414,7 @@ export function usePracticeController(args: {
         const parts = pathname.split("/").filter(Boolean);
         const locale = parts[0] || "en";
 
-        const raw = String(completionReturnUrl ?? "").trim();
+        const raw = String(resolvedReturnUrl ?? "").trim();
 
         // use session-provided returnUrl first
         if (raw && !raw.startsWith("//") && !/^[a-zA-Z][a-zA-Z0-9+.-]*:/.test(raw)) {
@@ -508,7 +508,7 @@ export function usePracticeController(args: {
       submit: engine.submit,
       reveal: engine.reveal,
       retryLoad: engine.retryLoad,
-
+      submitBusy: engine.submitBusy,
       padRef,
       zHeldRef,
       updateCurrent: engine.updateCurrent,
@@ -527,7 +527,7 @@ export function usePracticeController(args: {
       allowReveal,
       showDebug,
       maxAttempts,
-
+      engine.submitBusy,
       sessionSize,
       topic,
       difficulty,

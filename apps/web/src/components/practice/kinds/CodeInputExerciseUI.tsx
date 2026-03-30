@@ -174,6 +174,7 @@ export default function CodeInputExerciseUI({
 
             <CodeRunner
                 title={runnerTitle as any}
+
                 frame={frame}
                 hintMarkdown={exercise.hint}
                 height={320}
@@ -181,7 +182,7 @@ export default function CodeInputExerciseUI({
                 allowReset={!readOnly}
                 allowRun={!readOnly}
                 runtime={{ backend: "judge0", terminalView: "plain" }}
-                showHint
+                showHint={false}
                 showEditorThemeToggle={!readOnly}
                 language={language}
                 onChangeLanguage={onChangeLanguage}

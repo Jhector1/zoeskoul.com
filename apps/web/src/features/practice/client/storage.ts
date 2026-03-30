@@ -206,6 +206,7 @@ export function readReturnUrlFromSearchParams(sp: URLSearchParams): string | nul
       sp.get("returnUrl") ||
       null;
 
+
   if (!raw) return null;
 
   try {

@@ -1,7 +1,7 @@
-// src/components/practice/shell/ResultPanel.tsx
 "use client";
 
 import React from "react";
+import { cn } from "@/lib/cn";
 import type { Exercise } from "@/lib/practice/types";
 import type { QItem } from "../practiceType";
 import RevealAnswerCard from "../RevealAnswerCard";
@@ -22,7 +22,7 @@ export default function ResultPanel({
                                         updateCurrent,
                                         resultBoxClass,
                                         concept,
-                                        excuseAndNext, // ✅ NEW
+                                        excuseAndNext,
                                     }: {
     t: any;
     busy: boolean;
@@ -36,46 +36,43 @@ export default function ResultPanel({
     updateCurrent: (patch: Partial<QItem>) => void;
     resultBoxClass: string;
     concept: UseConceptExplainResult;
-
     excuseAndNext?: (reason?: string | null) => Promise<void> | void;
 }) {
     const excused = isExcusedPracticeItem(current);
 
     return (
         <div className="p-4">
-            <div className="text-xs font-extrabold text-neutral-500 dark:text-white/60">
-                {t("result.title")}
-            </div>
+            <div className="ui-kicker">{t("result.title")}</div>
 
-            <div className={`mt-2 rounded-2xl border p-3 text-xs leading-relaxed ${resultBoxClass}`}>
+            <div className={cn("mt-2 p-3 text-xs leading-relaxed", resultBoxClass)}>
                 {actionErr ? (
-                    <div className="text-neutral-800 dark:text-white/80">
-                        <div className="font-extrabold">{t("result.errorTitle")}</div>
-                        <div className="mt-1 text-neutral-600 dark:text-white/70">{actionErr}</div>
+                    <div className="text-[rgb(var(--ui-text)/0.92)]">
+                        <div className="ui-title-sm">{t("result.errorTitle")}</div>
+                        <div className="mt-1 ui-meta-strong">{actionErr}</div>
 
                         <div className="mt-3 flex flex-wrap gap-2">
                             <button
                                 type="button"
                                 onClick={() => excuseAndNext?.(actionErr)}
                                 disabled={busy || !excuseAndNext || !current}
-                                className="ui-btn ui-btn-secondary px-3 py-2 text-[11px] font-extrabold disabled:opacity-50 disabled:cursor-not-allowed"
+                                className="ui-btn-secondary px-3 disabled:cursor-not-allowed disabled:opacity-50"
                             >
                                 Continue
                             </button>
                         </div>
                     </div>
                 ) : excused ? (
-                    <div className="text-neutral-800 dark:text-white/80">
-                        <div className="font-extrabold">Excused</div>
-                        <div className="mt-1 text-neutral-600 dark:text-white/70">
+                    <div className="text-[rgb(var(--ui-text)/0.92)]">
+                        <div className="ui-title-sm">Excused</div>
+                        <div className="mt-1 ui-meta">
                             This question was excused so you can keep going.
                         </div>
                     </div>
                 ) : !current?.result ? (
-                    <div className="text-neutral-600 dark:text-white/70">{t("result.submitToValidate")}</div>
+                    <div className="ui-meta">{t("result.submitToValidate")}</div>
                 ) : (
                     <>
-                        <div className="font-extrabold">
+                        <div className="ui-title-sm">
                             {current.revealed
                                 ? t("result.revealed")
                                 : current.result.ok
@@ -93,16 +90,18 @@ export default function ResultPanel({
                         ) : null}
 
                         {isLockedRun && !current.result.ok && !current.submitted ? (
-                            <div className="mt-2 text-neutral-600 dark:text-white/70">
-                                {t("result.attemptsLeft", { count: Math.max(0, maxAttempts - attempts) })}
+                            <div className="mt-2 ui-meta">
+                                {t("result.attemptsLeft", {
+                                    count: Math.max(0, maxAttempts - attempts),
+                                })}
                             </div>
                         ) : null}
 
                         {current.result.explanation ? (
-                            <div className="mt-2 rounded-xl border border-neutral-200 bg-white/60 p-3 dark:border-white/10 dark:bg-white/[0.06]">
+                            <div className="ui-surface-muted mt-2 p-3">
                                 <MathMarkdown
                                     content={String(current.result.explanation)}
-                                    className="prose prose-neutral dark:prose-invert max-w-none prose-p:my-2"
+                                    className="ui-quiz-markdown"
                                 />
                             </div>
                         ) : null}
@@ -114,29 +113,28 @@ export default function ResultPanel({
                         {allowReveal ? (
                             <div className="flex flex-wrap items-center gap-2">
                                 <button
+                                    type="button"
                                     onClick={concept.explainConcept}
                                     disabled={busy || concept.aiBusy}
-                                    className="ui-btn ui-btn-secondary px-3 py-2 text-[11px] font-extrabold disabled:opacity-50 disabled:cursor-not-allowed"
+                                    className="ui-btn-secondary px-3 disabled:cursor-not-allowed disabled:opacity-50"
                                 >
                                     {concept.aiBusy ? t("ai.explaining") : t("ai.explainConcept")}
                                 </button>
-                                <div className="text-[11px] text-neutral-500 dark:text-white/50">
-                                    {t("ai.helperLine")}
-                                </div>
+                                <div className="ui-meta">{t("ai.helperLine")}</div>
                             </div>
                         ) : null}
 
                         {concept.aiErr ? (
-                            <div className="mt-2 text-[11px] text-rose-700 dark:text-rose-200/80">
+                            <div className="mt-2 text-[11px] text-[rgb(var(--ui-danger)/1)]">
                                 {concept.aiErr}
                             </div>
                         ) : null}
 
                         {concept.aiText ? (
-                            <div className="mt-2 rounded-2xl border border-neutral-200 bg-neutral-50 p-3 dark:border-white/10 dark:bg-black/30">
+                            <div className="ui-surface-muted mt-2 p-3">
                                 <MathMarkdown
                                     content={concept.aiText}
-                                    className="prose prose-neutral dark:prose-invert max-w-none prose-p:my-2 prose-strong:font-extrabold"
+                                    className="ui-quiz-markdown"
                                 />
                             </div>
                         ) : null}

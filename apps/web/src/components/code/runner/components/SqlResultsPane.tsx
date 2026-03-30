@@ -150,50 +150,142 @@ function syncTabDefaults(
 function getDiagramConfig(mode: DiagramMode) {
     if (mode === "chen") {
         return {
-            minX: 220,
-            minY: 120,
             minWidth: 1500,
             minHeight: 980,
-            rightPad: 320,
-            bottomPad: 260,
+            leftPad: 900,
+            topPad: 820,
+            rightPad: 900,
+            bottomPad: 820,
             extraRight: 170,
             extraBottom: 110,
+
+            // much larger travel range
+            minX: -2600,
+            minY: -2200,
+            maxX: 4200,
+            maxY: 3600,
         };
     }
 
     if (mode === "erd") {
         return {
-            minX: 120,
-            minY: 80,
             minWidth: 1320,
             minHeight: 860,
-            rightPad: 260,
-            bottomPad: 180,
+            leftPad: 680,
+            topPad: 620,
+            rightPad: 680,
+            bottomPad: 620,
             extraRight: 70,
             extraBottom: 40,
+
+            // much larger travel range
+            minX: -2200,
+            minY: -1800,
+            maxX: 3800,
+            maxY: 3200,
         };
     }
 
     return {
-        minX: 40,
-        minY: 40,
         minWidth: 1100,
         minHeight: 760,
-        rightPad: 180,
-        bottomPad: 140,
+        leftPad: 560,
+        topPad: 520,
+        rightPad: 560,
+        bottomPad: 520,
         extraRight: 0,
         extraBottom: 0,
-    };
-}
 
-function clampDiagramNodePosition(mode: DiagramMode, x: number, y: number) {
+        // this is the one affecting Tables the most
+        minX: -2000,
+        minY: -1600,
+        maxX: 3200,
+        maxY: 2600,
+    };
+}function clampDiagramNodePosition(mode: DiagramMode, x: number, y: number) {
     const cfg = getDiagramConfig(mode);
     return {
-        x: Math.max(cfg.minX, x),
-        y: Math.max(cfg.minY, y),
+        x: Math.min(cfg.maxX, Math.max(cfg.minX, x)),
+        y: Math.min(cfg.maxY, Math.max(cfg.minY, y)),
     };
 }
+type DragTarget = (HTMLElement | SVGElement) & {
+    setPointerCapture?: (pointerId: number) => void;
+    releasePointerCapture?: (pointerId: number) => void;
+    hasPointerCapture?: (pointerId: number) => boolean;
+};
 
+function beginDiagramNodeDrag(args: {
+    target: DragTarget;
+    pointerId: number;
+    clientX: number;
+    clientY: number;
+    scale: number;
+    mode: DiagramMode;
+    tab: DiagramTabKey;
+    id: string;
+    startX: number;
+    startY: number;
+    onMove: (tab: DiagramTabKey, id: string, x: number, y: number) => void;
+}) {
+    const {
+        target,
+        pointerId,
+        clientX,
+        clientY,
+        scale,
+        mode,
+        tab,
+        id,
+        startX,
+        startY,
+        onMove,
+    } = args;
+
+    let raf: number | null = null;
+    let pending: { x: number; y: number } | null = null;
+
+    const flush = () => {
+        raf = null;
+        if (!pending) return;
+        onMove(tab, id, pending.x, pending.y);
+    };
+
+    const move = (ev: PointerEvent) => {
+        if (ev.pointerId !== pointerId) return;
+
+        const dx = (ev.clientX - clientX) / scale;
+        const dy = (ev.clientY - clientY) / scale;
+
+        pending = clampDiagramNodePosition(mode, startX + dx, startY + dy);
+
+        if (raf == null) {
+            raf = window.requestAnimationFrame(flush);
+        }
+    };
+
+    const cleanup = () => {
+        window.removeEventListener("pointermove", move);
+        window.removeEventListener("pointerup", cleanup);
+        window.removeEventListener("pointercancel", cleanup);
+        target.removeEventListener("lostpointercapture", cleanup as EventListener);
+
+        if (raf != null) {
+            window.cancelAnimationFrame(raf);
+            raf = null;
+        }
+
+        if (target.hasPointerCapture?.(pointerId)) {
+            target.releasePointerCapture?.(pointerId);
+        }
+    };
+
+    target.setPointerCapture?.(pointerId);
+    target.addEventListener("lostpointercapture", cleanup as EventListener);
+    window.addEventListener("pointermove", move, { passive: true });
+    window.addEventListener("pointerup", cleanup, { passive: true });
+    window.addEventListener("pointercancel", cleanup, { passive: true });
+}
 function clampDiagramBoxes(mode: DiagramMode, boxes: Box[]) {
     return boxes.map((box) => {
         const next = clampDiagramNodePosition(mode, box.x, box.y);
@@ -216,9 +308,13 @@ function buildDiagramScene(rawBoxes: Box[], mode: DiagramMode): DiagramScene {
     const maxY = Math.max(...rawBoxes.map((b) => b.y + b.h + cfg.extraBottom));
 
     return {
-        width: Math.max(cfg.minWidth, maxX + cfg.rightPad),
-        height: Math.max(cfg.minHeight, maxY + cfg.bottomPad),
-        boxes: rawBoxes,
+        width: Math.max(cfg.minWidth, maxX + cfg.leftPad + cfg.rightPad),
+        height: Math.max(cfg.minHeight, maxY + cfg.topPad + cfg.bottomPad),
+        boxes: rawBoxes.map((box) => ({
+            ...box,
+            x: box.x + cfg.leftPad,
+            y: box.y + cfg.topPad,
+        })),
     };
 }
 
@@ -235,10 +331,21 @@ type PanZoomCanvasProps = {
     children: (ctx: { scale: number }) => React.ReactNode;
 };
 
-function clampScale(n: number) {
-    return Math.max(0.35, Math.min(2.5, n));
-}
+const MIN_SCALE = 0.35;
+const MAX_SCALE = 2.5;
 
+function clampScale(n: number) {
+    return Math.max(MIN_SCALE, Math.min(MAX_SCALE, n));
+}
+function shouldIgnoreBoardPan(target: EventTarget | null) {
+    const el = target as Element | null;
+    if (!el || typeof el.closest !== "function") return false;
+
+    return Boolean(
+        el.closest("[data-diagram-node-drag='true']") ||
+        el.closest("[data-diagram-no-pan='true']"),
+    );
+}
 function PanZoomCanvas(props: PanZoomCanvasProps) {
     const { width, height, fitKey, children } = props;
 
@@ -247,8 +354,10 @@ function PanZoomCanvas(props: PanZoomCanvasProps) {
     const BOARD_PAD = 1400;
     const OVERSCROLL = 180;
 
-    const stageWidth = width + BOARD_PAD * 2;
-    const stageHeight = height + BOARD_PAD * 2;
+    const [viewportSize, setViewportSize] = React.useState({
+        vw: 0,
+        vh: 0,
+    });
 
     const [view, setView] = React.useState({
         scale: 1,
@@ -273,10 +382,62 @@ function PanZoomCanvas(props: PanZoomCanvasProps) {
     const rafRef = React.useRef<number | null>(null);
     const pendingRef = React.useRef<{ x: number; y: number } | null>(null);
 
+    const didInitialFitRef = React.useRef(false);
+    const lastFitKeyRef = React.useRef<string | number | undefined>(undefined);
+
+    const measureViewport = React.useCallback(() => {
+        const el = viewportRef.current;
+        const next = el
+            ? { vw: el.clientWidth, vh: el.clientHeight }
+            : { vw: 0, vh: 0 };
+
+        setViewportSize((prev) =>
+            prev.vw === next.vw && prev.vh === next.vh ? prev : next,
+        );
+
+        return next;
+    }, []);
+
     const getViewportSize = React.useCallback(() => {
         const el = viewportRef.current;
-        if (!el) return { vw: 0, vh: 0 };
+        if (!el) return viewportSize;
         return { vw: el.clientWidth, vh: el.clientHeight };
+    }, [viewportSize]);
+
+    const resolveStageMetrics = React.useCallback(
+        (vw: number, vh: number) => {
+            const baseStageWidth = width + BOARD_PAD * 2;
+            const baseStageHeight = height + BOARD_PAD * 2;
+
+            const minViewportStageWidth =
+                vw > 0 ? Math.ceil((vw + OVERSCROLL * 2) / MIN_SCALE) : 0;
+            const minViewportStageHeight =
+                vh > 0 ? Math.ceil((vh + OVERSCROLL * 2) / MIN_SCALE) : 0;
+
+            const stageWidth = Math.max(baseStageWidth, minViewportStageWidth);
+            const stageHeight = Math.max(baseStageHeight, minViewportStageHeight);
+
+            const boardLeft = Math.max(BOARD_PAD, (stageWidth - width) / 2);
+            const boardTop = Math.max(BOARD_PAD, (stageHeight - height) / 2);
+
+            return {
+                stageWidth,
+                stageHeight,
+                boardLeft,
+                boardTop,
+            };
+        },
+        [width, height],
+    );
+
+    const stageMetrics = React.useMemo(
+        () => resolveStageMetrics(viewportSize.vw, viewportSize.vh),
+        [viewportSize.vw, viewportSize.vh, resolveStageMetrics],
+    );
+
+    const applyView = React.useCallback((next: { scale: number; x: number; y: number }) => {
+        viewRef.current = next;
+        setView(next);
     }, []);
 
     const clampOffset = React.useCallback(
@@ -284,26 +445,31 @@ function PanZoomCanvas(props: PanZoomCanvasProps) {
             const { vw, vh } = getViewportSize();
             if (!vw || !vh) return raw;
 
-            const scaledStageW = stageWidth * nextScale;
-            const scaledStageH = stageHeight * nextScale;
+            const metrics = resolveStageMetrics(vw, vh);
 
-            const minX = vw - scaledStageW - OVERSCROLL;
-            const maxX = OVERSCROLL;
-            const minY = vh - scaledStageH - OVERSCROLL;
-            const maxY = OVERSCROLL;
+            const scaledStageW = metrics.stageWidth * nextScale;
+            const scaledStageH = metrics.stageHeight * nextScale;
+
+            const canPanX = scaledStageW > vw + OVERSCROLL * 2;
+            const canPanY = scaledStageH > vh + OVERSCROLL * 2;
 
             return {
-                x: Math.min(maxX, Math.max(minX, raw.x)),
-                y: Math.min(maxY, Math.max(minY, raw.y)),
+                x: canPanX
+                    ? Math.min(
+                        OVERSCROLL,
+                        Math.max(vw - scaledStageW - OVERSCROLL, raw.x),
+                    )
+                    : (vw - scaledStageW) / 2,
+                y: canPanY
+                    ? Math.min(
+                        OVERSCROLL,
+                        Math.max(vh - scaledStageH - OVERSCROLL, raw.y),
+                    )
+                    : (vh - scaledStageH) / 2,
             };
         },
-        [getViewportSize, stageWidth, stageHeight],
+        [getViewportSize, resolveStageMetrics],
     );
-
-    const applyView = React.useCallback((next: { scale: number; x: number; y: number }) => {
-        viewRef.current = next;
-        setView(next);
-    }, []);
 
     const getFitScale = React.useCallback(() => {
         const { vw, vh } = getViewportSize();
@@ -321,46 +487,69 @@ function PanZoomCanvas(props: PanZoomCanvasProps) {
             return;
         }
 
+        const metrics = resolveStageMetrics(vw, vh);
+
         const raw = {
-            x: (vw - width * nextScale) / 2 - BOARD_PAD * nextScale,
-            y: (vh - height * nextScale) / 2 - BOARD_PAD * nextScale,
+            x: (vw - width * nextScale) / 2 - metrics.boardLeft * nextScale,
+            y: (vh - height * nextScale) / 2 - metrics.boardTop * nextScale,
         };
 
         const clamped = clampOffset(raw, nextScale);
+
         applyView({
             scale: nextScale,
             x: clamped.x,
             y: clamped.y,
         });
-    }, [getViewportSize, getFitScale, width, height, clampOffset, applyView]);
-
-    const fitToViewRef = React.useRef(fitToView);
-    fitToViewRef.current = fitToView;
+    }, [
+        getViewportSize,
+        getFitScale,
+        resolveStageMetrics,
+        width,
+        height,
+        clampOffset,
+        applyView,
+    ]);
 
     React.useLayoutEffect(() => {
-        fitToViewRef.current();
-    }, [fitKey]);
+        measureViewport();
+    }, [measureViewport]);
 
     React.useEffect(() => {
         const el = viewportRef.current;
         if (!el || typeof ResizeObserver === "undefined") return;
 
         const ro = new ResizeObserver(() => {
-            const current = viewRef.current;
-            const clamped = clampOffset({ x: current.x, y: current.y }, current.scale);
-
-            if (clamped.x !== current.x || clamped.y !== current.y) {
-                applyView({
-                    ...current,
-                    x: clamped.x,
-                    y: clamped.y,
-                });
-            }
+            measureViewport();
         });
 
         ro.observe(el);
         return () => ro.disconnect();
-    }, [clampOffset, applyView]);
+    }, [measureViewport]);
+
+    React.useLayoutEffect(() => {
+        if (!viewportSize.vw || !viewportSize.vh) return;
+
+        const fitKeyChanged = lastFitKeyRef.current !== fitKey;
+
+        if (!didInitialFitRef.current || fitKeyChanged) {
+            fitToView();
+            didInitialFitRef.current = true;
+            lastFitKeyRef.current = fitKey;
+            return;
+        }
+
+        const current = viewRef.current;
+        const clamped = clampOffset({ x: current.x, y: current.y }, current.scale);
+
+        if (clamped.x !== current.x || clamped.y !== current.y) {
+            applyView({
+                ...current,
+                x: clamped.x,
+                y: clamped.y,
+            });
+        }
+    }, [viewportSize.vw, viewportSize.vh, fitKey, fitToView, clampOffset, applyView]);
 
     React.useEffect(() => {
         return () => {
@@ -388,7 +577,10 @@ function PanZoomCanvas(props: PanZoomCanvasProps) {
             const clampedScale = clampScale(nextScale);
 
             if (!el || clientX == null || clientY == null) {
-                const clampedOffset = clampOffset({ x: current.x, y: current.y }, clampedScale);
+                const clampedOffset = clampOffset(
+                    { x: current.x, y: current.y },
+                    clampedScale,
+                );
 
                 applyView({
                     scale: clampedScale,
@@ -427,7 +619,10 @@ function PanZoomCanvas(props: PanZoomCanvasProps) {
             if (!el) {
                 const current = viewRef.current;
                 const clampedScale = clampScale(nextScale);
-                const clampedOffset = clampOffset({ x: current.x, y: current.y }, clampedScale);
+                const clampedOffset = clampOffset(
+                    { x: current.x, y: current.y },
+                    clampedScale,
+                );
 
                 applyView({
                     scale: clampedScale,
@@ -458,6 +653,7 @@ function PanZoomCanvas(props: PanZoomCanvasProps) {
 
     const onPointerDown = React.useCallback((e: React.PointerEvent<HTMLDivElement>) => {
         if (e.button !== 0) return;
+        if (shouldIgnoreBoardPan(e.target)) return;
 
         e.preventDefault();
 
@@ -542,8 +738,8 @@ function PanZoomCanvas(props: PanZoomCanvasProps) {
                 <div
                     className="absolute left-0 top-0 will-change-transform"
                     style={{
-                        width: stageWidth,
-                        height: stageHeight,
+                        width: stageMetrics.stageWidth,
+                        height: stageMetrics.stageHeight,
                         transform: `translate(${view.x}px, ${view.y}px) scale(${view.scale})`,
                         transformOrigin: "0 0",
                         backgroundImage: `
@@ -556,8 +752,8 @@ function PanZoomCanvas(props: PanZoomCanvasProps) {
                     <div
                         className="absolute"
                         style={{
-                            left: BOARD_PAD,
-                            top: BOARD_PAD,
+                            left: stageMetrics.boardLeft,
+                            top: stageMetrics.boardTop,
                             width,
                             height,
                         }}
@@ -621,8 +817,8 @@ function Badge(props: { children: React.ReactNode; tone?: "neutral" | "good" | "
                 "border-rose-300/20 bg-rose-300/10 text-rose-800 dark:text-rose-200",
             )}
         >
-      {children}
-    </span>
+            {children}
+        </span>
     );
 }
 
@@ -654,7 +850,7 @@ function TabsRow(props: {
     const { tab, setTab } = props;
 
     return (
-        <div className="flex flex-wrap items-center gap-1.5">
+        <div className="flex flex-wrap items-center gap-1.5 p-1">
             <TabButton active={tab === "results"} onClick={() => setTab("results")}>
                 Results
             </TabButton>
@@ -675,8 +871,8 @@ function CellValue({ value }: { value: unknown }) {
     if (value == null) {
         return (
             <span className="inline-flex rounded-md border border-neutral-200 bg-neutral-50 px-1.5 py-0.5 text-[10px] font-medium text-neutral-500 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/40">
-        NULL
-      </span>
+                NULL
+            </span>
         );
     }
 
@@ -1116,8 +1312,8 @@ function ResultsTab(props: { result: Extract<SqlRunResult, { ok: true }> }) {
                                             <span className="truncate">{col.name}</span>
                                             {col.type ? (
                                                 <span className="rounded-md border border-neutral-200 bg-white px-1.5 py-0.5 text-[10px] font-medium normal-case tracking-normal text-neutral-500 dark:border-white/10 dark:bg-white/[0.06] dark:text-white/40">
-                            {col.type}
-                          </span>
+                                                        {col.type}
+                                                    </span>
                                             ) : null}
                                         </div>
                                     </th>
@@ -1193,6 +1389,11 @@ function TablesTab(props: {
 
     const scene = React.useMemo(() => buildDiagramScene(rawBoxes, "tables"), [rawBoxes]);
 
+    const rawBoxById = React.useMemo(
+        () => new Map(rawBoxes.map((box) => [box.id, box])),
+        [rawBoxes],
+    );
+
     const boxById = React.useMemo(
         () => new Map(scene.boxes.map((box) => [box.id, box])),
         [scene.boxes],
@@ -1219,35 +1420,29 @@ function TablesTab(props: {
             <div className="min-h-0 flex-1">
                 <PanZoomCanvas width={scene.width} height={scene.height} fitKey={fitKey}>
                     {({ scale }) => (
-                        <div className="relative h-full w-full">
+                        <div className="relative h-full w-full overflow-visible">
                             {schema.tables.map((table) => {
+                                const rawBox = rawBoxById.get(table.id)!;
                                 const box = boxById.get(table.id)!;
 
                                 const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
                                     e.preventDefault();
                                     e.stopPropagation();
 
-                                    const startClientX = e.clientX;
-                                    const startClientY = e.clientY;
-                                    const startX = box.x;
-                                    const startY = box.y;
-
-                                    const move = (ev: PointerEvent) => {
-                                        const dx = (ev.clientX - startClientX) / scale;
-                                        const dy = (ev.clientY - startClientY) / scale;
-                                        const next = clampDiagramNodePosition("tables", startX + dx, startY + dy);
-                                        onMove("tables", box.id, next.x, next.y);
-                                    };
-
-                                    const up = () => {
-                                        window.removeEventListener("pointermove", move);
-                                        window.removeEventListener("pointerup", up);
-                                    };
-
-                                    window.addEventListener("pointermove", move);
-                                    window.addEventListener("pointerup", up);
+                                    beginDiagramNodeDrag({
+                                        target: e.currentTarget,
+                                        pointerId: e.pointerId,
+                                        clientX: e.clientX,
+                                        clientY: e.clientY,
+                                        scale,
+                                        mode: "tables",
+                                        tab: "tables",
+                                        id: rawBox.id,
+                                        startX: rawBox.x,
+                                        startY: rawBox.y,
+                                        onMove,
+                                    });
                                 };
-
                                 return (
                                     <div
                                         key={table.id}
@@ -1260,8 +1455,9 @@ function TablesTab(props: {
                                         }}
                                     >
                                         <div
+                                            data-diagram-node-drag="true"
                                             onPointerDown={onPointerDown}
-                                            className="cursor-grab border-b border-neutral-200/70 bg-neutral-100/85 px-3 py-2.5 active:cursor-grabbing dark:border-white/10 dark:bg-white/[0.05]"
+                                            className="touch-none cursor-grab border-b border-neutral-200/70 bg-neutral-100/85 px-3 py-2.5 active:cursor-grabbing dark:border-white/10 dark:bg-white/[0.05]"
                                         >
                                             <div className="text-sm font-medium text-neutral-900 dark:text-white/90">
                                                 {table.name}
@@ -1322,6 +1518,11 @@ function ErdTab(props: {
 
     const scene = React.useMemo(() => buildDiagramScene(rawBoxes, "erd"), [rawBoxes]);
 
+    const rawBoxById = React.useMemo(
+        () => new Map(rawBoxes.map((box) => [box.id, box])),
+        [rawBoxes],
+    );
+
     const boxById = React.useMemo(
         () => new Map(scene.boxes.map((box) => [box.id, box])),
         [scene.boxes],
@@ -1350,7 +1551,7 @@ function ErdTab(props: {
             <div className="min-h-0 flex-1">
                 <PanZoomCanvas width={scene.width} height={scene.height} fitKey={fitKey}>
                     {({ scale }) => (
-                        <div className="relative h-full w-full">
+                        <div className="relative h-full w-full overflow-visible">
                             <svg
                                 width={scene.width}
                                 height={scene.height}
@@ -1421,33 +1622,27 @@ function ErdTab(props: {
                             </svg>
 
                             {schema.tables.map((table) => {
+                                const rawBox = rawBoxById.get(table.id)!;
                                 const box = boxById.get(table.id)!;
 
                                 const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
                                     e.preventDefault();
                                     e.stopPropagation();
 
-                                    const startClientX = e.clientX;
-                                    const startClientY = e.clientY;
-                                    const startX = box.x;
-                                    const startY = box.y;
-
-                                    const move = (ev: PointerEvent) => {
-                                        const dx = (ev.clientX - startClientX) / scale;
-                                        const dy = (ev.clientY - startClientY) / scale;
-                                        const next = clampDiagramNodePosition("erd", startX + dx, startY + dy);
-                                        onMove("erd", box.id, next.x, next.y);
-                                    };
-
-                                    const up = () => {
-                                        window.removeEventListener("pointermove", move);
-                                        window.removeEventListener("pointerup", up);
-                                    };
-
-                                    window.addEventListener("pointermove", move);
-                                    window.addEventListener("pointerup", up);
+                                    beginDiagramNodeDrag({
+                                        target: e.currentTarget,
+                                        pointerId: e.pointerId,
+                                        clientX: e.clientX,
+                                        clientY: e.clientY,
+                                        scale,
+                                        mode: "erd",
+                                        tab: "erd",
+                                        id: rawBox.id,
+                                        startX: rawBox.x,
+                                        startY: rawBox.y,
+                                        onMove,
+                                    });
                                 };
-
                                 return (
                                     <div
                                         key={table.id}
@@ -1460,8 +1655,9 @@ function ErdTab(props: {
                                         }}
                                     >
                                         <div
+                                            data-diagram-node-drag="true"
                                             onPointerDown={onPointerDown}
-                                            className="cursor-grab border-b border-neutral-200/70 bg-neutral-100/90 px-3 py-2.5 active:cursor-grabbing dark:border-white/10 dark:bg-white/[0.05]"
+                                            className="touch-none cursor-grab border-b border-neutral-200/70 bg-neutral-100/90 px-3 py-2.5 active:cursor-grabbing dark:border-white/10 dark:bg-white/[0.05]"
                                         >
                                             <div className="truncate text-sm font-medium text-neutral-900 dark:text-white/90">
                                                 {table.name}
@@ -1481,13 +1677,13 @@ function ErdTab(props: {
                                                     <div className="flex items-center gap-1">
                                                         {col.isPk ? (
                                                             <span className="rounded-md bg-emerald-500/10 px-1.5 py-0.5 text-[10px] font-medium text-emerald-700 dark:text-emerald-200">
-                                PK
-                              </span>
+                                                                PK
+                                                            </span>
                                                         ) : null}
                                                         {col.isFk ? (
                                                             <span className="rounded-md bg-amber-500/10 px-1.5 py-0.5 text-[10px] font-medium text-amber-700 dark:text-amber-200">
-                                FK
-                              </span>
+                                                                FK
+                                                            </span>
                                                         ) : null}
                                                     </div>
                                                 </div>
@@ -1519,6 +1715,11 @@ function ChenTab(props: {
     );
 
     const scene = React.useMemo(() => buildDiagramScene(rawBoxes, "chen"), [rawBoxes]);
+
+    const rawBoxById = React.useMemo(
+        () => new Map(rawBoxes.map((box) => [box.id, box])),
+        [rawBoxes],
+    );
 
     const boxById = React.useMemo(
         () => new Map(scene.boxes.map((box) => [box.id, box])),
@@ -1564,7 +1765,7 @@ function ChenTab(props: {
                             width={scene.width}
                             height={scene.height}
                             viewBox={`0 0 ${scene.width} ${scene.height}`}
-                            className="block"
+                            className="block overflow-visible"
                         >
                             {schema.relations.map((rel) => {
                                 const from = entityById.get(rel.fromTable);
@@ -1639,6 +1840,7 @@ function ChenTab(props: {
                             })}
 
                             {entities.map((entity) => {
+                                const rawBox = rawBoxById.get(entity.id)!;
                                 const attrs = entity.table.columns.slice(0, 10);
                                 const hiddenCount = Math.max(0, entity.table.columns.length - attrs.length);
 
@@ -1646,31 +1848,28 @@ function ChenTab(props: {
                                     e.preventDefault();
                                     e.stopPropagation();
 
-                                    const startClientX = e.clientX;
-                                    const startClientY = e.clientY;
-                                    const startX = entity.x;
-                                    const startY = entity.y;
-
-                                    const move = (ev: PointerEvent) => {
-                                        const dx = (ev.clientX - startClientX) / scale;
-                                        const dy = (ev.clientY - startClientY) / scale;
-                                        const next = clampDiagramNodePosition("chen", startX + dx, startY + dy);
-                                        onMove("chen", entity.id, next.x, next.y);
-                                    };
-
-                                    const up = () => {
-                                        window.removeEventListener("pointermove", move);
-                                        window.removeEventListener("pointerup", up);
-                                    };
-
-                                    window.addEventListener("pointermove", move);
-                                    window.addEventListener("pointerup", up);
+                                    beginDiagramNodeDrag({
+                                        target: e.currentTarget,
+                                        pointerId: e.pointerId,
+                                        clientX: e.clientX,
+                                        clientY: e.clientY,
+                                        scale,
+                                        mode: "chen",
+                                        tab: "chen",
+                                        id: rawBox.id,
+                                        startX: rawBox.x,
+                                        startY: rawBox.y,
+                                        onMove,
+                                    });
                                 };
-
                                 return (
                                     <g key={entity.id}>
-                                        <g onPointerDown={onPointerDown} className="cursor-grab active:cursor-grabbing">
-                                            <rect
+                                        <g
+                                            data-diagram-node-drag="true"
+                                            onPointerDown={onPointerDown}
+                                            className="cursor-grab active:cursor-grabbing"
+                                            style={{ touchAction: "none" }}
+                                        >                                          <rect
                                                 x={entity.x}
                                                 y={entity.y}
                                                 width={entity.w}
@@ -1868,9 +2067,9 @@ export default function SqlResultsPane(props: {
                             </div>
 
                             <div className="mt-3 rounded-lg border border-rose-300/20 bg-white/70 p-3 dark:border-rose-300/15 dark:bg-black/20">
-                <pre className="whitespace-pre-wrap break-words text-[12px] font-medium text-rose-800 dark:text-rose-200">
-                  {result.error ?? result.stderr ?? result.message ?? "Query failed."}
-                </pre>
+                                <pre className="whitespace-pre-wrap break-words text-[12px] font-medium text-rose-800 dark:text-rose-200">
+                                    {result.error ?? result.stderr ?? result.message ?? "Query failed."}
+                                </pre>
                             </div>
                         </div>
                     ) : tab === "tables" ? (

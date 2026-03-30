@@ -1,4 +1,3 @@
-// src/components/practice/PracticeShell.tsx
 "use client";
 
 import React, { useMemo } from "react";
@@ -21,10 +20,11 @@ export type PracticeShellProps = {
   isAssignmentRun: boolean;
   isSessionRun: boolean;
   isLockedRun: boolean;
+  submitBusy: boolean;
 
   returnUrl?: string | null;
   onReturn?: () => void;
-  isOnboardingTrial?: boolean; // ✅ NEW
+  isOnboardingTrial?: boolean;
 
   allowReveal: boolean;
   showDebug: boolean;
@@ -91,27 +91,24 @@ export type PracticeShellProps = {
 
   updateCurrent: (patch: Partial<QItem>) => void;
 
-  /** ✅ NEW: excuse current and continue */
   excuseAndNext?: (reason?: string | null) => Promise<void> | void;
-
-  /** ✅ NEW: skip a load error (try another exercise) */
   skipLoadError?: () => Promise<void> | void;
 };
 
 function getResultBoxClass(current: QItem | null) {
   if (isExcusedPracticeItem(current)) {
-    return "border-amber-600/25 bg-amber-50/70 dark:border-amber-300/30 dark:bg-amber-300/10";
+    return "ui-surface-warn";
   }
   if (current?.revealed) {
-    return "border-sky-300/50 bg-sky-50/70 dark:border-sky-300/25 dark:bg-sky-300/10";
+    return "ui-surface-soft border-sky-300/40 bg-sky-50/70 dark:border-sky-300/25 dark:bg-sky-300/10";
   }
   if (current?.result?.ok === true) {
-    return "border-emerald-600/25 bg-emerald-50 dark:border-emerald-300/30 dark:bg-emerald-300/10";
+    return "ui-surface-success";
   }
   if (current?.result) {
-    return "border-rose-400/40 bg-rose-50 dark:border-rose-300/30 dark:bg-rose-300/10";
+    return "ui-surface-danger";
   }
-  return "border-neutral-200 bg-white/70 dark:border-white/10 dark:bg-white/[0.06]";
+  return "ui-surface-soft";
 }
 
 export default function PracticeShell(props: PracticeShellProps) {

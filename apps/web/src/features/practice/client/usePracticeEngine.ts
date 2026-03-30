@@ -249,7 +249,7 @@ export function usePracticeEngine(args: {
   const [serverHistoryStack, setServerHistoryStack] = useState<QItem[]>([]);
 
   const appliedRunCountRef = useRef(false);
-
+  const [submitBusy, setSubmitBusy] = useState(false);
   const current = stack[idx] ?? null;
   const exercise = current?.exercise ?? null;
 
@@ -404,12 +404,12 @@ export function usePracticeEngine(args: {
             setCompletionReturnUrl(st.returnUrl || returnUrlFromQuery);
           } else {
             const serverReturn =
-                (response as any)?.returnUrl || (response as any)?.run?.returnUrl || null;
+                (response as any)?.returnUrl || (response as any)?.run?.returnUrl || (response as any)?.returnTo || null;
             setCompletionReturnUrl(serverReturn || returnUrlFromQuery);
           }
         } catch {
           const serverReturn =
-              (response as any)?.returnUrl || (response as any)?.run?.returnUrl || null;
+              (response as any)?.returnUrl || (response as any)?.run?.returnUrl ||(response as any)?.returnTo || null;
           setCompletionReturnUrl(serverReturn || returnUrlFromQuery);
         }
 
@@ -626,7 +626,7 @@ export function usePracticeEngine(args: {
     if (completed) return;
     if (submitLockRef.current) return;
     if (!current || !exercise) return;
-    if (busy) return;
+    if (submitBusy) return;
 
     if (current.submitted) return;
     if (isLockedRun && (current.attempts ?? 0) >= maxAttempts) return;
@@ -635,7 +635,7 @@ export function usePracticeEngine(args: {
     setActionErr(null);
 
     try {
-      setBusy(true);
+      setSubmitBusy(true);
 
       const submitted = await submitPracticeItem({
         item: current,
@@ -671,11 +671,10 @@ export function usePracticeEngine(args: {
     } catch (e: any) {
       setActionErr(e?.message ?? t("errors.failedToSubmit"));
     } finally {
-      setBusy(false);
+      setSubmitBusy(false);
       submitLockRef.current = false;
     }
   }
-
   async function reveal() {
     if (completed) return;
     if (!current || busy) return;
@@ -730,7 +729,7 @@ export function usePracticeEngine(args: {
     badge,
     pct,
     reviewStack,
-
+    submitBusy,
     updateCurrent,
     loadNextExercise,
     retryLoad: () => loadNextExercise({ forceNew: false }),

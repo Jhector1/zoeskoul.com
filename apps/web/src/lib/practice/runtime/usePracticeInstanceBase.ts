@@ -45,6 +45,7 @@ export function usePracticeInstanceBase(args: {
     const { load, maxAttempts, padRef } = args;
 
     const [busy, setBusy] = useState(false);
+    const [submitBusy, setSubmitBusy] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
     const [item, setItem] = useState<QItem | null>(null);
@@ -111,11 +112,11 @@ export function usePracticeInstanceBase(args: {
 
     const submit = useCallback(async () => {
         if (!item || !exercise) return;
-        if (busy) return;
+        if (submitBusy) return;
         if (item.submitted) return;
         if ((item.attempts ?? 0) >= maxAttempts) return;
 
-        setBusy(true);
+        setSubmitBusy(true);
         setError(null);
 
         try {
@@ -142,9 +143,9 @@ export function usePracticeInstanceBase(args: {
             }
             setError(e?.message ?? "Failed to submit.");
         } finally {
-            setBusy(false);
+            setSubmitBusy(false);
         }
-    }, [item, exercise, busy, maxAttempts, padRef, update]);
+    }, [item, exercise, submitBusy, maxAttempts, padRef, update]);
 
     const reveal = useCallback(async () => {
         if (!item) return;
@@ -177,6 +178,7 @@ export function usePracticeInstanceBase(args: {
 
     return {
         busy,
+        submitBusy,
         error,
         exercise,
         item,

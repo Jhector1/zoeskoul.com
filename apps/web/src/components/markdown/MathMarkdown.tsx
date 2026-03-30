@@ -143,14 +143,14 @@ function TerminalExample({ raw }: { raw: string }) {
         ? "ui-border-danger ui-bg-danger-soft"
         : isAccepted
             ? "ui-border-accent ui-bg-accent-soft"
-            : "ui-border ui-bg-surface-soft";
+            : " ui-surface";
 
     const sysCls = "ui-text-soft";
     const errCls = "ui-text-danger font-medium";
     const outCls = "ui-text";
 
     return (
-        <div className={join("relative z-0 my-3 mx-auto w-full max-w-[760px] p-3", outerCls)}>
+        <div className={join("ui-surface relative z-0 my-3 mx-auto w-full max-w-[760px] p-3", outerCls)}>
             <div className="flex items-center justify-between gap-2">
                 <div className="ui-meta-strong">Terminal</div>
                 <div className="ui-meta">{meta}</div>

@@ -1,4 +1,3 @@
-// src/components/practice/shell/PracticeView.tsx
 "use client";
 
 import React from "react";
@@ -35,7 +34,13 @@ export default function PracticeView(
     } = props;
 
     return (
-        <div className="min-h-screen bg-neutral-50 text-neutral-900 dark:bg-neutral-950 dark:text-white">
+        <div
+            className="min-h-screen"
+            style={{
+                backgroundColor: "rgb(var(--ui-bg) / 1)",
+                color: "rgb(var(--ui-text) / 1)",
+            }}
+        >
             {confirmOpen ? (
                 <ConfirmResetModal
                     open={confirmOpen}
