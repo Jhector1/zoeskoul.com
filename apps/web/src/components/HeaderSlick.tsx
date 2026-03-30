@@ -222,7 +222,7 @@ function SettingsMenu() {
                             small: t("fontSmall"),
                             normal: t("fontNormal"),
                             large: t("fontLarge"),
-                            extraLarge:("fontExtraLarge")
+                            extraLarge:t("fontExtraLarge")
                           }}
                       />
                     </div>
