@@ -97,7 +97,7 @@ export default function CodeInputExerciseUI({
             <div className="grid gap-3">
                 {showPrompt ? <ExercisePrompt exercise={exercise} /> : null}
 
-                <div className="ui-page-surface p-3">
+                <div className="ui-pabge-surface p-3">
                     <div className="flex items-center justify-between gap-2">
                         <div className="min-w-0">
                             <div className="ui-title-sm">

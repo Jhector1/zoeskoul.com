@@ -149,7 +149,7 @@ export default function QuizPracticeCard(props: {
   const maxForRenderer = ps?.maxAttempts ?? Number.POSITIVE_INFINITY;
 
   return (
-      <div className={["ui-quiz-card", !unlocked ? "opacity-70" : ""].join(" ")}>
+      <div className={["ui-surface p-2", !unlocked ? "opacity-70" : ""].join(" ")}>
         {!unlocked ? (
             <div className="ui-quiz-hint">
               {ui.t("unlockHint", {}, "Answer the previous question correctly to unlock this one.")}
