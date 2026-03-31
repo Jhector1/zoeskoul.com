@@ -97,32 +97,7 @@ function buildPracticeUrl(args: PracticeGetRequest) {
   return `/api/practice${qs ? `?${qs}` : ""}`;
 }
 
-export async function fetchPracticeExercise(
-    args: PracticeGetRequest & { signal?: AbortSignal },
-): Promise<PracticeGetResponse> {
-  const url = buildPracticeUrl(args);
 
-  const res = await fetch(url, {
-    method: "GET",
-    cache: "no-store",
-    signal: args.signal,
-  });
-
-  const data = (await readJsonSafe(res)) as PracticeGetResponse & {
-    explanation?: string | null;
-    message?: string | null;
-  };
-
-  if (!res.ok) {
-    throw new Error(
-        data?.explanation ??
-        data?.message ??
-        `Failed (${res.status})`,
-    );
-  }
-
-  return data;
-}
 
 export type PracticeSubmitRequest = {
   key: string;
@@ -131,33 +106,127 @@ export type PracticeSubmitRequest = {
   signal?: AbortSignal;
 };
 
-export async function submitPracticeAnswer(
-    args: PracticeSubmitRequest,
-): Promise<PracticeValidateClientResponse> {
-  const res = await fetch(`/api/practice/validate`, {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import type { SubmitAnswer } from "@/lib/practice/types";
+
+// export type PracticeGetResponse = any;
+// export type PracticeValidateClientResponse = any;
+
+export async function fetchPracticeExercise(args: Record<string, any>) {
+  const url = new URL("/api/practice", window.location.origin);
+
+  for (const [key, value] of Object.entries(args)) {
+    if (
+        value === undefined ||
+        value === null ||
+        value === "" ||
+        key === "signal"
+    ) {
+      continue;
+    }
+    url.searchParams.set(key, String(value));
+  }
+
+  const res = await fetch(url.toString(), {
+    method: "GET",
+    cache: "no-store",
+    signal: args.signal,
+    credentials: "include",
+  });
+
+  const data = await res.json().catch(() => null);
+
+  if (!res.ok) {
+    throw new Error(
+        String(data?.message ?? `Practice fetch failed (${res.status}).`),
+    );
+  }
+
+  return data as PracticeGetResponse;
+}
+
+export async function submitPracticeAnswer(args: {
+  key: string;
+  answer?: SubmitAnswer;
+  reveal?: boolean;
+}) {
+  const res = await fetch("/api/practice/validate", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
+    credentials: "include",
+    body: JSON.stringify({
+      key: args.key,
+      ...(args.answer ? { answer: args.answer } : {}),
+      ...(args.reveal ? { reveal: true } : {}),
+    }),
+  });
+
+  const data = await res.json().catch(() => null);
+
+  if (!res.ok) {
+    throw new Error(
+        String(data?.message ?? `Practice validate failed (${res.status}).`),
+    );
+  }
+
+  return data as PracticeValidateClientResponse;
+}
+
+export type PracticeHelpClientResponse = {
+  requestId?: string;
+  stepKey: string;
+  step?: {
+    key: string;
+    label: string;
+    kind: string;
+  };
+  source?: string | null;
+  content?: string | null;
+  reveal?: any | null;
+};
+
+export async function fetchPracticeHelp(args: {
+  key: string;
+  stepKey: string;
+  userAnswer?: any;
+  signal?: AbortSignal;
+}): Promise<PracticeHelpClientResponse> {
+  const res = await fetch("/api/practice/help", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    credentials: "include",
     cache: "no-store",
     signal: args.signal,
     body: JSON.stringify({
       key: args.key,
-      reveal: args.reveal ? true : undefined,
-      answer: args.reveal ? undefined : args.answer,
+      stepKey: args.stepKey,
+      userAnswer: args.userAnswer ?? null,
     }),
   });
 
-  const data = (await readJsonSafe(res)) as PracticeValidateClientResponse & {
-    explanation?: string | null;
-    message?: string | null;
-  };
+  const data = await res.json().catch(() => null);
 
   if (!res.ok) {
     throw new Error(
-        data?.explanation ??
-        data?.message ??
-        `Failed (${res.status})`,
+        String(data?.message ?? `Practice help failed (${res.status}).`),
     );
   }
 
-  return data;
+  return data as PracticeHelpClientResponse;
 }

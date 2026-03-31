@@ -40,6 +40,24 @@ function resolveMaybeTagged(
     return resolveText ? resolveText(s) : s;
 }
 
+export function getExerciseAuthoredHelpContent(
+    ex: Exercise | null | undefined,
+    stepKey: string,
+): string | null {
+    const helpSteps = Array.isArray((ex as any)?.help?.steps)
+        ? ((ex as any).help.steps as Array<{ key?: string; content?: string }>)
+        : [];
+
+    const found = helpSteps.find((step) => String(step?.key ?? "") === stepKey);
+    if (found?.content) return String(found.content);
+
+    if (stepKey === "hint_1" && typeof (ex as any)?.hint === "string") {
+        return String((ex as any).hint);
+    }
+
+    return null;
+}
+
 export function buildSubmitAnswerFromItem(item: QItem): SubmitAnswer | undefined {
     const ex = item.exercise;
 
@@ -230,8 +248,17 @@ export function initItemFromExercise(
 
         result: null,
         submitted: false,
-        revealed: false,
         attempts: 0,
+
+        help: {
+            openedStepKeys: [],
+            activeStepKey: null,
+            entries: {},
+            busyStepKey: null,
+            error: null,
+        },
+
+        revealed: false,
 
         codeLang: "python",
         code: "",

@@ -7,12 +7,17 @@ import { isEmptyPracticeAnswer } from "@/components/review/quiz/hooks/useQuizPra
 import type { VectorPadState } from "@/components/vectorpad/types";
 
 import ExerciseRenderer from "@/components/practice/ExerciseRenderer";
-import RevealAnswerCard from "@/components/practice/RevealAnswerCard";
+import PracticeHelpPanel from "@/components/practice/PracticeHelpPanel";
 import { useReviewTools } from "@/components/review/module/context/ReviewToolsContext";
 
 import { useTaggedT } from "@/i18n/tagged";
 import { resolveDeepTagged } from "@/i18n/resolveDeepTagged";
 import type { Exercise } from "@/lib/practice/types";
+import {
+  DEFAULT_PRACTICE_HELP_POLICY,
+  getNextPracticeHelpStepKey,
+  PRACTICE_HELP_STEP_DEF_MAP,
+} from "@/lib/practice/help/steps";
 
 export default function QuizPracticeCard(props: {
   q: Extract<ReviewQuestion, { kind: "practice" }>;
@@ -29,7 +34,7 @@ export default function QuizPracticeCard(props: {
   padRef: React.MutableRefObject<VectorPadState>;
   onUpdateItem: (patch: any) => void;
   onSubmit: () => void;
-  onReveal: () => void;
+  onHelp: (stepKey?: string) => void;
 
   excused?: boolean;
   onExcused?: () => void;
@@ -46,13 +51,12 @@ export default function QuizPracticeCard(props: {
     padRef,
     onUpdateItem,
     onSubmit,
-    onReveal,
+    onHelp,
   } = props;
 
   const tools = useReviewTools();
 
   const excused = Boolean(props.excused);
-  const revealed = Boolean(ps?.item?.revealed);
 
   const ui = useTaggedT("reviewQuizUi");
   const { raw } = useTaggedT();
@@ -132,8 +136,29 @@ export default function QuizPracticeCard(props: {
       ps?.ok === true ||
       !hasInput;
 
-  const disableReveal =
-      !unlocked || isCompleted || locked || excused || (ps?.busy ?? false) || ps?.ok === true;
+  const enabledHelpSteps = ps?.helpPolicy?.stepKeys?.length
+      ? ps.helpPolicy.stepKeys
+      : DEFAULT_PRACTICE_HELP_POLICY.stepKeys;
+
+  const openedHelpSteps = ps?.item?.help?.openedStepKeys ?? [];
+
+  const nextHelpStepKey = getNextPracticeHelpStepKey(
+      enabledHelpSteps,
+      openedHelpSteps,
+  );
+
+  const nextHelpLabel = nextHelpStepKey
+      ? PRACTICE_HELP_STEP_DEF_MAP.get(nextHelpStepKey)?.label ?? nextHelpStepKey
+      : null;
+
+  const disableHelp =
+      !unlocked ||
+      isCompleted ||
+      locked ||
+      excused ||
+      (ps?.busy ?? false) ||
+      ps?.ok === true ||
+      !nextHelpStepKey;
 
   const disableSkip = !unlocked || isCompleted || locked || excused || ps?.ok === true;
 
@@ -197,7 +222,7 @@ export default function QuizPracticeCard(props: {
               </div>
 
               <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between sm:gap-3">
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 flex-wrap">
                   <button
                       type="button"
                       onClick={onSubmit}
@@ -213,14 +238,14 @@ export default function QuizPracticeCard(props: {
 
                   <button
                       type="button"
-                      onClick={onReveal}
-                      disabled={disableReveal}
+                      onClick={() => onHelp(nextHelpStepKey ?? undefined)}
+                      disabled={disableHelp}
                       className={[
                         "ui-quiz-action",
-                        disableReveal ? "ui-quiz-action--disabled" : "ui-quiz-action--ghost",
+                        disableHelp ? "ui-quiz-action--disabled" : "ui-quiz-action--ghost",
                       ].join(" ")}
                   >
-                    {ui.t("buttons.reveal", {}, "Reveal")}
+                    {nextHelpLabel ?? ui.t("buttons.help", {}, "Help")}
                   </button>
                 </div>
 
@@ -235,22 +260,18 @@ export default function QuizPracticeCard(props: {
 
                   {ps.ok === true ? (
                       <span className="ml-2 whitespace-nowrap ui-quiz-status-good">✓ Correct</span>
-                  ) : ps.ok === false && ps.item?.result && !revealed ? (
+                  ) : ps.ok === false && ps.item?.result ? (
                       <span className="ml-2 whitespace-nowrap ui-quiz-status-danger">✕ Not correct</span>
                   ) : null}
                 </div>
               </div>
 
-              {revealed && ps.item?.result ? (
-                  <div className="mt-3">
-                    <RevealAnswerCard
-                        exercise={ex}
-                        current={ps.item}
-                        result={ps.item.result}
-                        updateCurrent={updateItemSafe}
-                    />
-                  </div>
-              ) : null}
+              <PracticeHelpPanel
+                  exercise={ex}
+                  current={ps.item}
+                  help={ps.item.help}
+                  updateCurrent={updateItemSafe}
+              />
             </div>
         ) : (
             <div className="mt-2 ui-quiz-status-soft">

@@ -1,4 +1,3 @@
-// src/features/practice/client/usePracticeEngine.ts
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -9,10 +8,9 @@ import type {
   Difficulty,
   TopicSlug,
 } from "@/lib/practice/types";
-import type { QItem, MissedItem } from "@/components/practice/practiceType";
+import type { QItem, MissedItem } from "@/lib/practice/uiTypes";
 import {
   fetchPracticeExercise,
-  submitPracticeAnswer,
   type PracticeGetResponse,
 } from "@/lib/practice/clientApi";
 import {
@@ -27,15 +25,20 @@ import { SESSION_DEFAULT } from "./constants";
 import type { RunMeta, TopicValue } from "./usePracticeRunMeta";
 import type { VectorPadState } from "@/components/vectorpad/types";
 import { getEffectiveSid } from "./storage";
-import type { SessionHistoryRow } from "./sessionStatus";
+import { useTaggedT } from "@/i18n/tagged";
+import { resolveDeepTagged } from "@/i18n/resolveDeepTagged";
+import { emitSfx } from "@/lib/sfx/bus";
+import {
+  buildLocalMissed,
+  computePracticeCounts,
+  computePracticePct,
+  historyRowToQItem,
+  requestPracticeHelpItem,
+  submitPracticeItem,
+} from "@/lib/practice/runtime";
 import { PurposeMode, PurposePolicy } from "@/lib/subjects/types";
-import {useTaggedT} from "@/i18n/tagged";
-import {resolveDeepTagged} from "@/i18n/resolveDeepTagged";
-import {emitSfx} from "@/lib/sfx/bus";
 
 export type Phase = "practice" | "summary";
-
-/* -------------------------------- helpers -------------------------------- */
 
 function applyAnswerPayloadToItem(item: QItem, payload: any) {
   if (!payload || typeof payload !== "object") return;
@@ -54,7 +57,6 @@ function applyAnswerPayloadToItem(item: QItem, payload: any) {
     case "matrix_input":
       if (Array.isArray(payload.raw)) (item as any).mat = payload.raw;
       break;
-
     case "code_input": {
       const code =
           typeof payload.code === "string"
@@ -82,7 +84,6 @@ function applyAnswerPayloadToItem(item: QItem, payload: any) {
       (item as any).codeStdin = stdin;
       break;
     }
-
     case "vector_drag_dot":
       (item as any).dragA = payload.a ?? (item as any).dragA;
       break;
@@ -109,12 +110,10 @@ export function buildCorrectItemFromExpected(q: QItem, expectedPayload: any): QI
   applyAnswerPayloadToItem(item, payload);
 
   (item as any).submitted = true;
-  (item as any).revealed = true;
   (item as any).result = { ok: true, finalized: true };
 
   return item;
 }
-
 
 function exerciseSignature(ex: Exercise | null | undefined): string {
   if (!ex) return "";
@@ -132,20 +131,6 @@ function stableAt(q: QItem): number {
   const n = Number(v);
   return Number.isFinite(n) ? n : 0;
 }
-
-/* -------------------------------- hook -------------------------------- */
-
-
-
-import {
-  buildLocalMissed,
-  computePracticeCounts,
-  computePracticePct,
-  historyRowToQItem,
-  revealPracticeItem,
-  submitPracticeItem,
-} from "@/lib/practice/runtime";
-
 
 export function usePracticeEngine(args: {
   subjectSlug: string;
@@ -299,7 +284,20 @@ export function usePracticeEngine(args: {
     setStack((prev) => {
       if (idx < 0 || idx >= prev.length) return prev;
       const next = prev.slice();
-      next[idx] = { ...next[idx], ...patch };
+      next[idx] = {
+        ...next[idx],
+        ...patch,
+        help: patch.help
+            ? {
+              ...next[idx].help,
+              ...patch.help,
+              entries: {
+                ...next[idx].help.entries,
+                ...(patch.help.entries ?? {}),
+              },
+            }
+            : next[idx].help,
+      };
       return next;
     });
   }
@@ -409,7 +407,7 @@ export function usePracticeEngine(args: {
           }
         } catch {
           const serverReturn =
-              (response as any)?.returnUrl || (response as any)?.run?.returnUrl ||(response as any)?.returnTo || null;
+              (response as any)?.returnUrl || (response as any)?.run?.returnUrl || (response as any)?.returnTo || null;
           setCompletionReturnUrl(serverReturn || returnUrlFromQuery);
         }
 
@@ -433,7 +431,7 @@ export function usePracticeEngine(args: {
       const resolvedEx = resolveDeepTagged(
           ex,
           (k) => rawKeyRef.current(k),
-      );
+      ) as Exercise;
 
       const item = initItemFromExercise(resolvedEx, key, {
         resolveText: (value) => resolveTextRef.current(value),
@@ -652,7 +650,6 @@ export function usePracticeEngine(args: {
         result: submitted.data as any,
         attempts: submitted.used,
         submitted: submitted.finalized,
-        revealed: false,
       });
 
       if ((submitted.data as any)?.sessionComplete) {
@@ -675,27 +672,48 @@ export function usePracticeEngine(args: {
       submitLockRef.current = false;
     }
   }
-  async function reveal() {
+
+  async function openHelp(stepKey?: string) {
     if (completed) return;
-    if (!current || busy) return;
-    if (!allowReveal) return;
+    if (!current || !exercise || busy) return;
 
     setBusy(true);
     setActionErr(null);
 
     try {
-      const revealed = await revealPracticeItem(current);
+      const chosenKey =
+          stepKey ??
+          (allowReveal ? "reveal" : "hint_1");
 
-      updateCurrent({
-        result: revealed.data as any,
-        revealed: true,
-        submitted: Boolean((revealed.data as any)?.finalized),
-        ...(revealed.dragA ? { dragA: revealed.dragA } : {}),
-        ...(revealed.dragB ? { dragB: revealed.dragB } : {}),
+      const opened = await requestPracticeHelpItem({
+        item: current,
+        exercise,
+        stepKey: chosenKey,
+        padRef,
       });
 
-      if (revealed.dragA) padRef.current.a = cloneVec(revealed.dragA) as any;
-      if (revealed.dragB) padRef.current.b = cloneVec(revealed.dragB) as any;
+      const nextOpenedKeys = current.help.openedStepKeys.includes(chosenKey)
+          ? current.help.openedStepKeys
+          : [...current.help.openedStepKeys, chosenKey];
+
+      updateCurrent({
+        ...(opened.dragA ? { dragA: opened.dragA } : {}),
+        ...(opened.dragB ? { dragB: opened.dragB } : {}),
+        help: {
+          ...current.help,
+          openedStepKeys: nextOpenedKeys,
+          activeStepKey: chosenKey,
+          busyStepKey: null,
+          error: null,
+          entries: {
+            ...current.help.entries,
+            [chosenKey]: opened.entry,
+          },
+        },
+      });
+
+      if (opened.dragA) padRef.current.a = cloneVec(opened.dragA) as any;
+      if (opened.dragB) padRef.current.b = cloneVec(opened.dragB) as any;
     } catch (e: any) {
       setActionErr(e?.message ?? t("errors.failedToSubmit"));
     } finally {
@@ -739,7 +757,7 @@ export function usePracticeEngine(args: {
     goPrev,
     goNext,
     submit,
-    reveal,
+    openHelp,
 
     excuseAndNext,
     skipLoadError,

@@ -506,7 +506,7 @@ export function usePracticeController(args: {
       goPrev: engine.goPrev,
       goNext: engine.goNext,
       submit: engine.submit,
-      reveal: engine.reveal,
+      reveal: engine.openHelp,
       retryLoad: engine.retryLoad,
       submitBusy: engine.submitBusy,
       padRef,

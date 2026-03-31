@@ -41,14 +41,22 @@ export type ExerciseKind =
 
 export type Vec3 = { x: number; y: number; z?: number };
 
+export type ExerciseHelpSpec = Partial<Record<string, string>>;
+
+
 export type ExerciseBase = {
     id: string;
-    topic: TopicSlug; // ✅ DB slug always
+    topic: TopicSlug;
     difficulty: Difficulty;
     title: string;
     prompt: string;
-    hint?: string; // ✅ put it h
+
+    help?: ExerciseHelpSpec;
+
+    // legacy compatibility
+    hint?: string;
 };
+
 
 export type SingleChoiceExercise = ExerciseBase & {
     kind: "single_choice";

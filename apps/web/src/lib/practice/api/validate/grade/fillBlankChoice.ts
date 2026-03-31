@@ -28,33 +28,25 @@ export function gradeFillBlankChoice(args: {
     if (args.isReveal) {
         return {
             ok: false,
-            revealAnswer: {
-                kind: "fill_blank_choice",
-                value: expected ?? "",
-                answers: Array.isArray(args.expectedCanon?.answers)
-                    ? args.expectedCanon.answers
-                    : expected
-                        ? [expected]
-                        : [],
-            },
+  
             explanation: "Solution shown.",
         };
     }
 
     const value = String((args.answer as any)?.value ?? "").trim();
     if (!value) {
-        return { ok: false, revealAnswer: null, explanation: "Missing value." };
+        return { ok: false,  explanation: "Missing value." };
     }
 
     if (!expected) {
-        return { ok: true, revealAnswer: null, explanation: "Answer recorded." };
+        return { ok: true,  explanation: "Answer recorded." };
     }
 
     const ok = normChoice(value) === normChoice(expected);
 
     return {
         ok,
-        revealAnswer: null,
+        
         explanation: ok ? "Correct." : "Not correct.",
     };
 }

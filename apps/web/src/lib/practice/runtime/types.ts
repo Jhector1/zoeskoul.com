@@ -1,5 +1,6 @@
 import type { Difficulty, Exercise } from "@/lib/practice/types";
 import type { QItem } from "@/lib/practice/uiTypes";
+import type { PracticeHelpPolicy } from "@/lib/practice/help/steps";
 
 export type PracticeItemState = {
     loading: boolean;
@@ -10,6 +11,7 @@ export type PracticeItemState = {
     attempts: number;
     maxAttempts: number | null;
     ok: boolean | null;
+    helpPolicy: PracticeHelpPolicy;
 };
 
 export type PracticeRuntimeTextResolvers = {
@@ -38,4 +40,5 @@ export type SessionHistoryRow = {
     lastRevealUsed?: boolean | null;
     lastAnswerPayload?: any;
     lastAttemptAt?: string | null;
+    helpUsedKeys?: string[];
 };

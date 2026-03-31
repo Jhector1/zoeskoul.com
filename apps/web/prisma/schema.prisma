@@ -52,8 +52,6 @@ enum PracticeRunPresetKey {
   // add more as you grow
 }
 
-
-
 enum FeatureKey {
   ide_multi_file
   ide_save_cloud
@@ -84,12 +82,6 @@ enum CodeProjectRole {
   viewer
 }
 
-
-
-
-
-
-
 model PracticeRunPreset {
   id  String               @id @default(cuid())
   key PracticeRunPresetKey @unique
@@ -100,6 +92,7 @@ model PracticeRunPreset {
   lockDifficulty PracticeDifficulty?
   lockTopic      String?
   allowReveal    Boolean?
+  helpPolicy     Json?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -107,18 +100,6 @@ model PracticeRunPreset {
   modules  PracticeModule[]
   sessions PracticeSession[]
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 model FeatureGrant {
   id String @id @default(cuid())
@@ -171,9 +152,9 @@ model CodeProject {
   scopeKey String?
 
   visibility CodeProjectVisibility @default(private)
-  shareToken String? @unique
+  shareToken String?               @unique
 
-  schemaVersion Int @default(1)
+  schemaVersion  Int @default(1)
   currentVersion Int @default(1)
 
   entryPath  String?
@@ -209,7 +190,7 @@ model CodeProjectRevision {
   projectId String
   project   CodeProject @relation(fields: [projectId], references: [id], onDelete: Cascade)
 
-  version Int
+  version       Int
   workspaceHash String? @db.VarChar(64)
 
   snapshot Json
@@ -218,7 +199,7 @@ model CodeProjectRevision {
   meta     Json?
 
   createdById String?
-  createdBy   User? @relation("UserCodeProjectRevisions", fields: [createdById], references: [id], onDelete: SetNull)
+  createdBy   User?   @relation("UserCodeProjectRevisions", fields: [createdById], references: [id], onDelete: SetNull)
 
   createdAt DateTime @default(now())
 
@@ -236,7 +217,7 @@ model CodeProjectGrant {
   actorKey String
 
   userId String?
-  user   User? @relation("UserCodeProjectGrants", fields: [userId], references: [id], onDelete: SetNull)
+  user   User?   @relation("UserCodeProjectGrants", fields: [userId], references: [id], onDelete: SetNull)
 
   role CodeProjectRole @default(viewer)
 
@@ -254,14 +235,6 @@ model CodeProjectGrant {
   @@index([userId])
   @@index([role])
 }
-
-
-
-
-
-
-
-
 
 model ModuleAccessGrant {
   id String @id @default(cuid())
@@ -318,7 +291,8 @@ model PracticeModule {
   practicePresetId   String?
   practicePreset     PracticeRunPreset?  @relation(fields: [practicePresetId], references: [id])
   moduleAccessGrants ModuleAccessGrant[]
-  codeProjects CodeProject[] @relation("ModuleCodeProjects")
+  codeProjects       CodeProject[]       @relation("ModuleCodeProjects")
+
   @@index([practicePresetId])
   @@index([order])
   @@index([subjectId, order])
@@ -437,11 +411,12 @@ model PracticeQuestionInstance {
 
   attempts PracticeAttempt[]
 
+  practiceHelpEvents PracticeHelpEvent[]
+
   @@index([sessionId])
   @@index([topicId, difficulty])
   @@index([purpose]) // ✅ optional but useful
   @@index([sessionId, answeredAt])
-
 }
 
 model PracticeAttempt {
@@ -471,7 +446,6 @@ model PracticeAttempt {
   @@index([instanceId, revealUsed, userId, createdAt])
   @@index([instanceId, revealUsed, guestId, createdAt])
   @@index([sessionId, revealUsed, createdAt])
-
 }
 
 enum AssignmentStatus {
@@ -595,13 +569,14 @@ model PracticeSession {
   module   PracticeModule? @relation("ModuleSessions", fields: [moduleId], references: [id], onDelete: SetNull)
 
   assignmentId String?
-  assignment   Assignment? @relation("AssignmentSessions", fields: [assignmentId], references: [id], onDelete: SetNull)
-
-  returnUrl String?
-  instances PracticeQuestionInstance[]
-  attempts  PracticeAttempt[]
-  presetId  String?
-  preset    PracticeRunPreset?         @relation(fields: [presetId], references: [id])
+  assignment   Assignment?                @relation("AssignmentSessions", fields: [assignmentId], references: [id], onDelete: SetNull)
+  helpPolicy   Json?
+  helpEvents   PracticeHelpEvent[]
+  returnUrl    String?
+  instances    PracticeQuestionInstance[]
+  attempts     PracticeAttempt[]
+  presetId     String?
+  preset       PracticeRunPreset?         @relation(fields: [presetId], references: [id])
 
   @@index([mode])
   @@index([presetId])
@@ -632,12 +607,13 @@ model Assignment {
 
   maxAttempts Int?
   allowReveal Boolean @default(false)
+  helpPolicy  Json?
   showDebug   Boolean @default(false)
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  codeProjects CodeProject[] @relation("AssignmentCodeProjects")
-  sessions PracticeSession[] @relation("AssignmentSessions")
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+  codeProjects CodeProject[]     @relation("AssignmentCodeProjects")
+  sessions     PracticeSession[] @relation("AssignmentSessions")
 
   @@index([sectionId])
 }
@@ -669,10 +645,10 @@ model User {
 
   onboardingProfile UserOnboardingProfile?
 
-    featureGrants         FeatureGrant[]        @relation("UserFeatureGrants")
-    codeProjects          CodeProject[]         @relation("UserCodeProjects")
-    codeProjectGrants     CodeProjectGrant[]    @relation("UserCodeProjectGrants")
-    codeProjectRevisions  CodeProjectRevision[] @relation("UserCodeProjectRevisions")
+  featureGrants        FeatureGrant[]        @relation("UserFeatureGrants")
+  codeProjects         CodeProject[]         @relation("UserCodeProjects")
+  codeProjectGrants    CodeProjectGrant[]    @relation("UserCodeProjectGrants")
+  codeProjectRevisions CodeProjectRevision[] @relation("UserCodeProjectRevisions")
 }
 
 model Account {
@@ -780,7 +756,8 @@ model PracticeSubject {
   accessGrants SubjectAccessGrant[]
 
   onboardingInterests UserOnboardingInterest[]
-  codeProjects CodeProject[] @relation("SubjectCodeProjects")
+  codeProjects        CodeProject[]            @relation("SubjectCodeProjects")
+
   @@index([order])
   @@index([status, order])
   @@index([showInOnboarding, status, order])
@@ -949,4 +926,40 @@ model SubjectEnrollment {
   @@index([userId])
   @@index([subjectId])
   @@index([actorKey, status])
+}
+
+model PracticeHelpEvent {
+  id String @id @default(cuid())
+
+  sessionId String?
+  session   PracticeSession? @relation(fields: [sessionId], references: [id], onDelete: SetNull)
+
+  instanceId String
+  instance   PracticeQuestionInstance @relation(fields: [instanceId], references: [id], onDelete: Cascade)
+
+  userId  String?
+  guestId String?
+
+  // "concept", "hint_1", "hint_2", "reveal", ...
+  stepKey String
+
+  // cached ordering when opened
+  stepIndex Int?
+
+  // "concept" | "hint" | "reveal"
+  kind String?
+
+  // "authored" | "ai" | "system"
+  source String?
+
+  // optional snapshot of returned payload/text
+  content Json?
+
+  createdAt DateTime @default(now())
+
+  @@index([sessionId, createdAt])
+  @@index([instanceId, createdAt])
+  @@index([instanceId, stepKey, createdAt])
+  @@index([instanceId, userId, createdAt])
+  @@index([instanceId, guestId, createdAt])
 }

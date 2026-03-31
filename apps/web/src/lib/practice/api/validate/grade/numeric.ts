@@ -15,7 +15,7 @@ export function gradeNumeric(args: {
   if (!Number.isFinite(expValue)) {
     return {
       ok: false,
-      revealAnswer: null,
+
       explanation: "Server bug: invalid expected numeric value.",
     };
   }
@@ -23,7 +23,7 @@ export function gradeNumeric(args: {
   if (args.isReveal) {
     return {
       ok: false,
-      revealAnswer: { kind: "numeric", value: expValue, latex: String(expValue) },
+
       explanation: "Solution shown.",
     };
   }
@@ -35,7 +35,7 @@ export function gradeNumeric(args: {
 
   return {
     ok,
-    revealAnswer: null,
+
     explanation: ok ? "Correct." : `Expected ${expValue}${tol ? ` ± ${tol}` : ""}.`,
   };
 }

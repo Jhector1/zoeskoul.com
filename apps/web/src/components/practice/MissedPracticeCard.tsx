@@ -10,7 +10,7 @@ import type { QItem } from "./practiceType";
 import SingleChoiceExerciseUI from "./kinds/SingleChoiceExerciseUI";
 import MultiChoiceExerciseUI from "./kinds/MultiChoiceExerciseUI";
 import CodeInputExerciseUI from "./kinds/CodeInputExerciseUI";
-import { buildCorrectItemFromExpected } from "@/features/practice/client/usePracticeEngine";
+import { buildCorrectItemFromExpected } from "@/lib/practice/runtime";
 import { useTranslations } from "next-intl";
 import { resolveDeepTagged } from "@/i18n/resolveDeepTagged";
 import { useTaggedT } from "@/i18n/tagged";

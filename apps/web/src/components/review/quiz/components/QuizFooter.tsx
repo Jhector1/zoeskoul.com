@@ -24,7 +24,7 @@ export default function QuizFooter(props: {
       <div
           className={cn(
               "ui-quiz-card flex flex-wrap items-center justify-between gap-2",
-              props.locked && "ui-quiz-card--locked",
+              props.locked && "ui-quiz-card-locked","rounded-none",
           )}
       >
         <div className="min-w-0">

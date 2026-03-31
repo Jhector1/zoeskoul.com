@@ -11,13 +11,17 @@ import {
   coerceMaxAttempts,
   extractCodeLike,
   fetchResolvedPracticeItem,
-  revealPracticeItem,
+  requestPracticeHelpItem,
   submitPracticeItem,
 } from "@/lib/practice/runtime";
 import { cloneVec } from "@/lib/practice/uiHelpers";
 import { emitSfx } from "@/lib/sfx/bus";
 import { useTaggedT } from "@/i18n/tagged";
 import { resolveDeepTagged } from "@/i18n/resolveDeepTagged";
+import {
+  DEFAULT_PRACTICE_HELP_POLICY,
+  getNextPracticeHelpStepKey,
+} from "@/lib/practice/help/steps";
 
 export { isEmptyPracticeAnswer } from "@/lib/practice/runtime";
 export type PracticeState = PracticeItemState;
@@ -106,6 +110,7 @@ export function useQuizPracticeBank(args: {
             attempts: initMeta?.attempts ?? 0,
             ok: initMeta?.ok ?? null,
             maxAttempts: fallbackMax,
+            helpPolicy: DEFAULT_PRACTICE_HELP_POLICY,
           },
         };
       });
@@ -196,6 +201,8 @@ export function useQuizPracticeBank(args: {
                   0,
               ok: initialState?.practiceMeta?.[q.id]?.ok ?? base?.ok ?? null,
               maxAttempts: loaded.maxAttempts ?? base?.maxAttempts ?? null,
+              helpPolicy:
+                  loaded.helpPolicy ?? base?.helpPolicy ?? DEFAULT_PRACTICE_HELP_POLICY,
             },
           };
         });
@@ -241,7 +248,20 @@ export function useQuizPracticeBank(args: {
       const ps = prev[qid];
       if (!ps?.item) return prev;
 
-      const nextItem = { ...ps.item, ...patch };
+      const nextItem = {
+        ...ps.item,
+        ...patch,
+        help: patch.help
+            ? {
+              ...ps.item.help,
+              ...patch.help,
+              entries: {
+                ...ps.item.help.entries,
+                ...(patch.help.entries ?? {}),
+              },
+            }
+            : ps.item.help,
+      };
 
       const isReset =
           ("submitted" in patch && (patch as any).submitted === false) ||
@@ -324,61 +344,136 @@ export function useQuizPracticeBank(args: {
       [practice, unlimitedAttempts, isCompleted, locked],
   );
 
-  const revealPractice = useCallback(
-      async (q: Extract<ReviewQuestion, { kind: "practice" }>) => {
+  const openPracticeHelp = useCallback(
+      async (
+          q: Extract<ReviewQuestion, { kind: "practice" }>,
+          explicitStepKey?: string,
+      ) => {
         if (isCompleted || locked) return;
 
         const ps = practice[q.id];
-        if (!ps || ps.loading || ps.busy || !ps.item) return;
+        if (!ps || ps.loading || ps.busy || !ps.item || !ps.exercise) return;
+        if (ps.ok === true) return;
 
-        setPractice((prev) => ({
-          ...prev,
-          [q.id]: { ...prev[q.id], busy: true, error: null },
-        }));
+        const enabledStepKeys = ps.helpPolicy?.stepKeys?.length
+            ? ps.helpPolicy.stepKeys
+            : DEFAULT_PRACTICE_HELP_POLICY.stepKeys;
 
-        try {
-          const revealed = await revealPracticeItem(ps.item);
+        const openedStepKeys = ps.item.help?.openedStepKeys ?? [];
 
-          if (revealed.dragA) {
-            updatePracticeItem(q.id, { dragA: revealed.dragA } as any);
-          }
-          if (revealed.dragB) {
-            updatePracticeItem(q.id, { dragB: revealed.dragB } as any);
-          }
+        const stepKey =
+            explicitStepKey ??
+            getNextPracticeHelpStepKey(enabledStepKeys, openedStepKeys);
 
-          const pr = getPadRef(q.id);
-          if (pr.current) {
-            if (revealed.dragA) pr.current.a = cloneVec(revealed.dragA) as any;
-            if (revealed.dragB) pr.current.b = cloneVec(revealed.dragB) as any;
-          }
+        if (!stepKey) return;
 
+        const existing = ps.item.help?.entries?.[stepKey];
+        if (existing) {
           setPractice((prev) => ({
             ...prev,
             [q.id]: {
               ...prev[q.id],
-              busy: false,
-              error: null,
-              ok: false,
               item: {
                 ...prev[q.id].item!,
-                result: revealed.data as any,
-                revealed: true,
-                submitted: true,
-              } as any,
+                help: {
+                  ...prev[q.id].item!.help,
+                  activeStepKey: stepKey,
+                  error: null,
+                },
+              },
             },
           }));
+          return;
+        }
+
+        setPractice((prev) => ({
+          ...prev,
+          [q.id]: {
+            ...prev[q.id],
+            busy: true,
+            error: null,
+            item: {
+              ...prev[q.id].item!,
+              help: {
+                ...prev[q.id].item!.help,
+                busyStepKey: stepKey,
+                error: null,
+              },
+            },
+          },
+        }));
+
+        try {
+          const opened = await requestPracticeHelpItem({
+            item: ps.item,
+            exercise: ps.exercise,
+            stepKey,
+            padRef: getPadRef(q.id),
+          });
+
+          if (opened.dragA || opened.dragB) {
+            const pr = getPadRef(q.id);
+            if (pr.current) {
+              if (opened.dragA) pr.current.a = cloneVec(opened.dragA) as any;
+              if (opened.dragB) pr.current.b = cloneVec(opened.dragB) as any;
+            }
+          }
+
+          setPractice((prev) => {
+            const current = prev[q.id];
+            if (!current?.item) return prev;
+
+            const prevHelp = current.item.help;
+            const openedKeys = prevHelp.openedStepKeys.includes(stepKey)
+                ? prevHelp.openedStepKeys
+                : [...prevHelp.openedStepKeys, stepKey];
+
+            return {
+              ...prev,
+              [q.id]: {
+                ...current,
+                busy: false,
+                item: {
+                  ...current.item,
+                  dragA: opened.dragA ?? current.item.dragA,
+                  dragB: opened.dragB ?? current.item.dragB,
+                  help: {
+                    ...prevHelp,
+                    openedStepKeys: openedKeys,
+                    activeStepKey: stepKey,
+                    busyStepKey: null,
+                    error: null,
+                    entries: {
+                      ...prevHelp.entries,
+                      [stepKey]: opened.entry,
+                    },
+                  },
+                },
+              },
+            };
+          });
         } catch (e: any) {
           setPractice((prev) => ({
             ...prev,
             [q.id]: {
               ...prev[q.id],
               busy: false,
-              error: e?.message ?? "Reveal failed.",
+              error: e?.message ?? "Help failed.",
+              item: prev[q.id]?.item
+                  ? {
+                    ...prev[q.id].item!,
+                    help: {
+                      ...prev[q.id].item!.help,
+                      busyStepKey: null,
+                      error: e?.message ?? "Help failed.",
+                    },
+                  }
+                  : prev[q.id]?.item,
             },
           }));
         }
       },
-      [practice, isCompleted, locked, updatePracticeItem],
+      [practice, isCompleted, locked],
   );
 
   function isPracticeChecked(q: Extract<ReviewQuestion, { kind: "practice" }>) {
@@ -392,7 +487,7 @@ export function useQuizPracticeBank(args: {
     getPadRef,
     updatePracticeItem,
     submitPractice,
-    revealPractice,
+    openPracticeHelp,
     isPracticeChecked,
   };
 }

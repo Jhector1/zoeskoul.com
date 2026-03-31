@@ -38,19 +38,32 @@
       }
     }
   },
+
+
   "quiz": {
     "m1_io_age_next_year": {
       "title": "Age next year",
       "prompt": "Read TWO inputs:\n1) name\n2) age\n\nPrint exactly:\nHi <name>! Next year you'll be <age+1>.",
+      "help": {
+        "concept": "Follow the pattern **Ask → Convert → Compute → Show**. Read the name as text, convert the age to an integer, compute `age + 1`, then print the exact required sentence.",
+        "hint_1": "The first input is a name, so leave it as text. The second input is age, so wrap it with `int(...)` before doing math.",
+        "hint_2": "A correct shape is:\n```python\nname = input()\nage = int(input())\nprint(f\"Hi {name}! Next year you'll be {age + 1}.\")\n```"
+      },
       "hint": "Convert age with int(...).",
       "starterCode": "# TODO\n",
       "runtime": {
         "outputTemplate": "Hi {name}! Next year you'll be {age_next}."
       }
     },
+
     "m1_io_tip_total": {
       "title": "Tip + total",
       "prompt": "Read TWO integers:\n1) bill\n2) tip percent\n\nCompute:\ntip = bill * pct // 100\ntotal = bill + tip\n\nPrint exactly:\nTip = <tip>\nTotal = <total>",
+      "help": {
+        "concept": "This is another **Ask → Convert → Compute → Show** program. Read both values as integers, compute the tip using integer division, then print two exact output lines.",
+        "hint_1": "Use `int(input())` for both inputs. Then compute `tip = bill * pct // 100` and `total = bill + tip`.",
+        "hint_2": "A correct structure is:\n```python\nbill = int(input())\npct = int(input())\ntip = bill * pct // 100\ntotal = bill + tip\nprint(f\"Tip = {tip}\")\nprint(f\"Total = {total}\")\n```"
+      },
       "hint": "Use integer math: // 100",
       "starterCode": "bill = int(input())\npct = int(input())\n# TODO\n",
       "runtime": {
@@ -58,15 +71,27 @@
         "totalLineTemplate": "Total = {total}"
       }
     },
+
     "m1_io_c_to_f": {
       "title": "Celsius → Fahrenheit",
       "prompt": "Read ONE integer C.\n\nCompute:\nF = C * 9/5 + 32\n\nPrint ONLY F as an integer.",
+      "help": {
+        "concept": "Read Celsius as an integer, apply the Fahrenheit formula, then print only the final numeric result.",
+        "hint_1": "Convert the input first with `c = int(input())`, then compute Fahrenheit using `c * 9 / 5 + 32`.",
+        "hint_2": "A correct solution is:\n```python\nc = int(input())\nf = int(c * 9 / 5 + 32)\nprint(f)\n```"
+      },
       "hint": "f = int(c * 9 / 5 + 32)",
       "starterCode": "c = int(input())\n# TODO\n"
     },
+
     "m1_io_input_returns_str": {
       "title": "What does input() return?",
       "prompt": "Look at this code:\n\n~~~python\nx = input()\n~~~\n\nIf the user types `42`, what is the type of `x`?",
+      "help": {
+        "concept": "`input()` always returns text. Python does not automatically turn typed digits into a number.",
+        "hint_1": "Even if the user types `42`, Python stores it as the string `\"42\"` unless you convert it.",
+        "hint_2": "The correct type is `str`."
+      },
       "hint": "`input()` always returns text.",
       "options": {
         "a": "int",
@@ -75,9 +100,15 @@
         "d": "bool"
       }
     },
+
     "m1_io_tip_integer_math": {
       "title": "Integer math for tip",
       "prompt": "Which line correctly computes the tip using integer math?",
+      "help": {
+        "concept": "Integer math means you want a whole-number result. In Python, `//` performs floor division.",
+        "hint_1": "Start from `bill * pct`, then divide by 100 using `//` instead of `/`.",
+        "hint_2": "The correct line is:\n```python\ntip = bill * pct // 100\n```"
+      },
       "hint": "Use `//` for whole-number division.",
       "options": {
         "a": "tip = bill * pct / 100",
@@ -86,9 +117,15 @@
         "d": "tip = pct - bill"
       }
     },
+
     "m1_io_c_to_f_formula": {
       "title": "Temperature formula",
       "prompt": "Which expression matches the lesson’s Celsius → Fahrenheit computation for an integer `c`?",
+      "help": {
+        "concept": "The Fahrenheit formula is based on scaling Celsius by `9/5` and then shifting by `32`.",
+        "hint_1": "Multiply by 9, divide by 5, then add 32 — in that order.",
+        "hint_2": "The matching expression is:\n```python\nint(c * 9 / 5 + 32)\n```"
+      },
       "hint": "Multiply by 9, divide by 5, then add 32.",
       "options": {
         "a": "int(c * 9 / 5 + 32)",
@@ -97,9 +134,15 @@
         "d": "int(c * 9 / (5 + 32))"
       }
     },
+
     "m1_io_age_next_year_parts": {
       "title": "Build the age-next-year solution",
       "prompt": "Select all lines that belong in a correct solution for the **Age next year** program.",
+      "help": {
+        "concept": "A correct solution needs all four parts of the pattern: ask for inputs, convert age, compute the new value, and print the exact result.",
+        "hint_1": "You need one line to read the name, one line to read and convert the age, and one line to print the required message.",
+        "hint_2": "The correct lines are the ones that read `name`, convert `age` with `int(input())`, and print `Hi {name}! Next year you'll be {age + 1}.`"
+      },
       "hint": "You need input, conversion, and exact output formatting.",
       "options": {
         "a": "name = input()",
@@ -109,9 +152,15 @@
         "e": "print(name, age, 1)"
       }
     },
+
     "m1_io_tip_output_lines": {
       "title": "Exact output lines",
       "prompt": "After computing `tip` and `total`, select all lines that match the required output exactly.",
+      "help": {
+        "concept": "When a prompt says **print exactly**, even punctuation, capitalization, and spacing matter.",
+        "hint_1": "Look for the labels `Tip =` and `Total =` with the same capitalization and spacing as the prompt.",
+        "hint_2": "The correct lines are:\n```python\nprint(f\"Tip = {tip}\")\nprint(f\"Total = {total}\")\n```"
+      },
       "hint": "The labels must match exactly: `Tip =` and `Total =`.",
       "options": {
         "a": "print(f\"Tip = {tip}\")",
@@ -120,9 +169,15 @@
         "d": "print(f\"total = {total}\")"
       }
     },
+
     "m1_io_convert_then_compute_truths": {
       "title": "Convert, then compute",
       "prompt": "Select all true statements about the temperature-converter program.",
+      "help": {
+        "concept": "The temperature converter follows the same beginner-program pattern: read input as text, convert it, compute with the numeric value, then display the result.",
+        "hint_1": "Think about what `input()` returns, what `int(input())` does, and which part of the code is the actual formula.",
+        "hint_2": "The true ideas are: `input()` returns a string, `int(input())` converts valid whole-number text, and `c * 9 / 5 + 32` is the compute step."
+      },
       "hint": "Think about the pattern: Ask → Convert → Compute → Show.",
       "options": {
         "a": "`input()` gives a string.",

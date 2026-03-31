@@ -8,31 +8,96 @@ type Input = {
   userAnswer: any | null;
 };
 
+function fallbackShort(input: Input): string {
+  if (input.mode === "concept") {
+    return "Focus on the method, not the final result. Identify the input, the operation, and the required output.";
+  }
+
+  return "Check the next step only. Convert values first if needed, then apply the rule or formula carefully.";
+}
+
+function stringifyUserAnswer(value: unknown): string {
+  if (value == null) return "";
+  try {
+    return JSON.stringify(value).slice(0, 500);
+  } catch {
+    return String(value).slice(0, 500);
+  }
+}
+
+function normalizeWhitespace(text: string): string {
+  return text
+      .replace(/\r\n/g, "\n")
+      .replace(/\n{3,}/g, "\n\n")
+      .replace(/[ \t]+/g, " ")
+      .trim();
+}
+
+function limitToShortResponse(text: string, maxChars: number): string {
+  const clean = normalizeWhitespace(text);
+
+  if (!clean) return "";
+
+  const sentences = clean.match(/[^.!?\n]+[.!?]?/g)?.map((s) => s.trim()).filter(Boolean) ?? [];
+  const short = sentences.slice(0, 2).join(" ").trim();
+
+  if (!short) {
+    return clean.slice(0, maxChars).trim();
+  }
+
+  if (short.length <= maxChars) return short;
+
+  return short.slice(0, maxChars).replace(/\s+\S*$/, "").trim() + "…";
+}
+
+function looksLikeReveal(text: string): boolean {
+  const s = text.toLowerCase();
+
+  return [
+    "the answer is",
+    "correct answer",
+    "choose option",
+    "pick option",
+    "option a",
+    "option b",
+    "option c",
+    "option d",
+    "the correct option",
+    "final answer",
+    "solution is",
+    "use this exact code",
+    "here is the code",
+  ].some((needle) => s.includes(needle));
+}
+
+function sanitizeAiText(text: string, input: Input): string {
+  const short = limitToShortResponse(text, input.mode === "concept" ? 220 : 160);
+
+  if (!short) return fallbackShort(input);
+  if (looksLikeReveal(short)) return fallbackShort(input);
+
+  return short;
+}
+
 export async function explainPracticeConcept(input: Input): Promise<string> {
   const apiKey = process.env.OPENAI_API_KEY;
   const model = process.env.OPENAI_MODEL ?? "gpt-4o-mini";
 
-  // Fallback if no AI key yet
   if (!apiKey) {
-    return [
-      `**Concept explanation (${input.topicSlug})**`,
-      ``,
-      `I can explain the approach here, but \`OPENAI_API_KEY\` is not set on the server.`,
-      ``,
-      `**How to study this type:**`,
-      `- Identify what the question is asking (kind: \`${input.kind}\`)`,
-      `- Write the general method (definitions / steps)`,
-      `- Only then plug numbers in (don’t do that in the explanation)`,
-    ].join("\n");
+    return fallbackShort(input);
   }
 
   const system = [
     "You are a tutor inside a practice app.",
-    "Explain the underlying concept and the general approach.",
-    "DO NOT give the final answer or compute results for the specific numbers in the prompt.",
-    "DO NOT identify the correct option letter/id for multiple choice.",
-    "You may point out common mistakes and what to check.",
-    "Use concise bullet points and (when helpful) small generic examples that are NOT the same as the prompt.",
+    "Your job is to give a very short nudge, not a full explanation.",
+    "Return at most 2 short sentences.",
+    "Be supportive and direct.",
+    "Do NOT give the final answer.",
+    "Do NOT solve the exact prompt.",
+    "Do NOT compute results for the given values.",
+    "Do NOT reveal the correct option, option letter, option id, or exact code solution.",
+    "Do NOT output step-by-step full solutions.",
+    "Only give a tiny conceptual hint or the next thing to check.",
   ].join(" ");
 
   const user = [
@@ -43,11 +108,14 @@ export async function explainPracticeConcept(input: Input): Promise<string> {
     "",
     "Question prompt:",
     input.prompt,
+    input.userAnswer != null
+        ? `\nUser attempt:\n${stringifyUserAnswer(input.userAnswer)}`
+        : "",
     "",
-    input.userAnswer
-      ? `User attempt (may be wrong):\n${JSON.stringify(input.userAnswer).slice(0, 1500)}`
-      : "",
-  ].filter(Boolean).join("\n");
+    "Reply very briefly. No bullets unless absolutely necessary.",
+  ]
+      .filter(Boolean)
+      .join("\n");
 
   const r = await fetch("https://api.openai.com/v1/chat/completions", {
     method: "POST",
@@ -57,8 +125,8 @@ export async function explainPracticeConcept(input: Input): Promise<string> {
     },
     body: JSON.stringify({
       model,
-      temperature: 0.2,
-      max_tokens: 450,
+      temperature: 0.1,
+      max_tokens: 120,
       messages: [
         { role: "system", content: system },
         { role: "user", content: user },
@@ -68,16 +136,17 @@ export async function explainPracticeConcept(input: Input): Promise<string> {
 
   const text = await r.text();
   let data: any = null;
+
   try {
     data = JSON.parse(text);
   } catch {
-    throw new Error(`AI returned non-JSON (${r.status}): ${text.slice(0, 180)}`);
+    return fallbackShort(input);
   }
 
   if (!r.ok) {
-    throw new Error(data?.error?.message ?? `AI error (${r.status})`);
+    return fallbackShort(input);
   }
 
-  const content = data?.choices?.[0]?.message?.content;
-  return String(content ?? "").trim() || "No explanation returned.";
+  const content = String(data?.choices?.[0]?.message?.content ?? "").trim();
+  return sanitizeAiText(content, input);
 }

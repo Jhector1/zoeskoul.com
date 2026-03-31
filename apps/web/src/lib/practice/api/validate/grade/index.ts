@@ -17,7 +17,7 @@ import {gradeFillBlankChoice} from "@/lib/practice/api/validate/grade/fillBlankC
 export type GradeResult = {
   ok: boolean;
   explanation: string;
-  revealAnswer: any | null;
+  // revealAnswer: any | null;
 };
 
 export async function gradeInstance(args: {
@@ -69,7 +69,7 @@ export async function gradeInstance(args: {
     default:
       return {
         ok: false,
-        revealAnswer: null,
+
         explanation: `Unsupported instance kind: ${String(args.instance.kind)}`,
       };
   }

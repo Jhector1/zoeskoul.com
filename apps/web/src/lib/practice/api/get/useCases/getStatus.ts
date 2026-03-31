@@ -202,6 +202,28 @@ export async function getPracticeStatus(
             if (!lastNonReveal.has(a.instanceId)) lastNonReveal.set(a.instanceId, a);
         }
 
+        const helpRows = await prisma.practiceHelpEvent.findMany({
+            where: {
+                sessionId: session.id,
+                ...(actorOR.length ? ({ OR: actorOR } as any) : {}),
+            },
+            orderBy: { createdAt: "desc" },
+            select: {
+                instanceId: true,
+                stepKey: true,
+                createdAt: true,
+            },
+        });
+
+        const helpUsedKeysMap = new Map<string, string[]>();
+
+        for (const row of helpRows) {
+            const prev = helpUsedKeysMap.get(row.instanceId) ?? [];
+            if (!prev.includes(row.stepKey)) {
+                prev.push(row.stepKey);
+                helpUsedKeysMap.set(row.instanceId, prev);
+            }
+        }
         const instances = await prisma.practiceQuestionInstance.findMany({
             where: { sessionId: session.id, answeredAt: { not: null } },
             orderBy: { answeredAt: "asc" },
@@ -236,13 +258,17 @@ export async function getPracticeStatus(
                 title: row.title,
                 prompt: row.prompt,
                 publicPayload: row.publicPayload ?? null,
-                attempts: countMap.get(row.id) ?? 0,
-                lastOk: last ? Boolean(last.ok) : null,
-                lastRevealUsed: Boolean(revealUsedAny.get(row.id) ?? false),
+
                 lastAnswerPayload: last?.answerPayload ?? null,
                 lastAttemptAt: last?.createdAt ?? null,
                 expectedAnswerPayload,
                 explanation,
+
+
+                attempts: countMap.get(row.id) ?? 0,
+                lastOk: last ? Boolean(last.ok) : null,
+                helpUsedKeys: helpUsedKeysMap.get(row.id) ?? [],
+                lastRevealUsed: Boolean(revealUsedAny.get(row.id) ?? false),
             };
         });
     }

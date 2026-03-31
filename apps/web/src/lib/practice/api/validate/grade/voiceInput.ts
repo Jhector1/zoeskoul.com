@@ -26,29 +26,25 @@ export function gradeVoiceInput(args: {
   if (args.isReveal) {
     return {
       ok: false,
-      revealAnswer: {
-        kind: "voice_input",
-        transcript: expected ?? "",
-        answers: Array.isArray(args.expectedCanon.answers) ? args.expectedCanon.answers : expected ? [expected] : [],
-      },
+
       explanation: "Solution shown.",
     };
   }
 
   const transcript = String((args.answer as any)?.transcript ?? "").trim();
   if (!transcript) {
-    return { ok: false, revealAnswer: null, explanation: "Missing transcript." };
+    return { ok: false,  explanation: "Missing transcript." };
   }
 
   if (!expected) {
-    return { ok: true, revealAnswer: null, explanation: "Answer recorded." };
+    return { ok: true,  explanation: "Answer recorded." };
   }
 
   const ok = norm(transcript) === norm(expected);
 
   return {
     ok,
-    revealAnswer: null,
+    
     explanation: ok ? "Correct." : "Not correct.",
   };
 }

@@ -3,7 +3,7 @@
 import React from "react";
 import { cn } from "@/lib/cn";
 import type { Exercise } from "@/lib/practice/types";
-import type { QItem } from "../practiceType";
+import type { QItem } from "@/lib/practice/uiTypes";
 import RevealAnswerCard from "../RevealAnswerCard";
 import MathMarkdown from "@/components/markdown/MathMarkdown";
 import type { UseConceptExplainResult } from "../hooks/useConceptExplain";
@@ -39,6 +39,10 @@ export default function ResultPanel({
     excuseAndNext?: (reason?: string | null) => Promise<void> | void;
 }) {
     const excused = isExcusedPracticeItem(current);
+    const activeHelpEntry =
+        current?.help?.activeStepKey
+            ? current.help.entries[current.help.activeStepKey]
+            : null;
 
     return (
         <div className="p-4">
@@ -73,18 +77,16 @@ export default function ResultPanel({
                 ) : (
                     <>
                         <div className="ui-title-sm">
-                            {current.revealed
-                                ? t("result.revealed")
-                                : current.result.ok
-                                    ? t("result.correct")
-                                    : t("result.incorrect")}
+                            {current.result.ok
+                                ? t("result.correct")
+                                : t("result.incorrect")}
                         </div>
 
-                        {current.revealed ? (
+                        {activeHelpEntry?.reveal ? (
                             <RevealAnswerCard
                                 exercise={exercise}
                                 current={current}
-                                result={current.result}
+                                reveal={activeHelpEntry.reveal}
                                 updateCurrent={updateCurrent}
                             />
                         ) : null}

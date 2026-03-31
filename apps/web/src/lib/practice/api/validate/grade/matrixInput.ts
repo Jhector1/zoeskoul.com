@@ -21,7 +21,7 @@ export function gradeMatrixInput(args: {
   if (!Array.isArray(rawExp) || !Array.isArray(rawExp[0])) {
     return {
       ok: false,
-      revealAnswer: null,
+
       explanation: "Server bug: matrix_input expected.values is missing or not 2D.",
     };
   }
@@ -33,14 +33,7 @@ export function gradeMatrixInput(args: {
   if (args.isReveal) {
     return {
       ok: false,
-      revealAnswer: {
-        kind: "matrix_input",
-        values: expValues,
-        latex: matrixToLatex(expValues),
-        labelLatex:
-          (args.instance.publicPayload as any)?.labelLatex ??
-          String.raw`\mathbf{A}=`,
-      },
+
       explanation: "Solution shown.",
     };
   }
@@ -58,5 +51,5 @@ export function gradeMatrixInput(args: {
       ? `One or more entries differ by more than ${tol}.`
       : `Wrong shape. Expected ${expValues.length}×${expValues[0].length}, got ${got.length}×${got[0]?.length ?? 0}.`;
 
-  return { ok, revealAnswer: null, explanation };
+  return { ok, explanation };
 }

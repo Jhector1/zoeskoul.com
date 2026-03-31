@@ -1,11 +1,13 @@
 import type { MutableRefObject } from "react";
 import type { Exercise } from "@/lib/practice/types";
-import type { QItem } from "@/lib/practice/uiTypes";
+import type { QItem, PracticeHelpEntry } from "@/lib/practice/uiTypes";
 import type { VectorPadState } from "@/components/vectorpad/types";
 import {
     fetchPracticeExercise,
+    fetchPracticeHelp,
     submitPracticeAnswer,
     type PracticeGetResponse,
+    type PracticeHelpClientResponse,
     type PracticeValidateClientResponse,
 } from "@/lib/practice/clientApi";
 import {
@@ -16,6 +18,10 @@ import {
 import { resolveDeepTagged } from "@/i18n/resolveDeepTagged";
 import { coerceMaxAttempts } from "./helpers";
 import type { PracticeRuntimeTextResolvers } from "./types";
+import {
+    DEFAULT_PRACTICE_HELP_POLICY,
+    normalizePracticeHelpPolicy,
+} from "@/lib/practice/help/steps";
 
 export async function fetchResolvedPracticeItem(args: {
     request: Record<string, any>;
@@ -56,7 +62,18 @@ export async function fetchResolvedPracticeItem(args: {
         : null;
 
     if (resolvedPatch) {
-        item = { ...item, ...resolvedPatch };
+        item = {
+            ...item,
+            ...resolvedPatch,
+            help: {
+                ...item.help,
+                ...(resolvedPatch.help ?? {}),
+                entries: {
+                    ...item.help.entries,
+                    ...(resolvedPatch.help?.entries ?? {}),
+                },
+            },
+        };
     }
 
     return {
@@ -70,6 +87,10 @@ export async function fetchResolvedPracticeItem(args: {
                 : null,
         run: (response as any)?.run ?? null,
         maxAttempts: coerceMaxAttempts((response as any)?.run?.maxAttempts),
+        helpPolicy: normalizePracticeHelpPolicy(
+            (response as any)?.run?.help ?? null,
+            Boolean((response as any)?.run?.allowReveal ?? true),
+        ),
     };
 }
 
@@ -147,27 +168,60 @@ export async function submitPracticeItem(args: {
     };
 }
 
-export async function revealPracticeItem(item: QItem) {
-    const data: PracticeValidateClientResponse = await submitPracticeAnswer({
+export async function requestPracticeHelpItem(args: {
+    item: QItem;
+    exercise: Exercise;
+    stepKey: string;
+    padRef?: MutableRefObject<VectorPadState>;
+}) {
+    const { item, exercise, stepKey } = args;
+
+    const userAnswer =
+        exercise.kind === "vector_drag_dot"
+            ? { kind: "vector_drag_dot", a: cloneVec(args.padRef?.current?.a ?? item.dragA) }
+            : exercise.kind === "vector_drag_target"
+                ? {
+                    kind: "vector_drag_target",
+                    a: cloneVec(args.padRef?.current?.a ?? item.dragA),
+                    b: cloneVec(args.padRef?.current?.b ?? item.dragB),
+                }
+                : buildSubmitAnswerFromItem(item) ?? null;
+
+    const data: PracticeHelpClientResponse = await fetchPracticeHelp({
         key: item.key,
-        reveal: true,
+        stepKey,
+        userAnswer,
     });
 
+    const reveal = data.reveal ?? null;
+
+    const entry: PracticeHelpEntry = {
+        key: stepKey,
+        label: data.step?.label ?? stepKey,
+        kind: data.step?.kind ?? undefined,
+        content: data.content ?? null,
+        reveal,
+        source: data.source ?? null,
+        openedAt: Date.now(),
+    };
+
     const dragA =
-        (data as any)?.revealAnswer?.solutionA ??
-        (data as any)?.reveal?.solutionA ??
-        (data as any)?.expected?.solutionA ??
+        reveal?.solutionA ??
+        reveal?.targetA ??
         null;
 
     const dragB =
-        (data as any)?.revealAnswer?.b ??
-        (data as any)?.reveal?.b ??
-        (data as any)?.expected?.b ??
+        reveal?.b ??
         null;
 
     return {
         data,
+        entry,
         dragA: dragA ? cloneVec(dragA) : null,
         dragB: dragB ? cloneVec(dragB) : null,
     };
 }
+
+// export { coerceMaxAttempts } from "./helpers";
+// export * from "./session";
+// export * from "./types";

@@ -24,13 +24,7 @@ export function gradeVectorDragDot(args: {
   if (args.isReveal) {
     return {
       ok: false,
-      revealAnswer: {
-        kind: "vector_drag_dot",
-        b,
-        solutionA,
-        targetDot,
-        latex: solutionA ? vecToLatex(solutionA) : null,
-      },
+
       explanation: solutionA
         ? `One valid answer is shown (a·b = ${targetDot}).`
         : "Missing b (cannot compute reveal solution).",
@@ -41,7 +35,7 @@ export function gradeVectorDragDot(args: {
   if (!a || !b) {
     return {
       ok: false,
-      revealAnswer: null,
+      
       explanation: "Missing vector data (a or b).",
     };
   }
@@ -62,7 +56,7 @@ export function gradeVectorDragDot(args: {
   if (!Number.isFinite(a2) || a2 < min2 - EPS) {
     return {
       ok: false,
-      revealAnswer: null,
+      
       explanation: `a cannot be the zero vector (|a| must be ≥ ${minMag}).`,
     };
   }
@@ -71,7 +65,7 @@ export function gradeVectorDragDot(args: {
 
   return {
     ok,
-    revealAnswer: null,
+    
     explanation: ok
       ? "Correct."
       : `Your a·b = ${dot.toFixed(2)}. Aim for ${targetDot} ± ${tol}.`,

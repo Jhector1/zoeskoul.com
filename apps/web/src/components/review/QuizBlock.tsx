@@ -656,9 +656,9 @@ export default function QuizBlock({
                           scheduleScroll(q.id, "end");
                           void practiceBank.submitPractice(q);
                         }}
-                        onReveal={() => {
+                        onHelp={(stepKey) => {
                           scheduleScroll(q.id, "end");
-                          void practiceBank.revealPractice(q);
+                          void practiceBank.openPracticeHelp(q, stepKey);
                         }}
                     />
                 ) : (

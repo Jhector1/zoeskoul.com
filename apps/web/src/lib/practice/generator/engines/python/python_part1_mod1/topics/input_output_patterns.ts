@@ -1,12 +1,15 @@
 import { makeCodeExpected, safeInt, pickName } from "../../_shared";
 import {
     defineTopic,
-    type Handler,type AnyHandler,
+    type AnyHandler,
     type TopicBundle,
     type HandlerArgs,
     makeSingleChoiceOut,
     makeMultiChoiceOut,
-    makeCodeInputOut, pickDifferentInt, pickDifferentName,
+    makeCodeInputOut,
+    pickDifferentInt,
+    pickDifferentName,
+    buildTaggedHelpSteps,
 } from "@/lib/practice/generator/engines/utils";
 import { TOPIC_ID } from "@/lib/subjects/python/modules/module1/topics/input_output_patterns/meta";
 import {
@@ -37,9 +40,6 @@ function Q(key: M1IoKey) {
     return `quiz.${key}`;
 }
 
-
-
-
 export const M1_IO_HANDLERS = {
     m1_io_age_next_year: (args: HandlerArgs) => {
         const { rng, diff, id, topic } = args;
@@ -52,7 +52,7 @@ export const M1_IO_HANDLERS = {
         const outputTemplate = i18nText(
             args,
             `${Q("m1_io_age_next_year")}.runtime.outputTemplate`,
-            "Hi {name}! Next year you'll be {age_next}."
+            "Hi {name}! Next year you'll be {age_next}.",
         );
 
         const promptText = i18nText(
@@ -63,7 +63,7 @@ export const M1_IO_HANDLERS = {
 2) age
 
 Print exactly:
-Hi <name>! Next year you'll be <age+1>.`
+Hi <name>! Next year you'll be <age+1>.`,
         );
 
         const exStdin = `${name1}\n${age1}\n`;
@@ -108,6 +108,7 @@ Hi <name>! Next year you'll be <age+1>.`
             prompt: `${promptText}\n\n${terminalFenceI18n(args, exStdin, exStdout)}`.trim(),
             language: "python",
             starterCode: tag(`${Q("m1_io_age_next_year")}.starterCode`),
+            help: buildTaggedHelpSteps(Q("m1_io_age_next_year")),
             hint: tag(`${Q("m1_io_age_next_year")}.hint`),
             expected,
         });
@@ -129,12 +130,12 @@ Hi <name>! Next year you'll be <age+1>.`
         const tipLineTemplate = i18nText(
             args,
             `${Q("m1_io_tip_total")}.runtime.tipLineTemplate`,
-            "Tip = {tip}"
+            "Tip = {tip}",
         );
         const totalLineTemplate = i18nText(
             args,
             `${Q("m1_io_tip_total")}.runtime.totalLineTemplate`,
-            "Total = {total}"
+            "Total = {total}",
         );
         const promptText = i18nText(
             args,
@@ -149,7 +150,7 @@ total = bill + tip
 
 Print exactly:
 Tip = <tip>
-Total = <total>`
+Total = <total>`,
         );
 
         const exStdin = `${bill1}\n${pct1}\n`;
@@ -193,6 +194,7 @@ Total = <total>`
             prompt: `${promptText}\n\n${terminalFenceI18n(args, exStdin, exStdout)}`.trim(),
             language: "python",
             starterCode: tag(`${Q("m1_io_tip_total")}.starterCode`),
+            help: buildTaggedHelpSteps(Q("m1_io_tip_total")),
             hint: tag(`${Q("m1_io_tip_total")}.hint`),
             expected,
         });
@@ -215,7 +217,7 @@ Total = <total>`
 Compute:
 F = C * 9/5 + 32
 
-Print ONLY F.`
+Print ONLY F as an integer.`,
         );
 
         const exStdin = `${c1}\n`;
@@ -239,6 +241,7 @@ Print ONLY F.`
             prompt: `${promptText}\n\n${terminalFenceI18n(args, exStdin, exStdout)}`.trim(),
             language: "python",
             starterCode: tag(`${Q("m1_io_c_to_f")}.starterCode`),
+            help: buildTaggedHelpSteps(Q("m1_io_c_to_f")),
             hint: tag(`${Q("m1_io_c_to_f")}.hint`),
             expected,
         });
@@ -259,6 +262,7 @@ Print ONLY F.`
                 { id: "d", text: tag(`${Q("m1_io_input_returns_str")}.options.d`) },
             ],
             answerOptionId: "c",
+            help: buildTaggedHelpSteps(Q("m1_io_input_returns_str")),
             hint: tag(`${Q("m1_io_input_returns_str")}.hint`),
         }),
 
@@ -277,6 +281,7 @@ Print ONLY F.`
                 { id: "d", text: tag(`${Q("m1_io_tip_integer_math")}.options.d`) },
             ],
             answerOptionId: "b",
+            help: buildTaggedHelpSteps(Q("m1_io_tip_integer_math")),
             hint: tag(`${Q("m1_io_tip_integer_math")}.hint`),
         }),
 
@@ -295,6 +300,7 @@ Print ONLY F.`
                 { id: "d", text: tag(`${Q("m1_io_c_to_f_formula")}.options.d`) },
             ],
             answerOptionId: "a",
+            help: buildTaggedHelpSteps(Q("m1_io_c_to_f_formula")),
             hint: tag(`${Q("m1_io_c_to_f_formula")}.hint`),
         }),
 
@@ -314,6 +320,7 @@ Print ONLY F.`
                 { id: "e", text: tag(`${Q("m1_io_age_next_year_parts")}.options.e`) },
             ],
             answerOptionIds: ["a", "b", "c"],
+            help: buildTaggedHelpSteps(Q("m1_io_age_next_year_parts")),
             hint: tag(`${Q("m1_io_age_next_year_parts")}.hint`),
         }),
 
@@ -332,6 +339,7 @@ Print ONLY F.`
                 { id: "d", text: tag(`${Q("m1_io_tip_output_lines")}.options.d`) },
             ],
             answerOptionIds: ["a", "b"],
+            help: buildTaggedHelpSteps(Q("m1_io_tip_output_lines")),
             hint: tag(`${Q("m1_io_tip_output_lines")}.hint`),
         }),
 
@@ -351,6 +359,7 @@ Print ONLY F.`
                 { id: "e", text: tag(`${Q("m1_io_convert_then_compute_truths")}.options.e`) },
             ],
             answerOptionIds: ["a", "b", "d"],
+            help: buildTaggedHelpSteps(Q("m1_io_convert_then_compute_truths")),
             hint: tag(`${Q("m1_io_convert_then_compute_truths")}.hint`),
         }),
 } satisfies Record<M1IoKey, AnyHandler>;

@@ -334,16 +334,18 @@ export default function ReviewModuleView({
     const assignmentSessionId = (progress as any)?.assignmentSessionId
         ? String((progress as any).assignmentSessionId)
         : null;
+    const assignmentStatusEnabled = progressHydrated && Boolean(assignmentSessionId);
 
     const {
         status: assignmentStatus,
         complete: assignmentDone,
-        pct: assignmentPct,              // answered/target (keep if you want)
-        rightPct: assignmentRightPct,    // ✅ green
-        missedPct: assignmentMissedPct,  // ✅ red
+        pct: assignmentPct,
+        rightPct: assignmentRightPct,
+        missedPct: assignmentMissedPct,
+        refresh: refreshAssignmentStatus,
     } = useAssignmentStatus({
         sessionId: assignmentSessionId,
-        enabled: progressHydrated,
+        enabled: assignmentStatusEnabled,
         subject: subjectSlug,
         module: moduleId,
     });

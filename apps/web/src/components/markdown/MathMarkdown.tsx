@@ -150,13 +150,13 @@ function TerminalExample({ raw }: { raw: string }) {
     const outCls = "ui-text";
 
     return (
-        <div className={join("ui-surface relative z-0 my-3 mx-auto w-full max-w-[760px] p-3", outerCls)}>
+        <div className={join("ui-surface relative z-0 my-3 mx-auto w-full max-w-[760px] p-3", outerCls, "rounded-none")}>
             <div className="flex items-center justify-between gap-2">
                 <div className="ui-meta-strong">Terminal</div>
                 <div className="ui-meta">{meta}</div>
             </div>
 
-            <div className={join("mt-2 max-h-48 overflow-auto rounded-md border p-2", innerCls)}>
+            <div className={join("mt-2 max-h-48 overflow-auto ","border-none")}>
                 <div className="whitespace-pre-wrap break-words px-2 font-mono text-xs leading-5">
                     {lines.map((l, i) => {
                         const line = String(l ?? "");

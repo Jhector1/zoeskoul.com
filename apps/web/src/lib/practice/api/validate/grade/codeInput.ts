@@ -3,12 +3,9 @@ import { runCode } from "@/lib/code/runCode";
 // import {LoadedValidateInstance} from "@/lib/practice/api/validate/repositories/instance.repo";import type { SubmitAnswer } from "../schemas";
 import {CodeExpectedSchema, SubmitAnswer} from "../schemas";
 import {LoadedValidateInstance} from "@/lib/practice/api/validate/repositories/instance.repo";
+import {GradeResult} from "@/lib/practice/api/validate/grade/index";
 
-type GradeResult = {
-  ok: boolean;
-  explanation: string;
-  revealAnswer: any | null;
-};
+
 
 const DEFAULT_LIMITS = {
   cpu_time_limit: 2,
@@ -53,7 +50,7 @@ export async function gradeCodeInput(args: {
   if (!parsed.success) {
     return {
       ok: false,
-      revealAnswer: null,
+      
       explanation: "Server bug: invalid code_input expected payload.",
     };
   }
@@ -63,11 +60,7 @@ export async function gradeCodeInput(args: {
   if (isReveal) {
     return {
       ok: false,
-      revealAnswer: {
-        kind: "code_input",
-        language: expected.language ?? "python",
-        solutionCode: expected.solutionCode ?? "",
-      },
+
       explanation: "Solution shown.",
     };
   }
@@ -75,14 +68,14 @@ export async function gradeCodeInput(args: {
   const ans: any = answer ?? {};
   const code = String(ans.code ?? ans.source ?? "").trimEnd();
   if (!code.trim()) {
-    return { ok: false, revealAnswer: null, explanation: "Missing code." };
+    return { ok: false,  explanation: "Missing code." };
   }
 
   const language = String(ans.language ?? expected.language ?? "python");
 
   const tests = Array.isArray(expected.tests) ? expected.tests : [];
   if (!tests.length) {
-    return { ok: false, revealAnswer: null, explanation: "Server bug: missing tests." };
+    return { ok: false,  explanation: "Server bug: missing tests." };
   }
 
   const MAX_TESTS = 12;
@@ -128,12 +121,12 @@ export async function gradeCodeInput(args: {
   }
 
   if (!firstFail) {
-    return { ok: true, revealAnswer: null, explanation: "Correct." };
+    return { ok: true,  explanation: "Correct." };
   }
 
   // ✅ No debug: do not leak expected output
   if (!showDebug) {
-    return { ok: false, revealAnswer: null, explanation: "Some tests failed." };
+    return { ok: false,  explanation: "Some tests failed." };
   }
 
   // ✅ Debug allowed: show details
@@ -150,5 +143,5 @@ export async function gradeCodeInput(args: {
   if (String(firstFail.want ?? "").trim())
     parts.push(`Expected:\n${String(firstFail.want).slice(0, 1200)}`);
 
-  return { ok: false, revealAnswer: null, explanation: parts.join("\n\n") };
+  return { ok: false,  explanation: parts.join("\n\n") };
 }

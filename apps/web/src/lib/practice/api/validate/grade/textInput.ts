@@ -65,25 +65,19 @@ export function gradeTextInput(args: {
     const shown = expectedRaw ?? rawCandidates[0] ?? "";
     return {
       ok: false,
-      revealAnswer: {
-        // ✅ IMPORTANT: match the instance kind (works for word_bank_arrange/listen_build/fill_blank_choice too)
-        kind: String(args.instance.kind),
-        value: shown,
-        answers: rawCandidates.length ? rawCandidates : shown ? [shown] : [],
-        match,
-      },
+
       explanation: "Solution shown.",
     };
   }
 
   const received = (args.answer as any)?.value;
   if (typeof received !== "string" || !received.trim()) {
-    return { ok: false, revealAnswer: null, explanation: "Missing text answer." };
+    return { ok: false,  explanation: "Missing text answer." };
   }
 
   // If expected is missing, record (keeps your current behavior)
   if (!normCandidates.length) {
-    return { ok: true, revealAnswer: null, explanation: "Answer recorded." };
+    return { ok: true,  explanation: "Answer recorded." };
   }
 
   const r = normLoose(received);
@@ -95,7 +89,7 @@ export function gradeTextInput(args: {
 
   return {
     ok,
-    revealAnswer: null,
+    
     explanation: ok ? "Correct." : "Not correct.",
   };
 }

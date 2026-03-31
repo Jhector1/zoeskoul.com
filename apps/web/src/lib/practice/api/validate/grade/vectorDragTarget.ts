@@ -23,11 +23,7 @@ export function gradeVectorDragTarget(args: {
   if (args.isReveal) {
     return {
       ok: false,
-      revealAnswer: {
-        kind: "vector_drag_target",
-        solutionA: { x: tx, y: ty, z: 0 },
-        latex: vecToLatex({ x: tx, y: ty, z: 0 }),
-      },
+
       explanation: `Solution shown. Drag a to (${tx}, ${ty}).`,
     };
   }
@@ -41,7 +37,7 @@ export function gradeVectorDragTarget(args: {
 
   return {
     ok,
-    revealAnswer: null,
+    
     explanation: ok ? "Nice drag accuracy." : `Get closer to (${tx}, ${ty}).`,
   };
 }

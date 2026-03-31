@@ -10,10 +10,6 @@ import { scrollIntoViewSmart } from "@/lib/ui/flowScroll";
 import { useTaggedT } from "@/i18n/tagged";
 import { resolveDeepTagged } from "@/i18n/resolveDeepTagged";
 
-function cn(...cls: Array<string | false | undefined | null>) {
-    return cls.filter(Boolean).join(" ");
-}
-
 async function copyToClipboard(text: string) {
     try {
         await navigator.clipboard.writeText(text);
@@ -51,25 +47,24 @@ type RevealModel = {
 };
 
 const REVEAL_PANEL = "ui-surface-muted p-3";
-const REVEAL_PANEL_SOFT = "ui-surface-soft p-3";
 const REVEAL_CHIP = "ui-pill-neutral";
-const REVEAL_PRE = "mt-1 overflow-x-auto rounded-md border p-3 font-mono text-xs leading-relaxed ui-border ui-bg-surface ui-text";
+const REVEAL_PRE =
+    "mt-1 overflow-x-auto rounded-md border p-3 font-mono text-xs leading-relaxed ui-border ui-bg-surface ui-text";
 const REVEAL_SMALL_LABEL = "ui-meta-strong";
-const REVEAL_COPY = "text-sm ui-text";
 
 export default function RevealAnswerCard({
                                              exercise,
                                              current,
-                                             result,
+                                             reveal,
+                                             title = "Revealed answer",
                                              updateCurrent,
                                          }: {
     exercise: Exercise | null;
     current: QItem;
-    result: any;
+    reveal: any;
+    title?: string;
     updateCurrent: (patch: Partial<QItem>) => void;
 }) {
-    const reveal = (result?.revealAnswer ?? result?.reveal ?? result?.expected) as any;
-
     const [copied, setCopied] = useState(false);
     const rootRef = useRef<HTMLDivElement | null>(null);
 
@@ -310,7 +305,10 @@ export default function RevealAnswerCard({
                     <div className={REVEAL_PANEL}>
                         <div className={REVEAL_SMALL_LABEL}>Option</div>
                         <div className="mt-1 text-sm ui-text">
-                            <MathMarkdown content={String(label)} className="max-w-none [&_.katex]:text-[rgb(var(--ui-text)/0.96)]" />
+                            <MathMarkdown
+                                content={String(label)}
+                                className="max-w-none [&_.katex]:text-[rgb(var(--ui-text)/0.96)]"
+                            />
                         </div>
                         <div className="mt-2 ui-meta">id: {optionId}</div>
                     </div>
@@ -409,14 +407,10 @@ export default function RevealAnswerCard({
     return (
         <div ref={rootRef} className="mt-3">
             <div className="flex flex-wrap items-center justify-between gap-2">
-                <div className="ui-meta-strong">Revealed answer</div>
+                <div className="ui-meta-strong">{title}</div>
 
                 <div className="flex flex-wrap gap-2">
-                    <button
-                        onClick={onCopy}
-                        disabled={!m.copyText}
-                        className="ui-btn-secondary"
-                    >
+                    <button onClick={onCopy} disabled={!m.copyText} className="ui-btn-secondary">
                         {copied ? "Copied ✓" : "Copy"}
                     </button>
 

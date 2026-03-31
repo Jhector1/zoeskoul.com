@@ -227,7 +227,7 @@ export async function handlePracticeValidate(ctx: PracticeValidateContext) {
     const res = NextResponse.json({
         ok: isReveal ? null : Boolean(graded.ok),
         revealUsed: isReveal,
-        revealAnswer: isReveal ? graded.revealAnswer : null,
+
         expected: null,
         explanation: includeExpected ? graded.explanation : publicExplanation,
         finalized,

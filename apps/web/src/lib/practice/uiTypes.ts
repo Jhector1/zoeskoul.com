@@ -8,6 +8,24 @@ import type {
 
 export type TopicValue = TopicSlug | "all";
 
+export type PracticeHelpEntry = {
+    key: string;
+    label?: string;
+    kind?: string;
+    content?: string | null;
+    reveal?: any | null;
+    source?: string | null;
+    openedAt: number;
+};
+
+export type PracticeHelpState = {
+    openedStepKeys: string[];
+    activeStepKey: string | null;
+    entries: Record<string, PracticeHelpEntry>;
+    busyStepKey: string | null;
+    error: string | null;
+};
+
 export type QItem = {
     key: string;
     exercise: Exercise;
@@ -25,7 +43,6 @@ export type QItem = {
 
     result: ValidateResponse | null;
     submitted: boolean;
-    revealed?: boolean;
     attempts?: number;
 
     code: string;
@@ -40,6 +57,11 @@ export type QItem = {
 
     voiceTranscript: string;
     voiceAudioId?: string;
+
+    help: PracticeHelpState;
+
+    // temporary legacy compatibility only
+    revealed?: boolean;
 
     codeRunOutput?: string;
 };

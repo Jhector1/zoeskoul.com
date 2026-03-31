@@ -101,18 +101,22 @@ export function applyAnswerPayloadToItem(item: QItem, payload: any) {
         case "single_choice":
             (item as any).single = payload.optionId ?? null;
             break;
+
         case "multi_choice":
             (item as any).multi = Array.isArray(payload.optionIds)
                 ? payload.optionIds
                 : [];
             break;
+
         case "numeric":
             (item as any).num =
                 payload.value == null ? "" : String(payload.value);
             break;
+
         case "matrix_input":
             if (Array.isArray(payload.raw)) (item as any).mat = payload.raw;
             break;
+
         case "code_input": {
             const code =
                 typeof payload.code === "string"
@@ -140,9 +144,11 @@ export function applyAnswerPayloadToItem(item: QItem, payload: any) {
             (item as any).codeStdin = stdin;
             break;
         }
+
         case "vector_drag_dot":
             (item as any).dragA = payload.a ?? (item as any).dragA;
             break;
+
         case "vector_drag_target":
             (item as any).dragA = payload.a ?? (item as any).dragA;
             (item as any).dragB = payload.b ?? (item as any).dragB;
@@ -168,9 +174,8 @@ export function buildCorrectItemFromExpected(
     const item = initItemFromExercise(exercise, `expected:${q.key}`);
     applyAnswerPayloadToItem(item, payload);
 
-    (item as any).submitted = true;
-    (item as any).revealed = true;
-    (item as any).result = { ok: true, finalized: true };
+    item.submitted = true;
+    item.result = { ok: true, finalized: true } as any;
 
     return item;
 }
@@ -187,18 +192,22 @@ export function historyRowToQItem(h: SessionHistoryRow): QItem {
     const key = `history:${String(h.instanceId)}`;
     const item = initItemFromExercise(ex, key);
 
-    (item as any).attempts = Number(h.attempts ?? 0);
-    (item as any).revealed = Boolean(h.lastRevealUsed);
+    item.attempts = Number(h.attempts ?? 0);
 
     const finalized = Boolean(h.answeredAt) || Number(h.attempts ?? 0) > 0;
-    (item as any).submitted = finalized;
+    item.submitted = finalized;
 
-    (item as any).result = {
+    item.result = {
         ok: h.lastOk === null ? undefined : Boolean(h.lastOk),
         finalized,
         expected: h.expectedAnswerPayload ?? null,
         explanation: h.explanation ?? null,
-    };
+    } as any;
+
+    if (Array.isArray(h.helpUsedKeys) && h.helpUsedKeys.length) {
+        item.help.openedStepKeys = [...h.helpUsedKeys];
+        item.help.activeStepKey = h.helpUsedKeys[h.helpUsedKeys.length - 1] ?? null;
+    }
 
     applyAnswerPayloadToItem(item, h.lastAnswerPayload);
     return item;
@@ -228,9 +237,8 @@ export function isPracticeItemFinalized(
 ) {
     if (!q) return false;
     if (q.submitted) return true;
-    if (q.revealed) return true;
 
-    const r: any = (q as any).result;
+    const r: any = q.result;
     if (!r) return false;
 
     if (r.ok === true) return true;

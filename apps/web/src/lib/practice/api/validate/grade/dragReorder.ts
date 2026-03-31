@@ -52,7 +52,7 @@ export function gradeDragReorder(args: {
   if (!parsed.success) {
     return {
       ok: false,
-      revealAnswer: null,
+
       explanation: "Server bug: drag_reorder expected.order is missing/invalid.",
     };
   }
@@ -64,7 +64,7 @@ export function gradeDragReorder(args: {
   if (expectedSet.size !== expectedOrder.length) {
     return {
       ok: false,
-      revealAnswer: null,
+
       explanation: "Server bug: drag_reorder expected.order contains duplicates.",
     };
   }
@@ -72,7 +72,6 @@ export function gradeDragReorder(args: {
   if (args.isReveal) {
     return {
       ok: false,
-      revealAnswer: { kind: "drag_reorder", order: expectedOrder },
       explanation: "Solution shown.",
     };
   }
@@ -81,22 +80,22 @@ export function gradeDragReorder(args: {
   const order = toIdList((args.answer as any)?.order);
 
   if (!order.length) {
-    return { ok: false, revealAnswer: null, explanation: "Missing order." };
+    return { ok: false,  explanation: "Missing order." };
   }
 
   // strong: user must submit a permutation of expected ids
   if (order.length !== expectedOrder.length) {
-    return { ok: false, revealAnswer: null, explanation: "Not correct." };
+    return { ok: false,  explanation: "Not correct." };
   }
 
   const orderSet = new Set(order);
   if (orderSet.size !== order.length) {
-    return { ok: false, revealAnswer: null, explanation: "Not correct." };
+    return { ok: false,  explanation: "Not correct." };
   }
 
   for (const id of order) {
     if (!expectedSet.has(id)) {
-      return { ok: false, revealAnswer: null, explanation: "Not correct." };
+      return { ok: false, explanation: "Not correct." };
     }
   }
 
@@ -105,7 +104,7 @@ export function gradeDragReorder(args: {
 
   return {
     ok,
-    revealAnswer: null,
+
     explanation: ok ? "Correct." : "Not correct.",
   };
 }

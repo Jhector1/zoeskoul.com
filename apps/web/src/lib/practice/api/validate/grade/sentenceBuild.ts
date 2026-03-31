@@ -33,34 +33,26 @@ export function gradeSentenceBuild(args: {
     if (args.isReveal) {
         return {
             ok: false,
-            revealAnswer: {
-                kind: args.instance.kind,
-                value: expected ?? "",
-                answers: Array.isArray(args.expectedCanon?.answers)
-                    ? args.expectedCanon.answers
-                    : expected
-                        ? [expected]
-                        : [],
-            },
+
             explanation: "Solution shown.",
         };
     }
 
     const value = String((args.answer as any)?.value ?? "").trim();
     if (!value) {
-        return { ok: false, revealAnswer: null, explanation: "Missing value." };
+        return { ok: false, explanation: "Missing value." };
     }
 
     // If you didn’t provide expected, we accept “recorded”
     if (!expected) {
-        return { ok: true, revealAnswer: null, explanation: "Answer recorded." };
+        return { ok: true, explanation: "Answer recorded." };
     }
 
     const ok = normSentence(value) === normSentence(expected);
 
     return {
         ok,
-        revealAnswer: null,
+
         explanation: ok ? "Correct." : "Not correct.",
     };
 }

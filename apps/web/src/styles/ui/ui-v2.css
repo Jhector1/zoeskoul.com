@@ -1,8 +1,21 @@
-/* =========================
-   Base utilities
-========================= */
+/* =========================================================
+   ZoeSkoul UI system — cleaner refactor
+   Goals:
+   - keep existing public class names
+   - reduce repetition
+   - quieter / more premium surfaces
+   - Tailwind v4 safe: reusable apply targets stay in @utility
+========================================================= */
+
+/* =========================================================
+   Primitives / reusable utilities
+========================================================= */
 @utility ui-btn-ide {
-    @apply inline-flex h-8 items-center justify-center rounded-md px-2.5 text-[11px] font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-40;
+    @apply inline-flex h-8 items-center justify-center rounded-md border px-2.5 text-[11px] font-medium transition-[background-color,border-color,color,box-shadow,transform] disabled:cursor-not-allowed disabled:opacity-40;
+}
+
+@utility ui-btn-md {
+    @apply inline-flex h-9 items-center justify-center rounded-md border px-3 text-sm font-medium transition-[background-color,border-color,color,box-shadow,transform] disabled:cursor-not-allowed disabled:opacity-40;
 }
 
 @utility ui-badge {
@@ -13,10 +26,49 @@
     @apply inline-flex h-6 items-center rounded-md border px-2 text-[10px] font-medium;
 }
 
+@utility ui-card-xl {
+    @apply rounded-xl border;
+}
+
+@utility ui-card-md {
+    @apply rounded-md border;
+}
+
+@utility ui-card-soft-xl {
+    @apply rounded-xl border backdrop-blur;
+}
+
+@utility ui-text-label {
+    @apply text-[11px] font-medium;
+}
+
+@utility ui-focus-ring {
+    @apply outline-none transition-[border-color,box-shadow];
+}
+
+@utility ui-menu-icon-btn {
+    @apply inline-flex h-7 w-7 items-center justify-center rounded-md transition-colors;
+}
+
+@utility ui-topic-button {
+    @apply w-full rounded-xl border px-3 py-2 text-left transition-[background-color,border-color,color,box-shadow] disabled:cursor-not-allowed disabled:opacity-60;
+}
+
+@utility ui-note-box {
+    @apply rounded-xl border p-3 text-xs;
+}
+
+@utility ui-note-box-sm {
+    @apply rounded-md border p-2 text-xs;
+}
+
+/* =========================================================
+   Shared renderers
+========================================================= */
 @layer components {
-    /* =========================
-       Shared vars
-    ========================= */
+    /* ---------- Generic renderers ---------- */
+
+    :where(
     .ui-surface,
     .ui-surface-soft,
     .ui-surface-muted,
@@ -31,13 +83,15 @@
     .ui-review-topic-btn-active,
     .ui-review-note,
     .ui-review-note-danger,
-    .ui-review-topic-shell {
+    .ui-review-topic-shell
+  ) {
         background-color: var(--ui-comp-bg);
         border-color: var(--ui-comp-border);
         color: var(--ui-comp-text);
         box-shadow: var(--ui-comp-shadow, none);
     }
 
+    :where(
     .ui-btn-ide-border,
     .ui-btn-ide-active,
     .ui-btn-ide-primary,
@@ -48,13 +102,31 @@
     .ui-btn-secondary,
     .ui-btn-primary,
     .ui-btn-premium,
-    .ui-btn-disabled {
+    .ui-btn-disabled
+  ) {
         background-color: var(--ui-btn-bg);
         border-color: var(--ui-btn-border);
         color: var(--ui-btn-text);
         box-shadow: var(--ui-btn-shadow, none);
     }
 
+    :where(
+    .ui-btn-ide-border,
+    .ui-btn-ide-active,
+    .ui-btn-ide-primary,
+    .ui-btn-ide-success,
+    .ui-btn-ide-warn,
+    .ui-btn-ide-danger,
+    .ui-btn-secondary,
+    .ui-btn-primary,
+    .ui-btn-premium
+  ):hover:not(:disabled) {
+        background-color: var(--ui-btn-hover-bg, var(--ui-btn-bg));
+        border-color: var(--ui-btn-hover-border, var(--ui-btn-border));
+        color: var(--ui-btn-hover-text, var(--ui-btn-text));
+    }
+
+    :where(
     .ui-badge-neutral,
     .ui-badge-good,
     .ui-badge-warn,
@@ -63,349 +135,422 @@
     .ui-pill-good,
     .ui-pill-warn,
     .ui-pill-info,
-    .ui-pill-danger {
+    .ui-pill-danger
+  ) {
         background-color: var(--ui-chip-bg);
         border-color: var(--ui-chip-border);
         color: var(--ui-chip-text);
     }
 
-    /* =========================
+    /* ---------- Shared tone tokens ---------- */
+
+    .ui-tone-surface {
+        --ui-tone-bg: rgb(var(--ui-surface) / 0.94);
+        --ui-tone-border: rgb(var(--ui-border) / 0.72);
+        --ui-tone-text: rgb(var(--ui-text) / 1);
+        --ui-tone-shadow: var(--ui-shadow-soft);
+    }
+
+    .ui-tone-surface-soft {
+        --ui-tone-bg: rgb(var(--ui-surface) / 0.90);
+        --ui-tone-border: rgb(var(--ui-border) / 0.58);
+        --ui-tone-text: rgb(var(--ui-text) / 1);
+        --ui-tone-shadow: var(--ui-shadow-soft);
+    }
+
+    .ui-tone-surface-muted {
+        --ui-tone-bg: rgb(var(--ui-surface-2) / 0.96);
+        --ui-tone-border: rgb(var(--ui-border) / 0.82);
+        --ui-tone-text: rgb(var(--ui-text) / 1);
+        --ui-tone-shadow: none;
+    }
+
+    .ui-tone-floating {
+        --ui-tone-bg: rgb(var(--ui-surface) / 0.88);
+        --ui-tone-border: rgb(var(--ui-border) / 0.58);
+        --ui-tone-text: rgb(var(--ui-text) / 1);
+        --ui-tone-shadow: var(--ui-shadow-md);
+    }
+
+    .ui-tone-success-soft {
+        --ui-tone-bg: rgb(var(--ui-accent) / 0.08);
+        --ui-tone-border: rgb(var(--ui-accent) / 0.18);
+        --ui-tone-text: rgb(var(--ui-text) / 1);
+        --ui-tone-shadow: none;
+    }
+
+    .ui-tone-warn-soft {
+        --ui-tone-bg: rgb(var(--ui-warn) / 0.10);
+        --ui-tone-border: rgb(var(--ui-warn) / 0.20);
+        --ui-tone-text: rgb(var(--ui-text) / 1);
+        --ui-tone-shadow: none;
+    }
+
+    .ui-tone-danger-soft {
+        --ui-tone-bg: rgb(var(--ui-danger) / 0.10);
+        --ui-tone-border: rgb(var(--ui-danger) / 0.20);
+        --ui-tone-text: rgb(var(--ui-text) / 1);
+        --ui-tone-shadow: none;
+    }
+
+    /* =========================================================
        Surfaces
-    ========================= */
+    ========================================================= */
+
     .ui-surface {
-        @apply rounded-xl border;
-        --ui-comp-bg: rgb(var(--ui-surface) / 0.92);
-        --ui-comp-border: rgb(var(--ui-border) / 1);
+        @apply ui-card-xl;
+        --ui-comp-bg: rgb(var(--ui-surface) / 0.94);
+        --ui-comp-border: rgb(var(--ui-border) / 0.72);
         --ui-comp-text: rgb(var(--ui-text) / 1);
         --ui-comp-shadow: var(--ui-shadow-soft);
     }
 
     .ui-surface-soft {
-        @apply rounded-xl border;
+        @apply ui-card-xl;
         --ui-comp-bg: rgb(var(--ui-surface) / 0.90);
-        --ui-comp-border: rgb(var(--ui-border) / 0.7);
+        --ui-comp-border: rgb(var(--ui-border) / 0.58);
         --ui-comp-text: rgb(var(--ui-text) / 1);
         --ui-comp-shadow: var(--ui-shadow-soft);
     }
 
     .ui-surface-muted {
-        @apply rounded-md border;
-        --ui-comp-bg: rgb(var(--ui-surface-2) / 1);
-        --ui-comp-border: rgb(var(--ui-border) / 1);
+        @apply ui-card-md;
+        --ui-comp-bg: rgb(var(--ui-surface-2) / 0.96);
+        --ui-comp-border: rgb(var(--ui-border) / 0.82);
         --ui-comp-text: rgb(var(--ui-text) / 1);
     }
 
     .ui-surface-floating {
-        @apply rounded-md border backdrop-blur;
-        --ui-comp-bg: rgb(var(--ui-surface) / 0.94);
-        --ui-comp-border: rgb(var(--ui-border) / 0.7);
+        @apply ui-card-soft-xl;
+        --ui-comp-bg: rgb(var(--ui-surface) / 0.88);
+        --ui-comp-border: rgb(var(--ui-border) / 0.58);
         --ui-comp-text: rgb(var(--ui-text) / 1);
         --ui-comp-shadow: var(--ui-shadow-md);
     }
 
     .ui-surface-danger {
-        @apply rounded-xl border;
-        --ui-comp-bg: rgb(var(--ui-danger) / 0.1);
-        --ui-comp-border: rgb(var(--ui-danger) / 0.2);
+        @apply ui-card-xl;
+        --ui-comp-bg: rgb(var(--ui-danger) / 0.10);
+        --ui-comp-border: rgb(var(--ui-danger) / 0.20);
         --ui-comp-text: rgb(var(--ui-text) / 1);
     }
 
     .ui-surface-warn {
-        @apply rounded-xl border;
-        --ui-comp-bg: rgb(var(--ui-warn) / 0.1);
-        --ui-comp-border: rgb(var(--ui-warn) / 0.2);
+        @apply ui-card-xl;
+        --ui-comp-bg: rgb(var(--ui-warn) / 0.10);
+        --ui-comp-border: rgb(var(--ui-warn) / 0.20);
         --ui-comp-text: rgb(var(--ui-text) / 1);
     }
 
     .ui-surface-success {
-        @apply border;
-        --ui-comp-bg: rgb(var(--ui-accent) / 0.1);
-        --ui-comp-border: rgb(var(--ui-accent) / 0.2);
+        @apply ui-card-xl;
+        --ui-comp-bg: rgb(var(--ui-accent) / 0.08);
+        --ui-comp-border: rgb(var(--ui-accent) / 0.18);
         --ui-comp-text: rgb(var(--ui-text) / 1);
     }
 
-    /* =========================
+    /* =========================================================
        Typography
-    ========================= */
+    ========================================================= */
+
     .ui-kicker {
         @apply text-[10px] font-medium uppercase tracking-[0.16em];
-        color: rgb(var(--ui-text-muted) / 0.9);
+        color: rgb(var(--ui-text-muted) / 0.84);
     }
 
     .ui-title-sm {
         @apply text-sm font-medium;
-        color: rgb(var(--ui-text) / 0.95);
+        color: rgb(var(--ui-text) / 0.96);
     }
 
     .ui-title-md {
         @apply text-lg font-semibold tracking-tight;
-        color: rgb(var(--ui-text) / 0.95);
+        color: rgb(var(--ui-text) / 0.96);
     }
 
     .ui-title-lg {
         @apply text-2xl font-semibold tracking-tight;
-        color: rgb(var(--ui-text) / 0.95);
+        color: rgb(var(--ui-text) / 0.96);
     }
 
     .ui-meta {
         @apply text-[11px] font-medium;
-        color: rgb(var(--ui-text-muted) / 0.85);
+        color: rgb(var(--ui-text-muted) / 0.82);
     }
 
     .ui-meta-strong {
         @apply text-[11px] font-medium;
-        color: rgb(var(--ui-text-muted) / 1);
+        color: rgb(var(--ui-text-muted) / 0.96);
     }
 
-    /* =========================
-       IDE button variants
-    ========================= */
+    /* =========================================================
+       IDE buttons
+    ========================================================= */
+
     .ui-btn-ide-ghost {
         @apply ui-btn-ide;
-        color: rgb(var(--ui-text-muted) / 1);
+        border-color: transparent;
+        background-color: transparent;
+        color: rgb(var(--ui-text-muted) / 0.96);
     }
 
-    .ui-btn-ide-ghost:hover {
-        background-color: rgb(var(--ui-hover) / 1);
+    .ui-btn-ide-ghost:hover:not(:disabled) {
+        background-color: rgb(var(--ui-hover) / 0.9);
         color: rgb(var(--ui-text) / 1);
     }
 
     .ui-btn-ide-border {
-        @apply ui-btn-ide border;
-        --ui-btn-bg: rgb(var(--ui-surface) / 1);
-        --ui-btn-border: rgb(var(--ui-border) / 1);
-        --ui-btn-text: rgb(var(--ui-text-muted) / 1);
+        @apply ui-btn-ide;
+        --ui-btn-bg: rgb(var(--ui-surface) / 0.92);
+        --ui-btn-border: rgb(var(--ui-border) / 0.78);
+        --ui-btn-text: rgb(var(--ui-text-muted) / 0.96);
         --ui-btn-shadow: var(--ui-shadow-soft);
-        --ui-btn-hover-bg: rgb(var(--ui-hover) / 1);
+        --ui-btn-hover-bg: rgb(var(--ui-hover) / 0.92);
+        --ui-btn-hover-border: rgb(var(--ui-border-strong) / 0.72);
         --ui-btn-hover-text: rgb(var(--ui-text) / 1);
     }
 
     .ui-btn-ide-active {
-        @apply ui-btn-ide border;
-        --ui-btn-bg: rgb(var(--ui-surface-3) / 1);
-        --ui-btn-border: rgb(var(--ui-border-strong) / 1);
+        @apply ui-btn-ide;
+        --ui-btn-bg: rgb(var(--ui-surface-3) / 0.90);
+        --ui-btn-border: rgb(var(--ui-border-strong) / 0.82);
         --ui-btn-text: rgb(var(--ui-text) / 1);
-        --ui-btn-hover-bg: rgb(var(--ui-hover) / 1);
+        --ui-btn-shadow: inset 0 1px 0 rgb(255 255 255 / 0.02);
+        --ui-btn-hover-bg: rgb(var(--ui-hover) / 0.96);
+        --ui-btn-hover-border: rgb(var(--ui-border-strong) / 0.9);
         --ui-btn-hover-text: rgb(var(--ui-text) / 1);
     }
 
     .ui-btn-ide-primary {
-        @apply ui-btn-ide border;
-        --ui-btn-bg: rgb(var(--ui-accent) / 1);
-        --ui-btn-border: rgb(var(--ui-accent) / 0.2);
+        @apply ui-btn-ide;
+        --ui-btn-bg: rgb(var(--ui-accent) / 0.96);
+        --ui-btn-border: rgb(var(--ui-accent) / 0.28);
         --ui-btn-text: rgb(var(--ui-text-invert) / 1);
-        --ui-btn-hover-bg: rgb(var(--ui-accent) / 0.92);
+        --ui-btn-shadow: var(--ui-shadow-soft);
+        --ui-btn-hover-bg: rgb(var(--ui-accent) / 0.88);
+        --ui-btn-hover-border: rgb(var(--ui-accent) / 0.34);
         --ui-btn-hover-text: rgb(var(--ui-text-invert) / 1);
     }
 
     .ui-btn-ide-success {
-        @apply ui-btn-ide border;
-        --ui-btn-bg: rgb(var(--ui-accent) / 0.1);
-        --ui-btn-border: rgb(var(--ui-accent) / 0.2);
+        @apply ui-btn-ide;
+        --ui-btn-bg: rgb(var(--ui-accent) / 0.10);
+        --ui-btn-border: rgb(var(--ui-accent) / 0.20);
         --ui-btn-text: rgb(var(--ui-accent) / 1);
-        --ui-btn-hover-bg: rgb(var(--ui-accent) / 0.15);
+        --ui-btn-hover-bg: rgb(var(--ui-accent) / 0.14);
+        --ui-btn-hover-border: rgb(var(--ui-accent) / 0.24);
         --ui-btn-hover-text: rgb(var(--ui-accent) / 1);
     }
 
     .ui-btn-ide-warn {
-        @apply ui-btn-ide border;
-        --ui-btn-bg: rgb(var(--ui-warn) / 0.1);
-        --ui-btn-border: rgb(var(--ui-warn) / 0.2);
+        @apply ui-btn-ide;
+        --ui-btn-bg: rgb(var(--ui-warn) / 0.10);
+        --ui-btn-border: rgb(var(--ui-warn) / 0.20);
         --ui-btn-text: rgb(var(--ui-warn) / 1);
-        --ui-btn-hover-bg: rgb(var(--ui-warn) / 0.15);
+        --ui-btn-hover-bg: rgb(var(--ui-warn) / 0.14);
+        --ui-btn-hover-border: rgb(var(--ui-warn) / 0.24);
         --ui-btn-hover-text: rgb(var(--ui-warn) / 1);
     }
 
     .ui-btn-ide-danger {
-        @apply ui-btn-ide border;
-        --ui-btn-bg: rgb(var(--ui-danger) / 0.1);
-        --ui-btn-border: rgb(var(--ui-danger) / 0.2);
+        @apply ui-btn-ide;
+        --ui-btn-bg: rgb(var(--ui-danger) / 0.10);
+        --ui-btn-border: rgb(var(--ui-danger) / 0.20);
         --ui-btn-text: rgb(var(--ui-danger) / 1);
-        --ui-btn-hover-bg: rgb(var(--ui-danger) / 0.15);
+        --ui-btn-hover-bg: rgb(var(--ui-danger) / 0.14);
+        --ui-btn-hover-border: rgb(var(--ui-danger) / 0.24);
         --ui-btn-hover-text: rgb(var(--ui-danger) / 1);
     }
 
     .ui-btn-ide-disabled {
-        @apply inline-flex h-9 items-center justify-center rounded-md border px-3 text-sm font-medium;
-        --ui-btn-bg: rgb(var(--ui-surface-2) / 1);
-        --ui-btn-border: rgb(var(--ui-border) / 1);
-        --ui-btn-text: rgb(var(--ui-text-soft) / 0.8);
+        @apply ui-btn-md;
+        --ui-btn-bg: rgb(var(--ui-surface-2) / 0.92);
+        --ui-btn-border: rgb(var(--ui-border) / 0.78);
+        --ui-btn-text: rgb(var(--ui-text-soft) / 0.78);
     }
 
-    .ui-btn-ide-border:hover,
-    .ui-btn-ide-active:hover,
-    .ui-btn-ide-primary:hover,
-    .ui-btn-ide-success:hover,
-    .ui-btn-ide-warn:hover,
-    .ui-btn-ide-danger:hover {
-        background-color: var(--ui-btn-hover-bg);
-        color: var(--ui-btn-hover-text);
-    }
-
-    /* =========================
+    /* =========================================================
        General buttons
-    ========================= */
+    ========================================================= */
+
     .ui-btn-secondary {
-        @apply inline-flex h-8 items-center justify-center rounded-md border px-2.5 text-[11px] font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-40;
-        --ui-btn-bg: rgb(var(--ui-surface) / 1);
-        --ui-btn-border: rgb(var(--ui-border) / 1);
-        --ui-btn-text: rgb(var(--ui-text-muted) / 1);
+        @apply ui-btn-ide;
+        --ui-btn-bg: rgb(var(--ui-surface) / 0.92);
+        --ui-btn-border: rgb(var(--ui-border) / 0.78);
+        --ui-btn-text: rgb(var(--ui-text-muted) / 0.96);
         --ui-btn-shadow: var(--ui-shadow-soft);
-        --ui-btn-hover-bg: rgb(var(--ui-hover) / 1);
+        --ui-btn-hover-bg: rgb(var(--ui-hover) / 0.92);
+        --ui-btn-hover-border: rgb(var(--ui-border-strong) / 0.72);
         --ui-btn-hover-text: rgb(var(--ui-text) / 1);
     }
 
     .ui-btn-primary {
-        @apply inline-flex h-9 items-center justify-center rounded-md border px-3 text-sm font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-40;
-        --ui-btn-bg: rgb(var(--ui-accent) / 1);
-        --ui-btn-border: rgb(var(--ui-accent) / 0.2);
+        @apply ui-btn-md;
+        --ui-btn-bg: rgb(var(--ui-accent) / 0.96);
+        --ui-btn-border: rgb(var(--ui-accent) / 0.28);
         --ui-btn-text: rgb(var(--ui-text-invert) / 1);
         --ui-btn-shadow: var(--ui-shadow-soft);
-        --ui-btn-hover-bg: rgb(var(--ui-accent) / 0.92);
+        --ui-btn-hover-bg: rgb(var(--ui-accent) / 0.88);
+        --ui-btn-hover-border: rgb(var(--ui-accent) / 0.34);
         --ui-btn-hover-text: rgb(var(--ui-text-invert) / 1);
     }
 
     .ui-btn-premium {
-        @apply inline-flex h-9 items-center justify-center rounded-md border px-3 text-sm font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-40;
-        --ui-btn-bg: rgb(var(--ui-warn) / 0.1);
-        --ui-btn-border: rgb(var(--ui-warn) / 0.2);
+        @apply ui-btn-md;
+        --ui-btn-bg: rgb(var(--ui-warn) / 0.10);
+        --ui-btn-border: rgb(var(--ui-warn) / 0.22);
         --ui-btn-text: rgb(var(--ui-warn) / 1);
-        --ui-btn-hover-bg: rgb(var(--ui-warn) / 0.15);
+        --ui-btn-shadow: var(--ui-shadow-soft);
+        --ui-btn-hover-bg: rgb(var(--ui-warn) / 0.14);
+        --ui-btn-hover-border: rgb(var(--ui-warn) / 0.28);
         --ui-btn-hover-text: rgb(var(--ui-warn) / 1);
     }
 
     .ui-btn-disabled {
-        @apply inline-flex h-9 items-center justify-center rounded-md border px-3 text-sm font-medium;
-        --ui-btn-bg: rgb(var(--ui-surface-2) / 1);
-        --ui-btn-border: rgb(var(--ui-border) / 1);
-        --ui-btn-text: rgb(var(--ui-text-soft) / 0.8);
+        @apply ui-btn-md;
+        --ui-btn-bg: rgb(var(--ui-surface-2) / 0.92);
+        --ui-btn-border: rgb(var(--ui-border) / 0.78);
+        --ui-btn-text: rgb(var(--ui-text-soft) / 0.78);
     }
 
-    .ui-btn-secondary:hover,
-    .ui-btn-primary:hover,
-    .ui-btn-premium:hover {
-        background-color: var(--ui-btn-hover-bg);
-        color: var(--ui-btn-hover-text);
-    }
-
-    /* =========================
+    /* =========================================================
        Inputs
-    ========================= */
+    ========================================================= */
+
     .ui-input-ide {
-        @apply h-9 rounded-md border px-3 text-[12px] font-medium outline-none transition-colors;
-        background-color: rgb(var(--ui-surface) / 1);
-        border-color: rgb(var(--ui-border) / 1);
+        @apply ui-focus-ring h-9 rounded-md border px-3 text-[12px] font-medium;
+        background-color: rgb(var(--ui-surface) / 0.94);
+        border-color: rgb(var(--ui-border) / 0.78);
         color: rgb(var(--ui-text) / 1);
     }
 
     .ui-input-ide::placeholder {
-        color: rgb(var(--ui-text-soft) / 0.85);
+        color: rgb(var(--ui-text-soft) / 0.82);
     }
 
     .ui-input-ide:focus {
-        border-color: rgb(var(--ui-ring) / 0.45);
+        border-color: rgb(var(--ui-ring) / 0.42);
         box-shadow: 0 0 0 3px rgb(var(--ui-ring) / 0.12);
     }
 
     .ui-select-ide {
-        @apply h-8 rounded-md border px-2.5 text-[11px] font-medium outline-none transition-colors;
-        background-color: rgb(var(--ui-surface) / 1);
-        border-color: rgb(var(--ui-border) / 1);
-        color: rgb(var(--ui-text-muted) / 1);
+        @apply ui-focus-ring h-8 rounded-md border px-2.5 text-[11px] font-medium;
+        background-color: rgb(var(--ui-surface) / 0.92);
+        border-color: rgb(var(--ui-border) / 0.78);
+        color: rgb(var(--ui-text-muted) / 0.96);
     }
 
     .ui-select-ide:hover {
-        background-color: rgb(var(--ui-hover) / 1);
+        background-color: rgb(var(--ui-hover) / 0.9);
         color: rgb(var(--ui-text) / 1);
     }
 
     .ui-select-ide:focus {
-        border-color: rgb(var(--ui-ring) / 0.45);
+        border-color: rgb(var(--ui-ring) / 0.42);
         box-shadow: 0 0 0 3px rgb(var(--ui-ring) / 0.12);
     }
 
-    /* =========================
+    .ui-textarea-ide {
+        @apply ui-focus-ring mt-1 min-h-[120px] w-full rounded-md border px-3 py-2 font-mono text-[12px] leading-5;
+        background-color: rgb(var(--ui-surface) / 0.94);
+        border-color: rgb(var(--ui-border) / 0.78);
+        color: rgb(var(--ui-text) / 1);
+    }
+
+    .ui-textarea-ide::placeholder {
+        color: rgb(var(--ui-text-soft) / 0.82);
+    }
+
+    .ui-textarea-ide:focus {
+        border-color: rgb(var(--ui-ring) / 0.42);
+        box-shadow: 0 0 0 3px rgb(var(--ui-ring) / 0.12);
+    }
+
+    /* =========================================================
        Badges
-    ========================= */
+    ========================================================= */
+
     .ui-badge-neutral {
         @apply ui-badge;
-        --ui-chip-bg: rgb(var(--ui-surface) / 1);
-        --ui-chip-border: rgb(var(--ui-border) / 1);
-        --ui-chip-text: rgb(var(--ui-text-muted) / 1);
+        --ui-chip-bg: rgb(var(--ui-surface) / 0.92);
+        --ui-chip-border: rgb(var(--ui-border) / 0.78);
+        --ui-chip-text: rgb(var(--ui-text-muted) / 0.96);
     }
 
     .ui-badge-good {
         @apply ui-badge;
-        --ui-chip-bg: rgb(var(--ui-accent) / 0.1);
-        --ui-chip-border: rgb(var(--ui-accent) / 0.2);
+        --ui-chip-bg: rgb(var(--ui-accent) / 0.10);
+        --ui-chip-border: rgb(var(--ui-accent) / 0.20);
         --ui-chip-text: rgb(var(--ui-accent) / 1);
     }
 
     .ui-badge-warn {
         @apply ui-badge;
-        --ui-chip-bg: rgb(var(--ui-warn) / 0.1);
-        --ui-chip-border: rgb(var(--ui-warn) / 0.2);
+        --ui-chip-bg: rgb(var(--ui-warn) / 0.10);
+        --ui-chip-border: rgb(var(--ui-warn) / 0.20);
         --ui-chip-text: rgb(var(--ui-warn) / 1);
     }
 
     .ui-badge-bad {
         @apply ui-badge;
-        --ui-chip-bg: rgb(var(--ui-danger) / 0.1);
-        --ui-chip-border: rgb(var(--ui-danger) / 0.2);
+        --ui-chip-bg: rgb(var(--ui-danger) / 0.10);
+        --ui-chip-border: rgb(var(--ui-danger) / 0.20);
         --ui-chip-text: rgb(var(--ui-danger) / 1);
     }
 
-    /* =========================
+    /* =========================================================
        Pills
-    ========================= */
+    ========================================================= */
+
     .ui-pill-neutral {
         @apply ui-pill;
-        --ui-chip-bg: rgb(var(--ui-surface) / 1);
-        --ui-chip-border: rgb(var(--ui-border) / 1);
-        --ui-chip-text: rgb(var(--ui-text-muted) / 1);
+        --ui-chip-bg: rgb(var(--ui-surface) / 0.92);
+        --ui-chip-border: rgb(var(--ui-border) / 0.78);
+        --ui-chip-text: rgb(var(--ui-text-muted) / 0.96);
     }
 
     .ui-pill-good {
         @apply ui-pill;
-        --ui-chip-bg: rgb(var(--ui-accent) / 0.1);
-        --ui-chip-border: rgb(var(--ui-accent) / 0.2);
+        --ui-chip-bg: rgb(var(--ui-accent) / 0.10);
+        --ui-chip-border: rgb(var(--ui-accent) / 0.20);
         --ui-chip-text: rgb(var(--ui-accent) / 1);
     }
 
     .ui-pill-warn {
         @apply ui-pill;
-        --ui-chip-bg: rgb(var(--ui-warn) / 0.1);
-        --ui-chip-border: rgb(var(--ui-warn) / 0.2);
+        --ui-chip-bg: rgb(var(--ui-warn) / 0.10);
+        --ui-chip-border: rgb(var(--ui-warn) / 0.20);
         --ui-chip-text: rgb(var(--ui-warn) / 1);
     }
 
     .ui-pill-info {
         @apply ui-pill;
-        --ui-chip-bg: rgb(var(--ui-info) / 0.1);
-        --ui-chip-border: rgb(var(--ui-info) / 0.2);
+        --ui-chip-bg: rgb(var(--ui-info) / 0.10);
+        --ui-chip-border: rgb(var(--ui-info) / 0.20);
         --ui-chip-text: rgb(var(--ui-info) / 1);
     }
 
     .ui-pill-danger {
         @apply ui-pill;
-        --ui-chip-bg: rgb(var(--ui-danger) / 0.1);
-        --ui-chip-border: rgb(var(--ui-danger) / 0.2);
+        --ui-chip-bg: rgb(var(--ui-danger) / 0.10);
+        --ui-chip-border: rgb(var(--ui-danger) / 0.20);
         --ui-chip-text: rgb(var(--ui-danger) / 1);
     }
 
-    /* =========================
+    /* =========================================================
        Stats / progress
-    ========================= */
+    ========================================================= */
+
     .ui-stat-card {
         @apply rounded-md border px-3 py-3;
-        --ui-comp-bg: rgb(var(--ui-surface) / 1);
-        --ui-comp-border: rgb(var(--ui-border) / 1);
+        --ui-comp-bg: rgb(var(--ui-surface) / 0.92);
+        --ui-comp-border: rgb(var(--ui-border) / 0.78);
         --ui-comp-text: rgb(var(--ui-text) / 1);
     }
 
     .ui-progress-track {
         @apply h-2 w-full overflow-hidden rounded-full;
-        background-color: rgb(var(--ui-border-soft) / 1);
+        background-color: rgb(var(--ui-border-soft) / 0.9);
     }
 
     .ui-progress-fill {
@@ -413,51 +558,53 @@
         background-color: rgb(var(--ui-accent) / 1);
     }
 
-    /* =========================
+    /* =========================================================
        Splitters
-    ========================= */
+    ========================================================= */
+
     .ui-splitter-x {
         @apply w-[6px] outline-none;
-        background-color: rgb(var(--ui-border) / 0.5);
+        background-color: rgb(var(--ui-border) / 0.42);
     }
 
     .ui-splitter-y {
         @apply h-[6px] outline-none;
-        background-color: rgb(var(--ui-border) / 0.5);
+        background-color: rgb(var(--ui-border) / 0.42);
     }
 
     .ui-splitter-interactive:hover,
     .ui-splitter-interactive:focus {
-        background-color: rgb(var(--ui-border-strong) / 0.8);
+        background-color: rgb(var(--ui-border-strong) / 0.76);
     }
 
-    /* =========================
+    /* =========================================================
        IDE menu
-    ========================= */
+    ========================================================= */
+
     .ui-ide-menubtn {
-        @apply inline-flex h-7 w-7 items-center justify-center rounded-md transition-colors;
+        @apply ui-menu-icon-btn;
         color: rgb(var(--ui-text-muted) / 0.9);
     }
 
     .ui-ide-menubtn:hover {
-        background-color: rgb(var(--ui-hover) / 1);
+        background-color: rgb(var(--ui-hover) / 0.92);
         color: rgb(var(--ui-text) / 1);
     }
 
     .ui-ide-menupanel {
         @apply overflow-hidden rounded-md border p-1 backdrop-blur;
-        background-color: rgb(var(--ui-surface) / 0.98);
-        border-color: rgb(var(--ui-border) / 1);
+        background-color: rgb(var(--ui-surface) / 0.96);
+        border-color: rgb(var(--ui-border) / 0.78);
         box-shadow: var(--ui-shadow-lg);
     }
 
     .ui-ide-menuitem {
         @apply flex h-8 w-full items-center gap-2 rounded-md px-2 text-[11px] font-medium transition-colors;
-        color: rgb(var(--ui-text-muted) / 1);
+        color: rgb(var(--ui-text-muted) / 0.96);
     }
 
     .ui-ide-menuitem:hover {
-        background-color: rgb(var(--ui-hover) / 1);
+        background-color: rgb(var(--ui-hover) / 0.92);
         color: rgb(var(--ui-text) / 1);
     }
 
@@ -470,120 +617,126 @@
         color: rgb(var(--ui-danger) / 1);
     }
 
-    /* =========================
+    /* =========================================================
        Terminal
-    ========================= */
+    ========================================================= */
+
     .ui-terminal-surface {
-        @apply h-full  border;
-        /*background-color: rgb(var(--ui-surface) / 0.9);*/
-        border-color: rgb(var(--ui-border) / 0.7);
+        @apply h-full border;
+        background-color: rgb(var(--ui-surface) / 0.32);
+        border-color: rgb(var(--ui-border) / 0.62);
         color: rgb(var(--ui-text) / 1);
     }
 
     .ui-terminal-log {
         @apply mt-2 flex-1 overflow-auto border-t py-2;
-        /*background-color: rgb(var(--ui-surface-2) / 0.7);*/
-        border-color: rgb(var(--ui-border) / 0.7);
+        border-color: rgb(var(--ui-border) / 0.58);
+        background-color: rgb(var(--ui-surface-2) / 0.28);
     }
 
     .ui-terminal-prompt {
         @apply relative mt-2 border-t px-2.5 py-2;
-        background-color: rgb(var(--ui-surface-2) / 0.85);
-        border-color: rgb(var(--ui-border) / 0.7);
+        background-color: rgb(var(--ui-surface-2) / 0.72);
+        border-color: rgb(var(--ui-border) / 0.58);
     }
 
-    /* =========================
+    /* =========================================================
        Page helpers
-    ========================= */
+    ========================================================= */
+
     .ui-page-surface {
-        @apply rounded-xl border;
-        --ui-comp-bg: rgb(var(--ui-surface) / 0.92);
-        --ui-comp-border: rgb(var(--ui-border) / 1);
+        @apply ui-card-xl;
+        --ui-comp-bg: rgb(var(--ui-surface) / 0.94);
+        --ui-comp-border: rgb(var(--ui-border) / 0.72);
         --ui-comp-text: rgb(var(--ui-text) / 1);
         --ui-comp-shadow: var(--ui-shadow-soft);
     }
 
     .ui-icon-box {
         @apply grid h-10 w-10 shrink-0 place-items-center rounded-md border;
-        --ui-comp-bg: rgb(var(--ui-surface) / 1);
-        --ui-comp-border: rgb(var(--ui-border) / 1);
+        --ui-comp-bg: rgb(var(--ui-surface) / 0.92);
+        --ui-comp-border: rgb(var(--ui-border) / 0.78);
         --ui-comp-text: rgb(var(--ui-text) / 1);
     }
 
-    /* =========================
+    /* =========================================================
        Review / module
-    ========================= */
+    ========================================================= */
+
     .ui-review-header {
         @apply shrink-0 border-b p-3;
-        background-color: rgb(var(--ui-surface) / 0.82);
-        border-color: rgb(var(--ui-border) / 1);
+        background-color: rgb(var(--ui-surface) / 0.78);
+        border-color: rgb(var(--ui-border) / 0.78);
         color: rgb(var(--ui-text) / 1);
         backdrop-filter: blur(12px);
     }
 
     .ui-review-progress-text {
         @apply text-[11px] font-medium;
-        color: rgb(var(--ui-text-muted) / 0.9);
+        color: rgb(var(--ui-text-muted) / 0.84);
     }
 
     .ui-review-progress-value {
         @apply text-[11px] font-medium tabular-nums;
-        color: rgb(var(--ui-text) / 0.9);
+        color: rgb(var(--ui-text) / 0.92);
     }
 
     .ui-review-topic-btn,
     .ui-review-topic-btn-active {
-        @apply w-full rounded-xl border px-3 py-2 text-left transition-colors disabled:cursor-not-allowed disabled:opacity-60;
+        @apply ui-topic-button;
     }
 
     .ui-review-topic-btn {
-        --ui-comp-bg: rgb(var(--ui-surface) / 1);
-        --ui-comp-border: rgb(var(--ui-border) / 1);
+        --ui-comp-bg: rgb(var(--ui-surface) / 0.86);
+        --ui-comp-border: rgb(var(--ui-border) / 0.62);
         --ui-comp-text: rgb(var(--ui-text) / 1);
+        --ui-comp-shadow: none;
     }
 
     .ui-review-topic-btn:hover {
-        background-color: rgb(var(--ui-hover) / 1);
+        background-color: rgb(var(--ui-hover) / 0.78);
+        border-color: rgb(var(--ui-border-strong) / 0.64);
     }
 
     .ui-review-topic-btn-active {
         --ui-comp-bg: rgb(var(--ui-accent) / 0.08);
-        --ui-comp-border: rgb(var(--ui-accent) / 0.22);
+        --ui-comp-border: rgb(var(--ui-accent) / 0.18);
         --ui-comp-text: rgb(var(--ui-text) / 1);
+        --ui-comp-shadow: inset 0 1px 0 rgb(255 255 255 / 0.02);
     }
 
     .ui-review-topic-summary {
         @apply mt-1 text-xs;
-        color: rgb(var(--ui-text-muted) / 0.85);
+        color: rgb(var(--ui-text-muted) / 0.82);
     }
 
     .ui-review-note,
     .ui-review-note-danger {
-        @apply mt-3 rounded-xl border p-3 text-xs;
+        @apply ui-note-box;
     }
 
     .ui-review-note {
-        --ui-comp-bg: rgb(var(--ui-surface) / 1);
-        --ui-comp-border: rgb(var(--ui-border) / 1);
+        --ui-comp-bg: rgb(var(--ui-surface) / 0.90);
+        --ui-comp-border: rgb(var(--ui-border) / 0.72);
         --ui-comp-text: rgb(var(--ui-text) / 1);
     }
 
     .ui-review-note-danger {
-        --ui-comp-bg: rgb(var(--ui-danger) / 0.1);
-        --ui-comp-border: rgb(var(--ui-danger) / 0.2);
+        --ui-comp-bg: rgb(var(--ui-danger) / 0.10);
+        --ui-comp-border: rgb(var(--ui-danger) / 0.20);
         --ui-comp-text: rgb(var(--ui-danger) / 1);
     }
 
     .ui-ring-button {
         @apply mt-4 w-full rounded-xl border px-3 py-2 text-center transition-colors disabled:cursor-not-allowed disabled:opacity-50;
-        background-color: rgb(var(--ui-surface) / 1);
-        border-color: rgb(var(--ui-border) / 1);
+        background-color: rgb(var(--ui-surface) / 0.90);
+        border-color: rgb(var(--ui-border) / 0.72);
         color: rgb(var(--ui-text) / 1);
         box-shadow: var(--ui-shadow-soft);
     }
 
     .ui-ring-button:hover {
-        background-color: rgb(var(--ui-hover) / 1);
+        background-color: rgb(var(--ui-hover) / 0.82);
     }
 
     .ui-ring-button-title {
@@ -593,7 +746,7 @@
 
     .ui-ring-button-subtitle {
         @apply truncate text-[11px] font-medium;
-        color: rgb(var(--ui-text-muted) / 0.9);
+        color: rgb(var(--ui-text-muted) / 0.84);
     }
 
     .ui-ring-meter {
@@ -602,8 +755,8 @@
 
     .ui-ring-meter-core {
         @apply inline-grid h-7 w-7 place-items-center rounded-full border;
-        background-color: rgb(var(--ui-surface) / 1);
-        border-color: rgb(var(--ui-border) / 1);
+        background-color: rgb(var(--ui-surface) / 0.92);
+        border-color: rgb(var(--ui-border) / 0.72);
     }
 
     .ui-ring-meter-value {
@@ -611,13 +764,14 @@
         color: rgb(var(--ui-text) / 1);
     }
 
-    /* =========================
+    /* =========================================================
        Review topic / banners
-    ========================= */
+    ========================================================= */
+
     .ui-review-topic-shell {
-        @apply mb-3  border p-3;
-        --ui-comp-bg: rgb(var(--ui-surface) / 1);
-        --ui-comp-border: rgb(var(--ui-border) / 1);
+        @apply mb-3 border p-3;
+        --ui-comp-bg: rgb(var(--ui-surface) / 0.90);
+        --ui-comp-border: rgb(var(--ui-border) / 0.70);
         --ui-comp-text: rgb(var(--ui-text) / 1);
         --ui-comp-shadow: var(--ui-shadow-soft);
     }
@@ -629,7 +783,7 @@
 
     .ui-review-topic-shell-subtitle {
         @apply mt-1 whitespace-normal break-words text-xs font-medium;
-        color: rgb(var(--ui-text-muted) / 0.88);
+        color: rgb(var(--ui-text-muted) / 0.84);
     }
 
     .ui-review-topic-shell-right {
@@ -646,31 +800,32 @@
 
     .ui-review-banner-mark {
         @apply mt-[2px] font-medium;
-        color: rgb(var(--ui-text-muted) / 0.9);
+        color: rgb(var(--ui-text-muted) / 0.88);
     }
 
     .ui-review-footer-summary {
         @apply text-xs font-medium;
-        color: rgb(var(--ui-text-muted) / 0.92);
+        color: rgb(var(--ui-text-muted) / 0.90);
     }
 
     .ui-review-footer-percent {
         @apply text-[11px] font-medium;
-        color: rgb(var(--ui-text-muted) / 0.82);
+        color: rgb(var(--ui-text-muted) / 0.78);
     }
 
     .ui-review-footer-hint {
         @apply text-xs font-medium;
-        color: rgb(var(--ui-text-muted) / 0.82);
+        color: rgb(var(--ui-text-muted) / 0.78);
     }
 
-    /* =========================
+    /* =========================================================
        Review page helpers
-    ========================= */
+    ========================================================= */
+
     .ui-review-mobile-drawer {
         @apply fixed top-0 bottom-0 z-[100] w-[min(92vw,380px)] border;
-        background-color: rgb(var(--ui-surface) / 0.94);
-        border-color: rgb(var(--ui-border) / 0.85);
+        background-color: rgb(var(--ui-surface) / 0.92);
+        border-color: rgb(var(--ui-border) / 0.72);
         color: rgb(var(--ui-text) / 1);
         backdrop-filter: blur(14px);
         box-shadow: var(--ui-shadow-lg);
@@ -678,14 +833,14 @@
 
     .ui-review-mobile-drawer-header {
         @apply shrink-0 flex items-center justify-between gap-2 border-b p-3;
-        border-color: rgb(var(--ui-border) / 1);
+        border-color: rgb(var(--ui-border) / 0.72);
         color: rgb(var(--ui-text) / 1);
     }
 
     .ui-review-bottom-bar {
         @apply rounded-xl border py-2;
-        background-color: rgb(var(--ui-surface) / 0.84);
-        border-color: rgb(var(--ui-border) / 0.8);
+        background-color: rgb(var(--ui-surface) / 0.80);
+        border-color: rgb(var(--ui-border) / 0.68);
         color: rgb(var(--ui-text) / 1);
         backdrop-filter: blur(14px);
         box-shadow: var(--ui-shadow-soft);
@@ -693,45 +848,28 @@
 
     .ui-review-bottom-hint {
         @apply mt-2 text-xs font-medium;
-        color: rgb(var(--ui-text-muted) / 0.86);
+        color: rgb(var(--ui-text-muted) / 0.82);
     }
 
+    /* =========================================================
+       Quiz helpers
+    ========================================================= */
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /* =========================
-   Quiz helpers
-========================= */
     .ui-quiz-copy {
-        color: rgb(var(--ui-text-muted) / 0.86);
+        color: rgb(var(--ui-text-muted) / 0.84);
     }
 
     .ui-quiz-copy-strong {
-        color: rgb(var(--ui-text-muted) / 1);
+        color: rgb(var(--ui-text-muted) / 0.96);
     }
 
     .ui-quiz-copy-soft {
-        color: rgb(var(--ui-text-muted) / 0.72);
+        color: rgb(var(--ui-text-muted) / 0.70);
     }
 
     .ui-quiz-markdown {
         @apply text-sm;
-        color: rgb(var(--ui-text-muted) / 0.92);
+        color: rgb(var(--ui-text-muted) / 0.90);
     }
 
     .ui-quiz-markdown :where(.katex) {
@@ -746,7 +884,7 @@
 
     .ui-quiz-markdown-sm {
         @apply text-xs;
-        color: rgb(var(--ui-text-muted) / 0.86);
+        color: rgb(var(--ui-text-muted) / 0.84);
     }
 
     .ui-quiz-markdown-sm :where(.katex) {
@@ -755,17 +893,17 @@
 
     .ui-quiz-status {
         @apply text-xs font-medium;
-        color: rgb(var(--ui-text-muted) / 0.88);
+        color: rgb(var(--ui-text-muted) / 0.86);
     }
 
     .ui-quiz-status-strong {
         @apply text-xs font-medium;
-        color: rgb(var(--ui-text-muted) / 1);
+        color: rgb(var(--ui-text-muted) / 0.96);
     }
 
     .ui-quiz-status-soft {
         @apply text-xs font-medium;
-        color: rgb(var(--ui-text-muted) / 0.74);
+        color: rgb(var(--ui-text-muted) / 0.72);
     }
 
     .ui-quiz-status-good {
@@ -784,14 +922,14 @@
     }
 
     .ui-quiz-note-inline {
-        @apply mt-2 rounded-md border p-2 text-xs;
-        background-color: rgb(var(--ui-surface-2) / 1);
-        border-color: rgb(var(--ui-border) / 1);
+        @apply ui-note-box-sm mt-2;
+        background-color: rgb(var(--ui-surface-2) / 0.92);
+        border-color: rgb(var(--ui-border) / 0.78);
         color: rgb(var(--ui-text-muted) / 0.94);
     }
 
     .ui-quiz-note-danger {
-        @apply mt-2 rounded-md border p-2 text-xs;
+        @apply ui-note-box-sm mt-2;
         background-color: rgb(var(--ui-danger) / 0.10);
         border-color: rgb(var(--ui-danger) / 0.20);
         color: rgb(var(--ui-danger) / 1);
@@ -799,14 +937,14 @@
 
     .ui-quiz-explain {
         @apply mt-3 rounded-md border p-3;
-        background-color: rgb(var(--ui-surface-2) / 1);
-        border-color: rgb(var(--ui-border) / 1);
+        background-color: rgb(var(--ui-surface-2) / 0.92);
+        border-color: rgb(var(--ui-border) / 0.78);
         color: rgb(var(--ui-text) / 1);
     }
 
     .ui-quiz-checkrow-status {
         @apply text-xs font-medium sm:text-right;
-        color: rgb(var(--ui-text-muted) / 0.9);
+        color: rgb(var(--ui-text-muted) / 0.88);
     }
 
     .ui-quiz-toggle-row {
@@ -814,36 +952,16 @@
     }
 
     .ui-quiz-toggle-label {
-        @apply inline-flex items-center gap-2 select-none text-xs font-medium;
-        color: rgb(var(--ui-text-muted) / 0.92);
+        @apply inline-flex select-none items-center gap-2 text-xs font-medium;
+        color: rgb(var(--ui-text-muted) / 0.90);
     }
 
     .ui-quiz-dialog-note {
         @apply text-xs font-medium;
-        color: rgb(var(--ui-text-muted) / 0.78);
+        color: rgb(var(--ui-text-muted) / 0.76);
     }
 
     .ui-quiz-spinner {
         @apply inline-flex h-3 w-3 animate-spin rounded-full border-2 border-current border-t-transparent;
-    }
-
-
-
-
-
-    .ui-textarea-ide {
-        @apply mt-1 min-h-[120px] w-full rounded-md border px-3 py-2 font-mono text-[12px] leading-5 outline-none transition-colors;
-        background-color: rgb(var(--ui-surface) / 1);
-        border-color: rgb(var(--ui-border) / 1);
-        color: rgb(var(--ui-text) / 1);
-    }
-
-    .ui-textarea-ide::placeholder {
-        color: rgb(var(--ui-text-soft) / 0.82);
-    }
-
-    .ui-textarea-ide:focus {
-        border-color: rgb(var(--ui-ring) / 0.45);
-        box-shadow: 0 0 0 3px rgb(var(--ui-ring) / 0.12);
     }
 }

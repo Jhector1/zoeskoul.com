@@ -12,6 +12,11 @@ import type {
     SingleChoiceExercise,
 } from "@/lib/practice/types";
 
+import { tag } from "@/lib/practice/generator/shared/i18n";
+import {ExerciseHelpSpec} from "@/lib/practice/types";
+
+export type HelpStepKey = "concept" | "hint_1" | "hint_2";
+
 export type PracticePurpose = "quiz" | "project";
 
 /* -------------------------------------------------------------------------- */
@@ -191,6 +196,7 @@ export function makeSingleChoiceOut(args: {
     options: Array<{ id: string; text: string }>;
     answerOptionId: string;
     hint?: string;
+    help?: ExerciseHelpSpec;
 }): GenOut<"single_choice"> {
     const exercise: SingleChoiceExercise = {
         id: args.id,
@@ -200,6 +206,7 @@ export function makeSingleChoiceOut(args: {
         title: args.title,
         prompt: args.prompt,
         options: args.options,
+        ...(args.help ? { help: args.help } : {}),
         ...(args.hint ? { hint: args.hint } : {}),
     };
 
@@ -223,6 +230,7 @@ export function makeMultiChoiceOut(args: {
     options: Opt[];
     answerOptionIds: string[];
     hint?: string;
+    help?: ExerciseHelpSpec;
 }): GenOut<"multi_choice"> {
     const exercise: MultiChoiceExercise = {
         id: args.id,
@@ -232,6 +240,7 @@ export function makeMultiChoiceOut(args: {
         title: args.title,
         prompt: args.prompt,
         options: args.options,
+        ...(args.help ? { help: args.help } : {}),
         ...(args.hint ? { hint: args.hint } : {}),
     };
 
@@ -255,6 +264,7 @@ export function makeCodeInputOut(args: {
     language?: CodeLanguage;
     expected: GenOut<"code_input">["expected"];
     hint?: string;
+    help?: ExerciseHelpSpec;
     editorHeight?: number;
     allowLanguageSwitch?: boolean;
     stdinHint?: string;
@@ -269,6 +279,7 @@ export function makeCodeInputOut(args: {
         prompt: args.prompt,
         language: args.language ?? "python",
         starterCode: args.starterCode,
+        ...(args.help ? { help: args.help } : {}),
         ...(args.hint ? { hint: args.hint } : {}),
         ...(args.editorHeight != null ? { editorHeight: args.editorHeight } : {}),
         ...(args.allowLanguageSwitch != null
@@ -580,4 +591,19 @@ export function makeNoGenerator(
         (err as { engineName?: string }).engineName = engineName;
         throw err;
     };
+}
+
+
+
+export function buildTaggedHelpSteps(
+    baseKey: string,
+    stepKeys: string[] = ["concept", "hint_1", "hint_2"],
+) {
+    const help: Record<string, string> = {};
+
+    for (const stepKey of stepKeys) {
+        help[stepKey] = tag(`${baseKey}.help.${stepKey}`);
+    }
+
+    return help;
 }
