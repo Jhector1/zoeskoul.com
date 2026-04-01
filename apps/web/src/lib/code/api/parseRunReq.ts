@@ -2,8 +2,9 @@ import "server-only";
 
 import type { RunLimits, RunReq, SqlRunLimits } from "@/lib/code/types";
 import type { CodeLanguage, SqlDialect } from "@/lib/practice/types";
+import {InteractiveLanguage} from "@zoeskoul/code-contracts";
 
-const CODE_LANGS = new Set<Exclude<CodeLanguage, "sql">>([
+const CODE_LANGS = new Set<InteractiveLanguage>([
     "python",
     "java",
     "javascript",
@@ -233,11 +234,11 @@ export function parseRunReq(input: unknown): RunReq {
         };
     }
 
-    if (!CODE_LANGS.has(rawLanguage as Exclude<CodeLanguage, "sql">)) {
+    if (!CODE_LANGS.has(rawLanguage as InteractiveLanguage)) {
         throw new Error("Invalid code language.");
     }
 
-    const language = rawLanguage as Exclude<CodeLanguage, "sql">;
+    const language = rawLanguage as InteractiveLanguage;
 
     if ("files" in input || "entry" in input) {
         return {

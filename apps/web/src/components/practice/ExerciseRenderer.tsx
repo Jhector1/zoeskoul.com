@@ -56,8 +56,11 @@ type CodeToolsApi = {
     boundId: string | null;
 
     ensureVisible?: () => void;
-};
 
+    getRunFeedbackEntry?: (id: string) => { feedback: any | null; tick: number } | null;
+    setRunFeedback?: (id: string, feedback: any | null) => void;
+    clearRunFeedback?: (id: string) => void;
+};
 function CodeInputWithTools(props: {
     exercise: any;
     current: any;
@@ -73,6 +76,8 @@ function CodeInputWithTools(props: {
     updateCurrent: (patch: any) => void;
     showPrompt: boolean;
 
+    feedback?: any;
+    explanation?: string | null;
 }) {
     const {
         exercise,
@@ -85,57 +90,73 @@ function CodeInputWithTools(props: {
         codeTools,
         codeInputId,
         updateCurrent,
-        showPrompt
+        showPrompt,
     } = props;
+
+    const {
+        registerCodeInput,
+        unregisterCodeInput,
+        clearRunFeedback,
+        isBound,
+        boundId,
+        ensureVisible,
+        requestBind,
+        getRunFeedbackEntry,
+    } = codeTools;
 
     const curLang = ((current as any).codeLang ?? "python") as CodeLanguage;
     const curCode = (current as any).code ?? exercise.starterCode ?? "";
-    const curStdin = (current as any).codeStdin ?? exercise.starterStdin ?? "";
+    const curStdin = (current as any).codeStdin ?? "";
 
     const onPatch = useCallback((patch: any) => updateCurrent(patch), [updateCurrent]);
 
-    // 1) register/unregister ONCE per id
     useEffect(() => {
-        codeTools.registerCodeInput(codeInputId, {
+        registerCodeInput(codeInputId, {
             lang: curLang,
             code: curCode,
             stdin: curStdin,
             onPatch,
         });
 
-        return () => codeTools.unregisterCodeInput(codeInputId);
-        // only per id + stable callback
+        return () => unregisterCodeInput(codeInputId);
+        // mount/unmount registration only
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [codeTools, codeInputId, onPatch]);
+    }, [registerCodeInput, unregisterCodeInput, codeInputId, onPatch]);
 
-    // 2) update snapshot when values change (NO cleanup)
     const didFirstSnapshot = useRef(false);
     useEffect(() => {
         if (!didFirstSnapshot.current) {
             didFirstSnapshot.current = true;
-            return; // avoid double-call noise on mount
+            return;
         }
 
-        codeTools.registerCodeInput(codeInputId, {
+        registerCodeInput(codeInputId, {
             lang: curLang,
             code: curCode,
             stdin: curStdin,
             onPatch,
         });
-    }, [codeTools, codeInputId, curLang, curCode, curStdin, onPatch]);
 
-    const toolsBoundToThis = codeTools.isBound(codeInputId);
-    const toolsUnbound = codeTools.boundId == null;
+        clearRunFeedback?.(codeInputId);
+    }, [registerCodeInput, clearRunFeedback, codeInputId, curLang, curCode, curStdin, onPatch]);
 
+    const toolsBoundToThis = isBound(codeInputId);
+    const toolsUnbound = boundId == null;
+
+    const checkedFeedback = props.feedback ?? null;
+    const checkedExplanation = props.explanation ?? null;
+    const runEntry = getRunFeedbackEntry?.(codeInputId) ?? null;
+    const toolRunFeedback = runEntry?.feedback ?? null;
+    const toolRunTick = runEntry?.tick ?? 0;
     return (
         <CodeInputExerciseUI
             exercise={exercise}
             code={curCode}
             stdin={curStdin}
             language={curLang}
-            onChangeCode={(code) => updateCurrent({code, ...resetCheckPatch()})}
-            onChangeStdin={(codeStdin) => updateCurrent({codeStdin, ...resetCheckPatch()})}
-            onChangeLanguage={(codeLang) => updateCurrent({codeLang, ...resetCheckPatch()})}
+            onChangeCode={(code) => updateCurrent({ code, ...resetCheckPatch() })}
+            onChangeStdin={(codeStdin) => updateCurrent({ codeStdin, ...resetCheckPatch() })}
+            onChangeLanguage={(codeLang) => updateCurrent({ codeLang, ...resetCheckPatch() })}
             disabled={lockInputs}
             checked={checked}
             ok={ok}
@@ -144,11 +165,14 @@ function CodeInputWithTools(props: {
             toolsBound={toolsBoundToThis}
             toolsUnbound={toolsUnbound}
             autoBindMode="never"
-            // ✅ NEW
             showPrompt={showPrompt}
+            feedback={checkedFeedback}
+            explanation={checkedExplanation}
+            runFeedback={toolRunFeedback}
+            runFeedbackTick={toolRunTick}
             onUseTools={() => {
-                codeTools.ensureVisible?.();
-                codeTools.requestBind(codeInputId);
+                ensureVisible?.();
+                requestBind(codeInputId);
             }}
         />
     );
@@ -548,6 +572,10 @@ export default function ExerciseRenderer({
 // -----------------------------
 // code_input ✅ ToolsPanel support
 // -----------------------------
+    const resultAny = (current as any)?.result ?? null;
+    const codeFeedback = resultAny?.feedback ?? null;
+    const codeExplanation =
+        typeof resultAny?.explanation === "string" ? resultAny.explanation : null;
     if (ex.kind === "code_input") {
         const useTools = codeRunnerMode === "tools" && !!codeTools && !!codeInputId;
 
@@ -565,7 +593,8 @@ export default function ExerciseRenderer({
                     codeInputId={codeInputId!}
                     updateCurrent={updateCurrent}
                     showPrompt={showPrompt}
-
+                    feedback={codeFeedback}
+                    explanation={codeExplanation}
                 />
             );
         }
@@ -580,18 +609,19 @@ export default function ExerciseRenderer({
                 exercise={ex as any}
                 code={curCode}
                 stdin={curStdin}
-frame={"card"}
+                frame={"card"}
                 language={curLang}
-                onChangeCode={(code) => updateCurrent({code, ...resetCheckPatch()})}
-                onChangeStdin={(codeStdin) => updateCurrent({codeStdin, ...resetCheckPatch()})}
-                onChangeLanguage={(codeLang) => updateCurrent({codeLang, ...resetCheckPatch()})}
+                onChangeCode={(code) => updateCurrent({ code, ...resetCheckPatch() })}
+                onChangeStdin={(codeStdin) => updateCurrent({ codeStdin, ...resetCheckPatch() })}
+                onChangeLanguage={(codeLang) => updateCurrent({ codeLang, ...resetCheckPatch() })}
                 disabled={lockInputs}
                 checked={checked}
                 ok={ok}
                 showPrompt={showPrompt}
-
                 readOnly={readOnly}
                 variant="embedded"
+                feedback={codeFeedback}
+                explanation={codeExplanation}
             />
         );
     }

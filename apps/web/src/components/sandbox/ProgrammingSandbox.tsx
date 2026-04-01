@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { LangRail, LANGS } from "@/components/ide/lang/LangRail";
 import { CodeLanguage } from "@/lib/practice/types";
 import { cn } from "@/components/ide/utils";
+import {useAuthHref} from "@/hooks/useAuthHref";
 
 export type ProgrammingSandboxAccess = {
     hasUser: boolean;
@@ -134,7 +135,7 @@ export default function ProgrammingIdeSandbox({
 
     const storageKey =
         `${process.env.NEXT_PUBLIC_APP_NAME ?? "learnoir"}.ide.workspace.v2.sandbox.programming.${toolSlug}`;
-
+    const authHref = useAuthHref();
     return (
         <div className="h-dvh  w-full min-w-0 overflow-hidden bg-transparent">
             <div className="grid h-full min-h-0 min-w-0 w-full grid-rows-[auto_1fr]">
@@ -209,7 +210,7 @@ export default function ProgrammingIdeSandbox({
                             lessonHref={lessonHref}
                             lessonLabel={lessonLabel}
                             access={access}
-                            loginHref="/authenticate"
+                            loginHref={authHref}
                             billingHref="/billing"
                             draftStorageMode="local"
                             projectTitle={`${title} Project`}

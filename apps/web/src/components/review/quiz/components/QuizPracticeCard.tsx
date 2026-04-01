@@ -35,7 +35,7 @@ export default function QuizPracticeCard(props: {
   onUpdateItem: (patch: any) => void;
   onSubmit: () => void;
   onHelp: (stepKey?: string) => void;
-
+  onRetryExercise?: () => void;
   excused?: boolean;
   onExcused?: () => void;
 }) {
@@ -52,6 +52,7 @@ export default function QuizPracticeCard(props: {
     onUpdateItem,
     onSubmit,
     onHelp,
+      onRetryExercise,
   } = props;
 
   const tools = useReviewTools();
@@ -190,26 +191,38 @@ export default function QuizPracticeCard(props: {
         ) : null}
 
         {ps?.loading ? (
-            <div className="mt-2 ui-quiz-status-soft">
-              {ui.t("practice.loadingExercise", {}, "Loading exercise…")}
+            <div className="mt-2 ui-quiz-status-soft flex items-center gap-2">
+              <span>{ui.t("practice.loadingExercise", {}, "Loading exercise…")}</span>
             </div>
         ) : ps?.error ? (
             <div className="ui-quiz-note-danger">
               <div>{ps.error}</div>
 
-              <button
-                  type="button"
-                  onClick={props.onExcused}
-                  disabled={disableSkip}
-                  className={[
-                    "mt-2 ui-quiz-action",
-                    disableSkip ? "ui-quiz-action--disabled" : "ui-quiz-action--ghost",
-                  ].join(" ")}
-              >
-                {props.excused
-                    ? ui.t("buttons.excused", {}, "Excused")
-                    : ui.t("buttons.continue", {}, "Continue")}
-              </button>
+              <div className="mt-2 flex flex-wrap gap-2">
+                {props.onRetryExercise ? (
+                    <button
+                        type="button"
+                        onClick={props.onRetryExercise}
+                        className="ui-quiz-action ui-quiz-action--ghost"
+                    >
+                      Retry
+                    </button>
+                ) : null}
+
+                <button
+                    type="button"
+                    onClick={props.onExcused}
+                    disabled={disableSkip}
+                    className={[
+                      "ui-quiz-action",
+                      disableSkip ? "ui-quiz-action--disabled" : "ui-quiz-action--ghost",
+                    ].join(" ")}
+                >
+                  {props.excused
+                      ? ui.t("buttons.excused", {}, "Excused")
+                      : ui.t("buttons.continue", {}, "Continue")}
+                </button>
+              </div>
             </div>
         ) : ex && ps?.item ? (
             <div className="mt-1">

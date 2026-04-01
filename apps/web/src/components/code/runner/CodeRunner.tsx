@@ -10,7 +10,12 @@ import {
     DEFAULT_SQL_DIALECT,
     DEFAULT_SQL_DIALECTS,
 } from "./constants";
-import { isControlled, type CodeRunnerProps, type TerminalDock, CodeRunnerFrame } from "./types";
+import {
+    isControlled,
+    type CodeRunnerProps,
+    type TerminalDock,
+    CodeRunnerFrame,
+} from "./types";
 import HeaderBar from "./components/HeaderBar";
 import EditorPane from "./components/EditorPane";
 import { useSplitSizing } from "./hooks/useSplitSizing";
@@ -20,15 +25,22 @@ import { runViaApi } from "@/lib/code/runClient";
 import { useCodeRunnerController } from "@/components/code/runner/hooks/controller/useCodeRunnerController";
 import { resolveRuntime } from "@/components/code/runner/hooks/controller/useResolvedRuntime";
 import TerminalSurface from "@/components/code/runner/components/TerminalSurface";
-import {cx} from "@/components/tools/utils/cx";
+import { cx } from "@/components/tools/utils/cx";
 
 type MobilePane = "editor" | "output";
+
+type CodeRunnerWithStdinProps = CodeRunnerProps & {
+    stdin?: string;
+    initialStdin?: string;
+    onChangeStdin?: (value: string) => void;
+    showStdinEditor?: boolean;
+    stdinPlaceholder?: string;
+};
 
 const RUNNER_SURFACE =
     "overflow-hidden rounded-xl border border-neutral-200 bg-neutral-50/60 dark:border-white/10 dark:bg-black/20";
 
-const PANEL_EDITOR =
-    "bg-white/80 dark:bg-black/10";
+const PANEL_EDITOR = "bg-white/80 dark:bg-black/10";
 
 const PANEL_TABS =
     "border-b border-neutral-200 bg-white/88 dark:border-white/10 dark:bg-black/25";
@@ -48,10 +60,9 @@ const MOBILE_TAB_OUTPUT_ACTIVE =
 const SPLIT_BAR_IDLE =
     "bg-neutral-200/50 outline-none dark:bg-white/[0.04] dark:hover:bg-white/[0.09] dark:focus:bg-white/[0.09]";
 
-const SPLIT_BAR_ACTIVE =
-    "hover:bg-neutral-300/60 focus:bg-neutral-300/60";
+const SPLIT_BAR_ACTIVE = "hover:bg-neutral-300/60 focus:bg-neutral-300/60";
 
-function CodeRunnerContent(props: CodeRunnerProps) {
+function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     const {
         frame = "card" as CodeRunnerFrame,
         title = "Try it",
@@ -90,9 +101,15 @@ function CodeRunnerContent(props: CodeRunnerProps) {
         editorModelKey,
         onBeforeRun,
         isAuthenticated,
+
+        stdin: controlledStdin,
+        initialStdin,
+        onChangeStdin,
+        showStdinEditor = true,
+        stdinPlaceholder = "Type stdin here. Each new line becomes one input line.",
     } = props as any;
 
-    const controlled = isControlled(props);
+    const controlled = isControlled(props as any);
     const runtime = resolveRuntime((props as any).runtime);
 
     const { resolvedTheme } = useTheme();
@@ -157,6 +174,10 @@ function CodeRunnerContent(props: CodeRunnerProps) {
 
     const [uSqlDialect, setUSqlDialect] = useState<SqlDialect>(initialSqlDialect);
 
+    const [uStdin, setUStdin] = useState<string>(
+        typeof initialStdin === "string" ? initialStdin : "",
+    );
+
     const lang: CodeLanguage = fixedLanguage
         ? fixedLanguage
         : controlled
@@ -170,6 +191,9 @@ function CodeRunnerContent(props: CodeRunnerProps) {
         : controlled
             ? ((props as any).sqlDialect ?? uSqlDialect)
             : uSqlDialect;
+
+    const stdinControlled = typeof controlledStdin === "string";
+    const stdin: string = stdinControlled ? String(controlledStdin ?? "") : uStdin;
 
     const setLang = (l: CodeLanguage) => {
         if (fixedLanguage) return;
@@ -188,6 +212,11 @@ function CodeRunnerContent(props: CodeRunnerProps) {
         const cb = (props as any).onChangeSqlDialect as ((d: SqlDialect) => void) | undefined;
         if (cb) cb(d);
         else setUSqlDialect(d);
+    };
+
+    const setStdin = (value: string) => {
+        if (typeof onChangeStdin === "function") onChangeStdin(value);
+        if (!stdinControlled) setUStdin(value);
     };
 
     const [uDock, setUDock] = useState<TerminalDock>(
@@ -268,6 +297,7 @@ function CodeRunnerContent(props: CodeRunnerProps) {
         runtime,
         lang,
         code,
+        stdin,
         sqlDialect,
         sqlSchemaSql,
         sqlSeedSql,
@@ -278,7 +308,7 @@ function CodeRunnerContent(props: CodeRunnerProps) {
         resetTerminalOnRun,
         isAuthenticated,
         onRun: onRun ?? defaultOnRun,
-    });
+    } as any);
 
     useEffect(() => {
         requestLayout();
@@ -302,33 +332,36 @@ function CodeRunnerContent(props: CodeRunnerProps) {
         }
     }, [isNarrowScreen, showEditor, showTerminal, term.runState]);
 
-    const onSwitchLang = React.useCallback((next: CodeLanguage) => {
-        if (fixedLanguage) return;
-        if (!allowedLangs.includes(next)) return;
-        if (next === lang) return;
+    const onSwitchLang = React.useCallback(
+        (next: CodeLanguage) => {
+            if (fixedLanguage) return;
+            if (!allowedLangs.includes(next)) return;
+            if (next === lang) return;
 
-        setLang(next);
+            setLang(next);
 
-        if (!preserveCodeOnLanguageSwitch && !controlled) {
-            setCode(DEFAULT_CODE[next]);
-        }
+            if (!preserveCodeOnLanguageSwitch && !controlled) {
+                setCode(DEFAULT_CODE[next]);
+            }
 
-        if (isNarrowScreen && showEditor && showTerminal) {
-            setMobilePane("editor");
-        }
+            if (isNarrowScreen && showEditor && showTerminal) {
+                setMobilePane("editor");
+            }
 
-        term.resetTerminal();
-    }, [
-        fixedLanguage,
-        allowedLangs,
-        lang,
-        preserveCodeOnLanguageSwitch,
-        controlled,
-        isNarrowScreen,
-        showEditor,
-        showTerminal,
-        term,
-    ]);
+            term.resetTerminal();
+        },
+        [
+            fixedLanguage,
+            allowedLangs,
+            lang,
+            preserveCodeOnLanguageSwitch,
+            controlled,
+            isNarrowScreen,
+            showEditor,
+            showTerminal,
+            term,
+        ],
+    );
 
     const showPickerUI = showLanguagePicker && !fixedLanguage && allowedLangs.length > 1;
     const showSqlDialectPickerUI =
@@ -365,8 +398,9 @@ function CodeRunnerContent(props: CodeRunnerProps) {
 
     const outputLabel = term.backend === "sql" ? "Results" : "Terminal";
     const mobileTabAttention = term.runState !== "idle" || !!term.lastResult;
-
     const mobileBodyHeight = Math.max(240, (split.mainH || numericHeight) - 48);
+
+    const showStdinEditorUI = showStdinEditor && showEditor && lang !== "sql";
 
     const renderOutputPane = (panelHeight?: number, panelWidth?: number) => {
         return (
@@ -464,6 +498,28 @@ function CodeRunnerContent(props: CodeRunnerProps) {
                 </div>
             ) : null}
 
+            {showStdinEditorUI ? (
+                <div className={frame === "plain" ? "mt-3" : "mt-3"}>
+                    <div className="rounded-xl border border-neutral-200 bg-white/80 p-3 dark:border-white/10 dark:bg-black/10">
+                        <div className="text-xs font-medium text-neutral-700 dark:text-white/75">
+                            Stdin
+                        </div>
+                        <div className="mt-1 text-[11px] text-neutral-500 dark:text-white/45">
+                            Each new line is passed as one input line.
+                        </div>
+
+                        <textarea
+                            value={stdin}
+                            onChange={(e) => setStdin(e.target.value)}
+                            placeholder={stdinPlaceholder}
+                            disabled={disabled || term.busy}
+                            rows={4}
+                            className="mt-3 min-h-[88px] w-full resize-y rounded-lg border border-neutral-200 bg-neutral-50 px-3 py-2 font-mono text-xs text-neutral-900 outline-none transition focus:border-neutral-300 dark:border-white/10 dark:bg-black/20 dark:text-white/90 dark:focus:border-white/15"
+                        />
+                    </div>
+                </div>
+            ) : null}
+
             {showEditor || showTerminal ? (
                 <div
                     ref={mainRef}
@@ -501,7 +557,9 @@ function CodeRunnerContent(props: CodeRunnerProps) {
                                             onClick={() => setMobilePane("output")}
                                             className={cx(
                                                 MOBILE_TAB_BASE,
-                                                mobilePane === "output" ? MOBILE_TAB_OUTPUT_ACTIVE : MOBILE_TAB_IDLE,
+                                                mobilePane === "output"
+                                                    ? MOBILE_TAB_OUTPUT_ACTIVE
+                                                    : MOBILE_TAB_IDLE,
                                             )}
                                             aria-pressed={mobilePane === "output"}
                                         >
@@ -521,7 +579,12 @@ function CodeRunnerContent(props: CodeRunnerProps) {
                             </div>
                         ) : effectiveDock === "bottom" ? (
                             <div className="flex h-full min-h-0 flex-col">
-                                <div className={cx("min-h-0 border-b border-neutral-200 dark:border-white/10", PANEL_EDITOR)}>
+                                <div
+                                    className={cx(
+                                        "min-h-0 border-b border-neutral-200 dark:border-white/10",
+                                        PANEL_EDITOR,
+                                    )}
+                                >
                                     {renderEditorPane(split.bottomEditorH)}
                                 </div>
 
@@ -529,14 +592,10 @@ function CodeRunnerContent(props: CodeRunnerProps) {
                                     {...split.separatorProps}
                                     aria-disabled={term.runState !== "idle"}
                                     onPointerDown={
-                                        term.runState !== "idle"
-                                            ? undefined
-                                            : split.onPointerDownSplit
+                                        term.runState !== "idle" ? undefined : split.onPointerDownSplit
                                     }
                                     onKeyDown={
-                                        term.runState !== "idle"
-                                            ? undefined
-                                            : split.separatorProps.onKeyDown
+                                        term.runState !== "idle" ? undefined : split.separatorProps.onKeyDown
                                     }
                                     className={[
                                         "h-[6px]",
@@ -556,7 +615,12 @@ function CodeRunnerContent(props: CodeRunnerProps) {
                             </div>
                         ) : (
                             <div className="flex h-full min-h-0">
-                                <div className={cx("min-w-0 flex-1 border-r border-neutral-200 dark:border-white/10", PANEL_EDITOR)}>
+                                <div
+                                    className={cx(
+                                        "min-w-0 flex-1 border-r border-neutral-200 dark:border-white/10",
+                                        PANEL_EDITOR,
+                                    )}
+                                >
                                     {renderEditorPane(split.rightTotalH)}
                                 </div>
 
@@ -564,14 +628,10 @@ function CodeRunnerContent(props: CodeRunnerProps) {
                                     {...split.separatorProps}
                                     aria-disabled={term.runState !== "idle"}
                                     onPointerDown={
-                                        term.runState !== "idle"
-                                            ? undefined
-                                            : split.onPointerDownSplit
+                                        term.runState !== "idle" ? undefined : split.onPointerDownSplit
                                     }
                                     onKeyDown={
-                                        term.runState !== "idle"
-                                            ? undefined
-                                            : split.separatorProps.onKeyDown
+                                        term.runState !== "idle" ? undefined : split.separatorProps.onKeyDown
                                     }
                                     className={[
                                         "w-[6px]",
@@ -597,6 +657,6 @@ function CodeRunnerContent(props: CodeRunnerProps) {
     );
 }
 
-export default function CodeRunner(props: CodeRunnerProps) {
+export default function CodeRunner(props: CodeRunnerWithStdinProps) {
     return <CodeRunnerContent {...props} />;
 }

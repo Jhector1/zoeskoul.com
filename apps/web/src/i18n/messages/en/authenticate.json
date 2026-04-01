@@ -5,13 +5,14 @@
       "tagline": "Secure sign-in"
     },
     "card": {
+      "eyebrow": "Secure access",
       "title": "Sign in",
       "subtitle": "Choose a sign-in method to continue."
     },
     "providers": {
       "sso": "Continue with SSO",
       "google": "Continue with Google",
-      "recommended": "Recommended"
+      "recommended": "Single Sign-On"
     },
     "status": {
       "redirecting": "Redirecting..."

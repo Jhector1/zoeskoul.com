@@ -1,11 +1,18 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import type { CodeLanguage, Exercise } from "@/lib/practice/types";
 import type { RunResult } from "@/lib/code/types";
 import CodeRunner, { CodeRunnerFrame } from "@/components/code/CodeRunner";
 import { ExercisePrompt } from "@/components/practice/kinds/KindHelper";
 import { useTaggedT } from "@/i18n/tagged";
+import { runViaApi } from "@/lib/code/runClient";
+import {
+    pickRunFeedbackFromResult,
+} from "@/lib/code/feedback/classify";
+import type { CodeFeedback } from "@/lib/code/feedback/types";
+import CodeFeedbackCallout from "@/components/practice/kinds/CodeFeedbackCallout";
+import {InteractiveLanguage} from "@zoeskoul/code-contracts";
 
 type CodeInputExercise = Extract<Exercise, { kind: "code_input" }>;
 
@@ -31,8 +38,12 @@ export default function CodeInputExerciseUI({
                                                 onUseTools,
                                                 onSyncTools,
                                                 autoBindMode = "whenUnbound",
-                                                frame = "plain",
                                                 showPrompt = true,
+                                                frame = "plain",
+                                                feedback = null,
+                                                explanation = null,
+                                                runFeedback: externalRunFeedback = null,
+                                                runFeedbackTick = 0,
                                             }: {
     exercise: CodeInputExercise;
     code: string;
@@ -55,6 +66,10 @@ export default function CodeInputExerciseUI({
     autoBindMode?: CodeInputAutoBindMode;
     showPrompt?: boolean;
     frame?: CodeRunnerFrame;
+    feedback?: CodeFeedback | null;
+    explanation?: string | null;
+    runFeedback?: CodeFeedback | null;
+    runFeedbackTick?: number;
 }) {
     const showCorrect =
         checked && ok === false && reviewCorrect && typeof reviewCorrect.code === "string";
@@ -64,6 +79,84 @@ export default function CodeInputExerciseUI({
     const didAutoBind = useRef(false);
     const didFirstSync = useRef(false);
     const ui = useTaggedT("practiceUi.codeInput");
+
+    const [runFeedback, setRunFeedback] = useState<CodeFeedback | null>(null);
+
+    useEffect(() => {
+        setRunFeedback(null);
+    }, [code, stdin, language]);
+
+
+
+// In tools mode, the parent passes plain run feedback through `feedback`.
+// In embedded mode, local `runFeedback` comes from this component's own runner.
+
+
+
+
+
+    const checkedFeedback = checked && ok === false ? feedback ?? null : null;
+    const checkedExplanation = checked && ok === false ? explanation ?? null : null;
+
+    const localRunFeedback = runFeedback;
+
+    const [lastRunTickSeen, setLastRunTickSeen] = useState(0);
+    const [preferRunFeedback, setPreferRunFeedback] = useState(false);
+
+    useEffect(() => {
+        if (variant !== "tools") return;
+        if (!runFeedbackTick) return;
+        if (runFeedbackTick === lastRunTickSeen) return;
+
+        setLastRunTickSeen(runFeedbackTick);
+        setPreferRunFeedback(true);
+    }, [variant, runFeedbackTick, lastRunTickSeen]);
+
+    useEffect(() => {
+        if (variant === "tools") return;
+        if (localRunFeedback !== null) {
+            setPreferRunFeedback(true);
+        }
+    }, [variant, localRunFeedback]);
+
+    useEffect(() => {
+        setPreferRunFeedback(false);
+    }, [code, stdin, language]);
+
+    const activeFeedback = preferRunFeedback
+        ? (variant === "tools" ? externalRunFeedback : localRunFeedback)
+        : checkedFeedback ?? (variant === "tools" ? externalRunFeedback : localRunFeedback);
+
+    const activeExplanation = preferRunFeedback ? null : checkedExplanation ?? null;
+
+    const showFeedback = Boolean(activeFeedback || activeExplanation);
+    const executeRun = useCallback(
+        async (args: { language: InteractiveLanguage; code: string; stdin: string }) => {
+            setRunFeedback(null);
+
+            const result = onRun
+                ? await onRun(args)
+                : await runViaApi(
+                    {
+                        kind: "code",
+                        language: args.language,
+                        code: args.code,
+                        stdin: args.stdin,
+                    },
+                    undefined,
+                );
+
+            const nextFeedback = pickRunFeedbackFromResult({
+                result,
+                language: args.language,
+                code: args.code,
+            });
+
+            setRunFeedback(nextFeedback);
+            return result;
+        },
+        [onRun],
+    );
 
     useEffect(() => {
         if (variant !== "tools") return;
@@ -155,6 +248,13 @@ export default function CodeInputExerciseUI({
                     </div>
                 </div>
 
+                {showFeedback ? (
+                    <CodeFeedbackCallout
+                        feedback={activeFeedback}
+                        explanation={activeExplanation}
+                    />
+                ) : null}
+
                 {showCorrect ? (
                     <div className="ui-surface-success p-3">
                         <div className="ui-meta-strong">
@@ -167,14 +267,12 @@ export default function CodeInputExerciseUI({
     }
 
     const runnerTitle = showPrompt ? exercise.title : undefined;
-
     return (
         <div className="grid gap-3">
             {showPrompt ? <ExercisePrompt exercise={exercise} /> : null}
 
             <CodeRunner
                 title={runnerTitle as any}
-
                 frame={frame}
                 hintMarkdown={exercise.hint}
                 height={320}
@@ -189,7 +287,9 @@ export default function CodeInputExerciseUI({
                 fixedLanguage={lockLanguage ? language : undefined}
                 showLanguagePicker={lockLanguage ? false : true}
                 code={code}
+                stdin={stdin}
                 onChangeCode={(c) => !readOnly && onChangeCode(c)}
+                onChangeStdin={(s) => !readOnly && onChangeStdin(s)}
                 onRun={
                     onRun
                         ? async (args) =>
@@ -202,6 +302,13 @@ export default function CodeInputExerciseUI({
                 }
                 fixedTerminalDock="bottom"
             />
+
+            {showFeedback ? (
+                <CodeFeedbackCallout
+                    feedback={activeFeedback}
+                    explanation={activeExplanation}
+                />
+            ) : null}
 
             {showCorrect ? (
                 <div className="ui-surface-success p-3">

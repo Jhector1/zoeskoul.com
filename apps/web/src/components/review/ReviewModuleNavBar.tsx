@@ -37,7 +37,7 @@ const ReviewModuleNavBar = React.forwardRef<HTMLDivElement, Props>(
 
         const goModule = (mid: string) => {
             router.push(
-                ROUTES.moduleIntro(
+                ROUTES.learningPath(
                     encodeURIComponent(subjectSlug),
                     encodeURIComponent(mid),
                 ),

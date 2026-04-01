@@ -188,7 +188,7 @@ export async function handlePracticeValidate(ctx: PracticeValidateContext) {
         instance,
         expectedCanon,
         answer: isReveal ? null : answer!,
-        isReveal,
+
         showDebug,
     });
 
@@ -225,11 +225,12 @@ export async function handlePracticeValidate(ctx: PracticeValidateContext) {
     const returnUrl = safeSameOriginUrl(req, session?.returnUrl ?? null);
 
     const res = NextResponse.json({
-        ok: isReveal ? null : Boolean(graded.ok),
-        revealUsed: isReveal,
-
+        ok: Boolean(graded.ok),
+        revealUsed: false,
+        revealAnswer: null,
         expected: null,
-        explanation: includeExpected ? graded.explanation : publicExplanation,
+        explanation: publicExplanation,
+        feedback: graded.feedback ?? null,
         finalized,
         attempts: { used: nextNonRevealAttempts, max: maxAttempts, left },
         sessionComplete: persisted.sessionComplete,

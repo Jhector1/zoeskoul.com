@@ -1,5 +1,5 @@
 import {PracticeKind} from "@prisma/client";
-
+import {CodeLanguage} from  "@zoeskoul/code-contracts"
 // src/lib/practice/types.ts
 export type Difficulty = "easy" | "medium" | "hard";
 
@@ -295,10 +295,4 @@ export type ValidateResponse = {
 export type PoolKind = PracticeKind;
 export type SqlDialect = "postgres" | "mysql" | "sqlite" | "mssql";
 
-export type CodeLanguage =
-    | "python"
-    | "java"
-    | "javascript"
-    | "c"
-    | "cpp"
-    | "sql";
+export type {CodeLanguage}

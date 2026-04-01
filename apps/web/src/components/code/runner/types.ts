@@ -1,6 +1,7 @@
 import type { RunResult } from "@/lib/code/types";
 import type { CodeLanguage, SqlDialect } from "@/lib/practice/types";
 import {CodeRunnerRuntime} from "@/components/code/runner/runtime";
+import {InteractiveLanguage} from "@zoeskoul/code-contracts";
 
 export type TerminalDock = "bottom" | "right";
 
@@ -12,7 +13,7 @@ export type TermLine =
 
 export type OnRunArgs =
     | {
-    language: Exclude<CodeLanguage, "sql">;
+    language: InteractiveLanguage;
     code: string;
     stdin: string;
     signal?: AbortSignal;

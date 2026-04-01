@@ -16,6 +16,7 @@ import { useBillingStatus } from "@/components/billing/hooks/useBillingStatus";
 import { ROUTES } from "@/utils";
 import { useSearchParams } from "next/navigation";
 import SoundToggle from "@/lib/sfx/SoundToggle";
+import {useAuthHref} from "@/hooks/useAuthHref";
 
 type NavItem = { href: string; label: string };
 type SessionStatus = "loading" | "authenticated" | "unauthenticated";
@@ -314,18 +315,8 @@ export default function HeaderSlick({
   useEffect(() => setOpen(false), [pathname]);
 
   const { headlineBadge } = useBillingStatus();
-  const searchParams = useSearchParams();
 
-  const callbackUrl = useMemo(() => {
-    const qs = searchParams?.toString();
-    const path = pathname || "/";
-    return `/${locale}${path === "/" ? "" : path}${qs ? `?${qs}` : ""}`;
-  }, [locale, pathname, searchParams]);
-
-  const authHref = useMemo(() => {
-    return { pathname: "/authenticate", query: { callbackUrl } } as const;
-  }, [callbackUrl]);
-
+  const authHref = useAuthHref();
   const navLinkClass = (active: boolean) =>
       cn(
           active ? "ui-btn-ide-active" : "ui-btn-ide-ghost",

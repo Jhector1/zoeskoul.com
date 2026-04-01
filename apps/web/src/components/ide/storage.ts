@@ -7,6 +7,7 @@ import {
     defaultSqlSeedCode,
 } from "./languageDefaults";
 import type { CodeLanguage } from "@/lib/practice/types";
+import {InteractiveLanguage} from "@zoeskoul/code-contracts";
 
 export const STORAGE_KEY_V2 = `${process.env.NEXT_PUBLIC_APP_NAME}.ide.workspace.v2`;
 export const STORAGE_KEY_V1 = `${process.env.NEXT_PUBLIC_APP_NAME}.ide.workspace.v1`;
@@ -54,7 +55,7 @@ function clamp(n: number, lo: number, hi: number) {
     return Math.max(lo, Math.min(hi, n));
 }
 
-function buildDefaultCodeWorkspace(language: Exclude<CodeLanguage, "sql">): WorkspaceStateV2 {
+function buildDefaultCodeWorkspace(language: InteractiveLanguage): WorkspaceStateV2 {
     const rootSrcId = uid();
     const mainId = uid();
     const t = now();
@@ -320,7 +321,7 @@ export function saveV2(storageKey: string, ws: WorkspaceStateV2) {
 
 function buildCodeWorkspaceFromV1(
     v1: any,
-    language: Exclude<CodeLanguage, "sql">,
+    language: InteractiveLanguage,
 ): WorkspaceStateV2 | null {
     const rootSrcId = uid();
     const t = now();

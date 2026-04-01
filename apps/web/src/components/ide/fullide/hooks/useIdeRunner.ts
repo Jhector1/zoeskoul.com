@@ -8,7 +8,7 @@ import { runViaApi } from "@/lib/code/runClient";
 import { exportProjectFiles, relativeProjectPathOf } from "../../fsTree";
 import { runBatchClient } from "@/components/code/runner/hooks/useBatchRun";
 import { startInteractiveProjectRun } from "@/components/ide/fullide/runtime/startInteractiveProjectRun";
-import {StartSessionResult} from "@zoeskoul/code-contracts";
+import {InteractiveLanguage, StartSessionResult} from "@zoeskoul/code-contracts";
 
 type Args = {
     nodes: any[];
@@ -29,7 +29,7 @@ type IdeRunArgs =
     signal?: AbortSignal;
 }
     | {
-    language: Exclude<CodeLanguage, "sql">;
+    language: InteractiveLanguage;
     code?: string;
     stdin?: string;
     signal?: AbortSignal;
@@ -55,12 +55,12 @@ type ProjectSqlReq = {
 type ProjectCodeReq =
     | {
     kind: "code";
-    language: Exclude<CodeLanguage, "sql">;
+    language: InteractiveLanguage;
     code: string;
 }
     | {
     kind: "code";
-    language: Exclude<CodeLanguage, "sql">;
+    language: InteractiveLanguage;
     entry: string;
     files: ProjectFile[];
 };

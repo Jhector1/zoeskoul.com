@@ -1,4 +1,5 @@
 import type { CodeLanguage, SqlDialect } from "@/lib/practice/types";
+import {InteractiveLanguage} from "@/lib/code/types/common";
 
 export type SqlScalar = string | number | boolean | null;
 
@@ -27,14 +28,14 @@ export type SqlRunLimits = {
 export type CodeRunReq =
     | {
     kind?: "code";
-    language: Exclude<CodeLanguage, "sql">;
+    language: InteractiveLanguage
     code: string;
     stdin?: string;
     limits?: RunLimits;
 }
     | {
     kind?: "code";
-    language: Exclude<CodeLanguage, "sql">;
+    language: InteractiveLanguage;
     entry: string;
     files: Array<{ path: string; content: string }> | Record<string, string>;
     stdin?: string;

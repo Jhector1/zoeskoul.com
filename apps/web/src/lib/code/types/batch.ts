@@ -1,5 +1,5 @@
 import type { CodeLanguage } from "@/lib/practice/types";
-import type { FileEntry, RunLimits } from "./common";
+import type {FileEntry, InteractiveLanguage, RunLimits} from "./common";
 import type {
     SqlRunReq,
     SqlRunResult,
@@ -10,7 +10,7 @@ export type BatchCodeRunReq =
     | {
     kind: "code";
     mode?: "batch";
-    language: Exclude<CodeLanguage, "sql">;
+    language: InteractiveLanguage;
     code: string;
     stdin?: string;
     limits?: RunLimits;
@@ -18,7 +18,7 @@ export type BatchCodeRunReq =
     | {
     kind: "code";
     mode?: "batch";
-    language: Exclude<CodeLanguage, "sql">;
+    language: InteractiveLanguage;
     entry: string;
     files: FileEntry[] | Record<string, string>;
     stdin?: string;

@@ -1,8 +1,9 @@
 import JSZip from "jszip";
 import type { FileEntry } from "./types";
 import { CodeLanguage } from "@/lib/practice/types";
+import {InteractiveLanguage} from "@zoeskoul/code-contracts";
 
-type ProjectLanguage = Exclude<CodeLanguage, "sql">;
+type ProjectLanguage = InteractiveLanguage;
 
 function assertSafeRelPath(p: string) {
     if (!p || p.startsWith("/") || p.includes("..")) {

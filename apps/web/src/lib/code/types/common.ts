@@ -1,5 +1,5 @@
 import type { CodeLanguage, SqlDialect } from "@/lib/practice/types";
-
+import {InteractiveLanguage} from "@zoeskoul/code-contracts"
 export type SqlScalar = string | number | boolean | null;
 
 export type FileEntry = {
@@ -29,5 +29,5 @@ export type SqlRunLimits = {
     maxBytes?: number;
 };
 
-export type ProjectLanguage = Exclude<CodeLanguage, "sql">;
-export type InteractiveLanguage = Exclude<CodeLanguage, "sql">;
+
+export type{ InteractiveLanguage } ;

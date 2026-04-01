@@ -7,6 +7,7 @@ export function useJudge0Runner(args: SharedRunnerArgs): CodeRunnerController {
     const legacy = useTerminalRunner({
         lang: args.lang,
         code: args.code,
+        stdin: (args as any).stdin,
         sqlDialect: args.sqlDialect,
         sqlSchemaSql: args.sqlSchemaSql,
         sqlSeedSql: args.sqlSeedSql,

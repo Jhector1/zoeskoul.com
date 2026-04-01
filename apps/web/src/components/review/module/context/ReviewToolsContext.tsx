@@ -11,6 +11,7 @@ import React, {
     useState,
 } from "react";
 import { CodeLanguage } from "@/lib/practice/types";
+import type { CodeFeedback } from "@/lib/code/feedback/types";
 
 export type RegisterArgs = {
     lang: CodeLanguage;
@@ -18,7 +19,10 @@ export type RegisterArgs = {
     stdin?: string;
     onPatch: (patch: any) => void;
 };
-
+export type RunFeedbackEntry = {
+    feedback: CodeFeedback | null;
+    tick: number;
+};
 export type CodeInputMeta = {
     /** Global ordering across the page (smaller = earlier). */
     order: number;
@@ -29,7 +33,7 @@ export type CodeInputMeta = {
 };
 
 export type ReviewToolsValue = {
-    /** ✅ NEW: Tools enabled for this page/device */
+    /** Tools enabled for this page/device */
     enabled: boolean;
 
     registerCodeInput: (id: string, args: RegisterArgs) => void;
@@ -50,6 +54,11 @@ export type ReviewToolsValue = {
     isBound: (id: string) => boolean;
 
     ensureVisible?: () => void;
+
+    /** NEW: share plain Run feedback from Tools pane to bound exercise card */
+    getRunFeedbackEntry: (id: string) => RunFeedbackEntry | null;
+    setRunFeedback: (id: string, feedback: CodeFeedback | null) => void;
+    clearRunFeedback: (id: string) => void;
 };
 
 const Ctx = createContext<ReviewToolsValue | null>(null);
@@ -65,20 +74,8 @@ export function ReviewToolsProvider({
                                         onBindToToolsPanel,
                                         onUnbindFromToolsPanel,
                                         externalBoundId,
-
-                                        /**
-                                         * ✅ NEW:
-                                         * When false, we behave like “Tools do not exist” (no binding, no registry, no side-effects).
-                                         * This is what makes Tools desktop-only.
-                                         */
                                         enabled = true,
-
-                                        /**
-                                         * "first_unanswered" = deterministic mode required by your spec
-                                         * "first_registered" = legacy fallback
-                                         */
                                         mode = "first_unanswered",
-
                                         resetKey,
                                     }: {
     children: React.ReactNode;
@@ -109,7 +106,8 @@ export function ReviewToolsProvider({
     const [registryTick, setRegistryTick] = useState(0);
     const [metaTick, setMetaTick] = useState(0);
 
-    // (optional) avoid strict-mode unbind flicker
+    const [runFeedbackById, setRunFeedbackById] = useState<Record<string, RunFeedbackEntry>>({});
+    // avoid strict-mode unbind flicker
     const unbindTimersRef = useRef(new Map<string, number>());
 
     const clearUnbindTimer = useCallback((id: string) => {
@@ -125,27 +123,54 @@ export function ReviewToolsProvider({
         };
     }, []);
 
-    // ✅ If enabled flips OFF (e.g., resize to tablet/phone), force unbind + stop.
+    const getRunFeedbackEntry = useCallback((id: string) => {
+        if (!id) return null;
+        return runFeedbackById[id] ?? null;
+    }, [runFeedbackById]);
+
+    const setRunFeedback = useCallback((id: string, feedback: CodeFeedback | null) => {
+        if (!id) return;
+
+        setRunFeedbackById((prev) => {
+            const cur = prev[id];
+            const next: RunFeedbackEntry = {
+                feedback: feedback ?? null,
+                tick: (cur?.tick ?? 0) + 1,
+            };
+
+            return { ...prev, [id]: next };
+        });
+    }, []);
+
+    const clearRunFeedback = useCallback((id: string) => {
+        if (!id) return;
+        setRunFeedbackById((prev) => {
+            if (!(id in prev)) return prev;
+            const next = { ...prev };
+            delete next[id];
+            return next;
+        });
+    }, []);
+
+    // If enabled flips OFF, force unbind + clear.
     useEffect(() => {
         if (enabled) return;
 
-        // clear everything
         registryRef.current.clear();
         orderRef.current = [];
         metaRef.current.clear();
 
         setRequestedId(null);
         setBoundId(null);
+        setRunFeedbackById({});
 
-        // tell ToolsPanel to unbind
         onUnbindFromToolsPanel?.();
 
-        // ticks so any dependents re-render cleanly
         setRegistryTick((x) => x + 1);
         setMetaTick((x) => x + 1);
     }, [enabled, onUnbindFromToolsPanel]);
 
-    // ✅ reset registry/order/meta (topic switch / reset)
+    // reset registry/order/meta on topic reset
     const lastResetRef = useRef<string | null>(null);
     useEffect(() => {
         if (!resetKey) return;
@@ -164,6 +189,7 @@ export function ReviewToolsProvider({
 
             setRequestedId(null);
             setBoundId(externalBoundId ?? null);
+            setRunFeedbackById({});
 
             setRegistryTick((x) => x + 1);
             setMetaTick((x) => x + 1);
@@ -172,7 +198,7 @@ export function ReviewToolsProvider({
         lastResetRef.current = resetKey;
     }, [resetKey, externalBoundId, onUnbindFromToolsPanel]);
 
-    // ✅ keep provider boundId consistent with external tool state
+    // keep provider boundId consistent with external tool state
     useEffect(() => {
         if (externalBoundId === undefined) return;
         const next = externalBoundId ?? null;
@@ -185,14 +211,25 @@ export function ReviewToolsProvider({
     }, [externalBoundId]);
 
     const unbindCodeInput = useCallback(() => {
+        const currentBound = (externalBoundId ?? boundId) ?? null;
+
+        if (currentBound) {
+            setRunFeedbackById((prev) => {
+                if (!(currentBound in prev)) return prev;
+                const next = { ...prev };
+                delete next[currentBound];
+                return next;
+            });
+        }
+
         setBoundId(null);
         setRequestedId(null);
         onUnbindFromToolsPanel?.();
-    }, [onUnbindFromToolsPanel]);
+    }, [externalBoundId, boundId, onUnbindFromToolsPanel]);
 
     const isBound = useCallback(
         (id: string) => (externalBoundId ?? boundId) === id,
-        [externalBoundId, boundId]
+        [externalBoundId, boundId],
     );
 
     const bindNow = useCallback(
@@ -201,7 +238,7 @@ export function ReviewToolsProvider({
 
             const snap = registryRef.current.get(id);
             if (!snap) {
-                setRequestedId(id); // wait until register
+                setRequestedId(id);
                 return;
             }
 
@@ -210,7 +247,7 @@ export function ReviewToolsProvider({
             setBoundId(id);
             setRequestedId(null);
         },
-        [ensureVisible, onBindToToolsPanel]
+        [ensureVisible, onBindToToolsPanel],
     );
 
     const pickFirstUnanswered = useCallback((): string | null => {
@@ -228,10 +265,10 @@ export function ReviewToolsProvider({
                 bestOrder = ord;
                 bestId = id;
             } else if (ord === bestOrder && bestId != null) {
-                // deterministic tie-breaker
                 if (id < bestId) bestId = id;
             }
         }
+
         return bestId;
     }, []);
 
@@ -246,19 +283,17 @@ export function ReviewToolsProvider({
         const effectiveBound = (externalBoundId ?? boundId) ?? null;
 
         let desired: string | null = null;
-
         if (mode === "first_unanswered") desired = pickFirstUnanswered();
         else desired = pickFirstRegistered();
 
         if (!desired) {
-            // deterministic: if nothing eligible, unbind
             if (effectiveBound != null) unbindCodeInput();
             return;
         }
 
         if (effectiveBound === desired) return;
 
-        defer(() => bindNow(desired!));
+        defer(() => bindNow(desired));
     }, [
         externalBoundId,
         boundId,
@@ -269,20 +304,18 @@ export function ReviewToolsProvider({
         bindNow,
     ]);
 
-    // ✅ main reconciliation loop (deterministic)
     useEffect(() => {
         if (!enabled) return;
         reconcileBinding();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [enabled, registryTick, metaTick, mode]);
 
-    // kept for compatibility, deterministic overrides target
     const requestBind = useCallback(
         (_id: string) => {
             if (!enabledRef.current) return;
             reconcileBinding();
         },
-        [reconcileBinding]
+        [reconcileBinding],
     );
 
     useEffect(() => {
@@ -295,31 +328,28 @@ export function ReviewToolsProvider({
             if (!enabledRef.current) return;
             reconcileBinding();
         },
-        [reconcileBinding]
+        [reconcileBinding],
     );
 
-    const setCodeInputMeta = useCallback(
-        (id: string, patch: Partial<CodeInputMeta>) => {
-            if (!enabledRef.current) return;
+    const setCodeInputMeta = useCallback((id: string, patch: Partial<CodeInputMeta>) => {
+        if (!enabledRef.current) return;
 
-            const cur = metaRef.current.get(id);
-            const next: CodeInputMeta = {
-                order: patch.order ?? cur?.order ?? Number.POSITIVE_INFINITY,
-                eligible: patch.eligible ?? cur?.eligible ?? false,
-                done: patch.done ?? cur?.done ?? false,
-            };
+        const cur = metaRef.current.get(id);
+        const next: CodeInputMeta = {
+            order: patch.order ?? cur?.order ?? Number.POSITIVE_INFINITY,
+            eligible: patch.eligible ?? cur?.eligible ?? false,
+            done: patch.done ?? cur?.done ?? false,
+        };
 
-            const same =
-                cur &&
-                cur.order === next.order &&
-                cur.eligible === next.eligible &&
-                cur.done === next.done;
+        const same =
+            cur &&
+            cur.order === next.order &&
+            cur.eligible === next.eligible &&
+            cur.done === next.done;
 
-            metaRef.current.set(id, next);
-            if (!same) setMetaTick((x) => x + 1);
-        },
-        []
-    );
+        metaRef.current.set(id, next);
+        if (!same) setMetaTick((x) => x + 1);
+    }, []);
 
     const registerCodeInput = useCallback(
         (id: string, args: RegisterArgs) => {
@@ -351,16 +381,16 @@ export function ReviewToolsProvider({
             externalBoundId,
             boundId,
             onBindToToolsPanel,
-        ]
+        ],
     );
 
     const unregisterCodeInput = useCallback(
         (id: string) => {
-            // even if disabled, cleanup is fine
             registryRef.current.delete(id);
             metaRef.current.delete(id);
             setRegistryTick((x) => x + 1);
             setMetaTick((x) => x + 1);
+            clearRunFeedback(id);
 
             const t = window.setTimeout(() => {
                 unbindTimersRef.current.delete(id);
@@ -375,7 +405,7 @@ export function ReviewToolsProvider({
 
             if (requestedId === id) setRequestedId(null);
         },
-        [externalBoundId, boundId, requestedId, unbindCodeInput]
+        [clearRunFeedback, externalBoundId, boundId, requestedId, unbindCodeInput],
     );
 
     const value = useMemo<ReviewToolsValue>(
@@ -393,6 +423,10 @@ export function ReviewToolsProvider({
             boundId: (externalBoundId ?? boundId) ?? null,
             isBound,
             ensureVisible: enabled ? ensureVisible : undefined,
+
+            getRunFeedbackEntry,
+            setRunFeedback,
+            clearRunFeedback,
         }),
         [
             enabled,
@@ -406,7 +440,10 @@ export function ReviewToolsProvider({
             boundId,
             isBound,
             ensureVisible,
-        ]
+            getRunFeedbackEntry,
+            setRunFeedback,
+            clearRunFeedback,
+        ],
     );
 
     return <Ctx.Provider value={value}>{children}</Ctx.Provider>;

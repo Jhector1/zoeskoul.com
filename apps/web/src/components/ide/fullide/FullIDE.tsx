@@ -419,6 +419,25 @@ function buildLocalWorkspaceIdSeed(args: {
         args.forcedLanguage ?? "any",
     ].join("::");
 }
+function hrefToString(
+    href: FullIDEProps["loginHref"],
+    fallback = "/authenticate",
+) {
+    if (!href) return fallback;
+    if (typeof href === "string") return href;
+
+    const pathname = href.pathname ?? fallback;
+    const query = href.query ?? {};
+    const qs = new URLSearchParams();
+
+    for (const [key, value] of Object.entries(query)) {
+        if (value == null) continue;
+        qs.set(key, String(value));
+    }
+
+    const queryString = qs.toString();
+    return queryString ? `${pathname}?${queryString}` : pathname;
+}
 
 export default function FullIDE(props: FullIDEProps) {
     const {
@@ -434,7 +453,7 @@ export default function FullIDE(props: FullIDEProps) {
         lessonHref,
         lessonLabel = "Lesson",
         access,
-        loginHref = "/authenticate",
+        loginHref ,
         billingHref = "/billing",
         initialProjectId = null,
         projectTitle,
@@ -458,7 +477,10 @@ export default function FullIDE(props: FullIDEProps) {
 
 
 
-
+    const normalizedLoginHref = useMemo(
+        () => hrefToString(loginHref, "/authenticate"),
+        [loginHref],
+    );
 
     const localWorkspaceId = useMemo(
         () =>
@@ -544,7 +566,7 @@ export default function FullIDE(props: FullIDEProps) {
                 lessonHref={lessonHref}
                 lessonLabel={lessonLabel}
                 access={access}
-                loginHref={loginHref}
+                loginHref={normalizedLoginHref}
                 billingHref={billingHref}
                 initialProjectId={initialProjectId}
                 projectTitle={projectTitle}

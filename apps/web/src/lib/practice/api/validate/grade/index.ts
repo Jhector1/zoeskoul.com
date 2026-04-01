@@ -1,5 +1,5 @@
-// src/lib/practice/api/validate/grade/index.ts
-import {LoadedValidateInstance} from "@/lib/practice/api/validate/repositories/instance.repo";import type { SubmitAnswer } from "../schemas";
+import { LoadedValidateInstance } from "@/lib/practice/api/validate/repositories/instance.repo";
+import type { SubmitAnswer } from "../schemas";
 
 import { gradeNumeric } from "./numeric";
 import { gradeSingleChoice } from "./singleChoice";
@@ -11,20 +11,20 @@ import { gradeCodeInput } from "./codeInput";
 import { gradeTextInput } from "./textInput";
 import { gradeDragReorder } from "./dragReorder";
 import { gradeVoiceInput } from "./voiceInput";
-import {gradeSentenceBuild} from "@/lib/practice/api/validate/grade/sentenceBuild";
-import {gradeFillBlankChoice} from "@/lib/practice/api/validate/grade/fillBlankChoice";
+import { gradeSentenceBuild } from "@/lib/practice/api/validate/grade/sentenceBuild";
+import { gradeFillBlankChoice } from "@/lib/practice/api/validate/grade/fillBlankChoice";
+import type { CodeFeedback } from "@/lib/code/feedback/types";
 
 export type GradeResult = {
   ok: boolean;
   explanation: string;
-  // revealAnswer: any | null;
+  feedback?: CodeFeedback | null;
 };
 
 export async function gradeInstance(args: {
   instance: LoadedValidateInstance;
   expectedCanon: any;
   answer: SubmitAnswer | null;
-  isReveal: boolean;
   showDebug: boolean;
 }): Promise<GradeResult> {
   switch (args.instance.kind) {
@@ -57,7 +57,7 @@ export async function gradeInstance(args: {
 
     case "voice_input":
       return gradeVoiceInput(args as any);
-      // ✅ NEW
+
     case "word_bank_arrange":
       return gradeSentenceBuild(args as any);
 
@@ -66,11 +66,12 @@ export async function gradeInstance(args: {
 
     case "fill_blank_choice":
       return gradeFillBlankChoice(args as any);
+
     default:
       return {
         ok: false,
-
         explanation: `Unsupported instance kind: ${String(args.instance.kind)}`,
+        feedback: null,
       };
   }
 }

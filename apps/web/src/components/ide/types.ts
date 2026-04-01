@@ -71,7 +71,12 @@ import type {
 // export type ToastKind = "info" | "success" | "error";
 
 export type ToastState = Toast;
-
+export type RouterPushHref =
+    | string
+    | {
+    readonly pathname?: string;
+    readonly query?: Record<string, string | number | boolean | null | undefined>;
+};
 export type FullIDEProps = {
     title?: string;
     height?: number;
@@ -88,7 +93,7 @@ export type FullIDEProps = {
         IdeCapabilities,
         "hasUser" | "canUseMultiFile" | "canSaveCloud" | "canCreateProjects"
     >;
-    loginHref?: string;
+    loginHref?: RouterPushHref;
     billingHref?: string;
     initialProjectId?: string | null;
     projectTitle?: string;

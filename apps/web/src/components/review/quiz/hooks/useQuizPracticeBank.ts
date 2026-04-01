@@ -26,6 +26,25 @@ import {
 export { isEmptyPracticeAnswer } from "@/lib/practice/runtime";
 export type PracticeState = PracticeItemState;
 
+const LOAD_TIMEOUT_MS = 12000;
+
+function withTimeout<T>(promise: Promise<T>, ms: number, message: string) {
+  return new Promise<T>((resolve, reject) => {
+    const timer = setTimeout(() => reject(new Error(message)), ms);
+
+    promise.then(
+        (value) => {
+          clearTimeout(timer);
+          resolve(value);
+        },
+        (error) => {
+          clearTimeout(timer);
+          reject(error);
+        },
+    );
+  });
+}
+
 export function useQuizPracticeBank(args: {
   questions: ReviewQuestion[];
   spec: ReviewQuizSpec;
@@ -56,6 +75,7 @@ export function useQuizPracticeBank(args: {
 
   const [practice, setPractice] = useState<Record<string, PracticeState>>({});
   const practiceRef = useRef(practice);
+  const loadTokenRef = useRef<Record<string, number>>({});
 
   useEffect(() => {
     practiceRef.current = practice;
@@ -75,167 +95,197 @@ export function useQuizPracticeBank(args: {
   useEffect(() => {
     setPractice({});
     padRefs.current = {};
+    loadTokenRef.current = {};
   }, [resetKey]);
 
-  useEffect(() => {
-    if (!questions.length) return;
+  const loadPracticeQuestion = useCallback(
+      async (
+          q: Extract<ReviewQuestion, { kind: "practice" }>,
+          opts?: { force?: boolean; cancelledRef?: { current: boolean } },
+      ) => {
+        const force = Boolean(opts?.force);
+        const cancelledRef = opts?.cancelledRef;
 
-    let cancelled = false;
+        const existing = practiceRef.current?.[q.id];
+        if (
+            !force &&
+            existing &&
+            (existing.loading || existing.exercise || existing.item)
+        ) {
+          return;
+        }
 
-    async function ensurePracticeQuestion(q: ReviewQuestion) {
-      if (q.kind !== "practice") return;
-
-      const existing = practiceRef.current?.[q.id];
-      if (existing && (existing.loading || existing.exercise || existing.item)) {
-        return;
-      }
-
-      setPractice((prev) => {
-        if (prev[q.id]) return prev;
+        const token = (loadTokenRef.current[q.id] ?? 0) + 1;
+        loadTokenRef.current[q.id] = token;
 
         const initMeta = initialState?.practiceMeta?.[q.id];
-        const fallbackMax =
-            unlimitedAttempts
-                ? null
-                : coerceMaxAttempts((q as any).maxAttempts ?? specMaxAttempts ?? null);
+        const fallbackMax = unlimitedAttempts
+            ? null
+            : coerceMaxAttempts((q as any).maxAttempts ?? specMaxAttempts ?? null);
 
-        return {
+        setPractice((prev) => ({
           ...prev,
           [q.id]: {
             loading: true,
             error: null,
             busy: false,
-            exercise: null,
-            item: null,
-            attempts: initMeta?.attempts ?? 0,
-            ok: initMeta?.ok ?? null,
-            maxAttempts: fallbackMax,
-            helpPolicy: DEFAULT_PRACTICE_HELP_POLICY,
-          },
-        };
-      });
-
-      try {
-        const loaded = await fetchResolvedPracticeItem({
-          request: {
-            subject: (q as any).fetch.subject,
-            module: (q as any).fetch.module,
-            section: (q as any).fetch.section,
-            topic: (q as any).fetch.topic ? String((q as any).fetch.topic) : "",
-            difficulty: (q as any).fetch.difficulty,
-            allowReveal: (q as any).fetch.allowReveal ? true : undefined,
-            preferKind: (q as any).fetch.preferKind ?? undefined,
-            salt: (q as any).fetch.salt ?? undefined,
-            preferPurpose: "mixed",
-            purposePolicy: "fallback",
-            exerciseKey: (q as any).fetch.exerciseKey ?? undefined,
-            seedPolicy: (q as any).fetch.seedPolicy ?? undefined,
-          },
-          resolvers: {
-            raw: (k) => rawKeyRef.current(k),
-            resolveText: (value) => resolveTextRef.current(value),
-          },
-          savedPatch: initialState?.practiceItemPatch?.[q.id] ?? null,
-          transformItem: (baseItem, resolvedEx) => {
-            const mode = (spec as any).mode ?? "quiz";
-            const carryFromPrev =
-                mode === "project" && Boolean((q as any).carryFromPrev);
-
-            if (!carryFromPrev || (resolvedEx as any).kind !== "code_input") {
-              return baseItem;
-            }
-
-            const idx = questions.findIndex((qq) => qq.id === q.id);
-            const prevQ = idx > 0 ? questions[idx - 1] : null;
-
-            const rawCurrentPatch = initialState?.practiceItemPatch?.[q.id];
-            const currentPatch = rawCurrentPatch
-                ? resolveDeepTagged(rawCurrentPatch, (k) => rawKeyRef.current(k))
-                : null;
-
-            const current = extractCodeLike(currentPatch);
-
-            let prevSource: any = null;
-            if (prevQ) {
-              const livePrevItem = practiceRef.current?.[prevQ.id]?.item;
-              const rawPrevSource =
-                  livePrevItem ?? initialState?.practiceItemPatch?.[prevQ.id] ?? null;
-
-              prevSource = rawPrevSource
-                  ? resolveDeepTagged(rawPrevSource, (k) => rawKeyRef.current(k))
-                  : null;
-            }
-
-            const prev = extractCodeLike(prevSource);
-
-            if (!current.code && prev.code) {
-              return {
-                ...baseItem,
-                code: prev.code,
-                codeStdin: prev.stdin ?? (baseItem as any).codeStdin ?? "",
-                codeLang: (prev.language as any) ?? (baseItem as any).codeLang,
-                stdin: prev.stdin ?? (baseItem as any).stdin ?? "",
-              };
-            }
-
-            return baseItem;
-          },
-        });
-
-        if (cancelled) return;
-
-        setPractice((prev) => {
-          const base = prev[q.id];
-
-          return {
-            ...prev,
-            [q.id]: {
-              ...base,
-              loading: false,
-              error: null,
-              exercise: loaded.exercise,
-              item: loaded.item,
-              attempts:
-                  initialState?.practiceMeta?.[q.id]?.attempts ??
-                  base?.attempts ??
-                  0,
-              ok: initialState?.practiceMeta?.[q.id]?.ok ?? base?.ok ?? null,
-              maxAttempts: loaded.maxAttempts ?? base?.maxAttempts ?? null,
-              helpPolicy:
-                  loaded.helpPolicy ?? base?.helpPolicy ?? DEFAULT_PRACTICE_HELP_POLICY,
-            },
-          };
-        });
-      } catch (e: any) {
-        if (cancelled) return;
-
-        setPractice((prev) => ({
-          ...prev,
-          [q.id]: {
-            ...prev[q.id],
-            loading: false,
-            error: e?.message ?? "Failed to load practice exercise.",
-            busy: false,
+            exercise: force ? null : prev[q.id]?.exercise ?? null,
+            item: force ? null : prev[q.id]?.item ?? null,
+            attempts: initMeta?.attempts ?? prev[q.id]?.attempts ?? 0,
+            ok: initMeta?.ok ?? prev[q.id]?.ok ?? null,
+            maxAttempts: prev[q.id]?.maxAttempts ?? fallbackMax,
+            helpPolicy:
+                prev[q.id]?.helpPolicy ?? DEFAULT_PRACTICE_HELP_POLICY,
           },
         }));
-      }
-    }
+
+        try {
+          const loaded = await withTimeout(
+              fetchResolvedPracticeItem({
+                request: {
+                  subject: (q as any).fetch.subject,
+                  module: (q as any).fetch.module,
+                  section: (q as any).fetch.section,
+                  topic: (q as any).fetch.topic
+                      ? String((q as any).fetch.topic)
+                      : "",
+                  difficulty: (q as any).fetch.difficulty,
+                  allowReveal: (q as any).fetch.allowReveal ? true : undefined,
+                  preferKind: (q as any).fetch.preferKind ?? undefined,
+                  salt: (q as any).fetch.salt ?? undefined,
+                  preferPurpose: "mixed",
+                  purposePolicy: "fallback",
+                  exerciseKey: (q as any).fetch.exerciseKey ?? undefined,
+                  seedPolicy: (q as any).fetch.seedPolicy ?? undefined,
+                },
+                resolvers: {
+                  raw: (k) => rawKeyRef.current(k),
+                  resolveText: (value) => resolveTextRef.current(value),
+                },
+                savedPatch: initialState?.practiceItemPatch?.[q.id] ?? null,
+                transformItem: (baseItem, resolvedEx) => {
+                  const mode = (spec as any).mode ?? "quiz";
+                  const carryFromPrev =
+                      mode === "project" && Boolean((q as any).carryFromPrev);
+
+                  if (!carryFromPrev || (resolvedEx as any).kind !== "code_input") {
+                    return baseItem;
+                  }
+
+                  const idx = questions.findIndex((qq) => qq.id === q.id);
+                  const prevQ = idx > 0 ? questions[idx - 1] : null;
+
+                  const rawCurrentPatch = initialState?.practiceItemPatch?.[q.id];
+                  const currentPatch = rawCurrentPatch
+                      ? resolveDeepTagged(rawCurrentPatch, (k) => rawKeyRef.current(k))
+                      : null;
+
+                  const current = extractCodeLike(currentPatch);
+
+                  let prevSource: any = null;
+                  if (prevQ) {
+                    const livePrevItem = practiceRef.current?.[prevQ.id]?.item;
+                    const rawPrevSource =
+                        livePrevItem ?? initialState?.practiceItemPatch?.[prevQ.id] ?? null;
+
+                    prevSource = rawPrevSource
+                        ? resolveDeepTagged(rawPrevSource, (k) => rawKeyRef.current(k))
+                        : null;
+                  }
+
+                  const prev = extractCodeLike(prevSource);
+
+                  if (!current.code && prev.code) {
+                    return {
+                      ...baseItem,
+                      code: prev.code,
+                      codeStdin: prev.stdin ?? (baseItem as any).codeStdin ?? "",
+                      codeLang: (prev.language as any) ?? (baseItem as any).codeLang,
+                      stdin: prev.stdin ?? (baseItem as any).stdin ?? "",
+                    };
+                  }
+
+                  return baseItem;
+                },
+              }),
+              LOAD_TIMEOUT_MS,
+              "Exercise took too long to load. Please retry.",
+          );
+
+          if (cancelledRef?.current) return;
+          if (loadTokenRef.current[q.id] !== token) return;
+
+          setPractice((prev) => {
+            const base = prev[q.id];
+            if (!base) return prev;
+
+            return {
+              ...prev,
+              [q.id]: {
+                ...base,
+                loading: false,
+                error: null,
+                exercise: loaded.exercise,
+                item: loaded.item,
+                attempts:
+                    initialState?.practiceMeta?.[q.id]?.attempts ??
+                    base.attempts ??
+                    0,
+                ok: initialState?.practiceMeta?.[q.id]?.ok ?? base.ok ?? null,
+                maxAttempts: loaded.maxAttempts ?? base.maxAttempts ?? null,
+                helpPolicy:
+                    loaded.helpPolicy ??
+                    base.helpPolicy ??
+                    DEFAULT_PRACTICE_HELP_POLICY,
+              },
+            };
+          });
+        } catch (e: any) {
+          if (cancelledRef?.current) return;
+          if (loadTokenRef.current[q.id] !== token) return;
+
+          setPractice((prev) => ({
+            ...prev,
+            [q.id]: {
+              ...prev[q.id],
+              loading: false,
+              busy: false,
+              exercise: null,
+              item: null,
+              error: e?.message ?? "Failed to load practice exercise.",
+            },
+          }));
+        }
+      },
+      [initialState, questions, spec, specMaxAttempts, unlimitedAttempts],
+  );
+
+  useEffect(() => {
+    if (!questions.length) return;
+
+    const cancelledRef = { current: false };
 
     for (const q of questions) {
-      void ensurePracticeQuestion(q);
+      if (q.kind !== "practice") continue;
+      void loadPracticeQuestion(q, { cancelledRef });
     }
 
     return () => {
-      cancelled = true;
+      cancelledRef.current = true;
     };
-  }, [
-    questions,
-    unlimitedAttempts,
-    specMaxAttempts,
-    resetKey,
-    initialState,
-    spec,
-  ]);
+  }, [questions, loadPracticeQuestion, resetKey]);
+
+  const retryPracticeQuestion = useCallback(
+      async (qid: string) => {
+        const q = questions.find(
+            (qq): qq is Extract<ReviewQuestion, { kind: "practice" }> =>
+                qq.kind === "practice" && qq.id === qid,
+        );
+        if (!q) return;
+        await loadPracticeQuestion(q, { force: true });
+      },
+      [questions, loadPracticeQuestion],
+  );
 
   const updatePracticeItem = useCallback((qid: string, patch: Partial<QItem>) => {
     const pr = padRefs.current[qid];
@@ -319,7 +369,8 @@ export function useQuizPracticeBank(args: {
                 busy: false,
                 attempts: nextAttempts,
                 ok: submitted.ok,
-                maxAttempts: submitted.serverMaxAttempts ?? prev[q.id].maxAttempts ?? null,
+                maxAttempts:
+                    submitted.serverMaxAttempts ?? prev[q.id].maxAttempts ?? null,
                 item: {
                   ...prev[q.id].item!,
                   ...(submitted.statePatch ?? {}),
@@ -489,5 +540,6 @@ export function useQuizPracticeBank(args: {
     submitPractice,
     openPracticeHelp,
     isPracticeChecked,
+    retryPracticeQuestion,
   };
 }

@@ -641,6 +641,7 @@ export default function QuizBlock({
                         seqOrder={orderBase + idx}
                         padRef={practiceBank.getPadRef(q.id) as any}
                         excused={isExcused(q.id)}
+                        onRetryExercise={() => practiceBank.retryPracticeQuestion(q.id)}
                         onExcused={() => {
                           if (!unlocked) return;
                           const ps0 = practiceBank.practice[q.id];

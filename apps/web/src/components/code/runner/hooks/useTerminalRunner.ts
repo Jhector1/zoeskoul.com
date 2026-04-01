@@ -24,9 +24,7 @@ function needsMoreInput(lang: CodeLanguage, r: RunResult) {
     return false;
 }
 
-function readAbortKind(
-    ref: React.MutableRefObject<AbortKind>,
-): AbortKind {
+function readAbortKind(ref: React.MutableRefObject<AbortKind>): AbortKind {
     return ref.current;
 }
 
@@ -45,11 +43,7 @@ function isAbortLike(err: unknown, signal?: AbortSignal) {
     if (err instanceof DOMException && err.name === "AbortError") return true;
 
     const message =
-        err instanceof Error
-            ? err.message
-            : typeof err === "string"
-                ? err
-                : "";
+        err instanceof Error ? err.message : typeof err === "string" ? err : "";
 
     return /abort|aborted|cancel|cancelled/i.test(message);
 }
@@ -165,6 +159,7 @@ type AbortKind = "none" | "silent" | "user";
 export function useTerminalRunner(args: {
     lang: CodeLanguage;
     code: string;
+    stdin?: string;
     sqlDialect?: SqlDialect;
     sqlSchemaSql?: string;
     sqlSeedSql?: string;
@@ -178,6 +173,7 @@ export function useTerminalRunner(args: {
     const {
         lang,
         code,
+        stdin,
         sqlDialect,
         sqlSchemaSql,
         sqlSeedSql,
@@ -240,6 +236,17 @@ export function useTerminalRunner(args: {
             prompts: normalizePromptList(raw.prompts),
         };
     }, [lang, code]);
+
+    const normalizedSeedStdin = React.useMemo(() => {
+        const raw = String(stdin ?? "").replace(/\r\n/g, "\n");
+        if (!raw) return "";
+        return raw.endsWith("\n") ? raw : `${raw}\n`;
+    }, [stdin]);
+
+    const seedStdinLines = React.useMemo(() => {
+        const body = normalizedSeedStdin.replace(/\n$/, "");
+        return body ? body.split("\n") : [];
+    }, [normalizedSeedStdin]);
 
     const isSql = lang === "sql";
     const resolvedSqlDialect = sqlDialect ?? "sqlite";
@@ -330,6 +337,34 @@ export function useTerminalRunner(args: {
         probeStdoutRef.current = "";
         terminalRef.current = [];
     }, [abortActiveRun, clearInputUi]);
+
+    const buildCompletedRunLines = React.useCallback(
+        (r: RunResult, echoedInput: string[] = []): TermLine[] => {
+            const lines: TermLine[] = [];
+
+            for (const value of echoedInput) {
+                lines.push({ type: "in", text: value });
+            }
+
+            lines.push(...toOutTermLines(cleanTermText(r.stdout ?? "")));
+
+            if (r.compile_output) {
+                lines.push({ type: "err", text: cleanTermText(r.compile_output) });
+            }
+            if (r.stderr) {
+                lines.push({ type: "err", text: cleanTermText(r.stderr) });
+            }
+            if (r.message) {
+                lines.push({ type: "err", text: cleanTermText(r.message) });
+            }
+            if (r.error && !isCanceledResult(r)) {
+                lines.push({ type: "err", text: cleanTermText(r.error) });
+            }
+
+            return lines;
+        },
+        [],
+    );
 
     const runOnce = React.useCallback(
         async (stdinToUse: string): Promise<RunResult | null> => {
@@ -614,6 +649,34 @@ export function useTerminalRunner(args: {
                 return;
             }
 
+            if (normalizedSeedStdin) {
+                clearInputUi();
+                setTypedLines(seedStdinLines);
+                setStdinBuffer(normalizedSeedStdin);
+                probeStdoutRef.current = "";
+
+                replaceRunLines(
+                    runId,
+                    seedStdinLines.map((value) => ({ type: "in" as const, text: value })),
+                );
+
+                const r = await runOnce(normalizedSeedStdin);
+                if (!r) {
+                    clearInputUi();
+                    setRunState("idle");
+                    return;
+                }
+                if (isCanceledResult(r)) {
+                    clearInputUi();
+                    setRunState("idle");
+                    return;
+                }
+
+                replaceRunLines(runId, buildCompletedRunLines(r, seedStdinLines));
+                setRunState("idle");
+                return;
+            }
+
             const expectsInput = inputPlan.expected > 0;
             const probeSafe = lang === "python" || lang === "java";
 
@@ -658,9 +721,7 @@ export function useTerminalRunner(args: {
             }
 
             const preOut = extractPreOutputForCCpp(lang, code, inputPlan.prompts);
-            const firstPrompt = inputPlan.prompts[0]
-                ? prettyPrompt(inputPlan.prompts[0])
-                : "";
+            const firstPrompt = inputPlan.prompts[0] ? prettyPrompt(inputPlan.prompts[0]) : "";
 
             setAwaitingInput(true);
             setInputPrompt(firstPrompt);
@@ -691,6 +752,9 @@ export function useTerminalRunner(args: {
         replaceRunLines,
         rebuildInteractiveTranscript,
         appendErrLine,
+        normalizedSeedStdin,
+        seedStdinLines,
+        buildCompletedRunLines,
     ]);
 
     const submitInput = React.useCallback(async () => {
