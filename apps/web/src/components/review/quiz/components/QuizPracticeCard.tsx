@@ -52,7 +52,6 @@ export default function QuizPracticeCard(props: {
     onUpdateItem,
     onSubmit,
     onHelp,
-      onRetryExercise,
   } = props;
 
   const tools = useReviewTools();
@@ -178,8 +177,14 @@ export default function QuizPracticeCard(props: {
 
   const maxForRenderer = ps?.maxAttempts ?? Number.POSITIVE_INFINITY;
 
+  const hasExercise = Boolean(ex && ps?.item);
+  const isInitialLoading = Boolean(ps?.loading && !hasExercise && !ps?.error);
+  const isRefreshing = Boolean(ps?.loading && hasExercise);
+  const hasBlockingError = Boolean(ps?.error && !hasExercise);
+  const hasInlineError = Boolean(ps?.error && hasExercise);
+
   return (
-      <div className={[" p-2", !unlocked ? "opacity-70" : ""].join(" ")}>
+      <div className={["p-2", !unlocked ? "opacity-70" : ""].join(" ")}>
         {!unlocked ? (
             <div className="ui-quiz-hint">
               {ui.t(
@@ -190,13 +195,13 @@ export default function QuizPracticeCard(props: {
             </div>
         ) : null}
 
-        {ps?.loading ? (
+        {isInitialLoading ? (
             <div className="mt-2 ui-quiz-status-soft flex items-center gap-2">
               <span>{ui.t("practice.loadingExercise", {}, "Loading exercise…")}</span>
             </div>
-        ) : ps?.error ? (
+        ) : hasBlockingError ? (
             <div className="ui-quiz-note-danger">
-              <div>{ps.error}</div>
+              <div>{ps?.error}</div>
 
               <div className="mt-2 flex flex-wrap gap-2">
                 {props.onRetryExercise ? (
@@ -226,6 +231,30 @@ export default function QuizPracticeCard(props: {
             </div>
         ) : ex && ps?.item ? (
             <div className="mt-1">
+              {isRefreshing ? (
+                  <div className="mb-2 ui-quiz-status-soft flex items-center gap-2">
+                    <span>{ui.t("practice.refreshing", {}, "Refreshing…")}</span>
+                  </div>
+              ) : null}
+
+              {hasInlineError ? (
+                  <div className="mb-2 ui-quiz-note-danger">
+                    <div>{ps?.error}</div>
+
+                    <div className="mt-2 flex flex-wrap gap-2">
+                      {props.onRetryExercise ? (
+                          <button
+                              type="button"
+                              onClick={props.onRetryExercise}
+                              className="ui-quiz-action ui-quiz-action--ghost"
+                          >
+                            Retry
+                          </button>
+                      ) : null}
+                    </div>
+                  </div>
+              ) : null}
+
               <div className="mt-2">
                 <ExerciseRenderer
                     exercise={ex}

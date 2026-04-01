@@ -123,21 +123,25 @@ export function useQuizPracticeBank(args: {
             ? null
             : coerceMaxAttempts((q as any).maxAttempts ?? specMaxAttempts ?? null);
 
-        setPractice((prev) => ({
-          ...prev,
-          [q.id]: {
-            loading: true,
-            error: null,
-            busy: false,
-            exercise: force ? null : prev[q.id]?.exercise ?? null,
-            item: force ? null : prev[q.id]?.item ?? null,
-            attempts: initMeta?.attempts ?? prev[q.id]?.attempts ?? 0,
-            ok: initMeta?.ok ?? prev[q.id]?.ok ?? null,
-            maxAttempts: prev[q.id]?.maxAttempts ?? fallbackMax,
-            helpPolicy:
-                prev[q.id]?.helpPolicy ?? DEFAULT_PRACTICE_HELP_POLICY,
-          },
-        }));
+        setPractice((prev) => {
+          const prevState = prev[q.id];
+          return {
+            ...prev,
+            [q.id]: {
+              loading: true,
+              error: null,
+              busy: false,
+              // keep current content while refreshing
+              exercise: prevState?.exercise ?? null,
+              item: prevState?.item ?? null,
+              attempts: initMeta?.attempts ?? prevState?.attempts ?? 0,
+              ok: initMeta?.ok ?? prevState?.ok ?? null,
+              maxAttempts: prevState?.maxAttempts ?? fallbackMax,
+              helpPolicy:
+                  prevState?.helpPolicy ?? DEFAULT_PRACTICE_HELP_POLICY,
+            },
+          };
+        });
 
         try {
           const loaded = await withTimeout(
@@ -244,17 +248,21 @@ export function useQuizPracticeBank(args: {
           if (cancelledRef?.current) return;
           if (loadTokenRef.current[q.id] !== token) return;
 
-          setPractice((prev) => ({
-            ...prev,
-            [q.id]: {
-              ...prev[q.id],
-              loading: false,
-              busy: false,
-              exercise: null,
-              item: null,
-              error: e?.message ?? "Failed to load practice exercise.",
-            },
-          }));
+          setPractice((prev) => {
+            const current = prev[q.id];
+            if (!current) return prev;
+
+            return {
+              ...prev,
+              [q.id]: {
+                ...current,
+                loading: false,
+                busy: false,
+                // keep old content if refresh fails
+                error: e?.message ?? "Failed to load practice exercise.",
+              },
+            };
+          });
         }
       },
       [initialState, questions, spec, specMaxAttempts, unlimitedAttempts],
