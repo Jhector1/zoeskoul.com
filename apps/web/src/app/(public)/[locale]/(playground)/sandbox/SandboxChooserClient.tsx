@@ -62,7 +62,7 @@ export default function SandboxChooserClient({ locale }: { locale: string }) {
             },
             {
                 slug: "sql",
-                title: "SQL Playground",
+                title: "SQL Sandbox",
                 description:
                     "Write queries, learn joins and aggregations, and test answers.",
                 icon: <Database className="h-4 w-4" />,
