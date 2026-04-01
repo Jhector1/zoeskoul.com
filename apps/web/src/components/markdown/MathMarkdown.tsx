@@ -52,7 +52,6 @@ function CheckIcon(props: React.SVGProps<SVGSVGElement>) {
         </svg>
     );
 }
-
 function PreWithCopy({
                          children,
                          className,
@@ -87,21 +86,29 @@ function PreWithCopy({
         }
     }
 
+    const frameClass = join(
+        "relative my-3 w-full overflow-hidden rounded-md border",
+        "border-white/10 bg-[#020817]",
+    );
+
     const preClass = join(
-        "overflow-x-auto rounded-md border p-3 pt-10 text-xs leading-relaxed font-mono",
-        "ui-border ui-bg-surface-2 ui-text",
-        "[&_.hljs]:bg-transparent [&_.hljs]:p-0 [&_.hljs]:m-0",
+        "m-0 overflow-x-auto bg-transparent p-4 pr-14 text-xs leading-relaxed font-mono text-white",
+        "rounded-none border-0",
+        "[&>code]:block [&>code]:min-w-full",
+        "[&>code]:!bg-transparent [&>code]:!p-0 [&>code]:!m-0",
+        "[&>code.hljs]:!bg-transparent [&>code.hljs]:!p-0 [&>code.hljs]:!m-0",
         className,
     );
 
     const copyBtnClass = join(
-        "absolute z-10 top-2 right-2 inline-flex h-8 w-8 items-center justify-center rounded-md border transition-colors",
-        "ui-border ui-bg-surface ui-text-muted hover:ui-bg-hover hover:ui-text",
-        "focus:outline-none focus:ring-2 focus:ring-[rgb(var(--ui-ring)/0.35)]",
+        "absolute right-3 top-3 z-10 inline-flex h-9 w-9 items-center justify-center rounded-md",
+        "border border-white/10 bg-white/5 text-white/70 transition-colors",
+        "hover:bg-white/10 hover:text-white",
+        "focus:outline-none focus:ring-2 focus:ring-white/20",
     );
 
     return (
-        <div className="relative z-0 my-3 w-full">
+        <div className={frameClass}>
             <button
                 type="button"
                 onClick={onCopy}
@@ -208,7 +215,7 @@ export default function MathMarkdown({ content, className, inline = false }: Pro
                         inline ? (
                             <>{children}</>
                         ) : (
-                            <p className="my-2 text-sm leading-relaxed ui-text-muted">
+                            <p className="my-2 text-sm  leading-relaxed ui-text-muted">
                                 {children}
                             </p>
                         ),

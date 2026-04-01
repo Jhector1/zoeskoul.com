@@ -105,7 +105,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         stdin: controlledStdin,
         initialStdin,
         onChangeStdin,
-        showStdinEditor = true,
+        showStdinEditor = false,
         stdinPlaceholder = "Type stdin here. Each new line becomes one input line.",
     } = props as any;
 
