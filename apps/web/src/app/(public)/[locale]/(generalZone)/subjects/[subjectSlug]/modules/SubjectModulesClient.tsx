@@ -457,10 +457,7 @@ export default function SubjectModulesClient(props: Props) {
 
                             const hasAnyProgress = (mp?.completedTopicKeys?.size ?? 0) > 0 || doneTopics > 0;
 
-                            const moduleHref = `/${encodeURIComponent(locale)}/${ROUTES.moduleIntro(
-                                encodeURIComponent(subjectSlug),
-                                encodeURIComponent(m.slug),
-                            )}`;
+                            const moduleHref = hasAnyProgress?ROUTES.learningPath(subjectSlug, m.slug): ROUTES.moduleIntro(subjectSlug, m.slug);
 
                             const modulesListPath = `/${encodeURIComponent(locale)}/subjects/${encodeURIComponent(subjectSlug)}/modules`;
 

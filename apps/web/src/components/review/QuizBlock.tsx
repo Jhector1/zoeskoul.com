@@ -628,7 +628,7 @@ export default function QuizBlock({
           const isLast = nextIdx < 0;
 
           return (
-              <div key={q.id} ref={setQuestionEl(q.id)} data-qid={q.id}>
+              <div className={"ui-page-surface"} key={q.id} ref={setQuestionEl(q.id)} data-qid={q.id}>
                 {q.kind === "practice" ? (
                     <QuizPracticeCard
                         q={q}

@@ -23,7 +23,7 @@ export function SketchShell({
   footer?: React.ReactNode;
 }) {
   return (
-      <div className="w-full ui-surface-muted">
+      <div className="w-full ui-surface-muted border-none rounded-none">
         <div className={cn("grid gap-3", rightMarkdown ? "md:grid-cols-[1fr_320px]" : "grid-cols-1")}>
           <div className={cn(SKETCH_PANEL, toneCls(tone))}>
             {title || subtitle ? (

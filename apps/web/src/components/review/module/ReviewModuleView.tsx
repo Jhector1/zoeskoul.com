@@ -830,6 +830,14 @@ export default function ReviewModuleView({
         findCurrentActivityCardId,
         scrollToCardId,
     ]);
+    const handleBack = useCallback(() => {
+        if (typeof window !== "undefined" && window.history.length > 1) {
+            router.back();
+            return;
+        }
+
+        router.push(`/${locale}`);
+    }, [router, locale]);
     const footerPad = footerInsetPx ? footerInsetPx + 12 : 0;
     const padStyle = {
         paddingBottom:  undefined,
@@ -935,6 +943,14 @@ export default function ReviewModuleView({
                                 <HeaderSlick
                                     slot={
                                         <div className="inline-flex items-center gap-2 whitespace-nowrap [&>button]:shrink-0">
+                                            <button
+                                                type="button"
+                                                onClick={handleBack}
+                                                className="ui-btn ui-btn-secondary text-xs font-extrabold whitespace-nowrap"
+                                                title="Go back"
+                                            >
+                                                ← Back
+                                            </button>
                                             {/* Topics */}
                                             <button
                                                 type="button"
