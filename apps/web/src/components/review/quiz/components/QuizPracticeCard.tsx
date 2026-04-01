@@ -55,7 +55,6 @@ export default function QuizPracticeCard(props: {
   } = props;
 
   const tools = useReviewTools();
-
   const excused = Boolean(props.excused);
 
   const ui = useTaggedT("reviewQuizUi");
@@ -68,7 +67,8 @@ export default function QuizPracticeCard(props: {
 
   const toolsEnabled = Boolean(tools?.enabled);
   const isCodeInput = ex?.kind === "code_input";
-  const codeRunnerMode: "embedded" | "tools" = toolsEnabled && isCodeInput ? "tools" : "embedded";
+  const codeRunnerMode: "embedded" | "tools" =
+      toolsEnabled && isCodeInput ? "tools" : "embedded";
 
   const codeTools = toolsEnabled && isCodeInput ? (tools as any) : null;
   const codeInputId = toolsEnabled && isCodeInput ? q.id : undefined;
@@ -103,7 +103,8 @@ export default function QuizPracticeCard(props: {
     if (ex.kind !== "code_input") return;
     if (!ps) return;
 
-    const doneForFlow = ps.ok === true || excused || (!strictSequential && attemptsCapped);
+    const doneForFlow =
+        ps.ok === true || excused || (!strictSequential && attemptsCapped);
     const eligible = unlocked && !locked && !isCompleted && !excused;
 
     tools.setCodeInputMeta(q.id, {
@@ -160,7 +161,10 @@ export default function QuizPracticeCard(props: {
       ps?.ok === true ||
       !nextHelpStepKey;
 
-  const disableSkip = !unlocked || isCompleted || locked || excused || ps?.ok === true;
+  const disableSkip =
+      !unlocked || isCompleted || locked || excused || ps?.ok === true;
+
+  const hasOpenedHelp = Boolean(ps?.item?.help?.openedStepKeys?.length);
 
   const btnLabel = ps?.busy ? (
       <span className="inline-flex items-center gap-2">
@@ -177,7 +181,11 @@ export default function QuizPracticeCard(props: {
       <div className={["ui-surface p-2", !unlocked ? "opacity-70" : ""].join(" ")}>
         {!unlocked ? (
             <div className="ui-quiz-hint">
-              {ui.t("unlockHint", {}, "Answer the previous question correctly to unlock this one.")}
+              {ui.t(
+                  "unlockHint",
+                  {},
+                  "Answer the previous question correctly to unlock this one.",
+              )}
             </div>
         ) : null}
 
@@ -222,7 +230,7 @@ export default function QuizPracticeCard(props: {
               </div>
 
               <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between sm:gap-3">
-                <div className="flex items-center gap-2 flex-wrap">
+                <div className="flex flex-wrap items-center gap-2">
                   <button
                       type="button"
                       onClick={onSubmit}
@@ -236,17 +244,19 @@ export default function QuizPracticeCard(props: {
                     {btnLabel}
                   </button>
 
-                  <button
-                      type="button"
-                      onClick={() => onHelp(nextHelpStepKey ?? undefined)}
-                      disabled={disableHelp}
-                      className={[
-                        "ui-quiz-action",
-                        disableHelp ? "ui-quiz-action--disabled" : "ui-quiz-action--ghost",
-                      ].join(" ")}
-                  >
-                    {nextHelpLabel ?? ui.t("buttons.help", {}, "Help")}
-                  </button>
+                  {!hasOpenedHelp ? (
+                      <button
+                          type="button"
+                          onClick={() => onHelp(nextHelpStepKey ?? undefined)}
+                          disabled={disableHelp}
+                          className={[
+                            "ui-quiz-action",
+                            disableHelp ? "ui-quiz-action--disabled" : "ui-quiz-action--ghost",
+                          ].join(" ")}
+                      >
+                        {nextHelpLabel ?? ui.t("buttons.help", {}, "Help")}
+                      </button>
+                  ) : null}
                 </div>
 
                 <div className="ui-quiz-checkrow-status">
@@ -259,9 +269,13 @@ export default function QuizPracticeCard(props: {
               </span>
 
                   {ps.ok === true ? (
-                      <span className="ml-2 whitespace-nowrap ui-quiz-status-good">✓ Correct</span>
+                      <span className="ml-2 whitespace-nowrap ui-quiz-status-good">
+                  ✓ Correct
+                </span>
                   ) : ps.ok === false && ps.item?.result ? (
-                      <span className="ml-2 whitespace-nowrap ui-quiz-status-danger">✕ Not correct</span>
+                      <span className="ml-2 whitespace-nowrap ui-quiz-status-danger">
+                  ✕ Not correct
+                </span>
                   ) : null}
                 </div>
               </div>
@@ -270,7 +284,9 @@ export default function QuizPracticeCard(props: {
                   exercise={ex}
                   current={ps.item}
                   help={ps.item.help}
+                  helpPolicy={ps.helpPolicy}
                   updateCurrent={updateItemSafe}
+                  onOpenHelp={onHelp}
               />
             </div>
         ) : (

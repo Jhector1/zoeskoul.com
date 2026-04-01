@@ -58,12 +58,14 @@ export default function RevealAnswerCard({
                                              reveal,
                                              title = "Revealed answer",
                                              updateCurrent,
+                                             autoScroll = true,
                                          }: {
     exercise: Exercise | null;
     current: QItem;
     reveal: any;
     title?: string;
     updateCurrent: (patch: Partial<QItem>) => void;
+    autoScroll?: boolean;
 }) {
     const [copied, setCopied] = useState(false);
     const rootRef = useRef<HTMLDivElement | null>(null);
@@ -375,7 +377,9 @@ export default function RevealAnswerCard({
     }, [reveal, exT, exercise, current.codeLang]);
 
     useEffect(() => {
+        if (!autoScroll) return;
         if (!model) return;
+
         const el = rootRef.current;
         if (!el) return;
 
@@ -386,7 +390,7 @@ export default function RevealAnswerCard({
                 offsetPx: 12,
             });
         });
-    }, [model]);
+    }, [autoScroll, model]);
 
     if (!model) return null;
     const m = model;
