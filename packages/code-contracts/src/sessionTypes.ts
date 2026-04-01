@@ -6,7 +6,9 @@ export type CodeLanguage =
     | "c"
     | "cpp"
     | "sql";
-export type InteractiveLanguage = Exclude<CodeLanguage, "sql">;
+
+export type InteractiveLanguage= Exclude<CodeLanguage, "sql">;
+
 export type FileEntry = {
     path: string;
     content: string;

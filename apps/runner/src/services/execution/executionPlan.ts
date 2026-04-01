@@ -1,24 +1,40 @@
-import type { InteractiveLanguage } from "@zoeskoul/code-contracts";
+import type { InteractiveLanguage, FileEntry } from "@zoeskoul/code-contracts";
 
 export type ExecutionPlan = {
     compileCmd?: string;
     runCmd: string;
 };
 
+function getJavaMainClass(files: FileEntry[], entryFile: string): string {
+    const normalizedEntry = entryFile.replace(/\\/g, "/");
+    const simpleName =
+        normalizedEntry.split("/").pop()?.replace(/\.java$/, "") || "Main";
+
+    const entrySource =
+        files.find((f) => f.path.replace(/\\/g, "/") === normalizedEntry)?.content ?? "";
+
+    const pkgMatch = entrySource.match(
+        /^\s*package\s+([A-Za-z_]\w*(?:\.[A-Za-z_]\w*)*)\s*;/m,
+    );
+
+    if (pkgMatch?.[1]) {
+        return `${pkgMatch[1]}.${simpleName}`;
+    }
+
+    return simpleName;
+}
+
 export function getExecutionPlan(
     language: InteractiveLanguage,
     entryFile: string,
+    files: FileEntry[] = [],
 ): ExecutionPlan {
     switch (language) {
         case "python":
-            return {
-                runCmd: `python3 -u '${entryFile}'`,
-            };
+            return { runCmd: `python3 -u '${entryFile}'` };
 
         case "javascript":
-            return {
-                runCmd: `node '${entryFile}'`,
-            };
+            return { runCmd: `node '${entryFile}'` };
 
         case "c":
             return {
@@ -47,11 +63,7 @@ export function getExecutionPlan(
             };
 
         case "java": {
-            const mainClass = entryFile
-                .replace(/\\/g, "/")
-                .replace(/\.java$/, "")
-                .split("/")
-                .join(".");
+            const mainClass = getJavaMainClass(files, entryFile);
 
             return {
                 compileCmd: [
@@ -61,7 +73,7 @@ export function getExecutionPlan(
                     `[ -n "$SRCS" ]`,
                     `javac -d build $SRCS`,
                 ].join(" && "),
-                runCmd: `java -cp build '${mainClass}'`,
+                runCmd: `java -cp build ${mainClass}`,
             };
         }
     }

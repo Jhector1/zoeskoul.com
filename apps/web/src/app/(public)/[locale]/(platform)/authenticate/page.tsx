@@ -180,7 +180,7 @@ export default function AuthenticatePage() {
                     </section>
 
                     <div className="ui-meta mt-6 text-center">
-                        {t("notes.trouble")} {t("notes.support")}
+                        {t("notes.trouble")} <Link href={"/contact"}>{t("notes.support")}</Link>
                     </div>
                 </div>
             </div>
