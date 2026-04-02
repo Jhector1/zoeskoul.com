@@ -21,6 +21,7 @@ export default function PracticeHelpPanel({
                                               helpPolicy,
                                               updateCurrent,
                                               onOpenHelp,
+                                              codeInputId,
                                           }: {
     exercise: Exercise | null;
     current: QItem;
@@ -28,6 +29,7 @@ export default function PracticeHelpPanel({
     helpPolicy?: PracticeHelpPolicy | null;
     updateCurrent: (patch: Partial<QItem>) => void;
     onOpenHelp?: (stepKey?: string) => void;
+    codeInputId?: string;
 }) {
     const tt = useTaggedT();
     const cardRefs = useRef<Record<string, HTMLDivElement | null>>({});
@@ -118,6 +120,7 @@ export default function PracticeHelpPanel({
                                     reveal={entry.reveal}
                                     updateCurrent={updateCurrent}
                                     autoScroll={false}
+                                    codeInputId={codeInputId}
                                 />
                             </div>
                         ) : null}

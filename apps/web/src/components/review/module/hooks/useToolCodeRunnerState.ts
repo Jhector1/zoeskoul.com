@@ -221,14 +221,8 @@ export function useToolCodeRunnerState(args: {
             sqlDialect?: SqlDialect;
             onPatch: (patch: any) => void;
         }) => {
-            const wasSameId = boundRef.current?.id === args2.id;
-
             boundRef.current = { id: args2.id, onPatch: args2.onPatch };
             setBoundId((prev) => (prev === args2.id ? prev : args2.id));
-
-            if (wasSameId && boundDirtyRef.current) return;
-
-            boundDirtyRef.current = false;
 
             const nextSnap: ToolSnap = {
                 lang: args2.lang,
@@ -237,6 +231,8 @@ export function useToolCodeRunnerState(args: {
                 sqlDialect: args2.sqlDialect ?? defaultSqlDialect,
             };
 
+            // incoming bind payload is authoritative
+            boundDirtyRef.current = false;
             latestSnapRef.current = nextSnap;
 
             setToolLang0((prev) => (prev === nextSnap.lang ? prev : nextSnap.lang));

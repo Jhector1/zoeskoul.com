@@ -3,7 +3,7 @@
 import React, { useMemo } from "react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-import { CheckCircle2, Lock, Sparkles } from "lucide-react";
+import { ArrowLeft, CheckCircle2, Lock, Sparkles } from "lucide-react";
 
 import { cn } from "@/lib/cn";
 import { useReviewProgressMany } from "@/components/review/module/hooks/useReviewProgressMany";
@@ -59,8 +59,7 @@ function clamp01(n: number) {
 }
 
 function countMatches(topicKeys: string[], completed?: Set<string> | null) {
-    if (!topicKeys.length) return 0;
-    if (!completed || completed.size === 0) return 0;
+    if (!topicKeys.length || !completed?.size) return 0;
 
     let n = 0;
     for (const k of topicKeys) {
@@ -69,91 +68,105 @@ function countMatches(topicKeys: string[], completed?: Set<string> | null) {
     return n;
 }
 
-function Kicker({ children }: { children: React.ReactNode }) {
-    return <div className="ui-kicker">{children}</div>;
-}
-
 function Surface({
                      children,
                      className,
+                     tone = "default",
                  }: {
     children: React.ReactNode;
     className?: string;
-}) {
-    return <div className={cn("ui-page-surface", className)}>{children}</div>;
-}
-
-function Pill({
-                  variant,
-                  children,
-              }: {
-    variant: "good" | "neutral" | "warn";
-    children: React.ReactNode;
+    tone?: "default" | "page" | "muted";
 }) {
     return (
-        <span
+        <div
             className={cn(
-                variant === "good" && "ui-pill-good",
-                variant === "neutral" && "ui-pill-neutral",
-                variant === "warn" && "ui-pill-warn",
+                tone === "page"
+                    ? "ui-page-surface"
+                    : tone === "muted"
+                        ? "ui-surface-muted"
+                        : "ui-surface",
+                className,
             )}
         >
-      {children}
-    </span>
+            {children}
+        </div>
     );
 }
 
-function StatCard({
-                      label,
-                      value,
-                      subvalue,
-                  }: {
-    label: React.ReactNode;
-    value: React.ReactNode;
-    subvalue?: React.ReactNode;
+function StatusPill({
+                        tone,
+                        children,
+                    }: {
+    tone: "neutral" | "good" | "warn" | "info" | "danger";
+    children: React.ReactNode;
+}) {
+    const cls =
+        tone === "good"
+            ? "ui-pill-good"
+            : tone === "warn"
+                ? "ui-pill-warn"
+                : tone === "info"
+                    ? "ui-pill-info"
+                    : tone === "danger"
+                        ? "ui-pill-danger"
+                        : "ui-pill-neutral";
+
+    return <span className={cls}>{children}</span>;
+}
+
+function ProgressBar({ pct }: { pct: number }) {
+    const safePct = clamp01(pct);
+
+    return (
+        <div className="ui-progress-track h-1.5">
+            <div
+                className="ui-progress-fill"
+                style={{ width: `${Math.round(safePct * 100)}%` }}
+            />
+        </div>
+    );
+}
+
+function ActionLink({
+                        href,
+                        children,
+                        variant = "primary",
+                        fullWidth = false,
+                    }: {
+    href: string;
+    children: React.ReactNode;
+    variant?: "primary" | "secondary" | "premium";
+    fullWidth?: boolean;
+}) {
+    const cls =
+        variant === "premium"
+            ? "ui-btn-premium"
+            : variant === "secondary"
+                ? "ui-btn-secondary"
+                : "ui-btn-primary";
+
+    return (
+        <Link href={href} className={cn(cls, fullWidth && "w-full sm:w-auto")}>
+            <span>{children}</span>
+        </Link>
+    );
+}
+
+function DisabledAction({
+                            children,
+                            fullWidth = false,
+                        }: {
+    children: React.ReactNode;
+    fullWidth?: boolean;
 }) {
     return (
-        <div className="ui-stat-card ui-surface">
-            <div className="text-[10px] font-medium uppercase tracking-[0.12em] text-neutral-500 dark:text-white/40">
-                {label}
-            </div>
-            <div className="mt-1 text-base font-semibold tracking-tight tabular-nums text-neutral-900 dark:text-white/90">
-                {value}
-            </div>
-            {subvalue ? (
-                <div className="mt-1 text-[11px] font-medium text-neutral-500 dark:text-white/50">
-                    {subvalue}
-                </div>
-            ) : null}
-        </div>
+        <span className={cn("ui-btn-disabled", fullWidth && "w-full sm:w-auto")}>
+            <span>{children}</span>
+        </span>
     );
 }
 
-function ProgressBar({ pct, label }: { pct: number; label?: React.ReactNode }) {
-    const safePct = clamp01(pct);
-    const w = `${Math.round(safePct * 100)}%`;
-    const showMin = safePct > 0;
-
-    return (
-        <div className="grid gap-1.5">
-            {label ? (
-                <div className="flex items-center justify-between gap-3 text-[11px] font-medium text-neutral-500 dark:text-white/50">
-                    <div className="min-w-0">{label}</div>
-                    <span className="shrink-0 tabular-nums">{w}</span>
-                </div>
-            ) : null}
-
-            <div className="ui-progress-track">
-                <div
-                    className={cn("ui-progress-fill", showMin && "min-w-[10px]")}
-                    style={{ width: w }}
-                />
-            </div>
-        </div>
-    );
-}
-
-function IconCircle({
+function ModuleIcon({
                         idx,
                         completed,
                         locked,
@@ -165,83 +178,23 @@ function IconCircle({
     return (
         <div
             className={cn(
-                "ui-icon-box",
-                completed && "border-emerald-300/20 bg-emerald-300/10 text-emerald-700 dark:text-emerald-200",
-                locked && "bg-neutral-50 text-neutral-500 dark:bg-white/[0.04] dark:text-white/50",
+                "ui-icon-box h-8 w-8 rounded-full text-[11px]",
+                completed &&
+                "border-[rgb(var(--ui-accent)/0.20)] bg-[rgb(var(--ui-accent)/0.10)] text-[rgb(var(--ui-accent)/1)]",
+                locked &&
+                "border-[rgb(var(--ui-border)/0.78)] bg-[rgb(var(--ui-surface-2)/0.92)] text-[rgb(var(--ui-text-soft)/0.9)]",
             )}
             aria-hidden
         >
             {completed ? (
-                <CheckCircle2 className="h-4 w-4" />
+                <CheckCircle2 className="h-3.5 w-3.5" />
             ) : locked ? (
-                <Lock className="h-4 w-4" />
+                <Lock className="h-3.5 w-3.5" />
             ) : (
                 <span className="font-medium tabular-nums">{idx + 1}</span>
             )}
         </div>
     );
-}
-
-function ActionLink({
-                        href,
-                        children,
-                        fullWidth = false,
-                        variant = "primary",
-                    }: {
-    href: string;
-    children: React.ReactNode;
-    fullWidth?: boolean;
-    variant?: "primary" | "secondary" | "premium";
-}) {
-    const cls =
-        variant === "primary"
-            ? "ui-btn-primary"
-            : variant === "premium"
-                ? "ui-btn-premium"
-                : "ui-btn-secondary";
-
-    return (
-        <Link href={href} className={cn(cls, fullWidth ? "w-full sm:w-auto" : "")}>
-            <span>{children}</span>
-        </Link>
-    );
-}
-
-function DisabledAction({ children }: { children: React.ReactNode }) {
-    return (
-        <span className="ui-btn-disabled w-full sm:w-auto">
-      <span>{children}</span>
-    </span>
-    );
-}
-
-function getStatusText(args: {
-    completed: boolean;
-    seqLocked: boolean;
-    showPremium: boolean;
-    hasAnyProgress: boolean;
-    t: ReturnType<typeof useTranslations>;
-}) {
-    const { completed, seqLocked, showPremium, hasAnyProgress, t } = args;
-
-    if (completed) return t("pillCompleted");
-    if (seqLocked) return t("pillLocked");
-    if (showPremium) return t("pillPremium");
-    if (hasAnyProgress) return t("pillInProgress");
-    return t("pillNotStarted");
-}
-
-function getAccessText(args: {
-    seqLocked: boolean;
-    showPremium: boolean;
-    accessReason: string;
-}) {
-    const { seqLocked, showPremium, accessReason } = args;
-
-    if (seqLocked) return "Sequential";
-    if (showPremium && accessReason === "requires_login") return "Sign in required";
-    if (showPremium) return "Premium";
-    return "Included";
 }
 
 export default function SubjectModulesClient(props: Props) {
@@ -298,6 +251,7 @@ export default function SubjectModulesClient(props: Props) {
 
         for (let i = 0; i < sortedModules.length; i++) {
             const cur = sortedModules[i];
+
             if (i === 0) {
                 set.add(cur.slug);
                 continue;
@@ -324,12 +278,11 @@ export default function SubjectModulesClient(props: Props) {
             totalTopics += moduleTopicKeys.length;
 
             const direct = countMatches(moduleTopicKeys, mp?.completedTopicKeys);
+            const completedSize = mp?.completedTopicKeys?.size ?? 0;
 
             const fallback =
-                direct === 0 &&
-                moduleTopicKeys.length > 0 &&
-                (mp?.completedTopicKeys?.size ?? 0) > 0
-                    ? Math.min(moduleTopicKeys.length, mp!.completedTopicKeys.size)
+                direct === 0 && moduleTopicKeys.length > 0 && completedSize > 0
+                    ? Math.min(moduleTopicKeys.length, completedSize)
                     : direct;
 
             doneTopics += fallback;
@@ -343,291 +296,225 @@ export default function SubjectModulesClient(props: Props) {
             pct,
             totalModules: sortedModules.length,
             completedModules,
-            totalSections: sections.length,
         };
-    }, [sortedModules, progByModuleSlug, topicIdsByModuleDbId, sections.length]);
+    }, [sortedModules, progByModuleSlug, topicIdsByModuleDbId]);
 
     const backHref = `/${encodeURIComponent(locale)}/subjects`;
+    const modulesListPath = `/${encodeURIComponent(locale)}/subjects/${encodeURIComponent(subjectSlug)}/modules`;
 
     return (
-        <div className="min-h-screen bg-neutral-50 text-neutral-900 dark:bg-[#0b0d12] dark:text-white/90">
-            <div className="ui-container grid gap-4 py-5 sm:gap-5 md:gap-6 md:py-8">
-                <Surface className="p-4 sm:p-5 md:p-6">
-                    <div className="grid gap-5 lg:grid-cols-[minmax(0,1.5fr)_minmax(280px,0.8fr)] lg:items-start">
-                        <div className="min-w-0">
-                            <div className="flex flex-wrap items-center gap-2">
-                                <Kicker>{t("kickerSubject")}</Kicker>
-                                {unlockAll ? <Pill variant="warn">{t("unlockEnabled")}</Pill> : null}
-                                {progressLoading ? <Pill variant="neutral">{t("syncing")}</Pill> : null}
-                            </div>
+        <div className="min-h-screen bg-[rgb(var(--ui-bg)/1)] text-[rgb(var(--ui-text)/1)]">
+            <div className="ui-container py-4 sm:py-5 md:py-6">
+                <div className="mx-auto max-w-4xl space-y-3">
+                    <Surface tone="page" className="p-4 sm:p-5">
+                        <Link
+                            href={backHref}
+                            className="inline-flex items-center gap-1.5 text-[11px] font-medium text-[rgb(var(--ui-text-muted)/0.88)] transition hover:text-[rgb(var(--ui-text)/1)]"
+                        >
+                            <ArrowLeft className="h-3.5 w-3.5" />
+                            {t("changeSubject")}
+                        </Link>
 
-                            <div className="mt-2 text-2xl font-semibold tracking-tight sm:text-3xl md:text-4xl">
-                                {subjectTitle}
-                            </div>
+                        <div className="mt-3 flex flex-wrap items-center gap-2">
+                            <div className="ui-kicker">{t("kickerSubject")}</div>
+                            {unlockAll ? <StatusPill tone="warn">{t("unlockEnabled")}</StatusPill> : null}
+                            {progressLoading ? <StatusPill tone="neutral">{t("syncing")}</StatusPill> : null}
+                        </div>
 
-                            {subjectDescription ? (
-                                <div className="mt-3 max-w-3xl text-sm leading-6 text-neutral-600 dark:text-white/70 sm:text-base">
-                                    {subjectDescription}
+                        <h1 className="ui-title-lg mt-2 text-xl sm:text-2xl">{subjectTitle}</h1>
+
+                        {subjectDescription ? (
+                            <p className="mt-1 max-w-2xl text-sm leading-6 text-[rgb(var(--ui-text-muted)/0.92)]">
+                                {subjectDescription}
+                            </p>
+                        ) : null}
+
+                        <div className="mt-4 grid gap-2">
+                            <div className="flex flex-wrap items-center justify-between gap-2">
+                                <div className="ui-meta">{t("overallProgress")}</div>
+                                <div className="ui-meta-strong tabular-nums">
+                                    {progressLoading
+                                        ? t("syncing")
+                                        : `${subjectStats.doneTopics}/${subjectStats.totalTopics} • ${subjectStats.completedModules}/${subjectStats.totalModules} modules`}
                                 </div>
-                            ) : null}
-
-                            <div className="mt-5">
-                                <ProgressBar
-                                    pct={subjectStats.pct}
-                                    label={
-                                        <div className="flex min-w-0 flex-col gap-0.5 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-3">
-                                            <span>{t("overallProgress")}</span>
-                                            <span className="tabular-nums">
-                        {progressLoading
-                            ? t("syncing")
-                            : t("topicsRatio", {
-                                done: subjectStats.doneTopics,
-                                total: subjectStats.totalTopics,
-                            })}
-                      </span>
-                                            {subjectStats.totalModules ? (
-                                                <span className="tabular-nums text-neutral-500 dark:text-white/45">
-                          {t("modulesRatio", {
-                              done: subjectStats.completedModules,
-                              total: subjectStats.totalModules,
-                          })}
-                        </span>
-                                            ) : null}
-                                        </div>
-                                    }
-                                />
                             </div>
+
+                            <ProgressBar pct={subjectStats.pct} />
                         </div>
+                    </Surface>
 
-                        <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
-                            <StatCard
-                                label={t("topicsLabel")}
-                                value={`${subjectStats.doneTopics}/${subjectStats.totalTopics}`}
-                            />
-                            <StatCard label={t("sectionsLabel")} value={subjectStats.totalSections} />
-                            <StatCard
-                                label={t("kickerModule")}
-                                value={subjectStats.totalModules}
-                                subvalue={t("modulesRatio", {
-                                    done: subjectStats.completedModules,
-                                    total: subjectStats.totalModules,
-                                })}
-                            />
-                            <div className="flex items-end">
-                                <ActionLink href={backHref} fullWidth variant="secondary">
-                                    {t("changeSubject")}
-                                </ActionLink>
-                            </div>
-                        </div>
-                    </div>
-                </Surface>
+                    {sortedModules.length ? (
+                        <div className="space-y-2">
+                            {sortedModules.map((m, idx) => {
+                                const modSections = sectionsByModuleDbId.get(String(m.id)) ?? [];
+                                const mp = progByModuleSlug[m.slug];
 
-                {sortedModules.length ? (
-                    <div className="grid gap-3">
-                        {sortedModules.map((m, idx) => {
-                            const modSections = sectionsByModuleDbId.get(String(m.id)) ?? [];
-                            const mp = progByModuleSlug[m.slug];
+                                const sequentialUnlocked = unlockedBySlug.has(m.slug);
+                                const seqLocked = !unlockAll && !sequentialUnlocked && idx !== 0;
 
-                            const sequentialUnlocked = unlockedBySlug.has(m.slug);
-                            const seqLocked = !unlockAll && !sequentialUnlocked && idx !== 0;
+                                const access = accessByModuleSlug?.[m.slug] ?? {
+                                    ok: true,
+                                    paid: false,
+                                    reason: "unknown",
+                                };
 
-                            const access = accessByModuleSlug?.[m.slug] ?? {
-                                ok: true,
-                                paid: false,
-                                reason: "unknown",
-                            };
+                                const paywallLocked = !unlockAll && !access.ok;
+                                const showPremium = paywallLocked && !seqLocked;
 
-                            const paywallLocked = !unlockAll && !access.ok;
-                            const showPremium = paywallLocked && !seqLocked;
+                                const completed = Boolean(mp?.moduleCompleted);
 
-                            const completed = Boolean(mp?.moduleCompleted);
+                                const moduleTopicKeys = topicIdsByModuleDbId[m.id] ?? [];
+                                const totalTopics = moduleTopicKeys.length;
 
-                            const moduleTopicKeys = topicIdsByModuleDbId[m.id] ?? [];
-                            const totalTopics = moduleTopicKeys.length;
+                                const directDone = countMatches(moduleTopicKeys, mp?.completedTopicKeys);
+                                const completedSize = mp?.completedTopicKeys?.size ?? 0;
 
-                            const directDone = countMatches(moduleTopicKeys, mp?.completedTopicKeys);
+                                const doneTopics =
+                                    directDone === 0 && totalTopics > 0 && completedSize > 0
+                                        ? Math.min(totalTopics, completedSize)
+                                        : directDone;
 
-                            const doneTopics =
-                                directDone === 0 && totalTopics > 0 && (mp?.completedTopicKeys?.size ?? 0) > 0
-                                    ? Math.min(totalTopics, mp!.completedTopicKeys.size)
-                                    : directDone;
+                                const modulePct =
+                                    totalTopics > 0 ? clamp01(doneTopics / totalTopics) : completed ? 1 : 0;
 
-                            const modulePct =
-                                totalTopics > 0 ? clamp01(doneTopics / totalTopics) : completed ? 1 : 0;
+                                const hasAnyProgress = completedSize > 0 || doneTopics > 0;
 
-                            const hasAnyProgress = (mp?.completedTopicKeys?.size ?? 0) > 0 || doneTopics > 0;
+                                const moduleHref = hasAnyProgress
+                                    ? ROUTES.learningPath(subjectSlug, m.slug)
+                                    : ROUTES.moduleIntro(subjectSlug, m.slug);
 
-                            const moduleHref = hasAnyProgress?ROUTES.learningPath(subjectSlug, m.slug): ROUTES.moduleIntro(subjectSlug, m.slug);
+                                const billingHref = buildBillingHref({
+                                    locale,
+                                    next: moduleHref,
+                                    back: modulesListPath,
+                                    reason: "module",
+                                    subject: subjectSlug,
+                                    module: m.slug,
+                                });
 
-                            const modulesListPath = `/${encodeURIComponent(locale)}/subjects/${encodeURIComponent(subjectSlug)}/modules`;
+                                const ctaLabel = showPremium
+                                    ? access.reason === "requires_login"
+                                        ? t("cta.signInToUnlock")
+                                        : t("cta.unlock")
+                                    : completed
+                                        ? t("cta.review")
+                                        : hasAnyProgress
+                                            ? t("cta.continue")
+                                            : t("cta.start");
 
-                            const billingHref = buildBillingHref({
-                                locale,
-                                next: moduleHref,
-                                back: modulesListPath,
-                                reason: "module",
-                                subject: subjectSlug,
-                                module: m.slug,
-                            });
+                                const statusText = completed
+                                    ? t("pillCompleted")
+                                    : seqLocked
+                                        ? t("pillLocked")
+                                        : showPremium
+                                            ? t("pillPremium")
+                                            : hasAnyProgress
+                                                ? t("pillInProgress")
+                                                : t("pillNotStarted");
 
-                            const ctaLabel = showPremium
-                                ? access.reason === "requires_login"
-                                    ? t("cta.signInToUnlock")
-                                    : t("cta.unlock")
-                                : completed
-                                    ? t("cta.review")
-                                    : hasAnyProgress
-                                        ? t("cta.continue")
-                                        : t("cta.start");
+                                const pillTone: "neutral" | "good" | "warn" =
+                                    completed ? "good" : showPremium || hasAnyProgress ? "warn" : "neutral";
 
-                            const statusText = getStatusText({
-                                completed,
-                                seqLocked,
-                                showPremium,
-                                hasAnyProgress,
-                                t,
-                            });
-
-                            const accessText = getAccessText({
-                                seqLocked,
-                                showPremium,
-                                accessReason: access.reason,
-                            });
-
-                            return (
-                                <Surface
-                                    key={m.slug}
-                                    className={cn(
-                                        "transition-colors",
-                                        !seqLocked && "hover:border-neutral-300 dark:hover:border-white/15",
-                                        completed && "border-emerald-300/20 dark:border-emerald-300/15",
-                                    )}
-                                >
-                                    <div className="p-4 sm:p-5">
-                                        <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+                                return (
+                                    <Surface
+                                        key={m.slug}
+                                        className={cn(
+                                            "p-3 sm:p-4 transition-colors",
+                                            !seqLocked &&
+                                            "hover:border-[rgb(var(--ui-border-strong)/0.72)] hover:bg-[rgb(var(--ui-surface)/0.98)]",
+                                            completed &&
+                                            "border-[rgb(var(--ui-accent)/0.18)] bg-[rgb(var(--ui-surface)/0.96)]",
+                                        )}
+                                    >
+                                        <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                                             <div className="min-w-0 flex-1">
-                                                <div className="flex min-w-0 gap-3">
-                                                    <IconCircle idx={idx} completed={completed} locked={seqLocked} />
+                                                <div className="flex items-start gap-3">
+                                                    <ModuleIcon idx={idx} completed={completed} locked={seqLocked} />
 
                                                     <div className="min-w-0 flex-1">
                                                         <div className="flex flex-wrap items-center gap-2">
-                                                            <Kicker>{t("kickerModule")}</Kicker>
+                                                            <h2 className="ui-title-sm min-w-0 truncate text-sm sm:text-[15px]">
+                                                                {m.title}
+                                                            </h2>
 
-                                                            {completed ? (
-                                                                <Pill variant="good">{t("pillCompleted")}</Pill>
-                                                            ) : seqLocked ? (
-                                                                <Pill variant="neutral">{t("pillLocked")}</Pill>
-                                                            ) : showPremium ? (
-                                                                <Pill variant="warn">{t("pillPremium")}</Pill>
-                                                            ) : hasAnyProgress ? (
-                                                                <Pill variant="warn">{t("pillInProgress")}</Pill>
-                                                            ) : (
-                                                                <Pill variant="neutral">{t("pillNotStarted")}</Pill>
-                                                            )}
+                                                            <StatusPill tone={pillTone}>{statusText}</StatusPill>
 
-                                                            {progressLoading ? <Pill variant="neutral">{t("syncing")}</Pill> : null}
+                                                            {showPremium ? (
+                                                                <Sparkles className="h-3.5 w-3.5 text-[rgb(var(--ui-warn)/1)]" />
+                                                            ) : null}
                                                         </div>
 
-                                                        <div className="mt-2 text-lg font-semibold tracking-tight sm:text-xl">
-                                                            {m.title}
+                                                        <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] text-[rgb(var(--ui-text-muted)/0.88)]">
+                                                            <span>{modSections.length} sections</span>
+                                                            <span>
+                                                                {totalTopics
+                                                                    ? `${doneTopics}/${totalTopics} topics`
+                                                                    : t("noTopics")}
+                                                            </span>
+
+                                                            {(m.weekStart != null || m.weekEnd != null) && (
+                                                                <span className="tabular-nums">
+                                                                    Weeks {m.weekStart ?? "?"}–{m.weekEnd ?? "?"}
+                                                                </span>
+                                                            )}
                                                         </div>
 
                                                         {m.description ? (
-                                                            <div className="mt-2 max-w-3xl text-sm leading-6 text-neutral-600 dark:text-white/70">
+                                                            <p className="mt-1 line-clamp-2 text-xs leading-5 text-[rgb(var(--ui-text-muted)/0.82)]">
                                                                 {m.description}
-                                                            </div>
+                                                            </p>
                                                         ) : null}
+
+                                                        <div className="mt-3 space-y-1.5">
+                                                            <div className="flex items-center justify-between gap-2 text-[11px]">
+                                                                <span className="text-[rgb(var(--ui-text-muted)/0.84)]">
+                                                                    {totalTopics
+                                                                        ? t("topicsComplete", {
+                                                                            done: doneTopics,
+                                                                            total: totalTopics,
+                                                                        })
+                                                                        : completed
+                                                                            ? t("completedShort")
+                                                                            : t("noTopics")}
+                                                                </span>
+                                                                <span className="tabular-nums text-[rgb(var(--ui-text-muted)/0.96)]">
+                                                                    {Math.round(modulePct * 100)}%
+                                                                </span>
+                                                            </div>
+
+                                                            <ProgressBar pct={modulePct} />
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
 
-                                            <div className="w-full lg:w-auto lg:shrink-0">
+                                            <div className="shrink-0 sm:pl-3">
                                                 {seqLocked ? (
-                                                    <DisabledAction>{ctaLabel}</DisabledAction>
+                                                    <DisabledAction fullWidth>{ctaLabel}</DisabledAction>
                                                 ) : showPremium ? (
-                                                    <ActionLink href={billingHref} fullWidth variant="premium">
+                                                    <ActionLink href={billingHref} variant="premium" fullWidth>
                                                         {ctaLabel}
                                                     </ActionLink>
                                                 ) : (
-                                                    <ActionLink href={moduleHref} fullWidth variant="primary">
+                                                    <ActionLink href={moduleHref} variant="primary" fullWidth>
                                                         {ctaLabel}
                                                     </ActionLink>
                                                 )}
                                             </div>
                                         </div>
-
-                                        <div className="mt-4 grid gap-2 sm:grid-cols-2 xl:grid-cols-4">
-                                            {(m.weekStart != null || m.weekEnd != null) && (
-                                                <StatCard
-                                                    label={t("weeksLabel")}
-                                                    value={
-                                                        <span className="tabular-nums">
-                              {m.weekStart ?? "?"}–{m.weekEnd ?? "?"}
-                            </span>
-                                                    }
-                                                />
-                                            )}
-
-                                            <StatCard label={t("sectionsLabel")} value={modSections.length} />
-
-                                            <StatCard
-                                                label={t("topicsLabel")}
-                                                value={
-                                                    totalTopics ? (
-                                                        <span className="tabular-nums">
-                              {doneTopics}/{totalTopics}
-                            </span>
-                                                    ) : (
-                                                        t("noTopics")
-                                                    )
-                                                }
-                                            />
-
-                                            <StatCard
-                                                label="Status"
-                                                value={
-                                                    <span className="inline-flex items-center gap-1.5">
-                            {completed ? (
-                                <CheckCircle2 className="h-4 w-4 text-emerald-600 dark:text-emerald-300" />
-                            ) : showPremium ? (
-                                <Sparkles className="h-4 w-4 text-amber-600 dark:text-amber-300" />
-                            ) : seqLocked ? (
-                                <Lock className="h-4 w-4 text-neutral-500 dark:text-white/50" />
-                            ) : null}
-                                                        <span>{statusText}</span>
-                          </span>
-                                                }
-                                                subvalue={accessText}
-                                            />
-                                        </div>
-
-                                        <div className="mt-4">
-                                            <ProgressBar
-                                                pct={modulePct}
-                                                label={
-                                                    <span>
-                            {totalTopics
-                                ? t("topicsComplete", { done: doneTopics, total: totalTopics })
-                                : completed
-                                    ? t("completedShort")
-                                    : t("noTopics")}
-                          </span>
-                                                }
-                                            />
-                                        </div>
-                                    </div>
-                                </Surface>
-                            );
-                        })}
-                    </div>
-                ) : (
-                    <Surface className="p-4 sm:p-5 md:p-6">
-                        <div className="text-lg font-semibold tracking-tight">{t("empty.title")}</div>
-                        <div className="mt-2 text-sm text-neutral-600 dark:text-white/70">
-                            {t("empty.desc")}
+                                    </Surface>
+                                );
+                            })}
                         </div>
-                    </Surface>
-                )}
+                    ) : (
+                        <Surface tone="page" className="p-4 sm:p-5">
+                            <div className="ui-title-md text-base">{t("empty.title")}</div>
+                            <div className="mt-1 text-sm text-[rgb(var(--ui-text-muted)/0.88)]">
+                                {t("empty.desc")}
+                            </div>
+                        </Surface>
+                    )}
+                </div>
             </div>
         </div>
     );

@@ -182,8 +182,8 @@ export default function ProjectsDrawer(props: {
                     </div>
 
                     <div className="flex flex-wrap items-center gap-1.5">
-                        <button type="button" onClick={onCreateBlankProject} className="ui-btn-ide-border">
-                            New Local
+                        <button type="button" onClick={onCreateBlankProject} className="ui-btn-premium">
+                            New Project
                         </button>
 
                         <button type="button" onClick={onSaveAsProject} className="ui-btn-ide-success">

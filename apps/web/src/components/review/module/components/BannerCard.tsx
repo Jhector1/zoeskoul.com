@@ -18,7 +18,7 @@ export default function BannerCard({
         <div
             className={cn(
                 "p-4 md:p-5",
-                tone === "good" ? "ui-surface-success" : "ui-surface",
+                tone === "good" ? "ui-surface-success" : "ui-surface","rounded-none"
             )}
         >
             <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">

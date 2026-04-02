@@ -1,6 +1,6 @@
 "use client";
 
-import React, {useCallback, useEffect, useMemo, useRef, useState} from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import { DEFAULT_SQL_DIALECT } from "@/components/code/runner/constants";
@@ -48,8 +48,6 @@ type FullIDEInnerProps = {
     sqlDialect: any;
     setSqlDialect: React.Dispatch<React.SetStateAction<any>>;
     onChangeLanguage?: FullIDEProps["onChangeLanguage"];
-
-
     history: WorkspaceHookResult["history"];
     state: WorkspaceHookResult["state"];
     derived: WorkspaceHookResult["derived"];
@@ -81,7 +79,6 @@ function FullIDEInner({
                           derived,
                           history,
                           actions,
-
                       }: FullIDEInnerProps) {
     const {
         language,
@@ -143,6 +140,7 @@ function FullIDEInner({
         editorHostRef,
         onCloseMobileExplorer: () => setShowMobileExplorer(false),
     });
+
     const isSql = language === "sql";
 
     const codeBackend: ExecutionBackend = isSql ? "judge0" : "pty";
@@ -262,7 +260,7 @@ function FullIDEInner({
 
     const handleConfirmDelete = () => {
         if (!pendingDeleteId) return;
-        actions.performDelete(pendingDeleteId);
+        actions.performDelete();
     };
 
     const handlePrimarySave = () => {
@@ -419,6 +417,7 @@ function buildLocalWorkspaceIdSeed(args: {
         args.forcedLanguage ?? "any",
     ].join("::");
 }
+
 function hrefToString(
     href: FullIDEProps["loginHref"],
     fallback = "/authenticate",
@@ -453,7 +452,7 @@ export default function FullIDE(props: FullIDEProps) {
         lessonHref,
         lessonLabel = "Lesson",
         access,
-        loginHref ,
+        loginHref,
         billingHref = "/billing",
         initialProjectId = null,
         projectTitle,
@@ -472,10 +471,6 @@ export default function FullIDE(props: FullIDEProps) {
 
     const actorKey = useMemo(() => buildClientActorKey(access), [access]);
     const scopeKey = useMemo(() => buildScopeKey(projectScope), [projectScope]);
-
-
-
-
 
     const normalizedLoginHref = useMemo(
         () => hrefToString(loginHref, "/authenticate"),
@@ -507,7 +502,6 @@ export default function FullIDE(props: FullIDEProps) {
         projectId: initialProjectId,
         scopeKey,
         draftStorageMode: (draftStorageMode ?? "off") as "off" | "local",
-
         localWorkspaceId,
     });
 
@@ -522,6 +516,7 @@ export default function FullIDE(props: FullIDEProps) {
     );
 
     const isIdeReady = !!(
+        workspace.derived.storageHydrated &&
         workspace.derived.currentWorkspace &&
         workspace.state.nodes.length > 0 &&
         workspace.state.activeFileId &&
@@ -581,12 +576,10 @@ export default function FullIDE(props: FullIDEProps) {
                 sqlDialect={sqlDialect}
                 setSqlDialect={setSqlDialect}
                 onChangeLanguage={onChangeLanguage}
-
                 history={workspace.history}
                 state={workspace.state}
                 derived={workspace.derived}
                 actions={workspace.actions}
-
             />
         </div>
     );

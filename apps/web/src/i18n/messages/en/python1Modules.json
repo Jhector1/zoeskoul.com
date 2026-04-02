@@ -87,7 +87,7 @@
     },
 
     "actions": {
-      "back": "← Back",
+      "back": "Back",
       "practice": "Practice →"
     },
 
@@ -123,7 +123,7 @@
     "topicsRatio": "{done}/{total} topics",
     "modulesRatio": "• {done}/{total} modules",
 
-    "changeSubject": "← Change subject",
+    "changeSubject": "Change subject",
 
     "kickerModule": "Module",
     "pillCompleted": "✓ Completed",

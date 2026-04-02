@@ -57,7 +57,7 @@ export function saveWorkspaceMeta(baseKey: string, meta: WorkspaceMeta) {
   } catch {}
 }
 
-export function loadWorkspaceForLanguage(args: {
+export async function loadWorkspaceForLanguage(args: {
   baseStorageKey: string;
   next: CodeLanguage;
   draftStorageMode: DraftStorageMode;
@@ -77,7 +77,7 @@ export function loadWorkspaceForLanguage(args: {
     localWorkspaceId: args.localWorkspaceId,
   });
 
-  return loadV2(key, args.next);
+  return await loadV2(key, args.next);
 }
 
 export function saveWorkspaceForLanguage(args: {
@@ -111,8 +111,6 @@ export function saveWorkspaceForLanguage(args: {
     localWorkspaceId,
   });
 
-  saveV2(key, ws);
-
   saveWorkspaceMeta(baseStorageKey, {
     lastLanguage: ws.language,
     actorKey: actorKey?.trim() || "anonymous",
@@ -120,6 +118,8 @@ export function saveWorkspaceForLanguage(args: {
     scopeKey: scopeKey ?? null,
     localWorkspaceId: localWorkspaceId ?? null,
   });
+
+  void saveV2(key, ws);
 }
 
 export function tryMigrateInitialWorkspace(args: {
@@ -138,12 +138,13 @@ export function tryMigrateInitialWorkspace(args: {
   } = args;
 
   if (draftStorageMode !== "local") return null;
-  if (baseStorageKey !== STORAGE_KEY_V2) return null;
+  if (!baseStorageKey.startsWith(STORAGE_KEY_V2)) return null;
 
   const migrated = tryMigrateV1(initialLanguage);
   if (!migrated) return null;
 
   saveWorkspaceForLanguage(migrated);
+
   if (forcedLanguage && migrated.language !== forcedLanguage) {
     return null;
   }

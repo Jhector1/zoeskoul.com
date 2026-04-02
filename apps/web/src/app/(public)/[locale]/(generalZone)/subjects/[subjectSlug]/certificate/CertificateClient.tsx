@@ -1,10 +1,11 @@
-// src/app/[locale]/subjects/[subjectSlug]/certificate/CertificateClient.tsx
 "use client";
 
-import React, {useEffect, useMemo, useState} from "react";
-import {useParams} from "next/navigation";
-import {useRouter} from "@/i18n/navigation";
-import {cn} from "@/lib/cn";
+import React, { useEffect, useMemo, useState } from "react";
+import { useParams } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
+import { ArrowLeft, Award, CheckCircle2, Download, Lock, Sparkles } from "lucide-react";
+import { cn } from "@/lib/cn";
+import CertificatePreviewCard from "./_components/CertificatePreviewCard";
 
 type Status = {
     eligible: boolean;
@@ -20,8 +21,77 @@ type Status = {
         assignmentCompleted: boolean;
     }>;
     certificate: { id: string; issuedAt: string; completedAt: string | null } | null;
-    actor: { isGuest: boolean };};
-const APP_NAME = process.env.NEXT_PUBLIC_APP_NAME;
+    actor: { isGuest: boolean };
+};
+
+function Surface({
+                     children,
+                     className,
+                     tone = "page",
+                 }: {
+    children: React.ReactNode;
+    className?: string;
+    tone?: "page" | "default" | "muted" | "success";
+}) {
+    return (
+        <div
+            className={cn(
+                tone === "muted"
+                    ? "ui-surface-muted"
+                    : tone === "success"
+                        ? "ui-surface-success"
+                        : tone === "default"
+                            ? "ui-surface"
+                            : "ui-page-surface",
+                className,
+            )}
+        >
+            {children}
+        </div>
+    );
+}
+
+function Pill({
+                  tone,
+                  children,
+              }: {
+    tone: "neutral" | "good" | "warn" | "info";
+    children: React.ReactNode;
+}) {
+    const cls =
+        tone === "good"
+            ? "ui-pill-good"
+            : tone === "warn"
+                ? "ui-pill-warn"
+                : tone === "info"
+                    ? "ui-pill-info"
+                    : "ui-pill-neutral";
+
+    return <span className={cls}>{children}</span>;
+}
+
+function SectionHeader({
+                           title,
+                           icon,
+                           meta,
+                       }: {
+    title: React.ReactNode;
+    icon?: React.ReactNode;
+    meta?: React.ReactNode;
+}) {
+    return (
+        <div className="flex items-center justify-between gap-3">
+            <div className="min-w-0">
+                <div className="flex items-center gap-2">
+                    {icon ? <span className="text-[rgb(var(--ui-text-muted)/0.9)]">{icon}</span> : null}
+                    <h2 className="ui-title-md text-base sm:text-lg">{title}</h2>
+                </div>
+            </div>
+            {meta ? <div className="ui-meta-strong shrink-0">{meta}</div> : null}
+        </div>
+    );
+}
+
 export default function CertificateClient() {
     const params = useParams<{ locale: string; subjectSlug: string }>();
     const router = useRouter();
@@ -43,7 +113,7 @@ export default function CertificateClient() {
 
             const r = await fetch(
                 `/api/certificates/subject?subjectSlug=${encodeURIComponent(subjectSlug)}&locale=${encodeURIComponent(locale)}`,
-                {cache: "no-store"},
+                { cache: "no-store" },
             );
             const data = await r.json().catch(() => null);
 
@@ -55,25 +125,34 @@ export default function CertificateClient() {
             } else {
                 setStatus(data);
             }
+
             setLoading(false);
         }
 
         if (subjectSlug) void run();
+
         return () => {
             alive = false;
         };
     }, [subjectSlug, locale]);
 
-    const nextSteps = useMemo(() => {
-        return [
+    const nextSteps = useMemo(
+        () => [
             {
                 title: "Start the next course",
-                body: "Keep momentum — pick your next module set and continue practicing."
+                body: "Keep momentum and continue learning with your next subject.",
             },
-            {title: "Practice for 10 minutes/day", body: "Consistency beats cramming. Build a daily streak."},
-            {title: "Do a project", body: "Use what you learned in a small real project and ship it."},
-        ];
-    }, []);
+            {
+                title: "Practice regularly",
+                body: "A short daily practice routine will help the material stick.",
+            },
+            {
+                title: "Build a small project",
+                body: "Use what you learned in something real and finish it.",
+            },
+        ],
+        [],
+    );
 
     async function downloadPdf() {
         if (!status?.eligible) return;
@@ -83,7 +162,7 @@ export default function CertificateClient() {
 
             const r = await fetch(
                 `/api/certificates/subject/pdf?subjectSlug=${encodeURIComponent(subjectSlug)}&locale=${encodeURIComponent(locale)}`,
-                {cache: "no-store"},
+                { cache: "no-store" },
             );
 
             if (!r.ok) {
@@ -103,10 +182,9 @@ export default function CertificateClient() {
 
             window.URL.revokeObjectURL(url);
 
-            // refresh status so "certificate" object becomes available after first issue
             const rr = await fetch(
                 `/api/certificates/subject?subjectSlug=${encodeURIComponent(subjectSlug)}&locale=${encodeURIComponent(locale)}`,
-                {cache: "no-store"},
+                { cache: "no-store" },
             );
             const dd = await rr.json().catch(() => null);
             if (rr.ok) setStatus(dd);
@@ -118,19 +196,39 @@ export default function CertificateClient() {
     }
 
     if (loading) {
-        return <div className="p-6 text-sm text-neutral-600 dark:text-white/70">Loading…</div>;
+        return (
+            <div className="min-h-screen bg-[rgb(var(--ui-bg)/1)]">
+                <div className="ui-container py-4 sm:py-5 md:py-6">
+                    <div className="mx-auto max-w-4xl">
+                        <Surface className="p-4 sm:p-5">
+                            <div className="ui-kicker">Certificate</div>
+                            <div className="mt-2 text-sm text-[rgb(var(--ui-text-muted)/0.9)]">
+                                Loading…
+                            </div>
+                        </Surface>
+                    </div>
+                </div>
+            </div>
+        );
     }
 
     if (err) {
         return (
-            <div className="min-h-screen p-6">
-                <div className="ui-card p-5">
-                    <div className="text-lg font-black">Certificate</div>
-                    <div className="mt-2 text-sm text-rose-700 dark:text-rose-200">{err}</div>
-                    <div className="mt-4">
-                        <button className="ui-btn ui-btn-secondary" onClick={() => router.back()}>
-                            ← Back
-                        </button>
+            <div className="min-h-screen bg-[rgb(var(--ui-bg)/1)]">
+                <div className="ui-container py-4 sm:py-5 md:py-6">
+                    <div className="mx-auto max-w-4xl">
+                        <Surface className="p-4 sm:p-5">
+                            <SectionHeader title="Certificate" />
+                            <div className="mt-3 text-sm text-[rgb(var(--ui-danger)/1)]">{err}</div>
+                            <div className="mt-4">
+                                <button className="ui-btn-secondary" onClick={() => router.back()}>
+                                    <span className="inline-flex items-center gap-1.5">
+                                        <ArrowLeft className="h-3.5 w-3.5" />
+                                        Back
+                                    </span>
+                                </button>
+                            </div>
+                        </Surface>
                     </div>
                 </div>
             </div>
@@ -138,276 +236,199 @@ export default function CertificateClient() {
     }
 
     const eligible = Boolean(status?.eligible);
+
     const completionDateStr = status?.completedAt
-        ? new Date(status.completedAt).toLocaleDateString("en-US", {year: "numeric", month: "long", day: "numeric"})
+        ? new Date(status.completedAt).toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+        })
         : "—";
 
     const issuedDateStr = status?.certificate?.issuedAt
         ? new Date(status.certificate.issuedAt).toLocaleDateString("en-US", {
             year: "numeric",
             month: "long",
-            day: "numeric"
+            day: "numeric",
         })
         : "—";
+
     const previewName = eligible
         ? (status?.displayName ?? "Learner")
         : (status?.actor?.isGuest ? "Guest Learner" : "Learner");
+
     return (
-        <div
-            className="min-h-screen bg-[radial-gradient(1200px_700px_at_20%_0%,#eafff5_0%,#ffffff_55%,#f6f7ff_100%)] dark:bg-[radial-gradient(1200px_700px_at_20%_0%,#151a2c_0%,#0b0d12_50%)] text-neutral-900 dark:text-white/90">
-            <div className="ui-container py-6 grid gap-4">
-                <div className={cn("ui-card p-5 md:p-6", eligible ? "border-emerald-600/25" : "border-neutral-200")}>
-                    <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
-                        <div className="min-w-0">
-                            <div className="text-sm font-black text-neutral-600 dark:text-white/60">Course Certificate
-                            </div>
-                            <div className="mt-1 text-2xl font-black tracking-tight">
-                                {eligible ? "🎉 Congratulations!" : "Almost there"}
-                            </div>
+        <div className="min-h-screen bg-[rgb(var(--ui-bg)/1)] text-[rgb(var(--ui-text)/1)]">
+            <div className="ui-container py-4 sm:py-5 md:py-6">
+                <div className="mx-auto max-w-4xl space-y-3">
+                    <Surface className="p-4 sm:p-5">
+                        <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                            <div className="min-w-0">
+                                <div className="ui-kicker">Course Certificate</div>
 
-                            <div className="mt-2 text-sm text-neutral-700 dark:text-white/70">
-                                {eligible ? (
-                                    <>
-                                        You completed <span className="font-extrabold">{status?.subject.title}</span>.
-                                        Download your
-                                        certificate and keep going.
-                                    </>
-                                ) : (
-                                    <>
-                                        Finish all modules{status?.requireAssignment ? " + module assignments" : ""} to
-                                        unlock your
-                                        certificate for <span className="font-extrabold">{status?.subject.title}</span>.
-                                    </>
-                                )}
-                            </div>
+                                <div className="mt-2 flex flex-wrap items-center gap-2">
+                                    <Pill tone={eligible ? "good" : "warn"}>
+                                        {eligible ? "Unlocked" : "In progress"}
+                                    </Pill>
 
-                            {status?.certificate ? (
-                                <div className="mt-3 text-xs text-neutral-600 dark:text-white/60">
-                                    Issued certificate: <span className="font-black">{status.certificate.id}</span>
-                                </div>
-                            ) : null}
-                        </div>
-
-                        <div className="shrink-0 flex items-center gap-2">
-                            <button className="ui-btn ui-btn-secondary" onClick={() => router.back()}>
-                                ← Back
-                            </button>
-
-                            <button
-                                className={cn("ui-btn ui-btn-primary", (!eligible || downloading) && "opacity-60 cursor-not-allowed")}
-                                disabled={!eligible || downloading}
-                                aria-disabled={!eligible || downloading}
-                                onClick={downloadPdf}
-                            >
-                                {downloading ? "Preparing…" : "Download PDF"}
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                {/* ✅ Always-visible preview (locks when not eligible) */}
-                <div className="ui-card p-5 overflow-hidden">
-                    <div className="text-lg font-black">Certificate Preview</div>
-
-                    <div
-                        className={cn(
-                            "mt-3 rounded-2xl border bg-white dark:bg-white/[0.04] dark:border-white/10 relative overflow-hidden",
-                            !eligible && "opacity-70",
-                        )}
-                    >
-                        {!eligible && (
-                            <div
-                                className="absolute inset-0 z-20 grid place-items-center bg-white/60 dark:bg-black/40 backdrop-blur-[1px]">
-                                <div className="ui-card px-4 py-2 text-sm font-extrabold">Finish the checklist to
-                                    unlock
-                                </div>
-                            </div>
-                        )}
-
-                        {/* Aspect ratio close to Letter landscape (11 x 8.5) */}
-                        <div className="relative mx-auto w-full max-w-[980px] aspect-[11/8.5] p-6 md:p-8">
-                            {/* Subtle wave background (CSS-only) */}
-                            <div className="absolute inset-0 opacity-[0.16] pointer-events-none">
-                                <div className="absolute -left-24 top-10 h-[140%] w-[140%] rotate-[-8deg]">
-                                    <div
-                                        className="h-full w-full bg-[repeating-linear-gradient(0deg,transparent_0px,transparent_18px,rgba(148,163,184,0.6)_19px,transparent_20px)]"/>
-                                </div>
-                            </div>
-
-                            {/* Watermark */}
-                            <div className="absolute inset-0 grid place-items-center pointer-events-none">
-                                <div
-                                    className="text-[64px] md:text-[88px] font-black tracking-widest text-neutral-900/5 dark:text-white/5 rotate-[-12deg]"
-                                    style={{fontFamily: "var(--font-playfair)"}}
-                                >
-                                    {String(APP_NAME).toUpperCase()}
-                                </div>
-                            </div>
-
-                            {/* Gold frame */}
-                            <div className="absolute inset-3 rounded-[18px] border-[3px] border-[#C9A227]"/>
-                            <div
-                                className="absolute inset-[18px] rounded-[14px] border border-neutral-200/80 dark:border-white/10"/>
-
-                            {/* Corner ornaments */}
-                            {[
-                                "left-[14px] top-[14px]",
-                                "right-[14px] top-[14px]",
-                                "left-[14px] bottom-[14px]",
-                                "right-[14px] bottom-[14px]",
-                            ].map((pos) => (
-                                <div key={pos} className={cn("absolute h-3 w-3 border border-[#B88B1D]", pos)}/>
-                            ))}
-
-                            {/* Content */}
-                            <div className="relative h-full flex flex-col items-center justify-center text-center px-6">
-                                <div
-                                    className="text-[11px] font-extrabold tracking-[0.22em] text-slate-600 dark:text-white/60">
-                                    {String(APP_NAME).toUpperCase()}
+                                    {status?.certificate ? <Pill tone="info">Issued</Pill> : null}
                                 </div>
 
-                                <div className="mt-1 text-xs text-slate-500 dark:text-white/50">
-                                    {status?.subject.title}
-                                </div>
+                                <h1 className="ui-title-lg mt-3 text-xl sm:text-2xl">
+                                    {eligible ? "Congratulations" : "Almost there"}
+                                </h1>
 
-                                <div
-                                    className="mt-6 text-[44px] md:text-[58px] leading-none text-slate-950 dark:text-white"
-                                    style={{fontFamily: "var(--font-playfair)"}}
-                                >
-                                    CERTIFICATE
-                                </div>
+                                <p className="mt-2 max-w-2xl text-sm leading-6 text-[rgb(var(--ui-text-muted)/0.9)]">
+                                    {eligible ? (
+                                        <>
+                                            You completed{" "}
+                                            <span className="font-medium text-[rgb(var(--ui-text)/0.96)]">
+                                                {status?.subject.title}
+                                            </span>
+                                            . Your certificate is ready.
+                                        </>
+                                    ) : (
+                                        <>
+                                            Finish all modules
+                                            {status?.requireAssignment ? " and required assignments" : ""}
+                                            {" "}to unlock the certificate for{" "}
+                                            <span className="font-medium text-[rgb(var(--ui-text)/0.96)]">
+                                                {status?.subject.title}
+                                            </span>
+                                            .
+                                        </>
+                                    )}
+                                </p>
 
-                                <div
-                                    className="mt-1 text-[18px] md:text-[22px] text-slate-950/90 dark:text-white/90"
-                                    style={{fontFamily: "var(--font-playfair)"}}
-                                >
-                                    OF COMPLETION
-                                </div>
-
-                                {/* Gold separator */}
-                                <div className="mt-4 h-[2px] w-40 bg-[#C9A227]"/>
-
-                                <div className="mt-6 text-sm text-slate-700 dark:text-white/70">
-                                    This certificate is proudly presented to
-                                </div>
-
-                                {/* Name (script) */}
-                                <div
-                                    className="mt-3 text-[44px] md:text-[58px] leading-none text-slate-950 dark:text-white"
-                                    style={{fontFamily: "var(--font-script)"}}
-                                >
-                                    {previewName}
-                                </div>
-                                    {/* Dotted gold line */}
-                                    <div className="mt-3 w-[70%] border-t border-dashed border-[#C9A227]"/>
-
-                                    <div className="mt-5 text-sm text-slate-700 dark:text-white/70">
-                                        for the successful completion of
+                                {status?.certificate ? (
+                                    <div className="mt-2 text-xs text-[rgb(var(--ui-text-muted)/0.84)]">
+                                        Certificate ID:{" "}
+                                        <span className="font-medium text-[rgb(var(--ui-text)/0.96)]">
+                                            {status.certificate.id}
+                                        </span>
                                     </div>
+                                ) : null}
+                            </div>
 
-                                    <div
-                                        className="mt-2 text-xl md:text-2xl font-extrabold text-slate-950 dark:text-white">
-                                        {status?.subject.title}
-                                    </div>
+                            <div className="flex shrink-0 flex-wrap items-center gap-2">
+                                <button className="ui-btn-secondary" onClick={() => router.back()}>
+                                    <span className="inline-flex items-center gap-1.5">
+                                        <ArrowLeft className="h-3.5 w-3.5" />
+                                        Back
+                                    </span>
+                                </button>
 
-                                    {/* Bottom row */}
-                                    <div className="mt-auto w-full grid grid-cols-3 items-end gap-3 pt-6">
-                                        {/* Date */}
-                                        <div className="text-left">
-                                            <div className="h-px bg-neutral-300 dark:bg-white/10 mb-2"/>
-                                            <div className="text-xs text-slate-500 dark:text-white/50">Date awarded
-                                            </div>
-                                            <div className="text-sm font-bold text-slate-900 dark:text-white">
-                                                {completionDateStr}
-                                            </div>
-                                        </div>
-
-                                        {/* Seal */}
-                                        <div className="flex justify-center">
-                                            <div
-                                                className="h-16 w-16 rounded-full border-2 border-[#C9A227] bg-[#fff8e1] dark:bg-white/5 grid place-items-center">
-                                                <div className="text-[10px] font-black text-[#B88B1D]">VERIFIED</div>
-                                            </div>
-                                        </div>
-
-                                        {/* Signature */}
-                                        <div className="text-right">
-                                            <div className="h-px bg-neutral-300 dark:bg-white/10 mb-2"/>
-                                            <div className="text-xs text-slate-500 dark:text-white/50">Name / Position
-                                            </div>
-                                            <div className="text-sm font-bold text-slate-900 dark:text-white">Program
-                                                Director
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    {/* Footer tiny meta */}
-                                    <div
-                                        className="mt-3 w-full flex justify-between text-[11px] text-slate-500 dark:text-white/50">
-                                        {/*<div> <div>Verified by course progress records</div>*/}
-                                            <span>Issued: {issuedDateStr}</span>
-                                    {/*</div>*/}
-
-                                        <span>{status?.certificate ? `Certificate ID: ${status.certificate.id}` : ""}</span>
-                                    </div>
-                                </div>
+                                <button
+                                    className={cn(
+                                        "ui-btn-primary",
+                                        (!eligible || downloading) && "cursor-not-allowed opacity-60",
+                                    )}
+                                    disabled={!eligible || downloading}
+                                    aria-disabled={!eligible || downloading}
+                                    onClick={downloadPdf}
+                                >
+                                    <span className="inline-flex items-center gap-1.5">
+                                        <Download className="h-3.5 w-3.5" />
+                                        {downloading ? "Preparing…" : "Download PDF"}
+                                    </span>
+                                </button>
                             </div>
                         </div>
-                    </div>
+                    </Surface>
 
-                    <div className="ui-card p-5">
-                        <div className="text-lg font-black">Checklist</div>
-                        <div className="mt-3 grid gap-2">
-                            {status?.modules?.map((m) => {
-                                const ok = m.moduleCompleted && (!status.requireAssignment || m.assignmentCompleted);
-                                return (
-                                    <div
-                                        key={m.moduleId}
-                                        className={cn(
-                                            "rounded-xl border px-3 py-2 text-sm flex items-center justify-between gap-2",
-                                            ok
-                                                ? "border-emerald-600/25 bg-emerald-500/10 dark:border-emerald-300/30 dark:bg-emerald-300/10"
-                                                : "border-neutral-200 bg-white dark:border-white/10 dark:bg-white/[0.04]",
-                                        )}
-                                    >
-                                        <div className="min-w-0">
-                                            <div className="font-extrabold truncate">{m.title}</div>
-                                            {status.requireAssignment ? (
-                                                <div className="text-xs text-neutral-600 dark:text-white/60">
-                                                    Topics: {m.moduleCompleted ? "done" : "not done"} • Assignment:{" "}
-                                                    {m.assignmentCompleted ? "done" : "not done"}
-                                                </div>
-                                            ) : null}
-                                        </div>
-                                        <div
-                                            className={cn(
-                                                "text-xs font-black",
-                                                ok ? "text-emerald-700 dark:text-emerald-200" : "text-neutral-500 dark:text-white/60",
-                                            )}
+                    <Surface className="p-4 sm:p-5">
+                        <SectionHeader
+                            title="Certificate Preview"
+                            icon={<Award className="h-4 w-4" />}
+                            meta={eligible ? "Unlocked" : "Locked"}
+                        />
+
+                        <div className="mt-4">
+                            <CertificatePreviewCard
+                                eligible={eligible}
+                                previewName={previewName}
+                                subjectTitle={status?.subject.title ?? "Course"}
+                                completionDateStr={completionDateStr}
+                                issuedDateStr={issuedDateStr}
+                                certificateId={status?.certificate?.id ?? null}
+                            />
+                        </div>
+                    </Surface>
+
+                    <div className="grid gap-3 lg:grid-cols-[minmax(0,1.12fr)_minmax(240px,0.88fr)]">
+                        <Surface className="p-4 sm:p-5">
+                            <SectionHeader
+                                title="Checklist"
+                                icon={
+                                    eligible ? (
+                                        <CheckCircle2 className="h-4 w-4" />
+                                    ) : (
+                                        <Lock className="h-4 w-4" />
+                                    )
+                                }
+                                meta={`${status?.modules?.length ?? 0} modules`}
+                            />
+
+                            <div className="mt-4 grid gap-2">
+                                {status?.modules?.map((m) => {
+                                    const ok =
+                                        m.moduleCompleted &&
+                                        (!status.requireAssignment || m.assignmentCompleted);
+
+                                    return (
+                                        <Surface
+                                            key={m.moduleId}
+                                            tone={ok ? "success" : "muted"}
+                                            className="rounded-xl px-3 py-2.5"
                                         >
-                                            {ok ? "✓ Complete" : "In progress"}
-                                        </div>
-                                    </div>
-                                );
-                            })}
-                        </div>
-                    </div>
+                                            <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                                                <div className="min-w-0">
+                                                    <div className="truncate text-sm font-medium text-[rgb(var(--ui-text)/0.96)]">
+                                                        {m.title}
+                                                    </div>
 
-                    <div className="ui-card p-5">
-                        <div className="text-lg font-black">Next steps</div>
-                        <div className="mt-3 grid gap-3 md:grid-cols-3">
-                            {nextSteps.map((s) => (
-                                <div
-                                    key={s.title}
-                                    className="rounded-2xl border border-neutral-200 bg-white p-4 dark:border-white/10 dark:bg-white/[0.04]"
-                                >
-                                    <div className="font-extrabold">{s.title}</div>
-                                    <div className="mt-1 text-sm text-neutral-600 dark:text-white/60">{s.body}</div>
-                                </div>
-                            ))}
-                        </div>
+                                                    {status.requireAssignment ? (
+                                                        <div className="mt-1 text-[11px] leading-5 text-[rgb(var(--ui-text-muted)/0.84)]">
+                                                            Topics: {m.moduleCompleted ? "done" : "not done"} • Assignment:{" "}
+                                                            {m.assignmentCompleted ? "done" : "not done"}
+                                                        </div>
+                                                    ) : null}
+                                                </div>
+
+                                                <div className="shrink-0">
+                                                    <Pill tone={ok ? "good" : "neutral"}>
+                                                        {ok ? "Complete" : "In progress"}
+                                                    </Pill>
+                                                </div>
+                                            </div>
+                                        </Surface>
+                                    );
+                                })}
+                            </div>
+                        </Surface>
+
+                        <Surface className="p-4 sm:p-5">
+                            <SectionHeader
+                                title="Next steps"
+                                icon={<Sparkles className="h-4 w-4" />}
+                            />
+
+                            <div className="mt-4 grid gap-2">
+                                {nextSteps.map((step) => (
+                                    <Surface key={step.title} tone="muted" className="rounded-xl p-3">
+                                        <div className="text-sm font-medium text-[rgb(var(--ui-text)/0.96)]">
+                                            {step.title}
+                                        </div>
+                                        <div className="mt-1 text-xs leading-5 text-[rgb(var(--ui-text-muted)/0.88)]">
+                                            {step.body}
+                                        </div>
+                                    </Surface>
+                                ))}
+                            </div>
+                        </Surface>
                     </div>
                 </div>
             </div>
-            );
-            }
+        </div>
+    );
+}

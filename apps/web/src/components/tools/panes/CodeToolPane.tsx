@@ -10,6 +10,7 @@ import type { CodeFeedback } from "@/lib/code/feedback/types";
 import CodeFeedbackCallout from "@/components/practice/kinds/CodeFeedbackCallout";
 import { useReviewTools } from "@/components/review/module/context/ReviewToolsContext";
 import type { OnRun } from "@/components/code/runner/types";
+import {isInteractiveLanguage} from "@/components/practice/practiceType";
 
 export default function CodeToolPane(props: {
     height: number;
@@ -33,6 +34,7 @@ export default function CodeToolPane(props: {
     const boundId = tools?.boundId ?? null;
     const clearRunFeedback = tools?.clearRunFeedback;
     const setRunFeedbackForCard = tools?.setRunFeedback;
+    const syncCodeInputSnapshot = tools?.syncCodeInputSnapshot;
 
     const { ref, size } = useElementSize<HTMLDivElement>();
     const runnerH = Math.max(320, size.h);
@@ -43,32 +45,12 @@ export default function CodeToolPane(props: {
         setRunFeedback(null);
         if (boundId) clearRunFeedback?.(boundId);
     }, [toolLang, toolCode, toolStdin, boundId, clearRunFeedback]);
+
     const handleRun = useCallback<OnRun>(
         async (args) => {
-            if (args.language === "sql") {
-                const result = await runViaApi(
-                    {
-                        kind: "sql",
-                        language: "sql",
-                        dialect: args.sqlDialect,
-                        code: args.code,
-                        schemaSql: args.sqlSchemaSql,
-                        seedSql: args.sqlSeedSql,
-                        setupSql: args.setupSql,
-                        datasetId: args.datasetId,
-                    },
-                    args.signal,
-                );
-
-                setRunFeedback(null);
-
-                if (boundId) {
-                    setRunFeedbackForCard?.(boundId, null);
-                }
-
-                return result;
+            if (!isInteractiveLanguage(args.language)) {
+                throw new Error("SQL is not supported in CodeInputExerciseUI embedded runner.");
             }
-
             const result = await runViaApi(
                 {
                     kind: "code",
@@ -113,12 +95,30 @@ export default function CodeToolPane(props: {
                 onChangeCode={(c: string) => {
                     setRunFeedback(null);
                     if (boundId) clearRunFeedback?.(boundId);
+
                     onChangeCode(c);
+
+                    if (boundId) {
+                        syncCodeInputSnapshot?.(boundId, {
+                            code: c,
+                            submitted: false,
+                            result: null,
+                        });
+                    }
                 }}
-                onChangeStdin={(s) => {
+                onChangeStdin={(s: string) => {
                     setRunFeedback(null);
                     if (boundId) clearRunFeedback?.(boundId);
+
                     onChangeStdin(s);
+
+                    if (boundId) {
+                        syncCodeInputSnapshot?.(boundId, {
+                            codeStdin: s,
+                            submitted: false,
+                            result: null,
+                        });
+                    }
                 }}
                 onBeforeRun={async () => {
                     setRunFeedback(null);

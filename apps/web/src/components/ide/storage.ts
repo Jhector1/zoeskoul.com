@@ -1,3 +1,4 @@
+// src/components/ide/storage.ts
 import type { FSNode, FileNode, FolderNode, WorkspaceStateV2, NodeId } from "./types";
 import { uid } from "./utils";
 import {
@@ -7,7 +8,12 @@ import {
     defaultSqlSeedCode,
 } from "./languageDefaults";
 import type { CodeLanguage } from "@/lib/practice/types";
-import {InteractiveLanguage} from "@zoeskoul/code-contracts";
+import { InteractiveLanguage } from "@zoeskoul/code-contracts";
+import {
+    getWorkspaceBody,
+    putWorkspaceBody,
+    deleteWorkspaceBody,
+} from "./workspaceHook/workspace.idb";
 
 export const STORAGE_KEY_V2 = `${process.env.NEXT_PUBLIC_APP_NAME}.ide.workspace.v2`;
 export const STORAGE_KEY_V1 = `${process.env.NEXT_PUBLIC_APP_NAME}.ide.workspace.v1`;
@@ -299,7 +305,7 @@ export function repairWorkspaceStateV2(
     };
 }
 
-export function loadV2(
+function loadLegacyV2FromLocalStorage(
     storageKey: string,
     fallbackLanguage: CodeLanguage = "python",
 ): WorkspaceStateV2 | null {
@@ -312,11 +318,64 @@ export function loadV2(
     }
 }
 
-export function saveV2(storageKey: string, ws: WorkspaceStateV2) {
+function saveLegacyV2ToLocalStorage(storageKey: string, ws: WorkspaceStateV2) {
     try {
-        const safe = repairWorkspaceStateV2(ws, ws.language);
-        localStorage.setItem(storageKey, JSON.stringify(safe));
+        localStorage.setItem(storageKey, JSON.stringify(ws));
     } catch {}
+}
+
+function removeLegacyV2FromLocalStorage(storageKey: string) {
+    try {
+        localStorage.removeItem(storageKey);
+    } catch {}
+}
+
+export async function loadV2(
+    storageKey: string,
+    fallbackLanguage: CodeLanguage = "python",
+): Promise<WorkspaceStateV2 | null> {
+    try {
+        const fromIdb = await getWorkspaceBody(storageKey);
+        if (fromIdb) {
+            return repairWorkspaceStateV2(fromIdb, fallbackLanguage);
+        }
+    } catch {
+        // fall through to legacy
+    }
+
+    const legacy = loadLegacyV2FromLocalStorage(storageKey, fallbackLanguage);
+    if (!legacy) return null;
+
+    try {
+        await putWorkspaceBody(storageKey, legacy);
+        removeLegacyV2FromLocalStorage(storageKey);
+    } catch {
+        // keep legacy copy if IDB write fails
+    }
+
+    return legacy;
+}
+
+export async function saveV2(storageKey: string, ws: WorkspaceStateV2) {
+    const safe = repairWorkspaceStateV2(ws, ws.language);
+
+    try {
+        await putWorkspaceBody(storageKey, safe);
+        removeLegacyV2FromLocalStorage(storageKey);
+        return;
+    } catch {
+        // fallback for browsers where IDB fails unexpectedly
+    }
+
+    saveLegacyV2ToLocalStorage(storageKey, safe);
+}
+
+export async function deleteV2(storageKey: string) {
+    try {
+        await deleteWorkspaceBody(storageKey);
+    } catch {}
+
+    removeLegacyV2FromLocalStorage(storageKey);
 }
 
 function buildCodeWorkspaceFromV1(

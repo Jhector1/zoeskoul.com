@@ -60,7 +60,11 @@ type CodeToolsApi = {
     getRunFeedbackEntry?: (id: string) => { feedback: any | null; tick: number } | null;
     setRunFeedback?: (id: string, feedback: any | null) => void;
     clearRunFeedback?: (id: string) => void;
+
+    syncCodeInputSnapshot?: (id: string, patch: any) => void;
+    patchCodeInput?: (id: string, patch: any) => void;
 };
+
 function CodeInputWithTools(props: {
     exercise: any;
     current: any;
@@ -91,12 +95,13 @@ function CodeInputWithTools(props: {
         codeInputId,
         updateCurrent,
         showPrompt,
+        feedback,
+        explanation,
     } = props;
 
     const {
         registerCodeInput,
         unregisterCodeInput,
-        clearRunFeedback,
         isBound,
         boundId,
         ensureVisible,
@@ -110,6 +115,7 @@ function CodeInputWithTools(props: {
 
     const onPatch = useCallback((patch: any) => updateCurrent(patch), [updateCurrent]);
 
+    // register once for lifecycle / binding
     useEffect(() => {
         registerCodeInput(codeInputId, {
             lang: curLang,
@@ -119,16 +125,16 @@ function CodeInputWithTools(props: {
         });
 
         return () => unregisterCodeInput(codeInputId);
-        // mount/unmount registration only
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [registerCodeInput, unregisterCodeInput, codeInputId, onPatch]);
 
-    const didFirstSnapshot = useRef(false);
+    const toolsBoundToThis = isBound(codeInputId);
+    const toolsUnbound = boundId == null;
+
+    // IMPORTANT:
+    // only seed from current while NOT bound.
+    // once bound, Tools/registry own the live code.
     useEffect(() => {
-        if (!didFirstSnapshot.current) {
-            didFirstSnapshot.current = true;
-            return;
-        }
+        if (toolsBoundToThis) return;
 
         registerCodeInput(codeInputId, {
             lang: curLang,
@@ -136,18 +142,12 @@ function CodeInputWithTools(props: {
             stdin: curStdin,
             onPatch,
         });
+    }, [toolsBoundToThis, registerCodeInput, codeInputId, curLang, curCode, curStdin, onPatch]);
 
-        clearRunFeedback?.(codeInputId);
-    }, [registerCodeInput, clearRunFeedback, codeInputId, curLang, curCode, curStdin, onPatch]);
-
-    const toolsBoundToThis = isBound(codeInputId);
-    const toolsUnbound = boundId == null;
-
-    const checkedFeedback = props.feedback ?? null;
-    const checkedExplanation = props.explanation ?? null;
     const runEntry = getRunFeedbackEntry?.(codeInputId) ?? null;
     const toolRunFeedback = runEntry?.feedback ?? null;
     const toolRunTick = runEntry?.tick ?? 0;
+
     return (
         <CodeInputExerciseUI
             exercise={exercise}
@@ -166,8 +166,8 @@ function CodeInputWithTools(props: {
             toolsUnbound={toolsUnbound}
             autoBindMode="never"
             showPrompt={showPrompt}
-            feedback={checkedFeedback}
-            explanation={checkedExplanation}
+            feedback={feedback ?? null}
+            explanation={explanation ?? null}
             runFeedback={toolRunFeedback}
             runFeedbackTick={toolRunTick}
             onUseTools={() => {
@@ -177,7 +177,6 @@ function CodeInputWithTools(props: {
         />
     );
 }
-
 // ...rest of ExerciseRenderer unchanged
 
 

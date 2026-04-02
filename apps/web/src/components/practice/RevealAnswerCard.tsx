@@ -9,6 +9,7 @@ import MatrixInputPanel from "./MatrixInputPanel";
 import { scrollIntoViewSmart } from "@/lib/ui/flowScroll";
 import { useTaggedT } from "@/i18n/tagged";
 import { resolveDeepTagged } from "@/i18n/resolveDeepTagged";
+import { useReviewTools } from "@/components/review/module/context/ReviewToolsContext";
 
 async function copyToClipboard(text: string) {
     try {
@@ -59,6 +60,7 @@ export default function RevealAnswerCard({
                                              title = "Revealed answer",
                                              updateCurrent,
                                              autoScroll = true,
+                                             codeInputId,
                                          }: {
     exercise: Exercise | null;
     current: QItem;
@@ -66,9 +68,12 @@ export default function RevealAnswerCard({
     title?: string;
     updateCurrent: (patch: Partial<QItem>) => void;
     autoScroll?: boolean;
+    codeInputId?: string;
 }) {
     const [copied, setCopied] = useState(false);
+    const [filled, setFilled] = useState(false);
     const rootRef = useRef<HTMLDivElement | null>(null);
+    const tools = useReviewTools();
 
     const { raw } = useTaggedT();
     const exT: Exercise | null = useMemo(() => {
@@ -123,15 +128,15 @@ export default function RevealAnswerCard({
                         </div>
 
                         <pre className="p-3 overflow-x-auto font-mono text-xs leading-relaxed ui-text">
-              <code>{code?.trim() ? code : "// (no solutionCode provided)"}</code>
-            </pre>
+                            <code>{code?.trim() ? code : "// (no solutionCode provided)"}</code>
+                        </pre>
 
                         {stdin ? (
                             <div className="border-t px-3 py-2 ui-border">
                                 <div className={REVEAL_SMALL_LABEL}>stdin</div>
                                 <pre className={REVEAL_PRE}>
-                  <code>{stdin}</code>
-                </pre>
+                                    <code>{stdin}</code>
+                                </pre>
                             </div>
                         ) : null}
                     </div>
@@ -198,8 +203,8 @@ export default function RevealAnswerCard({
                                 <div className="mt-2 flex flex-wrap gap-2">
                                     {answers.map((a: string) => (
                                         <span key={a} className={REVEAL_CHIP}>
-                      {a}
-                    </span>
+                                            {a}
+                                        </span>
                                     ))}
                                 </div>
                             </>
@@ -235,8 +240,8 @@ export default function RevealAnswerCard({
                                     const label = String(byId.get(sid) ?? sid);
                                     return (
                                         <span key={sid} className={REVEAL_CHIP}>
-                      {label}
-                    </span>
+                                            {label}
+                                        </span>
                                     );
                                 })
                             ) : (
@@ -279,8 +284,8 @@ export default function RevealAnswerCard({
                             {answers.length ? (
                                 answers.map((a: string) => (
                                     <span key={a} className={REVEAL_CHIP}>
-                    {a}
-                  </span>
+                                        {a}
+                                    </span>
                                 ))
                             ) : copyText ? (
                                 <span className={REVEAL_CHIP}>{copyText}</span>
@@ -337,8 +342,8 @@ export default function RevealAnswerCard({
                             <div className="mt-2 flex flex-wrap gap-2">
                                 {optionIds.map((id: any) => (
                                     <span key={id} className={REVEAL_CHIP}>
-                    {byId.get(id) ?? id}
-                  </span>
+                                        {byId.get(id) ?? id}
+                                    </span>
                                 ))}
                             </div>
                         ) : (
@@ -405,7 +410,24 @@ export default function RevealAnswerCard({
 
     function onFill() {
         if (!m.fillPatch) return;
-        updateCurrent({ ...m.fillPatch, submitted: false, result: null });
+
+        const patch = { ...m.fillPatch, submitted: false, result: null };
+
+        if (String(reveal?.kind ?? exercise?.kind ?? "") === "code_input" && codeInputId) {
+            if (tools?.patchCodeInput) {
+                tools.patchCodeInput(codeInputId, patch);
+            } else {
+                updateCurrent(patch);
+            }
+
+            setFilled(true);
+            window.setTimeout(() => setFilled(false), 1200);
+            return;
+        }
+
+        updateCurrent(patch);
+        setFilled(true);
+        window.setTimeout(() => setFilled(false), 1200);
     }
 
     return (
@@ -424,7 +446,7 @@ export default function RevealAnswerCard({
                         className="ui-btn-secondary"
                         title="Fill the input with the revealed answer"
                     >
-                        Fill answer
+                        {filled ? "Filled ✓" : "Fill answer"}
                     </button>
                 </div>
             </div>

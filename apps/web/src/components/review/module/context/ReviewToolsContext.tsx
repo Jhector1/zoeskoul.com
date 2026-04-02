@@ -1,4 +1,3 @@
-// src/components/review/module/context/ReviewToolsContext.tsx
 "use client";
 
 import React, {
@@ -19,35 +18,28 @@ export type RegisterArgs = {
     stdin?: string;
     onPatch: (patch: any) => void;
 };
+
 export type RunFeedbackEntry = {
     feedback: CodeFeedback | null;
     tick: number;
 };
+
 export type CodeInputMeta = {
-    /** Global ordering across the page (smaller = earlier). */
     order: number;
-    /** If false, skip for binding (locked/unavailable). */
     eligible: boolean;
-    /** If true, skip for binding (answered/flow-complete). */
     done: boolean;
 };
 
 export type ReviewToolsValue = {
-    /** Tools enabled for this page/device */
     enabled: boolean;
 
     registerCodeInput: (id: string, args: RegisterArgs) => void;
     unregisterCodeInput: (id: string) => void;
 
-    /**
-     * Deterministic: Tools always binds to the first unanswered eligible code_input.
-     * requestBind / requestBindNext are kept for compatibility, but they reconcile to that rule.
-     */
     requestBind: (id: string) => void;
     requestBindNext: (afterId: string) => void;
     unbindCodeInput: () => void;
 
-    /** QuizPracticeCard reports ordering + completion/unlock status */
     setCodeInputMeta: (id: string, meta: Partial<CodeInputMeta>) => void;
 
     boundId: string | null;
@@ -55,10 +47,12 @@ export type ReviewToolsValue = {
 
     ensureVisible?: () => void;
 
-    /** NEW: share plain Run feedback from Tools pane to bound exercise card */
     getRunFeedbackEntry: (id: string) => RunFeedbackEntry | null;
     setRunFeedback: (id: string, feedback: CodeFeedback | null) => void;
     clearRunFeedback: (id: string) => void;
+
+    syncCodeInputSnapshot: (id: string, patch: any) => void;
+    patchCodeInput: (id: string, patch: any) => void;
 };
 
 const Ctx = createContext<ReviewToolsValue | null>(null);
@@ -80,14 +74,10 @@ export function ReviewToolsProvider({
                                     }: {
     children: React.ReactNode;
     ensureVisible?: () => void;
-
     onBindToToolsPanel: (args: { id: string } & RegisterArgs) => void;
     onUnbindFromToolsPanel?: () => void;
-
     externalBoundId?: string | null;
-
     enabled?: boolean;
-
     mode?: "first_unanswered" | "first_registered";
     resetKey?: string;
 }) {
@@ -107,7 +97,6 @@ export function ReviewToolsProvider({
     const [metaTick, setMetaTick] = useState(0);
 
     const [runFeedbackById, setRunFeedbackById] = useState<Record<string, RunFeedbackEntry>>({});
-    // avoid strict-mode unbind flicker
     const unbindTimersRef = useRef(new Map<string, number>());
 
     const clearUnbindTimer = useCallback((id: string) => {
@@ -137,7 +126,6 @@ export function ReviewToolsProvider({
                 feedback: feedback ?? null,
                 tick: (cur?.tick ?? 0) + 1,
             };
-
             return { ...prev, [id]: next };
         });
     }, []);
@@ -152,7 +140,62 @@ export function ReviewToolsProvider({
         });
     }, []);
 
-    // If enabled flips OFF, force unbind + clear.
+    const syncCodeInputSnapshot = useCallback((id: string, patch: any) => {
+        if (!id) return;
+
+        const cur = registryRef.current.get(id);
+        if (!cur) return;
+
+        const next: RegisterArgs = {
+            ...cur,
+            lang: (patch?.codeLang ?? cur.lang) as CodeLanguage,
+            code: typeof patch?.code === "string" ? patch.code : cur.code,
+            stdin:
+                typeof patch?.codeStdin === "string"
+                    ? patch.codeStdin
+                    : typeof patch?.stdin === "string"
+                        ? patch.stdin
+                        : cur.stdin,
+        };
+
+        registryRef.current.set(id, next);
+        cur.onPatch?.(patch);
+    }, []);
+
+    const bindNow = useCallback(
+        (id: string) => {
+            if (!enabledRef.current) return;
+
+            const snap = registryRef.current.get(id);
+            if (!snap) {
+                setRequestedId(id);
+                return;
+            }
+
+            ensureVisible?.();
+            onBindToToolsPanel({ id, ...snap });
+            setBoundId(id);
+            setRequestedId(null);
+        },
+        [ensureVisible, onBindToToolsPanel],
+    );
+
+    const patchCodeInput = useCallback((id: string, patch: any) => {
+        if (!id) return;
+
+        clearRunFeedback(id);
+        syncCodeInputSnapshot(id, patch);
+        bindNow(id);
+    }, [bindNow, clearRunFeedback, syncCodeInputSnapshot]);
+
+    const requestBind = useCallback(
+        (id: string) => {
+            if (!enabledRef.current) return;
+            if (!id) return;
+            bindNow(id);
+        },
+        [bindNow],
+    );
     useEffect(() => {
         if (enabled) return;
 
@@ -170,7 +213,6 @@ export function ReviewToolsProvider({
         setMetaTick((x) => x + 1);
     }, [enabled, onUnbindFromToolsPanel]);
 
-    // reset registry/order/meta on topic reset
     const lastResetRef = useRef<string | null>(null);
     useEffect(() => {
         if (!resetKey) return;
@@ -198,7 +240,6 @@ export function ReviewToolsProvider({
         lastResetRef.current = resetKey;
     }, [resetKey, externalBoundId, onUnbindFromToolsPanel]);
 
-    // keep provider boundId consistent with external tool state
     useEffect(() => {
         if (externalBoundId === undefined) return;
         const next = externalBoundId ?? null;
@@ -230,24 +271,6 @@ export function ReviewToolsProvider({
     const isBound = useCallback(
         (id: string) => (externalBoundId ?? boundId) === id,
         [externalBoundId, boundId],
-    );
-
-    const bindNow = useCallback(
-        (id: string) => {
-            if (!enabledRef.current) return;
-
-            const snap = registryRef.current.get(id);
-            if (!snap) {
-                setRequestedId(id);
-                return;
-            }
-
-            ensureVisible?.();
-            onBindToToolsPanel({ id, ...snap });
-            setBoundId(id);
-            setRequestedId(null);
-        },
-        [ensureVisible, onBindToToolsPanel],
     );
 
     const pickFirstUnanswered = useCallback((): string | null => {
@@ -310,25 +333,35 @@ export function ReviewToolsProvider({
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [enabled, registryTick, metaTick, mode]);
 
-    const requestBind = useCallback(
-        (_id: string) => {
-            if (!enabledRef.current) return;
-            reconcileBinding();
-        },
-        [reconcileBinding],
-    );
-
     useEffect(() => {
         if (!enabled) return;
         reconcileBinding();
     }, [enabled, reconcileBinding, externalBoundId]);
 
+
+
     const requestBindNext = useCallback(
-        (_afterId: string) => {
+        (afterId: string) => {
             if (!enabledRef.current) return;
+
+            const ordered = orderRef.current.filter((id) => registryRef.current.has(id));
+            const startIndex = ordered.indexOf(afterId);
+
+            for (let i = startIndex + 1; i < ordered.length; i += 1) {
+                const id = ordered[i];
+                const meta = metaRef.current.get(id);
+
+                if (!meta) continue;
+                if (!meta.eligible) continue;
+                if (meta.done) continue;
+
+                bindNow(id);
+                return;
+            }
+
             reconcileBinding();
         },
-        [reconcileBinding],
+        [bindNow, reconcileBinding],
     );
 
     const setCodeInputMeta = useCallback((id: string, patch: Partial<CodeInputMeta>) => {
@@ -427,6 +460,9 @@ export function ReviewToolsProvider({
             getRunFeedbackEntry,
             setRunFeedback,
             clearRunFeedback,
+
+            syncCodeInputSnapshot,
+            patchCodeInput,
         }),
         [
             enabled,
@@ -443,6 +479,8 @@ export function ReviewToolsProvider({
             getRunFeedbackEntry,
             setRunFeedback,
             clearRunFeedback,
+            syncCodeInputSnapshot,
+            patchCodeInput,
         ],
     );
 

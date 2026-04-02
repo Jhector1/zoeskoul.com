@@ -70,6 +70,7 @@ export type IdeWorkspaceDerived = {
   rootSrc: FolderNode | undefined;
   currentWorkspace: WorkspaceStateV2 | null;
   isSingleFileMode: boolean;
+  storageHydrated: boolean;
 };
 
 export type DividerRootEl = HTMLElement | null;
@@ -106,7 +107,7 @@ export type IdeWorkspaceActions = {
 
   setEntry: (id: NodeId) => void;
   requestDelete: (id: NodeId) => void;
-  performDelete: (id: NodeId) => void;
+  performDelete: () => void;
 
   onMouseDownDivider: (e: React.MouseEvent, rootEl: DividerRootEl) => void;
   onPointerDownDivider: (e: React.PointerEvent, rootEl: DividerRootEl) => void;

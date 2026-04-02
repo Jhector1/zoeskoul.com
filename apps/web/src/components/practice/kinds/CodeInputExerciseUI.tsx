@@ -3,16 +3,15 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import type { CodeLanguage, Exercise } from "@/lib/practice/types";
 import type { RunResult } from "@/lib/code/types";
+import type { CodeFeedback } from "@/lib/code/feedback/types";
+import { pickRunFeedbackFromResult } from "@/lib/code/feedback/classify";
+import { runViaApi } from "@/lib/code/runClient";
 import CodeRunner, { CodeRunnerFrame } from "@/components/code/CodeRunner";
 import { ExercisePrompt } from "@/components/practice/kinds/KindHelper";
 import { useTaggedT } from "@/i18n/tagged";
-import { runViaApi } from "@/lib/code/runClient";
-import {
-    pickRunFeedbackFromResult,
-} from "@/lib/code/feedback/classify";
-import type { CodeFeedback } from "@/lib/code/feedback/types";
 import CodeFeedbackCallout from "@/components/practice/kinds/CodeFeedbackCallout";
 import {InteractiveLanguage} from "@zoeskoul/code-contracts";
+import {isInteractiveLanguage} from "@/components/practice/practiceType";
 
 type CodeInputExercise = Extract<Exercise, { kind: "code_input" }>;
 
@@ -42,7 +41,7 @@ export default function CodeInputExerciseUI({
                                                 frame = "plain",
                                                 feedback = null,
                                                 explanation = null,
-                                                runFeedback: externalRunFeedback = null,
+                                                runFeedback = null,
                                                 runFeedbackTick = 0,
                                             }: {
     exercise: CodeInputExercise;
@@ -75,65 +74,32 @@ export default function CodeInputExerciseUI({
         checked && ok === false && reviewCorrect && typeof reviewCorrect.code === "string";
 
     const lockLanguage = true;
-
     const didAutoBind = useRef(false);
     const didFirstSync = useRef(false);
     const ui = useTaggedT("practiceUi.codeInput");
 
-    const [runFeedback, setRunFeedback] = useState<CodeFeedback | null>(null);
+    const [embeddedRunFeedback, setEmbeddedRunFeedback] = useState<CodeFeedback | null>(null);
 
     useEffect(() => {
-        setRunFeedback(null);
+        setEmbeddedRunFeedback(null);
     }, [code, stdin, language]);
-
-
-
-// In tools mode, the parent passes plain run feedback through `feedback`.
-// In embedded mode, local `runFeedback` comes from this component's own runner.
-
-
-
-
 
     const checkedFeedback = checked && ok === false ? feedback ?? null : null;
     const checkedExplanation = checked && ok === false ? explanation ?? null : null;
 
-    const localRunFeedback = runFeedback;
+    const activeFeedback =
+        checkedFeedback ??
+        (variant === "tools" ? runFeedback ?? null : embeddedRunFeedback);
 
-    const [lastRunTickSeen, setLastRunTickSeen] = useState(0);
-    const [preferRunFeedback, setPreferRunFeedback] = useState(false);
-
-    useEffect(() => {
-        if (variant !== "tools") return;
-        if (!runFeedbackTick) return;
-        if (runFeedbackTick === lastRunTickSeen) return;
-
-        setLastRunTickSeen(runFeedbackTick);
-        setPreferRunFeedback(true);
-    }, [variant, runFeedbackTick, lastRunTickSeen]);
-
-    useEffect(() => {
-        if (variant === "tools") return;
-        if (localRunFeedback !== null) {
-            setPreferRunFeedback(true);
-        }
-    }, [variant, localRunFeedback]);
-
-    useEffect(() => {
-        setPreferRunFeedback(false);
-    }, [code, stdin, language]);
-
-    const activeFeedback = preferRunFeedback
-        ? (variant === "tools" ? externalRunFeedback : localRunFeedback)
-        : checkedFeedback ?? (variant === "tools" ? externalRunFeedback : localRunFeedback);
-
-    const activeExplanation = preferRunFeedback ? null : checkedExplanation ?? null;
-
+    const activeExplanation = checkedFeedback ? checkedExplanation : null;
     const showFeedback = Boolean(activeFeedback || activeExplanation);
-    const executeRun = useCallback(
-        async (args: { language: InteractiveLanguage; code: string; stdin: string }) => {
-            setRunFeedback(null);
 
+    const executeEmbeddedRun = useCallback(
+        async (args: { language: CodeLanguage; code: string; stdin: string }) => {
+            setEmbeddedRunFeedback(null);
+            if (!isInteractiveLanguage(args.language)) {
+                                throw new Error("SQL is not supported in CodeInputExerciseUI embedded runner.");
+            }
             const result = onRun
                 ? await onRun(args)
                 : await runViaApi(
@@ -152,7 +118,7 @@ export default function CodeInputExerciseUI({
                 code: args.code,
             });
 
-            setRunFeedback(nextFeedback);
+            setEmbeddedRunFeedback(nextFeedback);
             return result;
         },
         [onRun],
@@ -183,29 +149,35 @@ export default function CodeInputExerciseUI({
         }
 
         onSyncTools();
-    }, [variant, toolsBound, code, stdin, language, onSyncTools]);
+    }, [variant, toolsBound, code, stdin, language, onSyncTools, runFeedbackTick]);
 
     if (variant === "tools") {
         return (
             <div className="grid gap-3">
                 {showPrompt ? <ExercisePrompt exercise={exercise} /> : null}
 
-                <div className="ui-pabge-surface p-3">
-                    <div className="flex items-center justify-between gap-2">
+                <div className="ui-page-surface p-3">
+                    <div className="flex items-center justify-between gap-3">
                         <div className="min-w-0">
                             <div className="ui-title-sm">
-                                {ui.t("tools.title", {}, "Edit & run in Tools")}
+                                {ui.t("tools.title", {}, "Solve in Tools")}
                             </div>
+
                             <div className="mt-1 ui-meta">
                                 {ui.t("tools.language", {}, "Language")}:{" "}
                                 <span className="font-medium ui-text">{String(language ?? "python")}</span>
                                 {" • "}
-                                {ui.t("tools.stdin", {}, "Stdin")}:{" "}
-                                <span className="font-medium ui-text">
-                  {String(stdin ?? "").trim()
-                      ? ui.t("yes", {}, "yes")
-                      : ui.t("no", {}, "no")}
-                </span>
+                                {toolsBound
+                                    ? ui.t("tools.bound", {}, "Bound to Tools")
+                                    : ui.t("tools.notBound", {}, "Not bound yet")}
+                            </div>
+
+                            <div className="mt-2 ui-meta">
+                                {ui.t(
+                                    "tools.desc",
+                                    {},
+                                    "Write code, run it, and use Fill answer directly in the Tools pane."
+                                )}
                             </div>
                         </div>
 
@@ -219,32 +191,9 @@ export default function CodeInputExerciseUI({
                             title={ui.t("tools.bindTitle", {}, "Bind this question to the Tools panel")}
                         >
                             {toolsBound
-                                ? ui.t("tools.bound", {}, "Bound ✓")
+                                ? ui.t("tools.boundShort", {}, "Bound ✓")
                                 : ui.t("tools.open", {}, "Open in Tools")}
                         </button>
-                    </div>
-
-                    <div className="mt-3 grid gap-2">
-                        <div className="ui-meta-strong">
-                            {ui.t("tools.codeSnapshot", {}, "Your code (snapshot)")}
-                        </div>
-
-                        <pre className="max-h-56 overflow-auto rounded-md border p-3 font-mono text-[11px] ui-border ui-bg-surface-2 ui-text">
-              {String(code ?? "").trim()
-                  ? String(code)
-                  : ui.t("tools.emptyCode", {}, "// Open Tools → to write code")}
-            </pre>
-
-                        {String(stdin ?? "").trim() ? (
-                            <>
-                                <div className="ui-meta-strong">
-                                    {ui.t("tools.stdinSnapshot", {}, "Stdin (snapshot)")}
-                                </div>
-                                <pre className="max-h-32 overflow-auto rounded-md border p-3 font-mono text-[11px] ui-border ui-bg-surface-2 ui-text">
-                  {String(stdin)}
-                </pre>
-                            </>
-                        ) : null}
                     </div>
                 </div>
 
@@ -267,6 +216,7 @@ export default function CodeInputExerciseUI({
     }
 
     const runnerTitle = showPrompt ? exercise.title : undefined;
+
     return (
         <div className="grid gap-3">
             {showPrompt ? <ExercisePrompt exercise={exercise} /> : null}
@@ -290,15 +240,12 @@ export default function CodeInputExerciseUI({
                 stdin={stdin}
                 onChangeCode={(c) => !readOnly && onChangeCode(c)}
                 onChangeStdin={(s) => !readOnly && onChangeStdin(s)}
-                onRun={
-                    onRun
-                        ? async (args) =>
-                            onRun({
-                                language: args.language,
-                                code: args.code,
-                                stdin: args.stdin ?? "",
-                            })
-                        : undefined
+                onRun={(args) =>
+                    executeEmbeddedRun({
+                        language: args.language,
+                        code: args.code,
+                        stdin: args.stdin ?? "",
+                    })
                 }
                 fixedTerminalDock="bottom"
             />
@@ -331,7 +278,9 @@ export default function CodeInputExerciseUI({
                             fixedLanguage={reviewCorrect!.language}
                             onChangeLanguage={() => {}}
                             code={reviewCorrect!.code}
+                            stdin={reviewCorrect!.stdin}
                             onChangeCode={() => {}}
+                            onChangeStdin={() => {}}
                             onRun={undefined}
                         />
                     </div>

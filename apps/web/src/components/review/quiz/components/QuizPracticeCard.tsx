@@ -329,6 +329,7 @@ export default function QuizPracticeCard(props: {
                   helpPolicy={ps.helpPolicy}
                   updateCurrent={updateItemSafe}
                   onOpenHelp={onHelp}
+                  codeInputId={codeInputId}
               />
             </div>
         ) : (

@@ -42,6 +42,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import ReviewModuleSkeleton from "@/components/review/module/ReviewModuleSkeleton";
 import { useSkeletonGate } from "@/components/review/module/hooks/useSkeletonGate";
 import HeaderSlick from "@/components/HeaderSlick";
+import {flowLog, shortCode} from "@/lib/debug/codeFlowDebug";
 
 /* -----------------------------
    ✅ MOBILE-FIRST RESPONSIVE
