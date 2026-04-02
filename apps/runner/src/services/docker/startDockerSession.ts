@@ -28,6 +28,7 @@ function normalizeFiles(req: InteractiveRunReq): { files: FileEntry[]; entry: st
         const files = Array.isArray(req.files)
             ? req.files
             : Object.entries(req.files).map(([path, content]) => ({ path, content }));
+
         return { files, entry: req.entry };
     }
 
@@ -67,7 +68,9 @@ export async function startDockerSession(
 ): Promise<StartSessionResult> {
     const { files, entry } = normalizeFiles(req);
     const workspaceDir = await createWorkspace(files);
-    const plan = getExecutionPlan(req.language, entry);
+
+    // IMPORTANT: pass files too, so Java can read the package declaration
+    const plan = getExecutionPlan(req.language, entry, files);
 
     const sessionId = `sess_${crypto.randomUUID()}`;
     const containerName = `zoeskoul_${sessionId}`;

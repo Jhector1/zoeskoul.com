@@ -31,10 +31,14 @@ export function getExecutionPlan(
 ): ExecutionPlan {
     switch (language) {
         case "python":
-            return { runCmd: `python3 -u '${entryFile}'` };
+            return {
+                runCmd: `python3 -u '${entryFile}'`,
+            };
 
         case "javascript":
-            return { runCmd: `node '${entryFile}'` };
+            return {
+                runCmd: `node '${entryFile}'`,
+            };
 
         case "c":
             return {
@@ -64,7 +68,11 @@ export function getExecutionPlan(
 
         case "java": {
             const mainClass = getJavaMainClass(files, entryFile);
-
+            console.log({
+                entryFile,
+                filePaths: files.map((f) => f.path),
+                mainClass,
+            });
             return {
                 compileCmd: [
                     "set -euo pipefail",
