@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useEffect, useMemo } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { ReviewQuestion } from "@/lib/subjects/types";
 import type { PracticeState } from "@/components/review/quiz/hooks/useQuizPracticeBank";
 import { isEmptyPracticeAnswer } from "@/components/review/quiz/hooks/useQuizPracticeBank";
@@ -18,6 +18,8 @@ import {
   getNextPracticeHelpStepKey,
   PRACTICE_HELP_STEP_DEF_MAP,
 } from "@/lib/practice/help/steps";
+
+const LOADING_TIMEOUT_MS = 8000;
 
 export default function QuizPracticeCard(props: {
   q: Extract<ReviewQuestion, { kind: "practice" }>;
@@ -183,6 +185,43 @@ export default function QuizPracticeCard(props: {
   const hasBlockingError = Boolean(ps?.error && !hasExercise);
   const hasInlineError = Boolean(ps?.error && hasExercise);
 
+  // Defensive UI layer:
+  // even if the hook ever regresses, the user should never stare at an endless spinner.
+  const [loadTimedOut, setLoadTimedOut] = useState(false);
+  const autoRetriedRef = useRef<string | null>(null);
+
+  useEffect(() => {
+    setLoadTimedOut(false);
+    autoRetriedRef.current = null;
+  }, [q.id]);
+
+  useEffect(() => {
+    if (!isInitialLoading) {
+      setLoadTimedOut(false);
+      return;
+    }
+
+    const timer = window.setTimeout(() => {
+      setLoadTimedOut(true);
+    }, LOADING_TIMEOUT_MS);
+
+    return () => window.clearTimeout(timer);
+  }, [isInitialLoading, q.id]);
+
+  useEffect(() => {
+    if (!isInitialLoading) return;
+    if (!loadTimedOut) return;
+    if (!props.onRetryExercise) return;
+
+    const retryKey = `${q.id}:${ps?.attempts ?? 0}`;
+    if (autoRetriedRef.current === retryKey) return;
+
+    autoRetriedRef.current = retryKey;
+    props.onRetryExercise();
+  }, [isInitialLoading, loadTimedOut, props.onRetryExercise, q.id, ps?.attempts]);
+
+  const showStuckLoading = isInitialLoading && loadTimedOut;
+
   return (
       <div className={["p-2", !unlocked ? "opacity-70" : ""].join(" ")}>
         {!unlocked ? (
@@ -195,7 +234,43 @@ export default function QuizPracticeCard(props: {
             </div>
         ) : null}
 
-        {isInitialLoading ? (
+        {showStuckLoading ? (
+            <div className="ui-quiz-note-danger">
+              <div>
+                {ui.t(
+                    "practice.loadingStuck",
+                    {},
+                    "This exercise is taking longer than expected to load.",
+                )}
+              </div>
+
+              <div className="mt-2 flex flex-wrap gap-2">
+                {props.onRetryExercise ? (
+                    <button
+                        type="button"
+                        onClick={props.onRetryExercise}
+                        className="ui-quiz-action ui-quiz-action--ghost"
+                    >
+                      {ui.t("buttons.retry", {}, "Retry")}
+                    </button>
+                ) : null}
+
+                <button
+                    type="button"
+                    onClick={props.onExcused}
+                    disabled={disableSkip}
+                    className={[
+                      "ui-quiz-action",
+                      disableSkip ? "ui-quiz-action--disabled" : "ui-quiz-action--ghost",
+                    ].join(" ")}
+                >
+                  {props.excused
+                      ? ui.t("buttons.excused", {}, "Excused")
+                      : ui.t("buttons.continue", {}, "Continue")}
+                </button>
+              </div>
+            </div>
+        ) : isInitialLoading ? (
             <div className="mt-2 ui-quiz-status-soft flex items-center gap-2">
               <span>{ui.t("practice.loadingExercise", {}, "Loading exercise…")}</span>
             </div>
@@ -210,7 +285,7 @@ export default function QuizPracticeCard(props: {
                         onClick={props.onRetryExercise}
                         className="ui-quiz-action ui-quiz-action--ghost"
                     >
-                      Retry
+                      {ui.t("buttons.retry", {}, "Retry")}
                     </button>
                 ) : null}
 
@@ -248,7 +323,7 @@ export default function QuizPracticeCard(props: {
                               onClick={props.onRetryExercise}
                               className="ui-quiz-action ui-quiz-action--ghost"
                           >
-                            Retry
+                            {ui.t("buttons.retry", {}, "Retry")}
                           </button>
                       ) : null}
                     </div>

@@ -11,6 +11,7 @@ import { cn } from "@/lib/cn";
 
 import SketchBlock from "@/components/sketches/subjects/SketchBlock";
 import { useTaggedT } from "@/i18n/tagged";
+import {FlowNavMode} from "@/components/review/navigation/FlowNavigator";
 
 type SavedSketchState = any;
 
@@ -50,6 +51,7 @@ export default function CardRenderer(props: {
     onQuizReset: (quizCardId: string) => void;
 
     savedSketch: SavedSketchState | null;
+    quizNavMode?: FlowNavMode;
     onSketchStateChange: (sketchCardId: string, s: SavedSketchState) => void;
 }) {
     const ui = useTaggedT("cardUi");
@@ -69,6 +71,7 @@ export default function CardRenderer(props: {
         onQuizStateChange,
         onQuizReset,
         savedSketch,
+        quizNavMode = "scroll",
         onSketchStateChange,
     } = props;
 
@@ -147,11 +150,12 @@ export default function CardRenderer(props: {
                             strictSequential={quizBlockProps.strictSequential as any}
                             unlimitedAttempts={quizBlockProps.unlimitedAttempts}
                             orderBase={orderBase}
+                            navigationMode={quizNavMode}
                         />
                     )
                 ) : null}
 
-                {done ? <CompletedBadge text={completedText} /> : null}
+                {/*{done ? <CompletedBadge text={completedText} /> : null}*/}
             </div>
         );
     }

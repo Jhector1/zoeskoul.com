@@ -16,8 +16,8 @@ export default function TopicShell(props: {
     const subtitle = tt.resolve(props.subtitle ?? null);
 
     return (
-        <section className="min-h-full">
-            <div className="sticky isolate">
+        <section className="h-full min-h-0 flex flex-col">
+            <div className="sticky isolate shrink-0">
                 <div
                     style={{
                         backgroundColor: "rgb(var(--ui-bg) / 1)",
@@ -39,7 +39,9 @@ export default function TopicShell(props: {
                 </div>
             </div>
 
-            <div className="relative z-0">{children}</div>
+            <div className="relative z-0 flex-1 min-h-0 flex flex-col">
+                {children}
+            </div>
         </section>
     );
 }

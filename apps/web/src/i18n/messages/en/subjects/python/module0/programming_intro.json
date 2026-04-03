@@ -7,8 +7,7 @@
           "summary": "Learn what a programming language is and why Python is a great first language.",
           "cards": {
             "sketch": {
-              "title": "Programming Languages: Talking to Computers"
-            },
+              "title": "What Is a Programming Language?"            },
             "quiz": {
               "title": "Quick check: programming languages"
             }
@@ -21,7 +20,7 @@
     "py": {
       "programming": {
         "intro": {
-          "title": "Programming Languages: Talking to Computers",
+          "title": "Programming Languages: How We Talk to Computers",
           "bodyMarkdown": "Just like humans communicate with each other using language, we also communicate with computers using programming languages. Computer scientists designed these languages so we can give instructions to a computer in a way it can understand.\n\nThere are many programming languages—such as Python, Java, and C—and each one has its own strengths. In this lesson, we’ll focus on Python, one of the most widely used programming languages in the world today."
         }
       }

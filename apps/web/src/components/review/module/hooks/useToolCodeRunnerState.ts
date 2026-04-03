@@ -42,7 +42,7 @@ export function useToolCodeRunnerState(args: {
         viewTid,
         toolKey = "codeRunner",
         defaultLang = "python",
-        defaultCode = `print("hello world")`,
+        defaultCode = `print("Hello World!")`,
         defaultStdin = "",
         defaultSqlDialect = "postgres",
         rightCollapsed,

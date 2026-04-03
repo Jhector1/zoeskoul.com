@@ -26,6 +26,9 @@ import { QuizBlockSkeleton } from "@/components/review/quiz/components/QuizBlock
 
 import { scrollIntoViewSmart } from "@/lib/ui/flowScroll";
 import { useTaggedT } from "@/i18n/tagged";
+import FlowNavigator, {
+  type FlowNavMode,
+} from "@/components/review/navigation/FlowNavigator";
 
 const LS_AUTO_ADV = "learnoir.quiz.autoAdvance";
 
@@ -56,6 +59,7 @@ export default function QuizBlock({
                                     quizId,
                                     spec,
                                     quizKey,
+                                    navigationMode = "scroll",
                                     passScore,
                                     onPass,
                                     sequential = true,
@@ -73,6 +77,7 @@ export default function QuizBlock({
   quizId: string;
   spec: ReviewQuizSpec;
   quizKey?: string;
+  navigationMode?: FlowNavMode;
   passScore: number;
   onPass: () => void;
   sequential?: boolean;
@@ -87,7 +92,6 @@ export default function QuizBlock({
   strictSequential?: boolean;
 
   onReset?: () => void;
-
   orderBase?: number;
 }) {
   const initState = initialState ?? null;
@@ -112,19 +116,32 @@ export default function QuizBlock({
       });
 
   const [excusedById, setExcusedById] = useState<Record<string, boolean>>({});
+  const [autoAdvance, setAutoAdvance] = useState(true);
+  const [reduceMotion, setReduceMotion] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [confirmResetQuiz, setConfirmResetQuiz] = useState(false);
+  const [awaitNextQid, setAwaitNextQid] = useState<string | null>(null);
+  const [pendingScrollQid, setPendingScrollQid] = useState<string | null>(null);
+  const [pendingScrollMode, setPendingScrollMode] = useState<"explain" | "end">("end");
 
   const onPassRef = useRef(onPass);
+  const autoKeyRef = useRef<string>("");
+  const restoreQuestionKeyRef = useRef<string>("");
+  const lastActionQidRef = useRef<string | null>(null);
+  const advanceTimerRef = useRef<number | null>(null);
+
+  const qElRef = useRef(new Map<string, HTMLDivElement | null>());
+  const footerElRef = useRef<HTMLDivElement | null>(null);
+  const endAnchorRef = useRef(new Map<string, HTMLDivElement | null>());
+  const explainRef = useRef(new Map<string, HTMLDivElement | null>());
+
   useEffect(() => {
     onPassRef.current = onPass;
   }, [onPass]);
 
-  const autoKeyRef = useRef<string>("");
-
   useEffect(() => {
     setExcusedById(initState?.excusedById ?? {});
   }, [resetKey, initState?.excusedById]);
-
-  const restoreQuestionKeyRef = useRef<string>("");
 
   const isExcused = useCallback(
       (qid: string) => Boolean(excusedById[qid]),
@@ -278,8 +295,6 @@ export default function QuizBlock({
     };
   }, [questions, local.answers, local.checkedById, practiceBank.practice, initState, excusedById]);
 
-  const [autoAdvance, setAutoAdvance] = useState(true);
-
   useEffect(() => {
     if (typeof window === "undefined") return;
     setAutoAdvance(readAutoAdvance(true));
@@ -290,8 +305,6 @@ export default function QuizBlock({
       window.localStorage.setItem(LS_AUTO_ADV, autoAdvance ? "1" : "0");
     } catch {}
   }, [autoAdvance]);
-
-  const [reduceMotion, setReduceMotion] = useState(false);
 
   useEffect(() => {
     if (typeof window === "undefined" || !window.matchMedia) return;
@@ -308,12 +321,6 @@ export default function QuizBlock({
     };
   }, []);
 
-  const qElRef = useRef(new Map<string, HTMLDivElement | null>());
-  const footerElRef = useRef<HTMLDivElement | null>(null);
-
-  const endAnchorRef = useRef(new Map<string, HTMLDivElement | null>());
-  const explainRef = useRef(new Map<string, HTMLDivElement | null>());
-
   function setQuestionEl(qid: string) {
     return (el: HTMLDivElement | null) => {
       qElRef.current.set(qid, el);
@@ -323,6 +330,13 @@ export default function QuizBlock({
   const setEndAnchor = useCallback(
       (qid: string) => (el: HTMLDivElement | null) => {
         endAnchorRef.current.set(qid, el);
+      },
+      [],
+  );
+
+  const setExplainEl = useCallback(
+      (qid: string) => (el: HTMLDivElement | null) => {
+        explainRef.current.set(qid, el);
       },
       [],
   );
@@ -348,17 +362,12 @@ export default function QuizBlock({
     isCompleted,
   ]);
 
-  const setExplainEl = useCallback(
-      (qid: string) => (el: HTMLDivElement | null) => {
-        explainRef.current.set(qid, el);
-      },
-      [],
-  );
-
-  const lastActionQidRef = useRef<string | null>(null);
-  const advanceTimerRef = useRef<number | null>(null);
-
-  const [awaitNextQid, setAwaitNextQid] = useState<string | null>(null);
+  const findCurrentActivityQuestionIndex = useCallback(() => {
+    const qid = findCurrentActivityQuestionId();
+    if (!qid) return 0;
+    const idx = questions.findIndex((q) => q.id === qid);
+    return idx < 0 ? 0 : idx;
+  }, [findCurrentActivityQuestionId, questions]);
 
   useEffect(() => {
     setAwaitNextQid(null);
@@ -370,12 +379,26 @@ export default function QuizBlock({
     };
   }, []);
 
-  const [pendingScrollQid, setPendingScrollQid] = useState<string | null>(null);
-  const [pendingScrollMode, setPendingScrollMode] = useState<"explain" | "end">("end");
-
   function scheduleScroll(qid: string, mode: "explain" | "end") {
     setPendingScrollMode(mode);
     setPendingScrollQid(qid);
+  }
+
+  function focusPrimaryActionForQuestion(qid: string) {
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        const root = qElRef.current.get(qid);
+        if (!root) return;
+
+        const target =
+            root.querySelector<HTMLElement>('[data-flow-focus]:not([disabled])') ??
+            root.querySelector<HTMLElement>(
+                "button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled])",
+            );
+
+        target?.focus({ preventScroll: true } as any);
+      });
+    });
   }
 
   useEffect(() => {
@@ -384,7 +407,8 @@ export default function QuizBlock({
     requestAnimationFrame(() => {
       const qid = pendingScrollQid;
 
-      const explainEl = pendingScrollMode === "explain" ? explainRef.current.get(qid) : null;
+      const explainEl =
+          pendingScrollMode === "explain" ? explainRef.current.get(qid) : null;
       const endEl = endAnchorRef.current.get(qid);
       const root = qElRef.current.get(qid);
 
@@ -412,6 +436,12 @@ export default function QuizBlock({
 
     const restoreKey = `${resetKey}:restore`;
     if (restoreQuestionKeyRef.current === restoreKey) return;
+
+    if (navigationMode === "slideshow") {
+      restoreQuestionKeyRef.current = restoreKey;
+      setActiveIndex(findCurrentActivityQuestionIndex());
+      return;
+    }
 
     let cancelled = false;
     let tries = 0;
@@ -463,7 +493,15 @@ export default function QuizBlock({
     return () => {
       cancelled = true;
     };
-  }, [quizLoading, questions, resetKey, findCurrentActivityQuestionId, reduceMotion]);
+  }, [
+    quizLoading,
+    questions,
+    resetKey,
+    findCurrentActivityQuestionId,
+    findCurrentActivityQuestionIndex,
+    reduceMotion,
+    navigationMode,
+  ]);
 
   function scrollToFooter() {
     const el = footerElRef.current;
@@ -489,6 +527,13 @@ export default function QuizBlock({
     }
 
     const nextQ = questions[nextIdx];
+
+    if (navigationMode === "slideshow") {
+      setActiveIndex(nextIdx);
+      focusPrimaryActionForQuestion(nextQ.id);
+      return;
+    }
+
     const el = qElRef.current.get(nextQ.id);
     if (el) {
       scrollIntoViewSmart(el, {
@@ -584,8 +629,6 @@ export default function QuizBlock({
     } as SavedQuizState);
   }, [resetKey]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const [confirmResetQuiz, setConfirmResetQuiz] = useState(false);
-
   async function resetThisQuiz() {
     const key = (serverQuizKey || stableKey).trim();
     if (!key) return;
@@ -600,6 +643,7 @@ export default function QuizBlock({
     practiceBank.setPractice({});
     setExcusedById({});
     setReloadNonce((n) => n + 1);
+    setActiveIndex(0);
   }
 
   if (quizLoading) return <QuizBlockSkeleton />;
@@ -612,104 +656,135 @@ export default function QuizBlock({
     return <div className="mt-2 ui-quiz-status-soft">{ui.t("noQuestions", {}, "No questions.")}</div>;
   }
 
+  const nextSlideIndex =
+      navigationMode === "slideshow" ? findNextUnlockedIndex(activeIndex) : -1;
+
+  function renderQuestionItem(q: ReviewQuestion, idx: number) {
+    const unlocked = isUnlocked(idx);
+
+    const showNext =
+        awaitNextQid === q.id &&
+        prereqsMet &&
+        !locked &&
+        !isCompleted &&
+        isFlowDone(q);
+
+    const nextIdx = findNextUnlockedIndex(idx);
+    const isLast = nextIdx < 0;
+
+    return (
+        <div className="ui-page-surface" key={q.id} ref={setQuestionEl(q.id)} data-qid={q.id}>
+          {q.kind === "practice" ? (
+              <QuizPracticeCard
+                  q={q}
+                  ps={practiceBank.practice[q.id]}
+                  unlocked={unlocked}
+                  isCompleted={isCompleted}
+                  locked={locked}
+                  unlimitedAttempts={unlimitedAttempts}
+                  strictSequential={strictSequential}
+                  seqOrder={orderBase + idx}
+                  padRef={practiceBank.getPadRef(q.id) as any}
+                  excused={isExcused(q.id)}
+                  onRetryExercise={() => practiceBank.retryPracticeQuestion(q.id)}
+                  onExcused={() => {
+                    if (!unlocked) return;
+                    const ps0 = practiceBank.practice[q.id];
+                    if (!ps0?.error) return;
+
+                    setExcusedById((prev) => ({ ...prev, [q.id]: true }));
+                    lastActionQidRef.current = q.id;
+                    scheduleScroll(q.id, "end");
+                  }}
+                  onUpdateItem={(patch) => practiceBank.updatePracticeItem(q.id, patch)}
+                  onSubmit={() => {
+                    lastActionQidRef.current = q.id;
+                    scheduleScroll(q.id, "end");
+                    void practiceBank.submitPractice(q);
+                  }}
+                  onHelp={(stepKey) => {
+                    scheduleScroll(q.id, "end");
+                    void practiceBank.openPracticeHelp(q, stepKey);
+                  }}
+              />
+          ) : (
+              <QuizLocalCard
+                  prereqsMet={prereqsMet}
+                  q={q}
+                  unlocked={unlocked}
+                  isCompleted={isCompleted}
+                  locked={locked}
+                  value={local.answers[q.id]}
+                  checked={Boolean(local.checkedById[q.id])}
+                  ok={getQuestionOk(q)}
+                  onPick={(val) => local.setAnswer(q.id, val)}
+                  explainRef={setExplainEl(q.id)}
+                  onCheck={() => {
+                    if (isCompleted || locked) return;
+                    if (local.checkedById[q.id]) return;
+
+                    lastActionQidRef.current = q.id;
+
+                    const okNow = computeLocalOkNow(q, local.answers[q.id]);
+
+                    local.check(q.id);
+                    emitSfx(okNow ? "answer:correct" : "answer:wrong");
+                    scheduleScroll(q.id, "explain");
+                  }}
+              />
+          )}
+
+          {showNext ? (
+              <div className="mt-2 flex justify-end">
+                <button
+                    type="button"
+                    className="ui-quiz-action ui-quiz-action--primary"
+                    data-flow-focus="1"
+                    onClick={() => {
+                      setAwaitNextQid(null);
+                      if (isLast) scrollToFooter();
+                      else advanceFrom(q.id);
+                    }}
+                >
+                  {isLast
+                      ? ui.t("buttons.finish", {}, "Finish →")
+                      : ui.t("buttons.next", {}, "Next →")}
+                </button>
+              </div>
+          ) : null}
+
+          <div ref={setEndAnchor(q.id)} className="h-0" aria-hidden />
+        </div>
+    );
+  }
+
   return (
       <div className="mt-3 grid gap-3">
-        {questions.map((q, idx) => {
-          const unlocked = isUnlocked(idx);
-
-          const showNext =
-              awaitNextQid === q.id &&
-              prereqsMet &&
-              !locked &&
-              !isCompleted &&
-              isFlowDone(q);
-
-          const nextIdx = findNextUnlockedIndex(idx);
-          const isLast = nextIdx < 0;
-
-          return (
-              <div className={"ui-page-surface"} key={q.id} ref={setQuestionEl(q.id)} data-qid={q.id}>
-                {q.kind === "practice" ? (
-                    <QuizPracticeCard
-                        q={q}
-                        ps={practiceBank.practice[q.id]}
-                        unlocked={unlocked}
-                        isCompleted={isCompleted}
-                        locked={locked}
-                        unlimitedAttempts={unlimitedAttempts}
-                        strictSequential={strictSequential}
-                        seqOrder={orderBase + idx}
-                        padRef={practiceBank.getPadRef(q.id) as any}
-                        excused={isExcused(q.id)}
-                        onRetryExercise={() => practiceBank.retryPracticeQuestion(q.id)}
-                        onExcused={() => {
-                          if (!unlocked) return;
-                          const ps0 = practiceBank.practice[q.id];
-                          if (!ps0?.error) return;
-
-                          setExcusedById((prev) => ({ ...prev, [q.id]: true }));
-                          lastActionQidRef.current = q.id;
-                          scheduleScroll(q.id, "end");
-                        }}
-                        onUpdateItem={(patch) => practiceBank.updatePracticeItem(q.id, patch)}
-                        onSubmit={() => {
-                          lastActionQidRef.current = q.id;
-                          scheduleScroll(q.id, "end");
-                          void practiceBank.submitPractice(q);
-                        }}
-                        onHelp={(stepKey) => {
-                          scheduleScroll(q.id, "end");
-                          void practiceBank.openPracticeHelp(q, stepKey);
-                        }}
-                    />
-                ) : (
-                    <QuizLocalCard
-                        prereqsMet={prereqsMet}
-                        q={q}
-                        unlocked={unlocked}
-                        isCompleted={isCompleted}
-                        locked={locked}
-                        value={local.answers[q.id]}
-                        checked={Boolean(local.checkedById[q.id])}
-                        ok={getQuestionOk(q)}
-                        onPick={(val) => local.setAnswer(q.id, val)}
-                        explainRef={setExplainEl(q.id)}
-                        onCheck={() => {
-                          if (isCompleted || locked) return;
-                          if (local.checkedById[q.id]) return;
-
-                          lastActionQidRef.current = q.id;
-
-                          const okNow = computeLocalOkNow(q, local.answers[q.id]);
-
-                          local.check(q.id);
-                          emitSfx(okNow ? "answer:correct" : "answer:wrong");
-                          scheduleScroll(q.id, "explain");
-                        }}
-                    />
-                )}
-
-                {showNext ? (
-                    <div className="mt-2 flex justify-end">
-                      <button
-                          type="button"
-                          className="ui-quiz-action ui-quiz-action--primary"
-                          data-flow-focus="1"
-                          onClick={() => {
-                            setAwaitNextQid(null);
-                            if (isLast) scrollToFooter();
-                            else advanceFrom(q.id);
-                          }}
-                      >
-                        {isLast ? ui.t("buttons.finish", {}, "Finish →") : ui.t("buttons.next", {}, "Next →")}
-                      </button>
-                    </div>
-                ) : null}
-
-                <div ref={setEndAnchor(q.id)} className="h-0" aria-hidden />
-              </div>
-          );
-        })}
+        <FlowNavigator
+            items={questions}
+            mode={navigationMode}
+            activeIndex={activeIndex}
+            onActiveIndexChange={setActiveIndex}
+            reduceMotion={reduceMotion}
+            getKey={(q) => q.id}
+            getProgressLabel={(index, total) =>
+                ui.t("progress.question", { current: index + 1, total }, `Question ${index + 1} of ${total}`)
+            }
+            canGoPrev={activeIndex > 0}
+            canGoNext={nextSlideIndex >= 0}
+            onPrev={() => {
+              setAwaitNextQid(null);
+              setActiveIndex((i) => Math.max(0, i - 1));
+            }}
+            onNext={() => {
+              if (nextSlideIndex < 0) return;
+              setAwaitNextQid(null);
+              setActiveIndex(nextSlideIndex);
+              const nextQ = questions[nextSlideIndex];
+              if (nextQ) focusPrimaryActionForQuestion(nextQ.id);
+            }}
+            renderItem={renderQuestionItem}
+        />
 
         <div ref={footerElRef}>
           <div className="ui-quiz-toggle-row">

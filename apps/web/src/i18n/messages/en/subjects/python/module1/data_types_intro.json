@@ -94,7 +94,7 @@
     },
     "m1_types_tip_total_code": {
       "title": "Restaurant tip + total (ints)",
-      "prompt": "A restaurant app asks for:\n1) bill (integer)\n2) tip percent (integer)\n\nCompute:\ntip = bill * pct // 100\ntotal = bill + tip\n\nPrint EXACTLY:\nTip = <tip>\nTotal = <total>",
+      "prompt": "A restaurant app asks for:\n1) bill (integer)\n2) tip percent (integer)\n\nCompute:\ntip = bill * pct // 100\ntotal = bill + tip\n\nPrint EXACTLY:\nTip = <tip>\n\nTotal = <total>",
       "hint": "Use integer math: // 100",
       "tipLineTemplate": "Tip = {tip}",
       "totalLineTemplate": "Total = {total}"

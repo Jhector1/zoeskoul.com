@@ -23,10 +23,11 @@ export const PY_MODULE0_SECTION = defineSection({
         },
     },
     topics: [
+        EDITOR_WORKSPACE_OVERVIEW_TOPIC,
         COMPUTER_INTRO_TOPIC,
         PROGRAMMING_INTRO_TOPIC,
         SYNTAX_INTRO_TOPIC,
-        EDITOR_WORKSPACE_OVERVIEW_TOPIC,
+
 
         COMMENTS_INTRO_TOPIC,
     ],

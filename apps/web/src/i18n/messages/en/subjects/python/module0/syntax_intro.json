@@ -7,8 +7,7 @@
           "summary": "Learn what syntax means and why breaking syntax causes errors like SyntaxError.",
           "cards": {
             "sketch": {
-              "title": "Syntax: Rules Computers Require"
-            },
+              "title": "What Is Syntax?"            },
             "quiz": {
               "title": "Quick check: syntax"
             }
@@ -22,7 +21,7 @@
       "syntax": {
         "intro": {
           "title": "Syntax: The Rules of a Programming Language",
-          "bodyMarkdown": "Every programming language has a set of rules that determine **how instructions must be written**.\nThese rules are called **syntax**.\n\nJust like spoken languages have **grammar rules**, programming languages have **syntax rules** that define how code must be structured so the computer can understand it.\n\nEach programming language has its own syntax:\n\n- Python has its own syntax\n- Java has its own syntax\n- C has its own syntax\n\nEven though many languages share similar ideas, the **exact way you write instructions** can be different in each language.\n\nIf you break these syntax rules, Python will raise a **SyntaxError**, and the program will stop running because the **interpreter cannot understand the instruction**.\n\nIn this module, you will begin getting comfortable with Python syntax so you can write **clear and correct instructions** for the computer to execute."
+          "bodyMarkdown": "Every programming language has a set of rules that determine **how instructions must be written**.\nThese rules are called **syntax**.\n\nJust like spoken languages have rules for how words and sentences must be structured, programming languages have **syntax rules** that define how code must be written so the computer can understand it.\n\nEach programming language has its own syntax:\n\n- Python has its own syntax\n- Java has its own syntax\n- C has its own syntax\n\nEven though many languages share similar ideas, the **exact way you write instructions** can be different in each language.\n\nIf you break these syntax rules, Python will raise a **SyntaxError**, and the program will stop running because the **interpreter cannot understand the instruction**.\n\nIn this module, you will begin getting comfortable with Python syntax so you can write **clear and correct instructions** for the computer to execute."
         }
       }
     }

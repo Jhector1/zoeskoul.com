@@ -48,8 +48,7 @@
   "quiz": {
     "m2_cond_age_gate_code": {
       "title": "Snack Shop Gate: adult or minor",
-      "prompt": "Story: you’re building a kiosk at a snack shop. Some items are 18+.\n\nRead ONE integer age.\n\nIf age >= 18 print:\nALLOWED\n\nElse print:\nDENIED",
-      "hint": "Use `if age >= 18:` and an `else:` block.",
+      "prompt": "A snack shop kiosk must check whether a customer is old enough to buy an 18+ item.\n\nRead one integer age.\n\nIf age is greater than or equal to 18, print:\nALLOWED\n\nOtherwise, print:\nDENIED",      "hint": "Use `if age >= 18:` and an `else:` block.",
       "starterCode": "# TODO\n",
       "runtime": {
         "allowedText": "ALLOWED",
@@ -58,7 +57,7 @@
     },
     "m2_cond_member_discount_code": {
       "title": "Snack Shop Discount: member saves 10%",
-      "prompt": "Story: the snack shop gives members a 10% discount.\n\nRead TWO inputs:\n1) subtotal (integer dollars)\n2) member flag (y/n)\n\nRules:\n- if member is y (or Y), apply 10% discount using integer math\n- otherwise no discount\n\nPrint exactly:\nTotal = <total>",
+      "prompt": "The snack shop gives members a 10% discount.\n\nRead TWO inputs:\n1) subtotal (integer dollars)\n2) member flag (y/n)\n\nRules:\n- if member is y (or Y), apply 10% discount using integer math\n- otherwise no discount\n\nPrint exactly:\nTotal = <total>",
       "hint": "Use: `member.lower() == \"y\"` and compute `subtotal * 10 // 100`.",
       "starterCode": "# TODO\n",
       "runtime": {
@@ -67,7 +66,7 @@
     },
     "m2_cond_password_check_code": {
       "title": "Kiosk Login: password check",
-      "prompt": "Story: the kiosk has an admin mode.\n\nRead ONE input password.\n\nIf password == \"letmein\" print:\nLogged in\n\nElse print:\nWrong password",
+      "prompt": "The kiosk has an admin mode.\n\nRead ONE input password.\n\nIf password == \"letmein\" print:\nLogged in\n\nElse print:\nWrong password",
       "hint": "Use `==` (comparison), not `=` (assignment).",
       "starterCode": "# TODO\n",
       "runtime": {

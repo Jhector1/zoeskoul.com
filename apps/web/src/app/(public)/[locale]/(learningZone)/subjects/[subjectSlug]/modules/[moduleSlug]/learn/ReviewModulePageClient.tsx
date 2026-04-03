@@ -125,6 +125,8 @@ export default function ReviewModulePageClient({ canUnlockAll }: { canUnlockAll:
                     canUnlockAll={canUnlockAll}
                     onModuleCompleteChange={setModuleComplete}
                     footerInsetPx={footerH}
+                    navigationMode={{ cards: "slideshow", quiz: "slideshow" }}
+
                 />
                 {/*{nav?.prevModuleId}*/}
             </div>

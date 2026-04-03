@@ -75,7 +75,13 @@ export function useQuizPracticeBank(args: {
 
   const [practice, setPractice] = useState<Record<string, PracticeState>>({});
   const practiceRef = useRef(practice);
+
+  // Token per question: latest request wins for that question.
   const loadTokenRef = useRef<Record<string, number>>({});
+
+  // Cycle changes whenever the quiz is reset/remounted logically.
+  // Prevents old requests from a previous cycle from writing into a new one.
+  const loadCycleRef = useRef(0);
 
   useEffect(() => {
     practiceRef.current = practice;
@@ -93,6 +99,7 @@ export function useQuizPracticeBank(args: {
   }
 
   useEffect(() => {
+    loadCycleRef.current += 1;
     setPractice({});
     padRefs.current = {};
     loadTokenRef.current = {};
@@ -105,13 +112,16 @@ export function useQuizPracticeBank(args: {
       ) => {
         const force = Boolean(opts?.force);
         const cancelledRef = opts?.cancelledRef;
+        const cycle = loadCycleRef.current;
 
         const existing = practiceRef.current?.[q.id];
-        if (
-            !force &&
-            existing &&
-            (existing.loading || existing.exercise || existing.item)
-        ) {
+        const alreadyResolved = Boolean(existing?.exercise && existing?.item);
+
+        // Long-term fix:
+        // only skip when the question is fully resolved.
+        // Do NOT skip just because existing.loading is true, because a stale/cancelled
+        // load can otherwise strand the question forever in a loading state.
+        if (!force && alreadyResolved) {
           return;
         }
 
@@ -131,7 +141,7 @@ export function useQuizPracticeBank(args: {
               loading: true,
               error: null,
               busy: false,
-              // keep current content while refreshing
+              // keep current content while refreshing if it already exists
               exercise: prevState?.exercise ?? null,
               item: prevState?.item ?? null,
               attempts: initMeta?.attempts ?? prevState?.attempts ?? 0,
@@ -217,6 +227,7 @@ export function useQuizPracticeBank(args: {
           );
 
           if (cancelledRef?.current) return;
+          if (loadCycleRef.current !== cycle) return;
           if (loadTokenRef.current[q.id] !== token) return;
 
           setPractice((prev) => {
@@ -246,6 +257,7 @@ export function useQuizPracticeBank(args: {
           });
         } catch (e: any) {
           if (cancelledRef?.current) return;
+          if (loadCycleRef.current !== cycle) return;
           if (loadTokenRef.current[q.id] !== token) return;
 
           setPractice((prev) => {
