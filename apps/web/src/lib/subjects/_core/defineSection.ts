@@ -1,6 +1,4 @@
-// src/lib/subjects/_core/defineSection.ts
-import type { JsonObject } from "./defineTopicBundle";
-import {TopicBundle} from "@/lib/practice/generator/engines/utils";
+import type { JsonObject, SubjectTopicBundle } from "./defineTopicBundle";
 
 export type SectionInput = {
     slug: string;
@@ -12,7 +10,7 @@ export type SectionInput = {
 
 export type SectionBundle = {
     section: SectionInput;
-    topics: readonly TopicBundle[];
+    topics: readonly SubjectTopicBundle[];
 };
 
 export function defineSection<const T extends SectionBundle>(input: T): T {

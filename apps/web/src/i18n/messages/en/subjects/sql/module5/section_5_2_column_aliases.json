@@ -1,397 +1,440 @@
 {
-  "topicId": "column_aliases",
-  "minutes": 10,
-  "topic": {
-    "labelKey": "topics.sql.sql_module_5.column_aliases.label",
-    "summaryKey": "topics.sql.sql_module_5.column_aliases.summary"
+  "topics": {
+    "sql": {
+      "sql_module_5": {
+        "column_aliases": {
+          "label": "Column Aliases",
+          "summary": "Learn how aliases rename columns in query results so output becomes clearer, cleaner, and easier to read.",
+          "cards": {
+            "sketch0": {
+              "title": "What is an alias?"
+            },
+            "sketch1": {
+              "title": "How does AS work?"
+            },
+            "sketch2": {
+              "title": "How do you rename result columns?"
+            },
+            "sketch3": {
+              "title": "How do aliases make output easier to read?"
+            },
+            "quiz": {
+              "title": "Quiz: Column Aliases"
+            }
+          }
+        }
+      }
+    }
   },
-  "cards": [
-    {
-      "id": "sketch0",
-      "kind": "sketch",
-      "titleKey": "topics.sql.sql_module_5.column_aliases.cards.sketch0.title",
-      "sketchId": "what_aliases_are",
-      "height": 520
-    },
-    {
-      "id": "sketch1",
-      "kind": "sketch",
-      "titleKey": "topics.sql.sql_module_5.column_aliases.cards.sketch1.title",
-      "sketchId": "as_keyword",
-      "height": 520
-    },
-    {
-      "id": "sketch2",
-      "kind": "sketch",
-      "titleKey": "topics.sql.sql_module_5.column_aliases.cards.sketch2.title",
-      "sketchId": "renaming_result_columns",
-      "height": 520
-    },
-    {
-      "id": "sketch3",
-      "kind": "sketch",
-      "titleKey": "topics.sql.sql_module_5.column_aliases.cards.sketch3.title",
-      "sketchId": "writing_readable_output",
-      "height": 520
-    },
-    {
-      "id": "quiz",
-      "kind": "quiz",
-      "titleKey": "topics.sql.sql_module_5.column_aliases.cards.quiz.title",
-      "quiz": {
-        "difficulty": "easy",
-        "n": 5,
-        "allowReveal": true,
-        "preferKind": null,
-        "maxAttempts": 10
+  "sketches": {
+    "sql": {
+      "sql_module_5": {
+        "column_aliases": {
+          "what_aliases_are": {
+            "title": "An alias gives a result column a clearer name.",
+            "bodyMarkdown": "Sometimes a query returns a column name that feels too long, too technical, or not descriptive enough.\n\nAn **alias** lets you rename that result column.\n\nThis is helpful when:\n\n- a calculated value needs a clear label\n- you want cleaner report output\n- you want the result to be easier for humans to read\n\nSo the big idea is:\n\n> an alias changes the column name in the result, not in the table"
+          },
+          "as_keyword": {
+            "title": "The `AS` keyword is a common way to assign an alias.",
+            "bodyMarkdown": "A common way to rename a result column is with `AS`.\n\nYou use it after a column name or expression.\n\nThat tells SQL:\n\n> show this result with a new label\n\nThis is especially useful for expressions because calculated columns often need a better name than the raw math alone."
+          },
+          "renaming_result_columns": {
+            "title": "You can rename normal columns or calculated columns in the result.",
+            "bodyMarkdown": "Aliases are useful for both kinds of result columns:\n\n- existing columns\n- calculated columns\n\nFor example, a query can show a normal column with a shorter label, or it can give a computed value a descriptive name.\n\nSo the key idea is:\n\n> aliases help the result say what the column means\n\nThat makes reports much easier to scan."
+          },
+          "writing_readable_output": {
+            "title": "Readable output uses labels that help people understand the result quickly.",
+            "bodyMarkdown": "A result table is easier to understand when the column names are clear.\n\nThat matters even more when a query includes calculations.\n\nA label like:\n\n- `total_price`\n\nis often much easier to read than a raw expression.\n\nSo a good beginner habit is:\n\n1. look at the result headers\n2. ask whether those names are clear\n3. rename them if needed\n\nThat is how aliases help create readable output."
+          }
+        }
       }
     }
-  ],
-  "sketches": [
-    {
-      "id": "what_aliases_are",
-      "archetype": "paragraph",
-      "titleKey": "sketches.sql.sql_module_5.column_aliases.what_aliases_are.title",
-      "bodyKey": "sketches.sql.sql_module_5.column_aliases.what_aliases_are.bodyMarkdown"
+  },
+  "quiz": {
+    "m5_s02_alias_unit_price": {
+      "title": "Rename a normal column",
+      "prompt": "The SQLite workspace already has a table named `orders`.\n\nWrite a query that returns `customer_name` and `unit_price`, but rename `unit_price` in the result to `price`.\n\nThen click **Run**.",
+      "help": {
+        "concept": "An alias changes how a column name appears in the result.",
+        "hint_1": "Select `customer_name`, then include `unit_price` with a new name using `AS`.",
+        "hint_2": "Build a normal query on `orders`, and in the select list keep the real column but give it a shorter label in the result."
+      },
+      "hint": "Use `AS` to rename `unit_price`.",
+      "starterCode": "-- Show customer_name and unit_price renamed as price\n"
     },
-    {
-      "id": "as_keyword",
-      "archetype": "paragraph",
-      "titleKey": "sketches.sql.sql_module_5.column_aliases.as_keyword.title",
-      "bodyKey": "sketches.sql.sql_module_5.column_aliases.as_keyword.bodyMarkdown"
+    "m5_s02_alias_total_price": {
+      "title": "Alias a calculated column",
+      "prompt": "The `orders` table already exists.\n\nWrite a query that returns `customer_name` and a calculated total using `quantity` and `unit_price`, and rename that calculated column to `total_price`.\n\nRun it and inspect the result header.",
+      "help": {
+        "concept": "Aliases are especially useful for calculated columns because the raw expression is not a friendly header.",
+        "hint_1": "Create the total with `quantity` and `unit_price`, then give that expression a clear result name.",
+        "hint_2": "Select `customer_name`, add one calculated expression for the total, and assign a readable alias to that calculated value."
+      },
+      "hint": "Use `AS total_price` on the expression.",
+      "starterCode": "-- Show customer_name and a calculated total named total_price\n"
     },
-    {
-      "id": "renaming_result_columns",
-      "archetype": "paragraph",
-      "titleKey": "sketches.sql.sql_module_5.column_aliases.renaming_result_columns.title",
-      "bodyKey": "sketches.sql.sql_module_5.column_aliases.renaming_result_columns.bodyMarkdown"
+    "m5_s02_alias_customer_name": {
+      "title": "Give a clearer label",
+      "prompt": "The `orders` table already exists.\n\nWrite a query that returns `customer_name` and `region`, but rename `customer_name` to `customer` in the result.\n\nThen click **Run**.",
+      "help": {
+        "concept": "Aliases can make a result feel cleaner by using shorter or clearer labels.",
+        "hint_1": "Use `customer_name` in the query, but show it with a shorter result label.",
+        "hint_2": "Select the two original columns, and on the name column apply `AS` so the result header becomes simpler."
+      },
+      "hint": "Rename `customer_name` with `AS`.",
+      "starterCode": "-- Show customer_name renamed as customer and include region\n"
     },
-    {
-      "id": "writing_readable_output",
-      "archetype": "paragraph",
-      "titleKey": "sketches.sql.sql_module_5.column_aliases.writing_readable_output.title",
-      "bodyKey": "sketches.sql.sql_module_5.column_aliases.writing_readable_output.bodyMarkdown"
+    "m5_s02_alias_status_column": {
+      "title": "Rename another result column",
+      "prompt": "The `orders` table already exists.\n\nWrite a query that returns `customer_name` and `status`, but rename `status` to `order_status`.\n\nRun it and read the new header.",
+      "help": {
+        "concept": "Aliases help result headers explain what a column means.",
+        "hint_1": "Select `customer_name` and `status`, then apply a more descriptive label to `status`.",
+        "hint_2": "Keep the original status column in the query, but use `AS` so its result header becomes more specific."
+      },
+      "hint": "Use `AS order_status`.",
+      "starterCode": "-- Show customer_name and status renamed as order_status\n"
+    },
+    "m5_s02_alias_practice_project": {
+      "title": "Practice aliases",
+      "prompt": "Use the SQL workspace on the right to practice aliases with the `orders` table.\n\nFor each task:\n\n1. type the query in the editor\n2. click **Run**\n3. read the result headers\n4. check whether the labels are clearer than before\n\nTasks:\n\n1. Show `customer_name` and rename it to `customer`\n2. Show `unit_price` and rename it to `price`\n3. Show a calculated total and rename it to `total_price`\n4. Show `status` and rename it to `order_status`\n5. Show `order_date` and rename it to `date`\n\nRun one query at a time.\nThis project is about making query output cleaner and easier to read.",
+      "help": {
+        "concept": "Aliases make result tables clearer by giving columns friendlier labels.",
+        "hint_1": "Each task keeps the same core query idea: return a column or expression, then rename the result with `AS`.",
+        "hint_2": "Solve the tasks one by one. Focus on the output label you want, then apply that label to the selected column or expression in the query."
+      },
+      "hint": "Use `AS` to improve the result headers.",
+      "starterCode": "-- Task 1\n-- Show customer_name renamed as customer\n\n"
+    },
+
+    "m5_s02_alias_meaning": {
+      "title": "What is an alias?",
+      "prompt": "In SQL, what is a column alias mainly used for?",
+      "help": {
+        "concept": "An alias gives a result column a different displayed name.",
+        "hint_1": "Think result header, not table change.",
+        "hint_2": "It changes the label you see in the output, not the stored table structure."
+      },
+      "hint": "Think result label.",
+      "options": {
+        "a": "To rename a column in the query result",
+        "b": "To delete a column from the table",
+        "c": "To sort rows automatically",
+        "d": "To make math impossible"
+      }
+    },
+    "m5_s02_as_meaning": {
+      "title": "What does AS do?",
+      "prompt": "What is the main job of `AS` in a beginner SQL query?",
+      "help": {
+        "concept": "`AS` is commonly used to assign an alias to a selected column or expression.",
+        "hint_1": "Think new label.",
+        "hint_2": "It helps SQL show a selected value under a clearer name in the result."
+      },
+      "hint": "Think assign a result name.",
+      "options": {
+        "a": "It gives a selected value a new result name",
+        "b": "It filters rows",
+        "c": "It multiplies numbers",
+        "d": "It creates a table"
+      }
+    },
+    "m5_s02_rename_result_columns_meaning": {
+      "title": "Why rename result columns?",
+      "prompt": "Why is renaming result columns useful?",
+      "help": {
+        "concept": "Renaming makes output clearer and easier to understand.",
+        "hint_1": "Think readability.",
+        "hint_2": "A clearer label helps people understand what the result column means."
+      },
+      "hint": "Think clearer output.",
+      "options": {
+        "a": "It makes result headers easier to understand",
+        "b": "It permanently changes the table",
+        "c": "It removes the need for `SELECT`",
+        "d": "It always hides the original value"
+      }
+    },
+    "m5_s02_readable_output_goal": {
+      "title": "What is the goal of readable output?",
+      "prompt": "What is the main goal when using aliases for readable output?",
+      "help": {
+        "concept": "Readable output helps a person quickly understand what each result column represents.",
+        "hint_1": "Think easier scanning.",
+        "hint_2": "The best labels help humans understand the table without guessing."
+      },
+      "hint": "Think easy to scan.",
+      "options": {
+        "a": "Make the result easier for people to read",
+        "b": "Hide all column names",
+        "c": "Make every query longer",
+        "d": "Replace all data with text"
+      }
+    },
+    "m5_s02_aliases_on_expressions": {
+      "title": "Why are aliases especially useful on expressions?",
+      "prompt": "Why are aliases especially useful for calculated columns?",
+      "help": {
+        "concept": "Calculated expressions often need a clear label so the result makes sense.",
+        "hint_1": "Think raw math is not a friendly header.",
+        "hint_2": "A name like `total_price` is easier to understand than a raw expression."
+      },
+      "hint": "Think calculated values need labels.",
+      "options": {
+        "a": "Because calculated columns need clear names in the result",
+        "b": "Because expressions cannot appear in `SELECT`",
+        "c": "Because aliases only work on numbers",
+        "d": "Because SQL forbids normal column names"
+      }
+    },
+
+    "m5_s02_aliases_true": {
+      "title": "What is true about aliases?",
+      "prompt": "Select all true statements about aliases in beginner SQL.",
+      "help": {
+        "concept": "Aliases rename result columns without changing the stored table structure.",
+        "hint_1": "Think result header only.",
+        "hint_2": "Choose the statements about clearer output and non-permanent renaming."
+      },
+      "hint": "Think rename the result, not the table.",
+      "options": {
+        "a": "Aliases can rename result columns",
+        "b": "Aliases can make output easier to read",
+        "c": "Aliases do not permanently rename the table column",
+        "d": "Aliases always delete original data",
+        "e": "Aliases are useful in reports"
+      }
+    },
+    "m5_s02_as_true": {
+      "title": "What is true about AS?",
+      "prompt": "Select all true statements about `AS` in beginner SQL.",
+      "help": {
+        "concept": "`AS` is commonly used to assign a new displayed name to a selected value.",
+        "hint_1": "Think new label for output.",
+        "hint_2": "Choose the statements about naming the result more clearly."
+      },
+      "hint": "Think assign a label.",
+      "options": {
+        "a": "`AS` can assign a new result name",
+        "b": "`AS` can be used with normal columns",
+        "c": "`AS` can be used with expressions",
+        "d": "`AS` is only for deleting rows",
+        "e": "`AS` helps make headers clearer"
+      }
+    },
+    "m5_s02_readable_output_true": {
+      "title": "What helps create readable output?",
+      "prompt": "Select all true statements about readable query output.",
+      "help": {
+        "concept": "Readable output uses clear headers that help people understand the result quickly.",
+        "hint_1": "Think labels and meaning.",
+        "hint_2": "Choose the ideas about result names that explain the data well."
+      },
+      "hint": "Think clear headers.",
+      "options": {
+        "a": "Clear labels help people understand the result faster",
+        "b": "Readable headers matter in report-style queries",
+        "c": "Aliases can reduce confusion in calculated columns",
+        "d": "Unreadable labels are always better",
+        "e": "Result headers should help explain what the values mean"
+      }
+    },
+    "m5_s02_rename_columns_true": {
+      "title": "What is true about renaming result columns?",
+      "prompt": "Select all true statements about renaming columns in query results.",
+      "help": {
+        "concept": "Renaming result columns helps the output match the meaning of the query.",
+        "hint_1": "Think selected value and clearer name.",
+        "hint_2": "Choose the statements about making the result more understandable."
+      },
+      "hint": "Think better headers.",
+      "options": {
+        "a": "A normal column can be renamed in the result",
+        "b": "A calculated expression can be renamed in the result",
+        "c": "Renaming can make a report easier to scan",
+        "d": "Renaming always changes the database schema",
+        "e": "A clearer header can better match the meaning of the query"
+      }
+    },
+    "m5_s02_alias_workflow_true": {
+      "title": "What matches a good beginner workflow for aliases?",
+      "prompt": "Select all statements that match a good beginner workflow for writing alias queries.",
+      "help": {
+        "concept": "A good workflow is to write the query, inspect the headers, and improve them when needed.",
+        "hint_1": "Think select, label, run, inspect.",
+        "hint_2": "Choose the steps that help you create clear result names."
+      },
+      "hint": "Write the query, then improve the headers.",
+      "options": {
+        "a": "Decide what columns or expressions to return",
+        "b": "Think about what label would be easiest to understand",
+        "c": "Use `AS` when the default header is unclear",
+        "d": "Run the query and inspect the result headers",
+        "e": "Ignore whether the output labels make sense"
+      }
+    },
+
+    "m5_s02_fill_alias_name": {
+      "title": "What an alias gives",
+      "prompt": "Fill in the blank with the best word.",
+      "template": "An alias gives a result column a clearer ____.",
+      "choices": {
+        "0": "name",
+        "1": "database",
+        "2": "row",
+        "3": "filter"
+      },
+      "hint": "An alias changes the displayed label.",
+      "help": {
+        "concept": "An alias helps the result use a clearer displayed name.",
+        "hint_1": "Think result header.",
+        "hint_2": "The missing word is `name`."
+      }
+    },
+    "m5_s02_fill_as_keyword": {
+      "title": "Common alias keyword",
+      "prompt": "Fill in the blank with the SQL keyword.",
+      "template": "A common way to assign an alias is with ____.",
+      "choices": {
+        "0": "AS",
+        "1": "IN",
+        "2": "ON",
+        "3": "BY"
+      },
+      "hint": "Use the keyword that assigns a new label.",
+      "help": {
+        "concept": "The `AS` keyword is commonly used for aliases.",
+        "hint_1": "Think result naming.",
+        "hint_2": "Use `AS`."
+      }
+    },
+    "m5_s02_fill_result_not_table": {
+      "title": "What aliasing does not change",
+      "prompt": "Fill in the blank with the best word.",
+      "template": "An alias changes the result header, not the stored ____ structure.",
+      "choices": {
+        "0": "table",
+        "1": "editor",
+        "2": "folder",
+        "3": "browser"
+      },
+      "hint": "Aliases do not change the stored schema.",
+      "help": {
+        "concept": "Aliases only change the displayed result name, not the stored table structure.",
+        "hint_1": "Think schema.",
+        "hint_2": "The missing word is `table`."
+      }
+    },
+    "m5_s02_fill_clear_total_label": {
+      "title": "Clear calculated label",
+      "prompt": "Fill in the blank with the best label.",
+      "template": "A readable name for `quantity * unit_price` is often ____.",
+      "choices": {
+        "0": "total_price",
+        "1": "thing",
+        "2": "math",
+        "3": "row_value_7"
+      },
+      "hint": "Use a label that explains the meaning.",
+      "help": {
+        "concept": "A strong alias should explain what the calculated value means.",
+        "hint_1": "Think report-friendly name.",
+        "hint_2": "A common label is `total_price`."
+      }
+    },
+    "m5_s02_fill_readable_output": {
+      "title": "Readable results",
+      "prompt": "Fill in the blank with the best word.",
+      "template": "Clear aliases make a result easier to ____ quickly.",
+      "choices": {
+        "0": "scan",
+        "1": "delete",
+        "2": "rename again",
+        "3": "shuffle"
+      },
+      "hint": "Readable headers help people move through the result faster.",
+      "help": {
+        "concept": "Readable output helps people understand results quickly.",
+        "hint_1": "Think fast reading.",
+        "hint_2": "The missing word is `scan`."
+      }
+    },
+
+    "m5_s02_reorder_alias_pattern": {
+      "title": "Order a basic alias pattern",
+      "prompt": "Reorder the parts into a normal alias pattern.",
+      "tokens": {
+        "t1": "unit_price",
+        "t2": "AS",
+        "t3": "price"
+      },
+      "hint": "Column first, then `AS`, then new label.",
+      "help": {
+        "concept": "A basic alias pattern is column or expression, then `AS`, then the new label.",
+        "hint_1": "Start with the original column.",
+        "hint_2": "Then place `AS` before the alias."
+      }
+    },
+    "m5_s02_reorder_expression_alias_pattern": {
+      "title": "Order a calculated alias pattern",
+      "prompt": "Reorder the parts into a calculated-column alias pattern.",
+      "tokens": {
+        "t1": "quantity * unit_price",
+        "t2": "AS",
+        "t3": "total_price"
+      },
+      "hint": "Expression first, then the alias keyword, then the new name.",
+      "help": {
+        "concept": "Calculated expressions often need a readable alias.",
+        "hint_1": "Start with the expression.",
+        "hint_2": "Then add `AS total_price`."
+      }
+    },
+    "m5_s02_reorder_header_workflow": {
+      "title": "Order the header check",
+      "prompt": "Reorder the steps into a good beginner habit for checking aliases.",
+      "tokens": {
+        "t1": "look at the result headers",
+        "t2": "ask whether the names are clear",
+        "t3": "rename unclear ones"
+      },
+      "hint": "Read the headers before deciding to improve them.",
+      "help": {
+        "concept": "A good workflow is to inspect headers and improve them when needed.",
+        "hint_1": "Start by reading the result.",
+        "hint_2": "Then decide whether to rename."
+      }
+    },
+    "m5_s02_reorder_customer_alias": {
+      "title": "Order a customer alias",
+      "prompt": "Reorder the parts into a simple alias for customer name.",
+      "tokens": {
+        "t1": "customer_name",
+        "t2": "AS",
+        "t3": "customer"
+      },
+      "hint": "Original column first, simpler name last.",
+      "help": {
+        "concept": "Aliases can shorten long or technical result headers.",
+        "hint_1": "Start with the real column name.",
+        "hint_2": "End with the simpler displayed name."
+      }
+    },
+    "m5_s02_reorder_alias_workflow": {
+      "title": "Order the alias workflow",
+      "prompt": "Reorder the steps into a good beginner workflow for writing an alias query.",
+      "tokens": {
+        "t1": "choose the value to return",
+        "t2": "choose a clear label",
+        "t3": "write the alias with AS",
+        "t4": "run the query and inspect the header"
+      },
+      "hint": "Choose the value before naming it.",
+      "help": {
+        "concept": "A good alias workflow helps you produce clearer query output.",
+        "hint_1": "Decide what to return first.",
+        "hint_2": "Inspection comes after running."
+      }
     }
-  ],
-  "exercises": [
-    {
-      "id": "m5_s02_alias_unit_price",
-      "kind": "code_input",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "quiz.m5_s02_alias_unit_price",
-      "language": "sql",
-      "fixedSqlDialect": "sqlite",
-      "recipe": {
-        "type": "sql_query",
-        "datasetId": "sales_kpi",
-        "resultShape": "table",
-        "solutionCode": "SELECT customer_name, unit_price AS price\nFROM orders;"
-      }
-    },
-    {
-      "id": "m5_s02_alias_total_price",
-      "kind": "code_input",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "quiz.m5_s02_alias_total_price",
-      "language": "sql",
-      "fixedSqlDialect": "sqlite",
-      "recipe": {
-        "type": "sql_query",
-        "datasetId": "sales_kpi",
-        "resultShape": "table",
-        "solutionCode": "SELECT customer_name, quantity * unit_price AS total_price\nFROM orders;"
-      }
-    },
-    {
-      "id": "m5_s02_alias_customer_name",
-      "kind": "code_input",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "quiz.m5_s02_alias_customer_name",
-      "language": "sql",
-      "fixedSqlDialect": "sqlite",
-      "recipe": {
-        "type": "sql_query",
-        "datasetId": "sales_kpi",
-        "resultShape": "table",
-        "solutionCode": "SELECT customer_name AS customer, region\nFROM orders;"
-      }
-    },
-    {
-      "id": "m5_s02_alias_status_column",
-      "kind": "code_input",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "quiz.m5_s02_alias_status_column",
-      "language": "sql",
-      "fixedSqlDialect": "sqlite",
-      "recipe": {
-        "type": "sql_query",
-        "datasetId": "sales_kpi",
-        "resultShape": "table",
-        "solutionCode": "SELECT customer_name, status AS order_status\nFROM orders;"
-      }
-    },
-    {
-      "id": "m5_s02_alias_practice_project",
-      "kind": "code_input",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "quiz.m5_s02_alias_practice_project",
-      "language": "sql",
-      "fixedSqlDialect": "sqlite",
-      "recipe": {
-        "type": "sql_query",
-        "datasetId": "sales_kpi",
-        "resultShape": "table",
-        "solutionCode": "SELECT customer_name AS customer\nFROM orders;"
-      }
-    },
-
-    {
-      "id": "m5_s02_alias_meaning",
-      "kind": "single_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "quiz.m5_s02_alias_meaning",
-      "optionIds": ["a", "b", "c", "d"],
-      "expected": {
-        "kind": "single_choice",
-        "optionId": "a"
-      }
-    },
-    {
-      "id": "m5_s02_as_meaning",
-      "kind": "single_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "quiz.m5_s02_as_meaning",
-      "optionIds": ["a", "b", "c", "d"],
-      "expected": {
-        "kind": "single_choice",
-        "optionId": "a"
-      }
-    },
-    {
-      "id": "m5_s02_rename_result_columns_meaning",
-      "kind": "single_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "quiz.m5_s02_rename_result_columns_meaning",
-      "optionIds": ["a", "b", "c", "d"],
-      "expected": {
-        "kind": "single_choice",
-        "optionId": "a"
-      }
-    },
-    {
-      "id": "m5_s02_readable_output_goal",
-      "kind": "single_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "quiz.m5_s02_readable_output_goal",
-      "optionIds": ["a", "b", "c", "d"],
-      "expected": {
-        "kind": "single_choice",
-        "optionId": "a"
-      }
-    },
-    {
-      "id": "m5_s02_aliases_on_expressions",
-      "kind": "single_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "quiz.m5_s02_aliases_on_expressions",
-      "optionIds": ["a", "b", "c", "d"],
-      "expected": {
-        "kind": "single_choice",
-        "optionId": "a"
-      }
-    },
-
-    {
-      "id": "m5_s02_aliases_true",
-      "kind": "multi_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "quiz.m5_s02_aliases_true",
-      "optionIds": ["a", "b", "c", "d", "e"],
-      "expected": {
-        "kind": "multi_choice",
-        "optionIds": ["a", "b", "c", "e"]
-      }
-    },
-    {
-      "id": "m5_s02_as_true",
-      "kind": "multi_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "quiz.m5_s02_as_true",
-      "optionIds": ["a", "b", "c", "d", "e"],
-      "expected": {
-        "kind": "multi_choice",
-        "optionIds": ["a", "b", "c", "e"]
-      }
-    },
-    {
-      "id": "m5_s02_readable_output_true",
-      "kind": "multi_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "quiz.m5_s02_readable_output_true",
-      "optionIds": ["a", "b", "c", "d", "e"],
-      "expected": {
-        "kind": "multi_choice",
-        "optionIds": ["a", "b", "c", "e"]
-      }
-    },
-    {
-      "id": "m5_s02_rename_columns_true",
-      "kind": "multi_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "quiz.m5_s02_rename_columns_true",
-      "optionIds": ["a", "b", "c", "d", "e"],
-      "expected": {
-        "kind": "multi_choice",
-        "optionIds": ["a", "b", "c", "e"]
-      }
-    },
-    {
-      "id": "m5_s02_alias_workflow_true",
-      "kind": "multi_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "quiz.m5_s02_alias_workflow_true",
-      "optionIds": ["a", "b", "c", "d", "e"],
-      "expected": {
-        "kind": "multi_choice",
-        "optionIds": ["a", "b", "c", "d"]
-      }
-    },
-
-    {
-      "id": "m5_s02_fill_alias_name",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "quiz.m5_s02_fill_alias_name",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "name"
-      }
-    },
-    {
-      "id": "m5_s02_fill_as_keyword",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "quiz.m5_s02_fill_as_keyword",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "AS"
-      }
-    },
-    {
-      "id": "m5_s02_fill_result_not_table",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "quiz.m5_s02_fill_result_not_table",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "table"
-      }
-    },
-    {
-      "id": "m5_s02_fill_clear_total_label",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "quiz.m5_s02_fill_clear_total_label",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "total_price"
-      }
-    },
-    {
-      "id": "m5_s02_fill_readable_output",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "quiz.m5_s02_fill_readable_output",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "scan"
-      }
-    },
-
-    {
-      "id": "m5_s02_reorder_alias_pattern",
-      "kind": "drag_reorder",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "quiz.m5_s02_reorder_alias_pattern",
-      "tokenIds": ["t1", "t2", "t3"],
-      "expected": {
-        "kind": "drag_reorder",
-        "tokenIds": ["t1", "t2", "t3"]
-      }
-    },
-    {
-      "id": "m5_s02_reorder_expression_alias_pattern",
-      "kind": "drag_reorder",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "quiz.m5_s02_reorder_expression_alias_pattern",
-      "tokenIds": ["t1", "t2", "t3"],
-      "expected": {
-        "kind": "drag_reorder",
-        "tokenIds": ["t1", "t2", "t3"]
-      }
-    },
-    {
-      "id": "m5_s02_reorder_header_workflow",
-      "kind": "drag_reorder",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "quiz.m5_s02_reorder_header_workflow",
-      "tokenIds": ["t1", "t2", "t3"],
-      "expected": {
-        "kind": "drag_reorder",
-        "tokenIds": ["t1", "t2", "t3"]
-      }
-    },
-    {
-      "id": "m5_s02_reorder_customer_alias",
-      "kind": "drag_reorder",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "quiz.m5_s02_reorder_customer_alias",
-      "tokenIds": ["t1", "t2", "t3"],
-      "expected": {
-        "kind": "drag_reorder",
-        "tokenIds": ["t1", "t2", "t3"]
-      }
-    },
-    {
-      "id": "m5_s02_reorder_alias_workflow",
-      "kind": "drag_reorder",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "quiz.m5_s02_reorder_alias_workflow",
-      "tokenIds": ["t1", "t2", "t3", "t4"],
-      "expected": {
-        "kind": "drag_reorder",
-        "tokenIds": ["t1", "t2", "t3", "t4"]
-      }
-    }
-  ]
+  }
 }

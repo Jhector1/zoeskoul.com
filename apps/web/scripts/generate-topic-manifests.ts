@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 // scripts/generate-topic-manifests.ts
 
-
 import path from "node:path";
 import {
     projectRoot,
@@ -43,7 +42,8 @@ async function buildSubjectRegistry(
 
     const topicEntries: Array<{
         topicId: string;
-        importName: string;
+        rawImportName: string;
+        typedImportName: string;
         importPath: string;
     }> = [];
 
@@ -60,10 +60,13 @@ async function buildSubjectRegistry(
             );
         }
 
+        const safe = toSafeIdentifier(topicId, "topicManifest", "t");
+
         topicEntries.push({
             topicId,
-            importName: toSafeIdentifier(topicId, "topicManifest", "t"),
-            importPath: toPosixImportPath(outputDir, file).replace(/\.json$/, ""),
+            rawImportName: `${safe}Json`,
+            typedImportName: safe,
+            importPath: toPosixImportPath(outputDir, file),
         });
     }
 
@@ -83,23 +86,31 @@ async function buildSubjectRegistry(
     }
 
     const importLines = topicEntries.map(
-        (entry) => `import ${entry.importName} from "${entry.importPath}";`,
+        (entry) => `import ${entry.rawImportName} from "${entry.importPath}";`,
+    );
+
+    const castLines = topicEntries.map(
+        (entry) =>
+            `const ${entry.typedImportName} = ${entry.rawImportName} as SlimTopicManifest;`,
     );
 
     const mapLines = topicEntries.map(
-        (entry) => `  ${JSON.stringify(entry.topicId)}: ${entry.importName},`,
+        (entry) => `  ${JSON.stringify(entry.topicId)}: ${entry.typedImportName},`,
     );
 
     const fileContents = `/* eslint-disable */
 // AUTO-GENERATED FILE. DO NOT EDIT.
 // Run: pnpm gen:topic-manifests
 
-import type { TopicManifestRefMap } from "@/lib/subjects/_core/subjectManifestTypes";
+import type {
+  SlimTopicManifest,
+  TopicManifestRefMap,
+} from "@/lib/subjects/_core/subjectManifestTypes";
 ${importLines.length ? `\n${importLines.join("\n")}\n` : ""}
-
-export const TOPIC_MANIFESTS = {
+${castLines.length ? `\n${castLines.join("\n")}\n` : ""}
+export const TOPIC_MANIFESTS: TopicManifestRefMap = {
 ${mapLines.join("\n")}
-} satisfies TopicManifestRefMap;
+};
 `;
 
     await writeTextFile(outputFile, fileContents);
@@ -125,7 +136,9 @@ async function main() {
     if (onlySubject) {
         const subjectDir = path.join(subjectsRoot, onlySubject);
         if (!(await exists(subjectDir))) {
-            throw new Error(`Subject folder "${onlySubject}" does not exist under ${subjectsRoot}`);
+            throw new Error(
+                `Subject folder "${onlySubject}" does not exist under ${subjectsRoot}`,
+            );
         }
     }
 }

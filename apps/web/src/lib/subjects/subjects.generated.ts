@@ -8,7 +8,7 @@ import python from "./python/subject.manifest.json";
 import sql from "./sql/subject.manifest.json";
 
 
-export const SUBJECT_MANIFESTS = {
-  "python": python,
-  "sql": sql,
-} satisfies Record<string, SubjectManifest>;
+export const SUBJECT_MANIFESTS: Record<string, SubjectManifest> = {
+  "python": python as SubjectManifest,
+  "sql": sql as SubjectManifest,
+};

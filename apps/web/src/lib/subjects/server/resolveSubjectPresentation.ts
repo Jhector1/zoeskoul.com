@@ -6,7 +6,10 @@ import type {
     ResolvedModuleIntroView,
     ResolvedSubjectCatalogMap,
     ResolvedSubjectModulesView,
+    SubjectManifest,
 } from "@/lib/subjects/_core/subjectManifestTypes";
+
+const manifestMap = SUBJECT_MANIFESTS as Record<string, SubjectManifest>;
 
 function asTag(key?: string | null) {
     return key ? (`@:${key}` as const) : null;
@@ -14,7 +17,7 @@ function asTag(key?: string | null) {
 
 export async function getResolvedSubjectCatalogMap(): Promise<ResolvedSubjectCatalogMap> {
     const entries = await Promise.all(
-        Object.entries(SUBJECT_MANIFESTS).map(async ([slug, manifest]) => {
+        Object.entries(manifestMap).map(async ([slug, manifest]) => {
             const resolved = (await resolveTaggedOnServer({
                 slug: manifest.subject.slug,
                 title: asTag(manifest.subject.titleKey) ?? manifest.subject.slug,
@@ -35,7 +38,7 @@ export async function getResolvedModuleIntroFromManifest(
     subjectSlug: string,
     moduleSlug: string,
 ): Promise<ResolvedModuleIntroView | null> {
-    const manifest = SUBJECT_MANIFESTS[subjectSlug];
+    const manifest = manifestMap[subjectSlug];
     if (!manifest) return null;
 
     const module = manifest.modules.find((m) => m.slug === moduleSlug);
@@ -69,7 +72,7 @@ export async function getResolvedModuleIntroFromManifest(
 export async function getResolvedSubjectModulesFromManifest(
     subjectSlug: string,
 ): Promise<ResolvedSubjectModulesView | null> {
-    const manifest = SUBJECT_MANIFESTS[subjectSlug];
+    const manifest = manifestMap[subjectSlug];
     if (!manifest) return null;
 
     return (await resolveTaggedOnServer({

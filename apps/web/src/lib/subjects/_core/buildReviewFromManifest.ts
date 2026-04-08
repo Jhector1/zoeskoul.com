@@ -76,7 +76,10 @@ export function buildReviewFromManifest(args: {
                                 difficulty: step.difficulty ?? card.project.difficulty,
                                 preferKind: step.preferKind ?? card.project.preferKind ?? null,
                                 exerciseKey: step.exerciseKey,
-                                seedPolicy: step.seedPolicy ?? "global",
+                                seedPolicy:
+                                    step.seedPolicy === "step"
+                                        ? "actor"
+                                        : (step.seedPolicy ?? "global"),
                                 maxAttempts: step.maxAttempts ?? card.project.maxAttempts ?? 10,
                             }),
                         ),

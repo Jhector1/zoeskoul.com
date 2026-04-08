@@ -27,7 +27,7 @@ export const SQL_DATASETS = {
 export type SqlDatasetId = keyof typeof SQL_DATASETS;
 
 export function getSqlDataset(datasetId: string | null | undefined) {
-    console.log(334444,datasetId)
+
     if (!datasetId) return null;
     return SQL_DATASETS[datasetId as SqlDatasetId] ?? null;
 }

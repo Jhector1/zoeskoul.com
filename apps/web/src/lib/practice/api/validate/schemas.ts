@@ -133,6 +133,8 @@ const SqlTestSchema = z
     .object({
         kind: z.literal("sql").default("sql"),
         sqlDialect: SqlDialectSchema.optional(),
+        schemaSql: z.string().optional(),
+        seedSql: z.string().optional(),
         runtime: SqlRuntimeSchema.optional(),
         compareTo: z.enum(["solution", "expected_table"]).optional().default("solution"),
         expectedTable: SqlExpectedTableSchema.optional(),
@@ -173,6 +175,8 @@ const SqlExpectedSchema = z
         kind: z.literal("code_input"),
         language: z.literal("sql"),
         fixedSqlDialect: SqlDialectSchema.optional(),
+        schemaSql: z.string().optional(),
+        seedSql: z.string().optional(),
         runtime: SqlRuntimeSchema.optional(),
         tests: z.array(SqlTestSchema).min(1),
         solutionCode: z.string().optional(),

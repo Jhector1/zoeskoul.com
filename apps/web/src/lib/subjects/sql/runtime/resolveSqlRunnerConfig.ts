@@ -52,7 +52,7 @@ export function resolveSqlRunnerConfig(
         sqlInitialTableSnapshots,
         defaultSqlDialect = DEFAULT_SQL_DIALECT,
     } = args;
-    console.log(7777777777,sqlDatasetId)
+
 
     const isSql = String(language ?? "").toLowerCase() === "sql";
     const dataset =

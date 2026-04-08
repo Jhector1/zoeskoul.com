@@ -50,6 +50,7 @@ export type ParagraphSpec = SketchSpecBase & {
     archetype: "paragraph";
     bodyMarkdown: string;
     images?: Record<string, ParagraphImage>;
+    text?:string;
 };
 
 export type ImageMarkerSpec = {

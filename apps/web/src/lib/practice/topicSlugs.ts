@@ -3,13 +3,10 @@ import type { GenKey, TopicSlug } from "./types";
 
 /**
  * Map generator keys (engine) -> DB slugs (PracticeTopic.slug)
- * Keep this aligned with prisma/seed/data.ts TOPICS values.
+ * Only include keys that actually need remapping.
  */
-export const GENKEY_TO_DB: Record<GenKey, TopicSlug> = {
-
-  // -----------------------------
+export const GENKEY_TO_DB: Partial<Record<GenKey, TopicSlug>> = {
   python_part1: "py0.python_part1",
-
 };
 
 /**
@@ -33,8 +30,8 @@ export function toDbTopicSlug(s: string): TopicSlug {
   const raw = String(s || "").trim();
   if (!raw) return raw as TopicSlug;
 
-  if (raw.includes(".")) return raw as TopicSlug; // already DB-style
+  if (raw.includes(".")) return raw as TopicSlug;
 
   const gk = genKeyFromAnySlug(raw);
-  return (gk ? GENKEY_TO_DB[gk] : raw) as TopicSlug; // unknown stays as-is
+  return (gk && GENKEY_TO_DB[gk] ? GENKEY_TO_DB[gk]! : raw) as TopicSlug;
 }

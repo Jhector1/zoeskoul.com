@@ -1,5 +1,9 @@
-import type { ExerciseKind } from "@/lib/practice/types";
-import type { PracticeKind } from "@prisma/client";
+import type {
+    ManifestCard,
+    ManifestExercise,
+    ManifestSketch,
+    TopicBundleManifest as BaseTopicBundleManifest,
+} from "@/lib/subjects/_core/manifestTypes";
 
 /* =========================
    Raw subject manifest types
@@ -109,168 +113,10 @@ export type ResolvedSubjectModulesView = {
 };
 
 /* =========================
-   Topic manifest types
+   Topic manifest references
    ========================= */
 
 export type TopicManifestRefMap = Record<string, SlimTopicManifest>;
-
-export type ManifestProjectStep = {
-    id: string;
-    titleKey: string;
-    exerciseKey: string;
-    difficulty?: "easy" | "medium" | "hard";
-    preferKind?: PracticeKind | null;
-    seedPolicy?: "global" | "step";
-    maxAttempts?: number;
-};
-
-export type ManifestCard =
-    | {
-    id: string;
-    kind: "sketch";
-    titleKey: string;
-    sketchId: string;
-    height?: number;
-}
-    | {
-    id: string;
-    kind: "quiz";
-    titleKey: string;
-    quiz: {
-        difficulty: "easy" | "medium" | "hard";
-        n: number;
-        allowReveal?: boolean;
-        preferKind?: ExerciseKind | null;
-        maxAttempts?: number;
-    };
-}
-    | {
-    id: string;
-    kind: "project";
-    titleKey: string;
-    project: {
-        difficulty: "easy" | "medium" | "hard";
-        allowReveal?: boolean;
-        preferKind?: PracticeKind | null;
-        maxAttempts?: number;
-        steps: ManifestProjectStep[];
-    };
-};
-
-export type ManifestSketch = {
-    id: string;
-    archetype: "paragraph";
-    titleKey: string;
-    bodyKey: string;
-    images?: Array<{
-        id: string;
-        publicId: string;
-        alt?: string;
-        width?: number;
-        height?: number;
-    }>;
-};
-
-export type ManifestBaseExercise = {
-    id: string;
-    kind: ExerciseKind;
-    purpose?: "quiz" | "project";
-    weight?: number;
-    messageBase: string;
-};
-
-export type ManifestSingleChoice = ManifestBaseExercise & {
-    kind: "single_choice";
-    optionIds: string[];
-    expected: {
-        kind: "single_choice";
-        optionId: string;
-    };
-};
-
-export type ManifestMultiChoice = ManifestBaseExercise & {
-    kind: "multi_choice";
-    optionIds: string[];
-    expected: {
-        kind: "multi_choice";
-        optionIds: string[];
-    };
-};
-
-export type ManifestDragReorder = ManifestBaseExercise & {
-    kind: "drag_reorder";
-    tokenIds: string[];
-    expected: {
-        kind: "drag_reorder";
-        tokenIds: string[];
-    };
-};
-
-export type ManifestFillBlankChoice = ManifestBaseExercise & {
-    kind: "fill_blank_choice";
-    choiceCount: number;
-    expected: {
-        kind: "fill_blank_choice";
-        value: string;
-    };
-};
-
-export type ManifestCodeInput = ManifestBaseExercise & {
-    kind: "code_input";
-    language?: string;
-    fixedSqlDialect?: string;
-    recipe: ManifestRecipe;
-};
-
-export type ManifestExercise =
-    | ManifestSingleChoice
-    | ManifestMultiChoice
-    | ManifestDragReorder
-    | ManifestFillBlankChoice
-    | ManifestCodeInput;
-
-export type ManifestRecipe =
-    | {
-    type: "fixed_tests";
-    tests: Array<{
-        stdin?: string;
-        stdout: string;
-        match?: "exact" | "includes";
-    }>;
-    solutionCode?: string;
-}
-    | {
-    type: "sql_query";
-    datasetId: string;
-    solutionCode: string;
-    resultShape?: "table";
-    ignoreRowOrder?: boolean;
-}
-    | {
-    type: "template_io";
-    vars: Record<string, ManifestVarSpec>;
-    computed?: Record<string, ManifestComputedSpec>;
-    tests: Array<{
-        stdinTemplate?: string;
-        stdoutTemplate: string;
-        match?: "exact" | "includes";
-    }>;
-    solutionTemplate?: string;
-};
-
-export type ManifestVarSpec =
-    | { source: "int"; min: number; max: number }
-    | { source: "pick"; from: string[] }
-    | { source: "pickDifferentFromVar"; from: string[]; var: string }
-    | { source: "intDifferentFromVar"; min: number; max: number; var: string };
-
-export type ManifestComputedSpec =
-    | { op: "add"; left: string; right: number }
-    | { op: "sub"; left: string; right: number }
-    | { op: "mul"; left: string; right: number }
-    | { op: "floor_div"; left: string; right: number }
-    | { op: "c_to_f_int"; left: string }
-    | { op: "mul_div_floor"; left: string; right: string; divisor: number };
 
 export type SlimTopicManifest = {
     topicId: string;
@@ -291,18 +137,4 @@ export type FullTopicManifest = SlimTopicManifest & {
     prefix: string;
 };
 
-export type TopicBundleManifest = {
-    topicId: string;
-    subjectSlug: string;
-    moduleSlug: string;
-    sectionSlug: string;
-    prefix: string;
-    minutes: number;
-    topic: {
-        labelKey: string;
-        summaryKey: string;
-    };
-    cards: ManifestCard[];
-    sketches: ManifestSketch[];
-    exercises: ManifestExercise[];
-};
+export type TopicBundleManifest = BaseTopicBundleManifest;

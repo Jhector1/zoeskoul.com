@@ -2,7 +2,6 @@
 
 // scripts/generate-subject-manifests.ts
 
-
 import path from "node:path";
 import {
     projectRoot,
@@ -70,7 +69,8 @@ async function main() {
     );
 
     const mapLines = subjectEntries.map(
-        (entry) => `  ${JSON.stringify(entry.slug)}: ${entry.importName},`,
+        (entry) =>
+            `  ${JSON.stringify(entry.slug)}: ${entry.importName} as SubjectManifest,`,
     );
 
     const fileContents = `/* eslint-disable */
@@ -80,9 +80,9 @@ async function main() {
 import type { SubjectManifest } from "@/lib/subjects/_core/subjectManifestTypes";
 ${importLines.length ? `\n${importLines.join("\n")}\n` : ""}
 
-export const SUBJECT_MANIFESTS = {
+export const SUBJECT_MANIFESTS: Record<string, SubjectManifest> = {
 ${mapLines.join("\n")}
-} satisfies Record<string, SubjectManifest>;
+};
 `;
 
     await writeTextFile(outputFile, fileContents);

@@ -12,7 +12,7 @@ export const SUBJECTS = SUBJECT_ARTIFACTS.subjects;
 export const MODULES = SUBJECT_ARTIFACTS.modules;
 export const TOPICS = SUBJECT_ARTIFACTS.topics;
 export const SECTIONS = SUBJECT_ARTIFACTS.sections;
-console.log(TOPICS)
+
 export const GENERATED_CATALOG = SUBJECT_ARTIFACTS.catalog;
 export const REVIEW_TOPICS_BY_SLUG = SUBJECT_ARTIFACTS.reviewTopicsBySlug;
 export const SUBJECT_SKETCHES = SUBJECT_ARTIFACTS.sketches;

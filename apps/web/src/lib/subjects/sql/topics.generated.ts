@@ -2,43 +2,79 @@
 // AUTO-GENERATED FILE. DO NOT EDIT.
 // Run: pnpm gen:topic-manifests
 
-import type { TopicManifestRefMap } from "@/lib/subjects/_core/subjectManifestTypes";
+import type {
+  SlimTopicManifest,
+  TopicManifestRefMap,
+} from "@/lib/subjects/_core/subjectManifestTypes";
 
-import databaseThinking from "./modules/module0/topics/database_thinking/topic.bundle";
-import firstSqlEnvironment from "./modules/module0/topics/first_sql_environment/topic.bundle";
-import understandingTables from "./modules/module0/topics/understanding_tables/topic.bundle";
-import whatSqlIs from "./modules/module0/topics/what_sql_is/topic.bundle";
-import introToSelect from "./modules/module1/topics/intro_to_select/topic.bundle";
-import practiceWithBasicQueries from "./modules/module1/topics/practice_with_basic_queries/topic.bundle";
-import readingDataFromATable from "./modules/module1/topics/reading_data_from_a_table/topic.bundle";
-import sqlSyntaxBasics from "./modules/module1/topics/sql_syntax_basics/topic.bundle";
-import beginnerFilteringPractice from "./modules/module2/topics/beginner_filtering_practice/topic.bundle";
-import comparisonOperators from "./modules/module2/topics/comparison_operators/topic.bundle";
-import filteringWithMultipleConditions from "./modules/module2/topics/filtering_with_multiple_conditions/topic.bundle";
-import introToFiltering from "./modules/module2/topics/intro_to_filtering/topic.bundle";
-import limitingOutput from "./modules/module3/topics/limiting_output/topic.bundle";
-import practiceWithOutputControl from "./modules/module3/topics/practice_with_output_control/topic.bundle";
-import sortingByMultipleColumns from "./modules/module3/topics/sorting_by_multiple_columns/topic.bundle";
-import sortingData from "./modules/module3/topics/sorting_data/topic.bundle";
-import listsAndRanges from "./modules/module4/topics/lists_and_ranges/topic.bundle";
-import missingData from "./modules/module4/topics/missing_data/topic.bundle";
-import searchAndCleanupPractice from "./modules/module4/topics/search_and_cleanup_practice/topic.bundle";
-import textMatching from "./modules/module4/topics/text_matching/topic.bundle";
-import columnAliases from "./modules/module5/column_aliases/topic.bundle";
-import creatingNewValuesInQueries from "./modules/module5/creating_new_values_in_queries/topic.bundle";
-import expressionPractice from "./modules/module5/expression_practice/topic.bundle";
-import simpleFunctions from "./modules/module5/simple_functions/topic.bundle";
-import aggregatePractice from "./modules/module6/aggregate_practice/topic.bundle";
-import aggregatesWithFilters from "./modules/module6/aggregates_with_filters/topic.bundle";
-import coreAggregateFunctions from "./modules/module6/core_aggregate_functions/topic.bundle";
-import introToAggregation from "./modules/module6/intro_to_aggregation/topic.bundle";
-import aggregatesWithGroups from "./modules/module7/aggregates_with_groups/topic.bundle";
-import filteringGroups from "./modules/module7/filtering_groups/topic.bundle";
-import groupingPractice from "./modules/module7/grouping_practice/topic.bundle";
-import introToGrouping from "./modules/module7/intro_to_grouping/topic.bundle";
+import databaseThinkingJson from "./modules/module0/topics/database_thinking/topic.bundle.json";
+import firstSqlEnvironmentJson from "./modules/module0/topics/first_sql_environment/topic.bundle.json";
+import understandingTablesJson from "./modules/module0/topics/understanding_tables/topic.bundle.json";
+import whatSqlIsJson from "./modules/module0/topics/what_sql_is/topic.bundle.json";
+import introToSelectJson from "./modules/module1/topics/intro_to_select/topic.bundle.json";
+import practiceWithBasicQueriesJson from "./modules/module1/topics/practice_with_basic_queries/topic.bundle.json";
+import readingDataFromATableJson from "./modules/module1/topics/reading_data_from_a_table/topic.bundle.json";
+import sqlSyntaxBasicsJson from "./modules/module1/topics/sql_syntax_basics/topic.bundle.json";
+import beginnerFilteringPracticeJson from "./modules/module2/topics/beginner_filtering_practice/topic.bundle.json";
+import comparisonOperatorsJson from "./modules/module2/topics/comparison_operators/topic.bundle.json";
+import filteringWithMultipleConditionsJson from "./modules/module2/topics/filtering_with_multiple_conditions/topic.bundle.json";
+import introToFilteringJson from "./modules/module2/topics/intro_to_filtering/topic.bundle.json";
+import limitingOutputJson from "./modules/module3/topics/limiting_output/topic.bundle.json";
+import practiceWithOutputControlJson from "./modules/module3/topics/practice_with_output_control/topic.bundle.json";
+import sortingByMultipleColumnsJson from "./modules/module3/topics/sorting_by_multiple_columns/topic.bundle.json";
+import sortingDataJson from "./modules/module3/topics/sorting_data/topic.bundle.json";
+import listsAndRangesJson from "./modules/module4/topics/lists_and_ranges/topic.bundle.json";
+import missingDataJson from "./modules/module4/topics/missing_data/topic.bundle.json";
+import searchAndCleanupPracticeJson from "./modules/module4/topics/search_and_cleanup_practice/topic.bundle.json";
+import textMatchingJson from "./modules/module4/topics/text_matching/topic.bundle.json";
+import columnAliasesJson from "./modules/module5/column_aliases/topic.bundle.json";
+import creatingNewValuesInQueriesJson from "./modules/module5/creating_new_values_in_queries/topic.bundle.json";
+import expressionPracticeJson from "./modules/module5/expression_practice/topic.bundle.json";
+import simpleFunctionsJson from "./modules/module5/simple_functions/topic.bundle.json";
+import aggregatePracticeJson from "./modules/module6/aggregate_practice/topic.bundle.json";
+import aggregatesWithFiltersJson from "./modules/module6/aggregates_with_filters/topic.bundle.json";
+import coreAggregateFunctionsJson from "./modules/module6/core_aggregate_functions/topic.bundle.json";
+import introToAggregationJson from "./modules/module6/intro_to_aggregation/topic.bundle.json";
+import aggregatesWithGroupsJson from "./modules/module7/aggregates_with_groups/topic.bundle.json";
+import filteringGroupsJson from "./modules/module7/filtering_groups/topic.bundle.json";
+import groupingPracticeJson from "./modules/module7/grouping_practice/topic.bundle.json";
+import introToGroupingJson from "./modules/module7/intro_to_grouping/topic.bundle.json";
 
 
-export const TOPIC_MANIFESTS = {
+const databaseThinking = databaseThinkingJson as SlimTopicManifest;
+const firstSqlEnvironment = firstSqlEnvironmentJson as SlimTopicManifest;
+const understandingTables = understandingTablesJson as SlimTopicManifest;
+const whatSqlIs = whatSqlIsJson as SlimTopicManifest;
+const introToSelect = introToSelectJson as SlimTopicManifest;
+const practiceWithBasicQueries = practiceWithBasicQueriesJson as SlimTopicManifest;
+const readingDataFromATable = readingDataFromATableJson as SlimTopicManifest;
+const sqlSyntaxBasics = sqlSyntaxBasicsJson as SlimTopicManifest;
+const beginnerFilteringPractice = beginnerFilteringPracticeJson as SlimTopicManifest;
+const comparisonOperators = comparisonOperatorsJson as SlimTopicManifest;
+const filteringWithMultipleConditions = filteringWithMultipleConditionsJson as SlimTopicManifest;
+const introToFiltering = introToFilteringJson as SlimTopicManifest;
+const limitingOutput = limitingOutputJson as SlimTopicManifest;
+const practiceWithOutputControl = practiceWithOutputControlJson as SlimTopicManifest;
+const sortingByMultipleColumns = sortingByMultipleColumnsJson as SlimTopicManifest;
+const sortingData = sortingDataJson as SlimTopicManifest;
+const listsAndRanges = listsAndRangesJson as SlimTopicManifest;
+const missingData = missingDataJson as SlimTopicManifest;
+const searchAndCleanupPractice = searchAndCleanupPracticeJson as SlimTopicManifest;
+const textMatching = textMatchingJson as SlimTopicManifest;
+const columnAliases = columnAliasesJson as SlimTopicManifest;
+const creatingNewValuesInQueries = creatingNewValuesInQueriesJson as SlimTopicManifest;
+const expressionPractice = expressionPracticeJson as SlimTopicManifest;
+const simpleFunctions = simpleFunctionsJson as SlimTopicManifest;
+const aggregatePractice = aggregatePracticeJson as SlimTopicManifest;
+const aggregatesWithFilters = aggregatesWithFiltersJson as SlimTopicManifest;
+const coreAggregateFunctions = coreAggregateFunctionsJson as SlimTopicManifest;
+const introToAggregation = introToAggregationJson as SlimTopicManifest;
+const aggregatesWithGroups = aggregatesWithGroupsJson as SlimTopicManifest;
+const filteringGroups = filteringGroupsJson as SlimTopicManifest;
+const groupingPractice = groupingPracticeJson as SlimTopicManifest;
+const introToGrouping = introToGroupingJson as SlimTopicManifest;
+
+export const TOPIC_MANIFESTS: TopicManifestRefMap = {
   "database_thinking": databaseThinking,
   "first_sql_environment": firstSqlEnvironment,
   "understanding_tables": understandingTables,
@@ -71,4 +107,4 @@ export const TOPIC_MANIFESTS = {
   "filtering_groups": filteringGroups,
   "grouping_practice": groupingPractice,
   "intro_to_grouping": introToGrouping,
-} satisfies TopicManifestRefMap;
+};

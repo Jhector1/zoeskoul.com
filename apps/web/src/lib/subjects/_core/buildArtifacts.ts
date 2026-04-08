@@ -1,10 +1,12 @@
-// import type { SketchEntry } from "@/components/sketches/registryTypes";
 import type { ReviewTopicShape } from "@/lib/subjects/types";
+import type { SketchEntry } from "@/components/sketches/subjects";
 import type { CourseBundle } from "./defineCourse";
-import type { TopicGeneratorRegistration, TopicMeta } from "./defineTopicBundle";
-import {SketchEntry} from "@/components/sketches/subjects";
+import type { SubjectTopicBundle, TopicMeta } from "./defineTopicBundle";
+
+type TopicGeneratorRegistration = NonNullable<SubjectTopicBundle["generator"]>;
 
 export type BuiltSubject = CourseBundle["subject"];
+
 export type BuiltModule = {
     slug: string;
     subjectSlug: string;
@@ -192,7 +194,7 @@ export function buildArtifacts(courses: readonly CourseBundle[]): BuiltArtifacts
                     if (bundle.generator) {
                         generatorsByTopicSlug[slug] = {
                             ...bundle.generator,
-                            genKey: bundle.generator.genKey ?? mod.genKey,
+                            genKey: mod.genKey,
                         };
                     }
 

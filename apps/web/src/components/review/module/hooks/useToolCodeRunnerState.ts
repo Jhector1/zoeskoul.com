@@ -96,7 +96,7 @@ export function useToolCodeRunnerState(args: {
     const initialLang = (saved?.lang as CodeLanguage) ?? defaultLang;
     const initialCode = typeof saved?.code === "string" ? saved.code : defaultCode;
     const initialStdin = typeof saved?.stdin === "string" ? saved.stdin : defaultStdin;
-console.log(saved?.sqlDatasetId )
+
     const initialResolvedSql = resolveSqlRunnerConfig({
         language: initialLang,
         sqlDialect: (saved?.sqlDialect as SqlDialect) ?? defaultSqlDialect,

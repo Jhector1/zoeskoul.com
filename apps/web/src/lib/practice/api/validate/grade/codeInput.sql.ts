@@ -107,7 +107,7 @@ export async function gradeSqlCodeInput(args: {
             tc.runtime?.datasetId ??
             expected.runtime?.datasetId ??
             undefined;
-        console.log(88888888,datasetId)
+
 
         const dataset = datasetId ? getSqlDataset(datasetId) : null;
 
@@ -144,7 +144,7 @@ export async function gradeSqlCodeInput(args: {
             limits: DEFAULT_SQL_LIMITS,
         } as any);
 
-        console.log(88888888,learnerRun)
+
 
         if (!learnerRun?.ok) {
             const feedback = classifySqlRunFailure(learnerRun, "check");          return {
@@ -205,9 +205,7 @@ export async function gradeSqlCodeInput(args: {
             expectedTable,
             tc.ignoreRowOrder ?? false,
         );
-        console.log("[gradeSqlCodeInput] learnerTable", learnerTable);
-        console.log("[gradeSqlCodeInput] expectedTable", expectedTable);
-        console.log("[gradeSqlCodeInput] pass", pass);
+
         if (!pass) {
             return {
                 ok: false,

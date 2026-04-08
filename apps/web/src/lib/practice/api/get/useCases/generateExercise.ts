@@ -126,7 +126,7 @@ export async function generatePracticeExercise(
         } as any);
 
         if (resolved.kind !== "ok") {
-            console.log(resolved)
+
             return {
                 kind: "json",
                 status: 400,
