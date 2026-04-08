@@ -147,6 +147,17 @@
       "startError": "Impossible de démarrer l’essai pour le moment.",
       "overlayTitle": "Préparation de votre première session de pratique.",
       "overlayDescription": "Cela ne prendra qu’un instant."
+    },
+
+    "entry": {
+      "kicker": "Bienvenue",
+      "title": "Bienvenue sur {appName}",
+      "description": "Aidons-nous à vous diriger au bon endroit. Êtes-vous nouveau ici ou avez-vous déjà un compte ?",
+      "avatarText": "Bonjour, je suis votre guide. Êtes-vous nouveau ici ou avez-vous déjà un compte ?",
+      "newUser": "Je suis nouveau ici",
+      "returningUser": "J’ai déjà un compte",
+      "helper": "Les nouveaux utilisateurs commencent par l’onboarding. Les utilisateurs existants vont à la connexion."
     }
+
   }
 }

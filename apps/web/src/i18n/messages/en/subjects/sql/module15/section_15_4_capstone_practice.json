@@ -1,0 +1,160 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_15": {
+        "capstone_practice": {
+          "label": "Capstone Practice",
+          "summary": "Practice asking business questions, writing full SQL solutions, explaining query logic, and building confidence through a small beginner capstone workflow.",
+          "cards": {
+            "sketch0": {
+              "title": "How do you ask business questions?"
+            },
+            "sketch1": {
+              "title": "How do you write full SQL solutions?"
+            },
+            "sketch2": {
+              "title": "How do you explain query logic?"
+            },
+            "sketch3": {
+              "title": "How do you build beginner confidence?"
+            },
+            "quiz": {
+              "title": "Quiz: Capstone Practice"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_15": {
+        "section_15_4": {
+          "ask_business_questions": {
+            "title": "A capstone starts with useful questions, not just SQL syntax.",
+            "bodyMarkdown": "A small capstone becomes more realistic when the learner asks practical questions such as:\n\n- which products sell most often?\n- which students have the most enrollments?\n- which department has the highest average salary?\n\nSo the big idea is:\n\n> a capstone project should start from useful questions"
+          },
+          "write_full_sql_solutions": {
+            "title": "A full SQL solution often includes schema, sample data, and the query itself.",
+            "bodyMarkdown": "A strong beginner capstone is more than one SELECT statement.\n\nIt often includes:\n\n- table design\n- sample inserts\n- the final query\n- maybe a grouped or joined report\n\nSo the key idea is:\n\n> a full SQL solution is a workflow, not just one line of SQL"
+          },
+          "explain_query_logic": {
+            "title": "Explaining the logic shows that the learner understands the SQL, not just the final result.",
+            "bodyMarkdown": "A good beginner explanation can answer:\n\n- what tables are involved?\n- why is this join needed?\n- why is GROUP BY used here?\n- what does the result mean?\n\nSo the main idea is:\n\n> explaining query logic is part of learning to think in SQL"
+          },
+          "build_beginner_confidence": {
+            "title": "Confidence grows when a learner can plan, build, query, and explain a small database project.",
+            "bodyMarkdown": "By the end of a capstone, a learner should feel able to:\n\n- create a small schema\n- insert sample data\n- answer several questions with SQL\n- explain what the queries are doing\n\nSo the important idea is:\n\n> confidence grows from completing a full beginner project, not from isolated syntax alone"
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "m15_s04_capstone_question_plan": {
+      "title": "Ask business questions first",
+      "prompt": "The SQLite workspace is using the blank `ddl_blank` dataset.\n\nCreate a small store-style schema with:\n\n- `products(id, name, price)`\n- `customers(id, name)`\n- `orders(id, customer_id, product_id, order_date)` with foreign keys\n\nInsert a few sample rows.\nThen write one query that answers this business question:\n\n> Which customer placed which orders?\n\nReturn customer name, product name, and order date.\nThen click **Run**.",
+      "help": {
+        "concept": "A capstone question becomes useful when the learner turns it into a real schema and a real joined report.",
+        "hint_1": "Build the small schema first, then insert a small dataset, then answer the question with a join.",
+        "hint_2": "The important shift here is from abstract SQL practice to answering a real project-style question."
+      },
+      "hint": "Build a small schema, insert rows, then answer the question with a join.",
+      "starterCode": "-- Build a small store capstone and answer one business question\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "ddl_blank",
+        "resultShape": "table"
+      }
+    },
+    "m15_s04_full_sql_solution": {
+      "title": "Write a full SQL solution",
+      "prompt": "The dataset is blank.\n\nWrite one full SQL solution that:\n\n1. creates `departments` and `employees`\n2. inserts a few sample rows\n3. returns each department name with the number of employees in that department\n\nThen click **Run**.",
+      "help": {
+        "concept": "A full SQL solution includes the setup and the final business question answer in one workflow.",
+        "hint_1": "Create the schema, insert the rows, then write the grouped report.",
+        "hint_2": "The report should join departments to employees and group by department so each row answers the project question clearly."
+      },
+      "hint": "Create, insert, then answer the question with a grouped report.",
+      "starterCode": "-- Write one full SQL solution from schema to grouped report\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "ddl_blank",
+        "resultShape": "table"
+      }
+    },
+    "m15_s04_explain_query_logic": {
+      "title": "Practice query-logic explanation",
+      "prompt": "The dataset is blank.\n\nWrite SQL that:\n\n1. creates `students`, `courses`, and `enrollments`\n2. inserts a few sample rows\n3. returns each student name and the number of courses they are enrolled in\n\nThen click **Run**.\nAfter running it, explain the query in plain language using these points:\n\n- which tables are involved\n- why the join is needed\n- why `GROUP BY` is needed\n- what each result row means",
+      "help": {
+        "concept": "A capstone is stronger when the learner can explain the logic after writing the SQL.",
+        "hint_1": "Write the SQL first, then explain it in simple words.",
+        "hint_2": "The explanation should describe the purpose of the joins and grouping, not only restate the SQL keywords."
+      },
+      "hint": "Write the SQL first, then explain what the join and GROUP BY are doing.",
+      "starterCode": "-- Build the student capstone report, then explain the logic in plain language\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "ddl_blank",
+        "resultShape": "table"
+      }
+    },
+    "m15_s04_capstone_project": {
+      "title": "Complete a beginner capstone",
+      "prompt": "Use the SQL workspace on the right to complete a beginner capstone project on the blank `ddl_blank` dataset.\n\nChoose one domain such as:\n\n- school\n- bookstore\n- clinic\n- art store\n\nYour capstone should include:\n\n1. a small relational schema\n2. sample data inserts\n3. 5 to 10 useful beginner queries\n4. at least one grouped summary report\n5. at least one multi-table join report\n6. a short written explanation of one query's logic\n\nUse **Tables** to inspect the schema, and use **ERD** and **Chen** once foreign keys exist.\n\nThis project is about finishing the course with one small portfolio-ready beginner database project.",
+      "help": {
+        "concept": "The course capstone is about proving that the learner can plan, build, query, and explain a small relational database from start to finish.",
+        "hint_1": "Choose a domain that feels simple enough to finish clearly.",
+        "hint_2": "A strong beginner capstone is not huge. It is small, complete, and clearly explained."
+      },
+      "hint": "Keep the capstone small, complete, and clearly explained.",
+      "starterCode": "-- Build your final beginner capstone project here\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "ddl_blank",
+        "resultShape": "table"
+      }
+    },
+    "m15_s04_capstone_goal_meaning": {
+      "title": "What is the goal of capstone practice?",
+      "prompt": "What is the main goal of the capstone practice section?",
+      "help": {
+        "concept": "The capstone is meant to bring together planning, schema design, inserts, queries, reports, and explanation.",
+        "hint_1": "Think full beginner workflow again.",
+        "hint_2": "It is about showing that the learner can do a whole small project, not just one isolated task."
+      },
+      "hint": "Think complete a whole small relational database project.",
+      "options": {
+        "a": "Complete a whole small relational database project from design to explanation",
+        "b": "Only practice one isolated SELECT statement",
+        "c": "Avoid schema design entirely",
+        "d": "Skip sample data"
+      }
+    },
+    "m15_s04_capstone_true": {
+      "title": "What is true about capstone practice?",
+      "prompt": "Select all true statements about the capstone practice section.",
+      "help": {
+        "concept": "The capstone is meant to consolidate the course into one small realistic beginner project.",
+        "hint_1": "Think schema, sample rows, useful questions, reports, explanation.",
+        "hint_2": "Choose the statements about building confidence through a complete project."
+      },
+      "hint": "Think a small complete project that brings earlier skills together.",
+      "options": {
+        "a": "It starts from useful business-style questions",
+        "b": "It can include schema and sample data",
+        "c": "It can include joined and grouped reports",
+        "d": "It can include explaining the query logic",
+        "e": "It is meant to build beginner confidence"
+      }
+    }
+  }
+}

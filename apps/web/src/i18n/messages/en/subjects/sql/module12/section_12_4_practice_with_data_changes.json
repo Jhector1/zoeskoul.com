@@ -1,0 +1,293 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_12": {
+        "practice_with_data_changes": {
+          "label": "Practice with Data Changes",
+          "summary": "Practice safe updates and deletes, including price changes, status updates, removing test rows, and following a careful modification workflow.",
+          "cards": {
+            "sketch0": {
+              "title": "How do you update prices?"
+            },
+            "sketch1": {
+              "title": "How do you change statuses?"
+            },
+            "sketch2": {
+              "title": "How do you delete test rows?"
+            },
+            "sketch3": {
+              "title": "What is a safe modification workflow?"
+            },
+            "quiz": {
+              "title": "Quiz: Practice with Data Changes"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_12": {
+        "section_12_4": {
+          "update_prices": {
+            "title": "Price updates are a clear beginner example of changing one stored value.",
+            "bodyMarkdown": "Price changes are a very natural update example.\n\nThey help learners practice:\n\n- targeting one row or a small set of rows\n- changing one column\n- checking that the WHERE condition is correct\n\nSo the big idea is:\n\n> price updates are a simple and practical beginner update pattern"
+          },
+          "change_statuses": {
+            "title": "Status changes are a useful example of updating categorical data.",
+            "bodyMarkdown": "A status field is often changed when an item moves from one state to another.\n\nThat makes it good practice for:\n\n- changing one column safely\n- targeting rows by id or by condition\n- pairing a status change with a date update when needed\n\nSo the key idea is:\n\n> status changes are a realistic beginner update pattern"
+          },
+          "delete_test_rows": {
+            "title": "Deleting test rows is a good beginner example of careful row removal.",
+            "bodyMarkdown": "This dataset includes test-style rows through the `is_test` flag.\n\nThat makes it a clear example of targeted deletion.\n\nIt is also a good place to practice:\n\n- previewing the rows first\n- checking the delete condition carefully\n- removing only the intended subset\n\nSo the main idea is:\n\n> delete-test-row practice is really delete-safely practice"
+          },
+          "safe_data_modification_workflow": {
+            "title": "A safe modification workflow is: preview, confirm, then change.",
+            "bodyMarkdown": "A strong beginner workflow for data changes is:\n\n1. identify the target rows\n2. preview them with SELECT\n3. confirm the WHERE condition\n4. run UPDATE or DELETE carefully\n\nSo the important idea is:\n\n> safe data modification is a workflow, not just a command"
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "m12_s04_update_prices": {
+      "title": "Update a price safely",
+      "prompt": "The SQLite workspace already has the `inventory_ops` dataset loaded.\n\nWrite a query that updates `price` to `5.49` for the row where `id` = 1 in `inventory_items`.\n\nThen click **Run**.",
+      "help": {
+        "concept": "This is a simple one-column update practice pattern using a clear row target.",
+        "hint_1": "Update `inventory_items`, set `price`, and target the row with `id = 1`.",
+        "hint_2": "Build a one-column update that changes only the intended row by using a precise WHERE condition."
+      },
+      "hint": "Set `price` and target the row by id.",
+      "starterCode": "-- Update the price for id = 1\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "inventory_ops",
+        "resultShape": "table"
+      }
+    },
+    "m12_s04_change_statuses": {
+      "title": "Change a status safely",
+      "prompt": "The tables already exist.\n\nWrite a query that updates `status` to `'active'` for rows in `inventory_items` where `status` = 'draft'.\n\nThen run it.",
+      "help": {
+        "concept": "Status updates are a clear way to practice changing a category-style value in selected rows.",
+        "hint_1": "Use UPDATE with SET on `status`, then target the matching rows with a WHERE condition.",
+        "hint_2": "Build a statement that changes the status value only for the rows that currently have the draft status."
+      },
+      "hint": "Use SET on status and WHERE on the current status.",
+      "starterCode": "-- Change rows from draft to active\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "inventory_ops",
+        "resultShape": "table"
+      }
+    },
+    "m12_s04_delete_test_rows": {
+      "title": "Delete test rows safely",
+      "prompt": "The tables already exist.\n\nWrite a query that deletes rows from `inventory_items` where `is_test` = 1.\n\nThen click **Run**.",
+      "help": {
+        "concept": "This is a strong beginner delete example because the target rows are clearly defined by a flag column.",
+        "hint_1": "Use DELETE FROM with a WHERE condition on the test flag.",
+        "hint_2": "Build a targeted delete that removes only rows marked as test rows, not the whole table."
+      },
+      "hint": "Use DELETE with a WHERE condition on is_test.",
+      "starterCode": "-- Delete the rows marked as test items\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "inventory_ops",
+        "resultShape": "table"
+      }
+    },
+    "m12_s04_safe_modification_preview": {
+      "title": "Preview before modifying",
+      "prompt": "The tables already exist.\n\nWrite a query that returns all columns from `inventory_items` where `status` = 'draft'.\n\nThen run it and inspect the rows that a future update would affect.",
+      "help": {
+        "concept": "The safe workflow begins with previewing the target rows before running the change query.",
+        "hint_1": "Use a SELECT query with the same condition you might later use in an UPDATE.",
+        "hint_2": "Build a preview query that shows the full draft rows so you can confirm the target set first."
+      },
+      "hint": "Use SELECT first with the same future change condition.",
+      "starterCode": "-- Preview the rows that a future update would affect\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "inventory_ops",
+        "resultShape": "table"
+      }
+    },
+    "m12_s04_modification_project": {
+      "title": "Practice safe data changes",
+      "prompt": "Use the SQL workspace on the right to practice data changes on the `inventory_ops` dataset.\n\nFor each task:\n\n1. preview rows first when useful\n2. write the change query carefully\n3. check the WHERE condition\n4. click **Run**\n5. think about what rows were touched\n\nTasks:\n\n1. Update one price by id\n2. Change a set of statuses from draft to active\n3. Delete rows where `is_test` = 1\n4. Preview rows where `status` = 'draft' before a future update\n5. Update `last_updated` for rows where `status` = 'active'\n\nRun one query at a time.\nThis project is about practicing both the SQL command and the safety workflow around it.",
+      "help": {
+        "concept": "Safe data modification is about both the command and the habits that surround the command.",
+        "hint_1": "Think preview first, then precise WHERE logic, then the change.",
+        "hint_2": "Solve the tasks one by one. Focus on whether the target set is correct before you run the update or delete."
+      },
+      "hint": "Preview first when needed, then use a precise WHERE condition.",
+      "starterCode": "-- Task 1\n-- Update one price by id\n\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "inventory_ops",
+        "resultShape": "table"
+      }
+    },
+    "m12_s04_update_prices_meaning": {
+      "title": "Why practice updating prices?",
+      "prompt": "Why are price updates a useful beginner practice example?",
+      "help": {
+        "concept": "Price updates are simple, realistic, and easy to target precisely.",
+        "hint_1": "Think clear one-column update.",
+        "hint_2": "They are practical because learners can focus on the row targeting and the changed value."
+      },
+      "hint": "Think simple, practical one-column update practice.",
+      "options": {
+        "a": "They are a simple and practical one-column update example",
+        "b": "They remove the need for WHERE",
+        "c": "They always update every row",
+        "d": "They only work with DELETE"
+      }
+    },
+    "m12_s04_change_statuses_meaning": {
+      "title": "Why practice changing statuses?",
+      "prompt": "Why are status changes a useful beginner update example?",
+      "help": {
+        "concept": "Status changes are realistic and easy to understand as category-style updates.",
+        "hint_1": "Think active, draft, inactive.",
+        "hint_2": "They are a good fit for practicing updates to selected groups of rows."
+      },
+      "hint": "Think realistic category-style updates.",
+      "options": {
+        "a": "They are realistic category-style updates to selected rows",
+        "b": "They make SELECT unnecessary",
+        "c": "They only exist for comments",
+        "d": "They automatically preview rows"
+      }
+    },
+    "m12_s04_delete_test_rows_meaning": {
+      "title": "Why practice deleting test rows?",
+      "prompt": "Why is deleting test rows a useful beginner delete example?",
+      "help": {
+        "concept": "The target rows are clearly defined by a flag, which makes the delete logic easier to reason about safely.",
+        "hint_1": "Think a clear target set.",
+        "hint_2": "A clean flag-based condition makes it easier to preview and delete the intended rows only."
+      },
+      "hint": "Think clearly defined target rows.",
+      "options": {
+        "a": "Because the target rows are clearly defined by a test flag",
+        "b": "Because delete is safe without WHERE here",
+        "c": "Because it avoids all previewing",
+        "d": "Because it always deletes only one row"
+      }
+    },
+    "m12_s04_safe_workflow_meaning": {
+      "title": "What is a safe modification workflow?",
+      "prompt": "What is the main idea of a safe data modification workflow?",
+      "help": {
+        "concept": "A safe workflow means previewing, confirming, and only then changing the data.",
+        "hint_1": "Think preview first, then change.",
+        "hint_2": "The workflow matters because it reduces preventable mistakes."
+      },
+      "hint": "Think preview, confirm, then change.",
+      "options": {
+        "a": "Preview the target rows, confirm the condition, then run the change",
+        "b": "Run the change first and inspect later only",
+        "c": "Remove WHERE to simplify the query",
+        "d": "Avoid checking the target set"
+      }
+    },
+    "m12_s04_modification_habits_meaning": {
+      "title": "Why combine command practice with safety habits?",
+      "prompt": "Why is it useful to practice both the SQL command and the safety habits around it?",
+      "help": {
+        "concept": "A good data-change habit is not only about syntax, but about using the syntax carefully.",
+        "hint_1": "Think correct command plus safe workflow.",
+        "hint_2": "The safest learner is the one who knows both how to write the query and how to check it."
+      },
+      "hint": "Think correct SQL plus careful workflow.",
+      "options": {
+        "a": "Because safe data changes require both correct syntax and careful habits",
+        "b": "Because syntax alone always prevents mistakes",
+        "c": "Because previewing is unrelated to updates and deletes",
+        "d": "Because WHERE never matters in practice"
+      }
+    },
+    "m12_s04_price_status_true": {
+      "title": "What is true about updating prices and statuses?",
+      "prompt": "Select all true statements about updating prices and statuses in beginner SQL practice.",
+      "help": {
+        "concept": "Price and status updates are realistic examples of targeted modification.",
+        "hint_1": "Think one value or grouped value changes.",
+        "hint_2": "Choose the statements about safe targeted updates."
+      },
+      "hint": "Think realistic targeted updates.",
+      "options": {
+        "a": "A price update can target one specific row",
+        "b": "A status update can target a set of matching rows",
+        "c": "WHERE still matters in both patterns",
+        "d": "These updates should never be previewed first",
+        "e": "These are useful beginner practice cases"
+      }
+    },
+    "m12_s04_delete_test_rows_true": {
+      "title": "What is true about deleting test rows?",
+      "prompt": "Select all true statements about delete-test-row practice.",
+      "help": {
+        "concept": "Delete-test-row practice is really safe-targeting practice.",
+        "hint_1": "Think flag-based target set.",
+        "hint_2": "Choose the statements about precise target conditions and preview habits."
+      },
+      "hint": "Think clearly targeted delete practice.",
+      "options": {
+        "a": "The test flag can define the delete target set clearly",
+        "b": "Previewing the test rows first can be helpful",
+        "c": "A WHERE condition is still critical",
+        "d": "Delete test rows means WHERE no longer matters",
+        "e": "This is a strong beginner safety exercise"
+      }
+    },
+    "m12_s04_safe_workflow_true": {
+      "title": "What is true about a safe data modification workflow?",
+      "prompt": "Select all true statements about a safe workflow for updates and deletes.",
+      "help": {
+        "concept": "A safe workflow combines row targeting, previewing, and careful execution.",
+        "hint_1": "Think target, preview, confirm, change.",
+        "hint_2": "Choose the statements about deliberate steps before modifying data."
+      },
+      "hint": "Think preview-first, precise-WHERE workflow.",
+      "options": {
+        "a": "It helps to identify the target rows first",
+        "b": "It helps to preview the target set when useful",
+        "c": "It helps to confirm the WHERE condition before changing data",
+        "d": "It encourages deliberate execution instead of rushing",
+        "e": "It means skipping row checks completely"
+      }
+    },
+    "m12_s04_modification_workflow_true": {
+      "title": "What matches a good beginner workflow for practicing data changes?",
+      "prompt": "Select all statements that match a good beginner workflow for practicing updates and deletes safely.",
+      "help": {
+        "concept": "A good workflow is to understand the target set, preview it when needed, write the change carefully, and reflect on what rows were affected.",
+        "hint_1": "Think target set first.",
+        "hint_2": "Choose the steps that build both SQL skill and safety habits."
+      },
+      "hint": "Understand the target set before running the change.",
+      "options": {
+        "a": "Identify the intended target rows first",
+        "b": "Preview the rows when the change feels risky or broad",
+        "c": "Write the UPDATE or DELETE carefully",
+        "d": "Reflect on what rows were affected afterward",
+        "e": "Ignore what the WHERE clause matches"
+      }
+    }
+  }
+}

@@ -1,6 +1,5 @@
 import { prisma } from "@/lib/prisma";
 import {
-    attachGuestCookie,
     actorKeyOf,
     ensureGuestId,
     getActor,
@@ -11,74 +10,47 @@ import {
     enforceSameOriginPost,
     readJsonSafe,
 } from "@/lib/practice/api/shared/http";
-import { resolveReviewAccess } from "@/lib/review/api/access/resolveReviewAccess";
-// import { ReviewProgressWriteSchema } from "@/lib/review/api/progress/schema";
 import { pickLocale } from "@/lib/review/api/shared/schemas";
-import { hasReviewModule } from "@/lib/subjects/registry";
-import { getLocaleFromCookie } from "@/serverUtils";
 import type { ReviewProgressState } from "@/lib/subjects/progressTypes";
-import {ReviewProgressWriteSchema} from "@/lib/review/api/progress/schemas";
+import { ReviewProgressWriteSchema } from "@/lib/review/api/progress/schemas";
+import { resolveReviewModuleForSubject } from "@/lib/review/api/shared/modules";
 
-async function gateReviewModule(args: {
-    req: Request;
+async function resolveReviewProgressScope(args: {
     subjectSlug: string;
-    moduleRef: string;
+    moduleSlug: string;
 }) {
     const actor0 = await getActor();
     const { actor, setGuestId } = ensureGuestId(actor0);
-    const locale = await getLocaleFromCookie();
 
-    const gate = await resolveReviewAccess({
-        prisma,
-        actor,
-        locale,
-        req: args.req,
+    const resolved = await resolveReviewModuleForSubject(prisma, {
         subjectSlug: args.subjectSlug,
-        moduleRef: args.moduleRef,
+        moduleSlug: args.moduleSlug,
     });
 
-    return { actor, setGuestId, gate };
-}
-
-function reviewRegistryMissingResponse(
-    subjectSlug: string,
-    moduleSlug: string,
-    setGuestId?: string | null,
-) {
-    return bodyJsonWithGuestCookie(
-        {
-            message: "Module not found in review registry for this subject.",
-            detail: { subjectSlug, moduleSlug },
-        },
-        404,
-        setGuestId,
-    );
+    return { actor, setGuestId, resolved };
 }
 
 export async function GET(req: Request) {
     const { searchParams } = new URL(req.url);
     const subjectSlug = (searchParams.get("subjectSlug") ?? "").trim();
-    const moduleRef = (searchParams.get("moduleId") ?? "").trim();
-    const locale = pickLocale(searchParams.get("locale"), "en");
+    const moduleSlug = (searchParams.get("moduleSlug") ?? searchParams.get("moduleId") ?? "").trim();    const locale = pickLocale(searchParams.get("locale"), "en");
 
-    if (!subjectSlug || !moduleRef) {
+    if (!subjectSlug || !moduleSlug) {
         return bodyJsonResponse({ message: "Missing subjectSlug/moduleId." }, 400);
     }
 
-    const { actor, setGuestId, gate } = await gateReviewModule({
-        req,
+    const { actor, setGuestId, resolved } = await resolveReviewProgressScope({
         subjectSlug,
-        moduleRef,
+        moduleSlug,
     });
 
-    if (!gate.ok) {
-        return attachGuestCookie(gate.res as any, setGuestId);
-    }
-
-    if (!hasReviewModule(gate.scope.subjectSlug, gate.scope.moduleSlug)) {
-        return reviewRegistryMissingResponse(
-            gate.scope.subjectSlug,
-            gate.scope.moduleSlug,
+    if (!resolved.ok) {
+        return bodyJsonWithGuestCookie(
+            {
+                message: resolved.message,
+                detail: resolved.detail,
+            },
+            resolved.statusCode,
             setGuestId,
         );
     }
@@ -89,8 +61,8 @@ export async function GET(req: Request) {
         where: {
             actorKey_subjectSlug_moduleId_locale: {
                 actorKey,
-                subjectSlug: gate.scope.subjectSlug,
-                moduleId: gate.scope.moduleSlug,
+                subjectSlug,
+                moduleId: resolved.module.slug,
                 locale,
             },
         },
@@ -131,24 +103,22 @@ export async function PUT(req: Request) {
     }
 
     const subjectSlug = parsed.data.subjectSlug;
-    const moduleRef = parsed.data.moduleRef;
+    const moduleSlug = parsed.data.moduleRef;
     const locale = pickLocale(parsed.data.locale, "en");
     const state = parsed.data.state;
 
-    const { actor, setGuestId, gate } = await gateReviewModule({
-        req,
+    const { actor, setGuestId, resolved } = await resolveReviewProgressScope({
         subjectSlug,
-        moduleRef,
+        moduleSlug,
     });
 
-    if (!gate.ok) {
-        return attachGuestCookie(gate.res as any, setGuestId);
-    }
-
-    if (!hasReviewModule(gate.scope.subjectSlug, gate.scope.moduleSlug)) {
-        return reviewRegistryMissingResponse(
-            gate.scope.subjectSlug,
-            gate.scope.moduleSlug,
+    if (!resolved.ok) {
+        return bodyJsonWithGuestCookie(
+            {
+                message: resolved.message,
+                detail: resolved.detail,
+            },
+            resolved.statusCode,
             setGuestId,
         );
     }
@@ -159,15 +129,15 @@ export async function PUT(req: Request) {
         where: {
             actorKey_subjectSlug_moduleId_locale: {
                 actorKey,
-                subjectSlug: gate.scope.subjectSlug,
-                moduleId: gate.scope.moduleSlug,
+                subjectSlug,
+                moduleId: resolved.module.slug,
                 locale,
             },
         },
         create: {
             actorKey,
-            subjectSlug: gate.scope.subjectSlug,
-            moduleId: gate.scope.moduleSlug,
+            subjectSlug,
+            moduleId: resolved.module.slug,
             locale,
             state,
         },
@@ -197,27 +167,25 @@ export async function DELETE(req: Request) {
 
     const { searchParams } = new URL(req.url);
     const subjectSlug = (searchParams.get("subjectSlug") ?? "").trim();
-    const moduleRef = (searchParams.get("moduleId") ?? "").trim();
-    const locale = pickLocale(searchParams.get("locale"), "en");
+    const moduleSlug =
+        (searchParams.get("moduleSlug") ?? searchParams.get("moduleId") ?? "").trim();    const locale = pickLocale(searchParams.get("locale"), "en");
 
-    if (!subjectSlug || !moduleRef) {
+    if (!subjectSlug || !moduleSlug) {
         return bodyJsonResponse({ message: "Missing subjectSlug/moduleId." }, 400);
     }
 
-    const { actor, setGuestId, gate } = await gateReviewModule({
-        req,
+    const { actor, setGuestId, resolved } = await resolveReviewProgressScope({
         subjectSlug,
-        moduleRef,
+        moduleSlug,
     });
 
-    if (!gate.ok) {
-        return attachGuestCookie(gate.res as any, setGuestId);
-    }
-
-    if (!hasReviewModule(gate.scope.subjectSlug, gate.scope.moduleSlug)) {
-        return reviewRegistryMissingResponse(
-            gate.scope.subjectSlug,
-            gate.scope.moduleSlug,
+    if (!resolved.ok) {
+        return bodyJsonWithGuestCookie(
+            {
+                message: resolved.message,
+                detail: resolved.detail,
+            },
+            resolved.statusCode,
             setGuestId,
         );
     }
@@ -228,8 +196,8 @@ export async function DELETE(req: Request) {
         prisma.reviewProgress.deleteMany({
             where: {
                 actorKey,
-                subjectSlug: gate.scope.subjectSlug,
-                moduleId: gate.scope.moduleSlug,
+                subjectSlug,
+                moduleId: resolved.module.slug,
                 locale,
             },
         }),
@@ -238,8 +206,8 @@ export async function DELETE(req: Request) {
                 actorKey,
                 AND: [
                     { quizKey: { startsWith: "review-quiz|" } },
-                    { quizKey: { contains: `|subject=${gate.scope.subjectSlug}|` } },
-                    { quizKey: { contains: `|module=${gate.scope.moduleSlug}|` } },
+                    { quizKey: { contains: `|subject=${subjectSlug}|` } },
+                    { quizKey: { contains: `|module=${resolved.module.slug}|` } },
                 ],
             },
         }),

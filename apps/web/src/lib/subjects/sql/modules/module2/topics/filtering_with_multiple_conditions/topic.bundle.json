@@ -1,0 +1,415 @@
+{
+  "topicId": "filtering_with_multiple_conditions",
+  "subjectSlug": "sql",
+  "moduleSlug": "sql_module_2",
+  "sectionSlug": "section_2_1",
+  "prefix": "sql2",
+  "minutes": 8,
+
+  "topic": {
+    "labelKey": "topics.sql.sql_module_2.filtering_with_multiple_conditions.label",
+    "summaryKey": "topics.sql.sql_module_2.filtering_with_multiple_conditions.summary"
+  },
+
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_2.filtering_with_multiple_conditions.cards.sketch0.title",
+      "sketchId": "and_operator",
+      "height": 520
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_2.filtering_with_multiple_conditions.cards.sketch1.title",
+      "sketchId": "or_operator",
+      "height": 520
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_2.filtering_with_multiple_conditions.cards.sketch2.title",
+      "sketchId": "not_operator",
+      "height": 520
+    },
+    {
+      "id": "sketch3",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_2.filtering_with_multiple_conditions.cards.sketch3.title",
+      "sketchId": "combining_conditions_safely",
+      "height": 520
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.sql.sql_module_2.filtering_with_multiple_conditions.cards.quiz.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "filter_art_and_stock_gte_10",
+            "titleKey": "topics.sql.sql_module_2.filtering_with_multiple_conditions.projectSteps.filter_art_and_stock_gte_10.title",
+            "exerciseKey": "m2_s03_filter_art_and_stock_gte_10",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "filter_art_or_home",
+            "titleKey": "topics.sql.sql_module_2.filtering_with_multiple_conditions.projectSteps.filter_art_or_home.title",
+            "exerciseKey": "m2_s03_filter_art_or_home",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "filter_not_stationery",
+            "titleKey": "topics.sql.sql_module_2.filtering_with_multiple_conditions.projectSteps.filter_not_stationery.title",
+            "exerciseKey": "m2_s03_filter_not_stationery",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql.sql_module_2.filtering_with_multiple_conditions.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 3,
+        "allowReveal": true,
+        "preferKind": "fill_blank_choice",
+        "maxAttempts": 10
+      }
+    }
+  ],
+
+  "sketches": [
+    {
+      "id": "and_operator",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_2.filtering_with_multiple_conditions.and_operator.title",
+      "bodyKey": "sketches.sql.sql_module_2.filtering_with_multiple_conditions.and_operator.bodyMarkdown"
+    },
+    {
+      "id": "or_operator",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_2.filtering_with_multiple_conditions.or_operator.title",
+      "bodyKey": "sketches.sql.sql_module_2.filtering_with_multiple_conditions.or_operator.bodyMarkdown"
+    },
+    {
+      "id": "not_operator",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_2.filtering_with_multiple_conditions.not_operator.title",
+      "bodyKey": "sketches.sql.sql_module_2.filtering_with_multiple_conditions.not_operator.bodyMarkdown"
+    },
+    {
+      "id": "combining_conditions_safely",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_2.filtering_with_multiple_conditions.combining_conditions_safely.title",
+      "bodyKey": "sketches.sql.sql_module_2.filtering_with_multiple_conditions.combining_conditions_safely.bodyMarkdown"
+    }
+  ],
+
+  "exercises": [
+    {
+      "id": "m2_s03_filter_art_and_stock_gte_10",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "quiz.m2_s03_filter_art_and_stock_gte_10",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "SELECT name, category, stock FROM products WHERE category = 'Art' AND stock >= 10;"
+      }
+    },
+    {
+      "id": "m2_s03_filter_art_or_home",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "quiz.m2_s03_filter_art_or_home",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "SELECT name, category FROM products WHERE category = 'Art' OR category = 'Home';"
+      }
+    },
+    {
+      "id": "m2_s03_filter_not_stationery",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "quiz.m2_s03_filter_not_stationery",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "SELECT name, category FROM products WHERE NOT category = 'Stationery';"
+      }
+    },
+
+    {
+      "id": "m2_s03_and_meaning",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_s03_and_meaning",
+      "optionIds": ["a", "b", "c", "d"],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "m2_s03_or_meaning",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_s03_or_meaning",
+      "optionIds": ["a", "b", "c", "d"],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "m2_s03_not_meaning",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_s03_not_meaning",
+      "optionIds": ["a", "b", "c", "d"],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "m2_s03_safe_combining_goal",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_s03_safe_combining_goal",
+      "optionIds": ["a", "b", "c", "d"],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "m2_s03_read_multi_condition_result",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_s03_read_multi_condition_result",
+      "optionIds": ["a", "b", "c", "d"],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+
+    {
+      "id": "m2_s03_and_true",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_s03_and_true",
+      "optionIds": ["a", "b", "c", "d", "e"],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": ["a", "b", "c", "e"]
+      }
+    },
+    {
+      "id": "m2_s03_or_true",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_s03_or_true",
+      "optionIds": ["a", "b", "c", "d", "e"],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": ["a", "b", "c", "e"]
+      }
+    },
+    {
+      "id": "m2_s03_not_true",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_s03_not_true",
+      "optionIds": ["a", "b", "c", "d", "e"],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": ["a", "b", "c", "e"]
+      }
+    },
+    {
+      "id": "m2_s03_safe_combining_true",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_s03_safe_combining_true",
+      "optionIds": ["a", "b", "c", "d", "e"],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": ["a", "b", "c", "d"]
+      }
+    },
+    {
+      "id": "m2_s03_multi_condition_workflow_true",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_s03_multi_condition_workflow_true",
+      "optionIds": ["a", "b", "c", "d", "e"],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": ["a", "b", "c", "d"]
+      }
+    },
+
+    {
+      "id": "m2_s03_reorder_and_logic",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_s03_reorder_and_logic",
+      "tokenIds": ["t1", "t2", "t3"],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": ["t1", "t2", "t3"]
+      }
+    },
+    {
+      "id": "m2_s03_reorder_or_logic",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_s03_reorder_or_logic",
+      "tokenIds": ["t1", "t2", "t3"],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": ["t1", "t2", "t3"]
+      }
+    },
+    {
+      "id": "m2_s03_reorder_not_logic",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_s03_reorder_not_logic",
+      "tokenIds": ["t1", "t2", "t3"],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": ["t1", "t2", "t3"]
+      }
+    },
+    {
+      "id": "m2_s03_reorder_safe_combining_flow",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_s03_reorder_safe_combining_flow",
+      "tokenIds": ["t1", "t2", "t3"],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": ["t1", "t2", "t3"]
+      }
+    },
+    {
+      "id": "m2_s03_reorder_multi_condition_workflow",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_s03_reorder_multi_condition_workflow",
+      "tokenIds": ["t1", "t2", "t3"],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": ["t1", "t2", "t3"]
+      }
+    },
+
+    {
+      "id": "m2_s03_fill_and_keyword",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_s03_fill_and_keyword",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "AND"
+      }
+    },
+    {
+      "id": "m2_s03_fill_or_keyword",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_s03_fill_or_keyword",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "OR"
+      }
+    },
+    {
+      "id": "m2_s03_fill_not_keyword",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_s03_fill_not_keyword",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "NOT"
+      }
+    },
+    {
+      "id": "m2_s03_fill_and_requirement",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_s03_fill_and_requirement",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "both"
+      }
+    },
+    {
+      "id": "m2_s03_fill_or_requirement",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_s03_fill_or_requirement",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "either"
+      }
+    }
+  ]
+}

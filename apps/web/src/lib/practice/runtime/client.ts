@@ -143,7 +143,7 @@ export async function submitPracticeItem(args: {
         key: item.key,
         answer,
     });
-
+    console.log("[validate client] response", data);
     const ok = Boolean((data as any)?.ok);
     const serverFinalized = Boolean((data as any)?.finalized);
     const serverUsed = Number((data as any)?.attempts?.used);

@@ -2,6 +2,7 @@
 
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 import { DEFAULT_SQL_DIALECT } from "@/components/code/runner/constants";
 import { useProjectDirtyState } from "@/components/code/projects/hooks/useProjectDirtyState";
@@ -28,6 +29,7 @@ import { CodeRunnerRuntime, ExecutionBackend } from "@/components/code/runner/ru
 type WorkspaceHookResult = ReturnType<typeof useIdeWorkspace>;
 
 type FullIDEInnerProps = {
+    actorKey: string;
     title: string;
     height: number;
     lessonHref?: string;
@@ -54,7 +56,64 @@ type FullIDEInnerProps = {
     actions: WorkspaceHookResult["actions"];
 };
 
+function getOrCreateGuestActorKey() {
+    if (typeof window === "undefined") return "guest:server";
+
+    const key = `${process.env.NEXT_PUBLIC_APP_NAME ?? "app"}.ide.guest-actor.v1`;
+
+    try {
+        const existing = window.localStorage.getItem(key);
+        if (existing) return `guest:${existing}`;
+
+        const id =
+            typeof crypto !== "undefined" && "randomUUID" in crypto
+                ? crypto.randomUUID()
+                : `guest-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+
+        window.localStorage.setItem(key, id);
+        return `guest:${id}`;
+    } catch {
+        return `guest:fallback`;
+    }
+}
+
+function buildScopeKey(projectScope: FullIDEProps["projectScope"]) {
+    return projectScope?.scopeKey ?? null;
+}
+
+function buildLocalWorkspaceIdSeed(args: {
+    projectScope: FullIDEProps["projectScope"];
+    forcedLanguage?: FullIDEProps["language"];
+}) {
+    return [
+        "draft",
+        args.projectScope?.scopeKey ?? args.projectScope?.kind ?? "global",
+        args.forcedLanguage ?? "any",
+    ].join("::");
+}
+
+function hrefToString(
+    href: FullIDEProps["loginHref"],
+    fallback = "/authenticate",
+) {
+    if (!href) return fallback;
+    if (typeof href === "string") return href;
+
+    const pathname = href.pathname ?? fallback;
+    const query = href.query ?? {};
+    const qs = new URLSearchParams();
+
+    for (const [key, value] of Object.entries(query)) {
+        if (value == null) continue;
+        qs.set(key, String(value));
+    }
+
+    const queryString = qs.toString();
+    return queryString ? `${pathname}?${queryString}` : pathname;
+}
+
 function FullIDEInner({
+                          actorKey,
                           title,
                           height,
                           lessonHref,
@@ -97,7 +156,6 @@ function FullIDEInner({
     const { activeFile, entryFile, tabFiles, currentWorkspace } = derived;
 
     const dirty = useProjectDirtyState(currentWorkspace, language);
-
     const projects = useProjectsList({
         enabled: access.canSaveCloud,
     });
@@ -108,6 +166,7 @@ function FullIDEInner({
     );
 
     const projectSession = useIdeProjectSession({
+        actorKey,
         title,
         projectTitle,
         projectDescription,
@@ -124,7 +183,6 @@ function FullIDEInner({
         activeFile,
         entryFile,
         replaceWorkspace: actions.replaceWorkspace,
-        resetWorkspaceForLanguage: actions.resetWorkspaceForLanguage,
         markLoaded: dirty.markLoaded,
         markSaved: dirty.markSaved,
         clearSavedBaseline: dirty.clearSavedBaseline,
@@ -397,47 +455,6 @@ function FullIDEInner({
     );
 }
 
-function buildClientActorKey(access: FullIDEProps["access"]) {
-    return access.hasUser ? "user" : "anonymous";
-}
-
-function buildScopeKey(projectScope: FullIDEProps["projectScope"]) {
-    return projectScope?.scopeKey ?? null;
-}
-
-function buildLocalWorkspaceIdSeed(args: {
-    initialProjectId: string | null;
-    projectScope: FullIDEProps["projectScope"];
-    forcedLanguage?: FullIDEProps["language"];
-}) {
-    return [
-        "local",
-        args.initialProjectId ?? "draft",
-        args.projectScope?.scopeKey ?? args.projectScope?.kind ?? "global",
-        args.forcedLanguage ?? "any",
-    ].join("::");
-}
-
-function hrefToString(
-    href: FullIDEProps["loginHref"],
-    fallback = "/authenticate",
-) {
-    if (!href) return fallback;
-    if (typeof href === "string") return href;
-
-    const pathname = href.pathname ?? fallback;
-    const query = href.query ?? {};
-    const qs = new URLSearchParams();
-
-    for (const [key, value] of Object.entries(query)) {
-        if (value == null) continue;
-        qs.set(key, String(value));
-    }
-
-    const queryString = qs.toString();
-    return queryString ? `${pathname}?${queryString}` : pathname;
-}
-
 export default function FullIDE(props: FullIDEProps) {
     const {
         title = "IDE",
@@ -458,18 +475,36 @@ export default function FullIDE(props: FullIDEProps) {
         projectTitle,
         projectDescription = null,
         projectScope,
-        draftStorageMode = "off",
+        draftStorageMode = "local",
         onReadyChange,
     } = props;
 
     const router = useRouter();
+    const { data: session } = useSession();
+
     const splitRef = useRef<HTMLDivElement | null>(null);
     const editorHostRef = useRef<HTMLDivElement | null>(null);
 
     const [showMobileExplorer, setShowMobileExplorer] = useState(false);
     const [sqlDialect, setSqlDialect] = useState(DEFAULT_SQL_DIALECT);
+    const [guestActorKey, setGuestActorKey] = useState<string>("guest:pending");
 
-    const actorKey = useMemo(() => buildClientActorKey(access), [access]);
+    useEffect(() => {
+        if (access.hasUser) return;
+        setGuestActorKey(getOrCreateGuestActorKey());
+    }, [access.hasUser]);
+
+    const actorKey = useMemo(() => {
+        if (access.hasUser) {
+            return session?.user?.id ? `user:${session.user.id}` : "user:pending";
+        }
+        return guestActorKey;
+    }, [access.hasUser, session?.user?.id, guestActorKey]);
+
+    const actorReady = access.hasUser
+        ? !!session?.user?.id
+        : guestActorKey !== "guest:pending";
+
     const scopeKey = useMemo(() => buildScopeKey(projectScope), [projectScope]);
 
     const normalizedLoginHref = useMemo(
@@ -480,18 +515,15 @@ export default function FullIDE(props: FullIDEProps) {
     const localWorkspaceId = useMemo(
         () =>
             buildLocalWorkspaceIdSeed({
-                initialProjectId,
                 projectScope,
                 forcedLanguage,
             }),
-        [initialProjectId, projectScope, forcedLanguage],
+        [projectScope, forcedLanguage],
     );
 
     const scopedStorageKey = useMemo(() => {
-        const scopePart = scopeKey ?? "global";
-        const projectPart = initialProjectId ?? localWorkspaceId;
-        return `${storageKey}:${scopePart}:${projectPart}`;
-    }, [storageKey, scopeKey, initialProjectId, localWorkspaceId]);
+        return `${storageKey}:${scopeKey ?? "global"}`;
+    }, [storageKey, scopeKey]);
 
     const workspace = useIdeWorkspace({
         storageKey: scopedStorageKey,
@@ -499,23 +531,25 @@ export default function FullIDE(props: FullIDEProps) {
         resetOnForcedLanguageChange,
         access,
         actorKey,
-        projectId: initialProjectId,
+        projectId: draftStorageMode === "local" ? null : initialProjectId,
         scopeKey,
-        draftStorageMode: (draftStorageMode ?? "off") as "off" | "local",
+        draftStorageMode: (draftStorageMode ?? "local") as "off" | "local",
         localWorkspaceId,
     });
 
     const sessionRemountKey = useMemo(
         () =>
             [
+                actorKey,
                 workspace.state.language,
-                initialProjectId ?? localWorkspaceId,
+                initialProjectId ?? "local",
                 scopeKey ?? "global",
             ].join("::"),
-        [workspace.state.language, initialProjectId, localWorkspaceId, scopeKey],
+        [actorKey, workspace.state.language, initialProjectId, scopeKey],
     );
 
     const isIdeReady = !!(
+        actorReady &&
         workspace.derived.storageHydrated &&
         workspace.derived.currentWorkspace &&
         workspace.state.nodes.length > 0 &&
@@ -556,6 +590,7 @@ export default function FullIDE(props: FullIDEProps) {
         >
             <FullIDEInner
                 key={sessionRemountKey}
+                actorKey={actorKey}
                 title={title}
                 height={height}
                 lessonHref={lessonHref}

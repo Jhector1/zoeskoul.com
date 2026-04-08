@@ -114,13 +114,24 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
     const draftStorageMode = opts?.draftStorageMode ?? "local";
     const initialWorkspace = opts?.initialWorkspace ?? null;
 
-    const actorKey = opts?.actorKey ?? (access.hasUser ? "user" : "anonymous");
-    const projectId = opts?.projectId ?? null;
-    const scopeKey = opts?.scopeKey ?? null;
-
     const localWorkspaceIdRef = useRef<string>(
         opts?.localWorkspaceId ?? buildEphemeralLocalWorkspaceId(),
     );
+
+    const actorKey = useMemo(() => {
+        const explicit = opts?.actorKey?.trim();
+        if (explicit) return explicit;
+
+        if (access.hasUser) {
+            return `unsafe-user:${localWorkspaceIdRef.current}`;
+        }
+
+        return "anonymous";
+    }, [opts?.actorKey, access.hasUser]);
+
+    // Local draft persistence must stay independent from cloud project identity.
+    const projectId = draftStorageMode === "local" ? null : (opts?.projectId ?? null);
+    const scopeKey = opts?.scopeKey ?? null;
 
     const [language, setLanguageState] = useState<CodeLanguage>("python");
     const [nodes, setNodes] = useState<FSNode[]>([]);

@@ -1,41 +1,34 @@
-import type { PrismaClient } from "@prisma/client";
+// src/lib/review/api/shared/modules.ts
 import { hasReviewModule } from "@/lib/subjects/registry";
+import { MODULES, SUBJECTS } from "@/lib/subjects";
 
 export type ReviewModuleRow = {
-    id: string;
     slug: string;
     order: number;
     title: string;
 };
 
 export async function loadReviewModulesForSubject(
-    prisma: PrismaClient,
+    _unused: unknown,
     subjectSlug: string,
-): Promise<null | { subjectId: string; modules: ReviewModuleRow[] }> {
-    const subject = await prisma.practiceSubject.findUnique({
-        where: { slug: subjectSlug },
-        select: { id: true },
-    });
+): Promise<null | { modules: ReviewModuleRow[] }> {
+    const subjectExists = SUBJECTS.some((s) => s.slug === subjectSlug);
+    if (!subjectExists) return null;
 
-    if (!subject) return null;
+    const modules = MODULES
+        .filter(
+            (m) =>
+                m.subjectSlug === subjectSlug &&
+                hasReviewModule(subjectSlug, m.slug),
+        )
+        .sort((a, b) => a.order - b.order)
+        .map((m) => ({
+            slug: m.slug,
+            order: m.order,
+            title: m.title,
+        }));
 
-    const dbModules = await prisma.practiceModule.findMany({
-        where: { subjectId: subject.id },
-        orderBy: { order: "asc" },
-        select: {
-            id: true,
-            slug: true,
-            order: true,
-            title: true,
-        },
-    });
-
-    const modules = dbModules.filter((m) => hasReviewModule(subjectSlug, m.slug));
-
-    return {
-        subjectId: subject.id,
-        modules,
-    };
+    return { modules };
 }
 
 export function findReviewModule(
@@ -48,25 +41,23 @@ export function findReviewModule(
 }
 
 export async function resolveReviewModuleForSubject(
-    prisma: PrismaClient,
+    _unused: unknown,
     args: { subjectSlug: string; moduleSlug: string },
-):
-    Promise<
-        | {
-        ok: true;
-        subjectId: string;
-        modules: ReviewModuleRow[];
-        module: ReviewModuleRow;
-        index: number;
-    }
-        | {
-        ok: false;
-        statusCode: number;
-        message: string;
-        detail?: Record<string, unknown>;
-    }
-    > {
-    const loaded = await loadReviewModulesForSubject(prisma, args.subjectSlug);
+): Promise<
+    | {
+    ok: true;
+    modules: ReviewModuleRow[];
+    module: ReviewModuleRow;
+    index: number;
+}
+    | {
+    ok: false;
+    statusCode: number;
+    message: string;
+    detail?: Record<string, unknown>;
+}
+> {
+    const loaded = await loadReviewModulesForSubject(_unused, args.subjectSlug);
 
     if (!loaded) {
         return {
@@ -78,6 +69,7 @@ export async function resolveReviewModuleForSubject(
     }
 
     const found = findReviewModule(loaded.modules, args.moduleSlug);
+
     if (!found) {
         return {
             ok: false,
@@ -93,7 +85,6 @@ export async function resolveReviewModuleForSubject(
 
     return {
         ok: true,
-        subjectId: loaded.subjectId,
         modules: loaded.modules,
         module: found.module,
         index: found.index,

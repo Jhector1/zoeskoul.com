@@ -9,7 +9,7 @@ import ToolTabs from "./ToolTabs";
 import { TOOL_SPECS } from "./registry";
 import type { ToolsCtx, ToolId } from "./types";
 import { useActiveTool } from "./hooks/useActiveTool";
-import { CodeLanguage } from "@/lib/practice/types";
+import type { CodeLanguage, SqlDialect } from "@/lib/practice/types";
 
 const PANE_ANIM = {
     show: { opacity: 1, scale: 1, y: 0, filter: "blur(0px)" },
@@ -29,16 +29,36 @@ export default function ToolsPanel(props: {
     toolLang: CodeLanguage;
     toolCode: string;
     toolStdin: string;
-
-    onChangeLang: (l: CodeLanguage) => void;
+    toolSqlDialect: SqlDialect;
     onChangeCode: (c: string) => void;
     onChangeStdin: (s: string) => void;
+
     onBeforeRun?: () => void | Promise<void>;
 
     subjectSlug: string;
     moduleId: string;
     locale: string;
     codeEnabled: boolean;
+
+
+
+    onChangeLang?: (l: CodeLanguage) => void;
+    onChangeSqlDialect?: (d: SqlDialect) => void;
+
+    sqlSchemaSql?: string;
+    sqlSeedSql?: string;
+    sqlSetupSql?: string;
+    sqlInitialTableSnapshots?: Record<
+        string,
+        {
+            name: string;
+            columns: Array<{ name: string; type?: string | null }>;
+            rows: unknown[][];
+            rowCount: number;
+        }
+    >;
+    showLanguagePicker?: boolean;
+    showSqlDialectPicker?: boolean;
 }) {
     const ctx: ToolsCtx = useMemo(
         () => ({
@@ -48,7 +68,7 @@ export default function ToolsPanel(props: {
             boundId: props.boundId ?? null,
             codeEnabled: props.codeEnabled,
         }),
-        [props.subjectSlug, props.moduleId, props.locale, props.boundId, props.codeEnabled]
+        [props.subjectSlug, props.moduleId, props.locale, props.boundId, props.codeEnabled],
     );
 
     const { active, setActive } = useActiveTool(ctx);
@@ -63,7 +83,7 @@ export default function ToolsPanel(props: {
             toolId: "notes",
             scopeKey,
         }),
-        [props.subjectSlug, props.moduleId, props.locale, scopeKey]
+        [props.subjectSlug, props.moduleId, props.locale, scopeKey],
     );
 
     const keepMounted = TOOL_SPECS.filter((t) => t.keepMounted);
@@ -128,14 +148,23 @@ export default function ToolsPanel(props: {
 
                         const pane =
                             spec.id === "code"
-                                ? spec.render({
+                                ?spec.render({
                                     height: props.codeRunnerRegionH,
                                     toolLang: props.toolLang,
                                     toolCode: props.toolCode,
                                     toolStdin: props.toolStdin,
+                                    toolSqlDialect: props.toolSqlDialect,
+                                    onChangeLang: props.onChangeLang,
                                     onChangeCode: props.onChangeCode,
                                     onChangeStdin: props.onChangeStdin,
+                                    onChangeSqlDialect: props.onChangeSqlDialect,
                                     onBeforeRun: props.onBeforeRun,
+                                    sqlSchemaSql: props.sqlSchemaSql,
+                                    sqlSeedSql: props.sqlSeedSql,
+                                    sqlSetupSql: props.sqlSetupSql,
+                                    sqlInitialTableSnapshots: props.sqlInitialTableSnapshots,
+                                    showLanguagePicker: props.showLanguagePicker,
+                                    showSqlDialectPicker: props.showSqlDialectPicker,
                                 })
                                 : spec.id === "notes"
                                     ? spec.render({ noteKey, format: "markdown" })
@@ -144,7 +173,7 @@ export default function ToolsPanel(props: {
                         return (
                             <motion.div
                                 key={spec.id}
-                                className={cx("absolute inset-0", isActive ? "" : "")}
+                                className="absolute inset-0"
                                 variants={PANE_ANIM}
                                 animate={isActive ? "show" : "hide"}
                                 transition={PANE_TRANSITION}

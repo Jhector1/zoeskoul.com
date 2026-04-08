@@ -1,0 +1,310 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_8": {
+        "join_practice": {
+          "label": "Join Practice",
+          "summary": "Practice joins with students and enrollments, students and courses, courses and departments, and learn how to choose the right join for the question.",
+          "cards": {
+            "sketch0": {
+              "title": "How do you join students and enrollments?"
+            },
+            "sketch1": {
+              "title": "How do you join students and courses?"
+            },
+            "sketch2": {
+              "title": "How do you join courses and departments?"
+            },
+            "sketch3": {
+              "title": "How do you choose the right join?"
+            },
+            "quiz": {
+              "title": "Quiz: Join Practice"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_8": {
+        "section_8_4": {
+          "students_and_enrollments": {
+            "title": "Students and enrollments are a direct one-step relationship.",
+            "bodyMarkdown": "The `students` table and the `enrollments` table connect directly.\n\nThat makes them great for first join practice.\n\nYou can answer questions like:\n\n- which students have enrollment rows?\n- which students have no enrollment rows?\n- what term appears with each student enrollment?\n\nSo the big idea is:\n\n> students and enrollments are a clear first join pair"
+          },
+          "students_and_courses": {
+            "title": "Students and courses connect through enrollments.",
+            "bodyMarkdown": "Students do not point directly to courses.\n\nInstead, the `enrollments` table connects them.\n\nThat means this relationship is a great example of a join path:\n\n- students → enrollments → courses\n\nSo the key idea is:\n\n> some relationships require more than one join step"
+          },
+          "courses_and_departments": {
+            "title": "Courses and departments show a clean category-style relationship.",
+            "bodyMarkdown": "A course belongs to one department through `department_id`.\n\nThat makes `courses` and `departments` a very clear join pair.\n\nThis is helpful because it looks like a classic category-style relationship:\n\n- one department\n- many possible courses\n\nSo the main idea is:\n\n> courses and departments are a clean example of a direct lookup join"
+          },
+          "choosing_the_right_join": {
+            "title": "The right join depends on whether unmatched rows should stay visible.",
+            "bodyMarkdown": "A beginner should ask:\n\n- do I want only matched rows?\n- or do I want all rows from one table, even if some have no match?\n\nThat question usually decides between:\n\n- `INNER JOIN`\n- `LEFT JOIN`\n\nSo the important idea is:\n\n> the best join type depends on what you want to keep in the result"
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "m8_s04_students_and_enrollments_inner": {
+      "title": "Join students and enrollments",
+      "prompt": "The SQLite workspace already has tables named `students`, `departments`, `courses`, and `enrollments`.\n\nWrite a query that returns `students.name` and `enrollments.term` using an `INNER JOIN`.\n\nThen click **Run**.",
+      "help": {
+        "concept": "A direct relationship join uses the foreign key in the relationship table and the primary key in the entity table.",
+        "hint_1": "Connect `students.id` to `enrollments.student_id` and select one column from each table.",
+        "hint_2": "Build a join that matches students to their enrollment rows and returns the student name with the enrollment term."
+      },
+      "hint": "Use the direct student-to-enrollment relationship.",
+      "starterCode": "-- Return matched student names and enrollment terms\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table"
+      }
+    },
+    "m8_s04_students_and_courses_inner": {
+      "title": "Join students and courses through enrollments",
+      "prompt": "The tables already exist.\n\nWrite a query that returns `students.name` and `courses.title` using joins through `enrollments`.\n\nRun it and inspect how one relationship table can connect two entity tables.",
+      "help": {
+        "concept": "Some relationships require an intermediate table rather than one direct join.",
+        "hint_1": "Start with `students`, connect to `enrollments`, then connect to `courses`.",
+        "hint_2": "Build the query in stages so student rows first match enrollments, and those enrollment rows then match courses."
+      },
+      "hint": "Join through `enrollments` in two steps.",
+      "starterCode": "-- Return student names and course titles through enrollments\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table"
+      }
+    },
+    "m8_s04_courses_and_departments_inner": {
+      "title": "Join courses and departments",
+      "prompt": "The tables already exist.\n\nWrite a query that returns `courses.title` and `departments.name` using an `INNER JOIN`.\n\nThen click **Run**.",
+      "help": {
+        "concept": "A direct lookup relationship is often a very clear join example.",
+        "hint_1": "Use the department relationship between `courses.department_id` and `departments.id`.",
+        "hint_2": "Build a query that combines the course title with the department name using the department ID relationship."
+      },
+      "hint": "Use the department relationship IDs.",
+      "starterCode": "-- Return course titles with department names\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table"
+      }
+    },
+    "m8_s04_choose_left_join_students_courses": {
+      "title": "Choose the right join for all students",
+      "prompt": "The tables already exist.\n\nWrite a query that returns `students.name` and `courses.title`, but keeps all students even if some students are not enrolled in any course.\n\nUse the right join type through `enrollments`, then run it.",
+      "help": {
+        "concept": "When all rows from one table must stay visible, that table should be preserved with a left join path.",
+        "hint_1": "Start from `students` and keep that table preserved while joining through `enrollments` and `courses`.",
+        "hint_2": "Build the query in stages so all student rows remain, even if some students find no enrollment and therefore no course."
+      },
+      "hint": "Keep `students` preserved across the join path.",
+      "starterCode": "-- Return all students and any matching course titles\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table"
+      }
+    },
+    "m8_s04_join_practice_project": {
+      "title": "Practice choosing the right join",
+      "prompt": "Use the SQL workspace on the right to practice joins on the `school_relations_intro` dataset.\n\nFor each task:\n\n1. type the query in the editor\n2. click **Run**\n3. inspect which rows stayed\n4. decide whether the join choice matched the question\n\nTasks:\n\n1. Show `students.name` and `enrollments.term` with an inner join\n2. Show `students.name` and `courses.title` through `enrollments`\n3. Show `courses.title` and `departments.name`\n4. Show all students and any course titles, even if some students have no enrollments\n5. Show all departments and any course titles, even if some departments have no courses\n\nRun one query at a time.\nThis project is about choosing the right join for the question you want to answer.",
+      "help": {
+        "concept": "Join practice becomes much clearer when learners ask what rows should stay in the result before choosing the join type.",
+        "hint_1": "Some tasks want only matched rows, while others want all rows from one side to remain visible.",
+        "hint_2": "Solve the tasks one by one. First decide whether the result should keep only matches or preserve one full table, then choose inner join or left join accordingly."
+      },
+      "hint": "Decide what rows should stay before choosing the join.",
+      "starterCode": "-- Task 1\n-- Show students.name and enrollments.term with an inner join\n\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table"
+      }
+    },
+    "m8_s04_students_courses_meaning": {
+      "title": "What is special about joining students and courses?",
+      "prompt": "What is the main beginner idea behind joining students and courses in this dataset?",
+      "help": {
+        "concept": "Students and courses are connected through the enrollment table rather than directly.",
+        "hint_1": "Think intermediate table.",
+        "hint_2": "The relationship exists, but it takes more than one step to follow it."
+      },
+      "hint": "Think students and courses connect through enrollments.",
+      "options": {
+        "a": "They are connected through the enrollments table",
+        "b": "They are the same table",
+        "c": "They can never be joined",
+        "d": "They are connected only by department names"
+      }
+    },
+    "m8_s04_courses_departments_meaning": {
+      "title": "What is special about joining courses and departments?",
+      "prompt": "What is the main beginner idea behind joining courses and departments?",
+      "help": {
+        "concept": "Courses point directly to departments through `department_id`.",
+        "hint_1": "Think direct lookup relationship.",
+        "hint_2": "This join is cleaner because one table stores the department reference directly."
+      },
+      "hint": "Think direct course-to-department reference.",
+      "options": {
+        "a": "Courses point directly to departments through department_id",
+        "b": "Departments point to courses through student_id",
+        "c": "They can only be connected through enrollments",
+        "d": "They are unrelated tables"
+      }
+    },
+    "m8_s04_choose_right_join_meaning": {
+      "title": "How do you choose the right join?",
+      "prompt": "What is the main question to ask when choosing between an inner join and a left join?",
+      "help": {
+        "concept": "The key question is whether unmatched rows from one side should still appear.",
+        "hint_1": "Think only matched rows or all left-side rows.",
+        "hint_2": "The right join type depends on what rows should remain visible in the output."
+      },
+      "hint": "Think what rows should stay visible.",
+      "options": {
+        "a": "Should only matched rows stay, or should all rows from one side stay?",
+        "b": "Should the column names be uppercase?",
+        "c": "Should the query use COUNT()?",
+        "d": "Should the table be renamed?"
+      }
+    },
+    "m8_s04_when_inner_better": {
+      "title": "When is an inner join the better choice?",
+      "prompt": "When is an `INNER JOIN` usually the better choice?",
+      "help": {
+        "concept": "An inner join is best when the question only wants successfully matched rows.",
+        "hint_1": "Think matched records only.",
+        "hint_2": "Use it when rows without a match should not appear."
+      },
+      "hint": "Think only matched rows should stay.",
+      "options": {
+        "a": "When you only want matched rows",
+        "b": "When you must keep every left-side row",
+        "c": "When you want NULL for missing matches",
+        "d": "When there is no relationship at all"
+      }
+    },
+    "m8_s04_when_left_better": {
+      "title": "When is a left join the better choice?",
+      "prompt": "When is a `LEFT JOIN` usually the better choice?",
+      "help": {
+        "concept": "A left join is best when the main table should stay fully visible.",
+        "hint_1": "Think all students or all departments even without matches.",
+        "hint_2": "Use it when missing matches should still be visible in the result."
+      },
+      "hint": "Think keep the full left-side list.",
+      "options": {
+        "a": "When you want all rows from the left table even if some have no match",
+        "b": "When you want to hide every unmatched row",
+        "c": "When you only want perfect matches",
+        "d": "When joins should be avoided"
+      }
+    },
+    "m8_s04_students_courses_true": {
+      "title": "What is true about students and courses joins?",
+      "prompt": "Select all true statements about joining students and courses in this dataset.",
+      "help": {
+        "concept": "Students and courses connect through enrollments, which makes them a good multi-step join example.",
+        "hint_1": "Think two-step relationship.",
+        "hint_2": "Choose the statements about using enrollments as the bridge."
+      },
+      "hint": "Think enrollments is the bridge table.",
+      "options": {
+        "a": "Students and courses are connected through enrollments",
+        "b": "A query can join students to enrollments and then to courses",
+        "c": "This is a good example of a multi-step join path",
+        "d": "Students and courses share the same primary key automatically",
+        "e": "This join pattern is useful for real relationship data"
+      }
+    },
+    "m8_s04_courses_departments_true": {
+      "title": "What is true about courses and departments joins?",
+      "prompt": "Select all true statements about joining courses and departments.",
+      "help": {
+        "concept": "Courses and departments form a direct foreign-key-to-primary-key relationship.",
+        "hint_1": "Think direct lookup relationship.",
+        "hint_2": "Choose the statements about a course pointing to its department."
+      },
+      "hint": "Think course points directly to department.",
+      "options": {
+        "a": "Courses can point directly to departments with department_id",
+        "b": "A join can combine course title with department name",
+        "c": "This is a clear example of a direct relationship join",
+        "d": "Departments can only be reached through students",
+        "e": "This relationship is useful for teaching direct joins"
+      }
+    },
+    "m8_s04_right_join_choice_true": {
+      "title": "What is true about choosing the right join?",
+      "prompt": "Select all true statements about choosing between inner join and left join.",
+      "help": {
+        "concept": "The choice depends on whether unmatched rows should stay or disappear.",
+        "hint_1": "Think preserve rows or matched rows only.",
+        "hint_2": "Choose the statements about join choice based on the question."
+      },
+      "hint": "Think what rows should remain visible.",
+      "options": {
+        "a": "If only matched rows matter, inner join is often the better choice",
+        "b": "If all rows from one side should stay, left join is often the better choice",
+        "c": "Choosing the preserved side matters in a left join",
+        "d": "Join type never affects which rows appear",
+        "e": "The question should guide the join choice"
+      }
+    },
+    "m8_s04_join_practice_reading_true": {
+      "title": "What is true about reading join practice results?",
+      "prompt": "Select all true statements about reading join practice query results.",
+      "help": {
+        "concept": "Join results should be read by noticing the source tables and whether the row represents a match or a preserved left-side row.",
+        "hint_1": "Think matched row or preserved row with NULL.",
+        "hint_2": "Choose the statements about interpreting join output carefully."
+      },
+      "hint": "Think what each row represents in the relationship.",
+      "options": {
+        "a": "It helps to know which columns came from which table",
+        "b": "Some rows may exist because of a successful match",
+        "c": "Some rows may exist because the left side was preserved",
+        "d": "NULL in right-side columns can matter in left joins",
+        "e": "Every join result should be read as if it came from one table only"
+      }
+    },
+    "m8_s04_join_practice_workflow_true": {
+      "title": "What matches a good beginner workflow for join practice?",
+      "prompt": "Select all statements that match a good beginner workflow for practicing joins.",
+      "help": {
+        "concept": "A good workflow is to identify the relationship, choose the right join type, write the join condition, and read the result in terms of matches or preserved rows.",
+        "hint_1": "Think relationship, join type, condition, reading.",
+        "hint_2": "Choose the steps that help build the right query for the question."
+      },
+      "hint": "Find the relationship first, then choose the join type.",
+      "options": {
+        "a": "Identify which tables are related",
+        "b": "Find the columns that define that relationship",
+        "c": "Decide whether the result should keep only matches or preserve a full side",
+        "d": "Read the result based on what each row represents",
+        "e": "Ignore whether unmatched rows should stay or disappear"
+      }
+    }
+  }
+}

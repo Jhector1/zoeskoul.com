@@ -1,0 +1,471 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_4": {
+        "text_matching": {
+          "label": "Text Matching",
+          "summary": "Learn how `LIKE` works, how `%` and `_` wildcards behave, and how to search for partial text inside customer data.",
+          "cards": {
+            "sketch0": {
+              "title": "What is LIKE?"
+            },
+            "sketch1": {
+              "title": "How does the % wildcard work?"
+            },
+            "sketch2": {
+              "title": "How does the _ wildcard work?"
+            },
+            "sketch3": {
+              "title": "How do you search partial text?"
+            },
+            "quiz": {
+              "title": "Quiz: Text Matching"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_4": {
+        "text_matching": {
+          "intro_to_like": {
+            "title": "`LIKE` helps you search text patterns instead of exact full matches.",
+            "bodyMarkdown": "Sometimes you do not know or need the full text value.\n\nYou may want to find:\n\n- names that start with one letter\n- cities that begin with `Chi`\n- emails that end with `example.com`\n\nThat is where `LIKE` helps.\n\nSo the big idea is:\n\n> `LIKE` is used for pattern matching in text"
+          },
+          "percent_wildcard": {
+            "title": "`%` means any number of characters.",
+            "bodyMarkdown": "The `%` wildcard can stand for:\n\n- zero characters\n- one character\n- many characters\n\nThat makes it useful for searching prefixes, suffixes, or text inside a value.\n\nSo the key idea is:\n\n> `%` means any amount of text"
+          },
+          "underscore_wildcard": {
+            "title": "`_` means exactly one character.",
+            "bodyMarkdown": "The `_` wildcard is more specific than `%`.\n\nIt stands for exactly:\n\n- one character\n\nThat makes it useful when the pattern length matters.\n\nSo the key idea is:\n\n> `_` means one and only one character"
+          },
+          "searching_partial_text": {
+            "title": "Partial text search helps when you know only part of the value.",
+            "bodyMarkdown": "A partial text search is useful when you know only a piece of the data.\n\nFor example, you may know:\n\n- the start of a city name\n- the end of an email address\n- a short piece inside a full name\n\nSo the big idea is:\n\n> partial text search lets you find rows without needing the full exact value"
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "m4_s01_like_city_chi": {
+      "title": "Search cities with LIKE",
+      "prompt": "The SQLite workspace already has a table named `customers`.\n\nWrite a query that shows the `full_name` and `city` columns for customers whose `city` starts with `Chi`.\n\nThen click **Run**.",
+      "help": {
+        "concept": "Use `LIKE` when you want pattern matching instead of an exact full-text match.",
+        "hint_1": "Select `full_name` and `city`, then match city values that begin with `Chi`.",
+        "hint_2": "Build a two-column query on `customers`, then use a text pattern that keeps city values beginning with `Chi` and allows any remaining characters after that start."
+      },
+      "hint": "Use `LIKE` with a prefix pattern.",
+      "starterCode": "-- Show customers in cities that start with Chi\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "customers_cleanup",
+        "resultShape": "table"
+      }
+    },
+    "m4_s01_email_example_domain": {
+      "title": "Search email endings",
+      "prompt": "The `customers` table already exists.\n\nWrite a query that shows the `full_name` and `email` columns for customers whose `email` ends with `example.com`.\n\nThen run it.",
+      "help": {
+        "concept": "The `%` wildcard is useful when the unknown text comes before or after a known piece.",
+        "hint_1": "Select `full_name` and `email`, then match emails that finish with `example.com`.",
+        "hint_2": "Write a two-column query on `customers`, then use a text pattern that allows any beginning before the fixed ending `example.com`."
+      },
+      "hint": "Use `LIKE` with `%` before the domain.",
+      "starterCode": "-- Show emails that end with example.com\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "customers_cleanup",
+        "resultShape": "table"
+      }
+    },
+    "m4_s01_city_miami_single_char": {
+      "title": "Use the _ wildcard",
+      "prompt": "The `customers` table already exists.\n\nWrite a query that shows the `full_name` and `city` columns for customers whose `city` matches the pattern `Miam_`.\n\nThen click **Run**.",
+      "help": {
+        "concept": "The `_` wildcard stands for exactly one character.",
+        "hint_1": "Select `full_name` and `city`, then use the pattern `Miam_` with `LIKE`.",
+        "hint_2": "Build a two-column query on `customers`, then use the one-character wildcard so the city must match `Miam` plus exactly one more character."
+      },
+      "hint": "Use `LIKE 'Miam_'`.",
+      "starterCode": "-- Show customers whose city matches Miam_\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "customers_cleanup",
+        "resultShape": "table"
+      }
+    },
+    "m4_s01_name_contains_ia": {
+      "title": "Search inside a name",
+      "prompt": "The `customers` table already exists.\n\nWrite a query that shows only the `full_name` column for customers whose `full_name` contains `ia` somewhere inside it.\n\nThen run it.",
+      "help": {
+        "concept": "To search for text inside a value, put the known text in the middle of a pattern and allow text before and after it.",
+        "hint_1": "Select only `full_name`, then search for names containing the text `ia`.",
+        "hint_2": "Write a one-column query on `customers`, then use a pattern that allows any text before and after the letters `ia`."
+      },
+      "hint": "Use `%` on both sides of the text.",
+      "starterCode": "-- Show names that contain ia\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "customers_cleanup",
+        "resultShape": "table"
+      }
+    },
+    "m4_s01_name_starts_with_l": {
+      "title": "Search names by first letter",
+      "prompt": "The `customers` table already exists.\n\nWrite a query that shows the `full_name` and `status` columns for customers whose `full_name` starts with `L`.\n\nThen click **Run**.",
+      "help": {
+        "concept": "A prefix text search uses `LIKE` with the known starting text followed by `%`.",
+        "hint_1": "Select `full_name` and `status`, then match names that begin with `L`.",
+        "hint_2": "Build a two-column query on `customers`, then use a pattern that fixes the first letter as `L` and allows any remaining characters after it."
+      },
+      "hint": "Use a prefix pattern starting with L.",
+      "starterCode": "-- Show customers whose names start with L\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "customers_cleanup",
+        "resultShape": "table"
+      }
+    },
+    "m4_s01_text_matching_project": {
+      "title": "Practice text matching",
+      "prompt": "Use the SQL workspace on the right to practice text matching on the `customers` table.\n\nFor each task:\n\n1. type the query in the editor\n2. click **Run**\n3. read the **Results** tab\n4. check whether the returned text matches the pattern you intended\n\nTasks:\n\n1. Show `full_name` and `city` for customers whose `city` starts with `Chi`\n2. Show `full_name` and `email` for customers whose `email` ends with `example.com`\n3. Show `full_name` and `city` for customers whose `city` matches `Miam_`\n4. Show only `full_name` for customers whose `full_name` contains `ia`\n5. Show `full_name` and `status` for customers whose `full_name` starts with `L`\n\nRun one query at a time.\nThis project is about using `LIKE`, `%`, and `_` to search text patterns clearly.",
+      "help": {
+        "concept": "This project builds the core pattern-matching habits: searching by prefix, suffix, single-character pattern, and partial text.",
+        "hint_1": "Some tasks need text at the start, some at the end, and some in the middle. Choose the wildcard pattern that matches that meaning.",
+        "hint_2": "Before writing each query, say the text pattern in plain English first. Then build the `LIKE` pattern so it matches that shape exactly."
+      },
+      "hint": "Match the wildcard pattern to the text shape you want.",
+      "starterCode": "-- Task 1\n-- Show customers in cities that start with Chi\n\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "customers_cleanup",
+        "resultShape": "table"
+      }
+    },
+    "m4_s01_like_meaning": {
+      "title": "What does LIKE do?",
+      "prompt": "What is the main job of `LIKE` in SQL?",
+      "help": {
+        "concept": "`LIKE` is used for pattern matching in text values.",
+        "hint_1": "Think text patterns instead of exact full matches.",
+        "hint_2": "It helps when you know part of a text value, not necessarily the whole exact value."
+      },
+      "hint": "Think text pattern matching.",
+      "options": {
+        "a": "It matches text patterns",
+        "b": "It sorts rows alphabetically",
+        "c": "It counts rows automatically",
+        "d": "It converts text to numbers"
+      }
+    },
+    "m4_s01_percent_meaning": {
+      "title": "What does % mean?",
+      "prompt": "In a `LIKE` pattern, what does `%` usually mean?",
+      "help": {
+        "concept": "`%` stands for any number of characters.",
+        "hint_1": "Think any amount of text.",
+        "hint_2": "It can stand for zero, one, or many characters."
+      },
+      "hint": "Think any number of characters.",
+      "options": {
+        "a": "Any number of characters",
+        "b": "Exactly one character",
+        "c": "Only a space character",
+        "d": "A missing value"
+      }
+    },
+    "m4_s01_underscore_meaning": {
+      "title": "What does _ mean?",
+      "prompt": "In a `LIKE` pattern, what does `_` usually mean?",
+      "help": {
+        "concept": "`_` stands for exactly one character.",
+        "hint_1": "Think one character only.",
+        "hint_2": "It is more specific than `%` because it matches a fixed length of one character."
+      },
+      "hint": "Think exactly one character.",
+      "options": {
+        "a": "Exactly one character",
+        "b": "Any number of characters",
+        "c": "Only a number",
+        "d": "A quote mark"
+      }
+    },
+    "m4_s01_partial_search_meaning": {
+      "title": "What is partial text search?",
+      "prompt": "What is the main idea of searching partial text in SQL?",
+      "help": {
+        "concept": "Partial text search means matching part of a value instead of requiring the full exact text.",
+        "hint_1": "Think part of the word or phrase.",
+        "hint_2": "It is useful when you know only the beginning, ending, or inside piece of a text value."
+      },
+      "hint": "Think only part of the value is known.",
+      "options": {
+        "a": "Matching only part of a text value",
+        "b": "Matching only numeric ranges",
+        "c": "Returning every row without checking text",
+        "d": "Sorting text in reverse"
+      }
+    },
+    "m4_s01_like_result_check": {
+      "title": "How should you check a LIKE result?",
+      "prompt": "After running a query with `LIKE`, what is a strong beginner habit?",
+      "help": {
+        "concept": "You should verify that the returned text really matches the pattern you intended.",
+        "hint_1": "Think compare the rows to the pattern.",
+        "hint_2": "Do not just trust the query. Check whether the returned values fit the prefix, suffix, or partial-text rule."
+      },
+      "hint": "Check that the text fits the pattern.",
+      "options": {
+        "a": "Verify that the returned text matches the intended pattern",
+        "b": "Ignore the pattern after running",
+        "c": "Only count the rows",
+        "d": "Assume all text matches automatically"
+      }
+    },
+    "m4_s01_like_true": {
+      "title": "What is true about LIKE?",
+      "prompt": "Select all true statements about `LIKE` in beginner SQL.",
+      "help": {
+        "concept": "`LIKE` is used for text pattern matching.",
+        "hint_1": "Think searching by shape instead of exact full value.",
+        "hint_2": "Choose the statements about pattern matching, not sorting or counting."
+      },
+      "hint": "Think text patterns.",
+      "options": {
+        "a": "`LIKE` is used for text pattern matching",
+        "b": "`LIKE` can help search partial text",
+        "c": "`LIKE` is useful when you do not know the full exact value",
+        "d": "`LIKE` always means numeric comparison",
+        "e": "`LIKE` is often used with wildcards"
+      }
+    },
+    "m4_s01_percent_true": {
+      "title": "What is true about % ?",
+      "prompt": "Select all true statements about `%` in `LIKE` patterns.",
+      "help": {
+        "concept": "`%` is the wildcard for any number of characters.",
+        "hint_1": "Think flexible text length.",
+        "hint_2": "Choose the statements about prefix, suffix, and inside-text matching."
+      },
+      "hint": "Think any amount of text.",
+      "options": {
+        "a": "`%` can stand for many characters",
+        "b": "`%` can stand for zero characters",
+        "c": "`%` is useful for prefix and suffix searches",
+        "d": "`%` always means exactly one character",
+        "e": "`%` can be used on both sides of known text"
+      }
+    },
+    "m4_s01_underscore_true": {
+      "title": "What is true about _ ?",
+      "prompt": "Select all true statements about `_` in `LIKE` patterns.",
+      "help": {
+        "concept": "`_` matches exactly one character.",
+        "hint_1": "Think fixed single-character placeholder.",
+        "hint_2": "Choose the statements about one-character matching, not unlimited matching."
+      },
+      "hint": "Think one-character wildcard.",
+      "options": {
+        "a": "`_` stands for exactly one character",
+        "b": "`_` is more specific than `%`",
+        "c": "`_` is useful when pattern length matters",
+        "d": "`_` means any number of characters",
+        "e": "`_` can help match one missing letter position"
+      }
+    },
+    "m4_s01_partial_search_true": {
+      "title": "What is true about partial text search?",
+      "prompt": "Select all true statements about partial text search in SQL.",
+      "help": {
+        "concept": "Partial text search is about matching part of a text value rather than the whole exact value.",
+        "hint_1": "Think starts with, ends with, or contains.",
+        "hint_2": "Choose the statements about finding text from a known piece."
+      },
+      "hint": "Think matching a known piece of text.",
+      "options": {
+        "a": "You can search for text at the beginning of a value",
+        "b": "You can search for text at the end of a value",
+        "c": "You can search for text inside a value",
+        "d": "Partial text search only works for numbers",
+        "e": "Wildcards help partial text search work"
+      }
+    },
+    "m4_s01_text_matching_workflow_true": {
+      "title": "What matches the right beginner workflow?",
+      "prompt": "Select all statements that match a good beginner workflow for text matching.",
+      "help": {
+        "concept": "A good workflow is to describe the pattern in plain English, choose the wildcard shape, run the query, and verify the text.",
+        "hint_1": "Think prefix, suffix, middle, or exact length.",
+        "hint_2": "Choose the steps that help translate text-search meaning into the right `LIKE` pattern."
+      },
+      "hint": "Describe the pattern first, then verify it.",
+      "options": {
+        "a": "Say the text pattern in plain English first",
+        "b": "Choose `%` or `_` based on the pattern shape",
+        "c": "Use `LIKE` for pattern matching",
+        "d": "Run the query and check that the returned text fits the pattern",
+        "e": "Ignore the actual returned text after running"
+      }
+    },
+
+    "m4_s01_reorder_like_purpose": {
+      "title": "What LIKE does",
+      "prompt": "Reorder the ideas to explain LIKE.",
+      "help": {
+        "concept": "LIKE is used for text pattern matching.",
+        "hint_1": "Start with not needing the full value.",
+        "hint_2": "End with matching by pattern."
+      },
+      "hint": "Think part of the text, then pattern match.",
+      "tokens": {
+        "t1": "sometimes you do not know the full text value",
+        "t2": "you can describe the text by a pattern instead",
+        "t3": "`LIKE` is used to match that pattern"
+      }
+    },
+    "m4_s01_reorder_percent_logic": {
+      "title": "How % works",
+      "prompt": "Put the wildcard ideas in order.",
+      "help": {
+        "concept": "% stands for any amount of text.",
+        "hint_1": "Think flexible length.",
+        "hint_2": "It can match many different text shapes."
+      },
+      "hint": "Think zero, one, or many characters.",
+      "tokens": {
+        "t1": "`%` can stand for zero characters",
+        "t2": "`%` can also stand for one or many characters",
+        "t3": "that makes it useful for flexible text matching"
+      }
+    },
+    "m4_s01_reorder_underscore_logic": {
+      "title": "How _ works",
+      "prompt": "Reorder the ideas to explain the underscore wildcard.",
+      "help": {
+        "concept": "_ stands for exactly one character.",
+        "hint_1": "Think fixed length of one.",
+        "hint_2": "It is more specific than %."
+      },
+      "hint": "Think one character only.",
+      "tokens": {
+        "t1": "`_` stands for exactly one character",
+        "t2": "it is more specific than `%`",
+        "t3": "it helps when the pattern length matters"
+      }
+    },
+    "m4_s01_reorder_partial_search_logic": {
+      "title": "Partial text search",
+      "prompt": "Put the partial-search idea in order.",
+      "help": {
+        "concept": "Partial text search is useful when you know only part of a value.",
+        "hint_1": "Think start, end, or inside piece.",
+        "hint_2": "You do not need the full exact value."
+      },
+      "hint": "Think known piece of the text.",
+      "tokens": {
+        "t1": "sometimes you know only part of the text",
+        "t2": "you can search by that known piece",
+        "t3": "partial text search finds rows without the full exact value"
+      }
+    },
+    "m4_s01_reorder_text_matching_workflow": {
+      "title": "Good text-matching workflow",
+      "prompt": "Reorder the beginner workflow for text matching.",
+      "help": {
+        "concept": "A good workflow is describe the pattern, choose the wildcard shape, run, verify.",
+        "hint_1": "Pattern meaning comes first.",
+        "hint_2": "Verification comes last."
+      },
+      "hint": "Say the pattern first.",
+      "tokens": {
+        "t1": "describe the text pattern in plain English",
+        "t2": "choose `%` or `_` to match that pattern shape",
+        "t3": "run the query and verify the returned text"
+      }
+    },
+
+    "m4_s01_fill_like_keyword": {
+      "title": "Pattern-matching keyword",
+      "prompt": "Fill in the blank with the correct keyword.",
+      "help": {
+        "concept": "LIKE is the SQL keyword used for pattern matching.",
+        "hint_1": "It is used instead of exact matching.",
+        "hint_2": "The answer is LIKE."
+      },
+      "hint": "Think pattern-matching keyword.",
+      "template": "The SQL keyword used for text pattern matching is ____.",
+      "choices": ["LIKE", "LIMIT", "ORDER BY", "GROUP"],
+      "correct": "LIKE"
+    },
+    "m4_s01_fill_percent_meaning": {
+      "title": "Meaning of %",
+      "prompt": "Choose the best phrase to complete the sentence.",
+      "help": {
+        "concept": "% means any number of characters.",
+        "hint_1": "Think flexible text length.",
+        "hint_2": "The answer is any number."
+      },
+      "hint": "Think flexible length.",
+      "template": "In a LIKE pattern, `%` means ____ of characters.",
+      "choices": ["any number", "exactly one", "zero only", "digits only"],
+      "correct": "any number"
+    },
+    "m4_s01_fill_underscore_meaning": {
+      "title": "Meaning of _",
+      "prompt": "Fill in the blank with the best phrase.",
+      "help": {
+        "concept": "_ means exactly one character.",
+        "hint_1": "It is more specific than %.",
+        "hint_2": "The answer is one character."
+      },
+      "hint": "Think fixed single character.",
+      "template": "In a LIKE pattern, `_` means exactly ____.",
+      "choices": ["one character", "many characters", "zero characters", "one word"],
+      "correct": "one character"
+    },
+    "m4_s01_fill_partial_search_need": {
+      "title": "When partial search helps",
+      "prompt": "Choose the best word to complete the sentence.",
+      "help": {
+        "concept": "Partial search helps when you know only part of the value.",
+        "hint_1": "Think not the full value.",
+        "hint_2": "The answer is part."
+      },
+      "hint": "Think only some of the text.",
+      "template": "Partial text search is useful when you know only ____ of the value.",
+      "choices": ["part", "all", "none", "zero"],
+      "correct": "part"
+    },
+    "m4_s01_fill_pattern_check": {
+      "title": "What to verify after LIKE",
+      "prompt": "Fill in the blank with the best word.",
+      "help": {
+        "concept": "After LIKE, you should verify that the text matches the intended pattern.",
+        "hint_1": "Think text shape.",
+        "hint_2": "The word is pattern."
+      },
+      "hint": "Think intended text shape.",
+      "template": "After running a LIKE query, verify that the returned text fits the intended ____.",
+      "choices": ["pattern", "row count", "toolbar", "comment"],
+      "correct": "pattern"
+    }
+
+  }
+}

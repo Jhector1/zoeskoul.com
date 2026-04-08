@@ -1,0 +1,293 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_12": {
+        "data_safety_mindset": {
+          "label": "Data Safety Mindset",
+          "summary": "Learn why previewing matters, why SELECT-first habits help, why backups and caution matter, and how to think before changing stored data.",
+          "cards": {
+            "sketch0": {
+              "title": "Why preview before update or delete?"
+            },
+            "sketch1": {
+              "title": "Why use SELECT first?"
+            },
+            "sketch2": {
+              "title": "Why do backups and caution matter?"
+            },
+            "sketch3": {
+              "title": "What does it mean to think before changing data?"
+            },
+            "quiz": {
+              "title": "Quiz: Data Safety Mindset"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_12": {
+        "section_12_3": {
+          "preview_before_update_delete": {
+            "title": "Previewing first helps you see the exact rows you are about to change.",
+            "bodyMarkdown": "A strong beginner habit is:\n\n- preview first\n- modify second\n\nThat means using a SELECT query with the same WHERE condition before you run an UPDATE or DELETE.\n\nSo the big idea is:\n\n> previewing first helps confirm the target rows before changing them"
+          },
+          "using_select_first": {
+            "title": "Using SELECT first is one of the safest habits in beginner SQL.",
+            "bodyMarkdown": "SELECT does not change the data.\n\nThat makes it a safe way to ask:\n\n- which rows match?\n- is this really the target set?\n- did my condition catch what I expected?\n\nSo the key idea is:\n\n> SELECT-first thinking is a safe way to check your logic before changing data"
+          },
+          "backups_and_caution": {
+            "title": "Backups and caution matter because change queries can affect real stored data.",
+            "bodyMarkdown": "When a query changes or removes data, mistakes can matter more.\n\nThat is why good habits include:\n\n- caution before running the statement\n- checking the target carefully\n- understanding that data changes are more serious than read-only queries\n\nSo the main idea is:\n\n> change queries deserve more caution than simple SELECT queries"
+          },
+          "thinking_before_changing_data": {
+            "title": "Thinking before changing data means asking what will change and why.",
+            "bodyMarkdown": "Before running an update or delete, a beginner should ask:\n\n- what rows will this touch?\n- is the WHERE condition correct?\n- should I preview first?\n- am I sure this is the intended change?\n\nSo the important idea is:\n\n> safe data changes begin with careful thinking, not rushing"
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "m12_s03_preview_status_rows": {
+      "title": "Preview before changing",
+      "prompt": "The SQLite workspace already has the `inventory_ops` dataset loaded.\n\nWrite a query that returns all columns from `inventory_items` where `status` = 'draft'.\n\nThen click **Run** and inspect which rows would be affected by a future change.",
+      "help": {
+        "concept": "A preview query helps confirm the exact target rows before running an UPDATE or DELETE.",
+        "hint_1": "Use a SELECT query with the same condition you might later use in a change query.",
+        "hint_2": "Build a preview query that shows the full rows matching the draft status so you can confirm the target set first."
+      },
+      "hint": "Use SELECT first with the same WHERE condition.",
+      "starterCode": "-- Preview the rows that match status = 'draft'\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "inventory_ops",
+        "resultShape": "table"
+      }
+    },
+    "m12_s03_preview_test_rows": {
+      "title": "Use SELECT first for test rows",
+      "prompt": "The tables already exist.\n\nWrite a query that returns all columns from `inventory_items` where `is_test` = 1.\n\nThen run it and inspect which rows would be affected by a future delete.",
+      "help": {
+        "concept": "Using SELECT first is a safe way to confirm that your targeting condition matches the intended rows.",
+        "hint_1": "Use a normal SELECT query with the same condition you might later use in DELETE.",
+        "hint_2": "Build a preview query that shows the rows marked as test rows so you can verify the target set before removing anything."
+      },
+      "hint": "Use SELECT first with the future delete condition.",
+      "starterCode": "-- Preview the rows marked as test rows\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "inventory_ops",
+        "resultShape": "table"
+      }
+    },
+    "m12_s03_preview_single_row": {
+      "title": "Preview one row before updating",
+      "prompt": "The tables already exist.\n\nWrite a query that returns all columns from `inventory_items` where `id` = 4.\n\nThen click **Run** and inspect the row that would be changed by a future update.",
+      "help": {
+        "concept": "Previewing one specific row can make later updates much safer and easier to reason about.",
+        "hint_1": "Use SELECT with a WHERE condition on the item id.",
+        "hint_2": "Build a full-row preview query for the single target row so you can check exactly what would be changed."
+      },
+      "hint": "Use SELECT * with a WHERE condition on the row id.",
+      "starterCode": "-- Preview one row before a future update\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "inventory_ops",
+        "resultShape": "table"
+      }
+    },
+    "m12_s03_compare_preview_and_change_mindset": {
+      "title": "Practice the preview mindset",
+      "prompt": "The tables already exist.\n\nWrite a query that returns all columns from `inventory_items` where `price` > 10.\n\nThen run it and think about why previewing this target set matters before a future update.",
+      "help": {
+        "concept": "Previewing broad target sets helps learners notice how many rows a future change might affect.",
+        "hint_1": "Use a SELECT query with a WHERE condition on price.",
+        "hint_2": "Build a preview query that shows all rows above the price threshold so you can see the size of the future target set."
+      },
+      "hint": "Use SELECT first to see the full target set.",
+      "starterCode": "-- Preview rows where price is greater than 10\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "inventory_ops",
+        "resultShape": "table"
+      }
+    },
+    "m12_s03_safety_mindset_project": {
+      "title": "Practice the data safety mindset",
+      "prompt": "Use the SQL workspace on the right to practice the safety mindset for data changes on the `inventory_ops` dataset.\n\nFor each task:\n\n1. write a SELECT preview query first\n2. click **Run**\n3. inspect which rows match\n4. think about what an update or delete would affect\n\nTasks:\n\n1. Preview rows where `status` = 'draft'\n2. Preview rows where `is_test` = 1\n3. Preview one row by id before a future update\n4. Preview rows where `price` > 10\n5. Preview rows where `category` = 'Decor'\n\nRun one query at a time.\nThis project is about building safe thinking before writing change queries.",
+      "help": {
+        "concept": "The safety mindset grows when learners repeatedly preview target rows before imagining changes to them.",
+        "hint_1": "For each task, use SELECT with the same condition you would later use in a change query.",
+        "hint_2": "Solve the tasks one by one. Focus on whether the previewed target set matches what you would actually want to change."
+      },
+      "hint": "Use SELECT first and study the target rows carefully.",
+      "starterCode": "-- Task 1\n-- Preview rows where status = 'draft'\n\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "inventory_ops",
+        "resultShape": "table"
+      }
+    },
+    "m12_s03_preview_meaning": {
+      "title": "Why preview before update or delete?",
+      "prompt": "Why is previewing rows before an update or delete such a good beginner habit?",
+      "help": {
+        "concept": "Previewing helps confirm the exact rows that would be affected before making changes.",
+        "hint_1": "Think confirm the target set.",
+        "hint_2": "It is a safe way to check whether your WHERE condition really matches what you intended."
+      },
+      "hint": "Think confirm the exact target rows first.",
+      "options": {
+        "a": "It helps confirm the exact rows that would be affected",
+        "b": "It automatically performs the update",
+        "c": "It removes the need for WHERE",
+        "d": "It deletes backup copies"
+      }
+    },
+    "m12_s03_select_first_meaning": {
+      "title": "Why use SELECT first?",
+      "prompt": "Why is SELECT-first thinking so useful before data changes?",
+      "help": {
+        "concept": "SELECT lets you inspect the target rows without changing them.",
+        "hint_1": "Think safe inspection.",
+        "hint_2": "It is useful because it checks the logic without modifying the data."
+      },
+      "hint": "Think inspect safely before changing anything.",
+      "options": {
+        "a": "Because SELECT lets you inspect the target rows without changing them",
+        "b": "Because SELECT automatically updates rows",
+        "c": "Because SELECT replaces backups",
+        "d": "Because SELECT disables WHERE"
+      }
+    },
+    "m12_s03_backups_meaning": {
+      "title": "Why do backups and caution matter?",
+      "prompt": "Why do backups and caution matter more with update and delete queries than with simple SELECT queries?",
+      "help": {
+        "concept": "Update and delete queries modify stored data, so mistakes can matter more.",
+        "hint_1": "Think real changes to stored rows.",
+        "hint_2": "The risk is higher because the query is not just reading data anymore."
+      },
+      "hint": "Think change queries affect real stored data.",
+      "options": {
+        "a": "Because update and delete queries change stored data",
+        "b": "Because SELECT is more dangerous than DELETE",
+        "c": "Because backups only matter for comments",
+        "d": "Because WHERE stops existing"
+      }
+    },
+    "m12_s03_thinking_before_change_meaning": {
+      "title": "What does it mean to think before changing data?",
+      "prompt": "What is the main idea of thinking before changing stored data?",
+      "help": {
+        "concept": "It means checking what rows will change and whether the condition is truly correct before running the change.",
+        "hint_1": "Think what rows, why those rows, and is the condition right?",
+        "hint_2": "It is a pause for reasoning before action."
+      },
+      "hint": "Think which rows will change and whether that is really correct.",
+      "options": {
+        "a": "Check what rows will change and whether the condition is really correct",
+        "b": "Run the change first and inspect later only",
+        "c": "Avoid WHERE whenever possible",
+        "d": "Ignore the target set"
+      }
+    },
+    "m12_s03_change_mindset_goal": {
+      "title": "What is the goal of a data safety mindset?",
+      "prompt": "What is the main goal of a data safety mindset in beginner SQL?",
+      "help": {
+        "concept": "The safety mindset aims to reduce preventable mistakes before change queries are run.",
+        "hint_1": "Think fewer avoidable mistakes.",
+        "hint_2": "The goal is to build habits that make data changes safer and more deliberate."
+      },
+      "hint": "Think safer, more deliberate data changes.",
+      "options": {
+        "a": "Reduce preventable mistakes before running change queries",
+        "b": "Make update and delete queries more rushed",
+        "c": "Avoid ever reading the data",
+        "d": "Remove all previewing"
+      }
+    },
+    "m12_s03_preview_true": {
+      "title": "What is true about previewing before data changes?",
+      "prompt": "Select all true statements about previewing before updates or deletes.",
+      "help": {
+        "concept": "Previewing is a safety habit that helps confirm the exact target rows before modification.",
+        "hint_1": "Think preview first, change second.",
+        "hint_2": "Choose the statements about using read-only checks before write queries."
+      },
+      "hint": "Think safe target confirmation.",
+      "options": {
+        "a": "Previewing can confirm the target rows",
+        "b": "Previewing often uses a SELECT query",
+        "c": "Previewing can reveal if the target set is larger than expected",
+        "d": "Previewing makes WHERE unnecessary",
+        "e": "Previewing is a strong beginner safety habit"
+      }
+    },
+    "m12_s03_select_first_true": {
+      "title": "What is true about using SELECT first?",
+      "prompt": "Select all true statements about using SELECT first before updates or deletes.",
+      "help": {
+        "concept": "SELECT-first thinking helps learners test conditions safely before modifying rows.",
+        "hint_1": "Think safe condition check.",
+        "hint_2": "Choose the statements about inspecting rows without changing them."
+      },
+      "hint": "Think inspect first, modify second.",
+      "options": {
+        "a": "SELECT can preview the rows matched by a future change condition",
+        "b": "SELECT can help verify WHERE logic safely",
+        "c": "SELECT does not modify the data while previewing",
+        "d": "SELECT always performs the update too",
+        "e": "SELECT-first thinking can reduce change mistakes"
+      }
+    },
+    "m12_s03_backups_true": {
+      "title": "What is true about backups and caution?",
+      "prompt": "Select all true statements about backups and caution around data changes.",
+      "help": {
+        "concept": "Backups and caution matter because change queries are more serious than read-only queries.",
+        "hint_1": "Think stored data can be changed or removed.",
+        "hint_2": "Choose the statements about treating write queries with more care."
+      },
+      "hint": "Think change queries deserve more caution.",
+      "options": {
+        "a": "Change queries deserve more caution than simple reads",
+        "b": "Mistakes in updates or deletes can matter more",
+        "c": "Careful habits are part of safer data work",
+        "d": "Backups and caution are useless with data changes",
+        "e": "Thinking ahead is part of safe modification work"
+      }
+    },
+    "m12_s03_safety_mindset_workflow_true": {
+      "title": "What matches a good beginner workflow for a data safety mindset?",
+      "prompt": "Select all statements that match a good beginner workflow for safe data changes.",
+      "help": {
+        "concept": "A good workflow is to identify the target rows, preview them, confirm the WHERE logic, and only then consider running the change.",
+        "hint_1": "Think identify, preview, confirm, then change.",
+        "hint_2": "Choose the steps that build safe habits before touching stored data."
+      },
+      "hint": "Identify the rows first, preview them, then confirm the change logic.",
+      "options": {
+        "a": "Decide what rows should change or be removed",
+        "b": "Preview those rows with SELECT first",
+        "c": "Confirm that the WHERE condition matches the intended target set",
+        "d": "Run the change only after that check",
+        "e": "Skip previewing because it slows you down"
+      }
+    }
+  }
+}

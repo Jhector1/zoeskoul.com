@@ -123,6 +123,16 @@ export async function GET(req: Request) {
     try {
         const out = await handlePracticeGet(ctx);
 
+        if (process.env.NODE_ENV === "development" && out.kind === "json") {
+            console.log("[/api/practice] exercise runtime check", {
+                requestId,
+                exerciseId: out.body?.exercise?.id,
+                exerciseKind: out.body?.exercise?.kind,
+                language: out.body?.exercise?.language,
+                fixedSqlDialect: out.body?.exercise?.fixedSqlDialect,
+                runtime: out.body?.exercise?.runtime,
+            });
+        }
         const res =
             out.kind === "res"
                 ? attachGuestCookie(out.res, setGuestId)

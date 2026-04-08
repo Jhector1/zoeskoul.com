@@ -1,0 +1,310 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_8": {
+        "left_join": {
+          "label": "LEFT JOIN",
+          "summary": "Learn what a left join does, how it keeps unmatched rows from the left table, when to use it, and how NULLs appear in joined results.",
+          "cards": {
+            "sketch0": {
+              "title": "What does a left join do?"
+            },
+            "sketch1": {
+              "title": "How are unmatched left-side rows kept?"
+            },
+            "sketch2": {
+              "title": "When should you use a left join?"
+            },
+            "sketch3": {
+              "title": "What do NULLs mean in joined results?"
+            },
+            "quiz": {
+              "title": "Quiz: LEFT JOIN"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_8": {
+        "section_8_3": {
+          "what_left_join_does": {
+            "title": "A left join keeps every row from the left table.",
+            "bodyMarkdown": "A `LEFT JOIN` starts from the left table and keeps all of its rows.\n\nIf a matching row is found on the right, SQL combines them.\nIf no match is found, the left row still stays.\n\nSo the big idea is:\n\n> a left join keeps all left-side rows, even when no match exists"
+          },
+          "keeping_unmatched_left_rows": {
+            "title": "Unmatched left-side rows stay in the result.",
+            "bodyMarkdown": "This is what makes `LEFT JOIN` different from `INNER JOIN`.\n\nFor example, in this dataset:\n\n- `Liam` has no enrollments\n- `Creative Writing` has no enrollments\n- `Arts` has no courses\n\nA left join can still show those rows if they are on the left side.\n\nSo the key idea is:\n\n> unmatched left rows are preserved"
+          },
+          "when_to_use_left_join": {
+            "title": "Use a left join when you want all rows from the left table, not just the matched ones.",
+            "bodyMarkdown": "A `LEFT JOIN` is useful when the question sounds like:\n\n- show all students, even if some have no enrollments\n- show all departments, even if some have no courses\n- show all courses, even if some have no enrollments\n\nSo the main idea is:\n\n> use a left join when missing matches still matter"
+          },
+          "nulls_in_joined_results": {
+            "title": "NULL in a joined result usually means there was no matching row on the right side.",
+            "bodyMarkdown": "When a left join keeps a left-side row but no right-side row matches it, SQL fills the right-side columns with `NULL`.\n\nThat means:\n\n- there was no match\n- the left row still stayed\n\nSo the important idea is:\n\n> NULL often signals a missing right-side match in a left join result"
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "m8_s03_left_join_students_enrollments": {
+      "title": "Keep all students",
+      "prompt": "The SQLite workspace already has tables named `students`, `departments`, `courses`, and `enrollments`.\n\nWrite a query that returns `students.name` and `enrollments.term` using a `LEFT JOIN` from `students` to `enrollments`.\n\nThen click **Run** and notice that students without enrollments still appear.",
+      "help": {
+        "concept": "A left join keeps every row from the left table, even if there is no match on the right.",
+        "hint_1": "Start from `students`, then join `enrollments` using the student relationship IDs.",
+        "hint_2": "Build the query so `students` stays on the left side and is matched to `enrollments` through the student ID relationship."
+      },
+      "hint": "Keep `students` on the left side of the join.",
+      "starterCode": "-- Return all students and any matching enrollment term\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table"
+      }
+    },
+    "m8_s03_left_join_departments_courses": {
+      "title": "Keep all departments",
+      "prompt": "The tables already exist.\n\nWrite a query that returns `departments.name` and `courses.title` using a `LEFT JOIN` from `departments` to `courses`.\n\nRun it and notice that departments without courses still appear.",
+      "help": {
+        "concept": "A left join is useful when you want every row from the main list, even if some have no match.",
+        "hint_1": "Keep `departments` on the left side and match it to `courses` through the department relationship.",
+        "hint_2": "Build the query so department rows stay in the result even when no course points to them."
+      },
+      "hint": "Keep `departments` on the left side.",
+      "starterCode": "-- Return all departments and any matching course title\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table"
+      }
+    },
+    "m8_s03_left_join_courses_enrollments": {
+      "title": "Keep all courses",
+      "prompt": "The tables already exist.\n\nWrite a query that returns `courses.title` and `enrollments.term` using a `LEFT JOIN` from `courses` to `enrollments`.\n\nThen click **Run**.",
+      "help": {
+        "concept": "A left join can show all courses even when some courses have no enrollment rows.",
+        "hint_1": "Put `courses` on the left side and match it to `enrollments` through the course relationship IDs.",
+        "hint_2": "Build the query so every course row stays in the result, even if the course finds no enrollment match."
+      },
+      "hint": "Keep `courses` on the left side.",
+      "starterCode": "-- Return all courses and any matching enrollment term\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table"
+      }
+    },
+    "m8_s03_left_join_students_courses_via_enrollments": {
+      "title": "Keep all students across two joins",
+      "prompt": "The tables already exist.\n\nWrite a query that returns `students.name` and `courses.title`, keeping all students even if some students are not enrolled in any course.\n\nUse `LEFT JOIN` through `enrollments`, then run it.",
+      "help": {
+        "concept": "Multiple left joins can preserve the left-side table across more than one relationship step.",
+        "hint_1": "Start with `students`, then left join `enrollments`, then left join `courses`.",
+        "hint_2": "Build the query in stages so the student row stays even if there is no matching enrollment and therefore no matching course."
+      },
+      "hint": "Keep `students` on the far left, then join outward.",
+      "starterCode": "-- Return all students and any matching course title\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table"
+      }
+    },
+    "m8_s03_left_join_project": {
+      "title": "Practice left joins",
+      "prompt": "Use the SQL workspace on the right to practice `LEFT JOIN` queries on the `school_relations_intro` dataset.\n\nFor each task:\n\n1. type the query in the editor\n2. click **Run**\n3. notice which left-side rows always stay\n4. look for NULL values where no match exists\n\nTasks:\n\n1. Show all students with any matching enrollment term\n2. Show all departments with any matching course title\n3. Show all courses with any matching enrollment term\n4. Show all students with any matching course title through enrollments\n5. Show all departments with any matching course title and department id relationships\n\nRun one query at a time.\nThis project is about understanding how left joins preserve unmatched left-side rows.",
+      "help": {
+        "concept": "Left joins are about keeping the left-side rows, not just the matched pairs.",
+        "hint_1": "Each task depends on choosing the correct left table and keeping it on the left side of the join.",
+        "hint_2": "Solve the tasks one by one. First decide which table must be fully preserved, then join outward from that table."
+      },
+      "hint": "Decide which table must always stay, and keep it on the left.",
+      "starterCode": "-- Task 1\n-- Show all students with any matching enrollment term\n\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table"
+      }
+    },
+    "m8_s03_left_join_meaning": {
+      "title": "What does a left join do?",
+      "prompt": "What is the main job of a `LEFT JOIN`?",
+      "help": {
+        "concept": "A left join keeps all rows from the left table whether or not a right-side match exists.",
+        "hint_1": "Think keep every left row.",
+        "hint_2": "Rows on the right can be missing, but the left row still stays."
+      },
+      "hint": "Think keep all left-side rows.",
+      "options": {
+        "a": "It keeps all rows from the left table, even when there is no right-side match",
+        "b": "It keeps only matched rows on both sides",
+        "c": "It removes NULL completely",
+        "d": "It always sorts the result"
+      }
+    },
+    "m8_s03_unmatched_left_rows_meaning": {
+      "title": "What happens to unmatched left-side rows?",
+      "prompt": "What happens to unmatched left-side rows in a left join?",
+      "help": {
+        "concept": "Unmatched left-side rows still appear in the result.",
+        "hint_1": "Think they stay.",
+        "hint_2": "The whole point of a left join is to preserve the left side even when no match exists."
+      },
+      "hint": "Think unmatched left rows still appear.",
+      "options": {
+        "a": "They stay in the result",
+        "b": "They are removed like in an inner join",
+        "c": "They become new tables",
+        "d": "They automatically join to every row"
+      }
+    },
+    "m8_s03_when_to_use_left_join_meaning": {
+      "title": "When should you use a left join?",
+      "prompt": "When is a `LEFT JOIN` usually the right choice?",
+      "help": {
+        "concept": "A left join is best when unmatched rows on the main table should still be shown.",
+        "hint_1": "Think all students, all courses, or all departments even if no match exists.",
+        "hint_2": "Use it when missing matches still matter to the question."
+      },
+      "hint": "Think keep every row from the main list.",
+      "options": {
+        "a": "When you want all rows from the left table even if some have no match",
+        "b": "When you only want matched rows on both sides",
+        "c": "When there are no relationships at all",
+        "d": "When you want to avoid NULL completely"
+      }
+    },
+    "m8_s03_nulls_in_join_results_meaning": {
+      "title": "What does NULL often mean in a left join result?",
+      "prompt": "In a left join result, what does `NULL` often mean in the right-side columns?",
+      "help": {
+        "concept": "NULL often signals that the left row had no matching right-side row.",
+        "hint_1": "Think missing match.",
+        "hint_2": "The left row stayed, but nothing was found on the joined right side."
+      },
+      "hint": "Think no matching right-side row.",
+      "options": {
+        "a": "There was no matching row on the right side",
+        "b": "The query always failed",
+        "c": "The left row was deleted",
+        "d": "The table has no primary key"
+      }
+    },
+    "m8_s03_why_nulls_help": {
+      "title": "Why are NULLs useful in left join results?",
+      "prompt": "Why can NULL values be useful in a left join result?",
+      "help": {
+        "concept": "NULL helps learners see which left-side rows did not find a match.",
+        "hint_1": "Think visible missing relationships.",
+        "hint_2": "It shows that the left row stayed but the right-side match was absent."
+      },
+      "hint": "Think visible evidence of no match.",
+      "options": {
+        "a": "They show which left-side rows did not find a right-side match",
+        "b": "They mean the whole query is wrong",
+        "c": "They replace the left table completely",
+        "d": "They are only used in spreadsheets"
+      }
+    },
+    "m8_s03_left_join_true": {
+      "title": "What is true about LEFT JOIN?",
+      "prompt": "Select all true statements about `LEFT JOIN`.",
+      "help": {
+        "concept": "Left joins preserve the left table even when there is no right-side match.",
+        "hint_1": "Think all left rows stay.",
+        "hint_2": "Choose the statements about preserving the left side and allowing missing right-side matches."
+      },
+      "hint": "Think preserve the left side.",
+      "options": {
+        "a": "A left join keeps all rows from the left table",
+        "b": "A left join can still return matched right-side data",
+        "c": "A left join can show NULL on the right side",
+        "d": "A left join always removes unmatched left rows",
+        "e": "A left join is useful when missing matches still matter"
+      }
+    },
+    "m8_s03_unmatched_left_rows_true": {
+      "title": "What is true about unmatched left-side rows?",
+      "prompt": "Select all true statements about unmatched left-side rows in left joins.",
+      "help": {
+        "concept": "Unmatched left rows are exactly why left joins are useful.",
+        "hint_1": "Think preserved rows.",
+        "hint_2": "Choose the statements about unmatched left rows staying in the result."
+      },
+      "hint": "Think unmatched left rows stay visible.",
+      "options": {
+        "a": "They can still appear in the result",
+        "b": "They can produce NULL in right-side columns",
+        "c": "They help reveal missing relationships",
+        "d": "They behave exactly like inner-join-only matched rows",
+        "e": "They are useful for questions like all students or all departments"
+      }
+    },
+    "m8_s03_when_use_left_join_true": {
+      "title": "What is true about when to use LEFT JOIN?",
+      "prompt": "Select all true statements about when a left join is the better choice.",
+      "help": {
+        "concept": "Left joins are best when all rows from a main table should remain visible.",
+        "hint_1": "Think complete left-side list.",
+        "hint_2": "Choose the statements about keeping rows even when the match is missing."
+      },
+      "hint": "Think all left-side rows should remain visible.",
+      "options": {
+        "a": "Use a left join when all students should appear even if some have no enrollments",
+        "b": "Use a left join when all departments should appear even if some have no courses",
+        "c": "Use a left join when all courses should appear even if some have no enrollments",
+        "d": "Use a left join only when you want matched rows only",
+        "e": "Choosing the left table matters"
+      }
+    },
+    "m8_s03_nulls_true": {
+      "title": "What is true about NULL in left join results?",
+      "prompt": "Select all true statements about NULL values in left join results.",
+      "help": {
+        "concept": "NULL in right-side columns often means the left row found no match.",
+        "hint_1": "Think missing right-side row.",
+        "hint_2": "Choose the statements about what NULL is signaling in preserved left-side rows."
+      },
+      "hint": "Think no match on the right side.",
+      "options": {
+        "a": "NULL can mean there was no right-side match",
+        "b": "NULL can appear even though the left row still stayed",
+        "c": "NULL helps show missing relationships",
+        "d": "NULL always means the query crashed",
+        "e": "NULL in a left join can be expected and useful"
+      }
+    },
+    "m8_s03_left_join_workflow_true": {
+      "title": "What matches a good beginner workflow for left joins?",
+      "prompt": "Select all statements that match a good beginner workflow for writing left join queries.",
+      "help": {
+        "concept": "A good workflow is to identify which table must be fully kept, put it on the left, write the relationship, and then read NULL values carefully.",
+        "hint_1": "Think choose the preserved table first.",
+        "hint_2": "Choose the steps that help you preserve the correct side and interpret missing matches."
+      },
+      "hint": "Choose the preserved table first, then join outward.",
+      "options": {
+        "a": "Decide which table must remain fully visible",
+        "b": "Put that table on the left side of the join",
+        "c": "Write the join using the relationship IDs",
+        "d": "Look for NULL values to spot missing matches",
+        "e": "Ignore which side of the join is supposed to be preserved"
+      }
+    }
+  }
+}

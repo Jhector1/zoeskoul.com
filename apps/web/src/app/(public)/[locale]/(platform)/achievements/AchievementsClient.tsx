@@ -190,9 +190,24 @@ export default function AchievementsClient() {
 
     const buckets = useMemo(() => {
         const items = data?.items ?? [];
-        const certificates = items.filter((x) => x.eligible);
-        const inProgress = items.filter((x) => !x.eligible);
-        return { certificates, inProgress };
+
+        const certificates = items.filter((x) => x.eligible || Boolean(x.certificate));
+
+        const completedButUnsynced = items.filter(
+            (x) =>
+                !x.eligible &&
+                !x.certificate &&
+                x.enrollment.status === "completed",
+        );
+
+        const inProgress = items.filter(
+            (x) =>
+                !x.eligible &&
+                !x.certificate &&
+                x.enrollment.status !== "completed",
+        );
+
+        return { certificates, completedButUnsynced, inProgress };
     }, [data]);
 
     async function downloadCertificatePdf(subjectSlug: string) {
@@ -304,10 +319,18 @@ export default function AchievementsClient() {
 
                         {buckets.certificates.length === 0 ? (
                             <div className="mt-4">
-                                <EmptyBlock>
-                                    No certificates yet. Keep going — your unlocked certificates will appear here.
-                                </EmptyBlock>
+                                {buckets.completedButUnsynced.length > 0 ? (
+                                    <EmptyBlock>
+                                        You have completed subject{buckets.completedButUnsynced.length > 1 ? "s" : ""}, but certificate status has not synced yet.
+                                        Open the certificate page for that subject or refresh this page.
+                                    </EmptyBlock>
+                                ) : (
+                                    <EmptyBlock>
+                                        No certificates yet. Keep going — your unlocked certificates will appear here.
+                                    </EmptyBlock>
+                                )}
                             </div>
+
                         ) : (
                             <div className="mt-4 grid gap-3 md:grid-cols-2">
                                 {buckets.certificates.map((it) => {
@@ -391,8 +414,11 @@ export default function AchievementsClient() {
                     <Surface className="p-4 sm:p-5">
                         <SectionHeader
                             title="In progress"
-                            meta={`${buckets.inProgress.length} active`}
-                            icon={<Clock3 className="h-4 w-4" />}
+                            meta={
+                                buckets.completedButUnsynced.length > 0
+                                    ? `${buckets.certificates.length} unlocked • ${buckets.completedButUnsynced.length} completed`
+                                    : `${buckets.certificates.length} unlocked`
+                            }                            icon={<Clock3 className="h-4 w-4" />}
                         />
 
                         {buckets.inProgress.length === 0 ? (

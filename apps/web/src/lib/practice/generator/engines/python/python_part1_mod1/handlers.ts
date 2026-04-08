@@ -6,7 +6,7 @@ import type { TopicContext } from "../../../generatorTypes";
 
 import { makePythonModuleGenerator } from "../_shared";
 
-import { VARS_GENERATOR_TOPIC} from "@/lib/subjects/python/modules/module1/topics/variables/generator";
+import { VARS_GENERATOR_TOPIC} from "@/lib/subjects/python/modules/module1/topics/variables_intro/generator";
 import { M1_ERRORS_GENERATOR_TOPIC } from "@/lib/subjects/python/modules/module1/topics/errors_intro/generator";
 import { M1_TYPES_GENERATOR_TOPIC } from "@/lib/subjects/python/modules/module1/topics/data_types_intro/generator";
 import { M1_GENERATOR_OPERATORS_TOPIC } from "@/lib/subjects/python/modules/module1/topics/operators_expressions/generator";

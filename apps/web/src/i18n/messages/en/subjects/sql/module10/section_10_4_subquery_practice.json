@@ -1,0 +1,310 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_10": {
+        "subquery_practice": {
+          "label": "Subquery Practice",
+          "summary": "Practice above-average filtering, finding students with enrollments, filtering from summary subqueries, and comparing join thinking with subquery thinking.",
+          "cards": {
+            "sketch0": {
+              "title": "How do you find rows above average?"
+            },
+            "sketch1": {
+              "title": "How do you find students with enrollments?"
+            },
+            "sketch2": {
+              "title": "How do you filter from a summary subquery?"
+            },
+            "sketch3": {
+              "title": "How do joins and subqueries compare?"
+            },
+            "quiz": {
+              "title": "Quiz: Subquery Practice"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_10": {
+        "section_10_4": {
+          "above_average_salary_mapped": {
+            "title": "Above-average filtering is one of the clearest subquery patterns.",
+            "bodyMarkdown": "This module uses **above-average grade level** instead of salary, but the idea is the same.\n\nThe pattern is:\n\n- calculate an average first\n- then keep rows above it\n\nSo the big idea is:\n\n> above-average filtering is a strong beginner example of subquery thinking"
+          },
+          "customers_with_orders_mapped": {
+            "title": "Students with enrollments are the same pattern as customers with orders.",
+            "bodyMarkdown": "This dataset does not use customers and orders.\n\nBut it does use:\n\n- students\n- enrollments\n\nThat creates the same idea:\n\n- find which IDs appear in the relationship table\n- then keep those matching outer rows\n\nSo the key idea is:\n\n> students with enrollments is the same beginner subquery pattern as customers with orders"
+          },
+          "filter_from_summary_query": {
+            "title": "A FROM subquery can create a summary first, and the outer query can filter that summary.",
+            "bodyMarkdown": "This pattern is useful when the question sounds like:\n\n- build a summary first\n- then keep only the summary rows that match a rule\n\nFor example:\n\n- count courses per department first\n- then keep only departments with more than one course\n\nSo the main idea is:\n\n> subqueries in FROM are useful when you want to filter a summary result"
+          },
+          "join_vs_subquery_thinking": {
+            "title": "Joins and subqueries can solve related problems, but the thinking feels different.",
+            "bodyMarkdown": "A join often feels like:\n\n- connect tables directly\n- then read the combined rows\n\nA subquery often feels like:\n\n- find a value or set first\n- then use it in another query\n\nSo the important idea is:\n\n> joins and subqueries can both solve real problems, but they organize the logic differently"
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "m10_s04_above_average_grade_practice": {
+      "title": "Find students above average",
+      "prompt": "The SQLite workspace already has the `school_relations_intro` dataset loaded.\n\nWrite a query that returns `name` and `grade_level` from `students`, but only for students whose `grade_level` is greater than the average `grade_level` of all students.\n\nThen click **Run**.",
+      "help": {
+        "concept": "This is the same classic subquery pattern as above-average salary, adapted here to grade level.",
+        "hint_1": "Use an inner query to calculate the average grade level first.",
+        "hint_2": "Build the outer student query first, then compare each student's grade_level against a small inner average query in the WHERE condition."
+      },
+      "hint": "Use an inner average query in the WHERE condition.",
+      "starterCode": "-- Return students above the average grade level\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table"
+      }
+    },
+    "m10_s04_students_with_enrollments_practice": {
+      "title": "Find students with enrollments",
+      "prompt": "The tables already exist.\n\nWrite a query that returns student names from `students`, but only for students whose `id` appears in `enrollments.student_id`.\n\nUse a subquery, then run it.",
+      "help": {
+        "concept": "This is the same beginner pattern as finding customers with orders, adapted here to students and enrollments.",
+        "hint_1": "The inner query should return the enrolled student IDs.",
+        "hint_2": "Build the outer student query first, then use the inner query to provide the set of student IDs that should stay."
+      },
+      "hint": "Use an inner query that returns student IDs from enrollments.",
+      "starterCode": "-- Return students whose id appears in enrollments\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table"
+      }
+    },
+    "m10_s04_filter_department_summary_practice": {
+      "title": "Filter from a summary subquery",
+      "prompt": "The tables already exist.\n\nWrite a query that first creates a department summary with `department_name` and `course_count` in a subquery in `FROM`, and then returns only departments where `course_count` is greater than 1.\n\nThen click **Run**.",
+      "help": {
+        "concept": "This is a good practice pattern for building a summary first and filtering it later.",
+        "hint_1": "Let the inner query build the grouped department count summary.",
+        "hint_2": "Build the department count summary inside the FROM subquery, alias it clearly, and let the outer query filter the summary rows by course_count."
+      },
+      "hint": "Build the summary first, then filter the summary outside.",
+      "starterCode": "-- Build a department summary first, then filter it in the outer query\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table"
+      }
+    },
+    "m10_s04_join_vs_subquery_students": {
+      "title": "Practice subquery thinking instead of join thinking",
+      "prompt": "The tables already exist.\n\nWrite a query that returns course titles from `courses`, but only for courses whose `id` appears in `enrollments.course_id`.\n\nUse a subquery instead of a join-based approach, then run it.",
+      "help": {
+        "concept": "This practice helps learners feel the difference between matching tables directly and using a returned set from an inner query.",
+        "hint_1": "The inner query should return the enrolled course IDs.",
+        "hint_2": "Build the outer course query first, and let the inner query provide the set of course IDs that count as enrolled."
+      },
+      "hint": "Use the inner query to provide the set of enrolled course IDs.",
+      "starterCode": "-- Use a subquery-based approach instead of a join-based approach\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table"
+      }
+    },
+    "m10_s04_subquery_practice_project": {
+      "title": "Practice real subquery patterns",
+      "prompt": "Use the SQL workspace on the right to practice subquery patterns on the `school_relations_intro` dataset.\n\nFor each task:\n\n1. type the query in the editor\n2. click **Run**\n3. think about what the inner query should return first\n4. then check how the outer query uses that result\n\nTasks:\n\n1. Return students above the average grade level\n2. Return students whose id appears in enrollments\n3. Return courses whose id appears in enrollments\n4. Build a department summary first and keep only departments with `course_count` greater than 1\n5. Return departments whose id appears in courses\n\nRun one query at a time.\nThis project is about recognizing when subquery thinking is a natural fit for the question.",
+      "help": {
+        "concept": "Practice becomes easier when learners first ask whether the inner query should return a single value, a set of IDs, or a temporary summary result.",
+        "hint_1": "Some tasks use comparison values, some use IN with ID sets, and some use FROM subqueries for summary filtering.",
+        "hint_2": "Solve the tasks one by one. First decide what kind of result the inner query should produce, then wrap the outer query around that result."
+      },
+      "hint": "Decide what kind of result the inner query should produce first.",
+      "starterCode": "-- Task 1\n-- Return students above the average grade level\n\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table"
+      }
+    },
+    "m10_s04_above_average_meaning": {
+      "title": "What is the point of above-average subquery practice?",
+      "prompt": "What is the main learning goal of an above-average subquery exercise?",
+      "help": {
+        "concept": "It teaches learners to calculate a value first and then compare rows against it.",
+        "hint_1": "Think average first, filter second.",
+        "hint_2": "The goal is to practice two-step logic with a calculated comparison value."
+      },
+      "hint": "Think calculate first, compare second.",
+      "options": {
+        "a": "Practice calculating a comparison value first and then filtering rows against it",
+        "b": "Practice formatting comments only",
+        "c": "Avoid WHERE completely",
+        "d": "Turn every query into a join"
+      }
+    },
+    "m10_s04_students_with_enrollments_meaning": {
+      "title": "What is the point of students-with-enrollments subquery practice?",
+      "prompt": "What is the main learning goal of finding students with enrollments using a subquery?",
+      "help": {
+        "concept": "It teaches learners to use a set of IDs returned by an inner query.",
+        "hint_1": "Think ID set from another table.",
+        "hint_2": "The goal is to check whether outer rows belong to a set returned by the inner query."
+      },
+      "hint": "Think use a returned set of IDs.",
+      "options": {
+        "a": "Practice using a set of IDs returned by an inner query",
+        "b": "Practice deleting rows from students",
+        "c": "Practice changing table names",
+        "d": "Practice left join NULL logic only"
+      }
+    },
+    "m10_s04_filter_summary_meaning": {
+      "title": "What is the point of filtering from a summary subquery?",
+      "prompt": "What is the main learning goal of filtering from a summary subquery in FROM?",
+      "help": {
+        "concept": "It teaches learners to build a summary first and then query that summary outside.",
+        "hint_1": "Think summary first, filter later.",
+        "hint_2": "The inner query creates a temporary result, and the outer query filters it."
+      },
+      "hint": "Think build the summary first, then filter it outside.",
+      "options": {
+        "a": "Practice building a summary first and filtering it in an outer query",
+        "b": "Practice removing aliases completely",
+        "c": "Practice replacing FROM with WHERE",
+        "d": "Practice never using GROUP BY"
+      }
+    },
+    "m10_s04_join_vs_subquery_meaning": {
+      "title": "How does join thinking differ from subquery thinking?",
+      "prompt": "What is the main difference in beginner thinking between joins and subqueries?",
+      "help": {
+        "concept": "Joins feel like connecting tables directly, while subqueries feel like finding a value or set first and then using it.",
+        "hint_1": "Think connect rows versus find something first.",
+        "hint_2": "Both can solve real problems, but the structure of the reasoning feels different."
+      },
+      "hint": "Think direct connection versus find-first-then-use.",
+      "options": {
+        "a": "Joins connect tables directly, while subqueries often find something first and then use it",
+        "b": "Joins and subqueries always feel identical",
+        "c": "Subqueries can never work with related tables",
+        "d": "Joins are only comments"
+      }
+    },
+    "m10_s04_when_subquery_fits": {
+      "title": "When does subquery thinking fit best?",
+      "prompt": "When does subquery thinking usually fit the problem well?",
+      "help": {
+        "concept": "Subquery thinking fits best when the problem naturally breaks into two steps.",
+        "hint_1": "Think compute first or collect IDs first.",
+        "hint_2": "A subquery is often a good fit when the outer logic depends on an inner result."
+      },
+      "hint": "Think two-step problems.",
+      "options": {
+        "a": "When the problem naturally breaks into two steps",
+        "b": "Only when there are no tables",
+        "c": "Only when aliases are impossible",
+        "d": "Only when comments are required"
+      }
+    },
+    "m10_s04_above_average_true": {
+      "title": "What is true about above-average subquery practice?",
+      "prompt": "Select all true statements about above-average subquery practice.",
+      "help": {
+        "concept": "Above-average practice is a clean model for scalar subquery thinking.",
+        "hint_1": "Think one comparison value returned by the inner query.",
+        "hint_2": "Choose the statements about average-first, filter-second logic."
+      },
+      "hint": "Think average first, rows second.",
+      "options": {
+        "a": "The inner query can calculate the average first",
+        "b": "The outer query can filter rows above that average",
+        "c": "This is a strong beginner scalar-subquery pattern",
+        "d": "This pattern removes the need for WHERE",
+        "e": "This is an example of two-step logic"
+      }
+    },
+    "m10_s04_students_with_enrollments_true": {
+      "title": "What is true about students-with-enrollments subquery practice?",
+      "prompt": "Select all true statements about using a subquery to find students with enrollments.",
+      "help": {
+        "concept": "This pattern uses an inner set of IDs from the relationship table.",
+        "hint_1": "Think enrolled student IDs.",
+        "hint_2": "Choose the statements about using the relationship table to define the outer result."
+      },
+      "hint": "Think use the enrolled student IDs returned by the inner query.",
+      "options": {
+        "a": "The inner query can return student IDs from enrollments",
+        "b": "The outer query can keep only students whose ID is in that set",
+        "c": "This is similar in pattern to customers-with-orders logic",
+        "d": "The outer query must ignore the inner IDs",
+        "e": "This is a beginner-friendly IN-subquery pattern"
+      }
+    },
+    "m10_s04_summary_filter_true": {
+      "title": "What is true about filtering from a summary subquery?",
+      "prompt": "Select all true statements about filtering from a summary subquery in FROM.",
+      "help": {
+        "concept": "This pattern uses an inner summary result and then filters that summary in the outer query.",
+        "hint_1": "Think summary first, filter outside.",
+        "hint_2": "Choose the statements about temporary summary results and outer filtering."
+      },
+      "hint": "Think inner summary, outer filter.",
+      "options": {
+        "a": "The inner query can build a grouped summary",
+        "b": "The outer query can filter that grouped summary",
+        "c": "This pattern is useful for questions about summary rows",
+        "d": "The inner query must never use grouping",
+        "e": "This is a common use of subqueries in FROM"
+      }
+    },
+    "m10_s04_join_vs_subquery_true": {
+      "title": "What is true about comparing join and subquery thinking?",
+      "prompt": "Select all true statements about join thinking versus subquery thinking.",
+      "help": {
+        "concept": "Both are useful, but the logic is organized differently.",
+        "hint_1": "Think connect rows versus get a result first.",
+        "hint_2": "Choose the statements about different ways of organizing SQL logic."
+      },
+      "hint": "Think different structure, same real-world usefulness.",
+      "options": {
+        "a": "A join often feels like connecting tables directly",
+        "b": "A subquery often feels like finding a value or set first",
+        "c": "Both can solve real SQL problems",
+        "d": "One of them is always wrong",
+        "e": "Comparing both can help beginners choose clearer logic"
+      }
+    },
+    "m10_s04_subquery_practice_workflow_true": {
+      "title": "What matches a good beginner workflow for subquery practice?",
+      "prompt": "Select all statements that match a good beginner workflow for practicing subqueries.",
+      "help": {
+        "concept": "A good workflow is to decide what the inner query should return, decide how the outer query will use it, and then read the result as a two-step process.",
+        "hint_1": "Think inner job, outer job, read step by step.",
+        "hint_2": "Choose the steps that separate the role of the inner query from the role of the outer query."
+      },
+      "hint": "Decide the inner job first, then the outer job.",
+      "options": {
+        "a": "Decide what the inner query should return",
+        "b": "Decide how the outer query will use that result",
+        "c": "Choose whether the inner result is one value, a set, or a temporary summary",
+        "d": "Read the finished query as a two-step process",
+        "e": "Ignore the role of the inner query completely"
+      }
+    }
+  }
+}

@@ -55,17 +55,116 @@ ${stdout.trimEnd()}
 ~~~`;
 }
 
-export function makeCodeExpected(args: {
-    language?: CodeLanguage;
+import type {  SqlDialect } from "@/lib/practice/types";
+import {CodeExpectedInput} from "@/lib/practice/api/validate/schemas";
+// import type { CodeExpectedInput } from "@/lib/practice/schemas";
+
+type ProgrammingLanguage = Exclude<CodeLanguage, "sql">;
+
+export type ProgrammingCodeTest = {
     stdin?: string;
     stdout?: string;
     match?: "exact" | "includes";
-    tests?: CodeTest[];
-    solutionCode?: string;
-}): CodeExpected {
-    const language = args.language ?? "python";
+};
 
-    const tests: CodeTest[] =
+export type SqlCell = string | number | boolean | null;
+
+export type SqlExpectedTable = {
+    columns: string[];
+    rows: SqlCell[][];
+};
+
+export type SqlRuntimeSpec = {
+    kind: "sql";
+    datasetId?: string;
+    resultShape?: "table";
+};
+
+export type SqlCodeTest = {
+    kind?: "sql";
+    sqlDialect?: SqlDialect;
+    runtime?: SqlRuntimeSpec;
+    compareTo?: "solution" | "expected_table";
+    expectedTable?: SqlExpectedTable;
+    match?: "table_exact";
+    ignoreRowOrder?: boolean;
+};
+
+type ProgrammingMakeCodeExpectedArgs = {
+    kind?: "code_input";
+    language?: ProgrammingLanguage;
+    stdin?: string;
+    stdout?: string;
+    match?: "exact" | "includes";
+    tests?: ProgrammingCodeTest[];
+    solutionCode?: string;
+};
+
+type SqlMakeCodeExpectedArgs = {
+    kind?: "code_input";
+    language: "sql";
+    fixedSqlDialect?: SqlDialect;
+    runtime?: SqlRuntimeSpec;
+    tests?: SqlCodeTest[];
+    solutionCode: string;
+};
+
+export function makeCodeExpected(
+    args: ProgrammingMakeCodeExpectedArgs,
+): CodeExpectedInput;
+export function makeCodeExpected(
+    args: SqlMakeCodeExpectedArgs,
+): CodeExpectedInput;
+
+export function makeCodeExpected(
+    args: ProgrammingMakeCodeExpectedArgs | SqlMakeCodeExpectedArgs,
+): CodeExpectedInput {
+    const kind = "code_input" as const;
+
+    if (args.language === "sql") {
+        const fixedSqlDialect = args.fixedSqlDialect ?? "sqlite";
+        const runtime =
+            args.runtime ??
+            ({
+                kind: "sql",
+                resultShape: "table",
+            } satisfies SqlRuntimeSpec);
+
+        const tests: SqlCodeTest[] =
+            Array.isArray(args.tests) && args.tests.length > 0
+                ? args.tests.map((t) => ({
+                    kind: "sql",
+                    sqlDialect: t.sqlDialect ?? fixedSqlDialect,
+                    runtime: t.runtime ?? runtime,
+                    compareTo: t.compareTo ?? "solution",
+                    expectedTable: t.expectedTable,
+                    match: t.match ?? "table_exact",
+                    ignoreRowOrder: t.ignoreRowOrder ?? false,
+                }))
+                : [
+                    {
+                        kind: "sql",
+                        sqlDialect: fixedSqlDialect,
+                        runtime,
+                        compareTo: "solution",
+                        match: "table_exact",
+                        ignoreRowOrder: false,
+                    },
+                ];
+
+        return {
+            kind,
+            language: "sql",
+            fixedSqlDialect,
+            runtime,
+            tests,
+            solutionCode: args.solutionCode,
+        };
+    }
+
+    const language: ProgrammingLanguage = args.language ?? "python";
+
+    const tests: ProgrammingCodeTest[] =
         Array.isArray(args.tests) && args.tests.length > 0
             ? args.tests.map((t) => ({
                 stdin: typeof t.stdin === "string" ? t.stdin : "",
@@ -81,12 +180,19 @@ export function makeCodeExpected(args: {
             ];
 
     return {
-        kind: "code_input",
+        kind,
         language,
         tests,
-        stdin: typeof args.stdin === "string" ? args.stdin : (tests[0]?.stdin ?? ""),
-        stdout: typeof args.stdout === "string" ? args.stdout : (tests[0]?.stdout ?? ""),
-        solutionCode: typeof args.solutionCode === "string" ? args.solutionCode : undefined,
+        stdin:
+            typeof args.stdin === "string"
+                ? args.stdin
+                : (tests[0]?.stdin ?? ""),
+        stdout:
+            typeof args.stdout === "string"
+                ? args.stdout
+                : (tests[0]?.stdout ?? ""),
+        solutionCode:
+            typeof args.solutionCode === "string" ? args.solutionCode : undefined,
     };
 }
 

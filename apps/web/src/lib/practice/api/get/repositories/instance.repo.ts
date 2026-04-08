@@ -23,7 +23,7 @@ export async function createPracticeInstance(args: {
     prisma: PrismaClient;
     sessionId: string | null;
     exercise: Exercise;
-    expected: any;
+    expected: unknown;
     topicSlug: TopicSlug;
     difficulty: Difficulty;
     topicIdHint?: string | null;
@@ -82,10 +82,10 @@ export async function createPracticeInstance(args: {
     const expectedAnswerPayload = buildExpectedAnswerPayload(kindEnum, expectedCanon);
 
     const explanation =
-        typeof expected?.explanation === "string"
-            ? expected.explanation
-            : typeof expected?.rationale === "string"
-                ? expected.rationale
+        typeof (expected as any)?.explanation === "string"
+            ? (expected as any).explanation
+            : typeof (expected as any)?.rationale === "string"
+                ? (expected as any).rationale
                 : null;
 
     const dbPurpose = toDbPurpose(purpose);

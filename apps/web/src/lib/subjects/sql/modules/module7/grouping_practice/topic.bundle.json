@@ -1,0 +1,352 @@
+{
+  "topicId": "grouping_practice",
+  "minutes": 10,
+  "topic": {
+    "labelKey": "topics.sql.sql_module_7.grouping_practice.label",
+    "summaryKey": "topics.sql.sql_module_7.grouping_practice.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_7.grouping_practice.cards.sketch0.title",
+      "sketchId": "sales_by_category",
+      "height": 520
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_7.grouping_practice.cards.sketch1.title",
+      "sketchId": "orders_by_customer",
+      "height": 520
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_7.grouping_practice.cards.sketch2.title",
+      "sketchId": "groups_with_high_averages",
+      "height": 520
+    },
+    {
+      "id": "sketch3",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_7.grouping_practice.cards.sketch3.title",
+      "sketchId": "summary_dashboards_in_sql",
+      "height": 520
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql.sql_module_7.grouping_practice.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 5,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sales_by_category",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_7.grouping_practice.sales_by_category.title",
+      "bodyKey": "sketches.sql.sql_module_7.grouping_practice.sales_by_category.bodyMarkdown"
+    },
+    {
+      "id": "orders_by_customer",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_7.grouping_practice.orders_by_customer.title",
+      "bodyKey": "sketches.sql.sql_module_7.grouping_practice.orders_by_customer.bodyMarkdown"
+    },
+    {
+      "id": "groups_with_high_averages",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_7.grouping_practice.groups_with_high_averages.title",
+      "bodyKey": "sketches.sql.sql_module_7.grouping_practice.groups_with_high_averages.bodyMarkdown"
+    },
+    {
+      "id": "summary_dashboards_in_sql",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_7.grouping_practice.summary_dashboards_in_sql.title",
+      "bodyKey": "sketches.sql.sql_module_7.grouping_practice.summary_dashboards_in_sql.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "m7_s04_sales_by_category",
+      "kind": "code_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m7_s04_sales_by_category",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_kpi",
+        "resultShape": "table",
+        "solutionCode": "SELECT category, SUM(quantity * unit_price) AS total_sales\nFROM orders\nGROUP BY category;"
+      }
+    },
+    {
+      "id": "m7_s04_orders_by_customer",
+      "kind": "code_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m7_s04_orders_by_customer",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_kpi",
+        "resultShape": "table",
+        "solutionCode": "SELECT customer_name, COUNT(*) AS order_count\nFROM orders\nGROUP BY customer_name;"
+      }
+    },
+    {
+      "id": "m7_s04_regions_with_high_averages",
+      "kind": "code_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m7_s04_regions_with_high_averages",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_kpi",
+        "resultShape": "table",
+        "solutionCode": "SELECT region, AVG(unit_price) AS avg_price\nFROM orders\nGROUP BY region\nHAVING AVG(unit_price) > 20;"
+      }
+    },
+    {
+      "id": "m7_s04_category_dashboard",
+      "kind": "code_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m7_s04_category_dashboard",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_kpi",
+        "resultShape": "table",
+        "solutionCode": "SELECT category, COUNT(*) AS order_count, SUM(quantity) AS total_quantity, AVG(unit_price) AS avg_price, SUM(quantity * unit_price) AS total_sales\nFROM orders\nGROUP BY category;"
+      }
+    },
+    {
+      "id": "m7_s04_customer_sales_summary",
+      "kind": "code_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m7_s04_customer_sales_summary",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_kpi",
+        "resultShape": "table",
+        "solutionCode": "SELECT customer_name, SUM(quantity * unit_price) AS total_sales\nFROM orders\nGROUP BY customer_name;"
+      }
+    },
+    {
+      "id": "m7_s04_grouping_practice_project",
+      "kind": "code_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m7_s04_grouping_practice_project",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_kpi",
+        "resultShape": "table",
+        "solutionCode": "SELECT category, SUM(quantity * unit_price) AS total_sales\nFROM orders\nGROUP BY category;"
+      }
+    },
+
+    {
+      "id": "m7_s04_sales_by_category_meaning",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m7_s04_sales_by_category_meaning",
+      "optionIds": ["a", "b", "c", "d"],
+      "expected": { "kind": "single_choice", "optionId": "a" }
+    },
+    {
+      "id": "m7_s04_orders_by_customer_meaning",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m7_s04_orders_by_customer_meaning",
+      "optionIds": ["a", "b", "c", "d"],
+      "expected": { "kind": "single_choice", "optionId": "a" }
+    },
+    {
+      "id": "m7_s04_high_average_groups_meaning",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m7_s04_high_average_groups_meaning",
+      "optionIds": ["a", "b", "c", "d"],
+      "expected": { "kind": "single_choice", "optionId": "a" }
+    },
+    {
+      "id": "m7_s04_dashboard_meaning",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m7_s04_dashboard_meaning",
+      "optionIds": ["a", "b", "c", "d"],
+      "expected": { "kind": "single_choice", "optionId": "a" }
+    },
+    {
+      "id": "m7_s04_reading_dashboard_results",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m7_s04_reading_dashboard_results",
+      "optionIds": ["a", "b", "c", "d"],
+      "expected": { "kind": "single_choice", "optionId": "a" }
+    },
+
+    {
+      "id": "m7_s04_sales_reports_true",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m7_s04_sales_reports_true",
+      "optionIds": ["a", "b", "c", "d", "e"],
+      "expected": { "kind": "multi_choice", "optionIds": ["a", "b", "c", "e"] }
+    },
+    {
+      "id": "m7_s04_customer_reports_true",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m7_s04_customer_reports_true",
+      "optionIds": ["a", "b", "c", "d", "e"],
+      "expected": { "kind": "multi_choice", "optionIds": ["a", "b", "c", "e"] }
+    },
+    {
+      "id": "m7_s04_high_average_groups_true",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m7_s04_high_average_groups_true",
+      "optionIds": ["a", "b", "c", "d", "e"],
+      "expected": { "kind": "multi_choice", "optionIds": ["a", "b", "c", "e"] }
+    },
+    {
+      "id": "m7_s04_dashboard_true",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m7_s04_dashboard_true",
+      "optionIds": ["a", "b", "c", "d", "e"],
+      "expected": { "kind": "multi_choice", "optionIds": ["a", "b", "c", "e"] }
+    },
+    {
+      "id": "m7_s04_grouping_practice_workflow_true",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m7_s04_grouping_practice_workflow_true",
+      "optionIds": ["a", "b", "c", "d", "e"],
+      "expected": { "kind": "multi_choice", "optionIds": ["a", "b", "c", "d"] }
+    },
+
+    {
+      "id": "m7_s04_fill_sales_expression",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m7_s04_fill_sales_expression",
+      "choiceCount": 4,
+      "expected": { "kind": "fill_blank_choice", "value": "quantity * unit_price" }
+    },
+    {
+      "id": "m7_s04_fill_category_label",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m7_s04_fill_category_label",
+      "choiceCount": 4,
+      "expected": { "kind": "fill_blank_choice", "value": "category" }
+    },
+    {
+      "id": "m7_s04_fill_customer_count",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m7_s04_fill_customer_count",
+      "choiceCount": 4,
+      "expected": { "kind": "fill_blank_choice", "value": "COUNT(*)" }
+    },
+    {
+      "id": "m7_s04_fill_dashboard_many_metrics",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m7_s04_fill_dashboard_many_metrics",
+      "choiceCount": 4,
+      "expected": { "kind": "fill_blank_choice", "value": "multiple" }
+    },
+    {
+      "id": "m7_s04_fill_read_label_then_metrics",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m7_s04_fill_read_label_then_metrics",
+      "choiceCount": 4,
+      "expected": { "kind": "fill_blank_choice", "value": "group label" }
+    },
+
+    {
+      "id": "m7_s04_reorder_sales_by_category_pattern",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m7_s04_reorder_sales_by_category_pattern",
+      "tokenIds": ["t1", "t2", "t3", "t4"],
+      "expected": { "kind": "drag_reorder", "tokenIds": ["t1", "t2", "t3", "t4"] }
+    },
+    {
+      "id": "m7_s04_reorder_orders_by_customer_pattern",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m7_s04_reorder_orders_by_customer_pattern",
+      "tokenIds": ["t1", "t2", "t3", "t4"],
+      "expected": { "kind": "drag_reorder", "tokenIds": ["t1", "t2", "t3", "t4"] }
+    },
+    {
+      "id": "m7_s04_reorder_dashboard_workflow",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m7_s04_reorder_dashboard_workflow",
+      "tokenIds": ["t1", "t2", "t3", "t4"],
+      "expected": { "kind": "drag_reorder", "tokenIds": ["t1", "t2", "t3", "t4"] }
+    },
+    {
+      "id": "m7_s04_reorder_read_dashboard",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m7_s04_reorder_read_dashboard",
+      "tokenIds": ["t1", "t2", "t3"],
+      "expected": { "kind": "drag_reorder", "tokenIds": ["t1", "t2", "t3"] }
+    },
+    {
+      "id": "m7_s04_reorder_group_report_parts",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m7_s04_reorder_group_report_parts",
+      "tokenIds": ["t1", "t2", "t3"],
+      "expected": { "kind": "drag_reorder", "tokenIds": ["t1", "t2", "t3"] }
+    }
+  ]
+}

@@ -1,0 +1,310 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_9": {
+        "comments_and_readability": {
+          "label": "Comments and Readability",
+          "summary": "Learn how SQL comments work, how to explain logic, how to name output clearly, and how to avoid messy SQL.",
+          "cards": {
+            "sketch0": {
+              "title": "What are SQL comments?"
+            },
+            "sketch1": {
+              "title": "Why explain query logic?"
+            },
+            "sketch2": {
+              "title": "How do you name output clearly?"
+            },
+            "sketch3": {
+              "title": "How do you avoid messy SQL?"
+            },
+            "quiz": {
+              "title": "Quiz: Comments and Readability"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_9": {
+        "section_9_3": {
+          "sql_comments": {
+            "title": "SQL comments are notes for humans reading the query.",
+            "bodyMarkdown": "A **comment** is text inside the query that explains something to the reader.\n\nComments do not exist to change the result.\nThey exist to help a human understand the query.\n\nA beginner often uses comments to explain:\n\n- what the query is doing\n- why a join is needed\n- what a specific filter means\n\nSo the big idea is:\n\n> comments help readers understand the query logic"
+          },
+          "explaining_logic": {
+            "title": "Explaining logic makes a query easier to review later.",
+            "bodyMarkdown": "A query can be correct but still hard to understand.\n\nA short note can help explain:\n\n- why a table is being joined\n- why a filter exists\n- what the output is meant to show\n\nSo the key idea is:\n\n> a small explanation can make the purpose of the query much clearer"
+          },
+          "naming_output_clearly": {
+            "title": "Readable output names help the result explain itself.",
+            "bodyMarkdown": "Clear output labels make the result easier to interpret.\n\nThis matters even more when the query includes:\n\n- joins\n- repeated names\n- calculated values\n\nSo the main idea is:\n\n> readable output names help the result table say what each column means"
+          },
+          "avoiding_messy_sql": {
+            "title": "Readable SQL avoids clutter, confusion, and unclear naming.",
+            "bodyMarkdown": "Messy SQL often feels hard to trust because the logic is difficult to follow.\n\nA beginner-friendly query usually avoids:\n\n- crowded formatting\n- unclear aliases\n- unlabeled output\n- no explanation at all in complex spots\n\nSo the important idea is:\n\n> readable SQL is easier to understand, review, and fix"
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "m9_s03_query_with_comment": {
+      "title": "Use a SQL comment",
+      "prompt": "The SQLite workspace already has the `school_relations_intro` dataset loaded.\n\nWrite a query that returns `students.name` and `enrollments.term` by joining `students` to `enrollments`.\n\nAdd a short SQL comment above the query explaining what the query is meant to show, then click **Run**.",
+      "help": {
+        "concept": "A comment can explain the purpose of the query without changing the result.",
+        "hint_1": "Write a short note above the query, then write the join normally.",
+        "hint_2": "Add one brief comment that explains the goal of the query, then build the join using the student relationship."
+      },
+      "hint": "Add a brief comment above the query explaining its purpose.",
+      "starterCode": "-- Explain what this query will show\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table"
+      }
+    },
+    "m9_s03_explain_join_logic": {
+      "title": "Explain join logic with a comment",
+      "prompt": "The tables already exist.\n\nWrite a query that returns `students.name` and `courses.title` by joining through `enrollments`.\n\nAdd a short comment explaining that `enrollments` is the bridge between the two tables, then run it.",
+      "help": {
+        "concept": "Comments can explain the logic of a relationship path that may not be obvious at first glance.",
+        "hint_1": "Add a note explaining the bridge table, then write the two-step join normally.",
+        "hint_2": "Use a short comment to explain why the middle table exists in the query, then build the join path through it."
+      },
+      "hint": "Explain the bridge table briefly, then write the join.",
+      "starterCode": "-- Explain why the middle table is needed\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table"
+      }
+    },
+    "m9_s03_name_output_clearly": {
+      "title": "Name output clearly",
+      "prompt": "The tables already exist.\n\nWrite a query that returns `students.name` and `courses.title` through `enrollments`, but rename the output columns to `student_name` and `course_title`.\n\nThen click **Run**.",
+      "help": {
+        "concept": "Readable output names make joined results easier to interpret.",
+        "hint_1": "Write the join normally, then alias the selected output columns clearly.",
+        "hint_2": "Select one column from `students` and one from `courses`, and give both result columns clearer labels."
+      },
+      "hint": "Use clear aliases for the output columns.",
+      "starterCode": "-- Return a readable joined result with clear output names\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table"
+      }
+    },
+    "m9_s03_comment_and_alias_report": {
+      "title": "Combine comments and readability",
+      "prompt": "The tables already exist.\n\nWrite a query that returns `courses.title` and `departments.name` by joining `courses` to `departments`.\n\nAdd a short comment explaining the purpose of the query, and rename the department result column to `department_name`, then run it.",
+      "help": {
+        "concept": "Comments explain the purpose, while aliases make the output easier to read.",
+        "hint_1": "Add one short note, then write the join and rename the department result.",
+        "hint_2": "Use a small comment for the reader, then combine a direct join with a clearer output label."
+      },
+      "hint": "Use one short comment and one clear result alias.",
+      "starterCode": "-- Explain what this query shows\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table"
+      }
+    },
+    "m9_s03_readability_project": {
+      "title": "Practice comments and readability",
+      "prompt": "Use the SQL workspace on the right to practice comments and readable SQL on the `school_relations_intro` dataset.\n\nFor each task:\n\n1. write the query clearly\n2. add comments only when they help explain the purpose or logic\n3. click **Run**\n4. check whether the result labels are easy to understand\n\nTasks:\n\n1. Add a comment above a students-and-enrollments join\n2. Add a comment explaining why `enrollments` is needed between students and courses\n3. Rename joined output columns clearly\n4. Add a comment and clear output aliases to a courses-and-departments query\n5. Write a readable query that shows `students.name` and `grade_level` with a short purpose comment\n\nRun one query at a time.\nThis project is about making queries easier for a human reader to understand.",
+      "help": {
+        "concept": "Readable SQL combines helpful comments, clear labels, and uncluttered structure.",
+        "hint_1": "Only use comments where they help the reader understand the goal or logic.",
+        "hint_2": "Solve the tasks one by one. Focus on whether the query would make sense to a beginner reading it later."
+      },
+      "hint": "Use comments when they clarify the purpose or logic, and use aliases for clearer output.",
+      "starterCode": "-- Task 1\n-- Add a short comment above a students-and-enrollments join\n\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table"
+      }
+    },
+    "m9_s03_sql_comments_meaning": {
+      "title": "What are SQL comments for?",
+      "prompt": "What is the main purpose of SQL comments in beginner queries?",
+      "help": {
+        "concept": "Comments are notes for humans reading the query, not instructions that change the result.",
+        "hint_1": "Think help the reader.",
+        "hint_2": "The point is to explain what the query is doing or why it is written that way."
+      },
+      "hint": "Think notes for the reader.",
+      "options": {
+        "a": "To help humans understand the query",
+        "b": "To change which rows are returned",
+        "c": "To replace JOIN",
+        "d": "To make aliases unnecessary"
+      }
+    },
+    "m9_s03_explaining_logic_meaning": {
+      "title": "Why explain query logic?",
+      "prompt": "Why can it be helpful to explain the logic of a SQL query?",
+      "help": {
+        "concept": "A short explanation can make the purpose or structure of the query much easier to understand later.",
+        "hint_1": "Think easier review later.",
+        "hint_2": "It helps readers understand why the query is written that way."
+      },
+      "hint": "Think easier to review and understand later.",
+      "options": {
+        "a": "It makes the purpose and structure easier to understand",
+        "b": "It automatically fixes broken joins",
+        "c": "It removes the need for IDs",
+        "d": "It forces the result to be sorted"
+      }
+    },
+    "m9_s03_naming_output_meaning": {
+      "title": "Why name output clearly?",
+      "prompt": "Why are clear output names useful in SQL results?",
+      "help": {
+        "concept": "Readable output labels help the result explain itself.",
+        "hint_1": "Think result headers that make sense quickly.",
+        "hint_2": "A reader should be able to look at the result and understand what each column means."
+      },
+      "hint": "Think readable result headers.",
+      "options": {
+        "a": "They help the result table explain what each column means",
+        "b": "They permanently rename the stored column",
+        "c": "They remove the need for formatting",
+        "d": "They replace WHERE"
+      }
+    },
+    "m9_s03_avoiding_messy_sql_meaning": {
+      "title": "What helps avoid messy SQL?",
+      "prompt": "What is one of the best ways to avoid messy SQL?",
+      "help": {
+        "concept": "Messy SQL becomes easier to avoid when the query has clear formatting, naming, and helpful explanation.",
+        "hint_1": "Think readable structure and labels.",
+        "hint_2": "A query is easier to trust when the purpose and logic are easy to follow."
+      },
+      "hint": "Think clear structure, clear labels, clear purpose.",
+      "options": {
+        "a": "Use clear formatting, helpful labels, and explanation when needed",
+        "b": "Write everything on one crowded line",
+        "c": "Avoid all aliases",
+        "d": "Hide the logic from the reader"
+      }
+    },
+    "m9_s03_when_comments_help": {
+      "title": "When are comments most helpful?",
+      "prompt": "When are comments especially helpful in beginner SQL?",
+      "help": {
+        "concept": "Comments help most when the purpose or logic might not be obvious to the reader.",
+        "hint_1": "Think places a beginner might get confused.",
+        "hint_2": "A brief note helps when the query structure or reason is not immediately clear."
+      },
+      "hint": "Think places where the purpose or logic needs explanation.",
+      "options": {
+        "a": "When the purpose or logic may not be obvious to the reader",
+        "b": "Only in empty queries",
+        "c": "Only in tables with one column",
+        "d": "Never, because comments are useless"
+      }
+    },
+    "m9_s03_comments_true": {
+      "title": "What is true about SQL comments?",
+      "prompt": "Select all true statements about SQL comments.",
+      "help": {
+        "concept": "Comments are for human readers and can explain the purpose or logic of the query.",
+        "hint_1": "Think explanation, not result change.",
+        "hint_2": "Choose the statements about helping readers understand the query."
+      },
+      "hint": "Think comments help humans, not the result logic.",
+      "options": {
+        "a": "Comments can explain what a query is doing",
+        "b": "Comments can explain why a join is used",
+        "c": "Comments can make review easier later",
+        "d": "Comments automatically change the result rows",
+        "e": "Comments are mainly for human readers"
+      }
+    },
+    "m9_s03_logic_true": {
+      "title": "What is true about explaining logic in SQL?",
+      "prompt": "Select all true statements about explaining query logic.",
+      "help": {
+        "concept": "Explaining logic can make a correct query much easier to understand.",
+        "hint_1": "Think purpose and reasoning.",
+        "hint_2": "Choose the statements about making the query easier to follow."
+      },
+      "hint": "Think easier to understand why the query works that way.",
+      "options": {
+        "a": "A short note can explain why a bridge table is needed",
+        "b": "A short note can explain the purpose of a query",
+        "c": "Logic explanation can help another learner read the query later",
+        "d": "Logic explanation means the query no longer needs correct SQL",
+        "e": "Logic explanation can support readability"
+      }
+    },
+    "m9_s03_output_names_true": {
+      "title": "What is true about naming output clearly?",
+      "prompt": "Select all true statements about clear output names in SQL results.",
+      "help": {
+        "concept": "Clear output names improve readability of the final result table.",
+        "hint_1": "Think understandable headers.",
+        "hint_2": "Choose the statements about readable labels and easier interpretation."
+      },
+      "hint": "Think output labels that explain themselves.",
+      "options": {
+        "a": "Clear output names can make results easier to interpret",
+        "b": "Joined results often benefit from better output names",
+        "c": "Aliases can help create clearer output names",
+        "d": "Clear output names permanently change the schema",
+        "e": "Readable headers make reports easier to scan"
+      }
+    },
+    "m9_s03_messy_sql_true": {
+      "title": "What is true about avoiding messy SQL?",
+      "prompt": "Select all true statements about avoiding messy SQL.",
+      "help": {
+        "concept": "Readable SQL usually uses clear formatting, helpful naming, and explanation where needed.",
+        "hint_1": "Think readable and easy to review.",
+        "hint_2": "Choose the statements about reducing clutter and confusion."
+      },
+      "hint": "Think readable and less cluttered.",
+      "options": {
+        "a": "Readable formatting can make SQL less messy",
+        "b": "Helpful aliases can reduce confusion",
+        "c": "Useful comments can clarify purpose or logic",
+        "d": "Messy SQL is always better for beginners",
+        "e": "Clean SQL is easier to review and fix"
+      }
+    },
+    "m9_s03_readability_workflow_true": {
+      "title": "What matches a good beginner workflow for comments and readability?",
+      "prompt": "Select all statements that match a good beginner workflow for writing readable SQL with comments.",
+      "help": {
+        "concept": "A good workflow is to write the query clearly, add comments only when they help, and make the output easy to understand.",
+        "hint_1": "Think purpose, clarity, labels.",
+        "hint_2": "Choose the steps that improve readability for a human reader."
+      },
+      "hint": "Write clearly, comment where needed, and label the output well.",
+      "options": {
+        "a": "Write the query in a readable layout",
+        "b": "Add comments when they help explain purpose or logic",
+        "c": "Use clear output names",
+        "d": "Check whether another beginner could understand the query",
+        "e": "Avoid readability once the query runs"
+      }
+    }
+  }
+}

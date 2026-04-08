@@ -46,7 +46,7 @@ export type QItem = {
     attempts?: number;
 
     code: string;
-    codeLang: CodeLanguage | "python" | "java";
+    codeLang: CodeLanguage;
     codeStdin: string;
     stdin?: string;
 

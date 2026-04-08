@@ -1,0 +1,412 @@
+{
+  "topicId": "simple_functions",
+  "minutes": 10,
+  "topic": {
+    "labelKey": "topics.sql.sql_module_5.simple_functions.label",
+    "summaryKey": "topics.sql.sql_module_5.simple_functions.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_5.simple_functions.cards.sketch0.title",
+      "sketchId": "intro_to_functions",
+      "height": 520
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_5.simple_functions.cards.sketch1.title",
+      "sketchId": "string_functions",
+      "height": 520
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_5.simple_functions.cards.sketch2.title",
+      "sketchId": "number_functions",
+      "height": 520
+    },
+    {
+      "id": "sketch3",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_5.simple_functions.cards.sketch3.title",
+      "sketchId": "date_function_awareness",
+      "height": 520
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql.sql_module_5.simple_functions.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 5,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "intro_to_functions",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_5.simple_functions.intro_to_functions.title",
+      "bodyKey": "sketches.sql.sql_module_5.simple_functions.intro_to_functions.bodyMarkdown"
+    },
+    {
+      "id": "string_functions",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_5.simple_functions.string_functions.title",
+      "bodyKey": "sketches.sql.sql_module_5.simple_functions.string_functions.bodyMarkdown"
+    },
+    {
+      "id": "number_functions",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_5.simple_functions.number_functions.title",
+      "bodyKey": "sketches.sql.sql_module_5.simple_functions.number_functions.bodyMarkdown"
+    },
+    {
+      "id": "date_function_awareness",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_5.simple_functions.date_function_awareness.title",
+      "bodyKey": "sketches.sql.sql_module_5.simple_functions.date_function_awareness.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "m5_s03_uppercase_customer_names",
+      "kind": "code_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m5_s03_uppercase_customer_names",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_kpi",
+        "resultShape": "table",
+        "solutionCode": "SELECT customer_name, UPPER(customer_name) AS customer_name_upper\nFROM orders;"
+      }
+    },
+    {
+      "id": "m5_s03_lowercase_category",
+      "kind": "code_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m5_s03_lowercase_category",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_kpi",
+        "resultShape": "table",
+        "solutionCode": "SELECT category, LOWER(category) AS category_lower\nFROM orders;"
+      }
+    },
+    {
+      "id": "m5_s03_name_length",
+      "kind": "code_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m5_s03_name_length",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_kpi",
+        "resultShape": "table",
+        "solutionCode": "SELECT customer_name, LENGTH(customer_name) AS name_length\nFROM orders;"
+      }
+    },
+    {
+      "id": "m5_s03_round_total_price",
+      "kind": "code_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m5_s03_round_total_price",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_kpi",
+        "resultShape": "table",
+        "solutionCode": "SELECT customer_name, ROUND(quantity * unit_price, 2) AS rounded_total_price\nFROM orders;"
+      }
+    },
+    {
+      "id": "m5_s03_date_awareness_query",
+      "kind": "code_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m5_s03_date_awareness_query",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_kpi",
+        "resultShape": "table",
+        "solutionCode": "SELECT customer_name, order_date, DATE(order_date) AS normalized_order_date\nFROM orders;"
+      }
+    },
+    {
+      "id": "m5_s03_functions_project",
+      "kind": "code_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m5_s03_functions_project",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_kpi",
+        "resultShape": "table",
+        "solutionCode": "SELECT customer_name, UPPER(customer_name) AS customer_name_upper\nFROM orders;"
+      }
+    },
+
+    {
+      "id": "m5_s03_function_meaning",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m5_s03_function_meaning",
+      "optionIds": ["a", "b", "c", "d"],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "m5_s03_string_functions_meaning",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m5_s03_string_functions_meaning",
+      "optionIds": ["a", "b", "c", "d"],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "m5_s03_number_functions_meaning",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m5_s03_number_functions_meaning",
+      "optionIds": ["a", "b", "c", "d"],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "m5_s03_date_functions_awareness",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m5_s03_date_functions_awareness",
+      "optionIds": ["a", "b", "c", "d"],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "m5_s03_reading_function_output",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m5_s03_reading_function_output",
+      "optionIds": ["a", "b", "c", "d"],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+
+    {
+      "id": "m5_s03_functions_true",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m5_s03_functions_true",
+      "optionIds": ["a", "b", "c", "d", "e"],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": ["a", "b", "c", "e"]
+      }
+    },
+    {
+      "id": "m5_s03_string_true",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m5_s03_string_true",
+      "optionIds": ["a", "b", "c", "d", "e"],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": ["a", "b", "c", "e"]
+      }
+    },
+    {
+      "id": "m5_s03_number_true",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m5_s03_number_true",
+      "optionIds": ["a", "b", "c", "d", "e"],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": ["a", "b", "c", "e"]
+      }
+    },
+    {
+      "id": "m5_s03_date_true",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m5_s03_date_true",
+      "optionIds": ["a", "b", "c", "d", "e"],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": ["a", "b", "c", "e"]
+      }
+    },
+    {
+      "id": "m5_s03_function_workflow_true",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m5_s03_function_workflow_true",
+      "optionIds": ["a", "b", "c", "d", "e"],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": ["a", "b", "c", "d"]
+      }
+    },
+
+    {
+      "id": "m5_s03_fill_function_returns",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m5_s03_fill_function_returns",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "result"
+      }
+    },
+    {
+      "id": "m5_s03_fill_uppercase_fn",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m5_s03_fill_uppercase_fn",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "UPPER"
+      }
+    },
+    {
+      "id": "m5_s03_fill_lowercase_fn",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m5_s03_fill_lowercase_fn",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "LOWER"
+      }
+    },
+    {
+      "id": "m5_s03_fill_rounding_fn",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m5_s03_fill_rounding_fn",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "ROUND"
+      }
+    },
+    {
+      "id": "m5_s03_fill_compare_output",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m5_s03_fill_compare_output",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "original"
+      }
+    },
+
+    {
+      "id": "m5_s03_reorder_function_workflow",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m5_s03_reorder_function_workflow",
+      "tokenIds": ["t1", "t2", "t3", "t4"],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": ["t1", "t2", "t3", "t4"]
+      }
+    },
+    {
+      "id": "m5_s03_reorder_upper_pattern",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m5_s03_reorder_upper_pattern",
+      "tokenIds": ["t1", "t2", "t3"],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": ["t1", "t2", "t3"]
+      }
+    },
+    {
+      "id": "m5_s03_reorder_round_pattern",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m5_s03_reorder_round_pattern",
+      "tokenIds": ["t1", "t2", "t3"],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": ["t1", "t2", "t3"]
+      }
+    },
+    {
+      "id": "m5_s03_reorder_read_output",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m5_s03_reorder_read_output",
+      "tokenIds": ["t1", "t2", "t3"],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": ["t1", "t2", "t3"]
+      }
+    },
+    {
+      "id": "m5_s03_reorder_value_types",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m5_s03_reorder_value_types",
+      "tokenIds": ["t1", "t2", "t3"],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": ["t1", "t2", "t3"]
+      }
+    }
+  ]
+}

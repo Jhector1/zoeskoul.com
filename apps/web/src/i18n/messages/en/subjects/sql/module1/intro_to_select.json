@@ -1,0 +1,489 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_1": {
+        "intro_to_select": {
+          "label": "Intro to SELECT",
+          "summary": "Learn how `SELECT` returns data, how to show all columns or only the ones you need, and how to read simple result tables.",
+          "cards": {
+            "sketch0": {
+              "title": "What does SELECT do?"
+            },
+            "sketch1": {
+              "title": "How do you show all columns with `*`?"
+            },
+            "sketch2": {
+              "title": "How do you select only specific columns?"
+            },
+            "sketch3": {
+              "title": "What is the basic `SELECT ... FROM ...` structure?"
+            },
+            "quiz": {
+              "title": "Quiz: Intro to SELECT"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_1": {
+        "intro_to_select": {
+          "what_select_does": {
+            "title": "`SELECT` asks SQL to return data.",
+            "bodyMarkdown": "The keyword `SELECT` is how you ask SQL to **show data**.\n\nIt does not mean “change the table.”\nIt means:\n\n> return something so I can read it\n\nIf a table is named `products`, SQL can return names, prices, categories, or the full table.\n\nExample:\n\n~~~sql\nSELECT name FROM products;\n~~~\n\nThat means:\n\n- `SELECT` → choose what to return\n- `name` → the column to return\n- `FROM products` → the table to read from\n\nSo the big idea is simple:\n\n> `SELECT` is for getting data back"
+          },
+          "selecting_all_columns_with_star": {
+            "title": "Use `*` when you want to see all columns.",
+            "bodyMarkdown": "Sometimes you want a quick look at the **whole table**.\n\nThat is what `*` is for.\n\n~~~sql\nSELECT * FROM products;\n~~~\n\nHere, the `*` means:\n\n- all columns\n\nSo if the table has columns like `id`, `name`, `category`, `price`, `stock`, and `created_at`, the result shows all of them.\n\nThis is useful when you:\n\n- want a quick first look at the table\n- are still learning what columns exist\n- want to inspect the full result first\n\nA simple memory trick is:\n\n> `*` = everything"
+          },
+          "selecting_specific_columns": {
+            "title": "You can ask for only the columns you need.",
+            "bodyMarkdown": "You do **not** always need the whole table.\n\nSometimes you only want the important parts.\n\nExample:\n\n~~~sql\nSELECT name, price FROM products;\n~~~\n\nThis returns only:\n\n- `name`\n- `price`\n\nThat makes the result smaller and easier to read.\n\nSelecting specific columns is helpful when you:\n\n- only need a few pieces of information\n- want cleaner output\n- want to focus on the most useful columns\n\nSo instead of asking for everything, you can ask for exactly what you need."
+          },
+          "query_structure_basics": {
+            "title": "A beginner query usually follows `SELECT ... FROM ...`.",
+            "bodyMarkdown": "A very common beginner SQL shape is:\n\n~~~sql\nSELECT column_or_columns\nFROM table_name;\n~~~\n\nYou can read it like this:\n\n- `SELECT` → what do I want to see?\n- `FROM` → where should SQL get it from?\n\nExamples:\n\n~~~sql\nSELECT * FROM products;\nSELECT name FROM products;\nSELECT id, name FROM products;\n~~~\n\nNotice the pattern:\n\n1. start with `SELECT`\n2. list one or more columns, or use `*`\n3. write `FROM`\n4. name the table\n\nThat structure appears again and again in SQL.\n\nSo if you learn this pattern well now, later queries will feel much easier."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "m1_s01_show_all_products": {
+      "title": "Show the full products table",
+      "prompt": "The SQLite workspace already has a table named `products`.\n\nWrite a query that shows **all columns** and **all rows** from `products`.\n\nClick **Run**, then read the **Results** tab.",
+      "help": {
+        "concept": "To show a whole table, SQL often uses `SELECT * FROM table_name;`. The `*` means every column in the table.",
+        "hint_1": "Use `SELECT`, then `*`, then the table name `products` after `FROM`.",
+        "hint_2": "This query has 3 main parts: `SELECT`, the symbol for all columns, and `FROM products`."
+      },
+      "hint": "Use `SELECT *`.",
+      "starterCode": "-- Show the full products table\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "resultShape": "table"
+      }
+    },
+    "m1_s01_show_product_names": {
+      "title": "Show one column",
+      "prompt": "The `products` table already exists.\n\nWrite a query that shows only the `name` column from `products`.\n\nRun it and notice how the result now has just one column.",
+      "help": {
+        "concept": "You can ask for one specific column by writing its name after `SELECT` instead of using `*`.",
+        "hint_1": "Replace `*` with the column name `name`.",
+        "hint_2": "Write a normal `SELECT ... FROM ...` query, but only put `name` after `SELECT`. Then read from the `products` table."
+      },
+      "hint": "Select just `name`.",
+      "starterCode": "-- Show only product names\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "resultShape": "table"
+      }
+    },
+    "m1_s01_show_name_and_price": {
+      "title": "Show two columns",
+      "prompt": "The `products` table already exists.\n\nWrite a query that shows only the `name` and `price` columns from `products`.\n\nRun it and compare the result with the full table.",
+      "help": {
+        "concept": "You can return more than one column by separating column names with commas.",
+        "hint_1": "Use both `name` and `price` after `SELECT`.",
+        "hint_2": "After `SELECT`, list the two column names separated by a comma. Then add `FROM products`."
+      },
+      "hint": "List both columns after `SELECT`.",
+      "starterCode": "-- Show names and prices\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "resultShape": "table"
+      }
+    },
+    "m1_s01_show_id_and_category": {
+      "title": "Show IDs and categories",
+      "prompt": "The `products` table already exists.\n\nWrite a query that returns the `id` and `category` columns from `products`.\n\nRun it and read the result from left to right.",
+      "help": {
+        "concept": "The order of the columns in `SELECT` is the order they appear in the result.",
+        "hint_1": "Choose `id` first and `category` second.",
+        "hint_2": "Write a `SELECT ... FROM ...` query with two columns. Put `id` before `category` so the result shows them in that order."
+      },
+      "hint": "Put `id` first, then `category`.",
+      "starterCode": "-- Show ids and categories\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "resultShape": "table"
+      }
+    },
+    "m1_s01_show_stock_only": {
+      "title": "Show stock values",
+      "prompt": "The `products` table already exists.\n\nWrite a query that shows only the `stock` column from `products`.\n\nRun it and notice that SQL can return just one part of each row.",
+      "help": {
+        "concept": "A query does not need to return every column. It can return just the one you ask for.",
+        "hint_1": "Use the column name `stock` after `SELECT`.",
+        "hint_2": "Use the basic pattern `SELECT ... FROM ...`. Put `stock` in the select part, then read from the `products` table."
+      },
+      "hint": "Select the `stock` column.",
+      "starterCode": "-- Show stock values only\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "resultShape": "table"
+      }
+    },
+    "m1_s01_products_explorer_project": {
+      "title": "Explore the products table",
+      "prompt": "Use the SQL workspace on the right to explore the `products` table.\n\nFor each task:\n\n1. type the query in the editor\n2. click **Run**\n3. read the **Results** tab\n4. optionally click **Tables** to remind yourself what table exists\n\nTasks:\n\n1. Show all columns and rows from `products`\n2. Show only the `name` column\n3. Show only the `price` column\n4. Show the `name` and `category` columns\n5. Show the `id` and `stock` columns\n\nRun one query at a time.\nDo not paste them all together.\nThis project is about using `SELECT` comfortably.",
+      "help": {
+        "concept": "This project builds confidence with simple `SELECT` queries: write one small query, run it, inspect the result, then move to the next task.",
+        "hint_1": "You will use the same beginner ideas again and again: show the full table, choose one column, then choose two columns.",
+        "hint_2": "Solve the tasks one by one. Start with the full-table version on `products`, then repeat the same structure but replace the selected part with one column or two columns depending on the task."
+      },
+      "hint": "Use one small query at a time.",
+      "starterCode": "-- Task 1\n-- Show the full products table\n\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "resultShape": "table"
+      }
+    },
+    "m1_s01_what_select_does": {
+      "title": "What does SELECT do?",
+      "prompt": "What is the main job of `SELECT` in SQL?",
+      "help": {
+        "concept": "This checks the core idea behind `SELECT`: it asks SQL to return data.",
+        "hint_1": "Think about what appears in the Results tab.",
+        "hint_2": "It is about showing or returning data, not deleting or drawing."
+      },
+      "hint": "Think query in, data out.",
+      "options": {
+        "a": "It asks the database to return data",
+        "b": "It permanently deletes a table",
+        "c": "It draws charts by itself",
+        "d": "It shuts down the database"
+      }
+    },
+    "m1_s01_star_meaning": {
+      "title": "What does * mean here?",
+      "prompt": "In this query, what does `*` mean?\n\n~~~sql\nSELECT * FROM products;\n~~~",
+      "help": {
+        "concept": "The `*` symbol means all columns from the chosen table.",
+        "hint_1": "It does not mean one row.",
+        "hint_2": "It tells SQL to return every column available from that table."
+      },
+      "hint": "Think all columns.",
+      "options": {
+        "a": "All columns",
+        "b": "Only the first column",
+        "c": "Only the last row",
+        "d": "A random value"
+      }
+    },
+    "m1_s01_specific_columns_why": {
+      "title": "Why select specific columns?",
+      "prompt": "Why might you select specific columns instead of using `*`?",
+      "help": {
+        "concept": "Specific columns make the result smaller and more focused.",
+        "hint_1": "Sometimes you only need part of the table.",
+        "hint_2": "Choosing fewer columns can make the result easier to read."
+      },
+      "hint": "Think cleaner output.",
+      "options": {
+        "a": "To return only the information you need",
+        "b": "Because `FROM` stops working otherwise",
+        "c": "Because SQL does not allow `*`",
+        "d": "To delete unused columns"
+      }
+    },
+    "m1_s01_query_structure_order": {
+      "title": "What is the basic query order?",
+      "prompt": "Which order matches the beginner SQL query structure?",
+      "help": {
+        "concept": "The usual beginner shape is `SELECT ... FROM ...`.",
+        "hint_1": "Start by naming what you want to return.",
+        "hint_2": "Then name the table where the data comes from."
+      },
+      "hint": "Think select first, source second.",
+      "options": {
+        "a": "SELECT columns FROM table",
+        "b": "FROM table SELECT columns",
+        "c": "TABLE FROM SELECT columns",
+        "d": "COLUMNS TABLE SELECT FROM"
+      }
+    },
+    "m1_s01_reading_results": {
+      "title": "How should you read a result table?",
+      "prompt": "What is a good beginner way to read the result of a `SELECT` query?",
+      "help": {
+        "concept": "A clear reading habit is to look at the headers first, then the values below them.",
+        "hint_1": "Start with the labels at the top.",
+        "hint_2": "Then read each row under those labels."
+      },
+      "hint": "Headers first.",
+      "options": {
+        "a": "Read the column names first, then the rows",
+        "b": "Ignore the headers completely",
+        "c": "Only read the first cell",
+        "d": "Only read the bottom row"
+      }
+    },
+    "m1_s01_select_true": {
+      "title": "What is true about SELECT?",
+      "prompt": "Select all true statements about `SELECT`.",
+      "help": {
+        "concept": "This checks the big beginner idea: `SELECT` is for returning data.",
+        "hint_1": "Think about showing data in the Results tab.",
+        "hint_2": "Choose statements about asking for data, not changing or destroying it."
+      },
+      "hint": "Think return and read.",
+      "options": {
+        "a": "It is used to return data",
+        "b": "It can be used to choose which columns to show",
+        "c": "It is a common reading query keyword",
+        "d": "It always deletes rows",
+        "e": "It can produce a result table"
+      }
+    },
+    "m1_s01_star_true": {
+      "title": "What is true about `SELECT * FROM products;`?",
+      "prompt": "Select all true statements about this query:\n\n~~~sql\nSELECT * FROM products;\n~~~",
+      "help": {
+        "concept": "This checks the beginner meaning of `SELECT *`.",
+        "hint_1": "The `*` means all columns.",
+        "hint_2": "It is about reading from the `products` table."
+      },
+      "hint": "Think all columns from products.",
+      "options": {
+        "a": "It asks to show data from `products`.",
+        "b": "The `*` means all columns.",
+        "c": "It is a reading query.",
+        "d": "It means delete every row in `products`.",
+        "e": "It can return a result table."
+      }
+    },
+    "m1_s01_specific_columns_true": {
+      "title": "What is true about selecting specific columns?",
+      "prompt": "Select all true statements about choosing specific columns in `SELECT`.",
+      "help": {
+        "concept": "Specific-column queries are useful when you want focused results.",
+        "hint_1": "Think about smaller, cleaner output.",
+        "hint_2": "Choose the ideas about selecting only what is needed."
+      },
+      "hint": "Think focus and clarity.",
+      "options": {
+        "a": "You can list one or more column names after `SELECT`",
+        "b": "Commas separate multiple column names",
+        "c": "The result can be easier to read than `SELECT *`",
+        "d": "You must always return every column",
+        "e": "You can choose only the information you need"
+      }
+    },
+    "m1_s01_from_true": {
+      "title": "What is true about FROM?",
+      "prompt": "Select all true statements about `FROM` in a beginner query.",
+      "help": {
+        "concept": "The `FROM` part tells SQL which table to read.",
+        "hint_1": "It points to the source table.",
+        "hint_2": "Choose the ideas about where the data comes from."
+      },
+      "hint": "Think source table.",
+      "options": {
+        "a": "It tells SQL which table to read from",
+        "b": "It comes after the selected columns",
+        "c": "It is part of the basic `SELECT ... FROM ...` shape",
+        "d": "It means sort the rows",
+        "e": "It helps SQL know where the data is"
+      }
+    },
+    "m1_s01_result_reading_true": {
+      "title": "What helps you read SELECT results well?",
+      "prompt": "Select all good beginner habits for reading a result table.",
+      "help": {
+        "concept": "The learner should read result tables in a calm, structured way.",
+        "hint_1": "Start with the labels, then match values.",
+        "hint_2": "Choose the habits that make the table easier to understand."
+      },
+      "hint": "Think labels, columns, rows.",
+      "options": {
+        "a": "Look at the column headers first",
+        "b": "Read values under the correct header",
+        "c": "Compare how the result changes after a new query",
+        "d": "Ignore the table structure completely",
+        "e": "Notice which columns are included in the result"
+      }
+    },
+
+    "m1_s01_reorder_select_purpose": {
+      "title": "What SELECT does",
+      "prompt": "Reorder the ideas to explain what `SELECT` does.",
+      "help": {
+        "concept": "`SELECT` is used to ask SQL to return data so you can read it.",
+        "hint_1": "Start with asking SQL.",
+        "hint_2": "End with reading the result."
+      },
+      "hint": "Think ask, return, read.",
+      "tokens": {
+        "t1": "`SELECT` asks SQL for data",
+        "t2": "SQL returns the requested result",
+        "t3": "you read the returned data"
+      }
+    },
+    "m1_s01_reorder_select_from_structure": {
+      "title": "Build the SELECT shape",
+      "prompt": "Put the beginner query structure in the correct order.",
+      "help": {
+        "concept": "A common beginner query follows `SELECT ... FROM ...`.",
+        "hint_1": "Start with `SELECT`.",
+        "hint_2": "The table comes after `FROM`."
+      },
+      "hint": "Think select first, source second.",
+      "tokens": {
+        "t1": "SELECT",
+        "t2": "column or columns",
+        "t3": "FROM",
+        "t4": "table name"
+      }
+    },
+    "m1_s01_reorder_star_meaning": {
+      "title": "What does * mean?",
+      "prompt": "Reorder the ideas to explain `SELECT * FROM products;`.",
+      "help": {
+        "concept": "The `*` symbol means all columns from the table.",
+        "hint_1": "Start with the symbol meaning.",
+        "hint_2": "Then explain the result."
+      },
+      "hint": "Think everything first.",
+      "tokens": {
+        "t1": "`*` means all columns",
+        "t2": "SQL reads from the `products` table",
+        "t3": "the result can show the full table columns"
+      }
+    },
+    "m1_s01_reorder_specific_columns": {
+      "title": "Choose only needed columns",
+      "prompt": "Reorder the ideas to explain why specific columns are useful.",
+      "help": {
+        "concept": "You can select only the columns you need for a smaller, cleaner result.",
+        "hint_1": "Start with choosing columns.",
+        "hint_2": "Then explain the cleaner output."
+      },
+      "hint": "Need first, cleaner second.",
+      "tokens": {
+        "t1": "choose only the columns you need",
+        "t2": "return a smaller result",
+        "t3": "make the output easier to read"
+      }
+    },
+    "m1_s01_reorder_name_price_query": {
+      "title": "Read a two-column query",
+      "prompt": "Reorder the ideas to explain this query.\n\n~~~sql\nSELECT name, price FROM products;\n~~~",
+      "help": {
+        "concept": "This query returns only the `name` and `price` columns from `products`.",
+        "hint_1": "Start with the selected columns.",
+        "hint_2": "Then mention the table source."
+      },
+      "hint": "Columns first, table after.",
+      "tokens": {
+        "t1": "`name` and `price` are the selected columns",
+        "t2": "the data comes from `products`",
+        "t3": "the result shows only those two columns"
+      }
+    },
+    "m1_s01_reorder_result_reading_flow": {
+      "title": "How to read SELECT results",
+      "prompt": "Put the result-reading steps in the best beginner order.",
+      "help": {
+        "concept": "A good way to read a result table is to start with headers and then match the values below.",
+        "hint_1": "Look at labels first.",
+        "hint_2": "Then connect rows to those labels."
+      },
+      "hint": "Headers before values.",
+      "tokens": {
+        "t1": "look at the column names first",
+        "t2": "read the values underneath",
+        "t3": "match each value to the correct column"
+      }
+    },
+
+
+    "m1_s01_fill_select_keyword_job": {
+      "title": "What SELECT returns",
+      "prompt": "Fill in the blank with the best word.",
+      "help": {
+        "concept": "`SELECT` is used to return data from a table.",
+        "hint_1": "It is what appears in the Results tab.",
+        "hint_2": "SELECT returns data."
+      },
+      "hint": "Think about what comes back.",
+      "template": "`SELECT` asks SQL to return ____.",
+      "choices": ["data", "buttons", "folders", "colors"],
+      "correct": "data"
+    },
+    "m1_s01_fill_star_means": {
+      "title": "Meaning of *",
+      "prompt": "Choose the best phrase to complete the sentence.",
+      "help": {
+        "concept": "In a SELECT query, `*` means every column from the chosen table.",
+        "hint_1": "It means everything in the column list.",
+        "hint_2": "It means all columns."
+      },
+      "hint": "Think everything.",
+      "template": "In `SELECT * FROM products;`, `*` means ____.",
+      "choices": ["all columns", "one row", "the table name", "only prices"],
+      "correct": "all columns"
+    },
+    "m1_s01_fill_from_source": {
+      "title": "Meaning of FROM",
+      "prompt": "Fill in the blank with the correct word.",
+      "help": {
+        "concept": "`FROM` tells SQL where the data comes from.",
+        "hint_1": "It points to the source.",
+        "hint_2": "The source is the table."
+      },
+      "hint": "Think source location.",
+      "template": "`FROM` tells SQL which ____ to read from.",
+      "choices": ["table", "button", "query", "row order"],
+      "correct": "table"
+    },
+    "m1_s01_fill_specific_columns_benefit": {
+      "title": "Why specific columns help",
+      "prompt": "Choose the best word to complete the sentence.",
+      "help": {
+        "concept": "Selecting specific columns can make the result more focused and smaller.",
+        "hint_1": "It is the opposite of bigger.",
+        "hint_2": "Specific columns can create a smaller result."
+      },
+      "hint": "Think less output.",
+      "template": "Choosing specific columns can return a ____ result.",
+      "choices": ["smaller", "louder", "slower", "darker"],
+      "correct": "smaller"
+    },
+    "m1_s01_fill_name_price_columns": {
+      "title": "Read a two-column query",
+      "prompt": "Fill in the blank with the missing column name.",
+      "help": {
+        "concept": "A query can list multiple columns separated by commas.",
+        "hint_1": "The query is `SELECT name, price FROM products;`.",
+        "hint_2": "The second column is `price`."
+      },
+      "hint": "Look at the second selected column.",
+      "template": "In `SELECT name, price FROM products;`, the second selected column is ____.",
+      "choices": ["price", "products", "FROM", "SELECT"],
+      "correct": "price"
+    }
+
+
+  }
+}

@@ -32,11 +32,13 @@
     }
   },
   "sketches": {
-    "py": {
-      "cond": {
-        "basics": {
-          "title": "Conditionals: Teaching Your Program to Make Decisions",
-          "bodyMarkdown": "So far you can:\n\n- store values in **variables**\n- understand **types**\n- compute using **operators + expressions**\n- work with **strings**\n- build mini-programs with **input → convert → compute → show**\n\nNow we add something that makes programs feel *intelligent*:\n\n✅ **Decision making**\n\nThink of your program like a **security guard at a door**.\n\nThe guard checks conditions:\n\n- “Are you on the list?”\n- “Are you old enough?”\n- “Do you have the correct password?”\n\nDepending on the answer, the guard decides what to do next.\n\nThat’s exactly what **conditionals** do.\n\nThey allow a program to **choose between different paths**.\n\n---\n\n## The `if` statement\n\n`if` means:\n\n> “Run this block only if the condition is **True**.”\n\nExample:\n\n~~~python\nage = 16\n\nif age >= 18:\n    print(\"Access granted.\")\n~~~\n\nHere the condition is:\n\n`age >= 18`\n\nIf it evaluates to **True**, the code runs.  \nIf it evaluates to **False**, Python skips the block.\n\n---\n\n## Indentation matters\n\nNotice the space before `print()`.\n\nPython uses **indentation** to mark blocks of code.\n\nEverything indented under `if` belongs to that decision.\n\n~~~python\nif condition:\n    do_this()\n    do_that()\n~~~\n\n---\n\n## `if` / `else`\n\nOften you want **two possible outcomes**.\n\n~~~python\nage = 16\n\nif age >= 18:\n    print(\"Access granted.\")\nelse:\n    print(\"Access denied.\")\n~~~\n\nNow the program always chooses **one of two paths**.\n\n---\n\n## Try it\n\n~~~python\nage = int(input(\"Age: \"))\n\nif age >= 18:\n    print(\"✅ You can enter.\")\nelse:\n    print(\"⛔ Not yet.\")\n~~~\n\nRun it twice:\n\n- once with **18 or higher**\n- once with a **smaller number**\n\nNotice how the program behaves differently.\n\n---\n\n## `elif`: more than two choices\n\nSometimes you need more than two possible paths.\n\n`elif` means **“else if.”**\n\n~~~python\nscore = 82\n\nif score >= 90:\n    print(\"A\")\nelif score >= 80:\n    print(\"B\")\nelif score >= 70:\n    print(\"C\")\nelse:\n    print(\"Needs improvement\")\n~~~\n\nPython checks conditions **from top to bottom** and stops at the first match.\n\n---\n\n## Example: Grade Checker\n\n~~~python\nscore = int(input(\"Score (0-100): \"))\n\nif score >= 90:\n    print(\"Grade: A\")\nelif score >= 80:\n    print(\"Grade: B\")\nelif score >= 70:\n    print(\"Grade: C\")\nelif score >= 60:\n    print(\"Grade: D\")\nelse:\n    print(\"Grade: F\")\n~~~\n\nTry different scores and see what happens.\n\n---\n\n## Boolean logic: combining conditions\n\nSometimes decisions depend on **multiple conditions**.\n\nPython provides logical operators:\n\n### `and` (both must be True)\n\n~~~python\nage = 20\nhas_id = True\n\nif age >= 18 and has_id:\n    print(\"✅ Allowed\")\nelse:\n    print(\"⛔ Not allowed\")\n~~~\n\n---\n\n### `or` (at least one must be True)\n\n~~~python\nis_member = False\nhas_coupon = True\n\nif is_member or has_coupon:\n    print(\"Discount applied!\")\n~~~\n\n---\n\n### `not` (reverse True / False)\n\n~~~python\nis_banned = False\n\nif not is_banned:\n    print(\"Welcome!\")\n~~~\n\n---\n\n## Example: Login Check\n\nImagine your program acting like the guard checking a password.\n\n~~~python\npassword = input(\"Password: \")\n\nif password == \"letmein\":\n    print(\"✅ Logged in\")\nelse:\n    print(\"⛔ Wrong password\")\n~~~\n\nTry:\n\n- `letmein`\n- anything else\n\n---\n\n## Truthy and Falsey values\n\nSome values behave like **False** even if they aren’t literally `False`.\n\nCommon falsey values:\n\n- `False`\n- `0`\n- `\"\"` (empty string)\n- `None`\n\nExample:\n\n~~~python\nname = input(\"Name (press Enter to skip): \")\n\nif name:\n    print(f\"Hello, {name}!\")\nelse:\n    print(\"Hello, stranger!\")\n~~~\n\nIf the user presses **Enter**, the string is empty and the program runs the `else` branch.\n\n---\n\n## Example: Shipping Rules\n\n~~~python\ntotal = float(input(\"Cart total: \"))\n\nif total >= 50:\n    print(\"✅ Free shipping!\")\nelse:\n    print(\"Shipping cost: $6.99\")\n~~~\n\nTry entering different totals.\n\n---\n\n## What you unlocked\n\nConditionals allow your program to:\n\n- **decide**\n- **branch**\n- respond differently to different inputs\n\nWithout conditionals, programs can only follow a **single path**.\n\nWith conditionals, programs can **adapt to the situation**.\n\n---\n\n## Next step\n\nNow that your program can **decide**, the next step is teaching it to **repeat actions**.\n\nNext topic: **Loops**.\n\nLoops allow programs to repeat tasks, such as:\n\n- asking for input again\n- processing lists of data\n- running until a condition is satisfied"
+    "python": {
+      "python-2": {
+        "conditionals_basics": {
+          "basics": {
+            "title": "Conditionals: Teaching Your Program to Make Decisions",
+            "bodyMarkdown": "So far you can:\n\n- store values in **variables**\n- understand **types**\n- compute using **operators + expressions**\n- work with **strings**\n- build mini-programs with **input → convert → compute → show**\n\nNow we add something that makes programs feel *intelligent*:\n\n✅ **Decision making**\n\nThink of your program like a **security guard at a door**.\n\nThe guard checks conditions:\n\n- “Are you on the list?”\n- “Are you old enough?”\n- “Do you have the correct password?”\n\nDepending on the answer, the guard decides what to do next.\n\nThat’s exactly what **conditionals** do.\n\nThey allow a program to **choose between different paths**.\n\n---\n\n## The `if` statement\n\n`if` means:\n\n> “Run this block only if the condition is **True**.”\n\nExample:\n\n~~~python\nage = 16\n\nif age >= 18:\n    print(\"Access granted.\")\n~~~\n\nHere the condition is:\n\n`age >= 18`\n\nIf it evaluates to **True**, the code runs.  \nIf it evaluates to **False**, Python skips the block.\n\n---\n\n## Indentation matters\n\nNotice the space before `print()`.\n\nPython uses **indentation** to mark blocks of code.\n\nEverything indented under `if` belongs to that decision.\n\n~~~python\nif condition:\n    do_this()\n    do_that()\n~~~\n\n---\n\n## `if` / `else`\n\nOften you want **two possible outcomes**.\n\n~~~python\nage = 16\n\nif age >= 18:\n    print(\"Access granted.\")\nelse:\n    print(\"Access denied.\")\n~~~\n\nNow the program always chooses **one of two paths**.\n\n---\n\n## Try it\n\n~~~python\nage = int(input(\"Age: \"))\n\nif age >= 18:\n    print(\"✅ You can enter.\")\nelse:\n    print(\"⛔ Not yet.\")\n~~~\n\nRun it twice:\n\n- once with **18 or higher**\n- once with a **smaller number**\n\nNotice how the program behaves differently.\n\n---\n\n## `elif`: more than two choices\n\nSometimes you need more than two possible paths.\n\n`elif` means **“else if.”**\n\n~~~python\nscore = 82\n\nif score >= 90:\n    print(\"A\")\nelif score >= 80:\n    print(\"B\")\nelif score >= 70:\n    print(\"C\")\nelse:\n    print(\"Needs improvement\")\n~~~\n\nPython checks conditions **from top to bottom** and stops at the first match.\n\n---\n\n## Example: Grade Checker\n\n~~~python\nscore = int(input(\"Score (0-100): \"))\n\nif score >= 90:\n    print(\"Grade: A\")\nelif score >= 80:\n    print(\"Grade: B\")\nelif score >= 70:\n    print(\"Grade: C\")\nelif score >= 60:\n    print(\"Grade: D\")\nelse:\n    print(\"Grade: F\")\n~~~\n\nTry different scores and see what happens.\n\n---\n\n## Boolean logic: combining conditions\n\nSometimes decisions depend on **multiple conditions**.\n\nPython provides logical operators:\n\n### `and` (both must be True)\n\n~~~python\nage = 20\nhas_id = True\n\nif age >= 18 and has_id:\n    print(\"✅ Allowed\")\nelse:\n    print(\"⛔ Not allowed\")\n~~~\n\n---\n\n### `or` (at least one must be True)\n\n~~~python\nis_member = False\nhas_coupon = True\n\nif is_member or has_coupon:\n    print(\"Discount applied!\")\n~~~\n\n---\n\n### `not` (reverse True / False)\n\n~~~python\nis_banned = False\n\nif not is_banned:\n    print(\"Welcome!\")\n~~~\n\n---\n\n## Example: Login Check\n\nImagine your program acting like the guard checking a password.\n\n~~~python\npassword = input(\"Password: \")\n\nif password == \"letmein\":\n    print(\"✅ Logged in\")\nelse:\n    print(\"⛔ Wrong password\")\n~~~\n\nTry:\n\n- `letmein`\n- anything else\n\n---\n\n## Truthy and Falsey values\n\nSome values behave like **False** even if they aren’t literally `False`.\n\nCommon falsey values:\n\n- `False`\n- `0`\n- `\"\"` (empty string)\n- `None`\n\nExample:\n\n~~~python\nname = input(\"Name (press Enter to skip): \")\n\nif name:\n    print(f\"Hello, {name}!\")\nelse:\n    print(\"Hello, stranger!\")\n~~~\n\nIf the user presses **Enter**, the string is empty and the program runs the `else` branch.\n\n---\n\n## Example: Shipping Rules\n\n~~~python\ntotal = float(input(\"Cart total: \"))\n\nif total >= 50:\n    print(\"✅ Free shipping!\")\nelse:\n    print(\"Shipping cost: $6.99\")\n~~~\n\nTry entering different totals.\n\n---\n\n## What you unlocked\n\nConditionals allow your program to:\n\n- **decide**\n- **branch**\n- respond differently to different inputs\n\nWithout conditionals, programs can only follow a **single path**.\n\nWith conditionals, programs can **adapt to the situation**.\n\n---\n\n## Next step\n\nNow that your program can **decide**, the next step is teaching it to **repeat actions**.\n\nNext topic: **Loops**.\n\nLoops allow programs to repeat tasks, such as:\n\n- asking for input again\n- processing lists of data\n- running until a condition is satisfied"
+          }
         }
       }
     }
@@ -48,11 +50,13 @@
   "quiz": {
     "m2_cond_age_gate_code": {
       "title": "Snack Shop Gate: adult or minor",
-      "prompt": "A snack shop kiosk must check whether a customer is old enough to buy an 18+ item.\n\nRead one integer age.\n\nIf age is greater than or equal to 18, print:\nALLOWED\n\nOtherwise, print:\nDENIED",      "hint": "Use `if age >= 18:` and an `else:` block.",
+      "prompt": "A snack shop kiosk must check whether a customer is old enough to buy an 18+ item.\n\nRead one integer age.\n\nIf age is greater than or equal to 18, print:\nALLOWED\n\nOtherwise, print:\nDENIED",
+      "hint": "Use `if age >= 18:` and an `else:` block.",
       "starterCode": "# TODO\n",
-      "runtime": {
-        "allowedText": "ALLOWED",
-        "deniedText": "DENIED"
+      "help": {
+        "concept": "This checks whether you can branch into one of two outputs using a simple comparison.",
+        "hint_1": "Read the age as an integer first.",
+        "hint_2": "If the age is at least 18 print ALLOWED, otherwise print DENIED."
       }
     },
     "m2_cond_member_discount_code": {
@@ -60,8 +64,10 @@
       "prompt": "The snack shop gives members a 10% discount.\n\nRead TWO inputs:\n1) subtotal (integer dollars)\n2) member flag (y/n)\n\nRules:\n- if member is y (or Y), apply 10% discount using integer math\n- otherwise no discount\n\nPrint exactly:\nTotal = <total>",
       "hint": "Use: `member.lower() == \"y\"` and compute `subtotal * 10 // 100`.",
       "starterCode": "# TODO\n",
-      "runtime": {
-        "totalLineTemplate": "Total = {total}"
+      "help": {
+        "concept": "This combines input, a conditional check, string cleanup, and integer math.",
+        "hint_1": "Lowercase the member flag before checking it.",
+        "hint_2": "If the flag is y, subtract a 10% integer discount. Otherwise keep the subtotal."
       }
     },
     "m2_cond_password_check_code": {
@@ -69,84 +75,286 @@
       "prompt": "The kiosk has an admin mode.\n\nRead ONE input password.\n\nIf password == \"letmein\" print:\nLogged in\n\nElse print:\nWrong password",
       "hint": "Use `==` (comparison), not `=` (assignment).",
       "starterCode": "# TODO\n",
-      "runtime": {
-        "loggedInText": "Logged in",
-        "wrongPasswordText": "Wrong password"
+      "help": {
+        "concept": "This checks whether you can compare text input and choose the right branch.",
+        "hint_1": "Read the password as text.",
+        "hint_2": "Use `==` to compare it to `letmein`."
       }
     },
+
     "m2_cond_elif_meaning_sc": {
       "title": "`elif` meaning",
       "prompt": "In Python, `elif` is best described as:",
+      "hint": "`elif` = else if (check another condition).",
+      "help": {
+        "concept": "elif adds another condition to test after an earlier if branch.",
+        "hint_1": "It is not a loop.",
+        "hint_2": "Think “else if.”"
+      },
       "options": {
         "a": "A loop that repeats code",
         "b": "An “else if” branch (another condition to test)",
         "c": "A way to import libraries"
-      },
-      "hint": "`elif` = else if (check another condition)."
+      }
     },
     "m2_cond_indent_matters_sc": {
       "title": "Indentation defines the block",
       "prompt": "Which statement is true about indentation in Python `if` blocks?",
+      "hint": "Python uses indentation to group lines into a block.",
+      "help": {
+        "concept": "Indented lines under an if statement belong to that decision block.",
+        "hint_1": "Python does not use braces for this.",
+        "hint_2": "Indentation is part of the syntax."
+      },
       "options": {
         "a": "Indentation is optional; Python uses braces `{}` instead",
         "b": "Indentation only matters inside functions, not `if` statements",
         "c": "Indented lines under `if` belong to that decision block",
         "d": "Indentation is only for making code look pretty"
-      },
-      "hint": "Python uses indentation to group lines into a block."
+      }
     },
     "m2_cond_elif_order_sc": {
       "title": "`elif` order",
       "prompt": "When Python evaluates an `if / elif / else` chain, it:",
+      "hint": "Only the first matching condition runs.",
+      "help": {
+        "concept": "Python checks branches from top to bottom and stops at the first true condition.",
+        "hint_1": "It does not run every matching branch.",
+        "hint_2": "It stops at the first match."
+      },
       "options": {
         "a": "Checks all branches and runs every matching one",
         "b": "Checks from top to bottom and stops at the first match",
         "c": "Always runs the `else` block first"
-      },
-      "hint": "Only the first matching condition runs."
+      }
     },
     "m2_cond_comparison_vs_assignment_sc": {
       "title": "`==` vs `=`",
       "prompt": "Which operator compares two values for equality in Python?",
+      "hint": "`==` checks equality. `=` assigns a value.",
+      "help": {
+        "concept": "A single equals sign assigns, while a double equals sign compares.",
+        "hint_1": "This question is asking about checking equality.",
+        "hint_2": "Use the double equals sign."
+      },
       "options": {
         "a": "`==`",
         "b": "`=`",
         "c": "`=>`",
         "d": "`:=`"
-      },
-      "hint": "`==` checks equality. `=` assigns a value."
+      }
     },
     "m2_cond_and_or_sc": {
       "title": "`and` vs `or`",
       "prompt": "If you need both conditions to be True, you should use:",
+      "hint": "`and` requires both sides to be True.",
+      "help": {
+        "concept": "The and operator only passes when both conditions are true.",
+        "hint_1": "or only needs one true side.",
+        "hint_2": "Both-true logic uses and."
+      },
       "options": {
         "a": "`or`",
         "b": "`and`",
         "c": "`not`"
-      },
-      "hint": "`and` requires both sides to be True."
+      }
     },
+
     "m2_cond_falsey_values_mc": {
       "title": "Falsey values",
       "prompt": "Which of these are considered falsey in Python? (Choose all that apply.)",
+      "hint": "Empty/zero/None-like values behave as False in conditions.",
+      "help": {
+        "concept": "Falsey values act like False in a condition even if they are not literally the Boolean value False.",
+        "hint_1": "Think about empty and zero-like values.",
+        "hint_2": "0, empty string, and empty list are falsey."
+      },
       "options": {
         "a": "`0`",
         "b": "`\"\"` (empty string)",
         "c": "`[]` (empty list)",
         "d": "`5`"
-      },
-      "hint": "Empty/zero/None-like values behave as False in conditions."
+      }
     },
     "m2_cond_logical_ops_mc": {
       "title": "Logical operators",
       "prompt": "Which of these are Python logical operators? (Choose all that apply.)",
+      "hint": "`elif` is a branch keyword. `and/or/not` are logical operators.",
+      "help": {
+        "concept": "Logical operators combine or reverse Boolean conditions.",
+        "hint_1": "elif is not one of them.",
+        "hint_2": "The operators are and, or, and not."
+      },
       "options": {
         "a": "`and`",
         "b": "`or`",
         "c": "`not`",
         "d": "`elif`"
+      }
+    },
+
+    "m2_cond_fill_if_meaning": {
+      "title": "Meaning of if",
+      "prompt": "Fill in the blank with the best word.",
+      "template": "An `if` block runs only when its condition is ____.",
+      "choices": {
+        "0": "True",
+        "1": "empty",
+        "2": "blue",
+        "3": "printed"
       },
-      "hint": "`elif` is a branch keyword. `and/or/not` are logical operators."
+      "hint": "A condition must pass.",
+      "help": {
+        "concept": "if runs its indented block only when the condition evaluates to True.",
+        "hint_1": "It does not run on False.",
+        "hint_2": "The missing word is True."
+      }
+    },
+    "m2_cond_fill_else_role": {
+      "title": "Role of else",
+      "prompt": "Complete the sentence with the best word.",
+      "template": "`else` handles the ____ case.",
+      "choices": {
+        "0": "otherwise",
+        "1": "first",
+        "2": "loop",
+        "3": "math"
+      },
+      "hint": "Think about the branch that runs when the if condition fails.",
+      "help": {
+        "concept": "else provides the fallback path when earlier conditions do not match.",
+        "hint_1": "It is the backup branch.",
+        "hint_2": "The missing word is otherwise."
+      }
+    },
+    "m2_cond_fill_and_meaning": {
+      "title": "Meaning of and",
+      "prompt": "Fill in the blank with the best word.",
+      "template": "The `and` operator requires ____ conditions to be True.",
+      "choices": {
+        "0": "both",
+        "1": "one",
+        "2": "zero",
+        "3": "random"
+      },
+      "hint": "It is stricter than `or`.",
+      "help": {
+        "concept": "and only succeeds when both sides are true.",
+        "hint_1": "One true side is not enough.",
+        "hint_2": "The answer is both."
+      }
+    },
+    "m2_cond_fill_or_meaning": {
+      "title": "Meaning of or",
+      "prompt": "Complete the sentence with the best word.",
+      "template": "The `or` operator needs at least ____ condition to be True.",
+      "choices": {
+        "0": "one",
+        "1": "two",
+        "2": "zero",
+        "3": "every"
+      },
+      "hint": "It is more flexible than `and`.",
+      "help": {
+        "concept": "or succeeds when at least one side is true.",
+        "hint_1": "It does not require both sides.",
+        "hint_2": "The answer is one."
+      }
+    },
+    "m2_cond_fill_falsey_empty": {
+      "title": "Empty string behavior",
+      "prompt": "Fill in the blank with the best word.",
+      "template": "An ____ string is falsey in Python.",
+      "choices": {
+        "0": "empty",
+        "1": "uppercase",
+        "2": "long",
+        "3": "quoted"
+      },
+      "hint": "Think about pressing Enter without typing a name.",
+      "help": {
+        "concept": "An empty string behaves like False in a condition.",
+        "hint_1": "It contains no characters.",
+        "hint_2": "The word is empty."
+      }
+    },
+
+    "m2_cond_reorder_if_else": {
+      "title": "Order the if/else flow",
+      "prompt": "Reorder the decision process.",
+      "tokens": {
+        "t1": "check the condition",
+        "t2": "choose a branch",
+        "t3": "run that branch"
+      },
+      "hint": "The check happens first.",
+      "help": {
+        "concept": "A conditional first evaluates the condition, then selects a path, then executes it.",
+        "hint_1": "Choice comes after the check.",
+        "hint_2": "Running the chosen block comes last."
+      }
+    },
+    "m2_cond_reorder_elif_chain": {
+      "title": "Order the elif chain",
+      "prompt": "Reorder how Python handles an if/elif/else chain.",
+      "tokens": {
+        "t1": "check first condition",
+        "t2": "check next condition if needed",
+        "t3": "stop at first match",
+        "t4": "use else if none matched"
+      },
+      "hint": "Python moves top to bottom.",
+      "help": {
+        "concept": "Python evaluates an if/elif/else chain in order until one branch matches.",
+        "hint_1": "It does not skip straight to else.",
+        "hint_2": "The first match stops the chain."
+      }
+    },
+    "m2_cond_reorder_password_check": {
+      "title": "Order the password check",
+      "prompt": "Reorder the login flow.",
+      "tokens": {
+        "t1": "read the password",
+        "t2": "compare to `letmein`",
+        "t3": "print the matching result"
+      },
+      "hint": "Input comes first.",
+      "help": {
+        "concept": "A basic password check reads input, compares it, then prints the result.",
+        "hint_1": "You must have the password before comparing it.",
+        "hint_2": "Output happens last."
+      }
+    },
+    "m2_cond_reorder_member_discount": {
+      "title": "Order the member discount flow",
+      "prompt": "Reorder the discount program steps.",
+      "tokens": {
+        "t1": "read subtotal and member flag",
+        "t2": "check if the customer is a member",
+        "t3": "compute the total",
+        "t4": "print the total"
+      },
+      "hint": "Computation comes after the membership check.",
+      "help": {
+        "concept": "The discount program reads inputs, checks the condition, computes the correct total, then shows it.",
+        "hint_1": "Do not print before computing.",
+        "hint_2": "The membership check comes before the final math."
+      }
+    },
+    "m2_cond_reorder_truthy_check": {
+      "title": "Order the truthy check idea",
+      "prompt": "Reorder the simple truthy-name pattern.",
+      "tokens": {
+        "t1": "read the name",
+        "t2": "check if it is empty",
+        "t3": "print the right greeting"
+      },
+      "hint": "The greeting depends on the input.",
+      "help": {
+        "concept": "Truthy/falsey checks often read a value, test whether it is empty, then choose an output.",
+        "hint_1": "The input must exist before checking it.",
+        "hint_2": "Greeting comes last."
+      }
     }
   }
 }

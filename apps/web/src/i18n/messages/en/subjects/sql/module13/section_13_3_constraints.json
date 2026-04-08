@@ -1,0 +1,310 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_13": {
+        "constraints": {
+          "label": "Constraints",
+          "summary": "Learn how `PRIMARY KEY`, `NOT NULL`, `UNIQUE`, and `FOREIGN KEY` help make table designs clearer, safer, and more relational.",
+          "cards": {
+            "sketch0": {
+              "title": "What does PRIMARY KEY do?"
+            },
+            "sketch1": {
+              "title": "What does NOT NULL do?"
+            },
+            "sketch2": {
+              "title": "What does UNIQUE do?"
+            },
+            "sketch3": {
+              "title": "What does FOREIGN KEY do?"
+            },
+            "quiz": {
+              "title": "Quiz: Constraints"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_13": {
+        "section_13_3": {
+          "primary_key": {
+            "title": "A primary key identifies one row in a table.",
+            "bodyMarkdown": "A `PRIMARY KEY` is the main row identifier.\n\nA beginner often uses it on an `id` column.\n\nThat helps each row have its own identity.\n\nSo the big idea is:\n\n> `PRIMARY KEY` helps identify one specific row"
+          },
+          "not_null": {
+            "title": "`NOT NULL` means the column must have a value.",
+            "bodyMarkdown": "Some columns are too important to leave empty.\n\nFor example, a table might require:\n\n- a product name\n- a student name\n- an order date\n\nSo the key idea is:\n\n> `NOT NULL` means the column should not be left missing"
+          },
+          "unique": {
+            "title": "`UNIQUE` means duplicate values are not allowed in that column.",
+            "bodyMarkdown": "A `UNIQUE` constraint is useful when repeated values would be a problem.\n\nExamples include:\n\n- usernames\n- emails\n- product codes\n\nSo the main idea is:\n\n> `UNIQUE` helps prevent repeated values in a column that should stay distinct"
+          },
+          "foreign_key": {
+            "title": "`FOREIGN KEY` connects one table to another.",
+            "bodyMarkdown": "A `FOREIGN KEY` is what lets one table point to a row in another table.\n\nThat is how relationships are formed.\n\nOnce you create foreign keys, the SQL workspace can show those links more clearly in **ERD** and **Chen** views.\n\nSo the important idea is:\n\n> `FOREIGN KEY` is what turns separate tables into related tables"
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "m13_s03_create_students_with_constraints": {
+      "title": "Use PRIMARY KEY and NOT NULL",
+      "prompt": "The SQLite workspace is using the blank `ddl_blank` dataset.\n\nWrite a query that creates a table named `students` with these columns and constraints:\n\n- `id` as `INTEGER PRIMARY KEY`\n- `name` as `TEXT NOT NULL`\n- `grade_level` as `INTEGER NOT NULL`\n- `city` as `TEXT`\n\nThen click **Run**.",
+      "help": {
+        "concept": "Constraints are written directly in the table definition, usually right next to the column type.",
+        "hint_1": "Add `PRIMARY KEY` to `id`, and `NOT NULL` to both `name` and `grade_level`.",
+        "hint_2": "Build the table normally, but extend the column definitions with the required constraint words in the right places."
+      },
+      "hint": "Add the constraint words directly into the column definitions.",
+      "starterCode": "-- Create a students table with PRIMARY KEY and NOT NULL\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "ddl_blank",
+        "resultShape": "table"
+      }
+    },
+    "m13_s03_create_products_with_unique": {
+      "title": "Use UNIQUE",
+      "prompt": "The dataset is blank.\n\nWrite a query that creates a table named `products` with these columns and constraints:\n\n- `id` as `INTEGER PRIMARY KEY`\n- `sku` as `TEXT UNIQUE`\n- `name` as `TEXT NOT NULL`\n- `price` as `REAL NOT NULL`\n\nThen run it.",
+      "help": {
+        "concept": "UNIQUE is useful when a column should not repeat values across different rows.",
+        "hint_1": "Add `UNIQUE` to the `sku` column definition.",
+        "hint_2": "Build the table normally, then include `UNIQUE` where the prompt says duplicates should not be allowed."
+      },
+      "hint": "Put UNIQUE on the sku column.",
+      "starterCode": "-- Create a products table with a UNIQUE sku\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "ddl_blank",
+        "resultShape": "table"
+      }
+    },
+    "m13_s03_create_orders_with_foreign_key": {
+      "title": "Use FOREIGN KEY",
+      "prompt": "The dataset is blank.\n\nWrite SQL that creates these two tables:\n\n1. `students`\n- `id` as `INTEGER PRIMARY KEY`\n- `name` as `TEXT NOT NULL`\n\n2. `orders`\n- `id` as `INTEGER PRIMARY KEY`\n- `student_id` as `INTEGER NOT NULL`\n- `order_date` as `TEXT NOT NULL`\n- plus a `FOREIGN KEY (student_id)` that references `students(id)`\n\nThen click **Run**.\nAfter that, open **ERD** and **Chen**.",
+      "help": {
+        "concept": "FOREIGN KEY creates a relationship between tables by referencing a primary key in another table.",
+        "hint_1": "Create the `students` table first, then create the `orders` table with the foreign key line.",
+        "hint_2": "Use two CREATE TABLE statements. In the second one, define the columns and add a separate `FOREIGN KEY (student_id) REFERENCES students(id)` line."
+      },
+      "hint": "Create students first, then add the FOREIGN KEY line inside orders.",
+      "starterCode": "-- Create related students and orders tables\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "ddl_blank",
+        "resultShape": "table"
+      }
+    },
+    "m13_s03_create_reviews_with_foreign_key": {
+      "title": "Use another foreign key",
+      "prompt": "The dataset is blank.\n\nWrite SQL that creates these two tables:\n\n1. `products`\n- `id` as `INTEGER PRIMARY KEY`\n- `name` as `TEXT NOT NULL`\n\n2. `reviews`\n- `id` as `INTEGER PRIMARY KEY`\n- `product_id` as `INTEGER NOT NULL`\n- `rating` as `INTEGER NOT NULL`\n- plus a `FOREIGN KEY (product_id)` that references `products(id)`\n\nThen run it.",
+      "help": {
+        "concept": "This is another beginner-friendly example of a relationship between two tables.",
+        "hint_1": "Create the main table first, then the related table.",
+        "hint_2": "Write two CREATE TABLE statements and place the FOREIGN KEY line inside the second table definition."
+      },
+      "hint": "Create the parent table first, then the related table with the FOREIGN KEY.",
+      "starterCode": "-- Create related products and reviews tables\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "ddl_blank",
+        "resultShape": "table"
+      }
+    },
+    "m13_s03_constraints_project": {
+      "title": "Practice constraints",
+      "prompt": "Use the SQL workspace on the right to practice constraints on the blank `ddl_blank` dataset.\n\nFor each task:\n\n1. write the table definition carefully\n2. click **Run**\n3. inspect the created table in **Tables**\n4. if there is a foreign key, inspect **ERD** and **Chen** too\n\nTasks:\n\n1. Create a `students` table with `PRIMARY KEY` and `NOT NULL`\n2. Create a `products` table with a `UNIQUE` sku\n3. Create `students` and `orders` with a foreign key link\n4. Create `products` and `reviews` with a foreign key link\n5. Create `users` with `id PRIMARY KEY`, `username UNIQUE`, and `email UNIQUE`\n\nRun one query at a time.\nThis project is about adding rules that make tables safer and clearer.",
+      "help": {
+        "concept": "Constraints are design rules that help identify rows, require values, prevent duplicates, and connect tables.",
+        "hint_1": "Read the prompt column by column and add the requested constraints directly where they belong.",
+        "hint_2": "Solve the tasks one by one. Focus first on what rule each column needs, then write the CREATE TABLE statement with those rules in place."
+      },
+      "hint": "Add each rule exactly where it belongs in the table definition.",
+      "starterCode": "-- Task 1\n-- Create a students table with PRIMARY KEY and NOT NULL\n\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "ddl_blank",
+        "resultShape": "table"
+      }
+    },
+    "m13_s03_primary_key_meaning": {
+      "title": "What does PRIMARY KEY do?",
+      "prompt": "What is the main job of a `PRIMARY KEY`?",
+      "help": {
+        "concept": "A primary key identifies one specific row in the table.",
+        "hint_1": "Think row identity.",
+        "hint_2": "It is the main identifier for rows in that table."
+      },
+      "hint": "Think one row identifier.",
+      "options": {
+        "a": "It identifies one specific row in the table",
+        "b": "It makes every value text",
+        "c": "It removes the need for table names",
+        "d": "It automatically inserts rows"
+      }
+    },
+    "m13_s03_not_null_meaning": {
+      "title": "What does NOT NULL do?",
+      "prompt": "What is the main idea of `NOT NULL`?",
+      "help": {
+        "concept": "NOT NULL requires that the column should have a value.",
+        "hint_1": "Think required value.",
+        "hint_2": "The column is not meant to be left missing."
+      },
+      "hint": "Think the column must have a value.",
+      "options": {
+        "a": "It means the column should not be left missing",
+        "b": "It means the column must be deleted",
+        "c": "It means the table must be empty",
+        "d": "It means every value becomes unique automatically"
+      }
+    },
+    "m13_s03_unique_meaning": {
+      "title": "What does UNIQUE do?",
+      "prompt": "What is the main idea of a `UNIQUE` constraint?",
+      "help": {
+        "concept": "UNIQUE prevents repeated values in that column.",
+        "hint_1": "Think no duplicates.",
+        "hint_2": "It is useful for values that should stay distinct across rows."
+      },
+      "hint": "Think no duplicate values allowed.",
+      "options": {
+        "a": "It prevents duplicate values in that column",
+        "b": "It turns the column into a foreign key",
+        "c": "It removes the need for a type",
+        "d": "It deletes repeated rows automatically after every query"
+      }
+    },
+    "m13_s03_foreign_key_meaning": {
+      "title": "What does FOREIGN KEY do?",
+      "prompt": "What is the main idea of a `FOREIGN KEY`?",
+      "help": {
+        "concept": "A foreign key points from one table to a row in another table.",
+        "hint_1": "Think relationship between tables.",
+        "hint_2": "It is what helps one table refer to another table's primary key."
+      },
+      "hint": "Think link one table to another.",
+      "options": {
+        "a": "It links one table to another table",
+        "b": "It forces every value to be decimal",
+        "c": "It hides the table from ERD",
+        "d": "It replaces the table name"
+      }
+    },
+    "m13_s03_constraints_goal_meaning": {
+      "title": "Why use constraints in table design?",
+      "prompt": "What is the main goal of adding constraints to a table design?",
+      "help": {
+        "concept": "Constraints add rules that make the design clearer and safer.",
+        "hint_1": "Think useful rules.",
+        "hint_2": "They help the table behave in more meaningful ways."
+      },
+      "hint": "Think rules that improve the table design.",
+      "options": {
+        "a": "Add useful rules that make the table safer and clearer",
+        "b": "Make the table harder to understand",
+        "c": "Remove all column names",
+        "d": "Replace CREATE TABLE"
+      }
+    },
+    "m13_s03_primary_key_true": {
+      "title": "What is true about PRIMARY KEY?",
+      "prompt": "Select all true statements about `PRIMARY KEY`.",
+      "help": {
+        "concept": "PRIMARY KEY is used to identify rows in a table.",
+        "hint_1": "Think row identity and ids.",
+        "hint_2": "Choose the statements about row identification."
+      },
+      "hint": "Think main row identifier.",
+      "options": {
+        "a": "It identifies rows in a table",
+        "b": "It is often used on an id column",
+        "c": "It is a core table-design constraint",
+        "d": "It means the table cannot have columns",
+        "e": "It helps later relationships make sense"
+      }
+    },
+    "m13_s03_not_null_true": {
+      "title": "What is true about NOT NULL?",
+      "prompt": "Select all true statements about `NOT NULL`.",
+      "help": {
+        "concept": "NOT NULL is useful when a column should always have a value.",
+        "hint_1": "Think required data.",
+        "hint_2": "Choose the statements about columns that should not be left missing."
+      },
+      "hint": "Think required-value columns.",
+      "options": {
+        "a": "It is useful for required columns",
+        "b": "It can be useful for names or important dates",
+        "c": "It means the column is not supposed to be missing",
+        "d": "It automatically creates a foreign key",
+        "e": "It adds a design rule to the column"
+      }
+    },
+    "m13_s03_unique_true": {
+      "title": "What is true about UNIQUE?",
+      "prompt": "Select all true statements about `UNIQUE`.",
+      "help": {
+        "concept": "UNIQUE prevents repeated values in columns that should stay distinct.",
+        "hint_1": "Think no duplicates in that column.",
+        "hint_2": "Choose the statements about distinct values."
+      },
+      "hint": "Think distinct column values.",
+      "options": {
+        "a": "It prevents duplicate values in the column",
+        "b": "It can be useful for usernames or product codes",
+        "c": "It is a rule about stored values",
+        "d": "It means the column must be a date",
+        "e": "It can make design intentions clearer"
+      }
+    },
+    "m13_s03_foreign_key_true": {
+      "title": "What is true about FOREIGN KEY?",
+      "prompt": "Select all true statements about `FOREIGN KEY`.",
+      "help": {
+        "concept": "FOREIGN KEY is what connects related tables.",
+        "hint_1": "Think relationships.",
+        "hint_2": "Choose the statements about one table referring to another."
+      },
+      "hint": "Think relationship columns.",
+      "options": {
+        "a": "It can connect one table to another",
+        "b": "It usually points to a key in another table",
+        "c": "It helps create relationships visible in ERD-style views",
+        "d": "It means every value must be unique text",
+        "e": "It turns separate tables into related tables"
+      }
+    },
+    "m13_s03_constraints_workflow_true": {
+      "title": "What matches a good beginner workflow for constraints?",
+      "prompt": "Select all statements that match a good beginner workflow for adding constraints.",
+      "help": {
+        "concept": "A good workflow is to decide what rule each column needs, then add that rule clearly in the table design.",
+        "hint_1": "Think rule by rule.",
+        "hint_2": "Choose the steps that help turn design needs into explicit constraints."
+      },
+      "hint": "Ask what rule each column needs before writing the constraint.",
+      "options": {
+        "a": "Decide which column should identify rows",
+        "b": "Decide which columns should always have a value",
+        "c": "Decide which columns should not allow duplicates",
+        "d": "Decide whether the table should link to another table",
+        "e": "Ignore what rules the columns need"
+      }
+    }
+  }
+}

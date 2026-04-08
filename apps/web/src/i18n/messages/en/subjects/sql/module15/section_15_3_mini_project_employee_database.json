@@ -1,0 +1,162 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_15": {
+        "mini_project_employee_database": {
+          "label": "Mini Project: Employee Database",
+          "summary": "Build a small employee database with departments, practice salary analysis, create department summaries, and write joined reports.",
+          "cards": {
+            "sketch0": {
+              "title": "How do you design employees and departments?"
+            },
+            "sketch1": {
+              "title": "How do you do salary analysis?"
+            },
+            "sketch2": {
+              "title": "How do you build department summaries?"
+            },
+            "sketch3": {
+              "title": "How do you write joined reports?"
+            },
+            "quiz": {
+              "title": "Quiz: Mini Project — Employee Database"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_15": {
+        "section_15_3": {
+          "employees_and_departments": {
+            "title": "Employees and departments make a strong beginner workplace database project.",
+            "bodyMarkdown": "This design is useful because it naturally includes:\n\n- one parent table\n- one child table\n- numeric fields like salary\n- grouped business questions\n\nSo the big idea is:\n\n> employee and department design is great practice for realistic SQL questions"
+          },
+          "salary_analysis": {
+            "title": "Salary analysis gives learners a practical reason to use aggregates.",
+            "bodyMarkdown": "Once salary data exists, learners can ask:\n\n- average salary\n- highest salary\n- lowest salary\n- salary by department\n\nSo the key idea is:\n\n> salary analysis makes aggregate SQL feel useful and concrete"
+          },
+          "department_summaries": {
+            "title": "Department summaries are a natural grouped-report exercise.",
+            "bodyMarkdown": "Departments are ideal for grouped reporting because learners can ask:\n\n- how many employees per department?\n- average salary per department?\n\nSo the main idea is:\n\n> department summaries are a clean beginner GROUP BY project"
+          },
+          "joined_reports": {
+            "title": "Joined reports help translate ids into readable employee and department information.",
+            "bodyMarkdown": "A good joined report can show:\n\n- employee name\n- department name\n- salary\n\nThat helps turn a relational design into a readable result table.\n\nSo the important idea is:\n\n> joined reports make the employee project feel more like real workplace SQL"
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "m15_s03_create_employee_schema": {
+      "title": "Create the employee project schema",
+      "prompt": "The SQLite workspace is using the blank `ddl_blank` dataset.\n\nWrite SQL that creates these two tables:\n\n1. `departments`\n- `id` as `INTEGER PRIMARY KEY`\n- `name` as `TEXT NOT NULL`\n\n2. `employees`\n- `id` as `INTEGER PRIMARY KEY`\n- `department_id` as `INTEGER NOT NULL`\n- `name` as `TEXT NOT NULL`\n- `salary` as `REAL NOT NULL`\n- `FOREIGN KEY (department_id)` references `departments(id)`\n\nThen click **Run**.",
+      "help": {
+        "concept": "This gives the employee project one department table and one employee table linked by a foreign key.",
+        "hint_1": "Create departments first.",
+        "hint_2": "Employees should store `department_id`, because many employees can belong to one department."
+      },
+      "hint": "Create departments first, then employees with the foreign key.",
+      "starterCode": "-- Create the employee project schema\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "ddl_blank",
+        "resultShape": "table"
+      }
+    },
+    "m15_s03_insert_employee_sample_data": {
+      "title": "Insert employee sample data",
+      "prompt": "The dataset is blank.\n\nWrite SQL that creates `departments` and `employees`, then inserts this sample data:\n\nDepartments:\n- (1, 'Sales')\n- (2, 'Engineering')\n\nEmployees:\n- (1, 1, 'Mia', 55000)\n- (2, 1, 'Leo', 60000)\n- (3, 2, 'Ava', 72000)\n\nThen click **Run**.",
+      "help": {
+        "concept": "The sample rows should be just enough to support aggregates and joined reports.",
+        "hint_1": "Create the tables first, then insert departments, then employees.",
+        "hint_2": "You do not need many rows. You only need enough rows to make salary and department reports meaningful."
+      },
+      "hint": "Create first, then insert a few departments and employees.",
+      "starterCode": "-- Create the employee schema and insert sample data\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "ddl_blank",
+        "resultShape": "table"
+      }
+    },
+    "m15_s03_salary_analysis_report": {
+      "title": "Run salary analysis",
+      "prompt": "The dataset is blank.\n\nWrite SQL that:\n\n1. creates `departments` and `employees`\n2. inserts a few sample rows\n3. returns a one-row report with the average salary, minimum salary, and maximum salary from `employees`\n\nThen click **Run**.",
+      "help": {
+        "concept": "This is the aggregate-analysis part of the employee mini project.",
+        "hint_1": "After inserting the sample rows, query only the employees table for this report.",
+        "hint_2": "Use aggregate functions on the salary column to return one summary row."
+      },
+      "hint": "Use AVG, MIN, and MAX on salary.",
+      "starterCode": "-- Build the employee project and return a salary summary row\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "ddl_blank",
+        "resultShape": "table"
+      }
+    },
+    "m15_s03_department_summary_report": {
+      "title": "Build a department summary",
+      "prompt": "The dataset is blank.\n\nWrite SQL that:\n\n1. creates `departments` and `employees`\n2. inserts a few sample rows\n3. returns each department name with the average salary in that department\n\nUse a join and `GROUP BY`, then run it.",
+      "help": {
+        "concept": "This exercise combines relational design, joins, aggregates, and grouped reporting.",
+        "hint_1": "Join departments to employees first.",
+        "hint_2": "Group by the department identity, and average the employee salary values within each group."
+      },
+      "hint": "Join first, then GROUP BY department, then average salary.",
+      "starterCode": "-- Build the employee project and return a department salary summary\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "ddl_blank",
+        "resultShape": "table"
+      }
+    },
+    "m15_s03_joined_employee_report": {
+      "title": "Build a joined employee report",
+      "prompt": "The dataset is blank.\n\nWrite SQL that:\n\n1. creates `departments` and `employees`\n2. inserts a few sample rows\n3. returns a joined report showing employee name, department name, and salary\n\nThen click **Run**.",
+      "help": {
+        "concept": "This is the readable joined-report version of the employee project.",
+        "hint_1": "Join employees to departments using the foreign key.",
+        "hint_2": "Return the human-readable names from both tables, plus the salary from employees."
+      },
+      "hint": "Join employees to departments and return readable columns.",
+      "starterCode": "-- Build the employee project and return a joined employee report\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "ddl_blank",
+        "resultShape": "table"
+      }
+    },
+    "m15_s03_employee_project_true": {
+      "title": "What is true about the employee mini project?",
+      "prompt": "Select all true statements about the employee mini project section.",
+      "help": {
+        "concept": "This section combines relational design with aggregate analysis and joined workplace-style reporting.",
+        "hint_1": "Think departments, employees, salary, summaries, joins.",
+        "hint_2": "Choose the statements about what this project is meant to practice."
+      },
+      "hint": "Think schema, salary analysis, grouped reports, and joins together.",
+      "options": {
+        "a": "It includes employees and departments",
+        "b": "It includes salary analysis",
+        "c": "It includes department summary reports",
+        "d": "It includes joined reports",
+        "e": "It combines several beginner SQL skills"
+      }
+    }
+  }
+}

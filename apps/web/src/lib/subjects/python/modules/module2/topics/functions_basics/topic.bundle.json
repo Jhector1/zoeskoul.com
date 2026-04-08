@@ -1,0 +1,288 @@
+{
+  "topicId": "functions_basics",
+  "minutes": 10,
+
+  "topic": {
+    "labelKey": "topics.python.python-2.functions_basics.label",
+    "summaryKey": "topics.python.python-2.functions_basics.summary"
+  },
+
+  "cards": [
+    {
+      "id": "sketch",
+      "kind": "sketch",
+      "titleKey": "topics.python.python-2.functions_basics.cards.sketch.title",
+      "sketchId": "basics",
+      "height": 520
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python.python-2.functions_basics.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "total_with_tip",
+            "titleKey": "topics.python.python-2.functions_basics.projectSteps.total_with_tip.title",
+            "exerciseKey": "m2_func_total_with_tip_code",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "shipping_cost",
+            "titleKey": "topics.python.python-2.functions_basics.projectSteps.shipping_cost.title",
+            "exerciseKey": "m2_func_shipping_rule_code",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "sum_list",
+            "titleKey": "topics.python.python-2.functions_basics.projectSteps.sum_list.title",
+            "exerciseKey": "m2_func_sum_list_code",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.python.python-2.functions_basics.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    }
+  ],
+
+  "sketches": [
+    {
+      "id": "basics",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python.python-2.functions_basics.basics.title",
+      "bodyKey": "sketches.python.python-2.functions_basics.basics.bodyMarkdown"
+    }
+  ],
+
+  "exercises": [
+    {
+      "id": "m2_func_total_with_tip_code",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "quiz.m2_func_total_with_tip_code",
+      "language": "python",
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          { "stdin": "40\n15\n", "stdout": "Total = 46\n", "match": "exact" },
+          { "stdin": "25\n20\n", "stdout": "Total = 30\n", "match": "exact" }
+        ],
+        "solutionCode": "def total_with_tip(bill, pct):\n    tip = bill * pct // 100\n    return bill + tip\n\nbill = int(input())\npct = int(input())\ntotal = total_with_tip(bill, pct)\nprint(f\"Total = {total}\")\n"
+      }
+    },
+    {
+      "id": "m2_func_shipping_rule_code",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "quiz.m2_func_shipping_rule_code",
+      "language": "python",
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          { "stdin": "60\n", "stdout": "Shipping = 0\n", "match": "exact" },
+          { "stdin": "40\n", "stdout": "Shipping = 7\n", "match": "exact" }
+        ],
+        "solutionCode": "def shipping_cost(total):\n    if total >= 50:\n        return 0\n    else:\n        return 7\n\ntotal = int(input())\nprint(f\"Shipping = {shipping_cost(total)}\")\n"
+      }
+    },
+    {
+      "id": "m2_func_sum_list_code",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "quiz.m2_func_sum_list_code",
+      "language": "python",
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          { "stdin": "3\n4\n5\n", "stdout": "sum = 12\n", "match": "exact" },
+          { "stdin": "10\n20\n30\n", "stdout": "sum = 60\n", "match": "exact" }
+        ],
+        "solutionCode": "def sum_list(xs):\n    total = 0\n    for x in xs:\n        total = total + x\n    return total\n\na = int(input())\nb = int(input())\nc = int(input())\nxs = [a, b, c]\nprint(f\"sum = {sum_list(xs)}\")\n"
+      }
+    },
+
+    {
+      "id": "m2_func_return_vs_print_sc",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_func_return_vs_print_sc",
+      "optionIds": ["a", "b", "c"],
+      "expected": { "kind": "single_choice", "optionId": "b" }
+    },
+    {
+      "id": "m2_func_parameters_vs_arguments_sc",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_func_parameters_vs_arguments_sc",
+      "optionIds": ["a", "b", "c"],
+      "expected": { "kind": "single_choice", "optionId": "c" }
+    },
+    {
+      "id": "m2_func_def_keyword_sc",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_func_def_keyword_sc",
+      "optionIds": ["a", "b", "c"],
+      "expected": { "kind": "single_choice", "optionId": "a" }
+    },
+    {
+      "id": "m2_func_scope_rule_sc",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_func_scope_rule_sc",
+      "optionIds": ["a", "b", "c"],
+      "expected": { "kind": "single_choice", "optionId": "b" }
+    },
+
+    {
+      "id": "m2_func_return_stops_mc",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_func_return_stops_mc",
+      "optionIds": ["a", "b", "c", "d"],
+      "expected": { "kind": "multi_choice", "optionIds": ["a", "c"] }
+    },
+    {
+      "id": "m2_func_calls_and_arguments_mc",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_func_calls_and_arguments_mc",
+      "optionIds": ["a", "b", "c", "d"],
+      "expected": { "kind": "multi_choice", "optionIds": ["a", "b", "d"] }
+    },
+    {
+      "id": "m2_func_sum_list_steps_mc",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_func_sum_list_steps_mc",
+      "optionIds": ["a", "b", "c", "d"],
+      "expected": { "kind": "multi_choice", "optionIds": ["a", "c", "d"] }
+    },
+
+    {
+      "id": "m2_func_fill_def_meaning",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_func_fill_def_meaning",
+      "choiceCount": 4,
+      "expected": { "kind": "fill_blank_choice", "value": "function" }
+    },
+    {
+      "id": "m2_func_fill_return_role",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_func_fill_return_role",
+      "choiceCount": 4,
+      "expected": { "kind": "fill_blank_choice", "value": "caller" }
+    },
+    {
+      "id": "m2_func_fill_parameter_name",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_func_fill_parameter_name",
+      "choiceCount": 4,
+      "expected": { "kind": "fill_blank_choice", "value": "definition" }
+    },
+    {
+      "id": "m2_func_fill_scope_rule",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_func_fill_scope_rule",
+      "choiceCount": 4,
+      "expected": { "kind": "fill_blank_choice", "value": "inside" }
+    },
+    {
+      "id": "m2_func_fill_reuse_benefit",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_func_fill_reuse_benefit",
+      "choiceCount": 4,
+      "expected": { "kind": "fill_blank_choice", "value": "repeating" }
+    },
+
+    {
+      "id": "m2_func_reorder_function_flow",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_func_reorder_function_flow",
+      "tokenIds": ["t1", "t2", "t3"],
+      "expected": { "kind": "drag_reorder", "tokenIds": ["t1", "t2", "t3"] }
+    },
+    {
+      "id": "m2_func_reorder_tip_helper",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_func_reorder_tip_helper",
+      "tokenIds": ["t1", "t2", "t3", "t4"],
+      "expected": { "kind": "drag_reorder", "tokenIds": ["t1", "t2", "t3", "t4"] }
+    },
+    {
+      "id": "m2_func_reorder_return_idea",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_func_reorder_return_idea",
+      "tokenIds": ["t1", "t2", "t3"],
+      "expected": { "kind": "drag_reorder", "tokenIds": ["t1", "t2", "t3"] }
+    },
+    {
+      "id": "m2_func_reorder_sum_list_steps",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_func_reorder_sum_list_steps",
+      "tokenIds": ["t1", "t2", "t3", "t4"],
+      "expected": { "kind": "drag_reorder", "tokenIds": ["t1", "t2", "t3", "t4"] }
+    },
+    {
+      "id": "m2_func_reorder_scope_rule",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_func_reorder_scope_rule",
+      "tokenIds": ["t1", "t2", "t3"],
+      "expected": { "kind": "drag_reorder", "tokenIds": ["t1", "t2", "t3"] }
+    }
+  ]
+}

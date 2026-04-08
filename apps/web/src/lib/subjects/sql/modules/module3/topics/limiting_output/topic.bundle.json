@@ -1,0 +1,463 @@
+{
+  "topicId": "limiting_output",
+  "subjectSlug": "sql",
+  "moduleSlug": "sql_module_3",
+  "sectionSlug": "section_3_1",
+  "prefix": "sql3",
+  "minutes": 8,
+
+  "topic": {
+    "labelKey": "topics.sql.sql_module_3.limiting_output.label",
+    "summaryKey": "topics.sql.sql_module_3.limiting_output.summary"
+  },
+
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_3.limiting_output.cards.sketch0.title",
+      "sketchId": "why_limit_results",
+      "height": 520
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_3.limiting_output.cards.sketch1.title",
+      "sketchId": "limit_keyword",
+      "height": 520
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_3.limiting_output.cards.sketch2.title",
+      "sketchId": "top_rows_only",
+      "height": 520
+    },
+    {
+      "id": "sketch3",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_3.limiting_output.cards.sketch3.title",
+      "sketchId": "combining_order_by_with_limit",
+      "height": 520
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.sql.sql_module_3.limiting_output.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "show_first_3_names",
+            "titleKey": "topics.sql.sql_module_3.limiting_output.projectSteps.show_first_3_names.title",
+            "exerciseKey": "m3_s03_show_first_3_names",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "top_2_highest_prices",
+            "titleKey": "topics.sql.sql_module_3.limiting_output.projectSteps.top_2_highest_prices.title",
+            "exerciseKey": "m3_s03_top_2_highest_prices",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "lowest_4_stock",
+            "titleKey": "topics.sql.sql_module_3.limiting_output.projectSteps.lowest_4_stock.title",
+            "exerciseKey": "m3_s03_lowest_4_stock",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "newest_3_products",
+            "titleKey": "topics.sql.sql_module_3.limiting_output.projectSteps.newest_3_products.title",
+            "exerciseKey": "m3_s03_newest_3_products",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "oldest_2_products",
+            "titleKey": "topics.sql.sql_module_3.limiting_output.projectSteps.oldest_2_products.title",
+            "exerciseKey": "m3_s03_oldest_2_products",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql.sql_module_3.limiting_output.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 3,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    }
+  ],
+
+  "sketches": [
+    {
+      "id": "why_limit_results",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_3.limiting_output.why_limit_results.title",
+      "bodyKey": "sketches.sql.sql_module_3.limiting_output.why_limit_results.bodyMarkdown"
+    },
+    {
+      "id": "limit_keyword",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_3.limiting_output.limit_keyword.title",
+      "bodyKey": "sketches.sql.sql_module_3.limiting_output.limit_keyword.bodyMarkdown"
+    },
+    {
+      "id": "top_rows_only",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_3.limiting_output.top_rows_only.title",
+      "bodyKey": "sketches.sql.sql_module_3.limiting_output.top_rows_only.bodyMarkdown"
+    },
+    {
+      "id": "combining_order_by_with_limit",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_3.limiting_output.combining_order_by_with_limit.title",
+      "bodyKey": "sketches.sql.sql_module_3.limiting_output.combining_order_by_with_limit.bodyMarkdown"
+    }
+  ],
+
+  "exercises": [
+    {
+      "id": "m3_s03_show_first_3_names",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "quiz.m3_s03_show_first_3_names",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "SELECT name FROM products LIMIT 3;"
+      }
+    },
+    {
+      "id": "m3_s03_top_2_highest_prices",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "quiz.m3_s03_top_2_highest_prices",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "SELECT name, price FROM products ORDER BY price DESC LIMIT 2;"
+      }
+    },
+    {
+      "id": "m3_s03_lowest_4_stock",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "quiz.m3_s03_lowest_4_stock",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "SELECT name, stock FROM products ORDER BY stock LIMIT 4;"
+      }
+    },
+    {
+      "id": "m3_s03_newest_3_products",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "quiz.m3_s03_newest_3_products",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "SELECT name, created_at FROM products ORDER BY created_at DESC LIMIT 3;"
+      }
+    },
+    {
+      "id": "m3_s03_oldest_2_products",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "quiz.m3_s03_oldest_2_products",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "SELECT name, created_at FROM products ORDER BY created_at ASC LIMIT 2;"
+      }
+    },
+
+    {
+      "id": "m3_s03_why_limit",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m3_s03_why_limit",
+      "optionIds": ["a", "b", "c", "d"],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "m3_s03_limit_job",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m3_s03_limit_job",
+      "optionIds": ["a", "b", "c", "d"],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "m3_s03_top_rows_meaning",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m3_s03_top_rows_meaning",
+      "optionIds": ["a", "b", "c", "d"],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "m3_s03_order_by_limit_combo",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m3_s03_order_by_limit_combo",
+      "optionIds": ["a", "b", "c", "d"],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "m3_s03_check_limited_result",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m3_s03_check_limited_result",
+      "optionIds": ["a", "b", "c", "d"],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+
+    {
+      "id": "m3_s03_limit_true",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m3_s03_limit_true",
+      "optionIds": ["a", "b", "c", "d", "e"],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": ["a", "b", "c", "e"]
+      }
+    },
+    {
+      "id": "m3_s03_top_rows_true",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m3_s03_top_rows_true",
+      "optionIds": ["a", "b", "c", "d", "e"],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": ["a", "b", "c", "e"]
+      }
+    },
+    {
+      "id": "m3_s03_order_by_limit_true",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m3_s03_order_by_limit_true",
+      "optionIds": ["a", "b", "c", "d", "e"],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": ["a", "b", "c", "e"]
+      }
+    },
+    {
+      "id": "m3_s03_limit_benefits_true",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m3_s03_limit_benefits_true",
+      "optionIds": ["a", "b", "c", "d", "e"],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": ["a", "b", "c", "e"]
+      }
+    },
+    {
+      "id": "m3_s03_limit_workflow_true",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m3_s03_limit_workflow_true",
+      "optionIds": ["a", "b", "c", "d", "e"],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": ["a", "b", "c", "d"]
+      }
+    },
+
+    {
+      "id": "m3_s03_reorder_limit_purpose",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m3_s03_reorder_limit_purpose",
+      "tokenIds": ["t1", "t2", "t3"],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": ["t1", "t2", "t3"]
+      }
+    },
+    {
+      "id": "m3_s03_reorder_limit_flow",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m3_s03_reorder_limit_flow",
+      "tokenIds": ["t1", "t2", "t3"],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": ["t1", "t2", "t3"]
+      }
+    },
+    {
+      "id": "m3_s03_reorder_top_rows_logic",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m3_s03_reorder_top_rows_logic",
+      "tokenIds": ["t1", "t2", "t3"],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": ["t1", "t2", "t3"]
+      }
+    },
+    {
+      "id": "m3_s03_reorder_order_limit_combo",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m3_s03_reorder_order_limit_combo",
+      "tokenIds": ["t1", "t2", "t3"],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": ["t1", "t2", "t3"]
+      }
+    },
+    {
+      "id": "m3_s03_reorder_limit_workflow",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m3_s03_reorder_limit_workflow",
+      "tokenIds": ["t1", "t2", "t3"],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": ["t1", "t2", "t3"]
+      }
+    },
+
+    {
+      "id": "m3_s03_fill_limit_keyword",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m3_s03_fill_limit_keyword",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "LIMIT"
+      }
+    },
+    {
+      "id": "m3_s03_fill_limit_job_word",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m3_s03_fill_limit_job_word",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "rows"
+      }
+    },
+    {
+      "id": "m3_s03_fill_top_rows_basis",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m3_s03_fill_top_rows_basis",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "order"
+      }
+    },
+    {
+      "id": "m3_s03_fill_order_by_role",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m3_s03_fill_order_by_role",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "top"
+      }
+    },
+    {
+      "id": "m3_s03_fill_limit_check",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m3_s03_fill_limit_check",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "count"
+      }
+    }
+  ]
+}

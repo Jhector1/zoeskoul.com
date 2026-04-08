@@ -1,0 +1,216 @@
+{
+  "topicId": "editor_workspace_overview",
+  "minutes": 8,
+
+  "topic": {
+    "labelKey": "topics.python.python-0.editor_workspace_overview.label",
+    "summaryKey": "topics.python.python-0.editor_workspace_overview.summary"
+  },
+
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python.python-0.editor_workspace_overview.cards.sketch0.title",
+      "sketchId": "intro",
+      "height": 520
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python.python-0.editor_workspace_overview.cards.sketch1.title",
+      "sketchId": "instructions_intro",
+      "height": 520
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.python.python-0.editor_workspace_overview.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 3,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    }
+  ],
+
+  "sketches": [
+    {
+      "id": "intro",
+      "archetype": "image_annotated",
+      "titleKey": "sketches.python.python-0.editor_workspace_overview.intro.title",
+      "altKey": "sketches.python.python-0.editor_workspace_overview.intro.alt",
+      "captionKey": "sketches.python.python-0.editor_workspace_overview.intro.caption",
+      "markersBase": "sketches.python.python-0.editor_workspace_overview.intro.markers"
+    },
+    {
+      "id": "instructions_intro",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python.python-0.editor_workspace_overview.instructions_intro.title",
+      "bodyKey": "sketches.python.python-0.editor_workspace_overview.instructions_intro.bodyMarkdown"
+    }
+  ],
+
+  "exercises": [
+    {
+      "id": "m0_workspace_run_button",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m0_workspace_run_button",
+      "optionIds": ["a", "b", "c"],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "m0_workspace_terminal_output",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m0_workspace_terminal_output",
+      "optionIds": ["a", "b", "c"],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "m0_workspace_editor_area",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m0_workspace_editor_area",
+      "optionIds": ["a", "b", "c"],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+
+    {
+      "id": "m0_workspace_fill_run_action",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m0_workspace_fill_run_action",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "executes"
+      }
+    },
+    {
+      "id": "m0_workspace_fill_output_area",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m0_workspace_fill_output_area",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "terminal"
+      }
+    },
+    {
+      "id": "m0_workspace_fill_write_place",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m0_workspace_fill_write_place",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "editor"
+      }
+    },
+    {
+      "id": "m0_workspace_fill_left_panel",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m0_workspace_fill_left_panel",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "sidebar"
+      }
+    },
+    {
+      "id": "m0_workspace_fill_run_icon",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m0_workspace_fill_run_icon",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "triangle"
+      }
+    },
+
+    {
+      "id": "m0_workspace_reorder_basic_flow",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m0_workspace_reorder_basic_flow",
+      "tokenIds": ["t1", "t2", "t3", "t4"],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": ["t1", "t2", "t3", "t4"]
+      }
+    },
+    {
+      "id": "m0_workspace_reorder_layout",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m0_workspace_reorder_layout",
+      "tokenIds": ["t1", "t2", "t3", "t4"],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": ["t1", "t2", "t3", "t4"]
+      }
+    },
+    {
+      "id": "m0_workspace_reorder_run_result",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m0_workspace_reorder_run_result",
+      "tokenIds": ["t1", "t2", "t3"],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": ["t1", "t2", "t3"]
+      }
+    },
+    {
+      "id": "m0_workspace_reorder_first_steps",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m0_workspace_reorder_first_steps",
+      "tokenIds": ["t1", "t2", "t3"],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": ["t1", "t2", "t3"]
+      }
+    },
+    {
+      "id": "m0_workspace_reorder_sidebar_use",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m0_workspace_reorder_sidebar_use",
+      "tokenIds": ["t1", "t2", "t3"],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": ["t1", "t2", "t3"]
+      }
+    }
+  ]
+}

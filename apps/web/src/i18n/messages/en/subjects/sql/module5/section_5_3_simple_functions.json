@@ -1,0 +1,451 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_5": {
+        "simple_functions": {
+          "label": "Simple Functions",
+          "summary": "Learn how simple SQL functions transform text, numbers, and dates so results become cleaner and more useful.",
+          "cards": {
+            "sketch0": {
+              "title": "What is a SQL function?"
+            },
+            "sketch1": {
+              "title": "How do string functions help?"
+            },
+            "sketch2": {
+              "title": "How do number functions help?"
+            },
+            "sketch3": {
+              "title": "What should beginners know about date functions?"
+            },
+            "quiz": {
+              "title": "Quiz: Simple Functions"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_5": {
+        "simple_functions": {
+          "intro_to_functions": {
+            "title": "A function is a built-in tool that transforms a value.",
+            "bodyMarkdown": "A SQL **function** takes a value, does something to it, and returns a result.\n\nFunctions are useful when you want to:\n\n- change text\n- round numbers\n- work with dates\n\nSo the big idea is:\n\n> a function helps SQL transform values in the result\n\nLike expressions, functions do not need to permanently change the table.\nThey help shape the query output."
+          },
+          "string_functions": {
+            "title": "String functions help change or inspect text values.",
+            "bodyMarkdown": "String functions work with text.\n\nBeginner examples include:\n\n- making text uppercase\n- making text lowercase\n- checking text length\n\nThese are useful when you want more consistent or informative output.\n\nSo the key idea is:\n\n> string functions help format or inspect text values"
+          },
+          "number_functions": {
+            "title": "Number functions help adjust or clean numeric results.",
+            "bodyMarkdown": "Number functions are useful when you want numeric output to be easier to read.\n\nA beginner example is rounding.\n\nThat is helpful when a calculated value has more detail than you want to show.\n\nSo the big idea is:\n\n> number functions help shape numeric output into a cleaner form"
+          },
+          "date_function_awareness": {
+            "title": "Date functions help work with date values in a more deliberate way.",
+            "bodyMarkdown": "Dates often need special handling.\n\nEven when a date already looks readable, SQL functions can still help you treat it as a date value in the result.\n\nA beginner does not need to master every date function yet.\n\nThe important idea is:\n\n- dates are their own kind of value\n- SQL has built-in tools for them too\n\nSo a good beginner mindset is:\n\n> be aware that dates can be transformed or checked with functions, just like text and numbers"
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "m5_s03_uppercase_customer_names": {
+      "title": "Use a string function",
+      "prompt": "The SQLite workspace already has a table named `orders`.\n\nWrite a query that returns `customer_name` and another result column that shows `customer_name` in uppercase.\n\nRun it and compare the two columns.",
+      "help": {
+        "concept": "A string function can transform text into a different form in the result.",
+        "hint_1": "Select the original `customer_name`, then use a text function on that same column to create an uppercase version.",
+        "hint_2": "Build the query with the original column first, then add one more selected value that applies an uppercase text function to it."
+      },
+      "hint": "Use an uppercase string function on `customer_name`.",
+      "starterCode": "-- Show customer_name and an uppercase version of it\n"
+    },
+    "m5_s03_lowercase_category": {
+      "title": "Use another string function",
+      "prompt": "The `orders` table already exists.\n\nWrite a query that returns `category` and another result column that shows `category` in lowercase.\n\nThen click **Run**.",
+      "help": {
+        "concept": "String functions can change the letter case of text values.",
+        "hint_1": "Select `category`, then apply a lowercase text function to that same column.",
+        "hint_2": "Keep the original text column in the result, and add one transformed version beside it using a lowercase string function."
+      },
+      "hint": "Use a lowercase string function on `category`.",
+      "starterCode": "-- Show category and a lowercase version of it\n"
+    },
+    "m5_s03_name_length": {
+      "title": "Measure text length",
+      "prompt": "The `orders` table already exists.\n\nWrite a query that returns `customer_name` and another result column showing the length of each `customer_name`.\n\nRun it and inspect the numeric results.",
+      "help": {
+        "concept": "Some string functions inspect text instead of changing its letters.",
+        "hint_1": "Select `customer_name`, then use a function that counts how many characters are in it.",
+        "hint_2": "Build the query with the original name column and one extra selected value that measures that text."
+      },
+      "hint": "Use a length function on `customer_name`.",
+      "starterCode": "-- Show customer_name and the length of customer_name\n"
+    },
+    "m5_s03_round_total_price": {
+      "title": "Use a number function",
+      "prompt": "The `orders` table already exists.\n\nWrite a query that returns `customer_name` and a calculated total using `quantity` and `unit_price`, but round that total to 2 decimal places in the result.\n\nThen click **Run**.",
+      "help": {
+        "concept": "Number functions can make calculated results cleaner, such as by rounding them.",
+        "hint_1": "First think about the total expression, then wrap that calculated value in a rounding function.",
+        "hint_2": "Build the total from the two numeric columns, then apply a number function that keeps only 2 decimal places."
+      },
+      "hint": "Round the total expression.",
+      "starterCode": "-- Show customer_name and a rounded total price\n"
+    },
+    "m5_s03_date_awareness_query": {
+      "title": "Use a date-aware function",
+      "prompt": "The `orders` table already exists.\n\nWrite a query that returns `customer_name`, `order_date`, and another result column that applies a date function to `order_date`.\n\nRun it and notice that SQL also has functions for dates.",
+      "help": {
+        "concept": "Date functions help SQL treat date-like values more deliberately.",
+        "hint_1": "Select the original `order_date`, then add one more selected value that applies a date-oriented function to that same column.",
+        "hint_2": "Build the query with the original date column visible, then add one transformed version beside it using a beginner-friendly date function."
+      },
+      "hint": "Apply a date function to `order_date`.",
+      "starterCode": "-- Show customer_name, order_date, and a date-function version of order_date\n"
+    },
+    "m5_s03_functions_project": {
+      "title": "Practice simple functions",
+      "prompt": "Use the SQL workspace on the right to practice simple functions on the `orders` table.\n\nFor each task:\n\n1. type the query in the editor\n2. click **Run**\n3. read the **Results** tab\n4. compare the original value with the transformed value\n\nTasks:\n\n1. Show `customer_name` and an uppercase version of it\n2. Show `category` and a lowercase version of it\n3. Show `customer_name` and the length of each name\n4. Show a rounded total using `quantity` and `unit_price`\n5. Show `order_date` and a date-function version of it\n\nRun one query at a time.\nThis project is about using simple functions to shape query output.",
+      "help": {
+        "concept": "Functions transform values in the result so output becomes easier to work with or read.",
+        "hint_1": "Each task keeps the same idea: show the original value, then show a transformed version created by a function.",
+        "hint_2": "Solve the tasks one by one. Decide whether the value is text, number, or date-like, then choose a matching function and place it in the select list."
+      },
+      "hint": "Show the original value and a transformed version.",
+      "starterCode": "-- Task 1\n-- Show customer_name and an uppercase version of it\n\n"
+    },
+
+    "m5_s03_function_meaning": {
+      "title": "What is a SQL function?",
+      "prompt": "What is the main job of a function in a SQL query?",
+      "help": {
+        "concept": "A function transforms or inspects a value and returns a result.",
+        "hint_1": "Think built-in tool for values.",
+        "hint_2": "It helps change, shape, or inspect data in the query output."
+      },
+      "hint": "Think transform a value.",
+      "options": {
+        "a": "It transforms or inspects a value in the query",
+        "b": "It always deletes rows",
+        "c": "It replaces the table name",
+        "d": "It removes the need for columns"
+      }
+    },
+    "m5_s03_string_functions_meaning": {
+      "title": "What do string functions help with?",
+      "prompt": "What are string functions mainly used for in beginner SQL?",
+      "help": {
+        "concept": "String functions work with text values.",
+        "hint_1": "Think uppercase, lowercase, length.",
+        "hint_2": "These functions help format or inspect text."
+      },
+      "hint": "Think text values.",
+      "options": {
+        "a": "Formatting or inspecting text values",
+        "b": "Only sorting rows",
+        "c": "Creating databases",
+        "d": "Ignoring text completely"
+      }
+    },
+    "m5_s03_number_functions_meaning": {
+      "title": "What do number functions help with?",
+      "prompt": "What are number functions mainly used for in beginner SQL?",
+      "help": {
+        "concept": "Number functions help clean or shape numeric output.",
+        "hint_1": "Think rounding.",
+        "hint_2": "They help make numeric results easier to read or use."
+      },
+      "hint": "Think numeric cleanup.",
+      "options": {
+        "a": "Cleaning or shaping numeric results",
+        "b": "Only renaming text columns",
+        "c": "Making `WHERE` disappear",
+        "d": "Changing every row into text"
+      }
+    },
+    "m5_s03_date_functions_awareness": {
+      "title": "What should beginners know about date functions?",
+      "prompt": "What is a good beginner idea to remember about date functions in SQL?",
+      "help": {
+        "concept": "Dates are a special kind of value, and SQL has built-in tools for working with them.",
+        "hint_1": "Think dates are not just random text forever.",
+        "hint_2": "The key awareness is that SQL can also transform or inspect date-like values."
+      },
+      "hint": "Think SQL has tools for dates too.",
+      "options": {
+        "a": "SQL has built-in functions for working with date values too",
+        "b": "Dates can never appear in queries",
+        "c": "Date functions only work in spreadsheets",
+        "d": "Dates always behave exactly like aliases"
+      }
+    },
+    "m5_s03_reading_function_output": {
+      "title": "How should you read function output?",
+      "prompt": "What is a good beginner way to read a query result that includes a function?",
+      "help": {
+        "concept": "A strong habit is to compare the original value with the transformed value returned by the function.",
+        "hint_1": "Look at both columns together.",
+        "hint_2": "Check whether the transformed result matches what the function is supposed to do."
+      },
+      "hint": "Compare original and transformed values.",
+      "options": {
+        "a": "Compare the original value with the transformed value",
+        "b": "Ignore the original value",
+        "c": "Skip the result headers",
+        "d": "Assume the function worked without checking"
+      }
+    },
+
+    "m5_s03_functions_true": {
+      "title": "What is true about SQL functions?",
+      "prompt": "Select all true statements about functions in beginner SQL.",
+      "help": {
+        "concept": "Functions help transform or inspect values inside the query result.",
+        "hint_1": "Think built-in helpers.",
+        "hint_2": "Choose the statements about shaping values in the output."
+      },
+      "hint": "Think transform or inspect.",
+      "options": {
+        "a": "Functions can transform values",
+        "b": "Functions can inspect values",
+        "c": "Functions can be used in selected results",
+        "d": "Functions always delete columns",
+        "e": "Functions can help make output more useful"
+      }
+    },
+    "m5_s03_string_true": {
+      "title": "What is true about string functions?",
+      "prompt": "Select all true statements about string functions in beginner SQL.",
+      "help": {
+        "concept": "String functions work with text values.",
+        "hint_1": "Think uppercase, lowercase, length.",
+        "hint_2": "Choose the statements about formatting or examining text."
+      },
+      "hint": "Think text functions.",
+      "options": {
+        "a": "String functions can change letter case",
+        "b": "String functions can inspect text length",
+        "c": "String functions work with text values",
+        "d": "String functions are only for deleting rows",
+        "e": "String functions can make text output easier to read"
+      }
+    },
+    "m5_s03_number_true": {
+      "title": "What is true about number functions?",
+      "prompt": "Select all true statements about number functions in beginner SQL.",
+      "help": {
+        "concept": "Number functions help shape numeric results.",
+        "hint_1": "Think rounding or cleaning a calculation.",
+        "hint_2": "Choose the statements about making numeric output easier to work with."
+      },
+      "hint": "Think numeric formatting.",
+      "options": {
+        "a": "Number functions can help round calculated values",
+        "b": "Number functions can make numeric output cleaner",
+        "c": "Number functions can be used in selected results",
+        "d": "Number functions always rename tables",
+        "e": "Number functions are useful in report-style queries"
+      }
+    },
+    "m5_s03_date_true": {
+      "title": "What is true about date functions?",
+      "prompt": "Select all true statements about date functions in beginner SQL.",
+      "help": {
+        "concept": "Date functions help SQL work with date-like values more deliberately.",
+        "hint_1": "Think dates are a value type SQL can work with.",
+        "hint_2": "Choose the statements about date transformation or date awareness."
+      },
+      "hint": "Think SQL tools for dates.",
+      "options": {
+        "a": "SQL can use functions on date-like values",
+        "b": "Date functions can appear in selected results",
+        "c": "Dates are worth treating carefully in queries",
+        "d": "Date functions make text functions impossible",
+        "e": "Beginners should know that SQL has date tools too"
+      }
+    },
+    "m5_s03_function_workflow_true": {
+      "title": "What matches a good beginner workflow for using functions?",
+      "prompt": "Select all statements that match a good beginner workflow for function queries.",
+      "help": {
+        "concept": "A good workflow is to identify the value type, choose the right function, run the query, and verify the output.",
+        "hint_1": "Think type, function, run, compare.",
+        "hint_2": "Choose the steps that help you transform values on purpose."
+      },
+      "hint": "Choose the right function for the value type.",
+      "options": {
+        "a": "Identify whether the value is text, number, or date-like",
+        "b": "Choose a function that matches that value type",
+        "c": "Run the query and inspect the transformed output",
+        "d": "Compare the transformed result with the original value",
+        "e": "Ignore whether the function matches the value type"
+      }
+    },
+
+    "m5_s03_fill_function_returns": {
+      "title": "What a function returns",
+      "prompt": "Fill in the blank with the best word.",
+      "template": "A SQL function takes a value, transforms it, and returns a ____.",
+      "choices": {
+        "0": "result",
+        "1": "table name",
+        "2": "folder",
+        "3": "server"
+      },
+      "hint": "A function returns a transformed value.",
+      "help": {
+        "concept": "Functions transform a value and give back a result.",
+        "hint_1": "Think output of the function.",
+        "hint_2": "The missing word is `result`."
+      }
+    },
+    "m5_s03_fill_uppercase_fn": {
+      "title": "Uppercase function",
+      "prompt": "Fill in the blank with the function name.",
+      "template": "To make text uppercase in SQL, use ____.",
+      "choices": {
+        "0": "UPPER",
+        "1": "LOWER",
+        "2": "ROUND",
+        "3": "DATE"
+      },
+      "hint": "Use the string function that capitalizes text.",
+      "help": {
+        "concept": "UPPER transforms text to uppercase.",
+        "hint_1": "Think capital letters.",
+        "hint_2": "The correct function is `UPPER`."
+      }
+    },
+    "m5_s03_fill_lowercase_fn": {
+      "title": "Lowercase function",
+      "prompt": "Fill in the blank with the function name.",
+      "template": "To make text lowercase in SQL, use ____.",
+      "choices": {
+        "0": "LOWER",
+        "1": "UPPER",
+        "2": "LENGTH",
+        "3": "ROUND"
+      },
+      "hint": "Use the string function that makes text lowercase.",
+      "help": {
+        "concept": "LOWER transforms text to lowercase.",
+        "hint_1": "Think small letters.",
+        "hint_2": "The correct function is `LOWER`."
+      }
+    },
+    "m5_s03_fill_rounding_fn": {
+      "title": "Rounding function",
+      "prompt": "Fill in the blank with the function name.",
+      "template": "To round a numeric result in SQL, use ____.",
+      "choices": {
+        "0": "ROUND",
+        "1": "UPPER",
+        "2": "DATE",
+        "3": "FROM"
+      },
+      "hint": "Use the function that cleans up decimal output.",
+      "help": {
+        "concept": "ROUND helps shape numeric output into a cleaner form.",
+        "hint_1": "Think decimal places.",
+        "hint_2": "The correct function is `ROUND`."
+      }
+    },
+    "m5_s03_fill_compare_output": {
+      "title": "How to read function output",
+      "prompt": "Fill in the blank with the best word.",
+      "template": "A good beginner habit is to compare the transformed value with the ____ value.",
+      "choices": {
+        "0": "original",
+        "1": "hidden",
+        "2": "deleted",
+        "3": "wrong"
+      },
+      "hint": "You should compare before and after.",
+      "help": {
+        "concept": "Checking the original value helps you understand what the function changed.",
+        "hint_1": "Look at both columns together.",
+        "hint_2": "The missing word is `original`."
+      }
+    },
+
+    "m5_s03_reorder_function_workflow": {
+      "title": "Order the function workflow",
+      "prompt": "Reorder the steps into a good beginner workflow for using functions in a query.",
+      "tokens": {
+        "t1": "identify the value type",
+        "t2": "choose the matching function",
+        "t3": "run the query",
+        "t4": "compare original and transformed output"
+      },
+      "hint": "Type first, then function.",
+      "help": {
+        "concept": "A good workflow helps you choose and verify the right transformation.",
+        "hint_1": "Decide the value type before choosing the function.",
+        "hint_2": "Comparison comes after running the query."
+      }
+    },
+    "m5_s03_reorder_upper_pattern": {
+      "title": "Order an uppercase pattern",
+      "prompt": "Reorder the parts into a common uppercase function pattern.",
+      "tokens": {
+        "t1": "UPPER",
+        "t2": "(",
+        "t3": "customer_name)"
+      },
+      "hint": "Function name first, then parentheses around the column.",
+      "help": {
+        "concept": "String functions wrap a text column in function-call syntax.",
+        "hint_1": "Start with the function name.",
+        "hint_2": "Then open the parentheses."
+      }
+    },
+    "m5_s03_reorder_round_pattern": {
+      "title": "Order a rounding pattern",
+      "prompt": "Reorder the parts into a common rounding pattern.",
+      "tokens": {
+        "t1": "ROUND",
+        "t2": "(quantity * unit_price,",
+        "t3": "2)"
+      },
+      "hint": "Function name first, then expression and decimal places.",
+      "help": {
+        "concept": "ROUND can wrap a calculated expression and keep a chosen number of decimal places.",
+        "hint_1": "Start with `ROUND`.",
+        "hint_2": "The decimal-place argument comes last."
+      }
+    },
+    "m5_s03_reorder_read_output": {
+      "title": "Order how to read function output",
+      "prompt": "Reorder the steps into a good way to read function results.",
+      "tokens": {
+        "t1": "look at the original value",
+        "t2": "look at the transformed value",
+        "t3": "check whether the function did the expected change"
+      },
+      "hint": "Read the original value before judging the transformed one.",
+      "help": {
+        "concept": "Comparing original and transformed values helps confirm the function worked as expected.",
+        "hint_1": "Start with the source value.",
+        "hint_2": "Then judge the change."
+      }
+    },
+    "m5_s03_reorder_value_types": {
+      "title": "Order the value types",
+      "prompt": "Reorder the value categories in the same sequence emphasized in this lesson.",
+      "tokens": {
+        "t1": "text",
+        "t2": "number",
+        "t3": "date"
+      },
+      "hint": "Follow the lesson flow.",
+      "help": {
+        "concept": "This lesson introduces text, number, and date-like values as the main beginner categories.",
+        "hint_1": "String ideas come first.",
+        "hint_2": "Date awareness comes last."
+      }
+    }
+  }
+}

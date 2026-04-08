@@ -5,15 +5,38 @@ import { NotebookPen, TerminalSquare } from "lucide-react";
 import type { ToolSpec, ToolsCtx } from "./types";
 import CodeToolPane from "./panes/CodeToolPane";
 import NotesToolPane from "./panes/NotesToolPane";
+import type { CodeLanguage, SqlDialect } from "@/lib/practice/types";
 
 export type CodeToolProps = {
     height: number;
-    toolLang: any;
+
+    toolLang: CodeLanguage;
     toolCode: string;
     toolStdin: string;
+    toolSqlDialect?: SqlDialect;
+
+    onChangeLang?: (l: CodeLanguage) => void;
     onChangeCode: (c: string) => void;
     onChangeStdin: (s: string) => void;
+    onChangeSqlDialect?: (d: SqlDialect) => void;
+
     onBeforeRun?: () => void | Promise<void>;
+
+    sqlSchemaSql?: string;
+    sqlSeedSql?: string;
+    sqlSetupSql?: string;
+    sqlInitialTableSnapshots?: Record<
+        string,
+        {
+            name: string;
+            columns: Array<{ name: string; type?: string | null }>;
+            rows: unknown[][];
+            rowCount: number;
+        }
+    >;
+
+    showLanguagePicker?: boolean;
+    showSqlDialectPicker?: boolean;
 };
 
 export type NotesToolProps = {

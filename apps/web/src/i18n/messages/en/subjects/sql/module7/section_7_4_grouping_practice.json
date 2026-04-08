@@ -1,0 +1,453 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_7": {
+        "grouping_practice": {
+          "label": "Grouping Practice",
+          "summary": "Practice grouped reports with sales by category, orders by customer, groups with high averages, and mini SQL dashboards.",
+          "cards": {
+            "sketch0": {
+              "title": "How do you calculate sales by category?"
+            },
+            "sketch1": {
+              "title": "How do you count orders by customer?"
+            },
+            "sketch2": {
+              "title": "How do you find groups with high averages?"
+            },
+            "sketch3": {
+              "title": "How do you build summary dashboards in SQL?"
+            },
+            "quiz": {
+              "title": "Quiz: Grouping Practice"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_7": {
+        "grouping_practice": {
+          "sales_by_category": {
+            "title": "Sales by category turns row-level order data into category totals.",
+            "bodyMarkdown": "A classic grouping question is:\n\n> how much sales value comes from each category?\n\nWith this dataset, a row-level sales expression can be:\n\n- `quantity * unit_price`\n\nThen grouping by `category` lets SQL total that value for each category.\n\nSo the big idea is:\n\n> grouping plus a sales expression can create a simple category sales report"
+          },
+          "orders_by_customer": {
+            "title": "Orders by customer shows how activity is distributed across customers.",
+            "bodyMarkdown": "Another useful grouped question is:\n\n> how many orders does each customer have?\n\nThis is a good practice pattern because it combines:\n\n- a clear group label\n- a simple count\n\nSo the key idea is:\n\n> grouped counts can show which customers appear more often in the data"
+          },
+          "groups_with_high_averages": {
+            "title": "Groups with high averages help you focus on stronger-performing segments.",
+            "bodyMarkdown": "Sometimes you do not just want all groups.\nYou want only the groups whose average is above some threshold.\n\nWith this dataset, that can mean:\n\n- regions with average price above 20\n- categories with average price above 15\n\nSo the main idea is:\n\n> grouping plus `HAVING` can keep only the high-average groups"
+          },
+          "summary_dashboards_in_sql": {
+            "title": "A summary dashboard combines several grouped measures into one readable report.",
+            "bodyMarkdown": "A grouped dashboard query often includes:\n\n- a group label\n- a count\n- a total\n- an average\n- maybe a minimum or maximum too\n\nThat makes the result feel closer to a real report.\n\nSo the important idea is:\n\n> grouping can power small dashboard-style summaries directly in SQL"
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "m7_s04_sales_by_category": {
+      "title": "Build sales by category",
+      "prompt": "The SQLite workspace already has a table named `orders`.\n\nWrite a query that returns each `category` and total sales for that category using `SUM(quantity * unit_price)`.\n\nRename the result to `total_sales`, then click **Run**.",
+      "help": {
+        "concept": "A grouped sales report often uses a row-level sales expression inside `SUM()` and groups by category.",
+        "hint_1": "Use `category` as the group label, and sum the sales expression `quantity * unit_price` for each category.",
+        "hint_2": "Build the query so each category gets one total_sales result based on summing the row-level sales expression."
+      },
+      "hint": "Group by `category` and sum `quantity * unit_price`.",
+      "starterCode": "-- Return each category and total_sales\n"
+    },
+    "m7_s04_orders_by_customer": {
+      "title": "Build orders by customer",
+      "prompt": "The `orders` table already exists.\n\nWrite a query that returns each `customer_name` and the number of orders for that customer.\n\nRename the result to `order_count`, then run it.",
+      "help": {
+        "concept": "A grouped count can be used to build a customer activity report.",
+        "hint_1": "Use `customer_name` as the group label and count the rows in each customer group.",
+        "hint_2": "Build a query that returns one row per customer with a count of that customer's orders."
+      },
+      "hint": "Group by `customer_name` and count the rows.",
+      "starterCode": "-- Return each customer_name and order_count\n"
+    },
+    "m7_s04_regions_with_high_averages": {
+      "title": "Find regions with high averages",
+      "prompt": "The `orders` table already exists.\n\nWrite a query that returns each `region` and its average `unit_price`, but only keep regions whose average `unit_price` is greater than 20.\n\nRename the average result to `avg_price`, then click **Run**.",
+      "help": {
+        "concept": "A high-average group report uses grouping, averaging, and `HAVING` together.",
+        "hint_1": "Group by `region`, calculate the average `unit_price`, then keep only groups whose average is above 20.",
+        "hint_2": "Build the grouped average first, then add a group-level filter that keeps only the high-average regions."
+      },
+      "hint": "Use `AVG()` with `GROUP BY region`, then filter with `HAVING`.",
+      "starterCode": "-- Return regions whose avg_price is greater than 20\n"
+    },
+    "m7_s04_category_dashboard": {
+      "title": "Build a category dashboard",
+      "prompt": "The `orders` table already exists.\n\nWrite a query that returns each `category` with these grouped summary columns:\n\n- `order_count`\n- `total_quantity`\n- `avg_price`\n- `total_sales`\n\nUse `COUNT(*)`, `SUM(quantity)`, `AVG(unit_price)`, and `SUM(quantity * unit_price)`.\n\nThen run it.",
+      "help": {
+        "concept": "A grouped dashboard combines several summaries side by side for each group.",
+        "hint_1": "Use `category` as the grouped column, then add one aggregate expression for each requested summary.",
+        "hint_2": "Build one grouped query where each category row shows count, total quantity, average price, and total sales together."
+      },
+      "hint": "Put several grouped summaries together in one query.",
+      "starterCode": "-- Return each category with grouped dashboard summaries\n"
+    },
+    "m7_s04_customer_sales_summary": {
+      "title": "Build customer sales totals",
+      "prompt": "The `orders` table already exists.\n\nWrite a query that returns each `customer_name` and total sales for that customer using `SUM(quantity * unit_price)`.\n\nRename the result to `total_sales`, then click **Run**.",
+      "help": {
+        "concept": "Grouped totals can turn row-level sales into a customer summary report.",
+        "hint_1": "Use `customer_name` as the grouped column and sum the sales expression for each customer.",
+        "hint_2": "Build the query so each customer gets one total_sales value based on summing `quantity * unit_price` across that customer's rows."
+      },
+      "hint": "Group by `customer_name` and sum `quantity * unit_price`.",
+      "starterCode": "-- Return each customer_name and total_sales\n"
+    },
+    "m7_s04_grouping_practice_project": {
+      "title": "Practice grouped summary dashboards",
+      "prompt": "Use the SQL workspace on the right to practice grouped report queries on the `orders` table.\n\nFor each task:\n\n1. type the query in the editor\n2. click **Run**\n3. read the grouped column first\n4. compare the summary values across groups\n\nTasks:\n\n1. Show `total_sales` by `category`\n2. Show `order_count` by `customer_name`\n3. Show regions with `avg_price` greater than 20\n4. Build a grouped dashboard by `category` with count, total quantity, average price, and total sales\n5. Show `total_sales` by `customer_name`\n\nRun one query at a time.\nThis project is about using grouping to build report-style summaries and dashboards.",
+      "help": {
+        "concept": "Grouping practice becomes more realistic when the grouped result feels like a small report.",
+        "hint_1": "Each task asks for a group label plus one or more summaries, and sometimes a `HAVING` filter too.",
+        "hint_2": "Solve the tasks one by one. First decide what the grouped label should be, then decide which summaries belong beside it, and add `HAVING` only when you need to filter whole groups."
+      },
+      "hint": "Choose the grouped label, then build the report around it.",
+      "starterCode": "-- Task 1\n-- Show total_sales by category\n\n"
+    },
+
+    "m7_s04_sales_by_category_meaning": {
+      "title": "What does sales by category show?",
+      "prompt": "What is the main idea of a grouped sales-by-category query?",
+      "help": {
+        "concept": "It shows a sales total separately for each category.",
+        "hint_1": "Think one sales total per category.",
+        "hint_2": "The query groups rows by category and totals the sales expression inside each group."
+      },
+      "hint": "Think total sales per category.",
+      "options": {
+        "a": "It shows one sales total for each category",
+        "b": "It always shows every original row unchanged",
+        "c": "It removes the need for grouping",
+        "d": "It can only count rows"
+      }
+    },
+    "m7_s04_orders_by_customer_meaning": {
+      "title": "What does orders by customer show?",
+      "prompt": "What is the main idea of an orders-by-customer query?",
+      "help": {
+        "concept": "It shows how many rows belong to each customer group.",
+        "hint_1": "Think one count per customer.",
+        "hint_2": "The grouped result tells how often each customer appears in the table."
+      },
+      "hint": "Think order count per customer.",
+      "options": {
+        "a": "It shows how many orders each customer has",
+        "b": "It averages every value in the table",
+        "c": "It sorts rows only",
+        "d": "It removes the customer column"
+      }
+    },
+    "m7_s04_high_average_groups_meaning": {
+      "title": "What does a high-average groups query show?",
+      "prompt": "What is the main idea of a query that keeps only groups with high averages?",
+      "help": {
+        "concept": "It returns only the groups whose average summary passes a threshold.",
+        "hint_1": "Think grouped average plus filter.",
+        "hint_2": "The result keeps only the group rows whose average is high enough."
+      },
+      "hint": "Think only groups with strong average values stay.",
+      "options": {
+        "a": "It keeps only groups whose average summary is above a threshold",
+        "b": "It removes averages completely",
+        "c": "It shows every group no matter what",
+        "d": "It can only be used without HAVING"
+      }
+    },
+    "m7_s04_dashboard_meaning": {
+      "title": "What is a summary dashboard query?",
+      "prompt": "What is the main idea of a grouped SQL dashboard query?",
+      "help": {
+        "concept": "A grouped dashboard shows several summary measures together for each group.",
+        "hint_1": "Think several summaries side by side.",
+        "hint_2": "It is a grouped report where each row contains multiple metrics."
+      },
+      "hint": "Think several metrics per group row.",
+      "options": {
+        "a": "It shows multiple summary measures together for each group",
+        "b": "It always returns one raw detail row only",
+        "c": "It can never use aliases",
+        "d": "It only works with MIN()"
+      }
+    },
+    "m7_s04_reading_dashboard_results": {
+      "title": "How should you read grouped dashboards?",
+      "prompt": "What is a good beginner way to read a grouped dashboard result?",
+      "help": {
+        "concept": "You should read the group label first and then compare the metrics in that row.",
+        "hint_1": "Think label first, metrics next.",
+        "hint_2": "Each row belongs to one group and contains several summaries for that group."
+      },
+      "hint": "Read the group label first, then the metrics.",
+      "options": {
+        "a": "Read the group label first, then the summaries in that row",
+        "b": "Ignore the group label and only read the numbers",
+        "c": "Assume all rows represent the whole table",
+        "d": "Only read the first summary column"
+      }
+    },
+
+    "m7_s04_sales_reports_true": {
+      "title": "What is true about sales-style grouped reports?",
+      "prompt": "Select all true statements about sales-style grouped report queries.",
+      "help": {
+        "concept": "Sales-style reports often combine grouping with totals based on expressions like quantity times unit price.",
+        "hint_1": "Think group label plus total sales.",
+        "hint_2": "Choose the statements about grouped totals and report-like output."
+      },
+      "hint": "Think grouped totals.",
+      "options": {
+        "a": "A grouped sales report can total `quantity * unit_price` per group",
+        "b": "Category can be used as a grouped sales label",
+        "c": "Customer can be used as a grouped sales label",
+        "d": "Sales-style grouped reports can never use `SUM()`",
+        "e": "Aliases can make grouped sales reports easier to read"
+      }
+    },
+    "m7_s04_customer_reports_true": {
+      "title": "What is true about orders by customer?",
+      "prompt": "Select all true statements about grouped customer order reports.",
+      "help": {
+        "concept": "Customer grouping is a common way to summarize activity by person.",
+        "hint_1": "Think one row per customer.",
+        "hint_2": "Choose the statements about customer-based grouped summaries."
+      },
+      "hint": "Think grouped customer summaries.",
+      "options": {
+        "a": "A customer report can show one row per customer",
+        "b": "A customer report can count that customer's orders",
+        "c": "A customer report can total that customer's sales",
+        "d": "A customer report must return every original order row unchanged",
+        "e": "Grouped customer reports help compare customers"
+      }
+    },
+    "m7_s04_high_average_groups_true": {
+      "title": "What is true about groups with high averages?",
+      "prompt": "Select all true statements about grouped queries that keep only high-average groups.",
+      "help": {
+        "concept": "High-average group queries combine grouping, averaging, and `HAVING`.",
+        "hint_1": "Think grouped mean plus threshold.",
+        "hint_2": "Choose the statements about filtering groups by their average summary."
+      },
+      "hint": "Think average and HAVING together.",
+      "options": {
+        "a": "They use a grouped average",
+        "b": "They often need `HAVING` to keep only strong groups",
+        "c": "They can be used with a grouped column like region",
+        "d": "They always keep every group in the table",
+        "e": "They help focus on only the groups above a chosen threshold"
+      }
+    },
+    "m7_s04_dashboard_true": {
+      "title": "What is true about grouped SQL dashboards?",
+      "prompt": "Select all true statements about grouped dashboard-style SQL queries.",
+      "help": {
+        "concept": "Grouped dashboards combine multiple summaries into readable per-group reports.",
+        "hint_1": "Think one row per group, many summaries per row.",
+        "hint_2": "Choose the statements about grouped reports with several metrics."
+      },
+      "hint": "Think multiple metrics per group row.",
+      "options": {
+        "a": "A grouped dashboard can include count, total, average, and sales metrics together",
+        "b": "A grouped dashboard often uses aliases for readability",
+        "c": "Each row in a grouped dashboard usually represents one group",
+        "d": "A grouped dashboard must avoid aggregate functions",
+        "e": "A grouped dashboard can feel like a small SQL report"
+      }
+    },
+    "m7_s04_grouping_practice_workflow_true": {
+      "title": "What matches a good beginner workflow for grouping practice?",
+      "prompt": "Select all statements that match a good beginner workflow for building grouped report queries.",
+      "help": {
+        "concept": "A good workflow is to choose the group label, choose the metrics, add filters only when needed, and read the result row by row.",
+        "hint_1": "Think label, metrics, filter, read.",
+        "hint_2": "Choose the steps that help turn grouped summaries into readable report output."
+      },
+      "hint": "Choose the group label first, then the metrics.",
+      "options": {
+        "a": "Decide what the grouped label should be",
+        "b": "Choose what summaries belong beside that label",
+        "c": "Add `HAVING` only when you need to filter whole groups",
+        "d": "Read each group row as one report entry",
+        "e": "Ignore whether the summaries actually match the question"
+      }
+    },
+
+    "m7_s04_fill_sales_expression": {
+      "title": "Sales expression",
+      "prompt": "Fill in the blank with the best expression.",
+      "template": "A common row-level sales expression in this lesson is ____.",
+      "choices": {
+        "0": "quantity * unit_price",
+        "1": "COUNT(*)",
+        "2": "region + category",
+        "3": "AVG(customer_name)"
+      },
+      "hint": "This expression multiplies amount by price.",
+      "help": {
+        "concept": "Sales-style summaries often use quantity times unit price as the row-level value.",
+        "hint_1": "Think row sales total.",
+        "hint_2": "The correct expression is `quantity * unit_price`."
+      }
+    },
+    "m7_s04_fill_category_label": {
+      "title": "Category report label",
+      "prompt": "Fill in the blank with the best grouped label.",
+      "template": "A sales-by-category report usually groups by ____.",
+      "choices": {
+        "0": "category",
+        "1": "status only",
+        "2": "file path",
+        "3": "font size"
+      },
+      "hint": "The report is organized by category.",
+      "help": {
+        "concept": "Sales by category uses category as the grouped label.",
+        "hint_1": "Think one sales total per category.",
+        "hint_2": "The correct label is `category`."
+      }
+    },
+    "m7_s04_fill_customer_count": {
+      "title": "Customer count expression",
+      "prompt": "Fill in the blank with the best grouped count expression.",
+      "template": "To count orders by customer, a common grouped metric is ____.",
+      "choices": {
+        "0": "COUNT(*)",
+        "1": "MIN(*)",
+        "2": "AVG(region)",
+        "3": "LOWER(customer_name)"
+      },
+      "hint": "Use the aggregate that counts grouped rows.",
+      "help": {
+        "concept": "Grouped customer activity reports often use COUNT to show how many orders each customer has.",
+        "hint_1": "Think order count.",
+        "hint_2": "The correct expression is `COUNT(*)`."
+      }
+    },
+    "m7_s04_fill_dashboard_many_metrics": {
+      "title": "Dashboard result style",
+      "prompt": "Fill in the blank with the best word.",
+      "template": "A grouped dashboard usually shows ____ summary measures together for each group.",
+      "choices": {
+        "0": "multiple",
+        "1": "zero",
+        "2": "hidden",
+        "3": "random"
+      },
+      "hint": "Dashboards combine several metrics side by side.",
+      "help": {
+        "concept": "Dashboard-style grouped queries combine more than one summary metric in each row.",
+        "hint_1": "Think several columns of metrics.",
+        "hint_2": "The missing word is `multiple`."
+      }
+    },
+    "m7_s04_fill_read_label_then_metrics": {
+      "title": "How to read a dashboard",
+      "prompt": "Fill in the blank with the best phrase.",
+      "template": "A good beginner habit is to read the ____ first, then the metrics in that row.",
+      "choices": {
+        "0": "group label",
+        "1": "browser tab",
+        "2": "terminal color",
+        "3": "folder name"
+      },
+      "hint": "Start by identifying what group the row represents.",
+      "help": {
+        "concept": "Grouped dashboard rows make the most sense when you identify the group before reading the metrics.",
+        "hint_1": "Think grouped column.",
+        "hint_2": "The correct phrase is `group label`."
+      }
+    },
+
+    "m7_s04_reorder_sales_by_category_pattern": {
+      "title": "Order a sales-by-category pattern",
+      "prompt": "Reorder the query parts into a grouped sales-by-category query.",
+      "tokens": {
+        "t1": "SELECT category, SUM(quantity * unit_price) AS total_sales",
+        "t2": "FROM orders",
+        "t3": "GROUP BY category",
+        "t4": ";"
+      },
+      "hint": "Select first, grouping later.",
+      "help": {
+        "concept": "A grouped sales-by-category query combines a category label with a summed sales expression.",
+        "hint_1": "Start with the SELECT line.",
+        "hint_2": "The grouping line comes after FROM."
+      }
+    },
+    "m7_s04_reorder_orders_by_customer_pattern": {
+      "title": "Order an orders-by-customer pattern",
+      "prompt": "Reorder the query parts into a grouped customer order-count query.",
+      "tokens": {
+        "t1": "SELECT customer_name, COUNT(*) AS order_count",
+        "t2": "FROM orders",
+        "t3": "GROUP BY customer_name",
+        "t4": ";"
+      },
+      "hint": "The pattern matches other grouped summary queries.",
+      "help": {
+        "concept": "Orders by customer uses customer_name as the group label and COUNT as the summary.",
+        "hint_1": "Start with the SELECT line.",
+        "hint_2": "Group by customer_name after FROM."
+      }
+    },
+    "m7_s04_reorder_dashboard_workflow": {
+      "title": "Order the dashboard workflow",
+      "prompt": "Reorder the steps into a good beginner workflow for grouped dashboard queries.",
+      "tokens": {
+        "t1": "choose the grouped label",
+        "t2": "choose the summary metrics",
+        "t3": "add HAVING only if whole groups must be filtered",
+        "t4": "read each group row as one report entry"
+      },
+      "hint": "Label first, reading last.",
+      "help": {
+        "concept": "Dashboard-style grouped queries start with the group and then add the metrics that belong beside it.",
+        "hint_1": "Choose the label before the metrics.",
+        "hint_2": "Interpretation comes after the query runs."
+      }
+    },
+    "m7_s04_reorder_read_dashboard": {
+      "title": "Order how to read a grouped dashboard",
+      "prompt": "Reorder the steps into a good way to read grouped dashboard output.",
+      "tokens": {
+        "t1": "read the grouped label",
+        "t2": "read the metrics in that row",
+        "t3": "compare that group with other groups"
+      },
+      "hint": "Know the group before comparing the metrics.",
+      "help": {
+        "concept": "Each grouped dashboard row represents one group and several summary values for that group.",
+        "hint_1": "Start by identifying the group.",
+        "hint_2": "Comparison comes after reading the metrics."
+      }
+    },
+    "m7_s04_reorder_group_report_parts": {
+      "title": "Order the main parts of a grouped report",
+      "prompt": "Reorder the main parts of a grouped report in the same lesson flow used here.",
+      "tokens": {
+        "t1": "group label",
+        "t2": "summary metrics",
+        "t3": "dashboard-style comparison"
+      },
+      "hint": "Label first, comparison last.",
+      "help": {
+        "concept": "Grouped practice starts with the label, then the summaries, then interpretation across groups.",
+        "hint_1": "The group label comes first.",
+        "hint_2": "Comparison comes after the summaries."
+      }
+    }
+  }
+}

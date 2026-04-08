@@ -44,7 +44,19 @@ type SchemaModel = {
     tables: TableModel[];
     relations: RelationModel[];
 };
+type SqlTableSnapshot = {
+    name: string;
+    columns: Array<{
+        name: string;
+        type?: string | null;
+    }>;
+    rows: unknown[][];
+    rowCount: number;
+};
 
+type SqlTableSnapshots = Record<string, SqlTableSnapshot>;
+
+const TABLE_ROWS_PANEL_H = 220;
 type Box = {
     id: string;
     x: number;
@@ -131,23 +143,30 @@ function buildChenLayout(tables: TableModel[]) {
     return { boxes, width, height };
 }
 
-function buildTableLayout(tables: TableModel[]) {
-    const cardW = 290;
+function buildTableLayout(
+    tables: TableModel[],
+    opts?: { includeRowsPanel?: boolean },
+) {
+    const cardW = 320;
     const rowH = 26;
     const headerH = 40;
     const gapX = 40;
     const gapY = 48;
     const cols = Math.max(1, Math.ceil(Math.sqrt(Math.max(1, tables.length))));
+    const rowsPanelH = opts?.includeRowsPanel ? TABLE_ROWS_PANEL_H : 0;
+
+    const laneH = Math.max(248, headerH + 8 * rowH + 16 + rowsPanelH);
 
     const boxes: Box[] = tables.map((table, i) => {
         const col = i % cols;
         const row = Math.floor(i / cols);
-        const h = headerH + Math.max(1, table.columns.length) * rowH + 16;
+        const h =
+            headerH + Math.max(1, table.columns.length) * rowH + 16 + rowsPanelH;
 
         return {
             id: table.id,
             x: 24 + col * (cardW + gapX),
-            y: 24 + row * (248 + gapY),
+            y: 24 + row * (laneH + gapY),
             w: cardW,
             h,
         };
@@ -160,7 +179,6 @@ function buildTableLayout(tables: TableModel[]) {
 
     return { boxes, width, height };
 }
-
 function applyStoredPositions(
     tab: DiagramTabKey,
     defaults: Box[],
@@ -360,6 +378,8 @@ function beginDiagramNodeDrag(args: {
     startX: number;
     startY: number;
     onMove: (tab: DiagramTabKey, id: string, x: number, y: number) => void;
+    onDragStart?: (id: string) => void;
+    onDragEnd?: (id: string) => void;
 }) {
     const {
         target,
@@ -373,10 +393,14 @@ function beginDiagramNodeDrag(args: {
         startX,
         startY,
         onMove,
+        onDragStart,
+        onDragEnd,
     } = args;
 
     let raf: number | null = null;
     let pending: { x: number; y: number } | null = null;
+
+    onDragStart?.(id);
 
     const flush = () => {
         raf = null;
@@ -417,6 +441,8 @@ function beginDiagramNodeDrag(args: {
         if (target.hasPointerCapture?.(pointerId)) {
             target.releasePointerCapture?.(pointerId);
         }
+
+        onDragEnd?.(id);
     };
 
     target.setPointerCapture?.(pointerId);
@@ -435,7 +461,12 @@ function shouldIgnoreBoardPan(target: EventTarget | null) {
         el.closest("[data-diagram-no-pan='true']"),
     );
 }
+function shouldIgnoreBoardWheel(target: EventTarget | null) {
+    const el = target as Element | null;
+    if (!el || typeof el.closest !== "function") return false;
 
+    return Boolean(el.closest("[data-diagram-no-pan='true']"));
+}
 type PanZoomCanvasProps = {
     width: number;
     height: number;
@@ -742,6 +773,27 @@ function PanZoomCanvas(props: PanZoomCanvasProps) {
         },
         [clampOffset, applyView],
     );
+    React.useEffect(() => {
+        const el = viewportRef.current;
+        if (!el) return;
+
+        const handleWheel = (e: WheelEvent) => {
+            if (shouldIgnoreBoardWheel(e.target)) {
+                return;
+            }
+
+            e.preventDefault();
+
+            const factor = e.deltaY < 0 ? 1.08 : 0.92;
+            zoomBy(viewRef.current.scale * factor, e.clientX, e.clientY);
+        };
+
+        el.addEventListener("wheel", handleWheel, { passive: false });
+
+        return () => {
+            el.removeEventListener("wheel", handleWheel);
+        };
+    }, [zoomBy]);
 
     const zoomCentered = React.useCallback(
         (nextScale: number) => {
@@ -772,14 +824,7 @@ function PanZoomCanvas(props: PanZoomCanvasProps) {
         fitToView();
     }, [fitToView]);
 
-    const onWheel = React.useCallback(
-        (e: React.WheelEvent<HTMLDivElement>) => {
-            e.preventDefault();
-            const factor = e.deltaY < 0 ? 1.08 : 0.92;
-            zoomBy(viewRef.current.scale * factor, e.clientX, e.clientY);
-        },
-        [zoomBy],
-    );
+
 
     const onPointerDown = React.useCallback((e: React.PointerEvent<HTMLDivElement>) => {
         if (e.button !== 0) return;
@@ -859,7 +904,7 @@ function PanZoomCanvas(props: PanZoomCanvasProps) {
                     "absolute inset-0 overflow-hidden touch-none select-none",
                     isPanning ? "cursor-grabbing" : "cursor-grab",
                 )}
-                onWheel={onWheel}
+
                 onPointerDown={onPointerDown}
                 onPointerMove={onPointerMove}
                 onPointerUp={onPointerUp}
@@ -870,12 +915,14 @@ function PanZoomCanvas(props: PanZoomCanvasProps) {
                     style={{
                         width: stageMetrics.stageWidth,
                         height: stageMetrics.stageHeight,
-                        transform: `translate(${view.x}px, ${view.y}px) scale(${view.scale})`,
+                        transform: `translate3d(${view.x}px, ${view.y}px, 0) scale(${view.scale})`,
                         transformOrigin: "0 0",
+                        backfaceVisibility: "hidden",
+                        WebkitBackfaceVisibility: "hidden",
                         backgroundImage: `
-              linear-gradient(to right, rgba(148,163,184,0.10) 1px, transparent 1px),
-              linear-gradient(to bottom, rgba(148,163,184,0.10) 1px, transparent 1px)
-            `,
+      linear-gradient(to right, rgba(148,163,184,0.10) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(148,163,184,0.10) 1px, transparent 1px)
+    `,
                         backgroundSize: "40px 40px",
                     }}
                 >
@@ -1227,7 +1274,173 @@ function parseSchemaSql(schemaSql?: string | null): SchemaModel {
         ),
     };
 }
+function getTableSnapshots(result: SqlRunResult | null): SqlTableSnapshots {
+    const raw = (result as any)?.ok ? (result as any)?.tableSnapshots : null;
 
+    if (!raw || typeof raw !== "object") return {};
+    return raw as SqlTableSnapshots;
+}
+
+function getSnapshotForTable(
+    snapshots: SqlTableSnapshots,
+    tableName: string,
+): SqlTableSnapshot | null {
+    if (snapshots[tableName]) return snapshots[tableName];
+
+    const normalized = normalizeIdent(tableName).toLowerCase();
+
+    for (const snapshot of Object.values(snapshots)) {
+        if (normalizeIdent(snapshot.name).toLowerCase() === normalized) {
+            return snapshot;
+        }
+    }
+
+    return null;
+}
+
+const TABLE_PREVIEW_ROW_LIMIT = 10;
+const TABLE_CARD_MIN_W = 460;
+const TABLE_CARD_MAX_W = 1040;
+const TABLE_COL_MIN_W = 132;
+const TABLE_COL_MAX_W = 280;
+const TABLE_CARD_H = 272;
+
+function clampPx(value: number, min: number, max: number) {
+    return Math.max(min, Math.min(max, value));
+}
+
+function cellText(value: unknown) {
+    if (value == null) return "NULL";
+    if (typeof value === "boolean") return value ? "true" : "false";
+    return String(value);
+}
+
+function estimateTextWidthPx(value: unknown) {
+    const text = String(value ?? "");
+    return clampPx(text.length * 7 + 24, 40, 360);
+}
+
+type TablePreviewMetrics = {
+    columns: Array<{
+        name: string;
+        type?: string | null;
+        width: number;
+    }>;
+    tableMinWidth: number;
+    cardWidth: number;
+    cardHeight: number;
+};
+
+function buildTablePreviewMetrics(
+    table: TableModel,
+    snapshots: SqlTableSnapshots,
+): TablePreviewMetrics {
+    const snapshot = getSnapshotForTable(snapshots, table.name);
+
+    const displayColumns =
+        snapshot?.columns?.length
+            ? snapshot.columns
+            : table.columns.map((col) => ({
+                name: col.name,
+                type: col.type ?? null,
+            }));
+
+    const previewRows = (snapshot?.rows ?? []).slice(0, TABLE_PREVIEW_ROW_LIMIT);
+
+    const columns = displayColumns.map((col, ci) => {
+        const headerWidth = estimateTextWidthPx(col.name);
+        const typeWidth = col.type ? estimateTextWidthPx(col.type) : 0;
+
+        const sampleValueWidth = previewRows.reduce((max, row) => {
+            return Math.max(max, estimateTextWidthPx(cellText(row[ci])));
+        }, 0);
+
+        const width = clampPx(
+            Math.max(headerWidth, typeWidth, sampleValueWidth) + 20,
+            TABLE_COL_MIN_W,
+            TABLE_COL_MAX_W,
+        );
+
+        return {
+            name: col.name,
+            type: col.type ?? null,
+            width,
+        };
+    });
+
+    const tableMinWidth = columns.reduce((sum, col) => sum + col.width, 0);
+    const cardWidth = clampPx(tableMinWidth + 2, TABLE_CARD_MIN_W, TABLE_CARD_MAX_W);
+
+    return {
+        columns,
+        tableMinWidth,
+        cardWidth,
+        cardHeight: TABLE_CARD_H,
+    };
+}
+
+function buildTablesCanvasLayout(
+    tables: TableModel[],
+    metricsByTable: Map<string, TablePreviewMetrics>,
+) {
+    const gapX = 40;
+    const gapY = 48;
+    const pad = 24;
+    const perRow = Math.max(1, Math.ceil(Math.sqrt(Math.max(1, tables.length))));
+
+    const boxes: Box[] = [];
+    let x = pad;
+    let y = pad;
+    let rowMaxH = 0;
+    let maxRight = pad;
+
+    tables.forEach((table, i) => {
+        if (i > 0 && i % perRow === 0) {
+            x = pad;
+            y += rowMaxH + gapY;
+            rowMaxH = 0;
+        }
+
+        const metrics = metricsByTable.get(table.id);
+        const w = metrics?.cardWidth ?? TABLE_CARD_MIN_W;
+        const h = metrics?.cardHeight ?? TABLE_CARD_H;
+
+        boxes.push({
+            id: table.id,
+            x,
+            y,
+            w,
+            h,
+        });
+
+        maxRight = Math.max(maxRight, x + w);
+        rowMaxH = Math.max(rowMaxH, h);
+        x += w + gapX;
+    });
+
+    return {
+        boxes,
+        width: maxRight + pad,
+        height: y + rowMaxH + pad,
+    };
+}
+function buildDefaultTableSnapshots(schema: SchemaModel): SqlTableSnapshots {
+    const out: SqlTableSnapshots = {};
+
+    for (const table of schema.tables) {
+        out[table.name] = {
+            name: table.name,
+            columns: table.columns.map((col) => ({
+                name: col.name,
+                type: col.type ?? null,
+            })),
+            rows: [],
+            rowCount: 0,
+        };
+    }
+
+    return out;
+}
 function sideOf(box: Box, side: "left" | "right" | "top" | "bottom") {
     if (side === "left") return { x: box.x, y: box.y + box.h / 2, dx: -1, dy: 0 };
     if (side === "right") return { x: box.x + box.w, y: box.y + box.h / 2, dx: 1, dy: 0 };
@@ -1437,8 +1650,8 @@ function ResultsTab(props: { result: Extract<SqlRunResult, { ok: true }> }) {
                                             <span className="truncate">{col.name}</span>
                                             {col.type ? (
                                                 <span className="rounded-md border border-neutral-200 bg-white px-1.5 py-0.5 text-[10px] font-medium normal-case tracking-normal text-neutral-500 dark:border-white/10 dark:bg-white/[0.06] dark:text-white/40">
-                            {col.type}
-                          </span>
+                                                        {col.type}
+                                                    </span>
                                             ) : null}
                                         </div>
                                     </th>
@@ -1497,18 +1710,30 @@ function ResultsTab(props: { result: Extract<SqlRunResult, { ok: true }> }) {
         </div>
     );
 }
-
 function TablesTab(props: {
     schema: SchemaModel;
     positions: DiagramPositions;
     onMove: (tab: DiagramTabKey, id: string, x: number, y: number) => void;
+    tableSnapshots?: SqlTableSnapshots;
 }) {
-    const { schema, positions, onMove } = props;
+    const { schema, positions, onMove, tableSnapshots = {} } = props;
+
+    const metricsByTable = React.useMemo(() => {
+        const map = new Map<string, TablePreviewMetrics>();
+
+        for (const table of schema.tables) {
+            map.set(table.id, buildTablePreviewMetrics(table, tableSnapshots));
+        }
+
+        return map;
+    }, [schema.tables, tableSnapshots]);
 
     const initialLayout = React.useMemo(
-        () => buildTableLayout(schema.tables),
-        [schema.tables],
+        () => buildTablesCanvasLayout(schema.tables, metricsByTable),
+        [schema.tables, metricsByTable],
     );
+
+    const [draggingTableId, setDraggingTableId] = React.useState<string | null>(null);
 
     const rawBoxes = React.useMemo(
         () =>
@@ -1542,8 +1767,8 @@ function TablesTab(props: {
     if (!schema.tables.length) {
         return (
             <EmptySchemaState
-                title="No schema available"
-                subtitle="Pass schema.sql into the SQL runner to render tables and relationships."
+                title="No tables available"
+                subtitle="Run the SQL lesson with schema and snapshots to show table rows."
             />
         );
     }
@@ -1553,10 +1778,6 @@ function TablesTab(props: {
             <div className="flex flex-wrap items-center gap-2">
                 <Badge>
                     {schema.tables.length} table{schema.tables.length === 1 ? "" : "s"}
-                </Badge>
-                <Badge>
-                    {schema.relations.length} relation
-                    {schema.relations.length === 1 ? "" : "s"}
                 </Badge>
             </div>
 
@@ -1571,11 +1792,19 @@ function TablesTab(props: {
                         <div className="relative h-full w-full overflow-visible">
                             {schema.tables.map((table) => {
                                 const rawBox = rawBoxById.get(table.id)!;
+                                const isDragging = draggingTableId === rawBox.id;
                                 const box = boxById.get(table.id)!;
 
-                                const onPointerDown = (
-                                    e: React.PointerEvent<HTMLDivElement>,
-                                ) => {
+                                const metrics = metricsByTable.get(table.id)!;
+                                const snapshot = getSnapshotForTable(tableSnapshots, table.name);
+                                const hasSnapshot = !!snapshot;
+
+                                const displayColumns = metrics.columns;
+                                const rows = snapshot?.rows ?? [];
+                                const rowCount = snapshot?.rowCount ?? 0;
+                                const previewRows = rows.slice(0, TABLE_PREVIEW_ROW_LIMIT);
+
+                                const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
                                     e.preventDefault();
                                     e.stopPropagation();
 
@@ -1591,57 +1820,154 @@ function TablesTab(props: {
                                         startX: rawBox.x,
                                         startY: rawBox.y,
                                         onMove,
+                                        onDragStart: () => setDraggingTableId(rawBox.id),
+                                        onDragEnd: () =>
+                                            setDraggingTableId((prev) =>
+                                                prev === rawBox.id ? null : prev,
+                                            ),
                                     });
                                 };
 
                                 return (
                                     <div
                                         key={table.id}
-                                        className="absolute overflow-hidden rounded-xl border border-neutral-200/70 bg-white/92 shadow-sm dark:border-white/10 dark:bg-neutral-950/95"
+                                        data-diagram-node-drag="true"
+                                        onPointerDown={onPointerDown}
+                                        className="absolute isolate overflow-hidden rounded-xl border border-neutral-200/70 bg-white/92 touch-none select-none cursor-grab active:cursor-grabbing dark:border-white/10 dark:bg-neutral-950/95"
                                         style={{
-                                            left: box.x,
-                                            top: box.y,
+                                            left: 0,
+                                            top: 0,
                                             width: box.w,
                                             minHeight: box.h,
+                                            transform: `translate3d(${box.x}px, ${box.y}px, 0)`,
+                                            willChange: isDragging ? "transform" : undefined,
+                                            backfaceVisibility: "hidden",
+                                            WebkitBackfaceVisibility: "hidden",
+                                            contain: "layout paint style",
+                                            zIndex: isDragging ? 20 : 1,
+                                            boxShadow: isDragging
+                                                ? "0 18px 42px rgba(15, 23, 42, 0.18)"
+                                                : "0 1px 2px rgba(15, 23, 42, 0.06)",
                                         }}
                                     >
-                                        <div
-                                            data-diagram-node-drag="true"
-                                            onPointerDown={onPointerDown}
-                                            className="touch-none select-none cursor-grab border-b border-neutral-200/70 bg-neutral-100/85 px-3 py-2.5 active:cursor-grabbing dark:border-white/10 dark:bg-white/[0.05]"
-                                        >
+                                        <div className="border-b border-neutral-200/70 bg-neutral-100/85 px-3 py-2.5 dark:border-white/10 dark:bg-white/[0.05]">
                                             <div className="text-sm font-medium text-neutral-900 dark:text-white/90">
                                                 {table.name}
                                             </div>
                                             <div className="mt-1 text-[11px] font-medium text-neutral-500 dark:text-white/45">
-                                                {table.columns.length} column
-                                                {table.columns.length === 1 ? "" : "s"}
+                                                {rowCount} row{rowCount === 1 ? "" : "s"}
                                             </div>
                                         </div>
 
-                                        <div className="divide-y divide-neutral-200/70 dark:divide-white/10">
-                                            {table.columns.map((col) => (
-                                                <div
-                                                    key={col.name}
-                                                    className="flex items-start justify-between gap-3 px-3 py-2.5"
+                                        <div
+                                            data-diagram-no-pan="true"
+                                            onPointerDown={(e) => e.stopPropagation()}
+                                            onWheel={(e) => e.stopPropagation()}
+                                            className="min-h-0 cursor-auto select-auto touch-auto"
+                                        >
+                                            <div
+                                                className="max-h-[220px] overflow-auto"
+                                                style={{
+                                                    transform: "translateZ(0)",
+                                                    backfaceVisibility: "hidden",
+                                                    WebkitBackfaceVisibility: "hidden",
+                                                    contain: "paint",
+                                                }}
+                                            >
+                                                <table
+                                                    className="border-collapse table-fixed"
+                                                    style={{
+                                                        width: Math.max(metrics.tableMinWidth, box.w - 2),
+                                                        minWidth: Math.max(metrics.tableMinWidth, box.w - 2),
+                                                    }}
                                                 >
-                                                    <div className="min-w-0">
-                                                        <div className="truncate text-[12px] font-medium text-neutral-900 dark:text-white/90">
-                                                            {col.name}
-                                                        </div>
-                                                        <div className="mt-1 text-[11px] font-medium text-neutral-500 dark:text-white/45">
-                                                            {col.type || "type unknown"}
-                                                        </div>
-                                                    </div>
+                                                    <thead className="sticky top-0 z-10 bg-neutral-100/95 backdrop-blur dark:bg-neutral-900/95">
+                                                    <tr>
+                                                        {displayColumns.map((col, ci) => (
+                                                            <th
+                                                                key={`${table.id}-col-${col.name}-${ci}`}
+                                                                className="border-b border-neutral-200/70 px-3 py-2 text-left align-top text-[10px] font-medium uppercase tracking-[0.12em] text-neutral-500 dark:border-white/10 dark:text-white/50"
+                                                                style={{
+                                                                    width: col.width,
+                                                                    minWidth: col.width,
+                                                                    maxWidth: col.width,
+                                                                }}
+                                                            >
+                                                                <div className="flex min-w-0 flex-col items-start gap-1">
+                                        <span className="whitespace-normal break-all text-left leading-4">
+                                            {col.name}
+                                        </span>
 
-                                                    <div className="flex flex-wrap justify-end gap-1">
-                                                        {col.isPk ? <Badge tone="good">PK</Badge> : null}
-                                                        {col.isFk ? <Badge tone="warn">FK</Badge> : null}
-                                                        {col.isUnique ? <Badge>UNIQUE</Badge> : null}
-                                                        {!col.nullable ? <Badge>NOT NULL</Badge> : null}
+                                                                    {col.type ? (
+                                                                        <span className="rounded-md border border-neutral-200 bg-white px-1.5 py-0.5 text-[10px] font-medium normal-case tracking-normal text-neutral-500 dark:border-white/10 dark:bg-white/[0.06] dark:text-white/40">
+                                                {col.type}
+                                            </span>
+                                                                    ) : null}
+                                                                </div>
+                                                            </th>
+                                                        ))}
+                                                    </tr>
+                                                    </thead>
+
+                                                    <tbody>
+                                                    {hasSnapshot ? (
+                                                        previewRows.length ? (
+                                                            previewRows.map((row, ri) => (
+                                                                <tr
+                                                                    key={ri}
+                                                                    className={cn(
+                                                                        "border-b border-neutral-200/70 last:border-b-0 dark:border-white/10",
+                                                                        ri % 2 === 0
+                                                                            ? "bg-white/70 dark:bg-transparent"
+                                                                            : "bg-neutral-50/70 dark:bg-white/[0.02]",
+                                                                    )}
+                                                                >
+                                                                    {displayColumns.map((col, ci) => (
+                                                                        <td
+                                                                            key={`${ri}-${ci}`}
+                                                                            className="px-3 py-2 align-top text-xs text-neutral-800 dark:text-white/85"
+                                                                            style={{
+                                                                                width: col.width,
+                                                                                minWidth: col.width,
+                                                                                maxWidth: col.width,
+                                                                            }}
+                                                                        >
+                                                                            <div className="break-words font-mono leading-5">
+                                                                                <CellValue value={row[ci]} />
+                                                                            </div>
+                                                                        </td>
+                                                                    ))}
+                                                                </tr>
+                                                            ))
+                                                        ) : (
+                                                            <tr>
+                                                                <td
+                                                                    colSpan={Math.max(1, displayColumns.length)}
+                                                                    className="px-3 py-6 text-center text-sm text-neutral-500 dark:text-white/45"
+                                                                >
+                                                                    Table has no rows.
+                                                                </td>
+                                                            </tr>
+                                                        )
+                                                    ) : (
+                                                        <tr>
+                                                            <td
+                                                                colSpan={Math.max(1, displayColumns.length)}
+                                                                className="px-3 py-6 text-center text-sm text-neutral-500 dark:text-white/45"
+                                                            >
+                                                                Run a query once to load table rows.
+                                                            </td>
+                                                        </tr>
+                                                    )}
+                                                    </tbody>
+                                                </table>
+
+                                                {hasSnapshot && rowCount > TABLE_PREVIEW_ROW_LIMIT ? (
+                                                    <div className="border-t border-neutral-200/70 px-3 py-2 text-[11px] text-neutral-500 dark:border-white/10 dark:text-white/45">
+                                                        Showing {TABLE_PREVIEW_ROW_LIMIT} of {rowCount} rows
                                                     </div>
-                                                </div>
-                                            ))}
+                                                ) : null}
+                                            </div>
                                         </div>
                                     </div>
                                 );
@@ -1653,7 +1979,6 @@ function TablesTab(props: {
         </div>
     );
 }
-
 function ErdTab(props: {
     schema: SchemaModel;
     positions: DiagramPositions;
@@ -2176,40 +2501,147 @@ function ChenTab(props: {
         </div>
     );
 }
-
 export default function SqlResultsPane(props: {
     result: SqlRunResult | null;
     busy: boolean;
     className?: string;
     schemaSql?: string;
+    initialTableSnapshots?: SqlTableSnapshots;
+    viewKey?: string;
 }) {
-    const { result, busy, className, schemaSql = "" } = props;
-    const [tab, setTab] = React.useState<TabKey>("results");
+    const {
+        result,
+        busy,
+        className,
+        schemaSql = "",
+        initialTableSnapshots,    viewKey = "",
+
+    } = props;
+
+    const [tab, setTab] = React.useState<TabKey>("tables");
     const [positions, setPositions] = React.useState<DiagramPositions>({});
 
-    React.useEffect(() => {
-        if (busy) setTab("results");
-    }, [busy]);
-
     const schema = React.useMemo(() => parseSchemaSql(schemaSql), [schemaSql]);
-    const tableLayout = React.useMemo(
-        () => buildTableLayout(schema.tables),
-        [schema.tables],
-    );
-    const chenLayout = React.useMemo(
-        () => buildChenLayout(schema.tables),
-        [schema.tables],
-    );
+
+    const sourceKey = React.useMemo(() => {
+        const snapshotKey = Object.entries(initialTableSnapshots ?? {})
+            .sort(([a], [b]) => a.localeCompare(b))
+            .map(([name, snap]) => {
+                const cols = (snap.columns ?? [])
+                    .map((c) => `${c.name}:${c.type ?? ""}`)
+                    .join(",");
+                return `${name}:${snap.rowCount}:${cols}`;
+            })
+            .join("|");
+
+        return `${viewKey}::${schemaSql}::${snapshotKey}`;
+    }, [viewKey, schemaSql, initialTableSnapshots]);
+
+    const fallbackSnapshots = React.useMemo(() => {
+        if (initialTableSnapshots && Object.keys(initialTableSnapshots).length > 0) {
+            return initialTableSnapshots;
+        }
+        return buildDefaultTableSnapshots(schema);
+    }, [initialTableSnapshots, schema]);
+
+    const [persistedSnapshots, setPersistedSnapshots] =
+        React.useState<SqlTableSnapshots>(() => fallbackSnapshots);
+
+    const [acceptedResult, setAcceptedResult] = React.useState<SqlRunResult | null>(null);
+
+    const blockedResultRef = React.useRef<SqlRunResult | null>(null);
+    const lastSourceKeyRef = React.useRef<string | null>(null);
 
     React.useEffect(() => {
-        setPositions((prev) => {
-            let next = syncTabDefaults(prev, "tables", tableLayout.boxes);
-            next = syncTabDefaults(next, "erd", tableLayout.boxes);
-            next = syncTabDefaults(next, "chen", chenLayout.boxes);
-            return next;
-        });
-    }, [tableLayout, chenLayout]);
+        const changed = lastSourceKeyRef.current !== sourceKey;
+        if (!changed) return;
 
+        lastSourceKeyRef.current = sourceKey;
+        blockedResultRef.current = result ?? null;
+
+        setAcceptedResult(null);
+        setPersistedSnapshots(fallbackSnapshots);
+        setPositions({});
+        setTab(busy ? "results" : "tables");
+    }, [sourceKey, fallbackSnapshots, result, busy]);
+
+    React.useEffect(() => {
+        if (busy) {
+            setTab("results");
+            return;
+        }
+
+        if (!result) {
+            setAcceptedResult(null);
+            setPersistedSnapshots(fallbackSnapshots);
+            return;
+        }
+
+        if (result === blockedResultRef.current) return;
+
+        setAcceptedResult(result);
+
+        if (result.ok) {
+            const nextSnapshots = getTableSnapshots(result);
+            setPersistedSnapshots(
+                Object.keys(nextSnapshots).length > 0 ? nextSnapshots : fallbackSnapshots,
+            );
+        }
+    }, [busy, result, fallbackSnapshots]);
+
+    const tableSnapshots = React.useMemo(() => {
+        return Object.keys(persistedSnapshots).length > 0
+            ? persistedSnapshots
+            : fallbackSnapshots;
+    }, [persistedSnapshots, fallbackSnapshots]);
+
+    const displayResult = acceptedResult;
+
+    const tablesMetricsByTable = React.useMemo(() => {
+        if (tab !== "tables") return null;
+
+        const map = new Map<string, TablePreviewMetrics>();
+        for (const table of schema.tables) {
+            map.set(table.id, buildTablePreviewMetrics(table, tableSnapshots));
+        }
+        return map;
+    }, [tab, schema.tables, tableSnapshots]);
+
+    const tablesLayout = React.useMemo(() => {
+        if (tab !== "tables" || !tablesMetricsByTable) {
+            return { boxes: [], width: 0, height: 0 };
+        }
+        return buildTablesCanvasLayout(schema.tables, tablesMetricsByTable);
+    }, [tab, schema.tables, tablesMetricsByTable]);
+
+    const erdLayout = React.useMemo(() => {
+        if (tab !== "erd") {
+            return { boxes: [], width: 0, height: 0 };
+        }
+        return buildTableLayout(schema.tables);
+    }, [tab, schema.tables]);
+
+    const chenLayout = React.useMemo(() => {
+        if (tab !== "chen") {
+            return { boxes: [], width: 0, height: 0 };
+        }
+        return buildChenLayout(schema.tables);
+    }, [tab, schema.tables]);
+
+    React.useEffect(() => {
+        if (tab !== "tables") return;
+        setPositions((prev) => syncTabDefaults(prev, "tables", tablesLayout.boxes));
+    }, [tab, tablesLayout]);
+
+    React.useEffect(() => {
+        if (tab !== "erd") return;
+        setPositions((prev) => syncTabDefaults(prev, "erd", erdLayout.boxes));
+    }, [tab, erdLayout]);
+
+    React.useEffect(() => {
+        if (tab !== "chen") return;
+        setPositions((prev) => syncTabDefaults(prev, "chen", chenLayout.boxes));
+    }, [tab, chenLayout]);
     const handleMove = React.useCallback(
         (diagramTab: DiagramTabKey, id: string, x: number, y: number) => {
             setPositions((prev) => ({
@@ -2241,7 +2673,7 @@ export default function SqlResultsPane(props: {
         );
     }
 
-    if (!result) {
+    if (!displayResult) {
         return (
             <div className={cn("flex h-full min-h-0 flex-col gap-3", className)}>
                 <TabsRow tab={tab} setTab={setTab} />
@@ -2251,6 +2683,7 @@ export default function SqlResultsPane(props: {
                             schema={schema}
                             positions={positions}
                             onMove={handleMove}
+                            tableSnapshots={tableSnapshots}
                         />
                     ) : tab === "erd" ? (
                         <ErdTab
@@ -2275,7 +2708,7 @@ export default function SqlResultsPane(props: {
         );
     }
 
-    if (!result.ok) {
+    if (!displayResult.ok) {
         return (
             <div className={cn("flex h-full min-h-0 flex-col gap-3", className)}>
                 <TabsRow tab={tab} setTab={setTab} />
@@ -2284,17 +2717,17 @@ export default function SqlResultsPane(props: {
                         <div className="flex h-full min-h-0 flex-col rounded-xl border border-rose-300/20 bg-rose-50/70 p-4 dark:border-rose-300/15 dark:bg-rose-950/20">
                             <div className="flex flex-wrap items-center gap-2">
                                 <Badge tone="bad">SQL error</Badge>
-                                <Badge>{result.dialect}</Badge>
-                                <Badge tone="bad">{result.status}</Badge>
+                                <Badge>{displayResult.dialect}</Badge>
+                                <Badge tone="bad">{displayResult.status}</Badge>
                             </div>
 
                             <div className="mt-3 rounded-lg border border-rose-300/20 bg-white/70 p-3 dark:border-rose-300/15 dark:bg-black/20">
-                <pre className="whitespace-pre-wrap break-words text-[12px] font-medium text-rose-800 dark:text-rose-200">
-                  {result.error ??
-                      result.stderr ??
-                      result.message ??
-                      "Query failed."}
-                </pre>
+                                <pre className="whitespace-pre-wrap break-words text-[12px] font-medium text-rose-800 dark:text-rose-200">
+                                    {displayResult.error ??
+                                        displayResult.stderr ??
+                                        displayResult.message ??
+                                        "Query failed."}
+                                </pre>
                             </div>
                         </div>
                     ) : tab === "tables" ? (
@@ -2302,6 +2735,7 @@ export default function SqlResultsPane(props: {
                             schema={schema}
                             positions={positions}
                             onMove={handleMove}
+                            tableSnapshots={tableSnapshots}
                         />
                     ) : tab === "erd" ? (
                         <ErdTab
@@ -2326,12 +2760,13 @@ export default function SqlResultsPane(props: {
             <TabsRow tab={tab} setTab={setTab} />
             <div className="min-h-0 flex-1">
                 {tab === "results" ? (
-                    <ResultsTab result={result} />
+                    <ResultsTab result={displayResult} />
                 ) : tab === "tables" ? (
                     <TablesTab
                         schema={schema}
                         positions={positions}
                         onMove={handleMove}
+                        tableSnapshots={tableSnapshots}
                     />
                 ) : tab === "erd" ? (
                     <ErdTab

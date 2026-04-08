@@ -1,23 +1,43 @@
 "use client";
 
-import React, {useEffect, useMemo, useState} from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { ExercisePrompt } from "@/components/practice/kinds/KindHelper";
 import { useSpeak } from "./_shared/useSpeak";
 
 type Exercise = {
     title: string;
     prompt: string;
-
-    // Use "__" as the blank marker (or "____")
-    template: string;          // e.g. "Il y a un ____ mexicain dans ma rue."
-    choices: string[];         // e.g. ["chargeur", "restaurant", "merci"]
-    correct?: string;          // optional (parent can grade)
+    template: string;
+    choices: string[];
+    correct?: string;
     locale?: string;
     hint?: string;
+    audio?: boolean; // hidden unless true
 };
 
 function renderTemplate(template: string, fill: string) {
     return template.replace(/_{2,}/g, fill || "______");
+}
+
+function renderSentenceWithBlank(template: string, fill: string) {
+    const parts = template.split(/_{2,}/g);
+
+    return (
+        <>
+            {parts.map((part, index) => (
+                <React.Fragment key={`${part}-${index}`}>
+                    <span>{part}</span>
+                    {index < parts.length - 1 ? (
+                        <span className="mx-1 inline-flex align-middle">
+              <span className={fill ? "ui-pill-good" : "ui-pill-neutral"}>
+                {fill || "Choose"}
+              </span>
+            </span>
+                    ) : null}
+                </React.Fragment>
+            ))}
+        </>
+    );
 }
 
 export default function FillBlankChoiceExerciseUI({
@@ -30,7 +50,7 @@ export default function FillBlankChoiceExerciseUI({
                                                       reviewCorrectValue = null,
                                                   }: {
     exercise: Exercise;
-    value: string;               // selected choice
+    value: string;
     onChangeValue: (v: string) => void;
     disabled: boolean;
     checked: boolean;
@@ -38,93 +58,144 @@ export default function FillBlankChoiceExerciseUI({
     reviewCorrectValue?: string | null;
 }) {
     const { speak, ttsStatus } = useSpeak();
-    const [selected, setSelected] = useState<string>(value ?? "");
 
-    const sentence = useMemo(
-        () => renderTemplate(exercise.template, selected),
-        [exercise.template, selected]
-    );
+    const [selected, setSelected] = useState<string>(value ?? "");
+    // const [showHint, setShowHint] = useState(false);
 
     useEffect(() => {
         setSelected(value ?? "");
     }, [value]);
-    const choose = (c: string) => {
+
+    const audioEnabled = exercise.audio === true;
+
+    const spokenSentence = useMemo(
+        () => renderTemplate(exercise.template, selected),
+        [exercise.template, selected]
+    );
+
+    const choose = (choice: string) => {
         if (disabled) return;
-        setSelected(c);
-        onChangeValue(c);
+        setSelected(choice);
+        onChangeValue(choice);
     };
 
-    const listen = () => void speak(sentence, { voice: "marin", speed: 1.0 });
+    const listenCurrent = () =>
+        void speak(spokenSentence, { voice: "marin", speed: 1.0 });
 
-    const shell =
-        "rounded-2xl border p-4 border-neutral-200/70 bg-white/70 dark:border-white/10 dark:bg-white/[0.04]";
-    const muted = "text-neutral-600 dark:text-white/60";
-    const text = "text-neutral-900 dark:text-white/90";
-    const btn =
-        "rounded-xl border px-3 py-2 text-xs font-semibold transition disabled:opacity-40 disabled:cursor-not-allowed " +
-        "border-neutral-200 bg-white hover:bg-neutral-50 text-neutral-900 dark:border-white/10 dark:bg-white/[0.03] dark:hover:bg-white/[0.06] dark:text-white/90";
-
-    const optBase =
-        "w-full rounded-2xl border px-4 py-3 text-left text-sm font-semibold transition " +
-        "border-neutral-200 bg-white hover:bg-neutral-50 text-neutral-900 " +
-        "dark:border-white/10 dark:bg-white/[0.03] dark:hover:bg-white/[0.06] dark:text-white/90";
-
-    const optActive =
-        "border-emerald-500/35 bg-emerald-500/10 text-emerald-900 dark:text-emerald-100";
-
-    const pillBase = "rounded-full border px-2.5 py-1 text-[11px] font-semibold tabular-nums";
-    const pillOk = "border-emerald-500/25 bg-emerald-500/10 text-emerald-700 dark:text-emerald-200";
-    const pillBad = "border-rose-500/25 bg-rose-500/10 text-rose-700 dark:text-rose-200";
+    const listenCorrect = () => {
+        if (!reviewCorrectValue) return;
+        void speak(renderTemplate(exercise.template, reviewCorrectValue), {
+            voice: "marin",
+            speed: 1.0,
+        });
+    };
 
     return (
-        <div className={shell}>
-            <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+        <div className="ui-review-topic-shell space-y-4">
+            <div className="flex items-start justify-between gap-3">
                 <ExercisePrompt exercise={exercise} />
-                {typeof ok === "boolean" ? (
-                    <div className={[pillBase, ok ? pillOk : pillBad].join(" ")}>
-                        {ok ? "Correct" : "Try again"}
-                    </div>
+                {/*{typeof ok === "boolean" ? (*/}
+                {/*    <div className={ok ? "ui-pill-good" : "ui-pill-danger"}>*/}
+                {/*        {ok ? "Correct" : "Try again"}*/}
+                {/*    </div>*/}
+                {/*) : null}*/}
+            </div>
+
+            <div className="ui-review-note space-y-3 border-none">
+                <div className="flex items-start justify-between gap-3">
+                    {/*<div>*/}
+                    {/*    <div className="ui-kicker">Fill in the blank</div>*/}
+                    {/*    <div className="ui-meta">Pick the best choice to complete the sentence.</div>*/}
+                    {/*</div>*/}
+
+                    {audioEnabled ? (
+                        <button
+                            type="button"
+                            className="ui-btn-secondary"
+                            onClick={listenCurrent}
+                            disabled={disabled}
+                        >
+                            Listen
+                        </button>
+                    ) : null}
+                </div>
+
+                <div className="ui-title-sm leading-8">
+                    {renderSentenceWithBlank(exercise.template, selected)}
+                </div>
+
+                {audioEnabled && ttsStatus ? (
+                    <div className="ui-quiz-status">{ttsStatus}</div>
                 ) : null}
+
+                {/*{exercise.hint ? (*/}
+                {/*    showHint ? (*/}
+                {/*        <div className="space-y-2">*/}
+                {/*            <div className="ui-quiz-note-inline">*/}
+                {/*                <span className="ui-meta-strong">Hint:</span> {exercise.hint}*/}
+                {/*            </div>*/}
+                {/*            <div>*/}
+                {/*                <button*/}
+                {/*                    type="button"*/}
+                {/*                    className="ui-btn-secondary"*/}
+                {/*                    onClick={() => setShowHint(false)}*/}
+                {/*                    disabled={disabled}*/}
+                {/*                >*/}
+                {/*                    Hide hint*/}
+                {/*                </button>*/}
+                {/*            </div>*/}
+                {/*        </div>*/}
+                {/*    ) : (*/}
+                {/*        <div>*/}
+                {/*            <button*/}
+                {/*                type="button"*/}
+                {/*                className="ui-btn-secondary"*/}
+                {/*                onClick={() => setShowHint(true)}*/}
+                {/*                disabled={disabled}*/}
+                {/*            >*/}
+                {/*                Show hint*/}
+                {/*            </button>*/}
+                {/*        </div>*/}
+                {/*    )*/}
+                {/*) : null}*/}
             </div>
 
-            <div className="mt-3 flex flex-wrap items-center gap-2">
-                <button className={btn} onClick={listen} disabled={disabled}>
-                    🔊 Listen
-                </button>
-                {ttsStatus ? <div className={`text-xs font-semibold ${muted}`}>{ttsStatus}</div> : null}
-            </div>
+            <div className="grid gap-2 sm:grid-cols-2">
+                {exercise.choices.map((choice) => {
+                    const active = selected === choice;
 
-            <div className="mt-4 rounded-2xl border border-neutral-200/70 bg-white/70 p-4 dark:border-white/10 dark:bg-white/[0.03]">
-                <div className={`text-xs font-semibold ${muted}`}>Sentence</div>
-                <div className={`mt-2 text-lg font-semibold ${text}`}>{sentence}</div>
-                {exercise.hint ? (
-                    <div className={`mt-2 text-xs ${muted}`}>
-                        Hint:{" "}
-                        <span className="font-semibold text-neutral-700 dark:text-white/70">{exercise.hint}</span>
-                    </div>
-                ) : null}
-            </div>
-
-            <div className="mt-4 grid gap-2">
-                {exercise.choices.map((c) => (
-                    <button
-                        key={c}
-                        className={[optBase, selected === c ? optActive : ""].join(" ")}
-                        onClick={() => choose(c)}
-                        disabled={disabled}
-                    >
-                        {c}
-                    </button>
-                ))}
+                    return (
+                        <button
+                            key={choice}
+                            type="button"
+                            onClick={() => choose(choice)}
+                            disabled={disabled}
+                            className={active ? "ui-review-topic-btn-active" : "ui-review-topic-btn"}
+                        >
+                            <div className="ui-title-sm">{choice}</div>
+                        </button>
+                    );
+                })}
             </div>
 
             {checked && ok === false && reviewCorrectValue ? (
-                <div className="mt-4 rounded-2xl border border-neutral-200/70 bg-white/70 p-3 dark:border-white/10 dark:bg-white/[0.04]">
-                    <div className={`text-xs font-semibold ${muted}`}>Correct</div>
-                    <div className={`mt-1 text-sm font-semibold ${text}`}>{reviewCorrectValue}</div>
-                    <button className={`${btn} mt-3`} onClick={() => void speak(renderTemplate(exercise.template, reviewCorrectValue))}>
-                        🔊 Listen (correct)
-                    </button>
+                <div className="ui-review-note-danger space-y-3">
+                    <div>
+                        <div className="ui-kicker">Correct answer</div>
+                        <div className="ui-title-sm mt-1">{reviewCorrectValue}</div>
+                    </div>
+
+                    {audioEnabled ? (
+                        <div>
+                            <button
+                                type="button"
+                                className="ui-btn-secondary"
+                                onClick={listenCorrect}
+                            >
+                                Listen
+                            </button>
+                        </div>
+                    ) : null}
                 </div>
             ) : null}
         </div>

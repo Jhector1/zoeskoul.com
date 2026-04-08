@@ -10,20 +10,23 @@ export type ModuleNavInfo = {
   total: number;
 } | null;
 
-export function useModuleNav(args: { subjectSlug: string; moduleId: string }) {
-  const { subjectSlug, moduleId } = args;
+export function useModuleNav(args: { subjectSlug: string; moduleSlug: string }) {
+  const { subjectSlug, moduleSlug } = args;
   const [nav, setNav] = useState<ModuleNavInfo | undefined>(undefined);
 
   useEffect(() => {
-    if (!subjectSlug || !moduleId) return;
-    setNav(undefined); // ✅ reset to loading on change
+    if (!subjectSlug || !moduleSlug) return;
+    setNav(undefined);
 
     const ctrl = new AbortController();
 
-    fetch(`/api/review/module-nav?subjectSlug=${encodeURIComponent(subjectSlug)}&moduleId=${encodeURIComponent(moduleId)}`, {
-      cache: "no-store",
-      signal: ctrl.signal,
-    })
+    fetch(
+        `/api/review/module-nav?subjectSlug=${encodeURIComponent(subjectSlug)}&moduleSlug=${encodeURIComponent(moduleSlug)}`,
+        {
+          cache: "no-store",
+          signal: ctrl.signal,
+        },
+    )
         .then((r) => (r.ok ? r.json() : null))
         .then((d) => setNav(d))
         .catch((e) => {
@@ -31,7 +34,7 @@ export function useModuleNav(args: { subjectSlug: string; moduleId: string }) {
         });
 
     return () => ctrl.abort();
-  }, [subjectSlug, moduleId]);
+  }, [subjectSlug, moduleSlug]);
 
   return nav;
 }

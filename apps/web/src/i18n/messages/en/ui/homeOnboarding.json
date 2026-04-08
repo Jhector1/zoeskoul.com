@@ -146,6 +146,17 @@
       "startError": "Could not start the trial right now.",
       "overlayTitle": "Preparing your first practice session.",
       "overlayDescription": "This will only take a moment."
-    }
+    },
+
+  "entry": {
+    "kicker": "Welcome",
+    "title": "Welcome to {appName}",
+    "description": "Let’s get you to the right place. Are you new here, or do you already have an account?",
+    "avatarText": "Hi, I’m your guide. Are you new here, or do you already have an account?",
+    "newUser": "I’m new here",
+    "returningUser": "I already have an account",
+    "helper": "New users start onboarding. Returning users go to sign in."
+
+}
   }
 }

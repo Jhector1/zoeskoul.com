@@ -84,7 +84,7 @@ export default function SketchBlock(props: {
         return (
             <div className="ui-soft p-3 text-xs font-extrabold text-neutral-700 dark:text-white/70">
                 {ui.t("unknownSketch", { id: sketchId }, `Unknown sketchId: ${sketchId}`)}
-                <span className="ml-2 font-mono">{sketchId}</span>
+                {/*<span className="ml-2 font-mono">{sketchId}</span>*/}
             </div>
         );
     }

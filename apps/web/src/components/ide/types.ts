@@ -181,11 +181,12 @@ export type UseIdeProjectSessionArgs = {
     activeFile: any | null;
     entryFile: any | null;
     replaceWorkspace: (ws: SaveProjectRequest["workspace"]) => void;
-    resetWorkspaceForLanguage: (language: CodeLanguage) => void;
+    resetWorkspaceForLanguage?: (language: CodeLanguage) => void;
     markLoaded: DirtyStateApi["markLoaded"];
     markSaved: DirtyStateApi["markSaved"];
     clearSavedBaseline: DirtyStateApi["clearSavedBaseline"];
     isDirty: boolean;
+    actorKey: string;
     setToast: (toast: ToastState) => void;
     refreshProjects: ProjectsHookResult["refresh"];
 };

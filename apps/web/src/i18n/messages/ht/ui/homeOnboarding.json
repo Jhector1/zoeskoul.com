@@ -147,6 +147,15 @@
       "startError": "Nou pa t ka kòmanse esè a kounye a.",
       "overlayTitle": "N ap prepare premye sesyon pratik ou a.",
       "overlayDescription": "Sa ap pran yon ti moman sèlman."
+    },
+    "entry": {
+      "kicker": "Byenvini",
+      "title": "Byenvini sou {appName}",
+      "description": "Ann ede w ale nan bon kote a. Èske ou nouvo isit la, oswa èske ou deja gen yon kont?",
+      "avatarText": "Bonjou, mwen se gid ou. Èske ou nouvo isit la, oswa èske ou deja gen yon kont?",
+      "newUser": "Mwen nouvo isit la",
+      "returningUser": "Mwen deja gen yon kont",
+      "helper": "Nouvo itilizatè yo kòmanse ak onboarding. Itilizatè ki deja egziste yo ale konekte."
     }
   }
 }

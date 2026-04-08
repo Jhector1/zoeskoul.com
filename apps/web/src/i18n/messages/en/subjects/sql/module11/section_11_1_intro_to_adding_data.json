@@ -1,0 +1,293 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_11": {
+        "intro_to_adding_data": {
+          "label": "Intro to Adding Data",
+          "summary": "Learn what `INSERT INTO` does, how to add one row, how to add multiple rows, and how to match values to columns correctly.",
+          "cards": {
+            "sketch0": {
+              "title": "What does INSERT INTO do?"
+            },
+            "sketch1": {
+              "title": "How do you insert one row?"
+            },
+            "sketch2": {
+              "title": "How do you insert multiple rows?"
+            },
+            "sketch3": {
+              "title": "How do values match columns?"
+            },
+            "quiz": {
+              "title": "Quiz: Intro to Adding Data"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_11": {
+        "section_11_1": {
+          "what_insert_into_does": {
+            "title": "`INSERT INTO` adds new rows to a table.",
+            "bodyMarkdown": "So far, many beginner queries have only **read** data.\n\n`INSERT INTO` is different.\nIt is used to **add** data.\n\nThat means a query can create a new row in a table.\n\nSo the big idea is:\n\n> `INSERT INTO` is used when you want to add new records to a table"
+          },
+          "insert_one_row": {
+            "title": "A single insert adds one new row.",
+            "bodyMarkdown": "A basic insert usually gives:\n\n- the table name\n- the columns being filled\n- one set of values\n\nThat creates one new record.\n\nSo the key idea is:\n\n> one set of values means one new row"
+          },
+          "insert_multiple_rows": {
+            "title": "One insert statement can add more than one row.",
+            "bodyMarkdown": "You do not always need a separate statement for every new row.\n\nA single `INSERT INTO` can include multiple value groups.\n\nThat is useful when:\n\n- adding several records at once\n- practicing batch inserts\n- loading a few rows together\n\nSo the main idea is:\n\n> multiple value groups can insert multiple rows in one statement"
+          },
+          "matching_values_to_columns": {
+            "title": "Inserted values must match the columns in order.",
+            "bodyMarkdown": "When you insert data, SQL matches each value to a column.\n\nThat means you must pay attention to:\n\n- the order of the columns\n- the number of values\n- the kind of data each column expects\n\nSo the important idea is:\n\n> each inserted value must line up with the correct column"
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "m11_s01_insert_one_item": {
+      "title": "Insert one row",
+      "prompt": "The SQLite workspace already has the `inventory_ops` dataset loaded.\n\nWrite a query that inserts one new row into `inventory_items` with these values:\n\n- `id` = 7\n- `name` = 'Desk Lamp'\n- `category` = 'Decor'\n- `price` = 28.00\n- `status` = 'active'\n- `is_test` = 0\n- `notes` = NULL\n- `last_updated` = '2026-02-07'\n\nThen click **Run**.",
+      "help": {
+        "concept": "A single insert statement adds one new row by matching one set of values to the listed columns.",
+        "hint_1": "List the columns you want to fill, then provide one matching value group.",
+        "hint_2": "Build an `INSERT INTO inventory_items (...) VALUES (...)` statement where the values appear in the same order as the columns."
+      },
+      "hint": "Use one VALUES group that matches the listed columns in order.",
+      "starterCode": "-- Insert one new inventory item\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "inventory_ops",
+        "resultShape": "table"
+      }
+    },
+    "m11_s01_insert_another_item": {
+      "title": "Insert another single row",
+      "prompt": "The tables already exist.\n\nWrite a query that inserts one new row into `inventory_items` with these values:\n\n- `id` = 8\n- `name` = 'Notebook Set'\n- `category` = 'Accessories'\n- `price` = 11.50\n- `status` = 'draft'\n- `is_test` = 1\n- `notes` = 'Preview item'\n- `last_updated` = '2026-02-08'\n\nThen run it.",
+      "help": {
+        "concept": "A one-row insert uses one column list and one value group.",
+        "hint_1": "Make sure the values line up with the columns exactly.",
+        "hint_2": "Use a normal single-row insert with one VALUES group in the same order as the target columns."
+      },
+      "hint": "Use one column list and one matching VALUES group.",
+      "starterCode": "-- Insert one preview inventory item\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "inventory_ops",
+        "resultShape": "table"
+      }
+    },
+    "m11_s01_insert_multiple_items": {
+      "title": "Insert multiple rows",
+      "prompt": "The tables already exist.\n\nWrite one query that inserts these two rows into `inventory_items`:\n\nRow 1:\n- `id` = 9\n- `name` = 'Phone Stand'\n- `category` = 'Accessories'\n- `price` = 13.00\n- `status` = 'active'\n- `is_test` = 0\n- `notes` = NULL\n- `last_updated` = '2026-02-09'\n\nRow 2:\n- `id` = 10\n- `name` = 'Tea Towel'\n- `category` = 'Kitchen'\n- `price` = 8.75\n- `status` = 'draft'\n- `is_test` = 0\n- `notes` = 'Seasonal sample'\n- `last_updated` = '2026-02-09'\n\nThen click **Run**.",
+      "help": {
+        "concept": "One insert statement can include more than one value group when the column list is the same.",
+        "hint_1": "Use one column list and then two separate value groups.",
+        "hint_2": "Build a single `INSERT INTO` statement and place both row value groups after `VALUES`, separated correctly."
+      },
+      "hint": "Use one INSERT statement with two VALUES groups.",
+      "starterCode": "-- Insert two inventory rows in one statement\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "inventory_ops",
+        "resultShape": "table"
+      }
+    },
+    "m11_s01_check_inserted_row": {
+      "title": "Read the inserted data",
+      "prompt": "The tables already exist.\n\nWrite a query that returns all columns from `inventory_items` for the row where `id` = 1.\n\nThen run it and inspect how one record is stored in the table.",
+      "help": {
+        "concept": "Reading an existing row helps learners see how the inserted values line up across the table columns.",
+        "hint_1": "Use a normal SELECT query with a WHERE condition on the id.",
+        "hint_2": "Build a query that returns the full row from `inventory_items` for one chosen id so you can inspect the stored column order and values."
+      },
+      "hint": "Use SELECT with a WHERE condition on id.",
+      "starterCode": "-- Show one full inventory row by id\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "inventory_ops",
+        "resultShape": "table"
+      }
+    },
+    "m11_s01_insert_intro_project": {
+      "title": "Practice basic inserting",
+      "prompt": "Use the SQL workspace on the right to practice `INSERT INTO` on the `inventory_ops` dataset.\n\nFor each task:\n\n1. type the query in the editor\n2. click **Run**\n3. think about how the values line up with the columns\n4. use a SELECT query afterward when needed to inspect the data\n\nTasks:\n\n1. Insert one new inventory item\n2. Insert another single row\n3. Insert two rows in one statement\n4. Select one row by id to inspect its values\n5. Insert one new draft item with all columns filled explicitly\n\nRun one query at a time.\nThis project is about learning the basic shape of insert statements.",
+      "help": {
+        "concept": "Basic insert practice is about adding rows carefully and matching each value to the right column.",
+        "hint_1": "Use one row first, then try multiple rows once the column order feels clear.",
+        "hint_2": "Solve the tasks one by one. Focus on the column list first, then place the values in the exact same order."
+      },
+      "hint": "Match the values to the listed columns carefully.",
+      "starterCode": "-- Task 1\n-- Insert one new inventory item\n\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "inventory_ops",
+        "resultShape": "table"
+      }
+    },
+    "m11_s01_insert_meaning": {
+      "title": "What does INSERT INTO do?",
+      "prompt": "What is the main job of `INSERT INTO` in SQL?",
+      "help": {
+        "concept": "`INSERT INTO` is used to add new data rows to a table.",
+        "hint_1": "Think add rows.",
+        "hint_2": "It is for creating new records, not just reading existing ones."
+      },
+      "hint": "Think add new rows.",
+      "options": {
+        "a": "It adds new rows to a table",
+        "b": "It removes rows from a table",
+        "c": "It only renames columns",
+        "d": "It only formats results"
+      }
+    },
+    "m11_s01_one_row_meaning": {
+      "title": "What does one VALUES group mean?",
+      "prompt": "In a basic insert statement, what does one VALUES group usually create?",
+      "help": {
+        "concept": "One VALUES group usually creates one inserted row.",
+        "hint_1": "Think one row of data.",
+        "hint_2": "A single value set maps to one new record."
+      },
+      "hint": "Think one VALUES group, one row.",
+      "options": {
+        "a": "One new row",
+        "b": "One new table",
+        "c": "One deleted row",
+        "d": "One comment line"
+      }
+    },
+    "m11_s01_multiple_rows_meaning": {
+      "title": "How do multiple-row inserts work?",
+      "prompt": "What is the main idea of inserting multiple rows in one statement?",
+      "help": {
+        "concept": "A single insert statement can contain several value groups when the column list stays the same.",
+        "hint_1": "Think several rows, one statement.",
+        "hint_2": "The same listed columns are reused for each row's value group."
+      },
+      "hint": "Think several VALUES groups in one INSERT statement.",
+      "options": {
+        "a": "One INSERT statement can include several VALUES groups",
+        "b": "Each new row always requires a new table",
+        "c": "Multiple-row inserts remove the need for columns",
+        "d": "They only work with SELECT"
+      }
+    },
+    "m11_s01_matching_values_meaning": {
+      "title": "Why must values match columns carefully?",
+      "prompt": "Why is matching values to columns important in an insert statement?",
+      "help": {
+        "concept": "Each value is assigned based on the column order and meaning.",
+        "hint_1": "Think right value in right place.",
+        "hint_2": "If the order is wrong, the inserted row can be wrong or fail."
+      },
+      "hint": "Think each value must line up with the correct column.",
+      "options": {
+        "a": "Because each value must line up with the correct column",
+        "b": "Because inserts ignore column meaning completely",
+        "c": "Because values are always sorted automatically",
+        "d": "Because tables do not use column order"
+      }
+    },
+    "m11_s01_insert_reading_meaning": {
+      "title": "Why read inserted results?",
+      "prompt": "Why can it be useful to look at inserted rows after an insert?",
+      "help": {
+        "concept": "Reading inserted rows helps confirm that the data landed in the expected columns.",
+        "hint_1": "Think verify what was stored.",
+        "hint_2": "It is a good way to confirm the inserted row matches your intention."
+      },
+      "hint": "Think check what was actually stored.",
+      "options": {
+        "a": "To verify that the inserted values were stored correctly",
+        "b": "To delete the inserted rows automatically",
+        "c": "To hide the inserted columns",
+        "d": "To remove the need for WHERE"
+      }
+    },
+    "m11_s01_insert_true": {
+      "title": "What is true about INSERT INTO?",
+      "prompt": "Select all true statements about `INSERT INTO`.",
+      "help": {
+        "concept": "INSERT INTO is used to add new rows to a table using values matched to columns.",
+        "hint_1": "Think add rows and match values carefully.",
+        "hint_2": "Choose the statements about adding records rather than reading them."
+      },
+      "hint": "Think adding rows carefully.",
+      "options": {
+        "a": "`INSERT INTO` adds new rows",
+        "b": "`INSERT INTO` can use a column list",
+        "c": "`INSERT INTO` can add one or more rows",
+        "d": "`INSERT INTO` only works for deleting data",
+        "e": "`INSERT INTO` is about writing data, not just reading it"
+      }
+    },
+    "m11_s01_multiple_rows_true": {
+      "title": "What is true about inserting multiple rows?",
+      "prompt": "Select all true statements about inserting multiple rows in one statement.",
+      "help": {
+        "concept": "Multi-row inserts reuse the same column list for several value groups.",
+        "hint_1": "Think one insert, many value groups.",
+        "hint_2": "Choose the statements about batch-style insertion."
+      },
+      "hint": "Think one column list, multiple VALUES groups.",
+      "options": {
+        "a": "One insert statement can insert more than one row",
+        "b": "Each value group should follow the same column order",
+        "c": "This can be useful for adding several records at once",
+        "d": "Multiple-row inserts mean column order stops mattering",
+        "e": "Each value group still represents one row"
+      }
+    },
+    "m11_s01_column_matching_true": {
+      "title": "What is true about matching values to columns?",
+      "prompt": "Select all true statements about matching inserted values to columns.",
+      "help": {
+        "concept": "Inserted data only works correctly when the values line up with the target columns.",
+        "hint_1": "Think correct value in correct column.",
+        "hint_2": "Choose the statements about order, count, and meaning."
+      },
+      "hint": "Think correct alignment matters.",
+      "options": {
+        "a": "The number of values should match the listed columns",
+        "b": "The order of values should match the order of columns",
+        "c": "Wrong alignment can cause bad data or errors",
+        "d": "Column order never matters in inserts",
+        "e": "Reading the row afterward can help confirm the match"
+      }
+    },
+    "m11_s01_insert_intro_workflow_true": {
+      "title": "What matches a good beginner workflow for basic inserts?",
+      "prompt": "Select all statements that match a good beginner workflow for writing simple insert statements.",
+      "help": {
+        "concept": "A good workflow is to identify the columns, prepare the values in matching order, run the insert, and verify the result.",
+        "hint_1": "Think columns first, values second.",
+        "hint_2": "Choose the steps that help keep the insert careful and readable."
+      },
+      "hint": "Choose the columns first, then line up the values.",
+      "options": {
+        "a": "Identify which columns should be filled",
+        "b": "Put the values in the same order as the columns",
+        "c": "Run the insert carefully",
+        "d": "Check the inserted row afterward when needed",
+        "e": "Ignore whether the values line up"
+      }
+    }
+  }
+}

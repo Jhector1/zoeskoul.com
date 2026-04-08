@@ -1,19 +1,20 @@
-import type { PracticeKind } from "@prisma/client";
 import type { ReviewTopicShape } from "@/lib/subjects/types";
 import type { SketchEntry } from "@/components/sketches/subjects";
+import type { TopicBundle as GeneratorTopicBundle } from "@/lib/practice/generator/engines/utils";
 
 export type JsonObject = { readonly [key: string]: unknown };
 
 export type TopicPoolItem = {
     key: string;
     w: number;
-    kind?: PracticeKind;
+    kind?: string;
+    purpose?: "quiz" | "project";
 };
 
 export type TopicMeta = {
     label: string;
     minutes: number;
-    preferKind?: PracticeKind | null;
+    preferKind?: string | null;
     pool?: readonly TopicPoolItem[];
 };
 
@@ -26,20 +27,18 @@ export type TopicDefInput = {
     meta: TopicMeta;
 };
 
-export type TopicGeneratorRegistration = {
-    genKey?: string;
-    pool: readonly TopicPoolItem[];
-    handlers: Record<string, unknown>;
-};
-
-export type TopicBundle = {
+export type SubjectTopicBundle = {
     def: TopicDefInput;
     review?: ReviewTopicShape;
     sketches?: Record<string, SketchEntry>;
-    generator?: TopicGeneratorRegistration;
+    generator?: GeneratorTopicBundle;
     locale?: JsonObject;
 };
 
-export function defineTopicBundle<T extends TopicBundle>(input: T): T {
+export type GeneratedSubjectTopicBundle = SubjectTopicBundle & {
+    generator: GeneratorTopicBundle;
+};
+
+export function defineTopicBundle<T extends SubjectTopicBundle>(input: T): T {
     return input;
 }

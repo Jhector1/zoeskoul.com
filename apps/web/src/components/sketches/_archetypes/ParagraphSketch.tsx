@@ -1,29 +1,30 @@
-import { cn } from "@/lib/cn";
-import TextMarkdown from "@/components/markdown/TextMarkdown";
-import MathMarkdown from "@/components/markdown/MathMarkdown";
+"use client";
 
-type ParagraphSpec = {
-    archetype: "paragraph";
-    specVersion: number;
-    title?: string;
-    bodyMarkdown?: string;
-    text?: string;
-};
+import React from "react";
+import RichMarkdownContent from "@/components/sketches/shared/RichMarkdownContent";
+import {ParagraphSpec} from "@/components/sketches/subjects/specTypes";
+import MathMarkdown from "@/components/markdown/MathMarkdown";
 
 export function ParagraphSketch({ spec }: { spec: ParagraphSpec }) {
     const md = (spec.bodyMarkdown ?? spec.text ?? "").trim();
 
     return (
-        <div className="">
+        <div>
             {spec.title ? (
                 <div className="text-sm font-extrabold text-neutral-900 dark:text-white">
                     {spec.title}
                 </div>
             ) : null}
 
-            {/*<div className={cn("mt-2 text-sm text-neutral-700 dark:text-white/75")}>*/}
-                {md ? <MathMarkdown content={md} /> : <span className="opacity-60">No text.</span>}
-            {/*</div>*/}
+            <RichMarkdownContent
+                content={md}
+                images={spec.images}
+                className="mt-2"
+                renderMarkdown={(content, key) => (
+                    <MathMarkdown key={key} content={content} />
+                )}
+                emptyFallback={<span className="opacity-60">No text.</span>}
+            />
         </div>
     );
 }

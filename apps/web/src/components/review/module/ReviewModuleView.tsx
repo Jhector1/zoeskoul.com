@@ -44,6 +44,7 @@ import FlowNavigator, {
     type FlowNavigationConfig,
     resolveFlowNavigationConfig,
 } from "@/components/review/navigation/FlowNavigator";
+import {resolveToolDefaults} from "@/components/tools/resolveToolDefaults";
 
 function useMediaQuery(query: string) {
     const [matches, setMatches] = React.useState(false);
@@ -129,6 +130,37 @@ function MobileDrawer(props: {
         </AnimatePresence>
     );
 }
+const STUDENTS_INITIAL_TABLE_SNAPSHOTS = {
+    students: {
+        name: "students",
+        columns: [
+            { name: "id", type: "INTEGER" },
+            { name: "name", type: "TEXT" },
+            { name: "grade", type: "INTEGER" },
+        ],
+        rows: [
+            [1, "Ana", 90],
+            [2, "Leo", 85],
+            [3, "Mina", 95],
+        ],
+        rowCount: 3,
+    },
+};
+
+const STUDENTS_SQL_SCHEMA = `
+CREATE TABLE students (
+  id INTEGER PRIMARY KEY,
+  name TEXT NOT NULL,
+  grade INTEGER
+);
+`;
+
+const STUDENTS_SQL_SEED = `
+INSERT INTO students (id, name, grade) VALUES
+  (1, 'Ana', 90),
+  (2, 'Leo', 85),
+  (3, 'Mina', 95);
+`;
 
 export default function ReviewModuleView({
                                              mod,
@@ -148,8 +180,7 @@ export default function ReviewModuleView({
 
     const locale = params?.locale ?? "en";
     const subjectSlug = params?.subjectSlug ?? "";
-    const moduleId = params?.moduleSlug ?? "";
-
+    const moduleSlug = params?.moduleSlug ?? "";
     const unlockAll = Boolean(canUnlockAll);
     const navModes = useMemo(
         () => resolveFlowNavigationConfig(navigationMode),
@@ -173,7 +204,7 @@ export default function ReviewModuleView({
         viewTopicId,
         setViewTopicId,
         flushNow,
-    } = useReviewProgress({ subjectSlug, moduleId, locale, firstTopicId });
+    } = useReviewProgress({ subjectSlug, moduleSlug, locale, firstTopicId });
 
     const viewTopic = useMemo(
         () => topics.find((t) => t.id === viewTopicId) ?? topics[0] ?? null,
@@ -185,15 +216,28 @@ export default function ReviewModuleView({
 
     const panels = useResizablePanels();
     const sketch = useDebouncedSketchState({ setProgress, viewTid });
-
+    const toolDefaults = useMemo(
+        () =>
+            resolveToolDefaults({
+                subjectSlug,
+                moduleMeta: (mod as any)?.meta,
+            }),
+        [subjectSlug, mod],
+    );
     const tool = useToolCodeRunnerState({
         progress,
         progressHydrated,
         setProgress,
         viewTid,
+        defaultLang: toolDefaults.defaultLang,
+        defaultCode: toolDefaults.defaultCode,
+        defaultStdin: toolDefaults.defaultStdin,
+        defaultSqlDialect: toolDefaults.defaultSqlDialect,
         rightCollapsed: panels.rightCollapsed,
         rightW: panels.rightW,
     });
+
+
 
     const handleEnsureToolsVisible = useCallback(() => {
         if (panels.rightCollapsed) {
@@ -345,7 +389,7 @@ export default function ReviewModuleView({
         sessionId: assignmentSessionId,
         enabled: assignmentStatusEnabled,
         subject: subjectSlug,
-        module: moduleId,
+        module: moduleSlug,
     });
 
     const assignmentLabel =
@@ -362,7 +406,7 @@ export default function ReviewModuleView({
                 ? `${assignmentStatus.answeredCount}/${assignmentStatus.targetCount} questions`
                 : undefined;
 
-    const nav = useModuleNav({ subjectSlug, moduleId });
+    const nav = useModuleNav({ subjectSlug, moduleSlug });
     const canGoNextModule =
         unlockAll ||
         ((moduleComplete || Boolean((progress as any)?.moduleCompleted)) && assignmentDone);
@@ -378,14 +422,14 @@ export default function ReviewModuleView({
     async function handleAssignmentClick() {
         const returnToCurrentModule = `/${locale}/${ROUTES.learningPath(
             encodeURIComponent(subjectSlug),
-            encodeURIComponent(moduleId),
+            encodeURIComponent(moduleSlug),
         )}`;
 
         if (assignmentSessionId && assignmentStatus.phase !== "idle") {
             router.push(
                 `/${ROUTES.practicePath(
                     encodeURIComponent(subjectSlug),
-                    encodeURIComponent(moduleId),
+                    encodeURIComponent(moduleSlug),
                 )}` +
                 `?sessionId=${encodeURIComponent(assignmentSessionId)}` +
                 `&returnTo=${encodeURIComponent(returnToCurrentModule)}`,
@@ -393,9 +437,8 @@ export default function ReviewModuleView({
             return;
         }
 
-        const moduleSlug = (mod as any).practiceSectionSlug ?? moduleId;
-
-        const r = await fetch(`/api/modules/${encodeURIComponent(moduleSlug)}/practice/start`, {
+        const practiceModuleSlug = (mod as any).practiceSectionSlug ?? moduleSlug;
+        const r = await fetch(`/api/modules/${encodeURIComponent(practiceModuleSlug)}/practice/start`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ returnUrl: returnToCurrentModule }),
@@ -419,7 +462,7 @@ export default function ReviewModuleView({
         router.push(
             `/${ROUTES.practicePath(
                 encodeURIComponent(subjectSlug),
-                encodeURIComponent(moduleId),
+                encodeURIComponent(practiceModuleSlug),
             )}` +
             `?sessionId=${encodeURIComponent(newSid)}` +
             `&returnTo=${encodeURIComponent(returnToCurrentModule)}`,
@@ -785,7 +828,7 @@ export default function ReviewModuleView({
     const tp: any = (progress as any)?.topics?.[viewTid] ?? {};
     const prereqsForAllQuizzes = unlockAll ? true : prereqsMetForAnyQuizOrProject(viewCards, tp);
 
-    const swapKey = `${subjectSlug}:${moduleId}:${locale}:${viewTid}:${versionStr}`;
+    const swapKey = `${subjectSlug}:${moduleSlug}:${locale}:${viewTid}:${versionStr}`;
 
     const showSkeleton = useSkeletonGate({
         ready: progressHydrated,
@@ -1282,14 +1325,19 @@ export default function ReviewModuleView({
                                                     toolLang={tool.toolLang as CodeLanguage}
                                                     toolCode={tool.toolCode}
                                                     toolStdin={tool.toolStdin}
-                                                    onChangeLang={handleToolChangeLang}
+                                                    toolSqlDialect={tool.toolSqlDialect}
                                                     onChangeCode={handleToolChangeCode}
                                                     onChangeStdin={handleToolChangeStdin}
                                                     onBeforeRun={tool.flushLatest}
                                                     subjectSlug={subjectSlug}
-                                                    moduleId={moduleId}
+                                                    moduleId={moduleSlug}
                                                     locale={locale}
                                                     codeEnabled={codeEnabled}
+                                                    showLanguagePicker={false}
+                                                    showSqlDialectPicker={false}
+                                                    sqlSchemaSql={tool.toolSqlSchemaSql??STUDENTS_SQL_SCHEMA}
+                                                    sqlSeedSql={tool.toolSqlSeedSql??STUDENTS_SQL_SEED}
+                                                    sqlInitialTableSnapshots={tool.toolSqlInitialTableSnapshots ?? STUDENTS_INITIAL_TABLE_SNAPSHOTS}
                                                 />
                                             </aside>
                                         </>

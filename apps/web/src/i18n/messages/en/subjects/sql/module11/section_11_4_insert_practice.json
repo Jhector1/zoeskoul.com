@@ -1,0 +1,293 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_11": {
+        "insert_practice": {
+          "label": "Insert Practice",
+          "summary": "Practice adding individual records, adding product-like rows, inserting multiple rows, and checking what was stored after the insert.",
+          "cards": {
+            "sketch0": {
+              "title": "How do you add one new record?"
+            },
+            "sketch1": {
+              "title": "How do you add a product-style item?"
+            },
+            "sketch2": {
+              "title": "How do you add multiple records?"
+            },
+            "sketch3": {
+              "title": "How do you check what was inserted?"
+            },
+            "quiz": {
+              "title": "Quiz: Insert Practice"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_11": {
+        "section_11_4": {
+          "add_a_student_mapped": {
+            "title": "Adding one new record is the core insert skill.",
+            "bodyMarkdown": "This dataset uses inventory items instead of students.\n\nBut the insert skill is the same:\n\n- choose the target table\n- choose the columns\n- provide the values\n\nSo the big idea is:\n\n> adding one new record is the foundation for every beginner insert"
+          },
+          "add_a_product": {
+            "title": "Adding a product-style item is a natural fit for this dataset.",
+            "bodyMarkdown": "This dataset is built around inventory items.\n\nThat makes it great for practicing inserts that feel like product records, such as:\n\n- item name\n- category\n- price\n- status\n- notes\n\nSo the key idea is:\n\n> inventory-style inserts are a practical way to practice clean row creation"
+          },
+          "add_multiple_records": {
+            "title": "Multiple-record inserts help practice consistency across rows.",
+            "bodyMarkdown": "When you insert more than one row at once, the main challenge is consistency.\n\nYou need to keep:\n\n- the same column list\n- the same value order\n- the right data type in each position\n\nSo the main idea is:\n\n> multi-row inserts are good practice for careful repetition"
+          },
+          "check_your_inserted_data": {
+            "title": "Reading inserted data back is part of good insert practice.",
+            "bodyMarkdown": "A beginner should not stop after the insert runs.\n\nIt is helpful to check the result by reading the row back.\n\nThat helps confirm:\n\n- the row exists\n- the values look correct\n- NULL or defaults behaved as expected\n\nSo the important idea is:\n\n> checking the stored row is part of good insert practice"
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "m11_s04_add_one_inventory_item": {
+      "title": "Add one new item",
+      "prompt": "The SQLite workspace already has the `inventory_ops` dataset loaded.\n\nWrite a query that inserts one new row into `inventory_items` with these values:\n\n- `id` = 7\n- `name` = 'Bookend'\n- `category` = 'Decor'\n- `price` = 16.00\n- `status` = 'active'\n- `is_test` = 0\n- `notes` = 'Pair item'\n- `last_updated` = '2026-02-07'\n\nThen click **Run**.",
+      "help": {
+        "concept": "A one-row insert is the core practice pattern for learning how to add new records.",
+        "hint_1": "Use an explicit column list and one matching VALUES group.",
+        "hint_2": "Build a clear single-row insert where the columns and values line up in the same order."
+      },
+      "hint": "Use one row with a clear column list.",
+      "starterCode": "-- Insert one new inventory record\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "inventory_ops",
+        "resultShape": "table"
+      }
+    },
+    "m11_s04_add_product_item": {
+      "title": "Add a product-style row",
+      "prompt": "The tables already exist.\n\nWrite a query that inserts one new product-style row into `inventory_items` with these values:\n\n- `id` = 8\n- `name` = 'Spice Jar'\n- `category` = 'Kitchen'\n- `price` = 9.50\n- `status` = 'draft'\n- `is_test` = 0\n- `notes` = 'New kitchen line'\n- `last_updated` = '2026-02-08'\n\nThen run it.",
+      "help": {
+        "concept": "This dataset is ideal for product-style insert practice because each row looks like an item record.",
+        "hint_1": "Use the given values in a standard single-row insert.",
+        "hint_2": "Build the insert carefully so the row reads like a clean inventory record with a name, category, price, status, flag, notes, and date."
+      },
+      "hint": "Insert the product-like row with a full explicit column list.",
+      "starterCode": "-- Insert one product-style inventory row\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "inventory_ops",
+        "resultShape": "table"
+      }
+    },
+    "m11_s04_add_multiple_records": {
+      "title": "Add multiple records",
+      "prompt": "The tables already exist.\n\nWrite one query that inserts these two rows into `inventory_items`:\n\nRow 1:\n- `id` = 9\n- `name` = 'Wire Basket'\n- `category` = 'Decor'\n- `price` = 21.00\n- `status` = 'active'\n- `is_test` = 0\n- `notes` = NULL\n- `last_updated` = '2026-02-09'\n\nRow 2:\n- `id` = 10\n- `name` = 'Glass Cup Set'\n- `category` = 'Kitchen'\n- `price` = 24.00\n- `status` = 'draft'\n- `is_test` = 1\n- `notes` = 'Photoshoot sample'\n- `last_updated` = '2026-02-09'\n\nThen click **Run**.",
+      "help": {
+        "concept": "Multi-row practice helps reinforce careful value order across repeated rows.",
+        "hint_1": "Use one explicit column list followed by two VALUES groups.",
+        "hint_2": "Build the insert so both row value groups follow the exact same target-column order."
+      },
+      "hint": "Use one INSERT statement with two carefully aligned VALUES groups.",
+      "starterCode": "-- Insert two inventory records in one statement\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "inventory_ops",
+        "resultShape": "table"
+      }
+    },
+    "m11_s04_check_inserted_data": {
+      "title": "Check your inserted data",
+      "prompt": "The tables already exist.\n\nWrite a query that returns all columns from `inventory_items` where `id` = 3.\n\nThen run it and inspect the stored row carefully.",
+      "help": {
+        "concept": "Reading stored rows is part of insert practice because it helps confirm what the table actually contains.",
+        "hint_1": "Use a SELECT query with a WHERE condition on the chosen id.",
+        "hint_2": "Build a query that returns the full row for one inventory item so you can inspect every stored value."
+      },
+      "hint": "Use SELECT * with a WHERE condition on id.",
+      "starterCode": "-- Read one inventory row back for inspection\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "inventory_ops",
+        "resultShape": "table"
+      }
+    },
+    "m11_s04_insert_practice_project": {
+      "title": "Practice real inserts",
+      "prompt": "Use the SQL workspace on the right to practice insert statements on the `inventory_ops` dataset.\n\nFor each task:\n\n1. write the insert or select query carefully\n2. click **Run**\n3. check whether the row values line up with the columns\n4. inspect stored data afterward when useful\n\nTasks:\n\n1. Insert one new inventory item\n2. Insert one product-style row\n3. Insert two rows in one statement\n4. Read one full row back with SELECT\n5. Insert one row using defaults for omitted columns and then inspect it\n\nRun one query at a time.\nThis project is about combining insert skills with careful checking.",
+      "help": {
+        "concept": "Insert practice is strongest when learners both add rows and verify what was stored afterward.",
+        "hint_1": "Use explicit column lists when possible, then read rows back to verify the result.",
+        "hint_2": "Solve the tasks one by one. Focus first on making the insert correct, then use SELECT when needed to confirm what the table now contains."
+      },
+      "hint": "Insert carefully, then check the stored row when needed.",
+      "starterCode": "-- Task 1\n-- Insert one new inventory item\n\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "inventory_ops",
+        "resultShape": "table"
+      }
+    },
+    "m11_s04_add_one_meaning": {
+      "title": "What is the point of adding one new record?",
+      "prompt": "What is the main learning goal of adding one new record in insert practice?",
+      "help": {
+        "concept": "Single-row practice teaches the core insert shape clearly.",
+        "hint_1": "Think one row, clear alignment.",
+        "hint_2": "It is the foundation for understanding every larger insert later."
+      },
+      "hint": "Think learn the core insert pattern clearly.",
+      "options": {
+        "a": "Practice the core insert pattern clearly with one row",
+        "b": "Avoid using columns",
+        "c": "Replace SELECT forever",
+        "d": "Delete existing rows first"
+      }
+    },
+    "m11_s04_product_style_meaning": {
+      "title": "Why use product-style insert practice here?",
+      "prompt": "Why is product-style insert practice a good fit for this dataset?",
+      "help": {
+        "concept": "The dataset is built around inventory item rows, which makes product-like inserts natural and concrete.",
+        "hint_1": "Think the table already stores item-style records.",
+        "hint_2": "That makes the practice feel realistic and easier to picture."
+      },
+      "hint": "Think this table already looks like product records.",
+      "options": {
+        "a": "Because the table already stores inventory-style item records",
+        "b": "Because product-style data only works in comments",
+        "c": "Because the dataset has no columns",
+        "d": "Because inserts do not need values here"
+      }
+    },
+    "m11_s04_multiple_records_meaning": {
+      "title": "What is the main challenge of adding multiple records?",
+      "prompt": "What is the main beginner challenge in multi-row insert practice?",
+      "help": {
+        "concept": "The main challenge is keeping the same column order and careful value alignment across all rows.",
+        "hint_1": "Think consistency across rows.",
+        "hint_2": "Each row must still match the same target columns in the same order."
+      },
+      "hint": "Think consistent value order across all inserted rows.",
+      "options": {
+        "a": "Keeping the values aligned consistently across multiple rows",
+        "b": "Removing all column names",
+        "c": "Avoiding VALUES entirely",
+        "d": "Turning the insert into a join"
+      }
+    },
+    "m11_s04_check_data_meaning": {
+      "title": "Why check inserted data?",
+      "prompt": "Why is checking inserted data part of good insert practice?",
+      "help": {
+        "concept": "Checking stored rows confirms that the insert worked and the data looks correct.",
+        "hint_1": "Think verify the final stored result.",
+        "hint_2": "Good insert practice includes not just writing the row, but confirming what landed in the table."
+      },
+      "hint": "Think verify the stored row afterward.",
+      "options": {
+        "a": "It helps confirm that the stored row looks correct",
+        "b": "It automatically fixes every mistake",
+        "c": "It removes the need for inserts",
+        "d": "It makes WHERE unnecessary"
+      }
+    },
+    "m11_s04_insert_practice_goal": {
+      "title": "What is the goal of insert practice?",
+      "prompt": "What is the main goal of this insert practice section?",
+      "help": {
+        "concept": "The goal is to combine correct inserts with careful checking and readable SQL habits.",
+        "hint_1": "Think add rows and confirm them.",
+        "hint_2": "The practice is not just about typing inserts, but about understanding what was stored."
+      },
+      "hint": "Think correct inserts plus checking the result.",
+      "options": {
+        "a": "Practice correct inserts and confirm what was stored",
+        "b": "Avoid using SELECT after inserts",
+        "c": "Make inserts as confusing as possible",
+        "d": "Only work with comments"
+      }
+    },
+    "m11_s04_add_one_true": {
+      "title": "What is true about adding one new record?",
+      "prompt": "Select all true statements about single-row insert practice.",
+      "help": {
+        "concept": "Single-row insert practice is the clearest way to learn the insert structure.",
+        "hint_1": "Think foundation pattern.",
+        "hint_2": "Choose the statements about learning the basic insert shape."
+      },
+      "hint": "Think the basic insert pattern.",
+      "options": {
+        "a": "It is a strong beginner way to learn insert structure",
+        "b": "It helps practice column-to-value matching",
+        "c": "It makes later multi-row inserts easier",
+        "d": "It means checking the row afterward is never useful",
+        "e": "It is a good foundation for write queries"
+      }
+    },
+    "m11_s04_multi_insert_true": {
+      "title": "What is true about adding multiple records?",
+      "prompt": "Select all true statements about multi-row insert practice.",
+      "help": {
+        "concept": "Multi-row inserts are good practice for careful repetition and consistency.",
+        "hint_1": "Think repeated alignment.",
+        "hint_2": "Choose the statements about using one column list and several value groups correctly."
+      },
+      "hint": "Think one column list, several aligned rows.",
+      "options": {
+        "a": "One statement can insert multiple rows",
+        "b": "Each row still needs the correct value order",
+        "c": "Multi-row inserts reward careful consistency",
+        "d": "The second row can ignore the listed columns",
+        "e": "This is useful practice for batch inserts"
+      }
+    },
+    "m11_s04_checking_true": {
+      "title": "What is true about checking inserted data?",
+      "prompt": "Select all true statements about checking inserted rows after an insert.",
+      "help": {
+        "concept": "Reading the stored row afterward helps learners verify the real result of the insert.",
+        "hint_1": "Think confirm what is actually stored.",
+        "hint_2": "Choose the statements about verification and careful review."
+      },
+      "hint": "Think verify what landed in the table.",
+      "options": {
+        "a": "It helps confirm that the row exists",
+        "b": "It helps confirm values landed in the expected columns",
+        "c": "It helps confirm NULL or defaults behaved as expected",
+        "d": "It is useless once the insert runs",
+        "e": "It is a strong beginner habit"
+      }
+    },
+    "m11_s04_insert_practice_workflow_true": {
+      "title": "What matches a good beginner workflow for insert practice?",
+      "prompt": "Select all statements that match a good beginner workflow for practicing inserts.",
+      "help": {
+        "concept": "A good workflow is to write the insert carefully, align the values, run it, and inspect the stored data when helpful.",
+        "hint_1": "Think plan, align, run, verify.",
+        "hint_2": "Choose the steps that help combine careful writing with post-insert checking."
+      },
+      "hint": "Write carefully, align values, then verify stored data.",
+      "options": {
+        "a": "Choose the target columns carefully",
+        "b": "Match the values to those columns in order",
+        "c": "Run the insert carefully",
+        "d": "Read back the stored row when helpful",
+        "e": "Ignore whether the inserted row matches your intention"
+      }
+    }
+  }
+}

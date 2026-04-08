@@ -1,0 +1,208 @@
+/* eslint-disable */
+// AUTO-GENERATED FILE.
+// Do not edit manually.
+// Run: pnpm i18n:generate
+
+type AnyObj = Record<string, any>;
+
+function isObject(v: unknown): v is AnyObj {
+  return !!v && typeof v === "object" && !Array.isArray(v);
+}
+
+function deepMerge<T extends AnyObj>(base: T, override: AnyObj): T {
+  const out: AnyObj = { ...base };
+
+  for (const k of Object.keys(override ?? {})) {
+    const bv = out[k];
+    const ov = override[k];
+
+    if (isObject(bv) && isObject(ov)) out[k] = deepMerge(bv, ov);
+    else out[k] = ov;
+  }
+
+  return out as T;
+}
+
+const loaders: Record<string, Array<() => Promise<AnyObj>>> = {
+  "en": [
+    () => import("./messages/en/authenticate.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/billing.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/common.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/exerciseRenderer.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/home.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/localeSwitcher.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/matricesPart2Landing.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/missedQuestions.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/module0.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/moduleSidebar.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/playground.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/practice.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/practiceSection.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/python1Modules.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/quizblock.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/reviewNav.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/seo/metadata.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/sketchBlockUi.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/sketchesVectorPart1.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/spanBasis.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/linear_algebra/module0/vectors1.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/linear_algebra/module2/la2.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/python/module0/comments_intro.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/python/module0/computer_intro.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/python/module0/programming_intro.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/python/module0/syntax_intro.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/python/module0/workspace.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/python/module1/data_types_intro.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/python/module1/errors_intro.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/python/module1/input_output_patterns.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/python/module1/operators_expressions.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/python/module1/string_basics.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/python/module1/variables.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/python/module2/conditionals.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/python/module2/function_basics.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/python/module2/list_basics.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/python/module2/loop_basics.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/python/subject.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/sql/datasets/sqlite.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/sql/module0/database_thinking.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/sql/module0/first_sql_environment.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/sql/module0/understanding_tables.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/sql/module0/what_sql_is.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/sql/module1/intro_to_select.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/sql/module1/practice_with_basic_queries.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/sql/module1/reading_data_from_a_table.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/sql/module1/syntax_basics.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/sql/module10/section_10_1_what_a_subquery_is.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/sql/module10/section_10_2_subqueries_in_where.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/sql/module10/section_10_3_subqueries_in_from.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/sql/module10/section_10_4_subquery_practice.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/sql/module11/section_11_1_intro_to_adding_data.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/sql/module11/section_11_2_safe_inserting.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/sql/module11/section_11_3_insert_with_null_and_defaults.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/sql/module11/section_11_4_insert_practice.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/sql/module12/section_12_1_updating_rows.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/sql/module12/section_12_2_deleting_rows.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/sql/module12/section_12_3_data_safety_mindset.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/sql/module12/section_12_4_practice_with_data_changes.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/sql/module13/section_13_1_intro_to_table_design.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/sql/module13/section_13_2_common_data_types.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/sql/module13/section_13_3_constraints.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/sql/module13/section_13_4_table_design_practice.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/sql/module14/section_14_1_why_relationships_matter.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/sql/module14/section_14_2_keys_and_relationships.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/sql/module14/section_14_3_good_beginner_design_habits.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/sql/module14/section_14_4_relational_design_practice.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/sql/module15/section_15_1_mini_project_student_database.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/sql/module15/section_15_2_mini_project_store_database.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/sql/module15/section_15_3_mini_project_employee_database.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/sql/module15/section_15_4_capstone_practice.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/sql/module2/beginner_filtering_practice.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/sql/module2/comparison_operators.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/sql/module2/filtering_with_multiple_conditions.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/sql/module2/intro_to_filtering.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/sql/module3/limiting_output.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/sql/module3/practice_with_output_control.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/sql/module3/sorting_by_multiple_columns.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/sql/module3/sorting_data.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/sql/module4/lists_and_ranges.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/sql/module4/missing_data.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/sql/module4/section_4_4_practice.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/sql/module4/text_matching.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/sql/module5/section_5_1_creating_new_values_in_queries.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/sql/module5/section_5_2_column_aliases.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/sql/module5/section_5_3_simple_functions.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/sql/module5/section_5_4_expression_practice.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/sql/module6/section_6_1_intro_to_aggregation.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/sql/module6/section_6_2_core_aggregate_functions.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/sql/module6/section_6_3_aggregates_with_filters.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/sql/module6/section_6_4_aggregate_practice.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/sql/module7/section_7_1_intro_to_grouping.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/sql/module7/section_7_2_aggregates_with_groups.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/sql/module7/section_7_3_filtering_groups.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/sql/module7/section_7_4_grouping_practice.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/sql/module8/section_8_2_inner_join.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/sql/module8/section_8_3_left_join.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/sql/module8/section_8_4_join_practice.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/sql/module8/section8_1_why_multiple_tables_exist.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/sql/module9/section_9_1_aliases_for_tables_and_columns.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/sql/module9/section_9_2_query_formatting.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/sql/module9/section_9_3_comments_and_readability.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/sql/module9/section_9_4_clean_query_practice.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/subjects/sql/subject.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/ui/contact.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/ui/footer.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/ui/homeOnboarding.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/ui/legal.json").then((m) => (m?.default ?? {}) as AnyObj),
+  ],
+
+  "fr": [
+    () => import("./messages/fr/authenticate.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/fr/billing.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/fr/common.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/fr/exerciseRenderer.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/fr/home.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/fr/localeSwitcher.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/fr/matricesPart2Landing.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/fr/module0.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/fr/moduleSidebar.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/fr/playground.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/fr/practice.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/fr/practiceSection.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/fr/python1Modules.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/fr/quizblock.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/fr/reviewNav.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/fr/seo/metadata.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/fr/sketchBlockUi.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/fr/sketchesVectorPart1.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/fr/spanBasis.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/fr/subjects.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/fr/subjects/python/module0/comments.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/fr/subjects/python/module1/data_types_intro.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/fr/subjects/python/module1/errors_intro.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/fr/subjects/python/module1/input_output_patterns.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/fr/subjects/python/module1/operators_expressions.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/fr/subjects/python/module1/string_basics.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/fr/subjects/python/module1/variables.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/fr/ui/contact.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/fr/ui/footer.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/fr/ui/homeOnboarding.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/fr/ui/legal.json").then((m) => (m?.default ?? {}) as AnyObj),
+  ],
+
+  "ht": [
+    () => import("./messages/ht/authenticate.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/ht/billing.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/ht/common.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/ht/exerciseRenderer.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/ht/home.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/ht/localeSwitcher.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/ht/matricesPart2Landing.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/ht/module0.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/ht/moduleSidebar.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/ht/playground.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/ht/practice.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/ht/practiceSection.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/ht/python1Modules.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/ht/quizblock.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/ht/reviewNav.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/ht/seo/metadata.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/ht/sketchBlockUi.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/ht/sketchesVectorPart1.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/ht/spanBasis.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/ht/subjects.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/ht/subjects/python/module0/comments.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/ht/ui/contact.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/ht/ui/footer.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/ht/ui/homeOnboarding.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/ht/ui/legal.json").then((m) => (m?.default ?? {}) as AnyObj),
+  ],
+};
+
+export async function loadLocaleMessages(locale: string): Promise<AnyObj> {
+  const fns = loaders[locale] ?? [];
+  const parts = await Promise.all(fns.map((fn) => fn()));
+  return parts.reduce((acc, part) => deepMerge(acc, part), {} as AnyObj);
+}
+
+export const AVAILABLE_MESSAGE_LOCALES = ["en","fr","ht"] as const;

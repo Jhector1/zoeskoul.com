@@ -33,6 +33,7 @@ import FooterSlick from "@/components/layout/FooterSlick";
 import { resolveDeepTagged } from "@/i18n/resolveDeepTagged";
 import { useTaggedT } from "@/i18n/tagged";
 import RedirectOverlay from "@/components/shared/RedirectOverlay";
+import {useAuthHref} from "@/hooks/useAuthHref";
 
 type Choice = {
     label: string;
@@ -123,7 +124,14 @@ const DEFAULT_DATA: OnboardingData = {
     themePreference: "",
     trialIntent: "",
 };
+// add this helper near DEFAULT_DATA
 
+function emptyValueForStep(stepId: StepId): OnboardingData[StepId] {
+    if (stepId === "learningInterests") {
+        return [] as OnboardingData[StepId];
+    }
+    return "" as OnboardingData[StepId];
+}
 const TAGGED_STEP_META: Omit<StepConfig, "choices">[] = [
     {
         id: "preferredLanguage",
@@ -805,10 +813,12 @@ function TrialSubjectChooser({
 
 /* -------------------- onboarding panel -------------------- */
 
+// replace your OnboardingPanel signature with this
+
 function OnboardingPanel({
                              data,
                              setData,
-                             onSkip,
+                             onSkipAll,
                              onFinish,
                              subjectOptions,
                              locale,
@@ -820,7 +830,7 @@ function OnboardingPanel({
                          }: {
     data: OnboardingData;
     setData: React.Dispatch<React.SetStateAction<OnboardingData>>;
-    onSkip: () => void;
+    onSkipAll: () => void;
     onFinish: (finalData: OnboardingData) => void;
     subjectOptions: SubjectCard[];
     locale: string;
@@ -1044,6 +1054,27 @@ function OnboardingPanel({
         saveStoredOnboarding(false, data, nextStepIndex, true);
     };
 
+    const handleSkipCurrent = () => {
+        if (busy) return;
+
+        const next = {
+            ...data,
+            [step.id]: emptyValueForStep(step.id),
+        } as OnboardingData;
+
+        setData(next);
+
+        if (stepIndex === total - 1) {
+            saveStoredOnboarding(false, next, stepIndex, true);
+            onFinish(next);
+            return;
+        }
+
+        const nextStepIndex = stepIndex + 1;
+        setStepIndex(nextStepIndex);
+        saveStoredOnboarding(false, next, nextStepIndex, true);
+    };
+
     const side: "left" | "right" = stepIndex % 2 === 0 ? "right" : "left";
 
     return (
@@ -1065,14 +1096,31 @@ function OnboardingPanel({
                         </div>
                     </div>
 
-                    <button
-                        type="button"
-                        onClick={onSkip}
-                        disabled={busy}
-                        className={cn(buttonClass("ghost"), "h-8 w-full text-sm sm:w-auto")}
-                    >
-                        {t("panel.skip")}
-                    </button>
+                    <div className="flex w-full flex-wrap items-center justify-end gap-1.5 sm:w-auto sm:flex-nowrap">
+                        <button
+                            type="button"
+                            onClick={handleSkipCurrent}
+                            disabled={busy}
+                            className={cn(
+                                buttonClass("ghost"),
+                                "h-7 w-auto shrink-0 whitespace-nowrap px-2.5 text-[11px] font-medium sm:text-xs"
+                            )}
+                        >
+                            {t("panel.skipCurrent", undefined, "Skip question")}
+                        </button>
+
+                        <button
+                            type="button"
+                            onClick={onSkipAll}
+                            disabled={busy}
+                            className={cn(
+                                buttonClass("ghost"),
+                                "h-7 w-auto shrink-0 whitespace-nowrap px-2.5 text-[11px] font-medium sm:text-xs"
+                            )}
+                        >
+                            {t("panel.skipAll", undefined, "Skip all")}
+                        </button>
+                    </div>
                 </div>
 
                 <div className="mt-4 space-y-2">
@@ -1298,7 +1346,9 @@ export default function HomePageAvatarOnboardingClient({
     const [skipped, setSkipped] = useState(false);
 
     const redirectingRef = useRef(false);
+// 1) add this near your other memo/state setup, after pathname/router
 
+    const authHref = useAuthHref() ;
     async function redirectToTrial(args: {
         href: string;
         delayMs?: number;
@@ -1317,6 +1367,26 @@ export default function HomePageAvatarOnboardingClient({
         },
         [setTheme],
     );
+// 3) add these handlers near your other handlers
+
+    const openOnboardingFlow = () => {
+        setCompleted(false);
+        setSkipped(false);
+        setPendingLocaleSwitch(null);
+        setShowOnboarding(true);
+        setBubbleCollapsed(false);
+
+        saveStoredOnboarding(false, onboardingData, resumeStepIndex, true);
+
+        if (typeof window !== "undefined") {
+            window.localStorage.removeItem(DISMISSED_KEY);
+        }
+    };
+
+    const handleGoToAuth = () => {
+        router.push(authHref as any);
+    };
+// 2) replace your bootstrapping effect with this
 
     useEffect(() => {
         const stored = readStoredOnboarding();
@@ -1333,21 +1403,16 @@ export default function HomePageAvatarOnboardingClient({
         setSkipped(effectiveSkipped);
         setResumeStepIndex(stored.stepIndex);
 
-        const shouldAutoOpen =
-            !isAuthenticated && !effectiveCompleted && !effectiveSkipped;
+        // only resume onboarding if it was already open before refresh
+        const shouldResumeOnboarding = Boolean(stored.open);
 
-        const shouldShowOnboarding =
-            stored.open || shouldAutoOpen;
-
-        setShowOnboarding(shouldShowOnboarding);
+        setShowOnboarding(shouldResumeOnboarding);
         setBubbleCollapsed(
-            !shouldShowOnboarding &&
             Boolean(effectiveCompleted || effectiveSkipped || isAuthenticated),
         );
         setHydrated(true);
         setBootstrapped(true);
     }, [isAuthenticated]);
-
     useEffect(() => {
         const interests = onboardingData.learningInterests ?? [];
 
@@ -1588,7 +1653,9 @@ export default function HomePageAvatarOnboardingClient({
         }
     };
 
-    const handleSkip = async () => {
+    // rename your page-level skip handler
+
+    const handleSkipAll = async () => {
         setShowOnboarding(false);
         setBubbleCollapsed(true);
         setResumeStepIndex(0);
@@ -1616,28 +1683,34 @@ export default function HomePageAvatarOnboardingClient({
         await beginTrial();
     };
 
-    const reopenAssistant = () => {
-        setCompleted(false);
-        setShowOnboarding(true);
-        setBubbleCollapsed(false);
-        setPendingLocaleSwitch(null);
-        setSkipped(false);
-        saveStoredOnboarding(false, onboardingData, resumeStepIndex, true);
+// 4) replace reopenAssistant with this simpler version
 
-        if (typeof window !== "undefined") {
-            window.localStorage.removeItem(DISMISSED_KEY);
-        }
+    const reopenAssistant = () => {
+        openOnboardingFlow();
     };
 
     const mustStayOnboarding =
         !skipped && !completed;
 
-    const showOnboardingGate =
+
+
+
+
+    // 5) replace these booleans
+
+    const showEntryGate =
         bootstrapped &&
-        (mustStayOnboarding || showOnboarding || Boolean(pendingLocaleSwitch));
+        !isAuthenticated &&
+        !completed &&
+        !skipped &&
+        !showOnboarding &&
+        !pendingLocaleSwitch;
+
+    const showOnboardingGate =
+        bootstrapped && (showOnboarding || Boolean(pendingLocaleSwitch));
 
     const showHomeContent =
-        bootstrapped && !showOnboardingGate;
+        bootstrapped && !showEntryGate && !showOnboardingGate;
 
     const showChrome = showHomeContent;
 
@@ -1701,7 +1774,87 @@ export default function HomePageAvatarOnboardingClient({
                                         </div>
                                     </Surface>
                                 </motion.div>
-                            ) : showOnboardingGate ? (
+                            )
+                                : showEntryGate ? (
+                                    <motion.div
+                                        key="entry-gate"
+                                        initial={{ opacity: 0, y: 10 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, y: -10 }}
+                                        transition={{ duration: 0.28 }}
+                                        className="mx-auto max-w-[760px]"
+                                    >
+                                        <Surface className="p-4 sm:p-5 lg:p-6">
+                                            <div className="mx-auto max-w-[560px] text-center">
+                                                <SectionKicker>
+                                                    {t("entry.kicker", undefined, "Welcome")}
+                                                </SectionKicker>
+
+                                                <h1 className="mt-2 text-[26px] font-semibold tracking-tight sm:text-[34px]">
+                                                    {t(
+                                                        "entry.title",
+                                                        { appName: APP_NAME },
+                                                        `Welcome to ${APP_NAME}`,
+                                                    )}
+                                                </h1>
+
+                                                <p className="mt-3 text-sm leading-6 text-[rgb(var(--ui-text-muted)/0.86)]">
+                                                    {t(
+                                                        "entry.description",
+                                                        { appName: APP_NAME },
+                                                        "Let’s get you to the right place. Are you new here, or do you already have an account?",
+                                                    )}
+                                                </p>
+                                            </div>
+
+                                            <div className="mt-6">
+                                                <AvatarWithQuestion
+                                                    text={t(
+                                                        "entry.avatarText",
+                                                        { appName: APP_NAME },
+                                                        "Hi, I’m your guide. Are you new here, or do you already have an account?",
+                                                    )}
+                                                    speaking
+                                                    side="right"
+                                                />
+                                            </div>
+
+                                            <div className="mx-auto mt-6 max-w-[520px]">
+                                                <Surface className="p-4">
+                                                    <div className="grid gap-3 sm:grid-cols-2">
+                                                        <button
+                                                            type="button"
+                                                            onClick={openOnboardingFlow}
+                                                            className={cn(buttonClass("primary"), "h-10 w-full")}
+                                                        >
+                                                            {t("entry.newUser", undefined, "I’m new here")}
+                                                        </button>
+
+                                                        <button
+                                                            type="button"
+                                                            onClick={handleGoToAuth}
+                                                            className={cn(buttonClass("secondary"), "h-10 w-full")}
+                                                        >
+                                                            {t(
+                                                                "entry.returningUser",
+                                                                undefined,
+                                                                "I already have an account",
+                                                            )}
+                                                        </button>
+                                                    </div>
+
+                                                    <div className="mt-3 text-center text-xs text-[rgb(var(--ui-text-muted)/0.8)]">
+                                                        {t(
+                                                            "entry.helper",
+                                                            undefined,
+                                                            "New users start onboarding. Returning users go to sign in.",
+                                                        )}
+                                                    </div>
+                                                </Surface>
+                                            </div>
+                                        </Surface>
+                                    </motion.div>
+                                ) : showOnboardingGate ? (
                                 <motion.div
                                     key="gate-only"
                                     initial={{ opacity: 0, y: 10 }}
@@ -1722,10 +1875,11 @@ export default function HomePageAvatarOnboardingClient({
                                         </div>
 
                                         <div className="mt-6">
+
                                             <OnboardingPanel
                                                 data={onboardingData}
                                                 setData={setOnboardingData}
-                                                onSkip={handleSkip}
+                                                onSkipAll={handleSkipAll}
                                                 onFinish={handleFinish}
                                                 subjectOptions={subjects}
                                                 locale={locale}

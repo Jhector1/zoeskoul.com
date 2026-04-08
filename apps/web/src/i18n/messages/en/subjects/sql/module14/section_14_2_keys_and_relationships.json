@@ -1,0 +1,293 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_14": {
+        "keys_and_relationships": {
+          "label": "Keys and Relationships",
+          "summary": "Review primary keys and foreign keys, learn how they link tables properly, and see how better linking helps avoid duplicate data.",
+          "cards": {
+            "sketch0": {
+              "title": "What is the primary key review?"
+            },
+            "sketch1": {
+              "title": "What is the foreign key review?"
+            },
+            "sketch2": {
+              "title": "How do you link tables properly?"
+            },
+            "sketch3": {
+              "title": "How do relationships reduce duplicate data?"
+            },
+            "quiz": {
+              "title": "Quiz: Keys and Relationships"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_14": {
+        "section_14_2": {
+          "primary_key_review": {
+            "title": "A primary key is still the main row identifier in relational design.",
+            "bodyMarkdown": "When tables become related, primary keys matter even more.\n\nThat is because other tables often point to them.\n\nA beginner usually sees this as:\n\n- `students.id`\n- `products.id`\n- `orders.id`\n\nSo the big idea is:\n\n> primary keys identify rows and give foreign keys something stable to point at"
+          },
+          "foreign_key_review": {
+            "title": "A foreign key is what creates the actual link between tables.",
+            "bodyMarkdown": "A foreign key stores a value that points to the primary key in another table.\n\nFor example:\n\n- `orders.student_id`\n- `reviews.product_id`\n\nSo the key idea is:\n\n> foreign keys are the link columns that connect tables together"
+          },
+          "linking_tables_properly": {
+            "title": "Good linking means pointing to ids consistently and in the right table.",
+            "bodyMarkdown": "A beginner-friendly linking pattern is:\n\n- parent table keeps its own primary key\n- child table stores the foreign key\n- the link points to the parent id\n\nThat keeps the design consistent and easier to query later.\n\nSo the main idea is:\n\n> proper linking means using ids consistently and placing the foreign key in the right table"
+          },
+          "avoiding_duplicate_data": {
+            "title": "Relationships help avoid repeating the same information again and again.",
+            "bodyMarkdown": "Without relationships, a design may repeat the same names or details in many places.\n\nFor example, instead of storing the full student name inside every order row, a design can store:\n\n- the student once in `students`\n- the student id in `orders`\n\nSo the important idea is:\n\n> relationships reduce duplication by letting tables refer to each other instead of repeating everything"
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "m14_s02_create_parent_child_link": {
+      "title": "Link a parent table to a child table",
+      "prompt": "The SQLite workspace is using the blank `ddl_blank` dataset.\n\nWrite SQL that creates these two tables:\n\n1. `customers`\n- `id` as `INTEGER PRIMARY KEY`\n- `name` as `TEXT NOT NULL`\n\n2. `orders`\n- `id` as `INTEGER PRIMARY KEY`\n- `customer_id` as `INTEGER NOT NULL`\n- `order_date` as `TEXT NOT NULL`\n- `FOREIGN KEY (customer_id)` references `customers(id)`\n\nThen click **Run**.",
+      "help": {
+        "concept": "The child table should store the foreign key that points to the parent's primary key.",
+        "hint_1": "Create the parent table first.",
+        "hint_2": "The main design step is placing `customer_id` in `orders` and linking it to `customers(id)`."
+      },
+      "hint": "Put the foreign key in the child table.",
+      "starterCode": "-- Create a customers and orders parent-child relationship\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "ddl_blank",
+        "resultShape": "table"
+      }
+    },
+    "m14_s02_create_products_reviews_link": {
+      "title": "Link another parent-child pair",
+      "prompt": "The dataset is blank.\n\nWrite SQL that creates these two tables:\n\n1. `products`\n- `id` as `INTEGER PRIMARY KEY`\n- `name` as `TEXT NOT NULL`\n\n2. `reviews`\n- `id` as `INTEGER PRIMARY KEY`\n- `product_id` as `INTEGER NOT NULL`\n- `rating` as `INTEGER NOT NULL`\n- `FOREIGN KEY (product_id)` references `products(id)`\n\nThen run it and inspect **ERD**.",
+      "help": {
+        "concept": "This is the same key pattern again: parent primary key, child foreign key.",
+        "hint_1": "Create products first, then reviews.",
+        "hint_2": "The relationship becomes clean when the child table stores `product_id` and points it to `products(id)`."
+      },
+      "hint": "Use product_id in reviews as the foreign key.",
+      "starterCode": "-- Create a products and reviews linked design\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "ddl_blank",
+        "resultShape": "table"
+      }
+    },
+    "m14_s02_create_duplicate_avoiding_design": {
+      "title": "Design to avoid duplication",
+      "prompt": "The dataset is blank.\n\nWrite SQL that creates these two tables:\n\n1. `students`\n- `id` as `INTEGER PRIMARY KEY`\n- `name` as `TEXT NOT NULL`\n\n2. `orders`\n- `id` as `INTEGER PRIMARY KEY`\n- `student_id` as `INTEGER NOT NULL`\n- `order_date` as `TEXT NOT NULL`\n- `FOREIGN KEY (student_id)` references `students(id)`\n\nThe goal is to store the student once in `students` and refer to that row from `orders`.\n\nThen click **Run**.",
+      "help": {
+        "concept": "A linked design reduces duplication because the child table stores the id reference instead of repeating the full parent details.",
+        "hint_1": "Use the same parent-child pattern as before.",
+        "hint_2": "The important idea is that `orders` should store `student_id`, not repeat the student's full information."
+      },
+      "hint": "Store the student once, then refer to that student by id.",
+      "starterCode": "-- Create a linked design that avoids repeating student data\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "ddl_blank",
+        "resultShape": "table"
+      }
+    },
+    "m14_s02_inspect_keys_in_views": {
+      "title": "Inspect primary and foreign keys in the views",
+      "prompt": "The dataset is blank.\n\nWrite SQL that creates these two related tables:\n\n1. `categories`\n- `id` as `INTEGER PRIMARY KEY`\n- `name` as `TEXT NOT NULL`\n\n2. `products`\n- `id` as `INTEGER PRIMARY KEY`\n- `category_id` as `INTEGER NOT NULL`\n- `name` as `TEXT NOT NULL`\n- `FOREIGN KEY (category_id)` references `categories(id)`\n\nThen click **Run**.\nAfter that, inspect **Tables**, **ERD**, and **Chen** and notice how keys and links appear differently.",
+      "help": {
+        "concept": "This exercise helps learners connect the key words in SQL to the visual structure in the diagram tabs.",
+        "hint_1": "Create the parent table first, then the child table.",
+        "hint_2": "The SQL part is straightforward. The visual part matters too: inspect how the primary key and foreign key become part of the relational picture."
+      },
+      "hint": "Create the linked pair, then inspect how the views show the relationship.",
+      "starterCode": "-- Create categories and products, then inspect the relationship views\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "ddl_blank",
+        "resultShape": "table"
+      }
+    },
+    "m14_s02_keys_relationships_project": {
+      "title": "Practice keys and relationships",
+      "prompt": "Use the SQL workspace on the right to practice keys and relationship linking on the blank `ddl_blank` dataset.\n\nFor each task:\n\n1. write the CREATE TABLE statements carefully\n2. click **Run**\n3. inspect the table structure\n4. inspect **ERD** and **Chen** when foreign keys are present\n\nTasks:\n\n1. Create `customers` and `orders`\n2. Create `products` and `reviews`\n3. Create `students` and `orders` to reduce duplication\n4. Create `categories` and `products`\n5. Create `authors` and `books`\n\nRun one query at a time.\nThis project is about using primary keys and foreign keys in a clean, consistent way.",
+      "help": {
+        "concept": "This section is really about repeating the same clean linking pattern until it becomes natural.",
+        "hint_1": "Keep asking: which table is the parent, and which table should hold the foreign key?",
+        "hint_2": "Solve the tasks one by one. First identify the main table with the primary key, then place the foreign key in the related table that depends on it."
+      },
+      "hint": "Identify the parent table first, then place the foreign key in the dependent table.",
+      "starterCode": "-- Task 1\n-- Create customers and orders using primary and foreign keys\n\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "ddl_blank",
+        "resultShape": "table"
+      }
+    },
+    "m14_s02_primary_key_review_meaning": {
+      "title": "Why review primary keys again?",
+      "prompt": "Why are primary keys especially important once tables become related?",
+      "help": {
+        "concept": "Once tables are related, foreign keys need stable target rows to point to.",
+        "hint_1": "Think foreign keys need something to reference.",
+        "hint_2": "The parent id becomes even more important because other tables depend on it."
+      },
+      "hint": "Think foreign keys need a stable row id to point at.",
+      "options": {
+        "a": "Because foreign keys need stable rows to point to",
+        "b": "Because primary keys only matter in single-table designs",
+        "c": "Because related tables do not use ids",
+        "d": "Because primary keys replace all foreign keys"
+      }
+    },
+    "m14_s02_foreign_key_review_meaning": {
+      "title": "What is the main review idea about foreign keys?",
+      "prompt": "What is the main review idea about foreign keys in relational design?",
+      "help": {
+        "concept": "A foreign key is the actual link column that points to another table's primary key.",
+        "hint_1": "Think link column.",
+        "hint_2": "It is not just another column; it is the relationship column."
+      },
+      "hint": "Think the column that links to another table.",
+      "options": {
+        "a": "A foreign key is the link column that points to another table",
+        "b": "A foreign key is the same thing as a table name",
+        "c": "A foreign key means the table cannot have rows",
+        "d": "A foreign key replaces primary keys"
+      }
+    },
+    "m14_s02_linking_properly_meaning": {
+      "title": "What does linking tables properly mean?",
+      "prompt": "What is the main idea of linking tables properly?",
+      "help": {
+        "concept": "Proper linking means using the parent id consistently and placing the foreign key in the right table.",
+        "hint_1": "Think parent id and child foreign key.",
+        "hint_2": "The design is cleaner when the link follows the same pattern each time."
+      },
+      "hint": "Think consistent ids and foreign keys in the right table.",
+      "options": {
+        "a": "Use the parent id consistently and place the foreign key in the right table",
+        "b": "Repeat the full parent details everywhere",
+        "c": "Avoid foreign keys whenever possible",
+        "d": "Put the foreign key in every table whether needed or not"
+      }
+    },
+    "m14_s02_duplicate_data_meaning": {
+      "title": "How do relationships help avoid duplicate data?",
+      "prompt": "How do relationships reduce duplicate data?",
+      "help": {
+        "concept": "Relationships let a child row refer to a parent row instead of repeating all the parent details.",
+        "hint_1": "Think refer instead of repeat.",
+        "hint_2": "The repeated information can live once in the parent table and be referenced by id."
+      },
+      "hint": "Think store once, refer by id.",
+      "options": {
+        "a": "They let one table refer to another instead of repeating all its details",
+        "b": "They force every table to repeat names again and again",
+        "c": "They remove ids from the design",
+        "d": "They only matter after INSERT"
+      }
+    },
+    "m14_s02_keys_tools_meaning": {
+      "title": "Why inspect the views in this section?",
+      "prompt": "Why are Tables, ERD, and Chen useful in the keys-and-relationships section?",
+      "help": {
+        "concept": "They help learners connect the SQL design rules to a visual model of the schema.",
+        "hint_1": "Think text structure plus visual structure.",
+        "hint_2": "The SQL tells you the rule, and the diagram helps you see the design."
+      },
+      "hint": "Think SQL rules plus visual schema understanding.",
+      "options": {
+        "a": "They help connect SQL design rules to a visual schema view",
+        "b": "They make foreign keys unnecessary",
+        "c": "They only work when no tables exist",
+        "d": "They prevent CREATE TABLE from running"
+      }
+    },
+    "m14_s02_keys_true": {
+      "title": "What is true about primary and foreign keys?",
+      "prompt": "Select all true statements about primary keys and foreign keys.",
+      "help": {
+        "concept": "Primary keys identify rows, and foreign keys connect tables by referring to those row identifiers.",
+        "hint_1": "Think identify and connect.",
+        "hint_2": "Choose the statements about how the two kinds of keys work together."
+      },
+      "hint": "Think primary keys identify, foreign keys connect.",
+      "options": {
+        "a": "Primary keys identify rows",
+        "b": "Foreign keys can refer to primary keys in another table",
+        "c": "Both are important in relational design",
+        "d": "Foreign keys remove the need for parent tables",
+        "e": "Keys help make relationships explicit"
+      }
+    },
+    "m14_s02_linking_true": {
+      "title": "What is true about linking tables properly?",
+      "prompt": "Select all true statements about linking tables properly.",
+      "help": {
+        "concept": "Proper linking means using consistent ids and clean parent-child structure.",
+        "hint_1": "Think consistent parent-child design.",
+        "hint_2": "Choose the statements about where the foreign key should go and what it should point to."
+      },
+      "hint": "Think clean parent-child linking.",
+      "options": {
+        "a": "The child table often stores the foreign key",
+        "b": "The foreign key should point to the parent's id",
+        "c": "Consistent id use makes the schema cleaner",
+        "d": "Proper linking means repeating the full parent data in the child table",
+        "e": "Good linking helps future queries make more sense"
+      }
+    },
+    "m14_s02_duplication_true": {
+      "title": "What is true about avoiding duplicate data?",
+      "prompt": "Select all true statements about avoiding duplicate data with relationships.",
+      "help": {
+        "concept": "A relational design can reduce repetition by storing the shared information once and referencing it by id.",
+        "hint_1": "Think store once, reference many times.",
+        "hint_2": "Choose the statements about using links instead of repeated full data."
+      },
+      "hint": "Think relationships reduce repetition.",
+      "options": {
+        "a": "A parent table can store the shared information once",
+        "b": "A child table can refer to that parent by id",
+        "c": "This can reduce repeated names or details",
+        "d": "Relationships usually increase duplication on purpose",
+        "e": "Cleaner links can lead to cleaner data design"
+      }
+    },
+    "m14_s02_keys_workflow_true": {
+      "title": "What matches a good beginner workflow for keys and relationships?",
+      "prompt": "Select all statements that match a good beginner workflow for linking tables with keys.",
+      "help": {
+        "concept": "A good workflow is to identify the parent table, define its primary key, then define the child table and its foreign key clearly.",
+        "hint_1": "Think parent first, child second.",
+        "hint_2": "Choose the steps that help produce consistent linked-table design."
+      },
+      "hint": "Define the parent first, then define the child link clearly.",
+      "options": {
+        "a": "Decide which table is the parent",
+        "b": "Give the parent a clear primary key",
+        "c": "Put the foreign key in the child table",
+        "d": "Point the foreign key to the parent id",
+        "e": "Ignore which table depends on which"
+      }
+    }
+  }
+}

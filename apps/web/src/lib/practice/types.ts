@@ -1,5 +1,5 @@
 import {PracticeKind} from "@prisma/client";
-import {CodeLanguage} from  "@zoeskoul/code-contracts"
+import {CodeLanguage} from "@zoeskoul/code-contracts"
 // src/lib/practice/types.ts
 export type Difficulty = "easy" | "medium" | "hard";
 
@@ -22,6 +22,8 @@ export type GenKey =
 
     | "python_part1" // ✅ NEW
 
+    | "sql_for_beginners"
+
 
 export type ExerciseKind =
     | "single_choice"
@@ -37,6 +39,7 @@ export type ExerciseKind =
     | "voice_input" | "word_bank_arrange"
     | "listen_build"
     | "fill_blank_choice"; // ✅ ADD
+
 // ✅ NEW;
 
 export type Vec3 = { x: number; y: number; z?: number };
@@ -159,7 +162,7 @@ export type VoiceInputExercise = ExerciseBase & {
 //     | "javascript"
 //     | "c"
 //     | "java" | "cpp";
-    // | "csharp";
+// | "csharp";
 
 // export type CodeInputExercise = ExerciseBase & {
 
@@ -172,19 +175,25 @@ export type VoiceInputExercise = ExerciseBase & {
 //   examples?: Array<{ input?: string; output: string }>;
 // };
 
+export type SqlRuntimeSpec = {
+    kind: "sql";
+    datasetId?: string;
+    resultShape?: "table";
+};
+
 export type CodeInputExercise = ExerciseBase & {
     kind: "code_input";
 
-    language?: CodeLanguage; // default "python" if omitted
-    starterCode?: string; // what user starts with
-    stdinHint?: string; // optional UI hint
-    editorHeight?: number; // optional (defaults in UI)
-    allowLanguageSwitch?: boolean; // optional (default true/false, your choice)
-
-    // hint?: string; // optional hint shown like other exercises
-
-    // Optional: if you want to show sample IO
+    language?: CodeLanguage;
+    starterCode?: string;
+    starterStdin?: string;
+    stdinHint?: string;
+    editorHeight?: number;
+    allowLanguageSwitch?: boolean;
     examples?: Array<{ stdin?: string; stdout: string }>;
+
+    fixedSqlDialect?: SqlDialect;
+    runtime?: SqlRuntimeSpec;
 };
 
 export type WordBankArrangeExercise = ExerciseBase & {
@@ -285,7 +294,8 @@ export type SubmitAnswer =
     | DragReorderSubmitAnswer
     | VoiceInputSubmitAnswer | WordBankArrangeSubmitAnswer
     | ListenBuildSubmitAnswer
-    | FillBlankChoiceSubmitAnswer;;
+    | FillBlankChoiceSubmitAnswer;
+;
 
 export type ValidateResponse = {
     ok: boolean;

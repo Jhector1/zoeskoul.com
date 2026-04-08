@@ -1,0 +1,310 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_8": {
+        "inner_join": {
+          "label": "INNER JOIN",
+          "summary": "Learn what an inner join does, how it matches rows from two tables, how join syntax works, and how to read joined results clearly.",
+          "cards": {
+            "sketch0": {
+              "title": "What does an inner join do?"
+            },
+            "sketch1": {
+              "title": "How are rows matched from two tables?"
+            },
+            "sketch2": {
+              "title": "What is the basic join syntax?"
+            },
+            "sketch3": {
+              "title": "How do you read join results?"
+            },
+            "quiz": {
+              "title": "Quiz: INNER JOIN"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_8": {
+        "section_8_2": {
+          "what_inner_join_does": {
+            "title": "An inner join keeps only rows that match on both sides.",
+            "bodyMarkdown": "An `INNER JOIN` combines rows from two tables when the join condition matches.\n\nIf there is no match, that row does not appear in the result.\n\nSo the big idea is:\n\n> an inner join keeps matched rows only"
+          },
+          "matching_rows_from_two_tables": {
+            "title": "Rows are matched using related ID columns.",
+            "bodyMarkdown": "An inner join usually matches a foreign key to a primary key.\n\nExamples in this dataset:\n\n- `enrollments.student_id` matches `students.id`\n- `enrollments.course_id` matches `courses.id`\n- `courses.department_id` matches `departments.id`\n\nSo the key idea is:\n\n> matching happens when the related ID values are equal"
+          },
+          "join_syntax": {
+            "title": "Join syntax connects a table to another table with an ON condition.",
+            "bodyMarkdown": "A join query usually has these parts:\n\n- select the columns you want\n- name the first table\n- join the second table\n- explain how the rows match with `ON`\n\nSo the important beginner pattern is:\n\n> join the second table, then describe the matching condition clearly"
+          },
+          "reading_join_results": {
+            "title": "Read join results by noticing which columns came from which table.",
+            "bodyMarkdown": "A join result mixes data from more than one table.\n\nA strong beginner habit is:\n\n1. notice which table each column came from\n2. read the matching pair or relationship\n3. interpret the combined row\n\nSo the main idea is:\n\n> one joined row often represents one successful match between tables"
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "m8_s02_join_students_enrollments": {
+      "title": "Join students to enrollments",
+      "prompt": "The SQLite workspace already has tables named `students`, `departments`, `courses`, and `enrollments`.\n\nWrite a query that returns `students.name` and `enrollments.term` by joining `students` to `enrollments`.\n\nThen click **Run**.",
+      "help": {
+        "concept": "An inner join combines rows when the relationship IDs match.",
+        "hint_1": "Start with the two tables that should be joined, then connect `students.id` to `enrollments.student_id`.",
+        "hint_2": "Build a query that selects one column from `students` and one from `enrollments`, then join the tables using the matching student relationship IDs."
+      },
+      "hint": "Match the student ID to the enrollment student_id.",
+      "starterCode": "-- Return student names and enrollment terms using an inner join\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table"
+      }
+    },
+    "m8_s02_join_courses_departments": {
+      "title": "Join courses to departments",
+      "prompt": "The tables already exist.\n\nWrite a query that returns `courses.title` and `departments.name` by joining `courses` to `departments`.\n\nRun it and inspect the matched result rows.",
+      "help": {
+        "concept": "A course row matches a department row through `department_id` and the department table's primary key.",
+        "hint_1": "Join `courses.department_id` to `departments.id`.",
+        "hint_2": "Build a query that selects the course title and the department name, then connect the two tables using the department relationship IDs."
+      },
+      "hint": "Match `courses.department_id` to `departments.id`.",
+      "starterCode": "-- Return course titles with department names\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table"
+      }
+    },
+    "m8_s02_join_enrollments_students": {
+      "title": "Read another inner join",
+      "prompt": "The tables already exist.\n\nWrite a query that returns `enrollments.id` and `students.name` by joining `enrollments` to `students`.\n\nThen click **Run**.",
+      "help": {
+        "concept": "Join direction can change, but the same relationship columns still control the match.",
+        "hint_1": "Use `enrollments.student_id` and `students.id` as the matching columns.",
+        "hint_2": "Build a query that starts from `enrollments`, adds `students`, and connects them using the student relationship IDs."
+      },
+      "hint": "Use the student relationship IDs in the join condition.",
+      "starterCode": "-- Return enrollment ids with student names\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table"
+      }
+    },
+    "m8_s02_join_enrollments_courses": {
+      "title": "Join enrollments to courses",
+      "prompt": "The tables already exist.\n\nWrite a query that returns `enrollments.term` and `courses.title` by joining `enrollments` to `courses`.\n\nRun it and read the combined rows.",
+      "help": {
+        "concept": "An inner join can connect a relationship table to the table it points to.",
+        "hint_1": "Use `enrollments.course_id` and `courses.id` as the matching columns.",
+        "hint_2": "Build a query that combines the term from `enrollments` with the course title from `courses` using the course relationship IDs."
+      },
+      "hint": "Match `enrollments.course_id` to `courses.id`.",
+      "starterCode": "-- Return enrollment terms with course titles\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table"
+      }
+    },
+    "m8_s02_inner_join_project": {
+      "title": "Practice inner joins",
+      "prompt": "Use the SQL workspace on the right to practice `INNER JOIN` queries on the `school_relations_intro` dataset.\n\nFor each task:\n\n1. type the query in the editor\n2. click **Run**\n3. inspect which rows matched successfully\n4. notice that unmatched rows do not appear\n\nTasks:\n\n1. Show `students.name` and `enrollments.term`\n2. Show `courses.title` and `departments.name`\n3. Show `enrollments.id` and `students.name`\n4. Show `enrollments.term` and `courses.title`\n5. Show `students.name` and `courses.title` by joining through `enrollments`\n\nRun one query at a time.\nThis project is about understanding matched rows from inner joins.",
+      "help": {
+        "concept": "Inner joins only return rows that successfully match through the join condition.",
+        "hint_1": "Each task uses related ID columns, and the result only keeps matching pairs.",
+        "hint_2": "Solve the tasks one by one. First identify which two tables should match, then identify the ID columns that create that match."
+      },
+      "hint": "Find the related ID columns, then join on them.",
+      "starterCode": "-- Task 1\n-- Show students.name and enrollments.term\n\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table"
+      }
+    },
+    "m8_s02_inner_join_meaning": {
+      "title": "What does an inner join do?",
+      "prompt": "What is the main job of an `INNER JOIN`?",
+      "help": {
+        "concept": "An inner join keeps only rows that successfully match between the joined tables.",
+        "hint_1": "Think matched rows only.",
+        "hint_2": "If there is no match, that row does not stay in the inner join result."
+      },
+      "hint": "Think keep matched rows only.",
+      "options": {
+        "a": "It keeps only rows that match between the joined tables",
+        "b": "It keeps every row from the left table no matter what",
+        "c": "It always creates NULL rows",
+        "d": "It removes the need for IDs"
+      }
+    },
+    "m8_s02_matching_rows_meaning": {
+      "title": "How are rows matched in an inner join?",
+      "prompt": "How are rows usually matched in an inner join?",
+      "help": {
+        "concept": "Joined rows are usually matched when a foreign key equals the related primary key.",
+        "hint_1": "Think related IDs with equal values.",
+        "hint_2": "The match happens because one table stores a reference to the other table's identifying row."
+      },
+      "hint": "Think equal relationship IDs.",
+      "options": {
+        "a": "By matching related ID values between the two tables",
+        "b": "By sorting both tables alphabetically",
+        "c": "By removing all foreign keys first",
+        "d": "By averaging the row numbers"
+      }
+    },
+    "m8_s02_join_syntax_meaning": {
+      "title": "What is the role of ON in join syntax?",
+      "prompt": "In a join query, what is the main job of the `ON` clause?",
+      "help": {
+        "concept": "The `ON` clause explains how the two tables should be matched.",
+        "hint_1": "Think matching condition.",
+        "hint_2": "It tells SQL which columns define the relationship between the tables."
+      },
+      "hint": "Think describe the match.",
+      "options": {
+        "a": "It describes how the rows from the two tables should match",
+        "b": "It renames the joined table",
+        "c": "It groups the result automatically",
+        "d": "It counts the joined rows"
+      }
+    },
+    "m8_s02_reading_join_results_meaning": {
+      "title": "How should you read inner join results?",
+      "prompt": "What is a good beginner way to read inner join results?",
+      "help": {
+        "concept": "A strong habit is to notice which columns came from which table and then read the match as one combined row.",
+        "hint_1": "Think table source plus matched row meaning.",
+        "hint_2": "Each joined row is a combination of related data from both tables."
+      },
+      "hint": "Read which table each column came from, then read the matched row.",
+      "options": {
+        "a": "Notice which table each column came from, then read the matched row as one combined result",
+        "b": "Ignore the table sources completely",
+        "c": "Assume every joined row came from only one table",
+        "d": "Only read the first column"
+      }
+    },
+    "m8_s02_why_rows_missing": {
+      "title": "Why can some rows disappear in an inner join?",
+      "prompt": "Why can some rows from the original tables fail to appear in an inner join result?",
+      "help": {
+        "concept": "Inner joins remove rows that do not find a match on the other side.",
+        "hint_1": "Think unmatched rows are dropped.",
+        "hint_2": "A row only survives if the join condition succeeds."
+      },
+      "hint": "Think rows without a match do not stay.",
+      "options": {
+        "a": "Because rows without a successful match are left out",
+        "b": "Because inner joins always delete duplicates permanently",
+        "c": "Because joins can only show one table",
+        "d": "Because aliases remove them"
+      }
+    },
+    "m8_s02_inner_join_true": {
+      "title": "What is true about INNER JOIN?",
+      "prompt": "Select all true statements about `INNER JOIN`.",
+      "help": {
+        "concept": "Inner joins keep only matched rows between the joined tables.",
+        "hint_1": "Think matched rows only.",
+        "hint_2": "Choose the statements about successful matches and combined row results."
+      },
+      "hint": "Think matched pairs.",
+      "options": {
+        "a": "An inner join keeps matched rows only",
+        "b": "An inner join combines columns from more than one table",
+        "c": "An inner join often uses related ID columns",
+        "d": "An inner join always keeps unmatched left-side rows",
+        "e": "An inner join can be used with relationship tables like enrollments"
+      }
+    },
+    "m8_s02_matching_rows_true": {
+      "title": "What is true about matching rows from two tables?",
+      "prompt": "Select all true statements about how rows are matched in joins.",
+      "help": {
+        "concept": "Row matching usually depends on the relationship between a foreign key and a primary key.",
+        "hint_1": "Think equal relationship IDs.",
+        "hint_2": "Choose the statements about row-to-row relationships across tables."
+      },
+      "hint": "Think related rows connect through IDs.",
+      "options": {
+        "a": "A foreign key can match a primary key in another table",
+        "b": "Matching ID values can connect related rows",
+        "c": "Relationship tables often help connect two entity tables",
+        "d": "Matching rows means sorting them alphabetically first",
+        "e": "A successful match can create one joined result row"
+      }
+    },
+    "m8_s02_join_syntax_true": {
+      "title": "What is true about join syntax?",
+      "prompt": "Select all true statements about basic join syntax.",
+      "help": {
+        "concept": "Basic join syntax names the tables and explains the matching condition with ON.",
+        "hint_1": "Think table plus join plus ON.",
+        "hint_2": "Choose the statements about describing the relationship clearly in the query."
+      },
+      "hint": "Think join the second table, then explain the match.",
+      "options": {
+        "a": "A join query names the tables being combined",
+        "b": "The `ON` clause explains the matching condition",
+        "c": "Join queries can select columns from both tables",
+        "d": "Join syntax removes the need for relationship columns",
+        "e": "Join queries often use aliases or full table names for clarity"
+      }
+    },
+    "m8_s02_reading_join_results_true": {
+      "title": "What is true about reading join results?",
+      "prompt": "Select all true statements about reading inner join results.",
+      "help": {
+        "concept": "Joined rows are easiest to read when learners track column sources and relationship meaning.",
+        "hint_1": "Think where each value came from.",
+        "hint_2": "Choose the statements about understanding the combined row as a relationship match."
+      },
+      "hint": "Think combined row from more than one table.",
+      "options": {
+        "a": "A joined row can contain columns from two tables",
+        "b": "It helps to know which table each column came from",
+        "c": "A joined row often represents one successful relationship match",
+        "d": "Joined rows should always be read like single-table rows only",
+        "e": "Clear column selection makes join results easier to understand"
+      }
+    },
+    "m8_s02_inner_join_workflow_true": {
+      "title": "What matches a good beginner workflow for inner joins?",
+      "prompt": "Select all statements that match a good beginner workflow for writing inner join queries.",
+      "help": {
+        "concept": "A good workflow is to identify the two tables, find the matching ID columns, write the join, and read the combined result carefully.",
+        "hint_1": "Think tables, IDs, join, result.",
+        "hint_2": "Choose the steps that help you connect the tables through their relationship columns."
+      },
+      "hint": "Find the two tables and the matching IDs first.",
+      "options": {
+        "a": "Identify which two tables need to be connected",
+        "b": "Find the ID columns that define their relationship",
+        "c": "Write the join condition using those related columns",
+        "d": "Read each joined row as a successful match",
+        "e": "Ignore which columns create the relationship"
+      }
+    }
+  }
+}

@@ -1,12 +1,11 @@
-
 // src/lib/review/api/access/resolveReviewAccess.ts
-
 import "server-only";
 
 import type { PrismaClient } from "@prisma/client";
 import type { Actor } from "@/lib/practice/actor";
 import { resolvePracticeAccess } from "@/lib/practice/access/resolvePracticeAccess";
 import { bodyJsonResponse } from "@/lib/practice/api/shared/http";
+import { resolveReviewModuleForSubject } from "@/lib/review/api/shared/modules";
 
 export type ReviewAccessResolved =
     | {
@@ -14,10 +13,10 @@ export type ReviewAccessResolved =
     mode: "standard";
     bypassBilling: false;
     scope: {
-        subjectId: string;
         subjectSlug: string;
-        moduleId: string;
         moduleSlug: string;
+        subjectDbId?: string | null;
+        moduleDbId?: string | null;
     };
 }
     | {
@@ -31,48 +30,24 @@ export async function resolveReviewAccess(args: {
     locale: string;
     req: Request;
     subjectSlug: string;
-    moduleRef: string; // slug or id
+    moduleSlug: string;
 }): Promise<ReviewAccessResolved> {
-    const { prisma, actor, locale, req, subjectSlug, moduleRef } = args;
+    const { prisma, actor, locale, req, subjectSlug, moduleSlug } = args;
 
-    const subject = await prisma.practiceSubject.findUnique({
-        where: { slug: subjectSlug },
-        select: { id: true, slug: true },
+    const resolved = await resolveReviewModuleForSubject(prisma, {
+        subjectSlug,
+        moduleSlug,
     });
 
-    if (!subject) {
+    if (!resolved.ok) {
         return {
             ok: false,
             res: bodyJsonResponse(
                 {
-                    message: "Unknown subjectSlug.",
-                    detail: { subjectSlug },
+                    message: resolved.message,
+                    detail: resolved.detail,
                 },
-                404,
-            ),
-        };
-    }
-
-    const mod = await prisma.practiceModule.findFirst({
-        where: {
-            subjectId: subject.id,
-            OR: [{ id: moduleRef }, { slug: moduleRef }],
-        },
-        select: {
-            id: true,
-            slug: true,
-        },
-    });
-
-    if (!mod) {
-        return {
-            ok: false,
-            res: bodyJsonResponse(
-                {
-                    message: "Unknown module for subject.",
-                    detail: { subjectSlug, moduleRef },
-                },
-                404,
+                resolved.statusCode,
             ),
         };
     }
@@ -83,8 +58,8 @@ export async function resolveReviewAccess(args: {
         locale,
         req,
         params: {
-            subject: subject.slug,
-            module: mod.slug,
+            subject: subjectSlug,
+            module: resolved.module.slug,
             sessionId: null,
             returnUrl: null,
             returnTo: null,
@@ -99,15 +74,26 @@ export async function resolveReviewAccess(args: {
         };
     }
 
+    const [subjectRow, moduleRow] = await Promise.all([
+        prisma.practiceSubject.findUnique({
+            where: { slug: subjectSlug },
+            select: { id: true },
+        }),
+        prisma.practiceModule.findUnique({
+            where: { slug: resolved.module.slug },
+            select: { id: true },
+        }),
+    ]);
+
     return {
         ok: true,
         mode: "standard",
         bypassBilling: false,
         scope: {
-            subjectId: subject.id,
-            subjectSlug: subject.slug,
-            moduleId: mod.id,
-            moduleSlug: mod.slug,
+            subjectSlug,
+            moduleSlug: resolved.module.slug,
+            subjectDbId: subjectRow?.id ?? null,
+            moduleDbId: moduleRow?.id ?? null,
         },
     };
 }

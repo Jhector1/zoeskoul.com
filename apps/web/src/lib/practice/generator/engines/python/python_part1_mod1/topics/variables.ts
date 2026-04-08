@@ -8,7 +8,7 @@ import {
     type TopicBundle,
 } from "@/lib/practice/generator/engines/utils";
 import { makeCodeExpected, pickName, safeInt } from "../../_shared";
-import { TOPIC_ID } from "@/lib/subjects/python/modules/module1/topics/variables/meta";
+import { TOPIC_ID } from "@/lib/subjects/python/modules/module1/topics/variables_intro/meta";
 import {
     i18nText,
     terminalFenceI18n,

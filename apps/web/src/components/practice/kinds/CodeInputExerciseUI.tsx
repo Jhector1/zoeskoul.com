@@ -1,17 +1,19 @@
 "use client";
 
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import type { CodeLanguage, Exercise } from "@/lib/practice/types";
+import type { CodeLanguage, Exercise, SqlDialect } from "@/lib/practice/types";
 import type { RunResult } from "@/lib/code/types";
 import type { CodeFeedback } from "@/lib/code/feedback/types";
-import { pickRunFeedbackFromResult } from "@/lib/code/feedback/classify";
+import { pickRunFeedbackFromResult } from "@/lib/code/feedback";
 import { runViaApi } from "@/lib/code/runClient";
 import CodeRunner, { CodeRunnerFrame } from "@/components/code/CodeRunner";
 import { ExercisePrompt } from "@/components/practice/kinds/KindHelper";
 import { useTaggedT } from "@/i18n/tagged";
 import CodeFeedbackCallout from "@/components/practice/kinds/CodeFeedbackCallout";
-import {InteractiveLanguage} from "@zoeskoul/code-contracts";
-import {isInteractiveLanguage} from "@/components/practice/practiceType";
+import {
+    resolveSqlRunnerConfig,
+    type SqlTableSnapshots,
+} from "@/lib/subjects/sql/runtime/resolveSqlRunnerConfig";
 
 type CodeInputExercise = Extract<Exercise, { kind: "code_input" }>;
 
@@ -43,6 +45,12 @@ export default function CodeInputExerciseUI({
                                                 explanation = null,
                                                 runFeedback = null,
                                                 runFeedbackTick = 0,
+                                                sqlDialect,
+                                                sqlDatasetId,
+                                                sqlSchemaSql,
+                                                sqlSeedSql,
+                                                sqlSetupSql,
+                                                sqlInitialTableSnapshots,
                                             }: {
     exercise: CodeInputExercise;
     code: string;
@@ -52,7 +60,17 @@ export default function CodeInputExerciseUI({
     onChangeStdin: (stdin: string) => void;
     onChangeLanguage: (l: CodeLanguage) => void;
     disabled: boolean;
-    onRun?: (args: { language: CodeLanguage; code: string; stdin: string }) => Promise<RunResult>;
+    onRun?: (args: {
+        language: CodeLanguage;
+        code: string;
+        stdin: string;
+        sqlDialect?: SqlDialect;
+        sqlDatasetId?: string;
+        sqlSchemaSql?: string;
+        sqlSeedSql?: string;
+        sqlSetupSql?: string;
+        sqlInitialTableSnapshots?: SqlTableSnapshots;
+    }) => Promise<RunResult>;
     checked?: boolean;
     ok?: boolean | null;
     reviewCorrect?: { language: CodeLanguage; code: string; stdin: string } | null;
@@ -69,6 +87,13 @@ export default function CodeInputExerciseUI({
     explanation?: string | null;
     runFeedback?: CodeFeedback | null;
     runFeedbackTick?: number;
+
+    sqlDialect?: SqlDialect;
+    sqlDatasetId?: string;
+    sqlSchemaSql?: string;
+    sqlSeedSql?: string;
+    sqlSetupSql?: string;
+    sqlInitialTableSnapshots?: SqlTableSnapshots;
 }) {
     const showCorrect =
         checked && ok === false && reviewCorrect && typeof reviewCorrect.code === "string";
@@ -82,7 +107,7 @@ export default function CodeInputExerciseUI({
 
     useEffect(() => {
         setEmbeddedRunFeedback(null);
-    }, [code, stdin, language]);
+    }, [code, stdin, language, sqlDialect, sqlDatasetId, sqlSchemaSql, sqlSeedSql]);
 
     const checkedFeedback = checked && ok === false ? feedback ?? null : null;
     const checkedExplanation = checked && ok === false ? explanation ?? null : null;
@@ -94,23 +119,77 @@ export default function CodeInputExerciseUI({
     const activeExplanation = checkedFeedback ? checkedExplanation : null;
     const showFeedback = Boolean(activeFeedback || activeExplanation);
 
+    const resolvedSql = resolveSqlRunnerConfig({
+        language,
+        sqlDialect,
+        sqlDatasetId,
+        sqlSchemaSql,
+        sqlSeedSql,
+        sqlSetupSql,
+        sqlInitialTableSnapshots,
+    });
+
     const executeEmbeddedRun = useCallback(
-        async (args: { language: CodeLanguage; code: string; stdin: string }) => {
+        async (args: {
+            language: CodeLanguage;
+            code: string;
+            stdin: string;
+        }) => {
             setEmbeddedRunFeedback(null);
-            if (!isInteractiveLanguage(args.language)) {
-                                throw new Error("SQL is not supported in CodeInputExerciseUI embedded runner.");
-            }
+
+            const nextResolvedSql = resolveSqlRunnerConfig({
+                language: args.language,
+                sqlDialect,
+                sqlDatasetId,
+                sqlSchemaSql,
+                sqlSeedSql,
+                sqlSetupSql,
+                sqlInitialTableSnapshots,
+            });
+
             const result = onRun
-                ? await onRun(args)
-                : await runViaApi(
-                    {
-                        kind: "code",
-                        language: args.language,
-                        code: args.code,
-                        stdin: args.stdin,
-                    },
-                    undefined,
-                );
+                ? await onRun({
+                    language: args.language,
+                    code: args.code,
+                    stdin: args.stdin,
+                    sqlDialect: nextResolvedSql.isSql ? nextResolvedSql.sqlDialect : undefined,
+                    sqlDatasetId: nextResolvedSql.isSql ? nextResolvedSql.sqlDatasetId : undefined,
+                    sqlSchemaSql: nextResolvedSql.isSql ? nextResolvedSql.sqlSchemaSql : undefined,
+                    sqlSeedSql: nextResolvedSql.isSql ? nextResolvedSql.sqlSeedSql : undefined,
+                    sqlSetupSql: nextResolvedSql.isSql ? nextResolvedSql.sqlSetupSql : undefined,
+                    sqlInitialTableSnapshots: nextResolvedSql.isSql
+                        ? nextResolvedSql.sqlInitialTableSnapshots
+                        : undefined,
+                })
+                : await (async () => {
+                    if (nextResolvedSql.isSql) {
+                        return runViaApi(
+                            {
+                                kind: "sql",
+                                language: "sql",
+                                dialect: nextResolvedSql.sqlDialect,
+                                code: args.code,
+                                schemaSql: nextResolvedSql.sqlSchemaSql ?? "",
+                                seedSql: nextResolvedSql.sqlSeedSql ?? "",
+                            },
+                            undefined,
+                        );
+                    }
+
+                    if (args.language === "sql") {
+                        throw new Error("Unexpected sql language in non-sql code run.");
+                    }
+
+                    return runViaApi(
+                        {
+                            kind: "code",
+                            language: args.language,
+                            code: args.code,
+                            stdin: args.stdin,
+                        },
+                        undefined,
+                    );
+                })();
 
             const nextFeedback = pickRunFeedbackFromResult({
                 result,
@@ -121,7 +200,15 @@ export default function CodeInputExerciseUI({
             setEmbeddedRunFeedback(nextFeedback);
             return result;
         },
-        [onRun],
+        [
+            onRun,
+            sqlDialect,
+            sqlDatasetId,
+            sqlSchemaSql,
+            sqlSeedSql,
+            sqlSetupSql,
+            sqlInitialTableSnapshots,
+        ],
     );
 
     useEffect(() => {
@@ -238,6 +325,13 @@ export default function CodeInputExerciseUI({
                 showLanguagePicker={lockLanguage ? false : true}
                 code={code}
                 stdin={stdin}
+                fixedSqlDialect={resolvedSql.isSql ? resolvedSql.sqlDialect : undefined}
+                showSqlDialectPicker={resolvedSql.isSql ? false : undefined}
+                sqlSchemaSql={resolvedSql.isSql ? (resolvedSql.sqlSchemaSql ?? "") : undefined}
+                sqlSeedSql={resolvedSql.isSql ? (resolvedSql.sqlSeedSql ?? "") : undefined}
+                sqlInitialTableSnapshots={
+                    resolvedSql.isSql ? resolvedSql.sqlInitialTableSnapshots : undefined
+                }
                 onChangeCode={(c) => !readOnly && onChangeCode(c)}
                 onChangeStdin={(s) => !readOnly && onChangeStdin(s)}
                 onRun={(args) =>

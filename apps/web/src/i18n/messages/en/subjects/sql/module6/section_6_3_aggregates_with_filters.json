@@ -1,0 +1,453 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_6": {
+        "aggregates_with_filters": {
+          "label": "Aggregates with Filters",
+          "summary": "Learn how to combine aggregate functions with `WHERE` so summary results are calculated only from selected rows.",
+          "cards": {
+            "sketch0": {
+              "title": "How do aggregates work with `WHERE`?"
+            },
+            "sketch1": {
+              "title": "How do you count filtered rows?"
+            },
+            "sketch2": {
+              "title": "How do you sum filtered data?"
+            },
+            "sketch3": {
+              "title": "How do you average selected records?"
+            },
+            "quiz": {
+              "title": "Quiz: Aggregates with Filters"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_6": {
+        "aggregates_with_filters": {
+          "aggregate_with_where": {
+            "title": "A `WHERE` clause limits which rows the aggregate will summarize.",
+            "bodyMarkdown": "An aggregate does not always need to summarize the whole table.\n\nYou can place a `WHERE` clause in the query so only matching rows are included first.\n\nThen the aggregate summarizes **that filtered set**.\n\nSo the big idea is:\n\n> `WHERE` decides which rows are included before the aggregate is calculated"
+          },
+          "counting_filtered_rows": {
+            "title": "A filtered count tells you how many matching rows there are.",
+            "bodyMarkdown": "A filtered `COUNT()` is very useful for questions like:\n\n- how many paid orders are there?\n- how many orders are in the North region?\n\nThis works by filtering first and counting second.\n\nSo the key idea is:\n\n> count only the rows that match the condition"
+          },
+          "summing_filtered_data": {
+            "title": "A filtered sum adds values only from the matching rows.",
+            "bodyMarkdown": "A filtered `SUM()` helps when you want totals from just part of the table.\n\nFor example:\n\n- total quantity for paid orders\n- total quantity for one category\n- total quantity for one region\n\nSo the important idea is:\n\n> filter first, then add only the remaining values"
+          },
+          "average_on_selected_records": {
+            "title": "A filtered average uses only the selected records.",
+            "bodyMarkdown": "A filtered `AVG()` is useful when you want the mean for one subset of rows.\n\nFor example:\n\n- average price for Art orders\n- average quantity for paid orders\n\nSo the main idea is:\n\n> the average only uses the rows that pass the `WHERE` condition"
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "m6_s03_count_paid_orders": {
+      "title": "Count filtered rows",
+      "prompt": "The SQLite workspace already has a table named `orders`.\n\nWrite a query that returns one summary value showing how many rows have `status` equal to `paid`.\n\nRename the result to `paid_order_count`, then click **Run**.",
+      "help": {
+        "concept": "A filtered aggregate uses `WHERE` first so the summary only includes matching rows.",
+        "hint_1": "Use `COUNT()` and add a `WHERE` condition on `status`.",
+        "hint_2": "Build a summary query that reads from `orders`, filters to the rows whose status matches `paid`, and then counts only those rows."
+      },
+      "hint": "Use `COUNT()` with a `WHERE` filter on `status`.",
+      "starterCode": "-- Count only the rows where status is paid\n"
+    },
+    "m6_s03_count_north_orders": {
+      "title": "Count rows in one region",
+      "prompt": "The `orders` table already exists.\n\nWrite a query that returns one summary value showing how many rows are in the `North` region.\n\nRename the result to `north_order_count`, then run it.",
+      "help": {
+        "concept": "A filtered count can answer how-many questions for a subset of rows.",
+        "hint_1": "Use `COUNT()` and a `WHERE` clause on `region`.",
+        "hint_2": "Create a summary query that filters to rows in the `North` region first, then counts the filtered rows."
+      },
+      "hint": "Use `COUNT()` with a `WHERE` filter on `region`.",
+      "starterCode": "-- Count only the rows in the North region\n"
+    },
+    "m6_s03_sum_paid_quantity": {
+      "title": "Sum filtered data",
+      "prompt": "The `orders` table already exists.\n\nWrite a query that returns one summary value showing the total `quantity` for rows where `status` is `paid`.\n\nRename the result to `paid_quantity_total`, then click **Run**.",
+      "help": {
+        "concept": "A filtered sum adds values only from rows that match the `WHERE` condition.",
+        "hint_1": "Use `SUM()` on `quantity`, and filter the rows by `status`.",
+        "hint_2": "Build a summary query that keeps only paid rows first, then totals the `quantity` values from that filtered set."
+      },
+      "hint": "Use `SUM(quantity)` with a `WHERE` filter on `status`.",
+      "starterCode": "-- Sum quantity only for paid rows\n"
+    },
+    "m6_s03_sum_art_quantity": {
+      "title": "Sum one category",
+      "prompt": "The `orders` table already exists.\n\nWrite a query that returns one summary value showing the total `quantity` for rows where `category` is `Art`.\n\nRename the result to `art_quantity_total`, then run it.",
+      "help": {
+        "concept": "A filtered sum can total values from only one category or subset.",
+        "hint_1": "Use `SUM()` on `quantity` and filter by `category`.",
+        "hint_2": "Create a summary query that keeps only `Art` rows, then adds the `quantity` values from those rows."
+      },
+      "hint": "Use `SUM(quantity)` with a `WHERE` filter on `category`.",
+      "starterCode": "-- Sum quantity only for the Art category\n"
+    },
+    "m6_s03_avg_art_price": {
+      "title": "Average selected records",
+      "prompt": "The `orders` table already exists.\n\nWrite a query that returns one summary value showing the average `unit_price` for rows where `category` is `Art`.\n\nRename the result to `art_avg_price`, then click **Run**.",
+      "help": {
+        "concept": "A filtered average uses only the rows that match the `WHERE` condition.",
+        "hint_1": "Use `AVG()` on `unit_price` and filter by `category`.",
+        "hint_2": "Build a summary query that keeps only the `Art` rows first, then calculates the average of `unit_price` from that selected set."
+      },
+      "hint": "Use `AVG(unit_price)` with a `WHERE` filter on `category`.",
+      "starterCode": "-- Average unit_price only for the Art category\n"
+    },
+    "m6_s03_filtered_aggregates_project": {
+      "title": "Practice filtered aggregates",
+      "prompt": "Use the SQL workspace on the right to practice filtered aggregate queries on the `orders` table.\n\nFor each task:\n\n1. type the query in the editor\n2. click **Run**\n3. read the result header\n4. confirm that the summary used only the matching rows\n\nTasks:\n\n1. Count rows where `status` is `paid`\n2. Count rows where `region` is `North`\n3. Sum `quantity` where `status` is `paid`\n4. Sum `quantity` where `category` is `Art`\n5. Average `unit_price` where `category` is `Art`\n\nRun one query at a time.\nThis project is about using `WHERE` to control which rows an aggregate summarizes.",
+      "help": {
+        "concept": "Filtered aggregates summarize only the rows that pass the `WHERE` condition.",
+        "hint_1": "Each task follows the same pattern: filter first, then summarize the remaining rows.",
+        "hint_2": "Solve the tasks one by one. First decide which rows should stay, then choose the aggregate that matches the type of summary you want."
+      },
+      "hint": "Filter first, then summarize.",
+      "starterCode": "-- Task 1\n-- Count rows where status is paid\n\n"
+    },
+
+    "m6_s03_where_with_aggregate_meaning": {
+      "title": "What does WHERE do in a filtered aggregate?",
+      "prompt": "When `WHERE` is used with an aggregate query, what is its main job?",
+      "help": {
+        "concept": "`WHERE` limits which rows are included before the aggregate is calculated.",
+        "hint_1": "Think choose the rows first.",
+        "hint_2": "The filter decides which rows the summary function is allowed to use."
+      },
+      "hint": "Think select the rows before summarizing.",
+      "options": {
+        "a": "It limits which rows are included in the summary",
+        "b": "It renames the result column",
+        "c": "It turns numbers into text",
+        "d": "It removes the aggregate function"
+      }
+    },
+    "m6_s03_count_filtered_rows_meaning": {
+      "title": "What does a filtered COUNT() tell you?",
+      "prompt": "What does a filtered `COUNT()` usually tell you?",
+      "help": {
+        "concept": "A filtered count tells you how many rows match the condition.",
+        "hint_1": "Think how many matching rows.",
+        "hint_2": "It counts only the rows that stay after the filter."
+      },
+      "hint": "Think how many rows matched.",
+      "options": {
+        "a": "How many rows match the filter",
+        "b": "The average of all rows",
+        "c": "The smallest value in the table",
+        "d": "The order of the rows"
+      }
+    },
+    "m6_s03_sum_filtered_data_meaning": {
+      "title": "What does a filtered SUM() do?",
+      "prompt": "What is the main effect of using `SUM()` with a `WHERE` clause?",
+      "help": {
+        "concept": "A filtered sum totals values only from the rows that match the condition.",
+        "hint_1": "Think total from selected rows only.",
+        "hint_2": "It ignores the rows that do not pass the filter."
+      },
+      "hint": "Think total from matching rows only.",
+      "options": {
+        "a": "It totals values only from rows that match the filter",
+        "b": "It counts every row regardless of the filter",
+        "c": "It always returns the highest value",
+        "d": "It removes the need for column names"
+      }
+    },
+    "m6_s03_avg_selected_records_meaning": {
+      "title": "What does a filtered AVG() do?",
+      "prompt": "What is the main effect of using `AVG()` with a `WHERE` clause?",
+      "help": {
+        "concept": "A filtered average uses only the selected rows when calculating the mean.",
+        "hint_1": "Think average of a subset.",
+        "hint_2": "The rows that do not match the filter are left out of the mean."
+      },
+      "hint": "Think average of matching rows only.",
+      "options": {
+        "a": "It averages only the rows that match the filter",
+        "b": "It averages every row in the table no matter what",
+        "c": "It automatically finds the minimum",
+        "d": "It sorts the selected rows"
+      }
+    },
+    "m6_s03_filtered_summary_reading": {
+      "title": "How should you read a filtered aggregate result?",
+      "prompt": "What is a good beginner way to read the result of a filtered aggregate query?",
+      "help": {
+        "concept": "A strong habit is to read both the summary header and the filter meaning together.",
+        "hint_1": "Think summary plus condition.",
+        "hint_2": "The returned value only makes sense if you remember which rows were included."
+      },
+      "hint": "Read the summary together with the filter idea.",
+      "options": {
+        "a": "Read the summary value together with the filter condition it used",
+        "b": "Ignore the filter once the query runs",
+        "c": "Assume filtered and unfiltered aggregates always mean the same thing",
+        "d": "Only read the alias and nothing else"
+      }
+    },
+
+    "m6_s03_filtered_aggregates_true": {
+      "title": "What is true about aggregates with filters?",
+      "prompt": "Select all true statements about filtered aggregate queries.",
+      "help": {
+        "concept": "Filtered aggregates use `WHERE` to decide which rows are included in the summary.",
+        "hint_1": "Think filter first, summarize second.",
+        "hint_2": "Choose the statements about limiting the input rows before calculating the summary."
+      },
+      "hint": "Think selected rows only.",
+      "options": {
+        "a": "`WHERE` can limit which rows the aggregate uses",
+        "b": "Filtered aggregates summarize only the matching rows",
+        "c": "The filter affects the returned summary value",
+        "d": "Filtered aggregates always ignore the `WHERE` clause",
+        "e": "Filtered aggregates are useful for subset questions"
+      }
+    },
+    "m6_s03_filtered_count_true": {
+      "title": "What is true about counting filtered rows?",
+      "prompt": "Select all true statements about filtered `COUNT()` queries.",
+      "help": {
+        "concept": "Filtered counts answer how-many questions for selected rows only.",
+        "hint_1": "Think count after filtering.",
+        "hint_2": "Choose the statements about counting only the rows that pass the condition."
+      },
+      "hint": "Think how many matched.",
+      "options": {
+        "a": "A filtered count can answer how many paid rows there are",
+        "b": "A filtered count only counts rows that match the condition",
+        "c": "A filtered count is useful for subset questions",
+        "d": "A filtered count always ignores text conditions",
+        "e": "A filtered count still returns a summary result"
+      }
+    },
+    "m6_s03_filtered_sum_avg_true": {
+      "title": "What is true about filtered SUM() and AVG()?",
+      "prompt": "Select all true statements about filtered `SUM()` and filtered `AVG()` queries.",
+      "help": {
+        "concept": "These functions summarize numeric data from only the filtered rows.",
+        "hint_1": "Think filtered totals and filtered averages.",
+        "hint_2": "Choose the statements about summarizing only the selected subset."
+      },
+      "hint": "Think totals and averages on subsets.",
+      "options": {
+        "a": "A filtered `SUM()` adds values from matching rows only",
+        "b": "A filtered `AVG()` uses matching rows only",
+        "c": "Both can answer subset summary questions",
+        "d": "Both always summarize the whole table no matter what",
+        "e": "Both can be combined with `WHERE`"
+      }
+    },
+    "m6_s03_filtered_reading_true": {
+      "title": "What is true about reading filtered summary results?",
+      "prompt": "Select all true statements about reading filtered aggregate results.",
+      "help": {
+        "concept": "The filter meaning matters just as much as the aggregate meaning.",
+        "hint_1": "Think what rows were included.",
+        "hint_2": "Choose the statements about interpreting the result in the context of the filter."
+      },
+      "hint": "Think summary plus filter.",
+      "options": {
+        "a": "The filter changes what the summary value represents",
+        "b": "The result should be interpreted together with the condition",
+        "c": "A clear alias can make filtered summary output easier to read",
+        "d": "The filter is irrelevant once the value is returned",
+        "e": "Filtered summaries are often used to answer targeted questions"
+      }
+    },
+    "m6_s03_filtered_aggregate_workflow_true": {
+      "title": "What matches a good beginner workflow for filtered aggregates?",
+      "prompt": "Select all statements that match a good beginner workflow for writing filtered aggregate queries.",
+      "help": {
+        "concept": "A good workflow is to choose the subset, choose the summary type, write the query, and verify the meaning of the result.",
+        "hint_1": "Think subset first, summary second.",
+        "hint_2": "Choose the steps that help you define both what rows to include and what summary to compute."
+      },
+      "hint": "Choose the subset, then choose the summary.",
+      "options": {
+        "a": "Decide which rows should be included",
+        "b": "Write a `WHERE` clause for that subset",
+        "c": "Choose the aggregate function that matches the summary question",
+        "d": "Run the query and interpret the result in context",
+        "e": "Ignore whether the filter matches the question"
+      }
+    },
+
+    "m6_s03_fill_where_filters_rows": {
+      "title": "What WHERE filters",
+      "prompt": "Fill in the blank with the best word.",
+      "template": "In a filtered aggregate query, `WHERE` decides which ____ are included first.",
+      "choices": {
+        "0": "rows",
+        "1": "fonts",
+        "2": "folders",
+        "3": "tabs"
+      },
+      "hint": "WHERE chooses the records before the summary is calculated.",
+      "help": {
+        "concept": "WHERE limits which rows are included before the aggregate runs.",
+        "hint_1": "Think original records.",
+        "hint_2": "The missing word is `rows`."
+      }
+    },
+    "m6_s03_fill_filter_then_count": {
+      "title": "Filtered COUNT order",
+      "prompt": "Fill in the blank with the best word.",
+      "template": "With a filtered `COUNT()`, you ____ only the rows that matched the condition.",
+      "choices": {
+        "0": "count",
+        "1": "rename",
+        "2": "sort",
+        "3": "duplicate"
+      },
+      "hint": "The filter happens before the counting.",
+      "help": {
+        "concept": "Filtered COUNT counts only the rows that remain after filtering.",
+        "hint_1": "Think how many matching rows.",
+        "hint_2": "The missing word is `count`."
+      }
+    },
+    "m6_s03_fill_filter_then_sum": {
+      "title": "Filtered SUM order",
+      "prompt": "Fill in the blank with the best word.",
+      "template": "With a filtered `SUM()`, you first filter the rows and then ____ the remaining values.",
+      "choices": {
+        "0": "sum",
+        "1": "lowercase",
+        "2": "rename",
+        "3": "hide"
+      },
+      "hint": "The total uses only the remaining rows.",
+      "help": {
+        "concept": "Filtered sums add only the values from the selected subset.",
+        "hint_1": "Think total remaining values.",
+        "hint_2": "The missing word is `sum`."
+      }
+    },
+    "m6_s03_fill_avg_subset": {
+      "title": "Filtered average scope",
+      "prompt": "Fill in the blank with the best word.",
+      "template": "A filtered `AVG()` calculates the mean for one selected ____ of rows.",
+      "choices": {
+        "0": "subset",
+        "1": "browser",
+        "2": "theme",
+        "3": "icon"
+      },
+      "hint": "Only some rows are included.",
+      "help": {
+        "concept": "Filtered averages are averages of a subset, not the whole table.",
+        "hint_1": "Think part of the table.",
+        "hint_2": "The missing word is `subset`."
+      }
+    },
+    "m6_s03_fill_read_filter_together": {
+      "title": "How to read filtered summaries",
+      "prompt": "Fill in the blank with the best word.",
+      "template": "A filtered summary makes the most sense when you read the result together with the ____ idea.",
+      "choices": {
+        "0": "filter",
+        "1": "keyboard",
+        "2": "window",
+        "3": "style"
+      },
+      "hint": "Remember which rows were included.",
+      "help": {
+        "concept": "Filtered summaries should be interpreted together with the filter condition.",
+        "hint_1": "Think included rows.",
+        "hint_2": "The missing word is `filter`."
+      }
+    },
+
+    "m6_s03_reorder_filtered_workflow": {
+      "title": "Order the filtered-aggregate workflow",
+      "prompt": "Reorder the steps into a good beginner workflow for filtered aggregate queries.",
+      "tokens": {
+        "t1": "decide which rows should stay",
+        "t2": "write the WHERE clause",
+        "t3": "choose the matching aggregate",
+        "t4": "run and interpret the result"
+      },
+      "hint": "Subset first, interpretation last.",
+      "help": {
+        "concept": "Filtered aggregate queries work best when you choose the subset before the summary.",
+        "hint_1": "Start with the rows to keep.",
+        "hint_2": "Interpretation comes after running."
+      }
+    },
+    "m6_s03_reorder_count_paid_pattern": {
+      "title": "Order a filtered count pattern",
+      "prompt": "Reorder the query parts into a filtered count query for paid orders.",
+      "tokens": {
+        "t1": "SELECT COUNT(*) AS paid_order_count",
+        "t2": "FROM orders",
+        "t3": "WHERE status = 'paid'",
+        "t4": ";"
+      },
+      "hint": "Filter after FROM.",
+      "help": {
+        "concept": "A filtered count query counts only the rows that match the WHERE condition.",
+        "hint_1": "Start with the SELECT line.",
+        "hint_2": "The WHERE line comes after FROM."
+      }
+    },
+    "m6_s03_reorder_sum_art_pattern": {
+      "title": "Order a filtered sum pattern",
+      "prompt": "Reorder the query parts into a filtered sum query for Art rows.",
+      "tokens": {
+        "t1": "SELECT SUM(quantity) AS art_quantity_total",
+        "t2": "FROM orders",
+        "t3": "WHERE category = 'Art'",
+        "t4": ";"
+      },
+      "hint": "Same structure as other filtered aggregates.",
+      "help": {
+        "concept": "A filtered sum totals only the values from rows that pass the filter.",
+        "hint_1": "Start with the SELECT line.",
+        "hint_2": "Put WHERE after FROM."
+      }
+    },
+    "m6_s03_reorder_read_filtered_result": {
+      "title": "Order how to read a filtered result",
+      "prompt": "Reorder the steps into a good way to read filtered aggregate output.",
+      "tokens": {
+        "t1": "read the result header",
+        "t2": "read the summary value",
+        "t3": "connect it to the filter condition"
+      },
+      "hint": "Header first, filter meaning last.",
+      "help": {
+        "concept": "Filtered summaries are easiest to understand when you connect the value to the rows included by the filter.",
+        "hint_1": "Start with the header.",
+        "hint_2": "Then remember which rows were selected."
+      }
+    },
+    "m6_s03_reorder_subset_question_types": {
+      "title": "Order the filtered summary ideas",
+      "prompt": "Reorder these filtered summary ideas in the same lesson flow used here.",
+      "tokens": {
+        "t1": "filtered count",
+        "t2": "filtered sum",
+        "t3": "filtered average"
+      },
+      "hint": "Follow the lesson order.",
+      "help": {
+        "concept": "This lesson introduces filtered count, filtered sum, and filtered average in sequence.",
+        "hint_1": "Count comes first.",
+        "hint_2": "Average comes last."
+      }
+    }
+  }
+}

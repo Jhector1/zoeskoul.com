@@ -5,7 +5,7 @@ import {
     makeSingleChoiceOut,
     type TopicBundle,
 } from "@/lib/practice/generator/engines/utils";
-import {TOPIC_ID} from "@/lib/subjects/python/modules/module0/topics/workspace/meta";
+import {TOPIC_ID} from "@/lib/subjects/python/modules/module0/topics/editor_workspace_overview/meta";
 
 export const M0_WORKSPACE_POOL = [
     { key: "m0_workspace_run_button", w: 1, kind: "single_choice", purpose: "quiz" },

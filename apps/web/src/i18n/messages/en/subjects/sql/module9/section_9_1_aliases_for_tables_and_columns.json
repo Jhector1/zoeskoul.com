@@ -1,0 +1,310 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_9": {
+        "aliases_for_tables_and_columns": {
+          "label": "Aliases for Tables and Columns",
+          "summary": "Review column aliases, learn table aliases, shorten longer queries, and make join queries easier to read.",
+          "cards": {
+            "sketch0": {
+              "title": "Why use column aliases again?"
+            },
+            "sketch1": {
+              "title": "What is a table alias?"
+            },
+            "sketch2": {
+              "title": "How do aliases shorten long queries?"
+            },
+            "sketch3": {
+              "title": "How do aliases make joins easier to read?"
+            },
+            "quiz": {
+              "title": "Quiz: Aliases for Tables and Columns"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_9": {
+        "section_9_1": {
+          "column_aliases_review": {
+            "title": "Column aliases give result columns clearer names.",
+            "bodyMarkdown": "A **column alias** changes how a result column is labeled in the output.\n\nThis is useful when:\n\n- a column name is too technical\n- a joined result needs clearer labels\n- a calculated value needs a readable name\n\nSo the big idea is:\n\n> column aliases improve the output label without changing the real table"
+          },
+          "table_aliases": {
+            "title": "Table aliases give tables short nicknames inside a query.",
+            "bodyMarkdown": "A **table alias** is a short name you use inside the query.\n\nThis helps when:\n\n- a query uses more than one table\n- column names are repeated across tables\n- the full table names make the query feel too long\n\nFor example, a table like `students` can be shortened in the query.\n\nSo the key idea is:\n\n> table aliases make long table references shorter while keeping the logic the same"
+          },
+          "shortening_long_queries": {
+            "title": "Aliases can make longer queries easier to scan.",
+            "bodyMarkdown": "In join queries, repeating full table names again and again can make the query harder to read.\n\nShort table aliases help reduce visual clutter.\n\nThat means you can focus more on:\n\n- what is being selected\n- how tables connect\n- what the result means\n\nSo the main idea is:\n\n> aliases can reduce repetition and make long queries feel smaller"
+          },
+          "making_joins_readable": {
+            "title": "Aliases are especially helpful in join queries.",
+            "bodyMarkdown": "Join queries often use columns from several tables.\n\nWithout aliases, the query can feel long and crowded.\n\nWith aliases, it becomes easier to see:\n\n- which table each column came from\n- which tables are being joined\n- which relationship columns are being matched\n\nSo the important idea is:\n\n> aliases help join queries feel more readable and structured"
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "m9_s01_alias_student_name_column": {
+      "title": "Review column aliases",
+      "prompt": "The SQLite workspace already has the `school_relations_intro` dataset loaded.\n\nWrite a query that returns `students.name` and `students.grade_level`, but rename the result columns to `student_name` and `grade`.\n\nThen click **Run**.",
+      "help": {
+        "concept": "Column aliases rename result headers so the output becomes clearer.",
+        "hint_1": "Select the two student columns, then give each one a better result label.",
+        "hint_2": "Build a normal query on `students`, and after each selected column add a clear alias for the output."
+      },
+      "hint": "Rename both result columns with aliases.",
+      "starterCode": "-- Show student names and grade levels with clearer result labels\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table"
+      }
+    },
+    "m9_s01_table_alias_students_enrollments": {
+      "title": "Use table aliases in a join",
+      "prompt": "The tables already exist.\n\nWrite a query that returns the student name and enrollment term by joining `students` and `enrollments`, but use short table aliases in the query.\n\nRename the output columns to `student_name` and `term_name`, then run it.",
+      "help": {
+        "concept": "Table aliases shorten join queries while column aliases make the result easier to read.",
+        "hint_1": "Give `students` and `enrollments` short table aliases, then join them through the student relationship.",
+        "hint_2": "Build the join using short table names inside the query, and give the selected result columns clearer output labels."
+      },
+      "hint": "Use short table aliases and clear output aliases.",
+      "starterCode": "-- Join students and enrollments using table aliases\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table"
+      }
+    },
+    "m9_s01_alias_courses_departments_join": {
+      "title": "Shorten a direct join",
+      "prompt": "The tables already exist.\n\nWrite a query that returns each course title and department name by joining `courses` and `departments` with table aliases.\n\nRename the department result column to `department_name`, then click **Run**.",
+      "help": {
+        "concept": "A short alias can make a simple join easier to scan without changing the logic.",
+        "hint_1": "Use table aliases for `courses` and `departments`, and join them through the department relationship.",
+        "hint_2": "Build the join with short table names, then rename the department output column so the result reads more clearly."
+      },
+      "hint": "Use short table aliases for the join.",
+      "starterCode": "-- Show course titles with department names using aliases\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table"
+      }
+    },
+    "m9_s01_alias_three_table_join": {
+      "title": "Make a three-table join readable",
+      "prompt": "The tables already exist.\n\nWrite a query that returns the student name and course title by joining `students`, `enrollments`, and `courses`.\n\nUse short table aliases and rename the result columns to `student_name` and `course_title`, then run it.",
+      "help": {
+        "concept": "Table aliases become especially useful when a query joins more than two tables.",
+        "hint_1": "Use one short alias per table and connect the joins through `enrollments`.",
+        "hint_2": "Build the query step by step: start from students, connect to enrollments, connect to courses, and keep the selected result labels clear."
+      },
+      "hint": "Use one short alias per table and join through enrollments.",
+      "starterCode": "-- Show student names and course titles using short aliases\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table"
+      }
+    },
+    "m9_s01_aliases_project": {
+      "title": "Practice readable aliases",
+      "prompt": "Use the SQL workspace on the right to practice aliases on the `school_relations_intro` dataset.\n\nFor each task:\n\n1. type the query in the editor\n2. click **Run**\n3. inspect the result headers\n4. notice whether the query feels shorter and easier to read\n\nTasks:\n\n1. Show student names and grades with column aliases\n2. Join students and enrollments with table aliases\n3. Join courses and departments with table aliases\n4. Join students, enrollments, and courses with table aliases\n5. Return department names and course titles with readable output labels\n\nRun one query at a time.\nThis project is about making join queries shorter and clearer.",
+      "help": {
+        "concept": "Aliases help both the query text and the result table feel easier to read.",
+        "hint_1": "Use column aliases for clearer output and table aliases for shorter joins.",
+        "hint_2": "Solve the tasks one by one. Focus on which names need to be shortened inside the query and which labels need to be improved in the result."
+      },
+      "hint": "Use table aliases for the query and column aliases for the output.",
+      "starterCode": "-- Task 1\n-- Show student names and grades with clearer result labels\n\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table"
+      }
+    },
+    "m9_s01_column_alias_review_meaning": {
+      "title": "Why review column aliases?",
+      "prompt": "What is the main reason to use a column alias in a beginner SQL query?",
+      "help": {
+        "concept": "A column alias improves the result label without changing the real table.",
+        "hint_1": "Think clearer result header.",
+        "hint_2": "It helps the output say what the column means more clearly."
+      },
+      "hint": "Think result label.",
+      "options": {
+        "a": "To give the result column a clearer name",
+        "b": "To permanently rename the real table column",
+        "c": "To replace joins completely",
+        "d": "To filter rows automatically"
+      }
+    },
+    "m9_s01_table_alias_meaning": {
+      "title": "What is a table alias?",
+      "prompt": "What is a table alias mainly used for?",
+      "help": {
+        "concept": "A table alias is a short nickname for a table inside the query.",
+        "hint_1": "Think shorter table name inside the query.",
+        "hint_2": "It makes repeated table references smaller and easier to scan."
+      },
+      "hint": "Think short nickname for a table.",
+      "options": {
+        "a": "A short name used for a table inside a query",
+        "b": "A permanent new table name",
+        "c": "A replacement for primary keys",
+        "d": "A type of aggregate function"
+      }
+    },
+    "m9_s01_shortening_queries_meaning": {
+      "title": "How do aliases shorten long queries?",
+      "prompt": "Why can aliases make long queries easier to read?",
+      "help": {
+        "concept": "Aliases reduce repeated long names and make the structure easier to spot.",
+        "hint_1": "Think less repetition.",
+        "hint_2": "A shorter reference can make joins and selected columns easier to scan."
+      },
+      "hint": "Think less repeated text.",
+      "options": {
+        "a": "They reduce repeated long names in the query",
+        "b": "They remove the need for ON conditions",
+        "c": "They automatically sort the result",
+        "d": "They delete extra columns from the table"
+      }
+    },
+    "m9_s01_making_joins_readable_meaning": {
+      "title": "How do aliases help joins?",
+      "prompt": "Why are aliases especially useful in join queries?",
+      "help": {
+        "concept": "Joins often use several tables, so aliases make the query feel more compact and readable.",
+        "hint_1": "Think several table names in one query.",
+        "hint_2": "Aliases help you see the relationship and selected columns with less visual clutter."
+      },
+      "hint": "Think shorter references in multi-table queries.",
+      "options": {
+        "a": "They make multi-table joins easier to read",
+        "b": "They remove the need for relationships",
+        "c": "They make INNER JOIN and LEFT JOIN the same",
+        "d": "They prevent columns from being selected"
+      }
+    },
+    "m9_s01_alias_source_reading": {
+      "title": "How should you read aliased join queries?",
+      "prompt": "What is a good beginner way to read a join query that uses table aliases?",
+      "help": {
+        "concept": "A strong habit is to map each alias back to its real table first.",
+        "hint_1": "Think short name back to real table.",
+        "hint_2": "Once you know what each alias stands for, the rest of the join becomes easier to follow."
+      },
+      "hint": "Map each short alias back to its real table first.",
+      "options": {
+        "a": "Figure out what real table each alias stands for first",
+        "b": "Ignore the aliases and guess",
+        "c": "Assume every alias refers to the same table",
+        "d": "Only read the SELECT line"
+      }
+    },
+    "m9_s01_column_aliases_true": {
+      "title": "What is true about column aliases?",
+      "prompt": "Select all true statements about column aliases.",
+      "help": {
+        "concept": "Column aliases change how selected output is labeled, not how the table is stored.",
+        "hint_1": "Think result header only.",
+        "hint_2": "Choose the statements about clearer output names."
+      },
+      "hint": "Think clearer output labels.",
+      "options": {
+        "a": "They can make result headers easier to understand",
+        "b": "They can be useful in join queries",
+        "c": "They do not permanently rename the table column",
+        "d": "They always delete the original column",
+        "e": "They can make reports easier to read"
+      }
+    },
+    "m9_s01_table_aliases_true": {
+      "title": "What is true about table aliases?",
+      "prompt": "Select all true statements about table aliases.",
+      "help": {
+        "concept": "Table aliases shorten how a table is referenced inside the query.",
+        "hint_1": "Think shorter names inside the query text.",
+        "hint_2": "Choose the statements about readability and repeated table references."
+      },
+      "hint": "Think shorter table references.",
+      "options": {
+        "a": "They can shorten repeated table references",
+        "b": "They are useful in join queries",
+        "c": "They can make long queries easier to scan",
+        "d": "They permanently rename the real table in the database",
+        "e": "They help when several tables appear in one query"
+      }
+    },
+    "m9_s01_short_queries_true": {
+      "title": "What is true about shortening long queries?",
+      "prompt": "Select all true statements about using aliases to shorten long queries.",
+      "help": {
+        "concept": "Aliases reduce repetition and help the structure stand out.",
+        "hint_1": "Think less clutter.",
+        "hint_2": "Choose the statements about readability and repetition."
+      },
+      "hint": "Think less repeated text.",
+      "options": {
+        "a": "Aliases can reduce repeated long table names",
+        "b": "Aliases can make joins easier to scan",
+        "c": "Aliases can make a query feel less cluttered",
+        "d": "Aliases remove the need to understand the relationship",
+        "e": "Shorter references can help learners focus on the logic"
+      }
+    },
+    "m9_s01_readable_joins_true": {
+      "title": "What is true about making joins readable?",
+      "prompt": "Select all true statements about making join queries more readable.",
+      "help": {
+        "concept": "Readable joins use clear structure, understandable labels, and manageable table references.",
+        "hint_1": "Think short references and clear outputs.",
+        "hint_2": "Choose the statements about clarity in multi-table queries."
+      },
+      "hint": "Think readable structure and readable labels.",
+      "options": {
+        "a": "Table aliases can help multi-table queries feel shorter",
+        "b": "Column aliases can make joined output clearer",
+        "c": "Readable joins help you see where each column came from",
+        "d": "Messier repeated names always make joins easier",
+        "e": "Readable joins are easier for beginners to follow"
+      }
+    },
+    "m9_s01_alias_workflow_true": {
+      "title": "What matches a good beginner workflow for aliases?",
+      "prompt": "Select all statements that match a good beginner workflow for using aliases well.",
+      "help": {
+        "concept": "A good workflow is to shorten repeated table references and improve unclear output labels.",
+        "hint_1": "Think shorten inside, clarify outside.",
+        "hint_2": "Choose the steps that help both the query text and the result table read better."
+      },
+      "hint": "Shorten repeated table references and clarify result labels.",
+      "options": {
+        "a": "Notice which table names repeat too often",
+        "b": "Use short table aliases when the query gets crowded",
+        "c": "Rename unclear output columns with column aliases",
+        "d": "Check whether the result headers are easy to understand",
+        "e": "Avoid thinking about readability at all"
+      }
+    }
+  }
+}

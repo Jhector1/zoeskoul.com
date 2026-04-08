@@ -1,0 +1,454 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_7": {
+        "aggregates_with_groups": {
+          "label": "Aggregates with Groups",
+          "summary": "Learn how to calculate counts, totals, averages, minimums, and maximums separately for each group.",
+          "cards": {
+            "sketch0": {
+              "title": "How do you count per group?"
+            },
+            "sketch1": {
+              "title": "How do you sum per group?"
+            },
+            "sketch2": {
+              "title": "How do you average per group?"
+            },
+            "sketch3": {
+              "title": "How do you find max and min per group?"
+            },
+            "quiz": {
+              "title": "Quiz: Aggregates with Groups"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_7": {
+        "aggregates_with_groups": {
+          "count_per_group": {
+            "title": "A grouped count tells you how many rows belong to each group.",
+            "bodyMarkdown": "When you combine `COUNT()` with `GROUP BY`, SQL returns one count for each group.\n\nThat helps answer questions like:\n\n- how many orders are in each category?\n- how many orders belong to each customer?\n\nSo the big idea is:\n\n> grouped counts answer how-many questions per group"
+          },
+          "sum_per_group": {
+            "title": "A grouped sum adds values separately inside each group.",
+            "bodyMarkdown": "When you combine `SUM()` with `GROUP BY`, SQL creates one total for each group.\n\nThat helps answer questions like:\n\n- total quantity per category\n- total sales per customer\n\nSo the key idea is:\n\n> grouped sums calculate one total per group"
+          },
+          "average_per_group": {
+            "title": "A grouped average gives one mean value per group.",
+            "bodyMarkdown": "When you combine `AVG()` with `GROUP BY`, each group gets its own average.\n\nThat is useful for questions like:\n\n- average price by category\n- average quantity by region\n\nSo the main idea is:\n\n> grouped averages compare groups using their mean values"
+          },
+          "max_and_min_per_group": {
+            "title": "Grouped minimums and maximums show the extremes inside each group.",
+            "bodyMarkdown": "When you use `MIN()` or `MAX()` with `GROUP BY`, SQL returns one extreme value for each group.\n\nThat helps answer questions like:\n\n- highest price in each category\n- lowest quantity in each region\n\nSo the important idea is:\n\n> each group can have its own smallest or largest value"
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "m7_s02_count_per_category": {
+      "title": "Count per group",
+      "prompt": "The SQLite workspace already has a table named `orders`.\n\nWrite a query that returns each `category` and the number of rows in that category.\n\nRename the count result to `order_count`, then click **Run**.",
+      "help": {
+        "concept": "A grouped count uses `COUNT()` with `GROUP BY` so each group gets its own row count.",
+        "hint_1": "Show `category`, count the rows, and group by `category`.",
+        "hint_2": "Build the query so one result row appears for each category, with a count beside it."
+      },
+      "hint": "Use `COUNT()` with `GROUP BY category`.",
+      "starterCode": "-- Return each category and its order_count\n"
+    },
+    "m7_s02_sum_quantity_per_category": {
+      "title": "Sum per group",
+      "prompt": "The `orders` table already exists.\n\nWrite a query that returns each `category` and the total `quantity` for that category.\n\nRename the sum result to `total_quantity`, then run it.",
+      "help": {
+        "concept": "A grouped sum totals a numeric column separately for each group.",
+        "hint_1": "Use `category` as the group label and sum the `quantity` column.",
+        "hint_2": "Build a query that returns one row per category with its own quantity total."
+      },
+      "hint": "Use `SUM(quantity)` with `GROUP BY category`.",
+      "starterCode": "-- Return each category and total_quantity\n"
+    },
+    "m7_s02_avg_price_per_region": {
+      "title": "Average per group",
+      "prompt": "The `orders` table already exists.\n\nWrite a query that returns each `region` and the average `unit_price` for that region.\n\nRename the average result to `avg_price`, then click **Run**.",
+      "help": {
+        "concept": "A grouped average returns one mean value for each group.",
+        "hint_1": "Use `region` as the group label and average `unit_price` inside each region.",
+        "hint_2": "Build a query that groups rows by `region` and gives each region one average price."
+      },
+      "hint": "Use `AVG(unit_price)` with `GROUP BY region`.",
+      "starterCode": "-- Return each region and avg_price\n"
+    },
+    "m7_s02_min_price_per_category": {
+      "title": "Minimum per group",
+      "prompt": "The `orders` table already exists.\n\nWrite a query that returns each `category` and the lowest `unit_price` in that category.\n\nRename the result to `min_price`, then run it.",
+      "help": {
+        "concept": "A grouped minimum finds the smallest value inside each group.",
+        "hint_1": "Use `category` as the grouped column and apply `MIN()` to `unit_price`.",
+        "hint_2": "Build a query that gives every category its own minimum price result."
+      },
+      "hint": "Use `MIN(unit_price)` with `GROUP BY category`.",
+      "starterCode": "-- Return each category and min_price\n"
+    },
+    "m7_s02_max_price_per_category": {
+      "title": "Maximum per group",
+      "prompt": "The `orders` table already exists.\n\nWrite a query that returns each `category` and the highest `unit_price` in that category.\n\nRename the result to `max_price`, then click **Run**.",
+      "help": {
+        "concept": "A grouped maximum finds the largest value inside each group.",
+        "hint_1": "Use `category` as the group label and apply `MAX()` to `unit_price`.",
+        "hint_2": "Build a query that returns one row per category and keeps the largest price from each category."
+      },
+      "hint": "Use `MAX(unit_price)` with `GROUP BY category`.",
+      "starterCode": "-- Return each category and max_price\n"
+    },
+    "m7_s02_group_aggregates_project": {
+      "title": "Practice grouped aggregates",
+      "prompt": "Use the SQL workspace on the right to practice grouped aggregate queries on the `orders` table.\n\nFor each task:\n\n1. type the query in the editor\n2. click **Run**\n3. read the grouped column first\n4. interpret the summary for each group\n\nTasks:\n\n1. Count rows per `category`\n2. Sum `quantity` per `category`\n3. Average `unit_price` per `region`\n4. Find the lowest `unit_price` per `category`\n5. Find the highest `unit_price` per `category`\n6. Build one category report with `COUNT()`, `SUM(quantity)`, `AVG(unit_price)`, `MIN(unit_price)`, and `MAX(unit_price)` together\n\nRun one query at a time.\nThis project is about calculating different summaries for each group.",
+      "help": {
+        "concept": "Grouped aggregates let each category, region, or customer have its own summary values.",
+        "hint_1": "Each task uses the same structure: show the group label, choose the aggregate, and group by the label column.",
+        "hint_2": "Solve the tasks one by one. Focus on what summary should appear for each group, then choose the aggregate that matches it."
+      },
+      "hint": "Choose the group label, then the per-group summary.",
+      "starterCode": "-- Task 1\n-- Count rows per category\n\n"
+    },
+
+    "m7_s02_count_per_group_meaning": {
+      "title": "What does a grouped COUNT() show?",
+      "prompt": "What does a grouped `COUNT()` usually show?",
+      "help": {
+        "concept": "A grouped count shows how many rows belong to each group.",
+        "hint_1": "Think how many per category, per customer, or per region.",
+        "hint_2": "It returns one count for every group label in the result."
+      },
+      "hint": "Think row count per group.",
+      "options": {
+        "a": "How many rows belong to each group",
+        "b": "The average value of each group",
+        "c": "The name of the whole table",
+        "d": "The smallest value in every column"
+      }
+    },
+    "m7_s02_sum_per_group_meaning": {
+      "title": "What does a grouped SUM() show?",
+      "prompt": "What does a grouped `SUM()` usually show?",
+      "help": {
+        "concept": "A grouped sum returns one total for each group.",
+        "hint_1": "Think one total per category or per customer.",
+        "hint_2": "It totals the chosen numeric column separately inside each group."
+      },
+      "hint": "Think total per group.",
+      "options": {
+        "a": "One total per group",
+        "b": "One row for every original record",
+        "c": "Only the highest row in the table",
+        "d": "A filter condition automatically"
+      }
+    },
+    "m7_s02_avg_per_group_meaning": {
+      "title": "What does a grouped AVG() show?",
+      "prompt": "What does a grouped `AVG()` usually show?",
+      "help": {
+        "concept": "A grouped average returns one mean value for each group.",
+        "hint_1": "Think average per region, per category, or per customer.",
+        "hint_2": "It compares groups using a mean calculated separately in each group."
+      },
+      "hint": "Think average per group.",
+      "options": {
+        "a": "One average per group",
+        "b": "Only the number of groups",
+        "c": "The smallest value for the whole table only",
+        "d": "The grouped column renamed permanently"
+      }
+    },
+    "m7_s02_min_max_per_group_meaning": {
+      "title": "What do grouped MIN() and MAX() show?",
+      "prompt": "What is the main idea of grouped `MIN()` and `MAX()`?",
+      "help": {
+        "concept": "They return extreme values separately inside each group.",
+        "hint_1": "Think smallest or largest within each category or region.",
+        "hint_2": "Each group keeps its own lowest or highest value."
+      },
+      "hint": "Think extremes per group.",
+      "options": {
+        "a": "They show the smallest or largest value inside each group",
+        "b": "They count the number of groups only",
+        "c": "They always average values first",
+        "d": "They remove the grouped column from the result"
+      }
+    },
+    "m7_s02_grouped_summary_reading": {
+      "title": "How should you read grouped summaries?",
+      "prompt": "What is a good beginner way to read grouped aggregate results?",
+      "help": {
+        "concept": "A strong habit is to match each group label with the summary shown beside it.",
+        "hint_1": "Read one row at a time.",
+        "hint_2": "Each row is a separate summary for one group label."
+      },
+      "hint": "Read the group label and summary together.",
+      "options": {
+        "a": "Match each group label with the summary shown beside it",
+        "b": "Ignore the grouped column and only read the numbers",
+        "c": "Assume every summary row is for the whole table",
+        "d": "Only read the first grouped row"
+      }
+    },
+
+    "m7_s02_grouped_counts_true": {
+      "title": "What is true about counts per group?",
+      "prompt": "Select all true statements about grouped `COUNT()` queries.",
+      "help": {
+        "concept": "Grouped counts answer how-many questions separately for each group.",
+        "hint_1": "Think one count per label.",
+        "hint_2": "Choose the statements about row counts inside groups."
+      },
+      "hint": "Think how many inside each group.",
+      "options": {
+        "a": "A grouped count can return one count per category",
+        "b": "A grouped count can return one count per customer",
+        "c": "A grouped count is useful for per-group questions",
+        "d": "A grouped count always returns one row for the whole table only",
+        "e": "A grouped count uses `COUNT()` together with grouping"
+      }
+    },
+    "m7_s02_grouped_sum_avg_true": {
+      "title": "What is true about sums and averages per group?",
+      "prompt": "Select all true statements about grouped `SUM()` and `AVG()` queries.",
+      "help": {
+        "concept": "Grouped sums and averages calculate separate numeric summaries for each group.",
+        "hint_1": "Think totals and means by label.",
+        "hint_2": "Choose the statements about per-group numeric summaries."
+      },
+      "hint": "Think totals and averages per group.",
+      "options": {
+        "a": "A grouped `SUM()` can total values inside each group",
+        "b": "A grouped `AVG()` can calculate a mean inside each group",
+        "c": "Both are useful for comparing groups",
+        "d": "Both always ignore the grouped column",
+        "e": "Both return summary results per group"
+      }
+    },
+    "m7_s02_grouped_min_max_true": {
+      "title": "What is true about min and max per group?",
+      "prompt": "Select all true statements about grouped `MIN()` and `MAX()` queries.",
+      "help": {
+        "concept": "Grouped min and max queries find the extremes inside each group.",
+        "hint_1": "Think lowest and highest by label.",
+        "hint_2": "Choose the statements about smallest or largest values inside groups."
+      },
+      "hint": "Think extremes inside each group.",
+      "options": {
+        "a": "Grouped `MIN()` can show the smallest value per group",
+        "b": "Grouped `MAX()` can show the largest value per group",
+        "c": "Both are useful for comparing group boundaries",
+        "d": "Both always total every value instead",
+        "e": "Both can be combined with `GROUP BY`"
+      }
+    },
+    "m7_s02_grouped_aggregate_report_true": {
+      "title": "What is true about per-group reports?",
+      "prompt": "Select all true statements about building grouped summary reports.",
+      "help": {
+        "concept": "A grouped report can combine several aggregate summaries for each group.",
+        "hint_1": "Think count, total, average, min, max side by side.",
+        "hint_2": "Choose the statements about showing several summaries for each group row."
+      },
+      "hint": "Think several summaries per group row.",
+      "options": {
+        "a": "A grouped report can include several aggregate columns",
+        "b": "Each row can represent one group",
+        "c": "Aliases can make grouped summaries easier to read",
+        "d": "A grouped report must return every original row unchanged",
+        "e": "A grouped report can make group comparison easier"
+      }
+    },
+    "m7_s02_grouped_aggregate_workflow_true": {
+      "title": "What matches a good beginner workflow for grouped aggregates?",
+      "prompt": "Select all statements that match a good beginner workflow for writing grouped aggregate queries.",
+      "help": {
+        "concept": "A good workflow is to choose the group label, choose the per-group summary, write the query, and read each group row carefully.",
+        "hint_1": "Think label, summary, result.",
+        "hint_2": "Choose the steps that help build and interpret one summary per group."
+      },
+      "hint": "Choose the group label, then the per-group summary.",
+      "options": {
+        "a": "Decide what column defines the groups",
+        "b": "Choose what aggregate should be shown for each group",
+        "c": "Use `GROUP BY` with the group label column",
+        "d": "Read each output row as one group summary",
+        "e": "Ignore what each group row is meant to summarize"
+      }
+    },
+
+    "m7_s02_fill_count_per_group": {
+      "title": "Count function per group",
+      "prompt": "Fill in the blank with the best function.",
+      "template": "To answer how-many questions per group, use ____ with `GROUP BY`.",
+      "choices": {
+        "0": "COUNT()",
+        "1": "SUM()",
+        "2": "AVG()",
+        "3": "LOWER()"
+      },
+      "hint": "This function counts rows in each group.",
+      "help": {
+        "concept": "Grouped counts answer how-many questions per group.",
+        "hint_1": "Think row count.",
+        "hint_2": "The correct function is `COUNT()`."
+      }
+    },
+    "m7_s02_fill_sum_per_group": {
+      "title": "Total function per group",
+      "prompt": "Fill in the blank with the best function.",
+      "template": "To calculate one total for each group, use ____ with `GROUP BY`.",
+      "choices": {
+        "0": "SUM()",
+        "1": "COUNT()",
+        "2": "AVG()",
+        "3": "DATE()"
+      },
+      "hint": "This function adds values inside each group.",
+      "help": {
+        "concept": "Grouped sums calculate one total per group.",
+        "hint_1": "Think total per label.",
+        "hint_2": "The correct function is `SUM()`."
+      }
+    },
+    "m7_s02_fill_avg_per_group": {
+      "title": "Mean function per group",
+      "prompt": "Fill in the blank with the best function.",
+      "template": "To calculate one mean value for each group, use ____ with `GROUP BY`.",
+      "choices": {
+        "0": "AVG()",
+        "1": "COUNT()",
+        "2": "MIN()",
+        "3": "UPPER()"
+      },
+      "hint": "This function calculates the average inside each group.",
+      "help": {
+        "concept": "Grouped averages compare groups using their mean values.",
+        "hint_1": "Think average per label.",
+        "hint_2": "The correct function is `AVG()`."
+      }
+    },
+    "m7_s02_fill_extremes_per_group": {
+      "title": "What min and max show",
+      "prompt": "Fill in the blank with the best word.",
+      "template": "Grouped `MIN()` and `MAX()` help show the ____ values inside each group.",
+      "choices": {
+        "0": "extreme",
+        "1": "hidden",
+        "2": "styling",
+        "3": "alphabetical"
+      },
+      "hint": "Think smallest and largest.",
+      "help": {
+        "concept": "Grouped min and max return the smallest or largest values in each group.",
+        "hint_1": "Think boundaries.",
+        "hint_2": "The missing word is `extreme`."
+      }
+    },
+    "m7_s02_fill_read_group_label_first": {
+      "title": "How to read grouped results",
+      "prompt": "Fill in the blank with the best phrase.",
+      "template": "A good beginner habit is to read the ____ first, then the summary beside it.",
+      "choices": {
+        "0": "group label",
+        "1": "browser tab",
+        "2": "font size",
+        "3": "terminal icon"
+      },
+      "hint": "Start by identifying what group the row represents.",
+      "help": {
+        "concept": "Each grouped row represents one label and one summary.",
+        "hint_1": "Think grouped column.",
+        "hint_2": "The correct phrase is `group label`."
+      }
+    },
+
+    "m7_s02_reorder_grouped_count_pattern": {
+      "title": "Order a grouped count pattern",
+      "prompt": "Reorder the query parts into a grouped count by category.",
+      "tokens": {
+        "t1": "SELECT category, COUNT(*) AS order_count",
+        "t2": "FROM orders",
+        "t3": "GROUP BY category",
+        "t4": ";"
+      },
+      "hint": "Select first, grouping later.",
+      "help": {
+        "concept": "A grouped count query shows the group label and a count summary for each group.",
+        "hint_1": "Start with the SELECT line.",
+        "hint_2": "GROUP BY comes after FROM."
+      }
+    },
+    "m7_s02_reorder_grouped_sum_pattern": {
+      "title": "Order a grouped sum pattern",
+      "prompt": "Reorder the query parts into a grouped category sum.",
+      "tokens": {
+        "t1": "SELECT category, SUM(quantity) AS total_quantity",
+        "t2": "FROM orders",
+        "t3": "GROUP BY category",
+        "t4": ";"
+      },
+      "hint": "The structure matches other grouped queries.",
+      "help": {
+        "concept": "A grouped sum query totals one numeric value inside each group.",
+        "hint_1": "Start with the SELECT line.",
+        "hint_2": "GROUP BY comes after FROM."
+      }
+    },
+    "m7_s02_reorder_grouped_avg_pattern": {
+      "title": "Order a grouped average pattern",
+      "prompt": "Reorder the query parts into a grouped average by region.",
+      "tokens": {
+        "t1": "SELECT region, AVG(unit_price) AS avg_price",
+        "t2": "FROM orders",
+        "t3": "GROUP BY region",
+        "t4": ";"
+      },
+      "hint": "Same grouped shape, different aggregate.",
+      "help": {
+        "concept": "A grouped average query gives each region its own mean value.",
+        "hint_1": "Start with the SELECT line.",
+        "hint_2": "Then add FROM and GROUP BY."
+      }
+    },
+    "m7_s02_reorder_read_grouped_report": {
+      "title": "Order how to read grouped summaries",
+      "prompt": "Reorder the steps into a good way to read grouped aggregate output.",
+      "tokens": {
+        "t1": "read the group label",
+        "t2": "read the summary value",
+        "t3": "interpret what that summary means for the group"
+      },
+      "hint": "Label first, interpretation last.",
+      "help": {
+        "concept": "Grouped summary rows make the most sense when you connect the label to the summary.",
+        "hint_1": "Start with the grouped label.",
+        "hint_2": "Meaning comes after the value."
+      }
+    },
+    "m7_s02_reorder_grouped_workflow": {
+      "title": "Order the grouped-aggregate workflow",
+      "prompt": "Reorder the steps into a good beginner workflow for grouped aggregate queries.",
+      "tokens": {
+        "t1": "decide what column defines the groups",
+        "t2": "choose the per-group summary",
+        "t3": "use GROUP BY with the label column",
+        "t4": "read each row as one group summary"
+      },
+      "hint": "Choose the label first.",
+      "help": {
+        "concept": "A good grouped-aggregate workflow starts with the group label and then adds the right summary.",
+        "hint_1": "Choose the grouped column before the aggregate.",
+        "hint_2": "Interpretation comes after running."
+      }
+    }
+  }
+}

@@ -1,0 +1,352 @@
+{
+  "topicId": "aggregates_with_filters",
+  "minutes": 10,
+  "topic": {
+    "labelKey": "topics.sql.sql_module_6.aggregates_with_filters.label",
+    "summaryKey": "topics.sql.sql_module_6.aggregates_with_filters.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_6.aggregates_with_filters.cards.sketch0.title",
+      "sketchId": "aggregate_with_where",
+      "height": 520
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_6.aggregates_with_filters.cards.sketch1.title",
+      "sketchId": "counting_filtered_rows",
+      "height": 520
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_6.aggregates_with_filters.cards.sketch2.title",
+      "sketchId": "summing_filtered_data",
+      "height": 520
+    },
+    {
+      "id": "sketch3",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_6.aggregates_with_filters.cards.sketch3.title",
+      "sketchId": "average_on_selected_records",
+      "height": 520
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql.sql_module_6.aggregates_with_filters.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 5,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "aggregate_with_where",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_6.aggregates_with_filters.aggregate_with_where.title",
+      "bodyKey": "sketches.sql.sql_module_6.aggregates_with_filters.aggregate_with_where.bodyMarkdown"
+    },
+    {
+      "id": "counting_filtered_rows",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_6.aggregates_with_filters.counting_filtered_rows.title",
+      "bodyKey": "sketches.sql.sql_module_6.aggregates_with_filters.counting_filtered_rows.bodyMarkdown"
+    },
+    {
+      "id": "summing_filtered_data",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_6.aggregates_with_filters.summing_filtered_data.title",
+      "bodyKey": "sketches.sql.sql_module_6.aggregates_with_filters.summing_filtered_data.bodyMarkdown"
+    },
+    {
+      "id": "average_on_selected_records",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_6.aggregates_with_filters.average_on_selected_records.title",
+      "bodyKey": "sketches.sql.sql_module_6.aggregates_with_filters.average_on_selected_records.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "m6_s03_count_paid_orders",
+      "kind": "code_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m6_s03_count_paid_orders",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_kpi",
+        "resultShape": "table",
+        "solutionCode": "SELECT COUNT(*) AS paid_order_count\nFROM orders\nWHERE status = 'paid';"
+      }
+    },
+    {
+      "id": "m6_s03_count_north_orders",
+      "kind": "code_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m6_s03_count_north_orders",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_kpi",
+        "resultShape": "table",
+        "solutionCode": "SELECT COUNT(*) AS north_order_count\nFROM orders\nWHERE region = 'North';"
+      }
+    },
+    {
+      "id": "m6_s03_sum_paid_quantity",
+      "kind": "code_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m6_s03_sum_paid_quantity",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_kpi",
+        "resultShape": "table",
+        "solutionCode": "SELECT SUM(quantity) AS paid_quantity_total\nFROM orders\nWHERE status = 'paid';"
+      }
+    },
+    {
+      "id": "m6_s03_sum_art_quantity",
+      "kind": "code_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m6_s03_sum_art_quantity",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_kpi",
+        "resultShape": "table",
+        "solutionCode": "SELECT SUM(quantity) AS art_quantity_total\nFROM orders\nWHERE category = 'Art';"
+      }
+    },
+    {
+      "id": "m6_s03_avg_art_price",
+      "kind": "code_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m6_s03_avg_art_price",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_kpi",
+        "resultShape": "table",
+        "solutionCode": "SELECT AVG(unit_price) AS art_avg_price\nFROM orders\nWHERE category = 'Art';"
+      }
+    },
+    {
+      "id": "m6_s03_filtered_aggregates_project",
+      "kind": "code_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m6_s03_filtered_aggregates_project",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_kpi",
+        "resultShape": "table",
+        "solutionCode": "SELECT COUNT(*) AS paid_order_count\nFROM orders\nWHERE status = 'paid';"
+      }
+    },
+
+    {
+      "id": "m6_s03_where_with_aggregate_meaning",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m6_s03_where_with_aggregate_meaning",
+      "optionIds": ["a", "b", "c", "d"],
+      "expected": { "kind": "single_choice", "optionId": "a" }
+    },
+    {
+      "id": "m6_s03_count_filtered_rows_meaning",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m6_s03_count_filtered_rows_meaning",
+      "optionIds": ["a", "b", "c", "d"],
+      "expected": { "kind": "single_choice", "optionId": "a" }
+    },
+    {
+      "id": "m6_s03_sum_filtered_data_meaning",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m6_s03_sum_filtered_data_meaning",
+      "optionIds": ["a", "b", "c", "d"],
+      "expected": { "kind": "single_choice", "optionId": "a" }
+    },
+    {
+      "id": "m6_s03_avg_selected_records_meaning",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m6_s03_avg_selected_records_meaning",
+      "optionIds": ["a", "b", "c", "d"],
+      "expected": { "kind": "single_choice", "optionId": "a" }
+    },
+    {
+      "id": "m6_s03_filtered_summary_reading",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m6_s03_filtered_summary_reading",
+      "optionIds": ["a", "b", "c", "d"],
+      "expected": { "kind": "single_choice", "optionId": "a" }
+    },
+
+    {
+      "id": "m6_s03_filtered_aggregates_true",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m6_s03_filtered_aggregates_true",
+      "optionIds": ["a", "b", "c", "d", "e"],
+      "expected": { "kind": "multi_choice", "optionIds": ["a", "b", "c", "e"] }
+    },
+    {
+      "id": "m6_s03_filtered_count_true",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m6_s03_filtered_count_true",
+      "optionIds": ["a", "b", "c", "d", "e"],
+      "expected": { "kind": "multi_choice", "optionIds": ["a", "b", "c", "e"] }
+    },
+    {
+      "id": "m6_s03_filtered_sum_avg_true",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m6_s03_filtered_sum_avg_true",
+      "optionIds": ["a", "b", "c", "d", "e"],
+      "expected": { "kind": "multi_choice", "optionIds": ["a", "b", "c", "e"] }
+    },
+    {
+      "id": "m6_s03_filtered_reading_true",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m6_s03_filtered_reading_true",
+      "optionIds": ["a", "b", "c", "d", "e"],
+      "expected": { "kind": "multi_choice", "optionIds": ["a", "b", "c", "e"] }
+    },
+    {
+      "id": "m6_s03_filtered_aggregate_workflow_true",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m6_s03_filtered_aggregate_workflow_true",
+      "optionIds": ["a", "b", "c", "d", "e"],
+      "expected": { "kind": "multi_choice", "optionIds": ["a", "b", "c", "d"] }
+    },
+
+    {
+      "id": "m6_s03_fill_where_filters_rows",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m6_s03_fill_where_filters_rows",
+      "choiceCount": 4,
+      "expected": { "kind": "fill_blank_choice", "value": "rows" }
+    },
+    {
+      "id": "m6_s03_fill_filter_then_count",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m6_s03_fill_filter_then_count",
+      "choiceCount": 4,
+      "expected": { "kind": "fill_blank_choice", "value": "count" }
+    },
+    {
+      "id": "m6_s03_fill_filter_then_sum",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m6_s03_fill_filter_then_sum",
+      "choiceCount": 4,
+      "expected": { "kind": "fill_blank_choice", "value": "sum" }
+    },
+    {
+      "id": "m6_s03_fill_avg_subset",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m6_s03_fill_avg_subset",
+      "choiceCount": 4,
+      "expected": { "kind": "fill_blank_choice", "value": "subset" }
+    },
+    {
+      "id": "m6_s03_fill_read_filter_together",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m6_s03_fill_read_filter_together",
+      "choiceCount": 4,
+      "expected": { "kind": "fill_blank_choice", "value": "filter" }
+    },
+
+    {
+      "id": "m6_s03_reorder_filtered_workflow",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m6_s03_reorder_filtered_workflow",
+      "tokenIds": ["t1", "t2", "t3", "t4"],
+      "expected": { "kind": "drag_reorder", "tokenIds": ["t1", "t2", "t3", "t4"] }
+    },
+    {
+      "id": "m6_s03_reorder_count_paid_pattern",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m6_s03_reorder_count_paid_pattern",
+      "tokenIds": ["t1", "t2", "t3", "t4"],
+      "expected": { "kind": "drag_reorder", "tokenIds": ["t1", "t2", "t3", "t4"] }
+    },
+    {
+      "id": "m6_s03_reorder_sum_art_pattern",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m6_s03_reorder_sum_art_pattern",
+      "tokenIds": ["t1", "t2", "t3", "t4"],
+      "expected": { "kind": "drag_reorder", "tokenIds": ["t1", "t2", "t3", "t4"] }
+    },
+    {
+      "id": "m6_s03_reorder_read_filtered_result",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m6_s03_reorder_read_filtered_result",
+      "tokenIds": ["t1", "t2", "t3"],
+      "expected": { "kind": "drag_reorder", "tokenIds": ["t1", "t2", "t3"] }
+    },
+    {
+      "id": "m6_s03_reorder_subset_question_types",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m6_s03_reorder_subset_question_types",
+      "tokenIds": ["t1", "t2", "t3"],
+      "expected": { "kind": "drag_reorder", "tokenIds": ["t1", "t2", "t3"] }
+    }
+  ]
+}

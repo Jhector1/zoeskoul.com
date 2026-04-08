@@ -1,0 +1,178 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_15": {
+        "mini_project_student_database": {
+          "label": "Mini Project: Student Database",
+          "summary": "Design a small student database, insert sample data, write simple queries, and build beginner summary reports.",
+          "cards": {
+            "sketch0": {
+              "title": "How do you design the tables?"
+            },
+            "sketch1": {
+              "title": "How do you insert sample data?"
+            },
+            "sketch2": {
+              "title": "How do you write simple queries?"
+            },
+            "sketch3": {
+              "title": "How do you build summary reports?"
+            },
+            "quiz": {
+              "title": "Quiz: Mini Project — Student Database"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_15": {
+        "section_15_1": {
+          "design_the_tables": {
+            "title": "A small student database is a strong first capstone-style project.",
+            "bodyMarkdown": "This project works well because it combines:\n\n- table design\n- keys and relationships\n- sample data\n- beginner queries\n\nSo the big idea is:\n\n> a small student database can bring many beginner SQL skills together"
+          },
+          "insert_sample_data": {
+            "title": "Sample data turns an empty design into something you can really query.",
+            "bodyMarkdown": "Once the tables exist, a learner needs a few rows to work with.\n\nThat makes it possible to practice:\n\n- reading data\n- filtering data\n- joining data\n- counting and grouping\n\nSo the key idea is:\n\n> a small seed dataset makes the project useful for real SQL practice"
+          },
+          "write_simple_queries": {
+            "title": "Simple queries help confirm the tables and rows are working as expected.",
+            "bodyMarkdown": "Before writing advanced reports, learners should first check simple things such as:\n\n- all students\n- all courses\n- one student's enrollments\n\nSo the main idea is:\n\n> simple queries are the first way to test whether the database design is working"
+          },
+          "build_summary_reports": {
+            "title": "Summary reports turn a small project into a more realistic SQL workflow.",
+            "bodyMarkdown": "Once the data is loaded, a learner can ask reporting questions such as:\n\n- how many students are there?\n- how many courses does each student have?\n- how many enrollments per course?\n\nSo the important idea is:\n\n> summary reports help the project feel more like a real database task"
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "m15_s01_create_student_project_schema": {
+      "title": "Design the student project tables",
+      "prompt": "The SQLite workspace is using the blank `ddl_blank` dataset.\n\nWrite SQL that creates these three tables:\n\n1. `students`\n- `id` as `INTEGER PRIMARY KEY`\n- `name` as `TEXT NOT NULL`\n- `grade_level` as `INTEGER NOT NULL`\n\n2. `courses`\n- `id` as `INTEGER PRIMARY KEY`\n- `title` as `TEXT NOT NULL`\n\n3. `enrollments`\n- `id` as `INTEGER PRIMARY KEY`\n- `student_id` as `INTEGER NOT NULL`\n- `course_id` as `INTEGER NOT NULL`\n- `FOREIGN KEY (student_id)` references `students(id)`\n- `FOREIGN KEY (course_id)` references `courses(id)`\n\nThen click **Run**.",
+      "help": {
+        "concept": "This is the small relational schema that the rest of the student project will use.",
+        "hint_1": "Create the main tables first, then the bridge table.",
+        "hint_2": "The main design step is using `enrollments` to connect students and courses cleanly."
+      },
+      "hint": "Create students and courses first, then link them with enrollments.",
+      "starterCode": "-- Create the schema for the student mini project\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "ddl_blank",
+        "resultShape": "table"
+      }
+    },
+    "m15_s01_insert_student_sample_data": {
+      "title": "Insert sample data",
+      "prompt": "The dataset is blank.\n\nWrite SQL that creates these three tables:\n\n- `students(id, name, grade_level)`\n- `courses(id, title)`\n- `enrollments(id, student_id, course_id)` with foreign keys\n\nThen insert this sample data:\n\nStudents:\n- (1, 'Mia', 10)\n- (2, 'Leo', 11)\n\nCourses:\n- (1, 'Biology')\n- (2, 'Algebra')\n\nEnrollments:\n- (1, 1, 1)\n- (2, 1, 2)\n- (3, 2, 2)\n\nThen click **Run**.",
+      "help": {
+        "concept": "A mini project becomes useful once the tables contain just enough sample rows to query.",
+        "hint_1": "Create the tables first, then insert into each one.",
+        "hint_2": "Keep the inserts small and clean. The goal is not lots of rows, but enough rows to support joins and counts."
+      },
+      "hint": "Create the tables first, then insert a few useful sample rows.",
+      "starterCode": "-- Create the tables and insert a small student sample dataset\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "ddl_blank",
+        "resultShape": "table"
+      }
+    },
+    "m15_s01_write_simple_queries": {
+      "title": "Write a simple join query",
+      "prompt": "The dataset is blank.\n\nWrite SQL that:\n\n1. creates `students`, `courses`, and `enrollments`\n2. inserts a few sample rows\n3. returns a joined result showing `students.name` and `courses.title`\n\nUse a join through `enrollments`, then click **Run**.",
+      "help": {
+        "concept": "This exercise combines table creation, sample data, and the first real project join query.",
+        "hint_1": "Build the schema, insert the rows, then write the join.",
+        "hint_2": "The join path should go from students to enrollments to courses, and the result should only return the human-readable columns."
+      },
+      "hint": "Create, insert, then join through enrollments.",
+      "starterCode": "-- Build the student project and return a joined result\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "ddl_blank",
+        "resultShape": "table"
+      }
+    },
+    "m15_s01_build_summary_report": {
+      "title": "Build a summary report",
+      "prompt": "The dataset is blank.\n\nWrite SQL that:\n\n1. creates `students`, `courses`, and `enrollments`\n2. inserts a few sample rows\n3. returns a report with each student name and the number of enrollments they have\n\nUse `GROUP BY`, then run it.",
+      "help": {
+        "concept": "A grouped summary report is one of the most important beginner capstone patterns.",
+        "hint_1": "After inserting the rows, join students to enrollments and count enrollments per student.",
+        "hint_2": "The report should group by the student identity and return one row per student with a count."
+      },
+      "hint": "Count enrollments per student with GROUP BY.",
+      "starterCode": "-- Build the student project and return a grouped report\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "ddl_blank",
+        "resultShape": "table"
+      }
+    },
+    "m15_s01_student_project_project": {
+      "title": "Complete the student mini project",
+      "prompt": "Use the SQL workspace on the right to build a small student database project on the blank `ddl_blank` dataset.\n\nProject goals:\n\n1. create related tables\n2. insert sample rows\n3. write several simple queries\n4. write at least one grouped report\n5. inspect the design in **Tables**, **ERD**, and **Chen**\n\nSuggested tasks:\n\n1. Create `students`, `courses`, and `enrollments`\n2. Insert a small sample dataset\n3. Show all students\n4. Show all student-course pairs with a join\n5. Show the number of enrollments per student\n\nThis project is about completing one full beginner workflow from design to reporting.",
+      "help": {
+        "concept": "A capstone-style beginner project should move from schema, to sample data, to useful questions.",
+        "hint_1": "Treat it as a full workflow, not as isolated SQL statements.",
+        "hint_2": "A good beginner project has just enough schema and data to support simple reads, one join, and one grouped report."
+      },
+      "hint": "Think design, insert, query, then summarize.",
+      "starterCode": "-- Build a full student mini project from schema to report\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "ddl_blank",
+        "resultShape": "table"
+      }
+    },
+    "m15_s01_project_goal_meaning": {
+      "title": "What is the goal of the student mini project?",
+      "prompt": "What is the main goal of the student mini project section?",
+      "help": {
+        "concept": "The section is meant to combine design, inserts, queries, and reporting into one small workflow.",
+        "hint_1": "Think full workflow.",
+        "hint_2": "The point is not just one query, but a small end-to-end relational project."
+      },
+      "hint": "Think one small full workflow from design to reporting.",
+      "options": {
+        "a": "Combine design, inserts, queries, and reporting in one small project",
+        "b": "Only practice DELETE statements",
+        "c": "Avoid relationships entirely",
+        "d": "Use no sample data"
+      }
+    },
+    "m15_s01_student_project_true": {
+      "title": "What is true about the student mini project?",
+      "prompt": "Select all true statements about the student mini project section.",
+      "help": {
+        "concept": "This project is a small capstone that brings earlier beginner skills together.",
+        "hint_1": "Think schema, rows, queries, report.",
+        "hint_2": "Choose the statements about combining several beginner SQL skills in one place."
+      },
+      "hint": "Think design, sample data, joins, and grouped reports together.",
+      "options": {
+        "a": "It includes table design",
+        "b": "It includes inserting sample data",
+        "c": "It includes at least one join-style query",
+        "d": "It can include a grouped summary report",
+        "e": "It is meant to combine beginner skills"
+      }
+    }
+  }
+}

@@ -12,13 +12,12 @@ import { useDebouncedCommit } from "@/lib/client/persistence/useDebouncedCommit"
 import { useFlushOnPageExit } from "@/lib/client/persistence/useFlushOnPageExit";
 
 export function useReviewProgress(args: {
-  subjectSlug: string;
-  moduleId: string;
-  locale: string;
-  firstTopicId: string;
+    subjectSlug: string;
+    moduleSlug: string;
+    locale: string;
+    firstTopicId: string;
 }) {
-  const { subjectSlug, moduleId, locale, firstTopicId } = args;
-
+    const { subjectSlug, moduleSlug, locale, firstTopicId } = args;
   const [progress, setProgress] = useState<ReviewProgressState>(emptyReviewProgress());
   const [hydrated, setHydrated] = useState(false);
 
@@ -48,13 +47,13 @@ export function useReviewProgress(args: {
   const payload = useMemo(
       () =>
           buildReviewProgressPayload({
-            subjectSlug,
-            moduleId,
-            locale,
-            state: progress,
-            activeTopicId,
+              subjectSlug,
+              moduleSlug,
+              locale,
+              state: progress,
+              activeTopicId,
           }),
-      [subjectSlug, moduleId, locale, progress, activeTopicId],
+      [subjectSlug, moduleSlug, locale, progress, activeTopicId],
   );
 
     const commitProgress = useCallback(
@@ -87,7 +86,7 @@ export function useReviewProgress(args: {
     lastCommittedRef,
   } = useDebouncedCommit({
     value: payload,
-    enabled: hydrated && Boolean(subjectSlug && moduleId),
+    enabled: hydrated && Boolean(subjectSlug && moduleSlug),
     delayMs: 900,
     serialize: stableJson,
     commit: commitProgress,
@@ -95,11 +94,11 @@ export function useReviewProgress(args: {
 
     const putProgressNow = useCallback(
         async (state: ReviewProgressState) => {
-            if (!subjectSlug || !moduleId) return;
+            if (!subjectSlug || !moduleSlug) return;
 
             const nextPayload = buildReviewProgressPayload({
                 subjectSlug,
-                moduleId,
+                moduleSlug,
                 locale,
                 state,
                 activeTopicId: activeTopicIdRef.current,
@@ -138,11 +137,11 @@ export function useReviewProgress(args: {
                 // ignore here if you want, but do not mark committed
             }
         },
-        [subjectSlug, moduleId, locale, lastCommittedRef],
+        [subjectSlug, moduleSlug, locale, lastCommittedRef],
     );
 
   useEffect(() => {
-    if (!subjectSlug || !moduleId) return;
+    if (!subjectSlug || !moduleSlug) return;
 
     const ctrl = new AbortController();
     setHydrated(false);
@@ -151,7 +150,7 @@ export function useReviewProgress(args: {
       try {
         const p = await fetchReviewProgressGET({
           subjectSlug,
-          moduleId,
+            moduleSlug,
           locale,
           signal: ctrl.signal,
         });
@@ -165,7 +164,7 @@ export function useReviewProgress(args: {
         prime(
             buildReviewProgressPayload({
               subjectSlug,
-              moduleId,
+                moduleSlug,
               locale,
               state: p,
               activeTopicId: nextActive,
@@ -181,7 +180,7 @@ export function useReviewProgress(args: {
         prime(
             buildReviewProgressPayload({
               subjectSlug,
-              moduleId,
+                moduleSlug,
               locale,
               state: ep,
               activeTopicId: firstTopicId,
@@ -195,7 +194,7 @@ export function useReviewProgress(args: {
     return () => ctrl.abort();
   }, [
     subjectSlug,
-    moduleId,
+      moduleSlug,
     locale,
     firstTopicId,
     setProgressSafe,

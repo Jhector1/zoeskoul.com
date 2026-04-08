@@ -181,6 +181,85 @@ async function executeViaRemoteWorker(req: SqlRunReq, url: string): Promise<SqlR
     }
 }
 
+
+
+
+
+
+
+type SqlTableSnapshot = {
+    name: string;
+    columns: SqlColumn[];
+    rows: SqlScalar[][];
+    rowCount: number;
+};
+
+async function readSqliteTableSnapshots(args: {
+    db: any;
+    maxRows: number;
+    maxBytes: number;
+}): Promise<Record<string, SqlTableSnapshot>> {
+    const { db, maxRows, maxBytes } = args;
+
+    const tableRows = db
+        .prepare(
+            `
+            SELECT name
+            FROM sqlite_master
+            WHERE type = 'table'
+              AND name NOT LIKE 'sqlite_%'
+            ORDER BY name ASC
+            `,
+        )
+        .all() as Array<{ name: string }>;
+
+    const snapshots: Record<string, SqlTableSnapshot> = {};
+
+    for (const t of tableRows) {
+        const tableName = String(t.name ?? "").trim();
+        if (!tableName) continue;
+
+        const escaped = tableName.replace(/"/g, `""`);
+
+        const stmt = db.prepare(`SELECT * FROM "${escaped}"`);
+        const columns: SqlColumn[] = stmt.columns().map((c: any) => ({
+            name: String(c?.name ?? ""),
+            type: c?.type ? String(c.type) : null,
+        }));
+
+        const countRow = db
+            .prepare(`SELECT COUNT(*) as count FROM "${escaped}"`)
+            .get() as { count?: number } | undefined;
+
+        const totalCount = Number(countRow?.count ?? 0);
+
+        const rows: SqlScalar[][] = [];
+        let usedBytes = 0;
+
+        for (const obj of stmt.iterate()) {
+            if (rows.length >= maxRows) break;
+
+            const row = columns.map((col) =>
+                normalizeCell((obj as Record<string, unknown>)[col.name]),
+            );
+
+            const rowBytes = byteLen(JSON.stringify(row));
+            if (usedBytes + rowBytes > maxBytes) break;
+
+            usedBytes += rowBytes;
+            rows.push(row);
+        }
+
+        snapshots[tableName] = {
+            name: tableName,
+            columns,
+            rows,
+            rowCount: totalCount,
+        };
+    }
+
+    return snapshots;
+}
 async function executeSqliteLocally(req: SqlRunReq): Promise<SqlRunResult> {
     const normalized = normalizeSqlReq(req);
     const dbFile = join(tmpdir(), `zoeskoul-sql-${randomUUID()}.db`);
@@ -200,7 +279,12 @@ async function executeSqliteLocally(req: SqlRunReq): Promise<SqlRunResult> {
         db.pragma("foreign_keys = ON");
         db.pragma("journal_mode = MEMORY");
         db.pragma("temp_store = MEMORY");
-        db.pragma(`busy_timeout = ${Math.min(normalized.limits?.statementTimeoutMs ?? 4000, 5000)}`);
+        db.pragma(
+            `busy_timeout = ${Math.min(
+                normalized.limits?.statementTimeoutMs ?? 4000,
+                5000,
+            )}`,
+        );
 
         interruptId = setTimeout(() => {
             timedOut = true;
@@ -220,14 +304,14 @@ async function executeSqliteLocally(req: SqlRunReq): Promise<SqlRunResult> {
         const started = Date.now();
         const stmt = db.prepare(normalized.code);
 
+        const maxRows = Math.max(1, normalized.limits?.maxRows ?? 200);
+        const maxBytes = Math.max(2048, normalized.limits?.maxBytes ?? 128_000);
+
         if (stmt.reader) {
             const columns: SqlColumn[] = stmt.columns().map((c: any) => ({
                 name: String(c?.name ?? ""),
                 type: c?.type ? String(c.type) : null,
             }));
-
-            const maxRows = Math.max(1, normalized.limits?.maxRows ?? 200);
-            const maxBytes = Math.max(2048, normalized.limits?.maxBytes ?? 128_000);
 
             const rows: SqlScalar[][] = [];
             let truncatedByRows = false;
@@ -255,6 +339,12 @@ async function executeSqliteLocally(req: SqlRunReq): Promise<SqlRunResult> {
                 rows.push(row);
             }
 
+            const tableSnapshots = await readSqliteTableSnapshots({
+                db,
+                maxRows,
+                maxBytes,
+            });
+
             const elapsedMs = Date.now() - started;
             const notices: string[] = [];
 
@@ -267,7 +357,10 @@ async function executeSqliteLocally(req: SqlRunReq): Promise<SqlRunResult> {
             );
 
             const limitedStdout = limitTextBytes(rendered, maxBytes);
-            if (limitedStdout.truncated && !notices.includes(`Output truncated to ${maxBytes} bytes.`)) {
+            if (
+                limitedStdout.truncated &&
+                !notices.includes(`Output truncated to ${maxBytes} bytes.`)
+            ) {
                 notices.push(`Output truncated to ${maxBytes} bytes.`);
             }
 
@@ -279,12 +372,20 @@ async function executeSqliteLocally(req: SqlRunReq): Promise<SqlRunResult> {
                 notices,
                 stdout: limitedStdout.text,
                 time: (elapsedMs / 1000).toFixed(3),
-            });
+                tableSnapshots,
+            } as any);
         }
 
         const info = stmt.run();
-        const elapsedMs = Date.now() - started;
         const affected = Number(info?.changes ?? 0);
+
+        const tableSnapshots = await readSqliteTableSnapshots({
+            db,
+            maxRows,
+            maxBytes,
+        });
+
+        const elapsedMs = Date.now() - started;
 
         return okSql({
             dialect: normalized.dialect,
@@ -292,7 +393,8 @@ async function executeSqliteLocally(req: SqlRunReq): Promise<SqlRunResult> {
             rowCount: affected,
             stdout: `Query OK. ${affected} row(s) affected.`,
             time: (elapsedMs / 1000).toFixed(3),
-        });
+            tableSnapshots,
+        } as any);
     } catch (e: any) {
         if (timedOut) {
             return timeoutSql(normalized.dialect);
@@ -311,7 +413,6 @@ async function executeSqliteLocally(req: SqlRunReq): Promise<SqlRunResult> {
         } catch {}
     }
 }
-
 export async function executeSqlRun(req: SqlRunReq): Promise<RunResult> {
     const normalized = normalizeSqlReq(req);
     const remote = workerUrlForDialect(normalized.dialect);

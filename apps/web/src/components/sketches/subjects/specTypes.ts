@@ -1,7 +1,6 @@
 // src/components/review/sketches/specTypes.ts
 import type { SketchTone } from "./types";
-
-import {CodeLanguage} from "@/lib/practice/types";
+import { CodeLanguage } from "@/lib/practice/types";
 
 export type ArchetypeId =
     | "intro_stepper"
@@ -18,51 +17,43 @@ export type ArchetypeId =
     | "glossary"
     | "ui_path_guide"
     | "code_runner"
-    // keep these because you already render them
-    | "paragraph"|"video_lesson"
-    // NEW
+    | "paragraph"
+    | "video_lesson"
     | "image"
-    // backward-compat (you currently have this in CodeSketchSpec)
     | "code_sketch";
 
 export type SketchSpecBase = {
     archetype: ArchetypeId;
     specVersion: number;
-
     title?: string;
     subtitle?: string;
-
-    /** optional right panel notes */
     hudMarkdown?: string;
-
     tone?: SketchTone;
 };
 
-/** =========================
- * Code Runner / Code Sketch
- * ========================= */
 export type CodeSketchSpec = SketchSpecBase & {
-    archetype: "code_runner" | "code_sketch"; // support both
+    archetype: "code_runner" | "code_sketch";
     starterCode: string;
     language: CodeLanguage;
     hint: string;
     instructionsMarkdown?: string;
 };
 
-/** =========================
- * Paragraph
- * ========================= */
+export type ParagraphImage = {
+    src: string;
+    alt: string;
+    caption?: string;
+    className?: string;
+};
+
 export type ParagraphSpec = SketchSpecBase & {
     archetype: "paragraph";
     bodyMarkdown: string;
+    images?: Record<string, ParagraphImage>;
 };
 
-/** =========================
- * Image
- * ========================= */
 export type ImageMarkerSpec = {
     id: string;
-    /** normalized (0..1) */
     x: number;
     y: number;
     label?: string;
@@ -71,36 +62,22 @@ export type ImageMarkerSpec = {
 
 export type ImageSketchSpec = SketchSpecBase & {
     archetype: "image";
-
     src: string;
     alt: string;
-
-    /** Provide either width/height OR aspectRatio */
     width?: number;
     height?: number;
     aspectRatio?: number;
-
-    /** markdown caption shown under image (optional) */
     captionMarkdown?: string;
-
     markers?: ImageMarkerSpec[];
-
     initialZoom?: number;
     minZoom?: number;
     maxZoom?: number;
     zoomStep?: number;
-
     allowPan?: boolean;
     allowWheelZoom?: boolean;
     allowDoubleClickReset?: boolean;
     showControls?: boolean;
-
     className?: string;
-
-    /**
-     * If true, the sketch can store the last zoom/pos in SavedSketchState.
-     * (Spec stays serializable; state is where runtime data belongs.)
-     */
     rememberTransform?: boolean;
 };
 
@@ -122,7 +99,7 @@ export type TemplatePickerSpec = SketchSpecBase & {
         label: string;
         description?: string;
         variables: Array<{ key: string; label: string; placeholder?: string }>;
-        template: string; // supports {varKey}
+        template: string;
     }>;
     outputTitle?: string;
 };

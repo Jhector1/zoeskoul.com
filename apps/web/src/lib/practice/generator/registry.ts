@@ -7,6 +7,7 @@ import type {
 } from "@/lib/practice/generator/engines/utils";
 
 import { makeGenPythonStatementsPart1 } from "./engines/python/python_part1";
+import {makeGenSqlStatementsSqlForBeginners} from "@/lib/practice/generator/engines/sql/sql_for_beginners";
 
 export type TopicGeneratorFactory = (ctx: TopicContext) => SubjectModuleGenerator;
 
@@ -40,4 +41,5 @@ function wrapGenFn(fn: GenFn): TopicGeneratorFactory {
 
 export const TOPIC_GENERATORS: Record<GenKey, TopicGeneratorFactory> = {
     python_part1: (ctx) => makeGenPythonStatementsPart1(ctx),
+    sql_for_beginners: (ctx) =>makeGenSqlStatementsSqlForBeginners(ctx)
 };

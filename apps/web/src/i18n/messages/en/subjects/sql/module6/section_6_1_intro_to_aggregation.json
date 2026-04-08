@@ -1,0 +1,442 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_6": {
+        "intro_to_aggregation": {
+          "label": "Intro to Aggregation",
+          "summary": "Learn how aggregate functions summarize many rows into one value, how aggregate queries differ from regular row-by-row queries, and how to read summary results clearly.",
+          "cards": {
+            "sketch0": {
+              "title": "What do aggregate functions do?"
+            },
+            "sketch1": {
+              "title": "How can one value come from many rows?"
+            },
+            "sketch2": {
+              "title": "How are aggregate queries different from regular queries?"
+            },
+            "sketch3": {
+              "title": "How do you read summary results?"
+            },
+            "quiz": {
+              "title": "Quiz: Intro to Aggregation"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_6": {
+        "intro_to_aggregation": {
+          "what_aggregate_functions_do": {
+            "title": "Aggregate functions summarize many rows into one result.",
+            "bodyMarkdown": "A regular query often shows **many rows**.\n\nBut sometimes you do not want every row.\nYou want a **summary**.\n\nThat is what aggregate functions do.\n\nThey help answer questions like:\n\n- how many rows are there?\n- what is the total?\n- what is the average?\n- what is the smallest value?\n- what is the largest value?\n\nSo the big idea is:\n\n> aggregate functions turn many row values into one summary value"
+          },
+          "one_value_from_many_rows": {
+            "title": "An aggregate can read many rows and return one value.",
+            "bodyMarkdown": "This is one of the most important SQL ideas.\n\nAn aggregate query looks at many rows in a column and combines them into a **single answer**.\n\nFor example, SQL can look across many prices and return:\n\n- one total\n- one average\n- one minimum\n- one maximum\n\nSo even though the table has many rows, the result may contain only **one summary row**.\n\nThat is why aggregates feel different from normal `SELECT` queries."
+          },
+          "aggregates_vs_regular_queries": {
+            "title": "Aggregate queries summarize, while regular queries usually list rows.",
+            "bodyMarkdown": "A regular query often answers:\n\n> show me the rows\n\nAn aggregate query often answers:\n\n> summarize the rows\n\nThat means the outputs look different.\n\nRegular queries often return many rows from the table.\nAggregate queries often return one row with one or more summary values.\n\nSo a helpful beginner way to think about it is:\n\n- regular query = row details\n- aggregate query = summary result"
+          },
+          "reading_summary_results": {
+            "title": "Read summary results by focusing on the meaning of the one returned value.",
+            "bodyMarkdown": "When you run an aggregate query, the result often looks much smaller than a normal table query.\n\nThat is expected.\n\nA strong beginner habit is:\n\n1. read the result header\n2. identify what summary was requested\n3. interpret the one returned value\n\nSo if the result is one number, ask yourself:\n\n- is it a count?\n- a total?\n- an average?\n- a smallest value?\n- a largest value?\n\nThat makes summary results easier to understand."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "m6_s01_count_all_orders": {
+      "title": "Summarize all rows with a count",
+      "prompt": "The SQLite workspace already has a table named `orders`.\n\nWrite a query that returns one summary value showing how many rows are in `orders`.\n\nRename the result to `order_count`, then click **Run**.",
+      "help": {
+        "concept": "An aggregate query can return one value that summarizes many rows, such as a total row count.",
+        "hint_1": "Use an aggregate that counts rows, and give that result a clear alias.",
+        "hint_2": "Build a query that reads from `orders`, uses a counting aggregate in the select list, and labels the summary result as `order_count`."
+      },
+      "hint": "Use a counting aggregate and alias it.",
+      "starterCode": "-- Return one summary value showing how many rows are in orders\n"
+    },
+    "m6_s01_average_unit_price_intro": {
+      "title": "Return one average value",
+      "prompt": "The `orders` table already exists.\n\nWrite a query that returns one summary value showing the average `unit_price` from all rows.\n\nRename the result to `avg_price`, then run it.",
+      "help": {
+        "concept": "An aggregate can read many numeric values from a column and return one average result.",
+        "hint_1": "Use an averaging aggregate on `unit_price` and give the summary a readable name.",
+        "hint_2": "Create a query on `orders` that applies an average-style aggregate to `unit_price` and labels the output `avg_price`."
+      },
+      "hint": "Use an average aggregate on `unit_price`.",
+      "starterCode": "-- Return one summary value for the average unit_price\n"
+    },
+    "m6_s01_highest_quantity_intro": {
+      "title": "Return one highest value",
+      "prompt": "The `orders` table already exists.\n\nWrite a query that returns one summary value showing the highest `quantity` in the table.\n\nRename the result to `max_quantity`, then click **Run**.",
+      "help": {
+        "concept": "An aggregate can summarize many rows by returning just the largest value from a column.",
+        "hint_1": "Use the aggregate that returns the largest value, and apply it to `quantity`.",
+        "hint_2": "Build a query on `orders` that summarizes the `quantity` column by keeping only its largest value in the result."
+      },
+      "hint": "Use the largest-value aggregate on `quantity`.",
+      "starterCode": "-- Return one summary value for the highest quantity\n"
+    },
+    "m6_s01_lowest_unit_price_intro": {
+      "title": "Return one lowest value",
+      "prompt": "The `orders` table already exists.\n\nWrite a query that returns one summary value showing the lowest `unit_price` in the table.\n\nRename the result to `min_price`, then run it.",
+      "help": {
+        "concept": "An aggregate can summarize many rows by returning the smallest value from a column.",
+        "hint_1": "Use the aggregate that returns the smallest value, and apply it to `unit_price`.",
+        "hint_2": "Create a summary query on `orders` that reads the `unit_price` column and keeps only its smallest value in the output."
+      },
+      "hint": "Use the smallest-value aggregate on `unit_price`.",
+      "starterCode": "-- Return one summary value for the lowest unit_price\n"
+    },
+    "m6_s01_intro_aggregation_project": {
+      "title": "Practice reading summary queries",
+      "prompt": "Use the SQL workspace on the right to practice aggregate-style summary queries on the `orders` table.\n\nFor each task:\n\n1. type the query in the editor\n2. click **Run**\n3. read the result header\n4. interpret the one summary value returned\n\nTasks:\n\n1. Return a row count named `order_count`\n2. Return an average price named `avg_price`\n3. Return the highest quantity named `max_quantity`\n4. Return the lowest unit price named `min_price`\n5. Return the highest unit price named `max_price`\n\nRun one query at a time.\nThis project is about getting comfortable with one-value summary results.",
+      "help": {
+        "concept": "Aggregate queries summarize many rows into one result value.",
+        "hint_1": "Each task asks for a single summary value from the `orders` table.",
+        "hint_2": "Solve the tasks one by one. Focus on what kind of summary the task wants, then choose the matching aggregate and label the result clearly."
+      },
+      "hint": "Choose the right summary function and alias it clearly.",
+      "starterCode": "-- Task 1\n-- Return a row count named order_count\n\n"
+    },
+
+    "m6_s01_aggregate_function_job": {
+      "title": "What do aggregate functions do?",
+      "prompt": "What is the main job of an aggregate function in SQL?",
+      "help": {
+        "concept": "Aggregate functions summarize values from many rows into a smaller result.",
+        "hint_1": "Think summary, not listing every row.",
+        "hint_2": "The main idea is combining many row values into one summary answer."
+      },
+      "hint": "Think summarize many rows.",
+      "options": {
+        "a": "They summarize values from many rows",
+        "b": "They always return every row unchanged",
+        "c": "They rename tables permanently",
+        "d": "They only sort rows alphabetically"
+      }
+    },
+    "m6_s01_one_value_many_rows": {
+      "title": "How can one value come from many rows?",
+      "prompt": "Why can an aggregate query return only one value even when the table has many rows?",
+      "help": {
+        "concept": "An aggregate reads many row values and combines them into one summary result.",
+        "hint_1": "Think combine, not list.",
+        "hint_2": "The function looks across many rows and produces one summary answer."
+      },
+      "hint": "Think many rows, one summary.",
+      "options": {
+        "a": "Because the function combines many row values into one summary",
+        "b": "Because SQL deletes the extra rows",
+        "c": "Because the table only has one column",
+        "d": "Because aliases hide the other rows"
+      }
+    },
+    "m6_s01_aggregate_vs_regular": {
+      "title": "How is an aggregate query different?",
+      "prompt": "What is the main difference between an aggregate query and a regular row query?",
+      "help": {
+        "concept": "Regular queries often list rows, while aggregate queries usually summarize them.",
+        "hint_1": "Think details versus summary.",
+        "hint_2": "One shows row data, the other usually shows a summarized result."
+      },
+      "hint": "Think rows versus summary.",
+      "options": {
+        "a": "Aggregate queries summarize rows, while regular queries often list them",
+        "b": "Aggregate queries cannot use tables",
+        "c": "Regular queries always return one value only",
+        "d": "Aggregate queries only work on text"
+      }
+    },
+    "m6_s01_reading_summary_result": {
+      "title": "How should you read a summary result?",
+      "prompt": "What is a good beginner way to read the result of an aggregate query?",
+      "help": {
+        "concept": "You should read the header first and then interpret what the one returned value represents.",
+        "hint_1": "Start with the label.",
+        "hint_2": "The key is to connect the returned number to the kind of summary requested."
+      },
+      "hint": "Read the header, then the summary value.",
+      "options": {
+        "a": "Read the result header first, then interpret the summary value",
+        "b": "Ignore the header completely",
+        "c": "Assume every one-row result is a count",
+        "d": "Only read the last character in the cell"
+      }
+    },
+    "m6_s01_why_aggregation_useful": {
+      "title": "Why is aggregation useful?",
+      "prompt": "Why are aggregate queries useful in SQL?",
+      "help": {
+        "concept": "Aggregate queries help answer summary questions quickly.",
+        "hint_1": "Think totals, counts, averages, extremes.",
+        "hint_2": "They are useful when you want a small summary answer instead of all row details."
+      },
+      "hint": "Think summary questions.",
+      "options": {
+        "a": "They help answer summary questions quickly",
+        "b": "They replace all normal queries forever",
+        "c": "They always return more rows than regular queries",
+        "d": "They can only be used with aliases"
+      }
+    },
+
+    "m6_s01_aggregates_true": {
+      "title": "What is true about aggregate functions?",
+      "prompt": "Select all true statements about aggregate functions in beginner SQL.",
+      "help": {
+        "concept": "Aggregate functions summarize many row values into smaller results.",
+        "hint_1": "Think summary output.",
+        "hint_2": "Choose the statements about combining many row values into one summary."
+      },
+      "hint": "Think summary from many rows.",
+      "options": {
+        "a": "They can summarize many rows into one value",
+        "b": "They are useful for counts and averages",
+        "c": "They can answer summary-style questions",
+        "d": "They always return every original row unchanged",
+        "e": "They often produce a smaller result than regular queries"
+      }
+    },
+    "m6_s01_one_value_true": {
+      "title": "What is true about one summary value from many rows?",
+      "prompt": "Select all true statements about aggregate queries returning one value from many rows.",
+      "help": {
+        "concept": "A one-value summary can still come from reading many underlying rows.",
+        "hint_1": "Think one result does not mean one input row.",
+        "hint_2": "Choose the ideas about combining many values into one answer."
+      },
+      "hint": "Think one answer from many rows.",
+      "options": {
+        "a": "The query can still read many rows even if the result has one value",
+        "b": "A summary result can represent the whole table",
+        "c": "The one value can be a count, total, or average",
+        "d": "One-value results mean only one row existed in the table",
+        "e": "Summary queries often look smaller than row-by-row queries"
+      }
+    },
+    "m6_s01_regular_vs_aggregate_true": {
+      "title": "What is true about aggregates versus regular queries?",
+      "prompt": "Select all true statements about aggregate queries compared with regular queries.",
+      "help": {
+        "concept": "Regular queries usually list data, while aggregate queries summarize it.",
+        "hint_1": "Think detail versus summary.",
+        "hint_2": "Choose the statements about how the result shape and purpose differ."
+      },
+      "hint": "Think details versus summaries.",
+      "options": {
+        "a": "Regular queries often return row details",
+        "b": "Aggregate queries often return summary values",
+        "c": "The purpose of an aggregate query is usually different from a regular listing query",
+        "d": "Regular queries can never use columns",
+        "e": "Aggregate queries often produce a more compact result"
+      }
+    },
+    "m6_s01_summary_results_true": {
+      "title": "What is true about reading summary results?",
+      "prompt": "Select all true statements about reading aggregate query results.",
+      "help": {
+        "concept": "Reading summary results starts with the header and the meaning of the one returned value.",
+        "hint_1": "Think what kind of summary is shown.",
+        "hint_2": "Choose the statements about interpreting the returned value carefully."
+      },
+      "hint": "Think header and meaning.",
+      "options": {
+        "a": "The header helps explain what the summary value means",
+        "b": "A one-cell result can still represent many underlying rows",
+        "c": "You should identify whether the value is a count, total, average, min, or max",
+        "d": "You should always ignore aliases in summary queries",
+        "e": "Summary results are easier to understand when labeled clearly"
+      }
+    },
+    "m6_s01_intro_aggregation_workflow_true": {
+      "title": "What matches a good beginner workflow for aggregate queries?",
+      "prompt": "Select all statements that match a good beginner workflow for writing and reading aggregate queries.",
+      "help": {
+        "concept": "A good workflow is to identify the summary question, choose the matching aggregate, run the query, and interpret the result.",
+        "hint_1": "Think question, function, run, interpret.",
+        "hint_2": "Choose the steps that help you connect the summary question to the returned value."
+      },
+      "hint": "Start with the summary question.",
+      "options": {
+        "a": "Decide what kind of summary you want",
+        "b": "Choose the aggregate function that matches that summary",
+        "c": "Run the query and read the result header",
+        "d": "Interpret the one returned value in context",
+        "e": "Ignore what the function is supposed to summarize"
+      }
+    },
+
+    "m6_s01_fill_many_rows_one_value": {
+      "title": "What aggregates return",
+      "prompt": "Fill in the blank with the best word.",
+      "template": "Aggregate functions turn many row values into one ____ value.",
+      "choices": {
+        "0": "summary",
+        "1": "folder",
+        "2": "hidden",
+        "3": "browser"
+      },
+      "hint": "The result is a summarized answer.",
+      "help": {
+        "concept": "Aggregate functions summarize many row values into a smaller result.",
+        "hint_1": "Think combined answer.",
+        "hint_2": "The missing word is `summary`."
+      }
+    },
+    "m6_s01_fill_regular_vs_aggregate": {
+      "title": "What aggregate queries do",
+      "prompt": "Fill in the blank with the best word.",
+      "template": "A regular query often lists rows, while an aggregate query often tries to ____ them.",
+      "choices": {
+        "0": "summarize",
+        "1": "rename",
+        "2": "sort alphabetically only",
+        "3": "delete"
+      },
+      "hint": "Think one combined answer.",
+      "help": {
+        "concept": "Aggregate queries summarize rows instead of listing every detail row.",
+        "hint_1": "Think summary result.",
+        "hint_2": "The correct word is `summarize`."
+      }
+    },
+    "m6_s01_fill_read_header_first": {
+      "title": "How to read results",
+      "prompt": "Fill in the blank with the best word.",
+      "template": "A good beginner habit is to read the result ____ first.",
+      "choices": {
+        "0": "header",
+        "1": "browser",
+        "2": "font",
+        "3": "folder"
+      },
+      "hint": "The label helps explain the number.",
+      "help": {
+        "concept": "The header helps explain what the returned summary value means.",
+        "hint_1": "Think label first.",
+        "hint_2": "The missing word is `header`."
+      }
+    },
+    "m6_s01_fill_result_can_be_count": {
+      "title": "One kind of summary",
+      "prompt": "Fill in the blank with the best word.",
+      "template": "A one-value aggregate result can be a total, an average, a min, a max, or a ____.",
+      "choices": {
+        "0": "count",
+        "1": "filename",
+        "2": "color",
+        "3": "button"
+      },
+      "hint": "Think how many rows.",
+      "help": {
+        "concept": "Count is one of the most common aggregate-style summary answers.",
+        "hint_1": "Think how many.",
+        "hint_2": "The missing word is `count`."
+      }
+    },
+    "m6_s01_fill_summary_question": {
+      "title": "What aggregates answer",
+      "prompt": "Fill in the blank with the best word.",
+      "template": "Aggregate queries are useful when you want a ____ answer instead of all row details.",
+      "choices": {
+        "0": "summary",
+        "1": "random",
+        "2": "styling",
+        "3": "temporary"
+      },
+      "hint": "Think smaller combined answer.",
+      "help": {
+        "concept": "Aggregate queries are useful for summary questions.",
+        "hint_1": "Think total, average, count.",
+        "hint_2": "The missing word is `summary`."
+      }
+    },
+
+    "m6_s01_reorder_aggregation_flow": {
+      "title": "Order the aggregation workflow",
+      "prompt": "Reorder the steps into a good beginner workflow for aggregate queries.",
+      "tokens": {
+        "t1": "decide what summary you want",
+        "t2": "choose the matching aggregate",
+        "t3": "run the query",
+        "t4": "interpret the returned value"
+      },
+      "hint": "Question first, interpretation last.",
+      "help": {
+        "concept": "A good workflow connects the summary question to the aggregate and then to the final result.",
+        "hint_1": "Choose the summary before the function.",
+        "hint_2": "Interpretation comes after running."
+      }
+    },
+    "m6_s01_reorder_count_pattern": {
+      "title": "Order a count pattern",
+      "prompt": "Reorder the parts into a common count summary pattern.",
+      "tokens": {
+        "t1": "COUNT(*)",
+        "t2": "AS",
+        "t3": "order_count"
+      },
+      "hint": "Aggregate first, alias last.",
+      "help": {
+        "concept": "A simple count summary often uses COUNT with a readable alias.",
+        "hint_1": "Start with the aggregate.",
+        "hint_2": "Then assign the alias."
+      }
+    },
+    "m6_s01_reorder_avg_pattern": {
+      "title": "Order an average pattern",
+      "prompt": "Reorder the parts into a common average summary pattern.",
+      "tokens": {
+        "t1": "AVG(unit_price)",
+        "t2": "AS",
+        "t3": "avg_price"
+      },
+      "hint": "Aggregate first, alias last.",
+      "help": {
+        "concept": "An average summary often uses AVG with a clear label.",
+        "hint_1": "Start with the AVG expression.",
+        "hint_2": "Then add the alias."
+      }
+    },
+    "m6_s01_reorder_read_summary_output": {
+      "title": "Order how to read summary output",
+      "prompt": "Reorder the steps into a good way to read aggregate results.",
+      "tokens": {
+        "t1": "read the result header",
+        "t2": "read the one returned value",
+        "t3": "interpret what kind of summary it is"
+      },
+      "hint": "Header first, meaning last.",
+      "help": {
+        "concept": "Aggregate results are easiest to understand when you identify the label before judging the value.",
+        "hint_1": "Start with the header.",
+        "hint_2": "Interpretation comes after reading the number."
+      }
+    },
+    "m6_s01_reorder_summary_types": {
+      "title": "Order the common summary types",
+      "prompt": "Reorder the summary types in the same lesson flow used here.",
+      "tokens": {
+        "t1": "count",
+        "t2": "total",
+        "t3": "average",
+        "t4": "minimum",
+        "t5": "maximum"
+      },
+      "hint": "Follow the lesson flow from count to max.",
+      "help": {
+        "concept": "This lesson introduces the main beginner summary types in a simple progression.",
+        "hint_1": "Count comes first.",
+        "hint_2": "Maximum comes last."
+      }
+    }
+  }
+}

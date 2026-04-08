@@ -1,0 +1,348 @@
+{
+  "topicId": "string_basics",
+
+  "minutes": 10,
+
+  "topic": {
+    "labelKey": "topics.python.python-1.string_basics.label",
+    "summaryKey": "topics.python.python-1.string_basics.summary"
+  },
+
+  "cards": [
+    {
+      "id": "sketch",
+      "kind": "sketch",
+      "titleKey": "topics.python.python-1.string_basics.cards.sketch.title",
+      "sketchId": "basics",
+      "height": 520
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python.python-1.string_basics.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "concat_vs_comma",
+            "titleKey": "topics.python.python-1.string_basics.projectSteps.concat_vs_comma.title",
+            "exerciseKey": "m1_str_concat_vs_comma_code",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "fstring_greeting",
+            "titleKey": "topics.python.python-1.string_basics.projectSteps.fstring_greeting.title",
+            "exerciseKey": "m1_str_fstring_greeting_code",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "username_generator",
+            "titleKey": "topics.python.python-1.string_basics.projectSteps.username_generator.title",
+            "exerciseKey": "m1_str_username_code",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
+    }
+  ],
+
+  "sketches": [
+    {
+      "id": "basics",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python.python-1.string_basics.basics.title",
+      "bodyKey": "sketches.python.python-1.string_basics.basics.bodyMarkdown"
+    }
+  ],
+
+  "exercises": [
+    {
+      "id": "m1_str_concat_vs_comma_sc",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_str_concat_vs_comma_sc",
+      "optionIds": ["a", "b", "c"],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "m1_str_fstring_placeholder_sc",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_str_fstring_placeholder_sc",
+      "optionIds": ["a", "b", "c"],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "m1_str_strip_sc",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_str_strip_sc",
+      "optionIds": ["a", "b", "c"],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "m1_str_lower_sc",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_str_lower_sc",
+      "optionIds": ["a", "b", "c"],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "c"
+      }
+    },
+
+    {
+      "id": "m1_str_username_steps_mc",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_str_username_steps_mc",
+      "optionIds": ["a", "b", "c", "d"],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": ["a", "c", "d"]
+      }
+    },
+    {
+      "id": "m1_str_concat_truths_mc",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_str_concat_truths_mc",
+      "optionIds": ["a", "b", "c", "d"],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": ["a", "b"]
+      }
+    },
+    {
+      "id": "m1_str_indexing_first_char_mc",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_str_indexing_first_char_mc",
+      "optionIds": ["a", "b", "c", "d"],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": ["b", "d"]
+      }
+    },
+
+    {
+      "id": "m1_str_fill_string_definition",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_str_fill_string_definition",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "quotes"
+      }
+    },
+    {
+      "id": "m1_str_fill_first_index",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_str_fill_first_index",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "0"
+      }
+    },
+    {
+      "id": "m1_str_fill_last_index",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_str_fill_last_index",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "-1"
+      }
+    },
+    {
+      "id": "m1_str_fill_lower_meaning",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_str_fill_lower_meaning",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "lowercase"
+      }
+    },
+    {
+      "id": "m1_str_fill_strip_meaning",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_str_fill_strip_meaning",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "spaces"
+      }
+    },
+
+    {
+      "id": "m1_str_reorder_username_steps",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_str_reorder_username_steps",
+      "tokenIds": ["t1", "t2", "t3", "t4"],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": ["t1", "t2", "t3", "t4"]
+      }
+    },
+    {
+      "id": "m1_str_reorder_fstring_idea",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_str_reorder_fstring_idea",
+      "tokenIds": ["t1", "t2", "t3"],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": ["t1", "t2", "t3"]
+      }
+    },
+    {
+      "id": "m1_str_reorder_clean_input",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_str_reorder_clean_input",
+      "tokenIds": ["t1", "t2", "t3"],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": ["t1", "t2", "t3"]
+      }
+    },
+    {
+      "id": "m1_str_reorder_indexing_idea",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_str_reorder_indexing_idea",
+      "tokenIds": ["t1", "t2", "t3"],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": ["t1", "t2", "t3"]
+      }
+    },
+    {
+      "id": "m1_str_reorder_print_options",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_str_reorder_print_options",
+      "tokenIds": ["t1", "t2", "t3"],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": ["t1", "t2", "t3"]
+      }
+    },
+
+    {
+      "id": "m1_str_concat_vs_comma_code",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "quiz.m1_str_concat_vs_comma_code",
+      "language": "python",
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "Maya\n16\n",
+            "stdout": "Hello Maya\nage: 16\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "name = input()\nage = int(input())\nprint(\"Hello\", name)\nprint(\"age:\", age)\n"
+      }
+    },
+    {
+      "id": "m1_str_fstring_greeting_code",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "quiz.m1_str_fstring_greeting_code",
+      "language": "python",
+      "recipe": {
+        "type": "template_io",
+        "vars": {
+          "name": {
+            "source": "pick",
+            "from": ["Maya", "Jordan", "Alex", "Sam"]
+          }
+        },
+        "tests": [
+          {
+            "stdinTemplate": "{name}\n",
+            "stdoutTemplate": "Hello, {name}!\n",
+            "match": "exact"
+          }
+        ],
+        "solutionTemplate": "name = input()\nprint(f\"Hello, {name}!\")\n"
+      }
+    },
+    {
+      "id": "m1_str_username_code",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "quiz.m1_str_username_code",
+      "language": "python",
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": " Maya \n Johnson \n",
+            "stdout": "mjohnson\n",
+            "match": "exact"
+          },
+          {
+            "stdin": " Alex \n Lee \n",
+            "stdout": "alee\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "first = input().strip()\nlast = input().strip()\nusername = (first[0] + last).lower()\nprint(username)\n"
+      }
+    }
+  ]
+}

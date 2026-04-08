@@ -1,0 +1,293 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_11": {
+        "safe_inserting": {
+          "label": "Safe Inserting",
+          "summary": "Learn why column lists matter, how to think about data types during inserts, how to avoid common insert errors, and how to check inserted results safely.",
+          "cards": {
+            "sketch0": {
+              "title": "Why do column lists matter?"
+            },
+            "sketch1": {
+              "title": "Why should you think about data types?"
+            },
+            "sketch2": {
+              "title": "How do you avoid insert errors?"
+            },
+            "sketch3": {
+              "title": "How do you read inserted results?"
+            },
+            "quiz": {
+              "title": "Quiz: Safe Inserting"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_11": {
+        "section_11_2": {
+          "why_column_lists_matter": {
+            "title": "Column lists make inserts safer and clearer.",
+            "bodyMarkdown": "A column list shows exactly where each value is going.\n\nThat helps beginners because it becomes easier to see:\n\n- which columns are being filled\n- what order the values should follow\n- which columns are being skipped on purpose\n\nSo the big idea is:\n\n> column lists make insert statements safer and easier to read"
+          },
+          "data_type_awareness": {
+            "title": "Inserted values should fit the kind of data each column expects.",
+            "bodyMarkdown": "Each column is meant for a certain kind of value.\n\nExamples in this dataset include:\n\n- text-like values\n- numbers\n- flag-style integers\n- date-like text\n\nSo the key idea is:\n\n> safe inserts pay attention to what kind of data each column expects"
+          },
+          "avoiding_insert_errors": {
+            "title": "Many insert errors come from mismatched columns, values, or missing required data.",
+            "bodyMarkdown": "Common beginner insert mistakes include:\n\n- wrong number of values\n- wrong value order\n- forgetting required columns\n- using a value that does not fit the intended column\n\nSo the main idea is:\n\n> careful column planning helps prevent many insert mistakes"
+          },
+          "reading_inserted_results": {
+            "title": "Checking inserted rows helps confirm that the insert worked as expected.",
+            "bodyMarkdown": "After an insert, it is often helpful to read the new row back.\n\nThat makes it easier to confirm:\n\n- the row was added\n- the values landed in the right columns\n- optional or default values behaved as expected\n\nSo the important idea is:\n\n> checking inserted results is a strong beginner habit"
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "m11_s02_safe_insert_with_column_list": {
+      "title": "Use a safe column list",
+      "prompt": "The SQLite workspace already has the `inventory_ops` dataset loaded.\n\nWrite a query that inserts one new row into `inventory_items` using an explicit column list with these values:\n\n- `id` = 7\n- `name` = 'Mini Shelf'\n- `category` = 'Decor'\n- `price` = 34.00\n- `status` = 'active'\n- `is_test` = 0\n- `notes` = 'Wood finish'\n- `last_updated` = '2026-02-07'\n\nThen click **Run**.",
+      "help": {
+        "concept": "A full column list makes the insert safer because every value has a clearly named target column.",
+        "hint_1": "Write the full column list first, then place the values in the same order.",
+        "hint_2": "Build an insert that names every target column explicitly so the value alignment is easy to verify."
+      },
+      "hint": "Name all target columns explicitly before listing the values.",
+      "starterCode": "-- Insert one row using a full explicit column list\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "inventory_ops",
+        "resultShape": "table"
+      }
+    },
+    "m11_s02_check_inserted_result": {
+      "title": "Read inserted results safely",
+      "prompt": "The tables already exist.\n\nWrite a query that returns all columns from `inventory_items` where `id` = 5.\n\nThen run it and inspect the row carefully.",
+      "help": {
+        "concept": "Reading a row after an insert or before a change helps confirm what the data looks like in storage.",
+        "hint_1": "Use a SELECT query with a WHERE condition on the id.",
+        "hint_2": "Build a query that reads the full row for a specific item so you can inspect each stored value carefully."
+      },
+      "hint": "Use SELECT * with a WHERE condition on id.",
+      "starterCode": "-- Show one full inventory row by id for inspection\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "inventory_ops",
+        "resultShape": "table"
+      }
+    },
+    "m11_s02_insert_type_aware_row": {
+      "title": "Think about data types",
+      "prompt": "The tables already exist.\n\nWrite a query that inserts this new row into `inventory_items`:\n\n- `id` = 8\n- `name` = 'Storage Bin'\n- `category` = 'Decor'\n- `price` = 19.99\n- `status` = 'draft'\n- `is_test` = 1\n- `notes` = NULL\n- `last_updated` = '2026-02-08'\n\nThen click **Run**.",
+      "help": {
+        "concept": "A safe insert respects text, numeric, flag, and date-like columns by giving each one a fitting value.",
+        "hint_1": "Check that each column gets the kind of value it expects.",
+        "hint_2": "Build a normal insert, but think carefully about which values are text, which are numeric, which are flag-like integers, and which can be NULL."
+      },
+      "hint": "Make sure each value fits the kind of column it belongs to.",
+      "starterCode": "-- Insert one row with careful type-aware values\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "inventory_ops",
+        "resultShape": "table"
+      }
+    },
+    "m11_s02_insert_two_safe_rows": {
+      "title": "Avoid insert mistakes",
+      "prompt": "The tables already exist.\n\nWrite one query that inserts these two rows safely into `inventory_items` using a clear column list:\n\nRow 1:\n- `id` = 9\n- `name` = 'Wall Hook'\n- `category` = 'Decor'\n- `price` = 6.50\n- `status` = 'active'\n- `is_test` = 0\n- `notes` = NULL\n- `last_updated` = '2026-02-09'\n\nRow 2:\n- `id` = 10\n- `name` = 'Recipe Card Pack'\n- `category` = 'Kitchen'\n- `price` = 5.25\n- `status` = 'draft'\n- `is_test` = 0\n- `notes` = 'Launch prep'\n- `last_updated` = '2026-02-09'\n\nThen run it.",
+      "help": {
+        "concept": "A clear column list plus careful value order is one of the best ways to avoid insert mistakes.",
+        "hint_1": "Use one explicit column list for both rows, then provide two matching value groups.",
+        "hint_2": "Write the insert so the same named columns apply to both rows, and make sure both value groups follow that exact order."
+      },
+      "hint": "Use one explicit column list and keep both value groups in the same order.",
+      "starterCode": "-- Insert two safe rows with a clear column list\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "inventory_ops",
+        "resultShape": "table"
+      }
+    },
+    "m11_s02_safe_insert_project": {
+      "title": "Practice safe inserting",
+      "prompt": "Use the SQL workspace on the right to practice safe inserting on the `inventory_ops` dataset.\n\nFor each task:\n\n1. write the insert carefully\n2. use a clear column list\n3. think about what type of value each column expects\n4. click **Run**\n5. inspect rows afterward when needed\n\nTasks:\n\n1. Insert one row with a full explicit column list\n2. Read one inserted or existing row back with SELECT\n3. Insert a row with careful type-aware values\n4. Insert two rows safely in one statement\n5. Insert one active non-test item with a short note\n\nRun one query at a time.\nThis project is about reducing insert mistakes before they happen.",
+      "help": {
+        "concept": "Safe inserting comes from planning the columns, the value order, and the data types before running the statement.",
+        "hint_1": "Column lists and careful value order are your first safety tools.",
+        "hint_2": "Solve the tasks one by one. First identify the exact columns to fill, then confirm each value belongs in that column before you run the insert."
+      },
+      "hint": "Plan the columns and value types before running the insert.",
+      "starterCode": "-- Task 1\n-- Insert one row with a full explicit column list\n\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "inventory_ops",
+        "resultShape": "table"
+      }
+    },
+    "m11_s02_column_lists_meaning": {
+      "title": "Why do column lists matter?",
+      "prompt": "Why are column lists helpful in insert statements?",
+      "help": {
+        "concept": "Column lists make it clear where each value is supposed to go.",
+        "hint_1": "Think safer alignment.",
+        "hint_2": "They make the target columns explicit instead of leaving the insert more ambiguous."
+      },
+      "hint": "Think clearer value-to-column matching.",
+      "options": {
+        "a": "They make it clearer where each value should go",
+        "b": "They delete the need for values",
+        "c": "They turn INSERT into SELECT",
+        "d": "They remove all column order"
+      }
+    },
+    "m11_s02_data_types_meaning": {
+      "title": "Why think about data types?",
+      "prompt": "Why should beginners think about data types when inserting?",
+      "help": {
+        "concept": "Each column expects a certain kind of value, so type awareness helps prevent bad inserts.",
+        "hint_1": "Think fit the value to the column.",
+        "hint_2": "A safer insert checks whether each value makes sense for its target column."
+      },
+      "hint": "Think the value should fit the target column.",
+      "options": {
+        "a": "Because each column expects a certain kind of value",
+        "b": "Because data types only matter in comments",
+        "c": "Because all columns accept every value the same way",
+        "d": "Because INSERT does not use columns"
+      }
+    },
+    "m11_s02_avoid_errors_meaning": {
+      "title": "How do insert errors often happen?",
+      "prompt": "Which idea best explains a common cause of insert errors?",
+      "help": {
+        "concept": "Insert errors often come from mismatched columns, missing required values, or incorrect value order.",
+        "hint_1": "Think wrong value in wrong place.",
+        "hint_2": "Many beginner errors happen before the query runs simply because the alignment was not checked carefully."
+      },
+      "hint": "Think mismatched columns or values.",
+      "options": {
+        "a": "Columns, values, or required data were not matched carefully",
+        "b": "The table always rejects every insert",
+        "c": "SELECT was missing from the query",
+        "d": "Aliases made the table disappear"
+      }
+    },
+    "m11_s02_reading_results_meaning": {
+      "title": "Why read inserted results?",
+      "prompt": "Why is reading inserted results a useful beginner habit?",
+      "help": {
+        "concept": "Reading rows back helps confirm the insert worked and the values landed where expected.",
+        "hint_1": "Think verify what was stored.",
+        "hint_2": "It is a simple way to check whether the insert matched your intention."
+      },
+      "hint": "Think verify the stored row.",
+      "options": {
+        "a": "It helps confirm the row was inserted as intended",
+        "b": "It automatically fixes wrong inserts",
+        "c": "It removes the need for column lists",
+        "d": "It prevents WHERE from being used"
+      }
+    },
+    "m11_s02_safety_focus_meaning": {
+      "title": "What is the main goal of safe inserting?",
+      "prompt": "What is the main goal of safe inserting in beginner SQL?",
+      "help": {
+        "concept": "Safe inserting aims to reduce mistakes before they happen by being deliberate about columns and values.",
+        "hint_1": "Think fewer preventable mistakes.",
+        "hint_2": "The goal is careful planning, not rushing the statement."
+      },
+      "hint": "Think careful inserts with fewer avoidable mistakes.",
+      "options": {
+        "a": "Reduce avoidable insert mistakes by planning carefully",
+        "b": "Make inserts as short and unclear as possible",
+        "c": "Avoid ever reading inserted rows",
+        "d": "Skip column names completely"
+      }
+    },
+    "m11_s02_column_lists_true": {
+      "title": "What is true about column lists?",
+      "prompt": "Select all true statements about using column lists in insert statements.",
+      "help": {
+        "concept": "Column lists improve clarity and help reduce alignment mistakes.",
+        "hint_1": "Think named targets.",
+        "hint_2": "Choose the statements about making inserts safer and easier to read."
+      },
+      "hint": "Think explicit target columns.",
+      "options": {
+        "a": "They make target columns explicit",
+        "b": "They help values line up more clearly",
+        "c": "They can make inserts easier to read",
+        "d": "They remove the need for correct value order",
+        "e": "They can make skipped columns more obvious"
+      }
+    },
+    "m11_s02_data_types_true": {
+      "title": "What is true about data type awareness?",
+      "prompt": "Select all true statements about data type awareness during inserts.",
+      "help": {
+        "concept": "Type awareness helps ensure each inserted value fits its target column.",
+        "hint_1": "Think fitting values to columns.",
+        "hint_2": "Choose the statements about value kind, meaning, and safer inserts."
+      },
+      "hint": "Think values should fit the intended columns.",
+      "options": {
+        "a": "Text-like values should go in text-oriented columns",
+        "b": "Numeric values should fit numeric columns",
+        "c": "Flag-style columns should get fitting values",
+        "d": "Type awareness never matters during inserts",
+        "e": "Thinking about value type can reduce insert mistakes"
+      }
+    },
+    "m11_s02_avoiding_errors_true": {
+      "title": "What is true about avoiding insert errors?",
+      "prompt": "Select all true statements about avoiding beginner insert errors.",
+      "help": {
+        "concept": "Many beginner insert errors are preventable with clear planning and value checking.",
+        "hint_1": "Think count, order, required columns.",
+        "hint_2": "Choose the statements about careful preparation before running the query."
+      },
+      "hint": "Think careful preparation prevents many mistakes.",
+      "options": {
+        "a": "Checking the number of values can help",
+        "b": "Checking value order can help",
+        "c": "Remembering required columns can help",
+        "d": "Ignoring the column list is always safer",
+        "e": "Reading the row afterward can help confirm success"
+      }
+    },
+    "m11_s02_safe_insert_workflow_true": {
+      "title": "What matches a good beginner workflow for safe inserting?",
+      "prompt": "Select all statements that match a good beginner workflow for safe inserting.",
+      "help": {
+        "concept": "A good workflow is to identify the target columns, check the values carefully, run the insert, and verify the result when needed.",
+        "hint_1": "Think plan, match, run, verify.",
+        "hint_2": "Choose the steps that reduce avoidable insert problems."
+      },
+      "hint": "Plan the target columns, line up the values, then verify.",
+      "options": {
+        "a": "Identify the columns being filled",
+        "b": "Check that the values fit those columns",
+        "c": "Use a clear column list",
+        "d": "Read the row afterward when needed",
+        "e": "Ignore whether the inserted values make sense"
+      }
+    }
+  }
+}

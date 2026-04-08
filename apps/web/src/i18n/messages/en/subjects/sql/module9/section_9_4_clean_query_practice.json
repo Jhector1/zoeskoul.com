@@ -1,0 +1,310 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_9": {
+        "clean_query_practice": {
+          "label": "Clean Query Practice",
+          "summary": "Practice refactoring messy queries, formatting joins, using aliases correctly, and writing readable report-style SQL.",
+          "cards": {
+            "sketch0": {
+              "title": "How do you refactor ugly queries?"
+            },
+            "sketch1": {
+              "title": "How do you format join queries well?"
+            },
+            "sketch2": {
+              "title": "How do you use aliases correctly?"
+            },
+            "sketch3": {
+              "title": "How do you write readable reports?"
+            },
+            "quiz": {
+              "title": "Quiz: Clean Query Practice"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_9": {
+        "section_9_4": {
+          "refactor_ugly_queries": {
+            "title": "Refactoring an ugly query means keeping the logic but improving the readability.",
+            "bodyMarkdown": "A query can work and still be hard to read.\n\nRefactoring means:\n\n- keep the same meaning\n- improve the layout\n- improve the naming\n- reduce clutter\n\nSo the big idea is:\n\n> refactoring SQL is about making the same logic easier for humans to understand"
+          },
+          "format_join_queries": {
+            "title": "Well-formatted joins make relationship logic easier to follow.",
+            "bodyMarkdown": "Join queries are often the first place where messy SQL becomes hard to read.\n\nFormatting helps readers spot:\n\n- where the query starts\n- what is being selected\n- which tables are joined\n- how the rows match\n\nSo the key idea is:\n\n> good join formatting reveals the relationship logic clearly"
+          },
+          "use_aliases_correctly": {
+            "title": "Good alias use makes the query shorter without making it confusing.",
+            "bodyMarkdown": "Aliases help when they reduce clutter.\n\nBut aliases should still be understandable.\n\nThat means good alias use should:\n\n- shorten repeated table names\n- keep the query readable\n- make output labels clearer\n\nSo the main idea is:\n\n> aliases should simplify the query, not make it more confusing"
+          },
+          "write_readable_reports": {
+            "title": "Readable reports combine clear layout, good labels, and understandable logic.",
+            "bodyMarkdown": "A readable report query should help the reader answer:\n\n- what is this row about?\n- where did this value come from?\n- what does this result column mean?\n\nSo a strong report query usually uses:\n\n- clear formatting\n- understandable aliases\n- helpful output names\n- clean join structure\n\nSo the important idea is:\n\n> readable reports are designed for people, not just for the database"
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "m9_s04_refactor_students_enrollments_query": {
+      "title": "Refactor an ugly join query",
+      "prompt": "The SQLite workspace already has the `school_relations_intro` dataset loaded.\n\nWrite a clean, readable query that returns `students.name` and `enrollments.term` by joining `students` to `enrollments`.\n\nUse aliases and formatting so the final query looks clean, then click **Run**.",
+      "help": {
+        "concept": "Refactoring keeps the same logic while improving formatting and naming.",
+        "hint_1": "Use a readable layout, short table aliases, and clear result labels if helpful.",
+        "hint_2": "Build the same join you already know, but present it in a way that is easy for a beginner to scan."
+      },
+      "hint": "Keep the logic the same, but make the query easier to read.",
+      "starterCode": "-- Rewrite this as a clean, readable join query\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table"
+      }
+    },
+    "m9_s04_format_students_courses_join": {
+      "title": "Format a multi-step join",
+      "prompt": "The tables already exist.\n\nWrite a clean, formatted query that returns `students.name` and `courses.title` by joining through `enrollments`.\n\nUse readable aliases and line breaks, then run it.",
+      "help": {
+        "concept": "Formatting is especially useful when a query joins through an intermediate relationship table.",
+        "hint_1": "Use one short alias per table and separate the join steps clearly.",
+        "hint_2": "Build the join in order and make each stage visually easy to follow."
+      },
+      "hint": "Format each join step clearly and use readable aliases.",
+      "starterCode": "-- Write a clean multi-line join through enrollments\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table"
+      }
+    },
+    "m9_s04_use_aliases_correctly": {
+      "title": "Use aliases correctly",
+      "prompt": "The tables already exist.\n\nWrite a query that returns `courses.title` and `departments.name`, using table aliases for the query and a clear output alias for the department name.\n\nThen click **Run**.",
+      "help": {
+        "concept": "Good aliases shorten the query and make the result easier to understand.",
+        "hint_1": "Use short table aliases inside the query and a more descriptive result label in the output.",
+        "hint_2": "Build the direct join normally, but use aliases to reduce clutter and improve the final column name."
+      },
+      "hint": "Use short aliases inside the query and a clear alias in the output.",
+      "starterCode": "-- Return course and department data with readable aliases\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table"
+      }
+    },
+    "m9_s04_readable_report_query": {
+      "title": "Write a readable report",
+      "prompt": "The tables already exist.\n\nWrite a readable report-style query that returns `students.name`, `courses.title`, and `enrollments.term` by joining through `enrollments`.\n\nUse readable formatting and clear output aliases, then run it.",
+      "help": {
+        "concept": "A readable report query makes the relationship and result meaning easy to understand.",
+        "hint_1": "Select the three result values you want, then format the join path clearly and label the output readably.",
+        "hint_2": "Build the three-table relationship in order and present the result as if another beginner will read it afterward."
+      },
+      "hint": "Make the result read like a small report.",
+      "starterCode": "-- Write a readable report query showing student, course, and term\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table"
+      }
+    },
+    "m9_s04_clean_queries_project": {
+      "title": "Practice clean SQL queries",
+      "prompt": "Use the SQL workspace on the right to practice clean, readable SQL on the `school_relations_intro` dataset.\n\nFor each task:\n\n1. write the query clearly\n2. use aliases where they help\n3. format the query so the structure is easy to scan\n4. click **Run**\n5. check whether the result is both correct and readable\n\nTasks:\n\n1. Refactor a students-and-enrollments join into a clean query\n2. Format a students-to-courses join through enrollments\n3. Use aliases correctly in a courses-and-departments join\n4. Write a readable student-course-term report\n5. Write a clean students query with clear output aliases\n\nRun one query at a time.\nThis project is about turning working SQL into readable SQL.",
+      "help": {
+        "concept": "Clean query practice is about improving readability while preserving correct logic.",
+        "hint_1": "Use readable layout, sensible aliases, and clear output names.",
+        "hint_2": "Solve the tasks one by one. Focus on whether the final query would feel easy for another beginner to review."
+      },
+      "hint": "Make the query correct first, then make it readable.",
+      "starterCode": "-- Task 1\n-- Refactor a students-and-enrollments join into a clean query\n\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table"
+      }
+    },
+    "m9_s04_refactor_ugly_query_meaning": {
+      "title": "What does it mean to refactor an ugly query?",
+      "prompt": "What is the main goal when refactoring an ugly SQL query?",
+      "help": {
+        "concept": "Refactoring improves readability while keeping the same logic and result.",
+        "hint_1": "Think same meaning, cleaner presentation.",
+        "hint_2": "The point is not to change the answer, but to make the query easier for humans to follow."
+      },
+      "hint": "Think same logic, cleaner query.",
+      "options": {
+        "a": "Keep the same logic but make the query easier to read",
+        "b": "Change the result completely",
+        "c": "Remove all joins from the query",
+        "d": "Delete the underlying tables"
+      }
+    },
+    "m9_s04_format_join_queries_meaning": {
+      "title": "Why format join queries carefully?",
+      "prompt": "Why is formatting especially useful in join queries?",
+      "help": {
+        "concept": "Join queries involve several moving parts, so formatting helps the relationship logic stand out.",
+        "hint_1": "Think selected columns, tables, and matches.",
+        "hint_2": "Formatting helps readers see how the tables connect."
+      },
+      "hint": "Think relationship logic becomes easier to follow.",
+      "options": {
+        "a": "It makes the relationship logic easier to follow",
+        "b": "It removes the need for ON conditions",
+        "c": "It changes INNER JOIN into LEFT JOIN",
+        "d": "It prevents aliases from being used"
+      }
+    },
+    "m9_s04_aliases_correctly_meaning": {
+      "title": "What does it mean to use aliases correctly?",
+      "prompt": "What is the main idea of using aliases correctly in SQL?",
+      "help": {
+        "concept": "Good aliases shorten the query or clarify the output without making the meaning harder to follow.",
+        "hint_1": "Think simplify, not confuse.",
+        "hint_2": "The alias should help the reader, not make the query harder to decode."
+      },
+      "hint": "Think shorten and clarify, not confuse.",
+      "options": {
+        "a": "Use aliases to simplify the query and clarify the output",
+        "b": "Use random aliases that are hard to understand",
+        "c": "Avoid aliases in every join",
+        "d": "Replace all column names completely"
+      }
+    },
+    "m9_s04_readable_reports_meaning": {
+      "title": "What makes a SQL report readable?",
+      "prompt": "What is the main goal of a readable report query?",
+      "help": {
+        "concept": "A readable report helps a human quickly understand the row meaning and the output columns.",
+        "hint_1": "Think clear row meaning and clear labels.",
+        "hint_2": "A good report query is designed to be understood by the reader, not only by the database."
+      },
+      "hint": "Think clear for human readers.",
+      "options": {
+        "a": "Make the result and query easy for a human to understand",
+        "b": "Hide where values came from",
+        "c": "Put everything on one line",
+        "d": "Avoid all output aliases"
+      }
+    },
+    "m9_s04_clean_sql_goal": {
+      "title": "Why practice clean SQL?",
+      "prompt": "Why is it useful for beginners to practice cleaning up SQL queries?",
+      "help": {
+        "concept": "Clean SQL is easier to read, debug, review, and improve later.",
+        "hint_1": "Think easier to trust and fix.",
+        "hint_2": "Readable queries are easier to learn from than crowded ones."
+      },
+      "hint": "Think easier to read and improve later.",
+      "options": {
+        "a": "Because clean SQL is easier to read, review, and improve",
+        "b": "Because clean SQL removes the need for correct logic",
+        "c": "Because messy SQL is always better for learning",
+        "d": "Because formatting changes the data in the tables"
+      }
+    },
+    "m9_s04_refactoring_true": {
+      "title": "What is true about refactoring SQL?",
+      "prompt": "Select all true statements about refactoring SQL queries.",
+      "help": {
+        "concept": "Refactoring improves readability while keeping the query's purpose and result consistent.",
+        "hint_1": "Think same result, better readability.",
+        "hint_2": "Choose the statements about cleaning up the query without changing what it means."
+      },
+      "hint": "Think same meaning, better presentation.",
+      "options": {
+        "a": "Refactoring can improve readability",
+        "b": "Refactoring should keep the core query meaning the same",
+        "c": "Refactoring can improve formatting and aliases",
+        "d": "Refactoring always means changing the tables",
+        "e": "Refactoring can make join logic easier to review"
+      }
+    },
+    "m9_s04_join_formatting_true": {
+      "title": "What is true about formatting join queries?",
+      "prompt": "Select all true statements about formatting join queries well.",
+      "help": {
+        "concept": "Formatted joins are easier to scan because the relationship steps are easier to see.",
+        "hint_1": "Think visible join structure.",
+        "hint_2": "Choose the statements about layout that helps readers follow the join path."
+      },
+      "hint": "Think visible join steps.",
+      "options": {
+        "a": "Clear layout can make join paths easier to follow",
+        "b": "Separating JOIN and ON parts can improve readability",
+        "c": "Readable join formatting helps beginners see how tables connect",
+        "d": "Formatting joins removes the need to know relationship columns",
+        "e": "Well-formatted joins are easier to review later"
+      }
+    },
+    "m9_s04_aliases_correctly_true": {
+      "title": "What is true about using aliases correctly?",
+      "prompt": "Select all true statements about good alias use in SQL.",
+      "help": {
+        "concept": "Good aliases help the reader rather than creating more confusion.",
+        "hint_1": "Think simplify and clarify.",
+        "hint_2": "Choose the statements about making the query shorter and the output clearer."
+      },
+      "hint": "Think helpful, not confusing.",
+      "options": {
+        "a": "Good table aliases can reduce clutter",
+        "b": "Good column aliases can improve output readability",
+        "c": "Aliases should make the query easier to understand",
+        "d": "Aliases should be as confusing as possible",
+        "e": "Alias choice affects how easy the query is to review"
+      }
+    },
+    "m9_s04_readable_reports_true": {
+      "title": "What is true about readable SQL reports?",
+      "prompt": "Select all true statements about readable report-style SQL queries.",
+      "help": {
+        "concept": "Readable reports combine understandable structure, output names, and join logic.",
+        "hint_1": "Think report for a human reader.",
+        "hint_2": "Choose the statements about making the result and the query easy to interpret."
+      },
+      "hint": "Think clear query and clear result.",
+      "options": {
+        "a": "Readable reports often use clear output names",
+        "b": "Readable reports benefit from clean formatting",
+        "c": "Readable reports make it easier to understand what each row shows",
+        "d": "Readable reports should hide the source of the values",
+        "e": "Readable reports are easier to review and explain"
+      }
+    },
+    "m9_s04_clean_query_workflow_true": {
+      "title": "What matches a good beginner workflow for cleaning up SQL?",
+      "prompt": "Select all statements that match a good beginner workflow for cleaning up SQL queries.",
+      "help": {
+        "concept": "A good workflow is to confirm the logic, improve the structure, clarify names, and check whether the result is easy to understand.",
+        "hint_1": "Think logic first, readability second.",
+        "hint_2": "Choose the steps that turn a working query into a readable one."
+      },
+      "hint": "Keep the logic correct, then improve readability.",
+      "options": {
+        "a": "Make sure the query logic is correct first",
+        "b": "Improve spacing and line breaks",
+        "c": "Use aliases that help rather than confuse",
+        "d": "Check whether the output names are readable",
+        "e": "Stop caring about readability once the query runs"
+      }
+    }
+  }
+}

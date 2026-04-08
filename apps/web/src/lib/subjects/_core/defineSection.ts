@@ -1,5 +1,6 @@
 // src/lib/subjects/_core/defineSection.ts
-import type { JsonObject, TopicBundle } from "./defineTopicBundle";
+import type { JsonObject } from "./defineTopicBundle";
+import {TopicBundle} from "@/lib/practice/generator/engines/utils";
 
 export type SectionInput = {
     slug: string;

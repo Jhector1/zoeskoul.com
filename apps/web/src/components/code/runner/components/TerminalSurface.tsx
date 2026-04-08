@@ -56,8 +56,23 @@ export default function TerminalSurface(props: {
     controller: CodeRunnerController;
     disabled: boolean;
     sqlSchemaSql?: string;
+    sqlInitialTableSnapshots?: Record<
+        string,
+        {
+            name: string;
+            columns: Array<{ name: string; type?: string | null }>;
+            rows: unknown[][];
+            rowCount: number;
+        }
+    >;
+    sqlViewKey?: string;
 }) {
-    const { controller, disabled, sqlSchemaSql = "" } = props;
+    const {
+        controller,
+        disabled,
+        sqlSchemaSql = "",
+        sqlInitialTableSnapshots,
+    } = props;
 
     const surface = resolveSurfaceKind(controller);
 
@@ -84,11 +99,13 @@ export default function TerminalSurface(props: {
 
         return (
             <SqlResultsPane
+                key={`${props.sqlViewKey ?? ""}::${sqlSchemaSql}`}
                 result={sqlResult}
                 busy={controller.busy}
                 schemaSql={sqlSchemaSql}
-            />
-        );
+                initialTableSnapshots={sqlInitialTableSnapshots}
+                viewKey={props.sqlViewKey}
+            />);
     }
 
     if (!hasRenderableOutput(controller)) {

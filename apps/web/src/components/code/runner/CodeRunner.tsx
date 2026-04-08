@@ -35,6 +35,15 @@ type CodeRunnerWithStdinProps = CodeRunnerProps & {
     onChangeStdin?: (value: string) => void;
     showStdinEditor?: boolean;
     stdinPlaceholder?: string;
+    sqlInitialTableSnapshots?: Record<
+        string,
+        {
+            name: string;
+            columns: Array<{ name: string; type?: string | null }>;
+            rows: unknown[][];
+            rowCount: number;
+        }
+    >;
 };
 
 const RUNNER_SURFACE =
@@ -106,6 +115,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         initialStdin,
         onChangeStdin,
         showStdinEditor = false,
+        sqlInitialTableSnapshots,
         stdinPlaceholder = "Type stdin here. Each new line becomes one input line.",
     } = props as any;
 
@@ -415,11 +425,17 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                     controller={term}
                     disabled={disabled}
                     sqlSchemaSql={sqlSchemaSql ?? sqlSetupSql ?? ""}
+                    sqlInitialTableSnapshots={sqlInitialTableSnapshots}
+                    sqlViewKey={[
+                        editorModelKey ?? "",
+                        sqlDatasetId ?? "",
+                        lang,
+                        sqlDialect,
+                    ].join("::")}
                 />
             </div>
         );
     };
-
     const renderEditorPane = (editorHeight: number) => (
         <div
             className={PANEL_EDITOR}

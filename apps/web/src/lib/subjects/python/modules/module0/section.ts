@@ -1,6 +1,6 @@
 import { defineSection } from "@/lib/subjects/_core/defineSection";
 import { COMMENTS_INTRO_TOPIC } from "./topics/comments_intro";
-import { EDITOR_WORKSPACE_OVERVIEW_TOPIC } from "./topics/workspace";
+import { EDITOR_WORKSPACE_OVERVIEW_TOPIC } from "./topics/editor_workspace_overview";
 import {COMPUTER_INTRO_TOPIC} from "@/lib/subjects/python/modules/module0/topics/computer_intro";
 import {PROGRAMMING_INTRO_TOPIC} from "@/lib/subjects/python/modules/module0/topics/programming_intro";
 import {SYNTAX_INTRO_TOPIC} from "@/lib/subjects/python/modules/module0/topics/syntax_intro";

@@ -1,0 +1,415 @@
+{
+  "topicId": "search_and_cleanup_practice",
+  "subjectSlug": "sql",
+  "moduleSlug": "sql_module_4",
+  "sectionSlug": "section_4_1",
+  "prefix": "sql4",
+  "minutes": 8,
+
+  "topic": {
+    "labelKey": "topics.sql.sql_module_4.search_and_cleanup_practice.label",
+    "summaryKey": "topics.sql.sql_module_4.search_and_cleanup_practice.summary"
+  },
+
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_4.search_and_cleanup_practice.cards.sketch0.title",
+      "sketchId": "search_names",
+      "height": 520
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_4.search_and_cleanup_practice.cards.sketch1.title",
+      "sketchId": "filter_categories",
+      "height": 520
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_4.search_and_cleanup_practice.cards.sketch2.title",
+      "sketchId": "find_missing_data",
+      "height": 520
+    },
+    {
+      "id": "sketch3",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_4.search_and_cleanup_practice.cards.sketch3.title",
+      "sketchId": "combine_text_and_null_filters",
+      "height": 520
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.sql.sql_module_4.search_and_cleanup_practice.cards.quiz.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "search_names_contains_li",
+            "titleKey": "topics.sql.sql_module_4.search_and_cleanup_practice.projectSteps.search_names_contains_li.title",
+            "exerciseKey": "m4_s04_search_names_contains_li",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "filter_status_groups",
+            "titleKey": "topics.sql.sql_module_4.search_and_cleanup_practice.projectSteps.filter_status_groups.title",
+            "exerciseKey": "m4_s04_filter_status_groups",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "find_missing_email",
+            "titleKey": "topics.sql.sql_module_4.search_and_cleanup_practice.projectSteps.find_missing_email.title",
+            "exerciseKey": "m4_s04_find_missing_email",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql.sql_module_4.search_and_cleanup_practice.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 3,
+        "allowReveal": true,
+        "preferKind": "fill_blank_choice",
+        "maxAttempts": 10
+      }
+    }
+  ],
+
+  "sketches": [
+    {
+      "id": "search_names",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_4.search_and_cleanup_practice.search_names.title",
+      "bodyKey": "sketches.sql.sql_module_4.search_and_cleanup_practice.search_names.bodyMarkdown"
+    },
+    {
+      "id": "filter_categories",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_4.search_and_cleanup_practice.filter_categories.title",
+      "bodyKey": "sketches.sql.sql_module_4.search_and_cleanup_practice.filter_categories.bodyMarkdown"
+    },
+    {
+      "id": "find_missing_data",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_4.search_and_cleanup_practice.find_missing_data.title",
+      "bodyKey": "sketches.sql.sql_module_4.search_and_cleanup_practice.find_missing_data.bodyMarkdown"
+    },
+    {
+      "id": "combine_text_and_null_filters",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_4.search_and_cleanup_practice.combine_text_and_null_filters.title",
+      "bodyKey": "sketches.sql.sql_module_4.search_and_cleanup_practice.combine_text_and_null_filters.bodyMarkdown"
+    }
+  ],
+
+  "exercises": [
+    {
+      "id": "m4_s04_search_names_contains_li",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "quiz.m4_s04_search_names_contains_li",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "customers_cleanup",
+        "resultShape": "table",
+        "solutionCode": "SELECT full_name FROM customers WHERE full_name LIKE '%li%';"
+      }
+    },
+    {
+      "id": "m4_s04_filter_status_groups",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "quiz.m4_s04_filter_status_groups",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "customers_cleanup",
+        "resultShape": "table",
+        "solutionCode": "SELECT full_name, status FROM customers WHERE status IN ('active', 'inactive');"
+      }
+    },
+    {
+      "id": "m4_s04_find_missing_email",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "quiz.m4_s04_find_missing_email",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "customers_cleanup",
+        "resultShape": "table",
+        "solutionCode": "SELECT full_name, email FROM customers WHERE email IS NULL;"
+      }
+    },
+
+    {
+      "id": "m4_s04_search_names_meaning",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m4_s04_search_names_meaning",
+      "optionIds": ["a", "b", "c", "d"],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "m4_s04_filter_groups_meaning",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m4_s04_filter_groups_meaning",
+      "optionIds": ["a", "b", "c", "d"],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "m4_s04_missing_data_meaning",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m4_s04_missing_data_meaning",
+      "optionIds": ["a", "b", "c", "d"],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "m4_s04_combine_text_null_meaning",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m4_s04_combine_text_null_meaning",
+      "optionIds": ["a", "b", "c", "d"],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "m4_s04_combined_result_check",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m4_s04_combined_result_check",
+      "optionIds": ["a", "b", "c", "d"],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+
+    {
+      "id": "m4_s04_search_names_true",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m4_s04_search_names_true",
+      "optionIds": ["a", "b", "c", "d", "e"],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": ["a", "b", "c", "e"]
+      }
+    },
+    {
+      "id": "m4_s04_filter_groups_true",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m4_s04_filter_groups_true",
+      "optionIds": ["a", "b", "c", "d", "e"],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": ["a", "b", "c", "e"]
+      }
+    },
+    {
+      "id": "m4_s04_missing_data_true",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m4_s04_missing_data_true",
+      "optionIds": ["a", "b", "c", "d", "e"],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": ["a", "b", "c", "e"]
+      }
+    },
+    {
+      "id": "m4_s04_combine_text_null_true",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m4_s04_combine_text_null_true",
+      "optionIds": ["a", "b", "c", "d", "e"],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": ["a", "b", "c", "e"]
+      }
+    },
+    {
+      "id": "m4_s04_practice_workflow_true",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m4_s04_practice_workflow_true",
+      "optionIds": ["a", "b", "c", "d", "e"],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": ["a", "b", "c", "d"]
+      }
+    },
+
+    {
+      "id": "m4_s04_reorder_name_search_logic",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m4_s04_reorder_name_search_logic",
+      "tokenIds": ["t1", "t2", "t3"],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": ["t1", "t2", "t3"]
+      }
+    },
+    {
+      "id": "m4_s04_reorder_group_filter_logic",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m4_s04_reorder_group_filter_logic",
+      "tokenIds": ["t1", "t2", "t3"],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": ["t1", "t2", "t3"]
+      }
+    },
+    {
+      "id": "m4_s04_reorder_missing_data_logic",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m4_s04_reorder_missing_data_logic",
+      "tokenIds": ["t1", "t2", "t3"],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": ["t1", "t2", "t3"]
+      }
+    },
+    {
+      "id": "m4_s04_reorder_text_null_combo",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m4_s04_reorder_text_null_combo",
+      "tokenIds": ["t1", "t2", "t3"],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": ["t1", "t2", "t3"]
+      }
+    },
+    {
+      "id": "m4_s04_reorder_practice_workflow",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m4_s04_reorder_practice_workflow",
+      "tokenIds": ["t1", "t2", "t3"],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": ["t1", "t2", "t3"]
+      }
+    },
+
+    {
+      "id": "m4_s04_fill_like_tool",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m4_s04_fill_like_tool",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "LIKE"
+      }
+    },
+    {
+      "id": "m4_s04_fill_group_filter_tool",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m4_s04_fill_group_filter_tool",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "IN"
+      }
+    },
+    {
+      "id": "m4_s04_fill_missing_data_tool",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m4_s04_fill_missing_data_tool",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "IS NULL"
+      }
+    },
+    {
+      "id": "m4_s04_fill_combo_logic_word",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m4_s04_fill_combo_logic_word",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "combined"
+      }
+    },
+    {
+      "id": "m4_s04_fill_practice_check",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m4_s04_fill_practice_check",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "verify"
+      }
+    }
+  ]
+}

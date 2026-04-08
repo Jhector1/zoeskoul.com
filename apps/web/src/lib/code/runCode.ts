@@ -155,10 +155,16 @@ async function buildSubmissionBody(req: CodeRunReq) {
 function normalizeSqlReq(req: RunReq): RunReq {
   if (!isSqlRunReq(req)) return req;
 
+  const dialect =
+      (req as any).dialect ??
+      (req as any).sqlDialect ??
+      "sqlite";
+
   return {
     ...req,
-    schemaSql: req.schemaSql ?? req.setupSql,
-  };
+    dialect,
+    schemaSql: (req as any).schemaSql ?? (req as any).setupSql,
+  } as any;
 }
 
 export async function submitRun(req: RunReq): Promise<RunSubmitResult> {

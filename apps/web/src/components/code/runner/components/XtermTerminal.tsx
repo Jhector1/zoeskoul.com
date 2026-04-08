@@ -171,8 +171,11 @@ export default function XtermTerminal(props: {
             const rect = host.getBoundingClientRect();
             const cell = measureCell(probe);
 
-            const cols = Math.max(20, Math.floor((rect.width - 16) / cell.width));
-            const rows = Math.max(8, Math.floor((rect.height - 8) / cell.height));
+            const horizontalPadding = 16;
+            const verticalPadding = 16;
+
+            const cols = Math.max(20, Math.floor((rect.width - horizontalPadding) / cell.width));
+            const rows = Math.max(8, Math.floor((rect.height - verticalPadding) / cell.height) - 1);
 
             const prev = lastSizeRef.current;
             if (prev && prev.cols === cols && prev.rows === rows) return;
@@ -184,7 +187,6 @@ export default function XtermTerminal(props: {
                 onResizeRef.current(cols, rows);
             } catch {}
         };
-
         const scheduleResize = () => {
             if (resizeTimerRef.current != null) {
                 window.clearTimeout(resizeTimerRef.current);
@@ -428,7 +430,7 @@ export default function XtermTerminal(props: {
             >
                 <div
                     ref={hostRef}
-                    className="h-full w-full min-h-[240px] px-2"
+                    className="relative h-full min-h-0 w-full px-2 pb-2"
                     aria-label="Interactive terminal"
                     onMouseDown={(e) => {
                         e.preventDefault();

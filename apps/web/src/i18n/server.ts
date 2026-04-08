@@ -38,3 +38,23 @@ export async function getServerI18n(namespace?: string) {
 
     return { tMaybe, rawMaybe };
 }
+
+
+import "server-only";
+
+import type { Values } from "@/i18n/tagged";
+import { resolveDeepTagged, type DeepResolved } from "@/i18n/resolveDeepTagged";
+
+export async function resolveTaggedOnServer<T>(
+    input: T,
+    namespace?: string,
+    values?: Values,
+): Promise<DeepResolved<T>> {
+    const { tMaybe } = await getServerI18n(namespace);
+
+    return resolveDeepTagged(
+        input,
+        (key, v) => tMaybe(key, `@:${key}`, v as Record<string, any> | undefined),
+        values,
+    ) as DeepResolved<T>;
+}

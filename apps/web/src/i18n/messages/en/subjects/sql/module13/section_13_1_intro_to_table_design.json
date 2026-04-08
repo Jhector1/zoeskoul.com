@@ -1,0 +1,310 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_13": {
+        "intro_to_table_design": {
+          "label": "Intro to Table Design",
+          "summary": "Learn what `CREATE TABLE` does, how to choose clear column names, how to pick useful data types, and how to design tables so they are easy to understand later.",
+          "cards": {
+            "sketch0": {
+              "title": "What does CREATE TABLE do?"
+            },
+            "sketch1": {
+              "title": "How do you choose column names?"
+            },
+            "sketch2": {
+              "title": "How do you choose data types?"
+            },
+            "sketch3": {
+              "title": "How do you design for clarity?"
+            },
+            "quiz": {
+              "title": "Quiz: Intro to Table Design"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_13": {
+        "section_13_1": {
+          "what_create_table_does": {
+            "title": "`CREATE TABLE` defines a new table structure.",
+            "bodyMarkdown": "Until now, many beginner queries worked with tables that already existed.\n\n`CREATE TABLE` is different.\nIt is used to define:\n\n- the table name\n- the columns\n- the data types\n- sometimes the rules for the data too\n\nSo the big idea is:\n\n> `CREATE TABLE` is how you design a table before putting data into it"
+          },
+          "choosing_column_names": {
+            "title": "Good column names should be clear and easy to understand.",
+            "bodyMarkdown": "A strong column name should tell the reader what the data means.\n\nBeginner-friendly names are usually:\n\n- specific\n- simple\n- consistent\n\nFor example, `student_name` is usually clearer than something vague like `info1`.\n\nSo the key idea is:\n\n> good column names make the table easier to read and use later"
+          },
+          "choosing_data_types": {
+            "title": "Each column should use a data type that fits the kind of value it stores.",
+            "bodyMarkdown": "A table works best when each column is designed for the right kind of data.\n\nFor example:\n\n- ids often use integers\n- names often use text\n- prices often use decimal-style numbers\n- dates are often stored as date-like text in beginner SQLite work\n\nSo the main idea is:\n\n> the data type should match the kind of information in the column"
+          },
+          "designing_for_clarity": {
+            "title": "A clear table design is easier to learn, query, and check in the SQL workspace.",
+            "bodyMarkdown": "Good table design is not only about being correct.\nIt is also about being readable.\n\nIn this module, after you run `CREATE TABLE`, you can use:\n\n- the **Tables** tab to inspect the table you created\n- later, the **ERD** tab to see relationships\n- later, the **Chen** tab to see entities and attributes\n\nSo the important idea is:\n\n> clear design helps both SQL and humans understand the table"
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "m13_s01_create_students_shell": {
+      "title": "Create a simple students table",
+      "prompt": "The SQLite workspace is using the blank `ddl_blank` dataset.\n\nWrite a query that creates a table named `students` with these columns:\n\n- `id` as `INTEGER`\n- `name` as `TEXT`\n- `grade_level` as `INTEGER`\n- `city` as `TEXT`\n\nThen click **Run**.\nAfter that, open the **Tables** tab and inspect the table structure.",
+      "help": {
+        "concept": "A `CREATE TABLE` query defines the table name and each column's name and type.",
+        "hint_1": "Start with `CREATE TABLE students (` and then list each column on its own line.",
+        "hint_2": "Build the table by naming it first, then writing each column with its type inside parentheses, separated by commas."
+      },
+      "hint": "Write `CREATE TABLE`, then list each column name with its type.",
+      "starterCode": "-- Create a students table\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "ddl_blank",
+        "resultShape": "table"
+      }
+    },
+    "m13_s01_create_products_shell": {
+      "title": "Create a simple products table",
+      "prompt": "The dataset is blank.\n\nWrite a query that creates a table named `products` with these columns:\n\n- `id` as `INTEGER`\n- `name` as `TEXT`\n- `price` as `REAL`\n- `category` as `TEXT`\n\nThen run it and inspect the **Tables** tab.",
+      "help": {
+        "concept": "A table definition becomes clearer when the column names describe the kind of values they will store.",
+        "hint_1": "Use `CREATE TABLE products (...)` and list the four columns inside.",
+        "hint_2": "Make sure each column uses the correct name and the matching type before you run the statement."
+      },
+      "hint": "Name the table first, then define the columns inside parentheses.",
+      "starterCode": "-- Create a products table\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "ddl_blank",
+        "resultShape": "table"
+      }
+    },
+    "m13_s01_create_events_shell": {
+      "title": "Create a table with date-like columns",
+      "prompt": "The dataset is blank.\n\nWrite a query that creates a table named `events` with these columns:\n\n- `id` as `INTEGER`\n- `title` as `TEXT`\n- `event_date` as `TEXT`\n- `created_at` as `TEXT`\n\nThen click **Run**.",
+      "help": {
+        "concept": "In beginner SQLite work, date-like values are often stored as text columns.",
+        "hint_1": "Use `TEXT` for both date-like columns here.",
+        "hint_2": "Build the table normally, and give the date-style columns names that clearly describe what they mean."
+      },
+      "hint": "Use `TEXT` for the date-style columns in this beginner table.",
+      "starterCode": "-- Create an events table\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "ddl_blank",
+        "resultShape": "table"
+      }
+    },
+    "m13_s01_create_clear_contacts_table": {
+      "title": "Design for clarity",
+      "prompt": "The dataset is blank.\n\nWrite a query that creates a table named `contacts` with clear column names:\n\n- `id` as `INTEGER`\n- `full_name` as `TEXT`\n- `email` as `TEXT`\n- `phone_number` as `TEXT`\n\nThen run it.",
+      "help": {
+        "concept": "Good table design uses column names that clearly describe the stored meaning.",
+        "hint_1": "Use the exact column names listed in the prompt.",
+        "hint_2": "The main goal is clarity: choose the table name and column names exactly as given, then assign the matching types."
+      },
+      "hint": "Use the clearer names exactly as listed.",
+      "starterCode": "-- Create a contacts table with clear column names\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "ddl_blank",
+        "resultShape": "table"
+      }
+    },
+    "m13_s01_intro_design_project": {
+      "title": "Practice basic table design",
+      "prompt": "Use the SQL workspace on the right to practice `CREATE TABLE` on the blank `ddl_blank` dataset.\n\nFor each task:\n\n1. write the table definition carefully\n2. click **Run**\n3. open the **Tables** tab to inspect the table you created\n4. check whether the column names and types feel clear\n\nTasks:\n\n1. Create a `students` table\n2. Create a `products` table\n3. Create an `events` table with date-like text columns\n4. Create a `contacts` table with clear names\n5. Create a `books` table with `id`, `title`, `author_name`, and `published_at`\n\nRun one query at a time.\nThis project is about learning the basic shape of table design.",
+      "help": {
+        "concept": "Beginner table design starts with four things: a clear table name, clear column names, fitting data types, and readable structure.",
+        "hint_1": "Keep the table names simple and the columns meaningful.",
+        "hint_2": "Solve the tasks one by one. Focus first on what the table is for, then name the columns clearly, then choose types that fit the values."
+      },
+      "hint": "Start with what the table is for, then name and type the columns clearly.",
+      "starterCode": "-- Task 1\n-- Create a students table\n\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "ddl_blank",
+        "resultShape": "table"
+      }
+    },
+    "m13_s01_create_table_meaning": {
+      "title": "What does CREATE TABLE do?",
+      "prompt": "What is the main job of `CREATE TABLE` in SQL?",
+      "help": {
+        "concept": "`CREATE TABLE` defines a new table and its structure.",
+        "hint_1": "Think design the table.",
+        "hint_2": "It is used before inserting data, because it defines the table layout first."
+      },
+      "hint": "Think define a new table structure.",
+      "options": {
+        "a": "It defines a new table and its structure",
+        "b": "It only reads rows from a table",
+        "c": "It only updates stored values",
+        "d": "It deletes tables automatically"
+      }
+    },
+    "m13_s01_column_names_meaning": {
+      "title": "Why do column names matter?",
+      "prompt": "Why are clear column names important in beginner table design?",
+      "help": {
+        "concept": "Clear names make the table easier to understand later.",
+        "hint_1": "Think readability.",
+        "hint_2": "A column name should help the reader understand the stored meaning quickly."
+      },
+      "hint": "Think clearer names make the table easier to read.",
+      "options": {
+        "a": "They make the table easier to understand later",
+        "b": "They remove the need for data types",
+        "c": "They automatically insert rows",
+        "d": "They replace every constraint"
+      }
+    },
+    "m13_s01_data_types_meaning": {
+      "title": "Why choose data types carefully?",
+      "prompt": "Why is choosing the right data type important when designing a table?",
+      "help": {
+        "concept": "The type should match the kind of value the column will store.",
+        "hint_1": "Think type fits meaning.",
+        "hint_2": "A column works best when its type matches the kind of data it is meant to hold."
+      },
+      "hint": "Think the type should fit the kind of value.",
+      "options": {
+        "a": "Because the type should match the kind of value stored in the column",
+        "b": "Because every column should always use TEXT",
+        "c": "Because data types only matter in SELECT",
+        "d": "Because types replace column names"
+      }
+    },
+    "m13_s01_clarity_meaning": {
+      "title": "What does designing for clarity mean?",
+      "prompt": "What is the main idea of designing a table for clarity?",
+      "help": {
+        "concept": "A clear table is easier to read, use, and check later.",
+        "hint_1": "Think readable structure.",
+        "hint_2": "Clarity means the names, types, and layout all make sense together."
+      },
+      "hint": "Think easy to read and easy to understand.",
+      "options": {
+        "a": "Make the table easy to read and understand later",
+        "b": "Use confusing short names everywhere",
+        "c": "Avoid using data types",
+        "d": "Never inspect the table after creating it"
+      }
+    },
+    "m13_s01_tools_meaning": {
+      "title": "Why is the Tables tab useful here?",
+      "prompt": "Why is the **Tables** tab useful in Module 13 after running `CREATE TABLE`?",
+      "help": {
+        "concept": "The Tables tab helps learners inspect the structure they just created.",
+        "hint_1": "Think see the created table.",
+        "hint_2": "It is a quick way to inspect the table name and the columns after the DDL query runs."
+      },
+      "hint": "Think inspect the created structure.",
+      "options": {
+        "a": "It lets you inspect the table you just created",
+        "b": "It automatically inserts sample rows",
+        "c": "It deletes the table after creation",
+        "d": "It hides the column names"
+      }
+    },
+    "m13_s01_create_table_true": {
+      "title": "What is true about CREATE TABLE?",
+      "prompt": "Select all true statements about `CREATE TABLE`.",
+      "help": {
+        "concept": "`CREATE TABLE` is used to define a table name, columns, and types.",
+        "hint_1": "Think define structure.",
+        "hint_2": "Choose the statements about designing the table before data is stored."
+      },
+      "hint": "Think table definition, not row reading.",
+      "options": {
+        "a": "`CREATE TABLE` defines a table structure",
+        "b": "`CREATE TABLE` can define columns",
+        "c": "`CREATE TABLE` can define data types",
+        "d": "`CREATE TABLE` only reads existing rows",
+        "e": "`CREATE TABLE` is part of database design"
+      }
+    },
+    "m13_s01_column_names_true": {
+      "title": "What is true about choosing column names?",
+      "prompt": "Select all true statements about choosing column names in beginner table design.",
+      "help": {
+        "concept": "Good column names make the table easier to understand and use.",
+        "hint_1": "Think clear and meaningful.",
+        "hint_2": "Choose the statements about names that help readers understand the data."
+      },
+      "hint": "Think clear names that describe the data.",
+      "options": {
+        "a": "Good column names should describe the stored meaning",
+        "b": "Clear names make later queries easier to read",
+        "c": "Consistent naming improves clarity",
+        "d": "Column names should be vague whenever possible",
+        "e": "Readable names help the table design feel cleaner"
+      }
+    },
+    "m13_s01_data_types_true": {
+      "title": "What is true about choosing data types?",
+      "prompt": "Select all true statements about choosing data types in beginner table design.",
+      "help": {
+        "concept": "The chosen type should fit the intended kind of value in the column.",
+        "hint_1": "Think fit the type to the meaning.",
+        "hint_2": "Choose the statements about matching types to the stored values."
+      },
+      "hint": "Think the type should fit the data.",
+      "options": {
+        "a": "IDs often use integer types",
+        "b": "Names often use text types",
+        "c": "Prices often use decimal-style numeric types",
+        "d": "All columns should always use the same type",
+        "e": "Choosing better types improves the table design"
+      }
+    },
+    "m13_s01_clarity_true": {
+      "title": "What is true about designing for clarity?",
+      "prompt": "Select all true statements about designing tables for clarity.",
+      "help": {
+        "concept": "Clear design helps learners understand and inspect the table more easily.",
+        "hint_1": "Think readable names, readable types, readable structure.",
+        "hint_2": "Choose the statements about making the design easier for humans to understand."
+      },
+      "hint": "Think readable design choices.",
+      "options": {
+        "a": "Clarity makes a table easier to inspect later",
+        "b": "Clarity makes later queries easier to understand",
+        "c": "Clarity comes from good names and fitting types",
+        "d": "Clarity means the design should be as confusing as possible",
+        "e": "A clear design helps both learning and debugging"
+      }
+    },
+    "m13_s01_design_workflow_true": {
+      "title": "What matches a good beginner workflow for table design?",
+      "prompt": "Select all statements that match a good beginner workflow for designing a new table.",
+      "help": {
+        "concept": "A good workflow is to decide the table purpose, then name columns clearly, then choose fitting data types, then inspect the result.",
+        "hint_1": "Think purpose, names, types, inspect.",
+        "hint_2": "Choose the steps that help turn an idea into a readable table definition."
+      },
+      "hint": "Start with the table purpose, then choose names and types carefully.",
+      "options": {
+        "a": "Decide what the table is for",
+        "b": "Choose clear column names",
+        "c": "Choose fitting data types",
+        "d": "Run the statement and inspect the table afterward",
+        "e": "Ignore whether the column names make sense"
+      }
+    }
+  }
+}

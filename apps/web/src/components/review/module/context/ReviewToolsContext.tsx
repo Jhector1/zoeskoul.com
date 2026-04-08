@@ -9,13 +9,32 @@ import React, {
     useRef,
     useState,
 } from "react";
-import { CodeLanguage } from "@/lib/practice/types";
+import {CodeLanguage, type SqlDialect} from "@/lib/practice/types";
 import type { CodeFeedback } from "@/lib/code/feedback/types";
+
+type SqlTableSnapshot = {
+    name: string;
+    columns: Array<{
+        name: string;
+        type?: string | null;
+    }>;
+    rows: unknown[][];
+    rowCount: number;
+};
+
+type SqlTableSnapshots = Record<string, SqlTableSnapshot>;
 
 export type RegisterArgs = {
     lang: CodeLanguage;
     code: string;
     stdin?: string;
+
+    sqlDialect?: SqlDialect;
+    sqlDatasetId?: string;
+    sqlSchemaSql?: string;
+    sqlSeedSql?: string;
+    sqlInitialTableSnapshots?: SqlTableSnapshots;
+
     onPatch: (patch: any) => void;
 };
 
@@ -156,8 +175,26 @@ export function ReviewToolsProvider({
                     : typeof patch?.stdin === "string"
                         ? patch.stdin
                         : cur.stdin,
-        };
 
+            sqlDialect:
+                patch?.codeSqlDialect ?? patch?.sqlDialect ?? cur.sqlDialect,
+            sqlDatasetId:
+                typeof patch?.sqlDatasetId === "string"
+                    ? patch.sqlDatasetId
+                    : cur.sqlDatasetId,
+            sqlSchemaSql:
+                typeof patch?.sqlSchemaSql === "string"
+                    ? patch.sqlSchemaSql
+                    : cur.sqlSchemaSql,
+            sqlSeedSql:
+                typeof patch?.sqlSeedSql === "string"
+                    ? patch.sqlSeedSql
+                    : cur.sqlSeedSql,
+            sqlInitialTableSnapshots:
+                patch?.sqlInitialTableSnapshots && typeof patch.sqlInitialTableSnapshots === "object"
+                    ? patch.sqlInitialTableSnapshots
+                    : cur.sqlInitialTableSnapshots,
+        };
         registryRef.current.set(id, next);
         cur.onPatch?.(patch);
     }, []);
@@ -185,8 +222,18 @@ export function ReviewToolsProvider({
 
         clearRunFeedback(id);
         syncCodeInputSnapshot(id, patch);
-        bindNow(id);
-    }, [bindNow, clearRunFeedback, syncCodeInputSnapshot]);
+
+        const current = (externalBoundId ?? boundId) ?? null;
+        if (current !== id) {
+            bindNow(id);
+        }
+    }, [
+        bindNow,
+        clearRunFeedback,
+        syncCodeInputSnapshot,
+        externalBoundId,
+        boundId,
+    ]);
 
     const requestBind = useCallback(
         (id: string) => {

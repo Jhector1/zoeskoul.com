@@ -1,6 +1,6 @@
 import type { TopicDefInput } from "@/lib/subjects/_core/defineTopicBundle";
 
-export function makeTopicDef<T extends { key: string; w: number; kind?: any }>(args: {
+export function makeTopicDef<T extends { key: string; w: number; kind?: any; purpose?: any }>(args: {
     id: string;
     label: string;
     minutes: number;
@@ -21,6 +21,7 @@ export function makeTopicDef<T extends { key: string; w: number; kind?: any }>(a
                 key: p.key,
                 w: p.w,
                 kind: p.kind,
+                purpose: p.purpose,
             })),
         },
     };

@@ -16,9 +16,8 @@ import {resolveReviewModuleForSubject} from "@/lib/review/api/shared/modules";
 export async function GET(req: Request) {
     const { searchParams } = new URL(req.url);
     const subjectSlug = (searchParams.get("subjectSlug") ?? "").trim();
-    const moduleRef = (searchParams.get("moduleId") ?? "").trim();
-
-    if (!subjectSlug || !moduleRef) {
+    const moduleSlug = (searchParams.get("moduleSlug") ?? searchParams.get("moduleId") ?? "").trim();
+    if (!subjectSlug || !moduleSlug) {
         return bodyJsonResponse(
             {
                 nextModuleId: null,
@@ -38,7 +37,7 @@ export async function GET(req: Request) {
         locale,
         req,
         subjectSlug,
-        moduleRef,
+        moduleSlug,
     });
 
     if (!gate.ok) {

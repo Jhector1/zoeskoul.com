@@ -4,7 +4,7 @@ import type { RNG } from "../../../shared/rng";
 import type { TopicContext } from "../../../generatorTypes";
 
 import { makePythonModuleGenerator } from "../_shared";
-import {M0_WORKSPACE_GENERATOR_TOPIC} from "@/lib/subjects/python/modules/module0/topics/workspace/generator";
+import {M0_WORKSPACE_GENERATOR_TOPIC} from "@/lib/subjects/python/modules/module0/topics/editor_workspace_overview/generator";
 import {M0_SYNTAX_GENERATOR_TOPIC} from "@/lib/subjects/python/modules/module0/topics/syntax_intro/generator";
 import {M0_PROGRAMMING_GENERATOR_TOPIC} from "@/lib/subjects/python/modules/module0/topics/programming_intro/generator";
 import {M0_COMPUTER_GENERATOR_TOPIC} from "@/lib/subjects/python/modules/module0/topics/computer_intro/generator";

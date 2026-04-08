@@ -1,7 +1,7 @@
 "use client";
 
 import React, {useCallback, useEffect, useMemo, useRef} from "react";
-import type {Exercise} from "@/lib/practice/types";
+import type {Exercise, SqlDialect} from "@/lib/practice/types";
 import type {VectorPadState} from "@/components/vectorpad/types";
 import {CodeLanguage} from "@/lib/practice/types";
 
@@ -36,6 +36,18 @@ import {useTaggedT} from "@/i18n/tagged";
 // keep the rest of your imports
 
 // ✅ minimal tools API (don’t import review context from practice layer)
+type SqlTableSnapshot = {
+    name: string;
+    columns: Array<{
+        name: string;
+        type?: string | null;
+    }>;
+    rows: unknown[][];
+    rowCount: number;
+};
+
+type SqlTableSnapshots = Record<string, SqlTableSnapshot>;
+
 type CodeToolsApi = {
     registerCodeInput: (
         id: string,
@@ -43,6 +55,13 @@ type CodeToolsApi = {
             lang: CodeLanguage;
             code: string;
             stdin?: string;
+
+            sqlDialect?: SqlDialect;
+            sqlDatasetId?: string;
+            sqlSchemaSql?: string;
+            sqlSeedSql?: string;
+            sqlInitialTableSnapshots?: SqlTableSnapshots;
+
             onPatch: (patch: any) => void;
         },
     ) => void;
@@ -64,7 +83,6 @@ type CodeToolsApi = {
     syncCodeInputSnapshot?: (id: string, patch: any) => void;
     patchCodeInput?: (id: string, patch: any) => void;
 };
-
 function CodeInputWithTools(props: {
     exercise: any;
     current: any;
@@ -109,10 +127,49 @@ function CodeInputWithTools(props: {
         getRunFeedbackEntry,
     } = codeTools;
 
-    const curLang = ((current as any).codeLang ?? "python") as CodeLanguage;
+    const curLang = ((current as any).codeLang ??
+        exercise?.language ??
+        (exercise?.fixedSqlDialect || exercise?.runtime?.datasetId ? "sql" : "python")) as CodeLanguage;
+
     const curCode = (current as any).code ?? exercise.starterCode ?? "";
     const curStdin = (current as any).codeStdin ?? "";
 
+    const isSqlExercise =
+        curLang === "sql" ||
+        exercise?.language === "sql" ||
+        Boolean(exercise?.fixedSqlDialect) ||
+        Boolean(exercise?.runtime?.datasetId) ||
+        typeof exercise?.sqlSchemaSql === "string" ||
+        typeof exercise?.sqlSeedSql === "string";
+
+    const exerciseSqlDialect =
+        isSqlExercise ? exercise?.fixedSqlDialect : undefined;
+
+    const exerciseSqlDatasetId =
+        isSqlExercise
+            ? (typeof exercise?.runtime?.datasetId === "string"
+                ? exercise.runtime.datasetId
+                : typeof exercise?.sqlDatasetId === "string"
+                    ? exercise.sqlDatasetId
+                    : undefined)
+            : undefined;
+
+    const exerciseSqlSchemaSql =
+        isSqlExercise && typeof exercise?.sqlSchemaSql === "string"
+            ? exercise.sqlSchemaSql
+            : undefined;
+
+    const exerciseSqlSeedSql =
+        isSqlExercise && typeof exercise?.sqlSeedSql === "string"
+            ? exercise.sqlSeedSql
+            : undefined;
+
+    const exerciseSqlInitialTableSnapshots =
+        isSqlExercise &&
+        exercise?.sqlInitialTableSnapshots &&
+        typeof exercise.sqlInitialTableSnapshots === "object"
+            ? exercise.sqlInitialTableSnapshots
+            : undefined;
     const onPatch = useCallback((patch: any) => updateCurrent(patch), [updateCurrent]);
 
     // register once for lifecycle / binding
@@ -121,12 +178,32 @@ function CodeInputWithTools(props: {
             lang: curLang,
             code: curCode,
             stdin: curStdin,
+
+            sqlDialect: curLang === "sql" ? exerciseSqlDialect : undefined,
+            sqlDatasetId: curLang === "sql" ? exerciseSqlDatasetId : undefined,
+            sqlSchemaSql: curLang === "sql" ? exerciseSqlSchemaSql : undefined,
+            sqlSeedSql: curLang === "sql" ? exerciseSqlSeedSql : undefined,
+            sqlInitialTableSnapshots:
+                curLang === "sql" ? exerciseSqlInitialTableSnapshots : undefined,
+
             onPatch,
         });
 
         return () => unregisterCodeInput(codeInputId);
-    }, [registerCodeInput, unregisterCodeInput, codeInputId, onPatch]);
-
+    }, [
+        registerCodeInput,
+        unregisterCodeInput,
+        codeInputId,
+        onPatch,
+        curLang,
+        curCode,
+        curStdin,
+        exerciseSqlDialect,
+        exerciseSqlDatasetId,
+        exerciseSqlSchemaSql,
+        exerciseSqlSeedSql,
+        exerciseSqlInitialTableSnapshots,
+    ]);
     const toolsBoundToThis = isBound(codeInputId);
     const toolsUnbound = boundId == null;
 
@@ -140,10 +217,30 @@ function CodeInputWithTools(props: {
             lang: curLang,
             code: curCode,
             stdin: curStdin,
+
+            sqlDialect: curLang === "sql" ? exerciseSqlDialect : undefined,
+            sqlDatasetId: curLang === "sql" ? exerciseSqlDatasetId : undefined,
+            sqlSchemaSql: curLang === "sql" ? exerciseSqlSchemaSql : undefined,
+            sqlSeedSql: curLang === "sql" ? exerciseSqlSeedSql : undefined,
+            sqlInitialTableSnapshots:
+                curLang === "sql" ? exerciseSqlInitialTableSnapshots : undefined,
+
             onPatch,
         });
-    }, [toolsBoundToThis, registerCodeInput, codeInputId, curLang, curCode, curStdin, onPatch]);
-
+    }, [
+        toolsBoundToThis,
+        registerCodeInput,
+        codeInputId,
+        curLang,
+        curCode,
+        curStdin,
+        onPatch,
+        exerciseSqlDialect,
+        exerciseSqlDatasetId,
+        exerciseSqlSchemaSql,
+        exerciseSqlSeedSql,
+        exerciseSqlInitialTableSnapshots,
+    ]);
     const runEntry = getRunFeedbackEntry?.(codeInputId) ?? null;
     const toolRunFeedback = runEntry?.feedback ?? null;
     const toolRunTick = runEntry?.tick ?? 0;
@@ -547,6 +644,7 @@ export default function ExerciseRenderer({
                 checked={checked}
                 ok={ok}
                 reviewCorrectValue={reviewCorrectValue}
+                // showHint={false}
             />
         );
     }
@@ -575,6 +673,7 @@ export default function ExerciseRenderer({
     const codeFeedback = resultAny?.feedback ?? null;
     const codeExplanation =
         typeof resultAny?.explanation === "string" ? resultAny.explanation : null;
+
     if (ex.kind === "code_input") {
         const useTools = codeRunnerMode === "tools" && !!codeTools && !!codeInputId;
 
@@ -598,17 +697,21 @@ export default function ExerciseRenderer({
             );
         }
 
-        // ✅ embedded fallback (important)
-        const curLang = ((current as any).codeLang ?? "python") as CodeLanguage;
-        const curCode = (current as any).code ?? ex.starterCode ?? "";
-        const curStdin = (current as any).codeStdin ??"" //ex.starterStdin ?? "";
+        const exAny = ex as any;
+
+        const curLang = ((current as any).codeLang ??
+            exAny.language ??
+            "python") as CodeLanguage;
+
+        const curCode = (current as any).code ?? exAny.starterCode ?? "";
+        const curStdin = (current as any).codeStdin ?? "";
 
         return (
             <CodeInputExerciseUI
-                exercise={ex as any}
+                exercise={exAny}
                 code={curCode}
                 stdin={curStdin}
-                frame={"card"}
+                frame="card"
                 language={curLang}
                 onChangeCode={(code) => updateCurrent({ code, ...resetCheckPatch() })}
                 onChangeStdin={(codeStdin) => updateCurrent({ codeStdin, ...resetCheckPatch() })}
@@ -621,6 +724,12 @@ export default function ExerciseRenderer({
                 variant="embedded"
                 feedback={codeFeedback}
                 explanation={codeExplanation}
+                sqlDialect={exAny.fixedSqlDialect}
+                sqlDatasetId={exAny.runtime?.datasetId}
+                sqlSchemaSql={exAny.sqlSchemaSql}
+                sqlSeedSql={exAny.sqlSeedSql}
+                sqlSetupSql={exAny.sqlSetupSql}
+                sqlInitialTableSnapshots={exAny.sqlInitialTableSnapshots}
             />
         );
     }

@@ -1,0 +1,352 @@
+{
+  "topicId": "aggregates_with_groups",
+  "minutes": 10,
+  "topic": {
+    "labelKey": "topics.sql.sql_module_7.aggregates_with_groups.label",
+    "summaryKey": "topics.sql.sql_module_7.aggregates_with_groups.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_7.aggregates_with_groups.cards.sketch0.title",
+      "sketchId": "count_per_group",
+      "height": 520
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_7.aggregates_with_groups.cards.sketch1.title",
+      "sketchId": "sum_per_group",
+      "height": 520
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_7.aggregates_with_groups.cards.sketch2.title",
+      "sketchId": "average_per_group",
+      "height": 520
+    },
+    {
+      "id": "sketch3",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_7.aggregates_with_groups.cards.sketch3.title",
+      "sketchId": "max_and_min_per_group",
+      "height": 520
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql.sql_module_7.aggregates_with_groups.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 5,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "count_per_group",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_7.aggregates_with_groups.count_per_group.title",
+      "bodyKey": "sketches.sql.sql_module_7.aggregates_with_groups.count_per_group.bodyMarkdown"
+    },
+    {
+      "id": "sum_per_group",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_7.aggregates_with_groups.sum_per_group.title",
+      "bodyKey": "sketches.sql.sql_module_7.aggregates_with_groups.sum_per_group.bodyMarkdown"
+    },
+    {
+      "id": "average_per_group",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_7.aggregates_with_groups.average_per_group.title",
+      "bodyKey": "sketches.sql.sql_module_7.aggregates_with_groups.average_per_group.bodyMarkdown"
+    },
+    {
+      "id": "max_and_min_per_group",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_7.aggregates_with_groups.max_and_min_per_group.title",
+      "bodyKey": "sketches.sql.sql_module_7.aggregates_with_groups.max_and_min_per_group.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "m7_s02_count_per_category",
+      "kind": "code_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m7_s02_count_per_category",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_kpi",
+        "resultShape": "table",
+        "solutionCode": "SELECT category, COUNT(*) AS order_count\nFROM orders\nGROUP BY category;"
+      }
+    },
+    {
+      "id": "m7_s02_sum_quantity_per_category",
+      "kind": "code_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m7_s02_sum_quantity_per_category",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_kpi",
+        "resultShape": "table",
+        "solutionCode": "SELECT category, SUM(quantity) AS total_quantity\nFROM orders\nGROUP BY category;"
+      }
+    },
+    {
+      "id": "m7_s02_avg_price_per_region",
+      "kind": "code_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m7_s02_avg_price_per_region",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_kpi",
+        "resultShape": "table",
+        "solutionCode": "SELECT region, AVG(unit_price) AS avg_price\nFROM orders\nGROUP BY region;"
+      }
+    },
+    {
+      "id": "m7_s02_min_price_per_category",
+      "kind": "code_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m7_s02_min_price_per_category",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_kpi",
+        "resultShape": "table",
+        "solutionCode": "SELECT category, MIN(unit_price) AS min_price\nFROM orders\nGROUP BY category;"
+      }
+    },
+    {
+      "id": "m7_s02_max_price_per_category",
+      "kind": "code_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m7_s02_max_price_per_category",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_kpi",
+        "resultShape": "table",
+        "solutionCode": "SELECT category, MAX(unit_price) AS max_price\nFROM orders\nGROUP BY category;"
+      }
+    },
+    {
+      "id": "m7_s02_group_aggregates_project",
+      "kind": "code_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m7_s02_group_aggregates_project",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_kpi",
+        "resultShape": "table",
+        "solutionCode": "SELECT category, COUNT(*) AS order_count\nFROM orders\nGROUP BY category;"
+      }
+    },
+
+    {
+      "id": "m7_s02_count_per_group_meaning",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m7_s02_count_per_group_meaning",
+      "optionIds": ["a", "b", "c", "d"],
+      "expected": { "kind": "single_choice", "optionId": "a" }
+    },
+    {
+      "id": "m7_s02_sum_per_group_meaning",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m7_s02_sum_per_group_meaning",
+      "optionIds": ["a", "b", "c", "d"],
+      "expected": { "kind": "single_choice", "optionId": "a" }
+    },
+    {
+      "id": "m7_s02_avg_per_group_meaning",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m7_s02_avg_per_group_meaning",
+      "optionIds": ["a", "b", "c", "d"],
+      "expected": { "kind": "single_choice", "optionId": "a" }
+    },
+    {
+      "id": "m7_s02_min_max_per_group_meaning",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m7_s02_min_max_per_group_meaning",
+      "optionIds": ["a", "b", "c", "d"],
+      "expected": { "kind": "single_choice", "optionId": "a" }
+    },
+    {
+      "id": "m7_s02_grouped_summary_reading",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m7_s02_grouped_summary_reading",
+      "optionIds": ["a", "b", "c", "d"],
+      "expected": { "kind": "single_choice", "optionId": "a" }
+    },
+
+    {
+      "id": "m7_s02_grouped_counts_true",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m7_s02_grouped_counts_true",
+      "optionIds": ["a", "b", "c", "d", "e"],
+      "expected": { "kind": "multi_choice", "optionIds": ["a", "b", "c", "e"] }
+    },
+    {
+      "id": "m7_s02_grouped_sum_avg_true",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m7_s02_grouped_sum_avg_true",
+      "optionIds": ["a", "b", "c", "d", "e"],
+      "expected": { "kind": "multi_choice", "optionIds": ["a", "b", "c", "e"] }
+    },
+    {
+      "id": "m7_s02_grouped_min_max_true",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m7_s02_grouped_min_max_true",
+      "optionIds": ["a", "b", "c", "d", "e"],
+      "expected": { "kind": "multi_choice", "optionIds": ["a", "b", "c", "e"] }
+    },
+    {
+      "id": "m7_s02_grouped_aggregate_report_true",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m7_s02_grouped_aggregate_report_true",
+      "optionIds": ["a", "b", "c", "d", "e"],
+      "expected": { "kind": "multi_choice", "optionIds": ["a", "b", "c", "e"] }
+    },
+    {
+      "id": "m7_s02_grouped_aggregate_workflow_true",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m7_s02_grouped_aggregate_workflow_true",
+      "optionIds": ["a", "b", "c", "d", "e"],
+      "expected": { "kind": "multi_choice", "optionIds": ["a", "b", "c", "d"] }
+    },
+
+    {
+      "id": "m7_s02_fill_count_per_group",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m7_s02_fill_count_per_group",
+      "choiceCount": 4,
+      "expected": { "kind": "fill_blank_choice", "value": "COUNT()" }
+    },
+    {
+      "id": "m7_s02_fill_sum_per_group",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m7_s02_fill_sum_per_group",
+      "choiceCount": 4,
+      "expected": { "kind": "fill_blank_choice", "value": "SUM()" }
+    },
+    {
+      "id": "m7_s02_fill_avg_per_group",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m7_s02_fill_avg_per_group",
+      "choiceCount": 4,
+      "expected": { "kind": "fill_blank_choice", "value": "AVG()" }
+    },
+    {
+      "id": "m7_s02_fill_extremes_per_group",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m7_s02_fill_extremes_per_group",
+      "choiceCount": 4,
+      "expected": { "kind": "fill_blank_choice", "value": "extreme" }
+    },
+    {
+      "id": "m7_s02_fill_read_group_label_first",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m7_s02_fill_read_group_label_first",
+      "choiceCount": 4,
+      "expected": { "kind": "fill_blank_choice", "value": "group label" }
+    },
+
+    {
+      "id": "m7_s02_reorder_grouped_count_pattern",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m7_s02_reorder_grouped_count_pattern",
+      "tokenIds": ["t1", "t2", "t3", "t4"],
+      "expected": { "kind": "drag_reorder", "tokenIds": ["t1", "t2", "t3", "t4"] }
+    },
+    {
+      "id": "m7_s02_reorder_grouped_sum_pattern",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m7_s02_reorder_grouped_sum_pattern",
+      "tokenIds": ["t1", "t2", "t3", "t4"],
+      "expected": { "kind": "drag_reorder", "tokenIds": ["t1", "t2", "t3", "t4"] }
+    },
+    {
+      "id": "m7_s02_reorder_grouped_avg_pattern",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m7_s02_reorder_grouped_avg_pattern",
+      "tokenIds": ["t1", "t2", "t3", "t4"],
+      "expected": { "kind": "drag_reorder", "tokenIds": ["t1", "t2", "t3", "t4"] }
+    },
+    {
+      "id": "m7_s02_reorder_read_grouped_report",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m7_s02_reorder_read_grouped_report",
+      "tokenIds": ["t1", "t2", "t3"],
+      "expected": { "kind": "drag_reorder", "tokenIds": ["t1", "t2", "t3"] }
+    },
+    {
+      "id": "m7_s02_reorder_grouped_workflow",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m7_s02_reorder_grouped_workflow",
+      "tokenIds": ["t1", "t2", "t3", "t4"],
+      "expected": { "kind": "drag_reorder", "tokenIds": ["t1", "t2", "t3", "t4"] }
+    }
+  ]
+}

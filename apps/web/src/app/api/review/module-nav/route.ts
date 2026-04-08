@@ -1,6 +1,5 @@
 import { prisma } from "@/lib/prisma";
 import {
-    attachGuestCookie,
     ensureGuestId,
     getActor,
 } from "@/lib/practice/actor";
@@ -10,15 +9,14 @@ import {
 } from "@/lib/practice/api/shared/http";
 import { resolvePracticeAccess } from "@/lib/practice/access/resolvePracticeAccess";
 import { getLocaleFromCookie } from "@/serverUtils";
-import {resolveReviewModuleForSubject} from "@/lib/review/api/shared/modules";
-// import { resolveReviewModuleForSubject } from "@/lib/review/api/modules";
+import { resolveReviewModuleForSubject } from "@/lib/review/api/shared/modules";
+import { SUBJECTS } from "@/lib/subjects";
 
 export async function GET(req: Request) {
     const { searchParams } = new URL(req.url);
     const subjectSlug = (searchParams.get("subjectSlug") ?? "").trim();
-    const moduleRef = (searchParams.get("moduleId") ?? "").trim();
-
-    if (!subjectSlug || !moduleRef) {
+    const moduleSlug = (searchParams.get("moduleSlug") ?? searchParams.get("moduleId") ?? "").trim();
+    if (!subjectSlug || !moduleSlug) {
         return bodyJsonResponse(
             {
                 message: "Missing subjectSlug/moduleId.",
@@ -31,12 +29,7 @@ export async function GET(req: Request) {
     const { actor, setGuestId } = ensureGuestId(actor0);
     const locale = await getLocaleFromCookie();
 
-    // 1) Resolve current subject/module WITHOUT billing gate.
-    //    We only need canonical module slug + subject ownership to compute nav.
-    const subject = await prisma.practiceSubject.findUnique({
-        where: { slug: subjectSlug },
-        select: { id: true, slug: true },
-    });
+    const subject = SUBJECTS.find((s) => s.slug === subjectSlug);
 
     if (!subject) {
         return bodyJsonWithGuestCookie(
@@ -49,32 +42,9 @@ export async function GET(req: Request) {
         );
     }
 
-    const current = await prisma.practiceModule.findFirst({
-        where: {
-            subjectId: subject.id,
-            OR: [{ id: moduleRef }, { slug: moduleRef }],
-        },
-        select: {
-            id: true,
-            slug: true,
-        },
-    });
-
-    if (!current) {
-        return bodyJsonWithGuestCookie(
-            {
-                message: "Unknown module for subject.",
-                detail: { subjectSlug, moduleRef },
-            },
-            404,
-            setGuestId,
-        );
-    }
-
-    // 2) Resolve review-registry order for this subject/module.
     const resolved = await resolveReviewModuleForSubject(prisma, {
-        subjectSlug: subject.slug,
-        moduleSlug: current.slug,
+        subjectSlug,
+        moduleSlug,
     });
 
     if (!resolved.ok) {
@@ -96,7 +66,6 @@ export async function GET(req: Request) {
             ? resolved.modules[resolved.index + 1]
             : null;
 
-    // 3) Billing only affects the next CTA state, not whether nav exists.
     let nextLocked = false;
 
     if (next) {

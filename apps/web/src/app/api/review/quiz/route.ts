@@ -1,3 +1,4 @@
+// src/app/api/review/quiz/route.ts
 import { PracticeKind } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 import {
@@ -26,17 +27,32 @@ import {
   readPoolFromTopicMeta,
   shortHash,
 } from "@/lib/review/api/quiz/helpers";
-// import {
-//   ReviewQuizSpecSchema,
-//   type ReviewQuizSpec,
-// } from "@/lib/review/api/quiz/schema";
+import {
+  ReviewQuizSpecSchema,
+  type ReviewQuizRequestSpec,
+} from "@/lib/review/api/quiz/schemas";
 import { hasReviewModule } from "@/lib/subjects/registry";
+// import { SECTIONS, TOPICS } from "@/lib/subjects/data";
 import { getLocaleFromCookie } from "@/serverUtils";
-// import {type ReviewQuizSpec} from "@/lib/subjects/types";
-import {ReviewQuizSpecSchema,  type ReviewQuizRequestSpec} from "@/lib/review/api/quiz/schemas";
+import {SECTIONS, TOPICS} from "@/lib/subjects";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
+
+type RegistrySection = {
+  slug: string;
+  subjectSlug: string;
+  moduleSlug: string;
+  topicSlugs: string[];
+};
+
+type RegistryTopic = {
+  slug: string;
+  subjectSlug: string;
+  moduleSlug: string;
+  genKey?: string | null;
+  meta?: unknown;
+};
 
 function reviewRegistryMissingResponse(
     subjectSlug: string,
@@ -51,6 +67,96 @@ function reviewRegistryMissingResponse(
       404,
       setGuestId,
   );
+}
+
+function findRegistrySection(args: {
+  sectionSlug: string;
+  subjectSlug: string;
+  moduleSlug: string;
+}) {
+  const { sectionSlug, subjectSlug, moduleSlug } = args;
+
+  return (SECTIONS as RegistrySection[]).find(
+      (s) =>
+          s.slug === sectionSlug &&
+          s.subjectSlug === subjectSlug &&
+          s.moduleSlug === moduleSlug,
+  );
+}
+
+function findRegistryTopic(slug: string) {
+  return (TOPICS as RegistryTopic[]).find((t) => t.slug === slug);
+}
+
+function getAllowedTopicSlugsFromRegistry(args: {
+  subjectSlug: string;
+  moduleSlug: string;
+  sectionSlug?: string | null;
+}) {
+  const { subjectSlug, moduleSlug, sectionSlug } = args;
+
+  if (sectionSlug) {
+    const section = findRegistrySection({
+      sectionSlug,
+      subjectSlug,
+      moduleSlug,
+    });
+
+    if (!section) {
+      return {
+        ok: false as const,
+        status: 404,
+        body: {
+          message: `Section "${sectionSlug}" not found in registry.`,
+        },
+      };
+    }
+
+    const pool = section.topicSlugs.filter((slug) => {
+      const t = findRegistryTopic(slug);
+      return Boolean(t?.genKey);
+    });
+
+    if (!pool.length) {
+      return {
+        ok: false as const,
+        status: 400,
+        body: {
+          message: `Section "${sectionSlug}" has no topics with genKey in registry.`,
+        },
+      };
+    }
+
+    return {
+      ok: true as const,
+      section,
+      topicSlugs: pool,
+    };
+  }
+
+  const pool = (TOPICS as RegistryTopic[])
+      .filter(
+          (t) =>
+              t.subjectSlug === subjectSlug &&
+              t.moduleSlug === moduleSlug &&
+              Boolean(t.genKey),
+      )
+      .map((t) => t.slug);
+
+  if (!pool.length) {
+    return {
+      ok: false as const,
+      status: 404,
+      body: {
+        message: `No topics found in registry for subject="${subjectSlug}" module="${moduleSlug}" (with genKey).`,
+      },
+    };
+  }
+
+  return {
+    ok: true as const,
+    topicSlugs: pool,
+  };
 }
 
 export async function POST(req: Request) {
@@ -93,7 +199,7 @@ export async function POST(req: Request) {
     locale,
     req,
     subjectSlug: parsedSpec.subject,
-    moduleRef: parsedSpec.moduleSlug,
+    moduleSlug: parsedSpec.moduleSlug,
   });
 
   if (!gate.ok) {
@@ -119,7 +225,6 @@ export async function POST(req: Request) {
   const defaultMaxAttempts = spec.maxAttempts ?? 1;
   const actorKey = actorKeyOf(actor);
 
-  // server-owned canonical key; ignore caller-supplied quizKey
   const quizKey = buildReviewQuizKey(spec);
 
   const existing = await prisma.reviewQuizInstance.findUnique({
@@ -137,7 +242,9 @@ export async function POST(req: Request) {
           questions: existing.questions,
           quizKey,
           requested: mode === "project" ? (spec.steps?.length ?? 0) : n,
-          generated: Array.isArray(existing.questions) ? existing.questions.length : undefined,
+          generated: Array.isArray(existing.questions)
+              ? existing.questions.length
+              : undefined,
           frozen: true,
         },
         200,
@@ -146,116 +253,45 @@ export async function POST(req: Request) {
   }
 
   const wantsAll = !spec.topic || spec.topic === "all";
-  let allowedTopicSlugs: string[] = [];
 
-  if (spec.section) {
-    const section = await prisma.practiceSection.findUnique({
-      where: { slug: spec.section },
-      select: {
-        slug: true,
-        module: { select: { slug: true } },
-        subject: { select: { slug: true } },
-        topics: {
-          orderBy: { order: "asc" },
-          select: {
-            topic: {
-              select: { slug: true, genKey: true },
-            },
-          },
-        },
-      },
-    });
+  const registryAllowed = getAllowedTopicSlugsFromRegistry({
+    subjectSlug: spec.subject,
+    moduleSlug: spec.moduleSlug,
+    sectionSlug: spec.section ?? null,
+  });
 
-    if (!section) {
-      return bodyJsonWithGuestCookie(
-          { message: `Section "${spec.section}" not found.` },
-          404,
-          setGuestId,
-      );
-    }
+  if (!registryAllowed.ok) {
+    return bodyJsonWithGuestCookie(
+        registryAllowed.body,
+        registryAllowed.status,
+        setGuestId,
+    );
+  }
 
-    if (section.subject?.slug !== spec.subject) {
-      return bodyJsonWithGuestCookie(
-          { message: `Section "${spec.section}" is not in subject "${spec.subject}".` },
-          400,
-          setGuestId,
-      );
-    }
+  let allowedTopicSlugs = registryAllowed.topicSlugs;
 
-    if (section.module?.slug !== spec.moduleSlug) {
-      return bodyJsonWithGuestCookie(
-          { message: `Section "${spec.section}" is not in module "${spec.moduleSlug}".` },
-          400,
-          setGuestId,
-      );
-    }
+  if (mode === "quiz" && !wantsAll) {
+    const dbSlug = toDbTopicSlug(spec.topic!);
 
-    const pool = section.topics
-        .map((x) => x.topic)
-        .filter((t) => t?.genKey)
-        .map((t) => t.slug);
-
-    if (!pool.length) {
-      return bodyJsonWithGuestCookie(
-          { message: `Section "${spec.section}" has no topics with genKey.` },
-          400,
-          setGuestId,
-      );
-    }
-
-    allowedTopicSlugs = pool;
-
-    if (mode === "quiz" && !wantsAll) {
-      const dbSlug = toDbTopicSlug(spec.topic!);
-
-      if (!pool.includes(dbSlug)) {
-        return bodyJsonWithGuestCookie(
-            { message: `Topic "${dbSlug}" is not part of section "${spec.section}".` },
-            400,
-            setGuestId,
-        );
-      }
-
-      allowedTopicSlugs = [dbSlug];
-    }
-  } else {
-    const rows = await prisma.practiceTopic.findMany({
-      where: {
-        subject: { is: { slug: spec.subject } },
-        module: { is: { slug: spec.moduleSlug } },
-        genKey: { not: null },
-      },
-      select: { slug: true },
-      orderBy: [{ order: "asc" }, { slug: "asc" }],
-      take: 2000,
-    });
-
-    if (!rows.length) {
+    if (!allowedTopicSlugs.includes(dbSlug)) {
       return bodyJsonWithGuestCookie(
           {
-            message: `No topics found for subject="${spec.subject}" module="${spec.moduleSlug}" (with genKey).`,
+            message: `Topic "${dbSlug}" is not part of the allowed review scope.`,
+            detail: {
+              requested: spec.topic,
+              normalized: dbSlug,
+              subject: spec.subject,
+              module: spec.moduleSlug,
+              section: spec.section ?? null,
+              allowedTopicSlugs,
+            },
           },
-          404,
+          400,
           setGuestId,
       );
     }
 
-    allowedTopicSlugs = rows.map((r) => r.slug);
-
-    if (mode === "quiz" && !wantsAll) {
-      const dbSlug = toDbTopicSlug(spec.topic!);
-      const ok = rows.some((r) => r.slug === dbSlug);
-
-      if (!ok) {
-        return bodyJsonWithGuestCookie(
-            { message: `Topic "${dbSlug}" is not in this subject/module.` },
-            400,
-            setGuestId,
-        );
-      }
-
-      allowedTopicSlugs = [dbSlug];
-    }
+    allowedTopicSlugs = [dbSlug];
   }
 
   let questions: any[] = [];
@@ -278,12 +314,12 @@ export async function POST(req: Request) {
       if (!allowedTopicSlugs.includes(dbSlug)) {
         return bodyJsonWithGuestCookie(
             {
-              message:
-                  `Project step topic "${dbSlug}" is not allowed by this subject/module/section.`,
+              message: `Project step topic "${dbSlug}" is not allowed by this subject/module/section.`,
               detail: {
                 stepId: st.id,
                 stepTopic: st.topic,
                 normalized: dbSlug,
+                allowedTopicSlugs,
               },
             },
             400,
@@ -327,12 +363,16 @@ export async function POST(req: Request) {
     const qk = shortHash(quizKey);
 
     const uniqPickedTopics = Array.from(new Set(pickedTopics));
+
     const topicRows = await prisma.practiceTopic.findMany({
       where: { slug: { in: uniqPickedTopics } },
       select: { slug: true, meta: true },
     });
 
-    const poolBySlug = new Map<string, { key: string; w: number; kind?: string | null }[]>();
+    const poolBySlug = new Map<
+        string,
+        { key: string; w: number; kind?: string | null }[]
+    >();
 
     for (const row of topicRows) {
       const pool = readPoolFromTopicMeta((row as any).meta);
@@ -484,7 +524,7 @@ export async function DELETE(req: Request) {
     locale,
     req,
     subjectSlug: parsed.subjectSlug,
-    moduleRef: parsed.moduleSlug,
+    moduleSlug: parsed.moduleSlug,
   });
 
   if (!gate.ok) {

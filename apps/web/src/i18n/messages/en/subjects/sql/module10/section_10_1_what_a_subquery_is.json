@@ -1,0 +1,310 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_10": {
+        "what_a_subquery_is": {
+          "label": "What a Subquery Is",
+          "summary": "Learn that a subquery is a query inside another query, why it is useful, how to think about it simply, and when beginners should use it.",
+          "cards": {
+            "sketch0": {
+              "title": "What does it mean to put a query inside another query?"
+            },
+            "sketch1": {
+              "title": "Why are subqueries useful?"
+            },
+            "sketch2": {
+              "title": "What is a simple mental model for subqueries?"
+            },
+            "sketch3": {
+              "title": "When should beginners use subqueries?"
+            },
+            "quiz": {
+              "title": "Quiz: What a Subquery Is"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_10": {
+        "section_10_1": {
+          "query_inside_another_query": {
+            "title": "A subquery is a query written inside another query.",
+            "bodyMarkdown": "A **subquery** is exactly what it sounds like:\n\n- one query\n- inside another query\n\nThe inner query produces a value or a small set of values.\nThen the outer query uses that result.\n\nSo the big idea is:\n\n> a subquery lets one query help another query"
+          },
+          "why_subqueries_are_useful": {
+            "title": "Subqueries are useful when one answer depends on another answer.",
+            "bodyMarkdown": "Sometimes a query needs to know something first.\n\nFor example:\n\n- the average grade level\n- which student IDs appear in enrollments\n- which department IDs appear in courses\n\nA subquery can compute that first answer.\nThen the outer query can use it.\n\nSo the key idea is:\n\n> subqueries help when the outer query depends on a smaller answer produced first"
+          },
+          "simple_mental_model": {
+            "title": "A simple mental model is: inner query first, outer query second.",
+            "bodyMarkdown": "A beginner-friendly way to think about subqueries is:\n\n1. the inner query finds something\n2. the outer query uses it\n\nThat means you can often read a subquery like:\n\n- find this first\n- then use that result here\n\nSo the main idea is:\n\n> the inner query gives the outer query something to work with"
+          },
+          "when_beginners_should_use_them": {
+            "title": "Beginners should use subqueries when the problem naturally feels two-step.",
+            "bodyMarkdown": "A subquery is a good beginner choice when the question sounds like:\n\n- find rows above some calculated value\n- find rows whose ID appears in another table\n- build a small result first, then use it again\n\nSo the important idea is:\n\n> use a subquery when the logic naturally feels like do this first, then do that"
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "m10_s01_students_above_average_intro": {
+      "title": "Use one query inside another",
+      "prompt": "The SQLite workspace already has the `school_relations_intro` dataset loaded.\n\nWrite a query that returns `name` and `grade_level` from `students`, but only for students whose `grade_level` is greater than the average `grade_level` of all students.\n\nThen click **Run**.",
+      "help": {
+        "concept": "A subquery is useful when the outer query needs a value that another query can calculate first.",
+        "hint_1": "The outer query reads rows from `students`, and the inner query calculates the average grade level.",
+        "hint_2": "Build the student query first, then place a small average-calculating query inside the condition so the outer query can compare each row against it."
+      },
+      "hint": "Use an inner query to calculate the average grade level first.",
+      "starterCode": "-- Return students whose grade_level is above the overall average\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table"
+      }
+    },
+    "m10_s01_students_with_enrollments_intro": {
+      "title": "Use a subquery to find matching IDs",
+      "prompt": "The tables already exist.\n\nWrite a query that returns student names from `students`, but only for students whose `id` appears in `enrollments.student_id`.\n\nUse a subquery, then run it.",
+      "help": {
+        "concept": "A subquery can return a list of IDs for the outer query to use.",
+        "hint_1": "The outer query reads `students`, and the inner query returns student IDs from `enrollments`.",
+        "hint_2": "Build the student query on the outside, and let the inner query produce the list of student IDs that should count as matches."
+      },
+      "hint": "Use the inner query to return the student IDs from enrollments.",
+      "starterCode": "-- Return students whose id appears in enrollments\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table"
+      }
+    },
+    "m10_s01_courses_with_enrollments_intro": {
+      "title": "Use another simple subquery",
+      "prompt": "The tables already exist.\n\nWrite a query that returns course titles from `courses`, but only for courses whose `id` appears in `enrollments.course_id`.\n\nThen click **Run**.",
+      "help": {
+        "concept": "A subquery can be used to find which IDs from one table appear in another table.",
+        "hint_1": "The outer query reads `courses`, and the inner query returns course IDs from `enrollments`.",
+        "hint_2": "Build the course query on the outside, and use a small inner query to generate the set of enrolled course IDs."
+      },
+      "hint": "Use the inner query to return the enrolled course IDs.",
+      "starterCode": "-- Return courses whose id appears in enrollments\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table"
+      }
+    },
+    "m10_s01_departments_with_courses_intro": {
+      "title": "Use a subquery with departments",
+      "prompt": "The tables already exist.\n\nWrite a query that returns department names from `departments`, but only for departments whose `id` appears in `courses.department_id`.\n\nThen run it.",
+      "help": {
+        "concept": "A beginner-friendly subquery can return the IDs that appear in a related table.",
+        "hint_1": "The outer query reads `departments`, and the inner query returns department IDs from `courses`.",
+        "hint_2": "Build a department query on the outside and use the inner query to generate the set of department IDs that actually appear in the courses table."
+      },
+      "hint": "Use the inner query to return the department IDs from courses.",
+      "starterCode": "-- Return departments whose id appears in courses\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table"
+      }
+    },
+    "m10_s01_subquery_intro_project": {
+      "title": "Practice simple subquery thinking",
+      "prompt": "Use the SQL workspace on the right to practice beginner-safe subqueries on the `school_relations_intro` dataset.\n\nFor each task:\n\n1. type the query in the editor\n2. click **Run**\n3. think about what the inner query returns first\n4. then think about how the outer query uses that result\n\nTasks:\n\n1. Return students above the average grade level\n2. Return students whose id appears in enrollments\n3. Return courses whose id appears in enrollments\n4. Return departments whose id appears in courses\n5. Return students whose grade_level is equal to the maximum grade level in `students`\n\nRun one query at a time.\nThis project is about getting comfortable with one query helping another query.",
+      "help": {
+        "concept": "Subqueries feel easier when learners think of them as a two-step process.",
+        "hint_1": "For each task, ask: what should the inner query find first?",
+        "hint_2": "Solve the tasks one by one. Focus on what value or set of values the inner query should return before you write the outer query around it."
+      },
+      "hint": "Ask what the inner query should return first.",
+      "starterCode": "-- Task 1\n-- Return students above the average grade level\n\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table"
+      }
+    },
+    "m10_s01_subquery_meaning": {
+      "title": "What is a subquery?",
+      "prompt": "What is the main meaning of a subquery in SQL?",
+      "help": {
+        "concept": "A subquery is a query written inside another query.",
+        "hint_1": "Think query inside query.",
+        "hint_2": "The inner query helps the outer query by returning something useful first."
+      },
+      "hint": "Think one query inside another query.",
+      "options": {
+        "a": "A query written inside another query",
+        "b": "A comment above a query",
+        "c": "A permanent new table",
+        "d": "A type of join only"
+      }
+    },
+    "m10_s01_useful_meaning": {
+      "title": "Why are subqueries useful?",
+      "prompt": "Why are subqueries often useful in SQL?",
+      "help": {
+        "concept": "Subqueries are useful when the outer query needs another answer first.",
+        "hint_1": "Think one answer depends on another.",
+        "hint_2": "The inner query can calculate a value or return a set that the outer query then uses."
+      },
+      "hint": "Think the outer query needs another answer first.",
+      "options": {
+        "a": "They help when one query needs another answer first",
+        "b": "They remove the need for tables",
+        "c": "They always replace WHERE",
+        "d": "They stop aliases from being used"
+      }
+    },
+    "m10_s01_mental_model_meaning": {
+      "title": "What is a simple mental model for subqueries?",
+      "prompt": "What is a good beginner mental model for subqueries?",
+      "help": {
+        "concept": "A strong beginner model is to think inner query first, outer query second.",
+        "hint_1": "Think two-step logic.",
+        "hint_2": "The inside query finds something, and the outside query uses it."
+      },
+      "hint": "Think inner first, outer second.",
+      "options": {
+        "a": "The inner query finds something first, then the outer query uses it",
+        "b": "The outer query must always run first",
+        "c": "Subqueries always hide the logic",
+        "d": "Subqueries only work with comments"
+      }
+    },
+    "m10_s01_when_beginners_use_meaning": {
+      "title": "When should beginners use subqueries?",
+      "prompt": "When is a subquery usually a good beginner choice?",
+      "help": {
+        "concept": "Subqueries are a good fit when the problem naturally feels like two steps.",
+        "hint_1": "Think do this first, then do that.",
+        "hint_2": "They fit especially well when the outer query depends on a calculated value or list from another query."
+      },
+      "hint": "Think when the problem naturally feels two-step.",
+      "options": {
+        "a": "When the logic naturally feels like do this first, then do that",
+        "b": "Only when no tables exist",
+        "c": "Only when using GROUP BY",
+        "d": "Never, because beginners should avoid them completely"
+      }
+    },
+    "m10_s01_inner_outer_reading": {
+      "title": "How should you start reading a subquery?",
+      "prompt": "What is a good beginner way to start reading a simple subquery?",
+      "help": {
+        "concept": "It helps to first ask what the inner query is trying to return.",
+        "hint_1": "Think what is the inside query finding?",
+        "hint_2": "Once that is clear, the role of the outer query is easier to understand."
+      },
+      "hint": "Ask what the inner query returns.",
+      "options": {
+        "a": "Ask what the inner query is returning first",
+        "b": "Ignore the inner query completely",
+        "c": "Assume the outer query explains everything by itself",
+        "d": "Only read the first line"
+      }
+    },
+    "m10_s01_subquery_true": {
+      "title": "What is true about subqueries?",
+      "prompt": "Select all true statements about subqueries in beginner SQL.",
+      "help": {
+        "concept": "Subqueries are queries inside other queries and often support two-step logic.",
+        "hint_1": "Think inner query helping outer query.",
+        "hint_2": "Choose the statements about nested queries and step-by-step thinking."
+      },
+      "hint": "Think nested query logic.",
+      "options": {
+        "a": "A subquery is written inside another query",
+        "b": "A subquery can help the outer query by returning a value or set",
+        "c": "Subqueries are often useful for two-step problems",
+        "d": "Subqueries permanently change the schema",
+        "e": "A subquery can be beginner-friendly when the logic is simple"
+      }
+    },
+    "m10_s01_usefulness_true": {
+      "title": "What is true about why subqueries are useful?",
+      "prompt": "Select all true statements about why subqueries can be useful.",
+      "help": {
+        "concept": "Subqueries help the outer query use information that another query finds first.",
+        "hint_1": "Think calculate first, use later.",
+        "hint_2": "Choose the statements about inner answers helping outer logic."
+      },
+      "hint": "Think one query helping another query.",
+      "options": {
+        "a": "They can calculate a value the outer query needs",
+        "b": "They can return a set of IDs the outer query can use",
+        "c": "They can make two-step logic easier to express",
+        "d": "They remove the need to understand the data",
+        "e": "They can solve problems that naturally depend on another answer first"
+      }
+    },
+    "m10_s01_mental_model_true": {
+      "title": "What is true about the beginner mental model for subqueries?",
+      "prompt": "Select all true statements about the beginner mental model for subqueries.",
+      "help": {
+        "concept": "The most useful beginner model is to think about the inner answer first, then the outer use of it.",
+        "hint_1": "Think step one, step two.",
+        "hint_2": "Choose the statements about reading the logic as a sequence."
+      },
+      "hint": "Think first answer, then use it.",
+      "options": {
+        "a": "The inner query often provides something the outer query uses",
+        "b": "Subqueries can often be read as a two-step process",
+        "c": "Reading inside logic first can make the outer logic easier",
+        "d": "Subqueries should always be read as one giant block with no steps",
+        "e": "Thinking step by step helps beginners"
+      }
+    },
+    "m10_s01_beginner_use_true": {
+      "title": "What is true about when beginners should use subqueries?",
+      "prompt": "Select all true statements about when subqueries are a good beginner choice.",
+      "help": {
+        "concept": "Beginners can use subqueries safely when the pattern is simple and the purpose is clear.",
+        "hint_1": "Think clear two-step logic.",
+        "hint_2": "Choose the situations where the inner query has an obvious job."
+      },
+      "hint": "Think clear two-step situations.",
+      "options": {
+        "a": "They are useful when comparing against a calculated value",
+        "b": "They are useful when checking whether IDs appear in another table",
+        "c": "They are useful when the inner query has a clear purpose",
+        "d": "They should only be used in extremely advanced SQL",
+        "e": "They can be beginner-safe when kept simple"
+      }
+    },
+    "m10_s01_subquery_workflow_true": {
+      "title": "What matches a good beginner workflow for simple subqueries?",
+      "prompt": "Select all statements that match a good beginner workflow for writing simple subqueries.",
+      "help": {
+        "concept": "A good workflow is to define the inner query's job first, then build the outer query around it.",
+        "hint_1": "Think inside purpose first.",
+        "hint_2": "Choose the steps that help separate the inner and outer roles."
+      },
+      "hint": "Define the inside job first, then write the outside query.",
+      "options": {
+        "a": "Decide what the inner query should return",
+        "b": "Write the inner query's goal in simple words first",
+        "c": "Build the outer query around that returned value or set",
+        "d": "Read the final query as two connected steps",
+        "e": "Ignore what the inner query is supposed to do"
+      }
+    }
+  }
+}

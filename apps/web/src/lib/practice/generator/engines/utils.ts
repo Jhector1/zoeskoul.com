@@ -9,7 +9,7 @@ import type {
     Difficulty,
     ExerciseKind,
     MultiChoiceExercise,
-    SingleChoiceExercise,
+    SingleChoiceExercise, SqlDialect, SqlRuntimeSpec,
 } from "@/lib/practice/types";
 
 import { tag } from "@/lib/practice/generator/shared/i18n";
@@ -253,6 +253,9 @@ export function makeMultiChoiceOut(args: {
     };
 }
 
+
+import type { CodeExpectedInput } from "@/lib/practice/api/validate/schemas";
+
 export function makeCodeInputOut(args: {
     archetype: string;
     id: string;
@@ -261,14 +264,22 @@ export function makeCodeInputOut(args: {
     title: string;
     prompt: string;
     starterCode: string;
+
     language?: CodeLanguage;
-    expected: GenOut<"code_input">["expected"];
+    expected: CodeExpectedInput;
+
     hint?: string;
     help?: ExerciseHelpSpec;
     editorHeight?: number;
     allowLanguageSwitch?: boolean;
+
     stdinHint?: string;
+    starterStdin?: string;
     examples?: Array<{ stdin?: string; stdout: string }>;
+
+    // SQL-only optional fields
+    fixedSqlDialect?: SqlDialect;
+    runtime?: SqlRuntimeSpec;
 }): GenOut<"code_input"> {
     const exercise: CodeInputExercise = {
         id: args.id,
@@ -279,6 +290,7 @@ export function makeCodeInputOut(args: {
         prompt: args.prompt,
         language: args.language ?? "python",
         starterCode: args.starterCode,
+
         ...(args.help ? { help: args.help } : {}),
         ...(args.hint ? { hint: args.hint } : {}),
         ...(args.editorHeight != null ? { editorHeight: args.editorHeight } : {}),
@@ -286,13 +298,17 @@ export function makeCodeInputOut(args: {
             ? { allowLanguageSwitch: args.allowLanguageSwitch }
             : {}),
         ...(args.stdinHint ? { stdinHint: args.stdinHint } : {}),
+        ...(args.starterStdin != null ? { starterStdin: args.starterStdin } : {}),
         ...(args.examples ? { examples: args.examples } : {}),
+
+        ...(args.fixedSqlDialect ? { fixedSqlDialect: args.fixedSqlDialect } : {}),
+        ...(args.runtime ? { runtime: args.runtime } : {}),
     };
 
     return {
         archetype: args.archetype,
         exercise,
-        expected: args.expected,
+        expected: args.expected as GenOut<"code_input">["expected"],
     };
 }
 
@@ -593,8 +609,77 @@ export function makeNoGenerator(
     };
 }
 
+export function makeDragReorderOut(args: {
+    archetype: string;
+    id: string;
+    topic: string;
+    diff: Difficulty;
+    title: string;
+    prompt: string;
+    tokens: Opt[];
+    answerTokenIds: string[];
+    hint?: string;
+    help?: ExerciseHelpSpec;
+}): GenOut<"drag_reorder"> {
+    const exercise = {
+        id: args.id,
+        topic: args.topic,
+        difficulty: args.diff,
+        kind: "drag_reorder" as const,
+        title: args.title,
+        prompt: args.prompt,
+        tokens: args.tokens,
+        ...(args.help ? { help: args.help } : {}),
+        ...(args.hint ? { hint: args.hint } : {}),
+    } as GenOut<"drag_reorder">["exercise"];
+
+    return {
+        archetype: args.archetype,
+        exercise,
+        expected: makeDragExpected(
+            args.answerTokenIds,
+        ) as GenOut<"drag_reorder">["expected"],
+    };
+}
 
 
+export function makeFillBlankChoiceOut(args: {
+    archetype: string;
+    id: string;
+    topic: string;
+    diff: Difficulty;
+    title: string;
+    prompt: string;
+    template: string;
+    choices: string[];
+    correct: string;
+    locale?: string;
+    hint?: string;
+    help?: ExerciseHelpSpec;
+}): GenOut<"fill_blank_choice"> {
+    const exercise = {
+        id: args.id,
+        topic: args.topic,
+        difficulty: args.diff,
+        kind: "fill_blank_choice" as const,
+        title: args.title,
+        prompt: args.prompt,
+        template: args.template,
+        choices: args.choices,
+        ...(args.locale ? { locale: args.locale } : {}),
+        ...(args.help ? { help: args.help } : {}),
+        ...(args.hint ? { hint: args.hint } : {}),
+    } as GenOut<"fill_blank_choice">["exercise"];
+
+    return {
+        archetype: args.archetype,
+        exercise,
+        expected: {
+            kind: "fill_blank_choice",
+            value: args.correct,
+        } as GenOut<"fill_blank_choice">["expected"],
+    };
+}
 export function buildTaggedHelpSteps(
     baseKey: string,
     stepKeys: string[] = ["concept", "hint_1", "hint_2"],

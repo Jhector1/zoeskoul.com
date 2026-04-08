@@ -1,7 +1,7 @@
 import {
   completedTopicKeysFromProgress,
   fetchReviewProgressGET,
-} from "@/lib/subjects/progressClient";
+} from "@/lib/review/progressClient";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 export type ModuleProgressLite = {
@@ -56,16 +56,16 @@ export function useReviewProgressMany(args: {
     (async () => {
       try {
         const settled = await Promise.allSettled(
-          stableIds.map(async (moduleId) => {
+          stableIds.map(async (moduleSlug) => {
             const p = await fetchReviewProgressGET({
               subjectSlug,
-              moduleId,
+              moduleSlug,
               locale,
               signal: ctrl.signal,
             });
 
             return [
-              moduleId,
+              moduleSlug,
               {
                 moduleCompleted: Boolean(p.moduleCompleted),
                 completedTopicKeys: completedTopicKeysFromProgress(p),
