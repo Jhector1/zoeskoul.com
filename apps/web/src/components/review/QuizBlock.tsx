@@ -53,7 +53,16 @@ function computeLocalOkNow(
   const tol = q.tolerance ?? 0;
   return Math.abs(v - q.answer) <= tol;
 }
+function serializePracticeItemForSave(item: any, exercise: any) {
+  const { key, kind, ui, ...rest } = item ?? {};
 
+  if (exercise?.kind === "drag_reorder" && !ui?.reorderTouched) {
+    delete rest.reorder;
+    delete rest.reorderIds;
+  }
+
+  return rest;
+}
 export default function QuizBlock({
                                     prereqsMet = true,
                                     quizId,
@@ -281,8 +290,7 @@ export default function QuizBlock({
       }
 
       if (ps?.item) {
-        const { key, kind, ...rest } = ps.item as any;
-        practiceItemPatch[q.id] = rest;
+        practiceItemPatch[q.id] = serializePracticeItemForSave(ps.item, ps.exercise);
       }
     }
 

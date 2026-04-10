@@ -1,7 +1,7 @@
 // src/components/practice/kinds/DragReorderExerciseUI.tsx
 "use client";
 
-import React, { useMemo, useRef, useState } from "react";
+import React, {useEffect, useMemo, useRef, useState} from "react";
 import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
 import MathMarkdown from "@/components/markdown/MathMarkdown";
 import {ExercisePrompt} from "@/components/practice/kinds/KindHelper";
@@ -25,15 +25,24 @@ const LAYOUT_SPRING = {
   mass: 0.7,
 };
 
+function shuffleArray<T>(arr: T[]) {
+  const copy = [...arr];
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy;
+}
+
 export default function DragReorderExerciseUI({
-  exercise,
-  tokenIds,
-  onChange,
-  disabled,
-  checked,
-  ok,
-  reviewCorrectTokenIds = null,
-}: {
+                                                exercise,
+                                                tokenIds,
+                                                onChange,
+                                                disabled,
+                                                checked,
+                                                ok,
+                                                reviewCorrectTokenIds = null,
+                                              }: {
   exercise: { title: string; prompt: string; tokens: Token[]; hint?: string };
   tokenIds: string[];
   onChange: (ids: string[]) => void;
@@ -48,15 +57,29 @@ export default function DragReorderExerciseUI({
     return m;
   }, [exercise.tokens]);
 
-  const defaultOrder = useMemo(
-    () => (exercise.tokens ?? []).map((t) => String(t.id)),
-    [exercise.tokens],
+  // const [defaultOrder] = useState<string[]>(() =>
+  //     shuffleArray((exercise.tokens ?? []).map((t) => String(t.id)))
+  // );
+
+  const orderSeedKey = useMemo(
+      () => (exercise.tokens ?? []).map((t) => String(t.id)).join("|"),
+      [exercise.tokens],
   );
+
+  const [defaultOrder, setDefaultOrder] = useState<string[]>([]);
+
+  useEffect(() => {
+    setDefaultOrder(
+        shuffleArray((exercise.tokens ?? []).map((t) => String(t.id)))
+    );
+  }, [orderSeedKey]);
 
   const order = useMemo(() => {
     const ids = Array.isArray(tokenIds) && tokenIds.length ? tokenIds.map(String) : defaultOrder;
     const filtered = ids.filter((id) => tokensById.has(id));
-    for (const id of defaultOrder) if (!filtered.includes(id)) filtered.push(id);
+    for (const id of defaultOrder) {
+      if (!filtered.includes(id)) filtered.push(id);
+    }
     return filtered;
   }, [tokenIds, defaultOrder, tokensById]);
 

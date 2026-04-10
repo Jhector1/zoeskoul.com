@@ -76,7 +76,7 @@
       "images": [
         {
           "id": "data_question_flow",
-          "publicId": "",
+
           "alt": ""
         }
       ]
@@ -89,7 +89,7 @@
       "images": [
         {
           "id": "organized_vs_messy_table",
-          "publicId": "",
+
           "alt": ""
         }
       ]
@@ -102,7 +102,7 @@
       "images": [
         {
           "id": "primary_key_simple_example",
-          "publicId": "",
+          "publicId": "primary_key_simple_example_l209sb",
           "alt": ""
         }
       ]

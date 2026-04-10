@@ -19,7 +19,7 @@
               "title": "How do you avoid filtering mistakes?"
             },
             "quiz": {
-              "title": "Quiz: Beginner Filtering Practice"
+              "title": "Quiz: Filtering Practice"
             }
           }
         }
@@ -36,7 +36,7 @@
           },
           "filter_by_text": {
             "title": "Text filters are useful for columns like name and category.",
-            "bodyMarkdown": "Some columns store text values.\n\nIn the `products` table, examples include:\n\n- `name`\n- `category`\n\nText filters are useful when you want rows with one exact word or label.\n\nA strong beginner habit is:\n\n- compare the text value carefully\n- remember that text values usually go in quotes\n\nCode example:\n\n~~~sql\nSELECT name, category\nFROM products\nWHERE category = 'Stationery';\n~~~\n\nThis keeps only rows where the category is exactly `Stationery`.\n\nSo the big idea is:\n\n> text filters help you keep rows based on exact text matches\n\n### Try it yourself\n\nLook at this condition:\n\n~~~sql\nWHERE name = 'Notebook'\n~~~\n\nAsk yourself:\n\n- is this filtering text or numbers?\n- why does the value need quotes?\n- what kind of rows should stay?"
+            "bodyMarkdown": "Some columns store text values.\n\nIn the `products` table, examples include:\n\n- `name`\n- `category`\n\nText filters are useful when you want rows with one exact word or label.\n\nA strong habit is:\n\n- compare the text value carefully\n- remember that text values usually go in quotes\n\nCode example:\n\n~~~sql\nSELECT name, category\nFROM products\nWHERE category = 'Stationery';\n~~~\n\nThis keeps only rows where the category is exactly `Stationery`.\n\nSo the big idea is:\n\n> text filters help you keep rows based on exact text matches\n\n### Try it yourself\n\nLook at this condition:\n\n~~~sql\nWHERE name = 'Notebook'\n~~~\n\nAsk yourself:\n\n- is this filtering text or numbers?\n- why does the value need quotes?\n- what kind of rows should stay?"
           },
           "filter_by_more_than_one_rule": {
             "title": "More than one rule lets you ask more specific questions.",

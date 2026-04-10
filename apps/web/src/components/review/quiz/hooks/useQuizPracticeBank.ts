@@ -44,7 +44,18 @@ function withTimeout<T>(promise: Promise<T>, ms: number, message: string) {
     );
   });
 }
+function sanitizeSavedPracticePatch(savedPatch: any, exerciseKind?: string) {
+  if (!savedPatch) return null;
 
+  const next = { ...savedPatch };
+
+  if (exerciseKind === "drag_reorder" && !next.ui?.reorderTouched) {
+    delete next.reorder;
+    delete next.reorderIds;
+  }
+
+  return next;
+}
 export function useQuizPracticeBank(args: {
   questions: ReviewQuestion[];
   spec: ReviewQuizSpec;
@@ -176,8 +187,10 @@ export function useQuizPracticeBank(args: {
                   raw: (k) => rawKeyRef.current(k),
                   resolveText: (value) => resolveTextRef.current(value),
                 },
-                savedPatch: initialState?.practiceItemPatch?.[q.id] ?? null,
-                transformItem: (baseItem, resolvedEx) => {
+                savedPatch: sanitizeSavedPracticePatch(
+                    initialState?.practiceItemPatch?.[q.id] ?? null,
+                    "drag_reorder" // or derive from resolved exercise/fetch metadata
+                ),                transformItem: (baseItem, resolvedEx) => {
                   const mode = (spec as any).mode ?? "quiz";
                   const carryFromPrev =
                       mode === "project" && Boolean((q as any).carryFromPrev);

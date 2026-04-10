@@ -32,19 +32,19 @@
         "database_thinking": {
           "why_database_thinking_matters": {
             "title": "Good structure makes data useful.",
-            "bodyMarkdown": "A database is helpful because it can answer questions.\n\n[[image:question_to_table_answer]]\n\nYou do not store data just to keep it.\nYou store it so you can **use it**.\n\nExamples:\n\n- Which students got an A?\n- How many courses are there?\n- Which products are out of stock?\n\nSo database thinking starts with one big idea:\n\n> organize data so questions become easier to answer\n\nThat is why structure matters from the beginning."
+            "bodyMarkdown": "A database is helpful because it can answer questions.\n\n[[image:question_to_table_answer]]\n\nYou do not store data just to keep it.\nYou store it so you can **use it**.\n\nExamples:\n\n- Which students got an A?\n- How many courses are there?\n- Which products are out of stock?\n\nSo database thinking starts with one core idea:\n\n> organize data so questions are easier to answer"
           },
           "questions_turn_into_answers": {
             "title": "A database should help you ask clear questions.",
-            "bodyMarkdown": "When data is organized well, you can ask better questions.\n\n[[image:data_question_flow]]\n\nThat is the mindset behind SQL:\n\n> ask a question, get an answer\n\nA messy system makes questions harder.\nA clear system makes questions easier.\n\nFor example, if student names, grades, and courses are mixed together in a confusing way, it becomes harder to search correctly.\n\nSo database thinking is not only about storing data.\nIt is also about preparing data for future questions."
+            "bodyMarkdown": "When data is organized well, you can ask better questions.\n\n[[image:data_question_flow]]\n\nThat is the mindset behind SQL:\n\n> ask a question, get an answer\n\nA messy system makes questions harder.\nA clear system makes questions easier.\n\nSo database thinking is not only about storing data.\nIt is also about preparing data for future questions."
           },
           "why_structure_matters": {
             "title": "Clear tables reduce confusion.",
-            "bodyMarkdown": "Good database design keeps information organized.\n\n[[image:organized_vs_messy_table]]\n\nThat usually means:\n\n- one table should focus on one main subject\n- columns should be clear\n- repeated information should be avoided when possible\n\nIf structure is messy, mistakes become more likely.\n\nFor example:\n\n- duplicate data is harder to update\n- mixed meanings confuse queries\n- unclear columns create bad results\n\nSo a strong structure helps the database stay easier to read, search, and maintain."
+            "bodyMarkdown": "Good database design keeps information organized.\n\n[[image:organized_vs_messy_table]]\n\nThat usually means:\n\n- one table focuses on one main subject\n- columns are clear\n- repeated information is reduced when possible\n\nIf structure is messy, mistakes become more likely.\n\nFor example:\n\n- duplicate data is harder to update\n- mixed meanings confuse queries\n- unclear columns create bad results\n\nSo strong structure makes the database easier to read, search, and maintain."
           },
           "what_a_key_is": {
             "title": "A key helps identify the right row.",
-            "bodyMarkdown": "A **key** is a value used to identify something important in a table.\n\n[[image:primary_key_simple_example]]\n\nThe most common beginner example is an `id`.\n\nExample:\n\n| student_id | name |\n|---|---|\n| 1 | Mia |\n| 2 | Leo |\n\nHere, `student_id` helps identify each student separately.\n\nKeys matter because names can repeat, but a key should point to one specific row.\n\nLater, you will also learn that keys help connect one table to another."
+            "bodyMarkdown": "A **key** is a value used to identify something important in a table.\n\n[[image:primary_key_simple_example]]\n\nA common example is an `id`.\n\nExample:\n\n| student_id | name |\n|---|---|\n| 1 | Mia |\n| 2 | Leo |\n\nHere, `student_id` helps identify each student separately.\n\nKeys matter because names can repeat, but a key should point to one specific row.\n\nLater, keys also help connect one table to another."
           }
         }
       }
@@ -101,7 +101,7 @@
     },
     "m0_s03_key_purpose": {
       "title": "What is a key used for?",
-      "prompt": "In beginner database design, what is a key mainly used for?",
+      "prompt": "In database design, what is a key mainly used for?",
       "help": {
         "concept": "A key helps identify a specific row or record in a table.",
         "hint_1": "Think about an `id` column.",
@@ -139,7 +139,7 @@
         "hint_1": "Choose statements that match organization, clarity, and identification.",
         "hint_2": "Avoid choices that sound random or unrelated to data design."
       },
-      "hint": "Match each option to the big ideas from the lesson.",
+      "hint": "Match each option to the main ideas from the lesson.",
       "options": {
         "a": "A database should help answer questions.",
         "b": "Good structure makes queries easier.",
@@ -223,12 +223,7 @@
       },
       "hint": "Databases help you get ____.",
       "template": "A good database helps turn stored data into useful ____.",
-      "choices": [
-        "answers",
-        "colors",
-        "stickers",
-        "batteries"
-      ],
+      "choices": ["answers", "colors", "stickers", "batteries"],
       "correct": "answers"
     },
     "m0_s03_fill_structure_value": {
@@ -241,12 +236,7 @@
       },
       "hint": "Good structure adds clarity.",
       "template": "Good database structure makes data easier to ____.",
-      "choices": [
-        "understand",
-        "erase",
-        "hide",
-        "ignore"
-      ],
+      "choices": ["understand", "erase", "hide", "ignore"],
       "correct": "understand"
     },
     "m0_s03_fill_key_meaning": {
@@ -259,12 +249,7 @@
       },
       "hint": "A key helps you identify one ____.",
       "template": "A key is used to identify one specific ____ in a table.",
-      "choices": [
-        "row",
-        "screen",
-        "query",
-        "keyboard"
-      ],
+      "choices": ["row", "screen", "query", "keyboard"],
       "correct": "row"
     },
     "m0_s03_fill_name_problem": {
@@ -277,12 +262,7 @@
       },
       "hint": "People can share the same ____.",
       "template": "A name alone may not be enough because names can ____.",
-      "choices": [
-        "repeat",
-        "sort",
-        "delete",
-        "connect"
-      ],
+      "choices": ["repeat", "sort", "delete", "connect"],
       "correct": "repeat"
     },
     "m0_s03_fill_future_keys": {
@@ -290,183 +270,13 @@
       "prompt": "Fill in the blank with the best answer.",
       "help": {
         "concept": "After learning that keys identify rows, you later learn they can help connect tables.",
-        "hint_1": "This comes after the beginner idea of identification.",
+        "hint_1": "This comes after the idea of identification.",
         "hint_2": "The missing word is about tables working together."
       },
       "hint": "Keys later help tables ____.",
       "template": "Later, keys can also help ____ one table to another.",
-      "choices": [
-        "connect",
-        "paint",
-        "freeze",
-        "rotate"
-      ],
+      "choices": ["connect", "paint", "freeze", "rotate"],
       "correct": "connect"
-    },
-    "m0_s02_reorder_table_reading_flow": {
-      "title": "Build the basic table idea",
-      "prompt": "Reorder the ideas to explain how a table works.",
-      "help": {
-        "concept": "A table organizes information using columns and rows.",
-        "hint_1": "Columns describe the kind of data.",
-        "hint_2": "Rows hold the actual entries."
-      },
-      "hint": "Think columns first, then rows, then entries.",
-      "tokens": {
-        "t1": "columns describe one type of information",
-        "t2": "rows hold actual entries",
-        "t3": "a table organizes data clearly"
-      }
-    },
-    "m0_s02_reorder_row_column_meaning": {
-      "title": "Match rows and columns",
-      "prompt": "Put these ideas in the correct order.",
-      "help": {
-        "concept": "Rows go across and columns go down in a table.",
-        "hint_1": "A row is horizontal.",
-        "hint_2": "A column is vertical."
-      },
-      "hint": "Across comes before down here.",
-      "tokens": {
-        "t1": "a row goes across",
-        "t2": "a column goes down",
-        "t3": "together they organize the table"
-      }
-    },
-    "m0_s02_reorder_record_field_relationship": {
-      "title": "Record and field",
-      "prompt": "Reorder the ideas to explain record and field correctly.",
-      "help": {
-        "concept": "A record is one full row, and a field is one value inside it.",
-        "hint_1": "Start with the bigger thing.",
-        "hint_2": "Then move to the smaller value."
-      },
-      "hint": "Whole row first, single value second.",
-      "tokens": {
-        "t1": "a record is one full row",
-        "t2": "a field is one value inside that row",
-        "t3": "fields live inside a record"
-      }
-    },
-    "m0_s02_reorder_good_naming_logic": {
-      "title": "Why names matter",
-      "prompt": "Reorder the ideas to explain why table and column names matter.",
-      "help": {
-        "concept": "Good names make tables easier to understand.",
-        "hint_1": "Table name gives the big context.",
-        "hint_2": "Column names explain the pieces."
-      },
-      "hint": "Think table first, then columns, then clarity.",
-      "tokens": {
-        "t1": "the table name tells what kind of data it holds",
-        "t2": "column names explain what each value means",
-        "t3": "clear names make data easier to read"
-      }
-    },
-    "m0_s02_reorder_read_table_steps": {
-      "title": "How to read a table",
-      "prompt": "Put the reading steps in the best beginner order.",
-      "help": {
-        "concept": "A smart reading flow starts broad and then becomes more detailed.",
-        "hint_1": "Start with the table name.",
-        "hint_2": "Then check columns before rows."
-      },
-      "hint": "Go from labels to entries.",
-      "tokens": {
-        "t1": "look at the table name",
-        "t2": "look at the column names",
-        "t3": "read the rows underneath"
-      }
-    },
-    "m0_s02_fill_row_direction": {
-      "title": "Row direction",
-      "prompt": "Fill in the blank with the correct word.",
-      "help": {
-        "concept": "A row is the horizontal part of a table.",
-        "hint_1": "It moves left to right.",
-        "hint_2": "A row goes across."
-      },
-      "hint": "Think horizontal.",
-      "template": "In a table, a row goes ____.",
-      "choices": [
-        "across",
-        "down",
-        "outside",
-        "backward"
-      ],
-      "correct": "across"
-    },
-    "m0_s02_fill_column_purpose": {
-      "title": "What columns describe",
-      "prompt": "Choose the word that completes the sentence.",
-      "help": {
-        "concept": "A column groups one kind of data such as name, price, or grade.",
-        "hint_1": "Columns describe the kind of data.",
-        "hint_2": "They describe one type of information."
-      },
-      "hint": "Think data category.",
-      "template": "Each column describes one type of ____.",
-      "choices": [
-        "information",
-        "database",
-        "password",
-        "button"
-      ],
-      "correct": "information"
-    },
-    "m0_s02_fill_record_meaning": {
-      "title": "Meaning of record",
-      "prompt": "Fill in the blank with the best answer.",
-      "help": {
-        "concept": "A record is one full entry in a table.",
-        "hint_1": "It is the whole horizontal entry.",
-        "hint_2": "A record is one full row."
-      },
-      "hint": "Think full entry.",
-      "template": "A record is one full ____ in a table.",
-      "choices": [
-        "row",
-        "column",
-        "database",
-        "server"
-      ],
-      "correct": "row"
-    },
-    "m0_s02_fill_field_meaning": {
-      "title": "Meaning of field",
-      "prompt": "Complete the sentence with the best word.",
-      "help": {
-        "concept": "A field is one small piece of data inside a record.",
-        "hint_1": "It is smaller than a full row.",
-        "hint_2": "A field is one value."
-      },
-      "hint": "Think one box in a row.",
-      "template": "A field is one ____ inside a record.",
-      "choices": [
-        "value",
-        "table",
-        "query",
-        "diagram"
-      ],
-      "correct": "value"
-    },
-    "m0_s02_fill_reading_first_step": {
-      "title": "First reading step",
-      "prompt": "Choose the best phrase to complete the sentence.",
-      "help": {
-        "concept": "A good beginner reading flow starts with the table name, then column names, then rows.",
-        "hint_1": "Start with the broad label.",
-        "hint_2": "The first thing to inspect is the table name."
-      },
-      "hint": "Start broad.",
-      "template": "A smart way to read a table starts with the ____.",
-      "choices": [
-        "table name",
-        "last row",
-        "table border",
-        "keyboard"
-      ],
-      "correct": "table name"
     }
   }
 }

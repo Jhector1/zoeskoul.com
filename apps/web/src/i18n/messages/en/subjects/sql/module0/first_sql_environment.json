@@ -32,7 +32,7 @@
         "first_sql_environment": {
           "where_sql_runs": {
             "title": "You will run SQL in the Tools panel on the right.",
-            "bodyMarkdown": "This course gives you a real **SQL workspace**.\n\nOn the right side, you will see a **Run SQL** tool.\nThat is where you will practice.\n\nInside it, you can:\n\n- type SQL in the editor\n- click **Run**\n- read the result below\n\n[[image:sql_workspace_overview]]\n\nSo this is your simple loop:\n\n1. type a query\n2. click **Run**\n3. inspect the answer\n\nThis is not just reading about SQL.\nYou will actually use it."
+            "bodyMarkdown": "This course gives you a real **SQL workspace**.\n\nOn the right side, you will see a **Run SQL** tool.\nThat is where you will practice.\n\nInside it, you can:\n\n- type SQL in the editor\n- click **Run**\n- read the result below\n\n[[image:sql_workspace_overview]]\n\nSo the main loop is:\n\n1. type a query\n2. click **Run**\n3. inspect the answer"
           },
           "sql_editor_basics": {
             "title": "The dark editor is where you write your SQL.",
@@ -44,7 +44,7 @@
           },
           "reading_query_results": {
             "title": "Read results by checking the headers first, then the rows.",
-            "bodyMarkdown": "After you run a query, the answer appears below the editor.\n\nIn the **Results** tab, look at:\n\n1. the **column names**\n2. the **rows** underneath\n\nIf you run:\n\n~~~sql\nSELECT 'Hello SQL' AS message;\n~~~\n\nthen:\n\n- `message` is the column name\n- `Hello SQL` is the returned value\n\nIf you run a table query like:\n\n~~~sql\nSELECT * FROM students;\n~~~\n\nthen each row is one student, and each column tells you what kind of value you are seeing.\n\nYou can also click **Tables** to see what tables exist before or after a query.\n\nSo the habit is:\n\n> run the query, then read the answer carefully"
+            "bodyMarkdown": "After you run a query, the answer appears below the editor.\n\nIn the **Results** tab, look at:\n\n1. the **column names**\n2. the **rows** underneath\n\nIf you run:\n\n~~~sql\nSELECT 'Hello SQL' AS message;\n~~~\n\nthen:\n\n- `message` is the column name\n- `Hello SQL` is the returned value\n\nIf you run a table query like:\n\n~~~sql\nSELECT * FROM students;\n~~~\n\nthen each row is one student, and each column tells you what kind of value you are seeing.\n\nYou can also click **Tables** to see what tables exist.\n\nSo the habit is:\n\n> run the query, then read the answer carefully"
           }
         }
       }
@@ -144,7 +144,7 @@
       "title": "Explore the students table",
       "prompt": "Use the SQL workspace on the right to explore the `students` table.\n\nFor each task:\n\n1. type the query in the editor\n2. click **Run**\n3. read the **Results** tab\n4. optionally click **Tables** to remind yourself what table exists\n\nTasks:\n\n1. Return a message using:\n   `SELECT 'Ready to query' AS message;`\n2. Show all columns and rows from `students`\n3. Show only the `name` and `grade` columns\n4. Show only students with grade `A`\n5. Sort the full table by `name`\n\nRun one query at a time.\nDo not paste them all together.\nThis project is about using the workspace confidently.",
       "help": {
-        "concept": "This project trains the full beginner workflow: write a query, run it, inspect the result, then try the next query.",
+        "concept": "This project trains the full workflow: write a query, run it, inspect the result, then try the next query.",
         "hint_1": "You will likely use `SELECT 'Ready to query' AS message;`, `SELECT *`, `SELECT name, grade`, `WHERE grade = 'A'`, and `ORDER BY name`.",
         "hint_2": "A good sequence is:\n```sql\nSELECT 'Ready to query' AS message;\nSELECT * FROM students;\nSELECT name, grade FROM students;\nSELECT * FROM students WHERE grade = 'A';\nSELECT * FROM students ORDER BY name;\n```\nRun them one at a time."
       },
@@ -178,7 +178,7 @@
       "title": "What is the dark editor for?",
       "prompt": "What do you mainly use the dark editor area for?",
       "help": {
-        "concept": "The editor is where the learner writes SQL before running it.",
+        "concept": "The editor is where SQL is written before running it.",
         "hint_1": "Think about where the query text goes.",
         "hint_2": "The answer appears below after running."
       },
@@ -210,7 +210,7 @@
       "title": "What is the Results tab for?",
       "prompt": "What do you mainly look at in the **Results** tab?",
       "help": {
-        "concept": "This checks whether the learner understands where query output appears.",
+        "concept": "This checks whether you understand where query output appears.",
         "hint_1": "It shows the answer from the query you just ran.",
         "hint_2": "Think returned rows and columns."
       },
@@ -224,7 +224,7 @@
     },
     "m0_s04_read_results_order": {
       "title": "How should you read the result table?",
-      "prompt": "What is a good beginner way to read a query result table?",
+      "prompt": "What is a good way to read a query result table?",
       "help": {
         "concept": "The simplest reading order is headers first, then the rows.",
         "hint_1": "Start with the labels.",
@@ -240,9 +240,9 @@
     },
     "m0_s04_workspace_parts_true": {
       "title": "Which parts belong to the SQL workspace?",
-      "prompt": "Select all parts that belong to the beginner SQL workspace.",
+      "prompt": "Select all parts that belong to the SQL workspace.",
       "help": {
-        "concept": "This checks recognition of the main UI pieces the learner will use.",
+        "concept": "This checks recognition of the main UI pieces you will use.",
         "hint_1": "Think editor, running, and reading results.",
         "hint_2": "Pick the parts that support writing and inspecting queries."
       },
@@ -259,7 +259,7 @@
       "title": "What is true about the hello query?",
       "prompt": "Select all true statements about this query:\n\n~~~sql\nSELECT 'Hello SQL' AS message;\n~~~",
       "help": {
-        "concept": "This checks whether the learner can read a tiny query result correctly.",
+        "concept": "This checks whether you can read a tiny query result correctly.",
         "hint_1": "The query returns one value with a named column.",
         "hint_2": "Focus on the quoted text and `AS message`."
       },
@@ -276,7 +276,7 @@
       "title": "What is true about `SELECT * FROM students;`?",
       "prompt": "Select all true statements about this query:\n\n~~~sql\nSELECT * FROM students;\n~~~",
       "help": {
-        "concept": "This checks the beginner meaning of `SELECT *`.",
+        "concept": "This checks the meaning of `SELECT *`.",
         "hint_1": "The `*` means all columns.",
         "hint_2": "It is about reading from the `students` table."
       },
@@ -293,7 +293,7 @@
       "title": "Why do result headers matter?",
       "prompt": "Select all true statements about column names in query results.",
       "help": {
-        "concept": "Column names help the learner understand what each returned value means.",
+        "concept": "Column names help you understand what each returned value means.",
         "hint_1": "Headers are labels for the values below them.",
         "hint_2": "They help you read the answer correctly."
       },
@@ -307,8 +307,8 @@
       }
     },
     "m0_s04_interaction_flow_true": {
-      "title": "What matches the right beginner workflow?",
-      "prompt": "Select all statements that match the right beginner workflow in this SQL tool.",
+      "title": "What matches the right workflow?",
+      "prompt": "Select all statements that match the right workflow in this SQL tool.",
       "help": {
         "concept": "This checks the intended habit for using the workspace.",
         "hint_1": "The learner should actively interact with the tool.",
@@ -325,7 +325,7 @@
     },
     "m0_s04_reorder_workspace_loop": {
       "title": "Use the SQL workspace",
-      "prompt": "Reorder the beginner workspace loop.",
+      "prompt": "Reorder the workspace loop.",
       "help": {
         "concept": "The main workflow is type, run, inspect.",
         "hint_1": "Typing comes first.",
@@ -340,9 +340,9 @@
     },
     "m0_s04_reorder_editor_focus": {
       "title": "Know the main workspace parts",
-      "prompt": "Put these workspace ideas in the most useful beginner order.",
+      "prompt": "Put these workspace ideas in the most useful order.",
       "help": {
-        "concept": "Beginners should focus on the editor, Run button, Results, and Tables.",
+        "concept": "Focus on the editor, Run button, Results, and Tables.",
         "hint_1": "Start with where you write.",
         "hint_2": "Then run, then inspect."
       },
@@ -402,7 +402,7 @@
     },
     "m0_s04_reorder_workspace_parts": {
       "title": "Core parts of the SQL tool",
-      "prompt": "Reorder the core beginner parts of the SQL tool from writing to reading.",
+      "prompt": "Reorder the core parts of the SQL tool from writing to reading.",
       "help": {
         "concept": "The SQL tool supports writing, running, and reading queries.",
         "hint_1": "Begin with the editor.",
@@ -426,12 +426,7 @@
       },
       "hint": "Think about the language you are practicing.",
       "template": "This course gives you a real ____ workspace.",
-      "choices": [
-        "SQL",
-        "HTML",
-        "CSS",
-        "Music"
-      ],
+      "choices": ["SQL", "HTML", "CSS", "Music"],
       "correct": "SQL"
     },
     "m0_s04_fill_run_action": {
@@ -444,12 +439,7 @@
       },
       "hint": "Think about the execution button.",
       "template": "After typing a query, click ____.",
-      "choices": [
-        "Run",
-        "Paint",
-        "Sleep",
-        "Erase"
-      ],
+      "choices": ["Run", "Paint", "Sleep", "Erase"],
       "correct": "Run"
     },
     "m0_s04_fill_results_tab_name": {
@@ -462,12 +452,7 @@
       },
       "hint": "Think about the answer tab.",
       "template": "After running a query, the answer usually appears in the ____ tab.",
-      "choices": [
-        "Results",
-        "Profile",
-        "Themes",
-        "Audio"
-      ],
+      "choices": ["Results", "Profile", "Themes", "Audio"],
       "correct": "Results"
     },
     "m0_s04_fill_hello_column_name": {
@@ -480,30 +465,20 @@
       },
       "hint": "Look at the alias after `AS`.",
       "template": "In `SELECT 'Hello SQL' AS message;`, the column name is ____.",
-      "choices": [
-        "message",
-        "students",
-        "grade",
-        "Results"
-      ],
+      "choices": ["message", "students", "grade", "Results"],
       "correct": "message"
     },
     "m0_s04_fill_tables_tab_name": {
       "title": "See available tables",
       "prompt": "Choose the correct tab name.",
       "help": {
-        "concept": "The Tables tab helps learners see which tables are available in the workspace.",
+        "concept": "The Tables tab helps you see which tables are available in the workspace.",
         "hint_1": "It helps you inspect available tables.",
-        "hint_2": "It is literally named after what it shows."
+        "hint_2": "It is named after what it shows."
       },
       "hint": "Think about the tab that lists tables.",
       "template": "You can click ____ to see what tables exist.",
-      "choices": [
-        "Tables",
-        "Volume",
-        "Search",
-        "Brush"
-      ],
+      "choices": ["Tables", "Volume", "Search", "Brush"],
       "correct": "Tables"
     }
   }

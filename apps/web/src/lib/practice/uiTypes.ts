@@ -25,6 +25,9 @@ export type PracticeHelpState = {
     busyStepKey: string | null;
     error: string | null;
 };
+type PracticeUiMeta = {
+    reorderTouched?: boolean;
+};
 
 export type QItem = {
     key: string;
@@ -52,17 +55,17 @@ export type QItem = {
 
     text: string;
 
-    reorderIds: string[];
-    reorder: string[];
+    reorder?: string[];
+    reorderIds?: string[]; // legacy only
 
     voiceTranscript: string;
     voiceAudioId?: string;
 
     help: PracticeHelpState;
 
-    // temporary legacy compatibility only
-    revealed?: boolean;
+    ui?: PracticeUiMeta;
 
+    revealed?: boolean;
     codeRunOutput?: string;
 };
 
