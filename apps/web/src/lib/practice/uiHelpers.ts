@@ -213,11 +213,6 @@ export function initItemFromExercise(
 
     const exAny = ex as any;
 
-    const reorderIds =
-        ex.kind === "drag_reorder" && Array.isArray(exAny.tokens)
-            ? exAny.tokens.map((t: any) => String(t?.id ?? t))
-            : [];
-
     const matRows = ex.kind === "matrix_input" ? 2 : 0;
     const matCols = ex.kind === "matrix_input" ? 2 : 0;
 
@@ -258,6 +253,8 @@ export function initItemFromExercise(
             error: null,
         },
 
+        ui: {},
+
         revealed: false,
 
         codeLang: "python",
@@ -266,8 +263,8 @@ export function initItemFromExercise(
         stdin: "",
 
         text: "",
-        reorderIds,
-        reorder: [...reorderIds],
+        reorderIds: [],
+        reorder: undefined,
 
         voiceTranscript: "",
         voiceAudioId: "",
