@@ -14,8 +14,11 @@ type Props = {
     nextLocked?: boolean;
     nextBillingHref?: string | null;
     canGoNext: boolean;
-    isLastModule: boolean;
+
+    showCertificateCta?: boolean;
     canGetCertificate: boolean;
+    certificateLabel?: string;
+    certificateHint?: string | null;
 };
 
 const ReviewModuleNavBar = React.forwardRef<HTMLDivElement, Props>(
@@ -27,8 +30,10 @@ const ReviewModuleNavBar = React.forwardRef<HTMLDivElement, Props>(
             nextLocked = false,
             nextBillingHref,
             canGoNext,
-            isLastModule,
+            showCertificateCta = false,
             canGetCertificate,
+            certificateLabel = "Get certificate",
+            certificateHint = null,
         },
         ref,
     ) {
@@ -55,11 +60,12 @@ const ReviewModuleNavBar = React.forwardRef<HTMLDivElement, Props>(
             router.refresh();
         };
 
-        const showNextCta = Boolean(nextModuleId) && !isLastModule;
+        const showNextCta = Boolean(nextModuleId) && !showCertificateCta;
         const nextLabel = nextLocked ? "Unlock next" : t("buttons.nextModule");
 
-        const showUnlockHint = !isLastModule && !canGoNext && Boolean(nextModuleId);
-        const showCertificateHint = isLastModule && !canGetCertificate;
+        const showUnlockHint = !showCertificateCta && !canGoNext && Boolean(nextModuleId);
+        const showCertificateHint =
+            Boolean(showCertificateCta) && Boolean(certificateHint) && !canGetCertificate;
         const showHint = showUnlockHint || showCertificateHint;
 
         return (
@@ -78,17 +84,15 @@ const ReviewModuleNavBar = React.forwardRef<HTMLDivElement, Props>(
                     {showHint ? (
                         <div className="ui-surface-floating max-w-full rounded-2xl px-3 py-2 text-right">
                             <div className="ui-review-bottom-hint">
-                                {showUnlockHint
-                                    ? t.rich("hints.unlockNext", {
+                                {showUnlockHint ? (
+                                    t.rich("hints.unlockNext", {
                                         next: (chunks) => (
                                             <span className="font-medium">{chunks}</span>
                                         ),
                                     })
-                                    : t.rich("hints.unlockCertificate", {
-                                        certificate: (chunks) => (
-                                            <span className="font-medium">{chunks}</span>
-                                        ),
-                                    })}
+                                ) : (
+                                    <span>{certificateHint}</span>
+                                )}
                             </div>
                         </div>
                     ) : null}
@@ -110,7 +114,7 @@ const ReviewModuleNavBar = React.forwardRef<HTMLDivElement, Props>(
                                 <span>{t("buttons.prevModule")}</span>
                             </button>
 
-                            {isLastModule ? (
+                            {showCertificateCta ? (
                                 <button
                                     type="button"
                                     disabled={!canGetCertificate}
@@ -120,14 +124,10 @@ const ReviewModuleNavBar = React.forwardRef<HTMLDivElement, Props>(
                                             ? "ui-btn-primary px-2.5"
                                             : "ui-btn-secondary px-2.5 opacity-60 cursor-not-allowed",
                                     )}
-                                    aria-label={t("buttons.getCertificate")}
-                                    title={
-                                        !canGetCertificate
-                                            ? t("aria.lockedCertificate")
-                                            : t("buttons.getCertificate")
-                                    }
+                                    aria-label={certificateLabel}
+                                    title={certificateLabel}
                                 >
-                                    <span>{t("buttons.getCertificate")}</span>
+                                    <span>{certificateLabel}</span>
                                     <span aria-hidden>→</span>
                                 </button>
                             ) : showNextCta ? (

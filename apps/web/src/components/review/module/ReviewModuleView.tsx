@@ -44,123 +44,19 @@ import FlowNavigator, {
     type FlowNavigationConfig,
     resolveFlowNavigationConfig,
 } from "@/components/review/navigation/FlowNavigator";
-import {resolveToolDefaults} from "@/components/tools/resolveToolDefaults";
+import { resolveToolDefaults } from "@/components/tools/resolveToolDefaults";
+import { resolveSqlRunnerConfig } from "@/lib/subjects/sql/runtime/resolveSqlRunnerConfig";
 
-function useMediaQuery(query: string) {
-    const [matches, setMatches] = React.useState(false);
-
-    React.useEffect(() => {
-        if (typeof window === "undefined" || !window.matchMedia) return;
-        const mq = window.matchMedia(query);
-
-        const apply = () => setMatches(Boolean(mq.matches));
-        apply();
-
-        if (mq.addEventListener) mq.addEventListener("change", apply);
-        else (mq as any).addListener?.(apply);
-
-        return () => {
-            if (mq.removeEventListener) mq.removeEventListener("change", apply);
-            else (mq as any).removeListener?.(apply);
-        };
-    }, [query]);
-
-    return matches;
-}
-
-function MobileDrawer(props: {
-    open: boolean;
-    side: "left" | "right";
-    title: string;
-    reduceMotion: boolean;
-    onClose: () => void;
-    children: React.ReactNode;
-}) {
-    const { open, side, title, reduceMotion, onClose, children } = props;
-
-    return (
-        <AnimatePresence>
-            {open ? (
-                <>
-                    <motion.button
-                        type="button"
-                        aria-label="Close drawer"
-                        className="fixed inset-0 z-[90] bg-black/30 backdrop-blur-[2px]"
-                        onClick={onClose}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: reduceMotion ? 0 : 0.16 }}
-                    />
-
-                    <motion.aside
-                        className={cn(
-                            "fixed top-0 bottom-0 z-[100] w-[min(92vw,380px)]",
-                            "bg-white/85 backdrop-blur border border-neutral-200/70",
-                            "dark:bg-[#0b0d12]/85 dark:border-white/10",
-                            "shadow-2xl",
-                            side === "left" ? "left-0 rounded-r-2xl" : "right-0 rounded-l-2xl",
-                        )}
-                        initial={{ x: side === "left" ? -24 : 24, opacity: 0 }}
-                        animate={{ x: 0, opacity: 1 }}
-                        exit={{ x: side === "left" ? -24 : 24, opacity: 0 }}
-                        transition={{
-                            duration: reduceMotion ? 0 : 0.2,
-                            ease: [0.16, 1, 0.3, 1],
-                        }}
-                    >
-                        <div className="h-full min-h-0 flex flex-col">
-                            <div className="shrink-0 flex items-center justify-between gap-2 p-3">
-                                <div className="text-sm font-black text-neutral-900 dark:text-white/90">
-                                    {title}
-                                </div>
-                                <button
-                                    type="button"
-                                    className="ui-btn ui-btn-secondary text-xs font-extrabold"
-                                    onClick={onClose}
-                                >
-                                    Close
-                                </button>
-                            </div>
-                            <div className="flex-1 min-h-0 overflow-auto">{children}</div>
-                        </div>
-                    </motion.aside>
-                </>
-            ) : null}
-        </AnimatePresence>
-    );
-}
-const STUDENTS_INITIAL_TABLE_SNAPSHOTS = {
-    students: {
-        name: "students",
-        columns: [
-            { name: "id", type: "INTEGER" },
-            { name: "name", type: "TEXT" },
-            { name: "grade", type: "INTEGER" },
-        ],
-        rows: [
-            [1, "Ana", 90],
-            [2, "Leo", 85],
-            [3, "Mina", 95],
-        ],
-        rowCount: 3,
-    },
-};
-
-const STUDENTS_SQL_SCHEMA = `
-CREATE TABLE students (
-  id INTEGER PRIMARY KEY,
-  name TEXT NOT NULL,
-  grade INTEGER
-);
-`;
-
-const STUDENTS_SQL_SEED = `
-INSERT INTO students (id, name, grade) VALUES
-  (1, 'Ana', 90),
-  (2, 'Leo', 85),
-  (3, 'Mina', 95);
-`;
+import MobileDrawer from "./components/layout/MobileDrawer";
+import SubjectFinishBanner from "./components/finish/SubjectFinishBanner";
+import { useMediaQuery } from "./hooks/useMediaQuery";
+import { useReduceMotion } from "./hooks/useReduceMotion";
+import { useSubjectFinish } from "./hooks/useSubjectFinish";
+import {
+    STUDENTS_INITIAL_TABLE_SNAPSHOTS,
+    STUDENTS_SQL_SCHEMA,
+    STUDENTS_SQL_SEED,
+} from "./data/studentsSqlFallback";
 
 export default function ReviewModuleView({
                                              mod,
@@ -224,6 +120,7 @@ export default function ReviewModuleView({
             }),
         [subjectSlug, mod],
     );
+
     const tool = useToolCodeRunnerState({
         progress,
         progressHydrated,
@@ -237,7 +134,28 @@ export default function ReviewModuleView({
         rightW: panels.rightW,
     });
 
+    const topicRuntime = (viewTopic as any)?.meta?.runtimeDefaults ?? null;
 
+    const topicSqlFallback = useMemo(() => {
+        if (topicRuntime?.kind !== "sql" || !topicRuntime.datasetId) return null;
+
+        return resolveSqlRunnerConfig({
+            language: "sql",
+            sqlDialect: topicRuntime.fixedSqlDialect,
+            sqlDatasetId: topicRuntime.datasetId,
+            defaultSqlDialect: toolDefaults.defaultSqlDialect,
+        });
+    }, [topicRuntime, toolDefaults.defaultSqlDialect]);
+
+    const reduceMotion = useReduceMotion();
+    const subjectFinish = useSubjectFinish({
+        subjectSlug,
+        moduleSlug,
+        enabled: Boolean(subjectSlug && moduleSlug),
+        refreshKey:
+            progressHydrated &&
+            `${subjectSlug}:${moduleSlug}:${String(moduleCompleteFromProgress(progress, topics))}:${String((progress as any)?.moduleCompleted)}`,
+    });
 
     const handleEnsureToolsVisible = useCallback(() => {
         if (panels.rightCollapsed) {
@@ -255,13 +173,6 @@ export default function ReviewModuleView({
     const handleUnbindFromToolsPanel = useCallback(() => {
         tool.unbindCodeInput();
     }, [tool.unbindCodeInput]);
-
-    const handleToolChangeLang = useCallback(
-        (lang: CodeLanguage) => {
-            tool.setToolLang(lang);
-        },
-        [tool.setToolLang],
-    );
 
     const handleToolChangeCode = useCallback(
         (code: string) => {
@@ -413,11 +324,7 @@ export default function ReviewModuleView({
 
     const navLoading = nav === undefined;
     const navError = nav === null;
-    const isLastModule = !!nav && !nav.nextModuleId;
     const hasNextModule = !!nav && !!nav.nextModuleId;
-
-    const moduleDone = moduleComplete || Boolean((progress as any)?.moduleCompleted);
-    const canGetCertificate = isLastModule && (unlockAll || moduleDone);
 
     async function handleAssignmentClick() {
         const returnToCurrentModule = `/${locale}/${ROUTES.learningPath(
@@ -578,22 +485,6 @@ export default function ReviewModuleView({
     }
 
     const mainScrollRef = useRef<HTMLElement | null>(null);
-    const [reduceMotion, setReduceMotion] = useState(false);
-
-    useEffect(() => {
-        if (typeof window === "undefined" || !window.matchMedia) return;
-        const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-        const apply = () => setReduceMotion(Boolean(mq.matches));
-        apply();
-
-        if (mq.addEventListener) mq.addEventListener("change", apply);
-        else (mq as any).addListener?.(apply);
-
-        return () => {
-            if (mq.removeEventListener) mq.removeEventListener("change", apply);
-            else (mq as any).removeListener?.(apply);
-        };
-    }, []);
 
     const mdUp = useMediaQuery("(min-width: 768px)");
     const lgUp = useMediaQuery("(min-width: 1024px)");
@@ -1269,34 +1160,20 @@ export default function ReviewModuleView({
                                                         />
                                                     </div>
                                                 ) : null}
-                                                {isLastModule && !nextTopic?.id? (
-                                                    <div className="mt-3 border border-emerald-600/25 bg-emerald-500/10 p-3 text-xs dark:border-emerald-300/30 dark:bg-emerald-300/10">
-                                                        <div className="font-black text-emerald-900 dark:text-emerald-100">
-                                                            Course complete
-                                                        </div>
-                                                        <div className="mt-1 text-emerald-900/80 dark:text-emerald-100/80">
-                                                            Download your certificate when ready.
-                                                        </div>
 
-                                                        <button
-                                                            type="button"
-                                                            className={cn(
-                                                                "mt-3 ui-btn ui-btn-primary w-full",
-                                                                !canGetCertificate && "opacity-60 cursor-not-allowed",
-                                                            )}
-                                                            disabled={!canGetCertificate}
-                                                            onClick={() =>
-                                                                router.push(`/subjects/${encodeURIComponent(subjectSlug)}/certificate`)
-                                                            }
-                                                        >
-                                                            Get certificate →
-                                                        </button>
-                                                    </div>
+                                                {!nextTopic?.id ? (
+                                                    <SubjectFinishBanner
+                                                        subjectSlug={subjectSlug}
+                                                        subjectFinish={subjectFinish}
+                                                        onOpenCertificate={() =>
+                                                            router.push(`/subjects/${encodeURIComponent(subjectSlug)}/certificate`)
+                                                        }
+                                                    />
                                                 ) : null}
+
                                                 <div className="ui-surface-muted mt-2 flex-1 min-h-0 overflow-auto rounded-none" />
                                             </div>
                                         </TopicShell>
-
                                     </main>
 
                                     {showDesktopRight ? (
@@ -1325,7 +1202,11 @@ export default function ReviewModuleView({
                                                     toolLang={tool.toolLang as CodeLanguage}
                                                     toolCode={tool.toolCode}
                                                     toolStdin={tool.toolStdin}
-                                                    toolSqlDialect={tool.toolSqlDialect}
+                                                    toolSqlDialect={
+                                                        tool.toolSqlDatasetId
+                                                            ? tool.toolSqlDialect
+                                                            : (topicSqlFallback?.sqlDialect ?? tool.toolSqlDialect)
+                                                    }
                                                     onChangeCode={handleToolChangeCode}
                                                     onChangeStdin={handleToolChangeStdin}
                                                     onBeforeRun={tool.flushLatest}
@@ -1335,14 +1216,25 @@ export default function ReviewModuleView({
                                                     codeEnabled={codeEnabled}
                                                     showLanguagePicker={false}
                                                     showSqlDialectPicker={false}
-                                                    sqlSchemaSql={tool.toolSqlSchemaSql??STUDENTS_SQL_SCHEMA}
-                                                    sqlSeedSql={tool.toolSqlSeedSql??STUDENTS_SQL_SEED}
-                                                    sqlInitialTableSnapshots={tool.toolSqlInitialTableSnapshots ?? STUDENTS_INITIAL_TABLE_SNAPSHOTS}
+                                                    sqlSchemaSql={
+                                                        tool.toolSqlSchemaSql ??
+                                                        topicSqlFallback?.sqlSchemaSql ??
+                                                        STUDENTS_SQL_SCHEMA
+                                                    }
+                                                    sqlSeedSql={
+                                                        tool.toolSqlSeedSql ??
+                                                        topicSqlFallback?.sqlSeedSql ??
+                                                        STUDENTS_SQL_SEED
+                                                    }
+                                                    sqlInitialTableSnapshots={
+                                                        tool.toolSqlInitialTableSnapshots ??
+                                                        topicSqlFallback?.sqlInitialTableSnapshots ??
+                                                        STUDENTS_INITIAL_TABLE_SNAPSHOTS
+                                                    }
                                                 />
                                             </aside>
                                         </>
                                     ) : null}
-
                                 </div>
                             </div>
                         </div>
@@ -1366,4 +1258,15 @@ export default function ReviewModuleView({
             {content}
         </ReviewToolsProvider>
     );
+}
+
+function moduleCompleteFromProgress(progress: any, topics: ReviewModule["topics"] | undefined) {
+    const safeTopics = Array.isArray(topics) ? topics : [];
+    if (!safeTopics.length) return false;
+
+    return safeTopics.every((t) => {
+        const cards = Array.isArray(t.cards) ? t.cards : [];
+        const tstate = progress?.topics?.[t.id];
+        return isTopicComplete(cards, tstate);
+    });
 }

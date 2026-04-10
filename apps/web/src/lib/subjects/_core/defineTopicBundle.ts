@@ -1,6 +1,7 @@
 import type { ReviewTopicShape } from "@/lib/subjects/types";
 import type { SketchEntry } from "@/components/sketches/subjects";
 import type { TopicBundle as GeneratorTopicBundle } from "@/lib/practice/generator/engines/utils";
+import type { ManifestRuntimeDefaults } from "@/lib/subjects/_core/manifestTypes";
 
 export type JsonObject = { readonly [key: string]: unknown };
 
@@ -16,6 +17,7 @@ export type TopicMeta = {
     minutes: number;
     preferKind?: string | null;
     pool?: readonly TopicPoolItem[];
+    runtimeDefaults?: ManifestRuntimeDefaults | null;
 };
 
 export type TopicDefInput = {

@@ -32,19 +32,19 @@
         "search_and_cleanup_practice": {
           "search_names": {
             "title": "Searching names often uses LIKE and partial text patterns.",
-            "bodyMarkdown": "When you search customer names, you often know only part of the text.\n\nThat makes tools like:\n\n- `LIKE`\n- `%`\n- `_`\n\nvery useful.\n\nSo the key idea is:\n\n> name search is often a text-pattern problem"
+            "bodyMarkdown": "When customer names are searched, often only part of the text is known.\n\nThat makes tools like:\n\n- `LIKE`\n- `%`\n- `_`\n\nvery useful.\n\nCode example:\n\n~~~sql\nSELECT full_name\nFROM customers\nWHERE full_name LIKE '%li%';\n~~~\n\nThis keeps names that contain `li` somewhere inside them.\n\nSo the key idea is:\n\n> name search is often a text-pattern problem\n\n### Try it yourself\n\nLook at this query:\n\n~~~sql\nSELECT full_name\nFROM customers\nWHERE full_name LIKE 'Test%';\n~~~\n\nAsk yourself:\n\n- which part of the name is fixed?\n- which part can vary?\n- what kind of names should appear in the result?"
           },
           "filter_categories": {
-            "title": "Filtering categories or groups means keeping only the customer groups you want.",
-            "bodyMarkdown": "In this dataset, customer groups can be things like:\n\n- status values such as `active`, `inactive`, or `draft`\n- city groups like `Chicago` or `Miami`\n- test versus non-test rows\n\nSo the main idea is:\n\n> filtering groups means keeping only the rows that belong to the right set"
+            "title": "Filtering categories or groups means keeping only the customer groups that matter.",
+            "bodyMarkdown": "In this dataset, customer groups can be things like:\n\n- status values such as `active`, `inactive`, or `draft`\n- city groups like `Chicago` or `Miami`\n- test versus non-test rows\n\nCode example:\n\n~~~sql\nSELECT full_name, status\nFROM customers\nWHERE status IN ('active', 'inactive');\n~~~\n\nThis keeps only rows from the chosen status groups.\n\nSo the main idea is:\n\n> filtering groups means keeping only the rows that belong to the right set\n\n### Try it yourself\n\nRead this query:\n\n~~~sql\nSELECT full_name, city\nFROM customers\nWHERE city IN ('Chicago', 'Miami');\n~~~\n\nAsk yourself:\n\n- which rows are allowed to stay?\n- what makes this a group filter instead of a text-pattern search?\n- how would the result change if `NOT IN` were used instead?"
           },
           "find_missing_data": {
             "title": "Finding missing data means checking which important fields have no value.",
-            "bodyMarkdown": "Missing data can appear in columns like:\n\n- `email`\n- `city`\n\nThat matters because missing fields can change reporting, communication, or cleanup tasks.\n\nSo the idea is:\n\n> missing-data filters help you find rows that need attention"
+            "bodyMarkdown": "Missing data can appear in columns like:\n\n- `email`\n- `city`\n\nThat matters because missing fields can affect reporting, communication, or cleanup tasks.\n\nCode example:\n\n~~~sql\nSELECT full_name, email\nFROM customers\nWHERE email IS NULL;\n~~~\n\nThis finds rows where the email field is missing.\n\nSo the idea is:\n\n> missing-data filters help find rows that need attention\n\n### Try it yourself\n\nLook at this query:\n\n~~~sql\nSELECT full_name, city\nFROM customers\nWHERE city IS NULL;\n~~~\n\nAsk yourself:\n\n- which field is being checked?\n- what kind of rows should come back?\n- why is this useful in a cleanup task?"
           },
           "combine_text_and_null_filters": {
             "title": "Combining text and NULL filters helps answer more realistic cleanup questions.",
-            "bodyMarkdown": "Real queries often mix two ideas at once.\n\nFor example, you may want rows where:\n\n- the city starts with `Chi` and the email exists\n- the name starts with `Test` or the email is missing\n\nThat means you combine text matching with missing-data logic.\n\nSo the big idea is:\n\n> realistic filtering often mixes pattern checks and NULL checks"
+            "bodyMarkdown": "Real queries often mix two ideas at once.\n\nFor example, rows may be needed where:\n\n- the city starts with `Chi` and the email exists\n- the name starts with `Test` or the email is missing\n\nThat means text matching is combined with missing-data logic.\n\nCode example:\n\n~~~sql\nSELECT full_name, city, email\nFROM customers\nWHERE city LIKE 'Chi%' AND email IS NOT NULL;\n~~~\n\nThis keeps rows where the city matches the text pattern and the email is present.\n\nSo the big idea is:\n\n> realistic filtering often mixes pattern checks and NULL checks\n\n### Try it yourself\n\nRead this query:\n\n~~~sql\nSELECT full_name, email, status\nFROM customers\nWHERE full_name LIKE 'Test%' OR email IS NULL;\n~~~\n\nAsk yourself:\n\n- what are the two separate rules?\n- is one rule enough, or do both need to match?\n- what kind of rows should appear in the result?"
           }
         }
       }
@@ -73,7 +73,7 @@
       "title": "Filter customer groups",
       "prompt": "The `customers` table already exists.\n\nWrite a query that shows the `full_name` and `status` columns for customers whose `status` is either `active` or `inactive`.\n\nThen run it.",
       "help": {
-        "concept": "When you want rows from one of several known groups, list-based filtering works well.",
+        "concept": "When rows from one of several known groups are needed, list-based filtering works well.",
         "hint_1": "Select `full_name` and `status`, then keep two allowed status values.",
         "hint_2": "Write a two-column query on `customers`, then keep only rows whose status belongs to the allowed group list containing `active` and `inactive`."
       },
@@ -161,11 +161,11 @@
     },
     "m4_s04_search_names_meaning": {
       "title": "What does searching names usually involve?",
-      "prompt": "In this dataset, what is a common beginner way to search names?",
+      "prompt": "In this dataset, what is a common way to search names?",
       "help": {
         "concept": "Name search often uses text-pattern matching rather than full exact matching.",
         "hint_1": "Think partial text.",
-        "hint_2": "You often know only part of the name, so pattern matching is useful."
+        "hint_2": "Often only part of the name is known, so pattern matching is useful."
       },
       "hint": "Think text patterns.",
       "options": {
@@ -225,7 +225,7 @@
     },
     "m4_s04_combined_result_check": {
       "title": "How should you check a combined filter result?",
-      "prompt": "After running a query that mixes text matching and NULL checks, what is a strong beginner habit?",
+      "prompt": "After running a query that mixes text matching and NULL checks, what is a strong habit?",
       "help": {
         "concept": "You should verify both parts of the condition against the returned rows.",
         "hint_1": "Think pattern check and NULL check.",
@@ -308,8 +308,8 @@
       }
     },
     "m4_s04_practice_workflow_true": {
-      "title": "What matches the right beginner workflow?",
-      "prompt": "Select all statements that match a good beginner workflow for this practice section.",
+      "title": "What matches the right workflow?",
+      "prompt": "Select all statements that match a good workflow for this practice section.",
       "help": {
         "concept": "A good workflow is to identify the filter type, write the right condition or combination, run the query, and verify the rows.",
         "hint_1": "Think text, group, missing, or mixed filter.",
@@ -324,7 +324,6 @@
         "e": "Ignore the actual returned values after running"
       }
     },
-
     "m4_s04_reorder_name_search_logic": {
       "title": "Searching names",
       "prompt": "Reorder the ideas to explain name search.",
@@ -387,7 +386,7 @@
     },
     "m4_s04_reorder_practice_workflow": {
       "title": "Good practice workflow",
-      "prompt": "Reorder the beginner workflow for this practice section.",
+      "prompt": "Reorder the workflow for this practice section.",
       "help": {
         "concept": "A good workflow is identify the filter type, choose the tool, run, verify.",
         "hint_1": "Filter type comes first.",
@@ -400,7 +399,6 @@
         "t3": "run the query and verify that the rows fit the intended logic"
       }
     },
-
     "m4_s04_fill_like_tool": {
       "title": "Tool for text patterns",
       "prompt": "Fill in the blank with the correct SQL tool.",
@@ -418,7 +416,7 @@
       "title": "Tool for chosen groups",
       "prompt": "Choose the best SQL tool to complete the sentence.",
       "help": {
-        "concept": "IN is commonly used when keeping one of several known group values.",
+        "concept": "IN is commonly used when one of several known group values should be kept.",
         "hint_1": "Think list of allowed values.",
         "hint_2": "The answer is IN."
       },
@@ -466,6 +464,5 @@
       "choices": ["verify", "rename", "drop", "paint"],
       "correct": "verify"
     }
-
   }
 }

@@ -32,19 +32,19 @@
         "intro_to_select": {
           "what_select_does": {
             "title": "`SELECT` asks SQL to return data.",
-            "bodyMarkdown": "The keyword `SELECT` is how you ask SQL to **show data**.\n\nIt does not mean “change the table.”\nIt means:\n\n> return something so I can read it\n\nIf a table is named `products`, SQL can return names, prices, categories, or the full table.\n\nExample:\n\n~~~sql\nSELECT name FROM products;\n~~~\n\nThat means:\n\n- `SELECT` → choose what to return\n- `name` → the column to return\n- `FROM products` → the table to read from\n\nSo the big idea is simple:\n\n> `SELECT` is for getting data back"
+            "bodyMarkdown": "The keyword `SELECT` is how you tell SQL that you want **data back**.\n\nIt is used for reading, not for changing the table.\n\nExample:\n\n~~~sql\nSELECT name FROM products;\n~~~\n\nYou can read that like this:\n\n- `SELECT` → return something\n- `name` → return this column\n- `FROM products` → read it from this table\n\nSo the core beginner idea is:\n\n> `SELECT` is used when you want to see data\n\n### Try it yourself\n\nLook at this query:\n\n~~~sql\nSELECT category FROM products;\n~~~\n\nAsk yourself:\n\n- what is SQL returning?\n- is the query reading data or changing data?\n- which word tells SQL to give you a result?"
           },
           "selecting_all_columns_with_star": {
-            "title": "Use `*` when you want to see all columns.",
-            "bodyMarkdown": "Sometimes you want a quick look at the **whole table**.\n\nThat is what `*` is for.\n\n~~~sql\nSELECT * FROM products;\n~~~\n\nHere, the `*` means:\n\n- all columns\n\nSo if the table has columns like `id`, `name`, `category`, `price`, `stock`, and `created_at`, the result shows all of them.\n\nThis is useful when you:\n\n- want a quick first look at the table\n- are still learning what columns exist\n- want to inspect the full result first\n\nA simple memory trick is:\n\n> `*` = everything"
+            "title": "Use `*` when you want to see the full table.",
+            "bodyMarkdown": "Sometimes you want a quick overview of everything in a table.\n\nThat is when `*` is useful.\n\n~~~sql\nSELECT * FROM products;\n~~~\n\nHere, `*` means:\n\n- all columns\n\nSo if the table has columns like `id`, `name`, `category`, `price`, and `stock`, the result can show all of them.\n\nThis is useful when you:\n\n- want a first look at the table\n- want to check which columns exist\n- want a full overview before narrowing the query\n\n### Try it yourself\n\nCompare these two queries:\n\n~~~sql\nSELECT * FROM products;\nSELECT name, price FROM products;\n~~~\n\nAsk yourself:\n\n- which query is wider?\n- which one is better for exploring the table?\n- which one is better for a quick price list?"
           },
           "selecting_specific_columns": {
             "title": "You can ask for only the columns you need.",
-            "bodyMarkdown": "You do **not** always need the whole table.\n\nSometimes you only want the important parts.\n\nExample:\n\n~~~sql\nSELECT name, price FROM products;\n~~~\n\nThis returns only:\n\n- `name`\n- `price`\n\nThat makes the result smaller and easier to read.\n\nSelecting specific columns is helpful when you:\n\n- only need a few pieces of information\n- want cleaner output\n- want to focus on the most useful columns\n\nSo instead of asking for everything, you can ask for exactly what you need."
+            "bodyMarkdown": "You do not always need the whole table.\n\nOften, the most useful query is the one that returns only the columns that matter.\n\nExample:\n\n~~~sql\nSELECT name, price FROM products;\n~~~\n\nThis returns only:\n\n- `name`\n- `price`\n\nThat makes the result more focused and often easier to read.\n\nSelecting specific columns is useful when you:\n\n- only need a few pieces of information\n- want a smaller result\n- want to reduce extra noise in the output\n\n### Try it yourself\n\nImagine you want to know:\n\n> what are the product names and prices?\n\nAsk yourself:\n\n- do you need every column?\n- which columns are enough?\n- would `SELECT *` be more than you need?"
           },
           "query_structure_basics": {
             "title": "A beginner query usually follows `SELECT ... FROM ...`.",
-            "bodyMarkdown": "A very common beginner SQL shape is:\n\n~~~sql\nSELECT column_or_columns\nFROM table_name;\n~~~\n\nYou can read it like this:\n\n- `SELECT` → what do I want to see?\n- `FROM` → where should SQL get it from?\n\nExamples:\n\n~~~sql\nSELECT * FROM products;\nSELECT name FROM products;\nSELECT id, name FROM products;\n~~~\n\nNotice the pattern:\n\n1. start with `SELECT`\n2. list one or more columns, or use `*`\n3. write `FROM`\n4. name the table\n\nThat structure appears again and again in SQL.\n\nSo if you learn this pattern well now, later queries will feel much easier."
+            "bodyMarkdown": "A very common beginner SQL shape is:\n\n~~~sql\nSELECT column_or_columns\nFROM table_name;\n~~~\n\nYou can read it like this:\n\n- `SELECT` → what should SQL return?\n- `FROM` → where should SQL get it from?\n\nExamples:\n\n~~~sql\nSELECT * FROM products;\nSELECT name FROM products;\nSELECT id, name FROM products;\n~~~\n\nThis pattern matters because it appears again and again in SQL.\n\nSo one strong beginner goal is:\n\n> get comfortable reading and writing the `SELECT ... FROM ...` shape\n\n### Try it yourself\n\nRead this query out loud:\n\n~~~sql\nSELECT id, name FROM products;\n~~~\n\nThen answer:\n\n- what should SQL return?\n- where should SQL get it from?\n- which part names the columns, and which part names the table?"
           }
         }
       }
@@ -324,7 +324,6 @@
         "e": "Notice which columns are included in the result"
       }
     },
-
     "m1_s01_reorder_select_purpose": {
       "title": "What SELECT does",
       "prompt": "Reorder the ideas to explain what `SELECT` does.",
@@ -416,8 +415,6 @@
         "t3": "match each value to the correct column"
       }
     },
-
-
     "m1_s01_fill_select_keyword_job": {
       "title": "What SELECT returns",
       "prompt": "Fill in the blank with the best word.",
@@ -483,7 +480,5 @@
       "choices": ["price", "products", "FROM", "SELECT"],
       "correct": "price"
     }
-
-
   }
 }

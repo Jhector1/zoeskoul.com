@@ -4,7 +4,7 @@
       "sql_module_3": {
         "limiting_output": {
           "label": "Limiting Output",
-          "summary": "Learn why limiting results matters, how `LIMIT` works, how to show only top rows, and how to combine `ORDER BY` with `LIMIT` for useful results.",
+          "summary": "Learn why limiting results matters, how `LIMIT` works, how top rows depend on order, and why `ORDER BY` and `LIMIT` work well together.",
           "cards": {
             "sketch0": {
               "title": "Why limit results?"
@@ -31,20 +31,20 @@
       "sql_module_3": {
         "limiting_output": {
           "why_limit_results": {
-            "title": "Limiting results matters when you only need a small part of the answer.",
-            "bodyMarkdown": "A query can return many rows.\n\nBut often you only need a few.\n\nFor example, you may want:\n\n- the top 3 prices\n- the newest 2 products\n- the first 5 rows in a sorted result\n\nSo the main idea is:\n\n> limiting keeps the result small and focused"
+            "title": "Limiting results matters when only a small part of the answer is useful.",
+            "bodyMarkdown": "A query can return many rows, but often you only need a few.\n\nFor example, you may want:\n\n- the top 3 prices\n- the newest 2 products\n- the first 5 rows in a sorted result\n\nCode example:\n\n~~~sql\nSELECT name\nFROM products\nLIMIT 3;\n~~~\n\nThis keeps the result small instead of returning every row.\n\nSo the main idea is:\n\n> limiting keeps the result small and focused\n\n### Try it yourself\n\nLook at this query:\n\n~~~sql\nSELECT name, price\nFROM products\nLIMIT 2;\n~~~\n\nAsk yourself:\n\n- how many rows should come back?\n- does this change which columns are shown or only how many rows stay?\n- when would a short result be easier to read than a full one?"
           },
           "limit_keyword": {
             "title": "`LIMIT` tells SQL how many rows to return.",
-            "bodyMarkdown": "The keyword `LIMIT` is used to keep only a certain number of rows in the result.\n\nExample shape:\n\n~~~sql\nSELECT column_or_columns\nFROM table_name\nLIMIT 3;\n~~~\n\nThat means:\n\n> return only the first 3 rows of the result\n\nSo the key idea is:\n\n> `LIMIT` controls result size"
+            "bodyMarkdown": "The keyword `LIMIT` is used to keep only a certain number of rows in the result.\n\nExample shape:\n\n~~~sql\nSELECT column_or_columns\nFROM table_name\nLIMIT 3;\n~~~\n\nThat means:\n\n> return only the first 3 rows of the result\n\nCode example:\n\n~~~sql\nSELECT name, stock\nFROM products\nLIMIT 4;\n~~~\n\nThis returns only 4 rows, even if the table has many more.\n\nSo the key idea is:\n\n> `LIMIT` controls result size\n\n### Try it yourself\n\nRead this query:\n\n~~~sql\nSELECT name, category\nFROM products\nLIMIT 5;\n~~~\n\nAsk yourself:\n\n- what does the number 5 control?\n- would the query still return the same columns?\n- what part of the result gets cut down?"
           },
           "top_rows_only": {
             "title": "Top rows only means you keep just the first few rows of the current result order.",
-            "bodyMarkdown": "When a query uses `LIMIT`, it keeps the first rows from the current ordered result.\n\nThat means the idea of “top rows” depends on the current order.\n\nSo a strong beginner habit is:\n\n- think about the row order first\n- then limit the number of rows\n\nThe big idea is:\n\n> `LIMIT` keeps the first part of the current result order"
+            "bodyMarkdown": "When a query uses `LIMIT`, it keeps the first rows from the current ordered result.\n\nThat means the idea of “top rows” depends on the current order.\n\nCode example:\n\n~~~sql\nSELECT name, price\nFROM products\nORDER BY price DESC\nLIMIT 3;\n~~~\n\nThis returns the first 3 rows **after** sorting by price descending.\n\nSo a strong habit is:\n\n- think about the row order first\n- then limit the number of rows\n\nThe big idea is:\n\n> `LIMIT` keeps the first part of the current result order\n\n### Try it yourself\n\nCompare these two ideas:\n\n~~~sql\nSELECT name, price\nFROM products\nLIMIT 3;\n~~~\n\n~~~sql\nSELECT name, price\nFROM products\nORDER BY price DESC\nLIMIT 3;\n~~~\n\nAsk yourself:\n\n- which one gives a more meaningful top 3?\n- why does sorting change what “top rows” means?\n- what would happen if the order changed?"
           },
           "combining_order_by_with_limit": {
             "title": "Combining `ORDER BY` with `LIMIT` makes top and bottom results meaningful.",
-            "bodyMarkdown": "Using `LIMIT` by itself can be useful, but using it with `ORDER BY` is even more powerful.\n\nThat lets you ask questions like:\n\n- highest prices first, then keep 3 rows\n- lowest stock first, then keep 2 rows\n- newest dates first, then keep 5 rows\n\nSo the idea is:\n\n> `ORDER BY` decides which rows rise to the top, and `LIMIT` keeps only those top rows"
+            "bodyMarkdown": "Using `LIMIT` by itself can be useful, but using it with `ORDER BY` is even more powerful.\n\nThat lets you ask questions like:\n\n- highest prices first, then keep 3 rows\n- lowest stock first, then keep 2 rows\n- newest dates first, then keep 5 rows\n\nCode example:\n\n~~~sql\nSELECT name, stock\nFROM products\nORDER BY stock ASC\nLIMIT 2;\n~~~\n\nThis returns the two rows with the lowest stock values.\n\nSo the idea is:\n\n> `ORDER BY` decides which rows rise to the top, and `LIMIT` keeps only those top rows\n\n### Try it yourself\n\nLook at this query:\n\n~~~sql\nSELECT name, created_at\nFROM products\nORDER BY created_at DESC\nLIMIT 3;\n~~~\n\nAsk yourself:\n\n- which rows should rise to the top?\n- why does `LIMIT 3` make sense only after sorting?\n- what question does this query answer?"
           }
         }
       }
@@ -225,7 +225,7 @@
     },
     "m3_s03_check_limited_result": {
       "title": "How should you check a limited result?",
-      "prompt": "After running a query with `LIMIT`, what is a strong beginner habit?",
+      "prompt": "After running a query with `LIMIT`, what is a strong habit?",
       "help": {
         "concept": "You should verify both the row count and the row order when relevant.",
         "hint_1": "Think how many rows and which rows.",
@@ -241,7 +241,7 @@
     },
     "m3_s03_limit_true": {
       "title": "What is true about LIMIT?",
-      "prompt": "Select all true statements about `LIMIT` in beginner SQL.",
+      "prompt": "Select all true statements about `LIMIT` in SQL.",
       "help": {
         "concept": "`LIMIT` controls how many rows stay in the result.",
         "hint_1": "Think row count and focused output.",
@@ -308,8 +308,8 @@
       }
     },
     "m3_s03_limit_workflow_true": {
-      "title": "What matches the right beginner workflow?",
-      "prompt": "Select all statements that match a good beginner workflow for limiting output.",
+      "title": "What matches the right workflow?",
+      "prompt": "Select all statements that match a good workflow for limiting output.",
       "help": {
         "concept": "A good workflow is to decide whether order matters, sort if needed, then limit and verify the result.",
         "hint_1": "Think sort if meaningful, then keep only a few.",
@@ -324,8 +324,6 @@
         "e": "Ignore the returned row order completely"
       }
     },
-
-
     "m3_s03_reorder_limit_purpose": {
       "title": "Why limit results",
       "prompt": "Reorder the ideas to explain why limiting is useful.",
@@ -388,7 +386,7 @@
     },
     "m3_s03_reorder_limit_workflow": {
       "title": "Good limiting workflow",
-      "prompt": "Reorder the beginner workflow for LIMIT.",
+      "prompt": "Reorder the workflow for LIMIT.",
       "help": {
         "concept": "A good workflow is think about order first, then limit and verify.",
         "hint_1": "Meaningful order comes before row count.",
@@ -401,7 +399,6 @@
         "t3": "run the query and verify both the row count and the chosen rows"
       }
     },
-
     "m3_s03_fill_limit_keyword": {
       "title": "Keyword for row count",
       "prompt": "Fill in the blank with the correct keyword.",
@@ -467,6 +464,5 @@
       "choices": ["count", "color", "toolbar", "font"],
       "correct": "count"
     }
-
   }
 }

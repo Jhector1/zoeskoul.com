@@ -32,19 +32,19 @@
         "sorting_by_multiple_columns": {
           "primary_sort": {
             "title": "The primary sort decides the first main order of the result.",
-            "bodyMarkdown": "When you sort by more than one column, the first column listed is the **primary sort**.\n\nThat means SQL uses it first to organize the rows.\n\nSo the key idea is:\n\n> the first sort column has the strongest control over the order"
+            "bodyMarkdown": "When you sort by more than one column, the first column listed is the **primary sort**.\n\nSQL uses it first to organize the rows.\n\nCode example:\n\n~~~sql\nSELECT name, category\nFROM products\nORDER BY category, name;\n~~~\n\nHere, `category` is the primary sort because it appears first.\n\nSo the key idea is:\n\n> the first sort column has the strongest control over the order\n\n### Try it yourself\n\nLook at this query:\n\n~~~sql\nSELECT name, stock, price\nFROM products\nORDER BY stock, price;\n~~~\n\nAsk yourself:\n\n- which column controls the main order?\n- what would SQL look at first?\n- which values would be grouped together first?"
           },
           "secondary_sort": {
             "title": "The secondary sort breaks ties inside the primary sort groups.",
-            "bodyMarkdown": "If two or more rows have the same value in the primary sort column, SQL can use another column to decide their order.\n\nThat second column is the **secondary sort**.\n\nSo the idea is:\n\n> the second sort column helps order rows that tie on the first one"
+            "bodyMarkdown": "If two or more rows have the same value in the primary sort column, SQL can use another column to decide their order.\n\nThat second column is the **secondary sort**.\n\nCode example:\n\n~~~sql\nSELECT name, category\nFROM products\nORDER BY category, name;\n~~~\n\nIf several rows share the same `category`, SQL uses `name` to order those tied rows.\n\nSo the idea is:\n\n> the second sort column helps order rows that tie on the first one\n\n### Try it yourself\n\nRead this query:\n\n~~~sql\nSELECT name, created_at\nFROM products\nORDER BY created_at, name;\n~~~\n\nAsk yourself:\n\n- what happens if two rows have the same `created_at` value?\n- which column breaks the tie?\n- why does that make the result easier to read?"
           },
           "sorting_text": {
             "title": "Sorting text with more than one column is useful for grouped labels and names.",
-            "bodyMarkdown": "Text sorting is useful when you want grouped labels first, then readable order inside each group.\n\nFor example, you might sort by:\n\n- category first\n- name second\n\nThat gives a result where categories form groups, and names are neatly ordered inside each group.\n\nSo the big idea is:\n\n> text sorting can be layered to create grouped, readable results"
+            "bodyMarkdown": "Text sorting is useful when you want grouped labels first, then readable order inside each group.\n\nFor example, you might sort by:\n\n- category first\n- name second\n\nThat gives a result where categories form groups, and names are neatly ordered inside each group.\n\nCode example:\n\n~~~sql\nSELECT name, category\nFROM products\nORDER BY category ASC, name ASC;\n~~~\n\nThis groups rows by category, then sorts names inside each category group.\n\nSo the big idea is:\n\n> text sorting can be layered to create grouped, readable results\n\n### Try it yourself\n\nLook at this order:\n\n- `category` first\n- `name` second\n\nAsk yourself:\n\n- what kind of grouping will appear?\n- what will happen inside one category group?\n- why is this clearer than sorting by `name` alone?"
           },
           "sorting_numbers_and_dates": {
             "title": "Numbers and dates can also be sorted in levels.",
-            "bodyMarkdown": "Multiple-column sorting is not only for text.\n\nYou can also sort by:\n\n- one number, then another number\n- a date, then a name\n- a category, then a date\n\nThis is useful when you want results that are grouped first, then ordered by size or time inside those groups.\n\nSo the idea is:\n\n> multi-column sorting works for numbers and dates too"
+            "bodyMarkdown": "Multiple-column sorting is not only for text.\n\nYou can also sort by:\n\n- one number, then another number\n- a date, then a name\n- a category, then a date\n\nCode example:\n\n~~~sql\nSELECT name, stock, price\nFROM products\nORDER BY stock ASC, price ASC;\n~~~\n\nThis sorts by `stock` first, then uses `price` when stock values tie.\n\nAnother example:\n\n~~~sql\nSELECT name, created_at\nFROM products\nORDER BY created_at ASC, name ASC;\n~~~\n\nThis sorts by date first, then by name.\n\nSo the idea is:\n\n> multi-column sorting works for numbers and dates too\n\n### Try it yourself\n\nRead this query:\n\n~~~sql\nSELECT name, category, created_at\nFROM products\nORDER BY category, created_at;\n~~~\n\nAsk yourself:\n\n- which column creates the first level of order?\n- what happens inside one category group?\n- why might this be useful for reading grouped timelines?"
           }
         }
       }
@@ -207,7 +207,7 @@
     },
     "m3_s02_check_multi_sort_result": {
       "title": "How should you check a multi-sort result?",
-      "prompt": "After running a multi-column sort query, what is a strong beginner habit?",
+      "prompt": "After running a multi-column sort query, what is a strong habit?",
       "help": {
         "concept": "You should check both the main grouping and the tie-break ordering.",
         "hint_1": "Think first column order, then second column order inside ties.",
@@ -290,8 +290,8 @@
       }
     },
     "m3_s02_multi_sort_workflow_true": {
-      "title": "What matches the right beginner workflow?",
-      "prompt": "Select all statements that match a good beginner workflow for multi-column sorting.",
+      "title": "What matches the right workflow?",
+      "prompt": "Select all statements that match a good workflow for multi-column sorting.",
       "help": {
         "concept": "A good workflow is to decide the strongest sort first, choose a tie-breaker second, then verify both.",
         "hint_1": "Think strongest sort, tie-breaker, result check.",
@@ -306,7 +306,6 @@
         "e": "Ignore tied rows after running"
       }
     },
-
     "m3_s02_reorder_primary_sort_logic": {
       "title": "Primary sort",
       "prompt": "Reorder the ideas to explain the primary sort.",
@@ -369,7 +368,7 @@
     },
     "m3_s02_reorder_multi_sort_workflow": {
       "title": "Good multi-sort workflow",
-      "prompt": "Reorder the beginner workflow for multi-column sorting.",
+      "prompt": "Reorder the workflow for multi-column sorting.",
       "help": {
         "concept": "A strong workflow is main sort first, tie-breaker second, then verify both.",
         "hint_1": "Think strongest sort first.",
@@ -382,7 +381,6 @@
         "t3": "run the query and verify both levels of ordering"
       }
     },
-
     "m3_s02_fill_primary_keyword": {
       "title": "Primary sort meaning",
       "prompt": "Fill in the blank with the best word.",
@@ -448,6 +446,5 @@
       "choices": ["strongest", "weakest", "latest", "shortest"],
       "correct": "strongest"
     }
-
   }
 }

@@ -1,4 +1,3 @@
-// src/lib/subjects/_core/defineCourseFromManifest.ts
 import { defineCourse } from "@/lib/subjects/_core/defineCourse";
 import { defineModule } from "@/lib/subjects/_core/defineModule";
 import { defineSection } from "@/lib/subjects/_core/defineSection";
@@ -33,6 +32,7 @@ export function defineCourseFromManifest(args: {
                         moduleSlug: moduleManifest.slug,
                         sectionSlug: sectionManifest.slug,
                         prefix: moduleManifest.prefix,
+                        moduleRuntimeDefaults: moduleManifest.runtimeDefaults ?? null,
                     }),
                 );
             });
@@ -112,6 +112,29 @@ export function defineCourseFromManifest(args: {
             imageAlt: manifest.subject.imageAlt ?? undefined,
             accessPolicy: manifest.subject.accessPolicy ?? "free",
             status: manifest.subject.status ?? "active",
+            meta: {
+                ...(manifest.subject.meta?.curriculum
+                    ? {
+                        curriculum: {
+                            ...manifest.subject.meta.curriculum,
+                            ...(manifest.subject.meta.curriculum.moreComingMessageKey
+                                ? {
+                                    moreComingMessage: tag(
+                                        manifest.subject.meta.curriculum.moreComingMessageKey,
+                                    ),
+                                }
+                                : {}),
+                        },
+                    }
+                    : {}),
+                ...(manifest.subject.meta?.completionPolicy
+                    ? {
+                        completionPolicy: {
+                            ...manifest.subject.meta.completionPolicy,
+                        },
+                    }
+                    : {}),
+            },
         },
         modules,
     });

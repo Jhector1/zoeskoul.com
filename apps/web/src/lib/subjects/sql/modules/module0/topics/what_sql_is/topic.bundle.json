@@ -5,12 +5,10 @@
   "sectionSlug": "section_0_1",
   "prefix": "sql0",
   "minutes": 8,
-
   "topic": {
     "labelKey": "topics.sql.sql_module_0.what_sql_is.label",
     "summaryKey": "topics.sql.sql_module_0.what_sql_is.summary"
   },
-
   "cards": [
     {
       "id": "sketch0",
@@ -53,7 +51,6 @@
       }
     }
   ],
-
   "sketches": [
     {
       "id": "what_sql_means",
@@ -61,22 +58,31 @@
       "titleKey": "sketches.sql.sql_module_0.what_sql_is.what_sql_means.title",
       "bodyKey": "sketches.sql.sql_module_0.what_sql_is.what_sql_means.bodyMarkdown",
       "images": [
-        {  "id": "sql_language_overview",
+        {
+          "id": "sql_language_overview",
           "publicId": "sql-language-overview_mieyho",
-          "alt": "" },
-        {  "id": "sql_question_to_data_flow",
+          "alt": ""
+        },
+        {
+          "id": "sql_question_to_data_flow",
           "publicId": "sql-question-to-data-flow_kbqjeo",
-          "alt": "" },
-        {  "id": "students_table_example",
+          "alt": ""
+        },
+        {
+          "id": "students_table_example",
           "publicId": "students-table-example_csvnzg",
-          "alt": "" },
-        {  "id": "select_from_breakdown",
+          "alt": ""
+        },
+        {
+          "id": "select_from_breakdown",
           "publicId": "select-from-breakdown_yuoi2u",
-          "alt": "" },
-        {  "id": "sql_result_focus",
+          "alt": ""
+        },
+        {
+          "id": "sql_result_focus",
           "publicId": "sql-result-focus_b6zdyw",
-          "alt": "" }
-
+          "alt": ""
+        }
       ]
     },
     {
@@ -85,13 +91,31 @@
       "titleKey": "sketches.sql.sql_module_0.what_sql_is.what_a_database_is.title",
       "bodyKey": "sketches.sql.sql_module_0.what_sql_is.what_a_database_is.bodyMarkdown",
       "images": [
-        { "publicId": "database_overview" },
-        { "publicId": "messy_vs_structured_data" },
-        { "publicId": "database_real_examples" },
-        { "publicId": "database_contains_tables" },
-        { "publicId": "table_row_column_labels" },
-        { "publicId": "row_vs_column_highlight" },
-        { "publicId": "database_container_model" }
+        {
+          "id": "database_overview",
+          "publicId": "database_overview_wmy9lo",
+          "alt": ""
+        },
+        {
+          "id": "messy_vs_structured_data",
+          "publicId": "messy_vs_structured_data_tvktv9",
+          "alt": ""
+        },
+        {
+          "id": "database_real_examples",
+          "publicId": "database_real_examples_plvl3a",
+          "alt": ""
+        },
+        {
+          "id": "database_contains_tables",
+          "publicId": "database_container_model_eqjc9x",
+          "alt": ""
+        },
+        {
+          "id": "row_vs_column_highlight",
+          "publicId": "row_vs_column_highlight_m2ofu8",
+          "alt": ""
+        }
       ]
     },
     {
@@ -100,10 +124,18 @@
       "titleKey": "sketches.sql.sql_module_0.what_sql_is.why_sql_is_useful.title",
       "bodyKey": "sketches.sql.sql_module_0.what_sql_is.why_sql_is_useful.bodyMarkdown",
       "images": [
-        { "publicId": "data_everywhere" },
-        { "publicId": "sql_actions_overview" },
-        { "publicId": "sql_questions_and_answers" },
-        { "publicId": "ask_run_result_cycle" }
+        {
+          "publicId": "data_everywhere"
+        },
+        {
+          "publicId": "sql_actions_overview"
+        },
+        {
+          "publicId": "sql_questions_and_answers"
+        },
+        {
+          "publicId": "ask_run_result_cycle"
+        }
       ]
     },
     {
@@ -112,16 +144,27 @@
       "titleKey": "sketches.sql.sql_module_0.what_sql_is.real_world_examples_of_databases.title",
       "bodyKey": "sketches.sql.sql_module_0.what_sql_is.real_world_examples_of_databases.bodyMarkdown",
       "images": [
-        { "publicId": "databases_in_daily_life" },
-        { "publicId": "school_database_example" },
-        { "publicId": "store_database_example" },
-        { "publicId": "media_database_example" },
-        { "publicId": "hospital_database_example" },
-        { "publicId": "shared_database_pattern" }
+        {
+          "publicId": "databases_in_daily_life"
+        },
+        {
+          "publicId": "school_database_example"
+        },
+        {
+          "publicId": "store_database_example"
+        },
+        {
+          "publicId": "media_database_example"
+        },
+        {
+          "publicId": "hospital_database_example"
+        },
+        {
+          "publicId": "shared_database_pattern"
+        }
       ]
     }
   ],
-
   "exercises": [
     {
       "id": "m0_s01_sql_stands_for",
@@ -129,7 +172,12 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m0_s01_sql_stands_for",
-      "optionIds": ["a", "b", "c", "d"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
       "expected": {
         "kind": "single_choice",
         "optionId": "a"
@@ -141,7 +189,12 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m0_s01_sql_main_purpose",
-      "optionIds": ["a", "b", "c", "d"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
       "expected": {
         "kind": "single_choice",
         "optionId": "b"
@@ -153,7 +206,12 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m0_s01_database_definition",
-      "optionIds": ["a", "b", "c", "d"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
       "expected": {
         "kind": "single_choice",
         "optionId": "b"
@@ -165,7 +223,12 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m0_s01_database_vs_table",
-      "optionIds": ["a", "b", "c", "d"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
       "expected": {
         "kind": "single_choice",
         "optionId": "b"
@@ -177,7 +240,12 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m0_s01_table_shape",
-      "optionIds": ["a", "b", "c", "d"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
       "expected": {
         "kind": "single_choice",
         "optionId": "a"
@@ -189,7 +257,12 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m0_s01_sql_command_recognition",
-      "optionIds": ["a", "b", "c", "d"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
       "expected": {
         "kind": "single_choice",
         "optionId": "b"
@@ -201,7 +274,12 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m0_s01_why_sql_useful",
-      "optionIds": ["a", "b", "c", "d"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
       "expected": {
         "kind": "single_choice",
         "optionId": "a"
@@ -213,7 +291,12 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m0_s01_real_world_examples",
-      "optionIds": ["a", "b", "c", "d"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
       "expected": {
         "kind": "single_choice",
         "optionId": "a"
@@ -225,10 +308,20 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m0_s01_select_all_true",
-      "optionIds": ["a", "b", "c", "d", "e"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
       "expected": {
         "kind": "multi_choice",
-        "optionIds": ["a", "b", "c"]
+        "optionIds": [
+          "a",
+          "b",
+          "c"
+        ]
       }
     },
     {
@@ -237,10 +330,18 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m0_s01_reorder_sql_name",
-      "tokenIds": ["t1", "t2", "t3"],
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
       "expected": {
         "kind": "drag_reorder",
-        "tokenIds": ["t1", "t2", "t3"]
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
       }
     },
     {
@@ -249,10 +350,18 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m0_s01_reorder_select_meaning",
-      "tokenIds": ["t1", "t2", "t3"],
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
       "expected": {
         "kind": "drag_reorder",
-        "tokenIds": ["t1", "t2", "t3"]
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
       }
     },
     {
@@ -261,10 +370,20 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m0_s01_reorder_database_picture",
-      "tokenIds": ["t1", "t2", "t3", "t4"],
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
       "expected": {
         "kind": "drag_reorder",
-        "tokenIds": ["t1", "t2", "t3", "t4"]
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
       }
     },
     {
@@ -273,10 +392,18 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m0_s01_reorder_sql_workflow",
-      "tokenIds": ["t1", "t2", "t3"],
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
       "expected": {
         "kind": "drag_reorder",
-        "tokenIds": ["t1", "t2", "t3"]
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
       }
     },
     {
@@ -285,10 +412,18 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m0_s01_reorder_real_system",
-      "tokenIds": ["t1", "t2", "t3"],
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
       "expected": {
         "kind": "drag_reorder",
-        "tokenIds": ["t1", "t2", "t3"]
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
       }
     },
     {
@@ -297,10 +432,18 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m0_s01_reorder_table_meaning",
-      "tokenIds": ["t1", "t2", "t3"],
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
       "expected": {
         "kind": "drag_reorder",
-        "tokenIds": ["t1", "t2", "t3"]
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
       }
     },
     {
@@ -375,4 +518,5 @@
         "value": "orders"
       }
     }
-  ]}
+  ]
+}

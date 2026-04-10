@@ -32,19 +32,19 @@
         "sql_syntax_basics": {
           "keywords": {
             "title": "Keywords are the special words SQL uses to understand your query.",
-            "bodyMarkdown": "SQL has important words like `SELECT` and `FROM`.\n\nThese words are called **keywords**.\n\nThey tell SQL what kind of action you want.\n\nExample:\n\n~~~sql\nSELECT name FROM products;\n~~~\n\nHere:\n\n- `SELECT` is a keyword\n- `FROM` is a keyword\n- `name` is a column name\n- `products` is a table name\n\nSo the big idea is:\n\n> keywords are the instruction words in a query\n\nA beginner habit is to quickly spot the keywords first when reading SQL."
+            "bodyMarkdown": "SQL has important words like `SELECT` and `FROM`.\n\nThese are called **keywords**.\nThey are part of the SQL language itself.\n\nExample:\n\n~~~sql\nSELECT name FROM products;\n~~~\n\nIn this query:\n\n- `SELECT` is a keyword\n- `FROM` is a keyword\n- `name` is a column name\n- `products` is a table name\n\nSo the key beginner idea is:\n\n> keywords tell SQL how to read the query\n\n### Try it yourself\n\nLook at this query:\n\n~~~sql\nSELECT price FROM products;\n~~~\n\nAsk yourself:\n\n- which words are SQL keywords?\n- which word is a column name?\n- which word is the table name?"
           },
           "semicolons": {
             "title": "A semicolon marks the end of a SQL statement.",
-            "bodyMarkdown": "A semicolon `;` is often used to mark the **end** of a SQL query.\n\nExample:\n\n~~~sql\nSELECT name FROM products;\n~~~\n\nThat last symbol helps show:\n\n> this statement is finished\n\nIn many beginner tools, queries may sometimes still run without it.\nBut it is still a good habit to include it.\n\nWhy?\n\n- it makes the end of the query clear\n- it matches common SQL style\n- it becomes more important when working with multiple statements\n\nSo a strong beginner habit is:\n\n> finish your query with a semicolon"
+            "bodyMarkdown": "A semicolon `;` is often used to mark the **end** of a query.\n\nExample:\n\n~~~sql\nSELECT name FROM products;\n~~~\n\nThat final symbol helps show:\n\n> this statement is complete\n\nIn some beginner tools, a simple query may still run without it.\nBut it is still a strong habit to include it.\n\nWhy?\n\n- it makes the end of the query clear\n- it matches common SQL style\n- it matters more when you work with multiple statements\n\n### Try it yourself\n\nCompare these two lines:\n\n~~~sql\nSELECT name FROM products\nSELECT name FROM products;\n~~~\n\nAsk yourself:\n\n- which one clearly shows the end of the statement?\n- what symbol makes the ending obvious?"
           },
           "uppercase_vs_lowercase": {
             "title": "SQL usually works in uppercase or lowercase, but consistency helps readability.",
-            "bodyMarkdown": "In many SQL systems, keywords work the same whether you write them in uppercase or lowercase.\n\nThese often mean the same thing:\n\n~~~sql\nSELECT name FROM products;\nselect name from products;\n~~~\n\nSo SQL usually does not care much about the case of the keywords.\n\nBut people do care about readability.\n\nA common style is:\n\n- keywords in uppercase\n- table names and column names in lowercase\n\nLike this:\n\n~~~sql\nSELECT name, price\nFROM products;\n~~~\n\nSo the goal is not magic.\nThe goal is:\n\n> write SQL in a way that is easy to read"
+            "bodyMarkdown": "In many SQL systems, keywords work the same whether you write them in uppercase or lowercase.\n\nThese usually mean the same thing:\n\n~~~sql\nSELECT name FROM products;\nselect name from products;\n~~~\n\nSo SQL often does not care much about case for simple keywords.\n\nBut people do care about readability.\n\nA common style is:\n\n- keywords in uppercase\n- table names and column names in lowercase\n\nLike this:\n\n~~~sql\nSELECT name, price\nFROM products;\n~~~\n\n### Try it yourself\n\nTake this query:\n\n~~~sql\nselect name, price from products;\n~~~\n\nRewrite it in a style that feels easier to scan.\nThen ask:\n\n- did the meaning change?\n- or did only the readability change?"
           },
           "common_beginner_syntax_mistakes": {
             "title": "Most beginner syntax mistakes come from missing or misplaced parts.",
-            "bodyMarkdown": "When a SQL query fails, the mistake is often small.\n\nCommon beginner mistakes include:\n\n- forgetting `FROM`\n- forgetting a comma between column names\n- misspelling a table name\n- using the wrong column name\n- forgetting the semicolon\n\nFor example, if you want two columns, this part needs a comma:\n\n- `name, price`\n\nnot just:\n\n- `name price`\n\nSo when something looks wrong, check the query in this order:\n\n1. are the keywords present?\n2. is the table name correct?\n3. are commas in the right places?\n4. is the query complete?\n\nThat simple checklist catches many beginner syntax problems."
+            "bodyMarkdown": "When a SQL query fails, the mistake is often something small.\n\nCommon beginner mistakes include:\n\n- forgetting `FROM`\n- forgetting a comma between column names\n- misspelling a table name\n- using the wrong column name\n- forgetting the semicolon\n\nFor example, if you want two columns, this needs a comma:\n\n- `name, price`\n\nnot:\n\n- `name price`\n\nA useful beginner checklist is:\n\n1. are the keywords present?\n2. is the table name correct?\n3. are commas in the right places?\n4. is the query complete?\n\n### Try it yourself\n\nLook at this broken query:\n\n~~~sql\nSELECT name price products;\n~~~\n\nAsk yourself:\n\n- what is missing?\n- where should the source table be named?\n- what punctuation should appear between the selected columns?"
           }
         }
       }
@@ -306,7 +306,6 @@
         "e": "Ignore punctuation completely"
       }
     },
-
     "m1_s03_reorder_keywords_meaning": {
       "title": "What keywords are",
       "prompt": "Reorder the ideas to explain SQL keywords.",
@@ -397,9 +396,6 @@
         "t3": "finish the statement clearly"
       }
     },
-
-
-
     "m1_s03_fill_keyword_example": {
       "title": "Example of a keyword",
       "prompt": "Choose the best word to complete the sentence.",
@@ -465,7 +461,5 @@
       "choices": ["FROM", "WHERE", "ORDER", "VALUE"],
       "correct": "FROM"
     }
-
-
   }
 }

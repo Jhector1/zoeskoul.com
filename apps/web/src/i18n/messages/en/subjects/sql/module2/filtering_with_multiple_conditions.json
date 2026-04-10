@@ -32,19 +32,19 @@
         "filtering_with_multiple_conditions": {
           "and_operator": {
             "title": "Use `AND` when every condition must be true.",
-            "bodyMarkdown": "The keyword `AND` combines conditions.\n\nIt means:\n\n> keep the row only if both sides are true\n\nSo if one condition fails, the row does not stay in the result.\n\nA good beginner way to remember it is:\n\n- `AND` = all required conditions must match"
+            "bodyMarkdown": "The keyword `AND` combines conditions.\n\nIt means:\n\n> keep the row only if both sides are true\n\nSo if one condition fails, the row does not stay in the result.\n\nCode example:\n\n~~~sql\nSELECT name, category, stock\nFROM products\nWHERE category = 'Art' AND stock >= 10;\n~~~\n\nThis keeps only rows that satisfy **both** rules.\n\nA good beginner way to remember it is:\n\n- `AND` = all required conditions must match\n\n### Try it yourself\n\nLook at this condition:\n\n~~~sql\nWHERE price > 10 AND stock < 20\n~~~\n\nAsk yourself:\n\n- does a row need both rules to match?\n- what happens if only one side is true?\n- would this make the result narrower or broader?"
           },
           "or_operator": {
             "title": "Use `OR` when at least one condition can match.",
-            "bodyMarkdown": "The keyword `OR` also combines conditions.\n\nIt means:\n\n> keep the row if either side is true\n\nThat makes `OR` more flexible than `AND`.\n\nA good beginner way to remember it is:\n\n- `OR` = one match can be enough"
+            "bodyMarkdown": "The keyword `OR` also combines conditions.\n\nIt means:\n\n> keep the row if either side is true\n\nThat makes `OR` more flexible than `AND`.\n\nCode example:\n\n~~~sql\nSELECT name, category\nFROM products\nWHERE category = 'Art' OR category = 'Home';\n~~~\n\nThis keeps rows in either category.\n\nA good beginner way to remember it is:\n\n- `OR` = one match can be enough\n\n### Try it yourself\n\nRead this condition:\n\n~~~sql\nWHERE category = 'Art' OR category = 'Stationery'\n~~~\n\nAsk yourself:\n\n- does a row need both categories to match?\n- what kind of rows can stay?\n- how is this different from using `AND`?"
           },
           "not_operator": {
             "title": "Use `NOT` when you want to reverse a condition.",
-            "bodyMarkdown": "The keyword `NOT` flips the meaning of a condition.\n\nIf a condition would normally match a row, `NOT` changes it so the row is excluded instead.\n\nSo the idea is:\n\n> `NOT` reverses the condition\n\nThis is helpful when you want rows that do **not** fit a rule."
+            "bodyMarkdown": "The keyword `NOT` flips the meaning of a condition.\n\nIf a condition would normally match a row, `NOT` changes it so the row is excluded instead.\n\nSo the idea is:\n\n> `NOT` reverses the condition\n\nThis is helpful when you want rows that do **not** fit a rule.\n\nCode example:\n\n~~~sql\nSELECT name, category\nFROM products\nWHERE NOT category = 'Stationery';\n~~~\n\nThis excludes rows in the `Stationery` category.\n\n### Try it yourself\n\nLook at this condition:\n\n~~~sql\nWHERE NOT category = 'Home'\n~~~\n\nAsk yourself:\n\n- which rows are excluded?\n- which rows stay?\n- how is this different from a normal exact match?"
           },
           "combining_conditions_safely": {
             "title": "Safe combining means writing the logic clearly and checking what each part means.",
-            "bodyMarkdown": "When a query has more than one condition, a small logic mistake can change the result a lot.\n\nA strong beginner habit is:\n\n1. say each rule in plain English\n2. decide whether the row needs all of them or only one of them\n3. write the conditions carefully\n4. run the query and verify the rows\n\nSo the goal is:\n\n> make the condition logic clear before you run it"
+            "bodyMarkdown": "When a query has more than one condition, a small logic mistake can change the result a lot.\n\nA strong beginner habit is:\n\n1. say each rule in plain English\n2. decide whether the row needs all of them or only one of them\n3. write the conditions carefully\n4. run the query and verify the rows\n\nCode example:\n\n~~~sql\nSELECT name, price, stock\nFROM products\nWHERE price > 10 AND stock < 20;\n~~~\n\nThis means:\n\n- the price must be above 10\n- the stock must be below 20\n- both rules must be true\n\nSo the goal is:\n\n> make the condition logic clear before you run it\n\n### Try it yourself\n\nTake this English rule:\n\n> category is Art or Home\n\nAsk yourself:\n\n- how many smaller conditions are there?\n- should both be true, or just one?\n- which keyword connects that logic best?"
           }
         }
       }
@@ -306,7 +306,6 @@
         "e": "Skip the result and assume the logic worked"
       }
     },
-
     "m2_s03_reorder_and_logic": {
       "title": "How AND works",
       "prompt": "Reorder the ideas to explain AND.",
@@ -382,7 +381,6 @@
         "t3": "run the query and verify that the rows match"
       }
     },
-
     "m2_s03_fill_and_keyword": {
       "title": "Keyword for both conditions",
       "prompt": "Fill in the blank with the correct keyword.",
@@ -448,6 +446,5 @@
       "choices": ["either", "both", "every", "final"],
       "correct": "either"
     }
-
   }
 }

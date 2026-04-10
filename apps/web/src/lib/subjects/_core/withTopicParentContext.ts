@@ -1,8 +1,8 @@
-// src/lib/subjects/_core/withTopicParentContext.ts
 import type {
     FullTopicManifest,
     SlimTopicManifest,
 } from "./subjectManifestTypes";
+import type { ManifestRuntimeDefaults } from "./manifestTypes";
 
 export function withTopicParentContext(args: {
     manifest: SlimTopicManifest;
@@ -10,6 +10,7 @@ export function withTopicParentContext(args: {
     moduleSlug: string;
     sectionSlug: string;
     prefix: string;
+    moduleRuntimeDefaults?: ManifestRuntimeDefaults | null;
 }): FullTopicManifest {
     return {
         ...args.manifest,
@@ -17,5 +18,6 @@ export function withTopicParentContext(args: {
         moduleSlug: args.moduleSlug,
         sectionSlug: args.sectionSlug,
         prefix: args.prefix,
+        runtimeDefaults: args.manifest.runtimeDefaults ?? args.moduleRuntimeDefaults ?? null,
     };
 }

@@ -24,6 +24,9 @@ export function buildReviewFromManifest(args: {
         label: tag(manifest.topic.labelKey) as any,
         minutes: manifest.minutes,
         summary: tag(manifest.topic.summaryKey) as any,
+        meta: {
+            runtimeDefaults: manifest.runtimeDefaults ?? null,
+        },
         cards: manifest.cards.map((card, index) => {
             if (card.kind === "sketch") {
                 return makeSketchCard({
@@ -91,12 +94,22 @@ export function buildReviewFromManifest(args: {
         }),
     } satisfies ReviewTopicShape;
 
-    const def = makeTopicDef({
+    const baseDef = makeTopicDef({
         id: manifest.topicId,
         label: tag(manifest.topic.labelKey) as any,
         minutes: manifest.minutes,
         pool,
     }) satisfies TopicDefInput;
+
+    const def: TopicDefInput = {
+        ...baseDef,
+        meta: {
+            ...(baseDef.meta ?? {}),
+            runtimeDefaults: manifest.runtimeDefaults ?? null,
+        },
+    };
+
+    // return { topic, def };
 
     return { topic, def };
 }

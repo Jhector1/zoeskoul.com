@@ -4,7 +4,7 @@
       "sql_module_3": {
         "sorting_data": {
           "label": "Sorting Data",
-          "summary": "Learn why sorting matters, how `ORDER BY` works, and how to sort results in ascending or descending order.",
+          "summary": "Learn why sorting matters, how `ORDER BY` works, and how ascending and descending order change the way results are read.",
           "cards": {
             "sketch0": {
               "title": "Why does sorting matter?"
@@ -31,20 +31,20 @@
       "sql_module_3": {
         "sorting_data": {
           "why_sorting_matters": {
-            "title": "Sorting matters because order changes how quickly you see the answer.",
-            "bodyMarkdown": "A query can return the right rows but still feel hard to read if the order is messy.\n\nSorting helps you:\n\n- find the highest or lowest values\n- read names in a predictable order\n- make results easier to compare\n\nSo the big idea is:\n\n> sorting makes results easier to scan and understand"
+            "title": "Sorting matters because the same rows can feel much clearer in a useful order.",
+            "bodyMarkdown": "A query can return the right rows and still feel hard to read if the order is messy.\n\nSorting helps you:\n\n- find high or low values faster\n- read names in a predictable order\n- compare rows more easily\n\nCode example:\n\n~~~sql\nSELECT name, price\nFROM products\nORDER BY price ASC;\n~~~\n\nThis puts lower prices first, so the pattern in the result becomes easier to see.\n\nSo the big idea is:\n\n> sorting changes how quickly you can understand the answer\n\n### Try it yourself\n\nLook at this query:\n\n~~~sql\nSELECT name, stock\nFROM products\nORDER BY stock DESC;\n~~~\n\nAsk yourself:\n\n- which rows should appear first?\n- why might this be easier to read than an unsorted result?\n- what kind of question does this order help answer quickly?"
           },
           "order_by": {
             "title": "`ORDER BY` tells SQL how to arrange the result rows.",
-            "bodyMarkdown": "The keyword `ORDER BY` is used to sort query results.\n\nExample shape:\n\n~~~sql\nSELECT column_or_columns\nFROM table_name\nORDER BY some_column;\n~~~\n\nYou can read it like this:\n\n- `SELECT` → what to return\n- `FROM` → where to read from\n- `ORDER BY` → how to arrange the rows\n\nSo the key idea is:\n\n> `ORDER BY` controls the order of the result"
+            "bodyMarkdown": "The keyword `ORDER BY` is used to sort query results.\n\nExample shape:\n\n~~~sql\nSELECT column_or_columns\nFROM table_name\nORDER BY some_column;\n~~~\n\nYou can read it like this:\n\n- `SELECT` → what to return\n- `FROM` → where to read from\n- `ORDER BY` → how to arrange the rows\n\nCode example:\n\n~~~sql\nSELECT name, category\nFROM products\nORDER BY category;\n~~~\n\nThis arranges the rows by `category`.\n\nSo the key idea is:\n\n> `ORDER BY` controls the order of the result\n\n### Try it yourself\n\nRead this query:\n\n~~~sql\nSELECT name, created_at\nFROM products\nORDER BY created_at;\n~~~\n\nAsk yourself:\n\n- which column controls the order?\n- is the query changing the rows or only arranging them?\n- what would look different in the result after sorting?"
           },
           "ascending_order": {
             "title": "Ascending order goes from smaller to larger or A to Z.",
-            "bodyMarkdown": "Ascending order is the default sort direction in many SQL queries.\n\nFor text, it often means:\n\n- A to Z\n\nFor numbers, it often means:\n\n- smallest to largest\n\nFor dates, it often means:\n\n- oldest to newest\n\nSo the main idea is:\n\n> ascending order moves upward in a natural direction"
+            "bodyMarkdown": "Ascending order is the default sort direction in many SQL queries.\n\nFor text, it often means:\n\n- A to Z\n\nFor numbers, it often means:\n\n- smallest to largest\n\nFor dates, it often means:\n\n- oldest to newest\n\nCode example:\n\n~~~sql\nSELECT name, price\nFROM products\nORDER BY price ASC;\n~~~\n\nThis places lower prices first and higher prices later.\n\nSo the main idea is:\n\n> ascending order moves forward in a natural direction\n\n### Try it yourself\n\nLook at this query:\n\n~~~sql\nSELECT name\nFROM products\nORDER BY name ASC;\n~~~\n\nAsk yourself:\n\n- what does ascending mean for text here?\n- which names should appear near the top?\n- how would the result change if the direction were reversed?"
           },
           "descending_order": {
             "title": "Descending order goes from larger to smaller or Z to A.",
-            "bodyMarkdown": "Descending order is useful when you want the biggest or latest values first.\n\nFor text, it often means:\n\n- Z to A\n\nFor numbers, it often means:\n\n- largest to smallest\n\nFor dates, it often means:\n\n- newest to oldest\n\nSo the main idea is:\n\n> descending order brings the biggest or latest values to the top"
+            "bodyMarkdown": "Descending order is useful when you want the biggest or latest values first.\n\nFor text, it often means:\n\n- Z to A\n\nFor numbers, it often means:\n\n- largest to smallest\n\nFor dates, it often means:\n\n- newest to oldest\n\nCode example:\n\n~~~sql\nSELECT name, stock\nFROM products\nORDER BY stock DESC;\n~~~\n\nThis places higher stock values first.\n\nSo the main idea is:\n\n> descending order brings larger or later values to the top\n\n### Try it yourself\n\nRead this query:\n\n~~~sql\nSELECT name, created_at\nFROM products\nORDER BY created_at DESC;\n~~~\n\nAsk yourself:\n\n- what does descending mean for dates?\n- which rows should appear first?\n- why is this useful when you want the newest rows quickly?"
           }
         }
       }
@@ -225,7 +225,7 @@
     },
     "m3_s01_sorting_result_check": {
       "title": "How should you check a sorted result?",
-      "prompt": "After running a sorted query, what is a strong beginner habit?",
+      "prompt": "After running a sorted query, what is a strong habit?",
       "help": {
         "concept": "You should verify that the rows really follow the requested order.",
         "hint_1": "Think compare the result to the requested sort.",
@@ -241,7 +241,7 @@
     },
     "m3_s01_order_by_true": {
       "title": "What is true about ORDER BY?",
-      "prompt": "Select all true statements about `ORDER BY` in beginner SQL.",
+      "prompt": "Select all true statements about `ORDER BY` in SQL.",
       "help": {
         "concept": "`ORDER BY` is used to sort the result rows of a query.",
         "hint_1": "Think result order and readability.",
@@ -308,8 +308,8 @@
       }
     },
     "m3_s01_sorting_workflow_true": {
-      "title": "What matches the right beginner sorting workflow?",
-      "prompt": "Select all statements that match a good beginner workflow for sorting data.",
+      "title": "What matches the right workflow?",
+      "prompt": "Select all statements that match a good workflow for sorting data.",
       "help": {
         "concept": "A good workflow is to decide what order you want, add the sort, run the query, and verify the result.",
         "hint_1": "Think desired order first, verification after.",
@@ -324,8 +324,6 @@
         "e": "Ignore the row order after running"
       }
     },
-
-
     "m3_s01_reorder_sorting_purpose": {
       "title": "Why sorting matters",
       "prompt": "Reorder the ideas to explain why sorting is useful.",
@@ -388,7 +386,7 @@
     },
     "m3_s01_reorder_sorting_workflow": {
       "title": "Good sorting workflow",
-      "prompt": "Reorder the beginner workflow for sorting.",
+      "prompt": "Reorder the workflow for sorting.",
       "help": {
         "concept": "A good workflow is decide the order, write it, run it, verify it.",
         "hint_1": "Start with the column and direction.",
@@ -401,7 +399,6 @@
         "t3": "run the query and verify the returned order"
       }
     },
-
     "m3_s01_fill_order_by_keyword": {
       "title": "Sorting keyword",
       "prompt": "Fill in the blank with the correct keyword.",
@@ -467,6 +464,5 @@
       "choices": ["requested order", "table border", "query comments", "toolbar layout"],
       "correct": "requested order"
     }
-
   }
 }

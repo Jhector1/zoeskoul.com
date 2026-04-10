@@ -13,6 +13,7 @@ export type ReviewTopic = {
     label: string;
     minutes?: number;
     summary?: string;
+    meta?: Record<string, unknown> | null;
 
     // ✅ allow `as const` topics
     cards: ReadonlyArray<ReviewCard>;
@@ -42,8 +43,7 @@ export type ReviewModule = {
     }>;
 };
 
-export type ReviewTopicShape = ReviewModule["topics"][number];
-
+export type ReviewTopicShape = ReviewTopic;
 
 
 

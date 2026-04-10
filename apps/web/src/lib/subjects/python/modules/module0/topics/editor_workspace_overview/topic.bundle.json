@@ -39,11 +39,48 @@
   "sketches": [
     {
       "id": "intro",
-      "archetype": "image_annotated",
+      "archetype": "image",
       "titleKey": "sketches.python.python-0.editor_workspace_overview.intro.title",
+      "src": "/assets/editor.png",
       "altKey": "sketches.python.python-0.editor_workspace_overview.intro.alt",
       "captionKey": "sketches.python.python-0.editor_workspace_overview.intro.caption",
-      "markersBase": "sketches.python.python-0.editor_workspace_overview.intro.markers"
+      "aspectRatio": 1.7777777778,
+
+      "markers": [
+        {
+          "id": "sidebar",
+          "x": 0.12,
+          "y": 0.2,
+          "labelKey": "sketches.python.python-0.editor_workspace_overview.intro.markers.sidebar"
+        },
+        {
+          "id": "editor",
+          "x": 0.55,
+          "y": 0.38,
+          "labelKey": "sketches.python.python-0.editor_workspace_overview.intro.markers.editor"
+        },
+        {
+          "id": "run",
+          "x": 0.92,
+          "y": 0.1,
+          "labelKey": "sketches.python.python-0.editor_workspace_overview.intro.markers.run"
+        },
+        {
+          "id": "terminal",
+          "x": 0.55,
+          "y": 0.88,
+          "labelKey": "sketches.python.python-0.editor_workspace_overview.intro.markers.terminal"
+        }
+      ],
+
+      "initialZoom": 1,
+      "minZoom": 1,
+      "maxZoom": 4,
+      "zoomStep": 0.15,
+      "allowPan": true,
+      "allowWheelZoom": true,
+      "allowDoubleClickReset": true,
+      "showControls": true
     },
     {
       "id": "instructions_intro",

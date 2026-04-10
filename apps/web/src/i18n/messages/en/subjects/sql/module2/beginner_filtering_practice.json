@@ -4,7 +4,7 @@
       "sql_module_2": {
         "beginner_filtering_practice": {
           "label": "Beginner Filtering Practice",
-          "summary": "Practice filtering by number, filtering by text, combining more than one rule, and avoiding common beginner filtering mistakes.",
+          "summary": "Practice filtering by number, filtering by text, combining more than one rule, and checking your logic to avoid common beginner mistakes.",
           "cards": {
             "sketch0": {
               "title": "How do you filter by number?"
@@ -32,19 +32,19 @@
         "beginner_filtering_practice": {
           "filter_by_number": {
             "title": "Number filters are useful for columns like id, price, and stock.",
-            "bodyMarkdown": "Many tables have numeric columns.\n\nIn the `products` table, examples include:\n\n- `id`\n- `price`\n- `stock`\n\nWhen filtering numbers, you often use operators like:\n\n- `=`\n- `>`\n- `<`\n- `>=`\n- `<=`\n\nSo the big idea is:\n\n> number filters help you keep rows based on numeric rules"
+            "bodyMarkdown": "Many tables have numeric columns.\n\nIn the `products` table, examples include:\n\n- `id`\n- `price`\n- `stock`\n\nWhen filtering numbers, you often use operators like:\n\n- `=`\n- `>`\n- `<`\n- `>=`\n- `<=`\n\nCode example:\n\n~~~sql\nSELECT name, stock\nFROM products\nWHERE stock > 10;\n~~~\n\nThis keeps rows whose stock is greater than `10`.\n\nSo the big idea is:\n\n> number filters help you keep rows based on numeric rules\n\n### Try it yourself\n\nRead this filter:\n\n~~~sql\nWHERE price < 20\n~~~\n\nAsk yourself:\n\n- what kind of column does this need?\n- would price `19` stay?\n- would price `20` stay?"
           },
           "filter_by_text": {
             "title": "Text filters are useful for columns like name and category.",
-            "bodyMarkdown": "Some columns store text values.\n\nIn the `products` table, examples include:\n\n- `name`\n- `category`\n\nText filters are useful when you want rows with one exact word or label.\n\nA strong beginner habit is:\n\n- compare the text value carefully\n- remember that text values usually go in quotes\n\nSo the big idea is:\n\n> text filters help you keep rows based on exact text matches"
+            "bodyMarkdown": "Some columns store text values.\n\nIn the `products` table, examples include:\n\n- `name`\n- `category`\n\nText filters are useful when you want rows with one exact word or label.\n\nA strong beginner habit is:\n\n- compare the text value carefully\n- remember that text values usually go in quotes\n\nCode example:\n\n~~~sql\nSELECT name, category\nFROM products\nWHERE category = 'Stationery';\n~~~\n\nThis keeps only rows where the category is exactly `Stationery`.\n\nSo the big idea is:\n\n> text filters help you keep rows based on exact text matches\n\n### Try it yourself\n\nLook at this condition:\n\n~~~sql\nWHERE name = 'Notebook'\n~~~\n\nAsk yourself:\n\n- is this filtering text or numbers?\n- why does the value need quotes?\n- what kind of rows should stay?"
           },
           "filter_by_more_than_one_rule": {
             "title": "More than one rule lets you ask more specific questions.",
-            "bodyMarkdown": "Sometimes one condition is not enough.\n\nYou may want rows that are:\n\n- in one category **and** above a stock threshold\n- in one category **or** another category\n- not part of a specific group\n\nThat is where combined filtering helps.\n\nSo the key idea is:\n\n> more rules can make the result more specific or more flexible, depending on the logic"
+            "bodyMarkdown": "Sometimes one condition is not enough.\n\nYou may want rows that are:\n\n- in one category **and** above a stock threshold\n- in one category **or** another category\n- not part of a specific group\n\nThat is where combined filtering helps.\n\nCode example:\n\n~~~sql\nSELECT name, category, price\nFROM products\nWHERE category = 'Art' AND price < 20;\n~~~\n\nThis keeps rows only if both parts are true.\n\nSo the key idea is:\n\n> more rules can make the result more specific or more flexible, depending on the logic\n\n### Try it yourself\n\nRead this condition:\n\n~~~sql\nWHERE category = 'Art' AND stock >= 10\n~~~\n\nAsk yourself:\n\n- how many rules are there?\n- do both have to match?\n- what kind of products would stay?"
           },
           "avoiding_filtering_mistakes": {
             "title": "Most filtering mistakes come from small logic or syntax problems.",
-            "bodyMarkdown": "Common beginner filtering mistakes include:\n\n- using the wrong operator\n- forgetting quotes around text\n- quoting numbers unnecessarily in beginner examples\n- choosing `AND` when the logic needed `OR`\n- not checking whether the result really matches the condition\n\nA strong beginner checklist is:\n\n1. check the column name\n2. check the operator\n3. check whether the value is text or number\n4. check the logic of the condition\n5. verify the result after running\n\nThat simple habit prevents many mistakes."
+            "bodyMarkdown": "Common beginner filtering mistakes include:\n\n- using the wrong operator\n- forgetting quotes around text\n- quoting numbers unnecessarily in beginner examples\n- choosing `AND` when the logic needed `OR`\n- not checking whether the result really matches the condition\n\nA strong beginner checklist is:\n\n1. check the column name\n2. check the operator\n3. check whether the value is text or number\n4. check the logic of the condition\n5. verify the result after running\n\nCode example:\n\n~~~sql\nSELECT name, category\nFROM products\nWHERE category = 'Art';\n~~~\n\nAfter running it, do not stop at the syntax.\nCheck whether every returned row really belongs to `Art`.\n\nThat simple habit prevents many mistakes.\n\n### Try it yourself\n\nLook at this broken idea:\n\n~~~sql\nWHERE category = Home\n~~~\n\nAsk yourself:\n\n- what is missing?\n- is `Home` text or number?\n- what should you check after fixing it?"
           }
         }
       }
@@ -289,12 +289,6 @@
         "e": "Skip reading the result after running"
       }
     },
-
-
-
-
-
-
     "m2_s04_reorder_number_filter_logic": {
       "title": "Number filter idea",
       "prompt": "Reorder the ideas to explain number filtering.",
@@ -370,7 +364,6 @@
         "t3": "run the query and verify that the rows match"
       }
     },
-
     "m2_s04_fill_number_column_example": {
       "title": "Example of a numeric column",
       "prompt": "Fill in the blank with the best column name.",
@@ -436,6 +429,5 @@
       "choices": ["verify", "rename", "drop", "sort"],
       "correct": "verify"
     }
-
   }
 }

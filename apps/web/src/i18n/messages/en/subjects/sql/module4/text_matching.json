@@ -31,20 +31,20 @@
       "sql_module_4": {
         "text_matching": {
           "intro_to_like": {
-            "title": "`LIKE` helps you search text patterns instead of exact full matches.",
-            "bodyMarkdown": "Sometimes you do not know or need the full text value.\n\nYou may want to find:\n\n- names that start with one letter\n- cities that begin with `Chi`\n- emails that end with `example.com`\n\nThat is where `LIKE` helps.\n\nSo the big idea is:\n\n> `LIKE` is used for pattern matching in text"
+            "title": "`LIKE` helps search text by pattern instead of full exact value.",
+            "bodyMarkdown": "Sometimes the full text value is not known, or only part of it matters.\n\nYou may want to find:\n\n- names that start with one letter\n- cities that begin with `Chi`\n- emails that end with `example.com`\n\nThat is where `LIKE` helps.\n\nCode example:\n\n~~~sql\nSELECT full_name, city\nFROM customers\nWHERE city LIKE 'Chi%';\n~~~\n\nThis keeps rows where the city begins with `Chi`.\n\nSo the big idea is:\n\n> `LIKE` is used for pattern matching in text\n\n### Try it yourself\n\nLook at this query:\n\n~~~sql\nSELECT full_name, email\nFROM customers\nWHERE email LIKE '%example.com';\n~~~\n\nAsk yourself:\n\n- which part of the email is fixed?\n- which part can vary?\n- why is `LIKE` a better fit here than an exact full match?"
           },
           "percent_wildcard": {
             "title": "`%` means any number of characters.",
-            "bodyMarkdown": "The `%` wildcard can stand for:\n\n- zero characters\n- one character\n- many characters\n\nThat makes it useful for searching prefixes, suffixes, or text inside a value.\n\nSo the key idea is:\n\n> `%` means any amount of text"
+            "bodyMarkdown": "The `%` wildcard can stand for:\n\n- zero characters\n- one character\n- many characters\n\nThat makes it useful for searching prefixes, suffixes, or text inside a value.\n\nCode example:\n\n~~~sql\nSELECT full_name\nFROM customers\nWHERE full_name LIKE '%ia%';\n~~~\n\nThis keeps names that contain `ia` anywhere inside them.\n\nSo the key idea is:\n\n> `%` means any amount of text\n\n### Try it yourself\n\nCompare these patterns:\n\n- `Chi%`\n- `%example.com`\n- `%ia%`\n\nAsk yourself:\n\n- which one searches the beginning?\n- which one searches the ending?\n- which one searches somewhere in the middle?"
           },
           "underscore_wildcard": {
             "title": "`_` means exactly one character.",
-            "bodyMarkdown": "The `_` wildcard is more specific than `%`.\n\nIt stands for exactly:\n\n- one character\n\nThat makes it useful when the pattern length matters.\n\nSo the key idea is:\n\n> `_` means one and only one character"
+            "bodyMarkdown": "The `_` wildcard is more specific than `%`.\n\nIt stands for exactly:\n\n- one character\n\nThat makes it useful when the pattern length matters.\n\nCode example:\n\n~~~sql\nSELECT full_name, city\nFROM customers\nWHERE city LIKE 'Miam_';\n~~~\n\nThis keeps rows where the city matches `Miam` plus exactly one more character.\n\nSo the key idea is:\n\n> `_` means one and only one character\n\n### Try it yourself\n\nLook at these two patterns:\n\n- `Miam_`\n- `Miam%`\n\nAsk yourself:\n\n- which one is stricter?\n- which one allows many extra characters?\n- when would the one-character wildcard be more useful than `%`?"
           },
           "searching_partial_text": {
-            "title": "Partial text search helps when you know only part of the value.",
-            "bodyMarkdown": "A partial text search is useful when you know only a piece of the data.\n\nFor example, you may know:\n\n- the start of a city name\n- the end of an email address\n- a short piece inside a full name\n\nSo the big idea is:\n\n> partial text search lets you find rows without needing the full exact value"
+            "title": "Partial text search helps when only part of the value is known.",
+            "bodyMarkdown": "A partial text search is useful when only one piece of the data is known.\n\nFor example, you may know:\n\n- the start of a city name\n- the end of an email address\n- a short piece inside a full name\n\nCode example:\n\n~~~sql\nSELECT full_name\nFROM customers\nWHERE full_name LIKE '%li%';\n~~~\n\nThis keeps names that contain `li` somewhere inside them.\n\nSo the big idea is:\n\n> partial text search lets rows be found without the full exact value\n\n### Try it yourself\n\nRead this query:\n\n~~~sql\nSELECT full_name, status\nFROM customers\nWHERE full_name LIKE 'L%';\n~~~\n\nAsk yourself:\n\n- which part of the name is fixed?\n- which part can vary?\n- what kind of names should appear in the result?"
           }
         }
       }
@@ -55,7 +55,7 @@
       "title": "Search cities with LIKE",
       "prompt": "The SQLite workspace already has a table named `customers`.\n\nWrite a query that shows the `full_name` and `city` columns for customers whose `city` starts with `Chi`.\n\nThen click **Run**.",
       "help": {
-        "concept": "Use `LIKE` when you want pattern matching instead of an exact full-text match.",
+        "concept": "Use `LIKE` when pattern matching is needed instead of an exact full-text match.",
         "hint_1": "Select `full_name` and `city`, then match city values that begin with `Chi`.",
         "hint_2": "Build a two-column query on `customers`, then use a text pattern that keeps city values beginning with `Chi` and allows any remaining characters after that start."
       },
@@ -165,7 +165,7 @@
       "help": {
         "concept": "`LIKE` is used for pattern matching in text values.",
         "hint_1": "Think text patterns instead of exact full matches.",
-        "hint_2": "It helps when you know part of a text value, not necessarily the whole exact value."
+        "hint_2": "It helps when part of a text value is known, not necessarily the whole exact value."
       },
       "hint": "Think text pattern matching.",
       "options": {
@@ -225,7 +225,7 @@
     },
     "m4_s01_like_result_check": {
       "title": "How should you check a LIKE result?",
-      "prompt": "After running a query with `LIKE`, what is a strong beginner habit?",
+      "prompt": "After running a query with `LIKE`, what is a strong habit?",
       "help": {
         "concept": "You should verify that the returned text really matches the pattern you intended.",
         "hint_1": "Think compare the rows to the pattern.",
@@ -241,7 +241,7 @@
     },
     "m4_s01_like_true": {
       "title": "What is true about LIKE?",
-      "prompt": "Select all true statements about `LIKE` in beginner SQL.",
+      "prompt": "Select all true statements about `LIKE` in SQL.",
       "help": {
         "concept": "`LIKE` is used for text pattern matching.",
         "hint_1": "Think searching by shape instead of exact full value.",
@@ -308,8 +308,8 @@
       }
     },
     "m4_s01_text_matching_workflow_true": {
-      "title": "What matches the right beginner workflow?",
-      "prompt": "Select all statements that match a good beginner workflow for text matching.",
+      "title": "What matches the right workflow?",
+      "prompt": "Select all statements that match a good workflow for text matching.",
       "help": {
         "concept": "A good workflow is to describe the pattern in plain English, choose the wildcard shape, run the query, and verify the text.",
         "hint_1": "Think prefix, suffix, middle, or exact length.",
@@ -324,7 +324,6 @@
         "e": "Ignore the actual returned text after running"
       }
     },
-
     "m4_s01_reorder_like_purpose": {
       "title": "What LIKE does",
       "prompt": "Reorder the ideas to explain LIKE.",
@@ -387,7 +386,7 @@
     },
     "m4_s01_reorder_text_matching_workflow": {
       "title": "Good text-matching workflow",
-      "prompt": "Reorder the beginner workflow for text matching.",
+      "prompt": "Reorder the workflow for text matching.",
       "help": {
         "concept": "A good workflow is describe the pattern, choose the wildcard shape, run, verify.",
         "hint_1": "Pattern meaning comes first.",
@@ -400,7 +399,6 @@
         "t3": "run the query and verify the returned text"
       }
     },
-
     "m4_s01_fill_like_keyword": {
       "title": "Pattern-matching keyword",
       "prompt": "Fill in the blank with the correct keyword.",
@@ -444,7 +442,7 @@
       "title": "When partial search helps",
       "prompt": "Choose the best word to complete the sentence.",
       "help": {
-        "concept": "Partial search helps when you know only part of the value.",
+        "concept": "Partial search helps when only part of the value is known.",
         "hint_1": "Think not the full value.",
         "hint_2": "The answer is part."
       },
@@ -466,6 +464,5 @@
       "choices": ["pattern", "row count", "toolbar", "comment"],
       "correct": "pattern"
     }
-
   }
 }

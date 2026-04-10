@@ -47,7 +47,7 @@ export default function LegalDocClient({
 
     return (
         <article className="space-y-6">
-            {/* Mobile / tablet: static in flow */}
+            {/* Mobile / tablet */}
             <div className="lg:hidden">
                 <LegalSectionNav
                     docTitle={resolved.title}
@@ -56,9 +56,9 @@ export default function LegalDocClient({
             </div>
 
             <div className="grid grid-cols-1 gap-8 lg:grid-cols-[280px_minmax(0,1fr)] lg:items-start">
-                {/* Desktop: true sticky sidebar */}
-                <aside className="hidden lg:block lg:self-start">
-                    <div className="sticky top-24">
+                {/* Desktop sticky sidebar */}
+                <aside className="hidden lg:sticky lg:top-24 lg:block lg:self-start">
+                    <div className="max-h-[calc(100svh-6rem)] overflow-y-auto">
                         <LegalSectionNav
                             docTitle={resolved.title}
                             sections={sectionItems}

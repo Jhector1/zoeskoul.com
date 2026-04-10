@@ -3,6 +3,21 @@ import type { ModuleBundle } from "./defineModule";
 
 export type SubjectStatus = "active" | "coming_soon" | "disabled";
 
+export type SubjectMeta = {
+    curriculum?: {
+        plannedModuleCount?: number;
+        isTerminalRelease?: boolean;
+        moreComingMessage?: string;
+        moreComingMessageKey?: string;
+    };
+    completionPolicy?: {
+        requireAllPublishedModules?: boolean;
+        rewardEnabledByDefault?: boolean;
+        certificateEnabledByDefault?: boolean;
+    };
+    readonly [key: string]: unknown;
+};
+
 export type SubjectInput = {
     slug: string;
     order: number;
@@ -10,7 +25,7 @@ export type SubjectInput = {
     description?: string | null;
     imagePublicId?: string | null;
     imageAlt?: string | null;
-    meta?: { readonly [key: string]: unknown } | null;
+    meta?: SubjectMeta | null;
 
     accessPolicy?: "free" | "paid";
     status?: SubjectStatus;

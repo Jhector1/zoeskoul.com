@@ -4,7 +4,7 @@
       "sql_module_2": {
         "intro_to_filtering": {
           "label": "Intro to Filtering",
-          "summary": "Learn why filtering matters, how `WHERE` works, and how to keep only the rows that match exact text or number values.",
+          "summary": "Learn why filtering matters, how `WHERE` works, how exact matching works, and how to write beginner filters for both text and number values.",
           "cards": {
             "sketch0": {
               "title": "Why does filtering matter?"
@@ -31,20 +31,20 @@
       "sql_module_2": {
         "intro_to_filtering": {
           "why_filtering_matters": {
-            "title": "Filtering matters because you often want only part of a table.",
-            "bodyMarkdown": "A table can contain many rows.\n\nBut most of the time, you do **not** want every row.\nYou want only the rows that match your question.\n\nFor example, in a `products` table, you might want:\n\n- only art products\n- only products with stock `10`\n- only the row for one specific product\n\nThat is why filtering matters.\n\nInstead of reading the whole table, you can ask SQL to keep only the matching rows.\n\nSo the big idea is:\n\n> filtering helps you focus on the rows you actually need"
+            "title": "Filtering matters because most questions only need part of a table.",
+            "bodyMarkdown": "A table can contain many rows, but most SQL questions are not about **every** row.\n\nUsually, you want only the rows that match a condition.\n\nFor example, in a `products` table, you might want:\n\n- only products in the `Art` category\n- only products with stock `10`\n- only the row for one specific product\n\nThat is why filtering matters.\n\nInstead of reading the whole table, you can ask SQL to keep only the rows that match your question.\n\nCode example:\n\n~~~sql\nSELECT *\nFROM products\nWHERE category = 'Art';\n~~~\n\nThis keeps only rows where the category is `Art`.\n\nSo the big idea is:\n\n> filtering helps you focus on the rows you actually need\n\n### Try it yourself\n\nRead this query:\n\n~~~sql\nSELECT *\nFROM products\nWHERE stock = 10;\n~~~\n\nAsk yourself:\n\n- will this return every row or only some rows?\n- what kind of products will stay in the result?\n- why is this more useful than always reading the full table?"
           },
           "the_where_clause": {
             "title": "The `WHERE` clause tells SQL which rows to keep.",
-            "bodyMarkdown": "The keyword `WHERE` is used to filter rows.\n\nIt adds a condition to the query.\n\nExample shape:\n\n~~~sql\nSELECT column_or_columns\nFROM table_name\nWHERE condition;\n~~~\n\nYou can read it like this:\n\n- `SELECT` → what to return\n- `FROM` → which table to read\n- `WHERE` → which rows should stay in the result\n\nSo `WHERE` answers this question:\n\n> which rows match the condition?\n\nRows that match stay.\nRows that do not match are left out."
+            "bodyMarkdown": "The keyword `WHERE` is used to filter rows.\n\nIt adds a condition to the query.\n\nBasic shape:\n\n~~~sql\nSELECT column_or_columns\nFROM table_name\nWHERE condition;\n~~~\n\nYou can read it like this:\n\n- `SELECT` → what to return\n- `FROM` → which table to read\n- `WHERE` → which rows should stay in the result\n\nRows that match the condition stay.\nRows that do not match are left out.\n\nCode example:\n\n~~~sql\nSELECT name, price\nFROM products\nWHERE category = 'Home';\n~~~\n\nThis returns only the `name` and `price` for rows whose category is `Home`.\n\nSo `WHERE` answers this question:\n\n> which rows match the condition?\n\n### Try it yourself\n\nLook at this query:\n\n~~~sql\nSELECT name\nFROM products\nWHERE id = 4;\n~~~\n\nAsk yourself:\n\n- what column is being returned?\n- what table is SQL reading from?\n- what does the `WHERE` part remove from the result?"
           },
           "matching_exact_values": {
             "title": "Exact matching usually uses the equals sign.",
-            "bodyMarkdown": "A common beginner filter checks whether a value is **exactly equal** to something.\n\nThat uses the equals sign:\n\n- `=`\n\nExamples of exact matching:\n\n- a category equals `Art`\n- an id equals `4`\n- a stock value equals `10`\n\nSo the key idea is:\n\n> use `=` when you want an exact match\n\nThat means the row must match the value exactly to appear in the result."
+            "bodyMarkdown": "A common beginner filter checks whether a value is **exactly equal** to something.\n\nThat uses the equals sign:\n\n- `=`\n\nExamples of exact matching:\n\n- a category equals `Art`\n- an id equals `4`\n- a stock value equals `10`\n\nCode example:\n\n~~~sql\nSELECT *\nFROM products\nWHERE name = 'Notebook';\n~~~\n\nThis keeps only the row where the `name` is exactly `Notebook`.\n\nSo the key idea is:\n\n> use `=` when you want an exact match\n\nThat means the row must match the value exactly to appear in the result.\n\n### Try it yourself\n\nCompare these two ideas:\n\n- `category = 'Art'`\n- `id = 4`\n\nAsk yourself:\n\n- which one is matching text?\n- which one is matching a number?\n- what do both have in common?"
           },
           "filtering_numbers_and_text": {
             "title": "Text and numbers are filtered a little differently.",
-            "bodyMarkdown": "When filtering, SQL treats **text** and **numbers** differently.\n\nFor text values, you usually put the value in quotes.\n\nExamples of text values:\n\n- `Art`\n- `Home`\n- `Notebook`\n\nFor number values, you usually do **not** use quotes.\n\nExamples of number values:\n\n- `4`\n- `10`\n- `25`\n\nSo a strong beginner habit is:\n\n- text values → use quotes\n- number values → usually no quotes\n\nThat makes your filter clearer and helps SQL read the condition correctly."
+            "bodyMarkdown": "When filtering, SQL treats **text** and **numbers** a little differently.\n\nFor text values, you usually put the value in quotes.\n\nExamples of text values:\n\n- `Art`\n- `Home`\n- `Notebook`\n\nFor number values, you usually do **not** use quotes.\n\nExamples of number values:\n\n- `4`\n- `10`\n- `25`\n\nCode examples:\n\n~~~sql\nSELECT *\nFROM products\nWHERE category = 'Art';\n~~~\n\n~~~sql\nSELECT *\nFROM products\nWHERE stock = 10;\n~~~\n\nSo a strong beginner habit is:\n\n- text values → use quotes\n- number values → usually no quotes\n\nThat makes your filter clearer and helps SQL read the condition correctly.\n\n### Try it yourself\n\nLook at these two filters:\n\n- `WHERE name = 'Notebook'`\n- `WHERE id = 4`\n\nAsk yourself:\n\n- which one uses text?\n- which one uses a number?\n- why does only one of them use quotes?"
           }
         }
       }
@@ -324,7 +324,6 @@
         "e": "Skip reading the result after running"
       }
     },
-
     "m2_s01_reorder_filtering_purpose": {
       "title": "Why filtering matters",
       "prompt": "Reorder the ideas to explain why filtering is useful.",
@@ -400,7 +399,6 @@
         "t3": "run the query and verify the returned rows"
       }
     },
-
     "m2_s01_fill_where_keyword": {
       "title": "Filtering keyword",
       "prompt": "Fill in the blank with the correct keyword.",
@@ -466,6 +464,5 @@
       "choices": ["rows", "buttons", "themes", "queries"],
       "correct": "rows"
     }
-
   }
 }

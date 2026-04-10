@@ -4,7 +4,7 @@
       "sql_module_1": {
         "practice_with_basic_queries": {
           "label": "Practice with Basic Queries",
-          "summary": "Practice asking for one column, multiple columns, and full tables, and start predicting what a result will look like before you run the query.",
+          "summary": "Practice asking for one column, several related columns, and full tables, and start predicting what the result should look like before you run the query.",
           "cards": {
             "sketch0": {
               "title": "How do you query one column?"
@@ -32,19 +32,19 @@
         "practice_with_basic_queries": {
           "query_one_column": {
             "title": "A one-column query asks for one specific kind of data.",
-            "bodyMarkdown": "Sometimes you only need one type of information.\n\nFor example, if you only want product names, you can ask for just that one column.\n\nA one-column query is useful when you want:\n\n- a simple result\n- less visual noise\n- one clear kind of value\n\nSo the big idea is:\n\n> one-column queries are focused and easy to read\n\nWhen you run one, check the result and notice that the table has only one header."
+            "bodyMarkdown": "Sometimes the clearest query is the smallest one.\n\nIf you only want one kind of information, you can ask SQL for just one column.\n\nFor example, if you only care about product names, the result does not need prices, categories, or stock.\n\nA one-column query is useful when you want:\n\n- one clear type of value\n- a narrow result\n- a simple table that is easy to inspect\n\nSo the beginner idea is:\n\n> one-column queries are useful when one kind of information is enough\n\nWhen you run one, notice that the result usually has:\n\n- one header\n- one value type under that header\n\n### Try it yourself\n\nImagine a query that asks only for `name` from `products`.\n\nBefore running it, ask yourself:\n\n- how many headers should appear?\n- what should that header be called?\n- what kind of values should appear underneath it?"
           },
           "query_multiple_columns": {
             "title": "A multiple-column query returns a few related pieces of information together.",
-            "bodyMarkdown": "Sometimes one column is not enough.\n\nYou may want to see a product name together with its price, or its category, or its stock.\n\nThat is where multiple-column queries help.\n\nThey are useful when you want to compare related values in the same row.\n\nExamples of useful pairs or groups are:\n\n- name and price\n- name and category\n- id, name, and stock\n\nSo the key idea is:\n\n> choose a small group of columns that belong together"
+            "bodyMarkdown": "Sometimes one column is too narrow.\n\nYou may want to see a product name together with its price, or its category, or its stock.\n\nThat is when multiple-column queries become useful.\n\nThey help when you want to read related values side by side in the same row.\n\nUseful examples include:\n\n- name and price\n- name and category\n- id, name, and stock\n\nThe important beginner idea is:\n\n> choose a small group of columns that makes sense together\n\nThis is different from a one-column query because the goal is not maximum simplicity.\nThe goal is to see a few related facts together.\n\n### Try it yourself\n\nSuppose you want to answer this question:\n\n> What is each product called, and how much does it cost?\n\nAsk yourself:\n\n- which two columns belong together?\n- would one column be enough?\n- would a full table show more than you need?"
           },
           "query_full_tables": {
             "title": "A full-table query is useful when you want a complete first look.",
-            "bodyMarkdown": "A full-table query asks for **all columns** from the table.\n\nThis is useful when you:\n\n- want a first overview\n- want to inspect everything available\n- are still learning the table structure\n\nA full-table query is often a good first step.\n\nThen later, you can switch to smaller focused queries.\n\nSo a helpful beginner workflow is:\n\n1. inspect the full table\n2. then select only the columns you really need"
+            "bodyMarkdown": "A full-table query asks for **all columns** from a table.\n\nThis is useful when you:\n\n- want a first overview\n- want to inspect everything available\n- are still learning the table structure\n\nA full-table query is often a good first step, especially when you do not yet know which columns matter most.\n\nThen later, you can switch to smaller and more focused queries.\n\nSo a helpful beginner workflow is:\n\n1. inspect the full table\n2. notice which columns exist\n3. switch later to only the columns you need\n\nThe key beginner idea is:\n\n> full-table queries help you explore before you narrow the result\n\n### Try it yourself\n\nImagine you run a full-table query on `products`.\n\nBefore seeing the result, ask:\n\n- should the result be narrow or wide?\n- would it show more headers than a one-column query?\n- why might this be useful before writing a smaller query?"
           },
           "predicting_result_output": {
             "title": "Before you run a query, try predicting the shape of the result.",
-            "bodyMarkdown": "A powerful beginner habit is to pause and predict the result before clicking **Run**.\n\nAsk yourself:\n\n- how many columns should appear?\n- what should the headers be?\n- will the result look wide or narrow?\n\nFor example:\n\n- one selected column → one result column\n- three selected columns → three result columns\n- `*` → all columns in the table\n\nYou do not need to guess every row exactly.\nJust predict the **shape** of the answer.\n\nThat habit helps you read SQL more confidently."
+            "bodyMarkdown": "A powerful beginner habit is to pause and predict the result before clicking **Run**.\n\nAsk yourself:\n\n- how many columns should appear?\n- what should the headers be?\n- will the result look wide or narrow?\n\nFor example:\n\n- one selected column → one result column\n- three selected columns → three result columns\n- `*` → all columns in the table\n\nYou do not need to guess every row exactly.\nJust predict the **shape** of the answer.\n\nThat habit helps you read SQL more confidently because you stop treating the output like a surprise.\n\n### Try it yourself\n\nLook at these three ideas:\n\n- one selected column\n- three selected columns\n- `*`\n\nAsk yourself:\n\n- which one should produce the narrowest result?\n- which one should produce the widest result?\n- how can the selected part of the query help you predict the output before running it?"
           }
         }
       }
@@ -324,8 +324,6 @@
         "e": "Skip the result and assume it worked"
       }
     },
-
-
     "m1_s04_reorder_full_table_workflow": {
       "title": "How full-table queries help",
       "prompt": "Reorder the beginner workflow for using a full-table query.",
@@ -386,7 +384,6 @@
         "t3": "full-table query"
       }
     },
-
     "m1_s04_reorder_one_column_focus": {
       "title": "What a one-column query does",
       "prompt": "Reorder the ideas to explain a one-column query.",
@@ -417,8 +414,6 @@
         "t3": "compare those values in the same row"
       }
     },
-
-
     "m1_s04_fill_one_column_shape": {
       "title": "One selected column",
       "prompt": "Fill in the blank with the best phrase.",
@@ -484,6 +479,5 @@
       "choices": ["overview", "mistake", "filter", "sort"],
       "correct": "overview"
     }
-
   }
 }

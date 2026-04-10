@@ -1,8 +1,9 @@
 {
   "subjects": {
     "sql": {
-      "title": "SQL",
-      "description": "SQL for beginners."
+      "title": "SQL for beginners",
+      "description": "Learn SQL from the ground up with beginner-friendly lessons on databases, SELECT, WHERE, sorting, and practical querying",
+      "moreComingSoon": "More SQL lessons are coming soon."
     }
   },
 

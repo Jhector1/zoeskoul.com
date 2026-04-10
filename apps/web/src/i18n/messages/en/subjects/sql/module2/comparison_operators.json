@@ -38,27 +38,27 @@
         "comparison_operators": {
           "equals_operator": {
             "title": "Use `=` when you want an exact match.",
-            "bodyMarkdown": "The `=` operator checks whether a value matches **exactly**.\n\nExample ideas:\n\n- category = `Art`\n- id = `4`\n- stock = `10`\n\nThis is useful when you want rows that match one specific value.\n\nSo the main idea is:\n\n> `=` means exactly equal to"
+            "bodyMarkdown": "The `=` operator checks whether a value matches **exactly**.\n\nThis is useful when you want one precise value.\n\nExamples:\n\n- category = `Art`\n- id = `4`\n- stock = `10`\n\nCode example:\n\n~~~sql\nSELECT *\nFROM products\nWHERE category = 'Art';\n~~~\n\nThis keeps only rows where the category is exactly `Art`.\n\nSo the main idea is:\n\n> `=` means exactly equal to\n\n### Try it yourself\n\nLook at this condition:\n\n~~~sql\nWHERE id = 4\n~~~\n\nAsk yourself:\n\n- is this checking for one exact value or a range?\n- would rows with id `5` stay?\n- what kind of question does `=` answer best?"
           },
           "not_equal_operator": {
             "title": "Use `!=` or `<>` when you want values that are not equal.",
-            "bodyMarkdown": "Sometimes you want rows that **do not** match a specific value.\n\nThat is where `!=` or `<>` can help.\n\nBoth are commonly used to mean:\n\n> not equal to\n\nSo if a category should not be `Home`, this kind of operator helps exclude those rows.\n\nA beginner way to think about it is:\n\n- `=` keeps the exact match\n- `!=` or `<>` keeps the non-matching rows"
+            "bodyMarkdown": "Sometimes you want rows that **do not** match one specific value.\n\nThat is where `!=` or `<>` helps.\n\nBoth are commonly used to mean:\n\n> not equal to\n\nCode example:\n\n~~~sql\nSELECT name, category\nFROM products\nWHERE category != 'Home';\n~~~\n\nThis keeps rows whose category is anything except `Home`.\n\nA beginner way to think about it is:\n\n- `=` keeps the exact match\n- `!=` or `<>` keeps the non-matching rows\n\n### Try it yourself\n\nRead this condition:\n\n~~~sql\nWHERE category <> 'Stationery'\n~~~\n\nAsk yourself:\n\n- which rows are excluded?\n- which rows stay?\n- how is this different from `category = 'Stationery'`?"
           },
           "greater_than_operator": {
             "title": "Use `>` when the value must be bigger than something.",
-            "bodyMarkdown": "The `>` operator means **greater than**.\n\nThis is useful for numbers like:\n\n- price greater than `20`\n- stock greater than `10`\n- id greater than `3`\n\nSo if the row value must be above a number, use `>`.\n\nThe key idea is:\n\n> `>` keeps values larger than the comparison value"
+            "bodyMarkdown": "The `>` operator means **greater than**.\n\nThis is useful for number-based comparisons like:\n\n- price greater than `20`\n- stock greater than `10`\n- id greater than `3`\n\nCode example:\n\n~~~sql\nSELECT name, price\nFROM products\nWHERE price > 20;\n~~~\n\nThis keeps rows whose price is above `20`.\n\nSo the key idea is:\n\n> `>` keeps values larger than the comparison value\n\n### Try it yourself\n\nLook at this condition:\n\n~~~sql\nWHERE stock > 10\n~~~\n\nAsk yourself:\n\n- would stock `11` stay?\n- would stock `10` stay?\n- does this include the boundary value or not?"
           },
           "less_than_operator": {
             "title": "Use `<` when the value must be smaller than something.",
-            "bodyMarkdown": "The `<` operator means **less than**.\n\nThis is useful for conditions like:\n\n- stock less than `10`\n- price less than `15`\n- id less than `5`\n\nSo if the row value must be below a number, use `<`.\n\nThe key idea is:\n\n> `<` keeps values smaller than the comparison value"
+            "bodyMarkdown": "The `<` operator means **less than**.\n\nThis is useful for conditions like:\n\n- stock less than `10`\n- price less than `15`\n- id less than `5`\n\nCode example:\n\n~~~sql\nSELECT *\nFROM products\nWHERE stock < 10;\n~~~\n\nThis keeps rows whose stock is below `10`.\n\nSo the key idea is:\n\n> `<` keeps values smaller than the comparison value\n\n### Try it yourself\n\nRead this condition:\n\n~~~sql\nWHERE price < 15\n~~~\n\nAsk yourself:\n\n- would price `14` stay?\n- would price `15` stay?\n- what kind of rows is this trying to keep?"
           },
           "greater_or_equal_less_or_equal": {
             "title": "Use `>=` or `<=` when the boundary should count too.",
-            "bodyMarkdown": "Sometimes the value should match the boundary **or go past it**.\n\nThat is where these operators help:\n\n- `>=` means greater than **or equal to**\n- `<=` means less than **or equal to**\n\nThese are useful when the edge value should still stay in the result.\n\nSo the big idea is:\n\n> `>=` and `<=` include the boundary value too"
+            "bodyMarkdown": "Sometimes the comparison value itself should still count as a match.\n\nThat is where these operators help:\n\n- `>=` means greater than **or equal to**\n- `<=` means less than **or equal to**\n\nCode examples:\n\n~~~sql\nSELECT name, stock\nFROM products\nWHERE stock >= 15;\n~~~\n\n~~~sql\nSELECT name, price\nFROM products\nWHERE price <= 18;\n~~~\n\nThese include rows where the value is exactly `15` or exactly `18`.\n\nSo the big idea is:\n\n> `>=` and `<=` include the boundary value too\n\n### Try it yourself\n\nCompare these two conditions:\n\n- `stock > 15`\n- `stock >= 15`\n\nAsk yourself:\n\n- which one includes stock `15`?\n- which one excludes it?\n- when would the inclusive version be better?"
           },
           "choosing_the_right_comparison": {
             "title": "Choose the comparison based on what rows you want to keep.",
-            "bodyMarkdown": "The best comparison operator depends on the question.\n\nAsk yourself:\n\n- do I want one exact value?\n- do I want values that are different?\n- do I want values above a number?\n- below a number?\n- or should the edge value count too?\n\nA good beginner habit is:\n\n1. say the condition in plain English\n2. choose the operator that matches that meaning\n\nSo the goal is:\n\n> turn your question into the right comparison"
+            "bodyMarkdown": "The best comparison operator depends on the question.\n\nAsk yourself:\n\n- do I want one exact value?\n- do I want values that are different?\n- do I want values above a number?\n- below a number?\n- or should the edge value count too?\n\nA good beginner habit is:\n\n1. say the condition in plain English\n2. choose the operator that matches that meaning\n\nCode examples:\n\n~~~sql\nWHERE category = 'Art'\nWHERE category != 'Home'\nWHERE price > 20\nWHERE stock <= 10\n~~~\n\nSo the goal is:\n\n> turn your question into the right comparison\n\n### Try it yourself\n\nTranslate these into operator ideas:\n\n- exactly `Art`\n- not `Home`\n- above `20`\n- at most `10`\n\nAsk yourself:\n\n- which operator matches each meaning?\n- which ones are strict?\n- which ones include the boundary?"
           }
         }
       }
@@ -372,8 +372,6 @@
         "e": "Choose the operator that matches the meaning"
       }
     },
-
-
     "m2_s02_reorder_equals_logic": {
       "title": "What = means",
       "prompt": "Reorder the ideas to explain the equals operator.",
@@ -449,7 +447,6 @@
         "t3": "choose the operator that matches that meaning"
       }
     },
-
     "m2_s02_fill_equals_symbol": {
       "title": "Exact match symbol",
       "prompt": "Choose the symbol that completes the sentence.",
@@ -515,6 +512,5 @@
       "choices": ["meaning", "font", "layout", "theme"],
       "correct": "meaning"
     }
-
   }
 }

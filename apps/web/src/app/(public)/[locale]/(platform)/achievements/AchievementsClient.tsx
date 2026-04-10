@@ -3,8 +3,40 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useParams } from "next/navigation";
 import { useRouter } from "@/i18n/navigation";
-import { ArrowLeft, Award, CheckCircle2, Clock3, Download } from "lucide-react";
+import {
+    ArrowLeft,
+    Award,
+    CheckCircle2,
+    Clock3,
+    Download,
+    Medal,
+    Rocket,
+    Sparkles,
+    BookOpen,
+} from "lucide-react";
 import { cn } from "@/lib/cn";
+
+type FinishState = {
+    status:
+        | "in_progress"
+        | "more_coming"
+        | "reward_ready"
+        | "certificate_ready"
+        | "certificate_issued";
+    message: string | null;
+    rewardEligible: boolean;
+    certificateEligible: boolean;
+    certificateIssued: boolean;
+    curriculumComplete: boolean;
+};
+
+type AchievementReward = {
+    badgeLabel?: string | null;
+    badgeDescription?: string | null;
+    capstoneHref?: string | null;
+    subjectHref?: string | null;
+    certificateHref?: string | null;
+};
 
 type AchievementItem = {
     subject: {
@@ -40,6 +72,9 @@ type AchievementItem = {
         updatedAt: string | null;
     }>;
     certificate: { id: string; issuedAt: string; completedAt: string | null } | null;
+
+    finishState?: FinishState | null;
+    reward?: AchievementReward | null;
 };
 
 type Payload = {
@@ -147,6 +182,30 @@ function ProgressMeter({ pct }: { pct: number }) {
     );
 }
 
+function isRewardUnlocked(it: AchievementItem) {
+    const s = it.finishState?.status;
+    return (
+        Boolean(it.finishState?.rewardEligible) ||
+        s === "reward_ready" ||
+        s === "certificate_ready" ||
+        s === "certificate_issued"
+    );
+}
+
+function isCertificateUnlocked(it: AchievementItem) {
+    const s = it.finishState?.status;
+    return (
+        Boolean(it.certificate) ||
+        Boolean(it.finishState?.certificateEligible) ||
+        s === "certificate_ready" ||
+        s === "certificate_issued"
+    );
+}
+
+function isMoreComing(it: AchievementItem) {
+    return it.finishState?.status === "more_coming";
+}
+
 export default function AchievementsClient() {
     const params = useParams<{ locale: string }>();
     const router = useRouter();
@@ -191,23 +250,25 @@ export default function AchievementsClient() {
     const buckets = useMemo(() => {
         const items = data?.items ?? [];
 
-        const certificates = items.filter((x) => x.eligible || Boolean(x.certificate));
+        const certificates = items.filter((x) => isCertificateUnlocked(x));
 
-        const completedButUnsynced = items.filter(
-            (x) =>
-                !x.eligible &&
-                !x.certificate &&
-                x.enrollment.status === "completed",
+        const rewards = items.filter(
+            (x) => isRewardUnlocked(x) && !isCertificateUnlocked(x),
         );
+
+        const badges = items.filter((x) => isRewardUnlocked(x));
+
+        const moreComing = items.filter((x) => isMoreComing(x));
 
         const inProgress = items.filter(
             (x) =>
-                !x.eligible &&
-                !x.certificate &&
+                !isCertificateUnlocked(x) &&
+                !isRewardUnlocked(x) &&
+                !isMoreComing(x) &&
                 x.enrollment.status !== "completed",
         );
 
-        return { certificates, completedButUnsynced, inProgress };
+        return { certificates, rewards, badges, moreComing, inProgress };
     }, [data]);
 
     async function downloadCertificatePdf(subjectSlug: string) {
@@ -296,8 +357,7 @@ export default function AchievementsClient() {
                                 <div className="ui-kicker">Your learning</div>
                                 <h1 className="ui-title-lg mt-2 text-xl sm:text-2xl">Achievements</h1>
                                 <p className="mt-2 max-w-2xl text-sm leading-6 text-[rgb(var(--ui-text-muted)/0.9)]">
-                                    Certificates appear when you finish every module
-                                    {items[0]?.requireAssignment ? " and required assignments." : "."}
+                                    Rewards, badges, capstones, and certificates appear here as you finish each subject path.
                                 </p>
                             </div>
 
@@ -310,6 +370,175 @@ export default function AchievementsClient() {
                         </div>
                     </Surface>
 
+                    <div className="grid gap-3 md:grid-cols-3">
+                        <Surface className="p-4">
+                            <SectionHeader
+                                title="Badges"
+                                meta={`${buckets.badges.length}`}
+                                icon={<Medal className="h-4 w-4" />}
+                            />
+                            <div className="mt-2 text-sm text-[rgb(var(--ui-text-muted)/0.9)]">
+                                Earned for finishing subject milestones and final rewards.
+                            </div>
+                        </Surface>
+
+                        <Surface className="p-4">
+                            <SectionHeader
+                                title="Rewards"
+                                meta={`${buckets.rewards.length}`}
+                                icon={<Sparkles className="h-4 w-4" />}
+                            />
+                            <div className="mt-2 text-sm text-[rgb(var(--ui-text-muted)/0.9)]">
+                                Final unlocks before certificate issuance.
+                            </div>
+                        </Surface>
+
+                        <Surface className="p-4">
+                            <SectionHeader
+                                title="Certificates"
+                                meta={`${buckets.certificates.length}`}
+                                icon={<Award className="h-4 w-4" />}
+                            />
+                            <div className="mt-2 text-sm text-[rgb(var(--ui-text-muted)/0.9)]">
+                                Official completions you can open or download.
+                            </div>
+                        </Surface>
+                    </div>
+
+                    <Surface className="p-4 sm:p-5">
+                        <SectionHeader
+                            title="Learner badges"
+                            meta={`${buckets.badges.length} earned`}
+                            icon={<Medal className="h-4 w-4" />}
+                        />
+
+                        {buckets.badges.length === 0 ? (
+                            <div className="mt-4">
+                                <EmptyBlock>
+                                    No badges yet. Finish a subject path to unlock your first badge.
+                                </EmptyBlock>
+                            </div>
+                        ) : (
+                            <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                                {buckets.badges.map((it) => (
+                                    <Surface
+                                        key={`badge-${it.subject.slug}`}
+                                        tone="success"
+                                        className="rounded-2xl p-4"
+                                    >
+                                        <div className="flex items-start justify-between gap-3">
+                                            <div className="min-w-0">
+                                                <div className="flex items-center gap-2">
+                                                    <div className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-[rgb(var(--ui-accent)/0.12)] text-[rgb(var(--ui-accent)/1)]">
+                                                        <Medal className="h-4 w-4" />
+                                                    </div>
+                                                    <div>
+                                                        <div className="text-sm font-semibold text-[rgb(var(--ui-text)/0.96)]">
+                                                            {it.reward?.badgeLabel ?? `${it.subject.title} Finisher`}
+                                                        </div>
+                                                        <div className="text-xs text-[rgb(var(--ui-text-muted)/0.84)]">
+                                                            {it.reward?.badgeDescription ?? "Final path milestone earned"}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <StatePill tone="good">Earned</StatePill>
+                                        </div>
+
+                                        <div className="mt-4 flex flex-wrap gap-2">
+                                            <button
+                                                className="ui-btn-secondary"
+                                                onClick={() =>
+                                                    router.push(
+                                                        it.reward?.subjectHref ??
+                                                        `/subjects/${it.subject.slug}/modules`,
+                                                    )
+                                                }
+                                            >
+                                                Open subject
+                                            </button>
+                                        </div>
+                                    </Surface>
+                                ))}
+                            </div>
+                        )}
+                    </Surface>
+
+                    <Surface className="p-4 sm:p-5">
+                        <SectionHeader
+                            title="Unlocked rewards"
+                            meta={`${buckets.rewards.length} ready`}
+                            icon={<Sparkles className="h-4 w-4" />}
+                        />
+
+                        {buckets.rewards.length === 0 ? (
+                            <div className="mt-4">
+                                <EmptyBlock>
+                                    No standalone rewards are waiting right now.
+                                </EmptyBlock>
+                            </div>
+                        ) : (
+                            <div className="mt-4 grid gap-3 md:grid-cols-2">
+                                {buckets.rewards.map((it) => (
+                                    <Surface
+                                        key={`reward-${it.subject.slug}`}
+                                        tone="success"
+                                        className="rounded-2xl p-4"
+                                    >
+                                        <div className="flex items-start justify-between gap-3">
+                                            <div className="min-w-0">
+                                                <div className="flex flex-wrap items-center gap-2">
+                                                    <div className="truncate text-sm font-semibold text-[rgb(var(--ui-text)/0.96)] sm:text-base">
+                                                        {it.subject.title}
+                                                    </div>
+                                                    <StatePill tone="good">Unlocked</StatePill>
+                                                </div>
+
+                                                <div className="mt-2 text-xs leading-5 text-[rgb(var(--ui-text-muted)/0.88)]">
+                                                    {it.finishState?.message ?? "You unlocked the final reward for this subject."}
+                                                </div>
+                                            </div>
+
+                                            <div className="shrink-0 text-[rgb(var(--ui-accent)/1)]">
+                                                <Sparkles className="h-4 w-4" />
+                                            </div>
+                                        </div>
+
+                                        <div className="mt-4 flex flex-wrap items-center gap-2">
+                                            <button
+                                                className="ui-btn-primary"
+                                                onClick={() =>
+                                                    router.push(
+                                                        it.reward?.certificateHref ??
+                                                        `/subjects/${it.subject.slug}/certificate`,
+                                                    )
+                                                }
+                                            >
+                                                Continue
+                                            </button>
+
+                                            <button
+                                                className="ui-btn-secondary"
+                                                onClick={() =>
+                                                    router.push(
+                                                        it.reward?.capstoneHref ??
+                                                        `/subjects/${it.subject.slug}/modules`,
+                                                    )
+                                                }
+                                            >
+                                                <span className="inline-flex items-center gap-1.5">
+                                                    <Rocket className="h-3.5 w-3.5" />
+                                                    Capstone
+                                                </span>
+                                            </button>
+                                        </div>
+                                    </Surface>
+                                ))}
+                            </div>
+                        )}
+                    </Surface>
+
                     <Surface className="p-4 sm:p-5">
                         <SectionHeader
                             title="Certificates"
@@ -319,18 +548,10 @@ export default function AchievementsClient() {
 
                         {buckets.certificates.length === 0 ? (
                             <div className="mt-4">
-                                {buckets.completedButUnsynced.length > 0 ? (
-                                    <EmptyBlock>
-                                        You have completed subject{buckets.completedButUnsynced.length > 1 ? "s" : ""}, but certificate status has not synced yet.
-                                        Open the certificate page for that subject or refresh this page.
-                                    </EmptyBlock>
-                                ) : (
-                                    <EmptyBlock>
-                                        No certificates yet. Keep going — your unlocked certificates will appear here.
-                                    </EmptyBlock>
-                                )}
+                                <EmptyBlock>
+                                    No certificates yet. Keep going — your unlocked certificates will appear here.
+                                </EmptyBlock>
                             </div>
-
                         ) : (
                             <div className="mt-4 grid gap-3 md:grid-cols-2">
                                 {buckets.certificates.map((it) => {
@@ -398,7 +619,10 @@ export default function AchievementsClient() {
                                                 <button
                                                     className="ui-btn-secondary"
                                                     onClick={() =>
-                                                        router.push(`/subjects/${it.subject.slug}/certificate`)
+                                                        router.push(
+                                                            it.reward?.certificateHref ??
+                                                            `/subjects/${it.subject.slug}/certificate`,
+                                                        )
                                                     }
                                                 >
                                                     View
@@ -413,12 +637,66 @@ export default function AchievementsClient() {
 
                     <Surface className="p-4 sm:p-5">
                         <SectionHeader
+                            title="More coming soon"
+                            meta={`${buckets.moreComing.length}`}
+                            icon={<BookOpen className="h-4 w-4" />}
+                        />
+
+                        {buckets.moreComing.length === 0 ? (
+                            <div className="mt-4">
+                                <EmptyBlock>
+                                    Nothing is waiting in the “more coming soon” state right now.
+                                </EmptyBlock>
+                            </div>
+                        ) : (
+                            <div className="mt-4 grid gap-3 md:grid-cols-2">
+                                {buckets.moreComing.map((it) => (
+                                    <Surface
+                                        key={`coming-${it.subject.slug}`}
+                                        tone="default"
+                                        className="rounded-2xl p-4"
+                                    >
+                                        <div className="flex items-start justify-between gap-3">
+                                            <div className="min-w-0">
+                                                <div className="flex flex-wrap items-center gap-2">
+                                                    <div className="truncate text-sm font-semibold text-[rgb(var(--ui-text)/0.96)] sm:text-base">
+                                                        {it.subject.title}
+                                                    </div>
+                                                    <StatePill tone="info">More coming</StatePill>
+                                                </div>
+
+                                                <div className="mt-2 text-xs leading-5 text-[rgb(var(--ui-text-muted)/0.88)]">
+                                                    {it.finishState?.message ??
+                                                        "You completed everything published so far."}
+                                                </div>
+                                            </div>
+
+                                            <div className="shrink-0 text-[rgb(var(--ui-accent)/1)]">
+                                                <Sparkles className="h-4 w-4" />
+                                            </div>
+                                        </div>
+
+                                        <div className="mt-4 flex flex-wrap items-center gap-2">
+                                            <button
+                                                className="ui-btn-secondary"
+                                                onClick={() =>
+                                                    router.push(`/subjects/${it.subject.slug}/modules`)
+                                                }
+                                            >
+                                                View subject
+                                            </button>
+                                        </div>
+                                    </Surface>
+                                ))}
+                            </div>
+                        )}
+                    </Surface>
+
+                    <Surface className="p-4 sm:p-5">
+                        <SectionHeader
                             title="In progress"
-                            meta={
-                                buckets.completedButUnsynced.length > 0
-                                    ? `${buckets.certificates.length} unlocked • ${buckets.completedButUnsynced.length} completed`
-                                    : `${buckets.certificates.length} unlocked`
-                            }                            icon={<Clock3 className="h-4 w-4" />}
+                            meta={`${buckets.inProgress.length}`}
+                            icon={<Clock3 className="h-4 w-4" />}
                         />
 
                         {buckets.inProgress.length === 0 ? (
@@ -536,7 +814,7 @@ export default function AchievementsClient() {
                         <Surface className="p-4 sm:p-5">
                             <SectionHeader title="No enrollments yet" />
                             <div className="mt-2 text-sm text-[rgb(var(--ui-text-muted)/0.9)]">
-                                Enroll in a subject to start tracking progress and earning certificates.
+                                Enroll in a subject to start tracking progress and earning rewards, badges, and certificates.
                             </div>
                         </Surface>
                     ) : null}

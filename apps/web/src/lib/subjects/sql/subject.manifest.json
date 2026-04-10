@@ -8,7 +8,19 @@
     "imagePublicId": "ChatGPT_Image_Apr_2_2026_11_17_44_PM_nocvno",
     "imageAlt": "SQL subject cover",
     "titleKey": "subjects.sql.title",
-    "descriptionKey": "subjects.sql.description"
+    "descriptionKey": "subjects.sql.description",
+    "meta": {
+      "curriculum": {
+        "plannedModuleCount": 8,
+        "isTerminalRelease": false,
+        "moreComingMessageKey": "subjects.sql.moreComingSoon"
+      },
+      "completionPolicy": {
+        "requireAllPublishedModules": true,
+        "rewardEnabledByDefault": true,
+        "certificateEnabledByDefault": true
+      }
+    }
   },
   "modules": [
     {
@@ -20,6 +32,13 @@
       "weekStart": 1,
       "weekEnd": 1,
       "accessOverride": "free",
+
+      "runtimeDefaults": {
+        "kind": "sql",
+        "datasetId": "customers_cleanup",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table"
+      },
       "meta": {
         "estimatedMinutes": 45,
         "prereqKeys": [],

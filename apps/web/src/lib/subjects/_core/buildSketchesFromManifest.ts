@@ -12,13 +12,54 @@ export function buildSketchesFromManifest(
         const sketchId =
             `${manifest.subjectSlug}.${manifest.moduleSlug}.${manifest.topicId}.${sketch.id}`;
 
+        const runtime = sketch.runtime ?? manifest.runtimeDefaults ?? null;
+
+        if (sketch.archetype === "image") {
+            const entry: SketchEntry = {
+                kind: "archetype",
+                spec: {
+                    archetype: "image",
+                    specVersion: 1,
+                    title: `@:${sketch.titleKey}`,
+                    src: sketch.src ?? (sketch.publicId ? optimizer(sketch.publicId) : ""),
+                    ...(sketch.altKey ? { alt: `@:${sketch.altKey}` } : {}),
+                    ...(sketch.captionKey ? { caption: `@:${sketch.captionKey}` } : {}),
+                    ...(sketch.aspectRatio != null ? { aspectRatio: sketch.aspectRatio } : {}),
+                    ...(sketch.markers?.length
+                        ? {
+                            markers: sketch.markers.map((m) => ({
+                                id: m.id,
+                                x: m.x,
+                                y: m.y,
+                                label: `@:${m.labelKey}`,
+                            })),
+                        }
+                        : {}),
+                    ...(sketch.initialZoom != null ? { initialZoom: sketch.initialZoom } : {}),
+                    ...(sketch.minZoom != null ? { minZoom: sketch.minZoom } : {}),
+                    ...(sketch.maxZoom != null ? { maxZoom: sketch.maxZoom } : {}),
+                    ...(sketch.zoomStep != null ? { zoomStep: sketch.zoomStep } : {}),
+                    ...(sketch.allowPan != null ? { allowPan: sketch.allowPan } : {}),
+                    ...(sketch.allowWheelZoom != null ? { allowWheelZoom: sketch.allowWheelZoom } : {}),
+                    ...(sketch.allowDoubleClickReset != null
+                        ? { allowDoubleClickReset: sketch.allowDoubleClickReset }
+                        : {}),
+                    ...(sketch.showControls != null ? { showControls: sketch.showControls } : {}),
+                    ...(runtime ? { runtime } : {}),
+                },
+            };
+
+            return [sketchId, entry];
+        }
+
         const entry: SketchEntry = {
             kind: "archetype",
             spec: {
-                archetype: sketch.archetype,
+                archetype: "paragraph",
                 specVersion: 2,
                 title: `@:${sketch.titleKey}`,
                 bodyMarkdown: `@:${sketch.bodyKey}`,
+                ...(runtime ? { runtime } : {}),
                 ...(sketch.images?.length
                     ? {
                         images: Object.fromEntries(

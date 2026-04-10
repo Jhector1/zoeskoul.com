@@ -7,6 +7,8 @@ import {
     actorKeyOf,
 } from "@/lib/practice/actor";
 import { getSubjectCertificateStatus } from "@/lib/certificates/getSubjectCertificateStatus";
+import { resolveSubjectFinishState } from "@/lib/review/api/shared/resolveSubjectFinishState";
+import { resolveSubjectTitle } from "@/lib/subjects/resolveSubjectTitle";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -32,9 +34,27 @@ export async function GET(req: Request) {
     const setGuestId = ensured.setGuestId;
     const actorKey = actorKeyOf(actor);
 
-    if (!subjectSlug) return jsonErr("Missing subjectSlug.", 400, null, setGuestId);
+    if (!subjectSlug) {
+        return jsonErr("Missing subjectSlug.", 400, null, setGuestId);
+    }
 
-    const status = await getSubjectCertificateStatus({ actorKey, subjectSlug, locale });
+    const finish = await resolveSubjectFinishState({
+        subjectSlug,
+        actor,
+        locale,
+        currentModuleSlug: null,
+    });
+
+    if (!finish.ok) {
+        return jsonErr(finish.message, finish.statusCode, { subjectSlug }, setGuestId);
+    }
+
+    const status = await getSubjectCertificateStatus({
+        actorKey,
+        subjectSlug,
+        locale,
+    });
+
     if (!status.ok) {
         return jsonErr(status.message, status.status, { subjectSlug }, setGuestId);
     }
@@ -61,19 +81,39 @@ export async function GET(req: Request) {
         displayName = "Guest Learner";
     }
 
+    const subjectTitle = await resolveSubjectTitle({
+        subjectSlug: status.subject.slug,
+        locale,
+        fallback: status.subject.title,
+    });
+
+    const effectiveEligible =
+        Boolean(certificate?.id) ||
+        (status.eligible && finish.state.certificateEligible);
+
     return jsonOk(
         {
-            eligible: status.eligible,
+            eligible: effectiveEligible,
             requireAssignment: status.requireAssignment,
-            subject: { slug: status.subject.slug, title: status.subject.title },
+            subject: {
+                slug: status.subject.slug,
+                title: subjectTitle,
+            },
             locale,
             completedAt: status.completedAt,
             modules: status.modules,
-            certificate,
+            certificate: certificate
+                ? {
+                    ...certificate,
+                    issuedAt: certificate.issuedAt.toISOString(),
+                    completedAt: certificate.completedAt?.toISOString() ?? null,
+                }
+                : null,
             displayName,
             actor: {
                 isGuest: Boolean(actor.guestId && !actor.userId),
             },
+            finishState: finish.state,
         },
         setGuestId,
     );

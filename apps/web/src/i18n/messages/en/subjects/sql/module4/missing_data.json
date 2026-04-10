@@ -4,7 +4,7 @@
       "sql_module_4": {
         "missing_data": {
           "label": "Missing Data",
-          "summary": "Learn what `NULL` means, how to use `IS NULL` and `IS NOT NULL`, and how to avoid common beginner mistakes when checking missing values.",
+          "summary": "Learn what `NULL` means, how to use `IS NULL` and `IS NOT NULL`, and how to avoid common mistakes when checking missing values.",
           "cards": {
             "sketch0": {
               "title": "What does NULL mean?"
@@ -32,19 +32,19 @@
         "missing_data": {
           "what_null_means": {
             "title": "`NULL` means the value is missing or unknown.",
-            "bodyMarkdown": "In SQL, `NULL` does not mean the same thing as empty text or zero.\n\nIt means:\n\n- the value is missing\n- the value is unknown\n- the value is not currently stored\n\nSo the big idea is:\n\n> `NULL` means no actual value is present there"
+            "bodyMarkdown": "In SQL, `NULL` does not mean the same thing as empty text or zero.\n\nIt means:\n\n- the value is missing\n- the value is unknown\n- the value is not currently stored\n\nCode example:\n\n~~~sql\nSELECT full_name, email\nFROM customers\nWHERE email IS NULL;\n~~~\n\nThis keeps rows where the email field has no stored value.\n\nSo the big idea is:\n\n> `NULL` means no actual value is present there\n\n### Try it yourself\n\nLook at these three ideas:\n\n- `NULL`\n- empty text\n- zero\n\nAsk yourself:\n\n- which one means no stored value?\n- why are they not all the same thing?\n- what kind of field might realistically contain `NULL`?"
           },
           "is_null": {
-            "title": "Use `IS NULL` when you want rows with missing values.",
-            "bodyMarkdown": "To find missing data, SQL uses `IS NULL`.\n\nThis is different from exact matching with `=`.\n\nA strong beginner idea is:\n\n> `IS NULL` checks for missing values directly"
+            "title": "Use `IS NULL` when rows with missing values are needed.",
+            "bodyMarkdown": "To find missing data, SQL uses `IS NULL`.\n\nThis is different from exact matching with `=`.\n\nCode example:\n\n~~~sql\nSELECT full_name, city\nFROM customers\nWHERE city IS NULL;\n~~~\n\nThis keeps rows where the city value is missing.\n\nA strong idea here is:\n\n> `IS NULL` checks for missing values directly\n\n### Try it yourself\n\nRead this query:\n\n~~~sql\nSELECT full_name, email\nFROM customers\nWHERE email IS NULL;\n~~~\n\nAsk yourself:\n\n- what kind of rows should come back?\n- which column is being checked for missing data?\n- why would `= NULL` be the wrong style here?"
           },
           "is_not_null": {
-            "title": "Use `IS NOT NULL` when you want rows that do have a value.",
-            "bodyMarkdown": "Sometimes you want the opposite of missing data.\n\nThat is where `IS NOT NULL` helps.\n\nIt keeps rows where a real value is present.\n\nSo the key idea is:\n\n> `IS NOT NULL` checks for values that exist"
+            "title": "Use `IS NOT NULL` when rows that do have a value are needed.",
+            "bodyMarkdown": "Sometimes the opposite of missing data is needed.\n\nThat is where `IS NOT NULL` helps.\n\nIt keeps rows where a real value is present.\n\nCode example:\n\n~~~sql\nSELECT full_name, email\nFROM customers\nWHERE email IS NOT NULL;\n~~~\n\nThis keeps rows where the email field contains a stored value.\n\nSo the key idea is:\n\n> `IS NOT NULL` checks for values that exist\n\n### Try it yourself\n\nCompare these two checks:\n\n- `email IS NULL`\n- `email IS NOT NULL`\n\nAsk yourself:\n\n- which one keeps missing emails?\n- which one keeps present emails?\n- how do the results differ?"
           },
           "common_null_mistakes": {
             "title": "Common NULL mistakes come from treating NULL like normal text or number data.",
-            "bodyMarkdown": "A very common beginner mistake is trying to compare `NULL` with `=` or `!=`.\n\nThat usually does not work the way beginners expect.\n\nStrong beginner habits are:\n\n- use `IS NULL` for missing values\n- use `IS NOT NULL` for present values\n- check the result to make sure the missing data logic worked\n\nSo the main idea is:\n\n> NULL needs its own special checks"
+            "bodyMarkdown": "A very common mistake is trying to compare `NULL` with `=` or `!=`.\n\nThat usually does not work the way people expect.\n\nUseful habits are:\n\n- use `IS NULL` for missing values\n- use `IS NOT NULL` for present values\n- check the result to make sure the missing-data logic worked\n\nCode example:\n\n~~~sql\nSELECT full_name, email, city\nFROM customers\nWHERE email IS NULL OR city IS NULL;\n~~~\n\nThis finds rows where one of those important fields is missing.\n\nSo the main idea is:\n\n> NULL needs its own special checks\n\n### Try it yourself\n\nLook at this wrong idea:\n\n~~~sql\nWHERE email = NULL\n~~~\n\nAsk yourself:\n\n- why is this the wrong style for missing data?\n- what should replace it?\n- what should be checked in the returned rows after fixing it?"
           }
         }
       }
@@ -91,7 +91,7 @@
       "title": "Find customers with emails",
       "prompt": "The `customers` table already exists.\n\nWrite a query that shows the `full_name` and `email` columns for customers whose `email` is present.\n\nThen click **Run**.",
       "help": {
-        "concept": "`IS NOT NULL` is used when you want rows that do have a value.",
+        "concept": "`IS NOT NULL` is used when rows that do have a value are needed.",
         "hint_1": "Select `full_name` and `email`, then check that the email is present.",
         "hint_2": "Build a two-column query on `customers`, then keep only rows where the email field has a real stored value."
       },
@@ -127,7 +127,7 @@
       "title": "Find rows with missing data",
       "prompt": "The `customers` table already exists.\n\nWrite a query that shows the `full_name`, `email`, and `city` columns for customers whose `email` is missing or whose `city` is missing.\n\nThen click **Run**.",
       "help": {
-        "concept": "Missing data checks can be combined, but each NULL check still needs the correct NULL syntax.",
+        "concept": "Missing-data checks can be combined, but each NULL check still needs the correct NULL syntax.",
         "hint_1": "Select the three requested columns, then write one missing-value check for `email` and another for `city`.",
         "hint_2": "Build a three-column query on `customers`, then keep rows where either the email field is missing or the city field is missing."
       },
@@ -181,7 +181,7 @@
       "help": {
         "concept": "`IS NULL` checks whether a field has no stored value.",
         "hint_1": "Think missing-data check.",
-        "hint_2": "It is used when you want rows where the chosen column has no actual value stored."
+        "hint_2": "It is used when rows where the chosen column has no actual value stored are needed."
       },
       "hint": "Think check for missing values.",
       "options": {
@@ -197,7 +197,7 @@
       "help": {
         "concept": "`IS NOT NULL` checks whether a field does contain a real value.",
         "hint_1": "Think present-value check.",
-        "hint_2": "It is used when you want rows where the chosen column is not missing."
+        "hint_2": "It is used when rows where the chosen column is not missing are needed."
       },
       "hint": "Think check for present values.",
       "options": {
@@ -209,9 +209,9 @@
     },
     "m4_s03_null_mistake_meaning": {
       "title": "What is a common NULL mistake?",
-      "prompt": "Which of these is a common beginner NULL mistake?",
+      "prompt": "Which of these is a common NULL mistake?",
       "help": {
-        "concept": "A common beginner mistake is using normal equality style with NULL instead of NULL-specific checks.",
+        "concept": "A common mistake is using normal equality style with NULL instead of NULL-specific checks.",
         "hint_1": "Think wrong comparison style.",
         "hint_2": "NULL is special and should be checked with NULL-specific syntax."
       },
@@ -225,7 +225,7 @@
     },
     "m4_s03_null_result_check": {
       "title": "How should you check a NULL result?",
-      "prompt": "After running a query that checks for missing data, what is a strong beginner habit?",
+      "prompt": "After running a query that checks for missing data, what is a strong habit?",
       "help": {
         "concept": "You should verify that the returned rows really do have missing or present values where expected.",
         "hint_1": "Think check the actual returned fields.",
@@ -258,7 +258,7 @@
     },
     "m4_s03_is_null_true": {
       "title": "What is true about IS NULL?",
-      "prompt": "Select all true statements about `IS NULL` in beginner SQL.",
+      "prompt": "Select all true statements about `IS NULL` in SQL.",
       "help": {
         "concept": "`IS NULL` is the standard way to find missing values.",
         "hint_1": "Think missing-value rows.",
@@ -275,7 +275,7 @@
     },
     "m4_s03_is_not_null_true": {
       "title": "What is true about IS NOT NULL?",
-      "prompt": "Select all true statements about `IS NOT NULL` in beginner SQL.",
+      "prompt": "Select all true statements about `IS NOT NULL` in SQL.",
       "help": {
         "concept": "`IS NOT NULL` is used to keep rows where a value exists.",
         "hint_1": "Think present-value check.",
@@ -287,12 +287,12 @@
         "b": "`IS NOT NULL` excludes missing values",
         "c": "`IS NOT NULL` can be used in WHERE conditions",
         "d": "`IS NOT NULL` means partial text search",
-        "e": "`IS NOT NULL` is useful when you want only rows with actual data"
+        "e": "`IS NOT NULL` is useful when only rows with actual data are needed"
       }
     },
     "m4_s03_null_mistakes_true": {
       "title": "What are common NULL mistakes?",
-      "prompt": "Select all common beginner mistakes related to NULL handling.",
+      "prompt": "Select all common mistakes related to NULL handling.",
       "help": {
         "concept": "NULL mistakes usually come from treating NULL like normal text or number data.",
         "hint_1": "Think wrong comparison style and wrong assumptions.",
@@ -308,10 +308,10 @@
       }
     },
     "m4_s03_missing_data_workflow_true": {
-      "title": "What matches the right beginner workflow?",
-      "prompt": "Select all statements that match a good beginner workflow for missing-data checks.",
+      "title": "What matches the right workflow?",
+      "prompt": "Select all statements that match a good workflow for missing-data checks.",
       "help": {
-        "concept": "A good workflow is to decide whether you want missing or present values, choose the correct NULL check, run the query, and verify the result.",
+        "concept": "A good workflow is to decide whether missing or present values are needed, choose the correct NULL check, run the query, and verify the result.",
         "hint_1": "Think missing or present first.",
         "hint_2": "Choose the steps that help connect the missing-data goal to the correct SQL check."
       },
@@ -324,7 +324,6 @@
         "e": "Ignore the returned field values after running"
       }
     },
-
     "m4_s03_reorder_null_meaning": {
       "title": "What NULL means",
       "prompt": "Reorder the ideas to explain NULL.",
@@ -365,7 +364,7 @@
       },
       "hint": "Think present values.",
       "tokens": {
-        "t1": "sometimes you want rows where a value is present",
+        "t1": "sometimes rows where a value is present are needed",
         "t2": "`IS NOT NULL` checks for an existing value",
         "t3": "rows with actual stored values stay in the result"
       }
@@ -387,7 +386,7 @@
     },
     "m4_s03_reorder_missing_data_workflow": {
       "title": "Good missing-data workflow",
-      "prompt": "Reorder the beginner workflow.",
+      "prompt": "Reorder the workflow.",
       "help": {
         "concept": "A good workflow is decide missing or present, choose the check, run, verify.",
         "hint_1": "Meaning first.",
@@ -400,7 +399,6 @@
         "t3": "run the query and verify the returned field values"
       }
     },
-
     "m4_s03_fill_null_word": {
       "title": "Meaning of NULL",
       "prompt": "Fill in the blank with the best word.",
@@ -449,7 +447,7 @@
         "hint_2": "The word is equality."
       },
       "hint": "Think wrong comparison style.",
-      "template": "A common beginner NULL mistake is using normal ____ style with NULL.",
+      "template": "A common NULL mistake is using normal ____ style with NULL.",
       "choices": ["equality", "sorting", "grouping", "alias"],
       "correct": "equality"
     },
@@ -466,6 +464,5 @@
       "choices": ["present", "quoted", "sorted", "patterned"],
       "correct": "present"
     }
-
   }
 }

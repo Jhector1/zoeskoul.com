@@ -134,6 +134,7 @@ const loaders: Record<string, Array<() => Promise<AnyObj>>> = {
     () => import("./messages/en/ui/footer.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/en/ui/homeOnboarding.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/en/ui/legal.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/ui/reviewModuleView.json").then((m) => (m?.default ?? {}) as AnyObj),
   ],
 
   "fr": [

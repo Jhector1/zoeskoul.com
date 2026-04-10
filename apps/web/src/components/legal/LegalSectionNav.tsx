@@ -163,12 +163,7 @@ export default function LegalSectionNav({
                 <span className="text-[rgb(var(--ui-text)/0.96)]">{docTitle}</span>
             </div>
 
-            <div
-                className={cn(
-                    "ui-page-surface p-4",
-                    desktop && "max-h-[calc(100vh-7rem)] overflow-y-auto",
-                )}
-            >
+            <div className={cn("ui-page-surface p-4", desktop && "")}>
                 <div className="ui-kicker">On this page</div>
                 <div className="mt-1 ui-title-sm">{docTitle}</div>
 

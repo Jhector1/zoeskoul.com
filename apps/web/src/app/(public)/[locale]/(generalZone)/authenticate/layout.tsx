@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import {redirect} from "next/navigation";
+import {auth} from "@/lib/auth";
 
 export const metadata: Metadata = {
     robots: {
@@ -16,10 +18,15 @@ export const metadata: Metadata = {
     },
 };
 
-export default function AuthenticateLayout({
+export default async function AuthenticateLayout({
                                                children,
                                            }: {
     children: React.ReactNode;
 }) {
+    const session = await  auth();
+
+    if (session?.user) {
+        redirect("/profile");
+    }
     return children;
 }

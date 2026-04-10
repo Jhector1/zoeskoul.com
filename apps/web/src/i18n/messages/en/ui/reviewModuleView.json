@@ -1,0 +1,22 @@
+{
+  "review": {
+    "subjectFinish": {
+      "headline": {
+        "moreComing": "You finished everything published so far",
+        "rewardReady": "Course complete",
+        "certificateReady": "Course complete",
+        "keepGoing": "Keep going"
+      },
+      "body": {
+        "moreComing": "More modules are coming soon.",
+        "rewardReady": "You unlocked the final reward.",
+        "certificateReady": "You can now claim your certificate.",
+        "keepGoing": "Complete the remaining requirements."
+      },
+      "cta": {
+        "getCertificate": "Get certificate →",
+        "viewCertificate": "View certificate →"
+      }
+    }
+  }
+}

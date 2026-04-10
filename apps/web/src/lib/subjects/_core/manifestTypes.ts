@@ -1,6 +1,22 @@
 import type { ExerciseKind, CodeLanguage, SqlDialect } from "@/lib/practice/types";
 import type { PracticeKind } from "@prisma/client";
 
+export type ManifestSqlRuntimeDefaults = {
+    kind: "sql";
+    datasetId?: string;
+    fixedSqlDialect?: SqlDialect;
+    resultShape?: "table";
+};
+
+export type ManifestCodeRuntimeDefaults = {
+    kind: "code";
+    language?: Exclude<CodeLanguage, "sql">;
+};
+
+export type ManifestRuntimeDefaults =
+    | ManifestSqlRuntimeDefaults
+    | ManifestCodeRuntimeDefaults;
+
 export type ManifestCard =
     | {
     id: string;
@@ -44,11 +60,13 @@ export type ManifestProjectStep = {
     maxAttempts?: number;
 };
 
-export type ManifestSketch = {
+export type ManifestSketch =
+    | {
     id: string;
     archetype: "paragraph";
     titleKey: string;
     bodyKey: string;
+    runtime?: ManifestRuntimeDefaults | null;
     images?: Array<{
         id: string;
         publicId: string;
@@ -56,6 +74,31 @@ export type ManifestSketch = {
         width?: number;
         height?: number;
     }>;
+}
+    | {
+    id: string;
+    archetype: "image";
+    titleKey: string;
+    src?: string;
+    publicId?: string;
+    altKey?: string;
+    captionKey?: string;
+    runtime?: ManifestRuntimeDefaults | null;
+    aspectRatio?: number;
+    markers?: Array<{
+        id: string;
+        x: number;
+        y: number;
+        labelKey: string;
+    }>;
+    initialZoom?: number;
+    minZoom?: number;
+    maxZoom?: number;
+    zoomStep?: number;
+    allowPan?: boolean;
+    allowWheelZoom?: boolean;
+    allowDoubleClickReset?: boolean;
+    showControls?: boolean;
 };
 
 export type ManifestBaseExercise = {
@@ -128,7 +171,7 @@ export type ManifestRecipe =
 }
     | {
     type: "sql_query";
-    datasetId: string;
+    datasetId?: string;
     solutionCode: string;
     resultShape?: "table";
     ignoreRowOrder?: boolean;
@@ -171,6 +214,8 @@ export type TopicBundleManifest = {
         labelKey: string;
         summaryKey: string;
     };
+
+    runtimeDefaults?: ManifestRuntimeDefaults | null;
 
     cards: ManifestCard[];
     sketches: ManifestSketch[];

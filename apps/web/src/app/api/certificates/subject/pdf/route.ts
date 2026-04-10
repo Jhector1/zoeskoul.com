@@ -11,8 +11,11 @@ import {
     actorKeyOf,
 } from "@/lib/practice/actor";
 import { getSubjectCertificateStatus } from "@/lib/certificates/getSubjectCertificateStatus";
-import {CERT_DISCLAIMER, ISSUER_NAME, ISSUER_TITLE} from "@/lib/certificates/policy";
-import {APP_NAME} from "@/lib/seo/site";
+import { resolveSubjectFinishState } from "@/lib/review/api/shared/resolveSubjectFinishState";
+import { CERT_DISCLAIMER, ISSUER_NAME, ISSUER_TITLE } from "@/lib/certificates/policy";
+import { APP_NAME } from "@/lib/seo/site";
+import {resolveModuleTitle} from "@/lib/subjects/resolveModuleTitle";
+import {resolveSubjectTitle} from "@/lib/subjects/resolveSubjectTitle";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -99,18 +102,74 @@ export async function GET(req: Request) {
         return jsonErr("Missing subjectSlug.", 400, null, setGuestId);
     }
 
-    const status = await getSubjectCertificateStatus({ actorKey, subjectSlug, locale });
-    if (!status.ok) {
-        return jsonErr(status.message, status.status, { subjectSlug }, setGuestId);
+    const finish = await resolveSubjectFinishState({
+        subjectSlug,
+        actor,
+        locale,
+        currentModuleSlug: null,
+    });
+
+    if (!finish.ok) {
+        return jsonErr(finish.message, finish.statusCode, { subjectSlug }, setGuestId);
     }
 
-    if (!status.eligible) {
+    const existingCertificate = await prisma.courseCertificate.findUnique({
+        where: {
+            actorKey_subjectSlug_locale: {
+                actorKey,
+                subjectSlug,
+                locale,
+            },
+        },
+        select: {
+            id: true,
+            issuedAt: true,
+            completedAt: true,
+            meta: true,
+        },
+    });
+
+    const canViewExisting = Boolean(existingCertificate?.id);
+    const canIssueNew = finish.state.certificateEligible;
+
+    if (!canViewExisting && !canIssueNew) {
         return jsonErr(
-            "Not eligible for certificate.",
+            finish.state.status === "more_coming"
+                ? "Certificate is not available yet. More course content is still coming."
+                : "Not eligible for certificate.",
             403,
-            { requireAssignment: status.requireAssignment, modules: status.modules },
+            {
+                subjectSlug,
+                finishState: finish.state,
+            },
             setGuestId,
         );
+    }
+
+    const status = await getSubjectCertificateStatus({ actorKey, subjectSlug, locale });
+
+    if (!canViewExisting) {
+        if (!status.ok) {
+            return jsonErr(
+                status.message,
+                status.status,
+                { subjectSlug, finishState: finish.state },
+                setGuestId,
+            );
+        }
+
+        if (!status.eligible) {
+            return jsonErr(
+                "Not eligible for certificate.",
+                403,
+                {
+                    requireAssignment: status.requireAssignment,
+                    modules: status.modules,
+                    finishState: finish.state,
+                },
+                setGuestId,
+            );
+        }
     }
 
     let displayName = "Learner";
@@ -124,40 +183,90 @@ export async function GET(req: Request) {
         displayName = "Guest Learner";
     }
 
-    const completedAtDate = status.completedAt ? new Date(status.completedAt) : null;
-
-    const meta = {
-        courseTitle: status.subject.title,
-        requireAssignment: status.requireAssignment,
-        modules: status.modules.map((m) => ({
-            moduleId: m.moduleId,
-            title: m.title,
-            moduleCompleted: m.moduleCompleted,
-            assignmentCompleted: m.assignmentCompleted,
-        })),
-    };
-
-    const cert = await prisma.courseCertificate.upsert({
-        where: {
-            actorKey_subjectSlug_locale: {
-                actorKey,
-                subjectSlug: status.subject.slug,
-                locale,
-            },
-        },
-        create: {
-            actorKey,
-            subjectSlug: status.subject.slug,
-            locale,
-            completedAt: completedAtDate,
-            meta,
-        },
-        update: {
-            completedAt: completedAtDate ?? undefined,
-            meta,
-        },
-        select: { id: true, issuedAt: true, completedAt: true },
+    const subjectTitle = await resolveSubjectTitle({
+        subjectSlug,
+        locale,
+        fallback: status.ok ? status.subject.title : subjectSlug,
     });
+
+    const completedAtDate =
+        status.ok && status.completedAt
+            ? new Date(status.completedAt)
+            : existingCertificate?.completedAt ?? null;
+
+    const resolvedModules =
+        status.ok
+            ? await Promise.all(
+                status.modules.map(async (m) => {
+                    const moduleSlug =
+                        (m as any).moduleSlug ??
+                        (m as any).slug ??
+                        null;
+
+                    const title =
+                        moduleSlug
+                            ? await resolveModuleTitle({
+                                subjectSlug,
+                                moduleSlug,
+                                locale,
+                                fallback: m.title,
+                            })
+                            : m.title;
+
+                    return {
+                        moduleId: m.moduleId,
+                        moduleSlug,
+                        title,
+                        moduleCompleted: m.moduleCompleted,
+                        assignmentCompleted: m.assignmentCompleted,
+                    };
+                }),
+            )
+            : [];
+
+    const meta =
+        status.ok
+            ? {
+                courseTitle: subjectTitle,
+                requireAssignment: status.requireAssignment,
+                modules: resolvedModules,
+                finishState: finish.state,
+            }
+            : {
+                courseTitle: subjectTitle,
+                requireAssignment: false,
+                modules: [],
+                finishState: finish.state,
+            };
+
+    const cert =
+        canViewExisting && !canIssueNew && existingCertificate
+            ? {
+                id: existingCertificate.id,
+                issuedAt: existingCertificate.issuedAt,
+                completedAt: existingCertificate.completedAt,
+            }
+            : await prisma.courseCertificate.upsert({
+                where: {
+                    actorKey_subjectSlug_locale: {
+                        actorKey,
+                        subjectSlug,
+                        locale,
+                    },
+                },
+                create: {
+                    actorKey,
+                    subjectSlug,
+                    locale,
+                    completedAt: completedAtDate,
+                    meta,
+                },
+                update: {
+                    completedAt: completedAtDate ?? undefined,
+                    meta,
+                },
+                select: { id: true, issuedAt: true, completedAt: true },
+            });
 
     try {
         const interRegular = await loadPublicAsset(req, "/fonts/inter/Inter_18pt-Regular.ttf");
@@ -269,8 +378,10 @@ export async function GET(req: Request) {
         doc.opacity(1);
         doc.restore();
 
-        const courseTitle = status.subject.title;
-        const completionDateStr = fmtDate(status.completedAt);
+        const courseTitle = subjectTitle;
+        const completionDateStr = fmtDate(
+            completedAtDate ? completedAtDate.toISOString() : null,
+        );
         const issuedDateStr = cert.issuedAt.toLocaleDateString("en-US", {
             year: "numeric",
             month: "long",
@@ -339,18 +450,16 @@ export async function GET(req: Request) {
         doc.text(ISSUER_NAME, W - 310, yLine - 20, { width: 200, align: "right" });
         doc.fillColor(muted).font("Inter").fontSize(10);
         doc.text(ISSUER_TITLE, W - 310, yLine + 8, { width: 200, align: "right" });
-        // doc.text("Issued by", W - 310, yLine + 14, { width: 200, align: "right" });
-
         doc.restore();
 
         doc.save();
         doc.strokeColor(gold).lineWidth(2);
         doc.fillColor("#FFF8E1");
-        doc.circle(W / 2, sealY-10, 38).fillAndStroke();
+        doc.circle(W / 2, sealY - 10, 38).fillAndStroke();
         doc.fillColor(gold2).font("Inter-Bold").fontSize(9);
         doc.text("ISSUED", W / 2 - 42, sealY - 21, { width: 84, align: "center" });
         doc.fillColor(muted).font("Inter").fontSize(7.5);
-        doc.text(APP_NAME.toUpperCase(), W / 2 - 42, sealY-4 , { width: 84, align: "center" });
+        doc.text(APP_NAME.toUpperCase(), W / 2 - 42, sealY - 4, { width: 84, align: "center" });
         doc.restore();
 
         doc.save();
@@ -371,7 +480,7 @@ export async function GET(req: Request) {
         doc.end();
 
         const pdf = await done;
-        const filename = `${status.subject.slug}-certificate.pdf`;
+        const filename = `${subjectSlug}-certificate.pdf`;
 
         const bytes = new Uint8Array(pdf.byteLength);
         bytes.set(pdf);

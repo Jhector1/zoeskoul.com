@@ -698,7 +698,11 @@ export default function ExerciseRenderer({
         }
 
         const exAny = ex as any;
-
+        const effectiveSqlRuntime =
+            exAny.runtime ??
+            exAny.topicRuntimeDefaults ??
+            exAny.moduleRuntimeDefaults ??
+            null;
         const curLang = ((current as any).codeLang ??
             exAny.language ??
             "python") as CodeLanguage;
@@ -724,8 +728,8 @@ export default function ExerciseRenderer({
                 variant="embedded"
                 feedback={codeFeedback}
                 explanation={codeExplanation}
-                sqlDialect={exAny.fixedSqlDialect}
-                sqlDatasetId={exAny.runtime?.datasetId}
+                sqlDialect={exAny.fixedSqlDialect ?? effectiveSqlRuntime?.fixedSqlDialect}
+                sqlDatasetId={exAny.runtime?.datasetId ?? effectiveSqlRuntime?.datasetId}
                 sqlSchemaSql={exAny.sqlSchemaSql}
                 sqlSeedSql={exAny.sqlSeedSql}
                 sqlSetupSql={exAny.sqlSetupSql}

@@ -32,19 +32,19 @@
         "lists_and_ranges": {
           "in_operator": {
             "title": "`IN` checks whether a value belongs to a list.",
-            "bodyMarkdown": "Sometimes you want rows that match one value from a small list.\n\nThat is where `IN` helps.\n\nExamples of list-style thinking are:\n\n- status is `active` or `draft`\n- city is `Chicago` or `Miami`\n\nSo the key idea is:\n\n> `IN` means the value can match any item in the list"
+            "bodyMarkdown": "Sometimes rows should match one value from a small list.\n\nThat is where `IN` helps.\n\nExamples of list-style thinking are:\n\n- status is `active` or `draft`\n- city is `Chicago` or `Miami`\n\nCode example:\n\n~~~sql\nSELECT full_name, status\nFROM customers\nWHERE status IN ('active', 'draft');\n~~~\n\nThis keeps rows whose status belongs to that list.\n\nSo the key idea is:\n\n> `IN` means the value can match any item in the list\n\n### Try it yourself\n\nLook at this query:\n\n~~~sql\nSELECT full_name, city\nFROM customers\nWHERE city IN ('Chicago', 'Miami');\n~~~\n\nAsk yourself:\n\n- how many city values are allowed?\n- does a row need to match all of them or just one?\n- why is this shorter than repeating several exact matches?"
           },
           "not_in_operator": {
             "title": "`NOT IN` excludes rows whose value appears in a list.",
-            "bodyMarkdown": "Sometimes you want to remove a group of known values.\n\nThat is where `NOT IN` helps.\n\nExamples of list-style exclusion are:\n\n- city is not `Chicago` or `Miami`\n- status is not `draft`\n\nSo the idea is:\n\n> `NOT IN` keeps rows whose value is outside the list"
+            "bodyMarkdown": "Sometimes a known group of values should be removed.\n\nThat is where `NOT IN` helps.\n\nExamples of list-style exclusion are:\n\n- city is not `Chicago` or `Miami`\n- status is not `draft`\n\nCode example:\n\n~~~sql\nSELECT full_name, city\nFROM customers\nWHERE city NOT IN ('Chicago', 'Miami');\n~~~\n\nThis keeps rows whose city is outside that list.\n\nSo the idea is:\n\n> `NOT IN` keeps rows whose value is outside the list\n\n### Try it yourself\n\nRead this query:\n\n~~~sql\nSELECT full_name, status\nFROM customers\nWHERE status NOT IN ('draft');\n~~~\n\nAsk yourself:\n\n- which rows are excluded?\n- which rows stay?\n- how is this different from an allowed-values list with `IN`?"
           },
           "between_operator": {
             "title": "`BETWEEN` checks whether a value falls inside a range.",
-            "bodyMarkdown": "A range filter is useful when you want values between two boundaries.\n\nThat is where `BETWEEN` helps.\n\nExamples are:\n\n- dates between two signup dates\n- ids between 2 and 6\n\nA strong beginner idea is:\n\n> `BETWEEN` checks the value against a start and an end"
+            "bodyMarkdown": "A range filter is useful when values should fall between two boundaries.\n\nThat is where `BETWEEN` helps.\n\nExamples are:\n\n- dates between two signup dates\n- ids between 2 and 6\n\nCode example:\n\n~~~sql\nSELECT id, full_name\nFROM customers\nWHERE id BETWEEN 2 AND 6;\n~~~\n\nThis keeps rows whose id falls inside that range.\n\nA strong idea here is:\n\n> `BETWEEN` checks the value against a start and an end\n\n### Try it yourself\n\nLook at this query:\n\n~~~sql\nSELECT full_name, signup_date\nFROM customers\nWHERE signup_date BETWEEN '2026-01-12' AND '2026-01-25';\n~~~\n\nAsk yourself:\n\n- what is the lower boundary?\n- what is the upper boundary?\n- what kind of values should stay?"
           },
           "range_filtering_practice": {
             "title": "Range practice means checking both boundaries and the meaning of the range.",
-            "bodyMarkdown": "When you write a range filter, a strong beginner habit is to ask:\n\n- what is the lower boundary?\n- what is the upper boundary?\n- should both boundaries count?\n\nThat helps you avoid accidental off-by-one style mistakes.\n\nSo the big idea is:\n\n> good range filtering starts with clear boundary meaning"
+            "bodyMarkdown": "When a range filter is written, it helps to ask:\n\n- what is the lower boundary?\n- what is the upper boundary?\n- should both boundaries count?\n\nThat helps avoid off-by-one style mistakes.\n\nCode example:\n\n~~~sql\nSELECT id, full_name\nFROM customers\nWHERE id BETWEEN 2 AND 6;\n~~~\n\nAfter running it, the returned ids should be checked against the intended boundaries.\n\nSo the big idea is:\n\n> good range filtering starts with clear boundary meaning\n\n### Try it yourself\n\nRead this condition:\n\n~~~sql\nWHERE signup_date BETWEEN '2026-01-12' AND '2026-01-25'\n~~~\n\nAsk yourself:\n\n- what counts as the start of the range?\n- what counts as the end?\n- what should be checked in the result after running it?"
           }
         }
       }
@@ -91,7 +91,7 @@
       "title": "Filter a date range with BETWEEN",
       "prompt": "The `customers` table already exists.\n\nWrite a query that shows the `full_name` and `signup_date` columns for customers whose `signup_date` is between `2026-01-12` and `2026-01-25`.\n\nThen click **Run**.",
       "help": {
-        "concept": "`BETWEEN` is useful when you want values inside a lower and upper boundary.",
+        "concept": "`BETWEEN` is useful when values inside a lower and upper boundary are needed.",
         "hint_1": "Select `full_name` and `signup_date`, then use the start and end dates as a range.",
         "hint_2": "Build a two-column query on `customers`, then keep rows whose signup date falls inside the range from `2026-01-12` to `2026-01-25`."
       },
@@ -197,7 +197,7 @@
       "help": {
         "concept": "`BETWEEN` is used to check whether a value falls inside a lower and upper boundary.",
         "hint_1": "Think start and end.",
-        "hint_2": "It is useful when you want to keep values inside a continuous range."
+        "hint_2": "It is useful when values should stay inside a continuous range."
       },
       "hint": "Think inside a range.",
       "options": {
@@ -209,7 +209,7 @@
     },
     "m4_s02_range_practice_goal": {
       "title": "What helps with range filtering practice?",
-      "prompt": "What is a good beginner habit when writing a range filter?",
+      "prompt": "What is a good habit when writing a range filter?",
       "help": {
         "concept": "A clear range starts with understanding both boundaries and what they mean.",
         "hint_1": "Think lower boundary and upper boundary.",
@@ -225,7 +225,7 @@
     },
     "m4_s02_list_range_result_check": {
       "title": "How should you check a list or range result?",
-      "prompt": "After running a query with `IN`, `NOT IN`, or `BETWEEN`, what is a strong beginner habit?",
+      "prompt": "After running a query with `IN`, `NOT IN`, or `BETWEEN`, what is a strong habit?",
       "help": {
         "concept": "You should verify that the returned rows actually fit the list or range rule.",
         "hint_1": "Think compare rows to the condition.",
@@ -241,7 +241,7 @@
     },
     "m4_s02_in_true": {
       "title": "What is true about IN?",
-      "prompt": "Select all true statements about `IN` in beginner SQL.",
+      "prompt": "Select all true statements about `IN` in SQL.",
       "help": {
         "concept": "`IN` is used for list-based matching.",
         "hint_1": "Think one allowed value from a list.",
@@ -258,7 +258,7 @@
     },
     "m4_s02_not_in_true": {
       "title": "What is true about NOT IN?",
-      "prompt": "Select all true statements about `NOT IN` in beginner SQL.",
+      "prompt": "Select all true statements about `NOT IN` in SQL.",
       "help": {
         "concept": "`NOT IN` is used to exclude listed values.",
         "hint_1": "Think keep rows outside the list.",
@@ -275,7 +275,7 @@
     },
     "m4_s02_between_true": {
       "title": "What is true about BETWEEN?",
-      "prompt": "Select all true statements about `BETWEEN` in beginner SQL.",
+      "prompt": "Select all true statements about `BETWEEN` in SQL.",
       "help": {
         "concept": "`BETWEEN` is used for range-based filtering.",
         "hint_1": "Think inside start and end boundaries.",
@@ -292,7 +292,7 @@
     },
     "m4_s02_range_filtering_true": {
       "title": "What helps with range filtering?",
-      "prompt": "Select all true statements about good beginner range filtering habits.",
+      "prompt": "Select all true statements about good range filtering habits.",
       "help": {
         "concept": "Good range filtering starts with clear boundary meaning and careful result checking.",
         "hint_1": "Think clear start, clear end, and result verification.",
@@ -308,8 +308,8 @@
       }
     },
     "m4_s02_lists_ranges_workflow_true": {
-      "title": "What matches the right beginner workflow?",
-      "prompt": "Select all statements that match a good beginner workflow for lists and ranges.",
+      "title": "What matches the right workflow?",
+      "prompt": "Select all statements that match a good workflow for lists and ranges.",
       "help": {
         "concept": "A good workflow is to identify whether the question is about a list or a range, choose the right tool, run the query, and verify the result.",
         "hint_1": "Think list question versus range question.",
@@ -324,7 +324,6 @@
         "e": "Ignore the actual returned values after running"
       }
     },
-
     "m4_s02_reorder_in_logic": {
       "title": "What IN does",
       "prompt": "Reorder the ideas to explain IN.",
@@ -387,7 +386,7 @@
     },
     "m4_s02_reorder_lists_ranges_workflow": {
       "title": "Good lists-and-ranges workflow",
-      "prompt": "Reorder the beginner workflow.",
+      "prompt": "Reorder the workflow.",
       "help": {
         "concept": "A good workflow is decide list or range, choose the operator, run, verify.",
         "hint_1": "Meaning first.",
@@ -400,7 +399,6 @@
         "t3": "run the query and verify the returned values"
       }
     },
-
     "m4_s02_fill_in_keyword": {
       "title": "Keyword for allowed list",
       "prompt": "Fill in the blank with the correct keyword.",
@@ -466,6 +464,5 @@
       "choices": ["list", "date", "join", "table alias"],
       "correct": "list"
     }
-
   }
 }

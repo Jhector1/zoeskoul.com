@@ -10,12 +10,15 @@ import {
 import { resolvePracticeAccess } from "@/lib/practice/access/resolvePracticeAccess";
 import { getLocaleFromCookie } from "@/serverUtils";
 import { resolveReviewModuleForSubject } from "@/lib/review/api/shared/modules";
+import { resolveSubjectRuntimeWindow } from "@/lib/review/api/shared/resolveSubjectFinishState";
 import { SUBJECTS } from "@/lib/subjects";
 
 export async function GET(req: Request) {
     const { searchParams } = new URL(req.url);
     const subjectSlug = (searchParams.get("subjectSlug") ?? "").trim();
-    const moduleSlug = (searchParams.get("moduleSlug") ?? searchParams.get("moduleId") ?? "").trim();
+    const moduleSlug =
+        (searchParams.get("moduleSlug") ?? searchParams.get("moduleId") ?? "").trim();
+
     if (!subjectSlug || !moduleSlug) {
         return bodyJsonResponse(
             {
@@ -58,12 +61,48 @@ export async function GET(req: Request) {
         );
     }
 
+    const runtime = await resolveSubjectRuntimeWindow({
+        subjectSlug: subject.slug,
+    });
+
+    if (!runtime.ok) {
+        return bodyJsonWithGuestCookie(
+            {
+                message: runtime.message,
+            },
+            runtime.statusCode,
+            setGuestId,
+        );
+    }
+
+    const visibleModules = resolved.modules.filter((m) =>
+        runtime.publishedModules.some((pm) => pm.slug === m.slug),
+    );
+
+    const visibleIndex = visibleModules.findIndex(
+        (m) => m.slug === resolved.module.slug,
+    );
+
+    if (visibleIndex < 0) {
+        return bodyJsonWithGuestCookie(
+            {
+                message: "Module is not published yet.",
+                detail: {
+                    subjectSlug: subject.slug,
+                    moduleSlug,
+                },
+            },
+            404,
+            setGuestId,
+        );
+    }
+
     const prev =
-        resolved.index > 0 ? resolved.modules[resolved.index - 1] : null;
+        visibleIndex > 0 ? visibleModules[visibleIndex - 1] : null;
 
     const next =
-        resolved.index < resolved.modules.length - 1
-            ? resolved.modules[resolved.index + 1]
+        visibleIndex < visibleModules.length - 1
+            ? visibleModules[visibleIndex + 1]
             : null;
 
     let nextLocked = false;
@@ -89,8 +128,8 @@ export async function GET(req: Request) {
 
     return bodyJsonWithGuestCookie(
         {
-            index: resolved.index,
-            total: resolved.modules.length,
+            index: visibleIndex,
+            total: visibleModules.length,
             prevModuleId: prev?.slug ?? null,
             nextModuleId: next?.slug ?? null,
             nextLocked,

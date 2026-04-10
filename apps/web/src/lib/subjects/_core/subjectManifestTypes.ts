@@ -2,12 +2,21 @@ import type {
     ManifestCard,
     ManifestExercise,
     ManifestSketch,
+    ManifestRuntimeDefaults,
     TopicBundleManifest as BaseTopicBundleManifest,
 } from "@/lib/subjects/_core/manifestTypes";
 
-/* =========================
-   Raw subject manifest types
-   ========================= */
+export type SubjectCurriculumManifestMeta = {
+    plannedModuleCount?: number;
+    isTerminalRelease?: boolean;
+    moreComingMessageKey?: string;
+};
+
+export type SubjectCompletionPolicyManifestMeta = {
+    requireAllPublishedModules?: boolean;
+    rewardEnabledByDefault?: boolean;
+    certificateEnabledByDefault?: boolean;
+};
 
 export type SubjectManifest = {
     subject: {
@@ -20,6 +29,10 @@ export type SubjectManifest = {
         imageAlt?: string | null;
         titleKey: string;
         descriptionKey?: string | null;
+        meta?: {
+            curriculum?: SubjectCurriculumManifestMeta;
+            completionPolicy?: SubjectCompletionPolicyManifestMeta;
+        };
     };
     modules: SubjectModuleManifest[];
 };
@@ -33,6 +46,7 @@ export type SubjectModuleManifest = {
     weekStart?: number | null;
     weekEnd?: number | null;
     accessOverride?: "free" | "paid" | null;
+    runtimeDefaults?: ManifestRuntimeDefaults | null;
     meta?: {
         estimatedMinutes?: number;
         prereqKeys?: string[];
@@ -54,10 +68,6 @@ export type SubjectSectionManifest = {
     };
     topics: string[];
 };
-
-/* =========================
-   Resolved presentation types
-   ========================= */
 
 export type ResolvedSubjectCatalogItem = {
     slug: string;
@@ -112,10 +122,6 @@ export type ResolvedSubjectModulesView = {
     modules: ResolvedSubjectModule[];
 };
 
-/* =========================
-   Topic manifest references
-   ========================= */
-
 export type TopicManifestRefMap = Record<string, SlimTopicManifest>;
 
 export type SlimTopicManifest = {
@@ -125,6 +131,7 @@ export type SlimTopicManifest = {
         labelKey: string;
         summaryKey: string;
     };
+    runtimeDefaults?: ManifestRuntimeDefaults | null;
     cards: ManifestCard[];
     sketches: ManifestSketch[];
     exercises: ManifestExercise[];
