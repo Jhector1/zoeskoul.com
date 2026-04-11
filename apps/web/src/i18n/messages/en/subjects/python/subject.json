@@ -1,10 +1,11 @@
 {
   "subjects": {
     "python": {
-      "title": "Python",
-      "description": "Python for beginners."
+      "title": "Python for Beginners",
+      "description": "Learn Python step by step with beginner-friendly lessons and hands-on practice."
     }
   },
+
 
   "modules": {
     "python": {
@@ -25,7 +26,6 @@
           "Prevents beginner confusion before writing bigger programs"
         ]
       },
-
       "python-1": {
         "title": "Module 1 — Core Building Blocks",
         "description": "Variables, data types, operators, expressions, strings, and mini-program patterns.",
@@ -43,7 +43,6 @@
           "They make conditionals and loops feel much more natural in the next module"
         ]
       },
-
       "python-2": {
         "title": "Module 2 — Control Flow + Collections",
         "description": "Conditionals, loops, lists, and functions stitched into simple beginner mini-projects.",
@@ -64,7 +63,6 @@
       }
     }
   },
-
   "sections": {
     "python": {
       "python-0": {
@@ -80,7 +78,6 @@
           ]
         }
       },
-
       "python-1": {
         "python-1-core-building-blocks": {
           "title": "Module 1 — Core Building Blocks",
@@ -94,7 +91,6 @@
           ]
         }
       },
-
       "python-2": {
         "python-2-control-flow-collections": {
           "title": "Module 2 — Control Flow + Collections",

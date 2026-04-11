@@ -3,6 +3,10 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { ExercisePrompt } from "@/components/practice/kinds/KindHelper";
 import { useSpeak } from "./_shared/useSpeak";
+import {
+    normalizePresentableOptions,
+} from "@/lib/practice/presentationOrder";
+import { useRandomizedOptions } from "./_shared/useRandomizedOptions";
 
 type Exercise = {
     title: string;
@@ -12,7 +16,7 @@ type Exercise = {
     correct?: string;
     locale?: string;
     hint?: string;
-    audio?: boolean; // hidden unless true
+    audio?: boolean;
 };
 
 function renderTemplate(template: string, fill: string) {
@@ -60,7 +64,6 @@ export default function FillBlankChoiceExerciseUI({
     const { speak, ttsStatus } = useSpeak();
 
     const [selected, setSelected] = useState<string>(value ?? "");
-    // const [showHint, setShowHint] = useState(false);
 
     useEffect(() => {
         setSelected(value ?? "");
@@ -68,9 +71,16 @@ export default function FillBlankChoiceExerciseUI({
 
     const audioEnabled = exercise.audio === true;
 
+    const normalizedChoices = useMemo(
+        () => normalizePresentableOptions(exercise.choices ?? []),
+        [exercise.choices],
+    );
+
+    const choices = useRandomizedOptions(normalizedChoices);
+
     const spokenSentence = useMemo(
         () => renderTemplate(exercise.template, selected),
-        [exercise.template, selected]
+        [exercise.template, selected],
     );
 
     const choose = (choice: string) => {
@@ -94,20 +104,10 @@ export default function FillBlankChoiceExerciseUI({
         <div className="ui-review-topic-shell space-y-4">
             <div className="flex items-start justify-between gap-3">
                 <ExercisePrompt exercise={exercise} />
-                {/*{typeof ok === "boolean" ? (*/}
-                {/*    <div className={ok ? "ui-pill-good" : "ui-pill-danger"}>*/}
-                {/*        {ok ? "Correct" : "Try again"}*/}
-                {/*    </div>*/}
-                {/*) : null}*/}
             </div>
 
             <div className="ui-review-note space-y-3 border-none">
                 <div className="flex items-start justify-between gap-3">
-                    {/*<div>*/}
-                    {/*    <div className="ui-kicker">Fill in the blank</div>*/}
-                    {/*    <div className="ui-meta">Pick the best choice to complete the sentence.</div>*/}
-                    {/*</div>*/}
-
                     {audioEnabled ? (
                         <button
                             type="button"
@@ -127,52 +127,21 @@ export default function FillBlankChoiceExerciseUI({
                 {audioEnabled && ttsStatus ? (
                     <div className="ui-quiz-status">{ttsStatus}</div>
                 ) : null}
-
-                {/*{exercise.hint ? (*/}
-                {/*    showHint ? (*/}
-                {/*        <div className="space-y-2">*/}
-                {/*            <div className="ui-quiz-note-inline">*/}
-                {/*                <span className="ui-meta-strong">Hint:</span> {exercise.hint}*/}
-                {/*            </div>*/}
-                {/*            <div>*/}
-                {/*                <button*/}
-                {/*                    type="button"*/}
-                {/*                    className="ui-btn-secondary"*/}
-                {/*                    onClick={() => setShowHint(false)}*/}
-                {/*                    disabled={disabled}*/}
-                {/*                >*/}
-                {/*                    Hide hint*/}
-                {/*                </button>*/}
-                {/*            </div>*/}
-                {/*        </div>*/}
-                {/*    ) : (*/}
-                {/*        <div>*/}
-                {/*            <button*/}
-                {/*                type="button"*/}
-                {/*                className="ui-btn-secondary"*/}
-                {/*                onClick={() => setShowHint(true)}*/}
-                {/*                disabled={disabled}*/}
-                {/*            >*/}
-                {/*                Show hint*/}
-                {/*            </button>*/}
-                {/*        </div>*/}
-                {/*    )*/}
-                {/*) : null}*/}
             </div>
 
             <div className="grid gap-2 sm:grid-cols-2">
-                {exercise.choices.map((choice) => {
-                    const active = selected === choice;
+                {choices.map((choice) => {
+                    const active = selected === choice.text;
 
                     return (
                         <button
-                            key={choice}
+                            key={choice.id}
                             type="button"
-                            onClick={() => choose(choice)}
+                            onClick={() => choose(choice.text)}
                             disabled={disabled}
                             className={active ? "ui-review-topic-btn-active" : "ui-review-topic-btn"}
                         >
-                            <div className="ui-title-sm">{choice}</div>
+                            <div className="ui-title-sm">{choice.text}</div>
                         </button>
                     );
                 })}

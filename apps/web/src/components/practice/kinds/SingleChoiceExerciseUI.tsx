@@ -5,16 +5,10 @@ import type { Exercise } from "@/lib/practice/types";
 import MathMarkdown from "@/components/markdown/MathMarkdown";
 import { ExercisePrompt } from "@/components/practice/kinds/KindHelper";
 import { useTaggedT } from "@/i18n/tagged";
-
-type Opt = { id: string; text: string };
-
-function normalizeOptions(ex: any): Opt[] {
-    const raw = ex?.options ?? ex?.choices ?? [];
-    return (Array.isArray(raw) ? raw : []).map((o: any, i: number) => ({
-        id: String(o?.id ?? o?.optionId ?? o?.value ?? o?.key ?? i),
-        text: String(o?.text ?? o?.label ?? o?.content ?? o?.latex ?? o?.contentLatex ?? ""),
-    }));
-}
+import {
+    normalizePresentableOptions,
+} from "@/lib/practice/presentationOrder";
+import { useRandomizedOptions } from "./_shared/useRandomizedOptions";
 
 export default function SingleChoiceExerciseUI({
                                                    exercise,
@@ -34,7 +28,13 @@ export default function SingleChoiceExerciseUI({
     reviewCorrectId?: string | null;
 }) {
     const ui = useTaggedT("practiceUi.singleChoice");
-    const options = useMemo(() => normalizeOptions(exercise as any), [exercise]);
+
+    const normalizedOptions = useMemo(
+        () => normalizePresentableOptions((exercise as any)?.options ?? (exercise as any)?.choices ?? []),
+        [exercise],
+    );
+
+    const options = useRandomizedOptions(normalizedOptions);
 
     return (
         <div className="grid gap-2">
@@ -47,7 +47,8 @@ export default function SingleChoiceExerciseUI({
             <div className="grid gap-2">
                 {options.map((o) => {
                     const selected = value === o.id;
-                    const hasReviewCorrect = typeof reviewCorrectId === "string" && reviewCorrectId.length > 0;
+                    const hasReviewCorrect =
+                        typeof reviewCorrectId === "string" && reviewCorrectId.length > 0;
                     const isCorrect = hasReviewCorrect ? reviewCorrectId === o.id : false;
 
                     const tone = !checked

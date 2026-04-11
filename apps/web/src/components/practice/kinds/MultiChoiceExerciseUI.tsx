@@ -4,23 +4,10 @@ import React, { useMemo } from "react";
 import type { Exercise } from "@/lib/practice/types";
 import MathMarkdown from "@/components/markdown/MathMarkdown";
 import { ExercisePrompt } from "@/components/practice/kinds/KindHelper";
-
-type Opt = { id: string; text: string };
-
-function normalizeOptions(ex: any): Opt[] {
-  const raw = ex?.options ?? ex?.choices ?? [];
-  return (Array.isArray(raw) ? raw : []).map((o: any, i: number) => ({
-    id: String(o?.id ?? o?.optionId ?? o?.value ?? o?.key ?? i),
-    text: String(
-        o?.text ??
-        o?.label ??
-        o?.content ??
-        o?.latex ??
-        o?.contentLatex ??
-        "",
-    ),
-  }));
-}
+import {
+  normalizePresentableOptions,
+} from "@/lib/practice/presentationOrder";
+import { useRandomizedOptions } from "./_shared/useRandomizedOptions";
 
 export default function MultiChoiceExerciseUI({
                                                 exercise,
@@ -39,7 +26,16 @@ export default function MultiChoiceExerciseUI({
   ok: boolean | null;
   reviewCorrectIds?: string[] | null;
 }) {
-  const options = useMemo(() => normalizeOptions(exercise as any), [exercise]);
+  const normalizedOptions = useMemo(
+      () =>
+          normalizePresentableOptions(
+              (exercise as any)?.options ?? (exercise as any)?.choices ?? []
+          ),
+      [exercise],
+  );
+
+  const options = useRandomizedOptions(normalizedOptions);
+
   const selected = Array.isArray(value) ? value : [];
 
   const correctIds: string[] = useMemo(() => {
@@ -78,33 +74,45 @@ export default function MultiChoiceExerciseUI({
 
     if (!checked) {
       if (isOn) {
-        tone = "border-[rgb(var(--ui-info)/0.24)] bg-[rgb(var(--ui-info)/0.08)] ui-text";
-        boxTone = "border-[rgb(var(--ui-info)/0.32)] bg-[rgb(var(--ui-info)/0.28)]";
+        tone =
+            "border-[rgb(var(--ui-info)/0.24)] bg-[rgb(var(--ui-info)/0.08)] ui-text";
+        boxTone =
+            "border-[rgb(var(--ui-info)/0.32)] bg-[rgb(var(--ui-info)/0.28)]";
       }
       return { tone, boxTone };
     }
 
     if (canRevealPerOption) {
       if (isOn && isCorrect) {
-        tone = "border-[rgb(var(--ui-accent)/0.24)] bg-[rgb(var(--ui-accent)/0.08)] ui-text";
-        boxTone = "border-[rgb(var(--ui-accent)/0.32)] bg-[rgb(var(--ui-accent)/0.28)]";
+        tone =
+            "border-[rgb(var(--ui-accent)/0.24)] bg-[rgb(var(--ui-accent)/0.08)] ui-text";
+        boxTone =
+            "border-[rgb(var(--ui-accent)/0.32)] bg-[rgb(var(--ui-accent)/0.28)]";
       } else if (isOn && !isCorrect) {
-        tone = "border-[rgb(var(--ui-danger)/0.24)] bg-[rgb(var(--ui-danger)/0.08)] ui-text";
-        boxTone = "border-[rgb(var(--ui-danger)/0.32)] bg-[rgb(var(--ui-danger)/0.28)]";
+        tone =
+            "border-[rgb(var(--ui-danger)/0.24)] bg-[rgb(var(--ui-danger)/0.08)] ui-text";
+        boxTone =
+            "border-[rgb(var(--ui-danger)/0.32)] bg-[rgb(var(--ui-danger)/0.28)]";
       } else if (!isOn && isCorrect) {
-        tone = "border-[rgb(var(--ui-accent)/0.18)] bg-[rgb(var(--ui-accent)/0.05)] ui-text";
-        boxTone = "border-[rgb(var(--ui-accent)/0.24)] bg-[rgb(var(--ui-accent)/0.16)]";
+        tone =
+            "border-[rgb(var(--ui-accent)/0.18)] bg-[rgb(var(--ui-accent)/0.05)] ui-text";
+        boxTone =
+            "border-[rgb(var(--ui-accent)/0.24)] bg-[rgb(var(--ui-accent)/0.16)]";
       }
       return { tone, boxTone };
     }
 
     if (isOn) {
       if (ok === true) {
-        tone = "border-[rgb(var(--ui-accent)/0.24)] bg-[rgb(var(--ui-accent)/0.08)] ui-text";
-        boxTone = "border-[rgb(var(--ui-accent)/0.32)] bg-[rgb(var(--ui-accent)/0.28)]";
+        tone =
+            "border-[rgb(var(--ui-accent)/0.24)] bg-[rgb(var(--ui-accent)/0.08)] ui-text";
+        boxTone =
+            "border-[rgb(var(--ui-accent)/0.32)] bg-[rgb(var(--ui-accent)/0.28)]";
       } else if (ok === false) {
-        tone = "border-[rgb(var(--ui-danger)/0.24)] bg-[rgb(var(--ui-danger)/0.08)] ui-text";
-        boxTone = "border-[rgb(var(--ui-danger)/0.32)] bg-[rgb(var(--ui-danger)/0.28)]";
+        tone =
+            "border-[rgb(var(--ui-danger)/0.24)] bg-[rgb(var(--ui-danger)/0.08)] ui-text";
+        boxTone =
+            "border-[rgb(var(--ui-danger)/0.32)] bg-[rgb(var(--ui-danger)/0.28)]";
       }
     }
 
