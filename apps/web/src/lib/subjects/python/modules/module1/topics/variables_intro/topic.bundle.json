@@ -1,20 +1,38 @@
 {
   "topicId": "variables_intro",
-
   "minutes": 10,
-
   "topic": {
     "labelKey": "topics.python.python-1.variables_intro.label",
     "summaryKey": "topics.python.python-1.variables_intro.summary"
   },
-
   "cards": [
     {
-      "id": "sketch",
+      "id": "sketch0",
       "kind": "sketch",
-      "titleKey": "topics.python.python-1.variables_intro.cards.sketch.title",
-      "sketchId": "boxes",
-      "height": 520
+      "titleKey": "topics.python.python-1.variables_intro.cards.sketch0.title",
+      "sketchId": "boxes_intro",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python.python-1.variables_intro.cards.sketch1.title",
+      "sketchId": "boxes_assignment",
+      "height": 460
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python.python-1.variables_intro.cards.sketch2.title",
+      "sketchId": "boxes_update",
+      "height": 420
+    },
+    {
+      "id": "sketch3",
+      "kind": "sketch",
+      "titleKey": "topics.python.python-1.variables_intro.cards.sketch3.title",
+      "sketchId": "boxes_names",
+      "height": 460
     },
     {
       "id": "project",
@@ -57,16 +75,32 @@
       }
     }
   ],
-
   "sketches": [
     {
-      "id": "boxes",
+      "id": "boxes_intro",
       "archetype": "paragraph",
-      "titleKey": "sketches.python.python-1.variables_intro.boxes.title",
-      "bodyKey": "sketches.python.python-1.variables_intro.boxes.bodyMarkdown"
+      "titleKey": "sketches.python.python-1.variables_intro.boxes_intro.title",
+      "bodyKey": "sketches.python.python-1.variables_intro.boxes_intro.bodyMarkdown"
+    },
+    {
+      "id": "boxes_assignment",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python.python-1.variables_intro.boxes_assignment.title",
+      "bodyKey": "sketches.python.python-1.variables_intro.boxes_assignment.bodyMarkdown"
+    },
+    {
+      "id": "boxes_update",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python.python-1.variables_intro.boxes_update.title",
+      "bodyKey": "sketches.python.python-1.variables_intro.boxes_update.bodyMarkdown"
+    },
+    {
+      "id": "boxes_names",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python.python-1.variables_intro.boxes_names.title",
+      "bodyKey": "sketches.python.python-1.variables_intro.boxes_names.bodyMarkdown"
     }
   ],
-
   "exercises": [
     {
       "id": "m1_vars_what_is_variable_sc",
@@ -116,7 +150,6 @@
         "optionId": "a"
       }
     },
-
     {
       "id": "m1_vars_fill_variable_meaning",
       "kind": "fill_blank_choice",
@@ -177,7 +210,6 @@
         "value": "print"
       }
     },
-
     {
       "id": "m1_vars_reorder_box_model",
       "kind": "drag_reorder",
@@ -238,7 +270,6 @@
         "tokenIds": ["t1", "t2", "t3", "t4"]
       }
     },
-
     {
       "id": "m1_vars_boxes_print_code",
       "kind": "code_input",

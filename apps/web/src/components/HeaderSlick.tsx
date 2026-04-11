@@ -525,7 +525,7 @@ export function LearnHeaderSlick() {
       <HeaderSlick
           isBillingStatus={false}
           brand={process.env.NEXT_PUBLIC_APP_NAME}
-          badge="MVP"
+          badge=""
           isUser={false}
           isNav={false}
       />

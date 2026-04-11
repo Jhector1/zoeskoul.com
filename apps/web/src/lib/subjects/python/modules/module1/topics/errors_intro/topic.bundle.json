@@ -9,11 +9,32 @@
 
   "cards": [
     {
-      "id": "sketch",
+      "id": "sketch0",
       "kind": "sketch",
-      "titleKey": "topics.python.python-1.errors_intro.cards.sketch.title",
-      "sketchId": "errors",
-      "height": 520
+      "titleKey": "topics.python.python-1.errors_intro.cards.sketch0.title",
+      "sketchId": "errors_intro",
+      "height": 360
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python.python-1.errors_intro.cards.sketch1.title",
+      "sketchId": "name_error",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python.python-1.errors_intro.cards.sketch2.title",
+      "sketchId": "type_and_value_error",
+      "height": 460
+    },
+    {
+      "id": "sketch3",
+      "kind": "sketch",
+      "titleKey": "topics.python.python-1.errors_intro.cards.sketch3.title",
+      "sketchId": "debug_flow",
+      "height": 380
     },
     {
       "id": "project",
@@ -59,10 +80,28 @@
 
   "sketches": [
     {
-      "id": "errors",
+      "id": "errors_intro",
       "archetype": "paragraph",
-      "titleKey": "sketches.python.python-1.errors_intro.errors.title",
-      "bodyKey": "sketches.python.python-1.errors_intro.errors.bodyMarkdown"
+      "titleKey": "sketches.python.python-1.errors_intro.errors_intro.title",
+      "bodyKey": "sketches.python.python-1.errors_intro.errors_intro.bodyMarkdown"
+    },
+    {
+      "id": "name_error",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python.python-1.errors_intro.name_error.title",
+      "bodyKey": "sketches.python.python-1.errors_intro.name_error.bodyMarkdown"
+    },
+    {
+      "id": "type_and_value_error",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python.python-1.errors_intro.type_and_value_error.title",
+      "bodyKey": "sketches.python.python-1.errors_intro.type_and_value_error.bodyMarkdown"
+    },
+    {
+      "id": "debug_flow",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python.python-1.errors_intro.debug_flow.title",
+      "bodyKey": "sketches.python.python-1.errors_intro.debug_flow.bodyMarkdown"
     }
   ],
 

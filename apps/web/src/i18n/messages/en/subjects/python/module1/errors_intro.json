@@ -3,11 +3,20 @@
     "python": {
       "python-1": {
         "errors_intro": {
-          "label": "Common Errors + Debugging: Read the Message, Fix the Code",
-          "summary": "Learn to recognize NameError, TypeError, and ValueError, then practice quick debugging patterns and safe conversions.",
+          "label": "Common Errors and Debugging: Read the Message, Fix the Code",
+          "summary": "Recognize NameError, TypeError, and ValueError, then practice simple ways to inspect values and fix code.",
           "cards": {
-            "sketch": {
-              "title": "Common Errors: NameError, TypeError, and Debug Tricks"
+            "sketch0": {
+              "title": "Why Error Messages Matter"
+            },
+            "sketch1": {
+              "title": "NameError: Missing Names"
+            },
+            "sketch2": {
+              "title": "TypeError and ValueError"
+            },
+            "sketch3": {
+              "title": "A Simple Debug Flow"
             },
             "quiz": {
               "title": "Project: Identify → Fix → Validate"
@@ -15,13 +24,13 @@
           },
           "projectSteps": {
             "identify_error": {
-              "title": "Identify the error type (NameError vs TypeError vs ValueError)"
+              "title": "Identify the error type"
             },
             "fix_type_mismatch": {
-              "title": "Fix a type mismatch (convert and add numbers)"
+              "title": "Fix a type mismatch"
             },
             "avoid_valueerror": {
-              "title": "Avoid ValueError with basic validation"
+              "title": "Avoid ValueError with simple validation"
             }
           }
         }
@@ -29,18 +38,32 @@
     }
   },
 
+
   "sketches": {
     "python": {
       "python-1": {
         "errors_intro": {
-          "errors": {
-            "title": "Common Errors: NameError, TypeError, and Debug Tricks",
-            "bodyMarkdown": "Mistakes are a normal part of programming.\n\nWhen Python raises an error, it’s giving you **information about what went wrong**.\nLearning to read errors is one of the fastest ways to improve.\n\nHere are three common ones beginners encounter.\n\n---\n\n## 1) NameError — using a variable that doesn’t exist\n\n~~~python\nprint(score)\n~~~\n\nIf the variable `score` was never created, Python cannot use it.\n\nCommon causes:\n- a typo: `scroe` instead of `score`\n- using a variable before assigning a value\n\n---\n\n## Try it\n\nRun this (it works):\n\n~~~python\nscore = 10\nprint(score)\n~~~\n\nNow delete the line:\n\n~~~python\nscore = 10\n~~~\n\nRun the code again.\nYou should see a **NameError** because the variable no longer exists.\n\n---\n\n## 2) TypeError — incompatible types\n\nSometimes values exist, but they **cannot be combined the way you tried**.\n\n~~~python\nage = input(\"Age: \")   # string\nprint(age + 1)         # 🚫 string + int\n~~~\n\nThe variable `age` contains **text**, not a number.\n\nFix it by converting the type:\n\n~~~python\nage = int(input(\"Age: \"))\nprint(age + 1)\n~~~\n\n---\n\n## 3) ValueError — invalid value for a conversion\n\n~~~python\nage = int(\"twelve\")  # 🚫 ValueError\n~~~\n\nPython is trying to convert text into a number, but the text **does not represent a valid number**.\n\nValid examples:\n\n~~~python\nint(\"12\")\nfloat(\"3.5\")\n~~~\n\nInvalid examples:\n\n~~~python\nint(\"twelve\")\nfloat(\"hello\")\n~~~\n\n---\n\n## A simple debugging technique\n\nWhen something looks wrong, inspect the value and its type.\n\n### Print the value\n~~~python\nprint(\"value:\", x)\n~~~\n\n### Print the type\n~~~python\nprint(\"type:\", type(x))\n~~~\n\nThis quickly reveals many beginner mistakes.\n\n---\n\n## Quick mental model\n\n- **NameError** → the variable doesn't exist\n- **TypeError** → the types don’t work together\n- **ValueError** → the value is not in the expected format\n\nLearning to interpret these messages will save you a lot of time while programming."
+          "errors_intro": {
+            "title": "Why Error Messages Matter",
+            "bodyMarkdown": "Mistakes are a normal part of programming.\n\nWhen Python raises an error, it is giving you information about what went wrong. Learning to read these messages makes debugging much easier.\n\nIn this lesson, you will look at three common errors and a simple way to inspect what your code is doing."
+          },
+          "name_error": {
+            "title": "NameError: Missing Names",
+            "bodyMarkdown": "## NameError means Python cannot find a name\n\n~~~python\nprint(score)  # NameError if score was never created\n~~~\n\nIf `score` was never created, Python cannot use it.\n\nCommon causes:\n- a typo such as `scroe` instead of `score`\n- using a variable before assigning a value\n\n### Try it\n\nRun this code:\n\n~~~python\nscore = 10\nprint(score)  # prints: 10\n~~~\n\nNow remove this line:\n\n~~~python\nscore = 10\n~~~\n\nRun the code again.\n\nYou should get a **NameError** because the variable no longer exists."
+          },
+          "type_and_value_error": {
+            "title": "TypeError and ValueError",
+            "bodyMarkdown": "## TypeError — the types do not work together\n\nSometimes the values exist, but Python cannot combine them the way you asked.\n\n~~~python\nage = input(\"Age: \")\nprint(age + 1)  # TypeError because age is text, not a number\n~~~\n\n`age` contains text, not a number.\n\nFix it by converting the value first:\n\n~~~python\nage = int(input(\"Age: \"))\nprint(age + 1)  # if input is 16, prints: 17\n~~~\n\n---\n\n## ValueError — the value is in the wrong format\n\n~~~python\nage = int(\"twelve\")  # ValueError because \"twelve\" is not valid numeric text\n~~~\n\nPython is trying to convert text into a number, but the text is not written in a valid numeric form.\n\nValid examples:\n\n~~~python\nint(\"12\")       # gives: 12\nfloat(\"3.5\")    # gives: 3.5\n~~~\n\nInvalid examples:\n\n~~~python\nint(\"twelve\")   # ValueError\nfloat(\"hello\")  # ValueError\n~~~"
+          },
+          "debug_flow": {
+            "title": "A Simple Debug Flow",
+            "bodyMarkdown": "When something looks wrong, inspect both the value and the type.\n\n### Print the value\n~~~python\nprint(\"value:\", x)       # example: value: 10\n~~~\n\n### Print the type\n~~~python\nprint(\"type:\", type(x))  # example: type: <class 'int'>\n~~~\n\nThis quickly reveals many common mistakes.\n\n## Quick mental model\n\n- **NameError** → the name does not exist\n- **TypeError** → the types do not work together\n- **ValueError** → the value is in the wrong format\n\nReading the message, checking the value, and checking the type will help you fix many errors faster."
           }
         }
       }
     }
-  },
+  }
+,
 
   "quiz": {
     "m1_types_errors_sc": {
@@ -51,43 +74,43 @@
         "b": "TypeError",
         "c": "ValueError"
       },
-      "hint": "input() returns a string, and you can’t add a string and an int.",
+      "hint": "input() returns a string, so this tries to combine a string and an integer.",
       "help": {
-        "concept": "TypeError happens when values exist but their types cannot be used together the way the code expects.",
-        "hint_1": "The variable age exists, so this is not NameError.",
-        "hint_2": "The problem is trying to combine a string with an integer."
+        "concept": "TypeError happens when values exist, but their types cannot be used together in that operation.",
+        "hint_1": "The variable `age` exists, so this is not a missing-name problem.",
+        "hint_2": "The problem is combining a string with an integer."
       }
     },
 
     "m1_err_nameerror_sc": {
-      "title": "NameError: label doesn’t exist",
+      "title": "NameError: missing name",
       "prompt": "What error do you get if you run this?\n\n~~~python\nprint(score)\n~~~\n\n(Assume `score` was never created.)",
       "options": {
         "a": "NameError",
         "b": "TypeError",
         "c": "ValueError"
       },
-      "hint": "NameError happens when you use a variable name that doesn’t exist yet.",
+      "hint": "This happens when you use a variable name that does not exist yet.",
       "help": {
         "concept": "NameError means Python cannot find the variable name you asked for.",
-        "hint_1": "The variable score was never assigned.",
-        "hint_2": "Missing variable names cause NameError."
+        "hint_1": "The variable `score` was never assigned.",
+        "hint_2": "A missing variable name causes NameError."
       }
     },
 
     "m1_err_typeerror_sc": {
-      "title": "TypeError: types don’t mix",
+      "title": "TypeError: types do not mix",
       "prompt": "A shopping app stores the item count as a number:\n\n~~~python\ncount = 3\nprint(\"Items: \" + count)\n~~~\n\nWhat error will this cause?",
       "options": {
         "a": "NameError",
         "b": "TypeError",
         "c": "ValueError"
       },
-      "hint": "You can’t concatenate a string and an int. Convert with str(count).",
+      "hint": "You cannot join a string and an integer directly.",
       "help": {
-        "concept": "TypeError happens when Python cannot combine two values because their types are incompatible for that operation.",
+        "concept": "TypeError happens when Python cannot combine two values because their types do not fit the operation.",
         "hint_1": "Both values exist, so it is not NameError.",
-        "hint_2": "The issue is joining a string and an integer."
+        "hint_2": "The issue is joining text with an integer."
       }
     },
 
@@ -99,27 +122,27 @@
         "b": "TypeError",
         "c": "ValueError"
       },
-      "hint": "ValueError happens when conversion fails because the text isn’t a valid number.",
+      "hint": "This happens when conversion fails because the text is not a valid number.",
       "help": {
-        "concept": "ValueError means the type conversion function is fine, but the specific value is not in the expected format.",
-        "hint_1": "int(...) expects text that looks like a whole number.",
-        "hint_2": "The word twelve is not valid numeric text for int()."
+        "concept": "ValueError means the conversion function is correct, but the specific value is not in the expected format.",
+        "hint_1": "`int(...)` expects text that looks like a whole number.",
+        "hint_2": "`twelve` is not valid numeric text for `int()`."
       }
     },
 
     "m1_err_debug_combo_sc": {
       "title": "Best quick debug combo",
-      "prompt": "When something behaves weirdly, what’s the best quick debug combo for beginners?",
+      "prompt": "When something behaves strangely, what is the best quick debug combo?",
       "options": {
         "a": "Print the value and print the type",
         "b": "Restart the computer",
         "c": "Delete the file and rewrite everything"
       },
-      "hint": "Value + type solves most beginner confusion fast.",
+      "hint": "Checking both usually reveals what the program is really working with.",
       "help": {
-        "concept": "Printing both the value and its type quickly reveals many beginner bugs, especially around strings versus numbers.",
-        "hint_1": "One print shows what the data is right now.",
-        "hint_2": "The other print shows what type Python thinks it is."
+        "concept": "Printing both the value and its type quickly reveals many common bugs, especially around strings and numbers.",
+        "hint_1": "One print shows the current data.",
+        "hint_2": "The other shows how Python is interpreting it."
       }
     },
 
@@ -133,7 +156,7 @@
         "2": "is a decimal",
         "3": "is printed twice"
       },
-      "hint": "Think about missing variable names.",
+      "hint": "Think about a missing variable name.",
       "help": {
         "concept": "NameError is about a missing or misspelled variable name.",
         "hint_1": "Python cannot use a name it cannot find.",
@@ -151,11 +174,11 @@
         "2": "files",
         "3": "colors"
       },
-      "hint": "Think about strings, ints, and floats.",
+      "hint": "Think about strings, integers, and floats.",
       "help": {
         "concept": "TypeError is about incompatible data types.",
         "hint_1": "The values may exist, but they cannot be used together in that operation.",
-        "hint_2": "The problem is with the types."
+        "hint_2": "The issue is with the types."
       }
     },
 
@@ -172,7 +195,7 @@
       "hint": "Think about converting text to numbers.",
       "help": {
         "concept": "ValueError happens when the function is correct, but the specific input value is invalid for that conversion.",
-        "hint_1": "This often appears during int(...) or float(...).",
+        "hint_1": "This often appears during `int(...)` or `float(...)`.",
         "hint_2": "The value has the wrong format."
       }
     },
@@ -205,26 +228,26 @@
         "2": "color",
         "3": "speaker"
       },
-      "hint": "This tells you whether Python sees text, int, float, and so on.",
+      "hint": "This shows whether Python sees text, an integer, a float, and so on.",
       "help": {
         "concept": "Printing the type helps you see whether Python is treating a value as text, an integer, a float, or something else.",
-        "hint_1": "Think about type(x).",
+        "hint_1": "Think about `type(x)`.",
         "hint_2": "Print the type to confirm what Python sees."
       }
     },
 
     "m1_err_reorder_debug_steps": {
       "title": "Order the debug steps",
-      "prompt": "Reorder the steps in a sensible beginner debugging flow.",
+      "prompt": "Reorder the steps in a sensible debugging flow.",
       "tokens": {
         "t1": "read the error message",
         "t2": "print the value",
         "t3": "print the type",
         "t4": "fix the code"
       },
-      "hint": "You inspect before you fix.",
+      "hint": "Inspect before you fix.",
       "help": {
-        "concept": "A strong beginner debugging flow starts with reading the message, then inspecting the program state, then fixing the code.",
+        "concept": "A strong debugging flow starts with reading the message, then inspecting the program state, then fixing the code.",
         "hint_1": "The fix comes last.",
         "hint_2": "Read first, inspect second, then fix."
       }
@@ -257,7 +280,7 @@
       "hint": "Conversion comes before arithmetic.",
       "help": {
         "concept": "When input gives text, you must convert it before numeric operations will work.",
-        "hint_1": "input() comes first.",
+        "hint_1": "Reading input comes first.",
         "hint_2": "Math happens after conversion."
       }
     },
@@ -273,15 +296,15 @@
       },
       "hint": "Check before converting.",
       "help": {
-        "concept": "Validation should happen before a risky conversion, so you only call int(...) when the input looks safe.",
-        "hint_1": "The digit check comes before int(...).",
+        "concept": "Validation should happen before conversion, so you only call `int(...)` when the input looks safe.",
+        "hint_1": "The digit check comes before `int(...)`.",
         "hint_2": "Print the final result after conversion."
       }
     },
 
     "m1_err_reorder_error_models": {
       "title": "Order the error models",
-      "prompt": "Reorder the three quick mental models in the lesson order.",
+      "prompt": "Reorder the three quick mental models in lesson order.",
       "tokens": {
         "t1": "NameError = missing name",
         "t2": "TypeError = types clash",
@@ -289,7 +312,7 @@
       },
       "hint": "Follow the lesson’s quick mental model list.",
       "help": {
-        "concept": "The lesson introduces three common beginner errors in a specific order to help you recognize patterns quickly.",
+        "concept": "The lesson introduces three common error patterns in a fixed order so they are easier to remember.",
         "hint_1": "NameError comes first.",
         "hint_2": "ValueError comes after TypeError."
       }
@@ -297,12 +320,12 @@
 
     "m1_err_identify_error_code": {
       "title": "Identify the error type",
-      "prompt": "A beginner runs code that tries to print `score`, but `score` was never created.\n\nWrite a program that prints ONLY the name of the error Python would raise.",
+      "prompt": "A student runs code that tries to print `score`, but `score` was never created.\n\nWrite a program that prints ONLY the name of the error Python would raise.",
       "starterCode": "# Print the error name\n",
       "hint": "Think about a missing variable name.",
       "help": {
         "concept": "This exercise checks whether you can recognize that using a variable that was never created leads to NameError.",
-        "hint_1": "The variable name is missing, not the type conversion.",
+        "hint_1": "The problem is a missing name, not a conversion issue.",
         "hint_2": "Print only the exact error name."
       }
     },
@@ -311,7 +334,7 @@
       "title": "Fix the type mismatch (add two numbers)",
       "prompt": "A calculator app reads two numbers from the user.\n\nRead TWO inputs.\nConvert them to integers.\nPrint ONLY their sum.\n",
       "starterCode": "a = input()\nb = input()\n# TODO: convert and print sum\n",
-      "hint": "int(a) and int(b)",
+      "hint": "Use `int(a)` and `int(b)`.",
       "help": {
         "concept": "This checks whether you know that input values start as strings and must be converted before addition works as math.",
         "hint_1": "Read both values first, then convert them.",
@@ -323,11 +346,11 @@
       "title": "Avoid ValueError (basic validation)",
       "prompt": "A website asks for age as text.\n\nRead ONE input (a string).\n\nRules:\n- If it looks like a whole number (digits only), convert it to int and print:\n  Next year = <age+1>\n- Otherwise print:\n  Invalid age",
       "starterCode": "text = input().strip()\n# TODO\n",
-      "hint": "Use text.isdigit() to check. Then int(text).",
+      "hint": "Use `text.isdigit()` first, then `int(text)`.",
       "help": {
         "concept": "This exercise checks whether you can avoid ValueError by validating text before converting it to an integer.",
-        "hint_1": "Only call int(...) when the text contains digits only.",
-        "hint_2": "Print Next year = <value> for valid input, otherwise print Invalid age."
+        "hint_1": "Only call `int(...)` when the text contains digits only.",
+        "hint_2": "Print `Next year = <value>` for valid input, otherwise print `Invalid age`."
       }
     }
   }

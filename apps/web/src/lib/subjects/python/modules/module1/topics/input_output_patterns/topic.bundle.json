@@ -10,11 +10,32 @@
 
   "cards": [
     {
-      "id": "sketch",
+      "id": "sketch0",
       "kind": "sketch",
-      "titleKey": "topics.python.python-1.input_output_patterns.cards.sketch.title",
-      "sketchId": "patterns",
-      "height": 520
+      "titleKey": "topics.python.python-1.input_output_patterns.cards.sketch0.title",
+      "sketchId": "pattern_overview",
+      "height": 360
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python.python-1.input_output_patterns.cards.sketch1.title",
+      "sketchId": "input_returns_text",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python.python-1.input_output_patterns.cards.sketch2.title",
+      "sketchId": "convert_and_compute",
+      "height": 500
+    },
+    {
+      "id": "sketch3",
+      "kind": "sketch",
+      "titleKey": "topics.python.python-1.input_output_patterns.cards.sketch3.title",
+      "sketchId": "show_results",
+      "height": 420
     },
     {
       "id": "project",
@@ -60,10 +81,28 @@
 
   "sketches": [
     {
-      "id": "patterns",
+      "id": "pattern_overview",
       "archetype": "paragraph",
-      "titleKey": "sketches.python.python-1.input_output_patterns.patterns.title",
-      "bodyKey": "sketches.python.python-1.input_output_patterns.patterns.bodyMarkdown"
+      "titleKey": "sketches.python.python-1.input_output_patterns.pattern_overview.title",
+      "bodyKey": "sketches.python.python-1.input_output_patterns.pattern_overview.bodyMarkdown"
+    },
+    {
+      "id": "input_returns_text",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python.python-1.input_output_patterns.input_returns_text.title",
+      "bodyKey": "sketches.python.python-1.input_output_patterns.input_returns_text.bodyMarkdown"
+    },
+    {
+      "id": "convert_and_compute",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python.python-1.input_output_patterns.convert_and_compute.title",
+      "bodyKey": "sketches.python.python-1.input_output_patterns.convert_and_compute.bodyMarkdown"
+    },
+    {
+      "id": "show_results",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python.python-1.input_output_patterns.show_results.title",
+      "bodyKey": "sketches.python.python-1.input_output_patterns.show_results.bodyMarkdown"
     }
   ],
 

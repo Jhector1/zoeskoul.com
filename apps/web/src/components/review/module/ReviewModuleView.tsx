@@ -28,6 +28,12 @@ import {
     clamp01,
     prereqsMetForAnyQuizOrProject,
 } from "./utils";
+import {
+    isCardDoneFromState,
+    isQuizLikeCard,
+    markCardDoneInTopicState,
+    normalizeTopicProgressForCards,
+} from "./progressKeys";
 import { useResizablePanels } from "./hooks/useResizablePanels";
 import { useDebouncedSketchState } from "./hooks/useDebouncedSketchState";
 import { useToolCodeRunnerState } from "./hooks/useToolCodeRunnerState";
@@ -169,12 +175,42 @@ export default function ReviewModuleView({
 
     const reduceMotion = useReduceMotion();
 
+    useEffect(() => {
+        if (!progressHydrated) return;
+        if (!topics.length) return;
+
+        const currentTopics = progress?.topics ?? {};
+        const nextTopics: Record<string, any> = { ...currentTopics };
+        let changed = false;
+
+        for (const topic of topics) {
+            const cards = Array.isArray(topic.cards) ? topic.cards : [];
+            const cur = currentTopics[topic.id] ?? {};
+            const normalized = normalizeTopicProgressForCards(cur, cards);
+            if (normalized !== cur) {
+                nextTopics[topic.id] = normalized;
+                changed = true;
+            }
+        }
+
+        if (!changed) return;
+
+        const next: ReviewProgressState = {
+            ...(progress ?? {}),
+            topics: nextTopics,
+        };
+
+        setProgress(next);
+        flushNow(next);
+    }, [progressHydrated, topics, progress, setProgress, flushNow]);
+
     const moduleComplete = useMemo(() => {
         if (!topics.length) return false;
+
         return topics.every((t) => {
             const cards = Array.isArray(t.cards) ? t.cards : [];
             const tstate = (progress as any)?.topics?.[t.id];
-            return isTopicComplete(cards, tstate);
+            return isTopicComplete(cards, tstate, t.id);
         });
     }, [topics, progress]);
 
@@ -241,11 +277,15 @@ export default function ReviewModuleView({
     const topicUnlocked = useMemo(() => {
         return (tid: string) => {
             if (unlockAll) return true;
+
             const idx = topics.findIndex((x) => x.id === tid);
             if (idx <= 0) return true;
+
             const prev = topics[idx - 1];
+            const prevCards = Array.isArray(prev.cards) ? prev.cards : [];
             const prevState = (progress as any)?.topics?.[prev.id];
-            return isTopicComplete(prev.cards ?? [], prevState);
+
+            return isTopicComplete(prevCards, prevState, prev.id);
         };
     }, [topics, progress, unlockAll]);
 
@@ -288,7 +328,11 @@ export default function ReviewModuleView({
         if (!progressHydrated) return;
         if (!viewTid) return;
 
-        const doneNow = isTopicComplete(viewCards, (progress as any)?.topics?.[viewTid]);
+        const doneNow = isTopicComplete(
+            viewCards,
+            (progress as any)?.topics?.[viewTid],
+            viewTid,
+        );
         if (!doneNow) return;
 
         const tp: any = (progress as any)?.topics?.[viewTid] ?? {};
@@ -299,6 +343,7 @@ export default function ReviewModuleView({
         setProgress((p: any) => {
             const cur = p?.topics?.[viewTid] ?? {};
             if (cur.completed) return p;
+
             return {
                 ...p,
                 topics: {
@@ -426,7 +471,8 @@ export default function ReviewModuleView({
             const tid = pending.tid ?? "";
             const cards = (topics.find((t) => t.id === tid)?.cards ?? []) as ReviewCard[];
             const tp0 = (progress as any)?.topics?.[tid] ?? {};
-            const { answeredCount, sessionSize } = countAnswered(cards, tp0);
+            const { answeredCount, sessionSize } = countAnswered(cards, tp0, tid);
+
             return {
                 answeredCount,
                 sessionSize,
@@ -437,10 +483,11 @@ export default function ReviewModuleView({
 
         let answeredCount = 0;
         let sessionSize = 0;
+
         for (const t of topics) {
             const cards = (t.cards ?? []) as ReviewCard[];
             const tp0 = (progress as any)?.topics?.[t.id] ?? {};
-            const r = countAnswered(cards, tp0);
+            const r = countAnswered(cards, tp0, t.id);
             answeredCount += r.answeredCount;
             sessionSize += r.sessionSize;
         }
@@ -495,6 +542,7 @@ export default function ReviewModuleView({
             nextTopics[tid] = {
                 quizVersion: nextTopicV,
                 cardsDone: {},
+                readingDone: {},
                 quizzesDone: {},
                 quizState: {},
                 sketchState: {},
@@ -563,16 +611,11 @@ export default function ReviewModuleView({
         cardElRef.current.clear();
     }, [topicMotionKey]);
 
-    const isQuizLikeCard = useCallback((c: ReviewCard) => {
-        return c.type === "quiz" || c.type === "project";
-    }, []);
-
     const isCardDone = useCallback(
         (c: ReviewCard, tp0: any) => {
-            if (isQuizLikeCard(c)) return Boolean(tp0?.quizzesDone?.[c.id]);
-            return Boolean(tp0?.cardsDone?.[c.id]);
+            return isCardDoneFromState(c, tp0);
         },
-        [isQuizLikeCard],
+        [],
     );
 
     const userIsInteracting = useCallback(() => {
@@ -658,7 +701,7 @@ export default function ReviewModuleView({
             const tp0 = state?.topics?.[viewTid] ?? {};
             const prereqsAllQuizzes = unlockAll
                 ? true
-                : prereqsMetForAnyQuizOrProject(viewCards, tp0);
+                : prereqsMetForAnyQuizOrProject(viewCards, tp0, viewTid);
 
             for (const c of viewCards) {
                 if (isCardDone(c, tp0)) continue;
@@ -668,7 +711,7 @@ export default function ReviewModuleView({
 
             return viewCards[viewCards.length - 1]?.id ?? null;
         },
-        [viewTid, viewCards, unlockAll, isCardDone, isQuizLikeCard],
+        [viewTid, viewCards, unlockAll, isCardDone],
     );
 
     const findCurrentActivityCardIndex = useCallback(
@@ -683,7 +726,9 @@ export default function ReviewModuleView({
     const findNextActionableCardIndex = useCallback(
         (fromIndex: number, nextProgress: any) => {
             const tp0 = nextProgress?.topics?.[viewTid] ?? {};
-            const prereqsAllQuizzes = unlockAll ? true : prereqsMetForAnyQuizOrProject(viewCards, tp0);
+            const prereqsAllQuizzes = unlockAll
+                ? true
+                : prereqsMetForAnyQuizOrProject(viewCards, tp0, viewTid);
 
             for (let i = fromIndex + 1; i < viewCards.length; i++) {
                 const c = viewCards[i];
@@ -694,7 +739,7 @@ export default function ReviewModuleView({
 
             return -1;
         },
-        [viewTid, unlockAll, viewCards, isCardDone, isQuizLikeCard],
+        [viewTid, unlockAll, viewCards, isCardDone],
     );
 
     const scrollToNextActionable = useCallback(
@@ -730,13 +775,16 @@ export default function ReviewModuleView({
         const done = topics.reduce((acc, t) => {
             const tstate = (progress as any)?.topics?.[t.id];
             const cards = (t.cards ?? []) as ReviewCard[];
-            return acc + (isTopicComplete(cards, tstate) ? 1 : 0);
+            return acc + (isTopicComplete(cards, tstate, t.id) ? 1 : 0);
         }, 0);
+
         return { total, done, pct: total ? clamp01(done / total) : 0 };
     }, [topics, progress]);
 
     const tp: any = (progress as any)?.topics?.[viewTid] ?? {};
-    const prereqsForAllQuizzes = unlockAll ? true : prereqsMetForAnyQuizOrProject(viewCards, tp);
+    const prereqsForAllQuizzes = unlockAll
+        ? true
+        : prereqsMetForAnyQuizOrProject(viewCards, tp, viewTid);
 
     const showSkeleton = useSkeletonGate({
         ready: progressHydrated,
@@ -754,6 +802,7 @@ export default function ReviewModuleView({
             setShowMask(false);
             return;
         }
+
         setShowMask(true);
         const t = window.setTimeout(() => setShowMask(false), 420);
         return () => window.clearTimeout(t);
@@ -821,7 +870,11 @@ export default function ReviewModuleView({
         );
     }
 
-    const viewIsComplete = isTopicComplete(viewCards, (progress as any)?.topics?.[viewTid]);
+    const viewIsComplete = isTopicComplete(
+        viewCards,
+        (progress as any)?.topics?.[viewTid],
+        viewTid,
+    );
     const viewIdx = topics.findIndex((t) => t.id === viewTid);
     const prevTopic = viewIdx > 0 ? topics[viewIdx - 1] : null;
     const nextTopic = viewIdx >= 0 ? topics[viewIdx + 1] : null;
@@ -829,6 +882,7 @@ export default function ReviewModuleView({
     const goToTopic = useCallback(
         (tid: string) => {
             if (!tid) return;
+
             const idx = topics.findIndex((x) => x.id === tid);
             if (idx < 0) return;
 
@@ -886,7 +940,7 @@ export default function ReviewModuleView({
             const disabled = unlockAll ? false : !isEarlierOrActive && !canGoForward;
 
             const done = progressHydrated
-                ? isTopicComplete((t.cards ?? []) as ReviewCard[], (progress as any)?.topics?.[t.id])
+                ? isTopicComplete((t.cards ?? []) as ReviewCard[], (progress as any)?.topics?.[t.id], t.id)
                 : false;
 
             return {
@@ -1070,7 +1124,7 @@ export default function ReviewModuleView({
                                     }
                                     isBillingStatus={false}
                                     brand={process.env.NEXT_PUBLIC_APP_NAME}
-                                    badge="MVP"
+                                    badge=""
                                     isUser={false}
                                     isNav={false}
                                 />
@@ -1307,12 +1361,8 @@ function AnimatedTopicPane(props: {
                             const savedQuiz = (props.tp?.quizState?.[card.id] ?? null) as SavedQuizState | null;
                             const savedSketch = props.tp?.sketchState?.[card.id] ?? null;
 
-                            const isQuizLike = card.type === "quiz" || card.type === "project";
-                            const done = isQuizLike
-                                ? Boolean(props.tp?.quizzesDone?.[card.id])
-                                : Boolean(props.tp?.cardsDone?.[card.id]);
-
-                            const prereqsMet = isQuizLike ? props.prereqsForAllQuizzes : true;
+                            const done = isCardDoneFromState(card, props.tp);
+                            const prereqsMet = isQuizLikeCard(card) ? props.prereqsForAllQuizzes : true;
 
                             return (
                                 <div key={card.id} ref={props.setCardEl(card.id)}>
@@ -1332,10 +1382,14 @@ function AnimatedTopicPane(props: {
                                         onMarkDone={() => {
                                             props.setProgress((p: any) => {
                                                 const tp0: any = p.topics?.[props.viewTid] ?? {};
-                                                const cardsDone = { ...(tp0.cardsDone ?? {}), [card.id]: true };
+                                                const nextTopic = markCardDoneInTopicState(tp0, card);
+
                                                 const next = {
                                                     ...p,
-                                                    topics: { ...(p.topics ?? {}), [props.viewTid]: { ...tp0, cardsDone } },
+                                                    topics: {
+                                                        ...(p.topics ?? {}),
+                                                        [props.viewTid]: nextTopic,
+                                                    },
                                                 };
 
                                                 queueMicrotask(() => {
@@ -1350,9 +1404,13 @@ function AnimatedTopicPane(props: {
                                             props.setProgress((p: any) => {
                                                 const tp0: any = p.topics?.[props.viewTid] ?? {};
                                                 const quizzesDone = { ...(tp0.quizzesDone ?? {}), [quizId]: true };
+
                                                 const next = {
                                                     ...p,
-                                                    topics: { ...(p.topics ?? {}), [props.viewTid]: { ...tp0, quizzesDone } },
+                                                    topics: {
+                                                        ...(p.topics ?? {}),
+                                                        [props.viewTid]: { ...tp0, quizzesDone },
+                                                    },
                                                 };
 
                                                 queueMicrotask(() => {
@@ -1367,9 +1425,13 @@ function AnimatedTopicPane(props: {
                                             props.setProgress((p: any) => {
                                                 const tp0: any = p.topics?.[props.viewTid] ?? {};
                                                 const quizState = { ...(tp0.quizState ?? {}), [quizCardId]: s };
+
                                                 return {
                                                     ...p,
-                                                    topics: { ...(p.topics ?? {}), [props.viewTid]: { ...tp0, quizState } },
+                                                    topics: {
+                                                        ...(p.topics ?? {}),
+                                                        [props.viewTid]: { ...tp0, quizState },
+                                                    },
                                                 };
                                             });
                                         }}
@@ -1422,13 +1484,16 @@ function AnimatedTopicPane(props: {
     );
 }
 
-function moduleCompleteFromProgress(progress: any, topics: ReviewModule["topics"] | undefined) {
+function moduleCompleteFromProgress(
+    progress: any,
+    topics: ReviewModule["topics"] | undefined,
+) {
     const safeTopics = Array.isArray(topics) ? topics : [];
     if (!safeTopics.length) return false;
 
     return safeTopics.every((t) => {
         const cards = Array.isArray(t.cards) ? t.cards : [];
         const tstate = progress?.topics?.[t.id];
-        return isTopicComplete(cards, tstate);
+        return isTopicComplete(cards, tstate, t.id);
     });
 }

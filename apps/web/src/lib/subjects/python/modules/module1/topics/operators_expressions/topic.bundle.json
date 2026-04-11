@@ -10,11 +10,32 @@
 
   "cards": [
     {
-      "id": "sketch",
+      "id": "sketch0",
       "kind": "sketch",
-      "titleKey": "topics.python.python-1.operators_expressions.cards.sketch.title",
-      "sketchId": "expressions",
-      "height": 520
+      "titleKey": "topics.python.python-1.operators_expressions.cards.sketch0.title",
+      "sketchId": "operators_intro",
+      "height": 380
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python.python-1.operators_expressions.cards.sketch1.title",
+      "sketchId": "math_operators",
+      "height": 500
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python.python-1.operators_expressions.cards.sketch2.title",
+      "sketchId": "comparisons_and_types",
+      "height": 500
+    },
+    {
+      "id": "sketch3",
+      "kind": "sketch",
+      "titleKey": "topics.python.python-1.operators_expressions.cards.sketch3.title",
+      "sketchId": "mini_checkout",
+      "height": 420
     },
     {
       "id": "project",
@@ -60,10 +81,28 @@
 
   "sketches": [
     {
-      "id": "expressions",
+      "id": "operators_intro",
       "archetype": "paragraph",
-      "titleKey": "sketches.python.python-1.operators_expressions.expressions.title",
-      "bodyKey": "sketches.python.python-1.operators_expressions.expressions.bodyMarkdown"
+      "titleKey": "sketches.python.python-1.operators_expressions.operators_intro.title",
+      "bodyKey": "sketches.python.python-1.operators_expressions.operators_intro.bodyMarkdown"
+    },
+    {
+      "id": "math_operators",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python.python-1.operators_expressions.math_operators.title",
+      "bodyKey": "sketches.python.python-1.operators_expressions.math_operators.bodyMarkdown"
+    },
+    {
+      "id": "comparisons_and_types",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python.python-1.operators_expressions.comparisons_and_types.title",
+      "bodyKey": "sketches.python.python-1.operators_expressions.comparisons_and_types.bodyMarkdown"
+    },
+    {
+      "id": "mini_checkout",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python.python-1.operators_expressions.mini_checkout.title",
+      "bodyKey": "sketches.python.python-1.operators_expressions.mini_checkout.bodyMarkdown"
     }
   ],
 

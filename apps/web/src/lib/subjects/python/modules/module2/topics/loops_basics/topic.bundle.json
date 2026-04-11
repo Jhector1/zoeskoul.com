@@ -9,11 +9,32 @@
 
   "cards": [
     {
-      "id": "sketch",
+      "id": "sketch0",
       "kind": "sketch",
-      "titleKey": "topics.python.python-2.loops_basics.cards.sketch.title",
-      "sketchId": "basics",
-      "height": 520
+      "titleKey": "topics.python.python-2.loops_basics.cards.sketch0.title",
+      "sketchId": "why_loops",
+      "height": 360
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python.python-2.loops_basics.cards.sketch1.title",
+      "sketchId": "while_loops",
+      "height": 440
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python.python-2.loops_basics.cards.sketch2.title",
+      "sketchId": "break_continue",
+      "height": 460
+    },
+    {
+      "id": "sketch3",
+      "kind": "sketch",
+      "titleKey": "topics.python.python-2.loops_basics.cards.sketch3.title",
+      "sketchId": "for_loops",
+      "height": 460
     },
     {
       "id": "project",
@@ -59,10 +80,28 @@
 
   "sketches": [
     {
-      "id": "basics",
+      "id": "why_loops",
       "archetype": "paragraph",
-      "titleKey": "sketches.python.python-2.loops_basics.basics.title",
-      "bodyKey": "sketches.python.python-2.loops_basics.basics.bodyMarkdown"
+      "titleKey": "sketches.python.python-2.loops_basics.why_loops.title",
+      "bodyKey": "sketches.python.python-2.loops_basics.why_loops.bodyMarkdown"
+    },
+    {
+      "id": "while_loops",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python.python-2.loops_basics.while_loops.title",
+      "bodyKey": "sketches.python.python-2.loops_basics.while_loops.bodyMarkdown"
+    },
+    {
+      "id": "break_continue",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python.python-2.loops_basics.break_continue.title",
+      "bodyKey": "sketches.python.python-2.loops_basics.break_continue.bodyMarkdown"
+    },
+    {
+      "id": "for_loops",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python.python-2.loops_basics.for_loops.title",
+      "bodyKey": "sketches.python.python-2.loops_basics.for_loops.bodyMarkdown"
     }
   ],
 

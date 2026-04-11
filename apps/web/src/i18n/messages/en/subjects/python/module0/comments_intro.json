@@ -1,13 +1,23 @@
 {
+
   "topics": {
     "python": {
       "python-0": {
         "comments_intro": {
           "label": "Comments: Notes to Humans (Python Ignores Them)",
-          "summary": "Use comments to explain intent, label steps, and temporarily disable code while debugging (including multi-line notes).",
+          "summary": "Use comments to explain intent, label steps, and temporarily disable code while debugging.",
           "cards": {
-            "sketch": {
-              "title": "Comments in Python (#)"
+            "sketch0": {
+              "title": "Why Comments Matter"
+            },
+            "sketch1": {
+              "title": "Single-Line and Multi-Line Comments"
+            },
+            "sketch2": {
+              "title": "Using Comments While Debugging"
+            },
+            "sketch3": {
+              "title": "Good Comments vs Weak Comments"
             },
             "quiz": {
               "title": "Quick check: comments"
@@ -17,17 +27,31 @@
       }
     }
   },
-
   "sketches": {
     "python": {
       "python-0": {
         "comments_intro": {
-          "title": "Comments: Notes to Humans (Python Ignores Them)",
-          "bodyMarkdown": "When you write code, you’re writing for **two audiences**:\n\n1) The computer (Python)\n2) Future you (and other humans)\n\nA **comment** is a note for humans that Python completely ignores.\n\nThink of comments like sticky notes on a recipe:\nThey help you remember *why* you did something, not just *what* you did.\n\n---\n\n## Two ways to write comments in Python\n\nIn Python, you’ll mainly use:\n\n1) **Single-line comments** using `#`\n2) **Multi-line notes** (written as multiple `#` lines, or sometimes triple quotes)\n\n---\n\n## Single-line comments: `#`\n\nAnything after `#` on a line is ignored by Python.\n\n~~~python\n# This is a comment.\nprint(\"Hello\")  # This part is also a comment\n~~~\n\n---\n\n## Multi-line comments (multi-line notes).\n\nFor multi-line notes, you have two common options:\n\n### Option A: Multiple `#` lines (recommended)\n\n~~~python\n# Step 1: ask the user for input\n# Step 2: convert it to a number\n# Step 3: do the math\n# Step 4: print the result\n~~~\n\n### Option B: Triple quotes (`\"\"\" ... \"\"\"` or `''' ... '''`)\n\nThese create a **multi-line string**. If it’s not assigned to a variable, Python will usually ignore it at runtime, so some people use it like a block comment.\n\n~~~python\n\"\"\"\nMulti-line note:\n- This is a string literal\n- People sometimes use it as a \"block comment\"\n\"\"\"\n~~~\n\n> **Tip:** Use triple quotes mainly for **docstrings** (documentation for functions/classes). For regular comments, prefer `#` lines.\n\n---\n\n## Why comments matter (Module 0 reasons)\n\nUse comments to:\n- explain *why* a line exists\n- label steps in a mini-program (ask → convert → compute → show)\n- temporarily disable a line while debugging\n\n---\n\n## Try it (editor on the right)\n\nRun this:\n\n~~~python\n# Step 1: store values in variables\nprice = 4.99\nqty = 3\n\n# Step 2: compute\ntotal = price * qty\n\n# Step 3: show output\nprint(\"total =\", total)\n~~~\n\nNow **comment out** the line that computes `total` and run again:\n\n~~~python\nprice = 4.99\nqty = 3\n\n# total = price * qty\n\nprint(\"total =\", total)\n~~~\n\nYou should get an error — that’s expected.\nIt proves that comments truly “remove” code from execution.\n\n---\n\n## Notes\n\n✅ Write comments to explain **intent** (the *why*).\n❌ Don’t write comments that only repeat the code.\n\nA useful comment:\n~~~python\n# Convert input (text) into a number so we can do math\nage = int(input(\"Age: \"))\n~~~\n\nNot useful (repeats the code):\n~~~python\n# Set age to input\nage = int(input(\"Age: \"))\n~~~\n\n---\n\nNext up: we’ll use comments to label our steps while learning **variables** and **data types**."
+          "why_comments": {
+            "title": "Why Comments Matter",
+            "bodyMarkdown": "When you write code, you’re writing for **two audiences**:\n\n1. the computer\n2. future you and other humans\n\nA **comment** is a note for humans that Python ignores.\n\nThink of comments like sticky notes on a recipe.\nThey help you remember **why** you did something, not just **what** you typed.\n\nComments are useful when you want to:\n\n- explain intent\n- label steps in a small program\n- leave yourself a reminder\n- temporarily disable a line while debugging"
+          },
+          "comment_styles": {
+            "title": "Single-Line and Multi-Line Comments",
+            "bodyMarkdown": "## Single-line comments: `#`\n\nAnything after `#` on a line is ignored by Python.\n\n~~~python\n# This is a comment.\nprint(\"Hello\")  # prints: Hello\n~~~\n\n## Multi-line notes\n\nThe recommended style is to use multiple `#` lines.\n\n~~~python\n# Step 1: ask the user for input\n# Step 2: convert it to a number\n# Step 3: do the math\n# Step 4: print the result\n~~~\n\nSome people also use triple quotes for note-like blocks.\n\n~~~python\n\"\"\"\nMulti-line note:\n- This is a string literal\n- People sometimes use it like a block comment\n\"\"\"\n~~~\n\nUse triple quotes mainly for **docstrings**. For regular comments, prefer `#` lines."
+          },
+          "debugging_with_comments": {
+            "title": "Using Comments While Debugging",
+            "bodyMarkdown": "## Comments can disable code\n\nOne practical use for comments is temporarily turning off a line while you test the rest of the program.\n\n~~~python\n# Step 1: store values in variables\nprice = 4.99\nqty = 3\n\n# Step 2: compute\ntotal = price * qty\n\n# Step 3: show output\nprint(\"total =\", total)  # prints: total = 14.97\n~~~\n\nNow comment out the line that computes `total`:\n\n~~~python\nprice = 4.99\nqty = 3\n\n# total = price * qty\n\nprint(\"total =\", total)  # NameError because total was never created\n~~~\n\nThat error is expected.\nIt shows that comments really do remove a line from execution."
+          },
+          "good_vs_bad_comments": {
+            "title": "Good Comments vs Weak Comments",
+            "bodyMarkdown": "## Good comments explain intent\n\nA useful comment explains **why** a step exists.\n\n~~~python\n# Convert input text into a number so we can do math\nage = int(input(\"Age: \"))\n~~~\n\nA weak comment only repeats the code.\n\n~~~python\n# Set age to input\nage = int(input(\"Age: \"))\n~~~\n\n## Main idea\n\nGood comments help humans read code more easily.\n\nThey should:\n\n- explain intent\n- label a tricky step\n- help future readers\n\nThey should not just restate obvious code."
+          }
         }
       }
     }
-  },
+  }
+,
 
   "quiz": {
     "m0_comments_symbol": {

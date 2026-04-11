@@ -9,16 +9,37 @@
 
   "cards": [
     {
-      "id": "sketch",
+      "id": "sketch0",
       "kind": "sketch",
-      "titleKey": "topics.python.python-2.lists_basics.cards.sketch.title",
-      "sketchId": "basics",
-      "height": 520
+      "titleKey": "topics.python.python-2.lists_basics.cards.sketch0.title",
+      "sketchId": "lists_intro",
+      "height": 360
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python.python-2.lists_basics.cards.sketch1.title",
+      "sketchId": "indexing_and_length",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python.python-2.lists_basics.cards.sketch2.title",
+      "sketchId": "editing_lists",
+      "height": 460
+    },
+    {
+      "id": "sketch3",
+      "kind": "sketch",
+      "titleKey": "topics.python.python-2.lists_basics.cards.sketch3.title",
+      "sketchId": "looping_lists",
+      "height": 500
     },
     {
       "id": "project",
       "kind": "project",
-      "titleKey": "topics.python.python-2.lists_basics.cards.quiz.title",
+      "titleKey": "topics.python.python-2.lists_basics.cards.project.title",
       "project": {
         "difficulty": "easy",
         "allowReveal": true,
@@ -59,10 +80,28 @@
 
   "sketches": [
     {
-      "id": "basics",
+      "id": "lists_intro",
       "archetype": "paragraph",
-      "titleKey": "sketches.python.python-2.lists_basics.basics.title",
-      "bodyKey": "sketches.python.python-2.lists_basics.basics.bodyMarkdown"
+      "titleKey": "sketches.python.python-2.lists_basics.lists_intro.title",
+      "bodyKey": "sketches.python.python-2.lists_basics.lists_intro.bodyMarkdown"
+    },
+    {
+      "id": "indexing_and_length",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python.python-2.lists_basics.indexing_and_length.title",
+      "bodyKey": "sketches.python.python-2.lists_basics.indexing_and_length.bodyMarkdown"
+    },
+    {
+      "id": "editing_lists",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python.python-2.lists_basics.editing_lists.title",
+      "bodyKey": "sketches.python.python-2.lists_basics.editing_lists.bodyMarkdown"
+    },
+    {
+      "id": "looping_lists",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python.python-2.lists_basics.looping_lists.title",
+      "bodyKey": "sketches.python.python-2.lists_basics.looping_lists.bodyMarkdown"
     }
   ],
 

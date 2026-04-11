@@ -3,43 +3,66 @@
     "python": {
       "python-1": {
         "operators_expressions": {
-          "label": "Operators + Expressions: The Calculator Inside Your Code",
-          "summary": "Use math and comparison operators to compute results and produce True/False decisions using expressions.",
+          "label": "Operators and Expressions: The Calculator Inside Your Code",
+          "summary": "Use math and comparison operators to compute results and produce `True` or `False` decisions with expressions.",
           "cards": {
-            "sketch": {
-              "title": "Operators + Expressions (Math + Comparisons)"
+            "sketch0": {
+              "title": "Operators, Expressions, and Results"
+            },
+            "sketch1": {
+              "title": "Math Operators in Action"
+            },
+            "sketch2": {
+              "title": "Comparisons and Type Differences"
+            },
+            "sketch3": {
+              "title": "A Small Checkout Example"
             },
             "quiz": {
-              "title": "Project: Calculator brain (compute + decide)"
+              "title": "Project: Compute → Check → Output"
             }
           },
           "projectSteps": {
             "precedence": {
-              "title": "Operator precedence (compute the result)"
+              "title": "Operator precedence"
             },
             "mod_even_odd": {
-              "title": "Modulo (even/odd detector)"
+              "title": "Modulo for even and odd"
             },
             "checkout": {
-              "title": "Build a mini checkout line (subtotal, tax, total)"
+              "title": "Build a small checkout"
             }
           }
         }
       }
     }
   },
+
   "sketches": {
     "python": {
       "python-1": {
         "operators_expressions": {
-          "expressions": {
-            "title": "Operators + Expressions: The Calculator Inside Your Code",
-            "bodyMarkdown": "You already learned two important ideas:\n\n- **Variables** are labeled boxes that store values.\n- **Data types** tell you what kind of value is inside those boxes.\n\nNow we unlock the next capability:\n\n✅ **Using those values to compute new ones.**\n\nThink of your program like a small kitchen.\n\n- Variables are your **ingredients** (flour, sugar, milk).\n- Operators are your **tools** (mix, cut, heat).\n- Expressions are the **recipe steps** that combine everything.\n\nWhen you write an expression, you are telling Python:\n\n> “Take these values, apply an operation, and give me the result.”\n\n---\n\n## What is an operator?\n\nAn **operator** is a symbol that performs an operation.\n\nExamples:\n\n- `+` adds numbers\n- `*` multiplies numbers\n- `==` compares two values\n\nOperators take values and produce a result.\n\n---\n\n## What is an expression?\n\nAn **expression** is a piece of code that **evaluates to a value**.\n\nExamples:\n\n~~~python\n2 + 3\nprice * tax\nage >= 18\n~~~\n\nEach expression produces a result that Python can use.\n\n---\n\n## The basic math operators\n\nThese are the core arithmetic operators in Python:\n\n- `+` addition\n- `-` subtraction\n- `*` multiplication\n- `/` division (result is a float)\n- `//` floor division\n- `%` modulo (remainder)\n- `**` exponent (power)\n\n---\n\n## Try it\n\nCopy this into the editor on the right and run it:\n\n~~~python\nprint(\"2 + 3 =\", 2 + 3)\nprint(\"10 - 4 =\", 10 - 4)\nprint(\"6 * 7 =\", 6 * 7)\nprint(\"8 / 2 =\", 8 / 2)\nprint(\"7 / 2 =\", 7 / 2)\n~~~\n\nNotice that division with `/` can produce decimals.\n\n---\n\n## Floor division\n\nFloor division `//` means:\n\n> Divide, then keep only the whole-number part.\n\n~~~python\nprint(\"7 // 2 =\", 7 // 2)\nprint(\"9 // 4 =\", 9 // 4)\n~~~\n\n### Try it\n\n~~~python\nprint(\"15 // 2 =\", 15 // 2)\nprint(\"15 / 2  =\", 15 / 2)\n~~~\n\nCompare the results.\n\n---\n\n## Modulo: the remainder operator\n\nModulo `%` returns the remainder after division.\n\n~~~python\nprint(\"7 % 2 =\", 7 % 2)\nprint(\"10 % 3 =\", 10 % 3)\n~~~\n\n### Why modulo is useful\n\nModulo is commonly used to:\n\n- check **even vs odd numbers**\n- cycle through values\n- group items into batches\n\nExample:\n\n~~~python\nn = 14\nprint(\"n % 2 =\", n % 2)  # 0 means even\n\nn = 15\nprint(\"n % 2 =\", n % 2)  # 1 means odd\n~~~\n\n---\n\n## Exponents\n\nThe exponent operator `**` raises a number to a power.\n\n~~~python\nprint(\"2 ** 3 =\", 2 ** 3)\nprint(\"5 ** 2 =\", 5 ** 2)\n~~~\n\nTry changing the numbers and run again.\n\n---\n\n## Using variables in expressions\n\nThis is where the kitchen metaphor becomes useful.\n\nVariables hold the **ingredients**, and expressions combine them.\n\n~~~python\nprice = 4.99\nqty = 3\nsubtotal = price * qty\n\nprint(\"subtotal =\", subtotal)\n~~~\n\n### Try it\n\nChange `price` and `qty` and run the program again.\n\nThe **same expression** produces a different result because the ingredients changed.\n\n---\n\n## Comparison operators\n\nSometimes you don’t want a number result.\nYou want to **check a condition**.\n\nComparison operators produce a **boolean value**:\n\n- `==` equal to\n- `!=` not equal to\n- `<` less than\n- `<=` less than or equal\n- `>` greater than\n- `>=` greater than or equal\n\nExample:\n\n~~~python\nage = 16\nprint(age >= 18)\n~~~\n\nThe result is either `True` or `False`.\n\n---\n\n## Try it (predict first)\n\nBefore running, guess what each line prints:\n\n~~~python\nprint(5 == 5)\nprint(5 != 5)\nprint(10 > 3)\nprint(10 < 3)\nprint(7 >= 7)\nprint(7 <= 6)\n~~~\n\nRun it and check your guesses.\n\n---\n\n## A common beginner mistake: = vs ==\n\n- `=` **assignment** (store a value in a variable)\n- `==` **comparison** (check if two values match)\n\n~~~python\nx = 5\nprint(x == 5)\n~~~\n\n---\n\n## Expressions depend on types\n\nOperators behave differently depending on the data type.\n\n~~~python\nprint(10 + 5)\nprint(\"10\" + \"5\")\n~~~\n\nThe first line adds numbers.\nThe second joins text.\n\nIf you're unsure about a value's type, inspect it:\n\n~~~python\nx = \"10\"\nprint(type(x))\n~~~\n\n---\n\n## Mini exercise: simple checkout\n\n~~~python\nprice = 2.50\nqty = 4\ntax_rate = 0.10\n\nsubtotal = price * qty\ntax = subtotal * tax_rate\ntotal = subtotal + tax\n\nprint(\"subtotal =\", subtotal)\nprint(\"tax =\", tax)\nprint(\"total =\", total)\n~~~\n\nTry changing `qty` and `tax_rate` and run it again.\n\n---\n\n## What you unlocked\n\nOperators and expressions allow programs to:\n\n1) **Compute results**\n2) **Evaluate conditions**\n\nNext, we’ll improve how programs work with **strings** and produce cleaner output."
+          "operators_intro": {
+            "title": "Operators, Expressions, and Results",
+            "bodyMarkdown": "You already learned two key ideas:\n\n- variables store values\n- data types tell you what kind of values those are\n\nNow comes the next step:\n\nYou can use those values to produce new ones.\n\nThink of a program like a kitchen:\n\n- variables are the ingredients\n- operators are the tools\n- expressions are the steps that combine everything\n\nWhen you write an expression, you are telling Python to take values, apply an operation, and return a result.\n\n## What is an operator?\n\nAn **operator** is a symbol that performs an operation.\n\nExamples:\n\n- `+` adds numbers\n- `*` multiplies numbers\n- `==` compares two values\n\n## What is an expression?\n\nAn **expression** is a piece of code that evaluates to a value.\n\nExamples:\n\n~~~python\n2 + 3          # gives: 5\nprice * tax    # gives a computed number\nage >= 18      # gives: True or False\n~~~\n\nEach of these produces a result that Python can use."
+          },
+          "math_operators": {
+            "title": "Math Operators in Action",
+            "bodyMarkdown": "## Basic math operators\n\nThese are the core arithmetic operators in Python:\n\n- `+` addition\n- `-` subtraction\n- `*` multiplication\n- `/` division\n- `//` floor division\n- `%` modulo\n- `**` exponent\n\n## Try it\n\n~~~python\nprint(\"2 + 3 =\", 2 + 3)    # prints: 2 + 3 = 5\nprint(\"10 - 4 =\", 10 - 4)  # prints: 10 - 4 = 6\nprint(\"6 * 7 =\", 6 * 7)    # prints: 6 * 7 = 42\nprint(\"8 / 2 =\", 8 / 2)    # prints: 8 / 2 = 4.0\nprint(\"7 / 2 =\", 7 / 2)    # prints: 7 / 2 = 3.5\n~~~\n\nDivision with `/` can produce decimals.\n\n## Floor division\n\nFloor division `//` means divide, then keep only the whole-number part.\n\n~~~python\nprint(\"7 // 2 =\", 7 // 2)  # prints: 7 // 2 = 3\nprint(\"9 // 4 =\", 9 // 4)  # prints: 9 // 4 = 2\n~~~\n\n## Modulo\n\nModulo `%` gives the remainder after division.\n\n~~~python\nprint(\"7 % 2 =\", 7 % 2)    # prints: 7 % 2 = 1\nprint(\"10 % 3 =\", 10 % 3)  # prints: 10 % 3 = 1\n~~~\n\nThis is useful for checking even and odd numbers:\n\n~~~python\nn = 14\nprint(n % 2)                # prints: 0\n\nn = 15\nprint(n % 2)                # prints: 1\n~~~\n\n## Exponents\n\nThe exponent operator `**` raises a number to a power.\n\n~~~python\nprint(\"2 ** 3 =\", 2 ** 3)  # prints: 2 ** 3 = 8\nprint(\"5 ** 2 =\", 5 ** 2)  # prints: 5 ** 2 = 25\n~~~"
+          },
+          "comparisons_and_types": {
+            "title": "Comparisons and Type Differences",
+            "bodyMarkdown": "## Using variables in expressions\n\nVariables hold values, and expressions combine them.\n\n~~~python\nprice = 4.99\nqty = 3\nsubtotal = price * qty\nprint(\"subtotal =\", subtotal)  # prints: subtotal = 14.97\n~~~\n\nChange `price` or `qty` and the result changes too.\n\n## Comparison operators\n\nSometimes you want to check a condition instead of producing a number.\n\nComparison operators return a boolean value:\n\n- `==` equal to\n- `!=` not equal to\n- `<` less than\n- `<=` less than or equal to\n- `>` greater than\n- `>=` greater than or equal to\n\n~~~python\nage = 16\nprint(age >= 18)                # prints: False\n~~~\n\nThe result is either `True` or `False`.\n\n## A common mistake: `=` vs `==`\n\n- `=` stores a value in a variable\n- `==` compares two values\n\n~~~python\nx = 5\nprint(x == 5)                   # prints: True\n~~~\n\n## Types affect the result\n\nOperators behave differently depending on the type.\n\n~~~python\nprint(10 + 5)                   # prints: 15\nprint(\"10\" + \"5\")               # prints: 105\n~~~\n\nThe first adds numbers.\nThe second joins text.\n\nIf you are unsure about the type, inspect it:\n\n~~~python\nx = \"10\"\nprint(type(x))                  # prints: <class 'str'>\n~~~"
+          },
+          "mini_checkout": {
+            "title": "A Small Checkout Example",
+            "bodyMarkdown": "## A small checkout program\n\n~~~python\nprice = 2.50\nqty = 4\ntax_rate = 0.10\n\nsubtotal = price * qty\ntax = subtotal * tax_rate\ntotal = subtotal + tax\n\nprint(\"subtotal =\", subtotal)  # prints: subtotal = 10.0\nprint(\"tax =\", tax)            # prints: tax = 1.0\nprint(\"total =\", total)        # prints: total = 11.0\n~~~\n\nTry changing `qty` and `tax_rate` and run it again.\n\n## The main idea\n\nOperators and expressions let programs do two important things:\n\n1. compute results\n2. evaluate conditions\n\nThat is what makes programs feel active instead of static."
           }
         }
       }
     }
-  },
+  }
+,
   "quiz": {
     "m1_ops_precedence_rule_sc": {
       "title": "Precedence rule",
@@ -253,7 +276,7 @@
     },
     "m1_ops_reorder_checkout_steps": {
       "title": "Order the checkout steps",
-      "prompt": "Reorder the mini checkout flow.",
+      "prompt": "Reorder the small checkout flow.",
       "tokens": {
         "t1": "read subtotal and tax percent",
         "t2": "compute tax",
@@ -302,10 +325,10 @@
     "m1_ops_precedence_sc": {
       "title": "Operator precedence",
       "prompt": "Read THREE integers (a, b, c).\n\nCompute and print:\na + b * c\n\nPrint ONLY the number (one line).",
-      "hint": "Multiplication happens before addition: a + (b * c).",
+      "hint": "Multiplication happens before addition: `a + (b * c)`.",
       "starterCode": "a = int(input())\nb = int(input())\nc = int(input())\n# TODO: print a + b * c\n",
       "help": {
-        "concept": "This checks whether you can trust and use operator precedence correctly in code.",
+        "concept": "This checks whether you can use operator precedence correctly in code.",
         "hint_1": "You do not need parentheses for the correct result here.",
         "hint_2": "Print `a + b * c` directly."
       }
@@ -313,7 +336,7 @@
     "m1_ops_mod_evenodd_sc": {
       "title": "Modulo even/odd",
       "prompt": "Read ONE integer n.\n\nIf n is even, print:\neven\n\nOtherwise print:\nodd",
-      "hint": "If n % 2 == 0, it's even.",
+      "hint": "If `n % 2 == 0`, it is even.",
       "starterCode": "n = int(input())\n# TODO: print \"even\" or \"odd\"\n",
       "help": {
         "concept": "This exercise combines modulo with a condition to classify a number as even or odd.",
@@ -324,10 +347,10 @@
     "m1_ops_checkout_code": {
       "title": "Checkout (subtotal + tax)",
       "prompt": "Read TWO integers:\n1) subtotal\n2) tax percent\n\nCompute:\n- tax = subtotal * taxPct // 100\n- total = subtotal + tax\n\nPrint EXACTLY two lines:\nTax = <tax>\nTotal = <total>",
-      "hint": "tax = subtotal * taxPct // 100",
+      "hint": "Use `tax = subtotal * taxPct // 100`.",
       "starterCode": "subtotal = int(input())\ntaxPct = int(input())\n# TODO\n",
       "help": {
-        "concept": "This mini checkout uses integer arithmetic, multiple computed values, and exact output formatting.",
+        "concept": "This small checkout uses integer arithmetic, multiple computed values, and exact output formatting.",
         "hint_1": "Compute tax first with `// 100`.",
         "hint_2": "Then compute total and print both lines exactly."
       }

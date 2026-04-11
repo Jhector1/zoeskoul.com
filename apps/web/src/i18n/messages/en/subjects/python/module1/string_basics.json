@@ -3,52 +3,75 @@
     "python": {
       "python-1": {
         "string_basics": {
-          "label": "String Basics: Working With Text Like a Pro",
-          "summary": "Learn strings: concatenation vs commas, f-strings, indexing/slicing, and common methods like lower(), strip(), replace().",
+          "label": "String Basics: Working With Text",
+          "summary": "Learn how strings work, how to format output, how indexing and slicing read text, and how methods like `lower()`, `strip()`, and `replace()` clean it.",
           "cards": {
-            "sketch": {
-              "title": "Strings (Concatenation, f-strings, Indexing, Methods)"
+            "sketch0": {
+              "title": "What Strings Are"
+            },
+            "sketch1": {
+              "title": "Printing Text and Variables"
+            },
+            "sketch2": {
+              "title": "Indexing and Slicing"
+            },
+            "sketch3": {
+              "title": "String Methods and Clean Input"
             },
             "project": {
-              "title": "Project: Clean + human output"
+              "title": "Project: Clean text and build output"
             }
           },
           "projectSteps": {
             "concat_vs_comma": {
-              "title": "Concatenation vs commas (what prints?)"
+              "title": "Concatenation vs commas"
             },
             "fstring_greeting": {
-              "title": "Use an f-string to print a clean sentence"
+              "title": "Use an f-string for a clean sentence"
             },
             "username_generator": {
-              "title": "Build a username generator (strip + lower + indexing)"
+              "title": "Build a username generator"
             }
           }
         }
       }
     }
   },
+
   "sketches": {
     "python": {
       "python-1": {
         "string_basics": {
-          "basics": {
-            "title": "String Basics: Working With Text Like a Pro",
-            "bodyMarkdown": "You already learned how Python stores and uses values:\n\n- **Variables** are labeled boxes.\n- **Data types** tell you what kind of value is inside the box.\n- **Operators + expressions** let you compute results.\n\nNow we meet a type you’ll use constantly:\n\n✅ **Strings** (`str`) — text.\n\nStrings store things like:\n\n- names\n- messages\n- emails\n- passwords\n- search terms\n- anything the user types using `input()`\n\nIn fact, remember this rule:\n\n> ✅ `input()` always returns a **string**.\n\nSo understanding strings means understanding how your program reads and displays text.\n\n---\n\n## What is a string?\n\nA string is simply **text inside quotes**.\n\n~~~python\nname = \"Maya\"\ncity = 'Chicago'\n~~~\n\nSingle quotes and double quotes both work.\nJust pick one style and stay consistent.\n\n---\n\n## Showing text with print()\n\nWe’ve been using `print(...)` to show results in the terminal.\n\nNow we’ll use it to display text and variables together.\n\n---\n\n## Concatenation vs commas in print()\n\n### Concatenation (string + string)\n\nConcatenation means **joining strings together** using `+`.\n\n~~~python\nfirst = \"Maya\"\nlast = \"Johnson\"\n\nfull = first + \" \" + last\nprint(full)\n~~~\n\nThis works well, but there’s one rule:\n\n✅ Both sides of `+` must be **strings**.\n\nIf you try to join text and numbers directly, Python raises an error.\n\n~~~python\nage = 16\nprint(\"age: \" + age)  # 🚫 TypeError\n~~~\n\nFix it by converting the number to a string:\n\n~~~python\nage = 16\nprint(\"age: \" + str(age))\n~~~\n\n---\n\n### Commas in print (simpler)\n\nWhen you use commas inside `print`, Python prints each value separated by a space.\n\n~~~python\nage = 16\nprint(\"age:\", age)\n~~~\n\nThis is often the easiest way to display mixed values.\n\n---\n\n## Try it\n\n~~~python\nname = \"Maya\"\nage = 16\n\nprint(\"Hello \" + name)\nprint(\"Hello\", name)\n\nprint(\"age: \" + str(age))\nprint(\"age:\", age)\n~~~\n\nRun it and compare the outputs.\n\n---\n\n## f-strings: the cleanest way to mix text and variables\n\nModern Python usually uses **f-strings**.\n\nThey allow you to insert variables directly inside text.\n\n~~~python\nname = \"Maya\"\nage = 16\n\nprint(f\"Hi {name}, you are {age} years old.\")\n~~~\n\nIt reads almost like a normal sentence.\n\n---\n\n## Try it\n\n~~~python\nname = \"YourNameHere\"\ncity = \"YourCityHere\"\n\nprint(f\"Hi {name}! Welcome to {city}.\")\n~~~\n\nChange the values and run it again.\n\n---\n\n## Indexing: strings are sequences of characters\n\nA string is like a row of characters.\n\nEach character has a position called an **index**.\n\nIndexes start at **0**:\n\n~~~python\nword = \"Python\"\n\nprint(word[0])  # P\nprint(word[1])  # y\n~~~\n\nPython also supports negative indexes.\n\n`-1` means **the last character**:\n\n~~~python\nword = \"Python\"\n\nprint(word[-1])  # n\nprint(word[-2])  # o\n~~~\n\n---\n\n## Try it\n\n~~~python\nword = \"Learnoir\"\n\nprint(\"first:\", word[0])\nprint(\"second:\", word[1])\nprint(\"last:\", word[-1])\nprint(\"second last:\", word[-2])\n~~~\n\nNow change `word` to your own name and run it again.\n\n---\n\n## Slicing: taking a piece of a string\n\nSlicing lets you extract part of a string.\n\nFormat: `text[start:end]`\n\n- includes `start`\n- stops before `end`\n\n~~~python\nword = \"Python\"\n\nprint(word[0:2])  # Py\nprint(word[2:6])  # thon\n~~~\n\nShortcuts:\n\n~~~python\nword = \"Python\"\n\nprint(word[:2])  # Py\nprint(word[2:])  # thon\n~~~\n\n---\n\n## Try it\n\n~~~python\nword = \"Programming\"\n\nprint(word[:4])\nprint(word[4:])\nprint(word[1:6])\n~~~\n\n---\n\n## Common string methods\n\nMethods are built-in tools attached to strings.\n\nThink of them as **small text utilities**.\n\n### lower() — convert to lowercase\n\n~~~python\nmsg = \"HeLLo!\"\nprint(msg.lower())\n~~~\n\n### strip() — remove extra spaces\n\n~~~python\nraw = \"   hello   \"\nprint(raw.strip())\n~~~\n\n### replace() — substitute text\n\n~~~python\ntext = \"I like cats\"\nprint(text.replace(\"cats\", \"dogs\"))\n~~~\n\n---\n\n## Try it: clean user input\n\nUser input is often messy.\n\n~~~python\nname = input(\"Enter your name: \")\n\nclean = name.strip().lower()\n\nprint(\"raw:\", name)\nprint(\"clean:\", clean)\nprint(f\"Hello, {clean}!\")\n~~~\n\nTry typing:\n\n`   MAya   `\n\nNotice how the cleaned version changes.\n\n---\n\n## Mini exercise: simple username generator\n\n~~~python\nfirst = input(\"First name: \").strip()\nlast = input(\"Last name: \").strip()\n\nusername = (first[0] + last).lower()\n\nprint(f\"username: {username}\")\n~~~\n\nYou just used:\n\n- variables\n- strings\n- indexing\n- methods\n- f-strings\n- terminal output\n\n---\n\n## What you unlocked\n\nStrings are how programs **communicate**.\n\nNow you can:\n\n- display messages clearly\n- combine text with variables\n- access characters inside text\n- extract pieces of a string\n- clean user input\n\nNext, we’ll combine **strings + numbers + input** to build small interactive programs."
+          "strings_intro": {
+            "title": "What Strings Are",
+            "bodyMarkdown": "You already learned how Python stores and uses values:\n\n- variables store values\n- data types describe what kind of values those are\n- operators and expressions compute results\n\nNow we focus on one type you will use constantly:\n\n**Strings** (`str`) — text.\n\nStrings store things like names, messages, emails, passwords, search terms, and anything the user types with `input()`.\n\nOne rule is especially important:\n\n> `input()` always returns a string.\n\nSo when you understand strings, you understand a big part of how programs read and show text.\n\n## What is a string?\n\nA string is text inside quotes.\n\n~~~python\nname = \"Maya\"\ncity = 'Chicago'\n~~~\n\nSingle quotes and double quotes both work. It is usually best to pick one style and stay consistent."
+          },
+          "printing_strings": {
+            "title": "Printing Text and Variables",
+            "bodyMarkdown": "## Showing text with `print()`\n\nYou have already used `print(...)` to show output in the terminal.\n\nNow you can use it to display text and variables together.\n\n## Concatenation\n\nConcatenation means joining strings together with `+`.\n\n~~~python\nfirst = \"Maya\"\nlast = \"Johnson\"\nfull = first + \" \" + last\nprint(full)                  # prints: Maya Johnson\n~~~\n\nThis works well, but both sides of `+` must be strings.\n\n~~~python\nage = 16\nprint(\"age: \" + age)         # TypeError because age is an integer\n~~~\n\nThat causes a `TypeError`.\n\nYou can fix it by converting the number first:\n\n~~~python\nage = 16\nprint(\"age: \" + str(age))    # prints: age: 16\n~~~\n\n## Commas in `print()`\n\nCommas are often simpler:\n\n~~~python\nage = 16\nprint(\"age:\", age)           # prints: age: 16\n~~~\n\nPython prints each value with a space between them.\n\n## F-strings\n\nF-strings are usually the cleanest way to mix text and variables.\n\n~~~python\nname = \"Maya\"\nage = 16\nprint(f\"Hi {name}, you are {age} years old.\")  # prints: Hi Maya, you are 16 years old.\n~~~\n\nThey read almost like a normal sentence."
+          },
+          "indexing_and_slicing": {
+            "title": "Indexing and Slicing",
+            "bodyMarkdown": "## Strings are sequences of characters\n\nA string is made of characters in order.\n\nEach character has a position called an **index**.\n\nIndexes start at `0`.\n\n~~~python\nword = \"Python\"\nprint(word[0])               # prints: P\nprint(word[1])               # prints: y\n~~~\n\nPython also supports negative indexes.\n\n`-1` means the last character.\n\n~~~python\nword = \"Python\"\nprint(word[-1])              # prints: n\nprint(word[-2])              # prints: o\n~~~\n\n## Slicing\n\nSlicing lets you take part of a string.\n\nFormat: `text[start:end]`\n\n- it includes `start`\n- it stops before `end`\n\n~~~python\nword = \"Python\"\nprint(word[0:2])             # prints: Py\nprint(word[2:6])             # prints: thon\n~~~\n\nShortcuts also work:\n\n~~~python\nword = \"Python\"\nprint(word[:2])              # prints: Py\nprint(word[2:])              # prints: thon\n~~~\n\nIndexing reads one character.\nSlicing reads a section of the string."
+          },
+          "string_methods": {
+            "title": "String Methods and Clean Input",
+            "bodyMarkdown": "## Common string methods\n\nMethods are built-in tools attached to strings.\n\n### `lower()`\nConverts text to lowercase.\n\n~~~python\nmsg = \"HeLLo!\"\nprint(msg.lower())           # prints: hello!\n~~~\n\n### `strip()`\nRemoves extra spaces at the beginning and end.\n\n~~~python\nraw = \"   hello   \"\nprint(raw.strip())           # prints: hello\n~~~\n\n### `replace()`\nReplaces one piece of text with another.\n\n~~~python\ntext = \"I like cats\"\nprint(text.replace(\"cats\", \"dogs\"))  # prints: I like dogs\n~~~\n\n## Cleaning user input\n\nUser input is often messy.\n\n~~~python\nname = input(\"Enter your name: \")\nclean = name.strip().lower()\n\nprint(\"raw:\", name)         # if input is '  Maya  ', prints: raw:   Maya  \nprint(\"clean:\", clean)      # prints: clean: maya\nprint(f\"Hello, {clean}!\")   # prints: Hello, maya!\n~~~\n\n## A small username generator\n\n~~~python\nfirst = input(\"First name: \").strip()\nlast = input(\"Last name: \").strip()\nusername = (first[0] + last).lower()\nprint(f\"username: {username}\")  # if inputs are Maya and Johnson, prints: username: mjohnson\n~~~\n\nThat combines strings, indexing, methods, and formatted output.\n\n## What this lets you do\n\nNow you can:\n\n- display messages clearly\n- combine text with variables\n- access characters inside text\n- extract part of a string\n- clean user input"
           }
         }
       }
     }
-  },
+  }
+,
   "quiz": {
     "m1_str_concat_vs_comma_sc": {
       "title": "Concatenation vs commas",
       "prompt": "Assume `age = 16`. Which line prints **without** an error?",
-      "hint": "Commas work with numbers. Using + requires strings on both sides.",
+      "hint": "Commas work with numbers. Using `+` requires strings on both sides.",
       "help": {
-        "concept": "Using commas in print lets Python display mixed values easily, but + requires both sides to be strings.",
-        "hint_1": "Look for the option that avoids joining a string directly to a number with +.",
-        "hint_2": "The safe line uses a comma inside print."
+        "concept": "Using commas in `print` lets Python display mixed values easily, but `+` requires both sides to be strings.",
+        "hint_1": "Look for the option that avoids joining a string directly to a number with `+`.",
+        "hint_2": "The safe line uses a comma inside `print`."
       },
       "options": {
         "a": "`print(\"age: \" + age)`",
@@ -61,7 +84,7 @@
       "prompt": "Which line correctly inserts the variable `name` into an f-string?",
       "hint": "Inside an f-string, put the variable name inside curly braces.",
       "help": {
-        "concept": "F-strings insert variable values using curly braces inside a string that starts with f.",
+        "concept": "F-strings insert variable values using curly braces inside a string that starts with `f`.",
         "hint_1": "The line must start with `f` and use `{name}`.",
         "hint_2": "The correct placeholder is `{name}`."
       },
@@ -76,7 +99,7 @@
       "prompt": "What does `.strip()` do to a string?",
       "hint": "It removes extra spaces from the beginning and end.",
       "help": {
-        "concept": "strip() cleans surrounding whitespace from text.",
+        "concept": "`strip()` cleans surrounding whitespace from text.",
         "hint_1": "It does not lowercase the text.",
         "hint_2": "It removes spaces at the start and end."
       },
@@ -91,7 +114,7 @@
       "prompt": "What does `.lower()` do to a string?",
       "hint": "It changes uppercase letters into lowercase letters.",
       "help": {
-        "concept": "lower() converts letters to lowercase.",
+        "concept": "`lower()` converts letters to lowercase.",
         "hint_1": "It changes case, not spacing.",
         "hint_2": "The result is lowercase text."
       },
@@ -124,8 +147,8 @@
       "hint": "Think about commas, `+`, and f-strings.",
       "help": {
         "concept": "Strings can be combined in several ways, but each technique has rules.",
-        "hint_1": "Commas in print are flexible.",
-        "hint_2": "Using + works when both sides are strings."
+        "hint_1": "Commas in `print()` are flexible.",
+        "hint_2": "Using `+` works when both sides are strings."
       },
       "options": {
         "a": "Using commas in `print()` can show strings and numbers together.",
@@ -139,7 +162,7 @@
       "prompt": "Select all true statements about `first[0]`.",
       "hint": "`[0]` means the first character in the string.",
       "help": {
-        "concept": "Indexing accesses characters by position, and index 0 means the first character.",
+        "concept": "Indexing accesses characters by position, and index `0` means the first character.",
         "hint_1": "It does not mean the whole string.",
         "hint_2": "`first[0]` can help build usernames."
       },
@@ -161,10 +184,10 @@
         "2": "slashes",
         "3": "numbers"
       },
-      "hint": "Think about \"Maya\" and 'Chicago'.",
+      "hint": "Think about `\"Maya\"` and `'Chicago'`.",
       "help": {
         "concept": "Strings are written as text surrounded by quotes.",
-        "hint_1": "Single and double both work.",
+        "hint_1": "Single and double quotes both work.",
         "hint_2": "The missing word is quotes."
       }
     },
@@ -180,9 +203,9 @@
       },
       "hint": "Python indexing starts from zero.",
       "help": {
-        "concept": "Python sequences start at index 0.",
-        "hint_1": "The first position is not 1.",
-        "hint_2": "The answer is 0."
+        "concept": "Python sequences start at index `0`.",
+        "hint_1": "The first position is not `1`.",
+        "hint_2": "The answer is `0`."
       }
     },
     "m1_str_fill_last_index": {
@@ -198,8 +221,8 @@
       "hint": "Negative indexing counts from the end.",
       "help": {
         "concept": "Negative indexes count backward from the end of the string.",
-        "hint_1": "The final character is not at index 0 unless the string has one character.",
-        "hint_2": "The answer is -1."
+        "hint_1": "The final character is not at index `0` unless the string has one character.",
+        "hint_2": "The answer is `-1`."
       }
     },
     "m1_str_fill_lower_meaning": {
@@ -214,7 +237,7 @@
       },
       "hint": "Think about `HeLLo!` becoming `hello!`.",
       "help": {
-        "concept": "lower() changes letters into lowercase form.",
+        "concept": "`lower()` changes letters into lowercase form.",
         "hint_1": "It changes case, not type.",
         "hint_2": "The answer is lowercase."
       }
@@ -231,7 +254,7 @@
       },
       "hint": "Think about messy input like `   Maya   `.",
       "help": {
-        "concept": "strip() removes whitespace around text.",
+        "concept": "`strip()` removes whitespace around text.",
         "hint_1": "This helps clean user input.",
         "hint_2": "The removed thing is spaces."
       }
@@ -317,7 +340,7 @@
     "m1_str_concat_vs_comma_code": {
       "title": "Concatenation vs commas",
       "prompt": "Read TWO inputs:\n1) name\n2) age\n\nPrint EXACTLY:\nHello <name>\nage: <age>",
-      "hint": "Use commas in print or convert age with str(...).",
+      "hint": "Use commas in `print()` or convert age with `str(...)`.",
       "starterCode": "# TODO\n",
       "help": {
         "concept": "This checks whether you can safely print text together with a number.",
@@ -328,7 +351,7 @@
     "m1_str_fstring_greeting_code": {
       "title": "f-string greeting",
       "prompt": "Read ONE input (name).\n\nPrint EXACTLY:\nHello, <name>!",
-      "hint": "print(f\"Hello, {name}!\")",
+      "hint": "Use `print(f\"Hello, {name}!\")`.",
       "starterCode": "# TODO\n",
       "help": {
         "concept": "This checks whether you can use a simple f-string with one variable.",
@@ -339,7 +362,7 @@
     "m1_str_username_code": {
       "title": "Username generator",
       "prompt": "Read TWO inputs (first, last).\n\nRules:\n- strip spaces\n- username = first letter of first + last\n- lowercase\nPrint ONLY the username.",
-      "hint": "username = (first.strip()[0] + last.strip()).lower()",
+      "hint": "Use `username = (first.strip()[0] + last.strip()).lower()`.",
       "starterCode": "# TODO\n",
       "help": {
         "concept": "This combines stripping, indexing, lowercase conversion, and final output.",

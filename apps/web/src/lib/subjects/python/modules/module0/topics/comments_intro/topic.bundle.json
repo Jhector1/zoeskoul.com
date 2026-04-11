@@ -1,19 +1,38 @@
 {
   "topicId": "comments_intro",
-  "minutes": 8,
-
+  "minutes": 10,
   "topic": {
     "labelKey": "topics.python.python-0.comments_intro.label",
     "summaryKey": "topics.python.python-0.comments_intro.summary"
   },
-
   "cards": [
     {
-      "id": "sketch",
+      "id": "sketch0",
       "kind": "sketch",
-      "titleKey": "topics.python.python-0.comments_intro.cards.sketch.title",
-      "sketchId": "comments",
-      "height": 520
+      "titleKey": "topics.python.python-0.comments_intro.cards.sketch0.title",
+      "sketchId": "why_comments",
+      "height": 340
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python.python-0.comments_intro.cards.sketch1.title",
+      "sketchId": "comment_styles",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python.python-0.comments_intro.cards.sketch2.title",
+      "sketchId": "debugging_with_comments",
+      "height": 440
+    },
+    {
+      "id": "sketch3",
+      "kind": "sketch",
+      "titleKey": "topics.python.python-0.comments_intro.cards.sketch3.title",
+      "sketchId": "good_vs_bad_comments",
+      "height": 380
     },
     {
       "id": "quiz",
@@ -21,23 +40,39 @@
       "titleKey": "topics.python.python-0.comments_intro.cards.quiz.title",
       "quiz": {
         "difficulty": "easy",
-        "n": 3,
+        "n": 4,
         "allowReveal": true,
         "preferKind": null,
         "maxAttempts": 10
       }
     }
   ],
-
   "sketches": [
     {
-      "id": "comments",
+      "id": "why_comments",
       "archetype": "paragraph",
-      "titleKey": "sketches.python.python-0.comments_intro.title",
-      "bodyKey": "sketches.python.python-0.comments_intro.bodyMarkdown"
+      "titleKey": "sketches.python.python-0.comments_intro.why_comments.title",
+      "bodyKey": "sketches.python.python-0.comments_intro.why_comments.bodyMarkdown"
+    },
+    {
+      "id": "comment_styles",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python.python-0.comments_intro.comment_styles.title",
+      "bodyKey": "sketches.python.python-0.comments_intro.comment_styles.bodyMarkdown"
+    },
+    {
+      "id": "debugging_with_comments",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python.python-0.comments_intro.debugging_with_comments.title",
+      "bodyKey": "sketches.python.python-0.comments_intro.debugging_with_comments.bodyMarkdown"
+    },
+    {
+      "id": "good_vs_bad_comments",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python.python-0.comments_intro.good_vs_bad_comments.title",
+      "bodyKey": "sketches.python.python-0.comments_intro.good_vs_bad_comments.bodyMarkdown"
     }
   ],
-
   "exercises": [
     {
       "id": "m0_comments_symbol",
@@ -45,7 +80,11 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m0_comments_symbol",
-      "optionIds": ["a", "b", "c"],
+      "optionIds": [
+        "a",
+        "b",
+        "c"
+      ],
       "expected": {
         "kind": "single_choice",
         "optionId": "b"
@@ -57,7 +96,11 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m0_comments_ignored_by_python",
-      "optionIds": ["a", "b", "c"],
+      "optionIds": [
+        "a",
+        "b",
+        "c"
+      ],
       "expected": {
         "kind": "single_choice",
         "optionId": "a"
@@ -69,7 +112,11 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m0_comments_best_reason",
-      "optionIds": ["a", "b", "c"],
+      "optionIds": [
+        "a",
+        "b",
+        "c"
+      ],
       "expected": {
         "kind": "single_choice",
         "optionId": "b"
@@ -81,7 +128,11 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m0_comments_multiline_true",
-      "optionIds": ["a", "b", "c"],
+      "optionIds": [
+        "a",
+        "b",
+        "c"
+      ],
       "expected": {
         "kind": "single_choice",
         "optionId": "b"
@@ -93,7 +144,12 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m0_comments_docstring_vs_comment",
-      "optionIds": ["a", "b", "c", "d"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
       "expected": {
         "kind": "single_choice",
         "optionId": "c"
@@ -105,23 +161,35 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m0_comments_inline_comment",
-      "optionIds": ["a", "b", "c", "d"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
       "expected": {
         "kind": "single_choice",
         "optionId": "a"
       }
     },
-
     {
       "id": "m0_comments_multiline_valid_ways",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m0_comments_multiline_valid_ways",
-      "optionIds": ["a", "b", "c", "d"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
       "expected": {
         "kind": "multi_choice",
-        "optionIds": ["a", "b"]
+        "optionIds": [
+          "a",
+          "b"
+        ]
       }
     },
     {
@@ -130,10 +198,18 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m0_comments_which_lines_are_comments",
-      "optionIds": ["a", "b", "c", "d"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
       "expected": {
         "kind": "multi_choice",
-        "optionIds": ["a", "d"]
+        "optionIds": [
+          "a",
+          "d"
+        ]
       }
     },
     {
@@ -142,10 +218,19 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m0_comments_multi_good_comment_goals",
-      "optionIds": ["a", "b", "c", "d"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
       "expected": {
         "kind": "multi_choice",
-        "optionIds": ["a", "b", "d"]
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
       }
     },
     {
@@ -154,10 +239,18 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m0_comments_multi_valid_python_comment_forms",
-      "optionIds": ["a", "b", "c", "d"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
       "expected": {
         "kind": "multi_choice",
-        "optionIds": ["a", "b"]
+        "optionIds": [
+          "a",
+          "b"
+        ]
       }
     },
     {
@@ -166,10 +259,19 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m0_comments_multi_when_comments_help",
-      "optionIds": ["a", "b", "c", "d"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
       "expected": {
         "kind": "multi_choice",
-        "optionIds": ["a", "b", "d"]
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
       }
     },
     {
@@ -178,10 +280,18 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m0_comments_multi_python_ignores",
-      "optionIds": ["a", "b", "c", "d"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
       "expected": {
         "kind": "multi_choice",
-        "optionIds": ["a", "c"]
+        "optionIds": [
+          "a",
+          "c"
+        ]
       }
     },
     {
@@ -190,13 +300,20 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m0_comments_multi_disable_line_effect",
-      "optionIds": ["a", "b", "c", "d"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
       "expected": {
         "kind": "multi_choice",
-        "optionIds": ["a", "b"]
+        "optionIds": [
+          "a",
+          "b"
+        ]
       }
     },
-
     {
       "id": "m0_comments_fill_comment_symbol",
       "kind": "fill_blank_choice",
@@ -257,17 +374,26 @@
         "value": "documentation"
       }
     },
-
     {
       "id": "m0_comments_reorder_program_steps",
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m0_comments_reorder_program_steps",
-      "tokenIds": ["t1", "t2", "t3", "t4"],
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
       "expected": {
         "kind": "drag_reorder",
-        "tokenIds": ["t1", "t2", "t3", "t4"]
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
       }
     },
     {
@@ -276,10 +402,18 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m0_comments_reorder_comment_purpose",
-      "tokenIds": ["t1", "t2", "t3"],
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
       "expected": {
         "kind": "drag_reorder",
-        "tokenIds": ["t1", "t2", "t3"]
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
       }
     },
     {
@@ -288,10 +422,18 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m0_comments_reorder_inline_pattern",
-      "tokenIds": ["t1", "t2", "t3"],
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
       "expected": {
         "kind": "drag_reorder",
-        "tokenIds": ["t1", "t2", "t3"]
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
       }
     },
     {
@@ -300,10 +442,18 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m0_comments_reorder_debug_flow",
-      "tokenIds": ["t1", "t2", "t3"],
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
       "expected": {
         "kind": "drag_reorder",
-        "tokenIds": ["t1", "t2", "t3"]
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
       }
     },
     {
@@ -312,13 +462,22 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m0_comments_reorder_good_comment",
-      "tokenIds": ["t1", "t2", "t3", "t4"],
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
       "expected": {
         "kind": "drag_reorder",
-        "tokenIds": ["t1", "t2", "t3", "t4"]
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
       }
     },
-
     {
       "id": "m0_comments_disable_error_line",
       "kind": "code_input",

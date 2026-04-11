@@ -9,11 +9,32 @@
 
   "cards": [
     {
-      "id": "sketch",
+      "id": "sketch0",
       "kind": "sketch",
-      "titleKey": "topics.python.python-2.conditionals_basics.cards.sketch.title",
-      "sketchId": "basics",
+      "titleKey": "topics.python.python-2.conditionals_basics.cards.sketch0.title",
+      "sketchId": "decision_intro",
+      "height": 380
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python.python-2.conditionals_basics.cards.sketch1.title",
+      "sketchId": "if_else_basics",
+      "height": 480
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python.python-2.conditionals_basics.cards.sketch2.title",
+      "sketchId": "elif_and_logic",
       "height": 520
+    },
+    {
+      "id": "sketch3",
+      "kind": "sketch",
+      "titleKey": "topics.python.python-2.conditionals_basics.cards.sketch3.title",
+      "sketchId": "truthy_falsey",
+      "height": 420
     },
     {
       "id": "project",
@@ -71,10 +92,28 @@
 
   "sketches": [
     {
-      "id": "basics",
+      "id": "decision_intro",
       "archetype": "paragraph",
-      "titleKey": "sketches.python.python-2.conditionals_basics.basics.title",
-      "bodyKey": "sketches.python.python-2.conditionals_basics.basics.bodyMarkdown"
+      "titleKey": "sketches.python.python-2.conditionals_basics.decision_intro.title",
+      "bodyKey": "sketches.python.python-2.conditionals_basics.decision_intro.bodyMarkdown"
+    },
+    {
+      "id": "if_else_basics",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python.python-2.conditionals_basics.if_else_basics.title",
+      "bodyKey": "sketches.python.python-2.conditionals_basics.if_else_basics.bodyMarkdown"
+    },
+    {
+      "id": "elif_and_logic",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python.python-2.conditionals_basics.elif_and_logic.title",
+      "bodyKey": "sketches.python.python-2.conditionals_basics.elif_and_logic.bodyMarkdown"
+    },
+    {
+      "id": "truthy_falsey",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python.python-2.conditionals_basics.truthy_falsey.title",
+      "bodyKey": "sketches.python.python-2.conditionals_basics.truthy_falsey.bodyMarkdown"
     }
   ],
 

@@ -10,11 +10,32 @@
 
   "cards": [
     {
-      "id": "sketch",
+      "id": "sketch0",
       "kind": "sketch",
-      "titleKey": "topics.python.python-1.string_basics.cards.sketch.title",
-      "sketchId": "basics",
-      "height": 520
+      "titleKey": "topics.python.python-1.string_basics.cards.sketch0.title",
+      "sketchId": "strings_intro",
+      "height": 380
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python.python-1.string_basics.cards.sketch1.title",
+      "sketchId": "printing_strings",
+      "height": 500
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python.python-1.string_basics.cards.sketch2.title",
+      "sketchId": "indexing_and_slicing",
+      "height": 500
+    },
+    {
+      "id": "sketch3",
+      "kind": "sketch",
+      "titleKey": "topics.python.python-1.string_basics.cards.sketch3.title",
+      "sketchId": "string_methods",
+      "height": 500
     },
     {
       "id": "project",
@@ -60,10 +81,28 @@
 
   "sketches": [
     {
-      "id": "basics",
+      "id": "strings_intro",
       "archetype": "paragraph",
-      "titleKey": "sketches.python.python-1.string_basics.basics.title",
-      "bodyKey": "sketches.python.python-1.string_basics.basics.bodyMarkdown"
+      "titleKey": "sketches.python.python-1.string_basics.strings_intro.title",
+      "bodyKey": "sketches.python.python-1.string_basics.strings_intro.bodyMarkdown"
+    },
+    {
+      "id": "printing_strings",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python.python-1.string_basics.printing_strings.title",
+      "bodyKey": "sketches.python.python-1.string_basics.printing_strings.bodyMarkdown"
+    },
+    {
+      "id": "indexing_and_slicing",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python.python-1.string_basics.indexing_and_slicing.title",
+      "bodyKey": "sketches.python.python-1.string_basics.indexing_and_slicing.bodyMarkdown"
+    },
+    {
+      "id": "string_methods",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python.python-1.string_basics.string_methods.title",
+      "bodyKey": "sketches.python.python-1.string_basics.string_methods.bodyMarkdown"
     }
   ],
 

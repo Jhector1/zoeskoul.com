@@ -9,11 +9,32 @@
 
   "cards": [
     {
-      "id": "sketch",
+      "id": "sketch0",
       "kind": "sketch",
-      "titleKey": "topics.python.python-2.functions_basics.cards.sketch.title",
-      "sketchId": "basics",
+      "titleKey": "topics.python.python-2.functions_basics.cards.sketch0.title",
+      "sketchId": "why_functions",
+      "height": 400
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python.python-2.functions_basics.cards.sketch1.title",
+      "sketchId": "def_and_call",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python.python-2.functions_basics.cards.sketch2.title",
+      "sketchId": "parameters_and_return",
       "height": 520
+    },
+    {
+      "id": "sketch3",
+      "kind": "sketch",
+      "titleKey": "topics.python.python-2.functions_basics.cards.sketch3.title",
+      "sketchId": "scope_and_reuse",
+      "height": 460
     },
     {
       "id": "project",
@@ -71,10 +92,28 @@
 
   "sketches": [
     {
-      "id": "basics",
+      "id": "why_functions",
       "archetype": "paragraph",
-      "titleKey": "sketches.python.python-2.functions_basics.basics.title",
-      "bodyKey": "sketches.python.python-2.functions_basics.basics.bodyMarkdown"
+      "titleKey": "sketches.python.python-2.functions_basics.why_functions.title",
+      "bodyKey": "sketches.python.python-2.functions_basics.why_functions.bodyMarkdown"
+    },
+    {
+      "id": "def_and_call",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python.python-2.functions_basics.def_and_call.title",
+      "bodyKey": "sketches.python.python-2.functions_basics.def_and_call.bodyMarkdown"
+    },
+    {
+      "id": "parameters_and_return",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python.python-2.functions_basics.parameters_and_return.title",
+      "bodyKey": "sketches.python.python-2.functions_basics.parameters_and_return.bodyMarkdown"
+    },
+    {
+      "id": "scope_and_reuse",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python.python-2.functions_basics.scope_and_reuse.title",
+      "bodyKey": "sketches.python.python-2.functions_basics.scope_and_reuse.bodyMarkdown"
     }
   ],
 

@@ -1,6 +1,5 @@
-import type {PracticeKind} from "@prisma/client";
-import type {ManifestRuntimeDefaults} from "@/lib/subjects/_core/manifestTypes";
-
+import type { PracticeKind } from "@prisma/client";
+import type { ManifestRuntimeDefaults } from "@/lib/subjects/_core/manifestTypes";
 
 export type ReviewQuestion =
     | {
@@ -27,14 +26,13 @@ export type ReviewQuestion =
         subject: string;
         module?: string;
         section?: string;
-        topic?: string; // slug
+        topic?: string;
         difficulty?: "easy" | "medium" | "hard";
         allowReveal?: boolean;
         preferKind?: PracticeKind | null;
     };
     maxAttempts?: number;
 };
-
 
 export type ReviewTopicId = string;
 
@@ -53,18 +51,6 @@ export type ReviewQuizSpec = {
 };
 
 export type ReviewVideoProvider = "auto" | "youtube" | "vimeo" | "iframe" | "file";
-
-export type ReviewVideoCard = {
-    type: "video";
-    id: string;
-    title?: string;
-    url: string;
-    provider?: ReviewVideoProvider;
-    startSeconds?: number;
-    posterUrl?: string;
-    captionMarkdown?: string;
-    spec?: any;
-};
 
 export type SeedPolicy = "actor" | "global";
 export type Difficulty = "easy" | "medium" | "hard";
@@ -98,11 +84,69 @@ export type ReviewProjectSpec = {
     runtime?: ManifestRuntimeDefaults | null;
 };
 
+export type ReviewCardProgressMeta = {
+    /**
+     * Stable semantic completion key.
+     * Reading cards can share one progressKey even if they are split into multiple UI cards.
+     *
+     * Example:
+     *   progressKey: "comments_intro:reading"
+     */
+    progressKey?: string | null;
+
+    /**
+     * Old keys that should still count as completed after a refactor.
+     * Useful when migrating an old single "sketch" card into sketch0/sketch1/sketch2.
+     *
+     * Example:
+     *   legacyProgressKeys: ["sketch"]
+     */
+    legacyProgressKeys?: string[];
+};
+
+export type ReviewVideoCard = ReviewCardProgressMeta & {
+    type: "video";
+    id: string;
+    title?: string;
+    url: string;
+    provider?: ReviewVideoProvider;
+    startSeconds?: number;
+    posterUrl?: string;
+    captionMarkdown?: string;
+    spec?: any;
+};
+
 export type ReviewCard =
-    | { type: "text"; id: string; title?: string; markdown: string; spec?: any }
-    | { type: "sketch"; id: string; title?: string; sketchId: string; spec?: any; height?: number; props?: any }
-    | { type: "quiz"; id: string; title?: string; passScore?: number; spec: ReviewQuizSpec }
-    | { type: "project"; id: string; title?: string; passScore?: number; spec: ReviewProjectSpec }
+    | (ReviewCardProgressMeta & {
+    type: "text";
+    id: string;
+    title?: string;
+    markdown: string;
+    spec?: any;
+})
+    | (ReviewCardProgressMeta & {
+    type: "sketch";
+    id: string;
+    title?: string;
+    sketchId: string;
+    spec?: any;
+    height?: number;
+    props?: any;
+})
+    | (ReviewCardProgressMeta & {
+    type: "quiz";
+    id: string;
+    title?: string;
+    passScore?: number;
+    spec: ReviewQuizSpec;
+})
+    | (ReviewCardProgressMeta & {
+    type: "project";
+    id: string;
+    title?: string;
+    passScore?: number;
+    spec: ReviewProjectSpec;
+})
     | ReviewVideoCard;
 
 export type ReviewTopic = {
@@ -127,4 +171,3 @@ export type ReviewModule = {
 };
 
 export type ReviewTopicShape = ReviewTopic;
-

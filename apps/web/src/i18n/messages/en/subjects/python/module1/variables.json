@@ -6,8 +6,17 @@
           "label": "Variables: Labeled Boxes That Hold Values",
           "summary": "Understand variables as labeled boxes, assign values with '=', and practice updating values with real-world mini tasks.",
           "cards": {
-            "sketch": {
-              "title": "Variables: Labeled Boxes for Your Data"
+            "sketch0": {
+              "title": "Variables: Labels for Stored Data"
+            },
+            "sketch1": {
+              "title": "Creating Variables and Showing Values"
+            },
+            "sketch2": {
+              "title": "Updating Variables"
+            },
+            "sketch3": {
+              "title": "Variable Names and the Main Idea"
             },
             "project": {
               "title": "Project: Store → Swap → Total"
@@ -28,18 +37,32 @@
       }
     }
   },
+
   "sketches": {
     "python": {
       "python-1": {
         "variables_intro": {
-          "boxes": {
-            "title": "Variables: Labeled Boxes for Your Data",
-            "bodyMarkdown": "Imagine your computer's memory as a **huge storage room**.\n\nInside that room, the computer keeps many pieces of information:\n\n- numbers\n- text\n- results of calculations\n\nBut if everything were thrown into the room without organization, it would be impossible to find anything.\n\nSo we use **labeled boxes**.\n\nEach box holds a piece of data, and the **label tells us what’s inside**.\n\nFor example, you might have boxes labeled:\n\n- **snacks**\n- **homework**\n- **cables**\n- **important_stuff**\n\nNow, instead of searching the whole room, you can just look for the **label**.\n\nIn Python, a **variable** is exactly that label.\n\n✅ A variable is a **name that refers to a value stored in memory**.\n\n---\n\n## The “show it on the terminal screen” tool\n\nYou’ll see `print(...)` used a lot, and you might be wondering what it does.\n\nFor now, think of `print(...)` as a **display tool**.\n\n> Whatever you put inside `print(...)` will appear in the **terminal output** when the program runs.\n\nWe’ll talk more about these **tools with parentheses** (called functions) later.\n\n---\n\n## The moment a variable is created\n\nIn Python, a variable is created the moment you assign a value to it.\n\n~~~python\nage = 16\nname = \"Maya\"\n~~~\n\nRead this like a story:\n\n- Put **16** in a box labeled **age**\n- Put **\"Maya\"** in a box labeled **name**\n\nPython uses the symbol `=` for **assignment**.\n\nIn mathematics, `=` means **is equal to**.\nIn programming, it means:\n\n> “Store this value inside this variable.”\n\n*(When we want to compare values later, we use `==`. We'll learn that soon.)*\n\n---\n\n## Try it (editor on the right)\n\nCopy this code into the editor on the **right**, then run it and watch the terminal output:\n\n~~~python\nage = 16\nname = \"Maya\"\n\nprint(\"age =\", age)\nprint(\"name =\", name)\n~~~\n\nNow change the values (try a different name and age) and run it again.\n\n---\n\n## Variables can change (that’s the whole point)\n\nVariables are useful because the value inside the box can **change**.\n\n~~~python\nscore = 10\nscore = score + 5\nprint(score)  # 15\n~~~\n\nThat second line means:\n\n> Take the value inside **score**, add 5, and store the new result back into **score**.\n\nThe label stays the same — but the **value inside the box changes**.\n\n---\n\n## Try it (watch the change)\n\n~~~python\nscore = 10\nprint(\"start:\", score)\n\nscore = score + 5\nprint(\"after +5:\", score)\n\nscore = score - 2\nprint(\"after -2:\", score)\n~~~\n\nChange the `+5` and `-2` to other numbers and run the code again.\n\nWatch how the value keeps updating.\n\n---\n\n## Variable names (label rules)\n\nBecause variables are **labels**, they must follow some rules.\n\n✅ Allowed:\n- letters\n- numbers\n- underscores\n\n❗ But they **cannot start with a number**.\n\n❌ Not allowed:\n- spaces\n- symbols like `$` or `@`\n- Python keywords like `class`, `for`, `if`\n\nExamples:\n\n~~~python\nstudent_name = \"Ayo\"   # good (snake_case is common in Python)\nstudentName = \"Ayo\"    # also valid\n2cool = \"nope\"         # invalid (starts with a number)\n~~~\n\n---\n\n## Quick mental model\n\nA variable is **not the value itself**.\n\nIt is a **name tag** that lets you reuse and organize your data.\n\n~~~python\nprice = 4.99\ntax = 0.10\ntotal = price + (price * tax)\n\nprint(total)\n~~~\n\nWithout variables, you would repeat numbers everywhere.\n\nWith variables, your programs become:\n\n- easier to read\n- easier to change\n- easier to understand"
+          "boxes_intro": {
+            "title": "Variables: Labels for Stored Data",
+            "bodyMarkdown": "Imagine your computer's memory as a **huge storage room**.\n\nInside that room, the computer keeps many pieces of information:\n\n- numbers\n- text\n- results of calculations\n\nIf everything were thrown into that room without any organization, it would be hard to find anything.\n\nSo we use **labeled boxes**.\n\nEach box holds a piece of data, and the **label tells us what’s inside**.\n\nFor example, you might have boxes labeled:\n\n- **snacks**\n- **homework**\n- **cables**\n- **important_stuff**\n\nInstead of searching the whole room, you can look for the **label**.\n\nIn Python, a **variable** works the same way.\n\nA variable is a **name that refers to a value stored in memory**."
+          },
+          "boxes_assignment": {
+            "title": "Creating Variables and Showing Values",
+            "bodyMarkdown": "## The display tool: `print(...)`\n\nYou’ll see `print(...)` used often.\n\nFor now, think of `print(...)` as a **display tool**.\n\n> Whatever you put inside `print(...)` appears in the **terminal output** when the program runs.\n\nWe’ll learn more about these tools with parentheses later.\n\n---\n\n## The moment a variable is created\n\nIn Python, a variable is created when you assign a value to it.\n\n~~~python\nage = 16\nname = \"Maya\"\n~~~\n\nRead this like a story:\n\n- Put **16** in a box labeled **age**\n- Put **\"Maya\"** in a box labeled **name**\n\nPython uses the symbol `=` for **assignment**.\n\nIn math, `=` means **is equal to**.\nIn programming, it means:\n\n> Store this value inside this variable.\n\n*(Later, when we compare values, we use `==`.)*\n\n---\n\n## Try it\n\n~~~python\nage = 16\nname = \"Maya\"\n\nprint(\"age =\", age)    # prints: age = 16\nprint(\"name =\", name)  # prints: name = Maya\n~~~\n\nNow change the values and run it again."
+          },
+          "boxes_update": {
+            "title": "Updating Variables",
+            "bodyMarkdown": "## Variables can change\n\nVariables are useful because the value inside the box can **change**.\n\n~~~python\nscore = 10\nscore = score + 5\nprint(score)  # prints: 15\n~~~\n\nThat second line means:\n\n> Take the value inside **score**, add 5, and store the new result back into **score**.\n\nThe label stays the same, but the **value inside the box changes**.\n\n---\n\n## Try it\n\n~~~python\nscore = 10\nprint(\"start:\", score)      # prints: start: 10\n\nscore = score + 5\nprint(\"after +5:\", score)   # prints: after +5: 15\n\nscore = score - 2\nprint(\"after -2:\", score)   # prints: after -2: 13\n~~~\n\nChange the `+5` and `-2` to other numbers and run the code again.\n\nWatch how the value keeps updating."
+          },
+          "boxes_names": {
+            "title": "Variable Names and the Main Idea",
+            "bodyMarkdown": "## Variable names\n\nBecause variables are **labels**, they must follow some rules.\n\n✅ Allowed:\n- letters\n- numbers\n- underscores\n\n❗ But they **cannot start with a number**.\n\n❌ Not allowed:\n- spaces\n- symbols like `$` or `@`\n- Python keywords like `class`, `for`, `if`\n\nExamples:\n\n~~~python\nstudent_name = \"Ayo\"   # good\nstudentName = \"Ayo\"    # also valid\n2cool = \"nope\"         # invalid\n~~~\n\n---\n\n## Quick mental model\n\nA variable is **not the value itself**.\n\nIt is a **name tag** that helps you reuse and organize data.\n\n~~~python\nprice = 4.99\ntax = 0.10\ntotal = price + (price * tax)\n\nprint(total)            # prints: 5.489\n~~~\n\nWithout variables, you would repeat numbers everywhere.\n\nWith variables, your programs become:\n\n- easier to read\n- easier to change\n- easier to understand"
           }
         }
       }
     }
-  },
+  }
+,
   "common": {
     "terminalInputLabel": "input",
     "terminalOutputLabel": "output"
@@ -105,7 +128,6 @@
         "c": "25"
       }
     },
-
     "m1_vars_fill_variable_meaning": {
       "title": "Variable idea",
       "prompt": "Fill in the blank with the best word.",
@@ -191,7 +213,6 @@
         "hint_2": "The answer is print."
       }
     },
-
     "m1_vars_reorder_box_model": {
       "title": "Order the box model",
       "prompt": "Reorder the lesson’s variable idea.",
@@ -268,7 +289,6 @@
         "hint_2": "Printing comes after computation."
       }
     },
-
     "m1_vars_boxes_print_code": {
       "title": "Boxes: store and print",
       "prompt": "Read TWO inputs:\n1) name\n2) age\n\nStore them in variables and print EXACTLY:\nname = <name>\nage = <age>",

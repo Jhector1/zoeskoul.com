@@ -3,14 +3,20 @@
     "python": {
       "python-1": {
         "data_types_intro": {
-          "label": "Data Types + Conversion: What’s in the Box?",
-          "summary": "Learn core Python types (int/float/str/bool/None), how input() returns strings, and how to convert types safely.",
+          "label": "Data Types and Conversion: What’s in the Box?",
+          "summary": "Learn core Python types, see how `input()` returns text, and convert values into the form you need.",
           "cards": {
             "sketch0": {
-              "title": "Data Types: What’s Inside the Box?"
+              "title": "What a Data Type Tells You"
             },
             "sketch1": {
-              "title": "Type Conversion: Turning Strings into Numbers"
+              "title": "Five Common Types"
+            },
+            "sketch2": {
+              "title": "Why Types Change the Result"
+            },
+            "sketch3": {
+              "title": "Input and Type Conversion"
             },
             "quiz": {
               "title": "Project: Convert → Compute → Format"
@@ -18,10 +24,10 @@
           },
           "projectSteps": {
             "convert_next_year": {
-              "title": "Convert age to int and compute next year"
+              "title": "Convert age and compute next year"
             },
             "tip_total": {
-              "title": "Compute tip + total using integer math"
+              "title": "Compute tip and total"
             },
             "c_to_f": {
               "title": "Convert Celsius to Fahrenheit"
@@ -32,22 +38,32 @@
     }
   },
 
+
   "sketches": {
     "python": {
       "python-1": {
         "data_types_intro": {
-          "basic": {
-            "title": "Data Types: What’s Inside the Box?",
-            "bodyMarkdown": "You already have labeled boxes (variables). Now the next question is:\n\n**What kind of thing is inside the box?**\n\nPython calls that a **data type**.\n\nA type tells Python what the value *is*, and what you’re allowed to do with it.\n\n---\n\n## 5 types you’ll use constantly\n\n(There are more than five, but these show up everywhere.)\n\n### 1) Integers (`int`) — whole numbers\n~~~python\nstudents = 28\n~~~\n\n### 2) Floats (`float`) — decimals\n~~~python\nprice = 3.75\n~~~\n\n### 3) Strings (`str`) — text\n~~~python\nmessage = \"Welcome!\"\n~~~\n\n### 4) Booleans (`bool`) — True/False\n~~~python\nis_logged_in = True\n~~~\n\n### 5) None (`NoneType`) — “empty on purpose”\n~~~python\nnickname = None\n~~~\n\n`None` means:\n> “There is no value here yet.”\n\n---\n\n## Try it (scan the boxes)\n\nPaste this code into the editor on the **right** and run it:\n\n~~~python\nstudents = 28\nprice = 3.75\nmessage = \"Welcome!\"\nis_logged_in = True\nnickname = None\n\nprint(\"students:\", students, \"| type:\", type(students))\nprint(\"price:\", price, \"| type:\", type(price))\nprint(\"message:\", message, \"| type:\", type(message))\nprint(\"is_logged_in:\", is_logged_in, \"| type:\", type(is_logged_in))\nprint(\"nickname:\", nickname, \"| type:\", type(nickname))\n~~~\n\n---\n\n## Why types matter\n\nTypes affect how operations behave:\n\n- numbers add like math\n- strings “add” by joining text (**concatenation**)\n- mixing incompatible types can cause errors\n\nNumbers add like math:\n\n~~~python\na = 10\nb = 5\nprint(a + b)  # 15\n~~~\n\nStrings join together:\n\n~~~python\na = \"10\"\nb = \"5\"\nprint(a + b)  # \"105\"\n~~~\n\nThat’s not math — it’s **string concatenation** (joining text with `+`).\n\n---\n\n## Try it (predict first)\n\nBefore you run this, guess the output:\n\n~~~python\nprint(10 + 5)\nprint(\"10\" + \"5\")\nprint(\"hi\" + \" there\")\n~~~\n\nThen run it and check your guesses."
+          "types_overview": {
+            "title": "What a Data Type Tells You",
+            "bodyMarkdown": "You already have labeled boxes called variables.\n\nNow the next question is:\n\n**What kind of thing is inside the box?**\n\nPython calls that a **data type**.\n\nA type tells Python what a value is and what you can do with it."
           },
-          "convert": {
-            "title": "Type Conversion: Turning Strings into Numbers",
-            "bodyMarkdown": "Here’s a classic beginner surprise.\n\n---\n\n## Heads-up: `input(...)` always returns text\n\n`input(\"...\")` asks the user a question, and the user types an answer.\n\nOne rule matters most:\n\n✅ **`input()` always returns a string (`str`).**\n\n---\n\n## Try it (see the type)\n\nRun this and type anything when prompted:\n\n~~~python\nage = input(\"Enter your age: \")\nprint(\"You typed:\", age)\nprint(\"type:\", type(age))\n~~~\n\nNo matter what you type, the type is still `str`.\n\n---\n\n## Convert the type (casting)\n\nIf you want Python to treat input as a number, you must convert it:\n\n- use `int(...)` for whole numbers\n- use `float(...)` for decimals\n\n### Convert to int (whole number)\n~~~python\nage = int(input(\"Enter your age: \"))\nprint(age + 1)\n~~~\n\n### Convert to float (decimal)\n~~~python\nprice = float(input(\"Enter price: \"))\nprint(price * 1.10)\n~~~\n\n### Convert to string (when you need text)\n~~~python\nscore = 95\nmsg = \"Your score is \" + str(score)\nprint(msg)\n~~~\n\n---\n\n## Try it (mini checkout)\n\n~~~python\nprice = float(input(\"Price: \"))\nqty = int(input(\"Quantity: \"))\ntotal = price * qty\nprint(\"Total =\", total)\n~~~\n\nRun it again with different numbers."
+          "common_types": {
+            "title": "Five Common Types",
+            "bodyMarkdown": "## 1) Integers (`int`) — whole numbers\n~~~python\nstudents = 28\n~~~\n\n## 2) Floats (`float`) — decimal numbers\n~~~python\nprice = 3.75\n~~~\n\n## 3) Strings (`str`) — text\n~~~python\nmessage = \"Welcome!\"\n~~~\n\n## 4) Booleans (`bool`) — `True` or `False`\n~~~python\nis_logged_in = True\n~~~\n\n## 5) `None` — no value yet\n~~~python\nnickname = None\n~~~\n\n`None` means there is no value stored there yet.\n\n## Try it\n\n~~~python\nstudents = 28\nprice = 3.75\nmessage = \"Welcome!\"\nis_logged_in = True\nnickname = None\n\nprint(\"students:\", students, \"| type:\", type(students))        # prints: students: 28 | type: <class 'int'>\nprint(\"price:\", price, \"| type:\", type(price))                # prints: price: 3.75 | type: <class 'float'>\nprint(\"message:\", message, \"| type:\", type(message))          # prints: message: Welcome! | type: <class 'str'>\nprint(\"is_logged_in:\", is_logged_in, \"| type:\", type(is_logged_in))  # prints: is_logged_in: True | type: <class 'bool'>\nprint(\"nickname:\", nickname, \"| type:\", type(nickname))      # prints: nickname: None | type: <class 'NoneType'>\n~~~"
+          },
+          "why_types_matter": {
+            "title": "Why Types Change the Result",
+            "bodyMarkdown": "Types affect how operations behave.\n\nNumbers add like math:\n\n~~~python\na = 10\nb = 5\nprint(a + b)          # prints: 15\n~~~\n\nStrings join together:\n\n~~~python\na = \"10\"\nb = \"5\"\nprint(a + b)          # prints: 105\n~~~\n\nThat second result is not math. It is **concatenation**, which means joining text.\n\n## Try it\n\nBefore you run this, guess the output:\n\n~~~python\nprint(10 + 5)         # prints: 15\nprint(\"10\" + \"5\")     # prints: 105\nprint(\"hi\" + \" there\") # prints: hi there\n~~~"
+          },
+          "input_and_conversion": {
+            "title": "Input and Type Conversion",
+            "bodyMarkdown": "## `input()` returns text\n\n`input(...)` asks the user for something and returns the answer as a string.\n\n~~~python\nage = input(\"Enter your age: \")\nprint(\"You typed:\", age)         # if input is 16, prints: You typed: 16\nprint(\"type:\", type(age))        # prints: type: <class 'str'>\n~~~\n\nNo matter what the user types, the result starts as `str`.\n\n## Convert to the type you need\n\nUse `int(...)` for whole numbers:\n\n~~~python\nage = int(input(\"Enter your age: \"))\nprint(age + 1)                   # if input is 16, prints: 17\n~~~\n\nUse `float(...)` for decimals:\n\n~~~python\nprice = float(input(\"Enter price: \"))\nprint(price * 1.10)              # if input is 10, prints: 11.0\n~~~\n\nUse `str(...)` when you need text:\n\n~~~python\nscore = 95\nmsg = \"Your score is \" + str(score)\nprint(msg)                       # prints: Your score is 95\n~~~\n\n## Try it\n\n~~~python\nprice = float(input(\"Price: \"))\nqty = int(input(\"Quantity: \"))\ntotal = price * qty\nprint(\"Total =\", total)         # if inputs are 2.5 and 4, prints: Total = 10.0\n~~~"
           }
         }
       }
     }
-  },
+  }
+,
 
   "quiz": {
     "m1_types_string_vs_int_sc": {
@@ -58,7 +74,7 @@
         "b": "`\"42\"`",
         "c": "`3.14`"
       },
-      "hint": "Quotes make it text (a string).",
+      "hint": "Quotes make it text.",
       "help": {
         "concept": "Strings are text values. Quotes tell Python to treat something as text, even if it looks like a number.",
         "hint_1": "Look for the value wrapped in quotes.",
@@ -73,7 +89,7 @@
         "b": "`7.0`",
         "c": "`\"7.0\"`"
       },
-      "hint": "Decimals are floats (unless they’re quoted).",
+      "hint": "Decimals are floats unless they are quoted.",
       "help": {
         "concept": "Floats are numeric values that include a decimal point.",
         "hint_1": "Look for the number with a decimal that is not quoted.",
@@ -81,33 +97,33 @@
       }
     },
     "m1_types_bool_sc": {
-      "title": "Booleans are True/False",
+      "title": "Booleans are True or False",
       "prompt": "Which value is a boolean (`bool`)?",
       "options": {
         "a": "`True`",
         "b": "`\"True\"`",
         "c": "`1.0`"
       },
-      "hint": "Booleans are the keywords True or False (without quotes).",
+      "hint": "Booleans use the special words `True` and `False` without quotes.",
       "help": {
-        "concept": "Booleans represent true/false states using the special keywords True and False.",
-        "hint_1": "The correct answer is not in quotes.",
+        "concept": "Booleans represent true-or-false states using the special keywords `True` and `False`.",
+        "hint_1": "The correct answer is not inside quotes.",
         "hint_2": "A quoted word is text, not a boolean."
       }
     },
     "m1_types_none_sc": {
-      "title": "None means “no value yet”",
+      "title": "None means no value yet",
       "prompt": "Which value represents “no value yet” in Python?",
       "options": {
         "a": "`0`",
         "b": "`\"\"` (empty string)",
         "c": "`None`"
       },
-      "hint": "None is its own special value.",
+      "hint": "`None` is its own special value.",
       "help": {
-        "concept": "None is Python’s special placeholder meaning no value has been set yet.",
+        "concept": "`None` is Python’s special placeholder meaning no value has been set yet.",
         "hint_1": "Zero and empty strings are still real values.",
-        "hint_2": "The special empty-on-purpose value is None."
+        "hint_2": "The special placeholder is `None`."
       }
     },
 
@@ -121,10 +137,10 @@
         "2": "list",
         "3": "file"
       },
-      "hint": "Even if the user types 42, it still starts as text.",
+      "hint": "Even if the user types `42`, it still starts as text.",
       "help": {
-        "concept": "input() always gives text first, so conversion is needed before numeric math.",
-        "hint_1": "Think about what type Python gives you before int(...) or float(...).",
+        "concept": "`input()` always gives text first, so conversion is needed before numeric math.",
+        "hint_1": "Think about the type you have before using `int(...)` or `float(...)`.",
         "hint_2": "The answer is string."
       }
     },
@@ -141,7 +157,7 @@
       "hint": "No decimal point.",
       "help": {
         "concept": "Integers are whole numbers without a decimal part.",
-        "hint_1": "Think of 28, not 28.5.",
+        "hint_1": "Think of `28`, not `28.5`.",
         "hint_2": "The missing word is whole."
       }
     },
@@ -155,10 +171,10 @@
         "2": "string",
         "3": "missing"
       },
-      "hint": "Think 3.75.",
+      "hint": "Think of `3.75`.",
       "help": {
         "concept": "Floats are numeric values with decimal points.",
-        "hint_1": "This is the type used for 3.75.",
+        "hint_1": "This is the type used for `3.75`.",
         "hint_2": "The answer is decimal."
       }
     },
@@ -172,11 +188,11 @@
         "2": "None",
         "3": "Float"
       },
-      "hint": "Booleans are True/False.",
+      "hint": "Booleans come in two values only.",
       "help": {
-        "concept": "Boolean values only come in two forms: True and False.",
-        "hint_1": "The missing value is the opposite of False.",
-        "hint_2": "The answer is True."
+        "concept": "Boolean values only come in two forms: `True` and `False`.",
+        "hint_1": "The missing value is the opposite of `False`.",
+        "hint_2": "The answer is `True`."
       }
     },
     "m1_types_fill_none_meaning": {
@@ -191,7 +207,7 @@
       },
       "hint": "It means empty on purpose.",
       "help": {
-        "concept": "None means there is intentionally no value stored yet.",
+        "concept": "`None` means there is intentionally no value stored yet.",
         "hint_1": "It is not the same as zero or empty text.",
         "hint_2": "The phrase is no value."
       }
@@ -205,10 +221,10 @@
         "t2": "convert it",
         "t3": "do the math"
       },
-      "hint": "You cannot do numeric math before conversion.",
+      "hint": "Numeric math comes after conversion.",
       "help": {
         "concept": "For number input, the safe pattern is read text, convert it, then compute.",
-        "hint_1": "input() comes first.",
+        "hint_1": "`input()` comes first.",
         "hint_2": "Math happens last."
       }
     },
@@ -222,11 +238,11 @@
         "t4": "bool",
         "t5": "None"
       },
-      "hint": "Follow the same order used in the sketch.",
+      "hint": "Follow the same order used in the lesson.",
       "help": {
-        "concept": "The lesson introduces the most common beginner types in a specific sequence.",
-        "hint_1": "Integers come before floats.",
-        "hint_2": "None comes last."
+        "concept": "The lesson introduces the most common types in a specific sequence.",
+        "hint_1": "`int` comes before `float`.",
+        "hint_2": "`None` comes last."
       }
     },
     "m1_types_reorder_conversion_flow": {
@@ -237,10 +253,10 @@
         "t2": "convert to the needed type",
         "t3": "use the result"
       },
-      "hint": "The conversion happens in the middle.",
+      "hint": "Conversion happens in the middle.",
       "help": {
         "concept": "Conversion connects raw user text to useful typed values.",
-        "hint_1": "Start from the raw input.",
+        "hint_1": "Start with raw input.",
         "hint_2": "Use comes after conversion."
       }
     },
@@ -254,7 +270,7 @@
       },
       "hint": "Start with what strings are.",
       "help": {
-        "concept": "Adding strings does not do arithmetic; it joins text together.",
+        "concept": "Adding strings does not do arithmetic. It joins text together.",
         "hint_1": "The type idea comes first.",
         "hint_2": "The result is concatenation."
       }
@@ -277,36 +293,36 @@
     },
 
     "m1_types_convert_next_year_code": {
-      "title": "Convert age to int and compute next year",
+      "title": "Convert age and compute next year",
       "prompt": "A signup form collects:\n1) name\n2) age\n\nRead TWO inputs:\n- name (text)\n- age (text, but it represents a number)\n\nConvert age to an integer, then print EXACTLY:\nHi <name>! Next year you'll be <age+1>.",
-      "hint": "age = int(age)",
+      "hint": "Use `int(age)` before adding 1.",
       "starterCode": "name = input()\nage = input()\n",
       "help": {
         "concept": "This checks whether you know that input starts as text and must be converted before arithmetic.",
-        "hint_1": "Leave the name as text.",
-        "hint_2": "Convert age with int(...) before adding 1."
+        "hint_1": "Keep the name as text.",
+        "hint_2": "Convert age with `int(...)` before adding 1."
       }
     },
     "m1_types_tip_total_code": {
-      "title": "Restaurant tip + total (ints)",
+      "title": "Restaurant tip and total",
       "prompt": "A restaurant app asks for:\n1) bill (integer)\n2) tip percent (integer)\n\nCompute:\ntip = bill * pct // 100\ntotal = bill + tip\n\nPrint EXACTLY:\nTip = <tip>\nTotal = <total>",
-      "hint": "Use integer math: // 100",
+      "hint": "Use integer math with `// 100`.",
       "starterCode": "bill = int(input())\npct = int(input())\n",
       "help": {
         "concept": "This checks type conversion, integer math, and exact output formatting.",
-        "hint_1": "Compute tip first using floor division by 100.",
-        "hint_2": "Then add tip to bill and print both lines exactly."
+        "hint_1": "Compute the tip first.",
+        "hint_2": "Then add it to the bill and print both lines exactly."
       }
     },
     "m1_types_c_to_f_code": {
-      "title": "Celsius → Fahrenheit",
-      "prompt": "A weather station gives Celsius as an integer C.\n\nRead ONE integer C.\nCompute:\nF = C * 9/5 + 32\n\nPrint ONLY F.",
-      "hint": "f = int(c * 9 / 5 + 32)",
+      "title": "Celsius to Fahrenheit",
+      "prompt": "A weather station gives Celsius as an integer `C`.\n\nRead ONE integer `C`.\nCompute:\nF = C * 9/5 + 32\n\nPrint ONLY `F`.",
+      "hint": "Use `f = int(c * 9 / 5 + 32)`.",
       "starterCode": "c = int(input())\n",
       "help": {
-        "concept": "This checks reading one integer, applying a formula, and printing the computed result.",
+        "concept": "This checks reading one integer, applying a formula, and printing the result.",
         "hint_1": "Use the Celsius-to-Fahrenheit formula exactly.",
-        "hint_2": "Convert the final result to int before printing."
+        "hint_2": "Convert the final result to `int` before printing."
       }
     }
   }

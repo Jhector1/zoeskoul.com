@@ -4,45 +4,68 @@
       "python-2": {
         "lists_basics": {
           "label": "Lists: Store Many Values",
-          "summary": "Create lists, index items, append/remove values, and loop through lists to compute totals and averages.",
+          "summary": "Create lists, access items by index, add or remove values, and loop through lists to compute totals and averages.",
           "cards": {
-            "sketch": {
-              "title": "Lists (create, index, append/remove, loop)"
+            "sketch0": {
+              "title": "What Lists Are"
             },
-            "quiz": {
-              "title": "Project: Cart lists (sum/avg → max → names list)"
+            "sketch1": {
+              "title": "Indexing and Length"
+            },
+            "sketch2": {
+              "title": "Changing a List"
+            },
+            "sketch3": {
+              "title": "Looping Through Lists"
+            },
+            "project": {
+              "title": "Project: Sum, max, and names lists"
             }
           },
           "projectSteps": {
             "sum_avg_3": {
-              "title": "3 prices → sum + average"
+              "title": "3 prices → sum and average"
             },
             "max_of_4": {
               "title": "4 numbers → max"
             },
             "names_2": {
-              "title": "2 names → list + index print"
+              "title": "2 names → list and indexed print"
             }
           }
         }
       }
     }
   },
+
   "sketches": {
     "python": {
       "python-2": {
         "lists_basics": {
-          "basics": {
-            "title": "Lists: Your First Real Collection of Many Values",
-            "bodyMarkdown": "So far, your variables usually hold **one** value:\n\n~~~python\nname = \"Maya\"\nage = 16\n~~~\n\nBut real programs rarely work with only one thing.\n\nThey deal with **collections**:\n\n- many names\n- many scores\n- many items in a cart\n- many temperatures across a week\n\nThat’s what a **list** is for.\n\nThink of a list like a backpack:\n\n- it holds multiple items\n- you can add, remove, and check what’s inside\n- you can pull out a specific item when you need it\n\n---\n\n## Creating a list\n\nLists use square brackets `[ ... ]`.\n\n~~~python\ncolors = [\"red\", \"blue\", \"green\"]\nscores = [90, 82, 76]\n~~~\n\nA list can hold strings, numbers, booleans—almost anything.\n\n(You *can* mix types, but most of the time you keep lists consistent: all names, all scores, etc.)\n\n---\n\n## Indexing: grab one item\n\nLists use indexes starting at `0`, just like strings:\n\n~~~python\ncolors = [\"red\", \"blue\", \"green\"]\n\nprint(colors[0])   # red\nprint(colors[1])   # blue\nprint(colors[-1])  # green (last item)\n~~~\n\n---\n\n## Try it\n\n~~~python\ncolors = [\"red\", \"blue\", \"green\", \"yellow\"]\n\nprint(\"first:\", colors[0])\nprint(\"last:\", colors[-1])\n~~~\n\nChange the list and run again.\n\n---\n\n## How many items? `len(...)`\n\n`len(list)` tells you the number of items in the list.\n\n~~~python\ncolors = [\"red\", \"blue\", \"green\"]\nprint(len(colors))  # 3\n~~~\n\nThis becomes very important for totals, averages, and loops.\n\n---\n\n## Adding items: `append()`\n\n`append` adds an item to the end of the list.\n\n~~~python\ntasks = []\ntasks.append(\"study\")\ntasks.append(\"eat\")\nprint(tasks)\n~~~\n\n---\n\n## Removing items\n\n### Remove by value: `remove()`\n\n~~~python\ntasks = [\"study\", \"eat\", \"sleep\"]\ntasks.remove(\"eat\")\nprint(tasks)\n~~~\n\n⚠️ If the value isn’t in the list, Python will raise an error.\n\n---\n\n### Remove by position: `pop()` (quick mention)\n\n`pop()` removes an item by index (position).\n\n~~~python\ntasks = [\"study\", \"eat\", \"sleep\"]\ntasks.pop(1)        # removes \"eat\"\nprint(tasks)\n~~~\n\n---\n\n## Looping through a list (this is the big use)\n\nLoops + lists is where programming starts to feel powerful.\n\n~~~python\nscores = [90, 82, 76]\n\nfor s in scores:\n    print(\"score:\", s)\n~~~\n\n---\n\n## Mini-Project: Average Score\n\nWe combine:\n- list + loop + math + output\n\n~~~python\nscores = [90, 82, 76, 100]\ntotal = 0\n\nfor s in scores:\n    total = total + s\n\navg = total / len(scores)\nprint(\"average =\", avg)\n~~~\n\nTry changing the numbers.\n\n---\n\n## Lists + input: build your own list\n\n~~~python\nnames = []\n\nfor i in range(3):\n    n = input(\"Enter a name: \").strip()\n    names.append(n)\n\nprint(\"names:\", names)\n~~~\n\nTry changing `3` to `5` and run again.\n\n---\n\n## What you unlocked\n\nLists let you store **many values** and then:\n\n- loop through them\n- compute totals and averages\n- build small datasets from user input\n\nNext up: **Functions** — because once you repeat patterns (average, input loops, menus), you’ll want a reusable “machine.”"
+          "lists_intro": {
+            "title": "What Lists Are",
+            "bodyMarkdown": "So far, most variables have stored **one** value.\n\n~~~python\nname = \"Maya\"\nage = 16\n~~~\n\nBut real programs often work with collections:\n\n- many names\n- many scores\n- many cart items\n- many temperatures\n\nThat is what a **list** is for.\n\nA list holds many values in one place.\n\n## Creating a list\n\nLists use square brackets.\n\n~~~python\ncolors = [\"red\", \"blue\", \"green\"]\nscores = [90, 82, 76]\n~~~\n\nA list can hold strings, numbers, booleans, and more.\n\nMost of the time, it is best to keep one list consistent, such as all names or all scores."
+          },
+          "indexing_and_length": {
+            "title": "Indexing and Length",
+            "bodyMarkdown": "## Indexing\n\nLists use indexes starting at `0`, just like strings.\n\n~~~python\ncolors = [\"red\", \"blue\", \"green\"]\n\nprint(colors[0])   # prints: red\nprint(colors[1])   # prints: blue\nprint(colors[-1])  # prints: green\n~~~\n\n## Try it\n\n~~~python\ncolors = [\"red\", \"blue\", \"green\", \"yellow\"]\n\nprint(\"first:\", colors[0])  # prints: first: red\nprint(\"last:\", colors[-1])  # prints: last: yellow\n~~~\n\n## `len(...)`\n\n`len(list)` tells you how many items are in the list.\n\n~~~python\ncolors = [\"red\", \"blue\", \"green\"]\nprint(len(colors))  # prints: 3\n~~~\n\nThat becomes useful for totals, averages, and loops."
+          },
+          "editing_lists": {
+            "title": "Changing a List",
+            "bodyMarkdown": "## Adding items with `append()`\n\n`append()` adds one item to the end of the list.\n\n~~~python\ntasks = []\ntasks.append(\"study\")\ntasks.append(\"eat\")\nprint(tasks)  # prints: ['study', 'eat']\n~~~\n\n## Removing by value with `remove()`\n\n~~~python\ntasks = [\"study\", \"eat\", \"sleep\"]\ntasks.remove(\"eat\")\nprint(tasks)  # prints: ['study', 'sleep']\n~~~\n\nIf the value is not in the list, Python raises an error.\n\n## Removing by position with `pop()`\n\n~~~python\ntasks = [\"study\", \"eat\", \"sleep\"]\ntasks.pop(1)  # removes \"eat\"\nprint(tasks)  # prints: ['study', 'sleep']\n~~~\n\n`remove()` deletes by value.\n`pop()` deletes by index."
+          },
+          "looping_lists": {
+            "title": "Looping Through Lists",
+            "bodyMarkdown": "## Looping through a list\n\nLists become much more useful when you loop through them.\n\n~~~python\nscores = [90, 82, 76]\n\nfor s in scores:\n    print(\"score:\", s)  # prints each score on its own line\n~~~\n\n## Average score example\n\n~~~python\nscores = [90, 82, 76, 100]\ntotal = 0\n\nfor s in scores:\n    total = total + s\n\navg = total / len(scores)\nprint(\"average =\", avg)  # prints: average = 87.0\n~~~\n\n## Building a list from input\n\n~~~python\nnames = []\n\nfor i in range(3):\n    n = input(\"Enter a name: \").strip()\n    names.append(n)\n\nprint(\"names:\", names)  # example: names: ['Maya', 'Ayo', 'Lee']\n~~~\n\n## Main idea\n\nLists let you store many values and then:\n\n- loop through them\n- compute totals and averages\n- build small datasets from input"
           }
         }
       }
     }
   },
+
   "quiz": {
     "m2_list_three_prices_sum_avg_code": {
-      "title": "Cart list: sum + average (3 prices)",
+      "title": "Cart list: sum and average (3 prices)",
       "prompt": "Read THREE integer prices.\nStore them in a list.\n\nCompute:\n- sum of prices\n- average as floor integer using `// 3`\n\nPrint exactly:\nsum = <sum>\navg = <avg>",
       "hint": "Use a list, then sum with `sum(...)` or a loop.",
       "starterCode": "# TODO: read 3 prices\n# TODO: store in a list\n# TODO: compute sum and avg",
@@ -70,7 +93,7 @@
       "starterCode": "# TODO: read two names\n# TODO: store into list\n# TODO: print names[0] and names[1] lines",
       "help": {
         "concept": "This checks whether you can create a list, preserve order, and access elements by index.",
-        "hint_1": "Store first and second in a list in the same order they were read.",
+        "hint_1": "Store `first` and `second` in a list in the same order they were read.",
         "hint_2": "Print the two index lines exactly."
       }
     },
@@ -95,7 +118,7 @@
       "prompt": "If `scores = [90, 82, 76]`, what is `len(scores)`?",
       "hint": "`len(...)` counts the items.",
       "help": {
-        "concept": "len(list) returns the number of items in the list.",
+        "concept": "`len(list)` returns the number of items in the list.",
         "hint_1": "Count how many scores are shown.",
         "hint_2": "There are three items."
       },
@@ -110,9 +133,9 @@
       "prompt": "Which line adds one item to the end of a list called `tasks`?",
       "hint": "Use the list method that means “add to the end.”",
       "help": {
-        "concept": "append adds one new item to the end of a list.",
+        "concept": "`append` adds one new item to the end of a list.",
         "hint_1": "It is a list method.",
-        "hint_2": "The method name is append."
+        "hint_2": "The method name is `append`."
       },
       "options": {
         "a": "tasks.add(\"study\")",
@@ -142,9 +165,9 @@
       "prompt": "Choose all true statements.",
       "hint": "Think about adding and removing items from a list.",
       "help": {
-        "concept": "append adds to the end, remove deletes by value, and pop deletes by index.",
-        "hint_1": "append does not remove anything.",
-        "hint_2": "remove and pop work differently."
+        "concept": "`append` adds to the end, `remove` deletes by value, and `pop` deletes by index.",
+        "hint_1": "`append` does not remove anything.",
+        "hint_2": "`remove` and `pop` work differently."
       },
       "options": {
         "a": "`.append(x)` adds `x` to the end of the list.",
@@ -233,7 +256,7 @@
       },
       "hint": "Think count.",
       "help": {
-        "concept": "len counts how many elements are in the list.",
+        "concept": "`len` counts how many elements are in the list.",
         "hint_1": "It gives a count.",
         "hint_2": "The answer is items."
       }
@@ -250,7 +273,7 @@
       },
       "hint": "It adds after the current last item.",
       "help": {
-        "concept": "append adds one new element at the end of a list.",
+        "concept": "`append` adds one new element at the end of a list.",
         "hint_1": "It does not insert at the front.",
         "hint_2": "The answer is end."
       }
@@ -328,7 +351,7 @@
       "hint": "Move from collection to position to access.",
       "help": {
         "concept": "Indexing works because ordered collections give each item a position.",
-        "hint_1": "Start from the big idea that lists hold many things.",
+        "hint_1": "Start with the big idea that lists hold many things.",
         "hint_2": "Access comes after positions exist."
       }
     }

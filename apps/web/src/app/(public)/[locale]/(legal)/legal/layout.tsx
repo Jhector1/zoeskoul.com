@@ -10,7 +10,7 @@ export default function LegalLayout({ children }: { children: ReactNode }) {
             <HeaderSlick
                 isBillingStatus={false}
                 brand={process.env.NEXT_PUBLIC_APP_NAME}
-                badge="MVP"
+                badge=""
                 // isUser={true}
                 // isNav={false}
             />
