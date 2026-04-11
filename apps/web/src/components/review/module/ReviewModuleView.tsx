@@ -17,7 +17,7 @@ import { cn } from "@/lib/cn";
 
 import TopicShell from "./components/TopicShell";
 import TopicOutro from "./components/TopicOutro";
-import ModuleSidebar from "./components/ModuleSidebar";
+import ModuleSidebar, { type SidebarTopicItemVm } from "./components/ModuleSidebar";
 import ToolsPanel from "@/components/tools/ToolsPanel";
 
 import CardRenderer from "@/components/review/module/CardRenderer";
@@ -57,6 +57,17 @@ import {
     STUDENTS_SQL_SCHEMA,
     STUDENTS_SQL_SEED,
 } from "./data/studentsSqlFallback";
+
+const TOPIC_PANE_ANIM = {
+    initial: { opacity: 0, y: 10 },
+    animate: { opacity: 1, y: 0 },
+    exit: { opacity: 0, y: -6 },
+};
+
+const TOPIC_PANE_TRANSITION = {
+    duration: 0.22,
+    ease: [0.16, 1, 0.3, 1] as const,
+};
 
 export default function ReviewModuleView({
                                              mod,
@@ -112,6 +123,7 @@ export default function ReviewModuleView({
 
     const panels = useResizablePanels();
     const sketch = useDebouncedSketchState({ setProgress, viewTid });
+
     const toolDefaults = useMemo(
         () =>
             resolveToolDefaults({
@@ -148,13 +160,25 @@ export default function ReviewModuleView({
     }, [topicRuntime, toolDefaults.defaultSqlDialect]);
 
     const reduceMotion = useReduceMotion();
+
+    const moduleComplete = useMemo(() => {
+        if (!topics.length) return false;
+        return topics.every((t) => {
+            const cards = Array.isArray(t.cards) ? t.cards : [];
+            const tstate = (progress as any)?.topics?.[t.id];
+            return isTopicComplete(cards, tstate);
+        });
+    }, [topics, progress]);
+
     const subjectFinish = useSubjectFinish({
         subjectSlug,
         moduleSlug,
         enabled: Boolean(subjectSlug && moduleSlug),
         refreshKey:
             progressHydrated &&
-            `${subjectSlug}:${moduleSlug}:${String(moduleCompleteFromProgress(progress, topics))}:${String((progress as any)?.moduleCompleted)}`,
+            `${subjectSlug}:${moduleSlug}:${String(moduleCompleteFromProgress(progress, topics))}:${String(
+                (progress as any)?.moduleCompleted,
+            )}`,
     });
 
     const handleEnsureToolsVisible = useCallback(() => {
@@ -188,14 +212,18 @@ export default function ReviewModuleView({
         [tool.setToolStdin],
     );
 
-    const restoreActivityKeyRef = useRef<string>("");
+    const handleBeforeRun = useCallback(() => {
+        tool.flushLatest();
+    }, [tool.flushLatest]);
+
     const [activeCardIndex, setActiveCardIndex] = useState(0);
+    const restoreActivityKeyRef = useRef<string>("");
 
     const viewProg: any = (progress as any)?.topics?.[viewTid] ?? {};
     const moduleV = (progress as any)?.quizVersion ?? 0;
     const topicV = (viewProg as any)?.quizVersion ?? 0;
     const versionStr = `${moduleV}.${topicV}`;
-    const topicRenderKey = `${viewTid}:${versionStr}`;
+    const topicMotionKey = `${viewTid}:${versionStr}`;
 
     const activeIdx = useMemo(() => {
         const i = topics.findIndex((t) => t.id === activeTopicId);
@@ -212,15 +240,6 @@ export default function ReviewModuleView({
             return isTopicComplete(prev.cards ?? [], prevState);
         };
     }, [topics, progress, unlockAll]);
-
-    const moduleComplete = useMemo(() => {
-        if (!topics.length) return false;
-        return topics.every((t) => {
-            const cards = Array.isArray(t.cards) ? t.cards : [];
-            const tstate = (progress as any)?.topics?.[t.id];
-            return isTopicComplete(cards, tstate);
-        });
-    }, [topics, progress]);
 
     useEffect(() => {
         const down = () => ((window as any).__flowPointerDown = true);
@@ -326,7 +345,7 @@ export default function ReviewModuleView({
     const navError = nav === null;
     const hasNextModule = !!nav && !!nav.nextModuleId;
 
-    async function handleAssignmentClick() {
+    const handleAssignmentClick = useCallback(async () => {
         const returnToCurrentModule = `/${locale}/${ROUTES.learningPath(
             encodeURIComponent(subjectSlug),
             encodeURIComponent(moduleSlug),
@@ -374,7 +393,18 @@ export default function ReviewModuleView({
             `?sessionId=${encodeURIComponent(newSid)}` +
             `&returnTo=${encodeURIComponent(returnToCurrentModule)}`,
         );
-    }
+    }, [
+        locale,
+        subjectSlug,
+        moduleSlug,
+        assignmentSessionId,
+        assignmentStatus.phase,
+        router,
+        mod,
+        progress,
+        setProgress,
+        flushNow,
+    ]);
 
     const [confirmOpen, setConfirmOpen] = useState(false);
     const [pending, setPending] = useState<null | { kind: "module" | "topic"; tid?: string }>(
@@ -415,12 +445,12 @@ export default function ReviewModuleView({
         };
     }, [pending, progress, topics]);
 
-    function cancelPendingChange() {
+    const cancelPendingChange = useCallback(() => {
         setConfirmOpen(false);
         setPending(null);
-    }
+    }, []);
 
-    function applyPendingChange() {
+    const applyPendingChange = useCallback(() => {
         if (!pending) return;
 
         tool.unbindCodeInput();
@@ -471,18 +501,28 @@ export default function ReviewModuleView({
         });
 
         cancelPendingChange();
-    }
+    }, [
+        pending,
+        tool.unbindCodeInput,
+        firstTopicId,
+        progress,
+        setProgress,
+        setActiveTopicId,
+        setViewTopicId,
+        flushNow,
+        cancelPendingChange,
+    ]);
 
-    function requestResetModule() {
+    const requestResetModule = useCallback(() => {
         setPending({ kind: "module" });
         setConfirmOpen(true);
-    }
+    }, []);
 
-    function requestResetTopic(tid: string) {
+    const requestResetTopic = useCallback((tid: string) => {
         if (!tid) return;
         setPending({ kind: "topic", tid });
         setConfirmOpen(true);
-    }
+    }, []);
 
     const mainScrollRef = useRef<HTMLElement | null>(null);
 
@@ -513,18 +553,21 @@ export default function ReviewModuleView({
 
     useEffect(() => {
         cardElRef.current.clear();
-    }, [viewTid, topicRenderKey]);
+    }, [topicMotionKey]);
 
-    function isQuizLikeCard(c: ReviewCard) {
+    const isQuizLikeCard = useCallback((c: ReviewCard) => {
         return c.type === "quiz" || c.type === "project";
-    }
+    }, []);
 
-    function isCardDone(c: ReviewCard, tp0: any) {
-        if (isQuizLikeCard(c)) return Boolean(tp0?.quizzesDone?.[c.id]);
-        return Boolean(tp0?.cardsDone?.[c.id]);
-    }
+    const isCardDone = useCallback(
+        (c: ReviewCard, tp0: any) => {
+            if (isQuizLikeCard(c)) return Boolean(tp0?.quizzesDone?.[c.id]);
+            return Boolean(tp0?.cardsDone?.[c.id]);
+        },
+        [isQuizLikeCard],
+    );
 
-    function userIsInteracting() {
+    const userIsInteracting = useCallback(() => {
         if (typeof window !== "undefined" && (window as any).__flowPointerDown) return true;
 
         const sel = typeof window !== "undefined" ? window.getSelection?.() : null;
@@ -539,9 +582,9 @@ export default function ReviewModuleView({
         if (ae.isContentEditable) return true;
 
         return false;
-    }
+    }, []);
 
-    function visibleRatio(el: HTMLElement, container: HTMLElement) {
+    const visibleRatio = useCallback((el: HTMLElement, container: HTMLElement) => {
         const r = el.getBoundingClientRect();
         const c = container.getBoundingClientRect();
 
@@ -551,9 +594,9 @@ export default function ReviewModuleView({
         const h = Math.max(1, r.height);
 
         return visPx / h;
-    }
+    }, []);
 
-    function focusPrimaryAction(root: HTMLElement) {
+    const focusPrimaryAction = useCallback((root: HTMLElement) => {
         const preferred =
             root.querySelector<HTMLElement>(
                 'button[data-flow-focus]:not([disabled]),' +
@@ -569,7 +612,7 @@ export default function ReviewModuleView({
             );
 
         preferred?.focus({ preventScroll: true } as any);
-    }
+    }, []);
 
     const scrollToCardId = useCallback(
         (id: string) => {
@@ -599,7 +642,7 @@ export default function ReviewModuleView({
             if (reduceMotion || !needsScroll) requestAnimationFrame(focusLater);
             else window.setTimeout(focusLater, 250);
         },
-        [reduceMotion],
+        [reduceMotion, userIsInteracting, visibleRatio, focusPrimaryAction],
     );
 
     const findCurrentActivityCardId = useCallback(
@@ -617,7 +660,7 @@ export default function ReviewModuleView({
 
             return viewCards[viewCards.length - 1]?.id ?? null;
         },
-        [viewTid, viewCards, unlockAll],
+        [viewTid, viewCards, unlockAll, isCardDone, isQuizLikeCard],
     );
 
     const findCurrentActivityCardIndex = useCallback(
@@ -629,73 +672,41 @@ export default function ReviewModuleView({
         [findCurrentActivityCardId, viewCards],
     );
 
-    function findNextActionableCardIndex(fromIndex: number, nextProgress: any) {
-        const tp0 = nextProgress?.topics?.[viewTid] ?? {};
-        const prereqsAllQuizzes = unlockAll ? true : prereqsMetForAnyQuizOrProject(viewCards, tp0);
+    const findNextActionableCardIndex = useCallback(
+        (fromIndex: number, nextProgress: any) => {
+            const tp0 = nextProgress?.topics?.[viewTid] ?? {};
+            const prereqsAllQuizzes = unlockAll ? true : prereqsMetForAnyQuizOrProject(viewCards, tp0);
 
-        for (let i = fromIndex + 1; i < viewCards.length; i++) {
-            const c = viewCards[i];
-            if (isCardDone(c, tp0)) continue;
-            if (isQuizLikeCard(c) && !prereqsAllQuizzes) continue;
-            return i;
-        }
+            for (let i = fromIndex + 1; i < viewCards.length; i++) {
+                const c = viewCards[i];
+                if (isCardDone(c, tp0)) continue;
+                if (isQuizLikeCard(c) && !prereqsAllQuizzes) continue;
+                return i;
+            }
 
-        return -1;
-    }
+            return -1;
+        },
+        [viewTid, unlockAll, viewCards, isCardDone, isQuizLikeCard],
+    );
 
-    function scrollToNextActionable(fromIndex: number, nextProgress: any) {
-        const nextIndex = findNextActionableCardIndex(fromIndex, nextProgress);
-        if (nextIndex < 0) return;
+    const scrollToNextActionable = useCallback(
+        (fromIndex: number, nextProgress: any) => {
+            const nextIndex = findNextActionableCardIndex(fromIndex, nextProgress);
+            if (nextIndex < 0) return;
 
-        if (navModes.cards === "slideshow") {
-            setActiveCardIndex(nextIndex);
-            return;
-        }
+            if (navModes.cards === "slideshow") {
+                setActiveCardIndex(nextIndex);
+                return;
+            }
 
-        const nextCard = viewCards[nextIndex];
-        if (!nextCard) return;
-        requestAnimationFrame(() => scrollToCardId(nextCard.id));
-    }
+            const nextCard = viewCards[nextIndex];
+            if (!nextCard) return;
+            requestAnimationFrame(() => scrollToCardId(nextCard.id));
+        },
+        [findNextActionableCardIndex, navModes.cards, viewCards, scrollToCardId],
+    );
 
-    if (!topics.length) {
-        return (
-            <div className="h-full w-full p-6 text-sm text-neutral-600 dark:text-white/70">
-                This module has no topics yet.
-            </div>
-        );
-    }
-
-    const viewIsComplete = isTopicComplete(viewCards, (progress as any)?.topics?.[viewTid]);
-    const viewIdx = topics.findIndex((t) => t.id === viewTid);
-    const prevTopic = viewIdx > 0 ? topics[viewIdx - 1] : null;
-    const nextTopic = viewIdx >= 0 ? topics[viewIdx + 1] : null;
-
-    function goToTopic(tid: string) {
-        if (!tid) return;
-        const idx = topics.findIndex((x) => x.id === tid);
-        if (idx < 0) return;
-
-        if (!unlockAll) {
-            const isEarlierOrActive = idx <= activeIdx;
-            const canGoForward = topicUnlocked(tid);
-            if (!isEarlierOrActive && !canGoForward) return;
-        }
-
-        if (idx > activeIdx) setActiveTopicId(tid);
-        setViewTopicId(tid);
-    }
-
-    function goPrevTopic() {
-        if (!prevTopic?.id) return;
-        goToTopic(prevTopic.id);
-    }
-
-    function goNextTopic() {
-        if (!nextTopic?.id) return;
-        goToTopic(nextTopic.id);
-    }
-
-    const commitProgress = React.useCallback(
+    const commitProgress = useCallback(
         (updater: (p: any) => any) => {
             setProgress((p: any) => {
                 const next = updater(p);
@@ -719,11 +730,9 @@ export default function ReviewModuleView({
     const tp: any = (progress as any)?.topics?.[viewTid] ?? {};
     const prereqsForAllQuizzes = unlockAll ? true : prereqsMetForAnyQuizOrProject(viewCards, tp);
 
-    const swapKey = `${subjectSlug}:${moduleSlug}:${locale}:${viewTid}:${versionStr}`;
-
     const showSkeleton = useSkeletonGate({
         ready: progressHydrated,
-        swapKey,
+        swapKey: `${subjectSlug}:${moduleSlug}:${locale}`,
         reduceMotion,
         initialMinMs: 240,
         swapMs: 170,
@@ -748,7 +757,7 @@ export default function ReviewModuleView({
         if (!viewTid) return;
         if (userIsInteracting()) return;
 
-        const restoreKey = `${swapKey}:restore`;
+        const restoreKey = `${subjectSlug}:${moduleSlug}:${topicMotionKey}:restore`;
         if (restoreActivityKeyRef.current === restoreKey) return;
         restoreActivityKeyRef.current = restoreKey;
 
@@ -768,13 +777,16 @@ export default function ReviewModuleView({
     }, [
         progressHydrated,
         showSkeleton,
-        swapKey,
+        subjectSlug,
+        moduleSlug,
+        topicMotionKey,
         viewTid,
         progress,
         findCurrentActivityCardId,
         findCurrentActivityCardIndex,
         scrollToCardId,
         navModes.cards,
+        userIsInteracting,
     ]);
 
     const handleBack = useCallback(() => {
@@ -792,6 +804,103 @@ export default function ReviewModuleView({
         scrollPaddingBottom: footerPad || undefined,
         ["--flow-bottom-inset" as any]: `${footerPad || 0}px`,
     } as React.CSSProperties;
+
+    if (!topics.length) {
+        return (
+            <div className="h-full w-full p-6 text-sm text-neutral-600 dark:text-white/70">
+                This module has no topics yet.
+            </div>
+        );
+    }
+
+    const viewIsComplete = isTopicComplete(viewCards, (progress as any)?.topics?.[viewTid]);
+    const viewIdx = topics.findIndex((t) => t.id === viewTid);
+    const prevTopic = viewIdx > 0 ? topics[viewIdx - 1] : null;
+    const nextTopic = viewIdx >= 0 ? topics[viewIdx + 1] : null;
+
+    const goToTopic = useCallback(
+        (tid: string) => {
+            if (!tid) return;
+            const idx = topics.findIndex((x) => x.id === tid);
+            if (idx < 0) return;
+
+            if (!unlockAll) {
+                const isEarlierOrActive = idx <= activeIdx;
+                const canGoForward = topicUnlocked(tid);
+                if (!isEarlierOrActive && !canGoForward) return;
+            }
+
+            if (idx > activeIdx) setActiveTopicId(tid);
+            setViewTopicId(tid);
+        },
+        [topics, unlockAll, activeIdx, topicUnlocked, setActiveTopicId, setViewTopicId],
+    );
+
+    const goPrevTopic = useCallback(() => {
+        if (!prevTopic?.id) return;
+        goToTopic(prevTopic.id);
+    }, [prevTopic?.id, goToTopic]);
+
+    const goNextTopic = useCallback(() => {
+        if (!nextTopic?.id) return;
+        goToTopic(nextTopic.id);
+    }, [nextTopic?.id, goToTopic]);
+
+    const handleResetCurrentTopic = useCallback(() => {
+        requestResetTopic(viewTid);
+    }, [requestResetTopic, viewTid]);
+
+    const handleOpenCertificate = useCallback(() => {
+        router.push(`/subjects/${encodeURIComponent(subjectSlug)}/certificate`);
+    }, [router, subjectSlug]);
+
+    const handleToggleLeftPanel = useCallback(() => {
+        if (showDesktopLeft) panels.setLeftCollapsed((v) => !v);
+        else setMobileTopicsOpen(true);
+    }, [showDesktopLeft, panels.setLeftCollapsed]);
+
+    const handleToggleRightPanel = useCallback(() => {
+        panels.setRightCollapsed((v) => !v);
+    }, [panels.setRightCollapsed]);
+
+    const handleCollapseLeft = useCallback(() => {
+        panels.setLeftCollapsed(true);
+    }, [panels.setLeftCollapsed]);
+
+    const handleCollapseRight = useCallback(() => {
+        panels.setRightCollapsed(true);
+    }, [panels.setRightCollapsed]);
+
+    const sidebarTopicItems = useMemo<SidebarTopicItemVm[]>(() => {
+        return topics.map((t, idx) => {
+            const isEarlierOrActive = idx <= activeIdx;
+            const canGoForward = topicUnlocked(t.id);
+            const disabled = unlockAll ? false : !isEarlierOrActive && !canGoForward;
+
+            const done = progressHydrated
+                ? isTopicComplete((t.cards ?? []) as ReviewCard[], (progress as any)?.topics?.[t.id])
+                : false;
+
+            return {
+                id: t.id,
+                label: t.label ?? "",
+                summary: t.summary ?? null,
+                disabled,
+                done,
+                isViewing: viewTopicId === t.id,
+                isActive: activeTopicId === t.id,
+            };
+        });
+    }, [
+        topics,
+        activeIdx,
+        activeTopicId,
+        viewTopicId,
+        topicUnlocked,
+        unlockAll,
+        progressHydrated,
+        progress,
+    ]);
 
     const content = (
         <div
@@ -824,16 +933,10 @@ export default function ReviewModuleView({
             >
                 <div className="p-3" style={padStyle}>
                     <ModuleSidebar
-                        progressHydrated={progressHydrated}
                         mod={mod}
-                        topics={topics}
-                        progress={progress}
-                        activeIdx={activeIdx}
-                        activeTopicId={activeTopicId}
-                        viewTopicId={viewTopicId}
+                        topicItems={sidebarTopicItems}
                         unlockAll={unlockAll}
                         moduleProgress={moduleProgress}
-                        topicUnlocked={topicUnlocked}
                         onGoToTopic={(tid) => {
                             goToTopic(tid);
                             setMobileTopicsOpen(false);
@@ -900,10 +1003,7 @@ export default function ReviewModuleView({
 
                                             <button
                                                 type="button"
-                                                onClick={() => {
-                                                    if (showDesktopLeft) panels.setLeftCollapsed((v) => !v);
-                                                    else setMobileTopicsOpen(true);
-                                                }}
+                                                onClick={handleToggleLeftPanel}
                                                 className="ui-btn ui-btn-secondary text-xs font-extrabold whitespace-nowrap"
                                                 title="Topics"
                                             >
@@ -917,7 +1017,7 @@ export default function ReviewModuleView({
                                             {toolsUiEnabled ? (
                                                 <button
                                                     type="button"
-                                                    onClick={() => panels.setRightCollapsed((v) => !v)}
+                                                    onClick={handleToggleRightPanel}
                                                     className="ui-btn ui-btn-secondary text-xs font-extrabold whitespace-nowrap"
                                                     title="Tools"
                                                 >
@@ -927,7 +1027,7 @@ export default function ReviewModuleView({
 
                                             <button
                                                 type="button"
-                                                onClick={() => requestResetTopic(viewTid)}
+                                                onClick={handleResetCurrentTopic}
                                                 className="ui-btn ui-btn-secondary text-xs font-extrabold whitespace-nowrap hidden sm:inline-flex"
                                             >
                                                 Reset topic
@@ -981,19 +1081,13 @@ export default function ReviewModuleView({
                                             >
                                                 <div className="h-full min-h-0 overflow-auto" style={padStyle}>
                                                     <ModuleSidebar
-                                                        progressHydrated={progressHydrated}
                                                         mod={mod}
-                                                        topics={topics}
-                                                        progress={progress}
-                                                        activeIdx={activeIdx}
-                                                        activeTopicId={activeTopicId}
-                                                        viewTopicId={viewTopicId}
+                                                        topicItems={sidebarTopicItems}
                                                         unlockAll={unlockAll}
                                                         moduleProgress={moduleProgress}
-                                                        topicUnlocked={topicUnlocked}
                                                         onGoToTopic={goToTopic}
                                                         onResetModule={requestResetModule}
-                                                        onCollapse={() => panels.setLeftCollapsed(true)}
+                                                        onCollapse={handleCollapseLeft}
                                                         assignmentPct={assignmentRightPct}
                                                         assignmentMissedPct={assignmentMissedPct}
                                                         assignmentLabel={assignmentLabel}
@@ -1026,10 +1120,7 @@ export default function ReviewModuleView({
                                             <div className="mb-3 flex gap-2">
                                                 <button
                                                     type="button"
-                                                    onClick={() => {
-                                                        if (showDesktopLeft) panels.setLeftCollapsed(false);
-                                                        else setMobileTopicsOpen(true);
-                                                    }}
+                                                    onClick={handleToggleLeftPanel}
                                                     className="ui-btn ui-btn-secondary text-xs font-extrabold"
                                                 >
                                                     Topics ▶
@@ -1038,141 +1129,32 @@ export default function ReviewModuleView({
                                         ) : null}
 
                                         <TopicShell title={viewTopic?.label ?? ""} subtitle={viewTopic?.summary ?? null}>
-                                            <div className="flex h-full min-h-0 flex-col">
-                                                <FlowNavigator
-                                                    key={topicRenderKey}
-                                                    items={viewCards}
-                                                    mode={navModes.cards}
-                                                    activeIndex={activeCardIndex}
-                                                    onActiveIndexChange={setActiveCardIndex}
-                                                    reduceMotion={reduceMotion}
-                                                    getKey={(card: any) => card.id}
-                                                    getProgressLabel={(index, total) => `Item ${index + 1} of ${total}`}
-                                                    canGoPrev={activeCardIndex > 0}
-                                                    canGoNext={activeCardIndex < Math.max(0, viewCards.length - 1)}
-                                                    onPrev={() => setActiveCardIndex((i) => Math.max(0, i - 1))}
-                                                    onNext={() =>
-                                                        setActiveCardIndex((i) => Math.min(viewCards.length - 1, i + 1))
-                                                    }
-                                                    renderItem={(card: any, cardIndex: number) => {
-                                                        const savedQuiz = (tp?.quizState?.[card.id] ?? null) as SavedQuizState | null;
-                                                        const savedSketch = tp?.sketchState?.[card.id] ?? null;
-
-                                                        const isQuizLike = card.type === "quiz" || card.type === "project";
-                                                        const done = isQuizLike
-                                                            ? Boolean(tp?.quizzesDone?.[card.id])
-                                                            : Boolean(tp?.cardsDone?.[card.id]);
-
-                                                        const prereqsMet = isQuizLike ? prereqsForAllQuizzes : true;
-
-                                                        return (
-                                                            <div key={card.id} ref={setCardEl(card.id)}>
-                                                                <CardRenderer
-                                                                    card={card}
-                                                                    done={done}
-                                                                    cardIndex={cardIndex}
-                                                                    quizNavMode={navModes.quiz}
-                                                                    prereqsMet={prereqsMet}
-                                                                    progressHydrated={progressHydrated}
-                                                                    savedQuiz={progressHydrated ? savedQuiz : null}
-                                                                    versionStr={versionStr}
-                                                                    savedSketch={progressHydrated ? savedSketch : null}
-                                                                    onSketchStateChange={(sketchCardId, s) =>
-                                                                        sketch.saveSketchDebounced(viewTid, sketchCardId, s)
-                                                                    }
-                                                                    onMarkDone={() => {
-                                                                        setProgress((p: any) => {
-                                                                            const tp0: any = p.topics?.[viewTid] ?? {};
-                                                                            const cardsDone = { ...(tp0.cardsDone ?? {}), [card.id]: true };
-                                                                            const next = {
-                                                                                ...p,
-                                                                                topics: { ...(p.topics ?? {}), [viewTid]: { ...tp0, cardsDone } },
-                                                                            };
-
-                                                                            queueMicrotask(() => {
-                                                                                flushNow(next);
-                                                                                scrollToNextActionable(cardIndex, next);
-                                                                            });
-
-                                                                            return next;
-                                                                        });
-                                                                    }}
-                                                                    onQuizPass={(quizId) => {
-                                                                        setProgress((p: any) => {
-                                                                            const tp0: any = p.topics?.[viewTid] ?? {};
-                                                                            const quizzesDone = { ...(tp0.quizzesDone ?? {}), [quizId]: true };
-                                                                            const next = {
-                                                                                ...p,
-                                                                                topics: { ...(p.topics ?? {}), [viewTid]: { ...tp0, quizzesDone } },
-                                                                            };
-
-                                                                            queueMicrotask(() => {
-                                                                                flushNow(next);
-                                                                                scrollToNextActionable(cardIndex, next);
-                                                                            });
-
-                                                                            return next;
-                                                                        });
-                                                                    }}
-                                                                    onQuizStateChange={(quizCardId, s) => {
-                                                                        setProgress((p: any) => {
-                                                                            const tp0: any = p.topics?.[viewTid] ?? {};
-                                                                            const quizState = { ...(tp0.quizState ?? {}), [quizCardId]: s };
-                                                                            return {
-                                                                                ...p,
-                                                                                topics: { ...(p.topics ?? {}), [viewTid]: { ...tp0, quizState } },
-                                                                            };
-                                                                        });
-                                                                    }}
-                                                                    onQuizReset={(quizCardId) => {
-                                                                        commitProgress((p) => {
-                                                                            const tp0: any = p.topics?.[viewTid] ?? {};
-                                                                            const nextQuizState = { ...(tp0.quizState ?? {}) };
-                                                                            delete nextQuizState[quizCardId];
-
-                                                                            const nextQuizzesDone = { ...(tp0.quizzesDone ?? {}) };
-                                                                            delete nextQuizzesDone[quizCardId];
-
-                                                                            return {
-                                                                                ...p,
-                                                                                topics: {
-                                                                                    ...(p.topics ?? {}),
-                                                                                    [viewTid]: {
-                                                                                        ...tp0,
-                                                                                        quizState: nextQuizState,
-                                                                                        quizzesDone: nextQuizzesDone,
-                                                                                    },
-                                                                                },
-                                                                            };
-                                                                        });
-                                                                    }}
-                                                                />
-                                                            </div>
-                                                        );
-                                                    }}
-                                                />
-
-                                                {viewIsComplete ? (
-                                                    <div className="mt-3 shrink-0">
-                                                        <TopicOutro
-                                                            topic={viewTopic}
-                                                            onContinue={nextTopic?.id ? goNextTopic : undefined}
-                                                        />
-                                                    </div>
-                                                ) : null}
-
-                                                {!nextTopic?.id ? (
-                                                    <SubjectFinishBanner
-                                                        subjectSlug={subjectSlug}
-                                                        subjectFinish={subjectFinish}
-                                                        onOpenCertificate={() =>
-                                                            router.push(`/subjects/${encodeURIComponent(subjectSlug)}/certificate`)
-                                                        }
-                                                    />
-                                                ) : null}
-
-                                                <div className="ui-surface-muted mt-2 flex-1 min-h-0 overflow-auto rounded-none" />
-                                            </div>
+                                            <AnimatedTopicPane
+                                                motionKey={topicMotionKey}
+                                                viewCards={viewCards}
+                                                activeCardIndex={activeCardIndex}
+                                                onActiveCardIndexChange={setActiveCardIndex}
+                                                navModes={navModes}
+                                                reduceMotion={reduceMotion}
+                                                tp={tp}
+                                                progressHydrated={progressHydrated}
+                                                versionStr={versionStr}
+                                                prereqsForAllQuizzes={prereqsForAllQuizzes}
+                                                viewTid={viewTid}
+                                                sketch={sketch}
+                                                setProgress={setProgress}
+                                                flushNow={flushNow}
+                                                scrollToNextActionable={scrollToNextActionable}
+                                                commitProgress={commitProgress}
+                                                setCardEl={setCardEl}
+                                                viewIsComplete={viewIsComplete}
+                                                viewTopic={viewTopic}
+                                                onContinue={nextTopic?.id ? goNextTopic : undefined}
+                                                showSubjectFinish={!nextTopic?.id}
+                                                subjectSlug={subjectSlug}
+                                                subjectFinish={subjectFinish}
+                                                onOpenCertificate={handleOpenCertificate}
+                                            />
                                         </TopicShell>
                                     </main>
 
@@ -1194,8 +1176,8 @@ export default function ReviewModuleView({
                                                 style={{ width: panels.rightCollapsed ? 0 : panels.rightW }}
                                             >
                                                 <ToolsPanel
-                                                    onCollapse={() => panels.setRightCollapsed(true)}
-                                                    onUnbind={tool.unbindCodeInput}
+                                                    onCollapse={handleCollapseRight}
+                                                    onUnbind={handleUnbindFromToolsPanel}
                                                     boundId={tool.boundId}
                                                     rightBodyRef={tool.rightBodyRef}
                                                     codeRunnerRegionH={tool.codeRunnerRegionH}
@@ -1209,7 +1191,7 @@ export default function ReviewModuleView({
                                                     }
                                                     onChangeCode={handleToolChangeCode}
                                                     onChangeStdin={handleToolChangeStdin}
-                                                    onBeforeRun={tool.flushLatest}
+                                                    onBeforeRun={handleBeforeRun}
                                                     subjectSlug={subjectSlug}
                                                     moduleId={moduleSlug}
                                                     locale={locale}
@@ -1257,6 +1239,178 @@ export default function ReviewModuleView({
         >
             {content}
         </ReviewToolsProvider>
+    );
+}
+
+function AnimatedTopicPane(props: {
+    motionKey: string;
+    viewCards: ReviewCard[];
+    activeCardIndex: number;
+    onActiveCardIndexChange: (index: number) => void;
+    navModes: ReturnType<typeof resolveFlowNavigationConfig>;
+    reduceMotion: boolean;
+    tp: any;
+    progressHydrated: boolean;
+    versionStr: string;
+    prereqsForAllQuizzes: boolean;
+    viewTid: string;
+    sketch: ReturnType<typeof useDebouncedSketchState>;
+    setProgress: React.Dispatch<any>;
+    flushNow: (next: any) => void;
+    scrollToNextActionable: (fromIndex: number, nextProgress: any) => void;
+    commitProgress: (updater: (p: any) => any) => void;
+    setCardEl: (id: string) => (el: HTMLDivElement | null) => void;
+    viewIsComplete: boolean;
+    viewTopic: any;
+    onContinue?: () => void;
+    showSubjectFinish: boolean;
+    subjectSlug: string;
+    subjectFinish: any;
+    onOpenCertificate: () => void;
+}) {
+    return (
+        <div className="flex h-full min-h-0 flex-col">
+            <AnimatePresence initial={false} mode="wait">
+                <motion.div
+                    key={props.motionKey}
+                    initial={props.reduceMotion ? false : TOPIC_PANE_ANIM.initial}
+                    animate={TOPIC_PANE_ANIM.animate}
+                    exit={props.reduceMotion ? undefined : TOPIC_PANE_ANIM.exit}
+                    transition={props.reduceMotion ? { duration: 0 } : TOPIC_PANE_TRANSITION}
+                    className="flex h-full min-h-0 flex-col"
+                >
+                    <FlowNavigator
+                        items={props.viewCards}
+                        mode={props.navModes.cards}
+                        activeIndex={props.activeCardIndex}
+                        onActiveIndexChange={props.onActiveCardIndexChange}
+                        reduceMotion={props.reduceMotion}
+                        getKey={(card: any) => card.id}
+                        getProgressLabel={(index, total) => `Item ${index + 1} of ${total}`}
+                        canGoPrev={props.activeCardIndex > 0}
+                        canGoNext={props.activeCardIndex < Math.max(0, props.viewCards.length - 1)}
+                        onPrev={() => props.onActiveCardIndexChange(Math.max(0, props.activeCardIndex - 1))}
+                        onNext={() =>
+                            props.onActiveCardIndexChange(
+                                Math.min(props.viewCards.length - 1, props.activeCardIndex + 1),
+                            )
+                        }
+                        renderItem={(card: any, cardIndex: number) => {
+                            const savedQuiz = (props.tp?.quizState?.[card.id] ?? null) as SavedQuizState | null;
+                            const savedSketch = props.tp?.sketchState?.[card.id] ?? null;
+
+                            const isQuizLike = card.type === "quiz" || card.type === "project";
+                            const done = isQuizLike
+                                ? Boolean(props.tp?.quizzesDone?.[card.id])
+                                : Boolean(props.tp?.cardsDone?.[card.id]);
+
+                            const prereqsMet = isQuizLike ? props.prereqsForAllQuizzes : true;
+
+                            return (
+                                <div key={card.id} ref={props.setCardEl(card.id)}>
+                                    <CardRenderer
+                                        card={card}
+                                        done={done}
+                                        cardIndex={cardIndex}
+                                        quizNavMode={props.navModes.quiz}
+                                        prereqsMet={prereqsMet}
+                                        progressHydrated={props.progressHydrated}
+                                        savedQuiz={props.progressHydrated ? savedQuiz : null}
+                                        versionStr={props.versionStr}
+                                        savedSketch={props.progressHydrated ? savedSketch : null}
+                                        onSketchStateChange={(sketchCardId, s) =>
+                                            props.sketch.saveSketchDebounced(props.viewTid, sketchCardId, s)
+                                        }
+                                        onMarkDone={() => {
+                                            props.setProgress((p: any) => {
+                                                const tp0: any = p.topics?.[props.viewTid] ?? {};
+                                                const cardsDone = { ...(tp0.cardsDone ?? {}), [card.id]: true };
+                                                const next = {
+                                                    ...p,
+                                                    topics: { ...(p.topics ?? {}), [props.viewTid]: { ...tp0, cardsDone } },
+                                                };
+
+                                                queueMicrotask(() => {
+                                                    props.flushNow(next);
+                                                    props.scrollToNextActionable(cardIndex, next);
+                                                });
+
+                                                return next;
+                                            });
+                                        }}
+                                        onQuizPass={(quizId) => {
+                                            props.setProgress((p: any) => {
+                                                const tp0: any = p.topics?.[props.viewTid] ?? {};
+                                                const quizzesDone = { ...(tp0.quizzesDone ?? {}), [quizId]: true };
+                                                const next = {
+                                                    ...p,
+                                                    topics: { ...(p.topics ?? {}), [props.viewTid]: { ...tp0, quizzesDone } },
+                                                };
+
+                                                queueMicrotask(() => {
+                                                    props.flushNow(next);
+                                                    props.scrollToNextActionable(cardIndex, next);
+                                                });
+
+                                                return next;
+                                            });
+                                        }}
+                                        onQuizStateChange={(quizCardId, s) => {
+                                            props.setProgress((p: any) => {
+                                                const tp0: any = p.topics?.[props.viewTid] ?? {};
+                                                const quizState = { ...(tp0.quizState ?? {}), [quizCardId]: s };
+                                                return {
+                                                    ...p,
+                                                    topics: { ...(p.topics ?? {}), [props.viewTid]: { ...tp0, quizState } },
+                                                };
+                                            });
+                                        }}
+                                        onQuizReset={(quizCardId) => {
+                                            props.commitProgress((p) => {
+                                                const tp0: any = p.topics?.[props.viewTid] ?? {};
+                                                const nextQuizState = { ...(tp0.quizState ?? {}) };
+                                                delete nextQuizState[quizCardId];
+
+                                                const nextQuizzesDone = { ...(tp0.quizzesDone ?? {}) };
+                                                delete nextQuizzesDone[quizCardId];
+
+                                                return {
+                                                    ...p,
+                                                    topics: {
+                                                        ...(p.topics ?? {}),
+                                                        [props.viewTid]: {
+                                                            ...tp0,
+                                                            quizState: nextQuizState,
+                                                            quizzesDone: nextQuizzesDone,
+                                                        },
+                                                    },
+                                                };
+                                            });
+                                        }}
+                                    />
+                                </div>
+                            );
+                        }}
+                    />
+
+                    {props.viewIsComplete ? (
+                        <div className="mt-3 shrink-0">
+                            <TopicOutro topic={props.viewTopic} onContinue={props.onContinue} />
+                        </div>
+                    ) : null}
+
+                    {props.showSubjectFinish ? (
+                        <SubjectFinishBanner
+                            subjectSlug={props.subjectSlug}
+                            subjectFinish={props.subjectFinish}
+                            onOpenCertificate={props.onOpenCertificate}
+                        />
+                    ) : null}
+
+                    <div className="ui-surface-muted mt-2 flex-1 min-h-0 overflow-auto rounded-none" />
+                </motion.div>
+            </AnimatePresence>
+        </div>
     );
 }
 
