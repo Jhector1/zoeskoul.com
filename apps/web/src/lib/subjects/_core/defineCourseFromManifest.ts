@@ -1,9 +1,9 @@
-import { defineCourse } from "@/lib/subjects/_core/defineCourse";
-import { defineModule } from "@/lib/subjects/_core/defineModule";
-import { defineSection } from "@/lib/subjects/_core/defineSection";
-import { defineJsonTopicBundle } from "@/lib/subjects/_core/defineJsonTopicBundle";
-import { tag } from "@/lib/practice/generator/shared/i18n";
-import { withTopicParentContext } from "./withTopicParentContext";
+import {defineCourse} from "@/lib/subjects/_core/defineCourse";
+import {defineModule} from "@/lib/subjects/_core/defineModule";
+import {defineSection} from "@/lib/subjects/_core/defineSection";
+import {defineJsonTopicBundle} from "@/lib/subjects/_core/defineJsonTopicBundle";
+import {tag} from "@/lib/practice/generator/shared/i18n";
+import {withTopicParentContext} from "./withTopicParentContext";
 import type {
     SubjectManifest,
     TopicManifestRefMap,
@@ -13,7 +13,7 @@ export function defineCourseFromManifest(args: {
     manifest: SubjectManifest;
     topicManifests: TopicManifestRefMap;
 }) {
-    const { manifest, topicManifests } = args;
+    const {manifest, topicManifests} = args;
 
     const modules = manifest.modules.map((moduleManifest) => {
         const sections = moduleManifest.sections.map((sectionManifest) => {
@@ -47,19 +47,21 @@ export function defineCourseFromManifest(args: {
                         : undefined,
                     meta: {
                         ...(sectionManifest.meta?.module != null
-                            ? { module: sectionManifest.meta.module }
+                            ? {module: sectionManifest.meta.module}
                             : {}),
                         ...(sectionManifest.meta?.weeksKey
-                            ? { weeks: tag(sectionManifest.meta.weeksKey) }
+                            ? {weeks: tag(sectionManifest.meta.weeksKey)}
                             : {}),
                         ...(sectionManifest.meta?.bulletKeys?.length
-                            ? { bullets: sectionManifest.meta.bulletKeys.map((k) => tag(k)) }
+                            ? {bullets: sectionManifest.meta.bulletKeys.map((k) => tag(k))}
                             : {}),
                     },
                 },
                 topics,
             });
         });
+
+// inside defineCourseFromManifest
 
         return defineModule({
             module: {
@@ -76,6 +78,9 @@ export function defineCourseFromManifest(args: {
                 ...(moduleManifest.weekEnd != null
                     ? { weekEnd: moduleManifest.weekEnd }
                     : {}),
+
+                runtimeDefaults: moduleManifest.runtimeDefaults ?? null,
+
                 ...(moduleManifest.accessOverride
                     ? { accessOverride: moduleManifest.accessOverride }
                     : {}),
@@ -97,8 +102,7 @@ export function defineCourseFromManifest(args: {
             prefix: moduleManifest.prefix,
             genKey: manifest.subject.genKey,
             sections,
-        });
-    });
+        });    });
 
     return defineCourse({
         subject: {

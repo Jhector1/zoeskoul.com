@@ -2,6 +2,7 @@ import type { ReviewTopicShape } from "@/lib/subjects/types";
 import type { SketchEntry } from "@/components/sketches/subjects";
 import type { CourseBundle } from "./defineCourse";
 import type { SubjectTopicBundle, TopicMeta } from "./defineTopicBundle";
+import type { ManifestRuntimeDefaults } from "./manifestTypes";
 
 type TopicGeneratorRegistration = NonNullable<SubjectTopicBundle["generator"]>;
 
@@ -16,6 +17,7 @@ export type BuiltModule = {
     weekStart?: number | null;
     weekEnd?: number | null;
     meta?: Record<string, unknown>;
+    runtimeDefaults?: ManifestRuntimeDefaults | null;
     accessOverride?: "inherit" | "free" | "paid";
     entitlementKey?: string | null;
 };
@@ -59,6 +61,7 @@ export type BuiltCatalog = Record<
                 prefix: string;
                 topicIds: string[];
                 topics: Record<string, string>;
+                runtimeDefaults?: ManifestRuntimeDefaults | null;
             }
         >;
     }
@@ -229,6 +232,7 @@ export function buildArtifacts(courses: readonly CourseBundle[]): BuiltArtifacts
                 prefix: mod.prefix,
                 topicIds: [...new Set(moduleTopicIds)],
                 topics: moduleTopicMap,
+                runtimeDefaults: mod.module.runtimeDefaults ?? null,
             };
         }
 

@@ -53,6 +53,7 @@ export function buildReviewFromManifest(args: {
                         allowReveal: card.quiz.allowReveal ?? true,
                         preferKind: card.quiz.preferKind ?? null,
                         maxAttempts: card.quiz.maxAttempts ?? 10,
+                        runtime: manifest.runtimeDefaults ?? null,
                     }),
                 });
             }
@@ -71,6 +72,7 @@ export function buildReviewFromManifest(args: {
                         allowReveal: card.project.allowReveal ?? true,
                         preferKind: card.project.preferKind ?? null,
                         maxAttempts: card.project.maxAttempts ?? 10,
+                        runtime: manifest.runtimeDefaults ?? null,
                         steps: card.project.steps.map((step) =>
                             makeProjectStep({
                                 id: step.id,
@@ -86,8 +88,7 @@ export function buildReviewFromManifest(args: {
                                 maxAttempts: step.maxAttempts ?? card.project.maxAttempts ?? 10,
                             }),
                         ),
-                    }),
-                });
+                    }),                });
             }
 
             throw new Error(`Unsupported card kind: ${(card as any).kind}`);

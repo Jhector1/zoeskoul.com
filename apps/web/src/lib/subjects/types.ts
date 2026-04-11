@@ -1,61 +1,42 @@
+import type {PracticeKind} from "@prisma/client";
+import type {ManifestRuntimeDefaults} from "@/lib/subjects/_core/manifestTypes";
 
 
-
-
-
-
+export type ReviewQuestion =
+    | {
+    kind: "mcq";
+    id: string;
+    prompt: string;
+    choices: { id: string; label: string }[];
+    answerId: string;
+    explain?: string;
+}
+    | {
+    kind: "numeric";
+    id: string;
+    prompt: string;
+    answer: number;
+    tolerance?: number;
+    explain?: string;
+}
+    | {
+    kind: "practice";
+    id: string;
+    prompt?: string;
+    fetch: {
+        subject: string;
+        module?: string;
+        section?: string;
+        topic?: string; // slug
+        difficulty?: "easy" | "medium" | "hard";
+        allowReveal?: boolean;
+        preferKind?: PracticeKind | null;
+    };
+    maxAttempts?: number;
+};
 
 
 export type ReviewTopicId = string;
-
-export type ReviewTopic = {
-    id: ReviewTopicId;
-    label: string;
-    minutes?: number;
-    summary?: string;
-    meta?: Record<string, unknown> | null;
-
-    // ✅ allow `as const` topics
-    cards: ReadonlyArray<ReviewCard>;
-};
-
-export type ReviewCard =
-    | { type: "text"; id: string; title?: string; markdown: string; spec?: any }
-    | { type: "sketch"; id: string; title?: string; sketchId: string; spec?: any; height?: number; props?: any }
-    | { type: "quiz"; id: string; title?: string; passScore?: number; spec: ReviewQuizSpec }
-    // ✅ project card in your code has passScore sometimes → allow it
-    | { type: "project"; id: string; title?: string; passScore?: number; spec: ReviewProjectSpec }
-    | ReviewVideoCard;
-
-export type ReviewModule = {
-    id: string;
-    title: string;
-    subtitle?: string;
-    startPracticeHref?: (topicSlug: string) => string;
-
-    // ✅ allow `as const` topic lists
-    topics: ReadonlyArray<{
-        id: string;
-        label: string;
-        minutes?: number;
-        summary?: string;
-        cards: ReadonlyArray<ReviewCard>;
-    }>;
-};
-
-export type ReviewTopicShape = ReviewTopic;
-
-
-
-
-
-
-
-
-
-
-
-  import type { PracticeKind } from "@prisma/client";
 
 export type ReviewQuizSpec = {
     subject: string;
@@ -68,97 +49,36 @@ export type ReviewQuizSpec = {
     allowReveal?: boolean;
     preferKind?: PracticeKind | null;
     maxAttempts?: number;
+    runtime?: ManifestRuntimeDefaults | null;
 };
 
-export type ReviewQuestion =
-  | {
-      kind: "mcq";
-      id: string;
-      prompt: string;
-      choices: { id: string; label: string }[];
-      answerId: string;
-      explain?: string;
-    }
-  | {
-      kind: "numeric";
-      id: string;
-      prompt: string;
-      answer: number;
-      tolerance?: number;
-      explain?: string;
-    }
-  | {
-      kind: "practice";
-      id: string;
-      prompt?: string;
-      fetch: {
-        subject: string;
-        module?: string;
-        section?: string;
-        topic?: string; // slug
-        difficulty?: "easy" | "medium" | "hard";
-        allowReveal?: boolean;
-        preferKind?: PracticeKind | null;
-      };
-      maxAttempts?: number;
-    };
-
-
-    export type ReviewVideoProvider = "auto" | "youtube" | "vimeo" | "iframe" | "file";
+export type ReviewVideoProvider = "auto" | "youtube" | "vimeo" | "iframe" | "file";
 
 export type ReviewVideoCard = {
-  type: "video";
-  id: string;
-  title?: string;
-
-  /** Can be hosted anywhere */
-  url: string;
-
-  /**
-   * auto:
-   *  - youtube/vimeo => iframe embed
-   *  - .mp4/.webm/.mov => <video>
-   *  - otherwise => iframe
-   */
-  provider?: ReviewVideoProvider;
-
-  /** Optional start time in seconds (works for youtube/vimeo; for <video> we seek on mount best-effort) */
-  startSeconds?: number;
-
-  /** Optional poster image for <video> */
-  posterUrl?: string;
-
-  /** Optional caption/notes under the video */
-  captionMarkdown?: string;
-  spec?: any;
+    type: "video";
+    id: string;
+    title?: string;
+    url: string;
+    provider?: ReviewVideoProvider;
+    startSeconds?: number;
+    posterUrl?: string;
+    captionMarkdown?: string;
+    spec?: any;
 };
 
-// then include it in ReviewCard
-
-
-
-
-
-
-
 export type SeedPolicy = "actor" | "global";
-
-
 export type Difficulty = "easy" | "medium" | "hard";
-// export type SeedPolicy = "actor" | "global";
+export type PurposeMode = "quiz" | "project" | "mixed";
+export type PurposePolicy = "strict" | "fallback";
 
 export type ReviewProjectStep = {
     id: string;
     title?: string;
-
-    // ✅ allow inheriting from spec
     topic?: string;
     difficulty?: Difficulty;
     preferKind?: PracticeKind | null;
-
     exerciseKey?: string;
     seedPolicy?: SeedPolicy;
-
     maxAttempts?: number;
     carryFromPrev?: boolean;
 };
@@ -175,10 +95,36 @@ export type ReviewProjectSpec = {
     allowReveal?: boolean;
     maxAttempts?: number;
     steps: ReviewProjectStep[];
+    runtime?: ManifestRuntimeDefaults | null;
 };
-export type PurposeMode = "quiz" | "project" | "mixed";
-export type PurposePolicy = "strict" | "fallback";
 
+export type ReviewCard =
+    | { type: "text"; id: string; title?: string; markdown: string; spec?: any }
+    | { type: "sketch"; id: string; title?: string; sketchId: string; spec?: any; height?: number; props?: any }
+    | { type: "quiz"; id: string; title?: string; passScore?: number; spec: ReviewQuizSpec }
+    | { type: "project"; id: string; title?: string; passScore?: number; spec: ReviewProjectSpec }
+    | ReviewVideoCard;
 
+export type ReviewTopic = {
+    id: ReviewTopicId;
+    label: string;
+    minutes?: number;
+    summary?: string;
+    meta?: {
+        runtimeDefaults?: ManifestRuntimeDefaults | null;
+        [key: string]: unknown;
+    } | null;
+    cards: ReadonlyArray<ReviewCard>;
+};
 
+export type ReviewModule = {
+    id: string;
+    title: string;
+    subtitle?: string;
+    startPracticeHref?: (topicSlug: string) => string;
+    runtimeDefaults?: ManifestRuntimeDefaults | null;
+    topics: ReadonlyArray<ReviewTopic>;
+};
+
+export type ReviewTopicShape = ReviewTopic;
 

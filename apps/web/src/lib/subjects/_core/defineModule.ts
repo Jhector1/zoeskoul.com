@@ -1,4 +1,5 @@
 // src/lib/subjects/_core/defineModule.ts
+import type { ManifestRuntimeDefaults } from "./manifestTypes";
 import type { SectionBundle } from "./defineSection";
 
 export type ModuleMeta = {
@@ -18,6 +19,8 @@ export type ModuleInput = {
     weekStart?: number | null;
     weekEnd?: number | null;
     meta?: ModuleMeta;
+
+    runtimeDefaults?: ManifestRuntimeDefaults | null;
 
     accessOverride?: "inherit" | "free" | "paid";
     entitlementKey?: string | null;

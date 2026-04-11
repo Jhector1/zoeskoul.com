@@ -54,7 +54,7 @@ export default function ReviewModulePageClient({ canUnlockAll }: { canUnlockAll:
     const mod: ReviewModule | null = useMemo(() => {
         if (!subjectSlug || !moduleId) return null;
         return getReviewModule(subjectSlug, moduleId);
-    }, [subjectSlug, moduleId]);
+    }, [subjectSlug, moduleId, ]);
 
     const [nav, setNav] = useState<NavInfo | null | undefined>(undefined);
     const [moduleComplete, setModuleComplete] = useState(false);

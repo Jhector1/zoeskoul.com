@@ -5,6 +5,7 @@ import type {
     ReviewProjectStep,
 } from "@/lib/subjects/types";
 import type { PracticeKind } from "@prisma/client";
+import type { ManifestRuntimeDefaults } from "@/lib/subjects/_core/manifestTypes";
 
 type Difficulty = "easy" | "medium" | "hard";
 
@@ -54,6 +55,7 @@ export function makeQuizSpec(args: {
     allowReveal?: boolean;
     preferKind?: PracticeKind | null;
     maxAttempts?: number;
+    runtime?: ManifestRuntimeDefaults | null;
 }): ReviewQuizSpec {
     return {
         subject: args.subject,
@@ -65,6 +67,7 @@ export function makeQuizSpec(args: {
         allowReveal: args.allowReveal ?? true,
         preferKind: args.preferKind ?? null,
         maxAttempts: args.maxAttempts ?? 10,
+        runtime: args.runtime ?? null,
     };
 }
 
@@ -118,6 +121,7 @@ export function makeProjectSpec(args: {
     allowReveal?: boolean;
     maxAttempts?: number;
     steps: ReviewProjectStep[];
+    runtime?: ManifestRuntimeDefaults | null;
 }): ReviewProjectSpec {
     return {
         mode: "project",
@@ -130,6 +134,7 @@ export function makeProjectSpec(args: {
         allowReveal: args.allowReveal ?? true,
         maxAttempts: args.maxAttempts ?? 10,
         steps: args.steps,
+        runtime: args.runtime ?? null,
     };
 }
 

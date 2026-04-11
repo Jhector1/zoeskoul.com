@@ -1,4 +1,4 @@
-import type { ReviewModule } from "@/lib/subjects/types";
+import type { ReviewModule, ReviewTopicShape } from "@/lib/subjects/types";
 import { SUBJECT_ARTIFACTS } from "@/lib/subjects";
 
 function indexBy<T extends { slug: string }>(items: readonly T[]) {
@@ -28,16 +28,27 @@ export function buildReviewRegistry(): Record<string, Record<string, ReviewModul
             const mod = moduleBySlug[moduleSlug];
             const section = sectionBySlug[moduleEntry.sectionSlug];
 
-            const topics = moduleEntry.topicIds
+            const topics: ReviewTopicShape[] = moduleEntry.topicIds
                 .map((topicId) => moduleEntry.topics[topicId])
                 .map((topicSlug) => SUBJECT_ARTIFACTS.reviewTopicsBySlug[topicSlug])
-                .filter(Boolean);
+                .filter((topic): topic is ReviewTopicShape => Boolean(topic))
+                .map((topic) => ({
+                    ...topic,
+                    meta: topic.meta ?? null,
+                    cards: [...topic.cards],
+                }));
 
             out[subjectSlug][moduleSlug] = {
                 id: moduleSlug,
                 title: mod?.title ?? moduleSlug,
                 subtitle: makeSubtitle(moduleSlug),
                 startPracticeHref: makeStartPracticeHref(section?.slug ?? moduleEntry.sectionSlug),
+
+                runtimeDefaults:
+                    mod?.runtimeDefaults ??
+                    moduleEntry.runtimeDefaults ??
+                    null,
+
                 topics,
             };
         }

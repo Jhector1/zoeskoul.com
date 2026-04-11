@@ -33,12 +33,7 @@
       "weekEnd": 1,
       "accessOverride": "free",
 
-      "runtimeDefaults": {
-        "kind": "sql",
-        "datasetId": "customers_cleanup",
-        "fixedSqlDialect": "sqlite",
-        "resultShape": "table"
-      },
+
       "meta": {
         "estimatedMinutes": 45,
         "prereqKeys": [],
@@ -88,6 +83,12 @@
       "weekStart": 2,
       "weekEnd": 2,
       "accessOverride": "free",
+      "runtimeDefaults": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table"
+      },
       "meta": {
         "estimatedMinutes": 50,
         "prereqKeys": [
@@ -138,6 +139,12 @@
       "weekStart": 3,
       "weekEnd": 4,
       "accessOverride": "free",
+      "runtimeDefaults": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table"
+      },
       "meta": {
         "estimatedMinutes": 60,
         "prereqKeys": [
@@ -187,6 +194,12 @@
       "weekStart": 5,
       "weekEnd": 6,
       "accessOverride": "free",
+      "runtimeDefaults": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table"
+      },
       "meta": {
         "estimatedMinutes": 55,
         "prereqKeys": [
@@ -237,6 +250,12 @@
       "weekStart": 7,
       "weekEnd": 8,
       "accessOverride": "free",
+      "runtimeDefaults": {
+        "kind": "sql",
+        "datasetId": "customers_cleanup",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table"
+      },
       "meta": {
         "estimatedMinutes": 60,
         "prereqKeys": [

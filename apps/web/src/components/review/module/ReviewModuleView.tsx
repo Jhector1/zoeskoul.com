@@ -146,18 +146,26 @@ export default function ReviewModuleView({
         rightW: panels.rightW,
     });
 
-    const topicRuntime = (viewTopic as any)?.meta?.runtimeDefaults ?? null;
+    const moduleRuntime =
+        (mod as any)?.runtimeDefaults ??
+        (mod as any)?.meta?.runtimeDefaults ??
+        null;
+
+    const effectiveRuntime =
+        (viewTopic as any)?.meta?.runtimeDefaults ??
+        moduleRuntime ??
+        null;
 
     const topicSqlFallback = useMemo(() => {
-        if (topicRuntime?.kind !== "sql" || !topicRuntime.datasetId) return null;
+        if (effectiveRuntime?.kind !== "sql" || !effectiveRuntime.datasetId) return null;
 
         return resolveSqlRunnerConfig({
             language: "sql",
-            sqlDialect: topicRuntime.fixedSqlDialect,
-            sqlDatasetId: topicRuntime.datasetId,
+            sqlDialect: effectiveRuntime.fixedSqlDialect,
+            sqlDatasetId: effectiveRuntime.datasetId,
             defaultSqlDialect: toolDefaults.defaultSqlDialect,
         });
-    }, [topicRuntime, toolDefaults.defaultSqlDialect]);
+    }, [effectiveRuntime, toolDefaults.defaultSqlDialect]);
 
     const reduceMotion = useReduceMotion();
 
