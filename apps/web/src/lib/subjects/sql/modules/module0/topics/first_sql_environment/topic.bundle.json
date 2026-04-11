@@ -106,13 +106,8 @@
       "id": "where_sql_runs",
       "archetype": "paragraph",
       "titleKey": "sketches.sql.sql_module_0.first_sql_environment.where_sql_runs.title",
-      "bodyKey": "sketches.sql.sql_module_0.first_sql_environment.where_sql_runs.bodyMarkdown",
-      "images": [
-        {
-          "id": "sql_workspace_overview",
-          "publicId": "TODO_sql_workspace_overview"
-        }
-      ]
+      "bodyKey": "sketches.sql.sql_module_0.first_sql_environment.where_sql_runs.bodyMarkdown"
+
     },
     {
       "id": "sql_editor_basics",
@@ -128,7 +123,7 @@
       "images": [
         {
           "id": "first_query_in_workspace",
-          "publicId": "TODO_first_query_in_workspace"
+          "publicId": "Screenshot_2026-04-11_at_12.51.34_AM_y9mgqf"
         }
       ]
     },

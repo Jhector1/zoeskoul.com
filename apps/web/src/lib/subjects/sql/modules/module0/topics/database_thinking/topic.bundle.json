@@ -76,6 +76,7 @@
       "images": [
         {
           "id": "data_question_flow",
+          "publicId": "question_to_table_answer_ssu8dv",
 
           "alt": ""
         }
@@ -85,14 +86,7 @@
       "id": "why_structure_matters",
       "archetype": "paragraph",
       "titleKey": "sketches.sql.sql_module_0.database_thinking.why_structure_matters.title",
-      "bodyKey": "sketches.sql.sql_module_0.database_thinking.why_structure_matters.bodyMarkdown",
-      "images": [
-        {
-          "id": "organized_vs_messy_table",
-
-          "alt": ""
-        }
-      ]
+      "bodyKey": "sketches.sql.sql_module_0.database_thinking.why_structure_matters.bodyMarkdown"
     },
     {
       "id": "what_a_key_is",
