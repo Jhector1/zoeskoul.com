@@ -1,3 +1,6 @@
+
+
+
 import {
     makeSingleChoiceOut,
     makeMultiChoiceOut,
@@ -15,14 +18,24 @@ import {
 } from "./i18nResolve";
 import { RECIPE_REGISTRY } from "./recipes/registry";
 
+function maybeT(key: string): string | undefined {
+    try {
+        return t(key);
+    } catch {
+        return undefined;
+    }
+}
+
 function resolveBase(messageBase: string) {
     return {
         title: t(`${messageBase}.title`),
         prompt: t(`${messageBase}.prompt`),
-        hint: t(`${messageBase}.hint`),
+        hint: maybeT(`${messageBase}.hint`),
         help: resolveHelp(messageBase),
-        starterCode: t(`${messageBase}.starterCode`),
-        template: t(`${messageBase}.template`),
+        starterCode: maybeT(`${messageBase}.starterCode`) ?? "",
+        template: maybeT(`${messageBase}.template`) ?? "",
+        expectedExampleMeta: maybeT(`${messageBase}.expectedExampleMeta`),
+        maybeT,
     };
 }
 

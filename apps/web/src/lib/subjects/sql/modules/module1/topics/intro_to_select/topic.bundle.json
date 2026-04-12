@@ -130,6 +130,7 @@
       "messageBase": "quiz.m1_s01_show_all_products",
       "language": "sql",
       "fixedSqlDialect": "sqlite",
+      "showExpectedExample": true,
       "recipe": {
         "type": "sql_query",
         "datasetId": "products_catalog",
@@ -145,6 +146,7 @@
       "messageBase": "quiz.m1_s01_show_product_names",
       "language": "sql",
       "fixedSqlDialect": "sqlite",
+      "showExpectedExample": true,
       "recipe": {
         "type": "sql_query",
         "datasetId": "products_catalog",
@@ -160,6 +162,7 @@
       "messageBase": "quiz.m1_s01_show_name_and_price",
       "language": "sql",
       "fixedSqlDialect": "sqlite",
+      "showExpectedExample": true,
       "recipe": {
         "type": "sql_query",
         "datasetId": "products_catalog",

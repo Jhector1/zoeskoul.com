@@ -4,6 +4,7 @@ import type { RNG } from "@/lib/practice/generator/shared/rng";
 import type { GenOut } from "@/lib/practice/generator/shared/expected";
 import type { TopicContext } from "@/lib/practice/generator/generatorTypes";
 import type {
+    CodeExpectedExample,
     CodeInputExercise,
     CodeLanguage,
     Difficulty,
@@ -256,61 +257,7 @@ export function makeMultiChoiceOut(args: {
 
 import type { CodeExpectedInput } from "@/lib/practice/api/validate/schemas";
 
-export function makeCodeInputOut(args: {
-    archetype: string;
-    id: string;
-    topic: string;
-    diff: Difficulty;
-    title: string;
-    prompt: string;
-    starterCode: string;
 
-    language?: CodeLanguage;
-    expected: CodeExpectedInput;
-
-    hint?: string;
-    help?: ExerciseHelpSpec;
-    editorHeight?: number;
-    allowLanguageSwitch?: boolean;
-
-    stdinHint?: string;
-    starterStdin?: string;
-    examples?: Array<{ stdin?: string; stdout: string }>;
-
-    // SQL-only optional fields
-    fixedSqlDialect?: SqlDialect;
-    runtime?: SqlRuntimeSpec;
-}): GenOut<"code_input"> {
-    const exercise: CodeInputExercise = {
-        id: args.id,
-        topic: args.topic,
-        difficulty: args.diff,
-        kind: "code_input",
-        title: args.title,
-        prompt: args.prompt,
-        language: args.language ?? "python",
-        starterCode: args.starterCode,
-
-        ...(args.help ? { help: args.help } : {}),
-        ...(args.hint ? { hint: args.hint } : {}),
-        ...(args.editorHeight != null ? { editorHeight: args.editorHeight } : {}),
-        ...(args.allowLanguageSwitch != null
-            ? { allowLanguageSwitch: args.allowLanguageSwitch }
-            : {}),
-        ...(args.stdinHint ? { stdinHint: args.stdinHint } : {}),
-        ...(args.starterStdin != null ? { starterStdin: args.starterStdin } : {}),
-        ...(args.examples ? { examples: args.examples } : {}),
-
-        ...(args.fixedSqlDialect ? { fixedSqlDialect: args.fixedSqlDialect } : {}),
-        ...(args.runtime ? { runtime: args.runtime } : {}),
-    };
-
-    return {
-        archetype: args.archetype,
-        exercise,
-        expected: args.expected as GenOut<"code_input">["expected"],
-    };
-}
 
 /* -------------------------------------------------------------------------- */
 /* topic bundle helpers                                                       */
@@ -692,3 +639,67 @@ export function buildTaggedHelpSteps(
 
     return help;
 }
+
+
+
+
+
+
+
+export function makeCodeInputOut(args: {
+    archetype: string;
+    id: string;
+    topic: string;
+    diff: Difficulty;
+    title: string;
+    prompt: string;
+    starterCode: string;
+
+    language?: CodeLanguage;
+    expected: CodeExpectedInput;
+
+    hint?: string;
+    help?: ExerciseHelpSpec;
+    editorHeight?: number;
+    allowLanguageSwitch?: boolean;
+
+    stdinHint?: string;
+    starterStdin?: string;
+    examples?: Array<{ stdin?: string; stdout: string }>;
+
+    fixedSqlDialect?: SqlDialect;
+    runtime?: SqlRuntimeSpec;
+
+    expectedExample?: CodeExpectedExample | null;
+}): GenOut<"code_input"> {
+    const exercise: CodeInputExercise = {
+        id: args.id,
+        topic: args.topic,
+        difficulty: args.diff,
+        kind: "code_input",
+        title: args.title,
+        prompt: args.prompt,
+        language: args.language ?? "python",
+        starterCode: args.starterCode,
+
+        ...(args.help ? { help: args.help } : {}),
+        ...(args.hint ? { hint: args.hint } : {}),
+        ...(args.editorHeight != null ? { editorHeight: args.editorHeight } : {}),
+        ...(args.allowLanguageSwitch != null
+            ? { allowLanguageSwitch: args.allowLanguageSwitch }
+            : {}),
+        ...(args.stdinHint ? { stdinHint: args.stdinHint } : {}),
+        ...(args.starterStdin != null ? { starterStdin: args.starterStdin } : {}),
+        ...(args.examples ? { examples: args.examples } : {}),
+        ...(args.fixedSqlDialect ? { fixedSqlDialect: args.fixedSqlDialect } : {}),
+        ...(args.runtime ? { runtime: args.runtime } : {}),
+        ...(args.expectedExample ? { expectedExample: args.expectedExample } : {}),
+    };
+
+    return {
+        archetype: args.archetype,
+        exercise,
+        expected: args.expected as GenOut<"code_input">["expected"],
+    };
+}
+

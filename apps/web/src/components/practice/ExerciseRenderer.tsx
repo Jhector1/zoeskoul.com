@@ -47,7 +47,21 @@ type SqlTableSnapshot = {
 };
 
 type SqlTableSnapshots = Record<string, SqlTableSnapshot>;
-
+type CodeInputExerciseWithSqlExtras = Extract<Exercise, { kind: "code_input" }> & {
+    sqlSchemaSql?: string;
+    sqlSeedSql?: string;
+    sqlSetupSql?: string;
+    sqlDatasetId?: string;
+    sqlInitialTableSnapshots?: SqlTableSnapshots;
+    topicRuntimeDefaults?: {
+        fixedSqlDialect?: SqlDialect;
+        datasetId?: string;
+    } | null;
+    moduleRuntimeDefaults?: {
+        fixedSqlDialect?: SqlDialect;
+        datasetId?: string;
+    } | null;
+};
 type CodeToolsApi = {
     registerCodeInput: (
         id: string,
@@ -84,7 +98,7 @@ type CodeToolsApi = {
     patchCodeInput?: (id: string, patch: any) => void;
 };
 function CodeInputWithTools(props: {
-    exercise: any;
+    exercise: CodeInputExerciseWithSqlExtras;
     current: any;
     lockInputs: boolean;
     checked: boolean;
@@ -688,7 +702,7 @@ export default function ExerciseRenderer({
         if (useTools) {
             return (
                 <CodeInputWithTools
-                    exercise={ex as any}
+                    exercise={ex}
                     current={current}
                     lockInputs={lockInputs}
                     checked={checked}
@@ -705,22 +719,23 @@ export default function ExerciseRenderer({
             );
         }
 
-        const exAny = ex as any;
+        const exCode = ex as CodeInputExerciseWithSqlExtras;
         const effectiveSqlRuntime =
-            exAny.runtime ??
-            exAny.topicRuntimeDefaults ??
-            exAny.moduleRuntimeDefaults ??
+            (exCode as any).runtime ??
+            (exCode as any).topicRuntimeDefaults ??
+            (exCode as any).moduleRuntimeDefaults ??
             null;
+
         const curLang = ((current as any).codeLang ??
-            exAny.language ??
+            exCode.language ??
             "python") as CodeLanguage;
 
-        const curCode = (current as any).code ?? exAny.starterCode ?? "";
+        const curCode = (current as any).code ?? exCode.starterCode ?? "";
         const curStdin = (current as any).codeStdin ?? "";
 
         return (
             <CodeInputExerciseUI
-                exercise={exAny}
+                exercise={exCode}
                 code={curCode}
                 stdin={curStdin}
                 frame="card"
@@ -736,12 +751,12 @@ export default function ExerciseRenderer({
                 variant="embedded"
                 feedback={codeFeedback}
                 explanation={codeExplanation}
-                sqlDialect={exAny.fixedSqlDialect ?? effectiveSqlRuntime?.fixedSqlDialect}
-                sqlDatasetId={exAny.runtime?.datasetId ?? effectiveSqlRuntime?.datasetId}
-                sqlSchemaSql={exAny.sqlSchemaSql}
-                sqlSeedSql={exAny.sqlSeedSql}
-                sqlSetupSql={exAny.sqlSetupSql}
-                sqlInitialTableSnapshots={exAny.sqlInitialTableSnapshots}
+                sqlDialect={exCode.fixedSqlDialect ?? effectiveSqlRuntime?.fixedSqlDialect}
+                sqlDatasetId={exCode.runtime?.datasetId ?? effectiveSqlRuntime?.datasetId}
+                sqlSchemaSql={(exCode as any).sqlSchemaSql}
+                sqlSeedSql={(exCode as any).sqlSeedSql}
+                sqlSetupSql={(exCode as any).sqlSetupSql}
+                sqlInitialTableSnapshots={(exCode as any).sqlInitialTableSnapshots}
             />
         );
     }

@@ -4,6 +4,7 @@ import type {
     ManifestComputedSpec,
     ManifestVarSpec,
 } from "@/lib/subjects/_core/manifestTypes";
+import { buildTerminalExpectedExample } from "./expectedExample";
 
 function resolveVar(
     rng: any,
@@ -78,6 +79,12 @@ export const buildTemplateIoRecipe: RecipeHandler<any> = (def, args, resolved) =
         match: t.match ?? "exact",
     }));
 
+    const expectedExample = buildTerminalExpectedExample({
+        def,
+        resolved,
+        tests,
+    });
+
     return makeCodeInputOut({
         archetype: def.id,
         id: args.id,
@@ -97,5 +104,6 @@ export const buildTemplateIoRecipe: RecipeHandler<any> = (def, args, resolved) =
                 ? { solutionCode: fillTemplate(def.recipe.solutionTemplate, vars) }
                 : {}),
         } as any,
+        expectedExample,
     });
 };

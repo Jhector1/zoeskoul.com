@@ -284,6 +284,7 @@
       "weight": 1,
       "messageBase": "quiz.m1_types_convert_next_year_code",
       "language": "python",
+      "showExpectedExample": true,
       "recipe": {
         "type": "template_io",
         "vars": {
@@ -321,6 +322,7 @@
       "weight": 1,
       "messageBase": "quiz.m1_types_tip_total_code",
       "language": "python",
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -345,6 +347,7 @@
       "weight": 1,
       "messageBase": "quiz.m1_types_c_to_f_code",
       "language": "python",
+      "showExpectedExample": true,
       "recipe": {
         "type": "template_io",
         "vars": {

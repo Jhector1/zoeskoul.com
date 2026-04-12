@@ -1,7 +1,16 @@
+
+
+
+
 "use client";
 
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import type { CodeLanguage, Exercise, SqlDialect } from "@/lib/practice/types";
+import type {
+    CodeExpectedExample,
+    CodeLanguage,
+    Exercise,
+    SqlDialect,
+} from "@/lib/practice/types";
 import type { RunResult } from "@/lib/code/types";
 import type { CodeFeedback } from "@/lib/code/feedback/types";
 import { pickRunFeedbackFromResult } from "@/lib/code/feedback";
@@ -18,6 +27,93 @@ import {
 type CodeInputExercise = Extract<Exercise, { kind: "code_input" }>;
 
 export type CodeInputAutoBindMode = "never" | "whenUnbound" | "whenActive";
+
+function join(...xs: Array<string | false | null | undefined>) {
+    return xs.filter(Boolean).join(" ");
+}
+
+function ExpectedExampleCard({
+                                 example,
+                             }: {
+    example: CodeExpectedExample;
+}) {
+    if (example.kind === "terminal") {
+        const blocks: Array<{ type: "label" | "body"; text: string }> = [];
+
+        if (example.stdin && example.stdin.trim().length > 0) {
+            blocks.push({ type: "label", text: "> input" });
+            blocks.push({ type: "body", text: example.stdin.replace(/\n$/, "") });
+        }
+
+        blocks.push({ type: "label", text: "output" });
+        blocks.push({ type: "body", text: example.stdout.replace(/\n$/, "") });
+
+        return (
+            <div className="ui-page-surface p-3">
+                <div className="flex items-center justify-between gap-3">
+                    <div className="ui-title-sm">Example</div>
+                    <div className="ui-meta">{example.meta ?? "Expected example"}</div>
+                </div>
+
+                <div className="mt-2 whitespace-pre-wrap break-words px-2 font-mono text-xs leading-5">
+                    {blocks.map((block, i) => (
+                        <span
+                            key={i}
+                            className={join(
+                                block.type === "label" ? "ui-text-soft" : "ui-text"
+                            )}
+                        >
+                            {block.text}
+                            {i < blocks.length - 1 ? "\n" : null}
+                        </span>
+                    ))}
+                </div>
+            </div>
+        );
+    }
+
+    if (example.kind === "sql_result") {
+        return (
+            <div className="ui-page-surface p-3">
+                <div className="flex items-center justify-between gap-3">
+                    <div className="ui-title-sm">Expected result</div>
+                    <div className="ui-meta">{example.meta ?? "Result preview"}</div>
+                </div>
+
+                <div className="mt-2 overflow-auto">
+                    <table className="min-w-full text-left text-sm">
+                        <thead>
+                        <tr className="border-b border-black/10 dark:border-white/10">
+                            {example.columns.map((col) => (
+                                <th key={col} className="px-2 py-1 ui-text-soft font-medium">
+                                    {col}
+                                </th>
+                            ))}
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        {example.rows.map((row, i) => (
+                            <tr
+                                key={i}
+                                className="border-b border-black/5 dark:border-white/5"
+                            >
+                                {row.map((cell, j) => (
+                                    <td key={j} className="px-2 py-1 ui-text">
+                                        {cell == null ? "NULL" : String(cell)}
+                                    </td>
+                                ))}
+                            </tr>
+                        ))}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        );
+    }
+
+    return null;
+}
 
 export default function CodeInputExerciseUI({
                                                 exercise,
@@ -243,6 +339,10 @@ export default function CodeInputExerciseUI({
             <div className="grid gap-3">
                 {showPrompt ? <ExercisePrompt exercise={exercise} /> : null}
 
+                {exercise.expectedExample ? (
+                    <ExpectedExampleCard example={exercise.expectedExample} />
+                ) : null}
+
                 <div className="ui-page-surface p-3">
                     <div className="flex items-center justify-between gap-3">
                         <div className="min-w-0">
@@ -307,6 +407,10 @@ export default function CodeInputExerciseUI({
     return (
         <div className="grid gap-3">
             {showPrompt ? <ExercisePrompt exercise={exercise} /> : null}
+
+            {exercise.expectedExample ? (
+                <ExpectedExampleCard example={exercise.expectedExample} />
+            ) : null}
 
             <CodeRunner
                 title={runnerTitle as any}

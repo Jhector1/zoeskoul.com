@@ -33,19 +33,15 @@ export type ExerciseKind =
     | "vector_drag_dot"
     | "matrix_input"
     | "code_input"
-    // ✅ NEW
     | "text_input"
     | "drag_reorder"
     | "voice_input" | "word_bank_arrange"
     | "listen_build"
-    | "fill_blank_choice"; // ✅ ADD
-
-// ✅ NEW;
+    | "fill_blank_choice";
 
 export type Vec3 = { x: number; y: number; z?: number };
 
 export type ExerciseHelpSpec = Partial<Record<string, string>>;
-
 
 export type ExerciseBase = {
     id: string;
@@ -60,23 +56,16 @@ export type ExerciseBase = {
     hint?: string;
 };
 
-
 export type SingleChoiceExercise = ExerciseBase & {
     kind: "single_choice";
     options: { id: string; text: string }[];
-    // hint?: string;
 };
+
 export type MatrixInputExercise = ExerciseBase & {
     kind: "matrix_input";
     rows: number;
     cols: number;
-    tolerance: number; // per-entry tolerance
-    // hint?: string;
-    /**
-     * Optional display / UX flags:
-     * - step: for input stepping
-     * - integerOnly: enforce integer parsing on submit
-     */
+    tolerance: number;
     step?: number;
     integerOnly?: boolean;
 };
@@ -88,12 +77,7 @@ export type MultiChoiceExercise = ExerciseBase & {
 
 export type NumericExercise = ExerciseBase & {
     kind: "numeric";
-    // hint?: string;
     tolerance?: number;
-    /**
-     * Optional; don’t include in production payloads if you don’t want to leak answers.
-     * Validation should rely on signed expected.
-     */
     correctValue?: number;
 };
 
@@ -103,8 +87,7 @@ export type VectorDragTargetExercise = ExerciseBase & {
     initialB?: Vec3;
     targetA: Vec3;
     lockB: boolean;
-    targetB?: Vec3; // ✅ add
-
+    targetB?: Vec3;
     tolerance: number;
 };
 
@@ -116,16 +99,10 @@ export type VectorDragDotExercise = ExerciseBase & {
     tolerance: number;
 };
 
-// ---------------- NEW Exercise types ----------------
-
 export type TextInputExercise = ExerciseBase & {
     kind: "text_input";
     placeholder?: string;
-    /**
-     * optional UI helper: "short" vs "long"
-     */
     ui?: "short" | "long";
-    // hint?: string | null;
 };
 
 export type DragToken = { id: string; text: string };
@@ -133,53 +110,38 @@ export type DragToken = { id: string; text: string };
 export type DragReorderExercise = ExerciseBase & {
     kind: "drag_reorder";
     tokens: DragToken[];
-    // hint?: string | null;
 };
 
 export type VoiceInputExercise = ExerciseBase & {
     kind: "voice_input";
-    /**
-     * What the learner should say (displayed as the target).
-     */
     targetText: string;
-    /**
-     * optional locale hint for client STT
-     */
-    locale?: string; // e.g. "ht-HT" (or "fr-FR", etc.)
+    locale?: string;
     maxSeconds?: number;
-    // hint?: string | null;
 };
-
-// ---------------- Existing exercises ----------------
-// export type SingleChoiceExercise = ...
-// export type CodeInputExercise = ...
-// etc
-
-// src/lib/practice/types.ts (or wherever Exercise is defined)
-
-// export type CodeLanguage =
-//     | "python"
-//     | "javascript"
-//     | "c"
-//     | "java" | "cpp";
-// | "csharp";
-
-// export type CodeInputExercise = ExerciseBase & {
-
-//   kind: "code_input";
-
-//   language: CodeLanguage;
-//   starterCode?: string;
-
-//   // optional: show tests/examples
-//   examples?: Array<{ input?: string; output: string }>;
-// };
 
 export type SqlRuntimeSpec = {
     kind: "sql";
     datasetId?: string;
     resultShape?: "table";
 };
+
+export type TerminalExpectedExample = {
+    kind: "terminal";
+    meta?: string;
+    stdin?: string;
+    stdout: string;
+};
+
+export type SqlResultExpectedExample = {
+    kind: "sql_result";
+    meta?: string;
+    columns: string[];
+    rows: Array<Array<string | number | null>>;
+};
+
+export type CodeExpectedExample =
+    | TerminalExpectedExample
+    | SqlResultExpectedExample;
 
 export type CodeInputExercise = ExerciseBase & {
     kind: "code_input";
@@ -194,13 +156,14 @@ export type CodeInputExercise = ExerciseBase & {
 
     fixedSqlDialect?: SqlDialect;
     runtime?: SqlRuntimeSpec;
+
+    expectedExample?: CodeExpectedExample | null;
 };
 
 export type WordBankArrangeExercise = ExerciseBase & {
     kind: "word_bank_arrange";
     targetText: string;
     locale?: string;
-    // hint?: string | null;
     wordBank?: string[];
     distractors?: string[];
     ttsText?: string;
@@ -210,7 +173,6 @@ export type ListenBuildExercise = ExerciseBase & {
     kind: "listen_build";
     targetText: string;
     locale?: string;
-    // hint?: string | null;
     wordBank?: string[];
     distractors?: string[];
 };
@@ -219,17 +181,9 @@ export type FillBlankChoiceExercise = ExerciseBase & {
     kind: "fill_blank_choice";
     template: string;
     choices: string[];
-    correct?: string; // (optional; ideally only in signed expected)
+    correct?: string;
     locale?: string;
-    // hint?: string | null;
 };
-// export type Exercise =
-//   | NumericExercise
-//   | SingleChoiceExercise
-//   | MultiChoiceExercise
-//   | MatrixInputExercise
-//   | VectorDragTargetExercise
-//   | VectorDragDotExercise
 
 export type TextInputSubmitAnswer = {
     kind: "text_input";
@@ -243,8 +197,7 @@ export type DragReorderSubmitAnswer = {
 
 export type VoiceInputSubmitAnswer = {
     kind: "voice_input";
-    transcript: string; // client STT result
-    // optional if you store audio elsewhere:
+    transcript: string;
     audioUrl?: string;
     audioId?: string
 };
@@ -261,22 +214,23 @@ export type Exercise =
     | DragReorderExercise
     | VoiceInputExercise | WordBankArrangeExercise
     | ListenBuildExercise
-    | FillBlankChoiceExercise; // ✅ include
+    | FillBlankChoiceExercise;
 
 export type WordBankArrangeSubmitAnswer = {
     kind: "word_bank_arrange";
-    value: string; // assembled sentence
+    value: string;
 };
 
 export type ListenBuildSubmitAnswer = {
     kind: "listen_build";
-    value: string; // assembled sentence
+    value: string;
 };
 
 export type FillBlankChoiceSubmitAnswer = {
     kind: "fill_blank_choice";
-    value: string; // selected choice
+    value: string;
 };
+
 export type SubmitAnswer =
     | { kind: "single_choice"; optionId: string }
     | { kind: "multi_choice"; optionIds: string[] }
@@ -295,13 +249,13 @@ export type SubmitAnswer =
     | VoiceInputSubmitAnswer | WordBankArrangeSubmitAnswer
     | ListenBuildSubmitAnswer
     | FillBlankChoiceSubmitAnswer;
-;
 
 export type ValidateResponse = {
     ok: boolean;
     expected: any;
     explanation?: string;
 };
+
 export type PoolKind = PracticeKind;
 export type SqlDialect = "postgres" | "mysql" | "sqlite" | "mssql";
 

@@ -2,6 +2,8 @@ import { makeCodeInputOut } from "@/lib/practice/generator/engines/utils";
 import type { RecipeHandler } from "./types";
 import { makeCodeExpected } from "@/lib/practice/generator/engines/python/_shared";
 import type { CodeExpectedInput } from "@/lib/practice/api/validate/schemas";
+import { resolveSqlRunnerConfig } from "@/lib/subjects/sql/runtime/resolveSqlRunnerConfig";
+import { buildSqlExpectedExample } from "./expectedExample";
 
 function buildSqlExpected(args: {
     datasetId: string;
@@ -39,12 +41,35 @@ function buildSqlExpected(args: {
 }
 
 export const buildSqlQueryRecipe: RecipeHandler<any> = (def, args, resolved) => {
+    if (!def.recipe.datasetId) {
+        throw new Error(`sql_query recipe "${def.id}" is missing datasetId`);
+    }
+
     const expected = buildSqlExpected({
         datasetId: def.recipe.datasetId,
         resultShape: def.recipe.resultShape,
         ignoreRowOrder: def.recipe.ignoreRowOrder,
         solutionCode: def.recipe.solutionCode,
     });
+
+    const resolvedSql = resolveSqlRunnerConfig({
+        language: "sql",
+        sqlDialect: def.fixedSqlDialect ?? "sqlite",
+        sqlDatasetId: def.recipe.datasetId,
+    });
+
+    const expectedExample =
+        resolvedSql.isSql &&
+        resolvedSql.sqlSchemaSql &&
+        resolvedSql.sqlSeedSql
+            ? buildSqlExpectedExample({
+                def,
+                resolved,
+                schemaSql: resolvedSql.sqlSchemaSql,
+                seedSql: resolvedSql.sqlSeedSql,
+                solutionCode: def.recipe.solutionCode,
+            })
+            : null;
 
     return makeCodeInputOut({
         archetype: def.id,
@@ -64,5 +89,6 @@ export const buildSqlQueryRecipe: RecipeHandler<any> = (def, args, resolved) => 
             resultShape: def.recipe.resultShape ?? "table",
         },
         expected,
+        expectedExample,
     });
 };

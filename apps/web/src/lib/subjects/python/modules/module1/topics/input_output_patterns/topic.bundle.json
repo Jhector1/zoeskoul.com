@@ -114,6 +114,8 @@
       "weight": 1,
       "messageBase": "quiz.m1_io_age_next_year",
       "language": "python",
+      "showExpectedExample": true,
+
       "recipe": {
         "type": "template_io",
         "vars": {
@@ -151,6 +153,8 @@
       "weight": 1,
       "messageBase": "quiz.m1_io_tip_total",
       "language": "python",
+      "showExpectedExample": true,
+
       "recipe": {
         "type": "fixed_tests",
         "tests": [

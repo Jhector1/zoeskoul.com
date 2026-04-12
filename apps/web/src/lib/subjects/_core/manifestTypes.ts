@@ -145,12 +145,6 @@ export type ManifestFillBlankChoice = ManifestBaseExercise & {
     };
 };
 
-export type ManifestCodeInput = ManifestBaseExercise & {
-    kind: "code_input";
-    language?: CodeLanguage;
-    fixedSqlDialect?: SqlDialect;
-    recipe: ManifestRecipe;
-};
 
 export type ManifestExercise =
     | ManifestSingleChoice
@@ -220,4 +214,19 @@ export type TopicBundleManifest = {
     cards: ManifestCard[];
     sketches: ManifestSketch[];
     exercises: ManifestExercise[];
+};
+
+
+export type ManifestCodeInputExpectedExample =
+    | boolean
+    | {
+    metaKey?: string;
+};
+
+export type ManifestCodeInput = ManifestBaseExercise & {
+    kind: "code_input";
+    language?: CodeLanguage;
+    fixedSqlDialect?: SqlDialect;
+    recipe: ManifestRecipe;
+    showExpectedExample?: ManifestCodeInputExpectedExample;
 };

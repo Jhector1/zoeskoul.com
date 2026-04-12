@@ -1,12 +1,25 @@
 import { makeCodeInputOut } from "@/lib/practice/generator/engines/utils";
 import type { RecipeHandler } from "./types";
 import type { ManifestCodeInput } from "@/lib/subjects/_core/manifestTypes";
+import { buildTerminalExpectedExample } from "./expectedExample";
 
 export const buildFixedTestsRecipe: RecipeHandler<any> = (
     def: ManifestCodeInput & { recipe: { type: "fixed_tests"; tests: any[]; solutionCode?: string } },
     args,
     resolved,
 ) => {
+    const tests = def.recipe.tests.map((t: any) => ({
+        stdin: t.stdin,
+        stdout: t.stdout,
+        match: t.match ?? "exact",
+    }));
+
+    const expectedExample = buildTerminalExpectedExample({
+        def,
+        resolved,
+        tests,
+    });
+
     return makeCodeInputOut({
         archetype: def.id,
         id: args.id,
@@ -21,8 +34,9 @@ export const buildFixedTestsRecipe: RecipeHandler<any> = (
         fixedSqlDialect: def.fixedSqlDialect,
         expected: {
             kind: "code_input",
-            tests: def.recipe.tests,
+            tests,
             ...(def.recipe.solutionCode ? { solutionCode: def.recipe.solutionCode } : {}),
         } as any,
+        expectedExample,
     });
 };

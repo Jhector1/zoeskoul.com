@@ -63,6 +63,8 @@
       "starterCode": "-- Show the full products table\n",
       "fixedLanguage": "sql",
       "fixedSqlDialect": "sqlite",
+      "expectedExampleMeta": "Accepted | Example",
+
       "runtime": {
         "kind": "sql",
         "datasetId": "products_catalog",
@@ -81,6 +83,8 @@
       "starterCode": "-- Show only product names\n",
       "fixedLanguage": "sql",
       "fixedSqlDialect": "sqlite",
+      "expectedExampleMeta": "Accepted | Example",
+
       "runtime": {
         "kind": "sql",
         "datasetId": "products_catalog",
@@ -90,6 +94,7 @@
     "m1_s01_show_name_and_price": {
       "title": "Show two columns",
       "prompt": "The `products` table already exists.\n\nWrite a query that shows only the `name` and `price` columns from `products`.\n\nRun it and compare the result with the full table.",
+
       "help": {
         "concept": "You can return more than one column by separating column names with commas.",
         "hint_1": "Use both `name` and `price` after `SELECT`.",
@@ -99,6 +104,8 @@
       "starterCode": "-- Show names and prices\n",
       "fixedLanguage": "sql",
       "fixedSqlDialect": "sqlite",
+      "expectedExampleMeta": "Accepted | Example",
+
       "runtime": {
         "kind": "sql",
         "datasetId": "products_catalog",
@@ -117,6 +124,8 @@
       "starterCode": "-- Show ids and categories\n",
       "fixedLanguage": "sql",
       "fixedSqlDialect": "sqlite",
+      "expectedExampleMeta": "Accepted | Example",
+
       "runtime": {
         "kind": "sql",
         "datasetId": "products_catalog",
@@ -135,6 +144,8 @@
       "starterCode": "-- Show stock values only\n",
       "fixedLanguage": "sql",
       "fixedSqlDialect": "sqlite",
+      "expectedExampleMeta": "Accepted | Example",
+
       "runtime": {
         "kind": "sql",
         "datasetId": "products_catalog",
@@ -153,6 +164,8 @@
       "starterCode": "-- Task 1\n-- Show the full products table\n\n",
       "fixedLanguage": "sql",
       "fixedSqlDialect": "sqlite",
+      "expectedExampleMeta": "Accepted | Example",
+
       "runtime": {
         "kind": "sql",
         "datasetId": "products_catalog",
