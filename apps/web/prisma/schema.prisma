@@ -785,3 +785,75 @@ enum AccessGrantType {
   admin
   trial
 }
+
+
+
+
+
+
+model LearnerProgress {
+  id                String   @id @default(cuid())
+  actorKey          String   @unique
+  userId            String?
+  totalXp           Int      @default(0)
+  level             Int      @default(1)
+  currentStreak     Int      @default(0)
+  longestStreak     Int      @default(0)
+  lastActiveOn      DateTime? @db.Date
+  streakFreezes     Int      @default(0)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  @@index([userId])
+}
+
+model DailyLearningStat {
+  id                String   @id @default(cuid())
+  actorKey          String
+  userId            String?
+  day               DateTime @db.Date
+  xpEarned          Int      @default(0)
+  answeredCount     Int      @default(0)
+  correctCount      Int      @default(0)
+  sessionCount      Int      @default(0)
+  minutesStudied    Int      @default(0)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  @@unique([actorKey, day])
+  @@index([userId])
+  @@index([day])
+}
+
+model XpEvent {
+  id                String      @id @default(cuid())
+  actorKey          String
+  userId            String?
+  sourceType        XpSourceType
+  sourceId          String?
+  subjectId         String?
+  moduleId          String?
+  topicId           String?
+  instanceId        String?
+  sessionId         String?
+  xpDelta           Int
+  reason            String
+  idempotencyKey    String?     @unique
+  createdAt         DateTime    @default(now())
+
+  @@index([actorKey, createdAt])
+  @@index([userId])
+  @@index([sourceType, sourceId])
+  @@index([subjectId, moduleId])
+}
+
+enum XpSourceType {
+  answer_correct
+  answer_retry_correct
+  session_complete
+  topic_complete
+  module_complete
+  streak_bonus
+  daily_goal
+  project_step
+}

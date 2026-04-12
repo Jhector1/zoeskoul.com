@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo, useEffect, useState, useRef, useCallback } from "react";
+import React, {useMemo, useEffect, useState, useRef, useCallback, useTransition} from "react";
 import { useParams } from "next/navigation";
 import { useRouter } from "@/i18n/navigation";
 
@@ -63,6 +63,8 @@ import {
     STUDENTS_SQL_SCHEMA,
     STUDENTS_SQL_SEED,
 } from "./data/studentsSqlFallback";
+import { useGamificationSummary } from "@/components/review/module/hooks/useGamificationSummary";
+import CourseCompleteConfetti from "@/components/review/module/components/CourseCompleteConfetti";
 
 const TOPIC_PANE_ANIM = {
     initial: { opacity: 0, y: 10 },
@@ -74,6 +76,63 @@ const TOPIC_PANE_TRANSITION = {
     duration: 0.22,
     ease: [0.16, 1, 0.3, 1] as const,
 };
+
+
+
+
+
+
+const TOPIC_TOAST_MS = 4200;
+
+const TOPIC_TOAST_ANIM = {
+    initial: { opacity: 0, y: 18, scale: 0.98, filter: "blur(6px)" },
+    animate: { opacity: 1, y: 0, scale: 1, filter: "blur(0px)" },
+    exit: { opacity: 0, y: 10, scale: 0.985, filter: "blur(4px)" },
+};
+
+const TOPIC_TOAST_TRANSITION = {
+    type: "spring",
+    stiffness: 360,
+    damping: 30,
+    mass: 0.9,
+} as const;
+
+const MODULE_MODAL_BACKDROP_TRANSITION = {
+    duration: 0.2,
+    ease: [0.16, 1, 0.3, 1] as const,
+};
+
+const MODULE_MODAL_PANEL_ANIM = {
+    initial: { opacity: 0, y: 20, scale: 0.96, filter: "blur(8px)" },
+    animate: { opacity: 1, y: 0, scale: 1, filter: "blur(0px)" },
+    exit: { opacity: 0, y: 12, scale: 0.98, filter: "blur(6px)" },
+};
+
+const MODULE_MODAL_PANEL_TRANSITION = {
+    type: "spring",
+    stiffness: 320,
+    damping: 28,
+    mass: 0.95,
+} as const;
+
+
+
+type TopicCelebrateToast = {
+    id: string;
+    title: string;
+    message: string;
+    streak?: number | null;
+    xp?: number | null;
+};
+
+function getStreakMilestoneMessage(streak: number | null | undefined): string | null {
+    if (!streak) return null;
+    if (streak === 3) return "You’re building consistency.";
+    if (streak === 7) return "A full week — strong work.";
+    if (streak === 14) return "Two weeks in a row. Keep it alive.";
+    if (streak === 30) return "30 days — that’s real discipline.";
+    return null;
+}
 
 export default function ReviewModuleView({
                                              mod,
@@ -225,6 +284,19 @@ export default function ReviewModuleView({
             )}`,
     });
 
+    const [topicToast, setTopicToast] = useState<TopicCelebrateToast | null>(null);
+    const [moduleCelebrateOpen, setModuleCelebrateOpen] = useState(false);
+    const celebrationsBootstrappedRef = useRef(false);
+    const prevCompletedTopicsRef = useRef<Set<string>>(new Set());
+    const prevModuleCompleteRef = useRef(false);
+    const prevStreakRef = useRef<number | null>(null);
+    const [topicToastPaused, setTopicToastPaused] = useState(false);
+    const [courseCelebrateOpen, setCourseCelebrateOpen] = useState(false);
+    const [courseCelebrateBurstKey, setCourseCelebrateBurstKey] = useState(0);
+    const prevCourseCompleteRef = useRef(false);
+
+
+    const [isModuleContinuePending, startModuleContinueTransition] = useTransition();
     const handleEnsureToolsVisible = useCallback(() => {
         if (panels.rightCollapsed) {
             panels.setRightCollapsed(false);
@@ -396,7 +468,6 @@ export default function ReviewModuleView({
 
     const navLoading = nav === undefined;
     const navError = nav === null;
-    const hasNextModule = !!nav && !!nav.nextModuleId;
 
     const handleAssignmentClick = useCallback(async () => {
         const returnToCurrentModule = `/${locale}/${ROUTES.learningPath(
@@ -463,6 +534,29 @@ export default function ReviewModuleView({
     const [pending, setPending] = useState<null | { kind: "module" | "topic"; tid?: string }>(
         null,
     );
+
+
+    useEffect(() => {
+        const courseComplete =
+            subjectFinish?.status === "certificate_ready" ||
+            subjectFinish?.status === "certificate_issued";
+
+        if (!celebrationsBootstrappedRef.current) {
+            prevCourseCompleteRef.current = courseComplete;
+            return;
+        }
+
+        if (courseComplete && !prevCourseCompleteRef.current) {
+            setCourseCelebrateBurstKey((k) => k + 1);
+            setCourseCelebrateOpen(true);
+        }
+
+        prevCourseCompleteRef.current = courseComplete;
+    }, [subjectFinish]);
+
+
+
+
 
     const pendingStats = useMemo(() => {
         if (!pending) return { answeredCount: 0, sessionSize: 0, title: "", description: "" };
@@ -781,6 +875,91 @@ export default function ReviewModuleView({
         return { total, done, pct: total ? clamp01(done / total) : 0 };
     }, [topics, progress]);
 
+    const { summary: gamificationSummary } = useGamificationSummary();
+
+    const headerGamification = useMemo(() => {
+        if (!gamificationSummary) return null;
+
+        return {
+            totalXp: gamificationSummary.totalXp,
+            level: gamificationSummary.level,
+            currentStreak: gamificationSummary.currentStreak,
+            levelProgressPct: gamificationSummary.levelProgressPct,
+        };
+    }, [gamificationSummary]);
+
+    useEffect(() => {
+        if (!progressHydrated || !topics.length) return;
+
+        const currentCompletedTopics = new Set<string>();
+        for (const t of topics) {
+            const cards = Array.isArray(t.cards) ? t.cards : [];
+            const tstate = (progress as any)?.topics?.[t.id];
+            if (isTopicComplete(cards, tstate, t.id)) currentCompletedTopics.add(t.id);
+        }
+
+        const currentModuleComplete = moduleCompleteFromProgress(progress, topics);
+        const currentStreak = gamificationSummary?.currentStreak ?? null;
+
+        if (!celebrationsBootstrappedRef.current) {
+            prevCompletedTopicsRef.current = currentCompletedTopics;
+            prevModuleCompleteRef.current = currentModuleComplete;
+            prevStreakRef.current = currentStreak;
+            celebrationsBootstrappedRef.current = true;
+            return;
+        }
+
+        let newestToast: TopicCelebrateToast | null = null;
+        const prevCompleted = prevCompletedTopicsRef.current;
+        const prevStreak = prevStreakRef.current;
+
+        for (const t of topics) {
+            if (!currentCompletedTopics.has(t.id)) continue;
+            if (prevCompleted.has(t.id)) continue;
+
+            const streakIncreased =
+                currentStreak != null &&
+                (prevStreak == null || currentStreak > prevStreak);
+
+            const milestoneMessage = streakIncreased
+                ? getStreakMilestoneMessage(currentStreak)
+                : null;
+
+            newestToast = {
+                id: `${t.id}:${Date.now()}`,
+                title: "Topic complete",
+                message: streakIncreased
+                    ? milestoneMessage ?? `Nice work — your streak is now ${currentStreak}.`
+                    : "Nice work — keep the momentum.",
+                streak: streakIncreased ? currentStreak : null,
+                xp: null,
+            };
+        }
+
+        if (newestToast) {
+            setTopicToast(newestToast);
+        }
+        if (currentModuleComplete && !prevModuleCompleteRef.current) {
+            const courseCompleteSoon =
+                subjectFinish?.status === "certificate_ready" ||
+                subjectFinish?.status === "certificate_issued";
+
+            if (!courseCompleteSoon) {
+                setModuleCelebrateOpen(true);
+            }
+        }
+
+        prevCompletedTopicsRef.current = currentCompletedTopics;
+        prevModuleCompleteRef.current = currentModuleComplete;
+        prevStreakRef.current = currentStreak;
+    }, [progressHydrated, progress, topics, gamificationSummary, subjectFinish]);
+    useEffect(() => {
+        if (!topicToast || topicToastPaused) return;
+
+        const t = window.setTimeout(() => setTopicToast(null), TOPIC_TOAST_MS);
+        return () => window.clearTimeout(t);
+    }, [topicToast, topicToastPaused]);
+
     const tp: any = (progress as any)?.topics?.[viewTid] ?? {};
     const prereqsForAllQuizzes = unlockAll
         ? true
@@ -908,6 +1087,71 @@ export default function ReviewModuleView({
         goToTopic(nextTopic.id);
     }, [nextTopic?.id, goToTopic]);
 
+
+
+    const hasNextModule = !!nav && !!nav.nextModuleId;
+    const nextLocked = Boolean(nav?.nextLocked);
+    const nextBillingHref = nav?.nextBillingHref ?? null;
+
+    const goModule = useCallback(
+        (mid: string) => {
+            router.push(
+                ROUTES.learningPath(
+                    encodeURIComponent(subjectSlug),
+                    encodeURIComponent(mid),
+                ),
+            );
+            router.refresh();
+        },
+        [router, subjectSlug],
+    );
+
+    const goUnlockNext = useCallback(() => {
+        router.push(nextBillingHref || "/billing");
+        router.refresh();
+    }, [router, nextBillingHref]);
+
+    const handleOutroContinue = useCallback(() => {
+        if (nextTopic?.id) {
+            goNextTopic();
+            return;
+        }
+
+        if (!nav?.nextModuleId) return;
+        if (!canGoNextModule) return;
+
+        if (nextLocked) {
+            goUnlockNext();
+            return;
+        }
+
+        goModule(nav.nextModuleId);
+    }, [
+        nextTopic?.id,
+        goNextTopic,
+        nav?.nextModuleId,
+        canGoNextModule,
+        nextLocked,
+        goUnlockNext,
+        goModule,
+    ]);
+
+    const outroContinueEnabled =
+        Boolean(nextTopic?.id) || (Boolean(nav?.nextModuleId) && canGoNextModule);
+
+    const outroContinueLabel = nextTopic?.id
+        ? "Next topic"
+        : nav?.nextModuleId
+            ? nextLocked
+                ? "Unlock next"
+                : "Next module"
+            : "Continue";
+
+
+
+
+
+
     const handleResetCurrentTopic = useCallback(() => {
         requestResetTopic(viewTid);
     }, [requestResetTopic, viewTid]);
@@ -964,6 +1208,43 @@ export default function ReviewModuleView({
         progress,
     ]);
 
+    const moduleCelebrateCopy = useMemo(() => {
+        const title = "Module complete";
+        const moduleLabel =
+            String((mod as any)?.label ?? (mod as any)?.title ?? "this module");
+        const streak = gamificationSummary?.currentStreak ?? null;
+        const streakMilestone = getStreakMilestoneMessage(streak);
+
+        return {
+            title,
+            body: `Great job — you finished ${moduleLabel}.`,
+            streak,
+            totalXp: gamificationSummary?.totalXp ?? null,
+            streakMilestone,
+        };
+    }, [mod, gamificationSummary]);
+
+
+
+
+
+    const courseCelebrateCopy = useMemo(() => {
+        const streak = gamificationSummary?.currentStreak ?? null;
+        const totalXp = gamificationSummary?.totalXp ?? null;
+        const streakMilestone = getStreakMilestoneMessage(streak);
+
+        return {
+            title: "Course complete",
+            body: "You finished the full course. Nice work — this is a real milestone.",
+            streak,
+            totalXp,
+            streakMilestone,
+            ctaLabel:
+                subjectFinish?.certificateIssued ? "View certificate" : "Get certificate",
+        };
+    }, [gamificationSummary, subjectFinish]);
+
+
     const content = (
         <div
             className="relative h-full w-full overflow-hidden bg-[radial-gradient(1200px_700px_at_20%_0%,#eafff5_0%,#ffffff_55%,#f6f7ff_100%)] dark:bg-[radial-gradient(1200px_700px_at_20%_0%,#151a2c_0%,#0b0d12_50%)] text-neutral-900 dark:text-white/90"
@@ -985,6 +1266,222 @@ export default function ReviewModuleView({
                     onClose={cancelPendingChange}
                 />
             ) : null}
+
+
+
+            <CourseCompleteConfetti
+                open={courseCelebrateOpen}
+                reduceMotion={reduceMotion}
+                burstKey={courseCelebrateBurstKey}
+                count={92}
+            />
+
+            <AnimatePresence>
+                {courseCelebrateOpen ? (
+                    <motion.div
+                        key="course-celebrate-backdrop"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={reduceMotion ? { duration: 0 } : MODULE_MODAL_BACKDROP_TRANSITION}
+                        className="fixed inset-0 z-[96] flex items-center justify-center bg-black/45 p-4"
+                    >
+                        <motion.div
+                            initial={reduceMotion ? false : MODULE_MODAL_PANEL_ANIM.initial}
+                            animate={MODULE_MODAL_PANEL_ANIM.animate}
+                            exit={reduceMotion ? undefined : MODULE_MODAL_PANEL_ANIM.exit}
+                            transition={reduceMotion ? { duration: 0 } : MODULE_MODAL_PANEL_TRANSITION}
+                            className="relative w-full max-w-md rounded-3xl border border-[rgb(var(--ui-border)/0.9)] bg-[rgb(var(--ui-surface)/0.98)] p-6 shadow-2xl"
+                        >
+                            <div className="text-lg font-bold text-[rgb(var(--ui-text)/0.98)]">
+                                {courseCelebrateCopy.title}
+                            </div>
+
+                            <div className="mt-2 text-sm text-[rgb(var(--ui-text-soft)/0.96)]">
+                                {courseCelebrateCopy.body}
+                            </div>
+
+                            {courseCelebrateCopy.streakMilestone ? (
+                                <div className="mt-3 rounded-2xl border border-[rgb(var(--ui-border)/0.85)] bg-[rgb(var(--ui-surface-muted)/0.9)] px-3 py-2 text-sm font-medium text-[rgb(var(--ui-text)/0.96)]">
+                                    {courseCelebrateCopy.streakMilestone}
+                                </div>
+                            ) : null}
+
+                            <div className="mt-4 flex flex-wrap gap-2">
+                                {courseCelebrateCopy.streak ? (
+                                    <span className="rounded-full border border-[rgb(var(--ui-border)/0.85)] px-3 py-1.5 text-sm font-semibold">
+              🔥 {courseCelebrateCopy.streak} streak
+            </span>
+                                ) : null}
+
+                                {courseCelebrateCopy.totalXp != null ? (
+                                    <span className="rounded-full border border-[rgb(var(--ui-border)/0.85)] px-3 py-1.5 text-sm font-semibold">
+              {courseCelebrateCopy.totalXp.toLocaleString()} XP
+            </span>
+                                ) : null}
+
+                                <span className="rounded-full border border-[rgb(var(--ui-border)/0.85)] px-3 py-1.5 text-sm font-semibold">
+  Course finished
+</span>
+                            </div>
+
+                            <div className="mt-5 flex gap-2">
+                                <button
+                                    type="button"
+                                    onClick={() => {
+                                        setCourseCelebrateOpen(false);
+                                        handleOpenCertificate();
+                                    }}
+                                    className="ui-btn ui-btn-primary"
+                                >
+                                    {courseCelebrateCopy.ctaLabel}
+                                </button>
+
+                                <button
+                                    type="button"
+                                    onClick={() => setCourseCelebrateOpen(false)}
+                                    className="ui-btn ui-btn-secondary"
+                                >
+                                    Stay here
+                                </button>
+                            </div>
+                        </motion.div>
+                    </motion.div>
+                ) : null}
+            </AnimatePresence>
+            <AnimatePresence>
+                {moduleCelebrateOpen ? (
+                    <motion.div
+                        key="module-celebrate-backdrop"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={reduceMotion ? { duration: 0 } : MODULE_MODAL_BACKDROP_TRANSITION}
+                        className="fixed inset-0 z-[90] flex items-center justify-center bg-black/45 p-4"
+                    >
+                        <motion.div
+                            initial={reduceMotion ? false : MODULE_MODAL_PANEL_ANIM.initial}
+                            animate={MODULE_MODAL_PANEL_ANIM.animate}
+                            exit={reduceMotion ? undefined : MODULE_MODAL_PANEL_ANIM.exit}
+                            transition={reduceMotion ? { duration: 0 } : MODULE_MODAL_PANEL_TRANSITION}
+                            className="w-full max-w-md rounded-3xl border border-[rgb(var(--ui-border)/0.9)] bg-[rgb(var(--ui-surface)/0.98)] p-6 shadow-2xl"
+                        >
+                            <div className="text-lg font-bold text-[rgb(var(--ui-text)/0.98)]">
+                                {moduleCelebrateCopy.title}
+                            </div>
+
+                            <div className="mt-2 text-sm text-[rgb(var(--ui-text-soft)/0.96)]">
+                                {moduleCelebrateCopy.body}
+                            </div>
+
+                            {moduleCelebrateCopy.streakMilestone ? (
+                                <div className="mt-3 rounded-2xl border border-[rgb(var(--ui-border)/0.85)] bg-[rgb(var(--ui-surface-muted)/0.9)] px-3 py-2 text-sm font-medium text-[rgb(var(--ui-text)/0.96)]">
+                                    {moduleCelebrateCopy.streakMilestone}
+                                </div>
+                            ) : null}
+
+                            <div className="mt-4 flex flex-wrap gap-2">
+                                {moduleCelebrateCopy.streak ? (
+                                    <span className="rounded-full border border-[rgb(var(--ui-border)/0.85)] px-3 py-1.5 text-sm font-semibold">
+                            🔥 {moduleCelebrateCopy.streak} streak
+                        </span>
+                                ) : null}
+
+                                {moduleCelebrateCopy.totalXp != null ? (
+                                    <span className="rounded-full border border-[rgb(var(--ui-border)/0.85)] px-3 py-1.5 text-sm font-semibold">
+                            {moduleCelebrateCopy.totalXp.toLocaleString()} XP
+                        </span>
+                                ) : null}
+
+                                <span className="rounded-full border border-[rgb(var(--ui-border)/0.85)] px-3 py-1.5 text-sm font-semibold">
+                        {moduleProgress.done}/{moduleProgress.total} topics
+                    </span>
+                            </div>
+
+                            <div className="mt-5 flex gap-2">
+                                <button
+                                    type="button"
+                                    disabled={!outroContinueEnabled || isModuleContinuePending}
+                                    onClick={() => {
+                                        if (!outroContinueEnabled) return;
+
+                                        startModuleContinueTransition(() => {
+                                            handleOutroContinue();
+                                        });
+                                    }}
+                                    className={cn(
+                                        "ui-btn ui-btn-primary",
+                                        (!outroContinueEnabled || isModuleContinuePending) && "cursor-not-allowed opacity-60",
+                                    )}
+                                >
+                                    {isModuleContinuePending ? (
+                                        <span className="inline-flex items-center gap-2">
+        <span className="ui-quiz-spinner" />
+        Continuing…
+      </span>
+                                    ) : (
+                                        <>
+                                            {outroContinueLabel} <span aria-hidden>→</span>
+                                        </>
+                                    )}
+                                </button>
+
+                                <button
+                                    type="button"
+                                    disabled={isModuleContinuePending}
+                                    onClick={() => setModuleCelebrateOpen(false)}
+                                    className={cn(
+                                        "ui-btn ui-btn-secondary",
+                                        isModuleContinuePending && "cursor-not-allowed opacity-60",
+                                    )}
+                                >
+                                    Review module
+                                </button>
+                            </div>                        </motion.div>
+                    </motion.div>
+                ) : null}
+            </AnimatePresence>
+
+            <AnimatePresence>
+                {topicToast ? (
+                    <motion.div
+                        key={topicToast.id}
+                        initial={reduceMotion ? false : TOPIC_TOAST_ANIM.initial}
+                        animate={TOPIC_TOAST_ANIM.animate}
+                        exit={reduceMotion ? undefined : TOPIC_TOAST_ANIM.exit}
+                        transition={reduceMotion ? { duration: 0 } : TOPIC_TOAST_TRANSITION}
+                        className="fixed bottom-4 right-4 z-[80] w-[min(92vw,360px)]"
+                        onMouseEnter={() => setTopicToastPaused(true)}
+                        onMouseLeave={() => setTopicToastPaused(false)}
+                    >
+                        <div className="rounded-2xl border border-[rgb(var(--ui-border)/0.9)] bg-[rgb(var(--ui-surface)/0.96)] p-4 shadow-xl backdrop-blur">
+                            <div className="text-sm font-semibold text-[rgb(var(--ui-text)/0.98)]">
+                                {topicToast.title}
+                            </div>
+
+                            <div className="mt-1 text-sm text-[rgb(var(--ui-text-soft)/0.96)]">
+                                {topicToast.message}
+                            </div>
+
+                            {(topicToast.streak || topicToast.xp) ? (
+                                <div className="mt-2 flex flex-wrap gap-2">
+                                    {topicToast.streak ? (
+                                        <span className="rounded-full border border-[rgb(var(--ui-border)/0.8)] px-2.5 py-1 text-xs font-semibold">
+                                🔥 {topicToast.streak} streak
+                            </span>
+                                    ) : null}
+
+                                    {topicToast.xp ? (
+                                        <span className="rounded-full border border-[rgb(var(--ui-border)/0.8)] px-2.5 py-1 text-xs font-semibold">
+                                +{topicToast.xp} XP
+                            </span>
+                                    ) : null}
+                                </div>
+                            ) : null}
+                        </div>
+                    </motion.div>
+                ) : null}
+            </AnimatePresence>
 
             <MobileDrawer
                 open={mobileTopicsOpen}
@@ -1053,73 +1550,91 @@ export default function ReviewModuleView({
                             <div className="shrink-0">
                                 <HeaderSlick
                                     slot={
-                                        <div className="inline-flex items-center gap-2 whitespace-nowrap [&>button]:shrink-0">
-                                            <button
-                                                type="button"
-                                                onClick={handleBack}
-                                                className="ui-btn ui-btn-secondary text-xs font-extrabold whitespace-nowrap"
-                                                title="Go back"
-                                            >
-                                                ← Back
-                                            </button>
-
-                                            <button
-                                                type="button"
-                                                onClick={handleToggleLeftPanel}
-                                                className="ui-btn ui-btn-secondary text-xs font-extrabold whitespace-nowrap"
-                                                title="Topics"
-                                            >
-                                                {showDesktopLeft
-                                                    ? panels.leftCollapsed
-                                                        ? "Topics ▶"
-                                                        : "Topics ◀"
-                                                    : "Topics"}
-                                            </button>
-
-                                            {toolsUiEnabled ? (
+                                        <div className="flex w-full items-center justify-between gap-3">
+                                            <div className="inline-flex min-w-0 flex-wrap items-center gap-2 [&>button]:shrink-0">
                                                 <button
                                                     type="button"
-                                                    onClick={handleToggleRightPanel}
+                                                    onClick={handleBack}
                                                     className="ui-btn ui-btn-secondary text-xs font-extrabold whitespace-nowrap"
-                                                    title="Tools"
+                                                    title="Go back"
                                                 >
-                                                    {panels.rightCollapsed ? "Tools ▶" : "Tools ◀"}
+                                                    ← Back
                                                 </button>
+
+                                                <button
+                                                    type="button"
+                                                    onClick={handleToggleLeftPanel}
+                                                    className="ui-btn ui-btn-secondary text-xs font-extrabold whitespace-nowrap"
+                                                    title="Topics"
+                                                >
+                                                    {showDesktopLeft
+                                                        ? panels.leftCollapsed
+                                                            ? "Topics ▶"
+                                                            : "Topics ◀"
+                                                        : "Topics"}
+                                                </button>
+
+                                                {toolsUiEnabled ? (
+                                                    <button
+                                                        type="button"
+                                                        onClick={handleToggleRightPanel}
+                                                        className="ui-btn ui-btn-secondary text-xs font-extrabold whitespace-nowrap"
+                                                        title="Tools"
+                                                    >
+                                                        {panels.rightCollapsed ? "Tools ▶" : "Tools ◀"}
+                                                    </button>
+                                                ) : null}
+
+                                                <button
+                                                    type="button"
+                                                    onClick={handleResetCurrentTopic}
+                                                    className="ui-btn ui-btn-secondary text-xs font-extrabold whitespace-nowrap hidden sm:inline-flex"
+                                                >
+                                                    Reset topic
+                                                </button>
+
+                                                <button
+                                                    type="button"
+                                                    onClick={goPrevTopic}
+                                                    className="ui-btn ui-btn-secondary text-xs font-extrabold whitespace-nowrap"
+                                                    disabled={!prevTopic?.id}
+                                                    title={!prevTopic?.id ? "No previous topic" : "Previous topic"}
+                                                >
+                                                    ←
+                                                </button>
+
+                                                <button
+                                                    type="button"
+                                                    onClick={goNextTopic}
+                                                    className="ui-btn ui-btn-secondary text-xs font-extrabold whitespace-nowrap"
+                                                    disabled={!nextTopic?.id || (!unlockAll && !viewIsComplete)}
+                                                    title={
+                                                        !nextTopic?.id
+                                                            ? "No next topic"
+                                                            : !unlockAll && !viewIsComplete
+                                                                ? "Complete the topic to continue"
+                                                                : "Next topic"
+                                                    }
+                                                >
+                                                    →
+                                                </button>
+                                            </div>
+
+                                            {headerGamification ? (
+                                                <div className="hidden sm:flex shrink-0 items-center gap-2">
+                                                    <div className="rounded-full border border-[rgb(var(--ui-border)/0.9)] bg-[rgb(var(--ui-surface)/0.88)] px-2.5 py-1 text-xs font-semibold text-[rgb(var(--ui-text)/0.96)]">
+                                                        🔥 {headerGamification.currentStreak}
+                                                    </div>
+
+                                                    <div className="rounded-full border border-[rgb(var(--ui-border)/0.9)] bg-[rgb(var(--ui-surface)/0.88)] px-2.5 py-1 text-xs font-semibold text-[rgb(var(--ui-text)/0.96)]">
+                                                        Lv {headerGamification.level}
+                                                    </div>
+
+                                                    <div className="rounded-full border border-[rgb(var(--ui-border)/0.9)] bg-[rgb(var(--ui-surface)/0.88)] px-2.5 py-1 text-xs font-semibold text-[rgb(var(--ui-text)/0.96)]">
+                                                        {headerGamification.totalXp.toLocaleString()} XP
+                                                    </div>
+                                                </div>
                                             ) : null}
-
-                                            <button
-                                                type="button"
-                                                onClick={handleResetCurrentTopic}
-                                                className="ui-btn ui-btn-secondary text-xs font-extrabold whitespace-nowrap hidden sm:inline-flex"
-                                            >
-                                                Reset topic
-                                            </button>
-
-                                            <button
-                                                type="button"
-                                                onClick={goPrevTopic}
-                                                className="ui-btn ui-btn-secondary text-xs font-extrabold whitespace-nowrap"
-                                                disabled={!prevTopic?.id}
-                                                title={!prevTopic?.id ? "No previous topic" : "Previous topic"}
-                                            >
-                                                ←
-                                            </button>
-
-                                            <button
-                                                type="button"
-                                                onClick={goNextTopic}
-                                                className="ui-btn ui-btn-secondary text-xs font-extrabold whitespace-nowrap"
-                                                disabled={!nextTopic?.id || (!unlockAll && !viewIsComplete)}
-                                                title={
-                                                    !nextTopic?.id
-                                                        ? "No next topic"
-                                                        : !unlockAll && !viewIsComplete
-                                                            ? "Complete the topic to continue"
-                                                            : "Next topic"
-                                                }
-                                            >
-                                                →
-                                            </button>
                                         </div>
                                     }
                                     isBillingStatus={false}
@@ -1211,7 +1726,8 @@ export default function ReviewModuleView({
                                                 setCardEl={setCardEl}
                                                 viewIsComplete={viewIsComplete}
                                                 viewTopic={viewTopic}
-                                                onContinue={nextTopic?.id ? goNextTopic : undefined}
+                                                onContinue={outroContinueEnabled ? handleOutroContinue : undefined}
+                                                continueLabel={outroContinueLabel}
                                                 showSubjectFinish={!nextTopic?.id}
                                                 subjectSlug={subjectSlug}
                                                 subjectFinish={subjectFinish}
@@ -1325,6 +1841,7 @@ function AnimatedTopicPane(props: {
     viewIsComplete: boolean;
     viewTopic: any;
     onContinue?: () => void;
+    continueLabel?: string;
     showSubjectFinish: boolean;
     subjectSlug: string;
     subjectFinish: any;
@@ -1465,8 +1982,11 @@ function AnimatedTopicPane(props: {
 
                     {props.viewIsComplete ? (
                         <div className="mt-3 shrink-0">
-                            <TopicOutro topic={props.viewTopic} onContinue={props.onContinue} />
-                        </div>
+                            <TopicOutro
+                                topic={props.viewTopic}
+                                onContinue={props.onContinue}
+                                continueLabel={props.continueLabel}
+                            />                        </div>
                     ) : null}
 
                     {props.showSubjectFinish ? (

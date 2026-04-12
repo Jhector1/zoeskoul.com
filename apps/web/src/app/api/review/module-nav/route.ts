@@ -133,6 +133,7 @@ export async function GET(req: Request) {
             prevModuleId: prev?.slug ?? null,
             nextModuleId: next?.slug ?? null,
             nextLocked,
+            nextBillingHref: null,
         },
         200,
         setGuestId,

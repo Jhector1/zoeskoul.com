@@ -257,10 +257,42 @@ export type SubmitAnswer =
     | ListenBuildSubmitAnswer
     | FillBlankChoiceSubmitAnswer;
 
+export type ValidateGamificationPayload = {
+    xpGained: number;
+    leveledUp: boolean;
+    streakExtended: boolean;
+    awarded: Array<{
+        sourceType: string;
+        xpDelta: number;
+        reason: string;
+    }>;
+    summary: {
+        totalXp: number;
+        level: number;
+        currentStreak: number;
+        longestStreak: number;
+        xpIntoLevel: number;
+        xpForNextLevel: number | null;
+        levelProgressPct: number;
+    };
+};
+
 export type ValidateResponse = {
     ok: boolean;
     expected: any;
-    explanation?: string;
+    explanation?: string | null;
+    feedback?: string | null;
+    finalized?: boolean;
+    attempts?: {
+        used: number;
+        max: number | null;
+        left: number | null;
+    };
+    sessionComplete?: boolean;
+    summary?: unknown;
+    returnUrl?: string | null;
+    requestId?: string;
+    gamification?: ValidateGamificationPayload | null;
 };
 
 export type PoolKind = PracticeKind;

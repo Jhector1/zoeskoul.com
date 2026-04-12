@@ -7,9 +7,11 @@ import BannerCard from "./BannerCard";
 export default function TopicOutro({
                                        topic,
                                        onContinue,
+                                       continueLabel = "Continue",
                                    }: {
     topic: any;
     onContinue?: () => void;
+    continueLabel?: string;
 }) {
     const outro = topic?.outro ?? null;
     const bullets: string[] = outro?.bullets ?? [];
@@ -44,11 +46,10 @@ export default function TopicOutro({
                         onClick={onContinue}
                         className={cn("ui-btn-primary px-4")}
                     >
-                        Next topic →
+                        {continueLabel} <span aria-hidden>→</span>
                     </button>
                 ) : null
             }
         />
-
     );
 }

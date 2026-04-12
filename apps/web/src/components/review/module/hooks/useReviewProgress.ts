@@ -10,6 +10,7 @@ import {
 import { stableJson } from "@/lib/client/persistence/stableJson";
 import { useDebouncedCommit } from "@/lib/client/persistence/useDebouncedCommit";
 import { useFlushOnPageExit } from "@/lib/client/persistence/useFlushOnPageExit";
+import {emitGamificationUpdate} from "@/lib/gamification/browserEvents";
 
 export function useReviewProgress(args: {
     subjectSlug: string;
@@ -69,6 +70,19 @@ export function useReviewProgress(args: {
 
                 if (!res.ok) {
                     throw new Error(`Progress save failed: ${res.status}`);
+                }
+
+                const data = await res.json().catch(() => null);
+                const gamification = data?.gamification ?? null;
+
+                if (gamification?.summary) {
+                    emitGamificationUpdate({
+                        source: "review_progress",
+                        xpGained: gamification.xpGained ?? 0,
+                        leveledUp: Boolean(gamification.leveledUp),
+                        streakExtended: Boolean(gamification.streakExtended),
+                        summary: gamification.summary,
+                    });
                 }
             } catch (e: any) {
                 if (signal.aborted) return;
@@ -132,6 +146,19 @@ export function useReviewProgress(args: {
 
                 if (res.ok) {
                     lastCommittedRef.current = body;
+
+                    const data = await res.json().catch(() => null);
+                    const gamification = data?.gamification ?? null;
+
+                    if (gamification?.summary) {
+                        emitGamificationUpdate({
+                            source: "review_progress",
+                            xpGained: gamification.xpGained ?? 0,
+                            leveledUp: Boolean(gamification.leveledUp),
+                            streakExtended: Boolean(gamification.streakExtended),
+                            summary: gamification.summary,
+                        });
+                    }
                 }
             } catch {
                 // ignore here if you want, but do not mark committed

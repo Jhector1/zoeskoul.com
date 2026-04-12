@@ -49,7 +49,7 @@ function ExpectedExampleCard({
         blocks.push({ type: "body", text: example.stdout.replace(/\n$/, "") });
 
         return (
-            <div className="ui-page-surface p-3">
+            <div className="ui-surface p-3">
                 <div className="flex items-center justify-between gap-3">
                     <div className="ui-title-sm">Example</div>
                     <div className="ui-meta">{

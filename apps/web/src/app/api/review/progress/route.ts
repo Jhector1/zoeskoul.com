@@ -14,6 +14,8 @@ import { pickLocale } from "@/lib/review/api/shared/schemas";
 import type { ReviewProgressState } from "@/lib/subjects/progressTypes";
 import { ReviewProgressWriteSchema } from "@/lib/review/api/progress/schemas";
 import { resolveReviewModuleForSubject } from "@/lib/review/api/shared/modules";
+import {awardReviewProgressGamification} from "@/lib/gamification/awardReviewProgressGamification";
+// import { awardReviewProgressGamification } from "@/lib/gamification/awardReviewProgressGamification";
 
 async function resolveReviewProgressScope(args: {
     subjectSlug: string;
@@ -33,7 +35,8 @@ async function resolveReviewProgressScope(args: {
 export async function GET(req: Request) {
     const { searchParams } = new URL(req.url);
     const subjectSlug = (searchParams.get("subjectSlug") ?? "").trim();
-    const moduleSlug = (searchParams.get("moduleSlug") ?? searchParams.get("moduleId") ?? "").trim();    const locale = pickLocale(searchParams.get("locale"), "en");
+    const moduleSlug = (searchParams.get("moduleSlug") ?? searchParams.get("moduleId") ?? "").trim();
+    const locale = pickLocale(searchParams.get("locale"), "en");
 
     if (!subjectSlug || !moduleSlug) {
         return bodyJsonResponse({ message: "Missing subjectSlug/moduleId." }, 400);
@@ -125,6 +128,20 @@ export async function PUT(req: Request) {
 
     const actorKey = actorKeyOf(actor);
 
+    const previous = await prisma.reviewProgress.findUnique({
+        where: {
+            actorKey_subjectSlug_moduleId_locale: {
+                actorKey,
+                subjectSlug,
+                moduleId: resolved.module.slug,
+                locale,
+            },
+        },
+        select: {
+            state: true,
+        },
+    });
+
     const saved = await prisma.reviewProgress.upsert({
         where: {
             actorKey_subjectSlug_moduleId_locale: {
@@ -150,10 +167,30 @@ export async function PUT(req: Request) {
         },
     });
 
+    let gamification = null;
+    try {
+        gamification = await awardReviewProgressGamification({
+            prisma,
+            actor,
+            subjectSlug,
+            moduleSlug: resolved.module.slug,
+            previousState: (previous?.state ?? null) as ReviewProgressState | null,
+            nextState: state,
+        });
+    } catch (e) {
+        console.error("awardReviewProgressGamification failed", {
+            actorKey,
+            subjectSlug,
+            moduleSlug: resolved.module.slug,
+            error: e,
+        });
+    }
+
     return bodyJsonWithGuestCookie(
         {
             ok: true,
             saved,
+            gamification,
         },
         200,
         setGuestId,
@@ -167,8 +204,8 @@ export async function DELETE(req: Request) {
 
     const { searchParams } = new URL(req.url);
     const subjectSlug = (searchParams.get("subjectSlug") ?? "").trim();
-    const moduleSlug =
-        (searchParams.get("moduleSlug") ?? searchParams.get("moduleId") ?? "").trim();    const locale = pickLocale(searchParams.get("locale"), "en");
+    const moduleSlug = (searchParams.get("moduleSlug") ?? searchParams.get("moduleId") ?? "").trim();
+    const locale = pickLocale(searchParams.get("locale"), "en");
 
     if (!subjectSlug || !moduleSlug) {
         return bodyJsonResponse({ message: "Missing subjectSlug/moduleId." }, 400);

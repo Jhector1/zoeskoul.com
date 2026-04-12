@@ -48,7 +48,7 @@
         "difficulty": "easy",
         "n": 3,
         "allowReveal": true,
-        "preferKind": "fill_blank_choice",
+        "preferKind": null,
         "maxAttempts": 10
       }
     }

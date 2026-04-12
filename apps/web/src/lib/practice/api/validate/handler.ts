@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 
 import { attachGuestCookie } from "@/lib/practice/actor";
 import { isOnboardingTrialSession } from "@/lib/onboarding/trialPolicy";
+import { awardValidateGamification } from "@/lib/gamification/awardValidateGamification";
 
 import type { PracticeValidateContext } from "./types";
 import { getExpectedCanon } from "./mappers/expected.mapper";
@@ -188,7 +189,6 @@ export async function handlePracticeValidate(ctx: PracticeValidateContext) {
         instance,
         expectedCanon,
         answer: isReveal ? null : answer!,
-
         showDebug,
     });
 
@@ -209,6 +209,27 @@ export async function handlePracticeValidate(ctx: PracticeValidateContext) {
         ok: isReveal ? false : Boolean(graded.ok),
         finalized,
     });
+
+    let gamification = null;
+    try {
+        gamification = await awardValidateGamification({
+            prisma,
+            actor,
+            instance,
+            session,
+            isReveal,
+            gradedOk: Boolean(graded.ok),
+            priorNonRevealAttempts,
+            persisted,
+        });
+    } catch (e) {
+        console.error("awardValidateGamification failed", {
+            requestId,
+            instanceId: instance?.id,
+            sessionId: session?.id ?? null,
+            error: e,
+        });
+    }
 
     const includeExpected = isReveal;
 
@@ -235,6 +256,7 @@ export async function handlePracticeValidate(ctx: PracticeValidateContext) {
         attempts: { used: nextNonRevealAttempts, max: maxAttempts, left },
         sessionComplete: persisted.sessionComplete,
         summary: persisted.sessionSummary,
+        gamification,
         returnUrl,
         requestId,
     });

@@ -22,6 +22,7 @@ import {
   DEFAULT_PRACTICE_HELP_POLICY,
   getNextPracticeHelpStepKey,
 } from "@/lib/practice/help/steps";
+import {emitGamificationUpdate} from "@/lib/gamification/browserEvents";
 
 export { isEmptyPracticeAnswer } from "@/lib/practice/runtime";
 export type PracticeState = PracticeItemState;
@@ -391,6 +392,18 @@ export function useQuizPracticeBank(args: {
           });
 
           emitSfx(submitted.ok ? "answer:correct" : "answer:wrong");
+
+
+          const gamification = (submitted.data as any)?.gamification ?? null;
+          if (gamification?.summary) {
+            emitGamificationUpdate({
+              source: "validate",
+              xpGained: gamification.xpGained ?? 0,
+              leveledUp: Boolean(gamification.leveledUp),
+              streakExtended: Boolean(gamification.streakExtended),
+              summary: gamification.summary,
+            });
+          }
 
           setPractice((prev) => {
             const nextAttempts = submitted.used;
