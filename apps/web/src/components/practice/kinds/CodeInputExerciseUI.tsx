@@ -52,7 +52,9 @@ function ExpectedExampleCard({
             <div className="ui-page-surface p-3">
                 <div className="flex items-center justify-between gap-3">
                     <div className="ui-title-sm">Example</div>
-                    <div className="ui-meta">{example.meta ?? "Expected example"}</div>
+                    <div className="ui-meta">{
+                        // example.meta ??
+                        "Expected example"}</div>
                 </div>
 
                 <div className="mt-2 whitespace-pre-wrap break-words px-2 font-mono text-xs leading-5">
@@ -77,7 +79,9 @@ function ExpectedExampleCard({
             <div className="ui-page-surface p-3">
                 <div className="flex items-center justify-between gap-3">
                     <div className="ui-title-sm">Expected result</div>
-                    <div className="ui-meta">{example.meta ?? "Result preview"}</div>
+                    <div className="ui-meta">{
+                        // example.meta ??
+                        "Result preview"}</div>
                 </div>
 
                 <div className="mt-2 overflow-auto">

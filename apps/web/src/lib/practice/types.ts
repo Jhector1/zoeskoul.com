@@ -99,31 +99,6 @@ export type VectorDragDotExercise = ExerciseBase & {
     tolerance: number;
 };
 
-export type TextInputExercise = ExerciseBase & {
-    kind: "text_input";
-    placeholder?: string;
-    ui?: "short" | "long";
-};
-
-export type DragToken = { id: string; text: string };
-
-export type DragReorderExercise = ExerciseBase & {
-    kind: "drag_reorder";
-    tokens: DragToken[];
-};
-
-export type VoiceInputExercise = ExerciseBase & {
-    kind: "voice_input";
-    targetText: string;
-    locale?: string;
-    maxSeconds?: number;
-};
-
-export type SqlRuntimeSpec = {
-    kind: "sql";
-    datasetId?: string;
-    resultShape?: "table";
-};
 
 export type TerminalExpectedExample = {
     kind: "terminal";
@@ -159,6 +134,38 @@ export type CodeInputExercise = ExerciseBase & {
 
     expectedExample?: CodeExpectedExample | null;
 };
+
+
+
+
+
+export type TextInputExercise = ExerciseBase & {
+    kind: "text_input";
+    placeholder?: string;
+    ui?: "short" | "long";
+};
+
+export type DragToken = { id: string; text: string };
+
+export type DragReorderExercise = ExerciseBase & {
+    kind: "drag_reorder";
+    tokens: DragToken[];
+};
+
+export type VoiceInputExercise = ExerciseBase & {
+    kind: "voice_input";
+    targetText: string;
+    locale?: string;
+    maxSeconds?: number;
+};
+
+export type SqlRuntimeSpec = {
+    kind: "sql";
+    datasetId?: string;
+    resultShape?: "table";
+};
+
+
 
 export type WordBankArrangeExercise = ExerciseBase & {
     kind: "word_bank_arrange";

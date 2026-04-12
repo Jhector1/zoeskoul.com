@@ -7,8 +7,9 @@ import { resolveSurfaceKind } from "@/components/code/runner/runtime";
 
 import PlainTerminal from "./PlainTerminal";
 import XtermTerminal from "./XtermTerminal";
-import SqlResultsPane from "./SqlResultsPane";
+// import SqlResultsPane from "./SqlResultsPane";
 import TerminalPane from "./TerminalPane";
+import SqlResultsPane from "@/components/code/runner/components/sql/results-pane";
 
 function IdlePane(props: { label: string }) {
     return (

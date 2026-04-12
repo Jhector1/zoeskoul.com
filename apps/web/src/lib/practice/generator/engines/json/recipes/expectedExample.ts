@@ -11,11 +11,15 @@ type TestLike = {
     stdout: string;
 };
 
+function shouldShowExpectedExample(def: ManifestCodeInput): boolean {
+    return def.showExpectedExample !== false;
+}
+
 function resolveMeta(
     def: ManifestCodeInput,
     resolved: ResolvedRecipeContext,
 ): string | undefined {
-    if (!def.showExpectedExample) return undefined;
+    if (!shouldShowExpectedExample(def)) return undefined;
 
     if (typeof def.showExpectedExample === "object" && def.showExpectedExample.metaKey) {
         return resolved.maybeT?.(def.showExpectedExample.metaKey);
@@ -60,7 +64,7 @@ export function buildTerminalExpectedExample(args: {
 }): CodeExpectedExample | null {
     const { def, resolved, tests } = args;
 
-    if (!def.showExpectedExample) return null;
+    if (!shouldShowExpectedExample(def)) return null;
     if (!tests.length) return null;
 
     const first = tests[0];
@@ -86,7 +90,7 @@ export function buildSqlExpectedExample(args: {
 }): CodeExpectedExample | null {
     const { def, resolved, schemaSql, seedSql, solutionCode, maxRows = 12 } = args;
 
-    if (!def.showExpectedExample) return null;
+    if (!shouldShowExpectedExample(def)) return null;
 
     const BetterSqlite3 = getBetterSqlite3();
     if (!BetterSqlite3) return null;
