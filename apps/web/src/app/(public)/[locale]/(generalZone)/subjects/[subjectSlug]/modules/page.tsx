@@ -6,9 +6,11 @@ import { auth } from "@/lib/auth";
 import type { Actor } from "@/lib/practice/actor";
 import { getAccessSnapshot } from "@/lib/access/accessSnapshot";
 import { resolveModuleAccess } from "@/lib/access/resolveModuleAccess";
-import { getResolvedSubjectModulesFromManifest } from "@/lib/subjects/server/resolveSubjectPresentation";
-import {notFound} from "next/navigation";
-import {ResolvedSubjectModule, SubjectModuleManifest} from "@/lib/subjects/_core/subjectManifestTypes";
+import {
+  getResolvedSectionPresentationMap,
+  getResolvedSubjectModulesFromManifest,
+} from "@/lib/subjects/server/resolveSubjectPresentation";
+import { notFound } from "next/navigation";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -80,22 +82,34 @@ export default async function SubjectModulesPage({
     },
   });
 
-
   if (!subject) notFound();
 
   const manifestView = await getResolvedSubjectModulesFromManifest(subjectSlug);
   if (!manifestView) notFound();
-  const manifestModulesBySlug = new Map<string, ResolvedSubjectModule>(
+
+  const resolvedSectionsBySlug = await getResolvedSectionPresentationMap(subjectSlug);
+
+  const manifestModulesBySlug = new Map(
       manifestView.modules.map((m) => [m.slug, m]),
   );
 
-  const modules = subject.modules.map((m ) => {
+  const modules = subject.modules.map((m) => {
     const mv = manifestModulesBySlug.get(m.slug);
 
     return {
       ...m,
       title: mv?.title ?? m.slug,
-      description: mv?.description || null,
+      description: mv?.description ?? null,
+    };
+  });
+
+  const sections = subject.sections.map((s) => {
+    const sv = resolvedSectionsBySlug[s.slug];
+
+    return {
+      ...s,
+      title: sv?.title ?? s.title,
+      description: sv?.description ?? s.description ?? null,
     };
   });
 
@@ -139,7 +153,7 @@ export default async function SubjectModulesPage({
   }
 
   const moduleDbIds = modules.map((m) => m.id);
-  const sectionIds = subject.sections.map((s) => s.id);
+  const sectionIds = sections.map((s) => s.id);
 
   const moduleTopics = await prisma.practiceTopic.findMany({
     where: { moduleId: { in: moduleDbIds } },
@@ -177,7 +191,7 @@ export default async function SubjectModulesPage({
           subjectTitle={manifestView.subject.title}
           subjectDescription={manifestView.subject.description || null}
           modules={modules}
-          sections={subject.sections}
+          sections={sections}
           topicIdsByModuleDbId={topicIdsByModuleDbId}
           topicIdsBySectionId={topicIdsBySectionId}
           canUnlockAll={canUnlockAll}

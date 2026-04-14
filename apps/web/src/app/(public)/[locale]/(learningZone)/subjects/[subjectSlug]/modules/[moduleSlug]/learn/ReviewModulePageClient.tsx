@@ -1,12 +1,10 @@
 "use client";
 
-import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useParams } from "next/navigation";
 
 import ReviewModuleNavBar from "@/components/review/ReviewModuleNavBar";
-
 import type { ReviewModule } from "@/lib/subjects/types";
-import { getReviewModule } from "@/lib/subjects/registry";
 import ReviewModuleView from "@/components/review/module/ReviewModuleView";
 import { ROUTES } from "@/utils";
 import { buildBillingHref } from "@/lib/billing/moduleAccess";
@@ -44,17 +42,18 @@ type SubjectFinishState = {
     message: string | null;
 };
 
-export default function ReviewModulePageClient({ canUnlockAll }: { canUnlockAll: boolean }) {
+export default function ReviewModulePageClient({
+                                                   canUnlockAll,
+                                                   mod,
+                                               }: {
+    canUnlockAll: boolean;
+    mod: ReviewModule | null;
+}) {
     const params = useParams<{ locale: string; subjectSlug: string; moduleSlug: string }>();
 
     const locale = params?.locale ?? "en";
     const subjectSlug = params?.subjectSlug ?? "";
     const moduleId = params?.moduleSlug ?? "";
-
-    const mod: ReviewModule | null = useMemo(() => {
-        if (!subjectSlug || !moduleId) return null;
-        return getReviewModule(subjectSlug, moduleId);
-    }, [subjectSlug, moduleId, ]);
 
     const [nav, setNav] = useState<NavInfo | null | undefined>(undefined);
     const [moduleComplete, setModuleComplete] = useState(false);

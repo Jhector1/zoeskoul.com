@@ -85,22 +85,7 @@ export type ReviewProjectSpec = {
 };
 
 export type ReviewCardProgressMeta = {
-    /**
-     * Stable semantic completion key.
-     * Reading cards can share one progressKey even if they are split into multiple UI cards.
-     *
-     * Example:
-     *   progressKey: "comments_intro:reading"
-     */
     progressKey?: string | null;
-
-    /**
-     * Old keys that should still count as completed after a refactor.
-     * Useful when migrating an old single "sketch" card into sketch0/sketch1/sketch2.
-     *
-     * Example:
-     *   legacyProgressKeys: ["sketch"]
-     */
     legacyProgressKeys?: string[];
 };
 
@@ -161,13 +146,13 @@ export type ReviewTopic = {
     cards: ReadonlyArray<ReviewCard>;
 };
 
+export type ReviewTopicShape = ReviewTopic;
+
 export type ReviewModule = {
     id: string;
     title: string;
-    subtitle?: string;
-    startPracticeHref?: (topicSlug: string) => string;
+    subtitle?: string | null;
+    startPracticeSectionSlug: string;
     runtimeDefaults?: ManifestRuntimeDefaults | null;
-    topics: ReadonlyArray<ReviewTopic>;
+    topics: ReviewTopicShape[];
 };
-
-export type ReviewTopicShape = ReviewTopic;

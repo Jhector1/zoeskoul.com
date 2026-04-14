@@ -18,7 +18,6 @@ export default async function PracticePage() {
             id: true,
             slug: true,
             status: true,
-            // keep temporary fallbacks while migrating
             title: true,
             description: true,
             imagePublicId: true,

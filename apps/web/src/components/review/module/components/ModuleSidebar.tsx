@@ -8,8 +8,8 @@ import { useTaggedT } from "@/i18n/tagged";
 
 export type SidebarTopicItemVm = {
     id: string;
-    label: any;
-    summary: any;
+    label: string;
+    summary: string | null;
     disabled: boolean;
     done: boolean;
     isViewing: boolean;
@@ -23,11 +23,7 @@ function SidebarTopicRow({
     item: SidebarTopicItemVm;
     onGoToTopic: (tid: string) => void;
 }) {
-    const tt = useTaggedT();
     const ui = useTaggedT("moduleSidebarUi");
-
-    const topicLabel = tt.resolve(item.label ?? "");
-    const topicSummary = tt.resolve(item.summary ?? null);
 
     return (
         <button
@@ -40,7 +36,7 @@ function SidebarTopicRow({
             )}
         >
             <div className="flex items-center justify-between gap-2">
-                <div className="ui-title-sm">{topicLabel}</div>
+                <div className="ui-title-sm">{item.label}</div>
 
                 <div className="flex items-center gap-2">
                     {item.isActive ? (
@@ -55,7 +51,7 @@ function SidebarTopicRow({
                 </div>
             </div>
 
-            {topicSummary ? <div className="ui-review-topic-summary">{topicSummary}</div> : null}
+            {item.summary ? <div className="ui-review-topic-summary">{item.summary}</div> : null}
         </button>
     );
 }
@@ -108,18 +104,16 @@ function ModuleSidebar({
     hasNextModule: boolean;
     canGoNextModule: boolean;
 }) {
-    const tt = useTaggedT();
     const ui = useTaggedT("moduleSidebarUi");
 
-    const modTitle = tt.resolve((mod as any)?.title ?? "");
-    const modSubtitle = tt.resolve((mod as any)?.subtitle ?? null);
+    const modTitle = String((mod as any)?.title ?? "");
+    const modSubtitle = ((mod as any)?.subtitle ?? null) as string | null;
 
     return (
         <div className="ui-page-surface flex h-full min-h-0 flex-col overflow-hidden rounded-none">
             <div className="shrink-0 border-b border-[rgb(var(--ui-border)/0.9)] bg-[rgb(var(--ui-surface-2)/0.72)] px-4 py-3">
                 <div className="min-w-0">
                     <div className="ui-title-md">{modTitle}</div>
-
                     {modSubtitle ? <div className="mt-1 ui-meta">{modSubtitle}</div> : null}
                 </div>
 
@@ -182,8 +176,8 @@ function ModuleSidebar({
                 <RingButton
                     pct={assignmentPct}
                     missedPct={assignmentMissedPct}
-                    label={tt.resolve(assignmentLabel)}
-                    sublabel={tt.resolve(assignmentSublabel ?? null) || undefined}
+                    label={assignmentLabel}
+                    sublabel={assignmentSublabel || undefined}
                     onClick={onAssignmentClick}
                     disabled={false}
                 />

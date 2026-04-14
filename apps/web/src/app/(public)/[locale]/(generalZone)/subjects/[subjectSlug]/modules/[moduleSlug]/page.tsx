@@ -14,14 +14,11 @@ export default async function ModuleIntroPage({
     const { locale, subjectSlug, moduleSlug } = await params;
     if (!subjectSlug || !moduleSlug) notFound();
 
-    const subjectDb = await prisma.practiceSubject.findUnique({
-        where: { slug: subjectSlug },
-        select: { slug: true },
-    });
-    if (!subjectDb) notFound();
-
     const moduleDb = await prisma.practiceModule.findFirst({
-        where: { slug: moduleSlug, subject: { slug: subjectSlug } },
+        where: {
+            slug: moduleSlug,
+            subject: { slug: subjectSlug },
+        },
         select: {
             id: true,
             slug: true,
@@ -30,14 +27,15 @@ export default async function ModuleIntroPage({
             weekEnd: true,
         },
     });
+
     if (!moduleDb) notFound();
 
-    const [sectionsCount, topicsCount] = await Promise.all([
+    const [sectionsCount, topicsCount, manifestView] = await Promise.all([
         prisma.practiceSection.count({ where: { moduleId: moduleDb.id } }),
         prisma.practiceTopic.count({ where: { moduleId: moduleDb.id } }),
+        getResolvedModuleIntroFromManifest(subjectSlug, moduleSlug),
     ]);
 
-    const manifestView = await getResolvedModuleIntroFromManifest(subjectSlug, moduleSlug);
     if (!manifestView) notFound();
 
     return (
@@ -63,6 +61,7 @@ export default async function ModuleIntroPage({
                     prereqs: manifestView.module.meta.prereqs ?? [],
                     outcomes: manifestView.module.meta.outcomes ?? [],
                     why: manifestView.module.meta.why ?? [],
+                    videoUrl: manifestView.module.meta.videoUrl ?? undefined,
                 },
             }}
             stats={{ sectionsCount, topicsCount }}

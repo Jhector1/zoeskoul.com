@@ -1,32 +1,16 @@
-// src/lib/review/api/shared/modules.ts
-import { hasReviewModule } from "@/lib/subjects/registry";
-import { MODULES, SUBJECTS } from "@/lib/subjects";
+import {
+    getResolvedReviewModuleRows,
+    type ResolvedReviewModuleRow,
+} from "@/lib/subjects/server/resolveSubjectPresentation";
 
-export type ReviewModuleRow = {
-    slug: string;
-    order: number;
-    title: string;
-};
+export type ReviewModuleRow = ResolvedReviewModuleRow;
 
 export async function loadReviewModulesForSubject(
     _unused: unknown,
     subjectSlug: string,
 ): Promise<null | { modules: ReviewModuleRow[] }> {
-    const subjectExists = SUBJECTS.some((s) => s.slug === subjectSlug);
-    if (!subjectExists) return null;
-
-    const modules = MODULES
-        .filter(
-            (m) =>
-                m.subjectSlug === subjectSlug &&
-                hasReviewModule(subjectSlug, m.slug),
-        )
-        .sort((a, b) => a.order - b.order)
-        .map((m) => ({
-            slug: m.slug,
-            order: m.order,
-            title: m.title,
-        }));
+    const modules = await getResolvedReviewModuleRows(subjectSlug);
+    if (!modules) return null;
 
     return { modules };
 }
