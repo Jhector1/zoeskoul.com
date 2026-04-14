@@ -79,12 +79,13 @@ export function useToolCodeRunnerState(args: {
     const boundRef = useRef<BoundTarget | null>(null);
     const [boundId, setBoundId] = useState<string | null>(null);
     const boundDirtyRef = useRef(false);
-
+    const lastBindKeyRef = useRef<string>("");
     const isBound = useCallback((id: string) => boundRef.current?.id === id, []);
 
     const clearBoundState = useCallback(() => {
         boundRef.current = null;
         boundDirtyRef.current = false;
+        lastBindKeyRef.current = "";
         setBoundId((prev) => (prev === null ? prev : null));
     }, []);
 
@@ -333,9 +334,6 @@ export function useToolCodeRunnerState(args: {
             sqlInitialTableSnapshots?: SqlTableSnapshots;
             onPatch: (patch: any) => void;
         }) => {
-            boundRef.current = { id: args2.id, onPatch: args2.onPatch };
-            setBoundId((prev) => (prev === args2.id ? prev : args2.id));
-
             const resolvedSql = resolveSqlRunnerConfig({
                 language: args2.lang,
                 sqlDialect: args2.sqlDialect ?? defaultSqlDialect,
@@ -356,6 +354,17 @@ export function useToolCodeRunnerState(args: {
                 sqlSeedSql: resolvedSql.sqlSeedSql,
                 sqlInitialTableSnapshots: resolvedSql.sqlInitialTableSnapshots,
             };
+
+            const nextBindKey = `${args2.id}::${snapKey(nextSnap)}`;
+
+            if (lastBindKeyRef.current === nextBindKey) {
+                boundRef.current = { id: args2.id, onPatch: args2.onPatch };
+                return;
+            }
+
+            lastBindKeyRef.current = nextBindKey;
+            boundRef.current = { id: args2.id, onPatch: args2.onPatch };
+            setBoundId((prev) => (prev === args2.id ? prev : args2.id));
 
             boundDirtyRef.current = false;
             latestSnapRef.current = nextSnap;
