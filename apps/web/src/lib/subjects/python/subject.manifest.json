@@ -9,7 +9,19 @@
     "imagePublicId": "Screenshot_2026-02-03_at_1.19.20_AM_kdnlpk",
     "imageAlt": "Python subject cover",
     "titleKey": "subjects.python.title",
-    "descriptionKey": "subjects.python.description"
+    "descriptionKey": "subjects.python.description",
+    "meta": {
+      "curriculum": {
+        "plannedModuleCount": 8,
+        "isTerminalRelease": false,
+        "moreComingMessageKey": "subjects.sql.moreComingSoon"
+      },
+      "completionPolicy": {
+        "requireAllPublishedModules": true,
+        "rewardEnabledByDefault": true,
+        "certificateEnabledByDefault": true
+      }
+    }
   },
   "modules": [
     {

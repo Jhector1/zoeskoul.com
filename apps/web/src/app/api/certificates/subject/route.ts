@@ -9,6 +9,7 @@ import {
 import { getSubjectCertificateStatus } from "@/lib/certificates/getSubjectCertificateStatus";
 import { resolveSubjectFinishState } from "@/lib/review/api/shared/resolveSubjectFinishState";
 import { resolveSubjectTitle } from "@/lib/subjects/resolveSubjectTitle";
+import { resolveModuleTitle } from "@/lib/subjects/resolveModuleTitle";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -87,6 +88,24 @@ export async function GET(req: Request) {
         fallback: status.subject.title,
     });
 
+    const resolvedModules = await Promise.all(
+        status.modules.map(async (m) => {
+            const moduleSlug = m.moduleId;
+
+            const title = await resolveModuleTitle({
+                subjectSlug: status.subject.slug,
+                moduleSlug,
+                locale,
+                fallback: m.title,
+            });
+
+            return {
+                ...m,
+                title,
+            };
+        }),
+    );
+
     const effectiveEligible =
         Boolean(certificate?.id) ||
         (status.eligible && finish.state.certificateEligible);
@@ -101,7 +120,7 @@ export async function GET(req: Request) {
             },
             locale,
             completedAt: status.completedAt,
-            modules: status.modules,
+            modules: resolvedModules,
             certificate: certificate
                 ? {
                     ...certificate,

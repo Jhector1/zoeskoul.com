@@ -99,6 +99,7 @@ export async function runSeed() {
         moduleIdBySlug.set(m.slug, row.id);
       }
 
+
       // -------------------------
       // 3) Topics
       // -------------------------
@@ -113,10 +114,12 @@ export async function runSeed() {
                 ? t.meta
                 : { ...(t.meta ?? {}), variant: t.variant };
 
+        const topicTitleKey = t.titleKey ?? `topic.${t.slug}`;
+
         const row = await tx.practiceTopic.upsert({
           where: { slug: t.slug },
           update: {
-            titleKey: t.titleKey,
+            titleKey: topicTitleKey,
             description: t.description ?? null,
             order: t.order ?? 0,
             genKey: t.genKey ?? null,
@@ -126,7 +129,7 @@ export async function runSeed() {
           },
           create: {
             slug: t.slug,
-            titleKey: t.titleKey,
+            titleKey: topicTitleKey,
             description: t.description ?? null,
             order: t.order ?? 0,
             genKey: t.genKey ?? null,
@@ -138,7 +141,6 @@ export async function runSeed() {
 
         topicIdBySlug.set(t.slug, row.id);
       }
-
       // -------------------------
       // 4) Sections + section-topic links
       // -------------------------

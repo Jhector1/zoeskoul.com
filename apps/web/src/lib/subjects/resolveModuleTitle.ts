@@ -1,6 +1,6 @@
 import "server-only";
-import { getTranslations } from "next-intl/server";
 import { prisma } from "@/lib/prisma";
+import { resolveServerText } from "@/lib/subjects/resolveServerText";
 
 export async function resolveModuleTitle(args: {
     subjectSlug: string;
@@ -10,22 +10,16 @@ export async function resolveModuleTitle(args: {
 }) {
     const { subjectSlug, moduleSlug, locale = "en", fallback = null } = args;
 
-    try {
-        const t = await getTranslations({ locale });
-        const key = `modules.${subjectSlug}.${moduleSlug}.title`;
-        const value = t(key as any);
-
-        if (value && value !== key) {
-            return String(value).trim();
-        }
-    } catch {
-        // fall through
-    }
-
     const row = await prisma.practiceModule.findUnique({
         where: { slug: moduleSlug },
         select: { title: true },
     });
 
-    return row?.title?.trim() || fallback?.trim() || moduleSlug;
+    return resolveServerText({
+        locale,
+        preferredKey: `modules.${subjectSlug}.${moduleSlug}.title`,
+        dbValue: row?.title ?? null,
+        fallback,
+        finalFallback: moduleSlug,
+    });
 }

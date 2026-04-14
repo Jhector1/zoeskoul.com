@@ -464,7 +464,7 @@ export default function ReviewModuleView({
     const nav = useModuleNav({ subjectSlug, moduleSlug });
     const canGoNextModule =
         unlockAll ||
-        ((moduleComplete || Boolean((progress as any)?.moduleCompleted)) && assignmentDone);
+        ((moduleComplete || Boolean((progress as any)?.moduleCompleted)));
 
     const navLoading = nav === undefined;
     const navError = nav === null;

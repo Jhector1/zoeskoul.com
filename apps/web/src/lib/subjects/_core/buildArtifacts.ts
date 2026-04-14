@@ -1,71 +1,21 @@
 import type { ReviewTopicShape } from "@/lib/subjects/types";
 import type { SketchEntry } from "@/components/sketches/subjects";
 import type { CourseBundle } from "./defineCourse";
+import type { ModuleBundle } from "./defineModule";
+import type { SectionBundle } from "./defineSection";
 import type { SubjectTopicBundle, TopicMeta } from "./defineTopicBundle";
 import type { ManifestRuntimeDefaults } from "./manifestTypes";
 
 type TopicGeneratorRegistration = NonNullable<SubjectTopicBundle["generator"]>;
 
 export type BuiltSubject = CourseBundle["subject"];
-
-export type BuiltModule = {
-    slug: string;
-    subjectSlug: string;
-    order: number;
-    title: string;
-    description?: string | null;
-    weekStart?: number | null;
-    weekEnd?: number | null;
-    meta?: Record<string, unknown>;
-    runtimeDefaults?: ManifestRuntimeDefaults | null;
-    accessOverride?: "inherit" | "free" | "paid";
-    entitlementKey?: string | null;
-};
-
-export type BuiltTopic = {
-    slug: string;
+export type BuiltModule = ModuleBundle["module"];
+export type BuiltSection = SectionBundle["section"] & {
     subjectSlug: string;
     moduleSlug: string;
-    order: number;
-    titleKey: string;
-    description?: string | null;
-    genKey: string;
-    variant: string | null;
-    meta?: TopicMeta;
-};
-
-export type BuiltSection = {
-    slug: string;
-    subjectSlug: string;
-    moduleSlug: string;
-    order: number;
-    title: string;
-    description?: string | null;
-    meta?: Record<string, unknown> | null;
     topicSlugs: string[];
 };
 
-export type BuiltCatalog = Record<
-    string,
-    {
-        subjectSlug: string;
-        TOPIC: Record<string, string>;
-        modulesBySlug: Record<
-            string,
-            {
-                moduleSlug: string;
-                sectionSlug: string;
-                sectionTitle: string;
-                sectionOrder: number;
-                genKey: string;
-                prefix: string;
-                topicIds: string[];
-                topics: Record<string, string>;
-                runtimeDefaults?: ManifestRuntimeDefaults | null;
-            }
-        >;
-    }
->;
 
 export type BuiltArtifacts = {
     subjects: BuiltSubject[];
@@ -81,6 +31,49 @@ export type BuiltArtifacts = {
     >;
 };
 
+
+
+
+
+
+
+
+export type BuiltTopic = {
+    slug: string;
+    subjectSlug: string;
+    moduleSlug: string;
+    order: number;
+    title: string;
+    titleKey?: string;
+    description?: string | null;
+    descriptionKey?: string | null;
+    genKey: string;
+    variant: string | null;
+    meta?: TopicMeta;
+};
+
+export type BuiltCatalog = Record<
+    string,
+    {
+        subjectSlug: string;
+        TOPIC: Record<string, string>;
+        modulesBySlug: Record<
+            string,
+            {
+                moduleSlug: string;
+                sectionSlug: string;
+                sectionTitle: string;
+                sectionTitleKey?: string;
+                sectionOrder: number;
+                genKey: string;
+                prefix: string;
+                topicIds: string[];
+                topics: Record<string, string>;
+                runtimeDefaults?: ManifestRuntimeDefaults | null;
+            }
+        >;
+    }
+>;
 function invariant(condition: unknown, message: string): asserts condition {
     if (!condition) throw new Error(message);
 }
@@ -120,6 +113,7 @@ export function buildArtifacts(courses: readonly CourseBundle[]): BuiltArtifacts
         const { subject } = course;
 
         assertNonEmpty(subject.slug, "subject.slug");
+        assertNonEmpty(subject.titleKey ?? subject.title, "subject.title/titleKey");
         invariant(!subjectSeen.has(subject.slug), `Duplicate subject.slug "${subject.slug}"`);
         subjectSeen.add(subject.slug);
 
@@ -130,6 +124,10 @@ export function buildArtifacts(courses: readonly CourseBundle[]): BuiltArtifacts
 
         for (const mod of course.modules) {
             assertNonEmpty(mod.module.slug, "module.slug");
+            assertNonEmpty(
+                mod.module.titleKey ?? mod.module.title,
+                `module.title/titleKey for "${mod.module.slug}"`,
+            );
             assertNonEmpty(mod.prefix, `prefix for module "${mod.module.slug}"`);
             assertNonEmpty(mod.genKey, `genKey for module "${mod.module.slug}"`);
             assertNoDot(mod.prefix, `prefix for module "${mod.module.slug}"`);
@@ -149,6 +147,7 @@ export function buildArtifacts(courses: readonly CourseBundle[]): BuiltArtifacts
                 const sec = sectionBundle.section;
 
                 assertNonEmpty(sec.slug, "section.slug");
+                assertNonEmpty(sec.titleKey ?? sec.title, `section.title/titleKey for "${sec.slug}"`);
                 invariant(!sectionSeen.has(sec.slug), `Duplicate section.slug "${sec.slug}"`);
                 sectionSeen.add(sec.slug);
 
@@ -172,8 +171,10 @@ export function buildArtifacts(courses: readonly CourseBundle[]): BuiltArtifacts
                         subjectSlug: subject.slug,
                         moduleSlug: mod.module.slug,
                         order: def.order ?? idx,
-                        titleKey: def.titleKey ?? `topic.${slug}`,
+                        title: def.titleKey ?? `topic.${slug}`,
+                        titleKey: def.titleKey,
                         description: def.description,
+                        descriptionKey: undefined,
                         genKey: mod.genKey,
                         variant,
                         meta: def.meta,
@@ -185,7 +186,7 @@ export function buildArtifacts(courses: readonly CourseBundle[]): BuiltArtifacts
 
                     if (TOPIC[def.id] && TOPIC[def.id] !== slug) {
                         throw new Error(
-                            `TOPIC collision for "${def.id}": "${TOPIC[def.id]}" vs "${slug}"`
+                            `TOPIC collision for "${def.id}": "${TOPIC[def.id]}" vs "${slug}"`,
                         );
                     }
                     TOPIC[def.id] = slug;
@@ -218,6 +219,8 @@ export function buildArtifacts(courses: readonly CourseBundle[]): BuiltArtifacts
                     order: sec.order,
                     title: sec.title,
                     description: sec.description,
+                    titleKey: sec.titleKey,
+                    descriptionKey: sec.descriptionKey,
                     meta: sec.meta ?? null,
                     topicSlugs: sectionTopicSlugs,
                 });
@@ -227,6 +230,7 @@ export function buildArtifacts(courses: readonly CourseBundle[]): BuiltArtifacts
                 moduleSlug: mod.module.slug,
                 sectionSlug: firstSection.section.slug,
                 sectionTitle: firstSection.section.title,
+                sectionTitleKey: firstSection.section.titleKey,
                 sectionOrder: firstSection.section.order,
                 genKey: mod.genKey,
                 prefix: mod.prefix,

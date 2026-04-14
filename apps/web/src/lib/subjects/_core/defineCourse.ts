@@ -7,7 +7,11 @@ export type SubjectMeta = {
     curriculum?: {
         plannedModuleCount?: number;
         isTerminalRelease?: boolean;
+
+        // legacy display field
         moreComingMessage?: string;
+
+        // canonical key field
         moreComingMessageKey?: string;
     };
     completionPolicy?: {
@@ -21,8 +25,15 @@ export type SubjectMeta = {
 export type SubjectInput = {
     slug: string;
     order: number;
+
+    // legacy display fields
     title: string;
     description?: string | null;
+
+    // canonical i18n fields
+    titleKey?: string;
+    descriptionKey?: string | null;
+
     imagePublicId?: string | null;
     imageAlt?: string | null;
     meta?: SubjectMeta | null;
