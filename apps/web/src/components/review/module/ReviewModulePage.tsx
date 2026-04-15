@@ -1,10 +1,10 @@
 "use client";
 
 import React from "react";
-import { ReviewToolsProvider } from "@/components/review/module/context/ReviewToolsContext";
+import {ReviewToolsProvider} from "@/components/review/module/context/ReviewToolsContext";
 
-import type { ReviewModulePageProps } from "./types";
-import { useReviewModuleController } from "./hooks/useReviewModuleController";
+import type {ReviewModulePageProps} from "./types";
+import {useReviewModuleController} from "./hooks/useReviewModuleController";
 
 import ReviewModuleLayout from "./components/layout/ReviewModuleLayout";
 import ReviewModuleHeader from "./components/layout/ReviewModuleHeader";
@@ -22,27 +22,33 @@ export default function ReviewModulePage(props: ReviewModulePageProps) {
     const vm = useReviewModuleController(props);
 
     const page = (
-        <ReviewModuleLayout
-            ariaBusy={vm.layout.ariaBusy}
-            reduceMotion={vm.layout.reduceMotion}
-            showMask={vm.layout.showMask}
-            showSkeleton={vm.layout.showSkeleton}
-            leftCollapsed={vm.layout.leftCollapsed}
-            rightCollapsed={vm.layout.rightCollapsed}
-            leftW={vm.layout.leftW}
-            rightW={vm.layout.rightW}
-            header={<ReviewModuleHeader {...vm.header} />}
-            leftRail={<ReviewModuleLeftRail {...vm.leftRail} />}
-            rightRail={<ReviewModuleRightRail {...vm.rightRail} />}
-            mobileDrawer={<ReviewModuleMobileDrawer {...vm.mobileDrawer} />}
-            overlays={
-                <>
-                    <ReviewResetDialog {...vm.resetDialog} />
-                    <CelebrationLayer {...vm.celebrations} />
-                </>
-            }
-            body={<ReviewTopicStage {...vm.topicStage} />}
-        />
+
+        <>
+
+            <ReviewModuleLayout
+                ariaBusy={vm.layout.ariaBusy}
+                reduceMotion={vm.layout.reduceMotion}
+                showMask={vm.layout.showMask}
+                showSkeleton={vm.layout.showSkeleton}
+                leftCollapsed={vm.layout.leftCollapsed}
+                rightCollapsed={vm.layout.rightCollapsed}
+                leftW={vm.layout.leftW}
+                rightW={vm.layout.rightW}
+                header={<ReviewModuleHeader {...vm.header} />}
+                leftRail={<ReviewModuleLeftRail {...vm.leftRail} />}
+                rightRail={<ReviewModuleRightRail {...vm.rightRail} />}
+                mobileDrawer={<ReviewModuleMobileDrawer {...vm.mobileDrawer} />}
+                overlays={
+                    <>
+                        <ReviewResetDialog {...vm.resetDialog} />
+                        <CelebrationLayer {...vm.celebrations} />
+                    </>
+                }
+                body={<ReviewTopicStage {...vm.topicStage} />}
+
+            />
+            <div className="ui-surface-muted mt-2 h-[440rem] flex-1 min-h-0 overflow-auto bg-red-500 rounded-none"/>
+        </>
     );
 
     if (!vm.toolsProvider.enabled) return page;

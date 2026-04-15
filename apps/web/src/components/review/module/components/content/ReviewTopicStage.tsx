@@ -84,35 +84,37 @@ export default function ReviewTopicStage({
             ) : null}
 
             <TopicShell title={viewTopic?.label ?? ""} subtitle={viewTopic?.summary ?? null}>
-                <ReviewTopicCards
-                    motionKey={`${viewTid}:${versionStr}`}
-                    viewCards={viewCards}
-                    activeCardIndex={activeCardIndex}
-                    onActiveCardIndexChange={onActiveCardIndexChange}
-                    navModes={navModes}
-                    reduceMotion={reduceMotion}
-                    tp={tp}
-                    progressHydrated={progressHydrated}
-                    versionStr={versionStr}
-                    prereqsForAllQuizzes={prereqsForAllQuizzes}
-                    viewTid={viewTid}
-                    sketch={sketch}
-                    setProgress={setProgress}
-                    flushNow={flushNow}
-                    scrollToNextActionable={scrollToNextActionable}
-                    setCardEl={setCardEl}
-                />
+                <div className="flex min-h-full flex-col">
+                    <ReviewTopicCards
+                        motionKey={`${viewTid}:${versionStr}`}
+                        viewCards={viewCards}
+                        activeCardIndex={activeCardIndex}
+                        onActiveCardIndexChange={onActiveCardIndexChange}
+                        navModes={navModes}
+                        reduceMotion={reduceMotion}
+                        tp={tp}
+                        progressHydrated={progressHydrated}
+                        versionStr={versionStr}
+                        prereqsForAllQuizzes={prereqsForAllQuizzes}
+                        viewTid={viewTid}
+                        sketch={sketch}
+                        setProgress={setProgress}
+                        flushNow={flushNow}
+                        scrollToNextActionable={scrollToNextActionable}
+                        setCardEl={setCardEl}
+                    />
 
-                <ReviewTopicCompletion
-                    viewIsComplete={viewIsComplete}
-                    viewTopic={viewTopic}
-                    onContinue={onContinue}
-                    continueLabel={continueLabel}
-                    showSubjectFinish={showSubjectFinish}
-                    subjectSlug={subjectSlug}
-                    subjectFinish={subjectFinish}
-                    onOpenCertificate={onOpenCertificate}
-                />
+                    <ReviewTopicCompletion
+                        viewIsComplete={viewIsComplete}
+                        viewTopic={viewTopic}
+                        onContinue={onContinue}
+                        continueLabel={continueLabel}
+                        showSubjectFinish={showSubjectFinish}
+                        subjectSlug={subjectSlug}
+                        subjectFinish={subjectFinish}
+                        onOpenCertificate={onOpenCertificate}
+                    />
+                </div>
             </TopicShell>
         </main>
     );

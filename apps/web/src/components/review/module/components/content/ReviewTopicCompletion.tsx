@@ -26,9 +26,9 @@ export default function ReviewTopicCompletion({
                                                   onOpenCertificate,
                                               }: Props) {
     return (
-        <>
+        <div className="mt-2 flex min-h-0 flex-1 flex-col gap-3">
             {viewIsComplete ? (
-                <div className="mt-3 shrink-0">
+                <div className="shrink-0">
                     <TopicOutro
                         topic={viewTopic}
                         onContinue={onContinue}
@@ -38,14 +38,16 @@ export default function ReviewTopicCompletion({
             ) : null}
 
             {showSubjectFinish ? (
-                <SubjectFinishBanner
-                    subjectSlug={subjectSlug}
-                    subjectFinish={subjectFinish}
-                    onOpenCertificate={onOpenCertificate}
-                />
+                <div className="shrink-0">
+                    <SubjectFinishBanner
+                        subjectSlug={subjectSlug}
+                        subjectFinish={subjectFinish}
+                        onOpenCertificate={onOpenCertificate}
+                    />
+                </div>
             ) : null}
 
-            <div className="ui-surface-muted mt-2 flex-1 min-h-0 overflow-auto rounded-none" />
-        </>
+            <div className="ui-surface-muted min-h-0 flex-1 rounded-none" />
+        </div>
     );
 }

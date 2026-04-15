@@ -66,7 +66,7 @@ export default function ReviewTopicCards({
                                              setCardEl,
                                          }: Props) {
     return (
-        <div className="flex h-full min-h-0 flex-col">
+        <div className="flex min-h-0 flex-col shrink-0">
             <AnimatePresence initial={false} mode="wait">
                 <motion.div
                     key={motionKey}
@@ -74,7 +74,7 @@ export default function ReviewTopicCards({
                     animate={TOPIC_PANE_ANIM.animate}
                     exit={reduceMotion ? undefined : TOPIC_PANE_ANIM.exit}
                     transition={reduceMotion ? { duration: 0 } : TOPIC_PANE_TRANSITION}
-                    className="flex h-full min-h-0 flex-col"
+                    className="flex min-h-0 flex-col shrink-0"
                 >
                     <FlowNavigator
                         items={viewCards}
