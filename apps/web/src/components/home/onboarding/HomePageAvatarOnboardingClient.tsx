@@ -18,7 +18,7 @@ import {
     TimerReset,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
-
+import NavButton from "@/components/ui/NavButton";
 import { useRouter, usePathname } from "@/i18n/navigation";
 import { cn } from "@/lib/cn";
 import {
@@ -1830,9 +1830,9 @@ export default function HomePageAvatarOnboardingClient({
                                                             {t("entry.newUser", undefined, "I’m new here")}
                                                         </button>
 
-                                                        <button
-                                                            type="button"
-                                                            onClick={handleGoToAuth}
+                                                        <NavButton
+                                                            href={authHref}
+                                                            prefetch
                                                             className={cn(buttonClass("secondary"), "h-10 w-full")}
                                                         >
                                                             {t(
@@ -1840,7 +1840,7 @@ export default function HomePageAvatarOnboardingClient({
                                                                 undefined,
                                                                 "I already have an account",
                                                             )}
-                                                        </button>
+                                                        </NavButton>
                                                     </div>
 
                                                     <div className="mt-3 text-center text-xs text-[rgb(var(--ui-text-muted)/0.8)]">
@@ -1956,17 +1956,18 @@ export default function HomePageAvatarOnboardingClient({
                                                 >
                                                     {completed ? (
                                                         isAuthenticated ? (
-                                                            <Link
+                                                            <NavButton
                                                                 href={
                                                                     trialSubjectSlug
-                                                                        ? `/${encodeURIComponent(locale)}/subjects/${encodeURIComponent(trialSubjectSlug)}/modules`
+                                                                        ? `/subjects/${encodeURIComponent(trialSubjectSlug)}/modules`
                                                                         : `/${encodeURIComponent(locale)}/subjects`
                                                                 }
+                                                                prefetch
                                                                 className={cn(buttonClass("primary"), "h-9 gap-2 sm:w-auto")}
                                                             >
                                                                 {t("hero.continueLearning")}
                                                                 <ArrowRight className="size-4" />
-                                                            </Link>
+                                                            </NavButton>
                                                         ) : (
                                                             <button
                                                                 type="button"
@@ -1981,13 +1982,17 @@ export default function HomePageAvatarOnboardingClient({
                                                             </button>
                                                         )
                                                     ) : isAuthenticated ? (
-                                                        <Link
-                                                            href={`/${encodeURIComponent(locale)}/subjects`}
-                                                            className={cn(buttonClass("primary"), "h-9 gap-2 sm:w-auto")}
+                                                        <NavButton
+                                                            href={`/subjects`}
+                                                            prefetch
+                                                            className={cn(
+                                                                buttonClass("primary"),
+                                                                "h-9 whitespace-nowrap sm:w-auto inline-flex items-center"
+                                                            )}
                                                         >
-                                                            {t("hero.continueLearning")}
-                                                            <ArrowRight className="size-4" />
-                                                        </Link>
+                                                            <span className="whitespace-nowrap">{t("hero.continueLearning")}</span>
+                                                            {/*<ArrowRight className="size-4 shrink-0" />*/}
+                                                        </NavButton>
                                                     ) : (
                                                         <button
                                                             type="button"
@@ -1999,12 +2004,13 @@ export default function HomePageAvatarOnboardingClient({
                                                         </button>
                                                     )}
 
-                                                    <Link
+                                                    <NavButton
                                                         href={`/${encodeURIComponent(locale)}/subjects`}
+                                                        prefetch
                                                         className={cn(buttonClass("secondary"), "h-9 sm:w-auto")}
                                                     >
                                                         {t("hero.exploreSubjects")}
-                                                    </Link>
+                                                    </NavButton>
 
                                                     <button
                                                         type="button"
@@ -2070,16 +2076,17 @@ export default function HomePageAvatarOnboardingClient({
 
                                                                 {completed ? (
                                                                     isAuthenticated ? (
-                                                                        <Link
+                                                                        <NavButton
                                                                             href={
                                                                                 trialSubjectSlug
                                                                                     ? `/${encodeURIComponent(locale)}/subjects/${encodeURIComponent(trialSubjectSlug)}/modules`
                                                                                     : `/${encodeURIComponent(locale)}/subjects`
                                                                             }
+                                                                            prefetch
                                                                             className={cn(buttonClass("primary"), "w-full")}
                                                                         >
                                                                             {t("hero.continueLearning")}
-                                                                        </Link>
+                                                                        </NavButton>
                                                                     ) : (
                                                                         <div className="flex flex-col gap-2">
                                                                             <button
@@ -2103,12 +2110,13 @@ export default function HomePageAvatarOnboardingClient({
                                                                         </div>
                                                                     )
                                                                 ) : isAuthenticated ? (
-                                                                    <Link
+                                                                    <NavButton
                                                                         href={`/${encodeURIComponent(locale)}/subjects`}
+                                                                        prefetch
                                                                         className={cn(buttonClass("primary"), "w-full")}
                                                                     >
                                                                         {t("hero.continueLearning")}
-                                                                    </Link>
+                                                                    </NavButton>
                                                                 ) : (
                                                                     <button
                                                                         type="button"

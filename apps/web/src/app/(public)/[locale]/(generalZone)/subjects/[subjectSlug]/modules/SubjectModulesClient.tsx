@@ -9,6 +9,7 @@ import { cn } from "@/lib/cn";
 import { useReviewProgressMany } from "@/components/review/module/hooks/useReviewProgressMany";
 import { ROUTES } from "@/utils";
 import { buildBillingHref } from "@/lib/billing/moduleAccess";
+import NavButton from "@/components/ui/NavButton";
 
 type ModuleRow = {
     id: string;
@@ -127,31 +128,6 @@ function ProgressBar({ pct }: { pct: number }) {
     );
 }
 
-function ActionLink({
-                        href,
-                        children,
-                        variant = "primary",
-                        fullWidth = false,
-                    }: {
-    href: string;
-    children: React.ReactNode;
-    variant?: "primary" | "secondary" | "premium";
-    fullWidth?: boolean;
-}) {
-    const cls =
-        variant === "premium"
-            ? "ui-btn-premium"
-            : variant === "secondary"
-                ? "ui-btn-secondary"
-                : "ui-btn-primary";
-
-    return (
-        <Link href={href} className={cn(cls, fullWidth && "w-full sm:w-auto")}>
-            <span>{children}</span>
-        </Link>
-    );
-}
-
 function DisabledAction({
                             children,
                             fullWidth = false,
@@ -163,6 +139,24 @@ function DisabledAction({
         <span className={cn("ui-btn-disabled", fullWidth && "w-full sm:w-auto")}>
             <span>{children}</span>
         </span>
+    );
+}
+
+function getActionButtonClass(
+    variant: "primary" | "secondary" | "premium" = "primary",
+    fullWidth = false,
+) {
+    const cls =
+        variant === "premium"
+            ? "ui-btn-premium"
+            : variant === "secondary"
+                ? "ui-btn-secondary"
+                : "ui-btn-primary";
+
+    return cn(
+        cls,
+        "inline-flex items-center justify-center gap-2",
+        fullWidth && "w-full sm:w-auto",
     );
 }
 
@@ -492,13 +486,23 @@ export default function SubjectModulesClient(props: Props) {
                                                 {seqLocked ? (
                                                     <DisabledAction fullWidth>{ctaLabel}</DisabledAction>
                                                 ) : showPremium ? (
-                                                    <ActionLink href={billingHref} variant="premium" fullWidth>
+                                                    <NavButton
+                                                        href={billingHref}
+                                                        fullWidth
+                                                        prefetch
+                                                        className={getActionButtonClass("premium", true)}
+                                                    >
                                                         {ctaLabel}
-                                                    </ActionLink>
+                                                    </NavButton>
                                                 ) : (
-                                                    <ActionLink href={moduleHref} variant="primary" fullWidth>
+                                                    <NavButton
+                                                        href={moduleHref}
+                                                        fullWidth
+                                                        prefetch
+                                                        className={getActionButtonClass("primary", true)}
+                                                    >
                                                         {ctaLabel}
-                                                    </ActionLink>
+                                                    </NavButton>
                                                 )}
                                             </div>
                                         </div>

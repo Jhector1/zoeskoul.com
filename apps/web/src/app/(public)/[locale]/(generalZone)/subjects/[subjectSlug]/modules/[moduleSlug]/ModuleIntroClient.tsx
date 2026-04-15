@@ -9,6 +9,7 @@ import { cn } from "@/lib/cn";
 import { useReviewProgressMany } from "@/components/review/module/hooks/useReviewProgressMany";
 import { ROUTES } from "@/utils";
 import type { ModuleMeta } from "@/seed/data/subjects/_types";
+import NavButton from "@/components/ui/NavButton";
 
 type Props = {
     locale: string;
@@ -341,9 +342,14 @@ export default function ModuleIntroClient({ locale, subject, module, stats }: Pr
                                 <ProgressBar pct={progressPct} />
                             </div>
 
-                            <Link href={learnHref} className="ui-btn-primary w-full sm:w-auto">
+                            <NavButton
+                                href={learnHref}
+                                fullWidth
+                                prefetch
+                                className="ui-btn-primary w-full sm:w-auto"
+                            >
                                 {ctaLabel}
-                            </Link>
+                            </NavButton>
                         </div>
 
                         <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
@@ -365,7 +371,10 @@ export default function ModuleIntroClient({ locale, subject, module, stats }: Pr
                     </Surface>
 
                     <div className="grid gap-3 lg:grid-cols-[minmax(0,1.35fr)_minmax(260px,0.8fr)]">
-                        <InfoSection kicker={t("sections.prereqs")} title={prereqs.length ? "Before you start" : "Ready to begin"}>
+                        <InfoSection
+                            kicker={t("sections.prereqs")}
+                            title={prereqs.length ? "Before you start" : "Ready to begin"}
+                        >
                             {prereqs.length ? (
                                 <BulletList items={prereqs} marker="arrow" />
                             ) : (
@@ -428,17 +437,11 @@ export default function ModuleIntroClient({ locale, subject, module, stats }: Pr
                     {videoUrl ? <VideoEmbed url={videoUrl} title={videoTitle} /> : null}
 
                     <div className="grid gap-3 lg:grid-cols-2">
-                        <InfoSection
-                            kicker={t("sections.whatLearn")}
-                            title={t("sections.whatLearn")}
-                        >
+                        <InfoSection kicker={t("sections.whatLearn")} title={t("sections.whatLearn")}>
                             <BulletList items={outcomes} marker="check" />
                         </InfoSection>
 
-                        <InfoSection
-                            kicker={t("sections.whyMatters")}
-                            title={t("sections.whyMatters")}
-                        >
+                        <InfoSection kicker={t("sections.whyMatters")} title={t("sections.whyMatters")}>
                             <BulletList items={why} marker="dot" />
                         </InfoSection>
                     </div>
