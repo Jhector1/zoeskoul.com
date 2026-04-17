@@ -1,4 +1,5 @@
 import type { RefObject } from "react";
+import type { FileEntry, RunSessionState } from "@zoeskoul/code-contracts";
 import type { RunResult } from "@/lib/code/types";
 import type { BatchRunResult } from "@/lib/code/types/batch";
 import type { CodeLanguage, SqlDialect } from "@/lib/practice/types";
@@ -44,6 +45,15 @@ export type SharedRunnerArgs = {
     isAuthenticated?: boolean;
 };
 
+export type WorkspaceTerminalConfig = {
+    enabled?: boolean;
+    projectId?: string;
+    cwd?: string;
+    initialFiles?: FileEntry[] | Record<string, string>;
+    lazy?: boolean;
+    title?: string;
+};
+
 export type TranscriptState = {
     terminal: TermLine[];
     stdinBuffer: string;
@@ -61,6 +71,24 @@ export type StreamState = {
     inputEnabled: boolean;
     sendTerminalData: (data: string) => void;
     sendTerminalResize: (cols: number, rows: number) => void;
+};
+
+export type WorkspaceTerminalController = {
+    available: boolean;
+    started: boolean;
+    starting: boolean;
+    busy: boolean;
+    inputEnabled: boolean;
+    sessionId: string | null;
+    state: RunSessionState | "idle";
+    terminalFeed: TerminalChunk[];
+
+    open: () => Promise<void>;
+    stop: () => Promise<void>;
+    reset: () => void;
+
+    sendData: (data: string) => void;
+    resize: (cols: number, rows: number) => void;
 };
 
 export type CodeRunnerController = {

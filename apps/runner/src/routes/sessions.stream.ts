@@ -1,4 +1,5 @@
 import type { RequestHandler } from "express";
+import { getRequiredActorKey } from "../middleware/serviceAuth.js";
 import { getSession } from "../services/sessions/sessionStore.js";
 
 function isTerminalState(state: string) {
@@ -11,53 +12,88 @@ function isTerminalState(state: string) {
 }
 
 export const streamSessionRoute: RequestHandler = async (req, res) => {
-    const sessionId = String(req.params.sessionId);
+    try {
+        const actorKey = getRequiredActorKey(req);
+        const sessionId = String(req.params.sessionId);
 
-    res.setHeader("Content-Type", "text/event-stream");
-    res.setHeader("Cache-Control", "no-store, no-transform");
-    res.setHeader("Connection", "keep-alive");
-
-    res.flushHeaders?.();
-
-    let lastSeq = 0;
-
-    const flush = () => {
         const session = getSession(sessionId);
 
+        console.log("RUNNER STREAM auth", {
+            actorKey,
+            sessionId,
+            ownerKey: session?.ownerKey ?? null,
+        });
+
         if (!session) {
-            res.write(
-                `event: error\ndata: ${JSON.stringify({ message: "Session not found." })}\n\n`,
-            );
+            return res.status(404).json({
+                ok: false,
+                error: "Session not found.",
+            });
+        }
+
+        if (session.ownerKey !== actorKey) {
+            return res.status(403).json({
+                ok: false,
+                error: "Forbidden.",
+            });
+        }
+
+        res.setHeader("Content-Type", "text/event-stream; charset=utf-8");
+        res.setHeader("Cache-Control", "no-store, no-transform");
+        res.setHeader("Connection", "keep-alive");
+        res.flushHeaders?.();
+
+        let lastSeq = 0;
+
+        const flush = () => {
+            const current = getSession(sessionId);
+
+            if (!current) {
+                cleanup();
+                res.end();
+                return;
+            }
+
+            if (current.ownerKey !== actorKey) {
+                cleanup();
+                res.end();
+                return;
+            }
+
+            const unseen = current.events.filter((ev) => ev.seq > lastSeq);
+            for (const ev of unseen) {
+                lastSeq = ev.seq;
+                res.write(`data: ${JSON.stringify(ev)}\n\n`);
+            }
+
+            if (isTerminalState(current.state)) {
+                cleanup();
+                res.end();
+            }
+        };
+
+        const pollTimer = setInterval(flush, 100);
+        const heartbeatTimer = setInterval(() => {
+            res.write(": keepalive\n\n");
+        }, 15000);
+
+        function cleanup() {
+            clearInterval(pollTimer);
+            clearInterval(heartbeatTimer);
+        }
+
+        flush();
+
+        req.on("close", () => {
             cleanup();
-            res.end();
-            return;
-        }
+        });
+    } catch (e: any) {
+        const message = e?.message ?? "Failed to stream session.";
+        const status = message === "Unauthorized" ? 401 : 500;
 
-        const unseen = session.events.filter((ev) => ev.seq > lastSeq);
-        for (const ev of unseen) {
-            lastSeq = ev.seq;
-            res.write(`data: ${JSON.stringify(ev)}\n\n`);
-        }
-
-        if (isTerminalState(session.state)) {
-            cleanup();
-            res.end();
-        }
-    };
-
-    const pollTimer = setInterval(flush, 100);
-    const heartbeatTimer = setInterval(() => {
-        res.write(": keepalive\n\n");
-    }, 15000);
-
-    function cleanup() {
-        clearInterval(pollTimer);
-        clearInterval(heartbeatTimer);
+        return res.status(status).json({
+            ok: false,
+            error: message,
+        });
     }
-
-    flush();
-
-    req.on("close", () => {
-        cleanup();
-    });
 };

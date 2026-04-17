@@ -25,9 +25,13 @@ import { runViaApi } from "@/lib/code/runClient";
 import { useCodeRunnerController } from "@/components/code/runner/hooks/controller/useCodeRunnerController";
 import { resolveRuntime } from "@/components/code/runner/hooks/controller/useResolvedRuntime";
 import TerminalSurface from "@/components/code/runner/components/TerminalSurface";
+import XtermTerminal from "@/components/code/runner/components/XtermTerminal";
+import { useWorkspaceTerminalController } from "@/components/code/runner/hooks/pty/useWorkspaceTerminalController";
+import type { WorkspaceTerminalConfig } from "@/components/code/runner/runtime";
 import { cx } from "@/components/tools/utils/cx";
 
 type MobilePane = "editor" | "output";
+type OutputTab = "output" | "terminal";
 
 type CodeRunnerWithStdinProps = CodeRunnerProps & {
     stdin?: string;
@@ -35,6 +39,7 @@ type CodeRunnerWithStdinProps = CodeRunnerProps & {
     onChangeStdin?: (value: string) => void;
     showStdinEditor?: boolean;
     stdinPlaceholder?: string;
+    workspaceTerminal?: WorkspaceTerminalConfig;
     sqlInitialTableSnapshots?: Record<
         string,
         {
@@ -117,6 +122,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         showStdinEditor = false,
         sqlInitialTableSnapshots,
         stdinPlaceholder = "Type stdin here. Each new line becomes one input line.",
+        workspaceTerminal,
     } = props as any;
 
     const controlled = isControlled(props as any);
@@ -126,6 +132,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     const [editorTheme, setEditorTheme] = useState<"vs" | "vs-dark">("vs-dark");
     const [isNarrowScreen, setIsNarrowScreen] = useState(false);
     const [mobilePane, setMobilePane] = useState<MobilePane>("editor");
+    const [outputTab, setOutputTab] = useState<OutputTab>("output");
 
     useEffect(() => {
         if (!showEditorThemeToggle) {
@@ -320,6 +327,20 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         onRun: onRun ?? defaultOnRun,
     } as any);
 
+    const workspaceTerminalEnabled =
+        Boolean(workspaceTerminal?.enabled) &&
+        isAuthenticated === true &&
+        lang !== "sql";
+
+    const workspaceTerm = useWorkspaceTerminalController({
+        enabled: workspaceTerminalEnabled,
+        projectId: workspaceTerminal?.projectId,
+        cwd: workspaceTerminal?.cwd,
+        initialFiles: workspaceTerminal?.initialFiles,
+        lazy: workspaceTerminal?.lazy ?? true,
+        title: workspaceTerminal?.title,
+    });
+
     useEffect(() => {
         requestLayout();
     }, [effectiveDock, split.termW, split.bottomEditorH, split.bottomTermH, split.rightTotalH]);
@@ -335,10 +356,35 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     }, [showEditor, showTerminal]);
 
     useEffect(() => {
+        if (!workspaceTerminalEnabled && outputTab === "terminal") {
+            setOutputTab("output");
+        }
+    }, [workspaceTerminalEnabled, outputTab]);
+
+    useEffect(() => {
+        if (lang === "sql" && outputTab === "terminal") {
+            setOutputTab("output");
+        }
+    }, [lang, outputTab]);
+
+    useEffect(() => {
+        if (outputTab !== "terminal") return;
+        if (!workspaceTerminalEnabled) return;
+        if (workspaceTerm.started || workspaceTerm.starting) return;
+
+        void workspaceTerm.open();
+    }, [
+        outputTab,
+        workspaceTerminalEnabled,
+        workspaceTerm,
+    ]);
+
+    useEffect(() => {
         if (!isNarrowScreen) return;
         if (!showEditor || !showTerminal) return;
         if (term.runState !== "idle") {
             setMobilePane("output");
+            setOutputTab("output");
         }
     }, [isNarrowScreen, showEditor, showTerminal, term.runState]);
 
@@ -358,6 +404,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                 setMobilePane("editor");
             }
 
+            setOutputTab("output");
             term.resetTerminal();
         },
         [
@@ -406,36 +453,96 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
             ? term.lastResult
             : null;
 
-    const outputLabel = term.backend === "sql" ? "Results" : "Terminal";
+    const outputLabel = term.backend === "sql" ? "Results" : "Output";
     const mobileTabAttention = term.runState !== "idle" || !!term.lastResult;
     const mobileBodyHeight = Math.max(240, (split.mainH || numericHeight) - 48);
 
     const showStdinEditorUI = showStdinEditor && showEditor && lang !== "sql";
+    const showWorkspaceTerminalTab = workspaceTerminalEnabled;
+
+    const renderOutputBody = () => {
+        if (outputTab === "terminal" && showWorkspaceTerminalTab) {
+            return (
+                <XtermTerminal
+                    terminalFeed={workspaceTerm.terminalFeed}
+                    inputEnabled={workspaceTerm.inputEnabled}
+                    busy={workspaceTerm.busy}
+                    disabled={disabled}
+                    lastResult={null}
+                    onSendData={workspaceTerm.sendData}
+                    onResize={workspaceTerm.resize}
+                />
+            );
+        }
+
+        return (
+            <TerminalSurface
+                controller={term}
+                disabled={disabled}
+                sqlSchemaSql={sqlSchemaSql ?? sqlSetupSql ?? ""}
+                sqlInitialTableSnapshots={sqlInitialTableSnapshots}
+                sqlViewKey={[
+                    editorModelKey ?? "",
+                    sqlDatasetId ?? "",
+                    lang,
+                    sqlDialect,
+                ].join("::")}
+            />
+        );
+    };
 
     const renderOutputPane = (panelHeight?: number, panelWidth?: number) => {
         return (
             <div
-                className="min-h-0"
+                className="min-h-0 flex flex-col"
                 style={{
                     ...(typeof panelHeight === "number" ? { height: panelHeight } : {}),
                     ...(typeof panelWidth === "number" ? { width: panelWidth } : {}),
                 }}
             >
-                <TerminalSurface
-                    controller={term}
-                    disabled={disabled}
-                    sqlSchemaSql={sqlSchemaSql ?? sqlSetupSql ?? ""}
-                    sqlInitialTableSnapshots={sqlInitialTableSnapshots}
-                    sqlViewKey={[
-                        editorModelKey ?? "",
-                        sqlDatasetId ?? "",
-                        lang,
-                        sqlDialect,
-                    ].join("::")}
-                />
+                {showWorkspaceTerminalTab ? (
+                    <div className={cx("p-2", PANEL_TABS)}>
+                        <div className="flex items-center gap-2">
+                            <button
+                                type="button"
+                                onClick={() => setOutputTab("output")}
+                                className={cx(
+                                    MOBILE_TAB_BASE,
+                                    outputTab === "output" ? MOBILE_TAB_OUTPUT_ACTIVE : MOBILE_TAB_IDLE,
+                                )}
+                                aria-pressed={outputTab === "output"}
+                            >
+                                {outputLabel}
+                                {mobileTabAttention && outputTab !== "output" ? (
+                                    <span className="inline-flex h-2 w-2 rounded-full bg-sky-500" />
+                                ) : null}
+                            </button>
+
+                            <button
+                                type="button"
+                                onClick={() => setOutputTab("terminal")}
+                                className={cx(
+                                    MOBILE_TAB_BASE,
+                                    outputTab === "terminal" ? MOBILE_TAB_ACTIVE : MOBILE_TAB_IDLE,
+                                )}
+                                aria-pressed={outputTab === "terminal"}
+                            >
+                                <span>{workspaceTerminal?.title ?? "Terminal"}</span>
+                                {(workspaceTerm.started || workspaceTerm.busy || workspaceTerm.starting) ? (
+                                    <span className="inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+                                ) : null}
+                            </button>
+                        </div>
+                    </div>
+                ) : null}
+
+                <div className="min-h-0 flex-1 overflow-hidden">
+                    {renderOutputBody()}
+                </div>
             </div>
         );
     };
+
     const renderEditorPane = (editorHeight: number) => (
         <div
             className={PANEL_EDITOR}
@@ -490,6 +597,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                         allowReset={allowReset}
                         onReset={() => {
                             setCode(DEFAULT_CODE[lang]);
+                            setOutputTab("output");
                             term.resetTerminal();
                             if (isNarrowScreen && showEditor && showTerminal) {
                                 setMobilePane("editor");
@@ -497,6 +605,8 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                         }}
                         allowRun={allowRun}
                         onRun={async () => {
+                            setOutputTab("output");
+
                             if (isNarrowScreen && showEditor && showTerminal) {
                                 setMobilePane("output");
                             }

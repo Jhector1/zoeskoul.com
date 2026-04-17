@@ -1,0 +1,39 @@
+import tar from "tar-stream";
+import { Buffer } from "node:buffer";
+import type { FileEntry } from "@zoeskoul/code-contracts";
+
+const SAFE_REL_PATH = /^[A-Za-z0-9._/-]+$/;
+
+function assertStrictRelPath(p: string) {
+    const normalized = String(p ?? "").replace(/\\/g, "/").trim();
+    if (!normalized) throw new Error("Empty path.");
+    if (normalized.startsWith("/")) throw new Error(`Unsafe path: ${p}`);
+    if (normalized.includes("\0")) throw new Error(`Unsafe path: ${p}`);
+    if (!SAFE_REL_PATH.test(normalized)) throw new Error(`Disallowed path chars: ${p}`);
+
+    for (const part of normalized.split("/")) {
+        if (!part || part === "." || part === "..") {
+            throw new Error(`Unsafe path: ${p}`);
+        }
+    }
+    return normalized;
+}
+
+export async function buildWorkspaceTar(files: FileEntry[]): Promise<Buffer> {
+    const pack = tar.pack();
+    const chunks: Buffer[] = [];
+
+    const done = new Promise<Buffer>((resolve, reject) => {
+        pack.on("data", (chunk) => chunks.push(Buffer.from(chunk)));
+        pack.on("end", () => resolve(Buffer.concat(chunks)));
+        pack.on("error", reject);
+    });
+
+    for (const file of files) {
+        const path = assertStrictRelPath(file.path);
+        pack.entry({ name: path, mode: 0o644 }, file.content ?? "");
+    }
+
+    pack.finalize();
+    return done;
+}

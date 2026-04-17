@@ -6,11 +6,12 @@ import { buildMetadata } from "@/lib/seo/buildMetadata";
 import { getRouteSeo, getSharedSeo } from "@/lib/seo/getSeo";
 import type { AppLocale } from "@/lib/seo/types";
 import { resolveSandboxToolEntry } from "@/lib/sandbox/toolRegistry";
-// import { getCurrentActor } from "@/lib/auth/";
 import { checkIdeCapability } from "@/lib/access/ideCapabilityServer";
+// import { redirectToSignIn } from "@/lib/auth/redirect-to-sign-in";
 
 import SandboxToolClient, { type SandboxAccess } from "./SandboxToolClient";
-import {getActor} from "@/lib/practice/actor";
+import { getActor } from "@/lib/practice/actor";
+import {redirectToSignIn} from "@/lib/auth/require-auth";
 
 type PageProps = {
     params: Promise<{
@@ -47,9 +48,9 @@ export async function generateMetadata(
     });
 }
 
-async function getSandboxAccess(): Promise<SandboxAccess> {
-    const actor = await getActor();
-
+async function getSandboxAccessForActor(
+    actor: Awaited<ReturnType<typeof getActor>>,
+): Promise<SandboxAccess> {
     const [multiFileDecision, saveDecision] = await Promise.all([
         checkIdeCapability(prisma, {
             actor,
@@ -77,9 +78,22 @@ export default async function SandboxToolPage({
     const entry = resolveSandboxToolEntry(category, toolSlug);
     if (!entry) notFound();
 
+    const actor = await getActor();
+
+    if (
+        entry.kind === "programming" &&
+        entry.toolSlug === "shell" &&
+        !actor.userId
+    ) {
+        redirectToSignIn({
+            locale,
+            pathname: `/sandbox/${category}/${toolSlug}`,
+        });
+    }
+
     const access =
         entry.kind === "programming"
-            ? await getSandboxAccess()
+            ? await getSandboxAccessForActor(actor)
             : {
                 hasUser: false,
                 canUseMultiFile: false,

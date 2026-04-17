@@ -1,9 +1,11 @@
-import type { RunEvent, RunSessionState } from "@zoeskoul/code-contracts";
-import type { NodeJSStream } from "../types.js";
-import { RunEventInput } from "@zoeskoul/code-contracts";
+// apps/runner/src/services/sessions/sessionStore.ts
+import type { RunEvent, RunEventInput, RunSessionState } from "@zoeskoul/code-contracts";
+
+export type NodeJSStream = NodeJS.ReadWriteStream;
 
 type SessionRecord = {
     id: string;
+    ownerKey?: string;
     containerId: string;
     workspaceDir: string;
     state: RunSessionState;
@@ -24,11 +26,13 @@ function nowIso() {
 
 export function createSession(args: {
     id: string;
+    ownerKey?: string;
     containerId: string;
     workspaceDir: string;
 }) {
     const session: SessionRecord = {
         id: args.id,
+        ownerKey: args.ownerKey,
         containerId: args.containerId,
         workspaceDir: args.workspaceDir,
         state: "queued",
@@ -51,6 +55,7 @@ export function setSessionStream(id: string, stream: NodeJSStream) {
     if (!session) return null;
 
     session.attachStream = stream;
+    session.lastActivityAt = Date.now();
     sessions.set(id, session);
     return session;
 }
@@ -97,6 +102,10 @@ export function pushEvent(id: string, event: RunEventInput) {
     }
 
     session.events.push(full);
+    if (session.events.length > 2000) {
+        session.events.splice(0, session.events.length - 2000);
+    }
+
     session.lastActivityAt = Date.now();
     sessions.set(id, session);
 

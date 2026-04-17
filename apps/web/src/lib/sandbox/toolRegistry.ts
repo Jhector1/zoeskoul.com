@@ -2,13 +2,15 @@ import type { CodeLanguage } from "@/lib/practice/types";
 
 export type SandboxCategory = "programming" | "math";
 
-export type ProgrammingToolSlug =
+export type ProgrammingCodeToolSlug =
     | "python"
     | "java"
     | "javascript"
     | "c"
     | "cpp"
     | "sql";
+
+export type ProgrammingToolSlug = ProgrammingCodeToolSlug | "shell";
 
 export type MathToolSlug = "linear-algebra";
 
@@ -18,7 +20,7 @@ export type SandboxToolEntry =
     | {
     kind: "programming";
     category: "programming";
-    toolSlug: ProgrammingToolSlug;
+    toolSlug: ProgrammingCodeToolSlug;
     title: string;
     initialLanguage: CodeLanguage;
     seoKey:
@@ -31,6 +33,15 @@ export type SandboxToolEntry =
     lessonPath: string;
 }
     | {
+    kind: "programming";
+    category: "programming";
+    toolSlug: "shell";
+    title: string;
+    initialLanguage: CodeLanguage;
+    seoKey: "sandbox-shell-practice";
+    lessonPath?: string;
+}
+    | {
     kind: "math";
     category: "math";
     toolSlug: "linear-algebra";
@@ -39,7 +50,7 @@ export type SandboxToolEntry =
     lessonPath?: string;
 };
 
-export const PROGRAMMING_TOOL_ORDER: ProgrammingToolSlug[] = [
+export const PROGRAMMING_TOOL_ORDER: ProgrammingCodeToolSlug[] = [
     "python",
     "java",
     "javascript",
@@ -70,7 +81,6 @@ export function resolveSandboxToolEntry(
     if (category === "programming") {
         switch (toolSlug) {
             case "python":
-
                 return {
                     kind: "programming",
                     category: "programming",
@@ -79,8 +89,8 @@ export function resolveSandboxToolEntry(
                     initialLanguage: "python",
                     seoKey: "online-python-compiler",
                     lessonPath: "/subjects/python/modules",
-
                 };
+
             case "java":
                 return {
                     kind: "programming",
@@ -90,8 +100,8 @@ export function resolveSandboxToolEntry(
                     initialLanguage: "java",
                     seoKey: "online-java-compiler",
                     lessonPath: "/subjects/java/modules",
-
                 };
+
             case "javascript":
                 return {
                     kind: "programming",
@@ -101,8 +111,8 @@ export function resolveSandboxToolEntry(
                     initialLanguage: "javascript",
                     seoKey: "online-javascript-editor",
                     lessonPath: "/subjects/javascript/modules",
-
                 };
+
             case "c":
                 return {
                     kind: "programming",
@@ -112,8 +122,8 @@ export function resolveSandboxToolEntry(
                     initialLanguage: "c",
                     seoKey: "online-c-compiler",
                     lessonPath: "/subjects/programming/modules",
-
                 };
+
             case "cpp":
                 return {
                     kind: "programming",
@@ -123,8 +133,8 @@ export function resolveSandboxToolEntry(
                     initialLanguage: "cpp",
                     seoKey: "online-cpp-compiler",
                     lessonPath: "/subjects/cpp/modules",
-
                 };
+
             case "sql":
                 return {
                     kind: "programming",
@@ -134,8 +144,18 @@ export function resolveSandboxToolEntry(
                     initialLanguage: "sql",
                     seoKey: "online-sql-editor",
                     lessonPath: "/subjects/sql/modules",
-
                 };
+
+            case "shell":
+                return {
+                    kind: "programming",
+                    category: "programming",
+                    toolSlug: "shell",
+                    title: "Shell Practice",
+                    initialLanguage: "python",
+                    seoKey: "sandbox-shell-practice",
+                };
+
             default:
                 return null;
         }

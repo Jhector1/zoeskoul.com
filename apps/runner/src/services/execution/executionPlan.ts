@@ -1,87 +1,155 @@
-import type { InteractiveLanguage, FileEntry } from "@zoeskoul/code-contracts";
+import type { FileEntry, InteractiveLanguage } from "@zoeskoul/code-contracts";
 
 export type ExecutionPlan = {
-    compileCmd?: string;
-    runCmd: string;
+    prepareDirs?: string[];
+    compileCmd?: string[];
+    runCmd: string[];
 };
 
+type ExecutionPlanOptions = {
+    shell?: boolean;
+    cwd?: string;
+};
+
+const SAFE_REL_PATH = /^[A-Za-z0-9._/-]+$/;
+
+function normalizeRelPath(p: string) {
+    return String(p ?? "").replace(/\\/g, "/").trim();
+}
+
+function assertStrictRelPath(p: string) {
+    const normalized = normalizeRelPath(p);
+
+    if (!normalized) throw new Error("Empty path.");
+    if (normalized.startsWith("/")) throw new Error(`Unsafe path: ${p}`);
+    if (normalized.includes("\0")) throw new Error(`Unsafe path: ${p}`);
+    if (!SAFE_REL_PATH.test(normalized)) {
+        throw new Error(`Disallowed path chars: ${p}`);
+    }
+
+    for (const part of normalized.split("/")) {
+        if (!part || part === "." || part === "..") {
+            throw new Error(`Unsafe path: ${p}`);
+        }
+    }
+
+    return normalized;
+}
+
 function getJavaMainClass(files: FileEntry[], entryFile: string): string {
-    const normalizedEntry = entryFile.replace(/\\/g, "/");
-    const simpleName =
-        normalizedEntry.split("/").pop()?.replace(/\.java$/, "") || "Main";
+    const entry = assertStrictRelPath(entryFile);
+    const simpleName = entry.split("/").pop()?.replace(/\.java$/, "") || "Main";
 
-    const entrySource =
-        files.find((f) => f.path.replace(/\\/g, "/") === normalizedEntry)?.content ?? "";
+    const source =
+        files.find((f) => normalizeRelPath(f.path) === entry)?.content ?? "";
 
-    const pkgMatch = entrySource.match(
+    const pkgMatch = source.match(
         /^\s*package\s+([A-Za-z_]\w*(?:\.[A-Za-z_]\w*)*)\s*;/m,
     );
 
-    if (pkgMatch?.[1]) {
-        return `${pkgMatch[1]}.${simpleName}`;
+    return pkgMatch?.[1] ? `${pkgMatch[1]}.${simpleName}` : simpleName;
+}
+
+function filesByExt(files: FileEntry[], exts: string[]) {
+    return files
+        .map((f) => assertStrictRelPath(f.path))
+        .filter((p) => exts.some((ext) => p.endsWith(ext)));
+}
+
+function includeDirs(files: FileEntry[], exts: string[]) {
+    const dirs = new Set<string>();
+
+    for (const p of filesByExt(files, exts)) {
+        const idx = p.lastIndexOf("/");
+        if (idx > 0) {
+            dirs.add(p.slice(0, idx));
+        }
     }
 
-    return simpleName;
+    return [...dirs].sort().flatMap((dir) => ["-I", dir]);
 }
 
 export function getExecutionPlan(
     language: InteractiveLanguage,
-    entryFile: string,
+    entryFile?: string,
     files: FileEntry[] = [],
+    options: ExecutionPlanOptions = {},
 ): ExecutionPlan {
+    const shell = options.shell === true;
+    const entry = entryFile ? assertStrictRelPath(entryFile) : undefined;
+
     switch (language) {
         case "python":
+            if (!entry) throw new Error("Missing Python entry file.");
             return {
-                runCmd: `python3 -u '${entryFile}'`,
+                runCmd: ["python3", "-u", entry],
             };
 
         case "javascript":
+            if (!entry) throw new Error("Missing JavaScript entry file.");
             return {
-                runCmd: `node '${entryFile}'`,
+                runCmd: ["node", entry],
             };
 
-        case "c":
+        case "bash":
+            if (shell) {
+                return {
+                    runCmd: ["/bin/bash", "--noprofile", "--norc", "-i"],
+                };
+            }
+
+            if (!entry) throw new Error("Missing Bash entry file.");
             return {
-                compileCmd: [
-                    "set -euo pipefail",
-                    "mkdir -p build",
-                    `INCLUDES="$(find . -type f \\( -name '*.h' \\) -not -path './build/*' -print0 | xargs -0 -r -n1 dirname | sort -u | sed 's#^#-I#' | tr '\\n' ' ')"`,
-                    `SRCS="$(find . -type f \\( -name '*.c' \\) -not -path './build/*' -print0 | xargs -0 -r printf '%s ')"`,
-                    `[ -n "$SRCS" ]`,
-                    `gcc -O2 -std=c11 $INCLUDES -o build/app $SRCS`,
-                ].join(" && "),
-                runCmd: "./build/app",
+                runCmd: ["/bin/bash", "--noprofile", "--norc", entry],
             };
 
-        case "cpp":
+        case "c": {
+            const srcs = filesByExt(files, [".c"]);
+            if (!srcs.length) throw new Error("No C source files found.");
+
             return {
+                prepareDirs: ["build"],
                 compileCmd: [
-                    "set -euo pipefail",
-                    "mkdir -p build",
-                    `INCLUDES="$(find . -type f \\( -name '*.h' -o -name '*.hpp' -o -name '*.hh' \\) -not -path './build/*' -print0 | xargs -0 -r -n1 dirname | sort -u | sed 's#^#-I#' | tr '\\n' ' ')"`,
-                    `SRCS="$(find . -type f \\( -name '*.cpp' -o -name '*.cc' -o -name '*.cxx' \\) -not -path './build/*' -print0 | xargs -0 -r printf '%s ')"`,
-                    `[ -n "$SRCS" ]`,
-                    `g++ -O2 -std=c++17 $INCLUDES -o build/app $SRCS`,
-                ].join(" && "),
-                runCmd: "./build/app",
+                    "gcc",
+                    "-O2",
+                    "-std=c11",
+                    ...includeDirs(files, [".h"]),
+                    "-o",
+                    "build/app",
+                    ...srcs,
+                ],
+                runCmd: ["./build/app"],
             };
+        }
+
+        case "cpp": {
+            const srcs = filesByExt(files, [".cpp", ".cc", ".cxx"]);
+            if (!srcs.length) throw new Error("No C++ source files found.");
+
+            return {
+                prepareDirs: ["build"],
+                compileCmd: [
+                    "g++",
+                    "-O2",
+                    "-std=c++17",
+                    ...includeDirs(files, [".h", ".hpp", ".hh"]),
+                    "-o",
+                    "build/app",
+                    ...srcs,
+                ],
+                runCmd: ["./build/app"],
+            };
+        }
 
         case "java": {
-            const mainClass = getJavaMainClass(files, entryFile);
-            console.log({
-                entryFile,
-                filePaths: files.map((f) => f.path),
-                mainClass,
-            });
+            const srcs = filesByExt(files, [".java"]);
+            if (!srcs.length) throw new Error("No Java source files found.");
+            if (!entry) throw new Error("Missing Java entry file.");
+
             return {
-                compileCmd: [
-                    "set -euo pipefail",
-                    "mkdir -p build",
-                    `SRCS="$(find . -type f -name '*.java' -not -path './build/*' -print0 | xargs -0 -r printf '%s ')"`,
-                    `[ -n "$SRCS" ]`,
-                    `javac -d build $SRCS`,
-                ].join(" && "),
-                runCmd: `java -cp build ${mainClass}`,
+                prepareDirs: ["build"],
+                compileCmd: ["javac", "-d", "build", ...srcs],
+                runCmd: ["java", "-cp", "build", getJavaMainClass(files, entry)],
             };
         }
     }

@@ -31,6 +31,24 @@ function hasLocalePrefix(pathname: string) {
   return routing.locales.includes(maybeLocale as any);
 }
 
+function collapseDuplicateLocalePath(pathname: string) {
+  const parts = pathname.split("/");
+  const first = parts[1];
+  const second = parts[2];
+
+  if (
+      first &&
+      second &&
+      routing.locales.includes(first as any) &&
+      first === second
+  ) {
+    const rest = parts.slice(3).join("/");
+    return rest ? `/${first}/${rest}` : `/${first}`;
+  }
+
+  return null;
+}
+
 function isPublicPath(pathname: string) {
   // pathname is locale-stripped
   return (
@@ -47,6 +65,7 @@ function isPublicPath(pathname: string) {
 function isProtectedPath(pathname: string) {
   // pathname is locale-stripped
   return (
+      pathname === "/sandbox/programming/shell" ||
       pathname.startsWith("/admin") ||
       pathname.startsWith("/assignments") ||
       pathname.startsWith("/profile") ||
@@ -64,9 +83,17 @@ const POSSIBLE_SESSION_COOKIES = [
 const LOCALE_COOKIE = "NEXT_LOCALE";
 
 export default async function middleware(req: NextRequest) {
-  const { pathname } = req.nextUrl;
+  const { pathname, search } = req.nextUrl;
 
-  // Redirect non-locale routes to saved locale when available
+  // 1) Collapse accidental double locale prefixes like /en/en/...
+  const normalizedPath = collapseDuplicateLocalePath(pathname);
+  if (normalizedPath) {
+    const url = req.nextUrl.clone();
+    url.pathname = normalizedPath;
+    return NextResponse.redirect(url, 308);
+  }
+
+  // 2) Redirect non-locale routes to saved locale when available
   if (!hasLocalePrefix(pathname)) {
     const saved = req.cookies.get(LOCALE_COOKIE)?.value;
 
@@ -77,10 +104,10 @@ export default async function middleware(req: NextRequest) {
     }
   }
 
-  // Let next-intl do locale detection / redirects / rewrites
+  // 3) Let next-intl do locale detection / redirects / rewrites
   const res = handleI18n(req);
 
-  const { pathname: localizedPathname, search } = req.nextUrl;
+  const { pathname: localizedPathname } = req.nextUrl;
   const { locale, path } = stripLocale(localizedPathname);
 
   // Prevent auth pages from being indexed

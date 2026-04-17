@@ -200,6 +200,14 @@
         "ogDescription": "Write and run SQL queries online with the {appName} SQL editor.",
         "twitterTitle": "Online SQL Editor — {appName}",
         "twitterDescription": "Write and run SQL queries online with the {appName} SQL editor."
+      },
+      "sandbox-shell-practice": {
+        "title": "Shell Practice — {appName}",
+        "description": "Practice Bash commands in a real interactive shell with {appName}.",
+        "ogTitle": "Shell Practice — {appName}",
+        "ogDescription": "Use a real interactive Bash shell to practice commands and filesystem basics.",
+        "twitterTitle": "Shell Practice — {appName}",
+        "twitterDescription": "Practice Bash commands in a real interactive shell with {appName}."
       }
     },
     "subjects": {

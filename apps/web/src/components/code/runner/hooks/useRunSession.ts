@@ -2,14 +2,22 @@
 
 import * as React from "react";
 import type {
+    InteractiveRunReq,
     RunEvent,
     RunSessionState,
-    InteractiveRunReq,
 } from "@zoeskoul/code-contracts";
 
-type StartResult =
-    | { ok: true; sessionId: string; state: RunSessionState }
-    | { ok: false; error: string };
+type StartBrowserSessionResult =
+    | {
+    ok: true;
+    sessionId: string;
+    state: RunSessionState;
+    attachToken: string;
+}
+    | {
+    ok: false;
+    error: string;
+};
 
 type ServerToClientMessage =
     | { type: "ready"; sessionId: string; state: RunSessionState }
@@ -45,44 +53,64 @@ function isFinalSessionState(state: string) {
     );
 }
 
-function getWsBaseUrl() {
-    const explicit = process.env.NEXT_PUBLIC_RUNNER_WS_BASE_URL?.trim();
-    if (!explicit) {
-        throw new Error("Missing NEXT_PUBLIC_RUNNER_WS_BASE_URL");
-    }
-
-    const normalized = explicit.replace(/\/+$/, "");
-    if (!/^wss?:\/\//i.test(normalized)) {
-        throw new Error(
-            `NEXT_PUBLIC_RUNNER_WS_BASE_URL must start with ws:// or wss://. Got: ${normalized}`,
-        );
-    }
-
-    return normalized;
+function getWebSocketBase() {
+    if (typeof window === "undefined") return "";
+    const proto = window.location.protocol === "https:" ? "wss:" : "ws:";
+    return `${proto}//${window.location.host}`;
 }
 
 export function useRunSession() {
     const [sessionId, setSessionId] = React.useState<string | null>(null);
     const [state, setState] = React.useState<RunSessionState>("queued");
     const [events, setEvents] = React.useState<RunEvent[]>([]);
+
     const wsRef = React.useRef<WebSocket | null>(null);
+    const pendingRef = React.useRef<string[]>([]);
 
     const closeSocket = React.useCallback(() => {
         wsRef.current?.close();
         wsRef.current = null;
+        pendingRef.current = [];
+    }, []);
+
+    const sendOrQueue = React.useCallback((payload: unknown) => {
+        const encoded = JSON.stringify(payload);
+        const ws = wsRef.current;
+
+        if (!ws || ws.readyState === WebSocket.CONNECTING) {
+            pendingRef.current.push(encoded);
+            return;
+        }
+
+        if (ws.readyState !== WebSocket.OPEN) {
+            return;
+        }
+
+        ws.send(encoded);
     }, []);
 
     const connect = React.useCallback(
-        (nextSessionId: string, nextState: RunSessionState = "queued") => {
+        (nextSessionId: string, nextState: RunSessionState, attachToken: string) => {
             closeSocket();
+
             setEvents([]);
             setSessionId(nextSessionId);
             setState(nextState);
 
-            const base = getWsBaseUrl();
-            const wsUrl = `${base}/sessions/${encodeURIComponent(nextSessionId)}/ws`;
+            const base = getWebSocketBase();
+            const wsUrl =
+                `${base}/api/pty/sessions/${encodeURIComponent(nextSessionId)}/ws` +
+                `?token=${encodeURIComponent(attachToken)}`;
 
             const ws = new WebSocket(wsUrl);
+
+            ws.onopen = () => {
+                for (const msg of pendingRef.current.splice(0)) {
+                    if (ws.readyState === WebSocket.OPEN) {
+                        ws.send(msg);
+                    }
+                }
+            };
 
             ws.onmessage = (ev) => {
                 const msg = JSON.parse(ev.data) as ServerToClientMessage;
@@ -111,33 +139,12 @@ export function useRunSession() {
 
                 if (msg.type === "error") {
                     setState("failed");
-                    console.error("Runner WS error:", msg.message);
+                    console.error("PTY WS error:", msg.message);
                 }
-            };
-
-            ws.onopen = () => {
-                console.log("Runner WebSocket opened:", wsUrl);
             };
 
             ws.onerror = (ev) => {
-                console.error("Runner WebSocket failed:", wsUrl, ev);
-            };
-            ws.onclose = (ev) => {
-                const info = {
-                    url: wsUrl,
-                    code: ev.code,
-                    reason: ev.reason,
-                    wasClean: ev.wasClean,
-                };
-
-                const finalStates = new Set(["completed", "failed", "canceled", "timed_out"]);
-
-                if (finalStates.has(state) || ev.wasClean || ev.code === 1000 || ev.code === 1005) {
-                    console.log("Runner WebSocket closed:", info);
-                    return;
-                }
-
-                console.error("Runner WebSocket closed unexpectedly:", info);
+                console.error("PTY WS failed:", wsUrl, ev);
             };
 
             wsRef.current = ws;
@@ -149,13 +156,15 @@ export function useRunSession() {
         async (req: InteractiveRunReq) => {
             const res = await fetch("/api/run/pty/sessions/start", {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: {
+                    "Content-Type": "application/json",
+                },
                 body: JSON.stringify(req),
             });
 
-            const parsed = await parseJsonSafe<StartResult>(
+            const parsed = await parseJsonSafe<StartBrowserSessionResult>(
                 res,
-                "Non-JSON interactive session response",
+                "Non-JSON PTY session response",
             );
 
             if (!parsed.ok) {
@@ -172,29 +181,23 @@ export function useRunSession() {
                 );
             }
 
-            connect(data.sessionId, data.state);
+            connect(data.sessionId, data.state, data.attachToken);
             return data.sessionId;
         },
         [connect],
     );
 
     const sendInput = React.useCallback(async (input: string) => {
-        const ws = wsRef.current;
-        if (!ws || ws.readyState !== WebSocket.OPEN) return;
-        ws.send(JSON.stringify({ type: "input", data: input }));
-    }, []);
+        sendOrQueue({ type: "input", data: input });
+    }, [sendOrQueue]);
 
     const resize = React.useCallback(async (cols: number, rows: number) => {
-        const ws = wsRef.current;
-        if (!ws || ws.readyState !== WebSocket.OPEN) return;
-        ws.send(JSON.stringify({ type: "resize", cols, rows }));
-    }, []);
+        sendOrQueue({ type: "resize", cols, rows });
+    }, [sendOrQueue]);
 
     const cancel = React.useCallback(async () => {
-        const ws = wsRef.current;
-        if (!ws || ws.readyState !== WebSocket.OPEN) return;
-        ws.send(JSON.stringify({ type: "cancel" }));
-    }, []);
+        sendOrQueue({ type: "cancel" });
+    }, [sendOrQueue]);
 
     React.useEffect(() => {
         return () => {
@@ -202,15 +205,18 @@ export function useRunSession() {
         };
     }, [closeSocket]);
 
-    return {
-        sessionId,
-        state,
-        events,
-        start,
-        connect,
-        sendInput,
-        resize,
-        cancel,
-        closeSocket,
-    };
+    return React.useMemo(
+        () => ({
+            sessionId,
+            state,
+            events,
+            start,
+            connect,
+            sendInput,
+            resize,
+            cancel,
+            closeSocket,
+        }),
+        [sessionId, state, events, start, connect, sendInput, resize, cancel, closeSocket],
+    );
 }

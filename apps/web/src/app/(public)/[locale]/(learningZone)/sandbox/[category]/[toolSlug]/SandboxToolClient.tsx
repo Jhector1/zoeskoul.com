@@ -55,11 +55,16 @@ export default function SandboxToolClient({
                 ]),
             );
 
-        const localizedLessonHref = `/${locale}${entry.lessonPath}`;
+        const shellHref = `/${locale}/sandbox/programming/shell`;
+        const localizedLessonHref = entry.lessonPath
+            ? `/${locale}${entry.lessonPath}`
+            : undefined;
 
         return (
             <ProgrammingSandbox
-                initialLanguage={entry.initialLanguage}
+                initialLanguage={(entry.initialLanguage ?? "python") as CodeLanguage}
+                initialSurfaceMode={entry.toolSlug === "shell" ? "shell" : "code"}
+                shellHref={shellHref}
                 toolSlug={entry.toolSlug}
                 title={entry.title}
                 routeLanguageMap={routeLanguageMap}

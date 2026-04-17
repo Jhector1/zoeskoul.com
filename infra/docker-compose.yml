@@ -1,90 +1,67 @@
 services:
   postgres:
     image: postgres:16
-    container_name: zoeskoul-postgres
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ${POSTGRES_DB}
-    ports:
-      - "5432:5432"
     volumes:
       - postgres-data:/var/lib/postgresql/data
     restart: unless-stopped
-
-  redis:
-    image: redis:7
-    container_name: zoeskoul-redis
     ports:
-      - "6379:6379"
-    volumes:
-      - redis-data:/data
-    restart: unless-stopped
+      - "127.0.0.1:5433:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
 
   runtime-image:
     image: zoeskoul-runtime:latest
     build:
       context: ..
-      dockerfile: docker/runtime/Dockerfile
-    profiles: ["build-only"]
+      dockerfile: apps/runtime/Dockerfile
+    profiles:
+      - build-only
 
   runner:
     build:
       context: ..
       dockerfile: apps/runner/Dockerfile
-    container_name: zoeskoul-runner
+    user: "0:0"
     environment:
       NODE_ENV: production
-      PORT: ${RUNNER_PORT}
-      APP_URL: ${APP_URL}
-      WEB_URL: ${WEB_URL}
-      ALLOWED_WEB_ORIGINS: ${ALLOWED_WEB_ORIGINS}
-
-      RUNNER_IMAGE: zoeskoul-runtime:latest
-      DOCKER_SOCKET: /var/run/docker.sock
-      RUN_WALL_TIMEOUT_MS: ${RUN_WALL_TIMEOUT_MS}
-      RUN_IDLE_TIMEOUT_MS: ${RUN_IDLE_TIMEOUT_MS}
-      RUNNER_EXEC_UID: 1000
-      RUNNER_EXEC_GID: 1000
-      REDIS_URL: ${REDIS_URL}
-      RUNNER_WORKSPACE_ROOT: /opt/zoeskoul/workspaces
+      PORT: 4001
+      DOCKER_SOCKET: ${DOCKER_SOCKET:-/var/run/docker.sock}
+      RUNNER_IMAGE: ${RUNNER_IMAGE:-zoeskoul-runtime:latest}
+      RUNNER_SHARED_SECRET: ${RUNNER_SHARED_SECRET}
+      REDIS_URL: redis://host.docker.internal:6379
+      RUNNER_WORKSPACE_ROOT: ${RUNNER_WORKSPACE_ROOT}
+      RUN_WALL_TIMEOUT_MS: ${RUN_WALL_TIMEOUT_MS:-15000}
+      RUN_IDLE_TIMEOUT_MS: ${RUN_IDLE_TIMEOUT_MS:-20000}
+      RUNNER_EXEC_UID: ${RUNNER_EXEC_UID:-1000}
+      RUNNER_EXEC_GID: ${RUNNER_EXEC_GID:-1000}
+      RUNNER_MAX_FILES: ${RUNNER_MAX_FILES:-32}
+      RUNNER_MAX_TOTAL_BYTES: ${RUNNER_MAX_TOTAL_BYTES:-262144}
+      RUNNER_MAX_CONCURRENT_PER_ACTOR: ${RUNNER_MAX_CONCURRENT_PER_ACTOR:-3}
+    depends_on:
+      postgres:
+        condition: service_healthy
     ports:
-      - "${RUNNER_PORT}:4001"
+      - "127.0.0.1:4001:4001"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - /opt/zoeskoul/workspaces:/opt/zoeskoul/workspaces
-    depends_on:
-      - redis
-    restart: unless-stopped
-    networks:
-      - default
-      - public
-
-  web:
-    build:
-      context: ..
-      dockerfile: apps/web/Dockerfile
-    container_name: zoeskoul-web
-    environment:
-      NODE_ENV: production
-      RUNNER_BASE_URL: ${RUNNER_BASE_URL}
-      DATABASE_URL: ${DATABASE_URL}
-      REDIS_URL: ${REDIS_URL}
-      NEXTAUTH_URL: ${NEXTAUTH_URL}
-      AUTH_SECRET: ${AUTH_SECRET}
-      NEXT_PUBLIC_RUNNER_WS_BASE_URL: ${NEXT_PUBLIC_RUNNER_WS_BASE_URL}
-    ports:
-      - "${WEB_PORT}:3000"
-    depends_on:
-      - postgres
-      - redis
-      - runner
+      - ${RUNNER_WORKSPACE_ROOT}:${RUNNER_WORKSPACE_ROOT}
+    read_only: true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=64m
+      - /run:rw,noexec,nosuid,size=16m
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    pids_limit: 256
     restart: unless-stopped
 
 volumes:
   postgres-data:
-  redis-data:
-
-networks:
-  public:
-    external: true

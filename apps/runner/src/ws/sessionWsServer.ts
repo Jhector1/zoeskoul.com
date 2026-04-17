@@ -1,20 +1,29 @@
-import { WebSocketServer, type WebSocket } from "ws";
-import type { Server as HttpServer, IncomingMessage } from "node:http";
+import type { IncomingMessage } from "node:http";
+import type { Duplex } from "node:stream";
+import crypto from "node:crypto";
+import { WebSocketServer, WebSocket } from "ws";
+import { env } from "../lib/env.js";
 import { getSession, subscribeSession } from "../services/sessions/sessionStore.js";
 import { writeInput } from "../services/docker/writeInput.js";
 import { killSession } from "../services/docker/killSession.js";
 import { resizeSession } from "../services/docker/resizeSession.js";
-import { isAllowedOrigin, getAllowedOrigins } from "../lib/allowedOrigins.js";
 
 type ClientToServerMessage =
     | { type: "input"; data: string }
-    | { type: "cancel" }
     | { type: "resize"; cols: number; rows: number }
+    | { type: "cancel" }
     | { type: "ping" };
 
-function safeSend(ws: WebSocket, payload: unknown) {
-    if (ws.readyState !== ws.OPEN) return;
-    ws.send(JSON.stringify(payload));
+function getHeader(req: IncomingMessage, name: string) {
+    const value = req.headers[name];
+    return Array.isArray(value) ? value[0] : value ?? "";
+}
+
+function safeEqualText(a: string, b: string) {
+    const ab = Buffer.from(a);
+    const bb = Buffer.from(b);
+    if (ab.length !== bb.length) return false;
+    return crypto.timingSafeEqual(ab, bb);
 }
 
 function getSessionIdFromRequest(req: IncomingMessage) {
@@ -23,110 +32,174 @@ function getSessionIdFromRequest(req: IncomingMessage) {
     return match?.[1] ? decodeURIComponent(match[1]) : null;
 }
 
-export function attachSessionWsServer(server: HttpServer) {
+function safeSend(ws: WebSocket, payload: unknown) {
+    if (ws.readyState === WebSocket.OPEN) {
+        ws.send(JSON.stringify(payload));
+    }
+}
+
+function previewText(value: unknown, max = 120) {
+    const text = typeof value === "string" ? value : JSON.stringify(value);
+    if (!text) return "";
+    return text.length > max ? `${text.slice(0, max)}…` : text;
+}
+
+function bindSessionSocket(ws: WebSocket, sessionId: string, actorKey: string) {
+    const session = getSession(sessionId);
+    if (!session || session.ownerKey !== actorKey) {
+        safeSend(ws, { type: "error", message: "Session not found." });
+        ws.close();
+        return;
+    }
+
+    console.log("RUNNER WS bind", {
+        sessionId,
+        actorKey,
+        state: session.state,
+        existingEvents: session.events.length,
+    });
+
+    safeSend(ws, {
+        type: "ready",
+        sessionId,
+        state: session.state,
+    });
+
+    for (const ev of session.events) {
+        safeSend(ws, { type: "event", event: ev });
+    }
+
+    const unsubscribe = subscribeSession(sessionId, (event) => {
+        console.log("RUNNER WS event->client", {
+            sessionId,
+            type: event.type,
+            seq: event.seq,
+            preview:
+                event.type === "stdout" || event.type === "stderr"
+                    ? previewText(event.chunk)
+                    : event.type === "error"
+                        ? previewText(event.message)
+                        : undefined,
+        });
+
+        safeSend(ws, { type: "event", event });
+    });
+
+    ws.on("message", async (raw) => {
+        try {
+            const current = getSession(sessionId);
+            if (!current || current.ownerKey !== actorKey) {
+                safeSend(ws, { type: "error", message: "Forbidden." });
+                ws.close();
+                return;
+            }
+
+            const data = typeof raw === "string" ? raw : raw.toString("utf8");
+
+            let msg: ClientToServerMessage;
+            try {
+                msg = JSON.parse(data) as ClientToServerMessage;
+            } catch {
+                throw new Error("Invalid websocket JSON.");
+            }
+
+            console.log("RUNNER WS message", {
+                sessionId,
+                type: msg?.type,
+                data:
+                    msg?.type === "input"
+                        ? previewText(msg.data)
+                        : undefined,
+                cols: msg?.type === "resize" ? msg.cols : undefined,
+                rows: msg?.type === "resize" ? msg.rows : undefined,
+            });
+
+            if (msg.type === "ping") {
+                safeSend(ws, { type: "pong" });
+                return;
+            }
+
+            if (msg.type === "input") {
+                console.log("RUNNER WS input", {
+                    sessionId,
+                    data: JSON.stringify(msg.data),
+                    bytes: [...Buffer.from(String(msg.data ?? ""), "utf8")],
+                });
+                await writeInput(sessionId, String(msg.data ?? ""), actorKey);
+                return;
+            }
+
+            if (msg.type === "resize") {
+                await resizeSession(sessionId, msg.cols, msg.rows);
+                return;
+            }
+
+            if (msg.type === "cancel") {
+                await killSession(sessionId, "canceled");
+                return;
+            }
+
+            throw new Error("Unsupported websocket message type.");
+        } catch (e: any) {
+            console.error("RUNNER WS error", {
+                sessionId,
+                message: e?.message ?? "Invalid websocket message.",
+            });
+
+            safeSend(ws, {
+                type: "error",
+                message: e?.message ?? "Invalid websocket message.",
+            });
+        }
+    });
+
+    ws.on("close", () => {
+        console.log("RUNNER WS close", { sessionId });
+        unsubscribe();
+    });
+
+    ws.on("error", (err) => {
+        console.error("RUNNER WS socket error", {
+            sessionId,
+            message: err?.message ?? "socket error",
+        });
+        unsubscribe();
+    });
+}
+
+export function attachSessionWsServer() {
     const wss = new WebSocketServer({ noServer: true });
 
-    server.on("upgrade", (req, socket, head) => {
-
-
-        const origin = req.headers.origin;
+    return (req: IncomingMessage, socket: Duplex, head: Buffer) => {
+        const providedSecret = String(getHeader(req, "x-runner-secret"));
+        const actorKey = String(getHeader(req, "x-actor-key"));
         const sessionId = getSessionIdFromRequest(req);
 
-        if (!isAllowedOrigin(origin)) {
-            console.error("WS origin reject", {
-                origin,
-                allowedOrigins: [...getAllowedOrigins()],
-            });
+        if (!sessionId) return false;
+
+        if (!providedSecret || !safeEqualText(providedSecret, env.runnerSharedSecret)) {
             socket.write("HTTP/1.1 403 Forbidden\r\n\r\n");
             socket.destroy();
-            return;
+            return true;
         }
 
-        if (!sessionId) {
-            console.error("WS no session id", { url: req.url });
-            socket.write("HTTP/1.1 404 Not Found\r\n\r\n");
+        if (!actorKey) {
+            socket.write("HTTP/1.1 403 Forbidden\r\n\r\n");
             socket.destroy();
-            return;
+            return true;
         }
 
         const session = getSession(sessionId);
-        if (!session) {
-            console.error("WS session not found", { sessionId });
-            socket.write("HTTP/1.1 404 Not Found\r\n\r\n");
+        if (!session || session.ownerKey !== actorKey) {
+            socket.write("HTTP/1.1 403 Forbidden\r\n\r\n");
             socket.destroy();
-            return;
+            return true;
         }
 
-        wss.handleUpgrade(req, socket, head, (ws) => {
-
-
-            wss.emit("connection", ws, req, sessionId);
-        });
-    });
-
-    wss.on("connection", (ws: any, _req: any, sessionId: string) => {
-
-
-        const session = getSession(sessionId);
-        if (!session) {
-            safeSend(ws, { type: "error", message: "Session not found." });
-            ws.close();
-            return;
-        }
-
-        safeSend(ws, {
-            type: "ready",
-            sessionId,
-            state: session.state,
+        wss.handleUpgrade(req, socket as any, head, (ws) => {
+            bindSessionSocket(ws, sessionId, actorKey);
         });
 
-        for (const ev of session.events) {
-            safeSend(ws, { type: "event", event: ev });
-        }
-
-        const unsubscribe = subscribeSession(sessionId, (event) => {
-            safeSend(ws, { type: "event", event });
-        });
-
-        ws.on("message", async (raw: any) => {
-            try {
-                const msg = JSON.parse(String(raw)) as ClientToServerMessage;
-
-                if (msg.type === "ping") {
-                    safeSend(ws, { type: "pong" });
-                    return;
-                }
-
-                if (msg.type === "input") {
-                    await writeInput(sessionId, String(msg.data ?? ""));
-                    return;
-                }
-
-                if (msg.type === "cancel") {
-                    await killSession(sessionId, "canceled");
-                    return;
-                }
-
-                if (msg.type === "resize") {
-                    await resizeSession(sessionId, msg.cols, msg.rows);
-                    return;
-                }
-            } catch (e: any) {
-                safeSend(ws, {
-                    type: "error",
-                    message: e?.message ?? "Invalid websocket message.",
-                });
-            }
-        });
-
-        ws.on("close", () => {
-            unsubscribe();
-        });
-
-        ws.on("error", () => {
-            unsubscribe();
-        });
-    });
-
-    return wss;
+        return true;
+    };
 }

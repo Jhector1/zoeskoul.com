@@ -1,7 +1,10 @@
+# git
+.git
+.gitignore
+
 # dependencies
 node_modules/
-
-# package managers
+**/node_modules
 .pnpm-store/
 .npm/
 .yarn/
@@ -13,12 +16,16 @@ node_modules/
 
 # next.js
 .next/
+**/.next
 out/
 
 # build outputs
 dist/
+**/dist
 build/
+**/build
 coverage/
+**/coverage
 *.tsbuildinfo
 
 # logs
@@ -41,6 +48,7 @@ pnpm-debug.log*
 
 # OS / editor
 .DS_Store
+**/.DS_Store
 Thumbs.db
 .vscode/
 .idea/
@@ -49,6 +57,7 @@ Thumbs.db
 tmp/
 temp/
 .cache/
+**/.cache
 
 # vercel
 .vercel/
@@ -60,3 +69,7 @@ test-results/
 # prisma
 prisma/dev.db
 prisma/*.db-journal
+
+# local infra data
+infra/postgres-data
+infra/redis-data

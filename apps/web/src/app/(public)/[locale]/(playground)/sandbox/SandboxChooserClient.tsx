@@ -3,9 +3,21 @@
 import * as React from "react";
 import { useRouter } from "next/navigation";
 import { useTheme } from "next-themes";
-import { Code2, Database, Sigma, Sparkles, ArrowRight } from "lucide-react";
+import {
+    Code2,
+    Database,
+    Sigma,
+    Sparkles,
+    ArrowRight,
+    TerminalSquare,
+} from "lucide-react";
 
-type SandboxSlug = "programming" | "sql" | "linear-algebra" | "tools";
+type SandboxSlug =
+    | "programming"
+    | "programming-shell"
+    | "sql"
+    | "linear-algebra"
+    | "tools";
 
 type SandboxOption = {
     slug: SandboxSlug;
@@ -59,6 +71,16 @@ export default function SandboxChooserClient({ locale }: { locale: string }) {
                 tags: ["Python", "Java", "JavaScript", "C", "C++"],
                 path: "programming/python",
                 badge: { text: "All languages", tone: "good" },
+            },
+            {
+                slug: "programming-shell",
+                title: "Shell Practice",
+                description:
+                    "Use a real interactive Bash terminal with its own dedicated route.",
+                icon: <TerminalSquare className="h-4 w-4" />,
+                tags: ["Bash", "CLI", "Filesystem", "Interactive"],
+                path: "programming/shell",
+                badge: { text: "Terminal mode", tone: "good" },
             },
             {
                 slug: "sql",
@@ -141,7 +163,7 @@ export default function SandboxChooserClient({ locale }: { locale: string }) {
                             <input
                                 value={q}
                                 onChange={(e) => setQ(e.target.value)}
-                                placeholder='Search: "joins", "python", "vectors"...'
+                                placeholder='Search: "joins", "python", "shell"...'
                                 className="ui-input-ide w-full"
                             />
 
@@ -214,7 +236,7 @@ export default function SandboxChooserClient({ locale }: { locale: string }) {
 
                     {!filtered.length ? (
                         <div className="ui-surface-muted mt-3 p-4 text-sm text-neutral-600 dark:text-white/65">
-                            No matches. Try “python”, “joins”, or “vectors”.
+                            No matches. Try “python”, “joins”, or “shell”.
                         </div>
                     ) : null}
                 </div>

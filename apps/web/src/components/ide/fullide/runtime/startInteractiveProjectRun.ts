@@ -1,10 +1,21 @@
-// src/components/ide/fullide/runtime/startInteractiveProjectRun.ts
 "use client";
 
 import type {
     InteractiveRunReq,
-    StartSessionResult,
+    RunSessionState,
 } from "@zoeskoul/code-contracts";
+
+type StartBrowserSessionResult =
+    | {
+    ok: true;
+    sessionId: string;
+    state: RunSessionState;
+    attachToken: string;
+}
+    | {
+    ok: false;
+    error: string;
+};
 
 async function parseJsonSafe<T>(
     res: Response,
@@ -28,7 +39,7 @@ async function parseJsonSafe<T>(
 export async function startInteractiveProjectRun(
     req: InteractiveRunReq,
     signal?: AbortSignal,
-): Promise<StartSessionResult> {
+): Promise<StartBrowserSessionResult> {
     try {
         const res = await fetch("/api/run/pty/sessions/start", {
             method: "POST",
@@ -39,7 +50,7 @@ export async function startInteractiveProjectRun(
             signal,
         });
 
-        const parsed = await parseJsonSafe<StartSessionResult>(
+        const parsed = await parseJsonSafe<StartBrowserSessionResult>(
             res,
             "Non-JSON interactive session response",
         );

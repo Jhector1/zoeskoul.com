@@ -93,6 +93,7 @@ export default function XtermTerminal(props: {
     lastResult: RunResult | null;
     onSendData: (data: string) => void;
     onResize: (cols: number, rows: number) => void;
+    optimisticLocalEcho?: boolean;
 }) {
     const {
         terminalFeed,
@@ -117,7 +118,9 @@ export default function XtermTerminal(props: {
     const openTimerRef = useRef<number | null>(null);
     const raf1Ref = useRef<number | null>(null);
     const raf2Ref = useRef<number | null>(null);
+
     const dataDisposableRef = useRef<{ dispose: () => void } | null>(null);
+    const binaryDisposableRef = useRef<{ dispose: () => void } | null>(null);
 
     const lastSizeRef = useRef<{ cols: number; rows: number } | null>(null);
     const prevFeedRef = useRef<TerminalChunk[]>([]);
@@ -144,8 +147,6 @@ export default function XtermTerminal(props: {
     );
 
     const focusTerminal = useCallback(() => {
-        if (!inputReadyRef.current) return;
-
         requestAnimationFrame(() => {
             const term = termRef.current;
             if (!term || !openedRef.current) return;
@@ -187,6 +188,7 @@ export default function XtermTerminal(props: {
                 onResizeRef.current(cols, rows);
             } catch {}
         };
+
         const scheduleResize = () => {
             if (resizeTimerRef.current != null) {
                 window.clearTimeout(resizeTimerRef.current);
@@ -251,7 +253,21 @@ export default function XtermTerminal(props: {
                         termRef.current = term;
                         openedRef.current = true;
 
+                        term.attachCustomKeyEventHandler((ev: KeyboardEvent) => {
+                            if (!inputReadyRef.current) return true;
+                            if (ev.type === "keydown") {
+                                ev.stopPropagation();
+                            }
+                            return true;
+                        });
+
                         dataDisposableRef.current = term.onData((data) => {
+                            if (!inputReadyRef.current) return;
+                            console.log("XTERM onData", JSON.stringify(data));
+                            onSendDataRef.current(data);
+                        });
+
+                        binaryDisposableRef.current = term.onBinary((data) => {
                             if (!inputReadyRef.current) return;
                             onSendDataRef.current(data);
                         });
@@ -278,10 +294,7 @@ export default function XtermTerminal(props: {
 
                         window.setTimeout(() => {
                             scheduleResize();
-
-                            if (inputReadyRef.current) {
-                                focusTerminal();
-                            }
+                            focusTerminal();
                         }, 0);
                     });
                 });
@@ -297,6 +310,9 @@ export default function XtermTerminal(props: {
 
             dataDisposableRef.current?.dispose();
             dataDisposableRef.current = null;
+
+            binaryDisposableRef.current?.dispose();
+            binaryDisposableRef.current = null;
 
             resizeObserverRef.current?.disconnect();
             resizeObserverRef.current = null;
@@ -406,7 +422,7 @@ export default function XtermTerminal(props: {
     return (
         <div
             className={[
-                "h-full  border-t  p-2 flex flex-col",
+                "h-full border-t p-2 flex flex-col",
                 "bg-white/80 dark:bg-black/40",
                 "border-neutral-200 dark:border-white/10",
             ].join(" ")}

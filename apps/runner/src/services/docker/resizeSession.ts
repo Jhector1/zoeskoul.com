@@ -8,8 +8,9 @@ export async function resizeSession(sessionId: string, cols: number, rows: numbe
     }
 
     const container = docker.getContainer(session.containerId);
+
     await container.resize({
-        w: Math.max(1, Math.floor(cols || 80)),
-        h: Math.max(1, Math.floor(rows || 24)),
+        w: Math.max(1, Math.floor(Number(cols) || 80)),
+        h: Math.max(1, Math.floor(Number(rows) || 24)),
     });
 }

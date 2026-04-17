@@ -23,7 +23,7 @@ export type SeoRouteKey =
     | "online-cpp-compiler"
     | "online-sql-editor"
     | "sandbox-programming"
-    | "sandbox-linear-algebra"
+    | "sandbox-linear-algebra"|"sandbox-shell-practice"
 
 export type SeoSubjectKey =
     | "python"

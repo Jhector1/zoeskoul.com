@@ -19,6 +19,7 @@ type StartedInteractiveSession = {
     ok?: true;
     sessionId: string;
     state: RunSessionState;
+    attachToken: string;
 };
 
 function isFinalSessionState(state: string) {
@@ -34,7 +35,11 @@ function isStartedInteractiveSession(value: unknown): value is StartedInteractiv
     if (!value || typeof value !== "object") return false;
 
     const v = value as Record<string, unknown>;
-    return typeof v.sessionId === "string" && typeof v.state === "string";
+    return (
+        typeof v.sessionId === "string" &&
+        typeof v.state === "string" &&
+        typeof v.attachToken === "string"
+    );
 }
 
 function isInteractiveLanguage(lang: string): lang is InteractiveLanguage {
@@ -43,7 +48,8 @@ function isInteractiveLanguage(lang: string): lang is InteractiveLanguage {
         lang === "java" ||
         lang === "javascript" ||
         lang === "c" ||
-        lang === "cpp"
+        lang === "cpp" ||
+        lang === "bash"
     );
 }
 
@@ -74,7 +80,7 @@ function handleSessionEvent(args: {
             return;
         }
 
-        if (ev.state === "running") {
+        if (ev.state === "running" || ev.state === "waiting_for_input") {
             setBusy(true);
             setInputEnabled(true);
             setRunState("running");
@@ -85,8 +91,16 @@ function handleSessionEvent(args: {
             setBusy(false);
             setInputEnabled(false);
             setRunState("idle");
+            return;
         }
 
+        return;
+    }
+
+    if (ev.type === "input_request") {
+        setBusy(true);
+        setInputEnabled(true);
+        setRunState("running");
         return;
     }
 
@@ -161,10 +175,10 @@ export function usePtyRunner(args: SharedRunnerArgs): CodeRunnerController {
 
     const sendTerminalData = React.useCallback(
         (data: string) => {
-            if (!data || !inputEnabled) return;
+            if (!data) return;
             void session.sendInput(data);
         },
-        [inputEnabled, session],
+        [session],
     );
 
     const sendTerminalResize = React.useCallback(
@@ -205,7 +219,7 @@ export function usePtyRunner(args: SharedRunnerArgs): CodeRunnerController {
                 } as any);
 
                 if (isStartedInteractiveSession(started)) {
-                    session.connect(started.sessionId, started.state);
+                    session.connect(started.sessionId, started.state, started.attachToken);
                     return;
                 }
             }

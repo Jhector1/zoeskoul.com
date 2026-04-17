@@ -67,6 +67,15 @@ export default function IdeEditorPane({
         return file?.content ?? "";
     }, [nodes]);
 
+    const workspaceTerminalFiles = React.useMemo(() => {
+        return nodes
+            .filter((n: any) => n?.kind === "file" && typeof n?.name === "string")
+            .map((n: any) => ({
+                path: String(n.name),
+                content: String(n.content ?? ""),
+            }));
+    }, [nodes]);
+
     return (
         <div className="flex h-full min-h-0 min-w-0 flex-col overflow-hidden">
             <div className={PANEL_CARD_CLASS}>
@@ -102,10 +111,16 @@ export default function IdeEditorPane({
                             showEditorThemeToggle={false}
                             showTerminalDockToggle={isDesktop}
                             resetTerminalOnRun={true}
-                            onRun={isAuthenticated?onRun: undefined}
+                            onRun={isAuthenticated ? onRun : undefined}
                             isAuthenticated={isAuthenticated}
-
-                        editorModelKey={activeFileId ?? "no-file"}
+                            workspaceTerminal={{
+                                enabled: !isSql,
+                                cwd: "/workspace",
+                                initialFiles: workspaceTerminalFiles,
+                                lazy: true,
+                                title: "Terminal",
+                            }}
+                            editorModelKey={activeFileId ?? "no-file"}
                         />
                     </div>
                 ) : (

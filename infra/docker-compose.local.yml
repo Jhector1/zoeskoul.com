@@ -1,0 +1,14 @@
+services:
+  runner:
+    environment:
+      DOCKER_SOCKET: /var/run/docker.sock
+      RUNNER_IMAGE: zoeskoul-runtime:latest
+      RUNNER_WORKSPACE_ROOT: /workspaces
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  web:
+    environment:
+      NEXTAUTH_URL: http://localhost:${WEB_PORT:-3000}
+    ports:
+      - "127.0.0.1:${WEB_PORT:-3000}:3000"

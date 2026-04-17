@@ -2,30 +2,26 @@
   "name": "@zoeskoul/web",
   "version": "0.1.0",
   "private": true,
-
   "scripts": {
-    "dev": "next dev",
+    "dev": "NODE_ENV=development tsx server.ts",
     "build": "next build",
-
     "i18n:generate": "node scripts/generate-i18n-manifest.mjs",
     "gen:topic-manifests": "tsx scripts/generate-topic-manifests.ts",
     "gen:subject-manifests": "tsx scripts/generate-subject-manifests.ts",
     "gen:manifests": "pnpm i18n:generate && pnpm gen:topic-manifests && pnpm gen:subject-manifests",
-
     "db:seed": "npx prisma db seed",
     "sync:curriculum": "pnpm gen:manifests && pnpm db:seed",
-
-
     "predev": "pnpm gen:manifests",
     "prebuild": "pnpm gen:manifests",
     "pretypecheck": "pnpm gen:manifests",
-
-    "start": "next start",
+    "start": "NODE_ENV=production tsx server.ts",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
     "user:roles": "NODE_ENV=development tsx scripts/set-user-roles.ts",
     "postinstall": "prisma generate",
-    "cleanup:onboarding": "tsx scripts/cleanup-guest-onboarding.ts"
+    "cleanup:onboarding": "tsx scripts/cleanup-guest-onboarding.ts",
+    "dev:next": "next dev",
+    "start:next": "next start"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.11.1",
@@ -64,6 +60,7 @@
     "remark-math": "^6.0.0",
     "stripe": "^20.1.0",
     "tailwind-merge": "^3.4.0",
+    "ws": "^8.20.0",
     "xterm": "^5.3.0",
     "zod": "^4.3.6"
   },
@@ -79,6 +76,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/react-katex": "^3.0.4",
+    "@types/ws": "^8.18.1",
     "eslint": "^9",
     "eslint-config-next": "16.1.1",
     "i": "^0.3.7",
