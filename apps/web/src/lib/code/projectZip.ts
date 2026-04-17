@@ -1,7 +1,6 @@
 import JSZip from "jszip";
 import type { FileEntry } from "./types";
-import { CodeLanguage } from "@/lib/practice/types";
-import {InteractiveLanguage} from "@zoeskoul/code-contracts";
+import type { InteractiveLanguage } from "@zoeskoul/code-contracts";
 
 type ProjectLanguage = InteractiveLanguage;
 
@@ -51,6 +50,12 @@ java -cp build "${mainClass}"
 set -euo pipefail
 ./build/app
 `;
+            case "bash":
+                return `#!/usr/bin/env bash
+set -euo pipefail
+ENTRY="${entry}"
+bash "$ENTRY"
+`;
         }
     })();
 
@@ -79,6 +84,7 @@ g++ -O2 -std=c++17 -I. -o build/app $FILES
 `;
             case "python":
             case "javascript":
+            case "bash":
                 return null;
         }
     })();

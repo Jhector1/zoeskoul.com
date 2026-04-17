@@ -27,6 +27,7 @@ const LANG_META: Record<
     javascript: { label: "JavaScript", Icon: SiJavascript },
     c: { label: "C", Icon: SiC },
     cpp: { label: "C++", Icon: SiCplusplus },
+    bash: { label: "Bash", Icon: FiTerminal },
     sql: { label: "SQL", Icon: TbSql },
 };
 

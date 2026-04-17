@@ -1,5 +1,4 @@
 
-
 import { z } from "zod";
 
 export type CodeLanguage =
@@ -11,15 +10,16 @@ export type CodeLanguage =
     | "sql"
     | "bash";
 
-export type InteractiveLanguage = Exclude<CodeLanguage, "sql">;
-
+export type InteractiveLanguage = Exclude<CodeLanguage, "sql" | "bash">;
+export type TerminalRunnerLanguage = Exclude<CodeLanguage, "bash">;
+export type IdeCodeLanguage = Exclude<CodeLanguage, "sql">;
+export type ShellLanguage = "bash";
 export const interactiveLanguageSchema = z.enum([
     "python",
     "javascript",
     "java",
     "c",
     "cpp",
-    "bash",
 ]);
 
 export const fileEntrySchema = z.object({
@@ -140,11 +140,22 @@ export type RunEventInput =
 export type SessionInputReq = {
     input: string;
 };
-
-export type RunSessionSummary = {
+export type RunSessionSummary =
+    | {
     id: string;
+    kind: "code";
     state: RunSessionState;
     language: InteractiveLanguage;
+    createdAt: string;
+    updatedAt: string;
+    exitCode?: number | null;
+    compileExitCode?: number | null;
+}
+    | {
+    id: string;
+    kind: "shell";
+    state: RunSessionState;
+    language: "bash";
     createdAt: string;
     updatedAt: string;
     exitCode?: number | null;

@@ -7,6 +7,7 @@ import type { CodeRunnerRuntime } from "@/components/code/runner/runtime";
 import TabsBar from "../TabsBar";
 import { PANEL_CARD_CLASS } from "../../constants";
 import { cn } from "../../utils";
+import { exportProjectFiles } from "../../fsTree";
 
 type Props = {
     panelRef: React.RefObject<HTMLDivElement | null>;
@@ -21,6 +22,8 @@ type Props = {
     sqlDialect: any;
     isAuthenticated: boolean;
     runtime: CodeRunnerRuntime;
+    projectId?: string | null;
+    onSyncTerminalFiles?: (sessionId: string) => Promise<boolean>;
     onChangeLanguage: (language: any) => void;
     onChangeCode: (code: string) => void;
     onChangeSqlDialect: (dialect: any) => void;
@@ -42,6 +45,8 @@ export default function IdeEditorPane({
                                           language,
                                           sqlDialect,
                                           runtime,
+                                          projectId,
+                                          onSyncTerminalFiles,
                                           onChangeLanguage,
                                           onChangeCode,
                                           onChangeSqlDialect,
@@ -68,12 +73,7 @@ export default function IdeEditorPane({
     }, [nodes]);
 
     const workspaceTerminalFiles = React.useMemo(() => {
-        return nodes
-            .filter((n: any) => n?.kind === "file" && typeof n?.name === "string")
-            .map((n: any) => ({
-                path: String(n.name),
-                content: String(n.content ?? ""),
-            }));
+        return exportProjectFiles(nodes);
     }, [nodes]);
 
     return (
@@ -115,11 +115,17 @@ export default function IdeEditorPane({
                             isAuthenticated={isAuthenticated}
                             workspaceTerminal={{
                                 enabled: !isSql,
+                                projectId: projectId ?? undefined,
                                 cwd: "/workspace",
                                 initialFiles: workspaceTerminalFiles,
                                 lazy: true,
                                 title: "Terminal",
                             }}
+                            onSyncWorkspaceFiles={
+                                projectId && onSyncTerminalFiles
+                                    ? onSyncTerminalFiles
+                                    : undefined
+                            }
                             editorModelKey={activeFileId ?? "no-file"}
                         />
                     </div>

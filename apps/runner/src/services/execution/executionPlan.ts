@@ -11,6 +11,8 @@ type ExecutionPlanOptions = {
     cwd?: string;
 };
 
+type ExecutionLanguage = InteractiveLanguage | "bash";
+
 const SAFE_REL_PATH = /^[A-Za-z0-9._/-]+$/;
 
 function normalizeRelPath(p: string) {
@@ -70,7 +72,7 @@ function includeDirs(files: FileEntry[], exts: string[]) {
 }
 
 export function getExecutionPlan(
-    language: InteractiveLanguage,
+    language: ExecutionLanguage,
     entryFile?: string,
     files: FileEntry[] = [],
     options: ExecutionPlanOptions = {},

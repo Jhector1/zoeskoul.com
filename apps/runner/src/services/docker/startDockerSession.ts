@@ -75,8 +75,6 @@ function defaultEntry(language: InteractiveLanguage) {
             return "main.c";
         case "cpp":
             return "main.cpp";
-        case "bash":
-            return "main.sh";
     }
 }
 

@@ -15,6 +15,7 @@ export const DEFAULT_LANGS: CodeLanguage[] = [
     "javascript",
     "c",
     "cpp",
+    "bash",
     "sql",
 ];
 
@@ -24,5 +25,6 @@ export const DEFAULT_CODE: Record<CodeLanguage, string> = {
     javascript: `console.log("Hello from JavaScript!");\n`,
     c: `#include <stdio.h>\n\nint main() {\n  printf("Hello from C!\\n");\n  return 0;\n}\n`,
     cpp: `#include <iostream>\n\nint main() {\n  std::cout << "Hello from C++!" << std::endl;\n  return 0;\n}\n`,
+    bash: `echo "Hello from Bash!"\n`,
     sql: `SELECT 1 AS value;\n`,
 };

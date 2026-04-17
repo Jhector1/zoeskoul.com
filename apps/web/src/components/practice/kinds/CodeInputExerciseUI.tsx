@@ -23,6 +23,7 @@ import {
     resolveSqlRunnerConfig,
     type SqlTableSnapshots,
 } from "@/lib/subjects/sql/runtime/resolveSqlRunnerConfig";
+import {IdeCodeLanguage} from "@zoeskoul/code-contracts";
 
 type CodeInputExercise = Extract<Exercise, { kind: "code_input" }>;
 
@@ -155,13 +156,13 @@ export default function CodeInputExerciseUI({
     exercise: CodeInputExercise;
     code: string;
     stdin: string;
-    language: CodeLanguage;
+    language: IdeCodeLanguage;
     onChangeCode: (code: string) => void;
     onChangeStdin: (stdin: string) => void;
-    onChangeLanguage: (l: CodeLanguage) => void;
+    onChangeLanguage: (l: IdeCodeLanguage) => void;
     disabled: boolean;
     onRun?: (args: {
-        language: CodeLanguage;
+        language: IdeCodeLanguage;
         code: string;
         stdin: string;
         sqlDialect?: SqlDialect;
@@ -173,7 +174,7 @@ export default function CodeInputExerciseUI({
     }) => Promise<RunResult>;
     checked?: boolean;
     ok?: boolean | null;
-    reviewCorrect?: { language: CodeLanguage; code: string; stdin: string } | null;
+    reviewCorrect?: { language: IdeCodeLanguage; code: string; stdin: string } | null;
     readOnly?: boolean;
     variant?: "embedded" | "tools";
     toolsBound?: boolean;
@@ -231,7 +232,7 @@ export default function CodeInputExerciseUI({
 
     const executeEmbeddedRun = useCallback(
         async (args: {
-            language: CodeLanguage;
+            language: IdeCodeLanguage;
             code: string;
             stdin: string;
         }) => {

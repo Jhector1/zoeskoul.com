@@ -144,8 +144,8 @@ export type ProjectSessionApi = {
     handleSaveAndContinue: () => Promise<void>;
     handleDiscardAndContinue: () => void;
     cancelPendingSwitch: () => void;
+    syncTerminalFiles: (sessionId: string) => Promise<boolean>;
 };
-
 export type ViewportApi = {
     isDesktop: boolean;
     editorHeight: number;

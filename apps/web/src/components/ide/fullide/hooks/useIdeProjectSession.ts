@@ -232,6 +232,10 @@ export function useIdeProjectSession({
         [projectTitle, title],
     );
 
+
+
+
+
     const detachMissingProject = useCallback(
         (message: string) => {
             loadedProjectIdRef.current = null;
@@ -368,7 +372,115 @@ export function useIdeProjectSession({
         lastSavedAt,
         baseVersion,
     ]);
+    const syncTerminalFiles = useCallback(
+        async (sessionId: string): Promise<boolean> => {
+            if (!projectId) {
+                setToast({
+                    kind: "error",
+                    text: "Save this project first before syncing terminal files.",
+                });
+                return false;
+            }
 
+            if (!access.canSaveCloud) {
+                goToUpgrade();
+                return false;
+            }
+
+            try {
+                setIsSavingProject(true);
+                setSaveError(null);
+
+                const res = await fetch(
+                    `/api/ide/projects/${encodeURIComponent(projectId)}/terminal-sync`,
+                    {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            sessionId,
+                            baseVersion,
+                        }),
+                    },
+                );
+
+                if (res.status === 404) {
+                    detachMissingProject(
+                        "This saved project no longer exists. Your local draft was kept. Save it as a new project.",
+                    );
+                    return false;
+                }
+
+                if (!res.ok) {
+                    await handleProjectApiFailure(res);
+                    return false;
+                }
+
+                const data = await res.json();
+
+                if (!data?.project?.workspace) {
+                    throw new Error(
+                        "Terminal sync succeeded but no workspace was returned.",
+                    );
+                }
+
+                replaceWorkspace(data.project.workspace);
+                markLoaded(data.project.workspace);
+
+                loadedProjectIdRef.current = data.project.id;
+                projectIdSourceRef.current = "session";
+                setProjectId(data.project.id);
+                setCurrentProjectName(data.project.title ?? currentProjectName);
+                setLastSavedAt(data.project.updatedAt ?? null);
+                setBaseVersion(
+                    typeof data.project.currentVersion === "number"
+                        ? data.project.currentVersion
+                        : baseVersion,
+                );
+                setConflictInfo(null);
+                setPendingProjectId(null);
+                setPendingStartBlank(false);
+
+                persistLocalMeta({
+                    projectId: data.project.id,
+                    currentProjectName:
+                        data.project.title ?? currentProjectName,
+                    lastSavedAt: data.project.updatedAt ?? null,
+                    baseVersion:
+                        typeof data.project.currentVersion === "number"
+                            ? data.project.currentVersion
+                            : baseVersion,
+                });
+
+                setToast({
+                    kind: "success",
+                    text: "Synced terminal files to project.",
+                });
+                void refreshProjects();
+                return true;
+            } catch (e: any) {
+                const message = e?.message ?? "Failed to sync terminal files.";
+                setSaveError(message);
+                setToast({ kind: "error", text: message });
+                return false;
+            } finally {
+                setIsSavingProject(false);
+            }
+        },
+        [
+            projectId,
+            access.canSaveCloud,
+            goToUpgrade,
+            baseVersion,
+            currentProjectName,
+            detachMissingProject,
+            handleProjectApiFailure,
+            replaceWorkspace,
+            markLoaded,
+            persistLocalMeta,
+            refreshProjects,
+            setToast,
+        ],
+    );
     useEffect(() => {
         return () => {
             loadAbortRef.current?.abort();
@@ -1085,6 +1197,7 @@ export function useIdeProjectSession({
         cancelPendingSwitch,
         conflictInfo,
         dismissConflict,
+        syncTerminalFiles,
         reloadProjectFromCloud,
     };
 }

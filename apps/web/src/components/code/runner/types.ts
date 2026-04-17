@@ -1,7 +1,7 @@
 import type { RunResult } from "@/lib/code/types";
 import type { CodeLanguage, SqlDialect } from "@/lib/practice/types";
 import {CodeRunnerRuntime} from "@/components/code/runner/runtime";
-import {InteractiveLanguage} from "@zoeskoul/code-contracts";
+import {IdeCodeLanguage, InteractiveLanguage} from "@zoeskoul/code-contracts";
 
 export type TerminalDock = "bottom" | "right";
 
@@ -37,7 +37,7 @@ export type OnRun = (args: OnRunArgs) => Promise<RunResult>;
 
 export type ControlledProps = {
     language: CodeLanguage;
-    onChangeLanguage: (l: CodeLanguage) => void;
+    onChangeLanguage: (l: IdeCodeLanguage) => void;
 
     code: string;
     onChangeCode: (code: string) => void;
@@ -50,7 +50,7 @@ export type ControlledProps = {
 };
 
 export type UncontrolledProps = {
-    initialLanguage?: CodeLanguage;
+    initialLanguage?: IdeCodeLanguage;
     initialCode?: string;
 
     initialSqlDialect?: SqlDialect;
@@ -70,7 +70,7 @@ export type RunnerState =
 type BeforeRunFn = () => void | Promise<void>;
 export type CommonProps = {
     runtime?: CodeRunnerRuntime;
-    language?: CodeLanguage;
+    language?: IdeCodeLanguage;
     code?: string;
     stdin?: string;
     isAuthenticated?: boolean;
@@ -95,8 +95,8 @@ export type CommonProps = {
     showTerminal?: boolean;
     showHint?: boolean;
 
-    fixedLanguage?: CodeLanguage;
-    allowedLanguages?: CodeLanguage[];
+    fixedLanguage?: IdeCodeLanguage;
+    allowedLanguages?: IdeCodeLanguage[];
     showLanguagePicker?: boolean;
 
     fixedSqlDialect?: SqlDialect;

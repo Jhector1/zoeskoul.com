@@ -313,6 +313,8 @@ function FullIDEInner({
             setActiveFileId={(id) => actions.setActiveFileId(id ?? "")}
             closeTab={actions.closeTab}
             isDesktop={viewport.isDesktop}
+            projectId={projectSession.projectId}
+            onSyncTerminalFiles={projectSession.syncTerminalFiles}
         />
     );
 

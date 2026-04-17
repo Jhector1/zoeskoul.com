@@ -7,8 +7,9 @@ import { cleanTermText, toLines } from "../utils/text";
 import { inferInputPlan } from "../utils/input";
 import { expandPrompts, prettyPrompt, splitStdoutByPrompts } from "../utils/prompts";
 import type { CodeLanguage, SqlDialect } from "@/lib/practice/types";
+import {TerminalRunnerLanguage} from "@zoeskoul/code-contracts";
 
-function needsMoreInput(lang: CodeLanguage, r: RunResult) {
+function needsMoreInput(lang: TerminalRunnerLanguage, r: RunResult) {
     const blob = cleanTermText(
         (r.compile_output ?? "") +
         "\n" +
@@ -27,6 +28,9 @@ function needsMoreInput(lang: CodeLanguage, r: RunResult) {
 function readAbortKind(ref: React.MutableRefObject<AbortKind>): AbortKind {
     return ref.current;
 }
+
+
+
 
 function isCanceledResult(r: RunResult | null | undefined) {
     return r?.status === "Canceled";
@@ -113,8 +117,11 @@ function unescapeCStringContent(x: string) {
     return out;
 }
 
-function extractPreOutputForCCpp(lang: CodeLanguage, code: string, prompts: string[]) {
-    const src = String(code ?? "");
+function extractPreOutputForCCpp(
+    lang: Extract<TerminalRunnerLanguage, "c" | "cpp">,
+    code: string,
+    prompts: string[],
+) {    const src = String(code ?? "");
 
     const firstInputIdx =
         lang === "c"
@@ -157,7 +164,7 @@ function extractPreOutputForCCpp(lang: CodeLanguage, code: string, prompts: stri
 type AbortKind = "none" | "silent" | "user";
 
 export function useTerminalRunner(args: {
-    lang: CodeLanguage;
+    lang: TerminalRunnerLanguage;
     code: string;
     stdin?: string;
     sqlDialect?: SqlDialect;
@@ -194,8 +201,8 @@ export function useTerminalRunner(args: {
 
     const [busy, setBusy] = React.useState(false);
     const [lastResult, setLastResult] = React.useState<RunResult | null>(null);
-    const [lastRunLanguage, setLastRunLanguage] = React.useState<CodeLanguage | null>(null);
-    const [runState, setRunState] = React.useState<RunnerState>("idle");
+    const [lastRunLanguage, setLastRunLanguage] =
+        React.useState<TerminalRunnerLanguage | null>(null);    const [runState, setRunState] = React.useState<RunnerState>("idle");
 
     const runLockRef = React.useRef(false);
     const runIdRef = React.useRef(0);
@@ -720,8 +727,10 @@ export function useTerminalRunner(args: {
                 return;
             }
 
-            const preOut = extractPreOutputForCCpp(lang, code, inputPlan.prompts);
-            const firstPrompt = inputPlan.prompts[0] ? prettyPrompt(inputPlan.prompts[0]) : "";
+            const preOut =
+                lang === "c" || lang === "cpp"
+                    ? extractPreOutputForCCpp(lang, code, inputPlan.prompts)
+                    : [];            const firstPrompt = inputPlan.prompts[0] ? prettyPrompt(inputPlan.prompts[0]) : "";
 
             setAwaitingInput(true);
             setInputPrompt(firstPrompt);
@@ -795,7 +804,10 @@ export function useTerminalRunner(args: {
             }
 
             if (expectsInput && !probeSafe && next.length < inputPlan.expected) {
-                const preOut = extractPreOutputForCCpp(lang, code, inputPlan.prompts);
+                const preOut =
+                    lang === "c" || lang === "cpp"
+                        ? extractPreOutputForCCpp(lang, code, inputPlan.prompts)
+                        : [];
                 const rawNextPrompt = promptSlots[next.length] || promptSlots[0] || "";
                 const nextPrompt = rawNextPrompt ? prettyPrompt(rawNextPrompt) : "";
 

@@ -1,7 +1,6 @@
-import { CodeLanguage } from "@/lib/practice/types";
-import {InteractiveLanguage} from "@zoeskoul/code-contracts";
+import type { InteractiveLanguage } from "@zoeskoul/code-contracts";
 
-type Judge0Language = InteractiveLanguage;
+type Judge0Language = Exclude<InteractiveLanguage, "bash">;
 
 function envInt(name: string) {
     const v = process.env[name];
