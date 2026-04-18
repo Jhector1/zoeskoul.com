@@ -144,10 +144,10 @@ def apply_rlimits() -> None:
     except Exception:
         pass
 
-    try:
-        resource.setrlimit(resource.RLIMIT_NPROC, (128, 128))
-    except Exception:
-        pass
+    # Do not cap RLIMIT_NPROC for interactive PTY shells.
+    # It is per real UID, so with many session containers sharing the same
+    # user it can cause "bash: fork: Resource temporarily unavailable".
+    # Rely on container-level limits instead.
 
     try:
         resource.setrlimit(resource.RLIMIT_FSIZE, (16 * 1024 * 1024, 16 * 1024 * 1024))
