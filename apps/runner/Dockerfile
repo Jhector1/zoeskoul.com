@@ -38,6 +38,7 @@ WORKDIR /app
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml turbo.json tsconfig.base.json ./
 COPY apps/runner/package.json apps/runner/package.json
 COPY packages/code-contracts/package.json packages/code-contracts/package.json
+COPY packages/pty-auth/package.json packages/pty-auth/package.json
 
 RUN pnpm install --frozen-lockfile
 
@@ -47,7 +48,9 @@ WORKDIR /app
 COPY --from=deps /app /app
 COPY . .
 
+
 RUN pnpm --filter @zoeskoul/code-contracts build \
+ && pnpm --filter @zoeskoul/pty-auth build \
  && pnpm --filter @zoeskoul/runner build \
  && pnpm --filter @zoeskoul/runner deploy --prod --legacy /prod/runner
 

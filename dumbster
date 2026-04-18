@@ -51,20 +51,11 @@ docker system prune -af --volumes
 pnpm --filter @zoeskoul/runner build
 
 
-docker compose down --remove-orphans
-docker compose --profile build-only build runtime-image
-docker compose build runner
-docker compose up -d postgres runner
-docker compose ps
-docker compose logs -f postgres runner
-
-
-
-docker compose --profile build-only build  runtime-image
-docker compose build runner
-docker compose up -d runner
-docker compose ps
-docker compose logs -f postgres runner
+docker compose -f docker-compose.local.yml --profile build-only build runtime-image
+docker compose -f docker-compose.local.yml build runner
+docker compose -f docker-compose.local.yml up -d postgres redis runner
+docker compose -f docker-compose.local.yml ps
+docker compose -f docker-compose.local.yml logs -f runner
 
 
 cd /opt/zoeskoul.com/infra

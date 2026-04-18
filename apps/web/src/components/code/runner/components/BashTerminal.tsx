@@ -14,6 +14,7 @@ type BashTerminalStartResult =
     sessionId: string;
     state: RunSessionState;
     attachToken: string;
+    wsUrl: string;
 }
     | {
     ok: false;
@@ -49,12 +50,6 @@ function isFinalSessionState(state: string) {
         state === "canceled" ||
         state === "timed_out"
     );
-}
-
-function getWebSocketBase() {
-    if (typeof window === "undefined") return "";
-    const proto = window.location.protocol === "https:" ? "wss:" : "ws:";
-    return `${proto}//${window.location.host}`;
 }
 
 export default function BashTerminal({
@@ -149,17 +144,12 @@ export default function BashTerminal({
         (
             nextSessionId: string,
             nextState: RunSessionState,
-            attachToken: string,
+            wsUrl: string,
         ) => {
             closeSocket();
 
             setSessionId(nextSessionId);
             updateUiForState(nextState);
-
-            const wsUrl =
-                `${getWebSocketBase()}/api/pty/sessions/${encodeURIComponent(
-                    nextSessionId,
-                )}/ws?token=${encodeURIComponent(attachToken)}`;
 
             const ws = new WebSocket(wsUrl);
 
@@ -274,7 +264,7 @@ export default function BashTerminal({
             return;
         }
 
-        connect(out.sessionId, out.state, out.attachToken);
+        connect(out.sessionId, out.state, out.wsUrl);
     }, [
         connect,
         idleTimeoutMs,
@@ -321,7 +311,7 @@ export default function BashTerminal({
 
     return (
         <div className={className}>
-            <div className="flex h-full min-h-0 flex-col  border border-neutral-200 bg-white dark:border-white/10 dark:bg-neutral-950">
+            <div className="flex h-full min-h-0 flex-col border border-neutral-200 bg-white dark:border-white/10 dark:bg-neutral-950">
                 <div className="flex items-center justify-between gap-3 border-b border-neutral-200 px-3 py-2 dark:border-white/10">
                     <div className="min-w-0">
                         <div className="truncate text-sm font-semibold">{title}</div>

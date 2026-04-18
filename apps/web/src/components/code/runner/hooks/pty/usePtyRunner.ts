@@ -19,7 +19,7 @@ type StartedInteractiveSession = {
     ok?: true;
     sessionId: string;
     state: RunSessionState;
-    attachToken: string;
+    wsUrl: string;
 };
 
 function isFinalSessionState(state: string) {
@@ -38,7 +38,7 @@ function isStartedInteractiveSession(value: unknown): value is StartedInteractiv
     return (
         typeof v.sessionId === "string" &&
         typeof v.state === "string" &&
-        typeof v.attachToken === "string"
+        typeof v.wsUrl === "string"
     );
 }
 
@@ -219,8 +219,7 @@ export function usePtyRunner(args: SharedRunnerArgs): CodeRunnerController {
                 } as any);
 
                 if (isStartedInteractiveSession(started)) {
-                    session.connect(started.sessionId, started.state, started.attachToken);
-                    return;
+                    session.connect(started.sessionId, started.state, started.wsUrl);                    return;
                 }
             }
 

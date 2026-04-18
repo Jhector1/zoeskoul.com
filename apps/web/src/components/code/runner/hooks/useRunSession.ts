@@ -13,6 +13,7 @@ type StartBrowserSessionResult =
     sessionId: string;
     state: RunSessionState;
     attachToken: string;
+    wsUrl: string;
 }
     | {
     ok: false;
@@ -53,12 +54,6 @@ function isFinalSessionState(state: string) {
     );
 }
 
-function getWebSocketBase() {
-    if (typeof window === "undefined") return "";
-    const proto = window.location.protocol === "https:" ? "wss:" : "ws:";
-    return `${proto}//${window.location.host}`;
-}
-
 export function useRunSession() {
     const [sessionId, setSessionId] = React.useState<string | null>(null);
     const [state, setState] = React.useState<RunSessionState>("queued");
@@ -90,17 +85,12 @@ export function useRunSession() {
     }, []);
 
     const connect = React.useCallback(
-        (nextSessionId: string, nextState: RunSessionState, attachToken: string) => {
+        (nextSessionId: string, nextState: RunSessionState, wsUrl: string) => {
             closeSocket();
 
             setEvents([]);
             setSessionId(nextSessionId);
             setState(nextState);
-
-            const base = getWebSocketBase();
-            const wsUrl =
-                `${base}/api/pty/sessions/${encodeURIComponent(nextSessionId)}/ws` +
-                `?token=${encodeURIComponent(attachToken)}`;
 
             const ws = new WebSocket(wsUrl);
 
@@ -147,6 +137,7 @@ export function useRunSession() {
                 console.error("PTY WS failed:", wsUrl, ev);
             };
 
+
             wsRef.current = ws;
         },
         [closeSocket],
@@ -181,7 +172,7 @@ export function useRunSession() {
                 );
             }
 
-            connect(data.sessionId, data.state, data.attachToken);
+            connect(data.sessionId, data.state, data.wsUrl);
             return data.sessionId;
         },
         [connect],

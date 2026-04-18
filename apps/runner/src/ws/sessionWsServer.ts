@@ -1,12 +1,11 @@
 import type { IncomingMessage } from "node:http";
 import type { Duplex } from "node:stream";
-import crypto from "node:crypto";
 import { WebSocketServer, WebSocket } from "ws";
-import { env } from "../lib/env.js";
 import { getSession, subscribeSession } from "../services/sessions/sessionStore.js";
 import { writeInput } from "../services/docker/writeInput.js";
 import { killSession } from "../services/docker/killSession.js";
 import { resizeSession } from "../services/docker/resizeSession.js";
+import { verifyAttachToken } from "../lib/ptyAttachToken.js";
 
 type ClientToServerMessage =
     | { type: "input"; data: string }
@@ -14,22 +13,28 @@ type ClientToServerMessage =
     | { type: "cancel" }
     | { type: "ping" };
 
-function getHeader(req: IncomingMessage, name: string) {
-    const value = req.headers[name];
-    return Array.isArray(value) ? value[0] : value ?? "";
-}
-
-function safeEqualText(a: string, b: string) {
-    const ab = Buffer.from(a);
-    const bb = Buffer.from(b);
-    if (ab.length !== bb.length) return false;
-    return crypto.timingSafeEqual(ab, bb);
-}
-
 function getSessionIdFromRequest(req: IncomingMessage) {
     const url = new URL(req.url ?? "/", "http://localhost");
-    const match = url.pathname.match(/^\/sessions\/([^/]+)\/ws$/);
-    return match?.[1] ? decodeURIComponent(match[1]) : null;
+
+    const patterns = [
+        /^\/sessions\/([^/]+)\/ws$/,
+        /^\/api\/pty\/sessions\/([^/]+)\/ws$/,
+        /^\/api\/run\/pty\/sessions\/([^/]+)\/ws$/,
+    ];
+
+    for (const pattern of patterns) {
+        const match = url.pathname.match(pattern);
+        if (match?.[1]) {
+            return decodeURIComponent(match[1]);
+        }
+    }
+
+    return null;
+}
+
+function getAttachToken(req: IncomingMessage) {
+    const url = new URL(req.url ?? "/", "http://localhost");
+    return url.searchParams.get("token");
 }
 
 function safeSend(ws: WebSocket, payload: unknown) {
@@ -38,10 +43,15 @@ function safeSend(ws: WebSocket, payload: unknown) {
     }
 }
 
-function previewText(value: unknown, max = 120) {
-    const text = typeof value === "string" ? value : JSON.stringify(value);
-    if (!text) return "";
-    return text.length > max ? `${text.slice(0, max)}…` : text;
+function safeDeny(socket: Duplex, statusCode: number, message: string) {
+    socket.write(
+        `HTTP/1.1 ${statusCode} ${message}\r\n` +
+        "Connection: close\r\n" +
+        "Content-Type: text/plain\r\n" +
+        "\r\n" +
+        message,
+    );
+    socket.destroy();
 }
 
 function bindSessionSocket(ws: WebSocket, sessionId: string, actorKey: string) {
@@ -51,8 +61,6 @@ function bindSessionSocket(ws: WebSocket, sessionId: string, actorKey: string) {
         ws.close();
         return;
     }
-
-
 
     safeSend(ws, {
         type: "ready",
@@ -65,8 +73,6 @@ function bindSessionSocket(ws: WebSocket, sessionId: string, actorKey: string) {
     }
 
     const unsubscribe = subscribeSession(sessionId, (event) => {
-
-
         safeSend(ws, { type: "event", event });
     });
 
@@ -88,15 +94,12 @@ function bindSessionSocket(ws: WebSocket, sessionId: string, actorKey: string) {
                 throw new Error("Invalid websocket JSON.");
             }
 
-
-
             if (msg.type === "ping") {
                 safeSend(ws, { type: "pong" });
                 return;
             }
 
             if (msg.type === "input") {
-
                 await writeInput(sessionId, String(msg.data ?? ""), actorKey);
                 return;
             }
@@ -129,8 +132,7 @@ function bindSessionSocket(ws: WebSocket, sessionId: string, actorKey: string) {
         unsubscribe();
     });
 
-    ws.on("error", (err) => {
-
+    ws.on("error", () => {
         unsubscribe();
     });
 }
@@ -139,33 +141,61 @@ export function attachSessionWsServer() {
     const wss = new WebSocketServer({ noServer: true });
 
     return (req: IncomingMessage, socket: Duplex, head: Buffer) => {
-        const providedSecret = String(getHeader(req, "x-runner-secret"));
-        const actorKey = String(getHeader(req, "x-actor-key"));
         const sessionId = getSessionIdFromRequest(req);
-
         if (!sessionId) return false;
 
-        if (!providedSecret || !safeEqualText(providedSecret, env.runnerSharedSecret)) {
-            socket.write("HTTP/1.1 403 Forbidden\r\n\r\n");
-            socket.destroy();
+        const token = getAttachToken(req) ?? "";
+
+        console.log("RUNNER WS upgrade attempt", {
+            url: req.url,
+            sessionId,
+            hasToken: !!token,
+            tokenLength: token.length,
+            hasAttachSecret: !!process.env.PTY_ATTACH_SECRET,
+        });
+
+        let claims: { sid: string; actor: string; exp: number };
+        try {
+            claims = verifyAttachToken(token);
+
+            console.log("RUNNER WS token verified", {
+                sessionId,
+                claimsSid: claims.sid,
+                actor: claims.actor,
+                exp: claims.exp,
+            });
+        } catch (err) {
+            console.error("RUNNER WS token verify failed", {
+                sessionId,
+                message: err instanceof Error ? err.message : String(err),
+            });
+            safeDeny(socket, 401, "Unauthorized");
             return true;
         }
 
-        if (!actorKey) {
-            socket.write("HTTP/1.1 403 Forbidden\r\n\r\n");
-            socket.destroy();
+        if (claims.sid !== sessionId) {
+            console.error("RUNNER WS token/session mismatch", {
+                sessionId,
+                claimsSid: claims.sid,
+            });
+            safeDeny(socket, 401, "Unauthorized");
             return true;
         }
 
         const session = getSession(sessionId);
-        if (!session || session.ownerKey !== actorKey) {
-            socket.write("HTTP/1.1 403 Forbidden\r\n\r\n");
-            socket.destroy();
+        if (!session || session.ownerKey !== claims.actor) {
+            console.error("RUNNER WS forbidden", {
+                sessionId,
+                hasSession: !!session,
+                ownerKey: session?.ownerKey,
+                actor: claims.actor,
+            });
+            safeDeny(socket, 403, "Forbidden");
             return true;
         }
 
         wss.handleUpgrade(req, socket as any, head, (ws) => {
-            bindSessionSocket(ws, sessionId, actorKey);
+            bindSessionSocket(ws, sessionId, claims.actor);
         });
 
         return true;
