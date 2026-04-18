@@ -27,10 +27,11 @@ export const ROUTES = {
 export function toWebSocketUrl(input: string) {
     const url = new URL(input, window.location.href);
 
-    if (url.protocol === "https:") url.protocol = "wss:";
-    else if (url.protocol === "http:") url.protocol = "ws:";
-
-    console.log(45,url.toString)
-
+    if (url.protocol === "http:" || url.protocol === "ws:") {
+        url.protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
+    } else if (url.protocol === "https:" || url.protocol === "wss:") {
+        url.protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
+    }
+    console.log("WS URL", { input, output: url.toString() });
     return url.toString();
 }
