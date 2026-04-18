@@ -4,6 +4,8 @@ import createNextIntlPlugin from "next-intl/plugin";
 const withNextIntl = createNextIntlPlugin();
 
 const nextConfig = {
+  transpilePackages: ["@zoeskoul/pty-auth", "@zoeskoul/code-contracts"],
+
   images: {
     remotePatterns: [
       {
