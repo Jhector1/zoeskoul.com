@@ -7,6 +7,7 @@ import type {
     RunEvent,
     RunSessionState,
 } from "@zoeskoul/code-contracts";
+import {toWebSocketUrl} from "@/utils";
 
 type BashTerminalStartResult =
     | {
@@ -144,17 +145,18 @@ export default function BashTerminal({
         (
             nextSessionId: string,
             nextState: RunSessionState,
-            wsUrl: string,
+            rawWsUrl: string,
         ) => {
             closeSocket();
 
             setSessionId(nextSessionId);
             updateUiForState(nextState);
 
-            const ws = new WebSocket(wsUrl);
+            const finalWsUrl = toWebSocketUrl(rawWsUrl);
+            const ws = new WebSocket(finalWsUrl);
 
             ws.onopen = () => {
-                console.log("BROWSER shell ws open", nextSessionId);
+                console.log("BROWSER shell ws open", nextSessionId, finalWsUrl);
                 flushPending(ws);
             };
 
@@ -193,10 +195,7 @@ export default function BashTerminal({
                             return;
 
                         case "exit":
-                            pushChunk(
-                                "sys",
-                                `\r\n[process exited with code ${event.code}]\r\n`,
-                            );
+                            pushChunk("sys", `\r\n[process exited with code ${event.code}]\r\n`);
                             return;
 
                         case "compile_error":

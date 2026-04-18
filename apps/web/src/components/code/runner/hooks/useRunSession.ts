@@ -6,6 +6,7 @@ import type {
     RunEvent,
     RunSessionState,
 } from "@zoeskoul/code-contracts";
+import {toWebSocketUrl} from "@/utils";
 
 type StartBrowserSessionResult =
     | {
@@ -85,14 +86,17 @@ export function useRunSession() {
     }, []);
 
     const connect = React.useCallback(
-        (nextSessionId: string, nextState: RunSessionState, wsUrl: string) => {
+        (nextSessionId: string, nextState: RunSessionState, rawWsUrl: string) => {
             closeSocket();
 
             setEvents([]);
             setSessionId(nextSessionId);
             setState(nextState);
 
-            const ws = new WebSocket(wsUrl);
+            const finalWsUrl = toWebSocketUrl(rawWsUrl);
+            const ws = new WebSocket(finalWsUrl);
+
+
 
             ws.onopen = () => {
                 for (const msg of pendingRef.current.splice(0)) {

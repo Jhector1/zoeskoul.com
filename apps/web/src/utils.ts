@@ -23,3 +23,12 @@ export const ROUTES = {
     sandbox:"/sandbox",
     achievements:"/achievements"
 };
+
+export function toWebSocketUrl(input: string) {
+    const url = new URL(input, window.location.href);
+
+    if (url.protocol === "https:") url.protocol = "wss:";
+    else if (url.protocol === "http:") url.protocol = "ws:";
+
+    return url.toString();
+}
