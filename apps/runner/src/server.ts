@@ -14,5 +14,10 @@ server.on("upgrade", (req, socket, head) => {
 });
 
 server.listen(env.port, "0.0.0.0", () => {
-    console.log(`runner listening on http://0.0.0.0:${env.port}`);
+    const publicUrl = process.env.NEXTAUTH_URL?.trim();
+    console.log(
+        publicUrl
+            ? `runner listening on ${publicUrl}`
+            : `runner listening on 0.0.0.0:${env.port}`,
+    );
 });
