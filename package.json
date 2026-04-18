@@ -1,18 +1,12 @@
 {
   "name": "zoeskoul.com",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "turbo run dev --parallel",
     "build": "turbo run build",
     "typecheck": "turbo run typecheck",
-    "build:web": "pnpm --filter @zoeskoul/web build"
+    "build:web": "turbo run build --filter=@zoeskoul/web"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "packageManager": "pnpm@10.33.0",
   "devDependencies": {
     "@types/node": "^25.6.0",
