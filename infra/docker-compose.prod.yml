@@ -52,6 +52,7 @@ services:
 
   runner:
     image: zoeskoul-runner:latest
+    container_name: runner
     build:
       context: ..
       dockerfile: apps/runner/Dockerfile
@@ -92,6 +93,7 @@ services:
     stop_grace_period: 20s
     networks:
       - backend
+      - public
     logging:
       driver: json-file
       options:
@@ -105,3 +107,5 @@ volumes:
 networks:
   backend:
     driver: bridge
+  public:
+    external: true
