@@ -27,6 +27,7 @@ build/
 coverage/
 **/coverage
 *.tsbuildinfo
+runner-workspaces/
 
 # logs
 *.log
