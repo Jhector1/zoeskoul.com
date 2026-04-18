@@ -138,7 +138,7 @@ export function useRunSession() {
             };
 
             ws.onerror = (ev) => {
-                console.error("PTY WS failed:", wsUrl, ev);
+                console.error("PTY WS failed:", finalWsUrl, ev);
             };
 
 
