@@ -56,7 +56,6 @@ services:
     build:
       context: ..
       dockerfile: apps/runner/Dockerfile
-    user: "0:0"
     environment:
       NODE_ENV: production
       PORT: 4001
