@@ -263,7 +263,11 @@ importers:
         specifier: ^3.25.76
         version: 3.25.76
 
-  packages/pty-auth: {}
+  packages/pty-auth:
+    devDependencies:
+      '@types/node':
+        specifier: ^20.0.0
+        version: 20.19.37
 
 packages:
 
