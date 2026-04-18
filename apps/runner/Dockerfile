@@ -49,7 +49,7 @@ COPY . .
 
 RUN pnpm --filter @zoeskoul/code-contracts build \
  && pnpm --filter @zoeskoul/runner build \
- && pnpm deploy --filter @zoeskoul/runner --prod /prod/runner
+ && pnpm --filter @zoeskoul/runner deploy --prod --legacy /prod/runner
 
 FROM ubuntu:24.04 AS runner
 

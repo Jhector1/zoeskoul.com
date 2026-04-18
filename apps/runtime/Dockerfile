@@ -39,9 +39,11 @@ RUN apt-get update \
  && apt-get purge -y --auto-remove curl gpg \
  && rm -rf /var/lib/apt/lists/*
 
-RUN groupadd --gid 1000 sandbox \
- && useradd --uid 1000 --gid 1000 --create-home --home-dir /home/sandbox --shell /usr/sbin/nologin sandbox \
- && mkdir -p /opt/runner /workspace /tmp \
+RUN mkdir -p /opt/runner /workspace /tmp \
+ && if ! getent group 1000 >/dev/null; then groupadd --gid 1000 sandbox; fi \
+ && if ! getent passwd 1000 >/dev/null; then \
+      useradd --uid 1000 --gid 1000 --create-home --home-dir /home/sandbox --shell /usr/sbin/nologin sandbox; \
+    fi \
  && chown -R 1000:1000 /opt/runner /workspace /tmp \
  && chmod 1777 /tmp
 
