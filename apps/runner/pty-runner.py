@@ -172,7 +172,7 @@ def build_env() -> dict[str, str]:
     }
 
     if "PS1" not in os.environ:
-        env["PS1"] = "[pty-shell]\\w\\$ "
+        env["PS1"] = "[zoeskoul]\\w\\$ "
 
     return env
 

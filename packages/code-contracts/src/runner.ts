@@ -12,8 +12,8 @@ export type CodeLanguage =
 
 export type InteractiveLanguage = Exclude<CodeLanguage, "sql" | "bash">;
 export type TerminalRunnerLanguage = Exclude<CodeLanguage, "bash">;
-export type IdeCodeLanguage = Exclude<CodeLanguage, "sql">;
 export type ShellLanguage = "bash";
+export type NonSqlCodeLanguage = Exclude<CodeLanguage, "sql">;
 export const interactiveLanguageSchema = z.enum([
     "python",
     "javascript",
@@ -155,7 +155,7 @@ export type RunSessionSummary =
     id: string;
     kind: "shell";
     state: RunSessionState;
-    language: "bash";
+    language: ShellLanguage;
     createdAt: string;
     updatedAt: string;
     exitCode?: number | null;
