@@ -6,7 +6,7 @@ export type AttachClaims = {
     exp: number;
 };
 
-function base64url(input: Buffer | string) {
+function base64url(input) {
     return Buffer.from(input)
         .toString("base64")
         .replace(/\+/g, "-")
