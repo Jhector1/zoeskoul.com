@@ -68,22 +68,13 @@ function getRunnerWsBase() {
 
 export async function POST(req: NextRequest) {
     try {
-        console.log("PTY start route: entered");
 
         const actor = await getActor();
         const body = (await req.json()) as InteractiveRunReq;
 
-        console.log("PTY start route: request parsed", {
-            kind: body?.kind,
-            hasUserId: !!actor.userId,
-            hasRunnerBaseUrl: !!process.env.RUNNER_BASE_URL,
-            hasRunnerWsBaseUrl: !!process.env.RUNNER_WS_BASE_URL,
-            hasRunnerSharedSecret: !!process.env.RUNNER_SHARED_SECRET,
-            hasAttachSecret: !!process.env.PTY_ATTACH_SECRET,
-        });
+
 
         if (isShellRequest(body) && !actor.userId) {
-            console.log("PTY start route: shell denied, no signed-in user");
             return NextResponse.json<StartBrowserSessionResult>(
                 { ok: false, error: "Sign in required for Shell Practice." },
                 { status: 401 },
@@ -91,7 +82,6 @@ export async function POST(req: NextRequest) {
         }
 
         const actorKey = await requireRunnerActorKey();
-        console.log("PTY start route: actor key created");
 
         const out = await runnerPost<StartSessionResult>(
             "/sessions/start",
@@ -99,7 +89,6 @@ export async function POST(req: NextRequest) {
             body,
         );
 
-        console.log("PTY start route: runner response", out);
 
         if (!out.ok) {
             return NextResponse.json<StartBrowserSessionResult>(out, { status: 400 });
@@ -110,17 +99,13 @@ export async function POST(req: NextRequest) {
             actorKey,
         });
 
-        console.log("PTY start route: attach token created", {
-            sessionId: out.sessionId,
-            tokenLength: attachToken.length,
-        });
+
 
         const runnerWsBase = getRunnerWsBase();
         const wsUrl =
             `${runnerWsBase}/sessions/${encodeURIComponent(out.sessionId)}/ws` +
             `?token=${encodeURIComponent(attachToken)}`;
 
-        console.log("PTY start route: wsUrl created", { wsUrl });
 
         return NextResponse.json<StartBrowserSessionResult>({
             ok: true,

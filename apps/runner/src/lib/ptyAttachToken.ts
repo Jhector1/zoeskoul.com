@@ -21,14 +21,7 @@ export function verifyAttachToken(token: string): AttachClaims {
         token,
     });
 
-    if (process.env.NODE_ENV !== "production") {
-        console.log("RUNNER verifyAttachToken", {
-            payloadPrefix: payload?.slice(0, 24),
-            sigPrefix: sig?.slice(0, 16),
-            secretFp: fingerprintSecret(secret),
-            hasAttachSecret: true,
-        });
-    }
+
 
     return claims;
 }

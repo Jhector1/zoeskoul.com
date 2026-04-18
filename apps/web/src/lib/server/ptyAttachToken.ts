@@ -29,14 +29,7 @@ export function createAttachToken(args: {
 
     if (process.env.NODE_ENV !== "production") {
         const [payload, sig] = token.split(".");
-        console.log("WEB createAttachToken", {
-            sessionId: args.sessionId,
-            actorKey: args.actorKey,
-            payloadPrefix: payload?.slice(0, 24),
-            sigPrefix: sig?.slice(0, 16),
-            secretFp: fingerprintSecret(secret),
-            hasAttachSecret: true,
-        });
+
     }
 
     return token;

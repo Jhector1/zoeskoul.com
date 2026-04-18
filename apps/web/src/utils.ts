@@ -32,6 +32,5 @@ export function toWebSocketUrl(input: string) {
     } else if (url.protocol === "https:" || url.protocol === "wss:") {
         url.protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
     }
-    console.log("WS URL", { input, output: url.toString() });
     return url.toString();
 }

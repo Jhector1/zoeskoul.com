@@ -156,7 +156,6 @@ export default function BashTerminal({
             const ws = new WebSocket(finalWsUrl);
 
             ws.onopen = () => {
-                console.log("BROWSER shell ws open", nextSessionId, finalWsUrl);
                 flushPending(ws);
             };
 
@@ -281,7 +280,6 @@ export default function BashTerminal({
 
     const sendTerminalData = React.useCallback(
         (data: string) => {
-            console.log("BROWSER sendTerminalData", JSON.stringify(data));
             if (!data) return;
             sendOrQueue({ type: "input", data });
         },

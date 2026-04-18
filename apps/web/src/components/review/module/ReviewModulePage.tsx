@@ -47,7 +47,7 @@ export default function ReviewModulePage(props: ReviewModulePageProps) {
                 body={<ReviewTopicStage {...vm.topicStage} />}
 
             />
-            <div className="ui-surface-muted mt-2 h-[440rem] flex-1 min-h-0 overflow-auto bg-red-500 rounded-none"/>
+            <div className="ui-surface-muted mt-2 h-[440rem] flex-1 min-h-0 overflow-auto  rounded-none"/>
         </>
     );
 

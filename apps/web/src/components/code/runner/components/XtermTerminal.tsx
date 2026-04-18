@@ -263,7 +263,6 @@ export default function XtermTerminal(props: {
 
                         dataDisposableRef.current = term.onData((data) => {
                             if (!inputReadyRef.current) return;
-                            console.log("XTERM onData", JSON.stringify(data));
                             onSendDataRef.current(data);
                         });
 

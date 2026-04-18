@@ -146,24 +146,13 @@ export function attachSessionWsServer() {
 
         const token = getAttachToken(req) ?? "";
 
-        console.log("RUNNER WS upgrade attempt", {
-            url: req.url,
-            sessionId,
-            hasToken: !!token,
-            tokenLength: token.length,
-            hasAttachSecret: !!process.env.PTY_ATTACH_SECRET,
-        });
+
 
         let claims: { sid: string; actor: string; exp: number };
         try {
             claims = verifyAttachToken(token);
 
-            console.log("RUNNER WS token verified", {
-                sessionId,
-                claimsSid: claims.sid,
-                actor: claims.actor,
-                exp: claims.exp,
-            });
+
         } catch (err) {
             console.error("RUNNER WS token verify failed", {
                 sessionId,
