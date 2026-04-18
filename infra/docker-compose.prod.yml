@@ -94,8 +94,10 @@ services:
     restart: unless-stopped
     stop_grace_period: 20s
     networks:
-      - backend
-      - public
+      backend:
+      public:
+        aliases:
+          - runner
     logging:
       driver: json-file
       options:
