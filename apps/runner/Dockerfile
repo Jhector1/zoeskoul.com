@@ -78,14 +78,18 @@ RUN apt-get update \
  && apt-get purge -y --auto-remove curl gpg \
  && rm -rf /var/lib/apt/lists/*
 
-RUN groupadd --gid 10001 app \
- && useradd --uid 10001 --gid 10001 --create-home --home-dir /home/app --shell /usr/sbin/nologin app
+RUN if ! getent group 1000 >/dev/null; then groupadd --gid 1000 app; fi \
+ && if ! getent passwd 1000 >/dev/null; then \
+      useradd --uid 1000 --gid 1000 --create-home --home-dir /home/app --shell /usr/sbin/nologin app; \
+    fi
 
 WORKDIR /app
 
 COPY --from=builder /prod/runner /app
 
-USER 10001:10001
+RUN chown -R 1000:1000 /app
+
+USER 1000:1000
 
 EXPOSE 4001
 

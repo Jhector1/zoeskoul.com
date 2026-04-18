@@ -67,12 +67,13 @@ docker compose ps
 docker compose logs -f postgres runner
 
 
-
+cd /opt/zoeskoul.com/infra
+git pull --ff-only
 docker compose -f docker-compose.prod.yml --profile build-only build runtime-image
 docker compose -f docker-compose.prod.yml build runner
 docker compose -f docker-compose.prod.yml up -d
-docker compose ps
-docker compose logs -f postgres runner
+docker compose -f docker-compose.prod.yml ps
+docker compose -f docker-compose.prod.yml logs -f runner
 
 
 go
