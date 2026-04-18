@@ -151,21 +151,9 @@ export async function startDockerSession(
     const sessionId = `sess_${crypto.randomUUID()}`;
     const containerName = `zoeskoul_${sessionId}`;
 
-    console.log("PTY start normalized", {
-        sessionId,
-        kind: normalized.kind,
-        language: normalized.language,
-        entry: "entry" in normalized ? normalized.entry : undefined,
-        filesCount: normalized.files.length,
-        cwd: normalized.cwd,
-    });
 
-    console.log("PTY execution plan", {
-        sessionId,
-        compileCmd: plan.compileCmd ?? null,
-        runCmd: plan.runCmd,
-        prepareDirs: plan.prepareDirs ?? [],
-    });
+
+
 
     const container = await docker.createContainer({
         Image: env.runnerImage,
@@ -241,12 +229,7 @@ export async function startDockerSession(
             requestedWallTimeoutMs: normalized.wallTimeoutMs,
         });
 
-        console.log("PTY timeout policy", {
-            sessionId,
-            kind: normalized.kind,
-            idleTimeoutMs: timeouts.idleTimeoutMs,
-            wallTimeoutMs: timeouts.wallTimeoutMs,
-        });
+
 
         armWallTimeout(sessionId, timeouts.wallTimeoutMs);
         armIdleTimeout(sessionId, timeouts.idleTimeoutMs);

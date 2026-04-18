@@ -8,14 +8,7 @@ export async function writeInput(
 ) {
     const session = requireOwnedSession(sessionId, actorKey);
 
-    console.log("WRITE INPUT begin", {
-        sessionId,
-        actorKey,
-        input: JSON.stringify(input),
-        bytes: [...Buffer.from(String(input ?? ""), "utf8")],
-        hasAttachStream: !!session.attachStream,
-        state: session.state,
-    });
+
 
     if (!session.attachStream) {
         throw new Error("Session is not accepting input.");
@@ -24,5 +17,5 @@ export async function writeInput(
     session.attachStream.write(Buffer.from(String(input ?? ""), "utf8"));
     touchSession(sessionId);
 
-    console.log("WRITE INPUT done", { sessionId });
+
 }

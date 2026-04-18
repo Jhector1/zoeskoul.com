@@ -1,14 +1,67 @@
 services:
-  runner:
+  postgres:
+    image: postgres:16
     environment:
-      DOCKER_SOCKET: /var/run/docker.sock
-      RUNNER_IMAGE: zoeskoul-runtime:latest
-      RUNNER_WORKSPACE_ROOT: /workspaces
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:5433:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  runtime-image:
+    image: zoeskoul-runtime:latest
+    build:
+      context: ..
+      dockerfile: apps/runtime/Dockerfile
+    profiles:
+      - build-only
+
+  runner:
+    build:
+      context: ..
+      dockerfile: apps/runner/Dockerfile
+    user: "0:0"
+    environment:
+      NODE_ENV: production
+      PORT: 4001
+      DOCKER_SOCKET: ${DOCKER_SOCKET:-/var/run/docker.sock}
+      RUNNER_IMAGE: ${RUNNER_IMAGE:-zoeskoul-runtime:latest}
+      RUNNER_SHARED_SECRET: ${RUNNER_SHARED_SECRET}
+      REDIS_URL: redis://host.docker.internal:6379
+      RUNNER_WORKSPACE_ROOT: ${RUNNER_WORKSPACE_ROOT}
+      RUN_WALL_TIMEOUT_MS: ${RUN_WALL_TIMEOUT_MS:-15000}
+      RUN_IDLE_TIMEOUT_MS: ${RUN_IDLE_TIMEOUT_MS:-20000}
+      RUNNER_EXEC_UID: ${RUNNER_EXEC_UID:-1000}
+      RUNNER_EXEC_GID: ${RUNNER_EXEC_GID:-1000}
+      RUNNER_MAX_FILES: ${RUNNER_MAX_FILES:-32}
+      RUNNER_MAX_TOTAL_BYTES: ${RUNNER_MAX_TOTAL_BYTES:-262144}
+      RUNNER_MAX_CONCURRENT_PER_ACTOR: ${RUNNER_MAX_CONCURRENT_PER_ACTOR:-3}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:4001:4001"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+      - ${RUNNER_WORKSPACE_ROOT}:${RUNNER_WORKSPACE_ROOT}
+    read_only: true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=64m
+      - /run:rw,noexec,nosuid,size=16m
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    pids_limit: 256
+    restart: unless-stopped
 
-  web:
-    environment:
-      NEXTAUTH_URL: http://localhost:${WEB_PORT:-3000}
-    ports:
-      - "127.0.0.1:${WEB_PORT:-3000}:3000"
+volumes:
+  postgres-data:

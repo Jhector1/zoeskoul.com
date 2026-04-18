@@ -18,11 +18,7 @@ export const streamSessionRoute: RequestHandler = async (req, res) => {
 
         const session = getSession(sessionId);
 
-        console.log("RUNNER STREAM auth", {
-            actorKey,
-            sessionId,
-            ownerKey: session?.ownerKey ?? null,
-        });
+
 
         if (!session) {
             return res.status(404).json({

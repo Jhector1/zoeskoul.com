@@ -14,14 +14,7 @@ export const inputSessionRoute: RequestHandler = async (req, res) => {
 
         const session = getSession(sessionId);
 
-        console.log("RUNNER INPUT", {
-            actorKey,
-            sessionId,
-            input: visibleInput(input),
-            hasSession: Boolean(session),
-            ownerKey: session?.ownerKey ?? null,
-            hasAttachStream: Boolean(session?.attachStream),
-        });
+
 
         if (!session) {
             return res.status(404).json({

@@ -11,10 +11,7 @@ export const startSessionRoute: RequestHandler = async (req, res) => {
         const out = await startDockerSession(body, actorKey);
 
         if (out.ok) {
-            console.log("RUNNER START stored owner/session", {
-                actorKey,
-                sessionId: out.sessionId,
-            });
+
             return res.status(200).json(out);
         }
 

@@ -13,11 +13,7 @@ export const resizeSessionRoute: RequestHandler = async (req, res) => {
         const session = getSession(sessionId);
 
         if (!session) {
-            console.log("resize auth", {
-                actorKey,
-                sessionOwnerKey: null,
-                sessionId,
-            });
+
 
             return res.status(404).json({
                 ok: false,
@@ -25,11 +21,7 @@ export const resizeSessionRoute: RequestHandler = async (req, res) => {
             });
         }
 
-        console.log("resize auth", {
-            actorKey,
-            sessionOwnerKey: session.ownerKey ?? null,
-            sessionId,
-        });
+
 
         if (session.ownerKey !== actorKey) {
             return res.status(403).json({

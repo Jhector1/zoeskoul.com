@@ -1,34 +1,41 @@
+# syntax=docker/dockerfile:1.7
+
 FROM ubuntu:24.04 AS base
 
-ENV DEBIAN_FRONTEND=noninteractive
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    bash \
+ARG NODE_MAJOR=22
+ARG PNPM_VERSION=10.33.0
+
+ENV DEBIAN_FRONTEND=noninteractive \
+    LANG=C.UTF-8 \
+    LC_ALL=C.UTF-8
+
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends \
     ca-certificates \
     curl \
     gpg \
     git \
-    python3 \
     make \
     g++ \
-    && rm -rf /var/lib/apt/lists/*
-
-RUN mkdir -p /etc/apt/keyrings \
+    python3 \
+    tini \
+ && mkdir -p /etc/apt/keyrings \
  && curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key \
     | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg \
- && echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_22.x nodistro main" \
+ && echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_${NODE_MAJOR}.x nodistro main" \
     > /etc/apt/sources.list.d/nodesource.list \
  && apt-get update \
  && apt-get install -y --no-install-recommends nodejs \
+ && corepack enable \
+ && corepack prepare pnpm@${PNPM_VERSION} --activate \
  && rm -rf /var/lib/apt/lists/*
-
-RUN corepack enable && corepack prepare pnpm@10.33.0 --activate
 
 FROM base AS deps
 WORKDIR /app
 
-COPY package.json pnpm-workspace.yaml turbo.json tsconfig.base.json ./
-COPY pnpm-lock.yaml ./
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml turbo.json tsconfig.base.json ./
 COPY apps/runner/package.json apps/runner/package.json
 COPY packages/code-contracts/package.json packages/code-contracts/package.json
 
@@ -37,25 +44,50 @@ RUN pnpm install --frozen-lockfile
 FROM base AS builder
 WORKDIR /app
 
-COPY --from=deps /app/node_modules ./node_modules
-COPY --from=deps /app/apps/runner/node_modules ./apps/runner/node_modules
-COPY --from=deps /app/packages/code-contracts/node_modules ./packages/code-contracts/node_modules
-
+COPY --from=deps /app /app
 COPY . .
 
-RUN pnpm --filter @zoeskoul/code-contracts build
-RUN pnpm --filter @zoeskoul/runner build
+RUN pnpm --filter @zoeskoul/code-contracts build \
+ && pnpm --filter @zoeskoul/runner build \
+ && pnpm deploy --filter @zoeskoul/runner --prod /prod/runner
 
-FROM base AS runner
+FROM ubuntu:24.04 AS runner
+
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
+ARG NODE_MAJOR=22
+
+ENV DEBIAN_FRONTEND=noninteractive \
+    NODE_ENV=production \
+    LANG=C.UTF-8 \
+    LC_ALL=C.UTF-8
+
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends \
+    ca-certificates \
+    curl \
+    gpg \
+    tini \
+ && mkdir -p /etc/apt/keyrings \
+ && curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key \
+    | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg \
+ && echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_${NODE_MAJOR}.x nodistro main" \
+    > /etc/apt/sources.list.d/nodesource.list \
+ && apt-get update \
+ && apt-get install -y --no-install-recommends nodejs \
+ && apt-get purge -y --auto-remove curl gpg \
+ && rm -rf /var/lib/apt/lists/*
+
+RUN groupadd --gid 10001 app \
+ && useradd --uid 10001 --gid 10001 --create-home --home-dir /home/app --shell /usr/sbin/nologin app
+
 WORKDIR /app
-ENV NODE_ENV=production
 
-RUN useradd -r -u 10001 -g users appuser
+COPY --from=builder /prod/runner /app
 
-COPY --from=builder /app /app
-
-USER 10001:100
-WORKDIR /app/apps/runner
+USER 10001:10001
 
 EXPOSE 4001
+
+ENTRYPOINT ["/usr/bin/tini", "--"]
 CMD ["node", "dist/server.js"]

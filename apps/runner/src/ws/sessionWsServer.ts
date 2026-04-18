@@ -52,12 +52,7 @@ function bindSessionSocket(ws: WebSocket, sessionId: string, actorKey: string) {
         return;
     }
 
-    console.log("RUNNER WS bind", {
-        sessionId,
-        actorKey,
-        state: session.state,
-        existingEvents: session.events.length,
-    });
+
 
     safeSend(ws, {
         type: "ready",
@@ -70,17 +65,7 @@ function bindSessionSocket(ws: WebSocket, sessionId: string, actorKey: string) {
     }
 
     const unsubscribe = subscribeSession(sessionId, (event) => {
-        console.log("RUNNER WS event->client", {
-            sessionId,
-            type: event.type,
-            seq: event.seq,
-            preview:
-                event.type === "stdout" || event.type === "stderr"
-                    ? previewText(event.chunk)
-                    : event.type === "error"
-                        ? previewText(event.message)
-                        : undefined,
-        });
+
 
         safeSend(ws, { type: "event", event });
     });
@@ -103,16 +88,7 @@ function bindSessionSocket(ws: WebSocket, sessionId: string, actorKey: string) {
                 throw new Error("Invalid websocket JSON.");
             }
 
-            console.log("RUNNER WS message", {
-                sessionId,
-                type: msg?.type,
-                data:
-                    msg?.type === "input"
-                        ? previewText(msg.data)
-                        : undefined,
-                cols: msg?.type === "resize" ? msg.cols : undefined,
-                rows: msg?.type === "resize" ? msg.rows : undefined,
-            });
+
 
             if (msg.type === "ping") {
                 safeSend(ws, { type: "pong" });
@@ -120,11 +96,7 @@ function bindSessionSocket(ws: WebSocket, sessionId: string, actorKey: string) {
             }
 
             if (msg.type === "input") {
-                console.log("RUNNER WS input", {
-                    sessionId,
-                    data: JSON.stringify(msg.data),
-                    bytes: [...Buffer.from(String(msg.data ?? ""), "utf8")],
-                });
+
                 await writeInput(sessionId, String(msg.data ?? ""), actorKey);
                 return;
             }
@@ -154,15 +126,11 @@ function bindSessionSocket(ws: WebSocket, sessionId: string, actorKey: string) {
     });
 
     ws.on("close", () => {
-        console.log("RUNNER WS close", { sessionId });
         unsubscribe();
     });
 
     ws.on("error", (err) => {
-        console.error("RUNNER WS socket error", {
-            sessionId,
-            message: err?.message ?? "socket error",
-        });
+
         unsubscribe();
     });
 }

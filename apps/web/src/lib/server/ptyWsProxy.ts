@@ -72,7 +72,6 @@ function bindProxy(browserWs: WebSocket, sessionId: string, actorKey: string) {
 
     runnerWs.on("open", () => {
         runnerOpen = true;
-        console.log("WEB PTY PROXY runner open", { sessionId });
 
         for (const msg of pendingToRunner.splice(0)) {
             if (runnerWs.readyState === WebSocket.OPEN) {
@@ -173,11 +172,7 @@ export function createPtyUpgradeHandler() {
             return true;
         }
 
-        console.log("WEB PTY PROXY upgrade accepted", {
-            sessionId,
-            actorKey: claims.actor,
-            url: req.url ?? "",
-        });
+
 
         wss.handleUpgrade(req, socket as any, head, (browserWs) => {
             bindProxy(browserWs, sessionId, claims.actor);

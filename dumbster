@@ -65,3 +65,11 @@ docker compose build runner
 docker compose up -d runner
 docker compose ps
 docker compose logs -f postgres runner
+
+
+
+docker compose -f docker-compose.prod.yml --profile build-only build runtime-image
+docker compose -f docker-compose.prod.yml build runner
+docker compose -f docker-compose.prod.yml up -d
+docker compose ps
+docker compose logs -f postgres runner
