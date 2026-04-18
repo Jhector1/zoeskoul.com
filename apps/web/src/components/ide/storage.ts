@@ -8,7 +8,7 @@ import {
     defaultSqlSeedCode,
 } from "./languageDefaults";
 import type { CodeLanguage } from "@/lib/practice/types";
-import {IdeCodeLanguage, InteractiveLanguage} from "@zoeskoul/code-contracts";
+import {NonSqlCodeLanguage, InteractiveLanguage} from "@zoeskoul/code-contracts";
 import {
     getWorkspaceBody,
     putWorkspaceBody,
@@ -61,7 +61,7 @@ function clamp(n: number, lo: number, hi: number) {
     return Math.max(lo, Math.min(hi, n));
 }
 
-function buildDefaultCodeWorkspace(language: IdeCodeLanguage): WorkspaceStateV2 {
+function buildDefaultCodeWorkspace(language: NonSqlCodeLanguage): WorkspaceStateV2 {
     const rootSrcId = uid();
     const mainId = uid();
     const t = now();
@@ -381,7 +381,7 @@ export async function deleteV2(storageKey: string) {
 
 function buildCodeWorkspaceFromV1(
     v1: any,
-    language: IdeCodeLanguage,
+    language: NonSqlCodeLanguage,
 ): WorkspaceStateV2 | null {
     const rootSrcId = uid();
     const t = now();

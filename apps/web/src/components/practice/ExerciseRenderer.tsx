@@ -3,7 +3,6 @@
 import React, {useCallback, useEffect, useMemo, useRef} from "react";
 import type {Exercise, SqlDialect} from "@/lib/practice/types";
 import type {VectorPadState} from "@/components/vectorpad/types";
-import {CodeLanguage} from "@/lib/practice/types";
 
 import NumericExerciseUI from "./kinds/NumericExerciseUI";
 import SingleChoiceExerciseUI from "./kinds/SingleChoiceExerciseUI";
@@ -27,6 +26,7 @@ import {TFn} from "@/components/practice/PracticeShell";
 import {useTranslations} from "next-intl";
 import {resolveDeepTagged} from "@/i18n/resolveDeepTagged";
 import {useTaggedT} from "@/i18n/tagged";
+import {TerminalRunnerLanguage} from "@zoeskoul/code-contracts";
 
 // ✅ minimal tools API (don’t import review context from practice layer)
 // ...imports unchanged
@@ -66,7 +66,7 @@ type CodeToolsApi = {
     registerCodeInput: (
         id: string,
         args: {
-            lang: CodeLanguage;
+            lang: TerminalRunnerLanguage;
             code: string;
             stdin?: string;
 
@@ -143,7 +143,7 @@ function CodeInputWithTools(props: {
 
     const curLang = ((current as any).codeLang ??
         exercise?.language ??
-        (exercise?.fixedSqlDialect || exercise?.runtime?.datasetId ? "sql" : "python")) as CodeLanguage;
+        (exercise?.fixedSqlDialect || exercise?.runtime?.datasetId ? "sql" : "python")) as TerminalRunnerLanguage;
 
     const curCode = (current as any).code ?? exercise.starterCode ?? "";
     const curStdin = (current as any).codeStdin ?? "";
@@ -728,7 +728,7 @@ export default function ExerciseRenderer({
 
         const curLang = ((current as any).codeLang ??
             exCode.language ??
-            "python") as CodeLanguage;
+            "python") as TerminalRunnerLanguage;
 
         const curCode = (current as any).code ?? exCode.starterCode ?? "";
         const curStdin = (current as any).codeStdin ?? "";

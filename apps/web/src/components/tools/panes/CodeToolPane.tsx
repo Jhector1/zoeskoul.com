@@ -10,6 +10,7 @@ import type { CodeFeedback } from "@/lib/code/feedback/types";
 import CodeFeedbackCallout from "@/components/practice/kinds/CodeFeedbackCallout";
 import { useReviewTools } from "@/components/review/module/context/ReviewToolsContext";
 import type { OnRun } from "@/components/code/runner/types";
+import {TerminalRunnerLanguage} from "@zoeskoul/code-contracts";
 
 type SqlTableSnapshot = {
     name: string;
@@ -25,7 +26,7 @@ type SqlTableSnapshots = Record<string, SqlTableSnapshot>;
 
 export default function CodeToolPane(props: {
     height: number;
-    toolLang: CodeLanguage;
+    toolLang: TerminalRunnerLanguage;
     toolCode: string;
     toolStdin: string;
     onChangeCode: (c: string) => void;

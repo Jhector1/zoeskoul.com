@@ -4,18 +4,19 @@ import React from "react";
 import { NotebookPen, TerminalSquare } from "lucide-react";
 import type { ToolSpec, ToolsCtx } from "./types";
 import CodeToolPane from "./panes/CodeToolPane";
-import NotesToolPane from "./panes/NotesToolPane";
-import type { CodeLanguage, SqlDialect } from "@/lib/practice/types";
+import{ SqlDialect } from "@/lib/practice/types";
+import {TerminalRunnerLanguage} from "@zoeskoul/code-contracts";
+import NotesToolPane from "@/components/tools/panes/NotesToolPane";
 
 export type CodeToolProps = {
     height: number;
 
-    toolLang: CodeLanguage;
+    toolLang: TerminalRunnerLanguage;
     toolCode: string;
     toolStdin: string;
     toolSqlDialect?: SqlDialect;
 
-    onChangeLang?: (l: CodeLanguage) => void;
+    onChangeLang?: (l: TerminalRunnerLanguage) => void;
     onChangeCode: (c: string) => void;
     onChangeStdin: (s: string) => void;
     onChangeSqlDialect?: (d: SqlDialect) => void;

@@ -57,9 +57,10 @@ ${stdout.trimEnd()}
 
 import type {  SqlDialect } from "@/lib/practice/types";
 import {CodeExpectedInput} from "@/lib/practice/api/validate/schemas";
+import {InteractiveLanguage} from "@zoeskoul/code-contracts";
 // import type { CodeExpectedInput } from "@/lib/practice/schemas";
 
-type ProgrammingLanguage = Exclude<CodeLanguage, "sql">;
+type ProgrammingLanguage = InteractiveLanguage;
 
 export type ProgrammingCodeTest = {
     stdin?: string;
