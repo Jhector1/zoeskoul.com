@@ -695,7 +695,7 @@ export function useWorkspaceTerminalController(
     );
 
     const beforeSubmitEnter = React.useCallback(async (): Promise<void> => {
-        const ok = await pushWorkspaceFromSource(true);
+        const ok = await pushWorkspaceFromSource(false);
         if (!ok) {
             throw new Error("Could not push local workspace to terminal.");
         }
