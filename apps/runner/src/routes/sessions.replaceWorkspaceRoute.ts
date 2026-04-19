@@ -9,7 +9,6 @@ type ReplaceWorkspaceBody = {
 
 export const sessionsReplaceWorkspaceRoute: RequestHandler = async (req, res) => {
     try {
-        console.log(90)
         const actorKey = getRequiredActorKey(req);
         const sessionId = String(req.params.sessionId);
         const body = (req.body ?? {}) as ReplaceWorkspaceBody;

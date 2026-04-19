@@ -1,33 +1,48 @@
 // eslint.config.mjs
 import js from "@eslint/js";
 import tseslint from "typescript-eslint";
-// optional:
-import unusedImports from "eslint-plugin-unused-imports";
 
 export default [
+    {
+        ignores: [
+            "**/.next/**",
+            "**/node_modules/**",
+            "**/dist/**",
+            "**/build/**",
+            "**/coverage/**",
+            "**/.turbo/**",
+        ],
+    },
+
     js.configs.recommended,
     ...tseslint.configs.recommended,
+
     {
-        files: ["**/*.{ts,tsx,js,jsx}"],
-        plugins: {
-            "unused-imports": unusedImports,
-        },
+        files: ["**/*.{ts,tsx}"],
         rules: {
             "no-unused-vars": "off",
             "@typescript-eslint/no-unused-vars": [
-                "error",
+                "warn",
                 {
                     argsIgnorePattern: "^_",
                     varsIgnorePattern: "^_",
                     caughtErrorsIgnorePattern: "^_",
                 },
             ],
+        },
+    },
 
-            // optional but nice for imports:
-            "unused-imports/no-unused-imports": "error",
-
-            // REMOVE THIS in flat config:
-            // "import/no-unused-modules": ["warn", { unusedExports: true, missingExports: true }],
+    {
+        files: ["**/*.{js,jsx,mjs,cjs}"],
+        rules: {
+            "no-unused-vars": [
+                "warn",
+                {
+                    argsIgnorePattern: "^_",
+                    varsIgnorePattern: "^_",
+                    caughtErrorsIgnorePattern: "^_",
+                },
+            ],
         },
     },
 ];

@@ -28,7 +28,6 @@ export async function POST(
     ctx: { params: Promise<{ sessionId: string }> },
 ) {
     try {
-        console.log(8999900)
         const { sessionId } = await ctx.params;
         const actorKey = await requireRunnerActorKey();
 

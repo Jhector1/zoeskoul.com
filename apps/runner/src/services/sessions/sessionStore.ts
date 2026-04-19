@@ -120,8 +120,3 @@ export function pushEvent(id: string, event: RunEventInput) {
 
     return full;
 }
-
-export function deleteSession(id: string) {
-    sessions.delete(id);
-    listeners.delete(id);
-}
