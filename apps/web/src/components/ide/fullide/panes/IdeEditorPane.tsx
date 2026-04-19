@@ -121,7 +121,7 @@ export default function IdeEditorPane({
 
             <div ref={panelRef} className="min-h-0 min-w-0 flex-1 overflow-hidden">
                 {activeFile ? (
-                    <div className={cn("h-full overflow-hidden px-2 pt-2", PANEL_CARD_CLASS)}>
+                    <div className={cn("h-full overflow-hidden  pt-2", PANEL_CARD_CLASS)}>
                         <CodeRunner
                             frame="plain"
                             title={isSql ? `SQL · ${title}` : isWeb ? `Web · ${title}` : title}

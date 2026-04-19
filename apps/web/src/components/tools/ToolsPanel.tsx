@@ -102,7 +102,7 @@ function ToolsPanelInner(props: ToolsPanelProps) {
                 onCollapse={props.onCollapse}
             />
 
-            <div ref={props.rightBodyRef} className="min-h-0 flex-1 overflow-hidden p-3">
+            <div ref={props.rightBodyRef} className="min-h-0 flex-1 overflow-hidden pt-1">
                 <div className="relative h-full min-h-0">
                     <MemoCodePaneLayer
                         isActive={active === "code"}

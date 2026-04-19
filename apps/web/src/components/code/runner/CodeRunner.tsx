@@ -55,7 +55,7 @@ type CodeRunnerWithStdinProps = CodeRunnerProps & {
 };
 
 const RUNNER_SURFACE =
-    "overflow-hidden rounded-xl border border-neutral-200 bg-neutral-50/60 dark:border-white/10 dark:bg-black/20";
+    "overflow-hidden border border-neutral-200 bg-neutral-50/60 dark:border-white/10 dark:bg-black/20";
 
 const PANEL_EDITOR = "bg-white/80 dark:bg-black/10";
 
@@ -641,7 +641,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     return (
         <div className={outerCls}>
             {showHeaderBar ? (
-                <div className="relative z-20 overflow-visible @container">
+                <div className="relative px-2 z-20 overflow-visible @container">
                     <HeaderBar
                         title={title}
                         disabled={disabled}
