@@ -73,4 +73,4 @@ prisma/*.db-journal
 # local infra data
 infra/postgres-data
 infra/redis-data
-runner-workspaces/
+.runner-workspaces/
