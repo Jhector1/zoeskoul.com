@@ -1,12 +1,11 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 
-export type ReplaceWorkspaceFile = {
-    path: string;
-    content: string;
-};
+export type ReplaceWorkspaceEntry =
+    | { kind?: "file"; path: string; content: string }
+    | { kind: "directory"; path: string };
 
-const MAX_FILES = 150;
+const MAX_ENTRIES = 400;
 const MAX_TOTAL_BYTES = 5 * 1024 * 1024;
 
 const ALLOWED_EXTENSIONS = new Set([
@@ -68,38 +67,62 @@ async function rmContents(dir: string) {
     );
 }
 
+function entryKind(entry: ReplaceWorkspaceEntry) {
+    return entry.kind === "directory" ? "directory" : "file";
+}
+
+function sortEntries(entries: ReplaceWorkspaceEntry[]) {
+    return [...entries].sort((a, b) => {
+        const pathCmp = a.path.localeCompare(b.path);
+        if (pathCmp !== 0) return pathCmp;
+
+        const ak = entryKind(a);
+        const bk = entryKind(b);
+        if (ak === bk) return 0;
+        return ak === "directory" ? -1 : 1;
+    });
+}
+
 export async function replaceWorkspaceFiles(
     workspaceDir: string,
-    files: ReplaceWorkspaceFile[],
+    files: ReplaceWorkspaceEntry[],
 ) {
     if (!Array.isArray(files)) {
         throw new Error("files must be an array.");
     }
 
-    if (files.length > MAX_FILES) {
-        throw new Error(`Workspace limit reached: max ${MAX_FILES} files.`);
+    if (files.length > MAX_ENTRIES) {
+        throw new Error(`Workspace limit reached: max ${MAX_ENTRIES} entries.`);
     }
 
     let totalBytes = 0;
     const seenPaths = new Set<string>();
 
-    const normalized = files
-        .map((file) => {
-            const relPath = String(file?.path ?? "").replace(/\\/g, "/").trim();
-            const content = String(file?.content ?? "");
+    const normalized = sortEntries(
+        files.map((entry) => {
+            const relPath = String(entry?.path ?? "").replace(/\\/g, "/").trim();
 
             if (!isSafeRelativePath(relPath)) {
-                throw new Error(`Unsafe file path: ${relPath}`);
+                throw new Error(`Unsafe path: ${relPath}`);
             }
+
+            if (seenPaths.has(relPath)) {
+                throw new Error(`Duplicate path: ${relPath}`);
+            }
+            seenPaths.add(relPath);
+
+            if (entry.kind === "directory") {
+                return {
+                    kind: "directory" as const,
+                    path: relPath,
+                };
+            }
+
+            const content = String((entry as any)?.content ?? "");
 
             if (!isAllowedFile(relPath)) {
                 throw new Error(`Unsupported file type: ${relPath}`);
             }
-
-            if (seenPaths.has(relPath)) {
-                throw new Error(`Duplicate file path: ${relPath}`);
-            }
-            seenPaths.add(relPath);
 
             totalBytes += Buffer.byteLength(content, "utf8");
             if (totalBytes > MAX_TOTAL_BYTES) {
@@ -108,38 +131,29 @@ export async function replaceWorkspaceFiles(
                 );
             }
 
-            return { path: relPath, content };
-        })
-        .sort((a, b) => a.path.localeCompare(b.path));
+            return {
+                kind: "file" as const,
+                path: relPath,
+                content,
+            };
+        }),
+    );
 
     await fs.mkdir(workspaceDir, { recursive: true });
 
-    const workspaceParent = path.dirname(workspaceDir);
-    const workspaceBase = path.basename(workspaceDir);
-    const stageDir = await fs.mkdtemp(
-        path.join(workspaceParent, `${workspaceBase}.stage-`),
-    );
+    await rmContents(workspaceDir);
 
-    try {
-        for (const file of normalized) {
-            const abs = path.join(stageDir, file.path);
-            const parent = path.dirname(abs);
+    for (const entry of normalized) {
+        const abs = path.join(workspaceDir, entry.path);
 
-            await fs.mkdir(parent, { recursive: true });
-            await fs.writeFile(abs, file.content, "utf8");
+        if (entry.kind === "directory") {
+            await fs.mkdir(abs, { recursive: true });
+            continue;
         }
 
-        await rmContents(workspaceDir);
-
-        const stageEntries = await fs.readdir(stageDir, { withFileTypes: true });
-        for (const entry of stageEntries) {
-            const from = path.join(stageDir, entry.name);
-            const to = path.join(workspaceDir, entry.name);
-            await fs.rename(from, to);
-        }
-
-        return { fileCount: normalized.length };
-    } finally {
-        await fs.rm(stageDir, { recursive: true, force: true });
+        await fs.mkdir(path.dirname(abs), { recursive: true });
+        await fs.writeFile(abs, entry.content, "utf8");
     }
+
+    return { fileCount: normalized.length };
 }

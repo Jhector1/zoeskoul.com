@@ -33,6 +33,10 @@ export type TerminalChunk = {
 
 export type RunnerLastResult = RunResult | BatchRunResult | null;
 
+export type WorkspaceSyncEntry =
+    | (FileEntry & { kind?: "file" })
+    | { kind: "directory"; path: string };
+
 export type SharedRunnerArgs = {
     runtime?: CodeRunnerRuntime | ResolvedCodeRunnerRuntime;
     lang: TerminalRunnerLanguage;
@@ -53,13 +57,13 @@ export type WorkspaceTerminalConfig = {
     enabled?: boolean;
     projectId?: string;
     cwd?: string;
-    initialFiles?: FileEntry[] | Record<string, string>;
+    initialFiles?: WorkspaceSyncEntry[] | Record<string, string>;
     lazy?: boolean;
     title?: string;
 
-    getWorkspaceFiles?: () => FileEntry[];
+    getWorkspaceFiles?: () => WorkspaceSyncEntry[];
     onTerminalSnapshotFiles?: (
-        files: FileEntry[],
+        files: WorkspaceSyncEntry[],
         meta: { dirtyUiPaths: Set<string> },
     ) => void | Promise<void>;
 };
@@ -103,8 +107,8 @@ export type WorkspaceTerminalController = {
     sendData: (data: string) => void;
     resize: (cols: number, rows: number) => void;
 
-    replaceFiles: (files: FileEntry[]) => Promise<boolean>;
-    snapshotFiles: () => Promise<FileEntry[]>;
+    replaceFiles: (files: WorkspaceSyncEntry[]) => Promise<boolean>;
+    snapshotFiles: () => Promise<WorkspaceSyncEntry[]>;
     beforeSubmitEnter: () => Promise<void>;
     afterSubmitEnter: () => Promise<void>;
 };

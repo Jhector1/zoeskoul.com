@@ -7,7 +7,7 @@ import type { CodeRunnerRuntime } from "@/components/code/runner/runtime";
 import TabsBar from "../TabsBar";
 import { PANEL_CARD_CLASS } from "../../constants";
 import { cn } from "../../utils";
-import { exportProjectFiles } from "../../fsTree";
+import { exportWorkspaceEntries } from "../../fsTree";
 
 type Props = {
     panelRef: React.RefObject<HTMLDivElement | null>;
@@ -24,7 +24,10 @@ type Props = {
     runtime: CodeRunnerRuntime;
     projectId?: string | null;
     onApplyTerminalSnapshotFiles?: (
-        files: Array<{ path: string; content: string }>,
+        files: Array<
+            | { kind?: "file"; path: string; content: string }
+            | { kind: "directory"; path: string }
+        >,
         meta: { dirtyUiPaths: Set<string> },
     ) => void | Promise<void>;
     onChangeLanguage: (language: any) => void;
@@ -75,8 +78,8 @@ export default function IdeEditorPane({
         return file?.content ?? "";
     }, [nodes]);
 
-    const workspaceTerminalFiles = React.useMemo(() => {
-        return exportProjectFiles(nodes);
+    const workspaceTerminalEntries = React.useMemo(() => {
+        return exportWorkspaceEntries(nodes);
     }, [nodes]);
 
     return (
@@ -120,8 +123,8 @@ export default function IdeEditorPane({
                                 enabled: !isSql,
                                 projectId: projectId ?? undefined,
                                 cwd: "/workspace",
-                                initialFiles: workspaceTerminalFiles,
-                                getWorkspaceFiles: () => workspaceTerminalFiles,
+                                initialFiles: workspaceTerminalEntries,
+                                getWorkspaceFiles: () => workspaceTerminalEntries,
                                 onTerminalSnapshotFiles: onApplyTerminalSnapshotFiles,
                                 lazy: true,
                                 title: "Terminal",

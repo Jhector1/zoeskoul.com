@@ -14,7 +14,7 @@ import type {
 import type { CodeLanguage } from "@/lib/practice/types";
 import type { UseIdeWorkspaceOpts, UseIdeWorkspaceResult } from "./workspace.types";
 
-import { findFile } from "../fsTree";
+import { findFile, pathOf } from "../fsTree";
 import { ALL_LANGUAGES, DEFAULT_ACCESS, SAVE_DEBOUNCE_MS } from "./workspace.constants";
 import {
     STORAGE_KEY_V2,
@@ -100,6 +100,38 @@ function isEditableTarget(target: EventTarget | null) {
     if (target.closest(".monaco-editor")) return true;
 
     return false;
+}
+
+function remapExpandedFolderIds(
+    prevNodes: FSNode[],
+    prevExpanded: Iterable<NodeId>,
+    nextNodes: FSNode[],
+): NodeId[] {
+    const nextFoldersByPath = new Map<string, FolderNode>();
+
+    for (const node of nextNodes) {
+        if (node.kind !== "folder") continue;
+        nextFoldersByPath.set(pathOf(nextNodes, node.id), node);
+    }
+
+    const out: NodeId[] = [];
+    const seen = new Set<NodeId>();
+
+    for (const id of prevExpanded) {
+        const prevFolder = prevNodes.find(
+            (n): n is FolderNode => n.kind === "folder" && n.id === id,
+        );
+        if (!prevFolder) continue;
+
+        const nextFolder = nextFoldersByPath.get(pathOf(prevNodes, prevFolder.id));
+        if (!nextFolder) continue;
+        if (seen.has(nextFolder.id)) continue;
+
+        seen.add(nextFolder.id);
+        out.push(nextFolder.id);
+    }
+
+    return out;
 }
 
 export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResult {
@@ -327,12 +359,23 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
 
     const replaceWorkspace = useCallback(
         (ws: WorkspaceStateV2) => {
-            hydrateWorkspace(ws);
+            const normalized = normalizeWorkspaceForAccess(ws, access);
+            const preservedExpanded = remapExpandedFolderIds(
+                nodes,
+                expanded,
+                normalized.nodes,
+            );
+
+            hydrateWorkspace({
+                ...normalized,
+                expanded: preservedExpanded,
+            });
+
             clearTransientUi();
             setToast(null);
             setStorageHydrated(true);
         },
-        [hydrateWorkspace, clearTransientUi],
+        [hydrateWorkspace, clearTransientUi, access, nodes, expanded],
     );
 
     const resetWorkspaceForLanguage = useCallback(

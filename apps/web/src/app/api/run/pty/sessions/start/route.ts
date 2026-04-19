@@ -9,6 +9,14 @@ import { requireRunnerActorKey } from "@/lib/server/runnerActorKey";
 import { runnerPost, RunnerHttpError } from "@/lib/server/runnerClient";
 import { createAttachToken } from "@/lib/server/ptyAttachToken";
 
+type WorkspaceSyncEntry =
+    | { kind?: "file"; path: string; content: string }
+    | { kind: "directory"; path: string };
+
+type ShellStartReq = Extract<InteractiveRunReq, { kind: "shell" }> & {
+    files?: WorkspaceSyncEntry[];
+};
+
 type StartBrowserSessionResult =
     | {
     ok: true;
@@ -22,14 +30,9 @@ type StartBrowserSessionResult =
     error: string;
 };
 
-function isShellRequest(
-    body: unknown,
-): body is Extract<InteractiveRunReq, { kind: "shell" }> {
-    return (
-        !!body &&
-        typeof body === "object" &&
-        (body as { kind?: unknown }).kind === "shell"
-    );
+function isShellRequest(body: unknown): body is ShellStartReq {
+    if (!body || typeof body !== "object") return false;
+    return (body as { kind?: unknown }).kind === "shell";
 }
 
 function getRunnerWsBase() {
@@ -61,18 +64,13 @@ function getRunnerWsBase() {
         );
     }
 
-    throw new Error(
-        "Missing RUNNER_WS_BASE_URL or RUNNER_BASE_URL",
-    );
+    throw new Error("Missing RUNNER_WS_BASE_URL or RUNNER_BASE_URL");
 }
 
 export async function POST(req: NextRequest) {
     try {
-
         const actor = await getActor();
-        const body = (await req.json()) as InteractiveRunReq;
-
-
+        const body = (await req.json()) as InteractiveRunReq | ShellStartReq;
 
         if (isShellRequest(body) && !actor.userId) {
             return NextResponse.json<StartBrowserSessionResult>(
@@ -89,7 +87,6 @@ export async function POST(req: NextRequest) {
             body,
         );
 
-
         if (!out.ok) {
             return NextResponse.json<StartBrowserSessionResult>(out, { status: 400 });
         }
@@ -99,13 +96,10 @@ export async function POST(req: NextRequest) {
             actorKey,
         });
 
-
-
         const runnerWsBase = getRunnerWsBase();
         const wsUrl =
             `${runnerWsBase}/sessions/${encodeURIComponent(out.sessionId)}/ws` +
             `?token=${encodeURIComponent(attachToken)}`;
-
 
         return NextResponse.json<StartBrowserSessionResult>({
             ok: true,

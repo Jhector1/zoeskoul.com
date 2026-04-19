@@ -2,11 +2,11 @@
 
 import * as React from "react";
 import type {
-    FileEntry,
     RunSessionState,
 } from "@zoeskoul/code-contracts";
 import type {
     TerminalChunk,
+    WorkspaceSyncEntry,
     WorkspaceTerminalController,
     WorkspaceTerminalConfig,
 } from "../../runtime";
@@ -23,51 +23,104 @@ function isFinalSessionState(state: string) {
     );
 }
 
-function normalizeFiles(
+function normalizeEntries(
     files: WorkspaceTerminalConfig["initialFiles"],
-): FileEntry[] | undefined {
+): WorkspaceSyncEntry[] | undefined {
     if (!files) return undefined;
-    if (Array.isArray(files)) return files;
+
+    if (Array.isArray(files)) {
+        return files.map((entry) => {
+            if ((entry as any)?.kind === "directory") {
+                return {
+                    kind: "directory",
+                    path: String((entry as any).path ?? ""),
+                } satisfies WorkspaceSyncEntry;
+            }
+
+            return {
+                kind: "file",
+                path: String((entry as any).path ?? ""),
+                content: String((entry as any).content ?? ""),
+            } satisfies WorkspaceSyncEntry;
+        });
+    }
 
     return Object.entries(files).map(([path, content]) => ({
+        kind: "file" as const,
         path,
         content,
     }));
+}
+
+function entryKind(entry: WorkspaceSyncEntry) {
+    return entry.kind === "directory" ? "directory" : "file";
 }
 
 function normalizePath(input: string) {
     return String(input ?? "").replace(/\\/g, "/").trim();
 }
 
-function sortFiles(files: FileEntry[]) {
-    return [...files]
-        .map((f) => ({
-            path: normalizePath(f.path),
-            content: String(f.content ?? ""),
-        }))
-        .filter((f) => !!f.path)
-        .sort((a, b) => a.path.localeCompare(b.path));
+function sortEntries(entries: WorkspaceSyncEntry[]) {
+    return [...entries]
+        .map((entry) => {
+            if (entry.kind === "directory") {
+                return {
+                    kind: "directory" as const,
+                    path: normalizePath(entry.path),
+                };
+            }
+
+            return {
+                kind: "file" as const,
+                path: normalizePath(entry.path),
+                content: String((entry as any).content ?? ""),
+            };
+        })
+        .filter((entry) => !!entry.path)
+        .sort((a, b) => {
+            const pathCmp = a.path.localeCompare(b.path);
+            if (pathCmp !== 0) return pathCmp;
+            if (a.kind === b.kind) return 0;
+            return a.kind === "directory" ? -1 : 1;
+        });
 }
 
-function filesEqual(a: FileEntry[], b: FileEntry[]) {
-    const aa = sortFiles(a);
-    const bb = sortFiles(b);
+function entriesEqual(a: WorkspaceSyncEntry[], b: WorkspaceSyncEntry[]) {
+    const aa = sortEntries(a);
+    const bb = sortEntries(b);
 
     if (aa.length !== bb.length) return false;
 
     for (let i = 0; i < aa.length; i++) {
+        if (aa[i].kind !== bb[i].kind) return false;
         if (aa[i].path !== bb[i].path) return false;
-        if (aa[i].content !== bb[i].content) return false;
+        if (aa[i].kind === "file" && bb[i].kind === "file") {
+            if (aa[i].content !== bb[i].content) return false;
+        }
     }
 
     return true;
 }
 
-function diffDirtyUiPaths(currentUiFiles: FileEntry[], baselineFiles: FileEntry[]) {
+function diffDirtyUiPaths(
+    currentUiEntries: WorkspaceSyncEntry[],
+    baselineEntries: WorkspaceSyncEntry[],
+) {
     const out = new Set<string>();
 
-    const current = new Map(sortFiles(currentUiFiles).map((f) => [f.path, f.content]));
-    const baseline = new Map(sortFiles(baselineFiles).map((f) => [f.path, f.content]));
+    const current = new Map(
+        sortEntries(currentUiEntries).map((entry) => [
+            entry.path,
+            entry.kind === "directory" ? "__DIR__" : `__FILE__:${entry.content}`,
+        ]),
+    );
+
+    const baseline = new Map(
+        sortEntries(baselineEntries).map((entry) => [
+            entry.path,
+            entry.kind === "directory" ? "__DIR__" : `__FILE__:${entry.content}`,
+        ]),
+    );
 
     const allPaths = new Set([...current.keys(), ...baseline.keys()]);
 
@@ -81,24 +134,30 @@ function diffDirtyUiPaths(currentUiFiles: FileEntry[], baselineFiles: FileEntry[
 }
 
 function applyDirtyOverridesToSnapshot(
-    snapshotFiles: FileEntry[],
-    currentUiFiles: FileEntry[],
+    snapshotEntries: WorkspaceSyncEntry[],
+    currentUiEntries: WorkspaceSyncEntry[],
     dirtyUiPaths: Set<string>,
 ) {
-    const merged = new Map(sortFiles(snapshotFiles).map((f) => [f.path, f.content]));
-    const current = new Map(sortFiles(currentUiFiles).map((f) => [f.path, f.content]));
+    const merged = new Map<string, WorkspaceSyncEntry>();
+    const current = new Map<string, WorkspaceSyncEntry>();
+
+    for (const entry of sortEntries(snapshotEntries)) {
+        merged.set(entry.path, entry);
+    }
+
+    for (const entry of sortEntries(currentUiEntries)) {
+        current.set(entry.path, entry);
+    }
 
     for (const path of dirtyUiPaths) {
         if (current.has(path)) {
-            merged.set(path, current.get(path) ?? "");
+            merged.set(path, current.get(path)!);
         } else {
             merged.delete(path);
         }
     }
 
-    return sortFiles(
-        [...merged.entries()].map(([path, content]) => ({ path, content })),
-    );
+    return sortEntries([...merged.values()]);
 }
 
 async function postJson<T>(url: string, body: unknown): Promise<T> {
@@ -121,7 +180,7 @@ async function postJson<T>(url: string, body: unknown): Promise<T> {
 
 type SnapshotResponse = {
     ok: true;
-    files: FileEntry[];
+    files: WorkspaceSyncEntry[];
 };
 
 type ReplaceResponse = {
@@ -157,18 +216,35 @@ export function useWorkspaceTerminalController(
     const nextChunkIdRef = React.useRef(1);
     const lastHandledSeqRef = React.useRef(0);
 
-    const lastPushedFilesRef = React.useRef<FileEntry[]>(
-        sortFiles(normalizeFiles(args.initialFiles) ?? []),
+    const lastPushedEntriesRef = React.useRef<WorkspaceSyncEntry[]>(
+        sortEntries(normalizeEntries(args.initialFiles) ?? []),
     );
     const quietTimerRef = React.useRef<number | null>(null);
     const awaitingPostEnterSnapshotRef = React.useRef(false);
     const snapshotInFlightRef = React.useRef<Promise<boolean> | null>(null);
+    const openInFlightRef = React.useRef<Promise<void> | null>(null);
 
-    const getWorkspaceFiles = React.useCallback(() => {
+    const startedRef = React.useRef(started);
+    const startingRef = React.useRef(starting);
+    const stateRef = React.useRef<RunSessionState | "idle">(state);
+
+    React.useEffect(() => {
+        startedRef.current = started;
+    }, [started]);
+
+    React.useEffect(() => {
+        startingRef.current = starting;
+    }, [starting]);
+
+    React.useEffect(() => {
+        stateRef.current = state;
+    }, [state]);
+
+    const getWorkspaceEntries = React.useCallback(() => {
         const live = args.getWorkspaceFiles?.();
-        if (live) return sortFiles(live);
+        if (live) return sortEntries(live);
 
-        return sortFiles(normalizeFiles(args.initialFiles) ?? []);
+        return sortEntries(normalizeEntries(args.initialFiles) ?? []);
     }, [args.getWorkspaceFiles, args.initialFiles]);
 
     const pushChunk = React.useCallback(
@@ -197,6 +273,7 @@ export function useWorkspaceTerminalController(
         nextChunkIdRef.current = 1;
         awaitingPostEnterSnapshotRef.current = false;
         snapshotInFlightRef.current = null;
+        openInFlightRef.current = null;
         setTerminalFeed([]);
         setInputEnabled(false);
         setBusy(false);
@@ -207,17 +284,20 @@ export function useWorkspaceTerminalController(
     }, [clearQuietTimer, closeSocket]);
 
     const replaceFiles = React.useCallback(
-        async (files: FileEntry[]) => {
+        async (files: WorkspaceSyncEntry[]) => {
             if (!sessionId) return false;
 
             setSyncStatus("pushing");
 
             try {
+                const sorted = sortEntries(files);
+
                 await postJson<ReplaceResponse>(
                     `/api/run/pty/sessions/${encodeURIComponent(sessionId)}/workspace/replace`,
-                    { files: sortFiles(files) },
+                    { files: sorted },
                 );
-                lastPushedFilesRef.current = sortFiles(files);
+
+                lastPushedEntriesRef.current = sorted;
                 setSyncStatus("idle");
                 return true;
             } catch (e: any) {
@@ -230,7 +310,7 @@ export function useWorkspaceTerminalController(
     );
 
     const snapshotFiles = React.useCallback(async () => {
-        if (!sessionId) return [] as FileEntry[];
+        if (!sessionId) return [] as WorkspaceSyncEntry[];
 
         setSyncStatus("pulling");
 
@@ -240,7 +320,7 @@ export function useWorkspaceTerminalController(
                 {},
             );
             setSyncStatus("idle");
-            return sortFiles(out.files ?? []);
+            return sortEntries(out.files ?? []);
         } catch (e: any) {
             setSyncStatus("error");
             pushChunk("err", `\r\n${e?.message ?? "Failed to pull terminal workspace."}\r\n`);
@@ -250,15 +330,15 @@ export function useWorkspaceTerminalController(
 
     const pushWorkspaceFromSource = React.useCallback(
         async (force = false) => {
-            const files = getWorkspaceFiles();
+            const entries = getWorkspaceEntries();
 
-            if (!force && filesEqual(files, lastPushedFilesRef.current)) {
+            if (!force && entriesEqual(entries, lastPushedEntriesRef.current)) {
                 return true;
             }
 
-            return await replaceFiles(files);
+            return await replaceFiles(entries);
         },
-        [getWorkspaceFiles, replaceFiles],
+        [getWorkspaceEntries, replaceFiles],
     );
 
     const pullSnapshotIntoWorkspace = React.useCallback(async () => {
@@ -267,15 +347,15 @@ export function useWorkspaceTerminalController(
 
         const run = (async () => {
             const snapshot = await snapshotFiles();
-            const currentUiFiles = getWorkspaceFiles();
+            const currentUiEntries = getWorkspaceEntries();
             const dirtyUiPaths = diffDirtyUiPaths(
-                currentUiFiles,
-                lastPushedFilesRef.current,
+                currentUiEntries,
+                lastPushedEntriesRef.current,
             );
 
             const nextBaseline = applyDirtyOverridesToSnapshot(
                 snapshot,
-                currentUiFiles,
+                currentUiEntries,
                 dirtyUiPaths,
             );
 
@@ -286,7 +366,7 @@ export function useWorkspaceTerminalController(
                     dirtyUiPaths,
                 });
             } finally {
-                lastPushedFilesRef.current = nextBaseline;
+                lastPushedEntriesRef.current = nextBaseline;
             }
 
             return true;
@@ -299,7 +379,7 @@ export function useWorkspaceTerminalController(
         } finally {
             snapshotInFlightRef.current = null;
         }
-    }, [sessionId, snapshotFiles, getWorkspaceFiles, args]);
+    }, [sessionId, snapshotFiles, getWorkspaceEntries, args]);
 
     const schedulePostEnterSnapshot = React.useCallback(
         (delayMs = 700) => {
@@ -328,70 +408,83 @@ export function useWorkspaceTerminalController(
 
     const open = React.useCallback(async () => {
         if (!args.enabled) return;
-        if (starting) return;
-        if (started && !isFinalSessionState(state)) return;
 
-        const files = getWorkspaceFiles();
-
-        lastHandledSeqRef.current = 0;
-        nextChunkIdRef.current = 1;
-        awaitingPostEnterSnapshotRef.current = false;
-        setTerminalFeed([]);
-        setInputEnabled(false);
-        setBusy(true);
-        setState("preparing");
-        setStarting(true);
-        setSyncStatus("idle");
-
-        pushChunk("sys", "[starting workspace terminal]\r\n");
-
-        try {
-            await start({
-                kind: "shell",
-                mode: "interactive",
-                language: "bash",
-                projectId: args.projectId,
-                cwd: args.cwd,
-                ...(files.length ? { files } : {}),
-            });
-
-            lastPushedFilesRef.current = sortFiles(files);
-            setStarted(true);
-        } catch (e: any) {
-            pushChunk("err", `${e?.message ?? "Failed to start workspace terminal."}\r\n`);
-            setBusy(false);
-            setInputEnabled(false);
-            setState("failed");
-            setStarted(false);
-        } finally {
-            setStarting(false);
+        if (openInFlightRef.current) {
+            return await openInFlightRef.current;
         }
+
+        if (startingRef.current) return;
+
+        if (startedRef.current && !isFinalSessionState(stateRef.current)) {
+            return;
+        }
+
+        const run = (async () => {
+            const entries = getWorkspaceEntries();
+
+            lastHandledSeqRef.current = 0;
+            nextChunkIdRef.current = 1;
+            awaitingPostEnterSnapshotRef.current = false;
+            setTerminalFeed([]);
+            setInputEnabled(false);
+            setBusy(true);
+            setState("preparing");
+            setStarting(true);
+            setSyncStatus("idle");
+
+            pushChunk("sys", "[starting workspace terminal]\r\n");
+
+            try {
+                await start({
+                    kind: "shell",
+                    mode: "interactive",
+                    language: "bash",
+                    projectId: args.projectId,
+                    cwd: args.cwd,
+                    ...(entries.length ? { files: entries as any } : {}),
+                });
+
+                lastPushedEntriesRef.current = sortEntries(entries);
+                setStarted(true);
+            } catch (e: any) {
+                pushChunk("err", `${e?.message ?? "Failed to start workspace terminal."}\r\n`);
+                setBusy(false);
+                setInputEnabled(false);
+                setState("failed");
+                setStarted(false);
+                throw e;
+            } finally {
+                setStarting(false);
+                openInFlightRef.current = null;
+            }
+        })();
+
+        openInFlightRef.current = run;
+        return await run;
     }, [
         args.enabled,
         args.projectId,
         args.cwd,
-        getWorkspaceFiles,
+        getWorkspaceEntries,
         start,
-        started,
-        starting,
-        state,
         pushChunk,
     ]);
 
     const stop = React.useCallback(async () => {
-        if (!started && !starting) return;
+        if (!startedRef.current && !startingRef.current) return;
 
         try {
             await cancel();
             pushChunk("sys", "\r\n[workspace terminal stopped]\r\n");
         } finally {
             clearQuietTimer();
+            openInFlightRef.current = null;
             setBusy(false);
             setInputEnabled(false);
             setStarted(false);
             setStarting(false);
         }
-    }, [cancel, started, starting, pushChunk, clearQuietTimer]);
+    }, [cancel, pushChunk, clearQuietTimer]);
 
     const sendData = React.useCallback(
         (data: string) => {
@@ -466,6 +559,7 @@ export function useWorkspaceTerminalController(
                     setBusy(false);
                     setInputEnabled(false);
                     setStarted(false);
+                    openInFlightRef.current = null;
 
                     if (awaitingPostEnterSnapshotRef.current) {
                         schedulePostEnterSnapshot(100);
@@ -495,6 +589,7 @@ export function useWorkspaceTerminalController(
                 setInputEnabled(false);
                 setState("failed");
                 setStarted(false);
+                openInFlightRef.current = null;
 
                 if (awaitingPostEnterSnapshotRef.current) {
                     schedulePostEnterSnapshot(100);
@@ -507,6 +602,7 @@ export function useWorkspaceTerminalController(
                 setBusy(false);
                 setInputEnabled(false);
                 setStarted(false);
+                openInFlightRef.current = null;
 
                 if (awaitingPostEnterSnapshotRef.current) {
                     schedulePostEnterSnapshot(100);
@@ -520,6 +616,7 @@ export function useWorkspaceTerminalController(
                 setInputEnabled(false);
                 setState("failed");
                 setStarted(false);
+                openInFlightRef.current = null;
 
                 if (awaitingPostEnterSnapshotRef.current) {
                     schedulePostEnterSnapshot(100);

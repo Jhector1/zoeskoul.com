@@ -8,7 +8,7 @@ import { DEFAULT_SQL_DIALECT } from "@/components/code/runner/constants";
 import { useProjectDirtyState } from "@/components/code/projects/hooks/useProjectDirtyState";
 import { useProjectsList } from "@/components/code/projects/hooks/useProjectsList";
 
-import { pathOf } from "../fsTree";
+import {pathOf, WorkspaceSyncEntry} from "../fsTree";
 import { useIdeWorkspace } from "../workspaceHook/useIdeWorkspace";
 import { cn } from "../utils";
 import IdeDesktopLayout from "@/components/ide/fullide/chrome/IdeDesktopLayout";
@@ -256,10 +256,9 @@ function FullIDEInner({
     const goBack = useCallback(() => {
         router.push("/sandbox");
     }, [router]);
-
     const applyTerminalSnapshotFiles = useCallback(
         async (
-            files: Array<{ path: string; content: string }>,
+            files: WorkspaceSyncEntry[],
             meta: { dirtyUiPaths: Set<string> },
         ) => {
             const prior = currentWorkspaceRef.current;

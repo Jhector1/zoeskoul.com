@@ -1,12 +1,11 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 
-export type SnapshotWorkspaceFile = {
-    path: string;
-    content: string;
-};
+export type SnapshotWorkspaceEntry =
+    | { kind: "directory"; path: string }
+    | { kind: "file"; path: string; content: string };
 
-const MAX_FILES = 150;
+const MAX_ENTRIES = 400;
 const MAX_TOTAL_BYTES = 5 * 1024 * 1024;
 
 const ALLOWED_EXTENSIONS = new Set([
@@ -39,6 +38,16 @@ const ALLOWED_BASENAMES = new Set([
     "readme.md",
 ]);
 
+const IGNORED_DIRS = new Set([
+    ".git",
+    "node_modules",
+    ".next",
+    "dist",
+    "build",
+    "target",
+    "__pycache__",
+]);
+
 function isAllowedFile(relPath: string) {
     const base = path.basename(relPath);
     if (ALLOWED_BASENAMES.has(base)) return true;
@@ -57,7 +66,12 @@ function isSafeRelativePath(relPath: string) {
     return parts.every((part) => !!part && part !== "." && part !== "..");
 }
 
-async function walkFiles(root: string, dir: string, out: string[]) {
+async function walkEntries(
+    root: string,
+    dir: string,
+    dirs: string[],
+    files: string[],
+) {
     const entries = await fs.readdir(dir, { withFileTypes: true });
 
     for (const entry of entries) {
@@ -67,30 +81,54 @@ async function walkFiles(root: string, dir: string, out: string[]) {
         if (!isSafeRelativePath(rel)) continue;
 
         if (entry.isDirectory()) {
-            await walkFiles(root, abs, out);
+            if (IGNORED_DIRS.has(entry.name)) continue;
+
+            dirs.push(rel);
+
+            if (dirs.length + files.length > MAX_ENTRIES) {
+                throw new Error(`Workspace limit reached: max ${MAX_ENTRIES} entries.`);
+            }
+
+            await walkEntries(root, abs, dirs, files);
             continue;
         }
 
         if (!entry.isFile()) continue;
         if (!isAllowedFile(rel)) continue;
 
-        out.push(rel);
+        files.push(rel);
 
-        if (out.length > MAX_FILES) {
-            throw new Error(`Workspace limit reached: max ${MAX_FILES} files.`);
+        if (dirs.length + files.length > MAX_ENTRIES) {
+            throw new Error(`Workspace limit reached: max ${MAX_ENTRIES} entries.`);
         }
     }
 }
 
 export async function snapshotWorkspaceFiles(workspaceDir: string) {
-    const relPaths: string[] = [];
-    await walkFiles(workspaceDir, workspaceDir, relPaths);
-    relPaths.sort((a, b) => a.localeCompare(b));
+    const relDirs: string[] = [];
+    const relFiles: string[] = [];
+
+    await walkEntries(workspaceDir, workspaceDir, relDirs, relFiles);
+
+    relDirs.sort((a, b) => {
+        const da = a.split("/").length;
+        const db = b.split("/").length;
+        if (da !== db) return da - db;
+        return a.localeCompare(b);
+    });
+    relFiles.sort((a, b) => a.localeCompare(b));
 
     let totalBytes = 0;
-    const files: SnapshotWorkspaceFile[] = [];
+    const entries: SnapshotWorkspaceEntry[] = [];
 
-    for (const relPath of relPaths) {
+    for (const relDir of relDirs) {
+        entries.push({
+            kind: "directory",
+            path: relDir,
+        });
+    }
+
+    for (const relPath of relFiles) {
         const abs = path.join(workspaceDir, relPath);
         const content = await fs.readFile(abs, "utf8");
         const bytes = Buffer.byteLength(content, "utf8");
@@ -102,11 +140,12 @@ export async function snapshotWorkspaceFiles(workspaceDir: string) {
             );
         }
 
-        files.push({
+        entries.push({
+            kind: "file",
             path: relPath,
             content,
         });
     }
 
-    return files;
+    return entries;
 }

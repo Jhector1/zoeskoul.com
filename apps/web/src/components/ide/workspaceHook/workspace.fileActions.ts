@@ -61,6 +61,60 @@ function findFolderChild(
   );
 }
 
+function splitCreationPath(input: string) {
+  const parts = normalizeImportPath(input);
+  if (!parts.length) return null;
+
+  return {
+    parentNames: parts.slice(0, -1),
+    leafName: parts[parts.length - 1],
+  };
+}
+
+function ensureFolderPath(args: {
+  nodes: FSNode[];
+  baseParentId: NodeId | null;
+  folderNames: string[];
+}) {
+  let nextNodes = [...args.nodes];
+  let parentId = args.baseParentId;
+  const expandedIds = new Set<NodeId>();
+
+  if (parentId) {
+    expandedIds.add(parentId);
+  }
+
+  for (const rawName of args.folderNames) {
+    const found = findFolderChild(nextNodes, parentId, rawName);
+    if (found) {
+      parentId = found.id;
+      expandedIds.add(found.id);
+      continue;
+    }
+
+    const safeName = ensureUniqueSiblingName(nextNodes, parentId, rawName);
+    const folderId = uid();
+
+    nextNodes.push({
+      id: folderId,
+      kind: "folder",
+      name: safeName,
+      parentId,
+      createdAt: Date.now(),
+      updatedAt: Date.now(),
+    } as FolderNode);
+
+    parentId = folderId;
+    expandedIds.add(folderId);
+  }
+
+  return {
+    nodes: nextNodes,
+    parentId,
+    expandedIds,
+  };
+}
+
 export function openFile(args: {
   nodes: FSNode[];
   id: NodeId;
@@ -360,6 +414,7 @@ export function commitInlineEdit(args: {
     access,
     policy,
     inlineEdit,
+    language,
     nodes,
     activeFileId,
     setNodes,
@@ -373,7 +428,9 @@ export function commitInlineEdit(args: {
   if (!inlineEdit) return;
 
   const raw = inlineEdit.value.trim();
-  if (!raw) {
+  const split = splitCreationPath(raw);
+
+  if (!split) {
     setToast({ kind: "error", text: "Name can’t be empty." });
     return;
   }
@@ -413,16 +470,34 @@ export function commitInlineEdit(args: {
       return;
     }
 
-    const folderId = uid();
-    const safe = ensureUniqueSiblingName(nodes, inlineEdit.parentId, raw);
+    let nextNodes = [...nodes];
+    let targetParentId = inlineEdit.parentId;
+    const expandedIds = new Set<NodeId>();
 
-    const nextNodes: FSNode[] = [
-      ...nodes,
+    if (split.parentNames.length) {
+      const ensured = ensureFolderPath({
+        nodes: nextNodes,
+        baseParentId: targetParentId,
+        folderNames: split.parentNames,
+      });
+
+      nextNodes = ensured.nodes;
+      targetParentId = ensured.parentId;
+      for (const id of ensured.expandedIds) expandedIds.add(id);
+    } else if (targetParentId) {
+      expandedIds.add(targetParentId);
+    }
+
+    const folderId = uid();
+    const safe = ensureUniqueSiblingName(nextNodes, targetParentId, split.leafName);
+
+    nextNodes = [
+      ...nextNodes,
       {
         id: folderId,
         kind: "folder",
         name: safe,
-        parentId: inlineEdit.parentId,
+        parentId: targetParentId,
         createdAt: Date.now(),
         updatedAt: Date.now(),
       } as FolderNode,
@@ -435,9 +510,13 @@ export function commitInlineEdit(args: {
     }
 
     setNodes(nextNodes);
-    if (inlineEdit.parentId) {
-      setExpanded((s) => new Set(s).add(inlineEdit.parentId!));
-    }
+    setExpanded((prev) => {
+      const next = new Set(prev);
+      for (const id of expandedIds) next.add(id);
+      if (targetParentId) next.add(targetParentId);
+      next.add(folderId);
+      return next;
+    });
     setInlineEdit(null);
     return;
   }
@@ -453,13 +532,9 @@ export function commitInlineEdit(args: {
     return;
   }
 
-  const safeName = ensureUniqueSiblingName(
-      nodes,
-      access.canUseMultiFile ? inlineEdit.parentId : null,
-      raw,
-  );
-
   if (!access.canUseMultiFile) {
+    const fileNameOnly = split.leafName;
+
     const target =
         findFile(nodes, activeFileId) ??
         nodes.find((n): n is FileNode => n.kind === "file");
@@ -470,7 +545,7 @@ export function commitInlineEdit(args: {
       {
         id: replacementId,
         kind: "file",
-        name: safeName,
+        name: fileNameOnly,
         parentId: null,
         content: target?.content ?? "",
         createdAt: target?.createdAt ?? Date.now(),
@@ -492,14 +567,38 @@ export function commitInlineEdit(args: {
     return;
   }
 
+  let nextNodes = [...nodes];
+  let targetParentId = inlineEdit.parentId;
+  const expandedIds = new Set<NodeId>();
+
+  if (split.parentNames.length) {
+    const ensured = ensureFolderPath({
+      nodes: nextNodes,
+      baseParentId: targetParentId,
+      folderNames: split.parentNames,
+    });
+
+    nextNodes = ensured.nodes;
+    targetParentId = ensured.parentId;
+    for (const id of ensured.expandedIds) expandedIds.add(id);
+  } else if (targetParentId) {
+    expandedIds.add(targetParentId);
+  }
+
   const fileId = uid();
-  const nextNodes: FSNode[] = [
-    ...nodes,
+  const safeName = ensureUniqueSiblingName(
+      nextNodes,
+      targetParentId,
+      split.leafName,
+  );
+
+  nextNodes = [
+    ...nextNodes,
     {
       id: fileId,
       kind: "file",
       name: safeName,
-      parentId: inlineEdit.parentId,
+      parentId: targetParentId,
       content: "",
       createdAt: Date.now(),
       updatedAt: Date.now(),
@@ -515,11 +614,12 @@ export function commitInlineEdit(args: {
   setNodes(nextNodes);
   setOpenTabs((prev) => (prev.includes(fileId) ? prev : [...prev, fileId]));
   setActiveFileId(fileId);
-
-  if (inlineEdit.parentId) {
-    setExpanded((prev) => new Set(prev).add(inlineEdit.parentId!));
-  }
-
+  setExpanded((prev) => {
+    const next = new Set(prev);
+    for (const id of expandedIds) next.add(id);
+    if (targetParentId) next.add(targetParentId);
+    return next;
+  });
   setInlineEdit(null);
 }
 

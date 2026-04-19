@@ -4,10 +4,14 @@ import { runnerPost, RunnerHttpError } from "@/lib/server/runnerClient";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
+type WorkspaceSyncEntry =
+    | { kind?: "file"; path: string; content: string }
+    | { kind: "directory"; path: string };
+
 type SnapshotWorkspaceResponse =
     | {
     ok: true;
-    files: Array<{ path: string; content: string }>;
+    files: WorkspaceSyncEntry[];
 }
     | {
     ok: false;

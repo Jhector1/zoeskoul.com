@@ -4,8 +4,12 @@ import { runnerPost, RunnerHttpError } from "@/lib/server/runnerClient";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
+type WorkspaceSyncEntry =
+    | { kind?: "file"; path: string; content: string }
+    | { kind: "directory"; path: string };
+
 type ReplaceWorkspaceRequest = {
-    files: Array<{ path: string; content: string }>;
+    files: WorkspaceSyncEntry[];
 };
 
 type ReplaceWorkspaceResponse =
@@ -32,12 +36,12 @@ export async function POST(
     ctx: { params: Promise<{ sessionId: string }> },
 ) {
     try {
-
         const { sessionId } = await ctx.params;
         const body = (await req.json()) as Partial<ReplaceWorkspaceRequest>;
 
         const files = Array.isArray(body.files) ? body.files : [];
         const actorKey = await requireRunnerActorKey();
+
         const out = await runnerPost<ReplaceWorkspaceResponse>(
             `/sessions/${encodeURIComponent(sessionId)}/replace-workspace`,
             actorKey,

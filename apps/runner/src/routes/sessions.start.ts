@@ -11,7 +11,6 @@ export const startSessionRoute: RequestHandler = async (req, res) => {
         const out = await startDockerSession(body, actorKey);
 
         if (out.ok) {
-
             return res.status(200).json(out);
         }
 

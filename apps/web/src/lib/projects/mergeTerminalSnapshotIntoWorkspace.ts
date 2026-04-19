@@ -3,24 +3,22 @@ import type {
     FolderNode,
     FSNode,
     NodeId,
+    WorkspaceStateV2,
 } from "@/components/ide/types";
 import { uid } from "@/components/ide/utils";
 import {
     isSafeRelPath,
     pathOf,
-    relativeProjectPathOf,
 } from "@/components/ide/fsTree";
 import { repairWorkspaceStateV2 } from "@/components/ide/storage";
-import {WorkspaceStateV2} from "@/components/ide/types";
 
-type SnapshotFile = {
-    path: string;
-    content: string;
-};
+type SnapshotEntry =
+    | { kind?: "file"; path: string; content: string }
+    | { kind: "directory"; path: string };
 
 type MergeArgs = {
     prior: WorkspaceStateV2;
-    snapshotFiles: SnapshotFile[];
+    snapshotFiles: SnapshotEntry[];
     dirtyUiPaths?: Iterable<string>;
 };
 
@@ -44,10 +42,6 @@ function sortByDepthThenName(paths: string[]) {
     });
 }
 
-function sortFiles(files: SnapshotFile[]) {
-    return [...files].sort((a, b) => a.path.localeCompare(b.path));
-}
-
 function detectSyntheticRoot(prior: WorkspaceStateV2): FolderNode | null {
     const topFolders = prior.nodes.filter(
         (n): n is FolderNode => n.kind === "folder" && n.parentId === null,
@@ -63,12 +57,32 @@ function detectSyntheticRoot(prior: WorkspaceStateV2): FolderNode | null {
     return null;
 }
 
-function priorFilePathMap(prior: WorkspaceStateV2) {
+function relativeNodePathOf(
+    nodes: FSNode[],
+    id: NodeId,
+    syntheticRootName?: string | null,
+) {
+    const full = pathOf(nodes, id);
+    const parts = full.split("/").filter(Boolean);
+
+    if (syntheticRootName && parts[0] === syntheticRootName) {
+        parts.shift();
+    } else if (!syntheticRootName && parts.length > 1) {
+        parts.shift();
+    }
+
+    return normalizeRelPath(parts.join("/"));
+}
+
+function priorFilePathMap(
+    prior: WorkspaceStateV2,
+    syntheticRootName?: string | null,
+) {
     const out = new Map<string, FileNode>();
 
     for (const node of prior.nodes) {
         if (node.kind !== "file") continue;
-        const rel = normalizeRelPath(relativeProjectPathOf(prior.nodes, node.id));
+        const rel = relativeNodePathOf(prior.nodes, node.id, syntheticRootName);
         if (!rel) continue;
         out.set(rel, node);
     }
@@ -76,57 +90,104 @@ function priorFilePathMap(prior: WorkspaceStateV2) {
     return out;
 }
 
-function priorFolderFullPathMap(prior: WorkspaceStateV2) {
+function priorFolderPathMap(
+    prior: WorkspaceStateV2,
+    syntheticRootId?: string | null,
+    syntheticRootName?: string | null,
+) {
     const out = new Map<string, FolderNode>();
 
     for (const node of prior.nodes) {
         if (node.kind !== "folder") continue;
-        const full = normalizeRelPath(pathOf(prior.nodes, node.id));
-        if (!full) continue;
-        out.set(full, node);
+        if (syntheticRootId && node.id === syntheticRootId) continue;
+
+        const rel = relativeNodePathOf(prior.nodes, node.id, syntheticRootName);
+        if (!rel) continue;
+        out.set(rel, node);
     }
 
     return out;
 }
 
-function buildDesiredFiles(args: {
-    snapshotFiles: SnapshotFile[];
-    priorFiles: Map<string, FileNode>;
-    dirtyUiPaths: Set<string>;
-}) {
-    const map = new Map<string, string>();
+function normalizeSnapshotEntries(entries: SnapshotEntry[]) {
+    const out = new Map<string, SnapshotEntry>();
 
-    for (const file of args.snapshotFiles) {
-        const rel = normalizeRelPath(file.path);
+    for (const entry of entries ?? []) {
+        const rel = normalizeRelPath(entry?.path);
         if (!rel) continue;
-        map.set(rel, file.content ?? "");
-    }
 
-    for (const rel of args.dirtyUiPaths) {
-        const prior = args.priorFiles.get(rel);
-        if (prior) {
-            map.set(rel, prior.content ?? "");
+        if ((entry as any)?.kind === "directory") {
+            out.set(rel, { kind: "directory", path: rel });
         } else {
-            map.delete(rel);
+            out.set(rel, {
+                kind: "file",
+                path: rel,
+                content: String((entry as any)?.content ?? ""),
+            });
         }
     }
 
-    return sortFiles(
-        [...map.entries()].map(([path, content]) => ({ path, content })),
-    );
+    return out;
+}
+
+function buildDesiredEntries(args: {
+    snapshotFiles: SnapshotEntry[];
+    priorFiles: Map<string, FileNode>;
+    priorFolders: Map<string, FolderNode>;
+    dirtyUiPaths: Set<string>;
+}) {
+    const map = normalizeSnapshotEntries(args.snapshotFiles);
+
+    for (const rel of args.dirtyUiPaths) {
+        const priorFile = args.priorFiles.get(rel);
+        const priorFolder = args.priorFolders.get(rel);
+
+        if (priorFile) {
+            map.set(rel, {
+                kind: "file",
+                path: rel,
+                content: priorFile.content ?? "",
+            });
+            continue;
+        }
+
+        if (priorFolder) {
+            map.set(rel, {
+                kind: "directory",
+                path: rel,
+            });
+            continue;
+        }
+
+        map.delete(rel);
+    }
+
+    return [...map.values()].sort((a, b) => {
+        const pathCmp = a.path.localeCompare(b.path);
+        if (pathCmp !== 0) return pathCmp;
+        if ((a.kind ?? "file") === (b.kind ?? "file")) return 0;
+        return (a.kind ?? "file") === "directory" ? -1 : 1;
+    });
+}
+
+function parentRelPath(rel: string) {
+    const parts = rel.split("/").filter(Boolean);
+    if (parts.length <= 1) return "";
+    return parts.slice(0, -1).join("/");
 }
 
 function remapFileIdByRelativePath(
     prior: WorkspaceStateV2,
     nextFilesByRelPath: Map<string, FileNode>,
     wantedId: NodeId,
+    syntheticRootName?: string | null,
 ) {
     const wanted = prior.nodes.find(
         (n): n is FileNode => n.kind === "file" && n.id === wantedId,
     );
     if (!wanted) return null;
 
-    const rel = normalizeRelPath(relativeProjectPathOf(prior.nodes, wanted.id));
+    const rel = relativeNodePathOf(prior.nodes, wanted.id, syntheticRootName);
     if (!rel) return null;
 
     return nextFilesByRelPath.get(rel)?.id ?? null;
@@ -134,7 +195,9 @@ function remapFileIdByRelativePath(
 
 function remapExpandedFolders(
     prior: WorkspaceStateV2,
-    nextFoldersByFullPath: Map<string, FolderNode>,
+    nextFoldersByRelPath: Map<string, FolderNode>,
+    syntheticRootId?: string | null,
+    syntheticRootName?: string | null,
 ) {
     const out: NodeId[] = [];
 
@@ -143,11 +206,12 @@ function remapExpandedFolders(
             (n): n is FolderNode => n.kind === "folder" && n.id === id,
         );
         if (!node) continue;
+        if (syntheticRootId && node.id === syntheticRootId) continue;
 
-        const full = normalizeRelPath(pathOf(prior.nodes, node.id));
-        if (!full) continue;
+        const rel = relativeNodePathOf(prior.nodes, node.id, syntheticRootName);
+        if (!rel) continue;
 
-        const next = nextFoldersByFullPath.get(full);
+        const next = nextFoldersByRelPath.get(rel);
         if (next) out.push(next.id);
     }
 
@@ -165,99 +229,141 @@ export function mergeTerminalSnapshotIntoWorkspace(
     );
 
     const syntheticRoot = detectSyntheticRoot(prior);
-    const priorFiles = priorFilePathMap(prior);
-    const priorFolders = priorFolderFullPathMap(prior);
+    const syntheticRootId = syntheticRoot?.id ?? null;
+    const syntheticRootName = syntheticRoot?.name ?? null;
 
-    const desiredFiles = buildDesiredFiles({
+    const priorFiles = priorFilePathMap(prior, syntheticRootName);
+    const priorFolders = priorFolderPathMap(prior, syntheticRootId, syntheticRootName);
+
+    const desiredEntries = buildDesiredEntries({
         snapshotFiles,
         priorFiles,
+        priorFolders,
         dirtyUiPaths,
     });
 
-    const fullFolderPaths = new Set<string>();
-    const fullFilePaths: Array<{ rel: string; full: string; content: string }> = [];
+    const desiredFolderRelPaths = new Set<string>();
+    const desiredFiles = desiredEntries.filter(
+        (entry): entry is { kind?: "file"; path: string; content: string } =>
+            (entry.kind ?? "file") !== "directory",
+    );
 
-    if (syntheticRoot) {
-        fullFolderPaths.add(syntheticRoot.name);
-    }
+    for (const entry of desiredEntries) {
+        if ((entry.kind ?? "file") === "directory") {
+            desiredFolderRelPaths.add(entry.path);
 
-    for (const file of desiredFiles) {
-        const relParts = file.path.split("/").filter(Boolean);
-        const fullParts = syntheticRoot
-            ? [syntheticRoot.name, ...relParts]
-            : relParts;
-
-        for (let i = 1; i < fullParts.length; i++) {
-            fullFolderPaths.add(fullParts.slice(0, i).join("/"));
+            let current = parentRelPath(entry.path);
+            while (current) {
+                desiredFolderRelPaths.add(current);
+                current = parentRelPath(current);
+            }
+            continue;
         }
 
-        fullFilePaths.push({
-            rel: file.path,
-            full: fullParts.join("/"),
-            content: file.content,
-        });
+        let current = parentRelPath(entry.path);
+        while (current) {
+            desiredFolderRelPaths.add(current);
+            current = parentRelPath(current);
+        }
     }
 
     const folderNodes: FolderNode[] = [];
-    const folderIdByFullPath = new Map<string, NodeId>();
-    const nextFoldersByFullPath = new Map<string, FolderNode>();
+    const folderIdByRelPath = new Map<string, NodeId>();
+    const nextFoldersByRelPath = new Map<string, FolderNode>();
 
-    for (const fullPath of sortByDepthThenName([...fullFolderPaths])) {
-        const parts = fullPath.split("/");
-        const name = parts[parts.length - 1];
-        const parentPath = parts.length > 1 ? parts.slice(0, -1).join("/") : null;
-        const priorFolder = priorFolders.get(fullPath);
+    if (syntheticRoot) {
+        const rootNode: FolderNode = {
+            id: syntheticRoot.id,
+            kind: "folder",
+            name: syntheticRoot.name,
+            parentId: null,
+            createdAt: syntheticRoot.createdAt ?? now(),
+            updatedAt: now(),
+        };
+        folderNodes.push(rootNode);
+        folderIdByRelPath.set("", rootNode.id);
+    }
+
+    for (const relPath of sortByDepthThenName([...desiredFolderRelPaths])) {
+        const priorFolder = priorFolders.get(relPath);
+        const name = relPath.split("/").filter(Boolean).pop() ?? relPath;
+        const parentRel = parentRelPath(relPath);
 
         const node: FolderNode = {
             id: priorFolder?.id ?? uid(),
             kind: "folder",
             name,
-            parentId: parentPath ? folderIdByFullPath.get(parentPath) ?? null : null,
+            parentId:
+                parentRel === ""
+                    ? syntheticRoot
+                        ? folderIdByRelPath.get("") ?? null
+                        : null
+                    : folderIdByRelPath.get(parentRel) ?? null,
             createdAt: priorFolder?.createdAt ?? now(),
             updatedAt: now(),
         };
 
         folderNodes.push(node);
-        folderIdByFullPath.set(fullPath, node.id);
-        nextFoldersByFullPath.set(fullPath, node);
+        folderIdByRelPath.set(relPath, node.id);
+        nextFoldersByRelPath.set(relPath, node);
     }
 
     const fileNodes: FileNode[] = [];
     const nextFilesByRelPath = new Map<string, FileNode>();
 
-    for (const file of fullFilePaths) {
-        const parts = file.full.split("/");
-        const name = parts[parts.length - 1];
-        const parentPath = parts.length > 1 ? parts.slice(0, -1).join("/") : null;
-        const priorFile = priorFiles.get(file.rel);
+    for (const file of desiredFiles) {
+        const priorFile = priorFiles.get(file.path);
+        const name = file.path.split("/").filter(Boolean).pop() ?? file.path;
+        const parentRel = parentRelPath(file.path);
 
         const node: FileNode = {
             id: priorFile?.id ?? uid(),
             kind: "file",
             name,
-            parentId: parentPath ? folderIdByFullPath.get(parentPath) ?? null : null,
+            parentId:
+                parentRel === ""
+                    ? syntheticRoot
+                        ? folderIdByRelPath.get("") ?? null
+                        : null
+                    : folderIdByRelPath.get(parentRel) ?? null,
             content: file.content ?? "",
             createdAt: priorFile?.createdAt ?? now(),
             updatedAt: now(),
         };
 
         fileNodes.push(node);
-        nextFilesByRelPath.set(file.rel, node);
+        nextFilesByRelPath.set(file.path, node);
     }
 
     const nodes: FSNode[] = [...folderNodes, ...fileNodes];
 
     const activeFileId =
-        remapFileIdByRelativePath(prior, nextFilesByRelPath, prior.activeFileId) ??
+        remapFileIdByRelativePath(
+            prior,
+            nextFilesByRelPath,
+            prior.activeFileId,
+            syntheticRootName,
+        ) ??
         fileNodes[0]?.id ??
         "";
 
     const entryFileId =
-        remapFileIdByRelativePath(prior, nextFilesByRelPath, prior.entryFileId) ??
-        activeFileId;
+        remapFileIdByRelativePath(
+            prior,
+            nextFilesByRelPath,
+            prior.entryFileId,
+            syntheticRootName,
+        ) ?? activeFileId;
 
     const openTabs = (prior.openTabs ?? [])
-        .map((id) => remapFileIdByRelativePath(prior, nextFilesByRelPath, id))
+        .map((id) =>
+            remapFileIdByRelativePath(
+                prior,
+                nextFilesByRelPath,
+                id,
+                syntheticRootName,
+            ),
+        )
         .filter(Boolean) as NodeId[];
 
     if (activeFileId && !openTabs.includes(activeFileId)) {
@@ -272,7 +378,12 @@ export function mergeTerminalSnapshotIntoWorkspace(
         activeFileId,
         entryFileId,
         stdin: prior.stdin ?? "",
-        expanded: remapExpandedFolders(prior, nextFoldersByFullPath),
+        expanded: remapExpandedFolders(
+            prior,
+            nextFoldersByRelPath,
+            syntheticRootId,
+            syntheticRootName,
+        ),
         leftPct: prior.leftPct ?? 26,
     };
 

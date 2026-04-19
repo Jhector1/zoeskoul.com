@@ -1,4 +1,3 @@
-
 import { z } from "zod";
 
 export type CodeLanguage =
@@ -14,6 +13,7 @@ export type InteractiveLanguage = Exclude<CodeLanguage, "sql" | "bash">;
 export type TerminalRunnerLanguage = Exclude<CodeLanguage, "bash">;
 export type ShellLanguage = "bash";
 export type NonSqlCodeLanguage = Exclude<CodeLanguage, "sql">;
+
 export const interactiveLanguageSchema = z.enum([
     "python",
     "javascript",
@@ -23,11 +23,24 @@ export const interactiveLanguageSchema = z.enum([
 ]);
 
 export const fileEntrySchema = z.object({
+    kind: z.literal("file").optional(),
     path: z.string().min(1),
     content: z.string(),
 });
 
+export const directoryEntrySchema = z.object({
+    kind: z.literal("directory"),
+    path: z.string().min(1),
+});
+
+export const workspaceSyncEntrySchema = z.union([
+    fileEntrySchema,
+    directoryEntrySchema,
+]);
+
 export type FileEntry = z.infer<typeof fileEntrySchema>;
+export type DirectoryEntry = z.infer<typeof directoryEntrySchema>;
+export type WorkspaceSyncEntry = z.infer<typeof workspaceSyncEntrySchema>;
 
 const timeoutFields = {
     wallTimeoutMs: z.number().int().positive().max(60_000).optional(),
@@ -49,7 +62,7 @@ export const interactiveRunReqSchema = z.union([
         language: interactiveLanguageSchema,
         entry: z.string().min(1),
         files: z.union([
-            z.array(fileEntrySchema),
+            z.array(workspaceSyncEntrySchema),
             z.record(z.string(), z.string()),
         ]),
         ...timeoutFields,
@@ -60,7 +73,7 @@ export const interactiveRunReqSchema = z.union([
         mode: z.literal("interactive"),
         language: z.literal("bash"),
         files: z.union([
-            z.array(fileEntrySchema),
+            z.array(workspaceSyncEntrySchema),
             z.record(z.string(), z.string()),
         ]).optional(),
         projectId: z.string().optional(),
@@ -83,7 +96,7 @@ export type InteractiveRunReq =
     mode: "interactive";
     language: InteractiveLanguage;
     entry: string;
-    files: FileEntry[] | Record<string, string>;
+    files: WorkspaceSyncEntry[] | Record<string, string>;
     wallTimeoutMs?: number;
     idleTimeoutMs?: number;
 }
@@ -91,12 +104,13 @@ export type InteractiveRunReq =
     kind: "shell";
     mode: "interactive";
     language: "bash";
-    files?: FileEntry[] | Record<string, string>;
+    files?: WorkspaceSyncEntry[] | Record<string, string>;
     projectId?: string;
     cwd?: string;
     wallTimeoutMs?: number;
     idleTimeoutMs?: number;
 };
+
 export type RunSessionState =
     | "queued"
     | "preparing"
@@ -140,6 +154,7 @@ export type RunEventInput =
 export type SessionInputReq = {
     input: string;
 };
+
 export type RunSessionSummary =
     | {
     id: string;
@@ -165,18 +180,3 @@ export type RunSessionSummary =
 export type SessionStatusResult =
     | { ok: true; session: RunSessionSummary }
     | { ok: false; error: string };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

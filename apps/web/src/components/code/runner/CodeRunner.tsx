@@ -20,7 +20,6 @@ import HeaderBar from "./components/HeaderBar";
 import EditorPane from "./components/EditorPane";
 import { useSplitSizing } from "./hooks/useSplitSizing";
 import type { CodeLanguage, SqlDialect } from "@/lib/practice/types";
-import { isSqlRunResult } from "@/lib/code/types";
 import { runViaApi } from "@/lib/code/runClient";
 import { useCodeRunnerController } from "@/components/code/runner/hooks/controller/useCodeRunnerController";
 import { resolveRuntime } from "@/components/code/runner/hooks/controller/useResolvedRuntime";
@@ -258,6 +257,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     };
 
     const monacoEditorRef = useRef<any>(null);
+    const terminalAutoOpenRequestedRef = useRef(false);
 
     const requestLayout = () => {
         const ed = monacoEditorRef.current;
@@ -370,15 +370,45 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     }, [lang, outputTab]);
 
     useEffect(() => {
-        if (outputTab !== "terminal") return;
-        if (!workspaceTerminalEnabled) return;
-        if (workspaceTerm.started || workspaceTerm.starting) return;
+        if (outputTab !== "terminal" || !workspaceTerminalEnabled) {
+            terminalAutoOpenRequestedRef.current = false;
+            return;
+        }
 
-        void workspaceTerm.open();
+        if (
+            workspaceTerm.sessionId ||
+            workspaceTerm.started ||
+            workspaceTerm.starting
+        ) {
+            return;
+        }
+
+        if (terminalAutoOpenRequestedRef.current) {
+            return;
+        }
+
+        terminalAutoOpenRequestedRef.current = true;
+
+        void workspaceTerm.open().catch(() => {
+            terminalAutoOpenRequestedRef.current = false;
+        });
     }, [
         outputTab,
         workspaceTerminalEnabled,
-        workspaceTerm,
+        workspaceTerm.sessionId,
+        workspaceTerm.started,
+        workspaceTerm.starting,
+        workspaceTerm.open,
+    ]);
+
+    useEffect(() => {
+        if (workspaceTerm.sessionId || workspaceTerm.started || workspaceTerm.starting) {
+            terminalAutoOpenRequestedRef.current = false;
+        }
+    }, [
+        workspaceTerm.sessionId,
+        workspaceTerm.started,
+        workspaceTerm.starting,
     ]);
 
     useEffect(() => {
@@ -407,6 +437,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
             }
 
             setOutputTab("output");
+            terminalAutoOpenRequestedRef.current = false;
             term.resetTerminal();
         },
         [
@@ -517,7 +548,10 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
 
                             <button
                                 type="button"
-                                onClick={() => setOutputTab("terminal")}
+                                onClick={() => {
+                                    terminalAutoOpenRequestedRef.current = false;
+                                    setOutputTab("terminal");
+                                }}
                                 className={cx(
                                     MOBILE_TAB_BASE,
                                     outputTab === "terminal" ? MOBILE_TAB_ACTIVE : MOBILE_TAB_IDLE,
@@ -595,6 +629,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                         onReset={() => {
                             setCode(DEFAULT_CODE[lang]);
                             setOutputTab("output");
+                            terminalAutoOpenRequestedRef.current = false;
                             term.resetTerminal();
                             if (isNarrowScreen && showEditor && showTerminal) {
                                 setMobilePane("editor");

@@ -3,8 +3,12 @@ import { getRequiredActorKey } from "../middleware/serviceAuth.js";
 import { getSession } from "../services/sessions/sessionStore.js";
 import { replaceWorkspaceFiles } from "../services/workspace/replaceWorkspaceFiles.js";
 
+type WorkspaceSyncEntry =
+    | { kind?: "file"; path: string; content: string }
+    | { kind: "directory"; path: string };
+
 type ReplaceWorkspaceBody = {
-    files?: Array<{ path: string; content: string }>;
+    files?: WorkspaceSyncEntry[];
 };
 
 export const sessionsReplaceWorkspaceRoute: RequestHandler = async (req, res) => {
