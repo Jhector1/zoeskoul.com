@@ -1,6 +1,6 @@
-import type { CodeLanguage } from "@/lib/practice/types";
+import type { WorkspaceLanguage } from "@/lib/practice/types";
 
-export function defaultExt(lang: CodeLanguage): string {
+export function defaultExt(lang: WorkspaceLanguage): string {
     switch (lang) {
         case "python":
             return ".py";
@@ -16,10 +16,12 @@ export function defaultExt(lang: CodeLanguage): string {
             return ".sh";
         case "sql":
             return ".sql";
+        case "web":
+            return ".html";
     }
 }
 
-export function defaultMainFile(lang: CodeLanguage): string {
+export function defaultMainFile(lang: WorkspaceLanguage): string {
     switch (lang) {
         case "python":
             return "main.py";
@@ -35,10 +37,12 @@ export function defaultMainFile(lang: CodeLanguage): string {
             return "main.sh";
         case "sql":
             return "query.sql";
+        case "web":
+            return "index.html";
     }
 }
 
-export function defaultMainCode(lang: CodeLanguage): string {
+export function defaultMainCode(lang: WorkspaceLanguage): string {
     switch (lang) {
         case "python":
             return `print("Hello from Python!")\n`;
@@ -54,7 +58,73 @@ export function defaultMainCode(lang: CodeLanguage): string {
             return `echo "Hello from Bash!"\n`;
         case "sql":
             return `SELECT 1 AS value;\n`;
+        case "web":
+            return `<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web Preview</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <h1>Hello web workspace</h1>
+      <p>Edit HTML, CSS, and JS together.</p>
+      <button id="btn">Click me</button>
+      <div id="out"></div>
+    </main>
+    <script src="./script.js"></script>
+  </body>
+</html>
+`;
     }
+}
+
+export function defaultWebCssCode(): string {
+    return `:root {
+  color-scheme: light dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.app {
+  padding: 24px;
+}
+
+h1 {
+  margin-top: 0;
+}
+
+button {
+  padding: 10px 14px;
+  cursor: pointer;
+}
+
+#out {
+  margin-top: 12px;
+  font-weight: 700;
+}
+`;
+}
+
+export function defaultWebJsCode(): string {
+    return `const btn = document.getElementById("btn");
+const out = document.getElementById("out");
+
+if (btn && out) {
+  btn.addEventListener("click", () => {
+    out.textContent = "Button clicked";
+  });
+}
+`;
 }
 
 export function defaultSqlSchemaCode(): string {

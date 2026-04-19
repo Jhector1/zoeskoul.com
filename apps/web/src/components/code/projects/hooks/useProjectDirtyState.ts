@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import type { WorkspaceStateV2 } from "@/components/ide/types";
-import type { CodeLanguage } from "@/lib/practice/types";
+import type { WorkspaceLanguage } from "@/lib/practice/types";
 
 function snapshotOfWorkspace(ws: WorkspaceStateV2 | null | undefined) {
     return JSON.stringify(ws ?? null);
@@ -10,10 +10,10 @@ function snapshotOfWorkspace(ws: WorkspaceStateV2 | null | undefined) {
 
 export function useProjectDirtyState(
     currentWorkspace: WorkspaceStateV2 | null,
-    language: CodeLanguage,
+    language: WorkspaceLanguage,
 ) {
     const [savedSnapshot, setSavedSnapshot] = useState<string | null>(null);
-    const [baselineLanguage, setBaselineLanguage] = useState<CodeLanguage>(language);
+    const [baselineLanguage, setBaselineLanguage] = useState<WorkspaceLanguage>(language);
 
     const currentSnapshot = useMemo(
         () => snapshotOfWorkspace(currentWorkspace),

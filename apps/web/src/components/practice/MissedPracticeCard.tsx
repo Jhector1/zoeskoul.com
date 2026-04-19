@@ -2,7 +2,7 @@
 
 import React, { useEffect, useMemo, useRef } from "react";
 import MathMarkdown from "@/components/markdown/MathMarkdown";
-import type { CodeLanguage, Exercise } from "@/lib/practice/types";
+import type { WorkspaceLanguage, Exercise } from "@/lib/practice/types";
 import type { VectorPadState } from "@/components/vectorpad/types";
 import { defaultVectorPadState } from "@/components/vectorpad/defaultState";
 import ExerciseRenderer from "./ExerciseRenderer";
@@ -14,7 +14,7 @@ import { buildCorrectItemFromExpected } from "@/lib/practice/runtime";
 import { useTranslations } from "next-intl";
 import { resolveDeepTagged } from "@/i18n/resolveDeepTagged";
 import { useTaggedT } from "@/i18n/tagged";
-import {TerminalRunnerLanguage} from "@zoeskoul/code-contracts";
+import {RunnerLanguage} from "@zoeskoul/code-contracts";
 
 function normalizeMath(md: string) {
   const s = String(md ?? "");
@@ -117,7 +117,7 @@ function ReadOnlyPracticeCard({
     const code = typeof ci.code === "string" ? ci.code : null;
     if (!code) return null;
 
-    const language = (ci.codeLang ?? (q as any).codeLang) as TerminalRunnerLanguage;
+    const language = (ci.codeLang ?? (q as any).codeLang) as RunnerLanguage;
     const stdin =
         typeof ci.codeStdin === "string" ? ci.codeStdin : ((q as any).codeStdin ?? "");
     return { language, code, stdin };
@@ -188,7 +188,7 @@ function ReadOnlyPracticeCard({
                   exercise={exercise as any}
                   code={(q as any).code ?? ""}
                   stdin={(q as any).codeStdin ?? ""}
-                  language={(((q as any).codeLang ?? "python") as TerminalRunnerLanguage)}
+                  language={(((q as any).codeLang ?? "python") as RunnerLanguage)}
                   onChangeCode={() => {}}
                   onChangeStdin={() => {}}
                   onChangeLanguage={() => {}}

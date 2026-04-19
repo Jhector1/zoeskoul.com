@@ -1,7 +1,7 @@
 import type { RunResult } from "@/lib/code/types";
-import type { CodeLanguage, SqlDialect } from "@/lib/practice/types";
-import {CodeRunnerRuntime} from "@/components/code/runner/runtime";
-import {TerminalRunnerLanguage, InteractiveLanguage} from "@zoeskoul/code-contracts";
+import type { WorkspaceLanguage, SqlDialect } from "@/lib/practice/types";
+import { CodeRunnerRuntime } from "@/components/code/runner/runtime";
+import { InteractiveLanguage } from "@zoeskoul/code-contracts";
 
 export type TerminalDock = "bottom" | "right";
 
@@ -23,12 +23,9 @@ export type OnRunArgs =
     code: string;
     stdin?: string;
     sqlDialect: SqlDialect;
-
     sqlSchemaSql?: string;
     sqlSeedSql?: string;
-
     setupSql?: string;
-
     datasetId?: string;
     signal?: AbortSignal;
 };
@@ -36,8 +33,8 @@ export type OnRunArgs =
 export type OnRun = (args: OnRunArgs) => Promise<RunResult>;
 
 export type ControlledProps = {
-    language: CodeLanguage;
-    onChangeLanguage: (l: TerminalRunnerLanguage) => void;
+    language: WorkspaceLanguage;
+    onChangeLanguage: (l: WorkspaceLanguage) => void;
 
     code: string;
     onChangeCode: (code: string) => void;
@@ -50,7 +47,7 @@ export type ControlledProps = {
 };
 
 export type UncontrolledProps = {
-    initialLanguage?: TerminalRunnerLanguage;
+    initialLanguage?: WorkspaceLanguage;
     initialCode?: string;
 
     initialSqlDialect?: SqlDialect;
@@ -60,17 +57,20 @@ export type UncontrolledProps = {
 };
 
 export type CodeRunnerFrame = "card" | "plain";
-//
+
 export type RunnerState =
     | "idle"
     | "starting"
     | "running"
     | "awaiting_input"
     | "canceling";
+
 type BeforeRunFn = () => void | Promise<void>;
+
 export type CommonProps = {
     runtime?: CodeRunnerRuntime;
-    language?: TerminalRunnerLanguage;
+    language?: WorkspaceLanguage;
+    editorLanguage?: string;
     code?: string;
     stdin?: string;
     isAuthenticated?: boolean;
@@ -82,12 +82,6 @@ export type CommonProps = {
     hintMarkdown?: string;
     editorModelKey?: string;
 
-    /**
-     * Preserve the current editor contents when switching languages,
-     * including the empty string.
-     *
-     * DEFAULT_CODE should only be used on first mount or explicit Reset.
-     */
     preserveCodeOnLanguageSwitch?: boolean;
 
     showHeaderBar?: boolean;
@@ -95,8 +89,8 @@ export type CommonProps = {
     showTerminal?: boolean;
     showHint?: boolean;
 
-    fixedLanguage?: TerminalRunnerLanguage;
-    allowedLanguages?: TerminalRunnerLanguage[];
+    fixedLanguage?: WorkspaceLanguage;
+    allowedLanguages?: WorkspaceLanguage[];
     showLanguagePicker?: boolean;
 
     fixedSqlDialect?: SqlDialect;
@@ -105,9 +99,7 @@ export type CommonProps = {
 
     sqlSchemaSql?: string;
     sqlSeedSql?: string;
-
     sqlSetupSql?: string;
-
     sqlDatasetId?: string;
 
     allowReset?: boolean;
@@ -120,7 +112,7 @@ export type CommonProps = {
 
     showEditorThemeToggle?: boolean;
     showTerminalDockToggle?: boolean;
-    onBeforeRun?:BeforeRunFn;
+    onBeforeRun?: BeforeRunFn;
     onRun?: OnRun;
 };
 
@@ -133,42 +125,3 @@ export function isControlled(
 ): p is CommonProps & ControlledProps {
     return (p as any).code !== undefined && typeof (p as any).onChangeCode === "function";
 }
-
-
-
-// export type ExecutionBackend = "pty" | "judge0";
-// export type TerminalView = "plain" | "xterm" | "auto";
-//
-// export type CodeRunnerRuntime = {
-//     backend: ExecutionBackend;
-//     terminalView?: TerminalView;
-// };
-
-// export type TerminalChunk = {
-//     id: number;
-//     kind: "pty" | "err" | "sys";
-//     data: string;
-// // };
-//
-// export type RunnerState =
-//     | "idle"
-//     | "starting"
-//     | "running"
-//     | "awaiting_input"
-//     | "canceling";
-//
-// export type RunnerController = {
-//     terminalFeed: TerminalChunk[];
-//     inputEnabled: boolean;
-//     busy: boolean;
-//     runState: RunnerState;
-//     lastResult: any | null;
-//     lastRunLanguage: string | null;
-//
-//     startRun: () => Promise<void>;
-//     cancelRun: () => Promise<void> | void;
-//     resetTerminal: () => void;
-//
-//     sendTerminalData: (data: string) => void;
-//     sendTerminalResize: (cols: number, rows: number) => void;
-// };

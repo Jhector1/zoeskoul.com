@@ -4,7 +4,7 @@ import FullIDE from "@/components/ide/fullide/FullIDE";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "@/i18n/navigation";
 import { LangRail, LANGS } from "@/components/ide/lang/LangRail";
-import { CodeLanguage } from "@/lib/practice/types";
+import { WorkspaceLanguage } from "@/lib/practice/types";
 import { cn } from "@/components/ide/utils";
 import { useAuthHref } from "@/hooks/useAuthHref";
 import BashTerminal from "@/components/code/runner/components/BashTerminal";
@@ -142,20 +142,20 @@ export default function ProgrammingIdeSandbox({
                                                   lessonLabel = "Lesson",
                                                   access,
                                               }: {
-    initialLanguage?: CodeLanguage;
+    initialLanguage?: WorkspaceLanguage;
     initialSurfaceMode?: SurfaceMode;
     shellHref?: string;
     toolSlug?: string;
     title?: string;
-    routeLanguageMap?: Partial<Record<CodeLanguage, string>>;
+    routeLanguageMap?: Partial<Record<WorkspaceLanguage, string>>;
     lessonHref?: string;
     lessonLabel?: string;
     access: ProgrammingSandboxAccess;
 }) {
     const router = useRouter();
 
-    const [lang, setLang] = useState<CodeLanguage>(initialLanguage);
-    const [railCollapsed, setRailCollapsed] = useState(false);
+    const [lang, setLang] = useState<WorkspaceLanguage>(initialLanguage);
+    const [railCollapsed, setRailCollapsed] = useState(true);
     const [ideReady, setIdeReady] = useState(false);
     const [surfaceMode, setSurfaceMode] = useState<SurfaceMode>(initialSurfaceMode);
 
@@ -205,7 +205,7 @@ export default function ProgrammingIdeSandbox({
     const authHref = useAuthHref();
     const shellRequiresLogin = !access.hasUser;
 
-    const handleLanguageChange = (next: CodeLanguage) => {
+    const handleLanguageChange = (next: WorkspaceLanguage) => {
         if (next === lang && surfaceMode === "code") return;
 
         clearReadyTimer();
@@ -336,7 +336,7 @@ export default function ProgrammingIdeSandbox({
                                             <button
                                                 key={item.id}
                                                 type="button"
-                                                onClick={() => handleLanguageChange(item.id as CodeLanguage)}
+                                                onClick={() => handleLanguageChange(item.id as WorkspaceLanguage)}
                                                 aria-pressed={selected}
                                                 className={cn(
                                                     "shrink-0 whitespace-nowrap rounded-lg border px-3 py-2 text-xs font-extrabold transition-colors",

@@ -9,8 +9,6 @@ import React, {
     useState,
 } from "react";
 import dynamic from "next/dynamic";
-import { monacoLang } from "../utils/monaco";
-import { CodeLanguage } from "@/lib/practice/types";
 import { cn } from "@/components/ide/utils";
 import { editor } from "monaco-editor";
 
@@ -19,18 +17,75 @@ const Monaco = dynamic(() => import("@monaco-editor/react"), { ssr: false });
 type RunnerFrame = "plain" | "card";
 type MobileEditMode = "auto" | "always" | "never";
 
-function extForLang(lang: CodeLanguage) {
-    switch (lang) {
+function normalizeEditorLanguage(lang: string) {
+    const value = String(lang ?? "").toLowerCase();
+
+    switch (value) {
+        case "python":
+            return "python";
+        case "java":
+            return "java";
+        case "javascript":
+        case "js":
+            return "javascript";
+        case "typescript":
+        case "ts":
+            return "typescript";
+        case "html":
+        case "htm":
+        case "web":
+            return "html";
+        case "css":
+            return "css";
+        case "json":
+            return "json";
+        case "sql":
+            return "sql";
+        case "c":
+            return "c";
+        case "cpp":
+        case "c++":
+            return "cpp";
+        case "bash":
+        case "shell":
+        case "sh":
+            return "shell";
+        default:
+            return "plaintext";
+    }
+}
+
+function extForLang(lang: string) {
+    const value = String(lang ?? "").toLowerCase();
+
+    switch (value) {
         case "python":
             return "py";
         case "java":
             return "java";
         case "javascript":
+        case "js":
             return "js";
+        case "typescript":
+        case "ts":
+            return "ts";
+        case "html":
+        case "htm":
+        case "web":
+            return "html";
+        case "css":
+            return "css";
+        case "json":
+            return "json";
         case "c":
             return "c";
         case "cpp":
+        case "c++":
             return "cpp";
+        case "bash":
+        case "shell":
+        case "sh":
+            return "sh";
         case "sql":
             return "sql";
         default:
@@ -51,14 +106,14 @@ function sanitizePathPart(x: string) {
 function buildModelPath(args: {
     modelKey?: string;
     instanceKey: string;
-    lang: CodeLanguage;
+    lang: string;
 }) {
     const base = sanitizePathPart(args.modelKey || args.instanceKey);
     return `inmemory://zoeskoul-runner/${base}.${extForLang(args.lang)}`;
 }
 
 export default function EditorPane(props: {
-    lang: CodeLanguage;
+    lang: string;
     code: string;
     onChange: (v: string) => void;
     theme: "vs" | "vs-dark";
@@ -95,13 +150,15 @@ export default function EditorPane(props: {
     const [mobileEditing, setMobileEditing] = useState(false);
     const [needsMobileEditToggle, setNeedsMobileEditToggle] = useState(false);
 
+    const normalizedLang = useMemo(() => normalizeEditorLanguage(lang), [lang]);
+
     const path = useMemo(() => {
         return buildModelPath({
             modelKey,
             instanceKey: instanceKeyRef.current,
-            lang,
+            lang: normalizedLang,
         });
-    }, [modelKey, lang]);
+    }, [modelKey, normalizedLang]);
 
     useEffect(() => {
         if (typeof window === "undefined" || !window.matchMedia) return;
@@ -314,7 +371,7 @@ export default function EditorPane(props: {
                 <Monaco
                     height={height}
                     path={path}
-                    language={monacoLang(lang)}
+                    language={normalizedLang}
                     defaultValue={String(code ?? "")}
                     theme={theme}
                     saveViewState

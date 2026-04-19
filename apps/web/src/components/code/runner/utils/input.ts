@@ -2,9 +2,9 @@ import { extractInputPromptsPython, countPythonInputs } from "./input.python";
 import { extractJavaPrintPrompts, countJavaInputs } from "./input.java";
 import { extractCPrintfPrompts, countCInputs } from "./input.c";
 import { extractCppCoutPrompts, countCppInputs } from "./input.cpp";
-import type { CodeLanguage } from "@/lib/practice/types";
+import type { WorkspaceLanguage } from "@/lib/practice/types";
 
-export function inferInputPlan(lang: CodeLanguage, code: string) {
+export function inferInputPlan(lang: WorkspaceLanguage, code: string) {
     if (lang === "sql") {
         return { expected: 0, prompts: [] as string[] };
     }

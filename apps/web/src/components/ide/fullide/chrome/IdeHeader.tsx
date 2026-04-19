@@ -3,7 +3,7 @@
 import Link from "next/link";
 
 import ProjectSwitcherButton from "@/components/code/projects/ProjectSwitcherButton";
-import type { CodeLanguage, SqlDialect } from "@/lib/practice/types";
+import type { WorkspaceLanguage, SqlDialect } from "@/lib/practice/types";
 
 import { IDE_LANGUAGES } from "../../constants";
 import { SQL_DIALECT_LABEL } from "../../constants";
@@ -109,10 +109,10 @@ export default function IdeHeader({
                                   }: {
     isDesktop: boolean;
     showTopLanguageButtons: boolean;
-    language: CodeLanguage;
+    language: WorkspaceLanguage;
     sqlDialect: SqlDialect;
     onChangeSqlDialect: (dialect: SqlDialect) => void;
-    onChangeLanguage: (language: CodeLanguage) => void;
+    onChangeLanguage: (language: WorkspaceLanguage) => void;
     onBack: () => void;
     onOpenFiles: () => void;
     onOpenProjects: () => void;

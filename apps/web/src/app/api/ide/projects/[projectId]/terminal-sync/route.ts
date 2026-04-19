@@ -16,6 +16,7 @@ import {
     toPrismaJson,
     toWorkspaceAccessFromProjectGate,
 } from "@/lib/projects/projectRouteUtils";
+import {isWorkspaceLanguage} from "@/components/ide/workspaceHook/workspace.persistence";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -166,7 +167,15 @@ export async function POST(
         });
 
         const access = toWorkspaceAccessFromProjectGate(gate);
-        const policy = resolveWorkspacePolicy(access);
+
+        if (!isWorkspaceLanguage(existing.language)) {
+            return jsonNoStore(
+                { ok: false, error: `Unsupported project language: ${existing.language}` },
+                400,
+            );
+        }
+
+        const policy = resolveWorkspacePolicy(access, existing.language);
         const validationError = validateWorkspaceNodes(nextWorkspace.nodes, policy);
 
         if (validationError) {

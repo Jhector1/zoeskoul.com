@@ -9,7 +9,7 @@ import React, {
     useRef,
     useState,
 } from "react";
-import {CodeLanguage, type SqlDialect} from "@/lib/practice/types";
+import {WorkspaceLanguage, type SqlDialect} from "@/lib/practice/types";
 import type { CodeFeedback } from "@/lib/code/feedback/types";
 
 type SqlTableSnapshot = {
@@ -25,7 +25,7 @@ type SqlTableSnapshot = {
 type SqlTableSnapshots = Record<string, SqlTableSnapshot>;
 
 export type RegisterArgs = {
-    lang: CodeLanguage;
+    lang: WorkspaceLanguage;
     code: string;
     stdin?: string;
 
@@ -167,7 +167,7 @@ export function ReviewToolsProvider({
 
         const next: RegisterArgs = {
             ...cur,
-            lang: (patch?.codeLang ?? cur.lang) as CodeLanguage,
+            lang: (patch?.codeLang ?? cur.lang) as WorkspaceLanguage,
             code: typeof patch?.code === "string" ? patch.code : cur.code,
             stdin:
                 typeof patch?.codeStdin === "string"

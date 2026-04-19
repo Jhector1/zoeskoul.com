@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback } from "react";
-import type { SqlDialect, CodeLanguage } from "@/lib/practice/types";
+import type { SqlDialect, WorkspaceLanguage } from "@/lib/practice/types";
 import type { RunResult } from "@/lib/code/types";
 import type { ExecutionBackend } from "@/components/code/runner/runtime";
 import { runViaApi } from "@/lib/code/runClient";

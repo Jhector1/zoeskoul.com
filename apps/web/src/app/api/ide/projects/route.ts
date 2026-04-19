@@ -72,7 +72,7 @@ export async function POST(req: Request) {
 
         const body = parseSaveProjectRequest(await req.json());
         const access = toWorkspaceAccessFromProjectGate(gate);
-        const policy = resolveWorkspacePolicy(access);
+        const policy = resolveWorkspacePolicy(access, body.language);
         const error = validateWorkspaceNodes(body.workspace.nodes, policy);
 
         if (error) {

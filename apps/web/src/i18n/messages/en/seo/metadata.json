@@ -62,7 +62,14 @@
 
 
 
-
+      "online-web-editor": {
+        "title": "Online HTML CSS JS Editor — {appName}",
+        "description": "Write HTML, CSS, and JavaScript online with live preview in {appName}.",
+        "ogTitle": "Online HTML CSS JS Editor — {appName}",
+        "ogDescription": "Build and preview HTML, CSS, and JavaScript online with {appName}.",
+        "twitterTitle": "Online HTML CSS JS Editor — {appName}",
+        "twitterDescription": "Write HTML, CSS, and JavaScript online with live preview in {appName}."
+      },
 
 
         "legal-index": {

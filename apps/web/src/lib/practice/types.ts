@@ -1,5 +1,5 @@
 import {PracticeKind} from "@prisma/client";
-import {CodeLanguage} from "@zoeskoul/code-contracts"
+import {WorkspaceLanguage} from "@zoeskoul/code-contracts"
 // src/lib/practice/types.ts
 export type Difficulty = "easy" | "medium" | "hard";
 
@@ -121,7 +121,7 @@ export type CodeExpectedExample =
 export type CodeInputExercise = ExerciseBase & {
     kind: "code_input";
 
-    language?: CodeLanguage;
+    language?: WorkspaceLanguage;
     starterCode?: string;
     starterStdin?: string;
     stdinHint?: string;
@@ -247,7 +247,7 @@ export type SubmitAnswer =
     | { kind: "matrix_input"; values: number[][] }
     | {
     kind: "code_input";
-    language?: CodeLanguage;
+    language?: WorkspaceLanguage;
     code: string;
     stdin?: string;
 }
@@ -298,4 +298,4 @@ export type ValidateResponse = {
 export type PoolKind = PracticeKind;
 export type SqlDialect = "postgres" | "mysql" | "sqlite" | "mssql";
 
-export type {CodeLanguage}
+export type {WorkspaceLanguage}

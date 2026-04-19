@@ -895,9 +895,12 @@ export function useIdeProjectSession({
 
     const executeStartBlankProject = useCallback(() => {
         const base = createDefaultStateForLanguage(language);
-        const blankWorkspace = access.canUseMultiFile
-            ? base
-            : buildSingleFileWorkspace(language, base);
+        const blankWorkspace =
+            language === "web"||language=="sql"
+                ? base
+                : access.canUseMultiFile
+                    ? base
+                    : buildSingleFileWorkspace(language, base);
 
         if (typeof resetWorkspaceForLanguage === "function") {
             resetWorkspaceForLanguage(language);
@@ -908,7 +911,7 @@ export function useIdeProjectSession({
         clearProjectSessionMeta(sessionKey);
         resetLanguageScopedProjectState();
         clearSavedBaseline();
-        setToast({kind: "success", text: "Started a new local project."});
+        setToast({ kind: "success", text: "Started a new local project." });
     }, [
         access.canUseMultiFile,
         language,

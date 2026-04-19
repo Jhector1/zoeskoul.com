@@ -1,26 +1,103 @@
 import { z } from "zod";
 
-export type CodeLanguage =
-    | "python"
-    | "java"
-    | "javascript"
-    | "c"
-    | "cpp"
-    | "sql"
-    | "bash";
+export const WORKSPACE_LANGUAGES = [
+    "python",
+    "java",
+    "javascript",
+    "c",
+    "cpp",
+    "sql",
+    "bash",
+    "web",
+] as const;
 
-export type InteractiveLanguage = Exclude<CodeLanguage, "sql" | "bash">;
-export type TerminalRunnerLanguage = Exclude<CodeLanguage, "bash">;
-export type ShellLanguage = "bash";
-export type NonSqlCodeLanguage = Exclude<CodeLanguage, "sql">;
+export type WorkspaceLanguage = (typeof WORKSPACE_LANGUAGES)[number];
 
-export const interactiveLanguageSchema = z.enum([
+export const RUNNER_LANGUAGES = [
+    "python",
+    "java",
+    "javascript",
+    "c",
+    "cpp",
+    "sql",
+] as const;
+
+export type RunnerLanguage = (typeof RUNNER_LANGUAGES)[number];
+
+export const RUNNER_CODE_LANGUAGES = [
+    "python",
+    "java",
+    "javascript",
+    "c",
+    "cpp",
+] as const;
+
+export type RunnerCodeLanguage = (typeof RUNNER_CODE_LANGUAGES)[number];
+
+export const INTERACTIVE_LANGUAGES = [
     "python",
     "javascript",
     "java",
     "c",
     "cpp",
-]);
+] as const;
+
+export type InteractiveLanguage = (typeof INTERACTIVE_LANGUAGES)[number];
+
+export const SHELL_LANGUAGES = ["bash"] as const;
+export type ShellLanguage = (typeof SHELL_LANGUAGES)[number];
+
+export const WEB_LANGUAGES = ["web"] as const;
+export type WebLanguage = (typeof WEB_LANGUAGES)[number];
+
+export const SQL_LANGUAGES = ["sql"] as const;
+export type SqlLanguage = (typeof SQL_LANGUAGES)[number];
+
+/**
+ * Workspace languages that use a normal file-based starter workspace.
+ * This includes bash, because it behaves like a single-file script workspace.
+ */
+export type FileWorkspaceLanguage = Exclude<WorkspaceLanguage, "sql" | "web">;
+
+export const workspaceLanguageSchema = z.enum(WORKSPACE_LANGUAGES);
+export const runnerLanguageSchema = z.enum(RUNNER_LANGUAGES);
+export const interactiveLanguageSchema = z.enum(INTERACTIVE_LANGUAGES);
+
+export function isWorkspaceLanguage(value: unknown): value is WorkspaceLanguage {
+    return typeof value === "string" && (WORKSPACE_LANGUAGES as readonly string[]).includes(value);
+}
+
+export function isRunnerLanguage(value: unknown): value is RunnerLanguage {
+    return typeof value === "string" && (RUNNER_LANGUAGES as readonly string[]).includes(value);
+}
+
+export function isRunnerCodeLanguage(value: unknown): value is RunnerCodeLanguage {
+    return typeof value === "string" && (RUNNER_CODE_LANGUAGES as readonly string[]).includes(value);
+}
+
+export function isInteractiveLanguage(value: unknown): value is InteractiveLanguage {
+    return typeof value === "string" && (INTERACTIVE_LANGUAGES as readonly string[]).includes(value);
+}
+
+export function isShellLanguage(value: unknown): value is ShellLanguage {
+    return value === "bash";
+}
+
+export function isWebLanguage(value: unknown): value is WebLanguage {
+    return value === "web";
+}
+
+export function isSqlLanguage(value: unknown): value is SqlLanguage {
+    return value === "sql";
+}
+
+/**
+ * Backward-compat aliases during migration.
+ * Remove later once the codebase fully uses the clearer names above.
+ */
+export type CodeLanguage = WorkspaceLanguage;
+export type TerminalRunnerLanguage = RunnerLanguage;
+export type NonSqlWorkspaceLanguage = FileWorkspaceLanguage;
 
 export const fileEntrySchema = z.object({
     kind: z.literal("file").optional(),

@@ -8,7 +8,7 @@ import {
     PROGRAMMING_TOOL_ORDER,
     type SandboxToolEntry,
 } from "@/lib/sandbox/toolRegistry";
-import type { CodeLanguage } from "@/lib/practice/types";
+import type { WorkspaceLanguage } from "@/lib/practice/types";
 
 export type SandboxAccess = {
     hasUser: boolean;
@@ -47,13 +47,13 @@ export default function SandboxToolClient({
     access: SandboxAccess;
 }) {
     if (entry.kind === "programming") {
-        const routeLanguageMap: Partial<Record<CodeLanguage, string>> =
+        const routeLanguageMap: Partial<Record<WorkspaceLanguage, string>> =
             Object.fromEntries(
                 PROGRAMMING_TOOL_ORDER.map((tool) => [
                     tool,
                     buildProgrammingToolHref(locale, tool),
                 ]),
-            );
+            ) as Partial<Record<WorkspaceLanguage, string>>;
 
         const shellHref = `/${locale}/sandbox/programming/shell`;
         const localizedLessonHref = entry.lessonPath
@@ -62,7 +62,7 @@ export default function SandboxToolClient({
 
         return (
             <ProgrammingSandbox
-                initialLanguage={(entry.initialLanguage ?? "python") as CodeLanguage}
+                initialLanguage={(entry.initialLanguage ?? "python") as WorkspaceLanguage}
                 initialSurfaceMode={entry.toolSlug === "shell" ? "shell" : "code"}
                 shellHref={shellHref}
                 toolSlug={entry.toolSlug}

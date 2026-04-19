@@ -1,4 +1,4 @@
-import type { CodeLanguage, SqlDialect } from "@/lib/practice/types";
+import type { WorkspaceLanguage, SqlDialect } from "@/lib/practice/types";
 
 export const SQL_DIALECT_LABEL: Record<SqlDialect, string> = {
   postgres: "PostgreSQL",
@@ -14,7 +14,7 @@ export const IDE_LANGUAGES = [
   "c",
   "cpp",
   "sql",
-] as const satisfies readonly CodeLanguage[];
+] as const satisfies readonly WorkspaceLanguage[];
 
 export const ACTION_BTN_CLASS = "ui-btn ui-btn-secondary";
 export const CHIP_BTN_CLASS =

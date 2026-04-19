@@ -11,14 +11,14 @@ import type {
     Toast,
     WorkspaceStateV2,
 } from "../types";
-import type { CodeLanguage } from "@/lib/practice/types";
+import type { WorkspaceLanguage } from "@/lib/practice/types";
 import type { UseIdeWorkspaceOpts, UseIdeWorkspaceResult } from "./workspace.types";
 
 import { findFile, pathOf } from "../fsTree";
 import { ALL_LANGUAGES, DEFAULT_ACCESS, SAVE_DEBOUNCE_MS } from "./workspace.constants";
 import {
     STORAGE_KEY_V2,
-    isCodeLanguage,
+    isWorkspaceLanguage,
     loadWorkspaceForLanguage as loadWorkspaceForLanguageRaw,
     readWorkspaceMeta,
     saveWorkspaceForLanguage as saveWorkspaceForLanguageRaw,
@@ -62,7 +62,7 @@ function buildEphemeralLocalWorkspaceId() {
 }
 
 type WorkspaceHistorySnapshot = {
-    language: CodeLanguage;
+    language: WorkspaceLanguage;
     nodes: FSNode[];
     openTabs: NodeId[];
     activeFileId: NodeId;
@@ -139,10 +139,16 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
     const forcedLanguage = opts?.forcedLanguage;
     const resetOnForcedLanguageChange = !!opts?.resetOnForcedLanguageChange;
     const access = opts?.access ?? DEFAULT_ACCESS;
-    const policy = useMemo<IdeWorkspacePolicy>(
-        () => opts?.policy ?? resolveWorkspacePolicy(access),
-        [opts?.policy, access],
+
+    const [language, setLanguageState] = useState<WorkspaceLanguage>(
+        forcedLanguage ?? "python",
     );
+
+    const policy = useMemo<IdeWorkspacePolicy>(
+        () => opts?.policy ?? resolveWorkspacePolicy(access, language),
+        [opts?.policy, access, language],
+    );
+
     const draftStorageMode = opts?.draftStorageMode ?? "local";
     const initialWorkspace = opts?.initialWorkspace ?? null;
 
@@ -161,11 +167,10 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
         return "anonymous";
     }, [opts?.actorKey, access.hasUser]);
 
-    // Local draft persistence must stay independent from cloud project identity.
     const projectId = draftStorageMode === "local" ? null : (opts?.projectId ?? null);
     const scopeKey = opts?.scopeKey ?? null;
 
-    const [language, setLanguageState] = useState<CodeLanguage>("python");
+    // const [language, setLanguageState] = useState<WorkspaceLanguage>("python");
     const [nodes, setNodes] = useState<FSNode[]>([]);
     const [openTabs, setOpenTabs] = useState<NodeId[]>([]);
     const [activeFileId, setActiveFileId] = useState<NodeId>("");
@@ -182,7 +187,7 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
     const [toast, setToast] = useState<Toast>(null);
 
     const hydratedRef = useRef(false);
-    const prevForcedRef = useRef<CodeLanguage | null>(null);
+    const prevForcedRef = useRef<WorkspaceLanguage | null>(null);
     const hydrateRequestIdRef = useRef(0);
     const completedHydrationIdentityRef = useRef<string>("");
 
@@ -223,6 +228,14 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
         setInlineEdit(null);
         setPendingDeleteId(null);
     }, []);
+
+    const materializeWorkspaceForAccess = useCallback(
+        (nextLanguage: WorkspaceLanguage, base: WorkspaceStateV2) => {
+            if (nextLanguage === "web") return base;
+            return access.canUseMultiFile ? base : buildSingleFileWorkspace(nextLanguage, base);
+        },
+        [access.canUseMultiFile],
+    );
 
     const hydrateWorkspace = useCallback(
         (ws: WorkspaceStateV2) => {
@@ -379,15 +392,13 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
     );
 
     const resetWorkspaceForLanguage = useCallback(
-        (next: CodeLanguage) => {
+        (next: WorkspaceLanguage) => {
             const base = createDefaultStateForLanguage(next);
-            hydrateWorkspace(
-                access.canUseMultiFile ? base : buildSingleFileWorkspace(next, base),
-            );
+            hydrateWorkspace(materializeWorkspaceForAccess(next, base));
             clearTransientUi();
             setStorageHydrated(true);
         },
-        [hydrateWorkspace, clearTransientUi, access.canUseMultiFile],
+        [hydrateWorkspace, clearTransientUi, materializeWorkspaceForAccess],
     );
 
     const currentWorkspace = useMemo<WorkspaceStateV2 | null>(() => {
@@ -410,7 +421,7 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
     currentWorkspaceRef.current = currentWorkspace;
 
     const loadWorkspaceForLanguage = useCallback(
-        async (next: CodeLanguage) =>
+        async (next: WorkspaceLanguage) =>
             await loadWorkspaceForLanguageRaw({
                 baseStorageKey,
                 next,
@@ -438,8 +449,8 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
     );
 
     const switchLanguage = useCallback(
-        (next: CodeLanguage) => {
-            if (!isCodeLanguage(next)) return;
+        (next: WorkspaceLanguage) => {
+            if (!isWorkspaceLanguage(next)) return;
             if (next === language) return;
 
             const requestId = ++hydrateRequestIdRef.current;
@@ -459,9 +470,7 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
                         hydrateWorkspace(loaded);
                     } else {
                         const base = createDefaultStateForLanguage(next);
-                        hydrateWorkspace(
-                            access.canUseMultiFile ? base : buildSingleFileWorkspace(next, base),
-                        );
+                        hydrateWorkspace(materializeWorkspaceForAccess(next, base));
                     }
 
                     clearTransientUi();
@@ -472,9 +481,7 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
                     if (hydrateRequestIdRef.current !== requestId) return;
 
                     const base = createDefaultStateForLanguage(next);
-                    hydrateWorkspace(
-                        access.canUseMultiFile ? base : buildSingleFileWorkspace(next, base),
-                    );
+                    hydrateWorkspace(materializeWorkspaceForAccess(next, base));
 
                     setToast({
                         kind: "error",
@@ -493,7 +500,7 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
             loadWorkspaceForLanguage,
             hydrateWorkspace,
             clearTransientUi,
-            access.canUseMultiFile,
+            materializeWorkspaceForAccess,
         ],
     );
 
@@ -518,18 +525,14 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
 
                 if (draftStorageMode !== "local") {
                     const baseLanguage =
-                        forcedLanguage && isCodeLanguage(forcedLanguage)
+                        forcedLanguage && isWorkspaceLanguage(forcedLanguage)
                             ? forcedLanguage
                             : "python";
                     const base = createDefaultStateForLanguage(baseLanguage);
 
                     if (cancelled || hydrateRequestIdRef.current !== requestId) return;
 
-                    hydrateWorkspace(
-                        access.canUseMultiFile
-                            ? base
-                            : buildSingleFileWorkspace(baseLanguage, base),
-                    );
+                    hydrateWorkspace(materializeWorkspaceForAccess(baseLanguage, base));
                     return;
                 }
 
@@ -549,17 +552,13 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
                         : null) ??
                     "python";
 
-                const initialLanguage = isCodeLanguage(wanted) ? wanted : "python";
+                const initialLanguage = isWorkspaceLanguage(wanted) ? wanted : "python";
 
                 if (forcedLanguage && resetOnForcedLanguageChange) {
                     if (cancelled || hydrateRequestIdRef.current !== requestId) return;
 
                     const base = createDefaultStateForLanguage(forcedLanguage);
-                    hydrateWorkspace(
-                        access.canUseMultiFile
-                            ? base
-                            : buildSingleFileWorkspace(forcedLanguage, base),
-                    );
+                    hydrateWorkspace(materializeWorkspaceForAccess(forcedLanguage, base));
                     return;
                 }
 
@@ -583,28 +582,20 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
                     hydrateWorkspace(ws);
                 } else {
                     const base = createDefaultStateForLanguage(initialLanguage);
-                    hydrateWorkspace(
-                        access.canUseMultiFile
-                            ? base
-                            : buildSingleFileWorkspace(initialLanguage, base),
-                    );
+                    hydrateWorkspace(materializeWorkspaceForAccess(initialLanguage, base));
                 }
             } catch (error) {
                 console.error("[ide] initial hydrate failed", error);
 
                 const fallbackLanguage =
-                    forcedLanguage && isCodeLanguage(forcedLanguage)
+                    forcedLanguage && isWorkspaceLanguage(forcedLanguage)
                         ? forcedLanguage
                         : "python";
 
                 if (cancelled || hydrateRequestIdRef.current !== requestId) return;
 
                 const base = createDefaultStateForLanguage(fallbackLanguage);
-                hydrateWorkspace(
-                    access.canUseMultiFile
-                        ? base
-                        : buildSingleFileWorkspace(fallbackLanguage, base),
-                );
+                hydrateWorkspace(materializeWorkspaceForAccess(fallbackLanguage, base));
 
                 setToast({
                     kind: "error",
@@ -631,12 +622,12 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
         loadWorkspaceForLanguage,
         saveWorkspaceForLanguage,
         hydrateWorkspace,
-        access.canUseMultiFile,
         draftStorageMode,
         actorKey,
         projectId,
         scopeKey,
         hydrationIdentity,
+        materializeWorkspaceForAccess,
     ]);
 
     useEffect(() => {

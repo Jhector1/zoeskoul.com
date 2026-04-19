@@ -1,7 +1,7 @@
 import "server-only";
 
 import type { RunLimits, RunReq, SqlRunLimits } from "@/lib/code/types";
-import type { CodeLanguage, SqlDialect } from "@/lib/practice/types";
+import type { WorkspaceLanguage, SqlDialect } from "@/lib/practice/types";
 import {InteractiveLanguage} from "@zoeskoul/code-contracts";
 
 const CODE_LANGS = new Set<InteractiveLanguage>([

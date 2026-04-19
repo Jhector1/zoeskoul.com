@@ -6,17 +6,18 @@ import {
     SiJavascript,
     SiC,
     SiCplusplus,
+    SiHtml5,
 } from "react-icons/si";
 import { FaJava } from "react-icons/fa6";
 import { TbSql } from "react-icons/tb";
-import { CodeLanguage } from "@/lib/practice/types";
+import { WorkspaceLanguage } from "@/lib/practice/types";
 
 function cn(...cls: Array<string | false | undefined | null>) {
     return cls.filter(Boolean).join(" ");
 }
 
 type LangItem = {
-    id: CodeLanguage;
+    id: WorkspaceLanguage;
     label: string;
     desc: string;
     Icon: React.ComponentType<{ className?: string }>;
@@ -26,14 +27,15 @@ export const LANGS: LangItem[] = [
     { id: "python", label: "Python", desc: "Best for quick practice", Icon: SiPython },
     { id: "java", label: "Java", desc: "OOP + interviews", Icon: FaJava },
     { id: "javascript", label: "JavaScript", desc: "Web scripting", Icon: SiJavascript },
+    { id: "web", label: "Web", desc: "HTML + CSS + JS", Icon: SiHtml5 },
     { id: "c", label: "C", desc: "Low-level fundamentals", Icon: SiC },
     { id: "cpp", label: "C++", desc: "Performance + STL", Icon: SiCplusplus },
     { id: "sql", label: "SQL", desc: "Queries + databases", Icon: TbSql },
 ];
 
 export function LangRail(props: {
-    lang: CodeLanguage;
-    setLang: (l: CodeLanguage) => void;
+    lang: WorkspaceLanguage;
+    setLang: (l: WorkspaceLanguage) => void;
     collapsed: boolean;
     onToggleCollapsed: () => void;
 }) {
@@ -67,14 +69,14 @@ export function LangRail(props: {
                         title={collapsed ? "Expand sidebar" : "Collapse sidebar"}
                         aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
                     >
-            <span
-                className={cn(
-                    "text-sm font-medium transition-transform duration-200",
-                    collapsed ? "rotate-180" : "rotate-0",
-                )}
-            >
-              ‹
-            </span>
+                        <span
+                            className={cn(
+                                "text-sm font-medium transition-transform duration-200",
+                                collapsed ? "rotate-180" : "rotate-0",
+                            )}
+                        >
+                            ‹
+                        </span>
                     </button>
                 </div>
             </div>

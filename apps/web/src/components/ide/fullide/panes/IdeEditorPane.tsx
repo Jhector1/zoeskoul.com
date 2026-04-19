@@ -40,6 +40,22 @@ type Props = {
     isDesktop: boolean;
 };
 
+function resolveEditorLanguage(workspaceLanguage: string, fileName?: string | null) {
+    const lower = String(fileName ?? "").toLowerCase();
+
+    if (workspaceLanguage === "web") {
+        if (lower.endsWith(".html") || lower.endsWith(".htm")) return "html";
+        if (lower.endsWith(".css")) return "css";
+        if (lower.endsWith(".js") || lower.endsWith(".mjs") || lower.endsWith(".cjs")) {
+            return "javascript";
+        }
+        if (lower.endsWith(".json")) return "json";
+        return "html";
+    }
+
+    return workspaceLanguage;
+}
+
 export default function IdeEditorPane({
                                           panelRef,
                                           nodes,
@@ -64,6 +80,8 @@ export default function IdeEditorPane({
                                           isDesktop,
                                           isAuthenticated,
                                       }: Props) {
+    const isWeb = language === "web";
+
     const schemaSql = React.useMemo(() => {
         const file = nodes.find(
             (n: any) =>
@@ -80,9 +98,14 @@ export default function IdeEditorPane({
         return file?.content ?? "";
     }, [nodes]);
 
-    const workspaceTerminalEntries = React.useMemo(() => {
+    const workspaceEntries = React.useMemo(() => {
         return exportWorkspaceEntries(nodes);
     }, [nodes]);
+
+    const editorLanguage = React.useMemo(
+        () => resolveEditorLanguage(language, activeFile?.name),
+        [language, activeFile?.name],
+    );
 
     return (
         <div className="flex h-full min-h-0 min-w-0 flex-col overflow-hidden">
@@ -101,9 +124,10 @@ export default function IdeEditorPane({
                     <div className={cn("h-full overflow-hidden px-2 pt-2", PANEL_CARD_CLASS)}>
                         <CodeRunner
                             frame="plain"
-                            title={isSql ? `SQL · ${title}` : title}
+                            title={isSql ? `SQL · ${title}` : isWeb ? `Web · ${title}` : title}
                             height={runnerHeight}
                             language={language}
+                            editorLanguage={editorLanguage}
                             onChangeLanguage={onChangeLanguage}
                             code={activeFile.content}
                             onChangeCode={onChangeCode}
@@ -114,19 +138,20 @@ export default function IdeEditorPane({
                             showLanguagePicker={false}
                             showSqlDialectPicker
                             allowReset={isDesktop}
+                            allowRun={!isWeb}
                             runtime={runtime}
-                            allowRun
                             showEditorThemeToggle={false}
                             showTerminalDockToggle={isDesktop}
                             resetTerminalOnRun={true}
-                            onRun={isAuthenticated ? onRun : undefined}
+                            onRun={isAuthenticated && !isWeb ? onRun : undefined}
                             isAuthenticated={isAuthenticated}
+                            webPreviewEntries={workspaceEntries}
                             workspaceTerminal={{
-                                enabled: !isSql,
+                                enabled: !isSql && !isWeb,
                                 projectId: projectId ?? undefined,
                                 cwd: "/workspace",
-                                initialFiles: workspaceTerminalEntries,
-                                getWorkspaceFiles: () => workspaceTerminalEntries,
+                                initialFiles: workspaceEntries,
+                                getWorkspaceFiles: () => workspaceEntries,
                                 onTerminalSnapshotFiles: onApplyTerminalSnapshotFiles,
                                 lazy: true,
                                 title: "Terminal",
@@ -137,7 +162,7 @@ export default function IdeEditorPane({
                     </div>
                 ) : (
                     <div className="flex h-full min-h-[280px] items-center justify-center rounded-none border border-dashed border-neutral-300 bg-white p-6 text-sm font-extrabold text-neutral-600 sm:rounded-xl dark:border-white/10 dark:bg-black/30 dark:text-white/70">
-                        {isSql ? "No SQL file selected." : "No file selected."}
+                        {isSql ? "No SQL file selected." : isWeb ? "No web file selected." : "No file selected."}
                     </div>
                 )}
             </div>

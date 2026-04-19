@@ -1,4 +1,4 @@
-import type { CodeLanguage } from "@/lib/practice/types";
+import type { WorkspaceLanguage } from "@/lib/practice/types";
 import type { WorkspaceStateV2 } from "../types";
 import type { DraftStorageMode, WorkspaceMeta } from "./workspace.types";
 import {
@@ -9,11 +9,12 @@ import {
   STORAGE_KEY_V2,
 } from "../storage";
 
-export function isCodeLanguage(v: unknown): v is CodeLanguage {
+export function isWorkspaceLanguage(v: unknown): v is WorkspaceLanguage {
   return (
       v === "python" ||
       v === "java" ||
       v === "javascript" ||
+      v === "web" ||
       v === "c" ||
       v === "cpp" ||
       v === "sql"
@@ -34,7 +35,7 @@ export function readWorkspaceMeta(baseKey: string): WorkspaceMeta | null {
     if (!raw) return null;
 
     const parsed = JSON.parse(raw) as Partial<WorkspaceMeta>;
-    if (!parsed || !isCodeLanguage(parsed.lastLanguage)) return null;
+    if (!parsed || !isWorkspaceLanguage(parsed.lastLanguage)) return null;
 
     return {
       lastLanguage: parsed.lastLanguage,
@@ -59,7 +60,7 @@ export function saveWorkspaceMeta(baseKey: string, meta: WorkspaceMeta) {
 
 export async function loadWorkspaceForLanguage(args: {
   baseStorageKey: string;
-  next: CodeLanguage;
+  next: WorkspaceLanguage;
   draftStorageMode: DraftStorageMode;
   actorKey?: string | null;
   projectId?: string | null;
@@ -124,8 +125,8 @@ export function saveWorkspaceForLanguage(args: {
 
 export function tryMigrateInitialWorkspace(args: {
   baseStorageKey: string;
-  initialLanguage: CodeLanguage;
-  forcedLanguage?: CodeLanguage;
+  initialLanguage: WorkspaceLanguage;
+  forcedLanguage?: WorkspaceLanguage;
   draftStorageMode: DraftStorageMode;
   saveWorkspaceForLanguage: (ws: WorkspaceStateV2 | null) => void;
 }) {

@@ -1,5 +1,5 @@
 import type {
-    CodeLanguage,
+    WorkspaceLanguage,
     Exercise,
     SubmitAnswer,
     TopicSlug,
@@ -176,7 +176,7 @@ export function buildSubmitAnswerFromItem(item: QItem): SubmitAnswer | undefined
 
         const language = String(
             (item as any).codeLang ?? (ex as any).language ?? "python",
-        ) as CodeLanguage;
+        ) as WorkspaceLanguage;
 
         const stdin = String(
             (item as any).codeStdin ?? (item as any).stdin ?? "",

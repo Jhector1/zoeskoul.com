@@ -1,7 +1,7 @@
 // src/lib/practice/generator/engines/python/python_shared/_shared.ts
 import { PracticePurpose } from "@prisma/client";
 
-import type { CodeInputExercise, CodeLanguage, SingleChoiceExercise } from "../../../types";
+import type { CodeInputExercise, WorkspaceLanguage, SingleChoiceExercise } from "../../../types";
 import type { TopicContext } from "../../generatorTypes";
 import type { RNG } from "../../shared/rng";
 import {
@@ -38,7 +38,7 @@ export type CodeTest = {
 
 export type CodeExpected = {
     kind: "code_input";
-    language?: CodeLanguage;
+    language?: WorkspaceLanguage;
     tests: CodeTest[];
     stdin?: string;
     stdout?: string;
@@ -211,4 +211,4 @@ export function makePythonModuleGenerator(args: {
 
 /* -------------------------------- re-exports -------------------------------- */
 
-export type { SingleChoiceExercise, CodeInputExercise, CodeLanguage, TopicBundle };
+export type { SingleChoiceExercise, CodeInputExercise, WorkspaceLanguage, TopicBundle };

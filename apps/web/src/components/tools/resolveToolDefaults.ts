@@ -1,8 +1,8 @@
-import type { CodeLanguage, SqlDialect } from "@/lib/practice/types";
+import type { WorkspaceLanguage, SqlDialect } from "@/lib/practice/types";
 import { DEFAULT_SQL_DIALECT } from "@/components/code/runner/constants";
 
 export type ToolDefaults = {
-    defaultLang: CodeLanguage;
+    defaultLang: WorkspaceLanguage;
     defaultCode: string;
     defaultStdin: string;
     defaultSqlDialect: SqlDialect;
@@ -103,7 +103,7 @@ export function resolveToolDefaults(args: {
     }
 }
 
-function starterFor(lang: CodeLanguage): string {
+function starterFor(lang: WorkspaceLanguage): string {
     switch (lang) {
         case "sql":
             return `SELECT 'Hello SQL' AS message;`;

@@ -1,7 +1,7 @@
 "use client";
 
 import type React from "react";
-import type { CodeLanguage } from "@/lib/practice/types";
+import type { WorkspaceLanguage } from "@/lib/practice/types";
 
 import type {
   FileNode,
@@ -182,7 +182,7 @@ export function toggleFolder(args: {
 export function startNewFile(args: {
   access: IdeWorkspaceAccess;
   policy: IdeWorkspacePolicy;
-  language: CodeLanguage;
+  language: WorkspaceLanguage;
   nodes: FSNode[];
   parentId: NodeId | null;
   setExpanded: Setters["setExpanded"];
@@ -286,7 +286,7 @@ export function requestDelete(args: {
   policy: IdeWorkspacePolicy;
   nodes: FSNode[];
   id: NodeId;
-  language: CodeLanguage;
+  language: WorkspaceLanguage;
   entryFileId: NodeId;
   setPendingDeleteId: Setters["setPendingDeleteId"];
   setToast: Setters["setToast"];
@@ -328,7 +328,7 @@ export function requestDelete(args: {
 export function performDelete(args: {
   nodes: FSNode[];
   id: NodeId;
-  language: CodeLanguage;
+  language: WorkspaceLanguage;
   entryFileId: NodeId;
   setNodes: Setters["setNodes"];
   setOpenTabs: Setters["setOpenTabs"];
@@ -400,7 +400,7 @@ export function commitInlineEdit(args: {
   access: IdeWorkspaceAccess;
   policy: IdeWorkspacePolicy;
   inlineEdit: InlineEdit;
-  language: CodeLanguage;
+  language: WorkspaceLanguage;
   nodes: FSNode[];
   activeFileId: NodeId;
   setNodes: Setters["setNodes"];

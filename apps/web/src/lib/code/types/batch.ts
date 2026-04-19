@@ -1,4 +1,4 @@
-import type { CodeLanguage } from "@/lib/practice/types";
+import type { WorkspaceLanguage } from "@/lib/practice/types";
 import type {FileEntry, InteractiveLanguage, RunLimits} from "./common";
 import type {
     SqlRunReq,

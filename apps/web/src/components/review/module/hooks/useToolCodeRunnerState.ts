@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import type { CodeLanguage, SqlDialect } from "@/lib/practice/types";
+import type { WorkspaceLanguage, SqlDialect } from "@/lib/practice/types";
 import { useDebouncedCommit } from "@/lib/client/persistence/useDebouncedCommit";
 import { useFlushOnPageExit } from "@/lib/client/persistence/useFlushOnPageExit";
 import { DEFAULT_SQL_DIALECT } from "@/components/code/runner/constants";
@@ -13,7 +13,7 @@ import {
 type BoundTarget = { id: string; onPatch: (patch: any) => void };
 
 type ToolSnap = {
-    lang: CodeLanguage;
+    lang: WorkspaceLanguage;
     code: string;
     stdin: string;
 
@@ -45,7 +45,7 @@ export function useToolCodeRunnerState(args: {
     viewTid: string;
 
     toolKey?: string;
-    defaultLang?: CodeLanguage;
+    defaultLang?: WorkspaceLanguage;
     defaultCode?: string;
     defaultStdin?: string;
     defaultSqlDialect?: SqlDialect;
@@ -94,7 +94,7 @@ export function useToolCodeRunnerState(args: {
     }, [progress, viewTid, toolKey]);
 
 
-    const initialLang = (saved?.lang as CodeLanguage) ?? defaultLang;
+    const initialLang = (saved?.lang as WorkspaceLanguage) ?? defaultLang;
     const initialCode = typeof saved?.code === "string" ? saved.code : defaultCode;
     const initialStdin = typeof saved?.stdin === "string" ? saved.stdin : defaultStdin;
 
@@ -114,7 +114,7 @@ export function useToolCodeRunnerState(args: {
         defaultSqlDialect,
     });
 
-    const [toolLang, setToolLang0] = useState<CodeLanguage>(initialLang);
+    const [toolLang, setToolLang0] = useState<WorkspaceLanguage>(initialLang);
     const [toolCode, setToolCode0] = useState<string>(initialCode);
     const [toolStdin, setToolStdin0] = useState<string>(initialStdin);
 
@@ -253,7 +253,7 @@ export function useToolCodeRunnerState(args: {
 
         const s = (progress as any)?.topics?.[viewTid]?.toolState?.[toolKey] ?? null;
 
-        const nextLang = (s?.lang as CodeLanguage) ?? defaultLang;
+        const nextLang = (s?.lang as WorkspaceLanguage) ?? defaultLang;
         const nextCode = typeof s?.code === "string" ? s.code : defaultCode;
         const nextStdin = typeof s?.stdin === "string" ? s.stdin : defaultStdin;
 
@@ -324,7 +324,7 @@ export function useToolCodeRunnerState(args: {
     const bindCodeInput = useCallback(
         (args2: {
             id: string;
-            lang: CodeLanguage;
+            lang: WorkspaceLanguage;
             code: string;
             stdin?: string;
             sqlDialect?: SqlDialect;
@@ -412,7 +412,7 @@ export function useToolCodeRunnerState(args: {
         };
     }, [cancel, flushLatest]);
 
-    const setToolLang = useCallback((l: CodeLanguage) => {
+    const setToolLang = useCallback((l: WorkspaceLanguage) => {
         latestSnapRef.current = { ...latestSnapRef.current, lang: l };
         setToolLang0((prev) => (prev === l ? prev : l));
 

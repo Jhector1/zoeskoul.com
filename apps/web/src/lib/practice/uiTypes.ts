@@ -1,5 +1,5 @@
 import type {
-    CodeLanguage,
+    WorkspaceLanguage,
     Exercise,
     TopicSlug,
     ValidateResponse,
@@ -49,7 +49,7 @@ export type QItem = {
     attempts?: number;
 
     code: string;
-    codeLang: CodeLanguage;
+    codeLang: WorkspaceLanguage;
     codeStdin: string;
     stdin?: string;
 

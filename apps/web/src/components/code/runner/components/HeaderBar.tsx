@@ -13,18 +13,19 @@ import {
     FiCode,
     FiSquare,
 } from "react-icons/fi";
-import { SiPython, SiJavascript, SiC, SiCplusplus } from "react-icons/si";
+import { SiPython, SiJavascript, SiC, SiCplusplus, SiHtml5 } from "react-icons/si";
 import { FaJava } from "react-icons/fa";
 import { TbSql } from "react-icons/tb";
-import type { CodeLanguage, SqlDialect } from "@/lib/practice/types";
+import type { WorkspaceLanguage, SqlDialect } from "@/lib/practice/types";
 
 const LANG_META: Record<
-    CodeLanguage,
+    WorkspaceLanguage,
     { label: string; Icon: React.ComponentType<{ className?: string }> }
 > = {
     python: { label: "Python", Icon: SiPython },
     java: { label: "Java", Icon: FaJava },
     javascript: { label: "JavaScript", Icon: SiJavascript },
+    web: { label: "Web", Icon: SiHtml5 },
     c: { label: "C", Icon: SiC },
     cpp: { label: "C++", Icon: SiCplusplus },
     bash: { label: "Bash", Icon: FiTerminal },
@@ -45,12 +46,12 @@ function cx(...xs: Array<string | false | null | undefined>) {
 function IconText({ icon, text }: { icon: React.ReactNode; text: React.ReactNode }) {
     return (
         <span className="inline-flex items-center">
-      <span className="inline-flex @lg:hidden">{icon}</span>
-      <span className="hidden @lg:inline-flex items-center gap-1.5">
-        {icon}
-          <span className="whitespace-nowrap">{text}</span>
-      </span>
-    </span>
+            <span className="inline-flex @lg:hidden">{icon}</span>
+            <span className="hidden @lg:inline-flex items-center gap-1.5">
+                {icon}
+                <span className="whitespace-nowrap">{text}</span>
+            </span>
+        </span>
     );
 }
 
@@ -70,9 +71,9 @@ export default function HeaderBar(props: {
     showDockToggle: boolean;
 
     showPicker: boolean;
-    allowedLangs: CodeLanguage[];
-    lang: CodeLanguage;
-    onSwitchLang: (l: CodeLanguage) => void;
+    allowedLangs: WorkspaceLanguage[];
+    lang: WorkspaceLanguage;
+    onSwitchLang: (l: WorkspaceLanguage) => void;
 
     showSqlDialectPicker: boolean;
     allowedSqlDialects: SqlDialect[];
@@ -208,9 +209,9 @@ export default function HeaderBar(props: {
 
                 {lang === "sql" && showSqlDialectPicker ? (
                     <label className="flex items-center gap-1.5">
-            <span className="hidden lg:block text-[11px] font-medium text-neutral-500 dark:text-white/45">
-              Dialect
-            </span>
+                        <span className="hidden lg:block text-[11px] font-medium text-neutral-500 dark:text-white/45">
+                            Dialect
+                        </span>
                         <select
                             value={sqlDialect}
                             onChange={(e) => onSwitchSqlDialect(e.target.value as SqlDialect)}

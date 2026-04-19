@@ -11,7 +11,7 @@ export { default } from "./ReviewModulePage";
 //
 // import type { ReviewModule, ReviewCard } from "@/lib/subjects/types";
 // import type { SavedQuizState, ReviewProgressState } from "@/lib/subjects/progressTypes";
-// import { CodeLanguage } from "@/lib/practice/types";
+// import { WorkspaceLanguage } from "@/lib/practice/types";
 //
 // import { useReviewProgress } from "@/components/review/module/hooks/useReviewProgress";
 // import { useAssignmentStatus } from "@/components/review/module/hooks/useAssignmentStatus";
@@ -1795,7 +1795,7 @@ export { default } from "./ReviewModulePage";
 //                                                     boundId={tool.boundId}
 //                                                     rightBodyRef={tool.rightBodyRef}
 //                                                     codeRunnerRegionH={tool.codeRunnerRegionH}
-//                                                     toolLang={tool.toolLang as CodeLanguage}
+//                                                     toolLang={tool.toolLang as WorkspaceLanguage}
 //                                                     toolCode={tool.toolCode}
 //                                                     toolStdin={tool.toolStdin}
 //                                                     toolSqlDialect={

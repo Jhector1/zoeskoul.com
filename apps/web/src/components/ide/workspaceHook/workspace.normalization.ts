@@ -1,4 +1,4 @@
-import type { CodeLanguage } from "@/lib/practice/types";
+import type { WorkspaceLanguage } from "@/lib/practice/types";
 
 import type { FileNode, FSNode, WorkspaceStateV2 } from "../types";
 import type { IdeWorkspaceAccess } from "./workspace.types";
@@ -6,33 +6,33 @@ import { uid } from "../utils";
 import { defaultExt } from "../languageDefaults";
 import { buildDefaultWorkspace } from "../storage";
 
-export function createDefaultStateForLanguage(lang: CodeLanguage): WorkspaceStateV2 {
+export function createDefaultStateForLanguage(lang: WorkspaceLanguage): WorkspaceStateV2 {
   return buildDefaultWorkspace(lang);
 }
 
 export function buildSingleFileWorkspace(
-  lang: CodeLanguage,
-  source?: WorkspaceStateV2 | null,
+    lang: WorkspaceLanguage,
+    source?: WorkspaceStateV2 | null,
 ): WorkspaceStateV2 {
   const seed = buildDefaultWorkspace(lang);
 
   const seedMain =
-    seed.nodes.find((n): n is FileNode => n.kind === "file") ??
-    ({
-      id: uid(),
-      kind: "file",
-      name: `main${defaultExt(lang)}`,
-      parentId: null,
-      content: "",
-      createdAt: Date.now(),
-      updatedAt: Date.now(),
-    } satisfies FileNode);
+      seed.nodes.find((n): n is FileNode => n.kind === "file") ??
+      ({
+        id: uid(),
+        kind: "file",
+        name: `main${defaultExt(lang)}`,
+        parentId: null,
+        content: "",
+        createdAt: Date.now(),
+        updatedAt: Date.now(),
+      } satisfies FileNode);
 
   const sourceFile =
-    source?.nodes.find((n): n is FileNode => n.kind === "file" && n.id === source.activeFileId) ??
-    source?.nodes.find((n): n is FileNode => n.kind === "file" && n.id === source.entryFileId) ??
-    source?.nodes.find((n): n is FileNode => n.kind === "file") ??
-    null;
+      source?.nodes.find((n): n is FileNode => n.kind === "file" && n.id === source.activeFileId) ??
+      source?.nodes.find((n): n is FileNode => n.kind === "file" && n.id === source.entryFileId) ??
+      source?.nodes.find((n): n is FileNode => n.kind === "file") ??
+      null;
 
   const file: FileNode = {
     id: seedMain.id,
@@ -58,9 +58,10 @@ export function buildSingleFileWorkspace(
 }
 
 export function normalizeWorkspaceForAccess(
-  ws: WorkspaceStateV2,
-  access: IdeWorkspaceAccess,
+    ws: WorkspaceStateV2,
+    access: IdeWorkspaceAccess,
 ): WorkspaceStateV2 {
+  if (ws.language === "web") return ws;
   if (access.canUseMultiFile) return ws;
 
   const fileCount = ws.nodes.filter((n): n is FileNode => n.kind === "file").length;
@@ -71,7 +72,7 @@ export function normalizeWorkspaceForAccess(
 
 export function fileIdsOf(nodes: FSNode[]) {
   return new Set(
-    nodes.filter((n): n is FileNode => n.kind === "file").map((n) => n.id),
+      nodes.filter((n): n is FileNode => n.kind === "file").map((n) => n.id),
   );
 }
 

@@ -504,7 +504,7 @@ export default function VoiceInputExerciseUI({
 
             // include a bit more context to reduce English drift
             const promptParts = [
-                "CodeLanguage: Haitian Creole / Kreyòl ayisyen. Pa tradui. Kenbe òtograf nòmal.",
+                "WorkspaceLanguage: Haitian Creole / Kreyòl ayisyen. Pa tradui. Kenbe òtograf nòmal.",
                 exercise.hint ? `Sijesyon: ${String(exercise.hint).slice(0, 200)}` : null,
                 "Transkri egzakteman sa w tande a. Pa tradui.",
             ].filter(Boolean);

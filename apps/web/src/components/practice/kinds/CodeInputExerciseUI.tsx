@@ -7,9 +7,8 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import type {
     CodeExpectedExample,
-    CodeLanguage,
     Exercise,
-    SqlDialect,
+    SqlDialect, WorkspaceLanguage,
 } from "@/lib/practice/types";
 import type { RunResult } from "@/lib/code/types";
 import type { CodeFeedback } from "@/lib/code/feedback/types";
@@ -23,7 +22,7 @@ import {
     resolveSqlRunnerConfig,
     type SqlTableSnapshots,
 } from "@/lib/subjects/sql/runtime/resolveSqlRunnerConfig";
-import {TerminalRunnerLanguage} from "@zoeskoul/code-contracts";
+import {isRunnerLanguage, RunnerLanguage} from "@zoeskoul/code-contracts";
 
 type CodeInputExercise = Extract<Exercise, { kind: "code_input" }>;
 
@@ -156,13 +155,13 @@ export default function CodeInputExerciseUI({
     exercise: CodeInputExercise;
     code: string;
     stdin: string;
-    language: TerminalRunnerLanguage;
+    language: RunnerLanguage;
     onChangeCode: (code: string) => void;
     onChangeStdin: (stdin: string) => void;
-    onChangeLanguage: (l: TerminalRunnerLanguage) => void;
+    onChangeLanguage: (l: RunnerLanguage) => void;
     disabled: boolean;
     onRun?: (args: {
-        language: TerminalRunnerLanguage;
+        language: RunnerLanguage;
         code: string;
         stdin: string;
         sqlDialect?: SqlDialect;
@@ -174,7 +173,7 @@ export default function CodeInputExerciseUI({
     }) => Promise<RunResult>;
     checked?: boolean;
     ok?: boolean | null;
-    reviewCorrect?: { language: TerminalRunnerLanguage; code: string; stdin: string } | null;
+    reviewCorrect?: { language: RunnerLanguage; code: string; stdin: string } | null;
     readOnly?: boolean;
     variant?: "embedded" | "tools";
     toolsBound?: boolean;
@@ -232,7 +231,7 @@ export default function CodeInputExerciseUI({
 
     const executeEmbeddedRun = useCallback(
         async (args: {
-            language: TerminalRunnerLanguage;
+            language: RunnerLanguage;
             code: string;
             stdin: string;
         }) => {
@@ -338,7 +337,13 @@ export default function CodeInputExerciseUI({
 
         onSyncTools();
     }, [variant, toolsBound, code, stdin, language, onSyncTools, runFeedbackTick]);
-
+    const handleWorkspaceLanguageChange = useCallback(
+        (next: WorkspaceLanguage) => {
+            if (!isRunnerLanguage(next)) return;
+            onChangeLanguage(next);
+        },
+        [onChangeLanguage],
+    );
     if (variant === "tools") {
         return (
             <div className="grid gap-3">
@@ -429,7 +434,7 @@ export default function CodeInputExerciseUI({
                 showHint={false}
                 showEditorThemeToggle={!readOnly}
                 language={language}
-                onChangeLanguage={onChangeLanguage}
+                onChangeLanguage={handleWorkspaceLanguageChange}
                 fixedLanguage={lockLanguage ? language : undefined}
                 showLanguagePicker={lockLanguage ? false : true}
                 code={code}

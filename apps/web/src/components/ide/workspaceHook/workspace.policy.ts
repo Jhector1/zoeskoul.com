@@ -1,6 +1,7 @@
 
 import type { FSNode } from "../types";
 import type { IdeWorkspaceAccess } from "./workspace.types";
+import {WorkspaceLanguage} from "@zoeskoul/code-contracts";
 
 export type IdeWorkspacePolicy = {
     canCreateFiles: boolean;
@@ -29,8 +30,25 @@ export function bytesOfText(input: string) {
 
 export function resolveWorkspacePolicy(
     access: IdeWorkspaceAccess,
+    lang: WorkspaceLanguage,
 ): IdeWorkspacePolicy {
     if (!access.hasUser) {
+        if (lang === "web" ||lang === "sql") {
+            return {
+                canCreateFiles: false,
+                canCreateFolders: false,
+                canRenameNodes: false,
+                canDeleteNodes: false,
+                canMoveNodes: false,
+                canUploadFiles: false,
+                maxImportFiles: 0,
+                maxUploadFileBytes: 0,
+                maxWorkspaceBytes: 512 * 1024,
+                maxNodes: 3,
+                maxFiles: 3,
+                maxDepth: 1,
+            };
+        }
         return {
             canCreateFiles: false,
             canCreateFolders: false,

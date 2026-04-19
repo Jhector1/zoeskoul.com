@@ -3,7 +3,7 @@
 import React, { useMemo, useState } from "react";
 import type { ProjectSummary } from "@/lib/projects/projectApiTypes";
 import { cn } from "@/components/ide/utils";
-import type { CodeLanguage } from "@/lib/practice/types";
+import type { WorkspaceLanguage } from "@/lib/practice/types";
 
 type ScopeFilter = "all" | "recent" | "personal" | "module" | "assignment" | "template";
 type LanguageFilter = "current" | "all";
@@ -49,7 +49,7 @@ export default function ProjectsDrawer(props: {
     onOpenChange: (open: boolean) => void;
     currentProjectId: string | null;
     currentProjectTitle: string;
-    currentLanguage: CodeLanguage;
+    currentLanguage: WorkspaceLanguage;
     canCreateProjects: boolean;
     loading: boolean;
     error: string | null;

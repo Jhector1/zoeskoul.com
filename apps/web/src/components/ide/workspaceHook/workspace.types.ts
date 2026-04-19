@@ -1,5 +1,5 @@
 import type React from "react";
-import type { CodeLanguage } from "@/lib/practice/types";
+import type { WorkspaceLanguage } from "@/lib/practice/types";
 import type {
   FileNode,
   FolderNode,
@@ -24,7 +24,7 @@ export type DraftStorageMode = "off" | "local";
 
 export type UseIdeWorkspaceOpts = {
   storageKey?: string;
-  forcedLanguage?: CodeLanguage;
+  forcedLanguage?: WorkspaceLanguage;
   resetOnForcedLanguageChange?: boolean;
   access?: IdeWorkspaceAccess;
   draftStorageMode?: DraftStorageMode;
@@ -39,7 +39,7 @@ export type UseIdeWorkspaceOpts = {
 };
 
 export type WorkspaceMeta = {
-  lastLanguage: CodeLanguage;
+  lastLanguage: WorkspaceLanguage;
   actorKey: string;
   projectId: string | null;
   scopeKey: string | null;
@@ -47,7 +47,7 @@ export type WorkspaceMeta = {
 };
 
 export type IdeWorkspaceState = {
-  language: CodeLanguage;
+  language: WorkspaceLanguage;
   nodes: FSNode[];
   openTabs: NodeId[];
   activeFileId: NodeId;
@@ -76,7 +76,7 @@ export type IdeWorkspaceDerived = {
 export type DividerRootEl = HTMLElement | null;
 
 export type IdeWorkspaceActions = {
-  setLanguage: (next: CodeLanguage) => void;
+  setLanguage: (next: WorkspaceLanguage) => void;
   setNodes: React.Dispatch<React.SetStateAction<FSNode[]>>;
   setOpenTabs: React.Dispatch<React.SetStateAction<NodeId[]>>;
   setActiveFileId: React.Dispatch<React.SetStateAction<NodeId>>;
@@ -90,8 +90,8 @@ export type IdeWorkspaceActions = {
   setToast: React.Dispatch<React.SetStateAction<Toast>>;
   importExternalFiles: (files: ImportedWorkspaceFile[]) => void;
   replaceWorkspace: (ws: WorkspaceStateV2) => void;
-  resetWorkspaceForLanguage: (next: CodeLanguage) => void;
-  switchLanguage: (next: CodeLanguage) => void;
+  resetWorkspaceForLanguage: (next: WorkspaceLanguage) => void;
+  switchLanguage: (next: WorkspaceLanguage) => void;
 
   openFile: (id: NodeId) => void;
   closeTab: (id: NodeId) => void;
@@ -118,7 +118,7 @@ export type IdeWorkspaceActions = {
 };
 
 export type IdeWorkspaceConstants = {
-  allLanguages: CodeLanguage[];
+  allLanguages: WorkspaceLanguage[];
 };
 
 export type UseIdeWorkspaceResult = {

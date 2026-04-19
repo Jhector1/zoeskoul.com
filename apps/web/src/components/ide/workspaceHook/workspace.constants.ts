@@ -1,10 +1,11 @@
-import type { CodeLanguage } from "@/lib/practice/types";
+import type { WorkspaceLanguage } from "@/lib/practice/types";
 import type { IdeWorkspaceAccess } from "./workspace.types";
 
-export const ALL_LANGUAGES: CodeLanguage[] = [
+export const ALL_LANGUAGES: WorkspaceLanguage[] = [
   "python",
   "java",
   "javascript",
+  "web",
   "c",
   "cpp",
   "sql",

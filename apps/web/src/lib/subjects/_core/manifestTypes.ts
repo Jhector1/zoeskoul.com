@@ -1,4 +1,4 @@
-import type { ExerciseKind, CodeLanguage, SqlDialect } from "@/lib/practice/types";
+import type { ExerciseKind, WorkspaceLanguage, SqlDialect } from "@/lib/practice/types";
 import type { PracticeKind } from "@prisma/client";
 
 export type ManifestSqlRuntimeDefaults = {
@@ -10,7 +10,7 @@ export type ManifestSqlRuntimeDefaults = {
 
 export type ManifestCodeRuntimeDefaults = {
     kind: "code";
-    language?: Exclude<CodeLanguage, "sql">;
+    language?: Exclude<WorkspaceLanguage, "sql">;
 };
 
 export type ManifestRuntimeDefaults =
@@ -225,7 +225,7 @@ export type ManifestCodeInputExpectedExample =
 
 export type ManifestCodeInput = ManifestBaseExercise & {
     kind: "code_input";
-    language?: CodeLanguage;
+    language?: WorkspaceLanguage;
     fixedSqlDialect?: SqlDialect;
     recipe: ManifestRecipe;
     showExpectedExample?: ManifestCodeInputExpectedExample;

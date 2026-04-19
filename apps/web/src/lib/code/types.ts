@@ -1,4 +1,4 @@
-import type { CodeLanguage, SqlDialect } from "@/lib/practice/types";
+import type { WorkspaceLanguage, SqlDialect } from "@/lib/practice/types";
 import {InteractiveLanguage} from "@/lib/code/types/common";
 
 export type SqlScalar = string | number | boolean | null;

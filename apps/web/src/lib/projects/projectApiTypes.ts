@@ -1,5 +1,5 @@
 // src/lib/projects/projectApiTypes.ts
-import type { CodeLanguage } from "@/lib/practice/types";
+import type { WorkspaceLanguage } from "@/lib/practice/types";
 import type { JsonObject } from "@/lib/types/json";
 import type {
     CodeProjectScopeKind,
@@ -19,7 +19,7 @@ export type ProjectScopeInput = {
 export type SaveProjectRequest = {
     title: string;
     description?: string | null;
-    language: CodeLanguage;
+    language: WorkspaceLanguage;
     workspace: WorkspaceStateV2 & JsonObject;
     entryPath?: string | null;
     activePath?: string | null;

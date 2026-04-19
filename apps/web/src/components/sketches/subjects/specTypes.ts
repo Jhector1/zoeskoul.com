@@ -1,6 +1,6 @@
 // src/components/review/sketches/specTypes.ts
 import type { SketchTone } from "./types";
-import { CodeLanguage } from "@/lib/practice/types";
+import { WorkspaceLanguage } from "@/lib/practice/types";
 
 export type ArchetypeId =
     | "intro_stepper"
@@ -34,7 +34,7 @@ export type SketchSpecBase = {
 export type CodeSketchSpec = SketchSpecBase & {
     archetype: "code_runner" | "code_sketch";
     starterCode: string;
-    language: CodeLanguage;
+    language: WorkspaceLanguage;
     hint: string;
     instructionsMarkdown?: string;
 };

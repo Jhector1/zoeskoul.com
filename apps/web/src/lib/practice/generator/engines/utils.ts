@@ -6,7 +6,7 @@ import type { TopicContext } from "@/lib/practice/generator/generatorTypes";
 import type {
     CodeExpectedExample,
     CodeInputExercise,
-    CodeLanguage,
+    WorkspaceLanguage,
     Difficulty,
     ExerciseKind,
     MultiChoiceExercise,
@@ -655,7 +655,7 @@ export function makeCodeInputOut(args: {
     prompt: string;
     starterCode: string;
 
-    language?: CodeLanguage;
+    language?: WorkspaceLanguage;
     expected: CodeExpectedInput;
 
     hint?: string;

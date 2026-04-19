@@ -2,7 +2,7 @@
 
 import React, { useCallback, useEffect, useState } from "react";
 import CodeRunner from "@/components/code/runner/CodeRunner";
-import type { CodeLanguage, SqlDialect } from "@/lib/practice/types";
+import type { WorkspaceLanguage, SqlDialect } from "@/lib/practice/types";
 import { useElementSize } from "@/components/tools/hooks/useElementSize";
 import { runViaApi } from "@/lib/code/runClient";
 import { pickRunFeedbackFromResult } from "@/lib/code/feedback";
@@ -10,7 +10,7 @@ import type { CodeFeedback } from "@/lib/code/feedback/types";
 import CodeFeedbackCallout from "@/components/practice/kinds/CodeFeedbackCallout";
 import { useReviewTools } from "@/components/review/module/context/ReviewToolsContext";
 import type { OnRun } from "@/components/code/runner/types";
-import {TerminalRunnerLanguage} from "@zoeskoul/code-contracts";
+import {RunnerLanguage} from "@zoeskoul/code-contracts";
 
 type SqlTableSnapshot = {
     name: string;
@@ -26,7 +26,7 @@ type SqlTableSnapshots = Record<string, SqlTableSnapshot>;
 
 export default function CodeToolPane(props: {
     height: number;
-    toolLang: TerminalRunnerLanguage;
+    toolLang: RunnerLanguage;
     toolCode: string;
     toolStdin: string;
     onChangeCode: (c: string) => void;

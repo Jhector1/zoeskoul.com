@@ -6,10 +6,10 @@ import type { TermLine, OnRun, RunnerState } from "../types";
 import { cleanTermText, toLines } from "../utils/text";
 import { inferInputPlan } from "../utils/input";
 import { expandPrompts, prettyPrompt, splitStdoutByPrompts } from "../utils/prompts";
-import type { CodeLanguage, SqlDialect } from "@/lib/practice/types";
-import {TerminalRunnerLanguage} from "@zoeskoul/code-contracts";
+import type { WorkspaceLanguage, SqlDialect } from "@/lib/practice/types";
+import {RunnerLanguage} from "@zoeskoul/code-contracts";
 
-function needsMoreInput(lang: TerminalRunnerLanguage, r: RunResult) {
+function needsMoreInput(lang: RunnerLanguage, r: RunResult) {
     const blob = cleanTermText(
         (r.compile_output ?? "") +
         "\n" +
@@ -118,7 +118,7 @@ function unescapeCStringContent(x: string) {
 }
 
 function extractPreOutputForCCpp(
-    lang: Extract<TerminalRunnerLanguage, "c" | "cpp">,
+    lang: Extract<RunnerLanguage, "c" | "cpp">,
     code: string,
     prompts: string[],
 ) {    const src = String(code ?? "");
@@ -164,7 +164,7 @@ function extractPreOutputForCCpp(
 type AbortKind = "none" | "silent" | "user";
 
 export function useTerminalRunner(args: {
-    lang: TerminalRunnerLanguage;
+    lang: RunnerLanguage;
     code: string;
     stdin?: string;
     sqlDialect?: SqlDialect;
@@ -202,7 +202,7 @@ export function useTerminalRunner(args: {
     const [busy, setBusy] = React.useState(false);
     const [lastResult, setLastResult] = React.useState<RunResult | null>(null);
     const [lastRunLanguage, setLastRunLanguage] =
-        React.useState<TerminalRunnerLanguage | null>(null);    const [runState, setRunState] = React.useState<RunnerState>("idle");
+        React.useState<RunnerLanguage | null>(null);    const [runState, setRunState] = React.useState<RunnerState>("idle");
 
     const runLockRef = React.useRef(false);
     const runIdRef = React.useRef(0);

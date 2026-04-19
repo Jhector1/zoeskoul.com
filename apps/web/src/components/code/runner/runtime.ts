@@ -1,16 +1,7 @@
-
-
-
-
-
-
-
-
-
 import type { RefObject } from "react";
 import type {
     RunSessionState,
-    TerminalRunnerLanguage,
+    RunnerLanguage,
     WorkspaceSyncEntry,
 } from "@zoeskoul/code-contracts";
 import type { RunResult } from "@/lib/code/types";
@@ -46,7 +37,7 @@ export type RunnerLastResult = RunResult | BatchRunResult | null;
 
 export type SharedRunnerArgs = {
     runtime?: CodeRunnerRuntime | ResolvedCodeRunnerRuntime;
-    lang: TerminalRunnerLanguage;
+    lang: RunnerLanguage;
     code: string;
     sqlDialect?: SqlDialect;
     sqlSchemaSql?: string;
@@ -131,7 +122,7 @@ export type CodeRunnerController = {
     cancelRun: () => Promise<void> | void;
 
     lastResult: RunnerLastResult;
-    lastRunLanguage: TerminalRunnerLanguage | null;
+    lastRunLanguage: RunnerLanguage | null;
 
     resetTerminal: () => void;
     startRun: () => Promise<void>;

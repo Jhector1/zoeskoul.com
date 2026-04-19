@@ -8,7 +8,7 @@ import ToolTabs from "./ToolTabs";
 import { TOOL_SPECS } from "./registry";
 import type { ToolsCtx, ToolId } from "./types";
 import { useActiveTool } from "./hooks/useActiveTool";
-import type { CodeLanguage, SqlDialect } from "@/lib/practice/types";
+import type { WorkspaceLanguage, SqlDialect } from "@/lib/practice/types";
 
 const PANE_ANIM = {
     show: { opacity: 1, scale: 1, y: 0, filter: "blur(0px)" },
@@ -31,7 +31,7 @@ export type ToolsPanelProps = {
     rightBodyRef: React.RefObject<HTMLDivElement | null>;
     codeRunnerRegionH: number;
 
-    toolLang: CodeLanguage;
+    toolLang: WorkspaceLanguage;
     toolCode: string;
     toolStdin: string;
     toolSqlDialect: SqlDialect;
@@ -45,7 +45,7 @@ export type ToolsPanelProps = {
     locale: string;
     codeEnabled: boolean;
 
-    onChangeLang?: (l: CodeLanguage) => void;
+    onChangeLang?: (l: WorkspaceLanguage) => void;
     onChangeSqlDialect?: (d: SqlDialect) => void;
 
     sqlSchemaSql?: string;
@@ -219,11 +219,11 @@ function CodePaneLayer(props: {
     isActive: boolean;
     codeEnabled: boolean;
     height: number;
-    toolLang: CodeLanguage;
+    toolLang: WorkspaceLanguage;
     toolCode: string;
     toolStdin: string;
     toolSqlDialect: SqlDialect;
-    onChangeLang?: (l: CodeLanguage) => void;
+    onChangeLang?: (l: WorkspaceLanguage) => void;
     onChangeCode: (c: string) => void;
     onChangeStdin: (s: string) => void;
     onChangeSqlDialect?: (d: SqlDialect) => void;

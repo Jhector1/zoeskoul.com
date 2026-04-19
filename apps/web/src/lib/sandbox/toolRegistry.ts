@@ -1,4 +1,4 @@
-import type { CodeLanguage } from "@/lib/practice/types";
+import type { WorkspaceLanguage } from "@/lib/practice/types";
 
 export type SandboxCategory = "programming" | "math";
 
@@ -6,6 +6,7 @@ export type ProgrammingCodeToolSlug =
     | "python"
     | "java"
     | "javascript"
+    | "web"
     | "c"
     | "cpp"
     | "sql";
@@ -22,11 +23,12 @@ export type SandboxToolEntry =
     category: "programming";
     toolSlug: ProgrammingCodeToolSlug;
     title: string;
-    initialLanguage: CodeLanguage;
+    initialLanguage: WorkspaceLanguage;
     seoKey:
         | "online-python-compiler"
         | "online-java-compiler"
         | "online-javascript-editor"
+        | "online-web-editor"
         | "online-c-compiler"
         | "online-cpp-compiler"
         | "online-sql-editor";
@@ -37,7 +39,7 @@ export type SandboxToolEntry =
     category: "programming";
     toolSlug: "shell";
     title: string;
-    initialLanguage: CodeLanguage;
+    initialLanguage: WorkspaceLanguage;
     seoKey: "sandbox-shell-practice";
     lessonPath?: string;
 }
@@ -54,6 +56,7 @@ export const PROGRAMMING_TOOL_ORDER: ProgrammingCodeToolSlug[] = [
     "python",
     "java",
     "javascript",
+    "web",
     "c",
     "cpp",
     "sql",
@@ -111,6 +114,17 @@ export function resolveSandboxToolEntry(
                     initialLanguage: "javascript",
                     seoKey: "online-javascript-editor",
                     lessonPath: "/subjects/javascript/modules",
+                };
+
+            case "web":
+                return {
+                    kind: "programming",
+                    category: "programming",
+                    toolSlug: "web",
+                    title: "Online HTML CSS JS Editor",
+                    initialLanguage: "web",
+                    seoKey: "online-web-editor",
+                    lessonPath: "/subjects/web/modules",
                 };
 
             case "c":

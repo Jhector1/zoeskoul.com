@@ -1,6 +1,6 @@
 import JSZip from "jszip";
 import type { FileEntry } from "./types";
-import { CodeLanguage } from "@/lib/practice/types";
+import { WorkspaceLanguage } from "@/lib/practice/types";
 import {InteractiveLanguage} from "@zoeskoul/code-contracts";
 
 type ProjectLanguage = InteractiveLanguage;

@@ -9,25 +9,28 @@ import {
     DEFAULT_LANGS,
     DEFAULT_SQL_DIALECT,
     DEFAULT_SQL_DIALECTS,
-} from "./constants";
+} from "@/components/code/runner/constants";
 import {
     isControlled,
     type CodeRunnerProps,
     type TerminalDock,
     CodeRunnerFrame,
-} from "./types";
-import HeaderBar from "./components/HeaderBar";
-import EditorPane from "./components/EditorPane";
-import { useSplitSizing } from "./hooks/useSplitSizing";
-import type { CodeLanguage, SqlDialect } from "@/lib/practice/types";
+} from "@/components/code/runner/types";
+// import HeaderBar from "./runner/components/HeaderBar";
+import EditorPane from "@/components/code/runner/components/EditorPane";
+import OutputSurface, {
+    type OutputSurfaceModel,
+} from "@/components/code/runner/components/OutputSurface";
+import { useSplitSizing } from "@/components/code/runner/hooks/useSplitSizing";
+import type { WorkspaceLanguage, SqlDialect } from "@/lib/practice/types";
 import { runViaApi } from "@/lib/code/runClient";
 import { useCodeRunnerController } from "@/components/code/runner/hooks/controller/useCodeRunnerController";
 import { resolveRuntime } from "@/components/code/runner/hooks/controller/useResolvedRuntime";
-import TerminalSurface from "@/components/code/runner/components/TerminalSurface";
 import XtermTerminal from "@/components/code/runner/components/XtermTerminal";
 import { useWorkspaceTerminalController } from "@/components/code/runner/hooks/pty/useWorkspaceTerminalController";
-import type { WorkspaceTerminalConfig } from "@/components/code/runner/runtime";
+import type { WorkspaceSyncEntry, WorkspaceTerminalConfig } from "@/components/code/runner/runtime";
 import { cx } from "@/components/tools/utils/cx";
+import HeaderBar from "@/components/code/runner/components/HeaderBar";
 
 type MobilePane = "editor" | "output";
 type OutputTab = "output" | "terminal";
@@ -39,6 +42,7 @@ type CodeRunnerWithStdinProps = CodeRunnerProps & {
     showStdinEditor?: boolean;
     stdinPlaceholder?: string;
     workspaceTerminal?: WorkspaceTerminalConfig;
+    webPreviewEntries?: WorkspaceSyncEntry[];
     sqlInitialTableSnapshots?: Record<
         string,
         {
@@ -114,11 +118,13 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         editorModelKey,
         onBeforeRun,
         isAuthenticated,
+        editorLanguage,
 
         stdin: controlledStdin,
         initialStdin,
         onChangeStdin,
         showStdinEditor = false,
+        webPreviewEntries = [],
         sqlInitialTableSnapshots,
         stdinPlaceholder = "Type stdin here. Each new line becomes one input line.",
         workspaceTerminal,
@@ -168,13 +174,13 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         return base;
     }, [allowedSqlDialects, fixedSqlDialect]);
 
-    const initialLang: CodeLanguage =
+    const initialLang: WorkspaceLanguage =
         fixedLanguage ??
         (controlled ? (props as any).language : (props as any).initialLanguage) ??
         allowedLangs[0] ??
         "python";
 
-    const [uLang, setULang] = useState<CodeLanguage>(initialLang);
+    const [uLang, setULang] = useState<WorkspaceLanguage>(initialLang);
 
     const [uCode, setUCode] = useState<string>(
         typeof (props as any).initialCode === "string"
@@ -194,12 +200,13 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         typeof initialStdin === "string" ? initialStdin : "",
     );
 
-    const lang: CodeLanguage = fixedLanguage
+    const lang: WorkspaceLanguage = fixedLanguage
         ? fixedLanguage
         : controlled
             ? (props as any).language
             : uLang;
 
+    const isWeb = lang === "web";
     const code: string = controlled ? ((props as any).code ?? "") : uCode;
 
     const sqlDialect: SqlDialect = fixedSqlDialect
@@ -211,7 +218,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     const stdinControlled = typeof controlledStdin === "string";
     const stdin: string = stdinControlled ? String(controlledStdin ?? "") : uStdin;
 
-    const setLang = (l: CodeLanguage) => {
+    const setLang = (l: WorkspaceLanguage) => {
         if (fixedLanguage) return;
         if (!allowedLangs.includes(l)) return;
         controlled ? (props as any).onChangeLanguage(l) : setULang(l);
@@ -310,9 +317,12 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         );
     }, []);
 
+    const runnerLang = (isWeb ? "javascript" : lang) as any;
+    const effectiveAllowRun = allowRun && !isWeb;
+
     const term = useCodeRunnerController({
         runtime,
-        lang,
+        lang: runnerLang,
         code,
         stdin,
         sqlDialect,
@@ -321,7 +331,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         sqlSetupSql,
         sqlDatasetId,
         disabled,
-        allowRun,
+        allowRun: effectiveAllowRun,
         resetTerminalOnRun,
         isAuthenticated,
         onRun: onRun ?? defaultOnRun,
@@ -330,7 +340,8 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     const workspaceTerminalEnabled =
         Boolean(workspaceTerminal?.enabled) &&
         isAuthenticated === true &&
-        lang !== "sql";
+        lang !== "sql" &&
+        !isWeb;
 
     const workspaceTerm = useWorkspaceTerminalController({
         enabled: workspaceTerminalEnabled,
@@ -365,10 +376,10 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     }, [workspaceTerminalEnabled, outputTab]);
 
     useEffect(() => {
-        if (lang === "sql" && outputTab === "terminal") {
+        if ((lang === "sql" || isWeb) && outputTab === "terminal") {
             setOutputTab("output");
         }
-    }, [lang, outputTab]);
+    }, [lang, isWeb, outputTab]);
 
     useEffect(() => {
         if (outputTab !== "terminal" || !workspaceTerminalEnabled) {
@@ -415,14 +426,14 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     useEffect(() => {
         if (!isNarrowScreen) return;
         if (!showEditor || !showTerminal) return;
-        if (term.runState !== "idle") {
+        if (term.runState !== "idle" && !isWeb) {
             setMobilePane("output");
             setOutputTab("output");
         }
-    }, [isNarrowScreen, showEditor, showTerminal, term.runState]);
+    }, [isNarrowScreen, showEditor, showTerminal, term.runState, isWeb]);
 
     const onSwitchLang = React.useCallback(
-        (next: CodeLanguage) => {
+        (next: WorkspaceLanguage) => {
             if (fixedLanguage) return;
             if (!allowedLangs.includes(next)) return;
             if (next === lang) return;
@@ -480,12 +491,54 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
             }
             : undefined;
 
-    const outputLabel = term.backend === "sql" ? "Results" : "Output";
-    const mobileTabAttention = term.runState !== "idle" || !!term.lastResult;
+    const outputLabel = isWeb ? "Preview" : lang === "sql" ? "Results" : "Output";
+    const mobileTabAttention = !isWeb && (term.runState !== "idle" || !!term.lastResult);
     const mobileBodyHeight = Math.max(240, (split.mainH || numericHeight) - 48);
 
-    const showStdinEditorUI = showStdinEditor && showEditor && lang !== "sql";
+    const showStdinEditorUI = showStdinEditor && showEditor && lang !== "sql" && !isWeb;
     const showWorkspaceTerminalTab = workspaceTerminalEnabled;
+    const effectiveEditorLanguage = editorLanguage ?? (isWeb ? "html" : lang);
+
+    const outputModel: OutputSurfaceModel = useMemo(() => {
+        if (isWeb) {
+            return {
+                kind: "web-preview",
+                entries: webPreviewEntries,
+                title: "Preview",
+            };
+        }
+
+        if (lang === "sql") {
+            return {
+                kind: "sql",
+                controller: term,
+                sqlSchemaSql: sqlSchemaSql ?? sqlSetupSql ?? "",
+                sqlInitialTableSnapshots,
+                sqlViewKey: [
+                    editorModelKey ?? "",
+                    sqlDatasetId ?? "",
+                    lang,
+                    sqlDialect,
+                ].join("::"),
+            };
+        }
+
+        return {
+            kind: "runner",
+            controller: term,
+        };
+    }, [
+        isWeb,
+        webPreviewEntries,
+        lang,
+        term,
+        sqlSchemaSql,
+        sqlSetupSql,
+        sqlInitialTableSnapshots,
+        editorModelKey,
+        sqlDatasetId,
+        sqlDialect,
+    ]);
 
     const renderOutputBody = () => {
         if (outputTab === "terminal" && showWorkspaceTerminalTab) {
@@ -504,20 +557,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
             );
         }
 
-        return (
-            <TerminalSurface
-                controller={term}
-                disabled={disabled}
-                sqlSchemaSql={sqlSchemaSql ?? sqlSetupSql ?? ""}
-                sqlInitialTableSnapshots={sqlInitialTableSnapshots}
-                sqlViewKey={[
-                    editorModelKey ?? "",
-                    sqlDatasetId ?? "",
-                    lang,
-                    sqlDialect,
-                ].join("::")}
-            />
-        );
+        return <OutputSurface model={outputModel} disabled={disabled} />;
     };
 
     const renderOutputPane = (panelHeight?: number, panelWidth?: number) => {
@@ -582,7 +622,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         >
             <EditorPane
                 frame={frame}
-                lang={lang}
+                lang={effectiveEditorLanguage}
                 mobileEditMode="auto"
                 code={code}
                 onChange={setCode}
@@ -605,7 +645,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                     <HeaderBar
                         title={title}
                         disabled={disabled}
-                        busy={term.busy}
+                        busy={term.busy && !isWeb}
                         runState={term.runState}
                         onCancel={term.cancelRun}
                         editorTheme={editorTheme}
@@ -636,8 +676,10 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                                 setMobilePane("editor");
                             }
                         }}
-                        allowRun={allowRun}
+                        allowRun={effectiveAllowRun}
                         onRun={async () => {
+                            if (isWeb) return;
+
                             setOutputTab("output");
 
                             if (isNarrowScreen && showEditor && showTerminal) {
@@ -749,24 +791,24 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
 
                                 <div
                                     {...split.separatorProps}
-                                    aria-disabled={term.runState !== "idle"}
+                                    aria-disabled={term.runState !== "idle" && !isWeb}
                                     onPointerDown={
-                                        term.runState !== "idle" ? undefined : split.onPointerDownSplit
+                                        term.runState !== "idle" && !isWeb ? undefined : split.onPointerDownSplit
                                     }
                                     onKeyDown={
-                                        term.runState !== "idle" ? undefined : split.separatorProps.onKeyDown
+                                        term.runState !== "idle" && !isWeb ? undefined : split.separatorProps.onKeyDown
                                     }
                                     className={[
                                         "h-[6px]",
                                         SPLIT_BAR_IDLE,
-                                        term.runState !== "idle"
+                                        term.runState !== "idle" && !isWeb
                                             ? "cursor-not-allowed opacity-60"
                                             : `cursor-row-resize ${SPLIT_BAR_ACTIVE}`,
                                     ].join(" ")}
                                     title={
-                                        term.runState !== "idle"
+                                        term.runState !== "idle" && !isWeb
                                             ? "Cannot resize while a run session is active"
-                                            : "Drag or use arrow keys to resize terminal"
+                                            : "Drag or use arrow keys to resize preview"
                                     }
                                 />
 
@@ -785,24 +827,24 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
 
                                 <div
                                     {...split.separatorProps}
-                                    aria-disabled={term.runState !== "idle"}
+                                    aria-disabled={term.runState !== "idle" && !isWeb}
                                     onPointerDown={
-                                        term.runState !== "idle" ? undefined : split.onPointerDownSplit
+                                        term.runState !== "idle" && !isWeb ? undefined : split.onPointerDownSplit
                                     }
                                     onKeyDown={
-                                        term.runState !== "idle" ? undefined : split.separatorProps.onKeyDown
+                                        term.runState !== "idle" && !isWeb ? undefined : split.separatorProps.onKeyDown
                                     }
                                     className={[
                                         "w-[6px]",
                                         SPLIT_BAR_IDLE,
-                                        term.runState !== "idle"
+                                        term.runState !== "idle" && !isWeb
                                             ? "cursor-not-allowed opacity-60"
                                             : `cursor-col-resize ${SPLIT_BAR_ACTIVE}`,
                                     ].join(" ")}
                                     title={
-                                        term.runState !== "idle"
+                                        term.runState !== "idle" && !isWeb
                                             ? "Cannot resize while a run session is active"
-                                            : "Drag or use arrow keys to resize terminal"
+                                            : "Drag or use arrow keys to resize preview"
                                     }
                                 />
 

@@ -1,4 +1,4 @@
-import {CodeLanguage} from "@/lib/practice/types";
+import {WorkspaceLanguage} from "@/lib/practice/types";
 
 
 export type NodeId = string;
@@ -26,7 +26,7 @@ export type FSNode = FolderNode | FileNode;
 
 export type WorkspaceStateV2 = {
     version: 2;
-    language: CodeLanguage;
+    language: WorkspaceLanguage;
     nodes: FSNode[];
     openTabs: NodeId[];
     activeFileId: NodeId;
@@ -83,8 +83,8 @@ export type FullIDEProps = {
     className?: string;
     fullHeight?: boolean;
     storageKey?: string;
-    language?: CodeLanguage;
-    onChangeLanguage?: (l: CodeLanguage) => void;
+    language?: WorkspaceLanguage;
+    onChangeLanguage?: (l: WorkspaceLanguage) => void;
     resetOnForcedLanguageChange?: boolean;
     showTopLanguageButtons?: boolean;
     lessonHref?: string;
@@ -174,14 +174,14 @@ export type UseIdeProjectSessionArgs = {
     loginHref: string;
     billingHref: string;
     routerPush: (href: string) => void;
-    language: CodeLanguage;
+    language: WorkspaceLanguage;
     sqlDialect: SqlDialect;
     currentWorkspace: SaveProjectRequest["workspace"] | null;
     nodes: any[];
     activeFile: any | null;
     entryFile: any | null;
     replaceWorkspace: (ws: SaveProjectRequest["workspace"]) => void;
-    resetWorkspaceForLanguage?: (language: CodeLanguage) => void;
+    resetWorkspaceForLanguage?: (language: WorkspaceLanguage) => void;
     markLoaded: DirtyStateApi["markLoaded"];
     markSaved: DirtyStateApi["markSaved"];
     clearSavedBaseline: DirtyStateApi["clearSavedBaseline"];

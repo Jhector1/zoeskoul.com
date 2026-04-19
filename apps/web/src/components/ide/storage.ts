@@ -1,4 +1,3 @@
-// src/components/ide/storage.ts
 import type { FSNode, FileNode, FolderNode, WorkspaceStateV2, NodeId } from "./types";
 import { uid } from "./utils";
 import {
@@ -6,9 +5,11 @@ import {
     defaultMainCode,
     defaultSqlSchemaCode,
     defaultSqlSeedCode,
+    defaultWebCssCode,
+    defaultWebJsCode,
 } from "./languageDefaults";
-import type { CodeLanguage } from "@/lib/practice/types";
-import {NonSqlCodeLanguage, InteractiveLanguage} from "@zoeskoul/code-contracts";
+import type { WorkspaceLanguage } from "@/lib/practice/types";
+import {FileWorkspaceLanguage, NonSqlWorkspaceLanguage} from "@zoeskoul/code-contracts";
 import {
     getWorkspaceBody,
     putWorkspaceBody,
@@ -21,13 +22,13 @@ export const STORAGE_KEY_V1 = `${process.env.NEXT_PUBLIC_APP_NAME}.ide.workspace
 const MIN_LEFT_PCT = 16;
 const MAX_LEFT_PCT = 40;
 
-export function storageKeyForLanguage(baseKey: string, language: CodeLanguage) {
+export function storageKeyForLanguage(baseKey: string, language: WorkspaceLanguage) {
     return `${baseKey}:${language}`;
 }
 
 export function storageKeyForWorkspace(args: {
     baseKey: string;
-    language: CodeLanguage;
+    language: WorkspaceLanguage;
     actorKey?: string | null;
     projectId?: string | null;
     scopeKey?: string | null;
@@ -61,7 +62,7 @@ function clamp(n: number, lo: number, hi: number) {
     return Math.max(lo, Math.min(hi, n));
 }
 
-function buildDefaultCodeWorkspace(language: NonSqlCodeLanguage): WorkspaceStateV2 {
+function buildDefaultFileWorkspace(language: FileWorkspaceLanguage): WorkspaceStateV2 {
     const rootSrcId = uid();
     const mainId = uid();
     const t = now();
@@ -95,6 +96,54 @@ function buildDefaultCodeWorkspace(language: NonSqlCodeLanguage): WorkspaceState
         entryFileId: mainId,
         stdin: "",
         expanded: [rootSrcId],
+        leftPct: 26,
+    };
+}
+function buildDefaultWebWorkspace(): WorkspaceStateV2 {
+    const htmlId = uid();
+    const cssId = uid();
+    const jsId = uid();
+    const t = now();
+
+    const nodes: FSNode[] = [
+        {
+            id: htmlId,
+            kind: "file",
+            name: "index.html",
+            parentId: null,
+            content: defaultMainCode("web"),
+            createdAt: t,
+            updatedAt: t,
+        },
+        {
+            id: cssId,
+            kind: "file",
+            name: "styles.css",
+            parentId: null,
+            content: defaultWebCssCode(),
+            createdAt: t,
+            updatedAt: t,
+        },
+        {
+            id: jsId,
+            kind: "file",
+            name: "script.js",
+            parentId: null,
+            content: defaultWebJsCode(),
+            createdAt: t,
+            updatedAt: t,
+        },
+    ];
+
+    return {
+        version: 2,
+        language: "web",
+        nodes,
+        openTabs: [htmlId, cssId, jsId],
+        activeFileId: htmlId,
+        entryFileId: htmlId,
+        stdin: "",
+        expanded: [],
         leftPct: 26,
     };
 }
@@ -148,9 +197,10 @@ function buildDefaultSqlWorkspace(): WorkspaceStateV2 {
     };
 }
 
-export function buildDefaultWorkspace(language: CodeLanguage): WorkspaceStateV2 {
+export function buildDefaultWorkspace(language: WorkspaceLanguage): WorkspaceStateV2 {
     if (language === "sql") return buildDefaultSqlWorkspace();
-    return buildDefaultCodeWorkspace(language);
+    if (language === "web") return buildDefaultWebWorkspace();
+    return buildDefaultFileWorkspace(language);
 }
 
 function normalizeNode(raw: unknown): FSNode | null {
@@ -213,11 +263,11 @@ function dedupe<T extends string>(arr: T[]) {
 
 export function repairWorkspaceStateV2(
     raw: unknown,
-    fallbackLanguage: CodeLanguage = "python",
+    fallbackLanguage: WorkspaceLanguage = "python",
 ): WorkspaceStateV2 {
     if (!isRecord(raw)) return buildDefaultWorkspace(fallbackLanguage);
 
-    const language = ((): CodeLanguage => {
+    const language = ((): WorkspaceLanguage => {
         const v = raw.language;
         if (
             v === "python" ||
@@ -226,7 +276,8 @@ export function repairWorkspaceStateV2(
             v === "c" ||
             v === "cpp" ||
             v === "bash" ||
-            v === "sql"
+            v === "sql" ||
+            v === "web"
         ) {
             return v;
         }
@@ -308,7 +359,7 @@ export function repairWorkspaceStateV2(
 
 function loadLegacyV2FromLocalStorage(
     storageKey: string,
-    fallbackLanguage: CodeLanguage = "python",
+    fallbackLanguage: WorkspaceLanguage = "python",
 ): WorkspaceStateV2 | null {
     try {
         const raw = localStorage.getItem(storageKey);
@@ -333,7 +384,7 @@ function removeLegacyV2FromLocalStorage(storageKey: string) {
 
 export async function loadV2(
     storageKey: string,
-    fallbackLanguage: CodeLanguage = "python",
+    fallbackLanguage: WorkspaceLanguage = "python",
 ): Promise<WorkspaceStateV2 | null> {
     try {
         const fromIdb = await getWorkspaceBody(storageKey);
@@ -381,7 +432,7 @@ export async function deleteV2(storageKey: string) {
 
 function buildCodeWorkspaceFromV1(
     v1: any,
-    language: NonSqlCodeLanguage,
+    language: FileWorkspaceLanguage,
 ): WorkspaceStateV2 | null {
     const rootSrcId = uid();
     const t = now();
@@ -426,26 +477,31 @@ function buildCodeWorkspaceFromV1(
 }
 
 export function tryMigrateV1(
-    fallbackLanguage: CodeLanguage = "python",
+    fallbackLanguage: WorkspaceLanguage = "python",
 ): WorkspaceStateV2 | null {
     try {
         const raw = localStorage.getItem(STORAGE_KEY_V1);
         if (!raw) return null;
 
         const v1 = JSON.parse(raw) as any;
-        const language: CodeLanguage =
+        const language: WorkspaceLanguage =
             v1?.language === "python" ||
             v1?.language === "java" ||
             v1?.language === "javascript" ||
             v1?.language === "c" ||
             v1?.language === "cpp" ||
             v1?.language === "bash" ||
-            v1?.language === "sql"
+            v1?.language === "sql" ||
+            v1?.language === "web"
                 ? v1.language
                 : fallbackLanguage;
 
         if (language === "sql") {
             return buildDefaultSqlWorkspace();
+        }
+
+        if (language === "web") {
+            return buildDefaultWebWorkspace();
         }
 
         const migrated = buildCodeWorkspaceFromV1(v1, language);

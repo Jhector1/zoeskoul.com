@@ -4,7 +4,7 @@ import React, { useEffect, useId, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { cn } from "../utils";
 import { IconDots } from "./icons";
-import { CodeLanguage } from "@/lib/practice/types";
+import { WorkspaceLanguage } from "@/lib/practice/types";
 
 export type MenuAction = {
     label: string;
@@ -307,7 +307,7 @@ export default function NodeMenu(props: NodeMenuProps) {
     );
 }
 
-export function defaultExt(lang: CodeLanguage) {
+export function defaultExt(lang: WorkspaceLanguage) {
     switch (lang) {
         case "python":
             return ".py";

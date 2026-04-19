@@ -436,6 +436,22 @@ export default function IdeExplorerPane({
                         </div>
                     </div>
                 </div>
+            ) : language === "web" ? (
+                <div className="border-t border-neutral-200 p-3 dark:border-white/10">
+                    <div className="text-[11px] font-extrabold uppercase tracking-[0.14em] text-neutral-600 dark:text-white/60">
+                        Web Preview
+                    </div>
+                    <div className="mt-2 space-y-2 text-xs font-semibold text-neutral-600 dark:text-white/60">
+                        <div className="rounded-lg border border-neutral-200 bg-white p-3 dark:border-white/10 dark:bg-black/30">
+                            Use <span className="font-black text-neutral-900 dark:text-white/85">index.html</span>,
+                            <span className="font-black text-neutral-900 dark:text-white/85"> styles.css</span>, and
+                            <span className="font-black text-neutral-900 dark:text-white/85"> script.js</span>.
+                        </div>
+                        <div className="rounded-lg border border-neutral-200 bg-white p-3 dark:border-white/10 dark:bg-black/30">
+                            The right pane is a live browser preview. Changes refresh automatically.
+                        </div>
+                    </div>
+                </div>
             ) : (
                 <div className="border-t border-neutral-200 p-3 dark:border-white/10">
                     <div className="text-[11px] font-extrabold uppercase tracking-[0.14em] text-neutral-600 dark:text-white/60">

@@ -26,7 +26,7 @@ import {TFn} from "@/components/practice/PracticeShell";
 import {useTranslations} from "next-intl";
 import {resolveDeepTagged} from "@/i18n/resolveDeepTagged";
 import {useTaggedT} from "@/i18n/tagged";
-import {TerminalRunnerLanguage} from "@zoeskoul/code-contracts";
+import {RunnerLanguage} from "@zoeskoul/code-contracts";
 
 // ✅ minimal tools API (don’t import review context from practice layer)
 // ...imports unchanged
@@ -66,7 +66,7 @@ type CodeToolsApi = {
     registerCodeInput: (
         id: string,
         args: {
-            lang: TerminalRunnerLanguage;
+            lang: RunnerLanguage;
             code: string;
             stdin?: string;
 
@@ -143,7 +143,7 @@ function CodeInputWithTools(props: {
 
     const curLang = ((current as any).codeLang ??
         exercise?.language ??
-        (exercise?.fixedSqlDialect || exercise?.runtime?.datasetId ? "sql" : "python")) as TerminalRunnerLanguage;
+        (exercise?.fixedSqlDialect || exercise?.runtime?.datasetId ? "sql" : "python")) as RunnerLanguage;
 
     const curCode = (current as any).code ?? exercise.starterCode ?? "";
     const curStdin = (current as any).codeStdin ?? "";
@@ -728,7 +728,7 @@ export default function ExerciseRenderer({
 
         const curLang = ((current as any).codeLang ??
             exCode.language ??
-            "python") as TerminalRunnerLanguage;
+            "python") as RunnerLanguage;
 
         const curCode = (current as any).code ?? exCode.starterCode ?? "";
         const curStdin = (current as any).codeStdin ?? "";
