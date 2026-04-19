@@ -4,6 +4,7 @@ import type {
     InteractiveLanguage,
     InteractiveRunReq,
     StartSessionResult,
+    WorkspaceSyncEntry,
 } from "@zoeskoul/code-contracts";
 import { env } from "../../lib/env.js";
 import {
@@ -24,10 +25,6 @@ import { cleanupWorkspace } from "../workspace/cleanupWorkspace.js";
 import { getExecutionPlan } from "../execution/executionPlan.js";
 import { docker } from "./dockerClient.js";
 
-type WorkspaceSyncEntry =
-    | (FileEntry & { kind?: "file" })
-    | { kind: "directory"; path: string };
-
 type NormalizedRequest =
     | {
     kind: "code";
@@ -37,7 +34,6 @@ type NormalizedRequest =
     wallTimeoutMs?: number;
     idleTimeoutMs?: number;
     cwd?: string;
-    shell: false;
 }
     | {
     kind: "shell";
@@ -47,7 +43,6 @@ type NormalizedRequest =
     wallTimeoutMs?: number;
     idleTimeoutMs?: number;
     cwd?: string;
-    shell: true;
 };
 
 const ATTACH_NOISE_TEXT =
@@ -62,12 +57,12 @@ function normalizePath(input: string) {
     return String(input ?? "").replace(/\\/g, "/").trim();
 }
 
-function entryPath(entry: WorkspaceSyncEntry) {
-    return normalizePath(entry.path);
-}
-
 function entryKind(entry: WorkspaceSyncEntry) {
     return entry.kind === "directory" ? "directory" : "file";
+}
+
+function entryPath(entry: WorkspaceSyncEntry) {
+    return normalizePath(entry.path);
 }
 
 function normalizeFilesMap(
@@ -80,26 +75,26 @@ function normalizeFilesMap(
             if ((entry as any)?.kind === "directory") {
                 return {
                     kind: "directory" as const,
-                    path: normalizePath((entry as any).path),
+                    path: entryPath(entry),
                 };
             }
 
             return {
                 kind: "file" as const,
-                path: normalizePath((entry as any).path),
+                path: entryPath(entry),
                 content: String((entry as any).content ?? ""),
             };
         })
         : Object.entries(files).map(([path, content]) => ({
             kind: "file" as const,
-            path: normalizePath(path),
+            path: entryPath({ path } as WorkspaceSyncEntry),
             content: String(content ?? ""),
         }));
 
     return entries
         .filter((entry) => !!entry.path)
         .sort((a, b) => {
-            const pathCmp = entryPath(a).localeCompare(entryPath(b));
+            const pathCmp = a.path.localeCompare(b.path);
             if (pathCmp !== 0) return pathCmp;
             if (entryKind(a) === entryKind(b)) return 0;
             return entryKind(a) === "directory" ? -1 : 1;
@@ -111,7 +106,7 @@ function onlyFileEntries(entries: WorkspaceSyncEntry[]): FileEntry[] {
         .filter((entry): entry is FileEntry => entry.kind !== "directory")
         .map((entry) => ({
             path: entry.path,
-            content: entry.content,
+            content: String((entry as any).content ?? ""),
         }));
 }
 
@@ -135,11 +130,10 @@ function normalizeRequest(req: InteractiveRunReq): NormalizedRequest {
         return {
             kind: "shell",
             language: "bash",
-            files: normalizeFilesMap(req.files as WorkspaceSyncEntry[] | Record<string, string> | undefined),
+            files: normalizeFilesMap(req.files),
             wallTimeoutMs: req.wallTimeoutMs,
             idleTimeoutMs: req.idleTimeoutMs,
             cwd: req.cwd,
-            shell: true,
         };
     }
 
@@ -147,11 +141,10 @@ function normalizeRequest(req: InteractiveRunReq): NormalizedRequest {
         return {
             kind: "code",
             language: req.language,
-            files: normalizeFilesMap(req.files as WorkspaceSyncEntry[] | Record<string, string> | undefined),
+            files: normalizeFilesMap(req.files),
             entry: req.entry,
             wallTimeoutMs: req.wallTimeoutMs,
             idleTimeoutMs: req.idleTimeoutMs,
-            shell: false,
         };
     }
 
@@ -164,7 +157,6 @@ function normalizeRequest(req: InteractiveRunReq): NormalizedRequest {
         entry,
         wallTimeoutMs: req.wallTimeoutMs,
         idleTimeoutMs: req.idleTimeoutMs,
-        shell: false,
     };
 }
 
@@ -182,9 +174,7 @@ export async function startDockerSession(
     ownerKey: string,
 ): Promise<StartSessionResult> {
     const normalized = normalizeRequest(req);
-
-    // createWorkspace must accept directory-aware entries now
-    const workspaceDir = await createWorkspace(normalized.files as any);
+    const workspaceDir = await createWorkspace(normalized.files);
 
     const plan =
         normalized.kind === "shell"
@@ -224,10 +214,16 @@ export async function startDockerSession(
             "COLUMNS=120",
             "LINES=30",
             "PYTHONUNBUFFERED=1",
-            "HOME=/tmp",
+            "HOME=/workspace",
+            "TMPDIR=/tmp",
             "PATH=/usr/bin:/bin",
             "BASH_ENV=/dev/null",
             "ENV=/dev/null",
+            "HISTFILE=/workspace/.bash_history",
+            "HISTSIZE=500",
+            "HISTFILESIZE=1000",
+            "HISTCONTROL=ignoredups:erasedups",
+            "PROMPT_COMMAND=history -a; history -n",
         ],
         Cmd: ["python3", "/opt/runner/pty-runner.py"],
         HostConfig: {

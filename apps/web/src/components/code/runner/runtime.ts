@@ -1,13 +1,24 @@
+
+
+
+
+
+
+
+
+
 import type { RefObject } from "react";
 import type {
-    FileEntry,
     RunSessionState,
     TerminalRunnerLanguage,
+    WorkspaceSyncEntry,
 } from "@zoeskoul/code-contracts";
 import type { RunResult } from "@/lib/code/types";
 import type { BatchRunResult } from "@/lib/code/types/batch";
 import type { SqlDialect } from "@/lib/practice/types";
 import type { OnRun, RunnerState, TermLine } from "./types";
+
+export type { WorkspaceSyncEntry };
 
 export type ExecutionBackend = "pty" | "judge0";
 export type TerminalView = "plain" | "xterm" | "auto";
@@ -33,10 +44,6 @@ export type TerminalChunk = {
 
 export type RunnerLastResult = RunResult | BatchRunResult | null;
 
-export type WorkspaceSyncEntry =
-    | (FileEntry & { kind?: "file" })
-    | { kind: "directory"; path: string };
-
 export type SharedRunnerArgs = {
     runtime?: CodeRunnerRuntime | ResolvedCodeRunnerRuntime;
     lang: TerminalRunnerLanguage;
@@ -60,6 +67,7 @@ export type WorkspaceTerminalConfig = {
     initialFiles?: WorkspaceSyncEntry[] | Record<string, string>;
     lazy?: boolean;
     title?: string;
+    historyScopeKey?: string;
 
     getWorkspaceFiles?: () => WorkspaceSyncEntry[];
     onTerminalSnapshotFiles?: (

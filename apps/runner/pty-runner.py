@@ -161,17 +161,23 @@ def apply_rlimits() -> None:
 
 
 def build_env() -> dict[str, str]:
-    env = {
-        "TERM": os.environ.get("TERM", "xterm-256color"),
-        "PATH": "/usr/bin:/bin",
-        "HOME": "/tmp",
-        "LANG": "C.UTF-8",
-        "PYTHONUNBUFFERED": "1",
-        "BASH_ENV": "/dev/null",
-        "ENV": "/dev/null",
-    }
+    env = dict(os.environ)
 
-    if "PS1" not in os.environ:
+    env.setdefault("TERM", "xterm-256color")
+    env.setdefault("PATH", "/usr/bin:/bin")
+    env.setdefault("HOME", "/workspace")
+    env.setdefault("LANG", "C.UTF-8")
+    env.setdefault("PYTHONUNBUFFERED", "1")
+    env.setdefault("BASH_ENV", "/dev/null")
+    env.setdefault("ENV", "/dev/null")
+
+    env.setdefault("HISTFILE", "/workspace/.bash_history")
+    env.setdefault("HISTSIZE", "500")
+    env.setdefault("HISTFILESIZE", "1000")
+    env.setdefault("HISTCONTROL", "ignoredups:erasedups")
+    env.setdefault("PROMPT_COMMAND", "history -a; history -n")
+
+    if not env.get("PS1"):
         env["PS1"] = "[zoeskoul]\\w\\$ "
 
     return env

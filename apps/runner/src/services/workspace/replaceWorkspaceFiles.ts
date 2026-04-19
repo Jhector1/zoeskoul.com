@@ -1,9 +1,6 @@
 import fs from "node:fs/promises";
 import path from "node:path";
-
-export type ReplaceWorkspaceEntry =
-    | { kind?: "file"; path: string; content: string }
-    | { kind: "directory"; path: string };
+import type { WorkspaceSyncEntry } from "@zoeskoul/code-contracts";
 
 const MAX_ENTRIES = 400;
 const MAX_TOTAL_BYTES = 5 * 1024 * 1024;
@@ -36,6 +33,7 @@ const ALLOWED_BASENAMES = new Set([
     "README",
     "README.md",
     "readme.md",
+    ".bash_history",
 ]);
 
 function isAllowedFile(relPath: string) {
@@ -67,11 +65,11 @@ async function rmContents(dir: string) {
     );
 }
 
-function entryKind(entry: ReplaceWorkspaceEntry) {
+function entryKind(entry: WorkspaceSyncEntry) {
     return entry.kind === "directory" ? "directory" : "file";
 }
 
-function sortEntries(entries: ReplaceWorkspaceEntry[]) {
+function sortEntries(entries: WorkspaceSyncEntry[]) {
     return [...entries].sort((a, b) => {
         const pathCmp = a.path.localeCompare(b.path);
         if (pathCmp !== 0) return pathCmp;
@@ -85,7 +83,7 @@ function sortEntries(entries: ReplaceWorkspaceEntry[]) {
 
 export async function replaceWorkspaceFiles(
     workspaceDir: string,
-    files: ReplaceWorkspaceEntry[],
+    files: WorkspaceSyncEntry[],
 ) {
     if (!Array.isArray(files)) {
         throw new Error("files must be an array.");
@@ -140,7 +138,6 @@ export async function replaceWorkspaceFiles(
     );
 
     await fs.mkdir(workspaceDir, { recursive: true });
-
     await rmContents(workspaceDir);
 
     for (const entry of normalized) {

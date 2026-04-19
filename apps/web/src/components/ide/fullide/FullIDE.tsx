@@ -315,7 +315,26 @@ function FullIDEInner({
             }}
         />
     );
+    const terminalHistoryScopeKey = useMemo(() => {
+        const stableProjectId = initialProjectId ?? projectSession.projectId ?? null;
 
+        if (stableProjectId) {
+            return `project:${stableProjectId}`;
+        }
+
+        return [
+            "local",
+            actorKey,
+            projectScope?.scopeKey ?? projectScope?.kind ?? "global",
+            language,
+        ].join("::");
+    }, [
+        initialProjectId,
+        projectSession.projectId,
+        actorKey,
+        projectScope,
+        language,
+    ]);
     const editorPane = (
         <IdeEditorPane
             panelRef={editorHostRef}
@@ -338,6 +357,7 @@ function FullIDEInner({
             closeTab={actions.closeTab}
             isDesktop={viewport.isDesktop}
             projectId={projectSession.projectId}
+            terminalHistoryScopeKey={terminalHistoryScopeKey}
             onApplyTerminalSnapshotFiles={applyTerminalSnapshotFiles}
         />
     );

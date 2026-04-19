@@ -341,6 +341,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         onTerminalSnapshotFiles: workspaceTerminal?.onTerminalSnapshotFiles,
         lazy: workspaceTerminal?.lazy ?? true,
         title: workspaceTerminal?.title,
+        historyScopeKey: workspaceTerminal?.historyScopeKey,
     });
 
     useEffect(() => {

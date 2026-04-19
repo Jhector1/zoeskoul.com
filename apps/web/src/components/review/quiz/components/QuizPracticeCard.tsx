@@ -354,8 +354,8 @@ export default function QuizPracticeCard(props: {
                       disabled={disableCheck}
                       data-flow-focus="1"
                       className={[
-                        "ui-quiz-action",
-                        disableCheck ? "ui-quiz-action--disabled" : "ui-quiz-action--primary",
+                        "ui-quiz-anction","ui-btn-primary",
+                        disableCheck ? "ui-quiz-action--disabled" : "ui-btn-primary",
                       ].join(" ")}
                   >
                     {btnLabel}

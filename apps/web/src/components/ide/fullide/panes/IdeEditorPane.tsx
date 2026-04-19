@@ -23,6 +23,7 @@ type Props = {
     isAuthenticated: boolean;
     runtime: CodeRunnerRuntime;
     projectId?: string | null;
+    terminalHistoryScopeKey?: string;
     onApplyTerminalSnapshotFiles?: (
         files: Array<
             | { kind?: "file"; path: string; content: string }
@@ -52,6 +53,7 @@ export default function IdeEditorPane({
                                           sqlDialect,
                                           runtime,
                                           projectId,
+                                          terminalHistoryScopeKey,
                                           onApplyTerminalSnapshotFiles,
                                           onChangeLanguage,
                                           onChangeCode,
@@ -128,6 +130,7 @@ export default function IdeEditorPane({
                                 onTerminalSnapshotFiles: onApplyTerminalSnapshotFiles,
                                 lazy: true,
                                 title: "Terminal",
+                                historyScopeKey: terminalHistoryScopeKey,
                             }}
                             editorModelKey={activeFileId ?? "no-file"}
                         />

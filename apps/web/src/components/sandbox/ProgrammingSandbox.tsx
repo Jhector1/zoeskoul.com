@@ -307,23 +307,23 @@ export default function ProgrammingIdeSandbox({
         <div className="h-dvh w-full min-w-0 overflow-hidden bg-transparent">
             <div className="grid h-full min-h-0 min-w-0 w-full grid-rows-[auto_1fr]">
                 <div className="border-b border-neutral-200 bg-white/95 backdrop-blur dark:border-white/10 dark:bg-neutral-950/95">
-                    <div className="flex w-full min-w-0 items-center justify-between gap-3 px-3 py-2.5">
-                        <div className="min-w-0">
-                            <div className="text-[11px] font-black uppercase tracking-[0.14em] text-neutral-500 dark:text-white/45">
-                                Workspace
-                            </div>
+                    {/*<div className="flex w-full min-w-0 items-center justify-between gap-3 px-3 py-2.5">*/}
+                    {/*    <div className="min-w-0">*/}
+                    {/*        <div className="text-[11px] font-black uppercase tracking-[0.14em] text-neutral-500 dark:text-white/45">*/}
+                    {/*            Workspace*/}
+                    {/*        </div>*/}
 
-                            <div className="mt-1 text-sm font-semibold text-neutral-900 dark:text-white/90">
-                                {surfaceMode === "code" ? active.label : "Shell Practice"}
-                            </div>
-                        </div>
+                    {/*        <div className="mt-1 text-sm font-semibold text-neutral-900 dark:text-white/90">*/}
+                    {/*            {surfaceMode === "code" ? active.label : "Shell Practice"}*/}
+                    {/*        </div>*/}
+                    {/*    </div>*/}
 
-                        <SurfaceModeSwitch
-                            mode={surfaceMode}
-                            shellRequiresLogin={shellRequiresLogin}
-                            onModeChange={handleSurfaceModeChange}
-                        />
-                    </div>
+                    {/*    <SurfaceModeSwitch*/}
+                    {/*        mode={surfaceMode}*/}
+                    {/*        shellRequiresLogin={shellRequiresLogin}*/}
+                    {/*        onModeChange={handleSurfaceModeChange}*/}
+                    {/*    />*/}
+                    {/*</div>*/}
 
                     {surfaceMode === "code" ? (
                         <div className="w-full min-w-0 px-2 pb-2 lg:hidden">

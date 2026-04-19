@@ -1,9 +1,6 @@
 import fs from "node:fs/promises";
 import path from "node:path";
-
-export type SnapshotWorkspaceEntry =
-    | { kind: "directory"; path: string }
-    | { kind: "file"; path: string; content: string };
+import type { WorkspaceSyncEntry } from "@zoeskoul/code-contracts";
 
 const MAX_ENTRIES = 400;
 const MAX_TOTAL_BYTES = 5 * 1024 * 1024;
@@ -36,6 +33,7 @@ const ALLOWED_BASENAMES = new Set([
     "README",
     "README.md",
     "readme.md",
+    ".bash_history",
 ]);
 
 const IGNORED_DIRS = new Set([
@@ -119,7 +117,7 @@ export async function snapshotWorkspaceFiles(workspaceDir: string) {
     relFiles.sort((a, b) => a.localeCompare(b));
 
     let totalBytes = 0;
-    const entries: SnapshotWorkspaceEntry[] = [];
+    const entries: WorkspaceSyncEntry[] = [];
 
     for (const relDir of relDirs) {
         entries.push({

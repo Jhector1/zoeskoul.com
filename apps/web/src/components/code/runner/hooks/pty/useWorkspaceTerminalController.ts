@@ -1,9 +1,7 @@
 "use client";
 
 import * as React from "react";
-import type {
-    RunSessionState,
-} from "@zoeskoul/code-contracts";
+import type { RunSessionState } from "@zoeskoul/code-contracts";
 import type {
     TerminalChunk,
     WorkspaceSyncEntry,
@@ -11,8 +9,18 @@ import type {
     WorkspaceTerminalConfig,
 } from "../../runtime";
 import { useRunSession } from "../useRunSession";
+import {
+    deleteTerminalHistory,
+    getTerminalHistory,
+    putTerminalHistory,
+} from "./terminalHistory.idb";
 
 type SyncStatus = "idle" | "pushing" | "pulling" | "error";
+
+const HISTORY_FILE_PATH = ".bash_history";
+const HISTORY_STORAGE_PREFIX = "zoeskoul:terminal-history:v3";
+const HISTORY_MAX_LINES = 500;
+const HISTORY_MAX_BYTES = 32 * 1024;
 
 function isFinalSessionState(state: string) {
     return (
@@ -29,54 +37,52 @@ function normalizeEntries(
     if (!files) return undefined;
 
     if (Array.isArray(files)) {
-        return files.map((entry) => {
+        return files.map((entry): WorkspaceSyncEntry => {
             if ((entry as any)?.kind === "directory") {
                 return {
                     kind: "directory",
                     path: String((entry as any).path ?? ""),
-                } satisfies WorkspaceSyncEntry;
+                };
             }
 
             return {
                 kind: "file",
                 path: String((entry as any).path ?? ""),
                 content: String((entry as any).content ?? ""),
-            } satisfies WorkspaceSyncEntry;
+            };
         });
     }
 
-    return Object.entries(files).map(([path, content]) => ({
-        kind: "file" as const,
-        path,
-        content,
-    }));
-}
-
-function entryKind(entry: WorkspaceSyncEntry) {
-    return entry.kind === "directory" ? "directory" : "file";
+    return Object.entries(files).map(
+        ([path, content]): WorkspaceSyncEntry => ({
+            kind: "file",
+            path,
+            content,
+        }),
+    );
 }
 
 function normalizePath(input: string) {
     return String(input ?? "").replace(/\\/g, "/").trim();
 }
 
-function sortEntries(entries: WorkspaceSyncEntry[]) {
+function sortEntries(entries: WorkspaceSyncEntry[]): WorkspaceSyncEntry[] {
     return [...entries]
-        .map((entry) => {
+        .map((entry): WorkspaceSyncEntry => {
             if (entry.kind === "directory") {
                 return {
-                    kind: "directory" as const,
+                    kind: "directory",
                     path: normalizePath(entry.path),
                 };
             }
 
             return {
-                kind: "file" as const,
+                kind: "file",
                 path: normalizePath(entry.path),
                 content: String((entry as any).content ?? ""),
             };
         })
-        .filter((entry) => !!entry.path)
+        .filter((entry): entry is WorkspaceSyncEntry => !!entry.path)
         .sort((a, b) => {
             const pathCmp = a.path.localeCompare(b.path);
             if (pathCmp !== 0) return pathCmp;
@@ -92,10 +98,14 @@ function entriesEqual(a: WorkspaceSyncEntry[], b: WorkspaceSyncEntry[]) {
     if (aa.length !== bb.length) return false;
 
     for (let i = 0; i < aa.length; i++) {
-        if (aa[i].kind !== bb[i].kind) return false;
-        if (aa[i].path !== bb[i].path) return false;
-        if (aa[i].kind === "file" && bb[i].kind === "file") {
-            if (aa[i].content !== bb[i].content) return false;
+        const left = aa[i];
+        const right = bb[i];
+
+        if (left.kind !== right.kind) return false;
+        if (left.path !== right.path) return false;
+
+        if (left.kind !== "directory" && right.kind !== "directory") {
+            if (left.content !== right.content) return false;
         }
     }
 
@@ -137,7 +147,7 @@ function applyDirtyOverridesToSnapshot(
     snapshotEntries: WorkspaceSyncEntry[],
     currentUiEntries: WorkspaceSyncEntry[],
     dirtyUiPaths: Set<string>,
-) {
+): WorkspaceSyncEntry[] {
     const merged = new Map<string, WorkspaceSyncEntry>();
     const current = new Map<string, WorkspaceSyncEntry>();
 
@@ -158,6 +168,125 @@ function applyDirtyOverridesToSnapshot(
     }
 
     return sortEntries([...merged.values()]);
+}
+
+function buildHistoryStorageKey(args: {
+    historyScopeKey?: string;
+    projectId?: string;
+    cwd?: string;
+    title?: string;
+}) {
+    const scope =
+        args.historyScopeKey?.trim() ||
+        (args.projectId?.trim() ? `project:${args.projectId.trim()}` : "workspace:default");
+
+    const cwd = normalizePath(args.cwd || "/workspace") || "/workspace";
+    const title = (args.title?.trim() || "terminal").replace(/\s+/g, "-").toLowerCase();
+
+    return `${HISTORY_STORAGE_PREFIX}:${scope}:${cwd}:${title}`;
+}
+
+function capHistoryContent(input: string) {
+    const encoder = new TextEncoder();
+
+    let lines = String(input ?? "")
+        .replace(/\r\n/g, "\n")
+        .replace(/\0/g, "")
+        .split("\n");
+
+    while (lines.length && lines[lines.length - 1] === "") {
+        lines.pop();
+    }
+
+    if (lines.length > HISTORY_MAX_LINES) {
+        lines = lines.slice(-HISTORY_MAX_LINES);
+    }
+
+    let text = lines.join("\n");
+
+    while (lines.length > 1 && encoder.encode(text).length > HISTORY_MAX_BYTES) {
+        lines.shift();
+        text = lines.join("\n");
+    }
+
+    if (!text.trim()) return "";
+    return text.endsWith("\n") ? text : `${text}\n`;
+}
+
+function appendHistoryLine(existing: string, line: string) {
+    const trimmed = String(line ?? "").trim();
+    if (!trimmed) return capHistoryContent(existing);
+    return capHistoryContent(`${existing}${trimmed}\n`);
+}
+
+function isHiddenHistoryEntry(entry: WorkspaceSyncEntry) {
+    return entry.kind !== "directory" && normalizePath(entry.path) === HISTORY_FILE_PATH;
+}
+
+function augmentEntriesWithHistory(
+    entries: WorkspaceSyncEntry[],
+    historyContent: string,
+): WorkspaceSyncEntry[] {
+    const visible = sortEntries(entries).filter((entry) => !isHiddenHistoryEntry(entry));
+
+    if (!historyContent) return visible;
+
+    return sortEntries([
+        ...visible,
+        {
+            kind: "file",
+            path: HISTORY_FILE_PATH,
+            content: historyContent,
+        },
+    ]);
+}
+
+function stripHiddenHistoryEntry(
+    entries: WorkspaceSyncEntry[],
+): { visible: WorkspaceSyncEntry[]; historyContent: string | null } {
+    let historyContent: string | null = null;
+    const visible: WorkspaceSyncEntry[] = [];
+
+    for (const entry of sortEntries(entries)) {
+        if (isHiddenHistoryEntry(entry)) {
+            historyContent = String((entry as any).content ?? "");
+            continue;
+        }
+        visible.push(entry);
+    }
+
+    return { visible, historyContent };
+}
+
+function isPersistentHistoryClearCommand(line: string) {
+    const trimmed = String(line ?? "").trim();
+    if (!trimmed) return false;
+
+    const segments = trimmed
+        .split(/&&|;/g)
+        .map((part) => part.trim())
+        .filter(Boolean);
+
+    if (!segments.length) return false;
+
+    let sawClear = false;
+    let sawWrite = false;
+
+    for (const segment of segments) {
+        const match = segment.match(/^history(?:\s+(.*))?$/);
+        if (!match) return false;
+
+        const tail = (match[1] ?? "").trim();
+        const tokens = tail ? tail.split(/\s+/) : [];
+
+        for (const token of tokens) {
+            if (!token.startsWith("-")) continue;
+            if (token.includes("c")) sawClear = true;
+            if (token.includes("w")) sawWrite = true;
+        }
+    }
+
+    return sawClear && sawWrite;
 }
 
 async function postJson<T>(url: string, body: unknown): Promise<T> {
@@ -217,7 +346,9 @@ export function useWorkspaceTerminalController(
     const lastHandledSeqRef = React.useRef(0);
 
     const lastPushedEntriesRef = React.useRef<WorkspaceSyncEntry[]>(
-        sortEntries(normalizeEntries(args.initialFiles) ?? []),
+        sortEntries(normalizeEntries(args.initialFiles) ?? []).filter(
+            (entry) => !isHiddenHistoryEntry(entry),
+        ),
     );
     const quietTimerRef = React.useRef<number | null>(null);
     const awaitingPostEnterSnapshotRef = React.useRef(false);
@@ -227,6 +358,158 @@ export function useWorkspaceTerminalController(
     const startedRef = React.useRef(started);
     const startingRef = React.useRef(starting);
     const stateRef = React.useRef<RunSessionState | "idle">(state);
+
+    const historyStorageKey = React.useMemo(
+        () =>
+            buildHistoryStorageKey({
+                historyScopeKey: args.historyScopeKey,
+                projectId: args.projectId,
+                cwd: args.cwd,
+                title: args.title,
+            }),
+        [args.historyScopeKey, args.projectId, args.cwd, args.title],
+    );
+
+    const historyContentRef = React.useRef("");
+    const historyLoadPromiseRef = React.useRef<Promise<string> | null>(null);
+    const pendingInputLineRef = React.useRef("");
+    const escapeSequenceRef = React.useRef("");
+
+    const ensureHistoryLoaded = React.useCallback(async (): Promise<string> => {
+        if (historyLoadPromiseRef.current) {
+            return await historyLoadPromiseRef.current;
+        }
+
+        const run = (async (): Promise<string> => {
+            try {
+                const content = capHistoryContent(
+                    (await getTerminalHistory(historyStorageKey)) ?? "",
+                );
+                historyContentRef.current = content;
+                return content;
+            } catch {
+                return historyContentRef.current;
+            } finally {
+                historyLoadPromiseRef.current = null;
+            }
+        })();
+
+        historyLoadPromiseRef.current = run;
+        return await run;
+    }, [historyStorageKey]);
+
+    const persistHistoryContent = React.useCallback(
+        async (content: string | null): Promise<void> => {
+            const capped = capHistoryContent(content ?? "");
+            historyContentRef.current = capped;
+
+            try {
+                if (!capped) {
+                    await deleteTerminalHistory(historyStorageKey);
+                } else {
+                    await putTerminalHistory(historyStorageKey, capped);
+                }
+            } catch {}
+        },
+        [historyStorageKey],
+    );
+
+    const appendHistoryLineNow = React.useCallback(
+        async (line: string): Promise<void> => {
+            const next = appendHistoryLine(historyContentRef.current, line);
+            historyContentRef.current = next;
+
+            try {
+                if (!next) {
+                    await deleteTerminalHistory(historyStorageKey);
+                } else {
+                    await putTerminalHistory(historyStorageKey, next);
+                }
+            } catch {}
+        },
+        [historyStorageKey],
+    );
+
+    const commitPendingInputLine = React.useCallback(async (): Promise<void> => {
+        const line = pendingInputLineRef.current;
+        pendingInputLineRef.current = "";
+
+        const trimmed = line.trim();
+        if (!trimmed) return;
+
+        if (isPersistentHistoryClearCommand(trimmed)) {
+            await persistHistoryContent("");
+            return;
+        }
+
+        await appendHistoryLineNow(trimmed);
+    }, [appendHistoryLineNow, persistHistoryContent]);
+
+    const mirrorOutgoingInput = React.useCallback(
+        (data: string) => {
+            if (!data) return;
+
+            for (let i = 0; i < data.length; i += 1) {
+                const ch = data[i];
+
+                if (escapeSequenceRef.current) {
+                    escapeSequenceRef.current += ch;
+
+                    if (/[A-Za-z~]$/.test(escapeSequenceRef.current)) {
+                        escapeSequenceRef.current = "";
+                    }
+                    continue;
+                }
+
+                if (ch === "\u001b") {
+                    escapeSequenceRef.current = ch;
+                    continue;
+                }
+
+                if (ch === "\r" || ch === "\n") {
+                    void commitPendingInputLine();
+
+                    if (ch === "\r" && data[i + 1] === "\n") {
+                        i += 1;
+                    }
+                    continue;
+                }
+
+                if (ch === "\u007f" || ch === "\b") {
+                    pendingInputLineRef.current = pendingInputLineRef.current.slice(0, -1);
+                    continue;
+                }
+
+                if (ch === "\u0003" || ch === "\u0015") {
+                    pendingInputLineRef.current = "";
+                    continue;
+                }
+
+                if (ch === "\u0017") {
+                    pendingInputLineRef.current = pendingInputLineRef.current.replace(
+                        /(?:\s+)?[^\s]*$/,
+                        "",
+                    );
+                    continue;
+                }
+
+                if (ch < " " && ch !== "\t") {
+                    continue;
+                }
+
+                pendingInputLineRef.current += ch;
+            }
+        },
+        [commitPendingInputLine],
+    );
+
+    React.useEffect(() => {
+        historyContentRef.current = "";
+        historyLoadPromiseRef.current = null;
+        pendingInputLineRef.current = "";
+        escapeSequenceRef.current = "";
+        void ensureHistoryLoaded();
+    }, [ensureHistoryLoaded]);
 
     React.useEffect(() => {
         startedRef.current = started;
@@ -240,11 +523,15 @@ export function useWorkspaceTerminalController(
         stateRef.current = state;
     }, [state]);
 
-    const getWorkspaceEntries = React.useCallback(() => {
+    const getWorkspaceEntries = React.useCallback((): WorkspaceSyncEntry[] => {
         const live = args.getWorkspaceFiles?.();
-        if (live) return sortEntries(live);
+        if (live) {
+            return sortEntries(live).filter((entry) => !isHiddenHistoryEntry(entry));
+        }
 
-        return sortEntries(normalizeEntries(args.initialFiles) ?? []);
+        return sortEntries(normalizeEntries(args.initialFiles) ?? []).filter(
+            (entry) => !isHiddenHistoryEntry(entry),
+        );
     }, [args.getWorkspaceFiles, args.initialFiles]);
 
     const pushChunk = React.useCallback(
@@ -274,6 +561,8 @@ export function useWorkspaceTerminalController(
         awaitingPostEnterSnapshotRef.current = false;
         snapshotInFlightRef.current = null;
         openInFlightRef.current = null;
+        pendingInputLineRef.current = "";
+        escapeSequenceRef.current = "";
         setTerminalFeed([]);
         setInputEnabled(false);
         setBusy(false);
@@ -284,20 +573,24 @@ export function useWorkspaceTerminalController(
     }, [clearQuietTimer, closeSocket]);
 
     const replaceFiles = React.useCallback(
-        async (files: WorkspaceSyncEntry[]) => {
+        async (files: WorkspaceSyncEntry[]): Promise<boolean> => {
             if (!sessionId) return false;
 
             setSyncStatus("pushing");
 
             try {
-                const sorted = sortEntries(files);
+                const visible = sortEntries(files).filter(
+                    (entry) => !isHiddenHistoryEntry(entry),
+                );
+                const historyContent = await ensureHistoryLoaded();
+                const payload = augmentEntriesWithHistory(visible, historyContent);
 
                 await postJson<ReplaceResponse>(
                     `/api/run/pty/sessions/${encodeURIComponent(sessionId)}/workspace/replace`,
-                    { files: sorted },
+                    { files: payload },
                 );
 
-                lastPushedEntriesRef.current = sorted;
+                lastPushedEntriesRef.current = visible;
                 setSyncStatus("idle");
                 return true;
             } catch (e: any) {
@@ -306,11 +599,11 @@ export function useWorkspaceTerminalController(
                 return false;
             }
         },
-        [sessionId, pushChunk],
+        [sessionId, ensureHistoryLoaded, pushChunk],
     );
 
-    const snapshotFiles = React.useCallback(async () => {
-        if (!sessionId) return [] as WorkspaceSyncEntry[];
+    const snapshotFiles = React.useCallback(async (): Promise<WorkspaceSyncEntry[]> => {
+        if (!sessionId) return [];
 
         setSyncStatus("pulling");
 
@@ -319,17 +612,24 @@ export function useWorkspaceTerminalController(
                 `/api/run/pty/sessions/${encodeURIComponent(sessionId)}/workspace/snapshot`,
                 {},
             );
+
+            const { visible, historyContent } = stripHiddenHistoryEntry(out.files ?? []);
+
+            if (historyContent !== null) {
+                void persistHistoryContent(historyContent);
+            }
+
             setSyncStatus("idle");
-            return sortEntries(out.files ?? []);
+            return sortEntries(visible);
         } catch (e: any) {
             setSyncStatus("error");
             pushChunk("err", `\r\n${e?.message ?? "Failed to pull terminal workspace."}\r\n`);
             return [];
         }
-    }, [sessionId, pushChunk]);
+    }, [sessionId, persistHistoryContent, pushChunk]);
 
     const pushWorkspaceFromSource = React.useCallback(
-        async (force = false) => {
+        async (force = false): Promise<boolean> => {
             const entries = getWorkspaceEntries();
 
             if (!force && entriesEqual(entries, lastPushedEntriesRef.current)) {
@@ -341,11 +641,11 @@ export function useWorkspaceTerminalController(
         [getWorkspaceEntries, replaceFiles],
     );
 
-    const pullSnapshotIntoWorkspace = React.useCallback(async () => {
+    const pullSnapshotIntoWorkspace = React.useCallback(async (): Promise<boolean> => {
         if (!sessionId) return false;
         if (snapshotInFlightRef.current) return await snapshotInFlightRef.current;
 
-        const run = (async () => {
+        const run = (async (): Promise<boolean> => {
             const snapshot = await snapshotFiles();
             const currentUiEntries = getWorkspaceEntries();
             const dirtyUiPaths = diffDirtyUiPaths(
@@ -394,19 +694,19 @@ export function useWorkspaceTerminalController(
         [clearQuietTimer, pullSnapshotIntoWorkspace],
     );
 
-    const beforeSubmitEnter = React.useCallback(async () => {
+    const beforeSubmitEnter = React.useCallback(async (): Promise<void> => {
         const ok = await pushWorkspaceFromSource(true);
         if (!ok) {
             throw new Error("Could not push local workspace to terminal.");
         }
     }, [pushWorkspaceFromSource]);
 
-    const afterSubmitEnter = React.useCallback(async () => {
+    const afterSubmitEnter = React.useCallback(async (): Promise<void> => {
         awaitingPostEnterSnapshotRef.current = true;
         schedulePostEnterSnapshot(700);
     }, [schedulePostEnterSnapshot]);
 
-    const open = React.useCallback(async () => {
+    const open = React.useCallback(async (): Promise<void> => {
         if (!args.enabled) return;
 
         if (openInFlightRef.current) {
@@ -419,12 +719,16 @@ export function useWorkspaceTerminalController(
             return;
         }
 
-        const run = (async () => {
-            const entries = getWorkspaceEntries();
+        const run = (async (): Promise<void> => {
+            const visibleEntries = getWorkspaceEntries();
+            const historyContent = await ensureHistoryLoaded();
+            const fullEntries = augmentEntriesWithHistory(visibleEntries, historyContent);
 
             lastHandledSeqRef.current = 0;
             nextChunkIdRef.current = 1;
             awaitingPostEnterSnapshotRef.current = false;
+            pendingInputLineRef.current = "";
+            escapeSequenceRef.current = "";
             setTerminalFeed([]);
             setInputEnabled(false);
             setBusy(true);
@@ -441,10 +745,10 @@ export function useWorkspaceTerminalController(
                     language: "bash",
                     projectId: args.projectId,
                     cwd: args.cwd,
-                    ...(entries.length ? { files: entries as any } : {}),
+                    ...(fullEntries.length ? { files: fullEntries as any } : {}),
                 });
 
-                lastPushedEntriesRef.current = sortEntries(entries);
+                lastPushedEntriesRef.current = visibleEntries;
                 setStarted(true);
             } catch (e: any) {
                 pushChunk("err", `${e?.message ?? "Failed to start workspace terminal."}\r\n`);
@@ -466,11 +770,12 @@ export function useWorkspaceTerminalController(
         args.projectId,
         args.cwd,
         getWorkspaceEntries,
+        ensureHistoryLoaded,
         start,
         pushChunk,
     ]);
 
-    const stop = React.useCallback(async () => {
+    const stop = React.useCallback(async (): Promise<void> => {
         if (!startedRef.current && !startingRef.current) return;
 
         try {
@@ -479,6 +784,8 @@ export function useWorkspaceTerminalController(
         } finally {
             clearQuietTimer();
             openInFlightRef.current = null;
+            pendingInputLineRef.current = "";
+            escapeSequenceRef.current = "";
             setBusy(false);
             setInputEnabled(false);
             setStarted(false);
@@ -489,9 +796,10 @@ export function useWorkspaceTerminalController(
     const sendData = React.useCallback(
         (data: string) => {
             if (!data) return;
+            mirrorOutgoingInput(data);
             void sendInput(data);
         },
-        [sendInput],
+        [mirrorOutgoingInput, sendInput],
     );
 
     const resize = React.useCallback(
