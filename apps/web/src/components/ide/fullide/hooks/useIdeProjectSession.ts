@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import {useCallback, useEffect, useRef, useState} from "react";
 
 import type {
     ProjectConflictResponse,
@@ -11,7 +11,7 @@ import {
     createDefaultStateForLanguage,
 } from "@/components/ide/workspaceHook/workspace.normalization";
 
-import { pathOf } from "../../fsTree";
+import {pathOf} from "../../fsTree";
 import type {
     PersistProjectResult,
     ProjectSessionApi,
@@ -108,7 +108,8 @@ function writeProjectSessionMeta(key: string, meta: LocalProjectSessionMeta) {
 
     try {
         window.localStorage.setItem(key, JSON.stringify(meta));
-    } catch {}
+    } catch {
+    }
 }
 
 function clearProjectSessionMeta(key: string) {
@@ -116,7 +117,8 @@ function clearProjectSessionMeta(key: string) {
 
     try {
         window.localStorage.removeItem(key);
-    } catch {}
+    } catch {
+    }
 }
 
 export function useIdeProjectSession({
@@ -232,10 +234,6 @@ export function useIdeProjectSession({
         [projectTitle, title],
     );
 
-
-
-
-
     const detachMissingProject = useCallback(
         (message: string) => {
             loadedProjectIdRef.current = null;
@@ -250,7 +248,7 @@ export function useIdeProjectSession({
             clearProjectSessionMeta(sessionKey);
             clearSavedBaseline();
             setSaveError(message);
-            setToast({ kind: "error", text: message });
+            setToast({kind: "error", text: message});
         },
         [projectTitle, title, sessionKey, clearSavedBaseline, setToast],
     );
@@ -265,7 +263,8 @@ export function useIdeProjectSession({
             let data: any = null;
             try {
                 data = await res.json();
-            } catch {}
+            } catch {
+            }
 
             if (res.status === 409 && data?.code === "PROJECT_CONFLICT") {
                 const conflict = data as ProjectConflictResponse;
@@ -280,7 +279,7 @@ export function useIdeProjectSession({
 
                 const message = "A newer cloud version exists. Your local draft was kept.";
                 setSaveError(message);
-                setToast({ kind: "error", text: message });
+                setToast({kind: "error", text: message});
                 return conflict;
             }
 
@@ -294,7 +293,7 @@ export function useIdeProjectSession({
                         : "Project request failed.");
 
             setSaveError(message);
-            setToast({ kind: "error", text: message });
+            setToast({kind: "error", text: message});
 
             if (res.status === 401 || res.status === 402) {
                 goToUpgrade();
@@ -341,7 +340,7 @@ export function useIdeProjectSession({
             setPendingStartBlank(false);
         } else {
             projectIdSourceRef.current = null;
-            resetLanguageScopedProjectState({ keepProjectsOpen: true });
+            resetLanguageScopedProjectState({keepProjectsOpen: true});
         }
 
         setHydratedSessionKey(sessionKey);
@@ -372,115 +371,14 @@ export function useIdeProjectSession({
         lastSavedAt,
         baseVersion,
     ]);
+
+    // Local terminal sync is handled directly by the workspace terminal controller now.
+    // Keep this no-op only to avoid breaking older type contracts while removing the cloud-sync path.
     const syncTerminalFiles = useCallback(
-        async (sessionId: string): Promise<boolean> => {
-            if (!projectId) {
-                setToast({
-                    kind: "error",
-                    text: "Save this project first before syncing terminal files.",
-                });
-                return false;
-            }
-
-            if (!access.canSaveCloud) {
-                goToUpgrade();
-                return false;
-            }
-
-            try {
-                setIsSavingProject(true);
-                setSaveError(null);
-
-                const res = await fetch(
-                    `/api/ide/projects/${encodeURIComponent(projectId)}/terminal-sync`,
-                    {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({
-                            sessionId,
-                            baseVersion,
-                        }),
-                    },
-                );
-
-                if (res.status === 404) {
-                    detachMissingProject(
-                        "This saved project no longer exists. Your local draft was kept. Save it as a new project.",
-                    );
-                    return false;
-                }
-
-                if (!res.ok) {
-                    await handleProjectApiFailure(res);
-                    return false;
-                }
-
-                const data = await res.json();
-
-                if (!data?.project?.workspace) {
-                    throw new Error(
-                        "Terminal sync succeeded but no workspace was returned.",
-                    );
-                }
-
-                replaceWorkspace(data.project.workspace);
-                markLoaded(data.project.workspace);
-
-                loadedProjectIdRef.current = data.project.id;
-                projectIdSourceRef.current = "session";
-                setProjectId(data.project.id);
-                setCurrentProjectName(data.project.title ?? currentProjectName);
-                setLastSavedAt(data.project.updatedAt ?? null);
-                setBaseVersion(
-                    typeof data.project.currentVersion === "number"
-                        ? data.project.currentVersion
-                        : baseVersion,
-                );
-                setConflictInfo(null);
-                setPendingProjectId(null);
-                setPendingStartBlank(false);
-
-                persistLocalMeta({
-                    projectId: data.project.id,
-                    currentProjectName:
-                        data.project.title ?? currentProjectName,
-                    lastSavedAt: data.project.updatedAt ?? null,
-                    baseVersion:
-                        typeof data.project.currentVersion === "number"
-                            ? data.project.currentVersion
-                            : baseVersion,
-                });
-
-                setToast({
-                    kind: "success",
-                    text: "Synced terminal files to project.",
-                });
-                void refreshProjects();
-                return true;
-            } catch (e: any) {
-                const message = e?.message ?? "Failed to sync terminal files.";
-                setSaveError(message);
-                setToast({ kind: "error", text: message });
-                return false;
-            } finally {
-                setIsSavingProject(false);
-            }
-        },
-        [
-            projectId,
-            access.canSaveCloud,
-            goToUpgrade,
-            baseVersion,
-            currentProjectName,
-            detachMissingProject,
-            handleProjectApiFailure,
-            replaceWorkspace,
-            markLoaded,
-            persistLocalMeta,
-            refreshProjects,
-            setToast,
-        ],
+        async (_sessionId: string): Promise<boolean> => false,
+        [],
     );
+
     useEffect(() => {
         return () => {
             loadAbortRef.current?.abort();
@@ -614,7 +512,7 @@ export function useIdeProjectSession({
 
                 const message = e?.message ?? "Failed to load project.";
                 setSaveError(message);
-                setToast({ kind: "error", text: message });
+                setToast({kind: "error", text: message});
                 return false;
             } finally {
                 if (seq === loadSeqRef.current) {
@@ -660,7 +558,7 @@ export function useIdeProjectSession({
         const targetProjectId = conflictInfo?.projectId ?? projectId;
         if (!targetProjectId) return;
 
-        await loadProjectFromCloud(targetProjectId, { forceReplaceLocal: true });
+        await loadProjectFromCloud(targetProjectId, {forceReplaceLocal: true});
     }, [conflictInfo?.projectId, projectId, loadProjectFromCloud]);
 
     const persistProject = useCallback(
@@ -670,13 +568,13 @@ export function useIdeProjectSession({
             createRevision?: boolean;
         }): Promise<PersistProjectResult> => {
             if (!currentWorkspace) {
-                setToast({ kind: "error", text: "Nothing to save yet." });
-                return { ok: false };
+                setToast({kind: "error", text: "Nothing to save yet."});
+                return {ok: false};
             }
 
             if (!access.canSaveCloud) {
                 goToUpgrade();
-                return { ok: false };
+                return {ok: false};
             }
 
             const localMeta = readProjectSessionMeta(sessionKey);
@@ -701,8 +599,8 @@ export function useIdeProjectSession({
                 scope: projectScope,
                 createRevision: args?.createRevision ?? true,
                 revisionNote: targetProjectId ? "Manual save" : "Created from Save As",
-                settings: { sqlDialect },
-                meta: { source: "full-ide" },
+                settings: {sqlDialect},
+                meta: {source: "full-ide"},
                 baseVersion: targetProjectId
                     ? (baseVersion ?? localMeta?.baseVersion ?? null)
                     : null,
@@ -720,7 +618,7 @@ export function useIdeProjectSession({
                         : "/api/ide/projects",
                     {
                         method: targetProjectId ? "PATCH" : "POST",
-                        headers: { "Content-Type": "application/json" },
+                        headers: {"Content-Type": "application/json"},
                         body: JSON.stringify(body),
                     },
                 );
@@ -729,21 +627,21 @@ export function useIdeProjectSession({
                     detachMissingProject(
                         "This saved project no longer exists. Your local draft was kept. Save it as a new project.",
                     );
-                    return { ok: false };
+                    return {ok: false};
                 }
 
                 if (!res.ok) {
                     await handleProjectApiFailure(res);
-                    return { ok: false };
+                    return {ok: false};
                 }
 
                 const data = await res.json();
-                return { ok: true, data };
+                return {ok: true, data};
             } catch (e: any) {
                 const message = e?.message ?? "Failed to save project.";
                 setSaveError(message);
-                setToast({ kind: "error", text: message });
-                return { ok: false };
+                setToast({kind: "error", text: message});
+                return {ok: false};
             } finally {
                 setIsSavingProject(false);
             }
@@ -776,7 +674,7 @@ export function useIdeProjectSession({
         const workspaceToSave = currentWorkspace;
 
         if (!workspaceToSave) {
-            setToast({ kind: "error", text: "Nothing to save yet." });
+            setToast({kind: "error", text: "Nothing to save yet."});
             return false;
         }
 
@@ -830,7 +728,7 @@ export function useIdeProjectSession({
         });
 
         markSaved(workspaceToSave);
-        setToast({ kind: "success", text: "Project saved." });
+        setToast({kind: "success", text: "Project saved."});
         void refreshProjects();
         return true;
     }, [
@@ -852,7 +750,7 @@ export function useIdeProjectSession({
         async (nextTitle: string) => {
             const workspaceToSave = currentWorkspace;
             if (!workspaceToSave) {
-                setToast({ kind: "error", text: "Nothing to save yet." });
+                setToast({kind: "error", text: "Nothing to save yet."});
                 return false;
             }
 
@@ -889,7 +787,7 @@ export function useIdeProjectSession({
             });
 
             markSaved(workspaceToSave);
-            setToast({ kind: "success", text: "Project saved as a new project." });
+            setToast({kind: "success", text: "Project saved as a new project."});
             setSaveAsOpen(false);
             void refreshProjects();
             return true;
@@ -915,7 +813,7 @@ export function useIdeProjectSession({
                     `/api/ide/projects/${encodeURIComponent(renamingProject.id)}/meta`,
                     {
                         method: "PATCH",
-                        headers: { "Content-Type": "application/json" },
+                        headers: {"Content-Type": "application/json"},
                         body: JSON.stringify({
                             title: nextTitle,
                             baseVersion,
@@ -970,7 +868,7 @@ export function useIdeProjectSession({
 
                 setRenameOpen(false);
                 setRenamingProject(null);
-                setToast({ kind: "success", text: "Project renamed." });
+                setToast({kind: "success", text: "Project renamed."});
                 void refreshProjects();
                 return true;
             } catch (e: any) {
@@ -1010,7 +908,7 @@ export function useIdeProjectSession({
         clearProjectSessionMeta(sessionKey);
         resetLanguageScopedProjectState();
         clearSavedBaseline();
-        setToast({ kind: "success", text: "Started a new local project." });
+        setToast({kind: "success", text: "Started a new local project."});
     }, [
         access.canUseMultiFile,
         language,
@@ -1043,7 +941,7 @@ export function useIdeProjectSession({
                     return;
                 }
 
-                void loadProjectFromCloud(nextProjectId, { forceReplaceLocal: true });
+                void loadProjectFromCloud(nextProjectId, {forceReplaceLocal: true});
                 setProjectsOpen(false);
                 return;
             }
@@ -1076,7 +974,8 @@ export function useIdeProjectSession({
                 forceReplaceLocal: options?.forceReplaceLocal ?? false,
             });
         },
-        [pendingProjectId, loadProjectFromCloud],
+        [pendingProjectId, loadProjectFromCloud
+            , loadProjectFromCloud]
     );
 
     const handleSaveAndContinue = useCallback(async () => {
@@ -1110,7 +1009,7 @@ export function useIdeProjectSession({
             return;
         }
 
-        void continueOpenPendingProject({ forceReplaceLocal: true });
+        void continueOpenPendingProject({forceReplaceLocal: true});
     }, [pendingStartBlank, executeStartBlankProject, continueOpenPendingProject]);
 
     const cancelPendingSwitch = useCallback(() => {
@@ -1149,7 +1048,7 @@ export function useIdeProjectSession({
                     clearSavedBaseline();
                 }
 
-                setToast({ kind: "success", text: "Project archived." });
+                setToast({kind: "success", text: "Project archived."});
                 void refreshProjects();
             } catch (e: any) {
                 setToast({

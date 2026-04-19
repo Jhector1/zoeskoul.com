@@ -85,6 +85,26 @@ function writeChunk(term: XTerm, chunk: TerminalChunk) {
     term.write(`\x1b[90m${text}\x1b[0m`);
 }
 
+function splitInputByEnter(data: string) {
+    const parts: Array<{ kind: "text" | "enter"; value: string }> = [];
+    let buf = "";
+
+    for (const ch of Array.from(data)) {
+        if (ch === "\r") {
+            if (buf) {
+                parts.push({ kind: "text", value: buf });
+                buf = "";
+            }
+            parts.push({ kind: "enter", value: "\r" });
+            continue;
+        }
+        buf += ch;
+    }
+
+    if (buf) parts.push({ kind: "text", value: buf });
+    return parts;
+}
+
 export default function XtermTerminal(props: {
     terminalFeed: TerminalChunk[];
     inputEnabled: boolean;
@@ -94,6 +114,8 @@ export default function XtermTerminal(props: {
     onSendData: (data: string) => void;
     onResize: (cols: number, rows: number) => void;
     optimisticLocalEcho?: boolean;
+    onBeforeSubmitEnter?: () => Promise<void>;
+    onAfterSubmitEnter?: () => Promise<void>;
 }) {
     const {
         terminalFeed,
@@ -127,6 +149,9 @@ export default function XtermTerminal(props: {
 
     const onSendDataRef = useRef(onSendData);
     const onResizeRef = useRef(onResize);
+    const onBeforeSubmitEnterRef = useRef(props.onBeforeSubmitEnter);
+    const onAfterSubmitEnterRef = useRef(props.onAfterSubmitEnter);
+    const inputQueueRef = useRef<Promise<void>>(Promise.resolve());
 
     inputReadyRef.current = inputEnabled && !disabled;
 
@@ -137,6 +162,14 @@ export default function XtermTerminal(props: {
     useEffect(() => {
         onResizeRef.current = onResize;
     }, [onResize]);
+
+    useEffect(() => {
+        onBeforeSubmitEnterRef.current = props.onBeforeSubmitEnter;
+    }, [props.onBeforeSubmitEnter]);
+
+    useEffect(() => {
+        onAfterSubmitEnterRef.current = props.onAfterSubmitEnter;
+    }, [props.onAfterSubmitEnter]);
 
     const statusText = useMemo(
         () =>
@@ -263,7 +296,27 @@ export default function XtermTerminal(props: {
 
                         dataDisposableRef.current = term.onData((data) => {
                             if (!inputReadyRef.current) return;
-                            onSendDataRef.current(data);
+
+                            const run = async () => {
+                                const parts = splitInputByEnter(data);
+
+                                for (const part of parts) {
+                                    if (part.kind === "text") {
+                                        onSendDataRef.current(part.value);
+                                        continue;
+                                    }
+
+                                    await onBeforeSubmitEnterRef.current?.();
+                                    onSendDataRef.current(part.value);
+                                    await onAfterSubmitEnterRef.current?.();
+                                }
+                            };
+
+                            inputQueueRef.current = inputQueueRef.current
+                                .then(run)
+                                .catch((err) => {
+                                    console.error("xterm input dispatch failed", err);
+                                });
                         });
 
                         binaryDisposableRef.current = term.onBinary((data) => {

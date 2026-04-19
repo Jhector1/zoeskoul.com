@@ -23,7 +23,10 @@ type Props = {
     isAuthenticated: boolean;
     runtime: CodeRunnerRuntime;
     projectId?: string | null;
-    onSyncTerminalFiles?: (sessionId: string) => Promise<boolean>;
+    onApplyTerminalSnapshotFiles?: (
+        files: Array<{ path: string; content: string }>,
+        meta: { dirtyUiPaths: Set<string> },
+    ) => void | Promise<void>;
     onChangeLanguage: (language: any) => void;
     onChangeCode: (code: string) => void;
     onChangeSqlDialect: (dialect: any) => void;
@@ -46,7 +49,7 @@ export default function IdeEditorPane({
                                           sqlDialect,
                                           runtime,
                                           projectId,
-                                          onSyncTerminalFiles,
+                                          onApplyTerminalSnapshotFiles,
                                           onChangeLanguage,
                                           onChangeCode,
                                           onChangeSqlDialect,
@@ -118,14 +121,11 @@ export default function IdeEditorPane({
                                 projectId: projectId ?? undefined,
                                 cwd: "/workspace",
                                 initialFiles: workspaceTerminalFiles,
+                                getWorkspaceFiles: () => workspaceTerminalFiles,
+                                onTerminalSnapshotFiles: onApplyTerminalSnapshotFiles,
                                 lazy: true,
                                 title: "Terminal",
                             }}
-                            onSyncWorkspaceFiles={
-                                projectId && onSyncTerminalFiles
-                                    ? onSyncTerminalFiles
-                                    : undefined
-                            }
                             editorModelKey={activeFileId ?? "no-file"}
                         />
                     </div>

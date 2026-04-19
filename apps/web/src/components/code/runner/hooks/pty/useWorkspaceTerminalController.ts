@@ -12,6 +12,8 @@ import type {
 } from "../../runtime";
 import { useRunSession } from "../useRunSession";
 
+type SyncStatus = "idle" | "pushing" | "pulling" | "error";
+
 function isFinalSessionState(state: string) {
     return (
         state === "completed" ||
@@ -33,6 +35,100 @@ function normalizeFiles(
     }));
 }
 
+function normalizePath(input: string) {
+    return String(input ?? "").replace(/\\/g, "/").trim();
+}
+
+function sortFiles(files: FileEntry[]) {
+    return [...files]
+        .map((f) => ({
+            path: normalizePath(f.path),
+            content: String(f.content ?? ""),
+        }))
+        .filter((f) => !!f.path)
+        .sort((a, b) => a.path.localeCompare(b.path));
+}
+
+function filesEqual(a: FileEntry[], b: FileEntry[]) {
+    const aa = sortFiles(a);
+    const bb = sortFiles(b);
+
+    if (aa.length !== bb.length) return false;
+
+    for (let i = 0; i < aa.length; i++) {
+        if (aa[i].path !== bb[i].path) return false;
+        if (aa[i].content !== bb[i].content) return false;
+    }
+
+    return true;
+}
+
+function diffDirtyUiPaths(currentUiFiles: FileEntry[], baselineFiles: FileEntry[]) {
+    const out = new Set<string>();
+
+    const current = new Map(sortFiles(currentUiFiles).map((f) => [f.path, f.content]));
+    const baseline = new Map(sortFiles(baselineFiles).map((f) => [f.path, f.content]));
+
+    const allPaths = new Set([...current.keys(), ...baseline.keys()]);
+
+    for (const path of allPaths) {
+        if ((current.get(path) ?? null) !== (baseline.get(path) ?? null)) {
+            out.add(path);
+        }
+    }
+
+    return out;
+}
+
+function applyDirtyOverridesToSnapshot(
+    snapshotFiles: FileEntry[],
+    currentUiFiles: FileEntry[],
+    dirtyUiPaths: Set<string>,
+) {
+    const merged = new Map(sortFiles(snapshotFiles).map((f) => [f.path, f.content]));
+    const current = new Map(sortFiles(currentUiFiles).map((f) => [f.path, f.content]));
+
+    for (const path of dirtyUiPaths) {
+        if (current.has(path)) {
+            merged.set(path, current.get(path) ?? "");
+        } else {
+            merged.delete(path);
+        }
+    }
+
+    return sortFiles(
+        [...merged.entries()].map(([path, content]) => ({ path, content })),
+    );
+}
+
+async function postJson<T>(url: string, body: unknown): Promise<T> {
+    const res = await fetch(url, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+    });
+
+    const data = await res.json().catch(() => null);
+
+    if (!res.ok || !data?.ok) {
+        throw new Error(data?.error ?? `Request failed (${res.status})`);
+    }
+
+    return data as T;
+}
+
+type SnapshotResponse = {
+    ok: true;
+    files: FileEntry[];
+};
+
+type ReplaceResponse = {
+    ok: true;
+    fileCount: number;
+};
+
 type UseWorkspaceTerminalArgs = WorkspaceTerminalConfig & {
     enabled: boolean;
 };
@@ -42,7 +138,6 @@ export function useWorkspaceTerminalController(
 ): WorkspaceTerminalController {
     const {
         sessionId,
-        state: sessionState,
         events,
         start,
         sendInput,
@@ -57,9 +152,24 @@ export function useWorkspaceTerminalController(
     const [state, setState] = React.useState<RunSessionState | "idle">("idle");
     const [started, setStarted] = React.useState(false);
     const [starting, setStarting] = React.useState(false);
+    const [syncStatus, setSyncStatus] = React.useState<SyncStatus>("idle");
 
     const nextChunkIdRef = React.useRef(1);
     const lastHandledSeqRef = React.useRef(0);
+
+    const lastPushedFilesRef = React.useRef<FileEntry[]>(
+        sortFiles(normalizeFiles(args.initialFiles) ?? []),
+    );
+    const quietTimerRef = React.useRef<number | null>(null);
+    const awaitingPostEnterSnapshotRef = React.useRef(false);
+    const snapshotInFlightRef = React.useRef<Promise<boolean> | null>(null);
+
+    const getWorkspaceFiles = React.useCallback(() => {
+        const live = args.getWorkspaceFiles?.();
+        if (live) return sortFiles(live);
+
+        return sortFiles(normalizeFiles(args.initialFiles) ?? []);
+    }, [args.getWorkspaceFiles, args.initialFiles]);
 
     const pushChunk = React.useCallback(
         (kind: TerminalChunk["kind"], data: string) => {
@@ -73,32 +183,165 @@ export function useWorkspaceTerminalController(
         [],
     );
 
+    const clearQuietTimer = React.useCallback(() => {
+        if (quietTimerRef.current != null) {
+            window.clearTimeout(quietTimerRef.current);
+            quietTimerRef.current = null;
+        }
+    }, []);
+
     const reset = React.useCallback(() => {
+        clearQuietTimer();
         closeSocket();
         lastHandledSeqRef.current = 0;
         nextChunkIdRef.current = 1;
+        awaitingPostEnterSnapshotRef.current = false;
+        snapshotInFlightRef.current = null;
         setTerminalFeed([]);
         setInputEnabled(false);
         setBusy(false);
         setState("idle");
         setStarted(false);
         setStarting(false);
-    }, [closeSocket]);
+        setSyncStatus("idle");
+    }, [clearQuietTimer, closeSocket]);
+
+    const replaceFiles = React.useCallback(
+        async (files: FileEntry[]) => {
+            if (!sessionId) return false;
+
+            setSyncStatus("pushing");
+
+            try {
+                await postJson<ReplaceResponse>(
+                    `/api/run/pty/sessions/${encodeURIComponent(sessionId)}/workspace/replace`,
+                    { files: sortFiles(files) },
+                );
+                lastPushedFilesRef.current = sortFiles(files);
+                setSyncStatus("idle");
+                return true;
+            } catch (e: any) {
+                setSyncStatus("error");
+                pushChunk("err", `\r\n${e?.message ?? "Failed to sync workspace to terminal."}\r\n`);
+                return false;
+            }
+        },
+        [sessionId, pushChunk],
+    );
+
+    const snapshotFiles = React.useCallback(async () => {
+        if (!sessionId) return [] as FileEntry[];
+
+        setSyncStatus("pulling");
+
+        try {
+            const out = await postJson<SnapshotResponse>(
+                `/api/run/pty/sessions/${encodeURIComponent(sessionId)}/workspace/snapshot`,
+                {},
+            );
+            setSyncStatus("idle");
+            return sortFiles(out.files ?? []);
+        } catch (e: any) {
+            setSyncStatus("error");
+            pushChunk("err", `\r\n${e?.message ?? "Failed to pull terminal workspace."}\r\n`);
+            return [];
+        }
+    }, [sessionId, pushChunk]);
+
+    const pushWorkspaceFromSource = React.useCallback(
+        async (force = false) => {
+            const files = getWorkspaceFiles();
+
+            if (!force && filesEqual(files, lastPushedFilesRef.current)) {
+                return true;
+            }
+
+            return await replaceFiles(files);
+        },
+        [getWorkspaceFiles, replaceFiles],
+    );
+
+    const pullSnapshotIntoWorkspace = React.useCallback(async () => {
+        if (!sessionId) return false;
+        if (snapshotInFlightRef.current) return await snapshotInFlightRef.current;
+
+        const run = (async () => {
+            const snapshot = await snapshotFiles();
+            const currentUiFiles = getWorkspaceFiles();
+            const dirtyUiPaths = diffDirtyUiPaths(
+                currentUiFiles,
+                lastPushedFilesRef.current,
+            );
+
+            const nextBaseline = applyDirtyOverridesToSnapshot(
+                snapshot,
+                currentUiFiles,
+                dirtyUiPaths,
+            );
+
+            awaitingPostEnterSnapshotRef.current = false;
+
+            try {
+                await args.onTerminalSnapshotFiles?.(snapshot, {
+                    dirtyUiPaths,
+                });
+            } finally {
+                lastPushedFilesRef.current = nextBaseline;
+            }
+
+            return true;
+        })();
+
+        snapshotInFlightRef.current = run;
+
+        try {
+            return await run;
+        } finally {
+            snapshotInFlightRef.current = null;
+        }
+    }, [sessionId, snapshotFiles, getWorkspaceFiles, args]);
+
+    const schedulePostEnterSnapshot = React.useCallback(
+        (delayMs = 700) => {
+            if (!awaitingPostEnterSnapshotRef.current) return;
+            clearQuietTimer();
+
+            quietTimerRef.current = window.setTimeout(() => {
+                quietTimerRef.current = null;
+                void pullSnapshotIntoWorkspace();
+            }, delayMs);
+        },
+        [clearQuietTimer, pullSnapshotIntoWorkspace],
+    );
+
+    const beforeSubmitEnter = React.useCallback(async () => {
+        const ok = await pushWorkspaceFromSource(true);
+        if (!ok) {
+            throw new Error("Could not push local workspace to terminal.");
+        }
+    }, [pushWorkspaceFromSource]);
+
+    const afterSubmitEnter = React.useCallback(async () => {
+        awaitingPostEnterSnapshotRef.current = true;
+        schedulePostEnterSnapshot(700);
+    }, [schedulePostEnterSnapshot]);
 
     const open = React.useCallback(async () => {
         if (!args.enabled) return;
         if (starting) return;
         if (started && !isFinalSessionState(state)) return;
 
-        const files = normalizeFiles(args.initialFiles);
+        const files = getWorkspaceFiles();
 
         lastHandledSeqRef.current = 0;
         nextChunkIdRef.current = 1;
+        awaitingPostEnterSnapshotRef.current = false;
         setTerminalFeed([]);
         setInputEnabled(false);
         setBusy(true);
         setState("preparing");
         setStarting(true);
+        setSyncStatus("idle");
 
         pushChunk("sys", "[starting workspace terminal]\r\n");
 
@@ -109,9 +352,10 @@ export function useWorkspaceTerminalController(
                 language: "bash",
                 projectId: args.projectId,
                 cwd: args.cwd,
-                ...(files?.length ? { files } : {}),
+                ...(files.length ? { files } : {}),
             });
 
+            lastPushedFilesRef.current = sortFiles(files);
             setStarted(true);
         } catch (e: any) {
             pushChunk("err", `${e?.message ?? "Failed to start workspace terminal."}\r\n`);
@@ -124,9 +368,9 @@ export function useWorkspaceTerminalController(
         }
     }, [
         args.enabled,
-        args.initialFiles,
         args.projectId,
         args.cwd,
+        getWorkspaceFiles,
         start,
         started,
         starting,
@@ -141,12 +385,13 @@ export function useWorkspaceTerminalController(
             await cancel();
             pushChunk("sys", "\r\n[workspace terminal stopped]\r\n");
         } finally {
+            clearQuietTimer();
             setBusy(false);
             setInputEnabled(false);
             setStarted(false);
             setStarting(false);
         }
-    }, [cancel, started, starting, pushChunk]);
+    }, [cancel, started, starting, pushChunk, clearQuietTimer]);
 
     const sendData = React.useCallback(
         (data: string) => {
@@ -183,11 +428,17 @@ export function useWorkspaceTerminalController(
 
             if (ev.type === "stdout") {
                 pushChunk("pty", ev.chunk);
+                if (awaitingPostEnterSnapshotRef.current) {
+                    schedulePostEnterSnapshot(700);
+                }
                 continue;
             }
 
             if (ev.type === "stderr") {
                 pushChunk("err", ev.chunk);
+                if (awaitingPostEnterSnapshotRef.current) {
+                    schedulePostEnterSnapshot(700);
+                }
                 continue;
             }
 
@@ -204,6 +455,10 @@ export function useWorkspaceTerminalController(
                     setBusy(true);
                     setInputEnabled(true);
                     setStarted(true);
+
+                    if (awaitingPostEnterSnapshotRef.current) {
+                        schedulePostEnterSnapshot(450);
+                    }
                     continue;
                 }
 
@@ -211,6 +466,10 @@ export function useWorkspaceTerminalController(
                     setBusy(false);
                     setInputEnabled(false);
                     setStarted(false);
+
+                    if (awaitingPostEnterSnapshotRef.current) {
+                        schedulePostEnterSnapshot(100);
+                    }
                     continue;
                 }
 
@@ -222,6 +481,10 @@ export function useWorkspaceTerminalController(
                 setBusy(true);
                 setInputEnabled(true);
                 setStarted(true);
+
+                if (awaitingPostEnterSnapshotRef.current) {
+                    schedulePostEnterSnapshot(250);
+                }
                 continue;
             }
 
@@ -232,6 +495,10 @@ export function useWorkspaceTerminalController(
                 setInputEnabled(false);
                 setState("failed");
                 setStarted(false);
+
+                if (awaitingPostEnterSnapshotRef.current) {
+                    schedulePostEnterSnapshot(100);
+                }
                 continue;
             }
 
@@ -240,6 +507,10 @@ export function useWorkspaceTerminalController(
                 setBusy(false);
                 setInputEnabled(false);
                 setStarted(false);
+
+                if (awaitingPostEnterSnapshotRef.current) {
+                    schedulePostEnterSnapshot(100);
+                }
                 continue;
             }
 
@@ -249,15 +520,19 @@ export function useWorkspaceTerminalController(
                 setInputEnabled(false);
                 setState("failed");
                 setStarted(false);
+
+                if (awaitingPostEnterSnapshotRef.current) {
+                    schedulePostEnterSnapshot(100);
+                }
             }
         }
-    }, [events, pushChunk]);
+    }, [events, pushChunk, schedulePostEnterSnapshot]);
 
     React.useEffect(() => {
-        if (!sessionId && state !== "idle" && !busy && !starting) {
-            setStarted(false);
-        }
-    }, [sessionId, state, busy, starting]);
+        return () => {
+            clearQuietTimer();
+        };
+    }, [clearQuietTimer]);
 
     return {
         available: args.enabled,
@@ -268,6 +543,7 @@ export function useWorkspaceTerminalController(
         sessionId,
         state,
         terminalFeed,
+        syncStatus,
 
         open,
         stop,
@@ -275,5 +551,10 @@ export function useWorkspaceTerminalController(
 
         sendData,
         resize,
+
+        replaceFiles,
+        snapshotFiles,
+        beforeSubmitEnter,
+        afterSubmitEnter,
     };
 }

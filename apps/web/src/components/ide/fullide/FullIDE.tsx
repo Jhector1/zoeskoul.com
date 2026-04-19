@@ -25,6 +25,7 @@ import IdeEditorPane from "@/components/ide/fullide/panes/IdeEditorPane";
 import IdeExplorerPane from "@/components/ide/fullide/panes/IdeExplorerPane";
 import type { FullIDEProps } from "../types";
 import { CodeRunnerRuntime, ExecutionBackend } from "@/components/code/runner/runtime";
+import { mergeTerminalSnapshotIntoWorkspace } from "@/lib/projects/mergeTerminalSnapshotIntoWorkspace";
 
 type WorkspaceHookResult = ReturnType<typeof useIdeWorkspace>;
 
@@ -154,6 +155,11 @@ function FullIDEInner({
     } = state;
 
     const { activeFile, entryFile, tabFiles, currentWorkspace } = derived;
+    const currentWorkspaceRef = useRef(currentWorkspace);
+
+    useEffect(() => {
+        currentWorkspaceRef.current = currentWorkspace;
+    }, [currentWorkspace]);
 
     const dirty = useProjectDirtyState(currentWorkspace, language);
     const projects = useProjectsList({
@@ -251,6 +257,25 @@ function FullIDEInner({
         router.push("/sandbox");
     }, [router]);
 
+    const applyTerminalSnapshotFiles = useCallback(
+        async (
+            files: Array<{ path: string; content: string }>,
+            meta: { dirtyUiPaths: Set<string> },
+        ) => {
+            const prior = currentWorkspaceRef.current;
+            if (!prior) return;
+
+            actions.replaceWorkspace(
+                mergeTerminalSnapshotIntoWorkspace({
+                    prior,
+                    snapshotFiles: files,
+                    dirtyUiPaths: meta.dirtyUiPaths,
+                }),
+            );
+        },
+        [actions],
+    );
+
     const explorerPane = (
         <IdeExplorerPane
             isSql={isSql}
@@ -314,7 +339,7 @@ function FullIDEInner({
             closeTab={actions.closeTab}
             isDesktop={viewport.isDesktop}
             projectId={projectSession.projectId}
-            onSyncTerminalFiles={projectSession.syncTerminalFiles}
+            onApplyTerminalSnapshotFiles={applyTerminalSnapshotFiles}
         />
     );
 

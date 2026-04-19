@@ -40,7 +40,6 @@ type CodeRunnerWithStdinProps = CodeRunnerProps & {
     showStdinEditor?: boolean;
     stdinPlaceholder?: string;
     workspaceTerminal?: WorkspaceTerminalConfig;
-    onSyncWorkspaceFiles?: (sessionId: string) => Promise<boolean>;
     sqlInitialTableSnapshots?: Record<
         string,
         {
@@ -124,9 +123,6 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         sqlInitialTableSnapshots,
         stdinPlaceholder = "Type stdin here. Each new line becomes one input line.",
         workspaceTerminal,
-
-
-        onSyncWorkspaceFiles,
     } = props as any;
 
     const controlled = isControlled(props as any);
@@ -341,22 +337,11 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         projectId: workspaceTerminal?.projectId,
         cwd: workspaceTerminal?.cwd,
         initialFiles: workspaceTerminal?.initialFiles,
+        getWorkspaceFiles: workspaceTerminal?.getWorkspaceFiles,
+        onTerminalSnapshotFiles: workspaceTerminal?.onTerminalSnapshotFiles,
         lazy: workspaceTerminal?.lazy ?? true,
         title: workspaceTerminal?.title,
     });
-
-    const [isSyncingWorkspace, setIsSyncingWorkspace] = useState(false);
-
-    const handleSyncWorkspace = useCallback(async () => {
-        if (!workspaceTerm.sessionId || !onSyncWorkspaceFiles) return;
-
-        try {
-            setIsSyncingWorkspace(true);
-            await onSyncWorkspaceFiles(workspaceTerm.sessionId);
-        } finally {
-            setIsSyncingWorkspace(false);
-        }
-    }, [workspaceTerm.sessionId, onSyncWorkspaceFiles]);
 
     useEffect(() => {
         requestLayout();
@@ -463,13 +448,6 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
             }
             : undefined;
 
-    const sqlResult =
-        lang === "sql" &&
-        term.lastRunLanguage === "sql" &&
-        isSqlRunResult(term.lastResult)
-            ? term.lastResult
-            : null;
-
     const outputLabel = term.backend === "sql" ? "Results" : "Output";
     const mobileTabAttention = term.runState !== "idle" || !!term.lastResult;
     const mobileBodyHeight = Math.max(240, (split.mainH || numericHeight) - 48);
@@ -488,6 +466,8 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                     lastResult={null}
                     onSendData={workspaceTerm.sendData}
                     onResize={workspaceTerm.resize}
+                    onBeforeSubmitEnter={workspaceTerm.beforeSubmitEnter}
+                    onAfterSubmitEnter={workspaceTerm.afterSubmitEnter}
                 />
             );
         }
@@ -549,23 +529,6 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                                     <span className="inline-flex h-2 w-2 rounded-full bg-emerald-500" />
                                 ) : null}
                             </button>
-
-                            {outputTab === "terminal" &&
-                            workspaceTerm.sessionId &&
-                            onSyncWorkspaceFiles ? (
-                                <button
-                                    type="button"
-                                    onClick={() => void handleSyncWorkspace()}
-                                    disabled={isSyncingWorkspace}
-                                    className={cx(
-                                        MOBILE_TAB_BASE,
-                                        MOBILE_TAB_IDLE,
-                                        "ml-auto border border-neutral-200 dark:border-white/10",
-                                    )}
-                                >
-                                    {isSyncingWorkspace ? "Syncing…" : "Sync Files"}
-                                </button>
-                            ) : null}
                         </div>
                     </div>
                 ) : null}

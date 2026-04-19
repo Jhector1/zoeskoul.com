@@ -1,8 +1,12 @@
 import type { RefObject } from "react";
-import type {FileEntry, RunSessionState, TerminalRunnerLanguage} from "@zoeskoul/code-contracts";
+import type {
+    FileEntry,
+    RunSessionState,
+    TerminalRunnerLanguage,
+} from "@zoeskoul/code-contracts";
 import type { RunResult } from "@/lib/code/types";
 import type { BatchRunResult } from "@/lib/code/types/batch";
-import type { CodeLanguage, SqlDialect } from "@/lib/practice/types";
+import type { SqlDialect } from "@/lib/practice/types";
 import type { OnRun, RunnerState, TermLine } from "./types";
 
 export type ExecutionBackend = "pty" | "judge0";
@@ -52,6 +56,12 @@ export type WorkspaceTerminalConfig = {
     initialFiles?: FileEntry[] | Record<string, string>;
     lazy?: boolean;
     title?: string;
+
+    getWorkspaceFiles?: () => FileEntry[];
+    onTerminalSnapshotFiles?: (
+        files: FileEntry[],
+        meta: { dirtyUiPaths: Set<string> },
+    ) => void | Promise<void>;
 };
 
 export type TranscriptState = {
@@ -71,6 +81,8 @@ export type StreamState = {
     inputEnabled: boolean;
     sendTerminalData: (data: string) => void;
     sendTerminalResize: (cols: number, rows: number) => void;
+    beforeSubmitEnter?: () => Promise<void>;
+    afterSubmitEnter?: () => Promise<void>;
 };
 
 export type WorkspaceTerminalController = {
@@ -82,6 +94,7 @@ export type WorkspaceTerminalController = {
     sessionId: string | null;
     state: RunSessionState | "idle";
     terminalFeed: TerminalChunk[];
+    syncStatus: "idle" | "pushing" | "pulling" | "error";
 
     open: () => Promise<void>;
     stop: () => Promise<void>;
@@ -89,6 +102,11 @@ export type WorkspaceTerminalController = {
 
     sendData: (data: string) => void;
     resize: (cols: number, rows: number) => void;
+
+    replaceFiles: (files: FileEntry[]) => Promise<boolean>;
+    snapshotFiles: () => Promise<FileEntry[]>;
+    beforeSubmitEnter: () => Promise<void>;
+    afterSubmitEnter: () => Promise<void>;
 };
 
 export type CodeRunnerController = {
