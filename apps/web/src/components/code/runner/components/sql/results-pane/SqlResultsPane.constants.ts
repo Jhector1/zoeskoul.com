@@ -9,7 +9,7 @@ export  {cn} from "@/components/ide/utils";
 export const TABLE_ROWS_PANEL_H = 220;
 
 export const SURFACE =
-    "rounded-xl border border-neutral-200/70 bg-white/90 dark:border-white/10 dark:bg-black/20";
+    " border border-neutral-200/70 bg-white/90 dark:border-white/10 dark:bg-black/20";
 
 export const FLOAT_BAR =
     "rounded-md border border-neutral-200/70 bg-white/92 shadow-sm backdrop-blur dark:border-white/10 dark:bg-black/55";
