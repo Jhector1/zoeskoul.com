@@ -26,8 +26,7 @@ npx ts-node scripts/resetBilling.ts you@example.com
 npx dotenv -e .env.development.local -- npx tsx scripts/resetBilling.ts tutoring@student.learnoir.com
 
 docker build -f docker/runtime/Dockerfile -t zoeskoul-runtime:latest docker/runtime
-pnpm tsx scripts/update-user-roles.ts --email tutoring@student.learnoir.com --roles ADMIN
-
+pnpm tsx scripts/set-user-roles.ts --email tutoring@student.learnoir.com --roles admin
 cd /opt/zoeskoul.com/infra
 git pull --ff-only
 docker compose --profile build-only build runtime-image

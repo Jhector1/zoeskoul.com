@@ -96,7 +96,7 @@ export function TablesTab(props: {
 
     return (
         <div className="flex h-full min-h-0 flex-col gap-3">
-            <div className="flex flex-wrap items-center gap-2">
+            <div className="flex flex-wrap items-center pl-3 gap-2">
                 <Badge>
                     {schema.tables.length} table{schema.tables.length === 1 ? "" : "s"}
                 </Badge>

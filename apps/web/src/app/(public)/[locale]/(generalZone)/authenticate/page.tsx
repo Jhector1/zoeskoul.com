@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useMemo, useState } from "react";
-import { signIn } from "next-auth/react";
-import { useSearchParams } from "next/navigation";
-import { useLocale, useTranslations } from "next-intl";
-import { Link } from "@/i18n/navigation";
-import { cn } from "@/lib/cn";
-import { sanitizeCallbackUrl } from "@/lib/auth/callback-url";
+import React, {useMemo, useState} from "react";
+import {signIn} from "next-auth/react";
+import {useSearchParams} from "next/navigation";
+import {useLocale, useTranslations} from "next-intl";
+import {Link} from "@/i18n/navigation";
+import {cn} from "@/lib/cn";
+import {sanitizeCallbackUrl} from "@/lib/auth/callback-url";
 
 type AuthProvider = {
     id: string;
@@ -70,29 +70,33 @@ export default function AuthenticatePage() {
     function onProvider(providerId: string) {
         if (loadingProvider) return;
         setLoadingProvider(providerId);
-        void signIn(providerId, { callbackUrl });
+        void signIn(providerId, {callbackUrl});
     }
 
     const appName = process.env.NEXT_PUBLIC_APP_NAME ?? "Learnoir";
 
     return (
-        <main className="relative min-h-screen overflow-hidden bg-neutral-50 text-neutral-900 dark:bg-[#070A12] dark:text-white">
+        <main
+            className="relative min-h-screen overflow-hidden bg-neutral-50 text-neutral-900 dark:bg-[#070A12] dark:text-white">
             <div className="pointer-events-none absolute inset-0">
-                <div className="absolute -top-24 left-1/2 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-emerald-500/10 blur-3xl" />
-                <div className="absolute -bottom-24 right-[-80px] h-[420px] w-[420px] rounded-full bg-indigo-500/10 blur-3xl" />
-                <div className="absolute inset-0 bg-[radial-gradient(1200px_700px_at_20%_0%,rgba(16,185,129,0.10)_0%,rgba(245,245,245,1)_60%)] dark:bg-[radial-gradient(1200px_700px_at_20%_0%,rgba(55,65,81,0.35)_0%,rgba(7,10,18,1)_55%)]" />
+                <div
+                    className="absolute -top-24 left-1/2 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-emerald-500/10 blur-3xl"/>
+                <div
+                    className="absolute -bottom-24 right-[-80px] h-[420px] w-[420px] rounded-full bg-indigo-500/10 blur-3xl"/>
+                <div
+                    className="absolute inset-0 bg-[radial-gradient(1200px_700px_at_20%_0%,rgba(16,185,129,0.10)_0%,rgba(245,245,245,1)_60%)] dark:bg-[radial-gradient(1200px_700px_at_20%_0%,rgba(55,65,81,0.35)_0%,rgba(7,10,18,1)_55%)]"/>
             </div>
 
             <div className="relative mx-auto flex min-h-screen max-w-6xl items-center justify-center p-6">
                 <div className="w-full max-w-md">
                     <div className="mb-6 flex items-center justify-center gap-3">
                         <div className="ui-icon-box">
-                            <KeycloakIcon className="h-5 w-5 opacity-90" />
+                            <KeycloakIcon className="h-5 w-5 opacity-90"/>
                         </div>
 
                         <div className="min-w-0 leading-tight">
                             <div className="ui-title-sm">
-                                {t("brand.name", { appName })}
+                                {t("brand.name", {appName})}
                             </div>
                             <div className="ui-meta">
                                 {t("brand.tagline")}
@@ -137,9 +141,9 @@ export default function AuthenticatePage() {
                                         >
                       <span className="flex min-w-0 items-center gap-3">
                         {isLoading ? (
-                            <Spinner className="h-4 w-4 shrink-0" />
+                            <Spinner className="h-4 w-4 shrink-0"/>
                         ) : (
-                            <Icon className="h-4 w-4 shrink-0 opacity-90" />
+                            <Icon className="h-4 w-4 shrink-0 opacity-90"/>
                         )}
 
                           <span className="min-w-0">
@@ -165,7 +169,8 @@ export default function AuthenticatePage() {
 
                             <p className="ui-meta mt-4">{t("notes.redirect")}</p>
 
-                            <div className="mt-6 border-t border-[rgb(var(--ui-border)/0.72)] pt-4 text-[11px] leading-relaxed">
+                            <div
+                                className="mt-6 border-t border-[rgb(var(--ui-border)/0.72)] pt-4 text-[11px] leading-relaxed">
                                 <span className="ui-meta">{t("legal.prefix")} </span>
                                 <Link href="/legal/terms" className="ui-meta-strong hover:underline">
                                     {t("legal.terms")}
@@ -188,7 +193,7 @@ export default function AuthenticatePage() {
     );
 }
 
-function Spinner({ className = "" }: { className?: string }) {
+function Spinner({className = ""}: { className?: string }) {
     return (
         <svg
             className={cn("animate-spin", className)}
@@ -206,7 +211,7 @@ function Spinner({ className = "" }: { className?: string }) {
     );
 }
 
-function KeycloakIcon({ className = "" }: { className?: string }) {
+function KeycloakIcon({className = ""}: { className?: string }) {
     return (
         <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path
@@ -226,7 +231,7 @@ function KeycloakIcon({ className = "" }: { className?: string }) {
     );
 }
 
-function GoogleIcon({ className = "" }: { className?: string }) {
+function GoogleIcon({className = ""}: { className?: string }) {
     return (
         <svg className={className} viewBox="0 0 24 24" aria-hidden="true">
             <path

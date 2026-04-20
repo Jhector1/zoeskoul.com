@@ -281,6 +281,72 @@ importers:
         specifier: ^3.25.76
         version: 3.25.76
 
+  packages/curriculum-ai:
+    dependencies:
+      '@zoeskoul/curriculum-contracts':
+        specifier: workspace:*
+        version: link:../curriculum-contracts
+
+  packages/curriculum-cli:
+    dependencies:
+      '@zoeskoul/curriculum-ai':
+        specifier: workspace:*
+        version: link:../curriculum-ai
+      '@zoeskoul/curriculum-compiler':
+        specifier: workspace:*
+        version: link:../curriculum-compiler
+
+  packages/curriculum-compiler:
+    dependencies:
+      '@zoeskoul/curriculum-ai':
+        specifier: workspace:*
+        version: link:../curriculum-ai
+      '@zoeskoul/curriculum-contracts':
+        specifier: workspace:*
+        version: link:../curriculum-contracts
+      '@zoeskoul/curriculum-core':
+        specifier: workspace:*
+        version: link:../curriculum-core
+      '@zoeskoul/curriculum-profiles':
+        specifier: workspace:*
+        version: link:../curriculum-profiles
+
+  packages/curriculum-contracts:
+    dependencies:
+      zod:
+        specifier: ^3.25.76
+        version: 3.25.76
+
+  packages/curriculum-core:
+    dependencies:
+      '@zoeskoul/curriculum-contracts':
+        specifier: workspace:*
+        version: link:../curriculum-contracts
+
+  packages/curriculum-profiles:
+    dependencies:
+      '@zoeskoul/curriculum-contracts':
+        specifier: workspace:*
+        version: link:../curriculum-contracts
+
+  packages/curriculum-registry:
+    dependencies:
+      '@zoeskoul/curriculum-core':
+        specifier: workspace:*
+        version: link:../curriculum-core
+
+  packages/curriculum-runtime:
+    dependencies:
+      '@zoeskoul/curriculum-contracts':
+        specifier: workspace:*
+        version: link:../curriculum-contracts
+      '@zoeskoul/curriculum-core':
+        specifier: workspace:*
+        version: link:../curriculum-core
+      '@zoeskoul/curriculum-profiles':
+        specifier: workspace:*
+        version: link:../curriculum-profiles
+
   packages/pty-auth:
     devDependencies:
       '@types/node':

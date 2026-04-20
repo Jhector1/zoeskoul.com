@@ -1,0 +1,35 @@
+{
+  "subjectSlug": "python",
+  "profileId": "python",
+  "sourceLocale": "en",
+  "targetLocales": ["fr", "ht", "es"],
+  "title": "Python for Beginners",
+  "description": "Learn Python step by step with hands-on practice.",
+  "level": "beginner",
+  "audience": ["absolute beginners", "students", "career switchers"],
+  "goals": [
+    "understand variables and expressions",
+    "use conditionals and loops",
+    "write functions",
+    "read and write simple programs"
+  ],
+  "constraints": {
+    "moduleCount": 8,
+    "topicsPerModuleMin": 4,
+    "topicsPerModuleMax": 6
+  },
+  "teachingStyle": {
+    "tone": "clear, supportive, beginner-friendly",
+    "quizWeight": 0.4,
+    "projectWeight": 0.25,
+    "codeInputWeight": 0.35
+  },
+  "seedModules": [
+    "Getting Started",
+    "Variables and Data Types",
+    "Conditionals",
+    "Loops",
+    "Functions",
+    "Collections"
+  ]
+}
