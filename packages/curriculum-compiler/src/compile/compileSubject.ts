@@ -1,8 +1,10 @@
-import type { CourseBlueprint, CoursePlan, SubjectManifest } from "@zoeskoul/curriculum-contracts";
+import type {
+    CourseBlueprint,
+    CoursePlan,
+    SubjectManifest,
+} from "@zoeskoul/curriculum-contracts";
 import {
     buildModuleDescriptionKey,
-    buildModulePrefix,
-    buildModuleSlug,
     buildModuleTitleKey,
     buildSectionDescriptionKey,
     buildSectionTitleKey,
@@ -46,44 +48,63 @@ function buildSubjectManifestFromPlan(
                 },
             },
         },
-        modules: plan.modules.map((m, moduleIndex) => ({
-            slug: m.moduleSlug || buildModuleSlug(blueprint.subjectSlug, moduleIndex),
-            prefix: m.prefix || buildModulePrefix(blueprint.subjectSlug, moduleIndex),
-            order: m.order,
-            titleKey: buildModuleTitleKey(blueprint.subjectSlug, m.moduleSlug),
-            descriptionKey: buildModuleDescriptionKey(blueprint.subjectSlug, m.moduleSlug),
-            weekStart: m.weekStart ?? null,
-            weekEnd: m.weekEnd ?? null,
-            accessOverride: "free",
-            runtimeDefaults: profile.buildModuleRuntimeDefaults(m),
-            meta: {
-                estimatedMinutes: m.sections
-                    .flatMap((s) => s.topics)
-                    .reduce((sum, t) => sum + (t.minutes ?? 0), 0),
-                prereqKeys:
-                    moduleIndex > 0
-                        ? [buildModuleTitleKey(blueprint.subjectSlug, plan.modules[moduleIndex - 1].moduleSlug)]
-                        : [],
-                outcomeKeys: [],
-                whyKeys: [],
-            },
-            sections: m.sections.map((s, sectionIndex) => ({
-                slug: s.sectionSlug,
-                order: s.order,
-                titleKey: buildSectionTitleKey(blueprint.subjectSlug, m.moduleSlug, s.sectionSlug),
-                descriptionKey: buildSectionDescriptionKey(
+        modules: plan.modules.map((m, moduleIndex) => {
+            const canonicalModuleSlug = `module${moduleIndex}`;
+
+            return {
+                slug: canonicalModuleSlug,
+                prefix: canonicalModuleSlug,
+                order: m.order,
+                titleKey: buildModuleTitleKey(blueprint.subjectSlug, canonicalModuleSlug),
+                descriptionKey: buildModuleDescriptionKey(
                     blueprint.subjectSlug,
-                    m.moduleSlug,
-                    s.sectionSlug,
+                    canonicalModuleSlug,
                 ),
+                weekStart: m.weekStart ?? null,
+                weekEnd: m.weekEnd ?? null,
+                accessOverride: "free",
+                runtimeDefaults: profile.buildModuleRuntimeDefaults(m),
                 meta: {
-                    module: moduleIndex,
-                    weeksKey: `sections.${blueprint.subjectSlug}.${m.moduleSlug}.${s.sectionSlug}.weeks`,
-                    bulletKeys: [],
+                    estimatedMinutes: m.sections
+                        .flatMap((s) => s.topics)
+                        .reduce((sum, t) => sum + (t.minutes ?? 0), 0),
+                    prereqKeys:
+                        moduleIndex > 0
+                            ? [
+                                buildModuleTitleKey(
+                                    blueprint.subjectSlug,
+                                    `module${moduleIndex - 1}`,
+                                ),
+                            ]
+                            : [],
+                    outcomeKeys: [],
+                    whyKeys: [],
                 },
-                topics: s.topics.map((t) => t.topicId),
-            })),
-        })),
+                sections: m.sections.map((s, sectionIndex) => {
+                    const canonicalSectionSlug = `section${moduleIndex}_${sectionIndex}`;
+                    return {
+                        slug: canonicalSectionSlug,
+                        order: s.order,
+                        titleKey: buildSectionTitleKey(
+                            blueprint.subjectSlug,
+                            canonicalModuleSlug,
+                            canonicalSectionSlug,
+                        ),
+                        descriptionKey: buildSectionDescriptionKey(
+                            blueprint.subjectSlug,
+                            canonicalModuleSlug,
+                            canonicalSectionSlug,
+                        ),
+                        meta: {
+                            module: moduleIndex,
+                            weeksKey: `sections.${blueprint.subjectSlug}.${canonicalModuleSlug}.${canonicalSectionSlug}.weeks`,
+                            bulletKeys: [],
+                        },
+                        topics: s.topics.map((t) => t.topicId),
+                    };
+                }),
+            };
+        }),
     };
 }
 
@@ -104,8 +125,14 @@ export async function compileSubject(args: {
         messagesByLocale: Record<string, Record<string, unknown>>;
     }> = [];
 
-    for (const mod of plan.modules) {
-        for (const sec of mod.sections) {
+    for (let moduleIndex = 0; moduleIndex < plan.modules.length; moduleIndex++) {
+        const mod = plan.modules[moduleIndex];
+        const canonicalModuleSlug = `module${moduleIndex}`;
+
+        for (let sectionIndex = 0; sectionIndex < mod.sections.length; sectionIndex++) {
+            const sec = mod.sections[sectionIndex];
+            const canonicalSectionSlug = `section${moduleIndex}_${sectionIndex}`;
+
             for (const topic of sec.topics) {
                 const compiledTopic = await compileTopic({
                     provider,
@@ -113,8 +140,8 @@ export async function compileSubject(args: {
                     profileId: blueprint.profileId,
                     sourceLocale: blueprint.sourceLocale,
                     targetLocales: blueprint.targetLocales,
-                    moduleSlug: mod.moduleSlug,
-                    sectionSlug: sec.sectionSlug,
+                    moduleSlug: canonicalModuleSlug,
+                    sectionSlug: canonicalSectionSlug,
                     topic,
                 });
 

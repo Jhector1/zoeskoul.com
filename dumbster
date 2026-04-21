@@ -66,4 +66,13 @@ docker compose -f docker-compose.prod.yml ps
 docker compose -f docker-compose.prod.yml logs -f runner
 
 
-go
+
+
+
+
+
+
+
+ set -a
+source .env.local
+set +a

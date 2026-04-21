@@ -1,8 +1,8 @@
 {
-  "subjectSlug": "sql",
-  "profileId": "sql",
+  "subjectSlug": "sql2",
+  "profileId": "sql2",
   "sourceLocale": "en",
-  "targetLocales": ["fr", "ht", "es"],
+  "targetLocales": [],
   "title": "SQL for Beginners",
   "description": "Learn SQL from zero with hands-on practice.",
   "level": "beginner",

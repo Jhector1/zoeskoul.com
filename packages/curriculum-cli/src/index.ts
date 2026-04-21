@@ -1,34 +1,59 @@
-#!/usr/bin/env node
 import { runPlan } from "./commands/plan.js";
 import { runCompileSubject } from "./commands/compile-subject.js";
 import { runCompileTopic } from "./commands/compile-topic.js";
 import { runValidateDraft } from "./commands/validate.js";
 import { runPublish } from "./commands/publish.js";
+import { runPdfToPlan } from "./commands/pdf-to-plan.js";
+
+function requireArg(value: string | undefined, label: string): string {
+    if (!value) {
+        throw new Error(`Missing required ${label}`);
+    }
+    return value;
+}
 
 async function main() {
-    const [, , command, arg1, arg2] = process.argv;
+    const [, , command, ...args] = process.argv;
 
     switch (command) {
-        case "plan":
-            await runPlan(arg1);
-            break;
-        case "compile-subject":
-            await runCompileSubject(arg1);
-            break;
-        case "compile-topic":
-            await runCompileTopic(arg1, arg2);
-            break;
-        case "validate":
-            await runValidateDraft(arg1);
-            break;
-        case "publish":
-            await runPublish(arg1);
-            break;
+        case "plan": {
+            const blueprintPath = requireArg(args[0], "<blueprintPath>");
+            await runPlan(blueprintPath);
+            return;
+        }
+
+        case "compile-subject": {
+            const blueprintPath = requireArg(args[0], "<blueprintPath>");
+            await runCompileSubject(blueprintPath);
+            return;
+        }
+
+        case "compile-topic": {
+            const blueprintPath = requireArg(args[0], "<blueprintPath>");
+            const topicId = requireArg(args[1], "<topicId>");
+            await runCompileTopic(blueprintPath, topicId);
+            return;
+        }
+
+        case "validate": {
+            const draftPath = requireArg(args[0], "<draftPath>");
+            await runValidateDraft(draftPath);
+            return;
+        }
+
+        case "publish": {
+            const draftPath = requireArg(args[0], "<draftPath>");
+            await runPublish(draftPath);
+            return;
+        }
+
+        case "pdf-to-plan": {
+            await runPdfToPlan(args);
+            return;
+        }
+
         default:
-            console.error(
-                "Usage: curriculum-cli <plan|compile-subject|compile-topic|validate|publish> <blueprintPath|subjectSlug> [topicId]",
-            );
-            process.exit(1);
+            throw new Error(`Unknown command: ${command ?? "(none)"}`);
     }
 }
 

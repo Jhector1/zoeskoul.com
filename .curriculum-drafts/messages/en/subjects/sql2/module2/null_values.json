@@ -1,0 +1,135 @@
+{
+  "topics": {
+    "sql2": {
+      "module2": {
+        "null_values": {
+          "label": "Filtering NULL Values",
+          "summary": "Handling NULLs in filters.",
+          "cards": {
+            "sketch0": {
+              "title": "Overview: Filtering NULL Values"
+            },
+            "sketch1": {
+              "title": "filter for NULL and NOT NULL values"
+            },
+            "sketch2": {
+              "title": "Practice the core idea of Filtering NULL Values"
+            },
+            "sketch3": {
+              "title": "How to practice Filtering NULL Values"
+            },
+            "project": {
+              "title": "Practice: Filtering NULL Values"
+            },
+            "quiz": {
+              "title": "Quiz: Filtering NULL Values"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql2": {
+      "module2": {
+        "null_values": {
+          "concept_overview": {
+            "title": "What is Filtering NULL Values?",
+            "bodyMarkdown": "Filtering NULL Values focuses on this idea: Handling NULLs in filters.\n\nA good starting point is to say the requirement in plain language before writing SQL.\n\n### Learning goals\n- filter for NULL and NOT NULL values\n- Practice the core idea of Filtering NULL Values"
+          },
+          "goal_one": {
+            "title": "filter for NULL and NOT NULL values",
+            "bodyMarkdown": "filter for NULL and NOT NULL values.\n\nWhen practicing Filtering NULL Values, start with a focused example and verify the result carefully."
+          },
+          "goal_two": {
+            "title": "Practice the core idea of Filtering NULL Values",
+            "bodyMarkdown": "Practice the core idea of Filtering NULL Values.\n\nUse the topic idea to explain what the query is doing in plain English."
+          },
+          "practice_note": {
+            "title": "How to practice Filtering NULL Values",
+            "bodyMarkdown": "Read the requirement, predict the result, run the query, and verify whether the output really answers the question.\n\nThat habit is especially important for Filtering NULL Values."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "module2_null_values_practice_sql": {
+      "title": "Practice: Filtering NULL Values",
+      "prompt": "The `products` table already exists.\n\nWrite a query that shows the `name` and `price` columns for rows whose `price` is greater than `50`.\n\nThen run it.",
+      "help": {
+        "concept": "Handling NULLs in filters.",
+        "hint_1": "Write the condition after FROM.",
+        "hint_2": "Use price > 50."
+      },
+      "hint": "Use WHERE with a comparison operator.",
+      "starterCode": "-- Filter rows by price\nSELECT name, price\nFROM products\nWHERE price > 50\n"
+    },
+    "module2_null_values_core_concept": {
+      "title": "Core idea: Filtering NULL Values",
+      "prompt": "What is the best description of Filtering NULL Values?",
+      "help": {
+        "concept": "Handling NULLs in filters.",
+        "hint_1": "Look for the option that matches the main concept directly.",
+        "hint_2": "Ignore answers that describe unrelated SQL behavior."
+      },
+      "hint": "Match the answer to the topic summary.",
+      "options": {
+        "a": "It keeps only the rows that match a condition.",
+        "b": "It permanently changes the schema.",
+        "c": "It automatically groups records.",
+        "d": "It only works with joins."
+      }
+    },
+    "module2_null_values_true_statements": {
+      "title": "True statements about Filtering NULL Values",
+      "prompt": "Select all true statements about Filtering NULL Values.",
+      "help": {
+        "concept": "Handling NULLs in filters.",
+        "hint_1": "Pick statements that align with the topic summary and objectives.",
+        "hint_2": "Reject statements that clearly describe unrelated SQL ideas."
+      },
+      "hint": "Use the summary and objectives as your guide.",
+      "options": {
+        "a": "Filtering is often done with WHERE.",
+        "b": "Comparison operators help define the row condition.",
+        "c": "Filtering always changes the stored table data.",
+        "d": "AND and OR can change which rows stay in the output.",
+        "e": "Filtering is unrelated to business questions."
+      }
+    },
+    "module2_null_values_workflow_order": {
+      "title": "Workflow for Filtering NULL Values",
+      "prompt": "Reorder the workflow ideas for Filtering NULL Values.",
+      "help": {
+        "concept": "Identify which rows should stay, write the condition, then verify the result.",
+        "hint_1": "Think about what should happen first.",
+        "hint_2": "Then think about what should happen last."
+      },
+      "hint": "Order the steps logically.",
+      "tokens": {
+        "t1": "decide which rows should stay in the result",
+        "t2": "write the condition in the WHERE clause",
+        "t3": "run the query and verify the remaining rows"
+      }
+    },
+    "module2_null_values_keyword_fill": {
+      "title": "Filtering keyword",
+      "prompt": "Fill in the blank with the best SQL keyword.",
+      "help": {
+        "concept": "Handling NULLs in filters.",
+        "hint_1": "Think about which SQL term best completes the sentence.",
+        "hint_2": "Use the topic meaning to eliminate unrelated options."
+      },
+      "hint": "Match the sentence to the right SQL term.",
+      "template": "The clause commonly used to filter rows is ____.",
+      "choices": [
+        "WHERE",
+        "GROUP BY",
+        "INSERT",
+        "CREATE"
+      ],
+      "correct": "WHERE"
+    }
+  }
+}

@@ -1,0 +1,135 @@
+{
+  "topics": {
+    "sql2": {
+      "module6": {
+        "left_join_basics": {
+          "label": "LEFT JOIN Basics",
+          "summary": "Using LEFT JOIN to include unmatched rows.",
+          "cards": {
+            "sketch0": {
+              "title": "Overview: LEFT JOIN Basics"
+            },
+            "sketch1": {
+              "title": "write LEFT JOIN queries"
+            },
+            "sketch2": {
+              "title": "Practice the core idea of LEFT JOIN Basics"
+            },
+            "sketch3": {
+              "title": "How to practice LEFT JOIN Basics"
+            },
+            "project": {
+              "title": "Practice: LEFT JOIN Basics"
+            },
+            "quiz": {
+              "title": "Quiz: LEFT JOIN Basics"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql2": {
+      "module6": {
+        "left_join_basics": {
+          "concept_overview": {
+            "title": "What is LEFT JOIN Basics?",
+            "bodyMarkdown": "LEFT JOIN Basics focuses on this idea: Using LEFT JOIN to include unmatched rows.\n\nA good starting point is to say the requirement in plain language before writing SQL.\n\n### Learning goals\n- write LEFT JOIN queries\n- Practice the core idea of LEFT JOIN Basics"
+          },
+          "goal_one": {
+            "title": "write LEFT JOIN queries",
+            "bodyMarkdown": "write LEFT JOIN queries.\n\nWhen practicing LEFT JOIN Basics, start with a focused example and verify the result carefully."
+          },
+          "goal_two": {
+            "title": "Practice the core idea of LEFT JOIN Basics",
+            "bodyMarkdown": "Practice the core idea of LEFT JOIN Basics.\n\nUse the topic idea to explain what the query is doing in plain English."
+          },
+          "practice_note": {
+            "title": "How to practice LEFT JOIN Basics",
+            "bodyMarkdown": "Read the requirement, predict the result, run the query, and verify whether the output really answers the question.\n\nThat habit is especially important for LEFT JOIN Basics."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "module6_left_join_basics_practice_sql": {
+      "title": "Practice: LEFT JOIN Basics",
+      "prompt": "The `products` table already exists.\n\nWrite a query that shows product names where the name contains the letter `a`.\n\nThen run it.",
+      "help": {
+        "concept": "Using LEFT JOIN to include unmatched rows.",
+        "hint_1": "Put the letter inside a pattern like %a%",
+        "hint_2": "Write the condition in WHERE."
+      },
+      "hint": "Use LIKE with % wildcards.",
+      "starterCode": "-- Match text patterns\nSELECT name\nFROM products\nWHERE name LIKE '%a%'\n"
+    },
+    "module6_left_join_basics_core_concept": {
+      "title": "Core idea: LEFT JOIN Basics",
+      "prompt": "What is the best description of LEFT JOIN Basics?",
+      "help": {
+        "concept": "Using LEFT JOIN to include unmatched rows.",
+        "hint_1": "Look for the option that matches the main concept directly.",
+        "hint_2": "Ignore answers that describe unrelated SQL behavior."
+      },
+      "hint": "Match the answer to the topic summary.",
+      "options": {
+        "a": "It handles partial text matching, lists, ranges, and missing values.",
+        "b": "It is only about table creation.",
+        "c": "It always requires joining tables.",
+        "d": "It permanently fixes bad data in storage."
+      }
+    },
+    "module6_left_join_basics_true_statements": {
+      "title": "True statements about LEFT JOIN Basics",
+      "prompt": "Select all true statements about LEFT JOIN Basics.",
+      "help": {
+        "concept": "Using LEFT JOIN to include unmatched rows.",
+        "hint_1": "Pick statements that align with the topic summary and objectives.",
+        "hint_2": "Reject statements that clearly describe unrelated SQL ideas."
+      },
+      "hint": "Use the summary and objectives as your guide.",
+      "options": {
+        "a": "LIKE can be used for pattern matching.",
+        "b": "IS NULL checks for missing values.",
+        "c": "BETWEEN can describe a range.",
+        "d": "= NULL is the standard way to test for nulls.",
+        "e": "IN can be cleaner than many OR conditions."
+      }
+    },
+    "module6_left_join_basics_workflow_order": {
+      "title": "Workflow for LEFT JOIN Basics",
+      "prompt": "Reorder the workflow ideas for LEFT JOIN Basics.",
+      "help": {
+        "concept": "Choose the matching/filtering idea first, then write the condition, then verify the rows.",
+        "hint_1": "Think about what should happen first.",
+        "hint_2": "Then think about what should happen last."
+      },
+      "hint": "Order the steps logically.",
+      "tokens": {
+        "t1": "decide whether you are matching text, a list, a range, or nulls",
+        "t2": "write the matching condition in WHERE",
+        "t3": "run the query and verify the kept rows"
+      }
+    },
+    "module6_left_join_basics_keyword_fill": {
+      "title": "Pattern matching keyword",
+      "prompt": "Fill in the blank with the best SQL keyword.",
+      "help": {
+        "concept": "Using LEFT JOIN to include unmatched rows.",
+        "hint_1": "Think about which SQL term best completes the sentence.",
+        "hint_2": "Use the topic meaning to eliminate unrelated options."
+      },
+      "hint": "Match the sentence to the right SQL term.",
+      "template": "A common operator for basic text pattern matching is ____.",
+      "choices": [
+        "LIKE",
+        "CREATE",
+        "DELETE",
+        "ALTER"
+      ],
+      "correct": "LIKE"
+    }
+  }
+}

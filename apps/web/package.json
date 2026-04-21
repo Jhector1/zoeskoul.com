@@ -34,6 +34,8 @@
     "@zoeskoul/code-contracts": "workspace:*",
     "@zoeskoul/pty-auth": "workspace:*",
 
+    "@zoeskoul/practice-contracts": "workspace:*",
+
     "better-sqlite3": "^12.8.0",
     "clsx": "^2.1.1",
     "dotenv": "^17.2.3",

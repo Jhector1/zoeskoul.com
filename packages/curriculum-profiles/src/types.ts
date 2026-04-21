@@ -1,29 +1,39 @@
 import type {
     CourseProfileId,
+    ManifestExercise,
     ManifestRuntimeDefaults,
-    PlannedModule,
     TopicBundleManifest,
+    TopicPlanDraft,
 } from "@zoeskoul/curriculum-contracts";
 
 export type RecipeHandler<T = any> = (
     def: any,
     args: any,
-    resolved: {
-        title: string;
-        prompt: string;
-        hint?: string;
-        starterCode: string;
-        help?: any;
-        expectedExampleMeta?: string;
-        maybeT?: (key: string) => string | undefined;
-    },
+    resolved: any,
 ) => any;
 
 export type CourseProfile = {
     id: CourseProfileId;
-    allowedExerciseKinds: string[];
+    allowedExerciseKinds: Array<ManifestExercise["kind"]>;
     allowedRecipeTypes: string[];
-    buildModuleRuntimeDefaults(module: PlannedModule): ManifestRuntimeDefaults | null;
+    buildModuleRuntimeDefaults(modulePlan: any): ManifestRuntimeDefaults | null;
     getRecipeRegistry(): Record<string, RecipeHandler<any>>;
     validateTopicBundle(bundle: TopicBundleManifest): string[];
+
+    buildTopicBundleFromPlan?: (args: {
+        subjectSlug: string;
+        moduleSlug: string;
+        sectionSlug: string;
+        prefix: string;
+        topicPlan: TopicPlanDraft;
+    }) => TopicBundleManifest;
+
+    buildTopicMessagesFromPlan?: (args: {
+        subjectSlug: string;
+        moduleSlug: string;
+        sectionSlug: string;
+        prefix: string;
+        topicPlan: TopicPlanDraft;
+        locale: string;
+    }) => Record<string, unknown>;
 };

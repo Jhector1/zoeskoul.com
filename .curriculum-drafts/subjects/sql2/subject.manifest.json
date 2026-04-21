@@ -1,0 +1,367 @@
+{
+  "subject": {
+    "slug": "sql2",
+    "genKey": "sql2",
+    "order": 10,
+    "accessPolicy": "free",
+    "status": "active",
+    "titleKey": "subjects.sql2.title",
+    "descriptionKey": "subjects.sql2.description",
+    "meta": {
+      "curriculum": {
+        "plannedModuleCount": 8,
+        "isTerminalRelease": false,
+        "moreComingMessageKey": "subjects.sql2.moreComingSoon"
+      },
+      "completionPolicy": {
+        "requireAllPublishedModules": true,
+        "rewardEnabledByDefault": true,
+        "certificateEnabledByDefault": true
+      }
+    }
+  },
+  "modules": [
+    {
+      "slug": "module0",
+      "prefix": "module0",
+      "order": 1,
+      "titleKey": "modules.sql2.module0.title",
+      "descriptionKey": "modules.sql2.module0.description",
+      "weekStart": 1,
+      "weekEnd": 1,
+      "accessOverride": "free",
+      "runtimeDefaults": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table"
+      },
+      "meta": {
+        "estimatedMinutes": 45,
+        "prereqKeys": [],
+        "outcomeKeys": [],
+        "whyKeys": []
+      },
+      "sections": [
+        {
+          "slug": "section0_0",
+          "order": 1,
+          "titleKey": "sections.sql2.module0.section0_0.title",
+          "descriptionKey": "sections.sql2.module0.section0_0.description",
+          "meta": {
+            "module": 0,
+            "weeksKey": "sections.sql2.module0.section0_0.weeks",
+            "bulletKeys": []
+          },
+          "topics": [
+            "what_is_sql",
+            "why_use_sql",
+            "relational_databases",
+            "sql_environments"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "module1",
+      "prefix": "module1",
+      "order": 2,
+      "titleKey": "modules.sql2.module1.title",
+      "descriptionKey": "modules.sql2.module1.description",
+      "weekStart": 2,
+      "weekEnd": 2,
+      "accessOverride": "free",
+      "runtimeDefaults": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table"
+      },
+      "meta": {
+        "estimatedMinutes": 45,
+        "prereqKeys": [
+          "modules.sql2.module0.title"
+        ],
+        "outcomeKeys": [],
+        "whyKeys": []
+      },
+      "sections": [
+        {
+          "slug": "section1_0",
+          "order": 1,
+          "titleKey": "sections.sql2.module1.section1_0.title",
+          "descriptionKey": "sections.sql2.module1.section1_0.description",
+          "meta": {
+            "module": 1,
+            "weeksKey": "sections.sql2.module1.section1_0.weeks",
+            "bulletKeys": []
+          },
+          "topics": [
+            "select_statement_syntax",
+            "select_columns",
+            "select_multiple_columns",
+            "select_distinct"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "module2",
+      "prefix": "module2",
+      "order": 3,
+      "titleKey": "modules.sql2.module2.title",
+      "descriptionKey": "modules.sql2.module2.description",
+      "weekStart": 3,
+      "weekEnd": 3,
+      "accessOverride": "free",
+      "runtimeDefaults": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table"
+      },
+      "meta": {
+        "estimatedMinutes": 45,
+        "prereqKeys": [
+          "modules.sql2.module1.title"
+        ],
+        "outcomeKeys": [],
+        "whyKeys": []
+      },
+      "sections": [
+        {
+          "slug": "section2_0",
+          "order": 1,
+          "titleKey": "sections.sql2.module2.section2_0.title",
+          "descriptionKey": "sections.sql2.module2.section2_0.description",
+          "meta": {
+            "module": 2,
+            "weeksKey": "sections.sql2.module2.section2_0.weeks",
+            "bulletKeys": []
+          },
+          "topics": [
+            "where_clause_basics",
+            "comparison_operators",
+            "logical_operators",
+            "null_values"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "module3",
+      "prefix": "module3",
+      "order": 4,
+      "titleKey": "modules.sql2.module3.title",
+      "descriptionKey": "modules.sql2.module3.description",
+      "weekStart": 4,
+      "weekEnd": 4,
+      "accessOverride": "free",
+      "runtimeDefaults": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table"
+      },
+      "meta": {
+        "estimatedMinutes": 45,
+        "prereqKeys": [
+          "modules.sql2.module2.title"
+        ],
+        "outcomeKeys": [],
+        "whyKeys": []
+      },
+      "sections": [
+        {
+          "slug": "section3_0",
+          "order": 1,
+          "titleKey": "sections.sql2.module3.section3_0.title",
+          "descriptionKey": "sections.sql2.module3.section3_0.description",
+          "meta": {
+            "module": 3,
+            "weeksKey": "sections.sql2.module3.section3_0.weeks",
+            "bulletKeys": []
+          },
+          "topics": [
+            "order_by_clause",
+            "multiple_sort_columns",
+            "limit_clause",
+            "offset_clause"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "module4",
+      "prefix": "module4",
+      "order": 5,
+      "titleKey": "modules.sql2.module4.title",
+      "descriptionKey": "modules.sql2.module4.description",
+      "weekStart": 5,
+      "weekEnd": 5,
+      "accessOverride": "free",
+      "runtimeDefaults": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table"
+      },
+      "meta": {
+        "estimatedMinutes": 40,
+        "prereqKeys": [
+          "modules.sql2.module3.title"
+        ],
+        "outcomeKeys": [],
+        "whyKeys": []
+      },
+      "sections": [
+        {
+          "slug": "section4_0",
+          "order": 1,
+          "titleKey": "sections.sql2.module4.section4_0.title",
+          "descriptionKey": "sections.sql2.module4.section4_0.description",
+          "meta": {
+            "module": 4,
+            "weeksKey": "sections.sql2.module4.section4_0.weeks",
+            "bulletKeys": []
+          },
+          "topics": [
+            "like_operator",
+            "wildcards_in_like",
+            "basic_string_functions",
+            "removing_duplicates"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "module5",
+      "prefix": "module5",
+      "order": 6,
+      "titleKey": "modules.sql2.module5.title",
+      "descriptionKey": "modules.sql2.module5.description",
+      "weekStart": 6,
+      "weekEnd": 6,
+      "accessOverride": "free",
+      "runtimeDefaults": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table"
+      },
+      "meta": {
+        "estimatedMinutes": 45,
+        "prereqKeys": [
+          "modules.sql2.module4.title"
+        ],
+        "outcomeKeys": [],
+        "whyKeys": []
+      },
+      "sections": [
+        {
+          "slug": "section5_0",
+          "order": 1,
+          "titleKey": "sections.sql2.module5.section5_0.title",
+          "descriptionKey": "sections.sql2.module5.section5_0.description",
+          "meta": {
+            "module": 5,
+            "weeksKey": "sections.sql2.module5.section5_0.weeks",
+            "bulletKeys": []
+          },
+          "topics": [
+            "count_function",
+            "sum_and_avg_functions",
+            "min_and_max_functions",
+            "group_by_clause"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "module6",
+      "prefix": "module6",
+      "order": 7,
+      "titleKey": "modules.sql2.module6.title",
+      "descriptionKey": "modules.sql2.module6.description",
+      "weekStart": 7,
+      "weekEnd": 7,
+      "accessOverride": "free",
+      "runtimeDefaults": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table"
+      },
+      "meta": {
+        "estimatedMinutes": 45,
+        "prereqKeys": [
+          "modules.sql2.module5.title"
+        ],
+        "outcomeKeys": [],
+        "whyKeys": []
+      },
+      "sections": [
+        {
+          "slug": "section6_0",
+          "order": 1,
+          "titleKey": "sections.sql2.module6.section6_0.title",
+          "descriptionKey": "sections.sql2.module6.section6_0.description",
+          "meta": {
+            "module": 6,
+            "weeksKey": "sections.sql2.module6.section6_0.weeks",
+            "bulletKeys": []
+          },
+          "topics": [
+            "why_joins_are_needed",
+            "inner_join_basics",
+            "left_join_basics",
+            "joining_multiple_tables"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "module7",
+      "prefix": "module7",
+      "order": 8,
+      "titleKey": "modules.sql2.module7.title",
+      "descriptionKey": "modules.sql2.module7.description",
+      "weekStart": 8,
+      "weekEnd": 8,
+      "accessOverride": "free",
+      "runtimeDefaults": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table"
+      },
+      "meta": {
+        "estimatedMinutes": 50,
+        "prereqKeys": [
+          "modules.sql2.module6.title"
+        ],
+        "outcomeKeys": [],
+        "whyKeys": []
+      },
+      "sections": [
+        {
+          "slug": "section7_0",
+          "order": 1,
+          "titleKey": "sections.sql2.module7.section7_0.title",
+          "descriptionKey": "sections.sql2.module7.section7_0.description",
+          "meta": {
+            "module": 7,
+            "weeksKey": "sections.sql2.module7.section7_0.weeks",
+            "bulletKeys": []
+          },
+          "topics": [
+            "practice_select_queries",
+            "practice_joins_and_aggregates",
+            "common_sql_errors",
+            "next_steps_in_sql_learning"
+          ]
+        }
+      ]
+    }
+  ]
+}

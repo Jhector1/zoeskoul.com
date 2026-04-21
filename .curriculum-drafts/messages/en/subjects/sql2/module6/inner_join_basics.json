@@ -1,0 +1,135 @@
+{
+  "topics": {
+    "sql2": {
+      "module6": {
+        "inner_join_basics": {
+          "label": "INNER JOIN Basics",
+          "summary": "Combining tables with INNER JOIN.",
+          "cards": {
+            "sketch0": {
+              "title": "Overview: INNER JOIN Basics"
+            },
+            "sketch1": {
+              "title": "write basic INNER JOIN queries"
+            },
+            "sketch2": {
+              "title": "Practice the core idea of INNER JOIN Basics"
+            },
+            "sketch3": {
+              "title": "How to practice INNER JOIN Basics"
+            },
+            "project": {
+              "title": "Practice: INNER JOIN Basics"
+            },
+            "quiz": {
+              "title": "Quiz: INNER JOIN Basics"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql2": {
+      "module6": {
+        "inner_join_basics": {
+          "concept_overview": {
+            "title": "What is INNER JOIN Basics?",
+            "bodyMarkdown": "INNER JOIN Basics focuses on this idea: Combining tables with INNER JOIN.\n\nA good starting point is to say the requirement in plain language before writing SQL.\n\n### Learning goals\n- write basic INNER JOIN queries\n- Practice the core idea of INNER JOIN Basics"
+          },
+          "goal_one": {
+            "title": "write basic INNER JOIN queries",
+            "bodyMarkdown": "write basic INNER JOIN queries.\n\nWhen practicing INNER JOIN Basics, start with a focused example and verify the result carefully."
+          },
+          "goal_two": {
+            "title": "Practice the core idea of INNER JOIN Basics",
+            "bodyMarkdown": "Practice the core idea of INNER JOIN Basics.\n\nUse the topic idea to explain what the query is doing in plain English."
+          },
+          "practice_note": {
+            "title": "How to practice INNER JOIN Basics",
+            "bodyMarkdown": "Read the requirement, predict the result, run the query, and verify whether the output really answers the question.\n\nThat habit is especially important for INNER JOIN Basics."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "module6_inner_join_basics_practice_sql": {
+      "title": "Practice: INNER JOIN Basics",
+      "prompt": "The `products` table already exists.\n\nWrite a query that shows product names where the name contains the letter `a`.\n\nThen run it.",
+      "help": {
+        "concept": "Combining tables with INNER JOIN.",
+        "hint_1": "Put the letter inside a pattern like %a%",
+        "hint_2": "Write the condition in WHERE."
+      },
+      "hint": "Use LIKE with % wildcards.",
+      "starterCode": "-- Match text patterns\nSELECT name\nFROM products\nWHERE name LIKE '%a%'\n"
+    },
+    "module6_inner_join_basics_core_concept": {
+      "title": "Core idea: INNER JOIN Basics",
+      "prompt": "What is the best description of INNER JOIN Basics?",
+      "help": {
+        "concept": "Combining tables with INNER JOIN.",
+        "hint_1": "Look for the option that matches the main concept directly.",
+        "hint_2": "Ignore answers that describe unrelated SQL behavior."
+      },
+      "hint": "Match the answer to the topic summary.",
+      "options": {
+        "a": "It handles partial text matching, lists, ranges, and missing values.",
+        "b": "It is only about table creation.",
+        "c": "It always requires joining tables.",
+        "d": "It permanently fixes bad data in storage."
+      }
+    },
+    "module6_inner_join_basics_true_statements": {
+      "title": "True statements about INNER JOIN Basics",
+      "prompt": "Select all true statements about INNER JOIN Basics.",
+      "help": {
+        "concept": "Combining tables with INNER JOIN.",
+        "hint_1": "Pick statements that align with the topic summary and objectives.",
+        "hint_2": "Reject statements that clearly describe unrelated SQL ideas."
+      },
+      "hint": "Use the summary and objectives as your guide.",
+      "options": {
+        "a": "LIKE can be used for pattern matching.",
+        "b": "IS NULL checks for missing values.",
+        "c": "BETWEEN can describe a range.",
+        "d": "= NULL is the standard way to test for nulls.",
+        "e": "IN can be cleaner than many OR conditions."
+      }
+    },
+    "module6_inner_join_basics_workflow_order": {
+      "title": "Workflow for INNER JOIN Basics",
+      "prompt": "Reorder the workflow ideas for INNER JOIN Basics.",
+      "help": {
+        "concept": "Choose the matching/filtering idea first, then write the condition, then verify the rows.",
+        "hint_1": "Think about what should happen first.",
+        "hint_2": "Then think about what should happen last."
+      },
+      "hint": "Order the steps logically.",
+      "tokens": {
+        "t1": "decide whether you are matching text, a list, a range, or nulls",
+        "t2": "write the matching condition in WHERE",
+        "t3": "run the query and verify the kept rows"
+      }
+    },
+    "module6_inner_join_basics_keyword_fill": {
+      "title": "Pattern matching keyword",
+      "prompt": "Fill in the blank with the best SQL keyword.",
+      "help": {
+        "concept": "Combining tables with INNER JOIN.",
+        "hint_1": "Think about which SQL term best completes the sentence.",
+        "hint_2": "Use the topic meaning to eliminate unrelated options."
+      },
+      "hint": "Match the sentence to the right SQL term.",
+      "template": "A common operator for basic text pattern matching is ____.",
+      "choices": [
+        "LIKE",
+        "CREATE",
+        "DELETE",
+        "ALTER"
+      ],
+      "correct": "LIKE"
+    }
+  }
+}

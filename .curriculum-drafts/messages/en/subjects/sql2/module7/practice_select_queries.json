@@ -1,0 +1,135 @@
+{
+  "topics": {
+    "sql2": {
+      "module7": {
+        "practice_select_queries": {
+          "label": "Practice SELECT Queries",
+          "summary": "Apply SELECT, WHERE, and ORDER BY.",
+          "cards": {
+            "sketch0": {
+              "title": "Overview: Practice SELECT Queries"
+            },
+            "sketch1": {
+              "title": "write queries combining learned concepts"
+            },
+            "sketch2": {
+              "title": "Practice the core idea of Practice SELECT Queries"
+            },
+            "sketch3": {
+              "title": "How to practice Practice SELECT Queries"
+            },
+            "project": {
+              "title": "Practice: Practice SELECT Queries"
+            },
+            "quiz": {
+              "title": "Quiz: Practice SELECT Queries"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql2": {
+      "module7": {
+        "practice_select_queries": {
+          "concept_overview": {
+            "title": "What is Practice SELECT Queries?",
+            "bodyMarkdown": "Practice SELECT Queries focuses on this idea: Apply SELECT, WHERE, and ORDER BY.\n\nA good starting point is to say the requirement in plain language before writing SQL.\n\n### Learning goals\n- write queries combining learned concepts\n- Practice the core idea of Practice SELECT Queries"
+          },
+          "goal_one": {
+            "title": "write queries combining learned concepts",
+            "bodyMarkdown": "write queries combining learned concepts.\n\nWhen practicing Practice SELECT Queries, start with a focused example and verify the result carefully."
+          },
+          "goal_two": {
+            "title": "Practice the core idea of Practice SELECT Queries",
+            "bodyMarkdown": "Practice the core idea of Practice SELECT Queries.\n\nUse the topic idea to explain what the query is doing in plain English."
+          },
+          "practice_note": {
+            "title": "How to practice Practice SELECT Queries",
+            "bodyMarkdown": "Read the requirement, predict the result, run the query, and verify whether the output really answers the question.\n\nThat habit is especially important for Practice SELECT Queries."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "module7_practice_select_queries_practice_sql": {
+      "title": "Practice: Practice SELECT Queries",
+      "prompt": "The `products` table already exists.\n\nWrite a query that shows the `name` and `price` columns for rows whose `price` is greater than `50`.\n\nThen run it.",
+      "help": {
+        "concept": "Apply SELECT, WHERE, and ORDER BY.",
+        "hint_1": "Write the condition after FROM.",
+        "hint_2": "Use price > 50."
+      },
+      "hint": "Use WHERE with a comparison operator.",
+      "starterCode": "-- Filter rows by price\nSELECT name, price\nFROM products\nWHERE price > 50\n"
+    },
+    "module7_practice_select_queries_core_concept": {
+      "title": "Core idea: Practice SELECT Queries",
+      "prompt": "What is the best description of Practice SELECT Queries?",
+      "help": {
+        "concept": "Apply SELECT, WHERE, and ORDER BY.",
+        "hint_1": "Look for the option that matches the main concept directly.",
+        "hint_2": "Ignore answers that describe unrelated SQL behavior."
+      },
+      "hint": "Match the answer to the topic summary.",
+      "options": {
+        "a": "It keeps only the rows that match a condition.",
+        "b": "It permanently changes the schema.",
+        "c": "It automatically groups records.",
+        "d": "It only works with joins."
+      }
+    },
+    "module7_practice_select_queries_true_statements": {
+      "title": "True statements about Practice SELECT Queries",
+      "prompt": "Select all true statements about Practice SELECT Queries.",
+      "help": {
+        "concept": "Apply SELECT, WHERE, and ORDER BY.",
+        "hint_1": "Pick statements that align with the topic summary and objectives.",
+        "hint_2": "Reject statements that clearly describe unrelated SQL ideas."
+      },
+      "hint": "Use the summary and objectives as your guide.",
+      "options": {
+        "a": "Filtering is often done with WHERE.",
+        "b": "Comparison operators help define the row condition.",
+        "c": "Filtering always changes the stored table data.",
+        "d": "AND and OR can change which rows stay in the output.",
+        "e": "Filtering is unrelated to business questions."
+      }
+    },
+    "module7_practice_select_queries_workflow_order": {
+      "title": "Workflow for Practice SELECT Queries",
+      "prompt": "Reorder the workflow ideas for Practice SELECT Queries.",
+      "help": {
+        "concept": "Identify which rows should stay, write the condition, then verify the result.",
+        "hint_1": "Think about what should happen first.",
+        "hint_2": "Then think about what should happen last."
+      },
+      "hint": "Order the steps logically.",
+      "tokens": {
+        "t1": "decide which rows should stay in the result",
+        "t2": "write the condition in the WHERE clause",
+        "t3": "run the query and verify the remaining rows"
+      }
+    },
+    "module7_practice_select_queries_keyword_fill": {
+      "title": "Filtering keyword",
+      "prompt": "Fill in the blank with the best SQL keyword.",
+      "help": {
+        "concept": "Apply SELECT, WHERE, and ORDER BY.",
+        "hint_1": "Think about which SQL term best completes the sentence.",
+        "hint_2": "Use the topic meaning to eliminate unrelated options."
+      },
+      "hint": "Match the sentence to the right SQL term.",
+      "template": "The clause commonly used to filter rows is ____.",
+      "choices": [
+        "WHERE",
+        "GROUP BY",
+        "INSERT",
+        "CREATE"
+      ],
+      "correct": "WHERE"
+    }
+  }
+}

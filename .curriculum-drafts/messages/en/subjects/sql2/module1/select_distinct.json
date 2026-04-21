@@ -1,0 +1,103 @@
+{
+  "topics": {
+    "sql2": {
+      "module1": {
+        "select_distinct": {
+          "label": "SELECT DISTINCT",
+          "summary": "Removing duplicate rows from results.",
+          "cards": {
+            "sketch0": {
+              "title": "Overview: SELECT DISTINCT"
+            },
+            "sketch1": {
+              "title": "use DISTINCT to eliminate duplicates"
+            },
+            "sketch2": {
+              "title": "understand when to use DISTINCT"
+            },
+            "sketch3": {
+              "title": "How to practice SELECT DISTINCT"
+            },
+            "quiz": {
+              "title": "Quiz: SELECT DISTINCT"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql2": {
+      "module1": {
+        "select_distinct": {
+          "concept_overview": {
+            "title": "What is SELECT DISTINCT?",
+            "bodyMarkdown": "SELECT DISTINCT focuses on this idea: Removing duplicate rows from results.\n\nA good starting point is to say the requirement in plain language before writing SQL.\n\n### Learning goals\n- use DISTINCT to eliminate duplicates\n- understand when to use DISTINCT"
+          },
+          "goal_one": {
+            "title": "use DISTINCT to eliminate duplicates",
+            "bodyMarkdown": "use DISTINCT to eliminate duplicates.\n\nWhen practicing SELECT DISTINCT, start with a focused example and verify the result carefully."
+          },
+          "goal_two": {
+            "title": "understand when to use DISTINCT",
+            "bodyMarkdown": "understand when to use DISTINCT.\n\nUse the topic idea to explain what the query is doing in plain English."
+          },
+          "practice_note": {
+            "title": "How to practice SELECT DISTINCT",
+            "bodyMarkdown": "Read the requirement, predict the result, run the query, and verify whether the output really answers the question.\n\nThat habit is especially important for SELECT DISTINCT."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "module1_select_distinct_core_concept": {
+      "title": "Core idea: SELECT DISTINCT",
+      "prompt": "What is the best description of SELECT DISTINCT?",
+      "help": {
+        "concept": "Removing duplicate rows from results.",
+        "hint_1": "Look for the option that matches the main concept directly.",
+        "hint_2": "Ignore answers that describe unrelated SQL behavior."
+      },
+      "hint": "Match the answer to the topic summary.",
+      "options": {
+        "a": "Removing duplicate rows from results.",
+        "b": "It permanently removes columns from a table.",
+        "c": "It only changes schema metadata.",
+        "d": "It always requires aggregation."
+      }
+    },
+    "module1_select_distinct_true_statements": {
+      "title": "True statements about SELECT DISTINCT",
+      "prompt": "Select all true statements about SELECT DISTINCT.",
+      "help": {
+        "concept": "Removing duplicate rows from results.",
+        "hint_1": "Pick statements that align with the topic summary and objectives.",
+        "hint_2": "Reject statements that clearly describe unrelated SQL ideas."
+      },
+      "hint": "Use the summary and objectives as your guide.",
+      "options": {
+        "a": "Removing duplicate rows from results.",
+        "b": "use DISTINCT to eliminate duplicates",
+        "c": "It is unrelated to retrieving data from tables.",
+        "d": "It only works after deleting rows.",
+        "e": "understand when to use DISTINCT"
+      }
+    },
+    "module1_select_distinct_workflow_order": {
+      "title": "Workflow for SELECT DISTINCT",
+      "prompt": "Reorder the workflow ideas for SELECT DISTINCT.",
+      "help": {
+        "concept": "Understand the requirement, write the SQL, then verify the result.",
+        "hint_1": "Think about what should happen first.",
+        "hint_2": "Then think about what should happen last."
+      },
+      "hint": "Order the steps logically.",
+      "tokens": {
+        "t1": "read the requirement for the data you want",
+        "t2": "write the SQL that matches that requirement",
+        "t3": "run the query and verify the output"
+      }
+    }
+  }
+}

@@ -1,0 +1,147 @@
+{
+  "topicId": "logical_operators",
+  "subjectSlug": "sql2",
+  "moduleSlug": "module2",
+  "sectionSlug": "section2_0",
+  "prefix": "module2",
+  "minutes": 15,
+  "topic": {
+    "labelKey": "topics.sql2.module2.logical_operators.label",
+    "summaryKey": "topics.sql2.module2.logical_operators.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql2.module2.logical_operators.cards.sketch0.title",
+      "sketchId": "concept_overview",
+      "height": 520
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql2.module2.logical_operators.cards.sketch1.title",
+      "sketchId": "goal_one",
+      "height": 520
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.sql2.module2.logical_operators.cards.sketch2.title",
+      "sketchId": "goal_two",
+      "height": 520
+    },
+    {
+      "id": "sketch3",
+      "kind": "sketch",
+      "titleKey": "topics.sql2.module2.logical_operators.cards.sketch3.title",
+      "sketchId": "practice_note",
+      "height": 520
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql2.module2.logical_operators.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 3,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "concept_overview",
+      "archetype": "paragraph",
+      "titleKey": "topics.sql2.module2.logical_operators.sketches.concept_overview.title",
+      "bodyKey": "topics.sql2.module2.logical_operators.sketches.concept_overview.body"
+    },
+    {
+      "id": "goal_one",
+      "archetype": "paragraph",
+      "titleKey": "topics.sql2.module2.logical_operators.sketches.goal_one.title",
+      "bodyKey": "topics.sql2.module2.logical_operators.sketches.goal_one.body"
+    },
+    {
+      "id": "goal_two",
+      "archetype": "paragraph",
+      "titleKey": "topics.sql2.module2.logical_operators.sketches.goal_two.title",
+      "bodyKey": "topics.sql2.module2.logical_operators.sketches.goal_two.body"
+    },
+    {
+      "id": "practice_note",
+      "archetype": "paragraph",
+      "titleKey": "topics.sql2.module2.logical_operators.sketches.practice_note.title",
+      "bodyKey": "topics.sql2.module2.logical_operators.sketches.practice_note.body"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "module2_logical_operators_core_concept",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.module2_logical_operators_core_concept",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "module2_logical_operators_true_statements",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.module2_logical_operators_true_statements",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "e"
+        ]
+      }
+    },
+    {
+      "id": "module2_logical_operators_workflow_order",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.module2_logical_operators_workflow_order",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    }
+  ],
+  "runtimeDefaults": {
+    "kind": "sql",
+    "datasetId": "products_catalog",
+    "fixedSqlDialect": "sqlite",
+    "resultShape": "table"
+  }
+}

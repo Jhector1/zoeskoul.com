@@ -1,0 +1,135 @@
+{
+  "topics": {
+    "sql2": {
+      "module1": {
+        "select_statement_syntax": {
+          "label": "SELECT Statement Syntax",
+          "summary": "Basic structure of a SELECT statement.",
+          "cards": {
+            "sketch0": {
+              "title": "Overview: SELECT Statement Syntax"
+            },
+            "sketch1": {
+              "title": "write a simple SELECT statement"
+            },
+            "sketch2": {
+              "title": "identify the key parts of a SELECT statement"
+            },
+            "sketch3": {
+              "title": "How to practice SELECT Statement Syntax"
+            },
+            "project": {
+              "title": "Practice: SELECT Statement Syntax"
+            },
+            "quiz": {
+              "title": "Quiz: SELECT Statement Syntax"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql2": {
+      "module1": {
+        "select_statement_syntax": {
+          "concept_overview": {
+            "title": "What is SELECT Statement Syntax?",
+            "bodyMarkdown": "SELECT Statement Syntax focuses on this idea: Basic structure of a SELECT statement.\n\nA good starting point is to say the requirement in plain language before writing SQL.\n\n### Learning goals\n- write a simple SELECT statement\n- identify the key parts of a SELECT statement"
+          },
+          "goal_one": {
+            "title": "write a simple SELECT statement",
+            "bodyMarkdown": "write a simple SELECT statement.\n\nWhen practicing SELECT Statement Syntax, start with a focused example and verify the result carefully."
+          },
+          "goal_two": {
+            "title": "identify the key parts of a SELECT statement",
+            "bodyMarkdown": "identify the key parts of a SELECT statement.\n\nUse the topic idea to explain what the query is doing in plain English."
+          },
+          "practice_note": {
+            "title": "How to practice SELECT Statement Syntax",
+            "bodyMarkdown": "Read the requirement, predict the result, run the query, and verify whether the output really answers the question.\n\nThat habit is especially important for SELECT Statement Syntax."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "module1_select_statement_syntax_practice_sql": {
+      "title": "Practice: SELECT Statement Syntax",
+      "prompt": "The `products` table already exists.\n\nWrite a query that shows `name`, `price`, and a calculated column named `price_with_tax` that multiplies `price` by `1.1`.\n\nThen run it.",
+      "help": {
+        "concept": "Basic structure of a SELECT statement.",
+        "hint_1": "You can multiply a numeric column directly in the SELECT list.",
+        "hint_2": "Use AS price_with_tax."
+      },
+      "hint": "Use an expression in SELECT and give it an alias.",
+      "starterCode": "-- Show a calculated column\nSELECT name, price, price * 1.1 AS price_with_tax\nFROM products\n"
+    },
+    "module1_select_statement_syntax_core_concept": {
+      "title": "Core idea: SELECT Statement Syntax",
+      "prompt": "What is the best description of SELECT Statement Syntax?",
+      "help": {
+        "concept": "Basic structure of a SELECT statement.",
+        "hint_1": "Look for the option that matches the main concept directly.",
+        "hint_2": "Ignore answers that describe unrelated SQL behavior."
+      },
+      "hint": "Match the answer to the topic summary.",
+      "options": {
+        "a": "It uses expressions in SELECT to create calculated output values.",
+        "b": "It deletes rows before selecting them.",
+        "c": "It only renames tables permanently.",
+        "d": "It only changes database schema."
+      }
+    },
+    "module1_select_statement_syntax_true_statements": {
+      "title": "True statements about SELECT Statement Syntax",
+      "prompt": "Select all true statements about SELECT Statement Syntax.",
+      "help": {
+        "concept": "Basic structure of a SELECT statement.",
+        "hint_1": "Pick statements that align with the topic summary and objectives.",
+        "hint_2": "Reject statements that clearly describe unrelated SQL ideas."
+      },
+      "hint": "Use the summary and objectives as your guide.",
+      "options": {
+        "a": "You can compute new values directly in SELECT.",
+        "b": "You can give a calculated expression an alias.",
+        "c": "Calculated columns require deleting the original column first.",
+        "d": "Calculated columns only work in UPDATE statements.",
+        "e": "Expressions in SELECT help you inspect transformed output."
+      }
+    },
+    "module1_select_statement_syntax_workflow_order": {
+      "title": "Workflow for SELECT Statement Syntax",
+      "prompt": "Reorder the workflow ideas for SELECT Statement Syntax.",
+      "help": {
+        "concept": "Decide what to calculate, write the expression, then inspect the output.",
+        "hint_1": "Think about what should happen first.",
+        "hint_2": "Then think about what should happen last."
+      },
+      "hint": "Order the steps logically.",
+      "tokens": {
+        "t1": "identify the value you want to calculate",
+        "t2": "write the expression in the SELECT list",
+        "t3": "run the query and inspect the calculated output"
+      }
+    },
+    "module1_select_statement_syntax_keyword_fill": {
+      "title": "Expression location",
+      "prompt": "Fill in the blank with the best SQL keyword.",
+      "help": {
+        "concept": "Basic structure of a SELECT statement.",
+        "hint_1": "Think about which SQL term best completes the sentence.",
+        "hint_2": "Use the topic meaning to eliminate unrelated options."
+      },
+      "hint": "Match the sentence to the right SQL term.",
+      "template": "A calculated expression in a query is commonly written in the ____ list.",
+      "choices": [
+        "SELECT",
+        "DELETE",
+        "GROUP",
+        "TABLE"
+      ],
+      "correct": "SELECT"
+    }
+  }
+}

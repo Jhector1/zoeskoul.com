@@ -1,0 +1,135 @@
+{
+  "topics": {
+    "sql2": {
+      "module3": {
+        "offset_clause": {
+          "label": "OFFSET Clause",
+          "summary": "Skipping rows in results.",
+          "cards": {
+            "sketch0": {
+              "title": "Overview: OFFSET Clause"
+            },
+            "sketch1": {
+              "title": "use OFFSET for pagination"
+            },
+            "sketch2": {
+              "title": "Practice the core idea of OFFSET Clause"
+            },
+            "sketch3": {
+              "title": "How to practice OFFSET Clause"
+            },
+            "project": {
+              "title": "Practice: OFFSET Clause"
+            },
+            "quiz": {
+              "title": "Quiz: OFFSET Clause"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql2": {
+      "module3": {
+        "offset_clause": {
+          "concept_overview": {
+            "title": "What is OFFSET Clause?",
+            "bodyMarkdown": "OFFSET Clause focuses on this idea: Skipping rows in results.\n\nA good starting point is to say the requirement in plain language before writing SQL.\n\n### Learning goals\n- use OFFSET for pagination\n- Practice the core idea of OFFSET Clause"
+          },
+          "goal_one": {
+            "title": "use OFFSET for pagination",
+            "bodyMarkdown": "use OFFSET for pagination.\n\nWhen practicing OFFSET Clause, start with a focused example and verify the result carefully."
+          },
+          "goal_two": {
+            "title": "Practice the core idea of OFFSET Clause",
+            "bodyMarkdown": "Practice the core idea of OFFSET Clause.\n\nUse the topic idea to explain what the query is doing in plain English."
+          },
+          "practice_note": {
+            "title": "How to practice OFFSET Clause",
+            "bodyMarkdown": "Read the requirement, predict the result, run the query, and verify whether the output really answers the question.\n\nThat habit is especially important for OFFSET Clause."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "module3_offset_clause_practice_sql": {
+      "title": "Practice: OFFSET Clause",
+      "prompt": "The `products` table already exists.\n\nWrite a query that shows product names where the name contains the letter `a`.\n\nThen run it.",
+      "help": {
+        "concept": "Skipping rows in results.",
+        "hint_1": "Put the letter inside a pattern like %a%",
+        "hint_2": "Write the condition in WHERE."
+      },
+      "hint": "Use LIKE with % wildcards.",
+      "starterCode": "-- Match text patterns\nSELECT name\nFROM products\nWHERE name LIKE '%a%'\n"
+    },
+    "module3_offset_clause_core_concept": {
+      "title": "Core idea: OFFSET Clause",
+      "prompt": "What is the best description of OFFSET Clause?",
+      "help": {
+        "concept": "Skipping rows in results.",
+        "hint_1": "Look for the option that matches the main concept directly.",
+        "hint_2": "Ignore answers that describe unrelated SQL behavior."
+      },
+      "hint": "Match the answer to the topic summary.",
+      "options": {
+        "a": "It handles partial text matching, lists, ranges, and missing values.",
+        "b": "It is only about table creation.",
+        "c": "It always requires joining tables.",
+        "d": "It permanently fixes bad data in storage."
+      }
+    },
+    "module3_offset_clause_true_statements": {
+      "title": "True statements about OFFSET Clause",
+      "prompt": "Select all true statements about OFFSET Clause.",
+      "help": {
+        "concept": "Skipping rows in results.",
+        "hint_1": "Pick statements that align with the topic summary and objectives.",
+        "hint_2": "Reject statements that clearly describe unrelated SQL ideas."
+      },
+      "hint": "Use the summary and objectives as your guide.",
+      "options": {
+        "a": "LIKE can be used for pattern matching.",
+        "b": "IS NULL checks for missing values.",
+        "c": "BETWEEN can describe a range.",
+        "d": "= NULL is the standard way to test for nulls.",
+        "e": "IN can be cleaner than many OR conditions."
+      }
+    },
+    "module3_offset_clause_workflow_order": {
+      "title": "Workflow for OFFSET Clause",
+      "prompt": "Reorder the workflow ideas for OFFSET Clause.",
+      "help": {
+        "concept": "Choose the matching/filtering idea first, then write the condition, then verify the rows.",
+        "hint_1": "Think about what should happen first.",
+        "hint_2": "Then think about what should happen last."
+      },
+      "hint": "Order the steps logically.",
+      "tokens": {
+        "t1": "decide whether you are matching text, a list, a range, or nulls",
+        "t2": "write the matching condition in WHERE",
+        "t3": "run the query and verify the kept rows"
+      }
+    },
+    "module3_offset_clause_keyword_fill": {
+      "title": "Pattern matching keyword",
+      "prompt": "Fill in the blank with the best SQL keyword.",
+      "help": {
+        "concept": "Skipping rows in results.",
+        "hint_1": "Think about which SQL term best completes the sentence.",
+        "hint_2": "Use the topic meaning to eliminate unrelated options."
+      },
+      "hint": "Match the sentence to the right SQL term.",
+      "template": "A common operator for basic text pattern matching is ____.",
+      "choices": [
+        "LIKE",
+        "CREATE",
+        "DELETE",
+        "ALTER"
+      ],
+      "correct": "LIKE"
+    }
+  }
+}

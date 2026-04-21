@@ -1,0 +1,479 @@
+{
+  "subjectSlug": "sql2",
+  "profileId": "sql2",
+  "modules": [
+    {
+      "moduleSlug": "what_sql_is",
+      "prefix": "Module 1",
+      "order": 1,
+      "title": "What SQL Is",
+      "description": "Introduction to SQL, its history, and its role in data management.",
+      "weekStart": 1,
+      "weekEnd": 1,
+      "sections": [
+        {
+          "sectionSlug": "introduction_to_sql",
+          "order": 1,
+          "title": "Introduction to SQL",
+          "description": "Overview of SQL and its uses.",
+          "topics": [
+            {
+              "topicId": "what_is_sql",
+              "order": 1,
+              "title": "What is SQL?",
+              "summary": "Definition and purpose of SQL.",
+              "minutes": 10,
+              "learningGoals": [
+                "Understand the meaning of SQL",
+                "Recognize the importance of SQL in databases"
+              ]
+            },
+            {
+              "topicId": "history_of_sql",
+              "order": 2,
+              "title": "History of SQL",
+              "summary": "A brief history of SQL and its evolution.",
+              "minutes": 10,
+              "learningGoals": [
+                "Recall key milestones in SQL development"
+              ]
+            },
+            {
+              "topicId": "databases_and_sql",
+              "order": 3,
+              "title": "Databases and SQL",
+              "summary": "How SQL interacts with databases.",
+              "minutes": 15,
+              "learningGoals": [
+                "Identify the relationship between SQL and databases"
+              ]
+            },
+            {
+              "topicId": "common_sql_uses",
+              "order": 4,
+              "title": "Common SQL Uses",
+              "summary": "Where and why SQL is used today.",
+              "minutes": 10,
+              "learningGoals": [
+                "List common applications of SQL"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleSlug": "reading_data",
+      "prefix": "Module 2",
+      "order": 2,
+      "title": "Reading Data",
+      "description": "Learn to retrieve data from tables using SELECT statements.",
+      "weekStart": 2,
+      "weekEnd": 2,
+      "sections": [
+        {
+          "sectionSlug": "select_basics",
+          "order": 1,
+          "title": "SELECT Basics",
+          "description": "Fundamentals of the SELECT statement.",
+          "topics": [
+            {
+              "topicId": "select_statement_syntax",
+              "order": 1,
+              "title": "SELECT Statement Syntax",
+              "summary": "Structure of a basic SELECT statement.",
+              "minutes": 15,
+              "learningGoals": [
+                "Write a simple SELECT statement"
+              ]
+            },
+            {
+              "topicId": "selecting_columns",
+              "order": 2,
+              "title": "Selecting Columns",
+              "summary": "How to choose specific columns to display.",
+              "minutes": 10,
+              "learningGoals": [
+                "Select specific columns from a table"
+              ]
+            },
+            {
+              "topicId": "selecting_all_columns",
+              "order": 3,
+              "title": "Selecting All Columns",
+              "summary": "Using * to select all columns.",
+              "minutes": 8,
+              "learningGoals": [
+                "Use * to retrieve all columns"
+              ]
+            },
+            {
+              "topicId": "selecting_multiple_tables_intro",
+              "order": 4,
+              "title": "Selecting from Multiple Tables (Intro)",
+              "summary": "Introduction to reading data from more than one table.",
+              "minutes": 12,
+              "learningGoals": [
+                "Understand the basics of multi-table queries"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleSlug": "filtering",
+      "prefix": "Module 3",
+      "order": 3,
+      "title": "Filtering",
+      "description": "Learn to filter results using WHERE clauses and logical operators.",
+      "weekStart": 3,
+      "weekEnd": 3,
+      "sections": [
+        {
+          "sectionSlug": "where_clause_basics",
+          "order": 1,
+          "title": "WHERE Clause Basics",
+          "description": "Introduction to filtering data.",
+          "topics": [
+            {
+              "topicId": "where_clause_syntax",
+              "order": 1,
+              "title": "WHERE Clause Syntax",
+              "summary": "How to use WHERE to filter results.",
+              "minutes": 12,
+              "learningGoals": [
+                "Write a WHERE clause to filter data"
+              ]
+            },
+            {
+              "topicId": "comparison_operators",
+              "order": 2,
+              "title": "Comparison Operators",
+              "summary": "Using =, <, >, <=, >=, <> in filters.",
+              "minutes": 10,
+              "learningGoals": [
+                "Use comparison operators in WHERE clauses"
+              ]
+            },
+            {
+              "topicId": "logical_operators",
+              "order": 3,
+              "title": "Logical Operators",
+              "summary": "Combining conditions with AND, OR, NOT.",
+              "minutes": 12,
+              "learningGoals": [
+                "Combine multiple conditions using logical operators"
+              ]
+            },
+            {
+              "topicId": "null_values_filtering",
+              "order": 4,
+              "title": "Filtering NULL Values",
+              "summary": "Handling NULLs in filters.",
+              "minutes": 10,
+              "learningGoals": [
+                "Filter data where values are NULL or not NULL"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleSlug": "sorting_and_output_control",
+      "prefix": "Module 4",
+      "order": 4,
+      "title": "Sorting and Output Control",
+      "description": "Learn to sort results and limit the number of rows returned.",
+      "weekStart": 4,
+      "weekEnd": 4,
+      "sections": [
+        {
+          "sectionSlug": "sorting_and_limiting",
+          "order": 1,
+          "title": "Sorting and Limiting",
+          "description": "Control the order and amount of output.",
+          "topics": [
+            {
+              "topicId": "order_by_clause",
+              "order": 1,
+              "title": "ORDER BY Clause",
+              "summary": "Sorting results by one or more columns.",
+              "minutes": 12,
+              "learningGoals": [
+                "Sort query results using ORDER BY"
+              ]
+            },
+            {
+              "topicId": "sorting_asc_desc",
+              "order": 2,
+              "title": "Sorting ASC and DESC",
+              "summary": "Sorting in ascending and descending order.",
+              "minutes": 10,
+              "learningGoals": [
+                "Sort results in ascending or descending order"
+              ]
+            },
+            {
+              "topicId": "limit_clause",
+              "order": 3,
+              "title": "LIMIT Clause",
+              "summary": "Restricting the number of rows returned.",
+              "minutes": 10,
+              "learningGoals": [
+                "Limit the number of rows in query results"
+              ]
+            },
+            {
+              "topicId": "offset_clause",
+              "order": 4,
+              "title": "OFFSET Clause",
+              "summary": "Skipping rows in output.",
+              "minutes": 10,
+              "learningGoals": [
+                "Use OFFSET to skip rows in results"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleSlug": "text_matching_and_cleanup",
+      "prefix": "Module 5",
+      "order": 5,
+      "title": "Text Matching and Cleanup",
+      "description": "Work with text data using pattern matching and basic string functions.",
+      "weekStart": 5,
+      "weekEnd": 5,
+      "sections": [
+        {
+          "sectionSlug": "text_matching_and_functions",
+          "order": 1,
+          "title": "Text Matching and Functions",
+          "description": "Find and clean text data.",
+          "topics": [
+            {
+              "topicId": "like_operator",
+              "order": 1,
+              "title": "LIKE Operator",
+              "summary": "Pattern matching with LIKE and wildcards.",
+              "minutes": 12,
+              "learningGoals": [
+                "Use LIKE to match text patterns"
+              ]
+            },
+            {
+              "topicId": "ilike_and_case_insensitivity",
+              "order": 2,
+              "title": "ILIKE and Case Insensitivity",
+              "summary": "Case-insensitive text matching.",
+              "minutes": 10,
+              "learningGoals": [
+                "Apply ILIKE for case-insensitive searches"
+              ]
+            },
+            {
+              "topicId": "basic_string_functions",
+              "order": 3,
+              "title": "Basic String Functions",
+              "summary": "Using functions like UPPER, LOWER, TRIM.",
+              "minutes": 12,
+              "learningGoals": [
+                "Clean and transform text with string functions"
+              ]
+            },
+            {
+              "topicId": "handling_whitespace",
+              "order": 4,
+              "title": "Handling Whitespace",
+              "summary": "Removing or managing extra spaces in text.",
+              "minutes": 8,
+              "learningGoals": [
+                "Remove or manage whitespace in text columns"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleSlug": "aggregating_data",
+      "prefix": "Module 6",
+      "order": 6,
+      "title": "Aggregating Data",
+      "description": "Learn to summarize data using aggregate functions and grouping.",
+      "weekStart": 6,
+      "weekEnd": 6,
+      "sections": [
+        {
+          "sectionSlug": "aggregate_functions",
+          "order": 1,
+          "title": "Aggregate Functions",
+          "description": "Summarize data with SQL functions.",
+          "topics": [
+            {
+              "topicId": "count_sum_avg",
+              "order": 1,
+              "title": "COUNT, SUM, AVG",
+              "summary": "Counting and calculating averages and sums.",
+              "minutes": 12,
+              "learningGoals": [
+                "Use COUNT, SUM, and AVG to summarize data"
+              ]
+            },
+            {
+              "topicId": "min_max",
+              "order": 2,
+              "title": "MIN and MAX",
+              "summary": "Finding minimum and maximum values.",
+              "minutes": 10,
+              "learningGoals": [
+                "Find minimum and maximum values in a column"
+              ]
+            },
+            {
+              "topicId": "group_by_clause",
+              "order": 3,
+              "title": "GROUP BY Clause",
+              "summary": "Grouping data for aggregation.",
+              "minutes": 12,
+              "learningGoals": [
+                "Group data using GROUP BY"
+              ]
+            },
+            {
+              "topicId": "having_clause",
+              "order": 4,
+              "title": "HAVING Clause",
+              "summary": "Filtering groups after aggregation.",
+              "minutes": 10,
+              "learningGoals": [
+                "Filter grouped data using HAVING"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleSlug": "joining_tables",
+      "prefix": "Module 7",
+      "order": 7,
+      "title": "Joining Tables",
+      "description": "Combine data from multiple tables using JOIN operations.",
+      "weekStart": 7,
+      "weekEnd": 7,
+      "sections": [
+        {
+          "sectionSlug": "joins_basics",
+          "order": 1,
+          "title": "Joins Basics",
+          "description": "Introduction to combining tables.",
+          "topics": [
+            {
+              "topicId": "inner_join",
+              "order": 1,
+              "title": "INNER JOIN",
+              "summary": "Combining rows with matching values.",
+              "minutes": 14,
+              "learningGoals": [
+                "Use INNER JOIN to combine tables"
+              ]
+            },
+            {
+              "topicId": "left_join",
+              "order": 2,
+              "title": "LEFT JOIN",
+              "summary": "Including all rows from the left table.",
+              "minutes": 12,
+              "learningGoals": [
+                "Use LEFT JOIN to include unmatched rows"
+              ]
+            },
+            {
+              "topicId": "right_join",
+              "order": 3,
+              "title": "RIGHT JOIN",
+              "summary": "Including all rows from the right table.",
+              "minutes": 10,
+              "learningGoals": [
+                "Use RIGHT JOIN to include unmatched rows"
+              ]
+            },
+            {
+              "topicId": "full_outer_join",
+              "order": 4,
+              "title": "FULL OUTER JOIN",
+              "summary": "Combining all rows from both tables.",
+              "minutes": 10,
+              "learningGoals": [
+                "Use FULL OUTER JOIN to combine all rows"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleSlug": "practical_sql_projects",
+      "prefix": "Module 8",
+      "order": 8,
+      "title": "Practical SQL Projects",
+      "description": "Apply SQL skills in hands-on projects and review key concepts.",
+      "weekStart": 8,
+      "weekEnd": 8,
+      "sections": [
+        {
+          "sectionSlug": "project_and_review",
+          "order": 1,
+          "title": "Project and Review",
+          "description": "Practice and consolidate learning.",
+          "topics": [
+            {
+              "topicId": "mini_project_1",
+              "order": 1,
+              "title": "Mini Project: Data Exploration",
+              "summary": "Explore and analyze a sample database.",
+              "minutes": 20,
+              "learningGoals": [
+                "Apply SELECT, WHERE, and ORDER BY in a real scenario"
+              ]
+            },
+            {
+              "topicId": "mini_project_2",
+              "order": 2,
+              "title": "Mini Project: Data Cleanup",
+              "summary": "Clean and transform messy data.",
+              "minutes": 18,
+              "learningGoals": [
+                "Use string functions and filters to clean data"
+              ]
+            },
+            {
+              "topicId": "review_quiz",
+              "order": 3,
+              "title": "Review Quiz",
+              "summary": "Test knowledge of key concepts from the course.",
+              "minutes": 12,
+              "learningGoals": [
+                "Reinforce understanding of core SQL topics"
+              ]
+            },
+            {
+              "topicId": "next_steps_in_sql",
+              "order": 4,
+              "title": "Next Steps in SQL",
+              "summary": "Guidance for further learning and practice.",
+              "minutes": 10,
+              "learningGoals": [
+                "Identify resources for continued SQL learning"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

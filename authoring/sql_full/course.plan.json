@@ -1,0 +1,2454 @@
+{
+  "subjectSlug": "sql_full",
+  "title": "SQL for Absolute Beginners",
+  "description": "Normalized course plan generated from PDF curriculum input.",
+  "source": {
+    "kind": "pdf",
+    "filePath": "/Users/admin/documents/zoeskoul/SQL_Absolute_Beginners_Curriculum.pdf",
+    "originalTitle": "SQL_Absolute_Beginners_Curriculum.pdf"
+  },
+  "modules": [
+    {
+      "moduleSlug": "module_0",
+      "order": 0,
+      "title": "Getting Started with SQL and Databases",
+      "purpose": "Build the learner's mental model before syntax: what SQL is, how databases organize information, and how a question becomes a query.",
+      "learningObjectives": [
+        "Explain what SQL does in plain language.",
+        "Identify rows, columns, tables, and simple keys.",
+        "Describe how data questions map to database queries."
+      ],
+      "guidedExercises": [
+        "Label the parts of a sample table: table name, columns, rows, and key candidate.",
+        "Translate three business questions into data questions.",
+        "Run a provided starter query inside a SQL editor and describe the result."
+      ],
+      "quizFocus": [
+        "Define database, table, row, and column.",
+        "Explain why spreadsheets and relational tables are similar but not identical.",
+        "Identify when data should live in more than one table."
+      ],
+      "moduleProject": "Create a one-page data map for a tiny school or store database showing 3-4 tables and what each table stores.",
+      "sections": [
+        {
+          "sectionSlug": "section_0_1",
+          "order": 1,
+          "title": "What SQL Is",
+          "sourceSectionCode": "0.1",
+          "topics": [
+            {
+              "topicId": "what_sql_means",
+              "order": 1,
+              "title": "What SQL means",
+              "sourceTopicCode": "0.1.1"
+            },
+            {
+              "topicId": "what_a_database_is",
+              "order": 2,
+              "title": "What a database is",
+              "sourceTopicCode": "0.1.2"
+            },
+            {
+              "topicId": "why_sql_is_useful",
+              "order": 3,
+              "title": "Why SQL is useful",
+              "sourceTopicCode": "0.1.3"
+            },
+            {
+              "topicId": "real_world_examples_of_databases",
+              "order": 4,
+              "title": "Real-world examples of databases",
+              "sourceTopicCode": "0.1.4"
+            }
+          ]
+        },
+        {
+          "sectionSlug": "section_0_2",
+          "order": 2,
+          "title": "Understanding Tables",
+          "sourceSectionCode": "0.2",
+          "topics": [
+            {
+              "topicId": "rows_and_columns",
+              "order": 1,
+              "title": "Rows and columns",
+              "sourceTopicCode": "0.2.1"
+            },
+            {
+              "topicId": "records_and_fields",
+              "order": 2,
+              "title": "Records and fields",
+              "sourceTopicCode": "0.2.2"
+            },
+            {
+              "topicId": "table_names_and_column_names",
+              "order": 3,
+              "title": "Table names and column names",
+              "sourceTopicCode": "0.2.3"
+            },
+            {
+              "topicId": "reading_data_like_a_spreadsheet",
+              "order": 4,
+              "title": "Reading data like a spreadsheet",
+              "sourceTopicCode": "0.2.4"
+            }
+          ]
+        },
+        {
+          "sectionSlug": "section_0_3",
+          "order": 3,
+          "title": "Database Thinking",
+          "sourceSectionCode": "0.3",
+          "topics": [
+            {
+              "topicId": "how_data_is_organized",
+              "order": 1,
+              "title": "How data is organized",
+              "sourceTopicCode": "0.3.1"
+            },
+            {
+              "topicId": "one_table_vs_multiple_tables",
+              "order": 2,
+              "title": "One table vs multiple tables",
+              "sourceTopicCode": "0.3.2"
+            },
+            {
+              "topicId": "intro_to_keys",
+              "order": 3,
+              "title": "Intro to keys",
+              "sourceTopicCode": "0.3.3"
+            },
+            {
+              "topicId": "thinking_in_questions_and_answers",
+              "order": 4,
+              "title": "Thinking in questions and answers",
+              "sourceTopicCode": "0.3.4"
+            }
+          ]
+        },
+        {
+          "sectionSlug": "section_0_4",
+          "order": 4,
+          "title": "First SQL Environment",
+          "sourceSectionCode": "0.4",
+          "topics": [
+            {
+              "topicId": "where_sql_runs",
+              "order": 1,
+              "title": "Where SQL runs",
+              "sourceTopicCode": "0.4.1"
+            },
+            {
+              "topicId": "sql_editor_basics",
+              "order": 2,
+              "title": "SQL editor basics",
+              "sourceTopicCode": "0.4.2"
+            },
+            {
+              "topicId": "running_your_first_query",
+              "order": 3,
+              "title": "Running your first query",
+              "sourceTopicCode": "0.4.3"
+            },
+            {
+              "topicId": "reading_query_results",
+              "order": 4,
+              "title": "Reading query results",
+              "sourceTopicCode": "0.4.4"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleSlug": "module_1",
+      "order": 1,
+      "title": "Your First Queries with SELECT",
+      "purpose": "Teach learners to retrieve data confidently with SELECT and FROM before filtering or joining tables.",
+      "learningObjectives": [
+        "Write valid SELECT statements against a single table.",
+        "Choose between selecting all columns and selecting only needed columns.",
+        "Read result sets without confusion."
+      ],
+      "guidedExercises": [
+        "Write four SELECT statements using one table and different column combinations.",
+        "Predict the output before running each query.",
+        "Correct five broken beginner queries."
+      ],
+      "quizFocus": [
+        "What is the role of SELECT?",
+        "What is the role of FROM?",
+        "Why is SELECT * useful for exploration but risky in real applications?"
+      ],
+      "moduleProject": "Build a one-page query sheet with ten starter SELECT queries against a student, product, or movie table.",
+      "sections": [
+        {
+          "sectionSlug": "section_1_1",
+          "order": 1,
+          "title": "Intro to SELECT",
+          "sourceSectionCode": "1.1",
+          "topics": [
+            {
+              "topicId": "what_select_does",
+              "order": 1,
+              "title": "What SELECT does",
+              "sourceTopicCode": "1.1.1"
+            },
+            {
+              "topicId": "selecting_all_columns_with",
+              "order": 2,
+              "title": "Selecting all columns with *",
+              "sourceTopicCode": "1.1.2"
+            },
+            {
+              "topicId": "selecting_specific_columns",
+              "order": 3,
+              "title": "Selecting specific columns",
+              "sourceTopicCode": "1.1.3"
+            },
+            {
+              "topicId": "query_structure_basics",
+              "order": 4,
+              "title": "Query structure basics",
+              "sourceTopicCode": "1.1.4"
+            }
+          ]
+        },
+        {
+          "sectionSlug": "section_1_2",
+          "order": 2,
+          "title": "Reading Data from a Table",
+          "sourceSectionCode": "1.2",
+          "topics": [
+            {
+              "topicId": "from_and_table_names",
+              "order": 1,
+              "title": "FROM and table names",
+              "sourceTopicCode": "1.2.1"
+            },
+            {
+              "topicId": "choosing_the_right_columns",
+              "order": 2,
+              "title": "Choosing the right columns",
+              "sourceTopicCode": "1.2.2"
+            },
+            {
+              "topicId": "viewing_clean_results",
+              "order": 3,
+              "title": "Viewing clean results",
+              "sourceTopicCode": "1.2.3"
+            },
+            {
+              "topicId": "writing_simple_readable_queries",
+              "order": 4,
+              "title": "Writing simple readable queries",
+              "sourceTopicCode": "1.2.4"
+            }
+          ]
+        },
+        {
+          "sectionSlug": "section_1_3",
+          "order": 3,
+          "title": "SQL Syntax Basics",
+          "sourceSectionCode": "1.3",
+          "topics": [
+            {
+              "topicId": "keywords",
+              "order": 1,
+              "title": "Keywords",
+              "sourceTopicCode": "1.3.1"
+            },
+            {
+              "topicId": "semicolons",
+              "order": 2,
+              "title": "Semicolons",
+              "sourceTopicCode": "1.3.2"
+            },
+            {
+              "topicId": "uppercase_vs_lowercase",
+              "order": 3,
+              "title": "Uppercase vs lowercase",
+              "sourceTopicCode": "1.3.3"
+            },
+            {
+              "topicId": "common_beginner_syntax_mistakes",
+              "order": 4,
+              "title": "Common beginner syntax mistakes",
+              "sourceTopicCode": "1.3.4"
+            }
+          ]
+        },
+        {
+          "sectionSlug": "section_1_4",
+          "order": 4,
+          "title": "Practice with Basic Queries",
+          "sourceSectionCode": "1.4",
+          "topics": [
+            {
+              "topicId": "query_one_column",
+              "order": 1,
+              "title": "Query one column",
+              "sourceTopicCode": "1.4.1"
+            },
+            {
+              "topicId": "query_multiple_columns",
+              "order": 2,
+              "title": "Query multiple columns",
+              "sourceTopicCode": "1.4.2"
+            },
+            {
+              "topicId": "query_full_tables",
+              "order": 3,
+              "title": "Query full tables",
+              "sourceTopicCode": "1.4.3"
+            },
+            {
+              "topicId": "predicting_result_output",
+              "order": 4,
+              "title": "Predicting result output",
+              "sourceTopicCode": "1.4.4"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleSlug": "module_2",
+      "order": 2,
+      "title": "Filtering Data with WHERE",
+      "purpose": "Introduce decision-making in queries by teaching learners to keep only the rows they actually need.",
+      "learningObjectives": [
+        "Use WHERE to narrow results correctly.",
+        "Compare text and numeric values using SQL operators.",
+        "Combine logical conditions without changing the intended meaning."
+      ],
+      "guidedExercises": [
+        "Find all rows that match an exact value.",
+        "Filter a table using at least one range condition and one text condition.",
+        "Rewrite mixed AND/OR logic with parentheses to make it explicit."
+      ],
+      "quizFocus": [
+        "What happens if a query has no WHERE clause?",
+        "When should you use AND versus OR?",
+        "Why do parentheses help when multiple conditions are involved?"
+      ],
+      "moduleProject": "Create a 'data detective' worksheet with ten filtering prompts and answer them with SQL.",
+      "sections": [
+        {
+          "sectionSlug": "section_2_1",
+          "order": 1,
+          "title": "Intro to Filtering",
+          "sourceSectionCode": "2.1",
+          "topics": [
+            {
+              "topicId": "why_filtering_matters",
+              "order": 1,
+              "title": "Why filtering matters",
+              "sourceTopicCode": "2.1.1"
+            },
+            {
+              "topicId": "the_where_clause",
+              "order": 2,
+              "title": "The WHERE clause",
+              "sourceTopicCode": "2.1.2"
+            },
+            {
+              "topicId": "matching_exact_values",
+              "order": 3,
+              "title": "Matching exact values",
+              "sourceTopicCode": "2.1.3"
+            },
+            {
+              "topicId": "filtering_numbers_and_text",
+              "order": 4,
+              "title": "Filtering numbers and text",
+              "sourceTopicCode": "2.1.4"
+            }
+          ]
+        },
+        {
+          "sectionSlug": "section_2_2",
+          "order": 2,
+          "title": "Comparison Operators",
+          "sourceSectionCode": "2.2",
+          "topics": [
+            {
+              "topicId": "",
+              "order": 1,
+              "title": "=",
+              "sourceTopicCode": "2.2.1"
+            },
+            {
+              "topicId": "or",
+              "order": 2,
+              "title": "!= or <>",
+              "sourceTopicCode": "2.2.2"
+            },
+            {
+              "topicId": "",
+              "order": 3,
+              "title": ">",
+              "sourceTopicCode": "2.2.3"
+            },
+            {
+              "topicId": "",
+              "order": 4,
+              "title": "<",
+              "sourceTopicCode": "2.2.4"
+            },
+            {
+              "topicId": "",
+              "order": 5,
+              "title": ">=, <=",
+              "sourceTopicCode": "2.2.5"
+            },
+            {
+              "topicId": "choosing_the_right_comparison",
+              "order": 6,
+              "title": "Choosing the right comparison",
+              "sourceTopicCode": "2.2.6"
+            }
+          ]
+        },
+        {
+          "sectionSlug": "section_2_3",
+          "order": 3,
+          "title": "Filtering with Multiple Conditions",
+          "sourceSectionCode": "2.3",
+          "topics": [
+            {
+              "topicId": "and",
+              "order": 1,
+              "title": "AND",
+              "sourceTopicCode": "2.3.1"
+            },
+            {
+              "topicId": "or",
+              "order": 2,
+              "title": "OR",
+              "sourceTopicCode": "2.3.2"
+            },
+            {
+              "topicId": "not",
+              "order": 3,
+              "title": "NOT",
+              "sourceTopicCode": "2.3.3"
+            },
+            {
+              "topicId": "combining_conditions_safely",
+              "order": 4,
+              "title": "Combining conditions safely",
+              "sourceTopicCode": "2.3.4"
+            }
+          ]
+        },
+        {
+          "sectionSlug": "section_2_4",
+          "order": 4,
+          "title": "Beginner Filtering Practice",
+          "sourceSectionCode": "2.4",
+          "topics": [
+            {
+              "topicId": "filter_by_number",
+              "order": 1,
+              "title": "Filter by number",
+              "sourceTopicCode": "2.4.1"
+            },
+            {
+              "topicId": "filter_by_text",
+              "order": 2,
+              "title": "Filter by text",
+              "sourceTopicCode": "2.4.2"
+            },
+            {
+              "topicId": "filter_by_more_than_one_rule",
+              "order": 3,
+              "title": "Filter by more than one rule",
+              "sourceTopicCode": "2.4.3"
+            },
+            {
+              "topicId": "avoiding_filtering_mistakes",
+              "order": 4,
+              "title": "Avoiding filtering mistakes",
+              "sourceTopicCode": "2.4.4"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleSlug": "module_3",
+      "order": 3,
+      "title": "Sorting and Limiting Results",
+      "purpose": "Help beginners control output so answers are easier to read, rank, and compare.",
+      "learningObjectives": [
+        "Sort result sets in meaningful ways.",
+        "Use LIMIT to keep only the most relevant rows.",
+        "Combine sorting and limiting to answer ranking questions."
+      ],
+      "guidedExercises": [
+        "Show the top 5 most expensive products.",
+        "Show the 10 most recent rows in a table with dates.",
+        "Sort by two columns and explain how ties are handled."
+      ],
+      "quizFocus": [
+        "What is the default sort direction in most SQL engines?",
+        "Why is LIMIT often paired with ORDER BY?",
+        "What does a secondary sort do?"
+      ],
+      "moduleProject": "Build a 'top performers' report for a sample sales or grades dataset.",
+      "sections": [
+        {
+          "sectionSlug": "section_3_1",
+          "order": 1,
+          "title": "Sorting Data",
+          "sourceSectionCode": "3.1",
+          "topics": [
+            {
+              "topicId": "why_sorting_matters",
+              "order": 1,
+              "title": "Why sorting matters",
+              "sourceTopicCode": "3.1.1"
+            },
+            {
+              "topicId": "order_by",
+              "order": 2,
+              "title": "ORDER BY",
+              "sourceTopicCode": "3.1.2"
+            },
+            {
+              "topicId": "ascending_order",
+              "order": 3,
+              "title": "Ascending order",
+              "sourceTopicCode": "3.1.3"
+            },
+            {
+              "topicId": "descending_order",
+              "order": 4,
+              "title": "Descending order",
+              "sourceTopicCode": "3.1.4"
+            }
+          ]
+        },
+        {
+          "sectionSlug": "section_3_2",
+          "order": 2,
+          "title": "Sorting by Multiple Columns",
+          "sourceSectionCode": "3.2",
+          "topics": [
+            {
+              "topicId": "primary_sort",
+              "order": 1,
+              "title": "Primary sort",
+              "sourceTopicCode": "3.2.1"
+            },
+            {
+              "topicId": "secondary_sort",
+              "order": 2,
+              "title": "Secondary sort",
+              "sourceTopicCode": "3.2.2"
+            },
+            {
+              "topicId": "sorting_text",
+              "order": 3,
+              "title": "Sorting text",
+              "sourceTopicCode": "3.2.3"
+            },
+            {
+              "topicId": "sorting_numbers_and_dates",
+              "order": 4,
+              "title": "Sorting numbers and dates",
+              "sourceTopicCode": "3.2.4"
+            }
+          ]
+        },
+        {
+          "sectionSlug": "section_3_3",
+          "order": 3,
+          "title": "Limiting Output",
+          "sourceSectionCode": "3.3",
+          "topics": [
+            {
+              "topicId": "why_limit_results",
+              "order": 1,
+              "title": "Why limit results",
+              "sourceTopicCode": "3.3.1"
+            },
+            {
+              "topicId": "limit",
+              "order": 2,
+              "title": "LIMIT",
+              "sourceTopicCode": "3.3.2"
+            },
+            {
+              "topicId": "top_rows_only",
+              "order": 3,
+              "title": "Top rows only",
+              "sourceTopicCode": "3.3.3"
+            },
+            {
+              "topicId": "combining_order_by_with_limit",
+              "order": 4,
+              "title": "Combining ORDER BY with LIMIT",
+              "sourceTopicCode": "3.3.4"
+            }
+          ]
+        },
+        {
+          "sectionSlug": "section_3_4",
+          "order": 4,
+          "title": "Practice with Output Control",
+          "sourceSectionCode": "3.4",
+          "topics": [
+            {
+              "topicId": "find_highest_values",
+              "order": 1,
+              "title": "Find highest values",
+              "sourceTopicCode": "3.4.1"
+            },
+            {
+              "topicId": "find_lowest_values",
+              "order": 2,
+              "title": "Find lowest values",
+              "sourceTopicCode": "3.4.2"
+            },
+            {
+              "topicId": "show_top_5_records",
+              "order": 3,
+              "title": "Show top 5 records",
+              "sourceTopicCode": "3.4.3"
+            },
+            {
+              "topicId": "build_clear_result_sets",
+              "order": 4,
+              "title": "Build clear result sets",
+              "sourceTopicCode": "3.4.4"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleSlug": "module_4",
+      "order": 4,
+      "title": "Working with Text, Lists, Ranges, and NULL",
+      "purpose": "Expand filtering to real-world cases like partial text, multiple choices, ranges, and missing values.",
+      "learningObjectives": [],
+      "guidedExercises": [
+        "Find names that start with a given letter.",
+        "Find rows whose category is in a list of allowed values.",
+        "Identify rows with missing contact information."
+      ],
+      "quizFocus": [
+        "Why does = NULL not work the way beginners expect?",
+        "What is the difference between % and _ in LIKE patterns?",
+        "When is IN cleaner than multiple OR conditions?"
+      ],
+      "moduleProject": "Create a search-and-cleanup worksheet for a customer table with missing or inconsistent information.",
+      "sections": [
+        {
+          "sectionSlug": "section_4_1",
+          "order": 1,
+          "title": "Text Matching",
+          "sourceSectionCode": "4.1",
+          "topics": [
+            {
+              "topicId": "intro_to_like",
+              "order": 1,
+              "title": "Intro to LIKE",
+              "sourceTopicCode": "4.1.1"
+            },
+            {
+              "topicId": "wildcard",
+              "order": 2,
+              "title": "% wildcard",
+              "sourceTopicCode": "4.1.2"
+            },
+            {
+              "topicId": "wildcard",
+              "order": 3,
+              "title": "_ wildcard",
+              "sourceTopicCode": "4.1.3"
+            },
+            {
+              "topicId": "searching_partial_text",
+              "order": 4,
+              "title": "Searching partial text",
+              "sourceTopicCode": "4.1.4"
+            }
+          ]
+        },
+        {
+          "sectionSlug": "section_4_2",
+          "order": 2,
+          "title": "Lists and Ranges",
+          "sourceSectionCode": "4.2",
+          "topics": [
+            {
+              "topicId": "in",
+              "order": 1,
+              "title": "IN",
+              "sourceTopicCode": "4.2.1"
+            },
+            {
+              "topicId": "not_in",
+              "order": 2,
+              "title": "NOT IN",
+              "sourceTopicCode": "4.2.2"
+            },
+            {
+              "topicId": "between",
+              "order": 3,
+              "title": "BETWEEN",
+              "sourceTopicCode": "4.2.3"
+            },
+            {
+              "topicId": "range_filtering_practice",
+              "order": 4,
+              "title": "Range filtering practice",
+              "sourceTopicCode": "4.2.4"
+            }
+          ]
+        },
+        {
+          "sectionSlug": "section_4_3",
+          "order": 3,
+          "title": "Missing Data",
+          "sourceSectionCode": "4.3",
+          "topics": [
+            {
+              "topicId": "what_null_means",
+              "order": 1,
+              "title": "What NULL means",
+              "sourceTopicCode": "4.3.1"
+            },
+            {
+              "topicId": "is_null",
+              "order": 2,
+              "title": "IS NULL",
+              "sourceTopicCode": "4.3.2"
+            },
+            {
+              "topicId": "is_not_null",
+              "order": 3,
+              "title": "IS NOT NULL",
+              "sourceTopicCode": "4.3.3"
+            },
+            {
+              "topicId": "common_null_mistakes",
+              "order": 4,
+              "title": "Common NULL mistakes",
+              "sourceTopicCode": "4.3.4"
+            }
+          ]
+        },
+        {
+          "sectionSlug": "section_4_4",
+          "order": 4,
+          "title": "Practice",
+          "sourceSectionCode": "4.4",
+          "topics": [
+            {
+              "topicId": "search_names",
+              "order": 1,
+              "title": "Search names",
+              "sourceTopicCode": "4.4.1"
+            },
+            {
+              "topicId": "filter_categories",
+              "order": 2,
+              "title": "Filter categories",
+              "sourceTopicCode": "4.4.2"
+            },
+            {
+              "topicId": "find_missing_data",
+              "order": 3,
+              "title": "Find missing data",
+              "sourceTopicCode": "4.4.3"
+            },
+            {
+              "topicId": "combine_text_and_null_filters",
+              "order": 4,
+              "title": "Combine text and NULL filters",
+              "sourceTopicCode": "4.4.4"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleSlug": "module_5",
+      "order": 5,
+      "title": "Calculated Columns and SQL Expressions",
+      "purpose": "Teach learners to create new values from existing data so raw tables become useful reports.",
+      "learningObjectives": [
+        "Use arithmetic and expressions inside SELECT.",
+        "Rename outputs with aliases for readability.",
+        "Apply simple built-in functions safely."
+      ],
+      "guidedExercises": [
+        "Calculate line totals from price and quantity.",
+        "Create a discounted price column.",
+        "Use aliases to make a result set presentation-ready."
+      ],
+      "quizFocus": [
+        "What is an expression in SQL?",
+        "Why are aliases useful in reports?",
+        "What happens when an expression uses NULL values?"
+      ],
+      "moduleProject": "Build a simple invoice or payroll report with calculated columns and clear output names.",
+      "sections": [
+        {
+          "sectionSlug": "section_5_1",
+          "order": 1,
+          "title": "Creating New Values in Queries",
+          "sourceSectionCode": "5.1",
+          "topics": [
+            {
+              "topicId": "what_expressions_are",
+              "order": 1,
+              "title": "What expressions are",
+              "sourceTopicCode": "5.1.1"
+            },
+            {
+              "topicId": "math_in_sql",
+              "order": 2,
+              "title": "Math in SQL",
+              "sourceTopicCode": "5.1.2"
+            },
+            {
+              "topicId": "adding_and_subtracting",
+              "order": 3,
+              "title": "Adding and subtracting",
+              "sourceTopicCode": "5.1.3"
+            },
+            {
+              "topicId": "multiplying_and_dividing",
+              "order": 4,
+              "title": "Multiplying and dividing",
+              "sourceTopicCode": "5.1.4"
+            }
+          ]
+        },
+        {
+          "sectionSlug": "section_5_2",
+          "order": 2,
+          "title": "Column Aliases",
+          "sourceSectionCode": "5.2",
+          "topics": [
+            {
+              "topicId": "what_aliases_are",
+              "order": 1,
+              "title": "What aliases are",
+              "sourceTopicCode": "5.2.1"
+            },
+            {
+              "topicId": "as",
+              "order": 2,
+              "title": "AS",
+              "sourceTopicCode": "5.2.2"
+            },
+            {
+              "topicId": "renaming_result_columns",
+              "order": 3,
+              "title": "Renaming result columns",
+              "sourceTopicCode": "5.2.3"
+            },
+            {
+              "topicId": "writing_readable_output",
+              "order": 4,
+              "title": "Writing readable output",
+              "sourceTopicCode": "5.2.4"
+            }
+          ]
+        },
+        {
+          "sectionSlug": "section_5_3",
+          "order": 3,
+          "title": "Simple Functions",
+          "sourceSectionCode": "5.3",
+          "topics": [
+            {
+              "topicId": "intro_to_functions",
+              "order": 1,
+              "title": "Intro to functions",
+              "sourceTopicCode": "5.3.1"
+            },
+            {
+              "topicId": "string_functions",
+              "order": 2,
+              "title": "String functions",
+              "sourceTopicCode": "5.3.2"
+            },
+            {
+              "topicId": "number_functions",
+              "order": 3,
+              "title": "Number functions",
+              "sourceTopicCode": "5.3.3"
+            },
+            {
+              "topicId": "date_function_awareness",
+              "order": 4,
+              "title": "Date function awareness",
+              "sourceTopicCode": "5.3.4"
+            }
+          ]
+        },
+        {
+          "sectionSlug": "section_5_4",
+          "order": 4,
+          "title": "Expression Practice",
+          "sourceSectionCode": "5.4",
+          "topics": [
+            {
+              "topicId": "total_price_calculations",
+              "order": 1,
+              "title": "Total price calculations",
+              "sourceTopicCode": "5.4.1"
+            },
+            {
+              "topicId": "discount_calculations",
+              "order": 2,
+              "title": "Discount calculations",
+              "sourceTopicCode": "5.4.2"
+            },
+            {
+              "topicId": "renaming_outputs",
+              "order": 3,
+              "title": "Renaming outputs",
+              "sourceTopicCode": "5.4.3"
+            },
+            {
+              "topicId": "simple_report_queries",
+              "order": 4,
+              "title": "Simple report queries",
+              "sourceTopicCode": "5.4.4"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleSlug": "module_6",
+      "order": 6,
+      "title": "Aggregate Functions",
+      "purpose": "Move from row-by-row reading to summarizing many rows into a single business answer.",
+      "learningObjectives": [
+        "Use core aggregate functions correctly.",
+        "Summarize filtered subsets of data.",
+        "Interpret aggregate output in business terms."
+      ],
+      "guidedExercises": [
+        "Count the number of customers in a table.",
+        "Find total revenue for a filtered set of orders.",
+        "Calculate average score or salary for a chosen group of rows."
+      ],
+      "quizFocus": [
+        "What is the difference between COUNT(*) and COUNT(column)?",
+        "Why are aggregates useful for dashboards and reporting?",
+        "How does WHERE interact with an aggregate query?"
+      ],
+      "moduleProject": "Create a one-page KPI report for a tiny business dataset using only aggregate queries.",
+      "sections": [
+        {
+          "sectionSlug": "section_6_1",
+          "order": 1,
+          "title": "Intro to Aggregation",
+          "sourceSectionCode": "6.1",
+          "topics": [
+            {
+              "topicId": "what_aggregate_functions_do",
+              "order": 1,
+              "title": "What aggregate functions do",
+              "sourceTopicCode": "6.1.1"
+            },
+            {
+              "topicId": "one_value_from_many_rows",
+              "order": 2,
+              "title": "One value from many rows",
+              "sourceTopicCode": "6.1.2"
+            },
+            {
+              "topicId": "aggregates_vs_regular_queries",
+              "order": 3,
+              "title": "Aggregates vs regular queries",
+              "sourceTopicCode": "6.1.3"
+            },
+            {
+              "topicId": "reading_summary_results",
+              "order": 4,
+              "title": "Reading summary results",
+              "sourceTopicCode": "6.1.4"
+            }
+          ]
+        },
+        {
+          "sectionSlug": "section_6_2",
+          "order": 2,
+          "title": "Core Aggregate Functions",
+          "sourceSectionCode": "6.2",
+          "topics": [
+            {
+              "topicId": "count",
+              "order": 1,
+              "title": "COUNT()",
+              "sourceTopicCode": "6.2.1"
+            },
+            {
+              "topicId": "sum",
+              "order": 2,
+              "title": "SUM()",
+              "sourceTopicCode": "6.2.2"
+            },
+            {
+              "topicId": "avg",
+              "order": 3,
+              "title": "AVG()",
+              "sourceTopicCode": "6.2.3"
+            },
+            {
+              "topicId": "min",
+              "order": 4,
+              "title": "MIN()",
+              "sourceTopicCode": "6.2.4"
+            },
+            {
+              "topicId": "max",
+              "order": 5,
+              "title": "MAX()",
+              "sourceTopicCode": "6.2.5"
+            }
+          ]
+        },
+        {
+          "sectionSlug": "section_6_3",
+          "order": 3,
+          "title": "Aggregates with Filters",
+          "sourceSectionCode": "6.3",
+          "topics": [
+            {
+              "topicId": "aggregate_with_where",
+              "order": 1,
+              "title": "Aggregate with WHERE",
+              "sourceTopicCode": "6.3.1"
+            },
+            {
+              "topicId": "counting_filtered_rows",
+              "order": 2,
+              "title": "Counting filtered rows",
+              "sourceTopicCode": "6.3.2"
+            },
+            {
+              "topicId": "summing_filtered_data",
+              "order": 3,
+              "title": "Summing filtered data",
+              "sourceTopicCode": "6.3.3"
+            },
+            {
+              "topicId": "average_on_selected_records",
+              "order": 4,
+              "title": "Average on selected records",
+              "sourceTopicCode": "6.3.4"
+            }
+          ]
+        },
+        {
+          "sectionSlug": "section_6_4",
+          "order": 4,
+          "title": "Aggregate Practice",
+          "sourceSectionCode": "6.4",
+          "topics": [
+            {
+              "topicId": "count_customers",
+              "order": 1,
+              "title": "Count customers",
+              "sourceTopicCode": "6.4.1"
+            },
+            {
+              "topicId": "sum_sales",
+              "order": 2,
+              "title": "Sum sales",
+              "sourceTopicCode": "6.4.2"
+            },
+            {
+              "topicId": "find_highest_and_lowest_values",
+              "order": 3,
+              "title": "Find highest and lowest values",
+              "sourceTopicCode": "6.4.3"
+            },
+            {
+              "topicId": "build_mini_summary_reports",
+              "order": 4,
+              "title": "Build mini summary reports",
+              "sourceTopicCode": "6.4.4"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleSlug": "module_7",
+      "order": 7,
+      "title": "Grouping Data with GROUP BY and HAVING",
+      "purpose": "Teach learners to summarize by category, person, team, or product instead of only summarizing the whole table.",
+      "learningObjectives": [
+        "Write grouped summaries with GROUP BY.",
+        "Choose between WHERE and HAVING based on the stage of filtering.",
+        "Explain grouped result sets clearly."
+      ],
+      "guidedExercises": [
+        "Count orders by customer.",
+        "Find average salary by department.",
+        "Show only groups that exceed a chosen threshold using HAVING."
+      ],
+      "quizFocus": [
+        "Why can't HAVING fully replace WHERE?",
+        "What happens when a selected column is neither grouped nor aggregated?",
+        "Why does GROUP BY make result sets shorter than the original table?"
+      ],
+      "moduleProject": "Create a management summary report with grouped counts, sums, and averages.",
+      "sections": [
+        {
+          "sectionSlug": "section_7_1",
+          "order": 1,
+          "title": "Intro to Grouping",
+          "sourceSectionCode": "7.1",
+          "topics": [
+            {
+              "topicId": "what_grouping_means",
+              "order": 1,
+              "title": "What grouping means",
+              "sourceTopicCode": "7.1.1"
+            },
+            {
+              "topicId": "group_by",
+              "order": 2,
+              "title": "GROUP BY",
+              "sourceTopicCode": "7.1.2"
+            },
+            {
+              "topicId": "grouping_by_one_column",
+              "order": 3,
+              "title": "Grouping by one column",
+              "sourceTopicCode": "7.1.3"
+            },
+            {
+              "topicId": "reading_grouped_results",
+              "order": 4,
+              "title": "Reading grouped results",
+              "sourceTopicCode": "7.1.4"
+            }
+          ]
+        },
+        {
+          "sectionSlug": "section_7_2",
+          "order": 2,
+          "title": "Aggregates with Groups",
+          "sourceSectionCode": "7.2",
+          "topics": [
+            {
+              "topicId": "count_per_group",
+              "order": 1,
+              "title": "Count per group",
+              "sourceTopicCode": "7.2.1"
+            },
+            {
+              "topicId": "sum_per_group",
+              "order": 2,
+              "title": "Sum per group",
+              "sourceTopicCode": "7.2.2"
+            },
+            {
+              "topicId": "average_per_group",
+              "order": 3,
+              "title": "Average per group",
+              "sourceTopicCode": "7.2.3"
+            },
+            {
+              "topicId": "max_and_min_per_group",
+              "order": 4,
+              "title": "Max and min per group",
+              "sourceTopicCode": "7.2.4"
+            }
+          ]
+        },
+        {
+          "sectionSlug": "section_7_3",
+          "order": 3,
+          "title": "Filtering Groups",
+          "sourceSectionCode": "7.3",
+          "topics": [
+            {
+              "topicId": "why_having_exists",
+              "order": 1,
+              "title": "Why HAVING exists",
+              "sourceTopicCode": "7.3.1"
+            },
+            {
+              "topicId": "where_vs_having",
+              "order": 2,
+              "title": "WHERE vs HAVING",
+              "sourceTopicCode": "7.3.2"
+            },
+            {
+              "topicId": "filtering_grouped_results",
+              "order": 3,
+              "title": "Filtering grouped results",
+              "sourceTopicCode": "7.3.3"
+            },
+            {
+              "topicId": "common_grouping_mistakes",
+              "order": 4,
+              "title": "Common grouping mistakes",
+              "sourceTopicCode": "7.3.4"
+            }
+          ]
+        },
+        {
+          "sectionSlug": "section_7_4",
+          "order": 4,
+          "title": "Grouping Practice",
+          "sourceSectionCode": "7.4",
+          "topics": [
+            {
+              "topicId": "sales_by_category",
+              "order": 1,
+              "title": "Sales by category",
+              "sourceTopicCode": "7.4.1"
+            },
+            {
+              "topicId": "orders_by_customer",
+              "order": 2,
+              "title": "Orders by customer",
+              "sourceTopicCode": "7.4.2"
+            },
+            {
+              "topicId": "departments_with_high_averages",
+              "order": 3,
+              "title": "Departments with high averages",
+              "sourceTopicCode": "7.4.3"
+            },
+            {
+              "topicId": "summary_dashboards_in_sql",
+              "order": 4,
+              "title": "Summary dashboards in SQL",
+              "sourceTopicCode": "7.4.4"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleSlug": "module_8",
+      "order": 8,
+      "title": "Introduction to Joins",
+      "purpose": "Show how relational databases connect information stored in different tables.",
+      "learningObjectives": [
+        "Explain why related data is split across tables.",
+        "Write INNER JOIN and LEFT JOIN queries.",
+        "Identify missing matches and interpret NULLs after joins."
+      ],
+      "guidedExercises": [
+        "Join customers to orders and show a combined report.",
+        "Use LEFT JOIN to find rows that do not have a match.",
+        "Sketch the relationship before writing the query."
+      ],
+      "quizFocus": [
+        "What is the difference between INNER JOIN and LEFT JOIN?",
+        "Why are keys important in join logic?",
+        "Why do NULL values appear in some left-joined results?"
+      ],
+      "moduleProject": "Build a multi-table report that combines at least three tables from a school, store, or HR dataset.",
+      "sections": [
+        {
+          "sectionSlug": "section_8_1",
+          "order": 1,
+          "title": "Why Multiple Tables Exist",
+          "sourceSectionCode": "8.1",
+          "topics": [
+            {
+              "topicId": "splitting_data_into_tables",
+              "order": 1,
+              "title": "Splitting data into tables",
+              "sourceTopicCode": "8.1.1"
+            },
+            {
+              "topicId": "connecting_data_with_ids",
+              "order": 2,
+              "title": "Connecting data with IDs",
+              "sourceTopicCode": "8.1.2"
+            },
+            {
+              "topicId": "primary_keys",
+              "order": 3,
+              "title": "Primary keys",
+              "sourceTopicCode": "8.1.3"
+            },
+            {
+              "topicId": "foreign_keys",
+              "order": 4,
+              "title": "Foreign keys",
+              "sourceTopicCode": "8.1.4"
+            }
+          ]
+        },
+        {
+          "sectionSlug": "section_8_2",
+          "order": 2,
+          "title": "INNER JOIN",
+          "sourceSectionCode": "8.2",
+          "topics": [
+            {
+              "topicId": "what_an_inner_join_does",
+              "order": 1,
+              "title": "What an inner join does",
+              "sourceTopicCode": "8.2.1"
+            },
+            {
+              "topicId": "matching_rows_from_two_tables",
+              "order": 2,
+              "title": "Matching rows from two tables",
+              "sourceTopicCode": "8.2.2"
+            },
+            {
+              "topicId": "join_syntax",
+              "order": 3,
+              "title": "Join syntax",
+              "sourceTopicCode": "8.2.3"
+            },
+            {
+              "topicId": "reading_join_results",
+              "order": 4,
+              "title": "Reading join results",
+              "sourceTopicCode": "8.2.4"
+            }
+          ]
+        },
+        {
+          "sectionSlug": "section_8_3",
+          "order": 3,
+          "title": "LEFT JOIN",
+          "sourceSectionCode": "8.3",
+          "topics": [
+            {
+              "topicId": "what_a_left_join_does",
+              "order": 1,
+              "title": "What a left join does",
+              "sourceTopicCode": "8.3.1"
+            },
+            {
+              "topicId": "keeping_unmatched_left_side_rows",
+              "order": 2,
+              "title": "Keeping unmatched left-side rows",
+              "sourceTopicCode": "8.3.2"
+            },
+            {
+              "topicId": "when_to_use_left_join",
+              "order": 3,
+              "title": "When to use left join",
+              "sourceTopicCode": "8.3.3"
+            },
+            {
+              "topicId": "nulls_in_joined_results",
+              "order": 4,
+              "title": "NULLs in joined results",
+              "sourceTopicCode": "8.3.4"
+            }
+          ]
+        },
+        {
+          "sectionSlug": "section_8_4",
+          "order": 4,
+          "title": "Join Practice",
+          "sourceSectionCode": "8.4",
+          "topics": [
+            {
+              "topicId": "customers_and_orders",
+              "order": 1,
+              "title": "Customers and orders",
+              "sourceTopicCode": "8.4.1"
+            },
+            {
+              "topicId": "students_and_courses",
+              "order": 2,
+              "title": "Students and courses",
+              "sourceTopicCode": "8.4.2"
+            },
+            {
+              "topicId": "products_and_categories",
+              "order": 3,
+              "title": "Products and categories",
+              "sourceTopicCode": "8.4.3"
+            },
+            {
+              "topicId": "choosing_the_right_join",
+              "order": 4,
+              "title": "Choosing the right join",
+              "sourceTopicCode": "8.4.4"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleSlug": "module_9",
+      "order": 9,
+      "title": "Writing Cleaner Queries",
+      "purpose": "Improve readability so beginners do not just write working SQL, but SQL they can revisit, debug, and teach from.",
+      "learningObjectives": [
+        "Use aliases and formatting to improve clarity.",
+        "Write SQL that is easy to debug and review.",
+        "Add comments only when they genuinely help understanding."
+      ],
+      "guidedExercises": [
+        "Reformat three one-line queries into readable SQL.",
+        "Rename poor aliases to clearer ones.",
+        "Add concise comments to a query with non-obvious logic."
+      ],
+      "quizFocus": [
+        "When are table aliases helpful versus unnecessary?",
+        "Why should SQL be broken across lines?",
+        "What makes a query easy for another person to maintain?"
+      ],
+      "moduleProject": "Take a messy starter script and refactor it into a clean, readable reporting query pack.",
+      "sections": [
+        {
+          "sectionSlug": "section_9_1",
+          "order": 1,
+          "title": "Aliases for Tables and Columns",
+          "sourceSectionCode": "9.1",
+          "topics": [
+            {
+              "topicId": "column_aliases_review",
+              "order": 1,
+              "title": "Column aliases review",
+              "sourceTopicCode": "9.1.1"
+            },
+            {
+              "topicId": "table_aliases",
+              "order": 2,
+              "title": "Table aliases",
+              "sourceTopicCode": "9.1.2"
+            },
+            {
+              "topicId": "shortening_long_queries",
+              "order": 3,
+              "title": "Shortening long queries",
+              "sourceTopicCode": "9.1.3"
+            },
+            {
+              "topicId": "making_joins_readable",
+              "order": 4,
+              "title": "Making joins readable",
+              "sourceTopicCode": "9.1.4"
+            }
+          ]
+        },
+        {
+          "sectionSlug": "section_9_2",
+          "order": 2,
+          "title": "Query Formatting",
+          "sourceSectionCode": "9.2",
+          "topics": [
+            {
+              "topicId": "indenting_queries",
+              "order": 1,
+              "title": "Indenting queries",
+              "sourceTopicCode": "9.2.1"
+            },
+            {
+              "topicId": "breaking_queries_across_lines",
+              "order": 2,
+              "title": "Breaking queries across lines",
+              "sourceTopicCode": "9.2.2"
+            },
+            {
+              "topicId": "organizing_long_statements",
+              "order": 3,
+              "title": "Organizing long statements",
+              "sourceTopicCode": "9.2.3"
+            },
+            {
+              "topicId": "writing_beginner_friendly_sql",
+              "order": 4,
+              "title": "Writing beginner-friendly SQL",
+              "sourceTopicCode": "9.2.4"
+            }
+          ]
+        },
+        {
+          "sectionSlug": "section_9_3",
+          "order": 3,
+          "title": "Comments and Readability",
+          "sourceSectionCode": "9.3",
+          "topics": [
+            {
+              "topicId": "sql_comments",
+              "order": 1,
+              "title": "SQL comments",
+              "sourceTopicCode": "9.3.1"
+            },
+            {
+              "topicId": "explaining_logic",
+              "order": 2,
+              "title": "Explaining logic",
+              "sourceTopicCode": "9.3.2"
+            },
+            {
+              "topicId": "naming_output_clearly",
+              "order": 3,
+              "title": "Naming output clearly",
+              "sourceTopicCode": "9.3.3"
+            },
+            {
+              "topicId": "avoiding_messy_sql",
+              "order": 4,
+              "title": "Avoiding messy SQL",
+              "sourceTopicCode": "9.3.4"
+            }
+          ]
+        },
+        {
+          "sectionSlug": "section_9_4",
+          "order": 4,
+          "title": "Clean Query Practice",
+          "sourceSectionCode": "9.4",
+          "topics": [
+            {
+              "topicId": "refactor_ugly_queries",
+              "order": 1,
+              "title": "Refactor ugly queries",
+              "sourceTopicCode": "9.4.1"
+            },
+            {
+              "topicId": "format_join_queries",
+              "order": 2,
+              "title": "Format join queries",
+              "sourceTopicCode": "9.4.2"
+            },
+            {
+              "topicId": "use_aliases_correctly",
+              "order": 3,
+              "title": "Use aliases correctly",
+              "sourceTopicCode": "9.4.3"
+            },
+            {
+              "topicId": "write_readable_reports",
+              "order": 4,
+              "title": "Write readable reports",
+              "sourceTopicCode": "9.4.4"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleSlug": "module_10",
+      "order": 10,
+      "title": "Subqueries for Beginners",
+      "purpose": "Introduce query-inside-query thinking without overwhelming learners with advanced database theory.",
+      "learningObjectives": [
+        "Read subqueries from the inside out.",
+        "Use simple subqueries in WHERE and FROM.",
+        "Recognize when a join might be clearer than a subquery."
+      ],
+      "guidedExercises": [
+        "Find products priced above the overall average.",
+        "Use IN with a subquery to find customers who placed orders.",
+        "Wrap a grouped query and filter it in an outer query."
+      ],
+      "quizFocus": [
+        "Why are aliases important for subqueries in FROM?",
+        "What does it mean to read a subquery inside out?",
+        "When might a join be easier to understand?"
+      ],
+      "moduleProject": "Build a comparison worksheet showing two solutions to the same problem: one with a join and one with a subquery.",
+      "sections": [
+        {
+          "sectionSlug": "section_10_1",
+          "order": 1,
+          "title": "What a Subquery Is",
+          "sourceSectionCode": "10.1",
+          "topics": [
+            {
+              "topicId": "query_inside_another_query",
+              "order": 1,
+              "title": "Query inside another query",
+              "sourceTopicCode": "10.1.1"
+            },
+            {
+              "topicId": "why_subqueries_are_useful",
+              "order": 2,
+              "title": "Why subqueries are useful",
+              "sourceTopicCode": "10.1.2"
+            },
+            {
+              "topicId": "simple_mental_model",
+              "order": 3,
+              "title": "Simple mental model",
+              "sourceTopicCode": "10.1.3"
+            },
+            {
+              "topicId": "when_beginners_should_use_them",
+              "order": 4,
+              "title": "When beginners should use them",
+              "sourceTopicCode": "10.1.4"
+            }
+          ]
+        },
+        {
+          "sectionSlug": "section_10_2",
+          "order": 2,
+          "title": "Subqueries in WHERE",
+          "sourceSectionCode": "10.2",
+          "topics": [
+            {
+              "topicId": "compare_against_a_calculated_value",
+              "order": 1,
+              "title": "Compare against a calculated value",
+              "sourceTopicCode": "10.2.1"
+            },
+            {
+              "topicId": "find_values_above_average",
+              "order": 2,
+              "title": "Find values above average",
+              "sourceTopicCode": "10.2.2"
+            },
+            {
+              "topicId": "use_in_with_subqueries",
+              "order": 3,
+              "title": "Use IN with subqueries",
+              "sourceTopicCode": "10.2.3"
+            },
+            {
+              "topicId": "read_inside_out_logic",
+              "order": 4,
+              "title": "Read inside-out logic",
+              "sourceTopicCode": "10.2.4"
+            }
+          ]
+        },
+        {
+          "sectionSlug": "section_10_3",
+          "order": 3,
+          "title": "Subqueries in FROM",
+          "sourceSectionCode": "10.3",
+          "topics": [
+            {
+              "topicId": "temporary_result_sets",
+              "order": 1,
+              "title": "Temporary result sets",
+              "sourceTopicCode": "10.3.1"
+            },
+            {
+              "topicId": "build_on_top_of_another_query",
+              "order": 2,
+              "title": "Build on top of another query",
+              "sourceTopicCode": "10.3.2"
+            },
+            {
+              "topicId": "aliasing_subqueries",
+              "order": 3,
+              "title": "Aliasing subqueries",
+              "sourceTopicCode": "10.3.3"
+            },
+            {
+              "topicId": "beginner_safe_examples",
+              "order": 4,
+              "title": "Beginner-safe examples",
+              "sourceTopicCode": "10.3.4"
+            }
+          ]
+        },
+        {
+          "sectionSlug": "section_10_4",
+          "order": 4,
+          "title": "Subquery Practice",
+          "sourceSectionCode": "10.4",
+          "topics": [
+            {
+              "topicId": "above_average_salary",
+              "order": 1,
+              "title": "Above-average salary",
+              "sourceTopicCode": "10.4.1"
+            },
+            {
+              "topicId": "customers_with_orders",
+              "order": 2,
+              "title": "Customers with orders",
+              "sourceTopicCode": "10.4.2"
+            },
+            {
+              "topicId": "filter_from_a_summary_query",
+              "order": 3,
+              "title": "Filter from a summary query",
+              "sourceTopicCode": "10.4.3"
+            },
+            {
+              "topicId": "compare_join_vs_subquery_thinking",
+              "order": 4,
+              "title": "Compare join vs subquery thinking",
+              "sourceTopicCode": "10.4.4"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleSlug": "module_11",
+      "order": 11,
+      "title": "Inserting Data",
+      "purpose": "Shift from reading data to adding new rows carefully and correctly.",
+      "learningObjectives": [],
+      "guidedExercises": [
+        "Insert one valid row into a table.",
+        "Insert multiple rows in a single statement.",
+        "Check the table afterward to confirm what changed."
+      ],
+      "quizFocus": [
+        "Why is it safer to name columns in INSERT statements?",
+        "What happens if a required column is missing?",
+        "When can NULL be inserted intentionally?"
+      ],
+      "moduleProject": "Create a seed-data script that loads starter data for a simple student, product, or book database.",
+      "sections": [
+        {
+          "sectionSlug": "section_11_1",
+          "order": 1,
+          "title": "Intro to Adding Data",
+          "sourceSectionCode": "11.1",
+          "topics": [
+            {
+              "topicId": "what_insert_into_does",
+              "order": 1,
+              "title": "What INSERT INTO does",
+              "sourceTopicCode": "11.1.1"
+            },
+            {
+              "topicId": "insert_one_row",
+              "order": 2,
+              "title": "Insert one row",
+              "sourceTopicCode": "11.1.2"
+            },
+            {
+              "topicId": "insert_multiple_rows",
+              "order": 3,
+              "title": "Insert multiple rows",
+              "sourceTopicCode": "11.1.3"
+            },
+            {
+              "topicId": "matching_values_to_columns",
+              "order": 4,
+              "title": "Matching values to columns",
+              "sourceTopicCode": "11.1.4"
+            }
+          ]
+        },
+        {
+          "sectionSlug": "section_11_2",
+          "order": 2,
+          "title": "Safe Inserting",
+          "sourceSectionCode": "11.2",
+          "topics": [
+            {
+              "topicId": "why_column_lists_matter",
+              "order": 1,
+              "title": "Why column lists matter",
+              "sourceTopicCode": "11.2.1"
+            },
+            {
+              "topicId": "data_type_awareness",
+              "order": 2,
+              "title": "Data type awareness",
+              "sourceTopicCode": "11.2.2"
+            },
+            {
+              "topicId": "avoiding_insert_errors",
+              "order": 3,
+              "title": "Avoiding insert errors",
+              "sourceTopicCode": "11.2.3"
+            },
+            {
+              "topicId": "reading_inserted_results",
+              "order": 4,
+              "title": "Reading inserted results",
+              "sourceTopicCode": "11.2.4"
+            }
+          ]
+        },
+        {
+          "sectionSlug": "section_11_3",
+          "order": 3,
+          "title": "Insert with NULL and Defaults",
+          "sourceSectionCode": "11.3",
+          "topics": [
+            {
+              "topicId": "missing_values_during_insert",
+              "order": 1,
+              "title": "Missing values during insert",
+              "sourceTopicCode": "11.3.1"
+            },
+            {
+              "topicId": "default_values",
+              "order": 2,
+              "title": "Default values",
+              "sourceTopicCode": "11.3.2"
+            },
+            {
+              "topicId": "optional_columns",
+              "order": 3,
+              "title": "Optional columns",
+              "sourceTopicCode": "11.3.3"
+            },
+            {
+              "topicId": "insert_behavior_basics",
+              "order": 4,
+              "title": "Insert behavior basics",
+              "sourceTopicCode": "11.3.4"
+            }
+          ]
+        },
+        {
+          "sectionSlug": "section_11_4",
+          "order": 4,
+          "title": "Insert Practice",
+          "sourceSectionCode": "11.4",
+          "topics": [
+            {
+              "topicId": "add_a_student",
+              "order": 1,
+              "title": "Add a student",
+              "sourceTopicCode": "11.4.1"
+            },
+            {
+              "topicId": "add_a_product",
+              "order": 2,
+              "title": "Add a product",
+              "sourceTopicCode": "11.4.2"
+            },
+            {
+              "topicId": "add_multiple_records",
+              "order": 3,
+              "title": "Add multiple records",
+              "sourceTopicCode": "11.4.3"
+            },
+            {
+              "topicId": "check_your_inserted_data",
+              "order": 4,
+              "title": "Check your inserted data",
+              "sourceTopicCode": "11.4.4"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleSlug": "module_12",
+      "order": 12,
+      "title": "Updating and Deleting Data",
+      "purpose": "Teach safe data changes and the habit of previewing before modifying records.",
+      "learningObjectives": [
+        "Update and delete rows intentionally.",
+        "Preview affected rows before running changes.",
+        "Adopt safe habits that prevent accidental data loss."
+      ],
+      "guidedExercises": [
+        "Run a SELECT preview for rows you plan to update.",
+        "Update a filtered subset of rows.",
+        "Delete only temporary or test rows after confirming the target set."
+      ],
+      "quizFocus": [
+        "Why should UPDATE and DELETE almost always be paired with WHERE?",
+        "What is a safe preview workflow before data changes?",
+        "Why is accidental deletion more dangerous than a bad SELECT query?"
+      ],
+      "moduleProject": "Write a maintenance script that updates statuses, fixes one field, and removes obsolete test data using safe preview steps.",
+      "sections": [
+        {
+          "sectionSlug": "section_12_1",
+          "order": 1,
+          "title": "Updating Rows",
+          "sourceSectionCode": "12.1",
+          "topics": [
+            {
+              "topicId": "what_update_does",
+              "order": 1,
+              "title": "What UPDATE does",
+              "sourceTopicCode": "12.1.1"
+            },
+            {
+              "topicId": "changing_one_column",
+              "order": 2,
+              "title": "Changing one column",
+              "sourceTopicCode": "12.1.2"
+            },
+            {
+              "topicId": "changing_multiple_columns",
+              "order": 3,
+              "title": "Changing multiple columns",
+              "sourceTopicCode": "12.1.3"
+            },
+            {
+              "topicId": "why_where_is_critical",
+              "order": 4,
+              "title": "Why WHERE is critical",
+              "sourceTopicCode": "12.1.4"
+            }
+          ]
+        },
+        {
+          "sectionSlug": "section_12_2",
+          "order": 2,
+          "title": "Deleting Rows",
+          "sourceSectionCode": "12.2",
+          "topics": [
+            {
+              "topicId": "what_delete_does",
+              "order": 1,
+              "title": "What DELETE does",
+              "sourceTopicCode": "12.2.1"
+            },
+            {
+              "topicId": "deleting_selected_rows",
+              "order": 2,
+              "title": "Deleting selected rows",
+              "sourceTopicCode": "12.2.2"
+            },
+            {
+              "topicId": "dangers_of_missing_where",
+              "order": 3,
+              "title": "Dangers of missing WHERE",
+              "sourceTopicCode": "12.2.3"
+            },
+            {
+              "topicId": "safe_delete_habits",
+              "order": 4,
+              "title": "Safe delete habits",
+              "sourceTopicCode": "12.2.4"
+            }
+          ]
+        },
+        {
+          "sectionSlug": "section_12_3",
+          "order": 3,
+          "title": "Data Safety Mindset",
+          "sourceSectionCode": "12.3",
+          "topics": [
+            {
+              "topicId": "preview_before_update_delete",
+              "order": 1,
+              "title": "Preview before update/delete",
+              "sourceTopicCode": "12.3.1"
+            },
+            {
+              "topicId": "using_select_first",
+              "order": 2,
+              "title": "Using SELECT first",
+              "sourceTopicCode": "12.3.2"
+            },
+            {
+              "topicId": "backups_and_caution",
+              "order": 3,
+              "title": "Backups and caution",
+              "sourceTopicCode": "12.3.3"
+            },
+            {
+              "topicId": "thinking_before_changing_data",
+              "order": 4,
+              "title": "Thinking before changing data",
+              "sourceTopicCode": "12.3.4"
+            }
+          ]
+        },
+        {
+          "sectionSlug": "section_12_4",
+          "order": 4,
+          "title": "Practice with Data Changes",
+          "sourceSectionCode": "12.4",
+          "topics": [
+            {
+              "topicId": "update_prices",
+              "order": 1,
+              "title": "Update prices",
+              "sourceTopicCode": "12.4.1"
+            },
+            {
+              "topicId": "change_statuses",
+              "order": 2,
+              "title": "Change statuses",
+              "sourceTopicCode": "12.4.2"
+            },
+            {
+              "topicId": "delete_test_rows",
+              "order": 3,
+              "title": "Delete test rows",
+              "sourceTopicCode": "12.4.3"
+            },
+            {
+              "topicId": "safe_data_modification_workflow",
+              "order": 4,
+              "title": "Safe data modification workflow",
+              "sourceTopicCode": "12.4.4"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleSlug": "module_13",
+      "order": 13,
+      "title": "Creating Tables and Database Structure",
+      "purpose": "Introduce schema design so learners can build small databases instead of only querying prebuilt ones.",
+      "learningObjectives": [
+        "Create basic relational tables with sensible data types.",
+        "Use core constraints to protect data quality.",
+        "Explain why schema choices affect future queries."
+      ],
+      "guidedExercises": [
+        "Design a students table and justify each column.",
+        "Create a products table with a primary key and price column.",
+        "Link two tables with a foreign key."
+      ],
+      "quizFocus": [
+        "What does a primary key guarantee?",
+        "Why is NOT NULL useful?",
+        "How does a foreign key support relational design?"
+      ],
+      "moduleProject": "Design and create the full schema for a tiny business or school database with at least three related tables.",
+      "sections": [
+        {
+          "sectionSlug": "section_13_1",
+          "order": 1,
+          "title": "Intro to Table Design",
+          "sourceSectionCode": "13.1",
+          "topics": [
+            {
+              "topicId": "what_create_table_does",
+              "order": 1,
+              "title": "What CREATE TABLE does",
+              "sourceTopicCode": "13.1.1"
+            },
+            {
+              "topicId": "choosing_column_names",
+              "order": 2,
+              "title": "Choosing column names",
+              "sourceTopicCode": "13.1.2"
+            },
+            {
+              "topicId": "choosing_data_types",
+              "order": 3,
+              "title": "Choosing data types",
+              "sourceTopicCode": "13.1.3"
+            },
+            {
+              "topicId": "designing_for_clarity",
+              "order": 4,
+              "title": "Designing for clarity",
+              "sourceTopicCode": "13.1.4"
+            }
+          ]
+        },
+        {
+          "sectionSlug": "section_13_2",
+          "order": 2,
+          "title": "Common Data Types",
+          "sourceSectionCode": "13.2",
+          "topics": [
+            {
+              "topicId": "integers",
+              "order": 1,
+              "title": "Integers",
+              "sourceTopicCode": "13.2.1"
+            },
+            {
+              "topicId": "text_types",
+              "order": 2,
+              "title": "Text types",
+              "sourceTopicCode": "13.2.2"
+            },
+            {
+              "topicId": "decimal_numbers",
+              "order": 3,
+              "title": "Decimal numbers",
+              "sourceTopicCode": "13.2.3"
+            },
+            {
+              "topicId": "dates_and_times",
+              "order": 4,
+              "title": "Dates and times",
+              "sourceTopicCode": "13.2.4"
+            }
+          ]
+        },
+        {
+          "sectionSlug": "section_13_3",
+          "order": 3,
+          "title": "Constraints",
+          "sourceSectionCode": "13.3",
+          "topics": [
+            {
+              "topicId": "primary_key",
+              "order": 1,
+              "title": "PRIMARY KEY",
+              "sourceTopicCode": "13.3.1"
+            },
+            {
+              "topicId": "not_null",
+              "order": 2,
+              "title": "NOT NULL",
+              "sourceTopicCode": "13.3.2"
+            },
+            {
+              "topicId": "unique",
+              "order": 3,
+              "title": "UNIQUE",
+              "sourceTopicCode": "13.3.3"
+            },
+            {
+              "topicId": "foreign_key",
+              "order": 4,
+              "title": "FOREIGN KEY",
+              "sourceTopicCode": "13.3.4"
+            }
+          ]
+        },
+        {
+          "sectionSlug": "section_13_4",
+          "order": 4,
+          "title": "Table Design Practice",
+          "sourceSectionCode": "13.4",
+          "topics": [
+            {
+              "topicId": "create_a_students_table",
+              "order": 1,
+              "title": "Create a students table",
+              "sourceTopicCode": "13.4.1"
+            },
+            {
+              "topicId": "create_a_products_table",
+              "order": 2,
+              "title": "Create a products table",
+              "sourceTopicCode": "13.4.2"
+            },
+            {
+              "topicId": "create_an_orders_table",
+              "order": 3,
+              "title": "Create an orders table",
+              "sourceTopicCode": "13.4.3"
+            },
+            {
+              "topicId": "link_tables_together",
+              "order": 4,
+              "title": "Link tables together",
+              "sourceTopicCode": "13.4.4"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleSlug": "module_14",
+      "order": 14,
+      "title": "Relational Database Design for Beginners",
+      "purpose": "Strengthen the modeling side of SQL so learners understand why tables are shaped the way they are.",
+      "learningObjectives": [
+        "Recognize common relationship patterns.",
+        "Reduce duplication by separating repeated information.",
+        "Turn a real-world scenario into related tables."
+      ],
+      "guidedExercises": [
+        "Identify relationship types in three short scenarios.",
+        "Redesign a denormalized table into multiple related tables.",
+        "Draw a basic entity-relationship sketch before writing SQL."
+      ],
+      "quizFocus": [
+        "What is the difference between one-to-many and many-to-many?",
+        "Why is duplicate data dangerous?",
+        "Why should tables stay focused on one main subject?"
+      ],
+      "moduleProject": "Create a beginner ERD and matching CREATE TABLE script for a chosen domain such as school, bookstore, clinic, or art store.",
+      "sections": [
+        {
+          "sectionSlug": "section_14_1",
+          "order": 1,
+          "title": "Why Relationships Matter",
+          "sourceSectionCode": "14.1",
+          "topics": [
+            {
+              "topicId": "related_data",
+              "order": 1,
+              "title": "Related data",
+              "sourceTopicCode": "14.1.1"
+            },
+            {
+              "topicId": "one_to_one",
+              "order": 2,
+              "title": "One-to-one",
+              "sourceTopicCode": "14.1.2"
+            },
+            {
+              "topicId": "one_to_many",
+              "order": 3,
+              "title": "One-to-many",
+              "sourceTopicCode": "14.1.3"
+            },
+            {
+              "topicId": "many_to_many_idea",
+              "order": 4,
+              "title": "Many-to-many idea",
+              "sourceTopicCode": "14.1.4"
+            }
+          ]
+        },
+        {
+          "sectionSlug": "section_14_2",
+          "order": 2,
+          "title": "Keys and Relationships",
+          "sourceSectionCode": "14.2",
+          "topics": [
+            {
+              "topicId": "primary_key_review",
+              "order": 1,
+              "title": "Primary key review",
+              "sourceTopicCode": "14.2.1"
+            },
+            {
+              "topicId": "foreign_key_review",
+              "order": 2,
+              "title": "Foreign key review",
+              "sourceTopicCode": "14.2.2"
+            },
+            {
+              "topicId": "linking_tables_properly",
+              "order": 3,
+              "title": "Linking tables properly",
+              "sourceTopicCode": "14.2.3"
+            },
+            {
+              "topicId": "avoiding_duplicate_data",
+              "order": 4,
+              "title": "Avoiding duplicate data",
+              "sourceTopicCode": "14.2.4"
+            }
+          ]
+        },
+        {
+          "sectionSlug": "section_14_3",
+          "order": 3,
+          "title": "Good Beginner Design Habits",
+          "sourceSectionCode": "14.3",
+          "topics": [
+            {
+              "topicId": "keep_tables_focused",
+              "order": 1,
+              "title": "Keep tables focused",
+              "sourceTopicCode": "14.3.1"
+            },
+            {
+              "topicId": "separate_repeated_information",
+              "order": 2,
+              "title": "Separate repeated information",
+              "sourceTopicCode": "14.3.2"
+            },
+            {
+              "topicId": "use_ids_consistently",
+              "order": 3,
+              "title": "Use IDs consistently",
+              "sourceTopicCode": "14.3.3"
+            },
+            {
+              "topicId": "design_for_future_queries",
+              "order": 4,
+              "title": "Design for future queries",
+              "sourceTopicCode": "14.3.4"
+            }
+          ]
+        },
+        {
+          "sectionSlug": "section_14_4",
+          "order": 4,
+          "title": "Relational Design Practice",
+          "sourceSectionCode": "14.4",
+          "topics": [
+            {
+              "topicId": "store_and_product_model",
+              "order": 1,
+              "title": "Store and product model",
+              "sourceTopicCode": "14.4.1"
+            },
+            {
+              "topicId": "student_and_enrollment_model",
+              "order": 2,
+              "title": "Student and enrollment model",
+              "sourceTopicCode": "14.4.2"
+            },
+            {
+              "topicId": "customer_and_order_model",
+              "order": 3,
+              "title": "Customer and order model",
+              "sourceTopicCode": "14.4.3"
+            },
+            {
+              "topicId": "turn_design_into_sql_tables",
+              "order": 4,
+              "title": "Turn design into SQL tables",
+              "sourceTopicCode": "14.4.4"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleSlug": "module_15",
+      "order": 15,
+      "title": "Real Beginner SQL Projects and Course Capstone",
+      "purpose": "Consolidate everything into realistic beginner projects that require reading, filtering, grouping, joining, and basic data design.",
+      "learningObjectives": [
+        "Combine multiple beginner SQL skills in a single workflow.",
+        "Plan, build, query, and explain a small relational database.",
+        "Finish the course with portfolio-ready beginner projects."
+      ],
+      "guidedExercises": [
+        "Choose one domain and create starter tables plus sample data.",
+        "Answer at least ten business questions with SQL.",
+        "Present the final project as a short written report with queries and explanations."
+      ],
+      "quizFocus": [
+        "Which SQL skills appear most often in real reports?",
+        "How do you decide what tables and columns a project needs?",
+        "Why is being able to explain a query just as important as writing it?"
+      ],
+      "moduleProject": "Complete a capstone database project with schema, seed data, 10-15 queries, one grouped report, one multi-table join report, and a brief written explanation.",
+      "sections": [
+        {
+          "sectionSlug": "section_15_1",
+          "order": 1,
+          "title": "Mini Project: Student Database",
+          "sourceSectionCode": "15.1",
+          "topics": [
+            {
+              "topicId": "design_the_tables",
+              "order": 1,
+              "title": "Design the tables",
+              "sourceTopicCode": "15.1.1"
+            },
+            {
+              "topicId": "insert_sample_data",
+              "order": 2,
+              "title": "Insert sample data",
+              "sourceTopicCode": "15.1.2"
+            },
+            {
+              "topicId": "write_simple_queries",
+              "order": 3,
+              "title": "Write simple queries",
+              "sourceTopicCode": "15.1.3"
+            },
+            {
+              "topicId": "build_summary_reports",
+              "order": 4,
+              "title": "Build summary reports",
+              "sourceTopicCode": "15.1.4"
+            }
+          ]
+        },
+        {
+          "sectionSlug": "section_15_2",
+          "order": 2,
+          "title": "Mini Project: Store Database",
+          "sourceSectionCode": "15.2",
+          "topics": [
+            {
+              "topicId": "products_table",
+              "order": 1,
+              "title": "Products table",
+              "sourceTopicCode": "15.2.1"
+            },
+            {
+              "topicId": "customers_table",
+              "order": 2,
+              "title": "Customers table",
+              "sourceTopicCode": "15.2.2"
+            },
+            {
+              "topicId": "orders_table",
+              "order": 3,
+              "title": "Orders table",
+              "sourceTopicCode": "15.2.3"
+            },
+            {
+              "topicId": "query_sales_information",
+              "order": 4,
+              "title": "Query sales information",
+              "sourceTopicCode": "15.2.4"
+            }
+          ]
+        },
+        {
+          "sectionSlug": "section_15_3",
+          "order": 3,
+          "title": "Mini Project: Employee Database",
+          "sourceSectionCode": "15.3",
+          "topics": [
+            {
+              "topicId": "employees_and_departments",
+              "order": 1,
+              "title": "Employees and departments",
+              "sourceTopicCode": "15.3.1"
+            },
+            {
+              "topicId": "salary_analysis",
+              "order": 2,
+              "title": "Salary analysis",
+              "sourceTopicCode": "15.3.2"
+            },
+            {
+              "topicId": "department_summaries",
+              "order": 3,
+              "title": "Department summaries",
+              "sourceTopicCode": "15.3.3"
+            },
+            {
+              "topicId": "joined_reports",
+              "order": 4,
+              "title": "Joined reports",
+              "sourceTopicCode": "15.3.4"
+            }
+          ]
+        },
+        {
+          "sectionSlug": "section_15_4",
+          "order": 4,
+          "title": "Capstone Practice",
+          "sourceSectionCode": "15.4",
+          "topics": [
+            {
+              "topicId": "ask_business_questions",
+              "order": 1,
+              "title": "Ask business questions",
+              "sourceTopicCode": "15.4.1"
+            },
+            {
+              "topicId": "write_full_sql_solutions",
+              "order": 2,
+              "title": "Write full SQL solutions",
+              "sourceTopicCode": "15.4.2"
+            },
+            {
+              "topicId": "explain_query_logic",
+              "order": 3,
+              "title": "Explain query logic",
+              "sourceTopicCode": "15.4.3"
+            },
+            {
+              "topicId": "build_beginner_confidence",
+              "order": 4,
+              "title": "Build beginner confidence",
+              "sourceTopicCode": "15.4.4"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

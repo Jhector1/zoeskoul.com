@@ -26,6 +26,14 @@ export async function writeDraft(args: {
     await writeJson(getDraftSubjectManifestPath(args.subjectSlug), args.subjectManifest);
 
     for (const pack of args.topicPacks) {
+
+        if (!pack.topicBundle.moduleSlug) {
+            throw new Error(`Missing moduleSlug for topic "${pack.topicBundle.topicId}"`);
+        }
+
+        if (!pack.topicBundle.topicId) {
+            throw new Error(`Missing topicId in topic bundle`);
+        }
         await writeJson(
             getDraftTopicBundlePath(
                 args.subjectSlug,

@@ -1,0 +1,135 @@
+{
+  "topics": {
+    "sql2": {
+      "module2": {
+        "where_clause_basics": {
+          "label": "title",
+          "summary": "summary",
+          "cards": {
+            "sketch0": {
+              "title": "Overview: title"
+            },
+            "sketch1": {
+              "title": "1"
+            },
+            "sketch2": {
+              "title": "2"
+            },
+            "sketch3": {
+              "title": "How to practice title"
+            },
+            "project": {
+              "title": "Practice: title"
+            },
+            "quiz": {
+              "title": "Quiz: title"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql2": {
+      "module2": {
+        "where_clause_basics": {
+          "concept_overview": {
+            "title": "What is title?",
+            "bodyMarkdown": "title focuses on this idea: summary\n\nA good starting point is to say the requirement in plain language before writing SQL.\n\n### Learning goals\n- 1\n- 2"
+          },
+          "goal_one": {
+            "title": "1",
+            "bodyMarkdown": "1.\n\nWhen practicing title, start with a focused example and verify the result carefully."
+          },
+          "goal_two": {
+            "title": "2",
+            "bodyMarkdown": "2.\n\nUse the topic idea to explain what the query is doing in plain English."
+          },
+          "practice_note": {
+            "title": "How to practice title",
+            "bodyMarkdown": "Read the requirement, predict the result, run the query, and verify whether the output really answers the question.\n\nThat habit is especially important for title."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "module2_where_clause_basics_practice_sql": {
+      "title": "Practice: title",
+      "prompt": "The `products` table already exists.\n\nWrite a query that shows the `name` and `price` columns for rows whose `price` is greater than `50`.\n\nThen run it.",
+      "help": {
+        "concept": "summary",
+        "hint_1": "Write the condition after FROM.",
+        "hint_2": "Use price > 50."
+      },
+      "hint": "Use WHERE with a comparison operator.",
+      "starterCode": "-- Filter rows by price\nSELECT name, price\nFROM products\nWHERE price > 50\n"
+    },
+    "module2_where_clause_basics_core_concept": {
+      "title": "Core idea: title",
+      "prompt": "What is the best description of title?",
+      "help": {
+        "concept": "summary",
+        "hint_1": "Look for the option that matches the main concept directly.",
+        "hint_2": "Ignore answers that describe unrelated SQL behavior."
+      },
+      "hint": "Match the answer to the topic summary.",
+      "options": {
+        "a": "It keeps only the rows that match a condition.",
+        "b": "It permanently changes the schema.",
+        "c": "It automatically groups records.",
+        "d": "It only works with joins."
+      }
+    },
+    "module2_where_clause_basics_true_statements": {
+      "title": "True statements about title",
+      "prompt": "Select all true statements about title.",
+      "help": {
+        "concept": "summary",
+        "hint_1": "Pick statements that align with the topic summary and objectives.",
+        "hint_2": "Reject statements that clearly describe unrelated SQL ideas."
+      },
+      "hint": "Use the summary and objectives as your guide.",
+      "options": {
+        "a": "Filtering is often done with WHERE.",
+        "b": "Comparison operators help define the row condition.",
+        "c": "Filtering always changes the stored table data.",
+        "d": "AND and OR can change which rows stay in the output.",
+        "e": "Filtering is unrelated to business questions."
+      }
+    },
+    "module2_where_clause_basics_workflow_order": {
+      "title": "Workflow for title",
+      "prompt": "Reorder the workflow ideas for title.",
+      "help": {
+        "concept": "Identify which rows should stay, write the condition, then verify the result.",
+        "hint_1": "Think about what should happen first.",
+        "hint_2": "Then think about what should happen last."
+      },
+      "hint": "Order the steps logically.",
+      "tokens": {
+        "t1": "decide which rows should stay in the result",
+        "t2": "write the condition in the WHERE clause",
+        "t3": "run the query and verify the remaining rows"
+      }
+    },
+    "module2_where_clause_basics_keyword_fill": {
+      "title": "Filtering keyword",
+      "prompt": "Fill in the blank with the best SQL keyword.",
+      "help": {
+        "concept": "summary",
+        "hint_1": "Think about which SQL term best completes the sentence.",
+        "hint_2": "Use the topic meaning to eliminate unrelated options."
+      },
+      "hint": "Match the sentence to the right SQL term.",
+      "template": "The clause commonly used to filter rows is ____.",
+      "choices": [
+        "WHERE",
+        "GROUP BY",
+        "INSERT",
+        "CREATE"
+      ],
+      "correct": "WHERE"
+    }
+  }
+}

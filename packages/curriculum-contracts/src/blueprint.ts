@@ -2,6 +2,7 @@ import type { LocaleCode } from "./locales.js";
 
 export type CourseProfileId =
     | "sql"
+    | "sql2"
     | "python"
     | "math"
     | "language"

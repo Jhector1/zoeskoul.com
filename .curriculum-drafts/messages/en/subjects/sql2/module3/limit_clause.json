@@ -1,0 +1,135 @@
+{
+  "topics": {
+    "sql2": {
+      "module3": {
+        "limit_clause": {
+          "label": "LIMIT Clause",
+          "summary": "Restricting the number of rows returned.",
+          "cards": {
+            "sketch0": {
+              "title": "What is the main sort?"
+            },
+            "sketch1": {
+              "title": "What breaks ties?"
+            },
+            "sketch2": {
+              "title": "Why limit output?"
+            },
+            "sketch3": {
+              "title": "How to practice output control"
+            },
+            "project": {
+              "title": "Practice: LIMIT Clause"
+            },
+            "quiz": {
+              "title": "Quiz: LIMIT Clause"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql2": {
+      "module3": {
+        "limit_clause": {
+          "primary_sort": {
+            "title": "The first sort rule controls the main order of the result.",
+            "bodyMarkdown": "When you sort by more than one column, the first column listed has the strongest control over the order."
+          },
+          "secondary_sort": {
+            "title": "A second sort rule helps order rows that tie on the first one.",
+            "bodyMarkdown": "If two rows have the same value in the first sort column, the second sort column helps break the tie."
+          },
+          "limit_results": {
+            "title": "LIMIT keeps only the most relevant rows when you do not need the full result.",
+            "bodyMarkdown": "ORDER BY and LIMIT are often used together to answer ranking-style questions like top values or newest rows."
+          },
+          "practice_note": {
+            "title": "Practice by predicting the order first, then verifying it after running the query.",
+            "bodyMarkdown": "Say which rows should come first and why before you run the query."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "module3_limit_clause_practice_sql": {
+      "title": "Practice: LIMIT Clause",
+      "prompt": "The `products` table already exists.\n\nWrite a query that shows the five most expensive products by sorting `price` from highest to lowest.\n\nThen run it.",
+      "help": {
+        "concept": "Restricting the number of rows returned.",
+        "hint_1": "Higher prices should appear first.",
+        "hint_2": "LIMIT trims the output after sorting."
+      },
+      "hint": "Use ORDER BY with DESC, then LIMIT 5.",
+      "starterCode": "-- Show top priced rows\nSELECT name, price\nFROM products\nORDER BY price DESC\nLIMIT 5\n"
+    },
+    "module3_limit_clause_core_concept": {
+      "title": "Core idea: LIMIT Clause",
+      "prompt": "What is the best description of LIMIT Clause?",
+      "help": {
+        "concept": "Restricting the number of rows returned.",
+        "hint_1": "Look for the option that matches the main concept directly.",
+        "hint_2": "Ignore answers that describe unrelated SQL behavior."
+      },
+      "hint": "Match the answer to the topic summary.",
+      "options": {
+        "a": "It controls the order and size of the output so results are easier to read.",
+        "b": "It permanently changes values inside the table.",
+        "c": "It only works with grouped queries.",
+        "d": "It deletes rows after ranking them."
+      }
+    },
+    "module3_limit_clause_true_statements": {
+      "title": "True statements about LIMIT Clause",
+      "prompt": "Select all true statements about LIMIT Clause.",
+      "help": {
+        "concept": "Restricting the number of rows returned.",
+        "hint_1": "Pick statements that align with the topic summary and objectives.",
+        "hint_2": "Reject statements that clearly describe unrelated SQL ideas."
+      },
+      "hint": "Use the summary and objectives as your guide.",
+      "options": {
+        "a": "ORDER BY changes the order of the result set.",
+        "b": "LIMIT is often paired with ORDER BY.",
+        "c": "A secondary sort can break ties.",
+        "d": "Sorting always changes stored table data.",
+        "e": "Descending order can help find highest values first."
+      }
+    },
+    "module3_limit_clause_workflow_order": {
+      "title": "Workflow for LIMIT Clause",
+      "prompt": "Reorder the workflow ideas for LIMIT Clause.",
+      "help": {
+        "concept": "Choose the ordering rule, apply it, then trim the result if needed.",
+        "hint_1": "Think about what should happen first.",
+        "hint_2": "Then think about what should happen last."
+      },
+      "hint": "Order the steps logically.",
+      "tokens": {
+        "t1": "decide which rows should appear first",
+        "t2": "write the ORDER BY rule",
+        "t3": "apply LIMIT if only a few rows are needed"
+      }
+    },
+    "module3_limit_clause_keyword_fill": {
+      "title": "Sorting keyword",
+      "prompt": "Fill in the blank with the best SQL keyword.",
+      "help": {
+        "concept": "Restricting the number of rows returned.",
+        "hint_1": "Think about which SQL term best completes the sentence.",
+        "hint_2": "Use the topic meaning to eliminate unrelated options."
+      },
+      "hint": "Match the sentence to the right SQL term.",
+      "template": "The SQL clause used to sort query results is ____.",
+      "choices": [
+        "ORDER BY",
+        "GROUP BY",
+        "DELETE",
+        "VALUES"
+      ],
+      "correct": "ORDER BY"
+    }
+  }
+}

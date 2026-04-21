@@ -5,3 +5,4 @@ export * from "./compile/compileTopic.js";
 export * from "./rebuild/rebuildRegistries.js";
 export * from "./write/publishDraft.js";
 export * from "./write/writeDraft.js";
+export * from "./pdf/pdfToCoursePlan.js";

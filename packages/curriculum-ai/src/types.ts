@@ -1,14 +1,32 @@
-import type { CoursePlan, TopicBundleManifest } from "@zoeskoul/curriculum-contracts";
+import type {
+    TopicBundleManifest,
+    TopicPlanDraft,
+} from "@zoeskoul/curriculum-contracts";
 
 export type TopicPackDraft = {
-    topicBundle: TopicBundleManifest;
+    topicBundle: Partial<TopicBundleManifest> & TopicPlanDraft;
     messagesByLocale: Record<string, Record<string, unknown>>;
 };
 
+export type TranslationEntry = {
+    key: string;
+    value: string;
+};
+
+export type TranslationEntriesPayload = {
+    entries: TranslationEntry[];
+};
+
+export type GenerateJsonArgs = {
+    system: string;
+    user: string;
+    schemaName:
+        | "CoursePlan"
+        | "TopicPackDraft"
+        | "TranslatedMessages"
+        | "TranslatedEntries";
+};
+
 export type AiProvider = {
-    generateJson<T>(args: {
-        system: string;
-        user: string;
-        schemaName: string;
-    }): Promise<T>;
+    generateJson<T>(args: GenerateJsonArgs): Promise<T>;
 };

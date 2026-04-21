@@ -1,0 +1,103 @@
+{
+  "topics": {
+    "sql2": {
+      "module2": {
+        "logical_operators": {
+          "label": "Logical Operators",
+          "summary": "Combining conditions with AND, OR, NOT.",
+          "cards": {
+            "sketch0": {
+              "title": "Overview: Logical Operators"
+            },
+            "sketch1": {
+              "title": "combine multiple conditions"
+            },
+            "sketch2": {
+              "title": "understand AND, OR, NOT logic"
+            },
+            "sketch3": {
+              "title": "How to practice Logical Operators"
+            },
+            "quiz": {
+              "title": "Quiz: Logical Operators"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql2": {
+      "module2": {
+        "logical_operators": {
+          "concept_overview": {
+            "title": "What is Logical Operators?",
+            "bodyMarkdown": "Logical Operators focuses on this idea: Combining conditions with AND, OR, NOT.\n\nA good starting point is to say the requirement in plain language before writing SQL.\n\n### Learning goals\n- combine multiple conditions\n- understand AND, OR, NOT logic"
+          },
+          "goal_one": {
+            "title": "combine multiple conditions",
+            "bodyMarkdown": "combine multiple conditions.\n\nWhen practicing Logical Operators, start with a focused example and verify the result carefully."
+          },
+          "goal_two": {
+            "title": "understand AND, OR, NOT logic",
+            "bodyMarkdown": "understand AND, OR, NOT logic.\n\nUse the topic idea to explain what the query is doing in plain English."
+          },
+          "practice_note": {
+            "title": "How to practice Logical Operators",
+            "bodyMarkdown": "Read the requirement, predict the result, run the query, and verify whether the output really answers the question.\n\nThat habit is especially important for Logical Operators."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "module2_logical_operators_core_concept": {
+      "title": "Core idea: Logical Operators",
+      "prompt": "What is the best description of Logical Operators?",
+      "help": {
+        "concept": "Combining conditions with AND, OR, NOT.",
+        "hint_1": "Look for the option that matches the main concept directly.",
+        "hint_2": "Ignore answers that describe unrelated SQL behavior."
+      },
+      "hint": "Match the answer to the topic summary.",
+      "options": {
+        "a": "Combining conditions with AND, OR, NOT.",
+        "b": "It permanently removes columns from a table.",
+        "c": "It only changes schema metadata.",
+        "d": "It always requires aggregation."
+      }
+    },
+    "module2_logical_operators_true_statements": {
+      "title": "True statements about Logical Operators",
+      "prompt": "Select all true statements about Logical Operators.",
+      "help": {
+        "concept": "Combining conditions with AND, OR, NOT.",
+        "hint_1": "Pick statements that align with the topic summary and objectives.",
+        "hint_2": "Reject statements that clearly describe unrelated SQL ideas."
+      },
+      "hint": "Use the summary and objectives as your guide.",
+      "options": {
+        "a": "Combining conditions with AND, OR, NOT.",
+        "b": "combine multiple conditions",
+        "c": "It is unrelated to retrieving data from tables.",
+        "d": "It only works after deleting rows.",
+        "e": "understand AND, OR, NOT logic"
+      }
+    },
+    "module2_logical_operators_workflow_order": {
+      "title": "Workflow for Logical Operators",
+      "prompt": "Reorder the workflow ideas for Logical Operators.",
+      "help": {
+        "concept": "Understand the requirement, write the SQL, then verify the result.",
+        "hint_1": "Think about what should happen first.",
+        "hint_2": "Then think about what should happen last."
+      },
+      "hint": "Order the steps logically.",
+      "tokens": {
+        "t1": "read the requirement for the data you want",
+        "t2": "write the SQL that matches that requirement",
+        "t3": "run the query and verify the output"
+      }
+    }
+  }
+}

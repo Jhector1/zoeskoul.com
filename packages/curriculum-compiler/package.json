@@ -5,7 +5,6 @@
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
-
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -20,6 +19,7 @@
     "@zoeskoul/curriculum-ai": "workspace:*",
     "@zoeskoul/curriculum-contracts": "workspace:*",
     "@zoeskoul/curriculum-core": "workspace:*",
-    "@zoeskoul/curriculum-profiles": "workspace:*"
+    "@zoeskoul/curriculum-profiles": "workspace:*",
+    "pdf-parse": "^2.4.5"
   }
 }

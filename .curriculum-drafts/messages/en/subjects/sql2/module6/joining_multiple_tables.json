@@ -1,0 +1,135 @@
+{
+  "topics": {
+    "sql2": {
+      "module6": {
+        "joining_multiple_tables": {
+          "label": "joining_multiple_tables.title",
+          "summary": "joining_multiple_tables.summary",
+          "cards": {
+            "sketch0": {
+              "title": "Overview: joining_multiple_tables.title"
+            },
+            "sketch1": {
+              "title": "joining_multiple_tables.learningGoals.0"
+            },
+            "sketch2": {
+              "title": "Practice the core idea of joining_multiple_tables.title"
+            },
+            "sketch3": {
+              "title": "How to practice joining_multiple_tables.title"
+            },
+            "project": {
+              "title": "Practice: joining_multiple_tables.title"
+            },
+            "quiz": {
+              "title": "Quiz: joining_multiple_tables.title"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql2": {
+      "module6": {
+        "joining_multiple_tables": {
+          "concept_overview": {
+            "title": "What is joining_multiple_tables.title?",
+            "bodyMarkdown": "joining_multiple_tables.title focuses on this idea: joining_multiple_tables.summary\n\nA good starting point is to say the requirement in plain language before writing SQL.\n\n### Learning goals\n- joining_multiple_tables.learningGoals.0\n- Practice the core idea of joining_multiple_tables.title"
+          },
+          "goal_one": {
+            "title": "joining_multiple_tables.learningGoals.0",
+            "bodyMarkdown": "joining_multiple_tables.learningGoals.0.\n\nWhen practicing joining_multiple_tables.title, start with a focused example and verify the result carefully."
+          },
+          "goal_two": {
+            "title": "Practice the core idea of joining_multiple_tables.title",
+            "bodyMarkdown": "Practice the core idea of joining_multiple_tables.title.\n\nUse the topic idea to explain what the query is doing in plain English."
+          },
+          "practice_note": {
+            "title": "How to practice joining_multiple_tables.title",
+            "bodyMarkdown": "Read the requirement, predict the result, run the query, and verify whether the output really answers the question.\n\nThat habit is especially important for joining_multiple_tables.title."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "module6_joining_multiple_tables_practice_sql": {
+      "title": "Practice: joining_multiple_tables.title",
+      "prompt": "The `products` table already exists.\n\nWrite a query that returns the number of rows and the average price.\n\nThen run it.",
+      "help": {
+        "concept": "joining_multiple_tables.summary",
+        "hint_1": "COUNT(*) gives the number of rows.",
+        "hint_2": "AVG(price) gives the average price."
+      },
+      "hint": "Use aggregate functions in the SELECT list.",
+      "starterCode": "-- Summarize the table\nSELECT COUNT(*) AS product_count, AVG(price) AS avg_price\nFROM products\n"
+    },
+    "module6_joining_multiple_tables_core_concept": {
+      "title": "Core idea: joining_multiple_tables.title",
+      "prompt": "What is the best description of joining_multiple_tables.title?",
+      "help": {
+        "concept": "joining_multiple_tables.summary",
+        "hint_1": "Look for the option that matches the main concept directly.",
+        "hint_2": "Ignore answers that describe unrelated SQL behavior."
+      },
+      "hint": "Match the answer to the topic summary.",
+      "options": {
+        "a": "It summarizes many rows into a smaller business answer.",
+        "b": "It only renames columns.",
+        "c": "It permanently edits stored values.",
+        "d": "It only works with joins."
+      }
+    },
+    "module6_joining_multiple_tables_true_statements": {
+      "title": "True statements about joining_multiple_tables.title",
+      "prompt": "Select all true statements about joining_multiple_tables.title.",
+      "help": {
+        "concept": "joining_multiple_tables.summary",
+        "hint_1": "Pick statements that align with the topic summary and objectives.",
+        "hint_2": "Reject statements that clearly describe unrelated SQL ideas."
+      },
+      "hint": "Use the summary and objectives as your guide.",
+      "options": {
+        "a": "COUNT can summarize the number of rows.",
+        "b": "AVG can summarize numeric values.",
+        "c": "SUM, MIN, and MAX are aggregate functions.",
+        "d": "Aggregates only work after DELETE.",
+        "e": "Aggregates help produce report-style summaries."
+      }
+    },
+    "module6_joining_multiple_tables_workflow_order": {
+      "title": "Workflow for joining_multiple_tables.title",
+      "prompt": "Reorder the workflow ideas for joining_multiple_tables.title.",
+      "help": {
+        "concept": "Choose the summary you want, write the matching aggregate, then interpret the output.",
+        "hint_1": "Think about what should happen first.",
+        "hint_2": "Then think about what should happen last."
+      },
+      "hint": "Order the steps logically.",
+      "tokens": {
+        "t1": "decide what summary value you need",
+        "t2": "choose the matching aggregate function",
+        "t3": "run the query and interpret the summary output"
+      }
+    },
+    "module6_joining_multiple_tables_keyword_fill": {
+      "title": "Aggregate function",
+      "prompt": "Fill in the blank with the best SQL function.",
+      "help": {
+        "concept": "joining_multiple_tables.summary",
+        "hint_1": "Think about which SQL term best completes the sentence.",
+        "hint_2": "Use the topic meaning to eliminate unrelated options."
+      },
+      "hint": "Match the sentence to the right SQL term.",
+      "template": "To count all rows in a table, a common SQL function is ____.",
+      "choices": [
+        "COUNT",
+        "TABLE",
+        "ALTER",
+        "GROUP"
+      ],
+      "correct": "COUNT"
+    }
+  }
+}

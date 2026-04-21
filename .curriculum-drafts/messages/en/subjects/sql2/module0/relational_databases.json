@@ -1,0 +1,135 @@
+{
+  "topics": {
+    "sql2": {
+      "module0": {
+        "relational_databases": {
+          "label": "relational_databases.title",
+          "summary": "relational_databases.summary",
+          "cards": {
+            "sketch0": {
+              "title": "Overview: relational_databases.title"
+            },
+            "sketch1": {
+              "title": "relational_databases.learningGoal.0"
+            },
+            "sketch2": {
+              "title": "relational_databases.learningGoal.1"
+            },
+            "sketch3": {
+              "title": "How to practice relational_databases.title"
+            },
+            "project": {
+              "title": "Practice: relational_databases.title"
+            },
+            "quiz": {
+              "title": "Quiz: relational_databases.title"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql2": {
+      "module0": {
+        "relational_databases": {
+          "concept_overview": {
+            "title": "What is relational_databases.title?",
+            "bodyMarkdown": "relational_databases.title focuses on this idea: relational_databases.summary\n\nA good starting point is to say the requirement in plain language before writing SQL.\n\n### Learning goals\n- relational_databases.learningGoal.0\n- relational_databases.learningGoal.1"
+          },
+          "goal_one": {
+            "title": "relational_databases.learningGoal.0",
+            "bodyMarkdown": "relational_databases.learningGoal.0.\n\nWhen practicing relational_databases.title, start with a focused example and verify the result carefully."
+          },
+          "goal_two": {
+            "title": "relational_databases.learningGoal.1",
+            "bodyMarkdown": "relational_databases.learningGoal.1.\n\nUse the topic idea to explain what the query is doing in plain English."
+          },
+          "practice_note": {
+            "title": "How to practice relational_databases.title",
+            "bodyMarkdown": "Read the requirement, predict the result, run the query, and verify whether the output really answers the question.\n\nThat habit is especially important for relational_databases.title."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "module0_relational_databases_practice_sql": {
+      "title": "Practice: relational_databases.title",
+      "prompt": "The `products` table already exists.\n\nWrite a query that shows `name`, `price`, and a calculated column named `price_with_tax` that multiplies `price` by `1.1`.\n\nThen run it.",
+      "help": {
+        "concept": "relational_databases.summary",
+        "hint_1": "You can multiply a numeric column directly in the SELECT list.",
+        "hint_2": "Use AS price_with_tax."
+      },
+      "hint": "Use an expression in SELECT and give it an alias.",
+      "starterCode": "-- Show a calculated column\nSELECT name, price, price * 1.1 AS price_with_tax\nFROM products\n"
+    },
+    "module0_relational_databases_core_concept": {
+      "title": "Core idea: relational_databases.title",
+      "prompt": "What is the best description of relational_databases.title?",
+      "help": {
+        "concept": "relational_databases.summary",
+        "hint_1": "Look for the option that matches the main concept directly.",
+        "hint_2": "Ignore answers that describe unrelated SQL behavior."
+      },
+      "hint": "Match the answer to the topic summary.",
+      "options": {
+        "a": "It uses expressions in SELECT to create calculated output values.",
+        "b": "It deletes rows before selecting them.",
+        "c": "It only renames tables permanently.",
+        "d": "It only changes database schema."
+      }
+    },
+    "module0_relational_databases_true_statements": {
+      "title": "True statements about relational_databases.title",
+      "prompt": "Select all true statements about relational_databases.title.",
+      "help": {
+        "concept": "relational_databases.summary",
+        "hint_1": "Pick statements that align with the topic summary and objectives.",
+        "hint_2": "Reject statements that clearly describe unrelated SQL ideas."
+      },
+      "hint": "Use the summary and objectives as your guide.",
+      "options": {
+        "a": "You can compute new values directly in SELECT.",
+        "b": "You can give a calculated expression an alias.",
+        "c": "Calculated columns require deleting the original column first.",
+        "d": "Calculated columns only work in UPDATE statements.",
+        "e": "Expressions in SELECT help you inspect transformed output."
+      }
+    },
+    "module0_relational_databases_workflow_order": {
+      "title": "Workflow for relational_databases.title",
+      "prompt": "Reorder the workflow ideas for relational_databases.title.",
+      "help": {
+        "concept": "Decide what to calculate, write the expression, then inspect the output.",
+        "hint_1": "Think about what should happen first.",
+        "hint_2": "Then think about what should happen last."
+      },
+      "hint": "Order the steps logically.",
+      "tokens": {
+        "t1": "identify the value you want to calculate",
+        "t2": "write the expression in the SELECT list",
+        "t3": "run the query and inspect the calculated output"
+      }
+    },
+    "module0_relational_databases_keyword_fill": {
+      "title": "Expression location",
+      "prompt": "Fill in the blank with the best SQL keyword.",
+      "help": {
+        "concept": "relational_databases.summary",
+        "hint_1": "Think about which SQL term best completes the sentence.",
+        "hint_2": "Use the topic meaning to eliminate unrelated options."
+      },
+      "hint": "Match the sentence to the right SQL term.",
+      "template": "A calculated expression in a query is commonly written in the ____ list.",
+      "choices": [
+        "SELECT",
+        "DELETE",
+        "GROUP",
+        "TABLE"
+      ],
+      "correct": "SELECT"
+    }
+  }
+}

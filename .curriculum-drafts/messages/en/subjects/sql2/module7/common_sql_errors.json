@@ -1,0 +1,135 @@
+{
+  "topics": {
+    "sql2": {
+      "module7": {
+        "common_sql_errors": {
+          "label": "common_sql_errors.title",
+          "summary": "common_sql_errors.summary",
+          "cards": {
+            "sketch0": {
+              "title": "Overview: common_sql_errors.title"
+            },
+            "sketch1": {
+              "title": "common_sql_errors.learningGoals.0"
+            },
+            "sketch2": {
+              "title": "Practice the core idea of common_sql_errors.title"
+            },
+            "sketch3": {
+              "title": "How to practice common_sql_errors.title"
+            },
+            "project": {
+              "title": "Practice: common_sql_errors.title"
+            },
+            "quiz": {
+              "title": "Quiz: common_sql_errors.title"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql2": {
+      "module7": {
+        "common_sql_errors": {
+          "concept_overview": {
+            "title": "What is common_sql_errors.title?",
+            "bodyMarkdown": "common_sql_errors.title focuses on this idea: common_sql_errors.summary\n\nA good starting point is to say the requirement in plain language before writing SQL.\n\n### Learning goals\n- common_sql_errors.learningGoals.0\n- Practice the core idea of common_sql_errors.title"
+          },
+          "goal_one": {
+            "title": "common_sql_errors.learningGoals.0",
+            "bodyMarkdown": "common_sql_errors.learningGoals.0.\n\nWhen practicing common_sql_errors.title, start with a focused example and verify the result carefully."
+          },
+          "goal_two": {
+            "title": "Practice the core idea of common_sql_errors.title",
+            "bodyMarkdown": "Practice the core idea of common_sql_errors.title.\n\nUse the topic idea to explain what the query is doing in plain English."
+          },
+          "practice_note": {
+            "title": "How to practice common_sql_errors.title",
+            "bodyMarkdown": "Read the requirement, predict the result, run the query, and verify whether the output really answers the question.\n\nThat habit is especially important for common_sql_errors.title."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "module7_common_sql_errors_practice_sql": {
+      "title": "Practice: common_sql_errors.title",
+      "prompt": "The `products` table already exists.\n\nWrite a query that returns the number of rows and the average price.\n\nThen run it.",
+      "help": {
+        "concept": "common_sql_errors.summary",
+        "hint_1": "COUNT(*) gives the number of rows.",
+        "hint_2": "AVG(price) gives the average price."
+      },
+      "hint": "Use aggregate functions in the SELECT list.",
+      "starterCode": "-- Summarize the table\nSELECT COUNT(*) AS product_count, AVG(price) AS avg_price\nFROM products\n"
+    },
+    "module7_common_sql_errors_core_concept": {
+      "title": "Core idea: common_sql_errors.title",
+      "prompt": "What is the best description of common_sql_errors.title?",
+      "help": {
+        "concept": "common_sql_errors.summary",
+        "hint_1": "Look for the option that matches the main concept directly.",
+        "hint_2": "Ignore answers that describe unrelated SQL behavior."
+      },
+      "hint": "Match the answer to the topic summary.",
+      "options": {
+        "a": "It summarizes many rows into a smaller business answer.",
+        "b": "It only renames columns.",
+        "c": "It permanently edits stored values.",
+        "d": "It only works with joins."
+      }
+    },
+    "module7_common_sql_errors_true_statements": {
+      "title": "True statements about common_sql_errors.title",
+      "prompt": "Select all true statements about common_sql_errors.title.",
+      "help": {
+        "concept": "common_sql_errors.summary",
+        "hint_1": "Pick statements that align with the topic summary and objectives.",
+        "hint_2": "Reject statements that clearly describe unrelated SQL ideas."
+      },
+      "hint": "Use the summary and objectives as your guide.",
+      "options": {
+        "a": "COUNT can summarize the number of rows.",
+        "b": "AVG can summarize numeric values.",
+        "c": "SUM, MIN, and MAX are aggregate functions.",
+        "d": "Aggregates only work after DELETE.",
+        "e": "Aggregates help produce report-style summaries."
+      }
+    },
+    "module7_common_sql_errors_workflow_order": {
+      "title": "Workflow for common_sql_errors.title",
+      "prompt": "Reorder the workflow ideas for common_sql_errors.title.",
+      "help": {
+        "concept": "Choose the summary you want, write the matching aggregate, then interpret the output.",
+        "hint_1": "Think about what should happen first.",
+        "hint_2": "Then think about what should happen last."
+      },
+      "hint": "Order the steps logically.",
+      "tokens": {
+        "t1": "decide what summary value you need",
+        "t2": "choose the matching aggregate function",
+        "t3": "run the query and interpret the summary output"
+      }
+    },
+    "module7_common_sql_errors_keyword_fill": {
+      "title": "Aggregate function",
+      "prompt": "Fill in the blank with the best SQL function.",
+      "help": {
+        "concept": "common_sql_errors.summary",
+        "hint_1": "Think about which SQL term best completes the sentence.",
+        "hint_2": "Use the topic meaning to eliminate unrelated options."
+      },
+      "hint": "Match the sentence to the right SQL term.",
+      "template": "To count all rows in a table, a common SQL function is ____.",
+      "choices": [
+        "COUNT",
+        "TABLE",
+        "ALTER",
+        "GROUP"
+      ],
+      "correct": "COUNT"
+    }
+  }
+}

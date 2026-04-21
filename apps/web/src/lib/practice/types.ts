@@ -1,7 +1,16 @@
-import {PracticeKind} from "@prisma/client";
-import {WorkspaceLanguage} from "@zoeskoul/code-contracts"
+import { PracticeKind } from "@prisma/client";
+import type {
+    CodeExpectedExample,
+    Difficulty,
+    ExerciseHelpSpec,
+    ExerciseKind,
+    SqlDialect,
+    SqlRuntimeSpec,
+    Vec3,
+    WorkspaceLanguage,
+} from "@zoeskoul/practice-contracts";
+
 // src/lib/practice/types.ts
-export type Difficulty = "easy" | "medium" | "hard";
 
 /**
  * DB-facing slug (unlimited).
@@ -17,31 +26,9 @@ export type Topic = TopicSlug;
 /**
  * Generator engine keys (ONLY engines you implement).
  */
-
 export type GenKey =
-
-    | "python_part1" // ✅ NEW
-
-    | "sql_for_beginners"
-
-
-export type ExerciseKind =
-    | "single_choice"
-    | "multi_choice"
-    | "numeric"
-    | "vector_drag_target"
-    | "vector_drag_dot"
-    | "matrix_input"
-    | "code_input"
-    | "text_input"
-    | "drag_reorder"
-    | "voice_input" | "word_bank_arrange"
-    | "listen_build"
-    | "fill_blank_choice";
-
-export type Vec3 = { x: number; y: number; z?: number };
-
-export type ExerciseHelpSpec = Partial<Record<string, string>>;
+    | "python_part1"
+    | "sql_for_beginners";
 
 export type ExerciseBase = {
     id: string;
@@ -49,10 +36,7 @@ export type ExerciseBase = {
     difficulty: Difficulty;
     title: string;
     prompt: string;
-
     help?: ExerciseHelpSpec;
-
-    // legacy compatibility
     hint?: string;
 };
 
@@ -99,28 +83,8 @@ export type VectorDragDotExercise = ExerciseBase & {
     tolerance: number;
 };
 
-
-export type TerminalExpectedExample = {
-    kind: "terminal";
-    meta?: string;
-    stdin?: string;
-    stdout: string;
-};
-
-export type SqlResultExpectedExample = {
-    kind: "sql_result";
-    meta?: string;
-    columns: string[];
-    rows: Array<Array<string | number | null>>;
-};
-
-export type CodeExpectedExample =
-    | TerminalExpectedExample
-    | SqlResultExpectedExample;
-
 export type CodeInputExercise = ExerciseBase & {
     kind: "code_input";
-
     language?: WorkspaceLanguage;
     starterCode?: string;
     starterStdin?: string;
@@ -128,16 +92,10 @@ export type CodeInputExercise = ExerciseBase & {
     editorHeight?: number;
     allowLanguageSwitch?: boolean;
     examples?: Array<{ stdin?: string; stdout: string }>;
-
     fixedSqlDialect?: SqlDialect;
     runtime?: SqlRuntimeSpec;
-
     expectedExample?: CodeExpectedExample | null;
 };
-
-
-
-
 
 export type TextInputExercise = ExerciseBase & {
     kind: "text_input";
@@ -158,14 +116,6 @@ export type VoiceInputExercise = ExerciseBase & {
     locale?: string;
     maxSeconds?: number;
 };
-
-export type SqlRuntimeSpec = {
-    kind: "sql";
-    datasetId?: string;
-    resultShape?: "table";
-};
-
-
 
 export type WordBankArrangeExercise = ExerciseBase & {
     kind: "word_bank_arrange";
@@ -199,29 +149,16 @@ export type TextInputSubmitAnswer = {
 
 export type DragReorderSubmitAnswer = {
     kind: "drag_reorder";
-    tokenIds?: string[]; order?: string[];
+    tokenIds?: string[];
+    order?: string[];
 };
 
 export type VoiceInputSubmitAnswer = {
     kind: "voice_input";
     transcript: string;
     audioUrl?: string;
-    audioId?: string
+    audioId?: string;
 };
-
-export type Exercise =
-    | SingleChoiceExercise
-    | MultiChoiceExercise
-    | NumericExercise
-    | VectorDragTargetExercise
-    | VectorDragDotExercise
-    | MatrixInputExercise
-    | CodeInputExercise
-    | TextInputExercise
-    | DragReorderExercise
-    | VoiceInputExercise | WordBankArrangeExercise
-    | ListenBuildExercise
-    | FillBlankChoiceExercise;
 
 export type WordBankArrangeSubmitAnswer = {
     kind: "word_bank_arrange";
@@ -238,6 +175,21 @@ export type FillBlankChoiceSubmitAnswer = {
     value: string;
 };
 
+export type Exercise =
+    | SingleChoiceExercise
+    | MultiChoiceExercise
+    | NumericExercise
+    | VectorDragTargetExercise
+    | VectorDragDotExercise
+    | MatrixInputExercise
+    | CodeInputExercise
+    | TextInputExercise
+    | DragReorderExercise
+    | VoiceInputExercise
+    | WordBankArrangeExercise
+    | ListenBuildExercise
+    | FillBlankChoiceExercise;
+
 export type SubmitAnswer =
     | { kind: "single_choice"; optionId: string }
     | { kind: "multi_choice"; optionIds: string[] }
@@ -253,7 +205,8 @@ export type SubmitAnswer =
 }
     | TextInputSubmitAnswer
     | DragReorderSubmitAnswer
-    | VoiceInputSubmitAnswer | WordBankArrangeSubmitAnswer
+    | VoiceInputSubmitAnswer
+    | WordBankArrangeSubmitAnswer
     | ListenBuildSubmitAnswer
     | FillBlankChoiceSubmitAnswer;
 
@@ -296,6 +249,14 @@ export type ValidateResponse = {
 };
 
 export type PoolKind = PracticeKind;
-export type SqlDialect = "postgres" | "mysql" | "sqlite" | "mssql";
 
-export type {WorkspaceLanguage}
+export type {
+    CodeExpectedExample,
+    Difficulty,
+    ExerciseHelpSpec,
+    ExerciseKind,
+    SqlDialect,
+    SqlRuntimeSpec,
+    Vec3,
+    WorkspaceLanguage,
+};

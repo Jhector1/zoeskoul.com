@@ -2,6 +2,7 @@ import type { CourseProfile, RecipeHandler } from "./types.js";
 import { buildFixedTestsRecipe } from "./base/recipes/buildFixedTestsRecipe.js";
 import { buildTemplateIoRecipe } from "./base/recipes/buildTemplateIoRecipe.js";
 import { sqlProfile } from "./sql/index.js";
+import { sql2Profile } from "./sql2/index.js";
 import { pythonProfile } from "./python/index.js";
 import { mathProfile } from "./math/index.js";
 import { languageProfile } from "./language/index.js";
@@ -9,6 +10,7 @@ import { webProfile } from "./web/index.js";
 
 const profiles = [
     sqlProfile,
+    sql2Profile,
     pythonProfile,
     mathProfile,
     languageProfile,
