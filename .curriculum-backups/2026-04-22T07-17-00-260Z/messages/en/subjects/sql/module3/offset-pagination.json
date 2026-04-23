@@ -1,0 +1,101 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_3": {
+        "offset-pagination": {
+          "label": "OFFSET and Pagination",
+          "summary": "Skip rows and paginate results with OFFSET.",
+          "cards": {
+            "sketch0": {
+              "title": "What is OFFSET?"
+            },
+            "sketch1": {
+              "title": "Pagination with LIMIT and OFFSET"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_3": {
+        "offset-pagination": {
+          "offset-intro": {
+            "title": "What is OFFSET?",
+            "bodyMarkdown": "OFFSET is a SQL clause that allows you to skip a specified number of rows before starting to return rows from a query result. It's commonly used with LIMIT to paginate results, making it easier to display data page by page in applications."
+          },
+          "offset-pagination-example": {
+            "title": "Pagination with LIMIT and OFFSET",
+            "bodyMarkdown": "To paginate results, you combine LIMIT (to set the number of rows per page) and OFFSET (to skip rows). For example, `LIMIT 10 OFFSET 20` returns 10 rows, starting after skipping the first 20 rows. This is useful for implementing 'Next' and 'Previous' buttons in data tables."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "offset-purpose-single-choice": {
+      "title": "Purpose of OFFSET",
+      "prompt": "What is the main purpose of the OFFSET clause in a SQL query?",
+      "hint": "Think about what happens to the first few rows when OFFSET is used.",
+      "help": {
+        "concept": "OFFSET is used to skip a certain number of rows before starting to return rows from the query result.",
+        "hint_1": "OFFSET does not affect columns or sorting, but changes which rows are included in the output.",
+        "hint_2": "OFFSET is often paired with LIMIT to paginate results by skipping rows."
+      },
+      "options": {
+        "a": "To skip a specified number of rows before returning results",
+        "b": "To limit the number of columns returned",
+        "c": "To sort the results in descending order",
+        "d": "To filter rows based on a condition"
+      }
+    },
+    "offset-pagination-drag-reorder": {
+      "title": "Paginating with LIMIT and OFFSET",
+      "prompt": "Arrange the steps to paginate results using LIMIT and OFFSET.",
+      "hint": "Think about the logical order of building a paginated query.",
+      "help": {
+        "concept": "Paginating results involves selecting data, ordering it, then limiting and skipping rows as needed.",
+        "hint_1": "Start with selecting data, then decide how to order it.",
+        "hint_2": "After ordering, set how many rows you want and how many to skip."
+      },
+      "tokens": {
+        "t1": "Write a SELECT statement",
+        "t2": "Add an ORDER BY clause to define row order",
+        "t3": "Add LIMIT to set the number of rows per page",
+        "t4": "Add OFFSET to skip rows for the current page"
+      }
+    },
+    "offset-syntax-fill-blank": {
+      "title": "OFFSET Syntax",
+      "prompt": "Fill in the blank: To skip the first 15 rows and return the next 5, use `LIMIT 5 ____ 15`.",
+      "hint": "Which keyword is used to skip rows in SQL?",
+      "help": {
+        "concept": "the missing term is the SQL keyword used to skip a number of rows before returning results.",
+        "hint_1": "It's not WHERE or ORDER BY. Think about pagination.",
+        "hint_2": "the missing term is paired with LIMIT to control which rows are returned."
+      },
+      "template": "LIMIT 5 ____ 15",
+      "choices": [
+        "OFFSET",
+        "ORDER BY",
+        "WHERE",
+        "SKIP"
+      ]
+    },
+    "offset-code-input-products": {
+      "title": "Paginate Products Catalog",
+      "prompt": "Write a SQL query to select all columns from the `products_catalog` table, ordered by `id` ascending, returning the third page of 10 results (i.e., skip the first 20 rows).",
+      "hint": "Use ORDER BY, LIMIT, and OFFSET. The third page means skipping 2 pages of 10 rows each.",
+      "help": {
+        "concept": "To paginate, use ORDER BY to define row order, LIMIT for page size, and OFFSET to skip rows.",
+        "hint_1": "ORDER BY id ASC arranges the rows. LIMIT 10 sets the page size. OFFSET should skip 20 rows.",
+        "hint_2": "OFFSET is calculated as (page number - 1) * page size. For page 3 and size 10, OFFSET is 20."
+      },
+      "starterCode": "-- Write your query here\n"
+    }
+  }
+}

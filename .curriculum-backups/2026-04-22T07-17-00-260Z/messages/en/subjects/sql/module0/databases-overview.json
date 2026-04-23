@@ -1,0 +1,116 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_0": {
+        "databases-overview": {
+          "label": "Databases Overview",
+          "summary": "Explore what databases are and how they store information.",
+          "cards": {
+            "sketch0": {
+              "title": "What is a Database?"
+            },
+            "sketch1": {
+              "title": "How is Data Organized in Databases?"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_0": {
+        "databases-overview": {
+          "sketch-what-is-a-database": {
+            "title": "What is a Database?",
+            "bodyMarkdown": "A **database** is an organized collection of data that is stored and accessed electronically. Databases are designed to efficiently store, retrieve, and manage large amounts of information. They are used in many applications, from websites to banking systems, to keep track of data such as users, transactions, products, and more."
+          },
+          "sketch-how-data-is-organized": {
+            "title": "How is Data Organized in Databases?",
+            "bodyMarkdown": "Most databases organize data into **tables**. Each table contains rows (records) and columns (fields). For example, a table called `Customers` might have columns like `CustomerID`, `Name`, and `Email`. Each row in the table represents a single customer. This structure makes it easy to store, search, and update information."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "quiz-define-database": {
+      "title": "What best describes a database?",
+      "prompt": "Choose the most accurate definition of a database.",
+      "hint": "Think about where large amounts of information are stored.",
+      "help": {
+        "concept": "A database is a system for storing and managing data in an organized way.",
+        "hint_1": "Databases are not just files or web pages; they are structured to handle lots of data.",
+        "hint_2": "Look for the option that mentions organized data storage."
+      },
+      "options": {
+        "a": "A collection of web pages.",
+        "b": "A program for editing photos.",
+        "c": "An organized collection of data stored electronically.",
+        "d": "A type of computer hardware."
+      }
+    },
+    "quiz-table-structure": {
+      "title": "Understanding Tables",
+      "prompt": "Which of the following are true about tables in a database? Select all that apply.",
+      "hint": "Think about how spreadsheets work.",
+      "help": {
+        "concept": "Tables organize data into rows (records) and columns (fields), and columns define the type of data.",
+        "hint_1": "Tables are not limited to just numbers.",
+        "hint_2": "Consider how each part of a table (row, column) is used to organize information."
+      },
+      "options": {
+        "a": "Tables are made up of rows and columns.",
+        "b": "Each row in a table represents a record.",
+        "c": "Tables can only store numbers.",
+        "d": "Columns define the type of data stored."
+      }
+    },
+    "quiz-organize-drag": {
+      "title": "Order the Steps: How Data is Stored",
+      "prompt": "Put these steps in the correct order for how data is organized in a database table.",
+      "hint": "Think about what comes first: the structure or the data?",
+      "help": {
+        "concept": "First, the structure (columns) is defined, then data (rows) is added.",
+        "hint_1": "You can't add data before you know what columns exist.",
+        "hint_2": "The table's structure is set up before any rows are inserted."
+      },
+      "tokens": {
+        "t1": "A table is created with columns.",
+        "t2": "Rows are added to the table.",
+        "t3": "Each row contains data for each column."
+      }
+    },
+    "quiz-fill-blank-database": {
+      "title": "Fill in the Blank: Database Structure",
+      "prompt": "A database stores data in ______, which are made up of rows and columns.",
+      "hint": "Think about the main structure used to organize data.",
+      "help": {
+        "concept": "the missing term are the primary way data is organized in most databases.",
+        "hint_1": "It's not files or folders.",
+        "hint_2": "The answer is the same as what you see in spreadsheets."
+      },
+      "template": "A database stores data in [blank], which are made up of rows and columns.",
+      "choices": [
+        "tables",
+        "files",
+        "folders",
+        "pages"
+      ]
+    },
+    "quiz-sql-table-example": {
+      "title": "Identify Table Columns",
+      "prompt": "Given the following table from the `students_intro` dataset, write a SQL query to select the `name` and `grade` columns from the `students` table.",
+      "hint": "Use SELECT to choose columns from the table.",
+      "help": {
+        "concept": "To get specific columns from a table, use the SELECT statement followed by the column names.",
+        "hint_1": "List the columns you want after SELECT, separated by commas.",
+        "hint_2": "Remember to specify the table name after FROM."
+      },
+      "starterCode": "-- Write your SQL query here"
+    }
+  }
+}

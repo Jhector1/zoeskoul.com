@@ -1,0 +1,106 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_1": {
+        "select-all": {
+          "label": "Selecting All Columns",
+          "summary": "Learn how to use the wildcard (*) in SQL to select all columns from a table.",
+          "cards": {
+            "sketch0": {
+              "title": "What Does SELECT * Do?"
+            },
+            "sketch1": {
+              "title": "When Should You Use SELECT *?"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_1": {
+        "select-all": {
+          "sketch-what-is-select-star": {
+            "title": "What Does SELECT * Do?",
+            "bodyMarkdown": "In SQL, the `*` symbol is called the wildcard. When you use `SELECT *`, it tells the database to return **all columns** from the specified table. This is a quick way to see every field for each row, without having to list each column name.\n\nFor example, to get all columns from the `products` table:\n\n```sql\nSELECT * FROM products;\n```\n\nThis query will return every column (`id`, `name`, `category`, `price`, `stock`, `created_at`) for all products in the table."
+          },
+          "sketch-when-to-use-select-star": {
+            "title": "When Should You Use SELECT *?",
+            "bodyMarkdown": "`SELECT *` is useful when you want to quickly view all the data in a table, especially during exploration or debugging. However, in production queries, it's often better to specify only the columns you need, to improve performance and clarity.\n\nExample output for `SELECT * FROM products;`:\n\n| id | name              | category   | price | stock | created_at |\n|----|-------------------|------------|-------|-------|------------|\n| 1  | Sketchbook        | Art        | 12.99 | 25    | 2026-01-10 |\n| 2  | Acrylic Paint Set | Art        | 24.50 | 10    | 2026-02-02 |\n| ...| ...               | ...        | ...   | ...   | ...        |"
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "quiz-single-choice-select-star-purpose": {
+      "title": "What does the * symbol mean in a SELECT statement?",
+      "prompt": "In the SQL query `SELECT * FROM products;`, what does the `*` symbol do?",
+      "hint": "Think about what information you get when you use * in SELECT.",
+      "help": {
+        "concept": "The * symbol in SQL is a wildcard that stands for all columns in the table.",
+        "hint_1": "Using * after SELECT returns every column for each row.",
+        "hint_2": "If you want to see all the data fields for each product, * is the shortcut."
+      },
+      "options": {
+        "a": "It selects only the first column.",
+        "b": "It selects all columns from the table.",
+        "c": "It selects only rows with a star symbol.",
+        "d": "It sorts the results alphabetically."
+      }
+    },
+    "quiz-drag-reorder-select-star-syntax": {
+      "title": "Put the SELECT * statement in order",
+      "prompt": "Arrange the tokens to form a valid SQL statement that selects all columns from the products table.",
+      "hint": "Start with the SQL command, then the wildcard, then specify the table.",
+      "help": {
+        "concept": "A basic SELECT statement starts with SELECT, followed by what to select, then FROM and the table name.",
+        "hint_1": "The wildcard * comes after SELECT.",
+        "hint_2": "The table name comes after FROM, and don't forget the semicolon at the end."
+      },
+      "tokens": {
+        "t1": "SELECT",
+        "t2": "*",
+        "t3": "FROM",
+        "t4": "products",
+        "t5": ";"
+      }
+    },
+    "quiz-fill-blank-choice-select-star-output": {
+      "title": "What columns are returned by SELECT *?",
+      "prompt": "If you run `SELECT * FROM products;`, which columns will be included in the result?",
+      "hint": "Look at the columns defined in the products table.",
+      "help": {
+        "concept": "SELECT * returns every column defined in the table's schema.",
+        "hint_1": "Check the products table for its column names.",
+        "hint_2": "There are six columns: id, name, category, price, stock, and created_at."
+      },
+      "template": "The query returns the columns: ___, ___, ___, ___, ___, and ___.",
+      "choices": [
+        "id",
+        "name",
+        "category",
+        "price",
+        "stock",
+        "created_at",
+        "discount",
+        "address"
+      ]
+    },
+    "quiz-code-input-select-all-products": {
+      "title": "Write a query to select all columns from products",
+      "prompt": "Write a SQL query that returns all columns for every row in the `products` table.",
+      "hint": "Use SELECT with the wildcard symbol and specify the table name.",
+      "help": {
+        "concept": "To select all columns, use SELECT * followed by FROM and the table name.",
+        "hint_1": "The wildcard * comes right after SELECT.",
+        "hint_2": "Don't forget to end your SQL statement with a semicolon."
+      },
+      "starterCode": "-- Write your query below\n"
+    }
+  }
+}

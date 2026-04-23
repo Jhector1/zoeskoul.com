@@ -76,3 +76,9 @@ docker compose -f docker-compose.prod.yml logs -f runner
  set -a
 source .env.local
 set +a
+
+
+
+pnpm curr:plan authoring/sql/course.blueprint.json
+pnpm curr:compile authoring/sql/course.blueprint.json
+pnpm curr:publish authoring/sql/course.blueprint.json

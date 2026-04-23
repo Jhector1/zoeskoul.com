@@ -1,0 +1,124 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_2": {
+        "where-basics": {
+          "label": "WHERE Clause Basics",
+          "summary": "Learn how to filter rows in SQL using the WHERE clause. Practice writing queries to select only the data you need from the products table.",
+          "cards": {
+            "sketch0": {
+              "title": "What is the WHERE Clause?"
+            },
+            "sketch1": {
+              "title": "Common Operators in WHERE"
+            },
+            "sketch2": {
+              "title": "Combining Conditions"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_2": {
+        "where-basics": {
+          "sketch-where-intro": {
+            "title": "What is the WHERE Clause?",
+            "bodyMarkdown": "The `WHERE` clause in SQL is used to filter rows returned by a query. It allows you to specify conditions that each row must meet to be included in the result set. For example, if you want to find all products in the `products` table with a price greater than $20, you can use:\n\n```sql\nSELECT * FROM products WHERE price > 20;\n```\n\nOnly rows where the `price` column is greater than 20 will be shown."
+          },
+          "sketch-where-operators": {
+            "title": "Common Operators in WHERE",
+            "bodyMarkdown": "You can use different operators in the `WHERE` clause to filter data:\n\n- `=` : Equal to\n- `!=` or `<>` : Not equal to\n- `>` : Greater than\n- `<` : Less than\n- `>=` : Greater than or equal to\n- `<=` : Less than or equal to\n- `IN` : Matches any value in a list\n- `LIKE` : Pattern matching for text\n\nExample: Find all products in the 'Art' category:\n\n```sql\nSELECT * FROM products WHERE category = 'Art';\n```"
+          },
+          "sketch-where-multiple-conditions": {
+            "title": "Combining Conditions",
+            "bodyMarkdown": "You can combine multiple conditions in a `WHERE` clause using `AND` and `OR`.\n\n- `AND` requires all conditions to be true.\n- `OR` requires at least one condition to be true.\n\nExample: Find products in the 'Home' category with a price less than $100:\n\n```sql\nSELECT * FROM products WHERE category = 'Home' AND price < 100;\n```"
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "where-single-choice-basic": {
+      "title": "Filtering by Category",
+      "prompt": "Which SQL query will return only products in the 'Stationery' category?",
+      "hint": "Focus on filtering by the 'category' column.",
+      "help": {
+        "concept": "The WHERE clause filters rows based on the condition you specify. To select the correct answer specific category, compare the 'category' column to the desired value.",
+        "hint_1": "Check which column holds the category information.",
+        "hint_2": "The correct query uses WHERE category = 'Stationery'."
+      },
+      "options": {
+        "a": "SELECT * FROM products WHERE category = 'Stationery';",
+        "b": "SELECT * FROM products WHERE name = 'Stationery';",
+        "c": "SELECT * FROM products WHERE price = 'Stationery';",
+        "d": "SELECT * FROM products WHERE stock = 'Stationery';"
+      }
+    },
+    "where-multi-choice-operators": {
+      "title": "Choosing Valid WHERE Clauses",
+      "prompt": "Which of the following WHERE clauses are valid for filtering products with a price greater than 20?",
+      "hint": "Look for operators that select prices above 20.",
+      "help": {
+        "concept": "The '>' and '>=' operators are used to filter values greater than or equal to the correct answer number.",
+        "hint_1": "One operator selects strictly greater, another includes 20 as well.",
+        "hint_2": "Both WHERE price > 20 and WHERE price >= 20 are valid for this purpose."
+      },
+      "options": {
+        "a": "WHERE price > 20",
+        "b": "WHERE price = 20",
+        "c": "WHERE price >= 20",
+        "d": "WHERE price < 20"
+      }
+    },
+    "where-drag-reorder": {
+      "title": "Ordering a WHERE Query",
+      "prompt": "Arrange the tokens to form a valid SQL query that selects all products with stock less than 10.",
+      "hint": "Start with SELECT, then FROM, then WHERE, and end with a semicolon.",
+      "help": {
+        "concept": "A basic SQL query follows the order: SELECT, FROM, WHERE, and ends with a semicolon.",
+        "hint_1": "The WHERE clause comes after FROM.",
+        "hint_2": "The correct order is SELECT, FROM, WHERE, semicolon."
+      },
+      "tokens": {
+        "t1": "SELECT *",
+        "t2": "FROM products",
+        "t3": "WHERE stock < 10",
+        "t4": ";"
+      }
+    },
+    "where-fill-blank-choice": {
+      "title": "Fill in the WHERE Value",
+      "prompt": "Complete the query to select all products in the 'Art' category:\n\nSELECT * FROM products WHERE category = ____;",
+      "hint": "Remember to use single quotes for text values in SQL.",
+      "help": {
+        "concept": "Text values in SQL must be enclosed in single quotes.",
+        "hint_1": "Which choice is the category name with single quotes?",
+        "hint_2": "The correct answer is the one with 'Art' in single quotes."
+      },
+      "template": "SELECT * FROM products WHERE category = {blank};",
+      "choices": [
+        "'Art'",
+        "'Home'",
+        "'Stationery'",
+        "Art"
+      ]
+    },
+    "where-code-input-basic": {
+      "title": "Write a WHERE Clause",
+      "prompt": "Write a SQL query to select all columns from the products table where the price is less than 20.",
+      "hint": "Use the price column and the less than operator.",
+      "help": {
+        "concept": "The WHERE clause filters rows based on the condition you specify. Use '<' to select values less than a number.",
+        "hint_1": "Write WHERE price < 20 after FROM products.",
+        "hint_2": "The full query selects all columns where price is less than 20."
+      },
+      "starterCode": "SELECT * FROM products WHERE"
+    }
+  }
+}

@@ -1,0 +1,155 @@
+{
+  "topicId": "left-right-join",
+  "subjectSlug": "sql",
+  "moduleSlug": "sql_module_6",
+  "sectionSlug": "section_6_1",
+  "prefix": "sql6",
+  "minutes": 20,
+  "topic": {
+    "labelKey": "topics.sql.sql_module_6.left-right-join.label",
+    "summaryKey": "topics.sql.sql_module_6.left-right-join.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_6.left-right-join.cards.sketch0.title",
+      "sketchId": "sketch-what-is-left-right-join",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_6.left-right-join.cards.sketch1.title",
+      "sketchId": "sketch-why-use-left-right-join",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_6.left-right-join.cards.sketch2.title",
+      "sketchId": "sketch-visual-example",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql.sql_module_6.left-right-join.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch-what-is-left-right-join",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_6.left-right-join.sketch-what-is-left-right-join.title",
+      "bodyKey": "sketches.sql.sql_module_6.left-right-join.sketch-what-is-left-right-join.bodyMarkdown"
+    },
+    {
+      "id": "sketch-why-use-left-right-join",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_6.left-right-join.sketch-why-use-left-right-join.title",
+      "bodyKey": "sketches.sql.sql_module_6.left-right-join.sketch-why-use-left-right-join.bodyMarkdown"
+    },
+    {
+      "id": "sketch-visual-example",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_6.left-right-join.sketch-visual-example.title",
+      "bodyKey": "sketches.sql.sql_module_6.left-right-join.sketch-visual-example.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "quiz-left-join-definition",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.quiz-left-join-definition",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "quiz-find-students-no-enrollments",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.quiz-find-students-no-enrollments",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "quiz-drag-reorder-left-join-steps",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.quiz-drag-reorder-left-join-steps",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "quiz-fill-blank-choice-left-join-syntax",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.quiz-fill-blank-choice-left-join-syntax",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "LEFT JOIN"
+      }
+    },
+    {
+      "id": "quiz-sql-left-join-list-all-students-and-courses",
+      "kind": "code_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.quiz-sql-left-join-list-all-students-and-courses",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table",
+        "solutionCode": "SELECT students.name, courses.title\nFROM students\nLEFT JOIN enrollments ON students.id = enrollments.student_id\nLEFT JOIN courses ON enrollments.course_id = courses.id;"
+      }
+    }
+  ]
+}

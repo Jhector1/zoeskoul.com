@@ -1,0 +1,182 @@
+{
+  "topicId": "order-by",
+  "subjectSlug": "sql",
+  "moduleSlug": "sql_module_3",
+  "sectionSlug": "section_3_1",
+  "prefix": "sql3",
+  "minutes": 20,
+  "topic": {
+    "labelKey": "topics.sql.sql_module_3.order-by.label",
+    "summaryKey": "topics.sql.sql_module_3.order-by.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_3.order-by.cards.sketch0.title",
+      "sketchId": "sketch-what-is-order-by",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_3.order-by.cards.sketch1.title",
+      "sketchId": "sketch-order-by-multiple-columns",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_3.order-by.cards.sketch2.title",
+      "sketchId": "sketch-order-by-direction",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql.sql_module_3.order-by.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 5,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch-what-is-order-by",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_3.order-by.sketch-what-is-order-by.title",
+      "bodyKey": "sketches.sql.sql_module_3.order-by.sketch-what-is-order-by.bodyMarkdown"
+    },
+    {
+      "id": "sketch-order-by-multiple-columns",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_3.order-by.sketch-order-by-multiple-columns.title",
+      "bodyKey": "sketches.sql.sql_module_3.order-by.sketch-order-by-multiple-columns.bodyMarkdown"
+    },
+    {
+      "id": "sketch-order-by-direction",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_3.order-by.sketch-order-by-direction.title",
+      "bodyKey": "sketches.sql.sql_module_3.order-by.sketch-order-by-direction.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "quiz-single-choice-basic-order-by",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.quiz-single-choice-basic-order-by",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "quiz-single-choice-default-order",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.quiz-single-choice-default-order",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "quiz-multi-choice-multiple-columns",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.quiz-multi-choice-multiple-columns",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": []
+      }
+    },
+    {
+      "id": "quiz-drag-reorder-sql-order-by",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.quiz-drag-reorder-sql-order-by",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "quiz-fill-blank-choice-order-by-keyword",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.quiz-fill-blank-choice-order-by-keyword",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "ORDER BY"
+      }
+    },
+    {
+      "id": "quiz-code-input-order-by-price-desc",
+      "kind": "code_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.quiz-code-input-order-by-price-desc",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "SELECT * FROM products\nORDER BY price DESC;"
+      }
+    },
+    {
+      "id": "quiz-code-input-order-by-category-then-price",
+      "kind": "code_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.quiz-code-input-order-by-category-then-price",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "SELECT name, category, price FROM products\nORDER BY category ASC, price ASC;"
+      }
+    }
+  ]
+}

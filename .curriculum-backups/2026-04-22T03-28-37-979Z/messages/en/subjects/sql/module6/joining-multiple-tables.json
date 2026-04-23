@@ -1,0 +1,102 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_6": {
+        "joining-multiple-tables": {
+          "label": "Joining Multiple Tables",
+          "summary": "Join more than two tables in a single query.",
+          "cards": {
+            "sketch0": {
+              "title": "Why Join Multiple Tables?"
+            },
+            "sketch1": {
+              "title": "How to Join More Than Two Tables"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_6": {
+        "joining-multiple-tables": {
+          "sk1": {
+            "title": "Why Join Multiple Tables?",
+            "bodyMarkdown": "In real-world databases, information is often split across several tables. To answer complex questions, you may need to combine data from three or more tables in a single query. SQL allows you to chain multiple JOINs together, letting you access all the data you need at once."
+          },
+          "sk2": {
+            "title": "How to Join More Than Two Tables",
+            "bodyMarkdown": "To join more than two tables, simply add additional JOIN clauses to your query. Each JOIN connects another table using a matching condition. For example:\n\n```sql\nSELECT ...\nFROM table1\nJOIN table2 ON table1.id = table2.t1_id\nJOIN table3 ON table2.id = table3.t2_id;\n```\nThis pattern can be extended to as many tables as needed, as long as you specify the correct relationships."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "q1": {
+      "title": "Purpose of Multiple JOINs",
+      "prompt": "Why would you use more than one JOIN in a SQL query?",
+      "hint": "Think about what JOINs do in SQL.",
+      "help": {
+        "concept": "JOINs are used to combine rows from two or more tables based on related columns.",
+        "hint_1": "Multiple JOINs let you pull data from more than two tables in a single query.",
+        "hint_2": "If you need information that exists in three or more tables, you can use several JOINs to connect them."
+      },
+      "options": {
+        "a": "To combine data from several related tables",
+        "b": "To sort the results by multiple columns",
+        "c": "To update multiple tables at once",
+        "d": "To delete rows from several tables"
+      }
+    },
+    "q2": {
+      "title": "Order the Steps: Multi-Table JOIN",
+      "prompt": "Arrange the steps to join three tables in a SQL query.",
+      "hint": "Start with the main table, then add JOINs.",
+      "help": {
+        "concept": "A multi-table JOIN starts with a base table, then adds JOINs for each additional table.",
+        "hint_1": "After FROM, each JOIN adds another table using ON.",
+        "hint_2": "The SELECT clause can come first or last, but JOINs must follow FROM."
+      },
+      "tokens": {
+        "t1": "Write SELECT and FROM with the first table",
+        "t2": "Add JOIN for the second table with ON condition",
+        "t3": "Add JOIN for the third table with ON condition",
+        "t4": "Specify columns to retrieve"
+      }
+    },
+    "q3": {
+      "title": "Fill in the Blank: JOIN Syntax",
+      "prompt": "Complete the SQL statement to join three tables: \n\nSELECT * FROM customers ___ orders ON customers.id = orders.customer_id ___ payments ON orders.id = payments.order_id;",
+      "hint": "What keyword is used to add another table to a query?",
+      "help": {
+        "concept": "The JOIN keyword is used to add tables to a query and specify how they are related.",
+        "hint_1": "Each new table is connected with JOIN and an ON condition.",
+        "hint_2": "You need the same keyword for both blanks."
+      },
+      "template": "SELECT * FROM customers ___ orders ON customers.id = orders.customer_id ___ payments ON orders.id = payments.order_id;",
+      "choices": [
+        "JOIN",
+        "WHERE",
+        "GROUP BY",
+        "LEFT",
+        "AND"
+      ]
+    },
+    "q4": {
+      "title": "Write a Query: Join Three Tables",
+      "prompt": "Using the 'products_catalog' dataset, write a SQL query to list each product's name, its category name, and the supplier's name. The relevant tables are products, categories, and suppliers.",
+      "hint": "You'll need to JOIN products to categories and suppliers using their IDs.",
+      "help": {
+        "concept": "To combine columns from three tables, use JOINs with ON conditions that match related columns.",
+        "hint_1": "Start from products, then JOIN categories using category_id, and suppliers using supplier_id.",
+        "hint_2": "Select the name columns from each table after joining them."
+      },
+      "starterCode": "-- Write a query to join products, categories, and suppliers\nSELECT "
+    }
+  }
+}

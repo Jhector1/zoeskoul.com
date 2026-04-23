@@ -1,0 +1,123 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_2": {
+        "logical-operators": {
+          "label": "Logical Operators (AND, OR, NOT)",
+          "summary": "Combine multiple conditions with logical operators.",
+          "cards": {
+            "sketch0": {
+              "title": "Introduction to Logical Operators"
+            },
+            "sketch1": {
+              "title": "Examples of AND, OR, and NOT"
+            },
+            "sketch2": {
+              "title": "Order of Evaluation"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_2": {
+        "logical-operators": {
+          "logical-operators-intro": {
+            "title": "Introduction to Logical Operators",
+            "bodyMarkdown": "Logical operators in SQL allow you to combine multiple conditions in a WHERE clause. The most common logical operators are **AND**, **OR**, and **NOT**.\n\n- **AND**: All combined conditions must be true.\n- **OR**: At least one of the combined conditions must be true.\n- **NOT**: Negates a condition.\n\nFor example, to find products in the 'Art' category that cost less than $20:\n\n```sql\nSELECT * FROM products\nWHERE category = 'Art' AND price < 20;\n```\n\nThis returns only products that are both in the 'Art' category **and** have a price less than 20."
+          },
+          "logical-operators-examples": {
+            "title": "Examples of AND, OR, and NOT",
+            "bodyMarkdown": "You can use logical operators to create more flexible queries:\n\n- **OR** example:\n\n```sql\nSELECT * FROM products\nWHERE category = 'Art' OR category = 'Stationery';\n```\n\nThis returns all products that are either in the 'Art' category **or** the 'Stationery' category.\n\n- **NOT** example:\n\n```sql\nSELECT * FROM products\nWHERE NOT (stock < 10);\n```\n\nThis returns products with a stock of 10 or more."
+          },
+          "logical-operators-order": {
+            "title": "Order of Evaluation",
+            "bodyMarkdown": "When combining multiple logical operators, SQL evaluates **NOT** first, then **AND**, then **OR**. Use parentheses `()` to control the order explicitly.\n\nFor example:\n\n```sql\nSELECT * FROM products\nWHERE category = 'Home' OR (category = 'Art' AND price < 20);\n```\n\nThis returns all 'Home' products, plus 'Art' products that cost less than $20."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "single-choice-and-or": {
+      "title": "Choosing the Correct Logical Operator",
+      "prompt": "Which logical operator should you use to find products that are in the 'Art' category **and** have a price less than $20?",
+      "hint": "You want both conditions to be true.",
+      "help": {
+        "concept": "The AND operator requires all combined conditions to be true for the correct answer row to be included.",
+        "hint_1": "AND is used when both conditions must be satisfied.",
+        "hint_2": "OR is for either condition, NOT is for negation, BETWEEN is for ranges."
+      },
+      "options": {
+        "a": "AND",
+        "b": "OR",
+        "c": "NOT",
+        "d": "BETWEEN"
+      }
+    },
+    "multi-choice-or-not": {
+      "title": "Understanding OR and NOT",
+      "prompt": "Which queries would return all products that are **not** in the 'Home' category?",
+      "hint": "Look for queries that exclude 'Home' products.",
+      "help": {
+        "concept": "NOT and != are both ways to exclude certain values in SQL.",
+        "hint_1": "NOT inverts the condition, and != checks for inequality.",
+        "hint_2": "Queries that include only 'Home' or explicitly include 'Home' are not correct."
+      },
+      "options": {
+        "a": "SELECT * FROM products WHERE NOT category = 'Home';",
+        "b": "SELECT * FROM products WHERE category != 'Home';",
+        "c": "SELECT * FROM products WHERE category = 'Home';",
+        "d": "SELECT * FROM products WHERE category = 'Art' OR category = 'Stationery' OR category = 'Home';"
+      }
+    },
+    "drag-reorder-evaluation": {
+      "title": "Order of Logical Operator Evaluation",
+      "prompt": "Arrange the logical operators in the order SQL evaluates them (from first to last).",
+      "hint": "Which operator is evaluated first?",
+      "help": {
+        "concept": "SQL evaluates the correct answer first, then the correct answer, then the correct answer unless parentheses change the order.",
+        "hint_1": "the correct answer is a unary operator the correct answer is evaluated before the correct answer the correct answer the correct answer.",
+        "hint_2": "the correct answer comes before the correct answer in evaluation order."
+      },
+      "tokens": {
+        "t1": "NOT",
+        "t2": "AND",
+        "t3": "OR"
+      }
+    },
+    "fill-blank-choice-parentheses": {
+      "title": "Using Parentheses with Logical Operators",
+      "prompt": "Fill in the blank: Parentheses are used in SQL to control the _____ of logical operators.",
+      "hint": "Parentheses affect how expressions are grouped.",
+      "help": {
+        "concept": "Parentheses change the order in which logical operators are evaluated in SQL.",
+        "hint_1": "They determine which conditions are checked together first.",
+        "hint_2": "It's about the sequence in which SQL checks the logic."
+      },
+      "template": "Parentheses are used in SQL to control the {blank} of logical operators.",
+      "choices": [
+        "order of evaluation",
+        "table name",
+        "column type",
+        "row count"
+      ]
+    },
+    "code-input-and-or-not": {
+      "title": "Combining AND, OR, and NOT in a Query",
+      "prompt": "Write a SQL query to select all columns from the products table for products that are either in the 'Art' category **or** have a price greater than $100, but **not** if their stock is less than 5.",
+      "hint": "Combine OR and AND, and use NOT to exclude low stock.",
+      "help": {
+        "concept": "Combine multiple conditions using parentheses and logical operators. Use NOT to exclude certain rows.",
+        "hint_1": "Use (category = 'Art' OR price > 100) to select the main group, then AND NOT (stock < 5) to exclude low stock.",
+        "hint_2": "Remember to use parentheses to group the OR condition before applying AND and NOT."
+      },
+      "starterCode": "-- Write your query below"
+    }
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_0": {
+        "sql-databases": {
+          "label": "SQL and Databases",
+          "summary": "How SQL interacts with databases and what a database is.",
+          "cards": {
+            "sketch0": {
+              "title": "What is a Database?"
+            },
+            "sketch1": {
+              "title": "How SQL Works with Databases"
+            },
+            "sketch2": {
+              "title": "Why Use SQL and Databases?"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_0": {
+        "sql-databases": {
+          "sketch1": {
+            "title": "What is a Database?",
+            "bodyMarkdown": "A **database** is an organized collection of data that can be easily accessed, managed, and updated. Databases store information in a structured way, making it simple to retrieve and manipulate data as needed. Examples include customer lists, product inventories, or student records."
+          },
+          "sketch2": {
+            "title": "How SQL Works with Databases",
+            "bodyMarkdown": "**SQL** (Structured Query Language) is a language used to communicate with databases. SQL lets you ask questions about the data, add new information, update existing records, or remove data. Most modern databases use SQL as their main way to interact with the stored information."
+          },
+          "sketch3": {
+            "title": "Why Use SQL and Databases?",
+            "bodyMarkdown": "Databases help keep data organized and secure, especially when dealing with large amounts of information. SQL makes it possible to quickly find, change, or analyze data. This is essential for businesses, schools, and many other organizations that rely on accurate and up-to-date information."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "quiz1": {
+      "title": "What is a database?",
+      "prompt": "Choose the best definition of a database.",
+      "options": {
+        "a": "A collection of web pages",
+        "b": "A programming language",
+        "c": "An organized collection of data",
+        "d": "A type of computer hardware"
+      }
+    },
+    "quiz2": {
+      "title": "What is SQL used for?",
+      "prompt": "What is the main purpose of SQL?",
+      "options": {
+        "a": "Designing websites",
+        "b": "Communicating with databases",
+        "c": "Writing mobile apps",
+        "d": "Creating graphics"
+      }
+    },
+    "quiz3": {
+      "title": "What can you do with SQL?",
+      "prompt": "Select all actions you can perform with SQL.",
+      "options": {
+        "a": "Add new data to a database",
+        "b": "Update existing records",
+        "c": "Delete data",
+        "d": "Draw images"
+      }
+    },
+    "quiz4": {
+      "title": "Order the steps: Using SQL with a database",
+      "prompt": "Arrange the steps in the correct order for using SQL to get data from a database.",
+      "tokens": {
+        "t1": "Write an SQL query",
+        "t2": "Send the query to the database",
+        "t3": "Database processes the query",
+        "t4": "Database returns the results"
+      }
+    },
+    "quiz5": {
+      "title": "Write a simple SQL query",
+      "prompt": "Write an SQL query to select all columns from the `products` table in the `products_catalog` database.",
+      "starterCode": "-- Write your SQL query below\n"
+    }
+  }
+}

@@ -1,0 +1,116 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_0": {
+        "databases-overview": {
+          "label": "Databases Overview",
+          "summary": "Explore what databases are and how they store information.",
+          "cards": {
+            "sketch0": {
+              "title": "What is a Database?"
+            },
+            "sketch1": {
+              "title": "How is Data Organized?"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_0": {
+        "databases-overview": {
+          "sketch-what-is-database": {
+            "title": "What is a Database?",
+            "bodyMarkdown": "A **database** is an organized collection of data that is stored and accessed electronically. Databases allow you to efficiently store, retrieve, and manage information. They are used in countless applications, from websites to banking systems, to keep track of everything from user accounts to inventory."
+          },
+          "sketch-how-data-organized": {
+            "title": "How is Data Organized?",
+            "bodyMarkdown": "In most databases, data is organized into **tables**. Each table contains rows and columns, similar to a spreadsheet. Each row represents a single record, and each column represents a specific attribute of that record. This structure makes it easy to search, sort, and analyze data."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "quiz-define-database": {
+      "title": "What best describes a database?",
+      "prompt": "Choose the most accurate definition of a database.",
+      "hint": "Think about where information is stored and managed.",
+      "help": {
+        "concept": "A database is a system for storing and organizing data so it can be easily accessed and managed.",
+        "hint_1": "Databases are not just for websites or images—they store information.",
+        "hint_2": "Look for the option that mentions data organization."
+      },
+      "options": {
+        "a": "A collection of web pages.",
+        "b": "A program for editing images.",
+        "c": "An organized collection of data.",
+        "d": "A type of computer hardware."
+      }
+    },
+    "quiz-data-organization": {
+      "title": "How is data typically organized in a database?",
+      "prompt": "Select the correct way data is organized in most databases.",
+      "hint": "Think about spreadsheets and how they organize information.",
+      "help": {
+        "concept": "Databases use tables, which are structured with rows and columns, to organize data efficiently.",
+        "hint_1": "Tables are a key feature of most databases.",
+        "hint_2": "Rows and columns help keep data structured and easy to query."
+      },
+      "options": {
+        "a": "In a single long list.",
+        "b": "In tables with rows and columns.",
+        "c": "Randomly scattered files.",
+        "d": "In folders and subfolders."
+      }
+    },
+    "quiz-table-components": {
+      "title": "What are the main components of a database table?",
+      "prompt": "Select all that apply.",
+      "hint": "Think about how a spreadsheet is structured.",
+      "help": {
+        "concept": "A table is made up of rows (records), columns (fields), and cells (the intersection of a row and column).",
+        "hint_1": "Folders are not part of a table's structure.",
+        "hint_2": "Tables are built from rows, columns, and the cells where they intersect."
+      },
+      "options": {
+        "a": "Rows",
+        "b": "Columns",
+        "c": "Folders",
+        "d": "Cells"
+      }
+    },
+    "quiz-table-order": {
+      "title": "Order the steps: How is data stored in a table?",
+      "prompt": "Arrange the steps in the correct order, from general to specific.",
+      "hint": "Start with the largest structure and move to the smallest.",
+      "help": {
+        "concept": "Data is organized hierarchically: a database contains tables, tables contain rows, and rows contain cells.",
+        "hint_1": "Think about nesting: which contains which?",
+        "hint_2": "A cell is the most specific, while the database is the broadest."
+      },
+      "tokens": {
+        "t1": "Database",
+        "t2": "Table",
+        "t3": "Row",
+        "t4": "Cell"
+      }
+    },
+    "quiz-sql-table-query": {
+      "title": "Identify a Table in SQL",
+      "prompt": "Write an SQL query to display all records from the 'products' table in the 'products_catalog' dataset.",
+      "hint": "Use the SELECT statement to retrieve all columns.",
+      "help": {
+        "concept": "The SELECT statement is used to retrieve data from a table. The * symbol means all columns.",
+        "hint_1": "Start with SELECT and use * to get all columns.",
+        "hint_2": "Don't forget to specify the table name after FROM."
+      },
+      "starterCode": "-- Write your SQL query below\n"
+    }
+  }
+}

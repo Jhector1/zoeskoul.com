@@ -1,0 +1,116 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_5": {
+        "having-clause": {
+          "label": "HAVING Clause",
+          "summary": "Filter groups with HAVING after aggregation.",
+          "cards": {
+            "sketch0": {
+              "title": "What is the HAVING Clause?"
+            },
+            "sketch1": {
+              "title": "HAVING vs WHERE"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_5": {
+        "having-clause": {
+          "sk1": {
+            "title": "What is the HAVING Clause?",
+            "bodyMarkdown": "The `HAVING` clause in SQL is used to filter groups created by `GROUP BY` after aggregation functions like `SUM`, `COUNT`, or `AVG` have been applied. Unlike `WHERE`, which filters rows before grouping, `HAVING` filters groups after aggregation.\n\n**Example:**\n\nSuppose you want to see only regions with more than 2 orders:\n\n```sql\nSELECT region, COUNT(*) AS order_count\nFROM orders\nGROUP BY region\nHAVING COUNT(*) > 2;\n```\n\nThis returns only those regions where the number of orders is greater than 2."
+          },
+          "sk2": {
+            "title": "HAVING vs WHERE",
+            "bodyMarkdown": "`WHERE` filters rows **before** grouping and aggregation, while `HAVING` filters groups **after** aggregation.\n\n- Use `WHERE` to filter individual rows (e.g., only 'paid' orders).\n- Use `HAVING` to filter groups based on aggregate values (e.g., regions with total quantity > 10).\n\n**Example:**\n\n```sql\nSELECT region, SUM(quantity) AS total_qty\nFROM orders\nWHERE status = 'paid'\nGROUP BY region\nHAVING SUM(quantity) > 10;\n```\n\nThis query first filters for 'paid' orders, then groups by region, and finally shows only those regions where the total quantity is greater than 10."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "q1": {
+      "title": "Purpose of HAVING",
+      "prompt": "What is the main purpose of the HAVING clause in SQL?",
+      "hint": "HAVING is used after GROUP BY.",
+      "help": {
+        "concept": "The HAVING clause filters groups created by GROUP BY, based on aggregate values.",
+        "hint_1": "HAVING works with aggregate functions like SUM or COUNT.",
+        "hint_2": "HAVING is applied after the data has been grouped and aggregated."
+      },
+      "options": {
+        "a": "To filter individual rows before grouping",
+        "b": "To filter groups after aggregation",
+        "c": "To sort the results",
+        "d": "To join tables"
+      }
+    },
+    "q2": {
+      "title": "WHERE vs HAVING",
+      "prompt": "Which statements about WHERE and HAVING are correct? (Select all that apply)",
+      "hint": "Think about when each clause is applied in the query process.",
+      "help": {
+        "concept": "WHERE filters rows before grouping; HAVING filters groups after aggregation.",
+        "hint_1": "Aggregate functions like SUM or COUNT are used with HAVING, not WHERE.",
+        "hint_2": "HAVING is used to filter groups created by GROUP BY, after aggregation."
+      },
+      "options": {
+        "a": "WHERE filters rows before aggregation",
+        "b": "HAVING filters groups after aggregation",
+        "c": "WHERE can use aggregate functions like SUM or COUNT",
+        "d": "HAVING is used with GROUP BY"
+      }
+    },
+    "q3": {
+      "title": "Query Order: WHERE, GROUP BY, HAVING",
+      "prompt": "Arrange the SQL clauses in the order they are processed in a query with aggregation.",
+      "hint": "Which comes first: filtering rows, grouping, or filtering groups?",
+      "help": {
+        "concept": "SQL processes WHERE before grouping, then GROUP BY, then HAVING after aggregation.",
+        "hint_1": "WHERE filters rows before any grouping happens.",
+        "hint_2": "HAVING is always after GROUP BY and aggregation."
+      },
+      "tokens": {
+        "t1": "WHERE",
+        "t2": "GROUP BY",
+        "t3": "HAVING"
+      }
+    },
+    "q4": {
+      "title": "Choose the Correct Clause",
+      "prompt": "Fill in the blank: To filter groups after aggregation, use the ____ clause.",
+      "hint": "It's not WHERE.",
+      "help": {
+        "concept": "the missing term is designed to filter groups after aggregation, unlike WHERE.",
+        "hint_1": "the missing term comes after GROUP BY in a query.",
+        "hint_2": "the missing term works with aggregate functions to filter grouped results."
+      },
+      "template": "To filter groups after aggregation, use the ____ clause.",
+      "choices": [
+        "WHERE",
+        "HAVING",
+        "ORDER BY",
+        "SELECT"
+      ]
+    },
+    "q5": {
+      "title": "Filter Regions with High Total Quantity",
+      "prompt": "Write a SQL query to list each region and the total quantity of items ordered, but only include regions where the total quantity is greater than 10.",
+      "hint": "Use GROUP BY for region and HAVING with SUM(quantity).",
+      "help": {
+        "concept": "Use GROUP BY to aggregate by region, and HAVING to filter groups based on the sum of quantity.",
+        "hint_1": "First, group by region and calculate SUM(quantity).",
+        "hint_2": "Use HAVING to keep only those groups where SUM(quantity) is greater than 10."
+      },
+      "starterCode": "-- Write your query here\n"
+    }
+  }
+}

@@ -1,0 +1,124 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_6": {
+        "cross-join": {
+          "label": "CROSS JOIN",
+          "summary": "Learn how to use CROSS JOIN to combine all rows from two tables, producing a Cartesian product.",
+          "cards": {
+            "sketch0": {
+              "title": "What is a CROSS JOIN?"
+            },
+            "sketch1": {
+              "title": "CROSS JOIN Syntax"
+            },
+            "sketch2": {
+              "title": "When to Use CROSS JOIN"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_6": {
+        "cross-join": {
+          "sk1": {
+            "title": "What is a CROSS JOIN?",
+            "bodyMarkdown": "A **CROSS JOIN** in SQL combines every row from the first table with every row from the second table, creating a Cartesian product. This means if the first table has 6 rows and the second has 5, the result will have 30 rows (6 × 5).\n\nCROSS JOINs are rarely used in everyday queries, but they can be helpful when you need all possible combinations between two sets. Unlike INNER JOIN or LEFT JOIN, there is no ON clause, since no matching condition is required.\n\n**Example:**\n\nSuppose you want to see all possible pairs of students and departments:\n\n```sql\nSELECT students.name, departments.name\nFROM students\nCROSS JOIN departments;\n```\n\nThis will list every student with every department."
+          },
+          "sk2": {
+            "title": "CROSS JOIN Syntax",
+            "bodyMarkdown": "The basic syntax for a CROSS JOIN is:\n\n```sql\nSELECT ...\nFROM table1\nCROSS JOIN table2;\n```\n\nYou can also use a comma (`,`) instead of the CROSS JOIN keyword, but using the explicit keyword is clearer and preferred in modern SQL."
+          },
+          "sk3": {
+            "title": "When to Use CROSS JOIN",
+            "bodyMarkdown": "Use CROSS JOIN when you need every possible combination of rows from two tables. For example, generating a schedule grid of all students and all courses, or pairing every department with every course.\n\n**Be careful:** CROSS JOINs can produce very large results if your tables are big!"
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "q1": {
+      "title": "What does a CROSS JOIN do?",
+      "prompt": "Which statement best describes the result of a CROSS JOIN between two tables?",
+      "hint": "Think about combinations.",
+      "help": {
+        "concept": "A CROSS JOIN produces a Cartesian product, combining every row from the first table with every row from the second.",
+        "hint_1": "CROSS JOIN does not require a matching condition.",
+        "hint_2": "It creates all possible pairs of rows from both tables."
+      },
+      "options": {
+        "a": "It returns only matching rows based on a condition.",
+        "b": "It returns all possible combinations of rows from both tables.",
+        "c": "It returns only rows from the first table.",
+        "d": "It returns rows from the first table and matching rows from the second table."
+      }
+    },
+    "q2": {
+      "title": "Identifying CROSS JOIN results",
+      "prompt": "Suppose 'students' has 6 rows and 'departments' has 5 rows. After running a CROSS JOIN between them, which of the following are true? (Select all that apply.)",
+      "hint": "How many combinations are possible?",
+      "help": {
+        "concept": "CROSS JOIN multiplies the number of rows in the first table by the number of rows in the second.",
+        "hint_1": "Each student is paired with every department.",
+        "hint_2": "No matching condition is needed, and the total rows are the product of the two table sizes."
+      },
+      "options": {
+        "a": "The result will have 30 rows.",
+        "b": "Each student will appear with every department.",
+        "c": "The result will have 11 rows.",
+        "d": "A matching condition is required."
+      }
+    },
+    "q3": {
+      "title": "Ordering steps to create a CROSS JOIN",
+      "prompt": "Arrange the steps to write a CROSS JOIN query between 'students' and 'departments'.",
+      "hint": "Start with SELECT, then FROM, then CROSS JOIN.",
+      "help": {
+        "concept": "The correct order is SELECT, FROM, CROSS JOIN, and then end the statement.",
+        "hint_1": "Begin with what you want to select.",
+        "hint_2": "After FROM, add CROSS JOIN, then finish with a semicolon."
+      },
+      "tokens": {
+        "t1": "Write SELECT statement for desired columns",
+        "t2": "Specify FROM students",
+        "t3": "Add CROSS JOIN departments",
+        "t4": "End with a semicolon"
+      }
+    },
+    "q4": {
+      "title": "Fill in the blank: CROSS JOIN syntax",
+      "prompt": "Complete the following SQL query to list all combinations of student names and department names:\n\nSELECT students.name, departments.name\nFROM students ___ departments;",
+      "hint": "Which JOIN type creates all combinations?",
+      "help": {
+        "concept": "the missing term is used to produce a Cartesian product of two tables.",
+        "hint_1": "It's not INNER, LEFT, or RIGHT JOIN.",
+        "hint_2": "The correct keyword is used for all possible pairs."
+      },
+      "template": "SELECT students.name, departments.name\nFROM students ___ departments;",
+      "choices": [
+        "INNER JOIN",
+        "CROSS JOIN",
+        "LEFT JOIN",
+        "RIGHT JOIN"
+      ]
+    },
+    "q5": {
+      "title": "Write a CROSS JOIN query",
+      "prompt": "Write a SQL query to list every possible combination of student name and course title using a CROSS JOIN.",
+      "hint": "Use CROSS JOIN between students and courses.",
+      "help": {
+        "concept": "CROSS JOIN combines every row from students with every row from courses, producing all possible pairs.",
+        "hint_1": "SELECT the columns you want, then FROM students CROSS JOIN courses.",
+        "hint_2": "No ON clause is needed for CROSS JOIN; just list the tables."
+      },
+      "starterCode": "-- List all combinations of student names and course titles\nSELECT"
+    }
+  }
+}

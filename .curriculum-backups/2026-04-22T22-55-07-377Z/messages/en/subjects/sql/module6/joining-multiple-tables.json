@@ -1,0 +1,124 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_6": {
+        "joining-multiple-tables": {
+          "label": "Joining Multiple Tables",
+          "summary": "Learn how to join more than two tables in a single SQL query using the school_relations_intro dataset.",
+          "cards": {
+            "sketch0": {
+              "title": "What Does It Mean to Join Multiple Tables?"
+            },
+            "sketch1": {
+              "title": "How to Chain JOINs"
+            },
+            "sketch2": {
+              "title": "Why Join Multiple Tables?"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_6": {
+        "joining-multiple-tables": {
+          "sketch-what-is-multi-join": {
+            "title": "What Does It Mean to Join Multiple Tables?",
+            "bodyMarkdown": "In SQL, you can join more than two tables in a single query by chaining multiple JOIN clauses. This is useful when you need to combine related data spread across several tables. For example, in the `school_relations_intro` dataset, you might want to see which students are enrolled in which courses, and also include the department for each course. To do this, you would join the `enrollments`, `students`, `courses`, and `departments` tables together."
+          },
+          "sketch-how-to-chain-joins": {
+            "title": "How to Chain JOINs",
+            "bodyMarkdown": "To join three or more tables, you start with one table and then add JOIN clauses for each additional table. Each JOIN connects two tables using a matching column, usually a primary key and a foreign key. For example:\n\n```sql\nSELECT students.name, courses.title, departments.name AS department\nFROM enrollments\nJOIN students ON enrollments.student_id = students.id\nJOIN courses ON enrollments.course_id = courses.id\nJOIN departments ON courses.department_id = departments.id;\n```\n\nThis query lists each student's name, the course title, and the department name for every enrollment."
+          },
+          "sketch-why-join-multiple": {
+            "title": "Why Join Multiple Tables?",
+            "bodyMarkdown": "Joining multiple tables lets you answer more complex questions. For example, you can find all students in a certain department, or list all courses a student is taking along with the department for each course. Without joining all relevant tables, you would miss important context or details."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "multi-join-single-choice": {
+      "title": "Which SQL clause is used to combine more than two tables in a single query?",
+      "prompt": "Suppose you want to list students, their enrolled courses, and the department for each course. Which SQL clause allows you to combine all three tables in one query?",
+      "hint": "Think about the clause that connects tables based on related columns.",
+      "help": {
+        "concept": "JOIN clauses are used to combine rows from two or more tables based on related columns.",
+        "hint_1": "You need to connect tables using a clause that matches keys between them.",
+        "hint_2": "The clause you use is the same one for combining two tables, just repeated for more."
+      },
+      "options": {
+        "a": "GROUP BY",
+        "b": "JOIN",
+        "c": "ORDER BY",
+        "d": "UNION"
+      }
+    },
+    "multi-join-drag-reorder": {
+      "title": "Order the JOINs",
+      "prompt": "Arrange the steps to join students, enrollments, courses, and departments to get each student's name, course title, and department name.",
+      "hint": "Think about which table connects to which, starting from enrollments.",
+      "help": {
+        "concept": "Each JOIN connects two tables using a shared key. The order matters for clarity and logic.",
+        "hint_1": "Begin with the table that links students and courses.",
+        "hint_2": "After joining enrollments to students, join to courses, then departments."
+      },
+      "tokens": {
+        "t1": "Start with enrollments",
+        "t2": "JOIN students ON enrollments.student_id = students.id",
+        "t3": "JOIN courses ON enrollments.course_id = courses.id",
+        "t4": "JOIN departments ON courses.department_id = departments.id"
+      }
+    },
+    "multi-join-fill-blank": {
+      "title": "Fill in the Missing Table",
+      "prompt": "To get the department name for each enrollment, which table must you join after courses?",
+      "hint": "Which table contains department names?",
+      "help": {
+        "concept": "To get department details, you need to join the table that stores department information.",
+        "hint_1": "Look for the table with department names and IDs.",
+        "hint_2": "It's not students or enrollments, but the one that lists all the missing term."
+      },
+      "template": "SELECT ... FROM enrollments JOIN students ON enrollments.student_id = students.id JOIN courses ON enrollments.course_id = courses.id JOIN [___] ON courses.department_id = [___];",
+      "choices": [
+        "students",
+        "departments",
+        "enrollments",
+        "grade_levels"
+      ]
+    },
+    "multi-join-multi-choice": {
+      "title": "Which columns are used to join these tables?",
+      "prompt": "You want to join enrollments, students, courses, and departments. Which columns are used in the ON conditions for these joins?",
+      "hint": "Think about which columns are foreign keys referencing primary keys.",
+      "help": {
+        "concept": "JOIN conditions usually match the correct answer foreign key in one table to the correct answer primary key in another.",
+        "hint_1": "Check which columns link enrollments to students, enrollments to courses, and courses to departments.",
+        "hint_2": "Grade level is not the correct answer key for joining these tables."
+      },
+      "options": {
+        "a": "enrollments.student_id = students.id",
+        "b": "enrollments.course_id = courses.id",
+        "c": "courses.department_id = departments.id",
+        "d": "students.grade_level = courses.id"
+      }
+    },
+    "multi-join-code-input": {
+      "title": "Write a Query: Student, Course, Department",
+      "prompt": "Write a SQL query to list each student's name, the title of the course they are enrolled in, and the department name for that course. Use the school_relations_intro dataset.",
+      "hint": "You'll need to join enrollments to students, courses, and departments.",
+      "help": {
+        "concept": "To get information from multiple related tables, use JOINs to connect them via their key columns.",
+        "hint_1": "Start from enrollments, join to students and courses, then join courses to departments.",
+        "hint_2": "Select the columns you need from each table after joining them together."
+      },
+      "starterCode": "-- Write your query here"
+    }
+  }
+}

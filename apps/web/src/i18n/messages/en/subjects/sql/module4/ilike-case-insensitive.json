@@ -1,0 +1,117 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_4": {
+        "ilike-case-insensitive": {
+          "label": "Case-Insensitive Matching",
+          "summary": "Learn how to perform case-insensitive searches in SQL using ILIKE or similar operators. This is useful for matching text regardless of letter case, such as finding names or cities in a customer database.",
+          "cards": {
+            "sketch0": {
+              "title": "Why Case-Insensitive Matching Matters"
+            },
+            "sketch1": {
+              "title": "ILIKE vs LIKE and Alternatives"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_4": {
+        "ilike-case-insensitive": {
+          "intro-ilike": {
+            "title": "Why Case-Insensitive Matching Matters",
+            "bodyMarkdown": "When searching for text in SQL, the standard `LIKE` operator is case-sensitive in many databases. This means `LIKE 'Chicago'` will not match `chicago` or `CHICAGO`. To match text regardless of case, use `ILIKE` (in PostgreSQL) or functions like `LOWER()` in SQLite. This is especially helpful when searching for names, cities, or emails where users may enter data with different capitalization.\n\n**Example:**\n\nSuppose you want to find all customers from Chicago, regardless of how 'Chicago' is capitalized in the `city` column:\n\n```sql\nSELECT * FROM customers WHERE LOWER(city) = 'chicago';\n```\n\nThis query converts all values in the `city` column to lowercase before comparing them to `'chicago'`, ensuring a case-insensitive match."
+          },
+          "ilike-vs-like": {
+            "title": "ILIKE vs LIKE and Alternatives",
+            "bodyMarkdown": "Some SQL dialects, like PostgreSQL, support the `ILIKE` operator for case-insensitive pattern matching. However, SQLite (used in this dataset) does not support `ILIKE`. Instead, you can use the `LOWER()` or `UPPER()` functions to normalize both sides of the comparison.\n\n**Pattern Matching Example:**\n\nTo find customers whose email ends with `@example.com`, regardless of case:\n\n```sql\nSELECT * FROM customers WHERE LOWER(email) LIKE '%@example.com';\n```\n\nThis ensures emails like `MIA@EXAMPLE.COM` or `mia@example.com` are both matched."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "single-choice-ilike": {
+      "title": "Case-Insensitive Search in SQLite",
+      "prompt": "Which SQL expression will find all customers whose city is 'chicago', regardless of capitalization, in SQLite?",
+      "hint": "Think about how to make both sides lowercase.",
+      "help": {
+        "concept": "SQLite does not support ILIKE, so you need to use a function to normalize case.",
+        "hint_1": "Use the LOWER() function on the column.",
+        "hint_2": "Compare LOWER(city) to the lowercase string."
+      },
+      "options": {
+        "a": "WHERE city = 'chicago'",
+        "b": "WHERE city LIKE 'chicago'",
+        "c": "WHERE LOWER(city) = 'chicago'",
+        "d": "WHERE city ILIKE 'chicago'"
+      }
+    },
+    "multi-choice-patterns": {
+      "title": "Matching Emails Case-Insensitively",
+      "prompt": "Select all SQL expressions that will match emails ending with '@example.com', regardless of case, in SQLite.",
+      "hint": "You need to transform the email column to match the pattern's case.",
+      "help": {
+        "concept": "To match text case-insensitively in SQLite, use LOWER() or UPPER() on the column and pattern.",
+        "hint_1": "Convert the email column to lower or upper case before comparing.",
+        "hint_2": "ILIKE is not supported in SQLite, so use LOWER() or UPPER()."
+      },
+      "options": {
+        "a": "WHERE email LIKE '%@example.com'",
+        "b": "WHERE LOWER(email) LIKE '%@example.com'",
+        "c": "WHERE UPPER(email) LIKE '%@EXAMPLE.COM'",
+        "d": "WHERE email ILIKE '%@example.com'"
+      }
+    },
+    "drag-reorder-case": {
+      "title": "Steps for Case-Insensitive Comparison",
+      "prompt": "Arrange the steps to perform a case-insensitive comparison in SQLite.",
+      "hint": "Think about the order: select, transform, prepare value, compare.",
+      "help": {
+        "concept": "Case-insensitive comparison involves transforming both sides to the same case before comparing.",
+        "hint_1": "Start with the SELECT, then normalize the column.",
+        "hint_2": "Lowercase the value before comparing with =."
+      },
+      "tokens": {
+        "t1": "Apply LOWER() to the column",
+        "t2": "Write the comparison value in lowercase",
+        "t3": "Use the = operator to compare",
+        "t4": "Write the SELECT statement"
+      }
+    },
+    "fill-blank-choice-ilike": {
+      "title": "Fill in the Function",
+      "prompt": "Fill in the blank to make this WHERE clause case-insensitive in SQLite:\n\n```sql\nSELECT * FROM customers WHERE ____ (city) = 'miami';\n```",
+      "hint": "Which function makes text lowercase?",
+      "help": {
+        "concept": "the missing term() converts text to lowercase, which helps with case-insensitive matching.",
+        "hint_1": "You want to compare both sides in lowercase.",
+        "hint_2": "the missing term() is the function for this."
+      },
+      "template": "SELECT * FROM customers WHERE ____ (city) = 'miami';",
+      "choices": [
+        "LOWER",
+        "UPPER",
+        "TRIM",
+        "LENGTH"
+      ]
+    },
+    "code-input-case-insensitive": {
+      "title": "Find All Customers Named 'Emma Reed' (Any Case)",
+      "prompt": "Write a SQL query to select all columns for customers whose full_name is 'Emma Reed', regardless of case or extra spaces. Use SQLite functions as needed.",
+      "hint": "Use LOWER() and TRIM() to normalize the full_name column.",
+      "help": {
+        "concept": "To match names regardless of case and spaces, use LOWER() to ignore case and TRIM() to remove extra spaces.",
+        "hint_1": "Apply TRIM() to remove spaces, then LOWER() to ignore case.",
+        "hint_2": "Compare the normalized column to the lowercase, trimmed name."
+      },
+      "starterCode": "-- Write your query below"
+    }
+  }
+}

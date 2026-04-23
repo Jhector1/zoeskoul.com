@@ -1,0 +1,157 @@
+{
+  "topicId": "sql-environments",
+  "subjectSlug": "sql",
+  "moduleSlug": "sql_module_0",
+  "sectionSlug": "section_0_1",
+  "prefix": "sql0",
+  "minutes": 15,
+  "topic": {
+    "labelKey": "topics.sql.sql_module_0.sql-environments.label",
+    "summaryKey": "topics.sql.sql_module_0.sql-environments.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_0.sql-environments.cards.sketch0.title",
+      "sketchId": "sketch-what-is-sql-environment",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_0.sql-environments.cards.sketch1.title",
+      "sketchId": "sketch-popular-sql-tools",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_0.sql-environments.cards.sketch2.title",
+      "sketchId": "sketch-accessing-database",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql.sql_module_0.sql-environments.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch-what-is-sql-environment",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_0.sql-environments.sketch-what-is-sql-environment.title",
+      "bodyKey": "sketches.sql.sql_module_0.sql-environments.sketch-what-is-sql-environment.bodyMarkdown"
+    },
+    {
+      "id": "sketch-popular-sql-tools",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_0.sql-environments.sketch-popular-sql-tools.title",
+      "bodyKey": "sketches.sql.sql_module_0.sql-environments.sketch-popular-sql-tools.bodyMarkdown"
+    },
+    {
+      "id": "sketch-accessing-database",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_0.sql-environments.sketch-accessing-database.title",
+      "bodyKey": "sketches.sql.sql_module_0.sql-environments.sketch-accessing-database.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "quiz-sql-environment-single-choice",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.quiz-sql-environment-single-choice",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "quiz-sql-environment-multi-choice",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.quiz-sql-environment-multi-choice",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "c",
+          "e"
+        ]
+      }
+    },
+    {
+      "id": "quiz-sql-environment-drag-reorder",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.quiz-sql-environment-drag-reorder",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "quiz-sql-environment-fill-blank-choice",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.quiz-sql-environment-fill-blank-choice",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "command-line"
+      }
+    },
+    {
+      "id": "quiz-sql-environment-code-input",
+      "kind": "code_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.quiz-sql-environment-code-input",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "students_intro",
+        "resultShape": "table",
+        "solutionCode": "SELECT * FROM students;"
+      }
+    }
+  ]
+}

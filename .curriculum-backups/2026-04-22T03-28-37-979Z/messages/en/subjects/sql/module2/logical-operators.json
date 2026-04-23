@@ -1,0 +1,116 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_2": {
+        "logical-operators": {
+          "label": "Logical Operators (AND, OR, NOT)",
+          "summary": "Combine multiple conditions with logical operators.",
+          "cards": {
+            "sketch0": {
+              "title": "What Are Logical Operators?"
+            },
+            "sketch1": {
+              "title": "Examples of Logical Operators"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_2": {
+        "logical-operators": {
+          "sketch-logic-intro": {
+            "title": "What Are Logical Operators?",
+            "bodyMarkdown": "Logical operators in SQL allow you to combine multiple conditions in a WHERE clause. The most common logical operators are **AND**, **OR**, and **NOT**. These help you filter data more precisely by specifying how multiple conditions should be evaluated together."
+          },
+          "sketch-logic-examples": {
+            "title": "Examples of Logical Operators",
+            "bodyMarkdown": "- **AND**: All conditions must be true. Example: `WHERE price > 10 AND stock > 0`\n- **OR**: At least one condition must be true. Example: `WHERE category = 'Books' OR category = 'Magazines'`\n- **NOT**: Negates a condition. Example: `WHERE NOT discontinued`"
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "logic-single-choice-and-or": {
+      "title": "Choosing the Right Logical Operator",
+      "prompt": "You want to select products that are either in the 'Books' category or have a price less than 10. Which logical operator should you use to combine these conditions?",
+      "hint": "Think about whether both or just one condition needs to be true.",
+      "help": {
+        "concept": "The OR operator is used when you want at least one of multiple conditions to be true.",
+        "hint_1": "If you want products that are either in a certain category or below a certain price, you don't require both conditions to be true.",
+        "hint_2": "The operator you need allows for either condition to match, not necessarily both."
+      },
+      "options": {
+        "a": "AND",
+        "b": "OR",
+        "c": "NOT",
+        "d": "BETWEEN"
+      }
+    },
+    "logic-multi-choice-which-are-true": {
+      "title": "Identifying Logical Operator Results",
+      "prompt": "Given the condition: `WHERE price > 20 AND stock > 5`, which of the following products will be selected? (Assume all products are from the same table.)",
+      "hint": "Both conditions must be true for a row to be selected.",
+      "help": {
+        "concept": "The AND operator requires all combined conditions to be true for a row to be included in the result.",
+        "hint_1": "Check each product: does it have both price > 20 and stock > 5?",
+        "hint_2": "Eliminate any product that fails either the price or stock condition."
+      },
+      "options": {
+        "a": "Product A: price = 25, stock = 10",
+        "b": "Product B: price = 15, stock = 10",
+        "c": "Product C: price = 25, stock = 3",
+        "d": "Product D: price = 22, stock = 6"
+      }
+    },
+    "logic-drag-reorder-eval": {
+      "title": "Order of Evaluation",
+      "prompt": "Arrange the following steps in the order SQL evaluates them in a WHERE clause with logical operators.",
+      "hint": "NOT has the highest precedence, followed by AND, then OR.",
+      "help": {
+        "concept": "SQL evaluates logical operators in a specific order: NOT first, then AND, then OR.",
+        "hint_1": "Think about which operator negates a condition and which combine them.",
+        "hint_2": "The negation operator is evaluated before combining conditions."
+      },
+      "tokens": {
+        "t1": "Evaluate NOT conditions",
+        "t2": "Evaluate AND conditions",
+        "t3": "Evaluate OR conditions"
+      }
+    },
+    "logic-fill-blank-choice-not": {
+      "title": "Filling in the Blank: NOT Operator",
+      "prompt": "Complete the sentence: The NOT operator is used to _____ a condition in a WHERE clause.",
+      "hint": "NOT changes a true condition to false and vice versa.",
+      "help": {
+        "concept": "The NOT operator reverses the result of a condition.",
+        "hint_1": "If a condition is true, applying NOT makes it false.",
+        "hint_2": "NOT is used when you want the opposite of a condition."
+      },
+      "template": "The NOT operator is used to [[blank]] a condition in a WHERE clause.",
+      "choices": [
+        "combine",
+        "negate",
+        "repeat",
+        "sort"
+      ]
+    },
+    "logic-code-input-products-and-or": {
+      "title": "Write a Query with AND and OR",
+      "prompt": "Write a SQL query to select all columns from the `products_catalog` table where the category is 'Books' **or** the price is less than 10, **and** the product is not discontinued.",
+      "hint": "Use parentheses to group OR conditions, and use NOT for the discontinued column.",
+      "help": {
+        "concept": "Combine AND, OR, and NOT in WHERE clauses. Use parentheses to control evaluation order.",
+        "hint_1": "Group the category and price conditions together with OR, then combine with AND and NOT.",
+        "hint_2": "Remember to wrap the OR conditions in parentheses before applying AND with NOT discontinued."
+      },
+      "starterCode": "SELECT *\nFROM products_catalog\nWHERE "
+    }
+  }
+}

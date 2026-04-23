@@ -1,0 +1,134 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_0": {
+        "sql-history-purpose": {
+          "label": "History and Purpose of SQL",
+          "summary": "Learn the origins and main uses of SQL in data management.",
+          "cards": {
+            "sketch0": {
+              "title": "The Origins of SQL"
+            },
+            "sketch1": {
+              "title": "Main Purposes of SQL"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_0": {
+        "sql-history-purpose": {
+          "sketch-history-sql": {
+            "title": "The Origins of SQL",
+            "bodyMarkdown": "SQL, or Structured Query Language, was developed in the 1970s at IBM by Donald D. Chamberlin and Raymond F. Boyce. It was designed to manage and query data stored in relational databases, based on the relational model proposed by Edgar F. Codd. The first version was called SEQUEL, later shortened to SQL. Over time, SQL became the standard language for relational database management systems (RDBMS), and is now used worldwide in countless applications."
+          },
+          "sketch-purpose-sql": {
+            "title": "Main Purposes of SQL",
+            "bodyMarkdown": "SQL is used to interact with relational databases. Its main purposes include:\n\n- **Querying data**: Retrieve specific information from large datasets using SELECT statements.\n- **Inserting, updating, and deleting data**: Manage records in tables with INSERT, UPDATE, and DELETE commands.\n- **Defining database structure**: Create or modify tables and relationships using DDL (Data Definition Language) commands like CREATE TABLE.\n- **Controlling access**: Manage user permissions and security.\n\nFor example, to see all students in the `students` table:\n\n```sql\nSELECT * FROM students;\n```\n\nThis command returns all rows and columns from the `students` table."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "quiz-sql-origin": {
+      "title": "Who developed SQL?",
+      "prompt": "Who were the main developers of SQL at IBM in the 1970s?",
+      "hint": "Think about IBM researchers in the 1970s.",
+      "help": {
+        "concept": "SQL was created at IBM by two computer scientists to work with relational databases.",
+        "hint_1": "The correct answer is not a famous software company founder.",
+        "hint_2": "Look for the names associated with IBM and the original SEQUEL project."
+      },
+      "options": {
+        "a": "Donald D. Chamberlin and Raymond F. Boyce",
+        "b": "Bill Gates and Paul Allen",
+        "c": "Edgar F. Codd and Larry Ellison",
+        "d": "Linus Torvalds and Guido van Rossum"
+      }
+    },
+    "quiz-sql-purpose": {
+      "title": "What are the main uses of SQL?",
+      "prompt": "Select all main purposes of SQL.",
+      "hint": "Focus on database-related tasks.",
+      "help": {
+        "concept": "SQL is designed for managing and interacting with relational databases.",
+        "hint_1": "SQL is not used for web design.",
+        "hint_2": "Think about tasks like querying, managing data, and controlling access in databases."
+      },
+      "options": {
+        "a": "Querying data from tables",
+        "b": "Designing web page layouts",
+        "c": "Inserting, updating, and deleting records",
+        "d": "Defining and modifying database structure",
+        "e": "Controlling user access and permissions"
+      }
+    },
+    "quiz-sql-standard": {
+      "title": "SQL as a Standard",
+      "prompt": "What does it mean that SQL is a 'standard' language for relational databases?",
+      "hint": "Consider how SQL is used across different database systems.",
+      "help": {
+        "concept": "A standard language means it is widely adopted and follows common specifications.",
+        "hint_1": "SQL is not limited to one company or one type of task.",
+        "hint_2": "It is the common language for interacting with many relational databases."
+      },
+      "options": {
+        "a": "It is used by most relational database systems and follows agreed-upon rules.",
+        "b": "It is only used at IBM.",
+        "c": "It is a programming language for building mobile apps.",
+        "d": "It is only used for creating tables, not for querying data."
+      }
+    },
+    "quiz-sql-select-example": {
+      "title": "Basic SQL Query Example",
+      "prompt": "Write a SQL query to select all columns and rows from the `students` table.",
+      "hint": "Use the SELECT statement to get all data from the table.",
+      "help": {
+        "concept": "The SELECT statement retrieves data from a table. Using * selects all columns.",
+        "hint_1": "Start your query with SELECT and use * for all columns.",
+        "hint_2": "Don't forget to specify the table name after FROM."
+      },
+      "starterCode": "-- Write your SQL query below\n"
+    },
+    "quiz-sql-purpose-blank": {
+      "title": "Fill in the Blank: SQL Purpose",
+      "prompt": "SQL is mainly used to manage and ___ data in relational databases.",
+      "hint": "Think about retrieving information from databases.",
+      "help": {
+        "concept": "One of SQL's main purposes is to retrieve (the missing term) data from databases.",
+        "hint_1": "The word means to ask for or request information.",
+        "hint_2": "It's the same word as in 'SELECT' statements."
+      },
+      "template": "SQL is mainly used to manage and [[blank]] data in relational databases.",
+      "choices": [
+        "query",
+        "paint",
+        "compile",
+        "animate"
+      ]
+    },
+    "quiz-sql-history-order": {
+      "title": "Timeline: SQL Development",
+      "prompt": "Arrange these events in the correct order from earliest to latest.",
+      "hint": "Start with the theoretical foundation, then the language, then standardization and adoption.",
+      "help": {
+        "concept": "SQL's history began with the relational model, followed by the creation of the language, then its standardization and widespread use.",
+        "hint_1": "The relational model came before SQL was invented.",
+        "hint_2": "Standardization happened before SQL was used everywhere."
+      },
+      "tokens": {
+        "t1": "Relational model proposed by Edgar F. Codd",
+        "t2": "SEQUEL language developed at IBM",
+        "t3": "SQL becomes an ANSI standard",
+        "t4": "SQL widely adopted by database systems"
+      }
+    }
+  }
+}

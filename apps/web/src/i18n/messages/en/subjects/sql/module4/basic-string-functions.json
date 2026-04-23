@@ -1,0 +1,90 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_4": {
+        "basic-string-functions": {
+          "label": "Basic String Functions",
+          "summary": "Use functions like UPPER, LOWER, and TRIM to clean up text.",
+          "cards": {
+            "sketch0": {
+              "title": "What Are Basic String Functions?"
+            },
+            "sketch1": {
+              "title": "Why Use String Functions?"
+            },
+            "sketch2": {
+              "title": "Examples of String Functions"
+            },
+            "project": {
+              "title": "Project"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "projectSteps": {
+            "q4": {
+              "title": "Clean Up Customer Names"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_4": {
+        "basic-string-functions": {
+          "sk1": {
+            "title": "What Are Basic String Functions?",
+            "bodyMarkdown": "SQL provides several built-in functions to help you clean and format text data. Common functions include:\n\n- **UPPER()**: Converts all letters in a string to uppercase.\n- **LOWER()**: Converts all letters in a string to lowercase.\n- **TRIM()**: Removes leading and trailing spaces from a string.\n\nThese functions are useful for making text comparisons consistent and for cleaning up messy data."
+          },
+          "sk2": {
+            "title": "Why Use String Functions?",
+            "bodyMarkdown": "Text data can be messy—users might enter names with extra spaces or inconsistent capitalization. Using string functions helps standardize your data, making it easier to search, compare, and analyze."
+          },
+          "sk3": {
+            "title": "Examples of String Functions",
+            "bodyMarkdown": "Suppose you have a table of customer names with inconsistent formatting:\n\n```sql\nSELECT name FROM customers_cleanup;\n```\n\nYou can use string functions to clean up the names:\n\n- `SELECT UPPER(name) FROM customers_cleanup;` — All names in uppercase.\n- `SELECT LOWER(name) FROM customers_cleanup;` — All names in lowercase.\n- `SELECT TRIM(name) FROM customers_cleanup;` — Names with no leading or trailing spaces."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "q1": {
+      "title": "Which SQL function removes spaces from the beginning and end of a string?",
+      "prompt": "Choose the correct function.",
+      "options": {
+        "a": "TRIM()",
+        "b": "LOWER()",
+        "c": "UPPER()",
+        "d": "REPLACE()"
+      }
+    },
+    "q2": {
+      "title": "Select all functions that change the case of text in SQL.",
+      "prompt": "Pick all that apply.",
+      "options": {
+        "a": "UPPER()",
+        "b": "LOWER()",
+        "c": "TRIM()",
+        "d": "CONCAT()"
+      }
+    },
+    "q3": {
+      "title": "Order the steps to clean up a name field.",
+      "prompt": "Drag to put the steps in the correct order.",
+      "tokens": {
+        "t1": "Remove leading/trailing spaces with TRIM()",
+        "t2": "Convert to lowercase with LOWER()",
+        "t3": "Compare cleaned names"
+      }
+    },
+    "q4": {
+      "title": "Clean Up Customer Names",
+      "prompt": "Write a SQL query to select all customer names from the `customers_cleanup` table, but with leading and trailing spaces removed and all letters in lowercase.",
+      "starterCode": "-- Write your query here\nSELECT ____ FROM customers_cleanup;"
+    }
+  }
+}

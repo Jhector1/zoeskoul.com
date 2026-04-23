@@ -1,27 +1,14 @@
-import fs from "node:fs/promises";
-import path from "node:path";
 
-async function exists(filePath: string) {
-    try {
-        await fs.access(filePath);
-        return true;
-    } catch {
-        return false;
-    }
-}
+import { validateDraftSubject } from "@zoeskoul/curriculum-compiler";
 
 export async function runValidateDraft(subjectSlug: string) {
-    const subjectManifestPath = path.join(
-        ".curriculum-drafts",
-        "subjects",
-        subjectSlug,
-        "subject.manifest.json",
+  const result = await validateDraftSubject(subjectSlug);
+
+  if (!result.ok) {
+    throw new Error(
+        `Draft validation failed for ${subjectSlug}:\n${result.issues
+            .map((x) => `- ${x}`)
+            .join("\n")}`,
     );
-
-    const ok = await exists(subjectManifestPath);
-    if (!ok) {
-        throw new Error(`Draft manifest not found for subject ${subjectSlug}`);
-    }
-
-    console.log(`Draft exists for ${subjectSlug}: ${subjectManifestPath}`);
+  }
 }

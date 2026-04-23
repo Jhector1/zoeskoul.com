@@ -1,0 +1,127 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_6": {
+        "cross-join": {
+          "label": "CROSS JOIN",
+          "summary": "Combine all rows from two tables.",
+          "cards": {
+            "sketch0": {
+              "title": "What is a CROSS JOIN?"
+            },
+            "sketch1": {
+              "title": "CROSS JOIN Syntax"
+            },
+            "sketch2": {
+              "title": "When to Use CROSS JOIN"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_6": {
+        "cross-join": {
+          "intro-cross-join": {
+            "title": "What is a CROSS JOIN?",
+            "bodyMarkdown": "A **CROSS JOIN** in SQL produces the Cartesian product of two tables. This means every row from the first table is combined with every row from the second table. The result set contains all possible combinations of rows.\n\nFor example, if `students` has 6 rows and `departments` has 5 rows, then `SELECT * FROM students CROSS JOIN departments;` will return 30 rows (6 x 5 = 30).\n\nCROSS JOINs are rarely used in practice unless you specifically want every possible pairing, such as generating all possible student-department pairs."
+          },
+          "syntax-cross-join": {
+            "title": "CROSS JOIN Syntax",
+            "bodyMarkdown": "The basic syntax for a CROSS JOIN is:\n\n```sql\nSELECT ...\nFROM table1\nCROSS JOIN table2;\n```\n\nYou can also use a comma `,` between table names, but using `CROSS JOIN` is clearer and more explicit."
+          },
+          "when-to-use-cross-join": {
+            "title": "When to Use CROSS JOIN",
+            "bodyMarkdown": "Use a CROSS JOIN when you need all possible combinations of rows from two tables. For example, you might want to pair every student with every department to assign advisors, or to generate a grid of all possible course-term combinations."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "cross-join-effect": {
+      "title": "Effect of CROSS JOIN",
+      "prompt": "If the `students` table has 6 rows and the `departments` table has 5 rows, how many rows will the result of `SELECT * FROM students CROSS JOIN departments;` contain?",
+      "hint": "Multiply the number of rows in each table.",
+      "help": {
+        "concept": "A CROSS JOIN returns every combination of rows from both tables.",
+        "hint_1": "Multiply the row counts: 6 students × 5 departments.",
+        "hint_2": "The result is the product of the row counts of both tables."
+      },
+      "options": {
+        "a": "6",
+        "b": "5",
+        "c": "11",
+        "d": "30",
+        "e": "1"
+      }
+    },
+    "cross-join-purpose": {
+      "title": "When to Use CROSS JOIN",
+      "prompt": "In which situations would a CROSS JOIN be appropriate? Select all that apply.",
+      "hint": "Think about cases where you need every possible pairing.",
+      "help": {
+        "concept": "CROSS JOIN is used to create all possible combinations of rows from two tables.",
+        "hint_1": "It's not used for filtering or matching, but for pairing everything with everything.",
+        "hint_2": "Look for options that mention 'all possible pairs' or 'all combinations'."
+      },
+      "options": {
+        "a": "Generating all possible pairs between two tables",
+        "b": "Filtering students by grade level",
+        "c": "Listing all students enrolled in a course",
+        "d": "Creating a grid of all possible course-term combinations",
+        "e": "Combining rows only when a condition matches"
+      }
+    },
+    "cross-join-syntax": {
+      "title": "CROSS JOIN Syntax",
+      "prompt": "Fill in the blank to complete the CROSS JOIN query:\n\n```sql\nSELECT * FROM students ____ departments;\n```",
+      "hint": "Which keyword creates a Cartesian product?",
+      "help": {
+        "concept": "The the missing term keyword is used to combine every row from both tables.",
+        "hint_1": "It's not INNER JOIN or JOIN; those require conditions.",
+        "hint_2": "The keyword is two words and explicitly means 'all combinations'."
+      },
+      "template": "SELECT * FROM students ____ departments;",
+      "choices": [
+        "JOIN",
+        "CROSS JOIN",
+        "INNER JOIN",
+        "ON",
+        "WHERE"
+      ]
+    },
+    "cross-join-order": {
+      "title": "Order the Steps: CROSS JOIN Query",
+      "prompt": "Arrange the steps to create a CROSS JOIN between `students` and `departments`.",
+      "hint": "Start with SELECT, then FROM, then the join, then end with a semicolon.",
+      "help": {
+        "concept": "A SQL query starts with SELECT, specifies the source table, then the join, and ends with a semicolon.",
+        "hint_1": "The join clause comes after FROM.",
+        "hint_2": "The semicolon always comes last."
+      },
+      "tokens": {
+        "t1": "SELECT *",
+        "t2": "FROM students",
+        "t3": "CROSS JOIN departments",
+        "t4": ";"
+      }
+    },
+    "cross-join-sql-task": {
+      "title": "Write a CROSS JOIN Query",
+      "prompt": "Write a SQL query to list every possible combination of student name and department name. The result should have two columns: `name` from `students` and `name` from `departments`.",
+      "hint": "Use CROSS JOIN between students and departments, and select the name columns from both.",
+      "help": {
+        "concept": "CROSS JOIN combines every row from both tables. You can select specific columns from each table.",
+        "hint_1": "Use CROSS JOIN and specify the columns as students.name and departments.name.",
+        "hint_2": "Remember to use the table names as prefixes for the columns in the SELECT clause."
+      },
+      "starterCode": "-- Write your query below"
+    }
+  }
+}

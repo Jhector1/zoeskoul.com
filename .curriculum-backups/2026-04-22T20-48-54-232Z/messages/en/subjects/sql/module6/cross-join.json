@@ -1,0 +1,109 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_6": {
+        "cross-join": {
+          "label": "CROSS JOIN",
+          "summary": "Combine all rows from two tables.",
+          "cards": {
+            "sketch0": {
+              "title": "What is a CROSS JOIN?"
+            },
+            "sketch1": {
+              "title": "CROSS JOIN Syntax"
+            },
+            "sketch2": {
+              "title": "Example: Students and Departments"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_6": {
+        "cross-join": {
+          "cross-join-intro": {
+            "title": "What is a CROSS JOIN?",
+            "bodyMarkdown": "A **CROSS JOIN** in SQL combines every row from the first table with every row from the second table. This produces a result set that contains all possible pairs of rows from the two tables. The size of the result is the number of rows in the first table multiplied by the number of rows in the second table.\n\nFor example, if the `students` table has 6 rows and the `departments` table has 5 rows, then `SELECT * FROM students CROSS JOIN departments;` will return 30 rows (6 x 5).\n\nCROSS JOINs are sometimes called a \"cartesian product\". They are useful when you want to see all possible combinations, but be careful: the result can get very large with big tables!"
+          },
+          "cross-join-syntax": {
+            "title": "CROSS JOIN Syntax",
+            "bodyMarkdown": "The basic syntax for a CROSS JOIN is:\n\n```sql\nSELECT ...\nFROM table1\nCROSS JOIN table2;\n```\n\nYou can also write:\n\n```sql\nSELECT ...\nFROM table1, table2;\n```\n\nBoth forms produce the same cartesian product. However, using `CROSS JOIN` makes your intention clearer."
+          },
+          "cross-join-example": {
+            "title": "Example: Students and Departments",
+            "bodyMarkdown": "Suppose you want to see every possible pairing of student and department. Try this query:\n\n```sql\nSELECT students.name, departments.name\nFROM students\nCROSS JOIN departments;\n```\n\nThis will list every student next to every department, even if the student is not enrolled in any course from that department. The result will have 30 rows (6 students x 5 departments)."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "cross-join-single-choice-meaning": {
+      "title": "What does a CROSS JOIN do?",
+      "prompt": "Which statement best describes the result of a CROSS JOIN between two tables?",
+      "hint": "Think about what happens when every row from one table is paired with every row from another.",
+      "help": {
+        "concept": "A CROSS JOIN creates a cartesian product, pairing every row from the first table with every row from the second table.",
+        "hint_1": "CROSS JOIN does not require any matching condition.",
+        "hint_2": "The result set contains all possible pairs of rows from both tables."
+      },
+      "options": {
+        "a": "It returns only the rows that match between the two tables.",
+        "b": "It returns all possible combinations of rows from both tables.",
+        "c": "It returns only the rows from the first table.",
+        "d": "It merges columns with the same name from both tables."
+      }
+    },
+    "cross-join-drag-reorder": {
+      "title": "Order the steps: What happens in a CROSS JOIN?",
+      "prompt": "Arrange the steps in the order they occur when a CROSS JOIN is performed between `students` and `departments`.",
+      "hint": "Start with the first row of the first table.",
+      "help": {
+        "concept": "A CROSS JOIN pairs each row from the first table with every row from the second table, repeating for all rows.",
+        "hint_1": "It begins with the first row of the first table and pairs it with all rows of the second.",
+        "hint_2": "This process repeats for each row in the first table until all combinations are made."
+      },
+      "tokens": {
+        "t1": "Take the first row from students.",
+        "t2": "Pair it with every row from departments.",
+        "t3": "Repeat for the next row in students.",
+        "t4": "Continue until all students are paired with all departments."
+      }
+    },
+    "cross-join-fill-blank-choice": {
+      "title": "CROSS JOIN Result Size",
+      "prompt": "If the `students` table has 6 rows and the `departments` table has 5 rows, how many rows will the result of `SELECT * FROM students CROSS JOIN departments;` have?",
+      "hint": "Multiply the number of rows in the first table by the number in the second.",
+      "help": {
+        "concept": "A CROSS JOIN produces a result set with a row count equal to the product of the row counts of the two tables.",
+        "hint_1": "Multiply the number of students by the number of departments.",
+        "hint_2": "6 students times 5 departments equals how many rows?"
+      },
+      "template": "The result will have [blank] rows.",
+      "choices": [
+        "6",
+        "5",
+        "11",
+        "30",
+        "1"
+      ]
+    },
+    "cross-join-code-input-basic": {
+      "title": "Write a CROSS JOIN Query",
+      "prompt": "Write a SQL query to list every possible pair of student name and department name using a CROSS JOIN.",
+      "hint": "Use CROSS JOIN to combine students and departments.",
+      "help": {
+        "concept": "CROSS JOIN combines every row from the first table with every row from the second table.",
+        "hint_1": "Select the columns you want from both tables and use CROSS JOIN in the FROM clause.",
+        "hint_2": "The FROM clause should include both tables with CROSS JOIN between them."
+      },
+      "starterCode": "-- List every student and every department pairing\nSELECT"
+    }
+  }
+}

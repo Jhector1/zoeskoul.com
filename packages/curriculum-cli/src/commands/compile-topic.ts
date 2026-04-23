@@ -1,33 +1,69 @@
-import { loadBlueprint } from "@zoeskoul/curriculum-compiler";
+import { loadBlueprint, compileTopic } from "@zoeskoul/curriculum-compiler";
 import { openAiProvider } from "@zoeskoul/curriculum-ai";
-import { generatePlan } from "@zoeskoul/curriculum-compiler";
-import { compileTopic } from "@zoeskoul/curriculum-compiler";
+import {
+    finishProgressBar,
+    renderProgressBar,
+} from "../utils/renderProgressBar.js";
+
+function makeProgressLabel(info: {
+    stage: string;
+    moduleSlug?: string;
+    topicId?: string;
+}) {
+    const location =
+        info.moduleSlug && info.topicId
+            ? `${info.moduleSlug} / ${info.topicId}`
+            : info.moduleSlug
+                ? info.moduleSlug
+                : info.topicId
+                    ? info.topicId
+                    : "";
+
+    return location ? `${info.stage} - ${location}` : info.stage;
+}
 
 export async function runCompileTopic(blueprintPath: string, topicId: string) {
     const blueprint = await loadBlueprint(blueprintPath);
-    const plan = await generatePlan({ blueprint, provider: openAiProvider });
 
-    for (const mod of plan.modules) {
-        for (const sec of mod.sections) {
-            for (const topic of sec.topics) {
-                if (topic.topicId !== topicId) continue;
+    let sawProgress = false;
+    let lastProgressTotal: number | undefined;
 
-                const out = await compileTopic({
-                    provider: openAiProvider,
-                    subjectSlug: blueprint.subjectSlug,
-                    profileId: blueprint.profileId,
-                    sourceLocale: blueprint.sourceLocale,
-                    targetLocales: blueprint.targetLocales,
-                    moduleSlug: mod.moduleSlug,
-                    sectionSlug: sec.sectionSlug,
-                    topic,
+    console.log(`Compiling topic ${topicId} for subject ${blueprint.subjectSlug}...`);
+
+    try {
+        const out = await compileTopic({
+            blueprint,
+            provider: openAiProvider,
+            topicId,
+            onProgress: (info) => {
+                sawProgress = true;
+                lastProgressTotal = info.total;
+
+                renderProgressBar({
+                    current: info.current,
+                    total: info.total,
+                    label: makeProgressLabel(info),
                 });
+            },
+        });
 
-                console.log(JSON.stringify(out, null, 2));
-                return;
-            }
+        if (sawProgress) {
+            const finalTotal = lastProgressTotal ?? 1;
+
+            renderProgressBar({
+                current: finalTotal,
+                total: finalTotal,
+                label: `completed - ${out.subjectSlug} / ${out.topicId}`,
+            });
+            process.stdout.write("\n");
+            console.log(`✔ Compiled topic ${out.topicId} for subject ${out.subjectSlug}`);
+        } else {
+            console.log(`Compiled topic ${out.topicId} for subject ${out.subjectSlug}`);
         }
+    } catch (error) {
+        if (sawProgress) {
+            finishProgressBar("✖ Compile failed");
+        }
+        throw error;
     }
-
-    throw new Error(`Topic not found in plan: ${topicId}`);
 }

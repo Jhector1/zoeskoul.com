@@ -1,0 +1,95 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_7": {
+        "mini-project": {
+          "label": "Mini-Project: End-to-End Query",
+          "summary": "Combine all skills in a small project to answer business questions.",
+          "cards": {
+            "sketch0": {
+              "title": "Mini-Project Overview"
+            },
+            "project": {
+              "title": "Mini-Project: End-to-End Query"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "projectSteps": {
+            "step1-select-products": {
+              "title": "Step 1: Select Products Over a Price Threshold"
+            },
+            "step2-sort-products": {
+              "title": "Step 2: Sort Products by Price Descending"
+            },
+            "step3-count-products-category": {
+              "title": "Step 3: Count Products by Category"
+            },
+            "step4-join-products-inventory": {
+              "title": "Step 4: Join Products with Inventory"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_7": {
+        "mini-project": {
+          "intro-mini-project": {
+            "title": "Mini-Project Overview",
+            "bodyMarkdown": "In this mini-project, you'll use your SQL skills to answer a real-world business question. You'll work step-by-step, integrating concepts like filtering, sorting, aggregation, and joining tables. This hands-on challenge will help you see how SQL is used to solve practical problems."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "step1-select-products": {
+      "title": "Step 1: Select Products Over a Price Threshold",
+      "prompt": "Write a SQL query to select all columns from the `products` table in the `products_catalog` dataset where the price is greater than 50.",
+      "hint": "Filter products by price using WHERE.",
+      "help": {
+        "concept": "The WHERE clause is used to filter rows based on a condition. Use it to select only products with a price greater than 50.",
+        "hint_1": "Remember to use WHERE with the price column and the greater than operator.",
+        "hint_2": "Your query should select all columns from products where price is above 50."
+      },
+      "starterCode": "-- Select products with price > 50\nSELECT "
+    },
+    "step2-sort-products": {
+      "title": "Step 2: Sort Products by Price Descending",
+      "prompt": "Write a SQL query to select all columns from the `products` table and sort the results by price in descending order.",
+      "hint": "Use ORDER BY with DESC to sort.",
+      "help": {
+        "concept": "ORDER BY sorts the result set. DESC sorts in descending order.",
+        "hint_1": "Add ORDER BY price DESC to your query.",
+        "hint_2": "Make sure you are selecting all columns and sorting by price from highest to lowest."
+      },
+      "starterCode": "-- Sort products by price descending\nSELECT "
+    },
+    "step3-count-products-category": {
+      "title": "Step 3: Count Products by Category",
+      "prompt": "Write a SQL query to count the number of products in each category from the `products` table.",
+      "hint": "Use GROUP BY with COUNT.",
+      "help": {
+        "concept": "GROUP BY groups rows by a column, and COUNT counts the number of rows in each group.",
+        "hint_1": "Select the category and use COUNT(*), then group by category.",
+        "hint_2": "Your query should show each category with the number of products in that category."
+      },
+      "starterCode": "-- Count products per category\nSELECT "
+    },
+    "step4-join-products-inventory": {
+      "title": "Step 4: Join Products with Inventory",
+      "prompt": "Write a SQL query to join the `products` table with the `inventory` table (both in the `products_catalog` dataset) on the product id, and select the product name and inventory quantity.",
+      "hint": "Use JOIN on product id columns.",
+      "help": {
+        "concept": "A JOIN combines rows from two tables based on a related column. Use ON to specify the join condition.",
+        "hint_1": "Join products and inventory using the product id columns.",
+        "hint_2": "Select the product name from products and quantity from inventory after joining."
+      },
+      "starterCode": "-- Join products and inventory\nSELECT "
+    }
+  }
+}

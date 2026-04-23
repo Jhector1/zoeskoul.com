@@ -1,0 +1,116 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_2": {
+        "logical-operators": {
+          "label": "Logical Operators (AND, OR, NOT)",
+          "summary": "Combine multiple conditions with logical operators.",
+          "cards": {
+            "sketch0": {
+              "title": "Combining Conditions with Logical Operators"
+            },
+            "sketch1": {
+              "title": "Examples of Logical Operators"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_2": {
+        "logical-operators": {
+          "sketch-logic-1": {
+            "title": "Combining Conditions with Logical Operators",
+            "bodyMarkdown": "In SQL, logical operators like **AND**, **OR**, and **NOT** allow you to combine multiple conditions in a `WHERE` clause. This helps you filter data more precisely. For example, you can select rows where two conditions are both true (using AND), where at least one condition is true (using OR), or where a condition is not true (using NOT)."
+          },
+          "sketch-logic-2": {
+            "title": "Examples of Logical Operators",
+            "bodyMarkdown": "Suppose you have a table of products. You might want to find products that are both in stock **AND** cost less than $20. Or, you might want to find products that are out of stock **OR** discontinued. You can also use **NOT** to exclude certain results, such as products that are **NOT** on sale."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "logic-single-choice-1": {
+      "title": "Choosing the Correct Logical Operator",
+      "prompt": "Which logical operator would you use to select rows where both conditions must be true?",
+      "hint": "Think about combining two requirements.",
+      "help": {
+        "concept": "The AND operator is used when you want both conditions to be true for a row to be selected.",
+        "hint_1": "You want to filter for rows that meet two requirements at the same time.",
+        "hint_2": "This operator only returns rows where all specified conditions are true."
+      },
+      "options": {
+        "a": "AND",
+        "b": "OR",
+        "c": "NOT",
+        "d": "BETWEEN"
+      }
+    },
+    "logic-multi-choice-1": {
+      "title": "Identifying Logical Operators",
+      "prompt": "Which of the following are logical operators you can use in a WHERE clause? (Select all that apply.)",
+      "hint": "Look for operators that combine or negate conditions.",
+      "help": {
+        "concept": "Logical operators in SQL include AND, OR, and NOT. IN is used for matching values in a list, not for combining conditions.",
+        "hint_1": "Three of these are used to combine or negate conditions.",
+        "hint_2": "IN is not a logical operator, but AND, OR, and NOT are."
+      },
+      "options": {
+        "a": "AND",
+        "b": "OR",
+        "c": "NOT",
+        "d": "IN"
+      }
+    },
+    "logic-drag-reorder-1": {
+      "title": "Order of Evaluation",
+      "prompt": "Arrange the logical operators in the order they are evaluated in SQL (from highest to lowest precedence).",
+      "hint": "Which operator is evaluated first?",
+      "help": {
+        "concept": "SQL evaluates NOT before AND, and AND before OR. This affects how combined conditions are processed.",
+        "hint_1": "NOT has the highest precedence, then AND, then OR.",
+        "hint_2": "Start with NOT, then AND, then OR."
+      },
+      "tokens": {
+        "t1": "NOT",
+        "t2": "AND",
+        "t3": "OR"
+      }
+    },
+    "logic-fill-blank-1": {
+      "title": "Filling in the Logical Operator",
+      "prompt": "Fill in the blank: To select products that are either out of stock ___ discontinued, use the ___ operator.",
+      "hint": "Which operator means 'either this or that'?",
+      "help": {
+        "concept": "The OR operator is used when you want to select rows that meet at least one of multiple conditions.",
+        "hint_1": "You want to match either of two conditions.",
+        "hint_2": "OR is used to combine conditions where either can be true."
+      },
+      "template": "To select products that are either out of stock ___ discontinued, use the ___ operator.",
+      "choices": [
+        "AND",
+        "OR",
+        "NOT",
+        "IN"
+      ]
+    },
+    "logic-code-input-1": {
+      "title": "Filtering with AND and OR",
+      "prompt": "Write a SQL query to select all products from the `products_catalog` table where the price is less than 20 **AND** the category is 'Books'.",
+      "hint": "Use WHERE with both conditions joined by AND.",
+      "help": {
+        "concept": "Combine multiple conditions in the WHERE clause using AND to require both to be true.",
+        "hint_1": "Write a WHERE clause with price < 20 and category = 'Books', joined by AND.",
+        "hint_2": "Both conditions must be true for a row to be selected."
+      },
+      "starterCode": "-- Write your SQL query here\n"
+    }
+  }
+}

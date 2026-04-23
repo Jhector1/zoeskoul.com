@@ -1,0 +1,121 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_7": {
+        "querying-sample-database": {
+          "label": "Querying a Sample Database",
+          "summary": "Practice querying a provided sample database.",
+          "cards": {
+            "sketch0": {
+              "title": "The inventory_items Table"
+            },
+            "sketch1": {
+              "title": "Example: Basic SELECT Query"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_7": {
+        "querying-sample-database": {
+          "intro-inventory-ops": {
+            "title": "The inventory_items Table",
+            "bodyMarkdown": "In this topic, you'll practice SQL queries using the `inventory_items` table from the `inventory_ops` dataset. This table tracks items in an inventory, including their name, category, price, status, and other details.\n\n**Table columns:**\n- `id` (INTEGER): Unique identifier for each item\n- `name` (TEXT): Name of the item\n- `category` (TEXT): Category of the item (e.g., Accessories, Kitchen, Decor)\n- `price` (REAL): Price of the item\n- `status` (TEXT): Status of the item (e.g., active, draft, inactive)\n- `is_test` (INTEGER): 1 if the item is a test/sample, 0 otherwise\n- `notes` (TEXT): Optional notes\n- `last_updated` (TEXT): Date the item was last updated\n\nSample rows include items like 'Sticker Pack', 'Test Mug', and 'Canvas Print'."
+          },
+          "basic-select-example": {
+            "title": "Example: Basic SELECT Query",
+            "bodyMarkdown": "To get all columns for every item in the inventory, use:\n\n```sql\nSELECT * FROM inventory_items;\n```\n\nTo get only the names and prices of all items:\n\n```sql\nSELECT name, price FROM inventory_items;\n```\n\nYou can filter results using the `WHERE` clause. For example, to find all items in the 'Kitchen' category:\n\n```sql\nSELECT * FROM inventory_items WHERE category = 'Kitchen';\n```"
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "single-choice-category": {
+      "title": "Identify the Correct Category",
+      "prompt": "Which category does the item 'Canvas Print' belong to in the inventory_items table?",
+      "hint": "Look at the sample data for 'Canvas Print'.",
+      "help": {
+        "concept": "Each item in the table has a category describing its type, such as 'Accessories', 'Kitchen', or 'Decor'.",
+        "hint_1": "Check the row where the name is 'Canvas Print' and see what is listed under 'category'.",
+        "hint_2": "The 'Canvas Print' is not a kitchen or accessory item."
+      },
+      "options": {
+        "a": "Accessories",
+        "b": "Kitchen",
+        "c": "Decor",
+        "d": "Stationery"
+      }
+    },
+    "multi-choice-status": {
+      "title": "Select All Active Items",
+      "prompt": "Which of the following items have a status of 'active' in the inventory_items table? (Select all that apply)",
+      "hint": "Check the 'status' column for each item.",
+      "help": {
+        "concept": "The 'status' column indicates whether an item is currently active, in draft, or inactive.",
+        "hint_1": "Look for items where the 'status' value is 'active'.",
+        "hint_2": "There are three items with 'active' status."
+      },
+      "options": {
+        "a": "Sticker Pack",
+        "b": "Test Mug",
+        "c": "Canvas Print",
+        "d": "Sample Poster",
+        "e": "Water Bottle",
+        "f": "Trial Tote"
+      }
+    },
+    "drag-reorder-price": {
+      "title": "Order Items by Price (Lowest to Highest)",
+      "prompt": "Arrange these items from lowest to highest price based on the inventory_items table.",
+      "hint": "Compare the price values for each item.",
+      "help": {
+        "concept": "Ordering by price means arranging items from the smallest to the largest value in the 'price' column.",
+        "hint_1": "Find the price for each item and sort them numerically.",
+        "hint_2": "The item with price 4.99 comes first, and the one with 45.00 comes last."
+      },
+      "tokens": {
+        "t1": "Sticker Pack",
+        "t2": "Trial Tote",
+        "t3": "Test Mug",
+        "t4": "Sample Poster",
+        "t5": "Water Bottle",
+        "t6": "Canvas Print"
+      }
+    },
+    "fill-blank-choice-category": {
+      "title": "Fill in the Category",
+      "prompt": "Fill in the blank: The item 'Water Bottle' belongs to the ______ category.",
+      "hint": "Check the 'category' column for 'Water Bottle'.",
+      "help": {
+        "concept": "Each item is assigned a category in the table, such as 'the missing term' or 'Accessories'.",
+        "hint_1": "Find the row for 'Water Bottle' and see what is listed under 'category'.",
+        "hint_2": "It's the same category as 'Test Mug'."
+      },
+      "template": "The item 'Water Bottle' belongs to the [blank] category.",
+      "choices": [
+        "Accessories",
+        "Kitchen",
+        "Decor",
+        "Stationery"
+      ]
+    },
+    "code-input-select-drafts": {
+      "title": "Write a Query for Draft Items",
+      "prompt": "Write an SQL query to select the name and price of all items in the inventory_items table that have a status of 'draft'.",
+      "hint": "Use SELECT with a WHERE clause to filter by status.",
+      "help": {
+        "concept": "To filter rows in SQL, use the WHERE clause with the desired column and value.",
+        "hint_1": "Select the columns 'name' and 'price', and filter where 'status' is 'draft'.",
+        "hint_2": "Your WHERE clause should check for status equal to 'draft'."
+      },
+      "starterCode": "-- Write your SQL query below"
+    }
+  }
+}

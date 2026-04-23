@@ -1,0 +1,117 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_0": {
+        "sql-history-purpose": {
+          "label": "History and Purpose of SQL",
+          "summary": "Learn the origins and main uses of SQL in data management.",
+          "cards": {
+            "sketch0": {
+              "title": "The Origins of SQL"
+            },
+            "sketch1": {
+              "title": "Main Purposes of SQL"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_0": {
+        "sql-history-purpose": {
+          "sketch-history-sql": {
+            "title": "The Origins of SQL",
+            "bodyMarkdown": "SQL, or Structured Query Language, was developed in the 1970s at IBM by Donald D. Chamberlin and Raymond F. Boyce. It was designed to manage and query data stored in relational databases. The first version was called SEQUEL, later renamed SQL. Over time, SQL became the standard language for relational database management systems (RDBMS), and was adopted by ANSI and ISO as a standard in the 1980s."
+          },
+          "sketch-purpose-sql": {
+            "title": "Main Purposes of SQL",
+            "bodyMarkdown": "SQL is used to interact with relational databases. Its main purposes include:\n\n- **Querying data**: Retrieving specific information from large datasets using SELECT statements.\n- **Inserting data**: Adding new records to tables.\n- **Updating data**: Modifying existing records.\n- **Deleting data**: Removing records from tables.\n- **Defining structure**: Creating or altering tables and schemas.\n\nFor example, to find all students from Chicago in the `students` table:\n\n```sql\nSELECT * FROM students WHERE city = 'Chicago';\n```"
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "quiz-sql-origin": {
+      "title": "Who developed SQL?",
+      "prompt": "Who were the original developers of SQL?",
+      "hint": "Think about IBM's contributions to database technology.",
+      "help": {
+        "concept": "SQL was created in the 1970s as the correct answer language for managing relational databases.",
+        "hint_1": "The original developers worked at IBM.",
+        "hint_2": "Their names are Donald D. Chamberlin and Raymond F. Boyce."
+      },
+      "options": {
+        "a": "Donald D. Chamberlin and Raymond F. Boyce at IBM",
+        "b": "Bill Gates at Microsoft",
+        "c": "Larry Page and Sergey Brin at Google",
+        "d": "Tim Berners-Lee at CERN"
+      }
+    },
+    "quiz-sql-purpose": {
+      "title": "What can SQL do?",
+      "prompt": "Which of the following are main purposes of SQL? Select all that apply.",
+      "hint": "Focus on tasks related to databases.",
+      "help": {
+        "concept": "SQL is designed for interacting with and managing relational databases.",
+        "hint_1": "SQL can retrieve, modify, and structure data, but not send emails.",
+        "hint_2": "Querying, modifying structure, and changing records are all SQL tasks."
+      },
+      "options": {
+        "a": "Query data from a database",
+        "b": "Create or modify database structure",
+        "c": "Send emails",
+        "d": "Insert, update, or delete records"
+      }
+    },
+    "quiz-sql-standardization": {
+      "title": "When did SQL become a standard?",
+      "prompt": "In which decade did SQL become an ANSI and ISO standard?",
+      "hint": "It was after SQL was first created in the 1970s.",
+      "help": {
+        "concept": "SQL was standardized to ensure consistency across database systems.",
+        "hint_1": "The standardization happened after initial development.",
+        "hint_2": "ANSI and ISO adopted SQL as a standard in the 1980s."
+      },
+      "options": {
+        "a": "1970s",
+        "b": "1980s",
+        "c": "1990s",
+        "d": "2000s"
+      }
+    },
+    "quiz-sql-fill-blank": {
+      "title": "Fill in the blank: SQL stands for...",
+      "prompt": "Fill in the blank: SQL stands for ____ Query Language.",
+      "hint": "The 'S' in SQL refers to how data is organized.",
+      "help": {
+        "concept": "SQL is designed to work with the missing term data in relational databases.",
+        "hint_1": "Think about how data is arranged in tables.",
+        "hint_2": "The correct word describes the organization of data."
+      },
+      "template": "SQL stands for ____ Query Language.",
+      "choices": [
+        "Structured",
+        "Sequential",
+        "Standard",
+        "System"
+      ]
+    },
+    "quiz-sql-example-query": {
+      "title": "Write a SQL query: Find students from Chicago",
+      "prompt": "Write a SQL query to select all columns for students who live in Chicago from the `students` table.",
+      "hint": "Use SELECT and a WHERE clause to filter by city.",
+      "help": {
+        "concept": "To retrieve specific rows from a table, use SELECT with a WHERE condition.",
+        "hint_1": "The WHERE clause should check if city equals 'Chicago'.",
+        "hint_2": "Select all columns and filter for city = 'Chicago'."
+      },
+      "starterCode": "-- Write your SQL query below"
+    }
+  }
+}

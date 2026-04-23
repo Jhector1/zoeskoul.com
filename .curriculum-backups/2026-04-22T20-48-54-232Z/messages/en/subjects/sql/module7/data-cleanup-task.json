@@ -1,0 +1,134 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_7": {
+        "data-cleanup-task": {
+          "label": "Data Cleanup Task",
+          "summary": "Use string functions and filtering to clean up data.",
+          "cards": {
+            "sketch0": {
+              "title": "Why Data Cleanup Matters"
+            },
+            "sketch1": {
+              "title": "inventory_items Table Overview"
+            },
+            "sketch2": {
+              "title": "Using String Functions for Cleanup"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_7": {
+        "data-cleanup-task": {
+          "sketch-intro-cleanup": {
+            "title": "Why Data Cleanup Matters",
+            "bodyMarkdown": "In real-world databases, data often needs to be cleaned or standardized before analysis. For example, you might want to remove test items, fix inconsistent text, or filter out inactive records. SQL provides powerful tools for these tasks, such as filtering with `WHERE`, updating values, and using string functions like `UPPER`, `LOWER`, and `TRIM`."
+          },
+          "sketch-inventory-ops-schema": {
+            "title": "inventory_items Table Overview",
+            "bodyMarkdown": "The `inventory_items` table contains product information:\n\n- **id**: Unique identifier\n- **name**: Product name\n- **category**: Product category\n- **price**: Price in dollars\n- **status**: Product status (e.g., 'active', 'draft', 'inactive')\n- **is_test**: 1 if the item is a test/sample, 0 otherwise\n- **notes**: Optional notes\n- **last_updated**: Last update date\n\nExample row:\n\n| id | name          | category    | price | status   | is_test | notes             | last_updated |\n|----|--------------|-------------|-------|----------|---------|-------------------|--------------|\n| 2  | Test Mug     | Kitchen     | 7.50  | draft    | 1       | Internal sample   | 2026-02-03   |"
+          },
+          "sketch-string-functions": {
+            "title": "Using String Functions for Cleanup",
+            "bodyMarkdown": "SQL string functions help standardize and clean text data. For example:\n\n- `UPPER(name)`: Converts the product name to uppercase.\n- `TRIM(notes)`: Removes leading/trailing spaces from notes.\n- `REPLACE(name, 'Test ', '')`: Removes the word 'Test ' from product names.\n\nYou can use these in `SELECT` statements to view cleaned data or in `UPDATE` statements to modify data."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "quiz-filter-test-items": {
+      "title": "Filtering Out Test Items",
+      "prompt": "Which SQL clause would you use to exclude all test items (where is_test = 1) from your results in the inventory_items table?",
+      "hint": "Think about which value means 'not a test item'.",
+      "help": {
+        "concept": "The WHERE clause filters rows based on a condition. In this table, is_test = 1 means the item is a test/sample.",
+        "hint_1": "You want only real items, not test items. Which value of is_test means 'real'?",
+        "hint_2": "Rows with is_test = 0 are not test items. Use WHERE to filter for these."
+      },
+      "options": {
+        "a": "WHERE is_test = 0",
+        "b": "WHERE is_test = 1",
+        "c": "ORDER BY is_test",
+        "d": "GROUP BY is_test"
+      }
+    },
+    "quiz-uppercase-names": {
+      "title": "Standardizing Product Names",
+      "prompt": "If you want to display all product names in uppercase in your results, which SQL function should you use?",
+      "hint": "Which function changes text to all capital letters?",
+      "help": {
+        "concept": "SQL provides string functions to manipulate text, such as changing case or removing spaces.",
+        "hint_1": "Look for the function that makes all letters uppercase.",
+        "hint_2": "UPPER turns all characters in a string to uppercase."
+      },
+      "options": {
+        "a": "LOWER",
+        "b": "UPPER",
+        "c": "TRIM",
+        "d": "REPLACE"
+      }
+    },
+    "quiz-remove-draft-inactive": {
+      "title": "Filtering Out Draft and Inactive Items",
+      "prompt": "Which conditions would you use in a WHERE clause to exclude both 'draft' and 'inactive' items from your results?",
+      "hint": "You want only items that are not 'draft' or 'inactive'.",
+      "help": {
+        "concept": "To exclude multiple values, you can use NOT IN or combine conditions with AND and !=.",
+        "hint_1": "Think about using NOT IN or combining two != conditions.",
+        "hint_2": "status != 'draft' AND status != 'inactive' and status NOT IN ('draft', 'inactive') both work."
+      },
+      "options": {
+        "a": "status = 'active'",
+        "b": "status != 'draft' AND status != 'inactive'",
+        "c": "status IN ('draft', 'inactive')",
+        "d": "status NOT IN ('draft', 'inactive')"
+      }
+    },
+    "quiz-trim-notes": {
+      "title": "Cleaning Up Notes",
+      "prompt": "Which SQL function removes extra spaces from the beginning and end of the notes column?",
+      "hint": "Which function is for removing whitespace?",
+      "help": {
+        "concept": "TRIM removes leading and trailing spaces from a string.",
+        "hint_1": "Look for the function that deals with spaces at the start or end.",
+        "hint_2": "TRIM is used to clean up unwanted spaces in text fields."
+      },
+      "options": {
+        "a": "TRIM",
+        "b": "UPPER",
+        "c": "REPLACE",
+        "d": "CONCAT"
+      }
+    },
+    "quiz-code-clean-active-items": {
+      "title": "Select Only Clean, Active Items",
+      "prompt": "Write a SQL query to select the id, name, and category of all items that are active and not test items from the inventory_items table.",
+      "hint": "Use WHERE to filter for status and is_test.",
+      "help": {
+        "concept": "Combine multiple conditions in the WHERE clause using AND to filter for both status and is_test.",
+        "hint_1": "Filter for status = 'active' and is_test = 0 in your WHERE clause.",
+        "hint_2": "Select the columns id, name, category, and filter for active, non-test items."
+      },
+      "starterCode": "-- Write your SQL query here\n"
+    },
+    "quiz-code-uppercase-names": {
+      "title": "Display Product Names in Uppercase",
+      "prompt": "Write a SQL query to select the id and the product name in uppercase (as 'name_upper') for all items in the inventory_items table.",
+      "hint": "Use UPPER on the name column and give it an alias.",
+      "help": {
+        "concept": "You can use SQL functions in SELECT and assign aliases with AS.",
+        "hint_1": "Apply UPPER to the name column and use AS to rename the output column.",
+        "hint_2": "Your SELECT should include id and UPPER(name) AS name_upper."
+      },
+      "starterCode": "-- Write your SQL query here\n"
+    }
+  }
+}

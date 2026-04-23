@@ -1,0 +1,153 @@
+{
+  "topicId": "order-by",
+  "subjectSlug": "sql",
+  "moduleSlug": "sql_module_3",
+  "sectionSlug": "section_3_1",
+  "prefix": "sql3",
+  "minutes": 20,
+  "topic": {
+    "labelKey": "topics.sql.sql_module_3.order-by.label",
+    "summaryKey": "topics.sql.sql_module_3.order-by.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_3.order-by.cards.sketch0.title",
+      "sketchId": "sketch-what-is-order-by",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_3.order-by.cards.sketch1.title",
+      "sketchId": "sketch-order-by-example",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_3.order-by.cards.sketch2.title",
+      "sketchId": "sketch-why-use-order-by",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql.sql_module_3.order-by.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch-what-is-order-by",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_3.order-by.sketch-what-is-order-by.title",
+      "bodyKey": "sketches.sql.sql_module_3.order-by.sketch-what-is-order-by.bodyMarkdown"
+    },
+    {
+      "id": "sketch-order-by-example",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_3.order-by.sketch-order-by-example.title",
+      "bodyKey": "sketches.sql.sql_module_3.order-by.sketch-order-by-example.bodyMarkdown"
+    },
+    {
+      "id": "sketch-why-use-order-by",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_3.order-by.sketch-why-use-order-by.title",
+      "bodyKey": "sketches.sql.sql_module_3.order-by.sketch-why-use-order-by.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "quiz-basic-order-by-single-choice",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.quiz-basic-order-by-single-choice",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "quiz-order-by-multi-column-multi-choice",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.quiz-order-by-multi-column-multi-choice",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "quiz-order-by-drag-reorder",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.quiz-order-by-drag-reorder",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "quiz-fill-blank-choice-order-by-direction",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.quiz-fill-blank-choice-order-by-direction",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "DESC"
+      }
+    },
+    {
+      "id": "quiz-code-input-order-by-date",
+      "kind": "code_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.quiz-code-input-order-by-date",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "SELECT * FROM products ORDER BY created_at DESC;"
+      }
+    }
+  ]
+}

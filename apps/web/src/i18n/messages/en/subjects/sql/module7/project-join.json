@@ -1,0 +1,99 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_7": {
+        "project-join": {
+          "label": "Combine Data from Multiple Tables",
+          "summary": "Use JOINs to answer questions across tables.",
+          "cards": {
+            "sketch0": {
+              "title": "Why Use JOINs?"
+            },
+            "sketch1": {
+              "title": "Types of JOINs"
+            },
+            "sketch2": {
+              "title": "JOIN Syntax"
+            },
+            "project": {
+              "title": "Project"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "projectSteps": {
+            "q4-code-join-products": {
+              "title": "List all products and their supplier names (if available) from the products_catalog dataset."
+            },
+            "q5-code-join-customers": {
+              "title": "Find all customers and the names of products they have ordered (if any) from the customers_cleanup dataset."
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_7": {
+        "project-join": {
+          "intro-joins": {
+            "title": "Why Use JOINs?",
+            "bodyMarkdown": "In real-world databases, information is often split across multiple tables. JOINs let you combine related data, making it possible to answer complex questions that a single table can't handle. For example, you might want to see which customers bought which products, or which students are enrolled in which courses."
+          },
+          "types-of-joins": {
+            "title": "Types of JOINs",
+            "bodyMarkdown": "The most common JOINs are:\n- **INNER JOIN**: Returns rows where there is a match in both tables.\n- **LEFT JOIN**: Returns all rows from the left table, and matched rows from the right table (or NULL if there is no match).\n- **RIGHT JOIN**: Returns all rows from the right table, and matched rows from the left table (or NULL if there is no match). (Note: SQLite does not support RIGHT JOIN directly.)\n- **FULL OUTER JOIN**: Returns all rows when there is a match in one of the tables. (Not supported in SQLite.)"
+          },
+          "join-syntax": {
+            "title": "JOIN Syntax",
+            "bodyMarkdown": "The basic syntax for an INNER JOIN looks like this:\n\n```sql\nSELECT columns\nFROM table1\nINNER JOIN table2\nON table1.column = table2.column;\n```\n\nYou can also use LEFT JOIN and other types as needed."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "q1-join-type": {
+      "title": "Which JOIN returns only the rows where there is a match in both tables?",
+      "prompt": "Which JOIN returns only the rows where there is a match in both tables?",
+      "options": {
+        "a": "INNER JOIN",
+        "b": "LEFT JOIN",
+        "c": "RIGHT JOIN",
+        "d": "FULL OUTER JOIN"
+      }
+    },
+    "q2-join-syntax": {
+      "title": "What keyword is used to specify the condition for joining two tables?",
+      "prompt": "What keyword is used to specify the condition for joining two tables?",
+      "options": {
+        "a": "WHERE",
+        "b": "ON",
+        "c": "USING",
+        "d": "WITH"
+      }
+    },
+    "q3-join-multi": {
+      "title": "Select all statements that are true about LEFT JOIN:",
+      "prompt": "Select all statements that are true about LEFT JOIN:",
+      "options": {
+        "a": "Returns all rows from the left table",
+        "b": "Returns only matching rows from both tables",
+        "c": "Returns NULLs for non-matching rows from the right table",
+        "d": "Ignores rows from the left table with no match"
+      }
+    },
+    "q4-code-join-products": {
+      "title": "List all products and their supplier names (if available) from the products_catalog dataset.",
+      "prompt": "Write a SQL query that returns the product name and the supplier name for each product. Show all products, even if they don't have a supplier.",
+      "starterCode": "-- Write your SQL query here\n"
+    },
+    "q5-code-join-customers": {
+      "title": "Find all customers and the names of products they have ordered (if any) from the customers_cleanup dataset.",
+      "prompt": "Write a SQL query to list each customer's name and the product name for each order. Include customers even if they haven't ordered anything.",
+      "starterCode": "-- Write your SQL query here\n"
+    }
+  }
+}

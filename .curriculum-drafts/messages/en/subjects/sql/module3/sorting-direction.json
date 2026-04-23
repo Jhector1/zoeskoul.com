@@ -1,0 +1,112 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_3": {
+        "sorting-direction": {
+          "label": "Sorting Direction (ASC, DESC)",
+          "summary": "Control sort order with ASC and DESC keywords.",
+          "cards": {
+            "sketch0": {
+              "title": "Sorting with ASC and DESC"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_3": {
+        "sorting-direction": {
+          "sk1": {
+            "title": "Sorting with ASC and DESC",
+            "bodyMarkdown": "In SQL, you can control the order of your query results using the `ORDER BY` clause. By default, results are sorted in ascending order (smallest to largest or A-Z). To specify the direction, use `ASC` for ascending or `DESC` for descending order.\n\n**Example:**\n\nTo list all products by price from lowest to highest:\n```sql\nSELECT name, price FROM products ORDER BY price ASC;\n```\n\nTo list products by price from highest to lowest:\n```sql\nSELECT name, price FROM products ORDER BY price DESC;\n```\n\nYou can also sort by multiple columns, specifying the direction for each:\n```sql\nSELECT name, category, price FROM products ORDER BY category ASC, price DESC;\n```\nThis sorts first by category (A-Z), then by price within each category (highest to lowest)."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "q1": {
+      "title": "Default Sorting Direction",
+      "prompt": "What is the default sorting direction when you use ORDER BY in SQL without specifying ASC or DESC?",
+      "hint": "Think about what happens if you just use ORDER BY column.",
+      "help": {
+        "concept": "ORDER BY sorts results in ascending order by default unless DESC is specified.",
+        "hint_1": "Ascending order is the default in most SQL databases.",
+        "hint_2": "If you don't specify, results go from smallest to largest or A-Z."
+      },
+      "options": {
+        "a": "Ascending (smallest to largest, A-Z)",
+        "b": "Descending (largest to smallest, Z-A)",
+        "c": "Random order",
+        "d": "No sorting is applied"
+      }
+    },
+    "q2": {
+      "title": "Sorting Directions in Practice",
+      "prompt": "Which of the following queries will sort products from the highest to lowest price?",
+      "hint": "Look for queries that use DESC with the price column.",
+      "help": {
+        "concept": "DESC sorts values in descending order, from highest to lowest.",
+        "hint_1": "Only queries with DESC on price will sort from highest to lowest.",
+        "hint_2": "ASC means ascending, so avoid those for highest-to-lowest sorting."
+      },
+      "options": {
+        "a": "SELECT * FROM products ORDER BY price DESC;",
+        "b": "SELECT * FROM products ORDER BY price ASC;",
+        "c": "SELECT * FROM products ORDER BY price;",
+        "d": "SELECT * FROM products ORDER BY price DESC, name ASC;"
+      }
+    },
+    "q3": {
+      "title": "Order the Steps: Sorting by Multiple Columns",
+      "prompt": "Arrange the SQL keywords to correctly sort products by category (A-Z), then by price (highest to lowest).",
+      "hint": "Start with the correct answer, then list columns and directions.",
+      "help": {
+        "concept": "When sorting by multiple columns, specify each column and its direction, separated by commas.",
+        "hint_1": "First comes the column for primary sorting, then its direction.",
+        "hint_2": "Use a comma to separate columns and specify the correct answer for the correct answer."
+      },
+      "tokens": {
+        "t1": "ORDER BY",
+        "t2": "category",
+        "t3": "ASC",
+        "t4": ",",
+        "t5": "price",
+        "t6": "DESC"
+      }
+    },
+    "q4": {
+      "title": "Fill in the Blank: Sorting Syntax",
+      "prompt": "Complete the SQL statement to sort products by stock in descending order:\n\nSELECT name, stock FROM products ORDER BY stock ____;",
+      "hint": "Which keyword means 'from highest to lowest'?",
+      "help": {
+        "concept": "the missing term is used to sort values in descending order.",
+        "hint_1": "ASC is for ascending, the missing term is for descending.",
+        "hint_2": "You want the products with the most stock first."
+      },
+      "template": "SELECT name, stock FROM products ORDER BY stock ____;",
+      "choices": [
+        "ASC",
+        "DESC",
+        "GROUP",
+        "LIMIT"
+      ]
+    },
+    "q5": {
+      "title": "Write a Query: Sort by Name Descending",
+      "prompt": "Write a SQL query to select all columns from the products table, sorted by name in descending (Z-A) order.",
+      "hint": "Use ORDER BY with the name column and specify the correct direction.",
+      "help": {
+        "concept": "ORDER BY lets you sort results by a column; DESC sorts from Z to A for text.",
+        "hint_1": "The column to sort by is name. Use DESC for descending order.",
+        "hint_2": "Remember to select all columns and use the correct table name."
+      },
+      "starterCode": "-- Write your query below"
+    }
+  }
+}

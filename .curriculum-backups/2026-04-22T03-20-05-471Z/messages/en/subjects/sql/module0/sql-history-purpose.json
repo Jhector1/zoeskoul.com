@@ -1,0 +1,92 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_0": {
+        "sql-history-purpose": {
+          "label": "What is SQL?",
+          "summary": "Overview of SQL, its history, and why it's important.",
+          "cards": {
+            "sketch0": {
+              "title": "What is SQL?"
+            },
+            "sketch1": {
+              "title": "A Brief History of SQL"
+            },
+            "sketch2": {
+              "title": "Why is SQL Important?"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_0": {
+        "sql-history-purpose": {
+          "sketch-sql-definition": {
+            "title": "What is SQL?",
+            "bodyMarkdown": "SQL stands for **Structured Query Language**. It is a standard programming language specifically designed for managing and manipulating data stored in relational databases. SQL allows users to create, read, update, and delete data efficiently."
+          },
+          "sketch-sql-history": {
+            "title": "A Brief History of SQL",
+            "bodyMarkdown": "SQL was developed in the 1970s at IBM by Donald D. Chamberlin and Raymond F. Boyce. It was originally called SEQUEL (Structured English Query Language) and later became SQL. In 1986, SQL became a standard of the American National Standards Institute (ANSI), and later of the International Organization for Standardization (ISO)."
+          },
+          "sketch-sql-purpose": {
+            "title": "Why is SQL Important?",
+            "bodyMarkdown": "SQL is essential because it is the primary way to interact with relational databases, which are widely used in businesses, websites, and applications. SQL enables users to efficiently retrieve and manipulate large amounts of data, making it a foundational skill for data analysts, developers, and many IT professionals."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "quiz-sql-definition": {
+      "title": "What does SQL stand for?",
+      "prompt": "Choose the correct expansion of SQL.",
+      "options": {
+        "a": "Structured Query Language",
+        "b": "Simple Quick Language",
+        "c": "Sequential Query Logic",
+        "d": "Standard Question Language"
+      }
+    },
+    "quiz-sql-history": {
+      "title": "When was SQL first developed?",
+      "prompt": "Select the decade when SQL was first created.",
+      "options": {
+        "a": "1960s",
+        "b": "1970s",
+        "c": "1980s",
+        "d": "1990s"
+      }
+    },
+    "quiz-sql-purpose": {
+      "title": "What are some uses of SQL?",
+      "prompt": "Select all correct uses of SQL.",
+      "options": {
+        "a": "Managing data in relational databases",
+        "b": "Designing websites' visual layouts",
+        "c": "Retrieving information from large datasets",
+        "d": "Sending emails"
+      }
+    },
+    "quiz-sql-order-history": {
+      "title": "Order the events in SQL's history",
+      "prompt": "Arrange these events in the correct chronological order.",
+      "tokens": {
+        "t1": "SQL was developed at IBM.",
+        "t2": "SQL became an ANSI standard.",
+        "t3": "SQL became an ISO standard."
+      }
+    },
+    "quiz-sql-basic-query": {
+      "title": "Write a basic SQL query",
+      "prompt": "Write an SQL statement to select all columns from the 'students' table.",
+      "starterCode": "-- Write your SQL query below\n"
+    }
+  }
+}

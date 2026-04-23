@@ -1,0 +1,90 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_5": {
+        "group-by": {
+          "label": "Grouping Data with GROUP BY",
+          "summary": "Group data for aggregation using GROUP BY.",
+          "cards": {
+            "sketch0": {
+              "title": "What is GROUP BY?"
+            },
+            "sketch1": {
+              "title": "How GROUP BY Works"
+            },
+            "sketch2": {
+              "title": "GROUP BY Syntax Example"
+            },
+            "project": {
+              "title": "Project"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "projectSteps": {
+            "q4": {
+              "title": "Write a SQL query to count the number of products in each category."
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_5": {
+        "group-by": {
+          "sk1": {
+            "title": "What is GROUP BY?",
+            "bodyMarkdown": "The `GROUP BY` clause in SQL is used to arrange identical data into groups. This is especially useful when you want to aggregate data, such as calculating sums, averages, or counts for each group. For example, you can group sales by region or products by category."
+          },
+          "sk2": {
+            "title": "How GROUP BY Works",
+            "bodyMarkdown": "When you use `GROUP BY`, SQL collects rows that have the same values in specified columns into summary rows. You typically use it with aggregate functions like `COUNT()`, `SUM()`, `AVG()`, `MIN()`, or `MAX()` to perform calculations for each group."
+          },
+          "sk3": {
+            "title": "GROUP BY Syntax Example",
+            "bodyMarkdown": "Here’s a basic example:\n\n```sql\nSELECT category, COUNT(*)\nFROM products\nGROUP BY category;\n```\n\nThis query counts the number of products in each category."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "q1": {
+      "title": "What does the GROUP BY clause do in SQL?",
+      "prompt": "Choose the best answer.",
+      "options": {
+        "a": "It filters rows based on a condition.",
+        "b": "It sorts the result set.",
+        "c": "It groups rows that have the same values in specified columns.",
+        "d": "It deletes duplicate rows."
+      }
+    },
+    "q2": {
+      "title": "Which of the following aggregate functions are commonly used with GROUP BY?",
+      "prompt": "Select all that apply.",
+      "options": {
+        "a": "SUM()",
+        "b": "AVG()",
+        "c": "COUNT()",
+        "d": "ORDER BY()"
+      }
+    },
+    "q3": {
+      "title": "Order the steps to group data and count items by category.",
+      "prompt": "Drag to reorder the steps from first to last.",
+      "tokens": {
+        "t1": "SELECT category, COUNT(*)",
+        "t2": "FROM products",
+        "t3": "GROUP BY category"
+      }
+    },
+    "q4": {
+      "title": "Write a SQL query to count the number of products in each category.",
+      "prompt": "Using the 'products_catalog' dataset, write a query that returns each category and the number of products in that category.",
+      "starterCode": "-- Write your SQL query here"
+    }
+  }
+}

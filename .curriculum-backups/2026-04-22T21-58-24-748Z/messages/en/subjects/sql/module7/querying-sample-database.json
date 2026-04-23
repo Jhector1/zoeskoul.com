@@ -1,0 +1,139 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_7": {
+        "querying-sample-database": {
+          "label": "Querying a Sample Database",
+          "summary": "Practice querying a provided sample database.",
+          "cards": {
+            "sketch0": {
+              "title": "Introduction to the Inventory Items Table"
+            },
+            "sketch1": {
+              "title": "Understanding Columns and Data Types"
+            },
+            "sketch2": {
+              "title": "Filtering and Sorting Data"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_7": {
+        "querying-sample-database": {
+          "intro-inventory-ops": {
+            "title": "Introduction to the Inventory Items Table",
+            "bodyMarkdown": "The `inventory_items` table contains information about products in an inventory system. Each row represents an item, with columns for `id`, `name`, `category`, `price`, `status`, `is_test`, `notes`, and `last_updated`. You can use SQL queries to select, filter, and analyze this data. For example, to see all active items:\n\n```sql\nSELECT * FROM inventory_items WHERE status = 'active';\n```"
+          },
+          "columns-and-types": {
+            "title": "Understanding Columns and Data Types",
+            "bodyMarkdown": "Here are the columns in `inventory_items`:\n\n- `id` (INTEGER): Unique identifier for each item\n- `name` (TEXT): Name of the item\n- `category` (TEXT): Category, such as 'Accessories' or 'Kitchen'\n- `price` (REAL): Price of the item\n- `status` (TEXT): Status, such as 'active', 'draft', or 'inactive'\n- `is_test` (INTEGER): 1 if test item, 0 otherwise\n- `notes` (TEXT): Optional notes\n- `last_updated` (TEXT): Date the item was last updated\n\nUnderstanding these columns helps you write precise queries."
+          },
+          "filtering-and-sorting": {
+            "title": "Filtering and Sorting Data",
+            "bodyMarkdown": "You can filter rows using the `WHERE` clause and sort results with `ORDER BY`. For example, to find all items in the 'Kitchen' category, sorted by price descending:\n\n```sql\nSELECT name, price FROM inventory_items WHERE category = 'Kitchen' ORDER BY price DESC;\n```"
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "single-choice-category": {
+      "title": "Identify the Correct Category",
+      "prompt": "Which category does the item 'Canvas Print' belong to in the `inventory_items` table?",
+      "hint": "Check the 'category' column for 'Canvas Print'.",
+      "help": {
+        "concept": "Each item in the table has a category describing its type.",
+        "hint_1": "Look for the row where the name is 'Canvas Print' and see its category.",
+        "hint_2": "The 'Canvas Print' is not a kitchen or accessory item; it's for home decoration."
+      },
+      "options": {
+        "a": "Accessories",
+        "b": "Decor",
+        "c": "Kitchen",
+        "d": "Stationery"
+      }
+    },
+    "multi-choice-status": {
+      "title": "Select All Active Items",
+      "prompt": "Which of the following items have a status of 'active' in the `inventory_items` table? Select all that apply.",
+      "hint": "Look for rows where status is 'active'.",
+      "help": {
+        "concept": "The 'status' column indicates if an item is currently active.",
+        "hint_1": "Check each item's status value in the table.",
+        "hint_2": "Three items are marked as 'active'; two are 'draft' and one is 'inactive'."
+      },
+      "options": {
+        "a": "Sticker Pack",
+        "b": "Test Mug",
+        "c": "Canvas Print",
+        "d": "Sample Poster",
+        "e": "Water Bottle",
+        "f": "Trial Tote"
+      }
+    },
+    "drag-reorder-price": {
+      "title": "Order Items by Price (Lowest to Highest)",
+      "prompt": "Arrange these items from lowest to highest price based on the `inventory_items` table.",
+      "hint": "Compare the price values for each item.",
+      "help": {
+        "concept": "Ordering data by price helps identify the cheapest and most expensive items.",
+        "hint_1": "List the prices for each item and sort them from smallest to largest.",
+        "hint_2": "The item with price 4.99 comes first, and the one with 45.00 comes last."
+      },
+      "tokens": {
+        "t1": "Sticker Pack",
+        "t2": "Test Mug",
+        "t3": "Trial Tote",
+        "t4": "Sample Poster",
+        "t5": "Water Bottle",
+        "t6": "Canvas Print"
+      }
+    },
+    "fill-blank-choice-status": {
+      "title": "Fill in the Item Status",
+      "prompt": "What is the status of the item 'Trial Tote' in the `inventory_items` table?",
+      "hint": "Check the 'status' column for 'Trial Tote'.",
+      "help": {
+        "concept": "The 'status' column shows the current state of each item.",
+        "hint_1": "Find the row for 'Trial Tote' and read its status.",
+        "hint_2": "This item is not currently active or inactive; it's still being prepared."
+      },
+      "template": "The status of 'Trial Tote' is [blank].",
+      "choices": [
+        "active",
+        "draft",
+        "inactive",
+        "archived"
+      ]
+    },
+    "code-input-select-kitchen": {
+      "title": "Query: Select All Kitchen Items",
+      "prompt": "Write a SQL query to select the `id`, `name`, and `price` of all items in the 'Kitchen' category from the `inventory_items` table.",
+      "hint": "Use SELECT with a WHERE clause to filter by category.",
+      "help": {
+        "concept": "Filtering rows by category lets you focus on specific types of items.",
+        "hint_1": "Use SELECT to choose columns and WHERE to specify category = 'Kitchen'.",
+        "hint_2": "Remember to select only id, name, and price for items where category matches 'Kitchen'."
+      },
+      "starterCode": "-- Write your SQL query below"
+    },
+    "code-input-count-active": {
+      "title": "Query: Count Active Items",
+      "prompt": "Write a SQL query to count how many items have a status of 'active' in the `inventory_items` table.",
+      "hint": "Use COUNT(*) with a WHERE clause.",
+      "help": {
+        "concept": "COUNT(*) returns the number of rows matching a condition.",
+        "hint_1": "Filter rows where status is 'active' and count them.",
+        "hint_2": "Use SELECT COUNT(*) FROM ... WHERE status equals 'active'."
+      },
+      "starterCode": "-- Write your SQL query below"
+    }
+  }
+}

@@ -1,0 +1,139 @@
+{
+  "topicId": "ilike-case-insensitive",
+  "subjectSlug": "sql",
+  "moduleSlug": "sql_module_4",
+  "sectionSlug": "section_4_1",
+  "prefix": "sql4",
+  "minutes": 10,
+  "topic": {
+    "labelKey": "topics.sql.sql_module_4.ilike-case-insensitive.label",
+    "summaryKey": "topics.sql.sql_module_4.ilike-case-insensitive.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_4.ilike-case-insensitive.cards.sketch0.title",
+      "sketchId": "sketch-what-is-ilike",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_4.ilike-case-insensitive.cards.sketch1.title",
+      "sketchId": "sketch-why-use-ilike",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql.sql_module_4.ilike-case-insensitive.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch-what-is-ilike",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_4.ilike-case-insensitive.sketch-what-is-ilike.title",
+      "bodyKey": "sketches.sql.sql_module_4.ilike-case-insensitive.sketch-what-is-ilike.bodyMarkdown"
+    },
+    {
+      "id": "sketch-why-use-ilike",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_4.ilike-case-insensitive.sketch-why-use-ilike.title",
+      "bodyKey": "sketches.sql.sql_module_4.ilike-case-insensitive.sketch-why-use-ilike.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "quiz-ilike-basic-single-choice",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.quiz-ilike-basic-single-choice",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "quiz-ilike-multi-choice-uses",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.quiz-ilike-multi-choice-uses",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": []
+      }
+    },
+    {
+      "id": "quiz-ilike-drag-reorder",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.quiz-ilike-drag-reorder",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "quiz-ilike-fill-blank-choice",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.quiz-ilike-fill-blank-choice",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "ILIKE"
+      }
+    },
+    {
+      "id": "quiz-ilike-code-input-sqlite",
+      "kind": "code_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.quiz-ilike-code-input-sqlite",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "SELECT * FROM products_catalog WHERE name LIKE '%apple%' COLLATE NOCASE;"
+      }
+    }
+  ]
+}

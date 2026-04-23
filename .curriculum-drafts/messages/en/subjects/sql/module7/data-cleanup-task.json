@@ -1,0 +1,164 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_7": {
+        "data-cleanup-task": {
+          "label": "Data Cleanup Task",
+          "summary": "Use string functions and filtering to clean up data in the inventory_items table. Practice removing test items, standardizing text, and filtering by status.",
+          "cards": {
+            "sketch0": {
+              "title": "Why Data Cleanup Matters"
+            },
+            "sketch1": {
+              "title": "About the inventory_items Table"
+            },
+            "sketch2": {
+              "title": "Common Data Cleanup Tasks"
+            },
+            "project": {
+              "title": "Inventory Data Cleanup Mini-Project"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "projectSteps": {
+            "remove-test-items": {
+              "title": "Filtering Out Test Items"
+            },
+            "standardize-category-case": {
+              "title": "Standardizing Category Names"
+            },
+            "filter-active-non-test": {
+              "title": "Filtering for Active, Real Inventory"
+            },
+            "replace-null-notes": {
+              "title": "Handling NULL Notes"
+            },
+            "order-cleanup-steps": {
+              "title": "Order of Data Cleanup Steps"
+            },
+            "sql-cleanup-query": {
+              "title": "Write a Cleanup Query"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_7": {
+        "data-cleanup-task": {
+          "intro-cleanup": {
+            "title": "Why Data Cleanup Matters",
+            "bodyMarkdown": "Real-world datasets often contain test records, inconsistent text, or outdated entries. Cleaning up data ensures accurate analysis and reporting. In SQL, you can use filtering, string functions, and updates to tidy up your tables."
+          },
+          "inventory-items-overview": {
+            "title": "About the inventory_items Table",
+            "bodyMarkdown": "The `inventory_items` table tracks products in inventory. Key columns include:\n\n- `id`: unique item identifier\n- `name`: product name\n- `category`: product category\n- `price`: item price\n- `status`: can be 'active', 'draft', or 'inactive'\n- `is_test`: 1 for test/sample items, 0 for real items\n- `notes`: optional notes\n- `last_updated`: date of last update\n\nSample rows:\n\n| id | name           | category    | price | status   | is_test | notes              | last_updated |\n|----|----------------|-------------|-------|----------|---------|--------------------|-------------|\n| 1  | Sticker Pack   | Accessories | 4.99  | active   | 0       | NULL               | 2026-02-01  |\n| 2  | Test Mug       | Kitchen     | 7.50  | draft    | 1       | Internal sample    | 2026-02-03  |\n| 4  | Sample Poster  | Decor       | 12.00 | inactive | 1       | Archived test item | 2026-01-29  |"
+          },
+          "cleanup-tasks": {
+            "title": "Common Data Cleanup Tasks",
+            "bodyMarkdown": "Some typical cleanup tasks for this table include:\n\n- **Removing test items**: Filter out rows where `is_test = 1`.\n- **Standardizing text**: Use functions like `UPPER()` or `LOWER()` to make names or categories consistent.\n- **Filtering by status**: Only include items with `status = 'active'` for current inventory.\n- **Handling NULLs**: Use `COALESCE()` to replace NULL notes with a default message."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "remove-test-items": {
+      "title": "Filtering Out Test Items",
+      "prompt": "Which SQL WHERE clause would remove all test items from your results in the `inventory_items` table?",
+      "hint": "Look for the value that marks real items.",
+      "help": {
+        "concept": "The `is_test` column marks test items with 1 and real items with 0.",
+        "hint_1": "You want only rows where `is_test` is not set to 1.",
+        "hint_2": "Filtering with `is_test = 0` will exclude all test/sample items."
+      },
+      "options": {
+        "a": "WHERE is_test = 0",
+        "b": "WHERE is_test = 1",
+        "c": "WHERE status = 'active'",
+        "d": "WHERE notes IS NULL"
+      }
+    },
+    "standardize-category-case": {
+      "title": "Standardizing Category Names",
+      "prompt": "To make all category names uppercase in your SELECT results, which SQL function should you use?",
+      "hint": "Think of a function that changes text to all capital letters.",
+      "help": {
+        "concept": "SQL provides string functions like the missing term() and LOWER() to change text case.",
+        "hint_1": "the missing term() converts all letters to uppercase.",
+        "hint_2": "Use the missing term(category) to display categories in uppercase."
+      },
+      "template": "SELECT id, name, ___(category) AS category FROM inventory_items;",
+      "choices": [
+        "UPPER",
+        "LOWER",
+        "TRIM",
+        "LENGTH"
+      ]
+    },
+    "filter-active-non-test": {
+      "title": "Filtering for Active, Real Inventory",
+      "prompt": "Which conditions should you use in your WHERE clause to select only active, non-test items?",
+      "hint": "You want items that are both active and not test items.",
+      "help": {
+        "concept": "Combine multiple conditions with AND to filter for both status and test flag.",
+        "hint_1": "Check for status 'active' and is_test set to 0.",
+        "hint_2": "Both conditions must be true to select real, active inventory."
+      },
+      "options": {
+        "a": "status = 'active'",
+        "b": "is_test = 0",
+        "c": "status = 'draft'",
+        "d": "is_test = 1"
+      }
+    },
+    "replace-null-notes": {
+      "title": "Handling NULL Notes",
+      "prompt": "Which SQL function lets you show 'No notes' instead of NULL in the notes column?",
+      "hint": "This function returns the first non-NULL value.",
+      "help": {
+        "concept": "the missing term() is a standard SQL function to handle NULLs by providing a fallback value.",
+        "hint_1": "the missing term(notes, 'No notes') will show 'No notes' if notes is NULL.",
+        "hint_2": "Use the missing term to replace NULLs in your SELECT output."
+      },
+      "template": "SELECT id, name, COALESCE(notes, 'No notes') AS notes FROM inventory_items;",
+      "choices": [
+        "COALESCE",
+        "IFNULL",
+        "NVL",
+        "ISNULL"
+      ]
+    },
+    "order-cleanup-steps": {
+      "title": "Order of Data Cleanup Steps",
+      "prompt": "Arrange these cleanup steps in the best order for preparing a clean inventory report.",
+      "hint": "Start by removing unwanted rows, then filter, then clean up columns.",
+      "help": {
+        "concept": "Data cleanup often starts with removing irrelevant data, then filtering, then standardizing and handling NULLs.",
+        "hint_1": "First, remove rows you don't want, then filter for the right status.",
+        "hint_2": "After filtering, standardize text and handle NULLs for reporting."
+      },
+      "tokens": {
+        "t1": "Remove test items",
+        "t2": "Filter by status",
+        "t3": "Standardize category names",
+        "t4": "Replace NULL notes"
+      }
+    },
+    "sql-cleanup-query": {
+      "title": "Write a Cleanup Query",
+      "prompt": "Write a SQL query to select all columns from `inventory_items` for items that are active and not test items. The results should show category names in uppercase and replace NULL notes with 'No notes'.",
+      "hint": "Use WHERE to filter, UPPER() for category, and COALESCE() for notes.",
+      "help": {
+        "concept": "Combine filtering, string functions, and NULL handling in a single SELECT statement.",
+        "hint_1": "Filter for status 'active' and is_test 0. Use UPPER() on category and COALESCE() on notes.",
+        "hint_2": "SELECT all columns, but transform category and notes as described."
+      },
+      "starterCode": "-- Write your SELECT statement here"
+    }
+  }
+}

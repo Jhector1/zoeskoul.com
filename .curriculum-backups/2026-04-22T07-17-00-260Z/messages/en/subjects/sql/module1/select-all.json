@@ -1,0 +1,118 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_1": {
+        "select-all": {
+          "label": "Selecting All Columns",
+          "summary": "Use the wildcard (*) to select all columns.",
+          "cards": {
+            "sketch0": {
+              "title": "What Does SELECT * Mean?"
+            },
+            "sketch1": {
+              "title": "When Should You Use SELECT *?"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_1": {
+        "select-all": {
+          "sketch-what-is-select-all": {
+            "title": "What Does SELECT * Mean?",
+            "bodyMarkdown": "In SQL, you can use the asterisk (*) as a wildcard to select all columns from a table. This is useful when you want to see every column for each row in your results, without having to list each column name individually."
+          },
+          "sketch-when-to-use-select-all": {
+            "title": "When Should You Use SELECT *?",
+            "bodyMarkdown": "SELECT * is handy for quick exploration or when you need every piece of data from a table. However, in production queries, it's often better to specify only the columns you need for performance and clarity."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "quiz-single-choice-select-all-syntax": {
+      "title": "Syntax for Selecting All Columns",
+      "prompt": "Which SQL statement selects all columns from the table named 'products'?",
+      "hint": "Look for the wildcard character.",
+      "help": {
+        "concept": "The asterisk (*) is used in SQL to represent all columns in a table.",
+        "hint_1": "The correct statement uses * after SELECT.",
+        "hint_2": "The statement should read: SELECT * FROM table_name;"
+      },
+      "options": {
+        "a": "SELECT * FROM products;",
+        "b": "SELECT all FROM products;",
+        "c": "SELECT columns FROM products;",
+        "d": "SELECT FROM products;"
+      }
+    },
+    "quiz-multi-choice-select-all-effects": {
+      "title": "Effects of SELECT *",
+      "prompt": "What happens when you use SELECT * in a query? (Choose all that apply.)",
+      "hint": "Think about what * means and what data is returned.",
+      "help": {
+        "concept": "SELECT * returns every column for each row in the table, which may include unnecessary data.",
+        "hint_1": "You don't have to specify columns with *.",
+        "hint_2": "SELECT * can result in large result sets if the table has many columns."
+      },
+      "options": {
+        "a": "All columns from the table are included in the result.",
+        "b": "Only the first column is selected.",
+        "c": "You don't need to list column names.",
+        "d": "It can return more data than needed."
+      }
+    },
+    "quiz-drag-reorder-select-all-steps": {
+      "title": "Ordering a SELECT * Query",
+      "prompt": "Arrange the parts of a SQL query to select all columns from the 'students' table in the correct order.",
+      "hint": "Start with the SQL command, then the wildcard, then specify the table.",
+      "help": {
+        "concept": "A basic SQL SELECT statement follows the order: SELECT, columns (or *), FROM, table name, semicolon.",
+        "hint_1": "SELECT comes first, followed by *.",
+        "hint_2": "FROM and the table name come after SELECT *."
+      },
+      "tokens": {
+        "t1": "SELECT",
+        "t2": "*",
+        "t3": "FROM",
+        "t4": "students",
+        "t5": ";"
+      }
+    },
+    "quiz-fill-blank-choice-select-all-keyword": {
+      "title": "Fill in the Blank: SELECT *",
+      "prompt": "Fill in the blank to select all columns from the 'employees' table: SELECT ___ FROM employees;",
+      "hint": "It's a single character wildcard.",
+      "help": {
+        "concept": "The asterisk (*) is the wildcard character for all columns in SQL.",
+        "hint_1": "It's not a word, but a symbol.",
+        "hint_2": "It's the same symbol used for multiplication."
+      },
+      "template": "SELECT ___ FROM employees;",
+      "choices": [
+        "*",
+        "all",
+        "columns",
+        "employee_id"
+      ]
+    },
+    "quiz-code-input-select-all-employees": {
+      "title": "Write a SELECT * Query",
+      "prompt": "Write a SQL query to select all columns from the 'employees' table.",
+      "hint": "Use SELECT, the wildcard, and FROM.",
+      "help": {
+        "concept": "To select all columns, use SELECT * followed by FROM and the table name.",
+        "hint_1": "The wildcard comes after SELECT.",
+        "hint_2": "The table name is 'employees'."
+      },
+      "starterCode": "-- Write your query below\n"
+    }
+  }
+}

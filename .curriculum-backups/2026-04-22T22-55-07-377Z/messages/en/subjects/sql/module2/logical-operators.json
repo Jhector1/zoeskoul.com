@@ -1,0 +1,130 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_2": {
+        "logical-operators": {
+          "label": "Logical Operators (AND, OR, NOT)",
+          "summary": "Combine multiple conditions with logical operators.",
+          "cards": {
+            "sketch0": {
+              "title": "Introduction to Logical Operators"
+            },
+            "sketch1": {
+              "title": "Using AND and OR"
+            },
+            "sketch2": {
+              "title": "Using NOT"
+            },
+            "sketch3": {
+              "title": "Combining Logical Operators"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_2": {
+        "logical-operators": {
+          "intro-logical-operators": {
+            "title": "Introduction to Logical Operators",
+            "bodyMarkdown": "Logical operators like **AND**, **OR**, and **NOT** allow you to combine multiple conditions in a SQL `WHERE` clause. This helps you filter data more precisely. For example, you might want to find products that are both in stock **and** below a certain price, or products that are either in one category **or** another."
+          },
+          "and-or-examples": {
+            "title": "Using AND and OR",
+            "bodyMarkdown": "The **AND** operator requires that *all* conditions are true. The **OR** operator requires that *at least one* condition is true.\n\nExample:\n\n```sql\nSELECT * FROM products\nWHERE category = 'Art' AND price < 20;\n```\nThis returns products in the 'Art' category **and** with a price less than 20.\n\n```sql\nSELECT * FROM products\nWHERE category = 'Art' OR category = 'Home';\n```\nThis returns products that are either in the 'Art' category **or** the 'Home' category."
+          },
+          "not-operator": {
+            "title": "Using NOT",
+            "bodyMarkdown": "The **NOT** operator reverses a condition. For example, `NOT category = 'Home'` finds products that are *not* in the 'Home' category.\n\nExample:\n\n```sql\nSELECT * FROM products\nWHERE NOT stock < 10;\n```\nThis returns products with a stock of 10 or more."
+          },
+          "combining-operators": {
+            "title": "Combining Logical Operators",
+            "bodyMarkdown": "You can combine **AND**, **OR**, and **NOT** in a single query. Use parentheses `()` to control the order of evaluation.\n\nExample:\n\n```sql\nSELECT * FROM products\nWHERE (category = 'Art' OR category = 'Stationery') AND price < 20;\n```\nThis returns products that are either in 'Art' or 'Stationery' categories **and** have a price less than 20."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "single-choice-and-or": {
+      "title": "Choosing the Correct Logical Operator",
+      "prompt": "Which operator should you use to find products that are in the 'Art' category **and** have a price less than 20?",
+      "hint": "You want both conditions to be true.",
+      "help": {
+        "concept": "The AND operator requires all combined conditions to be true for the correct answer row to be included.",
+        "hint_1": "Think about how to require both category and price criteria.",
+        "hint_2": "The operator you need ensures both the category and price conditions are satisfied."
+      },
+      "options": {
+        "a": "AND",
+        "b": "OR",
+        "c": "NOT",
+        "d": "BETWEEN"
+      }
+    },
+    "multi-choice-or-not": {
+      "title": "Understanding OR and NOT",
+      "prompt": "Which of the following queries will return products that are **not** in the 'Home' category **or** have a stock greater than 20? (Select all that apply.)",
+      "hint": "Look for queries that use NOT or != with 'Home', or check for stock greater than 20.",
+      "help": {
+        "concept": "OR returns rows where at least one condition is true. NOT and != both exclude 'Home' category.",
+        "hint_1": "Check which queries exclude 'Home' or include high stock.",
+        "hint_2": "Queries using NOT or != with 'Home' and OR with stock > 20 will match."
+      },
+      "options": {
+        "a": "SELECT * FROM products WHERE NOT category = 'Home' OR stock > 20;",
+        "b": "SELECT * FROM products WHERE category != 'Home' OR stock > 20;",
+        "c": "SELECT * FROM products WHERE category = 'Home' AND stock > 20;",
+        "d": "SELECT * FROM products WHERE NOT (category = 'Home' AND stock <= 20);"
+      }
+    },
+    "drag-reorder-evaluation": {
+      "title": "Order of Evaluation",
+      "prompt": "Arrange the following steps in the order SQL evaluates them in a WHERE clause with AND, OR, and NOT.",
+      "hint": "Which operator is evaluated first?",
+      "help": {
+        "concept": "SQL evaluates NOT first, then AND, then OR in WHERE clauses.",
+        "hint_1": "NOT has the highest precedence.",
+        "hint_2": "NOT comes before AND, which comes before OR."
+      },
+      "tokens": {
+        "t1": "NOT conditions",
+        "t2": "AND conditions",
+        "t3": "OR conditions"
+      }
+    },
+    "fill-blank-choice-parentheses": {
+      "title": "Using Parentheses",
+      "prompt": "Fill in the blank: Parentheses are used in SQL WHERE clauses to control the _____ of logical operators.",
+      "hint": "Parentheses affect which conditions are checked first.",
+      "help": {
+        "concept": "Parentheses group conditions and determine which are evaluated together first.",
+        "hint_1": "They change the sequence in which conditions are checked.",
+        "hint_2": "They control the order in which logical operators are applied."
+      },
+      "template": "Parentheses are used in SQL WHERE clauses to control the _____ of logical operators.",
+      "choices": [
+        "order of evaluation",
+        "number of rows",
+        "column names",
+        "table structure"
+      ]
+    },
+    "code-input-and-or-not": {
+      "title": "Write a Query with AND, OR, and NOT",
+      "prompt": "Write a SQL query to select all columns from the products table for products that are NOT in the 'Home' category AND (have a price less than 20 OR stock greater than 20).",
+      "hint": "Use NOT for the category, AND to combine, and parentheses for price/stock.",
+      "help": {
+        "concept": "Combine NOT, AND, and OR to filter rows. Parentheses group OR conditions.",
+        "hint_1": "Start with NOT category = 'Home', then AND, then group price and stock with OR.",
+        "hint_2": "Use parentheses to group price < 20 OR stock > 20, and combine with NOT and AND."
+      },
+      "starterCode": "-- Write your query below"
+    }
+  }
+}

@@ -1,0 +1,124 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_0": {
+        "sql-history-purpose": {
+          "label": "History and Purpose of SQL",
+          "summary": "Learn the origins and main uses of SQL in data management.",
+          "cards": {
+            "sketch0": {
+              "title": "The Origins of SQL"
+            },
+            "sketch1": {
+              "title": "Main Purposes of SQL"
+            },
+            "sketch2": {
+              "title": "Example: Querying a Students Table"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_0": {
+        "sql-history-purpose": {
+          "sketch-history-sql": {
+            "title": "The Origins of SQL",
+            "bodyMarkdown": "SQL, or Structured Query Language, was developed in the 1970s at IBM by Donald D. Chamberlin and Raymond F. Boyce. It was created to manage and query data stored in relational databases, based on the relational model proposed by Edgar F. Codd. The first version of SQL was called SEQUEL, but the name was later changed to SQL due to trademark issues. Today, SQL is the standard language for interacting with relational databases."
+          },
+          "sketch-purpose-sql": {
+            "title": "Main Purposes of SQL",
+            "bodyMarkdown": "SQL is used to store, retrieve, update, and delete data in relational databases. It allows users to define the structure of data (using DDL commands), manipulate data (using DML commands), and control access to data (using DCL commands). SQL is essential for data analysis, reporting, and application development in many industries."
+          },
+          "sketch-sql-example": {
+            "title": "Example: Querying a Students Table",
+            "bodyMarkdown": "Suppose you have a table named `students` with columns: `id`, `name`, `grade`, `age`, and `city`. To find all students who received an 'A' grade, you can use the following SQL query:\n\n```sql\nSELECT name, grade FROM students WHERE grade = 'A';\n```\nThis query retrieves the names and grades of students who have an 'A' in the `grade` column."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "quiz-sql-history-single": {
+      "title": "Who developed SQL?",
+      "prompt": "Who were the main developers of SQL at IBM in the 1970s?",
+      "hint": "Think of the IBM researchers who worked on database languages.",
+      "help": {
+        "concept": "SQL was developed at IBM by two computer scientists in the 1970s.",
+        "hint_1": "Their names are often mentioned together in the history of SQL.",
+        "hint_2": "They are not the same as the creator of the relational model or famous tech founders."
+      },
+      "options": {
+        "a": "Donald D. Chamberlin and Raymond F. Boyce",
+        "b": "Edgar F. Codd and Grace Hopper",
+        "c": "Bill Gates and Paul Allen",
+        "d": "Larry Page and Sergey Brin"
+      }
+    },
+    "quiz-sql-purpose-multi": {
+      "title": "Main Uses of SQL",
+      "prompt": "Which of the following are main purposes of SQL? Select all that apply.",
+      "hint": "Focus on what SQL does with data, not hardware.",
+      "help": {
+        "concept": "SQL is used for managing and interacting with data in relational databases.",
+        "hint_1": "SQL can define, manipulate, and secure data, but not design hardware.",
+        "hint_2": "Three of these options are related to data management tasks."
+      },
+      "options": {
+        "a": "Querying data in relational databases",
+        "b": "Defining the structure of data",
+        "c": "Controlling access to data",
+        "d": "Designing computer hardware"
+      }
+    },
+    "quiz-sql-drag-reorder": {
+      "title": "Timeline of SQL",
+      "prompt": "Arrange these events in the correct order, from earliest to latest.",
+      "hint": "Start with the theoretical model, then language development, renaming, and standardization.",
+      "help": {
+        "concept": "SQL's history starts with the relational model, followed by language creation, renaming, and standardization.",
+        "hint_1": "The relational model came before the language.",
+        "hint_2": "The language was first called SEQUEL, then renamed, then standardized."
+      },
+      "tokens": {
+        "t1": "Edgar F. Codd proposes the relational model",
+        "t2": "Chamberlin and Boyce develop SEQUEL at IBM",
+        "t3": "SEQUEL is renamed to SQL",
+        "t4": "SQL becomes an ANSI standard"
+      }
+    },
+    "quiz-sql-fill-blank": {
+      "title": "SQL Command Types",
+      "prompt": "Fill in the blank: The SQL command used to retrieve data from a table is ____.",
+      "hint": "It's the command that starts most queries to get data.",
+      "help": {
+        "concept": "SQL uses different commands for different operations; the missing term is for retrieving data.",
+        "hint_1": "It's the most common command for reading data.",
+        "hint_2": "It is not used for adding, changing, or removing data."
+      },
+      "template": "The SQL command used to retrieve data from a table is ____.",
+      "choices": [
+        "SELECT",
+        "INSERT",
+        "UPDATE",
+        "DELETE"
+      ]
+    },
+    "quiz-sql-code-input": {
+      "title": "Write a Simple SQL Query",
+      "prompt": "Write an SQL query to list the names and cities of all students who are 15 years old in the `students` table.",
+      "hint": "Use SELECT to choose columns and WHERE to filter by age.",
+      "help": {
+        "concept": "To retrieve specific columns for rows matching a condition, use SELECT with a WHERE clause.",
+        "hint_1": "You need to select 'name' and 'city' where 'age' equals 15.",
+        "hint_2": "Remember to use WHERE to filter the rows by age."
+      },
+      "starterCode": "-- Write your SQL query below"
+    }
+  }
+}

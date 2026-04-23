@@ -1,0 +1,131 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_5": {
+        "group-by": {
+          "label": "GROUP BY Clause",
+          "summary": "Group data for aggregate calculations.",
+          "cards": {
+            "sketch0": {
+              "title": "What is GROUP BY?"
+            },
+            "sketch1": {
+              "title": "GROUP BY Syntax"
+            },
+            "sketch2": {
+              "title": "Multiple Columns in GROUP BY"
+            },
+            "sketch3": {
+              "title": "GROUP BY and Aggregates"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_5": {
+        "group-by": {
+          "sk1": {
+            "title": "What is GROUP BY?",
+            "bodyMarkdown": "The `GROUP BY` clause in SQL is used to arrange identical data into groups. This is especially useful when you want to perform aggregate calculations (like `SUM`, `COUNT`, `AVG`, etc.) for each group of rows that share a common value in one or more columns.\n\nFor example, in the `orders` table, you might want to know the total quantity ordered per region. The `GROUP BY` clause lets you do this by grouping all rows with the same `region` value together."
+          },
+          "sk2": {
+            "title": "GROUP BY Syntax",
+            "bodyMarkdown": "The basic syntax for using `GROUP BY` is:\n\n```sql\nSELECT column1, AGG_FUNCTION(column2)\nFROM table_name\nGROUP BY column1;\n```\n\n- `column1`: The column you want to group by.\n- `AGG_FUNCTION`: An aggregate function like `SUM`, `COUNT`, `AVG`, etc.\n\nExample: To find the total quantity ordered in each region:\n\n```sql\nSELECT region, SUM(quantity)\nFROM orders\nGROUP BY region;\n```"
+          },
+          "sk3": {
+            "title": "Multiple Columns in GROUP BY",
+            "bodyMarkdown": "You can group by more than one column by listing them, separated by commas. This creates groups for each unique combination of the specified columns.\n\nExample: To get the total quantity ordered for each region and category:\n\n```sql\nSELECT region, category, SUM(quantity)\nFROM orders\nGROUP BY region, category;\n```"
+          },
+          "sk4": {
+            "title": "GROUP BY and Aggregates",
+            "bodyMarkdown": "When you use `GROUP BY`, every column in your `SELECT` list must either be included in the `GROUP BY` clause or be used inside an aggregate function.\n\nFor example, this is valid:\n\n```sql\nSELECT region, COUNT(*)\nFROM orders\nGROUP BY region;\n```\n\nBut this is **not** valid:\n\n```sql\nSELECT region, customer_name, COUNT(*)\nFROM orders\nGROUP BY region;\n```\n\nunless `customer_name` is also in the `GROUP BY` clause or used with an aggregate function."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "q1": {
+      "title": "Purpose of GROUP BY",
+      "prompt": "What is the main purpose of the GROUP BY clause in SQL?",
+      "hint": "Think about organizing data for aggregate calculations.",
+      "help": {
+        "concept": "The GROUP BY clause groups rows that share the same values in specified columns, allowing aggregate functions to be applied to each group.",
+        "hint_1": "GROUP BY is not used for filtering or sorting, but for grouping similar rows.",
+        "hint_2": "It is commonly used with aggregate functions like SUM, COUNT, or AVG."
+      },
+      "options": {
+        "a": "To filter rows based on a condition",
+        "b": "To sort the result set",
+        "c": "To group rows that have the same values in specified columns",
+        "d": "To join two tables together"
+      }
+    },
+    "q2": {
+      "title": "Valid GROUP BY Usage",
+      "prompt": "Which of the following queries correctly use the GROUP BY clause with the orders table? (Select all that apply)",
+      "hint": "Check if all columns in SELECT are either grouped or aggregated.",
+      "help": {
+        "concept": "When using GROUP BY, every column in the SELECT list must be either included in the GROUP BY clause or used with an aggregate function.",
+        "hint_1": "If the correct answer column is not in GROUP BY or inside an aggregate, the query is invalid.",
+        "hint_2": "Look for queries where SELECT columns match the GROUP BY columns or are aggregated."
+      },
+      "options": {
+        "a": "SELECT region, SUM(quantity) FROM orders GROUP BY region;",
+        "b": "SELECT region, category, COUNT(*) FROM orders GROUP BY region, category;",
+        "c": "SELECT region, customer_name FROM orders GROUP BY region;",
+        "d": "SELECT SUM(quantity) FROM orders GROUP BY category;"
+      }
+    },
+    "q3": {
+      "title": "Order the GROUP BY Query Steps",
+      "prompt": "Arrange the steps to write a GROUP BY query that shows the total quantity ordered per region.",
+      "hint": "Start with SELECT, then FROM, then GROUP BY, then execute.",
+      "help": {
+        "concept": "A typical SQL query structure is SELECT, FROM, GROUP BY, then execution.",
+        "hint_1": "SELECT comes first, followed by FROM, then GROUP BY.",
+        "hint_2": "The GROUP BY clause must come after FROM and before running the query."
+      },
+      "tokens": {
+        "t1": "Write SELECT region, SUM(quantity)",
+        "t2": "Write FROM orders",
+        "t3": "Write GROUP BY region",
+        "t4": "Run the query"
+      }
+    },
+    "q4": {
+      "title": "Fill in the GROUP BY Keyword",
+      "prompt": "Complete the query to show the total quantity per category:\n\nSELECT category, SUM(quantity)\nFROM orders\n____ category;",
+      "hint": "Which keyword is used to group rows?",
+      "help": {
+        "concept": "The the missing term clause is used to group rows for aggregate calculations.",
+        "hint_1": "It's not WHERE or ORDER BY.",
+        "hint_2": "This clause comes after FROM and before any aggregation."
+      },
+      "template": "SELECT category, SUM(quantity)\nFROM orders\n____ category;",
+      "choices": [
+        "GROUP BY",
+        "ORDER BY",
+        "WHERE",
+        "HAVING"
+      ]
+    },
+    "q5": {
+      "title": "Write a GROUP BY Query",
+      "prompt": "Write a SQL query to find the total sales amount (quantity * unit_price) for each region in the orders table.",
+      "hint": "Use SUM with a calculation and group by region.",
+      "help": {
+        "concept": "To get totals per group, use SUM on an expression and GROUP BY the grouping column.",
+        "hint_1": "Multiply quantity and unit_price, then sum the result for each region.",
+        "hint_2": "GROUP BY region, and use SUM(quantity * unit_price) in SELECT."
+      },
+      "starterCode": "-- Write your query below"
+    }
+  }
+}

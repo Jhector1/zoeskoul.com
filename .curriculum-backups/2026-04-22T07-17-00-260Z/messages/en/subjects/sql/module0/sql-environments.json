@@ -1,0 +1,124 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_0": {
+        "sql-environments": {
+          "label": "SQL Environments and Tools",
+          "summary": "Discover common tools and environments for running SQL queries.",
+          "cards": {
+            "sketch0": {
+              "title": "What is an SQL Environment?"
+            },
+            "sketch1": {
+              "title": "Popular SQL Tools"
+            },
+            "sketch2": {
+              "title": "Accessing a Database"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_0": {
+        "sql-environments": {
+          "sketch-what-is-sql-environment": {
+            "title": "What is an SQL Environment?",
+            "bodyMarkdown": "An SQL environment is any platform or tool where you can write and execute SQL queries. These environments connect to databases and allow you to interact with data using SQL commands. They can be graphical user interfaces (GUIs), command-line tools, or even web-based editors."
+          },
+          "sketch-popular-sql-tools": {
+            "title": "Popular SQL Tools",
+            "bodyMarkdown": "Some common SQL environments include:\n\n- **MySQL Workbench**: A GUI for MySQL databases.\n- **pgAdmin**: A popular tool for PostgreSQL.\n- **SQL Server Management Studio (SSMS)**: Used for Microsoft SQL Server.\n- **DBeaver**: A universal database tool supporting many SQL databases.\n- **Command-line clients**: Such as `mysql`, `psql`, or `sqlite3`.\n- **Online editors**: Like DB Fiddle or SQL Fiddle, which let you run queries in your browser."
+          },
+          "sketch-accessing-databases": {
+            "title": "Accessing a Database",
+            "bodyMarkdown": "To run SQL queries, you need to connect to a database. This usually involves providing connection details such as the database type, server address, username, and password. Once connected, you can use your SQL environment to write and execute queries, view results, and manage data."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "quiz-sql-environment-single-choice": {
+      "title": "Identifying an SQL Environment",
+      "prompt": "Which of the following is an example of an SQL environment?",
+      "hint": "Think about tools designed for database interaction.",
+      "help": {
+        "concept": "SQL environments are tools or platforms where you can write and execute SQL queries.",
+        "hint_1": "Look for a tool that is specifically made for working with databases.",
+        "hint_2": "MySQL Workbench is a graphical tool for managing MySQL databases."
+      },
+      "options": {
+        "a": "Microsoft Word",
+        "b": "MySQL Workbench",
+        "c": "Adobe Photoshop",
+        "d": "Google Chrome"
+      }
+    },
+    "quiz-sql-tools-multi-choice": {
+      "title": "Selecting SQL Tools",
+      "prompt": "Select all tools that can be used to run SQL queries.",
+      "hint": "Some tools are made for databases, others for spreadsheets.",
+      "help": {
+        "concept": "SQL tools are applications designed to connect to databases and execute SQL queries.",
+        "hint_1": "Focus on tools that mention SQL or database management.",
+        "hint_2": "Excel is mainly for spreadsheets, not for running SQL queries directly."
+      },
+      "options": {
+        "a": "pgAdmin",
+        "b": "DBeaver",
+        "c": "Excel",
+        "d": "SQL Server Management Studio (SSMS)"
+      }
+    },
+    "quiz-sql-environment-drag-reorder": {
+      "title": "Steps to Connect to a Database",
+      "prompt": "Arrange the steps in the correct order for connecting to a database using an SQL environment.",
+      "hint": "Think about what you need to do before you can write queries.",
+      "help": {
+        "concept": "Connecting to a database involves launching the tool, entering credentials, establishing the connection, and then running queries.",
+        "hint_1": "You need to open the tool and provide connection info before you can connect.",
+        "hint_2": "Writing queries comes after you are connected to the database."
+      },
+      "tokens": {
+        "t1": "Open your SQL tool",
+        "t2": "Enter connection details (host, username, password)",
+        "t3": "Connect to the database",
+        "t4": "Write and execute SQL queries"
+      }
+    },
+    "quiz-sql-environment-fill-blank": {
+      "title": "Fill in the Blank: SQL Environment",
+      "prompt": "A(n) ____ is a platform or tool where you can write and execute SQL queries.",
+      "hint": "It's a term that describes where you run SQL commands.",
+      "help": {
+        "concept": "An the missing term is any place where SQL queries can be written and executed.",
+        "hint_1": "It's not a spreadsheet or an image editor.",
+        "hint_2": "The answer includes the word 'SQL'."
+      },
+      "template": "A(n) ____ is a platform or tool where you can write and execute SQL queries.",
+      "choices": [
+        "spreadsheet",
+        "SQL environment",
+        "image editor",
+        "web browser"
+      ]
+    },
+    "quiz-sql-environment-code-input": {
+      "title": "Practice: Simple SQL Query in an Environment",
+      "prompt": "Suppose you are connected to the 'students_intro' database in your SQL environment. Write a query to select all columns from the 'students' table.",
+      "hint": "Use SELECT with * to get all columns.",
+      "help": {
+        "concept": "The SELECT statement retrieves data from a table. Using * selects all columns.",
+        "hint_1": "Start your query with SELECT * FROM ...",
+        "hint_2": "The table name is 'students'."
+      },
+      "starterCode": "-- Write your SQL query below\n"
+    }
+  }
+}

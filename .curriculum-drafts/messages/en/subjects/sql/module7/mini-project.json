@@ -1,0 +1,141 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_7": {
+        "mini-project": {
+          "label": "Mini-Project: End-to-End Query",
+          "summary": "Combine your SQL skills to answer real business questions using the inventory_ops dataset.",
+          "cards": {
+            "sketch0": {
+              "title": "Project Overview"
+            },
+            "sketch1": {
+              "title": "Dataset Structure"
+            },
+            "sketch2": {
+              "title": "Business Questions"
+            },
+            "project": {
+              "title": "Inventory Analysis Mini-Project"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "projectSteps": {
+            "filter-active-non-test": {
+              "title": "Find Active, Non-Test Items"
+            },
+            "avg-price-by-category": {
+              "title": "Average Price by Category"
+            },
+            "most-recently-updated-item": {
+              "title": "Most Recently Updated Item"
+            },
+            "order-steps": {
+              "title": "Order the Steps for an End-to-End Query"
+            },
+            "fill-blank-category": {
+              "title": "Fill in the Blank: Category Filtering"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_7": {
+        "mini-project": {
+          "intro": {
+            "title": "Project Overview",
+            "bodyMarkdown": "In this mini-project, you'll use the `inventory_items` table from the `inventory_ops` dataset. Your goal is to answer practical business questions by writing SQL queries that combine filtering, sorting, and aggregation. This project will help you practice integrating multiple SQL concepts in a real-world scenario."
+          },
+          "dataset-overview": {
+            "title": "Dataset Structure",
+            "bodyMarkdown": "The `inventory_items` table contains the following columns:\n\n- `id` (INTEGER): Unique identifier for each item\n- `name` (TEXT): Name of the inventory item\n- `category` (TEXT): Category of the item (e.g., Accessories, Kitchen, Decor)\n- `price` (REAL): Price of the item\n- `status` (TEXT): Status of the item (e.g., active, draft, inactive)\n- `is_test` (INTEGER): 1 if the item is a test/sample, 0 otherwise\n- `notes` (TEXT): Optional notes about the item\n- `last_updated` (TEXT): Date the item was last updated (YYYY-MM-DD)\n\nSample rows:\n\n| id | name           | category    | price | status   | is_test | notes              | last_updated |\n|----|----------------|-------------|-------|----------|---------|--------------------|--------------|\n| 1  | Sticker Pack   | Accessories | 4.99  | active   | 0       | NULL               | 2026-02-01   |\n| 2  | Test Mug       | Kitchen     | 7.50  | draft    | 1       | Internal sample    | 2026-02-03   |\n| 3  | Canvas Print   | Decor       | 45.00 | active   | 0       | NULL               | 2026-02-02   |"
+          },
+          "business-context": {
+            "title": "Business Questions",
+            "bodyMarkdown": "Imagine you are helping the operations team analyze inventory. They want to know:\n\n1. Which active items are available for sale (excluding test items)?\n2. What is the average price of items in each category?\n3. Which item was most recently updated?\n\nYou'll answer these questions step by step using SQL."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "filter-active-non-test": {
+      "title": "Find Active, Non-Test Items",
+      "prompt": "Write a SQL query to select the `id`, `name`, and `category` of all items that are 'active' and not test items (`is_test = 0`).",
+      "hint": "Filter by both `status` and `is_test`.",
+      "help": {
+        "concept": "Use the WHERE clause to filter rows based on multiple conditions. Combine conditions with AND.",
+        "hint_1": "You need to check both the status and is_test columns.",
+        "hint_2": "Use WHERE status = 'active' AND is_test = 0 to get only active, real items."
+      },
+      "starterCode": "-- Select id, name, and category for active, non-test items\nSELECT id, name, category\nFROM inventory_items\nWHERE ...;"
+    },
+    "avg-price-by-category": {
+      "title": "Average Price by Category",
+      "prompt": "Write a SQL query to show each category and the average price of items in that category. Name the average column `avg_price`.",
+      "hint": "Use GROUP BY and AVG().",
+      "help": {
+        "concept": "Aggregate functions like AVG() are used with GROUP BY to calculate values for each group.",
+        "hint_1": "GROUP BY category to get averages per category.",
+        "hint_2": "Remember to use AVG(price) and GROUP BY category in your SELECT statement."
+      },
+      "starterCode": "-- Show category and average price\nSELECT category, AVG(price) AS avg_price\nFROM inventory_items\n... ;"
+    },
+    "most-recently-updated-item": {
+      "title": "Most Recently Updated Item",
+      "prompt": "Which item was most recently updated in the inventory_items table?",
+      "hint": "Look for the highest date in the last_updated column.",
+      "help": {
+        "concept": "To find the most recently updated item, compare the values in the last_updated column.",
+        "hint_1": "Check which row has the latest date in last_updated.",
+        "hint_2": "Sort by last_updated descending to see which item comes first."
+      },
+      "options": {
+        "a": "Sticker Pack",
+        "b": "Test Mug",
+        "c": "Canvas Print",
+        "d": "Sample Poster",
+        "e": "Water Bottle",
+        "f": "Trial Tote"
+      }
+    },
+    "order-steps": {
+      "title": "Order the Steps for an End-to-End Query",
+      "prompt": "Arrange these steps in the correct order to answer a business question using SQL.",
+      "hint": "Think about the logical flow: what comes first?",
+      "help": {
+        "concept": "Solving a business problem with SQL involves understanding the question, writing the query, refining it, and checking the output.",
+        "hint_1": "Start by understanding what you need to answer.",
+        "hint_2": "You can't write the query before knowing the question."
+      },
+      "tokens": {
+        "t1": "Identify the business question",
+        "t2": "Write the SELECT statement",
+        "t3": "Add WHERE or GROUP BY as needed",
+        "t4": "Run the query and review results"
+      }
+    },
+    "fill-blank-category": {
+      "title": "Fill in the Blank: Category Filtering",
+      "prompt": "To select only items from the 'Kitchen' category, which value should you use in the WHERE clause?\n\nWHERE category = ____",
+      "hint": "Look at the category values in the dataset.",
+      "help": {
+        "concept": "The WHERE clause filters rows based on the value in a column.",
+        "hint_1": "Check the exact spelling and quotes for the category.",
+        "hint_2": "Use the value as it appears in the table, including single quotes."
+      },
+      "template": "WHERE category = ____",
+      "choices": [
+        "'Kitchen'",
+        "'Decor'",
+        "'Accessories'",
+        "'active'"
+      ]
+    }
+  }
+}

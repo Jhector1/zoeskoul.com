@@ -1,0 +1,135 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_0": {
+        "databases-overview": {
+          "label": "Databases Overview",
+          "summary": "Explore what databases are and how they store information.",
+          "cards": {
+            "sketch0": {
+              "title": "What is a Database?"
+            },
+            "sketch1": {
+              "title": "Example: The students Table"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_0": {
+        "databases-overview": {
+          "sketch-what-is-a-database": {
+            "title": "What is a Database?",
+            "bodyMarkdown": "A **database** is an organized collection of data that is stored and accessed electronically. Databases help us manage large amounts of information efficiently. For example, a school might use a database to keep track of students, their grades, ages, and cities. \n\nIn SQL, data is stored in **tables**. Each table has columns (like `name`, `grade`, `age`, `city`) and rows (each row represents a single record, such as a student)."
+          },
+          "sketch-students-table-example": {
+            "title": "Example: The students Table",
+            "bodyMarkdown": "Consider the `students` table:\n\n| id | name | grade | age | city       |\n|----|------|-------|-----|------------|\n| 1  | Noor | A     | 15  | Chicago    |\n| 2  | Mia  | A     | 14  | Evanston   |\n| 3  | Leo  | B     | 15  | Chicago    |\n| 4  | Ava  | C     | 14  | Oak Park   |\n| 5  | Zane | B     | 16  | Naperville |\n\nEach row is a student, and each column stores a specific type of information about the students."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "quiz-what-is-a-database": {
+      "title": "What best describes a database?",
+      "prompt": "Choose the best definition of a database.",
+      "hint": "Think about how data is stored and organized.",
+      "help": {
+        "concept": "A database is a structured way to store and manage data electronically.",
+        "hint_1": "A database is not just any collection of files or programs.",
+        "hint_2": "Databases are designed to organize and allow access to data efficiently."
+      },
+      "options": {
+        "a": "A collection of random files on a computer.",
+        "b": "A program for editing text documents.",
+        "c": "An organized collection of data stored electronically.",
+        "d": "A type of computer hardware."
+      }
+    },
+    "quiz-table-structure": {
+      "title": "Understanding Table Structure",
+      "prompt": "Which of the following are columns you would find in the `students` table from the example above? Select all that apply.",
+      "hint": "Look for columns that describe student information.",
+      "help": {
+        "concept": "Columns in the correct answer table represent different attributes of the data being stored.",
+        "hint_1": "Columns like 'name', 'grade', 'city', and 'age' describe students.",
+        "hint_2": "Ignore any column that doesn't relate to student details in the example table."
+      },
+      "options": {
+        "a": "name",
+        "b": "grade",
+        "c": "city",
+        "d": "salary",
+        "e": "age"
+      }
+    },
+    "quiz-table-rows-represent": {
+      "title": "What Does a Row Represent?",
+      "prompt": "In the `students` table, what does each row represent?",
+      "hint": "Each row contains all the information about one entity.",
+      "help": {
+        "concept": "Rows in the correct answer table represent individual records, such as the correct answer single student.",
+        "hint_1": "Each row combines values for all columns for one record.",
+        "hint_2": "In the example, each row lists details for one student."
+      },
+      "options": {
+        "a": "A single student",
+        "b": "A group of students",
+        "c": "A type of grade",
+        "d": "A city"
+      }
+    },
+    "quiz-drag-table-terms": {
+      "title": "Order the Database Terms",
+      "prompt": "Arrange these database terms from the largest to the smallest unit.",
+      "hint": "Think about how data is organized, from the whole system down to individual pieces.",
+      "help": {
+        "concept": "A the correct answer contains tables, which contain rows and columns, which in turn hold individual values.",
+        "hint_1": "Start with the biggest container and work down to the smallest detail.",
+        "hint_2": "A the correct answer is the smallest piece, while a the correct answer is the largest."
+      },
+      "tokens": {
+        "t1": "Database",
+        "t2": "Table",
+        "t3": "Row",
+        "t4": "Column",
+        "t5": "Value"
+      }
+    },
+    "quiz-fill-blank-table-name": {
+      "title": "Identify the Table Name",
+      "prompt": "In the example, the table that stores student information is called ____.",
+      "hint": "Look at the example table's name.",
+      "help": {
+        "concept": "The table name identifies what kind of data is stored.",
+        "hint_1": "The table name is shown at the top of the example.",
+        "hint_2": "It's the plural form referring to the people listed."
+      },
+      "template": "The table name is [___].",
+      "choices": [
+        "students",
+        "grades",
+        "cities",
+        "school"
+      ]
+    },
+    "quiz-sql-select-all": {
+      "title": "Write a Query to View All Students",
+      "prompt": "Write an SQL query to select all columns and all rows from the `students` table.",
+      "hint": "Use SELECT with * to get all columns.",
+      "help": {
+        "concept": "The SELECT statement retrieves data from a table. Using * selects all columns.",
+        "hint_1": "The FROM clause specifies which table to use.",
+        "hint_2": "Combine SELECT *, FROM, and the table name to get all data."
+      },
+      "starterCode": "-- Write your SQL query below"
+    }
+  }
+}

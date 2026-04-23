@@ -1,0 +1,142 @@
+{
+  "topicId": "string-functions",
+  "subjectSlug": "sql",
+  "moduleSlug": "sql_module_4",
+  "sectionSlug": "section_4_1",
+  "prefix": "sql4",
+  "minutes": 15,
+  "topic": {
+    "labelKey": "topics.sql.sql_module_4.string-functions.label",
+    "summaryKey": "topics.sql.sql_module_4.string-functions.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_4.string-functions.cards.sketch0.title",
+      "sketchId": "sketch-intro-string-funcs",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_4.string-functions.cards.sketch1.title",
+      "sketchId": "sketch-examples-string-funcs",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql.sql_module_4.string-functions.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch-intro-string-funcs",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_4.string-functions.sketch-intro-string-funcs.title",
+      "bodyKey": "sketches.sql.sql_module_4.string-functions.sketch-intro-string-funcs.bodyMarkdown"
+    },
+    {
+      "id": "sketch-examples-string-funcs",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_4.string-functions.sketch-examples-string-funcs.title",
+      "bodyKey": "sketches.sql.sql_module_4.string-functions.sketch-examples-string-funcs.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "quiz-single-choice-trim",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.quiz-single-choice-trim",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "quiz-multi-choice-string-funcs",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.quiz-multi-choice-string-funcs",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "quiz-drag-reorder-string-funcs",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.quiz-drag-reorder-string-funcs",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "quiz-fill-blank-choice-upper",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.quiz-fill-blank-choice-upper",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "UPPER"
+      }
+    },
+    {
+      "id": "quiz-code-input-trim-upper",
+      "kind": "code_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.quiz-code-input-trim-upper",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "customers_cleanup",
+        "resultShape": "table",
+        "solutionCode": "SELECT id, UPPER(TRIM(full_name)) AS clean_name FROM customers;"
+      }
+    }
+  ]
+}

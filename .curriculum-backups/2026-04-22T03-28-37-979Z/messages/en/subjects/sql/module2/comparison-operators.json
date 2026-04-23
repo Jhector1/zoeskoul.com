@@ -1,0 +1,118 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_2": {
+        "comparison-operators": {
+          "label": "Comparison Operators",
+          "summary": "Use =, <, >, <=, >=, <> to compare values.",
+          "cards": {
+            "sketch0": {
+              "title": "What Are Comparison Operators?"
+            },
+            "sketch1": {
+              "title": "Why Use Comparison Operators?"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_2": {
+        "comparison-operators": {
+          "sketch-what-are-comparison-operators": {
+            "title": "What Are Comparison Operators?",
+            "bodyMarkdown": "Comparison operators in SQL allow you to compare values in your queries. They are used in WHERE clauses to filter rows based on conditions. Common operators include:\n\n- `=` (equal to)\n- `<` (less than)\n- `>` (greater than)\n- `<=` (less than or equal to)\n- `>=` (greater than or equal to)\n- `<>` (not equal to)\n\nFor example, to find products with a price greater than 100: `WHERE price > 100`."
+          },
+          "sketch-why-use-comparison-operators": {
+            "title": "Why Use Comparison Operators?",
+            "bodyMarkdown": "Comparison operators help you retrieve only the data you need. For example, you can:\n\n- Find all students with a grade above 80\n- List employees hired after a certain date\n- Show products not equal to a specific category\n\nUsing these operators makes your queries more powerful and precise."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "quiz-single-choice-basic-comparison": {
+      "title": "Choosing the Correct Operator",
+      "prompt": "Which comparison operator would you use to find all products with a price not equal to 50?",
+      "hint": "Which symbol means 'not equal to' in SQL?",
+      "help": {
+        "concept": "The '<>' operator is used in SQL to check if two values are not equal.",
+        "hint_1": "Look for the operator that means 'not equal to'.",
+        "hint_2": "It's not '=', '<', or '>'."
+      },
+      "options": {
+        "a": "=",
+        "b": "<>",
+        "c": "<",
+        "d": ">"
+      }
+    },
+    "quiz-multi-choice-which-are-comparison": {
+      "title": "Identifying Comparison Operators",
+      "prompt": "Select all valid SQL comparison operators from the list below.",
+      "hint": "Some options are logical or pattern-matching operators, not comparison operators.",
+      "help": {
+        "concept": "Comparison operators compare values directly, while others are used for logic or patterns.",
+        "hint_1": "Exclude operators used for combining conditions or matching patterns.",
+        "hint_2": "Pick only those that compare two values numerically or for equality."
+      },
+      "options": {
+        "a": "=",
+        "b": "LIKE",
+        "c": "<=",
+        "d": "AND",
+        "e": "<>"
+      }
+    },
+    "quiz-drag-reorder-comparison-meaning": {
+      "title": "Order the Operators by Meaning",
+      "prompt": "Arrange these operators from 'less than' to 'greater than or equal to'.",
+      "hint": "Think about the mathematical order of these symbols.",
+      "help": {
+        "concept": "Ordering operators by their comparison meaning helps understand their use in filtering data.",
+        "hint_1": "Start with the smallest comparison and end with the largest.",
+        "hint_2": "Place '=' after '<', and '>=' at the end."
+      },
+      "tokens": {
+        "t1": "<",
+        "t2": "=",
+        "t3": ">=",
+        "t4": ">"
+      }
+    },
+    "quiz-fill-blank-choice-operator-usage": {
+      "title": "Fill in the Blank: Operator Usage",
+      "prompt": "Complete the SQL WHERE clause to find employees with a salary greater than 50000:\n\n`SELECT * FROM employees WHERE salary ___ 50000;`",
+      "hint": "Which operator checks for values above a number?",
+      "help": {
+        "concept": "The '>' operator is used to filter for values greater than a specified number.",
+        "hint_1": "You want salaries higher than 50000.",
+        "hint_2": "It's not '=', '<', or '<>'."
+      },
+      "template": "SELECT * FROM employees WHERE salary ___ 50000;",
+      "choices": [
+        "=",
+        "<",
+        ">",
+        "<>"
+      ]
+    },
+    "quiz-code-input-comparison-where": {
+      "title": "Write a WHERE Clause with a Comparison Operator",
+      "prompt": "Write a SQL query to select all products from the 'products_catalog' dataset where the price is less than 20.",
+      "hint": "Use the '<' operator with the price column.",
+      "help": {
+        "concept": "Comparison operators filter rows based on column values. Use '<' to find values less than a number.",
+        "hint_1": "The WHERE clause should compare 'price' to 20 using '<'.",
+        "hint_2": "Complete the WHERE clause so only products with price below 20 are selected."
+      },
+      "starterCode": "SELECT * FROM products_catalog\nWHERE "
+    }
+  }
+}

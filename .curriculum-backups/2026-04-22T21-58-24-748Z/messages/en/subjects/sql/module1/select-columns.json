@@ -1,0 +1,124 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_1": {
+        "select-columns": {
+          "label": "Selecting Specific Columns",
+          "summary": "Learn how to retrieve only the columns you need.",
+          "cards": {
+            "sketch0": {
+              "title": "Why Select Specific Columns?"
+            },
+            "sketch1": {
+              "title": "Syntax: SELECT Column Names"
+            },
+            "sketch2": {
+              "title": "Example: Products Table"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_1": {
+        "select-columns": {
+          "intro-select-columns": {
+            "title": "Why Select Specific Columns?",
+            "bodyMarkdown": "When working with SQL, you often don't need every column from a table. Selecting only the columns you need makes your queries faster and your results easier to read. For example, if you only want to see the name and price of products, you can specify those columns in your SELECT statement."
+          },
+          "syntax-select-columns": {
+            "title": "Syntax: SELECT Column Names",
+            "bodyMarkdown": "To select specific columns, list them after the SELECT keyword, separated by commas. For example:\n\n```sql\nSELECT name, price FROM products;\n```\n\nThis will return only the `name` and `price` columns from the `products` table."
+          },
+          "example-select-columns": {
+            "title": "Example: Products Table",
+            "bodyMarkdown": "Given the `products` table:\n\n| id | name               | category    | price  | stock | created_at  |\n|----|--------------------|-------------|--------|-------|-------------|\n| 1  | Sketchbook         | Art         | 12.99  | 25    | 2026-01-10  |\n| 2  | Acrylic Paint Set  | Art         | 24.50  | 10    | 2026-02-02  |\n| 3  | Desk Lamp          | Home        | 39.99  | 8     | 2025-12-20  |\n\nA query like:\n\n```sql\nSELECT name, category FROM products;\n```\n\nwill return:\n\n| name               | category |\n|--------------------|----------|\n| Sketchbook         | Art      |\n| Acrylic Paint Set  | Art      |\n| Desk Lamp          | Home     |"
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "single-choice-select-columns": {
+      "title": "Selecting Columns: Syntax",
+      "prompt": "Which SQL statement correctly selects only the `name` and `price` columns from the `products` table?",
+      "hint": "Remember to list the columns after SELECT, separated by commas.",
+      "help": {
+        "concept": "To select specific columns, use SELECT followed by the column names, separated by commas, then FROM and the table name.",
+        "hint_1": "The correct syntax is SELECT column1, column2 FROM table;",
+        "hint_2": "Look for the answer that lists both 'name' and 'price' after SELECT, separated by the correct answer comma, and uses FROM products."
+      },
+      "options": {
+        "a": "SELECT name, price FROM products;",
+        "b": "SELECT * FROM products;",
+        "c": "SELECT products FROM name, price;",
+        "d": "SELECT name price FROM products;"
+      }
+    },
+    "multi-choice-why-select-columns": {
+      "title": "Why Select Specific Columns?",
+      "prompt": "Why might you want to select only specific columns in a SQL query? (Choose all that apply)",
+      "hint": "Think about efficiency and clarity.",
+      "help": {
+        "concept": "Selecting only the columns you need can make queries faster, results clearer, and reduce unnecessary data.",
+        "hint_1": "You don't always need every column; sometimes less is more.",
+        "hint_2": "Selecting fewer columns can help with performance and readability, but not if you want every detail."
+      },
+      "options": {
+        "a": "To make query results easier to read",
+        "b": "To reduce the amount of data transferred",
+        "c": "To always get every possible detail",
+        "d": "To improve query performance"
+      }
+    },
+    "drag-reorder-select-columns": {
+      "title": "Order the SELECT Statement",
+      "prompt": "Arrange the parts of the SQL statement to select the `category` and `stock` columns from the `products` table.",
+      "hint": "Start with the correct answer, then list columns, then the correct answer and the table name.",
+      "help": {
+        "concept": "The basic the correct answer statement structure is: the correct answer columns the correct answer table;",
+        "hint_1": "First comes the correct answer, then the columns separated by commas, then the correct answer, then the table name.",
+        "hint_2": "The columns should be listed right after the correct answer, and the correct answer comes before the table name."
+      },
+      "tokens": {
+        "t1": "SELECT",
+        "t2": "category, stock",
+        "t3": "FROM",
+        "t4": "products;"
+      }
+    },
+    "fill-blank-choice-select-columns": {
+      "title": "Fill in the Blank: Selecting Columns",
+      "prompt": "Fill in the blank to select the `name` and `stock` columns from the `products` table:\n\nSELECT ___ FROM products;",
+      "hint": "List the columns you want, separated by a comma.",
+      "help": {
+        "concept": "To select specific columns, list them separated by commas after SELECT.",
+        "hint_1": "You want both 'name' and 'stock' in the correct order.",
+        "hint_2": "The answer should be 'the missing term', not '*', and not just the table name."
+      },
+      "template": "SELECT {blank} FROM products;",
+      "choices": [
+        "name, stock",
+        "products",
+        "*",
+        "stock, name"
+      ]
+    },
+    "code-input-select-columns": {
+      "title": "Write a Query: Select Columns",
+      "prompt": "Write a SQL query to return only the `name`, `category`, and `price` columns from the `products` table.",
+      "hint": "List the three columns after SELECT, separated by commas.",
+      "help": {
+        "concept": "To retrieve specific columns, use SELECT followed by the column names you want, separated by commas, then FROM and the table name.",
+        "hint_1": "You need to select 'name', 'category', and 'price' from the products table.",
+        "hint_2": "Remember the order: SELECT column1, column2, column3 FROM products;"
+      },
+      "starterCode": "-- Write your SQL query below"
+    }
+  }
+}

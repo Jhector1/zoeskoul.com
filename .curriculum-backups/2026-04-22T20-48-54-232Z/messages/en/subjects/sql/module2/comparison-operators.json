@@ -1,0 +1,119 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_2": {
+        "comparison-operators": {
+          "label": "Comparison Operators",
+          "summary": "Use =, <, >, <=, >=, <> to compare values.",
+          "cards": {
+            "sketch0": {
+              "title": "What Are Comparison Operators?"
+            },
+            "sketch1": {
+              "title": "Using Comparison Operators in WHERE"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_2": {
+        "comparison-operators": {
+          "sketch-what-are-comparison-operators": {
+            "title": "What Are Comparison Operators?",
+            "bodyMarkdown": "Comparison operators in SQL let you compare values in your queries. They are used in the WHERE clause to filter rows based on conditions. The main comparison operators are:\n\n- `=` (equal to)\n- `<` (less than)\n- `>` (greater than)\n- `<=` (less than or equal to)\n- `>=` (greater than or equal to)\n- `<>` (not equal to)\n\nFor example, to find products with a price greater than 20:\n\n```sql\nSELECT * FROM products WHERE price > 20;\n```\n\nThis returns all products where the price is more than 20."
+          },
+          "sketch-using-comparison-operators": {
+            "title": "Using Comparison Operators in WHERE",
+            "bodyMarkdown": "You can use comparison operators with any column in the `products` table. For example:\n\n- Find products in the 'Art' category:\n\n  ```sql\n  SELECT * FROM products WHERE category = 'Art';\n  ```\n\n- Find products with less than 10 items in stock:\n\n  ```sql\n  SELECT * FROM products WHERE stock < 10;\n  ```\n\n- Find products not in the 'Home' category:\n\n  ```sql\n  SELECT * FROM products WHERE category <> 'Home';\n  ```"
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "quiz-single-choice-basic-operator": {
+      "title": "Choose the correct operator",
+      "prompt": "Which operator would you use to find products with a price not equal to 18?",
+      "hint": "Think about the operator for 'not equal to'.",
+      "help": {
+        "concept": "The '<>' operator in SQL is used to compare two values and returns true if they are not equal.",
+        "hint_1": "It's not '=', which checks for equality.",
+        "hint_2": "Look for the operator that means 'not equal to' in SQL."
+      },
+      "options": {
+        "a": "= 18",
+        "b": "<> 18",
+        "c": "< 18",
+        "d": ">= 18"
+      }
+    },
+    "quiz-multi-choice-which-are-comparison": {
+      "title": "Identify comparison operators",
+      "prompt": "Which of the following are valid SQL comparison operators?",
+      "hint": "Some options are logical or pattern-matching operators, not comparison operators.",
+      "help": {
+        "concept": "Comparison operators compare values, while logical operators combine conditions and pattern-matching operators check for string patterns.",
+        "hint_1": "'AND' and 'LIKE' are not comparison operators.",
+        "hint_2": "Select the operators that directly compare two values."
+      },
+      "options": {
+        "a": "=",
+        "b": "<",
+        "c": "AND",
+        "d": "<>",
+        "e": "LIKE",
+        "f": ">="
+      }
+    },
+    "quiz-drag-reorder-comparison-meaning": {
+      "title": "Order the operators by meaning",
+      "prompt": "Arrange these operators from 'less than' to 'greater than or equal to'.",
+      "hint": "Start with the strictest 'less than' and end with the most inclusive 'greater than or equal to'.",
+      "help": {
+        "concept": "Comparison operators can be ordered by their inclusiveness and direction: '<' is less than, '<=' includes equality, '>' is greater than, '>=' includes equality.",
+        "hint_1": "'<' comes before '<=', and '>' comes before '>='.",
+        "hint_2": "The order is: less than, less than or equal to, greater than, greater than or equal to."
+      },
+      "tokens": {
+        "t1": "<",
+        "t2": "<=",
+        "t3": ">",
+        "t4": ">="
+      }
+    },
+    "quiz-fill-blank-choice-operator-meaning": {
+      "title": "Fill in the blank: Operator meaning",
+      "prompt": "The SQL operator that means 'not equal to' is ____.",
+      "hint": "It's not '=' or '<'.",
+      "help": {
+        "concept": "'<>' is the standard SQL operator for 'not equal to'.",
+        "hint_1": "It's a two-character operator.",
+        "hint_2": "It looks like angle brackets facing away from each other."
+      },
+      "template": "The SQL operator that means 'not equal to' is [[blank]].",
+      "choices": [
+        "=",
+        "<>",
+        "<",
+        "LIKE"
+      ]
+    },
+    "quiz-code-input-products-price-greater": {
+      "title": "Filter products by price",
+      "prompt": "Write a SQL query to select all columns from the `products` table for products with a price greater than 20.",
+      "hint": "Use the WHERE clause and the correct comparison operator for 'greater than'.",
+      "help": {
+        "concept": "The WHERE clause filters rows based on a condition. Use '>' to compare the price column to 20.",
+        "hint_1": "Start with SELECT * FROM products, then add WHERE price > 20.",
+        "hint_2": "Remember to use the '>' operator in your WHERE clause."
+      },
+      "starterCode": "-- Write your query below\n"
+    }
+  }
+}

@@ -1,0 +1,134 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_5": {
+        "min-max": {
+          "label": "MIN and MAX",
+          "summary": "Find minimum and maximum values in columns.",
+          "cards": {
+            "sketch0": {
+              "title": "Introduction to MIN and MAX"
+            },
+            "sketch1": {
+              "title": "Using MIN and MAX with GROUP BY"
+            },
+            "sketch2": {
+              "title": "MIN and MAX Ignore NULLs"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_5": {
+        "min-max": {
+          "min-max-intro": {
+            "title": "Introduction to MIN and MAX",
+            "bodyMarkdown": "The `MIN` and `MAX` aggregate functions in SQL help you find the smallest and largest values in a column. For example, to find the lowest and highest unit price in the `orders` table:\n\n```sql\nSELECT MIN(unit_price) AS lowest_price, MAX(unit_price) AS highest_price FROM orders;\n```\n\nThis query returns the minimum and maximum values from the `unit_price` column across all rows."
+          },
+          "min-max-groupby": {
+            "title": "Using MIN and MAX with GROUP BY",
+            "bodyMarkdown": "You can combine `MIN` and `MAX` with `GROUP BY` to find minimum or maximum values within each group. For example, to find the minimum quantity ordered in each region:\n\n```sql\nSELECT region, MIN(quantity) AS min_quantity FROM orders GROUP BY region;\n```\n\nThis will return the smallest quantity for each region."
+          },
+          "min-max-null": {
+            "title": "MIN and MAX Ignore NULLs",
+            "bodyMarkdown": "The `MIN` and `MAX` functions automatically ignore `NULL` values in the column. Only non-NULL values are considered when calculating the minimum or maximum."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "min-max-single-choice-basic": {
+      "title": "What does the MIN function do?",
+      "prompt": "What is the purpose of the SQL `MIN` function?",
+      "hint": "Think about what 'minimum' means.",
+      "help": {
+        "concept": "The `MIN` function finds the lowest value in a column.",
+        "hint_1": "It is used to get the smallest value.",
+        "hint_2": "It does not count or sum values, but finds the minimum."
+      },
+      "options": {
+        "a": "It returns the smallest value in a column.",
+        "b": "It returns the largest value in a column.",
+        "c": "It counts the number of rows.",
+        "d": "It sums all values in a column."
+      }
+    },
+    "min-max-multi-choice-uses": {
+      "title": "Where can you use MIN and MAX?",
+      "prompt": "Select all correct uses of `MIN` and `MAX` in SQL.",
+      "hint": "Think about which tasks involve minimum or maximum values.",
+      "help": {
+        "concept": "`MIN` and `MAX` are used to find the smallest or largest values in columns, including dates.",
+        "hint_1": "They can be used with numbers and dates.",
+        "hint_2": "Counting is not their purpose, but finding extremes is."
+      },
+      "options": {
+        "a": "Finding the lowest unit price in the orders table.",
+        "b": "Finding the highest quantity ordered in each region.",
+        "c": "Counting the number of orders.",
+        "d": "Finding the earliest order date."
+      }
+    },
+    "min-max-drag-reorder-syntax": {
+      "title": "Order the steps: Find the maximum quantity",
+      "prompt": "Arrange the steps to write a SQL query that finds the maximum quantity in the orders table.",
+      "hint": "Start with SELECT, then specify the table.",
+      "help": {
+        "concept": "A SQL query starts with SELECT, then FROM, then ends with a semicolon.",
+        "hint_1": "The function comes after SELECT.",
+        "hint_2": "The table comes after FROM, and the query ends with a semicolon."
+      },
+      "tokens": {
+        "t1": "SELECT MAX(quantity)",
+        "t2": "FROM orders",
+        "t3": ";"
+      }
+    },
+    "min-max-fill-blank-choice": {
+      "title": "Fill in the blank: Find minimum unit price",
+      "prompt": "Complete the query to find the minimum unit price in the orders table:\n\nSELECT ____ (unit_price) FROM orders;",
+      "hint": "Which function finds the smallest value?",
+      "help": {
+        "concept": "`the missing term` is used to find the lowest value in a column.",
+        "hint_1": "It's not SUM or AVG.",
+        "hint_2": "It's the opposite of MAX."
+      },
+      "template": "SELECT ____ (unit_price) FROM orders;",
+      "choices": [
+        "MIN",
+        "MAX",
+        "SUM",
+        "AVG"
+      ]
+    },
+    "min-max-code-input-basic": {
+      "title": "SQL: Find the highest unit price",
+      "prompt": "Write a SQL query to find the highest unit price in the orders table.",
+      "hint": "Use the MAX function on the unit_price column.",
+      "help": {
+        "concept": "`MAX` returns the largest value in a column. Use it with SELECT.",
+        "hint_1": "The function goes inside SELECT.",
+        "hint_2": "Apply MAX to unit_price and select from orders."
+      },
+      "starterCode": "-- Write your query below"
+    },
+    "min-max-code-input-groupby": {
+      "title": "SQL: Minimum quantity per category",
+      "prompt": "Write a SQL query to find the minimum quantity ordered for each category in the orders table. Show the category and its minimum quantity.",
+      "hint": "Use GROUP BY with the category column and MIN on quantity.",
+      "help": {
+        "concept": "Grouping lets you find minimums within each group using MIN and GROUP BY.",
+        "hint_1": "Select both category and MIN(quantity).",
+        "hint_2": "Group the results by category."
+      },
+      "starterCode": "-- Write your query below"
+    }
+  }
+}

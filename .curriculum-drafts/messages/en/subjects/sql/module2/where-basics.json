@@ -1,0 +1,123 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_2": {
+        "where-basics": {
+          "label": "WHERE Clause Basics",
+          "summary": "Learn how to filter rows in SQL using the WHERE clause. Practice writing queries to select only the data you need from the products table.",
+          "cards": {
+            "sketch0": {
+              "title": "What is the WHERE Clause?"
+            },
+            "sketch1": {
+              "title": "Common Operators in WHERE"
+            },
+            "sketch2": {
+              "title": "Combining Conditions with AND/OR"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_2": {
+        "where-basics": {
+          "sketch-where-intro": {
+            "title": "What is the WHERE Clause?",
+            "bodyMarkdown": "The `WHERE` clause in SQL lets you filter rows from a table based on specific conditions. It is used after the `FROM` clause in a `SELECT` statement. Only rows that meet the condition(s) in the `WHERE` clause will appear in your results.\n\n**Example:**\n\n```sql\nSELECT * FROM products WHERE category = 'Art';\n```\n\nThis query returns only the products in the 'Art' category."
+          },
+          "sketch-where-operators": {
+            "title": "Common Operators in WHERE",
+            "bodyMarkdown": "You can use different operators in the `WHERE` clause to filter data:\n\n- `=` : Equal to\n- `!=` or `<>` : Not equal to\n- `>` : Greater than\n- `<` : Less than\n- `>=` : Greater than or equal to\n- `<=` : Less than or equal to\n\n**Example:**\n\n```sql\nSELECT name, price FROM products WHERE price > 20;\n```\n\nThis returns products with a price greater than 20."
+          },
+          "sketch-where-multiple-conditions": {
+            "title": "Combining Conditions with AND/OR",
+            "bodyMarkdown": "You can combine multiple conditions in a `WHERE` clause using `AND` and `OR`.\n\n- `AND` requires all conditions to be true.\n- `OR` requires at least one condition to be true.\n\n**Example:**\n\n```sql\nSELECT * FROM products WHERE category = 'Home' AND stock < 10;\n```\n\nThis returns products in the 'Home' category with less than 10 in stock."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "where-single-choice-basic": {
+      "title": "Filtering by Category",
+      "prompt": "Which SQL query returns only products in the 'Stationery' category?",
+      "hint": "Focus on the column that holds the category information.",
+      "help": {
+        "concept": "The WHERE clause filters rows based on the correct answer condition. To filter by category, use the category column.",
+        "hint_1": "Look for the query that checks if the category column equals 'Stationery'.",
+        "hint_2": "The correct query uses WHERE category = 'Stationery'."
+      },
+      "options": {
+        "a": "SELECT * FROM products WHERE category = 'Stationery';",
+        "b": "SELECT * FROM products WHERE name = 'Stationery';",
+        "c": "SELECT * FROM products WHERE price = 'Stationery';",
+        "d": "SELECT * FROM products WHERE stock = 'Stationery';"
+      }
+    },
+    "where-multi-choice-operators": {
+      "title": "Using Operators in WHERE",
+      "prompt": "Which of the following queries will return products with a price greater than 20?",
+      "hint": "Remember which operators mean 'greater than' or 'greater than or equal to'.",
+      "help": {
+        "concept": "The '>' operator means greater than, and '>=' means greater than or equal to.",
+        "hint_1": "Queries with '>' or '>=' will return products with prices above 20.",
+        "hint_2": "Pick queries that use price > 20 or price >= 20."
+      },
+      "options": {
+        "a": "SELECT * FROM products WHERE price > 20;",
+        "b": "SELECT * FROM products WHERE price = 20;",
+        "c": "SELECT * FROM products WHERE price >= 20;",
+        "d": "SELECT * FROM products WHERE price < 20;"
+      }
+    },
+    "where-drag-reorder": {
+      "title": "Order the SQL Query",
+      "prompt": "Arrange the parts to form a valid SQL query that selects all products with stock less than 10.",
+      "hint": "Start with SELECT, then FROM, then WHERE.",
+      "help": {
+        "concept": "A basic SQL SELECT statement follows the order: SELECT, FROM, WHERE.",
+        "hint_1": "SELECT comes first, then FROM, then WHERE.",
+        "hint_2": "The WHERE clause always comes after FROM."
+      },
+      "tokens": {
+        "t1": "SELECT *",
+        "t2": "FROM products",
+        "t3": "WHERE stock < 10;"
+      }
+    },
+    "where-fill-blank-choice": {
+      "title": "Fill in the Blank: Filtering by Price",
+      "prompt": "Complete the query to select products with a price equal to 18.",
+      "hint": "Which operator means 'equal to'?",
+      "help": {
+        "concept": "The '=' operator is used to test equality in SQL.",
+        "hint_1": "Use the operator that checks if two values are the same.",
+        "hint_2": "The correct operator is the one used for equality."
+      },
+      "template": "SELECT * FROM products WHERE price ___ 18;",
+      "choices": [
+        "=",
+        ">",
+        "<",
+        "!="
+      ]
+    },
+    "where-code-input-basic": {
+      "title": "Write a WHERE Clause",
+      "prompt": "Write a SQL query to select the name and price of all products in the 'Art' category.",
+      "hint": "Use SELECT to choose columns, FROM to pick the table, and WHERE to filter by category.",
+      "help": {
+        "concept": "To filter rows, use the WHERE clause with the appropriate column and value.",
+        "hint_1": "Select the name and price columns from products where category is 'Art'.",
+        "hint_2": "Use WHERE category = 'Art' in your query."
+      },
+      "starterCode": "-- Write your query below"
+    }
+  }
+}

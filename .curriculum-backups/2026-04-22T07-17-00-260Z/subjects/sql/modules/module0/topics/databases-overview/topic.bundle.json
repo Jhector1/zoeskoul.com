@@ -1,0 +1,137 @@
+{
+  "topicId": "databases-overview",
+  "subjectSlug": "sql",
+  "moduleSlug": "sql_module_0",
+  "sectionSlug": "section_0_1",
+  "prefix": "sql0",
+  "minutes": 20,
+  "topic": {
+    "labelKey": "topics.sql.sql_module_0.databases-overview.label",
+    "summaryKey": "topics.sql.sql_module_0.databases-overview.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_0.databases-overview.cards.sketch0.title",
+      "sketchId": "sketch-what-is-a-database",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_0.databases-overview.cards.sketch1.title",
+      "sketchId": "sketch-how-data-is-organized",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql.sql_module_0.databases-overview.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch-what-is-a-database",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_0.databases-overview.sketch-what-is-a-database.title",
+      "bodyKey": "sketches.sql.sql_module_0.databases-overview.sketch-what-is-a-database.bodyMarkdown"
+    },
+    {
+      "id": "sketch-how-data-is-organized",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_0.databases-overview.sketch-how-data-is-organized.title",
+      "bodyKey": "sketches.sql.sql_module_0.databases-overview.sketch-how-data-is-organized.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "quiz-define-database",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.quiz-define-database",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "quiz-table-structure",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.quiz-table-structure",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": []
+      }
+    },
+    {
+      "id": "quiz-organize-drag",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.quiz-organize-drag",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "quiz-fill-blank-database",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.quiz-fill-blank-database",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "tables"
+      }
+    },
+    {
+      "id": "quiz-sql-table-example",
+      "kind": "code_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.quiz-sql-table-example",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "students_intro",
+        "resultShape": "table",
+        "solutionCode": "SELECT name, grade FROM students;"
+      }
+    }
+  ]
+}

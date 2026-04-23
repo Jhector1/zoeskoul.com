@@ -1,39 +1,36 @@
 import type {
-    CourseProfileId,
-    ManifestExercise,
-    ManifestRuntimeDefaults,
+    PlannedModule,
+    ProfileAdapter,
     TopicBundleManifest,
-    TopicPlanDraft,
+    TopicSeed,
 } from "@zoeskoul/curriculum-contracts";
 
-export type RecipeHandler<T = any> = (
-    def: any,
-    args: any,
-    resolved: any,
-) => any;
+export type RecipeResolvedArgs = {
+    title: string;
+    prompt: string;
+    hint?: string;
+    starterCode: string;
+    help?: unknown;
+    expectedExampleMeta?: string;
+    maybeT?: (key: string) => string | undefined;
+};
+
+export type RecipeHandler<TDef = unknown, TArgs = unknown, TResult = unknown> = (
+    def: TDef,
+    args: TArgs,
+    resolved: RecipeResolvedArgs,
+) => TResult;
 
 export type CourseProfile = {
-    id: CourseProfileId;
-    allowedExerciseKinds: Array<ManifestExercise["kind"]>;
+    id: string;
+    allowedExerciseKinds: string[];
     allowedRecipeTypes: string[];
-    buildModuleRuntimeDefaults(modulePlan: any): ManifestRuntimeDefaults | null;
-    getRecipeRegistry(): Record<string, RecipeHandler<any>>;
+    buildModuleRuntimeDefaults(
+        moduleOrder?: number,
+        module?: PlannedModule,
+    ): TopicSeed["moduleRuntimeDefaults"] | null;
+    getRecipeRegistry(): Record<string, RecipeHandler>;
     validateTopicBundle(bundle: TopicBundleManifest): string[];
-
-    buildTopicBundleFromPlan?: (args: {
-        subjectSlug: string;
-        moduleSlug: string;
-        sectionSlug: string;
-        prefix: string;
-        topicPlan: TopicPlanDraft;
-    }) => TopicBundleManifest;
-
-    buildTopicMessagesFromPlan?: (args: {
-        subjectSlug: string;
-        moduleSlug: string;
-        sectionSlug: string;
-        prefix: string;
-        topicPlan: TopicPlanDraft;
-        locale: string;
-    }) => Record<string, unknown>;
 };
+
+export type CourseProfileAdapter = ProfileAdapter;

@@ -1,0 +1,117 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_1": {
+        "select-columns": {
+          "label": "Selecting Specific Columns",
+          "summary": "Learn how to retrieve only the columns you need.",
+          "cards": {
+            "sketch0": {
+              "title": "What Does It Mean to Select Columns?"
+            },
+            "sketch1": {
+              "title": "Why Select Specific Columns?"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_1": {
+        "select-columns": {
+          "sketch-what-is-select-columns": {
+            "title": "What Does It Mean to Select Columns?",
+            "bodyMarkdown": "In SQL, you can choose to retrieve only the columns you need from a table, instead of selecting all columns. This helps you focus on relevant data and makes your queries more efficient. For example, instead of using `SELECT *`, you can specify column names like `SELECT name, price FROM products;` to get only the `name` and `price` columns."
+          },
+          "sketch-why-select-specific-columns": {
+            "title": "Why Select Specific Columns?",
+            "bodyMarkdown": "Selecting only the columns you need reduces the amount of data transferred and processed. This is especially important when working with large tables. It also makes your results easier to read and understand."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "quiz-single-choice-basic-select": {
+      "title": "Choosing Columns in a SELECT Statement",
+      "prompt": "Which SQL statement retrieves only the `name` and `price` columns from the `products` table?",
+      "hint": "Look for the statement that lists the column names after SELECT.",
+      "help": {
+        "concept": "To select specific columns, list them separated by commas after the SELECT keyword.",
+        "hint_1": "The correct statement should have both column names after SELECT and before FROM.",
+        "hint_2": "Avoid statements that use * or incorrect syntax for listing columns."
+      },
+      "options": {
+        "a": "SELECT name, price FROM products;",
+        "b": "SELECT * FROM products;",
+        "c": "SELECT columns name, price FROM products;",
+        "d": "SELECT name price FROM products;"
+      }
+    },
+    "quiz-multi-choice-why-select-columns": {
+      "title": "Benefits of Selecting Specific Columns",
+      "prompt": "Why might you choose to select only certain columns in a SQL query? (Select all that apply.)",
+      "hint": "Think about efficiency and clarity.",
+      "help": {
+        "concept": "Selecting only needed columns can make queries faster and results clearer.",
+        "hint_1": "Consider which options mention performance or readability.",
+        "hint_2": "One option is incorrect because it suggests always selecting all columns."
+      },
+      "options": {
+        "a": "To reduce the amount of data returned",
+        "b": "To make results easier to read",
+        "c": "To improve query performance",
+        "d": "To always get every column in the table"
+      }
+    },
+    "quiz-drag-reorder-select-syntax": {
+      "title": "Ordering Parts of a SELECT Statement",
+      "prompt": "Arrange the parts of this SQL statement in the correct order to select the `name` and `price` columns from the `products` table.",
+      "hint": "Start with the SQL keyword, then list columns, then specify the table.",
+      "help": {
+        "concept": "A SELECT statement starts with SELECT, followed by columns, FROM, and then the table name.",
+        "hint_1": "SELECT comes first, then the columns, then FROM, then the table.",
+        "hint_2": "Make sure the columns are listed right after SELECT."
+      },
+      "tokens": {
+        "t1": "SELECT",
+        "t2": "name, price",
+        "t3": "FROM",
+        "t4": "products;"
+      }
+    },
+    "quiz-fill-blank-choice-select-keyword": {
+      "title": "Filling in the SELECT Keyword",
+      "prompt": "Fill in the blank to complete the SQL statement: `____ name, price FROM products;`",
+      "hint": "Which SQL keyword is used to retrieve data?",
+      "help": {
+        "concept": "The the missing term keyword is used to start a query that retrieves data.",
+        "hint_1": "It's the most common keyword to begin a data retrieval query.",
+        "hint_2": "It's not GET, CHOOSE, or PICK."
+      },
+      "template": "____ name, price FROM products;",
+      "choices": [
+        "SELECT",
+        "GET",
+        "CHOOSE",
+        "PICK"
+      ]
+    },
+    "quiz-code-input-select-columns-products": {
+      "title": "Write a Query to Select Columns",
+      "prompt": "Write a SQL query to retrieve only the `name` and `price` columns from the `products_catalog` table.",
+      "hint": "Use SELECT with the column names, then FROM and the table name.",
+      "help": {
+        "concept": "To select specific columns, use SELECT followed by the column names separated by commas, then FROM and the table name.",
+        "hint_1": "List both column names after SELECT, separated by a comma.",
+        "hint_2": "Don't use *; specify both columns and the correct table name."
+      },
+      "starterCode": "-- Write your SQL query below\n"
+    }
+  }
+}

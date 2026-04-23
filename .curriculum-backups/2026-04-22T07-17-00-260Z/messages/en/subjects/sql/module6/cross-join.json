@@ -1,0 +1,117 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_6": {
+        "cross-join": {
+          "label": "CROSS JOIN",
+          "summary": "Combine all rows from two tables.",
+          "cards": {
+            "sketch0": {
+              "title": "What is a CROSS JOIN?"
+            },
+            "sketch1": {
+              "title": "Example of a CROSS JOIN"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_6": {
+        "cross-join": {
+          "cross-join-intro": {
+            "title": "What is a CROSS JOIN?",
+            "bodyMarkdown": "A **CROSS JOIN** returns the Cartesian product of two tables, meaning it combines every row from the first table with every row from the second table. This can result in a large number of rows if both tables are large. CROSS JOINs are useful when you want to pair every possible combination of rows from two tables."
+          },
+          "cross-join-example": {
+            "title": "Example of a CROSS JOIN",
+            "bodyMarkdown": "Suppose you have a table `colors` with 3 rows (Red, Blue, Green) and a table `sizes` with 2 rows (Small, Large). A CROSS JOIN between these tables will produce 6 rows, pairing each color with each size:\n\n| color | size  |\n|-------|-------|\n| Red   | Small |\n| Red   | Large |\n| Blue  | Small |\n| Blue  | Large |\n| Green | Small |\n| Green | Large |\n\nThe SQL syntax is:\n```sql\nSELECT * FROM colors CROSS JOIN sizes;\n```"
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "cross-join-single-choice-basic": {
+      "title": "Result of a CROSS JOIN",
+      "prompt": "If table A has 4 rows and table B has 3 rows, how many rows will the result of a CROSS JOIN between A and B have?",
+      "hint": "Multiply the number of rows in both tables.",
+      "help": {
+        "concept": "A CROSS JOIN returns every possible combination of rows from both tables, resulting in the product of their row counts.",
+        "hint_1": "If table A has 4 rows and table B has 3 rows, think about pairing each row from A with every row from B.",
+        "hint_2": "For each of the 4 rows in A, there are 3 possible matches from B. Multiply 4 by 3."
+      },
+      "options": {
+        "a": "7 rows",
+        "b": "12 rows",
+        "c": "4 rows",
+        "d": "3 rows"
+      }
+    },
+    "cross-join-multi-choice-uses": {
+      "title": "When to use a CROSS JOIN",
+      "prompt": "In which situations would a CROSS JOIN be appropriate? (Select all that apply.)",
+      "hint": "Think about the purpose of a CROSS JOIN versus other JOIN types.",
+      "help": {
+        "concept": "CROSS JOIN is used to create all possible combinations of rows from two tables, not to match or filter based on conditions.",
+        "hint_1": "CROSS JOIN does not use ON or WHERE to match rows.",
+        "hint_2": "It's useful for generating combinations, not for filtering or matching on specific columns."
+      },
+      "options": {
+        "a": "When you want every combination of rows from two tables.",
+        "b": "When you need to match rows based on a shared column value.",
+        "c": "To generate all possible pairs for testing purposes.",
+        "d": "To filter rows based on a condition."
+      }
+    },
+    "cross-join-drag-reorder": {
+      "title": "Steps to perform a CROSS JOIN",
+      "prompt": "Arrange the steps to perform a CROSS JOIN in SQL.",
+      "hint": "Start with SELECT, then list the tables and the join keyword.",
+      "help": {
+        "concept": "The SQL syntax for a CROSS JOIN involves selecting columns, specifying the first table, using the CROSS JOIN keyword, and then the second table.",
+        "hint_1": "The SELECT statement comes first.",
+        "hint_2": "After SELECT, list the first table, then CROSS JOIN, then the second table."
+      },
+      "tokens": {
+        "t1": "Write SELECT statement",
+        "t2": "Specify first table",
+        "t3": "Use CROSS JOIN keyword",
+        "t4": "Specify second table"
+      }
+    },
+    "cross-join-fill-blank-choice": {
+      "title": "CROSS JOIN Syntax",
+      "prompt": "Fill in the blank to complete the SQL statement for a CROSS JOIN:\n\nSELECT * FROM products ____ categories;",
+      "hint": "Which keyword creates a Cartesian product?",
+      "help": {
+        "concept": "The the missing term keyword is used to combine every row from the first table with every row from the second table.",
+        "hint_1": "It's not INNER JOIN or LEFT JOIN.",
+        "hint_2": "The keyword should indicate a Cartesian product."
+      },
+      "template": "SELECT * FROM products ____ categories;",
+      "choices": [
+        "CROSS JOIN",
+        "INNER JOIN",
+        "LEFT JOIN",
+        "ON"
+      ]
+    },
+    "cross-join-code-input": {
+      "title": "Write a CROSS JOIN Query",
+      "prompt": "Using the `products_catalog` dataset, write a SQL query to return every combination of product and category from the `products` and `categories` tables.",
+      "hint": "Use CROSS JOIN between the two tables.",
+      "help": {
+        "concept": "A CROSS JOIN combines every row from the first table with every row from the second table, resulting in all possible pairs.",
+        "hint_1": "Start with SELECT * FROM, then list the first table, then use the CROSS JOIN keyword.",
+        "hint_2": "The two tables are products and categories. Use CROSS JOIN to combine them."
+      },
+      "starterCode": "-- Write your query here\n"
+    }
+  }
+}

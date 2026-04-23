@@ -1,0 +1,127 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_1": {
+        "column-aliases": {
+          "label": "Column Aliases",
+          "summary": "Rename columns in your output using aliases.",
+          "cards": {
+            "sketch0": {
+              "title": "What Are Column Aliases?"
+            },
+            "sketch1": {
+              "title": "Why Use Aliases?"
+            },
+            "sketch2": {
+              "title": "Alias Syntax"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_1": {
+        "column-aliases": {
+          "intro-aliases": {
+            "title": "What Are Column Aliases?",
+            "bodyMarkdown": "A column alias lets you give a temporary name to a column in your SQL query results. This is useful for making output more readable or for renaming columns in calculations. You create an alias using the `AS` keyword in your `SELECT` statement.\n\nFor example:\n\n```sql\nSELECT name AS product_name, price AS cost FROM products;\n```\n\nThis will display the `name` column as `product_name` and the `price` column as `cost` in the result set."
+          },
+          "why-use-aliases": {
+            "title": "Why Use Aliases?",
+            "bodyMarkdown": "Aliases help make your query results clearer, especially when column names are long, unclear, or when you use expressions. For example, if you calculate a discounted price, you can give that calculation a friendly name:\n\n```sql\nSELECT name, price * 0.9 AS discounted_price FROM products;\n```\n\nNow, the output will have a column called `discounted_price` instead of just the expression."
+          },
+          "alias-syntax": {
+            "title": "Alias Syntax",
+            "bodyMarkdown": "To create a column alias, write the column or expression, then `AS`, then the alias name:\n\n```sql\nSELECT column_name AS alias_name FROM table_name;\n```\n\nYou can also use an alias without `AS` (just a space), but using `AS` is clearer and recommended."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "single-choice-alias-purpose": {
+      "title": "Purpose of Column Aliases",
+      "prompt": "Why would you use a column alias in a SQL query?",
+      "hint": "Think about how query results can be made clearer.",
+      "help": {
+        "concept": "Column aliases provide temporary names for columns in the output of a query, not in the table itself.",
+        "hint_1": "Aliases make query results easier to read or understand.",
+        "hint_2": "They do not change the table structure, only the output column headers."
+      },
+      "options": {
+        "a": "To permanently rename a column in the database",
+        "b": "To give a temporary, more readable name to a column in the query result",
+        "c": "To delete a column from the table",
+        "d": "To change the data type of a column"
+      }
+    },
+    "multi-choice-alias-syntax": {
+      "title": "Valid Ways to Write Aliases",
+      "prompt": "Which of the following are valid ways to create a column alias for the `price` column as `cost`?",
+      "hint": "There are two valid ways, one with `AS` and one with just the correct answer space.",
+      "help": {
+        "concept": "You can use `AS` or just the correct answer space to assign an alias to the correct answer column in SQL.",
+        "hint_1": "The alias follows the column name, either with `AS` or the correct answer space.",
+        "hint_2": "Using `=` or reversing the order is not correct for aliases."
+      },
+      "options": {
+        "a": "SELECT price AS cost FROM products;",
+        "b": "SELECT price cost FROM products;",
+        "c": "SELECT price = cost FROM products;",
+        "d": "SELECT cost AS price FROM products;"
+      }
+    },
+    "drag-reorder-alias-placement": {
+      "title": "Order the Parts of an Alias Statement",
+      "prompt": "Arrange the parts to form a correct SQL statement that selects the `name` column and gives it the alias `product_name`.",
+      "hint": "Start with the correct answer, then the column, then the alias, then the correct answer.",
+      "help": {
+        "concept": "The typical order is the correct answer, column, the correct answer, alias, the correct answer, table.",
+        "hint_1": "The alias comes after the column, using the correct answer.",
+        "hint_2": "Don't forget the the correct answer clause and semicolon at the end."
+      },
+      "tokens": {
+        "t1": "SELECT",
+        "t2": "name",
+        "t3": "AS",
+        "t4": "product_name",
+        "t5": "FROM",
+        "t6": "products",
+        "t7": ";"
+      }
+    },
+    "fill-blank-choice-alias-keyword": {
+      "title": "Alias Keyword",
+      "prompt": "Fill in the blank to create an alias for the `stock` column as `inventory`:\n\n```sql\nSELECT stock ___ inventory FROM products;\n```",
+      "hint": "Which keyword is used for aliases?",
+      "help": {
+        "concept": "The `the missing term` keyword is used to assign an alias to a column or expression.",
+        "hint_1": "It's a two-letter keyword.",
+        "hint_2": "It's not IS, =, or TO."
+      },
+      "template": "SELECT stock ___ inventory FROM products;",
+      "choices": [
+        "AS",
+        "IS",
+        "=",
+        "TO"
+      ]
+    },
+    "code-input-alias-query": {
+      "title": "Write a Query with Aliases",
+      "prompt": "Write a SQL query to select the `name` column as `product`, the `category` column as `type`, and the `price` column as `cost` from the `products` table.",
+      "hint": "Use AS to rename each column in the SELECT clause.",
+      "help": {
+        "concept": "You can assign aliases to columns in the SELECT clause using the AS keyword.",
+        "hint_1": "Each column should have its own alias using AS.",
+        "hint_2": "List all three columns with their aliases, separated by commas."
+      },
+      "starterCode": "-- Write your query below"
+    }
+  }
+}

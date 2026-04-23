@@ -33,6 +33,7 @@
     "@upstash/redis": "^1.36.3",
     "@zoeskoul/code-contracts": "workspace:*",
     "@zoeskoul/pty-auth": "workspace:*",
+    "@zoeskoul/curriculum-runtime": "workspace:*",
 
     "@zoeskoul/practice-contracts": "workspace:*",
 

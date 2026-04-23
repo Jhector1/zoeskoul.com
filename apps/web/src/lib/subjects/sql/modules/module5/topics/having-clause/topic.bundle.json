@@ -1,0 +1,160 @@
+{
+  "topicId": "having-clause",
+  "subjectSlug": "sql",
+  "moduleSlug": "sql_module_5",
+  "sectionSlug": "section_5_1",
+  "prefix": "sql5",
+  "minutes": 15,
+  "topic": {
+    "labelKey": "topics.sql.sql_module_5.having-clause.label",
+    "summaryKey": "topics.sql.sql_module_5.having-clause.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_5.having-clause.cards.sketch0.title",
+      "sketchId": "intro-having",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_5.having-clause.cards.sketch1.title",
+      "sketchId": "when-to-use-having",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_5.having-clause.cards.sketch2.title",
+      "sketchId": "having-vs-where",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql.sql_module_5.having-clause.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "intro-having",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_5.having-clause.intro-having.title",
+      "bodyKey": "sketches.sql.sql_module_5.having-clause.intro-having.bodyMarkdown"
+    },
+    {
+      "id": "when-to-use-having",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_5.having-clause.when-to-use-having.title",
+      "bodyKey": "sketches.sql.sql_module_5.having-clause.when-to-use-having.bodyMarkdown"
+    },
+    {
+      "id": "having-vs-where",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_5.having-clause.having-vs-where.title",
+      "bodyKey": "sketches.sql.sql_module_5.having-clause.having-vs-where.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "sc-having-purpose",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.sc-having-purpose",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "mc-having-aggregate",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.mc-having-aggregate",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "dr-having-order",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.dr-having-order",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4",
+        "t5",
+        "t6"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4",
+          "t5",
+          "t6"
+        ]
+      }
+    },
+    {
+      "id": "fb-having-vs-where",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.fb-having-vs-where",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "WHERE"
+      }
+    },
+    {
+      "id": "ci-having-paid-orders",
+      "kind": "code_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.ci-having-paid-orders",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_kpi",
+        "resultShape": "table",
+        "solutionCode": "SELECT region, COUNT(*) AS paid_count\nFROM orders\nWHERE status = 'paid'\nGROUP BY region\nHAVING COUNT(*) > 1;"
+      }
+    }
+  ]
+}

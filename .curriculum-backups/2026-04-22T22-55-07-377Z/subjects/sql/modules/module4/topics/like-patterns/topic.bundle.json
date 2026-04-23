@@ -1,0 +1,154 @@
+{
+  "topicId": "like-patterns",
+  "subjectSlug": "sql",
+  "moduleSlug": "sql_module_4",
+  "sectionSlug": "section_4_1",
+  "prefix": "sql4",
+  "minutes": 20,
+  "topic": {
+    "labelKey": "topics.sql.sql_module_4.like-patterns.label",
+    "summaryKey": "topics.sql.sql_module_4.like-patterns.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_4.like-patterns.cards.sketch0.title",
+      "sketchId": "intro-like-patterns",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_4.like-patterns.cards.sketch1.title",
+      "sketchId": "wildcards-explained",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_4.like-patterns.cards.sketch2.title",
+      "sketchId": "like-use-cases",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql.sql_module_4.like-patterns.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "intro-like-patterns",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_4.like-patterns.intro-like-patterns.title",
+      "bodyKey": "sketches.sql.sql_module_4.like-patterns.intro-like-patterns.bodyMarkdown"
+    },
+    {
+      "id": "wildcards-explained",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_4.like-patterns.wildcards-explained.title",
+      "bodyKey": "sketches.sql.sql_module_4.like-patterns.wildcards-explained.bodyMarkdown"
+    },
+    {
+      "id": "like-use-cases",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_4.like-patterns.like-use-cases.title",
+      "bodyKey": "sketches.sql.sql_module_4.like-patterns.like-use-cases.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "like-single-choice-1",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.like-single-choice-1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "like-multi-choice-1",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.like-multi-choice-1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "like-drag-reorder-1",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.like-drag-reorder-1",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "like-fill-blank-1",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.like-fill-blank-1",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "'%Reed'"
+      }
+    },
+    {
+      "id": "like-code-input-1",
+      "kind": "code_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.like-code-input-1",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "customers_cleanup",
+        "resultShape": "table",
+        "solutionCode": "SELECT * FROM customers WHERE status = 'active' AND city LIKE 'Chicago';"
+      }
+    }
+  ]
+}

@@ -1,0 +1,124 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_3": {
+        "limit-top": {
+          "label": "LIMIT and TOP Clauses",
+          "summary": "Restrict the number of rows returned.",
+          "cards": {
+            "sketch0": {
+              "title": "Introduction to LIMIT and TOP"
+            },
+            "sketch1": {
+              "title": "Using LIMIT with ORDER BY"
+            },
+            "sketch2": {
+              "title": "LIMIT with OFFSET"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_3": {
+        "limit-top": {
+          "sketch-intro-limit-top": {
+            "title": "Introduction to LIMIT and TOP",
+            "bodyMarkdown": "When working with large tables, you may not want to see every row in your query results. SQL provides ways to restrict the number of rows returned. In SQLite (and many other databases), you use the `LIMIT` clause at the end of your query to specify how many rows you want. For example:\n\n```sql\nSELECT * FROM products LIMIT 3;\n```\n\nThis query returns only the first 3 rows from the `products` table. In some databases like SQL Server, you might use the `TOP` keyword instead, but in SQLite, `LIMIT` is the standard."
+          },
+          "sketch-limit-with-order": {
+            "title": "Using LIMIT with ORDER BY",
+            "bodyMarkdown": "The `LIMIT` clause is often used together with `ORDER BY` to get the top or bottom rows based on a certain column. For example, to get the 2 most expensive products:\n\n```sql\nSELECT name, price FROM products ORDER BY price DESC LIMIT 2;\n```\n\nThis will return the two products with the highest prices. Without `ORDER BY`, `LIMIT` just returns the first N rows as they appear in the table, which may not be meaningful."
+          },
+          "sketch-limit-offset": {
+            "title": "LIMIT with OFFSET",
+            "bodyMarkdown": "You can also use `OFFSET` with `LIMIT` to skip a number of rows before returning results. For example:\n\n```sql\nSELECT name FROM products ORDER BY id LIMIT 2 OFFSET 2;\n```\n\nThis skips the first 2 rows and returns the next 2 rows. This is useful for pagination or browsing through large result sets."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "quiz-single-choice-limit-basic": {
+      "title": "Basic LIMIT Usage",
+      "prompt": "Which SQL query returns only the first 2 rows from the `products` table?",
+      "hint": "Look for the standard SQLite way to limit rows.",
+      "help": {
+        "concept": "The `LIMIT` clause in SQLite restricts the number of rows returned by the correct answer query.",
+        "hint_1": "SQLite does not use `TOP` or `rownum`.",
+        "hint_2": "The correct answer uses `LIMIT` followed by the number of rows."
+      },
+      "options": {
+        "a": "SELECT * FROM products LIMIT 2;",
+        "b": "SELECT * FROM products TOP 2;",
+        "c": "SELECT * FROM products WHERE rownum <= 2;",
+        "d": "SELECT * FROM products ORDER BY 2;"
+      }
+    },
+    "quiz-multi-choice-limit-order": {
+      "title": "Combining LIMIT and ORDER BY",
+      "prompt": "Select all queries that will return the two most expensive products from the `products` table.",
+      "hint": "Pay attention to the order of `ORDER BY` and `LIMIT`.",
+      "help": {
+        "concept": "`ORDER BY` sorts the results, and `LIMIT` restricts how many are shown. The order of these clauses matters.",
+        "hint_1": "`LIMIT` should come after `ORDER BY` to get the top N by the correct answer column.",
+        "hint_2": "Only queries that sort by price descending before limiting will return the most expensive products."
+      },
+      "options": {
+        "a": "SELECT * FROM products ORDER BY price DESC LIMIT 2;",
+        "b": "SELECT * FROM products LIMIT 2 ORDER BY price DESC;",
+        "c": "SELECT name, price FROM products ORDER BY price DESC LIMIT 2;",
+        "d": "SELECT name, price FROM products LIMIT 2;"
+      }
+    },
+    "quiz-drag-reorder-limit-offset": {
+      "title": "Query Structure: LIMIT with OFFSET",
+      "prompt": "Arrange the SQL keywords to form a query that selects all columns from `products`, skips the first 3 rows, and returns the next 2.",
+      "hint": "Start with SELECT and FROM, then add LIMIT and OFFSET.",
+      "help": {
+        "concept": "The typical order for these clauses is SELECT, FROM, LIMIT, then OFFSET.",
+        "hint_1": "LIMIT comes before OFFSET in SQLite syntax.",
+        "hint_2": "OFFSET always follows LIMIT at the end of the query."
+      },
+      "tokens": {
+        "t1": "SELECT *",
+        "t2": "FROM products",
+        "t3": "LIMIT 2",
+        "t4": "OFFSET 3"
+      }
+    },
+    "quiz-fill-blank-choice-limit-offset": {
+      "title": "Fill in the Blank: LIMIT with OFFSET",
+      "prompt": "Complete the query to select the names of the first 3 products in alphabetical order by name:\n\nSELECT name FROM products ORDER BY name _____ 3;",
+      "hint": "Which keyword restricts the number of rows in SQLite?",
+      "help": {
+        "concept": "`the missing term` is used in SQLite to restrict the number of rows returned.",
+        "hint_1": "The correct keyword is not `TOP` or `ROWNUM` in SQLite.",
+        "hint_2": "The answer is a clause that comes after ORDER BY and before the number."
+      },
+      "template": "SELECT name FROM products ORDER BY name _____ 3;",
+      "choices": [
+        "LIMIT",
+        "TOP",
+        "OFFSET",
+        "ROWNUM"
+      ]
+    },
+    "quiz-code-input-limit-practice": {
+      "title": "Practice: LIMIT in Action",
+      "prompt": "Write a SQL query to display the `name` and `price` of the 4 cheapest products from the `products` table.",
+      "hint": "Use ORDER BY to sort by price, then LIMIT to restrict the number of rows.",
+      "help": {
+        "concept": "To get the cheapest products, sort by price ascending and limit the results.",
+        "hint_1": "ORDER BY price ASC will sort from lowest to highest price.",
+        "hint_2": "Use LIMIT 4 to get only the four cheapest products."
+      },
+      "starterCode": "-- Write your query below"
+    }
+  }
+}

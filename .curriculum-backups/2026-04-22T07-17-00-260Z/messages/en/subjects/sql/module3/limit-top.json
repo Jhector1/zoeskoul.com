@@ -1,0 +1,123 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_3": {
+        "limit-top": {
+          "label": "LIMIT and TOP Clauses",
+          "summary": "Restrict the number of rows returned.",
+          "cards": {
+            "sketch0": {
+              "title": "What are LIMIT and TOP?"
+            },
+            "sketch1": {
+              "title": "Basic Usage of LIMIT"
+            },
+            "sketch2": {
+              "title": "Combining LIMIT with ORDER BY"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_3": {
+        "limit-top": {
+          "sketch1": {
+            "title": "What are LIMIT and TOP?",
+            "bodyMarkdown": "In SQL, the `LIMIT` clause (used in SQLite, MySQL, PostgreSQL) and the `TOP` keyword (used in SQL Server) are used to restrict the number of rows returned by a query. This is especially useful when you only need a sample of data or the first few results after sorting."
+          },
+          "sketch2": {
+            "title": "Basic Usage of LIMIT",
+            "bodyMarkdown": "To get only a certain number of rows, add `LIMIT n` at the end of your SELECT statement. For example, `SELECT * FROM products LIMIT 5;` returns only the first 5 rows from the products table."
+          },
+          "sketch3": {
+            "title": "Combining LIMIT with ORDER BY",
+            "bodyMarkdown": "Often, you'll want to sort your results before limiting them. For example, `SELECT * FROM products ORDER BY price DESC LIMIT 3;` returns the 3 most expensive products."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "quiz1": {
+      "title": "Purpose of LIMIT",
+      "prompt": "What is the main purpose of the LIMIT clause in SQL?",
+      "hint": "Think about controlling the amount of data you see.",
+      "help": {
+        "concept": "The LIMIT clause is used to control how many rows are returned by a query.",
+        "hint_1": "LIMIT is not about sorting or joining, but about the number of rows.",
+        "hint_2": "If you only want to see the first 10 results, you would use LIMIT."
+      },
+      "options": {
+        "a": "To restrict the number of rows returned",
+        "b": "To sort the results alphabetically",
+        "c": "To remove duplicate rows",
+        "d": "To join two tables"
+      }
+    },
+    "quiz2": {
+      "title": "Syntax for LIMIT",
+      "prompt": "Fill in the blank: SELECT * FROM products _____ 10;",
+      "hint": "Which keyword restricts the number of rows?",
+      "help": {
+        "concept": "The the missing term keyword is used to specify the maximum number of rows to return.",
+        "hint_1": "It's not WHERE or ORDER BY.",
+        "hint_2": "This keyword is often used at the end of a SELECT statement to the missing term output."
+      },
+      "template": "SELECT * FROM products {blank} 10;",
+      "choices": [
+        "LIMIT",
+        "ORDER BY",
+        "WHERE",
+        "GROUP BY"
+      ]
+    },
+    "quiz3": {
+      "title": "Combining ORDER BY and LIMIT",
+      "prompt": "If you want the 5 most expensive products, which clause should come first?",
+      "hint": "Think about sorting before limiting.",
+      "help": {
+        "concept": "ORDER BY sorts the data, and LIMIT restricts the number of rows after sorting.",
+        "hint_1": "You need to sort the prices before picking the top ones.",
+        "hint_2": "First, order the results, then limit how many you get."
+      },
+      "options": {
+        "a": "ORDER BY",
+        "b": "LIMIT",
+        "c": "WHERE",
+        "d": "GROUP BY"
+      }
+    },
+    "quiz4": {
+      "title": "Write a Query with LIMIT",
+      "prompt": "Write a SQL query to select all columns from the products_catalog table, but only return the first 3 rows.",
+      "hint": "Use SELECT * and the LIMIT clause.",
+      "help": {
+        "concept": "The LIMIT clause restricts the number of rows returned by a SELECT statement.",
+        "hint_1": "Start with SELECT * FROM products_catalog.",
+        "hint_2": "Add LIMIT and the number 3 at the end of your query."
+      },
+      "starterCode": "-- Write your query below\n"
+    },
+    "quiz5": {
+      "title": "Order the SQL Clauses",
+      "prompt": "Arrange the clauses in the correct order for a query that selects all products, sorts by price descending, and limits to 2 results.",
+      "hint": "Think about the usual order of SQL clauses.",
+      "help": {
+        "concept": "The typical order is SELECT, then ORDER BY, then LIMIT.",
+        "hint_1": "Start with SELECT, then sort, then limit.",
+        "hint_2": "ORDER BY comes before LIMIT in a SQL query."
+      },
+      "tokens": {
+        "t1": "SELECT * FROM products_catalog",
+        "t2": "ORDER BY price DESC",
+        "t3": "LIMIT 2"
+      }
+    }
+  }
+}

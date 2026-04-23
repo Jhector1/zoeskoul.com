@@ -1,0 +1,117 @@
+{
+  "topicId": "offset-pagination",
+  "subjectSlug": "sql",
+  "moduleSlug": "sql_module_3",
+  "sectionSlug": "section_3_1",
+  "prefix": "sql3",
+  "minutes": 15,
+  "topic": {
+    "labelKey": "topics.sql.sql_module_3.offset-pagination.label",
+    "summaryKey": "topics.sql.sql_module_3.offset-pagination.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_3.offset-pagination.cards.sketch0.title",
+      "sketchId": "sketch-offset-intro",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_3.offset-pagination.cards.sketch1.title",
+      "sketchId": "sketch-pagination-example",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql.sql_module_3.offset-pagination.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 3,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch-offset-intro",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_3.offset-pagination.sketch-offset-intro.title",
+      "bodyKey": "sketches.sql.sql_module_3.offset-pagination.sketch-offset-intro.bodyMarkdown"
+    },
+    {
+      "id": "sketch-pagination-example",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_3.offset-pagination.sketch-pagination-example.title",
+      "bodyKey": "sketches.sql.sql_module_3.offset-pagination.sketch-pagination-example.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "quiz-offset-purpose",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.quiz-offset-purpose",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "quiz-offset-pagination-formula",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.quiz-offset-pagination-formula",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "20"
+      }
+    },
+    {
+      "id": "quiz-offset-multi-choice",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.quiz-offset-multi-choice",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": []
+      }
+    },
+    {
+      "id": "quiz-offset-sql-query",
+      "kind": "code_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.quiz-offset-sql-query",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "SELECT name, price FROM products LIMIT 5 OFFSET 10;"
+      }
+    }
+  ]
+}

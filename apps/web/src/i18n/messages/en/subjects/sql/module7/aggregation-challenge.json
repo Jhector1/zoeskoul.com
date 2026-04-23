@@ -1,0 +1,137 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_7": {
+        "aggregation-challenge": {
+          "label": "Aggregation Challenge",
+          "summary": "Summarize and analyze data using aggregate functions.",
+          "cards": {
+            "sketch0": {
+              "title": "Introduction to Aggregation"
+            },
+            "sketch1": {
+              "title": "About the Dataset"
+            },
+            "project": {
+              "title": "Inventory Aggregation Mini-Project"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "projectSteps": {
+            "agg-single-choice-1": {
+              "title": "Which SQL function would you use to find the highest price in the inventory_items table?"
+            },
+            "agg-multi-choice-1": {
+              "title": "Identify all aggregate functions in SQL."
+            },
+            "agg-drag-reorder-1": {
+              "title": "Order the steps to get the average price per category."
+            },
+            "agg-fill-blank-1": {
+              "title": "Fill in the blank: Counting active items"
+            },
+            "agg-code-input-1": {
+              "title": "Find the total price of all non-test items"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_7": {
+        "aggregation-challenge": {
+          "intro-aggregation": {
+            "title": "Introduction to Aggregation",
+            "bodyMarkdown": "Aggregation functions in SQL, such as COUNT, SUM, AVG, MIN, and MAX, allow you to summarize data across multiple rows. For example, you can count how many items are in a table, calculate the average price, or find the highest price in a category. These functions are often used with the `GROUP BY` clause to group results by one or more columns.\n\nExample:\n\n```sql\nSELECT category, COUNT(*) AS item_count, AVG(price) AS avg_price\nFROM inventory_items\nWHERE status = 'active'\nGROUP BY category;\n```\n\nThis query returns the number of active items and their average price for each category."
+          },
+          "dataset-overview": {
+            "title": "About the Dataset",
+            "bodyMarkdown": "The `inventory_items` table contains information about products in inventory. Key columns include:\n\n- `id`: Unique identifier for each item\n- `name`: Name of the item\n- `category`: Product category (e.g., Accessories, Kitchen, Decor)\n- `price`: Price of the item\n- `status`: Status of the item (e.g., active, draft, inactive)\n- `is_test`: 1 if the item is a test/sample, 0 otherwise\n- `last_updated`: Date the item was last updated\n\nSample rows:\n\n| id | name           | category    | price | status   | is_test | last_updated |\n|----|----------------|-------------|-------|----------|---------|--------------|\n| 1  | Sticker Pack   | Accessories | 4.99  | active   | 0       | 2026-02-01   |\n| 3  | Canvas Print   | Decor       | 45.00 | active   | 0       | 2026-02-02   |\n| 5  | Water Bottle   | Kitchen     | 15.00 | active   | 0       | 2026-02-05   |"
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "agg-single-choice-1": {
+      "title": "Which SQL function would you use to find the highest price in the inventory_items table?",
+      "prompt": "You want to find the maximum price of all items in the `inventory_items` table. Which aggregate function should you use?",
+      "hint": "Think about which function returns the largest value.",
+      "help": {
+        "concept": "Aggregate functions summarize data. MAX returns the largest value in a column.",
+        "hint_1": "SUM adds up values, AVG calculates the mean, but only one returns the highest value.",
+        "hint_2": "Look for the function that gives you the greatest value in a set of numbers."
+      },
+      "options": {
+        "a": "SUM",
+        "b": "MAX",
+        "c": "AVG",
+        "d": "COUNT"
+      }
+    },
+    "agg-multi-choice-1": {
+      "title": "Identify all aggregate functions in SQL.",
+      "prompt": "Which of the following are aggregate functions in SQL? Select all that apply.",
+      "hint": "Aggregate functions perform calculations on sets of rows.",
+      "help": {
+        "concept": "Aggregate functions like COUNT, SUM, and MIN operate on groups of rows to return the correct answer single value.",
+        "hint_1": "GROUP BY and ORDER BY are clauses, not functions.",
+        "hint_2": "Select all options that actually compute the correct answer value from multiple rows."
+      },
+      "options": {
+        "a": "COUNT",
+        "b": "GROUP BY",
+        "c": "SUM",
+        "d": "MIN",
+        "e": "ORDER BY"
+      }
+    },
+    "agg-drag-reorder-1": {
+      "title": "Order the steps to get the average price per category.",
+      "prompt": "Arrange the steps to write a SQL query that returns the average price for each category in `inventory_items`.",
+      "hint": "Start with what you want to select, then specify the table, then group the results.",
+      "help": {
+        "concept": "A SQL query typically starts with SELECT, then FROM, then GROUP BY for aggregations.",
+        "hint_1": "You need to select columns and an aggregate, specify the table, then group.",
+        "hint_2": "The GROUP BY clause should come after FROM."
+      },
+      "tokens": {
+        "t1": "SELECT category, AVG(price)",
+        "t2": "FROM inventory_items",
+        "t3": "GROUP BY category"
+      }
+    },
+    "agg-fill-blank-1": {
+      "title": "Fill in the blank: Counting active items",
+      "prompt": "Complete the SQL query to count the number of active items in the `inventory_items` table:\n\n```sql\nSELECT COUNT(*) FROM inventory_items WHERE status = ____;\n```",
+      "hint": "Which status value means the item is currently available?",
+      "help": {
+        "concept": "The WHERE clause filters rows. Use the value that matches active items.",
+        "hint_1": "Look for the status value that means the item is available for use.",
+        "hint_2": "It's the same value used in the sample data for available items."
+      },
+      "template": "SELECT COUNT(*) FROM inventory_items WHERE status = ____;",
+      "choices": [
+        "'active'",
+        "'draft'",
+        "'inactive'",
+        "'test'"
+      ]
+    },
+    "agg-code-input-1": {
+      "title": "Find the total price of all non-test items",
+      "prompt": "Write a SQL query to find the total price of all items in `inventory_items` where `is_test` is 0.",
+      "hint": "Use SUM on the price column and filter for non-test items.",
+      "help": {
+        "concept": "SUM adds up values in a column. Use WHERE to filter rows.",
+        "hint_1": "You need to sum the price where is_test equals 0.",
+        "hint_2": "Combine SUM(price) with a WHERE clause for is_test = 0."
+      },
+      "starterCode": "-- Write a query to sum the price of all non-test items"
+    }
+  }
+}

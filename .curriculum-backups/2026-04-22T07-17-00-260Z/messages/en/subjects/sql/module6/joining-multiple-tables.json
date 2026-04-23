@@ -1,0 +1,117 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_6": {
+        "joining-multiple-tables": {
+          "label": "Joining Multiple Tables",
+          "summary": "Join more than two tables in a single query.",
+          "cards": {
+            "sketch0": {
+              "title": "Why Join Multiple Tables?"
+            },
+            "sketch1": {
+              "title": "How Multi-Table JOINs Work"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_6": {
+        "joining-multiple-tables": {
+          "sk1": {
+            "title": "Why Join Multiple Tables?",
+            "bodyMarkdown": "In real-world databases, information is often spread across several tables. To answer complex questions, you may need to combine data from three or more tables in a single query. SQL allows you to do this by chaining multiple JOIN clauses together."
+          },
+          "sk2": {
+            "title": "How Multi-Table JOINs Work",
+            "bodyMarkdown": "You can join more than two tables by adding additional JOIN clauses. Each JOIN connects another table to the growing result set, usually by matching key columns. The order of JOINs and the ON conditions are important for getting the correct results."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "q1": {
+      "title": "Purpose of Multi-Table JOINs",
+      "prompt": "Why would you use more than one JOIN in a SQL query?",
+      "hint": "Think about combining information from different sources.",
+      "help": {
+        "concept": "Multi-table JOINs allow you to retrieve related data from several tables in a single query.",
+        "hint_1": "JOINs are used to bring together rows from different tables based on related columns.",
+        "hint_2": "If you need columns from three or more tables, you need multiple JOINs."
+      },
+      "options": {
+        "a": "To combine data from several related tables",
+        "b": "To delete multiple tables at once",
+        "c": "To create new tables automatically",
+        "d": "To sort data in descending order"
+      }
+    },
+    "q2": {
+      "title": "Order of JOIN Clauses",
+      "prompt": "Arrange the steps to join three tables: customers, orders, and products, to get customer names and the products they ordered.",
+      "hint": "Consider which table you start from and how each JOIN connects to the previous result.",
+      "help": {
+        "concept": "Each JOIN adds another table to the result, usually by matching a key column from the previous table.",
+        "hint_1": "Start from the main table, then JOIN related tables one by one.",
+        "hint_2": "The order of JOINs should follow the relationships between tables."
+      },
+      "tokens": {
+        "t1": "Start with the customers table",
+        "t2": "JOIN orders ON customers.id = orders.customer_id",
+        "t3": "JOIN products ON orders.product_id = products.id",
+        "t4": "SELECT customer name and product name"
+      }
+    },
+    "q3": {
+      "title": "Choosing the Correct JOIN Condition",
+      "prompt": "Fill in the blank: To join the 'orders' table to the 'customers' table, you would use ON orders.____ = customers.id",
+      "hint": "Which column in 'orders' refers to the customer?",
+      "help": {
+        "concept": "Foreign keys in one table reference primary keys in another for JOINs.",
+        "hint_1": "Look for the column in 'orders' that links to 'customers'.",
+        "hint_2": "It's usually named after the referenced table's primary key."
+      },
+      "template": "ON orders.____ = customers.id",
+      "choices": [
+        "customer_id",
+        "order_id",
+        "product_id",
+        "name"
+      ]
+    },
+    "q4": {
+      "title": "Identifying Correct Multi-Table JOIN Syntax",
+      "prompt": "Which of the following are valid ways to join three tables in SQL?",
+      "hint": "Pay attention to the use of ON conditions.",
+      "help": {
+        "concept": "Each JOIN should specify an ON condition to define how tables are related.",
+        "hint_1": "Comma-separated tables need WHERE conditions, but explicit JOINs use ON.",
+        "hint_2": "JOINs without ON conditions can cause errors or unexpected results."
+      },
+      "options": {
+        "a": "SELECT ... FROM a JOIN b ON ... JOIN c ON ...",
+        "b": "SELECT ... FROM a, b, c WHERE ...",
+        "c": "SELECT ... FROM a JOIN b JOIN c",
+        "d": "SELECT ... FROM a JOIN b ON ... JOIN c ON ..."
+      }
+    },
+    "q5": {
+      "title": "Write a Query to Join Three Tables",
+      "prompt": "Using the 'products_catalog' dataset, write a SQL query to list each order's id, the customer's name, and the product's name by joining the orders, customers, and products tables.",
+      "hint": "You'll need two JOINs: one to customers, one to products.",
+      "help": {
+        "concept": "To combine data from three tables, chain JOINs using appropriate ON conditions.",
+        "hint_1": "Start from the orders table, JOIN customers using customer_id, and JOIN products using product_id.",
+        "hint_2": "SELECT the columns: order id, customer name, and product name."
+      },
+      "starterCode": "-- Write your SQL query here\n"
+    }
+  }
+}

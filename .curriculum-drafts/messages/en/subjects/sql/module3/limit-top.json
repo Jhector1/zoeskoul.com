@@ -1,0 +1,129 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_3": {
+        "limit-top": {
+          "label": "LIMIT and TOP Clauses",
+          "summary": "Restrict the number of rows returned.",
+          "cards": {
+            "sketch0": {
+              "title": "Introduction to LIMIT and TOP"
+            },
+            "sketch1": {
+              "title": "Using LIMIT with ORDER BY"
+            },
+            "sketch2": {
+              "title": "LIMIT with OFFSET"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_3": {
+        "limit-top": {
+          "intro-limit-top": {
+            "title": "Introduction to LIMIT and TOP",
+            "bodyMarkdown": "When working with SQL queries, you may not always want to retrieve every row from a table. Sometimes, you only need a few results—such as the first 5 products or the top 3 most expensive items. SQL provides special clauses to help you control how many rows are returned.\n\nIn SQLite (and many other databases), the `LIMIT` clause is used to restrict the number of rows in your query result. For example:\n\n```sql\nSELECT * FROM products LIMIT 3;\n```\n\nThis query will return only the first 3 rows from the `products` table.\n\nIn some other SQL dialects (like SQL Server), the `TOP` keyword is used instead:\n\n```sql\nSELECT TOP 3 * FROM products;\n```\n\nBut in SQLite, always use `LIMIT`."
+          },
+          "limit-with-order": {
+            "title": "Using LIMIT with ORDER BY",
+            "bodyMarkdown": "The `LIMIT` clause is often used together with `ORDER BY` to get the top or bottom rows based on a specific column. For example, to get the 2 most expensive products:\n\n```sql\nSELECT name, price FROM products\nORDER BY price DESC\nLIMIT 2;\n```\n\nThis will return the two products with the highest prices. Without `ORDER BY`, `LIMIT` just returns the first N rows as they appear in the table, which may not be meaningful."
+          },
+          "limit-offset": {
+            "title": "LIMIT with OFFSET",
+            "bodyMarkdown": "You can also use `OFFSET` with `LIMIT` to skip a certain number of rows before starting to return results. For example:\n\n```sql\nSELECT name FROM products\nORDER BY created_at DESC\nLIMIT 2 OFFSET 1;\n```\n\nThis query skips the most recently created product and returns the next two most recent products. This is useful for pagination or browsing through results in chunks."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "q1-basic-limit": {
+      "title": "Basic LIMIT Usage",
+      "prompt": "Which SQL query will return only the first 2 rows from the `products` table in SQLite?",
+      "hint": "SQLite uses the LIMIT clause.",
+      "help": {
+        "concept": "The LIMIT clause restricts the number of rows returned in SQLite.",
+        "hint_1": "Look for the query that uses LIMIT.",
+        "hint_2": "TOP and FETCH are not supported in SQLite; LIMIT is the correct syntax."
+      },
+      "options": {
+        "a": "SELECT * FROM products LIMIT 2;",
+        "b": "SELECT TOP 2 * FROM products;",
+        "c": "SELECT * FROM products WHERE ROWNUM <= 2;",
+        "d": "SELECT * FROM products FETCH FIRST 2 ROWS ONLY;"
+      }
+    },
+    "q2-limit-orderby": {
+      "title": "LIMIT with ORDER BY",
+      "prompt": "Write a SQL query to return the names and prices of the 3 cheapest products from the `products` table.",
+      "hint": "Use ORDER BY to sort by price, then LIMIT.",
+      "help": {
+        "concept": "ORDER BY sorts the results; LIMIT restricts the number of rows returned.",
+        "hint_1": "Sort the products by price in ascending order before applying LIMIT.",
+        "hint_2": "ORDER BY price ASC will sort from cheapest to most expensive; LIMIT 3 will give you the three cheapest."
+      },
+      "starterCode": "-- Write your query below"
+    },
+    "q3-offset": {
+      "title": "LIMIT with OFFSET",
+      "prompt": "Fill in the blank to skip the first 2 products and return the next 2 from the `products` table, ordered by `id` ascending:\n\n```sql\nSELECT * FROM products ORDER BY id ASC LIMIT 2 _____ 2;\n```",
+      "hint": "Which keyword skips rows before returning results?",
+      "help": {
+        "concept": "the missing term is used with LIMIT to skip a specified number of rows.",
+        "hint_1": "the missing term comes after LIMIT in the query.",
+        "hint_2": "the missing term is the standard SQL keyword for skipping rows."
+      },
+      "template": "SELECT * FROM products ORDER BY id ASC LIMIT 2 {blank} 2;",
+      "choices": [
+        "OFFSET",
+        "SKIP",
+        "AFTER",
+        "START"
+      ]
+    },
+    "q4-multi-choice-limit": {
+      "title": "When to Use LIMIT",
+      "prompt": "In which situations would you use the LIMIT clause? (Select all that apply.)",
+      "hint": "LIMIT restricts the number of rows returned.",
+      "help": {
+        "concept": "LIMIT is used to control the number of rows returned, often for pagination or sampling.",
+        "hint_1": "Think about scenarios where you don't want all the data at once.",
+        "hint_2": "LIMIT is not used for sorting, but for restricting or paginating results."
+      },
+      "options": {
+        "a": "To get only the first 5 rows of a table.",
+        "b": "To return all rows from a table.",
+        "c": "To paginate results in a web application.",
+        "d": "To sort rows by a column."
+      }
+    },
+    "q5-drag-reorder": {
+      "title": "Ordering a Query with LIMIT",
+      "prompt": "Arrange the SQL keywords to form a valid query that returns the 2 most recently added products.",
+      "hint": "Start with the correct answer and end with the correct answer.",
+      "help": {
+        "concept": "The correct order of SQL clauses is important for query execution.",
+        "hint_1": "the correct answer comes before the correct answer.",
+        "hint_2": "the correct answer is used after the column name to sort in descending order."
+      },
+      "tokens": {
+        "t1": "SELECT",
+        "t2": "*",
+        "t3": "FROM",
+        "t4": "products",
+        "t5": "ORDER BY",
+        "t6": "created_at",
+        "t7": "DESC",
+        "t8": "LIMIT",
+        "t9": "2"
+      }
+    }
+  }
+}

@@ -1,0 +1,161 @@
+{
+  "topicId": "databases-overview",
+  "subjectSlug": "sql",
+  "moduleSlug": "sql_module_0",
+  "sectionSlug": "section_0_1",
+  "prefix": "sql0",
+  "minutes": 20,
+  "topic": {
+    "labelKey": "topics.sql.sql_module_0.databases-overview.label",
+    "summaryKey": "topics.sql.sql_module_0.databases-overview.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_0.databases-overview.cards.sketch0.title",
+      "sketchId": "sketch-what-is-a-database",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_0.databases-overview.cards.sketch1.title",
+      "sketchId": "sketch-table-structure",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_0.databases-overview.cards.sketch2.title",
+      "sketchId": "sketch-why-use-databases",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql.sql_module_0.databases-overview.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch-what-is-a-database",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_0.databases-overview.sketch-what-is-a-database.title",
+      "bodyKey": "sketches.sql.sql_module_0.databases-overview.sketch-what-is-a-database.bodyMarkdown"
+    },
+    {
+      "id": "sketch-table-structure",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_0.databases-overview.sketch-table-structure.title",
+      "bodyKey": "sketches.sql.sql_module_0.databases-overview.sketch-table-structure.bodyMarkdown"
+    },
+    {
+      "id": "sketch-why-use-databases",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_0.databases-overview.sketch-why-use-databases.title",
+      "bodyKey": "sketches.sql.sql_module_0.databases-overview.sketch-why-use-databases.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "quiz-what-is-database",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.quiz-what-is-database",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "quiz-table-columns",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.quiz-table-columns",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e",
+        "f"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "c",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "quiz-table-rows",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.quiz-table-rows",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4",
+        "t5"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4",
+          "t5"
+        ]
+      }
+    },
+    {
+      "id": "quiz-fill-blank-table-definition",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.quiz-fill-blank-table-definition",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "columns"
+      }
+    },
+    {
+      "id": "quiz-sql-query-simple",
+      "kind": "code_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.quiz-sql-query-simple",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "students_intro",
+        "resultShape": "table",
+        "solutionCode": "SELECT name FROM students;"
+      }
+    }
+  ]
+}

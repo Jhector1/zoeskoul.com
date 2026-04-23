@@ -1,0 +1,110 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_3": {
+        "sorting-direction": {
+          "label": "Sorting Direction (ASC, DESC)",
+          "summary": "Control sort order with ASC and DESC keywords.",
+          "cards": {
+            "sketch0": {
+              "title": "Sorting Results in SQL"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_3": {
+        "sorting-direction": {
+          "sk1": {
+            "title": "Sorting Results in SQL",
+            "bodyMarkdown": "In SQL, you can control the order of your query results using the `ORDER BY` clause. By default, results are sorted in ascending order (from smallest to largest, or A to Z). To specify the direction, use the keywords `ASC` for ascending and `DESC` for descending. For example, `ORDER BY price ASC` sorts prices from lowest to highest, while `ORDER BY price DESC` sorts from highest to lowest."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "q1": {
+      "title": "Default Sorting Direction",
+      "prompt": "What is the default sorting direction when you use ORDER BY in SQL without specifying ASC or DESC?",
+      "hint": "Think about how numbers or words are usually sorted.",
+      "help": {
+        "concept": "ORDER BY sorts results in a specific direction. If you don't specify, SQL uses a default.",
+        "hint_1": "The default is from smallest to largest or A to Z.",
+        "hint_2": "ASC stands for ascending, which is the default direction."
+      },
+      "options": {
+        "a": "Ascending (ASC)",
+        "b": "Descending (DESC)",
+        "c": "Random order",
+        "d": "No order at all"
+      }
+    },
+    "q2": {
+      "title": "Using DESC in ORDER BY",
+      "prompt": "Which SQL clause will sort products by price from highest to lowest?",
+      "hint": "Look for the keyword that means descending.",
+      "help": {
+        "concept": "DESC is used to sort in descending order, from largest to smallest.",
+        "hint_1": "The opposite of ascending is descending.",
+        "hint_2": "The correct keyword is DESC, not DOWN."
+      },
+      "options": {
+        "a": "ORDER BY price ASC",
+        "b": "ORDER BY price DESC",
+        "c": "ORDER BY price",
+        "d": "ORDER BY price DOWN"
+      }
+    },
+    "q3": {
+      "title": "Fill in the Sorting Direction",
+      "prompt": "Complete the SQL statement to sort students by score from lowest to highest:\n\nSELECT * FROM students_intro ORDER BY score ___;",
+      "hint": "Lowest to highest is called ascending.",
+      "help": {
+        "concept": "the missing term sorts values in increasing order.",
+        "hint_1": "Ascending is the default, but you can specify it.",
+        "hint_2": "The keyword for ascending is the missing term."
+      },
+      "template": "SELECT * FROM students_intro ORDER BY score ___;",
+      "choices": [
+        "ASC",
+        "DESC",
+        "DOWN",
+        "UP"
+      ]
+    },
+    "q4": {
+      "title": "Ordering SQL Clauses",
+      "prompt": "Arrange the SQL clauses in the correct order for sorting employees by name in descending order.",
+      "hint": "Start with SELECT, then FROM, then ORDER BY, then the direction.",
+      "help": {
+        "concept": "SQL statements follow a specific order: SELECT, FROM, ORDER BY, and then sorting direction.",
+        "hint_1": "ORDER BY comes after FROM, and DESC is attached to the column.",
+        "hint_2": "DESC should follow the column name in ORDER BY."
+      },
+      "tokens": {
+        "t1": "SELECT *",
+        "t2": "FROM employees_basic",
+        "t3": "ORDER BY name",
+        "t4": "DESC"
+      }
+    },
+    "q5": {
+      "title": "Write a Query: Sort Products by Name Descending",
+      "prompt": "Write an SQL query to select all columns from the products_catalog table and sort the results by the name column in descending order.",
+      "hint": "Use ORDER BY with the column name and the correct direction keyword.",
+      "help": {
+        "concept": "ORDER BY lets you sort results by a column. Use DESC for descending order.",
+        "hint_1": "After selecting from the table, add ORDER BY name and specify descending.",
+        "hint_2": "The keyword DESC comes after the column name in ORDER BY."
+      },
+      "starterCode": "-- Write your query below\n"
+    }
+  }
+}

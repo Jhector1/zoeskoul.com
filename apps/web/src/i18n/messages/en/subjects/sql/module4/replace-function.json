@@ -1,0 +1,78 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_4": {
+        "replace-function": {
+          "label": "Replacing Text with REPLACE",
+          "summary": "How to use REPLACE to substitute text in columns.",
+          "cards": {
+            "sketch0": {
+              "title": "Introduction to REPLACE"
+            },
+            "sketch1": {
+              "title": "Common Use Cases"
+            },
+            "sketch2": {
+              "title": "Chaining REPLACE for Multiple Substitutions"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_4": {
+        "replace-function": {
+          "replace-intro": {
+            "title": "Introduction to REPLACE",
+            "bodyMarkdown": "The `REPLACE` function in SQL allows you to substitute all occurrences of a substring within a string with another substring. This is useful for cleaning up or standardizing text data in your tables. The basic syntax is:\n\n```sql\nREPLACE(original_text, search_text, replace_text)\n```\n\nFor example, to replace all dashes `-` with spaces in a column, you could use:\n\n```sql\nSELECT REPLACE(product_name, '-', ' ') FROM products_catalog;\n```"
+          },
+          "replace-use-cases": {
+            "title": "Common Use Cases",
+            "bodyMarkdown": "You might use `REPLACE` to:\n- Fix typos or standardize product names\n- Remove unwanted characters (like extra spaces or punctuation)\n- Update outdated terms in descriptions\n\nFor example, if some product names use `\"&\"` and others use `\"and\"`, you can standardize them:\n\n```sql\nSELECT REPLACE(product_name, '&', 'and') FROM products_catalog;\n```"
+          },
+          "replace-multiple": {
+            "title": "Chaining REPLACE for Multiple Substitutions",
+            "bodyMarkdown": "If you need to make several replacements, you can nest `REPLACE` functions. For example, to replace both `-` with a space and `&` with `and`:\n\n```sql\nSELECT REPLACE(REPLACE(product_name, '-', ' '), '&', 'and') FROM products_catalog;\n```\n\nEach `REPLACE` acts on the result of the previous one."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "replace-syntax-single-choice": {
+      "title": "What does the REPLACE function do in SQL?",
+      "prompt": "Choose the best description of the REPLACE function.",
+      "options": {
+        "a": "It removes rows from a table.",
+        "b": "It substitutes all occurrences of a substring with another substring in a string.",
+        "c": "It changes the data type of a column.",
+        "d": "It sorts the results alphabetically."
+      }
+    },
+    "replace-basic-code": {
+      "title": "Replace Characters in Product Names",
+      "prompt": "Write a SQL query to select all product names from the `products_catalog` table, replacing all dashes `-` with spaces.",
+      "starterCode": "SELECT REPLACE(product_name, '-', ?) AS cleaned_name\nFROM products_catalog;"
+    },
+    "replace-multi-choice": {
+      "title": "When should you use REPLACE?",
+      "prompt": "Select all situations where using REPLACE is appropriate.",
+      "options": {
+        "a": "To standardize inconsistent text values",
+        "b": "To remove unwanted characters from strings",
+        "c": "To change the order of rows in a table",
+        "d": "To update outdated terms in descriptions"
+      }
+    },
+    "replace-nested-code": {
+      "title": "Chaining REPLACE Functions",
+      "prompt": "Write a SQL query to select all product names from `products_catalog`, replacing all dashes `-` with spaces and all `&` with `and`.",
+      "starterCode": "SELECT REPLACE(REPLACE(product_name, '-', ' '), '&', ?) AS cleaned_name\nFROM products_catalog;"
+    }
+  }
+}

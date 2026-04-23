@@ -1,0 +1,124 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_1": {
+        "select-syntax": {
+          "label": "Basic SELECT Syntax",
+          "summary": "Understand the structure of a SELECT statement.",
+          "cards": {
+            "sketch0": {
+              "title": "What is a SELECT Statement?"
+            },
+            "sketch1": {
+              "title": "Selecting Specific Columns"
+            },
+            "sketch2": {
+              "title": "Basic SELECT Syntax Structure"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_1": {
+        "select-syntax": {
+          "sketch-what-is-select": {
+            "title": "What is a SELECT Statement?",
+            "bodyMarkdown": "The `SELECT` statement is the most fundamental SQL command for retrieving data from a table. It allows you to specify which columns you want to see and from which table. For example, to view all columns and rows from the `products` table:\n\n```sql\nSELECT * FROM products;\n```\n\nThe asterisk (`*`) means 'all columns'."
+          },
+          "sketch-select-columns": {
+            "title": "Selecting Specific Columns",
+            "bodyMarkdown": "You can choose specific columns to display by listing them after `SELECT`. For example, to see only the product names and prices:\n\n```sql\nSELECT name, price FROM products;\n```\n\nThis returns just the `name` and `price` columns for every row in the `products` table."
+          },
+          "sketch-select-syntax-breakdown": {
+            "title": "Basic SELECT Syntax Structure",
+            "bodyMarkdown": "A basic `SELECT` statement has this structure:\n\n```\nSELECT column1, column2 FROM table_name;\n```\n\n- `SELECT` tells SQL what columns you want.\n- List the columns separated by commas.\n- `FROM` specifies the table to get data from.\n\nExample:\n\n```sql\nSELECT id, name FROM products;\n```"
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "quiz-single-choice-select-star": {
+      "title": "What does the asterisk (*) mean in a SELECT statement?",
+      "prompt": "In the query `SELECT * FROM products;`, what does the `*` represent?",
+      "hint": "Think about what you want to see when you use *.",
+      "help": {
+        "concept": "The asterisk (*) in SQL is a wildcard that means 'all columns'.",
+        "hint_1": "Using * after SELECT shows every column in the table.",
+        "hint_2": "If you want to see every detail for each row, use *."
+      },
+      "options": {
+        "a": "It selects all columns from the table.",
+        "b": "It selects only the first column.",
+        "c": "It selects only unique rows.",
+        "d": "It multiplies the values in the table."
+      }
+    },
+    "quiz-drag-reorder-select-syntax": {
+      "title": "Order the Parts of a SELECT Statement",
+      "prompt": "Arrange the parts of this SQL statement in the correct order.",
+      "hint": "Start with the keyword that tells SQL what to do.",
+      "help": {
+        "concept": "A basic SELECT statement starts with SELECT, lists columns, then FROM, then the table name.",
+        "hint_1": "SELECT comes first, then the columns, then FROM, then the table.",
+        "hint_2": "The correct order is: SELECT, columns, FROM, table."
+      },
+      "tokens": {
+        "t1": "SELECT",
+        "t2": "name, price",
+        "t3": "FROM",
+        "t4": "products"
+      }
+    },
+    "quiz-fill-blank-choice-keyword": {
+      "title": "Fill in the Missing SQL Keyword",
+      "prompt": "Complete the statement to select all columns from the products table:\n\n`SELECT * ____ products;`",
+      "hint": "Which keyword tells SQL which table to use?",
+      "help": {
+        "concept": "The the missing term keyword specifies the table to retrieve data the missing term.",
+        "hint_1": "After SELECT, the missing term is used to indicate the table.",
+        "hint_2": "The missing word is the missing term."
+      },
+      "template": "SELECT * ____ products;",
+      "choices": [
+        "FROM",
+        "WHERE",
+        "INTO",
+        "ORDER"
+      ]
+    },
+    "quiz-single-choice-select-columns": {
+      "title": "Selecting Specific Columns",
+      "prompt": "Which query will show only the `name` and `category` columns from the `products` table?",
+      "hint": "List the columns you want after SELECT.",
+      "help": {
+        "concept": "To select specific columns, list them after SELECT and before FROM.",
+        "hint_1": "The correct query lists both columns separated by a comma.",
+        "hint_2": "The format is: SELECT column1, column2 FROM table;"
+      },
+      "options": {
+        "a": "SELECT name, category FROM products;",
+        "b": "SELECT * FROM products;",
+        "c": "SELECT category FROM products, name;",
+        "d": "SELECT products FROM name, category;"
+      }
+    },
+    "quiz-code-input-select-basic": {
+      "title": "Write a Basic SELECT Statement",
+      "prompt": "Write a SQL query to show the `name` and `price` columns for all products.",
+      "hint": "Use SELECT, list the columns, then FROM and the table name.",
+      "help": {
+        "concept": "A SELECT statement retrieves specific columns from a table.",
+        "hint_1": "Start with SELECT, then the columns you want, then FROM products.",
+        "hint_2": "List 'name' and 'price' after SELECT, separated by a comma."
+      },
+      "starterCode": "-- Write your SQL query below\n"
+    }
+  }
+}

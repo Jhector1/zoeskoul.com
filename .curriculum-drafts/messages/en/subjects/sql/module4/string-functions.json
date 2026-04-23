@@ -1,0 +1,134 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_4": {
+        "string-functions": {
+          "label": "String Functions (TRIM, UPPER, LOWER)",
+          "summary": "Clean and transform text data with string functions.",
+          "cards": {
+            "sketch0": {
+              "title": "Why Clean Up Text in SQL?"
+            },
+            "sketch1": {
+              "title": "TRIM: Remove Extra Spaces"
+            },
+            "sketch2": {
+              "title": "UPPER and LOWER: Change Case"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_4": {
+        "string-functions": {
+          "sk1": {
+            "title": "Why Clean Up Text in SQL?",
+            "bodyMarkdown": "Text data in databases often contains inconsistencies, such as extra spaces or mixed letter cases. SQL provides string functions like `TRIM`, `UPPER`, and `LOWER` to help you clean and standardize this data. For example, names may have leading or trailing spaces, or cities may be written in different cases. Using these functions makes your queries more reliable and your results more consistent."
+          },
+          "sk2": {
+            "title": "TRIM: Remove Extra Spaces",
+            "bodyMarkdown": "`TRIM` removes leading and trailing spaces from a string. This is useful when data entry errors cause extra spaces. \n\nExample:\n```sql\nSELECT full_name, TRIM(full_name) AS cleaned_name FROM customers;\n```\nThis will show both the original and cleaned names."
+          },
+          "sk3": {
+            "title": "UPPER and LOWER: Change Case",
+            "bodyMarkdown": "`UPPER` converts all letters in a string to uppercase, while `LOWER` converts them to lowercase. This is helpful for standardizing data for comparison or display.\n\nExample:\n```sql\nSELECT city, UPPER(city) AS city_upper, LOWER(city) AS city_lower FROM customers;\n```\nThis query shows each city in both uppercase and lowercase."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "q1": {
+      "title": "What does the TRIM function do?",
+      "prompt": "Which of the following best describes the purpose of the TRIM function in SQL?",
+      "hint": "Think about where extra spaces usually appear in text data.",
+      "help": {
+        "concept": "The TRIM function is used to clean up text by removing unwanted spaces at the beginning and end of a string.",
+        "hint_1": "TRIM does not affect spaces between words, only at the start or end.",
+        "hint_2": "TRIM is useful for fixing data entry errors where users accidentally add spaces before or after the main text."
+      },
+      "options": {
+        "a": "Removes all spaces from a string, including those between words.",
+        "b": "Removes only leading and trailing spaces from a string.",
+        "c": "Converts all letters in a string to uppercase.",
+        "d": "Replaces spaces with underscores."
+      }
+    },
+    "q2": {
+      "title": "Using UPPER and LOWER",
+      "prompt": "Which of the following are true about the UPPER and LOWER functions in SQL? Select all that apply.",
+      "hint": "Consider what each function does to the letters in the correct answer string.",
+      "help": {
+        "concept": "UPPER and LOWER are used to change the case of text, which is useful for standardizing data.",
+        "hint_1": "UPPER and LOWER do not remove spaces or punctuation.",
+        "hint_2": "These functions are often used before comparing text values to ignore case differences."
+      },
+      "options": {
+        "a": "UPPER converts all letters in a string to uppercase.",
+        "b": "LOWER converts all letters in a string to lowercase.",
+        "c": "UPPER removes spaces from a string.",
+        "d": "LOWER can help standardize text for comparisons."
+      }
+    },
+    "q3": {
+      "title": "Order of Cleaning Steps",
+      "prompt": "Arrange the steps to clean up a name for comparison in the most logical order.",
+      "hint": "Think about what should be cleaned first before changing the case.",
+      "help": {
+        "concept": "Cleaning text data is often a multi-step process: remove extra spaces, standardize case, then compare.",
+        "hint_1": "If you change the case before trimming, extra spaces may still affect the result.",
+        "hint_2": "Trimming first ensures the case conversion applies only to the actual text."
+      },
+      "tokens": {
+        "t1": "Remove leading/trailing spaces",
+        "t2": "Convert to lowercase",
+        "t3": "Compare with another value"
+      }
+    },
+    "q4": {
+      "title": "Fill in the Blank: Cleaning Names",
+      "prompt": "To remove extra spaces from the 'full_name' column in the customers table, use the ____ function.",
+      "hint": "Which function is designed to remove spaces at the start and end?",
+      "help": {
+        "concept": "the missing term is the function for removing leading and trailing spaces from text.",
+        "hint_1": "UPPER and LOWER change letter case, not spaces.",
+        "hint_2": "the missing term is the standard SQL function for this purpose."
+      },
+      "template": "SELECT ____ (full_name) FROM customers;",
+      "choices": [
+        "TRIM",
+        "UPPER",
+        "LOWER",
+        "REPLACE"
+      ]
+    },
+    "q5": {
+      "title": "Standardize City Names",
+      "prompt": "Write a SQL query to select the 'city' column from the customers table, but show all city names in uppercase as 'city_upper'.",
+      "hint": "Use the UPPER function on the city column.",
+      "help": {
+        "concept": "UPPER is used to convert all letters in a string to uppercase, which helps standardize text for display or comparison.",
+        "hint_1": "Select both the original city and the uppercase version using UPPER(city).",
+        "hint_2": "Alias the uppercase column as 'city_upper' in your SELECT statement."
+      },
+      "starterCode": "-- Write your query below"
+    },
+    "q6": {
+      "title": "Clean Up Full Names",
+      "prompt": "Write a SQL query to select the 'full_name' column from the customers table, but show a cleaned version (with no leading or trailing spaces) as 'cleaned_name'.",
+      "hint": "Use the TRIM function to remove spaces from the start and end of full_name.",
+      "help": {
+        "concept": "TRIM removes unwanted spaces at the beginning and end of a string, which is common in user-entered data.",
+        "hint_1": "Select both the original and the trimmed version using TRIM(full_name).",
+        "hint_2": "Alias the trimmed column as 'cleaned_name' in your SELECT statement."
+      },
+      "starterCode": "-- Write your query below"
+    }
+  }
+}

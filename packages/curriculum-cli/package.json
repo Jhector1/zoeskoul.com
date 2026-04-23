@@ -1,13 +1,10 @@
 {
   "name": "@zoeskoul/curriculum-cli",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "private": true,
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "bin": {
-    "curriculum-cli": "./dist/index.js"
-  },
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -16,10 +13,13 @@
   },
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "typecheck": "tsc -p tsconfig.json --noEmit"
+    "clean": "rimraf dist"
   },
   "dependencies": {
     "@zoeskoul/curriculum-ai": "workspace:*",
     "@zoeskoul/curriculum-compiler": "workspace:*"
+  },
+  "bin": {
+    "curriculum-cli": "./dist/index.js"
   }
 }

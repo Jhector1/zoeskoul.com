@@ -1,0 +1,130 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_4": {
+        "concatenation": {
+          "label": "Concatenating Text",
+          "summary": "Combine text fields using concatenation.",
+          "cards": {
+            "sketch0": {
+              "title": "Introduction to Text Concatenation in SQL"
+            },
+            "sketch1": {
+              "title": "Handling NULLs in Concatenation"
+            },
+            "sketch2": {
+              "title": "Concatenating Literals and Columns"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_4": {
+        "concatenation": {
+          "intro-concat": {
+            "title": "Introduction to Text Concatenation in SQL",
+            "bodyMarkdown": "Concatenation is the process of joining two or more text fields together into a single string. In SQL, you can use the `||` operator to concatenate text columns or literal strings. For example, to combine a customer's name and city, you might write:\n\n```sql\nSELECT full_name || ', ' || city AS name_and_city FROM customers;\n```\n\nThis will produce a new column that joins the `full_name` and `city` columns, separated by a comma and space. If either value is `NULL`, the result will also be `NULL`."
+          },
+          "concat-null-behavior": {
+            "title": "Handling NULLs in Concatenation",
+            "bodyMarkdown": "When concatenating columns, if any value is `NULL`, the result of the concatenation will also be `NULL`. For example:\n\n```sql\nSELECT full_name || ' <' || email || '>' AS contact FROM customers;\n```\n\nIf `email` is `NULL`, the entire `contact` value will be `NULL` for that row. To avoid this, you can use the `COALESCE()` function to substitute a default value for `NULL` fields:\n\n```sql\nSELECT full_name || ' <' || COALESCE(email, 'no-email') || '>' AS contact FROM customers;\n```"
+          },
+          "concat-literals": {
+            "title": "Concatenating Literals and Columns",
+            "bodyMarkdown": "You can concatenate columns with literal strings to format your output. For example, to create a label for each customer:\n\n```sql\nSELECT 'Customer: ' || full_name AS label FROM customers;\n```\n\nThis adds the literal text 'Customer: ' before each customer's name."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "single-choice-concat-operator": {
+      "title": "Which operator is used to concatenate text in SQLite?",
+      "prompt": "You want to join two text columns in SQLite. Which operator should you use?",
+      "hint": "It's not the plus sign.",
+      "help": {
+        "concept": "In SQLite, the double pipe `||` is used to concatenate text values.",
+        "hint_1": "Look for the operator that is specific to text concatenation in SQLite.",
+        "hint_2": "The same operator is used in many SQL dialects for joining strings, and it looks like two vertical bars."
+      },
+      "options": {
+        "a": "||",
+        "b": "+",
+        "c": "&",
+        "d": "CONCAT()"
+      }
+    },
+    "multi-choice-concat-results": {
+      "title": "What happens when concatenating columns with NULL values?",
+      "prompt": "Select all statements that are true when concatenating columns in SQLite where one or more values are NULL.",
+      "hint": "Think about how SQL treats NULLs in expressions.",
+      "help": {
+        "concept": "In SQLite, concatenating with NULL results in NULL. COALESCE() can be used to provide the correct answer fallback value.",
+        "hint_1": "NULL values are not ignored in concatenation; they affect the result.",
+        "hint_2": "If you want to avoid NULL results, you need to replace NULLs with something else before concatenating."
+      },
+      "options": {
+        "a": "The result will be NULL if any value is NULL.",
+        "b": "The result will be an empty string if any value is NULL.",
+        "c": "You can use COALESCE() to replace NULLs before concatenation.",
+        "d": "Concatenation always ignores NULL values."
+      }
+    },
+    "drag-reorder-concat-syntax": {
+      "title": "Order the parts to form a valid concatenation query",
+      "prompt": "Arrange the tokens to create a SQL query that combines the full_name and city columns, separated by a comma and space.",
+      "hint": "Start with the correct answer and end with a semicolon.",
+      "help": {
+        "concept": "A valid SQL concatenation query uses the `||` operator between columns and literals.",
+        "hint_1": "The the correct answer clause comes first, and the correct answer comes before the table name.",
+        "hint_2": "Remember to use `the correct answer` to give your result column a name."
+      },
+      "tokens": {
+        "t1": "SELECT",
+        "t2": "full_name",
+        "t3": "||",
+        "t4": "', '",
+        "t5": "city",
+        "t6": "AS",
+        "t7": "name_and_city",
+        "t8": "FROM",
+        "t9": "customers",
+        "t10": ";"
+      }
+    },
+    "fill-blank-choice-coalesce": {
+      "title": "Fill in the blank: Using COALESCE with concatenation",
+      "prompt": "Complete the query to show the full_name and email, but display 'no-email' if email is NULL:\n\n```sql\nSELECT full_name || ' <' || _____(email, 'no-email') || '>' AS contact FROM customers;\n```",
+      "hint": "Which function returns the first non-NULL value?",
+      "help": {
+        "concept": "the missing term() returns the first non-NULL argument, making it useful for replacing NULLs in concatenation.",
+        "hint_1": "It's a standard SQL function for handling NULLs.",
+        "hint_2": "This function can take multiple arguments and returns the first one that is not NULL."
+      },
+      "template": "SELECT full_name || ' <' || {blank} || '>' AS contact FROM customers;",
+      "choices": [
+        "COALESCE",
+        "CONCAT",
+        "IFNULL",
+        "REPLACE"
+      ]
+    },
+    "code-input-concat-label": {
+      "title": "Write a query to create a customer label",
+      "prompt": "Write a SQL query that selects the id and a label column for each customer. The label should be formatted as 'Customer: ' followed by the full_name.",
+      "hint": "Use the || operator and a literal string.",
+      "help": {
+        "concept": "Concatenation joins text columns and literals using the `||` operator in SQLite.",
+        "hint_1": "Start your SELECT with id and then concatenate the literal with the name.",
+        "hint_2": "Remember to use AS to name your new column 'label'."
+      },
+      "starterCode": "-- Write your query below"
+    }
+  }
+}

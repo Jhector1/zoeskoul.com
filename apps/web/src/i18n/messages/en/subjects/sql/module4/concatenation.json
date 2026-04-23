@@ -1,0 +1,130 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_4": {
+        "concatenation": {
+          "label": "Concatenating Text",
+          "summary": "Combine text fields using concatenation.",
+          "cards": {
+            "sketch0": {
+              "title": "Introduction to Text Concatenation in SQL"
+            },
+            "sketch1": {
+              "title": "Handling NULLs in Concatenation"
+            },
+            "sketch2": {
+              "title": "Common Use Cases for Concatenation"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_4": {
+        "concatenation": {
+          "intro-concat": {
+            "title": "Introduction to Text Concatenation in SQL",
+            "bodyMarkdown": "Concatenation means joining two or more text values together to form a single string. In SQL, you can concatenate columns or string literals using the `||` operator (in SQLite) or the `CONCAT()` function (in some other databases). For example, if you want to combine a customer's `full_name` and `city` into one string, you can write:\n\n```sql\nSELECT full_name || ', ' || city AS name_and_city\nFROM customers;\n```\nThis will produce results like `Mia Lopez, Chicago`."
+          },
+          "concat-null-behavior": {
+            "title": "Handling NULLs in Concatenation",
+            "bodyMarkdown": "When concatenating columns, if any value is `NULL`, the result will also be `NULL`. For example, if a customer does not have an email, concatenating their name and email will result in `NULL`. To avoid this, you can use the `COALESCE()` function to provide a default value:\n\n```sql\nSELECT full_name || ' <' || COALESCE(email, 'no-email') || '>' AS contact_info\nFROM customers;\n```\nThis ensures that even if `email` is `NULL`, the string will still be complete."
+          },
+          "concat-use-cases": {
+            "title": "Common Use Cases for Concatenation",
+            "bodyMarkdown": "Concatenation is useful for formatting output, creating display names, or generating custom labels. For example, you might want to create a mailing label by combining the customer's name and city, or format an email display as `Name <email>`."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "single-choice-concat-operator": {
+      "title": "Which operator is used for concatenating text in SQLite?",
+      "prompt": "Suppose you want to combine the `full_name` and `city` columns in the `customers` table. Which operator should you use in SQLite?",
+      "hint": "It's not the plus sign.",
+      "help": {
+        "concept": "In SQLite, the double pipe `||` is the standard operator for joining text values together.",
+        "hint_1": "Look for the operator that is specifically for string concatenation, not arithmetic.",
+        "hint_2": "The double vertical bar is used for this purpose in SQLite."
+      },
+      "options": {
+        "a": "||",
+        "b": "+",
+        "c": "AND",
+        "d": "&"
+      }
+    },
+    "multi-choice-concat-use-cases": {
+      "title": "When is text concatenation useful?",
+      "prompt": "Select all situations where concatenating text fields in SQL is helpful.",
+      "hint": "Think about formatting and combining text, not calculations or filtering.",
+      "help": {
+        "concept": "Concatenation is for joining text fields, often for display or formatting purposes.",
+        "hint_1": "It's not used for mathematical operations or filtering.",
+        "hint_2": "Look for options that involve combining or formatting text."
+      },
+      "options": {
+        "a": "Creating a display name from first and last name",
+        "b": "Calculating the sum of two numeric columns",
+        "c": "Formatting an email as Name <email>",
+        "d": "Filtering rows based on a condition"
+      }
+    },
+    "drag-reorder-concat-syntax": {
+      "title": "Arrange the SQL for concatenating name and city",
+      "prompt": "Put the following SQL tokens in order to select the customer's full name and city, separated by a comma and space.",
+      "hint": "Start with the correct answer, then concatenate the columns with the operator.",
+      "help": {
+        "concept": "The concatenation operator joins text columns and literals in the the correct answer clause.",
+        "hint_1": "Remember to use the operator between each part you want to join.",
+        "hint_2": "The alias comes after the concatenated expression, before the correct answer."
+      },
+      "tokens": {
+        "t1": "SELECT",
+        "t2": "full_name",
+        "t3": "||",
+        "t4": "', '",
+        "t5": "city",
+        "t6": "AS",
+        "t7": "name_and_city",
+        "t8": "FROM",
+        "t9": "customers",
+        "t10": ";"
+      }
+    },
+    "fill-blank-choice-concat-null": {
+      "title": "Fill in the blank: Handling NULLs in concatenation",
+      "prompt": "Which SQL function can you use to replace NULL values when concatenating text fields?",
+      "hint": "It's a function that returns the first non-NULL value.",
+      "help": {
+        "concept": "the missing term returns the first non-NULL argument, making it useful for replacing NULLs in concatenation.",
+        "hint_1": "It's not an aggregate function.",
+        "hint_2": "This function is commonly used to provide fallback values for NULLs."
+      },
+      "template": "SELECT full_name || ' <' || ______(email, 'no-email') || '>' AS contact_info FROM customers;",
+      "choices": [
+        "COALESCE",
+        "SUM",
+        "COUNT",
+        "GROUP_CONCAT"
+      ]
+    },
+    "code-input-concat-email-label": {
+      "title": "Write a query to format customer email labels",
+      "prompt": "Write a SQL query that selects `full_name` and `email` from the `customers` table, and creates a new column called `label` that combines them in the format: `Full Name <email>`. If `email` is NULL, use `no-email` instead.",
+      "hint": "Use the concatenation operator and COALESCE for the email.",
+      "help": {
+        "concept": "Combine columns and string literals using the concatenation operator, and use COALESCE to handle NULL values.",
+        "hint_1": "Concatenate full_name, a space and angle bracket, and the email (with COALESCE).",
+        "hint_2": "Remember to alias the new column as 'label' and use COALESCE(email, 'no-email')."
+      },
+      "starterCode": "-- Write your query below"
+    }
+  }
+}

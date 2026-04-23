@@ -1,0 +1,76 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_3": {
+        "order-direction": {
+          "label": "Sorting Direction (ASC, DESC)",
+          "summary": "Control the direction of sorting.",
+          "cards": {
+            "sketch0": {
+              "title": "Sorting Direction in SQL"
+            },
+            "project": {
+              "title": "Project"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "projectSteps": {
+            "q4": {
+              "title": "Write a query to list student names in descending order."
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_3": {
+        "order-direction": {
+          "sk1": {
+            "title": "Sorting Direction in SQL",
+            "bodyMarkdown": "When you use the `ORDER BY` clause in SQL, you can control the direction of sorting with `ASC` (ascending) or `DESC` (descending). By default, `ORDER BY` sorts in ascending order (`ASC`).\n\n- **ASC**: Sorts from smallest to largest (A-Z, 0-9).\n- **DESC**: Sorts from largest to smallest (Z-A, 9-0).\n\n**Example:**\n```sql\nSELECT name, price FROM products\nORDER BY price DESC;\n```\nThis query lists products from the most expensive to the least expensive."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "q1": {
+      "title": "Which keyword sorts results from highest to lowest?",
+      "prompt": "You want to see the most expensive products first. Which keyword should you use with ORDER BY?",
+      "options": {
+        "a": "ASC",
+        "b": "DESC",
+        "c": "ORDER",
+        "d": "LIMIT"
+      }
+    },
+    "q2": {
+      "title": "Select all true statements about ORDER BY direction.",
+      "prompt": "Which of the following statements about sorting direction in SQL are true?",
+      "options": {
+        "a": "`ORDER BY price ASC` sorts prices from lowest to highest.",
+        "b": "`ORDER BY name DESC` sorts names from Z to A.",
+        "c": "`ORDER BY price` is the same as `ORDER BY price ASC`.",
+        "d": "`ORDER BY price DESC` sorts prices from lowest to highest."
+      }
+    },
+    "q3": {
+      "title": "Arrange the results in ascending order.",
+      "prompt": "Given the prices: 15, 7, 22, arrange them as they would appear with `ORDER BY price ASC`.",
+      "tokens": {
+        "t1": "7",
+        "t2": "15",
+        "t3": "22"
+      }
+    },
+    "q4": {
+      "title": "Write a query to list student names in descending order.",
+      "prompt": "Using the `students_intro` dataset, write a SQL query to select all student names in descending alphabetical order.",
+      "starterCode": "-- Write your query here\n"
+    }
+  }
+}

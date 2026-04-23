@@ -55,11 +55,11 @@
       "title": "Filter with IN",
       "prompt": "The SQLite workspace already has a table named `customers`.\n\nWrite a query that shows the `full_name` and `status` columns for customers whose `status` is either `active` or `draft`.\n\nThen click **Run**.",
       "help": {
-        "concept": "`IN` is useful when a value can match any one of several listed options.",
-        "hint_1": "Select `full_name` and `status`, then filter the status against a short list.",
-        "hint_2": "Build a two-column query on `customers`, then keep only rows whose status belongs to the list containing `active` and `draft`."
+        "concept": "...",
+        "hint_1": "...",
+        "hint_2": "..."
       },
-      "hint": "Use `IN` with the two allowed status values.",
+      "hint": "....",
       "starterCode": "-- Show customers with active or draft status\n",
       "fixedLanguage": "sql",
       "fixedSqlDialect": "sqlite",

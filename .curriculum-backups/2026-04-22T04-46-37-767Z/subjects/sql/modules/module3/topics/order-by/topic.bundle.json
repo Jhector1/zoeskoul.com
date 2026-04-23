@@ -1,0 +1,120 @@
+{
+  "topicId": "order-by",
+  "subjectSlug": "sql",
+  "moduleSlug": "sql_module_3",
+  "sectionSlug": "section_3_1",
+  "prefix": "sql3",
+  "minutes": 20,
+  "topic": {
+    "labelKey": "topics.sql.sql_module_3.order-by.label",
+    "summaryKey": "topics.sql.sql_module_3.order-by.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_3.order-by.cards.sketch0.title",
+      "sketchId": "sketch-what-is-order-by",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_3.order-by.cards.sketch1.title",
+      "sketchId": "sketch-order-by-syntax",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql.sql_module_3.order-by.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 3,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch-what-is-order-by",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_3.order-by.sketch-what-is-order-by.title",
+      "bodyKey": "sketches.sql.sql_module_3.order-by.sketch-what-is-order-by.bodyMarkdown"
+    },
+    {
+      "id": "sketch-order-by-syntax",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_3.order-by.sketch-order-by-syntax.title",
+      "bodyKey": "sketches.sql.sql_module_3.order-by.sketch-order-by-syntax.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "quiz-order-by-basic-single-choice",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.quiz-order-by-basic-single-choice",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "quiz-order-by-syntax-fill-blank",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.quiz-order-by-syntax-fill-blank",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "ORDER BY"
+      }
+    },
+    {
+      "id": "quiz-order-by-drag-reorder",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.quiz-order-by-drag-reorder",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "quiz-order-by-code-input",
+      "kind": "code_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.quiz-order-by-code-input",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "students_intro",
+        "resultShape": "table",
+        "solutionCode": "SELECT name, grade FROM students_intro\nORDER BY grade DESC;"
+      }
+    }
+  ]
+}

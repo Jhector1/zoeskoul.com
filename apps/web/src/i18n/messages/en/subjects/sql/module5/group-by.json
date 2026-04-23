@@ -1,0 +1,136 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_5": {
+        "group-by": {
+          "label": "GROUP BY Clause",
+          "summary": "Group data for aggregate calculations.",
+          "cards": {
+            "sketch0": {
+              "title": "What is GROUP BY?"
+            },
+            "sketch1": {
+              "title": "GROUP BY with Multiple Columns"
+            },
+            "sketch2": {
+              "title": "GROUP BY and WHERE"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_5": {
+        "group-by": {
+          "sk1": {
+            "title": "What is GROUP BY?",
+            "bodyMarkdown": "The `GROUP BY` clause in SQL is used to arrange identical data into groups. This is especially useful when you want to perform aggregate functions (like `SUM`, `COUNT`, `AVG`, etc.) on subsets of your data. For example, you might want to know the total sales per region or the number of orders per customer.\n\n**Example:**\n\nSuppose you want to find the total quantity of products ordered in each region from the `orders` table:\n\n```sql\nSELECT region, SUM(quantity) AS total_quantity\nFROM orders\nGROUP BY region;\n```\n\nThis query will return one row per region, showing the sum of quantities for each."
+          },
+          "sk2": {
+            "title": "GROUP BY with Multiple Columns",
+            "bodyMarkdown": "You can group by more than one column to get more detailed summaries. For example, grouping by both `region` and `category` gives you aggregates for each combination.\n\n**Example:**\n\n```sql\nSELECT region, category, COUNT(*) AS order_count\nFROM orders\nGROUP BY region, category;\n```\n\nThis query counts the number of orders for each region-category pair."
+          },
+          "sk3": {
+            "title": "GROUP BY and WHERE",
+            "bodyMarkdown": "You can use `WHERE` to filter rows before grouping. The `WHERE` clause always comes before `GROUP BY` in your SQL statement.\n\n**Example:**\n\n```sql\nSELECT customer_name, SUM(quantity) AS total_quantity\nFROM orders\nWHERE status = 'paid'\nGROUP BY customer_name;\n```\n\nThis query gives the total quantity of paid orders per customer."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "q1": {
+      "title": "Purpose of GROUP BY",
+      "prompt": "What is the main purpose of the GROUP BY clause in SQL?",
+      "hint": "Think about how you summarize data by categories.",
+      "help": {
+        "concept": "GROUP BY is used to arrange rows into groups based on column values, enabling aggregate calculations for each group.",
+        "hint_1": "GROUP BY doesn't filter or sort, but organizes data for aggregation.",
+        "hint_2": "It's used when you want to calculate things like totals or averages for each category."
+      },
+      "options": {
+        "a": "To filter rows based on a condition",
+        "b": "To sort the result set",
+        "c": "To group rows that have the same values in specified columns",
+        "d": "To join two tables together"
+      }
+    },
+    "q2": {
+      "title": "Valid GROUP BY Usage",
+      "prompt": "Which of the following queries correctly use the GROUP BY clause? (Select all that apply)",
+      "hint": "Check if all non-aggregated columns in SELECT are included in GROUP BY.",
+      "help": {
+        "concept": "When using GROUP BY, all columns in the SELECT list that are not inside an aggregate function must be listed in the GROUP BY clause.",
+        "hint_1": "If you select the correct answer column and it's not aggregated, it must be in GROUP BY.",
+        "hint_2": "Queries missing GROUP BY for non-aggregated columns are invalid."
+      },
+      "options": {
+        "a": "SELECT region, SUM(quantity) FROM orders GROUP BY region;",
+        "b": "SELECT SUM(quantity) FROM orders GROUP BY region;",
+        "c": "SELECT region, COUNT(*) FROM orders;",
+        "d": "SELECT region, category, COUNT(*) FROM orders GROUP BY region, category;"
+      }
+    },
+    "q3": {
+      "title": "Order the SQL Clauses",
+      "prompt": "Arrange the SQL clauses in the correct order for a query that uses GROUP BY.",
+      "hint": "Start with the correct answer and the correct answer, then filter, group, and finally sort.",
+      "help": {
+        "concept": "The standard SQL clause order is the correct answer, the correct answer, the correct answer, the correct answer, the correct answer.",
+        "hint_1": "the correct answer comes after the correct answer, before the correct answer.",
+        "hint_2": "the correct answer is always last; the correct answer is always first."
+      },
+      "tokens": {
+        "t1": "SELECT",
+        "t2": "FROM",
+        "t3": "WHERE",
+        "t4": "GROUP BY",
+        "t5": "ORDER BY"
+      }
+    },
+    "q4": {
+      "title": "GROUP BY Syntax",
+      "prompt": "Fill in the blank to complete the SQL statement that shows the total quantity ordered per region:\n\nSELECT region, SUM(quantity) FROM orders _____ region;",
+      "hint": "Which clause is used to aggregate by region?",
+      "help": {
+        "concept": "the missing term is used to aggregate data by one or more columns.",
+        "hint_1": "It's not WHERE or ORDER BY.",
+        "hint_2": "It's the clause that groups rows for aggregation."
+      },
+      "template": "SELECT region, SUM(quantity) FROM orders {blank} region;",
+      "choices": [
+        "GROUP BY",
+        "ORDER BY",
+        "WHERE",
+        "HAVING"
+      ]
+    },
+    "q5": {
+      "title": "Total Quantity by Category",
+      "prompt": "Write a SQL query to show each category and the total quantity ordered for each category from the orders table.",
+      "hint": "Use GROUP BY on category and SUM the quantity.",
+      "help": {
+        "concept": "To get totals per category, use GROUP BY category and aggregate with SUM.",
+        "hint_1": "SELECT category and SUM(quantity), then GROUP BY category.",
+        "hint_2": "GROUP BY should match the column you want totals for."
+      },
+      "starterCode": "-- Write your query here"
+    },
+    "q6": {
+      "title": "Paid Orders per Customer",
+      "prompt": "Write a SQL query to show each customer and the number of paid orders they have placed.",
+      "hint": "Filter for paid orders, then group by customer_name and count.",
+      "help": {
+        "concept": "Use WHERE to filter for paid orders, then GROUP BY customer_name and use COUNT to get the number of orders.",
+        "hint_1": "Add WHERE status = 'paid' before GROUP BY.",
+        "hint_2": "COUNT(*) gives the number of orders per customer after grouping."
+      },
+      "starterCode": "-- Write your query here"
+    }
+  }
+}

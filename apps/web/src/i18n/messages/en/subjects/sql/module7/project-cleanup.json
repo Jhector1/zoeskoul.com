@@ -1,0 +1,90 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_7": {
+        "project-cleanup": {
+          "label": "Clean and Format Output",
+          "summary": "Use string functions and formatting for clean results.",
+          "cards": {
+            "sketch0": {
+              "title": "Why Clean and Format Output?"
+            },
+            "sketch1": {
+              "title": "Common String Functions"
+            },
+            "sketch2": {
+              "title": "Formatting Examples"
+            },
+            "project": {
+              "title": "Project"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "projectSteps": {
+            "quiz-code-cleanup": {
+              "title": "Format Customer Names and Phone Numbers"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_7": {
+        "project-cleanup": {
+          "sketch-clean-format-intro": {
+            "title": "Why Clean and Format Output?",
+            "bodyMarkdown": "When working with SQL, your query results are often shared with others or used in reports. Clean, well-formatted output makes your data easier to read and understand. SQL provides string functions like `TRIM`, `UPPER`, `LOWER`, `REPLACE`, and formatting tools like `printf` (in SQLite) to help you present your data clearly."
+          },
+          "sketch-string-functions": {
+            "title": "Common String Functions",
+            "bodyMarkdown": "Some useful string functions in SQL include:\n\n- `TRIM(column)`: Removes leading and trailing spaces.\n- `UPPER(column)`: Converts text to uppercase.\n- `LOWER(column)`: Converts text to lowercase.\n- `REPLACE(column, 'old', 'new')`: Replaces occurrences of 'old' with 'new'.\n- `printf(format, ...)`: Formats numbers or strings (SQLite-specific)."
+          },
+          "sketch-formatting-examples": {
+            "title": "Formatting Examples",
+            "bodyMarkdown": "Suppose you have a table with messy customer names and phone numbers. You can use string functions to:\n\n- Remove extra spaces: `TRIM(name)`\n- Standardize case: `UPPER(name)` or `LOWER(name)`\n- Format phone numbers: `REPLACE(phone, '-', '')` to remove dashes\n- Format prices: `printf('%.2f', price)` to show two decimal places"
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "quiz-string-function-single": {
+      "title": "Which SQL function removes spaces from the beginning and end of a string?",
+      "prompt": "Which SQL function removes spaces from the beginning and end of a string?",
+      "options": {
+        "a": "TRIM",
+        "b": "REPLACE",
+        "c": "UPPER",
+        "d": "CONCAT"
+      }
+    },
+    "quiz-multi-cleanup": {
+      "title": "Which of the following can help you clean and format output in SQL? (Select all that apply)",
+      "prompt": "Which of the following can help you clean and format output in SQL? (Select all that apply)",
+      "options": {
+        "a": "TRIM",
+        "b": "UPPER",
+        "c": "REPLACE",
+        "d": "SUM"
+      }
+    },
+    "quiz-drag-reorder-format": {
+      "title": "Arrange the steps to clean a name column: (1) Remove spaces, (2) Convert to uppercase, (3) Replace dashes with spaces.",
+      "prompt": "Arrange the steps to clean a name column: (1) Remove spaces, (2) Convert to uppercase, (3) Replace dashes with spaces.",
+      "tokens": {
+        "t1": "Remove spaces",
+        "t2": "Convert to uppercase",
+        "t3": "Replace dashes with spaces"
+      }
+    },
+    "quiz-code-cleanup": {
+      "title": "Format Customer Names and Phone Numbers",
+      "prompt": "Given the `customers_cleanup` table with columns `name` and `phone`, write a SQL query to select the customer name in uppercase (with no leading/trailing spaces) and the phone number with all dashes removed. Name the columns as `clean_name` and `clean_phone`.",
+      "starterCode": "-- Write your SQL query here\nSELECT \n    -- clean_name,\n    -- clean_phone\nFROM customers_cleanup;"
+    }
+  }
+}

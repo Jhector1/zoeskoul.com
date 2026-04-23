@@ -1,0 +1,125 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_0": {
+        "sql-environments": {
+          "label": "SQL Environments and Tools",
+          "summary": "Discover common tools and environments for running SQL queries.",
+          "cards": {
+            "sketch0": {
+              "title": "What is an SQL Environment?"
+            },
+            "sketch1": {
+              "title": "Popular SQL Tools"
+            },
+            "sketch2": {
+              "title": "Connecting to a Database"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_0": {
+        "sql-environments": {
+          "sk1": {
+            "title": "What is an SQL Environment?",
+            "bodyMarkdown": "An **SQL environment** is any tool or platform where you can write and execute SQL queries against a database. These environments help you interact with your data, run commands, and view results. They range from command-line tools to graphical applications and web-based editors."
+          },
+          "sk2": {
+            "title": "Popular SQL Tools",
+            "bodyMarkdown": "Some common SQL environments include:\n\n- **Command-line tools** like `sqlite3`, `psql` (for PostgreSQL), or `mysql`.\n- **Graphical user interfaces (GUIs)** such as DBeaver, DB Browser for SQLite, or MySQL Workbench.\n- **Web-based editors** provided by cloud services or online learning platforms.\n\nEach tool connects to a database and lets you run SQL queries, view tables, and manage data."
+          },
+          "sk3": {
+            "title": "Connecting to a Database",
+            "bodyMarkdown": "To use SQL, you must connect your environment to a database. This usually involves specifying the database file (for SQLite), or providing connection details like host, username, and password (for other databases). Once connected, you can run queries such as:\n\n```sql\nSELECT * FROM students;\n```\n\nThis command retrieves all rows from the `students` table in the `students_intro` database."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "q1": {
+      "title": "Identifying SQL Environments",
+      "prompt": "Which of the following is a graphical tool for running SQL queries?",
+      "hint": "Think about tools designed for databases with the correct answer visual interface.",
+      "help": {
+        "concept": "Graphical SQL tools provide the correct answer user-friendly interface for writing and executing queries.",
+        "hint_1": "DBeaver is the correct answer popular GUI for databases.",
+        "hint_2": "The other options are command-line utilities unrelated to SQL."
+      },
+      "options": {
+        "a": "DBeaver",
+        "b": "curl",
+        "c": "nano",
+        "d": "grep"
+      }
+    },
+    "q2": {
+      "title": "Common Features of SQL Environments",
+      "prompt": "Which features are commonly found in SQL environments?",
+      "hint": "Focus on features related to working with databases.",
+      "help": {
+        "concept": "SQL environments are designed to help users interact with databases, not edit images.",
+        "hint_1": "Running queries and viewing data are core features.",
+        "hint_2": "Managing connections is also essential, but editing images is not."
+      },
+      "options": {
+        "a": "Ability to run queries",
+        "b": "Viewing table data",
+        "c": "Editing images",
+        "d": "Managing database connections"
+      }
+    },
+    "q3": {
+      "title": "Steps to Run a Query",
+      "prompt": "Arrange the steps to run a SQL query in the correct order.",
+      "hint": "Start with launching the tool, end with seeing what your query returns.",
+      "help": {
+        "concept": "Running a query involves preparing the environment, connecting, writing, executing, and reviewing results.",
+        "hint_1": "You can't write or run a query before opening the environment and connecting.",
+        "hint_2": "Viewing results comes after executing the query."
+      },
+      "tokens": {
+        "t1": "Open your SQL environment",
+        "t2": "Connect to the database",
+        "t3": "Write your SQL query",
+        "t4": "Execute the query",
+        "t5": "View the results"
+      }
+    },
+    "q4": {
+      "title": "Connecting to SQLite",
+      "prompt": "Fill in the blank: To connect to a SQLite database file named `school.db` using the command line, you would type: `______ school.db`",
+      "hint": "Which command-line tool is used for SQLite databases?",
+      "help": {
+        "concept": "Each database system has its own command-line client. SQLite uses a specific one.",
+        "hint_1": "The command starts with 'sqlite'.",
+        "hint_2": "It's not mysql or psql; it's the tool made for SQLite."
+      },
+      "template": "______ school.db",
+      "choices": [
+        "sqlite3",
+        "mysql",
+        "psql",
+        "sqlplus"
+      ]
+    },
+    "q5": {
+      "title": "Running a Simple Query",
+      "prompt": "Write an SQL query to display all columns and rows from the `students` table.",
+      "hint": "Use SELECT to get all columns from the table.",
+      "help": {
+        "concept": "The SELECT statement retrieves data from a table. Using * selects all columns.",
+        "hint_1": "The query should start with SELECT and use *.",
+        "hint_2": "Don't forget to specify the table name after FROM."
+      },
+      "starterCode": "-- Write your SQL query here"
+    }
+  }
+}

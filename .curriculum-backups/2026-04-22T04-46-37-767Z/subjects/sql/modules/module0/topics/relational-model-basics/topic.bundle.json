@@ -1,0 +1,139 @@
+{
+  "topicId": "relational-model-basics",
+  "subjectSlug": "sql",
+  "moduleSlug": "sql_module_0",
+  "sectionSlug": "section_0_1",
+  "prefix": "sql0",
+  "minutes": 20,
+  "topic": {
+    "labelKey": "topics.sql.sql_module_0.relational-model-basics.label",
+    "summaryKey": "topics.sql.sql_module_0.relational-model-basics.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_0.relational-model-basics.cards.sketch0.title",
+      "sketchId": "relational-model-overview",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_0.relational-model-basics.cards.sketch1.title",
+      "sketchId": "tables-rows-columns",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql.sql_module_0.relational-model-basics.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "relational-model-overview",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_0.relational-model-basics.relational-model-overview.title",
+      "bodyKey": "sketches.sql.sql_module_0.relational-model-basics.relational-model-overview.bodyMarkdown"
+    },
+    {
+      "id": "tables-rows-columns",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_0.relational-model-basics.tables-rows-columns.title",
+      "bodyKey": "sketches.sql.sql_module_0.relational-model-basics.tables-rows-columns.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "single-choice-table-definition",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.single-choice-table-definition",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "multi-choice-rows-columns",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.multi-choice-rows-columns",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": []
+      }
+    },
+    {
+      "id": "drag-reorder-table-structure",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.drag-reorder-table-structure",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "fill-blank-choice-table-example",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.fill-blank-choice-table-example",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": ""
+      }
+    },
+    {
+      "id": "code-input-select-all-products",
+      "kind": "code_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.code-input-select-all-products",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "SELECT * FROM products;"
+      }
+    }
+  ]
+}

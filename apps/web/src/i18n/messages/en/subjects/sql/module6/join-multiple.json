@@ -1,0 +1,91 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_6": {
+        "join-multiple": {
+          "label": "Joining Multiple Tables",
+          "summary": "How to join more than two tables in a query.",
+          "cards": {
+            "sketch0": {
+              "title": "Why Join Multiple Tables?"
+            },
+            "sketch1": {
+              "title": "Syntax for Joining Multiple Tables"
+            },
+            "sketch2": {
+              "title": "Tips for Multiple Joins"
+            },
+            "project": {
+              "title": "Project"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "projectSteps": {
+            "ci-join-multiple-sql": {
+              "title": "Write a SQL query to list each student's name, their class name, and the teacher's name by joining the `students`, `classes`, and `teachers` tables."
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_6": {
+        "join-multiple": {
+          "intro-join-multiple": {
+            "title": "Why Join Multiple Tables?",
+            "bodyMarkdown": "In real-world databases, information is often spread across several tables. To answer complex questions, you may need to combine data from three or more tables in a single query. This is done by chaining multiple JOIN operations together."
+          },
+          "syntax-join-multiple": {
+            "title": "Syntax for Joining Multiple Tables",
+            "bodyMarkdown": "To join more than two tables, you simply add more JOIN clauses to your query. Each JOIN connects another table using a matching column. For example:\n\n```sql\nSELECT o.order_id, c.customer_name, p.product_name\nFROM orders o\nJOIN customers c ON o.customer_id = c.customer_id\nJOIN products p ON o.product_id = p.product_id;\n```\nThis query combines data from `orders`, `customers`, and `products`."
+          },
+          "tips-join-multiple": {
+            "title": "Tips for Multiple Joins",
+            "bodyMarkdown": "- Use table aliases to keep queries readable.\n- Make sure each JOIN condition matches the correct columns.\n- You can mix different types of joins (INNER, LEFT, etc.) as needed."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "sc-join-multiple-purpose": {
+      "title": "Why might you need to join more than two tables in a SQL query?",
+      "prompt": "Why might you need to join more than two tables in a SQL query?",
+      "options": {
+        "a": "To combine related information from several tables",
+        "b": "To delete multiple tables at once",
+        "c": "To create new tables automatically",
+        "d": "To sort data alphabetically"
+      }
+    },
+    "mc-join-multiple-best-practices": {
+      "title": "Which of the following are good practices when joining multiple tables?",
+      "prompt": "Which of the following are good practices when joining multiple tables?",
+      "options": {
+        "a": "Use table aliases for readability",
+        "b": "Always use LEFT JOIN",
+        "c": "Check that each JOIN condition matches the correct columns",
+        "d": "Mix different types of joins if needed"
+      }
+    },
+    "dr-join-multiple-order": {
+      "title": "Put the steps for joining three tables in the correct order.",
+      "prompt": "Put the steps for joining three tables in the correct order.",
+      "tokens": {
+        "t1": "Write the SELECT statement",
+        "t2": "FROM the first table",
+        "t3": "JOIN the second table ON a matching column",
+        "t4": "JOIN the third table ON a matching column"
+      }
+    },
+    "ci-join-multiple-sql": {
+      "title": "Write a SQL query to list each student's name, their class name, and the teacher's name by joining the `students`, `classes`, and `teachers` tables.",
+      "prompt": "Write a SQL query to list each student's name, their class name, and the teacher's name by joining the `students`, `classes`, and `teachers` tables.",
+      "starterCode": "-- students: student_id, name, class_id\n-- classes: class_id, class_name, teacher_id\n-- teachers: teacher_id, teacher_name\nSELECT "
+    }
+  }
+}

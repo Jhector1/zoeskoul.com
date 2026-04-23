@@ -1,0 +1,118 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_5": {
+        "count-sum-avg": {
+          "label": "COUNT, SUM, AVG",
+          "summary": "Calculate totals and averages from data.",
+          "cards": {
+            "sketch0": {
+              "title": "Aggregate Functions Overview"
+            },
+            "sketch1": {
+              "title": "Using COUNT, SUM, and AVG"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_5": {
+        "count-sum-avg": {
+          "sketch-1": {
+            "title": "Aggregate Functions Overview",
+            "bodyMarkdown": "SQL aggregate functions allow you to perform calculations on sets of rows. The most common ones are:\n\n- **COUNT**: Counts the number of rows.\n- **SUM**: Adds up numeric values in a column.\n- **AVG**: Calculates the average value of a numeric column.\n\nThese functions are often used with the `SELECT` statement to summarize data."
+          },
+          "sketch-2": {
+            "title": "Using COUNT, SUM, and AVG",
+            "bodyMarkdown": "To use aggregate functions, specify them in the `SELECT` clause. For example:\n\n```sql\nSELECT COUNT(*) FROM products;\nSELECT SUM(price) FROM products;\nSELECT AVG(price) FROM products;\n```\n\nYou can also use them with `WHERE` to filter rows before aggregation."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "quiz-1": {
+      "title": "Purpose of COUNT",
+      "prompt": "What does the COUNT function do in SQL?",
+      "hint": "COUNT is used to determine how many rows are returned.",
+      "help": {
+        "concept": "COUNT returns the total number of rows that match the query criteria.",
+        "hint_1": "Think about which function tells you how many items are present.",
+        "hint_2": "COUNT does not add or average values, it just tallies rows."
+      },
+      "options": {
+        "a": "Counts the number of rows in a result set",
+        "b": "Adds up all the values in a column",
+        "c": "Finds the maximum value in a column",
+        "d": "Calculates the average of a column"
+      }
+    },
+    "quiz-2": {
+      "title": "Identifying Aggregate Functions",
+      "prompt": "Which of the following are aggregate functions in SQL?",
+      "hint": "Aggregate functions perform calculations on groups of rows.",
+      "help": {
+        "concept": "Aggregate functions summarize data, while SELECT and WHERE are clauses.",
+        "hint_1": "Look for functions that calculate totals or averages.",
+        "hint_2": "SELECT and WHERE are not aggregate functions."
+      },
+      "options": {
+        "a": "COUNT",
+        "b": "SUM",
+        "c": "AVG",
+        "d": "SELECT",
+        "e": "WHERE"
+      }
+    },
+    "quiz-3": {
+      "title": "Order of Operations",
+      "prompt": "Arrange the steps to calculate the average price of products in the correct order.",
+      "hint": "Start by writing the SELECT statement, then use the function, column, and table.",
+      "help": {
+        "concept": "Calculating an average involves selecting the function, column, and table in the right order.",
+        "hint_1": "Begin with SELECT, then indicate which function and column to use.",
+        "hint_2": "The table comes last, after specifying what you want to calculate."
+      },
+      "tokens": {
+        "t1": "Write a SELECT statement",
+        "t2": "Use the AVG function",
+        "t3": "Specify the column (price)",
+        "t4": "Choose the table (products)"
+      }
+    },
+    "quiz-4": {
+      "title": "Fill in the Aggregate Function",
+      "prompt": "Complete the SQL statement to count the number of products:\n\nSELECT ___(*) FROM products;",
+      "hint": "Which function counts rows?",
+      "help": {
+        "concept": "the missing term is used to the missing term rows in a table.",
+        "hint_1": "You want to know how many products there are.",
+        "hint_2": "SUM and AVG are for calculations, not counting."
+      },
+      "template": "SELECT ___(*) FROM products;",
+      "choices": [
+        "COUNT",
+        "SUM",
+        "AVG",
+        "MAX"
+      ]
+    },
+    "quiz-5": {
+      "title": "Calculate Total Inventory Value",
+      "prompt": "Write a SQL query to find the total value of all products in the 'products_catalog' dataset. The value for each product is its price multiplied by its quantity. Return the total value as a single number.",
+      "hint": "Use SUM to add up the product of price and quantity.",
+      "help": {
+        "concept": "To find the total value, multiply price by quantity for each row, then sum the results.",
+        "hint_1": "You need to use SUM and multiply two columns inside it.",
+        "hint_2": "The columns to use are price and quantity from the products table."
+      },
+      "starterCode": "-- Write your query below\n"
+    }
+  }
+}

@@ -1,0 +1,127 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_3": {
+        "order-by": {
+          "label": "ORDER BY Clause",
+          "summary": "Sort query results by one or more columns.",
+          "cards": {
+            "sketch0": {
+              "title": "What is ORDER BY?"
+            },
+            "sketch1": {
+              "title": "Sorting by Multiple Columns"
+            },
+            "sketch2": {
+              "title": "ORDER BY and Column Positions"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_3": {
+        "order-by": {
+          "sk1": {
+            "title": "What is ORDER BY?",
+            "bodyMarkdown": "The `ORDER BY` clause in SQL is used to sort the results of a query by one or more columns. By default, sorting is in ascending order (from lowest to highest). You can also specify descending order using the `DESC` keyword.\n\nFor example, to list all products sorted by price from lowest to highest:\n\n```sql\nSELECT * FROM products\nORDER BY price;\n```\n\nTo sort by price from highest to lowest:\n\n```sql\nSELECT * FROM products\nORDER BY price DESC;\n```"
+          },
+          "sk2": {
+            "title": "Sorting by Multiple Columns",
+            "bodyMarkdown": "You can sort results by more than one column. The query will sort by the first column, and if there are ties, it will sort by the next column, and so on.\n\nFor example, to sort products by category (A-Z), and then by price (low to high) within each category:\n\n```sql\nSELECT * FROM products\nORDER BY category, price;\n```"
+          },
+          "sk3": {
+            "title": "ORDER BY and Column Positions",
+            "bodyMarkdown": "Instead of using column names, you can use the column's position in the SELECT list with `ORDER BY`. For example, `ORDER BY 2` sorts by the second column in the SELECT statement. However, using column names is clearer and less error-prone."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "q1": {
+      "title": "Default Sorting Order",
+      "prompt": "What is the default sorting order when using ORDER BY in SQL?",
+      "hint": "Think about what happens if you don't specify ASC or DESC.",
+      "help": {
+        "concept": "ORDER BY sorts results in ascending order by default.",
+        "hint_1": "If you don't specify the correct answer direction, SQL sorts from smallest to largest.",
+        "hint_2": "The default is ascending order unless DESC is used."
+      },
+      "options": {
+        "a": "Ascending (lowest to highest)",
+        "b": "Descending (highest to lowest)",
+        "c": "Random order",
+        "d": "No sorting is applied"
+      }
+    },
+    "q2": {
+      "title": "Valid ORDER BY Usages",
+      "prompt": "Which of the following are valid ways to use ORDER BY in a query on the products table?",
+      "hint": "Check for correct SQL syntax and valid keywords.",
+      "help": {
+        "concept": "ORDER BY can use column names, multiple columns, directions, or column positions.",
+        "hint_1": "Look for correct placement of ORDER BY and column names or numbers.",
+        "hint_2": "The last option has the wrong order of keywords."
+      },
+      "options": {
+        "a": "ORDER BY price",
+        "b": "ORDER BY price DESC",
+        "c": "ORDER BY category, price",
+        "d": "ORDER BY 2 DESC",
+        "e": "ORDER price BY"
+      }
+    },
+    "q3": {
+      "title": "Ordering Products by Stock",
+      "prompt": "Arrange the following product names in order from lowest to highest stock, as they would appear using `ORDER BY stock`.",
+      "hint": "Look at the stock values for each product.",
+      "help": {
+        "concept": "ORDER BY stock arranges products from the smallest to the largest stock value.",
+        "hint_1": "Start with the product that has the fewest units in stock.",
+        "hint_2": "Arrange them in increasing order based on their stock numbers."
+      },
+      "tokens": {
+        "t1": "Office Chair",
+        "t2": "Desk Lamp",
+        "t3": "Acrylic Paint Set",
+        "t4": "Fountain Pen",
+        "t5": "Sketchbook",
+        "t6": "Notebook"
+      }
+    },
+    "q4": {
+      "title": "ORDER BY Syntax",
+      "prompt": "Fill in the blank to complete the SQL statement that lists all products sorted by price from highest to lowest:\n\n```sql\nSELECT * FROM products\n_____ price DESC;\n```",
+      "hint": "Which clause is used for sorting in SQL?",
+      "help": {
+        "concept": "the missing term is the SQL clause for sorting query results.",
+        "hint_1": "GROUP BY is for grouping, not sorting.",
+        "hint_2": "The clause for sorting is two words, starting with 'ORDER'."
+      },
+      "template": "SELECT * FROM products\n_____ price DESC;",
+      "choices": [
+        "ORDER BY",
+        "GROUP BY",
+        "SORT",
+        "ORDER"
+      ]
+    },
+    "q5": {
+      "title": "Sort Products by Category and Price",
+      "prompt": "Write a SQL query to select all columns from the products table, sorted first by category (A-Z), then by price from highest to lowest within each category.",
+      "hint": "Use ORDER BY with both category and price, and specify DESC for price.",
+      "help": {
+        "concept": "ORDER BY can sort by multiple columns, each with its own direction.",
+        "hint_1": "First sort by category in ascending order, then by price in descending order.",
+        "hint_2": "Remember to specify DESC for price after listing category."
+      },
+      "starterCode": "-- Write your SQL query below"
+    }
+  }
+}

@@ -1,0 +1,124 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_4": {
+        "like-patterns": {
+          "label": "Pattern Matching with LIKE",
+          "summary": "Search for patterns in text using LIKE and wildcards.",
+          "cards": {
+            "sketch0": {
+              "title": "Introduction to LIKE"
+            },
+            "sketch1": {
+              "title": "Using Wildcards with LIKE"
+            },
+            "sketch2": {
+              "title": "Case Sensitivity in LIKE"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_4": {
+        "like-patterns": {
+          "like-intro": {
+            "title": "Introduction to LIKE",
+            "bodyMarkdown": "The `LIKE` operator in SQL is used to search for a specified pattern in a column. It's especially useful for filtering text fields such as names, emails, or cities. \n\nYou can use two main wildcards:\n- `%` matches any sequence of characters (including zero characters)\n- `_` matches exactly one character\n\nFor example, to find customers whose city starts with 'Ch':\n\n```sql\nSELECT * FROM customers WHERE city LIKE 'Ch%';\n```\n\nThis would match 'Chicago' but not 'Houston'."
+          },
+          "like-wildcards": {
+            "title": "Using Wildcards with LIKE",
+            "bodyMarkdown": "Wildcards make `LIKE` powerful:\n- `%` can be placed anywhere in the pattern. For example, `%a%` matches any value containing 'a'.\n- `_` is used for single-character matching. For example, `_ia` matches 'Mia' but not 'Liam'.\n\nYou can combine wildcards for more complex patterns. For example:\n\n```sql\nSELECT * FROM customers WHERE full_name LIKE '_ia%';\n```\n\nThis finds names where the second and third letters are 'ia', such as 'Mia Lopez'."
+          },
+          "like-case-sensitivity": {
+            "title": "Case Sensitivity in LIKE",
+            "bodyMarkdown": "In SQLite, the `LIKE` operator is case-insensitive for ASCII characters by default. This means `LIKE 'mia%'` will match both 'Mia Lopez' and 'mia smith'.\n\nIf you need case-sensitive matching, you can use the `GLOB` operator or apply functions like `LOWER()` to both sides of the comparison."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "like-basic-single-choice": {
+      "title": "Basic LIKE Pattern",
+      "prompt": "Which SQL query finds all customers whose city starts with 'Ch'?",
+      "hint": "Remember how '%' works in LIKE patterns.",
+      "help": {
+        "concept": "The '%' wildcard matches any sequence of characters, and its position in the pattern determines what is matched.",
+        "hint_1": "To match values that start with 'Ch', the pattern should begin with 'Ch' and end with '%'.",
+        "hint_2": "Patterns like '%Ch' or '%Ch%' do not restrict the start of the string to 'Ch'."
+      },
+      "options": {
+        "a": "SELECT * FROM customers WHERE city LIKE 'Ch%';",
+        "b": "SELECT * FROM customers WHERE city LIKE '%Ch';",
+        "c": "SELECT * FROM customers WHERE city LIKE '%Ch%';",
+        "d": "SELECT * FROM customers WHERE city = 'Ch';"
+      }
+    },
+    "like-multi-choice-wildcards": {
+      "title": "Identifying LIKE Patterns",
+      "prompt": "Which of the following queries would match the customer 'Mia Lopez' in the full_name column? (Select all that apply.)",
+      "hint": "Think about where 'Mia' and 'Lopez' appear in the name.",
+      "help": {
+        "concept": "LIKE patterns can match at the start, end, or anywhere in the string depending on where the wildcards are placed.",
+        "hint_1": "Patterns like 'Mia%' match names starting with 'Mia'. '%Lopez' matches names ending with 'Lopez'.",
+        "hint_2": "The pattern '_ia%' matches names where the second and third letters are 'ia', and '%ia%' matches any name containing 'ia'."
+      },
+      "options": {
+        "a": "SELECT * FROM customers WHERE full_name LIKE 'Mia%';",
+        "b": "SELECT * FROM customers WHERE full_name LIKE '%Lopez';",
+        "c": "SELECT * FROM customers WHERE full_name LIKE '%ia%';",
+        "d": "SELECT * FROM customers WHERE full_name LIKE '_ia%';"
+      }
+    },
+    "like-drag-reorder-wildcards": {
+      "title": "Order the LIKE Patterns by Specificity",
+      "prompt": "Arrange these LIKE patterns from most specific (matches the fewest rows) to least specific (matches the most rows) for the full_name column.",
+      "hint": "Think about which pattern matches only one value and which matches almost everything.",
+      "help": {
+        "concept": "The more wildcards in a pattern, the less specific it is. Patterns without wildcards are the most specific.",
+        "hint_1": "A pattern with no wildcards matches exactly one value. Adding wildcards increases the number of matches.",
+        "hint_2": "'%' alone matches all values, while 'Mia Lopez' matches just one."
+      },
+      "tokens": {
+        "t1": "full_name LIKE 'Mia Lopez'",
+        "t2": "full_name LIKE 'Mia%'",
+        "t3": "full_name LIKE '%ia%'",
+        "t4": "full_name LIKE '%'"
+      }
+    },
+    "like-fill-blank-choice": {
+      "title": "Fill in the LIKE Pattern",
+      "prompt": "Complete the pattern to find customers whose email ends with '@example.com'.",
+      "hint": "Remember how to match the end of a string using LIKE.",
+      "help": {
+        "concept": "To match the end of a string, place the '%' wildcard at the start of the pattern.",
+        "hint_1": "The pattern should allow any characters before '@example.com'.",
+        "hint_2": "Only one pattern here puts '%' before '@example.com' and nothing after."
+      },
+      "template": "SELECT * FROM customers WHERE email LIKE [___];",
+      "choices": [
+        "'%@example.com'",
+        "'@example.com%'",
+        "'%example.com'",
+        "'%example.com%'"
+      ]
+    },
+    "like-code-input-basic": {
+      "title": "Write a LIKE Query",
+      "prompt": "Write a SQL query to select all columns for customers whose full_name contains the substring 'Patel'.",
+      "hint": "Use LIKE with '%' wildcards to match any characters before and after 'Patel'.",
+      "help": {
+        "concept": "LIKE with '%' on both sides of a substring matches any value containing that substring anywhere.",
+        "hint_1": "The pattern should be '%Patel%' to match names containing 'Patel'.",
+        "hint_2": "Make sure to use the correct column name and wrap the pattern in single quotes."
+      },
+      "starterCode": "-- Write your query below"
+    }
+  }
+}

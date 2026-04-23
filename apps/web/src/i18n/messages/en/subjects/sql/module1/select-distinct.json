@@ -1,0 +1,83 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_1": {
+        "select-distinct": {
+          "label": "Removing Duplicates with DISTINCT",
+          "summary": "How to use DISTINCT to remove duplicate rows.",
+          "cards": {
+            "sketch0": {
+              "title": "What is DISTINCT?"
+            },
+            "sketch1": {
+              "title": "How to Use DISTINCT"
+            },
+            "sketch2": {
+              "title": "DISTINCT with Multiple Columns"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_1": {
+        "select-distinct": {
+          "sk1": {
+            "title": "What is DISTINCT?",
+            "bodyMarkdown": "When you use the `SELECT` statement in SQL, you may get duplicate rows if the same value appears more than once in a column. The `DISTINCT` keyword helps you return only unique values, removing any duplicates from your results."
+          },
+          "sk2": {
+            "title": "How to Use DISTINCT",
+            "bodyMarkdown": "To use `DISTINCT`, place it right after `SELECT` and before the column name(s). For example:\n\n```sql\nSELECT DISTINCT city FROM customers;\n```\nThis query returns each city only once, even if multiple customers are from the same city."
+          },
+          "sk3": {
+            "title": "DISTINCT with Multiple Columns",
+            "bodyMarkdown": "You can use `DISTINCT` with more than one column. In this case, SQL returns unique combinations of the selected columns. For example:\n\n```sql\nSELECT DISTINCT city, country FROM customers;\n```\nThis query returns each unique pair of city and country."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "q1": {
+      "title": "What does the DISTINCT keyword do in a SELECT statement?",
+      "prompt": "Choose the best answer.",
+      "options": {
+        "a": "It sorts the results.",
+        "b": "It removes duplicate rows.",
+        "c": "It filters rows based on a condition.",
+        "d": "It groups rows together."
+      }
+    },
+    "q2": {
+      "title": "Which of the following queries will return only unique cities from the customers table?",
+      "prompt": "Select all that apply.",
+      "options": {
+        "a": "SELECT DISTINCT city FROM customers;",
+        "b": "SELECT city FROM customers;",
+        "c": "SELECT DISTINCT city, country FROM customers;",
+        "d": "SELECT city, country FROM customers;"
+      }
+    },
+    "q3": {
+      "title": "Put the steps in order to write a DISTINCT query.",
+      "prompt": "Drag the steps into the correct order.",
+      "tokens": {
+        "t1": "Write SELECT",
+        "t2": "Add DISTINCT",
+        "t3": "List the column(s)",
+        "t4": "Specify the table with FROM"
+      }
+    },
+    "q4": {
+      "title": "Write a query to list all unique product categories from the products table.",
+      "prompt": "Use the products_catalog dataset. Show each category only once.",
+      "starterCode": "-- Write your SQL query below\n"
+    }
+  }
+}

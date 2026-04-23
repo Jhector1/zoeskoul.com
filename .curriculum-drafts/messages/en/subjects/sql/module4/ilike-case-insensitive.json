@@ -1,0 +1,117 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_4": {
+        "ilike-case-insensitive": {
+          "label": "Case-Insensitive Matching",
+          "summary": "Learn how to perform case-insensitive searches in SQL using ILIKE or similar techniques. Practice matching text regardless of letter case in the customers_cleanup dataset.",
+          "cards": {
+            "sketch0": {
+              "title": "Why Case-Insensitive Matching Matters"
+            },
+            "sketch1": {
+              "title": "ILIKE vs LIKE in Practice"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_4": {
+        "ilike-case-insensitive": {
+          "sketch-intro-ilike": {
+            "title": "Why Case-Insensitive Matching Matters",
+            "bodyMarkdown": "When searching for text in SQL, you often want to match values regardless of whether they're uppercase or lowercase. For example, searching for 'chicago' should match 'Chicago', 'CHICAGO', or 'chicago'.\n\nSome SQL dialects (like PostgreSQL) provide the `ILIKE` operator for this. In SQLite, you can use `LIKE`, which is case-insensitive by default for ASCII, or use functions like `LOWER()` to ensure case-insensitive matching.\n\n**Example:**\n\n```sql\nSELECT * FROM customers WHERE city LIKE 'chicago';\n```\n\nThis will match any city value that is 'chicago', 'Chicago', or 'CHICAGO'."
+          },
+          "sketch-ilike-vs-like": {
+            "title": "ILIKE vs LIKE in Practice",
+            "bodyMarkdown": "Not all SQL databases support `ILIKE`. In SQLite, `LIKE` is case-insensitive for ASCII characters. If you want to be sure your match is case-insensitive, you can use the `LOWER()` function on both sides of the comparison:\n\n```sql\nSELECT * FROM customers WHERE LOWER(city) = 'chicago';\n```\n\nThis approach works across most SQL dialects and ensures that 'Chicago', 'CHICAGO', and 'chicago' all match."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "single-choice-ilike-vs-like": {
+      "title": "Case-Insensitive Search in SQLite",
+      "prompt": "Which SQL statement will return all customers from Chicago, regardless of how 'Chicago' is capitalized in the city column?",
+      "hint": "Remember how LIKE works in SQLite.",
+      "help": {
+        "concept": "In SQLite, the LIKE operator is case-insensitive for ASCII characters, so it matches 'Chicago', 'chicago', and 'CHICAGO'.",
+        "hint_1": "ILIKE is not supported in SQLite, but LIKE is case-insensitive for ASCII.",
+        "hint_2": "The correct answer uses LIKE, not = or ILIKE."
+      },
+      "options": {
+        "a": "SELECT * FROM customers WHERE city = 'chicago';",
+        "b": "SELECT * FROM customers WHERE city LIKE 'chicago';",
+        "c": "SELECT * FROM customers WHERE city ILIKE 'chicago';",
+        "d": "SELECT * FROM customers WHERE city = 'Chicago';"
+      }
+    },
+    "multi-choice-case-insensitive-methods": {
+      "title": "Ways to Achieve Case-Insensitive Matching",
+      "prompt": "Which of the following SQL expressions can be used to perform a case-insensitive match for the city 'miami' in the customers table? Select all that apply.",
+      "hint": "Think about which operators or functions ignore case.",
+      "help": {
+        "concept": "LIKE in SQLite is case-insensitive for ASCII. Using LOWER() on both sides also ensures case-insensitive comparison.",
+        "hint_1": "ILIKE is not supported in SQLite. = is case-sensitive.",
+        "hint_2": "LIKE and LOWER() are both valid for case-insensitive matching in SQLite."
+      },
+      "options": {
+        "a": "city LIKE 'miami'",
+        "b": "LOWER(city) = 'miami'",
+        "c": "city = 'miami'",
+        "d": "city ILIKE 'miami'"
+      }
+    },
+    "drag-reorder-case-insensitive-steps": {
+      "title": "Order the Steps for Case-Insensitive Search",
+      "prompt": "Arrange the steps to perform a case-insensitive search for customers in 'miami' using the city column.",
+      "hint": "Think about the logical flow of writing a SQL query.",
+      "help": {
+        "concept": "A SQL query starts with SELECT, then WHERE, then applies functions and comparisons.",
+        "hint_1": "Start with selecting data, then filter it.",
+        "hint_2": "Apply LOWER() in the WHERE clause before comparing to 'miami'."
+      },
+      "tokens": {
+        "t1": "Use the LOWER() function on the city column",
+        "t2": "Write the WHERE clause",
+        "t3": "Compare to the lowercase string 'miami'",
+        "t4": "Select all columns from customers"
+      }
+    },
+    "fill-blank-choice-ilike-syntax": {
+      "title": "Fill in the Blank: Case-Insensitive Comparison",
+      "prompt": "Fill in the blank to make this WHERE clause case-insensitive for the city 'seattle':\n\n```sql\nWHERE _____(city) = 'seattle'\n```",
+      "hint": "Which function converts text to lowercase?",
+      "help": {
+        "concept": "The the missing term() function converts text to all lowercase, making comparisons case-insensitive if the other side is also lowercase.",
+        "hint_1": "You want both sides of the comparison to be lowercase.",
+        "hint_2": "the missing term() is the function that makes text lowercase."
+      },
+      "template": "WHERE {blank}(city) = 'seattle'",
+      "choices": [
+        "LOWER",
+        "UPPER",
+        "TRIM",
+        "LENGTH"
+      ]
+    },
+    "code-input-case-insensitive-query": {
+      "title": "Write a Case-Insensitive Query",
+      "prompt": "Write a SQL query to select the full_name and city of all customers whose city is 'chicago', regardless of capitalization. Use the customers table.",
+      "hint": "Use LIKE for case-insensitive matching in SQLite.",
+      "help": {
+        "concept": "In SQLite, LIKE is case-insensitive for ASCII, so it matches 'Chicago', 'chicago', and 'CHICAGO'.",
+        "hint_1": "Use LIKE instead of = for case-insensitive search.",
+        "hint_2": "Select only full_name and city where city matches 'chicago' using LIKE."
+      },
+      "starterCode": "-- Write your query below"
+    }
+  }
+}

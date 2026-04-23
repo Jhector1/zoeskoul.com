@@ -1,0 +1,130 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_2": {
+        "logical-operators": {
+          "label": "Logical Operators (AND, OR, NOT)",
+          "summary": "Combine multiple conditions with logical operators.",
+          "cards": {
+            "sketch0": {
+              "title": "Introduction to Logical Operators"
+            },
+            "sketch1": {
+              "title": "Using OR to Broaden Results"
+            },
+            "sketch2": {
+              "title": "Using NOT to Exclude Results"
+            },
+            "sketch3": {
+              "title": "Combining AND, OR, and NOT"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_2": {
+        "logical-operators": {
+          "intro-logical-operators": {
+            "title": "Introduction to Logical Operators",
+            "bodyMarkdown": "Logical operators in SQL allow you to combine multiple conditions in a WHERE clause. The most common logical operators are **AND**, **OR**, and **NOT**.\n\n- **AND**: All conditions must be true.\n- **OR**: At least one condition must be true.\n- **NOT**: Negates a condition.\n\nFor example, to find products in the 'Art' category that cost more than $15:\n\n```sql\nSELECT * FROM products\nWHERE category = 'Art' AND price > 15;\n```\n\nThis returns only products that are both in the 'Art' category **and** have a price greater than 15."
+          },
+          "using-or": {
+            "title": "Using OR to Broaden Results",
+            "bodyMarkdown": "The **OR** operator is used when you want to match any of several conditions. For example, to find products that are either in the 'Home' category **or** have a stock greater than 20:\n\n```sql\nSELECT * FROM products\nWHERE category = 'Home' OR stock > 20;\n```\n\nThis query returns products that are in the 'Home' category, products with stock greater than 20, or both."
+          },
+          "using-not": {
+            "title": "Using NOT to Exclude Results",
+            "bodyMarkdown": "The **NOT** operator negates a condition. For example, to find all products that are **not** in the 'Stationery' category:\n\n```sql\nSELECT * FROM products\nWHERE NOT category = 'Stationery';\n```\n\nThis query returns all products except those in the 'Stationery' category."
+          },
+          "combining-operators": {
+            "title": "Combining AND, OR, and NOT",
+            "bodyMarkdown": "You can combine logical operators to create complex filters. Use parentheses `()` to control the order of evaluation.\n\nFor example, to find products that are either in the 'Art' category **or** have a price less than $10, but **not** in the 'Home' category:\n\n```sql\nSELECT * FROM products\nWHERE (category = 'Art' OR price < 10) AND NOT category = 'Home';\n```\n\nThis query returns products that match either of the first two conditions, but excludes any that are in the 'Home' category."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "single-choice-and-or": {
+      "title": "Understanding AND vs OR",
+      "prompt": "Which query returns products that are both in the 'Art' category **and** have a price greater than 20?",
+      "hint": "Remember, AND requires both conditions to be true.",
+      "help": {
+        "concept": "The AND operator only returns rows where all conditions are true. OR returns rows where at least one condition is true.",
+        "hint_1": "Look for the query that uses AND to combine the category and price conditions.",
+        "hint_2": "The correct query should filter for 'Art' category and price greater than 20 at the same time."
+      },
+      "options": {
+        "a": "SELECT * FROM products WHERE category = 'Art' OR price > 20;",
+        "b": "SELECT * FROM products WHERE category = 'Art' AND price > 20;",
+        "c": "SELECT * FROM products WHERE category = 'Art' NOT price > 20;",
+        "d": "SELECT * FROM products WHERE price > 20;"
+      }
+    },
+    "multi-choice-or-usage": {
+      "title": "Selecting with OR",
+      "prompt": "Which queries return products that are either in the 'Home' category or have a stock less than 10? Select all that apply.",
+      "hint": "OR means either condition can be true.",
+      "help": {
+        "concept": "The OR operator returns rows if at least one condition is true. The order of conditions does not matter.",
+        "hint_1": "Check which queries use OR between the two conditions.",
+        "hint_2": "Queries with AND require both conditions; queries with OR require only one."
+      },
+      "options": {
+        "a": "SELECT * FROM products WHERE category = 'Home' OR stock < 10;",
+        "b": "SELECT * FROM products WHERE category = 'Home' AND stock < 10;",
+        "c": "SELECT * FROM products WHERE stock < 10 OR category = 'Home';",
+        "d": "SELECT * FROM products WHERE NOT category = 'Home' OR stock < 10;"
+      }
+    },
+    "drag-reorder-operator-precedence": {
+      "title": "Operator Precedence",
+      "prompt": "Arrange the logical operators in order of their precedence in SQL (from highest to lowest).",
+      "hint": "Which operator is evaluated first?",
+      "help": {
+        "concept": "Operator precedence determines the order in which SQL evaluates logical operators in a WHERE clause.",
+        "hint_1": "the correct answer is evaluated before the correct answer the correct answer the correct answer.",
+        "hint_2": "the correct answer is evaluated before the correct answer, but after the correct answer."
+      },
+      "tokens": {
+        "t1": "NOT",
+        "t2": "AND",
+        "t3": "OR"
+      }
+    },
+    "fill-blank-choice-not": {
+      "title": "Using NOT in WHERE",
+      "prompt": "Fill in the blank to select all products that are **not** in the 'Art' category:\n\n```sql\nSELECT * FROM products WHERE ___ category = 'Art';\n```",
+      "hint": "Which operator negates a condition?",
+      "help": {
+        "concept": "The the missing term operator is used to exclude rows that match a condition.",
+        "hint_1": "the missing term is placed before the condition you want to negate.",
+        "hint_2": "You use the missing term to find rows where the condition is false."
+      },
+      "template": "SELECT * FROM products WHERE ___ category = 'Art';",
+      "choices": [
+        "NOT",
+        "AND",
+        "OR",
+        "EXCEPT"
+      ]
+    },
+    "code-input-combine-operators": {
+      "title": "Combining Logical Operators",
+      "prompt": "Write a SQL query to select all products that are in the 'Stationery' category **or** have a price less than 15, but **not** in the 'Home' category.",
+      "hint": "Combine OR and AND, and use NOT to exclude 'Home' category.",
+      "help": {
+        "concept": "Use parentheses to group OR conditions, and NOT to exclude a category.",
+        "hint_1": "Group the 'Stationery' and price conditions with OR, then use AND with NOT.",
+        "hint_2": "Remember to exclude 'Home' by adding AND NOT category = 'Home' at the end."
+      },
+      "starterCode": "-- Write your query below"
+    }
+  }
+}

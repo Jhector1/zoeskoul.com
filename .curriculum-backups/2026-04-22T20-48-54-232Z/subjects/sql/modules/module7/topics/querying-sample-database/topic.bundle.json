@@ -1,0 +1,126 @@
+{
+  "topicId": "querying-sample-database",
+  "subjectSlug": "sql",
+  "moduleSlug": "sql_module_7",
+  "sectionSlug": "section_7_1",
+  "prefix": "sql7",
+  "minutes": 20,
+  "topic": {
+    "labelKey": "topics.sql.sql_module_7.querying-sample-database.label",
+    "summaryKey": "topics.sql.sql_module_7.querying-sample-database.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_7.querying-sample-database.cards.sketch0.title",
+      "sketchId": "intro-inventory-items",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql.sql_module_7.querying-sample-database.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "intro-inventory-items",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_7.querying-sample-database.intro-inventory-items.title",
+      "bodyKey": "sketches.sql.sql_module_7.querying-sample-database.intro-inventory-items.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "sc-select-all",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.sc-select-all",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "mc-find-active-items",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.mc-find-active-items",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": []
+      }
+    },
+    {
+      "id": "drg-order-by-price",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.drg-order-by-price",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "fb-category-choice",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.fb-category-choice",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "'Kitchen'"
+      }
+    },
+    {
+      "id": "ci-select-non-test",
+      "kind": "code_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.ci-select-non-test",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "inventory_ops",
+        "resultShape": "table",
+        "solutionCode": "SELECT id, name, category FROM inventory_items WHERE is_test = 0;"
+      }
+    }
+  ]
+}

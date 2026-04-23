@@ -1,0 +1,133 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_3": {
+        "order-by": {
+          "label": "ORDER BY Clause",
+          "summary": "Sort query results by one or more columns.",
+          "cards": {
+            "sketch0": {
+              "title": "What is ORDER BY?"
+            },
+            "sketch1": {
+              "title": "Basic Example"
+            },
+            "sketch2": {
+              "title": "Sorting by Multiple Columns"
+            },
+            "sketch3": {
+              "title": "ORDER BY and NULL Values"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_3": {
+        "order-by": {
+          "sketch-what-is-order-by": {
+            "title": "What is ORDER BY?",
+            "bodyMarkdown": "The `ORDER BY` clause in SQL is used to sort the result set of a query by one or more columns. You can sort in ascending (`ASC`, the default) or descending (`DESC`) order. This helps you organize your data in a meaningful way, such as listing products by price or by name alphabetically."
+          },
+          "sketch-basic-example": {
+            "title": "Basic Example",
+            "bodyMarkdown": "Suppose you want to see all products sorted by price from lowest to highest:\n\n```sql\nSELECT * FROM products\nORDER BY price ASC;\n```\n\nTo sort by price from highest to lowest, use `DESC`:\n\n```sql\nSELECT * FROM products\nORDER BY price DESC;\n```"
+          },
+          "sketch-multi-column-order": {
+            "title": "Sorting by Multiple Columns",
+            "bodyMarkdown": "You can sort by more than one column. For example, to sort products by category (A-Z), and then by price (low to high) within each category:\n\n```sql\nSELECT * FROM products\nORDER BY category ASC, price ASC;\n```\n\nThis is useful when you want to group and then order items within those groups."
+          },
+          "sketch-order-by-and-null": {
+            "title": "ORDER BY and NULL Values",
+            "bodyMarkdown": "When sorting, SQL places `NULL` values either at the beginning or end, depending on the database and sort order. In SQLite, `NULL` values come first in ascending order and last in descending order. In our `products` table, all columns are NOT NULL, so this is not an issue here."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "quiz-single-choice-basic-order": {
+      "title": "Sorting Products by Price",
+      "prompt": "Which SQL clause will sort the products from the lowest to the highest price?",
+      "hint": "Use ORDER BY with the column and ASC for ascending order.",
+      "help": {
+        "concept": "The ORDER BY clause sorts results by the correct answer specified column. ASC means ascending order.",
+        "hint_1": "The correct clause uses ORDER BY, the column name, and ASC.",
+        "hint_2": "Remember, ASC is the default, but writing it makes your intent clear."
+      },
+      "options": {
+        "a": "ORDER BY price ASC",
+        "b": "ORDER price BY ASC",
+        "c": "SORT BY price DESC",
+        "d": "ORDER BY price"
+      }
+    },
+    "quiz-multi-choice-multi-column": {
+      "title": "Sorting by Multiple Columns",
+      "prompt": "Which of the following queries will sort products by category (A-Z), then by price (low to high) within each category? Select all that apply.",
+      "hint": "Pay attention to the order of columns and sort directions.",
+      "help": {
+        "concept": "When sorting by multiple columns, the order in ORDER BY matters. ASC is default.",
+        "hint_1": "category must come before price in ORDER BY for the grouping to work as described.",
+        "hint_2": "Both explicit ASC and omitting ASC (default) will sort ascending."
+      },
+      "options": {
+        "a": "SELECT * FROM products ORDER BY category ASC, price ASC;",
+        "b": "SELECT * FROM products ORDER BY price ASC, category ASC;",
+        "c": "SELECT * FROM products ORDER BY category, price;",
+        "d": "SELECT * FROM products ORDER BY category DESC, price ASC;"
+      }
+    },
+    "quiz-drag-reorder-output": {
+      "title": "Result Order by Price DESC",
+      "prompt": "Drag the product names to show the order of results when running:\n\n```sql\nSELECT name FROM products ORDER BY price DESC;\n```",
+      "hint": "Start with the highest price and go down.",
+      "help": {
+        "concept": "ORDER BY price DESC sorts from highest to lowest price.",
+        "hint_1": "Look for the product with the largest price first.",
+        "hint_2": "Arrange all products from most expensive to least expensive."
+      },
+      "tokens": {
+        "t1": "Office Chair",
+        "t2": "Desk Lamp",
+        "t3": "Acrylic Paint Set",
+        "t4": "Fountain Pen",
+        "t5": "Sketchbook",
+        "t6": "Notebook"
+      }
+    },
+    "quiz-fill-blank-choice-keyword": {
+      "title": "ORDER BY Keyword",
+      "prompt": "Fill in the blank to complete the SQL statement for sorting products by stock (highest first):\n\n```sql\nSELECT * FROM products _____ stock DESC;\n```",
+      "hint": "Which clause is used for sorting?",
+      "help": {
+        "concept": "the missing term is the SQL clause for sorting results.",
+        "hint_1": "It's not GROUP BY or SORT BY.",
+        "hint_2": "The clause starts with ORDER."
+      },
+      "template": "SELECT * FROM products _____ stock DESC;",
+      "choices": [
+        "ORDER BY",
+        "SORT BY",
+        "ORDER",
+        "GROUP BY"
+      ]
+    },
+    "quiz-code-input-basic": {
+      "title": "Write a Query: Sort by Name",
+      "prompt": "Write a SQL query to select all columns from the products table, sorted alphabetically by product name (A-Z).",
+      "hint": "Use ORDER BY with the name column.",
+      "help": {
+        "concept": "ORDER BY lets you sort results by any column, such as name.",
+        "hint_1": "The column to sort by is name. ASC is the default for alphabetical order.",
+        "hint_2": "ORDER BY name will sort A-Z."
+      },
+      "starterCode": "-- Write your query below"
+    }
+  }
+}

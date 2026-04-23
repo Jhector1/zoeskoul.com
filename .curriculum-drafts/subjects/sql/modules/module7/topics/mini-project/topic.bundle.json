@@ -1,0 +1,210 @@
+{
+  "topicId": "mini-project",
+  "subjectSlug": "sql",
+  "moduleSlug": "sql_module_7",
+  "sectionSlug": "section_7_1",
+  "prefix": "sql7",
+  "minutes": 30,
+  "topic": {
+    "labelKey": "topics.sql.sql_module_7.mini-project.label",
+    "summaryKey": "topics.sql.sql_module_7.mini-project.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_7.mini-project.cards.sketch0.title",
+      "sketchId": "intro",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_7.mini-project.cards.sketch1.title",
+      "sketchId": "dataset-overview",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_7.mini-project.cards.sketch2.title",
+      "sketchId": "business-context",
+      "height": 420
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.sql.sql_module_7.mini-project.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "filter-active-non-test",
+            "titleKey": "topics.sql.sql_module_7.mini-project.projectSteps.filter-active-non-test.title",
+            "exerciseKey": "filter-active-non-test",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "avg-price-by-category",
+            "titleKey": "topics.sql.sql_module_7.mini-project.projectSteps.avg-price-by-category.title",
+            "exerciseKey": "avg-price-by-category",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "most-recently-updated-item",
+            "titleKey": "topics.sql.sql_module_7.mini-project.projectSteps.most-recently-updated-item.title",
+            "exerciseKey": "most-recently-updated-item",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "order-steps",
+            "titleKey": "topics.sql.sql_module_7.mini-project.projectSteps.order-steps.title",
+            "exerciseKey": "order-steps",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "fill-blank-category",
+            "titleKey": "topics.sql.sql_module_7.mini-project.projectSteps.fill-blank-category.title",
+            "exerciseKey": "fill-blank-category",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql.sql_module_7.mini-project.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 3,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "intro",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_7.mini-project.intro.title",
+      "bodyKey": "sketches.sql.sql_module_7.mini-project.intro.bodyMarkdown"
+    },
+    {
+      "id": "dataset-overview",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_7.mini-project.dataset-overview.title",
+      "bodyKey": "sketches.sql.sql_module_7.mini-project.dataset-overview.bodyMarkdown"
+    },
+    {
+      "id": "business-context",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_7.mini-project.business-context.title",
+      "bodyKey": "sketches.sql.sql_module_7.mini-project.business-context.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "filter-active-non-test",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "quiz.filter-active-non-test",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "inventory_ops",
+        "resultShape": "table",
+        "solutionCode": "SELECT id, name, category\nFROM inventory_items\nWHERE status = 'active' AND is_test = 0;"
+      }
+    },
+    {
+      "id": "avg-price-by-category",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "quiz.avg-price-by-category",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "inventory_ops",
+        "resultShape": "table",
+        "solutionCode": "SELECT category, AVG(price) AS avg_price\nFROM inventory_items\nGROUP BY category;"
+      }
+    },
+    {
+      "id": "most-recently-updated-item",
+      "kind": "single_choice",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "quiz.most-recently-updated-item",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e",
+        "f"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "f"
+      }
+    },
+    {
+      "id": "order-steps",
+      "kind": "drag_reorder",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "quiz.order-steps",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "fill-blank-category",
+      "kind": "fill_blank_choice",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "quiz.fill-blank-category",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "'Kitchen'"
+      }
+    }
+  ]
+}

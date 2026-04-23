@@ -1,0 +1,155 @@
+{
+  "topicId": "joining-multiple-tables",
+  "subjectSlug": "sql",
+  "moduleSlug": "sql_module_6",
+  "sectionSlug": "section_6_1",
+  "prefix": "sql6",
+  "minutes": 15,
+  "topic": {
+    "labelKey": "topics.sql.sql_module_6.joining-multiple-tables.label",
+    "summaryKey": "topics.sql.sql_module_6.joining-multiple-tables.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_6.joining-multiple-tables.cards.sketch0.title",
+      "sketchId": "sketch-why-multi-join",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_6.joining-multiple-tables.cards.sketch1.title",
+      "sketchId": "sketch-how-multi-join",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_6.joining-multiple-tables.cards.sketch2.title",
+      "sketchId": "sketch-multi-join-tips",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql.sql_module_6.joining-multiple-tables.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch-why-multi-join",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_6.joining-multiple-tables.sketch-why-multi-join.title",
+      "bodyKey": "sketches.sql.sql_module_6.joining-multiple-tables.sketch-why-multi-join.bodyMarkdown"
+    },
+    {
+      "id": "sketch-how-multi-join",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_6.joining-multiple-tables.sketch-how-multi-join.title",
+      "bodyKey": "sketches.sql.sql_module_6.joining-multiple-tables.sketch-how-multi-join.bodyMarkdown"
+    },
+    {
+      "id": "sketch-multi-join-tips",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_6.joining-multiple-tables.sketch-multi-join-tips.title",
+      "bodyKey": "sketches.sql.sql_module_6.joining-multiple-tables.sketch-multi-join-tips.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "quiz-single-choice-join-order",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.quiz-single-choice-join-order",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "c"
+      }
+    },
+    {
+      "id": "quiz-multi-choice-join-keys",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.quiz-multi-choice-join-keys",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "quiz-drag-reorder-join-steps",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.quiz-drag-reorder-join-steps",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "quiz-fill-blank-choice-alias",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.quiz-fill-blank-choice-alias",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "d"
+      }
+    },
+    {
+      "id": "quiz-code-input-multi-join",
+      "kind": "code_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.quiz-code-input-multi-join",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table",
+        "solutionCode": "SELECT students.name, courses.title, departments.name\nFROM enrollments\nJOIN students ON enrollments.student_id = students.id\nJOIN courses ON enrollments.course_id = courses.id\nJOIN departments ON courses.department_id = departments.id;"
+      }
+    }
+  ]
+}

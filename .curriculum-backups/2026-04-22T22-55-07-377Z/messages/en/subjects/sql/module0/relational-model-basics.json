@@ -1,0 +1,140 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_0": {
+        "relational-model-basics": {
+          "label": "Relational Model Basics",
+          "summary": "Understand tables, rows, and columns in relational databases.",
+          "cards": {
+            "sketch0": {
+              "title": "What is the Relational Model?"
+            },
+            "sketch1": {
+              "title": "Tables, Rows, and Columns Explained"
+            },
+            "sketch2": {
+              "title": "What is a Primary Key?"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_0": {
+        "relational-model-basics": {
+          "relational-model-intro": {
+            "title": "What is the Relational Model?",
+            "bodyMarkdown": "The relational model is the foundation of most modern databases. In this model, data is organized into **tables** (also called relations). Each table consists of **rows** (records) and **columns** (fields). Every row represents a single item or entity, and each column represents a property or attribute of that entity.\n\nFor example, consider a table called `students`:\n\n| id | name | grade | age | city      |\n|----|------|-------|-----|-----------|\n| 1  | Noor | A     | 15  | Chicago   |\n| 2  | Mia  | A     | 14  | Evanston  |\n| 3  | Leo  | B     | 15  | Chicago   |\n| 4  | Ava  | C     | 14  | Oak Park  |\n| 5  | Zane | B     | 16  | Naperville|\n\nHere, each row is a student, and each column is a property like name or grade."
+          },
+          "tables-rows-columns": {
+            "title": "Tables, Rows, and Columns Explained",
+            "bodyMarkdown": "A **table** is a collection of related data entries. Each **row** in a table is a unique record, and each **column** holds a specific type of information about those records.\n\n- **Table**: The whole structure (e.g., `students`)\n- **Row**: A single record (e.g., Noor's information)\n- **Column**: A property (e.g., `grade` or `city`)\n\nIn SQL, you use tables to store and organize your data efficiently."
+          },
+          "primary-keys": {
+            "title": "What is a Primary Key?",
+            "bodyMarkdown": "A **primary key** is a column (or set of columns) that uniquely identifies each row in a table. In the `students` table, the `id` column is the primary key. This means no two students can have the same `id` value. Primary keys help ensure data integrity and make it easier to find specific records."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "identify-table-row-column": {
+      "title": "Identifying Tables, Rows, and Columns",
+      "prompt": "In the `students` table, what does each **row** represent?",
+      "hint": "Think about what information is stored in a single horizontal line of the table.",
+      "help": {
+        "concept": "A row in a table represents one complete record or entity.",
+        "hint_1": "Each row contains all the details about one student.",
+        "hint_2": "Rows are individual records, like Noor or Mia in the students table."
+      },
+      "options": {
+        "a": "A property of a student, like 'grade' or 'city'",
+        "b": "A single student and their information",
+        "c": "The entire collection of students",
+        "d": "A unique column name"
+      }
+    },
+    "primary-key-purpose": {
+      "title": "Understanding Primary Keys",
+      "prompt": "What is the main purpose of a primary key in a table?",
+      "hint": "Primary keys help keep each record unique.",
+      "help": {
+        "concept": "A primary key ensures that each row can be uniquely identified.",
+        "hint_1": "No two rows can have the same primary key value.",
+        "hint_2": "Primary keys prevent duplicate records and help find specific rows."
+      },
+      "options": {
+        "a": "To store the names of all columns",
+        "b": "To uniquely identify each row",
+        "c": "To sort the table alphabetically",
+        "d": "To count the number of rows"
+      }
+    },
+    "columns-properties": {
+      "title": "Columns as Properties",
+      "prompt": "Which of the following are columns in the `students` table? (Select all that apply)",
+      "hint": "Columns are the labels at the top of the table.",
+      "help": {
+        "concept": "Columns define the type of data stored for each row.",
+        "hint_1": "Look for the words that describe the correct answer property, not the correct answer value.",
+        "hint_2": "Names like 'id', 'grade', and 'city' are columns; 'Noor' is the correct answer value."
+      },
+      "options": {
+        "a": "id",
+        "b": "grade",
+        "c": "Noor",
+        "d": "city"
+      }
+    },
+    "drag-table-structure": {
+      "title": "Order the Table Structure",
+      "prompt": "Arrange the following from the largest to the smallest unit in a relational table.",
+      "hint": "Think about how data is organized from the whole to the smallest part.",
+      "help": {
+        "concept": "A the correct answer contains rows, rows contain columns, and columns intersect at cells.",
+        "hint_1": "Start with the biggest structure and move to the smallest.",
+        "hint_2": "A the correct answer is where a the correct answer and the correct answer meet; a the correct answer is the whole thing."
+      },
+      "tokens": {
+        "t1": "Table",
+        "t2": "Row",
+        "t3": "Column",
+        "t4": "Cell"
+      }
+    },
+    "fill-blank-table-name": {
+      "title": "Naming the Table",
+      "prompt": "Fill in the blank: In the dataset, the table that stores student information is called ____.",
+      "hint": "Look at the example table shown above.",
+      "help": {
+        "concept": "The table name is the label given to the collection of related data.",
+        "hint_1": "It's the name used in SQL queries to refer to the group of student records.",
+        "hint_2": "The table is called 'the missing term' in the example."
+      },
+      "template": "The table name is [___].",
+      "choices": [
+        "students",
+        "grades",
+        "cities",
+        "records"
+      ]
+    },
+    "code-list-all-students": {
+      "title": "List All Students",
+      "prompt": "Write an SQL query to select all columns and all rows from the `students` table.",
+      "hint": "Use SELECT with * to get every column.",
+      "help": {
+        "concept": "The SELECT statement retrieves data from a table. Using * selects all columns.",
+        "hint_1": "Use SELECT * and specify the table name.",
+        "hint_2": "The FROM clause should reference the 'students' table."
+      },
+      "starterCode": "-- Write your SQL query below"
+    }
+  }
+}

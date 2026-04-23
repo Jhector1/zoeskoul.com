@@ -1,0 +1,144 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_7": {
+        "querying-sample-database": {
+          "label": "Querying a Sample Database",
+          "summary": "Practice querying a provided sample database.",
+          "cards": {
+            "sketch0": {
+              "title": "The inventory_items Table"
+            },
+            "sketch1": {
+              "title": "Basic SELECT Example"
+            },
+            "sketch2": {
+              "title": "Filtering Rows with WHERE"
+            },
+            "project": {
+              "title": "Inventory Query Challenge"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "projectSteps": {
+            "sc-active-items": {
+              "title": "Identify Active Items"
+            },
+            "mc-kitchen-items": {
+              "title": "Select Kitchen Category Items"
+            },
+            "dr-price-order": {
+              "title": "Order Items by Price (Lowest to Highest)"
+            },
+            "fb-last-updated": {
+              "title": "Find Last Updated Date"
+            },
+            "ci-select-non-test-active": {
+              "title": "Select Active, Non-Test Items"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_7": {
+        "querying-sample-database": {
+          "intro-inventory-items": {
+            "title": "The inventory_items Table",
+            "bodyMarkdown": "The `inventory_items` table contains information about products in an inventory. Each row represents an item, with columns for `id`, `name`, `category`, `price`, `status`, `is_test`, `notes`, and `last_updated`. For example, the table includes items like 'Sticker Pack' (Accessories), 'Test Mug' (Kitchen), and 'Canvas Print' (Decor). You can use SQL queries to retrieve, filter, and analyze this data."
+          },
+          "basic-select-example": {
+            "title": "Basic SELECT Example",
+            "bodyMarkdown": "To view all items in the inventory, you can use a simple SELECT statement:\n\n```sql\nSELECT * FROM inventory_items;\n```\n\nThis will return all columns and rows from the table. You can also select specific columns, such as:\n\n```sql\nSELECT name, price FROM inventory_items;\n```"
+          },
+          "filtering-rows": {
+            "title": "Filtering Rows with WHERE",
+            "bodyMarkdown": "To filter results, use the `WHERE` clause. For example, to find only active items:\n\n```sql\nSELECT * FROM inventory_items WHERE status = 'active';\n```\n\nYou can combine conditions using `AND` or `OR`."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "sc-active-items": {
+      "title": "Identify Active Items",
+      "prompt": "Which of the following items has a status of 'active' in the inventory?",
+      "hint": "Look for items where status is 'active'.",
+      "help": {
+        "concept": "The 'status' column indicates whether an item is active, draft, or inactive.",
+        "hint_1": "Check the status value for each item listed.",
+        "hint_2": "Only select the item whose status is 'active' in the table."
+      },
+      "options": {
+        "a": "Test Mug",
+        "b": "Canvas Print",
+        "c": "Sample Poster",
+        "d": "Trial Tote"
+      }
+    },
+    "mc-kitchen-items": {
+      "title": "Select Kitchen Category Items",
+      "prompt": "Which items belong to the 'Kitchen' category?",
+      "hint": "Check the category column for each item.",
+      "help": {
+        "concept": "The 'category' column groups items by type, such as 'Kitchen' or 'Accessories'.",
+        "hint_1": "Look for items where category is 'Kitchen'.",
+        "hint_2": "Select all items that have 'Kitchen' as their category."
+      },
+      "options": {
+        "a": "Test Mug",
+        "b": "Water Bottle",
+        "c": "Sticker Pack",
+        "d": "Canvas Print"
+      }
+    },
+    "dr-price-order": {
+      "title": "Order Items by Price (Lowest to Highest)",
+      "prompt": "Arrange these items by their price from lowest to highest.",
+      "hint": "Compare the price of each item.",
+      "help": {
+        "concept": "Ordering by price means arranging items from the smallest to the largest value in the 'price' column.",
+        "hint_1": "Find the price for each item and sort them.",
+        "hint_2": "Start with the item with the lowest price and end with the highest."
+      },
+      "tokens": {
+        "t1": "Sticker Pack",
+        "t2": "Trial Tote",
+        "t3": "Water Bottle",
+        "t4": "Canvas Print"
+      }
+    },
+    "fb-last-updated": {
+      "title": "Find Last Updated Date",
+      "prompt": "What is the last_updated date for the 'Water Bottle' item?",
+      "hint": "Look for the 'Water Bottle' row and check its last_updated value.",
+      "help": {
+        "concept": "The 'last_updated' column records the most recent update date for each item.",
+        "hint_1": "Find the row where name is 'Water Bottle'.",
+        "hint_2": "Read the value in the 'last_updated' column for that row."
+      },
+      "template": "The last_updated date for 'Water Bottle' is [____].",
+      "choices": [
+        "2026-02-01",
+        "2026-02-05",
+        "2026-02-06",
+        "2026-02-03"
+      ]
+    },
+    "ci-select-non-test-active": {
+      "title": "Select Active, Non-Test Items",
+      "prompt": "Write a SQL query to select the name and price of all items that are 'active' and not test items (is_test = 0).",
+      "hint": "Use WHERE to filter by status and is_test.",
+      "help": {
+        "concept": "Filtering with WHERE allows you to select rows that match multiple conditions.",
+        "hint_1": "Combine status = 'active' with is_test = 0 using AND.",
+        "hint_2": "Select only the name and price columns for items that match both conditions."
+      },
+      "starterCode": "-- Write your query below"
+    }
+  }
+}

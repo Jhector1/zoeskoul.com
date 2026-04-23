@@ -1,0 +1,163 @@
+{
+  "subjects": {
+    "sql": {
+      "title": "SQL for beginners",
+      "description": "Learn SQL from the ground up with beginner-friendly lessons on databases, SELECT, WHERE, sorting, and practical querying",
+      "moreComingSoon": "More SQL lessons are coming soon."
+    }
+  },
+
+  "modules": {
+    "sql": {
+      "sql_module_0": {
+        "title": "Module 0 — Intro to SQL",
+        "description": "Understand SQL, databases, and how organized data is stored in tables.",
+        "outcomes": [
+          "Explain what SQL stands for",
+          "Describe what a database is",
+          "Distinguish a database from a table",
+          "Recognize rows, columns, and records",
+          "Explain why SQL is useful in real systems"
+        ],
+        "why": [
+          "Builds the mental model before writing queries",
+          "Makes SELECT, FROM, WHERE, and later joins feel more natural"
+        ]
+      },
+
+      "sql_module_1": {
+        "title": "Module 1 — Reading Data with SELECT",
+        "description": "Learn how to read data from tables with SELECT and understand the basic shape of SQL queries.",
+        "outcomes": [
+          "Use SELECT to read data from a table",
+          "Select all columns or specific columns",
+          "Recognize the basic structure of a SELECT query",
+          "Practice simple beginner table-reading queries"
+        ],
+        "why": [
+          "SELECT is the foundation for almost everything learners do first in SQL",
+          "Reading data clearly is the first step before filtering, sorting, and grouping"
+        ]
+      },
+
+      "sql_module_2": {
+        "title": "Module 2 — Filtering Data with WHERE",
+        "description": "Learn how to narrow results with WHERE, compare values correctly, combine conditions safely, and practice filtering with real beginner SQL queries.",
+        "outcomes": [
+          "Use WHERE to narrow results correctly",
+          "Compare text and numeric values using SQL operators",
+          "Combine logical conditions without changing the intended meaning"
+        ],
+        "why": [
+          "Filtering is how learners move from seeing all data to seeing useful data",
+          "It builds the decision-making habit needed for realistic querying"
+        ]
+      },
+
+      "sql_module_3": {
+        "title": "Module 3 — Sorting and Limiting Results",
+        "description": "Learn how to sort rows in a meaningful order and keep only the rows you need.",
+        "outcomes": [
+          "Sort rows with ORDER BY",
+          "Sort by more than one column",
+          "Use LIMIT to control result size",
+          "Combine ORDER BY and LIMIT for top-N style questions"
+        ],
+        "why": [
+          "Sorting helps learners make result tables easier to read",
+          "Limiting helps focus answers and supports practical top/bottom queries"
+        ]
+      },
+
+      "sql_module_4": {
+        "title": "Module 4 — Working with Text, Lists, Ranges, and NULL",
+        "description": "Learn how to search partial text, filter with lists and ranges, and handle missing values safely in real-world SQL queries.",
+        "outcomes": [
+          "Match partial text with LIKE patterns",
+          "Use % and _ wildcards correctly",
+          "Filter values with IN and NOT IN",
+          "Filter ranges with BETWEEN",
+          "Handle missing data with IS NULL and IS NOT NULL"
+        ],
+        "why": [
+          "Real datasets often contain inconsistent text, grouped choices, and missing values",
+          "These filtering tools make SQL much more useful for realistic search and cleanup tasks"
+        ]
+      }
+    }
+  },
+
+  "sections": {
+    "sql": {
+      "sql_module_0": {
+        "section_0_1": {
+          "title": "Module 0 — Introduction to SQL",
+          "description": "A beginner introduction to SQL, databases, tables, rows, and columns.",
+          "weeks": "Week 1",
+          "bullets": [
+            "What SQL means",
+            "What a database is",
+            "How tables, rows, and columns work",
+            "Why SQL is useful in real systems"
+          ]
+        }
+      },
+
+      "sql_module_1": {
+        "section_1_1": {
+          "title": "Module 1 — Reading Data with SELECT",
+          "description": "Learn how SELECT reads data from tables and how to choose which columns to return.",
+          "weeks": "Week 2",
+          "bullets": [
+            "Intro to SELECT",
+            "Reading data from a table",
+            "SQL syntax basics",
+            "Practice with basic queries"
+          ]
+        }
+      },
+
+      "sql_module_2": {
+        "section_2_1": {
+          "title": "Module 2 — Filtering Data with WHERE",
+          "description": "Learn why filtering matters, how WHERE works, how comparisons behave, and how to combine conditions safely.",
+          "weeks": "Week 3–4",
+          "bullets": [
+            "Intro to filtering",
+            "Comparison operators",
+            "Multiple conditions",
+            "Filtering practice"
+          ]
+        }
+      },
+
+      "sql_module_3": {
+        "section_3_1": {
+          "title": "Module 3 — Sorting and Limiting Results",
+          "description": "Learn how to control result order and result size with ORDER BY and LIMIT.",
+          "weeks": "Week 5–6",
+          "bullets": [
+            "Sorting data",
+            "Sorting by multiple columns",
+            "Limiting output",
+            "Practice with output control"
+          ]
+        }
+      },
+
+      "sql_module_4": {
+        "section_4_1": {
+          "title": "Module 4 — Working with Text, Lists, Ranges, and NULL",
+          "description": "Learn how to match partial text with LIKE, filter lists and ranges with IN and BETWEEN, and handle missing values safely with NULL checks.",
+          "weeks": "Week 7–8",
+          "bullets": [
+            "Text matching",
+            "Lists and ranges",
+            "Missing data",
+            "Search and cleanup practice"
+          ]
+        }
+      }
+    }
+  }
+}

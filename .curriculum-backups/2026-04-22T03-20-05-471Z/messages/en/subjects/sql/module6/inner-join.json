@@ -1,0 +1,91 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_6": {
+        "inner-join": {
+          "label": "INNER JOIN",
+          "summary": "Combine rows from two tables with matching values.",
+          "cards": {
+            "sketch0": {
+              "title": "What is INNER JOIN?"
+            },
+            "sketch1": {
+              "title": "How INNER JOIN Works"
+            },
+            "sketch2": {
+              "title": "INNER JOIN Syntax"
+            },
+            "project": {
+              "title": "Project"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "projectSteps": {
+            "q4": {
+              "title": "Write an INNER JOIN query"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_6": {
+        "inner-join": {
+          "sk1": {
+            "title": "What is INNER JOIN?",
+            "bodyMarkdown": "An **INNER JOIN** in SQL is used to combine rows from two or more tables based on a related column between them. Only rows with matching values in both tables are included in the result set."
+          },
+          "sk2": {
+            "title": "How INNER JOIN Works",
+            "bodyMarkdown": "Suppose you have two tables: `orders` and `customers`. If you want to see all orders along with the customer names, you can use an INNER JOIN on the customer ID column that appears in both tables. Only orders with a matching customer will be shown."
+          },
+          "sk3": {
+            "title": "INNER JOIN Syntax",
+            "bodyMarkdown": "The basic syntax for an INNER JOIN is:\n\n```sql\nSELECT columns\nFROM table1\nINNER JOIN table2\nON table1.column = table2.column;\n```\nThis selects rows where the join condition is true."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "q1": {
+      "title": "What does an INNER JOIN return?",
+      "prompt": "Which rows are included in the result of an INNER JOIN between two tables?",
+      "options": {
+        "a": "All rows from both tables",
+        "b": "Rows with matching values in both tables",
+        "c": "All rows from the first table and matching rows from the second",
+        "d": "Rows with non-matching values only"
+      }
+    },
+    "q2": {
+      "title": "When to use INNER JOIN",
+      "prompt": "Select all situations where you would use an INNER JOIN.",
+      "options": {
+        "a": "You want only records that exist in both tables",
+        "b": "You want all records from the left table",
+        "c": "You want to combine data where there is a match in both tables",
+        "d": "You want to include unmatched records"
+      }
+    },
+    "q3": {
+      "title": "Order the INNER JOIN steps",
+      "prompt": "Put the steps for writing an INNER JOIN query in the correct order.",
+      "tokens": {
+        "t1": "SELECT the columns you want",
+        "t2": "FROM the first table",
+        "t3": "INNER JOIN the second table",
+        "t4": "ON the matching column"
+      }
+    },
+    "q4": {
+      "title": "Write an INNER JOIN query",
+      "prompt": "Using the `products_catalog` dataset, write a query to select the product name and category name for all products, using an INNER JOIN between `products` and `categories` on the category ID.",
+      "starterCode": "-- Write your SQL query here"
+    }
+  }
+}

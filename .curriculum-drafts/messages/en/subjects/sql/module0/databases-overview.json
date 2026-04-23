@@ -1,0 +1,127 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_0": {
+        "databases-overview": {
+          "label": "Databases Overview",
+          "summary": "Explore what databases are and how they store information.",
+          "cards": {
+            "sketch0": {
+              "title": "What is a Database?"
+            },
+            "sketch1": {
+              "title": "How is Data Organized?"
+            },
+            "sketch2": {
+              "title": "Why Use Databases?"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_0": {
+        "databases-overview": {
+          "sketch-what-is-a-database": {
+            "title": "What is a Database?",
+            "bodyMarkdown": "A **database** is an organized collection of data that can be easily accessed, managed, and updated. Databases are used to store information in a structured way, making it simple to retrieve and analyze data. For example, a school might use a database to keep track of students, their grades, ages, and cities."
+          },
+          "sketch-database-structure": {
+            "title": "How is Data Organized?",
+            "bodyMarkdown": "In a database, data is typically organized into **tables**. Each table contains **rows** (records) and **columns** (fields). For instance, in the `students` table below, each row represents a student, and each column represents a piece of information about the student:\n\n| id | name | grade | age | city      |\n|----|------|-------|-----|-----------|\n| 1  | Noor | A     | 15  | Chicago   |\n| 2  | Mia  | A     | 14  | Evanston  |\n| 3  | Leo  | B     | 15  | Chicago   |\n| 4  | Ava  | C     | 14  | Oak Park  |\n| 5  | Zane | B     | 16  | Naperville|"
+          },
+          "sketch-why-use-databases": {
+            "title": "Why Use Databases?",
+            "bodyMarkdown": "Databases help keep information organized and make it easy to search, update, and analyze data. Instead of keeping information in paper files or scattered spreadsheets, a database allows many users to access and manage data efficiently and securely."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "quiz-define-database": {
+      "title": "What is a database?",
+      "prompt": "Choose the best definition of a database.",
+      "hint": "Think about how data is stored and accessed.",
+      "help": {
+        "concept": "A database is a structured way to store and manage data for easy access and analysis.",
+        "hint_1": "A database is more than just a collection; it's organized for easy use.",
+        "hint_2": "Databases are designed to store, manage, and retrieve information efficiently."
+      },
+      "options": {
+        "a": "A collection of unrelated documents.",
+        "b": "A program that only displays images.",
+        "c": "An organized collection of data that can be accessed and managed.",
+        "d": "A type of computer hardware."
+      }
+    },
+    "quiz-table-structure": {
+      "title": "Understanding Table Structure",
+      "prompt": "Which of the following are columns you would find in the `students` table? Select all that apply.",
+      "hint": "Look at the example table structure.",
+      "help": {
+        "concept": "Columns in the correct answer table represent different types of information stored about each record.",
+        "hint_1": "Check the columns listed in the students table example.",
+        "hint_2": "Only select columns that describe the correct answer student, not unrelated information."
+      },
+      "options": {
+        "a": "id",
+        "b": "name",
+        "c": "grade",
+        "d": "city",
+        "e": "salary",
+        "f": "age"
+      }
+    },
+    "quiz-organize-data": {
+      "title": "Order the Steps: How Data is Organized",
+      "prompt": "Arrange these from largest to smallest in a database context.",
+      "hint": "Start with the broadest concept.",
+      "help": {
+        "concept": "Databases contain tables, which contain rows and columns, and each cell holds a the correct answer.",
+        "hint_1": "Think about how you would break down a the correct answer into smaller parts.",
+        "hint_2": "A the correct answer is the smallest unit, while the the correct answer is the largest."
+      },
+      "tokens": {
+        "t1": "Database",
+        "t2": "Table",
+        "t3": "Row",
+        "t4": "Column",
+        "t5": "Value"
+      }
+    },
+    "quiz-fill-blank-table": {
+      "title": "Fill in the Blank: Table Names",
+      "prompt": "The table that stores information about students is called ____.",
+      "hint": "Look at the table name in the example.",
+      "help": {
+        "concept": "Table names describe the type of data stored in them.",
+        "hint_1": "Which table contains names, grades, and cities?",
+        "hint_2": "The table name matches the subject of the data: the missing term."
+      },
+      "template": "The table that stores information about students is called ____.",
+      "choices": [
+        "grades",
+        "students",
+        "cities",
+        "classes"
+      ]
+    },
+    "quiz-sql-select-all": {
+      "title": "SQL: Select All Students",
+      "prompt": "Write a SQL query to select all columns and all rows from the `students` table.",
+      "hint": "Use SELECT to get data from a table.",
+      "help": {
+        "concept": "The SELECT statement retrieves data from one or more columns in a table.",
+        "hint_1": "Use * to select all columns.",
+        "hint_2": "Remember to specify the table name after FROM."
+      },
+      "starterCode": "-- Write your SQL query below"
+    }
+  }
+}

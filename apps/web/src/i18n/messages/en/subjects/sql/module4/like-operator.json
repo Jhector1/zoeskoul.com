@@ -1,0 +1,91 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_4": {
+        "like-operator": {
+          "label": "Pattern Matching with LIKE",
+          "summary": "Use LIKE to filter text data by patterns.",
+          "cards": {
+            "sketch0": {
+              "title": "Introduction to LIKE"
+            },
+            "sketch1": {
+              "title": "Basic Syntax"
+            },
+            "sketch2": {
+              "title": "Wildcards in LIKE"
+            },
+            "project": {
+              "title": "Project"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "projectSteps": {
+            "q4": {
+              "title": "Find products containing 'phone'"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_4": {
+        "like-operator": {
+          "sk1": {
+            "title": "Introduction to LIKE",
+            "bodyMarkdown": "The `LIKE` operator in SQL allows you to filter rows based on text patterns. It is often used in the `WHERE` clause to search for a specified pattern in a column. Common wildcards include `%` (matches any sequence of characters) and `_` (matches a single character)."
+          },
+          "sk2": {
+            "title": "Basic Syntax",
+            "bodyMarkdown": "To use `LIKE`, write a query such as:\n\n```sql\nSELECT * FROM products WHERE name LIKE 'A%';\n```\nThis finds all products whose names start with 'A'."
+          },
+          "sk3": {
+            "title": "Wildcards in LIKE",
+            "bodyMarkdown": "- `%`: Matches zero or more characters. Example: `LIKE '%phone%'` finds any value containing 'phone'.\n- `_`: Matches exactly one character. Example: `LIKE 'A_nna'` matches 'Anna' and 'Aenna', but not 'Annia'."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "q1": {
+      "title": "Which SQL operator is used for pattern matching in text columns?",
+      "prompt": "Select the correct operator used for pattern matching.",
+      "options": {
+        "a": "LIKE",
+        "b": "EQUALS",
+        "c": "MATCHES",
+        "d": "FIND"
+      }
+    },
+    "q2": {
+      "title": "Which of the following are valid wildcards for the LIKE operator?",
+      "prompt": "Select all that apply.",
+      "options": {
+        "a": "%",
+        "b": "_",
+        "c": "*",
+        "d": "#"
+      }
+    },
+    "q3": {
+      "title": "What does the pattern 'A_%' match?",
+      "prompt": "Choose the best description.",
+      "options": {
+        "a": "Any value starting with 'A' followed by at least one character",
+        "b": "Any value containing 'A' anywhere",
+        "c": "Any value ending with 'A'",
+        "d": "Any value starting with 'A' only"
+      }
+    },
+    "q4": {
+      "title": "Find products containing 'phone'",
+      "prompt": "Write a SQL query to select all columns from the `products` table where the `name` contains the word 'phone'.",
+      "starterCode": "-- Write your SQL query below\n"
+    }
+  }
+}

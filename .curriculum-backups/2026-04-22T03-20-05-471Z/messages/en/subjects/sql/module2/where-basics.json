@@ -1,0 +1,84 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_2": {
+        "where-basics": {
+          "label": "The WHERE Clause",
+          "summary": "How to filter rows using WHERE.",
+          "cards": {
+            "sketch0": {
+              "title": "What is the WHERE Clause?"
+            },
+            "sketch1": {
+              "title": "Basic Syntax"
+            },
+            "sketch2": {
+              "title": "Example Usage"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_2": {
+        "where-basics": {
+          "sk1": {
+            "title": "What is the WHERE Clause?",
+            "bodyMarkdown": "The `WHERE` clause in SQL is used to filter rows in a query. It allows you to specify conditions that each row must meet to be included in the results. Without a `WHERE` clause, a query returns all rows from the table."
+          },
+          "sk2": {
+            "title": "Basic Syntax",
+            "bodyMarkdown": "The basic syntax for using the `WHERE` clause is:\n\n```sql\nSELECT column1, column2\nFROM table_name\nWHERE condition;\n```\n\nThe `condition` can compare column values to constants using operators like `=`, `>`, `<`, `>=`, `<=`, or `!=`."
+          },
+          "sk3": {
+            "title": "Example Usage",
+            "bodyMarkdown": "Suppose you have a `products` table. To find all products with a price greater than 100, you can write:\n\n```sql\nSELECT * FROM products\nWHERE price > 100;\n```\n\nOnly rows where the `price` column is greater than 100 will be returned."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "q1": {
+      "title": "What does the WHERE clause do in an SQL query?",
+      "prompt": "Choose the best answer.",
+      "options": {
+        "a": "It sorts the results.",
+        "b": "It filters rows based on a condition.",
+        "c": "It groups rows together.",
+        "d": "It adds new rows to the table."
+      }
+    },
+    "q2": {
+      "title": "Which of the following is a correct use of the WHERE clause?",
+      "prompt": "Select the correct SQL statement.",
+      "options": {
+        "a": "SELECT * FROM products WHERE price > 50;",
+        "b": "SELECT * WHERE price > 50 FROM products;",
+        "c": "SELECT WHERE price > 50 * FROM products;",
+        "d": "SELECT FROM products WHERE price > 50 *;"
+      }
+    },
+    "q3": {
+      "title": "Which operators can be used in a WHERE clause?",
+      "prompt": "Select all that apply.",
+      "options": {
+        "a": "=",
+        "b": ">",
+        "c": "<",
+        "d": "ADD",
+        "e": "!="
+      }
+    },
+    "q4": {
+      "title": "Filter products by category",
+      "prompt": "Write an SQL query to select all columns from the `products` table where the `category` is 'Electronics'.",
+      "starterCode": "-- Write your SQL query below\n"
+    }
+  }
+}

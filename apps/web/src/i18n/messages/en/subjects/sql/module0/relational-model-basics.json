@@ -1,0 +1,124 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_0": {
+        "relational-model-basics": {
+          "label": "Relational Model Basics",
+          "summary": "Understand tables, rows, and columns in relational databases.",
+          "cards": {
+            "sketch0": {
+              "title": "What is a Table?"
+            },
+            "sketch1": {
+              "title": "Rows and Columns Explained"
+            },
+            "sketch2": {
+              "title": "Sample Table: students"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_0": {
+        "relational-model-basics": {
+          "sketch-1": {
+            "title": "What is a Table?",
+            "bodyMarkdown": "In a relational database, data is organized into **tables**. Each table represents a collection of related information. For example, the `students` table stores information about students. A table consists of **rows** (also called records) and **columns** (also called fields or attributes)."
+          },
+          "sketch-2": {
+            "title": "Rows and Columns Explained",
+            "bodyMarkdown": "Each **row** in a table represents a single record. In the `students` table, each row is a student. Each **column** represents a specific attribute, such as `name`, `grade`, or `city`. For example, the `students` table has columns: `id`, `name`, `grade`, `age`, and `city`."
+          },
+          "sketch-3": {
+            "title": "Sample Table: students",
+            "bodyMarkdown": "| id | name  | grade | age | city       |\n|----|-------|-------|-----|------------|\n| 1  | Noor  | A     | 15  | Chicago    |\n| 2  | Mia   | A     | 14  | Evanston   |\n| 3  | Leo   | B     | 15  | Chicago    |\n| 4  | Ava   | C     | 14  | Oak Park   |\n| 5  | Zane  | B     | 16  | Naperville |\n\nThis table shows five students, each with their own row. The columns describe their attributes."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "quiz-1": {
+      "title": "Identifying a Column",
+      "prompt": "In the `students` table, which of the following is a column?",
+      "hint": "Columns describe attributes, not specific values.",
+      "help": {
+        "concept": "Columns are the named fields in a table, such as 'grade' or 'city'.",
+        "hint_1": "Look for a word that could describe all students, not just one.",
+        "hint_2": "It's not a specific student's name or city, but a label for a type of data."
+      },
+      "options": {
+        "a": "Noor",
+        "b": "grade",
+        "c": "3",
+        "d": "Oak Park"
+      }
+    },
+    "quiz-2": {
+      "title": "Select All Rows",
+      "prompt": "Which of the following are rows from the `students` table?",
+      "hint": "Rows represent complete records.",
+      "help": {
+        "concept": "Rows are full records in the correct answer table, containing values for each column.",
+        "hint_1": "Rows list all the attributes for the correct answer student.",
+        "hint_2": "If it looks like the correct answer full student entry, it's the correct answer row."
+      },
+      "options": {
+        "a": "1, Noor, A, 15, Chicago",
+        "b": "grade",
+        "c": "3, Leo, B, 15, Chicago",
+        "d": "city"
+      }
+    },
+    "quiz-3": {
+      "title": "Order the Table Structure",
+      "prompt": "Arrange the following from the largest to the smallest component in a table.",
+      "hint": "Think about how data is grouped.",
+      "help": {
+        "concept": "A the correct answer contains rows, which contain cells. Columns describe the type of data in each the correct answer.",
+        "hint_1": "Start with the whole structure and move to the smallest part.",
+        "hint_2": "A the correct answer is a single value at the intersection of a the correct answer and the correct answer."
+      },
+      "tokens": {
+        "t1": "Table",
+        "t2": "Row",
+        "t3": "Column",
+        "t4": "Cell"
+      }
+    },
+    "quiz-4": {
+      "title": "Fill in the Blank: Table Definition",
+      "prompt": "A ___ in a relational database is a collection of related data organized in rows and columns.",
+      "hint": "It's the main structure that holds all the data.",
+      "help": {
+        "concept": "A the missing term is the primary structure in a relational database.",
+        "hint_1": "Rows and columns are parts of this structure.",
+        "hint_2": "It's not a single value or attribute, but the whole set."
+      },
+      "template": "A ___ in a relational database is a collection of related data organized in rows and columns.",
+      "choices": [
+        "row",
+        "column",
+        "table",
+        "cell"
+      ]
+    },
+    "quiz-5": {
+      "title": "Select All Data from students",
+      "prompt": "Write an SQL query to select all columns and rows from the `students` table.",
+      "hint": "Use SELECT with a wildcard to get all columns.",
+      "help": {
+        "concept": "The SELECT statement retrieves data from a table. Using * selects all columns.",
+        "hint_1": "The basic form is SELECT * FROM table_name;",
+        "hint_2": "Remember to use the table name 'students'."
+      },
+      "starterCode": "-- Write your SQL query here"
+    }
+  }
+}

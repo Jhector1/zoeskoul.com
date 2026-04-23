@@ -1,0 +1,117 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_4": {
+        "ilike-case-insensitive": {
+          "label": "Case-Insensitive Matching",
+          "summary": "Learn how to perform case-insensitive searches in SQL using ILIKE or similar operators. Practice matching text regardless of letter case, especially useful for user data cleanup and flexible queries.",
+          "cards": {
+            "sketch0": {
+              "title": "Why Case-Insensitive Matching Matters"
+            },
+            "sketch1": {
+              "title": "Case-Insensitive Matching in the Dataset"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_4": {
+        "ilike-case-insensitive": {
+          "sk1": {
+            "title": "Why Case-Insensitive Matching Matters",
+            "bodyMarkdown": "When searching for text in SQL, the standard `LIKE` operator is case-sensitive in many databases. This means `LIKE 'emma%'` will not match 'Emma Reed' if the case doesn't match exactly. To make searches more flexible, case-insensitive matching is essential—especially when dealing with user data that may have inconsistent capitalization.\n\nSome SQL dialects (like PostgreSQL) provide `ILIKE` for case-insensitive matching. In SQLite, you can use `LIKE` with the `COLLATE NOCASE` clause, or convert both sides to lower or upper case using `LOWER()` or `UPPER()` functions.\n\n**Example:**\n\n```sql\nSELECT * FROM customers WHERE full_name LIKE 'emma%'; -- Case-sensitive\nSELECT * FROM customers WHERE full_name LIKE 'emma%' COLLATE NOCASE; -- Case-insensitive in SQLite\nSELECT * FROM customers WHERE LOWER(full_name) LIKE 'emma%'; -- Also works\n```\n\nThis helps you find all variations, such as 'Emma', 'emma', or 'EMMA'."
+          },
+          "sk2": {
+            "title": "Case-Insensitive Matching in the Dataset",
+            "bodyMarkdown": "Suppose you want to find all customers whose city is 'chicago', regardless of how it's capitalized. In the `customers` table, some entries may have 'Chicago', 'CHICAGO', or even 'chicago'.\n\nTo match all of them, use:\n\n```sql\nSELECT * FROM customers WHERE city LIKE 'chicago' COLLATE NOCASE;\n```\n\nOr, using `LOWER()`:\n\n```sql\nSELECT * FROM customers WHERE LOWER(city) = 'chicago';\n```\n\nBoth approaches ensure your query finds every customer from Chicago, no matter how the city name is stored."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "q1": {
+      "title": "Understanding Case Sensitivity",
+      "prompt": "Which SQL operator or clause can you use in SQLite to perform a case-insensitive search for names starting with 'emma' in the 'full_name' column?",
+      "hint": "Think about how SQLite handles case-insensitive matching.",
+      "help": {
+        "concept": "SQLite does not support the ILIKE operator, but it does allow case-insensitive matching using COLLATE NOCASE or by converting text with LOWER().",
+        "hint_1": "The COLLATE NOCASE clause can be added to LIKE for case-insensitive matching in SQLite.",
+        "hint_2": "ILIKE is not available in SQLite; use LIKE with COLLATE NOCASE instead."
+      },
+      "options": {
+        "a": "LIKE 'emma%'",
+        "b": "LIKE 'emma%' COLLATE NOCASE",
+        "c": "ILIKE 'emma%'",
+        "d": "REGEXP 'emma%'"
+      }
+    },
+    "q2": {
+      "title": "Identifying Case-Insensitive Techniques",
+      "prompt": "Which of the following queries will find all customers whose city is 'chicago', regardless of capitalization? (Select all that apply.)",
+      "hint": "Consider which queries ignore case when comparing text.",
+      "help": {
+        "concept": "Case-insensitive matching can be achieved with COLLATE NOCASE or by converting both sides to the same case using LOWER() or UPPER().",
+        "hint_1": "Queries using COLLATE NOCASE or LOWER() will match regardless of capitalization.",
+        "hint_2": "Plain equality or LIKE without COLLATE NOCASE is case-sensitive in SQLite."
+      },
+      "options": {
+        "a": "SELECT * FROM customers WHERE city = 'chicago';",
+        "b": "SELECT * FROM customers WHERE city LIKE 'chicago' COLLATE NOCASE;",
+        "c": "SELECT * FROM customers WHERE LOWER(city) = 'chicago';",
+        "d": "SELECT * FROM customers WHERE city LIKE 'CHICAGO';"
+      }
+    },
+    "q3": {
+      "title": "Order the Steps: Making a Case-Insensitive Search",
+      "prompt": "Arrange the steps to perform a case-insensitive search for customers whose status is 'active', regardless of case.",
+      "hint": "Think about the logical order of constructing a SQL query.",
+      "help": {
+        "concept": "To perform a case-insensitive match, you typically select from the table, filter with WHERE, apply a case function, and compare to a normalized value.",
+        "hint_1": "Start by selecting from the table, then filter, then normalize case.",
+        "hint_2": "The case function should be applied before the comparison."
+      },
+      "tokens": {
+        "t1": "Write a SELECT statement for the customers table",
+        "t2": "Use the WHERE clause to filter by status",
+        "t3": "Apply LOWER() to the status column",
+        "t4": "Compare to the lowercase string 'active'"
+      }
+    },
+    "q4": {
+      "title": "Fill in the Blank: Case-Insensitive LIKE",
+      "prompt": "Complete the SQL query to find all customers whose full_name starts with 'mia', regardless of case:\n\nSELECT * FROM customers WHERE full_name LIKE 'mia%' ____;",
+      "hint": "Which clause makes LIKE case-insensitive in SQLite?",
+      "help": {
+        "concept": "the missing term can be added to LIKE in SQLite to ignore case.",
+        "hint_1": "It's a clause, not a different operator.",
+        "hint_2": "ILIKE is not supported in SQLite; use the missing term."
+      },
+      "template": "SELECT * FROM customers WHERE full_name LIKE 'mia%' ____;",
+      "choices": [
+        "COLLATE NOCASE",
+        "ILIKE",
+        "REGEXP",
+        "CASE INSENSITIVE"
+      ]
+    },
+    "q5": {
+      "title": "Write a Case-Insensitive Query",
+      "prompt": "Write a SQL query to select all columns for customers whose city is 'chicago', regardless of capitalization.",
+      "hint": "Use LIKE with a clause that ignores case.",
+      "help": {
+        "concept": "In SQLite, use LIKE with COLLATE NOCASE to perform a case-insensitive match.",
+        "hint_1": "Add COLLATE NOCASE after your LIKE comparison.",
+        "hint_2": "The pattern should be 'chicago' and the clause should be COLLATE NOCASE."
+      },
+      "starterCode": "-- Write your query below"
+    }
+  }
+}

@@ -1,0 +1,136 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_7": {
+        "aggregation-challenge": {
+          "label": "Aggregation Challenge",
+          "summary": "Summarize and analyze data using aggregate functions.",
+          "cards": {
+            "sketch0": {
+              "title": "Introduction to Aggregation"
+            },
+            "sketch1": {
+              "title": "How GROUP BY Works"
+            },
+            "project": {
+              "title": "Inventory Aggregation Mini-Project"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "projectSteps": {
+            "single-choice-agg-func": {
+              "title": "Which SQL function calculates the total sum of a numeric column?"
+            },
+            "multi-choice-agg-select": {
+              "title": "Select all aggregate functions in SQL."
+            },
+            "drag-reorder-agg-steps": {
+              "title": "Order the steps to get the average price per category."
+            },
+            "fill-blank-choice-agg": {
+              "title": "Fill in the blank: Counting active items"
+            },
+            "code-input-agg-sql": {
+              "title": "SQL: Count items per category (excluding test items)"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_7": {
+        "aggregation-challenge": {
+          "intro-aggregation": {
+            "title": "Introduction to Aggregation",
+            "bodyMarkdown": "SQL aggregate functions help you summarize data, such as counting items, finding averages, or calculating totals. In the `inventory_items` table, you can use functions like `COUNT()`, `AVG()`, `SUM()`, `MIN()`, and `MAX()` to analyze inventory by category, status, or other fields. For example, to count all active items:\n\n```sql\nSELECT COUNT(*) FROM inventory_items WHERE status = 'active';\n```\n\nYou can also group results by a column using `GROUP BY`, such as counting items per category:\n\n```sql\nSELECT category, COUNT(*) FROM inventory_items GROUP BY category;\n```"
+          },
+          "group-by-explained": {
+            "title": "How GROUP BY Works",
+            "bodyMarkdown": "The `GROUP BY` clause groups rows that have the same values in specified columns into summary rows. For example, to find the average price for each category in the `inventory_items` table:\n\n```sql\nSELECT category, AVG(price) AS avg_price\nFROM inventory_items\nGROUP BY category;\n```\n\nThis returns one row per category, showing the average price of items in each group."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "single-choice-agg-func": {
+      "title": "Which SQL function calculates the total sum of a numeric column?",
+      "prompt": "Select the aggregate function that returns the total sum of values in a column.",
+      "hint": "Focus on the main concept being tested and eliminate choices that describe something different.",
+      "help": {
+        "concept": "Choose the option that matches the core idea described in the question without relying on repeated wording from the answer choices.",
+        "hint_1": "Rule out options that describe a different role, behavior, or SQL concept than the prompt asks about.",
+        "hint_2": "Use the prompt carefully and pick the choice that best matches what it is asking about: Select the aggregate function that returns the total sum of values in a column."
+      },
+      "options": {
+        "a": "COUNT()",
+        "b": "SUM()",
+        "c": "AVG()",
+        "d": "MAX()"
+      }
+    },
+    "multi-choice-agg-select": {
+      "title": "Select all aggregate functions in SQL.",
+      "prompt": "Which of the following are aggregate functions in SQL? Select all that apply.",
+      "hint": "Focus on the main concept being tested and eliminate choices that describe something different.",
+      "help": {
+        "concept": "Choose the option that matches the core idea described in the question without relying on repeated wording from the answer choices.",
+        "hint_1": "Rule out options that describe a different role, behavior, or SQL concept than the prompt asks about.",
+        "hint_2": "Use the prompt carefully and pick the choice that best matches what it is asking about: Which of the following are aggregate functions in SQL? Select all that apply."
+      },
+      "options": {
+        "a": "COUNT()",
+        "b": "GROUP BY",
+        "c": "AVG()",
+        "d": "SUM()"
+      }
+    },
+    "drag-reorder-agg-steps": {
+      "title": "Order the steps to get the average price per category.",
+      "prompt": "Arrange the SQL clauses in the correct order to find the average price per category.",
+      "hint": "Start with SELECT.",
+      "help": {
+        "concept": "A typical SQL aggregation query starts with SELECT, then FROM, then GROUP BY.",
+        "hint_1": "SELECT comes first, FROM next, then GROUP BY.",
+        "hint_2": "The order is SELECT, FROM, GROUP BY."
+      },
+      "tokens": {
+        "t1": "SELECT category, AVG(price)",
+        "t2": "FROM inventory_items",
+        "t3": "GROUP BY category"
+      }
+    },
+    "fill-blank-choice-agg": {
+      "title": "Fill in the blank: Counting active items",
+      "prompt": "Complete the SQL query to count the number of active items in the inventory.\n\n```sql\nSELECT COUNT(*) FROM inventory_items WHERE status = ____;\n```",
+      "hint": "Look for the status that means currently available.",
+      "help": {
+        "concept": "The WHERE clause filters rows. To count only active items, use the correct status value.",
+        "hint_1": "Check the status values in the table: active, draft, inactive.",
+        "hint_2": "Choose the value that matches items currently available for use."
+      },
+      "template": "SELECT COUNT(*) FROM inventory_items WHERE status = ____;",
+      "choices": [
+        "'active'",
+        "'draft'",
+        "'inactive'",
+        "'Decor'"
+      ]
+    },
+    "code-input-agg-sql": {
+      "title": "SQL: Count items per category (excluding test items)",
+      "prompt": "Write a SQL query to return each category and the number of items in that category, excluding test items (where is_test = 1). The result should have columns: category, item_count.",
+      "hint": "Use COUNT(*) and GROUP BY. Exclude test items.",
+      "help": {
+        "concept": "To aggregate by category and exclude test items, use GROUP BY and a WHERE clause.",
+        "hint_1": "Filter with WHERE is_test = 0, then GROUP BY category.",
+        "hint_2": "SELECT category, COUNT(*) FROM inventory_items WHERE is_test = 0 GROUP BY category."
+      },
+      "starterCode": "-- Write your query below"
+    }
+  }
+}

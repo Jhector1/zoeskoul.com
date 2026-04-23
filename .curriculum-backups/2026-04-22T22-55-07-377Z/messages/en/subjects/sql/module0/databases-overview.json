@@ -1,0 +1,127 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_0": {
+        "databases-overview": {
+          "label": "Databases Overview",
+          "summary": "Explore what databases are and how they store information.",
+          "cards": {
+            "sketch0": {
+              "title": "What is a Database?"
+            },
+            "sketch1": {
+              "title": "Table Structure Example"
+            },
+            "sketch2": {
+              "title": "Why Use Databases?"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_0": {
+        "databases-overview": {
+          "sketch-what-is-a-database": {
+            "title": "What is a Database?",
+            "bodyMarkdown": "A **database** is an organized collection of data that is stored and accessed electronically. Databases help us store, retrieve, and manage information efficiently. For example, a school might use a database to keep track of students, their grades, ages, and cities.\n\nIn SQL, data is organized into **tables**. Each table has columns (attributes) and rows (records). For instance, the `students` table in our example dataset has columns like `id`, `name`, `grade`, `age`, and `city`."
+          },
+          "sketch-table-structure": {
+            "title": "Table Structure Example",
+            "bodyMarkdown": "Let's look at the structure of the `students` table:\n\n| id | name | grade | age | city      |\n|----|------|-------|-----|-----------|\n| 1  | Noor | A     | 15  | Chicago   |\n| 2  | Mia  | A     | 14  | Evanston  |\n| 3  | Leo  | B     | 15  | Chicago   |\n| 4  | Ava  | C     | 14  | Oak Park  |\n| 5  | Zane | B     | 16  | Naperville|\n\nEach row represents a student, and each column represents a piece of information about that student."
+          },
+          "sketch-why-use-databases": {
+            "title": "Why Use Databases?",
+            "bodyMarkdown": "Databases make it easy to:\n- Store large amounts of data\n- Quickly find and update information\n- Keep data organized and consistent\n\nFor example, if you want to find all students from 'Chicago', a database lets you do this with a simple SQL query."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "quiz-what-is-database": {
+      "title": "What is a database?",
+      "prompt": "Which of the following best describes a database?",
+      "hint": "Think about how data is stored and managed.",
+      "help": {
+        "concept": "the correct answer database is an organized collection of data, not just the correct answer single file or row.",
+        "hint_1": "Databases are used to store and manage large amounts of information.",
+        "hint_2": "the correct answer database is not the correct answer programming language or the correct answer physical object, but the correct answer digital system for organizing data."
+      },
+      "options": {
+        "a": "A collection of organized data stored electronically",
+        "b": "A type of programming language",
+        "c": "A physical file cabinet",
+        "d": "A single row in a table"
+      }
+    },
+    "quiz-table-columns": {
+      "title": "Identifying Table Columns",
+      "prompt": "Which of the following are columns in the `students` table?",
+      "hint": "Look at the table structure for the correct columns.",
+      "help": {
+        "concept": "Columns are the attributes that describe each record in the correct answer table.",
+        "hint_1": "Check which options match the column headers in the `students` table.",
+        "hint_2": "Only select columns that are present in the provided table example."
+      },
+      "options": {
+        "a": "id",
+        "b": "name",
+        "c": "grade",
+        "d": "city",
+        "e": "salary",
+        "f": "department"
+      }
+    },
+    "quiz-table-rows": {
+      "title": "Order of Table Rows",
+      "prompt": "Arrange the following students in the order they appear in the `students` table (from top to bottom).",
+      "hint": "Check the table structure sketch for the order.",
+      "help": {
+        "concept": "Rows in a table are ordered by their appearance or by a specific column like 'id'.",
+        "hint_1": "Look at the 'id' column to determine the order.",
+        "hint_2": "Start with the student who has id 1 and continue in increasing order."
+      },
+      "tokens": {
+        "t1": "Noor",
+        "t2": "Mia",
+        "t3": "Leo",
+        "t4": "Ava",
+        "t5": "Zane"
+      }
+    },
+    "quiz-fill-blank-table-definition": {
+      "title": "Fill in the Blank: Table Definition",
+      "prompt": "A table in a database is made up of _____ and rows.",
+      "hint": "Think about the vertical parts of a table.",
+      "help": {
+        "concept": "Tables are structured with the missing term (attributes) and rows (records).",
+        "hint_1": "the missing term define the type of information stored in each row.",
+        "hint_2": "Each row is made up of values for each column."
+      },
+      "template": "A table in a database is made up of {{blank}} and rows.",
+      "choices": [
+        "columns",
+        "files",
+        "queries",
+        "scripts"
+      ]
+    },
+    "quiz-sql-query-simple": {
+      "title": "Simple SQL Query",
+      "prompt": "Write an SQL query to select the names of all students from the `students` table.",
+      "hint": "Use SELECT to choose the column you want.",
+      "help": {
+        "concept": "The SELECT statement is used to retrieve specific columns from a table.",
+        "hint_1": "You only need to select the 'name' column from the 'students' table.",
+        "hint_2": "The basic format is SELECT column FROM table."
+      },
+      "starterCode": "-- Write your SQL query below"
+    }
+  }
+}

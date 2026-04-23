@@ -1,0 +1,117 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_5": {
+        "group-by": {
+          "label": "GROUP BY Clause",
+          "summary": "Group data for aggregate calculations.",
+          "cards": {
+            "sketch0": {
+              "title": "What is GROUP BY?"
+            },
+            "sketch1": {
+              "title": "How GROUP BY Works"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_5": {
+        "group-by": {
+          "sk1": {
+            "title": "What is GROUP BY?",
+            "bodyMarkdown": "The `GROUP BY` clause in SQL is used to arrange identical data into groups. This is especially useful when you want to perform aggregate functions (like COUNT, SUM, AVG) on subsets of your data. For example, you can group sales by region to see the total sales per region."
+          },
+          "sk2": {
+            "title": "How GROUP BY Works",
+            "bodyMarkdown": "When you use `GROUP BY`, SQL collects rows that have the same value in specified columns into summary rows. Each group can then be summarized using aggregate functions. The columns listed in `GROUP BY` must also appear in the SELECT statement unless they are used with an aggregate function."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "q1": {
+      "title": "Purpose of GROUP BY",
+      "prompt": "What is the main purpose of the GROUP BY clause in SQL?",
+      "hint": "Think about how you would summarize data by categories.",
+      "help": {
+        "concept": "The GROUP BY clause is used to organize data into groups based on one or more columns, often for aggregation.",
+        "hint_1": "GROUP BY is not for filtering or sorting, but for grouping similar rows.",
+        "hint_2": "It is commonly used with aggregate functions like COUNT, SUM, or AVG."
+      },
+      "options": {
+        "a": "To filter rows based on a condition",
+        "b": "To sort the result set",
+        "c": "To group rows that have the same values in specified columns",
+        "d": "To join two tables together"
+      }
+    },
+    "q2": {
+      "title": "Choosing GROUP BY Columns",
+      "prompt": "Which columns can you use in the SELECT statement when using GROUP BY? (Select all that apply.)",
+      "hint": "Remember the rules about columns in SELECT when using GROUP BY.",
+      "help": {
+        "concept": "When using GROUP BY, only columns in the GROUP BY clause or those used with aggregate functions can appear in SELECT.",
+        "hint_1": "Columns not in GROUP BY or an aggregate function can't be in SELECT.",
+        "hint_2": "Aggregate functions summarize groups, and GROUP BY columns define the groups."
+      },
+      "options": {
+        "a": "Columns listed in the GROUP BY clause",
+        "b": "Columns used with aggregate functions",
+        "c": "Any column from the table",
+        "d": "Columns not mentioned in GROUP BY or aggregate functions"
+      }
+    },
+    "q3": {
+      "title": "GROUP BY Query Order",
+      "prompt": "Arrange the SQL keywords in the correct order to write a query that groups data.",
+      "hint": "Think about where GROUP BY appears relative to WHERE.",
+      "help": {
+        "concept": "The typical SQL query order is SELECT, FROM, WHERE, then GROUP BY.",
+        "hint_1": "GROUP BY comes after WHERE.",
+        "hint_2": "You select and filter before grouping."
+      },
+      "tokens": {
+        "t1": "SELECT",
+        "t2": "FROM",
+        "t3": "GROUP BY",
+        "t4": "WHERE"
+      }
+    },
+    "q4": {
+      "title": "GROUP BY Syntax",
+      "prompt": "Fill in the blank: SELECT department, COUNT(*) FROM employees ______ department;",
+      "hint": "Which clause is used to group rows?",
+      "help": {
+        "concept": "the missing term is the clause that groups rows sharing the same values.",
+        "hint_1": "It's not ORDER BY, WHERE, or HAVING.",
+        "hint_2": "This clause is essential for aggregation by categories."
+      },
+      "template": "SELECT department, COUNT(*) FROM employees ____ department;",
+      "choices": [
+        "GROUP BY",
+        "ORDER BY",
+        "WHERE",
+        "HAVING"
+      ]
+    },
+    "q5": {
+      "title": "Write a GROUP BY Query",
+      "prompt": "Write a SQL query to show the number of products in each category from the products_catalog table. Show the category and the count.",
+      "hint": "Use COUNT(*) and group by the category column.",
+      "help": {
+        "concept": "To count items per group, use an aggregate function and GROUP BY the grouping column.",
+        "hint_1": "Your SELECT should include the category and the count.",
+        "hint_2": "GROUP BY should reference the category column."
+      },
+      "starterCode": "-- Write your SQL query here\n"
+    }
+  }
+}

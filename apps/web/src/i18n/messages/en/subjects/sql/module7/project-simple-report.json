@@ -1,0 +1,92 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_7": {
+        "project-simple-report": {
+          "label": "Create a Simple Report",
+          "summary": "Build a report using SELECT, WHERE, and ORDER BY.",
+          "cards": {
+            "sketch0": {
+              "title": "What is a Simple SQL Report?"
+            },
+            "sketch1": {
+              "title": "Steps to Build a Simple Report"
+            },
+            "project": {
+              "title": "Project"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "projectSteps": {
+            "sc-which-clause-filters": {
+              "title": "Which SQL clause is used to filter rows in a query?"
+            },
+            "mc-report-steps": {
+              "title": "Which of the following are steps to create a simple SQL report?"
+            },
+            "dr-order-sql-clauses": {
+              "title": "Order the SQL clauses to build a simple report"
+            },
+            "ci-products-report": {
+              "title": "Write a query: List all products in stock, sorted by price (lowest first)"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_7": {
+        "project-simple-report": {
+          "intro-simple-report": {
+            "title": "What is a Simple SQL Report?",
+            "bodyMarkdown": "A simple SQL report is a query that retrieves specific information from a database. By combining `SELECT`, `WHERE`, and `ORDER BY`, you can filter and sort data to answer real business questions. For example, you might want to see a list of products in stock, sorted by price."
+          },
+          "steps-simple-report": {
+            "title": "Steps to Build a Simple Report",
+            "bodyMarkdown": "1. **SELECT**: Choose the columns you want to display.\n2. **WHERE**: Filter the rows to show only relevant data.\n3. **ORDER BY**: Sort the results to make the report more useful.\n\nLet's practice these steps using a sample products database."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "sc-which-clause-filters": {
+      "title": "Which SQL clause is used to filter rows in a query?",
+      "prompt": "Choose the correct clause for filtering rows.",
+      "options": {
+        "a": "SELECT",
+        "b": "WHERE",
+        "c": "ORDER BY",
+        "d": "GROUP BY"
+      }
+    },
+    "mc-report-steps": {
+      "title": "Which of the following are steps to create a simple SQL report?",
+      "prompt": "Select all that apply.",
+      "options": {
+        "a": "Use SELECT to choose columns",
+        "b": "Use WHERE to filter rows",
+        "c": "Use ORDER BY to sort results",
+        "d": "Use DROP TABLE to remove tables"
+      }
+    },
+    "dr-order-sql-clauses": {
+      "title": "Order the SQL clauses to build a simple report",
+      "prompt": "Arrange the clauses in the correct order for a basic report.",
+      "tokens": {
+        "t1": "SELECT",
+        "t2": "WHERE",
+        "t3": "ORDER BY"
+      }
+    },
+    "ci-products-report": {
+      "title": "Write a query: List all products in stock, sorted by price (lowest first)",
+      "prompt": "Using the `products_catalog` dataset, write a SQL query to select the `product_name` and `price` columns for products where `in_stock` is 1. Sort the results by `price` in ascending order.",
+      "starterCode": "-- Write your SQL query here\n"
+    }
+  }
+}

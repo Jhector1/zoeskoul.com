@@ -1,12 +1,15 @@
 import { execSync } from "node:child_process";
 
-export function rebuildRegistries(subjectSlug?: string) {
-    execSync("pnpm i18n:generate", { stdio: "inherit" });
-    execSync("pnpm gen:subject-manifests", { stdio: "inherit" });
-    execSync(
-        subjectSlug
-            ? `pnpm gen:topic-manifests --subject ${subjectSlug}`
-            : "pnpm gen:topic-manifests",
-        { stdio: "inherit" },
-    );
+export async function rebuildRegistries() {
+  execSync("pnpm --filter @zoeskoul/web i18n:generate", {
+    stdio: "inherit",
+  });
+
+  execSync("pnpm --filter @zoeskoul/web gen:topic-manifests", {
+    stdio: "inherit",
+  });
+
+  execSync("pnpm --filter @zoeskoul/web gen:subject-manifests", {
+    stdio: "inherit",
+  });
 }

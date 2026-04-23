@@ -1,0 +1,91 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_7": {
+        "project-aggregation": {
+          "label": "Summarize Data for Insights",
+          "summary": "Use aggregation and grouping to answer business questions.",
+          "cards": {
+            "sketch0": {
+              "title": "Why Aggregate Data?"
+            },
+            "sketch1": {
+              "title": "Grouping with GROUP BY"
+            },
+            "project": {
+              "title": "Project"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "projectSteps": {
+            "quiz-sql-agg-query": {
+              "title": "Write a SQL query to find the average price of products in each category from the products_catalog dataset. Show the category and the average price as avg_price."
+            },
+            "quiz-sql-count-query": {
+              "title": "Write a SQL query to count how many products are in each category in the products_catalog dataset. Show the category and the count as product_count."
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_7": {
+        "project-aggregation": {
+          "sketch-aggregation-intro": {
+            "title": "Why Aggregate Data?",
+            "bodyMarkdown": "Aggregation helps you turn raw data into meaningful summaries. For example, you might want to know the total sales per product, the average price in a category, or the number of customers in each city. SQL provides functions like `SUM`, `AVG`, `COUNT`, `MIN`, and `MAX` to help you answer these questions efficiently."
+          },
+          "sketch-group-by": {
+            "title": "Grouping with GROUP BY",
+            "bodyMarkdown": "The `GROUP BY` clause lets you organize data into groups based on one or more columns. When combined with aggregation functions, you can summarize each group. For example, grouping sales by product or employees by department."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "quiz-agg-funcs": {
+      "title": "Which SQL function would you use to find the average price of products?",
+      "prompt": "Which SQL function would you use to find the average price of products?",
+      "options": {
+        "a": "SUM",
+        "b": "AVG",
+        "c": "COUNT",
+        "d": "MAX"
+      }
+    },
+    "quiz-group-by-purpose": {
+      "title": "What can you achieve with the GROUP BY clause in SQL? (Select all that apply)",
+      "prompt": "What can you achieve with the GROUP BY clause in SQL? (Select all that apply)",
+      "options": {
+        "a": "Summarize data by categories",
+        "b": "Sort data alphabetically",
+        "c": "Calculate totals for each group",
+        "d": "Filter rows before aggregation"
+      }
+    },
+    "quiz-agg-order": {
+      "title": "Arrange the steps to calculate the total inventory per category:",
+      "prompt": "Arrange the steps to calculate the total inventory per category:",
+      "tokens": {
+        "t1": "SELECT category, SUM(quantity)",
+        "t2": "FROM products",
+        "t3": "GROUP BY category"
+      }
+    },
+    "quiz-sql-agg-query": {
+      "title": "Write a SQL query to find the average price of products in each category from the products_catalog dataset. Show the category and the average price as avg_price.",
+      "prompt": "Write a SQL query to find the average price of products in each category from the products_catalog dataset. Show the category and the average price as avg_price.",
+      "starterCode": "-- Write your SQL query here\n"
+    },
+    "quiz-sql-count-query": {
+      "title": "Write a SQL query to count how many products are in each category in the products_catalog dataset. Show the category and the count as product_count.",
+      "prompt": "Write a SQL query to count how many products are in each category in the products_catalog dataset. Show the category and the count as product_count.",
+      "starterCode": "-- Write your SQL query here\n"
+    }
+  }
+}

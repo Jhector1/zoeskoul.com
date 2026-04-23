@@ -1,0 +1,116 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_2": {
+        "null-values": {
+          "label": "Filtering NULL Values",
+          "summary": "Handle missing data using IS NULL and IS NOT NULL.",
+          "cards": {
+            "sketch0": {
+              "title": "What is NULL in SQL?"
+            },
+            "sketch1": {
+              "title": "Filtering Rows with NULL Values"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_2": {
+        "null-values": {
+          "sketch-null-basics": {
+            "title": "What is NULL in SQL?",
+            "bodyMarkdown": "In SQL, `NULL` represents missing or unknown data in a table. It is not the same as zero or an empty string. When a column value is `NULL`, it means no value has been assigned."
+          },
+          "sketch-filtering-null": {
+            "title": "Filtering Rows with NULL Values",
+            "bodyMarkdown": "To filter rows where a column is missing data, use the `IS NULL` or `IS NOT NULL` operators in your `WHERE` clause. For example:\n\n```sql\nSELECT * FROM students WHERE email IS NULL;\n```\nThis query returns all students who do not have an email address recorded."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "quiz-single-choice-null": {
+      "title": "Identifying NULL Filtering",
+      "prompt": "Which SQL clause would you use to find all products that do NOT have a description in the `products_catalog` table?",
+      "hint": "Think about how SQL checks for missing values.",
+      "help": {
+        "concept": "In SQL, `NULL` represents missing data. To check for missing values, use `IS NULL`.",
+        "hint_1": "The `=` operator does not work for `NULL` values.",
+        "hint_2": "Use `IS NULL` to find rows where the column has no value assigned."
+      },
+      "options": {
+        "a": "WHERE description = ''",
+        "b": "WHERE description IS NULL",
+        "c": "WHERE description != ''",
+        "d": "WHERE description IS NOT NULL"
+      }
+    },
+    "quiz-multi-choice-null": {
+      "title": "Recognizing NULL Handling",
+      "prompt": "Which of the following statements about `NULL` in SQL are true?",
+      "hint": "Consider what `NULL` represents and how to check for it.",
+      "help": {
+        "concept": "`NULL` is used for missing data. Use `IS NULL` or `IS NOT NULL` to filter. `=` does not work with `NULL`.",
+        "hint_1": "`NULL` is not the same as an empty string.",
+        "hint_2": "To check for missing values, use `IS NULL` or `IS NOT NULL`, not `=`."
+      },
+      "options": {
+        "a": "`NULL` means the value is missing or unknown.",
+        "b": "`NULL` is the same as an empty string.",
+        "c": "You can use `IS NOT NULL` to find rows with a value.",
+        "d": "You can use `=` to compare with `NULL`."
+      }
+    },
+    "quiz-drag-reorder-null": {
+      "title": "Order the Steps: Filtering NULL Emails",
+      "prompt": "Arrange the steps to write a query that finds all students without an email address in the `students_intro` table.",
+      "hint": "Start with selecting all columns, then specify the table, then filter.",
+      "help": {
+        "concept": "A basic SQL query starts with `SELECT`, then `FROM`, then `WHERE` for filtering.",
+        "hint_1": "The `WHERE` clause comes after specifying the table.",
+        "hint_2": "The filter for missing emails should be the last part."
+      },
+      "tokens": {
+        "t1": "SELECT *",
+        "t2": "FROM students_intro",
+        "t3": "WHERE email IS NULL"
+      }
+    },
+    "quiz-fill-blank-choice-null": {
+      "title": "Fill in the Blank: IS NULL or IS NOT NULL",
+      "prompt": "To find all employees who have a recorded phone number in the `employees_basic` table, use:\n\n```sql\nSELECT * FROM employees_basic WHERE phone ________;\n```",
+      "hint": "You want rows where the phone number is present.",
+      "help": {
+        "concept": "`the missing term` finds rows where the column has any value (not missing).",
+        "hint_1": "You need the opposite of missing data.",
+        "hint_2": "Use `the missing term` to filter for present values."
+      },
+      "template": "SELECT * FROM employees_basic WHERE phone ________;",
+      "choices": [
+        "IS NULL",
+        "IS NOT NULL",
+        "=",
+        "!="
+      ]
+    },
+    "quiz-code-input-null": {
+      "title": "Write a Query: Products Missing Price",
+      "prompt": "Write a SQL query to select all columns from the `products_catalog` table for products where the `price` is missing.",
+      "hint": "Use `IS NULL` in the WHERE clause to filter for missing prices.",
+      "help": {
+        "concept": "To find rows with missing data, use `IS NULL` in the `WHERE` clause.",
+        "hint_1": "Your query should select all columns and filter where `price` is missing.",
+        "hint_2": "Combine `SELECT *`, the table name, and `WHERE price IS NULL`."
+      },
+      "starterCode": "-- Write your query below\n"
+    }
+  }
+}

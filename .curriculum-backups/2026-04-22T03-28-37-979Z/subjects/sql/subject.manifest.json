@@ -1,0 +1,427 @@
+{
+  "subject": {
+    "slug": "sql",
+    "genKey": "sql_for_beginners",
+    "order": 20,
+    "accessPolicy": "free",
+    "status": "active",
+    "imagePublicId": null,
+    "imageAlt": null,
+    "titleKey": "subjects.sql.title",
+    "descriptionKey": "subjects.sql.description",
+    "meta": {
+      "curriculum": {
+        "plannedModuleCount": 8,
+        "isTerminalRelease": false,
+        "moreComingMessageKey": "subjects.sql.moreComingSoon"
+      },
+      "completionPolicy": {
+        "requireAllPublishedModules": true,
+        "rewardEnabledByDefault": true,
+        "certificateEnabledByDefault": true
+      }
+    }
+  },
+  "modules": [
+    {
+      "slug": "sql_module_0",
+      "prefix": "sql0",
+      "order": 0,
+      "titleKey": "modules.sql.sql_module_0.title",
+      "descriptionKey": "modules.sql.sql_module_0.description",
+      "weekStart": 1,
+      "weekEnd": 1,
+      "accessOverride": "free",
+      "meta": {
+        "estimatedMinutes": 70,
+        "prereqKeys": [
+          "modules.sql.sql_module_0.prereqs.0"
+        ],
+        "outcomeKeys": [
+          "modules.sql.sql_module_0.outcomes.0",
+          "modules.sql.sql_module_0.outcomes.1",
+          "modules.sql.sql_module_0.outcomes.2",
+          "modules.sql.sql_module_0.outcomes.3"
+        ],
+        "whyKeys": [
+          "modules.sql.sql_module_0.why.0",
+          "modules.sql.sql_module_0.why.1"
+        ]
+      },
+      "sections": [
+        {
+          "slug": "section_0_1",
+          "order": 1,
+          "titleKey": "sections.sql.sql_module_0.section_0_1.title",
+          "descriptionKey": "sections.sql.sql_module_0.section_0_1.description",
+          "meta": {
+            "module": 0,
+            "weeksKey": "sections.sql.sql_module_0.section_0_1.weeks",
+            "bulletKeys": [
+              "sections.sql.sql_module_0.section_0_1.bullets.0",
+              "sections.sql.sql_module_0.section_0_1.bullets.1",
+              "sections.sql.sql_module_0.section_0_1.bullets.2",
+              "sections.sql.sql_module_0.section_0_1.bullets.3"
+            ]
+          },
+          "topics": [
+            "sql-history-purpose",
+            "databases-overview",
+            "relational-model-basics",
+            "sql-environments"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "sql_module_1",
+      "prefix": "sql1",
+      "order": 1,
+      "titleKey": "modules.sql.sql_module_1.title",
+      "descriptionKey": "modules.sql.sql_module_1.description",
+      "weekStart": 2,
+      "weekEnd": 2,
+      "accessOverride": "free",
+      "meta": {
+        "estimatedMinutes": 60,
+        "prereqKeys": [
+          "modules.sql.sql_module_1.prereqs.0"
+        ],
+        "outcomeKeys": [
+          "modules.sql.sql_module_1.outcomes.0",
+          "modules.sql.sql_module_1.outcomes.1",
+          "modules.sql.sql_module_1.outcomes.2",
+          "modules.sql.sql_module_1.outcomes.3"
+        ],
+        "whyKeys": [
+          "modules.sql.sql_module_1.why.0",
+          "modules.sql.sql_module_1.why.1"
+        ]
+      },
+      "sections": [
+        {
+          "slug": "section_1_1",
+          "order": 1,
+          "titleKey": "sections.sql.sql_module_1.section_1_1.title",
+          "descriptionKey": "sections.sql.sql_module_1.section_1_1.description",
+          "meta": {
+            "module": 1,
+            "weeksKey": "sections.sql.sql_module_1.section_1_1.weeks",
+            "bulletKeys": [
+              "sections.sql.sql_module_1.section_1_1.bullets.0",
+              "sections.sql.sql_module_1.section_1_1.bullets.1",
+              "sections.sql.sql_module_1.section_1_1.bullets.2",
+              "sections.sql.sql_module_1.section_1_1.bullets.3"
+            ]
+          },
+          "topics": [
+            "select-syntax",
+            "select-columns",
+            "select-all",
+            "column-aliases"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "sql_module_2",
+      "prefix": "sql2",
+      "order": 2,
+      "titleKey": "modules.sql.sql_module_2.title",
+      "descriptionKey": "modules.sql.sql_module_2.description",
+      "weekStart": 3,
+      "weekEnd": 3,
+      "accessOverride": null,
+      "meta": {
+        "estimatedMinutes": 70,
+        "prereqKeys": [
+          "modules.sql.sql_module_2.prereqs.0"
+        ],
+        "outcomeKeys": [
+          "modules.sql.sql_module_2.outcomes.0",
+          "modules.sql.sql_module_2.outcomes.1",
+          "modules.sql.sql_module_2.outcomes.2",
+          "modules.sql.sql_module_2.outcomes.3"
+        ],
+        "whyKeys": [
+          "modules.sql.sql_module_2.why.0",
+          "modules.sql.sql_module_2.why.1"
+        ]
+      },
+      "sections": [
+        {
+          "slug": "section_2_1",
+          "order": 1,
+          "titleKey": "sections.sql.sql_module_2.section_2_1.title",
+          "descriptionKey": "sections.sql.sql_module_2.section_2_1.description",
+          "meta": {
+            "module": 2,
+            "weeksKey": "sections.sql.sql_module_2.section_2_1.weeks",
+            "bulletKeys": [
+              "sections.sql.sql_module_2.section_2_1.bullets.0",
+              "sections.sql.sql_module_2.section_2_1.bullets.1",
+              "sections.sql.sql_module_2.section_2_1.bullets.2",
+              "sections.sql.sql_module_2.section_2_1.bullets.3"
+            ]
+          },
+          "topics": [
+            "where-basics",
+            "comparison-operators",
+            "logical-operators",
+            "null-values"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "sql_module_3",
+      "prefix": "sql3",
+      "order": 3,
+      "titleKey": "modules.sql.sql_module_3.title",
+      "descriptionKey": "modules.sql.sql_module_3.description",
+      "weekStart": 4,
+      "weekEnd": 4,
+      "accessOverride": null,
+      "meta": {
+        "estimatedMinutes": 60,
+        "prereqKeys": [
+          "modules.sql.sql_module_3.prereqs.0"
+        ],
+        "outcomeKeys": [
+          "modules.sql.sql_module_3.outcomes.0",
+          "modules.sql.sql_module_3.outcomes.1",
+          "modules.sql.sql_module_3.outcomes.2",
+          "modules.sql.sql_module_3.outcomes.3"
+        ],
+        "whyKeys": [
+          "modules.sql.sql_module_3.why.0",
+          "modules.sql.sql_module_3.why.1"
+        ]
+      },
+      "sections": [
+        {
+          "slug": "section_3_1",
+          "order": 1,
+          "titleKey": "sections.sql.sql_module_3.section_3_1.title",
+          "descriptionKey": "sections.sql.sql_module_3.section_3_1.description",
+          "meta": {
+            "module": 3,
+            "weeksKey": "sections.sql.sql_module_3.section_3_1.weeks",
+            "bulletKeys": [
+              "sections.sql.sql_module_3.section_3_1.bullets.0",
+              "sections.sql.sql_module_3.section_3_1.bullets.1",
+              "sections.sql.sql_module_3.section_3_1.bullets.2",
+              "sections.sql.sql_module_3.section_3_1.bullets.3"
+            ]
+          },
+          "topics": [
+            "order-by",
+            "sorting-direction",
+            "limit-top",
+            "offset-pagination"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "sql_module_4",
+      "prefix": "sql4",
+      "order": 4,
+      "titleKey": "modules.sql.sql_module_4.title",
+      "descriptionKey": "modules.sql.sql_module_4.description",
+      "weekStart": 5,
+      "weekEnd": 5,
+      "accessOverride": null,
+      "meta": {
+        "estimatedMinutes": 60,
+        "prereqKeys": [
+          "modules.sql.sql_module_4.prereqs.0"
+        ],
+        "outcomeKeys": [
+          "modules.sql.sql_module_4.outcomes.0",
+          "modules.sql.sql_module_4.outcomes.1",
+          "modules.sql.sql_module_4.outcomes.2",
+          "modules.sql.sql_module_4.outcomes.3"
+        ],
+        "whyKeys": [
+          "modules.sql.sql_module_4.why.0",
+          "modules.sql.sql_module_4.why.1"
+        ]
+      },
+      "sections": [
+        {
+          "slug": "section_4_1",
+          "order": 1,
+          "titleKey": "sections.sql.sql_module_4.section_4_1.title",
+          "descriptionKey": "sections.sql.sql_module_4.section_4_1.description",
+          "meta": {
+            "module": 4,
+            "weeksKey": "sections.sql.sql_module_4.section_4_1.weeks",
+            "bulletKeys": [
+              "sections.sql.sql_module_4.section_4_1.bullets.0",
+              "sections.sql.sql_module_4.section_4_1.bullets.1",
+              "sections.sql.sql_module_4.section_4_1.bullets.2",
+              "sections.sql.sql_module_4.section_4_1.bullets.3"
+            ]
+          },
+          "topics": [
+            "like-patterns",
+            "ilike-case-insensitive",
+            "string-functions",
+            "concatenation"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "sql_module_5",
+      "prefix": "sql5",
+      "order": 5,
+      "titleKey": "modules.sql.sql_module_5.title",
+      "descriptionKey": "modules.sql.sql_module_5.description",
+      "weekStart": 6,
+      "weekEnd": 6,
+      "accessOverride": null,
+      "meta": {
+        "estimatedMinutes": 70,
+        "prereqKeys": [
+          "modules.sql.sql_module_5.prereqs.0"
+        ],
+        "outcomeKeys": [
+          "modules.sql.sql_module_5.outcomes.0",
+          "modules.sql.sql_module_5.outcomes.1",
+          "modules.sql.sql_module_5.outcomes.2",
+          "modules.sql.sql_module_5.outcomes.3"
+        ],
+        "whyKeys": [
+          "modules.sql.sql_module_5.why.0",
+          "modules.sql.sql_module_5.why.1"
+        ]
+      },
+      "sections": [
+        {
+          "slug": "section_5_1",
+          "order": 1,
+          "titleKey": "sections.sql.sql_module_5.section_5_1.title",
+          "descriptionKey": "sections.sql.sql_module_5.section_5_1.description",
+          "meta": {
+            "module": 5,
+            "weeksKey": "sections.sql.sql_module_5.section_5_1.weeks",
+            "bulletKeys": [
+              "sections.sql.sql_module_5.section_5_1.bullets.0",
+              "sections.sql.sql_module_5.section_5_1.bullets.1",
+              "sections.sql.sql_module_5.section_5_1.bullets.2",
+              "sections.sql.sql_module_5.section_5_1.bullets.3"
+            ]
+          },
+          "topics": [
+            "count-sum-avg",
+            "min-max",
+            "group-by",
+            "having-clause"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "sql_module_6",
+      "prefix": "sql6",
+      "order": 6,
+      "titleKey": "modules.sql.sql_module_6.title",
+      "descriptionKey": "modules.sql.sql_module_6.description",
+      "weekStart": 7,
+      "weekEnd": 7,
+      "accessOverride": null,
+      "meta": {
+        "estimatedMinutes": 65,
+        "prereqKeys": [
+          "modules.sql.sql_module_6.prereqs.0"
+        ],
+        "outcomeKeys": [
+          "modules.sql.sql_module_6.outcomes.0",
+          "modules.sql.sql_module_6.outcomes.1",
+          "modules.sql.sql_module_6.outcomes.2",
+          "modules.sql.sql_module_6.outcomes.3"
+        ],
+        "whyKeys": [
+          "modules.sql.sql_module_6.why.0",
+          "modules.sql.sql_module_6.why.1"
+        ]
+      },
+      "sections": [
+        {
+          "slug": "section_6_1",
+          "order": 1,
+          "titleKey": "sections.sql.sql_module_6.section_6_1.title",
+          "descriptionKey": "sections.sql.sql_module_6.section_6_1.description",
+          "meta": {
+            "module": 6,
+            "weeksKey": "sections.sql.sql_module_6.section_6_1.weeks",
+            "bulletKeys": [
+              "sections.sql.sql_module_6.section_6_1.bullets.0",
+              "sections.sql.sql_module_6.section_6_1.bullets.1",
+              "sections.sql.sql_module_6.section_6_1.bullets.2",
+              "sections.sql.sql_module_6.section_6_1.bullets.3"
+            ]
+          },
+          "topics": [
+            "inner-join",
+            "left-right-join",
+            "cross-join",
+            "joining-multiple-tables"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "sql_module_7",
+      "prefix": "sql7",
+      "order": 7,
+      "titleKey": "modules.sql.sql_module_7.title",
+      "descriptionKey": "modules.sql.sql_module_7.description",
+      "weekStart": 8,
+      "weekEnd": 8,
+      "accessOverride": null,
+      "meta": {
+        "estimatedMinutes": 80,
+        "prereqKeys": [
+          "modules.sql.sql_module_7.prereqs.0"
+        ],
+        "outcomeKeys": [
+          "modules.sql.sql_module_7.outcomes.0",
+          "modules.sql.sql_module_7.outcomes.1",
+          "modules.sql.sql_module_7.outcomes.2",
+          "modules.sql.sql_module_7.outcomes.3"
+        ],
+        "whyKeys": [
+          "modules.sql.sql_module_7.why.0",
+          "modules.sql.sql_module_7.why.1"
+        ]
+      },
+      "sections": [
+        {
+          "slug": "section_7_1",
+          "order": 1,
+          "titleKey": "sections.sql.sql_module_7.section_7_1.title",
+          "descriptionKey": "sections.sql.sql_module_7.section_7_1.description",
+          "meta": {
+            "module": 7,
+            "weeksKey": "sections.sql.sql_module_7.section_7_1.weeks",
+            "bulletKeys": [
+              "sections.sql.sql_module_7.section_7_1.bullets.0",
+              "sections.sql.sql_module_7.section_7_1.bullets.1",
+              "sections.sql.sql_module_7.section_7_1.bullets.2",
+              "sections.sql.sql_module_7.section_7_1.bullets.3"
+            ]
+          },
+          "topics": [
+            "querying-sample-database",
+            "data-cleanup-task",
+            "aggregation-challenge",
+            "mini-project"
+          ]
+        }
+      ]
+    }
+  ]
+}

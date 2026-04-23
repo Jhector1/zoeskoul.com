@@ -1,0 +1,124 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_0": {
+        "sql-environments": {
+          "label": "SQL Environments and Tools",
+          "summary": "Discover common tools and environments for running SQL queries.",
+          "cards": {
+            "sketch0": {
+              "title": "What Are SQL Environments?"
+            },
+            "sketch1": {
+              "title": "Popular SQL Tools"
+            },
+            "sketch2": {
+              "title": "Connecting to a Database"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_0": {
+        "sql-environments": {
+          "sk1": {
+            "title": "What Are SQL Environments?",
+            "bodyMarkdown": "An SQL environment is any platform or tool where you can write and execute SQL queries. These environments connect to a database and let you interact with data using SQL commands."
+          },
+          "sk2": {
+            "title": "Popular SQL Tools",
+            "bodyMarkdown": "Some common SQL environments include:\n\n- **Database Management Systems (DBMS):** Tools like MySQL Workbench, SQL Server Management Studio, and pgAdmin provide graphical interfaces for managing databases and running queries.\n- **Command-Line Interfaces:** Tools like `mysql`, `psql`, and `sqlite3` let you run SQL commands directly in a terminal.\n- **Online Editors:** Websites like SQL Fiddle or DB Fiddle allow you to practice SQL in your browser without installing anything.\n- **Programming Language Libraries:** Many languages (like Python's `sqlite3` or Java's JDBC) let you run SQL queries from code."
+          },
+          "sk3": {
+            "title": "Connecting to a Database",
+            "bodyMarkdown": "To run SQL queries, you need to connect your tool to a database. This usually involves specifying the database type, server address, username, and password. Once connected, you can create, read, update, and delete data using SQL."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "q1": {
+      "title": "Identifying an SQL Environment",
+      "prompt": "Which of the following is an example of an SQL environment?",
+      "hint": "Think about tools designed for databases.",
+      "help": {
+        "concept": "SQL environments are tools or platforms where you can write and execute SQL queries.",
+        "hint_1": "Look for a tool that is specifically made for working with databases.",
+        "hint_2": "MySQL Workbench is a graphical tool for managing MySQL databases."
+      },
+      "options": {
+        "a": "Microsoft Word",
+        "b": "MySQL Workbench",
+        "c": "Adobe Photoshop",
+        "d": "Google Chrome"
+      }
+    },
+    "q2": {
+      "title": "Choosing SQL Tools",
+      "prompt": "Select all tools that can be used to run SQL queries.",
+      "hint": "Some tools are made for databases, others are not.",
+      "help": {
+        "concept": "SQL tools are designed to connect to databases and execute SQL commands.",
+        "hint_1": "Consider which tools are specifically for SQL or databases.",
+        "hint_2": "Excel is a spreadsheet tool, not an SQL environment."
+      },
+      "options": {
+        "a": "SQL Server Management Studio",
+        "b": "Excel",
+        "c": "psql",
+        "d": "DB Fiddle"
+      }
+    },
+    "q3": {
+      "title": "Steps to Run an SQL Query",
+      "prompt": "Arrange the steps for running an SQL query in the correct order.",
+      "hint": "Think about what you need to do before you can run a query.",
+      "help": {
+        "concept": "Running an SQL query involves connecting, writing, executing, and then viewing results.",
+        "hint_1": "You can't write or run a query before connecting to the database.",
+        "hint_2": "After executing the query, you can see the results."
+      },
+      "tokens": {
+        "t1": "Connect to the database",
+        "t2": "Write your SQL query",
+        "t3": "Execute the query",
+        "t4": "View the results"
+      }
+    },
+    "q4": {
+      "title": "Connecting to a Database",
+      "prompt": "To run SQL queries, you must first ____ to the database.",
+      "hint": "What action lets you access the database?",
+      "help": {
+        "concept": "Before running queries, you need to establish a connection to the database.",
+        "hint_1": "You can't interact with the database until you are linked to it.",
+        "hint_2": "The correct word means to establish a link or access."
+      },
+      "template": "To run SQL queries, you must first {{blank}} to the database.",
+      "choices": [
+        "connect",
+        "delete",
+        "export",
+        "print"
+      ]
+    },
+    "q5": {
+      "title": "Running a Simple SQL Query",
+      "prompt": "Write an SQL query to select all columns from the 'products' table in the 'products_catalog' database.",
+      "hint": "Use SELECT to get all columns from a table.",
+      "help": {
+        "concept": "The SELECT statement retrieves data from a table. Using * selects all columns.",
+        "hint_1": "The basic syntax is SELECT * FROM table_name;",
+        "hint_2": "Replace table_name with 'products' to get all its data."
+      },
+      "starterCode": "-- Write your SQL query below\n"
+    }
+  }
+}

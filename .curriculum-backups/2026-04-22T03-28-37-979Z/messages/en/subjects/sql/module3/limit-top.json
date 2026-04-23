@@ -1,0 +1,124 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_3": {
+        "limit-top": {
+          "label": "LIMIT and TOP Clauses",
+          "summary": "Restrict the number of rows returned.",
+          "cards": {
+            "sketch0": {
+              "title": "What are LIMIT and TOP?"
+            },
+            "sketch1": {
+              "title": "Syntax Examples"
+            },
+            "sketch2": {
+              "title": "Combining LIMIT with ORDER BY"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_3": {
+        "limit-top": {
+          "sketch1": {
+            "title": "What are LIMIT and TOP?",
+            "bodyMarkdown": "In SQL, the `LIMIT` clause (used in SQLite, MySQL, PostgreSQL) and the `TOP` keyword (used in SQL Server) are used to restrict the number of rows returned by a query. This is useful when you only want to see a sample of results, such as the first 5 products or the top 10 scores."
+          },
+          "sketch2": {
+            "title": "Syntax Examples",
+            "bodyMarkdown": "To get the first 3 rows from a table in SQLite or MySQL, use:\n\n```sql\nSELECT * FROM products LIMIT 3;\n```\n\nIn SQL Server, use:\n\n```sql\nSELECT TOP 3 * FROM products;\n```\n\nBoth queries return only the first 3 rows from the `products` table."
+          },
+          "sketch3": {
+            "title": "Combining LIMIT with ORDER BY",
+            "bodyMarkdown": "Often, you'll use `LIMIT` or `TOP` together with `ORDER BY` to get the highest or lowest values. For example, to get the 5 most expensive products:\n\n```sql\nSELECT * FROM products ORDER BY price DESC LIMIT 5;\n```\n\nThis returns the 5 products with the highest prices."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "quiz1": {
+      "title": "Purpose of LIMIT",
+      "prompt": "What does the LIMIT clause do in an SQL query?",
+      "hint": "Think about controlling the amount of data shown.",
+      "help": {
+        "concept": "The LIMIT clause is used to specify the maximum number of rows the query should return.",
+        "hint_1": "LIMIT is about how many rows you see, not how they are sorted or named.",
+        "hint_2": "If you only want the first 10 results, you use LIMIT 10."
+      },
+      "options": {
+        "a": "It restricts the number of rows returned.",
+        "b": "It sorts the results in ascending order.",
+        "c": "It removes duplicate rows.",
+        "d": "It changes column names."
+      }
+    },
+    "quiz2": {
+      "title": "Using LIMIT with ORDER BY",
+      "prompt": "Which SQL query returns the 3 most expensive products from the products table?",
+      "hint": "Pay attention to the order and the use of DESC.",
+      "help": {
+        "concept": "To get the highest values, use ORDER BY with DESC, then LIMIT to restrict the number of rows.",
+        "hint_1": "First sort by price in descending order, then limit the results.",
+        "hint_2": "The correct query orders by price from highest to lowest and then limits to 3 rows."
+      },
+      "options": {
+        "a": "SELECT * FROM products ORDER BY price DESC LIMIT 3;",
+        "b": "SELECT * FROM products LIMIT 3 ORDER BY price DESC;",
+        "c": "SELECT * FROM products WHERE price = MAX(price) LIMIT 3;",
+        "d": "SELECT TOP 3 * FROM products ORDER BY price ASC;"
+      }
+    },
+    "quiz3": {
+      "title": "Fill in the Blank: LIMIT Syntax",
+      "prompt": "Complete the SQL query to return only the first 5 rows from the products table:\n\nSELECT * FROM products _____ 5;",
+      "hint": "Which keyword restricts the number of rows?",
+      "help": {
+        "concept": "The the missing term clause is placed at the end of the query to restrict the number of rows.",
+        "hint_1": "It's not ORDER BY, WHERE, or GROUP BY.",
+        "hint_2": "The keyword starts with 'L' and is used for row restriction."
+      },
+      "template": "SELECT * FROM products {blank} 5;",
+      "choices": [
+        "LIMIT",
+        "ORDER BY",
+        "WHERE",
+        "GROUP BY"
+      ]
+    },
+    "quiz4": {
+      "title": "Order the SQL Clauses",
+      "prompt": "Arrange the SQL clauses in the correct order to get the 2 cheapest products.",
+      "hint": "Start with SELECT, end with LIMIT.",
+      "help": {
+        "concept": "SQL queries follow a specific order: SELECT, FROM, ORDER BY, then LIMIT.",
+        "hint_1": "ORDER BY comes before LIMIT.",
+        "hint_2": "The LIMIT clause is always last."
+      },
+      "tokens": {
+        "t1": "SELECT *",
+        "t2": "FROM products",
+        "t3": "ORDER BY price ASC",
+        "t4": "LIMIT 2"
+      }
+    },
+    "quiz5": {
+      "title": "Write a Query with LIMIT",
+      "prompt": "Write an SQL query to return the first 4 rows from the products_catalog table.",
+      "hint": "Use SELECT * and LIMIT.",
+      "help": {
+        "concept": "To limit the number of rows, use the LIMIT clause at the end of your SELECT statement.",
+        "hint_1": "Start with SELECT * FROM products_catalog.",
+        "hint_2": "Add LIMIT 4 at the end of your query."
+      },
+      "starterCode": "-- Write your query below\n"
+    }
+  }
+}

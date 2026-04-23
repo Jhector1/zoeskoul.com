@@ -1,0 +1,124 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_6": {
+        "inner-join": {
+          "label": "INNER JOIN",
+          "summary": "Retrieve matching rows from two tables.",
+          "cards": {
+            "sketch0": {
+              "title": "What is an INNER JOIN?"
+            },
+            "sketch1": {
+              "title": "Example: Students and Courses"
+            },
+            "sketch2": {
+              "title": "Joining More Than Two Tables"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_6": {
+        "inner-join": {
+          "sketch-what-is-inner-join": {
+            "title": "What is an INNER JOIN?",
+            "bodyMarkdown": "An **INNER JOIN** in SQL combines rows from two tables based on a related column between them. Only rows with matching values in both tables are included in the result. For example, to list all students and the courses they are enrolled in, you can join the `students` and `enrollments` tables using the `student_id` column."
+          },
+          "sketch-inner-join-example": {
+            "title": "Example: Students and Courses",
+            "bodyMarkdown": "Suppose you want to see which students are enrolled in which courses. You can use an INNER JOIN between `students` and `enrollments`:\n\n```sql\nSELECT students.name, enrollments.course_id\nFROM students\nINNER JOIN enrollments ON students.id = enrollments.student_id;\n```\n\nThis query returns only the students who have enrollments, along with the course IDs they are enrolled in."
+          },
+          "sketch-multi-table-inner-join": {
+            "title": "Joining More Than Two Tables",
+            "bodyMarkdown": "You can use INNER JOIN to combine more than two tables. For example, to get the student name, course title, and department name for each enrollment, you can join `students`, `enrollments`, `courses`, and `departments`:\n\n```sql\nSELECT students.name, courses.title, departments.name\nFROM enrollments\nINNER JOIN students ON enrollments.student_id = students.id\nINNER JOIN courses ON enrollments.course_id = courses.id\nINNER JOIN departments ON courses.department_id = departments.id;\n```\n\nThis query shows the full path from student to course to department, but only for records that exist in all tables."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "quiz-inner-join-concept": {
+      "title": "What does an INNER JOIN do?",
+      "prompt": "Which best describes the result of an INNER JOIN between two tables?",
+      "hint": "Think about which rows appear in the result.",
+      "help": {
+        "concept": "An INNER JOIN returns only the rows where the join condition is true for both tables.",
+        "hint_1": "Rows must have matching values in the joined columns.",
+        "hint_2": "If a row in either table doesn't have a match, it won't appear in the result."
+      },
+      "options": {
+        "a": "It returns all rows from both tables, matching or not.",
+        "b": "It returns only rows with matching values in both tables.",
+        "c": "It returns all rows from the first table and matching rows from the second.",
+        "d": "It returns only rows with no matches in either table."
+      }
+    },
+    "quiz-inner-join-syntax": {
+      "title": "INNER JOIN Syntax",
+      "prompt": "Fill in the blank to complete the INNER JOIN syntax:\n\n```sql\nSELECT * FROM students _____ enrollments ON students.id = enrollments.student_id;\n```",
+      "hint": "Which keyword is used for matching rows in both tables?",
+      "help": {
+        "concept": "The the missing term keyword is used to combine rows from two tables where the join condition is met.",
+        "hint_1": "Look for the keyword that means 'matching rows only'.",
+        "hint_2": "It's the most common type of join and uses the word 'INNER'."
+      },
+      "template": "SELECT * FROM students {1} enrollments ON students.id = enrollments.student_id;",
+      "choices": [
+        "INNER JOIN",
+        "LEFT JOIN",
+        "RIGHT JOIN",
+        "FULL JOIN"
+      ]
+    },
+    "quiz-inner-join-drag-order": {
+      "title": "Order the INNER JOIN Query",
+      "prompt": "Arrange the tokens to form a valid INNER JOIN query that lists student names and course IDs.",
+      "hint": "Start with SELECT, then FROM, then JOIN, then ON.",
+      "help": {
+        "concept": "SQL queries follow a specific order: SELECT, FROM, JOIN, ON.",
+        "hint_1": "The SELECT clause comes first, followed by FROM.",
+        "hint_2": "JOIN and ON clauses follow after FROM."
+      },
+      "tokens": {
+        "t1": "SELECT students.name, enrollments.course_id",
+        "t2": "FROM students",
+        "t3": "INNER JOIN enrollments",
+        "t4": "ON students.id = enrollments.student_id"
+      }
+    },
+    "quiz-inner-join-multi-choice": {
+      "title": "Choosing INNER JOIN Results",
+      "prompt": "Which of the following are true about INNER JOIN results? (Select all that apply.)",
+      "hint": "Think about what happens to unmatched rows and if you can join more than two tables.",
+      "help": {
+        "concept": "INNER JOIN only includes rows where the join condition is satisfied, and can be chained to join multiple tables.",
+        "hint_1": "Unmatched rows are not included.",
+        "hint_2": "You can join more than two tables using multiple INNER JOINs."
+      },
+      "options": {
+        "a": "Rows from both tables must match the join condition to appear.",
+        "b": "Rows with no match in either table are excluded.",
+        "c": "It can be used to combine more than two tables.",
+        "d": "It always returns all rows from the first table."
+      }
+    },
+    "quiz-inner-join-code-input": {
+      "title": "Write an INNER JOIN Query",
+      "prompt": "Write a SQL query to list each student's name and the title of every course they are enrolled in. Use the `students`, `enrollments`, and `courses` tables.",
+      "hint": "You'll need to join enrollments to students and courses.",
+      "help": {
+        "concept": "Use INNER JOIN to combine enrollments with students and courses, matching on the appropriate IDs.",
+        "hint_1": "Join enrollments to students using student_id, and to courses using course_id.",
+        "hint_2": "Select the student name and course title in your SELECT clause."
+      },
+      "starterCode": "-- List student name and course title for each enrollment\nSELECT"
+    }
+  }
+}

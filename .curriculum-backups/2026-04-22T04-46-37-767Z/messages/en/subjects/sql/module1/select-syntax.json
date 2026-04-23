@@ -1,0 +1,101 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_1": {
+        "select-syntax": {
+          "label": "Basic SELECT Syntax",
+          "summary": "Understand the structure of a SELECT statement.",
+          "cards": {
+            "sketch0": {
+              "title": "What is a SELECT Statement?"
+            },
+            "sketch1": {
+              "title": "Structure of a Basic SELECT Statement"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_1": {
+        "select-syntax": {
+          "sketch-what-is-select": {
+            "title": "What is a SELECT Statement?",
+            "bodyMarkdown": "The `SELECT` statement is the foundation of SQL queries. It allows you to retrieve data from one or more tables in a database. The most basic form of a SELECT statement specifies which columns you want to see and from which table."
+          },
+          "sketch-select-structure": {
+            "title": "Structure of a Basic SELECT Statement",
+            "bodyMarkdown": "A simple SELECT statement follows this structure:\n\n```sql\nSELECT column1, column2 FROM table_name;\n```\n- `SELECT` specifies the columns to retrieve.\n- `FROM` specifies the table containing those columns."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "quiz-single-choice-select-keyword": {
+      "title": "Identifying the SELECT Keyword",
+      "prompt": "Which keyword is used to retrieve data from a table in SQL?",
+      "hint": "It's the main keyword for querying data.",
+      "help": {
+        "concept": "The SELECT keyword is used in SQL to specify which columns you want to retrieve from a table.",
+        "hint_1": "Think about the most common SQL command for reading data.",
+        "hint_2": "It's the first word in a basic SQL query to get data."
+      },
+      "options": {
+        "a": "SELECT",
+        "b": "GET",
+        "c": "FETCH",
+        "d": "SHOW"
+      }
+    },
+    "quiz-drag-reorder-select-syntax": {
+      "title": "Ordering a Basic SELECT Statement",
+      "prompt": "Arrange the parts of a basic SELECT statement in the correct order.",
+      "hint": "Start with the keyword that begins the query.",
+      "help": {
+        "concept": "A basic SELECT statement starts with SELECT, lists columns, then specifies the table with FROM.",
+        "hint_1": "The statement begins with the action, then what you want, then where from.",
+        "hint_2": "SELECT comes first, FROM comes after the columns."
+      },
+      "tokens": {
+        "t1": "SELECT",
+        "t2": "column1, column2",
+        "t3": "FROM",
+        "t4": "table_name"
+      }
+    },
+    "quiz-fill-blank-select-from": {
+      "title": "Filling in the SELECT Statement",
+      "prompt": "Fill in the blank to complete the SQL statement: `SELECT name FROM ____;`",
+      "hint": "It's the table name.",
+      "help": {
+        "concept": "After FROM, you specify the table you want to query.",
+        "hint_1": "Look for the option that could be a table.",
+        "hint_2": "It's not a SQL keyword or a column name."
+      },
+      "template": "SELECT name FROM [BLANK];",
+      "choices": [
+        "students",
+        "SELECT",
+        "name",
+        "WHERE"
+      ]
+    },
+    "quiz-code-input-basic-select": {
+      "title": "Write a Basic SELECT Statement",
+      "prompt": "Write a SQL query to select the `first_name` and `last_name` columns from the `employees` table.",
+      "hint": "Use SELECT, list the columns, then FROM and the table name.",
+      "help": {
+        "concept": "A SELECT statement specifies columns after SELECT and the table after FROM.",
+        "hint_1": "Remember to separate column names with a comma.",
+        "hint_2": "The table name is 'employees'."
+      },
+      "starterCode": "-- Write your SQL query below\n"
+    }
+  }
+}

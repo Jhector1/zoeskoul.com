@@ -1,0 +1,117 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_5": {
+        "count-sum-avg": {
+          "label": "COUNT, SUM, AVG",
+          "summary": "Calculate totals and averages from data.",
+          "cards": {
+            "sketch0": {
+              "title": "Introduction to COUNT, SUM, and AVG"
+            },
+            "sketch1": {
+              "title": "Examples with the sales_kpi Dataset"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_5": {
+        "count-sum-avg": {
+          "intro-aggregates": {
+            "title": "Introduction to COUNT, SUM, and AVG",
+            "bodyMarkdown": "SQL aggregate functions help you quickly summarize data. The most common are:\n\n- **COUNT**: Counts the number of rows.\n- **SUM**: Adds up values in a column.\n- **AVG**: Calculates the average value in a column.\n\nFor example, to count all orders in the `orders` table:\n\n```sql\nSELECT COUNT(*) FROM orders;\n```\n\nTo find the total quantity of items ordered:\n\n```sql\nSELECT SUM(quantity) FROM orders;\n```\n\nTo get the average unit price:\n\n```sql\nSELECT AVG(unit_price) FROM orders;\n```\n\nYou can also use `WHERE` to filter rows before aggregation."
+          },
+          "aggregate-examples": {
+            "title": "Examples with the sales_kpi Dataset",
+            "bodyMarkdown": "Suppose you want to analyze the `orders` table in the `sales_kpi` dataset:\n\n- **Count paid orders:**\n\n```sql\nSELECT COUNT(*) FROM orders WHERE status = 'paid';\n```\n\n- **Sum of quantities for 'Stationery' category:**\n\n```sql\nSELECT SUM(quantity) FROM orders WHERE category = 'Stationery';\n```\n\n- **Average unit price for 'Art' category:**\n\n```sql\nSELECT AVG(unit_price) FROM orders WHERE category = 'Art';\n```\n\nThese queries help you answer business questions like \"How many orders were paid?\" or \"What is the average price of art supplies?\""
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "count-orders-single-choice": {
+      "title": "Counting All Orders",
+      "prompt": "Which SQL query counts the total number of rows in the `orders` table?",
+      "hint": "Which function counts all rows, regardless of column?",
+      "help": {
+        "concept": "COUNT(*) returns the number of rows in the correct answer table.",
+        "hint_1": "COUNT(*) counts every row, even if there are NULLs.",
+        "hint_2": "SUM and AVG are for numeric columns, not for counting rows."
+      },
+      "options": {
+        "a": "SELECT COUNT(*) FROM orders;",
+        "b": "SELECT SUM(*) FROM orders;",
+        "c": "SELECT AVG(*) FROM orders;",
+        "d": "SELECT COUNT(quantity) FROM orders WHERE status = 'paid';"
+      }
+    },
+    "sum-quantity-code-input": {
+      "title": "Total Quantity Ordered",
+      "prompt": "Write a SQL query to find the total quantity of items ordered (sum of the `quantity` column) in the `orders` table.",
+      "hint": "Use SUM on the quantity column.",
+      "help": {
+        "concept": "SUM adds up all values in a numeric column.",
+        "hint_1": "The SUM function takes a column name as its argument.",
+        "hint_2": "You want the total of the quantity column from the orders table."
+      },
+      "starterCode": "-- Write your query here"
+    },
+    "avg-unit-price-fill-blank": {
+      "title": "Average Unit Price",
+      "prompt": "Fill in the blank to calculate the average unit price from the `orders` table:\n\n```sql\nSELECT ____ (unit_price) FROM orders;\n```",
+      "hint": "Which function calculates the mean value?",
+      "help": {
+        "concept": "the missing term returns the average (mean) of a numeric column.",
+        "hint_1": "the missing term is used to get the mean value.",
+        "hint_2": "You want the average price, not the sum or count."
+      },
+      "template": "SELECT ____ (unit_price) FROM orders;",
+      "choices": [
+        "SUM",
+        "AVG",
+        "COUNT",
+        "MIN"
+      ]
+    },
+    "multi-choice-aggregate-functions": {
+      "title": "Choosing Aggregate Functions",
+      "prompt": "Which of the following SQL functions can be used to summarize numeric data in the `orders` table? Select all that apply.",
+      "hint": "Think about which are aggregate functions.",
+      "help": {
+        "concept": "Aggregate functions summarize data, such as SUM, AVG, and COUNT.",
+        "hint_1": "GROUP BY is the correct answer clause, not an aggregate function.",
+        "hint_2": "SUM, AVG, and COUNT are all aggregate functions."
+      },
+      "options": {
+        "a": "SUM",
+        "b": "AVG",
+        "c": "COUNT",
+        "d": "GROUP BY"
+      }
+    },
+    "drag-reorder-aggregate-steps": {
+      "title": "Steps to Calculate Average Quantity",
+      "prompt": "Arrange the steps to calculate the average quantity ordered using SQL.",
+      "hint": "Start with SELECT, end with running the query.",
+      "help": {
+        "concept": "Writing a SQL aggregate query involves selecting, specifying the function and table, then executing.",
+        "hint_1": "First, write SELECT, then choose the function and table.",
+        "hint_2": "The last step is always to the correct answer."
+      },
+      "tokens": {
+        "t1": "Write SELECT statement",
+        "t2": "Use AVG function on quantity column",
+        "t3": "Specify FROM orders",
+        "t4": "Run the query"
+      }
+    }
+  }
+}

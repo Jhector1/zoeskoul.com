@@ -1,0 +1,130 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_7": {
+        "aggregation-challenge": {
+          "label": "Aggregation Challenge",
+          "summary": "Summarize and analyze data using aggregate functions.",
+          "cards": {
+            "sketch0": {
+              "title": "Understanding SQL Aggregation"
+            },
+            "project": {
+              "title": "Aggregate Data from Products Catalog"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "projectSteps": {
+            "agg-single-choice-1": {
+              "title": "Which SQL function returns the number of rows in a group?"
+            },
+            "agg-multi-choice-1": {
+              "title": "Identify Aggregate Functions"
+            },
+            "agg-drag-reorder-1": {
+              "title": "Order the Steps: Aggregation Query"
+            },
+            "agg-fill-blank-1": {
+              "title": "Fill in the Aggregate Function"
+            },
+            "agg-code-input-1": {
+              "title": "SQL Aggregation Practice"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_7": {
+        "aggregation-challenge": {
+          "intro-aggregation": {
+            "title": "Understanding SQL Aggregation",
+            "bodyMarkdown": "SQL aggregate functions allow you to summarize data across multiple rows. Common functions include COUNT, SUM, AVG, MIN, and MAX. These are often used with GROUP BY to analyze data by categories or groups."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "agg-single-choice-1": {
+      "title": "Which SQL function returns the number of rows in a group?",
+      "prompt": "Select the aggregate function that counts the number of rows in a result set.",
+      "hint": "It's the function used to tally up rows.",
+      "help": {
+        "concept": "COUNT() is used to count the number of rows that match a specified condition.",
+        "hint_1": "Think about which function is used to determine the total number of entries.",
+        "hint_2": "This function is often used as COUNT(*) to count all rows."
+      },
+      "options": {
+        "a": "SUM()",
+        "b": "COUNT()",
+        "c": "AVG()",
+        "d": "MAX()"
+      }
+    },
+    "agg-multi-choice-1": {
+      "title": "Identify Aggregate Functions",
+      "prompt": "Which of the following are SQL aggregate functions? Select all that apply.",
+      "hint": "Some options are not functions.",
+      "help": {
+        "concept": "Aggregate functions perform calculations on multiple rows and return a single value.",
+        "hint_1": "Look for options that are functions, not clauses.",
+        "hint_2": "GROUP BY and ORDER BY are clauses, not aggregate functions."
+      },
+      "options": {
+        "a": "SUM()",
+        "b": "GROUP BY",
+        "c": "AVG()",
+        "d": "MIN()",
+        "e": "ORDER BY"
+      }
+    },
+    "agg-drag-reorder-1": {
+      "title": "Order the Steps: Aggregation Query",
+      "prompt": "Arrange the steps to write a SQL query that shows the total price of all products in the 'products_catalog' table.",
+      "hint": "Start with SELECT, then FROM, then finish.",
+      "help": {
+        "concept": "A basic aggregation query starts with SELECT, specifies the aggregate function, then the table.",
+        "hint_1": "The SELECT clause comes before FROM.",
+        "hint_2": "The query ends after specifying the table."
+      },
+      "tokens": {
+        "t1": "SELECT SUM(price)",
+        "t2": "FROM products_catalog",
+        "t3": "END QUERY"
+      }
+    },
+    "agg-fill-blank-1": {
+      "title": "Fill in the Aggregate Function",
+      "prompt": "Complete the query to find the average price in the products_catalog table:\n\nSELECT ___(price) FROM products_catalog;",
+      "hint": "Which function calculates the mean?",
+      "help": {
+        "concept": "the missing term() computes the average value of a numeric column.",
+        "hint_1": "This function is used to find the mean value.",
+        "hint_2": "It's not SUM or COUNT, but the one for averages."
+      },
+      "template": "SELECT {blank}(price) FROM products_catalog;",
+      "choices": [
+        "SUM",
+        "AVG",
+        "COUNT",
+        "MIN"
+      ]
+    },
+    "agg-code-input-1": {
+      "title": "SQL Aggregation Practice",
+      "prompt": "Write a SQL query to find the highest price in the products_catalog table.",
+      "hint": "Use an aggregate function to find the maximum value.",
+      "help": {
+        "concept": "The MAX() function returns the largest value in a column.",
+        "hint_1": "Think about which function finds the highest value.",
+        "hint_2": "Apply MAX() to the price column in your SELECT statement."
+      },
+      "starterCode": "-- Write your SQL query below\n"
+    }
+  }
+}

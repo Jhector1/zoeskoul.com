@@ -1,0 +1,124 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_0": {
+        "sql-environments": {
+          "label": "SQL Environments and Tools",
+          "summary": "Discover common tools and environments for running SQL queries.",
+          "cards": {
+            "sketch0": {
+              "title": "What is an SQL Environment?"
+            },
+            "sketch1": {
+              "title": "Common SQL Tools"
+            },
+            "sketch2": {
+              "title": "Connecting to a Database"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_0": {
+        "sql-environments": {
+          "sketch-what-is-sql-env": {
+            "title": "What is an SQL Environment?",
+            "bodyMarkdown": "An **SQL environment** is any tool or platform where you can write and run SQL queries to interact with a database. These environments help you connect to databases, write queries, and view results. They range from simple command-line tools to advanced graphical applications."
+          },
+          "sketch-common-tools": {
+            "title": "Common SQL Tools",
+            "bodyMarkdown": "Some popular SQL environments include:\n\n- **Command-line interfaces (CLI):** Tools like `sqlite3`, `psql` (PostgreSQL), or `mysql` let you type SQL commands directly.\n- **Graphical user interfaces (GUI):** Applications like DBeaver, DB Browser for SQLite, or MySQL Workbench provide visual ways to browse tables and run queries.\n- **Online editors:** Websites such as SQL Fiddle or DB Fiddle let you practice SQL in your browser.\n- **Programming language libraries:** Many languages (like Python's `sqlite3` or JavaScript's `node-sqlite3`) allow you to run SQL queries from code."
+          },
+          "sketch-connecting-db": {
+            "title": "Connecting to a Database",
+            "bodyMarkdown": "To use SQL, you first need to connect to a database. This usually involves:\n\n1. **Choosing your environment** (CLI, GUI, or online tool)\n2. **Providing connection details** (like database file, server address, username, and password)\n3. **Opening the connection** and starting to write queries\n\nFor example, with the `sqlite3` CLI, you can connect to a database file by running:\n\n```\nsqlite3 students_intro.db\n```\n\nOnce connected, you can run queries like:\n\n```\nSELECT * FROM students;\n```"
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "quiz-sql-env-single-choice": {
+      "title": "Which of these is a graphical SQL environment?",
+      "prompt": "Select the tool that provides a graphical interface for running SQL queries.",
+      "hint": "Think about which tool uses windows, buttons, and menus.",
+      "help": {
+        "concept": "Graphical SQL environments use a visual interface, unlike command-line tools.",
+        "hint_1": "Look for a tool that is not used in the terminal.",
+        "hint_2": "DB Browser for SQLite is designed with a GUI for easy database interaction."
+      },
+      "options": {
+        "a": "sqlite3 command-line",
+        "b": "DB Browser for SQLite",
+        "c": "psql terminal",
+        "d": "Python's sqlite3 library"
+      }
+    },
+    "quiz-sql-env-multi-choice": {
+      "title": "Ways to Run SQL Queries",
+      "prompt": "Which of the following are valid ways to run SQL queries? Select all that apply.",
+      "hint": "Consider which options actually execute SQL code.",
+      "help": {
+        "concept": "SQL queries can be run in various environments, but not all interfaces support SQL execution.",
+        "hint_1": "Think about which options are designed for database interaction.",
+        "hint_2": "Web browsers don't execute SQL in the address bar, but command-line tools, GUIs, and libraries do."
+      },
+      "options": {
+        "a": "Using a command-line tool like sqlite3",
+        "b": "Writing SQL in a GUI application",
+        "c": "Typing SQL into a web browser's address bar",
+        "d": "Running SQL through a programming language library"
+      }
+    },
+    "quiz-sql-env-drag-reorder": {
+      "title": "Steps to Connect to a Database",
+      "prompt": "Arrange the steps for connecting to a database in the correct order.",
+      "hint": "Think about what you need to do before you can write queries.",
+      "help": {
+        "concept": "Connecting to a database involves preparation before querying.",
+        "hint_1": "You need to select a tool and connect before writing queries.",
+        "hint_2": "First pick your tool, then connect, then start querying."
+      },
+      "tokens": {
+        "t1": "Choose your environment",
+        "t2": "Provide connection details",
+        "t3": "Open the connection",
+        "t4": "Write and run SQL queries"
+      }
+    },
+    "quiz-sql-env-fill-blank": {
+      "title": "Fill in the Blank: SQL Environment",
+      "prompt": "A(n) ____ is a tool or platform where you can write and run SQL queries.",
+      "hint": "It's a general term for the place where you run SQL.",
+      "help": {
+        "concept": "An SQL the missing term is the context or tool for running SQL queries.",
+        "hint_1": "It's not a specific database or table.",
+        "hint_2": "The word starts with 'e' and describes the overall tool or setting."
+      },
+      "template": "A(n) [____] is a tool or platform where you can write and run SQL queries.",
+      "choices": [
+        "environment",
+        "database",
+        "table",
+        "query"
+      ]
+    },
+    "quiz-sql-env-code-input": {
+      "title": "Practice: Run a Simple Query",
+      "prompt": "Write an SQL query to show all columns and rows from the 'students' table.",
+      "hint": "Use SELECT with a wildcard to get all columns.",
+      "help": {
+        "concept": "The SELECT statement retrieves data from a table. Using * selects all columns.",
+        "hint_1": "The query should select everything from the 'students' table.",
+        "hint_2": "Use SELECT, then *, then FROM and the table name."
+      },
+      "starterCode": "-- Write your SQL query below\n"
+    }
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_7": {
+        "data-cleanup-task": {
+          "label": "Data Cleanup Task",
+          "summary": "Use string functions and filtering to clean up data.",
+          "cards": {
+            "sketch0": {
+              "title": "Why Data Cleanup Matters"
+            },
+            "project": {
+              "title": "Customer Data Cleanup Mini-Project"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "projectSteps": {
+            "quiz-trim-spaces": {
+              "title": "Trimming Extra Spaces"
+            },
+            "quiz-find-duplicates": {
+              "title": "Identifying Duplicate Records"
+            },
+            "quiz-standardize-case": {
+              "title": "Standardizing Text Case"
+            },
+            "quiz-cleanup-sql-task": {
+              "title": "Remove Extra Spaces in Customer Names"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_7": {
+        "data-cleanup-task": {
+          "sketch-intro-cleanup": {
+            "title": "Why Data Cleanup Matters",
+            "bodyMarkdown": "Raw data often contains inconsistencies, extra spaces, or unwanted characters. Cleaning up data using SQL string functions and filters helps ensure your queries return accurate and useful results. In this topic, you'll practice using SQL to standardize and filter messy data."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "quiz-trim-spaces": {
+      "title": "Trimming Extra Spaces",
+      "prompt": "Which SQL function removes leading and trailing spaces from a text column?",
+      "hint": "Think about a function that targets spaces at the start and end.",
+      "help": {
+        "concept": "The TRIM() function is used to remove unwanted spaces from the beginning and end of a string.",
+        "hint_1": "It's a function specifically for removing whitespace.",
+        "hint_2": "This function is often used before comparing or displaying text values."
+      },
+      "options": {
+        "a": "TRIM()",
+        "b": "REPLACE()",
+        "c": "SUBSTR()",
+        "d": "CONCAT()"
+      }
+    },
+    "quiz-find-duplicates": {
+      "title": "Identifying Duplicate Records",
+      "prompt": "Which of the following can help you find duplicate rows in a table? (Select all that apply)",
+      "hint": "Duplicates are often found by grouping and counting.",
+      "help": {
+        "concept": "GROUP BY groups rows with the same values, and HAVING COUNT(*) > 1 filters for groups with duplicates.",
+        "hint_1": "Look for options that group and filter based on counts.",
+        "hint_2": "You need to group similar rows and then filter for those that appear more than once."
+      },
+      "options": {
+        "a": "GROUP BY",
+        "b": "HAVING COUNT(*) > 1",
+        "c": "ORDER BY",
+        "d": "DISTINCT"
+      }
+    },
+    "quiz-standardize-case": {
+      "title": "Standardizing Text Case",
+      "prompt": "To make all names in a column uppercase, use the ____ function.",
+      "hint": "Think about a function that changes text to capital letters.",
+      "help": {
+        "concept": "The the missing term() function converts all letters in a string to uppercase.",
+        "hint_1": "It's the opposite of LOWER().",
+        "hint_2": "This function is useful for standardizing names or codes."
+      },
+      "template": "To make all names in a column uppercase, use the ____ function.",
+      "choices": [
+        "UPPER",
+        "LOWER",
+        "LENGTH",
+        "ROUND"
+      ]
+    },
+    "quiz-cleanup-sql-task": {
+      "title": "Remove Extra Spaces in Customer Names",
+      "prompt": "Write a SQL query to select all columns from the 'customers' table, but make sure the 'name' column has no leading or trailing spaces.",
+      "hint": "Use a string function to clean up the 'name' column.",
+      "help": {
+        "concept": "TRIM() removes spaces from the start and end of a string. You can use it in your SELECT statement to clean up the 'name' column.",
+        "hint_1": "Apply TRIM() to the 'name' column in your SELECT.",
+        "hint_2": "You can alias the cleaned column as 'name' for clarity."
+      },
+      "starterCode": "SELECT __ FROM customers;"
+    }
+  }
+}

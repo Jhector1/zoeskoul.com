@@ -1,0 +1,123 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_5": {
+        "min-max": {
+          "label": "MIN and MAX",
+          "summary": "Find minimum and maximum values in columns.",
+          "cards": {
+            "sketch0": {
+              "title": "What are MIN and MAX?"
+            },
+            "sketch1": {
+              "title": "Using MIN and MAX on Different Columns"
+            },
+            "sketch2": {
+              "title": "MIN and MAX with GROUP BY"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_5": {
+        "min-max": {
+          "intro-min-max": {
+            "title": "What are MIN and MAX?",
+            "bodyMarkdown": "The `MIN` and `MAX` aggregate functions in SQL help you find the smallest and largest values in a column. For example, you can use them to find the lowest and highest order quantities, prices, or dates in your data.\n\n**Example:**\n\nTo find the lowest and highest unit price in the `orders` table:\n\n```sql\nSELECT MIN(unit_price) AS lowest_price, MAX(unit_price) AS highest_price FROM orders;\n```\n\nThis query returns the minimum and maximum values from the `unit_price` column."
+          },
+          "min-max-multiple-columns": {
+            "title": "Using MIN and MAX on Different Columns",
+            "bodyMarkdown": "You can use `MIN` and `MAX` on any numeric or date column. You can also use them together in a single query to compare different columns.\n\n**Example:**\n\nFind the earliest and latest order dates:\n\n```sql\nSELECT MIN(order_date) AS first_order, MAX(order_date) AS last_order FROM orders;\n```\n\nThis will show you the range of order dates in your data."
+          },
+          "min-max-group-by": {
+            "title": "MIN and MAX with GROUP BY",
+            "bodyMarkdown": "To find the minimum or maximum value for each group (like each region or category), combine `MIN` or `MAX` with `GROUP BY`.\n\n**Example:**\n\nFind the highest quantity ordered in each region:\n\n```sql\nSELECT region, MAX(quantity) AS max_quantity\nFROM orders\nGROUP BY region;\n```\n\nThis query returns the maximum quantity for each region."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "min-max-single-choice-basic": {
+      "title": "Which SQL function finds the largest value in a column?",
+      "prompt": "You want to find the highest unit price in the `orders` table. Which function should you use?",
+      "hint": "Think about which function returns the greatest value.",
+      "help": {
+        "concept": "`MAX` returns the largest value in a column, while `MIN` returns the smallest.",
+        "hint_1": "`SUM` adds values, `COUNT` counts rows, but only one function finds the highest value.",
+        "hint_2": "Look for the function that gives you the maximum value in a column."
+      },
+      "options": {
+        "a": "SUM",
+        "b": "MIN",
+        "c": "MAX",
+        "d": "COUNT"
+      }
+    },
+    "min-max-multi-choice-usage": {
+      "title": "Where can you use MIN and MAX?",
+      "prompt": "Select all columns from the `orders` table where you can use the `MIN` or `MAX` function.",
+      "hint": "Think about which columns have values that can be ordered or compared.",
+      "help": {
+        "concept": "`MIN` and `MAX` work on numeric and date columns, not on text columns like names.",
+        "hint_1": "You can't find the minimum or maximum of names in the correct answer meaningful way.",
+        "hint_2": "Choose columns with numbers or dates, not text."
+      },
+      "options": {
+        "a": "quantity",
+        "b": "unit_price",
+        "c": "order_date",
+        "d": "customer_name"
+      }
+    },
+    "min-max-drag-reorder": {
+      "title": "Order the steps to find the highest order quantity per region",
+      "prompt": "Arrange the steps to write a query that finds the highest order quantity for each region in the `orders` table.",
+      "hint": "Start with SELECT, then FROM, then GROUP BY.",
+      "help": {
+        "concept": "A typical SQL aggregation query starts with SELECT, then FROM, then GROUP BY if grouping is needed.",
+        "hint_1": "The SELECT clause comes first, followed by the table, then grouping.",
+        "hint_2": "Remember the standard SQL query structure: SELECT ... FROM ... GROUP BY ..."
+      },
+      "tokens": {
+        "t1": "SELECT region, MAX(quantity)",
+        "t2": "FROM orders",
+        "t3": "GROUP BY region"
+      }
+    },
+    "min-max-fill-blank-choice": {
+      "title": "Fill in the blank: Find the lowest unit price",
+      "prompt": "Complete the query to find the lowest unit price in the `orders` table.",
+      "hint": "Which function gives you the smallest value?",
+      "help": {
+        "concept": "`the missing term` returns the smallest value in a column.",
+        "hint_1": "You want the minimum, not the maximum.",
+        "hint_2": "Choose the function that finds the lowest value."
+      },
+      "template": "SELECT ___(unit_price) FROM orders;",
+      "choices": [
+        "MIN",
+        "MAX",
+        "SUM",
+        "AVG"
+      ]
+    },
+    "min-max-code-input-basic": {
+      "title": "SQL: Find the earliest order date",
+      "prompt": "Write a SQL query to find the earliest order date in the `orders` table. Name the result column `earliest_date`.",
+      "hint": "Use the MIN function on the order_date column.",
+      "help": {
+        "concept": "To find the earliest date, use MIN on a date column.",
+        "hint_1": "Apply MIN to order_date and use AS to rename the result.",
+        "hint_2": "Your query should select MIN(order_date) and give it the alias earliest_date."
+      },
+      "starterCode": "-- Write your query here"
+    }
+  }
+}

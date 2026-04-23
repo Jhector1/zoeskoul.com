@@ -1,0 +1,157 @@
+{
+  "topicId": "cross-join",
+  "subjectSlug": "sql",
+  "moduleSlug": "sql_module_6",
+  "sectionSlug": "section_6_1",
+  "prefix": "sql6",
+  "minutes": 10,
+  "topic": {
+    "labelKey": "topics.sql.sql_module_6.cross-join.label",
+    "summaryKey": "topics.sql.sql_module_6.cross-join.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_6.cross-join.cards.sketch0.title",
+      "sketchId": "intro-cross-join",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_6.cross-join.cards.sketch1.title",
+      "sketchId": "syntax-cross-join",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_6.cross-join.cards.sketch2.title",
+      "sketchId": "when-to-use-cross-join",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql.sql_module_6.cross-join.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "intro-cross-join",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_6.cross-join.intro-cross-join.title",
+      "bodyKey": "sketches.sql.sql_module_6.cross-join.intro-cross-join.bodyMarkdown"
+    },
+    {
+      "id": "syntax-cross-join",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_6.cross-join.syntax-cross-join.title",
+      "bodyKey": "sketches.sql.sql_module_6.cross-join.syntax-cross-join.bodyMarkdown"
+    },
+    {
+      "id": "when-to-use-cross-join",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_6.cross-join.when-to-use-cross-join.title",
+      "bodyKey": "sketches.sql.sql_module_6.cross-join.when-to-use-cross-join.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "cross-join-effect",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.cross-join-effect",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "d"
+      }
+    },
+    {
+      "id": "cross-join-purpose",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.cross-join-purpose",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "cross-join-syntax",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.cross-join-syntax",
+      "choiceCount": 5,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "CROSS JOIN"
+      }
+    },
+    {
+      "id": "cross-join-order",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.cross-join-order",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "cross-join-sql-task",
+      "kind": "code_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.cross-join-sql-task",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table",
+        "solutionCode": "SELECT students.name, departments.name\nFROM students\nCROSS JOIN departments;"
+      }
+    }
+  ]
+}

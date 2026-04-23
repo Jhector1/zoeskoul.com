@@ -1,0 +1,118 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_7": {
+        "data-cleanup-task": {
+          "label": "Data Cleanup Task",
+          "summary": "Use string functions and filtering to clean up data.",
+          "cards": {
+            "sketch0": {
+              "title": "Why Data Cleanup Matters"
+            },
+            "sketch1": {
+              "title": "SQL Tools for Data Cleanup"
+            },
+            "project": {
+              "title": "Customer Name Cleanup Project"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "projectSteps": {
+            "quiz-trim-function": {
+              "title": "Removing Extra Spaces"
+            },
+            "quiz-standardize-case": {
+              "title": "Standardizing Text Case"
+            },
+            "quiz-replace-character": {
+              "title": "Replacing Characters"
+            },
+            "quiz-cleanup-sql-task": {
+              "title": "Clean Up Customer Names"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_7": {
+        "data-cleanup-task": {
+          "sketch-intro-cleanup": {
+            "title": "Why Data Cleanup Matters",
+            "bodyMarkdown": "Real-world data is often messy: names may have extra spaces, inconsistent capitalization, or unwanted characters. Cleaning and standardizing data using SQL functions helps ensure accuracy and makes analysis easier."
+          },
+          "sketch-sql-cleanup-tools": {
+            "title": "SQL Tools for Data Cleanup",
+            "bodyMarkdown": "Common SQL string functions for cleaning data include:\n- `TRIM()` to remove extra spaces\n- `UPPER()` or `LOWER()` to standardize case\n- `REPLACE()` to substitute unwanted characters\n- Filtering with `WHERE` to exclude bad data\nThese tools help you prepare your data for reliable analysis."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "quiz-trim-function": {
+      "title": "Removing Extra Spaces",
+      "prompt": "Which SQL function removes leading and trailing spaces from a text column?",
+      "hint": "Think about a function that targets spaces at the start and end.",
+      "help": {
+        "concept": "The TRIM() function is used to remove unwanted spaces from the beginning and end of a string.",
+        "hint_1": "It's not REPLACE(), which substitutes specific characters.",
+        "hint_2": "Look for a function that specifically targets whitespace at the edges of text."
+      },
+      "options": {
+        "a": "TRIM()",
+        "b": "REPLACE()",
+        "c": "LOWER()",
+        "d": "CONCAT()"
+      }
+    },
+    "quiz-standardize-case": {
+      "title": "Standardizing Text Case",
+      "prompt": "Which SQL functions can you use to make all letters in a column uppercase or lowercase?",
+      "hint": "There are two functions, one for each case.",
+      "help": {
+        "concept": "UPPER() converts text to all uppercase letters, while LOWER() converts text to all lowercase.",
+        "hint_1": "TRIM() and REPLACE() do not change letter case.",
+        "hint_2": "Both UPPER() and LOWER() are used for standardizing capitalization."
+      },
+      "options": {
+        "a": "UPPER()",
+        "b": "LOWER()",
+        "c": "TRIM()",
+        "d": "REPLACE()"
+      }
+    },
+    "quiz-replace-character": {
+      "title": "Replacing Characters",
+      "prompt": "Fill in the blank: To replace all dashes '-' with spaces in a column, use _____.",
+      "hint": "What do you want the dash to become?",
+      "help": {
+        "concept": "The REPLACE() function substitutes all occurrences of a substring with another string.",
+        "hint_1": "You want to turn dashes into spaces.",
+        "hint_2": "The replacement string should be a single space character."
+      },
+      "template": "REPLACE(column_name, '-', _____)",
+      "choices": [
+        "' '",
+        "''",
+        "'-'",
+        "'_'"
+      ]
+    },
+    "quiz-cleanup-sql-task": {
+      "title": "Clean Up Customer Names",
+      "prompt": "Write a SQL query to select the first_name and last_name columns from the customers_cleanup table, but with all leading/trailing spaces removed and all letters in uppercase. Name the columns as cleaned_first and cleaned_last.",
+      "hint": "Use both TRIM() and UPPER() on each name column.",
+      "help": {
+        "concept": "Combine string functions to clean and standardize text in SQL queries. Use TRIM() to remove spaces and UPPER() to convert to uppercase.",
+        "hint_1": "Wrap TRIM() inside UPPER() for each column.",
+        "hint_2": "Alias the cleaned columns as cleaned_first and cleaned_last."
+      },
+      "starterCode": "-- Write your query here\n"
+    }
+  }
+}

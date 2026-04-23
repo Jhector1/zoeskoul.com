@@ -1,0 +1,154 @@
+{
+  "topicId": "min-max",
+  "subjectSlug": "sql",
+  "moduleSlug": "sql_module_5",
+  "sectionSlug": "section_5_1",
+  "prefix": "sql5",
+  "minutes": 15,
+  "topic": {
+    "labelKey": "topics.sql.sql_module_5.min-max.label",
+    "summaryKey": "topics.sql.sql_module_5.min-max.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_5.min-max.cards.sketch0.title",
+      "sketchId": "intro-min-max",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_5.min-max.cards.sketch1.title",
+      "sketchId": "min-max-multiple-columns",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_5.min-max.cards.sketch2.title",
+      "sketchId": "min-max-group-by",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql.sql_module_5.min-max.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "intro-min-max",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_5.min-max.intro-min-max.title",
+      "bodyKey": "sketches.sql.sql_module_5.min-max.intro-min-max.bodyMarkdown"
+    },
+    {
+      "id": "min-max-multiple-columns",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_5.min-max.min-max-multiple-columns.title",
+      "bodyKey": "sketches.sql.sql_module_5.min-max.min-max-multiple-columns.bodyMarkdown"
+    },
+    {
+      "id": "min-max-group-by",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_5.min-max.min-max-group-by.title",
+      "bodyKey": "sketches.sql.sql_module_5.min-max.min-max-group-by.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "min-max-single-choice-basic",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.min-max-single-choice-basic",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "c"
+      }
+    },
+    {
+      "id": "min-max-multi-choice-usage",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.min-max-multi-choice-usage",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "min-max-drag-reorder",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.min-max-drag-reorder",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "min-max-fill-blank-choice",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.min-max-fill-blank-choice",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "MIN"
+      }
+    },
+    {
+      "id": "min-max-code-input-basic",
+      "kind": "code_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.min-max-code-input-basic",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_kpi",
+        "resultShape": "table",
+        "solutionCode": "SELECT MIN(order_date) AS earliest_date FROM orders;"
+      }
+    }
+  ]
+}

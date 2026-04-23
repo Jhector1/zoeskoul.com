@@ -1,80 +1,36 @@
-import type { ManifestRuntimeDefaults } from "@zoeskoul/curriculum-contracts";
-
-export type JsonObject = { readonly [key: string]: unknown };
-
-export type TopicPoolItem = {
-    key: string;
-    w: number;
-    kind?: string;
-    purpose?: "quiz" | "project";
-};
-
-export type TopicMeta = {
-    label: string;
-    minutes: number;
-    preferKind?: string | null;
-    pool?: readonly TopicPoolItem[];
-    runtimeDefaults?: ManifestRuntimeDefaults | null;
-};
-
-export type TopicDefInput = {
-    id: string;
-    order?: number;
-    variant?: string | null;
-    titleKey?: string;
-    description?: string | null;
-    meta: TopicMeta;
-};
-
-export type SubjectTopicBundle = {
-    def: TopicDefInput;
-    review?: unknown;
-    sketches?: Record<string, unknown>;
-    generator?: unknown;
-    locale?: JsonObject;
-};
-
-export type GeneratedSubjectTopicBundle = SubjectTopicBundle & {
-    generator: unknown;
-};
-
-export function defineTopicBundle<T extends SubjectTopicBundle>(input: T): T {
-    return input;
-}
-
-
-
-
+import { defineTopicBundle } from "../topic/defineTopicBundle.js";
 import { buildReviewFromManifest } from "../review/buildReviewFromManifest.js";
 import { buildSketchesFromManifest } from "../sketches/buildSketchesFromManifest.js";
 
-export function defineJsonTopicBundle(
-    manifest: any,
-    profileId: string,
-): GeneratedSubjectTopicBundle {
-    const generatorTopic = {
-        id: manifest.topicId,
-        pool: manifest.exercises.map((ex: any) => ({
-            key: ex.id,
-            w: ex.weight ?? 1,
-            kind: ex.kind,
-            purpose: ex.purpose,
-        })),
-        manifest,
-        profileId,
-    };
+function defineJsonGeneratorTopic(manifest: any, profileId: string) {
+  const pool = manifest.exercises.map((exercise: any) => ({
+    key: exercise.id,
+    w: exercise.weight ?? 1,
+    kind: exercise.kind,
+    purpose: exercise.purpose ?? "quiz",
+  }));
 
-    const review = buildReviewFromManifest({
-        manifest,
-        pool: generatorTopic.pool,
-    });
+  return {
+    id: `${manifest.prefix}.${manifest.topicId}`,
+    profileId,
+    pool,
+  };
+}
 
-    const sketches = buildSketchesFromManifest(manifest);
+export function defineJsonTopicBundle(manifest: any, profileId: string) {
+  const generatorTopic = defineJsonGeneratorTopic(manifest, profileId);
 
-    return defineTopicBundle({
-        def: review.def,
-        review: review.topic,
-        sketches,
-        generator: generatorTopic,
-    });
+  const review = buildReviewFromManifest({
+    manifest,
+    pool: generatorTopic.pool,
+  });
+
+  const sketches = buildSketchesFromManifest(manifest);
+
+  return defineTopicBundle({
+    def: review.def,
+    review: review.topic,
+    sketches,
+    generator: generatorTopic,
+  });
 }

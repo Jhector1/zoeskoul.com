@@ -1,0 +1,117 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_4": {
+        "like-patterns": {
+          "label": "Pattern Matching with LIKE",
+          "summary": "Search for patterns in text using LIKE and wildcards.",
+          "cards": {
+            "sketch0": {
+              "title": "Introduction to LIKE"
+            },
+            "sketch1": {
+              "title": "Wildcards in LIKE"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_4": {
+        "like-patterns": {
+          "sketch-like-intro": {
+            "title": "Introduction to LIKE",
+            "bodyMarkdown": "The `LIKE` operator in SQL is used to search for a specified pattern in a column. It is commonly used with text data to find values that match a certain format or contain specific characters. Wildcards such as `%` (any sequence of characters) and `_` (a single character) help define flexible patterns."
+          },
+          "sketch-like-wildcards": {
+            "title": "Wildcards in LIKE",
+            "bodyMarkdown": "The `%` wildcard matches zero or more characters, while the `_` wildcard matches exactly one character. For example, `WHERE name LIKE 'A%'` finds all names starting with 'A', and `WHERE code LIKE 'A_1'` matches codes like 'AB1' or 'AC1'."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "quiz-like-wildcard-meaning": {
+      "title": "Understanding LIKE Wildcards",
+      "prompt": "Which wildcard in SQL's LIKE operator matches any sequence of characters (including none)?",
+      "hint": "Think about which symbol is used to match multiple characters.",
+      "help": {
+        "concept": "The percent sign (%) in LIKE matches any sequence of characters, including an empty string.",
+        "hint_1": "It's not the underscore; that matches a single character.",
+        "hint_2": "This wildcard is used to find values like 'A%' for anything starting with 'A'."
+      },
+      "options": {
+        "a": "The underscore (_)",
+        "b": "The percent sign (%)",
+        "c": "The hash (#)",
+        "d": "The asterisk (*)"
+      }
+    },
+    "quiz-like-pattern-match": {
+      "title": "Selecting Patterns with LIKE",
+      "prompt": "Which of the following patterns would match the string 'cat' using LIKE?",
+      "hint": "Try substituting the wildcards with possible characters.",
+      "help": {
+        "concept": "LIKE patterns can use % for any sequence and _ for a single character. Multiple patterns may match the same string.",
+        "hint_1": "Check if each pattern could result in 'cat' when wildcards are replaced.",
+        "hint_2": "All these patterns can match 'cat' in different ways."
+      },
+      "options": {
+        "a": "'c_t'",
+        "b": "'ca%'",
+        "c": "'%at'",
+        "d": "'c%t'"
+      }
+    },
+    "quiz-like-drag-order": {
+      "title": "Order the LIKE Patterns by Specificity",
+      "prompt": "Arrange these LIKE patterns from most specific to least specific (top = most specific).",
+      "hint": "Which pattern matches only 'cat' and which matches many possibilities?",
+      "help": {
+        "concept": "A pattern without wildcards is most specific; more wildcards mean less specificity.",
+        "hint_1": "Patterns with more wildcards are less specific.",
+        "hint_2": "The pattern with only literal characters is the most specific."
+      },
+      "tokens": {
+        "t1": "'cat'",
+        "t2": "'c_t'",
+        "t3": "'c%'",
+        "t4": "'%'"
+      }
+    },
+    "quiz-like-fill-blank": {
+      "title": "Fill in the LIKE Pattern",
+      "prompt": "Complete the pattern to match any name starting with 'A' and ending with 'n'.\n\nSELECT * FROM students WHERE name LIKE ____;",
+      "hint": "You need a pattern that allows any characters between 'A' and 'n'.",
+      "help": {
+        "concept": "The % wildcard allows for any number of characters between the start and end letters.",
+        "hint_1": "The pattern should start with 'A', have any characters, and end with 'n'.",
+        "hint_2": "Use % between 'A' and 'n' to allow for any sequence."
+      },
+      "template": "SELECT * FROM students WHERE name LIKE {blank};",
+      "choices": [
+        "'A%n'",
+        "'A_n'",
+        "'A% n'",
+        "'A_n%'"
+      ]
+    },
+    "quiz-like-sql-query": {
+      "title": "Write a LIKE Query",
+      "prompt": "Write a SQL query to select all products from the products_catalog dataset where the product name contains the word 'phone' anywhere in the name.",
+      "hint": "Use % wildcards to match 'phone' anywhere in the product name.",
+      "help": {
+        "concept": "To match a substring anywhere in a text, wrap it with % wildcards in the LIKE pattern.",
+        "hint_1": "The pattern should have % before and after 'phone'.",
+        "hint_2": "LIKE '%phone%' will match any product name containing 'phone'."
+      },
+      "starterCode": "SELECT * FROM products_catalog\nWHERE product_name LIKE ____;"
+    }
+  }
+}

@@ -1,11 +1,10 @@
 {
   "name": "@zoeskoul/curriculum-runtime",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "private": true,
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
-
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -14,11 +13,10 @@
   },
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "typecheck": "tsc -p tsconfig.json --noEmit"
+    "clean": "rimraf dist"
   },
   "dependencies": {
     "@zoeskoul/curriculum-contracts": "workspace:*",
-    "@zoeskoul/curriculum-core": "workspace:*",
-    "@zoeskoul/curriculum-profiles": "workspace:*"
+    "@zoeskoul/curriculum-core": "workspace:*"
   }
 }

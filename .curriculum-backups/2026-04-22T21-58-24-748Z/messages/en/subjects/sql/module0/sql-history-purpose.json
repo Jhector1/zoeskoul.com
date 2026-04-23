@@ -1,0 +1,141 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_0": {
+        "sql-history-purpose": {
+          "label": "History and Purpose of SQL",
+          "summary": "Learn the origins and main uses of SQL in data management.",
+          "cards": {
+            "sketch0": {
+              "title": "The Origins of SQL"
+            },
+            "sketch1": {
+              "title": "What is SQL Used For?"
+            },
+            "sketch2": {
+              "title": "Example: Querying a Students Table"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_0": {
+        "sql-history-purpose": {
+          "sketch-history-sql": {
+            "title": "The Origins of SQL",
+            "bodyMarkdown": "SQL, or Structured Query Language, was developed in the 1970s at IBM by Donald D. Chamberlin and Raymond F. Boyce. It was designed to manage and query data stored in relational databases, a new concept at the time. The first version was called SEQUEL, later shortened to SQL. Over time, SQL became the standard language for interacting with relational databases, and was adopted by the American National Standards Institute (ANSI) in 1986."
+          },
+          "sketch-purpose-sql": {
+            "title": "What is SQL Used For?",
+            "bodyMarkdown": "SQL is used to store, retrieve, update, and delete data in relational databases. It allows users to define the structure of data (using CREATE and ALTER statements), manipulate data (using INSERT, UPDATE, DELETE), and query data (using SELECT). SQL is essential for data analysis, reporting, and application development, making it a foundational tool in data management."
+          },
+          "sketch-sql-example": {
+            "title": "Example: Querying a Students Table",
+            "bodyMarkdown": "Suppose we have a table called `students` with columns: `id`, `name`, `grade`, `age`, and `city`. To find all students who have a grade of 'A', you could use:\n\n```sql\nSELECT * FROM students WHERE grade = 'A';\n```\nThis query returns all rows where the `grade` column is 'A'."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "quiz-sql-origin": {
+      "title": "Who developed SQL?",
+      "prompt": "Who were the original developers of SQL?",
+      "hint": "Think about IBM in the 1970s.",
+      "help": {
+        "concept": "SQL was created at IBM by two computer scientists.",
+        "hint_1": "It was not developed at the correct answer tech company founded after 1980.",
+        "hint_2": "The correct answer involves IBM and two researchers: Chamberlin and Boyce."
+      },
+      "options": {
+        "a": "Donald D. Chamberlin and Raymond F. Boyce at IBM",
+        "b": "Bill Gates at Microsoft",
+        "c": "Larry Page and Sergey Brin at Google",
+        "d": "Mark Zuckerberg at Facebook"
+      }
+    },
+    "quiz-sql-purpose": {
+      "title": "Main Purposes of SQL",
+      "prompt": "Which of the following are main purposes of SQL? Select all that apply.",
+      "hint": "Focus on database-related tasks.",
+      "help": {
+        "concept": "SQL is used for managing and manipulating data in relational databases.",
+        "hint_1": "SQL is not used for communication tasks like emailing.",
+        "hint_2": "All options except sending emails are core SQL purposes."
+      },
+      "options": {
+        "a": "Querying data",
+        "b": "Defining data structure",
+        "c": "Sending emails",
+        "d": "Updating records",
+        "e": "Deleting data"
+      }
+    },
+    "quiz-sql-standardization": {
+      "title": "SQL Standardization",
+      "prompt": "In what year did SQL become an ANSI standard?",
+      "hint": "It was standardized in the 1980s.",
+      "help": {
+        "concept": "SQL was officially recognized as a standard language for relational databases by ANSI.",
+        "hint_1": "It happened before the 1990s.",
+        "hint_2": "The correct year is in the mid-1980s."
+      },
+      "options": {
+        "a": "1970",
+        "b": "1986",
+        "c": "1995",
+        "d": "2001"
+      }
+    },
+    "quiz-sql-drag-reorder": {
+      "title": "SQL Query Steps",
+      "prompt": "Arrange the steps for querying data from a table in the correct order.",
+      "hint": "Start with the statement, end with running it.",
+      "help": {
+        "concept": "A typical SQL query starts with SELECT, specifies the table, adds conditions, then is executed.",
+        "hint_1": "You must write the query before you can run it.",
+        "hint_2": "SELECT comes first, execution comes last."
+      },
+      "tokens": {
+        "t1": "Write the SELECT statement",
+        "t2": "Specify the table name",
+        "t3": "Add a WHERE clause to filter results",
+        "t4": "Execute the query"
+      }
+    },
+    "quiz-sql-fill-blank": {
+      "title": "Fill in the SQL Keyword",
+      "prompt": "Fill in the blank: To retrieve all columns from the students table, use SELECT ___ FROM students;",
+      "hint": "It's a single character used as a wildcard.",
+      "help": {
+        "concept": "The asterisk (*) is used in SQL to select all columns.",
+        "hint_1": "It's not a word, but a symbol.",
+        "hint_2": "It's the same symbol used for multiplication."
+      },
+      "template": "SELECT ___ FROM students;",
+      "choices": [
+        "*",
+        "ALL",
+        "COLUMNS",
+        "EVERYTHING"
+      ]
+    },
+    "quiz-sql-code-input": {
+      "title": "Write a Simple SQL Query",
+      "prompt": "Write an SQL query to list the names and grades of all students who live in 'Chicago'.",
+      "hint": "Use SELECT with the correct columns and a WHERE clause for the city.",
+      "help": {
+        "concept": "To filter rows in SQL, use the WHERE clause with the appropriate column and value.",
+        "hint_1": "You need to select only 'name' and 'grade' columns.",
+        "hint_2": "Filter for rows where city equals 'Chicago'."
+      },
+      "starterCode": "-- Write your SQL query below"
+    }
+  }
+}

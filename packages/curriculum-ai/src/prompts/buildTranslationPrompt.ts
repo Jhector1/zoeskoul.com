@@ -1,32 +1,31 @@
-import type { TranslationEntry } from "../types.js";
+import type { SubjectShapePack } from "@zoeskoul/curriculum-profiles";
 
 export function buildTranslationPrompt(args: {
-    sourceLocale: "en";
-    targetLocale: string;
-    entries: TranslationEntry[];
+  locale: string;
+  sourceLocale: string;
+  entries: Array<{ key: string; value: string }>;
+  shape: SubjectShapePack;
 }) {
-    return {
-        system: [
-            "Translate values only.",
-            "Return valid JSON only.",
-            "Return an object with exactly one top-level key named 'entries'.",
-            "Do not change any key.",
-            "Do not add entries.",
-            "Do not remove entries.",
-            "Return the same number of entries in the same order.",
-            "Each entry must keep the original key exactly.",
-            "Only translate the value field.",
-            "Preserve placeholders, inline code, code fences, variable names, and protected tokens.",
-        ].join(" "),
-        user: JSON.stringify(
-            {
-                task: "Translate entry list",
-                sourceLocale: args.sourceLocale,
-                targetLocale: args.targetLocale,
-                entries: args.entries,
-            },
-            null,
-            2,
-        ),
-    };
+  return {
+    system: [
+      "You translate ZoeSkoul curriculum message entries.",
+      "Return JSON only.",
+      "Preserve keys exactly.",
+      "Translate only values.",
+      "Keep code, SQL, Python identifiers, dataset names, and message keys unchanged.",
+      "Do not translate fenced code blocks line-by-line in a way that changes code.",
+      "Use the provided shape pack only as style/context, not as output structure.",
+      'Return: { "entries": [{ "key": "...", "value": "..." }] }',
+    ].join("\n"),
+    user: JSON.stringify(
+        {
+          sourceLocale: args.sourceLocale,
+          targetLocale: args.locale,
+          entries: args.entries,
+          shapeProfile: args.shape.profileId,
+        },
+        null,
+        2,
+    ),
+  };
 }

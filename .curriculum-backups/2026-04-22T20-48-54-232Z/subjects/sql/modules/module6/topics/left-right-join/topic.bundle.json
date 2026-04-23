@@ -1,0 +1,156 @@
+{
+  "topicId": "left-right-join",
+  "subjectSlug": "sql",
+  "moduleSlug": "sql_module_6",
+  "sectionSlug": "section_6_1",
+  "prefix": "sql6",
+  "minutes": 20,
+  "topic": {
+    "labelKey": "topics.sql.sql_module_6.left-right-join.label",
+    "summaryKey": "topics.sql.sql_module_6.left-right-join.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_6.left-right-join.cards.sketch0.title",
+      "sketchId": "sketch-left-right-join-intro",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_6.left-right-join.cards.sketch1.title",
+      "sketchId": "sketch-left-right-join-visual",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql.sql_module_6.left-right-join.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 5,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch-left-right-join-intro",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_6.left-right-join.sketch-left-right-join-intro.title",
+      "bodyKey": "sketches.sql.sql_module_6.left-right-join.sketch-left-right-join-intro.bodyMarkdown"
+    },
+    {
+      "id": "sketch-left-right-join-visual",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_6.left-right-join.sketch-left-right-join-visual.title",
+      "bodyKey": "sketches.sql.sql_module_6.left-right-join.sketch-left-right-join-visual.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "quiz-left-join-basic",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.quiz-left-join-basic",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "quiz-left-join-sql-output",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.quiz-left-join-sql-output",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "quiz-right-join-concept",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.quiz-right-join-concept",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "quiz-left-join-code",
+      "kind": "code_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.quiz-left-join-code",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table",
+        "solutionCode": "SELECT courses.title, departments.name\nFROM courses\nLEFT JOIN departments ON courses.department_id = departments.id;"
+      }
+    },
+    {
+      "id": "quiz-left-join-drag-order",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.quiz-left-join-drag-order",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "quiz-left-right-join-fill-blank",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.quiz-left-right-join-fill-blank",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "LEFT JOIN"
+      }
+    }
+  ]
+}

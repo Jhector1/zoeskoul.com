@@ -1,0 +1,88 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_5": {
+        "min-max": {
+          "label": "MIN and MAX Functions",
+          "summary": "Find minimum and maximum values in data.",
+          "cards": {
+            "sketch0": {
+              "title": "What are MIN and MAX?"
+            },
+            "sketch1": {
+              "title": "Basic Syntax"
+            },
+            "sketch2": {
+              "title": "Example Use Case"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_5": {
+        "min-max": {
+          "minmax-intro": {
+            "title": "What are MIN and MAX?",
+            "bodyMarkdown": "The `MIN` and `MAX` functions in SQL are used to find the smallest and largest values in a column. These are helpful when you want to quickly identify extremes, such as the lowest price or the highest score in a dataset."
+          },
+          "minmax-syntax": {
+            "title": "Basic Syntax",
+            "bodyMarkdown": "To use `MIN` or `MAX`, write a query like:\n\n```sql\nSELECT MIN(column_name) FROM table_name;\nSELECT MAX(column_name) FROM table_name;\n```\nReplace `column_name` and `table_name` with your actual column and table."
+          },
+          "minmax-example": {
+            "title": "Example Use Case",
+            "bodyMarkdown": "Suppose you have a `products` table with a `price` column. To find the cheapest and most expensive product:\n\n```sql\nSELECT MIN(price) FROM products;\nSELECT MAX(price) FROM products;\n```\nThis will return the lowest and highest prices in the table."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "minmax-single-choice-1": {
+      "title": "What does the MIN function do in SQL?",
+      "prompt": "Choose the best answer.",
+      "options": {
+        "a": "Finds the smallest value in a column",
+        "b": "Finds the largest value in a column",
+        "c": "Counts the number of rows",
+        "d": "Sums all values in a column"
+      }
+    },
+    "minmax-single-choice-2": {
+      "title": "Which query finds the highest salary in the employees table?",
+      "prompt": "Select the correct SQL statement.",
+      "options": {
+        "a": "SELECT MAX(salary) FROM employees;",
+        "b": "SELECT MIN(salary) FROM employees;",
+        "c": "SELECT SUM(salary) FROM employees;",
+        "d": "SELECT COUNT(salary) FROM employees;"
+      }
+    },
+    "minmax-multi-choice-1": {
+      "title": "Which of the following are valid uses of MIN and MAX?",
+      "prompt": "Select all that apply.",
+      "options": {
+        "a": "Finding the oldest date in a column",
+        "b": "Finding the highest score in a test",
+        "c": "Counting the number of products",
+        "d": "Finding the average value"
+      }
+    },
+    "minmax-code-input-1": {
+      "title": "Find the minimum quantity in inventory",
+      "prompt": "Write a SQL query to find the smallest value in the `quantity` column of the `inventory` table.",
+      "starterCode": "-- Write your query below\n"
+    },
+    "minmax-code-input-2": {
+      "title": "Get the maximum price from products",
+      "prompt": "Write a SQL query to find the highest price in the `price` column of the `products` table.",
+      "starterCode": "-- Write your query below\n"
+    }
+  }
+}

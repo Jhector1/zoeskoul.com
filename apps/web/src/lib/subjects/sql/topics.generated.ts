@@ -7,104 +7,104 @@ import type {
   TopicManifestRefMap,
 } from "@/lib/subjects/_core/subjectManifestTypes";
 
-import databaseThinkingJson from "./modules/module0/topics/database_thinking/topic.bundle.json";
-import firstSqlEnvironmentJson from "./modules/module0/topics/first_sql_environment/topic.bundle.json";
-import understandingTablesJson from "./modules/module0/topics/understanding_tables/topic.bundle.json";
-import whatSqlIsJson from "./modules/module0/topics/what_sql_is/topic.bundle.json";
-import introToSelectJson from "./modules/module1/topics/intro_to_select/topic.bundle.json";
-import practiceWithBasicQueriesJson from "./modules/module1/topics/practice_with_basic_queries/topic.bundle.json";
-import readingDataFromATableJson from "./modules/module1/topics/reading_data_from_a_table/topic.bundle.json";
-import sqlSyntaxBasicsJson from "./modules/module1/topics/sql_syntax_basics/topic.bundle.json";
-import beginnerFilteringPracticeJson from "./modules/module2/topics/beginner_filtering_practice/topic.bundle.json";
-import comparisonOperatorsJson from "./modules/module2/topics/comparison_operators/topic.bundle.json";
-import filteringWithMultipleConditionsJson from "./modules/module2/topics/filtering_with_multiple_conditions/topic.bundle.json";
-import introToFilteringJson from "./modules/module2/topics/intro_to_filtering/topic.bundle.json";
-import limitingOutputJson from "./modules/module3/topics/limiting_output/topic.bundle.json";
-import practiceWithOutputControlJson from "./modules/module3/topics/practice_with_output_control/topic.bundle.json";
-import sortingByMultipleColumnsJson from "./modules/module3/topics/sorting_by_multiple_columns/topic.bundle.json";
-import sortingDataJson from "./modules/module3/topics/sorting_data/topic.bundle.json";
-import listsAndRangesJson from "./modules/module4/topics/lists_and_ranges/topic.bundle.json";
-import missingDataJson from "./modules/module4/topics/missing_data/topic.bundle.json";
-import searchAndCleanupPracticeJson from "./modules/module4/topics/search_and_cleanup_practice/topic.bundle.json";
-import textMatchingJson from "./modules/module4/topics/text_matching/topic.bundle.json";
-import columnAliasesJson from "./modules/module5/column_aliases/topic.bundle.json";
-import creatingNewValuesInQueriesJson from "./modules/module5/creating_new_values_in_queries/topic.bundle.json";
-import expressionPracticeJson from "./modules/module5/expression_practice/topic.bundle.json";
-import simpleFunctionsJson from "./modules/module5/simple_functions/topic.bundle.json";
-import aggregatePracticeJson from "./modules/module6/aggregate_practice/topic.bundle.json";
-import aggregatesWithFiltersJson from "./modules/module6/aggregates_with_filters/topic.bundle.json";
-import coreAggregateFunctionsJson from "./modules/module6/core_aggregate_functions/topic.bundle.json";
-import introToAggregationJson from "./modules/module6/intro_to_aggregation/topic.bundle.json";
-import aggregatesWithGroupsJson from "./modules/module7/aggregates_with_groups/topic.bundle.json";
-import filteringGroupsJson from "./modules/module7/filtering_groups/topic.bundle.json";
-import groupingPracticeJson from "./modules/module7/grouping_practice/topic.bundle.json";
-import introToGroupingJson from "./modules/module7/intro_to_grouping/topic.bundle.json";
+import databasesOverviewJson from "./modules/module0/topics/databases-overview/topic.bundle.json";
+import relationalModelBasicsJson from "./modules/module0/topics/relational-model-basics/topic.bundle.json";
+import sqlEnvironmentsJson from "./modules/module0/topics/sql-environments/topic.bundle.json";
+import sqlHistoryPurposeJson from "./modules/module0/topics/sql-history-purpose/topic.bundle.json";
+import columnAliasesJson from "./modules/module1/topics/column-aliases/topic.bundle.json";
+import selectAllJson from "./modules/module1/topics/select-all/topic.bundle.json";
+import selectColumnsJson from "./modules/module1/topics/select-columns/topic.bundle.json";
+import selectSyntaxJson from "./modules/module1/topics/select-syntax/topic.bundle.json";
+import comparisonOperatorsJson from "./modules/module2/topics/comparison-operators/topic.bundle.json";
+import logicalOperatorsJson from "./modules/module2/topics/logical-operators/topic.bundle.json";
+import nullValuesJson from "./modules/module2/topics/null-values/topic.bundle.json";
+import whereBasicsJson from "./modules/module2/topics/where-basics/topic.bundle.json";
+import limitTopJson from "./modules/module3/topics/limit-top/topic.bundle.json";
+import offsetPaginationJson from "./modules/module3/topics/offset-pagination/topic.bundle.json";
+import orderByJson from "./modules/module3/topics/order-by/topic.bundle.json";
+import sortingDirectionJson from "./modules/module3/topics/sorting-direction/topic.bundle.json";
+import concatenationJson from "./modules/module4/topics/concatenation/topic.bundle.json";
+import ilikeCaseInsensitiveJson from "./modules/module4/topics/ilike-case-insensitive/topic.bundle.json";
+import likePatternsJson from "./modules/module4/topics/like-patterns/topic.bundle.json";
+import stringFunctionsJson from "./modules/module4/topics/string-functions/topic.bundle.json";
+import countSumAvgJson from "./modules/module5/topics/count-sum-avg/topic.bundle.json";
+import groupByJson from "./modules/module5/topics/group-by/topic.bundle.json";
+import havingClauseJson from "./modules/module5/topics/having-clause/topic.bundle.json";
+import minMaxJson from "./modules/module5/topics/min-max/topic.bundle.json";
+import crossJoinJson from "./modules/module6/topics/cross-join/topic.bundle.json";
+import innerJoinJson from "./modules/module6/topics/inner-join/topic.bundle.json";
+import joiningMultipleTablesJson from "./modules/module6/topics/joining-multiple-tables/topic.bundle.json";
+import leftRightJoinJson from "./modules/module6/topics/left-right-join/topic.bundle.json";
+import aggregationChallengeJson from "./modules/module7/topics/aggregation-challenge/topic.bundle.json";
+import dataCleanupTaskJson from "./modules/module7/topics/data-cleanup-task/topic.bundle.json";
+import miniProjectJson from "./modules/module7/topics/mini-project/topic.bundle.json";
+import queryingSampleDatabaseJson from "./modules/module7/topics/querying-sample-database/topic.bundle.json";
 
 
-const databaseThinking = databaseThinkingJson as SlimTopicManifest;
-const firstSqlEnvironment = firstSqlEnvironmentJson as SlimTopicManifest;
-const understandingTables = understandingTablesJson as SlimTopicManifest;
-const whatSqlIs = whatSqlIsJson as SlimTopicManifest;
-const introToSelect = introToSelectJson as SlimTopicManifest;
-const practiceWithBasicQueries = practiceWithBasicQueriesJson as SlimTopicManifest;
-const readingDataFromATable = readingDataFromATableJson as SlimTopicManifest;
-const sqlSyntaxBasics = sqlSyntaxBasicsJson as SlimTopicManifest;
-const beginnerFilteringPractice = beginnerFilteringPracticeJson as SlimTopicManifest;
-const comparisonOperators = comparisonOperatorsJson as SlimTopicManifest;
-const filteringWithMultipleConditions = filteringWithMultipleConditionsJson as SlimTopicManifest;
-const introToFiltering = introToFilteringJson as SlimTopicManifest;
-const limitingOutput = limitingOutputJson as SlimTopicManifest;
-const practiceWithOutputControl = practiceWithOutputControlJson as SlimTopicManifest;
-const sortingByMultipleColumns = sortingByMultipleColumnsJson as SlimTopicManifest;
-const sortingData = sortingDataJson as SlimTopicManifest;
-const listsAndRanges = listsAndRangesJson as SlimTopicManifest;
-const missingData = missingDataJson as SlimTopicManifest;
-const searchAndCleanupPractice = searchAndCleanupPracticeJson as SlimTopicManifest;
-const textMatching = textMatchingJson as SlimTopicManifest;
+const databasesOverview = databasesOverviewJson as SlimTopicManifest;
+const relationalModelBasics = relationalModelBasicsJson as SlimTopicManifest;
+const sqlEnvironments = sqlEnvironmentsJson as SlimTopicManifest;
+const sqlHistoryPurpose = sqlHistoryPurposeJson as SlimTopicManifest;
 const columnAliases = columnAliasesJson as SlimTopicManifest;
-const creatingNewValuesInQueries = creatingNewValuesInQueriesJson as SlimTopicManifest;
-const expressionPractice = expressionPracticeJson as SlimTopicManifest;
-const simpleFunctions = simpleFunctionsJson as SlimTopicManifest;
-const aggregatePractice = aggregatePracticeJson as SlimTopicManifest;
-const aggregatesWithFilters = aggregatesWithFiltersJson as SlimTopicManifest;
-const coreAggregateFunctions = coreAggregateFunctionsJson as SlimTopicManifest;
-const introToAggregation = introToAggregationJson as SlimTopicManifest;
-const aggregatesWithGroups = aggregatesWithGroupsJson as SlimTopicManifest;
-const filteringGroups = filteringGroupsJson as SlimTopicManifest;
-const groupingPractice = groupingPracticeJson as SlimTopicManifest;
-const introToGrouping = introToGroupingJson as SlimTopicManifest;
+const selectAll = selectAllJson as SlimTopicManifest;
+const selectColumns = selectColumnsJson as SlimTopicManifest;
+const selectSyntax = selectSyntaxJson as SlimTopicManifest;
+const comparisonOperators = comparisonOperatorsJson as SlimTopicManifest;
+const logicalOperators = logicalOperatorsJson as SlimTopicManifest;
+const nullValues = nullValuesJson as SlimTopicManifest;
+const whereBasics = whereBasicsJson as SlimTopicManifest;
+const limitTop = limitTopJson as SlimTopicManifest;
+const offsetPagination = offsetPaginationJson as SlimTopicManifest;
+const orderBy = orderByJson as SlimTopicManifest;
+const sortingDirection = sortingDirectionJson as SlimTopicManifest;
+const concatenation = concatenationJson as SlimTopicManifest;
+const ilikeCaseInsensitive = ilikeCaseInsensitiveJson as SlimTopicManifest;
+const likePatterns = likePatternsJson as SlimTopicManifest;
+const stringFunctions = stringFunctionsJson as SlimTopicManifest;
+const countSumAvg = countSumAvgJson as SlimTopicManifest;
+const groupBy = groupByJson as SlimTopicManifest;
+const havingClause = havingClauseJson as SlimTopicManifest;
+const minMax = minMaxJson as SlimTopicManifest;
+const crossJoin = crossJoinJson as SlimTopicManifest;
+const innerJoin = innerJoinJson as SlimTopicManifest;
+const joiningMultipleTables = joiningMultipleTablesJson as SlimTopicManifest;
+const leftRightJoin = leftRightJoinJson as SlimTopicManifest;
+const aggregationChallenge = aggregationChallengeJson as SlimTopicManifest;
+const dataCleanupTask = dataCleanupTaskJson as SlimTopicManifest;
+const miniProject = miniProjectJson as SlimTopicManifest;
+const queryingSampleDatabase = queryingSampleDatabaseJson as SlimTopicManifest;
 
 export const TOPIC_MANIFESTS: TopicManifestRefMap = {
-  "database_thinking": databaseThinking,
-  "first_sql_environment": firstSqlEnvironment,
-  "understanding_tables": understandingTables,
-  "what_sql_is": whatSqlIs,
-  "intro_to_select": introToSelect,
-  "practice_with_basic_queries": practiceWithBasicQueries,
-  "reading_data_from_a_table": readingDataFromATable,
-  "sql_syntax_basics": sqlSyntaxBasics,
-  "beginner_filtering_practice": beginnerFilteringPractice,
-  "comparison_operators": comparisonOperators,
-  "filtering_with_multiple_conditions": filteringWithMultipleConditions,
-  "intro_to_filtering": introToFiltering,
-  "limiting_output": limitingOutput,
-  "practice_with_output_control": practiceWithOutputControl,
-  "sorting_by_multiple_columns": sortingByMultipleColumns,
-  "sorting_data": sortingData,
-  "lists_and_ranges": listsAndRanges,
-  "missing_data": missingData,
-  "search_and_cleanup_practice": searchAndCleanupPractice,
-  "text_matching": textMatching,
-  "column_aliases": columnAliases,
-  "creating_new_values_in_queries": creatingNewValuesInQueries,
-  "expression_practice": expressionPractice,
-  "simple_functions": simpleFunctions,
-  "aggregate_practice": aggregatePractice,
-  "aggregates_with_filters": aggregatesWithFilters,
-  "core_aggregate_functions": coreAggregateFunctions,
-  "intro_to_aggregation": introToAggregation,
-  "aggregates_with_groups": aggregatesWithGroups,
-  "filtering_groups": filteringGroups,
-  "grouping_practice": groupingPractice,
-  "intro_to_grouping": introToGrouping,
+  "databases-overview": databasesOverview,
+  "relational-model-basics": relationalModelBasics,
+  "sql-environments": sqlEnvironments,
+  "sql-history-purpose": sqlHistoryPurpose,
+  "column-aliases": columnAliases,
+  "select-all": selectAll,
+  "select-columns": selectColumns,
+  "select-syntax": selectSyntax,
+  "comparison-operators": comparisonOperators,
+  "logical-operators": logicalOperators,
+  "null-values": nullValues,
+  "where-basics": whereBasics,
+  "limit-top": limitTop,
+  "offset-pagination": offsetPagination,
+  "order-by": orderBy,
+  "sorting-direction": sortingDirection,
+  "concatenation": concatenation,
+  "ilike-case-insensitive": ilikeCaseInsensitive,
+  "like-patterns": likePatterns,
+  "string-functions": stringFunctions,
+  "count-sum-avg": countSumAvg,
+  "group-by": groupBy,
+  "having-clause": havingClause,
+  "min-max": minMax,
+  "cross-join": crossJoin,
+  "inner-join": innerJoin,
+  "joining-multiple-tables": joiningMultipleTables,
+  "left-right-join": leftRightJoin,
+  "aggregation-challenge": aggregationChallenge,
+  "data-cleanup-task": dataCleanupTask,
+  "mini-project": miniProject,
+  "querying-sample-database": queryingSampleDatabase,
 };

@@ -1,0 +1,154 @@
+{
+  "topicId": "inner-join",
+  "subjectSlug": "sql",
+  "moduleSlug": "sql_module_6",
+  "sectionSlug": "section_6_1",
+  "prefix": "sql6",
+  "minutes": 20,
+  "topic": {
+    "labelKey": "topics.sql.sql_module_6.inner-join.label",
+    "summaryKey": "topics.sql.sql_module_6.inner-join.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_6.inner-join.cards.sketch0.title",
+      "sketchId": "sketch-what-is-inner-join",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_6.inner-join.cards.sketch1.title",
+      "sketchId": "sketch-inner-join-example",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_6.inner-join.cards.sketch2.title",
+      "sketchId": "sketch-join-multiple-tables",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql.sql_module_6.inner-join.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch-what-is-inner-join",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_6.inner-join.sketch-what-is-inner-join.title",
+      "bodyKey": "sketches.sql.sql_module_6.inner-join.sketch-what-is-inner-join.bodyMarkdown"
+    },
+    {
+      "id": "sketch-inner-join-example",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_6.inner-join.sketch-inner-join-example.title",
+      "bodyKey": "sketches.sql.sql_module_6.inner-join.sketch-inner-join-example.bodyMarkdown"
+    },
+    {
+      "id": "sketch-join-multiple-tables",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_6.inner-join.sketch-join-multiple-tables.title",
+      "bodyKey": "sketches.sql.sql_module_6.inner-join.sketch-join-multiple-tables.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "quiz-inner-join-basic",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.quiz-inner-join-basic",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "c"
+      }
+    },
+    {
+      "id": "quiz-inner-join-syntax",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.quiz-inner-join-syntax",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "quiz-inner-join-columns",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.quiz-inner-join-columns",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a"
+        ]
+      }
+    },
+    {
+      "id": "quiz-inner-join-fill-blank",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.quiz-inner-join-fill-blank",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "INNER JOIN"
+      }
+    },
+    {
+      "id": "quiz-inner-join-code",
+      "kind": "code_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.quiz-inner-join-code",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table",
+        "solutionCode": "SELECT students.name, courses.title\nFROM enrollments\nINNER JOIN students ON enrollments.student_id = students.id\nINNER JOIN courses ON enrollments.course_id = courses.id;"
+      }
+    }
+  ]
+}

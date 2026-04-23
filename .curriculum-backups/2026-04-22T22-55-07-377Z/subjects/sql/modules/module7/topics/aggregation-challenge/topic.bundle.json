@@ -1,0 +1,187 @@
+{
+  "topicId": "aggregation-challenge",
+  "subjectSlug": "sql",
+  "moduleSlug": "sql_module_7",
+  "sectionSlug": "section_7_1",
+  "prefix": "sql7",
+  "minutes": 15,
+  "topic": {
+    "labelKey": "topics.sql.sql_module_7.aggregation-challenge.label",
+    "summaryKey": "topics.sql.sql_module_7.aggregation-challenge.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_7.aggregation-challenge.cards.sketch0.title",
+      "sketchId": "agg-intro",
+      "height": 420
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.sql.sql_module_7.aggregation-challenge.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "agg-single-choice-category-count",
+            "titleKey": "topics.sql.sql_module_7.aggregation-challenge.projectSteps.agg-single-choice-category-count.title",
+            "exerciseKey": "agg-single-choice-category-count",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "agg-multi-choice-aggregate-functions",
+            "titleKey": "topics.sql.sql_module_7.aggregation-challenge.projectSteps.agg-multi-choice-aggregate-functions.title",
+            "exerciseKey": "agg-multi-choice-aggregate-functions",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "agg-drag-reorder-groupby",
+            "titleKey": "topics.sql.sql_module_7.aggregation-challenge.projectSteps.agg-drag-reorder-groupby.title",
+            "exerciseKey": "agg-drag-reorder-groupby",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "agg-fill-blank-choice-min-price",
+            "titleKey": "topics.sql.sql_module_7.aggregation-challenge.projectSteps.agg-fill-blank-choice-min-price.title",
+            "exerciseKey": "agg-fill-blank-choice-min-price",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "agg-code-input-active-items-sum",
+            "titleKey": "topics.sql.sql_module_7.aggregation-challenge.projectSteps.agg-code-input-active-items-sum.title",
+            "exerciseKey": "agg-code-input-active-items-sum",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql.sql_module_7.aggregation-challenge.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "agg-intro",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_7.aggregation-challenge.agg-intro.title",
+      "bodyKey": "sketches.sql.sql_module_7.aggregation-challenge.agg-intro.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "agg-single-choice-category-count",
+      "kind": "single_choice",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "quiz.agg-single-choice-category-count",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "agg-multi-choice-aggregate-functions",
+      "kind": "multi_choice",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "quiz.agg-multi-choice-aggregate-functions",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "agg-drag-reorder-groupby",
+      "kind": "drag_reorder",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "quiz.agg-drag-reorder-groupby",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "agg-fill-blank-choice-min-price",
+      "kind": "fill_blank_choice",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "quiz.agg-fill-blank-choice-min-price",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "MIN"
+      }
+    },
+    {
+      "id": "agg-code-input-active-items-sum",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "quiz.agg-code-input-active-items-sum",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "inventory_ops",
+        "resultShape": "table",
+        "solutionCode": "SELECT SUM(price) FROM inventory_items WHERE status = 'active';"
+      }
+    }
+  ]
+}

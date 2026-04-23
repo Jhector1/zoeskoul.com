@@ -1,0 +1,105 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_7": {
+        "mini-project": {
+          "label": "Mini-Project: End-to-End Query",
+          "summary": "Combine all skills in a small project to answer business questions.",
+          "cards": {
+            "sketch0": {
+              "title": "Project Introduction"
+            },
+            "project": {
+              "title": "Analyze and Recommend: Product Sales & Inventory"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "projectSteps": {
+            "step1-single-choice": {
+              "title": "Identify the Best Dataset"
+            },
+            "step2-code-input": {
+              "title": "Find Top-Selling Product"
+            },
+            "step3-code-input": {
+              "title": "Check Inventory for Top Product"
+            },
+            "step4-single-choice": {
+              "title": "Business Recommendation"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_7": {
+        "mini-project": {
+          "intro-paragraph": {
+            "title": "Project Introduction",
+            "bodyMarkdown": "In this mini-project, you'll apply your SQL knowledge to answer a real-world business question using a sample dataset. You'll write queries to filter, aggregate, and join data to generate insights. This hands-on exercise will help you integrate multiple SQL concepts in a practical scenario."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "step1-single-choice": {
+      "title": "Identify the Best Dataset",
+      "prompt": "You need to analyze product sales and inventory levels. Which dataset would be most appropriate to use for this analysis?",
+      "hint": "Focus on datasets related to products.",
+      "help": {
+        "concept": "Choosing the right dataset is crucial for accurate analysis. Datasets are often named after their content focus.",
+        "hint_1": "Look for a dataset that contains product and inventory information.",
+        "hint_2": "Datasets with 'products' in their name are likely to contain relevant data for sales and inventory analysis."
+      },
+      "options": {
+        "a": "products_catalog",
+        "b": "students_intro",
+        "c": "employees_basic",
+        "d": "customers_cleanup"
+      }
+    },
+    "step2-code-input": {
+      "title": "Find Top-Selling Product",
+      "prompt": "Write a SQL query to find the product with the highest total sales quantity in the 'products_catalog' dataset. Return the product name and the total quantity sold.",
+      "hint": "Aggregate sales by product and sort by quantity.",
+      "help": {
+        "concept": "To find the top-selling product, use aggregation functions like SUM and GROUP BY, then sort the results.",
+        "hint_1": "Group the data by product name and sum the quantity sold for each product.",
+        "hint_2": "After grouping and summing, order the results by total quantity in descending order and limit the output to one row."
+      },
+      "starterCode": "-- Write your SQL query here\n"
+    },
+    "step3-code-input": {
+      "title": "Check Inventory for Top Product",
+      "prompt": "Write a SQL query to check the current inventory level for the top-selling product you found in the previous step. Return the product name and inventory count.",
+      "hint": "Use a subquery to identify the top product.",
+      "help": {
+        "concept": "Subqueries can be used to filter results based on aggregated data from the same table.",
+        "hint_1": "Find the product name with the highest total sales using a subquery.",
+        "hint_2": "Use the subquery result in the WHERE clause to filter for the top-selling product's inventory."
+      },
+      "starterCode": "-- Write your SQL query here\n"
+    },
+    "step4-single-choice": {
+      "title": "Business Recommendation",
+      "prompt": "If the top-selling product has a low inventory count, what action should the business consider?",
+      "hint": "Think about supply and demand.",
+      "help": {
+        "concept": "When a product sells well but inventory is low, businesses should ensure they can meet demand.",
+        "hint_1": "A popular product running low on stock may lead to missed sales opportunities.",
+        "hint_2": "Restocking or increasing inventory helps meet customer demand and maximize sales."
+      },
+      "options": {
+        "a": "Increase inventory for the product",
+        "b": "Decrease the product price",
+        "c": "Discontinue the product",
+        "d": "Reduce marketing for the product"
+      }
+    }
+  }
+}

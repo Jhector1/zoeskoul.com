@@ -1,0 +1,119 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_5": {
+        "having-clause": {
+          "label": "HAVING Clause",
+          "summary": "Filter groups with HAVING after aggregation.",
+          "cards": {
+            "sketch0": {
+              "title": "What is the HAVING Clause?"
+            },
+            "sketch1": {
+              "title": "Syntax Example"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_5": {
+        "having-clause": {
+          "sk1": {
+            "title": "What is the HAVING Clause?",
+            "bodyMarkdown": "The `HAVING` clause in SQL is used to filter groups of rows created by `GROUP BY` based on aggregate conditions. Unlike `WHERE`, which filters rows before grouping, `HAVING` filters after aggregation. This is useful when you want to keep only groups that meet certain criteria, such as groups with a count above a threshold."
+          },
+          "sk2": {
+            "title": "Syntax Example",
+            "bodyMarkdown": "Example:\n\n```sql\nSELECT category, COUNT(*) AS num_products\nFROM products_catalog\nGROUP BY category\nHAVING COUNT(*) > 5;\n```\n\nThis query shows only categories with more than 5 products."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "q1": {
+      "title": "Purpose of HAVING",
+      "prompt": "What is the main purpose of the HAVING clause in SQL?",
+      "hint": "HAVING is used after GROUP BY.",
+      "help": {
+        "concept": "The HAVING clause filters groups of rows after they have been aggregated using GROUP BY.",
+        "hint_1": "HAVING works on groups, not individual rows.",
+        "hint_2": "HAVING is similar to WHERE, but it applies after aggregation."
+      },
+      "options": {
+        "a": "To filter rows before grouping",
+        "b": "To filter groups after aggregation",
+        "c": "To sort the results",
+        "d": "To join multiple tables"
+      }
+    },
+    "q2": {
+      "title": "HAVING vs WHERE",
+      "prompt": "Which statements about HAVING and WHERE are true? (Select all that apply)",
+      "hint": "Think about when each clause is applied.",
+      "help": {
+        "concept": "WHERE filters rows before grouping, while HAVING filters groups after aggregation. Aggregate functions like COUNT or SUM can be used in HAVING but not in WHERE.",
+        "hint_1": "WHERE is for filtering rows; HAVING is for filtering groups.",
+        "hint_2": "Aggregate functions are allowed in HAVING, not WHERE."
+      },
+      "options": {
+        "a": "WHERE filters rows before grouping",
+        "b": "HAVING filters groups after aggregation",
+        "c": "HAVING can use aggregate functions",
+        "d": "WHERE can use aggregate functions"
+      }
+    },
+    "q3": {
+      "title": "Order of SQL Clauses",
+      "prompt": "Arrange the SQL clauses in the correct order for a query using aggregation and filtering.",
+      "hint": "Start with SELECT and end with ORDER BY.",
+      "help": {
+        "concept": "SQL queries follow a specific order: SELECT, FROM, WHERE, GROUP BY, HAVING, ORDER BY.",
+        "hint_1": "WHERE comes before GROUP BY; HAVING comes after.",
+        "hint_2": "HAVING always follows GROUP BY."
+      },
+      "tokens": {
+        "t1": "SELECT",
+        "t2": "FROM",
+        "t3": "WHERE",
+        "t4": "GROUP BY",
+        "t5": "HAVING",
+        "t6": "ORDER BY"
+      }
+    },
+    "q4": {
+      "title": "Choosing the Right Clause",
+      "prompt": "Fill in the blank: To filter groups after aggregation, use the ____ clause.",
+      "hint": "It's not WHERE.",
+      "help": {
+        "concept": "the missing term is used to filter groups after aggregation, while WHERE filters rows before grouping.",
+        "hint_1": "the missing term comes after GROUP BY.",
+        "hint_2": "the missing term is the clause for post-aggregation filtering."
+      },
+      "template": "To filter groups after aggregation, use the ____ clause.",
+      "choices": [
+        "WHERE",
+        "HAVING",
+        "ORDER BY",
+        "GROUP BY"
+      ]
+    },
+    "q5": {
+      "title": "Write a HAVING Query",
+      "prompt": "Write a SQL query to show each category from the products_catalog dataset that has more than 3 products. Show the category and the count of products as num_products.",
+      "hint": "Use GROUP BY and HAVING with COUNT.",
+      "help": {
+        "concept": "To filter groups based on an aggregate value, use GROUP BY to create groups and HAVING to filter them.",
+        "hint_1": "Group by category and count the products in each group.",
+        "hint_2": "Use HAVING to keep only groups with a count greater than 3."
+      },
+      "starterCode": "-- Write your query here\n"
+    }
+  }
+}

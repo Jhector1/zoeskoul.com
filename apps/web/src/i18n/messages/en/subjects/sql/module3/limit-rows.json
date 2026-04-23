@@ -1,0 +1,99 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_3": {
+        "limit-rows": {
+          "label": "Limiting Results with LIMIT",
+          "summary": "Restrict the number of rows returned using LIMIT.",
+          "cards": {
+            "sketch0": {
+              "title": "Why LIMIT Matters"
+            },
+            "sketch1": {
+              "title": "Basic LIMIT Syntax"
+            },
+            "sketch2": {
+              "title": "Combining LIMIT with ORDER BY"
+            },
+            "project": {
+              "title": "Project"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "projectSteps": {
+            "q4": {
+              "title": "Write a query to return the first 4 rows from the 'students' table."
+            },
+            "q5": {
+              "title": "Write a query to show the 2 most expensive products from the 'products' table."
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_3": {
+        "limit-rows": {
+          "sketch1": {
+            "title": "Why LIMIT Matters",
+            "bodyMarkdown": "When working with large datasets, you often don't need to see every row. The `LIMIT` clause in SQL lets you restrict the number of rows returned by your query. This is especially useful for previewing data or improving performance."
+          },
+          "sketch2": {
+            "title": "Basic LIMIT Syntax",
+            "bodyMarkdown": "To use `LIMIT`, add it at the end of your SQL query:\n\n```sql\nSELECT * FROM table_name LIMIT number_of_rows;\n```\nFor example, to get just the first 5 products:\n\n```sql\nSELECT * FROM products LIMIT 5;\n```"
+          },
+          "sketch3": {
+            "title": "Combining LIMIT with ORDER BY",
+            "bodyMarkdown": "Often, you'll want to sort your results before limiting them. Use `ORDER BY` with `LIMIT` to get, for example, the top 3 most expensive products:\n\n```sql\nSELECT * FROM products ORDER BY price DESC LIMIT 3;\n```"
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "q1": {
+      "title": "What does the LIMIT clause do in a SQL query?",
+      "prompt": "What does the LIMIT clause do in a SQL query?",
+      "options": {
+        "a": "Limits the number of columns returned",
+        "b": "Limits the number of rows returned",
+        "c": "Limits the number of tables used",
+        "d": "Limits the size of the database"
+      }
+    },
+    "q2": {
+      "title": "Which query returns only the first 10 rows from the 'students' table?",
+      "prompt": "Which query returns only the first 10 rows from the 'students' table?",
+      "options": {
+        "a": "SELECT * FROM students LIMIT 10;",
+        "b": "SELECT * FROM students WHERE rownum < 10;",
+        "c": "SELECT TOP 10 * FROM students;",
+        "d": "SELECT * FROM students ORDER BY LIMIT 10;"
+      }
+    },
+    "q3": {
+      "title": "Select all correct uses of LIMIT in SQL.",
+      "prompt": "Select all correct uses of LIMIT in SQL.",
+      "options": {
+        "a": "SELECT * FROM products LIMIT 5;",
+        "b": "SELECT name FROM employees LIMIT 3;",
+        "c": "SELECT * FROM customers WHERE LIMIT 2;",
+        "d": "SELECT * FROM inventory LIMIT;"
+      }
+    },
+    "q4": {
+      "title": "Write a query to return the first 4 rows from the 'students' table.",
+      "prompt": "Write a query to return the first 4 rows from the 'students' table.",
+      "starterCode": "-- Write your SQL query below\n"
+    },
+    "q5": {
+      "title": "Write a query to show the 2 most expensive products from the 'products' table.",
+      "prompt": "Write a query to show the 2 most expensive products from the 'products' table.",
+      "starterCode": "-- Write your SQL query below\n"
+    }
+  }
+}

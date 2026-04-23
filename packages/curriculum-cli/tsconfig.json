@@ -3,12 +3,18 @@
   "compilerOptions": {
     "rootDir": "src",
     "outDir": "dist",
-    "module": "NodeNext",
-    "noEmit": false,
-    "moduleResolution": "NodeNext",
+    "composite": true,
     "declaration": true,
     "declarationMap": true,
+    "noEmit": false,
+    "emitDeclarationOnly": false,
+    "tsBuildInfoFile": "dist/.tsbuildinfo",
     "types": ["node"]
   },
-  "include": ["src/**/*.ts"]
+  "include": ["src/**/*.ts"],
+  "references": [
+    { "path": "../curriculum-ai" },
+    { "path": "../curriculum-compiler" },
+    { "path": "../curriculum-contracts" }
+  ]
 }

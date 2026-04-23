@@ -1,0 +1,76 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_4": {
+        "wildcards": {
+          "label": "Wildcards in LIKE",
+          "summary": "How to use % and _ wildcards in LIKE patterns.",
+          "cards": {
+            "sketch0": {
+              "title": "Introduction to Wildcards in LIKE"
+            },
+            "sketch1": {
+              "title": "Examples of Wildcard Usage"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_4": {
+        "wildcards": {
+          "wildcards-intro": {
+            "title": "Introduction to Wildcards in LIKE",
+            "bodyMarkdown": "In SQL, the `LIKE` operator is used to search for a specified pattern in a column. Wildcards help you create flexible patterns:\n\n- `%` (percent sign) matches any sequence of characters (including zero characters).\n- `_` (underscore) matches exactly one character.\n\nFor example, `WHERE name LIKE 'A%'` finds all names starting with 'A'."
+          },
+          "wildcards-examples": {
+            "title": "Examples of Wildcard Usage",
+            "bodyMarkdown": "Here are some common ways to use wildcards with `LIKE`:\n\n- `LIKE 'J_n'` matches 'Jan', 'Jen', 'Jon', etc. (any three-letter name starting with 'J' and ending with 'n').\n- `LIKE '%son'` matches any value ending with 'son', such as 'Jackson' or 'Emerson'.\n- `LIKE 'A%z'` matches any value starting with 'A' and ending with 'z', such as 'Alvarez'."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "wildcards-single-choice-1": {
+      "title": "Which wildcard matches any single character in a LIKE pattern?",
+      "prompt": "Select the correct wildcard for matching exactly one character.",
+      "options": {
+        "a": "%",
+        "b": "_",
+        "c": "*",
+        "d": "#"
+      }
+    },
+    "wildcards-multi-choice-1": {
+      "title": "Select all correct LIKE patterns to find names starting with 'A'.",
+      "prompt": "Which of these patterns will match names that start with 'A'?",
+      "options": {
+        "a": "A%",
+        "b": "%A",
+        "c": "A_",
+        "d": "A__%",
+        "e": "%A%"
+      }
+    },
+    "wildcards-drag-reorder-1": {
+      "title": "Order the steps to find all products ending with 'phone'.",
+      "prompt": "Arrange the steps to write a SQL query that finds all product names ending with 'phone'.",
+      "tokens": {
+        "t1": "SELECT *",
+        "t2": "FROM products",
+        "t3": "WHERE name LIKE '%phone';"
+      }
+    },
+    "wildcards-code-input-1": {
+      "title": "Find all customers whose names start with 'S' and are 4 letters long.",
+      "prompt": "Write a SQL query to select all customers from the `customers` table whose `name` starts with 'S' and is exactly 4 letters long.",
+      "starterCode": "-- Write your query below\nSELECT * FROM customers WHERE name LIKE ?;"
+    }
+  }
+}

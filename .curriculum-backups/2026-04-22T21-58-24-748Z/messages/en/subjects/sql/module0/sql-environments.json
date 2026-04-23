@@ -1,0 +1,130 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_0": {
+        "sql-environments": {
+          "label": "SQL Environments and Tools",
+          "summary": "Discover common tools and environments for running SQL queries.",
+          "cards": {
+            "sketch0": {
+              "title": "What is an SQL Environment?"
+            },
+            "sketch1": {
+              "title": "Popular SQL Tools"
+            },
+            "sketch2": {
+              "title": "Connecting to a Database"
+            },
+            "sketch3": {
+              "title": "Sample Table: students"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_0": {
+        "sql-environments": {
+          "sk1": {
+            "title": "What is an SQL Environment?",
+            "bodyMarkdown": "An **SQL environment** is any tool or platform where you can write and execute SQL queries. These environments connect to databases and let you interact with data using SQL commands. Examples include command-line tools, graphical applications, and web-based editors."
+          },
+          "sk2": {
+            "title": "Popular SQL Tools",
+            "bodyMarkdown": "Some common SQL environments are:\n\n- **SQLite CLI**: A command-line tool for working with SQLite databases.\n- **DB Browser for SQLite**: A graphical application for SQLite.\n- **MySQL Workbench**: A GUI for MySQL databases.\n- **psql**: The command-line interface for PostgreSQL.\n- **Online editors**: Websites that let you run SQL queries in your browser.\n\nEach tool may have different features, but all allow you to write and run SQL queries."
+          },
+          "sk3": {
+            "title": "Connecting to a Database",
+            "bodyMarkdown": "To use SQL, you first need to connect to a database. This usually involves:\n\n1. **Choosing the right tool** for your database type (e.g., SQLite, MySQL).\n2. **Opening or creating a database file** (for SQLite) or entering connection details (for server databases).\n3. **Writing SQL queries** in the tool's editor or prompt.\n\nFor example, in SQLite CLI, you might run:\n\n```\nsqlite3 students.db\n```\n\nThis opens the `students.db` database so you can start running SQL commands."
+          },
+          "sk4": {
+            "title": "Sample Table: students",
+            "bodyMarkdown": "Suppose you have a table called `students` with the following columns:\n\n- `id` (INTEGER)\n- `name` (TEXT)\n- `grade` (TEXT)\n- `age` (INTEGER)\n- `city` (TEXT)\n\nSample data:\n\n| id | name | grade | age | city       |\n|----|------|-------|-----|------------|\n| 1  | Noor | A     | 15  | Chicago    |\n| 2  | Mia  | A     | 14  | Evanston   |\n| 3  | Leo  | B     | 15  | Chicago    |\n| 4  | Ava  | C     | 14  | Oak Park   |\n| 5  | Zane | B     | 16  | Naperville |\n\nYou can use any SQL environment to query this table, such as finding all students from Chicago."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "q1": {
+      "title": "Identifying SQL Environments",
+      "prompt": "Which of the following is a graphical tool for working with SQLite databases?",
+      "hint": "Think about which tool has a graphical interface for SQLite.",
+      "help": {
+        "concept": "Some SQL tools are command-line based, while others provide a graphical user interface (GUI).",
+        "hint_1": "DB Browser for SQLite is designed for SQLite and has a GUI.",
+        "hint_2": "It's not a command-line tool, and it's not for MySQL or PostgreSQL."
+      },
+      "options": {
+        "a": "SQLite CLI",
+        "b": "DB Browser for SQLite",
+        "c": "psql",
+        "d": "MySQL Workbench"
+      }
+    },
+    "q2": {
+      "title": "Selecting SQL Tools",
+      "prompt": "Which of the following can be used to run SQL queries? (Select all that apply)",
+      "hint": "Consider which options are designed for SQL.",
+      "help": {
+        "concept": "SQL queries can be run in specialized tools and environments, not in general-purpose word processors.",
+        "hint_1": "Look for tools that mention SQL or databases.",
+        "hint_2": "Microsoft Word is not an SQL tool, but the others are."
+      },
+      "options": {
+        "a": "DB Browser for SQLite",
+        "b": "Microsoft Word",
+        "c": "Online SQL editors",
+        "d": "psql"
+      }
+    },
+    "q3": {
+      "title": "Steps to Connect to a Database",
+      "prompt": "Arrange the steps for connecting to a database in the correct order.",
+      "hint": "Think about what you must do before you can write queries.",
+      "help": {
+        "concept": "Connecting to a database involves preparing your tool, connecting, and then running queries.",
+        "hint_1": "You need to open the tool before you can connect to a database.",
+        "hint_2": "You can't write queries until you're connected to the database."
+      },
+      "tokens": {
+        "t1": "Open your SQL tool",
+        "t2": "Enter database connection details or open a database file",
+        "t3": "Write and run SQL queries"
+      }
+    },
+    "q4": {
+      "title": "Choosing the Right Tool",
+      "prompt": "Fill in the blank: To run SQL queries on a PostgreSQL database from the command line, you would typically use ____.",
+      "hint": "Which command-line tool is made for PostgreSQL?",
+      "help": {
+        "concept": "Each database system usually has its own command-line interface.",
+        "hint_1": "The tool's name often starts with 'p' for PostgreSQL.",
+        "hint_2": "It's not for SQLite or MySQL."
+      },
+      "template": "To run SQL queries on a PostgreSQL database from the command line, you would typically use ____.",
+      "choices": [
+        "psql",
+        "DB Browser for SQLite",
+        "MySQL Workbench",
+        "SQLite CLI"
+      ]
+    },
+    "q5": {
+      "title": "Querying the students Table",
+      "prompt": "Write an SQL query to select the names of all students who live in 'Chicago' from the students table.",
+      "hint": "Use SELECT to get the 'name' column and filter by city.",
+      "help": {
+        "concept": "To select specific rows, use a WHERE clause to filter by column value.",
+        "hint_1": "Use SELECT name FROM students WHERE city = ...",
+        "hint_2": "Remember to match the city name exactly as it appears in the table."
+      },
+      "starterCode": "-- Write your SQL query here"
+    }
+  }
+}

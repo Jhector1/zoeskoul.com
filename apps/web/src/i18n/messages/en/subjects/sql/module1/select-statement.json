@@ -1,0 +1,92 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_1": {
+        "select-statement": {
+          "label": "The SELECT Statement",
+          "summary": "How to use SELECT to read data from a table.",
+          "cards": {
+            "sketch0": {
+              "title": "What is the SELECT Statement?"
+            },
+            "sketch1": {
+              "title": "Basic SELECT Syntax"
+            },
+            "sketch2": {
+              "title": "Example: Selecting All Data"
+            },
+            "project": {
+              "title": "Project"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "projectSteps": {
+            "quiz-select-code": {
+              "title": "Write a SELECT statement to get all data from the 'products' table."
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_1": {
+        "select-statement": {
+          "sketch-what-is-select": {
+            "title": "What is the SELECT Statement?",
+            "bodyMarkdown": "The `SELECT` statement is the most basic and important command in SQL. It is used to retrieve data from one or more tables in a database. When you use `SELECT`, you can specify which columns you want to see, or you can select all columns."
+          },
+          "sketch-basic-select-syntax": {
+            "title": "Basic SELECT Syntax",
+            "bodyMarkdown": "The simplest form of a `SELECT` statement looks like this:\n\n```sql\nSELECT * FROM table_name;\n```\n\n- `SELECT` tells the database you want to read data.\n- `*` means 'all columns'.\n- `FROM` specifies the table you want to read from."
+          },
+          "sketch-example-select": {
+            "title": "Example: Selecting All Data",
+            "bodyMarkdown": "Suppose you have a table called `products` with columns like `id`, `name`, and `price`. To get all the data from this table, you would write:\n\n```sql\nSELECT * FROM products;\n```\n\nThis will return every row and every column from the `products` table."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "quiz-select-purpose": {
+      "title": "What is the main purpose of the SELECT statement in SQL?",
+      "prompt": "Choose the best answer.",
+      "options": {
+        "a": "To retrieve data from a table",
+        "b": "To delete data from a table",
+        "c": "To update data in a table",
+        "d": "To create a new table"
+      }
+    },
+    "quiz-select-syntax": {
+      "title": "Which SQL statement will select all columns from the 'products' table?",
+      "prompt": "Choose the correct SQL statement.",
+      "options": {
+        "a": "SELECT * FROM products;",
+        "b": "SELECT products FROM *;",
+        "c": "GET * FROM products;",
+        "d": "SELECT ALL FROM products;"
+      }
+    },
+    "quiz-select-keywords-order": {
+      "title": "Order the keywords to form a correct SELECT statement.",
+      "prompt": "Drag to arrange the SQL keywords in the correct order.",
+      "tokens": {
+        "t1": "SELECT",
+        "t2": "*",
+        "t3": "FROM",
+        "t4": "products",
+        "t5": ";"
+      }
+    },
+    "quiz-select-code": {
+      "title": "Write a SELECT statement to get all data from the 'products' table.",
+      "prompt": "Write a SQL query that selects all columns and all rows from the `products` table.",
+      "starterCode": "-- Write your SQL query below\n"
+    }
+  }
+}

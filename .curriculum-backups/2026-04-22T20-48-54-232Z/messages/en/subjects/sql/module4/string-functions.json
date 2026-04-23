@@ -1,0 +1,116 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_4": {
+        "string-functions": {
+          "label": "String Functions (TRIM, UPPER, LOWER)",
+          "summary": "Clean and transform text data with string functions.",
+          "cards": {
+            "sketch0": {
+              "title": "Introduction to String Functions"
+            },
+            "sketch1": {
+              "title": "Examples Using the Customers Table"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_4": {
+        "string-functions": {
+          "sketch-intro-string-funcs": {
+            "title": "Introduction to String Functions",
+            "bodyMarkdown": "String functions in SQL help you clean and transform text data. Common functions include:\n\n- **TRIM(text)**: Removes leading and trailing spaces from a string.\n- **UPPER(text)**: Converts all letters in a string to uppercase.\n- **LOWER(text)**: Converts all letters in a string to lowercase.\n\nThese are especially useful for standardizing data, making searches case-insensitive, or cleaning up user input."
+          },
+          "sketch-examples-string-funcs": {
+            "title": "Examples Using the Customers Table",
+            "bodyMarkdown": "Suppose you have the following row in the `customers` table:\n\n| id | full_name      | email             |\n|----|---------------|-------------------|\n| 3  |  Ava Patel  | ava@example.com    |\n\n- Using `TRIM(full_name)` will return `Ava Patel` (removes extra spaces).\n- Using `UPPER(full_name)` will return `AVA PATEL`.\n- Using `LOWER(email)` will return `ava@example.com` (already lowercase, but ensures consistency).\n\nYou can combine these functions as needed in your SELECT statements."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "quiz-single-choice-trim": {
+      "title": "What does the TRIM function do?",
+      "prompt": "Which of the following best describes the purpose of the TRIM function in SQL?",
+      "hint": "Think about where extra spaces might appear in user input.",
+      "help": {
+        "concept": "The TRIM function is used to remove unwanted spaces from the start and end of a string, which is common in data entry.",
+        "hint_1": "TRIM does not remove all spaces, only those at the edges.",
+        "hint_2": "TRIM is useful for cleaning up leading and trailing spaces, not for changing the case or replacing characters."
+      },
+      "options": {
+        "a": "Removes all spaces from a string",
+        "b": "Removes spaces only at the beginning and end of a string",
+        "c": "Converts text to uppercase",
+        "d": "Replaces spaces with underscores"
+      }
+    },
+    "quiz-single-choice-upper": {
+      "title": "Using UPPER for Standardization",
+      "prompt": "Why might you use the UPPER function when querying email addresses?",
+      "hint": "Think about how text comparisons work in SQL.",
+      "help": {
+        "concept": "UPPER is used to convert all letters to uppercase, which helps standardize text for comparisons.",
+        "hint_1": "UPPER does not remove spaces or extract parts of the email.",
+        "hint_2": "Converting both sides of a comparison to uppercase ensures case differences don't affect the result."
+      },
+      "options": {
+        "a": "To remove spaces from emails",
+        "b": "To make email comparisons case-insensitive",
+        "c": "To extract the domain from emails",
+        "d": "To shorten email addresses"
+      }
+    },
+    "quiz-drag-reorder-string-funcs": {
+      "title": "Order of String Cleanup Steps",
+      "prompt": "Arrange the steps to clean up a name field for consistent searching.",
+      "hint": "Think about what should be cleaned first.",
+      "help": {
+        "concept": "Cleaning text often involves removing extra spaces before changing the case, then performing comparisons.",
+        "hint_1": "Start by removing spaces that might affect the result.",
+        "hint_2": "After trimming, convert to lowercase for case-insensitive comparison."
+      },
+      "tokens": {
+        "t1": "Remove leading/trailing spaces",
+        "t2": "Convert to lowercase",
+        "t3": "Compare with search term"
+      }
+    },
+    "quiz-fill-blank-choice-string-func": {
+      "title": "Choose the Correct Function",
+      "prompt": "Fill in the blank: To convert the `city` column to all uppercase letters in a SELECT statement, use _____.",
+      "hint": "Which function changes text to uppercase?",
+      "help": {
+        "concept": "the missing term is the SQL function for converting text to all capital letters.",
+        "hint_1": "TRIM removes spaces, LOWER makes text lowercase.",
+        "hint_2": "the missing term is used for uppercase conversion."
+      },
+      "template": "SELECT {blank}(city) FROM customers;",
+      "choices": [
+        "TRIM",
+        "UPPER",
+        "LOWER",
+        "REPLACE"
+      ]
+    },
+    "quiz-code-input-trim-upper": {
+      "title": "Clean Up Names for Display",
+      "prompt": "Write a SQL query to select the `id` and a cleaned-up version of `full_name` from the `customers` table. The cleaned-up name should have no leading/trailing spaces and be in uppercase. Name the new column `clean_name`.",
+      "hint": "You need to use both TRIM and UPPER together.",
+      "help": {
+        "concept": "You can nest string functions in SQL to first remove spaces and then change the case.",
+        "hint_1": "Apply TRIM to full_name first, then wrap it with UPPER.",
+        "hint_2": "The inner function should remove spaces, and the outer function should convert to uppercase."
+      },
+      "starterCode": "SELECT id, _____(_____(full_name)) AS clean_name\nFROM customers;"
+    }
+  }
+}

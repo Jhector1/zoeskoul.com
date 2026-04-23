@@ -1,0 +1,123 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_5": {
+        "group-by": {
+          "label": "GROUP BY Clause",
+          "summary": "Group data for aggregate calculations.",
+          "cards": {
+            "sketch0": {
+              "title": "What is GROUP BY?"
+            },
+            "sketch1": {
+              "title": "GROUP BY Syntax"
+            },
+            "sketch2": {
+              "title": "GROUP BY with Multiple Columns"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_5": {
+        "group-by": {
+          "sk1": {
+            "title": "What is GROUP BY?",
+            "bodyMarkdown": "The `GROUP BY` clause in SQL is used to arrange identical data into groups. This is especially useful when you want to perform aggregate calculations, such as counting the number of orders per region or finding the average unit price per category. The `GROUP BY` clause is commonly used with aggregate functions like `COUNT()`, `SUM()`, `AVG()`, `MIN()`, and `MAX()`.\n\n**Example:**\n\nSuppose you want to know the total quantity of items ordered in each region from the `orders` table:\n\n```sql\nSELECT region, SUM(quantity) AS total_quantity\nFROM orders\nGROUP BY region;\n```\n\nThis query groups the rows by `region` and calculates the sum of `quantity` for each group."
+          },
+          "sk2": {
+            "title": "GROUP BY Syntax",
+            "bodyMarkdown": "The basic syntax for using `GROUP BY` is:\n\n```sql\nSELECT column1, AGG_FUNC(column2)\nFROM table_name\nGROUP BY column1;\n```\n\n- `column1`: The column you want to group by.\n- `AGG_FUNC(column2)`: An aggregate function (like `SUM`, `COUNT`, etc.) applied to another column.\n\nYou can group by more than one column by listing them separated by commas."
+          },
+          "sk3": {
+            "title": "GROUP BY with Multiple Columns",
+            "bodyMarkdown": "You can group by more than one column to create subgroups. For example, to get the total quantity ordered for each combination of `region` and `category`:\n\n```sql\nSELECT region, category, SUM(quantity) AS total_quantity\nFROM orders\nGROUP BY region, category;\n```\n\nThis query will return the sum of `quantity` for each unique pair of `region` and `category`."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "q1": {
+      "title": "Purpose of GROUP BY",
+      "prompt": "What is the main purpose of the GROUP BY clause in SQL?",
+      "hint": "Think about organizing data for aggregate calculations.",
+      "help": {
+        "concept": "The GROUP BY clause is used to arrange rows into groups based on the values of one or more columns.",
+        "hint_1": "GROUP BY is not used for filtering or sorting, but for grouping similar rows.",
+        "hint_2": "It is often used with aggregate functions to summarize data for each group."
+      },
+      "options": {
+        "a": "To filter rows based on a condition",
+        "b": "To sort the result set",
+        "c": "To group rows that have the same values in specified columns",
+        "d": "To join two tables together"
+      }
+    },
+    "q2": {
+      "title": "Valid Uses of GROUP BY",
+      "prompt": "Which of the following queries correctly use the GROUP BY clause? (Select all that apply)",
+      "hint": "GROUP BY is needed when you use aggregate functions and want results per group.",
+      "help": {
+        "concept": "GROUP BY is used with aggregate functions to summarize data for each group. The SELECT list should include only grouped columns and aggregates.",
+        "hint_1": "Look for queries that use GROUP BY with aggregate functions.",
+        "hint_2": "Queries missing GROUP BY with aggregates or using GROUP BY without aggregates may be incorrect."
+      },
+      "options": {
+        "a": "SELECT region, COUNT(*) FROM orders GROUP BY region;",
+        "b": "SELECT * FROM orders GROUP BY category;",
+        "c": "SELECT category, AVG(unit_price) FROM orders GROUP BY category;",
+        "d": "SELECT customer_name, SUM(quantity) FROM orders;"
+      }
+    },
+    "q3": {
+      "title": "GROUP BY Query Order",
+      "prompt": "Arrange the SQL keywords to form a correct GROUP BY query that calculates the total quantity per region.",
+      "hint": "Start with SELECT, then specify the table, then group.",
+      "help": {
+        "concept": "A typical GROUP BY query starts with SELECT, followed by FROM, and then GROUP BY.",
+        "hint_1": "The SELECT clause comes first, followed by FROM, then GROUP BY.",
+        "hint_2": "GROUP BY always comes after FROM in a SQL query."
+      },
+      "tokens": {
+        "t1": "SELECT region, SUM(quantity)",
+        "t2": "FROM orders",
+        "t3": "GROUP BY region"
+      }
+    },
+    "q4": {
+      "title": "GROUP BY Syntax Fill-in",
+      "prompt": "Fill in the blank to complete the GROUP BY query:\n\nSELECT region, COUNT(*) FROM orders ____ region;",
+      "hint": "Which clause is used to group rows?",
+      "help": {
+        "concept": "The the missing term clause is used to group rows for aggregate calculations.",
+        "hint_1": "It's not WHERE or ORDER BY; think about grouping.",
+        "hint_2": "the missing term comes before aggregate calculations per group."
+      },
+      "template": "SELECT region, COUNT(*) FROM orders ____ region;",
+      "choices": [
+        "GROUP BY",
+        "ORDER BY",
+        "WHERE",
+        "HAVING"
+      ]
+    },
+    "q5": {
+      "title": "Write a GROUP BY Query",
+      "prompt": "Write a SQL query to find the total quantity ordered for each category in the orders table.",
+      "hint": "Use GROUP BY with the category column and SUM on quantity.",
+      "help": {
+        "concept": "To get totals per group, use GROUP BY with an aggregate function.",
+        "hint_1": "Select category and sum of quantity, then group by category.",
+        "hint_2": "GROUP BY should match the column you want totals for."
+      },
+      "starterCode": "-- Write your query below"
+    }
+  }
+}

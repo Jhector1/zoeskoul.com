@@ -1,6 +1,6 @@
 {
   "name": "@zoeskoul/curriculum-compiler",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "private": true,
   "type": "module",
   "main": "./dist/index.js",
@@ -13,13 +13,14 @@
   },
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "typecheck": "tsc -p tsconfig.json --noEmit"
+    "clean": "rimraf dist"
   },
   "dependencies": {
     "@zoeskoul/curriculum-ai": "workspace:*",
     "@zoeskoul/curriculum-contracts": "workspace:*",
     "@zoeskoul/curriculum-core": "workspace:*",
     "@zoeskoul/curriculum-profiles": "workspace:*",
-    "pdf-parse": "^2.4.5"
+    "@zoeskoul/curriculum-runtime": "workspace:*"
+
   }
 }

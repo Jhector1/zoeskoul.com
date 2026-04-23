@@ -1,0 +1,123 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_5": {
+        "count-sum-avg": {
+          "label": "COUNT, SUM, AVG",
+          "summary": "Calculate totals and averages from data.",
+          "cards": {
+            "sketch0": {
+              "title": "Introduction to Aggregate Functions"
+            },
+            "sketch1": {
+              "title": "COUNT Function"
+            },
+            "sketch2": {
+              "title": "SUM and AVG Functions"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_5": {
+        "count-sum-avg": {
+          "sketch-1": {
+            "title": "Introduction to Aggregate Functions",
+            "bodyMarkdown": "SQL aggregate functions allow you to perform calculations on multiple rows of a table's column and return a single value. The most common aggregate functions are **COUNT**, **SUM**, and **AVG**. These are used to count rows, sum values, and calculate averages, respectively."
+          },
+          "sketch-2": {
+            "title": "COUNT Function",
+            "bodyMarkdown": "**COUNT** returns the number of rows that match a specified condition. For example, `SELECT COUNT(*) FROM products;` counts all rows in the products table."
+          },
+          "sketch-3": {
+            "title": "SUM and AVG Functions",
+            "bodyMarkdown": "**SUM** adds up all the values in a numeric column, while **AVG** calculates the average value. For example, `SELECT SUM(price) FROM products;` gives the total price of all products, and `SELECT AVG(price) FROM products;` gives the average price."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "quiz-1": {
+      "title": "Understanding COUNT",
+      "prompt": "Which SQL function would you use to find out how many products are in the products table?",
+      "hint": "Think about which function counts rows.",
+      "help": {
+        "concept": "COUNT is used to determine the number of rows that match a condition.",
+        "hint_1": "COUNT returns the number of records in a table or view.",
+        "hint_2": "If you want to know how many items are present, use COUNT."
+      },
+      "options": {
+        "a": "SUM",
+        "b": "COUNT",
+        "c": "AVG",
+        "d": "MAX"
+      }
+    },
+    "quiz-2": {
+      "title": "Choosing Aggregate Functions",
+      "prompt": "Which of the following SQL functions can be used to calculate the average or total of a numeric column?",
+      "hint": "Focus on functions that work with numeric values.",
+      "help": {
+        "concept": "SUM and AVG are used for numeric calculations: SUM adds values, AVG finds their mean.",
+        "hint_1": "SUM totals up values, AVG finds the average.",
+        "hint_2": "COUNT and MIN are not used for both total and average calculations."
+      },
+      "options": {
+        "a": "SUM",
+        "b": "AVG",
+        "c": "COUNT",
+        "d": "MIN"
+      }
+    },
+    "quiz-3": {
+      "title": "Fill in the Aggregate Function",
+      "prompt": "To find the average salary in the employees table, use: SELECT ___(salary) FROM employees;",
+      "hint": "Which function calculates the mean value?",
+      "help": {
+        "concept": "the missing term calculates the average (mean) of a numeric column.",
+        "hint_1": "the missing term is used to find the average value.",
+        "hint_2": "It's not SUM or COUNT, but the one that finds the mean."
+      },
+      "template": "SELECT ___(salary) FROM employees;",
+      "choices": [
+        "COUNT",
+        "SUM",
+        "AVG",
+        "MIN"
+      ]
+    },
+    "quiz-4": {
+      "title": "Order of Aggregate Functions by Use Case",
+      "prompt": "Arrange these aggregate functions in the order you would use them to: (1) count rows, (2) sum values, (3) calculate an average.",
+      "hint": "Think about which function counts, which adds, and which averages.",
+      "help": {
+        "concept": "COUNT is for counting, SUM for totaling, and AVG for averaging.",
+        "hint_1": "COUNT comes first, then SUM, then AVG.",
+        "hint_2": "Start with the function that counts, then the one that adds, then the one that averages."
+      },
+      "tokens": {
+        "t1": "COUNT",
+        "t2": "SUM",
+        "t3": "AVG"
+      }
+    },
+    "quiz-5": {
+      "title": "Write a Query Using SUM",
+      "prompt": "Write a SQL query to find the total quantity of all items in the inventory_ops table.",
+      "hint": "Use SUM on the quantity column.",
+      "help": {
+        "concept": "SUM adds up all values in a numeric column, such as quantity.",
+        "hint_1": "The query should select the SUM of the quantity column.",
+        "hint_2": "Use SELECT SUM(quantity) FROM inventory_ops."
+      },
+      "starterCode": "-- Write your SQL query here\n"
+    }
+  }
+}

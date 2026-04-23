@@ -1,0 +1,133 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_6": {
+        "left-right-join": {
+          "label": "LEFT and RIGHT JOIN",
+          "summary": "Include unmatched rows with LEFT and RIGHT JOIN.",
+          "cards": {
+            "sketch0": {
+              "title": "What are LEFT and RIGHT JOIN?"
+            },
+            "sketch1": {
+              "title": "When to Use LEFT or RIGHT JOIN"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_6": {
+        "left-right-join": {
+          "sketch-what-are-left-right-join": {
+            "title": "What are LEFT and RIGHT JOIN?",
+            "bodyMarkdown": "When combining tables in SQL, sometimes you want to include rows that don't have a match in the other table. **LEFT JOIN** returns all rows from the left table, plus any matching rows from the right table. If there is no match, the result will have NULLs for columns from the right table.\n\n**RIGHT JOIN** is similar, but returns all rows from the right table, and any matches from the left table. If there is no match, the left table's columns will be NULL.\n\nExample:\n\n```sql\nSELECT students.name, enrollments.term\nFROM students\nLEFT JOIN enrollments ON students.id = enrollments.student_id;\n```\n\nThis query lists all students, showing their enrollment term if they have one. Students with no enrollments will still appear, with NULL for the term."
+          },
+          "sketch-when-use-left-right-join": {
+            "title": "When to Use LEFT or RIGHT JOIN",
+            "bodyMarkdown": "Use **LEFT JOIN** when you want to keep all rows from the first (left) table, even if there are no matches in the second (right) table. Use **RIGHT JOIN** when you want to keep all rows from the second (right) table, even if there are no matches in the first (left) table.\n\nFor example, to find all courses and their enrollments (including courses with no enrollments):\n\n```sql\nSELECT courses.title, enrollments.student_id\nFROM courses\nLEFT JOIN enrollments ON courses.id = enrollments.course_id;\n```\n\nThis will show every course, even if no student is enrolled in it."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "quiz-left-join-basic": {
+      "title": "Understanding LEFT JOIN",
+      "prompt": "What does a LEFT JOIN do in SQL?",
+      "hint": "Think about which table's rows are always included.",
+      "help": {
+        "concept": "A LEFT JOIN keeps all rows from the left table, and adds data from the right table when there is a match.",
+        "hint_1": "LEFT JOIN includes all rows from the left table, even if there is no match in the right table.",
+        "hint_2": "If a row in the left table has no match in the right table, the result will have NULLs for the right table's columns."
+      },
+      "options": {
+        "a": "Returns only rows that have matches in both tables.",
+        "b": "Returns all rows from the left table, and matching rows from the right table.",
+        "c": "Returns all rows from the right table, and matching rows from the left table.",
+        "d": "Returns only rows that do not have matches in either table."
+      }
+    },
+    "quiz-right-join-basic": {
+      "title": "Understanding RIGHT JOIN",
+      "prompt": "Which statement best describes a RIGHT JOIN?",
+      "hint": "Focus on which table's rows are always present in the result.",
+      "help": {
+        "concept": "the correct answer RIGHT JOIN keeps all rows from the right table, and adds data from the left table when there is the correct answer match.",
+        "hint_1": "RIGHT JOIN includes all rows from the right table, even if there is no match in the left table.",
+        "hint_2": "If the correct answer row in the right table has no match in the left table, the result will have NULLs for the left table's columns."
+      },
+      "options": {
+        "a": "Returns all rows from the right table, and matching rows from the left table.",
+        "b": "Returns only rows that have matches in both tables.",
+        "c": "Returns all rows from the left table, and matching rows from the right table.",
+        "d": "Returns only rows that do not have matches in either table."
+      }
+    },
+    "quiz-left-join-null-values": {
+      "title": "LEFT JOIN and NULL Values",
+      "prompt": "When using LEFT JOIN, in which situations will you see NULL values in the result?",
+      "hint": "Think about what happens when there is no match in the right table.",
+      "help": {
+        "concept": "LEFT JOIN produces NULLs for columns from the right table when there is no match for the correct answer row in the left table.",
+        "hint_1": "If the correct answer left table row doesn't match any right table row, the right table's columns will be NULL.",
+        "hint_2": "Also, if you join on columns that are NULL, those rows may not match and can result in NULLs in the output."
+      },
+      "options": {
+        "a": "When a row in the left table has no matching row in the right table.",
+        "b": "When a row in the right table has no matching row in the left table.",
+        "c": "When all rows have matches in both tables.",
+        "d": "When joining on columns that contain NULLs."
+      }
+    },
+    "quiz-left-join-order": {
+      "title": "LEFT JOIN Query Structure",
+      "prompt": "Arrange the steps to perform a LEFT JOIN between students and enrollments to show all students and their enrollment terms.",
+      "hint": "Start with SELECT, then FROM, then JOIN, then ON.",
+      "help": {
+        "concept": "A LEFT JOIN query starts with SELECT, then FROM the left table, then LEFT JOIN the right table, and finally the ON clause.",
+        "hint_1": "The ON clause comes after the JOIN keyword.",
+        "hint_2": "The order is SELECT, FROM, LEFT JOIN, ON."
+      },
+      "tokens": {
+        "t1": "SELECT students.name, enrollments.term",
+        "t2": "FROM students",
+        "t3": "LEFT JOIN enrollments",
+        "t4": "ON students.id = enrollments.student_id"
+      }
+    },
+    "quiz-fill-blank-left-right": {
+      "title": "Fill in the JOIN Type",
+      "prompt": "Fill in the blank: To include all rows from the right table and matching rows from the left table, use a ____ JOIN.",
+      "hint": "Which JOIN keeps all rows from the the missing term table?",
+      "help": {
+        "concept": "the missing term JOIN includes all rows from the the missing term table, even if there is no match in the left table.",
+        "hint_1": "LEFT JOIN keeps all rows from the left table; the missing term JOIN keeps all rows from the the missing term table.",
+        "hint_2": "If you want to keep all rows from the the missing term table, use the missing term JOIN."
+      },
+      "template": "To include all rows from the right table and matching rows from the left table, use a ____ JOIN.",
+      "choices": [
+        "LEFT",
+        "RIGHT",
+        "INNER",
+        "FULL"
+      ]
+    },
+    "quiz-left-join-sql-task": {
+      "title": "SQL: List All Courses and Their Enrollments",
+      "prompt": "Write a SQL query to list all courses and the student_id of students enrolled in each course. Include courses even if no student is enrolled. Show the course title and student_id.",
+      "hint": "Use LEFT JOIN to keep all courses, even those with no enrollments.",
+      "help": {
+        "concept": "To include all courses, use LEFT JOIN from courses to enrollments. This keeps every course, even if there are no matching enrollments.",
+        "hint_1": "Start with SELECT courses.title, enrollments.student_id FROM courses LEFT JOIN enrollments ...",
+        "hint_2": "Join courses.id to enrollments.course_id using LEFT JOIN."
+      },
+      "starterCode": "-- Write your query here"
+    }
+  }
+}
