@@ -4,12 +4,16 @@ import { buildTemplateIoRecipe } from "./base/recipes/buildTemplateIoRecipe.js";
 import { sqlProfile, sqlProfileAdapter } from "./sql/index.js";
 import { pythonProfile, pythonProfileAdapter } from "./python/index.js";
 import { mathProfile, mathProfileAdapter } from "./math/index.js";
-import { languageProfile, languageProfileAdapter } from "./language/index.js";
-import { webProfile, webProfileAdapter } from "./web/index.js";
-import { dataScienceProfile, dataScienceProfileAdapter } from "./data-science/index.js";
+// import { languageProfile, languageProfileAdapter } from "./language/index.js";
+// import { webProfile, webProfileAdapter } from "./web/index.js";
+// import { dataScienceProfile, dataScienceProfileAdapter } from "./data-science/index.js";
 
-const profiles = [sqlProfile, pythonProfile, mathProfile, languageProfile, webProfile, dataScienceProfile] satisfies CourseProfile[];
-const adapters = [sqlProfileAdapter, pythonProfileAdapter, mathProfileAdapter, languageProfileAdapter, webProfileAdapter, dataScienceProfileAdapter] satisfies CourseProfileAdapter[];
+const profiles = [sqlProfile, pythonProfile, mathProfile,
+  // languageProfile, webProfile, dataScienceProfile
+] satisfies CourseProfile[];
+const adapters = [sqlProfileAdapter, pythonProfileAdapter, mathProfileAdapter,
+  // languageProfileAdapter, webProfileAdapter, dataScienceProfileAdapter
+] satisfies CourseProfileAdapter[];
 
 export const PROFILE_REGISTRY = Object.fromEntries(profiles.map((p) => [p.id, p])) as Record<string, CourseProfile>;
 export const PROFILE_ADAPTER_REGISTRY = Object.fromEntries(adapters.map((p) => [p.id, p])) as Record<string, CourseProfileAdapter>;

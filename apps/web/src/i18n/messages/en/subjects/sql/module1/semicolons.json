@@ -1,0 +1,125 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_1": {
+        "semicolons": {
+          "label": "Semicolons",
+          "summary": "Semicolons in Your First Queries with SELECT",
+          "cards": {
+            "sketch0": {
+              "title": "What is a Semicolon in SQL?"
+            },
+            "sketch1": {
+              "title": "When Do You Need a Semicolon?"
+            },
+            "sketch2": {
+              "title": "What Happens Without a Semicolon?"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_1": {
+        "semicolons": {
+          "sketch-1": {
+            "title": "What is a Semicolon in SQL?",
+            "bodyMarkdown": "In SQL, a semicolon (`;`) is used to mark the end of a statement. This helps the database know where one command finishes and another begins. While some SQL tools may let you run queries without a semicolon, it's good practice to always include it, especially when writing multiple statements."
+          },
+          "sketch-2": {
+            "title": "When Do You Need a Semicolon?",
+            "bodyMarkdown": "You should use a semicolon at the end of every SQL statement. This is especially important when you write more than one statement in a script. For example:\n\n```sql\nSELECT * FROM students;\nSELECT name FROM students;\n```\nEach statement ends with a semicolon."
+          },
+          "sketch-3": {
+            "title": "What Happens Without a Semicolon?",
+            "bodyMarkdown": "If you forget the semicolon, some SQL tools may still run your query, but others will show an error or wait for more input. Always using semicolons makes your SQL code more portable and less likely to cause confusion."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "fill-blank-1": {
+      "title": "Identify the Correct Ending",
+      "prompt": "Which of the following correctly ends a SQL statement?",
+      "hint": "What symbol is used to finish SQL statements?",
+      "help": {
+        "concept": "A semicolon is the standard way to end SQL statements.",
+        "hint_1": "Think about what comes at the end of a SQL command.",
+        "hint_2": "It's a punctuation mark commonly used to separate statements in SQL."
+      },
+      "template": "SELECT * FROM students ____",
+      "choices": [
+        ";",
+        ".",
+        ":",
+        ","
+      ]
+    },
+    "fill-blank-2": {
+      "title": "Semicolons and Multiple Statements",
+      "prompt": "Fill in the blank to correctly separate two SQL statements.",
+      "hint": "How do you separate two SQL statements?",
+      "help": {
+        "concept": "Each SQL statement should end with a semicolon to separate it from the next.",
+        "hint_1": "What symbol goes at the end of a statement?",
+        "hint_2": "It's the same symbol used to end the first statement before starting the next."
+      },
+      "template": "SELECT name FROM students____ SELECT age FROM students;",
+      "choices": [
+        ";",
+        ",",
+        ".",
+        ":"
+      ]
+    },
+    "single-choice-1": {
+      "title": "Why Use Semicolons?",
+      "prompt": "Why is it important to use semicolons at the end of SQL statements?",
+      "hint": "Think about how the database reads your commands.",
+      "help": {
+        "concept": "Semicolons separate SQL statements so the database can process them correctly.",
+        "hint_1": "Consider what happens if you write multiple statements together.",
+        "hint_2": "The semicolon tells the database where to stop reading one command and start the next."
+      },
+      "options": {
+        "a": "They help the database know where one statement ends and another begins.",
+        "b": "They make the query run faster.",
+        "c": "They are required for all programming languages.",
+        "d": "They change the output of the query."
+      }
+    },
+    "multi-choice-1": {
+      "title": "Semicolon Usage",
+      "prompt": "In which situations should you use a semicolon in SQL? Select all that apply.",
+      "hint": "Think about where statements start and end.",
+      "help": {
+        "concept": "Semicolons are used to end statements, not within keywords or identifiers.",
+        "hint_1": "Consider the structure of a full SQL command.",
+        "hint_2": "Semicolons are not used inside names or keywords, only at the end of statements."
+      },
+      "options": {
+        "a": "At the end of every SQL statement",
+        "b": "Between multiple statements in a script",
+        "c": "Inside a column name",
+        "d": "After the FROM keyword"
+      }
+    },
+    "code-input-1": {
+      "title": "Write a Query with a Semicolon",
+      "prompt": "Write a SQL statement that selects all columns from the students table and ends correctly.",
+      "hint": "Focus on the concept being tested.",
+      "help": {
+        "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+        "hint_1": "Eliminate choices or interpretations that do not match the task.",
+        "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+      },
+      "starterCode": "-- Write your SQL query below"
+    }
+  }
+}

@@ -1,0 +1,118 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_5": {
+        "intro-to-functions": {
+          "label": "Intro to functions",
+          "summary": "Intro to functions in Calculated Columns and SQL Expressions",
+          "cards": {
+            "sketch0": {
+              "title": "What are SQL functions?"
+            },
+            "sketch1": {
+              "title": "Simple function example"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "quiz": {
+            "fillblank-func-purpose": {
+              "title": "Purpose of SQL functions",
+              "prompt": "Why do we use functions in SQL SELECT statements?",
+              "hint": "Think about what functions do to the data you select.",
+              "help": {
+                "concept": "Functions in SQL are used to change or calculate values in your result set.",
+                "hint_1": "Functions like UPPER() or COUNT() change or summarize data.",
+                "hint_2": "The main goal is to modify or compute new values from existing data."
+              },
+              "template": "We use functions in SQL to ____ data in our queries.",
+              "choices": [
+                "transform",
+                "delete",
+                "sort",
+                "join"
+              ]
+            },
+            "fillblank-uppercase-example": {
+              "title": "Using UPPER() function",
+              "prompt": "Which function would you use to make all letters in a student's name uppercase?",
+              "hint": "Focus on the missing SQL concept rather than the exact missing word.",
+              "help": {
+                "concept": "The blank should be filled with the SQL term that matches the job the statement is trying to perform.",
+                "hint_1": "Think about what the missing part is supposed to do in the statement.",
+                "hint_2": "Choose the SQL term that best completes the meaning of the statement."
+              },
+              "template": "To make names uppercase, use the ____ function.",
+              "choices": [
+                "UPPER",
+                "LOWER",
+                "COUNT",
+                "SUM"
+              ]
+            },
+            "singlechoice-where-functions-go": {
+              "title": "Where do functions appear in a SQL query?",
+              "prompt": "In which part of a SQL query do you most often use functions to create calculated columns?",
+              "hint": "Focus on the main concept being tested and eliminate choices that describe something different.",
+              "help": {
+                "concept": "Choose the option that matches the core idea described in the question without relying on repeated wording from the answer choices.",
+                "hint_1": "Rule out options that describe a different role, behavior, or SQL concept than the question is testing.",
+                "hint_2": "Pick the option that best matches the concept, not the one that simply repeats familiar wording."
+              },
+              "options": {
+                "a": "SELECT clause",
+                "b": "FROM clause",
+                "c": "ORDER BY clause",
+                "d": "GROUP BY clause"
+              }
+            },
+            "multichoice-function-uses": {
+              "title": "Which are uses of SQL functions?",
+              "prompt": "Which of the following are valid uses of SQL functions? (Choose all that apply)",
+              "hint": "Think about which options involve calculation or transformation.",
+              "help": {
+                "concept": "SQL functions are used for calculations and data transformation, not for deleting data.",
+                "hint_1": "COUNT(), LOWER(), and AVG() are all functions for calculation or transformation.",
+                "hint_2": "Deleting rows is not done with a function, but with a DELETE statement."
+              },
+              "options": {
+                "a": "Counting the number of students",
+                "b": "Changing all names to lowercase",
+                "c": "Deleting rows from a table",
+                "d": "Calculating the average grade level"
+              }
+            },
+            "codeinput-uppercase-names": {
+              "title": "Write a query using a function",
+              "prompt": "Write a SQL query to select all student names from the students table, but display them in uppercase. The column should be called name_uppercase.",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+                "hint_1": "Eliminate choices or interpretations that do not match the task.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "starterCode": "-- Write your query below"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_5": {
+        "intro-to-functions": {
+          "sketch-what-are-functions": {
+            "title": "What are SQL functions?",
+            "bodyMarkdown": "SQL functions are built-in operations that take input values and return a result. They help you transform, calculate, or summarize data directly in your queries. For example, you can use functions to count rows, find averages, or change text to uppercase. Functions are often used in the SELECT clause to create new columns or modify existing ones."
+          },
+          "sketch-simple-function-example": {
+            "title": "Simple function example",
+            "bodyMarkdown": "Suppose you want to display all student names in uppercase. You can use the `UPPER()` function in your SELECT statement:\n\n```sql\nSELECT UPPER(name) AS name_uppercase FROM students;\n```\n\nThis query returns a list of student names, but all letters will be capitalized."
+          }
+        }
+      }
+    }
+  }
+}

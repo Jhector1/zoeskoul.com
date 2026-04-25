@@ -8,117 +8,16 @@
   },
   "modules": {
     "sql": {
-      "sql_module_0": {
-        "title": "Introduction to SQL",
-        "description": "Get started with SQL: what it is, why it's useful, and how databases work.",
-        "outcomes": [
-          "Understand the history of SQL",
-          "Identify the main purposes of SQL",
-          "Define a database",
-          "Explain how data is organized in databases",
-          "Describe tables, rows, and columns"
-        ],
-        "why": [
-          "Builds confidence with introduction to sql.",
-          "Prepares learners for the next skills in the course."
-        ]
-      },
-      "sql_module_1": {
-        "title": "Reading Data from Tables",
-        "description": "Learn how to retrieve data from tables using SELECT statements.",
-        "outcomes": [
-          "Write a basic SELECT statement",
-          "Identify SELECT statement components",
-          "Select specific columns from a table",
-          "Use * to select all columns",
-          "Apply aliases to columns in SELECT statements"
-        ],
-        "why": [
-          "Builds confidence with reading data from tables.",
-          "Prepares learners for the next skills in the course."
-        ]
-      },
-      "sql_module_2": {
-        "title": "Filtering Results",
-        "description": "Master filtering data using WHERE clauses and logical operators.",
-        "outcomes": [
-          "Write WHERE clauses to filter data",
-          "Apply comparison operators in WHERE clauses",
-          "Use AND, OR, NOT in WHERE clauses",
-          "Filter rows with NULL values"
-        ],
-        "why": [
-          "Builds confidence with filtering results.",
-          "Prepares learners for the next skills in the course."
-        ]
-      },
-      "sql_module_3": {
-        "title": "Sorting and Output Control",
-        "description": "Learn to sort results and limit the number of rows returned.",
-        "outcomes": [
-          "Sort results using ORDER BY",
-          "Sort results in ascending or descending order",
-          "Limit output using LIMIT or TOP",
-          "Paginate results using OFFSET"
-        ],
-        "why": [
-          "Builds confidence with sorting and output control.",
-          "Prepares learners for the next skills in the course."
-        ]
-      },
-      "sql_module_4": {
-        "title": "Text Matching and Cleanup",
-        "description": "Work with text data: searching, matching, and cleaning up results.",
-        "outcomes": [
-          "Use LIKE for pattern matching",
-          "Apply case-insensitive matching",
-          "Use TRIM, UPPER, LOWER in queries",
-          "Concatenate text fields in SQL"
-        ],
-        "why": [
-          "Builds confidence with text matching and cleanup.",
-          "Prepares learners for the next skills in the course."
-        ]
-      },
       "sql_module_5": {
-        "title": "Basic Aggregations",
-        "description": "Summarize data with aggregate functions like COUNT, SUM, AVG, MIN, and MAX.",
+        "title": "Calculated Columns and SQL Expressions",
+        "description": "Teach learners to create new values from existing data so raw tables become useful reports.",
         "outcomes": [
-          "Use COUNT, SUM, and AVG functions",
-          "Use MIN and MAX functions",
-          "Group data using GROUP BY",
-          "Filter grouped data using HAVING"
+          "Use arithmetic and expressions inside SELECT.",
+          "Rename outputs with aliases for readability.",
+          "Apply simple built-in functions safely."
         ],
         "why": [
-          "Builds confidence with basic aggregations.",
-          "Prepares learners for the next skills in the course."
-        ]
-      },
-      "sql_module_6": {
-        "title": "Multi-Table Queries",
-        "description": "Combine data from multiple tables using JOINs.",
-        "outcomes": [
-          "Write INNER JOIN queries",
-          "Use LEFT and RIGHT JOINs",
-          "Understand and use CROSS JOIN",
-          "Join multiple tables in one query"
-        ],
-        "why": [
-          "Builds confidence with multi-table queries.",
-          "Prepares learners for the next skills in the course."
-        ]
-      },
-      "sql_module_7": {
-        "title": "Practical SQL Projects",
-        "description": "Apply your SQL skills to real-world scenarios and mini-projects.",
-        "outcomes": [
-          "Apply SELECT, WHERE, and JOINs in practice",
-          "Clean and standardize data using SQL",
-          "Perform data aggregation in SQL",
-          "Integrate multiple SQL concepts in a project"
-        ],
-        "why": [
-          "Builds confidence with practical sql projects.",
+          "Builds confidence with calculated columns and sql expressions.",
           "Prepares learners for the next skills in the course."
         ]
       }
@@ -126,107 +25,49 @@
   },
   "sections": {
     "sql": {
-      "sql_module_0": {
-        "section_0_1": {
-          "title": "What is SQL?",
-          "description": "",
-          "weeks": "Week 1",
-          "bullets": [
-            "History and Purpose of SQL",
-            "Databases Overview",
-            "Relational Model Basics",
-            "SQL Environments and Tools"
-          ]
-        }
-      },
-      "sql_module_1": {
-        "section_1_1": {
-          "title": "SELECT Statement Basics",
-          "description": "",
-          "weeks": "Week 2",
-          "bullets": [
-            "Basic SELECT Syntax",
-            "Selecting Specific Columns",
-            "Selecting All Columns",
-            "Column Aliases"
-          ]
-        }
-      },
-      "sql_module_2": {
-        "section_2_1": {
-          "title": "Using WHERE to Filter Data",
-          "description": "",
-          "weeks": "Week 3",
-          "bullets": [
-            "WHERE Clause Basics",
-            "Comparison Operators",
-            "Logical Operators (AND, OR, NOT)",
-            "Filtering NULL Values"
-          ]
-        }
-      },
-      "sql_module_3": {
-        "section_3_1": {
-          "title": "Sorting and Limiting Output",
-          "description": "",
-          "weeks": "Week 4",
-          "bullets": [
-            "ORDER BY Clause",
-            "Sorting Direction (ASC, DESC)",
-            "LIMIT and TOP Clauses",
-            "OFFSET and Pagination"
-          ]
-        }
-      },
-      "sql_module_4": {
-        "section_4_1": {
-          "title": "Text Operations in SQL",
-          "description": "",
-          "weeks": "Week 5",
-          "bullets": [
-            "Pattern Matching with LIKE",
-            "Case-Insensitive Matching",
-            "String Functions (TRIM, UPPER, LOWER)",
-            "Concatenating Text"
-          ]
-        }
-      },
       "sql_module_5": {
         "section_5_1": {
-          "title": "Aggregate Functions",
+          "title": "Creating New Values in Queries",
           "description": "",
-          "weeks": "Week 6",
+          "weeks": null,
           "bullets": [
-            "COUNT, SUM, AVG",
-            "MIN and MAX",
-            "GROUP BY Clause",
-            "HAVING Clause"
+            "What expressions are",
+            "Math in SQL",
+            "Adding and subtracting",
+            "Multiplying and dividing"
           ]
-        }
-      },
-      "sql_module_6": {
-        "section_6_1": {
-          "title": "Introduction to JOINs",
+        },
+        "section_5_2": {
+          "title": "Column Aliases",
           "description": "",
-          "weeks": "Week 7",
+          "weeks": null,
           "bullets": [
-            "INNER JOIN",
-            "LEFT and RIGHT JOIN",
-            "CROSS JOIN",
-            "Joining Multiple Tables"
+            "What aliases are",
+            "AS",
+            "Renaming result columns",
+            "Writing readable output"
           ]
-        }
-      },
-      "sql_module_7": {
-        "section_7_1": {
-          "title": "Hands-On Practice",
+        },
+        "section_5_3": {
+          "title": "Simple Functions",
           "description": "",
-          "weeks": "Week 8",
+          "weeks": null,
           "bullets": [
-            "Querying a Sample Database",
-            "Data Cleanup Task",
-            "Aggregation Challenge",
-            "Mini-Project: End-to-End Query"
+            "Intro to functions",
+            "String functions",
+            "Number functions",
+            "Date function awareness"
+          ]
+        },
+        "section_5_4": {
+          "title": "Expression Practice",
+          "description": "",
+          "weeks": null,
+          "bullets": [
+            "Total price calculations",
+            "Discount calculations",
+            "Renaming outputs",
+            "Simple report queries"
           ]
         }
       }

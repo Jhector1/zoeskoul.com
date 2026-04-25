@@ -1,0 +1,123 @@
+{
+  "title": "Total price calculations",
+  "summary": "Learn how to use SQL expressions to calculate new values, such as totals, using arithmetic and aliases in SELECT statements.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch-1",
+      "title": "What are calculated columns?",
+      "bodyMarkdown": "A calculated column in SQL is a value you create on the fly in your SELECT statement, using arithmetic or expressions based on existing columns. For example, you might want to show a student's next grade level by adding 1 to the current `grade_level`:\n\n```sql\nSELECT name, grade_level, grade_level + 1 AS next_grade\nFROM students;\n```\n\nThis query displays each student's name, current grade, and what their grade will be next year."
+    },
+    {
+      "id": "sketch-2",
+      "title": "Using expressions and aliases",
+      "bodyMarkdown": "SQL expressions can use operators like `+`, `-`, `*`, and `/` to combine or transform data. You can also use aliases (with `AS`) to give your calculated columns clear names. For example:\n\n```sql\nSELECT name, grade_level * 2 AS double_grade\nFROM students;\n```\n\nHere, `double_grade` is an alias for the calculated value."
+    },
+    {
+      "id": "sketch-3",
+      "title": "Practical example: Calculating totals",
+      "bodyMarkdown": "Suppose you want to report how many courses each student is enrolled in. You can use a subquery or a join with `COUNT()` to calculate this. For example:\n\n```sql\nSELECT s.name, COUNT(e.id) AS course_count\nFROM students s\nLEFT JOIN enrollments e ON s.id = e.student_id\nGROUP BY s.id;\n```\n\nThis query shows each student's name and the number of courses they are enrolled in, using a calculated column with an alias."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "fill-blank-1",
+      "kind": "fill_blank_choice",
+      "title": "Fill in the blank: Calculating next grade",
+      "prompt": "Choose the best value for the missing blank in the statement.",
+      "template": "The missing value is [blank1].",
+      "choices": [
+        "grade_level + 1",
+        "grade_level - 1",
+        "grade_level * 2",
+        "grade_level / 2"
+      ],
+      "correctValue": "grade_level + 1",
+      "hint": "Think about how to increase the grade by one.",
+      "help": {
+        "concept": "To calculate a new value from an existing column, use arithmetic operators. Adding 1 to grade_level gives the next grade.",
+        "hint_1": "Use the + operator to increment the grade_level.",
+        "hint_2": "The correct expression adds 1 to the current grade_level."
+      }
+    },
+    {
+      "id": "fill-blank-2",
+      "kind": "fill_blank_choice",
+      "title": "Fill in the blank: Using aliases",
+      "prompt": "Choose the best value for the missing blank in the statement.",
+      "template": "The missing value is [blank1].",
+      "choices": [
+        "AS",
+        "ALIAS",
+        "RENAME",
+        "LABEL"
+      ],
+      "correctValue": "AS",
+      "hint": "Focus on the missing SQL concept rather than the exact missing word.",
+      "help": {
+        "concept": "The blank should be filled with the SQL term that matches the job the statement is trying to perform.",
+        "hint_1": "Think about what the missing part is supposed to do in the statement.",
+        "hint_2": "Choose the SQL term that best completes the meaning of the statement."
+      }
+    },
+    {
+      "id": "single-choice-1",
+      "kind": "single_choice",
+      "title": "Single choice: Which is a valid calculated column?",
+      "prompt": "Which of the following SELECT statements creates a calculated column showing double the grade level?",
+      "options": [
+        "SELECT name, grade_level * 2 AS double_grade FROM students;",
+        "SELECT name, grade_level AS double_grade FROM students;",
+        "SELECT name, grade_level + grade_level AS grade FROM students;",
+        "SELECT name, grade_level FROM students;"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Look for the statement that multiplies grade_level by 2 and uses an alias.",
+      "help": {
+        "concept": "A calculated column uses an expression and often an alias to show new values in the result set.",
+        "hint_1": "The correct answer multiplies grade_level by 2 and names it double_grade.",
+        "hint_2": "Check for both the calculation and the use of AS for the alias."
+      }
+    },
+    {
+      "id": "multi-choice-1",
+      "kind": "multi_choice",
+      "title": "Multi choice: Which statements use calculated columns?",
+      "prompt": "Select all SELECT statements below that use a calculated column.",
+      "options": [
+        "SELECT name, grade_level + 1 AS next_grade FROM students;",
+        "SELECT name, grade_level FROM students;",
+        "SELECT name, grade_level * 2 AS double_grade FROM students;",
+        "SELECT name, grade_level AS grade FROM students;"
+      ],
+      "correctOptionIds": [
+        "a",
+        "c"
+      ],
+      "hint": "A calculated column uses an expression, not just a column name.",
+      "help": {
+        "concept": "Calculated columns are created by performing operations on existing columns in the SELECT clause.",
+        "hint_1": "Look for statements that use arithmetic like + or *.",
+        "hint_2": "Only statements with an expression (not just a column) are correct."
+      }
+    },
+    {
+      "id": "code-input-1",
+      "kind": "code_input",
+      "title": "Code input: Calculate and rename a column",
+      "prompt": "Write a SQL query that lists each student's name and their grade level increased by 2, with the new column named future_grade.",
+      "starterCode": "-- Write your query below",
+      "solutionCode": "SELECT name, grade_level + 2 AS future_grade FROM students;",
+      "datasetId": "school_relations_intro",
+      "recipeType": "sql_query",
+      "hint": "Focus on the concept being tested.",
+      "help": {
+        "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+        "hint_1": "Eliminate choices or interpretations that do not match the task.",
+        "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+      }
+    }
+  ]
+}

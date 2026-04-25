@@ -12,6 +12,85 @@ function has(sql: string, pattern: RegExp) {
     return pattern.test(sql);
 }
 
+function hasPromptPhrase(prompt: string, pattern: RegExp) {
+    return pattern.test(prompt);
+}
+
+function suggestsGroupByIntent(prompt: string): boolean {
+    return (
+        hasPromptPhrase(prompt, /\bgroup by\b/i) ||
+        hasPromptPhrase(prompt, /\bgroup\b.*\bby\b/i) ||
+        hasPromptPhrase(prompt, /\bgroup rows by\b/i) ||
+        hasPromptPhrase(prompt, /\bgroup results by\b/i)
+    );
+}
+
+function suggestsCountIntent(prompt: string): {
+    explicit: boolean;
+    strong: boolean;
+    weak: boolean;
+} {
+    const explicit =
+        hasPromptPhrase(prompt, /\bwrite\s+(?:a\s+)?sql\s+query\s+to\s+count\b/i) ||
+        hasPromptPhrase(prompt, /\bwrite\s+(?:a\s+)?query\s+to\s+count\b/i) ||
+        hasPromptPhrase(prompt, /\bcount the number of\b/i) ||
+        hasPromptPhrase(prompt, /\bhow many\b/i) ||
+        hasPromptPhrase(prompt, /\bnumber of rows\b/i) ||
+        hasPromptPhrase(prompt, /\btotal number of rows\b/i) ||
+        hasPromptPhrase(prompt, /\bcount rows\b/i);
+
+    const strong =
+        explicit ||
+        hasPromptPhrase(prompt, /\bcount the\b/i) ||
+        hasPromptPhrase(prompt, /\bcount only\b/i);
+
+    const weak =
+        hasPromptPhrase(prompt, /\bcount\b/i) &&
+        !hasPromptPhrase(prompt, /\bcount\s*\(/i);
+
+    return { explicit, strong, weak };
+}
+
+function suggestsAvgIntent(prompt: string): boolean {
+    return (
+        hasPromptPhrase(prompt, /\baverage\b/i) ||
+        hasPromptPhrase(prompt, /\bavg\b/i)
+    );
+}
+
+function suggestsSumIntent(prompt: string): {
+    strong: boolean;
+    weak: boolean;
+} {
+    return {
+        strong:
+            hasPromptPhrase(prompt, /\bsum\b/i) ||
+            hasPromptPhrase(prompt, /\badd up\b/i) ||
+            hasPromptPhrase(prompt, /\btotal up\b/i),
+        weak:
+            hasPromptPhrase(prompt, /\bgrand total\b/i),
+    };
+}
+
+function suggestsHavingIntent(prompt: string): boolean {
+    return hasPromptPhrase(prompt, /\bhaving\b/i);
+}
+
+function suggestsJoinIntent(prompt: string): boolean {
+    return (
+        hasPromptPhrase(prompt, /\bjoin\b/i) ||
+        hasPromptPhrase(prompt, /\binner join\b/i) ||
+        hasPromptPhrase(prompt, /\bleft join\b/i) ||
+        hasPromptPhrase(prompt, /\bright join\b/i) ||
+        hasPromptPhrase(prompt, /\bcombine tables\b/i) ||
+        hasPromptPhrase(prompt, /\bfrom multiple tables\b/i)
+    );
+}
+
+function suggestsAtLeastIntent(prompt: string): boolean {
+    return hasPromptPhrase(prompt, /\bat least\b/i);
+}
+
 export function validateSqlPromptIntent(args: {
     seed: TopicSeed;
     draft: TopicAuthoringDraft;
@@ -29,7 +108,7 @@ export function validateSqlPromptIntent(args: {
 
         if (!sql) continue;
 
-        if (prompt.includes("group by") && !has(sql, /\bgroup\s+by\b/i)) {
+        if (suggestsGroupByIntent(prompt) && !has(sql, /\bgroup\s+by\b/i)) {
             issues.push({
                 code: "SQL_PROMPT_INTENT_GROUP_BY_MISSING",
                 category: "prompt_intent",
@@ -39,23 +118,34 @@ export function validateSqlPromptIntent(args: {
             });
         }
 
-        if (
-            (prompt.includes("count") || prompt.includes("how many")) &&
-            !has(sql, /\bcount\s*\(/i)
-        ) {
+        const countIntent = suggestsCountIntent(prompt);
+        if (countIntent.explicit && !has(sql, /\bcount\s*\(/i)) {
             issues.push({
                 code: "SQL_PROMPT_INTENT_COUNT_MISSING",
                 category: "prompt_intent",
-                severity: "error",
+                severity: "warn",
                 exerciseId: exercise.id,
-                message: "Prompt suggests COUNT, but the solution query does not use COUNT(...).",
+                message: "Prompt explicitly asks for COUNT, but the solution query does not use COUNT(...).",
+            });
+        } else if (countIntent.strong && !has(sql, /\bcount\s*\(/i)) {
+            issues.push({
+                code: "SQL_PROMPT_INTENT_COUNT_STRONG_MISMATCH",
+                category: "prompt_intent",
+                severity: "warn",
+                exerciseId: exercise.id,
+                message: "Prompt strongly suggests COUNT, but the solution query does not use COUNT(...).",
+            });
+        } else if (countIntent.weak && !has(sql, /\bcount\s*\(/i)) {
+            issues.push({
+                code: "SQL_PROMPT_INTENT_COUNT_WEAK_MISMATCH",
+                category: "prompt_intent",
+                severity: "warn",
+                exerciseId: exercise.id,
+                message: "Prompt mentions count-like wording, but the solution query does not use COUNT(...).",
             });
         }
 
-        if (
-            (prompt.includes("average") || prompt.includes("avg")) &&
-            !has(sql, /\bavg\s*\(/i)
-        ) {
+        if (suggestsAvgIntent(prompt) && !has(sql, /\bavg\s*\(/i)) {
             issues.push({
                 code: "SQL_PROMPT_INTENT_AVG_MISSING",
                 category: "prompt_intent",
@@ -65,20 +155,26 @@ export function validateSqlPromptIntent(args: {
             });
         }
 
-        if (
-            (prompt.includes("sum") || prompt.includes("total")) &&
-            !has(sql, /\bsum\s*\(/i)
-        ) {
+        const sumIntent = suggestsSumIntent(prompt);
+        if (sumIntent.strong && !has(sql, /\bsum\s*\(/i)) {
             issues.push({
                 code: "SQL_PROMPT_INTENT_SUM_MISSING",
                 category: "prompt_intent",
                 severity: "error",
                 exerciseId: exercise.id,
-                message: "Prompt suggests SUM or total, but the solution query does not use SUM(...).",
+                message: "Prompt suggests SUM, but the solution query does not use SUM(...).",
+            });
+        } else if (sumIntent.weak && !has(sql, /\bsum\s*\(/i)) {
+            issues.push({
+                code: "SQL_PROMPT_INTENT_SUM_WEAK_MISMATCH",
+                category: "prompt_intent",
+                severity: "warn",
+                exerciseId: exercise.id,
+                message: "Prompt mentions total-like wording, but the solution query does not use SUM(...).",
             });
         }
 
-        if (prompt.includes("having") && !has(sql, /\bhaving\b/i)) {
+        if (suggestsHavingIntent(prompt) && !has(sql, /\bhaving\b/i)) {
             issues.push({
                 code: "SQL_PROMPT_INTENT_HAVING_MISSING",
                 category: "prompt_intent",
@@ -88,12 +184,7 @@ export function validateSqlPromptIntent(args: {
             });
         }
 
-        if (
-            (prompt.includes("join") ||
-                prompt.includes("combine tables") ||
-                prompt.includes("multiple tables")) &&
-            !has(sql, /\bjoin\b/i)
-        ) {
+        if (suggestsJoinIntent(prompt) && !has(sql, /\bjoin\b/i)) {
             issues.push({
                 code: "SQL_PROMPT_INTENT_JOIN_MISSING",
                 category: "join",
@@ -103,7 +194,7 @@ export function validateSqlPromptIntent(args: {
             });
         }
 
-        if (prompt.includes("at least") && !has(sql, />=\s*\d+/i)) {
+        if (suggestsAtLeastIntent(prompt) && !has(sql, />=\s*\d+/i)) {
             issues.push({
                 code: "SQL_PROMPT_INTENT_AT_LEAST_MISSING_GTE",
                 category: "prompt_intent",

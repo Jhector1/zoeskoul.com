@@ -1,0 +1,13 @@
+{
+  "topicId": "date-function-awareness",
+  "ok": true,
+  "issues": [
+    {
+      "code": "SQL_RUNNER_NOT_CONFIGURED",
+      "category": "execution",
+      "severity": "warn",
+      "exerciseId": "ci-1-extract-term-year",
+      "message": "No shared SQL runner is configured for compiler-side semantic validation."
+    }
+  ]
+}

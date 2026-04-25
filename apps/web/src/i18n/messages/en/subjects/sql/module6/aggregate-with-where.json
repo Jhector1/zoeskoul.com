@@ -1,0 +1,118 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_6": {
+        "aggregate-with-where": {
+          "label": "Aggregate with WHERE",
+          "summary": "Learn how to use the WHERE clause to filter rows before applying aggregate functions in SQL.",
+          "cards": {
+            "sketch0": {
+              "title": "Aggregates with WHERE: The Basics"
+            },
+            "sketch1": {
+              "title": "Why Filter Before Aggregating?"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "quiz": {
+            "fill-blank-1": {
+              "title": "Purpose of WHERE in Aggregates",
+              "prompt": "Choose the best value for the first missing blank in the statement.",
+              "hint": "Think about what WHERE does in a SELECT statement.",
+              "help": {
+                "concept": "The WHERE clause limits which rows are included in the aggregation.",
+                "hint_1": "WHERE is used to include only certain rows based on a condition.",
+                "hint_2": "It selects a subset of rows before the aggregate function is applied."
+              },
+              "template": "The first missing value is [blank1].",
+              "choices": [
+                "filter",
+                "sort",
+                "group",
+                "rename"
+              ]
+            },
+            "fill-blank-2": {
+              "title": "Filtering Example",
+              "prompt": "Choose the best value for the first missing blank in the statement.",
+              "hint": "Focus on the missing SQL concept rather than the exact missing word.",
+              "help": {
+                "concept": "The blank should be filled with the SQL term that matches the job the statement is trying to perform.",
+                "hint_1": "Think about what the missing part is supposed to do in the statement.",
+                "hint_2": "Choose the SQL term that best completes the meaning of the statement."
+              },
+              "template": "The first missing value is [blank1].",
+              "choices": [
+                "'active'",
+                "'draft'",
+                "'inactive'",
+                "'Kitchen'"
+              ]
+            },
+            "single-choice-1": {
+              "title": "Effect of WHERE on Aggregates",
+              "prompt": "What happens if you use a WHERE clause in an aggregate query?",
+              "hint": "Does WHERE change which rows are counted or summarized?",
+              "help": {
+                "concept": "WHERE determines which rows are processed by the aggregate function.",
+                "hint_1": "Aggregates only consider rows that pass the WHERE filter.",
+                "hint_2": "If a row doesn't match the WHERE condition, it won't be included in the aggregate calculation."
+              },
+              "options": {
+                "a": "Only rows matching the WHERE condition are included in the aggregation.",
+                "b": "The WHERE clause is ignored when using aggregates.",
+                "c": "All rows are always included, regardless of WHERE.",
+                "d": "WHERE only affects the output columns, not the rows."
+              }
+            },
+            "multi-choice-1": {
+              "title": "Choosing Correct Aggregate Queries",
+              "prompt": "Which of the following queries will count only items in the 'Accessories' category? (Choose all that apply.)",
+              "hint": "Look for queries that include a WHERE clause filtering for 'Accessories'.",
+              "help": {
+                "concept": "A WHERE clause with category = 'Accessories' ensures only those rows are counted.",
+                "hint_1": "Check if the WHERE clause matches the category you want.",
+                "hint_2": "Queries without WHERE or with a different category won't count only 'Accessories'."
+              },
+              "options": {
+                "a": "SELECT COUNT(*) FROM inventory_items WHERE category = 'Accessories';",
+                "b": "SELECT COUNT(*) FROM inventory_items;",
+                "c": "SELECT COUNT(*) FROM inventory_items WHERE category = 'Kitchen';",
+                "d": "SELECT COUNT(*) FROM inventory_items WHERE category = 'Accessories' AND status = 'active';"
+              }
+            },
+            "code-input-1": {
+              "title": "Write an Aggregate Query with WHERE",
+              "prompt": "Write a SQL query to find the maximum price of items that are in the 'Kitchen' category.",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+                "hint_1": "Eliminate choices or interpretations that do not match the task.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "starterCode": "-- Write your query below"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_6": {
+        "aggregate-with-where": {
+          "sketch-1": {
+            "title": "Aggregates with WHERE: The Basics",
+            "bodyMarkdown": "Aggregate functions like COUNT, SUM, AVG, MIN, and MAX summarize data across multiple rows. The `WHERE` clause lets you filter which rows are included **before** the aggregation happens. For example, to count only 'active' items in the `inventory_items` table:\n\n```sql\nSELECT COUNT(*) FROM inventory_items WHERE status = 'active';\n```\nThis query counts only the rows where the status is 'active'."
+          },
+          "sketch-2": {
+            "title": "Why Filter Before Aggregating?",
+            "bodyMarkdown": "Filtering with `WHERE` is powerful because it lets you focus your summary on a specific subset of your data. For example, you might want to know the average price of items in the 'Kitchen' category:\n\n```sql\nSELECT AVG(price) FROM inventory_items WHERE category = 'Kitchen';\n```\nThis query calculates the average price **only** for rows where the category is 'Kitchen'."
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,148 @@
+{
+  "title": "Renaming result columns",
+  "summary": "Learn how to rename columns in SQL result sets using column aliases, making your queries clearer and your reports easier to read.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch-1",
+      "title": "Why Rename Columns?",
+      "bodyMarkdown": "When you use expressions or functions in your SELECT statement, the resulting column name can be hard to read. For example:\n\n```sql\nSELECT name, grade_level + 1 FROM students;\n```\n\nThis query returns a column named `grade_level + 1`, which isn't very clear. Renaming columns with an alias makes your results easier to understand."
+    },
+    {
+      "id": "sketch-2",
+      "title": "Using AS to Create Aliases",
+      "bodyMarkdown": "You can rename a result column by adding `AS new_name` after the column or expression:\n\n```sql\nSELECT name, grade_level + 1 AS next_year_grade FROM students;\n```\n\nNow the output column is labeled `next_year_grade` instead of `grade_level + 1`."
+    },
+    {
+      "id": "sketch-3",
+      "title": "Aliases with Table Columns",
+      "bodyMarkdown": "Aliases aren't just for expressions. You can also rename regular columns:\n\n```sql\nSELECT name AS student_name, grade_level AS year FROM students;\n```\n\nThis is helpful when preparing reports or joining tables with similar column names."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "fill-1",
+      "kind": "fill_blank_choice",
+      "title": "Syntax for Renaming Columns",
+      "prompt": "Fill in the blank to rename the result of an expression in SQL.",
+      "template": "SELECT name, grade_level + 1 ___ next_year_grade FROM students;",
+      "choices": [
+        "AS",
+        "TO",
+        "RENAME",
+        "WITH"
+      ],
+      "correctValue": "AS",
+      "hint": "It's a two-letter SQL keyword used for aliases.",
+      "help": {
+        "concept": "In SQL, the `AS` keyword is used to assign an alias to a column or expression in the SELECT clause.",
+        "hint_1": "The keyword comes right after the column or expression.",
+        "hint_2": "It's not TO, RENAME, or WITH—it's a short keyword often used for column aliases."
+      }
+    },
+    {
+      "id": "fill-2",
+      "kind": "fill_blank_choice",
+      "title": "Renaming a Table Column",
+      "prompt": "Choose the correct alias to rename the `name` column to `student_name` in the result.",
+      "template": "SELECT name ___ student_name FROM students;",
+      "choices": [
+        "AS",
+        "LIKE",
+        "IS",
+        "=="
+      ],
+      "correctValue": "AS",
+      "hint": "It's the same keyword used for expressions.",
+      "help": {
+        "concept": "The `AS` keyword is used to give a new name (alias) to a column in the SELECT statement.",
+        "hint_1": "This keyword works for both columns and expressions.",
+        "hint_2": "It's not LIKE, IS, or ==. It's a standard SQL keyword for aliases."
+      }
+    },
+    {
+      "id": "single-1",
+      "kind": "single_choice",
+      "title": "Purpose of Column Aliases",
+      "prompt": "Why would you use a column alias in a SQL query?",
+      "options": [
+        {
+          "id": "a",
+          "content": "To make result columns easier to read and understand"
+        },
+        {
+          "id": "b",
+          "content": "To change the data in the database"
+        },
+        {
+          "id": "c",
+          "content": "To speed up query execution"
+        },
+        {
+          "id": "d",
+          "content": "To delete columns from the table"
+        }
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Think about how the output looks, not how the data is stored.",
+      "help": {
+        "concept": "Column aliases are used to give more meaningful or readable names to columns in the result set of a query.",
+        "hint_1": "Aliases affect only the output, not the underlying data.",
+        "hint_2": "They help make reports and query results clearer, not faster or more permanent."
+      }
+    },
+    {
+      "id": "multi-1",
+      "kind": "multi_choice",
+      "title": "Where Can You Use Aliases?",
+      "prompt": "In which situations can you use column aliases in SQL? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "content": "Renaming the result of an arithmetic expression"
+        },
+        {
+          "id": "b",
+          "content": "Renaming a regular column"
+        },
+        {
+          "id": "c",
+          "content": "Renaming a table in the FROM clause"
+        },
+        {
+          "id": "d",
+          "content": "Renaming the result of a function like COUNT()"
+        }
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ],
+      "hint": "Think about SELECT clause outputs, not FROM clause tables.",
+      "help": {
+        "concept": "Column aliases can be used for expressions, functions, and regular columns in the SELECT clause, but table aliases are different.",
+        "hint_1": "You can use aliases for columns, expressions, and functions, but not for renaming tables in the SELECT clause.",
+        "hint_2": "Table aliases use a different syntax and are not the same as column aliases."
+      }
+    },
+    {
+      "id": "code-1",
+      "kind": "code_input",
+      "title": "Write a Query with Aliases",
+      "prompt": "Write a SQL query to select the `name` column as `student_name` and the `grade_level` column as `year` from the `students` table.",
+      "starterCode": "-- Write your query below\n",
+      "solutionCode": "SELECT name AS student_name, grade_level AS year FROM students;",
+      "datasetId": "school_relations_intro",
+      "recipeType": "sql_query",
+      "hint": "Use the AS keyword to rename both columns in your SELECT statement.",
+      "help": {
+        "concept": "To rename columns in your result set, use the AS keyword after each column in the SELECT clause.",
+        "hint_1": "Write SELECT, then the original column name, then AS, then the new name.",
+        "hint_2": "You need to alias both columns: name and grade_level."
+      }
+    }
+  ]
+}

@@ -1,0 +1,118 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_0": {
+        "where-sql-runs": {
+          "label": "Where SQL runs",
+          "summary": "Understand where SQL is used, what environments run SQL, and how SQL interacts with databases.",
+          "cards": {
+            "sketch0": {
+              "title": "What is SQL and where does it run?"
+            },
+            "sketch1": {
+              "title": "How does SQL connect to data?"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "quiz": {
+            "q1": {
+              "title": "SQL Environment Example",
+              "prompt": "Which of the following is an environment where SQL can run?",
+              "hint": "Focus on the missing SQL concept rather than the exact missing word.",
+              "help": {
+                "concept": "The blank should be filled with the SQL term that matches the job the statement is trying to perform.",
+                "hint_1": "Think about what the missing part is supposed to do in the statement.",
+                "hint_2": "Choose the SQL term that best completes the meaning of the statement."
+              },
+              "template": "SQL can run inside a ________.",
+              "choices": [
+                "database system",
+                "spreadsheet",
+                "text editor",
+                "web browser"
+              ]
+            },
+            "q2": {
+              "title": "SQL's Main Purpose",
+              "prompt": "What is the main thing SQL is used for?",
+              "hint": "What do you do with data using SQL?",
+              "help": {
+                "concept": "SQL is used to create, read, update, and delete data in databases.",
+                "hint_1": "SQL lets you organize and change data.",
+                "hint_2": "SQL is not for drawing or printing, but for handling data."
+              },
+              "template": "SQL is mainly used to ________ data in a database.",
+              "choices": [
+                "manage",
+                "draw",
+                "print",
+                "encrypt"
+              ]
+            },
+            "q3": {
+              "title": "Where does SQL NOT run?",
+              "prompt": "Which of these is NOT a place where SQL typically runs?",
+              "hint": "Think about which tool is not built for SQL.",
+              "help": {
+                "concept": "SQL requires a database engine to interpret and execute commands.",
+                "hint_1": "Spreadsheets store data but don't process SQL queries.",
+                "hint_2": "Database servers and cloud services are made for SQL, but spreadsheets are not."
+              },
+              "options": {
+                "a": "Inside a database server",
+                "b": "In a spreadsheet application",
+                "c": "On a cloud database service",
+                "d": "On your local computer with a database installed"
+              }
+            },
+            "q4": {
+              "title": "SQL Environments: Choose all that apply",
+              "prompt": "Which of the following are environments where you can run SQL queries? (Choose all that apply)",
+              "hint": "Focus on the main concept being tested and eliminate choices that describe something different.",
+              "help": {
+                "concept": "Choose the option that matches the core idea described in the question without relying on repeated wording from the answer choices.",
+                "hint_1": "Rule out options that describe a different role, behavior, or SQL concept than the question is testing.",
+                "hint_2": "Pick the option that best matches the concept, not the one that simply repeats familiar wording."
+              },
+              "options": {
+                "a": "MySQL database server",
+                "b": "PostgreSQL database server",
+                "c": "Google Sheets",
+                "d": "SQLite installed on your computer"
+              }
+            },
+            "q5": {
+              "title": "Try a Simple SQL Query",
+              "prompt": "Suppose you have a table called `students` with columns `id`, `name`, and `grade`. Write a SQL query to select all columns from the `students` table.",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+                "hint_1": "Eliminate choices or interpretations that do not match the task.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "starterCode": "-- Write your SQL query below"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_0": {
+        "where-sql-runs": {
+          "sk1": {
+            "title": "What is SQL and where does it run?",
+            "bodyMarkdown": "SQL (Structured Query Language) is a language used to interact with databases. You write SQL commands to ask questions or make changes to data stored in a database. SQL runs inside a database system, which could be software on your computer, a server in the cloud, or a service provided by a company. Examples include SQLite (local), MySQL, PostgreSQL, and cloud databases like Amazon RDS or Google Cloud SQL."
+          },
+          "sk2": {
+            "title": "How does SQL connect to data?",
+            "bodyMarkdown": "When you use SQL, you are sending commands to a database engine. This engine manages tables, rows, and columns of data. You might use a command-line tool, a web interface, or a programming language to send SQL queries to the database. The database engine runs your SQL and returns results."
+          }
+        }
+      }
+    }
+  }
+}

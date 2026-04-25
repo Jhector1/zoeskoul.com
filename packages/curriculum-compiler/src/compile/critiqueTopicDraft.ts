@@ -4,19 +4,15 @@ import type {
     TopicAuthoringDraft,
 } from "@zoeskoul/curriculum-contracts";
 import type { AiProvider } from "@zoeskoul/curriculum-ai";
-import { generateCoursePlan } from "@zoeskoul/curriculum-ai";
-import {
-    getProfileAdapter,
-    getProfileServices,
-} from "@zoeskoul/curriculum-profiles";
+import { getProfileServices } from "@zoeskoul/curriculum-profiles";
 import { validateBlueprint } from "../validate/validateBlueprint.js";
-import { validatePlan } from "../validate/validatePlan.js";
-import { loadSavedPlan } from "../planning/loadSavedPlan.js";
-import { savePlan } from "../planning/savePlan.js";
 import { readTopicReports } from "../reports/readTopicReports.js";
 import { writeTopicReports } from "../reports/writeTopicReports.js";
 import { reviewPreparedTopicDraft } from "../quality/reviewPreparedTopicDraft.js";
 import type { CompileProgressCallback } from "./compileProgress.js";
+import { resolvePlan } from "../spec/resolvePlan.js";
+import { findTopicPlanNode } from "../plan/findTopicPlanNode.js";
+import { buildTopicSeedFromPlanNode } from "../seeds/buildTopicSeedFromPlanNode.js";
 
 export async function critiqueTopicDraft(args: {
     blueprint: CourseBlueprint;
@@ -53,136 +49,116 @@ export async function critiqueTopicDraft(args: {
         topicId: args.topicId,
     });
 
-    let plan = await loadSavedPlan(args.blueprint.subjectSlug);
+    const resolved = await resolvePlan({
+        blueprint: args.blueprint,
+        provider: args.provider,
+    });
 
-    if (!plan) {
+    if (resolved.source === "spec") {
         advanceProgress({
-            stage: "generating course plan",
+            stage: "loaded course spec",
             topicId: args.topicId,
         });
-
-        plan = await generateCoursePlan(args.provider, args.blueprint);
-        validatePlan(plan);
-        await savePlan(args.blueprint.subjectSlug, plan);
-    } else {
-        validatePlan(plan);
-
+    } else if (resolved.source === "saved_plan") {
         advanceProgress({
             stage: "loaded saved plan",
             topicId: args.topicId,
         });
+    } else {
+        advanceProgress({
+            stage: "generated course plan",
+            topicId: args.topicId,
+        });
     }
 
-    const adapter = getProfileAdapter(args.blueprint.profileId);
+    const node = findTopicPlanNode({
+        plan: resolved.plan,
+        topicId: args.topicId,
+    });
+
+    if (!node) {
+        throw new Error(`Topic not found in resolved course structure: ${args.topicId}`);
+    }
+
     const profileServices = getProfileServices(args.blueprint.profileId);
 
-    for (const module of plan.modules) {
-        const moduleOrder = module.order - 1;
+    const seed = buildTopicSeedFromPlanNode({
+        blueprint: args.blueprint,
+        spec: resolved.spec,
+        module: node.module,
+        section: node.section,
+        topic: node.topic,
+    });
 
-        for (const section of module.sections) {
-            for (const topic of section.topics) {
-                if (topic.topicId !== args.topicId) continue;
+    advanceProgress({
+        stage: "loading saved draft report",
+        topicId: node.topic.topicId,
+        moduleSlug: node.module.moduleSlug,
+        sectionSlug: node.section.sectionSlug,
+    });
 
-                const seed = adapter.buildTopicSeed({
-                    blueprint: args.blueprint,
-                    module: {
-                        slug: module.moduleSlug,
-                        title: module.title,
-                        order: module.order,
-                        purpose: undefined,
-                        learningObjectives: topic.learningGoals,
-                        guidedExercises: [],
-                        quizFocus: [],
-                        moduleProject: undefined,
-                    },
-                    section: {
-                        slug: section.sectionSlug,
-                        title: section.title,
-                        order: section.order,
-                    },
-                    topic: {
-                        topicId: topic.topicId,
-                        order: topic.order,
-                        title: topic.title,
-                        summary: topic.summary,
-                        minutes: topic.minutes,
-                    },
-                });
+    const saved = await readTopicReports({
+        subjectSlug: args.blueprint.subjectSlug,
+        moduleOrder: node.moduleIndex,
+        topicId: node.topic.topicId,
+    });
 
-                advanceProgress({
-                    stage: "loading saved draft report",
-                    topicId: topic.topicId,
-                    moduleSlug: module.moduleSlug,
-                    sectionSlug: section.sectionSlug,
-                });
+    const repairedDraft = (saved.repairedDraft ??
+        saved.rawDraft) as TopicAuthoringDraft | undefined;
 
-                const saved = await readTopicReports({
-                    subjectSlug: args.blueprint.subjectSlug,
-                    moduleOrder,
-                    topicId: topic.topicId,
-                });
-
-                const repairedDraft = (saved.repairedDraft ??
-                    saved.rawDraft) as TopicAuthoringDraft | undefined;
-
-                if (!repairedDraft) {
-                    throw new Error(
-                        `No saved draft found for ${topic.topicId}. Compile the topic first before using critique-topic-draft.`,
-                    );
-                }
-
-                advanceProgress({
-                    stage: "reviewing saved draft",
-                    topicId: topic.topicId,
-                    moduleSlug: module.moduleSlug,
-                    sectionSlug: section.sectionSlug,
-                });
-
-                const review = await reviewPreparedTopicDraft({
-                    seed,
-                    draft: repairedDraft,
-                    profileServices,
-                });
-
-                await writeTopicReports({
-                    subjectSlug: args.blueprint.subjectSlug,
-                    moduleOrder,
-                    topicId: topic.topicId,
-                    repairedDraft,
-                    repairReport: saved.repairReport,
-                    critiqueReport: review.critiqueReport,
-                    semanticReport: review.semanticReport,
-                    topicBundle: saved.topicBundle,
-                });
-
-                advanceProgress({
-                    stage: "completed saved draft critique",
-                    topicId: topic.topicId,
-                    moduleSlug: module.moduleSlug,
-                    sectionSlug: section.sectionSlug,
-                });
-
-                return {
-                    mode: "draft" as const,
-                    subjectSlug: args.blueprint.subjectSlug,
-                    topicId: topic.topicId,
-                    moduleSlug: module.moduleSlug,
-                    sectionSlug: section.sectionSlug,
-                    moduleOrder,
-                    reportDir: path.join(
-                        ".curriculum-drafts",
-                        "reports",
-                        args.blueprint.subjectSlug,
-                        `module${moduleOrder}`,
-                        topic.topicId,
-                    ),
-                    repairReport: saved.repairReport,
-                    critiqueReport: review.critiqueReport,
-                    semanticReport: review.semanticReport,
-                };
-            }
-        }
+    if (!repairedDraft) {
+        throw new Error(
+            `No saved draft found for ${node.topic.topicId}. Compile the topic first before using critique-topic-draft.`,
+        );
     }
 
-    throw new Error(`Topic not found in saved/generated plan: ${args.topicId}`);
+    advanceProgress({
+        stage: "reviewing saved draft",
+        topicId: node.topic.topicId,
+        moduleSlug: node.module.moduleSlug,
+        sectionSlug: node.section.sectionSlug,
+    });
+
+    const review = await reviewPreparedTopicDraft({
+        seed,
+        draft: repairedDraft,
+        profileServices,
+    });
+
+    await writeTopicReports({
+        subjectSlug: args.blueprint.subjectSlug,
+        moduleOrder: node.moduleIndex,
+        topicId: node.topic.topicId,
+        repairedDraft,
+        repairReport: saved.repairReport,
+        critiqueReport: review.critiqueReport,
+        semanticReport: review.semanticReport,
+        topicBundle: saved.topicBundle,
+    });
+
+    advanceProgress({
+        stage: "completed saved draft critique",
+        topicId: node.topic.topicId,
+        moduleSlug: node.module.moduleSlug,
+        sectionSlug: node.section.sectionSlug,
+    });
+
+    return {
+        mode: "draft" as const,
+        subjectSlug: args.blueprint.subjectSlug,
+        topicId: node.topic.topicId,
+        moduleSlug: node.module.moduleSlug,
+        sectionSlug: node.section.sectionSlug,
+        moduleOrder: node.moduleIndex,
+        reportDir: path.join(
+            ".curriculum-drafts",
+            "reports",
+            args.blueprint.subjectSlug,
+            `module${node.moduleIndex}`,
+            node.topic.topicId,
+        ),
+        repairReport: saved.repairReport,
+        critiqueReport: review.critiqueReport,
+        semanticReport: review.semanticReport,
+    };
 }

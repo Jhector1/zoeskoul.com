@@ -1,0 +1,125 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_2": {
+        "combining-conditions-safely": {
+          "label": "Combining conditions safely",
+          "summary": "Learn how to combine multiple conditions in SQL WHERE clauses using AND, OR, and parentheses to control logic and avoid mistakes.",
+          "cards": {
+            "sketch0": {
+              "title": "Why combine conditions?"
+            },
+            "sketch1": {
+              "title": "AND vs OR"
+            },
+            "sketch2": {
+              "title": "Using parentheses for clarity"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_2": {
+        "combining-conditions-safely": {
+          "sk1": {
+            "title": "Why combine conditions?",
+            "bodyMarkdown": "Often, you need to filter data based on more than one rule. For example, you might want all products that are in stock **and** cost less than $20. SQL lets you combine conditions in the WHERE clause using logical operators like `AND` and `OR`."
+          },
+          "sk2": {
+            "title": "AND vs OR",
+            "bodyMarkdown": "`AND` means **all** conditions must be true for a row to be included. `OR` means **at least one** condition must be true. For example:\n\n```sql\nSELECT * FROM products_catalog WHERE price < 20 AND in_stock = 1;\n```\n\nThis returns only products that are both under $20 **and** in stock."
+          },
+          "sk3": {
+            "title": "Using parentheses for clarity",
+            "bodyMarkdown": "When mixing `AND` and `OR`, use parentheses to make your logic clear and avoid surprises. For example:\n\n```sql\nSELECT * FROM products_catalog WHERE (category = 'Books' OR category = 'Games') AND in_stock = 1;\n```\n\nThis returns all books or games that are in stock."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "q1": {
+      "title": "Choosing the correct logical operator",
+      "prompt": "You want to find all products in the `products_catalog` table that are either in the 'Electronics' category **or** cost less than $50. Which logical operator should you use to combine these conditions?",
+      "hint": "Focus on the concept being tested.",
+      "help": {
+        "concept": "The blank should be completed with the SQL term that fits the job being described.",
+        "hint_1": "Think about what the missing part needs to do in the statement.",
+        "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+      },
+      "template": "SELECT * FROM products_catalog WHERE category = 'Electronics' ___ price < 50;",
+      "choices": [
+        "AND",
+        "OR",
+        "NOT",
+        "BETWEEN"
+      ]
+    },
+    "q2": {
+      "title": "Parentheses and logic",
+      "prompt": "Which value for ___ will ensure that only products that are either 'Books' or 'Games' **and** are in stock are selected?",
+      "hint": "You want both the category condition the missing term the in-stock condition to be true.",
+      "help": {
+        "concept": "Parentheses group conditions. `the missing term` ensures both the grouped category the missing term the in-stock condition must be true.",
+        "hint_1": "The grouped categories are checked first, then combined with the stock status.",
+        "hint_2": "You need to require that the product is in stock in addition to being in one of the categories."
+      },
+      "template": "SELECT * FROM products_catalog WHERE (category = 'Books' OR category = 'Games') ___ in_stock = 1;",
+      "choices": [
+        "AND",
+        "OR",
+        "NOT",
+        "BETWEEN"
+      ]
+    },
+    "q3": {
+      "title": "Understanding operator precedence",
+      "prompt": "What happens if you write a WHERE clause with both AND and OR but **without** parentheses?",
+      "hint": "Think about which operator SQL processes first by default.",
+      "help": {
+        "concept": "In SQL, `AND` has higher precedence than `OR`, so `AND` conditions are evaluated first unless parentheses are used.",
+        "hint_1": "Operator precedence affects how the conditions are grouped.",
+        "hint_2": "Without parentheses, SQL will group all AND conditions together before considering OR."
+      },
+      "options": {
+        "a": "SQL always evaluates AND before OR.",
+        "b": "SQL always evaluates OR before AND.",
+        "c": "SQL evaluates from left to right, regardless of operator.",
+        "d": "SQL ignores operator precedence."
+      }
+    },
+    "q4": {
+      "title": "Safe filtering with multiple conditions",
+      "prompt": "Which of the following queries will return all products that are either in the 'Toys' category **or** are in stock and cost less than $15? (Select all that apply.)",
+      "hint": "Pay attention to how parentheses change the logic.",
+      "help": {
+        "concept": "Parentheses can change the order in which SQL evaluates conditions. Without parentheses, AND is evaluated before OR.",
+        "hint_1": "In the absence of parentheses, AND binds more tightly than OR.",
+        "hint_2": "Look for queries where 'Toys' is selected regardless of stock/price, and others where both stock and price are required if not 'Toys'."
+      },
+      "options": {
+        "a": "SELECT * FROM products_catalog WHERE category = 'Toys' OR (in_stock = 1 AND price < 15);",
+        "b": "SELECT * FROM products_catalog WHERE (category = 'Toys' OR in_stock = 1) AND price < 15;",
+        "c": "SELECT * FROM products_catalog WHERE category = 'Toys' OR in_stock = 1 AND price < 15;",
+        "d": "SELECT * FROM products_catalog WHERE category = 'Toys' AND in_stock = 1 AND price < 15;"
+      }
+    },
+    "q5": {
+      "title": "Write a safe combined condition",
+      "prompt": "Write a SQL query to select all products from `products_catalog` that are in the 'Electronics' category **and** have a price between $100 and $500 **or** are out of stock. Use parentheses to make your logic clear.",
+      "hint": "Focus on the concept being tested.",
+      "help": {
+        "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+        "hint_1": "Eliminate choices or interpretations that do not match the task.",
+        "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+      },
+      "starterCode": "-- Write your query below"
+    }
+  }
+}

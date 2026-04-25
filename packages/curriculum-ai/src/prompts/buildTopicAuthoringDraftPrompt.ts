@@ -1,20 +1,28 @@
 import type { TopicSeed } from "@zoeskoul/curriculum-contracts";
 import type { SubjectShapePack } from "@zoeskoul/curriculum-profiles";
+import { renderExercisePolicyPrompt } from "./renderExercisePolicyPrompt.js";
 
 export function buildTopicAuthoringDraftPrompt(args: {
     seed: TopicSeed;
     locale: string;
     shape: SubjectShapePack;
 }) {
+    const exercisePolicyRules = renderExercisePolicyPrompt({
+        policy: args.seed.exercisePolicy,
+        plannedCounts: args.seed.plannedExerciseCounts,
+    });
+
     const sqlDatasetRules =
         args.seed.profileId === "sql"
             ? [
                 "If profileId is sql:",
                 "- use the moduleRuntimeDefaults.datasetId from the seed as the default dataset for the whole topic",
-                "- all SQL code_input exercises must use that dataset unless an explicit override is requested",
-                "- all SQL examples in sketch bodyMarkdown must use table names and columns that belong to that same dataset",
-                "- do not invent table names or columns from another dataset",
-                "- do not mix datasets inside one topic unless explicitly instructed",
+                "- all SQL examples in sketch bodyMarkdown must use tables and columns from the module dataset",
+                "- sketches must never switch to an exercise dataset override",
+                "- only code_input exercises may declare a datasetId override",
+                "- if a code_input exercise overrides datasetId, that override applies only to that exercise runtime, not to sketches or other cards",
+                "- do not invent table names or columns",
+                "- do not use generic textbook placeholders like sales, products, product_name, or price unless they exist in the grounded schema",
                 '- code_input recipeType must be "sql_query"',
                 "- use only approved SQL datasetIds from the shape pack",
                 "",
@@ -40,7 +48,7 @@ export function buildTopicAuthoringDraftPrompt(args: {
             "For single_choice, include exactly one correctOptionId.",
             "For multi_choice, include one or more correctOptionIds.",
             "For drag_reorder, include the full correctOrder.",
-            "For fill_blank_choice, include a non-empty correctValue.",
+            "For fill_blank_choice, include a non-empty correctValue and make sure it exactly matches one of choices.",
             "For code_input, include non-empty solutionCode.",
             "Do not leave any solution field empty.",
             "",
@@ -84,6 +92,23 @@ export function buildTopicAuthoringDraftPrompt(args: {
             '- "options"',
             '- "correctOptionIds"',
             "",
+            "For kind = fill_blank_choice:",
+            "- Use exactly one blank only.",
+            "- Do not create two or more blanks in the same exercise.",
+            "- The template must contain exactly one placeholder.",
+            "- If the concept needs two answers, split it into two exercises or use a different kind.",
+            "",
+            "For kind = multi_choice:",
+            "- Use multi_choice only when 2 or more options are genuinely correct.",
+            "- Include every correct option in correctOptionIds, not just one example correct answer.",
+            "- If only one option is correct, use single_choice instead.",
+            '- When the prompt says "Select all that apply", "Choose all that apply", "Which are true", "Which scenarios", "Which of the following are", or similar plural wording, strongly prefer 2 or more correct options when appropriate.',
+            "- Do not default to a single correct answer for multi_choice.",
+            "- Before returning JSON, audit the full options list and include ALL correct options in correctOptionIds.",
+            "- If option a, b, and d are all correct, correctOptionIds must be exactly [\"a\", \"b\", \"d\"].",
+            "- Never stop after finding the first correct option.",
+            "- Double-check the incorrect options too, so no true option is omitted and no false option is included.",
+            "",
             "For kind = drag_reorder, include:",
             '- "tokens"',
             '- "correctOrder"',
@@ -101,9 +126,19 @@ export function buildTopicAuthoringDraftPrompt(args: {
             "",
             ...sqlDatasetRules,
             "",
+            exercisePolicyRules,
+            "",
             "If projectDraft is present:",
             '- it must contain "title" and "stepIds"',
             "- every stepId must refer to an existing quizDraft item id",
+            "",
+            "Final self-check before returning JSON:",
+            "- Every exercise kind matches the number of correct answers it needs.",
+            "- Every multi_choice includes ALL correct options, not only one.",
+            "- Every fill_blank_choice has exactly one blank and exactly one correctValue.",
+            "- Every code_input has the required SQL datasetId when recipeType is sql_query.",
+            "- Hints explain the concept but do not reveal the final answer wording.",
+            "- Sketch SQL examples must use the module dataset, not an exercise dataset.",
         ].join("\n"),
         user: JSON.stringify(
             {

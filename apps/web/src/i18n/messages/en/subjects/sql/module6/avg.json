@@ -1,0 +1,118 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_6": {
+        "avg": {
+          "label": "AVG()",
+          "summary": "AVG() in Aggregate Functions",
+          "cards": {
+            "sketch0": {
+              "title": "What Does AVG() Do?"
+            },
+            "sketch1": {
+              "title": "Filtering with AVG()"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "quiz": {
+            "fill-blank-avg-basic": {
+              "title": "Basic AVG() Syntax",
+              "prompt": "Fill in the blank to calculate the average price of all items in the inventory_items table.",
+              "hint": "Which function calculates the mean value?",
+              "help": {
+                "concept": "The the missing term() function returns the average value of a numeric column.",
+                "hint_1": "It's not SUM or COUNT; those return totals or counts, not averages.",
+                "hint_2": "Look for the aggregate function that specifically finds the mean."
+              },
+              "template": "SELECT ___(price) FROM inventory_items;",
+              "choices": [
+                "AVG",
+                "SUM",
+                "COUNT",
+                "MAX"
+              ]
+            },
+            "fill-blank-avg-filtered": {
+              "title": "AVG() with a Filter",
+              "prompt": "Fill in the blank to find the average price of items where the status is 'active'.",
+              "hint": "Focus on the missing SQL concept rather than the exact missing word.",
+              "help": {
+                "concept": "The blank should be filled with the SQL term that matches the job the statement is trying to perform.",
+                "hint_1": "Think about what the missing part is supposed to do in the statement.",
+                "hint_2": "Choose the SQL term that best completes the meaning of the statement."
+              },
+              "template": "SELECT AVG(price) FROM inventory_items WHERE status = ___;",
+              "choices": [
+                "'active'",
+                "'draft'",
+                "'inactive'",
+                "'Decor'"
+              ]
+            },
+            "single-choice-avg-meaning": {
+              "title": "What Does AVG() Return?",
+              "prompt": "What does the SQL function AVG(price) return?",
+              "hint": "AVG() is used for calculating mean values.",
+              "help": {
+                "concept": "AVG() computes the arithmetic mean of a numeric column.",
+                "hint_1": "It's not about totals or counts.",
+                "hint_2": "Focus on the function that finds the mean value."
+              },
+              "options": {
+                "a": "The average price of all selected items",
+                "b": "The total price of all selected items",
+                "c": "The highest price among selected items",
+                "d": "The number of items"
+              }
+            },
+            "multi-choice-avg-uses": {
+              "title": "When Would You Use AVG()?",
+              "prompt": "Select all scenarios where using AVG() is appropriate.",
+              "hint": "AVG() is for averages, not counts or maximums.",
+              "help": {
+                "concept": "AVG() is used to find the mean value of a numeric column, often after filtering.",
+                "hint_1": "Look for scenarios involving averages.",
+                "hint_2": "Exclude options that mention counting or finding the maximum."
+              },
+              "options": {
+                "a": "Finding the average price of items in a category",
+                "b": "Counting the number of items in stock",
+                "c": "Calculating the average price of active items",
+                "d": "Finding the highest price in the inventory"
+              }
+            },
+            "code-input-avg-active": {
+              "title": "Write an AVG() Query",
+              "prompt": "Write a SQL query to find the average price of all items in the 'Accessories' category.",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+                "hint_1": "Eliminate choices or interpretations that do not match the task.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "starterCode": "-- Write your SQL query below"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_6": {
+        "avg": {
+          "sketch-avg-intro": {
+            "title": "What Does AVG() Do?",
+            "bodyMarkdown": "The `AVG()` function in SQL calculates the average (arithmetic mean) of a numeric column across all rows that match the query. It's commonly used to summarize data, such as finding the average price of items in an inventory.\n\n**Example:**\n\n```sql\nSELECT AVG(price) FROM inventory_items;\n```\n\nThis query returns the average price of all items in the `inventory_items` table."
+          },
+          "sketch-avg-filter": {
+            "title": "Filtering with AVG()",
+            "bodyMarkdown": "You can combine `AVG()` with a `WHERE` clause to calculate the average for a subset of rows. For example, to find the average price of only 'active' items:\n\n```sql\nSELECT AVG(price) FROM inventory_items WHERE status = 'active';\n```\n\nThis returns the average price for items where the status is 'active'."
+          }
+        }
+      }
+    }
+  }
+}

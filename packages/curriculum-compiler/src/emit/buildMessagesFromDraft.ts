@@ -3,6 +3,7 @@ import type {
     TopicSeed,
 } from "@zoeskoul/curriculum-contracts";
 import type { SubjectShapePack } from "@zoeskoul/curriculum-profiles";
+import { buildExerciseMessageKeys } from "../messages/buildMessageKeys.js";
 
 function optionIdFromIndex(index: number) {
     return String.fromCharCode(97 + index);
@@ -29,6 +30,13 @@ function setNested(
     cursor[path[path.length - 1]] = value;
 }
 
+function splitQualifiedBase(messageBase: string): string[] {
+    return String(messageBase ?? "")
+        .split(".")
+        .map((x) => x.trim())
+        .filter(Boolean);
+}
+
 export function buildMessagesFromDraft(args: {
     shape: SubjectShapePack;
     seed: TopicSeed;
@@ -42,7 +50,6 @@ export function buildMessagesFromDraft(args: {
     const out: Record<string, unknown> = {
         topics: {},
         sketches: {},
-        quiz: {},
     };
 
     const topicPath = ["topics", seed.subjectSlug, logicalModuleSlug, seed.topicId];
@@ -76,7 +83,23 @@ export function buildMessagesFromDraft(args: {
     }
 
     for (const exercise of draft.quizDraft) {
-        const quizBase = ["quiz", exercise.id];
+        const optionIds =
+            exercise.kind === "single_choice" || exercise.kind === "multi_choice"
+                ? exercise.options.map((_, index) => optionIdFromIndex(index))
+                : [];
+
+        const messageKeys = buildExerciseMessageKeys({
+            scope: {
+                subjectSlug: seed.subjectSlug,
+                moduleSlug: logicalModuleSlug,
+                topicId: seed.topicId,
+            },
+            exerciseId: exercise.id,
+            messageBase: (exercise as { messageBase?: string }).messageBase,
+            optionIds,
+        });
+
+        const quizBase = splitQualifiedBase(messageKeys.qualifiedBase);
 
         setNested(out, [...quizBase, "title"], exercise.title);
         setNested(out, [...quizBase, "prompt"], exercise.prompt);

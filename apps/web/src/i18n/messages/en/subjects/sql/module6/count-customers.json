@@ -1,0 +1,118 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_6": {
+        "count-customers": {
+          "label": "Count customers",
+          "summary": "Learn to count rows using SQL aggregate functions, focusing on the COUNT() function and its use cases in summarizing business data.",
+          "cards": {
+            "sketch0": {
+              "title": "Counting Rows with COUNT()"
+            },
+            "sketch1": {
+              "title": "COUNT(*) vs COUNT(column)"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "quiz": {
+            "fill-blank-1": {
+              "title": "COUNT(*) vs COUNT(column)",
+              "prompt": "Which COUNT variant counts all rows, including those with NULL values in any column?",
+              "hint": "Focus on the missing SQL concept rather than the exact missing word.",
+              "help": {
+                "concept": "The blank should be filled with the SQL term that matches the job the statement is trying to perform.",
+                "hint_1": "Think about what the missing part is supposed to do in the statement.",
+                "hint_2": "Choose the SQL term that best completes the meaning of the statement."
+              },
+              "template": "The SQL function that counts all rows, including NULLs, is _____.",
+              "choices": [
+                "COUNT(*)",
+                "COUNT(name)",
+                "COUNT(DISTINCT name)",
+                "SUM(*)"
+              ]
+            },
+            "fill-blank-2": {
+              "title": "Counting non-null values",
+              "prompt": "Which SQL function counts only the rows where the 'notes' column is not NULL?",
+              "hint": "Focus on the missing SQL concept rather than the exact missing word.",
+              "help": {
+                "concept": "The blank should be filled with the SQL term that matches the job the statement is trying to perform.",
+                "hint_1": "Think about what the missing part is supposed to do in the statement.",
+                "hint_2": "Choose the SQL term that best completes the meaning of the statement."
+              },
+              "template": "To count only rows with a non-null 'notes' value, use _____.",
+              "choices": [
+                "COUNT(notes)",
+                "COUNT(*)",
+                "SUM(notes)",
+                "AVG(notes)"
+              ]
+            },
+            "single-choice-1": {
+              "title": "Purpose of aggregate functions",
+              "prompt": "What is the main purpose of aggregate functions like COUNT() in SQL?",
+              "hint": "Aggregate functions produce a single summary value.",
+              "help": {
+                "concept": "Aggregate functions like COUNT(), SUM(), and AVG() are used to summarize or combine information from multiple rows into a single result.",
+                "hint_1": "COUNT() gives you a total, not a list of rows.",
+                "hint_2": "Aggregate functions are for summarizing, not for updating or deleting rows."
+              },
+              "options": {
+                "a": "To summarize data across multiple rows",
+                "b": "To update every row in a table",
+                "c": "To delete duplicate rows",
+                "d": "To filter rows based on a condition"
+              }
+            },
+            "multi-choice-1": {
+              "title": "When does COUNT(*) return a different result than COUNT(column)?",
+              "prompt": "Select all scenarios where COUNT(*) and COUNT(notes) would return different results on the inventory_items table.",
+              "hint": "Think about how NULL values affect COUNT(column).",
+              "help": {
+                "concept": "COUNT(*) counts all rows. COUNT(column) only counts rows where the column is not NULL. If some or all rows have NULL in the column, the counts will differ.",
+                "hint_1": "If there are NULLs in 'notes', COUNT(notes) will be less than COUNT(*).",
+                "hint_2": "If every row has NULL in 'notes', COUNT(notes) will be zero, but COUNT(*) will still count all rows."
+              },
+              "options": {
+                "a": "Some rows have NULL in the 'notes' column",
+                "b": "All rows have a value in the 'notes' column",
+                "c": "No rows have a value in the 'notes' column",
+                "d": "The 'notes' column is always NOT NULL"
+              }
+            },
+            "code-input-1": {
+              "title": "Write a COUNT query",
+              "prompt": "Write a SQL query to count the number of active items in the inventory_items table.",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+                "hint_1": "Eliminate choices or interpretations that do not match the task.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "starterCode": "-- Write a query to count active items"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_6": {
+        "count-customers": {
+          "sketch-1": {
+            "title": "Counting Rows with COUNT()",
+            "bodyMarkdown": "The `COUNT()` function in SQL is used to count the number of rows that match a specified condition. For example, to count all items in the `inventory_items` table:\n\n```sql\nSELECT COUNT(*) FROM inventory_items;\n```\n\nYou can also count only non-null values in a specific column:\n\n```sql\nSELECT COUNT(name) FROM inventory_items;\n```\n\nThis counts only rows where `name` is not NULL."
+          },
+          "sketch-2": {
+            "title": "COUNT(*) vs COUNT(column)",
+            "bodyMarkdown": "`COUNT(*)` counts all rows, including those with NULLs in any column. `COUNT(column)` only counts rows where the specified column is not NULL. In most business tables, columns like `id` or `name` are usually NOT NULL, so both forms often return the same result, but not always."
+          }
+        }
+      }
+    }
+  }
+}

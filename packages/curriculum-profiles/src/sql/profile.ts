@@ -1,8 +1,9 @@
 import type { CourseProfile } from "../types.js";
+import type { PlannedModule } from "@zoeskoul/curriculum-contracts";
 import { buildSqlQueryRecipe } from "./recipes/buildSqlQueryRecipe.js";
-import { getSqlModuleDataset } from "./datasetPolicy.js";
+import { getSqlModuleDatasetPolicy } from "./datasetPolicy.js";
 
-export { getSqlModuleDataset } from "./datasetPolicy.js";
+export { getSqlModuleDataset, getSqlModuleDatasetPolicy } from "./datasetPolicy.js";
 
 export const sqlProfile: CourseProfile = {
     id: "sql",
@@ -14,22 +15,22 @@ export const sqlProfile: CourseProfile = {
         "code_input",
     ],
     allowedRecipeTypes: ["fixed_tests", "template_io", "sql_query"],
+    buildModuleRuntimeDefaults(moduleOrder?: number, module?: PlannedModule) {
+        const resolvedOrder =
+            typeof module?.order === "number" ? module.order : moduleOrder ?? 0;
 
-    buildModuleRuntimeDefaults(moduleOrder?: number) {
+        const policy = getSqlModuleDatasetPolicy(resolvedOrder);
+
         return {
             kind: "sql",
-            datasetId: getSqlModuleDataset(moduleOrder ?? 0),
+            datasetId: policy.datasetId,
             fixedSqlDialect: "sqlite",
             resultShape: "table",
         };
     },
-
     getRecipeRegistry() {
-        return {
-            sql_query: buildSqlQueryRecipe,
-        };
+        return { sql_query: buildSqlQueryRecipe };
     },
-
     validateTopicBundle(bundle) {
         if (!bundle || typeof bundle !== "object") {
             return ["ERROR: topicBundle is missing or invalid"];
@@ -48,7 +49,6 @@ export const sqlProfile: CourseProfile = {
         }
 
         const issues: string[] = [];
-
         for (const ex of bundle.exercises) {
             if (
                 ex?.kind === "code_input" &&

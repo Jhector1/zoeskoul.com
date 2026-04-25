@@ -1,0 +1,118 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_1": {
+        "query-one-column": {
+          "label": "Query one column",
+          "summary": "Learn how to write SQL queries that select a single column from a table using SELECT and FROM.",
+          "cards": {
+            "sketch0": {
+              "title": "Selecting a Single Column"
+            },
+            "sketch1": {
+              "title": "Why Select Specific Columns?"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_1": {
+        "query-one-column": {
+          "sketch-1": {
+            "title": "Selecting a Single Column",
+            "bodyMarkdown": "In SQL, you can retrieve data from a single column in a table using the SELECT statement. For example, if you have a table called `students` with columns `id`, `name`, and `grade`, you can get just the names of all students with:\n\n```sql\nSELECT name FROM students;\n```\n\nThis query returns only the `name` column for every row in the `students` table."
+          },
+          "sketch-2": {
+            "title": "Why Select Specific Columns?",
+            "bodyMarkdown": "Selecting only the columns you need makes your queries faster and your results easier to read. For example, if you only care about student grades, you can write:\n\n```sql\nSELECT grade FROM students;\n```\n\nThis avoids unnecessary data and helps you focus on what's important."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "fill-1": {
+      "title": "Fill in the blank: SELECT one column",
+      "prompt": "Which keyword completes this query to select the `name` column from the `students` table?\n\n`SELECT ____ FROM students;`",
+      "hint": "Focus on the missing SQL concept rather than the exact missing word.",
+      "help": {
+        "concept": "The blank should be filled with the SQL term that matches the job the statement is trying to perform.",
+        "hint_1": "Think about what the missing part is supposed to do in the statement.",
+        "hint_2": "Choose the SQL term that best completes the meaning of the statement."
+      },
+      "template": "SELECT ____ FROM students;",
+      "choices": [
+        "name",
+        "students",
+        "*",
+        "grade"
+      ]
+    },
+    "fill-2": {
+      "title": "Fill in the blank: Table name",
+      "prompt": "Complete the query to select the `grade` column from the correct table.\n\n`SELECT grade FROM ____;`",
+      "hint": "Which table holds the grades?",
+      "help": {
+        "concept": "The FROM clause tells SQL which table to get data from.",
+        "hint_1": "Look for the table that contains the 'grade' column.",
+        "hint_2": "The table is called 'the missing term'."
+      },
+      "template": "SELECT grade FROM ____;",
+      "choices": [
+        "students",
+        "grade",
+        "name",
+        "*"
+      ]
+    },
+    "single-1": {
+      "title": "Purpose of SELECT",
+      "prompt": "What does the SELECT keyword do in a SQL query?",
+      "hint": "SELECT is about choosing data, not changing or removing it.",
+      "help": {
+        "concept": "SELECT is used to specify which columns you want to see in your results.",
+        "hint_1": "SELECT does not filter or delete data.",
+        "hint_2": "It tells SQL which columns to show."
+      },
+      "options": {
+        "a": "It chooses which columns to display.",
+        "b": "It filters rows based on a condition.",
+        "c": "It deletes data from a table.",
+        "d": "It creates a new table."
+      }
+    },
+    "multi-1": {
+      "title": "Choosing columns in SELECT",
+      "prompt": "Which of the following queries will return only the `name` column from the `students` table? (Choose all that apply.)",
+      "hint": "Focus on the main concept being tested and eliminate choices that describe something different.",
+      "help": {
+        "concept": "Choose the option that matches the core idea described in the question without relying on repeated wording from the answer choices.",
+        "hint_1": "Rule out options that describe a different role, behavior, or SQL concept than the question is testing.",
+        "hint_2": "Pick the option that best matches the concept, not the one that simply repeats familiar wording."
+      },
+      "options": {
+        "a": "SELECT name FROM students;",
+        "b": "SELECT * FROM students;",
+        "c": "SELECT grade FROM students;",
+        "d": "SELECT name, grade FROM students;"
+      }
+    },
+    "code-1": {
+      "title": "Write a query: Select one column",
+      "prompt": "Write a SQL query to return only the `grade` column from the `students` table.",
+      "hint": "Focus on the concept being tested.",
+      "help": {
+        "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+        "hint_1": "Eliminate choices or interpretations that do not match the task.",
+        "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+      },
+      "starterCode": "-- Write your SQL query below"
+    }
+  }
+}

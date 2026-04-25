@@ -1,0 +1,144 @@
+{
+  "topicId": "or",
+  "subjectSlug": "sql",
+  "moduleSlug": "sql_module_2",
+  "sectionSlug": "section_2_2",
+  "prefix": "sql2",
+  "minutes": 15,
+  "topic": {
+    "labelKey": "topics.sql.sql_module_2.or.label",
+    "summaryKey": "topics.sql.sql_module_2.or.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_2.or.cards.sketch0.title",
+      "sketchId": "sk1",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_2.or.cards.sketch1.title",
+      "sketchId": "sk2",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_2.or.cards.sketch2.title",
+      "sketchId": "sk3",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql.sql_module_2.or.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sk1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_2.or.sk1.title",
+      "bodyKey": "sketches.sql.sql_module_2.or.sk1.bodyMarkdown"
+    },
+    {
+      "id": "sk2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_2.or.sk2.title",
+      "bodyKey": "sketches.sql.sql_module_2.or.sk2.bodyMarkdown"
+    },
+    {
+      "id": "sk3",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_2.or.sk3.title",
+      "bodyKey": "sketches.sql.sql_module_2.or.sk3.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "q1",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.q1",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "="
+      }
+    },
+    {
+      "id": "q2",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.q2",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "<>"
+      }
+    },
+    {
+      "id": "q3",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.q3",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "q4",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.q4",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a"
+        ]
+      }
+    },
+    {
+      "id": "q5",
+      "kind": "code_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.q5",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "SELECT * FROM products_catalog WHERE stock != 0;"
+      }
+    }
+  ]
+}

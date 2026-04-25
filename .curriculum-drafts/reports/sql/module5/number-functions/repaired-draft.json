@@ -1,0 +1,122 @@
+{
+  "title": "Number functions",
+  "summary": "Number functions in Calculated Columns and SQL Expressions",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch-1",
+      "title": "What are number functions in SQL?",
+      "bodyMarkdown": "Number functions in SQL are built-in functions that perform operations on numeric data. They can be used in SELECT statements to calculate new values, round numbers, find minimum or maximum values, and more. Examples include `ABS()` for absolute value, `ROUND()` for rounding numbers, and `POWER()` for exponents."
+    },
+    {
+      "id": "sketch-2",
+      "title": "Using number functions in SELECT",
+      "bodyMarkdown": "You can use number functions directly in your SELECT queries to create calculated columns. For example, to round each student's grade level to the nearest whole number (though grade_level is already an integer in this dataset), you could write:\n\n```sql\nSELECT name, grade_level, ROUND(grade_level) AS rounded_grade FROM students;\n```\n\nThis would show each student's name, their grade level, and the rounded value (which, in this case, is the same as the original)."
+    },
+    {
+      "id": "sketch-3",
+      "title": "Combining number functions with expressions",
+      "bodyMarkdown": "Number functions can be combined with arithmetic expressions. For example, if you wanted to see what each student's grade level would be in two years, you could use:\n\n```sql\nSELECT name, grade_level, grade_level + 2 AS future_grade FROM students;\n```\n\nYou could also use `ABS(grade_level - 10)` to see how far each student is from grade 10:\n\n```sql\nSELECT name, grade_level, ABS(grade_level - 10) AS distance_from_10 FROM students;\n```"
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "fill-blank-1",
+      "kind": "fill_blank_choice",
+      "title": "Identifying a number function",
+      "prompt": "Which function can you use to get the absolute value of a number in SQL?",
+      "template": "The SQL function for absolute value is ____.",
+      "choices": [
+        "ABS",
+        "ROUND",
+        "MIN",
+        "SUM"
+      ],
+      "correctValue": "ABS",
+      "hint": "Focus on the missing SQL concept rather than the exact missing word.",
+      "help": {
+        "concept": "The blank should be filled with the SQL term that matches the job the statement is trying to perform.",
+        "hint_1": "Think about what the missing part is supposed to do in the statement.",
+        "hint_2": "Choose the SQL term that best completes the meaning of the statement."
+      }
+    },
+    {
+      "id": "fill-blank-2",
+      "kind": "fill_blank_choice",
+      "title": "Using ROUND in SQL",
+      "prompt": "Suppose you want to round the result of a calculation in SQL. Which function would you use?",
+      "template": "To round a number in SQL, use the ____ function.",
+      "choices": [
+        "ROUND",
+        "ABS",
+        "MAX",
+        "COUNT"
+      ],
+      "correctValue": "ROUND",
+      "hint": "This function's name is the same as the mathematical operation.",
+      "help": {
+        "concept": "The the missing term() function is used to the missing term numeric values to the nearest integer or to a specified number of decimal places.",
+        "hint_1": "It's commonly used to tidy up decimal results.",
+        "hint_2": "This function is named after the process of making a number less precise, like 3.7 becoming 4."
+      }
+    },
+    {
+      "id": "single-choice-1",
+      "kind": "single_choice",
+      "title": "Choosing the correct SQL expression",
+      "prompt": "Which SQL expression calculates how many grades above 9 each student is?",
+      "options": [
+        "grade_level - 9",
+        "ABS(grade_level - 9)",
+        "ROUND(grade_level / 9)",
+        "grade_level + 9"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "You want to know how much higher the grade_level is than 9.",
+      "help": {
+        "concept": "Subtracting 9 from grade_level gives the number of grades above 9. If the result is negative, the student is below grade 9.",
+        "hint_1": "Think about subtraction: current grade minus 9.",
+        "hint_2": "The correct answer is a simple arithmetic difference, not an absolute value or division."
+      }
+    },
+    {
+      "id": "multi-choice-1",
+      "kind": "multi_choice",
+      "title": "Recognizing number functions",
+      "prompt": "Which of the following are number functions in SQL? (Select all that apply)",
+      "options": [
+        "ABS()",
+        "ROUND()",
+        "COUNT()",
+        "MIN()"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Focus on the main concept being tested and eliminate choices that describe something different.",
+      "help": {
+        "concept": "Choose the option that matches the core idea described in the question without relying on repeated wording from the answer choices.",
+        "hint_1": "Rule out options that describe a different role, behavior, or SQL concept than the question is testing.",
+        "hint_2": "Pick the option that best matches the concept, not the one that simply repeats familiar wording."
+      }
+    },
+    {
+      "id": "code-input-1",
+      "kind": "code_input",
+      "title": "Using ABS() in a SELECT statement",
+      "prompt": "Write a SQL query to show each student's name and how far their grade_level is from grade 10 (as a positive number), using the ABS() function. Name the calculated column 'distance_from_10'.",
+      "starterCode": "SELECT name, grade_level, ____ AS distance_from_10\nFROM students;",
+      "solutionCode": "SELECT name, grade_level, ABS(grade_level - 10) AS distance_from_10\nFROM students;",
+      "datasetId": "school_relations_intro",
+      "recipeType": "sql_query",
+      "hint": "Focus on the concept being tested.",
+      "help": {
+        "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+        "hint_1": "Eliminate choices or interpretations that do not match the task.",
+        "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+      }
+    }
+  ]
+}

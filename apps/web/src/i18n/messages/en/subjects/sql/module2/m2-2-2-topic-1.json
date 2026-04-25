@@ -1,0 +1,118 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_2": {
+        "m2-2-2-topic-1": {
+          "label": "=",
+          "summary": "= in Filtering Data with WHERE",
+          "cards": {
+            "sketch0": {
+              "title": "The = Operator in SQL"
+            },
+            "sketch1": {
+              "title": "Comparing Numbers and Text"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_2": {
+        "m2-2-2-topic-1": {
+          "sk1": {
+            "title": "The = Operator in SQL",
+            "bodyMarkdown": "The `=` operator in SQL is used to compare values for equality. When you use `WHERE column = value`, SQL returns only the rows where the column's value exactly matches the value you specify. This is useful for filtering data to see only what you need.\n\nFor example, if you have a `products` table and want to see all products in the 'Electronics' category:\n\n```sql\nSELECT * FROM products WHERE category = 'Electronics';\n```\n\nThis query will return only the rows where the `category` column is exactly 'Electronics'."
+          },
+          "sk2": {
+            "title": "Comparing Numbers and Text",
+            "bodyMarkdown": "You can use the `=` operator with both numbers and text. For numbers, you don't use quotes. For text, you must use single quotes.\n\nExamples:\n\n- Numeric: `WHERE price = 100`\n- Text: `WHERE name = 'Laptop'`\n\nBe careful: `WHERE name = 'laptop'` (lowercase) will not match `Laptop` (capitalized) because SQL string comparison is case-sensitive in many systems."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "q1": {
+      "title": "Choose the correct operator for equality",
+      "prompt": "Which operator should you use in SQL to filter rows where a column matches a specific value?",
+      "hint": "Focus on the missing SQL concept rather than the exact missing word.",
+      "help": {
+        "concept": "The blank should be filled with the SQL term that matches the job the statement is trying to perform.",
+        "hint_1": "Think about what the missing part is supposed to do in the statement.",
+        "hint_2": "Choose the SQL term that best completes the meaning of the statement."
+      },
+      "template": "SELECT * FROM products WHERE category ___ 'Electronics';",
+      "choices": [
+        "=",
+        "==",
+        "LIKE",
+        "!="
+      ]
+    },
+    "q2": {
+      "title": "Filtering by number",
+      "prompt": "Fill in the blank to select products with a price of 100.",
+      "hint": "Use the equality operator.",
+      "help": {
+        "concept": "To match a specific number, use the equality operator.",
+        "hint_1": "It's not greater than or less than.",
+        "hint_2": "It's the same operator as in the previous example."
+      },
+      "template": "SELECT * FROM products WHERE price ___ 100;",
+      "choices": [
+        "=",
+        ">",
+        "<",
+        "!="
+      ]
+    },
+    "q3": {
+      "title": "Case sensitivity in string comparison",
+      "prompt": "What happens if you write `WHERE name = 'laptop'` but the value in the table is 'Laptop'?",
+      "hint": "Think about how SQL compares text values.",
+      "help": {
+        "concept": "SQL string comparisons are often case-sensitive, so 'laptop' and 'Laptop' are different.",
+        "hint_1": "Does SQL treat 'laptop' and 'Laptop' as the same?",
+        "hint_2": "If the case doesn't match, the row won't be selected."
+      },
+      "options": {
+        "a": "The row will not be returned because the comparison is case-sensitive.",
+        "b": "The row will be returned because SQL ignores case.",
+        "c": "An error will occur.",
+        "d": "All rows will be returned."
+      }
+    },
+    "q4": {
+      "title": "Valid uses of = in WHERE",
+      "prompt": "Which of the following are valid uses of the `=` operator in a WHERE clause? Select all that apply.",
+      "hint": "Remember to use quotes for text values.",
+      "help": {
+        "concept": "The `=` operator can compare numbers or text, but text values must be in single quotes.",
+        "hint_1": "Check which options use correct SQL syntax for text.",
+        "hint_2": "Text values without quotes are not valid in SQL."
+      },
+      "options": {
+        "a": "WHERE price = 50",
+        "b": "WHERE category = 'Books'",
+        "c": "WHERE stock = 0",
+        "d": "WHERE name = Laptop"
+      }
+    },
+    "q5": {
+      "title": "Write a query using =",
+      "prompt": "Write a SQL query to select all columns from the `products` table where the `category` is exactly 'Books'.",
+      "hint": "Focus on the concept being tested.",
+      "help": {
+        "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+        "hint_1": "Eliminate choices or interpretations that do not match the task.",
+        "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+      },
+      "starterCode": "-- Write your SQL query below"
+    }
+  }
+}

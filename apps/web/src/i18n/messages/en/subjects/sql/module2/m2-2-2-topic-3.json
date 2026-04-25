@@ -1,0 +1,118 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_2": {
+        "m2-2-2-topic-3": {
+          "label": ">",
+          "summary": "> in Filtering Data with WHERE",
+          "cards": {
+            "sketch0": {
+              "title": "Understanding the > Operator in SQL"
+            },
+            "sketch1": {
+              "title": "Example: Filtering with >"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_2": {
+        "m2-2-2-topic-3": {
+          "sketch-1": {
+            "title": "Understanding the > Operator in SQL",
+            "bodyMarkdown": "The `>` operator in SQL is used to compare values and filter rows where a column's value is greater than a specified number or value. For example, if you want to find all products with a price greater than 100, you would use `WHERE price > 100` in your query. This operator works with numeric and date columns, and is commonly used to select ranges of data."
+          },
+          "sketch-2": {
+            "title": "Example: Filtering with >",
+            "bodyMarkdown": "Suppose you have a table called `products_catalog` with columns `product_id`, `name`, and `price`. To find all products that cost more than $50, you would write:\n\n```sql\nSELECT * FROM products_catalog WHERE price > 50;\n```\nThis query returns only the rows where the `price` column value is greater than 50."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "fill-blank-1": {
+      "title": "Choose the correct operator",
+      "prompt": "Which operator would you use to select rows where the `price` is greater than 100 in the `products_catalog` table?",
+      "hint": "Focus on the missing SQL concept rather than the exact missing word.",
+      "help": {
+        "concept": "The blank should be filled with the SQL term that matches the job the statement is trying to perform.",
+        "hint_1": "Think about what the missing part is supposed to do in the statement.",
+        "hint_2": "Choose the SQL term that best completes the meaning of the statement."
+      },
+      "template": "SELECT * FROM products_catalog WHERE price {blank} 100;",
+      "choices": [
+        ">",
+        "<",
+        "=",
+        ">="
+      ]
+    },
+    "fill-blank-2": {
+      "title": "Filtering products by price",
+      "prompt": "Fill in the blank to find products with a price greater than 75.",
+      "hint": "Focus on the missing SQL concept rather than the exact missing word.",
+      "help": {
+        "concept": "The blank should be filled with the SQL term that matches the job the statement is trying to perform.",
+        "hint_1": "Think about what the missing part is supposed to do in the statement.",
+        "hint_2": "Choose the SQL term that best completes the meaning of the statement."
+      },
+      "template": "SELECT name FROM products_catalog WHERE price {blank} 75;",
+      "choices": [
+        ">",
+        "<",
+        "<=",
+        "="
+      ]
+    },
+    "single-choice-1": {
+      "title": "Result of using > in a WHERE clause",
+      "prompt": "What does the following query return?\n\n```sql\nSELECT * FROM products_catalog WHERE price > 200;\n```",
+      "hint": "Focus on the meaning of the > operator.",
+      "help": {
+        "concept": "The `>` operator selects rows where the column value is strictly greater than the given number.",
+        "hint_1": "It does not include 200 itself.",
+        "hint_2": "Only rows with a price above 200 are returned."
+      },
+      "options": {
+        "a": "All products with a price exactly 200",
+        "b": "All products with a price less than 200",
+        "c": "All products with a price greater than 200",
+        "d": "All products"
+      }
+    },
+    "multi-choice-1": {
+      "title": "Identifying correct uses of >",
+      "prompt": "Which of the following queries correctly use the `>` operator to filter for values greater than 10?",
+      "hint": "Look for queries that use > to find values above 10.",
+      "help": {
+        "concept": "The `>` operator is used to select values greater than a specified number.",
+        "hint_1": "Ignore queries that use < or =.",
+        "hint_2": "Queries with > and a number will filter for values above that number."
+      },
+      "options": {
+        "a": "SELECT * FROM products_catalog WHERE price > 10;",
+        "b": "SELECT * FROM products_catalog WHERE price < 10;",
+        "c": "SELECT * FROM products_catalog WHERE price > 10 AND price < 100;",
+        "d": "SELECT * FROM products_catalog WHERE price = 10;"
+      }
+    },
+    "code-input-1": {
+      "title": "Write a query using >",
+      "prompt": "Write a SQL query to select the `name` and `price` of all products from `products_catalog` where the price is greater than 120.",
+      "hint": "Focus on the concept being tested.",
+      "help": {
+        "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+        "hint_1": "Eliminate choices or interpretations that do not match the task.",
+        "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+      },
+      "starterCode": "-- Write your query below"
+    }
+  }
+}

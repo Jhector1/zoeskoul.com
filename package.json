@@ -1,41 +1,36 @@
 {
   "name": "zoeskoul.com",
   "version": "1.0.0",
-
   "scripts": {
     "dev": "turbo run dev --parallel",
     "build": "turbo run build",
     "typecheck": "turbo run typecheck",
-
     "build:web": "turbo run build --filter=@zoeskoul/web",
-
     "curr:build": "pnpm --filter @zoeskoul/curriculum-contracts build && pnpm --filter @zoeskoul/curriculum-runtime build && pnpm --filter @zoeskoul/curriculum-profiles build && pnpm --filter @zoeskoul/curriculum-compiler build && pnpm --filter @zoeskoul/curriculum-cli build",
-
     "curr:plan": "node packages/curriculum-cli/dist/index.js plan",
     "curr:compile": "node packages/curriculum-cli/dist/index.js compile-subject",
     "curr:compile-topic": "node packages/curriculum-cli/dist/index.js compile-topic",
     "curr:validate": "node packages/curriculum-cli/dist/index.js validate",
     "curr:publish": "node packages/curriculum-cli/dist/index.js publish",
     "curr:publish-auto": "node packages/curriculum-cli/dist/index.js publish-auto",
-
     "curr:critique-topic": "node packages/curriculum-cli/dist/index.js critique-topic",
     "curr:critique-topic-draft": "node packages/curriculum-cli/dist/index.js critique-topic-draft",
     "curr:critique-subject": "node packages/curriculum-cli/dist/index.js critique-subject",
     "curr:critique-subject-draft": "node packages/curriculum-cli/dist/index.js critique-subject-draft",
-
     "curr:test": "node --test packages/curriculum-compiler/test",
     "curr:test:golden": "node --test packages/curriculum-compiler/test/golden.spec.ts",
-
     "curr:sql:compile": "node packages/curriculum-cli/dist/index.js compile-subject authoring/sql/course.blueprint.json",
     "curr:sql:validate": "node packages/curriculum-cli/dist/index.js validate sql",
     "curr:sql:publish": "node packages/curriculum-cli/dist/index.js publish authoring/sql/course.blueprint.json",
     "curr:sql:publish-auto": "node packages/curriculum-cli/dist/index.js publish-auto authoring/sql/course.blueprint.json",
     "curr:sql:critique": "node packages/curriculum-cli/dist/index.js critique-subject authoring/sql/course.blueprint.json",
     "curr:sql:critique-draft": "node packages/curriculum-cli/dist/index.js critique-subject-draft authoring/sql/course.blueprint.json",
-
-    "curr:sql:check": "pnpm curr:build && pnpm curr:sql:compile && pnpm curr:sql:validate && pnpm curr:sql:critique-draft && pnpm curr:test:golden"
-  }
-,
+    "curr:validate-spec": "node packages/curriculum-cli/dist/index.js validate-spec",
+    "curr:sql:validate-spec": "node packages/curriculum-cli/dist/index.js validate-spec sql",
+    "curr:sql:check": "pnpm curr:build && pnpm curr:sql:compile && pnpm curr:sql:validate && pnpm curr:sql:critique-draft && pnpm curr:test:golden",
+    "test:curriculum": "vitest run",
+    "test:curriculum:watch": "vitest"
+  },
   "packageManager": "pnpm@10.33.0",
   "devDependencies": {
     "@eslint/js": "^10.0.1",
@@ -46,7 +41,8 @@
     "knip": "^6.4.1",
     "turbo": "^2.8.20",
     "typescript": "^6.0.2",
-    "typescript-eslint": "^8.58.2"
+    "typescript-eslint": "^8.58.2",
+    "vitest": "^4.1.5"
   },
   "pnpm": {
     "overrides": {

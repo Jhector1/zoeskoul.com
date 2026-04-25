@@ -42,13 +42,17 @@ export const mathProfileAdapter: CourseProfileAdapter = {
       minutes: args.topic.minutes,
       moduleTitle: args.module.title,
       modulePurpose: args.module.purpose,
-      moduleObjectives: args.module.learningObjectives,
-      guidedExercises: args.module.guidedExercises,
-      quizFocus: args.module.quizFocus,
-      moduleProject: args.module.moduleProject,
+      moduleObjectives: args.module.learningObjectives ?? [],
+      guidedExercises: args.module.guidedExercises ?? [],
+      quizFocus: args.module.quizFocus ?? [],
+      moduleProject:
+          typeof args.module.moduleProject === "string"
+              ? args.module.moduleProject
+              : undefined,
       sectionTitle: args.section.title,
       sourceLocale: args.blueprint.sourceLocale,
-      targetLocales: args.blueprint.targetLocales,
+      targetLocales: args.blueprint.targetLocales ?? [],
+      exercisePolicy: args.module.exercisePolicy,
     };
   },
   validateTopicRecipe(_recipe: TopicRecipe) {
@@ -60,7 +64,7 @@ export const mathProfileAdapter: CourseProfileAdapter = {
       messagesByLocale: args.recipe.messagesByLocale,
     };
   },
-  buildSubjectManifest(args) {
+  buildSubjectManifest(args: BuildSubjectManifestArgs) {
     return buildBaseSubjectManifest(
         args.blueprint,
         args.modules,

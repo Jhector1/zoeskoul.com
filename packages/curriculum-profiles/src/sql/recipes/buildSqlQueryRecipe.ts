@@ -1,16 +1,24 @@
 import { buildSqlExpectedExample } from "../../base/expectedExample.js";
+import { getSqlDatasetById } from "../datasets/index.js";
 
 export const buildSqlQueryRecipe = (def: any, args: any, resolved: any) => {
   if (!def.recipe.datasetId) {
     throw new Error(`sql_query recipe "${def.id}" is missing datasetId`);
   }
 
+  const dataset = getSqlDatasetById(def.recipe.datasetId);
+  if (!dataset) {
+    throw new Error(
+        `sql_query recipe "${def.id}" references unknown dataset "${def.recipe.datasetId}"`,
+    );
+  }
+
   const expectedExample = buildSqlExpectedExample({
     def,
     resolved,
-    schemaSql: "-- TODO: wire real schema SQL",
-    seedSql: "-- TODO: wire real seed SQL",
-    solutionCode: def.recipe.solutionCode
+    schemaSql: dataset.schemaSql,
+    seedSql: dataset.seedSql,
+    solutionCode: def.recipe.solutionCode,
   });
 
   return {
@@ -29,7 +37,7 @@ export const buildSqlQueryRecipe = (def: any, args: any, resolved: any) => {
     runtime: {
       kind: "sql",
       datasetId: def.recipe.datasetId,
-      resultShape: def.recipe.resultShape ?? "table"
+      resultShape: def.recipe.resultShape ?? "table",
     },
     expected: {
       kind: "code_input",
@@ -38,7 +46,7 @@ export const buildSqlQueryRecipe = (def: any, args: any, resolved: any) => {
       runtime: {
         kind: "sql",
         datasetId: def.recipe.datasetId,
-        resultShape: def.recipe.resultShape ?? "table"
+        resultShape: def.recipe.resultShape ?? "table",
       },
       tests: [
         {
@@ -47,15 +55,15 @@ export const buildSqlQueryRecipe = (def: any, args: any, resolved: any) => {
           runtime: {
             kind: "sql",
             datasetId: def.recipe.datasetId,
-            resultShape: def.recipe.resultShape ?? "table"
+            resultShape: def.recipe.resultShape ?? "table",
           },
           compareTo: "solution",
           match: "table_exact",
-          ignoreRowOrder: def.recipe.ignoreRowOrder ?? false
-        }
+          ignoreRowOrder: def.recipe.ignoreRowOrder ?? false,
+        },
       ],
-      solutionCode: def.recipe.solutionCode
+      solutionCode: def.recipe.solutionCode,
     },
-    expectedExample
+    expectedExample,
   };
 };

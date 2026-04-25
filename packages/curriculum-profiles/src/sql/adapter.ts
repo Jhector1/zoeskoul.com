@@ -1,32 +1,69 @@
 import type {
-    TopicRecipe,
-    BuildSubjectManifestArgs,
     BuildTopicSeedArgs,
+    BuildSubjectManifestArgs,
     CompileTopicRecipeArgs,
-    TopicSeed,
+    TopicRecipe,
 } from "@zoeskoul/curriculum-contracts";
+import type { SqlDatasetArtifact } from "@zoeskoul/curriculum-contracts";
 import { buildBaseSubjectManifest } from "../shared/buildBaseSubjectManifest.js";
 import type { CourseProfileAdapter } from "../types.js";
-import { getSqlDatasetById } from "./datasets/index.js";
 import { sqlProfile } from "./profile.js";
+import { getSqlDatasetById } from "./datasets/index.js";
+import { getSqlModuleDatasetPolicy } from "./datasetPolicy.js";
 
-export { getSqlDatasetById, listSqlDatasetIds } from "./datasets/index.js";
+function buildSqlGrounding(args: {
+    dataset: SqlDatasetArtifact | null;
+    datasetId?: string;
+    moduleOrder: number;
+}) {
+    const policy = getSqlModuleDatasetPolicy(args.moduleOrder);
+
+    const datasetId = args.datasetId ?? args.dataset?.id ?? policy.datasetId;
+    const allowedTables = Object.fromEntries(
+        Object.entries(args.dataset?.tableSnapshots ?? {}).map(([tableName, table]) => [
+            tableName,
+            table.columns.map((column) => column.name),
+        ]),
+    );
+
+    return {
+        defaultDatasetId: datasetId,
+        preferredTeachingTable:
+            policy.preferredTeachingTable ??
+            Object.keys(args.dataset?.tableSnapshots ?? {})[0],
+        preferredLabelColumn: policy.preferredLabelColumn,
+        preferredNumericColumns: policy.preferredNumericColumns ?? [],
+        allowedTables,
+    };
+}
 
 export const sqlProfileAdapter: CourseProfileAdapter = {
     id: "sql",
 
+    getTopicSeedRuntimeDefaults(args) {
+        return sqlProfile.buildModuleRuntimeDefaults(args.module.order);
+    },
+
     buildTopicSeed(args: BuildTopicSeedArgs) {
-        const moduleOrder =
-            typeof args.module.order === "number" ? args.module.order - 1 : 0;
+        const fallbackRuntimeDefaults =
+            sqlProfile.buildModuleRuntimeDefaults(args.module.order) ?? undefined;
 
-        const moduleRuntimeDefaults: TopicSeed["moduleRuntimeDefaults"] =
-            args.module.runtimeDefaults ??
-            sqlProfile.buildModuleRuntimeDefaults(moduleOrder);
+        const moduleRuntimeDefaults =
+            args.module.runtimeDefaults ?? fallbackRuntimeDefaults ?? undefined;
 
-        const moduleDataset =
-            moduleRuntimeDefaults?.kind === "sql" && moduleRuntimeDefaults.datasetId
-                ? getSqlDatasetById(moduleRuntimeDefaults.datasetId)
-                : null;
+        const moduleDatasetId =
+            moduleRuntimeDefaults &&
+            typeof moduleRuntimeDefaults === "object" &&
+            "kind" in moduleRuntimeDefaults &&
+            moduleRuntimeDefaults.kind === "sql" &&
+            "datasetId" in moduleRuntimeDefaults &&
+            typeof moduleRuntimeDefaults.datasetId === "string"
+                ? moduleRuntimeDefaults.datasetId
+                : undefined;
+
+        const moduleDataset = moduleDatasetId
+            ? getSqlDatasetById(moduleDatasetId)
+            : null;
 
         return {
             subjectSlug: args.blueprint.subjectSlug,
@@ -40,15 +77,24 @@ export const sqlProfileAdapter: CourseProfileAdapter = {
             minutes: args.topic.minutes,
             moduleTitle: args.module.title,
             modulePurpose: args.module.purpose,
-            moduleObjectives: args.module.learningObjectives,
-            guidedExercises: args.module.guidedExercises,
-            quizFocus: args.module.quizFocus,
-            moduleProject: args.module.moduleProject,
+            moduleObjectives: args.module.learningObjectives ?? [],
+            guidedExercises: args.module.guidedExercises ?? [],
+            quizFocus: args.module.quizFocus ?? [],
+            moduleProject:
+                typeof args.module.moduleProject === "string"
+                    ? args.module.moduleProject
+                    : undefined,
             moduleRuntimeDefaults,
             moduleDataset,
+            sqlGrounding: buildSqlGrounding({
+                dataset: moduleDataset,
+                datasetId: moduleDatasetId,
+                moduleOrder: args.module.order,
+            }),
             sectionTitle: args.section.title,
             sourceLocale: args.blueprint.sourceLocale,
-            targetLocales: args.blueprint.targetLocales,
+            targetLocales: args.blueprint.targetLocales ?? [],
+            exercisePolicy: args.module.exercisePolicy,
         };
     },
 
@@ -67,8 +113,7 @@ export const sqlProfileAdapter: CourseProfileAdapter = {
         return buildBaseSubjectManifest(
             args.blueprint,
             args.modules,
-            (module: { order: number }) =>
-                sqlProfile.buildModuleRuntimeDefaults(Math.max(0, module.order - 1)),
+            (module) => sqlProfile.buildModuleRuntimeDefaults(module.order, module),
         );
     },
 };

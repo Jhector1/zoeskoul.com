@@ -1,0 +1,124 @@
+{
+  "title": "Simple report queries",
+  "summary": "Learn to write simple report queries using calculated columns and SQL expressions. Practice creating new columns, using expressions, and applying aliases for clear output in the school_relations_intro dataset.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sk1",
+      "title": "What is a simple report query?",
+      "bodyMarkdown": "A simple report query in SQL is a SELECT statement that retrieves data from one or more tables, often including calculated columns or expressions. For example, you might want to show all students and their grade levels, or count how many courses are in each department. Expressions can use arithmetic, functions, or combine columns to create new values in the output."
+    },
+    {
+      "id": "sk2",
+      "title": "Using expressions in SELECT",
+      "bodyMarkdown": "You can use expressions directly in the SELECT clause. For example, to show each student's grade level plus one:\n\n```sql\nSELECT name, grade_level, grade_level + 1 AS next_year_grade\nFROM students;\n```\n\nThis query adds a calculated column called `next_year_grade`."
+    },
+    {
+      "id": "sk3",
+      "title": "Renaming outputs with aliases",
+      "bodyMarkdown": "Aliases make your result columns easier to read. Use `AS` to give a column a new name in the output. For example:\n\n```sql\nSELECT name AS student_name, grade_level AS year\nFROM students;\n```\n\nThis query renames `name` to `student_name` and `grade_level` to `year` in the result set."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "q1",
+      "kind": "fill_blank_choice",
+      "title": "Add a calculated column",
+      "prompt": "Suppose you want to show each student's grade level plus 2 as a new column called `future_grade`. Which expression correctly creates this column?",
+      "template": "SELECT name, grade_level, _____ AS future_grade FROM students;",
+      "choices": [
+        "grade_level + 2",
+        "grade_level - 2",
+        "grade_level * 2",
+        "grade_level / 2"
+      ],
+      "correctValue": "grade_level + 2",
+      "hint": "Think about how to increase the grade level by 2.",
+      "help": {
+        "concept": "Calculated columns use expressions like addition, subtraction, multiplication, or division on existing columns.",
+        "hint_1": "You want to add 2 to the current grade level for each student.",
+        "hint_2": "Use the addition operator (+) with the grade_level column."
+      }
+    },
+    {
+      "id": "q2",
+      "kind": "fill_blank_choice",
+      "title": "Using aliases for clarity",
+      "prompt": "You want to rename the `name` column to `student_name` in your output. Which alias syntax is correct?",
+      "template": "SELECT name _____ student_name FROM students;",
+      "choices": [
+        "AS",
+        "TO",
+        "WITH",
+        "LIKE"
+      ],
+      "correctValue": "AS",
+      "hint": "Which keyword is used to rename a column in SQL?",
+      "help": {
+        "concept": "The AS keyword assigns an alias to a column or table in SQL.",
+        "hint_1": "Look for the keyword that is standard for column aliases.",
+        "hint_2": "It's a two-letter keyword commonly used for renaming."
+      }
+    },
+    {
+      "id": "q3",
+      "kind": "single_choice",
+      "title": "Purpose of expressions in SELECT",
+      "prompt": "Why would you use an expression like `grade_level + 1` in a SELECT statement?",
+      "options": [
+        "To create a new column with calculated values",
+        "To filter rows based on grade level",
+        "To change the table structure",
+        "To delete data from the table"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Think about what happens when you use arithmetic in SELECT.",
+      "help": {
+        "concept": "Expressions in SELECT create new output values for each row, often as calculated columns.",
+        "hint_1": "Expressions like `grade_level + 1` generate new data in the result set.",
+        "hint_2": "They do not change the table or filter rows, but add new calculated columns."
+      }
+    },
+    {
+      "id": "q4",
+      "kind": "multi_choice",
+      "title": "Which are valid SQL expressions in SELECT?",
+      "prompt": "Select all options that are valid expressions you could use in a SELECT clause with the `students` table.",
+      "options": [
+        "grade_level * 2",
+        "name || ' Smith'",
+        "grade_level > 10",
+        "id - 1"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ],
+      "hint": "Consider both arithmetic and string operations.",
+      "help": {
+        "concept": "Expressions in SELECT can use arithmetic, string concatenation, or other operations to create new output values.",
+        "hint_1": "Look for options that produce a value for each row, not just a true/false.",
+        "hint_2": "Comparisons like `>` are usually used in WHERE, not for calculated columns."
+      }
+    },
+    {
+      "id": "q5",
+      "kind": "code_input",
+      "title": "Write a simple report query with an alias",
+      "prompt": "Write a SQL query to show each student's name and their grade level as `year` (use an alias) from the `students` table.",
+      "starterCode": "-- Write your query here",
+      "solutionCode": "SELECT name, grade_level AS year FROM students;",
+      "datasetId": "school_relations_intro",
+      "recipeType": "sql_query",
+      "hint": "Use SELECT with the students table and rename grade_level using AS.",
+      "help": {
+        "concept": "To rename a column in the output, use the AS keyword to assign an alias in the SELECT clause.",
+        "hint_1": "Select both name and grade_level, but use AS to rename grade_level.",
+        "hint_2": "The alias should be 'year' for the grade_level column."
+      }
+    }
+  ]
+}

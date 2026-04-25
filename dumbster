@@ -82,3 +82,10 @@ set +a
 pnpm curr:plan authoring/sql/course.blueprint.json
 pnpm curr:compile authoring/sql/course.blueprint.json
 pnpm curr:publish authoring/sql/course.blueprint.json
+
+
+
+
+
+
+

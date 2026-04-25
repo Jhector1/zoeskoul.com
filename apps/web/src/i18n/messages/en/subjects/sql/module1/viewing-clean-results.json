@@ -1,0 +1,125 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_1": {
+        "viewing-clean-results": {
+          "label": "Viewing clean results",
+          "summary": "Learn how to write SELECT queries that return clear, readable results by choosing specific columns and understanding the basics of result sets.",
+          "cards": {
+            "sketch0": {
+              "title": "Why clean results matter"
+            },
+            "sketch1": {
+              "title": "SELECT and FROM basics"
+            },
+            "sketch2": {
+              "title": "Using SELECT *"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_1": {
+        "viewing-clean-results": {
+          "sketch-1": {
+            "title": "Why clean results matter",
+            "bodyMarkdown": "When you run a SQL query, the result set is what you see. Clean results are easy to read and only include the information you need. For example, if you want to see just the names and emails of customers, you can select only those columns instead of everything in the table."
+          },
+          "sketch-2": {
+            "title": "SELECT and FROM basics",
+            "bodyMarkdown": "The `SELECT` statement tells SQL which columns to show. The `FROM` clause tells SQL which table to use. For example:\n\n```sql\nSELECT first_name, last_name FROM customers;\n```\nThis query returns only the first and last names from the `customers` table."
+          },
+          "sketch-3": {
+            "title": "Using SELECT *",
+            "bodyMarkdown": "`SELECT *` returns all columns from a table. This is useful for exploring data, but in real applications, it's better to select only the columns you need. This keeps results clean and makes queries faster."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "fill-1": {
+      "title": "Choosing columns for clean results",
+      "prompt": "Which keyword lets you pick only the columns you want to see in your SQL query?",
+      "hint": "It's the main keyword for picking columns.",
+      "help": {
+        "concept": "The the missing term keyword is used to specify which columns you want to retrieve from a table.",
+        "hint_1": "This keyword always comes before the list of columns.",
+        "hint_2": "It's the first word in a basic query like the missing term name FROM table."
+      },
+      "template": "To view only specific columns, use the ____ keyword.",
+      "choices": [
+        "SELECT",
+        "FROM",
+        "WHERE",
+        "ORDER BY"
+      ]
+    },
+    "fill-2": {
+      "title": "Understanding SELECT *",
+      "prompt": "What does the asterisk (*) mean in a SELECT statement?",
+      "hint": "It's a shortcut for including everything.",
+      "help": {
+        "concept": "The asterisk (*) in SELECT * tells SQL to return every column from the specified table.",
+        "hint_1": "This is often used when you want to see the whole table.",
+        "hint_2": "It does not filter or limit columns; it includes all of them."
+      },
+      "template": "In SQL, SELECT * means ____.",
+      "choices": [
+        "select all columns",
+        "select only numeric columns",
+        "select no columns",
+        "select only unique rows"
+      ]
+    },
+    "single-1": {
+      "title": "Reading a simple SELECT query",
+      "prompt": "Given the query: SELECT email FROM customers; What will the result set include?",
+      "hint": "Look at which columns are listed after SELECT.",
+      "help": {
+        "concept": "A SELECT statement only returns the columns you specify after the SELECT keyword.",
+        "hint_1": "This query lists only one column after SELECT.",
+        "hint_2": "No WHERE clause means all rows, but only the email column is shown."
+      },
+      "options": {
+        "a": "All columns from the customers table",
+        "b": "Only the email column from the customers table",
+        "c": "Only rows where email is not null",
+        "d": "The email and first_name columns"
+      }
+    },
+    "multi-1": {
+      "title": "Benefits of selecting specific columns",
+      "prompt": "Why is it better to select only the columns you need instead of using SELECT *? (Choose all that apply.)",
+      "hint": "Think about readability, speed, and privacy.",
+      "help": {
+        "concept": "Selecting only needed columns makes queries faster, results clearer, and reduces the risk of showing unnecessary or sensitive information.",
+        "hint_1": "Fewer columns means less data to process and display.",
+        "hint_2": "It's also a good security practice to avoid exposing data you don't need."
+      },
+      "options": {
+        "a": "It makes results easier to read",
+        "b": "It can improve query performance",
+        "c": "It always returns more rows",
+        "d": "It helps avoid exposing sensitive data"
+      }
+    },
+    "code-1": {
+      "title": "Write a query for clean results",
+      "prompt": "Write a SQL query to show only the first_name and email columns from the customers table.",
+      "hint": "Focus on the concept being tested.",
+      "help": {
+        "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+        "hint_1": "Eliminate choices or interpretations that do not match the task.",
+        "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+      },
+      "starterCode": "-- Write your query below"
+    }
+  }
+}

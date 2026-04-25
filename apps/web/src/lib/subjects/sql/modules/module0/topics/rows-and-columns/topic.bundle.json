@@ -1,0 +1,132 @@
+{
+  "topicId": "rows-and-columns",
+  "subjectSlug": "sql",
+  "moduleSlug": "sql_module_0",
+  "sectionSlug": "section_0_2",
+  "prefix": "sql0",
+  "minutes": 15,
+  "topic": {
+    "labelKey": "topics.sql.sql_module_0.rows-and-columns.label",
+    "summaryKey": "topics.sql.sql_module_0.rows-and-columns.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_0.rows-and-columns.cards.sketch0.title",
+      "sketchId": "sketch-1",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_0.rows-and-columns.cards.sketch1.title",
+      "sketchId": "sketch-2",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql.sql_module_0.rows-and-columns.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch-1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_0.rows-and-columns.sketch-1.title",
+      "bodyKey": "sketches.sql.sql_module_0.rows-and-columns.sketch-1.bodyMarkdown"
+    },
+    {
+      "id": "sketch-2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_0.rows-and-columns.sketch-2.title",
+      "bodyKey": "sketches.sql.sql_module_0.rows-and-columns.sketch-2.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "fill-blank-1",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_0.rows-and-columns.quiz.fill-blank-1",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "name"
+      }
+    },
+    {
+      "id": "fill-blank-2",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_0.rows-and-columns.quiz.fill-blank-2",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "1, Zoe, 22"
+      }
+    },
+    {
+      "id": "single-choice-1",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_0.rows-and-columns.quiz.single-choice-1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "multi-choice-1",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_0.rows-and-columns.quiz.multi-choice-1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "code-input-1",
+      "kind": "code_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_0.rows-and-columns.quiz.code-input-1",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "students_intro",
+        "resultShape": "table",
+        "solutionCode": "SELECT * FROM students_intro;"
+      }
+    }
+  ]
+}

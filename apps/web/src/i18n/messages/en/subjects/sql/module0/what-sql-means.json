@@ -1,0 +1,125 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_0": {
+        "what-sql-means": {
+          "label": "What SQL means",
+          "summary": "Explore what SQL stands for, what it does, and how databases organize information using tables, rows, and columns.",
+          "cards": {
+            "sketch0": {
+              "title": "What is SQL?"
+            },
+            "sketch1": {
+              "title": "How Databases Organize Data"
+            },
+            "sketch2": {
+              "title": "Tables, Rows, and Columns Example"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "quiz": {
+            "q1-fill-blank-sql-abbreviation": {
+              "title": "What does SQL stand for?",
+              "prompt": "Fill in the blank: SQL stands for ____.",
+              "hint": "It's about structure and queries.",
+              "help": {
+                "concept": "SQL is an acronym for a language used to interact with relational databases.",
+                "hint_1": "The first word is 'Structured', and the last is 'Language'.",
+                "hint_2": "The full phrase is about querying data in a structured way."
+              },
+              "template": "SQL stands for {blank}.",
+              "choices": [
+                "Structured Query Language",
+                "Simple Quick Lookup",
+                "Standard Question List",
+                "System Query Logic"
+              ]
+            },
+            "q2-fill-blank-table-parts": {
+              "title": "Identify the part of a table",
+              "prompt": "In a database table, each horizontal line of data is called a ____.",
+              "hint": "Focus on the missing SQL concept rather than the exact missing word.",
+              "help": {
+                "concept": "The blank should be filled with the SQL term that matches the job the statement is trying to perform.",
+                "hint_1": "Think about what the missing part is supposed to do in the statement.",
+                "hint_2": "Choose the SQL term that best completes the meaning of the statement."
+              },
+              "template": "Each horizontal line of data in a table is a {blank}.",
+              "choices": [
+                "row",
+                "column",
+                "cell",
+                "field"
+              ]
+            },
+            "q3-single-choice-sql-purpose": {
+              "title": "Main purpose of SQL",
+              "prompt": "What is the main purpose of SQL?",
+              "hint": "SQL is about working with data, not visuals.",
+              "help": {
+                "concept": "SQL is used for interacting with data stored in tables within databases.",
+                "hint_1": "It helps you ask questions and organize data.",
+                "hint_2": "SQL's main job is to manage and retrieve data from databases."
+              },
+              "options": {
+                "a": "To manage and query data in relational databases",
+                "b": "To design user interfaces",
+                "c": "To create graphics",
+                "d": "To write web pages"
+              }
+            },
+            "q4-multi-choice-table-vs-spreadsheet": {
+              "title": "Tables vs. Spreadsheets",
+              "prompt": "Which of the following are true about how database tables and spreadsheets are similar or different? (Choose all that apply)",
+              "hint": "Think about structure, data types, and main uses.",
+              "help": {
+                "concept": "Database tables and spreadsheets both use rows and columns, but databases enforce structure and relationships, while spreadsheets focus on calculations.",
+                "hint_1": "Consider which features are unique to databases and which to spreadsheets.",
+                "hint_2": "Not every cell in a database table has a formula, but spreadsheets often use them for calculations."
+              },
+              "options": {
+                "a": "Both organize data into rows and columns",
+                "b": "Database tables can enforce data types and relationships",
+                "c": "Spreadsheets are designed mainly for calculations and charts",
+                "d": "Database tables always have formulas in every cell"
+              }
+            },
+            "q5-code-input-simple-select": {
+              "title": "Write a simple SQL query",
+              "prompt": "Write an SQL query to select all columns from the `products_catalog` table.",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+                "hint_1": "Eliminate choices or interpretations that do not match the task.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "starterCode": "-- Write your SQL query below"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_0": {
+        "what-sql-means": {
+          "sketch-1": {
+            "title": "What is SQL?",
+            "bodyMarkdown": "SQL stands for **Structured Query Language**. It is a language designed to manage and query data stored in relational databases. SQL lets you ask questions about your data, retrieve specific information, and update or organize that data efficiently."
+          },
+          "sketch-2": {
+            "title": "How Databases Organize Data",
+            "bodyMarkdown": "A relational database organizes data into **tables**. Each table has **columns** (fields) that define the type of data, and **rows** (records) that store the actual data. For example, a `students` table might have columns like `id`, `name`, and `grade`, and each row represents a different student."
+          },
+          "sketch-3": {
+            "title": "Tables, Rows, and Columns Example",
+            "bodyMarkdown": "Imagine a table called `products_catalog`:\n\n| id | name        | price |\n|----|-------------|-------|\n| 1  | Pencil      | 0.50  |\n| 2  | Notebook    | 2.00  |\n| 3  | Eraser      | 0.25  |\n\nHere, `id`, `name`, and `price` are columns. Each product is a row."
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,124 @@
+{
+  "title": "Intro to functions",
+  "summary": "Intro to functions in Calculated Columns and SQL Expressions",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sk1",
+      "title": "What are SQL functions?",
+      "bodyMarkdown": "SQL functions are built-in operations that take input values and return a result. You can use them in SELECT statements to transform or summarize data. For example, the `UPPER()` function converts text to uppercase, and `LENGTH()` returns the number of characters in a string.\n\nExample:\n\n```sql\nSELECT name, UPPER(name) AS name_upper, LENGTH(name) AS name_length\nFROM students;\n```\n\nThis query shows each student's name, their name in uppercase, and the length of their name."
+    },
+    {
+      "id": "sk2",
+      "title": "Why use functions in calculated columns?",
+      "bodyMarkdown": "Functions help you create new columns based on existing data. For example, you might want to display the grade level plus one (for next year), or show all department names in lowercase.\n\nExample:\n\n```sql\nSELECT name, grade_level, grade_level + 1 AS next_year_grade\nFROM students;\n```\n\nThis query adds a calculated column showing each student's grade level for the next year."
+    },
+    {
+      "id": "sk3",
+      "title": "Combining functions and expressions",
+      "bodyMarkdown": "You can combine functions with arithmetic or other expressions. For instance, you can use `LENGTH(name) + grade_level` to mix a function result with a numeric column.\n\nExample:\n\n```sql\nSELECT name, LENGTH(name) + grade_level AS score\nFROM students;\n```\n\nThis query creates a new column called `score` by adding the length of each student's name to their grade level."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "q1",
+      "kind": "fill_blank_choice",
+      "title": "Using a function in SELECT",
+      "prompt": "Which function would you use to count the number of characters in the 'name' column from the students table?",
+      "template": "SELECT name, _____(name) AS name_length FROM students;",
+      "choices": [
+        "LENGTH",
+        "COUNT",
+        "SUM",
+        "UPPER"
+      ],
+      "correctValue": "LENGTH",
+      "hint": "It's a function that measures string size.",
+      "help": {
+        "concept": "The the missing term() function returns the number of characters in a string.",
+        "hint_1": "COUNT is for counting rows, not characters.",
+        "hint_2": "the missing term is the function that gives you the size of a text value."
+      }
+    },
+    {
+      "id": "q2",
+      "kind": "fill_blank_choice",
+      "title": "Simple arithmetic expression",
+      "prompt": "How would you add 1 to every student's grade_level in a SELECT statement?",
+      "template": "SELECT name, grade_level + 1 AS _____ FROM students;",
+      "choices": [
+        "next_year_grade",
+        "grade_level",
+        "total",
+        "student_id"
+      ],
+      "correctValue": "next_year_grade",
+      "hint": "Think about a clear alias for the new column.",
+      "help": {
+        "concept": "Aliases make calculated columns readable and meaningful.",
+        "hint_1": "The alias should describe the new value (grade level plus one).",
+        "hint_2": "A good alias for grade_level + 1 is the missing term."
+      }
+    },
+    {
+      "id": "q3",
+      "kind": "single_choice",
+      "title": "Purpose of SQL functions",
+      "prompt": "What is the main purpose of using functions like UPPER() or LENGTH() in a SELECT statement?",
+      "options": [
+        "To transform or summarize data in your results",
+        "To create new tables",
+        "To delete rows from a table",
+        "To change the database structure"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Think about what happens to the data in the SELECT output.",
+      "help": {
+        "concept": "Functions in SELECT help you modify or analyze the data you retrieve.",
+        "hint_1": "Functions like UPPER() or LENGTH() change or summarize column values.",
+        "hint_2": "They do not change tables or the database, just the output of your query."
+      }
+    },
+    {
+      "id": "q4",
+      "kind": "multi_choice",
+      "title": "Which are SQL functions?",
+      "prompt": "Select all options that are valid SQL functions you could use in a SELECT statement.",
+      "options": [
+        "LENGTH()",
+        "UPPER()",
+        "SUM()",
+        "DELETE()"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "hint": "Focus on the main concept being tested and eliminate choices that describe something different.",
+      "help": {
+        "concept": "Choose the option that matches the core idea described in the question without relying on repeated wording from the answer choices.",
+        "hint_1": "Rule out options that describe a different role, behavior, or SQL concept than the question is testing.",
+        "hint_2": "Pick the option that best matches the concept, not the one that simply repeats familiar wording."
+      }
+    },
+    {
+      "id": "q5",
+      "kind": "code_input",
+      "title": "Write a query using a function",
+      "prompt": "Write a SQL query to show each student's name and their name in all uppercase letters. The result should have columns 'name' and 'name_upper'.",
+      "starterCode": "-- Write your query here",
+      "solutionCode": "SELECT name, UPPER(name) AS name_upper FROM students;",
+      "datasetId": "school_relations_intro",
+      "recipeType": "sql_query",
+      "hint": "Focus on the concept being tested.",
+      "help": {
+        "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+        "hint_1": "Eliminate choices or interpretations that do not match the task.",
+        "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+      }
+    }
+  ]
+}

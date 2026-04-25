@@ -1,0 +1,131 @@
+{
+  "topicId": "where-sql-runs",
+  "subjectSlug": "sql",
+  "moduleSlug": "sql_module_0",
+  "sectionSlug": "section_0_4",
+  "prefix": "sql0",
+  "minutes": 15,
+  "topic": {
+    "labelKey": "topics.sql.sql_module_0.where-sql-runs.label",
+    "summaryKey": "topics.sql.sql_module_0.where-sql-runs.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_0.where-sql-runs.cards.sketch0.title",
+      "sketchId": "sk1",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_0.where-sql-runs.cards.sketch1.title",
+      "sketchId": "sk2",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql.sql_module_0.where-sql-runs.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sk1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_0.where-sql-runs.sk1.title",
+      "bodyKey": "sketches.sql.sql_module_0.where-sql-runs.sk1.bodyMarkdown"
+    },
+    {
+      "id": "sk2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_0.where-sql-runs.sk2.title",
+      "bodyKey": "sketches.sql.sql_module_0.where-sql-runs.sk2.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "q1",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_0.where-sql-runs.quiz.q1",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "database system"
+      }
+    },
+    {
+      "id": "q2",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_0.where-sql-runs.quiz.q2",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "manage"
+      }
+    },
+    {
+      "id": "q3",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_0.where-sql-runs.quiz.q3",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "q4",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_0.where-sql-runs.quiz.q4",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "q5",
+      "kind": "code_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_0.where-sql-runs.quiz.q5",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "students_intro",
+        "resultShape": "table",
+        "solutionCode": "SELECT * FROM students;"
+      }
+    }
+  ]
+}

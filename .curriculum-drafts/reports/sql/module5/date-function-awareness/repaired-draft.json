@@ -1,0 +1,117 @@
+{
+  "title": "Date function awareness",
+  "summary": "Understand and apply date-related functions and expressions in SQL calculated columns, using the school_relations_intro dataset.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch-1-intro-date-functions",
+      "title": "Introduction to Date Functions in SQL",
+      "bodyMarkdown": "Date functions in SQL allow you to manipulate and extract information from date and time values. Even if your dataset stores dates as text (like 'Spring 2026'), you can use string functions or date functions to extract the year, month, or compare terms. For example, to extract the year from the `term` column in the `enrollments` table:\n\n```sql\nSELECT term, SUBSTR(term, -4) AS year FROM enrollments;\n```\n\nThis query creates a calculated column called `year` by taking the last 4 characters from the `term` value."
+    },
+    {
+      "id": "sketch-2-common-date-expressions",
+      "title": "Common Date Expressions",
+      "bodyMarkdown": "You can use SQL expressions to create new columns based on date information. For example, to check if an enrollment is in the year 2026:\n\n```sql\nSELECT *, SUBSTR(term, -4) = '2026' AS is_2026 FROM enrollments;\n```\n\nThis adds a column `is_2026` that is 1 if the term is in 2026, and 0 otherwise. This is useful for filtering or reporting on specific years."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "fb-1-extract-year",
+      "kind": "fill_blank_choice",
+      "title": "Extracting the Year from a Term",
+      "prompt": "Choose the best value for the missing blank in the statement.",
+      "template": "The missing value is [blank1].",
+      "choices": [
+        "SUBSTR(term, -4)",
+        "YEAR(term)",
+        "LEFT(term, 4)",
+        "RIGHT(term, 4)"
+      ],
+      "correctValue": "SUBSTR(term, -4)",
+      "hint": "Think about which function grabs a substring from a text value.",
+      "help": {
+        "concept": "In SQLite, SUBSTR can extract a portion of a string by position. Negative positions count from the end.",
+        "hint_1": "Look for a function that works with text and lets you specify a starting position.",
+        "hint_2": "SQLite does not have a built-in RIGHT() or YEAR() function, but SUBSTR can extract characters from the end."
+      }
+    },
+    {
+      "id": "fb-2-check-year-equality",
+      "kind": "fill_blank_choice",
+      "title": "Checking for a Specific Year",
+      "prompt": "Choose the best value for the missing blank in the statement.",
+      "template": "The missing value is [blank1].",
+      "choices": [
+        "SUBSTR(term, -4) = '2026'",
+        "YEAR(term) = 2026",
+        "term LIKE '%2026'",
+        "RIGHT(term, 4) = '2026'"
+      ],
+      "correctValue": "SUBSTR(term, -4) = '2026'",
+      "hint": "You need to compare the extracted year to '2026'.",
+      "help": {
+        "concept": "To check for a specific year in a text-based term, extract the year and compare it to your target value.",
+        "hint_1": "Use a function that extracts the year, then compare it with '2026'.",
+        "hint_2": "SQLite uses SUBSTR for string extraction, and you can compare the result directly."
+      }
+    },
+    {
+      "id": "sc-1-sqlite-date-function",
+      "kind": "single_choice",
+      "title": "SQLite Date Function Availability",
+      "prompt": "Which of the following date functions is NOT available by default in SQLite?",
+      "options": [
+        "DATE()",
+        "YEAR()",
+        "STRFTIME()",
+        "SUBSTR()"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Focus on the main concept being tested and eliminate choices that describe something different.",
+      "help": {
+        "concept": "Choose the option that matches the core idea described in the question without relying on repeated wording from the answer choices.",
+        "hint_1": "Rule out options that describe a different role, behavior, or SQL concept than the question is testing.",
+        "hint_2": "Pick the option that best matches the concept, not the one that simply repeats familiar wording."
+      }
+    },
+    {
+      "id": "mc-1-string-vs-date-functions",
+      "kind": "multi_choice",
+      "title": "String vs. Date Functions",
+      "prompt": "Which of the following can be used in SQLite to work with date-like text columns such as `term`? (Select all that apply.)",
+      "options": [
+        "SUBSTR()",
+        "STRFTIME()",
+        "YEAR()",
+        "CAST()"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Focus on the main concept being tested and eliminate choices that describe something different.",
+      "help": {
+        "concept": "Choose the option that matches the core idea described in the question without relying on repeated wording from the answer choices.",
+        "hint_1": "Rule out options that describe a different role, behavior, or SQL concept than the question is testing.",
+        "hint_2": "Pick the option that best matches the concept, not the one that simply repeats familiar wording."
+      }
+    },
+    {
+      "id": "ci-1-extract-term-year",
+      "kind": "code_input",
+      "title": "Write a Query to Extract Year from Term",
+      "prompt": "Write a SQL query that selects the `id`, `student_id`, `term`, and a calculated column called `year` that extracts the last 4 characters from the `term` column in the `enrollments` table.",
+      "starterCode": "-- Write your query below",
+      "solutionCode": "SELECT id, student_id, term, SUBSTR(term, -4) AS year FROM enrollments;",
+      "datasetId": "school_relations_intro",
+      "recipeType": "sql_query",
+      "hint": "Focus on the concept being tested.",
+      "help": {
+        "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+        "hint_1": "Eliminate choices or interpretations that do not match the task.",
+        "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+      }
+    }
+  ]
+}

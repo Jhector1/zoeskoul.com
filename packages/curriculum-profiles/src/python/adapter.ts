@@ -1,9 +1,8 @@
 import type {
-    TopicRecipe,
-    BuildSubjectManifestArgs,
     BuildTopicSeedArgs,
+    BuildSubjectManifestArgs,
     CompileTopicRecipeArgs,
-    TopicSeed,
+    TopicRecipe,
 } from "@zoeskoul/curriculum-contracts";
 import { buildBaseSubjectManifest } from "../shared/buildBaseSubjectManifest.js";
 import type { CourseProfileAdapter } from "../types.js";
@@ -13,10 +12,6 @@ export const pythonProfileAdapter: CourseProfileAdapter = {
     id: "python",
 
     buildTopicSeed(args: BuildTopicSeedArgs) {
-        const moduleRuntimeDefaults: TopicSeed["moduleRuntimeDefaults"] =
-            args.module.runtimeDefaults ??
-            pythonProfile.buildModuleRuntimeDefaults();
-
         return {
             subjectSlug: args.blueprint.subjectSlug,
             profileId: args.blueprint.profileId,
@@ -29,14 +24,18 @@ export const pythonProfileAdapter: CourseProfileAdapter = {
             minutes: args.topic.minutes,
             moduleTitle: args.module.title,
             modulePurpose: args.module.purpose,
-            moduleObjectives: args.module.learningObjectives,
-            guidedExercises: args.module.guidedExercises,
-            quizFocus: args.module.quizFocus,
-            moduleProject: args.module.moduleProject,
-            moduleRuntimeDefaults,
+            moduleObjectives: args.module.learningObjectives ?? [],
+            guidedExercises: args.module.guidedExercises ?? [],
+            quizFocus: args.module.quizFocus ?? [],
+            moduleProject:
+                typeof args.module.moduleProject === "string"
+                    ? args.module.moduleProject
+                    : undefined,
+            moduleRuntimeDefaults: args.module.runtimeDefaults ?? undefined,
             sectionTitle: args.section.title,
             sourceLocale: args.blueprint.sourceLocale,
-            targetLocales: args.blueprint.targetLocales,
+            targetLocales: args.blueprint.targetLocales ?? [],
+            exercisePolicy: args.module.exercisePolicy,
         };
     },
 

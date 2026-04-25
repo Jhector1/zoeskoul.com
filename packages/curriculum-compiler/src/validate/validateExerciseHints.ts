@@ -17,6 +17,10 @@ function containsWholeText(haystack: string, needle: string): boolean {
     return pattern.test(h);
 }
 
+function canonicalOptionIds(count: number): string[] {
+    return Array.from({ length: count }, (_, i) => String.fromCharCode(97 + i));
+}
+
 export function validateExerciseHints(draft: TopicAuthoringDraft): string[] {
     const warnings: string[] = [];
 
@@ -29,8 +33,17 @@ export function validateExerciseHints(draft: TopicAuthoringDraft): string[] {
         ];
 
         if (exercise.kind === "single_choice" || exercise.kind === "multi_choice") {
-            for (const answer of exercise.correctOptionIds) {
-                if (texts.some((text) => containsWholeText(text, answer))) {
+            const optionIds = canonicalOptionIds(exercise.options.length);
+
+            const correctOptionTexts = exercise.correctOptionIds
+                .map((id) => {
+                    const index = optionIds.indexOf(id);
+                    return index >= 0 ? exercise.options[index] : "";
+                })
+                .filter(Boolean);
+
+            for (const answerText of correctOptionTexts) {
+                if (texts.some((text) => containsWholeText(text, answerText))) {
                     warnings.push(`Hint reveals answer in exercise ${exercise.id}`);
                     break;
                 }

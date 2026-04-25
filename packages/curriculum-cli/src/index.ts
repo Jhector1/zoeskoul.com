@@ -8,6 +8,7 @@ import { runCritiqueSubjectDraft } from "./commands/critique-subject-draft.js";
 import { runValidateDraft } from "./commands/validate.js";
 import { runPublish } from "./commands/publish.js";
 import { runPublishAuto } from "./commands/publish-auto.js";
+import {runValidateSpec} from "./commands/validate-spec.js";
 
 async function main() {
   const [, , command, arg1, arg2] = process.argv;
@@ -100,11 +101,19 @@ async function main() {
       await runPublishAuto(arg1);
       return;
     }
+    case "validate-spec": {
+      if (!arg1) {
+        throw new Error(
+            "Usage: curriculum-cli validate-spec <subjectSlug|blueprintPath>",
+        );
+      }
+      await runValidateSpec(arg1);
+      return;
+    }
 
     default: {
       throw new Error(
-          "Usage: curriculum-cli <plan|compile-subject|compile-topic|critique-topic|critique-topic-draft|critique-subject|critique-subject-draft|validate|publish|publish-auto> <blueprintPath|subjectSlug> [topicId]",
-      );
+          "Usage: curriculum-cli <plan|compile-subject|compile-topic|critique-topic|critique-topic-draft|critique-subject|critique-subject-draft|validate|validate-spec|publish|publish-auto> <blueprintPath|subjectSlug> [topicId]",      );
     }
   }
 }

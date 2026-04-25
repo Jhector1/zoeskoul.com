@@ -8,20 +8,6 @@ function escapeRegExp(value: string): string {
     return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
-function sanitizeHintText(text: string, bannedValues: string[]): string {
-    let out = normalizeText(text);
-
-    for (const raw of bannedValues) {
-        const banned = normalizeText(raw);
-        if (!banned) continue;
-
-        const pattern = new RegExp(`\\b${escapeRegExp(banned)}\\b`, "gi");
-        out = out.replace(pattern, "the correct answer");
-    }
-
-    return out;
-}
-
 function uniqueNonEmpty(values: string[]): string[] {
     const seen = new Set<string>();
     const out: string[] = [];
@@ -35,10 +21,6 @@ function uniqueNonEmpty(values: string[]): string[] {
     return out;
 }
 
-function canonicalOptionIds(count: number): string[] {
-    return Array.from({ length: count }, (_, i) => String.fromCharCode(97 + i));
-}
-
 function normalizeComparable(value: string): string {
     return value
         .trim()
@@ -47,71 +29,135 @@ function normalizeComparable(value: string): string {
         .replace(/\s+/g, " ");
 }
 
-function containsOptionText(text: string, options: string[]): boolean {
+function canonicalOptionIds(count: number): string[] {
+    return Array.from({ length: count }, (_, i) => String.fromCharCode(97 + i));
+}
+
+function resolveCorrectOptionTexts(options: string[], correctOptionIds: string[]): string[] {
+    const ids = canonicalOptionIds(options.length);
+
+    return correctOptionIds
+        .map((id) => {
+            const index = ids.indexOf(id);
+            return index >= 0 ? options[index] : "";
+        })
+        .filter(Boolean);
+}
+
+function containsAnyAnswerText(text: string, answers: string[]): boolean {
     const normalizedText = normalizeComparable(text);
     if (!normalizedText) return false;
 
-    return options.some((option) => {
-        const normalizedOption = normalizeComparable(option);
-        if (!normalizedOption) return false;
-        return normalizedText.includes(normalizedOption);
+    return answers.some((answer) => {
+        const normalizedAnswer = normalizeComparable(answer);
+        return normalizedAnswer && normalizedText.includes(normalizedAnswer);
     });
 }
 
-function makeSafeChoiceHelp(prompt: string) {
-    const normalizedPrompt = normalizeText(prompt);
+function stripAnswerLeakFromTexts(args: {
+    hint: string;
+    help: {
+        concept: string;
+        hint_1: string;
+        hint_2: string;
+    };
+    bannedAnswers: string[];
+    fallback: {
+        hint: string;
+        help: {
+            concept: string;
+            hint_1: string;
+            hint_2: string;
+        };
+    };
+}) {
+    const revealsOriginal =
+        containsAnyAnswerText(args.hint, args.bannedAnswers) ||
+        containsAnyAnswerText(args.help.concept, args.bannedAnswers) ||
+        containsAnyAnswerText(args.help.hint_1, args.bannedAnswers) ||
+        containsAnyAnswerText(args.help.hint_2, args.bannedAnswers);
 
+    if (!revealsOriginal) {
+        return {
+            hint: args.hint,
+            help: args.help,
+        };
+    }
+
+    const fallbackReveals =
+        containsAnyAnswerText(args.fallback.hint, args.bannedAnswers) ||
+        containsAnyAnswerText(args.fallback.help.concept, args.bannedAnswers) ||
+        containsAnyAnswerText(args.fallback.help.hint_1, args.bannedAnswers) ||
+        containsAnyAnswerText(args.fallback.help.hint_2, args.bannedAnswers);
+
+    if (!fallbackReveals) {
+        return args.fallback;
+    }
+
+    return {
+        hint: "Focus on the concept being tested.",
+        help: {
+            concept: "Think about the role or idea being tested rather than repeating answer wording.",
+            hint_1: "Eliminate choices or interpretations that do not match the task.",
+            hint_2: "Choose the concept that best fits what the exercise is asking you to do.",
+        },
+    };
+}
+
+function makeSafeChoiceHelp() {
     return {
         hint: "Focus on the main concept being tested and eliminate choices that describe something different.",
         help: {
             concept:
                 "Choose the option that matches the core idea described in the question without relying on repeated wording from the answer choices.",
             hint_1:
-                "Rule out options that describe a different role, behavior, or SQL concept than the prompt asks about.",
+                "Rule out options that describe a different role, behavior, or SQL concept than the question is testing.",
             hint_2:
-                normalizedPrompt
-                    ? `Use the prompt carefully and pick the choice that best matches what it is asking about: ${normalizedPrompt.slice(0, 120)}${normalizedPrompt.length > 120 ? "..." : ""}`
-                    : "Use the prompt carefully and pick the choice that best matches the concept being tested.",
+                "Pick the option that best matches the concept, not the one that simply repeats familiar wording.",
         },
     };
 }
 
-function inferFillBlankCorrectValue(args: {
-    choices: string[];
-    correctValue?: string;
-    prompt?: string;
-    template?: string;
-    hint?: string;
-    helpConcept?: string;
-    helpHint1?: string;
-    helpHint2?: string;
-}): string {
-    const explicit = normalizeText(args.correctValue);
-    if (explicit) return explicit;
+function makeSafeFillBlankHelp() {
+    return {
+        hint: "Focus on the missing SQL concept rather than the exact missing word.",
+        help: {
+            concept:
+                "The blank should be filled with the SQL term that matches the job the statement is trying to perform.",
+            hint_1:
+                "Think about what the missing part is supposed to do in the statement.",
+            hint_2:
+                "Choose the SQL term that best completes the meaning of the statement.",
+        },
+    };
+}
 
-    const choices = uniqueNonEmpty(args.choices);
-    if (choices.length === 1) {
-        return choices[0];
-    }
+function makeSafeDragReorderHelp() {
+    return {
+        hint: "Focus on the logical order of the SQL parts being tested.",
+        help: {
+            concept:
+                "Arrange the pieces according to how the SQL statement is structured.",
+            hint_1:
+                "Think about which piece must appear first and which depends on it.",
+            hint_2:
+                "Put the parts in the order that makes the statement logically valid.",
+        },
+    };
+}
 
-    const searchSpace = [
-        normalizeText(args.prompt),
-        normalizeText(args.template),
-        normalizeText(args.hint),
-        normalizeText(args.helpConcept),
-        normalizeText(args.helpHint1),
-        normalizeText(args.helpHint2),
-    ].join(" ");
-
-    for (const choice of choices) {
-        if (!choice) continue;
-        const pattern = new RegExp(`\\b${escapeRegExp(choice)}\\b`, "i");
-        if (pattern.test(searchSpace)) {
-            return choice;
-        }
-    }
-
-    return "";
+function makeSafeCodeHelp() {
+    return {
+        hint: "Focus on the SQL task being asked for, not on copying final query text.",
+        help: {
+            concept:
+                "Build the query from the operation the exercise is testing.",
+            hint_1:
+                "Think about which clauses or functions are required for the task.",
+            hint_2:
+                "Construct the query based on what result the exercise expects, not by repeating exact solution wording.",
+        },
+    };
 }
 
 function inferChoiceIds(args: {
@@ -182,6 +228,66 @@ function inferChoiceIds(args: {
     return recovered;
 }
 
+function inferFillBlankCorrectValue(args: {
+    choices: string[];
+    correctValue?: string;
+    prompt?: string;
+    template?: string;
+    hint?: string;
+    helpConcept?: string;
+    helpHint1?: string;
+    helpHint2?: string;
+}): string {
+    const choices = uniqueNonEmpty(args.choices);
+
+    function matchChoice(candidate: string | undefined): string {
+        const normalizedCandidate = normalizeComparable(normalizeText(candidate));
+        if (!normalizedCandidate) return "";
+
+        const exact = choices.find(
+            (choice) => normalizeComparable(choice) === normalizedCandidate,
+        );
+        if (exact) return exact;
+
+        const loose = choices.find((choice) => {
+            const normalizedChoice = normalizeComparable(choice);
+            return (
+                normalizedChoice.includes(normalizedCandidate) ||
+                normalizedCandidate.includes(normalizedChoice)
+            );
+        });
+        if (loose) return loose;
+
+        return "";
+    }
+
+    const explicitMatch = matchChoice(args.correctValue);
+    if (explicitMatch) return explicitMatch;
+
+    if (choices.length === 1) {
+        return choices[0];
+    }
+
+    const searchSpace = [
+        normalizeText(args.prompt),
+        normalizeText(args.template),
+        normalizeText(args.hint),
+        normalizeText(args.helpConcept),
+        normalizeText(args.helpHint1),
+        normalizeText(args.helpHint2),
+    ].join(" ");
+
+    for (const choice of choices) {
+        if (!choice) continue;
+        const pattern = new RegExp(`\\b${escapeRegExp(choice)}\\b`, "i");
+        if (pattern.test(searchSpace)) {
+            return choice;
+        }
+    }
+
+    return "";
+}
+
 function repairDragReorderCorrectOrder(tokens: string[], correctOrder: string[]): string[] {
     const cleanTokens = uniqueNonEmpty(tokens);
     const cleanCorrectOrder = uniqueNonEmpty(correctOrder);
@@ -240,6 +346,154 @@ function repairDragReorderCorrectOrder(tokens: string[], correctOrder: string[])
     return cleanTokens;
 }
 
+function extractBannedCodeFragments(solutionCode: string): string[] {
+    const raw = solutionCode
+        .split(/\s+/)
+        .map((x) => x.trim())
+        .filter((x) => x.length >= 4);
+
+    const joined: string[] = [];
+    for (let i = 0; i < raw.length - 1; i += 1) {
+        joined.push(`${raw[i]} ${raw[i + 1]}`);
+    }
+
+    return uniqueNonEmpty([...raw, ...joined]).slice(0, 20);
+}
+
+function countFillBlanks(template: string, prompt: string): number {
+    const t = String(template ?? "");
+    const p = String(prompt ?? "");
+
+    const templateBracketBlanks = (t.match(/\[blank\d*\]/gi) ?? []).length;
+    const templateUnderscoreBlanks = (t.match(/_{2,}/g) ?? []).length;
+    const promptUnderscoreBlanks = (p.match(/_{2,}/g) ?? []).length;
+
+    return templateBracketBlanks + templateUnderscoreBlanks + promptUnderscoreBlanks;
+}
+
+function rewriteInvalidFillBlankAsSingleBlank(args: {
+    base: {
+        id: string;
+        title: string;
+        prompt: string;
+        hint: string;
+        help: {
+            concept: string;
+            hint_1: string;
+            hint_2: string;
+        };
+    };
+    choices: string[];
+    correctValue: string;
+    reason: "missing_blank" | "multiple_blanks";
+}) {
+    const safe = makeSafeFillBlankHelp();
+
+    const rewrittenPrompt =
+        args.reason === "multiple_blanks"
+            ? "Choose the best value for the first missing blank in the statement."
+            : "Choose the best value for the missing blank in the statement.";
+
+    const rewrittenTemplate =
+        args.reason === "multiple_blanks"
+            ? "The first missing value is [blank1]."
+            : "The missing value is [blank1].";
+
+    const sanitized = stripAnswerLeakFromTexts({
+        hint: args.base.hint || safe.hint,
+        help: {
+            concept: args.base.help.concept || safe.help.concept,
+            hint_1: args.base.help.hint_1 || safe.help.hint_1,
+            hint_2: args.base.help.hint_2 || safe.help.hint_2,
+        },
+        bannedAnswers: args.correctValue ? [args.correctValue] : [],
+        fallback: safe,
+    });
+
+    return {
+        ...args.base,
+        kind: "fill_blank_choice" as const,
+        prompt: rewrittenPrompt,
+        template: rewrittenTemplate,
+        choices: args.choices,
+        correctValue: args.correctValue || args.choices[0] || "",
+        hint: sanitized.hint,
+        help: sanitized.help,
+    };
+}
+function dedupeCaseInsensitive(values: string[]): string[] {
+    const seen = new Set<string>();
+    const out: string[] = [];
+
+    for (const value of values.map(normalizeText)) {
+        const normalized = normalizeComparable(value);
+        if (!value || seen.has(normalized)) continue;
+        seen.add(normalized);
+        out.push(value);
+    }
+
+    return out;
+}
+
+function buildFallbackDistractors(correctText: string): string[] {
+    const defaults = [
+        "A command",
+        "A table name",
+        "A database object",
+        "An unrelated value",
+        "A column group",
+        "A temporary result",
+    ];
+
+    return defaults.filter(
+        (candidate) =>
+            normalizeComparable(candidate) !== normalizeComparable(correctText),
+    );
+}
+
+function ensureMinimumChoiceOptions(args: {
+    options: string[];
+    correctOptionIds: string[];
+}): {
+    options: string[];
+    correctOptionIds: string[];
+} {
+    let options = dedupeCaseInsensitive(args.options);
+    let correctOptionIds = [...args.correctOptionIds];
+
+    const correctTexts = resolveCorrectOptionTexts(options, correctOptionIds);
+    const primaryCorrectText = correctTexts[0] ?? options[0] ?? "Correct answer";
+
+    if (options.length >= 2) {
+        return { options, correctOptionIds };
+    }
+
+    const distractors = buildFallbackDistractors(primaryCorrectText);
+
+    for (const distractor of distractors) {
+        if (options.length >= 2) break;
+
+        const exists = options.some(
+            (option) =>
+                normalizeComparable(option) === normalizeComparable(distractor),
+        );
+
+        if (!exists) {
+            options.push(distractor);
+        }
+    }
+
+    const newOptionIds = canonicalOptionIds(options.length);
+
+    if (correctOptionIds.length === 0 && newOptionIds.length > 0) {
+        correctOptionIds = [newOptionIds[0]];
+    }
+
+    return {
+        options,
+        correctOptionIds,
+    };
+}
 export function repairTopicAuthoringDraft(
     draft: TopicAuthoringDraft,
 ): TopicAuthoringDraft {
@@ -271,8 +525,8 @@ export function repairTopicAuthoringDraft(
             };
 
             if (exercise.kind === "single_choice" || exercise.kind === "multi_choice") {
-                const options = uniqueNonEmpty(exercise.options ?? []);
-                const correctOptionIds = inferChoiceIds({
+                let options = uniqueNonEmpty(exercise.options ?? []);
+                let correctOptionIds = inferChoiceIds({
                     options,
                     rawCorrectOptionIds: exercise.correctOptionIds ?? [],
                     prompt: base.prompt,
@@ -282,90 +536,169 @@ export function repairTopicAuthoringDraft(
                     helpHint2: base.help.hint_2,
                 });
 
-                let hint = base.hint;
-                let help = {
-                    concept: base.help.concept,
-                    hint_1: base.help.hint_1,
-                    hint_2: base.help.hint_2,
-                };
+                let optionIds = canonicalOptionIds(options.length);
 
-                const revealsOptionText =
-                    containsOptionText(hint, options) ||
-                    containsOptionText(help.concept, options) ||
-                    containsOptionText(help.hint_1, options) ||
-                    containsOptionText(help.hint_2, options);
-
-                if (revealsOptionText) {
-                    const safe = makeSafeChoiceHelp(base.prompt);
-                    hint = safe.hint;
-                    help = safe.help;
+                if (exercise.kind === "single_choice") {
+                    if (correctOptionIds.length === 0 && optionIds.length > 0) {
+                        correctOptionIds = [optionIds[0]];
+                    } else if (correctOptionIds.length > 1) {
+                        correctOptionIds = [correctOptionIds[0]];
+                    }
                 }
+
+                if (exercise.kind === "multi_choice") {
+                    if (correctOptionIds.length === 0 && optionIds.length > 0) {
+                        correctOptionIds = [optionIds[0]];
+                    }
+                }
+
+                const repaired = ensureMinimumChoiceOptions({
+                    options,
+                    correctOptionIds,
+                });
+
+                options = repaired.options;
+                correctOptionIds = repaired.correctOptionIds;
+                optionIds = canonicalOptionIds(options.length);
+
+                if (exercise.kind === "single_choice") {
+                    if (correctOptionIds.length === 0 && optionIds.length > 0) {
+                        correctOptionIds = [optionIds[0]];
+                    } else if (correctOptionIds.length > 1) {
+                        correctOptionIds = [correctOptionIds[0]];
+                    }
+                }
+
+                if (exercise.kind === "multi_choice") {
+                    if (correctOptionIds.length === 0 && optionIds.length > 0) {
+                        correctOptionIds = [optionIds[0]];
+                    }
+                }
+
+                const correctOptionTexts = resolveCorrectOptionTexts(options, correctOptionIds);
+
+                const sanitized = stripAnswerLeakFromTexts({
+                    hint: base.hint,
+                    help: {
+                        concept: base.help.concept,
+                        hint_1: base.help.hint_1,
+                        hint_2: base.help.hint_2,
+                    },
+                    bannedAnswers: correctOptionTexts,
+                    fallback: makeSafeChoiceHelp(),
+                });
 
                 return {
                     ...base,
                     kind: exercise.kind,
                     options,
                     correctOptionIds,
-                    hint,
-                    help,
+                    hint: sanitized.hint,
+                    help: sanitized.help,
                 };
             }
-
             if (exercise.kind === "drag_reorder") {
                 const tokens = uniqueNonEmpty(exercise.tokens ?? []);
                 const correctOrder = repairDragReorderCorrectOrder(
                     tokens,
                     exercise.correctOrder ?? [],
                 );
-                const banned = [...correctOrder];
+
+                const sanitized = stripAnswerLeakFromTexts({
+                    hint: base.hint,
+                    help: {
+                        concept: base.help.concept,
+                        hint_1: base.help.hint_1,
+                        hint_2: base.help.hint_2,
+                    },
+                    bannedAnswers: correctOrder,
+                    fallback: makeSafeDragReorderHelp(),
+                });
 
                 return {
                     ...base,
                     kind: "drag_reorder" as const,
                     tokens,
                     correctOrder,
-                    hint: sanitizeHintText(base.hint, banned),
-                    help: {
-                        concept: sanitizeHintText(base.help.concept, banned),
-                        hint_1: sanitizeHintText(base.help.hint_1, banned),
-                        hint_2: sanitizeHintText(base.help.hint_2, banned),
-                    },
+                    hint: sanitized.hint,
+                    help: sanitized.help,
                 };
             }
 
             if (exercise.kind === "fill_blank_choice") {
                 const choices = uniqueNonEmpty(exercise.choices ?? []);
-                const correctValue = inferFillBlankCorrectValue({
+                const template = normalizeText(exercise.template);
+                const blankCount = countFillBlanks(template, base.prompt);
+
+                let correctValue = inferFillBlankCorrectValue({
                     choices,
                     correctValue: exercise.correctValue,
                     prompt: base.prompt,
-                    template: exercise.template,
+                    template,
                     hint: base.hint,
                     helpConcept: base.help.concept,
                     helpHint1: base.help.hint_1,
                     helpHint2: base.help.hint_2,
                 });
 
-                const banned = correctValue ? [correctValue] : [];
+                if (!correctValue && choices.length > 0) {
+                    correctValue = choices[0];
+                }
+
+                if (blankCount === 0) {
+                    return rewriteInvalidFillBlankAsSingleBlank({
+                        base,
+                        choices,
+                        correctValue,
+                        reason: "missing_blank",
+                    });
+                }
+
+                if (blankCount > 1) {
+                    return rewriteInvalidFillBlankAsSingleBlank({
+                        base,
+                        choices,
+                        correctValue,
+                        reason: "multiple_blanks",
+                    });
+                }
+
+                const sanitized = stripAnswerLeakFromTexts({
+                    hint: base.hint,
+                    help: {
+                        concept: base.help.concept,
+                        hint_1: base.help.hint_1,
+                        hint_2: base.help.hint_2,
+                    },
+                    bannedAnswers: correctValue ? [correctValue] : [],
+                    fallback: makeSafeFillBlankHelp(),
+                });
 
                 return {
                     ...base,
                     kind: "fill_blank_choice" as const,
-                    template: normalizeText(exercise.template),
+                    template,
                     choices,
                     correctValue,
-                    hint: sanitizeHintText(base.hint, banned),
-                    help: {
-                        concept: sanitizeHintText(base.help.concept, banned),
-                        hint_1: sanitizeHintText(base.help.hint_1, banned),
-                        hint_2: sanitizeHintText(base.help.hint_2, banned),
-                    },
+                    hint: sanitized.hint,
+                    help: sanitized.help,
                 };
             }
 
             const starterCode = normalizeText(exercise.starterCode);
             const solutionCode = normalizeText(exercise.solutionCode);
-            const banned = solutionCode ? [solutionCode] : [];
+            const bannedAnswers = extractBannedCodeFragments(solutionCode);
+
+            const sanitized = stripAnswerLeakFromTexts({
+                hint: base.hint,
+                help: {
+                    concept: base.help.concept,
+                    hint_1: base.help.hint_1,
+                    hint_2: base.help.hint_2,
+                },
+                bannedAnswers,
+                fallback: makeSafeCodeHelp(),
+            });
 
             return {
                 ...base,
@@ -374,12 +707,8 @@ export function repairTopicAuthoringDraft(
                 solutionCode,
                 datasetId: normalizeText(exercise.datasetId) || undefined,
                 recipeType: exercise.recipeType,
-                hint: sanitizeHintText(base.hint, banned),
-                help: {
-                    concept: sanitizeHintText(base.help.concept, banned),
-                    hint_1: sanitizeHintText(base.help.hint_1, banned),
-                    hint_2: sanitizeHintText(base.help.hint_2, banned),
-                },
+                hint: sanitized.hint,
+                help: sanitized.help,
             };
         }),
         projectDraft: draft.projectDraft

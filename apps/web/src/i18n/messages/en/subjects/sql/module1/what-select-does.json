@@ -1,0 +1,118 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_1": {
+        "what-select-does": {
+          "label": "What SELECT does",
+          "summary": "Understand the purpose of the SELECT statement in SQL and how it is used to retrieve data from a table.",
+          "cards": {
+            "sketch0": {
+              "title": "The Role of SELECT"
+            },
+            "sketch1": {
+              "title": "SELECT * Explained"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_1": {
+        "what-select-does": {
+          "sketch-1": {
+            "title": "The Role of SELECT",
+            "bodyMarkdown": "In SQL, the `SELECT` statement is used to retrieve data from one or more tables in a database. It allows you to specify which columns you want to see and from which table. For example, if you have a table called `students_intro` with columns like `id`, `name`, and `grade`, you can use:\n\n```sql\nSELECT name, grade FROM students_intro;\n```\n\nThis will return a list of all student names and their grades."
+          },
+          "sketch-2": {
+            "title": "SELECT * Explained",
+            "bodyMarkdown": "Using `SELECT *` tells SQL to return all columns from the table. For example:\n\n```sql\nSELECT * FROM students_intro;\n```\n\nThis is useful when you want to quickly explore all the data in a table. However, in real applications, it's often better to specify only the columns you need."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "fill-1": {
+      "title": "Purpose of SELECT",
+      "prompt": "The SQL statement used to retrieve data from a table is ____.",
+      "hint": "It's the most common statement for reading data.",
+      "help": {
+        "concept": "The the missing term statement is used to fetch data from a database table.",
+        "hint_1": "Think about which SQL command is used to display rows.",
+        "hint_2": "It's the command you use to read, not modify, table contents."
+      },
+      "template": "The SQL statement used to retrieve data from a table is ____.",
+      "choices": [
+        "SELECT",
+        "INSERT",
+        "UPDATE",
+        "DELETE"
+      ]
+    },
+    "fill-2": {
+      "title": "Selecting All Columns",
+      "prompt": "To select all columns from the `students_intro` table, you would write: SELECT ____ FROM students_intro;",
+      "hint": "Focus on the missing SQL concept rather than the exact missing word.",
+      "help": {
+        "concept": "The blank should be filled with the SQL term that matches the job the statement is trying to perform.",
+        "hint_1": "Think about what the missing part is supposed to do in the statement.",
+        "hint_2": "Choose the SQL term that best completes the meaning of the statement."
+      },
+      "template": "SELECT ____ FROM students_intro;",
+      "choices": [
+        "*",
+        "ALL",
+        "EVERY",
+        "COLUMNS"
+      ]
+    },
+    "single-1": {
+      "title": "What does SELECT * do?",
+      "prompt": "What does the SQL statement `SELECT * FROM students_intro;` do?",
+      "hint": "Think about what the * symbol means in SQL.",
+      "help": {
+        "concept": "`SELECT *` retrieves every column for each row in the specified table.",
+        "hint_1": "Does this statement change the data or just display it?",
+        "hint_2": "The * means 'all columns', not rows or actions."
+      },
+      "options": {
+        "a": "It selects all columns from the students_intro table.",
+        "b": "It deletes all rows from the students_intro table.",
+        "c": "It updates all grades in the students_intro table.",
+        "d": "It inserts a new row into the students_intro table."
+      }
+    },
+    "multi-1": {
+      "title": "Which statements are true about SELECT?",
+      "prompt": "Select all statements that are true about the SQL SELECT statement.",
+      "hint": "Focus on what SELECT does, not what other SQL statements do.",
+      "help": {
+        "concept": "SELECT is for reading data, not modifying or deleting it.",
+        "hint_1": "Does SELECT ever remove or change data?",
+        "hint_2": "SELECT can show all or some columns, but not delete or update."
+      },
+      "options": {
+        "a": "SELECT can be used to retrieve specific columns.",
+        "b": "SELECT can be used to retrieve all columns.",
+        "c": "SELECT can delete data from a table.",
+        "d": "SELECT can be used without specifying columns."
+      }
+    },
+    "code-1": {
+      "title": "Write a SELECT statement",
+      "prompt": "Write a SQL query to display only the `name` and `grade` columns from the `students_intro` table.",
+      "hint": "Focus on the concept being tested.",
+      "help": {
+        "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+        "hint_1": "Eliminate choices or interpretations that do not match the task.",
+        "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+      },
+      "starterCode": "-- Write your query below"
+    }
+  }
+}

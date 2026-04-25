@@ -1,0 +1,124 @@
+{
+  "title": "Number functions",
+  "summary": "Number functions in Calculated Columns and SQL Expressions",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch-1",
+      "title": "What are number functions in SQL?",
+      "bodyMarkdown": "Number functions in SQL are built-in functions that perform operations on numeric data. They can be used in SELECT statements to calculate new values, round numbers, find minimum or maximum values, and more. Examples include `ABS()` for absolute value, `ROUND()` for rounding numbers, and `POWER()` for exponents."
+    },
+    {
+      "id": "sketch-2",
+      "title": "Using number functions in SELECT",
+      "bodyMarkdown": "You can use number functions directly in your SELECT queries to create calculated columns. For example, to round each student's grade level to the nearest whole number (though grade_level is already an integer in this dataset), you could write:\n\n```sql\nSELECT name, grade_level, ROUND(grade_level) AS rounded_grade FROM students;\n```\n\nThis would show each student's name, their grade level, and the rounded value (which, in this case, is the same as the original)."
+    },
+    {
+      "id": "sketch-3",
+      "title": "Combining number functions with expressions",
+      "bodyMarkdown": "Number functions can be combined with arithmetic expressions. For example, if you wanted to see what each student's grade level would be in two years, you could use:\n\n```sql\nSELECT name, grade_level, grade_level + 2 AS future_grade FROM students;\n```\n\nYou could also use `ABS(grade_level - 10)` to see how far each student is from grade 10:\n\n```sql\nSELECT name, grade_level, ABS(grade_level - 10) AS distance_from_10 FROM students;\n```"
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "fill-blank-1",
+      "kind": "fill_blank_choice",
+      "title": "Identifying a number function",
+      "prompt": "Which function can you use to get the absolute value of a number in SQL?",
+      "template": "The SQL function for absolute value is ____.",
+      "choices": [
+        "ABS",
+        "ROUND",
+        "MIN",
+        "SUM"
+      ],
+      "correctValue": "ABS",
+      "hint": "It's a three-letter function that returns only positive values.",
+      "help": {
+        "concept": "The ABS() function returns the absolute (non-negative) value of a number in SQL.",
+        "hint_1": "Think about which function removes the sign from a number.",
+        "hint_2": "This function is often used to measure distance from zero, regardless of direction."
+      }
+    },
+    {
+      "id": "fill-blank-2",
+      "kind": "fill_blank_choice",
+      "title": "Using ROUND in SQL",
+      "prompt": "Suppose you want to round the result of a calculation in SQL. Which function would you use?",
+      "template": "To round a number in SQL, use the ____ function.",
+      "choices": [
+        "ROUND",
+        "ABS",
+        "MAX",
+        "COUNT"
+      ],
+      "correctValue": "ROUND",
+      "hint": "This function's name is the same as the mathematical operation.",
+      "help": {
+        "concept": "The ROUND() function is used to round numeric values to the nearest integer or to a specified number of decimal places.",
+        "hint_1": "It's commonly used to tidy up decimal results.",
+        "hint_2": "This function is named after the process of making a number less precise, like 3.7 becoming 4."
+      }
+    },
+    {
+      "id": "single-choice-1",
+      "kind": "single_choice",
+      "title": "Choosing the correct SQL expression",
+      "prompt": "Which SQL expression calculates how many grades above 9 each student is?",
+      "options": [
+        "grade_level - 9",
+        "ABS(grade_level - 9)",
+        "ROUND(grade_level / 9)",
+        "grade_level + 9"
+      ],
+      "correctOptionIds": [
+        "grade_level - 9"
+      ],
+      "hint": "You want to know how much higher the grade_level is than 9.",
+      "help": {
+        "concept": "Subtracting 9 from grade_level gives the number of grades above 9. If the result is negative, the student is below grade 9.",
+        "hint_1": "Think about subtraction: current grade minus 9.",
+        "hint_2": "The correct answer is a simple arithmetic difference, not an absolute value or division."
+      }
+    },
+    {
+      "id": "multi-choice-1",
+      "kind": "multi_choice",
+      "title": "Recognizing number functions",
+      "prompt": "Which of the following are number functions in SQL? (Select all that apply)",
+      "options": [
+        "ABS()",
+        "ROUND()",
+        "COUNT()",
+        "MIN()"
+      ],
+      "correctOptionIds": [
+        "ABS()",
+        "ROUND()",
+        "MIN()"
+      ],
+      "hint": "Think about which functions operate directly on numbers.",
+      "help": {
+        "concept": "Number functions perform calculations or return information about numeric values. Some aggregate functions like MIN() also work with numbers.",
+        "hint_1": "COUNT() counts rows, not numbers themselves.",
+        "hint_2": "ABS(), ROUND(), and MIN() all work with numeric data, but COUNT() is for counting rows."
+      }
+    },
+    {
+      "id": "code-input-1",
+      "kind": "code_input",
+      "title": "Using ABS() in a SELECT statement",
+      "prompt": "Write a SQL query to show each student's name and how far their grade_level is from grade 10 (as a positive number), using the ABS() function. Name the calculated column 'distance_from_10'.",
+      "starterCode": "SELECT name, grade_level, ____ AS distance_from_10\nFROM students;",
+      "solutionCode": "SELECT name, grade_level, ABS(grade_level - 10) AS distance_from_10\nFROM students;",
+      "datasetId": "school_relations_intro",
+      "recipeType": "sql_query",
+      "hint": "Use ABS() to make sure the result is always positive.",
+      "help": {
+        "concept": "The ABS() function returns the absolute value of an expression, which is always non-negative.",
+        "hint_1": "Subtract 10 from grade_level, then wrap it in ABS().",
+        "hint_2": "The calculated column should use ABS(grade_level - 10) for the distance."
+      }
+    }
+  ]
+}

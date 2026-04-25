@@ -1,0 +1,118 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_5": {
+        "multiplying-and-dividing": {
+          "label": "Multiplying and dividing",
+          "summary": "Multiplying and dividing in Calculated Columns and SQL Expressions",
+          "cards": {
+            "sketch0": {
+              "title": "Multiplying and Dividing in SQL"
+            },
+            "sketch1": {
+              "title": "Using Division for Ratios"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "quiz": {
+            "fb1": {
+              "title": "Multiplying a column in SQL",
+              "prompt": "Suppose you want to show each student's grade level doubled in your query. Which expression would you use in the SELECT clause?",
+              "hint": "Focus on the missing SQL concept rather than the exact missing word.",
+              "help": {
+                "concept": "The blank should be filled with the SQL term that matches the job the statement is trying to perform.",
+                "hint_1": "Think about what the missing part is supposed to do in the statement.",
+                "hint_2": "Choose the SQL term that best completes the meaning of the statement."
+              },
+              "template": "SELECT name, grade_level ___ 2 AS double_grade FROM students;",
+              "choices": [
+                "*",
+                "+",
+                "/",
+                "-"
+              ]
+            },
+            "fb2": {
+              "title": "Dividing columns for ratios",
+              "prompt": "You want to show each student's grade level as a fraction of 12. Which operator should you use between grade_level and 12?",
+              "hint": "Focus on the missing SQL concept rather than the exact missing word.",
+              "help": {
+                "concept": "The blank should be filled with the SQL term that matches the job the statement is trying to perform.",
+                "hint_1": "Think about what the missing part is supposed to do in the statement.",
+                "hint_2": "Choose the SQL term that best completes the meaning of the statement."
+              },
+              "template": "SELECT name, grade_level ___ 12 AS grade_fraction FROM students;",
+              "choices": [
+                "/",
+                "*",
+                "+",
+                "-"
+              ]
+            },
+            "sc1": {
+              "title": "Choosing the correct SQL expression",
+              "prompt": "Which of the following SQL expressions correctly calculates double the grade level for each student?",
+              "hint": "Which operator doubles a value?",
+              "help": {
+                "concept": "To double a value, you multiply it by 2 using the * operator.",
+                "hint_1": "Multiplication is used to double a number.",
+                "hint_2": "Look for the expression that multiplies grade_level by 2."
+              },
+              "options": {
+                "a": "SELECT name, grade_level * 2 AS double_grade FROM students;",
+                "b": "SELECT name, grade_level + 2 AS double_grade FROM students;",
+                "c": "SELECT name, grade_level / 2 AS double_grade FROM students;",
+                "d": "SELECT name, grade_level - 2 AS double_grade FROM students;"
+              }
+            },
+            "mc1": {
+              "title": "Valid uses of multiplication and division in SQL",
+              "prompt": "Which of the following are valid uses of multiplication or division in a SQL SELECT statement? (Choose all that apply.)",
+              "hint": "Focus on multiplication and division, not addition or subtraction.",
+              "help": {
+                "concept": "Multiplication (*) and division (/) are used for scaling and ratios in SQL expressions. Addition and subtraction are different operations.",
+                "hint_1": "Look for expressions that use * or /.",
+                "hint_2": "Ignore options that use + or -; focus on multiplying or dividing."
+              },
+              "options": {
+                "a": "Calculating a student's grade level as a fraction of 12 using grade_level / 12",
+                "b": "Doubling a student's grade level using grade_level * 2",
+                "c": "Adding 2 to a student's grade level using grade_level + 2",
+                "d": "Subtracting 2 from a student's grade level using grade_level - 2"
+              }
+            },
+            "ci1": {
+              "title": "Write a SQL query to divide grade_level by 2",
+              "prompt": "Write a SQL query that returns each student's name and their grade level divided by 2, with the result column named half_grade.",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+                "hint_1": "Eliminate choices or interpretations that do not match the task.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "starterCode": "-- Write your query below"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_5": {
+        "multiplying-and-dividing": {
+          "sk1": {
+            "title": "Multiplying and Dividing in SQL",
+            "bodyMarkdown": "In SQL, you can use arithmetic operators to create new values in your SELECT statements. Multiplication (`*`) and division (`/`) are useful for calculating totals, averages, ratios, and more. For example, you might multiply a student's grade level by 2, or divide a count by another value to get a ratio. These expressions can be used directly in the SELECT clause and can be given an alias for clarity.\n\nExample:\n\n```sql\nSELECT name, grade_level * 2 AS double_grade\nFROM students;\n```\n\nThis query returns each student's name and their grade level multiplied by 2."
+          },
+          "sk2": {
+            "title": "Using Division for Ratios",
+            "bodyMarkdown": "Division in SQL is often used to calculate ratios or averages. For example, if you want to know what fraction of the highest grade level each student is in, you could divide their grade level by the maximum grade level in the table.\n\nExample:\n\n```sql\nSELECT name, grade_level / 12.0 AS grade_fraction\nFROM students;\n```\n\nThis query shows each student's grade as a fraction of 12 (assuming 12 is the highest grade level)."
+          }
+        }
+      }
+    }
+  }
+}

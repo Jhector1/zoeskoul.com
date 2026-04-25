@@ -1,0 +1,118 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_5": {
+        "as": {
+          "label": "AS in Calculated Columns and SQL Expressions",
+          "summary": "Learn how to use the AS keyword to create column aliases for calculated columns and SQL expressions, making your query results clearer and more readable.",
+          "cards": {
+            "sketch0": {
+              "title": "What is AS in SQL?"
+            },
+            "sketch1": {
+              "title": "Using AS with Calculated Columns"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "quiz": {
+            "fill-blank-1": {
+              "title": "Alias a column with AS",
+              "prompt": "Which keyword is used in SQL to give a column or expression a temporary name in the result set?",
+              "hint": "Focus on the missing SQL concept rather than the exact missing word.",
+              "help": {
+                "concept": "The blank should be filled with the SQL term that matches the job the statement is trying to perform.",
+                "hint_1": "Think about what the missing part is supposed to do in the statement.",
+                "hint_2": "Choose the SQL term that best completes the meaning of the statement."
+              },
+              "template": "SELECT name, grade_level ___ grade FROM students;",
+              "choices": [
+                "AS",
+                "WITH",
+                "INTO",
+                "BY"
+              ]
+            },
+            "fill-blank-2": {
+              "title": "Alias a calculated expression",
+              "prompt": "Fill in the blank to create an alias for a calculated column showing the next grade level.",
+              "hint": "Focus on the missing SQL concept rather than the exact missing word.",
+              "help": {
+                "concept": "The blank should be filled with the SQL term that matches the job the statement is trying to perform.",
+                "hint_1": "Think about what the missing part is supposed to do in the statement.",
+                "hint_2": "Choose the SQL term that best completes the meaning of the statement."
+              },
+              "template": "SELECT name, grade_level + 1 ___ next_grade FROM students;",
+              "choices": [
+                "AS",
+                "IS",
+                "TO",
+                "ON"
+              ]
+            },
+            "single-1": {
+              "title": "Purpose of AS",
+              "prompt": "Why would you use the AS keyword in a SQL SELECT statement?",
+              "hint": "Think about how your query results look.",
+              "help": {
+                "concept": "AS creates a temporary alias for columns or expressions in the output, making results easier to read.",
+                "hint_1": "It does not affect the actual table structure.",
+                "hint_2": "It's about how the results are labeled, not how data is stored."
+              },
+              "options": {
+                "a": "a. To rename a column or expression in the result set for clarity.",
+                "b": "b. To permanently change the column name in the table.",
+                "c": "c. To filter rows based on a condition.",
+                "d": "d. To join two tables together."
+              }
+            },
+            "multi-1": {
+              "title": "Where can AS be used?",
+              "prompt": "In which situations can you use the AS keyword in SQL? Select all that apply.",
+              "hint": "AS is useful for both columns and tables, but not for permanent changes.",
+              "help": {
+                "concept": "AS can be used for column aliases, table aliases, and function result aliases in queries.",
+                "hint_1": "It does not change the database schema.",
+                "hint_2": "It's used in SELECT statements and JOINs for temporary naming."
+              },
+              "options": {
+                "a": "a. Assigning a name to a calculated column in SELECT.",
+                "b": "b. Giving an alias to a table in a JOIN.",
+                "c": "c. Renaming a column permanently in the database.",
+                "d": "d. Assigning a name to a function result in SELECT."
+              }
+            },
+            "code-1": {
+              "title": "Write a query using AS for a calculated column",
+              "prompt": "Write a SQL query to select each student's name and their grade level plus one, with the calculated column labeled as next_grade.",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+                "hint_1": "Eliminate choices or interpretations that do not match the task.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "starterCode": "-- Write your query below"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_5": {
+        "as": {
+          "sketch-1": {
+            "title": "What is AS in SQL?",
+            "bodyMarkdown": "The **AS** keyword in SQL lets you assign a temporary name (alias) to a column or expression in your query results. This is especially useful when you use calculations or functions in your SELECT statement. For example:\n\n```sql\nSELECT name, grade_level AS grade\nFROM students;\n```\n\nHere, the output column will be labeled 'grade' instead of 'grade_level'."
+          },
+          "sketch-2": {
+            "title": "Using AS with Calculated Columns",
+            "bodyMarkdown": "You can use **AS** to give a name to a calculated column. For example, if you want to show the next grade level for each student:\n\n```sql\nSELECT name, grade_level + 1 AS next_grade\nFROM students;\n```\n\nThe result will have a column called 'next_grade' showing each student's grade level plus one."
+          }
+        }
+      }
+    }
+  }
+}

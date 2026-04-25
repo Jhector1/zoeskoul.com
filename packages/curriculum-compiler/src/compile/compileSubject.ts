@@ -1,15 +1,12 @@
 import type { CourseBlueprint } from "@zoeskoul/curriculum-contracts";
 import type { AiProvider } from "@zoeskoul/curriculum-ai";
-import { generateCoursePlan } from "@zoeskoul/curriculum-ai";
 import { validateBlueprint } from "../validate/validateBlueprint.js";
-import { validatePlan } from "../validate/validatePlan.js";
 import { compileSubjectPipeline } from "./compileSubjectPipeline.js";
-import { loadSavedPlan } from "../planning/loadSavedPlan.js";
-import { savePlan } from "../planning/savePlan.js";
 import {
   countPlanTopics,
   type CompileProgressCallback,
 } from "./compileProgress.js";
+import { resolvePlan } from "../spec/resolvePlan.js";
 
 export async function compileSubject(args: {
   blueprint: CourseBlueprint;
@@ -21,40 +18,39 @@ export async function compileSubject(args: {
   args.onProgress?.({
     current: 0,
     total: 0,
-    stage: "loading saved plan",
+    stage: "resolving course structure",
   });
 
-  let plan = await loadSavedPlan(args.blueprint.subjectSlug);
+  const resolved = await resolvePlan({
+    blueprint: args.blueprint,
+    provider: args.provider,
+  });
 
-  if (!plan) {
+  const totalTopics = countPlanTopics(resolved.plan);
+
+  if (resolved.source === "spec") {
     args.onProgress?.({
       current: 0,
-      total: 0,
-      stage: "generating course plan",
+      total: totalTopics,
+      stage: "loaded course spec",
     });
-
-    plan = await generateCoursePlan(args.provider, args.blueprint);
-    validatePlan(plan);
-    await savePlan(args.blueprint.subjectSlug, plan);
-
+  } else if (resolved.source === "saved_plan") {
     args.onProgress?.({
       current: 0,
-      total: countPlanTopics(plan),
-      stage: "saved course plan",
+      total: totalTopics,
+      stage: "loaded saved plan",
     });
   } else {
-    validatePlan(plan);
-
     args.onProgress?.({
       current: 0,
-      total: countPlanTopics(plan),
-      stage: "loaded saved plan",
+      total: totalTopics,
+      stage: "saved course plan",
     });
   }
 
   return compileSubjectPipeline({
     blueprint: args.blueprint,
-    plan,
+    plan: resolved.plan,
     provider: args.provider,
     onProgress: args.onProgress,
   });

@@ -1,0 +1,121 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_5": {
+        "string-functions": {
+          "label": "String functions",
+          "summary": "String functions in Calculated Columns and SQL Expressions",
+          "cards": {
+            "sketch0": {
+              "title": "What are string functions?"
+            },
+            "sketch1": {
+              "title": "Common string functions in SQLite"
+            },
+            "sketch2": {
+              "title": "Combining columns with string functions"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "quiz": {
+            "fillblank-1": {
+              "title": "Using UPPER to change case",
+              "prompt": "Which function would you use to convert the `name` column in the `students` table to all uppercase letters?",
+              "hint": "Focus on the missing SQL concept rather than the exact missing word.",
+              "help": {
+                "concept": "The blank should be filled with the SQL term that matches the job the statement is trying to perform.",
+                "hint_1": "Think about what the missing part is supposed to do in the statement.",
+                "hint_2": "Choose the SQL term that best completes the meaning of the statement."
+              },
+              "template": "SELECT ___(name) FROM students;",
+              "choices": [
+                "UPPER",
+                "LOWER",
+                "LENGTH",
+                "TRIM"
+              ]
+            },
+            "fillblank-2": {
+              "title": "Counting characters in a string",
+              "prompt": "Which function returns the number of characters in the `title` column of the `courses` table?",
+              "hint": "Which function measures how long a string is?",
+              "help": {
+                "concept": "The the missing term function returns the number of characters in a string.",
+                "hint_1": "It's not about changing case or trimming spaces.",
+                "hint_2": "The function's name suggests it measures size."
+              },
+              "template": "SELECT ___(title) FROM courses;",
+              "choices": [
+                "LENGTH",
+                "UPPER",
+                "SUBSTR",
+                "TRIM"
+              ]
+            },
+            "single-1": {
+              "title": "Extracting part of a string",
+              "prompt": "Which SQL function extracts a part of a string, starting at a specific position?",
+              "hint": "It's used to get a substring.",
+              "help": {
+                "concept": "The SUBSTR function extracts a substring from a string, starting at a given position.",
+                "hint_1": "This function needs a start position and length.",
+                "hint_2": "It's not about case, length, or trimming spaces."
+              },
+              "options": {
+                "a": "[object Object]",
+                "b": "A command"
+              }
+            },
+            "multi-1": {
+              "title": "Choosing string functions for formatting",
+              "prompt": "Which of the following SQL functions can be used to format or clean up text data? (Choose all that apply)",
+              "hint": "Consider which functions change the appearance or remove unwanted spaces.",
+              "help": {
+                "concept": "TRIM removes spaces, LOWER and UPPER change letter case, all useful for formatting or cleaning up text.",
+                "hint_1": "LENGTH only counts characters, but the others change or clean the text.",
+                "hint_2": "Pick all that modify or clean the text, not just measure it."
+              },
+              "options": {
+                "a": "[object Object]",
+                "b": "A command"
+              }
+            },
+            "code-1": {
+              "title": "Combine student name and grade level",
+              "prompt": "Write a SQL query to show each student's name and a new column called `student_info` that displays their name followed by their grade level in parentheses, like 'Mia (Grade 9)'.",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+                "hint_1": "Eliminate choices or interpretations that do not match the task.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "starterCode": "SELECT name, /* your code here */ FROM students;"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_5": {
+        "string-functions": {
+          "sketch-1": {
+            "title": "What are string functions?",
+            "bodyMarkdown": "String functions in SQL let you manipulate text data in your queries. For example, you can change the case of text, extract parts of a string, or combine columns. These are especially useful when working with columns like `name` or `title` in the `students` or `courses` tables.\n\nExample:\n\n```sql\nSELECT name, UPPER(name) AS name_uppercase FROM students;\n```\n\nThis query returns each student's name and their name in all uppercase letters."
+          },
+          "sketch-2": {
+            "title": "Common string functions in SQLite",
+            "bodyMarkdown": "Some common string functions in SQLite include:\n- `UPPER(text)`: Converts all letters to uppercase.\n- `LOWER(text)`: Converts all letters to lowercase.\n- `LENGTH(text)`: Returns the number of characters in the string.\n- `SUBSTR(text, start, length)`: Extracts a substring from the text.\n- `TRIM(text)`: Removes spaces from the beginning and end of the text.\n\nExample:\n\n```sql\nSELECT name, LENGTH(name) AS name_length FROM students;\n```\n\nThis query shows each student's name and the number of characters in their name."
+          },
+          "sketch-3": {
+            "title": "Combining columns with string functions",
+            "bodyMarkdown": "You can use string functions to combine columns or format output. For example, you might want to display a student's name and grade level together in a single column.\n\nExample:\n\n```sql\nSELECT name || ' (Grade ' || grade_level || ')' AS student_info FROM students;\n```\n\nThis query creates a new column showing the student's name and grade level in a readable format."
+          }
+        }
+      }
+    }
+  }
+}

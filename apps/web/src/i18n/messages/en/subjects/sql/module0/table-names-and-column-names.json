@@ -1,0 +1,118 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_0": {
+        "table-names-and-column-names": {
+          "label": "Table names and column names",
+          "summary": "Learn how tables and columns are named and referenced in SQL databases. Understand the difference between table names and column names, and how they are used in queries.",
+          "cards": {
+            "sketch0": {
+              "title": "What are table names and column names?"
+            },
+            "sketch1": {
+              "title": "Referencing tables and columns in SQL"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "quiz": {
+            "fill-blank-1": {
+              "title": "Identifying a table name",
+              "prompt": "In the table below, which is the table name?\n\n| student_id | first_name | last_name |\n|------------|------------|-----------|\n| 1          | Zoe        | Skoul     |\n| 2          | Alex       | Kim       |\n\nChoose the correct table name.",
+              "hint": "Look for the name that represents the whole collection of rows.",
+              "help": {
+                "concept": "A table name identifies the entire set of related data (all rows and columns).",
+                "hint_1": "It's not a column or a value inside the table.",
+                "hint_2": "The table name is usually a plural noun describing what the table stores."
+              },
+              "template": "The table name is ___.",
+              "choices": [
+                "students_intro",
+                "first_name",
+                "student_id",
+                "Zoe"
+              ]
+            },
+            "fill-blank-2": {
+              "title": "Identifying a column name",
+              "prompt": "Which of the following is a column name in the `students_intro` table?",
+              "hint": "Column names are found at the top of the table.",
+              "help": {
+                "concept": "Column names label the type of data stored in each vertical section of the table.",
+                "hint_1": "It's not the table name or a specific data value.",
+                "hint_2": "Column names are used after SELECT in SQL queries."
+              },
+              "template": "A column name in this table is ___.",
+              "choices": [
+                "first_name",
+                "students_intro",
+                "2",
+                "Kim"
+              ]
+            },
+            "single-choice-1": {
+              "title": "Purpose of column names",
+              "prompt": "Why do we use column names in SQL tables?",
+              "hint": "Column names help you know what each value represents.",
+              "help": {
+                "concept": "Column names describe what kind of information is stored in each column.",
+                "hint_1": "They are not used to name the table or count rows.",
+                "hint_2": "Column names are labels for the data in each column."
+              },
+              "options": {
+                "a": "To identify the type of data in each field",
+                "b": "To name the entire table",
+                "c": "To store the number of rows",
+                "d": "To sort the data automatically"
+              }
+            },
+            "multi-choice-1": {
+              "title": "Choosing valid SQL names",
+              "prompt": "Which of the following are valid SQL table or column names? (Choose all that apply)",
+              "hint": "Valid names usually start with a letter and use underscores.",
+              "help": {
+                "concept": "SQL names should start with a letter and can include underscores, but not spaces or start with numbers.",
+                "hint_1": "Names with hyphens or starting with numbers are not standard.",
+                "hint_2": "Look for names that follow the pattern: letters, numbers (not at the start), and underscores."
+              },
+              "options": {
+                "a": "students_intro",
+                "b": "first_name",
+                "c": "123grade",
+                "d": "last-name"
+              }
+            },
+            "code-input-1": {
+              "title": "Selecting columns from a table",
+              "prompt": "Write a SQL query to select the `first_name` and `grade_level` columns from the `students_intro` table.",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+                "hint_1": "Eliminate choices or interpretations that do not match the task.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "starterCode": "-- Write your SQL query below"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_0": {
+        "table-names-and-column-names": {
+          "sketch-1": {
+            "title": "What are table names and column names?",
+            "bodyMarkdown": "In a SQL database, data is organized into tables. Each table has a **name** that identifies it, such as `students` or `products`. Inside each table, data is stored in **columns**, and each column also has a name, like `first_name`, `price`, or `grade`.\n\nFor example, a table called `students_intro` might have columns named `student_id`, `first_name`, `last_name`, and `grade_level`. When you write SQL queries, you use these names to specify which data you want to work with."
+          },
+          "sketch-2": {
+            "title": "Referencing tables and columns in SQL",
+            "bodyMarkdown": "To select data from a table, you use the table name in your SQL statement. To get specific columns, you list their names after the `SELECT` keyword. For example:\n\n```sql\nSELECT first_name, grade_level FROM students_intro;\n```\n\nThis query selects the `first_name` and `grade_level` columns from the `students_intro` table."
+          }
+        }
+      }
+    }
+  }
+}

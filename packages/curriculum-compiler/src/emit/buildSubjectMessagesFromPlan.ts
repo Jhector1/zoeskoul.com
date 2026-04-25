@@ -3,6 +3,7 @@ import type {
     CoursePlan,
 } from "@zoeskoul/curriculum-contracts";
 import type { SubjectShapePack } from "@zoeskoul/curriculum-profiles";
+import { moduleOrderToIndex } from "../spec/moduleOrder.js";
 
 type SubjectMessageEntry = {
     title: string;
@@ -59,13 +60,13 @@ export function buildSubjectMessagesFromPlan(args: {
     const sectionMessages = messages.sections[subjectSlug];
 
     for (const module of plan.modules) {
-        const logicalModuleSlug = shape.subjectManifest.moduleSlug(module.order - 1);
+        const moduleIndex = moduleOrderToIndex(module.order);
+        const logicalModuleSlug = shape.subjectManifest.moduleSlug(moduleIndex);
 
         moduleMessages[logicalModuleSlug] = {
             title: module.title,
-            description: module.description ?? "",
-            outcomes: module.sections
-                .flatMap((section) => section.topics.flatMap((topic) => topic.learningGoals))
+            description: module.description ?? module.purpose ?? "",
+            outcomes: (module.learningObjectives ?? [])
                 .filter((value, index, array) => Boolean(value) && array.indexOf(value) === index)
                 .slice(0, 5),
             why: [
@@ -78,7 +79,7 @@ export function buildSubjectMessagesFromPlan(args: {
 
         for (const section of module.sections) {
             const logicalSectionSlug = shape.subjectManifest.sectionSlug(
-                module.order - 1,
+                moduleIndex,
                 section.order,
             );
 

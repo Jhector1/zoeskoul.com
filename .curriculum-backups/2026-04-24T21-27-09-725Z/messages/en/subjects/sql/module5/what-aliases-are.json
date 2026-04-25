@@ -1,0 +1,118 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_5": {
+        "what-aliases-are": {
+          "label": "What aliases are",
+          "summary": "Learn what aliases are in SQL, why they're useful, and how to use them to rename columns or expressions in your result sets.",
+          "cards": {
+            "sketch0": {
+              "title": "What is an Alias in SQL?"
+            },
+            "sketch1": {
+              "title": "Why Use Aliases?"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "quiz": {
+            "quiz-1-fill-blank-alias-keyword": {
+              "title": "Alias Keyword",
+              "prompt": "Which keyword is used in SQL to assign an alias to a column or expression?",
+              "hint": "Focus on the missing SQL concept rather than the exact missing word.",
+              "help": {
+                "concept": "The blank should be filled with the SQL term that matches the job the statement is trying to perform.",
+                "hint_1": "Think about what the missing part is supposed to do in the statement.",
+                "hint_2": "Choose the SQL term that best completes the meaning of the statement."
+              },
+              "template": "SELECT name ___ student_name FROM students;",
+              "choices": [
+                "AS",
+                "WITH",
+                "LIKE",
+                "INTO"
+              ]
+            },
+            "quiz-2-fill-blank-alias-effect": {
+              "title": "Effect of Aliases",
+              "prompt": "What does an alias change in your SQL query?",
+              "hint": "Aliases only affect how the result is shown, not the underlying data.",
+              "help": {
+                "concept": "Aliases only change how columns or tables are labeled in the result set, not the actual database schema.",
+                "hint_1": "Think about what you see in the output, not what is stored.",
+                "hint_2": "Aliases do not change the real column or table names in the database."
+              },
+              "template": "An alias changes the ___ of a column in the query output.",
+              "choices": [
+                "display name",
+                "data type",
+                "table structure",
+                "original column name"
+              ]
+            },
+            "quiz-3-single-choice-alias-purpose": {
+              "title": "Purpose of Aliases",
+              "prompt": "Why are aliases commonly used in SQL SELECT statements?",
+              "hint": "Think about how the query results look to someone reading them.",
+              "help": {
+                "concept": "Aliases are used to make the output of SQL queries easier to read and understand, especially for reports or when using expressions.",
+                "hint_1": "Aliases are about presentation, not permanent changes.",
+                "hint_2": "They help clarify what a column represents in the result set."
+              },
+              "options": {
+                "a": "To make column names in the output more readable",
+                "b": "To permanently rename columns in the database",
+                "c": "To change the data type of a column",
+                "d": "To delete columns from the table"
+              }
+            },
+            "quiz-4-multi-choice-alias-usage": {
+              "title": "When to Use Aliases",
+              "prompt": "In which situations is it helpful to use an alias in SQL? (Choose all that apply)",
+              "hint": "Think about readability and clarity in query results.",
+              "help": {
+                "concept": "Aliases are useful for making query results clearer, especially with expressions, joins, or reporting.",
+                "hint_1": "Consider cases where the output might be confusing without an alias.",
+                "hint_2": "Aliases do not change the underlying database, but help with output and clarity."
+              },
+              "options": {
+                "a": "When using expressions or calculations in SELECT",
+                "b": "When joining tables with columns of the same name",
+                "c": "When you want to change the actual table structure",
+                "d": "When preparing a report for easier reading"
+              }
+            },
+            "quiz-5-code-input-alias-sql": {
+              "title": "Write a Query with an Alias",
+              "prompt": "Write a SQL query to select the `name` column from the `students` table, but show it as `student_name` in the result.",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+                "hint_1": "Eliminate choices or interpretations that do not match the task.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "starterCode": "-- Write your query below"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_5": {
+        "what-aliases-are": {
+          "sketch-1-alias-intro": {
+            "title": "What is an Alias in SQL?",
+            "bodyMarkdown": "An **alias** in SQL is a temporary name you give to a column or table in your query results. Aliases make your output easier to read and understand, especially when using expressions or joining tables. You create an alias using the `AS` keyword. For example:\n\n```sql\nSELECT name AS student_name, grade_level AS grade\nFROM students;\n```\n\nHere, `name` is shown as `student_name` and `grade_level` as `grade` in the output."
+          },
+          "sketch-2-alias-why": {
+            "title": "Why Use Aliases?",
+            "bodyMarkdown": "Aliases help make your SQL results clearer. They are especially useful when:\n- You use expressions or calculations (e.g., `grade_level + 1 AS next_year_grade`)\n- You want to rename columns for reports\n- You join tables with columns that have the same name\n\nAliases only affect the output of your query—they do not change the actual table or column names in the database."
+          }
+        }
+      }
+    }
+  }
+}

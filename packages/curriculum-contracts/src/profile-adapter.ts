@@ -3,6 +3,7 @@ import type { PlannedModule } from "./plan.js";
 import type { SubjectManifest } from "./subject-manifest.js";
 import type { TopicRecipe } from "./topic-recipe.js";
 import type { TopicSeed } from "./topic-seed.js";
+import { ResolvedExercisePolicy } from "./exercise-policy.js";
 
 export type BuildTopicSeedArgs = {
   blueprint: CourseBlueprint;
@@ -16,6 +17,7 @@ export type BuildTopicSeedArgs = {
     quizFocus?: TopicSeed["quizFocus"];
     moduleProject?: TopicSeed["moduleProject"];
     runtimeDefaults?: TopicSeed["moduleRuntimeDefaults"];
+    exercisePolicy?: ResolvedExercisePolicy;
   };
   section: {
     slug: string;
@@ -47,4 +49,11 @@ export type ProfileAdapter = {
   validateTopicRecipe(recipe: TopicRecipe): string[];
   compileTopicRecipe(args: CompileTopicRecipeArgs): TopicRecipe;
   buildSubjectManifest(args: BuildSubjectManifestArgs): SubjectManifest;
+  getTopicSeedRuntimeDefaults?: (args: {
+    blueprint: CourseBlueprint;
+    module: {
+      slug: string;
+      order: number;
+    };
+  }) => TopicSeed["moduleRuntimeDefaults"] | null;
 };

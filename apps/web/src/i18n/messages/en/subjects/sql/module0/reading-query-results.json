@@ -1,0 +1,118 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_0": {
+        "reading-query-results": {
+          "label": "Reading query results",
+          "summary": "Learn how to interpret the results of SQL queries, including understanding tables, columns, and rows in the output.",
+          "cards": {
+            "sketch0": {
+              "title": "What is a query result?"
+            },
+            "sketch1": {
+              "title": "Sample query and result"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "quiz": {
+            "fill-blank-1": {
+              "title": "Identifying columns in query results",
+              "prompt": "Choose the best value for the first missing blank in the statement.",
+              "hint": "Think about what each vertical section represents.",
+              "help": {
+                "concept": "the missing term in a table represent fields or attributes for each record.",
+                "hint_1": "the missing term are the vertical divisions, each with a name at the top.",
+                "hint_2": "Rows go horizontally, the missing term go vertically in a table."
+              },
+              "template": "The first missing value is [blank1].",
+              "choices": [
+                "columns",
+                "rows",
+                "tables",
+                "cells"
+              ]
+            },
+            "fill-blank-2": {
+              "title": "Understanding rows in query results",
+              "prompt": "Choose the best value for the first missing blank in the statement.",
+              "hint": "Focus on the missing SQL concept rather than the exact missing word.",
+              "help": {
+                "concept": "The blank should be filled with the SQL term that matches the job the statement is trying to perform.",
+                "hint_1": "Think about what the missing part is supposed to do in the statement.",
+                "hint_2": "Choose the SQL term that best completes the meaning of the statement."
+              },
+              "template": "The first missing value is [blank1].",
+              "choices": [
+                "row",
+                "column",
+                "cell",
+                "database"
+              ]
+            },
+            "single-choice-1": {
+              "title": "What does a SQL query return?",
+              "prompt": "What is the typical output when you run a SELECT query in SQL?",
+              "hint": "Think about the structure you see after running a query.",
+              "help": {
+                "concept": "A SELECT query returns a result set organized as a table.",
+                "hint_1": "The output is structured with rows and columns.",
+                "hint_2": "You see a grid, not just a single value or file."
+              },
+              "options": {
+                "a": "A table of rows and columns",
+                "b": "A single number",
+                "c": "A list of table names",
+                "d": "A file on your computer"
+              }
+            },
+            "multi-choice-1": {
+              "title": "Which statements about SQL query results are true?",
+              "prompt": "Select all that apply about SQL query results.",
+              "hint": "Think about what you control in a SELECT statement.",
+              "help": {
+                "concept": "Query results are customizable and structured as tables.",
+                "hint_1": "You can select specific columns, and each row is a record.",
+                "hint_2": "The result doesn't have to include every column; you choose which ones."
+              },
+              "options": {
+                "a": "Each row represents a record.",
+                "b": "Each column represents a field or attribute.",
+                "c": "The result always includes all columns from the table.",
+                "d": "You can choose which columns to display in your result."
+              }
+            },
+            "code-input-1": {
+              "title": "Write a query to select specific columns",
+              "prompt": "Given a table `students` with columns `id`, `name`, and `grade`, write a SQL query to show only the `name` and `grade` columns for all students.",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+                "hint_1": "Eliminate choices or interpretations that do not match the task.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "starterCode": "-- Write your SQL query below"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_0": {
+        "reading-query-results": {
+          "sketch-1": {
+            "title": "What is a query result?",
+            "bodyMarkdown": "When you run a SQL query, the database returns a **result table**. This table has columns (fields) and rows (records), just like a spreadsheet. Each row represents a record that matches your query, and each column shows a specific piece of information about that record."
+          },
+          "sketch-2": {
+            "title": "Sample query and result",
+            "bodyMarkdown": "Suppose you have a table called `students` with columns: `id`, `name`, and `grade`.\n\nIf you run:\n\n```sql\nSELECT name, grade FROM students;\n```\n\nyou might see:\n\n| name    | grade |\n|---------|-------|\n| Alice   | 90    |\n| Bob     | 85    |\n| Carla   | 92    |\n\nEach row is a student, and each column is a field you asked for."
+          }
+        }
+      }
+    }
+  }
+}

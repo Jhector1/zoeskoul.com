@@ -10,3 +10,7 @@ export * from "./topic-authoring-draft.js";
 export * from "./sql-dataset.js";
 export * from "./publish-gate.js";
 
+export * from "./course-spec.js";
+
+
+export * from "./exercise-policy.js";

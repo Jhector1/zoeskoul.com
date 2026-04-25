@@ -1,0 +1,125 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_5": {
+        "adding-and-subtracting": {
+          "label": "Adding and subtracting",
+          "summary": "Learn how to use addition and subtraction in SQL calculated columns and expressions to create new values in your queries.",
+          "cards": {
+            "sketch0": {
+              "title": "Introduction to Arithmetic in SQL"
+            },
+            "sketch1": {
+              "title": "Example: Adding a Value"
+            },
+            "sketch2": {
+              "title": "Example: Subtracting a Value"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "quiz": {
+            "fill-blank-1-addition": {
+              "title": "Adding to a Column",
+              "prompt": "Which value will appear in the blank for Mia in the following query?\n\n```sql\nSELECT name, grade_level + 2 AS future_grade\nFROM students;\n```\n\nMia's current grade_level is 9.",
+              "hint": "Add 2 to Mia's current grade level.",
+              "help": {
+                "concept": "Addition in SQL expressions lets you increase a column's value by a constant.",
+                "hint_1": "Mia's grade_level is 9. Add 2 to it.",
+                "hint_2": "9 + 2 equals what?"
+              },
+              "template": "Mia's future_grade will be: ____",
+              "choices": [
+                "9",
+                "10",
+                "11",
+                "12"
+              ]
+            },
+            "fill-blank-2-subtraction": {
+              "title": "Subtracting from a Column",
+              "prompt": "What will be the value of `last_year_grade` for Emma in this query?\n\n```sql\nSELECT name, grade_level, grade_level - 1 AS last_year_grade\nFROM students;\n```\n\nEmma's current grade_level is 12.",
+              "hint": "Subtract 1 from Emma's current grade level.",
+              "help": {
+                "concept": "Subtraction in SQL expressions lets you decrease a column's value by a constant.",
+                "hint_1": "Emma's grade_level is 12. Subtract 1.",
+                "hint_2": "12 minus 1 equals what?"
+              },
+              "template": "Emma's last_year_grade will be: ____",
+              "choices": [
+                "10",
+                "11",
+                "12",
+                "13"
+              ]
+            },
+            "single-choice-1-alias": {
+              "title": "Purpose of Aliases",
+              "prompt": "Why would you use an alias (AS) when creating a calculated column in SQL?",
+              "hint": "Think about how the result set looks after using AS.",
+              "help": {
+                "concept": "Aliases let you rename columns or expressions in your query results for clarity.",
+                "hint_1": "An alias changes the column's label in the output.",
+                "hint_2": "It helps make the result easier to read or understand."
+              },
+              "options": {
+                "a": "To give a clear name to the new column in the result.",
+                "b": "To change the data type of the column.",
+                "c": "To filter rows based on the new value.",
+                "d": "To join two tables together."
+              }
+            },
+            "multi-choice-1-expressions": {
+              "title": "Valid Arithmetic Expressions",
+              "prompt": "Which of the following are valid ways to use addition or subtraction in a SQL SELECT statement? (Choose all that apply)",
+              "hint": "Focus on addition and subtraction with numeric columns.",
+              "help": {
+                "concept": "Addition and subtraction require numeric operands in SQL expressions.",
+                "hint_1": "Check if both sides of + or - are numbers.",
+                "hint_2": "Multiplication is not addition/subtraction, and adding a number to a text column is not valid."
+              },
+              "options": {
+                "a": "SELECT grade_level + 1 FROM students;",
+                "b": "SELECT name, grade_level - 2 FROM students;",
+                "c": "SELECT grade_level * 2 FROM students;",
+                "d": "SELECT grade_level + name FROM students;"
+              }
+            },
+            "code-input-1-calculate-next-year": {
+              "title": "Write a Query: Next Year's Grade",
+              "prompt": "Write a SQL query to show each student's name and what their grade level will be next year. Name the new column next_year_grade.",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+                "hint_1": "Eliminate choices or interpretations that do not match the task.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "starterCode": "-- Write your query below"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_5": {
+        "adding-and-subtracting": {
+          "sketch-1-intro-arithmetic": {
+            "title": "Introduction to Arithmetic in SQL",
+            "bodyMarkdown": "SQL lets you perform arithmetic operations like addition (+) and subtraction (-) directly in your SELECT statements. This is useful for creating new columns based on existing data. For example, you can add or subtract numeric columns or constants to calculate new values on the fly."
+          },
+          "sketch-2-example-addition": {
+            "title": "Example: Adding a Value",
+            "bodyMarkdown": "Suppose you want to show each student's grade level plus one, perhaps to see what grade they will be in next year. You can write:\n\n```sql\nSELECT name, grade_level, grade_level + 1 AS next_year_grade\nFROM students;\n```\n\nThis query creates a new column called `next_year_grade` that adds 1 to each student's current grade level."
+          },
+          "sketch-3-example-subtraction": {
+            "title": "Example: Subtracting a Value",
+            "bodyMarkdown": "You can also subtract numbers in SQL expressions. For instance, to see what grade a student was in last year:\n\n```sql\nSELECT name, grade_level, grade_level - 1 AS last_year_grade\nFROM students;\n```\n\nThis query creates a new column `last_year_grade` by subtracting 1 from each student's current grade level."
+          }
+        }
+      }
+    }
+  }
+}

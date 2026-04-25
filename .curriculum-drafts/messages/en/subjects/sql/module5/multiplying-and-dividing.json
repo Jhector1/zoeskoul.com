@@ -1,0 +1,125 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_5": {
+        "multiplying-and-dividing": {
+          "label": "Multiplying and dividing",
+          "summary": "Multiplying and dividing in Calculated Columns and SQL Expressions",
+          "cards": {
+            "sketch0": {
+              "title": "Multiplying and Dividing in SQL"
+            },
+            "sketch1": {
+              "title": "Dividing Values for Calculations"
+            },
+            "sketch2": {
+              "title": "Combining Arithmetic with Aliases"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "quiz": {
+            "q1": {
+              "title": "Multiplying a Column",
+              "prompt": "Which operator would you use to multiply the `grade_level` column by 2 in a SELECT statement?",
+              "hint": "Focus on the missing SQL concept rather than the exact missing word.",
+              "help": {
+                "concept": "The blank should be filled with the SQL term that matches the job the statement is trying to perform.",
+                "hint_1": "Think about what the missing part is supposed to do in the statement.",
+                "hint_2": "Choose the SQL term that best completes the meaning of the statement."
+              },
+              "template": "SELECT name, grade_level ___ 2 AS double_grade FROM students;",
+              "choices": [
+                "*",
+                "+",
+                "-",
+                "/"
+              ]
+            },
+            "q2": {
+              "title": "Dividing a Value",
+              "prompt": "How would you divide the `grade_level` column by 2 in a SELECT statement?",
+              "hint": "Which symbol is used for division in SQL?",
+              "help": {
+                "concept": "The division operator in SQL is used to divide one value by another, just like in basic arithmetic.",
+                "hint_1": "It's the forward slash symbol.",
+                "hint_2": "Look for the operator that separates numerator and denominator."
+              },
+              "template": "SELECT name, grade_level ___ 2 AS half_grade FROM students;",
+              "choices": [
+                "/",
+                "*",
+                "+",
+                "-"
+              ]
+            },
+            "q3": {
+              "title": "Purpose of Aliases",
+              "prompt": "Why would you use an alias like `AS double_grade` in a SELECT statement?",
+              "hint": "Aliases affect how columns are labeled in the output.",
+              "help": {
+                "concept": "Aliases in SQL are used to give columns or tables temporary names for the duration of a query, making results easier to read.",
+                "hint_1": "Think about how the column name appears in the result set.",
+                "hint_2": "It's about making the output more understandable."
+              },
+              "options": {
+                "a": "To rename the output column for clarity.",
+                "b": "To change the data type of the column.",
+                "c": "To filter rows in the result.",
+                "d": "To join tables together."
+              }
+            },
+            "q4": {
+              "title": "Using Arithmetic in SELECT",
+              "prompt": "Which of the following are valid ways to use arithmetic in a SELECT statement? (Choose all that apply)",
+              "hint": "Look for standard arithmetic operators in SQL.",
+              "help": {
+                "concept": "SQL supports basic arithmetic operators: +, -, *, and /. Some operators from other languages, like ** for exponentiation, are not standard in SQL.",
+                "hint_1": "Check which operators are supported in SQL arithmetic.",
+                "hint_2": "Multiplication, division, and addition are valid; exponentiation with ** is not."
+              },
+              "options": {
+                "a": "a. SELECT name, grade_level * 2 FROM students;",
+                "b": "b. SELECT name, grade_level / 2 FROM students;",
+                "c": "c. SELECT name, grade_level ** 2 FROM students;",
+                "d": "d. SELECT name, grade_level + 1 FROM students;"
+              }
+            },
+            "q5": {
+              "title": "Calculate Triple Grade Level",
+              "prompt": "Write a SQL query to show each student's name and their grade level multiplied by 3, with the calculated column labeled as `triple_grade`.",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+                "hint_1": "Eliminate choices or interpretations that do not match the task.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "starterCode": "-- Write your query here"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_5": {
+        "multiplying-and-dividing": {
+          "sk1": {
+            "title": "Multiplying and Dividing in SQL",
+            "bodyMarkdown": "SQL allows you to perform arithmetic operations directly in your SELECT statements. You can multiply (`*`) and divide (`/`) columns or values to create new calculated columns in your query results. For example, if you want to double each student's grade level, you can use:\n\n```sql\nSELECT name, grade_level, grade_level * 2 AS double_grade\nFROM students;\n```\n\nThis query adds a new column called `double_grade` that shows each student's grade level multiplied by 2."
+          },
+          "sk2": {
+            "title": "Dividing Values for Calculations",
+            "bodyMarkdown": "Division is also useful for creating ratios or averages. For example, if you want to see half of each student's grade level, you can write:\n\n```sql\nSELECT name, grade_level, grade_level / 2 AS half_grade\nFROM students;\n```\n\nThis will show a new column `half_grade` with each student's grade level divided by 2."
+          },
+          "sk3": {
+            "title": "Combining Arithmetic with Aliases",
+            "bodyMarkdown": "It's common to use arithmetic expressions with column aliases to make your results clearer. For example:\n\n```sql\nSELECT name, grade_level * 3 AS triple_grade\nFROM students;\n```\n\nHere, `triple_grade` is the alias for the calculated column. Aliases help make your output more readable and meaningful."
+          }
+        }
+      }
+    }
+  }
+}

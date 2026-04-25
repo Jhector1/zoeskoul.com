@@ -1,0 +1,146 @@
+{
+  "topicId": "simple-report-queries",
+  "subjectSlug": "sql",
+  "moduleSlug": "sql_module_5",
+  "sectionSlug": "section_5_4",
+  "prefix": "sql5",
+  "minutes": 15,
+  "topic": {
+    "labelKey": "topics.sql.sql_module_5.simple-report-queries.label",
+    "summaryKey": "topics.sql.sql_module_5.simple-report-queries.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_5.simple-report-queries.cards.sketch0.title",
+      "sketchId": "sk1",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_5.simple-report-queries.cards.sketch1.title",
+      "sketchId": "sk2",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_5.simple-report-queries.cards.sketch2.title",
+      "sketchId": "sk3",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql.sql_module_5.simple-report-queries.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sk1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_5.simple-report-queries.sk1.title",
+      "bodyKey": "sketches.sql.sql_module_5.simple-report-queries.sk1.bodyMarkdown"
+    },
+    {
+      "id": "sk2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_5.simple-report-queries.sk2.title",
+      "bodyKey": "sketches.sql.sql_module_5.simple-report-queries.sk2.bodyMarkdown"
+    },
+    {
+      "id": "sk3",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_5.simple-report-queries.sk3.title",
+      "bodyKey": "sketches.sql.sql_module_5.simple-report-queries.sk3.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "q1",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_5.simple-report-queries.quiz.q1",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "grade_level + 2"
+      }
+    },
+    {
+      "id": "q2",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_5.simple-report-queries.quiz.q2",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "AS"
+      }
+    },
+    {
+      "id": "q3",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_5.simple-report-queries.quiz.q3",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "q4",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_5.simple-report-queries.quiz.q4",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "q5",
+      "kind": "code_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_5.simple-report-queries.quiz.q5",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table",
+        "solutionCode": "SELECT name, grade_level AS year FROM students;"
+      }
+    }
+  ]
+}

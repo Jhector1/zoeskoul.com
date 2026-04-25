@@ -1,0 +1,118 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_2": {
+        "and": {
+          "label": "AND",
+          "summary": "Learn how to use the AND operator in SQL to filter data with multiple conditions in the WHERE clause.",
+          "cards": {
+            "sketch0": {
+              "title": "What is the AND Operator?"
+            },
+            "sketch1": {
+              "title": "How AND Works with WHERE"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_2": {
+        "and": {
+          "sketch-1": {
+            "title": "What is the AND Operator?",
+            "bodyMarkdown": "The `AND` operator in SQL allows you to combine two or more conditions in a `WHERE` clause. A row is included in the results only if **all** conditions joined by `AND` are true. This is useful when you want to filter data based on multiple criteria at the same time.\n\n**Example:**\n\nSuppose you have a table called `customers` with columns `city` and `age`. To find customers who live in 'London' **and** are older than 30:\n\n```sql\nSELECT * FROM customers\nWHERE city = 'London' AND age > 30;\n```\n\nOnly customers who meet **both** conditions will appear in the results."
+          },
+          "sketch-2": {
+            "title": "How AND Works with WHERE",
+            "bodyMarkdown": "When you use `AND` in a `WHERE` clause, SQL checks each row to see if **all** the conditions are true. If any condition is false, the row is excluded.\n\n**Example:**\n\n```sql\nSELECT * FROM customers\nWHERE country = 'USA' AND status = 'active';\n```\n\nThis query returns only customers who are in the USA **and** have an active status."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "fill-blank-1": {
+      "title": "AND Operator: Both Conditions Must Be True",
+      "prompt": "Which rows will be returned by this query?\n\n```sql\nSELECT * FROM customers\nWHERE city = 'Paris' AND age < 25;\n```",
+      "hint": "Think about how the missing term connects conditions.",
+      "help": {
+        "concept": "The the missing term operator requires all conditions to be true for a row to be included.",
+        "hint_1": "Rows must match both city the missing term age requirements.",
+        "hint_2": "If a customer is in Paris but not under 25, or under 25 but not in Paris, they won't be included."
+      },
+      "template": "Only customers who live in Paris ___ are younger than 25 will be returned.",
+      "choices": [
+        "or",
+        "and",
+        "but not",
+        "if"
+      ]
+    },
+    "fill-blank-2": {
+      "title": "Fill in the Missing Keyword",
+      "prompt": "Complete the SQL statement to find customers from 'Berlin' who have made more than 5 purchases:\n\n```sql\nSELECT * FROM customers\nWHERE city = 'Berlin' ___ purchases > 5;\n```",
+      "hint": "Which keyword combines two conditions that must both be true?",
+      "help": {
+        "concept": "Use the missing term to require both conditions to be true in the WHERE clause.",
+        "hint_1": "You want customers from Berlin with more than 5 purchases, not just one or the other.",
+        "hint_2": "The correct keyword is used to combine both conditions so both must be true."
+      },
+      "template": "The missing keyword is: ___",
+      "choices": [
+        "OR",
+        "AND",
+        "IN",
+        "BETWEEN"
+      ]
+    },
+    "single-choice-1": {
+      "title": "Understanding AND in WHERE",
+      "prompt": "What does the AND operator do in a SQL WHERE clause?",
+      "hint": "Think about how AND works in logic.",
+      "help": {
+        "concept": "AND requires every condition to be true for a row to be included.",
+        "hint_1": "If any condition is false, the row is excluded.",
+        "hint_2": "Rows are only included if they meet every condition joined by AND."
+      },
+      "options": {
+        "a": "It returns rows where at least one condition is true.",
+        "b": "It returns rows where all conditions are true.",
+        "c": "It returns all rows in the table.",
+        "d": "It sorts the results by multiple columns."
+      }
+    },
+    "multi-choice-1": {
+      "title": "Choose All Correct Uses of AND",
+      "prompt": "Which of the following queries correctly use the AND operator to filter data? (Select all that apply)",
+      "hint": "Look for queries that use AND to combine two conditions.",
+      "help": {
+        "concept": "AND is used to require multiple conditions to be true at the same time.",
+        "hint_1": "Check which queries use AND and have more than one condition.",
+        "hint_2": "Queries with AND and two conditions are correct; ignore those with OR or only one condition."
+      },
+      "options": {
+        "a": "SELECT * FROM customers WHERE city = 'Rome' AND age > 40;",
+        "b": "SELECT * FROM customers WHERE city = 'Rome' OR age > 40;",
+        "c": "SELECT * FROM customers WHERE country = 'Italy' AND status = 'active';",
+        "d": "SELECT * FROM customers WHERE age < 30;"
+      }
+    },
+    "code-input-1": {
+      "title": "Write a Query Using AND",
+      "prompt": "Write a SQL query to select all columns from the `customers` table where the city is 'Madrid' AND the age is greater than 35.",
+      "hint": "Focus on the concept being tested.",
+      "help": {
+        "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+        "hint_1": "Eliminate choices or interpretations that do not match the task.",
+        "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+      },
+      "starterCode": "-- Write your SQL query below"
+    }
+  }
+}

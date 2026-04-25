@@ -1,6 +1,7 @@
 import type {
   CourseBlueprint,
   CoursePlan,
+  CourseSpec,
 } from "@zoeskoul/curriculum-contracts";
 import type { AiProvider } from "@zoeskoul/curriculum-ai";
 import {
@@ -8,7 +9,6 @@ import {
   translateMessages,
 } from "@zoeskoul/curriculum-ai";
 import {
-  getProfileAdapter,
   getProfileServices,
   getSubjectShape,
 } from "@zoeskoul/curriculum-profiles";
@@ -25,20 +25,23 @@ import {
   countPlanTopics,
   type CompileProgressCallback,
 } from "./compileProgress.js";
+import { listTopicPlanNodes } from "../plan/listTopicPlanNodes.js";
+import { buildTopicSeedFromPlanNode } from "../seeds/buildTopicSeedFromPlanNode.js";
 
 export async function compileSubjectPipeline(args: {
   blueprint: CourseBlueprint;
   plan: CoursePlan;
+  spec?: CourseSpec | null;
   provider: AiProvider;
   onProgress?: CompileProgressCallback;
 }) {
   const shape = getSubjectShape(
       args.blueprint.profileId as "sql" | "python",
   );
-  const adapter = getProfileAdapter(args.blueprint.profileId);
   const profileServices = getProfileServices(args.blueprint.profileId);
 
-  const totalTopics = countPlanTopics(args.plan);
+  const topicNodes = listTopicPlanNodes({ plan: args.plan });
+  const totalTopics = topicNodes.length;
   let completedTopics = 0;
 
   args.onProgress?.({
@@ -92,196 +95,188 @@ export async function compileSubjectPipeline(args: {
     subjectMessagesByLocale,
   });
 
-  for (const module of args.plan.modules) {
-    const moduleOrder = module.order - 1;
+  for (const node of topicNodes) {
+    const seed = buildTopicSeedFromPlanNode({
+      blueprint: args.blueprint,
+      spec: args.spec ?? null,
+      module: node.module,
+      section: node.section,
+      topic: node.topic,
+    });
 
-    for (const section of module.sections) {
-      const sectionOrder = section.order;
+    args.onProgress?.({
+      current: completedTopics,
+      total: totalTopics,
+      stage: "generating topic draft",
+      topicId: node.topic.topicId,
+      moduleSlug: node.module.moduleSlug,
+      sectionSlug: node.section.sectionSlug,
+    });
 
-      for (const topic of section.topics) {
-        const seed = adapter.buildTopicSeed({
-          blueprint: args.blueprint,
-          module: {
-            slug: module.moduleSlug,
-            title: module.title,
-            order: module.order,
-            purpose: undefined,
-            learningObjectives: topic.learningGoals,
-            guidedExercises: [],
-            quizFocus: [],
-            moduleProject: undefined,
-          },
-          section: {
-            slug: section.sectionSlug,
-            title: section.title,
-            order: section.order,
-          },
-          topic: {
-            topicId: topic.topicId,
-            order: topic.order,
-            title: topic.title,
-            summary: topic.summary,
-            minutes: topic.minutes,
-          },
-        });
+    const rawDraft = await generateTopicAuthoringDraft(args.provider, {
+      seed,
+      locale: args.blueprint.sourceLocale,
+      shape,
+    });
 
-        args.onProgress?.({
-          current: completedTopics,
-          total: totalTopics,
-          stage: "generating topic draft",
-          topicId: topic.topicId,
-          moduleSlug: module.moduleSlug,
-          sectionSlug: section.sectionSlug,
-        });
+    args.onProgress?.({
+      current: completedTopics,
+      total: totalTopics,
+      stage: "evaluating topic draft",
+      topicId: node.topic.topicId,
+      moduleSlug: node.module.moduleSlug,
+      sectionSlug: node.section.sectionSlug,
+    });
 
-        const rawDraft = await generateTopicAuthoringDraft(args.provider, {
-          seed,
-          locale: args.blueprint.sourceLocale,
-          shape,
-        });
+    const evaluation = await evaluateTopicDraft({
+      provider: args.provider,
+      seed,
+      rawDraft,
+      profileServices,
+    });
 
-        args.onProgress?.({
-          current: completedTopics,
-          total: totalTopics,
-          stage: "evaluating topic draft",
-          topicId: topic.topicId,
-          moduleSlug: module.moduleSlug,
-          sectionSlug: section.sectionSlug,
-        });
+    const draft = evaluation.draft;
 
-        const evaluation = await evaluateTopicDraft({
-          provider: args.provider,
-          seed,
-          rawDraft,
-          profileServices,
-        });
+    await writeTopicReports({
+      subjectSlug: args.blueprint.subjectSlug,
+      moduleOrder: node.moduleIndex,
+      topicId: node.topic.topicId,
+      rawDraft,
+      repairedDraft: draft,
+      repairReport: evaluation.repairReport,
+      critiqueReport: evaluation.critiqueReport,
+      semanticReport: evaluation.semanticReport,
+    });
 
-        const draft = evaluation.draft;
+    args.onProgress?.({
+      current: completedTopics,
+      total: totalTopics,
+      stage: "validating draft",
+      topicId: node.topic.topicId,
+      moduleSlug: node.module.moduleSlug,
+      sectionSlug: node.section.sectionSlug,
+    });
 
-        args.onProgress?.({
-          current: completedTopics,
-          total: totalTopics,
-          stage: "validating draft",
-          topicId: topic.topicId,
-          moduleSlug: module.moduleSlug,
-          sectionSlug: section.sectionSlug,
-        });
+    assertTopicAuthoringDraft(draft);
 
-        assertTopicAuthoringDraft(draft);
+    if (!evaluation.critiqueReport.ok) {
+      const critiqueErrors = evaluation.critiqueReport.issues.filter(
+          (issue) => issue.severity === "error",
+      );
 
-        if (!evaluation.critiqueReport.ok) {
-          const critiqueErrors = evaluation.critiqueReport.issues.filter(
-              (issue) => issue.severity === "error",
-          );
-          if (critiqueErrors.length) {
-            throw new Error(
-                `Critique failed:\n${critiqueErrors.map((x) => `- ${x.message}`).join("\n")}`,
-            );
-          }
-        }
-
-        if (!evaluation.semanticReport.ok) {
-          const semanticErrors = evaluation.semanticReport.issues.filter(
-              (issue) => issue.severity === "error",
-          );
-          if (semanticErrors.length) {
-            throw new Error(
-                `Semantic validation failed:\n${semanticErrors
-                    .map((x) => `- ${x.message}`)
-                    .join("\n")}`,
-            );
-          }
-        }
-
-        args.onProgress?.({
-          current: completedTopics,
-          total: totalTopics,
-          stage: "building topic bundle",
-          topicId: topic.topicId,
-          moduleSlug: module.moduleSlug,
-          sectionSlug: section.sectionSlug,
-        });
-
-        const topicBundle = buildTopicBundleFromDraft({
-          shape,
-          seed,
-          draft,
-          moduleOrder,
-          sectionOrder,
-        });
-
-        const sourceMessages = buildMessagesFromDraft({
-          shape,
-          seed,
-          draft,
-          moduleOrder,
-        });
-
-        const messagesByLocale: Record<string, Record<string, unknown>> = {
-          [args.blueprint.sourceLocale]: sourceMessages,
-        };
-
-        for (const locale of args.blueprint.targetLocales ?? []) {
-          if (locale === args.blueprint.sourceLocale) continue;
-
-          args.onProgress?.({
-            current: completedTopics,
-            total: totalTopics,
-            stage: `translating topic messages (${locale})`,
-            topicId: topic.topicId,
-            moduleSlug: module.moduleSlug,
-            sectionSlug: section.sectionSlug,
-          });
-
-          messagesByLocale[locale] = await translateMessages(args.provider, {
-            shape,
-            sourceLocale: args.blueprint.sourceLocale,
-            locale,
-            sourceMessages,
-          });
-        }
-
-        args.onProgress?.({
-          current: completedTopics,
-          total: totalTopics,
-          stage: "writing topic artifacts",
-          topicId: topic.topicId,
-          moduleSlug: module.moduleSlug,
-          sectionSlug: section.sectionSlug,
-        });
-
-        await writeTopicArtifacts({
-          subjectSlug: args.blueprint.subjectSlug,
-          moduleOrder,
-          topicId: topic.topicId,
-          topicBundle,
-          messagesByLocale,
-        });
-
-        await writeTopicReports({
-          subjectSlug: args.blueprint.subjectSlug,
-          moduleOrder,
-          topicId: topic.topicId,
-          rawDraft,
-          repairedDraft: draft,
-          repairReport: evaluation.repairReport,
-          critiqueReport: evaluation.critiqueReport,
-          semanticReport: evaluation.semanticReport,
-          topicBundle,
-        });
-
-        completedTopics += 1;
-
-        args.onProgress?.({
-          current: completedTopics,
-          total: totalTopics,
-          stage: "completed topic",
-          topicId: topic.topicId,
-          moduleSlug: module.moduleSlug,
-          sectionSlug: section.sectionSlug,
-        });
+      if (critiqueErrors.length) {
+        throw new Error(
+            [
+              `Critique failed for topic "${node.topic.topicId}"`,
+              `Module: ${node.module.moduleSlug}`,
+              `Section: ${node.section.sectionSlug}`,
+              `Report dir: .curriculum-drafts/reports/${args.blueprint.subjectSlug}/module${node.moduleIndex}/${node.topic.topicId}`,
+              ...critiqueErrors.map((x) => `- ${x.message}`),
+            ].join("\n"),
+        );
       }
     }
+
+    if (!evaluation.semanticReport.ok) {
+      const semanticErrors = evaluation.semanticReport.issues.filter(
+          (issue) => issue.severity === "error",
+      );
+      if (semanticErrors.length) {
+        throw new Error(
+            `Semantic validation failed:\n${semanticErrors
+                .map((x) => `- ${x.message}`)
+                .join("\n")}`,
+        );
+      }
+    }
+
+    args.onProgress?.({
+      current: completedTopics,
+      total: totalTopics,
+      stage: "building topic bundle",
+      topicId: node.topic.topicId,
+      moduleSlug: node.module.moduleSlug,
+      sectionSlug: node.section.sectionSlug,
+    });
+
+    const topicBundle = buildTopicBundleFromDraft({
+      shape,
+      seed,
+      draft,
+      moduleOrder: node.moduleIndex,
+      sectionOrder: node.sectionOrder,
+    });
+
+    const sourceMessages = buildMessagesFromDraft({
+      shape,
+      seed,
+      draft,
+      moduleOrder: node.moduleIndex,
+    });
+
+    const messagesByLocale: Record<string, Record<string, unknown>> = {
+      [args.blueprint.sourceLocale]: sourceMessages,
+    };
+
+    for (const locale of args.blueprint.targetLocales ?? []) {
+      if (locale === args.blueprint.sourceLocale) continue;
+
+      args.onProgress?.({
+        current: completedTopics,
+        total: totalTopics,
+        stage: `translating topic messages (${locale})`,
+        topicId: node.topic.topicId,
+        moduleSlug: node.module.moduleSlug,
+        sectionSlug: node.section.sectionSlug,
+      });
+
+      messagesByLocale[locale] = await translateMessages(args.provider, {
+        shape,
+        sourceLocale: args.blueprint.sourceLocale,
+        locale,
+        sourceMessages,
+      });
+    }
+
+    args.onProgress?.({
+      current: completedTopics,
+      total: totalTopics,
+      stage: "writing topic artifacts",
+      topicId: node.topic.topicId,
+      moduleSlug: node.module.moduleSlug,
+      sectionSlug: node.section.sectionSlug,
+    });
+
+    await writeTopicArtifacts({
+      subjectSlug: args.blueprint.subjectSlug,
+      moduleOrder: node.moduleIndex,
+      topicId: node.topic.topicId,
+      topicBundle,
+      messagesByLocale,
+    });
+
+    await writeTopicReports({
+      subjectSlug: args.blueprint.subjectSlug,
+      moduleOrder: node.moduleIndex,
+      topicId: node.topic.topicId,
+      rawDraft,
+      repairedDraft: draft,
+      repairReport: evaluation.repairReport,
+      critiqueReport: evaluation.critiqueReport,
+      semanticReport: evaluation.semanticReport,
+      topicBundle,
+    });
+
+    completedTopics += 1;
+
+    args.onProgress?.({
+      current: completedTopics,
+      total: totalTopics,
+      stage: "completed topic",
+      topicId: node.topic.topicId,
+      moduleSlug: node.module.moduleSlug,
+      sectionSlug: node.section.sectionSlug,
+    });
   }
 
   args.onProgress?.({

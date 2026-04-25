@@ -1,0 +1,118 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_2": {
+        "not": {
+          "label": "NOT",
+          "summary": "NOT in Filtering Data with WHERE",
+          "cards": {
+            "sketch0": {
+              "title": "Introducing NOT in SQL"
+            },
+            "sketch1": {
+              "title": "Example: Using NOT with WHERE"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_2": {
+        "not": {
+          "not-intro": {
+            "title": "Introducing NOT in SQL",
+            "bodyMarkdown": "The `NOT` operator in SQL is used to reverse the result of a condition. When you use `NOT` before a condition in a `WHERE` clause, it selects rows where the condition is **not** true. For example, if you want to find all products that are **not** in stock, you can use `NOT` with a condition that checks for items in stock."
+          },
+          "not-example": {
+            "title": "Example: Using NOT with WHERE",
+            "bodyMarkdown": "Suppose you have a table called `products` with columns `product_id`, `name`, and `in_stock` (where `in_stock` is 1 for available and 0 for not available). To find products that are **not** in stock:\n\n```sql\nSELECT * FROM products WHERE NOT in_stock = 1;\n```\nThis query returns all products where `in_stock` is not 1 (so, 0)."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "not-fill-blank-1": {
+      "title": "NOT with Numeric Condition",
+      "prompt": "Fill in the blank: To select all products from the `products` table that are **not** priced at 10, which value completes this query?\n\n```sql\nSELECT * FROM products WHERE NOT price = ____;\n```",
+      "hint": "Think about which value you want to exclude.",
+      "help": {
+        "concept": "The NOT operator inverts the condition, so it selects rows where the condition is false.",
+        "hint_1": "You're looking for products where the price is not a specific value.",
+        "hint_2": "The blank should be filled with the price you want to exclude from the results."
+      },
+      "template": "SELECT * FROM products WHERE NOT price = ____;",
+      "choices": [
+        "10",
+        "0",
+        "NULL",
+        "100"
+      ]
+    },
+    "not-fill-blank-2": {
+      "title": "NOT with Text Condition",
+      "prompt": "Fill in the blank: To find all customers from the `customers` table whose city is **not** 'London', which value completes this query?\n\n```sql\nSELECT * FROM customers WHERE NOT city = '____';\n```",
+      "hint": "Which city do you want to exclude?",
+      "help": {
+        "concept": "NOT can be used with text comparisons to exclude specific values.",
+        "hint_1": "You're searching for customers whose city is not a certain value.",
+        "hint_2": "The blank should be filled with the city you want to exclude from the results."
+      },
+      "template": "SELECT * FROM customers WHERE NOT city = '____';",
+      "choices": [
+        "London",
+        "Paris",
+        "Berlin",
+        "Madrid"
+      ]
+    },
+    "not-single-choice-1": {
+      "title": "Understanding NOT",
+      "prompt": "Which of the following queries returns all products that are **not** in stock from the `products` table?",
+      "hint": "Look for the query that uses NOT to exclude in-stock items.",
+      "help": {
+        "concept": "NOT reverses the condition, so it returns rows where the condition is false.",
+        "hint_1": "You want products where in_stock is not 1.",
+        "hint_2": "The correct query uses NOT with the in_stock column to exclude available products."
+      },
+      "options": {
+        "a": "SELECT * FROM products WHERE NOT in_stock = 1;",
+        "b": "SELECT * FROM products WHERE in_stock = 1;",
+        "c": "SELECT * FROM products WHERE in_stock <> 0;",
+        "d": "SELECT * FROM products WHERE NOT price > 10;"
+      }
+    },
+    "not-multi-choice-1": {
+      "title": "NOT with Multiple Conditions",
+      "prompt": "Which queries return all customers who are **not** from 'Paris' and **not** from 'Berlin'?\n(Select all that apply.)",
+      "hint": "Think about how NOT interacts with OR and AND.",
+      "help": {
+        "concept": "NOT can be used to invert compound conditions. Using NOT with OR inside parentheses is equivalent to using AND with NOT on each condition.",
+        "hint_1": "De Morgan's Law applies: NOT (A OR B) is the same as (NOT A) AND (NOT B).",
+        "hint_2": "Look for queries that exclude both 'Paris' and 'Berlin' from the results."
+      },
+      "options": {
+        "a": "SELECT * FROM customers WHERE NOT (city = 'Paris' OR city = 'Berlin');",
+        "b": "SELECT * FROM customers WHERE city <> 'Paris' AND city <> 'Berlin';",
+        "c": "SELECT * FROM customers WHERE NOT city = 'Paris' AND NOT city = 'Berlin';",
+        "d": "SELECT * FROM customers WHERE city = 'Paris' OR city = 'Berlin';"
+      }
+    },
+    "not-code-input-1": {
+      "title": "Write a Query Using NOT",
+      "prompt": "Write a SQL query to select all products from the `products` table that are **not** in the category 'Electronics'. Show all columns.",
+      "hint": "Focus on the concept being tested.",
+      "help": {
+        "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+        "hint_1": "Eliminate choices or interpretations that do not match the task.",
+        "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+      },
+      "starterCode": "-- Write your query below"
+    }
+  }
+}

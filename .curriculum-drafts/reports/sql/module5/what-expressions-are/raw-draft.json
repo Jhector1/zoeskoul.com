@@ -1,0 +1,119 @@
+{
+  "title": "What expressions are",
+  "summary": "Understand what expressions are in SQL, how they are used in calculated columns, and why they matter for creating new values in queries.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch-1",
+      "title": "What is an Expression in SQL?",
+      "bodyMarkdown": "In SQL, an **expression** is any combination of values, columns, operators, and functions that returns a single value. Expressions are used to calculate new values, filter data, or transform existing columns. For example, you can add two columns together, use arithmetic, or apply a function to a column.\n\nExample:\n\n```sql\nSELECT name, grade_level + 1 AS next_year_grade\nFROM students;\n```\n\nHere, `grade_level + 1` is an expression that calculates the next grade for each student."
+    },
+    {
+      "id": "sketch-2",
+      "title": "Why Use Expressions?",
+      "bodyMarkdown": "Expressions let you create new columns or filter data based on calculations or logic. This makes your queries more powerful and your reports more useful. For instance, you might want to show all students who will be in grade 11 next year:\n\n```sql\nSELECT name\nFROM students\nWHERE grade_level + 1 = 11;\n```\n\nThe `grade_level + 1 = 11` part is an expression used in the WHERE clause."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "fill-blank-1",
+      "kind": "fill_blank_choice",
+      "title": "Identifying an Expression",
+      "prompt": "Which of the following is an example of an expression in SQL?",
+      "template": "SELECT name, ____ FROM students;",
+      "choices": [
+        "grade_level + 1",
+        "students",
+        "SELECT",
+        "grade_level"
+      ],
+      "correctValue": "grade_level + 1",
+      "hint": "Look for a calculation or combination of values.",
+      "help": {
+        "concept": "An expression combines columns, values, or functions to produce a new value.",
+        "hint_1": "Expressions often use operators like +, -, *, or functions.",
+        "hint_2": "A column name alone is not an expression; adding or manipulating it creates one."
+      }
+    },
+    {
+      "id": "fill-blank-2",
+      "kind": "fill_blank_choice",
+      "title": "Purpose of Expressions",
+      "prompt": "What is the main purpose of using expressions in a SELECT statement?",
+      "template": "Expressions are used to ____ new values from existing data.",
+      "choices": [
+        "create",
+        "delete",
+        "sort",
+        "join"
+      ],
+      "correctValue": "create",
+      "hint": "Think about what happens when you add or calculate columns.",
+      "help": {
+        "concept": "Expressions allow you to generate new data from existing columns or values.",
+        "hint_1": "They are not for removing or sorting data.",
+        "hint_2": "Expressions help you make new columns or results in your query."
+      }
+    },
+    {
+      "id": "single-choice-1",
+      "kind": "single_choice",
+      "title": "Expression Location",
+      "prompt": "Where can you use expressions in a SQL query?",
+      "options": [
+        "In SELECT and WHERE clauses",
+        "Only in SELECT clause",
+        "Only in WHERE clause",
+        "Only in table definitions"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Think about both selecting and filtering data.",
+      "help": {
+        "concept": "Expressions can be used to create new columns or filter rows.",
+        "hint_1": "You can use expressions to calculate values or set conditions.",
+        "hint_2": "Expressions are valid in both SELECT and WHERE, but not in table definitions."
+      }
+    },
+    {
+      "id": "multi-choice-1",
+      "kind": "multi_choice",
+      "title": "Which are Expressions?",
+      "prompt": "Select all options that are valid SQL expressions.",
+      "options": [
+        "grade_level * 2",
+        "name",
+        "10 - 3",
+        "department_id + 5"
+      ],
+      "correctOptionIds": [
+        "a",
+        "c",
+        "d"
+      ],
+      "hint": "Expressions can involve columns, numbers, and operators.",
+      "help": {
+        "concept": "Expressions combine columns, constants, and operators to produce a value.",
+        "hint_1": "A column name alone is not an expression, but calculations are.",
+        "hint_2": "Look for options that use arithmetic or combine values."
+      }
+    },
+    {
+      "id": "code-input-1",
+      "kind": "code_input",
+      "title": "Write a Query with an Expression",
+      "prompt": "Write a SQL query to show each student's name and their grade level plus 2, labeled as future_grade.",
+      "starterCode": "-- Write your query here\n",
+      "solutionCode": "SELECT name, grade_level + 2 AS future_grade\nFROM students;",
+      "datasetId": "school_relations_intro",
+      "recipeType": "sql_query",
+      "hint": "Use SELECT with the name column and an expression for grade_level plus 2.",
+      "help": {
+        "concept": "You can use arithmetic expressions in the SELECT clause and give them an alias.",
+        "hint_1": "Remember to use AS to label the new column.",
+        "hint_2": "Select name, then grade_level plus 2, and use AS to name the new column future_grade."
+      }
+    }
+  ]
+}

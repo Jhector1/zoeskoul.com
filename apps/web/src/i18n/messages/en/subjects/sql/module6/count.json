@@ -1,0 +1,125 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_6": {
+        "count": {
+          "label": "COUNT()",
+          "summary": "COUNT() in Aggregate Functions",
+          "cards": {
+            "sketch0": {
+              "title": "What is COUNT()?"
+            },
+            "sketch1": {
+              "title": "COUNT(*) vs COUNT(column)"
+            },
+            "sketch2": {
+              "title": "Filtering with COUNT()"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "quiz": {
+            "fb-1": {
+              "title": "COUNT(*) vs COUNT(column)",
+              "prompt": "Which version of COUNT will include rows where the column value is NULL?",
+              "hint": "Focus on the missing SQL concept rather than the exact missing word.",
+              "help": {
+                "concept": "The blank should be filled with the SQL term that matches the job the statement is trying to perform.",
+                "hint_1": "Think about what the missing part is supposed to do in the statement.",
+                "hint_2": "Choose the SQL term that best completes the meaning of the statement."
+              },
+              "template": "The function that counts all rows, including those with NULLs in any column, is _____.",
+              "choices": [
+                "COUNT(*)",
+                "COUNT(column)",
+                "COUNT(DISTINCT column)",
+                "SUM(column)"
+              ]
+            },
+            "fb-2": {
+              "title": "COUNT with WHERE",
+              "prompt": "How do you count only items with status 'active'?",
+              "hint": "Focus on the missing SQL concept rather than the exact missing word.",
+              "help": {
+                "concept": "The blank should be filled with the SQL term that matches the job the statement is trying to perform.",
+                "hint_1": "Think about what the missing part is supposed to do in the statement.",
+                "hint_2": "Choose the SQL term that best completes the meaning of the statement."
+              },
+              "template": "To count only active items, use: SELECT COUNT(*) FROM inventory_items WHERE status = _____.",
+              "choices": [
+                "'active'",
+                "'draft'",
+                "'inactive'",
+                "'Decor'"
+              ]
+            },
+            "sc-1": {
+              "title": "COUNT(column) behavior",
+              "prompt": "What does COUNT(notes) return in the inventory_items table?",
+              "hint": "COUNT(column) ignores NULL values.",
+              "help": {
+                "concept": "COUNT(column) only counts rows where the column is not NULL.",
+                "hint_1": "It skips rows where notes is NULL.",
+                "hint_2": "It counts only the rows with a value in notes."
+              },
+              "options": {
+                "a": "The number of rows where notes is not NULL",
+                "b": "The total number of rows in the table",
+                "c": "The sum of all notes values",
+                "d": "The number of unique notes values"
+              }
+            },
+            "mc-1": {
+              "title": "When to use COUNT()",
+              "prompt": "Which of the following are good uses for COUNT()? Select all that apply.",
+              "hint": "COUNT() is for counting rows, not adding values.",
+              "help": {
+                "concept": "COUNT() is used to count rows that meet certain criteria, not to sum or average values.",
+                "hint_1": "COUNT() can be used with or without a WHERE clause.",
+                "hint_2": "COUNT() does not add up numbers, but counts rows matching a condition."
+              },
+              "options": {
+                "a": "Finding out how many items are in inventory",
+                "b": "Counting how many items have a non-null note",
+                "c": "Summing the prices of all items",
+                "d": "Counting how many items have status 'draft'"
+              }
+            },
+            "ci-1": {
+              "title": "Write a COUNT() query",
+              "prompt": "Write a SQL query to count the number of items in the inventory_items table that are in the 'Kitchen' category.",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+                "hint_1": "Eliminate choices or interpretations that do not match the task.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "starterCode": "-- Write your query below"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_6": {
+        "count": {
+          "sketch-1": {
+            "title": "What is COUNT()?",
+            "bodyMarkdown": "The `COUNT()` function in SQL is an aggregate function that returns the number of rows that match a specified condition. It is commonly used to summarize data, such as finding out how many items are in a table or how many meet certain criteria. For example, to count all rows in the `inventory_items` table:\n\n```sql\nSELECT COUNT(*) FROM inventory_items;\n```\n\nThis query returns the total number of rows in the table."
+          },
+          "sketch-2": {
+            "title": "COUNT(*) vs COUNT(column)",
+            "bodyMarkdown": "`COUNT(*)` counts all rows, including those with NULL values in any column. `COUNT(column)` counts only the rows where the specified column is NOT NULL. For example:\n\n```sql\nSELECT COUNT(notes) FROM inventory_items;\n```\n\nThis query counts only the rows where the `notes` column is not NULL."
+          },
+          "sketch-3": {
+            "title": "Filtering with COUNT()",
+            "bodyMarkdown": "You can use `COUNT()` with a `WHERE` clause to count only rows that match a condition. For example, to count only active items:\n\n```sql\nSELECT COUNT(*) FROM inventory_items WHERE status = 'active';\n```\n\nThis returns the number of rows where the `status` column is 'active'."
+          }
+        }
+      }
+    }
+  }
+}

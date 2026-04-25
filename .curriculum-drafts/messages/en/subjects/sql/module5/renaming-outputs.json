@@ -1,0 +1,118 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_5": {
+        "renaming-outputs": {
+          "label": "Renaming outputs",
+          "summary": "Renaming outputs in Calculated Columns and SQL Expressions",
+          "cards": {
+            "sketch0": {
+              "title": "Why Rename Outputs?"
+            },
+            "sketch1": {
+              "title": "How to Use Aliases"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "quiz": {
+            "fb1": {
+              "title": "Basic alias syntax",
+              "prompt": "Which keyword is used in SQL to rename an output column in the SELECT list?",
+              "hint": "Focus on the missing SQL concept rather than the exact missing word.",
+              "help": {
+                "concept": "The blank should be filled with the SQL term that matches the job the statement is trying to perform.",
+                "hint_1": "Think about what the missing part is supposed to do in the statement.",
+                "hint_2": "Choose the SQL term that best completes the meaning of the statement."
+              },
+              "template": "SELECT name, grade_level + 1 ___ next_grade FROM students;",
+              "choices": [
+                "AS",
+                "WITH",
+                "BY",
+                "INTO"
+              ]
+            },
+            "fb2": {
+              "title": "Alias for a function output",
+              "prompt": "What alias would you use to label the uppercase version of a student's name as 'upper_name'?",
+              "hint": "The alias should match the label 'the missing term' exactly.",
+              "help": {
+                "concept": "Aliases can be any valid identifier and are used to label output columns for clarity.",
+                "hint_1": "The alias should be lowercase and match the prompt exactly.",
+                "hint_2": "Look for the choice that matches 'the missing term' as written."
+              },
+              "template": "SELECT name, UPPER(name) AS ___ FROM students;",
+              "choices": [
+                "upper_name",
+                "name_upper",
+                "UPPER_NAME",
+                "student_upper"
+              ]
+            },
+            "sc1": {
+              "title": "Purpose of aliases",
+              "prompt": "Why are aliases commonly used when creating calculated columns in SQL?",
+              "hint": "Think about how column names appear in the result set.",
+              "help": {
+                "concept": "Aliases help make result sets clearer by giving columns meaningful names, especially for expressions.",
+                "hint_1": "Aliases do not affect filtering or joining, only the output labels.",
+                "hint_2": "The main benefit is improved readability of the results."
+              },
+              "options": {
+                "a": "To make output columns easier to read and understand",
+                "b": "To change the data type of a column",
+                "c": "To filter rows in the result",
+                "d": "To join tables together"
+              }
+            },
+            "mc1": {
+              "title": "Valid uses of aliases",
+              "prompt": "Which of the following are valid uses of aliases in a SQL SELECT statement? (Choose all that apply.)",
+              "hint": "Think about where aliases can be applied in a query.",
+              "help": {
+                "concept": "Aliases can be used for columns (including calculated and function outputs) and for tables, but not for filtering.",
+                "hint_1": "Aliases are not used in WHERE, but can rename columns and tables.",
+                "hint_2": "You can use aliases for expressions, functions, and tables, but not for filtering rows."
+              },
+              "options": {
+                "a": "a. Renaming a calculated column",
+                "b": "b. Giving a new name to a function output",
+                "c": "c. Filtering rows in the WHERE clause",
+                "d": "d. Renaming a table in the FROM clause"
+              }
+            },
+            "ci1": {
+              "title": "Write a query with a renamed output",
+              "prompt": "Write a SQL query to select each student's name and their grade level plus one, labeling the calculated column as 'next_grade'.",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+                "hint_1": "Eliminate choices or interpretations that do not match the task.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "starterCode": "-- Write your query below"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_5": {
+        "renaming-outputs": {
+          "sk1": {
+            "title": "Why Rename Outputs?",
+            "bodyMarkdown": "When you use expressions or calculations in SQL, the default column name in the result is often the expression itself (like `grade_level + 1`). This can look messy and be hard to read. Renaming outputs with **aliases** makes your results clearer and more professional.\n\nFor example:\n\n```sql\nSELECT name, grade_level + 1 FROM students;\n```\n\nThis query returns a column named `grade_level + 1`. To give it a clearer name, use `AS`:\n\n```sql\nSELECT name, grade_level + 1 AS next_grade FROM students;\n```\n\nNow the output column is called `next_grade`."
+          },
+          "sk2": {
+            "title": "How to Use Aliases",
+            "bodyMarkdown": "You can rename any column or expression in your SELECT list using the `AS` keyword. The format is:\n\n```sql\nSELECT column_or_expression AS alias_name\nFROM table;\n```\n\nAliases are especially helpful for calculated columns or when using functions. For example:\n\n```sql\nSELECT name, UPPER(name) AS name_uppercase FROM students;\n```\n\nThis query shows each student's name and their name in uppercase, with the second column labeled `name_uppercase`."
+          }
+        }
+      }
+    }
+  }
+}

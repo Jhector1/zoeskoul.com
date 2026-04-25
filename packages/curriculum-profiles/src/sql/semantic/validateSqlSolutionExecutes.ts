@@ -1,15 +1,38 @@
 import type {
     TopicAuthoringDraft,
     TopicSeed,
+    SqlDatasetArtifact,
 } from "@zoeskoul/curriculum-contracts";
 import type { SemanticValidationIssue } from "../../shared/profileServices.js";
 import { getSqlRunner } from "@zoeskoul/curriculum-runtime";
+import { getSqlDatasetById } from "../datasets/index.js";
 
 const DEFAULT_SQL_LIMITS = {
     statementTimeoutMs: 4000,
     maxRows: 200,
     maxBytes: 128_000,
 } as const;
+
+function resolveExerciseDataset(args: {
+    seed: TopicSeed;
+    datasetId?: string;
+}): { datasetId?: string; dataset: SqlDatasetArtifact | null } {
+    const moduleDatasetId =
+        args.seed.moduleRuntimeDefaults?.kind === "sql"
+            ? args.seed.moduleRuntimeDefaults.datasetId
+            : undefined;
+
+    const datasetId = args.datasetId ?? moduleDatasetId;
+
+    const dataset =
+        datasetId && datasetId === moduleDatasetId
+            ? args.seed.moduleDataset ?? getSqlDatasetById(datasetId)
+            : datasetId
+                ? getSqlDatasetById(datasetId)
+                : args.seed.moduleDataset ?? null;
+
+    return { datasetId, dataset };
+}
 
 export async function validateSqlSolutionExecutes(args: {
     seed: TopicSeed;
@@ -48,16 +71,10 @@ export async function validateSqlSolutionExecutes(args: {
             continue;
         }
 
-        const dataset = args.seed.moduleDataset as
-            | { schemaSql?: string; seedSql?: string }
-            | null
-            | undefined;
-
-        const datasetId =
-            exercise.datasetId ??
-            (args.seed.moduleRuntimeDefaults?.kind === "sql"
-                ? args.seed.moduleRuntimeDefaults.datasetId
-                : undefined);
+        const resolved = resolveExerciseDataset({
+            seed: args.seed,
+            datasetId: exercise.datasetId,
+        });
 
         const dialect =
             args.seed.moduleRuntimeDefaults?.kind === "sql"
@@ -67,9 +84,9 @@ export async function validateSqlSolutionExecutes(args: {
         const run = await runSql({
             code: exercise.solutionCode,
             dialect,
-            schemaSql: dataset?.schemaSql ?? "",
-            seedSql: dataset?.seedSql ?? "",
-            datasetId,
+            schemaSql: resolved.dataset?.schemaSql ?? "",
+            seedSql: resolved.dataset?.seedSql ?? "",
+            datasetId: resolved.datasetId,
             limits: DEFAULT_SQL_LIMITS,
         });
 

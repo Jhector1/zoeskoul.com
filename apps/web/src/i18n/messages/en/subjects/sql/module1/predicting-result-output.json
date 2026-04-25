@@ -1,0 +1,118 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_1": {
+        "predicting-result-output": {
+          "label": "Predicting result output",
+          "summary": "Learn to predict the output of basic SELECT queries by understanding how columns and tables relate to the result set.",
+          "cards": {
+            "sketch0": {
+              "title": "How SELECT and FROM shape your results"
+            },
+            "sketch1": {
+              "title": "Predicting output: SELECT * vs. specific columns"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_1": {
+        "predicting-result-output": {
+          "sketch-1": {
+            "title": "How SELECT and FROM shape your results",
+            "bodyMarkdown": "In SQL, the `SELECT` statement determines which columns appear in your result, while the `FROM` clause specifies the table to pull data from. For example, using the `students_intro` dataset:\n\n```sql\nSELECT name, grade FROM students;\n```\n\nThis query returns a table with two columns: `name` and `grade`, showing the values for each student in the `students` table."
+          },
+          "sketch-2": {
+            "title": "Predicting output: SELECT * vs. specific columns",
+            "bodyMarkdown": "`SELECT *` returns all columns from the table, while listing columns returns only those columns. For example:\n\n```sql\nSELECT * FROM students;\n```\n\nreturns every column for every student. But:\n\n```sql\nSELECT id, name FROM students;\n```\n\nreturns only the `id` and `name` columns."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "fill-1": {
+      "title": "Predicting columns in the result",
+      "prompt": "Given the query:\n\n```sql\nSELECT name, grade FROM students;\n```\n\nWhich columns will appear in the result set?",
+      "hint": "Look at the columns listed after SELECT.",
+      "help": {
+        "concept": "The columns listed after SELECT determine which columns appear in the result set.",
+        "hint_1": "Only the columns you specify after SELECT will be shown.",
+        "hint_2": "If you write SELECT the missing term, only those two columns will appear in the result."
+      },
+      "template": "The result will include the columns: [blank] and [blank].",
+      "choices": [
+        "name",
+        "grade",
+        "id",
+        "age"
+      ]
+    },
+    "fill-2": {
+      "title": "Predicting output rows",
+      "prompt": "Suppose the `students` table has 5 rows. What will be the number of rows in the result of:\n\n```sql\nSELECT id, name FROM students;\n```",
+      "hint": "How many rows does the table have?",
+      "help": {
+        "concept": "A SELECT query without WHERE returns all rows from the table.",
+        "hint_1": "The number of rows in the result matches the number of rows in the table.",
+        "hint_2": "If there are the missing term students, the result will have the missing term rows."
+      },
+      "template": "The result will have [blank] rows.",
+      "choices": [
+        "5",
+        "2",
+        "id",
+        "name"
+      ]
+    },
+    "single-1": {
+      "title": "Understanding SELECT *",
+      "prompt": "What does the query `SELECT * FROM students;` do?",
+      "hint": "What does * mean in SQL SELECT?",
+      "help": {
+        "concept": "`SELECT *` selects all columns from the specified table.",
+        "hint_1": "The asterisk (*) is a wildcard for all columns.",
+        "hint_2": "This query returns every column and every row in the table."
+      },
+      "options": {
+        "a": "Returns all columns and all rows from the students table.",
+        "b": "Returns only the first column from the students table.",
+        "c": "Returns only the first row from the students table.",
+        "d": "Returns no data."
+      }
+    },
+    "multi-1": {
+      "title": "Choosing correct SELECT statements",
+      "prompt": "Which of the following queries will return only the `name` column from the `students` table? (Select all that apply.)",
+      "hint": "Focus on the main concept being tested and eliminate choices that describe something different.",
+      "help": {
+        "concept": "Choose the option that matches the core idea described in the question without relying on repeated wording from the answer choices.",
+        "hint_1": "Rule out options that describe a different role, behavior, or SQL concept than the question is testing.",
+        "hint_2": "Pick the option that best matches the concept, not the one that simply repeats familiar wording."
+      },
+      "options": {
+        "a": "SELECT name FROM students;",
+        "b": "SELECT * FROM students;",
+        "c": "SELECT id, name FROM students;",
+        "d": "SELECT name, grade FROM students;"
+      }
+    },
+    "code-1": {
+      "title": "Write a query to select specific columns",
+      "prompt": "Write a SQL query to return only the `id` and `grade` columns from the `students` table.",
+      "hint": "Focus on the concept being tested.",
+      "help": {
+        "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+        "hint_1": "Eliminate choices or interpretations that do not match the task.",
+        "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+      },
+      "starterCode": "-- Write your query below"
+    }
+  }
+}

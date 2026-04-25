@@ -25,7 +25,6 @@ export * from "./emit/buildTopicBundleFromDraft.js";
 export * from "./emit/buildMessagesFromDraft.js";
 export * from "./write/writeSubjectArtifacts.js";
 export * from "./write/writeTopicArtifacts.js";
-export * from "./validate/validateSqlDatasetConsistency.js";
 
 
 
@@ -50,4 +49,14 @@ export { compileTopic } from "./compile/compileTopic.js";
 export { critiqueTopic } from "./compile/critiqueTopic.js";
 export { critiqueTopicDraft } from "./compile/critiqueTopicDraft.js";
 export { critiqueSubject } from "./compile/critiqueSubject.js";
-export { critiqueSubjectDraft } from "./compile/critiqueSubjectDraft.js";;
+export { critiqueSubjectDraft } from "./compile/critiqueSubjectDraft.js";
+
+
+export * from "./spec/loadCourseSpec.js";
+export * from "./spec/buildPlanFromSpec.js";
+export * from "./spec/resolvePlan.js";
+
+
+export * from "./spec/moduleOrder.js";
+export * from "./seeds/buildTopicSeedFromPlanNode.js";
+export * from "./spec/validateCourseSpecForSubject.js";

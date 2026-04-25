@@ -1,0 +1,124 @@
+{
+  "title": "Writing readable output",
+  "summary": "Learn how to use column aliases and expressions in SQL to make your query results clear and presentation-ready.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sk1",
+      "title": "Why readable output matters",
+      "bodyMarkdown": "When you write SQL queries, the default column names in your output often come directly from the table or the expression you use. This can make results hard to read, especially when you use calculations or functions. For example:\n\n```sql\nSELECT name, grade_level + 1 FROM students;\n```\n\nThis query shows each student's name and their grade level plus one, but the second column will be labeled `grade_level + 1`, which isn't very clear. To make your results easier to understand, you can use **column aliases**."
+    },
+    {
+      "id": "sk2",
+      "title": "Using column aliases with AS",
+      "bodyMarkdown": "A **column alias** lets you rename the output column in your result set. Use the `AS` keyword to give a column a new name:\n\n```sql\nSELECT name, grade_level + 1 AS next_grade FROM students;\n```\n\nNow, the second column will be labeled `next_grade`, making it clear what the value means. Aliases are especially useful for calculated columns and for making reports more readable."
+    },
+    {
+      "id": "sk3",
+      "title": "Aliases for functions and expressions",
+      "bodyMarkdown": "You can use aliases for any column, including those created with functions or expressions. For example, if you want to show the length of each student's name:\n\n```sql\nSELECT name, LENGTH(name) AS name_length FROM students;\n```\n\nThis query outputs two columns: the student's name and the number of characters in their name, labeled as `name_length`."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "q1",
+      "kind": "fill_blank_choice",
+      "title": "Identifying the alias keyword",
+      "prompt": "Which keyword is used to assign a new name to a column in the output of a SQL query?",
+      "hint": "It's a short keyword that comes before the new column name.",
+      "help": {
+        "concept": "Column aliases in SQL are created using a specific keyword after the expression or column name.",
+        "hint_1": "This keyword is often written in uppercase and comes right before the alias name.",
+        "hint_2": "It's the same keyword used in 'SELECT name AS student_name'."
+      },
+      "template": "SELECT name, grade_level + 1 ___ next_grade FROM students;",
+      "choices": [
+        "AS",
+        "WITH",
+        "BY",
+        "INTO"
+      ],
+      "correctValue": "AS"
+    },
+    {
+      "id": "q2",
+      "kind": "fill_blank_choice",
+      "title": "Choosing a clear alias",
+      "prompt": "What is the best alias to use for a column showing the number of characters in a student's name?",
+      "hint": "The alias should describe what the value represents.",
+      "help": {
+        "concept": "Aliases should make the meaning of the column clear to anyone reading the output.",
+        "hint_1": "Think about what the column actually shows: the length of the name.",
+        "hint_2": "A good alias is short and descriptive, like 'name_length'."
+      },
+      "template": "SELECT name, LENGTH(name) AS ___ FROM students;",
+      "choices": [
+        "name_length",
+        "characters",
+        "student",
+        "length"
+      ],
+      "correctValue": "name_length"
+    },
+    {
+      "id": "q3",
+      "kind": "single_choice",
+      "title": "Purpose of column aliases",
+      "prompt": "Why are column aliases useful in SQL queries?",
+      "hint": "Think about how the output looks to someone reading it.",
+      "help": {
+        "concept": "Column aliases help make query results more understandable and professional.",
+        "hint_1": "They let you rename columns in the result set.",
+        "hint_2": "Aliases are especially helpful when using expressions or functions."
+      },
+      "options": [
+        "They make output columns easier to understand.",
+        "They change the data stored in the table.",
+        "They speed up query execution.",
+        "They enforce data types."
+      ],
+      "correctOptionIds": [
+        "They make output columns easier to understand."
+      ]
+    },
+    {
+      "id": "q4",
+      "kind": "multi_choice",
+      "title": "Valid uses of column aliases",
+      "prompt": "Which of the following are valid uses of column aliases in SQL? (Choose all that apply)",
+      "hint": "Think about where you might want to rename columns in your output.",
+      "help": {
+        "concept": "Column aliases can be used for original columns, expressions, and functions in the SELECT clause.",
+        "hint_1": "You can use aliases for both calculated columns and existing columns.",
+        "hint_2": "Aliases help clarify the meaning of any output column, not just those from calculations."
+      },
+      "options": [
+        "Renaming a column created by an arithmetic expression",
+        "Renaming a column created by a function like LENGTH()",
+        "Renaming an original column from the table",
+        "Renaming a table in the FROM clause"
+      ],
+      "correctOptionIds": [
+        "Renaming a column created by an arithmetic expression",
+        "Renaming a column created by a function like LENGTH()",
+        "Renaming an original column from the table"
+      ]
+    },
+    {
+      "id": "q5",
+      "kind": "code_input",
+      "title": "Write a query with a calculated column and alias",
+      "prompt": "Write a SQL query that selects each student's name and their grade level plus one, with the calculated column labeled as next_grade.",
+      "hint": "Use SELECT, the students table, and the AS keyword to rename the calculated column.",
+      "help": {
+        "concept": "To create a readable output, use an expression for the calculation and assign it an alias using AS.",
+        "hint_1": "Your SELECT clause should include name and grade_level + 1 AS next_grade.",
+        "hint_2": "Remember to select from the students table and use the correct alias for the calculated column."
+      },
+      "starterCode": "-- Write your query below\n",
+      "solutionCode": "SELECT name, grade_level + 1 AS next_grade FROM students;",
+      "datasetId": "school_relations_intro",
+      "recipeType": "sql_query"
+    }
+  ]
+}

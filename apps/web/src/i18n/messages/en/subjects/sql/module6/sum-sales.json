@@ -1,0 +1,118 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_6": {
+        "sum-sales": {
+          "label": "Sum sales",
+          "summary": "Learn how to use SQL aggregate functions to sum values, focusing on the SUM() function for summarizing sales-like data in the inventory_items table.",
+          "cards": {
+            "sketch0": {
+              "title": "Introduction to SUM()"
+            },
+            "sketch1": {
+              "title": "Filtering with SUM()"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "quiz": {
+            "q1": {
+              "title": "Basic SUM() usage",
+              "prompt": "Which SQL function is used to add up all values in a numeric column?",
+              "hint": "It's an aggregate function for totals.",
+              "help": {
+                "concept": "The the missing term() function adds up all values in a numeric column.",
+                "hint_1": "Think about which function calculates totals, not averages or counts.",
+                "hint_2": "The function name is a synonym for 'add up'."
+              },
+              "template": "SELECT ___(price) FROM inventory_items;",
+              "choices": [
+                "SUM",
+                "COUNT",
+                "AVG",
+                "MAX"
+              ]
+            },
+            "q2": {
+              "title": "SUM() with filtering",
+              "prompt": "Fill in the blank to sum prices only for items in the 'Kitchen' category.",
+              "hint": "Look for the correct category name.",
+              "help": {
+                "concept": "The WHERE clause filters rows before aggregation.",
+                "hint_1": "Check the category names in the table.",
+                "hint_2": "The category for mugs and water bottles is the answer."
+              },
+              "template": "SELECT SUM(price) FROM inventory_items WHERE category = '___';",
+              "choices": [
+                "Kitchen",
+                "Accessories",
+                "Decor",
+                "active"
+              ]
+            },
+            "q3": {
+              "title": "SUM() output type",
+              "prompt": "What type of value does the SUM() function return?",
+              "hint": "Does SUM() return one value or many?",
+              "help": {
+                "concept": "Aggregate functions like SUM() return a single value unless grouped.",
+                "hint_1": "SUM() combines all values into one result.",
+                "hint_2": "The output is a single number representing the total."
+              },
+              "options": {
+                "a": "A single value (scalar)",
+                "b": "A list of all prices",
+                "c": "A table with multiple columns",
+                "d": "A text description"
+              }
+            },
+            "q4": {
+              "title": "When to use SUM()",
+              "prompt": "In which scenarios would you use the SUM() function? Select all that apply.",
+              "hint": "Focus on scenarios involving totals.",
+              "help": {
+                "concept": "SUM() is used for adding up numeric values, not counting or averaging.",
+                "hint_1": "Look for options that mention 'total' or 'sum'.",
+                "hint_2": "Ignore options about counting or averaging."
+              },
+              "options": {
+                "a": "To calculate the total price of all items",
+                "b": "To count the number of items",
+                "c": "To find the average price",
+                "d": "To sum prices for items in a specific category"
+              }
+            },
+            "q5": {
+              "title": "Write a SUM() query with a filter",
+              "prompt": "Write a SQL query to find the total price of all items with status 'active' in the inventory_items table.",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+                "hint_1": "Eliminate choices or interpretations that do not match the task.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "starterCode": "-- Write your query below"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_6": {
+        "sum-sales": {
+          "sk1": {
+            "title": "Introduction to SUM()",
+            "bodyMarkdown": "The `SUM()` function in SQL is used to add up all the values in a numeric column for the rows returned by a query. It's commonly used to calculate totals, such as total sales or total inventory value. For example, to find the total price of all items in the `inventory_items` table:\n\n```sql\nSELECT SUM(price) AS total_price FROM inventory_items;\n```\nThis query returns a single value representing the sum of all prices in the table."
+          },
+          "sk2": {
+            "title": "Filtering with SUM()",
+            "bodyMarkdown": "You can combine `SUM()` with a `WHERE` clause to sum only a subset of rows. For example, to sum the prices of only active items:\n\n```sql\nSELECT SUM(price) AS active_total FROM inventory_items WHERE status = 'active';\n```\nThis query adds up the price of items where the status is 'active'."
+          }
+        }
+      }
+    }
+  }
+}

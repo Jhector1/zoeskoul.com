@@ -4,22 +4,18 @@ import type {
     TopicAuthoringDraft,
 } from "@zoeskoul/curriculum-contracts";
 import type { AiProvider } from "@zoeskoul/curriculum-ai";
+import { generateTopicAuthoringDraft } from "@zoeskoul/curriculum-ai";
 import {
-    generateCoursePlan,
-    generateTopicAuthoringDraft,
-} from "@zoeskoul/curriculum-ai";
-import {
-    getProfileAdapter,
     getProfileServices,
     getSubjectShape,
 } from "@zoeskoul/curriculum-profiles";
 import { validateBlueprint } from "../validate/validateBlueprint.js";
-import { validatePlan } from "../validate/validatePlan.js";
-import { loadSavedPlan } from "../planning/loadSavedPlan.js";
-import { savePlan } from "../planning/savePlan.js";
 import { evaluateTopicDraft } from "../quality/evaluateTopicDraft.js";
 import { writeTopicReports } from "../reports/writeTopicReports.js";
 import type { CompileProgressCallback } from "./compileProgress.js";
+import { resolvePlan } from "../spec/resolvePlan.js";
+import { findTopicPlanNode } from "../plan/findTopicPlanNode.js";
+import { buildTopicSeedFromPlanNode } from "../seeds/buildTopicSeedFromPlanNode.js";
 
 export async function critiqueTopic(args: {
     blueprint: CourseBlueprint;
@@ -56,131 +52,111 @@ export async function critiqueTopic(args: {
         topicId: args.topicId,
     });
 
-    let plan = await loadSavedPlan(args.blueprint.subjectSlug);
+    const resolved = await resolvePlan({
+        blueprint: args.blueprint,
+        provider: args.provider,
+    });
 
-    if (!plan) {
+    if (resolved.source === "spec") {
         advanceProgress({
-            stage: "generating course plan",
+            stage: "loaded course spec",
             topicId: args.topicId,
         });
-
-        plan = await generateCoursePlan(args.provider, args.blueprint);
-        validatePlan(plan);
-        await savePlan(args.blueprint.subjectSlug, plan);
-    } else {
-        validatePlan(plan);
-
+    } else if (resolved.source === "saved_plan") {
         advanceProgress({
             stage: "loaded saved plan",
             topicId: args.topicId,
         });
+    } else {
+        advanceProgress({
+            stage: "generated course plan",
+            topicId: args.topicId,
+        });
+    }
+
+    const node = findTopicPlanNode({
+        plan: resolved.plan,
+        topicId: args.topicId,
+    });
+
+    if (!node) {
+        throw new Error(`Topic not found in resolved course structure: ${args.topicId}`);
     }
 
     const shape = getSubjectShape(args.blueprint.profileId as "sql" | "python");
-    const adapter = getProfileAdapter(args.blueprint.profileId);
     const profileServices = getProfileServices(args.blueprint.profileId);
 
-    for (const module of plan.modules) {
-        const moduleOrder = module.order - 1;
+    const seed = buildTopicSeedFromPlanNode({
+        blueprint: args.blueprint,
+        spec: resolved.spec,
+        module: node.module,
+        section: node.section,
+        topic: node.topic,
+    });
 
-        for (const section of module.sections) {
-            for (const topic of section.topics) {
-                if (topic.topicId !== args.topicId) continue;
+    advanceProgress({
+        stage: "generating topic draft",
+        topicId: node.topic.topicId,
+        moduleSlug: node.module.moduleSlug,
+        sectionSlug: node.section.sectionSlug,
+    });
 
-                const seed = adapter.buildTopicSeed({
-                    blueprint: args.blueprint,
-                    module: {
-                        slug: module.moduleSlug,
-                        title: module.title,
-                        order: module.order,
-                        purpose: undefined,
-                        learningObjectives: topic.learningGoals,
-                        guidedExercises: [],
-                        quizFocus: [],
-                        moduleProject: undefined,
-                    },
-                    section: {
-                        slug: section.sectionSlug,
-                        title: section.title,
-                        order: section.order,
-                    },
-                    topic: {
-                        topicId: topic.topicId,
-                        order: topic.order,
-                        title: topic.title,
-                        summary: topic.summary,
-                        minutes: topic.minutes,
-                    },
-                });
+    const rawDraft = await generateTopicAuthoringDraft(args.provider, {
+        seed,
+        locale: args.blueprint.sourceLocale,
+        shape,
+    });
 
-                advanceProgress({
-                    stage: "generating topic draft",
-                    topicId: topic.topicId,
-                    moduleSlug: module.moduleSlug,
-                    sectionSlug: section.sectionSlug,
-                });
+    advanceProgress({
+        stage: "evaluating topic draft",
+        topicId: node.topic.topicId,
+        moduleSlug: node.module.moduleSlug,
+        sectionSlug: node.section.sectionSlug,
+    });
 
-                const rawDraft = await generateTopicAuthoringDraft(args.provider, {
-                    seed,
-                    locale: args.blueprint.sourceLocale,
-                    shape,
-                });
+    const evaluation = await evaluateTopicDraft({
+        provider: args.provider,
+        seed,
+        rawDraft,
+        profileServices,
+    });
 
-                advanceProgress({
-                    stage: "evaluating topic draft",
-                    topicId: topic.topicId,
-                    moduleSlug: module.moduleSlug,
-                    sectionSlug: section.sectionSlug,
-                });
+    const repairedDraft = evaluation.draft as TopicAuthoringDraft;
 
-                const evaluation = await evaluateTopicDraft({
-                    provider: args.provider,
-                    seed,
-                    rawDraft,
-                    profileServices,
-                });
+    await writeTopicReports({
+        subjectSlug: args.blueprint.subjectSlug,
+        moduleOrder: node.moduleIndex,
+        topicId: node.topic.topicId,
+        rawDraft,
+        repairedDraft,
+        repairReport: evaluation.repairReport,
+        critiqueReport: evaluation.critiqueReport,
+        semanticReport: evaluation.semanticReport,
+    });
 
-                const repairedDraft = evaluation.draft as TopicAuthoringDraft;
+    advanceProgress({
+        stage: "completed topic critique",
+        topicId: node.topic.topicId,
+        moduleSlug: node.module.moduleSlug,
+        sectionSlug: node.section.sectionSlug,
+    });
 
-                await writeTopicReports({
-                    subjectSlug: args.blueprint.subjectSlug,
-                    moduleOrder,
-                    topicId: topic.topicId,
-                    rawDraft,
-                    repairedDraft,
-                    repairReport: evaluation.repairReport,
-                    critiqueReport: evaluation.critiqueReport,
-                    semanticReport: evaluation.semanticReport,
-                });
-
-                advanceProgress({
-                    stage: "completed topic critique",
-                    topicId: topic.topicId,
-                    moduleSlug: module.moduleSlug,
-                    sectionSlug: section.sectionSlug,
-                });
-
-                return {
-                    mode: "fresh" as const,
-                    subjectSlug: args.blueprint.subjectSlug,
-                    topicId: topic.topicId,
-                    moduleSlug: module.moduleSlug,
-                    sectionSlug: section.sectionSlug,
-                    moduleOrder,
-                    reportDir: path.join(
-                        ".curriculum-drafts",
-                        "reports",
-                        args.blueprint.subjectSlug,
-                        `module${moduleOrder}`,
-                        topic.topicId,
-                    ),
-                    repairReport: evaluation.repairReport,
-                    critiqueReport: evaluation.critiqueReport,
-                    semanticReport: evaluation.semanticReport,
-                };
-            }
-        }
-    }
-
-    throw new Error(`Topic not found in saved/generated plan: ${args.topicId}`);
+    return {
+        mode: "fresh" as const,
+        subjectSlug: args.blueprint.subjectSlug,
+        topicId: node.topic.topicId,
+        moduleSlug: node.module.moduleSlug,
+        sectionSlug: node.section.sectionSlug,
+        moduleOrder: node.moduleIndex,
+        reportDir: path.join(
+            ".curriculum-drafts",
+            "reports",
+            args.blueprint.subjectSlug,
+            `module${node.moduleIndex}`,
+            node.topic.topicId,
+        ),
+        repairReport: evaluation.repairReport,
+        critiqueReport: evaluation.critiqueReport,
+        semanticReport: evaluation.semanticReport,
+    };
 }

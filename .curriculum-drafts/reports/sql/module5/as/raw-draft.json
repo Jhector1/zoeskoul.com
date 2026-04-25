@@ -1,0 +1,119 @@
+{
+  "title": "AS in Calculated Columns and SQL Expressions",
+  "summary": "Learn how to use the AS keyword to create column aliases for calculated columns and SQL expressions, making your query results clearer and more readable.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch-1",
+      "title": "What is AS in SQL?",
+      "bodyMarkdown": "The **AS** keyword in SQL lets you assign a temporary name (alias) to a column or expression in your query results. This is especially useful when you use calculations or functions in your SELECT statement. For example:\n\n```sql\nSELECT name, grade_level AS grade\nFROM students;\n```\n\nHere, the output column will be labeled 'grade' instead of 'grade_level'."
+    },
+    {
+      "id": "sketch-2",
+      "title": "Using AS with Calculated Columns",
+      "bodyMarkdown": "You can use **AS** to give a name to a calculated column. For example, if you want to show the next grade level for each student:\n\n```sql\nSELECT name, grade_level + 1 AS next_grade\nFROM students;\n```\n\nThe result will have a column called 'next_grade' showing each student's grade level plus one."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "fill-blank-1",
+      "kind": "fill_blank_choice",
+      "title": "Alias a column with AS",
+      "prompt": "Which keyword is used in SQL to give a column or expression a temporary name in the result set?",
+      "template": "SELECT name, grade_level ___ grade FROM students;",
+      "choices": [
+        "AS",
+        "WITH",
+        "INTO",
+        "BY"
+      ],
+      "correctValue": "AS",
+      "hint": "It's a two-letter keyword.",
+      "help": {
+        "concept": "The AS keyword assigns an alias to a column or expression in SQL.",
+        "hint_1": "This keyword is placed between the original column/expression and the alias name.",
+        "hint_2": "It's commonly used as: column_name AS alias_name."
+      }
+    },
+    {
+      "id": "fill-blank-2",
+      "kind": "fill_blank_choice",
+      "title": "Alias a calculated expression",
+      "prompt": "Fill in the blank to create an alias for a calculated column showing the next grade level.",
+      "template": "SELECT name, grade_level + 1 ___ next_grade FROM students;",
+      "choices": [
+        "AS",
+        "IS",
+        "TO",
+        "ON"
+      ],
+      "correctValue": "AS",
+      "hint": "It's the same keyword used for aliasing regular columns.",
+      "help": {
+        "concept": "AS is used to assign an alias to any column or expression, including calculations.",
+        "hint_1": "You use this keyword between the calculation and the alias.",
+        "hint_2": "The syntax is: expression AS alias."
+      }
+    },
+    {
+      "id": "single-1",
+      "kind": "single_choice",
+      "title": "Purpose of AS",
+      "prompt": "Why would you use the AS keyword in a SQL SELECT statement?",
+      "options": [
+        "a. To rename a column or expression in the result set for clarity.",
+        "b. To permanently change the column name in the table.",
+        "c. To filter rows based on a condition.",
+        "d. To join two tables together."
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Think about how your query results look.",
+      "help": {
+        "concept": "AS creates a temporary alias for columns or expressions in the output, making results easier to read.",
+        "hint_1": "It does not affect the actual table structure.",
+        "hint_2": "It's about how the results are labeled, not how data is stored."
+      }
+    },
+    {
+      "id": "multi-1",
+      "kind": "multi_choice",
+      "title": "Where can AS be used?",
+      "prompt": "In which situations can you use the AS keyword in SQL? Select all that apply.",
+      "options": [
+        "a. Assigning a name to a calculated column in SELECT.",
+        "b. Giving an alias to a table in a JOIN.",
+        "c. Renaming a column permanently in the database.",
+        "d. Assigning a name to a function result in SELECT."
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ],
+      "hint": "AS is useful for both columns and tables, but not for permanent changes.",
+      "help": {
+        "concept": "AS can be used for column aliases, table aliases, and function result aliases in queries.",
+        "hint_1": "It does not change the database schema.",
+        "hint_2": "It's used in SELECT statements and JOINs for temporary naming."
+      }
+    },
+    {
+      "id": "code-1",
+      "kind": "code_input",
+      "title": "Write a query using AS for a calculated column",
+      "prompt": "Write a SQL query to select each student's name and their grade level plus one, with the calculated column labeled as next_grade.",
+      "starterCode": "-- Write your query below\n",
+      "solutionCode": "SELECT name, grade_level + 1 AS next_grade FROM students;",
+      "datasetId": "school_relations_intro",
+      "recipeType": "sql_query",
+      "hint": "Use AS to give the calculated column a name.",
+      "help": {
+        "concept": "To label a calculated column, use AS between the calculation and the alias name.",
+        "hint_1": "Your SELECT should include name and the calculation with AS.",
+        "hint_2": "The alias should be next_grade."
+      }
+    }
+  ]
+}

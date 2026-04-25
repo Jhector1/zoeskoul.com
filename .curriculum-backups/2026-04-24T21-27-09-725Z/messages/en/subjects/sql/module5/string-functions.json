@@ -1,0 +1,125 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_5": {
+        "string-functions": {
+          "label": "String functions",
+          "summary": "String functions in Calculated Columns and SQL Expressions",
+          "cards": {
+            "sketch0": {
+              "title": "What are String Functions?"
+            },
+            "sketch1": {
+              "title": "Using String Functions in SELECT"
+            },
+            "sketch2": {
+              "title": "Combining Strings"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "quiz": {
+            "fill-blank-1": {
+              "title": "Function to Convert Text to Uppercase",
+              "prompt": "Which SQL function turns all letters in a text column to uppercase?",
+              "hint": "Focus on the missing SQL concept rather than the exact missing word.",
+              "help": {
+                "concept": "The blank should be filled with the SQL term that matches the job the statement is trying to perform.",
+                "hint_1": "Think about what the missing part is supposed to do in the statement.",
+                "hint_2": "Choose the SQL term that best completes the meaning of the statement."
+              },
+              "template": "SELECT _____(name) FROM students;",
+              "choices": [
+                "UPPER",
+                "LOWER",
+                "LENGTH",
+                "CONCAT"
+              ]
+            },
+            "fill-blank-2": {
+              "title": "Concatenating Strings in SQLite",
+              "prompt": "Which operator is used in SQLite to join two strings together?",
+              "hint": "Focus on the missing SQL concept rather than the exact missing word.",
+              "help": {
+                "concept": "The blank should be filled with the SQL term that matches the job the statement is trying to perform.",
+                "hint_1": "Think about what the missing part is supposed to do in the statement.",
+                "hint_2": "Choose the SQL term that best completes the meaning of the statement."
+              },
+              "template": "SELECT name _____ grade_level FROM students;",
+              "choices": [
+                "||",
+                "+",
+                "&",
+                "AND"
+              ]
+            },
+            "single-choice-1": {
+              "title": "Finding the Length of a String",
+              "prompt": "Which SQL function returns the number of characters in a text value?",
+              "hint": "Focus on the main concept being tested and eliminate choices that describe something different.",
+              "help": {
+                "concept": "Choose the option that matches the core idea described in the question without relying on repeated wording from the answer choices.",
+                "hint_1": "Rule out options that describe a different role, behavior, or SQL concept than the question is testing.",
+                "hint_2": "Pick the option that best matches the concept, not the one that simply repeats familiar wording."
+              },
+              "options": {
+                "a": "LENGTH",
+                "b": "UPPER",
+                "c": "TRIM",
+                "d": "REPLACE"
+              }
+            },
+            "multi-choice-1": {
+              "title": "Which Are String Functions?",
+              "prompt": "Which of the following are string functions in SQL? (Choose all that apply)",
+              "hint": "Focus on the main concept being tested and eliminate choices that describe something different.",
+              "help": {
+                "concept": "Choose the option that matches the core idea described in the question without relying on repeated wording from the answer choices.",
+                "hint_1": "Rule out options that describe a different role, behavior, or SQL concept than the question is testing.",
+                "hint_2": "Pick the option that best matches the concept, not the one that simply repeats familiar wording."
+              },
+              "options": {
+                "a": "UPPER",
+                "b": "LENGTH",
+                "c": "SUM",
+                "d": "LOWER"
+              }
+            },
+            "code-input-1": {
+              "title": "Show Student Names in Lowercase",
+              "prompt": "Write a SQL query to select all student names from the students table, but display them in lowercase. The output column should be named name_lowercase.",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+                "hint_1": "Eliminate choices or interpretations that do not match the task.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "starterCode": "-- Write your query below"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_5": {
+        "string-functions": {
+          "sketch-1": {
+            "title": "What are String Functions?",
+            "bodyMarkdown": "String functions in SQL let you manipulate text data in your queries. Common examples include changing case (like UPPER or LOWER), finding the length of a string (LENGTH), or combining text (using || or CONCAT). These are especially useful when working with columns like names or titles."
+          },
+          "sketch-2": {
+            "title": "Using String Functions in SELECT",
+            "bodyMarkdown": "You can apply string functions directly in your SELECT statements. For example, to display all student names in uppercase from the students table:\n\n```sql\nSELECT UPPER(name) AS name_uppercase FROM students;\n```\n\nThis returns a column with all names in uppercase letters."
+          },
+          "sketch-3": {
+            "title": "Combining Strings",
+            "bodyMarkdown": "To join (concatenate) two or more strings in SQLite, use the `||` operator. For example, to show a student's name with their grade level:\n\n```sql\nSELECT name || ' (Grade ' || grade_level || ')' AS student_info FROM students;\n```\n\nThis creates a new column like 'Mia (Grade 9)'."
+          }
+        }
+      }
+    }
+  }
+}

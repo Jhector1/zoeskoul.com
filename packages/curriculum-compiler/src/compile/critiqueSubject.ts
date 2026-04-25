@@ -1,15 +1,13 @@
 import type { CourseBlueprint } from "@zoeskoul/curriculum-contracts";
 import type { AiProvider } from "@zoeskoul/curriculum-ai";
-import { generateCoursePlan } from "@zoeskoul/curriculum-ai";
-import { loadSavedPlan } from "../planning/loadSavedPlan.js";
-import { savePlan } from "../planning/savePlan.js";
 import { validateBlueprint } from "../validate/validateBlueprint.js";
-import { validatePlan } from "../validate/validatePlan.js";
 import { critiqueTopic } from "./critiqueTopic.js";
 import {
     countPlanTopics,
     type CompileProgressCallback,
 } from "./compileProgress.js";
+import { resolvePlan } from "../spec/resolvePlan.js";
+import { listTopicPlanNodes } from "../plan/listTopicPlanNodes.js";
 
 export async function critiqueSubject(args: {
     blueprint: CourseBlueprint;
@@ -21,72 +19,69 @@ export async function critiqueSubject(args: {
     args.onProgress?.({
         current: 0,
         total: 0,
-        stage: "loading saved plan",
+        stage: "resolving course structure",
     });
 
-    let plan = await loadSavedPlan(args.blueprint.subjectSlug);
+    const resolved = await resolvePlan({
+        blueprint: args.blueprint,
+        provider: args.provider,
+    });
 
-    if (!plan) {
+    const topicNodes = listTopicPlanNodes({
+        plan: resolved.plan,
+    });
+    const totalTopics = topicNodes.length;
+
+    if (resolved.source === "spec") {
         args.onProgress?.({
             current: 0,
-            total: 0,
-            stage: "generating course plan",
+            total: totalTopics,
+            stage: "loaded course spec",
         });
-
-        plan = await generateCoursePlan(args.provider, args.blueprint);
-        validatePlan(plan);
-        await savePlan(args.blueprint.subjectSlug, plan);
-
+    } else if (resolved.source === "saved_plan") {
         args.onProgress?.({
             current: 0,
-            total: countPlanTopics(plan),
-            stage: "saved course plan",
+            total: totalTopics,
+            stage: "loaded saved plan",
         });
     } else {
-        validatePlan(plan);
-
         args.onProgress?.({
             current: 0,
-            total: countPlanTopics(plan),
-            stage: "loaded saved plan",
+            total: totalTopics,
+            stage: "generated course plan",
         });
     }
 
     const results = [];
-    const totalTopics = countPlanTopics(plan);
     let completedTopics = 0;
 
-    for (const module of plan.modules) {
-        for (const section of module.sections) {
-            for (const topic of section.topics) {
-                args.onProgress?.({
-                    current: completedTopics,
-                    total: totalTopics,
-                    stage: "critiquing topic",
-                    moduleSlug: module.moduleSlug,
-                    sectionSlug: section.sectionSlug,
-                    topicId: topic.topicId,
-                });
+    for (const node of topicNodes) {
+        args.onProgress?.({
+            current: completedTopics,
+            total: totalTopics,
+            stage: "critiquing topic",
+            moduleSlug: node.module.moduleSlug,
+            sectionSlug: node.section.sectionSlug,
+            topicId: node.topic.topicId,
+        });
 
-                const result = await critiqueTopic({
-                    blueprint: args.blueprint,
-                    provider: args.provider,
-                    topicId: topic.topicId,
-                });
+        const result = await critiqueTopic({
+            blueprint: args.blueprint,
+            provider: args.provider,
+            topicId: node.topic.topicId,
+        });
 
-                results.push(result);
-                completedTopics += 1;
+        results.push(result);
+        completedTopics += 1;
 
-                args.onProgress?.({
-                    current: completedTopics,
-                    total: totalTopics,
-                    stage: "completed topic critique",
-                    moduleSlug: module.moduleSlug,
-                    sectionSlug: section.sectionSlug,
-                    topicId: topic.topicId,
-                });
-            }
-        }
+        args.onProgress?.({
+            current: completedTopics,
+            total: totalTopics,
+            stage: "completed topic critique",
+            moduleSlug: node.module.moduleSlug,
+            sectionSlug: node.section.sectionSlug,
+            topicId: node.topic.topicId,
+        });
     }
 
     args.onProgress?.({

@@ -1,0 +1,118 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_2": {
+        "filter-by-number": {
+          "label": "Filter by number",
+          "summary": "Learn how to use the WHERE clause in SQL to filter data based on numeric values. Practice filtering rows using exact matches and range conditions.",
+          "cards": {
+            "sketch0": {
+              "title": "Filtering Data with WHERE and Numbers"
+            },
+            "sketch1": {
+              "title": "Common Numeric Filters"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_2": {
+        "filter-by-number": {
+          "sketch-1": {
+            "title": "Filtering Data with WHERE and Numbers",
+            "bodyMarkdown": "The `WHERE` clause in SQL lets you filter rows based on conditions. When working with numbers, you can use comparison operators like `=`, `>`, `<`, `>=`, and `<=` to select only the rows you want. For example, if you have a table called `products_catalog` with a `price` column, you can find all products that cost more than 50 like this:\n\n```sql\nSELECT * FROM products_catalog WHERE price > 50;\n```\n\nYou can also combine conditions using `AND` and `OR` to create more specific filters."
+          },
+          "sketch-2": {
+            "title": "Common Numeric Filters",
+            "bodyMarkdown": "Some common ways to filter by number include:\n\n- Finding exact matches: `WHERE quantity = 10`\n- Filtering by range: `WHERE price >= 20 AND price <= 100`\n- Excluding values: `WHERE stock != 0`\n\nRemember, the `WHERE` clause only affects which rows are returned, not the columns."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "fill-blank-1": {
+      "title": "Choose the correct operator for filtering prices above 100",
+      "prompt": "Which operator should you use in the WHERE clause to select products with a price greater than 100?",
+      "hint": "Focus on the missing SQL concept rather than the exact missing word.",
+      "help": {
+        "concept": "The blank should be filled with the SQL term that matches the job the statement is trying to perform.",
+        "hint_1": "Think about what the missing part is supposed to do in the statement.",
+        "hint_2": "Choose the SQL term that best completes the meaning of the statement."
+      },
+      "template": "SELECT * FROM products_catalog WHERE price ___ 100;",
+      "choices": [
+        ">",
+        "<",
+        "=",
+        ">="
+      ]
+    },
+    "fill-blank-2": {
+      "title": "Fill in the blank to filter products with exactly 20 in stock",
+      "prompt": "Complete the query to find products with exactly 20 units in stock.",
+      "hint": "Focus on the missing SQL concept rather than the exact missing word.",
+      "help": {
+        "concept": "The blank should be filled with the SQL term that matches the job the statement is trying to perform.",
+        "hint_1": "Think about what the missing part is supposed to do in the statement.",
+        "hint_2": "Choose the SQL term that best completes the meaning of the statement."
+      },
+      "template": "SELECT * FROM products_catalog WHERE stock ___ 20;",
+      "choices": [
+        "=",
+        ">",
+        "<",
+        "!="
+      ]
+    },
+    "single-choice-1": {
+      "title": "Which query returns products with a price less than or equal to 50?",
+      "prompt": "Select the query that correctly filters for products costing 50 or less.",
+      "hint": "Look for the operator that includes 50 and all lower prices.",
+      "help": {
+        "concept": "`<=` means 'less than or equal to' in SQL, so it includes the number and all smaller values.",
+        "hint_1": "You want to include products priced at 50 and below.",
+        "hint_2": "The correct operator is a combination of less than and equal."
+      },
+      "options": {
+        "a": "SELECT * FROM products_catalog WHERE price <= 50;",
+        "b": "SELECT * FROM products_catalog WHERE price >= 50;",
+        "c": "SELECT * FROM products_catalog WHERE price = 50;",
+        "d": "SELECT * FROM products_catalog WHERE price > 50;"
+      }
+    },
+    "multi-choice-1": {
+      "title": "Which queries filter for products with stock not equal to 0?",
+      "prompt": "Select all queries that return products where stock is not zero.",
+      "hint": "There are several ways to exclude zero stock.",
+      "help": {
+        "concept": "You can use `!=`, `>`, or `NOT` to filter out specific values in SQL.",
+        "hint_1": "Think about both inequality and logical negation.",
+        "hint_2": "Any query that does not return rows with stock exactly zero is correct."
+      },
+      "options": {
+        "a": "SELECT * FROM products_catalog WHERE stock != 0;",
+        "b": "SELECT * FROM products_catalog WHERE stock > 0;",
+        "c": "SELECT * FROM products_catalog WHERE stock = 0;",
+        "d": "SELECT * FROM products_catalog WHERE NOT stock = 0;"
+      }
+    },
+    "code-input-1": {
+      "title": "Write a query to find products with a price between 20 and 100",
+      "prompt": "Write an SQL query that returns all columns from `products_catalog` where the price is at least 20 and at most 100.",
+      "hint": "Focus on the concept being tested.",
+      "help": {
+        "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+        "hint_1": "Eliminate choices or interpretations that do not match the task.",
+        "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+      },
+      "starterCode": "-- Write your query below"
+    }
+  }
+}

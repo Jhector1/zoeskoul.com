@@ -1,0 +1,145 @@
+{
+  "topicId": "renaming-result-columns",
+  "subjectSlug": "sql",
+  "moduleSlug": "sql_module_5",
+  "sectionSlug": "section_5_2",
+  "prefix": "sql5",
+  "minutes": 15,
+  "topic": {
+    "labelKey": "topics.sql.sql_module_5.renaming-result-columns.label",
+    "summaryKey": "topics.sql.sql_module_5.renaming-result-columns.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_5.renaming-result-columns.cards.sketch0.title",
+      "sketchId": "sk1",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_5.renaming-result-columns.cards.sketch1.title",
+      "sketchId": "sk2",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_5.renaming-result-columns.cards.sketch2.title",
+      "sketchId": "sk3",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql.sql_module_5.renaming-result-columns.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sk1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_5.renaming-result-columns.sk1.title",
+      "bodyKey": "sketches.sql.sql_module_5.renaming-result-columns.sk1.bodyMarkdown"
+    },
+    {
+      "id": "sk2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_5.renaming-result-columns.sk2.title",
+      "bodyKey": "sketches.sql.sql_module_5.renaming-result-columns.sk2.bodyMarkdown"
+    },
+    {
+      "id": "sk3",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_5.renaming-result-columns.sk3.title",
+      "bodyKey": "sketches.sql.sql_module_5.renaming-result-columns.sk3.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "fb1",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_5.renaming-result-columns.quiz.fb1",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "AS"
+      }
+    },
+    {
+      "id": "fb2",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_5.renaming-result-columns.quiz.fb2",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "AS"
+      }
+    },
+    {
+      "id": "sc1",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_5.renaming-result-columns.quiz.sc1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "mc1",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_5.renaming-result-columns.quiz.mc1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "ci1",
+      "kind": "code_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_5.renaming-result-columns.quiz.ci1",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table",
+        "solutionCode": "SELECT name AS student_name FROM students;"
+      }
+    }
+  ]
+}

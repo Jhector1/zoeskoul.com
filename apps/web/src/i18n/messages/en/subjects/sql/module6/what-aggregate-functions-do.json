@@ -1,0 +1,125 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_6": {
+        "what-aggregate-functions-do": {
+          "label": "What aggregate functions do",
+          "summary": "What aggregate functions do in Aggregate Functions",
+          "cards": {
+            "sketch0": {
+              "title": "What are aggregate functions?"
+            },
+            "sketch1": {
+              "title": "Example: Counting items"
+            },
+            "sketch2": {
+              "title": "Example: Calculating average price"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "quiz": {
+            "fill-blank-1": {
+              "title": "Purpose of aggregate functions",
+              "prompt": "Choose the best value for the first missing blank in the statement.",
+              "hint": "Think about what you do when you want a total or an average.",
+              "help": {
+                "concept": "Aggregate functions combine information from many rows into one summary result.",
+                "hint_1": "They help you get totals, averages, or counts from a table.",
+                "hint_2": "The word means to bring together or combine into a summary."
+              },
+              "template": "The first missing value is [blank1].",
+              "choices": [
+                "summarize",
+                "delete",
+                "sort",
+                "duplicate"
+              ]
+            },
+            "fill-blank-2": {
+              "title": "Identifying an aggregate function",
+              "prompt": "Which of the following is an aggregate function in SQL?",
+              "hint": "Focus on the missing SQL concept rather than the exact missing word.",
+              "help": {
+                "concept": "The blank should be filled with the SQL term that matches the job the statement is trying to perform.",
+                "hint_1": "Think about what the missing part is supposed to do in the statement.",
+                "hint_2": "Choose the SQL term that best completes the meaning of the statement."
+              },
+              "template": "The ____ function returns the number of rows in a table.",
+              "choices": [
+                "COUNT",
+                "SELECT",
+                "WHERE",
+                "JOIN"
+              ]
+            },
+            "single-choice-1": {
+              "title": "Result of an aggregate function",
+              "prompt": "What does the SQL query `SELECT AVG(price) FROM inventory_items;` return?",
+              "hint": "AVG() calculates a summary value.",
+              "help": {
+                "concept": "Aggregate functions like AVG() return a single summary value, not a list.",
+                "hint_1": "AVG() finds the average of a numeric column.",
+                "hint_2": "The result is one value, not a list of all prices."
+              },
+              "options": {
+                "a": "A single value representing the average price of all items",
+                "b": "A list of all prices in the table",
+                "c": "The highest price in the table",
+                "d": "The number of items in the table"
+              }
+            },
+            "multi-choice-1": {
+              "title": "Recognizing aggregate functions",
+              "prompt": "Which of the following are aggregate functions in SQL? (Choose all that apply)",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+                "hint_1": "Eliminate options that do not match the SQL concept being tested.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "options": {
+                "a": "SUM",
+                "b": "MIN",
+                "c": "UPDATE",
+                "d": "MAX"
+              }
+            },
+            "code-input-1": {
+              "title": "Write a query using an aggregate function",
+              "prompt": "Write a SQL query to find the total number of items in the `inventory_items` table.",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+                "hint_1": "Eliminate choices or interpretations that do not match the task.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "starterCode": "-- Write your query below"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_6": {
+        "what-aggregate-functions-do": {
+          "sketch-1": {
+            "title": "What are aggregate functions?",
+            "bodyMarkdown": "Aggregate functions in SQL allow you to summarize or combine data from multiple rows into a single value. Common examples include `COUNT()`, `SUM()`, `AVG()`, `MIN()`, and `MAX()`. These are especially useful for reporting, dashboards, and answering questions like \"How many items are in stock?\" or \"What is the average price of all products?\""
+          },
+          "sketch-2": {
+            "title": "Example: Counting items",
+            "bodyMarkdown": "Suppose you want to know how many inventory items are in your `inventory_items` table. You can use:\n\n```sql\nSELECT COUNT(*) FROM inventory_items;\n```\n\nThis returns a single number representing the total number of rows (items) in the table."
+          },
+          "sketch-3": {
+            "title": "Example: Calculating average price",
+            "bodyMarkdown": "To find the average price of all items in your inventory, use the `AVG()` function:\n\n```sql\nSELECT AVG(price) FROM inventory_items;\n```\n\nThis gives you the average value of the `price` column across all rows."
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,118 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_0": {
+        "running-your-first-query": {
+          "label": "Running your first query",
+          "summary": "Learn how to run your first SQL query, understand the basic structure of a table, and identify key database concepts.",
+          "cards": {
+            "sketch0": {
+              "title": "What is a SQL Query?"
+            },
+            "sketch1": {
+              "title": "Parts of a Table"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "quiz": {
+            "fill-blank-1": {
+              "title": "Identifying Table Parts",
+              "prompt": "In the table below, what is the name of the column that stores each student's score?\n\n| id | name    | grade |\n|----|---------|-------|\n| 1  | Alice   | 90    |\n| 2  | Bob     | 85    |\n| 3  | Charlie | 92    |",
+              "hint": "Focus on the missing SQL concept rather than the exact missing word.",
+              "help": {
+                "concept": "The blank should be filled with the SQL term that matches the job the statement is trying to perform.",
+                "hint_1": "Think about what the missing part is supposed to do in the statement.",
+                "hint_2": "Choose the SQL term that best completes the meaning of the statement."
+              },
+              "template": "The column that stores the score is called: _____.",
+              "choices": [
+                "id",
+                "name",
+                "grade",
+                "score"
+              ]
+            },
+            "fill-blank-2": {
+              "title": "Basic SQL Query Structure",
+              "prompt": "What keyword is used in SQL to specify which columns you want to see in your results?",
+              "hint": "It's the first word in a basic SQL query.",
+              "help": {
+                "concept": "SQL uses specific keywords to structure queries. The keyword for picking columns comes at the start.",
+                "hint_1": "Think about how you begin a query to retrieve data.",
+                "hint_2": "The keyword is used before listing the column names you want."
+              },
+              "template": "The SQL keyword to choose columns is: _____.",
+              "choices": [
+                "SELECT",
+                "FROM",
+                "WHERE",
+                "TABLE"
+              ]
+            },
+            "single-choice-1": {
+              "title": "What is a row in a database table?",
+              "prompt": "Which best describes a row in a database table?",
+              "hint": "Think about what each horizontal line in a table represents.",
+              "help": {
+                "concept": "A row contains all the data for one entry in the table, such as one person or item.",
+                "hint_1": "Each row is a complete set of information for one thing.",
+                "hint_2": "If you look at a table, each row is one record, like a student."
+              },
+              "options": {
+                "a": "A single record, like one student's information",
+                "b": "A label for a group of columns",
+                "c": "The name of the table",
+                "d": "A type of SQL command"
+              }
+            },
+            "multi-choice-1": {
+              "title": "Tables vs. Spreadsheets",
+              "prompt": "Which of the following are true about how database tables and spreadsheets are similar or different? (Select all that apply.)",
+              "hint": "Think about structure, rules, and connections between tables.",
+              "help": {
+                "concept": "Database tables and spreadsheets both use rows and columns, but databases have stricter rules and can relate tables.",
+                "hint_1": "Consider which features are unique to databases.",
+                "hint_2": "Spreadsheets are flexible, but databases can enforce data types and relationships."
+              },
+              "options": {
+                "a": "Both organize data in rows and columns.",
+                "b": "Database tables can enforce data types for each column.",
+                "c": "Spreadsheets always require unique values in every row.",
+                "d": "Database tables can have relationships with other tables."
+              }
+            },
+            "code-input-1": {
+              "title": "Write Your First SQL Query",
+              "prompt": "Write a SQL query to display all columns and all rows from the `students` table.",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+                "hint_1": "Eliminate choices or interpretations that do not match the task.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "starterCode": "-- Write your SQL query below"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_0": {
+        "running-your-first-query": {
+          "sketch-1": {
+            "title": "What is a SQL Query?",
+            "bodyMarkdown": "A SQL query is a command you send to a database to retrieve or manipulate data. For example, if you have a table called `students` with columns like `id`, `name`, and `grade`, you can use a query to get all student names:\n\n```sql\nSELECT name FROM students;\n```\nThis command asks the database to return the `name` column from every row in the `students` table."
+          },
+          "sketch-2": {
+            "title": "Parts of a Table",
+            "bodyMarkdown": "A table in a database is similar to a spreadsheet. It has:\n- **Table name**: e.g., `students`\n- **Columns**: e.g., `id`, `name`, `grade`\n- **Rows**: Each row is a record, like a single student.\n\nExample:\n\n| id | name    | grade |\n|----|---------|-------|\n| 1  | Alice   | 90    |\n| 2  | Bob     | 85    |\n| 3  | Charlie | 92    |"
+          }
+        }
+      }
+    }
+  }
+}

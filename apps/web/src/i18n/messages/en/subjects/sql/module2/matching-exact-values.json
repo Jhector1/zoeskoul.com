@@ -1,0 +1,118 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_2": {
+        "matching-exact-values": {
+          "label": "Matching exact values",
+          "summary": "Learn how to filter SQL query results by matching exact values using the WHERE clause.",
+          "cards": {
+            "sketch0": {
+              "title": "What does it mean to match exact values?"
+            },
+            "sketch1": {
+              "title": "Why use exact matching?"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_2": {
+        "matching-exact-values": {
+          "sketch-1": {
+            "title": "What does it mean to match exact values?",
+            "bodyMarkdown": "In SQL, matching exact values means filtering your results to include only the rows where a column equals a specific value. This is done using the `WHERE` clause with the `=` operator. For example, to find all products with a price of 10 in a `products` table, you would write:\n\n```sql\nSELECT * FROM products WHERE price = 10;\n```\nThis query returns only the rows where the `price` column is exactly 10."
+          },
+          "sketch-2": {
+            "title": "Why use exact matching?",
+            "bodyMarkdown": "Exact matching is useful when you want to find specific records, such as a customer with a particular ID or a product with a certain name. It helps you narrow down large datasets to just the information you need."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "fill-1": {
+      "title": "Choose the correct operator for exact matching",
+      "prompt": "Which operator is used in SQL to match a column to an exact value?",
+      "hint": "Focus on the missing SQL concept rather than the exact missing word.",
+      "help": {
+        "concept": "The blank should be filled with the SQL term that matches the job the statement is trying to perform.",
+        "hint_1": "Think about what the missing part is supposed to do in the statement.",
+        "hint_2": "Choose the SQL term that best completes the meaning of the statement."
+      },
+      "template": "SELECT * FROM products WHERE price ___ 20;",
+      "choices": [
+        "=",
+        ">",
+        "<",
+        "LIKE"
+      ]
+    },
+    "fill-2": {
+      "title": "Filtering by exact text value",
+      "prompt": "Fill in the blank to select all customers whose city is exactly 'Paris'.",
+      "hint": "Focus on the missing SQL concept rather than the exact missing word.",
+      "help": {
+        "concept": "The blank should be filled with the SQL term that matches the job the statement is trying to perform.",
+        "hint_1": "Think about what the missing part is supposed to do in the statement.",
+        "hint_2": "Choose the SQL term that best completes the meaning of the statement."
+      },
+      "template": "SELECT * FROM customers WHERE city ___ 'Paris';",
+      "choices": [
+        "=",
+        "LIKE",
+        "IN",
+        "<>"
+      ]
+    },
+    "single-1": {
+      "title": "Effect of no WHERE clause",
+      "prompt": "What happens if you run a SELECT query without a WHERE clause?",
+      "hint": "Think about what filtering does.",
+      "help": {
+        "concept": "The WHERE clause filters rows. Without it, nothing is filtered out.",
+        "hint_1": "No WHERE means no filter is applied.",
+        "hint_2": "The query returns every row in the table."
+      },
+      "options": {
+        "a": "All rows from the table are returned.",
+        "b": "No rows are returned.",
+        "c": "Only the first row is returned.",
+        "d": "Only rows with NULL values are returned."
+      }
+    },
+    "multi-1": {
+      "title": "Identifying exact match queries",
+      "prompt": "Which of the following queries will return only rows where the value in the 'status' column is exactly 'active'? Select all that apply.",
+      "hint": "Consider case sensitivity and operator meaning.",
+      "help": {
+        "concept": "The `=` operator matches exact values, and `LIKE` without wildcards also acts as an exact match. SQL is often case-sensitive depending on the database.",
+        "hint_1": "Check which queries use equality or LIKE without wildcards.",
+        "hint_2": "Remember that 'Active' (capital A) is different from 'active' in many SQL databases."
+      },
+      "options": {
+        "a": "SELECT * FROM users WHERE status = 'active';",
+        "b": "SELECT * FROM users WHERE status LIKE 'active';",
+        "c": "SELECT * FROM users WHERE status = 'Active';",
+        "d": "SELECT * FROM users WHERE status <> 'active';"
+      }
+    },
+    "code-1": {
+      "title": "Write a query to match an exact value",
+      "prompt": "Write a SQL query to select all rows from the `products_catalog` table where the `category` column is exactly 'Books'.",
+      "hint": "Focus on the concept being tested.",
+      "help": {
+        "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+        "hint_1": "Eliminate choices or interpretations that do not match the task.",
+        "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+      },
+      "starterCode": "-- Write your SQL query below"
+    }
+  }
+}

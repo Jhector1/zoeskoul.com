@@ -1,0 +1,131 @@
+{
+  "topicId": "date-function-awareness",
+  "subjectSlug": "sql",
+  "moduleSlug": "sql_module_5",
+  "sectionSlug": "section_5_3",
+  "prefix": "sql5",
+  "minutes": 15,
+  "topic": {
+    "labelKey": "topics.sql.sql_module_5.date-function-awareness.label",
+    "summaryKey": "topics.sql.sql_module_5.date-function-awareness.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_5.date-function-awareness.cards.sketch0.title",
+      "sketchId": "sketch-1-intro-date-functions",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_5.date-function-awareness.cards.sketch1.title",
+      "sketchId": "sketch-2-common-date-expressions",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql.sql_module_5.date-function-awareness.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch-1-intro-date-functions",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_5.date-function-awareness.sketch-1-intro-date-functions.title",
+      "bodyKey": "sketches.sql.sql_module_5.date-function-awareness.sketch-1-intro-date-functions.bodyMarkdown"
+    },
+    {
+      "id": "sketch-2-common-date-expressions",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_5.date-function-awareness.sketch-2-common-date-expressions.title",
+      "bodyKey": "sketches.sql.sql_module_5.date-function-awareness.sketch-2-common-date-expressions.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "fb-1-extract-year",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_5.date-function-awareness.quiz.fb-1-extract-year",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "SUBSTR(term, -4)"
+      }
+    },
+    {
+      "id": "fb-2-check-year-equality",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_5.date-function-awareness.quiz.fb-2-check-year-equality",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "SUBSTR(term, -4) = '2026'"
+      }
+    },
+    {
+      "id": "sc-1-sqlite-date-function",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_5.date-function-awareness.quiz.sc-1-sqlite-date-function",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "mc-1-string-vs-date-functions",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_5.date-function-awareness.quiz.mc-1-string-vs-date-functions",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a"
+        ]
+      }
+    },
+    {
+      "id": "ci-1-extract-term-year",
+      "kind": "code_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_5.date-function-awareness.quiz.ci-1-extract-term-year",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table",
+        "solutionCode": "SELECT id, student_id, term, SUBSTR(term, -4) AS year FROM enrollments;"
+      }
+    }
+  ]
+}

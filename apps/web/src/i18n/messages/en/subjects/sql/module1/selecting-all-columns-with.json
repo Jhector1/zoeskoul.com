@@ -1,0 +1,119 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_1": {
+        "selecting-all-columns-with": {
+          "label": "Selecting all columns with *",
+          "summary": "Learn how to use SELECT * to retrieve all columns from a table in SQL. Understand when and why to use SELECT * and practice writing your first queries.",
+          "cards": {
+            "sketch0": {
+              "title": "What does SELECT * do?"
+            },
+            "sketch1": {
+              "title": "When should you use SELECT *?"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_1": {
+        "selecting-all-columns-with": {
+          "sk1": {
+            "title": "What does SELECT * do?",
+            "bodyMarkdown": "In SQL, the asterisk (*) is a shortcut that tells the database to return all columns from a table. For example, if you have a table called `students` with columns `id`, `name`, and `grade`, the query:\n\n```sql\nSELECT * FROM students;\n```\nwill return every column for every row in the `students` table."
+          },
+          "sk2": {
+            "title": "When should you use SELECT *?",
+            "bodyMarkdown": "Using `SELECT *` is helpful when you want to quickly explore a table or see all its data. However, in production code, it's often better to specify only the columns you need, to avoid unnecessary data transfer and to make your queries clearer."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "q1": {
+      "title": "Fill in the blank: Basic SELECT * syntax",
+      "prompt": "Complete the SQL statement to select all columns from the `students` table.",
+      "hint": "Focus on the missing SQL concept rather than the exact missing word.",
+      "help": {
+        "concept": "The blank should be filled with the SQL term that matches the job the statement is trying to perform.",
+        "hint_1": "Think about what the missing part is supposed to do in the statement.",
+        "hint_2": "Choose the SQL term that best completes the meaning of the statement."
+      },
+      "template": "SELECT ___ FROM students;",
+      "choices": [
+        "*",
+        "ALL",
+        "COLUMNS",
+        "EVERYTHING"
+      ]
+    },
+    "q2": {
+      "title": "Fill in the blank: Table name placement",
+      "prompt": "Where does the table name go in a SELECT * statement?",
+      "hint": "It's the name of the table you want data from.",
+      "help": {
+        "concept": "The FROM clause specifies which table to select data from.",
+        "hint_1": "Look for the table name in the FROM part.",
+        "hint_2": "It's the name of the table containing the data you want."
+      },
+      "template": "SELECT * FROM ___;",
+      "choices": [
+        "students",
+        "columns",
+        "*",
+        "SELECT"
+      ]
+    },
+    "q3": {
+      "title": "Why might SELECT * be risky in production?",
+      "prompt": "Why is using SELECT * not recommended in production queries?",
+      "hint": "Think about performance and unnecessary data.",
+      "help": {
+        "concept": "SELECT * returns all columns, which can be inefficient if you only need a few.",
+        "hint_1": "It may transfer more data than necessary.",
+        "hint_2": "It can slow down queries and use more resources."
+      },
+      "options": {
+        "a": "It can return more data than needed, making queries slower.",
+        "b": "It always causes errors.",
+        "c": "It only works with empty tables.",
+        "d": "It deletes data from the table."
+      }
+    },
+    "q4": {
+      "title": "What does SELECT * return?",
+      "prompt": "When you run SELECT * FROM students;, what do you get?",
+      "hint": "Think about the meaning of * in SQL.",
+      "help": {
+        "concept": "SELECT * returns every column for every row in the specified table.",
+        "hint_1": "It does not limit by row or column.",
+        "hint_2": "It returns the full table contents."
+      },
+      "options": {
+        "a": "All columns for all rows in the students table",
+        "b": "Only the first column",
+        "c": "Only the first row",
+        "d": "All columns for only the first row",
+        "e": "All columns for all rows"
+      }
+    },
+    "q5": {
+      "title": "Write a SELECT * query",
+      "prompt": "Write a SQL query to select all columns from the `students` table.",
+      "hint": "Focus on the concept being tested.",
+      "help": {
+        "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+        "hint_1": "Eliminate choices or interpretations that do not match the task.",
+        "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+      },
+      "starterCode": "-- Write your query below"
+    }
+  }
+}

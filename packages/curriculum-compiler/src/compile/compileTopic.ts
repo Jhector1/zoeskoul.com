@@ -1,19 +1,14 @@
 import type { CourseBlueprint } from "@zoeskoul/curriculum-contracts";
 import type { AiProvider } from "@zoeskoul/curriculum-ai";
 import {
-    generateCoursePlan,
     generateTopicAuthoringDraft,
     translateMessages,
 } from "@zoeskoul/curriculum-ai";
 import {
-    getProfileAdapter,
     getProfileServices,
     getSubjectShape,
 } from "@zoeskoul/curriculum-profiles";
 import { validateBlueprint } from "../validate/validateBlueprint.js";
-import { validatePlan } from "../validate/validatePlan.js";
-import { loadSavedPlan } from "../planning/loadSavedPlan.js";
-import { savePlan } from "../planning/savePlan.js";
 import { assertTopicAuthoringDraft } from "../validate/assertTopicAuthoringDraft.js";
 import { buildSubjectManifestFromPlan } from "../emit/buildSubjectManifestFromPlan.js";
 import { buildSubjectMessagesFromPlan } from "../emit/buildSubjectMessagesFromPlan.js";
@@ -24,6 +19,9 @@ import { writeTopicArtifacts } from "../write/writeTopicArtifacts.js";
 import { writeTopicReports } from "../reports/writeTopicReports.js";
 import { evaluateTopicDraft } from "../quality/evaluateTopicDraft.js";
 import type { CompileProgressCallback } from "./compileProgress.js";
+import { resolvePlan } from "../spec/resolvePlan.js";
+import { findTopicPlanNode } from "../plan/findTopicPlanNode.js";
+import { buildTopicSeedFromPlanNode } from "../seeds/buildTopicSeedFromPlanNode.js";
 
 export async function compileTopic(args: {
     blueprint: CourseBlueprint;
@@ -63,27 +61,38 @@ export async function compileTopic(args: {
         topicId: args.topicId,
     });
 
-    let plan = await loadSavedPlan(args.blueprint.subjectSlug);
+    const resolved = await resolvePlan({
+        blueprint: args.blueprint,
+        provider: args.provider,
+    });
 
-    if (!plan) {
+    if (resolved.source === "spec") {
         advanceProgress({
-            stage: "generating course plan",
+            stage: "loaded course spec",
             topicId: args.topicId,
         });
-
-        plan = await generateCoursePlan(args.provider, args.blueprint);
-        validatePlan(plan);
-        await savePlan(args.blueprint.subjectSlug, plan);
-    } else {
-        validatePlan(plan);
+    } else if (resolved.source === "saved_plan") {
         advanceProgress({
             stage: "loaded saved plan",
             topicId: args.topicId,
         });
+    } else {
+        advanceProgress({
+            stage: "generated course plan",
+            topicId: args.topicId,
+        });
+    }
+
+    const node = findTopicPlanNode({
+        plan: resolved.plan,
+        topicId: args.topicId,
+    });
+
+    if (!node) {
+        throw new Error(`Topic not found in resolved course structure: ${args.topicId}`);
     }
 
     const shape = getSubjectShape(args.blueprint.profileId as "sql" | "python");
-    const adapter = getProfileAdapter(args.blueprint.profileId);
     const profileServices = getProfileServices(args.blueprint.profileId);
 
     advanceProgress({
@@ -93,13 +102,13 @@ export async function compileTopic(args: {
 
     const subjectManifest = buildSubjectManifestFromPlan({
         blueprint: args.blueprint,
-        plan,
+        plan: resolved.plan,
         shape,
     });
 
     const sourceSubjectMessages = buildSubjectMessagesFromPlan({
         blueprint: args.blueprint,
-        plan,
+        plan: resolved.plan,
         shape,
     });
 
@@ -132,186 +141,154 @@ export async function compileTopic(args: {
         subjectMessagesByLocale,
     });
 
-    for (const module of plan.modules) {
-        const moduleOrder = module.order - 1;
+    const seed = buildTopicSeedFromPlanNode({
+        blueprint: args.blueprint,
+        spec: resolved.spec,
+        module: node.module,
+        section: node.section,
+        topic: node.topic,
+    });
 
-        for (const section of module.sections) {
-            const sectionOrder = section.order;
+    advanceProgress({
+        stage: "generating topic draft",
+        topicId: node.topic.topicId,
+        moduleSlug: node.module.moduleSlug,
+        sectionSlug: node.section.sectionSlug,
+    });
 
-            for (const topic of section.topics) {
-                if (topic.topicId !== args.topicId) continue;
+    const rawDraft = await generateTopicAuthoringDraft(args.provider, {
+        seed,
+        locale: args.blueprint.sourceLocale,
+        shape,
+    });
 
-                const seed = adapter.buildTopicSeed({
-                    blueprint: args.blueprint,
-                    module: {
-                        slug: module.moduleSlug,
-                        title: module.title,
-                        order: module.order,
-                        purpose: undefined,
-                        learningObjectives: topic.learningGoals,
-                        guidedExercises: [],
-                        quizFocus: [],
-                        moduleProject: undefined,
-                    },
-                    section: {
-                        slug: section.sectionSlug,
-                        title: section.title,
-                        order: section.order,
-                    },
-                    topic: {
-                        topicId: topic.topicId,
-                        order: topic.order,
-                        title: topic.title,
-                        summary: topic.summary,
-                        minutes: topic.minutes,
-                    },
-                });
+    advanceProgress({
+        stage: "evaluating topic draft",
+        topicId: node.topic.topicId,
+        moduleSlug: node.module.moduleSlug,
+        sectionSlug: node.section.sectionSlug,
+    });
 
-                advanceProgress({
-                    stage: "generating topic draft",
-                    topicId: topic.topicId,
-                    moduleSlug: module.moduleSlug,
-                    sectionSlug: section.sectionSlug,
-                });
+    const evaluation = await evaluateTopicDraft({
+        provider: args.provider,
+        seed,
+        rawDraft,
+        profileServices,
+    });
 
-                const rawDraft = await generateTopicAuthoringDraft(args.provider, {
-                    seed,
-                    locale: args.blueprint.sourceLocale,
-                    shape,
-                });
+    const draft = evaluation.draft;
 
-                advanceProgress({
-                    stage: "evaluating topic draft",
-                    topicId: topic.topicId,
-                    moduleSlug: module.moduleSlug,
-                    sectionSlug: section.sectionSlug,
-                });
+    advanceProgress({
+        stage: "validating draft",
+        topicId: node.topic.topicId,
+        moduleSlug: node.module.moduleSlug,
+        sectionSlug: node.section.sectionSlug,
+    });
 
-                const evaluation = await evaluateTopicDraft({
-                    provider: args.provider,
-                    seed,
-                    rawDraft,
-                    profileServices,
-                });
+    assertTopicAuthoringDraft(draft);
 
-                const draft = evaluation.draft;
-
-                advanceProgress({
-                    stage: "validating draft",
-                    topicId: topic.topicId,
-                    moduleSlug: module.moduleSlug,
-                    sectionSlug: section.sectionSlug,
-                });
-
-                assertTopicAuthoringDraft(draft);
-
-                if (!evaluation.critiqueReport.ok) {
-                    const critiqueErrors = evaluation.critiqueReport.issues.filter(
-                        (issue) => issue.severity === "error",
-                    );
-                    if (critiqueErrors.length) {
-                        throw new Error(
-                            `Critique failed:\n${critiqueErrors.map((x) => `- ${x.message}`).join("\n")}`,
-                        );
-                    }
-                }
-
-                if (!evaluation.semanticReport.ok) {
-                    const semanticErrors = evaluation.semanticReport.issues.filter(
-                        (issue) => issue.severity === "error",
-                    );
-                    if (semanticErrors.length) {
-                        throw new Error(
-                            `Semantic validation failed:\n${semanticErrors
-                                .map((x) => `- ${x.message}`)
-                                .join("\n")}`,
-                        );
-                    }
-                }
-
-                advanceProgress({
-                    stage: "building topic bundle",
-                    topicId: topic.topicId,
-                    moduleSlug: module.moduleSlug,
-                    sectionSlug: section.sectionSlug,
-                });
-
-                const topicBundle = buildTopicBundleFromDraft({
-                    shape,
-                    seed,
-                    draft,
-                    moduleOrder,
-                    sectionOrder,
-                });
-
-                const sourceMessages = buildMessagesFromDraft({
-                    shape,
-                    seed,
-                    draft,
-                    moduleOrder,
-                });
-
-                const messagesByLocale: Record<string, Record<string, unknown>> = {
-                    [args.blueprint.sourceLocale]: sourceMessages,
-                };
-
-                for (const locale of extraLocales) {
-                    advanceProgress({
-                        stage: `translating topic messages (${locale})`,
-                        topicId: topic.topicId,
-                        moduleSlug: module.moduleSlug,
-                        sectionSlug: section.sectionSlug,
-                    });
-
-                    messagesByLocale[locale] = await translateMessages(args.provider, {
-                        shape,
-                        sourceLocale: args.blueprint.sourceLocale,
-                        locale,
-                        sourceMessages,
-                    });
-                }
-
-                advanceProgress({
-                    stage: "writing topic artifacts",
-                    topicId: topic.topicId,
-                    moduleSlug: module.moduleSlug,
-                    sectionSlug: section.sectionSlug,
-                });
-
-                await writeTopicArtifacts({
-                    subjectSlug: args.blueprint.subjectSlug,
-                    moduleOrder,
-                    topicId: topic.topicId,
-                    topicBundle,
-                    messagesByLocale,
-                });
-
-                await writeTopicReports({
-                    subjectSlug: args.blueprint.subjectSlug,
-                    moduleOrder,
-                    topicId: topic.topicId,
-                    rawDraft,
-                    repairedDraft: draft,
-                    repairReport: evaluation.repairReport,
-                    critiqueReport: evaluation.critiqueReport,
-                    semanticReport: evaluation.semanticReport,
-                    topicBundle,
-                });
-
-                advanceProgress({
-                    stage: "completed topic",
-                    topicId: topic.topicId,
-                    moduleSlug: module.moduleSlug,
-                    sectionSlug: section.sectionSlug,
-                });
-
-                return {
-                    topicId: topic.topicId,
-                    subjectSlug: args.blueprint.subjectSlug,
-                };
-            }
+    if (!evaluation.critiqueReport.ok) {
+        const critiqueErrors = evaluation.critiqueReport.issues.filter(
+            (issue) => issue.severity === "error",
+        );
+        if (critiqueErrors.length) {
+            throw new Error(
+                `Critique failed:\n${critiqueErrors.map((x) => `- ${x.message}`).join("\n")}`,
+            );
         }
     }
 
-    throw new Error(`Topic not found in saved/generated plan: ${args.topicId}`);
+    if (!evaluation.semanticReport.ok) {
+        const semanticErrors = evaluation.semanticReport.issues.filter(
+            (issue) => issue.severity === "error",
+        );
+        if (semanticErrors.length) {
+            throw new Error(
+                `Semantic validation failed:\n${semanticErrors
+                    .map((x) => `- ${x.message}`)
+                    .join("\n")}`,
+            );
+        }
+    }
+
+    advanceProgress({
+        stage: "building topic bundle",
+        topicId: node.topic.topicId,
+        moduleSlug: node.module.moduleSlug,
+        sectionSlug: node.section.sectionSlug,
+    });
+
+    const topicBundle = buildTopicBundleFromDraft({
+        shape,
+        seed,
+        draft,
+        moduleOrder: node.moduleIndex,
+        sectionOrder: node.sectionOrder,
+    });
+
+    const sourceMessages = buildMessagesFromDraft({
+        shape,
+        seed,
+        draft,
+        moduleOrder: node.moduleIndex,
+    });
+
+    const messagesByLocale: Record<string, Record<string, unknown>> = {
+        [args.blueprint.sourceLocale]: sourceMessages,
+    };
+
+    for (const locale of extraLocales) {
+        advanceProgress({
+            stage: `translating topic messages (${locale})`,
+            topicId: node.topic.topicId,
+            moduleSlug: node.module.moduleSlug,
+            sectionSlug: node.section.sectionSlug,
+        });
+
+        messagesByLocale[locale] = await translateMessages(args.provider, {
+            shape,
+            sourceLocale: args.blueprint.sourceLocale,
+            locale,
+            sourceMessages,
+        });
+    }
+
+    advanceProgress({
+        stage: "writing topic artifacts",
+        topicId: node.topic.topicId,
+        moduleSlug: node.module.moduleSlug,
+        sectionSlug: node.section.sectionSlug,
+    });
+
+    await writeTopicArtifacts({
+        subjectSlug: args.blueprint.subjectSlug,
+        moduleOrder: node.moduleIndex,
+        topicId: node.topic.topicId,
+        topicBundle,
+        messagesByLocale,
+    });
+
+    await writeTopicReports({
+        subjectSlug: args.blueprint.subjectSlug,
+        moduleOrder: node.moduleIndex,
+        topicId: node.topic.topicId,
+        rawDraft,
+        repairedDraft: draft,
+        repairReport: evaluation.repairReport,
+        critiqueReport: evaluation.critiqueReport,
+        semanticReport: evaluation.semanticReport,
+        topicBundle,
+    });
+
+    advanceProgress({
+        stage: "completed topic",
+        topicId: node.topic.topicId,
+        moduleSlug: node.module.moduleSlug,
+        sectionSlug: node.section.sectionSlug,
+    });
+
+    return {
+        topicId: node.topic.topicId,
+        subjectSlug: args.blueprint.subjectSlug,
+    };
 }

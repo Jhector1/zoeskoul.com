@@ -12,9 +12,13 @@ import type {
 import { repairIncompleteExercises } from "../normalize/repairIncompleteExercises.js";
 import { normalizeTopicAuthoringDraft } from "../normalize/normalizeTopicAuthoringDraft.js";
 import { repairTopicAuthoringDraft } from "../normalize/repairTopicAuthoringDraft.js";
+import { sanitizeHintLeaksInDraft } from "../normalize/sanitizeHintLeaksInDraft.js";
 import { validateExerciseHints } from "../validate/validateExerciseHints.js";
 import { buildHintCritiqueIssues } from "./buildHintCritiqueIssues.js";
 import { mergeCritiqueReports } from "./mergeCritiqueReports.js";
+import { buildExercisePolicyCritiqueIssues } from "./buildExercisePolicyCritiqueIssues.js";
+import { buildMultiChoiceCompletenessIssues } from "./buildMultiChoiceCompletenessIssues.js";
+import { buildFillBlankSingleBlankIssues } from "./buildFillBlankSingleBlankIssues.js";
 
 function makeBaseRepairReport(topicId: string): RepairReport {
     return {
@@ -51,16 +55,38 @@ export async function evaluateTopicDraft(args: {
     });
 
     draft = repairTopicAuthoringDraft(draft);
+    draft = sanitizeHintLeaksInDraft(draft);
 
     const profileRepairResult = await args.profileServices.repairDraft({
         seed: args.seed,
         draft,
     });
 
-    draft = profileRepairResult.draft;
+    draft = await repairIncompleteExercises({
+        provider: args.provider,
+        seed: args.seed,
+        draft: profileRepairResult.draft,
+    });
+
+    draft = repairTopicAuthoringDraft(draft);
+    draft = sanitizeHintLeaksInDraft(draft);
 
     const hintWarnings = validateExerciseHints(draft);
     const hintCritiqueIssues = buildHintCritiqueIssues(hintWarnings);
+
+    const policyCritiqueIssues = buildExercisePolicyCritiqueIssues({
+        draft,
+        policy: args.seed.exercisePolicy,
+        plannedCounts: args.seed.plannedExerciseCounts,
+    });
+
+    const multiChoiceCompletenessIssues = buildMultiChoiceCompletenessIssues({
+        draft,
+    });
+
+    const fillBlankSingleBlankIssues = buildFillBlankSingleBlankIssues({
+        draft,
+    });
 
     const profileCritiqueReport = await args.profileServices.critiqueDraft({
         seed: args.seed,
@@ -70,7 +96,12 @@ export async function evaluateTopicDraft(args: {
     const critiqueReport = mergeCritiqueReports({
         topicId: args.seed.topicId,
         reports: [profileCritiqueReport],
-        extraIssues: hintCritiqueIssues,
+        extraIssues: [
+            ...hintCritiqueIssues,
+            ...policyCritiqueIssues,
+            ...multiChoiceCompletenessIssues,
+            ...fillBlankSingleBlankIssues,
+        ],
     });
 
     const semanticReport = await args.profileServices.validateSemantic({

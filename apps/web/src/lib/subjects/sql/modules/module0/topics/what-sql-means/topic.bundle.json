@@ -1,0 +1,146 @@
+{
+  "topicId": "what-sql-means",
+  "subjectSlug": "sql",
+  "moduleSlug": "sql_module_0",
+  "sectionSlug": "section_0_1",
+  "prefix": "sql0",
+  "minutes": 15,
+  "topic": {
+    "labelKey": "topics.sql.sql_module_0.what-sql-means.label",
+    "summaryKey": "topics.sql.sql_module_0.what-sql-means.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_0.what-sql-means.cards.sketch0.title",
+      "sketchId": "sketch-1",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_0.what-sql-means.cards.sketch1.title",
+      "sketchId": "sketch-2",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_0.what-sql-means.cards.sketch2.title",
+      "sketchId": "sketch-3",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql.sql_module_0.what-sql-means.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch-1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_0.what-sql-means.sketch-1.title",
+      "bodyKey": "sketches.sql.sql_module_0.what-sql-means.sketch-1.bodyMarkdown"
+    },
+    {
+      "id": "sketch-2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_0.what-sql-means.sketch-2.title",
+      "bodyKey": "sketches.sql.sql_module_0.what-sql-means.sketch-2.bodyMarkdown"
+    },
+    {
+      "id": "sketch-3",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_0.what-sql-means.sketch-3.title",
+      "bodyKey": "sketches.sql.sql_module_0.what-sql-means.sketch-3.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "q1-fill-blank-sql-abbreviation",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_0.what-sql-means.quiz.q1-fill-blank-sql-abbreviation",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "Structured Query Language"
+      }
+    },
+    {
+      "id": "q2-fill-blank-table-parts",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_0.what-sql-means.quiz.q2-fill-blank-table-parts",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "row"
+      }
+    },
+    {
+      "id": "q3-single-choice-sql-purpose",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_0.what-sql-means.quiz.q3-single-choice-sql-purpose",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "q4-multi-choice-table-vs-spreadsheet",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_0.what-sql-means.quiz.q4-multi-choice-table-vs-spreadsheet",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "q5-code-input-simple-select",
+      "kind": "code_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_0.what-sql-means.quiz.q5-code-input-simple-select",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "SELECT * FROM products_catalog;"
+      }
+    }
+  ]
+}

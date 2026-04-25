@@ -1,0 +1,125 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_5": {
+        "math-in-sql": {
+          "label": "Math in SQL",
+          "summary": "Math in SQL in Calculated Columns and SQL Expressions",
+          "cards": {
+            "sketch0": {
+              "title": "Using Math in SQL Queries"
+            },
+            "sketch1": {
+              "title": "Combining Columns and Numbers"
+            },
+            "sketch2": {
+              "title": "Using Aliases for Readability"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "quiz": {
+            "q1": {
+              "title": "Simple Arithmetic in SELECT",
+              "prompt": "Choose the best value for the missing blank in the statement.",
+              "hint": "Think about how to add a number to a column.",
+              "help": {
+                "concept": "You can use arithmetic operators like +, -, *, and / in SQL expressions to calculate new values from columns.",
+                "hint_1": "Adding 2 to a column uses the + operator.",
+                "hint_2": "The correct expression adds 2 to the grade_level column."
+              },
+              "template": "The missing value is [blank1].",
+              "choices": [
+                "grade_level + 2",
+                "grade_level - 2",
+                "grade_level * 2",
+                "grade_level / 2"
+              ]
+            },
+            "q2": {
+              "title": "Using Aliases",
+              "prompt": "What is the alias in this SQL statement?\n\n```sql\nSELECT name, grade_level * 2 AS double_grade FROM students;\n```",
+              "hint": "The alias comes after the AS keyword.",
+              "help": {
+                "concept": "An alias is a temporary name given to a column or table in a SQL query for readability.",
+                "hint_1": "Look for the word after AS in the SELECT statement.",
+                "hint_2": "The calculated column is given a new name using AS."
+              },
+              "template": "The alias for the calculated column is __.",
+              "choices": [
+                "double_grade",
+                "grade_level",
+                "students",
+                "name"
+              ]
+            },
+            "q3": {
+              "title": "Purpose of Expressions in SQL",
+              "prompt": "Why would you use an expression like `grade_level + 1` in a SELECT statement?",
+              "hint": "Think about what happens when you add 1 to a column in the SELECT list.",
+              "help": {
+                "concept": "Expressions in SQL allow you to calculate new values from existing columns directly in your query results.",
+                "hint_1": "Adding 1 to a column creates a new value for each row.",
+                "hint_2": "Expressions are used to generate new columns or values in the result set."
+              },
+              "options": {
+                "a": "To create a new value based on existing data",
+                "b": "To rename a column",
+                "c": "To filter rows",
+                "d": "To join tables"
+              }
+            },
+            "q4": {
+              "title": "Valid SQL Expressions",
+              "prompt": "Which of the following are valid SQL expressions you could use in a SELECT clause? (Choose all that apply.)",
+              "hint": "Consider which expressions make sense for a numeric column.",
+              "help": {
+                "concept": "SQL expressions can use arithmetic operators on numeric columns. Adding a number to a text column is not valid.",
+                "hint_1": "You can subtract, multiply, or divide numbers with numeric columns.",
+                "hint_2": "You cannot add a number to a text column like 'name'."
+              },
+              "options": {
+                "a": "grade_level - 1",
+                "b": "grade_level * 3",
+                "c": "name + 1",
+                "d": "grade_level / 2"
+              }
+            },
+            "q5": {
+              "title": "Write a Query with a Calculated Column",
+              "prompt": "Write a SQL query to show each student's name and their grade level divided by 2, labeled as `half_grade`.",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+                "hint_1": "Eliminate choices or interpretations that do not match the task.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "starterCode": "-- Write your query below"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_5": {
+        "math-in-sql": {
+          "sk1": {
+            "title": "Using Math in SQL Queries",
+            "bodyMarkdown": "SQL lets you do math directly in your SELECT statements. For example, you can add, subtract, multiply, or divide columns or numbers. This is useful for creating new values from your data. For instance, if you want to show the next grade level for each student, you can add 1 to the `grade_level` column:\n\n```sql\nSELECT name, grade_level, grade_level + 1 AS next_grade\nFROM students;\n```\n\nThis query lists each student's name, their current grade, and what their grade will be next year."
+          },
+          "sk2": {
+            "title": "Combining Columns and Numbers",
+            "bodyMarkdown": "You can combine columns with numbers or other columns in SQL expressions. For example, if you want to show a student's grade level doubled, you can multiply the column by 2:\n\n```sql\nSELECT name, grade_level, grade_level * 2 AS double_grade\nFROM students;\n```\n\nThis creates a new column called `double_grade` in the result."
+          },
+          "sk3": {
+            "title": "Using Aliases for Readability",
+            "bodyMarkdown": "When you create new values in your SELECT statement, it's helpful to give them clear names using the `AS` keyword. These names are called aliases. For example:\n\n```sql\nSELECT name, grade_level + 1 AS next_grade\nFROM students;\n```\n\nHere, `next_grade` is an alias for the calculated column."
+          }
+        }
+      }
+    }
+  }
+}

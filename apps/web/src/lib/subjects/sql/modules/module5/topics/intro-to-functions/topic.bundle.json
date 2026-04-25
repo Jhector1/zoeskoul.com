@@ -1,0 +1,144 @@
+{
+  "topicId": "intro-to-functions",
+  "subjectSlug": "sql",
+  "moduleSlug": "sql_module_5",
+  "sectionSlug": "section_5_3",
+  "prefix": "sql5",
+  "minutes": 15,
+  "topic": {
+    "labelKey": "topics.sql.sql_module_5.intro-to-functions.label",
+    "summaryKey": "topics.sql.sql_module_5.intro-to-functions.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_5.intro-to-functions.cards.sketch0.title",
+      "sketchId": "sketch-what-are-functions",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_5.intro-to-functions.cards.sketch1.title",
+      "sketchId": "sketch-simple-function-example",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_5.intro-to-functions.cards.sketch2.title",
+      "sketchId": "sketch-multiple-functions",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql.sql_module_5.intro-to-functions.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch-what-are-functions",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_5.intro-to-functions.sketch-what-are-functions.title",
+      "bodyKey": "sketches.sql.sql_module_5.intro-to-functions.sketch-what-are-functions.bodyMarkdown"
+    },
+    {
+      "id": "sketch-simple-function-example",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_5.intro-to-functions.sketch-simple-function-example.title",
+      "bodyKey": "sketches.sql.sql_module_5.intro-to-functions.sketch-simple-function-example.bodyMarkdown"
+    },
+    {
+      "id": "sketch-multiple-functions",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_5.intro-to-functions.sketch-multiple-functions.title",
+      "bodyKey": "sketches.sql.sql_module_5.intro-to-functions.sketch-multiple-functions.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "fillblank-func-purpose",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_5.intro-to-functions.quiz.fillblank-func-purpose",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "transform"
+      }
+    },
+    {
+      "id": "fillblank-max-grade",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_5.intro-to-functions.quiz.fillblank-max-grade",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "MAX"
+      }
+    },
+    {
+      "id": "singlechoice-func-location",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_5.intro-to-functions.quiz.singlechoice-func-location",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "multichoice-simple-functions",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_5.intro-to-functions.quiz.multichoice-simple-functions",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a"
+        ]
+      }
+    },
+    {
+      "id": "codeinput-select-max-grade",
+      "kind": "code_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_5.intro-to-functions.quiz.codeinput-select-max-grade",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table",
+        "solutionCode": "SELECT MAX(grade_level) FROM students;"
+      }
+    }
+  ]
+}

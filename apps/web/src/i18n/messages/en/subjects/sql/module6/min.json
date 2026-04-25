@@ -1,0 +1,118 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_6": {
+        "min": {
+          "label": "MIN()",
+          "summary": "Learn how to use the MIN() aggregate function in SQL to find the smallest value in a column, with practical examples using the inventory_items table.",
+          "cards": {
+            "sketch0": {
+              "title": "What Does MIN() Do?"
+            },
+            "sketch1": {
+              "title": "MIN() with Filtering"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "quiz": {
+            "q1": {
+              "title": "Basic MIN() Syntax",
+              "prompt": "Which SQL keyword completes this statement to find the lowest price?\n\nSELECT ___(price) FROM inventory_items;",
+              "hint": "Focus on the missing SQL concept rather than the exact missing word.",
+              "help": {
+                "concept": "The blank should be filled with the SQL term that matches the job the statement is trying to perform.",
+                "hint_1": "Think about what the missing part is supposed to do in the statement.",
+                "hint_2": "Choose the SQL term that best completes the meaning of the statement."
+              },
+              "template": "SELECT {blank}(price) FROM inventory_items;",
+              "choices": [
+                "MIN",
+                "MAX",
+                "AVG",
+                "COUNT"
+              ]
+            },
+            "q2": {
+              "title": "MIN() with WHERE Clause",
+              "prompt": "Fill in the blank to find the minimum price for items in the 'Kitchen' category:\n\nSELECT MIN(price) FROM inventory_items WHERE category = ___;",
+              "hint": "Focus on the missing SQL concept rather than the exact missing word.",
+              "help": {
+                "concept": "The blank should be filled with the SQL term that matches the job the statement is trying to perform.",
+                "hint_1": "Think about what the missing part is supposed to do in the statement.",
+                "hint_2": "Choose the SQL term that best completes the meaning of the statement."
+              },
+              "template": "SELECT MIN(price) FROM inventory_items WHERE category = {blank};",
+              "choices": [
+                "'Kitchen'",
+                "'Decor'",
+                "'Accessories'",
+                "'active'"
+              ]
+            },
+            "q3": {
+              "title": "Understanding MIN() Output",
+              "prompt": "What does the following query return?\n\nSELECT MIN(price) FROM inventory_items WHERE status = 'active';",
+              "hint": "Focus on what MIN() does and the effect of the WHERE clause.",
+              "help": {
+                "concept": "MIN() returns the smallest value in the selected rows.",
+                "hint_1": "The WHERE clause limits the rows to those with status 'active'.",
+                "hint_2": "The query finds the minimum price for only active items."
+              },
+              "options": {
+                "a": "The lowest price among items with status 'active'",
+                "b": "The highest price among all items",
+                "c": "The number of active items",
+                "d": "The average price of active items"
+              }
+            },
+            "q4": {
+              "title": "When to Use MIN()",
+              "prompt": "In which scenarios would using MIN() be appropriate? Select all that apply.",
+              "hint": "Think about cases where you want the smallest value.",
+              "help": {
+                "concept": "MIN() is used to find the smallest value in a column, such as lowest price or earliest date.",
+                "hint_1": "Look for scenarios involving minimums or earliest values.",
+                "hint_2": "MIN() is not for counting or finding the maximum."
+              },
+              "options": {
+                "a": "Finding the cheapest item in inventory",
+                "b": "Finding the most expensive item in inventory",
+                "c": "Finding the earliest date in a list of updates",
+                "d": "Counting the number of items in a category"
+              }
+            },
+            "q5": {
+              "title": "Write a Query Using MIN()",
+              "prompt": "Write a SQL query to find the name and price of the item with the lowest price in the inventory_items table.",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+                "hint_1": "Eliminate choices or interpretations that do not match the task.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "starterCode": "-- Write your query below"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_6": {
+        "min": {
+          "sk1": {
+            "title": "What Does MIN() Do?",
+            "bodyMarkdown": "The `MIN()` function in SQL returns the smallest value from a set of values in a column. It's commonly used to find the lowest price, earliest date, or minimum value in a dataset. For example, to find the lowest price among all inventory items:\n\n```sql\nSELECT MIN(price) FROM inventory_items;\n```\nThis query will return the smallest price from the `price` column in the `inventory_items` table."
+          },
+          "sk2": {
+            "title": "MIN() with Filtering",
+            "bodyMarkdown": "You can combine `MIN()` with a `WHERE` clause to find the minimum value in a filtered subset of rows. For example, to find the lowest price among only the 'active' items:\n\n```sql\nSELECT MIN(price) FROM inventory_items WHERE status = 'active';\n```\nThis query returns the smallest price for items where the status is 'active'."
+          }
+        }
+      }
+    }
+  }
+}

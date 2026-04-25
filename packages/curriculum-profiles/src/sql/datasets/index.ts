@@ -31,7 +31,7 @@ export function getSqlDataset(datasetId: string | null | undefined) {
 
 
 export function getSqlDatasetById(datasetId: string): SqlDatasetArtifact | null {
-    return SQL_DATASETS[datasetId] ?? null;
+    return getSqlDataset(datasetId);
 }
 
 export function listSqlDatasetIds(): string[] {

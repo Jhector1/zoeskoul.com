@@ -1,0 +1,125 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_2": {
+        "or": {
+          "label": "!= or <>",
+          "summary": "Learn how to use the SQL 'not equal to' operators (!= and <>) to filter data in WHERE clauses.",
+          "cards": {
+            "sketch0": {
+              "title": "What are != and <> in SQL?"
+            },
+            "sketch1": {
+              "title": "Example: Filtering with !="
+            },
+            "sketch2": {
+              "title": "!= vs <>: Are They Different?"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_2": {
+        "or": {
+          "sk1": {
+            "title": "What are != and <> in SQL?",
+            "bodyMarkdown": "In SQL, the operators `!=` and `<>` are both used to mean 'not equal to'. You can use either one in a WHERE clause to filter out rows where a column matches a specific value. For example, `WHERE status != 'active'` will select all rows where the status is not 'active'."
+          },
+          "sk2": {
+            "title": "Example: Filtering with !=",
+            "bodyMarkdown": "Suppose you have a table called `products_catalog` with a column `category`. To find all products that are not in the 'Electronics' category, you could write:\n\n```sql\nSELECT * FROM products_catalog WHERE category != 'Electronics';\n```\n\nYou could also use `<>` instead of `!=` for the same result."
+          },
+          "sk3": {
+            "title": "!= vs <>: Are They Different?",
+            "bodyMarkdown": "Both `!=` and `<>` do the same thing in SQL—they check if two values are not equal. Some databases prefer one over the other, but in most cases, you can use either. In SQLite (the system used here), both are accepted."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "q1": {
+      "title": "Choose the correct operator for 'not equal to'",
+      "prompt": "Which of the following operators can be used in SQL to mean 'not equal to'?",
+      "hint": "Focus on the missing SQL concept rather than the exact missing word.",
+      "help": {
+        "concept": "The blank should be filled with the SQL term that matches the job the statement is trying to perform.",
+        "hint_1": "Think about what the missing part is supposed to do in the statement.",
+        "hint_2": "Choose the SQL term that best completes the meaning of the statement."
+      },
+      "template": "SELECT * FROM products_catalog WHERE category ___ 'Toys';",
+      "choices": [
+        "=",
+        "!=",
+        "<>",
+        "=="
+      ]
+    },
+    "q2": {
+      "title": "Alternative 'not equal to' operator",
+      "prompt": "Fill in the blank with another valid 'not equal to' operator in SQL.",
+      "hint": "Focus on the missing SQL concept rather than the exact missing word.",
+      "help": {
+        "concept": "The blank should be filled with the SQL term that matches the job the statement is trying to perform.",
+        "hint_1": "Think about what the missing part is supposed to do in the statement.",
+        "hint_2": "Choose the SQL term that best completes the meaning of the statement."
+      },
+      "template": "SELECT * FROM products_catalog WHERE price ___ 100;",
+      "choices": [
+        "<>",
+        "==",
+        "===",
+        "><"
+      ]
+    },
+    "q3": {
+      "title": "Understanding != and <>",
+      "prompt": "What is the result of the following query?\n\n```sql\nSELECT * FROM products_catalog WHERE category != 'Books';\n```",
+      "hint": "!= means 'not equal to'.",
+      "help": {
+        "concept": "The '!=' operator filters out rows where the column matches the given value.",
+        "hint_1": "Rows with category 'Books' are excluded.",
+        "hint_2": "The query returns all products except those in the 'Books' category."
+      },
+      "options": {
+        "a": "It selects only products in the 'Books' category.",
+        "b": "It selects all products except those in the 'Books' category.",
+        "c": "It selects nothing.",
+        "d": "It selects only products with category 'Books' or 'Magazines'."
+      }
+    },
+    "q4": {
+      "title": "Valid 'not equal to' operators in SQL",
+      "prompt": "Which of the following are valid ways to write 'not equal to' in a SQL WHERE clause?",
+      "hint": "Focus on the main concept being tested and eliminate choices that describe something different.",
+      "help": {
+        "concept": "Choose the option that matches the core idea described in the question without relying on repeated wording from the answer choices.",
+        "hint_1": "Rule out options that describe a different role, behavior, or SQL concept than the question is testing.",
+        "hint_2": "Pick the option that best matches the concept, not the one that simply repeats familiar wording."
+      },
+      "options": {
+        "a": "!=",
+        "b": "<>",
+        "c": "==",
+        "d": "!=="
+      }
+    },
+    "q5": {
+      "title": "Write a query using 'not equal to'",
+      "prompt": "Write a SQL query to select all products from `products_catalog` where the `stock` is not equal to 0.",
+      "hint": "Focus on the concept being tested.",
+      "help": {
+        "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+        "hint_1": "Eliminate choices or interpretations that do not match the task.",
+        "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+      },
+      "starterCode": "-- Write your SQL query below"
+    }
+  }
+}

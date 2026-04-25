@@ -4,22 +4,23 @@ type DraftQuizItem = TopicAuthoringDraft["quizDraft"][number];
 type DraftHelp = DraftQuizItem["help"];
 
 function asOptionalString(value: unknown): string | undefined {
-    return typeof value === "string" && value.trim() ? value : undefined;
+    return typeof value === "string" && value.trim() ? value.trim() : undefined;
 }
+
 function normalizeOptionText(value: unknown): string {
-    if (typeof value === "string") return value;
+    if (typeof value === "string") return value.trim();
 
     if (value && typeof value === "object") {
         const obj = value as Record<string, unknown>;
 
-        if (typeof obj.text === "string") return obj.text;
-        if (typeof obj.label === "string") return obj.label;
-        if (typeof obj.value === "string") return obj.value;
-        if (typeof obj.title === "string") return obj.title;
-        if (typeof obj.name === "string") return obj.name;
+        if (typeof obj.text === "string") return obj.text.trim();
+        if (typeof obj.label === "string") return obj.label.trim();
+        if (typeof obj.value === "string") return obj.value.trim();
+        if (typeof obj.title === "string") return obj.title.trim();
+        if (typeof obj.name === "string") return obj.name.trim();
     }
 
-    return String(value);
+    return String(value).trim();
 }
 
 function normalizeOptionsArray(
@@ -27,13 +28,14 @@ function normalizeOptionsArray(
     rawOptionIds: unknown[],
 ): string[] {
     if (rawOptions.length > 0) {
-        return rawOptions.map(normalizeOptionText);
+        return rawOptions.map(normalizeOptionText).filter(Boolean);
     }
 
-    return rawOptionIds.map((x) =>
-        String(x).replace(/^option-/, "").replace(/-/g, " "),
-    );
+    return rawOptionIds
+        .map((x) => String(x).replace(/^option-/, "").replace(/-/g, " ").trim())
+        .filter(Boolean);
 }
+
 function fallbackHint(title: string, kind: DraftQuizItem["kind"]): string {
     switch (kind) {
         case "single_choice":
@@ -115,6 +117,19 @@ function normalizeHelp(
             legacyHint2 ??
             fallback.hint_2,
     };
+}
+
+function escapeRegExp(value: string): string {
+    return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function sanitizeFillBlankText(text: string, correctValue: string): string {
+    if (!text.trim() || !correctValue.trim()) return text;
+
+    const re = new RegExp(`\\b${escapeRegExp(correctValue)}\\b`, "gi");
+    if (!re.test(text)) return text;
+
+    return text.replace(re, "the missing term");
 }
 
 function normalizeSingleChoice(item: Record<string, unknown>): DraftQuizItem {
@@ -218,7 +233,7 @@ function normalizeSingleChoice(item: Record<string, unknown>): DraftQuizItem {
     }
 
     return {
-        id: String(item.id ?? ""),
+        id: String(item.id ?? "").trim(),
         kind: "single_choice",
         title,
         prompt,
@@ -228,6 +243,7 @@ function normalizeSingleChoice(item: Record<string, unknown>): DraftQuizItem {
         help: normalizeHelp(item, title, "single_choice"),
     };
 }
+
 function normalizeMultiChoice(item: Record<string, unknown>): DraftQuizItem {
     const title =
         asOptionalString(item.title) ??
@@ -243,12 +259,7 @@ function normalizeMultiChoice(item: Record<string, unknown>): DraftQuizItem {
     const rawOptionIds = Array.isArray(item.optionIds) ? item.optionIds : [];
     const rawOptions = Array.isArray(item.options) ? item.options : [];
 
-    const options =
-        rawOptions.length > 0
-            ? rawOptions.map(String)
-            : rawOptionIds.map((x) =>
-                String(x).replace(/^option-/, "").replace(/-/g, " "),
-            );
+    const options = normalizeOptionsArray(rawOptions, rawOptionIds);
 
     const canonicalOptionIds = options.map((_, index) =>
         String.fromCharCode(97 + index),
@@ -258,7 +269,7 @@ function normalizeMultiChoice(item: Record<string, unknown>): DraftQuizItem {
 
     if (Array.isArray(item.correctOptionIds)) {
         correctOptionIds = item.correctOptionIds
-            .map((value) => String(value))
+            .map((value) => String(value).trim())
             .filter((value) => canonicalOptionIds.includes(value));
     }
 
@@ -271,12 +282,12 @@ function normalizeMultiChoice(item: Record<string, unknown>): DraftQuizItem {
         correctOptionIds = (
             (item.expected as Record<string, unknown>).optionIds as unknown[]
         )
-            .map((value) => String(value))
+            .map((value) => String(value).trim())
             .filter((value) => canonicalOptionIds.includes(value));
     }
 
     if (correctOptionIds.length === 0 && Array.isArray(item.expected)) {
-        const expectedValues = item.expected.map(String);
+        const expectedValues = item.expected.map((x) => String(x).trim());
 
         const idMatches = expectedValues.filter((value) =>
             canonicalOptionIds.includes(value),
@@ -296,7 +307,7 @@ function normalizeMultiChoice(item: Record<string, unknown>): DraftQuizItem {
     }
 
     if (correctOptionIds.length === 0 && Array.isArray(item.correctOptions)) {
-        const correctTexts = item.correctOptions.map(String);
+        const correctTexts = item.correctOptions.map((x) => String(x).trim());
         correctOptionIds = options
             .map((option, index) => ({
                 option,
@@ -307,7 +318,7 @@ function normalizeMultiChoice(item: Record<string, unknown>): DraftQuizItem {
     }
 
     if (correctOptionIds.length === 0 && Array.isArray(item.expectedTexts)) {
-        const expectedTexts = item.expectedTexts.map(String);
+        const expectedTexts = item.expectedTexts.map((x) => String(x).trim());
         correctOptionIds = options
             .map((option, index) => ({
                 option,
@@ -318,7 +329,7 @@ function normalizeMultiChoice(item: Record<string, unknown>): DraftQuizItem {
     }
 
     return {
-        id: String(item.id ?? ""),
+        id: String(item.id ?? "").trim(),
         kind: "multi_choice",
         title,
         prompt,
@@ -327,7 +338,9 @@ function normalizeMultiChoice(item: Record<string, unknown>): DraftQuizItem {
         hint: asOptionalString(item.hint) ?? fallbackHint(title, "multi_choice"),
         help: normalizeHelp(item, title, "multi_choice"),
     };
-}function normalizeDragReorder(item: Record<string, unknown>): DraftQuizItem {
+}
+
+function normalizeDragReorder(item: Record<string, unknown>): DraftQuizItem {
     const title =
         asOptionalString(item.title) ??
         asOptionalString(item.messageBase) ??
@@ -340,21 +353,25 @@ function normalizeMultiChoice(item: Record<string, unknown>): DraftQuizItem {
         title;
 
     return {
-        id: String(item.id ?? ""),
+        id: String(item.id ?? "").trim(),
         kind: "drag_reorder",
         title,
         prompt,
         tokens: Array.isArray(item.tokens)
-            ? item.tokens.map(String)
+            ? item.tokens.map((x) => String(x).trim()).filter(Boolean)
             : item.tokens && typeof item.tokens === "object"
-                ? Object.values(item.tokens as Record<string, unknown>).map(String)
+                ? Object.values(item.tokens as Record<string, unknown>)
+                    .map((x) => String(x).trim())
+                    .filter(Boolean)
                 : [],
         correctOrder: Array.isArray(item.correctOrder)
-            ? item.correctOrder.map(String)
+            ? item.correctOrder.map((x) => String(x).trim()).filter(Boolean)
             : Array.isArray(item.expected)
-                ? item.expected.map(String)
+                ? item.expected.map((x) => String(x).trim()).filter(Boolean)
                 : item.expected && typeof item.expected === "object"
-                    ? Object.values(item.expected as Record<string, unknown>).map(String)
+                    ? Object.values(item.expected as Record<string, unknown>)
+                        .map((x) => String(x).trim())
+                        .filter(Boolean)
                     : [],
         hint: asOptionalString(item.hint) ?? fallbackHint(title, "drag_reorder"),
         help: normalizeHelp(item, title, "drag_reorder"),
@@ -375,25 +392,27 @@ function normalizeFillBlankChoice(item: Record<string, unknown>): DraftQuizItem 
 
     const correctValue =
         typeof item.correctValue === "string"
-            ? item.correctValue
+            ? item.correctValue.trim()
             : typeof item.correct === "string"
-                ? item.correct
+                ? item.correct.trim()
                 : typeof item.expected === "string"
-                    ? item.expected
+                    ? item.expected.trim()
                     : "";
 
     const rawHelp = normalizeHelp(item, title, "fill_blank_choice");
 
     return {
-        id: String(item.id ?? ""),
+        id: String(item.id ?? "").trim(),
         kind: "fill_blank_choice",
         title,
         prompt,
-        template: typeof item.template === "string" ? item.template : "",
+        template: typeof item.template === "string" ? item.template.trim() : "",
         choices: Array.isArray(item.choices)
-            ? item.choices.map(String)
+            ? item.choices.map((x) => String(x).trim()).filter(Boolean)
             : item.choices && typeof item.choices === "object"
-                ? Object.values(item.choices as Record<string, unknown>).map(String)
+                ? Object.values(item.choices as Record<string, unknown>)
+                    .map((x) => String(x).trim())
+                    .filter(Boolean)
                 : [],
         correctValue,
         hint: sanitizeFillBlankText(
@@ -407,6 +426,7 @@ function normalizeFillBlankChoice(item: Record<string, unknown>): DraftQuizItem 
         },
     };
 }
+
 function normalizeCodeInput(item: Record<string, unknown>): DraftQuizItem {
     const title =
         asOptionalString(item.title) ??
@@ -421,13 +441,13 @@ function normalizeCodeInput(item: Record<string, unknown>): DraftQuizItem {
 
     const recipeType =
         typeof item.type === "string"
-            ? item.type
+            ? item.type.trim()
             : typeof item.recipeType === "string"
-                ? item.recipeType
+                ? item.recipeType.trim()
                 : undefined;
 
     return {
-        id: String(item.id ?? ""),
+        id: String(item.id ?? "").trim(),
         kind: "code_input",
         title,
         prompt,
@@ -437,7 +457,7 @@ function normalizeCodeInput(item: Record<string, unknown>): DraftQuizItem {
                 : "-- Write your answer below\n",
         solutionCode:
             typeof item.solutionCode === "string" ? item.solutionCode : "",
-        datasetId: typeof item.datasetId === "string" ? item.datasetId : undefined,
+        datasetId: typeof item.datasetId === "string" ? item.datasetId.trim() || undefined : undefined,
         recipeType:
             recipeType === "sql_query" ||
             recipeType === "template_io" ||
@@ -470,7 +490,7 @@ function normalizeQuizItem(item: Record<string, unknown>): DraftQuizItem {
         title;
 
     return {
-        id: String(item.id ?? ""),
+        id: String(item.id ?? "").trim(),
         kind: "single_choice",
         title,
         prompt,
@@ -481,26 +501,6 @@ function normalizeQuizItem(item: Record<string, unknown>): DraftQuizItem {
     };
 }
 
-
-
-function escapeRegExp(value: string): string {
-    return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-}
-
-function sanitizeFillBlankText(text: string, correctValue: string): string {
-    if (!text.trim() || !correctValue.trim()) return text;
-
-    const re = new RegExp(`\\b${escapeRegExp(correctValue)}\\b`, "gi");
-    if (!re.test(text)) return text;
-
-    return text.replace(re, "the missing term");
-}
-
-
-
-
-
-
 export function normalizeTopicAuthoringDraft(raw: unknown): TopicAuthoringDraft {
     const draft = (raw && typeof raw === "object" ? raw : {}) as Record<
         string,
@@ -508,16 +508,19 @@ export function normalizeTopicAuthoringDraft(raw: unknown): TopicAuthoringDraft 
     >;
 
     return {
-        title: typeof draft.title === "string" ? draft.title : "Untitled Topic",
-        summary: typeof draft.summary === "string" ? draft.summary : "",
-        minutes: typeof draft.minutes === "number" ? draft.minutes : 10,
+        title: asOptionalString(draft.title) ?? "Untitled Topic",
+        summary: asOptionalString(draft.summary) ?? "",
+        minutes:
+            typeof draft.minutes === "number" && Number.isFinite(draft.minutes)
+                ? draft.minutes
+                : 10,
         sketchBlocks: Array.isArray(draft.sketchBlocks)
             ? draft.sketchBlocks
                 .filter((x): x is Record<string, unknown> => !!x && typeof x === "object")
                 .map((x) => ({
-                    id: String(x.id ?? "sketch"),
-                    title: String(x.title ?? "Sketch"),
-                    bodyMarkdown: String(x.bodyMarkdown ?? ""),
+                    id: asOptionalString(x.id) ?? "sketch",
+                    title: asOptionalString(x.title) ?? "Sketch",
+                    bodyMarkdown: asOptionalString(x.bodyMarkdown) ?? "",
                 }))
             : [],
         quizDraft: Array.isArray(draft.quizDraft)
@@ -528,32 +531,21 @@ export function normalizeTopicAuthoringDraft(raw: unknown): TopicAuthoringDraft 
         projectDraft:
             draft.projectDraft && typeof draft.projectDraft === "object"
                 ? {
-                    title: String(
-                        (draft.projectDraft as Record<string, unknown>).title ?? "Project",
-                    ),
+                    title:
+                        asOptionalString(
+                            (draft.projectDraft as Record<string, unknown>).title,
+                        ) ?? "Project",
                     stepIds: Array.isArray(
                         (draft.projectDraft as Record<string, unknown>).stepIds,
                     )
                         ? (
                             (draft.projectDraft as Record<string, unknown>)
                                 .stepIds as unknown[]
-                        ).map(String)
+                        )
+                            .map((x) => String(x).trim())
+                            .filter(Boolean)
                         : [],
                 }
                 : undefined,
     };
 }
-
-// function sanitizeFillBlankText(text: string, correctValue: string): string {
-//     if (!correctValue.trim()) return text;
-//
-//     const escaped = correctValue.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-//     const re = new RegExp(`\\b${escaped}\\b`, "gi");
-//
-//     if (!re.test(text)) return text;
-//
-//     return text.replace(
-//         re,
-//         "the missing term",
-//     );
-// }

@@ -1,0 +1,119 @@
+{
+  "title": "Date function awareness",
+  "summary": "Understand and apply date-related functions and expressions in SQL calculated columns, using the school_relations_intro dataset.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch-1-intro-date-functions",
+      "title": "Introduction to Date Functions in SQL",
+      "bodyMarkdown": "Date functions in SQL allow you to manipulate and extract information from date and time values. Even if your dataset stores dates as text (like 'Spring 2026'), you can use string functions or date functions to extract the year, month, or compare terms. For example, to extract the year from the `term` column in the `enrollments` table:\n\n```sql\nSELECT term, SUBSTR(term, -4) AS year FROM enrollments;\n```\n\nThis query creates a calculated column called `year` by taking the last 4 characters from the `term` value."
+    },
+    {
+      "id": "sketch-2-common-date-expressions",
+      "title": "Common Date Expressions",
+      "bodyMarkdown": "You can use SQL expressions to create new columns based on date information. For example, to check if an enrollment is in the year 2026:\n\n```sql\nSELECT *, SUBSTR(term, -4) = '2026' AS is_2026 FROM enrollments;\n```\n\nThis adds a column `is_2026` that is 1 if the term is in 2026, and 0 otherwise. This is useful for filtering or reporting on specific years."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "fb-1-extract-year",
+      "kind": "fill_blank_choice",
+      "title": "Extracting the Year from a Term",
+      "prompt": "Which function can you use to extract the last 4 characters (the year) from the `term` column in the `enrollments` table?",
+      "template": "SELECT SUBSTR(term, -4) AS year FROM enrollments;",
+      "choices": [
+        "SUBSTR(term, -4)",
+        "YEAR(term)",
+        "LEFT(term, 4)",
+        "RIGHT(term, 4)"
+      ],
+      "correctValue": "SUBSTR(term, -4)",
+      "hint": "Think about which function grabs a substring from a text value.",
+      "help": {
+        "concept": "In SQLite, SUBSTR can extract a portion of a string by position. Negative positions count from the end.",
+        "hint_1": "Look for a function that works with text and lets you specify a starting position.",
+        "hint_2": "SQLite does not have a built-in RIGHT() or YEAR() function, but SUBSTR can extract characters from the end."
+      }
+    },
+    {
+      "id": "fb-2-check-year-equality",
+      "kind": "fill_blank_choice",
+      "title": "Checking for a Specific Year",
+      "prompt": "How would you check if the `term` column in `enrollments` is in the year 2026?",
+      "template": "SELECT *, SUBSTR(term, -4) = '2026' AS is_2026 FROM enrollments;",
+      "choices": [
+        "SUBSTR(term, -4) = '2026'",
+        "YEAR(term) = 2026",
+        "term LIKE '%2026'",
+        "RIGHT(term, 4) = '2026'"
+      ],
+      "correctValue": "SUBSTR(term, -4) = '2026'",
+      "hint": "You need to compare the extracted year to '2026'.",
+      "help": {
+        "concept": "To check for a specific year in a text-based term, extract the year and compare it to your target value.",
+        "hint_1": "Use a function that extracts the year, then compare it with '2026'.",
+        "hint_2": "SQLite uses SUBSTR for string extraction, and you can compare the result directly."
+      }
+    },
+    {
+      "id": "sc-1-sqlite-date-function",
+      "kind": "single_choice",
+      "title": "SQLite Date Function Availability",
+      "prompt": "Which of the following date functions is NOT available by default in SQLite?",
+      "options": [
+        "DATE()",
+        "YEAR()",
+        "STRFTIME()",
+        "SUBSTR()"
+      ],
+      "correctOptionIds": [
+        "YEAR()"
+      ],
+      "hint": "Not all SQL dialects have the same built-in date functions.",
+      "help": {
+        "concept": "SQLite supports some date/time functions, but not all functions found in other SQL dialects.",
+        "hint_1": "Think about which function is common in MySQL but not in SQLite.",
+        "hint_2": "SQLite does not have a direct YEAR() function."
+      }
+    },
+    {
+      "id": "mc-1-string-vs-date-functions",
+      "kind": "multi_choice",
+      "title": "String vs. Date Functions",
+      "prompt": "Which of the following can be used in SQLite to work with date-like text columns such as `term`? (Select all that apply.)",
+      "options": [
+        "SUBSTR()",
+        "STRFTIME()",
+        "YEAR()",
+        "CAST()"
+      ],
+      "correctOptionIds": [
+        "SUBSTR()",
+        "STRFTIME()",
+        "CAST()"
+      ],
+      "hint": "Consider both string and date/time functions available in SQLite.",
+      "help": {
+        "concept": "SQLite supports string manipulation and some date/time formatting functions. YEAR() is not built-in.",
+        "hint_1": "Think about which functions can manipulate or interpret text values.",
+        "hint_2": "SUBSTR, STRFTIME, and CAST are all usable in SQLite for working with text and dates."
+      }
+    },
+    {
+      "id": "ci-1-extract-term-year",
+      "kind": "code_input",
+      "title": "Write a Query to Extract Year from Term",
+      "prompt": "Write a SQL query that selects the `id`, `student_id`, `term`, and a calculated column called `year` that extracts the last 4 characters from the `term` column in the `enrollments` table.",
+      "starterCode": "-- Write your query below\n",
+      "solutionCode": "SELECT id, student_id, term, SUBSTR(term, -4) AS year FROM enrollments;",
+      "datasetId": "school_relations_intro",
+      "recipeType": "sql_query",
+      "hint": "Use SUBSTR to extract the year from the term column.",
+      "help": {
+        "concept": "To create a calculated column, use SUBSTR to extract the last 4 characters from the term text.",
+        "hint_1": "Remember to alias the extracted value as 'year'.",
+        "hint_2": "Your SELECT should include id, student_id, term, and the calculated year column."
+      }
+    }
+  ]
+}

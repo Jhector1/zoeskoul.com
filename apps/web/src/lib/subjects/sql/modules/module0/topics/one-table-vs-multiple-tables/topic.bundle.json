@@ -1,0 +1,133 @@
+{
+  "topicId": "one-table-vs-multiple-tables",
+  "subjectSlug": "sql",
+  "moduleSlug": "sql_module_0",
+  "sectionSlug": "section_0_3",
+  "prefix": "sql0",
+  "minutes": 15,
+  "topic": {
+    "labelKey": "topics.sql.sql_module_0.one-table-vs-multiple-tables.label",
+    "summaryKey": "topics.sql.sql_module_0.one-table-vs-multiple-tables.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_0.one-table-vs-multiple-tables.cards.sketch0.title",
+      "sketchId": "sketch-1",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_0.one-table-vs-multiple-tables.cards.sketch1.title",
+      "sketchId": "sketch-2",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql.sql_module_0.one-table-vs-multiple-tables.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch-1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_0.one-table-vs-multiple-tables.sketch-1.title",
+      "bodyKey": "sketches.sql.sql_module_0.one-table-vs-multiple-tables.sketch-1.bodyMarkdown"
+    },
+    {
+      "id": "sketch-2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_0.one-table-vs-multiple-tables.sketch-2.title",
+      "bodyKey": "sketches.sql.sql_module_0.one-table-vs-multiple-tables.sketch-2.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "fillblank-1",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_0.one-table-vs-multiple-tables.quiz.fillblank-1",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "redundancy"
+      }
+    },
+    {
+      "id": "fillblank-2",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_0.one-table-vs-multiple-tables.quiz.fillblank-2",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "organized"
+      }
+    },
+    {
+      "id": "singlechoice-1",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_0.one-table-vs-multiple-tables.quiz.singlechoice-1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "multichoice-1",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_0.one-table-vs-multiple-tables.quiz.multichoice-1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "codeinput-1",
+      "kind": "code_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_0.one-table-vs-multiple-tables.quiz.codeinput-1",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "students_intro",
+        "resultShape": "table",
+        "solutionCode": "SELECT * FROM students_intro WHERE grade = 10;"
+      }
+    }
+  ]
+}

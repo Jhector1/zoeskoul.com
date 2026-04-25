@@ -7,6 +7,7 @@ import type {
 } from "@zoeskoul/curriculum-contracts";
 import type { SubjectShapePack } from "@zoeskoul/curriculum-profiles";
 import { getSqlModuleDataset } from "@zoeskoul/curriculum-profiles";
+import { moduleOrderToIndex } from "../spec/moduleOrder.js";
 
 export function buildSubjectManifestFromPlan(args: {
     blueprint: CourseBlueprint;
@@ -17,34 +18,34 @@ export function buildSubjectManifestFromPlan(args: {
     const kp = shape.subjectManifest.keyPatterns;
 
     const modules: SubjectModuleManifest[] = plan.modules.map((module) => {
-        const moduleOrder = module.order - 1;
-        const logicalModuleSlug = shape.subjectManifest.moduleSlug(moduleOrder);
+        const moduleIndex = moduleOrderToIndex(module.order);
+        const logicalModuleSlug = shape.subjectManifest.moduleSlug(moduleIndex);
 
         const sections: SubjectSectionManifest[] = module.sections.map((section) => ({
-            slug: shape.subjectManifest.sectionSlug(moduleOrder, section.order),
+            slug: shape.subjectManifest.sectionSlug(moduleIndex, section.order),
             order: section.order,
             titleKey: kp.sectionTitleKey(
                 blueprint.subjectSlug,
                 logicalModuleSlug,
-                shape.subjectManifest.sectionSlug(moduleOrder, section.order),
+                shape.subjectManifest.sectionSlug(moduleIndex, section.order),
             ),
             descriptionKey: kp.sectionDescriptionKey(
                 blueprint.subjectSlug,
                 logicalModuleSlug,
-                shape.subjectManifest.sectionSlug(moduleOrder, section.order),
+                shape.subjectManifest.sectionSlug(moduleIndex, section.order),
             ),
             meta: {
-                module: moduleOrder,
+                module: moduleIndex,
                 weeksKey: kp.sectionWeeksKey(
                     blueprint.subjectSlug,
                     logicalModuleSlug,
-                    shape.subjectManifest.sectionSlug(moduleOrder, section.order),
+                    shape.subjectManifest.sectionSlug(moduleIndex, section.order),
                 ),
                 bulletKeys: [0, 1, 2, 3].map((i) =>
                     kp.sectionBulletKey(
                         blueprint.subjectSlug,
                         logicalModuleSlug,
-                        shape.subjectManifest.sectionSlug(moduleOrder, section.order),
+                        shape.subjectManifest.sectionSlug(moduleIndex, section.order),
                         i,
                     ),
                 ),
@@ -54,8 +55,8 @@ export function buildSubjectManifestFromPlan(args: {
 
         return {
             slug: logicalModuleSlug,
-            prefix: shape.subjectManifest.modulePrefix(moduleOrder),
-            order: moduleOrder,
+            prefix: shape.subjectManifest.modulePrefix(moduleIndex),
+            order: moduleIndex,
             titleKey: kp.moduleTitleKey(blueprint.subjectSlug, logicalModuleSlug),
             descriptionKey: kp.moduleDescriptionKey(blueprint.subjectSlug, logicalModuleSlug),
             weekStart: module.weekStart ?? null,
@@ -65,7 +66,7 @@ export function buildSubjectManifestFromPlan(args: {
                 blueprint.profileId === "sql"
                     ? {
                         kind: "sql",
-                        datasetId: getSqlModuleDataset(moduleOrder),
+                        datasetId: getSqlModuleDataset(moduleIndex),
                         fixedSqlDialect: "sqlite",
                         resultShape: "table",
                     }
@@ -75,11 +76,11 @@ export function buildSubjectManifestFromPlan(args: {
                     .flatMap((s) => s.topics)
                     .reduce((sum, t) => sum + t.minutes, 0),
                 prereqKeys:
-                    moduleOrder > 0
+                    moduleIndex > 0
                         ? [
                             kp.moduleTitleKey(
                                 blueprint.subjectSlug,
-                                shape.subjectManifest.moduleSlug(moduleOrder - 1),
+                                shape.subjectManifest.moduleSlug(moduleIndex - 1),
                             ),
                         ]
                         : [],

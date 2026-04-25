@@ -1,0 +1,118 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_6": {
+        "average-on-selected-records": {
+          "label": "Average on selected records",
+          "summary": "Learn how to calculate the average for a filtered set of records using SQL aggregate functions and WHERE clauses.",
+          "cards": {
+            "sketch0": {
+              "title": "Averages with Filters: The Basics"
+            },
+            "sketch1": {
+              "title": "Why Filtered Averages Matter"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "quiz": {
+            "q1": {
+              "title": "Choosing the correct aggregate function",
+              "prompt": "Which aggregate function would you use to find the average price of items in the `inventory_items` table?",
+              "hint": "It's the function for calculating averages.",
+              "help": {
+                "concept": "SQL provides several aggregate functions. `the missing term()` is specifically used to calculate the average value of a numeric column.",
+                "hint_1": "Think about which function returns the mean value.",
+                "hint_2": "The function name is short for 'average'."
+              },
+              "template": "SELECT ____ (price) FROM inventory_items;",
+              "choices": [
+                "AVG",
+                "SUM",
+                "COUNT",
+                "MIN"
+              ]
+            },
+            "q2": {
+              "title": "Filtering records before averaging",
+              "prompt": "To find the average price of only 'active' items, which clause should you add?",
+              "hint": "This clause filters rows before aggregation.",
+              "help": {
+                "concept": "The `the missing term` clause filters rows before any aggregation happens. This ensures only the desired records are included in the average.",
+                "hint_1": "It's the standard clause for row filtering.",
+                "hint_2": "This clause comes before GROUP BY and HAVING in a query."
+              },
+              "template": "SELECT AVG(price) FROM inventory_items ____ status = 'active';",
+              "choices": [
+                "WHERE",
+                "GROUP BY",
+                "ORDER BY",
+                "HAVING"
+              ]
+            },
+            "q3": {
+              "title": "Understanding filtered averages",
+              "prompt": "What does the following query return?\n\n```sql\nSELECT AVG(price) FROM inventory_items WHERE category = 'Kitchen';\n```",
+              "hint": "Focus on what AVG(price) with a WHERE clause does.",
+              "help": {
+                "concept": "The AVG() function calculates the mean value for the selected rows. The WHERE clause limits those rows to a specific category.",
+                "hint_1": "The WHERE clause restricts the rows to 'Kitchen' items.",
+                "hint_2": "AVG(price) returns the mean price, not the sum or count."
+              },
+              "options": {
+                "a": "The average price of all items in the 'Kitchen' category.",
+                "b": "The average price of all items in the table.",
+                "c": "The total price of all 'Kitchen' items.",
+                "d": "The number of 'Kitchen' items."
+              }
+            },
+            "q4": {
+              "title": "Scenarios for using filtered averages",
+              "prompt": "In which scenarios would you use a filtered average (AVG with WHERE)? Select all that apply.",
+              "hint": "Filtered averages are used when you want to average only certain records.",
+              "help": {
+                "concept": "A filtered average is useful when you want to calculate the mean for a subset of records, not the entire table.",
+                "hint_1": "Look for options that mention a subset or condition.",
+                "hint_2": "Ignore options that describe totals or counts, not averages."
+              },
+              "options": {
+                "a": "Finding the average price of items in a specific category.",
+                "b": "Calculating the average price of all items, regardless of status.",
+                "c": "Determining the average price of only 'active' items.",
+                "d": "Counting the number of items in the inventory."
+              }
+            },
+            "q5": {
+              "title": "Write a filtered average query",
+              "prompt": "Write a SQL query to find the average price of items in the `inventory_items` table where `is_test` is 0.",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+                "hint_1": "Eliminate choices or interpretations that do not match the task.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "starterCode": "-- Write your query below"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_6": {
+        "average-on-selected-records": {
+          "sk1": {
+            "title": "Averages with Filters: The Basics",
+            "bodyMarkdown": "SQL's `AVG()` function calculates the average value of a numeric column. To average only certain rows, combine `AVG()` with a `WHERE` clause. For example, to find the average price of only 'active' items in the `inventory_items` table:\n\n```sql\nSELECT AVG(price)\nFROM inventory_items\nWHERE status = 'active';\n```\nThis query only includes rows where `status` is 'active' in the average calculation."
+          },
+          "sk2": {
+            "title": "Why Filtered Averages Matter",
+            "bodyMarkdown": "Filtered averages help answer specific business questions, like 'What is the average price of items in a certain category?' or 'What is the average price of items currently available for sale?'. By using a `WHERE` clause, you can focus your analysis on just the records that matter for your question."
+          }
+        }
+      }
+    }
+  }
+}

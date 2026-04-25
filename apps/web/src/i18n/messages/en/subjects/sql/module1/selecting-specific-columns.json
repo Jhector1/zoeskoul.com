@@ -1,0 +1,125 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_1": {
+        "selecting-specific-columns": {
+          "label": "Selecting specific columns",
+          "summary": "Learn how to select only the columns you need from a table using SQL's SELECT statement.",
+          "cards": {
+            "sketch0": {
+              "title": "Why select specific columns?"
+            },
+            "sketch1": {
+              "title": "Basic SELECT syntax"
+            },
+            "sketch2": {
+              "title": "Comparing SELECT * and selecting columns"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_1": {
+        "selecting-specific-columns": {
+          "sketch-1": {
+            "title": "Why select specific columns?",
+            "bodyMarkdown": "When you use `SELECT *`, you retrieve all columns from a table. This is useful for quick exploration, but in real applications, it's better to select only the columns you need. This makes your queries faster and your results easier to read."
+          },
+          "sketch-2": {
+            "title": "Basic SELECT syntax",
+            "bodyMarkdown": "To select specific columns, list them after the `SELECT` keyword, separated by commas. For example:\n\n```sql\nSELECT first_name, last_name FROM students;\n```\n\nThis query returns only the `first_name` and `last_name` columns from the `students` table."
+          },
+          "sketch-3": {
+            "title": "Comparing SELECT * and selecting columns",
+            "bodyMarkdown": "`SELECT * FROM students;` returns all columns, while `SELECT student_id, grade FROM students;` returns only the `student_id` and `grade` columns. Choosing specific columns helps you focus on the data you actually need."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "fill-1": {
+      "title": "Identify the correct column selection",
+      "prompt": "Which keyword is used to list the columns you want to retrieve in a SQL query?",
+      "hint": "You need to specify the columns you want after SELECT.",
+      "help": {
+        "concept": "In SQL, you list the the missing term after SELECT to choose which columns to retrieve.",
+        "hint_1": "Think about what you would write after SELECT to get only certain columns.",
+        "hint_2": "You can use a comma-separated list of the missing term after SELECT."
+      },
+      "template": "SELECT [_____] FROM students;",
+      "choices": [
+        "*",
+        "column names",
+        "ALL",
+        "TABLE"
+      ]
+    },
+    "fill-2": {
+      "title": "Choose the correct column for the blank",
+      "prompt": "Fill in the blank to select only the `grade` column from the `students` table.",
+      "hint": "Focus on the missing SQL concept rather than the exact missing word.",
+      "help": {
+        "concept": "The blank should be filled with the SQL term that matches the job the statement is trying to perform.",
+        "hint_1": "Think about what the missing part is supposed to do in the statement.",
+        "hint_2": "Choose the SQL term that best completes the meaning of the statement."
+      },
+      "template": "SELECT [_____] FROM students;",
+      "choices": [
+        "grade",
+        "student_id",
+        "*",
+        "first_name"
+      ]
+    },
+    "single-1": {
+      "title": "Purpose of SELECT *",
+      "prompt": "What does the SQL statement `SELECT * FROM students;` do?",
+      "hint": "What does the asterisk (*) mean in SQL SELECT statements?",
+      "help": {
+        "concept": "The asterisk (*) in SQL means 'all columns'.",
+        "hint_1": "SELECT * retrieves every column in the table.",
+        "hint_2": "It's a shortcut for selecting all available columns."
+      },
+      "options": {
+        "a": "It selects all columns from the students table.",
+        "b": "It selects only the first column from the students table.",
+        "c": "It deletes all rows from the students table.",
+        "d": "It updates the students table."
+      }
+    },
+    "multi-1": {
+      "title": "Benefits of selecting specific columns",
+      "prompt": "Which of the following are benefits of selecting only specific columns in a SQL query? (Select all that apply.)",
+      "hint": "Think about efficiency and clarity.",
+      "help": {
+        "concept": "Selecting only needed columns can make queries faster, results clearer, and reduce unnecessary data.",
+        "hint_1": "Consider what happens when you retrieve less data.",
+        "hint_2": "Selecting specific columns does not change or update the table."
+      },
+      "options": {
+        "a": "Faster query performance",
+        "b": "Easier to read results",
+        "c": "Reduces data transfer",
+        "d": "Automatically updates the table"
+      }
+    },
+    "code-1": {
+      "title": "Write a query to select two columns",
+      "prompt": "Write a SQL query to select only the `student_id` and `first_name` columns from the `students` table.",
+      "hint": "Focus on the concept being tested.",
+      "help": {
+        "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+        "hint_1": "Eliminate choices or interpretations that do not match the task.",
+        "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+      },
+      "starterCode": "-- Write your query below"
+    }
+  }
+}

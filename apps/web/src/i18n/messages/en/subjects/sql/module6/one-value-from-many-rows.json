@@ -1,0 +1,118 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_6": {
+        "one-value-from-many-rows": {
+          "label": "One value from many rows",
+          "summary": "Learn how aggregate functions in SQL summarize multiple rows into a single value, such as totals, averages, and counts.",
+          "cards": {
+            "sketch0": {
+              "title": "What is Aggregation?"
+            },
+            "sketch1": {
+              "title": "Common Aggregate Functions"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "quiz": {
+            "fb-agg-count-vs-countcol": {
+              "title": "COUNT(*) vs COUNT(column)",
+              "prompt": "Choose the best value for the missing blank in the statement.",
+              "hint": "Think about how missing values affect the count.",
+              "help": {
+                "concept": "COUNT(*) includes every row, even if some columns are NULL. COUNT(column) skips rows where the column is NULL.",
+                "hint_1": "COUNT(column) ignores rows with NULL in that column.",
+                "hint_2": "COUNT(*) counts all rows, but COUNT(column) only counts rows where the column has a value."
+              },
+              "template": "The missing value is [blank1].",
+              "choices": [
+                "not NULL",
+                "greater than zero",
+                "a string",
+                "unique"
+              ]
+            },
+            "fb-agg-avg-function": {
+              "title": "Purpose of AVG()",
+              "prompt": "Choose the best value for the missing blank in the statement.",
+              "hint": "AVG stands for a common math operation.",
+              "help": {
+                "concept": "AVG() calculates the arithmetic mean of the values in a numeric column.",
+                "hint_1": "It adds up all the values and divides by the number of values.",
+                "hint_2": "AVG(price) gives you the mean price, not the sum or the highest/lowest price."
+              },
+              "template": "The missing value is [blank1].",
+              "choices": [
+                "average",
+                "sum",
+                "maximum",
+                "minimum"
+              ]
+            },
+            "sc-agg-dashboard-use": {
+              "title": "Why use aggregates?",
+              "prompt": "Why are aggregate functions like COUNT, SUM, and AVG useful for dashboards and business reports?",
+              "hint": "Think about what a dashboard needs to show.",
+              "help": {
+                "concept": "Dashboards and reports need summary numbers, not every detail. Aggregates provide totals, averages, and other summaries.",
+                "hint_1": "Aggregates help you see the big picture, not every row.",
+                "hint_2": "Dashboards use aggregates to show totals and averages, not to display all raw data."
+              },
+              "options": {
+                "a": "They summarize lots of data into key numbers.",
+                "b": "They let you see every single row in detail.",
+                "c": "They sort data alphabetically.",
+                "d": "They delete duplicate rows."
+              }
+            },
+            "mc-agg-which-are-aggregates": {
+              "title": "Which are aggregate functions?",
+              "prompt": "Which of the following SQL functions are aggregate functions? Select all that apply.",
+              "hint": "Focus on the main concept being tested and eliminate choices that describe something different.",
+              "help": {
+                "concept": "Choose the option that matches the core idea described in the question without relying on repeated wording from the answer choices.",
+                "hint_1": "Rule out options that describe a different role, behavior, or SQL concept than the question is testing.",
+                "hint_2": "Pick the option that best matches the concept, not the one that simply repeats familiar wording."
+              },
+              "options": {
+                "a": "COUNT()",
+                "b": "SUM()",
+                "c": "AVG()",
+                "d": "LEFT()"
+              }
+            },
+            "ci-agg-count-active-items": {
+              "title": "Count active inventory items",
+              "prompt": "Write a SQL query to count the number of inventory items with a status of 'active'.",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+                "hint_1": "Eliminate choices or interpretations that do not match the task.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "starterCode": "-- Write a query to count active items"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_6": {
+        "one-value-from-many-rows": {
+          "sketch-aggregation-intro": {
+            "title": "What is Aggregation?",
+            "bodyMarkdown": "Aggregation in SQL lets you turn many rows of data into a single summary value. For example, you can count how many items are in your inventory, find the average price, or get the highest or lowest value in a column. This is useful for reports and dashboards that need big-picture answers, not just row-by-row details."
+          },
+          "sketch-aggregate-functions": {
+            "title": "Common Aggregate Functions",
+            "bodyMarkdown": "Some of the most common aggregate functions in SQL are:\n\n- **COUNT()**: Counts the number of rows.\n- **SUM()**: Adds up numeric values.\n- **AVG()**: Calculates the average of numeric values.\n- **MIN()**: Finds the smallest value.\n- **MAX()**: Finds the largest value.\n\nExample:\n\n```sql\nSELECT COUNT(*) FROM inventory_items;\n```\nThis returns the total number of rows in the `inventory_items` table."
+          }
+        }
+      }
+    }
+  }
+}

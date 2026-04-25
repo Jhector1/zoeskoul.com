@@ -1,0 +1,125 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_6": {
+        "aggregates-vs-regular-queries": {
+          "label": "Aggregates vs regular queries",
+          "summary": "Understand the difference between aggregate and regular queries, and how to use aggregate functions to summarize data in SQL.",
+          "cards": {
+            "sketch0": {
+              "title": "What is an Aggregate Query?"
+            },
+            "sketch1": {
+              "title": "Regular Queries vs Aggregate Queries"
+            },
+            "sketch2": {
+              "title": "Why Use Aggregates?"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "quiz": {
+            "fill-blank-agg-1": {
+              "title": "Identify the aggregate function",
+              "prompt": "Which SQL keyword is used to count the number of rows in a table?",
+              "hint": "Focus on the missing SQL concept rather than the exact missing word.",
+              "help": {
+                "concept": "The blank should be filled with the SQL term that matches the job the statement is trying to perform.",
+                "hint_1": "Think about what the missing part is supposed to do in the statement.",
+                "hint_2": "Choose the SQL term that best completes the meaning of the statement."
+              },
+              "template": "SELECT ___ FROM inventory_items;",
+              "choices": [
+                "COUNT(*)",
+                "SUM(price)",
+                "AVG(price)",
+                "name"
+              ]
+            },
+            "fill-blank-agg-2": {
+              "title": "Recognize a regular query",
+              "prompt": "Which column would you select to see each item's name (not a summary)?",
+              "hint": "This returns one value per row, not a summary.",
+              "help": {
+                "concept": "Regular queries return columns directly from the table, showing one row per record.",
+                "hint_1": "Which choice is a column, not a function?",
+                "hint_2": "It's the column that identifies each item."
+              },
+              "template": "SELECT ___ FROM inventory_items;",
+              "choices": [
+                "name",
+                "COUNT(*)",
+                "SUM(price)",
+                "AVG(price)"
+              ]
+            },
+            "single-choice-agg-1": {
+              "title": "Difference between aggregate and regular queries",
+              "prompt": "What is the main difference between an aggregate query and a regular query?",
+              "hint": "Think about what aggregate functions do to the data.",
+              "help": {
+                "concept": "Aggregate queries use functions to combine data from many rows into a summary value.",
+                "hint_1": "Which option describes summarizing data?",
+                "hint_2": "Aggregate queries are about combining, not listing every row."
+              },
+              "options": {
+                "a": "Aggregate queries summarize multiple rows into one or a few values.",
+                "b": "Regular queries always use GROUP BY.",
+                "c": "Aggregate queries always return all columns.",
+                "d": "Regular queries can only show numbers."
+              }
+            },
+            "multi-choice-agg-1": {
+              "title": "Which are aggregate functions?",
+              "prompt": "Select all SQL functions below that are aggregate functions.",
+              "hint": "Aggregate functions summarize data. Which options do that?",
+              "help": {
+                "concept": "Aggregate functions like COUNT, SUM, and AVG operate on multiple rows to produce a single result.",
+                "hint_1": "Look for functions, not plain columns.",
+                "hint_2": "COUNT, SUM, and AVG are all aggregate functions."
+              },
+              "options": {
+                "a": "COUNT(*)",
+                "b": "SUM(price)",
+                "c": "AVG(price)",
+                "d": "name"
+              }
+            },
+            "code-input-agg-1": {
+              "title": "Write an aggregate query",
+              "prompt": "Write a SQL query to find the average price of all items in the inventory_items table.",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+                "hint_1": "Eliminate choices or interpretations that do not match the task.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "starterCode": "-- Write your query below"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_6": {
+        "aggregates-vs-regular-queries": {
+          "sketch-agg-vs-regular-1": {
+            "title": "What is an Aggregate Query?",
+            "bodyMarkdown": "An **aggregate query** uses functions like `COUNT()`, `SUM()`, `AVG()`, `MIN()`, or `MAX()` to summarize multiple rows into a single value. For example, to count all items in the `inventory_items` table:\n\n```sql\nSELECT COUNT(*) FROM inventory_items;\n```\nThis returns a single number: the total number of rows in the table."
+          },
+          "sketch-agg-vs-regular-2": {
+            "title": "Regular Queries vs Aggregate Queries",
+            "bodyMarkdown": "A **regular query** (also called a 'detail' or 'row-level' query) returns one row per record in the table. For example:\n\n```sql\nSELECT name, price FROM inventory_items;\n```\nThis returns a list of all item names and their prices, one row per item.\n\nIn contrast, an **aggregate query** summarizes data, often returning just one row with a summary value."
+          },
+          "sketch-agg-vs-regular-3": {
+            "title": "Why Use Aggregates?",
+            "bodyMarkdown": "Aggregates are useful for business reporting and dashboards. They help answer questions like:\n- How many products are active?\n- What is the average price of items in a category?\n- What is the highest or lowest price in inventory?\n\nThese answers are not about individual rows, but about the dataset as a whole."
+          }
+        }
+      }
+    }
+  }
+}

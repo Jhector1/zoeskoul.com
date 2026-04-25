@@ -1,0 +1,118 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_1": {
+        "choosing-the-right-columns": {
+          "label": "Choosing the right columns",
+          "summary": "Learn how to select specific columns or all columns from a table using SQL SELECT statements. Understand when to use SELECT * and when to specify columns for clarity and efficiency.",
+          "cards": {
+            "sketch0": {
+              "title": "Why choose specific columns?"
+            },
+            "sketch1": {
+              "title": "SELECT * vs. listing columns"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_1": {
+        "choosing-the-right-columns": {
+          "sketch-1": {
+            "title": "Why choose specific columns?",
+            "bodyMarkdown": "When you use SQL to retrieve data, you can select all columns from a table using `SELECT *`, or you can specify only the columns you need. For example, if you have a table called `students` with columns `id`, `name`, `age`, and `grade`, you can write:\n\n- `SELECT * FROM students;` (returns all columns)\n- `SELECT name, grade FROM students;` (returns only the `name` and `grade` columns)\n\nChoosing only the columns you need makes your queries faster and your results easier to read."
+          },
+          "sketch-2": {
+            "title": "SELECT * vs. listing columns",
+            "bodyMarkdown": "`SELECT *` is useful when you are exploring a new table and want to see all the data. However, in real applications, it's better to list only the columns you need. This avoids returning unnecessary data and makes your queries more efficient and secure."
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "fill-1": {
+      "title": "Selecting all columns",
+      "prompt": "Which keyword combination would you use to select all columns from the `students` table?",
+      "hint": "Focus on the missing SQL concept rather than the exact missing word.",
+      "help": {
+        "concept": "The blank should be filled with the SQL term that matches the job the statement is trying to perform.",
+        "hint_1": "Think about what the missing part is supposed to do in the statement.",
+        "hint_2": "Choose the SQL term that best completes the meaning of the statement."
+      },
+      "template": "SELECT {blank} FROM students;",
+      "choices": [
+        "*",
+        "ALL",
+        "COLUMNS",
+        "EVERYTHING"
+      ]
+    },
+    "fill-2": {
+      "title": "Choosing specific columns",
+      "prompt": "Fill in the blank to select only the `name` and `grade` columns from the `students` table.",
+      "hint": "Which column, besides 'name', do you want?",
+      "help": {
+        "concept": "You can list multiple columns in a SELECT statement by separating them with commas.",
+        "hint_1": "Look for the column that is not 'name' but is mentioned in the prompt.",
+        "hint_2": "It's the column that shows how well a student is doing in class."
+      },
+      "template": "SELECT name, {blank} FROM students;",
+      "choices": [
+        "grade",
+        "age",
+        "id",
+        "*"
+      ]
+    },
+    "single-1": {
+      "title": "Why avoid SELECT * in production?",
+      "prompt": "Why is it usually better to list specific columns instead of using SELECT * in production queries?",
+      "hint": "Think about performance and clarity.",
+      "help": {
+        "concept": "Listing only the columns you need reduces data transfer and makes results easier to understand.",
+        "hint_1": "SELECT * can return unnecessary data.",
+        "hint_2": "Listing columns helps with speed and readability."
+      },
+      "options": {
+        "a": "It makes queries faster and results clearer.",
+        "b": "It always returns fewer rows.",
+        "c": "It changes the table structure.",
+        "d": "It is required by SQL."
+      }
+    },
+    "multi-1": {
+      "title": "Benefits of listing columns",
+      "prompt": "Which of the following are benefits of listing specific columns in your SELECT statement? (Choose all that apply)",
+      "hint": "Think about speed, clarity, and security.",
+      "help": {
+        "concept": "Listing columns can make queries faster, results clearer, and reduce the risk of exposing sensitive data.",
+        "hint_1": "Consider what happens if you select only what's needed.",
+        "hint_2": "Some options are about performance, some about security, and some about clarity."
+      },
+      "options": {
+        "a": "Improves query performance",
+        "b": "Makes results easier to read",
+        "c": "Prevents accidental data exposure",
+        "d": "Automatically updates table columns"
+      }
+    },
+    "code-1": {
+      "title": "Write a SELECT statement for specific columns",
+      "prompt": "Write a SQL query to select only the `name` and `age` columns from the `students` table.",
+      "hint": "Focus on the concept being tested.",
+      "help": {
+        "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+        "hint_1": "Eliminate choices or interpretations that do not match the task.",
+        "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+      },
+      "starterCode": "-- Write your query below"
+    }
+  }
+}

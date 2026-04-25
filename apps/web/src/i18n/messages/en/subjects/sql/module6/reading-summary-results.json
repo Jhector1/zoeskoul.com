@@ -1,0 +1,125 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_6": {
+        "reading-summary-results": {
+          "label": "Reading summary results",
+          "summary": "Learn how to interpret and understand the results of SQL aggregate functions, including how to read summary values and what they mean for business questions.",
+          "cards": {
+            "sketch0": {
+              "title": "What are summary results?"
+            },
+            "sketch1": {
+              "title": "Interpreting COUNT and SUM"
+            },
+            "sketch2": {
+              "title": "Why summary results matter"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "quiz": {
+            "fb-1": {
+              "title": "Understanding COUNT(*)",
+              "prompt": "Which value does the query `SELECT COUNT(*) FROM inventory_items;` return?",
+              "hint": "Think about what COUNT(*) measures.",
+              "help": {
+                "concept": "COUNT(*) counts every row in the table, regardless of content.",
+                "hint_1": "COUNT(*) gives you the number of records.",
+                "hint_2": "It's not about columns or categories, but about how many entries are present."
+              },
+              "template": "It returns the total number of ____ in the table.",
+              "choices": [
+                "rows",
+                "columns",
+                "categories",
+                "prices"
+              ]
+            },
+            "fb-2": {
+              "title": "Interpreting SUM results",
+              "prompt": "If you run `SELECT SUM(price) FROM inventory_items WHERE status = 'active';`, what does the result represent?",
+              "hint": "SUM adds up values from a numeric column.",
+              "help": {
+                "concept": "SUM(column) returns the total of all values in that column for the filtered rows.",
+                "hint_1": "The column being summed is 'the missing term'.",
+                "hint_2": "The result is the combined value of 'the missing term' for all items with status 'active'."
+              },
+              "template": "It shows the total ____ of all active items.",
+              "choices": [
+                "price",
+                "category",
+                "status",
+                "name"
+              ]
+            },
+            "sc-1": {
+              "title": "Reading AVG output",
+              "prompt": "What does the result of `SELECT AVG(price) FROM inventory_items;` tell you?",
+              "hint": "AVG stands for average.",
+              "help": {
+                "concept": "AVG(column) calculates the mean value of a numeric column across all selected rows.",
+                "hint_1": "AVG gives you the mean, not the sum or count.",
+                "hint_2": "It answers: What is the typical price, on average, for items in this table?"
+              },
+              "options": {
+                "a": "The average price of all items in the table",
+                "b": "The highest price in the table",
+                "c": "The total number of items",
+                "d": "The sum of all prices"
+              }
+            },
+            "mc-1": {
+              "title": "Uses of aggregate results",
+              "prompt": "Which of the following are common uses for SQL aggregate results? (Choose all that apply)",
+              "hint": "Think about how businesses use summary numbers.",
+              "help": {
+                "concept": "Aggregates are used to summarize data for decision-making, not for detailed row-by-row analysis.",
+                "hint_1": "Dashboards and reports often show totals, averages, or counts.",
+                "hint_2": "KPIs (Key Performance Indicators) are often calculated using aggregate functions."
+              },
+              "options": {
+                "a": "Creating dashboards",
+                "b": "Generating summary reports",
+                "c": "Listing every row in a table",
+                "d": "Calculating business KPIs"
+              }
+            },
+            "ci-1": {
+              "title": "Write a query to count active items",
+              "prompt": "Write a SQL query to find out how many items in the inventory are currently 'active'.",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+                "hint_1": "Eliminate choices or interpretations that do not match the task.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "starterCode": "-- Write your query below"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_6": {
+        "reading-summary-results": {
+          "sketch-1": {
+            "title": "What are summary results?",
+            "bodyMarkdown": "Aggregate functions in SQL, such as `COUNT`, `SUM`, `AVG`, `MIN`, and `MAX`, return summary results. Instead of listing every row, they provide a single value that summarizes information from multiple rows. For example, `SELECT COUNT(*) FROM inventory_items;` returns the total number of items in the table."
+          },
+          "sketch-2": {
+            "title": "Interpreting COUNT and SUM",
+            "bodyMarkdown": "`COUNT(*)` counts all rows, while `COUNT(column)` counts only rows where the column is not NULL. `SUM(column)` adds up all the values in a numeric column. For example, `SELECT SUM(price) FROM inventory_items WHERE status = 'active';` gives the total price of all active items."
+          },
+          "sketch-3": {
+            "title": "Why summary results matter",
+            "bodyMarkdown": "Summary results help answer business questions quickly. Instead of reviewing every item, you can ask: How many items are active? What is the average price? These answers are useful for dashboards and reports."
+          }
+        }
+      }
+    }
+  }
+}

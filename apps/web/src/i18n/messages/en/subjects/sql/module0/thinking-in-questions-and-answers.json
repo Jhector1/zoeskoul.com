@@ -1,0 +1,125 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_0": {
+        "thinking-in-questions-and-answers": {
+          "label": "Thinking in questions and answers",
+          "summary": "Learn how to approach databases by translating real-world questions into data queries, and understand the basic building blocks of SQL tables.",
+          "cards": {
+            "sketch0": {
+              "title": "From Questions to Queries"
+            },
+            "sketch1": {
+              "title": "Tables, Rows, and Columns"
+            },
+            "sketch2": {
+              "title": "Keys and Uniqueness"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "quiz": {
+            "fbq-1": {
+              "title": "Identifying Table Parts",
+              "prompt": "Choose the best value for the first missing blank in the statement.",
+              "hint": "Focus on the missing SQL concept rather than the exact missing word.",
+              "help": {
+                "concept": "The blank should be filled with the SQL term that matches the job the statement is trying to perform.",
+                "hint_1": "Think about what the missing part is supposed to do in the statement.",
+                "hint_2": "Choose the SQL term that best completes the meaning of the statement."
+              },
+              "template": "The first missing value is [blank1].",
+              "choices": [
+                "row",
+                "column",
+                "table",
+                "key"
+              ]
+            },
+            "fbq-2": {
+              "title": "Purpose of a Key",
+              "prompt": "Choose the best value for the first missing blank in the statement.",
+              "hint": "Focus on the missing SQL concept rather than the exact missing word.",
+              "help": {
+                "concept": "The blank should be filled with the SQL term that matches the job the statement is trying to perform.",
+                "hint_1": "Think about what the missing part is supposed to do in the statement.",
+                "hint_2": "Choose the SQL term that best completes the meaning of the statement."
+              },
+              "template": "The first missing value is [blank1].",
+              "choices": [
+                "key",
+                "column",
+                "cell",
+                "value"
+              ]
+            },
+            "scq-1": {
+              "title": "Tables vs. Spreadsheets",
+              "prompt": "Which of the following is TRUE about both spreadsheets and database tables?",
+              "hint": "Think about the structure, not the rules.",
+              "help": {
+                "concept": "Spreadsheets and tables share a similar grid structure, but their rules differ.",
+                "hint_1": "Consider how data is visually organized in both.",
+                "hint_2": "Not all columns or rows have uniqueness or type restrictions in spreadsheets."
+              },
+              "options": {
+                "a": "Both organize data in rows and columns.",
+                "b": "Both require every column to have a unique value.",
+                "c": "Both can only store numbers.",
+                "d": "Both automatically prevent duplicate rows."
+              }
+            },
+            "mcq-1": {
+              "title": "When to Use Multiple Tables",
+              "prompt": "Which scenarios are good reasons to use more than one table in a database? (Choose all that apply.)",
+              "hint": "Think about organization and avoiding duplication.",
+              "help": {
+                "concept": "Multiple tables help organize related data and avoid redundancy.",
+                "hint_1": "If two types of things have different properties, they usually belong in different tables.",
+                "hint_2": "Storing unrelated data together or repeating information are signs you need more tables."
+              },
+              "options": {
+                "a": "You want to separate students and their classes.",
+                "b": "You want to store both products and orders.",
+                "c": "You want to keep all data in one place, even if it's unrelated.",
+                "d": "You want to avoid repeating the same information in many rows."
+              }
+            },
+            "ci-1": {
+              "title": "Simple Data Question to SQL",
+              "prompt": "Write a SQL query to select the names of all students from the `students_intro` table.",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+                "hint_1": "Eliminate choices or interpretations that do not match the task.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "starterCode": "-- Write a query to get all student names"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_0": {
+        "thinking-in-questions-and-answers": {
+          "sketch-1": {
+            "title": "From Questions to Queries",
+            "bodyMarkdown": "Databases are designed to answer questions about data. For example, if you want to know \"Which students scored above 90 in Math?\", you can turn this question into a SQL query. The process starts by identifying the table (e.g., `students`), the relevant columns (e.g., `score`, `subject`), and the condition (`score > 90 AND subject = 'Math'`)."
+          },
+          "sketch-2": {
+            "title": "Tables, Rows, and Columns",
+            "bodyMarkdown": "A database table is like a spreadsheet: each row is a record (such as a student), and each column is a property (such as name or grade). Tables have names, and each column has a name and a type (like text or number)."
+          },
+          "sketch-3": {
+            "title": "Keys and Uniqueness",
+            "bodyMarkdown": "A key is a column (or set of columns) that uniquely identifies each row in a table. For example, a `student_id` column could be a key for the `students` table, ensuring no two students share the same ID."
+          }
+        }
+      }
+    }
+  }
+}

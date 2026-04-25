@@ -1,0 +1,133 @@
+{
+  "topicId": "intro-to-keys",
+  "subjectSlug": "sql",
+  "moduleSlug": "sql_module_0",
+  "sectionSlug": "section_0_3",
+  "prefix": "sql0",
+  "minutes": 15,
+  "topic": {
+    "labelKey": "topics.sql.sql_module_0.intro-to-keys.label",
+    "summaryKey": "topics.sql.sql_module_0.intro-to-keys.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_0.intro-to-keys.cards.sketch0.title",
+      "sketchId": "sketch-what-is-a-key",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_0.intro-to-keys.cards.sketch1.title",
+      "sketchId": "sketch-types-of-keys",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql.sql_module_0.intro-to-keys.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch-what-is-a-key",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_0.intro-to-keys.sketch-what-is-a-key.title",
+      "bodyKey": "sketches.sql.sql_module_0.intro-to-keys.sketch-what-is-a-key.bodyMarkdown"
+    },
+    {
+      "id": "sketch-types-of-keys",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_0.intro-to-keys.sketch-types-of-keys.title",
+      "bodyKey": "sketches.sql.sql_module_0.intro-to-keys.sketch-types-of-keys.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "fillblank-why-keys",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_0.intro-to-keys.quiz.fillblank-why-keys",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "row"
+      }
+    },
+    {
+      "id": "fillblank-primary-key",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_0.intro-to-keys.quiz.fillblank-primary-key",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "primary"
+      }
+    },
+    {
+      "id": "singlechoice-foreign-key-purpose",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_0.intro-to-keys.quiz.singlechoice-foreign-key-purpose",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "multichoice-key-properties",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_0.intro-to-keys.quiz.multichoice-key-properties",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "c",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "codeinput-find-primary-key",
+      "kind": "code_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_0.intro-to-keys.quiz.codeinput-find-primary-key",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table",
+        "solutionCode": "SELECT student_id FROM students;"
+      }
+    }
+  ]
+}

@@ -1,0 +1,125 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_5": {
+        "adding-and-subtracting": {
+          "label": "Adding and subtracting",
+          "summary": "Learn how to use addition and subtraction in SQL expressions to create calculated columns and new values in your queries.",
+          "cards": {
+            "sketch0": {
+              "title": "What are calculated columns?"
+            },
+            "sketch1": {
+              "title": "Using addition and subtraction in SQL"
+            },
+            "sketch2": {
+              "title": "Aliasing calculated columns"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "quiz": {
+            "fill-blank-1": {
+              "title": "Adding to a column",
+              "prompt": "Suppose you want to show each student's grade level next year. Which expression would you use in the SELECT statement?",
+              "hint": "Focus on the missing SQL concept rather than the exact missing word.",
+              "help": {
+                "concept": "The blank should be filled with the SQL term that matches the job the statement is trying to perform.",
+                "hint_1": "Think about what the missing part is supposed to do in the statement.",
+                "hint_2": "Choose the SQL term that best completes the meaning of the statement."
+              },
+              "template": "SELECT name, grade_level ___ 1 AS next_year_grade FROM students;",
+              "choices": [
+                "+",
+                "-",
+                "*",
+                "/"
+              ]
+            },
+            "fill-blank-2": {
+              "title": "Subtracting from a column",
+              "prompt": "You want to display each student's grade level from the previous year. Which operator completes the expression?",
+              "hint": "Focus on the missing SQL concept rather than the exact missing word.",
+              "help": {
+                "concept": "The blank should be filled with the SQL term that matches the job the statement is trying to perform.",
+                "hint_1": "Think about what the missing part is supposed to do in the statement.",
+                "hint_2": "Choose the SQL term that best completes the meaning of the statement."
+              },
+              "template": "SELECT name, grade_level ___ 1 AS previous_grade FROM students;",
+              "choices": [
+                "+",
+                "-",
+                "*",
+                "/"
+              ]
+            },
+            "single-choice-1": {
+              "title": "Purpose of aliases",
+              "prompt": "Why should you use an alias (AS) when creating a calculated column in SQL?",
+              "hint": "Think about how the results are displayed to users.",
+              "help": {
+                "concept": "Aliases make your query results easier to understand by giving calculated columns meaningful names.",
+                "hint_1": "An alias helps label the output of an expression.",
+                "hint_2": "Using AS lets you rename a calculated column for clarity."
+              },
+              "options": {
+                "a": "To give the new column a clear and readable name",
+                "b": "To speed up the query execution",
+                "c": "To change the data type of the column",
+                "d": "To hide the column from the results"
+              }
+            },
+            "multi-choice-1": {
+              "title": "Valid uses of addition and subtraction",
+              "prompt": "Which of the following are valid uses of addition or subtraction in a SQL SELECT statement? (Choose all that apply.)",
+              "hint": "Consider which data types can be added or subtracted.",
+              "help": {
+                "concept": "Addition and subtraction in SQL work with numeric columns or values, not text columns.",
+                "hint_1": "You can add or subtract numbers, but not text.",
+                "hint_2": "Adding or subtracting works with numeric columns like grade_level."
+              },
+              "options": {
+                "a": "Adding 1 to a student's grade_level to show next year's grade",
+                "b": "Subtracting 1 from grade_level to show the previous grade",
+                "c": "Adding two text columns together",
+                "d": "Subtracting a number from a numeric column"
+              }
+            },
+            "code-input-1": {
+              "title": "Write a query with a calculated column",
+              "prompt": "Write a SQL query to display each student's name and what their grade level was last year. Name the calculated column previous_grade.",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+                "hint_1": "Eliminate choices or interpretations that do not match the task.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "starterCode": "-- Write your query below"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_5": {
+        "adding-and-subtracting": {
+          "sketch-1": {
+            "title": "What are calculated columns?",
+            "bodyMarkdown": "A calculated column in SQL is a new value you create in your SELECT statement by combining or transforming existing columns using expressions. For example, you can add, subtract, multiply, or divide columns to produce new results. These calculated values are not stored in the table—they are generated on the fly when you run your query."
+          },
+          "sketch-2": {
+            "title": "Using addition and subtraction in SQL",
+            "bodyMarkdown": "You can use the `+` and `-` operators in SQL to add or subtract numeric columns or values. For example:\n\n```sql\nSELECT name, grade_level + 1 AS next_year_grade\nFROM students;\n```\n\nThis query shows each student's name and what their grade level will be next year."
+          },
+          "sketch-3": {
+            "title": "Aliasing calculated columns",
+            "bodyMarkdown": "When you create a calculated column, it's helpful to give it a clear name using the `AS` keyword. This is called an alias. For example:\n\n```sql\nSELECT name, grade_level - 1 AS previous_grade\nFROM students;\n```\n\nHere, `previous_grade` is the alias for the calculated column."
+          }
+        }
+      }
+    }
+  }
+}

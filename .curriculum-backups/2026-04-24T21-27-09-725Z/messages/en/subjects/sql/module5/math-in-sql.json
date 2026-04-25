@@ -1,0 +1,118 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_5": {
+        "math-in-sql": {
+          "label": "Math in SQL",
+          "summary": "Learn how to use arithmetic and expressions in SQL to create new values, such as calculated columns, and make your queries more powerful and readable.",
+          "cards": {
+            "sketch0": {
+              "title": "What is Math in SQL?"
+            },
+            "sketch1": {
+              "title": "Using Expressions and Aliases"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "quiz": {
+            "fill-blank-1": {
+              "title": "Identifying an Expression",
+              "prompt": "Choose the best value for the first missing blank in the statement.",
+              "hint": "Look for the part that combines a column with a number using math.",
+              "help": {
+                "concept": "An expression in SQL is a combination of columns, values, and operators that produces a new value.",
+                "hint_1": "Which part of the SELECT line is doing a calculation?",
+                "hint_2": "It's the part that adds 1 to a column value."
+              },
+              "template": "The first missing value is [blank1].",
+              "choices": [
+                "grade_level + 1",
+                "AS next_year",
+                "name",
+                "students"
+              ]
+            },
+            "fill-blank-2": {
+              "title": "Purpose of an Alias",
+              "prompt": "Choose the best value for the first missing blank in the statement.",
+              "hint": "Think about what comes after the AS keyword.",
+              "help": {
+                "concept": "An alias in SQL gives a new, temporary name to a column or expression in the result set.",
+                "hint_1": "The alias makes the output column easier to understand.",
+                "hint_2": "It's not changing the calculation, just the column's label in the results."
+              },
+              "template": "The first missing value is [blank1].",
+              "choices": [
+                "give a readable name to the calculated column",
+                "multiply the grade_level by 2",
+                "select only the name column",
+                "filter rows from the students table"
+              ]
+            },
+            "single-1": {
+              "title": "Arithmetic in SELECT",
+              "prompt": "Which of the following queries will show each student's name and their grade level plus 2?",
+              "hint": "Look for the query that adds 2 to the grade_level in the SELECT list.",
+              "help": {
+                "concept": "You can perform arithmetic in the SELECT clause to create new calculated columns.",
+                "hint_1": "The calculation should be in the SELECT part, not WHERE or AS.",
+                "hint_2": "The correct query selects name and grade_level + 2."
+              },
+              "options": {
+                "a": "SELECT name, grade_level + 2 FROM students;",
+                "b": "SELECT name, grade_level FROM students WHERE grade_level + 2;",
+                "c": "SELECT name, grade_level AS grade_level + 2 FROM students;",
+                "d": "SELECT name, grade_level FROM students;"
+              }
+            },
+            "multi-1": {
+              "title": "Valid SQL Expressions",
+              "prompt": "Which of the following are valid SQL expressions you could use in a SELECT statement? (Choose all that apply)",
+              "hint": "Expressions combine columns, values, and operators.",
+              "help": {
+                "concept": "SQL expressions can use arithmetic or string operators to create new values.",
+                "hint_1": "Look for options that use math or string operations.",
+                "hint_2": "The last option is a full query, not an expression."
+              },
+              "options": {
+                "a": "grade_level - 1",
+                "b": "name || ' Smith'",
+                "c": "department_id * 2",
+                "d": "SELECT * FROM students"
+              }
+            },
+            "code-1": {
+              "title": "Write a Query with a Calculated Column",
+              "prompt": "Write a SQL query to show each student's name and what their grade level will be two years from now. Name the new column future_grade.",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+                "hint_1": "Eliminate choices or interpretations that do not match the task.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "starterCode": "-- Write your query below"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_5": {
+        "math-in-sql": {
+          "sketch-1": {
+            "title": "What is Math in SQL?",
+            "bodyMarkdown": "SQL lets you perform arithmetic operations (like addition, subtraction, multiplication, and division) directly in your SELECT statements. This is useful for creating new columns on the fly, such as calculating totals, averages, or other derived values from your data.\n\nFor example, you can add 1 to every student's grade level:\n\n```sql\nSELECT name, grade_level + 1 AS next_year_grade FROM students;\n```\n\nThis query shows each student's name and what their grade level will be next year."
+          },
+          "sketch-2": {
+            "title": "Using Expressions and Aliases",
+            "bodyMarkdown": "An **expression** in SQL is any combination of columns, values, and operators that produces a single value. You can use expressions to create calculated columns in your SELECT queries.\n\nTo make your results easier to read, use the `AS` keyword to give your calculated column a clear name (an **alias**):\n\n```sql\nSELECT name, grade_level * 2 AS double_grade FROM students;\n```\n\nHere, `double_grade` is an alias for the calculated value."
+          }
+        }
+      }
+    }
+  }
+}

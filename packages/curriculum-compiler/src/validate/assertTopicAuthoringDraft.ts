@@ -39,6 +39,17 @@ function assertHelp(
     }
 }
 
+function countFillBlanks(template: string, prompt: string): number {
+    const t = String(template ?? "");
+    const p = String(prompt ?? "");
+
+    const templateBracketBlanks = (t.match(/\[blank\d*\]/gi) ?? []).length;
+    const templateUnderscoreBlanks = (t.match(/_{2,}/g) ?? []).length;
+    const promptUnderscoreBlanks = (p.match(/_{2,}/g) ?? []).length;
+
+    return templateBracketBlanks + templateUnderscoreBlanks + promptUnderscoreBlanks;
+}
+
 export function assertTopicAuthoringDraft(
     draft: TopicAuthoringDraft,
 ): asserts draft is TopicAuthoringDraft {
@@ -158,9 +169,7 @@ export function assertTopicAuthoringDraft(
             const tokenSet = new Set(exercise.tokens.map((token) => token.trim()));
 
             if (!exercise.correctOrder.every((token) => tokenSet.has(token.trim()))) {
-                fail(
-                    `${label} drag_reorder correctOrder must only contain values from tokens`,
-                );
+                fail(`${label} drag_reorder correctOrder must only contain values from tokens`);
             }
 
             return;
@@ -169,6 +178,16 @@ export function assertTopicAuthoringDraft(
         if (exercise.kind === "fill_blank_choice") {
             if (!isNonEmptyString(exercise.template)) {
                 fail(`${label} fill_blank_choice needs template`);
+            }
+
+            const blankCount = countFillBlanks(exercise.template, exercise.prompt);
+
+            if (blankCount === 0) {
+                fail(`${label} fill_blank_choice needs exactly 1 blank placeholder`);
+            }
+
+            if (blankCount > 1) {
+                fail(`${label} fill_blank_choice supports only 1 blank, but found ${blankCount}`);
             }
 
             if (!Array.isArray(exercise.choices) || exercise.choices.length < 2) {

@@ -1,0 +1,118 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_5": {
+        "string-functions": {
+          "label": "String functions",
+          "summary": "Learn how to use SQL string functions in calculated columns and expressions to manipulate and analyze text data.",
+          "cards": {
+            "sketch0": {
+              "title": "What are SQL String Functions?"
+            },
+            "sketch1": {
+              "title": "Using LENGTH() and SUBSTR()"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "quiz": {
+            "fillblank-1": {
+              "title": "Using UPPER() to Change Case",
+              "prompt": "Choose the best value for the missing blank in the statement.",
+              "hint": "Focus on the missing SQL concept rather than the exact missing word.",
+              "help": {
+                "concept": "The blank should be filled with the SQL term that matches the job the statement is trying to perform.",
+                "hint_1": "Think about what the missing part is supposed to do in the statement.",
+                "hint_2": "Choose the SQL term that best completes the meaning of the statement."
+              },
+              "template": "The missing value is [blank1].",
+              "choices": [
+                "UPPER",
+                "LOWER",
+                "LENGTH",
+                "SUBSTR"
+              ]
+            },
+            "fillblank-2": {
+              "title": "Getting the Length of a String",
+              "prompt": "Choose the best value for the missing blank in the statement.",
+              "hint": "Which function counts characters in a string?",
+              "help": {
+                "concept": "the missing term() returns the number of characters in a string value.",
+                "hint_1": "It's not about changing case or extracting part of the string.",
+                "hint_2": "The function's name describes what it measures: the size of the string."
+              },
+              "template": "The missing value is [blank1].",
+              "choices": [
+                "LENGTH",
+                "UPPER",
+                "SUBSTR",
+                "LOWER"
+              ]
+            },
+            "single-1": {
+              "title": "Extracting Part of a String",
+              "prompt": "Which SQL function extracts a portion of text from a string column?",
+              "hint": "Focus on the main concept being tested and eliminate choices that describe something different.",
+              "help": {
+                "concept": "Choose the option that matches the core idea described in the question without relying on repeated wording from the answer choices.",
+                "hint_1": "Rule out options that describe a different role, behavior, or SQL concept than the question is testing.",
+                "hint_2": "Pick the option that best matches the concept, not the one that simply repeats familiar wording."
+              },
+              "options": {
+                "a": "SUBSTR",
+                "b": "LENGTH",
+                "c": "UPPER",
+                "d": "COUNT"
+              }
+            },
+            "multi-1": {
+              "title": "Functions for Changing Text Case",
+              "prompt": "Which of the following SQL functions can be used to change the case of text in a column? (Select all that apply)",
+              "hint": "Focus on the main concept being tested and eliminate choices that describe something different.",
+              "help": {
+                "concept": "Choose the option that matches the core idea described in the question without relying on repeated wording from the answer choices.",
+                "hint_1": "Rule out options that describe a different role, behavior, or SQL concept than the question is testing.",
+                "hint_2": "Pick the option that best matches the concept, not the one that simply repeats familiar wording."
+              },
+              "options": {
+                "a": "UPPER",
+                "b": "LOWER",
+                "c": "LENGTH",
+                "d": "SUBSTR"
+              }
+            },
+            "code-1": {
+              "title": "Show Student Names and Their Lengths",
+              "prompt": "Write a SQL query to display each student's name and the number of characters in their name. The output should have columns 'name' and 'name_length'.",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+                "hint_1": "Eliminate choices or interpretations that do not match the task.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "starterCode": "-- Write your query here"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_5": {
+        "string-functions": {
+          "sketch-1": {
+            "title": "What are SQL String Functions?",
+            "bodyMarkdown": "SQL string functions let you manipulate text data in your queries. Common examples include `UPPER()`, `LOWER()`, `LENGTH()`, and `SUBSTR()`. These functions can be used in the `SELECT` clause to create new columns or transform existing ones. For example, to get all student names in uppercase:\n\n```sql\nSELECT UPPER(name) AS name_upper FROM students;\n```\nThis returns the names of all students, but in uppercase letters."
+          },
+          "sketch-2": {
+            "title": "Using LENGTH() and SUBSTR()",
+            "bodyMarkdown": "The `LENGTH()` function returns the number of characters in a string. For example:\n\n```sql\nSELECT name, LENGTH(name) AS name_length FROM students;\n```\nThis query shows each student's name and the length of their name.\n\nThe `SUBSTR()` function extracts part of a string. For example, to get the first three letters of each student's name:\n\n```sql\nSELECT name, SUBSTR(name, 1, 3) AS first_three FROM students;\n```"
+          }
+        }
+      }
+    }
+  }
+}

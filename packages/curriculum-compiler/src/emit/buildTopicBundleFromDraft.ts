@@ -3,6 +3,8 @@ import type {
     TopicSeed,
 } from "@zoeskoul/curriculum-contracts";
 import type { SubjectShapePack } from "@zoeskoul/curriculum-profiles";
+import { buildExerciseMessageKeys } from "../messages/buildMessageKeys.js";
+import { validateTopicMessageBases } from "../messages/validateTopicMessageBases.js";
 
 function optionIdsFromCount(count: number) {
     return Array.from({ length: count }, (_, i) => String.fromCharCode(97 + i));
@@ -23,7 +25,10 @@ export function buildTopicBundleFromDraft(args: {
     const kp = shape.subjectManifest.keyPatterns;
 
     const logicalModuleSlug = shape.subjectManifest.moduleSlug(moduleOrder);
-    const logicalSectionSlug = shape.subjectManifest.sectionSlug(moduleOrder, sectionOrder);
+    const logicalSectionSlug = shape.subjectManifest.sectionSlug(
+        moduleOrder,
+        sectionOrder,
+    );
     const prefix = shape.subjectManifest.modulePrefix(moduleOrder);
 
     const sketchCards = draft.sketchBlocks.map((block, index) => ({
@@ -89,7 +94,10 @@ export function buildTopicBundleFromDraft(args: {
             ),
             quiz: {
                 difficulty: "easy",
-                n: Math.min(5, draft.quizDraft.filter((x) => x.kind !== "code_input").length || 3),
+                n: Math.min(
+                    5,
+                    draft.quizDraft.filter((x) => x.kind !== "code_input").length || 3,
+                ),
                 allowReveal: true,
                 preferKind: null,
                 maxAttempts: 10,
@@ -100,12 +108,45 @@ export function buildTopicBundleFromDraft(args: {
     const sketches = draft.sketchBlocks.map((block) => ({
         id: block.id,
         archetype: "paragraph" as const,
-        titleKey: kp.sketchTitleKey(seed.subjectSlug, logicalModuleSlug, seed.topicId, block.id),
-        bodyKey: kp.sketchBodyKey(seed.subjectSlug, logicalModuleSlug, seed.topicId, block.id),
+        titleKey: kp.sketchTitleKey(
+            seed.subjectSlug,
+            logicalModuleSlug,
+            seed.topicId,
+            block.id,
+        ),
+        bodyKey: kp.sketchBodyKey(
+            seed.subjectSlug,
+            logicalModuleSlug,
+            seed.topicId,
+            block.id,
+        ),
     }));
 
+    validateTopicMessageBases(
+        draft.quizDraft.map((exercise) => ({
+            id: exercise.id,
+            messageBase: (exercise as { messageBase?: string }).messageBase,
+        })),
+    );
+
     const exercises = draft.quizDraft.map((exercise) => {
-        const messageBase = kp.exerciseMessageBase(exercise.id);
+        const optionIdsForKeys =
+            exercise.kind === "single_choice" || exercise.kind === "multi_choice"
+                ? optionIdsFromCount(exercise.options.length)
+                : [];
+
+        const messageKeys = buildExerciseMessageKeys({
+            scope: {
+                subjectSlug: seed.subjectSlug,
+                moduleSlug: logicalModuleSlug,
+                topicId: seed.topicId,
+            },
+            exerciseId: exercise.id,
+            messageBase: (exercise as { messageBase?: string }).messageBase,
+            optionIds: optionIdsForKeys,
+        });
+
+        const messageBase = messageKeys.qualifiedBase;
         const isProjectExercise = projectStepIds.includes(exercise.id);
 
         if (exercise.kind === "single_choice") {
@@ -114,14 +155,18 @@ export function buildTopicBundleFromDraft(args: {
 
             if (!correctOptionId || !optionIds.includes(correctOptionId)) {
                 throw new Error(
-                    `Invalid single_choice exercise "${exercise.id}": correct answer key must be included in available optionIds.\n\nExpected one of: ${JSON.stringify(optionIds)}\nReceived: ${JSON.stringify(exercise.correctOptionIds)}\n\nExercise:\n${JSON.stringify(exercise, null, 2)}`
+                    `Invalid single_choice exercise "${exercise.id}": correct answer key must be included in available optionIds.\n\nExpected one of: ${JSON.stringify(
+                        optionIds,
+                    )}\nReceived: ${JSON.stringify(
+                        exercise.correctOptionIds,
+                    )}\n\nExercise:\n${JSON.stringify(exercise, null, 2)}`,
                 );
             }
 
             return {
                 id: exercise.id,
                 kind: "single_choice" as const,
-                purpose: isProjectExercise ? "project" as const : "quiz" as const,
+                purpose: isProjectExercise ? ("project" as const) : ("quiz" as const),
                 weight: 1,
                 messageBase,
                 optionIds,
@@ -140,14 +185,18 @@ export function buildTopicBundleFromDraft(args: {
 
             if (correctOptionIds.length === 0) {
                 throw new Error(
-                    `Invalid multi_choice exercise "${exercise.id}": no correct answer key is included in available optionIds.\n\nExpected values from: ${JSON.stringify(optionIds)}\nReceived: ${JSON.stringify(exercise.correctOptionIds)}\n\nExercise:\n${JSON.stringify(exercise, null, 2)}`
+                    `Invalid multi_choice exercise "${exercise.id}": no correct answer key is included in available optionIds.\n\nExpected values from: ${JSON.stringify(
+                        optionIds,
+                    )}\nReceived: ${JSON.stringify(
+                        exercise.correctOptionIds,
+                    )}\n\nExercise:\n${JSON.stringify(exercise, null, 2)}`,
                 );
             }
 
             return {
                 id: exercise.id,
                 kind: "multi_choice" as const,
-                purpose: isProjectExercise ? "project" as const : "quiz" as const,
+                purpose: isProjectExercise ? ("project" as const) : ("quiz" as const),
                 weight: 1,
                 messageBase,
                 optionIds,
@@ -166,8 +215,8 @@ export function buildTopicBundleFromDraft(args: {
                 tokenMap.set(normalizeText(token), tokenIds[i]);
             });
 
-            const expectedTokenIds = exercise.correctOrder.map((token) =>
-                tokenMap.get(normalizeText(token)) ?? "",
+            const expectedTokenIds = exercise.correctOrder.map(
+                (token) => tokenMap.get(normalizeText(token)) ?? "",
             );
 
             if (
@@ -175,14 +224,18 @@ export function buildTopicBundleFromDraft(args: {
                 expectedTokenIds.some((id) => !id)
             ) {
                 throw new Error(
-                    `Invalid drag_reorder exercise "${exercise.id}": every correctOrder value must be included in tokens.\n\nTokens: ${JSON.stringify(exercise.tokens)}\nCorrect order: ${JSON.stringify(exercise.correctOrder)}\n\nExercise:\n${JSON.stringify(exercise, null, 2)}`
+                    `Invalid drag_reorder exercise "${exercise.id}": every correctOrder value must be included in tokens.\n\nTokens: ${JSON.stringify(
+                        exercise.tokens,
+                    )}\nCorrect order: ${JSON.stringify(
+                        exercise.correctOrder,
+                    )}\n\nExercise:\n${JSON.stringify(exercise, null, 2)}`,
                 );
             }
 
             return {
                 id: exercise.id,
                 kind: "drag_reorder" as const,
-                purpose: isProjectExercise ? "project" as const : "quiz" as const,
+                purpose: isProjectExercise ? ("project" as const) : ("quiz" as const),
                 weight: 1,
                 messageBase,
                 tokenIds,
@@ -202,14 +255,18 @@ export function buildTopicBundleFromDraft(args: {
                 !normalizedChoices.some((choice) => choice === correctValue)
             ) {
                 throw new Error(
-                    `Invalid fill_blank_choice exercise "${exercise.id}": correctValue must be included in choices.\n\nChoices: ${JSON.stringify(exercise.choices)}\nCorrect value: ${JSON.stringify(exercise.correctValue)}\n\nExercise:\n${JSON.stringify(exercise, null, 2)}`
+                    `Invalid fill_blank_choice exercise "${exercise.id}": correctValue must be included in choices.\n\nChoices: ${JSON.stringify(
+                        exercise.choices,
+                    )}\nCorrect value: ${JSON.stringify(
+                        exercise.correctValue,
+                    )}\n\nExercise:\n${JSON.stringify(exercise, null, 2)}`,
                 );
             }
 
             return {
                 id: exercise.id,
                 kind: "fill_blank_choice" as const,
-                purpose: isProjectExercise ? "project" as const : "quiz" as const,
+                purpose: isProjectExercise ? ("project" as const) : ("quiz" as const),
                 weight: 1,
                 messageBase,
                 choiceCount: exercise.choices.length,
@@ -227,6 +284,15 @@ export function buildTopicBundleFromDraft(args: {
                         ? seed.moduleRuntimeDefaults.datasetId
                         : undefined;
 
+                const effectiveDatasetId =
+                    normalizeText(exercise.datasetId) || normalizeText(moduleDatasetId);
+
+                if (!effectiveDatasetId) {
+                    throw new Error(
+                        `SQL code_input exercise "${exercise.id}" is missing an effective datasetId`,
+                    );
+                }
+
                 const moduleDialect =
                     seed.moduleRuntimeDefaults?.kind === "sql"
                         ? seed.moduleRuntimeDefaults.fixedSqlDialect
@@ -240,15 +306,17 @@ export function buildTopicBundleFromDraft(args: {
                 return {
                     id: exercise.id,
                     kind: "code_input" as const,
-                    purpose: isProjectExercise ? "project" as const : "quiz" as const,
+                    purpose: isProjectExercise ? ("project" as const) : ("quiz" as const),
                     weight: 1,
                     messageBase,
                     language: "sql" as const,
-                    fixedSqlDialect: moduleDialect === "sqlite" ? "sqlite" : "sqlite",
+                    fixedSqlDialect:
+                        moduleDialect === "sqlite" ? "sqlite" : "sqlite",
                     recipe: {
                         type: "sql_query" as const,
-                        datasetId: exercise.datasetId ?? moduleDatasetId ?? "products_catalog",
-                        resultShape: moduleResultShape === "table" ? "table" : "table",
+                        datasetId: effectiveDatasetId,
+                        resultShape:
+                            moduleResultShape === "table" ? "table" : "table",
                         solutionCode: exercise.solutionCode,
                     },
                 };
@@ -257,7 +325,7 @@ export function buildTopicBundleFromDraft(args: {
             return {
                 id: exercise.id,
                 kind: "code_input" as const,
-                purpose: isProjectExercise ? "project" as const : "quiz" as const,
+                purpose: isProjectExercise ? ("project" as const) : ("quiz" as const),
                 weight: 1,
                 messageBase,
                 language: "python" as const,
@@ -278,7 +346,9 @@ export function buildTopicBundleFromDraft(args: {
             };
         }
 
-        throw new Error(`Unsupported exercise kind: ${(exercise as { kind: string }).kind}`);
+        throw new Error(
+            `Unsupported exercise kind: ${(exercise as { kind: string }).kind}`,
+        );
     });
 
     return {
@@ -289,8 +359,16 @@ export function buildTopicBundleFromDraft(args: {
         prefix,
         minutes: draft.minutes,
         topic: {
-            labelKey: kp.topicLabelKey(seed.subjectSlug, logicalModuleSlug, seed.topicId),
-            summaryKey: kp.topicSummaryKey(seed.subjectSlug, logicalModuleSlug, seed.topicId),
+            labelKey: kp.topicLabelKey(
+                seed.subjectSlug,
+                logicalModuleSlug,
+                seed.topicId,
+            ),
+            summaryKey: kp.topicSummaryKey(
+                seed.subjectSlug,
+                logicalModuleSlug,
+                seed.topicId,
+            ),
         },
         cards: [...sketchCards, ...projectCard, ...quizCard],
         sketches,

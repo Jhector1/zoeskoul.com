@@ -1,0 +1,125 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_0": {
+        "sql-editor-basics": {
+          "label": "SQL editor basics",
+          "summary": "Learn the essentials of using a SQL editor, including identifying tables, columns, and rows, and running your first queries.",
+          "cards": {
+            "sketch0": {
+              "title": "What is a SQL Editor?"
+            },
+            "sketch1": {
+              "title": "Tables, Columns, and Rows"
+            },
+            "sketch2": {
+              "title": "Running Your First Query"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "quiz": {
+            "fill-blank-1": {
+              "title": "Identifying a Table Name",
+              "prompt": "In the SQL query `SELECT * FROM students;`, what is the name of the table being queried?",
+              "hint": "Look for the word after FROM.",
+              "help": {
+                "concept": "The FROM clause in SQL specifies which table to retrieve data from.",
+                "hint_1": "The table name comes right after the FROM keyword.",
+                "hint_2": "In `SELECT * FROM the missing term;`, the table name is the word following FROM."
+              },
+              "template": "The table name in this query is ___.",
+              "choices": [
+                "students",
+                "SELECT",
+                "*",
+                "FROM"
+              ]
+            },
+            "fill-blank-2": {
+              "title": "Understanding Columns",
+              "prompt": "Which of the following is a column in the `students` table if the table has columns `id`, `name`, and `grade`?",
+              "hint": "Columns are the fields inside a table.",
+              "help": {
+                "concept": "Columns represent the attributes or fields in a table.",
+                "hint_1": "Columns are not the table name or SQL keywords.",
+                "hint_2": "In `students(id, name, the missing term)`, each item in parentheses is a column."
+              },
+              "template": "An example of a column in the students table is ___.",
+              "choices": [
+                "grade",
+                "students",
+                "SELECT",
+                "row"
+              ]
+            },
+            "single-choice-1": {
+              "title": "Purpose of the SQL Editor",
+              "prompt": "What is the main purpose of a SQL editor?",
+              "hint": "Think about what you do with SQL.",
+              "help": {
+                "concept": "A SQL editor is specifically designed for interacting with databases using SQL.",
+                "hint_1": "SQL editors are not for general programming or graphic design.",
+                "hint_2": "The SQL editor's main job is to let you run SQL commands and see results."
+              },
+              "options": {
+                "a": "To write and execute SQL queries on a database",
+                "b": "To design graphics for a website",
+                "c": "To create spreadsheets",
+                "d": "To write Python scripts"
+              }
+            },
+            "multi-choice-1": {
+              "title": "Tables vs. Spreadsheets",
+              "prompt": "Which of the following are similarities between a database table and a spreadsheet? (Select all that apply)",
+              "hint": "Think about how data is arranged and stored.",
+              "help": {
+                "concept": "Database tables and spreadsheets both organize data in a grid, but only databases use SQL.",
+                "hint_1": "Consider which features are shared between tables and spreadsheets.",
+                "hint_2": "Spreadsheets and tables both have rows/columns and can store structured data, but only databases use SQL."
+              },
+              "options": {
+                "a": "Both organize data in rows and columns",
+                "b": "Both can have multiple sheets or tables",
+                "c": "Both use SQL to query data",
+                "d": "Both allow storing structured data"
+              }
+            },
+            "code-input-1": {
+              "title": "Running a Simple Query",
+              "prompt": "Write a SQL query to select all columns from the `students` table.",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+                "hint_1": "Eliminate choices or interpretations that do not match the task.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "starterCode": "-- Write your SQL query below"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_0": {
+        "sql-editor-basics": {
+          "sketch-1": {
+            "title": "What is a SQL Editor?",
+            "bodyMarkdown": "A SQL editor is a tool where you can write and run SQL queries to interact with a database. It usually provides a text area for your SQL code, a button to execute your query, and a results pane to display the output. Most editors also show you the list of tables and their columns."
+          },
+          "sketch-2": {
+            "title": "Tables, Columns, and Rows",
+            "bodyMarkdown": "In a database, data is organized into **tables**. Each table has **columns** (the fields or attributes) and **rows** (the records or entries). For example, a `students` table might have columns like `id`, `name`, and `grade`, with each row representing a different student."
+          },
+          "sketch-3": {
+            "title": "Running Your First Query",
+            "bodyMarkdown": "To see data from a table, you write a SQL query such as `SELECT * FROM students;` in the editor and run it. The `SELECT` statement asks the database to return data, and the `*` means 'all columns'. The result will appear in the output pane, showing all rows from the `students` table."
+          }
+        }
+      }
+    }
+  }
+}
