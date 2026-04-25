@@ -3,6 +3,7 @@ import type {
     BuildSubjectManifestArgs,
     CompileTopicRecipeArgs,
     TopicRecipe,
+    TopicSeed,
 } from "@zoeskoul/curriculum-contracts";
 import type { SqlDatasetArtifact } from "@zoeskoul/curriculum-contracts";
 import { buildBaseSubjectManifest } from "../shared/buildBaseSubjectManifest.js";
@@ -16,7 +17,7 @@ function buildSqlGrounding(args: {
     datasetId?: string;
     moduleOrder: number;
 }) {
-    const policy = getSqlModuleDatasetPolicy(args.moduleOrder);
+    const policy = getSqlModuleDatasetPolicy(Math.max(0, args.moduleOrder - 1));
 
     const datasetId = args.datasetId ?? args.dataset?.id ?? policy.datasetId;
     const allowedTables = Object.fromEntries(
@@ -41,12 +42,39 @@ export const sqlProfileAdapter: CourseProfileAdapter = {
     id: "sql",
 
     getTopicSeedRuntimeDefaults(args) {
-        return sqlProfile.buildModuleRuntimeDefaults(args.module.order);
+        const datasetId =
+            args.blueprint.runtimePolicy?.moduleDatasetIds?.[args.module.slug] ??
+            args.blueprint.runtimePolicy?.datasetId ??
+            args.blueprint.runtimePolicy?.preferredDatasetId;
+
+        const runtimeDefaults: TopicSeed["moduleRuntimeDefaults"] | null =
+            datasetId || args.blueprint.runtimePolicy?.sqlDialect
+                ? {
+                    kind: "sql",
+                    datasetId,
+                    fixedSqlDialect: args.blueprint.runtimePolicy?.sqlDialect ?? "sqlite",
+                    resultShape: args.blueprint.runtimePolicy?.resultShape ?? "table",
+                }
+                : null;
+
+        return runtimeDefaults ?? sqlProfile.buildModuleRuntimeDefaults(args.module.order);
     },
 
     buildTopicSeed(args: BuildTopicSeedArgs) {
         const fallbackRuntimeDefaults =
-            sqlProfile.buildModuleRuntimeDefaults(args.module.order) ?? undefined;
+            sqlProfile.buildModuleRuntimeDefaults(args.module.order, {
+                moduleSlug: args.module.slug,
+                prefix: "",
+                order: args.module.order,
+                title: args.module.title,
+                purpose: args.module.purpose,
+                learningObjectives: args.module.learningObjectives ?? [],
+                guidedExercises: args.module.guidedExercises ?? [],
+                quizFocus: args.module.quizFocus ?? [],
+                moduleProject: args.module.moduleProject,
+                runtimePolicy: undefined,
+                sections: [],
+            } as any) ?? undefined;
 
         const moduleRuntimeDefaults =
             args.module.runtimeDefaults ?? fallbackRuntimeDefaults ?? undefined;

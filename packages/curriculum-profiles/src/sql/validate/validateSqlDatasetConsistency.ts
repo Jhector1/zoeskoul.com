@@ -1,122 +1,210 @@
+// packages/curriculum-profiles/src/sql/validate/validateSqlDatasetConsistency.ts
+
 import type {
+    SqlDatasetArtifact,
     TopicAuthoringDraft,
     TopicSeed,
-    SqlDatasetArtifact,
 } from "@zoeskoul/curriculum-contracts";
-import { getSqlDatasetById } from "../datasets/index.js";
+import { getSqlDataset } from "../datasets/index.js";
 
-function extractSqlCodeBlocks(markdown: string): string[] {
-    const matches = markdown.match(/```sql\s*([\s\S]*?)```/gi) ?? [];
-    const tildeMatches = markdown.match(/~~~sql\s*([\s\S]*?)~~~/gi) ?? [];
-
-    return [...matches, ...tildeMatches].map((block) =>
-        block
-            .replace(/^```sql\s*/i, "")
-            .replace(/^~~~sql\s*/i, "")
-            .replace(/```$/i, "")
-            .replace(/~~~$/i, "")
-            .trim(),
-    );
-}
-
-const SQL_NON_COLUMN_WORDS = new Set([
+const SQL_KEYWORDS = new Set([
     "select",
     "from",
     "where",
     "and",
     "or",
+    "not",
     "as",
-    "count",
-    "sum",
-    "avg",
-    "min",
-    "max",
-    "distinct",
     "group",
     "by",
     "order",
     "having",
     "limit",
-    "asc",
-    "desc",
-    "upper",
-    "lower",
-    "length",
-    "trim",
-    "ltrim",
-    "rtrim",
-    "round",
-    "abs",
-    "coalesce",
-    "substr",
-    "substring",
-    "replace",
-    "cast",
+    "offset",
+    "join",
+    "inner",
+    "left",
+    "right",
+    "full",
+    "outer",
+    "cross",
+    "on",
     "case",
     "when",
     "then",
     "else",
     "end",
-    "null",
+    "distinct",
+    "asc",
+    "desc",
     "is",
-    "not",
+    "null",
+    "between",
     "in",
     "like",
-    "between",
+    "glob",
+    "exists",
+    "union",
+    "all",
+    "intersect",
+    "except",
+    "with",
+    "recursive",
+    "over",
+    "partition",
+    "rows",
+    "range",
+    "current",
+    "row",
+    "preceding",
+    "following",
+    "unbounded",
+    "true",
+    "false",
+    "cast",
+    "collate",
 ]);
 
-const SQL_PLACEHOLDER_IDENTIFIERS = new Set([
-    "table",
-    "tables",
-    "column",
-    "columns",
-    "column_or_expression",
-    "expression",
-    "expressions",
-    "value",
-    "values",
-    "alias",
-    "result",
-    "results",
-    "condition",
-    "conditions",
-    "table_name",
-    "column_name",
-    "blank",
-    "blank1",
-    "blank2",
-    "placeholder",
-    "____",
+const SQL_TYPE_NAMES = new Set([
+    "integer",
+    "int",
+    "real",
+    "numeric",
+    "decimal",
+    "float",
+    "double",
+    "text",
+    "varchar",
+    "char",
+    "boolean",
+    "date",
+    "datetime",
+    "timestamp",
+    "blob",
 ]);
 
-function isPlaceholderIdentifier(value: string): boolean {
-    const lower = value.toLowerCase();
-    return (
-        SQL_PLACEHOLDER_IDENTIFIERS.has(lower) ||
-        /^_+$/.test(value) ||
-        /^_{2,}[a-z0-9_]*$/i.test(value) ||
-        lower.endsWith("_or_expression") ||
-        lower.endsWith("_name_here") ||
-        lower.endsWith("_value_here")
-    );
-}
+const SQL_FUNCTION_NAMES = new Set([
+    // Aggregates
+    "avg",
+    "count",
+    "sum",
+    "min",
+    "max",
+    "total",
+    "group_concat",
 
-function extractReferencedTables(sql: string): string[] {
-    const matches = [
-        ...sql.matchAll(/\bfrom\s+([a-zA-Z_][a-zA-Z0-9_]*)/gi),
-        ...sql.matchAll(/\bjoin\s+([a-zA-Z_][a-zA-Z0-9_]*)/gi),
-        ...sql.matchAll(/\bupdate\s+([a-zA-Z_][a-zA-Z0-9_]*)/gi),
-        ...sql.matchAll(/\binsert\s+into\s+([a-zA-Z_][a-zA-Z0-9_]*)/gi),
-        ...sql.matchAll(/\bdelete\s+from\s+([a-zA-Z_][a-zA-Z0-9_]*)/gi),
-    ];
+    // SQLite date/time
+    "date",
+    "time",
+    "datetime",
+    "julianday",
+    "unixepoch",
+    "strftime",
+    "timediff",
 
-    return [
-        ...new Set(
-            matches
-                .map((m) => m[1])
-                .filter((name) => name && !isPlaceholderIdentifier(name)),
-        ),
-    ];
+    // SQLite scalar/string
+    "abs",
+    "changes",
+    "char",
+    "coalesce",
+    "concat",
+    "concat_ws",
+    "format",
+    "glob",
+    "hex",
+    "ifnull",
+    "iif",
+    "instr",
+    "last_insert_rowid",
+    "length",
+    "like",
+    "likely",
+    "likelihood",
+    "lower",
+    "ltrim",
+    "max",
+    "min",
+    "nullif",
+    "printf",
+    "quote",
+    "random",
+    "randomblob",
+    "replace",
+    "round",
+    "rtrim",
+    "sign",
+    "soundex",
+    "sqlite_compileoption_get",
+    "sqlite_compileoption_used",
+    "sqlite_offset",
+    "sqlite_source_id",
+    "sqlite_version",
+    "substr",
+    "substring",
+    "trim",
+    "typeof",
+    "unicode",
+    "unlikely",
+    "upper",
+    "zeroblob",
+
+    // Common math funcs supported in many SQLite builds
+    "acos",
+    "acosh",
+    "asin",
+    "asinh",
+    "atan",
+    "atan2",
+    "atanh",
+    "ceil",
+    "ceiling",
+    "cos",
+    "cosh",
+    "degrees",
+    "exp",
+    "floor",
+    "ln",
+    "log",
+    "log10",
+    "log2",
+    "mod",
+    "pi",
+    "pow",
+    "power",
+    "radians",
+    "sin",
+    "sinh",
+    "sqrt",
+    "tan",
+    "tanh",
+    "trunc",
+
+    // Window functions
+    "row_number",
+    "rank",
+    "dense_rank",
+    "percent_rank",
+    "cume_dist",
+    "ntile",
+    "lag",
+    "lead",
+    "first_value",
+    "last_value",
+    "nth_value",
+]);
+
+type DatasetShape = {
+    id: string;
+    tableNames: Set<string>;
+    columnNames: Set<string>;
+};
+
+function normalizeIdentifier(value: string | undefined | null): string {
+    return (value ?? "")
+        .trim()
+        .replace(/^["'`\[]+/, "")
+        .replace(/["'`\]]+$/, "")
+        .toLowerCase();
 }
 
 function stripSqlComments(sql: string): string {
@@ -125,263 +213,262 @@ function stripSqlComments(sql: string): string {
         .replace(/\/\*[\s\S]*?\*\//g, " ");
 }
 
-function stripSqlStringLiterals(sql: string): string {
+function stripSqlStrings(sql: string): string {
     return sql
         .replace(/'([^']|'')*'/g, " ")
         .replace(/"([^"]|"")*"/g, " ");
 }
 
-function splitTopLevelCommaSeparated(text: string): string[] {
-    const parts: string[] = [];
-    let current = "";
-    let depth = 0;
+function stripSqlCommentsAndStrings(sql: string): string {
+    return stripSqlStrings(stripSqlComments(sql));
+}
 
-    for (const ch of text) {
-        if (ch === "(") depth += 1;
-        if (ch === ")") depth = Math.max(0, depth - 1);
+function escapeRegExp(value: string): string {
+    return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
 
-        if (ch === "," && depth === 0) {
-            parts.push(current.trim());
-            current = "";
+function isSqlFunctionReference(sql: string, identifier: string): boolean {
+    const normalized = normalizeIdentifier(identifier);
+    if (!normalized) return false;
+
+    const pattern = new RegExp(`\\b${escapeRegExp(normalized)}\\s*\\(`, "i");
+    return pattern.test(sql);
+}
+
+function extractIdentifiers(sql: string): string[] {
+    const cleaned = stripSqlCommentsAndStrings(sql);
+    const identifiers = cleaned.match(/\b[a-zA-Z_][a-zA-Z0-9_]*\b/g) ?? [];
+
+    return Array.from(
+        new Set(
+            identifiers
+                .map(normalizeIdentifier)
+                .filter((identifier) => identifier.length > 0),
+        ),
+    );
+}
+
+function extractAliases(sql: string): Set<string> {
+    const cleaned = stripSqlCommentsAndStrings(sql);
+    const aliases = new Set<string>();
+
+    const asAliasPattern = /\bas\s+([a-zA-Z_][a-zA-Z0-9_]*)\b/gi;
+    for (const match of cleaned.matchAll(asAliasPattern)) {
+        aliases.add(normalizeIdentifier(match[1]));
+    }
+
+    const tableAliasPattern =
+        /\b(?:from|join)\s+["'`]?(?<table>[a-zA-Z_][a-zA-Z0-9_]*)["'`]?(?:\s+(?:as\s+)?(?<alias>[a-zA-Z_][a-zA-Z0-9_]*))?/gi;
+
+    for (const match of cleaned.matchAll(tableAliasPattern)) {
+        const alias = normalizeIdentifier(match.groups?.alias);
+        if (alias && !SQL_KEYWORDS.has(alias)) {
+            aliases.add(alias);
+        }
+    }
+
+    return aliases;
+}
+
+function parseColumnsFromCreateTable(schemaSql: string): Set<string> {
+    const columns = new Set<string>();
+    const cleaned = stripSqlComments(schemaSql);
+
+    const createTablePattern =
+        /\bcreate\s+table\s+(?:if\s+not\s+exists\s+)?["'`]?[a-zA-Z_][a-zA-Z0-9_]*["'`]?\s*\(([\s\S]*?)\)\s*;?/gi;
+
+    for (const tableMatch of cleaned.matchAll(createTablePattern)) {
+        const body = tableMatch[1] ?? "";
+        const parts = body.split(",");
+
+        for (const rawPart of parts) {
+            const part = rawPart.trim();
+            if (!part) continue;
+
+            const firstToken = normalizeIdentifier(part.split(/\s+/)[0]);
+
+            if (!firstToken) continue;
+
+            if (
+                firstToken === "primary" ||
+                firstToken === "foreign" ||
+                firstToken === "unique" ||
+                firstToken === "check" ||
+                firstToken === "constraint"
+            ) {
+                continue;
+            }
+
+            columns.add(firstToken);
+        }
+    }
+
+    return columns;
+}
+
+function parseTablesFromCreateTable(schemaSql: string): Set<string> {
+    const tables = new Set<string>();
+    const cleaned = stripSqlComments(schemaSql);
+
+    const createTablePattern =
+        /\bcreate\s+table\s+(?:if\s+not\s+exists\s+)?["'`]?(?<table>[a-zA-Z_][a-zA-Z0-9_]*)["'`]?/gi;
+
+    for (const match of cleaned.matchAll(createTablePattern)) {
+        const table = normalizeIdentifier(match.groups?.table);
+        if (table) tables.add(table);
+    }
+
+    return tables;
+}
+
+function datasetToShape(dataset: SqlDatasetArtifact): DatasetShape {
+    const tableNames = new Set<string>();
+    const columnNames = new Set<string>();
+
+    const schemaSql = "schemaSql" in dataset ? String(dataset.schemaSql ?? "") : "";
+
+    for (const tableName of parseTablesFromCreateTable(schemaSql)) {
+        tableNames.add(tableName);
+    }
+
+    for (const columnName of parseColumnsFromCreateTable(schemaSql)) {
+        columnNames.add(columnName);
+    }
+
+    const tableSnapshots = Array.isArray(dataset.tableSnapshots)
+        ? dataset.tableSnapshots
+        : [];
+
+    for (const snapshot of tableSnapshots) {
+        const tableName = normalizeIdentifier(snapshot.tableName);
+        if (tableName) tableNames.add(tableName);
+
+        const columns = Array.isArray(snapshot.columns) ? snapshot.columns : [];
+        for (const column of columns) {
+            const columnName = normalizeIdentifier(String(column));
+            if (columnName) columnNames.add(columnName);
+        }
+    }
+
+    return {
+        id: String(dataset.id),
+        tableNames,
+        columnNames,
+    };
+}
+
+function getEffectiveDataset(args: {
+    seed: TopicSeed;
+    exerciseDatasetId?: string;
+}): SqlDatasetArtifact | null {
+    const exerciseDatasetId = args.exerciseDatasetId?.trim();
+    const moduleDatasetId =
+        args.seed.moduleRuntimeDefaults?.kind === "sql"
+            ? args.seed.moduleRuntimeDefaults.datasetId?.trim()
+            : undefined;
+
+    const seedDataset = args.seed.moduleDataset ?? null;
+    const datasetId = exerciseDatasetId || moduleDatasetId || seedDataset?.id;
+
+    if (!datasetId) return seedDataset;
+
+    if (seedDataset?.id === datasetId) {
+        return seedDataset;
+    }
+
+    return getSqlDataset(datasetId);
+}
+
+function shouldIgnoreIdentifier(args: {
+    sql: string;
+    identifier: string;
+    datasetShape: DatasetShape;
+    aliases: Set<string>;
+}): boolean {
+    const identifier = normalizeIdentifier(args.identifier);
+
+    if (!identifier) return true;
+
+    if (SQL_KEYWORDS.has(identifier)) return true;
+    if (SQL_TYPE_NAMES.has(identifier)) return true;
+    if (SQL_FUNCTION_NAMES.has(identifier)) return true;
+    if (args.aliases.has(identifier)) return true;
+    if (args.datasetShape.tableNames.has(identifier)) return true;
+
+    if (isSqlFunctionReference(args.sql, identifier)) return true;
+
+    return false;
+}
+
+function validateSqlExerciseAgainstDataset(args: {
+    exerciseId: string;
+    sql: string;
+    dataset: SqlDatasetArtifact;
+}): string[] {
+    const messages: string[] = [];
+    const datasetShape = datasetToShape(args.dataset);
+    const aliases = extractAliases(args.sql);
+    const identifiers = extractIdentifiers(args.sql);
+
+    for (const identifier of identifiers) {
+        if (
+            shouldIgnoreIdentifier({
+                sql: args.sql,
+                identifier,
+                datasetShape,
+                aliases,
+            })
+        ) {
             continue;
         }
 
-        current += ch;
-    }
-
-    if (current.trim()) parts.push(current.trim());
-    return parts;
-}
-
-function stripExplicitAlias(expression: string): string {
-    return expression.replace(
-        /\s+as\s+(?:"[^"]+"|'[^']+'|`[^`]+`|\[[^\]]+\]|[a-zA-Z_][a-zA-Z0-9_]*)\s*$/i,
-        "",
-    );
-}
-
-function stripBareTrailingAlias(expression: string): string {
-    const match = expression.match(
-        /^(.*?)(?:\s+)(?:"[^"]+"|'[^']+'|`[^`]+`|\[[^\]]+\]|[a-zA-Z_][a-zA-Z0-9_]*)\s*$/i,
-    );
-
-    if (!match) return expression;
-    const left = match[1].trim();
-
-    if (
-        /[()+\-*/]/.test(left) ||
-        /\./.test(left) ||
-        /\b(?:upper|lower|length|trim|ltrim|rtrim|round|abs|coalesce|substr|substring|replace|cast|count|sum|avg|min|max)\s*\(/i.test(
-            left,
-        )
-    ) {
-        return left;
-    }
-
-    return expression;
-}
-
-function stripTableQualifiers(expression: string): string {
-    return expression.replace(/\b[a-zA-Z_][a-zA-Z0-9_]*\./g, "");
-}
-
-function extractIdentifiersFromExpression(expression: string): string[] {
-    let text = expression;
-    text = stripExplicitAlias(text);
-    text = stripBareTrailingAlias(text);
-    text = stripTableQualifiers(text);
-
-    const identifiers = new Set<string>();
-
-    for (const match of text.matchAll(/\b([a-zA-Z_][a-zA-Z0-9_]*)\b/g)) {
-        const value = match[1];
-        if (!value) continue;
-
-        const lower = value.toLowerCase();
-        if (SQL_NON_COLUMN_WORDS.has(lower)) continue;
-        if (isPlaceholderIdentifier(value)) continue;
-
-        identifiers.add(value);
-    }
-
-    return [...identifiers];
-}
-
-function extractReferencedColumns(sql: string): string[] {
-    const cleaned = stripSqlStringLiterals(stripSqlComments(sql));
-    const identifiers = new Set<string>();
-
-    const selectMatches = [
-        ...cleaned.matchAll(/\bselect\s+([\s\S]*?)\bfrom\b/gi),
-    ];
-
-    for (const match of selectMatches) {
-        for (const expr of splitTopLevelCommaSeparated(match[1] ?? "")) {
-            for (const id of extractIdentifiersFromExpression(expr)) {
-                identifiers.add(id);
-            }
+        if (datasetShape.columnNames.has(identifier)) {
+            continue;
         }
+
+        messages.push(
+            `Exercise ${args.exerciseId} references column "${identifier}" that does not belong to effective dataset "${datasetShape.id}"`,
+        );
     }
 
-    const whereMatches = [
-        ...cleaned.matchAll(
-            /\bwhere\s+([\s\S]*?)(?:\bgroup\s+by\b|\border\s+by\b|\bhaving\b|\blimit\b|$)/gi,
-        ),
-    ];
-
-    for (const match of whereMatches) {
-        for (const id of extractIdentifiersFromExpression(match[1] ?? "")) {
-            identifiers.add(id);
-        }
-    }
-
-    const orderByMatches = [
-        ...cleaned.matchAll(/\border\s+by\s+([\s\S]*?)(?:\blimit\b|$)/gi),
-    ];
-
-    for (const match of orderByMatches) {
-        for (const expr of splitTopLevelCommaSeparated(match[1] ?? "")) {
-            for (const id of extractIdentifiersFromExpression(expr)) {
-                identifiers.add(id);
-            }
-        }
-    }
-
-    return [...identifiers];
-}
-
-function getAllowedTables(dataset: SqlDatasetArtifact) {
-    return new Set(Object.keys(dataset.tableSnapshots));
-}
-
-function getAllowedColumns(dataset: SqlDatasetArtifact) {
-    return new Set(
-        Object.values(dataset.tableSnapshots).flatMap((table) =>
-            Array.isArray(table?.columns) ? table.columns.map((c) => c.name) : [],
-        ),
-    );
-}
-
-function resolveDefaultDataset(args: {
-    seed: TopicSeed;
-}): { datasetId?: string; dataset: SqlDatasetArtifact | null } {
-    const datasetId =
-        args.seed.moduleRuntimeDefaults?.kind === "sql"
-            ? args.seed.moduleRuntimeDefaults.datasetId
-            : undefined;
-
-    const dataset =
-        args.seed.moduleDataset ??
-        (datasetId ? getSqlDatasetById(datasetId) : null);
-
-    return { datasetId, dataset };
-}
-
-function resolveExerciseDataset(args: {
-    seed: TopicSeed;
-    datasetId?: string;
-}): { datasetId?: string; dataset: SqlDatasetArtifact | null } {
-    const defaultResolved = resolveDefaultDataset({ seed: args.seed });
-    const datasetId = args.datasetId ?? defaultResolved.datasetId;
-    const dataset =
-        datasetId && datasetId === defaultResolved.datasetId
-            ? defaultResolved.dataset
-            : datasetId
-                ? getSqlDatasetById(datasetId)
-                : defaultResolved.dataset;
-
-    return { datasetId, dataset };
-}
-
-function validateSqlAgainstDataset(args: {
-    ownerLabel: string;
-    sql: string;
-    datasetId?: string;
-    dataset: SqlDatasetArtifact | null;
-}): string[] {
-    const issues: string[] = [];
-    if (!args.datasetId || !args.dataset) {
-        issues.push(`${args.ownerLabel} could not resolve an effective dataset`);
-        return issues;
-    }
-
-    const allowedTables = getAllowedTables(args.dataset);
-    const allowedColumns = getAllowedColumns(args.dataset);
-
-    const tables = extractReferencedTables(args.sql);
-    const columns = extractReferencedColumns(args.sql);
-
-    for (const table of tables) {
-        if (!allowedTables.has(table)) {
-            issues.push(
-                `${args.ownerLabel} references table "${table}" outside effective dataset "${args.datasetId}"`,
-            );
-        }
-    }
-
-    for (const column of columns) {
-        if (!allowedColumns.has(column) && !allowedTables.has(column)) {
-            issues.push(
-                `${args.ownerLabel} references column "${column}" that does not belong to effective dataset "${args.datasetId}"`,
-            );
-        }
-    }
-
-    return issues;
+    return messages;
 }
 
 export function validateSqlDatasetConsistency(args: {
     seed: TopicSeed;
     draft: TopicAuthoringDraft;
 }): string[] {
-    const issues: string[] = [];
-    const defaultResolved = resolveDefaultDataset({ seed: args.seed });
+    const messages: string[] = [];
 
-    if (!defaultResolved.datasetId || !defaultResolved.dataset) {
-        return issues;
-    }
+    for (const exercise of args.draft.quizDraft) {
+        if (exercise.kind !== "code_input") continue;
 
-    for (const block of args.draft.sketchBlocks) {
-        const sqlBlocks = extractSqlCodeBlocks(block.bodyMarkdown);
+        const recipeType = exercise.recipeType ?? "sql_query";
+        if (recipeType !== "sql_query") continue;
 
-        for (const sql of sqlBlocks) {
-            issues.push(
-                ...validateSqlAgainstDataset({
-                    ownerLabel: `Sketch ${block.id}`,
-                    sql,
-                    datasetId: defaultResolved.datasetId,
-                    dataset: defaultResolved.dataset,
-                }),
-            );
-        }
-    }
+        const sql = exercise.solutionCode?.trim();
+        if (!sql) continue;
 
-    for (const ex of args.draft.quizDraft) {
-        if (ex.kind !== "code_input") continue;
-
-        const effective = resolveExerciseDataset({
+        const dataset = getEffectiveDataset({
             seed: args.seed,
-            datasetId: ex.datasetId,
+            exerciseDatasetId: exercise.datasetId,
         });
 
-        if (!effective.datasetId || !effective.dataset) {
-            issues.push(`Exercise ${ex.id} could not resolve an effective dataset`);
+        if (!dataset) {
+            messages.push(
+                `Exercise ${exercise.id} does not have an effective SQL dataset.`,
+            );
             continue;
         }
 
-        const sqlTexts = [ex.starterCode, ex.solutionCode].filter(Boolean);
-
-        for (const sql of sqlTexts) {
-            issues.push(
-                ...validateSqlAgainstDataset({
-                    ownerLabel: `Exercise ${ex.id}`,
-                    sql,
-                    datasetId: effective.datasetId,
-                    dataset: effective.dataset,
-                }),
-            );
-        }
+        messages.push(
+            ...validateSqlExerciseAgainstDataset({
+                exerciseId: exercise.id,
+                sql,
+                dataset,
+            }),
+        );
     }
 
-    return [...new Set(issues)];
+    return messages;
 }

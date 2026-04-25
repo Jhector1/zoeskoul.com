@@ -1,3 +1,4 @@
+import type { BlueprintRuntimePolicy } from "./blueprint.js";
 import type { ExerciseKindMix } from "./exercise-policy.js";
 
 export type CourseSpecDifficulty = "beginner" | "intermediate" | "advanced";
@@ -15,11 +16,7 @@ export type CourseSpecProjectPolicy = {
     capstoneRequired?: boolean;
 };
 
-export type CourseSpecRuntimePolicy = {
-    sqlDialect?: string;
-    datasetStrategy?: "module_based" | "topic_based" | "manual";
-    preferredDatasetId?: string;
-};
+export type CourseSpecRuntimePolicy = Omit<BlueprintRuntimePolicy, "moduleDatasetIds">;
 
 export type CourseSpecQualityPolicy = {
     allowBlankTopicIds?: boolean;

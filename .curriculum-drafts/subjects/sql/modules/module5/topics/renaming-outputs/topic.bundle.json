@@ -25,12 +25,19 @@
       "height": 420
     },
     {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_5.renaming-outputs.cards.sketch2.title",
+      "sketchId": "sk3",
+      "height": 420
+    },
+    {
       "id": "quiz",
       "kind": "quiz",
       "titleKey": "topics.sql.sql_module_5.renaming-outputs.cards.quiz.title",
       "quiz": {
         "difficulty": "easy",
-        "n": 4,
+        "n": 3,
         "allowReveal": true,
         "preferKind": null,
         "maxAttempts": 10
@@ -49,44 +56,54 @@
       "archetype": "paragraph",
       "titleKey": "sketches.sql.sql_module_5.renaming-outputs.sk2.title",
       "bodyKey": "sketches.sql.sql_module_5.renaming-outputs.sk2.bodyMarkdown"
+    },
+    {
+      "id": "sk3",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_5.renaming-outputs.sk3.title",
+      "bodyKey": "sketches.sql.sql_module_5.renaming-outputs.sk3.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "fb1",
-      "kind": "fill_blank_choice",
+      "id": "q1",
+      "kind": "code_input",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.renaming-outputs.quiz.fb1",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "AS"
+      "messageBase": "topics.sql.sql_module_5.renaming-outputs.quiz.q1",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_kpi",
+        "resultShape": "table",
+        "solutionCode": "SELECT customer_name, quantity * unit_price AS order_total FROM orders;"
       }
     },
     {
-      "id": "fb2",
-      "kind": "fill_blank_choice",
+      "id": "q2",
+      "kind": "code_input",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.renaming-outputs.quiz.fb2",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "upper_name"
+      "messageBase": "topics.sql.sql_module_5.renaming-outputs.quiz.q2",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_kpi",
+        "resultShape": "table",
+        "solutionCode": "SELECT region AS sales_region FROM orders;"
       }
     },
     {
-      "id": "sc1",
+      "id": "q3",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.renaming-outputs.quiz.sc1",
+      "messageBase": "topics.sql.sql_module_5.renaming-outputs.quiz.q3",
       "optionIds": [
         "a",
-        "b",
-        "c",
-        "d"
+        "b"
       ],
       "expected": {
         "kind": "single_choice",
@@ -94,39 +111,32 @@
       }
     },
     {
-      "id": "mc1",
+      "id": "q4",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.renaming-outputs.quiz.mc1",
+      "messageBase": "topics.sql.sql_module_5.renaming-outputs.quiz.q4",
       "optionIds": [
         "a",
-        "b",
-        "c",
-        "d"
+        "b"
       ],
       "expected": {
         "kind": "multi_choice",
         "optionIds": [
-          "a",
-          "b",
-          "d"
+          "a"
         ]
       }
     },
     {
-      "id": "ci1",
-      "kind": "code_input",
+      "id": "q5",
+      "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.renaming-outputs.quiz.ci1",
-      "language": "sql",
-      "fixedSqlDialect": "sqlite",
-      "recipe": {
-        "type": "sql_query",
-        "datasetId": "school_relations_intro",
-        "resultShape": "table",
-        "solutionCode": "SELECT name, grade_level + 1 AS next_grade FROM students;"
+      "messageBase": "topics.sql.sql_module_5.renaming-outputs.quiz.q5",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "price_per_unit"
       }
     }
   ]

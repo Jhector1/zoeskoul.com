@@ -1,12 +1,21 @@
 import type { LocaleCode } from "./locales.js";
 
 export type CourseProfileId =
-  | "sql"
-  | "python"
-  | "math"
-  | "language"
-  | "web"
-  | "data_science";
+    | "sql"
+    | "python"
+    | "math"
+    | "language"
+    | "web"
+    | "data_science";
+
+export type BlueprintRuntimePolicy = {
+  sqlDialect?: string;
+  datasetStrategy?: "module_based" | "topic_based" | "manual";
+  datasetId?: string;
+  preferredDatasetId?: string;
+  resultShape?: string;
+  moduleDatasetIds?: Record<string, string>;
+};
 
 export type CourseBlueprint = {
   subjectSlug: string;
@@ -30,4 +39,5 @@ export type CourseBlueprint = {
     topicsPerModuleMax: number;
   };
   seedModules?: string[];
+  runtimePolicy?: BlueprintRuntimePolicy;
 };

@@ -14,14 +14,14 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.sql.sql_module_5.date-function-awareness.cards.sketch0.title",
-      "sketchId": "sketch-1-intro-date-functions",
+      "sketchId": "sketch-1",
       "height": 420
     },
     {
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.sql.sql_module_5.date-function-awareness.cards.sketch1.title",
-      "sketchId": "sketch-2-common-date-expressions",
+      "sketchId": "sketch-2",
       "height": 420
     },
     {
@@ -30,7 +30,7 @@
       "titleKey": "topics.sql.sql_module_5.date-function-awareness.cards.quiz.title",
       "quiz": {
         "difficulty": "easy",
-        "n": 4,
+        "n": 3,
         "allowReveal": true,
         "preferKind": null,
         "maxAttempts": 10
@@ -39,49 +39,55 @@
   ],
   "sketches": [
     {
-      "id": "sketch-1-intro-date-functions",
+      "id": "sketch-1",
       "archetype": "paragraph",
-      "titleKey": "sketches.sql.sql_module_5.date-function-awareness.sketch-1-intro-date-functions.title",
-      "bodyKey": "sketches.sql.sql_module_5.date-function-awareness.sketch-1-intro-date-functions.bodyMarkdown"
+      "titleKey": "sketches.sql.sql_module_5.date-function-awareness.sketch-1.title",
+      "bodyKey": "sketches.sql.sql_module_5.date-function-awareness.sketch-1.bodyMarkdown"
     },
     {
-      "id": "sketch-2-common-date-expressions",
+      "id": "sketch-2",
       "archetype": "paragraph",
-      "titleKey": "sketches.sql.sql_module_5.date-function-awareness.sketch-2-common-date-expressions.title",
-      "bodyKey": "sketches.sql.sql_module_5.date-function-awareness.sketch-2-common-date-expressions.bodyMarkdown"
+      "titleKey": "sketches.sql.sql_module_5.date-function-awareness.sketch-2.title",
+      "bodyKey": "sketches.sql.sql_module_5.date-function-awareness.sketch-2.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "fb-1-extract-year",
-      "kind": "fill_blank_choice",
+      "id": "code-1",
+      "kind": "code_input",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.date-function-awareness.quiz.fb-1-extract-year",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "SUBSTR(term, -4)"
+      "messageBase": "topics.sql.sql_module_5.date-function-awareness.quiz.code-1",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_kpi",
+        "resultShape": "table",
+        "solutionCode": "SELECT id, order_date, strftime('%m', order_date) AS order_month FROM orders;"
       }
     },
     {
-      "id": "fb-2-check-year-equality",
-      "kind": "fill_blank_choice",
+      "id": "code-2",
+      "kind": "code_input",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.date-function-awareness.quiz.fb-2-check-year-equality",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "SUBSTR(term, -4) = '2026'"
+      "messageBase": "topics.sql.sql_module_5.date-function-awareness.quiz.code-2",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_kpi",
+        "resultShape": "table",
+        "solutionCode": "SELECT * FROM orders WHERE strftime('%m', order_date) = '01';"
       }
     },
     {
-      "id": "sc-1-sqlite-date-function",
+      "id": "single-1",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.date-function-awareness.quiz.sc-1-sqlite-date-function",
+      "messageBase": "topics.sql.sql_module_5.date-function-awareness.quiz.single-1",
       "optionIds": [
         "a",
         "b",
@@ -94,11 +100,11 @@
       }
     },
     {
-      "id": "mc-1-string-vs-date-functions",
+      "id": "multi-1",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.date-function-awareness.quiz.mc-1-string-vs-date-functions",
+      "messageBase": "topics.sql.sql_module_5.date-function-awareness.quiz.multi-1",
       "optionIds": [
         "a",
         "b",
@@ -108,23 +114,22 @@
       "expected": {
         "kind": "multi_choice",
         "optionIds": [
-          "a"
+          "a",
+          "b",
+          "d"
         ]
       }
     },
     {
-      "id": "ci-1-extract-term-year",
-      "kind": "code_input",
+      "id": "fill-1",
+      "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.date-function-awareness.quiz.ci-1-extract-term-year",
-      "language": "sql",
-      "fixedSqlDialect": "sqlite",
-      "recipe": {
-        "type": "sql_query",
-        "datasetId": "school_relations_intro",
-        "resultShape": "table",
-        "solutionCode": "SELECT id, student_id, term, SUBSTR(term, -4) AS year FROM enrollments;"
+      "messageBase": "topics.sql.sql_module_5.date-function-awareness.quiz.fill-1",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "'%d'"
       }
     }
   ]

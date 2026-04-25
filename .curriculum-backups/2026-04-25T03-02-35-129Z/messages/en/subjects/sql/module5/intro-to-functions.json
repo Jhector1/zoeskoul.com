@@ -1,0 +1,125 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_5": {
+        "intro-to-functions": {
+          "label": "Intro to functions",
+          "summary": "Intro to functions in Calculated Columns and SQL Expressions",
+          "cards": {
+            "sketch0": {
+              "title": "What Are Functions in SQL?"
+            },
+            "sketch1": {
+              "title": "Simple Function Example"
+            },
+            "sketch2": {
+              "title": "Using Multiple Functions"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "quiz": {
+            "fillblank-func-purpose": {
+              "title": "Purpose of SQL Functions",
+              "prompt": "What is the main purpose of using functions in SQL?",
+              "hint": "Think about how functions change or process data.",
+              "help": {
+                "concept": "Functions in SQL are used to process or change data values, such as calculating sums or changing text.",
+                "hint_1": "Functions can modify or summarize data, not just remove or rearrange it.",
+                "hint_2": "The main use is to change or process data, not to delete or join tables."
+              },
+              "template": "Functions in SQL are used to __ data.",
+              "choices": [
+                "transform",
+                "delete",
+                "sort",
+                "join"
+              ]
+            },
+            "fillblank-max-grade": {
+              "title": "Using MAX() Function",
+              "prompt": "Which function would you use to find the highest grade level in the students table?",
+              "hint": "Focus on the missing SQL concept rather than the exact missing word.",
+              "help": {
+                "concept": "The blank should be filled with the SQL term that matches the job the statement is trying to perform.",
+                "hint_1": "Think about what the missing part is supposed to do in the statement.",
+                "hint_2": "Choose the SQL term that best completes the meaning of the statement."
+              },
+              "template": "To find the highest grade level, use the __ function.",
+              "choices": [
+                "MAX",
+                "MIN",
+                "COUNT",
+                "SUM"
+              ]
+            },
+            "singlechoice-func-location": {
+              "title": "Where Are Functions Used?",
+              "prompt": "In which part of a SQL query are functions like MAX() or COUNT() most commonly used?",
+              "hint": "Focus on the main concept being tested and eliminate choices that describe something different.",
+              "help": {
+                "concept": "Choose the option that matches the core idea described in the question without relying on repeated wording from the answer choices.",
+                "hint_1": "Rule out options that describe a different role, behavior, or SQL concept than the question is testing.",
+                "hint_2": "Pick the option that best matches the concept, not the one that simply repeats familiar wording."
+              },
+              "options": {
+                "a": "SELECT clause",
+                "b": "FROM clause",
+                "c": "ORDER BY clause",
+                "d": "GROUP BY clause"
+              }
+            },
+            "multichoice-simple-functions": {
+              "title": "Identifying Simple SQL Functions",
+              "prompt": "Which of the following are simple built-in SQL functions? Select all that apply.",
+              "hint": "Focus on the main concept being tested and eliminate choices that describe something different.",
+              "help": {
+                "concept": "Choose the option that matches the core idea described in the question without relying on repeated wording from the answer choices.",
+                "hint_1": "Rule out options that describe a different role, behavior, or SQL concept than the question is testing.",
+                "hint_2": "Pick the option that best matches the concept, not the one that simply repeats familiar wording."
+              },
+              "options": {
+                "a": "COUNT()",
+                "b": "SUM()",
+                "c": "JOIN()",
+                "d": "MIN()"
+              }
+            },
+            "codeinput-select-max-grade": {
+              "title": "Write a Query Using a Function",
+              "prompt": "Write a SQL query to return the highest grade level from the students table.",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+                "hint_1": "Eliminate choices or interpretations that do not match the task.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "starterCode": "-- Write your query below"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_5": {
+        "intro-to-functions": {
+          "sketch-what-are-functions": {
+            "title": "What Are Functions in SQL?",
+            "bodyMarkdown": "In SQL, a function is a built-in operation that takes one or more inputs and returns a value. Functions can help you transform, calculate, or summarize data. For example, you can use functions to count rows, find averages, or change text to uppercase. Functions are often used in the SELECT clause to create calculated columns or to process data as it is retrieved."
+          },
+          "sketch-simple-function-example": {
+            "title": "Simple Function Example",
+            "bodyMarkdown": "Suppose you want to know the highest grade level among all students. You can use the `MAX()` function:\n\n```sql\nSELECT MAX(grade_level) FROM students;\n```\n\nThis query returns the largest value in the `grade_level` column from the `students` table."
+          },
+          "sketch-multiple-functions": {
+            "title": "Using Multiple Functions",
+            "bodyMarkdown": "You can use more than one function in a single query. For example, to find both the minimum and maximum grade levels:\n\n```sql\nSELECT MIN(grade_level), MAX(grade_level) FROM students;\n```\n\nThis returns two values: the lowest and highest grade levels among all students."
+          }
+        }
+      }
+    }
+  }
+}

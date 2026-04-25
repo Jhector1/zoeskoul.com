@@ -37,7 +37,7 @@
       "titleKey": "topics.sql.sql_module_5.number-functions.cards.quiz.title",
       "quiz": {
         "difficulty": "easy",
-        "n": 4,
+        "n": 3,
         "allowReveal": true,
         "preferKind": null,
         "maxAttempts": 10
@@ -66,40 +66,44 @@
   ],
   "exercises": [
     {
-      "id": "fill-blank-1",
-      "kind": "fill_blank_choice",
+      "id": "exercise-1",
+      "kind": "code_input",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.number-functions.quiz.fill-blank-1",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "ABS"
+      "messageBase": "topics.sql.sql_module_5.number-functions.quiz.exercise-1",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_kpi",
+        "resultShape": "table",
+        "solutionCode": "SELECT id, unit_price, ROUND(unit_price) AS rounded_price\nFROM orders;"
       }
     },
     {
-      "id": "fill-blank-2",
-      "kind": "fill_blank_choice",
+      "id": "exercise-2",
+      "kind": "code_input",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.number-functions.quiz.fill-blank-2",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "ROUND"
+      "messageBase": "topics.sql.sql_module_5.number-functions.quiz.exercise-2",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_kpi",
+        "resultShape": "table",
+        "solutionCode": "SELECT id, quantity, unit_price, ROUND(quantity * unit_price, 2) AS total_rounded\nFROM orders;"
       }
     },
     {
-      "id": "single-choice-1",
+      "id": "exercise-3",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.number-functions.quiz.single-choice-1",
+      "messageBase": "topics.sql.sql_module_5.number-functions.quiz.exercise-3",
       "optionIds": [
         "a",
-        "b",
-        "c",
-        "d"
+        "b"
       ],
       "expected": {
         "kind": "single_choice",
@@ -107,16 +111,14 @@
       }
     },
     {
-      "id": "multi-choice-1",
+      "id": "exercise-4",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.number-functions.quiz.multi-choice-1",
+      "messageBase": "topics.sql.sql_module_5.number-functions.quiz.exercise-4",
       "optionIds": [
         "a",
-        "b",
-        "c",
-        "d"
+        "b"
       ],
       "expected": {
         "kind": "multi_choice",
@@ -126,18 +128,15 @@
       }
     },
     {
-      "id": "code-input-1",
-      "kind": "code_input",
+      "id": "exercise-5",
+      "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.number-functions.quiz.code-input-1",
-      "language": "sql",
-      "fixedSqlDialect": "sqlite",
-      "recipe": {
-        "type": "sql_query",
-        "datasetId": "school_relations_intro",
-        "resultShape": "table",
-        "solutionCode": "SELECT MAX(grade_level) FROM students;"
+      "messageBase": "topics.sql.sql_module_5.number-functions.quiz.exercise-5",
+      "choiceCount": 5,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "2"
       }
     }
   ]

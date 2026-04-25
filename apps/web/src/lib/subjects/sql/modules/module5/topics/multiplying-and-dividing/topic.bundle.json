@@ -30,7 +30,7 @@
       "titleKey": "topics.sql.sql_module_5.multiplying-and-dividing.cards.quiz.title",
       "quiz": {
         "difficulty": "easy",
-        "n": 4,
+        "n": 3,
         "allowReveal": true,
         "preferKind": null,
         "maxAttempts": 10
@@ -53,57 +53,59 @@
   ],
   "exercises": [
     {
-      "id": "fill-blank-1",
-      "kind": "fill_blank_choice",
+      "id": "exercise-1",
+      "kind": "code_input",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.multiplying-and-dividing.quiz.fill-blank-1",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "grade_level * 2"
+      "messageBase": "topics.sql.sql_module_5.multiplying-and-dividing.quiz.exercise-1",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_kpi",
+        "resultShape": "table",
+        "solutionCode": "SELECT id, customer_name, quantity, unit_price, quantity * unit_price AS line_total\nFROM orders;"
       }
     },
     {
-      "id": "fill-blank-2",
-      "kind": "fill_blank_choice",
+      "id": "exercise-2",
+      "kind": "code_input",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.multiplying-and-dividing.quiz.fill-blank-2",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "grade_level / 2"
+      "messageBase": "topics.sql.sql_module_5.multiplying-and-dividing.quiz.exercise-2",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_kpi",
+        "resultShape": "table",
+        "solutionCode": "SELECT id, customer_name, (quantity * unit_price) / quantity AS average_price\nFROM orders;"
       }
     },
     {
-      "id": "single-choice-1",
+      "id": "exercise-3",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.multiplying-and-dividing.quiz.single-choice-1",
+      "messageBase": "topics.sql.sql_module_5.multiplying-and-dividing.quiz.exercise-3",
       "optionIds": [
         "a",
-        "b",
-        "c",
-        "d"
+        "b"
       ],
       "expected": {
         "kind": "single_choice",
-        "optionId": "b"
+        "optionId": "a"
       }
     },
     {
-      "id": "multi-choice-1",
+      "id": "exercise-4",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.multiplying-and-dividing.quiz.multi-choice-1",
+      "messageBase": "topics.sql.sql_module_5.multiplying-and-dividing.quiz.exercise-4",
       "optionIds": [
         "a",
-        "b",
-        "c",
-        "d"
+        "b"
       ],
       "expected": {
         "kind": "multi_choice",
@@ -113,18 +115,15 @@
       }
     },
     {
-      "id": "code-input-1",
-      "kind": "code_input",
+      "id": "exercise-5",
+      "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.multiplying-and-dividing.quiz.code-input-1",
-      "language": "sql",
-      "fixedSqlDialect": "sqlite",
-      "recipe": {
-        "type": "sql_query",
-        "datasetId": "school_relations_intro",
-        "resultShape": "table",
-        "solutionCode": "SELECT name, grade_level * 3 AS triple_grade, grade_level / 2 AS half_grade FROM students;"
+      "messageBase": "topics.sql.sql_module_5.multiplying-and-dividing.quiz.exercise-5",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "*"
       }
     }
   ]

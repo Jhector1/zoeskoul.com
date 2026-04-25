@@ -14,21 +14,21 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.sql.sql_module_5.renaming-outputs.cards.sketch0.title",
-      "sketchId": "sketch-1",
+      "sketchId": "sk1",
       "height": 420
     },
     {
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.sql.sql_module_5.renaming-outputs.cards.sketch1.title",
-      "sketchId": "sketch-2",
+      "sketchId": "sk2",
       "height": 420
     },
     {
       "id": "sketch2",
       "kind": "sketch",
       "titleKey": "topics.sql.sql_module_5.renaming-outputs.cards.sketch2.title",
-      "sketchId": "sketch-3",
+      "sketchId": "sk3",
       "height": 420
     },
     {
@@ -37,7 +37,7 @@
       "titleKey": "topics.sql.sql_module_5.renaming-outputs.cards.quiz.title",
       "quiz": {
         "difficulty": "easy",
-        "n": 4,
+        "n": 3,
         "allowReveal": true,
         "preferKind": null,
         "maxAttempts": 10
@@ -46,60 +46,64 @@
   ],
   "sketches": [
     {
-      "id": "sketch-1",
+      "id": "sk1",
       "archetype": "paragraph",
-      "titleKey": "sketches.sql.sql_module_5.renaming-outputs.sketch-1.title",
-      "bodyKey": "sketches.sql.sql_module_5.renaming-outputs.sketch-1.bodyMarkdown"
+      "titleKey": "sketches.sql.sql_module_5.renaming-outputs.sk1.title",
+      "bodyKey": "sketches.sql.sql_module_5.renaming-outputs.sk1.bodyMarkdown"
     },
     {
-      "id": "sketch-2",
+      "id": "sk2",
       "archetype": "paragraph",
-      "titleKey": "sketches.sql.sql_module_5.renaming-outputs.sketch-2.title",
-      "bodyKey": "sketches.sql.sql_module_5.renaming-outputs.sketch-2.bodyMarkdown"
+      "titleKey": "sketches.sql.sql_module_5.renaming-outputs.sk2.title",
+      "bodyKey": "sketches.sql.sql_module_5.renaming-outputs.sk2.bodyMarkdown"
     },
     {
-      "id": "sketch-3",
+      "id": "sk3",
       "archetype": "paragraph",
-      "titleKey": "sketches.sql.sql_module_5.renaming-outputs.sketch-3.title",
-      "bodyKey": "sketches.sql.sql_module_5.renaming-outputs.sketch-3.bodyMarkdown"
+      "titleKey": "sketches.sql.sql_module_5.renaming-outputs.sk3.title",
+      "bodyKey": "sketches.sql.sql_module_5.renaming-outputs.sk3.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "fill-blank-1",
-      "kind": "fill_blank_choice",
+      "id": "q1",
+      "kind": "code_input",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.renaming-outputs.quiz.fill-blank-1",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "AS"
+      "messageBase": "topics.sql.sql_module_5.renaming-outputs.quiz.q1",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_kpi",
+        "resultShape": "table",
+        "solutionCode": "SELECT customer_name, quantity * unit_price AS order_total FROM orders;"
       }
     },
     {
-      "id": "fill-blank-2",
-      "kind": "fill_blank_choice",
+      "id": "q2",
+      "kind": "code_input",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.renaming-outputs.quiz.fill-blank-2",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "AS"
+      "messageBase": "topics.sql.sql_module_5.renaming-outputs.quiz.q2",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_kpi",
+        "resultShape": "table",
+        "solutionCode": "SELECT region AS sales_region FROM orders;"
       }
     },
     {
-      "id": "single-choice-1",
+      "id": "q3",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.renaming-outputs.quiz.single-choice-1",
+      "messageBase": "topics.sql.sql_module_5.renaming-outputs.quiz.q3",
       "optionIds": [
         "a",
-        "b",
-        "c",
-        "d"
+        "b"
       ],
       "expected": {
         "kind": "single_choice",
@@ -107,39 +111,32 @@
       }
     },
     {
-      "id": "multi-choice-1",
+      "id": "q4",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.renaming-outputs.quiz.multi-choice-1",
+      "messageBase": "topics.sql.sql_module_5.renaming-outputs.quiz.q4",
       "optionIds": [
         "a",
-        "b",
-        "c",
-        "d"
+        "b"
       ],
       "expected": {
         "kind": "multi_choice",
         "optionIds": [
-          "a",
-          "b",
-          "d"
+          "a"
         ]
       }
     },
     {
-      "id": "code-input-1",
-      "kind": "code_input",
+      "id": "q5",
+      "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.renaming-outputs.quiz.code-input-1",
-      "language": "sql",
-      "fixedSqlDialect": "sqlite",
-      "recipe": {
-        "type": "sql_query",
-        "datasetId": "school_relations_intro",
-        "resultShape": "table",
-        "solutionCode": "SELECT name, grade_level AS year FROM students;"
+      "messageBase": "topics.sql.sql_module_5.renaming-outputs.quiz.q5",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "price_per_unit"
       }
     }
   ]

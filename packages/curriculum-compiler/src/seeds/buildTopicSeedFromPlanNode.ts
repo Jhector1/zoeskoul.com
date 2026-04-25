@@ -4,38 +4,14 @@ import type {
     PlannedModule,
     PlannedSection,
     PlannedTopic,
-    TopicSeedRuntimeDefaults,
 } from "@zoeskoul/curriculum-contracts";
 import { getProfileAdapter } from "@zoeskoul/curriculum-profiles";
 import { resolveExercisePolicy } from "../spec/resolveExercisePolicy.js";
 import { planExerciseCounts } from "../policy/planExerciseCounts.js";
-
-function deriveModuleRuntimeDefaults(args: {
-    blueprint: CourseBlueprint;
-    spec?: CourseSpec | null;
-    moduleSlug: string;
-}): TopicSeedRuntimeDefaults | null {
-    const moduleSpec = args.spec?.modules.find(
-        (module) => module.moduleSlug === args.moduleSlug,
-    );
-
-    const runtimePolicy = moduleSpec?.runtimePolicy ?? args.spec?.policy?.runtimePolicy;
-    if (!runtimePolicy || typeof runtimePolicy !== "object") {
-        return null;
-    }
-
-    if ("sqlDialect" in runtimePolicy) {
-        return {
-            kind: "sql",
-            fixedSqlDialect:
-                typeof runtimePolicy.sqlDialect === "string"
-                    ? runtimePolicy.sqlDialect
-                    : undefined,
-        };
-    }
-
-    return null;
-}
+import {
+    resolveModuleRuntimePolicy,
+    runtimePolicyToTopicRuntimeDefaults,
+} from "../spec/resolveModuleRuntimePolicy.js";
 
 export function buildTopicSeedFromPlanNode(args: {
     blueprint: CourseBlueprint;
@@ -52,6 +28,21 @@ export function buildTopicSeedFromPlanNode(args: {
         moduleSlug: args.module.moduleSlug,
     });
 
+    const sourceRuntimePolicy = resolveModuleRuntimePolicy({
+        blueprint: args.blueprint,
+        spec: args.spec ?? null,
+        module: {
+            moduleSlug: args.module.moduleSlug,
+            order: args.module.order,
+            runtimePolicy: args.module.runtimePolicy,
+        },
+    });
+
+    const sourceRuntimeDefaults = runtimePolicyToTopicRuntimeDefaults({
+        profileId: args.blueprint.profileId,
+        runtimePolicy: sourceRuntimePolicy,
+    });
+
     const adapterRuntimeDefaults =
         adapter.getTopicSeedRuntimeDefaults?.({
             blueprint: args.blueprint,
@@ -61,15 +52,8 @@ export function buildTopicSeedFromPlanNode(args: {
             },
         }) ?? null;
 
-    const specRuntimeDefaults =
-        deriveModuleRuntimeDefaults({
-            blueprint: args.blueprint,
-            spec: args.spec ?? null,
-            moduleSlug: args.module.moduleSlug,
-        }) ?? null;
-
     const moduleRuntimeDefaults =
-        specRuntimeDefaults ?? adapterRuntimeDefaults ?? null;
+        sourceRuntimeDefaults ?? adapterRuntimeDefaults ?? null;
 
     const baseSeed = adapter.buildTopicSeed({
         blueprint: args.blueprint,

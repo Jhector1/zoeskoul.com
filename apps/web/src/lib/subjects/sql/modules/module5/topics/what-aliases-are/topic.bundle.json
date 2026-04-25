@@ -14,14 +14,14 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.sql.sql_module_5.what-aliases-are.cards.sketch0.title",
-      "sketchId": "sk1",
+      "sketchId": "sketch-1",
       "height": 420
     },
     {
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.sql.sql_module_5.what-aliases-are.cards.sketch1.title",
-      "sketchId": "sk2",
+      "sketchId": "sketch-2",
       "height": 420
     },
     {
@@ -30,7 +30,7 @@
       "titleKey": "topics.sql.sql_module_5.what-aliases-are.cards.quiz.title",
       "quiz": {
         "difficulty": "easy",
-        "n": 4,
+        "n": 3,
         "allowReveal": true,
         "preferKind": null,
         "maxAttempts": 10
@@ -39,54 +39,58 @@
   ],
   "sketches": [
     {
-      "id": "sk1",
+      "id": "sketch-1",
       "archetype": "paragraph",
-      "titleKey": "sketches.sql.sql_module_5.what-aliases-are.sk1.title",
-      "bodyKey": "sketches.sql.sql_module_5.what-aliases-are.sk1.bodyMarkdown"
+      "titleKey": "sketches.sql.sql_module_5.what-aliases-are.sketch-1.title",
+      "bodyKey": "sketches.sql.sql_module_5.what-aliases-are.sketch-1.bodyMarkdown"
     },
     {
-      "id": "sk2",
+      "id": "sketch-2",
       "archetype": "paragraph",
-      "titleKey": "sketches.sql.sql_module_5.what-aliases-are.sk2.title",
-      "bodyKey": "sketches.sql.sql_module_5.what-aliases-are.sk2.bodyMarkdown"
+      "titleKey": "sketches.sql.sql_module_5.what-aliases-are.sketch-2.title",
+      "bodyKey": "sketches.sql.sql_module_5.what-aliases-are.sketch-2.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "fb1",
-      "kind": "fill_blank_choice",
+      "id": "code-1",
+      "kind": "code_input",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.what-aliases-are.quiz.fb1",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "AS"
+      "messageBase": "topics.sql.sql_module_5.what-aliases-are.quiz.code-1",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_kpi",
+        "resultShape": "table",
+        "solutionCode": "SELECT customer_name, quantity * unit_price AS order_total\nFROM orders;"
       }
     },
     {
-      "id": "fb2",
-      "kind": "fill_blank_choice",
+      "id": "code-2",
+      "kind": "code_input",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.what-aliases-are.quiz.fb2",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "next_year_grade"
+      "messageBase": "topics.sql.sql_module_5.what-aliases-are.quiz.code-2",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_kpi",
+        "resultShape": "table",
+        "solutionCode": "SELECT region, AVG(unit_price) AS avg_price\nFROM orders\nGROUP BY region;"
       }
     },
     {
-      "id": "sc1",
+      "id": "single-1",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.what-aliases-are.quiz.sc1",
+      "messageBase": "topics.sql.sql_module_5.what-aliases-are.quiz.single-1",
       "optionIds": [
         "a",
-        "b",
-        "c",
-        "d"
+        "b"
       ],
       "expected": {
         "kind": "single_choice",
@@ -94,39 +98,32 @@
       }
     },
     {
-      "id": "mc1",
+      "id": "multi-1",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.what-aliases-are.quiz.mc1",
+      "messageBase": "topics.sql.sql_module_5.what-aliases-are.quiz.multi-1",
       "optionIds": [
         "a",
-        "b",
-        "c",
-        "d"
+        "b"
       ],
       "expected": {
         "kind": "multi_choice",
         "optionIds": [
-          "a",
-          "b",
-          "d"
+          "a"
         ]
       }
     },
     {
-      "id": "ci1",
-      "kind": "code_input",
+      "id": "fill-1",
+      "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.what-aliases-are.quiz.ci1",
-      "language": "sql",
-      "fixedSqlDialect": "sqlite",
-      "recipe": {
-        "type": "sql_query",
-        "datasetId": "school_relations_intro",
-        "resultShape": "table",
-        "solutionCode": "SELECT name AS student_name FROM students;"
+      "messageBase": "topics.sql.sql_module_5.what-aliases-are.quiz.fill-1",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "AS"
       }
     }
   ]

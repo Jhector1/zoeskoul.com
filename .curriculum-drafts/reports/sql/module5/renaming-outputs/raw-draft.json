@@ -6,114 +6,138 @@
     {
       "id": "sk1",
       "title": "Why Rename Outputs?",
-      "bodyMarkdown": "When you use expressions or calculations in SQL, the default column name in the result is often the expression itself (like `grade_level + 1`). This can look messy and be hard to read. Renaming outputs with **aliases** makes your results clearer and more professional.\n\nFor example:\n\n```sql\nSELECT name, grade_level + 1 FROM students;\n```\n\nThis query returns a column named `grade_level + 1`. To give it a clearer name, use `AS`:\n\n```sql\nSELECT name, grade_level + 1 AS next_grade FROM students;\n```\n\nNow the output column is called `next_grade`."
+      "bodyMarkdown": "When you use expressions or calculations in your SQL SELECT statements, the resulting column often has a generic or unclear name. For example, if you write `SELECT quantity * unit_price FROM orders;`, the output column will be named after the expression itself, which is not very readable.\n\nTo make your results clearer, you can rename (alias) the output using the `AS` keyword. This is especially helpful for reports or when sharing results with others."
     },
     {
       "id": "sk2",
-      "title": "How to Use Aliases",
-      "bodyMarkdown": "You can rename any column or expression in your SELECT list using the `AS` keyword. The format is:\n\n```sql\nSELECT column_or_expression AS alias_name\nFROM table;\n```\n\nAliases are especially helpful for calculated columns or when using functions. For example:\n\n```sql\nSELECT name, UPPER(name) AS name_uppercase FROM students;\n```\n\nThis query shows each student's name and their name in uppercase, with the second column labeled `name_uppercase`."
+      "title": "Using Aliases with AS",
+      "bodyMarkdown": "You can use the `AS` keyword to give a custom name to a column or expression in your SELECT statement. For example:\n\n```sql\nSELECT customer_name, quantity * unit_price AS total_amount\nFROM orders;\n```\n\nHere, the calculated column `quantity * unit_price` will appear in the results as `total_amount`."
+    },
+    {
+      "id": "sk3",
+      "title": "Aliases Without AS",
+      "bodyMarkdown": "In SQLite (and many other SQL dialects), you can also use a space instead of `AS` to assign an alias:\n\n```sql\nSELECT customer_name, quantity * unit_price total_amount\nFROM orders;\n```\n\nBoth forms are valid, but using `AS` is clearer and more readable."
     }
   ],
   "quizDraft": [
     {
-      "id": "fb1",
-      "kind": "fill_blank_choice",
-      "title": "Basic alias syntax",
-      "prompt": "Which keyword is used in SQL to rename an output column in the SELECT list?",
-      "template": "SELECT name, grade_level + 1 ___ next_grade FROM students;",
-      "choices": [
-        "AS",
-        "WITH",
-        "BY",
-        "INTO"
-      ],
-      "correctValue": "AS",
-      "hint": "It's a two-letter keyword placed before the new column name.",
+      "id": "q1",
+      "kind": "code_input",
+      "title": "Calculate and Rename a Column",
+      "prompt": "Write a query to select the customer_name and the total value of each order (quantity multiplied by unit_price) from the orders table. Rename the calculated column as order_total.",
+      "hint": "Use SELECT with an expression and the AS keyword to rename the output.",
       "help": {
-        "concept": "In SQL, the `AS` keyword is used to assign an alias to a column or expression in the SELECT clause.",
-        "hint_1": "The keyword comes right before the alias name.",
-        "hint_2": "It's the same keyword used to rename columns or tables temporarily in queries."
-      }
+        "concept": "You can use arithmetic expressions in SELECT and rename the result with AS to make the output column name clear.",
+        "hint_1": "Multiply quantity by unit_price and use AS to give it a new name.",
+        "hint_2": "SELECT customer_name, (quantity * unit_price) AS ... FROM orders;"
+      },
+      "starterCode": "SELECT customer_name, \n       quantity * unit_price AS order_total\nFROM orders;",
+      "solutionCode": "SELECT customer_name, quantity * unit_price AS order_total FROM orders;",
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query"
     },
     {
-      "id": "fb2",
-      "kind": "fill_blank_choice",
-      "title": "Alias for a function output",
-      "prompt": "What alias would you use to label the uppercase version of a student's name as 'upper_name'?",
-      "template": "SELECT name, UPPER(name) AS ___ FROM students;",
-      "choices": [
-        "upper_name",
-        "name_upper",
-        "UPPER_NAME",
-        "student_upper"
-      ],
-      "correctValue": "upper_name",
-      "hint": "The alias should match the label 'upper_name' exactly.",
+      "id": "q2",
+      "kind": "code_input",
+      "title": "Rename a Simple Column",
+      "prompt": "Write a query to select the region column from the orders table, but rename it as sales_region in the output.",
+      "hint": "Use the AS keyword to give the column a new name.",
       "help": {
-        "concept": "Aliases can be any valid identifier and are used to label output columns for clarity.",
-        "hint_1": "The alias should be lowercase and match the prompt exactly.",
-        "hint_2": "Look for the choice that matches 'upper_name' as written."
-      }
+        "concept": "Column aliases let you change the output column name for clarity or formatting.",
+        "hint_1": "SELECT region AS ... FROM orders;",
+        "hint_2": "Replace ... with your chosen alias."
+      },
+      "starterCode": "SELECT region AS sales_region\nFROM orders;",
+      "solutionCode": "SELECT region AS sales_region FROM orders;",
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query"
     },
     {
-      "id": "sc1",
+      "id": "q3",
       "kind": "single_choice",
-      "title": "Purpose of aliases",
-      "prompt": "Why are aliases commonly used when creating calculated columns in SQL?",
+      "title": "Purpose of Aliases",
+      "prompt": "Why would you use an alias (AS) when writing SQL queries?",
+      "hint": "Think about how the output looks and who will read it.",
+      "help": {
+        "concept": "Aliases make column names in the result set clearer and more meaningful, especially for calculated columns or when sharing results.",
+        "hint_1": "Consider readability and presentation.",
+        "hint_2": "Aliases help make results easier to understand."
+      },
       "options": [
-        "To make output columns easier to read and understand",
-        "To change the data type of a column",
-        "To filter rows in the result",
-        "To join tables together"
+        {
+          "id": "a",
+          "content": "To make output column names clearer and more readable"
+        },
+        {
+          "id": "b",
+          "content": "To speed up query execution"
+        },
+        {
+          "id": "c",
+          "content": "To change the data type of a column"
+        },
+        {
+          "id": "d",
+          "content": "To filter rows in the result"
+        }
       ],
       "correctOptionIds": [
         "a"
-      ],
-      "hint": "Think about how column names appear in the result set.",
-      "help": {
-        "concept": "Aliases help make result sets clearer by giving columns meaningful names, especially for expressions.",
-        "hint_1": "Aliases do not affect filtering or joining, only the output labels.",
-        "hint_2": "The main benefit is improved readability of the results."
-      }
+      ]
     },
     {
-      "id": "mc1",
+      "id": "q4",
       "kind": "multi_choice",
-      "title": "Valid uses of aliases",
-      "prompt": "Which of the following are valid uses of aliases in a SQL SELECT statement? (Choose all that apply.)",
+      "title": "Valid Ways to Rename Outputs",
+      "prompt": "Which of the following are valid ways to rename a calculated column in SQLite? Select all that apply.",
+      "hint": "Think about both the AS keyword and alternative syntax.",
+      "help": {
+        "concept": "SQLite allows you to use either the AS keyword or just a space to assign an alias to a column or expression.",
+        "hint_1": "Both 'AS alias' and 'expression alias' forms are valid.",
+        "hint_2": "Look for options that use either AS or a space after the expression."
+      },
       "options": [
-        "a. Renaming a calculated column",
-        "b. Giving a new name to a function output",
-        "c. Filtering rows in the WHERE clause",
-        "d. Renaming a table in the FROM clause"
+        {
+          "id": "a",
+          "content": "SELECT quantity * unit_price AS total FROM orders;"
+        },
+        {
+          "id": "b",
+          "content": "SELECT quantity * unit_price total FROM orders;"
+        },
+        {
+          "id": "c",
+          "content": "SELECT quantity * unit_price = total FROM orders;"
+        },
+        {
+          "id": "d",
+          "content": "SELECT quantity * unit_price AS FROM orders;"
+        }
       ],
       "correctOptionIds": [
         "a",
-        "b",
-        "d"
-      ],
-      "hint": "Think about where aliases can be applied in a query.",
-      "help": {
-        "concept": "Aliases can be used for columns (including calculated and function outputs) and for tables, but not for filtering.",
-        "hint_1": "Aliases are not used in WHERE, but can rename columns and tables.",
-        "hint_2": "You can use aliases for expressions, functions, and tables, but not for filtering rows."
-      }
+        "b"
+      ]
     },
     {
-      "id": "ci1",
-      "kind": "code_input",
-      "title": "Write a query with a renamed output",
-      "prompt": "Write a SQL query to select each student's name and their grade level plus one, labeling the calculated column as 'next_grade'.",
-      "starterCode": "-- Write your query below\n",
-      "solutionCode": "SELECT name, grade_level + 1 AS next_grade FROM students;",
-      "datasetId": "school_relations_intro",
-      "recipeType": "sql_query",
-      "hint": "Use the AS keyword to rename the calculated column.",
+      "id": "q5",
+      "kind": "fill_blank_choice",
+      "title": "Fill in the Alias",
+      "prompt": "Complete the query to rename the unit_price column to price_per_unit in the output.",
+      "hint": "Use the AS keyword to assign the alias.",
       "help": {
-        "concept": "To rename a calculated column, use the AS keyword after the expression in the SELECT clause.",
-        "hint_1": "Your SELECT should include name and grade_level + 1, with an alias for the calculation.",
-        "hint_2": "Remember to use AS to give the new column the label 'next_grade'."
-      }
+        "concept": "The AS keyword is used to rename columns or expressions in the SELECT clause.",
+        "hint_1": "The syntax is: column_name AS alias",
+        "hint_2": "Replace the blank with the correct alias."
+      },
+      "template": "SELECT unit_price AS {blank} FROM orders;",
+      "choices": [
+        "price_per_unit",
+        "unit",
+        "unitPrice",
+        "price"
+      ],
+      "correctValue": "price_per_unit"
     }
   ]
 }

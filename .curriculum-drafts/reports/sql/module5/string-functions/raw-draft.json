@@ -5,144 +5,135 @@
   "sketchBlocks": [
     {
       "id": "sketch-1",
-      "title": "What are string functions?",
-      "bodyMarkdown": "String functions in SQL let you manipulate text data in your queries. For example, you can change the case of text, extract parts of a string, or combine columns. These are especially useful when working with columns like `name` or `title` in the `students` or `courses` tables.\n\nExample:\n\n```sql\nSELECT name, UPPER(name) AS name_uppercase FROM students;\n```\n\nThis query returns each student's name and their name in all uppercase letters."
+      "title": "What are SQL string functions?",
+      "bodyMarkdown": "SQL string functions let you manipulate text data in your queries. For example, you can change text to uppercase, extract part of a string, or combine columns. These functions are useful for cleaning up or formatting output in reports.\n\nCommon string functions in SQLite include:\n- `UPPER(text)`: Converts text to uppercase.\n- `LOWER(text)`: Converts text to lowercase.\n- `LENGTH(text)`: Returns the number of characters in the text.\n- `SUBSTR(text, start, length)`: Extracts a substring from the text.\n- `TRIM(text)`: Removes spaces from the start and end of the text.\n\nExample:\n```sql\nSELECT customer_name, UPPER(region) AS region_upper FROM orders;\n```\nThis query shows each customer's name and their region in uppercase."
     },
     {
       "id": "sketch-2",
-      "title": "Common string functions in SQLite",
-      "bodyMarkdown": "Some common string functions in SQLite include:\n- `UPPER(text)`: Converts all letters to uppercase.\n- `LOWER(text)`: Converts all letters to lowercase.\n- `LENGTH(text)`: Returns the number of characters in the string.\n- `SUBSTR(text, start, length)`: Extracts a substring from the text.\n- `TRIM(text)`: Removes spaces from the beginning and end of the text.\n\nExample:\n\n```sql\nSELECT name, LENGTH(name) AS name_length FROM students;\n```\n\nThis query shows each student's name and the number of characters in their name."
-    },
-    {
-      "id": "sketch-3",
-      "title": "Combining columns with string functions",
-      "bodyMarkdown": "You can use string functions to combine columns or format output. For example, you might want to display a student's name and grade level together in a single column.\n\nExample:\n\n```sql\nSELECT name || ' (Grade ' || grade_level || ')' AS student_info FROM students;\n```\n\nThis query creates a new column showing the student's name and grade level in a readable format."
+      "title": "Using string functions in calculated columns",
+      "bodyMarkdown": "You can use string functions in calculated columns to create new values or clean up data. For example, if you want to show only the first three letters of each category, you can use `SUBSTR`:\n\n```sql\nSELECT category, SUBSTR(category, 1, 3) AS cat_short FROM orders;\n```\n\nThis query adds a new column called `cat_short` with the first three letters of the category."
     }
   ],
   "quizDraft": [
     {
-      "id": "fillblank-1",
-      "kind": "fill_blank_choice",
-      "title": "Using UPPER to change case",
-      "prompt": "Which function would you use to convert the `name` column in the `students` table to all uppercase letters?",
-      "template": "SELECT ___(name) FROM students;",
-      "choices": [
-        "UPPER",
-        "LOWER",
-        "LENGTH",
-        "TRIM"
-      ],
-      "correctValue": "UPPER",
-      "hint": "Think about which function changes all letters to capitals.",
+      "id": "quiz-1",
+      "kind": "code_input",
+      "title": "Show customer names in uppercase",
+      "prompt": "Write a SQL query to select the `customer_name` column from the `orders` table, but display all names in uppercase. Name the output column `customer_upper`.",
+      "hint": "Use the UPPER() function and an alias.",
       "help": {
-        "concept": "The UPPER function converts all characters in a string to uppercase.",
-        "hint_1": "Look for the function that changes the case of letters to uppercase.",
-        "hint_2": "It's not LOWER, LENGTH, or TRIM. Which one remains?"
-      }
+        "concept": "The UPPER() function converts text to uppercase. Use SELECT with an alias to rename the output column.",
+        "hint_1": "Apply UPPER() to the customer_name column and use AS to rename it.",
+        "hint_2": "Your SELECT should include UPPER(customer_name) AS customer_upper."
+      },
+      "starterCode": "SELECT ... FROM orders;",
+      "solutionCode": "SELECT UPPER(customer_name) AS customer_upper FROM orders;",
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query"
     },
     {
-      "id": "fillblank-2",
-      "kind": "fill_blank_choice",
-      "title": "Counting characters in a string",
-      "prompt": "Which function returns the number of characters in the `title` column of the `courses` table?",
-      "template": "SELECT ___(title) FROM courses;",
-      "choices": [
-        "LENGTH",
-        "UPPER",
-        "SUBSTR",
-        "TRIM"
-      ],
-      "correctValue": "LENGTH",
-      "hint": "Which function measures how long a string is?",
+      "id": "quiz-2",
+      "kind": "code_input",
+      "title": "Extract region initials",
+      "prompt": "Write a SQL query to select the first two letters of the `region` column from the `orders` table. Name the output column `region_initials`.",
+      "hint": "Use the SUBSTR() function to extract part of the string.",
       "help": {
-        "concept": "The LENGTH function returns the number of characters in a string.",
-        "hint_1": "It's not about changing case or trimming spaces.",
-        "hint_2": "The function's name suggests it measures size."
-      }
+        "concept": "The SUBSTR() function extracts a substring from a text value. It takes the column, a starting position, and a length.",
+        "hint_1": "Start at position 1 and extract 2 characters from region.",
+        "hint_2": "Use SUBSTR(region, 1, 2) and give it an alias."
+      },
+      "starterCode": "SELECT ... FROM orders;",
+      "solutionCode": "SELECT SUBSTR(region, 1, 2) AS region_initials FROM orders;",
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query"
     },
     {
-      "id": "single-1",
+      "id": "quiz-3",
       "kind": "single_choice",
-      "title": "Extracting part of a string",
-      "prompt": "Which SQL function extracts a part of a string, starting at a specific position?",
+      "title": "Which function returns the number of characters in a string?",
+      "prompt": "Which SQL function returns the number of characters in a text value?",
+      "hint": "Think about which function measures string length.",
+      "help": {
+        "concept": "The LENGTH() function returns the number of characters in a string.",
+        "hint_1": "It's not UPPER or LOWER.",
+        "hint_2": "Look for a function name that means 'size' or 'length'."
+      },
       "options": [
         {
           "id": "a",
-          "content": "SUBSTR"
+          "content": "LENGTH()"
         },
         {
           "id": "b",
-          "content": "UPPER"
+          "content": "UPPER()"
         },
         {
           "id": "c",
-          "content": "LENGTH"
+          "content": "TRIM()"
         },
         {
           "id": "d",
-          "content": "TRIM"
+          "content": "SUBSTR()"
         }
       ],
       "correctOptionIds": [
         "a"
-      ],
-      "hint": "It's used to get a substring.",
-      "help": {
-        "concept": "The SUBSTR function extracts a substring from a string, starting at a given position.",
-        "hint_1": "This function needs a start position and length.",
-        "hint_2": "It's not about case, length, or trimming spaces."
-      }
+      ]
     },
     {
-      "id": "multi-1",
+      "id": "quiz-4",
       "kind": "multi_choice",
-      "title": "Choosing string functions for formatting",
-      "prompt": "Which of the following SQL functions can be used to format or clean up text data? (Choose all that apply)",
+      "title": "Select all true statements about string functions",
+      "prompt": "Which of the following statements about SQL string functions are true? Select all that apply.",
+      "hint": "Consider what each function does.",
+      "help": {
+        "concept": "String functions can change, extract, or measure text values in SQL.",
+        "hint_1": "Some functions change case, others extract parts or measure length.",
+        "hint_2": "Think about what UPPER, LOWER, and LENGTH do."
+      },
       "options": [
         {
           "id": "a",
-          "content": "TRIM"
+          "content": "UPPER() changes text to uppercase."
         },
         {
           "id": "b",
-          "content": "LOWER"
+          "content": "LOWER() changes text to lowercase."
         },
         {
           "id": "c",
-          "content": "LENGTH"
+          "content": "LENGTH() returns the number of characters in a string."
         },
         {
           "id": "d",
-          "content": "UPPER"
+          "content": "SUBSTR() removes spaces from a string."
         }
       ],
       "correctOptionIds": [
         "a",
         "b",
-        "d"
-      ],
-      "hint": "Consider which functions change the appearance or remove unwanted spaces.",
-      "help": {
-        "concept": "TRIM removes spaces, LOWER and UPPER change letter case, all useful for formatting or cleaning up text.",
-        "hint_1": "LENGTH only counts characters, but the others change or clean the text.",
-        "hint_2": "Pick all that modify or clean the text, not just measure it."
-      }
+        "c"
+      ]
     },
     {
-      "id": "code-1",
-      "kind": "code_input",
-      "title": "Combine student name and grade level",
-      "prompt": "Write a SQL query to show each student's name and a new column called `student_info` that displays their name followed by their grade level in parentheses, like 'Mia (Grade 9)'.",
-      "starterCode": "SELECT name, /* your code here */ FROM students;",
-      "solutionCode": "SELECT name, name || ' (Grade ' || grade_level || ')' AS student_info FROM students;",
-      "datasetId": "school_relations_intro",
-      "recipeType": "sql_query",
-      "hint": "Use the concatenation operator (||) and string literals to combine columns.",
+      "id": "quiz-5",
+      "kind": "fill_blank_choice",
+      "title": "Fill in the blank: Removing spaces",
+      "prompt": "Which function removes spaces from the beginning and end of a string?",
+      "hint": "It's not UPPER or LOWER.",
       "help": {
-        "concept": "You can combine text and columns using the concatenation operator (||) and string literals in SQL.",
-        "hint_1": "Start with the name, then concatenate ' (Grade ', then the grade_level, then ')'.",
-        "hint_2": "Remember to use aliases to name the new column."
-      }
+        "concept": "The TRIM() function removes leading and trailing spaces from text.",
+        "hint_1": "This function is used for cleaning up whitespace.",
+        "hint_2": "It starts with the letter T."
+      },
+      "template": "The function that removes spaces from the start and end of a string is _____.",
+      "choices": [
+        "TRIM()",
+        "LENGTH()",
+        "UPPER()",
+        "SUBSTR()"
+      ],
+      "correctValue": "TRIM()"
     }
   ]
 }

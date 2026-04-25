@@ -1,123 +1,108 @@
 {
   "title": "Discount calculations",
-  "summary": "Learn how to use SQL expressions to calculate discounts and create new columns in your SELECT statements. Practice with real school data to understand how calculated columns work.",
+  "summary": "Discount calculations in Calculated Columns and SQL Expressions",
   "minutes": 15,
   "sketchBlocks": [
     {
       "id": "sk1",
-      "title": "What are calculated columns?",
-      "bodyMarkdown": "A calculated column in SQL is a value you create on the fly in your SELECT statement. Instead of just showing what's in the table, you can use arithmetic or functions to generate new results. For example, you might want to show a student's grade level plus one, or combine text columns. \n\nExample:\n\n```sql\nSELECT name, grade_level + 1 AS next_year_grade\nFROM students;\n```\n\nThis query shows each student's name and what their grade will be next year."
+      "title": "What is a discount calculation?",
+      "bodyMarkdown": "A discount calculation in SQL means using arithmetic expressions to reduce a price by a percentage or fixed amount. For example, if you want to show a 10% discount on each order's unit price, you can use an expression like `unit_price * 0.9` inside your SELECT statement. This creates a new column in your result set showing the discounted price, without changing the original data."
     },
     {
       "id": "sk2",
-      "title": "Applying discounts with expressions",
-      "bodyMarkdown": "Suppose you want to calculate a discounted value, such as reducing a number by 10%. You can use arithmetic in your SELECT statement:\n\n```sql\nSELECT name, grade_level, grade_level * 0.9 AS discounted_grade\nFROM students;\n```\n\nThis query multiplies each student's grade level by 0.9, showing what it would be if we applied a 10% discount. (Of course, grade levels don't get discounted in real life, but this is just for practice!)"
-    },
-    {
-      "id": "sk3",
-      "title": "Using aliases for clarity",
-      "bodyMarkdown": "When you create a calculated column, it's helpful to give it a clear name using the `AS` keyword. This is called an alias. Aliases make your results easier to read and understand.\n\nExample:\n\n```sql\nSELECT name, grade_level * 0.8 AS discounted_grade\nFROM students;\n```\n\nHere, `discounted_grade` is the alias for the calculated column."
+      "title": "Using calculated columns for discounts",
+      "bodyMarkdown": "To calculate a discounted total for each order in the `orders` table, you can multiply the `unit_price` by the `quantity` and then apply the discount. For example, to show a 15% discount, use:\n\n```sql\nSELECT id, customer_name, quantity, unit_price, \n  quantity * unit_price AS line_total,\n  quantity * unit_price * 0.85 AS discounted_total\nFROM orders;\n```\n\nThis query adds two calculated columns: one for the original line total, and one for the discounted total."
     }
   ],
   "quizDraft": [
     {
       "id": "q1",
-      "kind": "fill_blank_choice",
-      "title": "Calculating a 20% discount",
-      "prompt": "Choose the best value for the first missing blank in the statement.",
-      "template": "The first missing value is [blank1].",
-      "choices": [
-        "0.8",
-        "1.2",
-        "0.2",
-        "0.9"
-      ],
-      "correctValue": "0.8",
-      "hint": "Think about what number represents an 80% value.",
-      "help": {
-        "concept": "To apply a 20% discount, multiply by the missing term (which is 80% of the original value).",
-        "hint_1": "A 20% discount means you keep 80% of the value.",
-        "hint_2": "Multiplying by the missing term gives you 80% of the original number."
-      }
-    },
-    {
-      "id": "q2",
-      "kind": "fill_blank_choice",
-      "title": "Alias for a calculated column",
-      "prompt": "Choose the best value for the first missing blank in the statement.",
-      "template": "The first missing value is [blank1].",
-      "choices": [
-        "discounted_grade",
-        "grade_level",
-        "student_name",
-        "discount"
-      ],
-      "correctValue": "discounted_grade",
-      "hint": "The alias should describe the new, discounted value.",
-      "help": {
-        "concept": "Aliases help clarify the meaning of calculated columns in your results.",
-        "hint_1": "The alias should reflect that the value is after a discount.",
-        "hint_2": "A name like 'the missing term' makes it clear what the column shows."
-      }
-    },
-    {
-      "id": "q3",
-      "kind": "single_choice",
-      "title": "Purpose of using aliases",
-      "prompt": "Why is it helpful to use an alias for a calculated column in SQL?",
-      "options": [
-        "It makes the output easier to read and understand.",
-        "It increases the speed of the query.",
-        "It changes the values stored in the table.",
-        "It prevents errors in the calculation."
-      ],
-      "correctOptionIds": [
-        "a"
-      ],
-      "hint": "Think about how the results look when you use an alias.",
-      "help": {
-        "concept": "Aliases rename columns in the result set, making them more readable.",
-        "hint_1": "Aliases help clarify what each column represents.",
-        "hint_2": "Using an alias doesn't change the data, but it makes your results clearer."
-      }
-    },
-    {
-      "id": "q4",
-      "kind": "multi_choice",
-      "title": "Which of these are valid uses of calculated columns?",
-      "prompt": "Select all statements that correctly use calculated columns in SQL.",
-      "options": [
-        "a. SELECT name, grade_level + 1 AS next_year FROM students;",
-        "b. SELECT name, grade_level * 0.95 AS discounted FROM students;",
-        "c. SELECT name, AS grade_level FROM students;",
-        "d. SELECT name, grade_level - 2 AS adjusted FROM students;"
-      ],
-      "correctOptionIds": [
-        "a",
-        "b",
-        "d"
-      ],
-      "hint": "Look for statements that use arithmetic and an alias.",
-      "help": {
-        "concept": "Calculated columns use expressions and can be renamed with aliases.",
-        "hint_1": "Check if the statement creates a new value and gives it a name.",
-        "hint_2": "Statements that use arithmetic and 'AS' for an alias are valid."
-      }
-    },
-    {
-      "id": "q5",
       "kind": "code_input",
-      "title": "Write a query to show discounted grade levels",
-      "prompt": "Write a SQL query that shows each student's name and their grade level after a 15% discount (multiply by 0.85), with the discounted value labeled as 'discounted_grade'.",
-      "starterCode": "-- Write your query below",
-      "solutionCode": "SELECT name, grade_level * 0.85 AS discounted_grade\nFROM students;",
-      "datasetId": "school_relations_intro",
+      "title": "Calculate a 20% discount on unit price",
+      "prompt": "Write a SQL query to select `id`, `customer_name`, `unit_price`, and a new column called `discounted_price` that shows the unit price after a 20% discount for each order in the `orders` table.",
+      "starterCode": "SELECT id, customer_name, unit_price,\n  -- your expression here\nFROM orders;",
+      "solutionCode": "SELECT id, customer_name, unit_price,\n  unit_price * 0.8 AS discounted_price\nFROM orders;",
+      "datasetId": "sales_kpi",
       "recipeType": "sql_query",
       "hint": "Focus on the concept being tested.",
       "help": {
         "concept": "Think about the role or idea being tested rather than repeating answer wording.",
         "hint_1": "Eliminate choices or interpretations that do not match the task.",
         "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+      }
+    },
+    {
+      "id": "q2",
+      "kind": "code_input",
+      "title": "Calculate discounted line total",
+      "prompt": "Write a SQL query to select `id`, `quantity`, `unit_price`, and a new column called `discounted_total` that shows the total price for each order after applying a 10% discount to the line total (quantity * unit_price).",
+      "starterCode": "SELECT id, quantity, unit_price,\n  -- your expression here\nFROM orders;",
+      "solutionCode": "SELECT id, quantity, unit_price,\n  quantity * unit_price * 0.9 AS discounted_total\nFROM orders;",
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query",
+      "hint": "Focus on the concept being tested.",
+      "help": {
+        "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+        "hint_1": "Eliminate choices or interpretations that do not match the task.",
+        "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+      }
+    },
+    {
+      "id": "q3",
+      "kind": "single_choice",
+      "title": "Understanding discount expressions",
+      "prompt": "Which SQL expression correctly calculates a 25% discount on the `unit_price` column?",
+      "options": [
+        "[object Object]",
+        "A command"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "A 25% discount means you pay 75% of the price.",
+      "help": {
+        "concept": "To apply a percentage discount, multiply by (1 - discount rate).",
+        "hint_1": "A 25% discount leaves you with 75% of the price.",
+        "hint_2": "Multiply unit_price by 0.75 to get the discounted value."
+      }
+    },
+    {
+      "id": "q4",
+      "kind": "multi_choice",
+      "title": "Identifying correct discount calculations",
+      "prompt": "Which of the following SQL expressions correctly calculate a 15% discount on the line total (`quantity * unit_price`)? Select all that apply.",
+      "options": [
+        "[object Object]",
+        "A command"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "A 15% discount means multiplying by 0.85.",
+      "help": {
+        "concept": "Multiplying by 0.85 applies a 15% discount. Parentheses can change the order, but the result is the same if the math is correct.",
+        "hint_1": "Any expression multiplying the line total by 0.85 is correct.",
+        "hint_2": "Check if the calculation multiplies both quantity and unit_price by 0.85, directly or via parentheses."
+      }
+    },
+    {
+      "id": "q5",
+      "kind": "fill_blank_choice",
+      "title": "Fill in the blank: Discount factor",
+      "prompt": "Choose the best value for the first missing blank in the statement.",
+      "template": "The first missing value is [blank1].",
+      "choices": [
+        "0.7",
+        "0.3",
+        "1.3",
+        "0.97"
+      ],
+      "correctValue": "0.7",
+      "hint": "Subtract the discount rate from 1.",
+      "help": {
+        "concept": "A 30% discount means you pay 70% of the price, so multiply by the missing term.",
+        "hint_1": "1 minus 0.3 equals the missing term.",
+        "hint_2": "Multiplying by the missing term applies a 30% discount."
       }
     }
   ]

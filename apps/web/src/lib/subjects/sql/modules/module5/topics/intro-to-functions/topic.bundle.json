@@ -14,21 +14,21 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.sql.sql_module_5.intro-to-functions.cards.sketch0.title",
-      "sketchId": "sketch-what-are-functions",
+      "sketchId": "sk1",
       "height": 420
     },
     {
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.sql.sql_module_5.intro-to-functions.cards.sketch1.title",
-      "sketchId": "sketch-simple-function-example",
+      "sketchId": "sk2",
       "height": 420
     },
     {
       "id": "sketch2",
       "kind": "sketch",
       "titleKey": "topics.sql.sql_module_5.intro-to-functions.cards.sketch2.title",
-      "sketchId": "sketch-multiple-functions",
+      "sketchId": "sk3",
       "height": 420
     },
     {
@@ -37,7 +37,7 @@
       "titleKey": "topics.sql.sql_module_5.intro-to-functions.cards.quiz.title",
       "quiz": {
         "difficulty": "easy",
-        "n": 4,
+        "n": 3,
         "allowReveal": true,
         "preferKind": null,
         "maxAttempts": 10
@@ -46,60 +46,64 @@
   ],
   "sketches": [
     {
-      "id": "sketch-what-are-functions",
+      "id": "sk1",
       "archetype": "paragraph",
-      "titleKey": "sketches.sql.sql_module_5.intro-to-functions.sketch-what-are-functions.title",
-      "bodyKey": "sketches.sql.sql_module_5.intro-to-functions.sketch-what-are-functions.bodyMarkdown"
+      "titleKey": "sketches.sql.sql_module_5.intro-to-functions.sk1.title",
+      "bodyKey": "sketches.sql.sql_module_5.intro-to-functions.sk1.bodyMarkdown"
     },
     {
-      "id": "sketch-simple-function-example",
+      "id": "sk2",
       "archetype": "paragraph",
-      "titleKey": "sketches.sql.sql_module_5.intro-to-functions.sketch-simple-function-example.title",
-      "bodyKey": "sketches.sql.sql_module_5.intro-to-functions.sketch-simple-function-example.bodyMarkdown"
+      "titleKey": "sketches.sql.sql_module_5.intro-to-functions.sk2.title",
+      "bodyKey": "sketches.sql.sql_module_5.intro-to-functions.sk2.bodyMarkdown"
     },
     {
-      "id": "sketch-multiple-functions",
+      "id": "sk3",
       "archetype": "paragraph",
-      "titleKey": "sketches.sql.sql_module_5.intro-to-functions.sketch-multiple-functions.title",
-      "bodyKey": "sketches.sql.sql_module_5.intro-to-functions.sketch-multiple-functions.bodyMarkdown"
+      "titleKey": "sketches.sql.sql_module_5.intro-to-functions.sk3.title",
+      "bodyKey": "sketches.sql.sql_module_5.intro-to-functions.sk3.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "fillblank-func-purpose",
-      "kind": "fill_blank_choice",
+      "id": "q1",
+      "kind": "code_input",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.intro-to-functions.quiz.fillblank-func-purpose",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "transform"
+      "messageBase": "topics.sql.sql_module_5.intro-to-functions.quiz.q1",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_kpi",
+        "resultShape": "table",
+        "solutionCode": "SELECT id, ROUND(quantity * unit_price, 0) AS rounded_total\nFROM orders;"
       }
     },
     {
-      "id": "fillblank-max-grade",
-      "kind": "fill_blank_choice",
+      "id": "q2",
+      "kind": "code_input",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.intro-to-functions.quiz.fillblank-max-grade",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "MAX"
+      "messageBase": "topics.sql.sql_module_5.intro-to-functions.quiz.q2",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_kpi",
+        "resultShape": "table",
+        "solutionCode": "SELECT customer_name, UPPER(region) AS region_upper\nFROM orders;"
       }
     },
     {
-      "id": "singlechoice-func-location",
+      "id": "q3",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.intro-to-functions.quiz.singlechoice-func-location",
+      "messageBase": "topics.sql.sql_module_5.intro-to-functions.quiz.q3",
       "optionIds": [
         "a",
-        "b",
-        "c",
-        "d"
+        "b"
       ],
       "expected": {
         "kind": "single_choice",
@@ -107,16 +111,14 @@
       }
     },
     {
-      "id": "multichoice-simple-functions",
+      "id": "q4",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.intro-to-functions.quiz.multichoice-simple-functions",
+      "messageBase": "topics.sql.sql_module_5.intro-to-functions.quiz.q4",
       "optionIds": [
         "a",
-        "b",
-        "c",
-        "d"
+        "b"
       ],
       "expected": {
         "kind": "multi_choice",
@@ -126,18 +128,15 @@
       }
     },
     {
-      "id": "codeinput-select-max-grade",
-      "kind": "code_input",
+      "id": "q5",
+      "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.intro-to-functions.quiz.codeinput-select-max-grade",
-      "language": "sql",
-      "fixedSqlDialect": "sqlite",
-      "recipe": {
-        "type": "sql_query",
-        "datasetId": "school_relations_intro",
-        "resultShape": "table",
-        "solutionCode": "SELECT MAX(grade_level) FROM students;"
+      "messageBase": "topics.sql.sql_module_5.intro-to-functions.quiz.q5",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "LOWER()"
       }
     }
   ]

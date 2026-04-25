@@ -4,24 +4,78 @@
       "sql_module_5": {
         "renaming-result-columns": {
           "label": "Renaming result columns",
-          "summary": "Learn how to rename result columns in SQL queries using column aliases for clearer and more readable output.",
+          "summary": "Learn how to rename columns in your SQL query results using column aliases, making your output more readable and presentation-ready.",
           "cards": {
             "sketch0": {
-              "title": "Why Rename Result Columns?"
+              "title": "What is a column alias?"
             },
             "sketch1": {
-              "title": "How to Use Aliases in SQL"
+              "title": "Alias Syntax and Usage"
             },
             "sketch2": {
-              "title": "Aliases with Expressions"
+              "title": "Why use aliases?"
             },
             "quiz": {
               "title": "Quiz"
             }
           },
           "quiz": {
-            "fill-1": {
-              "title": "Basic Alias Syntax",
+            "quiz-1-alias-calculation": {
+              "title": "Create a calculated column with an alias",
+              "prompt": "Write a SQL query to select `customer_name` and a calculated column for the total order value (quantity multiplied by unit_price) as `order_total` from the `orders` table.",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+                "hint_1": "Eliminate choices or interpretations that do not match the task.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "starterCode": "-- Write your query here"
+            },
+            "quiz-2-alias-existing-column": {
+              "title": "Rename an existing column",
+              "prompt": "Write a SQL query to select `region` from the `orders` table, but rename it as `sales_region` in the result.",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+                "hint_1": "Eliminate choices or interpretations that do not match the task.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "starterCode": "-- Write your query here"
+            },
+            "quiz-3-alias-syntax-choice": {
+              "title": "Choosing the correct alias syntax",
+              "prompt": "Which of the following SQL statements correctly renames the calculated column to `total_value`?",
+              "hint": "Look for the use of AS and the correct placement of the alias.",
+              "help": {
+                "concept": "The AS keyword is used to assign an alias to a column or expression in the SELECT clause.",
+                "hint_1": "Check which option uses AS after the calculation.",
+                "hint_2": "The correct answer uses AS to rename the calculated column."
+              },
+              "options": {
+                "a": "a) SELECT quantity * unit_price total_value FROM orders;",
+                "b": "b) SELECT quantity * unit_price AS total_value FROM orders;",
+                "c": "c) SELECT quantity * unit_price = total_value FROM orders;",
+                "d": "d) SELECT total_value = quantity * unit_price FROM orders;"
+              }
+            },
+            "quiz-4-alias-multi-choice": {
+              "title": "When are column aliases useful?",
+              "prompt": "In which situations are column aliases helpful? Select all that apply.",
+              "hint": "Think about when you want to make your results clearer or more readable.",
+              "help": {
+                "concept": "Column aliases are useful for improving readability, especially with calculations or when preparing reports.",
+                "hint_1": "Consider both calculated columns and making reports easier to understand.",
+                "hint_2": "Aliases help with both expressions and presentation."
+              },
+              "options": {
+                "a": "a) When you want to rename a calculated column for clarity.",
+                "b": "b) When you want to make report output more readable.",
+                "c": "c) When you want to change the actual table column name.",
+                "d": "d) When you want to use a shorter name for a long column."
+              }
+            },
+            "quiz-5-alias-fill-blank": {
+              "title": "Fill in the blank: Alias keyword",
               "prompt": "Choose the best value for the first missing blank in the statement.",
               "hint": "Focus on the missing SQL concept rather than the exact missing word.",
               "help": {
@@ -32,70 +86,10 @@
               "template": "The first missing value is [blank1].",
               "choices": [
                 "AS",
-                "LIKE",
-                "RENAME",
-                "TO"
+                "INTO",
+                "WITH",
+                "ON"
               ]
-            },
-            "fill-2": {
-              "title": "Alias with Expressions",
-              "prompt": "Choose the best value for the first missing blank in the statement.",
-              "hint": "The alias describes what the expression means in the output.",
-              "help": {
-                "concept": "Aliases can be any descriptive name you choose for the result column, especially when using expressions.",
-                "hint_1": "The alias should explain that the value is the student's grade level next year.",
-                "hint_2": "It's a three-word phrase that matches the meaning of grade_level plus one."
-              },
-              "template": "The first missing value is [blank1].",
-              "choices": [
-                "Next Year Grade",
-                "Grade",
-                "Year",
-                "Level"
-              ]
-            },
-            "single-1": {
-              "title": "Purpose of Aliases",
-              "prompt": "Why are column aliases useful in SQL result sets?",
-              "hint": "Think about how the output looks to someone reading the results.",
-              "help": {
-                "concept": "Aliases only affect the column names in the query output, not the database schema.",
-                "hint_1": "Aliases help clarify what each column means in the result set.",
-                "hint_2": "They are for presentation, not for changing the database structure."
-              },
-              "options": {
-                "a": "They make result columns easier to read and understand.",
-                "b": "They change the actual column names in the database.",
-                "c": "They speed up query execution.",
-                "d": "They prevent duplicate rows."
-              }
-            },
-            "multi-1": {
-              "title": "Valid Uses of Aliases",
-              "prompt": "Which of the following are valid uses of column aliases in SQL? (Choose all that apply)",
-              "hint": "Think about what aliases do in the SELECT clause.",
-              "help": {
-                "concept": "Aliases are used for temporary naming in query results, not for altering the database schema.",
-                "hint_1": "You can use aliases for both existing columns and expressions.",
-                "hint_2": "One option is not possible with just an alias—it requires a schema change."
-              },
-              "options": {
-                "a": "Renaming a column in the SELECT output",
-                "b": "Giving a name to a calculated column",
-                "c": "Permanently changing the column name in the table",
-                "d": "Making query results easier to read"
-              }
-            },
-            "code-1": {
-              "title": "Write a Query with Aliases",
-              "prompt": "Write a SQL query to select the `name` column as `Student Name` and the `grade_level` column as `Grade` from the `students` table.",
-              "hint": "Focus on the concept being tested.",
-              "help": {
-                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
-                "hint_1": "Eliminate choices or interpretations that do not match the task.",
-                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
-              },
-              "starterCode": "-- Write your query below"
             }
           }
         }
@@ -106,17 +100,17 @@
     "sql": {
       "sql_module_5": {
         "renaming-result-columns": {
-          "sketch-1": {
-            "title": "Why Rename Result Columns?",
-            "bodyMarkdown": "When you write SQL queries, the column names in your results are usually taken directly from the table or expression. Sometimes, these names are unclear or too technical. By renaming columns using **aliases**, you can make your results easier to read and understand. For example, if you select `name` from the `students` table, you might want to show it as `Student Name` in your output."
+          "sketch-1-alias-basics": {
+            "title": "What is a column alias?",
+            "bodyMarkdown": "A column alias in SQL lets you assign a temporary name to a column or expression in your query results. This is especially useful when you use calculations or want to make column names more readable. You create an alias using the `AS` keyword.\n\n**Example:**\n```sql\nSELECT customer_name, quantity * unit_price AS total_amount\nFROM orders;\n```\nIn this example, the calculated column `quantity * unit_price` will appear as `total_amount` in the result set."
           },
-          "sketch-2": {
-            "title": "How to Use Aliases in SQL",
-            "bodyMarkdown": "To rename a column in your result, use the `AS` keyword after the column or expression. For example:\n\n```sql\nSELECT name AS \"Student Name\", grade_level AS \"Grade\" FROM students;\n```\nThis query will display the `name` column as `Student Name` and `grade_level` as `Grade` in the output."
+          "sketch-2-alias-syntax": {
+            "title": "Alias Syntax and Usage",
+            "bodyMarkdown": "You can use aliases for both existing columns and calculated expressions. The `AS` keyword is optional, but using it makes your SQL clearer.\n\n**Examples:**\n```sql\nSELECT customer_name, quantity, unit_price, quantity * unit_price AS calculated_value\nFROM orders;\n```\nBoth queries will show a column named `sales_region` in the output."
           },
-          "sketch-3": {
-            "title": "Aliases with Expressions",
-            "bodyMarkdown": "Aliases are especially useful when you use expressions or calculations in your SELECT statement. For example:\n\n```sql\nSELECT name, grade_level + 1 AS \"Next Year Grade\" FROM students;\n```\nHere, the result of `grade_level + 1` will appear under the column heading `Next Year Grade`."
+          "sketch-3-alias-presentation": {
+            "title": "Why use aliases?",
+            "bodyMarkdown": "Aliases help make your query results easier to read and understand, especially when sharing reports. For example, renaming `quantity * unit_price` to `Total Sales` makes the output more meaningful for non-technical users.\n\n**Example:**\n```sql\nSELECT customer_name, quantity * unit_price AS \"Total Sales\"\nFROM orders;\n```\nUsing quotes allows spaces in the alias."
           }
         }
       }

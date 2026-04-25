@@ -3,6 +3,13 @@
   "ok": true,
   "issues": [
     {
+      "code": "SQL_WEAK_DISTRACTORS",
+      "category": "pedagogy",
+      "severity": "warn",
+      "exerciseId": "q4",
+      "message": "Multi-choice exercise has too few options for strong distractors."
+    },
+    {
       "code": "MULTI_CHOICE_TOO_FEW_CORRECT_OPTIONS",
       "category": "clarity",
       "severity": "warn",

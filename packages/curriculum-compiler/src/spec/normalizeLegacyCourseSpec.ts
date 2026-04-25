@@ -5,7 +5,76 @@ import type {
     CourseSpecTopic,
     ExerciseKindMix,
 } from "@zoeskoul/curriculum-contracts";
+import {getSqlModuleDatasetPolicy} from "@zoeskoul/curriculum-profiles";
 
+
+function normalizeModuleRuntimePolicy(args: {
+    profileId: string;
+    moduleNumber: number;
+    rawModuleRuntimePolicy: any;
+    rawGlobalRuntimePolicy: any;
+}) {
+    const moduleRuntime =
+        args.rawModuleRuntimePolicy && typeof args.rawModuleRuntimePolicy === "object"
+            ? args.rawModuleRuntimePolicy
+            : undefined;
+
+    const globalRuntime =
+        args.rawGlobalRuntimePolicy && typeof args.rawGlobalRuntimePolicy === "object"
+            ? args.rawGlobalRuntimePolicy
+            : undefined;
+
+    const sqlDialect =
+        typeof moduleRuntime?.sqlDialect === "string"
+            ? moduleRuntime.sqlDialect.trim()
+            : typeof globalRuntime?.sqlDialect === "string"
+                ? globalRuntime.sqlDialect.trim()
+                : args.profileId === "sql"
+                    ? "sqlite"
+                    : undefined;
+
+    const datasetStrategy =
+        moduleRuntime?.datasetStrategy ??
+        globalRuntime?.datasetStrategy ??
+        (args.profileId === "sql" ? "module_based" : undefined);
+
+    const preferredDatasetId =
+        typeof moduleRuntime?.preferredDatasetId === "string"
+            ? moduleRuntime.preferredDatasetId.trim()
+            : typeof globalRuntime?.preferredDatasetId === "string"
+                ? globalRuntime.preferredDatasetId.trim()
+                : undefined;
+
+    const datasetId =
+        typeof moduleRuntime?.datasetId === "string" && moduleRuntime.datasetId.trim()
+            ? moduleRuntime.datasetId.trim()
+            : typeof globalRuntime?.datasetId === "string" && globalRuntime.datasetId.trim()
+                ? globalRuntime.datasetId.trim()
+                : args.profileId === "sql" && datasetStrategy === "module_based"
+                    ? getSqlModuleDatasetPolicy(args.moduleNumber).datasetId
+                    : preferredDatasetId;
+
+    const resultShape =
+        typeof moduleRuntime?.resultShape === "string"
+            ? moduleRuntime.resultShape.trim()
+            : typeof globalRuntime?.resultShape === "string"
+                ? globalRuntime.resultShape.trim()
+                : args.profileId === "sql"
+                    ? "table"
+                    : undefined;
+
+    if (!sqlDialect && !datasetStrategy && !datasetId && !preferredDatasetId && !resultShape) {
+        return undefined;
+    }
+
+    return {
+        sqlDialect,
+        datasetStrategy,
+        datasetId,
+        preferredDatasetId,
+        resultShape,
+    };
+}
 function slugify(input: string) {
     return String(input ?? "")
         .trim()
@@ -195,7 +264,12 @@ function normalizeTopic(
     };
 }
 
-function normalizeModule(module: any, usedTopicIds: Set<string>): CourseSpecModule {
+function normalizeModule(
+    module: any,
+    usedTopicIds: Set<string>,
+    profileId: string,
+    globalRuntimePolicy: any,
+): CourseSpecModule {
     const moduleNumber =
         typeof module?.moduleNumber === "number" ? module.moduleNumber : 0;
 
@@ -272,15 +346,12 @@ function normalizeModule(module: any, usedTopicIds: Set<string>): CourseSpecModu
                 : {
                     mix: pickModuleMix(moduleNumber),
                 },
-        runtimePolicy:
-            module?.runtimePolicy && typeof module.runtimePolicy === "object"
-                ? module.runtimePolicy
-                : moduleNumber <= 8
-                    ? {
-                        sqlDialect: "sqlite",
-                        datasetStrategy: "module_based",
-                    }
-                    : undefined,
+        runtimePolicy: normalizeModuleRuntimePolicy({
+            profileId,
+            moduleNumber,
+            rawModuleRuntimePolicy: module?.runtimePolicy,
+            rawGlobalRuntimePolicy: globalRuntimePolicy,
+        }),
         sections: normalizedSections,
     };
 }
@@ -290,8 +361,14 @@ export function normalizeLegacyCourseSpec(raw: unknown): CourseSpec {
     const usedTopicIds = new Set<string>();
 
     const modules = Array.isArray(input.modules) ? input.modules : [];
+    const profileId = String(input.profileId ?? "").trim();
+    const globalRuntimePolicy =
+        input.policy?.runtimePolicy && typeof input.policy.runtimePolicy === "object"
+            ? input.policy.runtimePolicy
+            : undefined;
+
     const normalizedModules = modules.map((module: any) =>
-        normalizeModule(module, usedTopicIds),
+        normalizeModule(module, usedTopicIds, profileId, globalRuntimePolicy),
     );
 
     return {
@@ -340,6 +417,7 @@ export function normalizeLegacyCourseSpec(raw: unknown): CourseSpec {
                     runtimePolicy: {
                         sqlDialect: "sqlite",
                         datasetStrategy: "module_based",
+                        resultShape: "table",
                     },
                     qualityPolicy: {
                         allowBlankTopicIds: false,

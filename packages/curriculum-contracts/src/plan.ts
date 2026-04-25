@@ -1,4 +1,4 @@
-import type { CourseProfileId } from "./blueprint.js";
+import type { BlueprintRuntimePolicy, CourseProfileId } from "./blueprint.js";
 
 export type PlannedTopic = {
   topicId: string;
@@ -17,6 +17,8 @@ export type PlannedSection = {
   topics: PlannedTopic[];
 };
 
+export type PlannedModuleRuntimePolicy = Omit<BlueprintRuntimePolicy, "moduleDatasetIds">;
+
 export type PlannedModule = {
   moduleSlug: string;
   prefix: string;
@@ -30,6 +32,7 @@ export type PlannedModule = {
   moduleProject?: string;
   weekStart?: number | null;
   weekEnd?: number | null;
+  runtimePolicy?: PlannedModuleRuntimePolicy;
   sections: PlannedSection[];
 };
 

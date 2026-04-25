@@ -30,7 +30,7 @@
       "titleKey": "topics.sql.sql_module_5.what-aliases-are.cards.quiz.title",
       "quiz": {
         "difficulty": "easy",
-        "n": 4,
+        "n": 3,
         "allowReveal": true,
         "preferKind": null,
         "maxAttempts": 10
@@ -53,57 +53,59 @@
   ],
   "exercises": [
     {
-      "id": "fill-blank-1",
-      "kind": "fill_blank_choice",
+      "id": "code-1",
+      "kind": "code_input",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.what-aliases-are.quiz.fill-blank-1",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "AS"
+      "messageBase": "topics.sql.sql_module_5.what-aliases-are.quiz.code-1",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_kpi",
+        "resultShape": "table",
+        "solutionCode": "SELECT customer_name, quantity * unit_price AS order_total\nFROM orders;"
       }
     },
     {
-      "id": "fill-blank-2",
-      "kind": "fill_blank_choice",
+      "id": "code-2",
+      "kind": "code_input",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.what-aliases-are.quiz.fill-blank-2",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "readable"
+      "messageBase": "topics.sql.sql_module_5.what-aliases-are.quiz.code-2",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_kpi",
+        "resultShape": "table",
+        "solutionCode": "SELECT region, AVG(unit_price) AS avg_price\nFROM orders\nGROUP BY region;"
       }
     },
     {
-      "id": "single-choice-1",
+      "id": "single-1",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.what-aliases-are.quiz.single-choice-1",
+      "messageBase": "topics.sql.sql_module_5.what-aliases-are.quiz.single-1",
       "optionIds": [
         "a",
-        "b",
-        "c",
-        "d"
+        "b"
       ],
       "expected": {
         "kind": "single_choice",
-        "optionId": "d"
+        "optionId": "a"
       }
     },
     {
-      "id": "multi-choice-1",
+      "id": "multi-1",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.what-aliases-are.quiz.multi-choice-1",
+      "messageBase": "topics.sql.sql_module_5.what-aliases-are.quiz.multi-1",
       "optionIds": [
         "a",
-        "b",
-        "c",
-        "d"
+        "b"
       ],
       "expected": {
         "kind": "multi_choice",
@@ -113,18 +115,15 @@
       }
     },
     {
-      "id": "code-input-1",
-      "kind": "code_input",
+      "id": "fill-1",
+      "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.what-aliases-are.quiz.code-input-1",
-      "language": "sql",
-      "fixedSqlDialect": "sqlite",
-      "recipe": {
-        "type": "sql_query",
-        "datasetId": "school_relations_intro",
-        "resultShape": "table",
-        "solutionCode": "SELECT name, grade_level AS Year FROM students;"
+      "messageBase": "topics.sql.sql_module_5.what-aliases-are.quiz.fill-1",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "AS"
       }
     }
   ]

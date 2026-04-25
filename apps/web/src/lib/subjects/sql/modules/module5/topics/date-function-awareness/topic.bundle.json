@@ -14,14 +14,14 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.sql.sql_module_5.date-function-awareness.cards.sketch0.title",
-      "sketchId": "sk1",
+      "sketchId": "sketch-1",
       "height": 420
     },
     {
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.sql.sql_module_5.date-function-awareness.cards.sketch1.title",
-      "sketchId": "sk2",
+      "sketchId": "sketch-2",
       "height": 420
     },
     {
@@ -30,7 +30,7 @@
       "titleKey": "topics.sql.sql_module_5.date-function-awareness.cards.quiz.title",
       "quiz": {
         "difficulty": "easy",
-        "n": 4,
+        "n": 3,
         "allowReveal": true,
         "preferKind": null,
         "maxAttempts": 10
@@ -39,49 +39,55 @@
   ],
   "sketches": [
     {
-      "id": "sk1",
+      "id": "sketch-1",
       "archetype": "paragraph",
-      "titleKey": "sketches.sql.sql_module_5.date-function-awareness.sk1.title",
-      "bodyKey": "sketches.sql.sql_module_5.date-function-awareness.sk1.bodyMarkdown"
+      "titleKey": "sketches.sql.sql_module_5.date-function-awareness.sketch-1.title",
+      "bodyKey": "sketches.sql.sql_module_5.date-function-awareness.sketch-1.bodyMarkdown"
     },
     {
-      "id": "sk2",
+      "id": "sketch-2",
       "archetype": "paragraph",
-      "titleKey": "sketches.sql.sql_module_5.date-function-awareness.sk2.title",
-      "bodyKey": "sketches.sql.sql_module_5.date-function-awareness.sk2.bodyMarkdown"
+      "titleKey": "sketches.sql.sql_module_5.date-function-awareness.sketch-2.title",
+      "bodyKey": "sketches.sql.sql_module_5.date-function-awareness.sketch-2.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "q1",
-      "kind": "fill_blank_choice",
+      "id": "code-1",
+      "kind": "code_input",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.date-function-awareness.quiz.q1",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "term"
+      "messageBase": "topics.sql.sql_module_5.date-function-awareness.quiz.code-1",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_kpi",
+        "resultShape": "table",
+        "solutionCode": "SELECT id, order_date, strftime('%m', order_date) AS order_month FROM orders;"
       }
     },
     {
-      "id": "q2",
-      "kind": "fill_blank_choice",
+      "id": "code-2",
+      "kind": "code_input",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.date-function-awareness.quiz.q2",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "Spring 2026"
+      "messageBase": "topics.sql.sql_module_5.date-function-awareness.quiz.code-2",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_kpi",
+        "resultShape": "table",
+        "solutionCode": "SELECT * FROM orders WHERE strftime('%m', order_date) = '01';"
       }
     },
     {
-      "id": "q3",
+      "id": "single-1",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.date-function-awareness.quiz.q3",
+      "messageBase": "topics.sql.sql_module_5.date-function-awareness.quiz.single-1",
       "optionIds": [
         "a",
         "b",
@@ -90,15 +96,15 @@
       ],
       "expected": {
         "kind": "single_choice",
-        "optionId": "a"
+        "optionId": "b"
       }
     },
     {
-      "id": "q4",
+      "id": "multi-1",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.date-function-awareness.quiz.q4",
+      "messageBase": "topics.sql.sql_module_5.date-function-awareness.quiz.multi-1",
       "optionIds": [
         "a",
         "b",
@@ -109,23 +115,21 @@
         "kind": "multi_choice",
         "optionIds": [
           "a",
-          "c"
+          "b",
+          "d"
         ]
       }
     },
     {
-      "id": "q5",
-      "kind": "code_input",
+      "id": "fill-1",
+      "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.date-function-awareness.quiz.q5",
-      "language": "sql",
-      "fixedSqlDialect": "sqlite",
-      "recipe": {
-        "type": "sql_query",
-        "datasetId": "school_relations_intro",
-        "resultShape": "table",
-        "solutionCode": "SELECT * FROM enrollments WHERE term = 'Spring 2026';"
+      "messageBase": "topics.sql.sql_module_5.date-function-awareness.quiz.fill-1",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "'%d'"
       }
     }
   ]

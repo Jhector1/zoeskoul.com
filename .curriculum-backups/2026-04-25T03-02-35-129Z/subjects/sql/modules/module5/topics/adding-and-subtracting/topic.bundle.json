@@ -1,0 +1,145 @@
+{
+  "topicId": "adding-and-subtracting",
+  "subjectSlug": "sql",
+  "moduleSlug": "sql_module_5",
+  "sectionSlug": "section_5_1",
+  "prefix": "sql5",
+  "minutes": 15,
+  "topic": {
+    "labelKey": "topics.sql.sql_module_5.adding-and-subtracting.label",
+    "summaryKey": "topics.sql.sql_module_5.adding-and-subtracting.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_5.adding-and-subtracting.cards.sketch0.title",
+      "sketchId": "sketch-1-intro-arithmetic",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_5.adding-and-subtracting.cards.sketch1.title",
+      "sketchId": "sketch-2-example-addition",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_5.adding-and-subtracting.cards.sketch2.title",
+      "sketchId": "sketch-3-example-subtraction",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql.sql_module_5.adding-and-subtracting.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch-1-intro-arithmetic",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_5.adding-and-subtracting.sketch-1-intro-arithmetic.title",
+      "bodyKey": "sketches.sql.sql_module_5.adding-and-subtracting.sketch-1-intro-arithmetic.bodyMarkdown"
+    },
+    {
+      "id": "sketch-2-example-addition",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_5.adding-and-subtracting.sketch-2-example-addition.title",
+      "bodyKey": "sketches.sql.sql_module_5.adding-and-subtracting.sketch-2-example-addition.bodyMarkdown"
+    },
+    {
+      "id": "sketch-3-example-subtraction",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_5.adding-and-subtracting.sketch-3-example-subtraction.title",
+      "bodyKey": "sketches.sql.sql_module_5.adding-and-subtracting.sketch-3-example-subtraction.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "fill-blank-1-addition",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_5.adding-and-subtracting.quiz.fill-blank-1-addition",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "11"
+      }
+    },
+    {
+      "id": "fill-blank-2-subtraction",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_5.adding-and-subtracting.quiz.fill-blank-2-subtraction",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "11"
+      }
+    },
+    {
+      "id": "single-choice-1-alias",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_5.adding-and-subtracting.quiz.single-choice-1-alias",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "multi-choice-1-expressions",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_5.adding-and-subtracting.quiz.multi-choice-1-expressions",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "code-input-1-calculate-next-year",
+      "kind": "code_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_5.adding-and-subtracting.quiz.code-input-1-calculate-next-year",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table",
+        "solutionCode": "SELECT name, grade_level + 1 AS next_year_grade\nFROM students;"
+      }
+    }
+  ]
+}

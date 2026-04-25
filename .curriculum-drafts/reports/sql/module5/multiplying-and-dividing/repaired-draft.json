@@ -4,120 +4,105 @@
   "minutes": 15,
   "sketchBlocks": [
     {
-      "id": "sk1",
-      "title": "Multiplying and Dividing in SQL",
-      "bodyMarkdown": "SQL allows you to perform arithmetic operations directly in your SELECT statements. You can multiply (`*`) and divide (`/`) columns or values to create new calculated columns in your query results. For example, if you want to double each student's grade level, you can use:\n\n```sql\nSELECT name, grade_level, grade_level * 2 AS double_grade\nFROM students;\n```\n\nThis query adds a new column called `double_grade` that shows each student's grade level multiplied by 2."
+      "id": "sketch-1",
+      "title": "Multiplying and Dividing in SQL Expressions",
+      "bodyMarkdown": "In SQL, you can create new columns in your SELECT queries by using arithmetic expressions. For example, to calculate the total value of an order, you can multiply the `quantity` by the `unit_price`:\n\n```sql\nSELECT id, customer_name, quantity, unit_price, quantity * unit_price AS line_total\nFROM orders;\n```\n\nThis query adds a new column called `line_total` that shows the total price for each order line. You can also use division to calculate values like average price per item or to apply discounts. Arithmetic expressions make your reports more useful by letting you compute values on the fly."
     },
     {
-      "id": "sk2",
-      "title": "Dividing Values for Calculations",
-      "bodyMarkdown": "Division is also useful for creating ratios or averages. For example, if you want to see half of each student's grade level, you can write:\n\n```sql\nSELECT name, grade_level, grade_level / 2 AS half_grade\nFROM students;\n```\n\nThis will show a new column `half_grade` with each student's grade level divided by 2."
-    },
-    {
-      "id": "sk3",
-      "title": "Combining Arithmetic with Aliases",
-      "bodyMarkdown": "It's common to use arithmetic expressions with column aliases to make your results clearer. For example:\n\n```sql\nSELECT name, grade_level * 3 AS triple_grade\nFROM students;\n```\n\nHere, `triple_grade` is the alias for the calculated column. Aliases help make your output more readable and meaningful."
+      "id": "sketch-2",
+      "title": "Using Division in Calculated Columns",
+      "bodyMarkdown": "Division can be used in SQL to calculate ratios or per-unit values. For example, if you want to know the price per item for each order (even though it's already in `unit_price`), you could write:\n\n```sql\nSELECT id, customer_name, quantity, unit_price, (quantity * unit_price) / quantity AS price_per_item\nFROM orders;\n```\n\nThis is a simple example, but division is especially useful when you need to split totals or calculate averages from sums and counts."
     }
   ],
   "quizDraft": [
     {
-      "id": "q1",
-      "kind": "fill_blank_choice",
-      "title": "Multiplying a Column",
-      "prompt": "Which operator would you use to multiply the `grade_level` column by 2 in a SELECT statement?",
-      "template": "SELECT name, grade_level ___ 2 AS double_grade FROM students;",
-      "choices": [
-        "*",
-        "+",
-        "-",
-        "/"
-      ],
-      "correctValue": "*",
-      "hint": "Focus on the missing SQL concept rather than the exact missing word.",
-      "help": {
-        "concept": "The blank should be filled with the SQL term that matches the job the statement is trying to perform.",
-        "hint_1": "Think about what the missing part is supposed to do in the statement.",
-        "hint_2": "Choose the SQL term that best completes the meaning of the statement."
-      }
-    },
-    {
-      "id": "q2",
-      "kind": "fill_blank_choice",
-      "title": "Dividing a Value",
-      "prompt": "How would you divide the `grade_level` column by 2 in a SELECT statement?",
-      "template": "SELECT name, grade_level ___ 2 AS half_grade FROM students;",
-      "choices": [
-        "/",
-        "*",
-        "+",
-        "-"
-      ],
-      "correctValue": "/",
-      "hint": "Which symbol is used for division in SQL?",
-      "help": {
-        "concept": "The division operator in SQL is used to divide one value by another, just like in basic arithmetic.",
-        "hint_1": "It's the forward slash symbol.",
-        "hint_2": "Look for the operator that separates numerator and denominator."
-      }
-    },
-    {
-      "id": "q3",
-      "kind": "single_choice",
-      "title": "Purpose of Aliases",
-      "prompt": "Why would you use an alias like `AS double_grade` in a SELECT statement?",
-      "options": [
-        "To rename the output column for clarity.",
-        "To change the data type of the column.",
-        "To filter rows in the result.",
-        "To join tables together."
-      ],
-      "correctOptionIds": [
-        "a"
-      ],
-      "hint": "Aliases affect how columns are labeled in the output.",
-      "help": {
-        "concept": "Aliases in SQL are used to give columns or tables temporary names for the duration of a query, making results easier to read.",
-        "hint_1": "Think about how the column name appears in the result set.",
-        "hint_2": "It's about making the output more understandable."
-      }
-    },
-    {
-      "id": "q4",
-      "kind": "multi_choice",
-      "title": "Using Arithmetic in SELECT",
-      "prompt": "Which of the following are valid ways to use arithmetic in a SELECT statement? (Choose all that apply)",
-      "options": [
-        "a. SELECT name, grade_level * 2 FROM students;",
-        "b. SELECT name, grade_level / 2 FROM students;",
-        "c. SELECT name, grade_level ** 2 FROM students;",
-        "d. SELECT name, grade_level + 1 FROM students;"
-      ],
-      "correctOptionIds": [
-        "a",
-        "b",
-        "d"
-      ],
-      "hint": "Look for standard arithmetic operators in SQL.",
-      "help": {
-        "concept": "SQL supports basic arithmetic operators: +, -, *, and /. Some operators from other languages, like ** for exponentiation, are not standard in SQL.",
-        "hint_1": "Check which operators are supported in SQL arithmetic.",
-        "hint_2": "Multiplication, division, and addition are valid; exponentiation with ** is not."
-      }
-    },
-    {
-      "id": "q5",
+      "id": "exercise-1",
       "kind": "code_input",
-      "title": "Calculate Triple Grade Level",
-      "prompt": "Write a SQL query to show each student's name and their grade level multiplied by 3, with the calculated column labeled as `triple_grade`.",
-      "starterCode": "-- Write your query here",
-      "solutionCode": "SELECT name, grade_level * 3 AS triple_grade FROM students;",
-      "datasetId": "school_relations_intro",
+      "title": "Calculate line total for each order",
+      "prompt": "Write a SQL query to show each order's `id`, `customer_name`, `quantity`, `unit_price`, and a new column called `line_total` that multiplies `quantity` by `unit_price`.",
+      "starterCode": "SELECT id, customer_name, quantity, unit_price\n-- Add your calculated column here\nFROM orders;",
+      "solutionCode": "SELECT id, customer_name, quantity, unit_price, quantity * unit_price AS line_total\nFROM orders;",
+      "datasetId": "sales_kpi",
       "recipeType": "sql_query",
       "hint": "Focus on the concept being tested.",
       "help": {
         "concept": "Think about the role or idea being tested rather than repeating answer wording.",
         "hint_1": "Eliminate choices or interpretations that do not match the task.",
         "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+      }
+    },
+    {
+      "id": "exercise-2",
+      "kind": "code_input",
+      "title": "Calculate average unit price per order",
+      "prompt": "Write a SQL query to show each order's `id`, `customer_name`, and a new column called `average_price` that divides the total price (`quantity * unit_price`) by `quantity`.",
+      "starterCode": "SELECT id, customer_name\n-- Add your calculated column here\nFROM orders;",
+      "solutionCode": "SELECT id, customer_name, (quantity * unit_price) / quantity AS average_price\nFROM orders;",
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query",
+      "hint": "Focus on the concept being tested.",
+      "help": {
+        "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+        "hint_1": "Eliminate choices or interpretations that do not match the task.",
+        "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+      }
+    },
+    {
+      "id": "exercise-3",
+      "kind": "single_choice",
+      "title": "Which operator is used for division in SQL expressions?",
+      "prompt": "Which symbol is used to divide one column by another in a SQL SELECT expression?",
+      "options": [
+        "[object Object]",
+        "A command"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Think about basic math symbols.",
+      "help": {
+        "concept": "SQL uses standard arithmetic operators for calculations in SELECT statements.",
+        "hint_1": "The division operator is the same as in most programming languages.",
+        "hint_2": "It's a single character used between numbers to divide them."
+      }
+    },
+    {
+      "id": "exercise-4",
+      "kind": "multi_choice",
+      "title": "Select all correct uses of multiplication in SQL SELECT",
+      "prompt": "Which of the following are correct ways to multiply columns in a SQL SELECT statement? Select all that apply.",
+      "options": [
+        "[object Object]",
+        "A command"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Look for correct syntax and use of the multiplication operator.",
+      "help": {
+        "concept": "Multiplication in SQL uses the * operator between columns or values.",
+        "hint_1": "Check if both operands are valid column names or numbers.",
+        "hint_2": "Look for correct use of AS for aliasing and proper SQL syntax."
+      }
+    },
+    {
+      "id": "exercise-5",
+      "kind": "fill_blank_choice",
+      "title": "Fill in the blank: Multiplying columns",
+      "prompt": "Choose the best value for the first missing blank in the statement.",
+      "template": "The first missing value is [blank1].",
+      "choices": [
+        "*",
+        "x",
+        "/",
+        "+"
+      ],
+      "correctValue": "*",
+      "hint": "Use the standard multiplication operator.",
+      "help": {
+        "concept": "The multiplication operator in SQL is the asterisk symbol.",
+        "hint_1": "It's the same symbol used for multiplication in most programming languages.",
+        "hint_2": "It's a single character between quantity and unit_price."
       }
     }
   ]

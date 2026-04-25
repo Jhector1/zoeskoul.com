@@ -51,6 +51,7 @@ export async function compileSubject(args: {
   return compileSubjectPipeline({
     blueprint: args.blueprint,
     plan: resolved.plan,
+    spec: resolved.spec,
     provider: args.provider,
     onProgress: args.onProgress,
   });

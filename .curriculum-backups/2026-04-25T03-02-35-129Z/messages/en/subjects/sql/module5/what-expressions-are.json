@@ -1,0 +1,125 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_5": {
+        "what-expressions-are": {
+          "label": "What expressions are",
+          "summary": "Learn what expressions are in SQL, how they are used in calculated columns, and why they are important for creating new values in queries.",
+          "cards": {
+            "sketch0": {
+              "title": "What is an Expression in SQL?"
+            },
+            "sketch1": {
+              "title": "Why Use Expressions?"
+            },
+            "sketch2": {
+              "title": "Expressions and Aliases"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "quiz": {
+            "fill-blank-1": {
+              "title": "Identifying an Expression",
+              "prompt": "Which part of the following SQL query is an expression?\n\n```sql\nSELECT name, grade_level + 1 AS next_year_grade FROM students;\n```",
+              "hint": "Look for a calculation or combination of values.",
+              "help": {
+                "concept": "An expression combines columns, values, or functions to produce a new value.",
+                "hint_1": "Which part is doing a calculation?",
+                "hint_2": "It's the part that adds 1 to a column value."
+              },
+              "template": "The expression in the query is: ____",
+              "choices": [
+                "grade_level + 1",
+                "students",
+                "AS next_year_grade",
+                "name"
+              ]
+            },
+            "fill-blank-2": {
+              "title": "Purpose of Expressions",
+              "prompt": "Why would you use an expression in a SELECT statement?",
+              "hint": "Expressions help you make something new from existing data.",
+              "help": {
+                "concept": "Expressions allow you to generate new values or columns in your query results.",
+                "hint_1": "Think about what happens when you add or combine columns.",
+                "hint_2": "You use expressions to make new values appear in your results."
+              },
+              "template": "Expressions are used to ____ new values from data.",
+              "choices": [
+                "create",
+                "delete",
+                "ignore",
+                "hide"
+              ]
+            },
+            "single-choice-1": {
+              "title": "Recognizing Expressions",
+              "prompt": "Which of the following is an example of an expression in SQL?",
+              "hint": "Expressions usually involve calculations or functions.",
+              "help": {
+                "concept": "An expression is a calculation or transformation using columns, values, or functions.",
+                "hint_1": "Which option is doing math or combining data?",
+                "hint_2": "Look for the one that multiplies a column by a number."
+              },
+              "options": {
+                "a": "grade_level * 2",
+                "b": "students",
+                "c": "AS grade",
+                "d": "FROM courses"
+              }
+            },
+            "multi-choice-1": {
+              "title": "Where Can You Use Expressions?",
+              "prompt": "In which parts of a SQL SELECT query can you use expressions? (Choose all that apply)",
+              "hint": "Think about where calculations or comparisons are allowed in a query.",
+              "help": {
+                "concept": "Expressions can be used to calculate, filter, or sort data in different parts of a query.",
+                "hint_1": "Which clauses let you use calculations or conditions?",
+                "hint_2": "You can use expressions to select, filter, or order data, but not to specify tables."
+              },
+              "options": {
+                "a": "SELECT clause",
+                "b": "WHERE clause",
+                "c": "FROM clause",
+                "d": "ORDER BY clause"
+              }
+            },
+            "code-input-1": {
+              "title": "Writing a Simple Expression",
+              "prompt": "Write a SQL query to select each student's name and their grade level increased by 2, with the new column named 'future_grade'.",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+                "hint_1": "Eliminate choices or interpretations that do not match the task.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "starterCode": "-- Write your query here"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_5": {
+        "what-expressions-are": {
+          "sketch-1": {
+            "title": "What is an Expression in SQL?",
+            "bodyMarkdown": "An **expression** in SQL is any combination of values, columns, operators, and functions that returns a single value. Expressions are used to create new values in queries, such as calculated columns or filters. For example, in the query:\n\n```sql\nSELECT name, grade_level + 1 AS next_year_grade FROM students;\n```\n\nthe part `grade_level + 1` is an expression that adds 1 to each student's grade level."
+          },
+          "sketch-2": {
+            "title": "Why Use Expressions?",
+            "bodyMarkdown": "Expressions let you transform and combine data directly in your SQL queries. This is useful for calculations, formatting, or creating new columns on the fly. For example, you can use expressions to:\n\n- Add or subtract numbers\n- Concatenate text\n- Use functions like `UPPER(name)` to change text to uppercase\n- Create new columns that don't exist in the original table"
+          },
+          "sketch-3": {
+            "title": "Expressions and Aliases",
+            "bodyMarkdown": "When you use an expression in your SELECT clause, you can give it a name using an **alias**. This makes your results easier to read. For example:\n\n```sql\nSELECT name, grade_level + 1 AS next_year_grade FROM students;\n```\n\nHere, `next_year_grade` is an alias for the calculated column."
+          }
+        }
+      }
+    }
+  }
+}

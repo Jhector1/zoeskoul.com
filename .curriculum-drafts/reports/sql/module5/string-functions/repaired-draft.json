@@ -5,113 +5,104 @@
   "sketchBlocks": [
     {
       "id": "sketch-1",
-      "title": "What are string functions?",
-      "bodyMarkdown": "String functions in SQL let you manipulate text data in your queries. For example, you can change the case of text, extract parts of a string, or combine columns. These are especially useful when working with columns like `name` or `title` in the `students` or `courses` tables.\n\nExample:\n\n```sql\nSELECT name, UPPER(name) AS name_uppercase FROM students;\n```\n\nThis query returns each student's name and their name in all uppercase letters."
+      "title": "What are SQL string functions?",
+      "bodyMarkdown": "SQL string functions let you manipulate text data in your queries. For example, you can change text to uppercase, extract part of a string, or combine columns. These functions are useful for cleaning up or formatting output in reports.\n\nCommon string functions in SQLite include:\n- `UPPER(text)`: Converts text to uppercase.\n- `LOWER(text)`: Converts text to lowercase.\n- `LENGTH(text)`: Returns the number of characters in the text.\n- `SUBSTR(text, start, length)`: Extracts a substring from the text.\n- `TRIM(text)`: Removes spaces from the start and end of the text.\n\nExample:\n```sql\nSELECT customer_name, UPPER(region) AS region_upper FROM orders;\n```\nThis query shows each customer's name and their region in uppercase."
     },
     {
       "id": "sketch-2",
-      "title": "Common string functions in SQLite",
-      "bodyMarkdown": "Some common string functions in SQLite include:\n- `UPPER(text)`: Converts all letters to uppercase.\n- `LOWER(text)`: Converts all letters to lowercase.\n- `LENGTH(text)`: Returns the number of characters in the string.\n- `SUBSTR(text, start, length)`: Extracts a substring from the text.\n- `TRIM(text)`: Removes spaces from the beginning and end of the text.\n\nExample:\n\n```sql\nSELECT name, LENGTH(name) AS name_length FROM students;\n```\n\nThis query shows each student's name and the number of characters in their name."
-    },
-    {
-      "id": "sketch-3",
-      "title": "Combining columns with string functions",
-      "bodyMarkdown": "You can use string functions to combine columns or format output. For example, you might want to display a student's name and grade level together in a single column.\n\nExample:\n\n```sql\nSELECT name || ' (Grade ' || grade_level || ')' AS student_info FROM students;\n```\n\nThis query creates a new column showing the student's name and grade level in a readable format."
+      "title": "Using string functions in calculated columns",
+      "bodyMarkdown": "You can use string functions in calculated columns to create new values or clean up data. For example, if you want to show only the first three letters of each category, you can use `SUBSTR`:\n\n```sql\nSELECT category, SUBSTR(category, 1, 3) AS cat_short FROM orders;\n```\n\nThis query adds a new column called `cat_short` with the first three letters of the category."
     }
   ],
   "quizDraft": [
     {
-      "id": "fillblank-1",
-      "kind": "fill_blank_choice",
-      "title": "Using UPPER to change case",
-      "prompt": "Which function would you use to convert the `name` column in the `students` table to all uppercase letters?",
-      "template": "SELECT ___(name) FROM students;",
-      "choices": [
-        "UPPER",
-        "LOWER",
-        "LENGTH",
-        "TRIM"
-      ],
-      "correctValue": "UPPER",
-      "hint": "Focus on the missing SQL concept rather than the exact missing word.",
-      "help": {
-        "concept": "The blank should be filled with the SQL term that matches the job the statement is trying to perform.",
-        "hint_1": "Think about what the missing part is supposed to do in the statement.",
-        "hint_2": "Choose the SQL term that best completes the meaning of the statement."
-      }
-    },
-    {
-      "id": "fillblank-2",
-      "kind": "fill_blank_choice",
-      "title": "Counting characters in a string",
-      "prompt": "Which function returns the number of characters in the `title` column of the `courses` table?",
-      "template": "SELECT ___(title) FROM courses;",
-      "choices": [
-        "LENGTH",
-        "UPPER",
-        "SUBSTR",
-        "TRIM"
-      ],
-      "correctValue": "LENGTH",
-      "hint": "Which function measures how long a string is?",
-      "help": {
-        "concept": "The the missing term function returns the number of characters in a string.",
-        "hint_1": "It's not about changing case or trimming spaces.",
-        "hint_2": "The function's name suggests it measures size."
-      }
-    },
-    {
-      "id": "single-1",
-      "kind": "single_choice",
-      "title": "Extracting part of a string",
-      "prompt": "Which SQL function extracts a part of a string, starting at a specific position?",
-      "options": [
-        "[object Object]",
-        "A command"
-      ],
-      "correctOptionIds": [
-        "a"
-      ],
-      "hint": "It's used to get a substring.",
-      "help": {
-        "concept": "The SUBSTR function extracts a substring from a string, starting at a given position.",
-        "hint_1": "This function needs a start position and length.",
-        "hint_2": "It's not about case, length, or trimming spaces."
-      }
-    },
-    {
-      "id": "multi-1",
-      "kind": "multi_choice",
-      "title": "Choosing string functions for formatting",
-      "prompt": "Which of the following SQL functions can be used to format or clean up text data? (Choose all that apply)",
-      "options": [
-        "[object Object]",
-        "A command"
-      ],
-      "correctOptionIds": [
-        "a"
-      ],
-      "hint": "Consider which functions change the appearance or remove unwanted spaces.",
-      "help": {
-        "concept": "TRIM removes spaces, LOWER and UPPER change letter case, all useful for formatting or cleaning up text.",
-        "hint_1": "LENGTH only counts characters, but the others change or clean the text.",
-        "hint_2": "Pick all that modify or clean the text, not just measure it."
-      }
-    },
-    {
-      "id": "code-1",
+      "id": "quiz-1",
       "kind": "code_input",
-      "title": "Combine student name and grade level",
-      "prompt": "Write a SQL query to show each student's name and a new column called `student_info` that displays their name followed by their grade level in parentheses, like 'Mia (Grade 9)'.",
-      "starterCode": "SELECT name, /* your code here */ FROM students;",
-      "solutionCode": "SELECT name, name || ' (Grade ' || grade_level || ')' AS student_info FROM students;",
-      "datasetId": "school_relations_intro",
+      "title": "Show customer names in uppercase",
+      "prompt": "Write a SQL query to select the `customer_name` column from the `orders` table, but display all names in uppercase. Name the output column `customer_upper`.",
+      "starterCode": "SELECT ... FROM orders;",
+      "solutionCode": "SELECT UPPER(customer_name) AS customer_upper FROM orders;",
+      "datasetId": "sales_kpi",
       "recipeType": "sql_query",
       "hint": "Focus on the concept being tested.",
       "help": {
         "concept": "Think about the role or idea being tested rather than repeating answer wording.",
         "hint_1": "Eliminate choices or interpretations that do not match the task.",
         "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+      }
+    },
+    {
+      "id": "quiz-2",
+      "kind": "code_input",
+      "title": "Extract region initials",
+      "prompt": "Write a SQL query to select the first two letters of the `region` column from the `orders` table. Name the output column `region_initials`.",
+      "starterCode": "SELECT ... FROM orders;",
+      "solutionCode": "SELECT SUBSTR(region, 1, 2) AS region_initials FROM orders;",
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query",
+      "hint": "Focus on the concept being tested.",
+      "help": {
+        "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+        "hint_1": "Eliminate choices or interpretations that do not match the task.",
+        "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+      }
+    },
+    {
+      "id": "quiz-3",
+      "kind": "single_choice",
+      "title": "Which function returns the number of characters in a string?",
+      "prompt": "Which SQL function returns the number of characters in a text value?",
+      "options": [
+        "[object Object]",
+        "A command"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Think about which function measures string length.",
+      "help": {
+        "concept": "The LENGTH() function returns the number of characters in a string.",
+        "hint_1": "It's not UPPER or LOWER.",
+        "hint_2": "Look for a function name that means 'size' or 'length'."
+      }
+    },
+    {
+      "id": "quiz-4",
+      "kind": "multi_choice",
+      "title": "Select all true statements about string functions",
+      "prompt": "Which of the following statements about SQL string functions are true? Select all that apply.",
+      "options": [
+        "[object Object]",
+        "A command"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Consider what each function does.",
+      "help": {
+        "concept": "String functions can change, extract, or measure text values in SQL.",
+        "hint_1": "Some functions change case, others extract parts or measure length.",
+        "hint_2": "Think about what UPPER, LOWER, and LENGTH do."
+      }
+    },
+    {
+      "id": "quiz-5",
+      "kind": "fill_blank_choice",
+      "title": "Fill in the blank: Removing spaces",
+      "prompt": "Which function removes spaces from the beginning and end of a string?",
+      "template": "The function that removes spaces from the start and end of a string is _____.",
+      "choices": [
+        "TRIM()",
+        "LENGTH()",
+        "UPPER()",
+        "SUBSTR()"
+      ],
+      "correctValue": "TRIM()",
+      "hint": "Focus on the missing SQL concept rather than the exact missing word.",
+      "help": {
+        "concept": "The blank should be filled with the SQL term that matches the job the statement is trying to perform.",
+        "hint_1": "Think about what the missing part is supposed to do in the statement.",
+        "hint_2": "Choose the SQL term that best completes the meaning of the statement."
       }
     }
   ]

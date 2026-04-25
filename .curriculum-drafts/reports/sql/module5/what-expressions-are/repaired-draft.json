@@ -1,112 +1,28 @@
 {
   "title": "What expressions are",
-  "summary": "Understand what expressions are in SQL, how they are used in calculated columns, and why they matter for creating new values in queries.",
+  "summary": "Understand what expressions are in SQL, how they are used in calculated columns, and why they are important for creating new values in queries.",
   "minutes": 15,
   "sketchBlocks": [
     {
       "id": "sketch-1",
       "title": "What is an Expression in SQL?",
-      "bodyMarkdown": "In SQL, an **expression** is any combination of values, columns, operators, and functions that returns a single value. Expressions are used to calculate new values, filter data, or transform existing columns. For example, you can add two columns together, use arithmetic, or apply a function to a column.\n\nExample:\n\n```sql\nSELECT name, grade_level + 1 AS next_year_grade\nFROM students;\n```\n\nHere, `grade_level + 1` is an expression that calculates the next grade for each student."
+      "bodyMarkdown": "In SQL, an **expression** is a combination of one or more values, operators, and SQL functions that evaluate to a single value. Expressions are used to create new values from existing data in your tables. For example, you can multiply two columns to calculate a total, or use a function to format a date.\n\nExample:\n```sql\nSELECT id, quantity * unit_price AS line_total\nFROM orders;\n```\nHere, `quantity * unit_price` is an expression that calculates the total price for each order."
     },
     {
       "id": "sketch-2",
       "title": "Why Use Expressions?",
-      "bodyMarkdown": "Expressions let you create new columns or filter data based on calculations or logic. This makes your queries more powerful and your reports more useful. For instance, you might want to show all students who will be in grade 11 next year:\n\n```sql\nSELECT name\nFROM students\nWHERE grade_level + 1 = 11;\n```\n\nThe `grade_level + 1 = 11` part is an expression used in the WHERE clause."
+      "bodyMarkdown": "Expressions let you perform calculations or transformations directly in your SQL queries. This is useful for:\n- Calculating totals (e.g., `quantity * unit_price`)\n- Creating new columns on the fly\n- Formatting or combining text\n- Applying functions to data\n\nFor example, you can add a discount:\n```sql\nSELECT id, unit_price, unit_price * 0.9 AS discounted_price\nFROM orders;\n```\nThis query calculates a 10% discount for each order."
     }
   ],
   "quizDraft": [
     {
-      "id": "fill-blank-1",
-      "kind": "fill_blank_choice",
-      "title": "Identifying an Expression",
-      "prompt": "Which of the following is an example of an expression in SQL?",
-      "template": "SELECT name, ____ FROM students;",
-      "choices": [
-        "grade_level + 1",
-        "students",
-        "SELECT",
-        "grade_level"
-      ],
-      "correctValue": "grade_level + 1",
-      "hint": "Look for a calculation or combination of values.",
-      "help": {
-        "concept": "An expression combines columns, values, or functions to produce a new value.",
-        "hint_1": "Expressions often use operators like +, -, *, or functions.",
-        "hint_2": "A column name alone is not an expression; adding or manipulating it creates one."
-      }
-    },
-    {
-      "id": "fill-blank-2",
-      "kind": "fill_blank_choice",
-      "title": "Purpose of Expressions",
-      "prompt": "What is the main purpose of using expressions in a SELECT statement?",
-      "template": "Expressions are used to ____ new values from existing data.",
-      "choices": [
-        "create",
-        "delete",
-        "sort",
-        "join"
-      ],
-      "correctValue": "create",
-      "hint": "Think about what happens when you add or calculate columns.",
-      "help": {
-        "concept": "Expressions allow you to generate new data from existing columns or values.",
-        "hint_1": "They are not for removing or sorting data.",
-        "hint_2": "Expressions help you make new columns or results in your query."
-      }
-    },
-    {
-      "id": "single-choice-1",
-      "kind": "single_choice",
-      "title": "Expression Location",
-      "prompt": "Where can you use expressions in a SQL query?",
-      "options": [
-        "In SELECT and WHERE clauses",
-        "Only in SELECT clause",
-        "Only in WHERE clause",
-        "Only in table definitions"
-      ],
-      "correctOptionIds": [
-        "a"
-      ],
-      "hint": "Think about both selecting and filtering data.",
-      "help": {
-        "concept": "Expressions can be used to create new columns or filter rows.",
-        "hint_1": "You can use expressions to calculate values or set conditions.",
-        "hint_2": "Expressions are valid in both SELECT and WHERE, but not in table definitions."
-      }
-    },
-    {
-      "id": "multi-choice-1",
-      "kind": "multi_choice",
-      "title": "Which are Expressions?",
-      "prompt": "Select all options that are valid SQL expressions.",
-      "options": [
-        "grade_level * 2",
-        "name",
-        "10 - 3",
-        "department_id + 5"
-      ],
-      "correctOptionIds": [
-        "a",
-        "c",
-        "d"
-      ],
-      "hint": "Expressions can involve columns, numbers, and operators.",
-      "help": {
-        "concept": "Expressions combine columns, constants, and operators to produce a value.",
-        "hint_1": "A column name alone is not an expression, but calculations are.",
-        "hint_2": "Look for options that use arithmetic or combine values."
-      }
-    },
-    {
-      "id": "code-input-1",
+      "id": "code-1",
       "kind": "code_input",
-      "title": "Write a Query with an Expression",
-      "prompt": "Write a SQL query to show each student's name and their grade level plus 2, labeled as future_grade.",
-      "starterCode": "-- Write your query here",
-      "solutionCode": "SELECT name, grade_level + 2 AS future_grade\nFROM students;",
-      "datasetId": "school_relations_intro",
+      "title": "Calculate a Line Total",
+      "prompt": "Write a SQL query to select the `id`, `quantity`, `unit_price`, and a new column called `line_total` that multiplies `quantity` by `unit_price` from the `orders` table.",
+      "starterCode": "SELECT id, quantity, unit_price\n-- Add your expression here\nFROM orders;",
+      "solutionCode": "SELECT id, quantity, unit_price, quantity * unit_price AS line_total\nFROM orders;",
+      "datasetId": "sales_kpi",
       "recipeType": "sql_query",
       "hint": "Focus on the concept being tested.",
       "help": {
@@ -114,6 +30,94 @@
         "hint_1": "Eliminate choices or interpretations that do not match the task.",
         "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
       }
+    },
+    {
+      "id": "code-2",
+      "kind": "code_input",
+      "title": "Create a Discounted Price Column",
+      "prompt": "Write a SQL query to select `id`, `unit_price`, and a new column called `discounted_price` that shows the unit price with a 15% discount (i.e., 85% of the original price) from the `orders` table.",
+      "starterCode": "SELECT id, unit_price\n-- Add your discounted price expression here\nFROM orders;",
+      "solutionCode": "SELECT id, unit_price, unit_price * 0.85 AS discounted_price\nFROM orders;",
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query",
+      "hint": "Focus on the concept being tested.",
+      "help": {
+        "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+        "hint_1": "Eliminate choices or interpretations that do not match the task.",
+        "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+      }
+    },
+    {
+      "id": "single-1",
+      "kind": "single_choice",
+      "title": "Identifying an Expression",
+      "prompt": "Which of the following is an example of an expression in SQL?",
+      "options": [
+        "a. SELECT * FROM orders;",
+        "b. quantity * unit_price",
+        "c. FROM orders",
+        "d. WHERE status = 'paid'"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "An expression combines values, operators, or functions to produce a new value.",
+      "help": {
+        "concept": "Expressions in SQL can be arithmetic (like `a + b`), string concatenations, or function calls that return a value.",
+        "hint_1": "Look for an option that calculates or transforms data.",
+        "hint_2": "Expressions usually appear in the SELECT clause and produce a new value."
+      }
+    },
+    {
+      "id": "multi-1",
+      "kind": "multi_choice",
+      "title": "Recognizing Expressions in Queries",
+      "prompt": "Which of the following are valid expressions you could use in a SQL SELECT statement? (Choose all that apply)",
+      "options": [
+        "a. quantity + 2",
+        "b. unit_price * 0.9",
+        "c. SELECT id FROM orders",
+        "d. UPPER(region)",
+        "e. WHERE status = 'paid'"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ],
+      "hint": "Expressions can use arithmetic, functions, or combine columns.",
+      "help": {
+        "concept": "Valid expressions in SQL include arithmetic operations, function calls, and string concatenations.",
+        "hint_1": "Check which options combine columns, use operators, or call functions.",
+        "hint_2": "More than one option may be correct; look for calculations or transformations."
+      }
+    },
+    {
+      "id": "fill-1",
+      "kind": "fill_blank_choice",
+      "title": "Fill in the Blank: Purpose of Expressions",
+      "prompt": "Choose the best value for the first missing blank in the statement.",
+      "template": "The first missing value is [blank1].",
+      "choices": [
+        "create",
+        "delete",
+        "ignore",
+        "hide"
+      ],
+      "correctValue": "create",
+      "hint": "Think about what expressions allow you to do with your data.",
+      "help": {
+        "concept": "Expressions let you calculate, transform, or generate new values based on the data in your tables.",
+        "hint_1": "What do you do when you use arithmetic or functions in SELECT?",
+        "hint_2": "Expressions help you make new values from columns you already have."
+      }
     }
-  ]
+  ],
+  "projectDraft": {
+    "title": "Build a Simple Invoice Report with Calculated Columns",
+    "stepIds": [
+      "code-1",
+      "code-2"
+    ]
+  }
 }

@@ -9,7 +9,9 @@ import type {
 function isNonEmptyString(value: unknown) {
     return typeof value === "string" && value.trim().length > 0;
 }
-
+function effectiveDatasetStrategy(spec: CourseSpec, module: CourseSpecModule) {
+    return module.runtimePolicy?.datasetStrategy ?? spec.policy?.runtimePolicy?.datasetStrategy;
+}
 function validateMix(
     mix: ExerciseKindMix | undefined,
     path: string,
@@ -266,6 +268,15 @@ export function validateCourseSpec(spec: CourseSpec): string[] {
         }
 
         for (const section of module.sections) {
+            if (
+                spec.profileId === "sql" &&
+                effectiveDatasetStrategy(spec, module) === "module_based" &&
+                !isNonEmptyString(module.runtimePolicy?.datasetId)
+            ) {
+                issues.push(
+                    `${module.moduleSlug}.runtimePolicy.datasetId is required for SQL when datasetStrategy="module_based"`,
+                );
+            }
             validateSection(
                 section,
                 module,

@@ -7,95 +7,85 @@
           "summary": "Intro to functions in Calculated Columns and SQL Expressions",
           "cards": {
             "sketch0": {
-              "title": "What Are Functions in SQL?"
+              "title": "What are SQL functions?"
             },
             "sketch1": {
-              "title": "Simple Function Example"
+              "title": "Using functions in calculated columns"
             },
             "sketch2": {
-              "title": "Using Multiple Functions"
+              "title": "Combining functions and expressions"
             },
             "quiz": {
               "title": "Quiz"
             }
           },
           "quiz": {
-            "fillblank-func-purpose": {
-              "title": "Purpose of SQL Functions",
-              "prompt": "What is the main purpose of using functions in SQL?",
-              "hint": "Think about how functions change or process data.",
-              "help": {
-                "concept": "Functions in SQL are used to process or change data values, such as calculating sums or changing text.",
-                "hint_1": "Functions can modify or summarize data, not just remove or rearrange it.",
-                "hint_2": "The main use is to change or process data, not to delete or join tables."
-              },
-              "template": "Functions in SQL are used to __ data.",
-              "choices": [
-                "transform",
-                "delete",
-                "sort",
-                "join"
-              ]
-            },
-            "fillblank-max-grade": {
-              "title": "Using MAX() Function",
-              "prompt": "Which function would you use to find the highest grade level in the students table?",
-              "hint": "Focus on the missing SQL concept rather than the exact missing word.",
-              "help": {
-                "concept": "The blank should be filled with the SQL term that matches the job the statement is trying to perform.",
-                "hint_1": "Think about what the missing part is supposed to do in the statement.",
-                "hint_2": "Choose the SQL term that best completes the meaning of the statement."
-              },
-              "template": "To find the highest grade level, use the __ function.",
-              "choices": [
-                "MAX",
-                "MIN",
-                "COUNT",
-                "SUM"
-              ]
-            },
-            "singlechoice-func-location": {
-              "title": "Where Are Functions Used?",
-              "prompt": "In which part of a SQL query are functions like MAX() or COUNT() most commonly used?",
-              "hint": "Focus on the main concept being tested and eliminate choices that describe something different.",
-              "help": {
-                "concept": "Choose the option that matches the core idea described in the question without relying on repeated wording from the answer choices.",
-                "hint_1": "Rule out options that describe a different role, behavior, or SQL concept than the question is testing.",
-                "hint_2": "Pick the option that best matches the concept, not the one that simply repeats familiar wording."
-              },
-              "options": {
-                "a": "SELECT clause",
-                "b": "FROM clause",
-                "c": "ORDER BY clause",
-                "d": "GROUP BY clause"
-              }
-            },
-            "multichoice-simple-functions": {
-              "title": "Identifying Simple SQL Functions",
-              "prompt": "Which of the following are simple built-in SQL functions? Select all that apply.",
-              "hint": "Focus on the main concept being tested and eliminate choices that describe something different.",
-              "help": {
-                "concept": "Choose the option that matches the core idea described in the question without relying on repeated wording from the answer choices.",
-                "hint_1": "Rule out options that describe a different role, behavior, or SQL concept than the question is testing.",
-                "hint_2": "Pick the option that best matches the concept, not the one that simply repeats familiar wording."
-              },
-              "options": {
-                "a": "COUNT()",
-                "b": "SUM()",
-                "c": "JOIN()",
-                "d": "MIN()"
-              }
-            },
-            "codeinput-select-max-grade": {
-              "title": "Write a Query Using a Function",
-              "prompt": "Write a SQL query to return the highest grade level from the students table.",
+            "q1": {
+              "title": "Round total order value to the nearest integer",
+              "prompt": "Write a SQL query to show each order's `id` and the total value (quantity multiplied by unit_price), rounded to the nearest integer. Name the rounded column `rounded_total`.",
               "hint": "Focus on the concept being tested.",
               "help": {
                 "concept": "Think about the role or idea being tested rather than repeating answer wording.",
                 "hint_1": "Eliminate choices or interpretations that do not match the task.",
                 "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
               },
-              "starterCode": "-- Write your query below"
+              "starterCode": "SELECT id, ____ AS rounded_total\nFROM orders;"
+            },
+            "q2": {
+              "title": "Show customer name and uppercase region",
+              "prompt": "Write a SQL query to display each customer's name and their region in all uppercase letters. Name the uppercase column `region_upper`.",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+                "hint_1": "Eliminate choices or interpretations that do not match the task.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "starterCode": "SELECT customer_name, ____ AS region_upper\nFROM orders;"
+            },
+            "q3": {
+              "title": "Which function rounds a number to the nearest integer?",
+              "prompt": "Which SQL function would you use to round a number to the nearest integer?",
+              "hint": "Think about which function changes a number's decimal places.",
+              "help": {
+                "concept": "ROUND() is used to round numbers, while SUM() adds values, UPPER() changes text case, and COUNT() counts rows.",
+                "hint_1": "It's not SUM(), UPPER(), or COUNT().",
+                "hint_2": "The function's name suggests it changes the number's precision."
+              },
+              "options": {
+                "a": "[object Object]",
+                "b": "A command"
+              }
+            },
+            "q4": {
+              "title": "Which of the following are SQL functions?",
+              "prompt": "Select all options that are SQL functions.",
+              "hint": "Look for built-in SQL functions for numbers or text.",
+              "help": {
+                "concept": "SQL provides functions like ROUND(), LOWER(), and UPPER() for manipulating numbers and text. MULTIPLY() is not a standard SQL function.",
+                "hint_1": "Check which are real SQL functions for text or numbers.",
+                "hint_2": "MULTIPLY() is not a standard SQL function."
+              },
+              "options": {
+                "a": "[object Object]",
+                "b": "A command"
+              }
+            },
+            "q5": {
+              "title": "Fill in the blank: function for lowercase",
+              "prompt": "Which function converts text to all lowercase letters in SQL?",
+              "hint": "Focus on the missing SQL concept rather than the exact missing word.",
+              "help": {
+                "concept": "The blank should be filled with the SQL term that matches the job the statement is trying to perform.",
+                "hint_1": "Think about what the missing part is supposed to do in the statement.",
+                "hint_2": "Choose the SQL term that best completes the meaning of the statement."
+              },
+              "template": "The function to convert text to lowercase is ____.",
+              "choices": [
+                "LOWER()",
+                "UPPER()",
+                "ROUND()",
+                "COUNT()"
+              ]
             }
           }
         }
@@ -106,17 +96,17 @@
     "sql": {
       "sql_module_5": {
         "intro-to-functions": {
-          "sketch-what-are-functions": {
-            "title": "What Are Functions in SQL?",
-            "bodyMarkdown": "In SQL, a function is a built-in operation that takes one or more inputs and returns a value. Functions can help you transform, calculate, or summarize data. For example, you can use functions to count rows, find averages, or change text to uppercase. Functions are often used in the SELECT clause to create calculated columns or to process data as it is retrieved."
+          "sk1": {
+            "title": "What are SQL functions?",
+            "bodyMarkdown": "SQL functions are built-in operations that take input values and return a result. They help you transform, calculate, or summarize data directly in your queries. For example, you can use `ROUND()` to round numbers, or `UPPER()` to convert text to uppercase.\n\nExample:\n\n```sql\nSELECT customer_name, ROUND(unit_price, 0) AS rounded_price\nFROM orders;\n```\nThis query shows each customer's name and their unit price rounded to the nearest whole number."
           },
-          "sketch-simple-function-example": {
-            "title": "Simple Function Example",
-            "bodyMarkdown": "Suppose you want to know the highest grade level among all students. You can use the `MAX()` function:\n\n```sql\nSELECT MAX(grade_level) FROM students;\n```\n\nThis query returns the largest value in the `grade_level` column from the `students` table."
+          "sk2": {
+            "title": "Using functions in calculated columns",
+            "bodyMarkdown": "You can use functions inside calculated columns to create new values. For instance, you might want to calculate the total value of each order and round it to two decimal places:\n\n```sql\nSELECT id, quantity * unit_price AS total,\n       ROUND(quantity * unit_price, 2) AS rounded_total\nFROM orders;\n```\nThis query creates two new columns: `total` (raw multiplication) and `rounded_total` (rounded to two decimals)."
           },
-          "sketch-multiple-functions": {
-            "title": "Using Multiple Functions",
-            "bodyMarkdown": "You can use more than one function in a single query. For example, to find both the minimum and maximum grade levels:\n\n```sql\nSELECT MIN(grade_level), MAX(grade_level) FROM students;\n```\n\nThis returns two values: the lowest and highest grade levels among all students."
+          "sk3": {
+            "title": "Combining functions and expressions",
+            "bodyMarkdown": "Functions can be combined with arithmetic expressions for more powerful calculations. For example, to get the total for each order and then round it:\n\n```sql\nSELECT id, ROUND(quantity * unit_price, 1) AS order_value\nFROM orders;\n```\nHere, `quantity * unit_price` computes the total, and `ROUND(..., 1)` rounds it to one decimal place."
           }
         }
       }

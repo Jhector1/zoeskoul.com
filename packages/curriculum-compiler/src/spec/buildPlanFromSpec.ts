@@ -8,6 +8,7 @@ import type {
     PlannedTopic,
 } from "@zoeskoul/curriculum-contracts";
 import { normalizeSpecModuleOrder } from "./moduleOrder.js";
+import { resolveModuleRuntimePolicy } from "./resolveModuleRuntimePolicy.js";
 
 function fallbackSummary(moduleTitle: string, topicTitle: string) {
     return `${topicTitle} in ${moduleTitle}`;
@@ -44,6 +45,16 @@ export function buildPlanFromSpec(args: {
                 };
             });
 
+            const runtimePolicy = resolveModuleRuntimePolicy({
+                blueprint: args.blueprint,
+                spec: args.spec,
+                module: {
+                    moduleSlug: module.moduleSlug,
+                    order: normalizedOrder,
+                    runtimePolicy: module.runtimePolicy,
+                },
+            });
+
             return {
                 moduleSlug: module.moduleSlug,
                 prefix: module.prefix ?? buildModulePrefix(args.blueprint.subjectSlug, logicalIndex),
@@ -57,6 +68,7 @@ export function buildPlanFromSpec(args: {
                 moduleProject: module.moduleProject,
                 weekStart: module.weekStart ?? null,
                 weekEnd: module.weekEnd ?? null,
+                runtimePolicy,
                 sections,
             };
         })

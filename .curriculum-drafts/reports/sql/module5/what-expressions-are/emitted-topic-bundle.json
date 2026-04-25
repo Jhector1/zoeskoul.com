@@ -25,12 +25,43 @@
       "height": 420
     },
     {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.sql.sql_module_5.what-expressions-are.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "code-1",
+            "titleKey": "topics.sql.sql_module_5.what-expressions-are.projectSteps.code-1.title",
+            "exerciseKey": "code-1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "code-2",
+            "titleKey": "topics.sql.sql_module_5.what-expressions-are.projectSteps.code-2.title",
+            "exerciseKey": "code-2",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
+    },
+    {
       "id": "quiz",
       "kind": "quiz",
       "titleKey": "topics.sql.sql_module_5.what-expressions-are.cards.quiz.title",
       "quiz": {
         "difficulty": "easy",
-        "n": 4,
+        "n": 3,
         "allowReveal": true,
         "preferKind": null,
         "maxAttempts": 10
@@ -53,35 +84,41 @@
   ],
   "exercises": [
     {
-      "id": "fill-blank-1",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
+      "id": "code-1",
+      "kind": "code_input",
+      "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.what-expressions-are.quiz.fill-blank-1",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "grade_level + 1"
+      "messageBase": "topics.sql.sql_module_5.what-expressions-are.quiz.code-1",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_kpi",
+        "resultShape": "table",
+        "solutionCode": "SELECT id, quantity, unit_price, quantity * unit_price AS line_total\nFROM orders;"
       }
     },
     {
-      "id": "fill-blank-2",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
+      "id": "code-2",
+      "kind": "code_input",
+      "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.what-expressions-are.quiz.fill-blank-2",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "create"
+      "messageBase": "topics.sql.sql_module_5.what-expressions-are.quiz.code-2",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_kpi",
+        "resultShape": "table",
+        "solutionCode": "SELECT id, unit_price, unit_price * 0.85 AS discounted_price\nFROM orders;"
       }
     },
     {
-      "id": "single-choice-1",
+      "id": "single-1",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.what-expressions-are.quiz.single-choice-1",
+      "messageBase": "topics.sql.sql_module_5.what-expressions-are.quiz.single-1",
       "optionIds": [
         "a",
         "b",
@@ -90,43 +127,41 @@
       ],
       "expected": {
         "kind": "single_choice",
-        "optionId": "a"
+        "optionId": "b"
       }
     },
     {
-      "id": "multi-choice-1",
+      "id": "multi-1",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.what-expressions-are.quiz.multi-choice-1",
+      "messageBase": "topics.sql.sql_module_5.what-expressions-are.quiz.multi-1",
       "optionIds": [
         "a",
         "b",
         "c",
-        "d"
+        "d",
+        "e"
       ],
       "expected": {
         "kind": "multi_choice",
         "optionIds": [
           "a",
-          "c",
+          "b",
           "d"
         ]
       }
     },
     {
-      "id": "code-input-1",
-      "kind": "code_input",
+      "id": "fill-1",
+      "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.what-expressions-are.quiz.code-input-1",
-      "language": "sql",
-      "fixedSqlDialect": "sqlite",
-      "recipe": {
-        "type": "sql_query",
-        "datasetId": "school_relations_intro",
-        "resultShape": "table",
-        "solutionCode": "SELECT name, grade_level + 2 AS future_grade\nFROM students;"
+      "messageBase": "topics.sql.sql_module_5.what-expressions-are.quiz.fill-1",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "create"
       }
     }
   ]

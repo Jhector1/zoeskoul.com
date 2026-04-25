@@ -1,26 +1,101 @@
 {
   "title": "Adding and subtracting",
-  "summary": "Adding and subtracting in Calculated Columns and SQL Expressions",
+  "summary": "Learn how to use addition and subtraction in SQL calculated columns to create new values from existing data.",
   "minutes": 15,
   "sketchBlocks": [
     {
-      "id": "sketch-1",
-      "title": "Using Arithmetic in SQL SELECT",
-      "bodyMarkdown": "SQL allows you to perform arithmetic operations directly in your SELECT statements. For example, you can add or subtract numeric columns to create new calculated columns in your result set. This is useful for generating new values from existing data, such as adjusting grades or calculating totals.\n\nExample:\n\n```sql\nSELECT name, grade_level + 1 AS next_year_grade\nFROM students;\n```\n\nThis query shows each student's name and what their grade level will be next year."
+      "id": "sk1",
+      "title": "What are calculated columns?",
+      "bodyMarkdown": "A calculated column in SQL is a value you create on the fly in your SELECT statement using arithmetic or expressions. For example, you might want to calculate the total price for each order by multiplying the quantity by the unit price. You can also add or subtract values to create new columns that aren't stored in the original table.\n\nExample:\n\n```sql\nSELECT id, quantity, unit_price, quantity * unit_price AS line_total\nFROM orders;\n```\n\nThis query creates a new column called `line_total` for each order."
     },
     {
-      "id": "sketch-2",
-      "title": "Subtracting Values in SQL",
-      "bodyMarkdown": "You can also subtract values in SQL expressions. For instance, if you want to see how many years until a student graduates (assuming graduation is at grade 12), you can subtract their current grade from 12.\n\nExample:\n\n```sql\nSELECT name, 12 - grade_level AS years_until_graduation\nFROM students;\n```\n\nThis query calculates how many years each student has left until graduation."
+      "id": "sk2",
+      "title": "Adding values in SQL expressions",
+      "bodyMarkdown": "You can use the `+` operator to add values in SQL. For example, if you want to add a fixed shipping fee to each order's total, you can do:\n\n```sql\nSELECT id, quantity * unit_price AS subtotal, (quantity * unit_price) + 5 AS total_with_shipping\nFROM orders;\n```\n\nThis adds 5 to each order's subtotal."
+    },
+    {
+      "id": "sk3",
+      "title": "Subtracting values in SQL expressions",
+      "bodyMarkdown": "The `-` operator lets you subtract values. For example, to show the effect of a discount:\n\n```sql\nSELECT id, quantity * unit_price AS subtotal, (quantity * unit_price) - 10 AS after_discount\nFROM orders;\n```\n\nThis subtracts 10 from each order's subtotal."
     }
   ],
   "quizDraft": [
     {
-      "id": "fill-blank-1",
+      "id": "q1",
+      "kind": "code_input",
+      "title": "Calculate the total price for each order",
+      "prompt": "Write a SQL query to select the id, quantity, unit_price, and a calculated column named total_price that multiplies quantity by unit_price for each order in the orders table.",
+      "starterCode": "SELECT id, quantity, unit_price\nFROM orders;",
+      "solutionCode": "SELECT id, quantity, unit_price, quantity * unit_price AS total_price\nFROM orders;",
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query",
+      "hint": "Focus on the concept being tested.",
+      "help": {
+        "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+        "hint_1": "Eliminate choices or interpretations that do not match the task.",
+        "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+      }
+    },
+    {
+      "id": "q2",
+      "kind": "code_input",
+      "title": "Show the total after subtracting a fixed discount",
+      "prompt": "Write a SQL query to select id, quantity, unit_price, and a new column called discounted_total that subtracts 5 from the total price (quantity * unit_price) for each order.",
+      "starterCode": "SELECT id, quantity, unit_price\nFROM orders;",
+      "solutionCode": "SELECT id, quantity, unit_price, (quantity * unit_price - 5) AS discounted_total\nFROM orders;",
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query",
+      "hint": "Focus on the concept being tested.",
+      "help": {
+        "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+        "hint_1": "Eliminate choices or interpretations that do not match the task.",
+        "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+      }
+    },
+    {
+      "id": "q3",
+      "kind": "single_choice",
+      "title": "Which operator is used for addition in SQL expressions?",
+      "prompt": "Which symbol is used to add two values in a SQL SELECT statement?",
+      "options": [
+        "[object Object]",
+        "A command"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "It's the same as in basic math.",
+      "help": {
+        "concept": "SQL uses standard arithmetic symbols for addition and subtraction.",
+        "hint_1": "Think about how you add numbers in a calculator.",
+        "hint_2": "The plus sign is used for addition."
+      }
+    },
+    {
+      "id": "q4",
+      "kind": "multi_choice",
+      "title": "Which of the following are valid uses of subtraction in SQL calculated columns?",
+      "prompt": "Select all statements that correctly use subtraction in a SQL SELECT statement.",
+      "options": [
+        "[object Object]",
+        "A command"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Look for correct use of the - operator and valid SQL syntax.",
+      "help": {
+        "concept": "Subtraction in SQL is done with the - operator, and expressions can be used in SELECT.",
+        "hint_1": "Check if the subtraction is between valid columns or values.",
+        "hint_2": "Valid statements use column names and the - operator in SELECT."
+      }
+    },
+    {
+      "id": "q5",
       "kind": "fill_blank_choice",
-      "title": "Add a Value to a Column",
-      "prompt": "Suppose you want to show each student's grade level next year. Which SQL expression correctly adds 1 to the current grade_level?",
-      "template": "SELECT name, grade_level ___ 1 AS next_year_grade FROM students;",
+      "title": "Fill in the blank: Adding a fixed fee",
+      "prompt": "Choose the best value for the first missing blank in the statement.",
+      "template": "The first missing value is [blank1].",
       "choices": [
         "+",
         "-",
@@ -33,87 +108,6 @@
         "concept": "The blank should be filled with the SQL term that matches the job the statement is trying to perform.",
         "hint_1": "Think about what the missing part is supposed to do in the statement.",
         "hint_2": "Choose the SQL term that best completes the meaning of the statement."
-      }
-    },
-    {
-      "id": "fill-blank-2",
-      "kind": "fill_blank_choice",
-      "title": "Subtracting for Graduation Countdown",
-      "prompt": "To find out how many years a student has until graduation (grade 12), which value should fill the blank?",
-      "template": "SELECT name, 12 ___ grade_level AS years_left FROM students;",
-      "choices": [
-        "+",
-        "-",
-        "*",
-        "/"
-      ],
-      "correctValue": "-",
-      "hint": "Focus on the missing SQL concept rather than the exact missing word.",
-      "help": {
-        "concept": "The blank should be filled with the SQL term that matches the job the statement is trying to perform.",
-        "hint_1": "Think about what the missing part is supposed to do in the statement.",
-        "hint_2": "Choose the SQL term that best completes the meaning of the statement."
-      }
-    },
-    {
-      "id": "single-choice-1",
-      "kind": "single_choice",
-      "title": "Understanding SQL Expressions",
-      "prompt": "Which of the following best describes a calculated column in SQL?",
-      "options": [
-        "A column that is copied directly from the table.",
-        "A column created by performing an operation on existing columns.",
-        "A column that always contains text values.",
-        "A column that cannot be renamed."
-      ],
-      "correctOptionIds": [
-        "b"
-      ],
-      "hint": "Calculated columns use expressions to create new values.",
-      "help": {
-        "concept": "A calculated column is generated by applying an expression or operation to one or more existing columns in a SELECT statement.",
-        "hint_1": "Look for the option that involves creating new values from existing data.",
-        "hint_2": "Calculated columns are not just copies; they are the result of expressions."
-      }
-    },
-    {
-      "id": "multi-choice-1",
-      "kind": "multi_choice",
-      "title": "Valid Arithmetic Expressions in SQL",
-      "prompt": "Which of the following are valid ways to use arithmetic in a SQL SELECT statement? (Choose all that apply.)",
-      "options": [
-        "SELECT name, grade_level + 1 FROM students;",
-        "SELECT name, 12 - grade_level FROM students;",
-        "SELECT name, grade_level * 2 FROM students;",
-        "SELECT name, grade_level FROM students WHERE grade_level / 2 = 5;"
-      ],
-      "correctOptionIds": [
-        "a",
-        "b",
-        "c",
-        "d"
-      ],
-      "hint": "All standard arithmetic operators can be used in SQL expressions.",
-      "help": {
-        "concept": "SQL supports addition (+), subtraction (-), multiplication (*), and division (/) in SELECT statements and WHERE clauses.",
-        "hint_1": "Check if each example uses a valid arithmetic operator and syntax.",
-        "hint_2": "All four statements use arithmetic correctly in SQL."
-      }
-    },
-    {
-      "id": "code-input-1",
-      "kind": "code_input",
-      "title": "Write a Query with Addition and Subtraction",
-      "prompt": "Write a SQL query that shows each student's name, their current grade_level, and what their grade will be two years from now (call it future_grade).",
-      "starterCode": "-- Write your query below",
-      "solutionCode": "SELECT name, grade_level, grade_level + 2 AS future_grade FROM students;",
-      "datasetId": "school_relations_intro",
-      "recipeType": "sql_query",
-      "hint": "Focus on the concept being tested.",
-      "help": {
-        "concept": "Think about the role or idea being tested rather than repeating answer wording.",
-        "hint_1": "Eliminate choices or interpretations that do not match the task.",
-        "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
       }
     }
   ]

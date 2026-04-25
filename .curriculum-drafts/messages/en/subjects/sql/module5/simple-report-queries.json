@@ -4,91 +4,25 @@
       "sql_module_5": {
         "simple-report-queries": {
           "label": "Simple report queries",
-          "summary": "Learn to write simple report queries using calculated columns and SQL expressions. Practice creating new columns, using expressions, and applying aliases for clear output in the school_relations_intro dataset.",
+          "summary": "Learn to write simple report queries using calculated columns and SQL expressions in the sales_kpi dataset.",
           "cards": {
             "sketch0": {
-              "title": "What is a simple report query?"
+              "title": "What is a calculated column?"
             },
             "sketch1": {
-              "title": "Using expressions in SELECT"
+              "title": "Using aliases for clarity"
             },
             "sketch2": {
-              "title": "Renaming outputs with aliases"
+              "title": "Combining expressions and filters"
             },
             "quiz": {
               "title": "Quiz"
             }
           },
           "quiz": {
-            "q1": {
-              "title": "Add a calculated column",
-              "prompt": "Suppose you want to show each student's grade level plus 2 as a new column called `future_grade`. Which expression correctly creates this column?",
-              "hint": "Think about how to increase the grade level by 2.",
-              "help": {
-                "concept": "Calculated columns use expressions like addition, subtraction, multiplication, or division on existing columns.",
-                "hint_1": "You want to add 2 to the current grade level for each student.",
-                "hint_2": "Use the addition operator (+) with the grade_level column."
-              },
-              "template": "SELECT name, grade_level, _____ AS future_grade FROM students;",
-              "choices": [
-                "grade_level + 2",
-                "grade_level - 2",
-                "grade_level * 2",
-                "grade_level / 2"
-              ]
-            },
-            "q2": {
-              "title": "Using aliases for clarity",
-              "prompt": "You want to rename the `name` column to `student_name` in your output. Which alias syntax is correct?",
-              "hint": "Focus on the missing SQL concept rather than the exact missing word.",
-              "help": {
-                "concept": "The blank should be filled with the SQL term that matches the job the statement is trying to perform.",
-                "hint_1": "Think about what the missing part is supposed to do in the statement.",
-                "hint_2": "Choose the SQL term that best completes the meaning of the statement."
-              },
-              "template": "SELECT name _____ student_name FROM students;",
-              "choices": [
-                "AS",
-                "TO",
-                "WITH",
-                "LIKE"
-              ]
-            },
-            "q3": {
-              "title": "Purpose of expressions in SELECT",
-              "prompt": "Why would you use an expression like `grade_level + 1` in a SELECT statement?",
-              "hint": "Think about what happens when you use arithmetic in SELECT.",
-              "help": {
-                "concept": "Expressions in SELECT create new output values for each row, often as calculated columns.",
-                "hint_1": "Expressions like `grade_level + 1` generate new data in the result set.",
-                "hint_2": "They do not change the table or filter rows, but add new calculated columns."
-              },
-              "options": {
-                "a": "To create a new column with calculated values",
-                "b": "To filter rows based on grade level",
-                "c": "To change the table structure",
-                "d": "To delete data from the table"
-              }
-            },
-            "q4": {
-              "title": "Which are valid SQL expressions in SELECT?",
-              "prompt": "Select all options that are valid expressions you could use in a SELECT clause with the `students` table.",
-              "hint": "Consider both arithmetic and string operations.",
-              "help": {
-                "concept": "Expressions in SELECT can use arithmetic, string concatenation, or other operations to create new output values.",
-                "hint_1": "Look for options that produce a value for each row, not just a true/false.",
-                "hint_2": "Comparisons like `>` are usually used in WHERE, not for calculated columns."
-              },
-              "options": {
-                "a": "grade_level * 2",
-                "b": "name || ' Smith'",
-                "c": "grade_level > 10",
-                "d": "id - 1"
-              }
-            },
-            "q5": {
-              "title": "Write a simple report query with an alias",
-              "prompt": "Write a SQL query to show each student's name and their grade level as `year` (use an alias) from the `students` table.",
+            "code-1": {
+              "title": "Calculate line totals for all orders",
+              "prompt": "Write a SQL query to show each order's `id`, `customer_name`, and the total value of the order as `line_total` (calculated as `quantity * unit_price`).",
               "hint": "Focus on the concept being tested.",
               "help": {
                 "concept": "Think about the role or idea being tested rather than repeating answer wording.",
@@ -96,6 +30,62 @@
                 "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
               },
               "starterCode": "-- Write your query here"
+            },
+            "code-2": {
+              "title": "Report only paid orders with calculated totals",
+              "prompt": "Write a SQL query to list `customer_name`, `status`, and the total value of each order as `total_amount` (quantity times unit_price), but only for orders where the status is 'paid'.",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+                "hint_1": "Eliminate choices or interpretations that do not match the task.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "starterCode": "-- Write your query here"
+            },
+            "single-1": {
+              "title": "Purpose of an alias in SQL reports",
+              "prompt": "Why are aliases (using AS) useful when creating report queries in SQL?",
+              "hint": "Think about how the output looks to someone reading the report.",
+              "help": {
+                "concept": "Aliases make result columns easier to understand by giving them descriptive names.",
+                "hint_1": "Aliases help clarify what a calculated column represents.",
+                "hint_2": "They make the output more readable and professional."
+              },
+              "options": {
+                "a": "[object Object]",
+                "b": "A command"
+              }
+            },
+            "multi-1": {
+              "title": "Identifying valid SQL expressions",
+              "prompt": "Which of the following are valid expressions you could use in a SELECT statement on the `orders` table? (Choose all that apply.)",
+              "hint": "Look for expressions that use existing columns and valid SQL syntax.",
+              "help": {
+                "concept": "A valid SQL expression can use arithmetic operations or functions on columns.",
+                "hint_1": "Expressions like quantity * unit_price or UPPER(customer_name) are valid.",
+                "hint_2": "Check if the expression uses columns from the table and follows SQL rules."
+              },
+              "options": {
+                "a": "[object Object]",
+                "b": "A command"
+              }
+            },
+            "fill-1": {
+              "title": "Choosing the correct alias",
+              "prompt": "Fill in the blank to assign the alias `discounted_total` to the calculated column for quantity times unit_price in this SELECT statement:",
+              "hint": "Use the AS keyword to assign an alias.",
+              "help": {
+                "concept": "The AS keyword is used to give a name (alias) to a calculated column in SQL.",
+                "hint_1": "Write the expression, then AS, then the alias name.",
+                "hint_2": "The alias should be after AS and match the desired column name."
+              },
+              "template": "SELECT quantity * unit_price AS [blank] FROM orders;",
+              "choices": [
+                "discounted_total",
+                "total",
+                "amount",
+                "price"
+              ]
             }
           }
         }
@@ -106,17 +96,17 @@
     "sql": {
       "sql_module_5": {
         "simple-report-queries": {
-          "sk1": {
-            "title": "What is a simple report query?",
-            "bodyMarkdown": "A simple report query in SQL is a SELECT statement that retrieves data from one or more tables, often including calculated columns or expressions. For example, you might want to show all students and their grade levels, or count how many courses are in each department. Expressions can use arithmetic, functions, or combine columns to create new values in the output."
+          "sketch-1": {
+            "title": "What is a calculated column?",
+            "bodyMarkdown": "A calculated column in SQL is a value you create on the fly in your SELECT statement using expressions. For example, you can multiply `quantity` by `unit_price` to get the total value of each order:\n\n```sql\nSELECT id, quantity * unit_price AS line_total\nFROM orders;\n```\nThis query returns each order's ID and its computed line total."
           },
-          "sk2": {
-            "title": "Using expressions in SELECT",
-            "bodyMarkdown": "You can use expressions directly in the SELECT clause. For example, to show each student's grade level plus one:\n\n```sql\nSELECT name, grade_level, grade_level + 1 AS next_year_grade\nFROM students;\n```\n\nThis query adds a calculated column called `next_year_grade`."
+          "sketch-2": {
+            "title": "Using aliases for clarity",
+            "bodyMarkdown": "Aliases rename columns in your result set, making reports easier to read. Use the `AS` keyword to assign an alias:\n\n```sql\nSELECT customer_name, region, quantity * unit_price AS total_amount\nFROM orders;\n```\nHere, `total_amount` is an alias for the calculated value."
           },
-          "sk3": {
-            "title": "Renaming outputs with aliases",
-            "bodyMarkdown": "Aliases make your result columns easier to read. Use `AS` to give a column a new name in the output. For example:\n\n```sql\nSELECT name AS student_name, grade_level AS year\nFROM students;\n```\n\nThis query renames `name` to `student_name` and `grade_level` to `year` in the result set."
+          "sketch-3": {
+            "title": "Combining expressions and filters",
+            "bodyMarkdown": "You can use expressions alongside filters to focus your report. For example, to see only 'paid' orders and their totals:\n\n```sql\nSELECT id, customer_name, quantity * unit_price AS line_total\nFROM orders\nWHERE status = 'paid';\n```\nThis returns only the paid orders with their calculated totals."
           }
         }
       }

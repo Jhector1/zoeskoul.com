@@ -37,7 +37,7 @@
       "titleKey": "topics.sql.sql_module_5.writing-readable-output.cards.quiz.title",
       "quiz": {
         "difficulty": "easy",
-        "n": 4,
+        "n": 3,
         "allowReveal": true,
         "preferKind": null,
         "maxAttempts": 10
@@ -67,26 +67,32 @@
   "exercises": [
     {
       "id": "q1",
-      "kind": "fill_blank_choice",
+      "kind": "code_input",
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "topics.sql.sql_module_5.writing-readable-output.quiz.q1",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "AS"
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_kpi",
+        "resultShape": "table",
+        "solutionCode": "SELECT customer_name, quantity * unit_price AS order_value FROM orders;"
       }
     },
     {
       "id": "q2",
-      "kind": "fill_blank_choice",
+      "kind": "code_input",
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "topics.sql.sql_module_5.writing-readable-output.quiz.q2",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "name_length"
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_kpi",
+        "resultShape": "table",
+        "solutionCode": "SELECT customer_name, region, unit_price * 0.85 AS discounted_price FROM orders;"
       }
     },
     {
@@ -97,9 +103,7 @@
       "messageBase": "topics.sql.sql_module_5.writing-readable-output.quiz.q3",
       "optionIds": [
         "a",
-        "b",
-        "c",
-        "d"
+        "b"
       ],
       "expected": {
         "kind": "single_choice",
@@ -114,9 +118,7 @@
       "messageBase": "topics.sql.sql_module_5.writing-readable-output.quiz.q4",
       "optionIds": [
         "a",
-        "b",
-        "c",
-        "d"
+        "b"
       ],
       "expected": {
         "kind": "multi_choice",
@@ -127,17 +129,14 @@
     },
     {
       "id": "q5",
-      "kind": "code_input",
+      "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "topics.sql.sql_module_5.writing-readable-output.quiz.q5",
-      "language": "sql",
-      "fixedSqlDialect": "sqlite",
-      "recipe": {
-        "type": "sql_query",
-        "datasetId": "school_relations_intro",
-        "resultShape": "table",
-        "solutionCode": "SELECT name, grade_level + 1 AS next_grade FROM students;"
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "AS"
       }
     }
   ]

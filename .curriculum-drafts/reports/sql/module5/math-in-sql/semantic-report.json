@@ -6,8 +6,29 @@
       "code": "SQL_RUNNER_NOT_CONFIGURED",
       "category": "execution",
       "severity": "warn",
-      "exerciseId": "q5",
+      "exerciseId": "calc-total-code",
       "message": "No shared SQL runner is configured for compiler-side semantic validation."
+    },
+    {
+      "code": "SQL_RUNNER_NOT_CONFIGURED",
+      "category": "execution",
+      "severity": "warn",
+      "exerciseId": "discounted-price-code",
+      "message": "No shared SQL runner is configured for compiler-side semantic validation."
+    },
+    {
+      "code": "SQL_PROMPT_INTENT_GROUP_BY_WEAK_MISMATCH",
+      "category": "prompt_intent",
+      "severity": "warn",
+      "exerciseId": "calc-total-code",
+      "message": "Prompt mentions grouping-like wording, but the solution query does not contain GROUP BY."
+    },
+    {
+      "code": "SQL_PROMPT_INTENT_GROUP_BY_WEAK_MISMATCH",
+      "category": "prompt_intent",
+      "severity": "warn",
+      "exerciseId": "discounted-price-code",
+      "message": "Prompt mentions grouping-like wording, but the solution query does not contain GROUP BY."
     }
   ]
 }

@@ -37,7 +37,7 @@
       "titleKey": "topics.sql.sql_module_5.intro-to-functions.cards.quiz.title",
       "quiz": {
         "difficulty": "easy",
-        "n": 4,
+        "n": 3,
         "allowReveal": true,
         "preferKind": null,
         "maxAttempts": 10
@@ -67,26 +67,32 @@
   "exercises": [
     {
       "id": "q1",
-      "kind": "fill_blank_choice",
+      "kind": "code_input",
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "topics.sql.sql_module_5.intro-to-functions.quiz.q1",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "LENGTH"
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_kpi",
+        "resultShape": "table",
+        "solutionCode": "SELECT id, ROUND(quantity * unit_price, 0) AS rounded_total\nFROM orders;"
       }
     },
     {
       "id": "q2",
-      "kind": "fill_blank_choice",
+      "kind": "code_input",
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "topics.sql.sql_module_5.intro-to-functions.quiz.q2",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "next_year_grade"
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_kpi",
+        "resultShape": "table",
+        "solutionCode": "SELECT customer_name, UPPER(region) AS region_upper\nFROM orders;"
       }
     },
     {
@@ -97,9 +103,7 @@
       "messageBase": "topics.sql.sql_module_5.intro-to-functions.quiz.q3",
       "optionIds": [
         "a",
-        "b",
-        "c",
-        "d"
+        "b"
       ],
       "expected": {
         "kind": "single_choice",
@@ -114,32 +118,25 @@
       "messageBase": "topics.sql.sql_module_5.intro-to-functions.quiz.q4",
       "optionIds": [
         "a",
-        "b",
-        "c",
-        "d"
+        "b"
       ],
       "expected": {
         "kind": "multi_choice",
         "optionIds": [
-          "a",
-          "b",
-          "c"
+          "a"
         ]
       }
     },
     {
       "id": "q5",
-      "kind": "code_input",
+      "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "topics.sql.sql_module_5.intro-to-functions.quiz.q5",
-      "language": "sql",
-      "fixedSqlDialect": "sqlite",
-      "recipe": {
-        "type": "sql_query",
-        "datasetId": "school_relations_intro",
-        "resultShape": "table",
-        "solutionCode": "SELECT name, UPPER(name) AS name_upper FROM students;"
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "LOWER()"
       }
     }
   ]

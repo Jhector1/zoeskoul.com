@@ -4,98 +4,88 @@
       "sql_module_5": {
         "math-in-sql": {
           "label": "Math in SQL",
-          "summary": "Learn how to use arithmetic and expressions in SQL to create new values, such as calculated columns, and make your queries more powerful and readable.",
+          "summary": "Learn how to use arithmetic and expressions in SQL to create new values, such as calculated columns, and make your reports more useful and readable.",
           "cards": {
             "sketch0": {
-              "title": "What is Math in SQL?"
+              "title": "Using Math in SQL"
             },
             "sketch1": {
-              "title": "Using Expressions and Aliases"
+              "title": "Using Aliases for Readability"
             },
             "sketch2": {
-              "title": "Why Use Calculated Columns?"
+              "title": "Math and NULL Values"
             },
             "quiz": {
               "title": "Quiz"
             }
           },
           "quiz": {
-            "fill-blank-1": {
-              "title": "Basic Arithmetic in SELECT",
-              "prompt": "Which value will appear in the new column for Mia if you run:\n\n```sql\nSELECT name, grade_level + 1 AS next_grade\nFROM students;\n```\n\nMia's grade_level is 9.",
-              "hint": "Add 1 to Mia's current grade_level.",
-              "help": {
-                "concept": "Arithmetic in SQL expressions lets you add, subtract, multiply, or divide column values directly in SELECT.",
-                "hint_1": "Mia's grade_level is 9. The query adds 1.",
-                "hint_2": "Calculate 9 + 1 to find the value for next_grade."
-              },
-              "template": "Mia's next_grade will be: ____",
-              "choices": [
-                "8",
-                "9",
-                "10",
-                "11"
-              ]
-            },
-            "fill-blank-2": {
-              "title": "Using Aliases for Readability",
-              "prompt": "What will be the alias (column header) for the calculated column in this query?\n\n```sql\nSELECT name, grade_level * 2 AS double_grade\nFROM students;\n```",
-              "hint": "Look for the word after AS in the query.",
-              "help": {
-                "concept": "Aliases in SQL are used to rename columns or expressions for clearer output.",
-                "hint_1": "The alias is defined using AS in the SELECT statement.",
-                "hint_2": "Check what name comes after AS in the SELECT clause."
-              },
-              "template": "The alias for the calculated column is: ____",
-              "choices": [
-                "grade_level",
-                "double_grade",
-                "name",
-                "grade_level * 2"
-              ]
-            },
-            "single-choice-1": {
-              "title": "Understanding Expressions",
-              "prompt": "Which of the following is a valid SQL expression for creating a new column that shows the grade level plus two?",
-              "hint": "SQL uses mathematical operators like + for addition.",
-              "help": {
-                "concept": "SQL expressions use standard arithmetic operators (+, -, *, /) to combine column values and numbers.",
-                "hint_1": "Look for the option that uses the + operator.",
-                "hint_2": "The correct expression uses grade_level and the plus sign."
-              },
-              "options": {
-                "a": "grade_level + 2",
-                "b": "grade_level plus 2",
-                "c": "grade_level & 2",
-                "d": "grade_level add 2"
-              }
-            },
-            "multi-choice-1": {
-              "title": "Choosing Valid SQL Expressions",
-              "prompt": "Which of the following are valid ways to create calculated columns in a SELECT statement? (Choose all that apply)",
-              "hint": "Focus on expressions that use numeric columns and valid operators.",
-              "help": {
-                "concept": "Calculated columns in SQL use arithmetic with numeric columns and can use aliases for clarity.",
-                "hint_1": "Check which expressions use numeric columns and valid math operators.",
-                "hint_2": "Ignore any that try to add numbers to text columns."
-              },
-              "options": {
-                "a": "grade_level - 1",
-                "b": "grade_level * 2 AS double_grade",
-                "c": "name + 1",
-                "d": "grade_level / 2 AS half_grade"
-              }
-            },
-            "code-input-1": {
-              "title": "Write a Query with a Calculated Column",
-              "prompt": "Write a SQL query to show each student's name and what their grade_level will be in two years. Name the new column future_grade.",
+            "calc-total-code": {
+              "title": "Calculate Order Total",
+              "prompt": "Write a SQL query to show each order's `id`, `customer_name`, and a calculated column named `order_total` that multiplies `quantity` by `unit_price` from the `orders` table.",
               "hint": "Focus on the concept being tested.",
               "help": {
                 "concept": "Think about the role or idea being tested rather than repeating answer wording.",
                 "hint_1": "Eliminate choices or interpretations that do not match the task.",
                 "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
               },
-              "starterCode": "-- Write your query below"
+              "starterCode": "SELECT id, customer_name, \n       -- your calculation here\nFROM orders;"
+            },
+            "discounted-price-code": {
+              "title": "Apply a Discount in SQL",
+              "prompt": "Write a SQL query to show `customer_name`, `unit_price`, and a new column called `discounted_price` that shows the unit price with a 10% discount (i.e., 90% of the original price) for each order.",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+                "hint_1": "Eliminate choices or interpretations that do not match the task.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "starterCode": "SELECT customer_name, unit_price, \n       -- your calculation here\nFROM orders;"
+            },
+            "alias-purpose-single": {
+              "title": "Purpose of Aliases",
+              "prompt": "Why are aliases (using the AS keyword) useful when creating calculated columns in SQL?",
+              "hint": "Think about how the output looks.",
+              "help": {
+                "concept": "Aliases let you rename columns in your result set, making the output clearer and more understandable.",
+                "hint_1": "Aliases affect how results are labeled, not how fast queries run.",
+                "hint_2": "Aliases help with readability, not with changing data or preventing NULLs."
+              },
+              "options": {
+                "a": "[object Object]",
+                "b": "A command"
+              }
+            },
+            "math-null-multi": {
+              "title": "Math with NULL Values",
+              "prompt": "Which of the following are true when using arithmetic expressions in SQL? (Choose all that apply.)",
+              "hint": "Consider what happens if a value is missing.",
+              "help": {
+                "concept": "NULL values in arithmetic cause the result to be NULL. SQL supports arithmetic operators and aliases for expressions.",
+                "hint_1": "NULLs do not get ignored in math; they make the result NULL.",
+                "hint_2": "You can use +, -, *, /, and AS for naming, but NULLs are not skipped."
+              },
+              "options": {
+                "a": "[object Object]",
+                "b": "A command"
+              }
+            },
+            "fill-blank-choice-math": {
+              "title": "Fill in the Blank: SQL Arithmetic",
+              "prompt": "Fill in the blank: To calculate the total value of an order in SQL, you can use the expression ______.",
+              "hint": "Think about multiplying quantity and price.",
+              "help": {
+                "concept": "Multiplying quantity by unit_price gives the total value for each order.",
+                "hint_1": "Multiplication gives you the total, not addition or division.",
+                "hint_2": "Use * to multiply the two columns for the total."
+              },
+              "template": "quantity * unit_price, quantity + unit_price, quantity / unit_price, unit_price - quantity",
+              "choices": [
+                "quantity * unit_price",
+                "quantity + unit_price",
+                "quantity / unit_price",
+                "unit_price - quantity"
+              ]
             }
           }
         }
@@ -106,17 +96,17 @@
     "sql": {
       "sql_module_5": {
         "math-in-sql": {
-          "sketch-1": {
-            "title": "What is Math in SQL?",
-            "bodyMarkdown": "SQL lets you perform arithmetic operations (like addition, subtraction, multiplication, and division) directly in your SELECT statements. This is useful for creating new columns based on existing data. For example, you can add 1 to a student's grade level:\n\n```sql\nSELECT name, grade_level, grade_level + 1 AS next_year_grade\nFROM students;\n```\n\nThis query shows each student's name, current grade, and what their grade will be next year."
+          "math-sql-basics": {
+            "title": "Using Math in SQL",
+            "bodyMarkdown": "SQL lets you perform arithmetic directly in your queries. For example, you can multiply columns to calculate totals or add values to create new columns. This is especially useful for reports and analytics.\n\nSuppose you want to calculate the total value of each order in the `orders` table. You can multiply `quantity` by `unit_price`:\n\n```sql\nSELECT id, customer_name, quantity, unit_price, quantity * unit_price AS line_total\nFROM orders;\n```\n\nThis query adds a new column called `line_total` to the results, showing the total price for each order."
           },
-          "sketch-2": {
-            "title": "Using Expressions and Aliases",
-            "bodyMarkdown": "An **expression** in SQL can combine columns, numbers, and operators. You can also use **aliases** (with `AS`) to give your calculated columns clear names. For example:\n\n```sql\nSELECT name, grade_level * 2 AS double_grade\nFROM students;\n```\n\nHere, `double_grade` is an alias for the calculated value."
+          "aliases-in-sql": {
+            "title": "Using Aliases for Readability",
+            "bodyMarkdown": "When you create new columns with expressions, the default column name can be hard to read. SQL allows you to use aliases (the `AS` keyword) to give your calculated columns clear names.\n\nFor example:\n\n```sql\nSELECT customer_name, quantity * unit_price AS total_amount\nFROM orders;\n```\n\nHere, `total_amount` is an alias for the calculated value. This makes your results easier to understand."
           },
-          "sketch-3": {
-            "title": "Why Use Calculated Columns?",
-            "bodyMarkdown": "Calculated columns help you create more useful reports by showing values that aren't stored directly in the database. For example, you might want to see all students and what their grade would be in two years:\n\n```sql\nSELECT name, grade_level, grade_level + 2 AS grade_in_two_years\nFROM students;\n```\n\nThis makes your results more informative without changing the underlying data."
+          "math-null-values": {
+            "title": "Math and NULL Values",
+            "bodyMarkdown": "If any value in a mathematical expression is `NULL`, the result will also be `NULL`. For example, if `quantity` is `NULL` for a row, then `quantity * unit_price` will be `NULL` for that row. Always consider how missing data might affect your calculations."
           }
         }
       }

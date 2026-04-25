@@ -1,13 +1,79 @@
+// packages/curriculum-compiler/src/emit/buildSubjectManifestFromPlan.ts
+
 import type {
     CourseBlueprint,
     CoursePlan,
+    ManifestRuntimeDefaults,
+    SqlDialect,
     SubjectManifest,
     SubjectModuleManifest,
     SubjectSectionManifest,
+    TopicSeedRuntimeDefaults,
+    WorkspaceLanguage,
 } from "@zoeskoul/curriculum-contracts";
 import type { SubjectShapePack } from "@zoeskoul/curriculum-profiles";
-import { getSqlModuleDataset } from "@zoeskoul/curriculum-profiles";
 import { moduleOrderToIndex } from "../spec/moduleOrder.js";
+import {
+    resolveModuleRuntimePolicy,
+    runtimePolicyToTopicRuntimeDefaults,
+} from "../spec/resolveModuleRuntimePolicy.js";
+
+const SQL_DIALECTS = ["sqlite", "postgres", "mysql", "mssql"] as const;
+
+const CODE_LANGUAGES = [
+    "python",
+    "java",
+    "javascript",
+    "c",
+    "cpp",
+    "bash",
+    "web",
+] as const;
+
+type ManifestCodeLanguage = Exclude<WorkspaceLanguage, "sql">;
+
+function toSqlDialect(value: string | undefined): SqlDialect | undefined {
+    if (!value) return undefined;
+
+    return SQL_DIALECTS.includes(value as SqlDialect)
+        ? (value as SqlDialect)
+        : undefined;
+}
+
+function toManifestCodeLanguage(
+    value: string | undefined,
+): ManifestCodeLanguage | undefined {
+    if (!value) return undefined;
+
+    return CODE_LANGUAGES.includes(value as ManifestCodeLanguage)
+        ? (value as ManifestCodeLanguage)
+        : undefined;
+}
+
+function toManifestRuntimeDefaults(
+    runtimeDefaults: TopicSeedRuntimeDefaults | null | undefined,
+): ManifestRuntimeDefaults | undefined {
+    if (!runtimeDefaults) return undefined;
+
+    if (runtimeDefaults.kind === "sql") {
+        return {
+            kind: "sql",
+            datasetId: runtimeDefaults.datasetId,
+            fixedSqlDialect:
+                toSqlDialect(runtimeDefaults.fixedSqlDialect) ?? "sqlite",
+            resultShape: "table",
+        };
+    }
+
+    if (runtimeDefaults.kind === "code") {
+        return {
+            kind: "code",
+            language: toManifestCodeLanguage(runtimeDefaults.language),
+        };
+    }
+
+    return undefined;
+}
 
 export function buildSubjectManifestFromPlan(args: {
     blueprint: CourseBlueprint;
@@ -21,74 +87,108 @@ export function buildSubjectManifestFromPlan(args: {
         const moduleIndex = moduleOrderToIndex(module.order);
         const logicalModuleSlug = shape.subjectManifest.moduleSlug(moduleIndex);
 
-        const sections: SubjectSectionManifest[] = module.sections.map((section) => ({
-            slug: shape.subjectManifest.sectionSlug(moduleIndex, section.order),
-            order: section.order,
-            titleKey: kp.sectionTitleKey(
-                blueprint.subjectSlug,
-                logicalModuleSlug,
-                shape.subjectManifest.sectionSlug(moduleIndex, section.order),
-            ),
-            descriptionKey: kp.sectionDescriptionKey(
-                blueprint.subjectSlug,
-                logicalModuleSlug,
-                shape.subjectManifest.sectionSlug(moduleIndex, section.order),
-            ),
-            meta: {
-                module: moduleIndex,
-                weeksKey: kp.sectionWeeksKey(
-                    blueprint.subjectSlug,
-                    logicalModuleSlug,
-                    shape.subjectManifest.sectionSlug(moduleIndex, section.order),
-                ),
-                bulletKeys: [0, 1, 2, 3].map((i) =>
-                    kp.sectionBulletKey(
+        const resolvedRuntimePolicy = resolveModuleRuntimePolicy({
+            blueprint,
+            module: {
+                moduleSlug: module.moduleSlug,
+                order: module.order,
+                runtimePolicy: module.runtimePolicy,
+            },
+        });
+
+        const topicRuntimeDefaults = runtimePolicyToTopicRuntimeDefaults({
+            profileId: blueprint.profileId,
+            runtimePolicy: resolvedRuntimePolicy,
+        });
+
+        const runtimeDefaults =
+            toManifestRuntimeDefaults(topicRuntimeDefaults);
+
+        const sections: SubjectSectionManifest[] = module.sections.map(
+            (section) => {
+                const sectionSlug = shape.subjectManifest.sectionSlug(
+                    moduleIndex,
+                    section.order,
+                );
+
+                return {
+                    slug: sectionSlug,
+                    order: section.order,
+                    titleKey: kp.sectionTitleKey(
                         blueprint.subjectSlug,
                         logicalModuleSlug,
-                        shape.subjectManifest.sectionSlug(moduleIndex, section.order),
-                        i,
+                        sectionSlug,
                     ),
-                ),
+                    descriptionKey: kp.sectionDescriptionKey(
+                        blueprint.subjectSlug,
+                        logicalModuleSlug,
+                        sectionSlug,
+                    ),
+                    meta: {
+                        module: moduleIndex,
+                        weeksKey: kp.sectionWeeksKey(
+                            blueprint.subjectSlug,
+                            logicalModuleSlug,
+                            sectionSlug,
+                        ),
+                        bulletKeys: [0, 1, 2, 3].map((i) =>
+                            kp.sectionBulletKey(
+                                blueprint.subjectSlug,
+                                logicalModuleSlug,
+                                sectionSlug,
+                                i,
+                            ),
+                        ),
+                    },
+                    topics: section.topics.map((topic) => topic.topicId),
+                };
             },
-            topics: section.topics.map((t) => t.topicId),
-        }));
+        );
 
         return {
             slug: logicalModuleSlug,
             prefix: shape.subjectManifest.modulePrefix(moduleIndex),
             order: moduleIndex,
-            titleKey: kp.moduleTitleKey(blueprint.subjectSlug, logicalModuleSlug),
-            descriptionKey: kp.moduleDescriptionKey(blueprint.subjectSlug, logicalModuleSlug),
+            titleKey: kp.moduleTitleKey(
+                blueprint.subjectSlug,
+                logicalModuleSlug,
+            ),
+            descriptionKey: kp.moduleDescriptionKey(
+                blueprint.subjectSlug,
+                logicalModuleSlug,
+            ),
             weekStart: module.weekStart ?? null,
             weekEnd: module.weekEnd ?? null,
             accessOverride: module.order <= 2 ? "free" : null,
-            runtimeDefaults:
-                blueprint.profileId === "sql"
-                    ? {
-                        kind: "sql",
-                        datasetId: getSqlModuleDataset(moduleIndex),
-                        fixedSqlDialect: "sqlite",
-                        resultShape: "table",
-                    }
-                    : undefined,
+            runtimeDefaults,
             meta: {
                 estimatedMinutes: module.sections
-                    .flatMap((s) => s.topics)
-                    .reduce((sum, t) => sum + t.minutes, 0),
+                    .flatMap((section) => section.topics)
+                    .reduce((sum, topic) => sum + topic.minutes, 0),
                 prereqKeys:
                     moduleIndex > 0
                         ? [
                             kp.moduleTitleKey(
                                 blueprint.subjectSlug,
-                                shape.subjectManifest.moduleSlug(moduleIndex - 1),
+                                shape.subjectManifest.moduleSlug(
+                                    moduleIndex - 1,
+                                ),
                             ),
                         ]
                         : [],
                 outcomeKeys: [0, 1, 2, 3].map((i) =>
-                    kp.moduleOutcomeKey(blueprint.subjectSlug, logicalModuleSlug, i),
+                    kp.moduleOutcomeKey(
+                        blueprint.subjectSlug,
+                        logicalModuleSlug,
+                        i,
+                    ),
                 ),
                 whyKeys: [0, 1].map((i) =>
-                    kp.moduleWhyKey(blueprint.subjectSlug, logicalModuleSlug, i),
+                    kp.moduleWhyKey(
+                        blueprint.subjectSlug,
+                        logicalModuleSlug,
+                        i,
+                    ),
                 ),
             },
             sections,
@@ -110,7 +210,9 @@ export function buildSubjectManifestFromPlan(args: {
                 curriculum: {
                     plannedModuleCount: plan.modules.length,
                     isTerminalRelease: false,
-                    moreComingMessageKey: kp.subjectMoreComingKey(blueprint.subjectSlug),
+                    moreComingMessageKey: kp.subjectMoreComingKey(
+                        blueprint.subjectSlug,
+                    ),
                 },
                 completionPolicy: shape.subjectManifest.completionPolicy,
             },

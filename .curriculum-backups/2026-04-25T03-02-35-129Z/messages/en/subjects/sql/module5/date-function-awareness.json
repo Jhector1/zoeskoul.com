@@ -1,0 +1,118 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_5": {
+        "date-function-awareness": {
+          "label": "Date function awareness",
+          "summary": "Date function awareness in Calculated Columns and SQL Expressions",
+          "cards": {
+            "sketch0": {
+              "title": "Using Dates in SQL Expressions"
+            },
+            "sketch1": {
+              "title": "Date Columns in the School Dataset"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "quiz": {
+            "q1": {
+              "title": "Identifying a column that could use date functions",
+              "prompt": "Which column in the `enrollments` table could you use with date or string functions to filter by academic term?",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+                "hint_1": "Eliminate choices or interpretations that do not match the task.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "template": "The column to use for filtering by term is: ____",
+              "choices": [
+                "term",
+                "student_id",
+                "course_id",
+                "id"
+              ]
+            },
+            "q2": {
+              "title": "Recognizing date-like values",
+              "prompt": "In the `enrollments` table, which value format would you expect in the `term` column?",
+              "hint": "Think about how academic terms are named.",
+              "help": {
+                "concept": "The `term` column stores the semester or period as a text value.",
+                "hint_1": "It combines a season and a year.",
+                "hint_2": "It's not a number or a person's name."
+              },
+              "template": "An example value from the `term` column is: ____",
+              "choices": [
+                "Spring 2026",
+                "12345",
+                "Biology",
+                "Emma"
+              ]
+            },
+            "q3": {
+              "title": "Purpose of date functions in SQL",
+              "prompt": "What is the main purpose of using date functions in SQL?",
+              "hint": "Think about what you want to do with dates in a report.",
+              "help": {
+                "concept": "Date functions help you work with date values, such as extracting the year or comparing dates.",
+                "hint_1": "They let you filter, group, or calculate with dates.",
+                "hint_2": "They're not for changing table structure or deleting data."
+              },
+              "options": {
+                "a": "To extract or manipulate information from date or date-like columns",
+                "b": "To change column names",
+                "c": "To create new tables",
+                "d": "To delete rows"
+              }
+            },
+            "q4": {
+              "title": "Scenarios for using date or string functions",
+              "prompt": "Which of the following scenarios could use date or string functions in SQL? (Choose all that apply.)",
+              "hint": "Focus on actions involving dates or text.",
+              "help": {
+                "concept": "Date and string functions are used to work with date or text columns, such as filtering or extracting parts of a value.",
+                "hint_1": "Filtering by a specific term or extracting a year both use these functions.",
+                "hint_2": "Counting or renaming doesn't require date or string functions."
+              },
+              "options": {
+                "a": "Filtering enrollments for 'Spring 2026'",
+                "b": "Counting students in each grade_level",
+                "c": "Extracting the year from a term value",
+                "d": "Renaming a column"
+              }
+            },
+            "q5": {
+              "title": "Filtering enrollments by term using SQL",
+              "prompt": "Write a SQL query to select all columns from the `enrollments` table where the term is 'Spring 2026'.",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+                "hint_1": "Eliminate choices or interpretations that do not match the task.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "starterCode": "-- Write your query below"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_5": {
+        "date-function-awareness": {
+          "sk1": {
+            "title": "Using Dates in SQL Expressions",
+            "bodyMarkdown": "SQL databases often store dates as text or numbers. To work with dates, you can use built-in date functions (like `DATE()`, `strftime()`, or `CURRENT_DATE`) to extract or manipulate date information. For example, you might want to select enrollments from a specific term or calculate the difference between two dates. Understanding how to use these functions helps you create more useful reports and calculated columns."
+          },
+          "sk2": {
+            "title": "Date Columns in the School Dataset",
+            "bodyMarkdown": "In the `school_relations_intro` dataset, the `enrollments` table has a `term` column, which stores the term as a text value (e.g., 'Spring 2026'). While this isn't a full date, you can still use string functions to filter or group by term, and in other datasets, you might use date functions to work with true date columns."
+          }
+        }
+      }
+    }
+  }
+}

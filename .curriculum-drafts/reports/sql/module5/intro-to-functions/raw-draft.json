@@ -6,118 +6,138 @@
     {
       "id": "sk1",
       "title": "What are SQL functions?",
-      "bodyMarkdown": "SQL functions are built-in operations that take input values and return a result. You can use them in SELECT statements to transform or summarize data. For example, the `UPPER()` function converts text to uppercase, and `LENGTH()` returns the number of characters in a string.\n\nExample:\n\n```sql\nSELECT name, UPPER(name) AS name_upper, LENGTH(name) AS name_length\nFROM students;\n```\n\nThis query shows each student's name, their name in uppercase, and the length of their name."
+      "bodyMarkdown": "SQL functions are built-in operations that take input values and return a result. They help you transform, calculate, or summarize data directly in your queries. For example, you can use `ROUND()` to round numbers, or `UPPER()` to convert text to uppercase.\n\nExample:\n\n```sql\nSELECT customer_name, ROUND(unit_price, 0) AS rounded_price\nFROM orders;\n```\nThis query shows each customer's name and their unit price rounded to the nearest whole number."
     },
     {
       "id": "sk2",
-      "title": "Why use functions in calculated columns?",
-      "bodyMarkdown": "Functions help you create new columns based on existing data. For example, you might want to display the grade level plus one (for next year), or show all department names in lowercase.\n\nExample:\n\n```sql\nSELECT name, grade_level, grade_level + 1 AS next_year_grade\nFROM students;\n```\n\nThis query adds a calculated column showing each student's grade level for the next year."
+      "title": "Using functions in calculated columns",
+      "bodyMarkdown": "You can use functions inside calculated columns to create new values. For instance, you might want to calculate the total value of each order and round it to two decimal places:\n\n```sql\nSELECT id, quantity * unit_price AS total,\n       ROUND(quantity * unit_price, 2) AS rounded_total\nFROM orders;\n```\nThis query creates two new columns: `total` (raw multiplication) and `rounded_total` (rounded to two decimals)."
     },
     {
       "id": "sk3",
       "title": "Combining functions and expressions",
-      "bodyMarkdown": "You can combine functions with arithmetic or other expressions. For instance, you can use `LENGTH(name) + grade_level` to mix a function result with a numeric column.\n\nExample:\n\n```sql\nSELECT name, LENGTH(name) + grade_level AS score\nFROM students;\n```\n\nThis query creates a new column called `score` by adding the length of each student's name to their grade level."
+      "bodyMarkdown": "Functions can be combined with arithmetic expressions for more powerful calculations. For example, to get the total for each order and then round it:\n\n```sql\nSELECT id, ROUND(quantity * unit_price, 1) AS order_value\nFROM orders;\n```\nHere, `quantity * unit_price` computes the total, and `ROUND(..., 1)` rounds it to one decimal place."
     }
   ],
   "quizDraft": [
     {
       "id": "q1",
-      "kind": "fill_blank_choice",
-      "title": "Using a function in SELECT",
-      "prompt": "Which function would you use to count the number of characters in the 'name' column from the students table?",
-      "template": "SELECT name, _____(name) AS name_length FROM students;",
-      "choices": [
-        "LENGTH",
-        "COUNT",
-        "SUM",
-        "UPPER"
-      ],
-      "correctValue": "LENGTH",
-      "hint": "It's a function that measures string size.",
+      "kind": "code_input",
+      "title": "Round total order value to the nearest integer",
+      "prompt": "Write a SQL query to show each order's `id` and the total value (quantity multiplied by unit_price), rounded to the nearest integer. Name the rounded column `rounded_total`.",
+      "starterCode": "SELECT id, ____ AS rounded_total\nFROM orders;",
+      "solutionCode": "SELECT id, ROUND(quantity * unit_price, 0) AS rounded_total\nFROM orders;",
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query",
+      "hint": "Use the ROUND() function on the multiplication.",
       "help": {
-        "concept": "The LENGTH() function returns the number of characters in a string.",
-        "hint_1": "COUNT is for counting rows, not characters.",
-        "hint_2": "LENGTH is the function that gives you the size of a text value."
+        "concept": "The ROUND() function rounds a numeric value to the specified number of decimal places. Multiplying quantity by unit_price gives the total value.",
+        "hint_1": "Multiply quantity and unit_price, then wrap the result in ROUND().",
+        "hint_2": "ROUND(expression, 0) will round to the nearest whole number."
       }
     },
     {
       "id": "q2",
-      "kind": "fill_blank_choice",
-      "title": "Simple arithmetic expression",
-      "prompt": "How would you add 1 to every student's grade_level in a SELECT statement?",
-      "template": "SELECT name, grade_level + 1 AS _____ FROM students;",
-      "choices": [
-        "next_year_grade",
-        "grade_level",
-        "total",
-        "student_id"
-      ],
-      "correctValue": "next_year_grade",
-      "hint": "Think about a clear alias for the new column.",
+      "kind": "code_input",
+      "title": "Show customer name and uppercase region",
+      "prompt": "Write a SQL query to display each customer's name and their region in all uppercase letters. Name the uppercase column `region_upper`.",
+      "starterCode": "SELECT customer_name, ____ AS region_upper\nFROM orders;",
+      "solutionCode": "SELECT customer_name, UPPER(region) AS region_upper\nFROM orders;",
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query",
+      "hint": "Use a text function to change region to uppercase.",
       "help": {
-        "concept": "Aliases make calculated columns readable and meaningful.",
-        "hint_1": "The alias should describe the new value (grade level plus one).",
-        "hint_2": "A good alias for grade_level + 1 is next_year_grade."
+        "concept": "The UPPER() function converts text to all uppercase letters. Use it on the region column.",
+        "hint_1": "Wrap the region column in the UPPER() function.",
+        "hint_2": "UPPER(region) will return the region in uppercase."
       }
     },
     {
       "id": "q3",
       "kind": "single_choice",
-      "title": "Purpose of SQL functions",
-      "prompt": "What is the main purpose of using functions like UPPER() or LENGTH() in a SELECT statement?",
+      "title": "Which function rounds a number to the nearest integer?",
+      "prompt": "Which SQL function would you use to round a number to the nearest integer?",
       "options": [
-        "To transform or summarize data in your results",
-        "To create new tables",
-        "To delete rows from a table",
-        "To change the database structure"
+        {
+          "id": "a",
+          "content": "ROUND()"
+        },
+        {
+          "id": "b",
+          "content": "SUM()"
+        },
+        {
+          "id": "c",
+          "content": "UPPER()"
+        },
+        {
+          "id": "d",
+          "content": "COUNT()"
+        }
       ],
       "correctOptionIds": [
         "a"
       ],
-      "hint": "Think about what happens to the data in the SELECT output.",
+      "hint": "Think about which function changes a number's decimal places.",
       "help": {
-        "concept": "Functions in SELECT help you modify or analyze the data you retrieve.",
-        "hint_1": "Functions like UPPER() or LENGTH() change or summarize column values.",
-        "hint_2": "They do not change tables or the database, just the output of your query."
+        "concept": "ROUND() is used to round numbers, while SUM() adds values, UPPER() changes text case, and COUNT() counts rows.",
+        "hint_1": "It's not SUM(), UPPER(), or COUNT().",
+        "hint_2": "The function's name suggests it changes the number's precision."
       }
     },
     {
       "id": "q4",
       "kind": "multi_choice",
-      "title": "Which are SQL functions?",
-      "prompt": "Select all options that are valid SQL functions you could use in a SELECT statement.",
+      "title": "Which of the following are SQL functions?",
+      "prompt": "Select all options that are SQL functions.",
       "options": [
-        "LENGTH()",
-        "UPPER()",
-        "SUM()",
-        "DELETE()"
+        {
+          "id": "a",
+          "content": "ROUND()"
+        },
+        {
+          "id": "b",
+          "content": "LOWER()"
+        },
+        {
+          "id": "c",
+          "content": "MULTIPLY()"
+        },
+        {
+          "id": "d",
+          "content": "UPPER()"
+        }
       ],
       "correctOptionIds": [
         "a",
         "b",
-        "c"
+        "d"
       ],
-      "hint": "Think about functions that return a value for each row or for a group.",
+      "hint": "Look for built-in SQL functions for numbers or text.",
       "help": {
-        "concept": "SQL functions like LENGTH(), UPPER(), and SUM() operate on data and return results. DELETE() is a statement, not a function.",
-        "hint_1": "LENGTH(), UPPER(), and SUM() are all built-in SQL functions.",
-        "hint_2": "DELETE() is not a function; it's a command to remove rows."
+        "concept": "SQL provides functions like ROUND(), LOWER(), and UPPER() for manipulating numbers and text. MULTIPLY() is not a standard SQL function.",
+        "hint_1": "Check which are real SQL functions for text or numbers.",
+        "hint_2": "MULTIPLY() is not a standard SQL function."
       }
     },
     {
       "id": "q5",
-      "kind": "code_input",
-      "title": "Write a query using a function",
-      "prompt": "Write a SQL query to show each student's name and their name in all uppercase letters. The result should have columns 'name' and 'name_upper'.",
-      "starterCode": "-- Write your query here",
-      "solutionCode": "SELECT name, UPPER(name) AS name_upper FROM students;",
-      "datasetId": "school_relations_intro",
-      "recipeType": "sql_query",
-      "hint": "Use the UPPER() function on the name column and give it an alias.",
+      "kind": "fill_blank_choice",
+      "title": "Fill in the blank: function for lowercase",
+      "prompt": "Which function converts text to all lowercase letters in SQL?",
+      "template": "The function to convert text to lowercase is ____.",
+      "choices": [
+        "LOWER()",
+        "UPPER()",
+        "ROUND()",
+        "COUNT()"
+      ],
+      "correctValue": "LOWER()",
+      "hint": "Think about the opposite of UPPER().",
       "help": {
-        "concept": "The UPPER() function converts text to uppercase. Use AS to assign an alias to the new column.",
-        "hint_1": "SELECT name, UPPER(name) AS ... FROM students;",
-        "hint_2": "The alias should be name_upper."
+        "concept": "LOWER() is the SQL function that converts text to all lowercase letters.",
+        "hint_1": "It's not UPPER(), ROUND(), or COUNT().",
+        "hint_2": "The function's name describes making letters small."
       }
     }
   ]

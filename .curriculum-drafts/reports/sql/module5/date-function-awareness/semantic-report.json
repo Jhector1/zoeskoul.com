@@ -6,7 +6,14 @@
       "code": "SQL_RUNNER_NOT_CONFIGURED",
       "category": "execution",
       "severity": "warn",
-      "exerciseId": "ci-1-extract-term-year",
+      "exerciseId": "code-1",
+      "message": "No shared SQL runner is configured for compiler-side semantic validation."
+    },
+    {
+      "code": "SQL_RUNNER_NOT_CONFIGURED",
+      "category": "execution",
+      "severity": "warn",
+      "exerciseId": "code-2",
       "message": "No shared SQL runner is configured for compiler-side semantic validation."
     }
   ]

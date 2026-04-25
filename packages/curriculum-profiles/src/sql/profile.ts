@@ -17,15 +17,20 @@ export const sqlProfile: CourseProfile = {
     allowedRecipeTypes: ["fixed_tests", "template_io", "sql_query"],
     buildModuleRuntimeDefaults(moduleOrder?: number, module?: PlannedModule) {
         const resolvedOrder =
-            typeof module?.order === "number" ? module.order : moduleOrder ?? 0;
+            typeof module?.order === "number" ? Math.max(0, module.order - 1) : Math.max(0, (moduleOrder ?? 1) - 1);
 
         const policy = getSqlModuleDatasetPolicy(resolvedOrder);
 
+        const runtime = module?.runtimePolicy;
+
         return {
             kind: "sql",
-            datasetId: policy.datasetId,
-            fixedSqlDialect: "sqlite",
-            resultShape: "table",
+            datasetId:
+                runtime?.datasetId ??
+                runtime?.preferredDatasetId ??
+                policy.datasetId,
+            fixedSqlDialect: runtime?.sqlDialect ?? "sqlite",
+            resultShape: runtime?.resultShape ?? "table",
         };
     },
     getRecipeRegistry() {

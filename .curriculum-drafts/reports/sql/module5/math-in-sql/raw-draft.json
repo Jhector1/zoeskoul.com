@@ -1,123 +1,143 @@
 {
   "title": "Math in SQL",
-  "summary": "Math in SQL in Calculated Columns and SQL Expressions",
+  "summary": "Learn how to use arithmetic and expressions in SQL to create new values, such as calculated columns, and make your reports more useful and readable.",
   "minutes": 15,
   "sketchBlocks": [
     {
-      "id": "sk1",
-      "title": "Using Math in SQL Queries",
-      "bodyMarkdown": "SQL lets you do math directly in your SELECT statements. For example, you can add, subtract, multiply, or divide columns or numbers. This is useful for creating new values from your data. For instance, if you want to show the next grade level for each student, you can add 1 to the `grade_level` column:\n\n```sql\nSELECT name, grade_level, grade_level + 1 AS next_grade\nFROM students;\n```\n\nThis query lists each student's name, their current grade, and what their grade will be next year."
+      "id": "math-sql-basics",
+      "title": "Using Math in SQL",
+      "bodyMarkdown": "SQL lets you perform arithmetic directly in your queries. For example, you can multiply columns to calculate totals or add values to create new columns. This is especially useful for reports and analytics.\n\nSuppose you want to calculate the total value of each order in the `orders` table. You can multiply `quantity` by `unit_price`:\n\n```sql\nSELECT id, customer_name, quantity, unit_price, quantity * unit_price AS line_total\nFROM orders;\n```\n\nThis query adds a new column called `line_total` to the results, showing the total price for each order."
     },
     {
-      "id": "sk2",
-      "title": "Combining Columns and Numbers",
-      "bodyMarkdown": "You can combine columns with numbers or other columns in SQL expressions. For example, if you want to show a student's grade level doubled, you can multiply the column by 2:\n\n```sql\nSELECT name, grade_level, grade_level * 2 AS double_grade\nFROM students;\n```\n\nThis creates a new column called `double_grade` in the result."
-    },
-    {
-      "id": "sk3",
+      "id": "aliases-in-sql",
       "title": "Using Aliases for Readability",
-      "bodyMarkdown": "When you create new values in your SELECT statement, it's helpful to give them clear names using the `AS` keyword. These names are called aliases. For example:\n\n```sql\nSELECT name, grade_level + 1 AS next_grade\nFROM students;\n```\n\nHere, `next_grade` is an alias for the calculated column."
+      "bodyMarkdown": "When you create new columns with expressions, the default column name can be hard to read. SQL allows you to use aliases (the `AS` keyword) to give your calculated columns clear names.\n\nFor example:\n\n```sql\nSELECT customer_name, quantity * unit_price AS total_amount\nFROM orders;\n```\n\nHere, `total_amount` is an alias for the calculated value. This makes your results easier to understand."
+    },
+    {
+      "id": "math-null-values",
+      "title": "Math and NULL Values",
+      "bodyMarkdown": "If any value in a mathematical expression is `NULL`, the result will also be `NULL`. For example, if `quantity` is `NULL` for a row, then `quantity * unit_price` will be `NULL` for that row. Always consider how missing data might affect your calculations."
     }
   ],
   "quizDraft": [
     {
-      "id": "q1",
-      "kind": "fill_blank_choice",
-      "title": "Simple Arithmetic in SELECT",
-      "prompt": "Suppose you want to show each student's grade level plus 2. Which expression would you use in the SELECT clause?",
-      "template": "SELECT name, grade_level + 2 AS future_grade FROM students;",
-      "choices": [
-        "grade_level + 2",
-        "grade_level - 2",
-        "grade_level * 2",
-        "grade_level / 2"
-      ],
-      "correctValue": "grade_level + 2",
-      "hint": "Think about how to add a number to a column.",
+      "id": "calc-total-code",
+      "kind": "code_input",
+      "title": "Calculate Order Total",
+      "prompt": "Write a SQL query to show each order's `id`, `customer_name`, and a calculated column named `order_total` that multiplies `quantity` by `unit_price` from the `orders` table.",
+      "hint": "Use SELECT with an arithmetic expression and an alias.",
+      "starterCode": "SELECT id, customer_name, \n       -- your calculation here\nFROM orders;",
+      "solutionCode": "SELECT id, customer_name, quantity * unit_price AS order_total\nFROM orders;",
       "help": {
-        "concept": "You can use arithmetic operators like +, -, *, and / in SQL expressions to calculate new values from columns.",
-        "hint_1": "Adding 2 to a column uses the + operator.",
-        "hint_2": "The correct expression adds 2 to the grade_level column."
-      }
+        "concept": "You can use arithmetic expressions in SELECT to create new columns. Use the AS keyword to assign an alias.",
+        "hint_1": "Multiply quantity and unit_price, and use AS to name the result.",
+        "hint_2": "The new column should be called order_total using AS."
+      },
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query"
     },
     {
-      "id": "q2",
-      "kind": "fill_blank_choice",
-      "title": "Using Aliases",
-      "prompt": "What is the alias in this SQL statement?\n\n```sql\nSELECT name, grade_level * 2 AS double_grade FROM students;\n```",
-      "template": "The alias for the calculated column is __.",
-      "choices": [
-        "double_grade",
-        "grade_level",
-        "students",
-        "name"
-      ],
-      "correctValue": "double_grade",
-      "hint": "The alias comes after the AS keyword.",
+      "id": "discounted-price-code",
+      "kind": "code_input",
+      "title": "Apply a Discount in SQL",
+      "prompt": "Write a SQL query to show `customer_name`, `unit_price`, and a new column called `discounted_price` that shows the unit price with a 10% discount (i.e., 90% of the original price) for each order.",
+      "hint": "Multiply unit_price by 0.9 and use an alias.",
+      "starterCode": "SELECT customer_name, unit_price, \n       -- your calculation here\nFROM orders;",
+      "solutionCode": "SELECT customer_name, unit_price, unit_price * 0.9 AS discounted_price\nFROM orders;",
       "help": {
-        "concept": "An alias is a temporary name given to a column or table in a SQL query for readability.",
-        "hint_1": "Look for the word after AS in the SELECT statement.",
-        "hint_2": "The calculated column is given a new name using AS."
-      }
+        "concept": "You can use arithmetic with constants in SQL expressions. Use AS to label the new column.",
+        "hint_1": "Calculate 90% of unit_price using multiplication.",
+        "hint_2": "Remember to use AS to name the new column discounted_price."
+      },
+      "datasetId": "sales_kpi",
+      "recipeType": "sql_query"
     },
     {
-      "id": "q3",
+      "id": "alias-purpose-single",
       "kind": "single_choice",
-      "title": "Purpose of Expressions in SQL",
-      "prompt": "Why would you use an expression like `grade_level + 1` in a SELECT statement?",
+      "title": "Purpose of Aliases",
+      "prompt": "Why are aliases (using the AS keyword) useful when creating calculated columns in SQL?",
+      "hint": "Think about how the output looks.",
       "options": [
-        "To create a new value based on existing data",
-        "To rename a column",
-        "To filter rows",
-        "To join tables"
+        {
+          "id": "a",
+          "content": "They make column names in the result easier to read."
+        },
+        {
+          "id": "b",
+          "content": "They speed up query execution."
+        },
+        {
+          "id": "c",
+          "content": "They prevent NULL values."
+        },
+        {
+          "id": "d",
+          "content": "They change the data in the table."
+        }
       ],
       "correctOptionIds": [
         "a"
       ],
-      "hint": "Think about what happens when you add 1 to a column in the SELECT list.",
       "help": {
-        "concept": "Expressions in SQL allow you to calculate new values from existing columns directly in your query results.",
-        "hint_1": "Adding 1 to a column creates a new value for each row.",
-        "hint_2": "Expressions are used to generate new columns or values in the result set."
+        "concept": "Aliases let you rename columns in your result set, making the output clearer and more understandable.",
+        "hint_1": "Aliases affect how results are labeled, not how fast queries run.",
+        "hint_2": "Aliases help with readability, not with changing data or preventing NULLs."
       }
     },
     {
-      "id": "q4",
+      "id": "math-null-multi",
       "kind": "multi_choice",
-      "title": "Valid SQL Expressions",
-      "prompt": "Which of the following are valid SQL expressions you could use in a SELECT clause? (Choose all that apply.)",
+      "title": "Math with NULL Values",
+      "prompt": "Which of the following are true when using arithmetic expressions in SQL? (Choose all that apply.)",
+      "hint": "Consider what happens if a value is missing.",
       "options": [
-        "grade_level - 1",
-        "grade_level * 3",
-        "name + 1",
-        "grade_level / 2"
+        {
+          "id": "a",
+          "content": "If any value in an arithmetic expression is NULL, the result is NULL."
+        },
+        {
+          "id": "b",
+          "content": "You can use arithmetic operators like +, -, *, and / in SELECT."
+        },
+        {
+          "id": "c",
+          "content": "Arithmetic expressions automatically ignore NULL values."
+        },
+        {
+          "id": "d",
+          "content": "You can use aliases to name the result of an expression."
+        }
       ],
       "correctOptionIds": [
         "a",
         "b",
         "d"
       ],
-      "hint": "Consider which expressions make sense for a numeric column.",
       "help": {
-        "concept": "SQL expressions can use arithmetic operators on numeric columns. Adding a number to a text column is not valid.",
-        "hint_1": "You can subtract, multiply, or divide numbers with numeric columns.",
-        "hint_2": "You cannot add a number to a text column like 'name'."
+        "concept": "NULL values in arithmetic cause the result to be NULL. SQL supports arithmetic operators and aliases for expressions.",
+        "hint_1": "NULLs do not get ignored in math; they make the result NULL.",
+        "hint_2": "You can use +, -, *, /, and AS for naming, but NULLs are not skipped."
       }
     },
     {
-      "id": "q5",
-      "kind": "code_input",
-      "title": "Write a Query with a Calculated Column",
-      "prompt": "Write a SQL query to show each student's name and their grade level divided by 2, labeled as `half_grade`.",
-      "starterCode": "-- Write your query below\n",
-      "solutionCode": "SELECT name, grade_level / 2 AS half_grade FROM students;",
-      "datasetId": "school_relations_intro",
-      "recipeType": "sql_query",
-      "hint": "Use SELECT with the name column and an expression dividing grade_level by 2. Use AS to label the new column.",
+      "id": "fill-blank-choice-math",
+      "kind": "fill_blank_choice",
+      "title": "Fill in the Blank: SQL Arithmetic",
+      "prompt": "Fill in the blank: To calculate the total value of an order in SQL, you can use the expression ______.",
+      "hint": "Think about multiplying quantity and price.",
+      "template": "quantity * unit_price, quantity + unit_price, quantity / unit_price, unit_price - quantity",
+      "choices": [
+        "quantity * unit_price",
+        "quantity + unit_price",
+        "quantity / unit_price",
+        "unit_price - quantity"
+      ],
+      "correctValue": "quantity * unit_price",
       "help": {
-        "concept": "You can create new columns in your result by using arithmetic expressions and aliases in the SELECT clause.",
-        "hint_1": "Divide the grade_level column by 2 and use AS to give it a name.",
-        "hint_2": "Your SELECT should include name and grade_level / 2 AS half_grade."
+        "concept": "Multiplying quantity by unit_price gives the total value for each order.",
+        "hint_1": "Multiplication gives you the total, not addition or division.",
+        "hint_2": "Use * to multiply the two columns for the total."
       }
     }
   ]

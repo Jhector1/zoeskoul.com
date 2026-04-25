@@ -25,19 +25,12 @@
       "height": 420
     },
     {
-      "id": "sketch2",
-      "kind": "sketch",
-      "titleKey": "topics.sql.sql_module_5.string-functions.cards.sketch2.title",
-      "sketchId": "sketch-3",
-      "height": 420
-    },
-    {
       "id": "quiz",
       "kind": "quiz",
       "titleKey": "topics.sql.sql_module_5.string-functions.cards.quiz.title",
       "quiz": {
         "difficulty": "easy",
-        "n": 4,
+        "n": 3,
         "allowReveal": true,
         "preferKind": null,
         "maxAttempts": 10
@@ -56,45 +49,45 @@
       "archetype": "paragraph",
       "titleKey": "sketches.sql.sql_module_5.string-functions.sketch-2.title",
       "bodyKey": "sketches.sql.sql_module_5.string-functions.sketch-2.bodyMarkdown"
-    },
-    {
-      "id": "sketch-3",
-      "archetype": "paragraph",
-      "titleKey": "sketches.sql.sql_module_5.string-functions.sketch-3.title",
-      "bodyKey": "sketches.sql.sql_module_5.string-functions.sketch-3.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "fillblank-1",
-      "kind": "fill_blank_choice",
+      "id": "quiz-1",
+      "kind": "code_input",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.string-functions.quiz.fillblank-1",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "UPPER"
+      "messageBase": "topics.sql.sql_module_5.string-functions.quiz.quiz-1",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_kpi",
+        "resultShape": "table",
+        "solutionCode": "SELECT UPPER(customer_name) AS customer_upper FROM orders;"
       }
     },
     {
-      "id": "fillblank-2",
-      "kind": "fill_blank_choice",
+      "id": "quiz-2",
+      "kind": "code_input",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.string-functions.quiz.fillblank-2",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "LENGTH"
+      "messageBase": "topics.sql.sql_module_5.string-functions.quiz.quiz-2",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_kpi",
+        "resultShape": "table",
+        "solutionCode": "SELECT SUBSTR(region, 1, 2) AS region_initials FROM orders;"
       }
     },
     {
-      "id": "single-1",
+      "id": "quiz-3",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.string-functions.quiz.single-1",
+      "messageBase": "topics.sql.sql_module_5.string-functions.quiz.quiz-3",
       "optionIds": [
         "a",
         "b"
@@ -105,11 +98,11 @@
       }
     },
     {
-      "id": "multi-1",
+      "id": "quiz-4",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.string-functions.quiz.multi-1",
+      "messageBase": "topics.sql.sql_module_5.string-functions.quiz.quiz-4",
       "optionIds": [
         "a",
         "b"
@@ -122,18 +115,15 @@
       }
     },
     {
-      "id": "code-1",
-      "kind": "code_input",
+      "id": "quiz-5",
+      "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.string-functions.quiz.code-1",
-      "language": "sql",
-      "fixedSqlDialect": "sqlite",
-      "recipe": {
-        "type": "sql_query",
-        "datasetId": "school_relations_intro",
-        "resultShape": "table",
-        "solutionCode": "SELECT name, name || ' (Grade ' || grade_level || ')' AS student_info FROM students;"
+      "messageBase": "topics.sql.sql_module_5.string-functions.quiz.quiz-5",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "TRIM()"
       }
     }
   ]

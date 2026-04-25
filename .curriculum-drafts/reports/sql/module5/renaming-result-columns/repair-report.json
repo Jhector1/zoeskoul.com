@@ -1,4 +1,12 @@
 {
   "topicId": "renaming-result-columns",
-  "repairs": []
+  "repairs": [
+    {
+      "code": "SQL_REWROTE_SKETCH_TO_MODULE_DATASET",
+      "category": "dataset",
+      "severity": "medium",
+      "field": "sketchBlocks.sketch-2-alias-syntax.bodyMarkdown",
+      "message": "Rewrote sketch SQL example to use the module runtime dataset instead of off-schema or exercise-scope SQL."
+    }
+  ]
 }
