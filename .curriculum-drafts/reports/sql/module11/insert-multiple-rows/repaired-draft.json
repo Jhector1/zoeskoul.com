@@ -1,0 +1,111 @@
+{
+  "title": "Insert multiple rows",
+  "summary": "Learn how to insert multiple rows into a table in a single SQL statement using the inventory_ops dataset.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch-1",
+      "title": "Why insert multiple rows at once?",
+      "bodyMarkdown": "Inserting multiple rows in a single SQL statement is more efficient than inserting them one at a time. It reduces the number of commands sent to the database and can help keep related data changes together. For example, to add two new items to the `inventory_items` table:\n\n```sql\nINSERT INTO inventory_items (name, category, price, status, is_test, notes, last_updated)\nVALUES\n  ('Keychain', 'Accessories', 3.50, 'active', 0, NULL, '2026-02-10'),\n  ('Coffee Thermos', 'Kitchen', 18.00, 'draft', 0, 'New product', '2026-02-10');\n```\nThis statement adds both rows at once."
+    },
+    {
+      "id": "sketch-2",
+      "title": "Syntax for inserting multiple rows",
+      "bodyMarkdown": "The basic syntax for inserting multiple rows is:\n\n```sql\nINSERT INTO table_name (column1, column2, ...)\nVALUES\n  (value1a, value2a, ...),\n  (value1b, value2b, ...),\n  ... ;\n```\nEach set of parentheses represents a new row. All rows must have values for the same columns, in the same order."
+    },
+    {
+      "id": "sketch-3",
+      "title": "Using explicit column lists",
+      "bodyMarkdown": "It's best practice to specify the columns you are inserting into. This makes your SQL more robust, especially if the table structure changes later. For example:\n\n```sql\nINSERT INTO inventory_items (name, category, price, status, is_test, notes, last_updated)\nVALUES\n  ('Desk Organizer', 'Accessories', 12.00, 'active', 0, NULL, '2026-02-11'),\n  ('Lunch Box', 'Kitchen', 8.50, 'draft', 0, NULL, '2026-02-11');\n```\nThis ensures each value matches the correct column."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "q1-insert-multi-basic",
+      "kind": "code_input",
+      "title": "Insert two new inventory items in one statement",
+      "prompt": "Insert the following two items into the `inventory_items` table in a single SQL statement. Use the columns: name, category, price, status, is_test, notes, last_updated.\n\n- 'Travel Mug', 'Kitchen', 13.00, 'active', 0, NULL, '2026-02-12'\n- 'Sticker Sheet', 'Accessories', 2.50, 'draft', 0, 'Limited edition', '2026-02-12'\n\nWrite the SQL statement.",
+      "starterCode": "-- Write your SQL statement here",
+      "solutionCode": "INSERT INTO inventory_items (name, category, price, status, is_test, notes, last_updated)\nVALUES\n  ('Travel Mug', 'Kitchen', 13.00, 'active', 0, NULL, '2026-02-12'),\n  ('Sticker Sheet', 'Accessories', 2.50, 'draft', 0, 'Limited edition', '2026-02-12');",
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query",
+      "hint": "Focus on the SQL task being asked for, not on copying final query text.",
+      "help": {
+        "concept": "Build the query from the operation the exercise is testing.",
+        "hint_1": "Think about which clauses or functions are required for the task.",
+        "hint_2": "Construct the query based on what result the exercise expects, not by repeating exact solution wording."
+      }
+    },
+    {
+      "id": "q2-insert-multi-null",
+      "kind": "code_input",
+      "title": "Insert rows with NULL and default values",
+      "prompt": "Insert two new rows into `inventory_items` with the following data. Use NULL for notes and let status default for both rows. Use columns: name, category, price, is_test, notes, last_updated.\n\n- 'Sample Pen', 'Accessories', 1.25, 1, NULL, '2026-02-13'\n- 'Test Apron', 'Kitchen', 11.00, 1, NULL, '2026-02-13'\n\nWrite the SQL statement.",
+      "starterCode": "-- Write your SQL statement here",
+      "solutionCode": "INSERT INTO inventory_items (name, category, price, is_test, notes, last_updated)\nVALUES\n  ('Sample Pen', 'Accessories', 1.25, 1, NULL, '2026-02-13'),\n  ('Test Apron', 'Kitchen', 11.00, 1, NULL, '2026-02-13');",
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query",
+      "hint": "Focus on the SQL task being asked for, not the final solution text.",
+      "help": {
+        "concept": "Build the query from the operation the exercise is testing.",
+        "hint_1": "Eliminate choices or interpretations that do not match the task.",
+        "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+      }
+    },
+    {
+      "id": "q3-insert-multi-explicit-cols",
+      "kind": "code_input",
+      "title": "Insert with explicit columns and values",
+      "prompt": "Insert two new items into `inventory_items` with these details. Use only the columns: name, category, price, status, last_updated. Omit is_test and notes (let them default or be NULL).\n\n- 'Gift Card', 'Accessories', 20.00, 'active', '2026-02-14'\n- 'Sample Plate', 'Kitchen', 6.00, 'draft', '2026-02-14'\n\nWrite the SQL statement.",
+      "starterCode": "-- Write your SQL statement here",
+      "solutionCode": "INSERT INTO inventory_items (name, category, price, status, last_updated)\nVALUES\n  ('Gift Card', 'Accessories', 20.00, 'active', '2026-02-14'),\n  ('Sample Plate', 'Kitchen', 6.00, 'draft', '2026-02-14');",
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query",
+      "hint": "Focus on the SQL task being asked for, not on copying final query text.",
+      "help": {
+        "concept": "Build the query from the operation the exercise is testing.",
+        "hint_1": "Think about which clauses or functions are required for the task.",
+        "hint_2": "Construct the query based on what result the exercise expects, not by repeating exact solution wording."
+      }
+    },
+    {
+      "id": "q4-insert-multi-benefits",
+      "kind": "multi_choice",
+      "title": "Benefits of inserting multiple rows at once",
+      "prompt": "Which of the following are benefits of inserting multiple rows in a single SQL statement? Select all that apply.",
+      "options": [
+        "[object Object]",
+        "A command"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Think about efficiency and data consistency.",
+      "help": {
+        "concept": "Inserting multiple rows at once can improve performance and help keep related data changes together.",
+        "hint_1": "Consider how fewer statements affect speed and transaction safety.",
+        "hint_2": "Look for options about speed, fewer commands, and keeping data together."
+      }
+    },
+    {
+      "id": "q5-insert-multi-syntax",
+      "kind": "fill_blank_choice",
+      "title": "Syntax for multiple row insert",
+      "prompt": "Choose the best value for the first missing blank in the statement.",
+      "template": "The first missing value is [blank1].",
+      "choices": [
+        "comma",
+        "semicolon",
+        "period",
+        "colon"
+      ],
+      "correctValue": "comma",
+      "hint": "Think about how you separate items in a list.",
+      "help": {
+        "concept": "In SQL, each set of values for a new row is separated by a the missing term in the VALUES clause.",
+        "hint_1": "What punctuation separates each row's values in the VALUES clause?",
+        "hint_2": "It's the same symbol used to separate items in a list."
+      }
+    }
+  ]
+}

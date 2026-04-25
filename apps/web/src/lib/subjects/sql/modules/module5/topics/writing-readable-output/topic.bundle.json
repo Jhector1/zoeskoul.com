@@ -77,7 +77,7 @@
         "type": "sql_query",
         "datasetId": "sales_kpi",
         "resultShape": "table",
-        "solutionCode": "SELECT customer_name, quantity * unit_price AS order_value FROM orders;"
+        "solutionCode": "SELECT id, customer_name, quantity * unit_price AS line_total\nFROM orders;"
       }
     },
     {
@@ -92,7 +92,7 @@
         "type": "sql_query",
         "datasetId": "sales_kpi",
         "resultShape": "table",
-        "solutionCode": "SELECT customer_name, region, unit_price * 0.85 AS discounted_price FROM orders;"
+        "solutionCode": "SELECT customer_name AS \"Customer Name\", region AS \"Region\"\nFROM orders;"
       }
     },
     {

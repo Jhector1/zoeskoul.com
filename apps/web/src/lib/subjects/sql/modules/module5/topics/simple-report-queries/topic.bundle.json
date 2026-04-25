@@ -14,21 +14,21 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.sql.sql_module_5.simple-report-queries.cards.sketch0.title",
-      "sketchId": "sketch-1",
+      "sketchId": "sk1",
       "height": 420
     },
     {
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.sql.sql_module_5.simple-report-queries.cards.sketch1.title",
-      "sketchId": "sketch-2",
+      "sketchId": "sk2",
       "height": 420
     },
     {
       "id": "sketch2",
       "kind": "sketch",
       "titleKey": "topics.sql.sql_module_5.simple-report-queries.cards.sketch2.title",
-      "sketchId": "sketch-3",
+      "sketchId": "sk3",
       "height": 420
     },
     {
@@ -46,97 +46,103 @@
   ],
   "sketches": [
     {
-      "id": "sketch-1",
+      "id": "sk1",
       "archetype": "paragraph",
-      "titleKey": "sketches.sql.sql_module_5.simple-report-queries.sketch-1.title",
-      "bodyKey": "sketches.sql.sql_module_5.simple-report-queries.sketch-1.bodyMarkdown"
+      "titleKey": "sketches.sql.sql_module_5.simple-report-queries.sk1.title",
+      "bodyKey": "sketches.sql.sql_module_5.simple-report-queries.sk1.bodyMarkdown"
     },
     {
-      "id": "sketch-2",
+      "id": "sk2",
       "archetype": "paragraph",
-      "titleKey": "sketches.sql.sql_module_5.simple-report-queries.sketch-2.title",
-      "bodyKey": "sketches.sql.sql_module_5.simple-report-queries.sketch-2.bodyMarkdown"
+      "titleKey": "sketches.sql.sql_module_5.simple-report-queries.sk2.title",
+      "bodyKey": "sketches.sql.sql_module_5.simple-report-queries.sk2.bodyMarkdown"
     },
     {
-      "id": "sketch-3",
+      "id": "sk3",
       "archetype": "paragraph",
-      "titleKey": "sketches.sql.sql_module_5.simple-report-queries.sketch-3.title",
-      "bodyKey": "sketches.sql.sql_module_5.simple-report-queries.sketch-3.bodyMarkdown"
+      "titleKey": "sketches.sql.sql_module_5.simple-report-queries.sk3.title",
+      "bodyKey": "sketches.sql.sql_module_5.simple-report-queries.sk3.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "code-1",
+      "id": "q1",
       "kind": "code_input",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.simple-report-queries.quiz.code-1",
+      "messageBase": "topics.sql.sql_module_5.simple-report-queries.quiz.q1",
       "language": "sql",
       "fixedSqlDialect": "sqlite",
       "recipe": {
         "type": "sql_query",
         "datasetId": "sales_kpi",
         "resultShape": "table",
-        "solutionCode": "SELECT id, customer_name, quantity * unit_price AS line_total FROM orders;"
+        "solutionCode": "SELECT id, customer_name, quantity * unit_price AS line_total\nFROM orders;"
       }
     },
     {
-      "id": "code-2",
+      "id": "q2",
       "kind": "code_input",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.simple-report-queries.quiz.code-2",
+      "messageBase": "topics.sql.sql_module_5.simple-report-queries.quiz.q2",
       "language": "sql",
       "fixedSqlDialect": "sqlite",
       "recipe": {
         "type": "sql_query",
         "datasetId": "sales_kpi",
         "resultShape": "table",
-        "solutionCode": "SELECT customer_name, status, quantity * unit_price AS total_amount FROM orders WHERE status = 'paid';"
+        "solutionCode": "SELECT id, unit_price, unit_price * 0.85 AS discounted_price\nFROM orders;"
       }
     },
     {
-      "id": "single-1",
+      "id": "q3",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.simple-report-queries.quiz.single-1",
+      "messageBase": "topics.sql.sql_module_5.simple-report-queries.quiz.q3",
       "optionIds": [
         "a",
-        "b"
+        "b",
+        "c",
+        "d"
       ],
       "expected": {
         "kind": "single_choice",
-        "optionId": "a"
+        "optionId": "b"
       }
     },
     {
-      "id": "multi-1",
+      "id": "q4",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.simple-report-queries.quiz.multi-1",
+      "messageBase": "topics.sql.sql_module_5.simple-report-queries.quiz.q4",
       "optionIds": [
         "a",
-        "b"
+        "b",
+        "c",
+        "d"
       ],
       "expected": {
         "kind": "multi_choice",
         "optionIds": [
-          "a"
+          "a",
+          "b",
+          "d"
         ]
       }
     },
     {
-      "id": "fill-1",
+      "id": "q5",
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.simple-report-queries.quiz.fill-1",
+      "messageBase": "topics.sql.sql_module_5.simple-report-queries.quiz.q5",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "discounted_total"
+        "value": "quantity * 2"
       }
     }
   ]

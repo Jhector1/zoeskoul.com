@@ -5,14 +5,21 @@
       "code": "SQL_REWROTE_SKETCH_TO_MODULE_DATASET",
       "category": "dataset",
       "severity": "medium",
-      "field": "sketchBlocks.sketch-1.bodyMarkdown",
+      "field": "sketchBlocks.sk1.bodyMarkdown",
       "message": "Rewrote sketch SQL example to use the module runtime dataset instead of off-schema or exercise-scope SQL."
     },
     {
       "code": "SQL_REWROTE_SKETCH_TO_MODULE_DATASET",
       "category": "dataset",
       "severity": "medium",
-      "field": "sketchBlocks.sketch-2.bodyMarkdown",
+      "field": "sketchBlocks.sk2.bodyMarkdown",
+      "message": "Rewrote sketch SQL example to use the module runtime dataset instead of off-schema or exercise-scope SQL."
+    },
+    {
+      "code": "SQL_REWROTE_SKETCH_TO_MODULE_DATASET",
+      "category": "dataset",
+      "severity": "medium",
+      "field": "sketchBlocks.sk3.bodyMarkdown",
       "message": "Rewrote sketch SQL example to use the module runtime dataset instead of off-schema or exercise-scope SQL."
     }
   ]

@@ -1,0 +1,27 @@
+{
+  "topicId": "default-values",
+  "ok": true,
+  "issues": [
+    {
+      "code": "SQL_RUNNER_NOT_CONFIGURED",
+      "category": "execution",
+      "severity": "warn",
+      "exerciseId": "insert-defaults-code-1",
+      "message": "No shared SQL runner is configured for compiler-side semantic validation."
+    },
+    {
+      "code": "SQL_RUNNER_NOT_CONFIGURED",
+      "category": "execution",
+      "severity": "warn",
+      "exerciseId": "insert-null-vs-default-code-2",
+      "message": "No shared SQL runner is configured for compiler-side semantic validation."
+    },
+    {
+      "code": "SQL_RUNNER_NOT_CONFIGURED",
+      "category": "execution",
+      "severity": "warn",
+      "exerciseId": "insert-all-defaults-code-3",
+      "message": "No shared SQL runner is configured for compiler-side semantic validation."
+    }
+  ]
+}

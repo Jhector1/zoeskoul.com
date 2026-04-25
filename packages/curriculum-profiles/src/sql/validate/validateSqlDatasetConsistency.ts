@@ -8,6 +8,7 @@ import type {
 import { getSqlDataset } from "../datasets/index.js";
 
 const SQL_KEYWORDS = new Set([
+    // Query
     "select",
     "from",
     "where",
@@ -21,6 +22,11 @@ const SQL_KEYWORDS = new Set([
     "having",
     "limit",
     "offset",
+    "distinct",
+    "asc",
+    "desc",
+
+    // Joins
     "join",
     "inner",
     "left",
@@ -29,14 +35,8 @@ const SQL_KEYWORDS = new Set([
     "outer",
     "cross",
     "on",
-    "case",
-    "when",
-    "then",
-    "else",
-    "end",
-    "distinct",
-    "asc",
-    "desc",
+
+    // Conditions
     "is",
     "null",
     "between",
@@ -44,12 +44,23 @@ const SQL_KEYWORDS = new Set([
     "like",
     "glob",
     "exists",
+
+    // CASE
+    "case",
+    "when",
+    "then",
+    "else",
+    "end",
+
+    // Set operations / CTE
     "union",
     "all",
     "intersect",
     "except",
     "with",
     "recursive",
+
+    // Window
     "over",
     "partition",
     "rows",
@@ -59,10 +70,50 @@ const SQL_KEYWORDS = new Set([
     "preceding",
     "following",
     "unbounded",
+
+    // Literals / expressions
     "true",
     "false",
     "cast",
     "collate",
+
+    // INSERT / UPDATE / DELETE
+    "insert",
+    "into",
+    "values",
+    "value",
+    "default",
+    "update",
+    "set",
+    "delete",
+    "returning",
+
+    // SQLite UPSERT / conflict handling
+    "conflict",
+    "replace",
+    "ignore",
+    "abort",
+    "fail",
+    "rollback",
+    "do",
+    "nothing",
+    "excluded",
+
+    // DDL, useful if beginner lessons include schema examples
+    "create",
+    "table",
+    "if",
+    "primary",
+    "key",
+    "foreign",
+    "references",
+    "constraint",
+    "unique",
+    "check",
+    "drop",
+    "alter",
+    "add",
+    "column",
 ]);
 
 const SQL_TYPE_NAMES = new Set([

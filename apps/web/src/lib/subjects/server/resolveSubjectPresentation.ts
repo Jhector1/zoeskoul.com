@@ -6,8 +6,15 @@ import {
     getRawReviewModule,
     getRawReviewModuleRows,
 } from "@/lib/subjects/registry";
-import type {ReviewCard, ReviewModule, ReviewProjectSpec, ReviewQuizSpec, ReviewTopicShape} from "@/lib/subjects/types";
-import {ManifestRuntimeDefaults} from "@/lib/subjects/_core/manifestTypes";
+import type {
+    ReviewCard,
+    ReviewModule,
+    ReviewModuleSection,
+    ReviewProjectSpec,
+    ReviewQuizSpec,
+    ReviewTopicShape,
+} from "@/lib/subjects/types";
+import type { ManifestRuntimeDefaults } from "@/lib/subjects/_core/manifestTypes";
 
 function indexBy<T extends { slug: string }>(items: readonly T[]) {
     return Object.fromEntries(items.map((x) => [x.slug, x])) as Record<string, T>;
@@ -83,6 +90,7 @@ export type ResolvedReviewModuleRow = {
     order: number;
     title: string;
 };
+
 function normalizeRuntimeDefaults(
     value: unknown,
 ): ManifestRuntimeDefaults | null | undefined {
@@ -163,6 +171,18 @@ function normalizeTopic(topic: ReviewTopicShape): ReviewTopicShape {
         cards: topic.cards.map((card) => normalizeCard(card)),
     };
 }
+
+function normalizeSection(section: ReviewModuleSection): ReviewModuleSection {
+    return {
+        ...section,
+        summary: section.summary ?? null,
+        description: section.description ?? section.summary ?? null,
+        topics: section.topics.map((topic) =>
+            normalizeTopic(topic as ReviewTopicShape),
+        ),
+    };
+}
+
 export async function getResolvedSubjectCatalogMap(): Promise<ResolvedSubjectCatalogMap> {
     const out: ResolvedSubjectCatalogMap = {};
 
@@ -231,6 +251,7 @@ export async function getResolvedSubjectModulesFromManifest(
     const modules = await Promise.all(
         rawModules.map(async (m) => {
             const resolved = await resolveTaggedOnServer(m);
+
             return {
                 slug: resolved.slug,
                 title: resolved.title,
@@ -364,6 +385,7 @@ export async function getResolvedReviewModuleRows(
     return Promise.all(
         raw.map(async (row) => {
             const resolved = await resolveTaggedOnServer(row);
+
             return {
                 slug: resolved.slug,
                 order: resolved.order,
@@ -382,15 +404,22 @@ export async function getResolvedReviewModule(
 
     const resolved = await resolveTaggedOnServer(raw);
 
+    const topics = resolved.topics.map((topic) =>
+        normalizeTopic(topic as ReviewTopicShape),
+    );
+
+    const sections = ((resolved.sections ?? []) as ReviewModuleSection[]).map(
+        normalizeSection,
+    );
+
     return {
         id: resolved.id,
         title: resolved.title,
         subtitle: resolved.subtitle ?? null,
         startPracticeSectionSlug: resolved.startPracticeSectionSlug,
         runtimeDefaults: normalizeRuntimeDefaults(resolved.runtimeDefaults) ?? null,
-        topics: resolved.topics.map((topic) =>
-            normalizeTopic(topic as ReviewTopicShape),
-        ),
+        topics,
+        sections,
     } satisfies ReviewModule;
 }
 

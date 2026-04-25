@@ -5,28 +5,23 @@
   "sketchBlocks": [
     {
       "id": "sketch-1",
-      "title": "What are number functions?",
-      "bodyMarkdown": "Number functions in SQL are built-in operations that perform calculations or transformations on numeric data. Examples include rounding numbers, finding minimum or maximum values, and calculating averages. These functions help you analyze and present numeric data more effectively in your reports."
+      "title": "What are number functions in SQL?",
+      "bodyMarkdown": "Number functions in SQL are built-in functions that perform operations on numeric data. They can be used to round numbers, find minimum or maximum values, calculate averages, and more. For example, you can use `ROUND()` to round a value, or `ABS()` to get the absolute value of a number. These functions are often used in SELECT statements to transform or summarize data.\n\nExample:\n\n```sql\nSELECT id, unit_price, ROUND(unit_price) AS rounded_price\nFROM orders;\n```\n\nThis query selects the order id, the original unit price, and the rounded unit price for each order."
     },
     {
       "id": "sketch-2",
-      "title": "Common number functions in SQL",
-      "bodyMarkdown": "Some common number functions in SQL include:\n\n- `ROUND(value, decimals)`: Rounds a number to a specified number of decimal places.\n- `ABS(value)`: Returns the absolute (positive) value.\n- `CEIL(value)` or `CEILING(value)`: Rounds a number up to the nearest integer.\n- `FLOOR(value)`: Rounds a number down to the nearest integer.\n\nFor example, to round the `unit_price` in the `orders` table to the nearest integer:\n\n```sql\nSELECT unit_price, ROUND(unit_price) AS rounded_price FROM orders;\n```"
-    },
-    {
-      "id": "sketch-3",
-      "title": "Using number functions with calculated columns",
-      "bodyMarkdown": "You can combine number functions with arithmetic expressions to create calculated columns. For instance, to calculate the total price for each order and round it to two decimal places:\n\n```sql\nSELECT id, quantity, unit_price, ROUND(quantity * unit_price, 2) AS total_rounded\nFROM orders;\n```\n\nThis multiplies `quantity` by `unit_price` for each row and rounds the result to two decimal places."
+      "title": "Using arithmetic and number functions together",
+      "bodyMarkdown": "You can combine arithmetic operations with number functions to create more complex calculated columns. For example, you might want to calculate the total price for each order and then round it to the nearest whole number.\n\nExample:\n\n```sql\nSELECT id, quantity * unit_price AS total, ROUND(quantity * unit_price) AS rounded_total\nFROM orders;\n```\n\nThis query multiplies `quantity` by `unit_price` to get the total, and then uses `ROUND()` to round the result."
     }
   ],
   "quizDraft": [
     {
-      "id": "exercise-1",
+      "id": "q1-code-input",
       "kind": "code_input",
-      "title": "Round the unit price",
-      "prompt": "Write a SQL query to select the `id`, `unit_price`, and a new column named `rounded_price` that shows the `unit_price` rounded to the nearest integer for each order in the `orders` table.",
-      "starterCode": "SELECT id, unit_price\n-- Add your rounded column here\nFROM orders;",
-      "solutionCode": "SELECT id, unit_price, ROUND(unit_price) AS rounded_price\nFROM orders;",
+      "title": "Calculate and round total order value",
+      "prompt": "Write a SQL query to select the `id` and the total value of each order (quantity multiplied by unit_price), rounded to the nearest whole number. Name the rounded column `rounded_total`.",
+      "starterCode": "SELECT id, \n       -- your code here\nFROM orders;",
+      "solutionCode": "SELECT id, ROUND(quantity * unit_price) AS rounded_total\nFROM orders;",
       "datasetId": "sales_kpi",
       "recipeType": "sql_query",
       "hint": "Focus on the concept being tested.",
@@ -37,12 +32,12 @@
       }
     },
     {
-      "id": "exercise-2",
+      "id": "q2-code-input",
       "kind": "code_input",
-      "title": "Calculate and round total price",
-      "prompt": "Write a SQL query to select the `id`, `quantity`, `unit_price`, and a new column named `total_rounded` that multiplies `quantity` by `unit_price` and rounds the result to two decimal places.",
-      "starterCode": "SELECT id, quantity, unit_price\n-- Add your calculated and rounded column here\nFROM orders;",
-      "solutionCode": "SELECT id, quantity, unit_price, ROUND(quantity * unit_price, 2) AS total_rounded\nFROM orders;",
+      "title": "Find the minimum unit price",
+      "prompt": "Write a SQL query to find the minimum unit price from the `orders` table. Name the result column `min_price`.",
+      "starterCode": "SELECT -- your code here\nFROM orders;",
+      "solutionCode": "SELECT MIN(unit_price) AS min_price\nFROM orders;",
       "datasetId": "sales_kpi",
       "recipeType": "sql_query",
       "hint": "Focus on the concept being tested.",
@@ -53,10 +48,10 @@
       }
     },
     {
-      "id": "exercise-3",
+      "id": "q3-single-choice",
       "kind": "single_choice",
-      "title": "Understanding ABS function",
-      "prompt": "What does the SQL function ABS(value) do?",
+      "title": "Which SQL function returns the absolute value of a number?",
+      "prompt": "Which of the following SQL functions returns the absolute value of a number?",
       "options": [
         "[object Object]",
         "A command"
@@ -64,18 +59,18 @@
       "correctOptionIds": [
         "a"
       ],
-      "hint": "Think about what happens to negative numbers.",
+      "hint": "Think about which function removes the sign from a number.",
       "help": {
-        "concept": "The ABS function returns the absolute value of a number, which is always non-negative.",
-        "hint_1": "ABS(-5) becomes 5.",
-        "hint_2": "It removes the sign from the number."
+        "concept": "The ABS() function returns the non-negative value of a number, regardless of its original sign.",
+        "hint_1": "Look for the function that always gives a positive result.",
+        "hint_2": "It's commonly used to turn negative numbers into positive ones."
       }
     },
     {
-      "id": "exercise-4",
+      "id": "q4-multi-choice",
       "kind": "multi_choice",
-      "title": "Choose all correct uses of number functions",
-      "prompt": "Which of the following are correct uses of number functions in SQL? Select all that apply.",
+      "title": "Which of the following are number functions in SQL?",
+      "prompt": "Select all options that are number functions in SQL.",
       "options": [
         "[object Object]",
         "A command"
@@ -83,32 +78,31 @@
       "correctOptionIds": [
         "a"
       ],
-      "hint": "Look for statements that use number functions correctly.",
+      "hint": "Think about functions that operate on numeric data.",
       "help": {
-        "concept": "Number functions like ROUND, ABS, and FLOOR are used to manipulate numeric data in SQL queries.",
-        "hint_1": "Check if the function is applied to a numeric column and used in SELECT.",
-        "hint_2": "Some options may use the wrong function or syntax."
+        "concept": "Number functions perform calculations or transformations on numeric values, such as rounding, finding minimums, or getting absolute values.",
+        "hint_1": "Consider functions like ROUND, MIN, and ABS.",
+        "hint_2": "Exclude functions that work only with text or dates."
       }
     },
     {
-      "id": "exercise-5",
+      "id": "q5-fill-blank-choice",
       "kind": "fill_blank_choice",
-      "title": "Fill in the blank: rounding to decimals",
-      "prompt": "Choose the best value for the first missing blank in the statement.",
-      "template": "The first missing value is [blank1].",
+      "title": "Fill in the blank: Rounding a calculated column",
+      "prompt": "Complete the SQL expression to round the result of multiplying quantity by unit_price.",
+      "template": "SELECT id, _____ AS rounded_total FROM orders;",
       "choices": [
-        "0",
-        "1",
-        "2",
-        "quantity",
-        "unit_price"
+        "ROUND(quantity * unit_price)",
+        "MIN(quantity * unit_price)",
+        "ABS(quantity * unit_price)",
+        "SUM(quantity * unit_price)"
       ],
-      "correctValue": "2",
-      "hint": "Think about the number of decimal places you want.",
+      "correctValue": "ROUND(quantity * unit_price)",
+      "hint": "Wrap the multiplication in a rounding function.",
       "help": {
-        "concept": "The second argument of the ROUND function specifies how many decimal places to keep.",
-        "hint_1": "To round to two decimal places, use the number the missing term.",
-        "hint_2": "The blank should be a number, not a column name."
+        "concept": "To round a calculated value, use the ROUND() function and place the expression inside the parentheses.",
+        "hint_1": "The function should look like ROUND(expression).",
+        "hint_2": "The expression inside should be quantity * unit_price."
       }
     }
   ]

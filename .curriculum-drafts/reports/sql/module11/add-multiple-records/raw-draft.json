@@ -1,0 +1,122 @@
+{
+  "title": "Add multiple records",
+  "summary": "Learn how to insert multiple rows into a table in a single SQL statement, using explicit column lists for clarity and safety.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sk1",
+      "title": "Inserting Multiple Rows at Once",
+      "bodyMarkdown": "You can add several new rows to a table with a single `INSERT` statement by listing multiple sets of values. This is more efficient than running separate `INSERT` statements for each row.\n\nFor example, to add two new inventory items:\n\n```sql\nINSERT INTO inventory_items (name, category, price, status, is_test, last_updated)\nVALUES\n  ('Enamel Pin', 'Accessories', 3.50, 'active', 0, '2026-02-10'),\n  ('Desk Mat', 'Decor', 22.00, 'draft', 0, '2026-02-10');\n```\n\nEach set of values in parentheses represents a new row. Make sure the order and number of values match the columns listed."
+    },
+    {
+      "id": "sk2",
+      "title": "Why Use Column Lists?",
+      "bodyMarkdown": "Specifying the column names in your `INSERT` statement makes your code safer and easier to read. If the table structure changes, or if columns have default values, naming columns ensures the right data goes into the right place.\n\nFor example:\n\n```sql\nINSERT INTO inventory_items (name, category, price)\nVALUES ('Keychain', 'Accessories', 2.99);\n```\n\nHere, columns like `status`, `is_test`, and `last_updated` will use their default values."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "q1",
+      "kind": "code_input",
+      "title": "Insert two new items in one statement",
+      "prompt": "Write an SQL statement to insert two new rows into the `inventory_items` table. Add:\n- 'Notebook', 'Accessories', 5.25, 'active', 0, '2026-02-12'\n- 'Ceramic Plate', 'Kitchen', 13.00, 'draft', 0, '2026-02-12'\n\nUse an explicit column list: (name, category, price, status, is_test, last_updated).",
+      "hint": "Use INSERT INTO with a column list and two sets of values.",
+      "help": {
+        "concept": "You can insert multiple rows by listing several value sets, separated by commas, after the VALUES keyword.",
+        "hint_1": "Start with INSERT INTO, specify the columns, then VALUES, and provide both rows in parentheses.",
+        "hint_2": "Each row's values should be in parentheses, separated by commas, matching the column order."
+      },
+      "starterCode": "-- Write your SQL statement below\n",
+      "solutionCode": "INSERT INTO inventory_items (name, category, price, status, is_test, last_updated)\nVALUES\n  ('Notebook', 'Accessories', 5.25, 'active', 0, '2026-02-12'),\n  ('Ceramic Plate', 'Kitchen', 13.00, 'draft', 0, '2026-02-12');",
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "q2",
+      "kind": "code_input",
+      "title": "Insert with default values",
+      "prompt": "Insert two new items into `inventory_items` with only the columns: name, category, and price. Add:\n- 'Glass Cup', 'Kitchen', 6.75\n- 'Poster Tube', 'Accessories', 2.50\n\nLet all other columns use their default values.",
+      "hint": "List only the columns you want to provide. The rest will use defaults.",
+      "help": {
+        "concept": "If you omit columns in the INSERT statement, their default values (if any) are used for those columns.",
+        "hint_1": "Write INSERT INTO with (name, category, price), then VALUES with both rows.",
+        "hint_2": "Don't include columns like status or last_updated; they will be filled automatically."
+      },
+      "starterCode": "-- Write your SQL statement below\n",
+      "solutionCode": "INSERT INTO inventory_items (name, category, price)\nVALUES\n  ('Glass Cup', 'Kitchen', 6.75),\n  ('Poster Tube', 'Accessories', 2.50);",
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "q3",
+      "kind": "code_input",
+      "title": "Insert a row with a NULL value",
+      "prompt": "Insert a new row into `inventory_items` for an item where the notes field is unknown. Add:\n- name: 'Sample Bag', category: 'Accessories', price: 8.00, status: 'active', is_test: 0, notes: NULL, last_updated: '2026-02-15'\n\nWrite a single-row INSERT statement using an explicit column list.",
+      "hint": "Include NULL for the notes column in your VALUES list.",
+      "help": {
+        "concept": "You can insert NULL for columns where the value is unknown or not applicable, as long as the column allows NULLs.",
+        "hint_1": "List all columns in the INSERT statement, and use NULL for the notes value.",
+        "hint_2": "Remember to match the order of columns and values, and use NULL without quotes."
+      },
+      "starterCode": "-- Write your SQL statement below\n",
+      "solutionCode": "INSERT INTO inventory_items (name, category, price, status, is_test, notes, last_updated)\nVALUES ('Sample Bag', 'Accessories', 8.00, 'active', 0, NULL, '2026-02-15');",
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "q4",
+      "kind": "multi_choice",
+      "title": "Benefits of inserting multiple rows at once",
+      "prompt": "Which of the following are benefits of inserting multiple rows in a single SQL statement? Select all that apply.",
+      "hint": "Think about efficiency and code clarity.",
+      "help": {
+        "concept": "Inserting multiple rows at once can improve performance and make code easier to manage.",
+        "hint_1": "Consider how fewer statements affect speed and readability.",
+        "hint_2": "Some options may not be true for all databases, but focus on general benefits."
+      },
+      "options": [
+        {
+          "id": "a",
+          "content": "It reduces the number of database calls."
+        },
+        {
+          "id": "b",
+          "content": "It can improve performance for bulk inserts."
+        },
+        {
+          "id": "c",
+          "content": "It guarantees all rows will be inserted, even if one fails."
+        },
+        {
+          "id": "d",
+          "content": "It makes the SQL code shorter and easier to read."
+        }
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ]
+    },
+    {
+      "id": "q5",
+      "kind": "fill_blank_choice",
+      "title": "Default values in INSERT statements",
+      "prompt": "When you omit a column in an INSERT statement, the database will use the column's ____ if one is defined.",
+      "hint": "Think about what the database uses when you don't provide a value.",
+      "help": {
+        "concept": "Columns can have default values set in the table definition. If you don't specify a value, the default is used.",
+        "hint_1": "Look for a term that means a value automatically provided by the database.",
+        "hint_2": "It's the value set in the table schema for missing data."
+      },
+      "template": "When you omit a column in an INSERT statement, the database will use the column's ____ if one is defined.",
+      "choices": [
+        "default value",
+        "primary key",
+        "index",
+        "constraint"
+      ],
+      "correctValue": "default value"
+    }
+  ]
+}

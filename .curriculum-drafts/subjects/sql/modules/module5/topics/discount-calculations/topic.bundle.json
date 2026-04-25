@@ -64,7 +64,7 @@
         "type": "sql_query",
         "datasetId": "sales_kpi",
         "resultShape": "table",
-        "solutionCode": "SELECT id, customer_name, unit_price,\n  unit_price * 0.8 AS discounted_price\nFROM orders;"
+        "solutionCode": "SELECT id, customer_name, unit_price, \n       unit_price * 0.8 AS discounted_price\nFROM orders;"
       }
     },
     {
@@ -79,7 +79,7 @@
         "type": "sql_query",
         "datasetId": "sales_kpi",
         "resultShape": "table",
-        "solutionCode": "SELECT id, quantity, unit_price,\n  quantity * unit_price * 0.9 AS discounted_total\nFROM orders;"
+        "solutionCode": "SELECT id, quantity, unit_price, \n       quantity * unit_price * 0.9 AS discounted_total\nFROM orders;"
       }
     },
     {
@@ -90,7 +90,9 @@
       "messageBase": "topics.sql.sql_module_5.discount-calculations.quiz.q3",
       "optionIds": [
         "a",
-        "b"
+        "b",
+        "c",
+        "d"
       ],
       "expected": {
         "kind": "single_choice",
@@ -105,12 +107,15 @@
       "messageBase": "topics.sql.sql_module_5.discount-calculations.quiz.q4",
       "optionIds": [
         "a",
-        "b"
+        "b",
+        "c",
+        "d"
       ],
       "expected": {
         "kind": "multi_choice",
         "optionIds": [
-          "a"
+          "a",
+          "b"
         ]
       }
     },
@@ -123,7 +128,7 @@
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "0.7"
+        "value": "0.85"
       }
     }
   ]

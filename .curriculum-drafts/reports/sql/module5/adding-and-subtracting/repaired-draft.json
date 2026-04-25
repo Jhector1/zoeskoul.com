@@ -1,32 +1,32 @@
 {
   "title": "Adding and subtracting",
-  "summary": "Learn how to use addition and subtraction in SQL calculated columns to create new values from existing data.",
+  "summary": "Learn how to use addition and subtraction in SQL calculated columns to create new values in your queries.",
   "minutes": 15,
   "sketchBlocks": [
     {
-      "id": "sk1",
+      "id": "sketch-1",
       "title": "What are calculated columns?",
-      "bodyMarkdown": "A calculated column in SQL is a value you create on the fly in your SELECT statement using arithmetic or expressions. For example, you might want to calculate the total price for each order by multiplying the quantity by the unit price. You can also add or subtract values to create new columns that aren't stored in the original table.\n\nExample:\n\n```sql\nSELECT id, quantity, unit_price, quantity * unit_price AS line_total\nFROM orders;\n```\n\nThis query creates a new column called `line_total` for each order."
+      "bodyMarkdown": "A calculated column in SQL is a value you create on the fly in your SELECT statement using arithmetic or expressions. For example, you can multiply the `quantity` and `unit_price` columns to get a total for each order:\n\n```sql\nSELECT id, customer_name, quantity, unit_price, quantity * unit_price AS line_total\nFROM orders;\n```\n\nThis query adds a new column called `line_total` that isn't stored in the table, but is calculated for each row."
     },
     {
-      "id": "sk2",
-      "title": "Adding values in SQL expressions",
-      "bodyMarkdown": "You can use the `+` operator to add values in SQL. For example, if you want to add a fixed shipping fee to each order's total, you can do:\n\n```sql\nSELECT id, quantity * unit_price AS subtotal, (quantity * unit_price) + 5 AS total_with_shipping\nFROM orders;\n```\n\nThis adds 5 to each order's subtotal."
+      "id": "sketch-2",
+      "title": "Adding and subtracting in SELECT",
+      "bodyMarkdown": "You can use `+` to add and `-` to subtract columns or values in SQL. For example, to give a $5 discount on every order, subtract 5 from the calculated total:\n\n```sql\nSELECT id, customer_name, quantity, unit_price, (quantity * unit_price) - 5 AS discounted_total\nFROM orders;\n```\n\nYou can also add a fixed fee, like a $2 shipping charge:\n\n```sql\nSELECT id, customer_name, (quantity * unit_price) + 2 AS total_with_shipping\nFROM orders;\n```"
     },
     {
-      "id": "sk3",
-      "title": "Subtracting values in SQL expressions",
-      "bodyMarkdown": "The `-` operator lets you subtract values. For example, to show the effect of a discount:\n\n```sql\nSELECT id, quantity * unit_price AS subtotal, (quantity * unit_price) - 10 AS after_discount\nFROM orders;\n```\n\nThis subtracts 10 from each order's subtotal."
+      "id": "sketch-3",
+      "title": "Using aliases for clarity",
+      "bodyMarkdown": "When you create a calculated column, use `AS` to give it a clear name (alias). This makes your results easier to read and understand. For example:\n\n```sql\nSELECT id, customer_name, quantity * unit_price AS line_total\nFROM orders;\n```\n\nHere, `line_total` is the alias for the calculated value."
     }
   ],
   "quizDraft": [
     {
-      "id": "q1",
+      "id": "quiz-1",
       "kind": "code_input",
-      "title": "Calculate the total price for each order",
-      "prompt": "Write a SQL query to select the id, quantity, unit_price, and a calculated column named total_price that multiplies quantity by unit_price for each order in the orders table.",
-      "starterCode": "SELECT id, quantity, unit_price\nFROM orders;",
-      "solutionCode": "SELECT id, quantity, unit_price, quantity * unit_price AS total_price\nFROM orders;",
+      "title": "Calculate the line total for each order",
+      "prompt": "Write a SQL query to show each order's id, customer_name, quantity, unit_price, and a calculated column called line_total (quantity * unit_price) from the orders table.",
+      "starterCode": "-- Write your query below",
+      "solutionCode": "SELECT id, customer_name, quantity, unit_price, quantity * unit_price AS line_total\nFROM orders;",
       "datasetId": "sales_kpi",
       "recipeType": "sql_query",
       "hint": "Focus on the concept being tested.",
@@ -37,12 +37,12 @@
       }
     },
     {
-      "id": "q2",
+      "id": "quiz-2",
       "kind": "code_input",
-      "title": "Show the total after subtracting a fixed discount",
-      "prompt": "Write a SQL query to select id, quantity, unit_price, and a new column called discounted_total that subtracts 5 from the total price (quantity * unit_price) for each order.",
-      "starterCode": "SELECT id, quantity, unit_price\nFROM orders;",
-      "solutionCode": "SELECT id, quantity, unit_price, (quantity * unit_price - 5) AS discounted_total\nFROM orders;",
+      "title": "Subtract a fixed discount from each order",
+      "prompt": "Write a SQL query to show id, customer_name, and a new column called discounted_total that subtracts 10 from the line total (quantity * unit_price) for each order.",
+      "starterCode": "-- Write your query below",
+      "solutionCode": "SELECT id, customer_name, (quantity * unit_price) - 10 AS discounted_total\nFROM orders;",
       "datasetId": "sales_kpi",
       "recipeType": "sql_query",
       "hint": "Focus on the concept being tested.",
@@ -53,10 +53,10 @@
       }
     },
     {
-      "id": "q3",
+      "id": "quiz-3",
       "kind": "single_choice",
-      "title": "Which operator is used for addition in SQL expressions?",
-      "prompt": "Which symbol is used to add two values in a SQL SELECT statement?",
+      "title": "Which operator is used for subtraction in SQL expressions?",
+      "prompt": "Which symbol do you use to subtract one column or value from another in a SQL SELECT statement?",
       "options": [
         "[object Object]",
         "A command"
@@ -64,18 +64,18 @@
       "correctOptionIds": [
         "a"
       ],
-      "hint": "It's the same as in basic math.",
+      "hint": "It's the same symbol used for subtraction in basic arithmetic.",
       "help": {
-        "concept": "SQL uses standard arithmetic symbols for addition and subtraction.",
-        "hint_1": "Think about how you add numbers in a calculator.",
-        "hint_2": "The plus sign is used for addition."
+        "concept": "SQL uses standard arithmetic operators: + for addition, - for subtraction, * for multiplication, and / for division.",
+        "hint_1": "Think about which symbol you use to subtract numbers in math.",
+        "hint_2": "It's not the plus, multiply, or divide symbol."
       }
     },
     {
-      "id": "q4",
+      "id": "quiz-4",
       "kind": "multi_choice",
-      "title": "Which of the following are valid uses of subtraction in SQL calculated columns?",
-      "prompt": "Select all statements that correctly use subtraction in a SQL SELECT statement.",
+      "title": "Which of the following are valid calculated columns in SQL?",
+      "prompt": "Select all the expressions below that could be used as calculated columns in a SELECT statement.",
       "options": [
         "[object Object]",
         "A command"
@@ -83,31 +83,32 @@
       "correctOptionIds": [
         "a"
       ],
-      "hint": "Look for correct use of the - operator and valid SQL syntax.",
+      "hint": "Consider which operators are valid for arithmetic in SQL.",
       "help": {
-        "concept": "Subtraction in SQL is done with the - operator, and expressions can be used in SELECT.",
-        "hint_1": "Check if the subtraction is between valid columns or values.",
-        "hint_2": "Valid statements use column names and the - operator in SELECT."
+        "concept": "SQL supports +, -, *, and / for arithmetic calculations in SELECT statements. The & operator is not used for arithmetic in SQL.",
+        "hint_1": "Look for expressions that use standard math operators.",
+        "hint_2": "The & symbol is not an arithmetic operator in SQL."
       }
     },
     {
-      "id": "q5",
+      "id": "quiz-5",
       "kind": "fill_blank_choice",
       "title": "Fill in the blank: Adding a fixed fee",
       "prompt": "Choose the best value for the first missing blank in the statement.",
       "template": "The first missing value is [blank1].",
       "choices": [
-        "+",
-        "-",
-        "*",
-        "/"
+        "3",
+        "quantity",
+        "unit_price",
+        "shipping",
+        "fee"
       ],
-      "correctValue": "+",
-      "hint": "Focus on the missing SQL concept rather than the exact missing word.",
+      "correctValue": "3",
+      "hint": "The blank should be filled with the fixed fee amount.",
       "help": {
-        "concept": "The blank should be filled with the SQL term that matches the job the statement is trying to perform.",
-        "hint_1": "Think about what the missing part is supposed to do in the statement.",
-        "hint_2": "Choose the SQL term that best completes the meaning of the statement."
+        "concept": "To add a fixed value to a calculated column, simply use the number in the expression.",
+        "hint_1": "You want to add the number the missing term to the calculated total.",
+        "hint_2": "Don't use a column name; use the actual fee amount."
       }
     }
   ]

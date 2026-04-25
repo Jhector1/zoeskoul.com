@@ -14,21 +14,21 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.sql.sql_module_5.math-in-sql.cards.sketch0.title",
-      "sketchId": "math-sql-basics",
+      "sketchId": "sketch-1",
       "height": 420
     },
     {
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.sql.sql_module_5.math-in-sql.cards.sketch1.title",
-      "sketchId": "aliases-in-sql",
+      "sketchId": "sketch-2",
       "height": 420
     },
     {
       "id": "sketch2",
       "kind": "sketch",
       "titleKey": "topics.sql.sql_module_5.math-in-sql.cards.sketch2.title",
-      "sketchId": "math-null-values",
+      "sketchId": "sketch-3",
       "height": 420
     },
     {
@@ -46,97 +46,102 @@
   ],
   "sketches": [
     {
-      "id": "math-sql-basics",
+      "id": "sketch-1",
       "archetype": "paragraph",
-      "titleKey": "sketches.sql.sql_module_5.math-in-sql.math-sql-basics.title",
-      "bodyKey": "sketches.sql.sql_module_5.math-in-sql.math-sql-basics.bodyMarkdown"
+      "titleKey": "sketches.sql.sql_module_5.math-in-sql.sketch-1.title",
+      "bodyKey": "sketches.sql.sql_module_5.math-in-sql.sketch-1.bodyMarkdown"
     },
     {
-      "id": "aliases-in-sql",
+      "id": "sketch-2",
       "archetype": "paragraph",
-      "titleKey": "sketches.sql.sql_module_5.math-in-sql.aliases-in-sql.title",
-      "bodyKey": "sketches.sql.sql_module_5.math-in-sql.aliases-in-sql.bodyMarkdown"
+      "titleKey": "sketches.sql.sql_module_5.math-in-sql.sketch-2.title",
+      "bodyKey": "sketches.sql.sql_module_5.math-in-sql.sketch-2.bodyMarkdown"
     },
     {
-      "id": "math-null-values",
+      "id": "sketch-3",
       "archetype": "paragraph",
-      "titleKey": "sketches.sql.sql_module_5.math-in-sql.math-null-values.title",
-      "bodyKey": "sketches.sql.sql_module_5.math-in-sql.math-null-values.bodyMarkdown"
+      "titleKey": "sketches.sql.sql_module_5.math-in-sql.sketch-3.title",
+      "bodyKey": "sketches.sql.sql_module_5.math-in-sql.sketch-3.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "calc-total-code",
+      "id": "code-1",
       "kind": "code_input",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.math-in-sql.quiz.calc-total-code",
+      "messageBase": "topics.sql.sql_module_5.math-in-sql.quiz.code-1",
       "language": "sql",
       "fixedSqlDialect": "sqlite",
       "recipe": {
         "type": "sql_query",
         "datasetId": "sales_kpi",
         "resultShape": "table",
-        "solutionCode": "SELECT id, customer_name, quantity * unit_price AS order_total\nFROM orders;"
+        "solutionCode": "SELECT id, quantity, unit_price, quantity * unit_price AS line_total\nFROM orders;"
       }
     },
     {
-      "id": "discounted-price-code",
+      "id": "code-2",
       "kind": "code_input",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.math-in-sql.quiz.discounted-price-code",
+      "messageBase": "topics.sql.sql_module_5.math-in-sql.quiz.code-2",
       "language": "sql",
       "fixedSqlDialect": "sqlite",
       "recipe": {
         "type": "sql_query",
         "datasetId": "sales_kpi",
         "resultShape": "table",
-        "solutionCode": "SELECT customer_name, unit_price, unit_price * 0.9 AS discounted_price\nFROM orders;"
+        "solutionCode": "SELECT id, customer_name, quantity * unit_price * 0.9 AS discounted_total\nFROM orders;"
       }
     },
     {
-      "id": "alias-purpose-single",
+      "id": "single-1",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.math-in-sql.quiz.alias-purpose-single",
+      "messageBase": "topics.sql.sql_module_5.math-in-sql.quiz.single-1",
       "optionIds": [
         "a",
-        "b"
+        "b",
+        "c",
+        "d"
       ],
       "expected": {
         "kind": "single_choice",
-        "optionId": "a"
+        "optionId": "b"
       }
     },
     {
-      "id": "math-null-multi",
+      "id": "multi-1",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.math-in-sql.quiz.math-null-multi",
+      "messageBase": "topics.sql.sql_module_5.math-in-sql.quiz.multi-1",
       "optionIds": [
         "a",
-        "b"
+        "b",
+        "c",
+        "d"
       ],
       "expected": {
         "kind": "multi_choice",
         "optionIds": [
-          "a"
+          "a",
+          "c"
         ]
       }
     },
     {
-      "id": "fill-blank-choice-math",
+      "id": "fill-1",
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.math-in-sql.quiz.fill-blank-choice-math",
+      "messageBase": "topics.sql.sql_module_5.math-in-sql.quiz.fill-1",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "quantity * unit_price"
+        "value": "NULL"
       }
     }
   ]

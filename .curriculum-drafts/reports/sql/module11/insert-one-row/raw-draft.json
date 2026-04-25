@@ -1,0 +1,113 @@
+{
+  "title": "Insert one row",
+  "summary": "Learn how to insert a single row into a table using SQL's INSERT statement, with a focus on explicit column lists and safe practices.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch-1-intro-insert",
+      "title": "Inserting a Single Row",
+      "bodyMarkdown": "To add a new row to a table in SQL, use the `INSERT INTO` statement. It's best practice to specify the columns you want to insert values into. For example, to add a new item to the `inventory_items` table:\n\n```sql\nINSERT INTO inventory_items (name, category, price, status, is_test, notes, last_updated)\nVALUES ('Desk Organizer', 'Accessories', 13.50, 'active', 0, NULL, '2026-02-10');\n```\n\nThis statement adds a new row with the provided values. The `id` column is omitted here because it's an auto-increment primary key."
+    },
+    {
+      "id": "sketch-2-defaults-and-null",
+      "title": "Defaults and NULL Values",
+      "bodyMarkdown": "If you omit a column in your `INSERT` statement, SQL will use the column's default value if one exists, or `NULL` if allowed. For example, the `notes` column in `inventory_items` allows `NULL`:\n\n```sql\nINSERT INTO inventory_items (name, category, price, status, is_test, last_updated)\nVALUES ('Sample Pen', 'Accessories', 2.99, 'draft', 1, '2026-02-11');\n```\n\nHere, `notes` will be set to `NULL` for this row."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "code-1-insert-basic",
+      "kind": "code_input",
+      "title": "Insert a new inventory item",
+      "prompt": "Write an SQL statement to insert a new row into `inventory_items` with the following values:\n- name: 'Mini Notebook'\n- category: 'Accessories'\n- price: 3.25\n- status: 'active'\n- is_test: 0\n- notes: NULL\n- last_updated: '2026-02-12'\n\nDo not include the `id` column in your statement.",
+      "hint": "Use INSERT INTO with a column list and VALUES.",
+      "help": {
+        "concept": "The INSERT INTO statement adds a new row to a table. It's safer to specify the columns explicitly.",
+        "hint_1": "List all columns except 'id' in the column list.",
+        "hint_2": "Remember to use NULL for the notes column and wrap text values in single quotes."
+      },
+      "starterCode": "-- Write your INSERT statement here",
+      "solutionCode": "INSERT INTO inventory_items (name, category, price, status, is_test, notes, last_updated)\nVALUES ('Mini Notebook', 'Accessories', 3.25, 'active', 0, NULL, '2026-02-12');",
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "code-2-insert-with-defaults",
+      "kind": "code_input",
+      "title": "Insert using default values",
+      "prompt": "Insert a new row into `inventory_items` with these values:\n- name: 'Trial Keychain'\n- category: 'Accessories'\n- price: 1.99\n- status: 'draft'\n- is_test: 1\n- last_updated: '2026-02-13'\n\nDo not provide a value for `notes`. Let it default.",
+      "hint": "Omit the notes column from your column list.",
+      "help": {
+        "concept": "If a column allows NULL or has a default, you can leave it out of the INSERT column list.",
+        "hint_1": "List only the columns you want to set values for.",
+        "hint_2": "Do not mention 'notes' in your column list or VALUES."
+      },
+      "starterCode": "-- Write your INSERT statement here",
+      "solutionCode": "INSERT INTO inventory_items (name, category, price, status, is_test, last_updated)\nVALUES ('Trial Keychain', 'Accessories', 1.99, 'draft', 1, '2026-02-13');",
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "code-3-insert-null-notes",
+      "kind": "code_input",
+      "title": "Insert with NULL for notes",
+      "prompt": "Insert a new row into `inventory_items` with these values:\n- name: 'Sample Eraser'\n- category: 'Accessories'\n- price: 0.99\n- status: 'active'\n- is_test: 0\n- notes: NULL\n- last_updated: '2026-02-14'\n\nExplicitly set the `notes` column to NULL.",
+      "hint": "Include the notes column and use NULL as its value.",
+      "help": {
+        "concept": "You can explicitly set a column to NULL in your INSERT statement if the column allows it.",
+        "hint_1": "Include 'notes' in the column list and use NULL in the VALUES.",
+        "hint_2": "Remember to match the order of columns and values."
+      },
+      "starterCode": "-- Write your INSERT statement here",
+      "solutionCode": "INSERT INTO inventory_items (name, category, price, status, is_test, notes, last_updated)\nVALUES ('Sample Eraser', 'Accessories', 0.99, 'active', 0, NULL, '2026-02-14');",
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "multi-1-why-column-list",
+      "kind": "multi_choice",
+      "title": "Why specify columns in INSERT?",
+      "prompt": "Why is it safer to specify the column list in an INSERT statement? (Choose all that apply.)",
+      "hint": "Think about what happens if the table structure changes.",
+      "help": {
+        "concept": "Specifying columns in INSERT statements protects against errors if the table changes and makes your code clearer.",
+        "hint_1": "Consider how omitting the column list can cause data to go into the wrong columns.",
+        "hint_2": "Also think about future changes to the table, like adding new columns."
+      },
+      "options": {
+        "a": "It prevents data from being inserted into the wrong columns if the table structure changes.",
+        "b": "It makes the statement easier to read and maintain.",
+        "c": "It is required by SQL syntax.",
+        "d": "It allows you to omit columns that have defaults or allow NULL."
+      },
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ]
+    },
+    {
+      "id": "fill-1-insert-required-columns",
+      "kind": "fill_blank_choice",
+      "title": "Required columns in INSERT",
+      "prompt": "Which column must always be included in an INSERT statement for `inventory_items`? (Assume you are not inserting into the auto-increment id column.)",
+      "hint": "Look for columns that do not allow NULL and have no default.",
+      "help": {
+        "concept": "Columns that are NOT NULL and do not have a default value must be provided in every INSERT.",
+        "hint_1": "Check the schema for columns with NOT NULL and no DEFAULT.",
+        "hint_2": "Find a column that is required and not auto-generated."
+      },
+      "template": "The column that must always be included is: [[blank]].",
+      "choices": [
+        "name",
+        "category",
+        "price",
+        "status",
+        "is_test",
+        "notes",
+        "last_updated"
+      ],
+      "correctValue": "name"
+    }
+  ]
+}

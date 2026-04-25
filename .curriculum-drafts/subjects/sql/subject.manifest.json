@@ -24,123 +24,123 @@
   },
   "modules": [
     {
-      "slug": "sql_module_5",
-      "prefix": "sql5",
-      "order": 5,
-      "titleKey": "modules.sql.sql_module_5.title",
-      "descriptionKey": "modules.sql.sql_module_5.description",
+      "slug": "sql_module_11",
+      "prefix": "sql11",
+      "order": 11,
+      "titleKey": "modules.sql.sql_module_11.title",
+      "descriptionKey": "modules.sql.sql_module_11.description",
       "weekStart": null,
       "weekEnd": null,
       "accessOverride": null,
       "runtimeDefaults": {
         "kind": "sql",
-        "datasetId": "sales_kpi",
+        "datasetId": "inventory_ops",
         "fixedSqlDialect": "sqlite",
         "resultShape": "table"
       },
       "meta": {
         "estimatedMinutes": 240,
         "prereqKeys": [
-          "modules.sql.sql_module_4.title"
+          "modules.sql.sql_module_10.title"
         ],
         "outcomeKeys": [
-          "modules.sql.sql_module_5.outcomes.0",
-          "modules.sql.sql_module_5.outcomes.1",
-          "modules.sql.sql_module_5.outcomes.2",
-          "modules.sql.sql_module_5.outcomes.3"
+          "modules.sql.sql_module_11.outcomes.0",
+          "modules.sql.sql_module_11.outcomes.1",
+          "modules.sql.sql_module_11.outcomes.2",
+          "modules.sql.sql_module_11.outcomes.3"
         ],
         "whyKeys": [
-          "modules.sql.sql_module_5.why.0",
-          "modules.sql.sql_module_5.why.1"
+          "modules.sql.sql_module_11.why.0",
+          "modules.sql.sql_module_11.why.1"
         ]
       },
       "sections": [
         {
-          "slug": "section_5_1",
+          "slug": "section_11_1",
           "order": 1,
-          "titleKey": "sections.sql.sql_module_5.section_5_1.title",
-          "descriptionKey": "sections.sql.sql_module_5.section_5_1.description",
+          "titleKey": "sections.sql.sql_module_11.section_11_1.title",
+          "descriptionKey": "sections.sql.sql_module_11.section_11_1.description",
           "meta": {
-            "module": 5,
-            "weeksKey": "sections.sql.sql_module_5.section_5_1.weeks",
+            "module": 11,
+            "weeksKey": "sections.sql.sql_module_11.section_11_1.weeks",
             "bulletKeys": [
-              "sections.sql.sql_module_5.section_5_1.bullets.0",
-              "sections.sql.sql_module_5.section_5_1.bullets.1",
-              "sections.sql.sql_module_5.section_5_1.bullets.2",
-              "sections.sql.sql_module_5.section_5_1.bullets.3"
+              "sections.sql.sql_module_11.section_11_1.bullets.0",
+              "sections.sql.sql_module_11.section_11_1.bullets.1",
+              "sections.sql.sql_module_11.section_11_1.bullets.2",
+              "sections.sql.sql_module_11.section_11_1.bullets.3"
             ]
           },
           "topics": [
-            "what-expressions-are",
-            "math-in-sql",
-            "adding-and-subtracting",
-            "multiplying-and-dividing"
+            "what-insert-into-does",
+            "insert-one-row",
+            "insert-multiple-rows",
+            "matching-values-to-columns"
           ]
         },
         {
-          "slug": "section_5_2",
+          "slug": "section_11_2",
           "order": 2,
-          "titleKey": "sections.sql.sql_module_5.section_5_2.title",
-          "descriptionKey": "sections.sql.sql_module_5.section_5_2.description",
+          "titleKey": "sections.sql.sql_module_11.section_11_2.title",
+          "descriptionKey": "sections.sql.sql_module_11.section_11_2.description",
           "meta": {
-            "module": 5,
-            "weeksKey": "sections.sql.sql_module_5.section_5_2.weeks",
+            "module": 11,
+            "weeksKey": "sections.sql.sql_module_11.section_11_2.weeks",
             "bulletKeys": [
-              "sections.sql.sql_module_5.section_5_2.bullets.0",
-              "sections.sql.sql_module_5.section_5_2.bullets.1",
-              "sections.sql.sql_module_5.section_5_2.bullets.2",
-              "sections.sql.sql_module_5.section_5_2.bullets.3"
+              "sections.sql.sql_module_11.section_11_2.bullets.0",
+              "sections.sql.sql_module_11.section_11_2.bullets.1",
+              "sections.sql.sql_module_11.section_11_2.bullets.2",
+              "sections.sql.sql_module_11.section_11_2.bullets.3"
             ]
           },
           "topics": [
-            "what-aliases-are",
-            "as",
-            "renaming-result-columns",
-            "writing-readable-output"
+            "why-column-lists-matter",
+            "data-type-awareness",
+            "avoiding-insert-errors",
+            "reading-inserted-results"
           ]
         },
         {
-          "slug": "section_5_3",
+          "slug": "section_11_3",
           "order": 3,
-          "titleKey": "sections.sql.sql_module_5.section_5_3.title",
-          "descriptionKey": "sections.sql.sql_module_5.section_5_3.description",
+          "titleKey": "sections.sql.sql_module_11.section_11_3.title",
+          "descriptionKey": "sections.sql.sql_module_11.section_11_3.description",
           "meta": {
-            "module": 5,
-            "weeksKey": "sections.sql.sql_module_5.section_5_3.weeks",
+            "module": 11,
+            "weeksKey": "sections.sql.sql_module_11.section_11_3.weeks",
             "bulletKeys": [
-              "sections.sql.sql_module_5.section_5_3.bullets.0",
-              "sections.sql.sql_module_5.section_5_3.bullets.1",
-              "sections.sql.sql_module_5.section_5_3.bullets.2",
-              "sections.sql.sql_module_5.section_5_3.bullets.3"
+              "sections.sql.sql_module_11.section_11_3.bullets.0",
+              "sections.sql.sql_module_11.section_11_3.bullets.1",
+              "sections.sql.sql_module_11.section_11_3.bullets.2",
+              "sections.sql.sql_module_11.section_11_3.bullets.3"
             ]
           },
           "topics": [
-            "intro-to-functions",
-            "string-functions",
-            "number-functions",
-            "date-function-awareness"
+            "missing-values-during-insert",
+            "default-values",
+            "optional-columns",
+            "insert-behavior-basics"
           ]
         },
         {
-          "slug": "section_5_4",
+          "slug": "section_11_4",
           "order": 4,
-          "titleKey": "sections.sql.sql_module_5.section_5_4.title",
-          "descriptionKey": "sections.sql.sql_module_5.section_5_4.description",
+          "titleKey": "sections.sql.sql_module_11.section_11_4.title",
+          "descriptionKey": "sections.sql.sql_module_11.section_11_4.description",
           "meta": {
-            "module": 5,
-            "weeksKey": "sections.sql.sql_module_5.section_5_4.weeks",
+            "module": 11,
+            "weeksKey": "sections.sql.sql_module_11.section_11_4.weeks",
             "bulletKeys": [
-              "sections.sql.sql_module_5.section_5_4.bullets.0",
-              "sections.sql.sql_module_5.section_5_4.bullets.1",
-              "sections.sql.sql_module_5.section_5_4.bullets.2",
-              "sections.sql.sql_module_5.section_5_4.bullets.3"
+              "sections.sql.sql_module_11.section_11_4.bullets.0",
+              "sections.sql.sql_module_11.section_11_4.bullets.1",
+              "sections.sql.sql_module_11.section_11_4.bullets.2",
+              "sections.sql.sql_module_11.section_11_4.bullets.3"
             ]
           },
           "topics": [
-            "total-price-calculations",
-            "discount-calculations",
-            "renaming-outputs",
-            "simple-report-queries"
+            "add-a-student",
+            "add-a-product",
+            "add-multiple-records",
+            "check-your-inserted-data"
           ]
         }
       ]

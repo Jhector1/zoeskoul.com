@@ -1,12 +1,29 @@
-
 import type {
     CourseSpec,
     CourseSpecModule,
     CourseSpecTopic,
     ExerciseKindMix,
 } from "@zoeskoul/curriculum-contracts";
-import {getSqlModuleDatasetPolicy} from "@zoeskoul/curriculum-profiles";
+import { getSqlModuleDatasetPolicy } from "@zoeskoul/curriculum-profiles";
 
+function cleanString(value: unknown): string | undefined {
+    return typeof value === "string" && value.trim() ? value.trim() : undefined;
+}
+
+function cleanStringArray(value: unknown): string[] | undefined {
+    if (!Array.isArray(value)) return undefined;
+
+    const items = value
+        .filter((x): x is string => typeof x === "string")
+        .map((x) => x.trim())
+        .filter(Boolean);
+
+    return items.length ? items : undefined;
+}
+
+function cleanNumberOrNull(value: unknown): number | null {
+    return typeof value === "number" && Number.isFinite(value) ? value : null;
+}
 
 function normalizeModuleRuntimePolicy(args: {
     profileId: string;
@@ -75,6 +92,7 @@ function normalizeModuleRuntimePolicy(args: {
         resultShape,
     };
 }
+
 function slugify(input: string) {
     return String(input ?? "")
         .trim()
@@ -126,9 +144,11 @@ function balancedSqlMix(): ExerciseKindMix {
 
 function pickModuleMix(moduleNumber: number): ExerciseKindMix {
     if (moduleNumber === 0 || moduleNumber === 14) return conceptualSqlMix();
+
     if ([2, 6, 7, 8, 10, 11, 12, 13, 15].includes(moduleNumber)) {
         return technicalSqlMix();
     }
+
     return balancedSqlMix();
 }
 
@@ -147,6 +167,7 @@ function cleanModuleProject(value: unknown): string | undefined {
     if (!text) return undefined;
 
     let cut = text.length;
+
     for (const marker of OVERLOADED_PROJECT_MARKERS) {
         const idx = text.indexOf(marker);
         if (idx >= 0 && idx < cut) cut = idx;
@@ -213,6 +234,7 @@ function normalizeTopicId(args: {
     if (!base) {
         const titleSlug = slugify(args.topic?.title ?? "");
         const sectionSlug = slugify(args.sectionNumber ?? "");
+
         base =
             titleSlug ||
             `m${args.moduleNumber}-${sectionSlug || "section"}-topic-${args.topicIndex + 1}`;
@@ -238,8 +260,7 @@ function normalizeTopic(
     used: Set<string>,
 ): CourseSpecTopic {
     return {
-        topicNumber:
-            typeof topic?.topicNumber === "string" ? topic.topicNumber : undefined,
+        topicNumber: cleanString(topic?.topicNumber),
         topicId: normalizeTopicId({
             topic,
             moduleNumber,
@@ -248,19 +269,17 @@ function normalizeTopic(
             used,
         }),
         title: String(topic?.title ?? "").trim(),
-        summary:
-            typeof topic?.summary === "string" ? topic.summary.trim() : undefined,
+        summary: cleanString(topic?.summary),
         minutes:
             typeof topic?.minutes === "number" && Number.isFinite(topic.minutes)
                 ? topic.minutes
                 : 15,
-        difficulty: "beginner",
-        technical: moduleNumber >= 1,
-        tags: [],
-        learningGoals:
-            Array.isArray(topic?.learningGoals)
-                ? topic.learningGoals.filter((x: unknown) => typeof x === "string")
-                : undefined,
+        difficulty: topic?.difficulty ?? "beginner",
+        technical: typeof topic?.technical === "boolean" ? topic.technical : moduleNumber >= 1,
+        tags: Array.isArray(topic?.tags)
+            ? topic.tags.filter((x: unknown): x is string => typeof x === "string")
+            : [],
+        learningGoals: cleanStringArray(topic?.learningGoals),
     };
 }
 
@@ -271,22 +290,37 @@ function normalizeModule(
     globalRuntimePolicy: any,
 ): CourseSpecModule {
     const moduleNumber =
-        typeof module?.moduleNumber === "number" ? module.moduleNumber : 0;
+        typeof module?.moduleNumber === "number" && Number.isFinite(module.moduleNumber)
+            ? module.moduleNumber
+            : 0;
 
     const sections = Array.isArray(module?.sections) ? module.sections : [];
-    const normalizedSections = sections.map((section: any) => {
+
+    const normalizedSections = sections.map((section: any, sectionIndex: number) => {
         const topics = Array.isArray(section?.topics) ? section.topics : [];
+
         return {
             sectionNumber:
                 typeof section?.sectionNumber === "string"
                     ? section.sectionNumber
                     : undefined,
-            sectionSlug: String(section?.sectionSlug ?? "").trim(),
+            sectionSlug:
+                typeof section?.sectionSlug === "string" && section.sectionSlug.trim()
+                    ? section.sectionSlug.trim()
+                    : `section-${moduleNumber}-${sectionIndex + 1}`,
+            order:
+                typeof section?.order === "number" && Number.isFinite(section.order)
+                    ? section.order
+                    : sectionIndex + 1,
             title: String(section?.title ?? "").trim(),
-            description:
-                typeof section?.description === "string"
-                    ? section.description.trim()
-                    : undefined,
+            description: cleanString(section?.description),
+
+            weekStart: cleanNumberOrNull(section?.weekStart),
+            weekEnd: cleanNumberOrNull(section?.weekEnd),
+            weeksLabel: cleanString(section?.weeksLabel) ?? null,
+
+            bullets: cleanStringArray(section?.bullets),
+
             topics: topics.map((topic: any, topicIndex: number) =>
                 normalizeTopic(
                     topic,
@@ -309,37 +343,31 @@ function normalizeModule(
     return {
         moduleNumber,
         moduleSlug: String(module?.moduleSlug ?? "").trim(),
-        order: moduleNumber + 1,
+        order:
+            typeof module?.order === "number" && Number.isFinite(module.order)
+                ? module.order
+                : moduleNumber + 1,
         title: String(module?.title ?? "").trim(),
-        description:
-            typeof module?.description === "string" ? module.description.trim() : undefined,
-        purpose: typeof module?.purpose === "string" ? module.purpose.trim() : undefined,
-        learningObjectives: Array.isArray(module?.learningObjectives)
-            ? module.learningObjectives.filter((x: unknown) => typeof x === "string")
-            : [],
-        guidedExercises: Array.isArray(module?.guidedExercises)
-            ? module.guidedExercises.filter((x: unknown) => typeof x === "string")
-            : [],
-        quizFocus: Array.isArray(module?.quizFocus)
-            ? module.quizFocus.filter((x: unknown) => typeof x === "string")
-            : [],
+        description: cleanString(module?.description),
+        purpose: cleanString(module?.purpose),
+        learningObjectives: cleanStringArray(module?.learningObjectives) ?? [],
+        guidedExercises: cleanStringArray(module?.guidedExercises) ?? [],
+        quizFocus: cleanStringArray(module?.quizFocus) ?? [],
         moduleProject: cleanModuleProject(module?.moduleProject),
+
+        weekStart: cleanNumberOrNull(module?.weekStart),
+        weekEnd: cleanNumberOrNull(module?.weekEnd),
+
         sectionCount:
-            typeof module?.sectionCount === "number"
+            typeof module?.sectionCount === "number" && Number.isFinite(module.sectionCount)
                 ? module.sectionCount
                 : normalizedSections.length,
         topicCount:
-            typeof module?.topicCount === "number"
+            typeof module?.topicCount === "number" && Number.isFinite(module.topicCount)
                 ? module.topicCount
                 : actualTopicCount,
-        recommendedPacing:
-            typeof module?.recommendedPacing === "string"
-                ? module.recommendedPacing.trim()
-                : undefined,
-        typicalOutcome:
-            typeof module?.typicalOutcome === "string"
-                ? module.typicalOutcome.trim()
-                : undefined,
+        recommendedPacing: cleanString(module?.recommendedPacing),
+        typicalOutcome: cleanString(module?.typicalOutcome),
         exercisePolicy:
             module?.exercisePolicy && typeof module.exercisePolicy === "object"
                 ? module.exercisePolicy
@@ -362,6 +390,7 @@ export function normalizeLegacyCourseSpec(raw: unknown): CourseSpec {
 
     const modules = Array.isArray(input.modules) ? input.modules : [];
     const profileId = String(input.profileId ?? "").trim();
+
     const globalRuntimePolicy =
         input.policy?.runtimePolicy && typeof input.policy.runtimePolicy === "object"
             ? input.policy.runtimePolicy
@@ -377,23 +406,17 @@ export function normalizeLegacyCourseSpec(raw: unknown): CourseSpec {
                 ? input.authoringFormatVersion
                 : "2.0",
         subjectSlug: String(input.subjectSlug ?? "").trim(),
-        profileId: String(input.profileId ?? "").trim(),
+        profileId,
+        sourceLocale: cleanString(input.sourceLocale) ?? "en",
+        targetLocales: Array.isArray(input.targetLocales)
+            ? input.targetLocales.filter((x: unknown): x is string => typeof x === "string")
+            : [],
         title: String(input.title ?? "").trim(),
-        subtitle:
-            typeof input.subtitle === "string" ? input.subtitle.trim() : undefined,
-        intendedFor:
-            typeof input.intendedFor === "string"
-                ? input.intendedFor.trim()
-                : undefined,
+        subtitle: cleanString(input.subtitle),
+        intendedFor: cleanString(input.intendedFor),
         courseOverview: {
-            recommendedSequence:
-                typeof input.courseOverview?.recommendedSequence === "string"
-                    ? input.courseOverview.recommendedSequence.trim()
-                    : undefined,
-            summary:
-                typeof input.courseOverview?.summary === "string"
-                    ? input.courseOverview.summary.trim()
-                    : undefined,
+            recommendedSequence: cleanString(input.courseOverview?.recommendedSequence),
+            summary: cleanString(input.courseOverview?.summary),
             moduleSummary: Array.isArray(input.courseOverview?.moduleSummary)
                 ? input.courseOverview.moduleSummary
                 : [],
@@ -428,41 +451,26 @@ export function normalizeLegacyCourseSpec(raw: unknown): CourseSpec {
                         maxModuleProjectLength: 320,
                     },
                 },
-        authoringGuidance: Array.isArray(input.authoringGuidance)
-            ? input.authoringGuidance.filter((x: unknown) => typeof x === "string")
-            : [],
+        authoringGuidance: cleanStringArray(input.authoringGuidance) ?? [],
         modules: normalizedModules,
         assessmentAndDelivery:
             input.assessmentAndDelivery && typeof input.assessmentAndDelivery === "object"
                 ? {
-                    suggestedBeginnerRhythm:
-                        typeof input.assessmentAndDelivery.suggestedBeginnerRhythm ===
-                        "string"
-                            ? input.assessmentAndDelivery.suggestedBeginnerRhythm.trim()
-                            : undefined,
-                    recommendedCourseDeliverables: Array.isArray(
-                        input.assessmentAndDelivery.recommendedCourseDeliverables,
-                    )
-                        ? input.assessmentAndDelivery.recommendedCourseDeliverables.filter(
-                            (x: unknown) => typeof x === "string",
-                        )
-                        : [],
+                    suggestedBeginnerRhythm: cleanString(
+                        input.assessmentAndDelivery.suggestedBeginnerRhythm,
+                    ),
+                    recommendedCourseDeliverables:
+                        cleanStringArray(
+                            input.assessmentAndDelivery.recommendedCourseDeliverables,
+                        ) ?? [],
                     samplePacingOptions:
                         input.assessmentAndDelivery.samplePacingOptions &&
                         typeof input.assessmentAndDelivery.samplePacingOptions === "object"
                             ? input.assessmentAndDelivery.samplePacingOptions
                             : {},
-                    toolingSuggestions: Array.isArray(
-                        input.assessmentAndDelivery.toolingSuggestions,
-                    )
-                        ? input.assessmentAndDelivery.toolingSuggestions.filter(
-                            (x: unknown) => typeof x === "string",
-                        )
-                        : [],
-                    closingNote:
-                        typeof input.assessmentAndDelivery.closingNote === "string"
-                            ? input.assessmentAndDelivery.closingNote.trim()
-                            : undefined,
+                    toolingSuggestions:
+                        cleanStringArray(input.assessmentAndDelivery.toolingSuggestions) ?? [],
+                    closingNote: cleanString(input.assessmentAndDelivery.closingNote),
                     moduleMilestones: Array.isArray(
                         input.assessmentAndDelivery.moduleMilestones,
                     )

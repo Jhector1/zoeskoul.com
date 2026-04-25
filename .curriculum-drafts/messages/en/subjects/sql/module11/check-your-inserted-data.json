@@ -1,0 +1,105 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_11": {
+        "check-your-inserted-data": {
+          "label": "Check your inserted data",
+          "summary": "Learn how to verify your inserted rows in the inventory_items table, confirm changes, and understand how to check for correct data after an INSERT.",
+          "cards": {
+            "sketch0": {
+              "title": "Why check your inserted data?"
+            },
+            "sketch1": {
+              "title": "Checking for specific values"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "quiz": {
+            "q1": {
+              "title": "Check for a newly inserted item by name",
+              "prompt": "Suppose you just inserted a new item called 'Eco Notebook' into the inventory_items table. Write a SQL query to display all columns for rows where the name is 'Eco Notebook'.",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+                "hint_1": "Eliminate choices or interpretations that do not match the task.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "starterCode": "-- Write a query to show all columns for the item named 'Eco Notebook'"
+            },
+            "q2": {
+              "title": "Count rows after inserting data",
+              "prompt": "After inserting several new items, you want to check how many total rows are now in the inventory_items table. Write a SQL query to return the total count of rows.",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+                "hint_1": "Eliminate choices or interpretations that do not match the task.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "starterCode": "-- Write a query to count all rows in inventory_items"
+            },
+            "q3": {
+              "title": "Check inserted data with multiple filters",
+              "prompt": "You inserted a new item in the 'Kitchen' category with a price of 10.00. Write a SQL query to show all columns for items in the 'Kitchen' category with a price of 10.00.",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+                "hint_1": "Eliminate choices or interpretations that do not match the task.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "starterCode": "-- Show all columns for Kitchen items with price 10.00"
+            },
+            "q4": {
+              "title": "Ways to check your inserted data",
+              "prompt": "Which of the following are good ways to check that your data was inserted correctly into the inventory_items table? Select all that apply.",
+              "hint": "Think about how you can confirm the presence and correctness of new rows.",
+              "help": {
+                "concept": "Verifying inserted data involves querying the table to confirm the new row is present and correct.",
+                "hint_1": "Look for methods that directly check the table's contents.",
+                "hint_2": "SELECT queries and row counts help confirm inserts; assuming or restarting does not."
+              },
+              "options": {
+                "a": "A command",
+                "b": "A table name"
+              }
+            },
+            "q5": {
+              "title": "Fill in the blank: Checking for a specific value",
+              "prompt": "Choose the best value for the first missing blank in the statement.",
+              "hint": "The value should match the item name exactly as stored in the table.",
+              "help": {
+                "concept": "String values in SQL queries must be enclosed in single quotes to match the exact value in the table.",
+                "hint_1": "Remember to use single quotes for string literals in SQL.",
+                "hint_2": "The value should be exactly as it appears in the table, with correct quoting."
+              },
+              "template": "The first missing value is [blank1].",
+              "choices": [
+                "'Sample Poster'",
+                "Sample Poster",
+                "\"Sample Poster\"",
+                "'Poster'"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_11": {
+        "check-your-inserted-data": {
+          "sk1": {
+            "title": "Why check your inserted data?",
+            "bodyMarkdown": "After you run an `INSERT` statement, it's important to confirm that your data was added as expected. You can do this by running a `SELECT` query on the table. For example, after inserting a new inventory item, you might run:\n\n```sql\nSELECT * FROM inventory_items;\n```\n\nOr, to check for a specific row you just inserted:\n\n```sql\nSELECT * FROM inventory_items WHERE name = 'Sticker Pack';\n```\n\nThis helps you verify that all columns have the correct values and that no mistakes were made during the insert."
+          },
+          "sk2": {
+            "title": "Checking for specific values",
+            "bodyMarkdown": "If you want to confirm that a particular value was inserted, use a `WHERE` clause to filter the results. For example, to check if any items in the 'Accessories' category were added:\n\n```sql\nSELECT id, name, category FROM inventory_items WHERE category = 'Accessories';\n```\n\nThis will show only the rows matching your filter, making it easier to spot your new data."
+          }
+        }
+      }
+    }
+  }
+}

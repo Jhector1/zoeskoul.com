@@ -14,14 +14,21 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.sql.sql_module_5.date-function-awareness.cards.sketch0.title",
-      "sketchId": "sketch-1",
+      "sketchId": "sk1",
       "height": 420
     },
     {
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.sql.sql_module_5.date-function-awareness.cards.sketch1.title",
-      "sketchId": "sketch-2",
+      "sketchId": "sk2",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_5.date-function-awareness.cards.sketch2.title",
+      "sketchId": "sk3",
       "height": 420
     },
     {
@@ -39,97 +46,97 @@
   ],
   "sketches": [
     {
-      "id": "sketch-1",
+      "id": "sk1",
       "archetype": "paragraph",
-      "titleKey": "sketches.sql.sql_module_5.date-function-awareness.sketch-1.title",
-      "bodyKey": "sketches.sql.sql_module_5.date-function-awareness.sketch-1.bodyMarkdown"
+      "titleKey": "sketches.sql.sql_module_5.date-function-awareness.sk1.title",
+      "bodyKey": "sketches.sql.sql_module_5.date-function-awareness.sk1.bodyMarkdown"
     },
     {
-      "id": "sketch-2",
+      "id": "sk2",
       "archetype": "paragraph",
-      "titleKey": "sketches.sql.sql_module_5.date-function-awareness.sketch-2.title",
-      "bodyKey": "sketches.sql.sql_module_5.date-function-awareness.sketch-2.bodyMarkdown"
+      "titleKey": "sketches.sql.sql_module_5.date-function-awareness.sk2.title",
+      "bodyKey": "sketches.sql.sql_module_5.date-function-awareness.sk2.bodyMarkdown"
+    },
+    {
+      "id": "sk3",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_5.date-function-awareness.sk3.title",
+      "bodyKey": "sketches.sql.sql_module_5.date-function-awareness.sk3.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "code-1",
+      "id": "q1",
       "kind": "code_input",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.date-function-awareness.quiz.code-1",
+      "messageBase": "topics.sql.sql_module_5.date-function-awareness.quiz.q1",
       "language": "sql",
       "fixedSqlDialect": "sqlite",
       "recipe": {
         "type": "sql_query",
         "datasetId": "sales_kpi",
         "resultShape": "table",
-        "solutionCode": "SELECT id, order_date, strftime('%m', order_date) AS order_month FROM orders;"
+        "solutionCode": "SELECT id, order_date, strftime('%Y', order_date) AS order_year\nFROM orders;"
       }
     },
     {
-      "id": "code-2",
+      "id": "q2",
       "kind": "code_input",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.date-function-awareness.quiz.code-2",
+      "messageBase": "topics.sql.sql_module_5.date-function-awareness.quiz.q2",
       "language": "sql",
       "fixedSqlDialect": "sqlite",
       "recipe": {
         "type": "sql_query",
         "datasetId": "sales_kpi",
         "resultShape": "table",
-        "solutionCode": "SELECT * FROM orders WHERE strftime('%m', order_date) = '01';"
+        "solutionCode": "SELECT *\nFROM orders\nWHERE strftime('%m', order_date) = '01';"
       }
     },
     {
-      "id": "single-1",
+      "id": "q3",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.date-function-awareness.quiz.single-1",
+      "messageBase": "topics.sql.sql_module_5.date-function-awareness.quiz.q3",
       "optionIds": [
         "a",
-        "b",
-        "c",
-        "d"
+        "b"
       ],
       "expected": {
         "kind": "single_choice",
-        "optionId": "b"
+        "optionId": "a"
       }
     },
     {
-      "id": "multi-1",
+      "id": "q4",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.date-function-awareness.quiz.multi-1",
+      "messageBase": "topics.sql.sql_module_5.date-function-awareness.quiz.q4",
       "optionIds": [
         "a",
-        "b",
-        "c",
-        "d"
+        "b"
       ],
       "expected": {
         "kind": "multi_choice",
         "optionIds": [
-          "a",
-          "b",
-          "d"
+          "a"
         ]
       }
     },
     {
-      "id": "fill-1",
+      "id": "q5",
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.date-function-awareness.quiz.fill-1",
+      "messageBase": "topics.sql.sql_module_5.date-function-awareness.quiz.q5",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "'%d'"
+        "value": "strftime('%m', order_date)"
       }
     }
   ]

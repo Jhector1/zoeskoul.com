@@ -28,7 +28,7 @@
       "id": "sketch2",
       "kind": "sketch",
       "titleKey": "topics.sql.sql_module_5.renaming-result-columns.cards.sketch2.title",
-      "sketchId": "sketch-3-alias-presentation",
+      "sketchId": "sketch-3-alias-with-functions",
       "height": 420
     },
     {
@@ -58,91 +58,85 @@
       "bodyKey": "sketches.sql.sql_module_5.renaming-result-columns.sketch-2-alias-syntax.bodyMarkdown"
     },
     {
-      "id": "sketch-3-alias-presentation",
+      "id": "sketch-3-alias-with-functions",
       "archetype": "paragraph",
-      "titleKey": "sketches.sql.sql_module_5.renaming-result-columns.sketch-3-alias-presentation.title",
-      "bodyKey": "sketches.sql.sql_module_5.renaming-result-columns.sketch-3-alias-presentation.bodyMarkdown"
+      "titleKey": "sketches.sql.sql_module_5.renaming-result-columns.sketch-3-alias-with-functions.title",
+      "bodyKey": "sketches.sql.sql_module_5.renaming-result-columns.sketch-3-alias-with-functions.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "quiz-1-alias-calculation",
+      "id": "quiz-1-alias-calc-column",
       "kind": "code_input",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.renaming-result-columns.quiz.quiz-1-alias-calculation",
+      "messageBase": "topics.sql.sql_module_5.renaming-result-columns.quiz.quiz-1-alias-calc-column",
       "language": "sql",
       "fixedSqlDialect": "sqlite",
       "recipe": {
         "type": "sql_query",
         "datasetId": "sales_kpi",
         "resultShape": "table",
-        "solutionCode": "SELECT customer_name, quantity * unit_price AS order_total\nFROM orders;"
+        "solutionCode": "SELECT id, quantity * unit_price AS order_total\nFROM orders;"
       }
     },
     {
-      "id": "quiz-2-alias-existing-column",
-      "kind": "code_input",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.renaming-result-columns.quiz.quiz-2-alias-existing-column",
-      "language": "sql",
-      "fixedSqlDialect": "sqlite",
-      "recipe": {
-        "type": "sql_query",
-        "datasetId": "sales_kpi",
-        "resultShape": "table",
-        "solutionCode": "SELECT region AS sales_region\nFROM orders;"
-      }
-    },
-    {
-      "id": "quiz-3-alias-syntax-choice",
+      "id": "quiz-2-alias-header",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.renaming-result-columns.quiz.quiz-3-alias-syntax-choice",
+      "messageBase": "topics.sql.sql_module_5.renaming-result-columns.quiz.quiz-2-alias-header",
       "optionIds": [
         "a",
-        "b",
-        "c",
-        "d"
+        "b"
       ],
       "expected": {
         "kind": "single_choice",
-        "optionId": "b"
+        "optionId": "a"
       }
     },
     {
-      "id": "quiz-4-alias-multi-choice",
+      "id": "quiz-3-multi-alias-usage",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.renaming-result-columns.quiz.quiz-4-alias-multi-choice",
+      "messageBase": "topics.sql.sql_module_5.renaming-result-columns.quiz.quiz-3-multi-alias-usage",
       "optionIds": [
         "a",
-        "b",
-        "c",
-        "d"
+        "b"
       ],
       "expected": {
         "kind": "multi_choice",
         "optionIds": [
-          "a",
-          "b",
-          "d"
+          "a"
         ]
       }
     },
     {
-      "id": "quiz-5-alias-fill-blank",
+      "id": "quiz-4-alias-fill-blank",
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.renaming-result-columns.quiz.quiz-5-alias-fill-blank",
+      "messageBase": "topics.sql.sql_module_5.renaming-result-columns.quiz.quiz-4-alias-fill-blank",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
         "value": "AS"
+      }
+    },
+    {
+      "id": "quiz-5-alias-multiple-columns",
+      "kind": "code_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_5.renaming-result-columns.quiz.quiz-5-alias-multiple-columns",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_kpi",
+        "resultShape": "table",
+        "solutionCode": "SELECT customer_name AS buyer, category AS item_type, status AS order_status\nFROM orders;"
       }
     }
   ]

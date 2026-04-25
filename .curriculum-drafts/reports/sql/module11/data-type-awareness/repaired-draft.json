@@ -1,0 +1,106 @@
+{
+  "title": "Data type awareness",
+  "summary": "Understand how data types affect inserting data in SQL. Learn to match values to column types, avoid common mistakes, and use explicit column lists for safer inserts.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch-1",
+      "title": "Why Data Types Matter in INSERT",
+      "bodyMarkdown": "When you insert data into a table, each column expects a value of a certain type. For example, in the `inventory_items` table, `price` is a REAL (number), `name` is TEXT, and `is_test` is an INTEGER (0 or 1). If you try to insert a string into a numeric column, or vice versa, you may get an error or unexpected results.\n\nExample:\n```sql\nINSERT INTO inventory_items (name, category, price, status, is_test, last_updated)\nVALUES ('New Keychain', 'Accessories', 3.50, 'active', 0, '2026-02-10');\n```\nHere, each value matches the expected data type for its column."
+    },
+    {
+      "id": "sketch-2",
+      "title": "Explicit Column Lists for Safer Inserts",
+      "bodyMarkdown": "It's safer to specify the columns you're inserting into, rather than relying on the table's column order. This helps avoid mistakes if the table structure changes or if you forget a required column.\n\nExample:\n```sql\n-- Safer:\nINSERT INTO inventory_items (name, category, price, status, is_test, last_updated)\nVALUES ('Sample Bag', 'Accessories', 8.00, 'draft', 1, '2026-02-11');\n\n-- Riskier (no column list):\nINSERT INTO inventory_items VALUES (7, 'Sample Bag', 'Accessories', 8.00, 'draft', 1, NULL, '2026-02-11');\n```\nThe first example is clearer and less error-prone."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "q1-code-input",
+      "kind": "code_input",
+      "title": "Insert a new inventory item with correct data types",
+      "prompt": "Write an INSERT statement to add a new row to the `inventory_items` table with these values:\n- name: 'Desk Organizer'\n- category: 'Accessories'\n- price: 13.25\n- status: 'active'\n- is_test: 0\n- notes: NULL\n- last_updated: '2026-02-12'\n\nUse an explicit column list and match each value to its correct data type.",
+      "starterCode": "-- Write your INSERT statement here",
+      "solutionCode": "INSERT INTO inventory_items (name, category, price, status, is_test, notes, last_updated)\nVALUES ('Desk Organizer', 'Accessories', 13.25, 'active', 0, NULL, '2026-02-12');",
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query",
+      "hint": "Focus on the SQL task being asked for, not on copying final query text.",
+      "help": {
+        "concept": "Build the query from the operation the exercise is testing.",
+        "hint_1": "Think about which clauses or functions are required for the task.",
+        "hint_2": "Construct the query based on what result the exercise expects, not by repeating exact solution wording."
+      }
+    },
+    {
+      "id": "q2-code-input",
+      "kind": "code_input",
+      "title": "Insert with missing optional column",
+      "prompt": "Insert a new item into `inventory_items` with the following values:\n- name: 'Travel Mug'\n- category: 'Kitchen'\n- price: 11.00\n- status: 'draft'\n- is_test: 1\n- last_updated: '2026-02-13'\n\nDo not provide a value for the `notes` column. Use an explicit column list.",
+      "starterCode": "-- Insert a row without the notes column",
+      "solutionCode": "INSERT INTO inventory_items (name, category, price, status, is_test, last_updated)\nVALUES ('Travel Mug', 'Kitchen', 11.00, 'draft', 1, '2026-02-13');",
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query",
+      "hint": "Focus on the SQL task being asked for, not on copying final query text.",
+      "help": {
+        "concept": "Build the query from the operation the exercise is testing.",
+        "hint_1": "Think about which clauses or functions are required for the task.",
+        "hint_2": "Construct the query based on what result the exercise expects, not by repeating exact solution wording."
+      }
+    },
+    {
+      "id": "q3-code-input",
+      "kind": "code_input",
+      "title": "Insert with integer and text types",
+      "prompt": "Write an INSERT statement for `inventory_items` to add a row with:\n- name: 'Sample Notebook'\n- category: 'Accessories'\n- price: 6.75\n- status: 'active'\n- is_test: 1\n- notes: 'Limited edition'\n- last_updated: '2026-02-14'\n\nBe sure to use the correct data types for each value.",
+      "starterCode": "-- Insert a row with correct types for each column",
+      "solutionCode": "INSERT INTO inventory_items (name, category, price, status, is_test, notes, last_updated)\nVALUES ('Sample Notebook', 'Accessories', 6.75, 'active', 1, 'Limited edition', '2026-02-14');",
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query",
+      "hint": "Focus on the SQL task being asked for, not on copying final query text.",
+      "help": {
+        "concept": "Build the query from the operation the exercise is testing.",
+        "hint_1": "Think about which clauses or functions are required for the task.",
+        "hint_2": "Construct the query based on what result the exercise expects, not by repeating exact solution wording."
+      }
+    },
+    {
+      "id": "q4-multi-choice",
+      "kind": "multi_choice",
+      "title": "Which values match the expected data types?",
+      "prompt": "Select ALL options that correctly match the expected data types for the `inventory_items` table.",
+      "options": [
+        "[object Object]",
+        "A command"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Check if each value fits the column's type (e.g., text, number, integer, or NULL).",
+      "help": {
+        "concept": "Each column in a SQL table has a defined data type. Values must match these types when inserting data.",
+        "hint_1": "Look for text in quotes for TEXT columns, numbers for REAL/INTEGER, and NULL where allowed.",
+        "hint_2": "If a value's type doesn't match the column, it's not a correct match."
+      }
+    },
+    {
+      "id": "q5-fill-blank-choice",
+      "kind": "fill_blank_choice",
+      "title": "Identify the correct data type for a column",
+      "prompt": "The `price` column in `inventory_items` expects values of which data type?",
+      "template": "The `price` column expects values of type: ____",
+      "choices": [
+        "INTEGER",
+        "REAL",
+        "TEXT",
+        "DATE"
+      ],
+      "correctValue": "REAL",
+      "hint": "Is price usually stored as a whole number, text, or a decimal number?",
+      "help": {
+        "concept": "The `price` column is used for monetary values and should allow decimals.",
+        "hint_1": "Check the schema for the data type of `price`.",
+        "hint_2": "It's not TEXT or INTEGER, but a type that supports decimals."
+      }
+    }
+  ]
+}

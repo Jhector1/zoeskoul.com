@@ -140,6 +140,9 @@ const SqlTestSchema = z
         expectedTable: SqlExpectedTableSchema.optional(),
         match: z.literal("table_exact").optional().default("table_exact"),
         ignoreRowOrder: z.boolean().optional().default(false),
+
+        // NEW: used for INSERT / UPDATE / DELETE grading
+        checkSql: z.string().optional(),
     })
     .superRefine((v, ctx) => {
         if ((v.compareTo ?? "solution") === "expected_table" && !v.expectedTable) {

@@ -1,0 +1,119 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_5": {
+        "total-price-calculations": {
+          "label": "Total price calculations",
+          "summary": "Learn how to calculate total prices using calculated columns and SQL expressions in the sales_kpi.orders table. Practice creating expressions, using aliases, and understanding how SQL handles arithmetic with real data.",
+          "cards": {
+            "sketch0": {
+              "title": "What is a calculated column?"
+            },
+            "sketch1": {
+              "title": "Using aliases for clarity"
+            },
+            "sketch2": {
+              "title": "Handling NULL values in expressions"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "quiz": {
+            "exercise-1": {
+              "title": "Calculate total price for each order",
+              "prompt": "Write a SQL query to select the `id`, `quantity`, `unit_price`, and a calculated column named `total_price` (which is `quantity * unit_price`) from the `orders` table.",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+                "hint_1": "Eliminate choices or interpretations that do not match the task.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "starterCode": "SELECT id, quantity, unit_price\nFROM orders;"
+            },
+            "exercise-2": {
+              "title": "Show customer name and total price only",
+              "prompt": "Write a SQL query to display only the `customer_name` and the total price (quantity times unit_price, as `total_price`) for each order in the `orders` table.",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+                "hint_1": "Eliminate choices or interpretations that do not match the task.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "starterCode": "SELECT customer_name\nFROM orders;"
+            },
+            "exercise-3": {
+              "title": "Purpose of aliases in SQL expressions",
+              "prompt": "Why should you use an alias when creating a calculated column in SQL?",
+              "hint": "Think about how the result looks to someone reading it.",
+              "help": {
+                "concept": "Aliases make your result columns easier to read and understand, especially for calculated values.",
+                "hint_1": "Without an alias, the column name will be the full expression.",
+                "hint_2": "Aliases help make reports and queries clearer for others."
+              },
+              "options": {
+                "a": "a. To make the column name in the result more readable",
+                "b": "b. To speed up the query execution",
+                "c": "c. To hide the column from the result",
+                "d": "d. To change the data type of the column"
+              }
+            },
+            "exercise-4": {
+              "title": "Which of the following are valid calculated columns in the orders table?",
+              "prompt": "Select all expressions that would create a valid calculated column in a SELECT statement on the `orders` table.",
+              "hint": "Look for expressions that use existing columns and valid SQL syntax.",
+              "help": {
+                "concept": "A calculated column can use arithmetic or functions on existing columns in the table.",
+                "hint_1": "Check if each expression uses columns from the orders table and valid SQL.",
+                "hint_2": "Expressions can use arithmetic, functions, or combine columns."
+              },
+              "options": {
+                "a": "a. quantity * unit_price AS total_price",
+                "b": "b. quantity + 5 AS bonus_quantity",
+                "c": "c. customer_name * 2 AS double_name",
+                "d": "d. unit_price - 3 AS discounted_price"
+              }
+            },
+            "exercise-5": {
+              "title": "Handling NULL in calculated columns",
+              "prompt": "If `unit_price` is NULL for a row in the `orders` table, what will be the result of `quantity * unit_price` for that row?",
+              "hint": "Think about how SQL treats arithmetic with the missing term values.",
+              "help": {
+                "concept": "In SQL, any arithmetic operation with the missing term results in the missing term.",
+                "hint_1": "the missing term means unknown, so the result of any calculation with the missing term is also unknown.",
+                "hint_2": "Multiplying any number by the missing term in SQL gives you the missing term."
+              },
+              "template": "The result will be: ___",
+              "choices": [
+                "zero",
+                "NULL",
+                "the quantity value",
+                "an error"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_5": {
+        "total-price-calculations": {
+          "sketch-1": {
+            "title": "What is a calculated column?",
+            "bodyMarkdown": "A calculated column in SQL is a value you create in your SELECT statement by combining or transforming existing columns using arithmetic or functions. For example, to find the total price for each order in the `orders` table, you can multiply the `quantity` by the `unit_price`:\n\n```sql\nSELECT id, quantity, unit_price, quantity * unit_price AS total_price\nFROM orders;\n```\n\nThis query adds a new column called `total_price` to the result, showing the product of `quantity` and `unit_price` for each row."
+          },
+          "sketch-2": {
+            "title": "Using aliases for clarity",
+            "bodyMarkdown": "Aliases let you rename columns or expressions in your SQL results for better readability. Use the `AS` keyword to give a name to your calculated column. For example:\n\n```sql\nSELECT customer_name, quantity * unit_price AS total_price\nFROM orders;\n```\n\nNow, the output will have a column labeled `total_price` instead of the expression."
+          },
+          "sketch-3": {
+            "title": "Handling NULL values in expressions",
+            "bodyMarkdown": "If any value in an arithmetic expression is `NULL`, the result will also be `NULL`. For example, if `unit_price` is `NULL` for a row, then `quantity * unit_price` will be `NULL` for that row. Always check your data or use functions like `COALESCE()` to handle possible `NULL`s."
+          }
+        }
+      }
+    }
+  }
+}

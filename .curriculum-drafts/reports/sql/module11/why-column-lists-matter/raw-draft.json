@@ -1,0 +1,111 @@
+{
+  "title": "Why column lists matter",
+  "summary": "Learn why specifying column lists in INSERT statements is crucial for safe and predictable data entry in SQL.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch-1",
+      "title": "The Importance of Column Lists in INSERT",
+      "bodyMarkdown": "When adding new rows to a table using `INSERT`, you can either specify the columns you want to fill, or leave them out. For example:\n\n```sql\nINSERT INTO inventory_items (name, category, price) VALUES ('New Keychain', 'Accessories', 3.99);\n```\n\nThis approach is safer than omitting the column list:\n\n```sql\nINSERT INTO inventory_items VALUES (7, 'New Keychain', 'Accessories', 3.99, 'active', 0, NULL, '2026-02-10');\n```\n\nIf the table structure changes (columns are added, removed, or reordered), omitting the column list can cause errors or put data in the wrong columns. Always use explicit column lists to avoid surprises and make your code easier to read and maintain."
+    },
+    {
+      "id": "sketch-2",
+      "title": "Defaults, NULLs, and Required Columns",
+      "bodyMarkdown": "Some columns have default values or allow NULLs, but others are required. For example, in `inventory_items`, `name`, `category`, `price`, `status`, `is_test`, and `last_updated` are all NOT NULL (required), while `notes` can be NULL. If you omit a required column in your INSERT and don't provide a value, you'll get an error. If you omit a column with a default, SQL will use the default value. Specifying the column list makes it clear which values go where, and lets you intentionally use defaults or NULLs."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "ex-1",
+      "kind": "code_input",
+      "title": "Insert a new inventory item with explicit columns",
+      "prompt": "Write an INSERT statement to add a new row to the `inventory_items` table with the following values:\n- name: 'Desk Organizer'\n- category: 'Accessories'\n- price: 8.50\n\nLet SQL use the default values for all other columns. Use an explicit column list.",
+      "hint": "List only the columns you want to set. The rest will use defaults.",
+      "help": {
+        "concept": "Specifying a column list in INSERT lets SQL fill in defaults for columns you don't mention.",
+        "hint_1": "Use (name, category, price) as your column list.",
+        "hint_2": "Don't include columns like status or last_updated; they have defaults."
+      },
+      "starterCode": "-- Write your INSERT statement here",
+      "solutionCode": "INSERT INTO inventory_items (name, category, price) VALUES ('Desk Organizer', 'Accessories', 8.50);",
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "ex-2",
+      "kind": "code_input",
+      "title": "Insert with all required columns (no column list)",
+      "prompt": "Write an INSERT statement that adds a new row to `inventory_items` by providing values for every column, in the correct order, **without** using a column list. Use these values:\n- id: 8\n- name: 'Sample Lamp'\n- category: 'Decor'\n- price: 22.00\n- status: 'active'\n- is_test: 0\n- notes: NULL\n- last_updated: '2026-02-11'",
+      "hint": "You must match the table's column order exactly when omitting the column list.",
+      "help": {
+        "concept": "If you omit the column list, you must provide a value for every column, in the exact order defined in the table.",
+        "hint_1": "Check the schema for the column order: id, name, category, price, status, is_test, notes, last_updated.",
+        "hint_2": "Write all values in the same order as the table definition."
+      },
+      "starterCode": "-- Write your INSERT statement here",
+      "solutionCode": "INSERT INTO inventory_items VALUES (8, 'Sample Lamp', 'Decor', 22.00, 'active', 0, NULL, '2026-02-11');",
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "ex-3",
+      "kind": "code_input",
+      "title": "Insert a row with a NULL value for an optional column",
+      "prompt": "Write an INSERT statement to add a new row to `inventory_items` with these values:\n- name: 'Trial Pen'\n- category: 'Accessories'\n- price: 2.00\n- notes: NULL\n\nLet SQL use defaults for all other columns. Use an explicit column list.",
+      "hint": "Include 'notes' in your column list and set it to NULL.",
+      "help": {
+        "concept": "You can set a column to NULL if it allows NULLs, by including it in your column list and using the NULL keyword.",
+        "hint_1": "Your column list should include name, category, price, and notes.",
+        "hint_2": "Set notes to NULL directly in the VALUES clause."
+      },
+      "starterCode": "-- Write your INSERT statement here",
+      "solutionCode": "INSERT INTO inventory_items (name, category, price, notes) VALUES ('Trial Pen', 'Accessories', 2.00, NULL);",
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "ex-4",
+      "kind": "multi_choice",
+      "title": "Why is using a column list safer?",
+      "prompt": "Which of the following are reasons why using a column list in an INSERT statement is safer? Select all that apply.",
+      "hint": "Think about what could go wrong if the table changes or if you forget a value.",
+      "help": {
+        "concept": "Column lists prevent mistakes if the table structure changes and make your code clearer.",
+        "hint_1": "Consider what happens if columns are added or reordered in the table.",
+        "hint_2": "Think about how explicit column lists help avoid data going into the wrong columns."
+      },
+      "options": {
+        "a": "It prevents data from being inserted into the wrong columns if the table structure changes.",
+        "b": "It makes the code easier to read and maintain.",
+        "c": "It allows you to omit required columns without errors.",
+        "d": "It lets SQL use default values for columns you don't specify.",
+        "e": "It automatically fills in all columns with NULLs."
+      },
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ]
+    },
+    {
+      "id": "ex-5",
+      "kind": "fill_blank_choice",
+      "title": "Default values in INSERT statements",
+      "prompt": "When you omit a column from the column list in an INSERT statement, SQL will use the column's ____ if one is defined.",
+      "hint": "Think about what SQL uses when you don't provide a value for a column.",
+      "help": {
+        "concept": "If a column has a default value and you omit it in your INSERT, SQL will use that default.",
+        "hint_1": "Check the table definition for default values.",
+        "hint_2": "SQL uses the default value if you don't specify a value for that column."
+      },
+      "template": "When you omit a column from the column list in an INSERT statement, SQL will use the column's ____ if one is defined.",
+      "choices": [
+        "default value",
+        "data type",
+        "primary key",
+        "index"
+      ],
+      "correctValue": "default value"
+    }
+  ]
+}

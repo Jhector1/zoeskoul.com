@@ -77,7 +77,7 @@
         "type": "sql_query",
         "datasetId": "sales_kpi",
         "resultShape": "table",
-        "solutionCode": "SELECT customer_name, quantity * unit_price AS order_total FROM orders;"
+        "solutionCode": "SELECT customer_name, quantity * unit_price AS order_value\nFROM orders;"
       }
     },
     {
@@ -92,7 +92,7 @@
         "type": "sql_query",
         "datasetId": "sales_kpi",
         "resultShape": "table",
-        "solutionCode": "SELECT region AS sales_region FROM orders;"
+        "solutionCode": "SELECT region AS sales_region, status AS order_status\nFROM orders;"
       }
     },
     {
@@ -136,7 +136,7 @@
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "price_per_unit"
+        "value": "AS"
       }
     }
   ]

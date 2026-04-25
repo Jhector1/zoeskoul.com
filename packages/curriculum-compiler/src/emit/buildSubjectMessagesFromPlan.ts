@@ -5,6 +5,56 @@ import type {
 import type { SubjectShapePack } from "@zoeskoul/curriculum-profiles";
 import { moduleOrderToIndex } from "../spec/moduleOrder.js";
 
+
+
+
+function cleanText(value: unknown): string {
+    return typeof value === "string" ? value.trim() : "";
+}
+
+function uniqueNonEmpty(values: string[]): string[] {
+    return Array.from(new Set(values.map(cleanText).filter(Boolean)));
+}
+
+function formatWeeks(args: {
+    weeksLabel?: string | null;
+    weekStart?: number | null;
+    weekEnd?: number | null;
+    moduleWeekStart?: number | null;
+    moduleWeekEnd?: number | null;
+}): string | null {
+    const explicit = cleanText(args.weeksLabel);
+    if (explicit) return explicit;
+
+    const start = args.weekStart ?? args.moduleWeekStart ?? null;
+    const end = args.weekEnd ?? args.moduleWeekEnd ?? null;
+
+    if (typeof start !== "number" || typeof end !== "number") return null;
+
+    return start === end ? `Week ${start}` : `Weeks ${start}–${end}`;
+}
+
+function sectionDescriptionFallback(args: {
+    sectionTitle: string;
+    moduleTitle: string;
+    topicTitles: string[];
+}): string {
+    const topics = uniqueNonEmpty(args.topicTitles).slice(0, 3);
+
+    if (topics.length > 0) {
+        return `Learn ${topics.join(", ").toLowerCase()} through focused examples and practice.`;
+    }
+
+    const sectionTitle = cleanText(args.sectionTitle);
+    if (sectionTitle) {
+        return `Build practical skills for ${sectionTitle.toLowerCase()} through short lessons and practice.`;
+    }
+
+    return `Build practical skills through short lessons and hands-on practice.`;
+}
+
+
+
 type SubjectMessageEntry = {
     title: string;
     description: string;
@@ -83,19 +133,28 @@ export function buildSubjectMessagesFromPlan(args: {
                 section.order,
             );
 
+            const topicTitles = section.topics.map((topic) => topic.title);
+
             sectionMessages[logicalModuleSlug][logicalSectionSlug] = {
                 title: section.title,
-                description: section.description ?? "",
-                weeks:
-                    module.weekStart != null && module.weekEnd != null
-                        ? module.weekStart === module.weekEnd
-                            ? `Week ${module.weekStart}`
-                            : `Week ${module.weekStart}–${module.weekEnd}`
-                        : null,
-                bullets: section.topics
-                    .map((topic) => topic.title)
-                    .filter(Boolean)
-                    .slice(0, 4),
+                description:
+                    cleanText(section.description) ||
+                    sectionDescriptionFallback({
+                        sectionTitle: section.title,
+                        moduleTitle: module.title,
+                        topicTitles,
+                    }),
+                weeks: formatWeeks({
+                    weeksLabel: section.weeksLabel,
+                    weekStart: section.weekStart,
+                    weekEnd: section.weekEnd,
+                    moduleWeekStart: module.weekStart,
+                    moduleWeekEnd: module.weekEnd,
+                }),
+                bullets: uniqueNonEmpty([
+                    ...(section.bullets ?? []),
+                    ...section.topics.map((topic) => topic.title),
+                ]).slice(0, 4),
             };
         }
     }

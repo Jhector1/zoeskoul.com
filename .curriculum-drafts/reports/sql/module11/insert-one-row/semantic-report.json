@@ -1,0 +1,27 @@
+{
+  "topicId": "insert-one-row",
+  "ok": true,
+  "issues": [
+    {
+      "code": "SQL_RUNNER_NOT_CONFIGURED",
+      "category": "execution",
+      "severity": "warn",
+      "exerciseId": "code-1-insert-basic",
+      "message": "No shared SQL runner is configured for compiler-side semantic validation."
+    },
+    {
+      "code": "SQL_RUNNER_NOT_CONFIGURED",
+      "category": "execution",
+      "severity": "warn",
+      "exerciseId": "code-2-insert-with-defaults",
+      "message": "No shared SQL runner is configured for compiler-side semantic validation."
+    },
+    {
+      "code": "SQL_RUNNER_NOT_CONFIGURED",
+      "category": "execution",
+      "severity": "warn",
+      "exerciseId": "code-3-insert-null-notes",
+      "message": "No shared SQL runner is configured for compiler-side semantic validation."
+    }
+  ]
+}

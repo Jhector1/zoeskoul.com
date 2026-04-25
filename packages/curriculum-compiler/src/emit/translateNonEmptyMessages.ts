@@ -1,0 +1,81 @@
+// packages/curriculum-compiler/src/emit/translateNonEmptyMessages.ts
+
+import type { AiProvider } from "@zoeskoul/curriculum-ai";
+import { translateMessages } from "@zoeskoul/curriculum-ai";
+import type { SubjectShapePack } from "@zoeskoul/curriculum-profiles";
+
+export type JsonObject = Record<string, unknown>;
+
+function isPlainObject(value: unknown): value is JsonObject {
+    return Boolean(value) && typeof value === "object" && !Array.isArray(value);
+}
+
+function countLeafStrings(value: unknown): number {
+    if (typeof value === "string") {
+        return value.trim() ? 1 : 0;
+    }
+
+    if (Array.isArray(value)) {
+        return value.reduce<number>(
+            (sum, item) => sum + countLeafStrings(item),
+            0,
+        );
+    }
+
+    if (isPlainObject(value)) {
+        return Object.values(value).reduce<number>(
+            (sum, item) => sum + countLeafStrings(item),
+            0,
+        );
+    }
+
+    return 0;
+}
+
+export function assertNonEmptyMessages(args: {
+    locale: string;
+    label: string;
+    messages: JsonObject;
+}) {
+    const count = countLeafStrings(args.messages);
+
+    if (count <= 0) {
+        throw new Error(
+            [
+                `Translation produced empty messages for locale "${args.locale}".`,
+                `Scope: ${args.label}`,
+                `Refusing to write "{}" because that hides a broken translation pipeline.`,
+            ].join("\n"),
+        );
+    }
+}
+
+export async function translateNonEmptyMessages(args: {
+    provider: AiProvider;
+    shape: SubjectShapePack;
+    sourceLocale: string;
+    locale: string;
+    sourceMessages: JsonObject;
+    label: string;
+}): Promise<JsonObject> {
+    assertNonEmptyMessages({
+        locale: args.sourceLocale,
+        label: `${args.label} source`,
+        messages: args.sourceMessages,
+    });
+
+    const translated = await translateMessages(args.provider, {
+        shape: args.shape,
+        sourceLocale: args.sourceLocale,
+        locale: args.locale,
+        sourceMessages: args.sourceMessages,
+    });
+
+    assertNonEmptyMessages({
+        locale: args.locale,
+        label: args.label,
+        messages: translated as JsonObject,
+    });
+
+    return translated as JsonObject;
+}

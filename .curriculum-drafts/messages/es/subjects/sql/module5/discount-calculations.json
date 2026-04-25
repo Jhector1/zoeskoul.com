@@ -1,0 +1,112 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_5": {
+        "discount-calculations": {
+          "label": "Cálculos de descuentos",
+          "summary": "Aprende cómo calcular descuentos y crear nuevas columnas usando expresiones y alias de SQL en el conjunto de datos sales_kpi.",
+          "cards": {
+            "sketch0": {
+              "title": "¿Qué son los cálculos de descuentos en SQL?"
+            },
+            "sketch1": {
+              "title": "Uso de múltiples columnas en expresiones"
+            },
+            "quiz": {
+              "title": "Cuestionario"
+            }
+          },
+          "quiz": {
+            "q1": {
+              "title": "Calcular un precio con 20% de descuento",
+              "prompt": "Escribe una consulta SQL para mostrar el id de cada pedido, customer_name, unit_price y una nueva columna llamada discounted_price que muestre el unit_price después de un 20% de descuento. Usa la tabla orders.",
+              "hint": "Concéntrate en el concepto que se está evaluando.",
+              "help": {
+                "concept": "Piensa en el rol o la idea que se está evaluando en vez de repetir la respuesta.",
+                "hint_1": "Elimina opciones o interpretaciones que no coincidan con la tarea.",
+                "hint_2": "Elige el concepto que mejor se ajuste a lo que te pide el ejercicio."
+              },
+              "starterCode": "SELECT id, customer_name, unit_price, \n       -- tu expresión aquí\nFROM orders;"
+            },
+            "q2": {
+              "title": "Calcular el total de línea con descuento",
+              "prompt": "Escribe una consulta SQL para mostrar id, quantity, unit_price y una nueva columna llamada discounted_total que muestre el precio total de cada pedido después de un 10% de descuento. Usa la tabla orders.",
+              "hint": "Concéntrate en el concepto que se está evaluando.",
+              "help": {
+                "concept": "Piensa en el rol o la idea que se está evaluando en vez de repetir la respuesta.",
+                "hint_1": "Elimina opciones o interpretaciones que no coincidan con la tarea.",
+                "hint_2": "Elige el concepto que mejor se ajuste a lo que te pide el ejercicio."
+              },
+              "starterCode": "SELECT id, quantity, unit_price, \n       -- tu expresión aquí\nFROM orders;"
+            },
+            "q3": {
+              "title": "Propósito de los alias de columna",
+              "prompt": "¿Por qué deberías usar alias de columna al calcular descuentos en SQL?",
+              "hint": "Piensa en cómo se ve el resultado para alguien que lee los resultados.",
+              "help": {
+                "concept": "Los alias hacen que las columnas de resultados sean más fáciles de entender al darles nombres claros y descriptivos.",
+                "hint_1": "Los alias ayudan a que la salida sea más legible.",
+                "hint_2": "Sin alias, las columnas calculadas pueden tener nombres confusos o poco claros."
+              },
+              "options": {
+                "a": "a. Para que las columnas de salida sean más fáciles de entender",
+                "b": "b. Para acelerar la ejecución de la consulta",
+                "c": "c. Para evitar usar aritmética en SQL",
+                "d": "d. Para ocultar columnas del resultado"
+              }
+            },
+            "q4": {
+              "title": "¿Qué expresiones calculan un descuento del 25%?",
+              "prompt": "Selecciona todas las expresiones que calculan correctamente un descuento del 25% sobre unit_price.",
+              "hint": "Un descuento del 25% significa conservar el 75% del precio.",
+              "help": {
+                "concept": "Para aplicar un descuento del 25%, multiplica el precio por 0.75 o resta el 25% del precio al original.",
+                "hint_1": "Multiplicar por 0.75 o restar unit_price * 0.25 ambos funcionan.",
+                "hint_2": "Verifica qué opciones conservan el 75% del precio o restan el 25% al original."
+              },
+              "options": {
+                "a": "a. unit_price * 0.75",
+                "b": "b. unit_price - (unit_price * 0.25)",
+                "c": "c. unit_price * 1.25",
+                "d": "d. unit_price + (unit_price * 0.25)"
+              }
+            },
+            "q5": {
+              "title": "Completa el espacio en blanco: factor de descuento",
+              "prompt": "Si quieres aplicar un descuento del 15% a unit_price, ¿por qué número deberías multiplicar unit_price?",
+              "hint": "Resta la tasa de descuento a 1.",
+              "help": {
+                "concept": "El factor de descuento es 1 menos la tasa de descuento (como decimal).",
+                "hint_1": "Un descuento del 15% significa conservar el 85% del precio.",
+                "hint_2": "Convierte 85% a decimal."
+              },
+              "template": "unit_price * [BLANK]",
+              "choices": [
+                "0.85",
+                "0.15",
+                "1.15",
+                "0.75"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_5": {
+        "discount-calculations": {
+          "sk1": {
+            "title": "¿Qué son los cálculos de descuentos en SQL?",
+            "bodyMarkdown": "Los cálculos de descuentos en SQL implican usar expresiones aritméticas para calcular nuevos valores basados en columnas existentes. Por ejemplo, puedes calcular un precio con descuento multiplicando el precio original por una tasa de descuento. Estos cálculos suelen realizarse en la cláusula `SELECT` y pueden recibir nombres legibles usando alias.\n\nEjemplo:\n\n```sql\nSELECT id, customer_name, unit_price, unit_price * 0.9 AS discounted_price\nFROM orders;\n```\n\nEsta consulta muestra el precio original de cada pedido y el precio tras un 10% de descuento."
+          },
+          "sk2": {
+            "title": "Uso de múltiples columnas en expresiones",
+            "bodyMarkdown": "Puedes combinar columnas en expresiones SQL para calcular valores como totales de línea o aplicar descuentos a los totales. Por ejemplo, para obtener el precio total de cada línea de pedido tras un 15% de descuento:\n\n```sql\nSELECT id, quantity, unit_price, quantity * unit_price AS line_total,\n       quantity * unit_price * 0.85 AS discounted_total\nFROM orders;\n```\n\nEsto multiplica la cantidad por el precio unitario para el total original y luego aplica un 15% de descuento."
+          }
+        }
+      }
+    }
+  }
+}

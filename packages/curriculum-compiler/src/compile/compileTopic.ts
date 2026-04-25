@@ -1,9 +1,8 @@
+// packages/curriculum-compiler/src/compile/compileTopic.ts
+
 import type { CourseBlueprint } from "@zoeskoul/curriculum-contracts";
 import type { AiProvider } from "@zoeskoul/curriculum-ai";
-import {
-    generateTopicAuthoringDraft,
-    translateMessages,
-} from "@zoeskoul/curriculum-ai";
+import { generateTopicAuthoringDraft } from "@zoeskoul/curriculum-ai";
 import {
     getProfileServices,
     getSubjectShape,
@@ -14,6 +13,10 @@ import { buildSubjectManifestFromPlan } from "../emit/buildSubjectManifestFromPl
 import { buildSubjectMessagesFromPlan } from "../emit/buildSubjectMessagesFromPlan.js";
 import { buildTopicBundleFromDraft } from "../emit/buildTopicBundleFromDraft.js";
 import { buildMessagesFromDraft } from "../emit/buildMessagesFromDraft.js";
+import {
+    assertNonEmptyMessages,
+    translateNonEmptyMessages,
+} from "../emit/translateNonEmptyMessages.js";
 import { writeSubjectArtifacts } from "../write/writeSubjectArtifacts.js";
 import { writeTopicArtifacts } from "../write/writeTopicArtifacts.js";
 import { writeTopicReports } from "../reports/writeTopicReports.js";
@@ -31,9 +34,11 @@ export async function compileTopic(args: {
 }) {
     validateBlueprint(args.blueprint);
 
+    const sourceLocale = args.blueprint.sourceLocale;
     const extraLocales = (args.blueprint.targetLocales ?? []).filter(
-        (locale) => locale !== args.blueprint.sourceLocale,
+        (locale) => locale !== sourceLocale,
     );
+
     const totalStages = 8 + extraLocales.length * 2;
     let currentStage = 0;
 
@@ -112,8 +117,14 @@ export async function compileTopic(args: {
         shape,
     });
 
+    assertNonEmptyMessages({
+        locale: sourceLocale,
+        label: `${args.blueprint.subjectSlug} subject messages`,
+        messages: sourceSubjectMessages,
+    });
+
     const subjectMessagesByLocale: Record<string, Record<string, unknown>> = {
-        [args.blueprint.sourceLocale]: sourceSubjectMessages,
+        [sourceLocale]: sourceSubjectMessages,
     };
 
     for (const locale of extraLocales) {
@@ -122,11 +133,13 @@ export async function compileTopic(args: {
             topicId: args.topicId,
         });
 
-        subjectMessagesByLocale[locale] = await translateMessages(args.provider, {
+        subjectMessagesByLocale[locale] = await translateNonEmptyMessages({
+            provider: args.provider,
             shape,
-            sourceLocale: args.blueprint.sourceLocale,
+            sourceLocale,
             locale,
             sourceMessages: sourceSubjectMessages,
+            label: `${args.blueprint.subjectSlug} subject messages`,
         });
     }
 
@@ -158,7 +171,7 @@ export async function compileTopic(args: {
 
     const rawDraft = await generateTopicAuthoringDraft(args.provider, {
         seed,
-        locale: args.blueprint.sourceLocale,
+        locale: sourceLocale,
         shape,
     });
 
@@ -178,6 +191,17 @@ export async function compileTopic(args: {
 
     const draft = evaluation.draft;
 
+    await writeTopicReports({
+        subjectSlug: args.blueprint.subjectSlug,
+        moduleOrder: node.moduleIndex,
+        topicId: node.topic.topicId,
+        rawDraft,
+        repairedDraft: draft,
+        repairReport: evaluation.repairReport,
+        critiqueReport: evaluation.critiqueReport,
+        semanticReport: evaluation.semanticReport,
+    });
+
     advanceProgress({
         stage: "validating draft",
         topicId: node.topic.topicId,
@@ -191,9 +215,16 @@ export async function compileTopic(args: {
         const critiqueErrors = evaluation.critiqueReport.issues.filter(
             (issue) => issue.severity === "error",
         );
+
         if (critiqueErrors.length) {
             throw new Error(
-                `Critique failed:\n${critiqueErrors.map((x) => `- ${x.message}`).join("\n")}`,
+                [
+                    `Critique failed for topic "${node.topic.topicId}"`,
+                    `Module: ${node.module.moduleSlug}`,
+                    `Section: ${node.section.sectionSlug}`,
+                    `Report dir: .curriculum-drafts/reports/${args.blueprint.subjectSlug}/module${node.moduleIndex}/${node.topic.topicId}`,
+                    ...critiqueErrors.map((x) => `- ${x.message}`),
+                ].join("\n"),
             );
         }
     }
@@ -202,11 +233,16 @@ export async function compileTopic(args: {
         const semanticErrors = evaluation.semanticReport.issues.filter(
             (issue) => issue.severity === "error",
         );
+
         if (semanticErrors.length) {
             throw new Error(
-                `Semantic validation failed:\n${semanticErrors
-                    .map((x) => `- ${x.message}`)
-                    .join("\n")}`,
+                [
+                    `Semantic validation failed for topic "${node.topic.topicId}"`,
+                    `Module: ${node.module.moduleSlug}`,
+                    `Section: ${node.section.sectionSlug}`,
+                    `Report dir: .curriculum-drafts/reports/${args.blueprint.subjectSlug}/module${node.moduleIndex}/${node.topic.topicId}`,
+                    ...semanticErrors.map((x) => `- ${x.message}`),
+                ].join("\n"),
             );
         }
     }
@@ -233,8 +269,14 @@ export async function compileTopic(args: {
         moduleOrder: node.moduleIndex,
     });
 
+    assertNonEmptyMessages({
+        locale: sourceLocale,
+        label: `${args.blueprint.subjectSlug}/${node.topic.topicId} topic messages`,
+        messages: sourceMessages,
+    });
+
     const messagesByLocale: Record<string, Record<string, unknown>> = {
-        [args.blueprint.sourceLocale]: sourceMessages,
+        [sourceLocale]: sourceMessages,
     };
 
     for (const locale of extraLocales) {
@@ -245,11 +287,13 @@ export async function compileTopic(args: {
             sectionSlug: node.section.sectionSlug,
         });
 
-        messagesByLocale[locale] = await translateMessages(args.provider, {
+        messagesByLocale[locale] = await translateNonEmptyMessages({
+            provider: args.provider,
             shape,
-            sourceLocale: args.blueprint.sourceLocale,
+            sourceLocale,
             locale,
             sourceMessages,
+            label: `${args.blueprint.subjectSlug}/${node.topic.topicId} topic messages`,
         });
     }
 

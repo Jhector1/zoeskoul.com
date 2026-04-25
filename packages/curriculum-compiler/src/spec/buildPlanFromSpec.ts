@@ -41,6 +41,13 @@ export function buildPlanFromSpec(args: {
                     order: sectionIndex + 1,
                     title: section.title,
                     description: section.description,
+
+                    weekStart: section.weekStart ?? null,
+                    weekEnd: section.weekEnd ?? null,
+                    weeksLabel: section.weeksLabel ?? null,
+
+                    bullets: section.bullets,
+
                     topics,
                 };
             });

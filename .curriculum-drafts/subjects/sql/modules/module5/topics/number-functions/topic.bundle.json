@@ -25,13 +25,6 @@
       "height": 420
     },
     {
-      "id": "sketch2",
-      "kind": "sketch",
-      "titleKey": "topics.sql.sql_module_5.number-functions.cards.sketch2.title",
-      "sketchId": "sketch-3",
-      "height": 420
-    },
-    {
       "id": "quiz",
       "kind": "quiz",
       "titleKey": "topics.sql.sql_module_5.number-functions.cards.quiz.title",
@@ -56,51 +49,45 @@
       "archetype": "paragraph",
       "titleKey": "sketches.sql.sql_module_5.number-functions.sketch-2.title",
       "bodyKey": "sketches.sql.sql_module_5.number-functions.sketch-2.bodyMarkdown"
-    },
-    {
-      "id": "sketch-3",
-      "archetype": "paragraph",
-      "titleKey": "sketches.sql.sql_module_5.number-functions.sketch-3.title",
-      "bodyKey": "sketches.sql.sql_module_5.number-functions.sketch-3.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "exercise-1",
+      "id": "q1-code-input",
       "kind": "code_input",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.number-functions.quiz.exercise-1",
+      "messageBase": "topics.sql.sql_module_5.number-functions.quiz.q1-code-input",
       "language": "sql",
       "fixedSqlDialect": "sqlite",
       "recipe": {
         "type": "sql_query",
         "datasetId": "sales_kpi",
         "resultShape": "table",
-        "solutionCode": "SELECT id, unit_price, ROUND(unit_price) AS rounded_price\nFROM orders;"
+        "solutionCode": "SELECT id, ROUND(quantity * unit_price) AS rounded_total\nFROM orders;"
       }
     },
     {
-      "id": "exercise-2",
+      "id": "q2-code-input",
       "kind": "code_input",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.number-functions.quiz.exercise-2",
+      "messageBase": "topics.sql.sql_module_5.number-functions.quiz.q2-code-input",
       "language": "sql",
       "fixedSqlDialect": "sqlite",
       "recipe": {
         "type": "sql_query",
         "datasetId": "sales_kpi",
         "resultShape": "table",
-        "solutionCode": "SELECT id, quantity, unit_price, ROUND(quantity * unit_price, 2) AS total_rounded\nFROM orders;"
+        "solutionCode": "SELECT MIN(unit_price) AS min_price\nFROM orders;"
       }
     },
     {
-      "id": "exercise-3",
+      "id": "q3-single-choice",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.number-functions.quiz.exercise-3",
+      "messageBase": "topics.sql.sql_module_5.number-functions.quiz.q3-single-choice",
       "optionIds": [
         "a",
         "b"
@@ -111,11 +98,11 @@
       }
     },
     {
-      "id": "exercise-4",
+      "id": "q4-multi-choice",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.number-functions.quiz.exercise-4",
+      "messageBase": "topics.sql.sql_module_5.number-functions.quiz.q4-multi-choice",
       "optionIds": [
         "a",
         "b"
@@ -128,15 +115,15 @@
       }
     },
     {
-      "id": "exercise-5",
+      "id": "q5-fill-blank-choice",
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.number-functions.quiz.exercise-5",
-      "choiceCount": 5,
+      "messageBase": "topics.sql.sql_module_5.number-functions.quiz.q5-fill-blank-choice",
+      "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "2"
+        "value": "ROUND(quantity * unit_price)"
       }
     }
   ]

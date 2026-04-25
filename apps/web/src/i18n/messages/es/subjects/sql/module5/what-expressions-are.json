@@ -1,0 +1,112 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_5": {
+        "what-expressions-are": {
+          "label": "Qué son las expresiones",
+          "summary": "Comprende qué son las expresiones en SQL, cómo se usan para crear nuevos valores en las consultas y por qué son esenciales para las columnas calculadas.",
+          "cards": {
+            "sketch0": {
+              "title": "¿Qué es una expresión en SQL?"
+            },
+            "sketch1": {
+              "title": "Expresiones con funciones y alias"
+            },
+            "quiz": {
+              "title": "Cuestionario"
+            }
+          },
+          "quiz": {
+            "code-1": {
+              "title": "Calcular una nueva columna usando una expresión",
+              "prompt": "Escribe una consulta SQL para seleccionar `id`, `quantity`, `unit_price` y una nueva columna llamada `line_total` que multiplique `quantity` por `unit_price` de la tabla `orders`.",
+              "hint": "Concéntrate en el concepto que se está evaluando.",
+              "help": {
+                "concept": "Piensa en el rol o la idea que se está evaluando en lugar de repetir la respuesta.",
+                "hint_1": "Descarta opciones o interpretaciones que no coincidan con la tarea.",
+                "hint_2": "Elige el concepto que mejor se ajuste a lo que te pide el ejercicio."
+              },
+              "starterCode": "SELECT id, quantity, unit_price\n-- Agrega tu expresión aquí\nFROM orders;"
+            },
+            "code-2": {
+              "title": "Usar una expresión con una función",
+              "prompt": "Escribe una consulta SQL para seleccionar `id` y una nueva columna llamada `double_quantity` que sea el doble del valor de `quantity` para cada pedido.",
+              "hint": "Concéntrate en el concepto que se está evaluando.",
+              "help": {
+                "concept": "Piensa en el rol o la idea que se está evaluando en lugar de repetir la respuesta.",
+                "hint_1": "Descarta opciones o interpretaciones que no coincidan con la tarea.",
+                "hint_2": "Elige el concepto que mejor se ajuste a lo que te pide el ejercicio."
+              },
+              "starterCode": "SELECT id,\n-- Tu expresión aquí\nFROM orders;"
+            },
+            "single-1": {
+              "title": "Identificando una expresión",
+              "prompt": "¿Cuál de los siguientes es un ejemplo de una expresión en SQL?",
+              "hint": "Busca un cálculo o transformación usando columnas o valores.",
+              "help": {
+                "concept": "Una expresión es cualquier combinación válida de columnas, valores, operadores o funciones que devuelve un solo valor.",
+                "hint_1": "Las expresiones suelen usar aritmética o funciones.",
+                "hint_2": "Multiplicar dos columnas es un ejemplo clásico de una expresión."
+              },
+              "options": {
+                "a": "a. SELECT * FROM orders;",
+                "b": "b. quantity * unit_price",
+                "c": "c. FROM orders",
+                "d": "d. AS line_total"
+              }
+            },
+            "multi-1": {
+              "title": "¿Cuáles de las siguientes son expresiones SQL válidas?",
+              "prompt": "Selecciona todas las opciones que sean expresiones SQL válidas.",
+              "hint": "Las expresiones pueden ser aritméticas, funciones o referencias directas a columnas.",
+              "help": {
+                "concept": "Las expresiones válidas incluyen operaciones aritméticas, llamadas a funciones e incluso referencias a una sola columna.",
+                "hint_1": "Piensa en lo que puede aparecer en una cláusula SELECT para producir un valor.",
+                "hint_2": "Tanto los cálculos como las llamadas a funciones son expresiones válidas."
+              },
+              "options": {
+                "a": "a. quantity + 10",
+                "b": "b. ROUND(unit_price, 1)",
+                "c": "c. orders",
+                "d": "d. status"
+              }
+            },
+            "fill-1": {
+              "title": "Completa el espacio: Resultado de la expresión",
+              "prompt": "En SQL, una expresión siempre produce un ______.",
+              "hint": "¿Qué devuelve una expresión?",
+              "help": {
+                "concept": "Una expresión en SQL siempre evalúa el término que falta.",
+                "hint_1": "Piensa en el resultado de un cálculo o función.",
+                "hint_2": "No es una tabla ni un nombre de columna, sino un solo resultado."
+              },
+              "template": "En SQL, una expresión siempre produce un {blank}.",
+              "choices": [
+                "tabla",
+                "valor único",
+                "nombre de columna",
+                "fila"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_5": {
+        "what-expressions-are": {
+          "sketch-1": {
+            "title": "¿Qué es una expresión en SQL?",
+            "bodyMarkdown": "Una **expresión** en SQL es cualquier combinación de valores, columnas, operadores y funciones que produce un solo valor. Las expresiones se usan a menudo en la cláusula `SELECT` para calcular nuevas columnas o transformar datos. Por ejemplo, puedes multiplicar dos columnas para obtener un nuevo valor:\n\n```sql\nSELECT id, quantity * unit_price AS line_total\nFROM orders;\n```\n\nAquí, `quantity * unit_price` es una expresión que calcula el precio total para cada línea de pedido."
+          },
+          "sketch-2": {
+            "title": "Expresiones con funciones y alias",
+            "bodyMarkdown": "Las expresiones también pueden usar funciones integradas de SQL. Por ejemplo, puedes redondear un valor calculado:\n\n```sql\nSELECT id, ROUND(quantity * unit_price, 2) AS rounded_total\nFROM orders;\n```\n\nLa función `ROUND()` se aplica a la expresión y el resultado recibe el alias `rounded_total` para mayor claridad."
+          }
+        }
+      }
+    }
+  }
+}

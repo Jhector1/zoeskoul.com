@@ -1,0 +1,111 @@
+{
+  "title": "Check your inserted data",
+  "summary": "Learn how to verify your inserted rows in the inventory_items table, confirm changes, and understand how to check for correct data after an INSERT.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sk1",
+      "title": "Why check your inserted data?",
+      "bodyMarkdown": "After you run an `INSERT` statement, it's important to confirm that your data was added as expected. You can do this by running a `SELECT` query on the table. For example, after inserting a new inventory item, you might run:\n\n```sql\nSELECT * FROM inventory_items;\n```\n\nOr, to check for a specific row you just inserted:\n\n```sql\nSELECT * FROM inventory_items WHERE name = 'Sticker Pack';\n```\n\nThis helps you verify that all columns have the correct values and that no mistakes were made during the insert."
+    },
+    {
+      "id": "sk2",
+      "title": "Checking for specific values",
+      "bodyMarkdown": "If you want to confirm that a particular value was inserted, use a `WHERE` clause to filter the results. For example, to check if any items in the 'Accessories' category were added:\n\n```sql\nSELECT id, name, category FROM inventory_items WHERE category = 'Accessories';\n```\n\nThis will show only the rows matching your filter, making it easier to spot your new data."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "q1",
+      "kind": "code_input",
+      "title": "Check for a newly inserted item by name",
+      "prompt": "Suppose you just inserted a new item called 'Eco Notebook' into the inventory_items table. Write a SQL query to display all columns for rows where the name is 'Eco Notebook'.",
+      "hint": "Use SELECT * with a WHERE clause to filter by the name column.",
+      "starterCode": "-- Write a query to show all columns for the item named 'Eco Notebook'\n",
+      "solutionCode": "SELECT * FROM inventory_items WHERE name = 'Eco Notebook';",
+      "help": {
+        "concept": "To confirm a specific row was inserted, use a SELECT statement with a WHERE clause matching the unique value you inserted.",
+        "hint_1": "Filter the inventory_items table by the name column.",
+        "hint_2": "Use SELECT * FROM inventory_items WHERE name equals the new item's name."
+      },
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "q2",
+      "kind": "code_input",
+      "title": "Count rows after inserting data",
+      "prompt": "After inserting several new items, you want to check how many total rows are now in the inventory_items table. Write a SQL query to return the total count of rows.",
+      "hint": "Use the COUNT function to count all rows in the table.",
+      "starterCode": "-- Write a query to count all rows in inventory_items\n",
+      "solutionCode": "SELECT COUNT(*) FROM inventory_items;",
+      "help": {
+        "concept": "COUNT(*) returns the total number of rows in a table, which helps verify how many records exist after inserts.",
+        "hint_1": "Use SELECT with the COUNT aggregate function.",
+        "hint_2": "COUNT(*) counts every row in the table."
+      },
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "q3",
+      "kind": "code_input",
+      "title": "Check inserted data with multiple filters",
+      "prompt": "You inserted a new item in the 'Kitchen' category with a price of 10.00. Write a SQL query to show all columns for items in the 'Kitchen' category with a price of 10.00.",
+      "hint": "Use WHERE to filter by both category and price.",
+      "starterCode": "-- Show all columns for Kitchen items with price 10.00\n",
+      "solutionCode": "SELECT * FROM inventory_items WHERE category = 'Kitchen' AND price = 10.00;",
+      "help": {
+        "concept": "Combining multiple conditions in a WHERE clause helps you confirm that the inserted data matches all expected values.",
+        "hint_1": "Filter by category and price using AND.",
+        "hint_2": "Both conditions must be true for a row to be returned."
+      },
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "q4",
+      "kind": "multi_choice",
+      "title": "Ways to check your inserted data",
+      "prompt": "Which of the following are good ways to check that your data was inserted correctly into the inventory_items table? Select all that apply.",
+      "hint": "Think about how you can confirm the presence and correctness of new rows.",
+      "options": {
+        "a": "Run a SELECT query with a WHERE clause for the inserted values.",
+        "b": "Count the total number of rows before and after the insert.",
+        "c": "Assume the data is correct if no error was shown.",
+        "d": "Check for the new row using a SELECT * query.",
+        "e": "Restart the database server."
+      },
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ],
+      "help": {
+        "concept": "Verifying inserted data involves querying the table to confirm the new row is present and correct.",
+        "hint_1": "Look for methods that directly check the table's contents.",
+        "hint_2": "SELECT queries and row counts help confirm inserts; assuming or restarting does not."
+      }
+    },
+    {
+      "id": "q5",
+      "kind": "fill_blank_choice",
+      "title": "Fill in the blank: Checking for a specific value",
+      "prompt": "To check if an item named 'Sample Poster' exists in the inventory_items table, you would use:\n\nSELECT * FROM inventory_items WHERE name = ____;",
+      "hint": "The value should match the item name exactly as stored in the table.",
+      "template": "SELECT * FROM inventory_items WHERE name = ____;",
+      "choices": [
+        "'Sample Poster'",
+        "Sample Poster",
+        "\"Sample Poster\"",
+        "'Poster'"
+      ],
+      "correctValue": "'Sample Poster'",
+      "help": {
+        "concept": "String values in SQL queries must be enclosed in single quotes to match the exact value in the table.",
+        "hint_1": "Remember to use single quotes for string literals in SQL.",
+        "hint_2": "The value should be exactly as it appears in the table, with correct quoting."
+      }
+    }
+  ]
+}

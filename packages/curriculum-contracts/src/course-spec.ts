@@ -62,6 +62,13 @@ export type CourseSpecSection = {
     sectionSlug: string;
     title: string;
     description?: string;
+
+    weekStart?: number | null;
+    weekEnd?: number | null;
+    weeksLabel?: string | null;
+
+    bullets?: string[];
+
     topics: CourseSpecTopic[];
 };
 
@@ -110,6 +117,8 @@ export type CourseSpec = {
     title: string;
     subtitle?: string;
     intendedFor?: string;
+    sourceLocale?: string;
+    targetLocales?: string[];
     courseOverview?: {
         recommendedSequence?: string;
         summary?: string;

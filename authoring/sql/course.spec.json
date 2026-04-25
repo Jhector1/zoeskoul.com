@@ -3,6 +3,10 @@
   "subjectSlug": "sql",
   "profileId": "sql",
   "title": "SQL for Absolute Beginners",
+  "sourceLocale": "en",
+  "targetLocales": [
+
+  ],
   "subtitle": "Full course blueprint in modules, sections, topics, exercises, quizzes, and projects",
   "intendedFor": "Best for self-learners, tutors, beginner bootcamps, community college intros, and first-time database students.",
   "courseOverview": {
@@ -110,14 +114,14 @@
   "releasePlan": {
     "currentRelease": {
       "name": "current",
-      "startModuleNumber": 5,
-      "endModuleNumber": 5
+      "startModuleNumber": 11,
+      "endModuleNumber": 11
     },
     "releases": [
       {
         "name": "current",
-        "startModuleNumber": 5,
-        "endModuleNumber": 5
+        "startModuleNumber": 11,
+        "endModuleNumber": 11
       }
     ]
   },
@@ -141,7 +145,8 @@
     },
     "runtimePolicy": {
       "sqlDialect": "sqlite",
-      "datasetStrategy": "module_based"
+      "datasetStrategy": "module_based",
+      "resultShape": "table"
     },
     "qualityPolicy": {
       "allowBlankTopicIds": false,
@@ -196,7 +201,9 @@
       },
       "runtimePolicy": {
         "sqlDialect": "sqlite",
-        "datasetStrategy": "module_based"
+        "datasetStrategy": "module_based",
+        "resultShape": "table",
+        "datasetId": "students_intro"
       },
       "sections": [
         {
@@ -248,6 +255,15 @@
                 "foundations"
               ]
             }
+          ],
+          "order": 1,
+          "description": "Start with the big picture: what SQL is, why people use it, and how it helps answer questions from data.",
+          "weeksLabel": "Module 0, Section 0.1",
+          "bullets": [
+            "What SQL means",
+            "What a database is",
+            "Why SQL is useful",
+            "Real-world examples of databases"
           ]
         },
         {
@@ -300,6 +316,15 @@
                 "filters"
               ]
             }
+          ],
+          "order": 2,
+          "description": "Learn how tables organize information through rows, columns, records, fields, and clear names.",
+          "weeksLabel": "Module 0, Section 0.2",
+          "bullets": [
+            "Rows and columns",
+            "Records and fields",
+            "Table names and column names",
+            "Reading data like a spreadsheet"
           ]
         },
         {
@@ -351,6 +376,15 @@
                 "foundations"
               ]
             }
+          ],
+          "order": 3,
+          "description": "Build the mental model for organizing data, connecting tables, and turning real questions into database questions.",
+          "weeksLabel": "Module 0, Section 0.3",
+          "bullets": [
+            "How data is organized",
+            "One table vs multiple tables",
+            "Intro to keys",
+            "Thinking in questions and answers"
           ]
         },
         {
@@ -403,9 +437,19 @@
                 "foundations"
               ]
             }
+          ],
+          "order": 4,
+          "description": "Get comfortable with where SQL runs, how editors work, and how to read the results of a first query.",
+          "weeksLabel": "Module 0, Section 0.4",
+          "bullets": [
+            "Where SQL runs",
+            "SQL editor basics",
+            "Running your first query",
+            "Reading query results"
           ]
         }
-      ]
+      ],
+      "description": "Build the learner's mental model before syntax: what SQL is, how databases organize information, and how a question becomes a query."
     },
     {
       "moduleNumber": 1,
@@ -444,7 +488,9 @@
       },
       "runtimePolicy": {
         "sqlDialect": "sqlite",
-        "datasetStrategy": "module_based"
+        "datasetStrategy": "module_based",
+        "resultShape": "table",
+        "datasetId": "students_intro"
       },
       "sections": [
         {
@@ -500,6 +546,15 @@
                 "retrieval"
               ]
             }
+          ],
+          "order": 1,
+          "description": "Learn the purpose of SELECT and how a basic query asks a table for information.",
+          "weeksLabel": "Module 1, Section 1.1",
+          "bullets": [
+            "What SELECT does",
+            "Selecting all columns with *",
+            "Selecting specific columns",
+            "Query structure basics"
           ]
         },
         {
@@ -555,6 +610,15 @@
                 "retrieval"
               ]
             }
+          ],
+          "order": 2,
+          "description": "Practice choosing useful columns and reading clean results from a single table.",
+          "weeksLabel": "Module 1, Section 1.2",
+          "bullets": [
+            "FROM and table names",
+            "Choosing the right columns",
+            "Viewing clean results",
+            "Writing simple readable queries"
           ]
         },
         {
@@ -610,6 +674,15 @@
                 "retrieval"
               ]
             }
+          ],
+          "order": 3,
+          "description": "Understand the small syntax details that make SQL readable and valid, including keywords, semicolons, and casing.",
+          "weeksLabel": "Module 1, Section 1.3",
+          "bullets": [
+            "Keywords",
+            "Semicolons",
+            "Uppercase vs lowercase",
+            "Common beginner syntax mistakes"
           ]
         },
         {
@@ -665,9 +738,19 @@
                 "retrieval"
               ]
             }
+          ],
+          "order": 4,
+          "description": "Strengthen the basic SELECT pattern by querying one column, multiple columns, and full tables.",
+          "weeksLabel": "Module 1, Section 1.4",
+          "bullets": [
+            "Query one column",
+            "Query multiple columns",
+            "Query full tables",
+            "Predicting result output"
           ]
         }
-      ]
+      ],
+      "description": "Teach learners to retrieve data confidently with SELECT and FROM before filtering or joining tables."
     },
     {
       "moduleNumber": 2,
@@ -706,7 +789,9 @@
       },
       "runtimePolicy": {
         "sqlDialect": "sqlite",
-        "datasetStrategy": "module_based"
+        "datasetStrategy": "module_based",
+        "resultShape": "table",
+        "datasetId": "students_intro"
       },
       "sections": [
         {
@@ -762,6 +847,15 @@
                 "filters"
               ]
             }
+          ],
+          "order": 1,
+          "description": "Learn why filtering matters and how WHERE keeps only the rows that answer the question.",
+          "weeksLabel": "Module 2, Section 2.1",
+          "bullets": [
+            "Why filtering matters",
+            "The WHERE clause",
+            "Matching exact values",
+            "Filtering numbers and text"
           ]
         },
         {
@@ -841,6 +935,15 @@
                 "filters"
               ]
             }
+          ],
+          "order": 2,
+          "description": "Use comparison operators to match exact values, ranges, and numeric conditions correctly.",
+          "weeksLabel": "Module 2, Section 2.2",
+          "bullets": [
+            "=",
+            "!= or <>",
+            ">",
+            "<"
           ]
         },
         {
@@ -896,6 +999,15 @@
                 "filters"
               ]
             }
+          ],
+          "order": 3,
+          "description": "Combine conditions with AND, OR, and NOT while keeping the query logic clear.",
+          "weeksLabel": "Module 2, Section 2.3",
+          "bullets": [
+            "AND",
+            "OR",
+            "NOT",
+            "Combining conditions safely"
           ]
         },
         {
@@ -951,9 +1063,19 @@
                 "filters"
               ]
             }
+          ],
+          "order": 4,
+          "description": "Apply filtering skills to text, numbers, and multi-rule questions while avoiding common mistakes.",
+          "weeksLabel": "Module 2, Section 2.4",
+          "bullets": [
+            "Filter by number",
+            "Filter by text",
+            "Filter by more than one rule",
+            "Avoiding filtering mistakes"
           ]
         }
-      ]
+      ],
+      "description": "Introduce decision-making in queries by teaching learners to keep only the rows they actually need."
     },
     {
       "moduleNumber": 3,
@@ -992,7 +1114,9 @@
       },
       "runtimePolicy": {
         "sqlDialect": "sqlite",
-        "datasetStrategy": "module_based"
+        "datasetStrategy": "module_based",
+        "resultShape": "table",
+        "datasetId": "students_intro"
       },
       "sections": [
         {
@@ -1045,6 +1169,15 @@
                 "limit"
               ]
             }
+          ],
+          "order": 1,
+          "description": "Learn how ORDER BY changes the order of results so the most useful rows are easier to see.",
+          "weeksLabel": "Module 3, Section 3.1",
+          "bullets": [
+            "Why sorting matters",
+            "ORDER BY",
+            "Ascending order",
+            "Descending order"
           ]
         },
         {
@@ -1096,6 +1229,15 @@
                 "limit"
               ]
             }
+          ],
+          "order": 2,
+          "description": "Practice sorting by more than one column and understand how SQL handles ties.",
+          "weeksLabel": "Module 3, Section 3.2",
+          "bullets": [
+            "Primary sort",
+            "Secondary sort",
+            "Sorting text",
+            "Sorting numbers and dates"
           ]
         },
         {
@@ -1148,6 +1290,15 @@
                 "limit"
               ]
             }
+          ],
+          "order": 3,
+          "description": "Use LIMIT with sorting to focus on the top, bottom, newest, or most relevant rows.",
+          "weeksLabel": "Module 3, Section 3.3",
+          "bullets": [
+            "Why limit results",
+            "LIMIT",
+            "Top rows only",
+            "Combining ORDER BY with LIMIT"
           ]
         },
         {
@@ -1199,9 +1350,19 @@
                 "limit"
               ]
             }
+          ],
+          "order": 4,
+          "description": "Build clearer result sets by combining sorting, limiting, and careful result reading.",
+          "weeksLabel": "Module 3, Section 3.4",
+          "bullets": [
+            "Find highest values",
+            "Find lowest values",
+            "Show top 5 records",
+            "Build clear result sets"
           ]
         }
-      ]
+      ],
+      "description": "Help beginners control output so answers are easier to read, rank, and compare."
     },
     {
       "moduleNumber": 4,
@@ -1240,7 +1401,9 @@
       },
       "runtimePolicy": {
         "sqlDialect": "sqlite",
-        "datasetStrategy": "module_based"
+        "datasetStrategy": "module_based",
+        "resultShape": "table",
+        "datasetId": "students_intro"
       },
       "sections": [
         {
@@ -1298,6 +1461,15 @@
                 "data-quality"
               ]
             }
+          ],
+          "order": 1,
+          "description": "Search text with LIKE and wildcards so queries can handle partial matches and flexible patterns.",
+          "weeksLabel": "Module 4, Section 4.1",
+          "bullets": [
+            "Intro to LIKE",
+            "% wildcard",
+            "_ wildcard",
+            "Searching partial text"
           ]
         },
         {
@@ -1353,6 +1525,15 @@
                 "data-quality"
               ]
             }
+          ],
+          "order": 2,
+          "description": "Use IN, NOT IN, and BETWEEN to write cleaner filters for lists and ranges.",
+          "weeksLabel": "Module 4, Section 4.2",
+          "bullets": [
+            "IN",
+            "NOT IN",
+            "BETWEEN",
+            "Range filtering practice"
           ]
         },
         {
@@ -1408,6 +1589,15 @@
                 "data-quality"
               ]
             }
+          ],
+          "order": 3,
+          "description": "Understand NULL and learn the right way to find missing or present values.",
+          "weeksLabel": "Module 4, Section 4.3",
+          "bullets": [
+            "What NULL means",
+            "IS NULL",
+            "IS NOT NULL",
+            "Common NULL mistakes"
           ]
         },
         {
@@ -1463,9 +1653,19 @@
                 "data-quality"
               ]
             }
+          ],
+          "order": 4,
+          "description": "Combine text matching, list filters, ranges, and NULL checks in practical search problems.",
+          "weeksLabel": "Module 4, Section 4.4",
+          "bullets": [
+            "Search names",
+            "Filter categories",
+            "Find missing data",
+            "Combine text and NULL filters"
           ]
         }
-      ]
+      ],
+      "description": "Expand filtering to real-world cases like partial text, multiple choices, ranges, and missing values."
     },
     {
       "moduleNumber": 5,
@@ -1504,7 +1704,9 @@
       },
       "runtimePolicy": {
         "sqlDialect": "sqlite",
-        "datasetStrategy": "module_based"
+        "datasetStrategy": "module_based",
+        "resultShape": "table",
+        "datasetId": "sales_kpi"
       },
       "sections": [
         {
@@ -1556,6 +1758,15 @@
                 "expressions"
               ]
             }
+          ],
+          "order": 1,
+          "description": "Create useful calculated values directly inside SELECT statements using arithmetic and expressions.",
+          "weeksLabel": "Module 5, Section 5.1",
+          "bullets": [
+            "What expressions are",
+            "Math in SQL",
+            "Adding and subtracting",
+            "Multiplying and dividing"
           ]
         },
         {
@@ -1607,6 +1818,15 @@
                 "expressions"
               ]
             }
+          ],
+          "order": 2,
+          "description": "Rename calculated and selected columns so query results are easier to read and explain.",
+          "weeksLabel": "Module 5, Section 5.2",
+          "bullets": [
+            "What aliases are",
+            "AS",
+            "Renaming result columns",
+            "Writing readable output"
           ]
         },
         {
@@ -1658,6 +1878,15 @@
                 "expressions"
               ]
             }
+          ],
+          "order": 3,
+          "description": "Explore beginner-friendly SQL functions for text, numbers, and dates without overcomplicating the query.",
+          "weeksLabel": "Module 5, Section 5.3",
+          "bullets": [
+            "Intro to functions",
+            "String functions",
+            "Number functions",
+            "Date function awareness"
           ]
         },
         {
@@ -1709,9 +1938,19 @@
                 "expressions"
               ]
             }
+          ],
+          "order": 4,
+          "description": "Use expressions and aliases to build simple report-style outputs such as totals, discounts, and renamed columns.",
+          "weeksLabel": "Module 5, Section 5.4",
+          "bullets": [
+            "Total price calculations",
+            "Discount calculations",
+            "Renaming outputs",
+            "Simple report queries"
           ]
         }
-      ]
+      ],
+      "description": "Teach learners to create new values from existing data so raw tables become useful reports."
     },
     {
       "moduleNumber": 6,
@@ -1750,7 +1989,9 @@
       },
       "runtimePolicy": {
         "sqlDialect": "sqlite",
-        "datasetStrategy": "module_based"
+        "datasetStrategy": "module_based",
+        "resultShape": "table",
+        "datasetId": "sales_kpi"
       },
       "sections": [
         {
@@ -1802,6 +2043,15 @@
                 "aggregates"
               ]
             }
+          ],
+          "order": 1,
+          "description": "Move from individual rows to summary answers by learning what aggregate functions do.",
+          "weeksLabel": "Module 6, Section 6.1",
+          "bullets": [
+            "What aggregate functions do",
+            "One value from many rows",
+            "Aggregates vs regular queries",
+            "Reading summary results"
           ]
         },
         {
@@ -1864,6 +2114,15 @@
                 "aggregates"
               ]
             }
+          ],
+          "order": 2,
+          "description": "Practice COUNT, SUM, AVG, MIN, and MAX as the core tools for summarizing data.",
+          "weeksLabel": "Module 6, Section 6.2",
+          "bullets": [
+            "COUNT()",
+            "SUM()",
+            "AVG()",
+            "MIN()"
           ]
         },
         {
@@ -1919,6 +2178,15 @@
                 "aggregates"
               ]
             }
+          ],
+          "order": 3,
+          "description": "Combine WHERE with aggregates to summarize only the rows that matter.",
+          "weeksLabel": "Module 6, Section 6.3",
+          "bullets": [
+            "Aggregate with WHERE",
+            "Counting filtered rows",
+            "Summing filtered data",
+            "Average on selected records"
           ]
         },
         {
@@ -1970,9 +2238,19 @@
                 "aggregates"
               ]
             }
+          ],
+          "order": 4,
+          "description": "Build small summary reports using counts, totals, averages, highest values, and lowest values.",
+          "weeksLabel": "Module 6, Section 6.4",
+          "bullets": [
+            "Count customers",
+            "Sum sales",
+            "Find highest and lowest values",
+            "Build mini summary reports"
           ]
         }
-      ]
+      ],
+      "description": "Move from row-by-row reading to summarizing many rows into a single business answer."
     },
     {
       "moduleNumber": 7,
@@ -2011,7 +2289,9 @@
       },
       "runtimePolicy": {
         "sqlDialect": "sqlite",
-        "datasetStrategy": "module_based"
+        "datasetStrategy": "module_based",
+        "resultShape": "table",
+        "datasetId": "sales_kpi"
       },
       "sections": [
         {
@@ -2067,6 +2347,15 @@
                 "having"
               ]
             }
+          ],
+          "order": 1,
+          "description": "Learn how GROUP BY turns many rows into summaries by category, person, product, or team.",
+          "weeksLabel": "Module 7, Section 7.1",
+          "bullets": [
+            "What grouping means",
+            "GROUP BY",
+            "Grouping by one column",
+            "Reading grouped results"
           ]
         },
         {
@@ -2122,6 +2411,15 @@
                 "having"
               ]
             }
+          ],
+          "order": 2,
+          "description": "Use aggregate functions with groups to calculate counts, totals, averages, minimums, and maximums per category.",
+          "weeksLabel": "Module 7, Section 7.2",
+          "bullets": [
+            "Count per group",
+            "Sum per group",
+            "Average per group",
+            "Max and min per group"
           ]
         },
         {
@@ -2179,6 +2477,15 @@
                 "having"
               ]
             }
+          ],
+          "order": 3,
+          "description": "Understand HAVING and how it filters grouped summaries differently from WHERE.",
+          "weeksLabel": "Module 7, Section 7.3",
+          "bullets": [
+            "Why HAVING exists",
+            "WHERE vs HAVING",
+            "Filtering grouped results",
+            "Common grouping mistakes"
           ]
         },
         {
@@ -2234,9 +2541,19 @@
                 "having"
               ]
             }
+          ],
+          "order": 4,
+          "description": "Create grouped reports for sales, orders, departments, and dashboard-style summaries.",
+          "weeksLabel": "Module 7, Section 7.4",
+          "bullets": [
+            "Sales by category",
+            "Orders by customer",
+            "Departments with high averages",
+            "Summary dashboards in SQL"
           ]
         }
-      ]
+      ],
+      "description": "Teach learners to summarize by category, person, team, or product instead of only summarizing the whole table."
     },
     {
       "moduleNumber": 8,
@@ -2275,7 +2592,9 @@
       },
       "runtimePolicy": {
         "sqlDialect": "sqlite",
-        "datasetStrategy": "module_based"
+        "datasetStrategy": "module_based",
+        "resultShape": "table",
+        "datasetId": "school_relations_intro"
       },
       "sections": [
         {
@@ -2331,6 +2650,15 @@
                 "relational"
               ]
             }
+          ],
+          "order": 1,
+          "description": "Understand why databases split related information across tables and how IDs connect that data.",
+          "weeksLabel": "Module 8, Section 8.1",
+          "bullets": [
+            "Splitting data into tables",
+            "Connecting data with IDs",
+            "Primary keys",
+            "Foreign keys"
           ]
         },
         {
@@ -2386,6 +2714,15 @@
                 "relational"
               ]
             }
+          ],
+          "order": 2,
+          "description": "Learn INNER JOIN by matching related rows from two tables and reading the combined result.",
+          "weeksLabel": "Module 8, Section 8.2",
+          "bullets": [
+            "What an inner join does",
+            "Matching rows from two tables",
+            "Join syntax",
+            "Reading join results"
           ]
         },
         {
@@ -2443,6 +2780,15 @@
                 "relational"
               ]
             }
+          ],
+          "order": 3,
+          "description": "Use LEFT JOIN to keep unmatched rows and understand why NULL appears in joined results.",
+          "weeksLabel": "Module 8, Section 8.3",
+          "bullets": [
+            "What a left join does",
+            "Keeping unmatched left-side rows",
+            "When to use left join",
+            "NULLs in joined results"
           ]
         },
         {
@@ -2498,9 +2844,19 @@
                 "relational"
               ]
             }
+          ],
+          "order": 4,
+          "description": "Practice choosing the right join for common relationships like customers and orders, students and courses, and products and categories.",
+          "weeksLabel": "Module 8, Section 8.4",
+          "bullets": [
+            "Customers and orders",
+            "Students and courses",
+            "Products and categories",
+            "Choosing the right join"
           ]
         }
-      ]
+      ],
+      "description": "Show how relational databases connect information stored in different tables."
     },
     {
       "moduleNumber": 9,
@@ -2588,6 +2944,15 @@
                 "relational"
               ]
             }
+          ],
+          "order": 1,
+          "description": "Use table and column aliases to make longer queries shorter, clearer, and easier to maintain.",
+          "weeksLabel": "Module 9, Section 9.1",
+          "bullets": [
+            "Column aliases review",
+            "Table aliases",
+            "Shortening long queries",
+            "Making joins readable"
           ]
         },
         {
@@ -2639,6 +3004,15 @@
                 "foundations"
               ]
             }
+          ],
+          "order": 2,
+          "description": "Format SQL across lines with indentation so the structure of the query is easy to follow.",
+          "weeksLabel": "Module 9, Section 9.2",
+          "bullets": [
+            "Indenting queries",
+            "Breaking queries across lines",
+            "Organizing long statements",
+            "Writing beginner-friendly SQL"
           ]
         },
         {
@@ -2690,6 +3064,15 @@
                 "foundations"
               ]
             }
+          ],
+          "order": 3,
+          "description": "Add helpful comments and readable names without cluttering queries or hiding the logic.",
+          "weeksLabel": "Module 9, Section 9.3",
+          "bullets": [
+            "SQL comments",
+            "Explaining logic",
+            "Naming output clearly",
+            "Avoiding messy SQL"
           ]
         },
         {
@@ -2742,9 +3125,25 @@
                 "foundations"
               ]
             }
+          ],
+          "order": 4,
+          "description": "Refactor messy SQL into clean query examples that are easier to debug, review, and explain.",
+          "weeksLabel": "Module 9, Section 9.4",
+          "bullets": [
+            "Refactor ugly queries",
+            "Format join queries",
+            "Use aliases correctly",
+            "Write readable reports"
           ]
         }
-      ]
+      ],
+      "runtimePolicy": {
+        "sqlDialect": "sqlite",
+        "datasetStrategy": "module_based",
+        "resultShape": "table",
+        "datasetId": "school_relations_intro"
+      },
+      "description": "Improve readability so beginners do not just write working SQL, but SQL they can revisit, debug, and teach from."
     },
     {
       "moduleNumber": 10,
@@ -2831,6 +3230,15 @@
                 "foundations"
               ]
             }
+          ],
+          "order": 1,
+          "description": "Introduce subqueries as queries inside other queries and learn when that pattern is useful.",
+          "weeksLabel": "Module 10, Section 10.1",
+          "bullets": [
+            "Query inside another query",
+            "Why subqueries are useful",
+            "Simple mental model",
+            "When beginners should use them"
           ]
         },
         {
@@ -2882,6 +3290,15 @@
                 "foundations"
               ]
             }
+          ],
+          "order": 2,
+          "description": "Use subqueries inside WHERE to compare rows against calculated values or lists of results.",
+          "weeksLabel": "Module 10, Section 10.2",
+          "bullets": [
+            "Compare against a calculated value",
+            "Find values above average",
+            "Use IN with subqueries",
+            "Read inside-out logic"
           ]
         },
         {
@@ -2933,6 +3350,15 @@
                 "foundations"
               ]
             }
+          ],
+          "order": 3,
+          "description": "Treat a subquery as a temporary result set that another query can build on.",
+          "weeksLabel": "Module 10, Section 10.3",
+          "bullets": [
+            "Temporary result sets",
+            "Build on top of another query",
+            "Aliasing subqueries",
+            "Beginner-safe examples"
           ]
         },
         {
@@ -2986,9 +3412,25 @@
                 "subquery"
               ]
             }
+          ],
+          "order": 4,
+          "description": "Practice solving beginner problems with subqueries and compare them with join-based thinking.",
+          "weeksLabel": "Module 10, Section 10.4",
+          "bullets": [
+            "Above-average salary",
+            "Customers with orders",
+            "Filter from a summary query",
+            "Compare join vs subquery thinking"
           ]
         }
-      ]
+      ],
+      "runtimePolicy": {
+        "sqlDialect": "sqlite",
+        "datasetStrategy": "module_based",
+        "resultShape": "table",
+        "datasetId": "school_relations_intro"
+      },
+      "description": "Introduce query-inside-query thinking without overwhelming learners with advanced database theory."
     },
     {
       "moduleNumber": 11,
@@ -3079,6 +3521,15 @@
                 "data-change"
               ]
             }
+          ],
+          "order": 1,
+          "description": "Learn what INSERT INTO does and how SQL adds new rows to a table.",
+          "weeksLabel": "Module 11, Section 11.1",
+          "bullets": [
+            "What INSERT INTO does",
+            "Insert one row",
+            "Insert multiple rows",
+            "Matching values to columns"
           ]
         },
         {
@@ -3134,6 +3585,15 @@
                 "data-change"
               ]
             }
+          ],
+          "order": 2,
+          "description": "Use explicit column lists and type awareness to make insert statements safer and easier to debug.",
+          "weeksLabel": "Module 11, Section 11.2",
+          "bullets": [
+            "Why column lists matter",
+            "Data type awareness",
+            "Avoiding insert errors",
+            "Reading inserted results"
           ]
         },
         {
@@ -3189,6 +3649,15 @@
                 "data-change"
               ]
             }
+          ],
+          "order": 3,
+          "description": "Understand how missing values, NULL, optional columns, and defaults affect inserted rows.",
+          "weeksLabel": "Module 11, Section 11.3",
+          "bullets": [
+            "Missing values during insert",
+            "Default values",
+            "Optional columns",
+            "Insert behavior basics"
           ]
         },
         {
@@ -3244,9 +3713,25 @@
                 "data-change"
               ]
             }
+          ],
+          "order": 4,
+          "description": "Practice adding students, products, and multiple records, then checking the inserted data.",
+          "weeksLabel": "Module 11, Section 11.4",
+          "bullets": [
+            "Add a student",
+            "Add a product",
+            "Add multiple records",
+            "Check your inserted data"
           ]
         }
-      ]
+      ],
+      "runtimePolicy": {
+        "sqlDialect": "sqlite",
+        "datasetStrategy": "module_based",
+        "resultShape": "table",
+        "datasetId": "inventory_ops"
+      },
+      "description": "Shift from reading data to adding new rows carefully and correctly."
     },
     {
       "moduleNumber": 12,
@@ -3335,6 +3820,15 @@
                 "filters"
               ]
             }
+          ],
+          "order": 1,
+          "description": "Learn how UPDATE changes existing rows and why WHERE is critical before making changes.",
+          "weeksLabel": "Module 12, Section 12.1",
+          "bullets": [
+            "What UPDATE does",
+            "Changing one column",
+            "Changing multiple columns",
+            "Why WHERE is critical"
           ]
         },
         {
@@ -3390,6 +3884,15 @@
                 "data-change"
               ]
             }
+          ],
+          "order": 2,
+          "description": "Use DELETE carefully by selecting target rows first and avoiding accidental full-table deletion.",
+          "weeksLabel": "Module 12, Section 12.2",
+          "bullets": [
+            "What DELETE does",
+            "Deleting selected rows",
+            "Dangers of missing WHERE",
+            "Safe delete habits"
           ]
         },
         {
@@ -3444,6 +3947,15 @@
                 "foundations"
               ]
             }
+          ],
+          "order": 3,
+          "description": "Build safe habits for previewing, backing up, and thinking before changing data.",
+          "weeksLabel": "Module 12, Section 12.3",
+          "bullets": [
+            "Preview before update/delete",
+            "Using SELECT first",
+            "Backups and caution",
+            "Thinking before changing data"
           ]
         },
         {
@@ -3497,9 +4009,25 @@
                 "foundations"
               ]
             }
+          ],
+          "order": 4,
+          "description": "Practice updating prices, changing statuses, deleting test rows, and following a safe modification workflow.",
+          "weeksLabel": "Module 12, Section 12.4",
+          "bullets": [
+            "Update prices",
+            "Change statuses",
+            "Delete test rows",
+            "Safe data modification workflow"
           ]
         }
-      ]
+      ],
+      "runtimePolicy": {
+        "sqlDialect": "sqlite",
+        "datasetStrategy": "module_based",
+        "resultShape": "table",
+        "datasetId": "inventory_ops"
+      },
+      "description": "Teach safe data changes and the habit of previewing before modifying records."
     },
     {
       "moduleNumber": 13,
@@ -3588,6 +4116,15 @@
                 "relational"
               ]
             }
+          ],
+          "order": 1,
+          "description": "Learn what CREATE TABLE does and how clear column choices shape the future database.",
+          "weeksLabel": "Module 13, Section 13.1",
+          "bullets": [
+            "What CREATE TABLE does",
+            "Choosing column names",
+            "Choosing data types",
+            "Designing for clarity"
           ]
         },
         {
@@ -3639,6 +4176,15 @@
                 "foundations"
               ]
             }
+          ],
+          "order": 2,
+          "description": "Choose beginner-friendly data types for integers, text, decimals, dates, and times.",
+          "weeksLabel": "Module 13, Section 13.2",
+          "bullets": [
+            "Integers",
+            "Text types",
+            "Decimal numbers",
+            "Dates and times"
           ]
         },
         {
@@ -3691,6 +4237,15 @@
                 "foundations"
               ]
             }
+          ],
+          "order": 3,
+          "description": "Use constraints like PRIMARY KEY, NOT NULL, UNIQUE, and FOREIGN KEY to protect data quality.",
+          "weeksLabel": "Module 13, Section 13.3",
+          "bullets": [
+            "PRIMARY KEY",
+            "NOT NULL",
+            "UNIQUE",
+            "FOREIGN KEY"
           ]
         },
         {
@@ -3742,9 +4297,24 @@
                 "foundations"
               ]
             }
+          ],
+          "order": 4,
+          "description": "Design and create simple tables, then connect them with keys in a small relational structure.",
+          "weeksLabel": "Module 13, Section 13.4",
+          "bullets": [
+            "Create a students table",
+            "Create a products table",
+            "Create an orders table",
+            "Link tables together"
           ]
         }
-      ]
+      ],
+      "runtimePolicy": {
+        "sqlDialect": "sqlite",
+        "datasetStrategy": "manual",
+        "resultShape": "table"
+      },
+      "description": "Introduce schema design so learners can build small databases instead of only querying prebuilt ones."
     },
     {
       "moduleNumber": 14,
@@ -3835,6 +4405,15 @@
                 "relational"
               ]
             }
+          ],
+          "order": 1,
+          "description": "Recognize how real-world relationships become one-to-one, one-to-many, and many-to-many database patterns.",
+          "weeksLabel": "Module 14, Section 14.1",
+          "bullets": [
+            "Related data",
+            "One-to-one",
+            "One-to-many",
+            "Many-to-many idea"
           ]
         },
         {
@@ -3890,6 +4469,15 @@
                 "relational"
               ]
             }
+          ],
+          "order": 2,
+          "description": "Review primary and foreign keys as the foundation for linking tables properly.",
+          "weeksLabel": "Module 14, Section 14.2",
+          "bullets": [
+            "Primary key review",
+            "Foreign key review",
+            "Linking tables properly",
+            "Avoiding duplicate data"
           ]
         },
         {
@@ -3945,6 +4533,15 @@
                 "relational"
               ]
             }
+          ],
+          "order": 3,
+          "description": "Build better table designs by reducing duplication, keeping tables focused, and planning for future queries.",
+          "weeksLabel": "Module 14, Section 14.3",
+          "bullets": [
+            "Keep tables focused",
+            "Separate repeated information",
+            "Use IDs consistently",
+            "Design for future queries"
           ]
         },
         {
@@ -4000,9 +4597,24 @@
                 "relational"
               ]
             }
+          ],
+          "order": 4,
+          "description": "Turn real scenarios like stores, enrollments, and orders into beginner-friendly relational designs.",
+          "weeksLabel": "Module 14, Section 14.4",
+          "bullets": [
+            "Store and product model",
+            "Student and enrollment model",
+            "Customer and order model",
+            "Turn design into SQL tables"
           ]
         }
-      ]
+      ],
+      "runtimePolicy": {
+        "sqlDialect": "sqlite",
+        "datasetStrategy": "manual",
+        "resultShape": "table"
+      },
+      "description": "Strengthen the modeling side of SQL so learners understand why tables are shaped the way they are."
     },
     {
       "moduleNumber": 15,
@@ -4093,6 +4705,15 @@
                 "project"
               ]
             }
+          ],
+          "order": 1,
+          "description": "Plan a small student database, insert sample data, and answer useful questions with SQL.",
+          "weeksLabel": "Module 15, Section 15.1",
+          "bullets": [
+            "Design the tables",
+            "Insert sample data",
+            "Write simple queries",
+            "Build summary reports"
           ]
         },
         {
@@ -4144,6 +4765,15 @@
                 "project"
               ]
             }
+          ],
+          "order": 2,
+          "description": "Design a store database with products, customers, orders, and sales queries.",
+          "weeksLabel": "Module 15, Section 15.2",
+          "bullets": [
+            "Products table",
+            "Customers table",
+            "Orders table",
+            "Query sales information"
           ]
         },
         {
@@ -4197,6 +4827,15 @@
                 "project"
               ]
             }
+          ],
+          "order": 3,
+          "description": "Create employee and department reports using salary analysis, summaries, and joined data.",
+          "weeksLabel": "Module 15, Section 15.3",
+          "bullets": [
+            "Employees and departments",
+            "Salary analysis",
+            "Department summaries",
+            "Joined reports"
           ]
         },
         {
@@ -4248,9 +4887,24 @@
                 "project"
               ]
             }
+          ],
+          "order": 4,
+          "description": "Bring the full course together by asking business questions, writing complete SQL solutions, and explaining the logic.",
+          "weeksLabel": "Module 15, Section 15.4",
+          "bullets": [
+            "Ask business questions",
+            "Write full SQL solutions",
+            "Explain query logic",
+            "Build beginner confidence"
           ]
         }
-      ]
+      ],
+      "runtimePolicy": {
+        "sqlDialect": "sqlite",
+        "datasetStrategy": "manual",
+        "resultShape": "table"
+      },
+      "description": "Consolidate everything into realistic beginner projects that require reading, filtering, grouping, joining, and basic data design."
     }
   ],
   "assessmentAndDelivery": {

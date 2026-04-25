@@ -39,6 +39,22 @@ import uppercaseVsLowercaseJson from "./modules/module1/topics/uppercase-vs-lowe
 import viewingCleanResultsJson from "./modules/module1/topics/viewing-clean-results/topic.bundle.json";
 import whatSelectDoesJson from "./modules/module1/topics/what-select-does/topic.bundle.json";
 import writingSimpleReadableQueriesJson from "./modules/module1/topics/writing-simple-readable-queries/topic.bundle.json";
+import addAProductJson from "./modules/module11/topics/add-a-product/topic.bundle.json";
+import addAStudentJson from "./modules/module11/topics/add-a-student/topic.bundle.json";
+import addMultipleRecordsJson from "./modules/module11/topics/add-multiple-records/topic.bundle.json";
+import avoidingInsertErrorsJson from "./modules/module11/topics/avoiding-insert-errors/topic.bundle.json";
+import checkYourInsertedDataJson from "./modules/module11/topics/check-your-inserted-data/topic.bundle.json";
+import dataTypeAwarenessJson from "./modules/module11/topics/data-type-awareness/topic.bundle.json";
+import defaultValuesJson from "./modules/module11/topics/default-values/topic.bundle.json";
+import insertBehaviorBasicsJson from "./modules/module11/topics/insert-behavior-basics/topic.bundle.json";
+import insertMultipleRowsJson from "./modules/module11/topics/insert-multiple-rows/topic.bundle.json";
+import insertOneRowJson from "./modules/module11/topics/insert-one-row/topic.bundle.json";
+import matchingValuesToColumnsJson from "./modules/module11/topics/matching-values-to-columns/topic.bundle.json";
+import missingValuesDuringInsertJson from "./modules/module11/topics/missing-values-during-insert/topic.bundle.json";
+import optionalColumnsJson from "./modules/module11/topics/optional-columns/topic.bundle.json";
+import readingInsertedResultsJson from "./modules/module11/topics/reading-inserted-results/topic.bundle.json";
+import whatInsertIntoDoesJson from "./modules/module11/topics/what-insert-into-does/topic.bundle.json";
+import whyColumnListsMatterJson from "./modules/module11/topics/why-column-lists-matter/topic.bundle.json";
 import andJson from "./modules/module2/topics/and/topic.bundle.json";
 import avoidingFilteringMistakesJson from "./modules/module2/topics/avoiding-filtering-mistakes/topic.bundle.json";
 import choosingTheRightComparisonJson from "./modules/module2/topics/choosing-the-right-comparison/topic.bundle.json";
@@ -124,6 +140,22 @@ const uppercaseVsLowercase = uppercaseVsLowercaseJson as SlimTopicManifest;
 const viewingCleanResults = viewingCleanResultsJson as SlimTopicManifest;
 const whatSelectDoes = whatSelectDoesJson as SlimTopicManifest;
 const writingSimpleReadableQueries = writingSimpleReadableQueriesJson as SlimTopicManifest;
+const addAProduct = addAProductJson as SlimTopicManifest;
+const addAStudent = addAStudentJson as SlimTopicManifest;
+const addMultipleRecords = addMultipleRecordsJson as SlimTopicManifest;
+const avoidingInsertErrors = avoidingInsertErrorsJson as SlimTopicManifest;
+const checkYourInsertedData = checkYourInsertedDataJson as SlimTopicManifest;
+const dataTypeAwareness = dataTypeAwarenessJson as SlimTopicManifest;
+const defaultValues = defaultValuesJson as SlimTopicManifest;
+const insertBehaviorBasics = insertBehaviorBasicsJson as SlimTopicManifest;
+const insertMultipleRows = insertMultipleRowsJson as SlimTopicManifest;
+const insertOneRow = insertOneRowJson as SlimTopicManifest;
+const matchingValuesToColumns = matchingValuesToColumnsJson as SlimTopicManifest;
+const missingValuesDuringInsert = missingValuesDuringInsertJson as SlimTopicManifest;
+const optionalColumns = optionalColumnsJson as SlimTopicManifest;
+const readingInsertedResults = readingInsertedResultsJson as SlimTopicManifest;
+const whatInsertIntoDoes = whatInsertIntoDoesJson as SlimTopicManifest;
+const whyColumnListsMatter = whyColumnListsMatterJson as SlimTopicManifest;
 const and = andJson as SlimTopicManifest;
 const avoidingFilteringMistakes = avoidingFilteringMistakesJson as SlimTopicManifest;
 const choosingTheRightComparison = choosingTheRightComparisonJson as SlimTopicManifest;
@@ -209,6 +241,22 @@ export const TOPIC_MANIFESTS: TopicManifestRefMap = {
   "viewing-clean-results": viewingCleanResults,
   "what-select-does": whatSelectDoes,
   "writing-simple-readable-queries": writingSimpleReadableQueries,
+  "add-a-product": addAProduct,
+  "add-a-student": addAStudent,
+  "add-multiple-records": addMultipleRecords,
+  "avoiding-insert-errors": avoidingInsertErrors,
+  "check-your-inserted-data": checkYourInsertedData,
+  "data-type-awareness": dataTypeAwareness,
+  "default-values": defaultValues,
+  "insert-behavior-basics": insertBehaviorBasics,
+  "insert-multiple-rows": insertMultipleRows,
+  "insert-one-row": insertOneRow,
+  "matching-values-to-columns": matchingValuesToColumns,
+  "missing-values-during-insert": missingValuesDuringInsert,
+  "optional-columns": optionalColumns,
+  "reading-inserted-results": readingInsertedResults,
+  "what-insert-into-does": whatInsertIntoDoes,
+  "why-column-lists-matter": whyColumnListsMatter,
   "and": and,
   "avoiding-filtering-mistakes": avoidingFilteringMistakes,
   "choosing-the-right-comparison": choosingTheRightComparison,

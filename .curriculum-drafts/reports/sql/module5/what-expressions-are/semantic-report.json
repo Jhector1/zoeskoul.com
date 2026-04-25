@@ -15,6 +15,13 @@
       "severity": "warn",
       "exerciseId": "code-2",
       "message": "No shared SQL runner is configured for compiler-side semantic validation."
+    },
+    {
+      "code": "SQL_PROMPT_INTENT_GROUP_BY_WEAK_MISMATCH",
+      "category": "prompt_intent",
+      "severity": "warn",
+      "exerciseId": "code-2",
+      "message": "Prompt mentions grouping-like wording, but the solution query does not contain GROUP BY."
     }
   ]
 }

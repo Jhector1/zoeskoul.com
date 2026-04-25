@@ -1,0 +1,76 @@
+{
+  "subjects": {
+    "sql": {
+      "title": "SQL for Beginners",
+      "description": "Learn SQL from zero with hands-on practice.",
+      "moreComingSoon": "More SQL for Beginners lessons are coming soon."
+    }
+  },
+  "modules": {
+    "sql": {
+      "sql_module_5": {
+        "title": "Calculated Columns and SQL Expressions",
+        "description": "Teach learners to create new values from existing data so raw tables become useful reports.",
+        "outcomes": [
+          "Use arithmetic and expressions inside SELECT.",
+          "Rename outputs with aliases for readability.",
+          "Apply simple built-in functions safely."
+        ],
+        "why": [
+          "Builds confidence with calculated columns and sql expressions.",
+          "Prepares learners for the next skills in the course."
+        ]
+      }
+    }
+  },
+  "sections": {
+    "sql": {
+      "sql_module_5": {
+        "section_5_1": {
+          "title": "Creating New Values in Queries",
+          "description": "Learn how SQL expressions create new values from existing columns, including basic math operations inside SELECT queries.",
+          "weeks": null,
+          "bullets": [
+            "What expressions are",
+            "Math in SQL",
+            "Adding and subtracting",
+            "Multiplying and dividing"
+          ]
+        },
+        "section_5_2": {
+          "title": "Column Aliases",
+          "description": "Practice using aliases to rename calculated columns so query results are easier to read and understand.",
+          "weeks": null,
+          "bullets": [
+            "What aliases are",
+            "AS",
+            "Renaming result columns",
+            "Writing readable output"
+          ]
+        },
+        "section_5_3": {
+          "title": "Simple Functions",
+          "description": "Explore simple SQL functions for working with text, numbers, and dates while keeping queries beginner-friendly.",
+          "weeks": null,
+          "bullets": [
+            "Intro to functions",
+            "String functions",
+            "Number functions",
+            "Date function awareness"
+          ]
+        },
+        "section_5_4": {
+          "title": "Expression Practice",
+          "description": "Apply expressions, aliases, and simple functions to build small report-style queries from real table data.",
+          "weeks": null,
+          "bullets": [
+            "Total price calculations",
+            "Discount calculations",
+            "Renaming outputs",
+            "Simple report queries"
+          ]
+        }
+      }
+    }
+  }
+}

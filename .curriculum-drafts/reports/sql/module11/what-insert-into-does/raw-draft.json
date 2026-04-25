@@ -1,0 +1,117 @@
+{
+  "title": "What INSERT INTO does",
+  "summary": "Learn how the INSERT INTO statement adds new rows to a table, why specifying columns matters, and how defaults and NULLs are handled.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sk1",
+      "title": "What does INSERT INTO do?",
+      "bodyMarkdown": "The `INSERT INTO` statement in SQL is used to add new rows of data to a table. You specify the table name, the columns you want to insert values into, and the values themselves. For example:\n\n```sql\nINSERT INTO inventory_items (name, category, price, status, is_test, notes, last_updated)\nVALUES ('Notebook', 'Accessories', 3.99, 'active', 0, NULL, '2026-02-10');\n```\n\nThis adds a new row to the `inventory_items` table. If you don't specify a value for a column with a default, SQL uses the default value. If a column allows NULL, you can insert NULL."
+    },
+    {
+      "id": "sk2",
+      "title": "Why specify columns in INSERT?",
+      "bodyMarkdown": "It's safer to list the columns you want to insert into, rather than relying on the table's column order. If the table structure changes, your statement is less likely to break. For example:\n\n```sql\nINSERT INTO inventory_items (name, category, price)\nVALUES ('Keychain', 'Accessories', 2.50);\n```\n\nIf you omit columns with defaults or that allow NULL, SQL will fill them in automatically."
+    },
+    {
+      "id": "sk3",
+      "title": "Defaults and NULLs in INSERT",
+      "bodyMarkdown": "Some columns have default values, like `status` (default 'draft') or `is_test` (default 0). If you don't provide a value for these columns, SQL uses the default. For columns that allow NULL, like `notes`, you can insert NULL explicitly or leave them out if not required."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "q1",
+      "kind": "code_input",
+      "title": "Insert a new inventory item with all required fields",
+      "prompt": "Write an SQL statement to add a new row to the `inventory_items` table with the following values:\n- name: 'Desk Organizer'\n- category: 'Accessories'\n- price: 8.75\n- status: 'active'\n- is_test: 0\n- notes: NULL\n- last_updated: '2026-02-10'\n\nUse an explicit column list.",
+      "hint": "List all columns except 'id', and use NULL for the notes column.",
+      "help": {
+        "concept": "INSERT INTO adds a new row to a table. It's best practice to specify the columns you are inserting into, especially when not all columns are required or have defaults.",
+        "hint_1": "Start with INSERT INTO, list the columns, and provide the values in the same order.",
+        "hint_2": "Remember to use NULL for the notes column and match the column order in your VALUES clause."
+      },
+      "starterCode": "-- Write your INSERT INTO statement here",
+      "solutionCode": "INSERT INTO inventory_items (name, category, price, status, is_test, notes, last_updated)\nVALUES ('Desk Organizer', 'Accessories', 8.75, 'active', 0, NULL, '2026-02-10');",
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "q2",
+      "kind": "code_input",
+      "title": "Insert using defaults and NULLs",
+      "prompt": "Insert a new item into `inventory_items` with the following:\n- name: 'Sample Coaster'\n- category: 'Kitchen'\n- price: 3.00\n- notes: 'Promotional item'\n- last_updated: '2026-02-12'\n\nLet SQL use the default values for 'status' and 'is_test'.",
+      "hint": "Omit 'status' and 'is_test' from the column list to use their defaults.",
+      "help": {
+        "concept": "When you leave out columns that have default values in your INSERT statement, SQL will automatically use those defaults.",
+        "hint_1": "List only the columns you want to provide values for.",
+        "hint_2": "Do not include 'status' or 'is_test' in your column list or VALUES."
+      },
+      "starterCode": "-- Insert a new row using defaults for status and is_test",
+      "solutionCode": "INSERT INTO inventory_items (name, category, price, notes, last_updated)\nVALUES ('Sample Coaster', 'Kitchen', 3.00, 'Promotional item', '2026-02-12');",
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "q3",
+      "kind": "code_input",
+      "title": "Insert multiple rows at once",
+      "prompt": "Write an SQL statement to insert two new rows into `inventory_items` at once:\n1. name: 'Gift Bag', category: 'Accessories', price: 1.50, status: 'active', is_test: 0, notes: NULL, last_updated: '2026-02-13'\n2. name: 'Trial Apron', category: 'Kitchen', price: 12.00, status: 'draft', is_test: 1, notes: 'Test batch', last_updated: '2026-02-14'\n\nUse a single INSERT INTO statement.",
+      "hint": "You can insert multiple rows by separating each set of values with a comma.",
+      "help": {
+        "concept": "SQL allows inserting multiple rows in one statement by providing multiple sets of values, separated by commas.",
+        "hint_1": "List the columns once, then provide two sets of values in parentheses.",
+        "hint_2": "Separate the two value sets with a comma and match the column order."
+      },
+      "starterCode": "-- Insert two new rows in one statement",
+      "solutionCode": "INSERT INTO inventory_items (name, category, price, status, is_test, notes, last_updated)\nVALUES ('Gift Bag', 'Accessories', 1.50, 'active', 0, NULL, '2026-02-13'),\n       ('Trial Apron', 'Kitchen', 12.00, 'draft', 1, 'Test batch', '2026-02-14');",
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "q4",
+      "kind": "multi_choice",
+      "title": "Why specify columns in INSERT INTO?",
+      "prompt": "Which of the following are reasons to always specify column names in an INSERT INTO statement? Select all that apply.",
+      "hint": "Think about what could go wrong if the table structure changes.",
+      "help": {
+        "concept": "Specifying columns in INSERT INTO statements makes your code more robust and less likely to break if the table changes.",
+        "hint_1": "Consider what happens if a new column is added to the table.",
+        "hint_2": "Also think about how column order can affect the data inserted."
+      },
+      "options": {
+        "a": "It prevents errors if the table's column order changes.",
+        "b": "It makes the statement clearer and easier to read.",
+        "c": "It allows you to omit columns with defaults or NULLs.",
+        "d": "It automatically fills in missing values with zeros.",
+        "e": "It ensures the correct data goes into the correct columns."
+      },
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c",
+        "e"
+      ]
+    },
+    {
+      "id": "q5",
+      "kind": "fill_blank_choice",
+      "title": "Default values in INSERT",
+      "prompt": "When you omit a column with a default value in an INSERT statement, SQL will use the ______ for that column.",
+      "hint": "Think about what SQL does when you don't provide a value for a column with a default.",
+      "help": {
+        "concept": "If a column has a default value and you don't specify it in your INSERT, SQL uses that default automatically.",
+        "hint_1": "The value comes from the table definition, not from your statement.",
+        "hint_2": "It's the value set in the CREATE TABLE statement for that column."
+      },
+      "template": "When you omit a column with a default value in an INSERT statement, SQL will use the ______ for that column.",
+      "choices": [
+        "default value",
+        "NULL",
+        "zero",
+        "previous value"
+      ],
+      "correctValue": "default value"
+    }
+  ]
+}

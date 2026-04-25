@@ -92,7 +92,7 @@
         "type": "sql_query",
         "datasetId": "sales_kpi",
         "resultShape": "table",
-        "solutionCode": "SELECT region, AVG(unit_price) AS avg_unit_price\nFROM orders\nGROUP BY region;"
+        "solutionCode": "SELECT customer_name, UPPER(region) AS region_upper\nFROM orders;"
       }
     },
     {
@@ -127,8 +127,8 @@
       "expected": {
         "kind": "multi_choice",
         "optionIds": [
-          "b",
-          "c"
+          "a",
+          "b"
         ]
       }
     },
@@ -141,7 +141,7 @@
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "total_qty"
+        "value": "AS"
       }
     }
   ]

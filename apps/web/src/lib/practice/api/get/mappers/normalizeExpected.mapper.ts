@@ -53,6 +53,8 @@ type SqlCodeTest = {
     expectedTable?: SqlExpectedTable;
     match: "table_exact";
     ignoreRowOrder: boolean;
+    // NEW
+    checkSql?: string;
 };
 
 type SqlCodeExpected = {
@@ -148,6 +150,10 @@ function toSqlCodeTests(expected: any): SqlCodeTest[] {
                 : undefined,
         match: "table_exact",
         ignoreRowOrder: Boolean(t?.ignoreRowOrder),
+        checkSql:
+            typeof t?.checkSql === "string" && t.checkSql.trim()
+                ? t.checkSql.trim()
+                : undefined,
     }));
 }
 

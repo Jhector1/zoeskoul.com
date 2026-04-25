@@ -25,37 +25,6 @@
       "height": 420
     },
     {
-      "id": "project",
-      "kind": "project",
-      "titleKey": "topics.sql.sql_module_5.what-expressions-are.cards.project.title",
-      "project": {
-        "difficulty": "easy",
-        "allowReveal": true,
-        "preferKind": "code_input",
-        "maxAttempts": 10,
-        "steps": [
-          {
-            "id": "code-1",
-            "titleKey": "topics.sql.sql_module_5.what-expressions-are.projectSteps.code-1.title",
-            "exerciseKey": "code-1",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "maxAttempts": 10
-          },
-          {
-            "id": "code-2",
-            "titleKey": "topics.sql.sql_module_5.what-expressions-are.projectSteps.code-2.title",
-            "exerciseKey": "code-2",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "maxAttempts": 10
-          }
-        ]
-      }
-    },
-    {
       "id": "quiz",
       "kind": "quiz",
       "titleKey": "topics.sql.sql_module_5.what-expressions-are.cards.quiz.title",
@@ -86,7 +55,7 @@
     {
       "id": "code-1",
       "kind": "code_input",
-      "purpose": "project",
+      "purpose": "quiz",
       "weight": 1,
       "messageBase": "topics.sql.sql_module_5.what-expressions-are.quiz.code-1",
       "language": "sql",
@@ -101,7 +70,7 @@
     {
       "id": "code-2",
       "kind": "code_input",
-      "purpose": "project",
+      "purpose": "quiz",
       "weight": 1,
       "messageBase": "topics.sql.sql_module_5.what-expressions-are.quiz.code-2",
       "language": "sql",
@@ -110,7 +79,7 @@
         "type": "sql_query",
         "datasetId": "sales_kpi",
         "resultShape": "table",
-        "solutionCode": "SELECT id, unit_price, unit_price * 0.85 AS discounted_price\nFROM orders;"
+        "solutionCode": "SELECT id, quantity * 2 AS double_quantity\nFROM orders;"
       }
     },
     {
@@ -140,8 +109,7 @@
         "a",
         "b",
         "c",
-        "d",
-        "e"
+        "d"
       ],
       "expected": {
         "kind": "multi_choice",
@@ -161,7 +129,7 @@
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "create"
+        "value": "single value"
       }
     }
   ]

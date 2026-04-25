@@ -1,5 +1,19 @@
 {
   "topicId": "renaming-result-columns",
   "ok": true,
-  "issues": []
+  "issues": [
+    {
+      "code": "SQL_WEAK_DISTRACTORS",
+      "category": "pedagogy",
+      "severity": "warn",
+      "exerciseId": "quiz-3-multi-alias-usage",
+      "message": "Multi-choice exercise has too few options for strong distractors."
+    },
+    {
+      "code": "MULTI_CHOICE_TOO_FEW_CORRECT_OPTIONS",
+      "category": "clarity",
+      "severity": "warn",
+      "message": "Multi-choice exercise \"quiz-3-multi-alias-usage\" looks like it should have multiple correct answers, but only 1 correct option is marked."
+    }
+  ]
 }

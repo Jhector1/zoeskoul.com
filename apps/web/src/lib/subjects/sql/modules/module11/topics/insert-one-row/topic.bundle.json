@@ -1,0 +1,130 @@
+{
+  "topicId": "insert-one-row",
+  "subjectSlug": "sql",
+  "moduleSlug": "sql_module_11",
+  "sectionSlug": "section_11_1",
+  "prefix": "sql11",
+  "minutes": 15,
+  "topic": {
+    "labelKey": "topics.sql.sql_module_11.insert-one-row.label",
+    "summaryKey": "topics.sql.sql_module_11.insert-one-row.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_11.insert-one-row.cards.sketch0.title",
+      "sketchId": "sketch-1-intro-insert",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_11.insert-one-row.cards.sketch1.title",
+      "sketchId": "sketch-2-defaults-and-null",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql.sql_module_11.insert-one-row.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 2,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch-1-intro-insert",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_11.insert-one-row.sketch-1-intro-insert.title",
+      "bodyKey": "sketches.sql.sql_module_11.insert-one-row.sketch-1-intro-insert.bodyMarkdown"
+    },
+    {
+      "id": "sketch-2-defaults-and-null",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_11.insert-one-row.sketch-2-defaults-and-null.title",
+      "bodyKey": "sketches.sql.sql_module_11.insert-one-row.sketch-2-defaults-and-null.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "code-1-insert-basic",
+      "kind": "code_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_11.insert-one-row.quiz.code-1-insert-basic",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "inventory_ops",
+        "resultShape": "table",
+        "solutionCode": "INSERT INTO inventory_items (name, category, price, status, is_test, notes, last_updated)\nVALUES ('Mini Notebook', 'Accessories', 3.25, 'active', 0, NULL, '2026-02-12');"
+      }
+    },
+    {
+      "id": "code-2-insert-with-defaults",
+      "kind": "code_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_11.insert-one-row.quiz.code-2-insert-with-defaults",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "inventory_ops",
+        "resultShape": "table",
+        "solutionCode": "INSERT INTO inventory_items (name, category, price, status, is_test, last_updated)\nVALUES ('Trial Keychain', 'Accessories', 1.99, 'draft', 1, '2026-02-13');"
+      }
+    },
+    {
+      "id": "code-3-insert-null-notes",
+      "kind": "code_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_11.insert-one-row.quiz.code-3-insert-null-notes",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "inventory_ops",
+        "resultShape": "table",
+        "solutionCode": "INSERT INTO inventory_items (name, category, price, status, is_test, notes, last_updated)\nVALUES ('Sample Eraser', 'Accessories', 0.99, 'active', 0, NULL, '2026-02-14');"
+      }
+    },
+    {
+      "id": "multi-1-why-column-list",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_11.insert-one-row.quiz.multi-1-why-column-list",
+      "optionIds": [
+        "a",
+        "b"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a"
+        ]
+      }
+    },
+    {
+      "id": "fill-1-insert-required-columns",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_11.insert-one-row.quiz.fill-1-insert-required-columns",
+      "choiceCount": 7,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "name"
+      }
+    }
+  ]
+}

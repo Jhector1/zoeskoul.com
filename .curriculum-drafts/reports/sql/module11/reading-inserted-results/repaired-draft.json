@@ -1,0 +1,118 @@
+{
+  "title": "Reading inserted results",
+  "summary": "Learn how to confirm what data was inserted, check results, and understand how to safely verify changes after an INSERT in SQL.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch-1",
+      "title": "Why Check Inserted Results?",
+      "bodyMarkdown": "After inserting data into a table, it's important to confirm what was actually added. This helps you catch mistakes, verify defaults, and ensure your statement worked as expected. For example, after running:\n\n```sql\nINSERT INTO inventory_items (name, category, price) VALUES ('Keychain', 'Accessories', 3.50);\n```\n\nyou can check the table with:\n\n```sql\nSELECT * FROM inventory_items WHERE name = 'Keychain';\n```\n\nThis shows the new row, including any default values or auto-generated columns."
+    },
+    {
+      "id": "sketch-2",
+      "title": "Reading Defaults and Auto Values",
+      "bodyMarkdown": "When you omit some columns in your INSERT, SQL fills in defaults or NULLs. For example, the `status` column in `inventory_items` defaults to `'draft'` if not specified. After this insert:\n\n```sql\nINSERT INTO inventory_items (name, category, price) VALUES ('Notebook', 'Accessories', 6.00);\n```\n\nA SELECT will show `status` as `'draft'` and `is_test` as `0` (the default)."
+    },
+    {
+      "id": "sketch-3",
+      "title": "Verifying Inserted Data",
+      "bodyMarkdown": "To confirm what was inserted, use a SELECT statement that targets the new row. For example:\n\n```sql\nSELECT id, name, status FROM inventory_items WHERE name = 'Notebook';\n```\n\nThis helps you see the assigned `id` (if auto-incremented), the `name`, and the `status` set by default or your INSERT."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "code-1",
+      "kind": "code_input",
+      "title": "Check the Inserted Row",
+      "prompt": "You just inserted a new item named 'Travel Mug' into the inventory_items table. Write a SQL query to display all columns for the row you just inserted.",
+      "starterCode": "-- Write your query here",
+      "solutionCode": "SELECT * FROM inventory_items WHERE name = 'Travel Mug';",
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query",
+      "hint": "Focus on the concept being tested.",
+      "help": {
+        "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+        "hint_1": "Eliminate choices or interpretations that do not match the task.",
+        "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+      }
+    },
+    {
+      "id": "code-2",
+      "kind": "code_input",
+      "title": "See Default Values After Insert",
+      "prompt": "Suppose you inserted a row into inventory_items with only name, category, and price specified. Write a query to show the status and is_test values for the row named 'Sample Notebook'.",
+      "starterCode": "-- Write your query here",
+      "solutionCode": "SELECT status, is_test FROM inventory_items WHERE name = 'Sample Notebook';",
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query",
+      "hint": "Focus on the concept being tested.",
+      "help": {
+        "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+        "hint_1": "Eliminate choices or interpretations that do not match the task.",
+        "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+      }
+    },
+    {
+      "id": "code-3",
+      "kind": "code_input",
+      "title": "Find the Auto-Assigned ID",
+      "prompt": "After inserting a new item called 'Desk Organizer', you want to know what id was assigned to it. Write a query to find the id for this item.",
+      "starterCode": "-- Write your query here",
+      "solutionCode": "SELECT id FROM inventory_items WHERE name = 'Desk Organizer';",
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query",
+      "hint": "Focus on the concept being tested.",
+      "help": {
+        "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+        "hint_1": "Eliminate choices or interpretations that do not match the task.",
+        "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+      }
+    },
+    {
+      "id": "multi-1",
+      "kind": "multi_choice",
+      "title": "What Can You Learn by Reading Inserted Results?",
+      "prompt": "After inserting a new row and reading it back with SELECT, which of the following can you confirm? (Choose all that apply.)",
+      "options": [
+        "a. That the row was actually added",
+        "b. What default values were set",
+        "c. The value of auto-incremented columns like id",
+        "d. The exact SQL statement used to insert the row",
+        "e. If your input values were stored correctly"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c",
+        "e"
+      ],
+      "hint": "Think about what SELECT reveals about the new row.",
+      "help": {
+        "concept": "Reading inserted results lets you verify values set by your INSERT, see defaults, and check auto-generated columns.",
+        "hint_1": "You can see both values you provided and those set by the database.",
+        "hint_2": "Consider if you can check auto-incremented ids, default values, and your own input."
+      }
+    },
+    {
+      "id": "fill-1",
+      "kind": "fill_blank_choice",
+      "title": "Default Value After Insert",
+      "prompt": "If you insert a row into inventory_items without specifying the status column, what value will status have by default?",
+      "template": "The default value for status is [blank].",
+      "choices": [
+        "draft",
+        "active",
+        "NULL",
+        "pending",
+        "0"
+      ],
+      "correctValue": "draft",
+      "hint": "Check the table definition for the default value.",
+      "help": {
+        "concept": "Columns can have default values set in the table schema. If you omit such a column in your INSERT, the default is used.",
+        "hint_1": "Look for the DEFAULT keyword in the table schema for status.",
+        "hint_2": "The default for status is a short text value set in the CREATE TABLE statement."
+      }
+    }
+  ]
+}

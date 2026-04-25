@@ -1,13 +1,12 @@
+// packages/curriculum-compiler/src/compile/compileSubjectPipeline.ts
+
 import type {
   CourseBlueprint,
   CoursePlan,
   CourseSpec,
 } from "@zoeskoul/curriculum-contracts";
 import type { AiProvider } from "@zoeskoul/curriculum-ai";
-import {
-  generateTopicAuthoringDraft,
-  translateMessages,
-} from "@zoeskoul/curriculum-ai";
+import { generateTopicAuthoringDraft } from "@zoeskoul/curriculum-ai";
 import {
   getProfileServices,
   getSubjectShape,
@@ -16,15 +15,16 @@ import { buildSubjectManifestFromPlan } from "../emit/buildSubjectManifestFromPl
 import { buildSubjectMessagesFromPlan } from "../emit/buildSubjectMessagesFromPlan.js";
 import { buildTopicBundleFromDraft } from "../emit/buildTopicBundleFromDraft.js";
 import { buildMessagesFromDraft } from "../emit/buildMessagesFromDraft.js";
+import {
+  assertNonEmptyMessages,
+  translateNonEmptyMessages,
+} from "../emit/translateNonEmptyMessages.js";
 import { assertTopicAuthoringDraft } from "../validate/assertTopicAuthoringDraft.js";
 import { writeSubjectArtifacts } from "../write/writeSubjectArtifacts.js";
 import { writeTopicArtifacts } from "../write/writeTopicArtifacts.js";
 import { writeTopicReports } from "../reports/writeTopicReports.js";
 import { evaluateTopicDraft } from "../quality/evaluateTopicDraft.js";
-import {
-  countPlanTopics,
-  type CompileProgressCallback,
-} from "./compileProgress.js";
+import type { CompileProgressCallback } from "./compileProgress.js";
 import { listTopicPlanNodes } from "../plan/listTopicPlanNodes.js";
 import { buildTopicSeedFromPlanNode } from "../seeds/buildTopicSeedFromPlanNode.js";
 
@@ -35,14 +35,17 @@ export async function compileSubjectPipeline(args: {
   provider: AiProvider;
   onProgress?: CompileProgressCallback;
 }) {
-  const shape = getSubjectShape(
-      args.blueprint.profileId as "sql" | "python",
-  );
+  const shape = getSubjectShape(args.blueprint.profileId as "sql" | "python");
   const profileServices = getProfileServices(args.blueprint.profileId);
 
   const topicNodes = listTopicPlanNodes({ plan: args.plan });
   const totalTopics = topicNodes.length;
   let completedTopics = 0;
+
+  const sourceLocale = args.blueprint.sourceLocale;
+  const extraLocales = (args.blueprint.targetLocales ?? []).filter(
+      (locale) => locale !== sourceLocale,
+  );
 
   args.onProgress?.({
     current: completedTopics,
@@ -62,24 +65,30 @@ export async function compileSubjectPipeline(args: {
     shape,
   });
 
+  assertNonEmptyMessages({
+    locale: sourceLocale,
+    label: `${args.blueprint.subjectSlug} subject messages`,
+    messages: sourceSubjectMessages,
+  });
+
   const subjectMessagesByLocale: Record<string, Record<string, unknown>> = {
-    [args.blueprint.sourceLocale]: sourceSubjectMessages,
+    [sourceLocale]: sourceSubjectMessages,
   };
 
-  for (const locale of args.blueprint.targetLocales ?? []) {
-    if (locale === args.blueprint.sourceLocale) continue;
-
+  for (const locale of extraLocales) {
     args.onProgress?.({
       current: completedTopics,
       total: totalTopics,
       stage: `translating subject messages (${locale})`,
     });
 
-    subjectMessagesByLocale[locale] = await translateMessages(args.provider, {
+    subjectMessagesByLocale[locale] = await translateNonEmptyMessages({
+      provider: args.provider,
       shape,
-      sourceLocale: args.blueprint.sourceLocale,
+      sourceLocale,
       locale,
       sourceMessages: sourceSubjectMessages,
+      label: `${args.blueprint.subjectSlug} subject messages`,
     });
   }
 
@@ -115,7 +124,7 @@ export async function compileSubjectPipeline(args: {
 
     const rawDraft = await generateTopicAuthoringDraft(args.provider, {
       seed,
-      locale: args.blueprint.sourceLocale,
+      locale: sourceLocale,
       shape,
     });
 
@@ -181,11 +190,16 @@ export async function compileSubjectPipeline(args: {
       const semanticErrors = evaluation.semanticReport.issues.filter(
           (issue) => issue.severity === "error",
       );
+
       if (semanticErrors.length) {
         throw new Error(
-            `Semantic validation failed:\n${semanticErrors
-                .map((x) => `- ${x.message}`)
-                .join("\n")}`,
+            [
+              `Semantic validation failed for topic "${node.topic.topicId}"`,
+              `Module: ${node.module.moduleSlug}`,
+              `Section: ${node.section.sectionSlug}`,
+              `Report dir: .curriculum-drafts/reports/${args.blueprint.subjectSlug}/module${node.moduleIndex}/${node.topic.topicId}`,
+              ...semanticErrors.map((x) => `- ${x.message}`),
+            ].join("\n"),
         );
       }
     }
@@ -214,13 +228,17 @@ export async function compileSubjectPipeline(args: {
       moduleOrder: node.moduleIndex,
     });
 
+    assertNonEmptyMessages({
+      locale: sourceLocale,
+      label: `${args.blueprint.subjectSlug}/${node.topic.topicId} topic messages`,
+      messages: sourceMessages,
+    });
+
     const messagesByLocale: Record<string, Record<string, unknown>> = {
-      [args.blueprint.sourceLocale]: sourceMessages,
+      [sourceLocale]: sourceMessages,
     };
 
-    for (const locale of args.blueprint.targetLocales ?? []) {
-      if (locale === args.blueprint.sourceLocale) continue;
-
+    for (const locale of extraLocales) {
       args.onProgress?.({
         current: completedTopics,
         total: totalTopics,
@@ -230,11 +248,13 @@ export async function compileSubjectPipeline(args: {
         sectionSlug: node.section.sectionSlug,
       });
 
-      messagesByLocale[locale] = await translateMessages(args.provider, {
+      messagesByLocale[locale] = await translateNonEmptyMessages({
+        provider: args.provider,
         shape,
-        sourceLocale: args.blueprint.sourceLocale,
+        sourceLocale,
         locale,
         sourceMessages,
+        label: `${args.blueprint.subjectSlug}/${node.topic.topicId} topic messages`,
       });
     }
 

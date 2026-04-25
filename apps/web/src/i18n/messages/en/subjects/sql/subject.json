@@ -8,16 +8,16 @@
   },
   "modules": {
     "sql": {
-      "sql_module_5": {
-        "title": "Calculated Columns and SQL Expressions",
-        "description": "Teach learners to create new values from existing data so raw tables become useful reports.",
+      "sql_module_11": {
+        "title": "Inserting Data",
+        "description": "Shift from reading data to adding new rows carefully and correctly.",
         "outcomes": [
-          "Use arithmetic and expressions inside SELECT.",
-          "Rename outputs with aliases for readability.",
-          "Apply simple built-in functions safely."
+          "Insert new rows with confidence.",
+          "Use explicit column lists for safer statements.",
+          "Recognize how defaults and NULL values affect inserts."
         ],
         "why": [
-          "Builds confidence with calculated columns and sql expressions.",
+          "Builds confidence with inserting data.",
           "Prepares learners for the next skills in the course."
         ]
       }
@@ -25,49 +25,49 @@
   },
   "sections": {
     "sql": {
-      "sql_module_5": {
-        "section_5_1": {
-          "title": "Creating New Values in Queries",
+      "sql_module_11": {
+        "section_11_1": {
+          "title": "Intro to Adding Data",
           "description": "",
           "weeks": null,
           "bullets": [
-            "What expressions are",
-            "Math in SQL",
-            "Adding and subtracting",
-            "Multiplying and dividing"
+            "What INSERT INTO does",
+            "Insert one row",
+            "Insert multiple rows",
+            "Matching values to columns"
           ]
         },
-        "section_5_2": {
-          "title": "Column Aliases",
+        "section_11_2": {
+          "title": "Safe Inserting",
           "description": "",
           "weeks": null,
           "bullets": [
-            "What aliases are",
-            "AS",
-            "Renaming result columns",
-            "Writing readable output"
+            "Why column lists matter",
+            "Data type awareness",
+            "Avoiding insert errors",
+            "Reading inserted results"
           ]
         },
-        "section_5_3": {
-          "title": "Simple Functions",
+        "section_11_3": {
+          "title": "Insert with NULL and Defaults",
           "description": "",
           "weeks": null,
           "bullets": [
-            "Intro to functions",
-            "String functions",
-            "Number functions",
-            "Date function awareness"
+            "Missing values during insert",
+            "Default values",
+            "Optional columns",
+            "Insert behavior basics"
           ]
         },
-        "section_5_4": {
-          "title": "Expression Practice",
+        "section_11_4": {
+          "title": "Insert Practice",
           "description": "",
           "weeks": null,
           "bullets": [
-            "Total price calculations",
-            "Discount calculations",
-            "Renaming outputs",
-            "Simple report queries"
+            "Add a student",
+            "Add a product",
+            "Add multiple records",
+            "Check your inserted data"
           ]
         }
       }

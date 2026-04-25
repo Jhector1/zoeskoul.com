@@ -1,27 +1,32 @@
 {
   "title": "Date function awareness",
-  "summary": "Date function awareness in Calculated Columns and SQL Expressions",
+  "summary": "Learn to recognize and use date functions in SQL expressions, especially for calculated columns and reporting.",
   "minutes": 15,
   "sketchBlocks": [
     {
-      "id": "sketch-1",
-      "title": "Working with Dates in SQL Expressions",
-      "bodyMarkdown": "In SQL, date values are often stored as text in the format 'YYYY-MM-DD'. You can use built-in date functions to extract parts of a date, calculate differences, or reformat dates. For example, in SQLite, the `date()` and `strftime()` functions help you manipulate date columns. If you want to extract the year from the `order_date` column in the `orders` table, you can use:\n\n```sql\nSELECT customer_name, quantity, unit_price, quantity * unit_price AS calculated_value\nFROM orders;\n```\n\nThis returns each order's date and its year as a new column."
+      "id": "sk1",
+      "title": "What are date functions in SQL?",
+      "bodyMarkdown": "Date functions in SQL allow you to manipulate and extract information from date values. For example, you can extract the year, month, or day from a date, or calculate the difference between two dates. In SQLite, common date functions include `date()`, `strftime()`, and `datetime()`. These are useful for filtering, grouping, or creating new columns based on date information.\n\n**Example:**\n\n```sql\nSELECT customer_name, quantity, unit_price, quantity * unit_price AS calculated_value\nFROM orders;\n```\n\nThis query extracts the year from each `order_date` in the `orders` table."
     },
     {
-      "id": "sketch-2",
-      "title": "Calculating Date Differences",
-      "bodyMarkdown": "You can calculate the number of days between two dates using the `julianday()` function in SQLite. For example, to find how many days have passed since each order was placed:\n\n```sql\nSELECT COUNT(*) AS row_count\nFROM orders;\n```\n\nThis computes the difference in days between a fixed date and each order's date."
+      "id": "sk2",
+      "title": "Using date functions in calculated columns",
+      "bodyMarkdown": "You can use date functions directly in your SELECT statements to create calculated columns. For instance, if you want to see which month each order was placed, you can use:\n\n```sql\nSELECT customer_name, quantity, unit_price, quantity * unit_price AS calculated_value\nFROM orders;\n```\n\nThis will add a new column called `order_month` showing the month part of each order's date."
+    },
+    {
+      "id": "sk3",
+      "title": "Filtering with date functions",
+      "bodyMarkdown": "Date functions are also useful for filtering data. For example, to find all orders placed in January, you can use:\n\n```sql\nSELECT customer_name, quantity, unit_price, quantity * unit_price AS calculated_value\nFROM orders;\n```\n\nThis filters the `orders` table to only include rows where the month is January."
     }
   ],
   "quizDraft": [
     {
-      "id": "code-1",
+      "id": "q1",
       "kind": "code_input",
-      "title": "Extract the month from order_date",
-      "prompt": "Write a SQL query to select the `id`, `order_date`, and the month (as a two-digit number) from the `orders` table. Name the new column `order_month`.",
-      "starterCode": "SELECT id, order_date, /* your code here */ AS order_month FROM orders;",
-      "solutionCode": "SELECT id, order_date, strftime('%m', order_date) AS order_month FROM orders;",
+      "title": "Extract the year from order_date",
+      "prompt": "Write a SQL query to select the `id`, `order_date`, and a calculated column called `order_year` that contains the year part of `order_date` from the `orders` table.",
+      "starterCode": "SELECT id, order_date\n-- Add the calculated column here\nFROM orders;",
+      "solutionCode": "SELECT id, order_date, strftime('%Y', order_date) AS order_year\nFROM orders;",
       "datasetId": "sales_kpi",
       "recipeType": "sql_query",
       "hint": "Focus on the concept being tested.",
@@ -32,12 +37,12 @@
       }
     },
     {
-      "id": "code-2",
+      "id": "q2",
       "kind": "code_input",
-      "title": "Find orders placed in January",
-      "prompt": "Write a SQL query to select all columns from the `orders` table where the order was placed in January (month = '01').",
-      "starterCode": "SELECT * FROM orders WHERE /* your condition here */;",
-      "solutionCode": "SELECT * FROM orders WHERE strftime('%m', order_date) = '01';",
+      "title": "Filter orders by month using a date function",
+      "prompt": "Write a SQL query to select all columns from `orders` where the order was placed in January (month = '01').",
+      "starterCode": "SELECT *\nFROM orders\n-- Add your WHERE clause here;",
+      "solutionCode": "SELECT *\nFROM orders\nWHERE strftime('%m', order_date) = '01';",
       "datasetId": "sales_kpi",
       "recipeType": "sql_query",
       "hint": "Focus on the concept being tested.",
@@ -48,67 +53,61 @@
       }
     },
     {
-      "id": "single-1",
+      "id": "q3",
       "kind": "single_choice",
-      "title": "Purpose of strftime('%Y', order_date)",
-      "prompt": "What does the expression `strftime('%Y', order_date)` return in a SELECT statement?",
+      "title": "Purpose of date functions",
+      "prompt": "Which of the following best describes the purpose of date functions in SQL?",
       "options": [
-        "a. The day of the month",
-        "b. The year as a four-digit number",
-        "c. The full date in a different format",
-        "d. The month as a two-digit number"
+        "[object Object]",
+        "A command"
       ],
       "correctOptionIds": [
-        "b"
+        "a"
       ],
-      "hint": "It extracts a part of the date.",
+      "hint": "Think about what you can do with dates in SQL.",
       "help": {
-        "concept": "The strftime function with '%Y' extracts the year from a date string.",
-        "hint_1": "The '%Y' format code returns the year as four digits.",
-        "hint_2": "This expression gives you the year part of the order_date, like '2026'."
+        "concept": "Date functions help you manipulate and extract information from date columns.",
+        "hint_1": "They are used to get parts of a date or perform calculations with dates.",
+        "hint_2": "They are not for formatting numbers or joining tables."
       }
     },
     {
-      "id": "multi-1",
+      "id": "q4",
       "kind": "multi_choice",
-      "title": "Which statements about date functions are true?",
-      "prompt": "Select all statements that are true about using date functions in SQL (SQLite).",
+      "title": "Recognizing date function usage",
+      "prompt": "Which of the following SQL expressions use a date function? Select all that apply.",
       "options": [
-        "a. You can extract the year from a date using strftime('%Y', column).",
-        "b. You can calculate the number of days between two dates using julianday().",
-        "c. Date functions cannot be used in the WHERE clause.",
-        "d. You can filter rows for a specific month using strftime('%m', column) in the WHERE clause."
+        "[object Object]",
+        "A command"
       ],
       "correctOptionIds": [
-        "a",
-        "b",
-        "d"
+        "a"
       ],
-      "hint": "Consider what date functions can do with date columns.",
+      "hint": "Look for functions that operate on date values.",
       "help": {
-        "concept": "Date functions can extract parts of a date, calculate differences, and filter data based on date values.",
-        "hint_1": "Some functions return year, month, or day; others can compute intervals.",
-        "hint_2": "Think about extracting, formatting, and comparing dates."
+        "concept": "Date functions include functions like `strftime`, `date`, and `datetime` that work with date columns.",
+        "hint_1": "Check if the function is used to extract or manipulate date information.",
+        "hint_2": "Not all functions shown are related to dates."
       }
     },
     {
-      "id": "fill-1",
+      "id": "q5",
       "kind": "fill_blank_choice",
-      "title": "Extracting the day from a date",
-      "prompt": "Fill in the blank to extract the day of the month from the `order_date` column in SQLite.",
-      "template": "SELECT strftime(______, order_date) AS order_day FROM orders;",
+      "title": "Extracting the month from a date",
+      "prompt": "Which function would you use to extract the month from the `order_date` column in SQLite?",
+      "template": "SELECT id, order_date, _____ AS order_month FROM orders;",
       "choices": [
-        "'%Y'",
-        "'%m'",
-        "'%d'",
-        "'%H'"
+        "strftime('%m', order_date)",
+        "sum(order_date)",
+        "date(order_date)",
+        "substr(order_date, 6, 2)"
       ],
-      "correctValue": "'%d'",
-      "hint": "Focus on the missing SQL concept rather than the exact missing word.",
+      "correctValue": "strftime('%m', order_date)",
+      "hint": "Think about which function can pull out the month part from a date.",
       "help": {
-        "concept": "The blank should be filled with the SQL term that matches the job the statement is trying to perform.",
-        "hint_1": "Think about what the missing part is supposed to do in the statement.",
-        "hint_2": "Choose the SQL term that best completes the meaning of the statement."
+        "concept": "To extract the month from a date in SQLite, you use a function that can format or extract date parts.",
+        "hint_1": "Look for a function that takes a date and a format string.",
+        "hint_2": "The function starts with 'str' and is commonly used for formatting dates."
       }
     }
   ]

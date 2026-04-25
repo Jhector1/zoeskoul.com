@@ -1,0 +1,27 @@
+{
+  "topicId": "avoiding-insert-errors",
+  "ok": true,
+  "issues": [
+    {
+      "code": "SQL_RUNNER_NOT_CONFIGURED",
+      "category": "execution",
+      "severity": "warn",
+      "exerciseId": "q1-explicit-columns-insert",
+      "message": "No shared SQL runner is configured for compiler-side semantic validation."
+    },
+    {
+      "code": "SQL_RUNNER_NOT_CONFIGURED",
+      "category": "execution",
+      "severity": "warn",
+      "exerciseId": "q4-insert-null-notes",
+      "message": "No shared SQL runner is configured for compiler-side semantic validation."
+    },
+    {
+      "code": "SQL_RUNNER_NOT_CONFIGURED",
+      "category": "execution",
+      "severity": "warn",
+      "exerciseId": "q5-insert-minimal-required",
+      "message": "No shared SQL runner is configured for compiler-side semantic validation."
+    }
+  ]
+}

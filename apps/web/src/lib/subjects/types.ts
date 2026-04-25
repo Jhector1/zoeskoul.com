@@ -148,11 +148,34 @@ export type ReviewTopic = {
 
 export type ReviewTopicShape = ReviewTopic;
 
+export type ReviewModuleSection = {
+    id: string;
+    slug: string;
+    title: string;
+    summary?: string | null;
+    description?: string | null;
+    order: number;
+    topics: ReviewTopicShape[];
+};
+
 export type ReviewModule = {
     id: string;
     title: string;
     subtitle?: string | null;
     startPracticeSectionSlug: string;
     runtimeDefaults?: ManifestRuntimeDefaults | null;
+
+    /**
+     * Keep required.
+     * Current progress, card rendering, navigation, and topic lookup depend on this.
+     */
     topics: ReviewTopicShape[];
+
+    /**
+     * New optional structure for sidebar display:
+     * module -> sections -> topics.
+     *
+     * Optional so old ReviewModule objects do not break.
+     */
+    sections?: ReviewModuleSection[];
 };

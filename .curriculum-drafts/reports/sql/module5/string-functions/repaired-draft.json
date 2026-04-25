@@ -5,23 +5,28 @@
   "sketchBlocks": [
     {
       "id": "sketch-1",
-      "title": "What are SQL string functions?",
-      "bodyMarkdown": "SQL string functions let you manipulate text data in your queries. For example, you can change text to uppercase, extract part of a string, or combine columns. These functions are useful for cleaning up or formatting output in reports.\n\nCommon string functions in SQLite include:\n- `UPPER(text)`: Converts text to uppercase.\n- `LOWER(text)`: Converts text to lowercase.\n- `LENGTH(text)`: Returns the number of characters in the text.\n- `SUBSTR(text, start, length)`: Extracts a substring from the text.\n- `TRIM(text)`: Removes spaces from the start and end of the text.\n\nExample:\n```sql\nSELECT customer_name, UPPER(region) AS region_upper FROM orders;\n```\nThis query shows each customer's name and their region in uppercase."
+      "title": "What are string functions in SQL?",
+      "bodyMarkdown": "String functions in SQL allow you to manipulate text data in your queries. Common string functions include `UPPER()`, `LOWER()`, `LENGTH()`, and `SUBSTR()`. These functions can help you clean, format, or extract information from text columns. For example, you can use `UPPER(customer_name)` to display all customer names in uppercase."
     },
     {
       "id": "sketch-2",
-      "title": "Using string functions in calculated columns",
-      "bodyMarkdown": "You can use string functions in calculated columns to create new values or clean up data. For example, if you want to show only the first three letters of each category, you can use `SUBSTR`:\n\n```sql\nSELECT category, SUBSTR(category, 1, 3) AS cat_short FROM orders;\n```\n\nThis query adds a new column called `cat_short` with the first three letters of the category."
+      "title": "Using string functions in SELECT",
+      "bodyMarkdown": "You can use string functions directly in the SELECT clause to create calculated columns. For example, to show the length of each customer's name in the `orders` table:\n\n```sql\nSELECT customer_name, LENGTH(customer_name) AS name_length FROM orders;\n```\nThis will return each customer name along with the number of characters in their name."
+    },
+    {
+      "id": "sketch-3",
+      "title": "Combining string functions and aliases",
+      "bodyMarkdown": "String functions are often combined with aliases to make results easier to read. For example, to display the first three letters of each region in uppercase:\n\n```sql\nSELECT region, UPPER(SUBSTR(region, 1, 3)) AS region_code FROM orders;\n```\nThis query creates a new column `region_code` showing the first three letters of the region in uppercase."
     }
   ],
   "quizDraft": [
     {
-      "id": "quiz-1",
+      "id": "code-1",
       "kind": "code_input",
       "title": "Show customer names in uppercase",
-      "prompt": "Write a SQL query to select the `customer_name` column from the `orders` table, but display all names in uppercase. Name the output column `customer_upper`.",
-      "starterCode": "SELECT ... FROM orders;",
-      "solutionCode": "SELECT UPPER(customer_name) AS customer_upper FROM orders;",
+      "prompt": "Write a SQL query to display each customer's name in uppercase along with their original name from the `orders` table.",
+      "starterCode": "SELECT customer_name, \n       -- your code here\nFROM orders;",
+      "solutionCode": "SELECT customer_name, UPPER(customer_name) AS customer_name_upper FROM orders;",
       "datasetId": "sales_kpi",
       "recipeType": "sql_query",
       "hint": "Focus on the concept being tested.",
@@ -32,12 +37,12 @@
       }
     },
     {
-      "id": "quiz-2",
+      "id": "code-2",
       "kind": "code_input",
-      "title": "Extract region initials",
-      "prompt": "Write a SQL query to select the first two letters of the `region` column from the `orders` table. Name the output column `region_initials`.",
-      "starterCode": "SELECT ... FROM orders;",
-      "solutionCode": "SELECT SUBSTR(region, 1, 2) AS region_initials FROM orders;",
+      "title": "Extract region code",
+      "prompt": "Write a SQL query to show each region and the first two letters of the region in lowercase, labeled as `region_code`.",
+      "starterCode": "SELECT region, \n       -- your code here\nFROM orders;",
+      "solutionCode": "SELECT region, LOWER(SUBSTR(region, 1, 2)) AS region_code FROM orders;",
       "datasetId": "sales_kpi",
       "recipeType": "sql_query",
       "hint": "Focus on the concept being tested.",
@@ -48,10 +53,10 @@
       }
     },
     {
-      "id": "quiz-3",
+      "id": "single-1",
       "kind": "single_choice",
-      "title": "Which function returns the number of characters in a string?",
-      "prompt": "Which SQL function returns the number of characters in a text value?",
+      "title": "Purpose of the LENGTH() function",
+      "prompt": "What does the LENGTH() function return when used on a text column in SQL?",
       "options": [
         "[object Object]",
         "A command"
@@ -59,18 +64,18 @@
       "correctOptionIds": [
         "a"
       ],
-      "hint": "Think about which function measures string length.",
+      "hint": "It counts something about the text.",
       "help": {
-        "concept": "The LENGTH() function returns the number of characters in a string.",
-        "hint_1": "It's not UPPER or LOWER.",
-        "hint_2": "Look for a function name that means 'size' or 'length'."
+        "concept": "LENGTH() returns the count of characters in a string, not words or rows.",
+        "hint_1": "Think about how many letters or symbols are in the text.",
+        "hint_2": "LENGTH() is about the size of the text value, not the table."
       }
     },
     {
-      "id": "quiz-4",
+      "id": "multi-1",
       "kind": "multi_choice",
-      "title": "Select all true statements about string functions",
-      "prompt": "Which of the following statements about SQL string functions are true? Select all that apply.",
+      "title": "Which are valid string functions in SQLite?",
+      "prompt": "Select all functions below that are valid string functions in SQLite.",
       "options": [
         "[object Object]",
         "A command"
@@ -78,26 +83,26 @@
       "correctOptionIds": [
         "a"
       ],
-      "hint": "Consider what each function does.",
+      "hint": "Some functions change case, others extract parts of text.",
       "help": {
-        "concept": "String functions can change, extract, or measure text values in SQL.",
-        "hint_1": "Some functions change case, others extract parts or measure length.",
-        "hint_2": "Think about what UPPER, LOWER, and LENGTH do."
+        "concept": "String functions operate on text values. SUM() is an aggregate numeric function, not a string function.",
+        "hint_1": "Look for functions that work with text, not numbers.",
+        "hint_2": "UPPER, LOWER, SUBSTR, and LENGTH are all for strings."
       }
     },
     {
-      "id": "quiz-5",
+      "id": "fill-1",
       "kind": "fill_blank_choice",
-      "title": "Fill in the blank: Removing spaces",
-      "prompt": "Which function removes spaces from the beginning and end of a string?",
-      "template": "The function that removes spaces from the start and end of a string is _____.",
+      "title": "Function to extract part of a string",
+      "prompt": "Which function extracts a substring from a text value in SQLite?",
+      "template": "To get the first three letters of a region, use ____ (region, 1, 3).",
       "choices": [
-        "TRIM()",
-        "LENGTH()",
-        "UPPER()",
-        "SUBSTR()"
+        "SUBSTR",
+        "LENGTH",
+        "UPPER",
+        "SUM"
       ],
-      "correctValue": "TRIM()",
+      "correctValue": "SUBSTR",
       "hint": "Focus on the missing SQL concept rather than the exact missing word.",
       "help": {
         "concept": "The blank should be filled with the SQL term that matches the job the statement is trying to perform.",

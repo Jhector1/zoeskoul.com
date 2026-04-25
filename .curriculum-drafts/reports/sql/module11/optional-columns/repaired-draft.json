@@ -1,0 +1,112 @@
+{
+  "title": "Optional columns",
+  "summary": "Learn how to insert data into tables with optional columns, using NULL and default values appropriately.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch-optional-columns-intro",
+      "title": "What are optional columns?",
+      "bodyMarkdown": "In SQL, some table columns can be optional. This means you don't have to provide a value for them when inserting a new row. Optional columns are either defined with a DEFAULT value or allow NULLs. For example, in the `inventory_items` table, the `notes` column is optional because it allows NULL, and the `status`, `is_test`, and `last_updated` columns have default values.\n\n```sql\nCREATE TABLE inventory_items (\n  id INTEGER PRIMARY KEY,\n  name TEXT NOT NULL,\n  category TEXT NOT NULL,\n  price REAL NOT NULL,\n  status TEXT NOT NULL DEFAULT 'draft',\n  is_test INTEGER NOT NULL DEFAULT 0,\n  notes TEXT NULL,\n  last_updated TEXT NOT NULL DEFAULT '2026-02-01'\n);\n```"
+    },
+    {
+      "id": "sketch-insert-without-optional",
+      "title": "Inserting without optional columns",
+      "bodyMarkdown": "When you insert a new row and omit optional columns, SQL will use the column's default value (if defined) or NULL (if allowed). For example, if you don't specify `notes` or `status`, the database will insert NULL for `notes` and 'draft' for `status`:\n\n```sql\nINSERT INTO inventory_items (id, name, category, price)\nVALUES (7, 'Keychain', 'Accessories', 3.50);\n```\nThis will result in:\n- `status` = 'draft'\n- `is_test` = 0\n- `notes` = NULL\n- `last_updated` = '2026-02-01'"
+    },
+    {
+      "id": "sketch-insert-null-explicit",
+      "title": "Inserting NULL explicitly",
+      "bodyMarkdown": "You can also explicitly insert NULL into a column that allows it. For example, to insert a new item with no notes:\n\n```sql\nINSERT INTO inventory_items (id, name, category, price, notes)\nVALUES (8, 'Sample Coaster', 'Kitchen', 2.99, NULL);\n```\nThis sets `notes` to NULL for this row."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "code-insert-omit-optional",
+      "kind": "code_input",
+      "title": "Insert a row omitting optional columns",
+      "prompt": "Insert a new inventory item with id 9, name 'Desk Mat', category 'Accessories', and price 12.50. Omit all optional columns so that defaults or NULLs are used where appropriate.",
+      "starterCode": "-- Write your INSERT statement here",
+      "solutionCode": "INSERT INTO inventory_items (id, name, category, price)\nVALUES (9, 'Desk Mat', 'Accessories', 12.50);",
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query",
+      "hint": "Focus on the SQL task being asked for, not on copying final query text.",
+      "help": {
+        "concept": "Build the query from the operation the exercise is testing.",
+        "hint_1": "Think about which clauses or functions are required for the task.",
+        "hint_2": "Construct the query based on what result the exercise expects, not by repeating exact solution wording."
+      }
+    },
+    {
+      "id": "code-insert-null-notes",
+      "kind": "code_input",
+      "title": "Insert a row with NULL for notes",
+      "prompt": "Insert a new inventory item with id 10, name 'Travel Mug', category 'Kitchen', price 18.00, and explicitly set notes to NULL. Omit other optional columns.",
+      "starterCode": "-- Write your INSERT statement here",
+      "solutionCode": "INSERT INTO inventory_items (id, name, category, price, notes)\nVALUES (10, 'Travel Mug', 'Kitchen', 18.00, NULL);",
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query",
+      "hint": "Focus on the SQL task being asked for, not on copying final query text.",
+      "help": {
+        "concept": "Build the query from the operation the exercise is testing.",
+        "hint_1": "Think about which clauses or functions are required for the task.",
+        "hint_2": "Construct the query based on what result the exercise expects, not by repeating exact solution wording."
+      }
+    },
+    {
+      "id": "code-insert-override-default",
+      "kind": "code_input",
+      "title": "Insert a row overriding a default value",
+      "prompt": "Insert a new inventory item with id 11, name 'Art Print', category 'Decor', price 30.00, and set status to 'active'. Omit other optional columns.",
+      "starterCode": "-- Write your INSERT statement here",
+      "solutionCode": "INSERT INTO inventory_items (id, name, category, price, status)\nVALUES (11, 'Art Print', 'Decor', 30.00, 'active');",
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query",
+      "hint": "Focus on the SQL task being asked for, not on copying final query text.",
+      "help": {
+        "concept": "Build the query from the operation the exercise is testing.",
+        "hint_1": "Think about which clauses or functions are required for the task.",
+        "hint_2": "Construct the query based on what result the exercise expects, not by repeating exact solution wording."
+      }
+    },
+    {
+      "id": "multi-choice-optional-columns",
+      "kind": "multi_choice",
+      "title": "Which columns are optional in inventory_items?",
+      "prompt": "Select ALL columns in the inventory_items table that are optional when inserting a new row (i.e., you can omit them and the insert will still succeed).",
+      "options": [
+        "[object Object]",
+        "A command"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Look for columns that allow NULL or have a DEFAULT value.",
+      "help": {
+        "concept": "Optional columns are those that either allow NULL or have a DEFAULT value, so you don't have to specify them when inserting.",
+        "hint_1": "Check the table definition for DEFAULT values and NULL allowances.",
+        "hint_2": "Columns like 'notes', 'status', 'is_test', and 'last_updated' are not required in every insert."
+      }
+    },
+    {
+      "id": "fill-blank-choice-default-status",
+      "kind": "fill_blank_choice",
+      "title": "Default value for status",
+      "prompt": "What value will the 'status' column have if you omit it when inserting a new row into inventory_items?",
+      "template": "If you omit 'status' in your INSERT, it will be set to: ____",
+      "choices": [
+        "NULL",
+        "active",
+        "draft",
+        "inactive",
+        "0"
+      ],
+      "correctValue": "draft",
+      "hint": "Check the table definition for the default value of 'status'.",
+      "help": {
+        "concept": "If a column has a DEFAULT value, SQL will use it when you omit the column in an insert.",
+        "hint_1": "Look for the DEFAULT keyword in the CREATE TABLE statement for 'status'.",
+        "hint_2": "The default for 'status' is a string value set in the table definition."
+      }
+    }
+  ]
+}

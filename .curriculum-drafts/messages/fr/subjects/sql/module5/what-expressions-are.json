@@ -1,0 +1,112 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_5": {
+        "what-expressions-are": {
+          "label": "Ce que sont les expressions",
+          "summary": "Comprendre ce que sont les expressions en SQL, comment elles sont utilisées pour créer de nouvelles valeurs dans les requêtes, et pourquoi elles sont essentielles pour les colonnes calculées.",
+          "cards": {
+            "sketch0": {
+              "title": "Qu'est-ce qu'une expression en SQL ?"
+            },
+            "sketch1": {
+              "title": "Expressions avec fonctions et alias"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "quiz": {
+            "code-1": {
+              "title": "Calculer une nouvelle colonne à l'aide d'une expression",
+              "prompt": "Écrivez une requête SQL pour sélectionner `id`, `quantity`, `unit_price`, et une nouvelle colonne appelée `line_total` qui multiplie `quantity` par `unit_price` depuis la table `orders`.",
+              "hint": "Concentrez-vous sur le concept testé.",
+              "help": {
+                "concept": "Pensez au rôle ou à l'idée testée plutôt que de répéter la formulation de la réponse.",
+                "hint_1": "Éliminez les choix ou interprétations qui ne correspondent pas à la tâche.",
+                "hint_2": "Choisissez le concept qui correspond le mieux à ce que l'exercice vous demande de faire."
+              },
+              "starterCode": "SELECT id, quantity, unit_price\n-- Ajoutez votre expression ici\nFROM orders;"
+            },
+            "code-2": {
+              "title": "Utiliser une expression avec une fonction",
+              "prompt": "Écrivez une requête SQL pour sélectionner `id` et une nouvelle colonne appelée `double_quantity` qui est le double de la valeur de `quantity` pour chaque commande.",
+              "hint": "Concentrez-vous sur le concept testé.",
+              "help": {
+                "concept": "Pensez au rôle ou à l'idée testée plutôt que de répéter la formulation de la réponse.",
+                "hint_1": "Éliminez les choix ou interprétations qui ne correspondent pas à la tâche.",
+                "hint_2": "Choisissez le concept qui correspond le mieux à ce que l'exercice vous demande de faire."
+              },
+              "starterCode": "SELECT id,\n-- Votre expression ici\nFROM orders;"
+            },
+            "single-1": {
+              "title": "Identifier une expression",
+              "prompt": "Laquelle des propositions suivantes est un exemple d'expression en SQL ?",
+              "hint": "Cherchez un calcul ou une transformation utilisant des colonnes ou des valeurs.",
+              "help": {
+                "concept": "Une expression est toute combinaison valide de colonnes, valeurs, opérateurs ou fonctions qui retourne une seule valeur.",
+                "hint_1": "Les expressions utilisent souvent l'arithmétique ou des fonctions.",
+                "hint_2": "Multiplier deux colonnes est un exemple classique d'expression."
+              },
+              "options": {
+                "a": "a. SELECT * FROM orders;",
+                "b": "b. quantity * unit_price",
+                "c": "c. FROM orders",
+                "d": "d. AS line_total"
+              }
+            },
+            "multi-1": {
+              "title": "Lesquelles des propositions suivantes sont des expressions SQL valides ?",
+              "prompt": "Sélectionnez toutes les options qui sont des expressions SQL valides.",
+              "hint": "Les expressions peuvent être arithmétiques, des fonctions ou des références directes à des colonnes.",
+              "help": {
+                "concept": "Les expressions valides incluent les opérations arithmétiques, les appels de fonctions et même les références à une seule colonne.",
+                "hint_1": "Pensez à ce qui peut apparaître dans une clause SELECT pour produire une valeur.",
+                "hint_2": "Les calculs comme les appels de fonctions sont des expressions valides."
+              },
+              "options": {
+                "a": "a. quantity + 10",
+                "b": "b. ROUND(unit_price, 1)",
+                "c": "c. orders",
+                "d": "d. status"
+              }
+            },
+            "fill-1": {
+              "title": "Complétez : Résultat d'une expression",
+              "prompt": "En SQL, une expression produit toujours ______.",
+              "hint": "Que retourne une expression ?",
+              "help": {
+                "concept": "Une expression en SQL donne toujours le terme manquant.",
+                "hint_1": "Pensez au résultat d'un calcul ou d'une fonction.",
+                "hint_2": "Ce n'est ni une table ni un nom de colonne, mais un résultat unique."
+              },
+              "template": "En SQL, une expression produit toujours {blank}.",
+              "choices": [
+                "table",
+                "valeur unique",
+                "nom de colonne",
+                "ligne"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_5": {
+        "what-expressions-are": {
+          "sketch-1": {
+            "title": "Qu'est-ce qu'une expression en SQL ?",
+            "bodyMarkdown": "Une **expression** en SQL est toute combinaison de valeurs, de colonnes, d'opérateurs et de fonctions qui produit une valeur unique. Les expressions sont souvent utilisées dans la clause `SELECT` pour calculer de nouvelles colonnes ou transformer des données. Par exemple, vous pouvez multiplier deux colonnes pour obtenir une nouvelle valeur :\n\n```sql\nSELECT id, quantity * unit_price AS line_total\nFROM orders;\n```\n\nIci, `quantity * unit_price` est une expression qui calcule le prix total pour chaque ligne de commande."
+          },
+          "sketch-2": {
+            "title": "Expressions avec fonctions et alias",
+            "bodyMarkdown": "Les expressions peuvent aussi utiliser les fonctions intégrées de SQL. Par exemple, vous pouvez arrondir une valeur calculée :\n\n```sql\nSELECT id, ROUND(quantity * unit_price, 2) AS rounded_total\nFROM orders;\n```\n\nLa fonction `ROUND()` est appliquée à l'expression, et le résultat reçoit l'alias `rounded_total` pour plus de clarté."
+          }
+        }
+      }
+    }
+  }
+}

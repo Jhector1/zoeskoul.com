@@ -1,0 +1,116 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_5": {
+        "adding-and-subtracting": {
+          "label": "Addition et soustraction",
+          "summary": "Apprenez à utiliser l'addition et la soustraction dans les colonnes calculées SQL pour créer de nouvelles valeurs dans vos requêtes.",
+          "cards": {
+            "sketch0": {
+              "title": "Qu'est-ce qu'une colonne calculée ?"
+            },
+            "sketch1": {
+              "title": "Addition et soustraction dans SELECT"
+            },
+            "sketch2": {
+              "title": "Utiliser des alias pour plus de clarté"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "quiz": {
+            "quiz-1": {
+              "title": "Calculez le total de ligne pour chaque commande",
+              "prompt": "Écrivez une requête SQL pour afficher l'id de chaque commande, le nom du client, la quantité, le prix unitaire et une colonne calculée appelée line_total (quantity * unit_price) depuis la table orders.",
+              "hint": "Concentrez-vous sur le concept testé.",
+              "help": {
+                "concept": "Pensez au rôle ou à l'idée testée plutôt que de répéter la formulation de la réponse.",
+                "hint_1": "Éliminez les choix ou interprétations qui ne correspondent pas à la tâche.",
+                "hint_2": "Choisissez le concept qui correspond le mieux à ce que l'exercice vous demande de faire."
+              },
+              "starterCode": "-- Écrivez votre requête ci-dessous"
+            },
+            "quiz-2": {
+              "title": "Soustraire une remise fixe de chaque commande",
+              "prompt": "Écrivez une requête SQL pour afficher id, customer_name et une nouvelle colonne appelée discounted_total qui soustrait 10 du total de ligne (quantity * unit_price) pour chaque commande.",
+              "hint": "Concentrez-vous sur le concept testé.",
+              "help": {
+                "concept": "Pensez au rôle ou à l'idée testée plutôt que de répéter la formulation de la réponse.",
+                "hint_1": "Éliminez les choix ou interprétations qui ne correspondent pas à la tâche.",
+                "hint_2": "Choisissez le concept qui correspond le mieux à ce que l'exercice vous demande de faire."
+              },
+              "starterCode": "-- Écrivez votre requête ci-dessous"
+            },
+            "quiz-3": {
+              "title": "Quel opérateur est utilisé pour la soustraction dans les expressions SQL ?",
+              "prompt": "Quel symbole utilisez-vous pour soustraire une colonne ou une valeur d'une autre dans une instruction SQL SELECT ?",
+              "hint": "C'est le même symbole que celui utilisé pour la soustraction en arithmétique de base.",
+              "help": {
+                "concept": "SQL utilise les opérateurs arithmétiques standards : + pour l'addition, - pour la soustraction, * pour la multiplication et / pour la division.",
+                "hint_1": "Pensez au symbole que vous utilisez pour soustraire des nombres en mathématiques.",
+                "hint_2": "Ce n'est pas le symbole plus, multiplier ou diviser."
+              },
+              "options": {
+                "a": "[object Object]",
+                "b": "Une commande"
+              }
+            },
+            "quiz-4": {
+              "title": "Lesquelles des colonnes calculées suivantes sont valides en SQL ?",
+              "prompt": "Sélectionnez toutes les expressions ci-dessous qui pourraient être utilisées comme colonnes calculées dans une instruction SELECT.",
+              "hint": "Considérez quels opérateurs sont valides pour l'arithmétique en SQL.",
+              "help": {
+                "concept": "SQL prend en charge +, -, * et / pour les calculs arithmétiques dans les instructions SELECT. L'opérateur & n'est pas utilisé pour l'arithmétique en SQL.",
+                "hint_1": "Cherchez les expressions qui utilisent des opérateurs mathématiques standards.",
+                "hint_2": "Le symbole & n'est pas un opérateur arithmétique en SQL."
+              },
+              "options": {
+                "a": "[object Object]",
+                "b": "Une commande"
+              }
+            },
+            "quiz-5": {
+              "title": "Complétez : Ajouter des frais fixes",
+              "prompt": "Choisissez la meilleure valeur pour le premier blanc manquant dans l'énoncé.",
+              "hint": "Le blanc doit être rempli avec le montant des frais fixes.",
+              "help": {
+                "concept": "Pour ajouter une valeur fixe à une colonne calculée, il suffit d'utiliser le nombre dans l'expression.",
+                "hint_1": "Vous voulez ajouter le nombre, le terme manquant, au total calculé.",
+                "hint_2": "N'utilisez pas un nom de colonne ; utilisez le montant réel des frais."
+              },
+              "template": "La première valeur manquante est [blank1].",
+              "choices": [
+                "3",
+                "quantity",
+                "unit_price",
+                "shipping",
+                "fee"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_5": {
+        "adding-and-subtracting": {
+          "sketch-1": {
+            "title": "Qu'est-ce qu'une colonne calculée ?",
+            "bodyMarkdown": "Une colonne calculée en SQL est une valeur que vous créez à la volée dans votre instruction SELECT à l'aide d'opérations arithmétiques ou d'expressions. Par exemple, vous pouvez multiplier les colonnes `quantity` et `unit_price` pour obtenir un total pour chaque commande :\n\n```sql\nSELECT id, customer_name, quantity, unit_price, quantity * unit_price AS line_total\nFROM orders;\n```\n\nCette requête ajoute une nouvelle colonne appelée `line_total` qui n'est pas stockée dans la table, mais calculée pour chaque ligne."
+          },
+          "sketch-2": {
+            "title": "Addition et soustraction dans SELECT",
+            "bodyMarkdown": "Vous pouvez utiliser `+` pour additionner et `-` pour soustraire des colonnes ou des valeurs en SQL. Par exemple, pour accorder une remise de 5 $ sur chaque commande, soustrayez 5 du total calculé :\n\n```sql\nSELECT id, customer_name, quantity, unit_price, (quantity * unit_price) - 5 AS discounted_total\nFROM orders;\n```\n\nVous pouvez aussi ajouter des frais fixes, comme 2 $ de frais de port :\n\n```sql\nSELECT id, customer_name, (quantity * unit_price) + 2 AS total_with_shipping\nFROM orders;\n```"
+          },
+          "sketch-3": {
+            "title": "Utiliser des alias pour plus de clarté",
+            "bodyMarkdown": "Lorsque vous créez une colonne calculée, utilisez `AS` pour lui donner un nom clair (alias). Cela rend vos résultats plus lisibles et compréhensibles. Par exemple :\n\n```sql\nSELECT id, customer_name, quantity * unit_price AS line_total\nFROM orders;\n```\n\nIci, `line_total` est l'alias pour la valeur calculée."
+          }
+        }
+      }
+    }
+  }
+}

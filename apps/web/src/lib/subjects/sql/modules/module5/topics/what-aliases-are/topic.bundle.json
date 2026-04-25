@@ -14,14 +14,14 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.sql.sql_module_5.what-aliases-are.cards.sketch0.title",
-      "sketchId": "sketch-1",
+      "sketchId": "sk1",
       "height": 420
     },
     {
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.sql.sql_module_5.what-aliases-are.cards.sketch1.title",
-      "sketchId": "sketch-2",
+      "sketchId": "sk2",
       "height": 420
     },
     {
@@ -39,55 +39,55 @@
   ],
   "sketches": [
     {
-      "id": "sketch-1",
+      "id": "sk1",
       "archetype": "paragraph",
-      "titleKey": "sketches.sql.sql_module_5.what-aliases-are.sketch-1.title",
-      "bodyKey": "sketches.sql.sql_module_5.what-aliases-are.sketch-1.bodyMarkdown"
+      "titleKey": "sketches.sql.sql_module_5.what-aliases-are.sk1.title",
+      "bodyKey": "sketches.sql.sql_module_5.what-aliases-are.sk1.bodyMarkdown"
     },
     {
-      "id": "sketch-2",
+      "id": "sk2",
       "archetype": "paragraph",
-      "titleKey": "sketches.sql.sql_module_5.what-aliases-are.sketch-2.title",
-      "bodyKey": "sketches.sql.sql_module_5.what-aliases-are.sketch-2.bodyMarkdown"
+      "titleKey": "sketches.sql.sql_module_5.what-aliases-are.sk2.title",
+      "bodyKey": "sketches.sql.sql_module_5.what-aliases-are.sk2.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "code-1",
+      "id": "q1",
       "kind": "code_input",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.what-aliases-are.quiz.code-1",
+      "messageBase": "topics.sql.sql_module_5.what-aliases-are.quiz.q1",
       "language": "sql",
       "fixedSqlDialect": "sqlite",
       "recipe": {
         "type": "sql_query",
         "datasetId": "sales_kpi",
         "resultShape": "table",
-        "solutionCode": "SELECT customer_name, quantity * unit_price AS order_total\nFROM orders;"
+        "solutionCode": "SELECT customer_name, quantity * unit_price AS order_value FROM orders;"
       }
     },
     {
-      "id": "code-2",
+      "id": "q2",
       "kind": "code_input",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.what-aliases-are.quiz.code-2",
+      "messageBase": "topics.sql.sql_module_5.what-aliases-are.quiz.q2",
       "language": "sql",
       "fixedSqlDialect": "sqlite",
       "recipe": {
         "type": "sql_query",
         "datasetId": "sales_kpi",
         "resultShape": "table",
-        "solutionCode": "SELECT region, AVG(unit_price) AS avg_price\nFROM orders\nGROUP BY region;"
+        "solutionCode": "SELECT region AS area FROM orders;"
       }
     },
     {
-      "id": "single-1",
+      "id": "q3",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.what-aliases-are.quiz.single-1",
+      "messageBase": "topics.sql.sql_module_5.what-aliases-are.quiz.q3",
       "optionIds": [
         "a",
         "b"
@@ -98,11 +98,11 @@
       }
     },
     {
-      "id": "multi-1",
+      "id": "q4",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.what-aliases-are.quiz.multi-1",
+      "messageBase": "topics.sql.sql_module_5.what-aliases-are.quiz.q4",
       "optionIds": [
         "a",
         "b"
@@ -115,11 +115,11 @@
       }
     },
     {
-      "id": "fill-1",
+      "id": "q5",
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.what-aliases-are.quiz.fill-1",
+      "messageBase": "topics.sql.sql_module_5.what-aliases-are.quiz.q5",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",

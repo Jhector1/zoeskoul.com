@@ -14,6 +14,13 @@ export type PlannedSection = {
   order: number;
   title: string;
   description?: string;
+
+  weekStart?: number | null;
+  weekEnd?: number | null;
+  weeksLabel?: string | null;
+
+  bullets?: string[];
+
   topics: PlannedTopic[];
 };
 

@@ -1,0 +1,124 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_5": {
+        "what-expressions-are": {
+          "label": "What expressions are",
+          "summary": "Understand what expressions are in SQL, how they are used in calculated columns, and why they are important for creating new values in queries.",
+          "cards": {
+            "sketch0": {
+              "title": "What is an Expression in SQL?"
+            },
+            "sketch1": {
+              "title": "Why Use Expressions?"
+            },
+            "project": {
+              "title": "Build a Simple Invoice Report with Calculated Columns"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "projectSteps": {
+            "code-1": {
+              "title": "Calculate a Line Total"
+            },
+            "code-2": {
+              "title": "Create a Discounted Price Column"
+            }
+          },
+          "quiz": {
+            "code-1": {
+              "title": "Calculate a Line Total",
+              "prompt": "Write a SQL query to select the `id`, `quantity`, `unit_price`, and a new column called `line_total` that multiplies `quantity` by `unit_price` from the `orders` table.",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+                "hint_1": "Eliminate choices or interpretations that do not match the task.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "starterCode": "SELECT id, quantity, unit_price\n-- Add your expression here\nFROM orders;"
+            },
+            "code-2": {
+              "title": "Create a Discounted Price Column",
+              "prompt": "Write a SQL query to select `id`, `unit_price`, and a new column called `discounted_price` that shows the unit price with a 15% discount (i.e., 85% of the original price) from the `orders` table.",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+                "hint_1": "Eliminate choices or interpretations that do not match the task.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "starterCode": "SELECT id, unit_price\n-- Add your discounted price expression here\nFROM orders;"
+            },
+            "single-1": {
+              "title": "Identifying an Expression",
+              "prompt": "Which of the following is an example of an expression in SQL?",
+              "hint": "An expression combines values, operators, or functions to produce a new value.",
+              "help": {
+                "concept": "Expressions in SQL can be arithmetic (like `a + b`), string concatenations, or function calls that return a value.",
+                "hint_1": "Look for an option that calculates or transforms data.",
+                "hint_2": "Expressions usually appear in the SELECT clause and produce a new value."
+              },
+              "options": {
+                "a": "a. SELECT * FROM orders;",
+                "b": "b. quantity * unit_price",
+                "c": "c. FROM orders",
+                "d": "d. WHERE status = 'paid'"
+              }
+            },
+            "multi-1": {
+              "title": "Recognizing Expressions in Queries",
+              "prompt": "Which of the following are valid expressions you could use in a SQL SELECT statement? (Choose all that apply)",
+              "hint": "Expressions can use arithmetic, functions, or combine columns.",
+              "help": {
+                "concept": "Valid expressions in SQL include arithmetic operations, function calls, and string concatenations.",
+                "hint_1": "Check which options combine columns, use operators, or call functions.",
+                "hint_2": "More than one option may be correct; look for calculations or transformations."
+              },
+              "options": {
+                "a": "a. quantity + 2",
+                "b": "b. unit_price * 0.9",
+                "c": "c. SELECT id FROM orders",
+                "d": "d. UPPER(region)",
+                "e": "e. WHERE status = 'paid'"
+              }
+            },
+            "fill-1": {
+              "title": "Fill in the Blank: Purpose of Expressions",
+              "prompt": "Choose the best value for the first missing blank in the statement.",
+              "hint": "Think about what expressions allow you to do with your data.",
+              "help": {
+                "concept": "Expressions let you calculate, transform, or generate new values based on the data in your tables.",
+                "hint_1": "What do you do when you use arithmetic or functions in SELECT?",
+                "hint_2": "Expressions help you make new values from columns you already have."
+              },
+              "template": "The first missing value is [blank1].",
+              "choices": [
+                "create",
+                "delete",
+                "ignore",
+                "hide"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_5": {
+        "what-expressions-are": {
+          "sketch-1": {
+            "title": "What is an Expression in SQL?",
+            "bodyMarkdown": "In SQL, an **expression** is a combination of one or more values, operators, and SQL functions that evaluate to a single value. Expressions are used to create new values from existing data in your tables. For example, you can multiply two columns to calculate a total, or use a function to format a date.\n\nExample:\n```sql\nSELECT id, quantity * unit_price AS line_total\nFROM orders;\n```\nHere, `quantity * unit_price` is an expression that calculates the total price for each order."
+          },
+          "sketch-2": {
+            "title": "Why Use Expressions?",
+            "bodyMarkdown": "Expressions let you perform calculations or transformations directly in your SQL queries. This is useful for:\n- Calculating totals (e.g., `quantity * unit_price`)\n- Creating new columns on the fly\n- Formatting or combining text\n- Applying functions to data\n\nFor example, you can add a discount:\n```sql\nSELECT id, unit_price, unit_price * 0.9 AS discounted_price\nFROM orders;\n```\nThis query calculates a 10% discount for each order."
+          }
+        }
+      }
+    }
+  }
+}

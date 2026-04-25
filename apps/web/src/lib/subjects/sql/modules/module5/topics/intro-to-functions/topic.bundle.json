@@ -77,7 +77,7 @@
         "type": "sql_query",
         "datasetId": "sales_kpi",
         "resultShape": "table",
-        "solutionCode": "SELECT id, ROUND(quantity * unit_price, 0) AS rounded_total\nFROM orders;"
+        "solutionCode": "SELECT id, ROUND(quantity * unit_price, 0) AS rounded_total FROM orders;"
       }
     },
     {
@@ -92,7 +92,7 @@
         "type": "sql_query",
         "datasetId": "sales_kpi",
         "resultShape": "table",
-        "solutionCode": "SELECT customer_name, UPPER(region) AS region_upper\nFROM orders;"
+        "solutionCode": "SELECT customer_name, UPPER(customer_name) AS upper_name FROM orders;"
       }
     },
     {
@@ -133,10 +133,10 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "topics.sql.sql_module_5.intro-to-functions.quiz.q5",
-      "choiceCount": 4,
+      "choiceCount": 5,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "LOWER()"
+        "value": "lower_name"
       }
     }
   ]

@@ -4,7 +4,7 @@
       "sql_module_5": {
         "simple-report-queries": {
           "label": "Simple report queries",
-          "summary": "Learn to write simple report queries using calculated columns and SQL expressions in the sales_kpi dataset.",
+          "summary": "Learn to write simple SQL report queries using calculated columns and expressions, including using aliases for clarity and basic arithmetic in SELECT statements.",
           "cards": {
             "sketch0": {
               "title": "What is a calculated column?"
@@ -13,16 +13,16 @@
               "title": "Using aliases for clarity"
             },
             "sketch2": {
-              "title": "Combining expressions and filters"
+              "title": "Expressions in SELECT"
             },
             "quiz": {
               "title": "Quiz"
             }
           },
           "quiz": {
-            "code-1": {
-              "title": "Calculate line totals for all orders",
-              "prompt": "Write a SQL query to show each order's `id`, `customer_name`, and the total value of the order as `line_total` (calculated as `quantity * unit_price`).",
+            "q1": {
+              "title": "Calculate line totals for each order",
+              "prompt": "Write a SQL query to show each order's `id`, `customer_name`, and a calculated column named `line_total` that multiplies `quantity` by `unit_price` from the `orders` table.",
               "hint": "Focus on the concept being tested.",
               "help": {
                 "concept": "Think about the role or idea being tested rather than repeating answer wording.",
@@ -31,9 +31,9 @@
               },
               "starterCode": "-- Write your query here"
             },
-            "code-2": {
-              "title": "Report only paid orders with calculated totals",
-              "prompt": "Write a SQL query to list `customer_name`, `status`, and the total value of each order as `total_amount` (quantity times unit_price), but only for orders where the status is 'paid'.",
+            "q2": {
+              "title": "Show discounted price for each order",
+              "prompt": "Write a SQL query to display `id`, `unit_price`, and a new column called `discounted_price` that shows the unit price with a 15% discount (i.e., unit_price * 0.85) for each order in the `orders` table.",
               "hint": "Focus on the concept being tested.",
               "help": {
                 "concept": "Think about the role or idea being tested rather than repeating answer wording.",
@@ -42,49 +42,53 @@
               },
               "starterCode": "-- Write your query here"
             },
-            "single-1": {
-              "title": "Purpose of an alias in SQL reports",
-              "prompt": "Why are aliases (using AS) useful when creating report queries in SQL?",
+            "q3": {
+              "title": "Purpose of aliases in SQL reports",
+              "prompt": "Why are aliases (using AS) useful when writing SQL report queries?",
               "hint": "Think about how the output looks to someone reading the report.",
               "help": {
-                "concept": "Aliases make result columns easier to understand by giving them descriptive names.",
-                "hint_1": "Aliases help clarify what a calculated column represents.",
-                "hint_2": "They make the output more readable and professional."
+                "concept": "Aliases make result columns easier to understand by giving them clear, descriptive names.",
+                "hint_1": "Aliases help make column names more readable in the output.",
+                "hint_2": "Aliases are especially helpful when using expressions or calculated columns."
               },
               "options": {
-                "a": "[object Object]",
-                "b": "A command"
+                "a": "a. They let you hide columns from the output.",
+                "b": "b. They make column names in the result set clearer and more readable.",
+                "c": "c. They speed up query execution.",
+                "d": "d. They are required for every column."
               }
             },
-            "multi-1": {
-              "title": "Identifying valid SQL expressions",
-              "prompt": "Which of the following are valid expressions you could use in a SELECT statement on the `orders` table? (Choose all that apply.)",
-              "hint": "Look for expressions that use existing columns and valid SQL syntax.",
+            "q4": {
+              "title": "Which of the following are valid SQL expressions for calculated columns?",
+              "prompt": "Select all options that show valid ways to create calculated columns in a SELECT statement.",
+              "hint": "Look for expressions that use arithmetic or combine columns.",
               "help": {
-                "concept": "A valid SQL expression can use arithmetic operations or functions on columns.",
-                "hint_1": "Expressions like quantity * unit_price or UPPER(customer_name) are valid.",
-                "hint_2": "Check if the expression uses columns from the table and follows SQL rules."
+                "concept": "A calculated column can use arithmetic operations or functions on existing columns in the SELECT clause.",
+                "hint_1": "Check for correct use of arithmetic and column names.",
+                "hint_2": "Valid expressions use existing columns and arithmetic or functions, and can be aliased."
               },
               "options": {
-                "a": "[object Object]",
-                "b": "A command"
+                "a": "a. quantity * unit_price AS total",
+                "b": "b. unit_price + 10 AS increased_price",
+                "c": "c. SELECT * FROM orders",
+                "d": "d. quantity / 2 AS half_quantity"
               }
             },
-            "fill-1": {
-              "title": "Choosing the correct alias",
-              "prompt": "Fill in the blank to assign the alias `discounted_total` to the calculated column for quantity times unit_price in this SELECT statement:",
-              "hint": "Use the AS keyword to assign an alias.",
+            "q5": {
+              "title": "Fill in the blank: Calculated column syntax",
+              "prompt": "Complete the SQL statement to create a calculated column showing double the quantity as `double_quantity`:\n\nSELECT id, quantity, ______ AS double_quantity FROM orders;",
+              "hint": "Multiply the quantity column by 2.",
               "help": {
-                "concept": "The AS keyword is used to give a name (alias) to a calculated column in SQL.",
-                "hint_1": "Write the expression, then AS, then the alias name.",
-                "hint_2": "The alias should be after AS and match the desired column name."
+                "concept": "To create a calculated column, use arithmetic on an existing column and alias it with AS.",
+                "hint_1": "The blank should be an expression that doubles the quantity.",
+                "hint_2": "Use the missing term in the blank."
               },
-              "template": "SELECT quantity * unit_price AS [blank] FROM orders;",
+              "template": "SELECT id, quantity, {{blank}} AS double_quantity FROM orders;",
               "choices": [
-                "discounted_total",
-                "total",
-                "amount",
-                "price"
+                "quantity * 2",
+                "quantity + 2",
+                "2 * quantity",
+                "quantity / 2"
               ]
             }
           }
@@ -96,17 +100,17 @@
     "sql": {
       "sql_module_5": {
         "simple-report-queries": {
-          "sketch-1": {
+          "sk1": {
             "title": "What is a calculated column?",
-            "bodyMarkdown": "A calculated column in SQL is a value you create on the fly in your SELECT statement using expressions. For example, you can multiply `quantity` by `unit_price` to get the total value of each order:\n\n```sql\nSELECT id, quantity * unit_price AS line_total\nFROM orders;\n```\nThis query returns each order's ID and its computed line total."
+            "bodyMarkdown": "A calculated column in SQL is a value you create on the fly in your SELECT statement using arithmetic or expressions. For example, if you want to see the total value of each order in the `orders` table, you can multiply `quantity` by `unit_price`:\n\n```sql\nSELECT id, quantity * unit_price AS line_total\nFROM orders;\n```\nThis query shows each order's ID and its calculated line total."
           },
-          "sketch-2": {
+          "sk2": {
             "title": "Using aliases for clarity",
-            "bodyMarkdown": "Aliases rename columns in your result set, making reports easier to read. Use the `AS` keyword to assign an alias:\n\n```sql\nSELECT customer_name, region, quantity * unit_price AS total_amount\nFROM orders;\n```\nHere, `total_amount` is an alias for the calculated value."
+            "bodyMarkdown": "Aliases let you rename columns in your result set for better readability. Use the `AS` keyword to give a column a new name. For example:\n\n```sql\nSELECT customer_name AS buyer, region, quantity * unit_price AS total_amount\nFROM orders;\n```\nHere, `customer_name` appears as `buyer` and the calculated column is labeled `total_amount`."
           },
-          "sketch-3": {
-            "title": "Combining expressions and filters",
-            "bodyMarkdown": "You can use expressions alongside filters to focus your report. For example, to see only 'paid' orders and their totals:\n\n```sql\nSELECT id, customer_name, quantity * unit_price AS line_total\nFROM orders\nWHERE status = 'paid';\n```\nThis returns only the paid orders with their calculated totals."
+          "sk3": {
+            "title": "Expressions in SELECT",
+            "bodyMarkdown": "You can use arithmetic expressions directly in the SELECT clause. For example, to show a 10% discount on each order:\n\n```sql\nSELECT id, unit_price, unit_price * 0.9 AS discounted_price\nFROM orders;\n```\nThis query displays the original and discounted prices for each order."
           }
         }
       }

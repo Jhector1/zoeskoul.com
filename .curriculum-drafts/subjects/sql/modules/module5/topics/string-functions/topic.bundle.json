@@ -25,6 +25,13 @@
       "height": 420
     },
     {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_5.string-functions.cards.sketch2.title",
+      "sketchId": "sketch-3",
+      "height": 420
+    },
+    {
       "id": "quiz",
       "kind": "quiz",
       "titleKey": "topics.sql.sql_module_5.string-functions.cards.quiz.title",
@@ -49,45 +56,51 @@
       "archetype": "paragraph",
       "titleKey": "sketches.sql.sql_module_5.string-functions.sketch-2.title",
       "bodyKey": "sketches.sql.sql_module_5.string-functions.sketch-2.bodyMarkdown"
+    },
+    {
+      "id": "sketch-3",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_5.string-functions.sketch-3.title",
+      "bodyKey": "sketches.sql.sql_module_5.string-functions.sketch-3.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "quiz-1",
+      "id": "code-1",
       "kind": "code_input",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.string-functions.quiz.quiz-1",
+      "messageBase": "topics.sql.sql_module_5.string-functions.quiz.code-1",
       "language": "sql",
       "fixedSqlDialect": "sqlite",
       "recipe": {
         "type": "sql_query",
         "datasetId": "sales_kpi",
         "resultShape": "table",
-        "solutionCode": "SELECT UPPER(customer_name) AS customer_upper FROM orders;"
+        "solutionCode": "SELECT customer_name, UPPER(customer_name) AS customer_name_upper FROM orders;"
       }
     },
     {
-      "id": "quiz-2",
+      "id": "code-2",
       "kind": "code_input",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.string-functions.quiz.quiz-2",
+      "messageBase": "topics.sql.sql_module_5.string-functions.quiz.code-2",
       "language": "sql",
       "fixedSqlDialect": "sqlite",
       "recipe": {
         "type": "sql_query",
         "datasetId": "sales_kpi",
         "resultShape": "table",
-        "solutionCode": "SELECT SUBSTR(region, 1, 2) AS region_initials FROM orders;"
+        "solutionCode": "SELECT region, LOWER(SUBSTR(region, 1, 2)) AS region_code FROM orders;"
       }
     },
     {
-      "id": "quiz-3",
+      "id": "single-1",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.string-functions.quiz.quiz-3",
+      "messageBase": "topics.sql.sql_module_5.string-functions.quiz.single-1",
       "optionIds": [
         "a",
         "b"
@@ -98,11 +111,11 @@
       }
     },
     {
-      "id": "quiz-4",
+      "id": "multi-1",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.string-functions.quiz.quiz-4",
+      "messageBase": "topics.sql.sql_module_5.string-functions.quiz.multi-1",
       "optionIds": [
         "a",
         "b"
@@ -115,15 +128,15 @@
       }
     },
     {
-      "id": "quiz-5",
+      "id": "fill-1",
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_5.string-functions.quiz.quiz-5",
+      "messageBase": "topics.sql.sql_module_5.string-functions.quiz.fill-1",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "TRIM()"
+        "value": "SUBSTR"
       }
     }
   ]

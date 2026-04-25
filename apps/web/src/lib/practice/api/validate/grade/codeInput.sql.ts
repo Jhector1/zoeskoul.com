@@ -20,6 +20,53 @@ const DEFAULT_SQL_LIMITS = {
     maxBytes: 128_000,
 } as const;
 
+function normalizeSql(sql: string | undefined | null): string {
+    return String(sql ?? "").trim();
+}
+
+function stripSqlComments(sql: string): string {
+    return String(sql ?? "")
+        .replace(/--.*$/gm, " ")
+        .replace(/\/\*[\s\S]*?\*\//g, " ");
+}
+
+function startsWithMutation(sql: string | undefined | null): boolean {
+    const cleaned = stripSqlComments(String(sql ?? "")).trim().toLowerCase();
+
+    return /^(insert|update|delete|replace|create|drop|alter)\b/.test(cleaned);
+}
+
+function ensureTrailingSemicolon(sql: string): string {
+    const trimmed = normalizeSql(sql);
+    if (!trimmed) return "";
+    return trimmed.endsWith(";") ? trimmed : `${trimmed};`;
+}
+
+function buildCheckedSqlScript(args: {
+    mainSql: string;
+    checkSql?: string;
+}): string {
+    const mainSql = normalizeSql(args.mainSql);
+    const checkSql = normalizeSql(args.checkSql);
+
+    if (!checkSql) return mainSql;
+
+    return [ensureTrailingSemicolon(mainSql), checkSql].join("\n");
+}
+
+function mutationNeedsCheckSql(args: {
+    learnerSql: string;
+    solutionSql?: string;
+    checkSql?: string;
+}) {
+    if (normalizeSql(args.checkSql)) return false;
+
+    return (
+        startsWithMutation(args.learnerSql) ||
+        startsWithMutation(args.solutionSql)
+    );
+}
+
 export async function gradeSqlCodeInput(args: {
     expected: SqlExpected;
     code: string;
@@ -62,10 +109,37 @@ export async function gradeSqlCodeInput(args: {
                 resultShape: "table" as const,
             };
 
+        const checkSql = normalizeSql(tc.checkSql);
+
+        if (
+            mutationNeedsCheckSql({
+                learnerSql: code,
+                solutionSql: expected.solutionCode,
+                checkSql,
+            })
+        ) {
+            return {
+                ok: false,
+                explanation:
+                    "Server bug: this SQL data-change exercise needs a checkSql query to verify the database state after the statement runs.",
+                feedback: null,
+            };
+        }
+
+        const learnerSqlForRun = buildCheckedSqlScript({
+            mainSql: code,
+            checkSql,
+        });
+
+        const solutionSqlForRun = buildCheckedSqlScript({
+            mainSql: expected.solutionCode ?? "",
+            checkSql,
+        });
+
         if ((tc.compareTo ?? "solution") === "solution") {
             const result = await validateSqlAgainstSolution({
-                learnerSql: code,
-                solutionSql: expected.solutionCode!,
+                learnerSql: learnerSqlForRun,
+                solutionSql: solutionSqlForRun,
                 dialect: sqlDialect,
                 schemaSql,
                 seedSql,
@@ -99,7 +173,9 @@ export async function gradeSqlCodeInput(args: {
                 if (result.errorStage === "learner_table_missing") {
                     return {
                         ok: false,
-                        explanation: "Your query ran, but no result table could be read.",
+                        explanation: checkSql
+                            ? "Your SQL ran, but the post-check query did not return a readable result table."
+                            : "Your query ran, but no result table could be read.",
                         feedback: classifySqlMissingResultTable("check"),
                     };
                 }
@@ -107,11 +183,14 @@ export async function gradeSqlCodeInput(args: {
                 if (result.errorStage === "table_mismatch") {
                     return {
                         ok: false,
-                        explanation: "Your query ran, but the returned table does not match the expected result.",
+                        explanation: checkSql
+                            ? "Your SQL ran, but the database state after your statement does not match the expected result."
+                            : "Your query ran, but the returned table does not match the expected result.",
                         feedback: classifySqlResultMismatch({
                             source: "check",
-                            message:
-                                "Check your selected columns, filtering, sorting, grouping, and returned rows.",
+                            message: checkSql
+                                ? "Check the row you inserted, updated, or deleted. The final table state is different from the expected state."
+                                : "Check your selected columns, filtering, sorting, grouping, and returned rows.",
                         }),
                     };
                 }
@@ -127,7 +206,9 @@ export async function gradeSqlCodeInput(args: {
                 if (result.errorStage === "solution_table_missing") {
                     return {
                         ok: false,
-                        explanation: "Server bug: SQL expected table is missing.",
+                        explanation: checkSql
+                            ? "Server bug: the SQL post-check query did not return a readable table."
+                            : "Server bug: SQL expected table is missing.",
                         feedback: null,
                     };
                 }
@@ -146,11 +227,12 @@ export async function gradeSqlCodeInput(args: {
             kind: "sql",
             language: "sql",
             dialect: sqlDialect,
-            code,
+            code: learnerSqlForRun,
             schemaSql,
             seedSql,
             datasetId,
             limits: DEFAULT_SQL_LIMITS,
+            runtime,
         } as any);
 
         if (!learnerRun?.ok) {
@@ -166,12 +248,15 @@ export async function gradeSqlCodeInput(args: {
         if (!learnerTable) {
             return {
                 ok: false,
-                explanation: "Your query ran, but no result table could be read.",
+                explanation: checkSql
+                    ? "Your SQL ran, but the post-check query did not return a readable result table."
+                    : "Your query ran, but no result table could be read.",
                 feedback: classifySqlMissingResultTable("check"),
             };
         }
 
         const expectedTable: SqlTable | null = tc.expectedTable ?? null;
+
         if (!expectedTable) {
             return {
                 ok: false,
@@ -189,15 +274,22 @@ export async function gradeSqlCodeInput(args: {
         if (!pass) {
             return {
                 ok: false,
-                explanation: "Your query ran, but the returned table does not match the expected result.",
+                explanation: checkSql
+                    ? "Your SQL ran, but the database state after your statement does not match the expected result."
+                    : "Your query ran, but the returned table does not match the expected result.",
                 feedback: classifySqlResultMismatch({
                     source: "check",
-                    message:
-                        "Check your selected columns, filtering, sorting, grouping, and returned rows.",
+                    message: checkSql
+                        ? "Check the row you inserted, updated, or deleted. The final table state is different from the expected state."
+                        : "Check your selected columns, filtering, sorting, grouping, and returned rows.",
                 }),
             };
         }
     }
 
-    return { ok: true, explanation: "Correct.", feedback: null };
+    return {
+        ok: true,
+        explanation: "Correct.",
+        feedback: null,
+    };
 }
