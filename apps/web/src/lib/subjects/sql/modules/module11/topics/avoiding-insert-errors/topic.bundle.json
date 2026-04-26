@@ -42,6 +42,46 @@
         "preferKind": null,
         "maxAttempts": 10
       }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.sql.sql_module_11.avoiding-insert-errors.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "q1_explicit_columns_insert",
+            "titleKey": "topics.sql.sql_module_11.avoiding-insert-errors.projectSteps.q1_explicit_columns_insert.title",
+            "exerciseKey": "q1-explicit-columns-insert",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "q4_insert_null_notes",
+            "titleKey": "topics.sql.sql_module_11.avoiding-insert-errors.projectSteps.q4_insert_null_notes.title",
+            "exerciseKey": "q4-insert-null-notes",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "q5_insert_minimal_required",
+            "titleKey": "topics.sql.sql_module_11.avoiding-insert-errors.projectSteps.q5_insert_minimal_required.title",
+            "exerciseKey": "q5-insert-minimal-required",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
     }
   ],
   "sketches": [
@@ -68,7 +108,7 @@
     {
       "id": "q1-explicit-columns-insert",
       "kind": "code_input",
-      "purpose": "quiz",
+      "purpose": "project",
       "weight": 1,
       "messageBase": "topics.sql.sql_module_11.avoiding-insert-errors.quiz.q1-explicit-columns-insert",
       "language": "sql",
@@ -112,7 +152,7 @@
     {
       "id": "q4-insert-null-notes",
       "kind": "code_input",
-      "purpose": "quiz",
+      "purpose": "project",
       "weight": 1,
       "messageBase": "topics.sql.sql_module_11.avoiding-insert-errors.quiz.q4-insert-null-notes",
       "language": "sql",
@@ -127,7 +167,7 @@
     {
       "id": "q5-insert-minimal-required",
       "kind": "code_input",
-      "purpose": "quiz",
+      "purpose": "project",
       "weight": 1,
       "messageBase": "topics.sql.sql_module_11.avoiding-insert-errors.quiz.q5-insert-minimal-required",
       "language": "sql",

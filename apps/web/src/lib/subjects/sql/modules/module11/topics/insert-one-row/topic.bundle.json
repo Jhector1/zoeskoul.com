@@ -35,6 +35,46 @@
         "preferKind": null,
         "maxAttempts": 10
       }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.sql.sql_module_11.insert-one-row.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "code_1_insert_basic",
+            "titleKey": "topics.sql.sql_module_11.insert-one-row.projectSteps.code_1_insert_basic.title",
+            "exerciseKey": "code-1-insert-basic",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "code_2_insert_with_defaults",
+            "titleKey": "topics.sql.sql_module_11.insert-one-row.projectSteps.code_2_insert_with_defaults.title",
+            "exerciseKey": "code-2-insert-with-defaults",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "code_3_insert_null_notes",
+            "titleKey": "topics.sql.sql_module_11.insert-one-row.projectSteps.code_3_insert_null_notes.title",
+            "exerciseKey": "code-3-insert-null-notes",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
     }
   ],
   "sketches": [
@@ -55,7 +95,7 @@
     {
       "id": "code-1-insert-basic",
       "kind": "code_input",
-      "purpose": "quiz",
+      "purpose": "project",
       "weight": 1,
       "messageBase": "topics.sql.sql_module_11.insert-one-row.quiz.code-1-insert-basic",
       "language": "sql",
@@ -70,7 +110,7 @@
     {
       "id": "code-2-insert-with-defaults",
       "kind": "code_input",
-      "purpose": "quiz",
+      "purpose": "project",
       "weight": 1,
       "messageBase": "topics.sql.sql_module_11.insert-one-row.quiz.code-2-insert-with-defaults",
       "language": "sql",
@@ -85,7 +125,7 @@
     {
       "id": "code-3-insert-null-notes",
       "kind": "code_input",
-      "purpose": "quiz",
+      "purpose": "project",
       "weight": 1,
       "messageBase": "topics.sql.sql_module_11.insert-one-row.quiz.code-3-insert-null-notes",
       "language": "sql",

@@ -42,6 +42,46 @@
         "preferKind": null,
         "maxAttempts": 10
       }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.sql.sql_module_11.matching-values-to-columns.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "q1_code_insert_basic",
+            "titleKey": "topics.sql.sql_module_11.matching-values-to-columns.projectSteps.q1_code_insert_basic.title",
+            "exerciseKey": "q1-code-insert-basic",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "q2_code_insert_null",
+            "titleKey": "topics.sql.sql_module_11.matching-values-to-columns.projectSteps.q2_code_insert_null.title",
+            "exerciseKey": "q2-code-insert-null",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "q3_code_insert_default",
+            "titleKey": "topics.sql.sql_module_11.matching-values-to-columns.projectSteps.q3_code_insert_default.title",
+            "exerciseKey": "q3-code-insert-default",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
     }
   ],
   "sketches": [
@@ -68,7 +108,7 @@
     {
       "id": "q1-code-insert-basic",
       "kind": "code_input",
-      "purpose": "quiz",
+      "purpose": "project",
       "weight": 1,
       "messageBase": "topics.sql.sql_module_11.matching-values-to-columns.quiz.q1-code-insert-basic",
       "language": "sql",
@@ -83,7 +123,7 @@
     {
       "id": "q2-code-insert-null",
       "kind": "code_input",
-      "purpose": "quiz",
+      "purpose": "project",
       "weight": 1,
       "messageBase": "topics.sql.sql_module_11.matching-values-to-columns.quiz.q2-code-insert-null",
       "language": "sql",
@@ -98,7 +138,7 @@
     {
       "id": "q3-code-insert-default",
       "kind": "code_input",
-      "purpose": "quiz",
+      "purpose": "project",
       "weight": 1,
       "messageBase": "topics.sql.sql_module_11.matching-values-to-columns.quiz.q3-code-insert-default",
       "language": "sql",

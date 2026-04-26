@@ -1,7 +1,10 @@
-// src/lib/practice/generator/engines/python/python_shared/_shared.ts
 import { PracticePurpose } from "@prisma/client";
 
-import type { CodeInputExercise, WorkspaceLanguage, SingleChoiceExercise } from "../../../types";
+import type {
+    CodeInputExercise,
+    WorkspaceLanguage,
+    SingleChoiceExercise,
+} from "../../../types";
 import type { TopicContext } from "../../generatorTypes";
 import type { RNG } from "../../shared/rng";
 import {
@@ -9,6 +12,9 @@ import {
     type SubjectModuleGenerator,
     type TopicBundle,
 } from "@/lib/practice/generator/engines/utils";
+import type { SqlDialect } from "@/lib/practice/types";
+import type { CodeExpectedInput } from "@/lib/practice/api/validate/schemas";
+import type { InteractiveLanguage } from "@zoeskoul/code-contracts";
 
 /* -------------------------------- random helpers -------------------------------- */
 
@@ -55,11 +61,6 @@ ${stdout.trimEnd()}
 ~~~`;
 }
 
-import type {  SqlDialect } from "@/lib/practice/types";
-import {CodeExpectedInput} from "@/lib/practice/api/validate/schemas";
-import {InteractiveLanguage} from "@zoeskoul/code-contracts";
-// import type { CodeExpectedInput } from "@/lib/practice/schemas";
-
 type ProgrammingLanguage = InteractiveLanguage;
 
 export type ProgrammingCodeTest = {
@@ -89,6 +90,7 @@ export type SqlCodeTest = {
     expectedTable?: SqlExpectedTable;
     match?: "table_exact";
     ignoreRowOrder?: boolean;
+    checkSql?: string;
 };
 
 type ProgrammingMakeCodeExpectedArgs = {
@@ -110,12 +112,8 @@ type SqlMakeCodeExpectedArgs = {
     solutionCode: string;
 };
 
-export function makeCodeExpected(
-    args: ProgrammingMakeCodeExpectedArgs,
-): CodeExpectedInput;
-export function makeCodeExpected(
-    args: SqlMakeCodeExpectedArgs,
-): CodeExpectedInput;
+export function makeCodeExpected(args: ProgrammingMakeCodeExpectedArgs): CodeExpectedInput;
+export function makeCodeExpected(args: SqlMakeCodeExpectedArgs): CodeExpectedInput;
 
 export function makeCodeExpected(
     args: ProgrammingMakeCodeExpectedArgs | SqlMakeCodeExpectedArgs,
@@ -124,6 +122,7 @@ export function makeCodeExpected(
 
     if (args.language === "sql") {
         const fixedSqlDialect = args.fixedSqlDialect ?? "sqlite";
+
         const runtime =
             args.runtime ??
             ({
@@ -141,6 +140,10 @@ export function makeCodeExpected(
                     expectedTable: t.expectedTable,
                     match: t.match ?? "table_exact",
                     ignoreRowOrder: t.ignoreRowOrder ?? false,
+                    checkSql:
+                        typeof t.checkSql === "string" && t.checkSql.trim()
+                            ? t.checkSql.trim()
+                            : undefined,
                 }))
                 : [
                     {
@@ -187,11 +190,11 @@ export function makeCodeExpected(
         stdin:
             typeof args.stdin === "string"
                 ? args.stdin
-                : (tests[0]?.stdin ?? ""),
+                : tests[0]?.stdin ?? "",
         stdout:
             typeof args.stdout === "string"
                 ? args.stdout
-                : (tests[0]?.stdout ?? ""),
+                : tests[0]?.stdout ?? "",
         solutionCode:
             typeof args.solutionCode === "string" ? args.solutionCode : undefined,
     };
@@ -211,4 +214,9 @@ export function makePythonModuleGenerator(args: {
 
 /* -------------------------------- re-exports -------------------------------- */
 
-export type { SingleChoiceExercise, CodeInputExercise, WorkspaceLanguage, TopicBundle };
+export type {
+    SingleChoiceExercise,
+    CodeInputExercise,
+    WorkspaceLanguage,
+    TopicBundle,
+};

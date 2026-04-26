@@ -35,6 +35,46 @@
         "preferKind": null,
         "maxAttempts": 10
       }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.sql.sql_module_11.add-a-product.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "q1",
+            "titleKey": "topics.sql.sql_module_11.add-a-product.projectSteps.q1.title",
+            "exerciseKey": "q1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "q2",
+            "titleKey": "topics.sql.sql_module_11.add-a-product.projectSteps.q2.title",
+            "exerciseKey": "q2",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "q3",
+            "titleKey": "topics.sql.sql_module_11.add-a-product.projectSteps.q3.title",
+            "exerciseKey": "q3",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
     }
   ],
   "sketches": [
@@ -55,7 +95,7 @@
     {
       "id": "q1",
       "kind": "code_input",
-      "purpose": "quiz",
+      "purpose": "project",
       "weight": 1,
       "messageBase": "topics.sql.sql_module_11.add-a-product.quiz.q1",
       "language": "sql",
@@ -70,7 +110,7 @@
     {
       "id": "q2",
       "kind": "code_input",
-      "purpose": "quiz",
+      "purpose": "project",
       "weight": 1,
       "messageBase": "topics.sql.sql_module_11.add-a-product.quiz.q2",
       "language": "sql",
@@ -85,7 +125,7 @@
     {
       "id": "q3",
       "kind": "code_input",
-      "purpose": "quiz",
+      "purpose": "project",
       "weight": 1,
       "messageBase": "topics.sql.sql_module_11.add-a-product.quiz.q3",
       "language": "sql",

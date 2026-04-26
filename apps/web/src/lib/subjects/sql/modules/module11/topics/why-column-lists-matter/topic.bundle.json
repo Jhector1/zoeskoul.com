@@ -35,6 +35,46 @@
         "preferKind": null,
         "maxAttempts": 10
       }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.sql.sql_module_11.why-column-lists-matter.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "ex_1",
+            "titleKey": "topics.sql.sql_module_11.why-column-lists-matter.projectSteps.ex_1.title",
+            "exerciseKey": "ex-1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "ex_2",
+            "titleKey": "topics.sql.sql_module_11.why-column-lists-matter.projectSteps.ex_2.title",
+            "exerciseKey": "ex-2",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "ex_3",
+            "titleKey": "topics.sql.sql_module_11.why-column-lists-matter.projectSteps.ex_3.title",
+            "exerciseKey": "ex-3",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
     }
   ],
   "sketches": [
@@ -55,7 +95,7 @@
     {
       "id": "ex-1",
       "kind": "code_input",
-      "purpose": "quiz",
+      "purpose": "project",
       "weight": 1,
       "messageBase": "topics.sql.sql_module_11.why-column-lists-matter.quiz.ex-1",
       "language": "sql",
@@ -71,7 +111,7 @@
     {
       "id": "ex-2",
       "kind": "code_input",
-      "purpose": "quiz",
+      "purpose": "project",
       "weight": 1,
       "messageBase": "topics.sql.sql_module_11.why-column-lists-matter.quiz.ex-2",
       "language": "sql",
@@ -87,7 +127,7 @@
     {
       "id": "ex-3",
       "kind": "code_input",
-      "purpose": "quiz",
+      "purpose": "project",
       "weight": 1,
       "messageBase": "topics.sql.sql_module_11.why-column-lists-matter.quiz.ex-3",
       "language": "sql",
@@ -108,12 +148,15 @@
       "messageBase": "topics.sql.sql_module_11.why-column-lists-matter.quiz.ex-4",
       "optionIds": [
         "a",
-        "b"
+        "b",
+        "c",
+        "d"
       ],
       "expected": {
         "kind": "multi_choice",
         "optionIds": [
-          "a"
+          "a",
+          "b"
         ]
       }
     },

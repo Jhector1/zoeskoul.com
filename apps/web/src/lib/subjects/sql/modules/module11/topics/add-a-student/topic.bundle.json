@@ -35,6 +35,46 @@
         "preferKind": null,
         "maxAttempts": 10
       }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.sql.sql_module_11.add-a-student.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "code_1",
+            "titleKey": "topics.sql.sql_module_11.add-a-student.projectSteps.code_1.title",
+            "exerciseKey": "code-1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "code_2",
+            "titleKey": "topics.sql.sql_module_11.add-a-student.projectSteps.code_2.title",
+            "exerciseKey": "code-2",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "code_3",
+            "titleKey": "topics.sql.sql_module_11.add-a-student.projectSteps.code_3.title",
+            "exerciseKey": "code-3",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
     }
   ],
   "sketches": [
@@ -55,7 +95,7 @@
     {
       "id": "code-1",
       "kind": "code_input",
-      "purpose": "quiz",
+      "purpose": "project",
       "weight": 1,
       "messageBase": "topics.sql.sql_module_11.add-a-student.quiz.code-1",
       "language": "sql",
@@ -70,7 +110,7 @@
     {
       "id": "code-2",
       "kind": "code_input",
-      "purpose": "quiz",
+      "purpose": "project",
       "weight": 1,
       "messageBase": "topics.sql.sql_module_11.add-a-student.quiz.code-2",
       "language": "sql",
@@ -85,7 +125,7 @@
     {
       "id": "code-3",
       "kind": "code_input",
-      "purpose": "quiz",
+      "purpose": "project",
       "weight": 1,
       "messageBase": "topics.sql.sql_module_11.add-a-student.quiz.code-3",
       "language": "sql",

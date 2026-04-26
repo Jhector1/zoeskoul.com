@@ -1,5 +1,5 @@
 import type { WorkspaceLanguage, SqlDialect } from "@/lib/practice/types";
-import {InteractiveLanguage} from "@/lib/code/types/common";
+import type { InteractiveLanguage } from "@/lib/code/types/common";
 
 export type SqlScalar = string | number | boolean | null;
 
@@ -7,7 +7,12 @@ export type SqlColumn = {
     name: string;
     type?: string | null;
 };
-export type FileEntry = { path: string; content: string };
+
+export type FileEntry = {
+    path: string;
+    content: string;
+};
+
 export type RunLimits = {
     cpu_time_limit?: number;
     cpu_extra_time?: number;
@@ -28,7 +33,7 @@ export type SqlRunLimits = {
 export type CodeRunReq =
     | {
     kind?: "code";
-    language: InteractiveLanguage
+    language: InteractiveLanguage;
     code: string;
     stdin?: string;
     limits?: RunLimits;
@@ -49,6 +54,13 @@ export type SqlRunReq = {
     code: string;
 
     /**
+     * Optional post-check SQL for mutation exercises.
+     * The runner executes `code` first, then executes `checkSql`
+     * in the same database and returns the `checkSql` table.
+     */
+    checkSql?: string;
+
+    /**
      * Canonical SQL setup fields.
      */
     schemaSql?: string;
@@ -56,7 +68,6 @@ export type SqlRunReq = {
 
     /**
      * Legacy alias kept during migration.
-     * If present, server code should normalize it into schemaSql.
      */
     setupSql?: string;
 
@@ -78,6 +89,7 @@ export type CodeRunResult = {
     memory?: number | null;
     error?: string;
 };
+
 export type SqlRunSuccess = {
     kind: "sql";
     ok: true;
@@ -123,6 +135,7 @@ export type SqlRunFailure = {
 export type SqlRunResult = SqlRunSuccess | SqlRunFailure;
 
 export type RunResult = CodeRunResult | SqlRunResult;
+
 export type RunPollResult = CodeRunResult & {
     done: boolean;
     token?: string;
@@ -150,5 +163,5 @@ export function isSqlRunReq(req: RunReq): req is SqlRunReq {
 }
 
 export function isSqlRunResult(result: unknown | null | undefined): result is SqlRunResult {
-    return !!result && (result as any).kind === "sql";
+    return Boolean(result) && (result as any).kind === "sql";
 }

@@ -42,6 +42,46 @@
         "preferKind": null,
         "maxAttempts": 10
       }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.sql.sql_module_11.insert-multiple-rows.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "q1_insert_multi_basic",
+            "titleKey": "topics.sql.sql_module_11.insert-multiple-rows.projectSteps.q1_insert_multi_basic.title",
+            "exerciseKey": "q1-insert-multi-basic",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "q2_insert_multi_null",
+            "titleKey": "topics.sql.sql_module_11.insert-multiple-rows.projectSteps.q2_insert_multi_null.title",
+            "exerciseKey": "q2-insert-multi-null",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "q3_insert_multi_explicit_cols",
+            "titleKey": "topics.sql.sql_module_11.insert-multiple-rows.projectSteps.q3_insert_multi_explicit_cols.title",
+            "exerciseKey": "q3-insert-multi-explicit-cols",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
     }
   ],
   "sketches": [
@@ -68,7 +108,7 @@
     {
       "id": "q1-insert-multi-basic",
       "kind": "code_input",
-      "purpose": "quiz",
+      "purpose": "project",
       "weight": 1,
       "messageBase": "topics.sql.sql_module_11.insert-multiple-rows.quiz.q1-insert-multi-basic",
       "language": "sql",
@@ -83,7 +123,7 @@
     {
       "id": "q2-insert-multi-null",
       "kind": "code_input",
-      "purpose": "quiz",
+      "purpose": "project",
       "weight": 1,
       "messageBase": "topics.sql.sql_module_11.insert-multiple-rows.quiz.q2-insert-multi-null",
       "language": "sql",
@@ -98,7 +138,7 @@
     {
       "id": "q3-insert-multi-explicit-cols",
       "kind": "code_input",
-      "purpose": "quiz",
+      "purpose": "project",
       "weight": 1,
       "messageBase": "topics.sql.sql_module_11.insert-multiple-rows.quiz.q3-insert-multi-explicit-cols",
       "language": "sql",

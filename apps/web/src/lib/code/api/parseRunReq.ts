@@ -1,8 +1,8 @@
 import "server-only";
 
 import type { RunLimits, RunReq, SqlRunLimits } from "@/lib/code/types";
-import type { WorkspaceLanguage, SqlDialect } from "@/lib/practice/types";
-import {InteractiveLanguage} from "@zoeskoul/code-contracts";
+import type { SqlDialect } from "@/lib/practice/types";
+import type { InteractiveLanguage } from "@zoeskoul/code-contracts";
 
 const CODE_LANGS = new Set<InteractiveLanguage>([
     "python",
@@ -10,6 +10,8 @@ const CODE_LANGS = new Set<InteractiveLanguage>([
     "javascript",
     "c",
     "cpp",
+    "bash",
+    "web",
 ]);
 
 const SQL_DIALECTS = new Set<SqlDialect>([
@@ -20,7 +22,7 @@ const SQL_DIALECTS = new Set<SqlDialect>([
 ]);
 
 function isRecord(v: unknown): v is Record<string, unknown> {
-    return !!v && typeof v === "object" && !Array.isArray(v);
+    return Boolean(v) && typeof v === "object" && !Array.isArray(v);
 }
 
 function asString(v: unknown, field: string, maxLen: number) {
@@ -198,6 +200,7 @@ function parseFiles(v: unknown) {
 
     if (isRecord(v)) {
         const out: Record<string, string> = {};
+
         for (const [path, content] of Object.entries(v)) {
             out[asString(path, "files key", 512)] = asString(
                 content,
@@ -205,6 +208,7 @@ function parseFiles(v: unknown) {
                 300_000,
             );
         }
+
         return out;
     }
 
@@ -218,6 +222,7 @@ export function parseRunReq(input: unknown): RunReq {
 
     if (rawLanguage === "sql" || input.kind === "sql") {
         const dialect = input.dialect;
+
         if (!SQL_DIALECTS.has(dialect as SqlDialect)) {
             throw new Error("Invalid SQL dialect.");
         }
@@ -227,7 +232,12 @@ export function parseRunReq(input: unknown): RunReq {
             language: "sql",
             dialect: dialect as SqlDialect,
             code: asString(input.code, "code", 300_000),
-            schemaSql: asOptionalString(input.schemaSql ?? input.setupSql, "schemaSql", 300_000),
+            checkSql: asOptionalString(input.checkSql, "checkSql", 300_000),
+            schemaSql: asOptionalString(
+                input.schemaSql ?? input.setupSql,
+                "schemaSql",
+                300_000,
+            ),
             seedSql: asOptionalString(input.seedSql, "seedSql", 300_000),
             datasetId: asOptionalString(input.datasetId, "datasetId", 256),
             limits: parseSqlLimits(input.limits),
@@ -262,8 +272,10 @@ export function parseRunReq(input: unknown): RunReq {
 
 export function parseRunToken(raw: unknown) {
     const token = typeof raw === "string" ? raw.trim() : "";
+
     if (!/^[A-Za-z0-9_-]{1,200}$/.test(token)) {
         throw new Error("Invalid run token.");
     }
+
     return token;
 }

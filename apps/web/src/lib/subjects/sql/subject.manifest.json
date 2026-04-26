@@ -11,7 +11,7 @@
     "descriptionKey": "subjects.sql.description",
     "meta": {
       "curriculum": {
-        "plannedModuleCount": 1,
+        "plannedModuleCount": 2,
         "isTerminalRelease": false,
         "moreComingMessageKey": "subjects.sql.moreComingSoon"
       },
@@ -24,6 +24,127 @@
   },
   "modules": [
     {
+      "slug": "sql_module_5",
+      "prefix": "sql5",
+      "order": 5,
+      "titleKey": "modules.sql.sql_module_5.title",
+      "descriptionKey": "modules.sql.sql_module_5.description",
+      "weekStart": null,
+      "weekEnd": null,
+      "accessOverride": null,
+      "runtimeDefaults": {
+        "kind": "sql",
+        "datasetId": "sales_kpi",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table"
+      },
+      "meta": {
+        "estimatedMinutes": 240,
+        "prereqKeys": [
+          "modules.sql.sql_module_4.title"
+        ],
+        "outcomeKeys": [
+          "modules.sql.sql_module_5.outcomes.0",
+          "modules.sql.sql_module_5.outcomes.1",
+          "modules.sql.sql_module_5.outcomes.2",
+          "modules.sql.sql_module_5.outcomes.3"
+        ],
+        "whyKeys": [
+          "modules.sql.sql_module_5.why.0",
+          "modules.sql.sql_module_5.why.1"
+        ]
+      },
+      "sections": [
+        {
+          "slug": "section_5_1",
+          "order": 1,
+          "titleKey": "sections.sql.sql_module_5.section_5_1.title",
+          "descriptionKey": "sections.sql.sql_module_5.section_5_1.description",
+          "meta": {
+            "module": 5,
+            "weeksKey": "sections.sql.sql_module_5.section_5_1.weeks",
+            "bulletKeys": [
+              "sections.sql.sql_module_5.section_5_1.bullets.0",
+              "sections.sql.sql_module_5.section_5_1.bullets.1",
+              "sections.sql.sql_module_5.section_5_1.bullets.2",
+              "sections.sql.sql_module_5.section_5_1.bullets.3"
+            ]
+          },
+          "topics": [
+            "what-expressions-are",
+            "math-in-sql",
+            "adding-and-subtracting",
+            "multiplying-and-dividing"
+          ]
+        },
+        {
+          "slug": "section_5_2",
+          "order": 2,
+          "titleKey": "sections.sql.sql_module_5.section_5_2.title",
+          "descriptionKey": "sections.sql.sql_module_5.section_5_2.description",
+          "meta": {
+            "module": 5,
+            "weeksKey": "sections.sql.sql_module_5.section_5_2.weeks",
+            "bulletKeys": [
+              "sections.sql.sql_module_5.section_5_2.bullets.0",
+              "sections.sql.sql_module_5.section_5_2.bullets.1",
+              "sections.sql.sql_module_5.section_5_2.bullets.2",
+              "sections.sql.sql_module_5.section_5_2.bullets.3"
+            ]
+          },
+          "topics": [
+            "what-aliases-are",
+            "as",
+            "renaming-result-columns",
+            "writing-readable-output"
+          ]
+        },
+        {
+          "slug": "section_5_3",
+          "order": 3,
+          "titleKey": "sections.sql.sql_module_5.section_5_3.title",
+          "descriptionKey": "sections.sql.sql_module_5.section_5_3.description",
+          "meta": {
+            "module": 5,
+            "weeksKey": "sections.sql.sql_module_5.section_5_3.weeks",
+            "bulletKeys": [
+              "sections.sql.sql_module_5.section_5_3.bullets.0",
+              "sections.sql.sql_module_5.section_5_3.bullets.1",
+              "sections.sql.sql_module_5.section_5_3.bullets.2",
+              "sections.sql.sql_module_5.section_5_3.bullets.3"
+            ]
+          },
+          "topics": [
+            "intro-to-functions",
+            "string-functions",
+            "number-functions",
+            "date-function-awareness"
+          ]
+        },
+        {
+          "slug": "section_5_4",
+          "order": 4,
+          "titleKey": "sections.sql.sql_module_5.section_5_4.title",
+          "descriptionKey": "sections.sql.sql_module_5.section_5_4.description",
+          "meta": {
+            "module": 5,
+            "weeksKey": "sections.sql.sql_module_5.section_5_4.weeks",
+            "bulletKeys": [
+              "sections.sql.sql_module_5.section_5_4.bullets.0",
+              "sections.sql.sql_module_5.section_5_4.bullets.1",
+              "sections.sql.sql_module_5.section_5_4.bullets.2",
+              "sections.sql.sql_module_5.section_5_4.bullets.3"
+            ]
+          },
+          "topics": [
+            "total-price-calculations",
+            "discount-calculations",
+            "renaming-outputs",
+            "simple-report-queries"
+          ]
+        }
+      ]
+    },    {
       "slug": "sql_module_11",
       "prefix": "sql11",
       "order": 11,

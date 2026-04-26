@@ -32,26 +32,7 @@ function stripSqlComments(sql: string): string {
 
 function startsWithMutation(sql: string | undefined | null): boolean {
     const cleaned = stripSqlComments(String(sql ?? "")).trim().toLowerCase();
-
     return /^(insert|update|delete|replace|create|drop|alter)\b/.test(cleaned);
-}
-
-function ensureTrailingSemicolon(sql: string): string {
-    const trimmed = normalizeSql(sql);
-    if (!trimmed) return "";
-    return trimmed.endsWith(";") ? trimmed : `${trimmed};`;
-}
-
-function buildCheckedSqlScript(args: {
-    mainSql: string;
-    checkSql?: string;
-}): string {
-    const mainSql = normalizeSql(args.mainSql);
-    const checkSql = normalizeSql(args.checkSql);
-
-    if (!checkSql) return mainSql;
-
-    return [ensureTrailingSemicolon(mainSql), checkSql].join("\n");
 }
 
 function mutationNeedsCheckSql(args: {
@@ -67,6 +48,24 @@ function mutationNeedsCheckSql(args: {
     );
 }
 
+function mismatchMessage(hasCheckSql: boolean) {
+    return hasCheckSql
+        ? "Your SQL ran, but the database state after your statement does not match the expected result."
+        : "Your query ran, but the returned table does not match the expected result.";
+}
+
+function mismatchHint(hasCheckSql: boolean) {
+    return hasCheckSql
+        ? "Check the row you inserted, updated, or deleted. The final table state is different from the expected state."
+        : "Check your selected columns, filtering, sorting, grouping, and returned rows.";
+}
+
+function missingTableMessage(hasCheckSql: boolean) {
+    return hasCheckSql
+        ? "Your SQL ran, but the post-check query did not return a readable result table."
+        : "Your query ran, but no result table could be read.";
+}
+
 export async function gradeSqlCodeInput(args: {
     expected: SqlExpected;
     code: string;
@@ -75,9 +74,9 @@ export async function gradeSqlCodeInput(args: {
     const { expected, code, showDebug } = args;
 
     const MAX_TESTS = 12;
-    const trimmed = expected.tests.slice(0, MAX_TESTS);
+    const tests = expected.tests.slice(0, MAX_TESTS);
 
-    for (const tc of trimmed) {
+    for (const tc of tests) {
         const datasetId =
             tc.runtime?.datasetId ??
             expected.runtime?.datasetId ??
@@ -110,6 +109,7 @@ export async function gradeSqlCodeInput(args: {
             };
 
         const checkSql = normalizeSql(tc.checkSql);
+        const hasCheckSql = Boolean(checkSql);
 
         if (
             mutationNeedsCheckSql({
@@ -126,20 +126,10 @@ export async function gradeSqlCodeInput(args: {
             };
         }
 
-        const learnerSqlForRun = buildCheckedSqlScript({
-            mainSql: code,
-            checkSql,
-        });
-
-        const solutionSqlForRun = buildCheckedSqlScript({
-            mainSql: expected.solutionCode ?? "",
-            checkSql,
-        });
-
         if ((tc.compareTo ?? "solution") === "solution") {
             const result = await validateSqlAgainstSolution({
-                learnerSql: learnerSqlForRun,
-                solutionSql: solutionSqlForRun,
+                learnerSql: code,
+                solutionSql: expected.solutionCode!,
                 dialect: sqlDialect,
                 schemaSql,
                 seedSql,
@@ -152,6 +142,7 @@ export async function gradeSqlCodeInput(args: {
                         language: "sql",
                         dialect: sqlArgs.dialect,
                         code: sqlArgs.code,
+                        checkSql,
                         schemaSql: sqlArgs.schemaSql,
                         seedSql: sqlArgs.seedSql,
                         datasetId: sqlArgs.datasetId,
@@ -173,9 +164,7 @@ export async function gradeSqlCodeInput(args: {
                 if (result.errorStage === "learner_table_missing") {
                     return {
                         ok: false,
-                        explanation: checkSql
-                            ? "Your SQL ran, but the post-check query did not return a readable result table."
-                            : "Your query ran, but no result table could be read.",
+                        explanation: missingTableMessage(hasCheckSql),
                         feedback: classifySqlMissingResultTable("check"),
                     };
                 }
@@ -183,14 +172,10 @@ export async function gradeSqlCodeInput(args: {
                 if (result.errorStage === "table_mismatch") {
                     return {
                         ok: false,
-                        explanation: checkSql
-                            ? "Your SQL ran, but the database state after your statement does not match the expected result."
-                            : "Your query ran, but the returned table does not match the expected result.",
+                        explanation: mismatchMessage(hasCheckSql),
                         feedback: classifySqlResultMismatch({
                             source: "check",
-                            message: checkSql
-                                ? "Check the row you inserted, updated, or deleted. The final table state is different from the expected state."
-                                : "Check your selected columns, filtering, sorting, grouping, and returned rows.",
+                            message: mismatchHint(hasCheckSql),
                         }),
                     };
                 }
@@ -206,7 +191,7 @@ export async function gradeSqlCodeInput(args: {
                 if (result.errorStage === "solution_table_missing") {
                     return {
                         ok: false,
-                        explanation: checkSql
+                        explanation: hasCheckSql
                             ? "Server bug: the SQL post-check query did not return a readable table."
                             : "Server bug: SQL expected table is missing.",
                         feedback: null,
@@ -227,7 +212,8 @@ export async function gradeSqlCodeInput(args: {
             kind: "sql",
             language: "sql",
             dialect: sqlDialect,
-            code: learnerSqlForRun,
+            code,
+            checkSql,
             schemaSql,
             seedSql,
             datasetId,
@@ -245,12 +231,11 @@ export async function gradeSqlCodeInput(args: {
         }
 
         const learnerTable = extractFirstSqlTable(learnerRun);
+
         if (!learnerTable) {
             return {
                 ok: false,
-                explanation: checkSql
-                    ? "Your SQL ran, but the post-check query did not return a readable result table."
-                    : "Your query ran, but no result table could be read.",
+                explanation: missingTableMessage(hasCheckSql),
                 feedback: classifySqlMissingResultTable("check"),
             };
         }
@@ -274,14 +259,10 @@ export async function gradeSqlCodeInput(args: {
         if (!pass) {
             return {
                 ok: false,
-                explanation: checkSql
-                    ? "Your SQL ran, but the database state after your statement does not match the expected result."
-                    : "Your query ran, but the returned table does not match the expected result.",
+                explanation: mismatchMessage(hasCheckSql),
                 feedback: classifySqlResultMismatch({
                     source: "check",
-                    message: checkSql
-                        ? "Check the row you inserted, updated, or deleted. The final table state is different from the expected state."
-                        : "Check your selected columns, filtering, sorting, grouping, and returned rows.",
+                    message: mismatchHint(hasCheckSql),
                 }),
             };
         }

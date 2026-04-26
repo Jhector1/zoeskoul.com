@@ -35,6 +35,46 @@
         "preferKind": null,
         "maxAttempts": 10
       }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.sql.sql_module_11.insert-behavior-basics.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "ex_1",
+            "titleKey": "topics.sql.sql_module_11.insert-behavior-basics.projectSteps.ex_1.title",
+            "exerciseKey": "ex-1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "ex_2",
+            "titleKey": "topics.sql.sql_module_11.insert-behavior-basics.projectSteps.ex_2.title",
+            "exerciseKey": "ex-2",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "ex_3",
+            "titleKey": "topics.sql.sql_module_11.insert-behavior-basics.projectSteps.ex_3.title",
+            "exerciseKey": "ex-3",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
     }
   ],
   "sketches": [
@@ -55,7 +95,7 @@
     {
       "id": "ex-1",
       "kind": "code_input",
-      "purpose": "quiz",
+      "purpose": "project",
       "weight": 1,
       "messageBase": "topics.sql.sql_module_11.insert-behavior-basics.quiz.ex-1",
       "language": "sql",
@@ -70,7 +110,7 @@
     {
       "id": "ex-2",
       "kind": "code_input",
-      "purpose": "quiz",
+      "purpose": "project",
       "weight": 1,
       "messageBase": "topics.sql.sql_module_11.insert-behavior-basics.quiz.ex-2",
       "language": "sql",
@@ -85,7 +125,7 @@
     {
       "id": "ex-3",
       "kind": "code_input",
-      "purpose": "quiz",
+      "purpose": "project",
       "weight": 1,
       "messageBase": "topics.sql.sql_module_11.insert-behavior-basics.quiz.ex-3",
       "language": "sql",

@@ -37,10 +37,22 @@ function normalizeCell(value: unknown): string | number | null {
     return String(value);
 }
 
+function stripSqlComments(sql: string): string {
+    return String(sql ?? "")
+        .replace(/--.*$/gm, " ")
+        .replace(/\/\*[\s\S]*?\*\//g, " ");
+}
+
+function isMutationSql(sql: string): boolean {
+    const cleaned = stripSqlComments(sql).trim().toLowerCase();
+    return /^(insert|update|delete|replace|create|drop|alter)\b/.test(cleaned);
+}
+
 function getBetterSqlite3():
     | (new (filename: string, options?: any) => {
     exec(sql: string): void;
     prepare(sql: string): {
+        reader?: boolean;
         columns(): Array<{ name: string }>;
         all(): Array<Record<string, unknown>>;
     };
@@ -86,9 +98,18 @@ export function buildSqlExpectedExample(args: {
     schemaSql: string;
     seedSql: string;
     solutionCode: string;
+    checkSql?: string;
     maxRows?: number;
 }): CodeExpectedExample | null {
-    const { def, resolved, schemaSql, seedSql, solutionCode, maxRows = 12 } = args;
+    const {
+        def,
+        resolved,
+        schemaSql,
+        seedSql,
+        solutionCode,
+        checkSql,
+        maxRows = 12,
+    } = args;
 
     if (!shouldShowExpectedExample(def)) return null;
 
@@ -102,12 +123,45 @@ export function buildSqlExpectedExample(args: {
         if (schemaSql.trim()) db.exec(schemaSql);
         if (seedSql.trim()) db.exec(seedSql);
 
+        if (isMutationSql(solutionCode)) {
+            if (!checkSql?.trim()) {
+                return null;
+            }
+
+            db.exec(solutionCode);
+
+            const checkStmt = db.prepare(checkSql);
+
+            if (checkStmt.reader === false) {
+                return null;
+            }
+
+            const columns = checkStmt.columns().map((c) => c.name);
+            const rawRows = checkStmt.all();
+
+            const rows = rawRows.slice(0, maxRows).map((rowObj) =>
+                columns.map((col) => normalizeCell(rowObj[col])),
+            );
+
+            return {
+                kind: "sql_result",
+                ...(meta ? { meta } : {}),
+                columns,
+                rows,
+            };
+        }
+
         const stmt = db.prepare(solutionCode);
+
+        if (stmt.reader === false) {
+            return null;
+        }
+
         const columns = stmt.columns().map((c) => c.name);
         const rawRows = stmt.all();
 
         const rows = rawRows.slice(0, maxRows).map((rowObj) =>
-            columns.map((col) => normalizeCell(rowObj[col]))
+            columns.map((col) => normalizeCell(rowObj[col])),
         );
 
         return {
@@ -116,6 +170,10 @@ export function buildSqlExpectedExample(args: {
             columns,
             rows,
         };
+    } catch {
+        // Expected examples are optional UI previews.
+        // They should never make /api/practice fail.
+        return null;
     } finally {
         db.close();
     }

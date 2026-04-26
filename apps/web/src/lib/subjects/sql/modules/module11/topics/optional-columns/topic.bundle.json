@@ -42,6 +42,46 @@
         "preferKind": null,
         "maxAttempts": 10
       }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.sql.sql_module_11.optional-columns.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "code_insert_omit_optional",
+            "titleKey": "topics.sql.sql_module_11.optional-columns.projectSteps.code_insert_omit_optional.title",
+            "exerciseKey": "code-insert-omit-optional",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "code_insert_null_notes",
+            "titleKey": "topics.sql.sql_module_11.optional-columns.projectSteps.code_insert_null_notes.title",
+            "exerciseKey": "code-insert-null-notes",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "code_insert_override_default",
+            "titleKey": "topics.sql.sql_module_11.optional-columns.projectSteps.code_insert_override_default.title",
+            "exerciseKey": "code-insert-override-default",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
     }
   ],
   "sketches": [
@@ -68,7 +108,7 @@
     {
       "id": "code-insert-omit-optional",
       "kind": "code_input",
-      "purpose": "quiz",
+      "purpose": "project",
       "weight": 1,
       "messageBase": "topics.sql.sql_module_11.optional-columns.quiz.code-insert-omit-optional",
       "language": "sql",
@@ -83,7 +123,7 @@
     {
       "id": "code-insert-null-notes",
       "kind": "code_input",
-      "purpose": "quiz",
+      "purpose": "project",
       "weight": 1,
       "messageBase": "topics.sql.sql_module_11.optional-columns.quiz.code-insert-null-notes",
       "language": "sql",
@@ -98,7 +138,7 @@
     {
       "id": "code-insert-override-default",
       "kind": "code_input",
-      "purpose": "quiz",
+      "purpose": "project",
       "weight": 1,
       "messageBase": "topics.sql.sql_module_11.optional-columns.quiz.code-insert-override-default",
       "language": "sql",
