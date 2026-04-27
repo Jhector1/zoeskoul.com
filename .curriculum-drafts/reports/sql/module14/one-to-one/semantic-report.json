@@ -1,0 +1,13 @@
+{
+  "topicId": "one-to-one",
+  "ok": true,
+  "issues": [
+    {
+      "code": "SQL_RUNNER_NOT_CONFIGURED",
+      "category": "execution",
+      "severity": "warn",
+      "exerciseId": "code-input-1",
+      "message": "No shared SQL runner is configured for compiler-side semantic validation."
+    }
+  ]
+}

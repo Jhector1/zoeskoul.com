@@ -1,8 +1,7 @@
 import type {
-    Prisma,
-    PrismaClient,
     XpSourceType,
-} from "@prisma/client";
+} from "@zoeskoul/db";
+import type { Prisma, PrismaClient } from "@/lib/prisma";
 
 import type { Actor } from "@/lib/practice/actor";
 import { actorKeyOf } from "@/lib/practice/actor";

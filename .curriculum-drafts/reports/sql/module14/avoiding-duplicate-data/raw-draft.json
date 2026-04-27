@@ -1,0 +1,124 @@
+{
+  "title": "Avoiding duplicate data",
+  "summary": "Learn why duplicate data is risky in relational databases and how to design tables to avoid it using proper keys and relationships.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sk1",
+      "title": "What is duplicate data?",
+      "bodyMarkdown": "Duplicate data occurs when the same piece of information is stored in multiple places within a database. For example, if the `products` table in the `products_catalog` dataset had two rows with the same `name`, `category`, and `price`, this would be duplicate data. This can lead to inconsistencies and makes updates more difficult."
+    },
+    {
+      "id": "sk2",
+      "title": "Why is duplicate data a problem?",
+      "bodyMarkdown": "Having duplicate data can cause several issues:\n\n- **Inconsistency:** If you update one row but not its duplicate, your data becomes unreliable.\n- **Wasted storage:** Storing the same information multiple times uses up unnecessary space.\n- **Harder maintenance:** More places to update means more chances for mistakes.\n\nFor example, if the price of 'Sketchbook' changes but only one row is updated, queries on the `products` table may return conflicting prices."
+    },
+    {
+      "id": "sk3",
+      "title": "How to avoid duplicate data",
+      "bodyMarkdown": "To avoid duplicate data, design tables with a clear primary key (like `id` in the `products` table) and keep each table focused on one subject. If you find yourself repeating information, consider splitting the data into related tables. For example, if you had a table that stored both product and supplier info, you could separate them into `products` and `suppliers` tables, linking them with a key."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "q1",
+      "kind": "fill_blank_choice",
+      "title": "Definition of duplicate data",
+      "prompt": "Fill in the blank: Duplicate data happens when the same piece of information is stored in ______ places in a database.",
+      "template": "Duplicate data happens when the same piece of information is stored in ______ places in a database.",
+      "choices": [
+        "multiple",
+        "single",
+        "temporary",
+        "hidden"
+      ],
+      "correctValue": "multiple",
+      "hint": "Think about how many places the same data appears.",
+      "help": {
+        "concept": "Duplicate data means the same information is repeated in more than one location.",
+        "hint_1": "It's not just in one place, but in several.",
+        "hint_2": "If you see the same value in more than one row or table, that's duplicate data."
+      }
+    },
+    {
+      "id": "q2",
+      "kind": "fill_blank_choice",
+      "title": "Primary key's role",
+      "prompt": "Fill in the blank: A ______ key helps prevent duplicate rows in a table.",
+      "template": "A ______ key helps prevent duplicate rows in a table.",
+      "choices": [
+        "primary",
+        "foreign",
+        "secondary",
+        "composite"
+      ],
+      "correctValue": "primary",
+      "hint": "It's the main unique identifier for each row.",
+      "help": {
+        "concept": "A primary key ensures each row in a table is unique, helping to avoid duplicates.",
+        "hint_1": "This key is required to be unique for every row.",
+        "hint_2": "It's the main key defined when you create a table."
+      }
+    },
+    {
+      "id": "q3",
+      "kind": "single_choice",
+      "title": "Why is duplicate data dangerous?",
+      "prompt": "Which of the following is a main risk of having duplicate data in a database?",
+      "options": [
+        "It can cause inconsistent information.",
+        "It makes queries run faster.",
+        "It increases data security.",
+        "It always improves reporting."
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Think about what happens if you update only one copy of the data.",
+      "help": {
+        "concept": "Duplicate data can lead to problems when not all copies are updated, causing inconsistencies.",
+        "hint_1": "If two rows disagree about the same fact, which is correct?",
+        "hint_2": "Inconsistent data makes your database unreliable."
+      }
+    },
+    {
+      "id": "q4",
+      "kind": "multi_choice",
+      "title": "Ways to avoid duplicate data",
+      "prompt": "Which of the following are good ways to avoid duplicate data? Select all that apply.",
+      "options": [
+        "a. Use a primary key for each table.",
+        "b. Split repeated information into separate tables.",
+        "c. Store the same data in multiple columns for safety.",
+        "d. Keep each table focused on one subject."
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ],
+      "hint": "Think about table design and keys.",
+      "help": {
+        "concept": "Good design uses keys and separates repeated info into related tables.",
+        "hint_1": "Primary keys and focused tables help prevent duplicates.",
+        "hint_2": "Storing the same data in multiple places is not a good practice."
+      }
+    },
+    {
+      "id": "q5",
+      "kind": "code_input",
+      "title": "Find duplicate product names",
+      "prompt": "Write a SQL query to find all product names in the `products` table that appear more than once (i.e., duplicate names). Show only the name and the count.",
+      "starterCode": "-- Write your SQL query below\n",
+      "solutionCode": "SELECT name, COUNT(*) as count\nFROM products\nGROUP BY name\nHAVING COUNT(*) > 1;",
+      "datasetId": "products_catalog",
+      "recipeType": "sql_query",
+      "hint": "Group by the product name and count how many times each appears.",
+      "help": {
+        "concept": "To find duplicates, group by the column and use HAVING to filter for counts greater than one.",
+        "hint_1": "Use GROUP BY with the name column and COUNT(*).",
+        "hint_2": "HAVING COUNT(*) > 1 will show only names that appear more than once."
+      }
+    }
+  ]
+}

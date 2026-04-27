@@ -1,7 +1,7 @@
 import "server-only";
 
 import { prisma } from "@/lib/prisma";
-import type { PracticeDifficulty } from "@prisma/client";
+import type { PracticeDifficulty } from "@zoeskoul/db";
 
 export function difficultyFromLevel(
     level: string | null | undefined,

@@ -1,0 +1,124 @@
+{
+  "title": "Foreign key review",
+  "summary": "Review the concept of foreign keys, their purpose, and how they help relate tables in a relational database. Practice identifying, describing, and using foreign keys in beginner-friendly scenarios.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sk1",
+      "title": "What is a Foreign Key?",
+      "bodyMarkdown": "A **foreign key** is a column (or set of columns) in one table that refers to the primary key of another table. Foreign keys create relationships between tables, allowing you to connect related data. For example, if you had a `products` table and an `orders` table, the `orders` table might have a `product_id` column that is a foreign key referencing `products.id`.\n\nForeign keys help maintain data integrity by ensuring that values in the referencing column must exist in the referenced table."
+    },
+    {
+      "id": "sk2",
+      "title": "Why Use Foreign Keys?",
+      "bodyMarkdown": "Foreign keys are essential for:\n\n- **Connecting related data**: They let you link rows in different tables, such as linking an order to a product.\n- **Enforcing referential integrity**: The database prevents you from entering a value in the foreign key column that doesn't exist in the referenced table.\n- **Reducing duplication**: Instead of repeating product details in every order, you store the product info once and use a foreign key to reference it."
+    },
+    {
+      "id": "sk3",
+      "title": "Foreign Key Example",
+      "bodyMarkdown": "Suppose you want to track which products are featured in a store's weekly promotion. You might create a new table:\n\n```sql\nCREATE TABLE featured_products (\n  id INTEGER PRIMARY KEY,\n  product_id INTEGER NOT NULL,\n  week_start TEXT NOT NULL,\n  FOREIGN KEY (product_id) REFERENCES products(id)\n);\n```\n\nHere, `product_id` in `featured_products` is a foreign key referencing the `id` column in the `products` table. This ensures every featured product actually exists in the main products list."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "fb1",
+      "kind": "fill_blank_choice",
+      "title": "Purpose of a Foreign Key",
+      "prompt": "Choose the best value for the first missing blank in the statement.",
+      "template": "The first missing value is [blank1].",
+      "choices": [
+        "connect",
+        "duplicate",
+        "delete",
+        "sort"
+      ],
+      "correctValue": "connect",
+      "hint": "Focus on the missing SQL concept rather than the exact missing word.",
+      "help": {
+        "concept": "The blank should be filled with the SQL term that matches the job the statement is trying to perform.",
+        "hint_1": "Think about what the missing part is supposed to do in the statement.",
+        "hint_2": "Choose the SQL term that best completes the meaning of the statement."
+      }
+    },
+    {
+      "id": "fb2",
+      "kind": "fill_blank_choice",
+      "title": "Referential Integrity",
+      "prompt": "Choose the best value for the first missing blank in the statement.",
+      "template": "The first missing value is [blank1].",
+      "choices": [
+        "referential",
+        "visual",
+        "temporal",
+        "numerical"
+      ],
+      "correctValue": "referential",
+      "hint": "It's about making sure references are valid.",
+      "help": {
+        "concept": "the missing term integrity ensures that foreign key values always refer to existing rows in the referenced table.",
+        "hint_1": "The word starts with 'r' and is about references.",
+        "hint_2": "It's the rule that keeps relationships between tables consistent."
+      }
+    },
+    {
+      "id": "sc1",
+      "kind": "single_choice",
+      "title": "Identifying a Foreign Key",
+      "prompt": "Which of the following best describes a foreign key?",
+      "options": [
+        "a. A column that uniquely identifies each row in its own table",
+        "b. A column that refers to the primary key in another table",
+        "c. A column that stores only numeric values",
+        "d. A column that is always auto-incremented"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Foreign keys point to another table.",
+      "help": {
+        "concept": "A foreign key is a column in one table that references the primary key of another table.",
+        "hint_1": "It's not about uniqueness in its own table, but about referencing another table.",
+        "hint_2": "Look for the option that mentions connecting to a primary key in a different table."
+      }
+    },
+    {
+      "id": "mc1",
+      "kind": "multi_choice",
+      "title": "Benefits of Foreign Keys",
+      "prompt": "Which of the following are benefits of using foreign keys? (Choose all that apply)",
+      "options": [
+        "a. They help connect related data across tables.",
+        "b. They enforce data consistency between tables.",
+        "c. They automatically sort data alphabetically.",
+        "d. They reduce data duplication."
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ],
+      "hint": "Think about relationships, consistency, and duplication.",
+      "help": {
+        "concept": "Foreign keys help link tables, enforce referential integrity, and reduce repeated data.",
+        "hint_1": "Not all options are about relationships or integrity.",
+        "hint_2": "Focus on the options that mention connecting data, enforcing rules, or avoiding repetition."
+      }
+    },
+    {
+      "id": "ci1",
+      "kind": "code_input",
+      "title": "Creating a Table with a Foreign Key",
+      "prompt": "Write a SQL statement to create a table called `featured_products` with columns: `id` (primary key), `product_id` (foreign key referencing `products.id`), and `week_start` (text, not null).",
+      "starterCode": "-- Write your CREATE TABLE statement below",
+      "solutionCode": "CREATE TABLE featured_products (\n  id INTEGER PRIMARY KEY,\n  product_id INTEGER NOT NULL,\n  week_start TEXT NOT NULL,\n  FOREIGN KEY (product_id) REFERENCES products(id)\n);",
+      "datasetId": "products_catalog",
+      "recipeType": "sql_query",
+      "hint": "Focus on the concept being tested.",
+      "help": {
+        "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+        "hint_1": "Eliminate choices or interpretations that do not match the task.",
+        "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+      }
+    }
+  ]
+}

@@ -1,0 +1,119 @@
+{
+  "title": "Turn design into SQL tables",
+  "summary": "Learn how to turn a real-world scenario into SQL tables by identifying entities, separating repeated information, and writing CREATE TABLE statements using the products_catalog dataset.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch-1",
+      "title": "From Scenario to Table Design",
+      "bodyMarkdown": "When designing a database, start by identifying the main entities (things or concepts) you want to store. For example, in a store, 'products' is a key entity. Each product has attributes like name, category, price, and stock. In the `products_catalog` dataset, these are represented as columns in the `products` table:\n\n```sql\nCREATE TABLE products (\n  id INTEGER PRIMARY KEY,\n  name TEXT NOT NULL,\n  category TEXT NOT NULL,\n  price REAL NOT NULL,\n  stock INTEGER NOT NULL,\n  created_at TEXT NOT NULL\n);\n```\n\nEach row in the table represents a single product."
+    },
+    {
+      "id": "sketch-2",
+      "title": "Why Separate Repeated Information?",
+      "bodyMarkdown": "If you notice repeated information (like the same category name for many products), it's a sign you might want to separate that data into its own table. This reduces duplication and makes updates easier. For example, you could have a `categories` table and link products to categories using a foreign key."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "fill-blank-1",
+      "kind": "fill_blank_choice",
+      "title": "Identify the main entity",
+      "prompt": "In the `products_catalog` dataset, which word best describes the main entity represented by the table?",
+      "template": "The main entity in the table is: _____.",
+      "choices": [
+        "product",
+        "category",
+        "price",
+        "stock"
+      ],
+      "correctValue": "product",
+      "hint": "Think about what each row in the table represents.",
+      "help": {
+        "concept": "An entity is a thing or concept you want to store information about. In this dataset, each row is about a single item for sale.",
+        "hint_1": "Look at the table name and the columns. What is the subject of each row?",
+        "hint_2": "Each row describes a single item such as a sketchbook or pen. What are these called?"
+      }
+    },
+    {
+      "id": "fill-blank-2",
+      "kind": "fill_blank_choice",
+      "title": "Spot repeated information",
+      "prompt": "Which column in the `products` table is most likely to have repeated values across many rows?",
+      "template": "The column with the most repeated values is: _____.",
+      "choices": [
+        "id",
+        "name",
+        "category",
+        "price"
+      ],
+      "correctValue": "category",
+      "hint": "Which attribute is shared by multiple products?",
+      "help": {
+        "concept": "Columns that describe types or groups (like the missing term) often repeat, since many products can belong to the same group.",
+        "hint_1": "Think about which products might share the same value in a column.",
+        "hint_2": "For example, both 'Sketchbook' and 'Acrylic Paint Set' are 'Art'. Which column is that?"
+      }
+    },
+    {
+      "id": "single-choice-1",
+      "kind": "single_choice",
+      "title": "Purpose of separating categories",
+      "prompt": "Why might you create a separate `categories` table instead of storing the category name in every product row?",
+      "options": [
+        "To reduce repeated data and make updates easier",
+        "To make the table longer",
+        "To increase the number of columns",
+        "To store prices in a different table"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Think about what happens if you need to rename a category.",
+      "help": {
+        "concept": "Separating repeated information into its own table is called normalization. It helps avoid inconsistencies and makes updates easier.",
+        "hint_1": "If you have to change a category name, would you rather update it in one place or many?",
+        "hint_2": "A separate table for categories means less duplication and easier maintenance."
+      }
+    },
+    {
+      "id": "multi-choice-1",
+      "kind": "multi_choice",
+      "title": "Choose all that apply: Good reasons to split information into separate tables",
+      "prompt": "Which of the following are good reasons to split information into separate tables? (Choose all that apply.)",
+      "options": [
+        "To avoid duplicate data",
+        "To make updates easier",
+        "To store unrelated information together",
+        "To improve data consistency"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ],
+      "hint": "Think about the benefits of having less repeated information.",
+      "help": {
+        "concept": "Splitting information into separate tables (normalization) reduces duplication, makes updates easier, and improves consistency.",
+        "hint_1": "Which options mention reducing repetition or making changes simpler?",
+        "hint_2": "Unrelated information should not be stored together; focus on avoiding duplicates and keeping data consistent."
+      }
+    },
+    {
+      "id": "code-input-1",
+      "kind": "code_input",
+      "title": "Write a CREATE TABLE statement",
+      "prompt": "Write a SQL statement to create a simple `categories` table with an integer primary key column called `id` and a text column called `name` that cannot be null.",
+      "starterCode": "-- Write your CREATE TABLE statement below",
+      "solutionCode": "CREATE TABLE categories (\n  id INTEGER PRIMARY KEY,\n  name TEXT NOT NULL\n);",
+      "datasetId": "products_catalog",
+      "recipeType": "sql_query",
+      "hint": "Focus on the concept being tested.",
+      "help": {
+        "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+        "hint_1": "Eliminate choices or interpretations that do not match the task.",
+        "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+      }
+    }
+  ]
+}

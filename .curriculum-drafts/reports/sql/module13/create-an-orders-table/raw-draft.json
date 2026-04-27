@@ -1,0 +1,133 @@
+{
+  "title": "Create an orders table",
+  "summary": "Practice designing and creating an 'orders' table for a product catalog database. Learn to choose appropriate columns, data types, and constraints to support order tracking and relational integrity.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch-1",
+      "title": "Why Create an Orders Table?",
+      "bodyMarkdown": "In a product catalog database, an **orders** table tracks purchases made by customers. This table typically includes information such as the order ID, the product ordered, the quantity, the order date, and possibly the customer who placed the order. Designing this table carefully ensures that you can record each transaction, link it to products, and maintain data integrity."
+    },
+    {
+      "id": "sketch-2",
+      "title": "Choosing Columns and Data Types",
+      "bodyMarkdown": "When creating an **orders** table, consider which columns are essential:\n\n- `id`: A unique identifier for each order (INTEGER PRIMARY KEY).\n- `product_id`: References the product being ordered (INTEGER, should match a product's `id`).\n- `quantity`: How many units were ordered (INTEGER, NOT NULL).\n- `order_date`: When the order was placed (TEXT, NOT NULL).\n\nYou may also want to add constraints like `NOT NULL` to ensure important fields are always filled."
+    },
+    {
+      "id": "sketch-3",
+      "title": "Example: Creating an Orders Table",
+      "bodyMarkdown": "Here's an example SQL statement to create a simple `orders` table related to the existing `products` table:\n\n```sql\nCREATE TABLE orders (\n  id INTEGER PRIMARY KEY,\n  product_id INTEGER NOT NULL,\n  quantity INTEGER NOT NULL,\n  order_date TEXT NOT NULL,\n  FOREIGN KEY (product_id) REFERENCES products(id)\n);\n```\n\nThis table uses a foreign key to ensure that every `product_id` in `orders` matches a valid product."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "code-1",
+      "kind": "code_input",
+      "title": "Create a basic orders table",
+      "prompt": "Write a SQL statement to create an `orders` table with the following columns:\n- `id` as INTEGER PRIMARY KEY\n- `product_id` as INTEGER and NOT NULL\n- `quantity` as INTEGER and NOT NULL\n- `order_date` as TEXT and NOT NULL\nDo not add any foreign keys yet.",
+      "hint": "List each column with its data type and constraints. Start with the primary key.",
+      "help": {
+        "concept": "A table is created using CREATE TABLE, and columns are defined with their data types and constraints.",
+        "hint_1": "Remember to use PRIMARY KEY for the id column and NOT NULL for required fields.",
+        "hint_2": "Each column should be on its own line, and the statement should end with a closing parenthesis and semicolon."
+      },
+      "starterCode": "-- Write your CREATE TABLE statement here",
+      "solutionCode": "CREATE TABLE orders (\n  id INTEGER PRIMARY KEY,\n  product_id INTEGER NOT NULL,\n  quantity INTEGER NOT NULL,\n  order_date TEXT NOT NULL\n);",
+      "datasetId": "products_catalog",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "code-2",
+      "kind": "code_input",
+      "title": "Add a foreign key to the orders table",
+      "prompt": "Modify your `orders` table creation statement to add a foreign key constraint on `product_id` referencing the `id` column in the `products` table.",
+      "hint": "Use the FOREIGN KEY syntax after listing all columns.",
+      "help": {
+        "concept": "A foreign key links a column in one table to a primary key in another, enforcing referential integrity.",
+        "hint_1": "Add FOREIGN KEY (product_id) REFERENCES products(id) at the end of your column list.",
+        "hint_2": "The foreign key constraint should be inside the CREATE TABLE statement, after all column definitions."
+      },
+      "starterCode": "-- Add a foreign key to your CREATE TABLE statement",
+      "solutionCode": "CREATE TABLE orders (\n  id INTEGER PRIMARY KEY,\n  product_id INTEGER NOT NULL,\n  quantity INTEGER NOT NULL,\n  order_date TEXT NOT NULL,\n  FOREIGN KEY (product_id) REFERENCES products(id)\n);",
+      "datasetId": "products_catalog",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "code-3",
+      "kind": "code_input",
+      "title": "Insert a sample order",
+      "prompt": "Insert a new row into the `orders` table for a purchase of 2 units of the product with `id` 1 on '2026-03-01'. Assume the table already exists.",
+      "hint": "Use the INSERT INTO statement and specify values for all columns except the primary key if it auto-increments.",
+      "help": {
+        "concept": "INSERT INTO adds a new row to a table. You must provide values for all NOT NULL columns.",
+        "hint_1": "List the columns you are inserting into, and provide the values in the correct order.",
+        "hint_2": "Remember to match the product_id to an existing product and use the correct date format."
+      },
+      "starterCode": "-- Insert a new order for product_id 1",
+      "solutionCode": "INSERT INTO orders (product_id, quantity, order_date) VALUES (1, 2, '2026-03-01');",
+      "datasetId": "products_catalog",
+      "recipeType": "sql_query",
+      "checkSql": "SELECT product_id, quantity, order_date FROM orders WHERE product_id = 1 AND quantity = 2 AND order_date = '2026-03-01';"
+    },
+    {
+      "id": "multi-1",
+      "kind": "multi_choice",
+      "title": "Which columns are essential for an orders table?",
+      "prompt": "Select all columns that are essential for tracking orders in a product catalog database.",
+      "hint": "Think about what information you must record for every order.",
+      "help": {
+        "concept": "An orders table should uniquely identify each order, link to the product, record the quantity, and note when the order was placed.",
+        "hint_1": "You need to know which product was ordered, how many, and when.",
+        "hint_2": "Columns like id, product_id, quantity, and order_date are all important for order tracking."
+      },
+      "options": [
+        {
+          "id": "a",
+          "content": "id"
+        },
+        {
+          "id": "b",
+          "content": "product_id"
+        },
+        {
+          "id": "c",
+          "content": "category"
+        },
+        {
+          "id": "d",
+          "content": "quantity"
+        },
+        {
+          "id": "e",
+          "content": "order_date"
+        }
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d",
+        "e"
+      ]
+    },
+    {
+      "id": "fill-1",
+      "kind": "fill_blank_choice",
+      "title": "Choosing a primary key",
+      "prompt": "Which column should be set as the PRIMARY KEY in the orders table?",
+      "hint": "The primary key uniquely identifies each row.",
+      "help": {
+        "concept": "A primary key is a unique identifier for each record in a table.",
+        "hint_1": "It's usually an id column with a unique value for every order.",
+        "hint_2": "Look for the column that is meant to be unique for each order."
+      },
+      "template": "The PRIMARY KEY column for the orders table should be: ____",
+      "choices": [
+        "id",
+        "product_id",
+        "quantity",
+        "order_date"
+      ],
+      "correctValue": "id"
+    }
+  ]
+}

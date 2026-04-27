@@ -224,9 +224,10 @@ export function assertTopicAuthoringDraft(
 
             if (
                 exercise.recipeType === "sql_query" &&
+                typeof exercise.datasetId !== "undefined" &&
                 !isNonEmptyString(exercise.datasetId)
             ) {
-                fail(`${label} code_input with recipeType=sql_query needs datasetId`);
+                fail(`${label} code_input datasetId must be non-empty when provided`);
             }
 
             return;

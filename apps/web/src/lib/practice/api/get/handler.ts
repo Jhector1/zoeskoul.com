@@ -1,4 +1,4 @@
-import { PracticePurpose } from "@prisma/client";
+import { PracticePurpose } from "@zoeskoul/db";
 
 import type { PracticeGetContext, PracticeGetResult } from "./types";
 import { isOnboardingTrialSession } from "@/lib/onboarding/trialPolicy";

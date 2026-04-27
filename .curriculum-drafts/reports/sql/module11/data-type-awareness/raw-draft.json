@@ -1,17 +1,22 @@
 {
   "title": "Data type awareness",
-  "summary": "Understand how data types affect inserting data in SQL. Learn to match values to column types, avoid common mistakes, and use explicit column lists for safer inserts.",
+  "summary": "Understand how SQL data types affect inserting data, why explicit column lists matter, and how to avoid common mistakes with types in the inventory_items table.",
   "minutes": 15,
   "sketchBlocks": [
     {
       "id": "sketch-1",
-      "title": "Why Data Types Matter in INSERT",
-      "bodyMarkdown": "When you insert data into a table, each column expects a value of a certain type. For example, in the `inventory_items` table, `price` is a REAL (number), `name` is TEXT, and `is_test` is an INTEGER (0 or 1). If you try to insert a string into a numeric column, or vice versa, you may get an error or unexpected results.\n\nExample:\n```sql\nINSERT INTO inventory_items (name, category, price, status, is_test, last_updated)\nVALUES ('New Keychain', 'Accessories', 3.50, 'active', 0, '2026-02-10');\n```\nHere, each value matches the expected data type for its column."
+      "title": "Why data types matter in INSERT",
+      "bodyMarkdown": "When inserting data into a table like `inventory_items`, each column expects a specific data type. For example, `price` expects a REAL (number), `name` expects TEXT, and `is_test` expects an INTEGER (usually 0 or 1). If you try to insert a string into `price`, or leave out a NOT NULL column, the database will raise an error or insert incorrect data. Always check the table schema before inserting."
     },
     {
       "id": "sketch-2",
-      "title": "Explicit Column Lists for Safer Inserts",
-      "bodyMarkdown": "It's safer to specify the columns you're inserting into, rather than relying on the table's column order. This helps avoid mistakes if the table structure changes or if you forget a required column.\n\nExample:\n```sql\n-- Safer:\nINSERT INTO inventory_items (name, category, price, status, is_test, last_updated)\nVALUES ('Sample Bag', 'Accessories', 8.00, 'draft', 1, '2026-02-11');\n\n-- Riskier (no column list):\nINSERT INTO inventory_items VALUES (7, 'Sample Bag', 'Accessories', 8.00, 'draft', 1, NULL, '2026-02-11');\n```\nThe first example is clearer and less error-prone."
+      "title": "Safer INSERT with explicit columns",
+      "bodyMarkdown": "It's best practice to specify column names in your INSERT statement. For example:\n\n```sql\nINSERT INTO inventory_items (name, category, price, status, is_test, last_updated)\nVALUES ('New Magnet', 'Accessories', 3.50, 'active', 0, '2026-02-10');\n```\n\nThis ensures the values match the correct columns and data types, even if the table structure changes later."
+    },
+    {
+      "id": "sketch-3",
+      "title": "NULLs and defaults in INSERT",
+      "bodyMarkdown": "Some columns allow NULL values or have default values. For example, `notes` can be NULL, and `status` defaults to 'draft' if not provided. If you omit a column with a default, the default is used. If you omit a NOT NULL column without a default, the INSERT will fail."
     }
   ],
   "quizDraft": [
@@ -19,81 +24,81 @@
       "id": "q1-code-input",
       "kind": "code_input",
       "title": "Insert a new inventory item with correct data types",
-      "prompt": "Write an INSERT statement to add a new row to the `inventory_items` table with these values:\n- name: 'Desk Organizer'\n- category: 'Accessories'\n- price: 13.25\n- status: 'active'\n- is_test: 0\n- notes: NULL\n- last_updated: '2026-02-12'\n\nUse an explicit column list and match each value to its correct data type.",
-      "hint": "List the columns in your INSERT statement and match each value to its type.",
+      "prompt": "Write an INSERT statement to add a new item to the `inventory_items` table with the following values:\n- name: 'Desk Organizer'\n- category: 'Accessories'\n- price: 8.75\n- status: 'active'\n- is_test: 0\n- notes: NULL\n- last_updated: '2026-02-10'\n\nUse an explicit column list and do not provide a value for `id` (let it auto-increment).",
+      "hint": "List all columns except id in the INSERT statement. Use NULL for notes.",
       "help": {
-        "concept": "Each column in a table has a specific data type. When inserting, use values that match these types (e.g., numbers for REAL/INTEGER, text in quotes for TEXT).",
-        "hint_1": "Start with `INSERT INTO inventory_items (column1, column2, ...) VALUES (...);` and match the value types.",
-        "hint_2": "Remember to use quotes for text values and NULL for missing notes."
+        "concept": "When inserting data, match each value to its column and data type. Use explicit columns to avoid mistakes.",
+        "hint_1": "Write INSERT INTO inventory_items (columns...) VALUES (...).",
+        "hint_2": "Remember to use NULL for the notes column and provide all other required values."
       },
-      "starterCode": "-- Write your INSERT statement here",
-      "solutionCode": "INSERT INTO inventory_items (name, category, price, status, is_test, notes, last_updated)\nVALUES ('Desk Organizer', 'Accessories', 13.25, 'active', 0, NULL, '2026-02-12');",
+      "starterCode": "-- Write your INSERT statement below",
+      "solutionCode": "INSERT INTO inventory_items (name, category, price, status, is_test, notes, last_updated)\nVALUES ('Desk Organizer', 'Accessories', 8.75, 'active', 0, NULL, '2026-02-10');",
       "datasetId": "inventory_ops",
       "recipeType": "sql_query"
     },
     {
       "id": "q2-code-input",
       "kind": "code_input",
-      "title": "Insert with missing optional column",
-      "prompt": "Insert a new item into `inventory_items` with the following values:\n- name: 'Travel Mug'\n- category: 'Kitchen'\n- price: 11.00\n- status: 'draft'\n- is_test: 1\n- last_updated: '2026-02-13'\n\nDo not provide a value for the `notes` column. Use an explicit column list.",
-      "hint": "Omit the `notes` column from your column list if you don't want to set it.",
+      "title": "Insert with missing NOT NULL column",
+      "prompt": "Try to insert a new row into `inventory_items` with only the columns: name, category, and price. What happens and why?",
+      "hint": "Some columns are NOT NULL and have no default.",
       "help": {
-        "concept": "If a column is optional (nullable), you can leave it out of the column list in your INSERT statement. The database will use NULL or the default value.",
-        "hint_1": "List only the columns you want to set. The database will handle missing optional columns.",
-        "hint_2": "Your column list should not include `notes`, and your VALUES list should match the columns you specify."
+        "concept": "NOT NULL columns require a value unless a default is provided. Omitting them causes an error.",
+        "hint_1": "Check which columns in inventory_items are NOT NULL and have no default.",
+        "hint_2": "If you omit such a column, the database will reject the insert."
       },
-      "starterCode": "-- Insert a row without the notes column",
-      "solutionCode": "INSERT INTO inventory_items (name, category, price, status, is_test, last_updated)\nVALUES ('Travel Mug', 'Kitchen', 11.00, 'draft', 1, '2026-02-13');",
+      "starterCode": "-- Try this INSERT and see what happens\nINSERT INTO inventory_items (name, category, price)\nVALUES ('Mini Lamp', 'Decor', 14.99);",
+      "solutionCode": "-- This will fail because status, is_test, and last_updated are NOT NULL and not provided.\n-- Example of a correct insert (for learning):\n-- INSERT INTO inventory_items (name, category, price, status, is_test, last_updated)\n-- VALUES ('Mini Lamp', 'Decor', 14.99, 'active', 0, '2026-02-11');",
       "datasetId": "inventory_ops",
       "recipeType": "sql_query"
     },
     {
       "id": "q3-code-input",
       "kind": "code_input",
-      "title": "Insert with integer and text types",
-      "prompt": "Write an INSERT statement for `inventory_items` to add a row with:\n- name: 'Sample Notebook'\n- category: 'Accessories'\n- price: 6.75\n- status: 'active'\n- is_test: 1\n- notes: 'Limited edition'\n- last_updated: '2026-02-14'\n\nBe sure to use the correct data types for each value.",
-      "hint": "Check which columns expect numbers and which expect text.",
+      "title": "Insert using default values",
+      "prompt": "Insert a new item into `inventory_items` with the following values:\n- name: 'Sample Keychain'\n- category: 'Accessories'\n- price: 2.50\n- is_test: 1\n- last_updated: '2026-02-12'\n\nOmit the `status` and `notes` columns so that defaults and NULLs are used where appropriate.",
+      "hint": "Omit status and notes from the column list. The table will use the default for status and NULL for notes.",
       "help": {
-        "concept": "INTEGER columns expect whole numbers, TEXT columns expect quoted strings, and REAL columns expect numbers (possibly with decimals).",
-        "hint_1": "Use 1 (not '1') for INTEGER columns and put text values in single quotes.",
-        "hint_2": "Make sure your column list and values match in order and type."
+        "concept": "If a column has a default value or allows NULL, you can omit it in the INSERT statement.",
+        "hint_1": "Write only the columns you want to provide. The rest will use defaults or NULL.",
+        "hint_2": "status will default to 'draft', notes will be NULL."
       },
-      "starterCode": "-- Insert a row with correct types for each column",
-      "solutionCode": "INSERT INTO inventory_items (name, category, price, status, is_test, notes, last_updated)\nVALUES ('Sample Notebook', 'Accessories', 6.75, 'active', 1, 'Limited edition', '2026-02-14');",
+      "starterCode": "-- Write your INSERT statement below",
+      "solutionCode": "INSERT INTO inventory_items (name, category, price, is_test, last_updated)\nVALUES ('Sample Keychain', 'Accessories', 2.50, 1, '2026-02-12');",
       "datasetId": "inventory_ops",
       "recipeType": "sql_query"
     },
     {
       "id": "q4-multi-choice",
       "kind": "multi_choice",
-      "title": "Which values match the expected data types?",
-      "prompt": "Select ALL options that correctly match the expected data types for the `inventory_items` table.",
-      "hint": "Check if each value fits the column's type (e.g., text, number, integer, or NULL).",
+      "title": "Which columns can be omitted in an INSERT?",
+      "prompt": "Which of the following columns in `inventory_items` can you safely omit from an INSERT statement (and still have the row inserted successfully)? Select all that apply.",
+      "hint": "Look for columns that have a default value or allow NULL.",
       "help": {
-        "concept": "Each column in a SQL table has a defined data type. Values must match these types when inserting data.",
-        "hint_1": "Look for text in quotes for TEXT columns, numbers for REAL/INTEGER, and NULL where allowed.",
-        "hint_2": "If a value's type doesn't match the column, it's not a correct match."
+        "concept": "Columns with a default value or that allow NULL can be omitted in an INSERT. NOT NULL columns without a default must be included.",
+        "hint_1": "Check the schema for columns with DEFAULT or NULL allowed.",
+        "hint_2": "status, notes, and id can be omitted; others usually require a value."
       },
       "options": [
         {
           "id": "a",
-          "content": "price: 9.99"
+          "content": "id"
         },
         {
           "id": "b",
-          "content": "is_test: 0"
+          "content": "status"
         },
         {
           "id": "c",
-          "content": "name: 12345"
+          "content": "name"
         },
         {
           "id": "d",
-          "content": "notes: NULL"
+          "content": "notes"
         },
         {
           "id": "e",
-          "content": "status: active"
+          "content": "price"
         }
       ],
       "correctOptionIds": [
@@ -105,22 +110,22 @@
     {
       "id": "q5-fill-blank-choice",
       "kind": "fill_blank_choice",
-      "title": "Identify the correct data type for a column",
-      "prompt": "The `price` column in `inventory_items` expects values of which data type?",
-      "hint": "Is price usually stored as a whole number, text, or a decimal number?",
+      "title": "Default value for status",
+      "prompt": "What is the default value for the `status` column in `inventory_items` if you omit it in an INSERT?",
+      "hint": "Check the schema for the DEFAULT keyword on status.",
       "help": {
-        "concept": "The `price` column is used for monetary values and should allow decimals.",
-        "hint_1": "Check the schema for the data type of `price`.",
-        "hint_2": "It's not TEXT or INTEGER, but a type that supports decimals."
+        "concept": "A column with a DEFAULT value will use that value if not provided in an INSERT.",
+        "hint_1": "Look for the DEFAULT value in the CREATE TABLE statement for status.",
+        "hint_2": "The default is a string value set in the schema."
       },
-      "template": "The `price` column expects values of type: ____",
+      "template": "The default value for status is: ___",
       "choices": [
-        "INTEGER",
-        "REAL",
-        "TEXT",
-        "DATE"
+        "active",
+        "draft",
+        "inactive",
+        "NULL"
       ],
-      "correctValue": "REAL"
+      "correctValue": "draft"
     }
   ]
 }

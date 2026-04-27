@@ -35,6 +35,46 @@
         "preferKind": null,
         "maxAttempts": 10
       }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.sql.sql_module_11.add-multiple-records.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "q1",
+            "titleKey": "topics.sql.sql_module_11.add-multiple-records.projectSteps.q1.title",
+            "exerciseKey": "q1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "q2",
+            "titleKey": "topics.sql.sql_module_11.add-multiple-records.projectSteps.q2.title",
+            "exerciseKey": "q2",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "q3",
+            "titleKey": "topics.sql.sql_module_11.add-multiple-records.projectSteps.q3.title",
+            "exerciseKey": "q3",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
     }
   ],
   "sketches": [
@@ -55,7 +95,7 @@
     {
       "id": "q1",
       "kind": "code_input",
-      "purpose": "quiz",
+      "purpose": "project",
       "weight": 1,
       "messageBase": "topics.sql.sql_module_11.add-multiple-records.quiz.q1",
       "language": "sql",
@@ -64,13 +104,14 @@
         "type": "sql_query",
         "datasetId": "inventory_ops",
         "resultShape": "table",
-        "solutionCode": "INSERT INTO inventory_items (name, category, price, status, is_test, last_updated)\nVALUES\n  ('Notebook', 'Accessories', 5.25, 'active', 0, '2026-02-12'),\n  ('Ceramic Plate', 'Kitchen', 13.00, 'draft', 0, '2026-02-12');"
+        "solutionCode": "INSERT INTO inventory_items (name, category, price, status, is_test, last_updated)\nVALUES\n  ('Mini Notebook', 'Accessories', 5.00, 'active', 0, '2026-02-12'),\n  ('Wall Calendar', 'Decor', 14.00, 'draft', 0, '2026-02-12');",
+        "checkSql": "SELECT * FROM \"inventory_items\" ORDER BY 1;"
       }
     },
     {
       "id": "q2",
       "kind": "code_input",
-      "purpose": "quiz",
+      "purpose": "project",
       "weight": 1,
       "messageBase": "topics.sql.sql_module_11.add-multiple-records.quiz.q2",
       "language": "sql",
@@ -79,13 +120,14 @@
         "type": "sql_query",
         "datasetId": "inventory_ops",
         "resultShape": "table",
-        "solutionCode": "INSERT INTO inventory_items (name, category, price)\nVALUES\n  ('Glass Cup', 'Kitchen', 6.75),\n  ('Poster Tube', 'Accessories', 2.50);"
+        "solutionCode": "INSERT INTO inventory_items (name, category, price, status, is_test, notes, last_updated)\nVALUES\n  ('Travel Mug', 'Kitchen', 12.50, 'active', 0, NULL, '2026-02-13'),\n  ('Art Print', 'Decor', 30.00, 'active', 0, NULL, '2026-02-13');",
+        "checkSql": "SELECT * FROM \"inventory_items\" ORDER BY 1;"
       }
     },
     {
       "id": "q3",
       "kind": "code_input",
-      "purpose": "quiz",
+      "purpose": "project",
       "weight": 1,
       "messageBase": "topics.sql.sql_module_11.add-multiple-records.quiz.q3",
       "language": "sql",
@@ -94,7 +136,8 @@
         "type": "sql_query",
         "datasetId": "inventory_ops",
         "resultShape": "table",
-        "solutionCode": "INSERT INTO inventory_items (name, category, price, status, is_test, notes, last_updated)\nVALUES ('Sample Bag', 'Accessories', 8.00, 'active', 0, NULL, '2026-02-15');"
+        "solutionCode": "INSERT INTO inventory_items (name, category, price, last_updated)\nVALUES\n  ('Sticker Sheet', 'Accessories', 3.00, '2026-02-14'),\n  ('Ceramic Vase', 'Decor', 28.00, '2026-02-14');",
+        "checkSql": "SELECT * FROM \"inventory_items\" ORDER BY 1;"
       }
     },
     {
@@ -105,12 +148,17 @@
       "messageBase": "topics.sql.sql_module_11.add-multiple-records.quiz.q4",
       "optionIds": [
         "a",
-        "b"
+        "b",
+        "c",
+        "d",
+        "e"
       ],
       "expected": {
         "kind": "multi_choice",
         "optionIds": [
-          "a"
+          "a",
+          "b",
+          "e"
         ]
       }
     },
@@ -123,7 +171,7 @@
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "default value"
+        "value": "comma"
       }
     }
   ]

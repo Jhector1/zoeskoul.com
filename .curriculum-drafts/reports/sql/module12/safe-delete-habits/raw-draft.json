@@ -1,0 +1,124 @@
+{
+  "title": "Safe delete habits",
+  "summary": "Learn and practice safe habits for deleting data in SQL, including previewing affected rows and using WHERE clauses to avoid accidental data loss.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch-safe-delete-intro",
+      "title": "Why Safe Delete Habits Matter",
+      "bodyMarkdown": "Deleting rows in SQL is a powerful operation—once data is deleted, it cannot be easily recovered. Accidental deletions can cause major problems, especially if you forget to use a WHERE clause and remove all rows from a table. To avoid mistakes, always preview the rows you plan to delete with a SELECT statement first. For example:\n\n```sql\n-- Preview rows marked as test data\nSELECT * FROM inventory_items WHERE is_test = 1;\n```\n\nAfter confirming the correct rows, you can safely delete them:\n\n```sql\nDELETE FROM inventory_items WHERE is_test = 1;\n```\n\nThis habit helps ensure you only remove the intended data."
+    },
+    {
+      "id": "sketch-preview-before-delete",
+      "title": "Preview Before You Delete",
+      "bodyMarkdown": "A safe workflow for deleting data involves two steps:\n\n1. **Preview**: Use a SELECT statement with the same WHERE condition you plan to use in your DELETE. This lets you see exactly which rows will be affected.\n2. **Delete**: Only after confirming the preview, run the DELETE statement with the same WHERE clause.\n\nExample:\n\n```sql\n-- Step 1: Preview\nSELECT id, name FROM inventory_items WHERE status = 'inactive';\n\n-- Step 2: Delete\nDELETE FROM inventory_items WHERE status = 'inactive';\n```\n\nThis approach reduces the risk of accidental data loss."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "code-preview-delete-test-items",
+      "kind": "code_input",
+      "title": "Preview test items before deleting",
+      "prompt": "Write a SQL SELECT statement to preview all rows in the `inventory_items` table that are marked as test data (where `is_test = 1`).",
+      "hint": "Use SELECT with a WHERE clause to filter for test items.",
+      "help": {
+        "concept": "Before deleting, preview the rows you'll affect by running a SELECT with the same WHERE condition.",
+        "hint_1": "Filter the table for rows where `is_test` equals 1.",
+        "hint_2": "Write a SELECT statement that shows all columns for test items."
+      },
+      "starterCode": "-- Preview test items before deleting\n",
+      "solutionCode": "SELECT * FROM inventory_items WHERE is_test = 1;",
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "code-delete-inactive-items",
+      "kind": "code_input",
+      "title": "Delete inactive inventory items",
+      "prompt": "Write a SQL DELETE statement to remove all rows from `inventory_items` where the `status` is 'inactive'.",
+      "hint": "Use DELETE with a WHERE clause to target only inactive items.",
+      "help": {
+        "concept": "DELETE statements should almost always include a WHERE clause to avoid removing all rows.",
+        "hint_1": "Target rows where the `status` column equals 'inactive'.",
+        "hint_2": "Write a DELETE statement with a WHERE condition for `status = 'inactive'`."
+      },
+      "starterCode": "-- Delete inactive inventory items\n",
+      "solutionCode": "DELETE FROM inventory_items WHERE status = 'inactive';",
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query",
+      "checkSql": "SELECT * FROM inventory_items WHERE status = 'inactive';"
+    },
+    {
+      "id": "code-delete-single-test-item",
+      "kind": "code_input",
+      "title": "Delete a specific test item by id",
+      "prompt": "Write a SQL DELETE statement to remove the test item with `id = 6` from the `inventory_items` table.",
+      "hint": "Use DELETE with a WHERE clause to match the specific id.",
+      "help": {
+        "concept": "To safely delete a single row, use a WHERE clause that matches only that row's unique identifier.",
+        "hint_1": "The id column uniquely identifies each row.",
+        "hint_2": "Write a DELETE statement with WHERE id = 6."
+      },
+      "starterCode": "-- Delete the test item with id 6\n",
+      "solutionCode": "DELETE FROM inventory_items WHERE id = 6;",
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query",
+      "checkSql": "SELECT * FROM inventory_items WHERE id = 6;"
+    },
+    {
+      "id": "multi-choice-safe-delete-habits",
+      "kind": "multi_choice",
+      "title": "Safe habits when deleting data",
+      "prompt": "Which of the following are safe habits when deleting rows in SQL? Select all that apply.",
+      "hint": "Think about steps that help prevent accidental data loss.",
+      "help": {
+        "concept": "Safe delete habits include previewing affected rows, always using WHERE, and double-checking your target set.",
+        "hint_1": "Previewing and filtering are both important.",
+        "hint_2": "Avoid deleting without WHERE and always check which rows will be affected."
+      },
+      "options": [
+        {
+          "id": "a",
+          "content": "Preview rows with SELECT before deleting."
+        },
+        {
+          "id": "b",
+          "content": "Always use a WHERE clause in DELETE statements."
+        },
+        {
+          "id": "c",
+          "content": "Delete all rows first, then check what was removed."
+        },
+        {
+          "id": "d",
+          "content": "Double-check the WHERE condition before running DELETE."
+        }
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ]
+    },
+    {
+      "id": "fill-blank-why-preview-delete",
+      "kind": "fill_blank_choice",
+      "title": "Why preview before deleting?",
+      "prompt": "Fill in the blank: Previewing rows with a SELECT statement before running a DELETE helps you ______ accidental data loss.",
+      "hint": "Think about what previewing helps you avoid.",
+      "help": {
+        "concept": "Previewing lets you see which rows will be deleted, reducing the risk of mistakes.",
+        "hint_1": "Previewing helps you avoid unwanted deletions.",
+        "hint_2": "It helps you prevent accidental removal of important data."
+      },
+      "template": "Previewing rows with a SELECT statement before running a DELETE helps you ______ accidental data loss.",
+      "choices": [
+        "cause",
+        "ignore",
+        "prevent",
+        "increase"
+      ],
+      "correctValue": "prevent"
+    }
+  ]
+}

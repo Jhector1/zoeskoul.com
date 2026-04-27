@@ -1,9 +1,13 @@
 import { NextResponse } from "next/server";
-import { runSeed } from "@/../prisma/seed/runSeed";
+import { execFile } from "node:child_process";
+import path from "node:path";
+import { promisify } from "node:util";
 import { auth } from "@/lib/auth"; // ✅ Auth.js v5 default export location
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
+
+const execFileAsync = promisify(execFile);
 
 function isAdminEmail(email?: string | null) {
   const list = (process.env.ADMIN_EMAILS ?? "")
@@ -31,9 +35,30 @@ export async function POST() {
   }
 
   try {
-    const result = await runSeed();
-    return NextResponse.json(result);
+    const repoRoot = path.resolve(process.cwd(), "../..");
+    const { stdout, stderr } = await execFileAsync(
+      "pnpm",
+      ["--dir", repoRoot, "--filter", "@zoeskoul/db", "db:seed"],
+      {
+        cwd: repoRoot,
+        env: process.env,
+      },
+    );
+
+    return NextResponse.json({
+      ok: true,
+      stdout: stdout.trim() || null,
+      stderr: stderr.trim() || null,
+    });
   } catch (e: any) {
-    return NextResponse.json({ ok: false, error: e?.message ?? "Seed failed" }, { status: 500 });
+    return NextResponse.json(
+      {
+        ok: false,
+        error: e?.message ?? "Seed failed",
+        stdout: e?.stdout?.trim?.() || null,
+        stderr: e?.stderr?.trim?.() || null,
+      },
+      { status: 500 },
+    );
   }
 }

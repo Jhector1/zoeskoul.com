@@ -1,0 +1,121 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_12": {
+        "update-prices": {
+          "label": "Update prices",
+          "summary": "Practice updating prices in the inventory_items table using safe SQL habits. Learn to preview affected rows, use WHERE clauses, and avoid accidental data changes.",
+          "cards": {
+            "sketch0": {
+              "title": "Preview Before Update"
+            },
+            "sketch1": {
+              "title": "Updating Prices Safely"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Practice"
+            }
+          },
+          "projectSteps": {
+            "q1": {
+              "title": "Update price for a specific item"
+            },
+            "q2": {
+              "title": "Update prices for a category"
+            },
+            "q3": {
+              "title": "Update prices for test items only"
+            }
+          },
+          "quiz": {
+            "q1": {
+              "title": "Update price for a specific item",
+              "prompt": "Increase the price of the item named 'Sticker Pack' by $2 in the inventory_items table.",
+              "hint": "Focus on the SQL task being asked for, not on copying final query text.",
+              "help": {
+                "concept": "Build the query from the operation the exercise is testing.",
+                "hint_1": "Think about which clauses or functions are required for the task.",
+                "hint_2": "Construct the query based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "-- Write your UPDATE statement here"
+            },
+            "q2": {
+              "title": "Update prices for a category",
+              "prompt": "Set the price of all items in the 'Decor' category to 20.00.",
+              "hint": "Focus on the SQL task being asked for, not on copying final query text.",
+              "help": {
+                "concept": "Build the query from the operation the exercise is testing.",
+                "hint_1": "Think about which clauses or functions are required for the task.",
+                "hint_2": "Construct the query based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "-- Write your UPDATE statement here"
+            },
+            "q3": {
+              "title": "Update prices for test items only",
+              "prompt": "Reduce the price by $1 for all items marked as test items (is_test = 1).",
+              "hint": "Focus on the SQL task being asked for, not on copying final query text.",
+              "help": {
+                "concept": "Build the query from the operation the exercise is testing.",
+                "hint_1": "Think about which clauses or functions are required for the task.",
+                "hint_2": "Construct the query based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "-- Write your UPDATE statement here"
+            },
+            "q4": {
+              "title": "Safe update practices",
+              "prompt": "Which of the following are good practices when updating prices in a table? Select all that apply.",
+              "hint": "Think about how to avoid accidental changes.",
+              "help": {
+                "concept": "Previewing and filtering updates helps prevent mistakes. Avoid updating all rows unless intentional.",
+                "hint_1": "Preview with SELECT and use WHERE to target updates.",
+                "hint_2": "Avoid running UPDATE without WHERE unless you want to change every row."
+              },
+              "options": {
+                "a": "a. Preview affected rows with SELECT before running UPDATE",
+                "b": "b. Always use a WHERE clause to target specific rows",
+                "c": "c. Run UPDATE without WHERE to save time",
+                "d": "d. Double-check your filter conditions before executing UPDATE"
+              }
+            },
+            "q5": {
+              "title": "Fill in the blank: WHERE clause importance",
+              "prompt": "Choose the best value for the first missing blank in the statement.",
+              "hint": "This clause limits which rows are affected.",
+              "help": {
+                "concept": "The the missing term clause specifies which rows to update, preventing accidental changes to all rows.",
+                "hint_1": "It's the clause that filters rows in UPDATE and SELECT.",
+                "hint_2": "Without this clause, every row in the table will be updated."
+              },
+              "template": "The first missing value is [blank1].",
+              "choices": [
+                "WHERE",
+                "ORDER BY",
+                "GROUP BY",
+                "HAVING"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_12": {
+        "update-prices": {
+          "sk1": {
+            "title": "Preview Before Update",
+            "bodyMarkdown": "Before updating prices in the `inventory_items` table, always preview the rows you plan to change. For example, to see all items in the 'Accessories' category:\n\n```sql\nSELECT id, name, price FROM inventory_items WHERE category = 'Accessories';\n```\n\nThis helps you confirm which rows will be affected before running an UPDATE."
+          },
+          "sk2": {
+            "title": "Updating Prices Safely",
+            "bodyMarkdown": "To update prices, use the `UPDATE` statement with a `WHERE` clause. For example, to increase the price of all 'Kitchen' items by $1:\n\n```sql\nUPDATE inventory_items SET price = price + 1 WHERE category = 'Kitchen';\n```\n\nAlways include a `WHERE` clause to avoid changing every row by mistake."
+          }
+        }
+      }
+    }
+  }
+}

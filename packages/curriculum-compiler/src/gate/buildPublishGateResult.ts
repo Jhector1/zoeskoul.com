@@ -18,6 +18,7 @@ export async function buildPublishGateResult(args: {
     let critiqueErrors = 0;
     let critiqueWarnings = 0;
     let semanticFailures = 0;
+    let goldenFailures = 0;
     let hintWarnings = 0;
     let sqlRunnerMissing = 0;
 
@@ -37,6 +38,10 @@ export async function buildPublishGateResult(args: {
         for (const issue of report.semanticReport?.issues ?? []) {
             if (issue.severity === "error") semanticFailures += 1;
             if (issue.code === "SQL_RUNNER_NOT_CONFIGURED") sqlRunnerMissing += 1;
+        }
+
+        for (const issue of report.goldenReport?.issues ?? []) {
+            if (issue.severity === "error") goldenFailures += 1;
         }
     }
 
@@ -60,6 +65,10 @@ export async function buildPublishGateResult(args: {
 
     if (semanticFailures > 0) {
         reasons.push(`Semantic validation found ${semanticFailures} error(s).`);
+    }
+
+    if (goldenFailures > 0) {
+        reasons.push(`Golden validation found ${goldenFailures} error(s).`);
     }
 
     if (repairsHigh > 0 && !policy.allowHighSeverityRepairs) {
@@ -92,6 +101,7 @@ export async function buildPublishGateResult(args: {
             repairsHigh,
             hintWarnings,
             semanticFailures,
+            goldenFailures,
         },
     };
 }

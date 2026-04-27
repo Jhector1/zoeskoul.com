@@ -1,4 +1,4 @@
-import type { PrismaClient } from "@prisma/client";
+import type { PrismaClient } from "@/lib/prisma";
 
 export async function loadValidateInstance(prisma: PrismaClient, instanceId: string) {
     return prisma.practiceQuestionInstance.findUnique({

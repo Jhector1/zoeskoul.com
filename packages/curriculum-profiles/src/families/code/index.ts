@@ -5,6 +5,7 @@ import {
     makeEmptyRepairReport,
     makeEmptySemanticValidationReport,
 } from "../../shared/noopReports.js";
+import { validateGoldenTopicBundle } from "../../shared/validateGoldenTopicBundle.js";
 
 export const codeFamilyTrustPolicy: ProfileTrustPolicy = {
     profileId: "code-family",
@@ -52,5 +53,9 @@ export const codeFamilyServices: FamilyProfileServices = {
 
     async validateSemantic(args) {
         return makeEmptySemanticValidationReport(args.seed.topicId);
+    },
+
+    async validateGolden(args) {
+        return validateGoldenTopicBundle(args);
     },
 };

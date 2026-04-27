@@ -1,0 +1,108 @@
+{
+  "title": "Create a products table",
+  "summary": "Practice designing and creating a products table with appropriate columns, data types, and constraints in SQL.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch-1",
+      "title": "What is a products table?",
+      "bodyMarkdown": "A products table stores information about items available for sale or inventory. Each row represents a single product, and columns describe attributes like the product's name, category, price, stock quantity, and when it was added. Good table design uses clear column names, appropriate data types, and constraints to ensure data quality."
+    },
+    {
+      "id": "sketch-2",
+      "title": "Example: Products table schema",
+      "bodyMarkdown": "Here's an example of a products table schema:\n\n```sql\nCREATE TABLE products (\n  id INTEGER PRIMARY KEY,\n  name TEXT NOT NULL,\n  category TEXT NOT NULL,\n  price REAL NOT NULL,\n  stock INTEGER NOT NULL,\n  created_at TEXT NOT NULL\n);\n```\n\nThis schema uses an integer primary key for unique identification, text columns for names and categories, a real number for price, and an integer for stock. The `created_at` column stores the date the product was added."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "code-1",
+      "kind": "code_input",
+      "title": "Create a products table",
+      "prompt": "Write a SQL statement to create a `products` table with the following columns:\n- `id` (integer, primary key)\n- `name` (text, not null)\n- `category` (text, not null)\n- `price` (real, not null)\n- `stock` (integer, not null)\n- `created_at` (text, not null)\n\nMake sure to include all constraints.",
+      "starterCode": "-- Write your CREATE TABLE statement here",
+      "solutionCode": "CREATE TABLE products (\n  id INTEGER PRIMARY KEY,\n  name TEXT NOT NULL,\n  category TEXT NOT NULL,\n  price REAL NOT NULL,\n  stock INTEGER NOT NULL,\n  created_at TEXT NOT NULL\n);",
+      "datasetId": "products_catalog",
+      "recipeType": "sql_query",
+      "hint": "Focus on the concept being tested.",
+      "help": {
+        "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+        "hint_1": "Eliminate choices or interpretations that do not match the task.",
+        "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+      }
+    },
+    {
+      "id": "code-2",
+      "kind": "code_input",
+      "title": "Add a new product to the table",
+      "prompt": "Insert a new row into the `products` table for a product named 'Watercolor Set' in the 'Art' category, priced at 19.99, with 20 in stock, and a created_at date of '2026-03-01'.",
+      "starterCode": "-- Write your INSERT INTO statement here",
+      "solutionCode": "INSERT INTO products (name, category, price, stock, created_at)\nVALUES ('Watercolor Set', 'Art', 19.99, 20, '2026-03-01');",
+      "datasetId": "products_catalog",
+      "recipeType": "sql_query",
+      "checkSql": "SELECT name, category, price, stock, created_at FROM products WHERE name = 'Watercolor Set' AND category = 'Art' AND price = 19.99 AND stock = 20 AND created_at = '2026-03-01';",
+      "hint": "Focus on the SQL task being asked for, not on copying final query text.",
+      "help": {
+        "concept": "Build the query from the operation the exercise is testing.",
+        "hint_1": "Think about which clauses or functions are required for the task.",
+        "hint_2": "Construct the query based on what result the exercise expects, not by repeating exact solution wording."
+      }
+    },
+    {
+      "id": "code-3",
+      "kind": "code_input",
+      "title": "Add a NOT NULL constraint to an existing column",
+      "prompt": "Suppose the `products` table was created without a NOT NULL constraint on the `stock` column. Write a SQL statement to alter the table and make `stock` NOT NULL.",
+      "starterCode": "-- Write the SQL statements needed to add NOT NULL to stock",
+      "solutionCode": "CREATE TABLE products_new (\n  id INTEGER PRIMARY KEY,\n  name TEXT NOT NULL,\n  category TEXT NOT NULL,\n  price REAL NOT NULL,\n  stock INTEGER NOT NULL,\n  created_at TEXT NOT NULL\n);\n\nINSERT INTO products_new (id, name, category, price, stock, created_at)\nSELECT id, name, category, price, stock, created_at FROM products;\n\nDROP TABLE products;\n\nALTER TABLE products_new RENAME TO products;",
+      "datasetId": "products_catalog",
+      "recipeType": "sql_query",
+      "checkSql": "PRAGMA table_info(products);",
+      "hint": "Focus on the concept being tested.",
+      "help": {
+        "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+        "hint_1": "Eliminate choices or interpretations that do not match the task.",
+        "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+      }
+    },
+    {
+      "id": "multi-1",
+      "kind": "multi_choice",
+      "title": "Choosing appropriate data types",
+      "prompt": "Which of the following data types are appropriate for the columns in a products table? Select all that apply.",
+      "options": [
+        "[object Object]",
+        "A command"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Think about the kind of data each column stores.",
+      "help": {
+        "concept": "Choosing the right data type helps ensure data is stored efficiently and correctly. For example, use INTEGER for whole numbers, REAL for decimals, and TEXT for strings.",
+        "hint_1": "Match each column's purpose to its data type: numbers, text, or dates.",
+        "hint_2": "Columns like price need decimals, names need text, and stock is a whole number."
+      }
+    },
+    {
+      "id": "fill-1",
+      "kind": "fill_blank_choice",
+      "title": "Primary key purpose",
+      "prompt": "Choose the best value for the first missing blank in the statement.",
+      "template": "The first missing value is [blank1].",
+      "choices": [
+        "unique",
+        "indexed",
+        "nullable",
+        "sorted"
+      ],
+      "correctValue": "unique",
+      "hint": "Focus on the missing SQL concept rather than the exact missing word.",
+      "help": {
+        "concept": "The blank should be filled with the SQL term that matches the job the statement is trying to perform.",
+        "hint_1": "Think about what the missing part is supposed to do in the statement.",
+        "hint_2": "Choose the SQL term that best completes the meaning of the statement."
+      }
+    }
+  ]
+}

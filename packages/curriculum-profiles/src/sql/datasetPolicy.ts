@@ -51,6 +51,12 @@ const SQL_MODULE_DATASET_POLICY: Record<number, SqlModuleDatasetPolicy> = {
         preferredLabelColumn: "item_name",
         preferredNumericColumns: ["quantity_on_hand", "reorder_level"],
     },
+    12: {
+        datasetId: "ddl_blank",
+    },
+    13: {
+        datasetId: "ddl_blank",
+    },
 };
 
 export function getSqlModuleDatasetPolicy(

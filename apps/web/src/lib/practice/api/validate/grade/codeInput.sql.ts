@@ -12,7 +12,7 @@ import {
     sqlTablesEqual,
     validateSqlAgainstSolution,
     type SqlTable,
-} from "@zoeskoul/curriculum-runtime";
+} from "@zoeskoul/curriculum-runtime/sql";
 
 const DEFAULT_SQL_LIMITS = {
     statementTimeoutMs: 4000,

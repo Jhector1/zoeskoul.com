@@ -1,11 +1,9 @@
 import { buildTerminalExpectedExample } from "../expectedExample.js";
+import { buildFixedTestsExpected } from "../codeInputExpected.js";
 
 export const buildFixedTestsRecipe = (def: any, args: any, resolved: any) => {
-  const tests = def.recipe.tests.map((t: any) => ({
-    stdin: t.stdin,
-    stdout: t.stdout,
-    match: t.match ?? "exact"
-  }));
+  const expected = buildFixedTestsExpected(def.recipe);
+  const tests = expected.tests;
 
   const expectedExample = buildTerminalExpectedExample({ def, resolved, tests });
 
@@ -21,11 +19,7 @@ export const buildFixedTestsRecipe = (def: any, args: any, resolved: any) => {
     starterCode: resolved.starterCode,
     help: resolved.help,
     hint: resolved.hint,
-    expected: {
-      kind: "code_input",
-      tests,
-      ...(def.recipe.solutionCode ? { solutionCode: def.recipe.solutionCode } : {})
-    },
+    expected,
     expectedExample
   };
 };

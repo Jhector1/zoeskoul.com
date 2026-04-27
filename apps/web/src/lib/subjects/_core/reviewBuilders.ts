@@ -4,7 +4,7 @@ import type {
     ReviewQuizSpec,
     ReviewProjectStep,
 } from "@/lib/subjects/types";
-import type { PracticeKind } from "@prisma/client";
+import type { PracticeKind } from "@zoeskoul/db";
 import type { ManifestRuntimeDefaults } from "@/lib/subjects/_core/manifestTypes";
 
 type Difficulty = "easy" | "medium" | "hard";

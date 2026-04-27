@@ -1,116 +1,108 @@
 {
   "title": "Reading inserted results",
-  "summary": "Learn how to confirm what data was inserted, check results, and understand how to safely verify changes after an INSERT in SQL.",
+  "summary": "Learn how to read and verify the results of INSERT operations in SQL, including how to check what was added and understand the impact of your statements on the inventory_items table.",
   "minutes": 15,
   "sketchBlocks": [
     {
       "id": "sketch-1",
-      "title": "Why Check Inserted Results?",
-      "bodyMarkdown": "After inserting data into a table, it's important to confirm what was actually added. This helps you catch mistakes, verify defaults, and ensure your statement worked as expected. For example, after running:\n\n```sql\nINSERT INTO inventory_items (name, category, price) VALUES ('Keychain', 'Accessories', 3.50);\n```\n\nyou can check the table with:\n\n```sql\nSELECT * FROM inventory_items WHERE name = 'Keychain';\n```\n\nThis shows the new row, including any default values or auto-generated columns."
+      "title": "How to Check Inserted Data",
+      "bodyMarkdown": "After you run an `INSERT` statement, you can confirm the new row by running a `SELECT` query. For example, if you insert a new item into the `inventory_items` table, you can use:\n\n```sql\nSELECT * FROM inventory_items WHERE name = 'New Item';\n```\n\nThis will show you the row(s) matching the name you just inserted. Checking inserted results helps you verify that your data was added as expected."
     },
     {
       "id": "sketch-2",
-      "title": "Reading Defaults and Auto Values",
-      "bodyMarkdown": "When you omit some columns in your INSERT, SQL fills in defaults or NULLs. For example, the `status` column in `inventory_items` defaults to `'draft'` if not specified. After this insert:\n\n```sql\nINSERT INTO inventory_items (name, category, price) VALUES ('Notebook', 'Accessories', 6.00);\n```\n\nA SELECT will show `status` as `'draft'` and `is_test` as `0` (the default)."
-    },
-    {
-      "id": "sketch-3",
-      "title": "Verifying Inserted Data",
-      "bodyMarkdown": "To confirm what was inserted, use a SELECT statement that targets the new row. For example:\n\n```sql\nSELECT id, name, status FROM inventory_items WHERE name = 'Notebook';\n```\n\nThis helps you see the assigned `id` (if auto-incremented), the `name`, and the `status` set by default or your INSERT."
+      "title": "Default Values After Insert",
+      "bodyMarkdown": "Some columns in `inventory_items` have default values, such as `status` (default: 'draft') and `last_updated` (default: '2026-02-01'). If you omit these columns in your `INSERT` statement, the database will automatically fill them with their default values. You can see these defaults by selecting the new row after insertion."
     }
   ],
   "quizDraft": [
     {
-      "id": "code-1",
+      "id": "ex-1",
       "kind": "code_input",
-      "title": "Check the Inserted Row",
-      "prompt": "You just inserted a new item named 'Travel Mug' into the inventory_items table. Write a SQL query to display all columns for the row you just inserted.",
-      "hint": "Use SELECT with a WHERE clause to find the row by name.",
+      "title": "Insert and Read Back a Row",
+      "prompt": "Insert a new row into the inventory_items table with the following values: name = 'Desk Organizer', category = 'Accessories', price = 13.50. Then, write a SELECT statement to show the row(s) where name is 'Desk Organizer'.",
+      "hint": "Use INSERT INTO with a column list, then SELECT with a WHERE clause.",
       "help": {
-        "concept": "After inserting data, you can use a SELECT statement to retrieve and verify the new row. Filtering by a unique value like the name helps you target the correct row.",
-        "hint_1": "Write a SELECT * statement and use WHERE to filter for 'Travel Mug'.",
-        "hint_2": "Make sure your WHERE clause matches the name column to 'Travel Mug'."
+        "concept": "To confirm an insert, add the row and then query for it using SELECT and a WHERE filter.",
+        "hint_1": "First, insert the row with the required columns. Then, select from inventory_items where name matches.",
+        "hint_2": "Write two statements: one INSERT, one SELECT. The SELECT should filter by name."
       },
-      "starterCode": "-- Write your query here",
-      "solutionCode": "SELECT * FROM inventory_items WHERE name = 'Travel Mug';",
+      "starterCode": "-- Add your INSERT statement here\n\n-- Add your SELECT statement here",
+      "solutionCode": "INSERT INTO inventory_items (name, category, price) VALUES ('Desk Organizer', 'Accessories', 13.50);\nSELECT * FROM inventory_items WHERE name = 'Desk Organizer';",
       "datasetId": "inventory_ops",
       "recipeType": "sql_query"
     },
     {
-      "id": "code-2",
+      "id": "ex-2",
       "kind": "code_input",
-      "title": "See Default Values After Insert",
-      "prompt": "Suppose you inserted a row into inventory_items with only name, category, and price specified. Write a query to show the status and is_test values for the row named 'Sample Notebook'.",
-      "hint": "Select only the columns you want and filter by name.",
+      "title": "Check Default Values After Insert",
+      "prompt": "Insert a new row into inventory_items with name = 'Sample Coaster', category = 'Kitchen', price = 3.25. Do not specify status or last_updated. Then, select the row(s) where name is 'Sample Coaster' to see the default values.",
+      "hint": "Omit status and last_updated in your INSERT. Use SELECT to view the result.",
       "help": {
-        "concept": "When you omit columns in an INSERT, SQL fills in defaults. You can SELECT specific columns to see what values were set.",
-        "hint_1": "Use SELECT to choose status and is_test, and WHERE to find 'Sample Notebook'.",
-        "hint_2": "Your WHERE clause should match the name column to 'Sample Notebook'."
+        "concept": "If you don't specify columns with defaults, the database fills them in automatically.",
+        "hint_1": "Insert only name, category, and price. Then select by name.",
+        "hint_2": "Check the status and last_updated columns in your SELECT result."
       },
-      "starterCode": "-- Write your query here",
-      "solutionCode": "SELECT status, is_test FROM inventory_items WHERE name = 'Sample Notebook';",
+      "starterCode": "-- Write your INSERT and SELECT statements",
+      "solutionCode": "INSERT INTO inventory_items (name, category, price) VALUES ('Sample Coaster', 'Kitchen', 3.25);\nSELECT * FROM inventory_items WHERE name = 'Sample Coaster';",
       "datasetId": "inventory_ops",
       "recipeType": "sql_query"
     },
     {
-      "id": "code-3",
+      "id": "ex-3",
       "kind": "code_input",
-      "title": "Find the Auto-Assigned ID",
-      "prompt": "After inserting a new item called 'Desk Organizer', you want to know what id was assigned to it. Write a query to find the id for this item.",
-      "hint": "Select the id column and filter by the item's name.",
+      "title": "Verify Multiple Inserts",
+      "prompt": "Insert two new rows into inventory_items: (name = 'Mini Poster', category = 'Decor', price = 6.00) and (name = 'Travel Cup', category = 'Kitchen', price = 8.75). Then, select all rows where category is 'Kitchen'.",
+      "hint": "Use a single INSERT statement for both rows, then SELECT with a WHERE filter.",
       "help": {
-        "concept": "Auto-incremented columns like id are assigned by the database. You can retrieve the id by selecting it for the row you just inserted.",
-        "hint_1": "Use SELECT id FROM inventory_items WHERE name = 'Desk Organizer'.",
-        "hint_2": "Make sure your WHERE clause matches the name exactly."
+        "concept": "You can insert multiple rows at once and then query to confirm all relevant rows.",
+        "hint_1": "List both sets of values in the INSERT. Use SELECT to filter by category.",
+        "hint_2": "Check that both new and existing 'Kitchen' items appear in your SELECT result."
       },
-      "starterCode": "-- Write your query here",
-      "solutionCode": "SELECT id FROM inventory_items WHERE name = 'Desk Organizer';",
+      "starterCode": "-- Write your INSERT and SELECT statements",
+      "solutionCode": "INSERT INTO inventory_items (name, category, price) VALUES ('Mini Poster', 'Decor', 6.00), ('Travel Cup', 'Kitchen', 8.75);\nSELECT * FROM inventory_items WHERE category = 'Kitchen';",
       "datasetId": "inventory_ops",
       "recipeType": "sql_query"
     },
     {
-      "id": "multi-1",
+      "id": "ex-4",
       "kind": "multi_choice",
-      "title": "What Can You Learn by Reading Inserted Results?",
-      "prompt": "After inserting a new row and reading it back with SELECT, which of the following can you confirm? (Choose all that apply.)",
-      "hint": "Think about what SELECT reveals about the new row.",
+      "title": "What Can You Learn by Selecting After Insert?",
+      "prompt": "After inserting a new row and running a SELECT query for it, which of the following can you confirm? Choose all that apply.",
+      "hint": "Think about what information is visible in the selected row.",
       "help": {
-        "concept": "Reading inserted results lets you verify values set by your INSERT, see defaults, and check auto-generated columns.",
-        "hint_1": "You can see both values you provided and those set by the database.",
-        "hint_2": "Consider if you can check auto-incremented ids, default values, and your own input."
+        "concept": "Selecting after an insert lets you verify the new row's presence and see how the database filled in any default or auto-generated values.",
+        "hint_1": "You can check both your inserted values and any defaults the database applied.",
+        "hint_2": "You cannot see the exact SQL you ran, but you can see the resulting data."
       },
       "options": [
         "a. That the row was actually added",
-        "b. What default values were set",
-        "c. The value of auto-incremented columns like id",
-        "d. The exact SQL statement used to insert the row",
-        "e. If your input values were stored correctly"
+        "b. The values of columns you inserted",
+        "c. The default values for columns you did not specify",
+        "d. The SQL statement you used for the insert"
       ],
       "correctOptionIds": [
         "a",
         "b",
-        "c",
-        "e"
+        "c"
       ]
     },
     {
-      "id": "fill-1",
+      "id": "ex-5",
       "kind": "fill_blank_choice",
-      "title": "Default Value After Insert",
-      "prompt": "If you insert a row into inventory_items without specifying the status column, what value will status have by default?",
-      "hint": "Check the table definition for the default value.",
+      "title": "Default Value for status",
+      "prompt": "When you insert a row into inventory_items and do not specify the status column, what value will status have by default?",
+      "hint": "Check the table definition for the default value of status.",
       "help": {
-        "concept": "Columns can have default values set in the table schema. If you omit such a column in your INSERT, the default is used.",
-        "hint_1": "Look for the DEFAULT keyword in the table schema for status.",
-        "hint_2": "The default for status is a short text value set in the CREATE TABLE statement."
+        "concept": "Columns with a DEFAULT value in the schema will use that value if not specified in an INSERT.",
+        "hint_1": "Look for the DEFAULT keyword in the inventory_items schema for status.",
+        "hint_2": "The default is a string value set in the table definition."
       },
       "template": "The default value for status is [blank].",
       "choices": [
         "draft",
         "active",
-        "NULL",
-        "pending",
-        "0"
+        "inactive",
+        "NULL"
       ],
       "correctValue": "draft"
     }

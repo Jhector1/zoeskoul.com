@@ -7,6 +7,7 @@ export type PublishGateStats = {
     repairsHigh: number;
     hintWarnings: number;
     semanticFailures: number;
+    goldenFailures: number;
 };
 
 export type PublishGateResult = {

@@ -1,0 +1,119 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_5": {
+        "math-in-sql": {
+          "label": "Matematik nan SQL",
+          "summary": "Matematik nan SQL nan Kolòn Kalkile ak Ekspresyon SQL",
+          "cards": {
+            "sketch0": {
+              "title": "Itilize Aritmetik nan SQL SELECT"
+            },
+            "sketch1": {
+              "title": "Chanje Non Kolòn Kalkile ak Alias"
+            },
+            "sketch2": {
+              "title": "Ekspresyon ak Valè NULL"
+            },
+            "quiz": {
+              "title": "Kesyonè"
+            }
+          },
+          "quiz": {
+            "code-1": {
+              "title": "Kalkile Total Liy pou Chak Kòmann",
+              "prompt": "Ekri yon demann SQL pou chwazi `id`, `quantity`, `unit_price`, ak yon nouvo kolòn ki rele `line_total` ki miltipliye `quantity` ak `unit_price` pou chak kòmann nan tab `orders` la.",
+              "hint": "Konsantre sou konsèp yo ap teste a.",
+              "help": {
+                "concept": "Panse a wòl oswa lide yo ap teste a olye pou w repete repons lan.",
+                "hint_1": "Elimine chwa oswa entèpretasyon ki pa koresponn ak sa yo mande a.",
+                "hint_2": "Chwazi konsèp ki pi byen adapte ak sa egzèsis la mande w fè a."
+              },
+              "starterCode": "SELECT id, quantity, unit_price\nFROM orders;"
+            },
+            "code-2": {
+              "title": "Aplike yon Rabè 10% sou Chak Kòmann",
+              "prompt": "Ekri yon demann SQL pou chwazi `id`, `customer_name`, ak yon nouvo kolòn ki rele `discounted_total` ki montre total la apre ou fin aplike yon rabè 10% sou total liy lan (`quantity * unit_price`).",
+              "hint": "Konsantre sou konsèp yo ap teste a.",
+              "help": {
+                "concept": "Panse a wòl oswa lide yo ap teste a olye pou w repete repons lan.",
+                "hint_1": "Elimine chwa oswa entèpretasyon ki pa koresponn ak sa yo mande a.",
+                "hint_2": "Chwazi konsèp ki pi byen adapte ak sa egzèsis la mande w fè a."
+              },
+              "starterCode": "SELECT id, customer_name\nFROM orders;"
+            },
+            "single-1": {
+              "title": "Konprann Ekspresyon SQL",
+              "prompt": "Ki nan sa ki annapre yo ki se yon ekspresyon SQL ki valab pou kreye yon nouvo kolòn ki double kantite a nan tab `orders` la?",
+              "hint": "Chèche yon ekspresyon ki miltipliye quantity pa 2.",
+              "help": {
+                "concept": "Yon ekspresyon SQL ka itilize operatè aritmetik pou kreye nouvo valè nan seksyon SELECT la.",
+                "hint_1": "Double vle di miltipliye pa 2.",
+                "hint_2": "Gade ki opsyon ki itilize operatè miltiplikasyon ak quantity."
+              },
+              "options": {
+                "a": "a. SELECT quantity + 2 AS double_quantity FROM orders;",
+                "b": "b. SELECT quantity * 2 AS double_quantity FROM orders;",
+                "c": "c. SELECT quantity / 2 AS double_quantity FROM orders;",
+                "d": "d. SELECT quantity - 2 AS double_quantity FROM orders;"
+              }
+            },
+            "multi-1": {
+              "title": "Chwazi Alias SQL ki Kòrèk",
+              "prompt": "Ki nan demann sa yo ki itilize alias kòrèkteman pou chanje non kolòn kalkile yo? Chwazi tout sa ki aplike.",
+              "hint": "Chèche itilizasyon AS pou bay yon nouvo non kolòn kalkile a.",
+              "help": {
+                "concept": "Alias nan SQL kreye ak mo kle AS pou chanje non kolòn yo, espesyalman kolòn kalkile yo.",
+                "hint_1": "Gade si AS byen itilize pou bay yon nouvo non kolòn.",
+                "hint_2": "Sèlman opsyon ki itilize AS kòrèkteman se alias ki valab."
+              },
+              "options": {
+                "a": "a. SELECT quantity * unit_price AS total FROM orders;",
+                "b": "b. SELECT quantity * unit_price total FROM orders;",
+                "c": "c. SELECT quantity * unit_price AS total_amount FROM orders;",
+                "d": "d. SELECT quantity * unit_price = total FROM orders;"
+              }
+            },
+            "fill-1": {
+              "title": "Efè NULL nan Aritmetik SQL",
+              "prompt": "Si kolòn `quantity` a NULL pou yon liy, ki rezilta `quantity * unit_price` ap bay pou liy sa a?",
+              "hint": "Panse kijan SQL trete aritmetik ak valè ki manke yo.",
+              "help": {
+                "concept": "Nan SQL, nenpòt operasyon aritmetik ki gen tèm ki manke ap bay tèm ki manke a kòm rezilta.",
+                "hint_1": "tèm ki manke a nan kalkil ap bay yon rezilta ki manke.",
+                "hint_2": "SQL konsidere tèm ki manke a kòm 'enkoni', kidonk rezilta a pa ka detèmine."
+              },
+              "template": "Rezilta a ap: ___",
+              "choices": [
+                "0",
+                "NULL",
+                "unit_price",
+                "quantity"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_5": {
+        "math-in-sql": {
+          "sketch-1": {
+            "title": "Itilize Aritmetik nan SQL SELECT",
+            "bodyMarkdown": "SQL pèmèt ou fè aritmetik dirèkteman nan deklarasyon SELECT ou yo. Pa egzanp, ou ka miltipliye kolòn pou kalkile total yo. Nan tab `orders` la, pou jwenn valè total chak kòmann, ou ka miltipliye `quantity` ak `unit_price`:\n\n```sql\nSELECT id, quantity, unit_price, quantity * unit_price AS line_total\nFROM orders;\n```\n\nSa kreye yon nouvo kolòn ki rele `line_total` nan rezilta a."
+          },
+          "sketch-2": {
+            "title": "Chanje Non Kolòn Kalkile ak Alias",
+            "bodyMarkdown": "Lè ou kreye nouvo valè nan demann SQL, ou ka itilize mo kle `AS` pou ba yo yon non klè (alias). Sa fè rezilta ou yo pi fasil pou li. Pa egzanp:\n\n```sql\nSELECT customer_name, quantity * unit_price AS total_amount\nFROM orders;\n```\n\nIsit la, `total_amount` se yon alias pou valè kalkile a."
+          },
+          "sketch-3": {
+            "title": "Ekspresyon ak Valè NULL",
+            "bodyMarkdown": "Si nenpòt valè nan yon ekspresyon aritmetik se `NULL`, rezilta a ap `NULL` tou. Pa egzanp, si `quantity` se `NULL` pou yon liy, `quantity * unit_price` ap retounen `NULL` pou liy sa a. Toujou verifye done ou pou valè ki manke si ou wè `NULL` ou pa t atann nan rezilta ou yo."
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,4 +1,4 @@
-import { PracticeKind } from "@prisma/client";
+import { PracticeKind } from "@zoeskoul/db";
 import type {
     CodeExpectedExample,
     Difficulty,

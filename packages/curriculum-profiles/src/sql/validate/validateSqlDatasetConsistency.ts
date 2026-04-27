@@ -6,7 +6,11 @@ import type {
     TopicSeed,
 } from "@zoeskoul/curriculum-contracts";
 import { getSqlDataset } from "../datasets/index.js";
-
+import {
+    prepareSqlForExistingColumnReferenceScan,
+    stripSqlComments,
+    stripSqlCommentsAndStrings, stripSqlStringLiterals,
+} from "../shared/sqlReferenceScan.js";
 const SQL_KEYWORDS = new Set([
     // Query
     "select",
@@ -35,7 +39,11 @@ const SQL_KEYWORDS = new Set([
     "outer",
     "cross",
     "on",
-
+    "current_date",
+    "current_time",
+    "current_timestamp",
+    "autoincrement",
+    "default",
     // Conditions
     "is",
     "null",
@@ -152,7 +160,9 @@ const SQL_FUNCTION_NAMES = new Set([
     "unixepoch",
     "strftime",
     "timediff",
-
+    "current_date",
+    "current_time",
+    "current_timestamp",
     // SQLite scalar/string
     "abs",
     "changes",
@@ -242,6 +252,41 @@ const SQL_FUNCTION_NAMES = new Set([
     "first_value",
     "last_value",
     "nth_value",
+    "unique",
+    // DDL, useful if beginner lessons include schema examples
+    "create",
+    "table",
+    "if",
+    "primary",
+    "key",
+    "foreign",
+    "references",
+    "constraint",
+    "unique",
+    "check",
+    "drop",
+    "alter",
+    "add",
+    "column",
+    "rename",
+    "to",
+    "create",
+    "table",
+    "if",
+    "primary",
+    "key",
+    "foreign",
+    "references",
+    "constraint",
+    "unique",
+    "check",
+    "drop",
+    "alter",
+    "add",
+    "column",
+    "rename",
+    "to",
+    "autoincrement",
 ]);
 
 type DatasetShape = {
@@ -258,21 +303,10 @@ function normalizeIdentifier(value: string | undefined | null): string {
         .toLowerCase();
 }
 
-function stripSqlComments(sql: string): string {
-    return sql
-        .replace(/--.*$/gm, " ")
-        .replace(/\/\*[\s\S]*?\*\//g, " ");
-}
 
-function stripSqlStrings(sql: string): string {
-    return sql
-        .replace(/'([^']|'')*'/g, " ")
-        .replace(/"([^"]|"")*"/g, " ");
-}
 
-function stripSqlCommentsAndStrings(sql: string): string {
-    return stripSqlStrings(stripSqlComments(sql));
-}
+
+
 
 function escapeRegExp(value: string): string {
     return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -372,6 +406,25 @@ function parseTablesFromCreateTable(schemaSql: string): Set<string> {
     return tables;
 }
 
+function validateCreateTableConflicts(args: {
+    exerciseId: string;
+    sql: string;
+    datasetShape: DatasetShape;
+}): string[] {
+    const messages: string[] = [];
+    const createdTableNames = parseTablesFromCreateTable(args.sql);
+
+    for (const tableName of createdTableNames) {
+        if (!args.datasetShape.tableNames.has(tableName)) continue;
+
+        messages.push(
+            `Exercise ${args.exerciseId} creates table "${tableName}" even though it already exists in effective dataset "${args.datasetShape.id}"`,
+        );
+    }
+
+    return messages;
+}
+
 function datasetToShape(dataset: SqlDatasetArtifact): DatasetShape {
     const tableNames = new Set<string>();
     const columnNames = new Set<string>();
@@ -450,21 +503,91 @@ function shouldIgnoreIdentifier(args: {
 
     return false;
 }
+function mergeExerciseCreatedSchema(args: {
+    datasetShape: DatasetShape;
+    sql: string;
+}): DatasetShape {
+    const createdTableNames = parseTablesFromCreateTable(args.sql);
+    const createdColumnNames = parseColumnsFromCreateTable(args.sql);
 
+    const insertColumnsForCreatedTables = parseInsertColumnsForCreatedTables({
+        sql: args.sql,
+        createdTableNames,
+    });
+
+    return {
+        id: args.datasetShape.id,
+        tableNames: new Set([
+            ...args.datasetShape.tableNames,
+            ...createdTableNames,
+        ]),
+        columnNames: new Set([
+            ...args.datasetShape.columnNames,
+            ...createdColumnNames,
+            ...insertColumnsForCreatedTables,
+        ]),
+    };
+}function parseInsertColumnsForCreatedTables(args: {
+    sql: string;
+    createdTableNames: Set<string>;
+}): Set<string> {
+    const columns = new Set<string>();
+    const cleaned = stripSqlCommentsAndStrings(args.sql);
+
+    const insertPattern =
+        /\binsert\s+into\s+["'`]?(?<table>[a-zA-Z_][a-zA-Z0-9_]*)["'`]?\s*\((?<columns>[^)]*)\)/gi;
+
+    for (const match of cleaned.matchAll(insertPattern)) {
+        const tableName = normalizeIdentifier(match.groups?.table);
+
+        if (!tableName || !args.createdTableNames.has(tableName)) {
+            continue;
+        }
+
+        const columnList = String(match.groups?.columns ?? "");
+
+        for (const rawColumn of columnList.split(",")) {
+            const columnName = normalizeIdentifier(rawColumn);
+
+            if (columnName) {
+                columns.add(columnName);
+            }
+        }
+    }
+
+    return columns;
+}
 function validateSqlExerciseAgainstDataset(args: {
     exerciseId: string;
     sql: string;
     dataset: SqlDatasetArtifact;
 }): string[] {
     const messages: string[] = [];
-    const datasetShape = datasetToShape(args.dataset);
-    const aliases = extractAliases(args.sql);
-    const identifiers = extractIdentifiers(args.sql);
+
+    const baseDatasetShape = datasetToShape(args.dataset);
+
+    messages.push(
+        ...validateCreateTableConflicts({
+            exerciseId: args.exerciseId,
+            sql: args.sql,
+            datasetShape: baseDatasetShape,
+        }),
+    );
+
+    const datasetShape = mergeExerciseCreatedSchema({
+        datasetShape: baseDatasetShape,
+        sql: args.sql,
+    });
+
+    const sqlForReferenceScan = prepareSqlForExistingColumnReferenceScan(args.sql);
+
+    const aliases = extractAliases(sqlForReferenceScan);
+    const identifiers = extractIdentifiers(sqlForReferenceScan);
 
     for (const identifier of identifiers) {
         if (
             shouldIgnoreIdentifier({
-                sql: args.sql,
+                sql: sqlForReferenceScan,
                 identifier,
                 datasetShape,
                 aliases,

@@ -1,0 +1,172 @@
+{
+  "topicId": "deleting-selected-rows",
+  "subjectSlug": "sql",
+  "moduleSlug": "sql_module_12",
+  "sectionSlug": "section_12_2",
+  "prefix": "sql12",
+  "minutes": 15,
+  "topic": {
+    "labelKey": "topics.sql.sql_module_12.deleting-selected-rows.label",
+    "summaryKey": "topics.sql.sql_module_12.deleting-selected-rows.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_12.deleting-selected-rows.cards.sketch0.title",
+      "sketchId": "sketch-1",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_12.deleting-selected-rows.cards.sketch1.title",
+      "sketchId": "sketch-2",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql.sql_module_12.deleting-selected-rows.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 2,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.sql.sql_module_12.deleting-selected-rows.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "delete_selected_test_rows",
+            "titleKey": "topics.sql.sql_module_12.deleting-selected-rows.projectSteps.delete_selected_test_rows.title",
+            "exerciseKey": "delete-selected-test-rows",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "delete_draft_decor_items",
+            "titleKey": "topics.sql.sql_module_12.deleting-selected-rows.projectSteps.delete_draft_decor_items.title",
+            "exerciseKey": "delete-draft-decor-items",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "preview_before_delete",
+            "titleKey": "topics.sql.sql_module_12.deleting-selected-rows.projectSteps.preview_before_delete.title",
+            "exerciseKey": "preview-before-delete",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch-1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_12.deleting-selected-rows.sketch-1.title",
+      "bodyKey": "sketches.sql.sql_module_12.deleting-selected-rows.sketch-1.bodyMarkdown"
+    },
+    {
+      "id": "sketch-2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_12.deleting-selected-rows.sketch-2.title",
+      "bodyKey": "sketches.sql.sql_module_12.deleting-selected-rows.sketch-2.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "delete-selected-test-rows",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_12.deleting-selected-rows.quiz.delete-selected-test-rows",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "inventory_ops",
+        "resultShape": "table",
+        "solutionCode": "DELETE FROM inventory_items WHERE is_test = 1;",
+        "checkSql": "SELECT * FROM inventory_items WHERE is_test = 1;"
+      }
+    },
+    {
+      "id": "delete-draft-decor-items",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_12.deleting-selected-rows.quiz.delete-draft-decor-items",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "inventory_ops",
+        "resultShape": "table",
+        "solutionCode": "DELETE FROM inventory_items WHERE category = 'Decor' AND status = 'draft';",
+        "checkSql": "SELECT * FROM inventory_items WHERE category = 'Decor' AND status = 'draft';"
+      }
+    },
+    {
+      "id": "preview-before-delete",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_12.deleting-selected-rows.quiz.preview-before-delete",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "inventory_ops",
+        "resultShape": "table",
+        "solutionCode": "SELECT * FROM inventory_items WHERE status = 'inactive';"
+      }
+    },
+    {
+      "id": "delete-rows-best-practices",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_12.deleting-selected-rows.quiz.delete-rows-best-practices",
+      "optionIds": [
+        "a",
+        "b"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a"
+        ]
+      }
+    },
+    {
+      "id": "delete-where-blank",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_12.deleting-selected-rows.quiz.delete-where-blank",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "status = 'inactive'"
+      }
+    }
+  ]
+}

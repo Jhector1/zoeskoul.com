@@ -1,0 +1,117 @@
+{
+  "title": "FOREIGN KEY",
+  "summary": "FOREIGN KEY in Creating Tables and Database Structure",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sk1",
+      "title": "What is a FOREIGN KEY?",
+      "bodyMarkdown": "A **FOREIGN KEY** is a constraint used in SQL to link two tables together. It ensures that the value in one table matches a value in another table, enforcing referential integrity. For example, if you have an `orders` table with a `product_id` column, you can set `product_id` as a FOREIGN KEY that references the `id` column in the `products` table. This means you cannot insert an order with a `product_id` that does not exist in the `products` table."
+    },
+    {
+      "id": "sk2",
+      "title": "FOREIGN KEY Syntax",
+      "bodyMarkdown": "To add a FOREIGN KEY constraint when creating a table, use the following syntax:\n\n```sql\nCREATE TABLE orders (\n  id INTEGER PRIMARY KEY,\n  product_id INTEGER,\n  FOREIGN KEY (product_id) REFERENCES products(id)\n);\n```\nThis ensures that every `product_id` in `orders` must exist as an `id` in `products`."
+    },
+    {
+      "id": "sk3",
+      "title": "Why Use FOREIGN KEY?",
+      "bodyMarkdown": "FOREIGN KEY constraints help maintain data consistency. For example, if you try to insert a row into `orders` with a `product_id` that does not exist in `products`, the database will reject the insert. This prevents orphaned records and keeps your data reliable."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "q1",
+      "kind": "code_input",
+      "title": "Create a table with a FOREIGN KEY constraint",
+      "prompt": "Create a new table called `orders` with columns:\n- `id` (INTEGER PRIMARY KEY)\n- `product_id` (INTEGER)\nAdd a FOREIGN KEY constraint on `product_id` referencing the `id` column of the `products` table.",
+      "starterCode": "-- Write a CREATE TABLE statement for orders with a FOREIGN KEY constraint\n",
+      "solutionCode": "CREATE TABLE orders (\n  id INTEGER PRIMARY KEY,\n  product_id INTEGER,\n  FOREIGN KEY (product_id) REFERENCES products(id)\n);",
+      "datasetId": "products_catalog",
+      "recipeType": "sql_query",
+      "hint": "Remember to use FOREIGN KEY syntax referencing products(id).",
+      "help": {
+        "concept": "A FOREIGN KEY links a column in one table to a primary key in another, enforcing referential integrity.",
+        "hint_1": "Use FOREIGN KEY (product_id) REFERENCES products(id) in your CREATE TABLE statement.",
+        "hint_2": "After defining the columns, add the FOREIGN KEY constraint at the end of the column list."
+      }
+    },
+    {
+      "id": "q2",
+      "kind": "code_input",
+      "title": "Insert a valid row into orders",
+      "prompt": "Insert a row into the `orders` table with `id` 1 and `product_id` 2. Assume the `products` table already contains a product with `id` 2.",
+      "starterCode": "-- Insert a valid row into orders\n",
+      "solutionCode": "INSERT INTO orders (id, product_id) VALUES (1, 2);",
+      "datasetId": "products_catalog",
+      "recipeType": "sql_query",
+      "checkSql": "SELECT * FROM orders WHERE id = 1 AND product_id = 2;",
+      "hint": "Insert a row where product_id matches an existing products.id.",
+      "help": {
+        "concept": "A FOREIGN KEY constraint only allows values that exist in the referenced table.",
+        "hint_1": "Check that product_id 2 exists in products before inserting.",
+        "hint_2": "Use INSERT INTO orders (id, product_id) VALUES (..., ...); with a valid product_id."
+      }
+    },
+    {
+      "id": "q3",
+      "kind": "code_input",
+      "title": "Try to insert an invalid foreign key value",
+      "prompt": "Attempt to insert a row into `orders` with `id` 2 and `product_id` 999. The `products` table does not have a product with `id` 999. What happens?",
+      "starterCode": "-- Try inserting a row with a non-existent product_id\n",
+      "solutionCode": "INSERT INTO orders (id, product_id) VALUES (2, 999);",
+      "datasetId": "products_catalog",
+      "recipeType": "sql_query",
+      "checkSql": "SELECT * FROM orders WHERE product_id = 999;",
+      "hint": "What does the FOREIGN KEY constraint do if the referenced value doesn't exist?",
+      "help": {
+        "concept": "A FOREIGN KEY constraint prevents inserting values that do not exist in the referenced table.",
+        "hint_1": "The database will reject the insert if product_id 999 is not in products.",
+        "hint_2": "The statement will fail due to the FOREIGN KEY constraint."
+      }
+    },
+    {
+      "id": "q4",
+      "kind": "multi_choice",
+      "title": "Benefits of using FOREIGN KEY constraints",
+      "prompt": "Which of the following are benefits of using FOREIGN KEY constraints? Select all that apply.",
+      "options": [
+        "a. Prevents orphaned records in related tables",
+        "b. Ensures data consistency between tables",
+        "c. Automatically increases performance of queries",
+        "d. Enforces referential integrity"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ],
+      "hint": "Think about how FOREIGN KEY affects data relationships and consistency.",
+      "help": {
+        "concept": "FOREIGN KEY constraints help keep data in sync and prevent invalid references.",
+        "hint_1": "They enforce rules about which values can appear in the referencing column.",
+        "hint_2": "They prevent orphaned records and enforce referential integrity, but do not guarantee faster queries."
+      }
+    },
+    {
+      "id": "q5",
+      "kind": "fill_blank_choice",
+      "title": "FOREIGN KEY references",
+      "prompt": "Fill in the blank: A FOREIGN KEY in one table must reference a column that is a ______ in another table.",
+      "template": "A FOREIGN KEY in one table must reference a column that is a ______ in another table.",
+      "choices": [
+        "primary key",
+        "text field",
+        "index",
+        "unique constraint"
+      ],
+      "correctValue": "primary key",
+      "hint": "What type of column is usually referenced by a FOREIGN KEY?",
+      "help": {
+        "concept": "A FOREIGN KEY typically references a primary key in another table to ensure uniqueness.",
+        "hint_1": "It's the main unique identifier for rows in the referenced table.",
+        "hint_2": "The referenced column must uniquely identify rows, usually as a primary key."
+      }
+    }
+  ]
+}

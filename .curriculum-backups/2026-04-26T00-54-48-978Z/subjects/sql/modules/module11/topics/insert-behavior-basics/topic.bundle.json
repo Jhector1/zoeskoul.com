@@ -1,0 +1,170 @@
+{
+  "topicId": "insert-behavior-basics",
+  "subjectSlug": "sql",
+  "moduleSlug": "sql_module_11",
+  "sectionSlug": "section_11_3",
+  "prefix": "sql11",
+  "minutes": 15,
+  "topic": {
+    "labelKey": "topics.sql.sql_module_11.insert-behavior-basics.label",
+    "summaryKey": "topics.sql.sql_module_11.insert-behavior-basics.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_11.insert-behavior-basics.cards.sketch0.title",
+      "sketchId": "sketch-1",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_11.insert-behavior-basics.cards.sketch1.title",
+      "sketchId": "sketch-2",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql.sql_module_11.insert-behavior-basics.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 2,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.sql.sql_module_11.insert-behavior-basics.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "ex_1",
+            "titleKey": "topics.sql.sql_module_11.insert-behavior-basics.projectSteps.ex_1.title",
+            "exerciseKey": "ex-1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "ex_2",
+            "titleKey": "topics.sql.sql_module_11.insert-behavior-basics.projectSteps.ex_2.title",
+            "exerciseKey": "ex-2",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "ex_3",
+            "titleKey": "topics.sql.sql_module_11.insert-behavior-basics.projectSteps.ex_3.title",
+            "exerciseKey": "ex-3",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch-1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_11.insert-behavior-basics.sketch-1.title",
+      "bodyKey": "sketches.sql.sql_module_11.insert-behavior-basics.sketch-1.bodyMarkdown"
+    },
+    {
+      "id": "sketch-2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_11.insert-behavior-basics.sketch-2.title",
+      "bodyKey": "sketches.sql.sql_module_11.insert-behavior-basics.sketch-2.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "ex-1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_11.insert-behavior-basics.quiz.ex-1",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "inventory_ops",
+        "resultShape": "table",
+        "solutionCode": "INSERT INTO inventory_items (name, category, price, status, is_test)\nVALUES ('Desk Mat', 'Accessories', 18.00, 'active', 0);"
+      }
+    },
+    {
+      "id": "ex-2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_11.insert-behavior-basics.quiz.ex-2",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "inventory_ops",
+        "resultShape": "table",
+        "solutionCode": "INSERT INTO inventory_items (name, category, price, status, is_test, notes)\nVALUES ('Sample Magnet', 'Decor', 2.25, 'draft', 1, NULL);"
+      }
+    },
+    {
+      "id": "ex-3",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_11.insert-behavior-basics.quiz.ex-3",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "inventory_ops",
+        "resultShape": "table",
+        "solutionCode": "INSERT INTO inventory_items (name, category, price)\nVALUES ('Test Item', 'Accessories', 5.00);"
+      }
+    },
+    {
+      "id": "ex-4",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_11.insert-behavior-basics.quiz.ex-4",
+      "optionIds": [
+        "a",
+        "b"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a"
+        ]
+      }
+    },
+    {
+      "id": "ex-5",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_11.insert-behavior-basics.quiz.ex-5",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "2026-02-01"
+      }
+    }
+  ]
+}

@@ -114,14 +114,14 @@
   "releasePlan": {
     "currentRelease": {
       "name": "current",
-      "startModuleNumber": 11,
-      "endModuleNumber": 11
+      "startModuleNumber": 12,
+      "endModuleNumber": 12
     },
     "releases": [
       {
         "name": "current",
-        "startModuleNumber": 11,
-        "endModuleNumber": 11
+        "startModuleNumber": 12,
+        "endModuleNumber": 12
       }
     ]
   },

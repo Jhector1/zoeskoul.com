@@ -1,4 +1,4 @@
-import type { PrismaClient } from "@prisma/client";
+import type { PrismaClient } from "@/lib/prisma";
 import type { NextResponse } from "next/server";
 import type { Actor } from "@/lib/practice/actor";
 

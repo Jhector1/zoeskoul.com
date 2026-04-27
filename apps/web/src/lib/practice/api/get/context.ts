@@ -1,4 +1,4 @@
-import type { PrismaClient } from "@prisma/client";
+import type { PrismaClient } from "@/lib/prisma";
 
 import type { GetParams } from "./schemas";
 import type { PracticeGetContext } from "./types";

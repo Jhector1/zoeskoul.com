@@ -1,7 +1,7 @@
 import {
     PracticeDifficulty as DbPracticeDifficulty,
     PracticeKind,
-} from "@prisma/client";
+} from "@zoeskoul/db";
 
 export function toPracticeKindOrThrow(kind: unknown): PracticeKind {
     const k = String(kind ?? "").trim() as PracticeKind;

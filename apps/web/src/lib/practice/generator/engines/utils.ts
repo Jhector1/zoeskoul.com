@@ -1,4 +1,4 @@
-import type { PracticeKind } from "@prisma/client";
+import type { PracticeKind } from "@zoeskoul/db";
 
 import type { RNG } from "@/lib/practice/generator/shared/rng";
 import type { GenOut } from "@/lib/practice/generator/shared/expected";
@@ -702,4 +702,3 @@ export function makeCodeInputOut(args: {
         expected: args.expected as GenOut<"code_input">["expected"],
     };
 }
-

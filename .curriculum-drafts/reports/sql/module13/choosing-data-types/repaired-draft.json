@@ -1,0 +1,106 @@
+{
+  "title": "Choosing data types",
+  "summary": "Learn how to choose appropriate data types for columns when designing SQL tables. Understand the impact of data types on storage, accuracy, and future queries using the products_catalog dataset.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch-1",
+      "title": "Why Data Types Matter",
+      "bodyMarkdown": "When creating a table in SQL, each column must be assigned a data type. Data types define what kind of data can be stored (such as numbers, text, or dates) and help the database optimize storage and enforce data integrity. For example, in the `products` table of the `products_catalog` dataset, the `price` column uses the `REAL` type for decimal numbers, while `name` uses `TEXT` for product names."
+    },
+    {
+      "id": "sketch-2",
+      "title": "Example: products Table",
+      "bodyMarkdown": "Here's the schema for the `products` table:\n\n```sql\nCREATE TABLE products (\n  id INTEGER PRIMARY KEY,\n  name TEXT NOT NULL,\n  category TEXT NOT NULL,\n  price REAL NOT NULL,\n  stock INTEGER NOT NULL,\n  created_at TEXT NOT NULL\n);\n```\n\nNotice how each column's data type matches the kind of data it stores. For example, `stock` is an `INTEGER` because it counts whole items, and `created_at` is `TEXT` to store date strings."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "code-1",
+      "kind": "code_input",
+      "title": "Create a table with appropriate data types",
+      "prompt": "Create a new table called `suppliers` with the following columns:\n- `id`: unique integer, primary key\n- `name`: supplier name, text, required\n- `contact_email`: email address, text, required\n- `rating`: supplier rating, decimal number (e.g., 4.5), required\nChoose the most appropriate SQL data types for each column.",
+      "starterCode": "-- Write your CREATE TABLE statement below",
+      "solutionCode": "CREATE TABLE suppliers (\n  id INTEGER PRIMARY KEY,\n  name TEXT NOT NULL,\n  contact_email TEXT NOT NULL,\n  rating REAL NOT NULL\n);",
+      "datasetId": "products_catalog",
+      "recipeType": "sql_query",
+      "hint": "Focus on the concept being tested.",
+      "help": {
+        "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+        "hint_1": "Eliminate choices or interpretations that do not match the task.",
+        "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+      }
+    },
+    {
+      "id": "code-2",
+      "kind": "code_input",
+      "title": "Add a new column with a suitable data type",
+      "prompt": "The `products` table needs a new column called `weight_grams` to store the weight of each product in grams (e.g., 250.0). Write an ALTER TABLE statement to add this column with the most appropriate data type.",
+      "starterCode": "-- Write your ALTER TABLE statement below",
+      "solutionCode": "ALTER TABLE products ADD COLUMN weight_grams REAL;",
+      "datasetId": "products_catalog",
+      "recipeType": "sql_query",
+      "hint": "Focus on the SQL task being asked for, not on copying final query text.",
+      "help": {
+        "concept": "Build the query from the operation the exercise is testing.",
+        "hint_1": "Think about which clauses or functions are required for the task.",
+        "hint_2": "Construct the query based on what result the exercise expects, not by repeating exact solution wording."
+      }
+    },
+    {
+      "id": "code-3",
+      "kind": "code_input",
+      "title": "Insert data using correct types",
+      "prompt": "Insert a new product into the `products` table with the following values:\n- id: 7\n- name: 'Watercolor Paper'\n- category: 'Art'\n- price: 15.25\n- stock: 40\n- created_at: '2026-03-01'\nMake sure each value matches the column's data type.",
+      "starterCode": "-- Write your INSERT statement below",
+      "solutionCode": "INSERT INTO products (id, name, category, price, stock, created_at) VALUES (7, 'Watercolor Paper', 'Art', 15.25, 40, '2026-03-01');",
+      "datasetId": "products_catalog",
+      "recipeType": "sql_query",
+      "hint": "Focus on the SQL task being asked for, not on copying final query text.",
+      "help": {
+        "concept": "Build the query from the operation the exercise is testing.",
+        "hint_1": "Think about which clauses or functions are required for the task.",
+        "hint_2": "Construct the query based on what result the exercise expects, not by repeating exact solution wording."
+      }
+    },
+    {
+      "id": "multi-1",
+      "kind": "multi_choice",
+      "title": "Which data types are appropriate?",
+      "prompt": "Which of the following data types are appropriate for the columns in the `products` table? Select all that apply.",
+      "options": [
+        "[object Object]",
+        "A command"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Think about the kind of data each column stores.",
+      "help": {
+        "concept": "Each column should use a data type that matches the kind of information it stores. For example, use INTEGER for counts, TEXT for strings, and REAL for decimal numbers.",
+        "hint_1": "Consider what type of data is stored in columns like price, name, and stock.",
+        "hint_2": "Some columns need to store text, some numbers, and some decimals."
+      }
+    },
+    {
+      "id": "fill-1",
+      "kind": "fill_blank_choice",
+      "title": "Choose the best data type for a date",
+      "prompt": "In the `products` table, which data type is used for the `created_at` column?",
+      "template": "The best data type for the `created_at` column is [blank].",
+      "choices": [
+        "TEXT",
+        "INTEGER",
+        "REAL",
+        "BOOLEAN"
+      ],
+      "correctValue": "TEXT",
+      "hint": "Look at the table schema and see how dates are stored.",
+      "help": {
+        "concept": "SQLite does not have a dedicated DATE type. Dates are often stored as the missing term in ISO format.",
+        "hint_1": "Check the CREATE TABLE statement for the products table.",
+        "hint_2": "The column is defined to store date strings."
+      }
+    }
+  ]
+}

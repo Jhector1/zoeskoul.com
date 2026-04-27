@@ -5,9 +5,8 @@ import { createHash } from "node:crypto";
 import {
     CodeProjectScopeKind,
     CodeProjectVisibility,
-    Prisma,
-    type PrismaClient,
-} from "@prisma/client";
+} from "@zoeskoul/db";
+import { Prisma, type PrismaClient } from "@/lib/prisma";
 
 type SaveProjectScopeInput = {
     kind?: CodeProjectScopeKind;

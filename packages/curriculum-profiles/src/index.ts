@@ -4,6 +4,8 @@ export * from "./shapes/index.js";
 
 export * from "./shared/profileServices.js";
 export * from "./shared/createProfileServices.js";
+export * from "./shared/validateGoldenTopicBundle.js";
+export * from "./base/codeInputExpected.js";
 
 export * from "./families/code/index.js";
 export * from "./families/query/index.js";

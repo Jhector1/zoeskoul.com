@@ -1,0 +1,169 @@
+{
+  "topicId": "foreign-key-review",
+  "subjectSlug": "sql",
+  "moduleSlug": "sql_module_14",
+  "sectionSlug": "section_14_2",
+  "prefix": "sql14",
+  "minutes": 15,
+  "topic": {
+    "labelKey": "topics.sql.sql_module_14.foreign-key-review.label",
+    "summaryKey": "topics.sql.sql_module_14.foreign-key-review.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_14.foreign-key-review.cards.sketch0.title",
+      "sketchId": "sk1",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_14.foreign-key-review.cards.sketch1.title",
+      "sketchId": "sk2",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_14.foreign-key-review.cards.sketch2.title",
+      "sketchId": "sk3",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql.sql_module_14.foreign-key-review.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.sql.sql_module_14.foreign-key-review.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "ci1",
+            "titleKey": "topics.sql.sql_module_14.foreign-key-review.projectSteps.ci1.title",
+            "exerciseKey": "ci1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sk1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_14.foreign-key-review.sk1.title",
+      "bodyKey": "sketches.sql.sql_module_14.foreign-key-review.sk1.bodyMarkdown"
+    },
+    {
+      "id": "sk2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_14.foreign-key-review.sk2.title",
+      "bodyKey": "sketches.sql.sql_module_14.foreign-key-review.sk2.bodyMarkdown"
+    },
+    {
+      "id": "sk3",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_14.foreign-key-review.sk3.title",
+      "bodyKey": "sketches.sql.sql_module_14.foreign-key-review.sk3.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "fb1",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_14.foreign-key-review.quiz.fb1",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "connect"
+      }
+    },
+    {
+      "id": "fb2",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_14.foreign-key-review.quiz.fb2",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "referential"
+      }
+    },
+    {
+      "id": "sc1",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_14.foreign-key-review.quiz.sc1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "mc1",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_14.foreign-key-review.quiz.mc1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "ci1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_14.foreign-key-review.quiz.ci1",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "CREATE TABLE featured_products (\n  id INTEGER PRIMARY KEY,\n  product_id INTEGER NOT NULL,\n  week_start TEXT NOT NULL,\n  FOREIGN KEY (product_id) REFERENCES products(id)\n);",
+        "checkSql": "SELECT name, sql FROM sqlite_master WHERE type = 'table' AND name = 'featured_products';"
+      }
+    }
+  ]
+}

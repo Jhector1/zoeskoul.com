@@ -131,6 +131,7 @@ function validateQuizEntry(
     id: string,
     entry: JsonObject,
     filePath: string,
+    label = "quiz",
 ): string[] {
     const issues: string[] = [];
 
@@ -139,44 +140,81 @@ function validateQuizEntry(
     const hint = asString(entry.hint);
     const help = asObject(entry.help);
 
-    if (!title) issues.push(`${filePath}: quiz.${id}.title is required`);
-    if (!prompt) issues.push(`${filePath}: quiz.${id}.prompt is required`);
-    if (!hint) issues.push(`${filePath}: quiz.${id}.hint is required`);
+    if (!title) issues.push(`${filePath}: ${label}.${id}.title is required`);
+    if (!prompt) issues.push(`${filePath}: ${label}.${id}.prompt is required`);
+    if (!hint) issues.push(`${filePath}: ${label}.${id}.hint is required`);
 
     if (!help) {
-        issues.push(`${filePath}: quiz.${id}.help is required`);
+        issues.push(`${filePath}: ${label}.${id}.help is required`);
     } else {
         if (!asString(help.concept)) {
-            issues.push(`${filePath}: quiz.${id}.help.concept is required`);
+            issues.push(`${filePath}: ${label}.${id}.help.concept is required`);
         }
         if (!asString(help.hint_1)) {
-            issues.push(`${filePath}: quiz.${id}.help.hint_1 is required`);
+            issues.push(`${filePath}: ${label}.${id}.help.hint_1 is required`);
         }
         if (!asString(help.hint_2)) {
-            issues.push(`${filePath}: quiz.${id}.help.hint_2 is required`);
+            issues.push(`${filePath}: ${label}.${id}.help.hint_2 is required`);
         }
     }
 
     return issues;
 }
 
+type QuizMessageContainer = {
+    label: string;
+    quiz: JsonObject;
+};
+
+function isQuizExerciseContainer(value: JsonObject): boolean {
+    return Object.values(value).some((entry) => {
+        const obj = asObject(entry);
+        return Boolean(obj && (asString(obj.prompt) || asObject(obj.help)));
+    });
+}
+
+function collectQuizMessageContainers(messages: JsonObject): QuizMessageContainer[] {
+    const containers: QuizMessageContainer[] = [];
+
+    const visit = (value: unknown, pathParts: string[]) => {
+        const obj = asObject(value);
+        if (!obj) return;
+
+        const quiz = asObject(obj.quiz);
+        if (quiz && isQuizExerciseContainer(quiz)) {
+            containers.push({
+                label: [...pathParts, "quiz"].join("."),
+                quiz,
+            });
+        }
+
+        for (const [key, child] of Object.entries(obj)) {
+            if (key === "quiz") continue;
+            if (asObject(child)) {
+                visit(child, [...pathParts, key]);
+            }
+        }
+    };
+
+    visit(messages, []);
+
+    return containers;
+}
+
 function validateNestedMessageFile(messages: JsonObject, filePath: string): string[] {
     const issues: string[] = [];
 
-    const quiz = asObject(messages.quiz);
-    if (!quiz) {
-        issues.push(`${filePath}: top-level "quiz" object is required`);
-        return issues;
+    for (const container of collectQuizMessageContainers(messages)) {
+        for (const [id, value] of Object.entries(container.quiz)) {
+            const entry = asObject(value);
+            if (!entry) {
+                issues.push(`${filePath}: ${container.label}.${id} must be an object`);
+                continue;
+            }
+            issues.push(...validateQuizEntry(id, entry, filePath, container.label));
+        }
     }
 
-    for (const [id, value] of Object.entries(quiz)) {
-        const entry = asObject(value);
-        if (!entry) {
-            issues.push(`${filePath}: quiz.${id} must be an object`);
-            continue;
-        }
-        issues.push(...validateQuizEntry(id, entry, filePath));
-    }
 
     return issues;
 }
@@ -188,42 +226,46 @@ function includesWholeAnswer(text: string, answers: string[]) {
 
 function validateHintsAgainstMessageFile(messages: JsonObject, filePath: string): string[] {
     const issues: string[] = [];
-    const quiz = asObject(messages.quiz);
-    if (!quiz) return issues;
 
-    for (const [id, value] of Object.entries(quiz)) {
-        const entry = asObject(value);
-        if (!entry) continue;
+    for (const container of collectQuizMessageContainers(messages)) {
+        for (const [id, value] of Object.entries(container.quiz)) {
+            const entry = asObject(value);
+            if (!entry) continue;
 
-        const hint = asString(entry.hint) ?? "";
-        const help = asObject(entry.help) ?? {};
-        const supportTexts = [
-            hint,
-            asString(help.concept) ?? "",
-            asString(help.hint_1) ?? "",
-            asString(help.hint_2) ?? "",
-        ];
+            const hint = asString(entry.hint) ?? "";
+            const help = asObject(entry.help) ?? {};
+            const supportTexts = [
+                hint,
+                asString(help.concept) ?? "",
+                asString(help.hint_1) ?? "",
+                asString(help.hint_2) ?? "",
+            ];
 
-        const options = asObject(entry.options);
-        if (options) {
-            const answerTexts = Object.values(options)
-                .map((v) => asString(v) ?? "")
-                .filter(Boolean);
+            const options = asObject(entry.options);
+            if (options) {
+                const answerTexts = Object.values(options)
+                    .map((v) => asString(v) ?? "")
+                    .filter(Boolean);
 
-            for (const text of supportTexts) {
-                if (includesWholeAnswer(text, answerTexts)) {
-                    issues.push(`${filePath}: hint may reveal option text in quiz.${id}`);
-                    break;
+                for (const text of supportTexts) {
+                    if (includesWholeAnswer(text, answerTexts)) {
+                        issues.push(
+                            `${filePath}: hint may reveal option text in ${container.label}.${id}`,
+                        );
+                        break;
+                    }
                 }
             }
-        }
 
-        const correct = asString(entry.correct);
-        if (correct) {
-            for (const text of supportTexts) {
-                if (text.toLowerCase().includes(correct.toLowerCase())) {
-                    issues.push(`${filePath}: hint reveals fill-blank answer in quiz.${id}`);
-                    break;
+            const correct = asString(entry.correct);
+            if (correct) {
+                for (const text of supportTexts) {
+                    if (text.toLowerCase().includes(correct.toLowerCase())) {
+                        issues.push(
+                            `${filePath}: hint reveals fill-blank answer in ${container.label}.${id}`,
+                        );
+                        break;
+                    }
                 }
             }
         }

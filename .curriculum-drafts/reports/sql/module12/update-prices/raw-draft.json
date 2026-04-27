@@ -1,0 +1,110 @@
+{
+  "title": "Update prices",
+  "summary": "Practice updating prices in the inventory_items table using safe SQL habits. Learn to preview affected rows, use WHERE clauses, and avoid accidental data changes.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sk1",
+      "title": "Preview Before Update",
+      "bodyMarkdown": "Before updating prices in the `inventory_items` table, always preview the rows you plan to change. For example, to see all items in the 'Accessories' category:\n\n```sql\nSELECT id, name, price FROM inventory_items WHERE category = 'Accessories';\n```\n\nThis helps you confirm which rows will be affected before running an UPDATE."
+    },
+    {
+      "id": "sk2",
+      "title": "Updating Prices Safely",
+      "bodyMarkdown": "To update prices, use the `UPDATE` statement with a `WHERE` clause. For example, to increase the price of all 'Kitchen' items by $1:\n\n```sql\nUPDATE inventory_items SET price = price + 1 WHERE category = 'Kitchen';\n```\n\nAlways include a `WHERE` clause to avoid changing every row by mistake."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "q1",
+      "kind": "code_input",
+      "title": "Update price for a specific item",
+      "prompt": "Increase the price of the item named 'Sticker Pack' by $2 in the inventory_items table.",
+      "hint": "Use UPDATE with SET and a WHERE clause filtering by name.",
+      "help": {
+        "concept": "To update a specific row, use UPDATE with a WHERE clause to target the correct item.",
+        "hint_1": "Set price = price + 2 where name matches 'Sticker Pack'.",
+        "hint_2": "Make sure to update only the row where name is 'Sticker Pack'."
+      },
+      "starterCode": "-- Write your UPDATE statement here",
+      "solutionCode": "UPDATE inventory_items SET price = price + 2 WHERE name = 'Sticker Pack';",
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "q2",
+      "kind": "code_input",
+      "title": "Update prices for a category",
+      "prompt": "Set the price of all items in the 'Decor' category to 20.00.",
+      "hint": "Use UPDATE with SET and filter by category.",
+      "help": {
+        "concept": "You can update multiple rows by filtering with a WHERE clause on a column value.",
+        "hint_1": "Set price to 20.00 where category is 'Decor'.",
+        "hint_2": "Make sure only 'Decor' items are affected."
+      },
+      "starterCode": "-- Write your UPDATE statement here",
+      "solutionCode": "UPDATE inventory_items SET price = 20.00 WHERE category = 'Decor';",
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "q3",
+      "kind": "code_input",
+      "title": "Update prices for test items only",
+      "prompt": "Reduce the price by $1 for all items marked as test items (is_test = 1).",
+      "hint": "Use UPDATE with SET and filter using is_test.",
+      "help": {
+        "concept": "To update only test items, use a WHERE clause with is_test = 1.",
+        "hint_1": "Subtract 1 from price where is_test is 1.",
+        "hint_2": "Only rows with is_test = 1 should be updated."
+      },
+      "starterCode": "-- Write your UPDATE statement here",
+      "solutionCode": "UPDATE inventory_items SET price = price - 1 WHERE is_test = 1;",
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "q4",
+      "kind": "multi_choice",
+      "title": "Safe update practices",
+      "prompt": "Which of the following are good practices when updating prices in a table? Select all that apply.",
+      "hint": "Think about how to avoid accidental changes.",
+      "help": {
+        "concept": "Previewing and filtering updates helps prevent mistakes. Avoid updating all rows unless intentional.",
+        "hint_1": "Preview with SELECT and use WHERE to target updates.",
+        "hint_2": "Avoid running UPDATE without WHERE unless you want to change every row."
+      },
+      "options": [
+        "a. Preview affected rows with SELECT before running UPDATE",
+        "b. Always use a WHERE clause to target specific rows",
+        "c. Run UPDATE without WHERE to save time",
+        "d. Double-check your filter conditions before executing UPDATE"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ]
+    },
+    {
+      "id": "q5",
+      "kind": "fill_blank_choice",
+      "title": "Fill in the blank: WHERE clause importance",
+      "prompt": "Fill in the blank to complete the sentence: You should almost always use a ______ clause when running an UPDATE statement.",
+      "hint": "This clause limits which rows are affected.",
+      "help": {
+        "concept": "The WHERE clause specifies which rows to update, preventing accidental changes to all rows.",
+        "hint_1": "It's the clause that filters rows in UPDATE and SELECT.",
+        "hint_2": "Without this clause, every row in the table will be updated."
+      },
+      "template": "You should almost always use a ______ clause when running an UPDATE statement.",
+      "choices": [
+        "WHERE",
+        "ORDER BY",
+        "GROUP BY",
+        "HAVING"
+      ],
+      "correctValue": "WHERE"
+    }
+  ]
+}

@@ -55,6 +55,54 @@ import optionalColumnsJson from "./modules/module11/topics/optional-columns/topi
 import readingInsertedResultsJson from "./modules/module11/topics/reading-inserted-results/topic.bundle.json";
 import whatInsertIntoDoesJson from "./modules/module11/topics/what-insert-into-does/topic.bundle.json";
 import whyColumnListsMatterJson from "./modules/module11/topics/why-column-lists-matter/topic.bundle.json";
+import backupsAndCautionJson from "./modules/module12/topics/backups-and-caution/topic.bundle.json";
+import changeStatusesJson from "./modules/module12/topics/change-statuses/topic.bundle.json";
+import changingMultipleColumnsJson from "./modules/module12/topics/changing-multiple-columns/topic.bundle.json";
+import changingOneColumnJson from "./modules/module12/topics/changing-one-column/topic.bundle.json";
+import dangersOfMissingWhereJson from "./modules/module12/topics/dangers-of-missing-where/topic.bundle.json";
+import deleteTestRowsJson from "./modules/module12/topics/delete-test-rows/topic.bundle.json";
+import deletingSelectedRowsJson from "./modules/module12/topics/deleting-selected-rows/topic.bundle.json";
+import previewBeforeUpdateDeleteJson from "./modules/module12/topics/preview-before-update-delete/topic.bundle.json";
+import safeDataModificationWorkflowJson from "./modules/module12/topics/safe-data-modification-workflow/topic.bundle.json";
+import safeDeleteHabitsJson from "./modules/module12/topics/safe-delete-habits/topic.bundle.json";
+import thinkingBeforeChangingDataJson from "./modules/module12/topics/thinking-before-changing-data/topic.bundle.json";
+import updatePricesJson from "./modules/module12/topics/update-prices/topic.bundle.json";
+import usingSelectFirstJson from "./modules/module12/topics/using-select-first/topic.bundle.json";
+import whatDeleteDoesJson from "./modules/module12/topics/what-delete-does/topic.bundle.json";
+import whatUpdateDoesJson from "./modules/module12/topics/what-update-does/topic.bundle.json";
+import whyWhereIsCriticalJson from "./modules/module12/topics/why-where-is-critical/topic.bundle.json";
+import choosingColumnNamesJson from "./modules/module13/topics/choosing-column-names/topic.bundle.json";
+import choosingDataTypesJson from "./modules/module13/topics/choosing-data-types/topic.bundle.json";
+import createAProductsTableJson from "./modules/module13/topics/create-a-products-table/topic.bundle.json";
+import createAStudentsTableJson from "./modules/module13/topics/create-a-students-table/topic.bundle.json";
+import createAnOrdersTableJson from "./modules/module13/topics/create-an-orders-table/topic.bundle.json";
+import datesAndTimesJson from "./modules/module13/topics/dates-and-times/topic.bundle.json";
+import decimalNumbersJson from "./modules/module13/topics/decimal-numbers/topic.bundle.json";
+import designingForClarityJson from "./modules/module13/topics/designing-for-clarity/topic.bundle.json";
+import foreignKeyJson from "./modules/module13/topics/foreign-key/topic.bundle.json";
+import integersJson from "./modules/module13/topics/integers/topic.bundle.json";
+import linkTablesTogetherJson from "./modules/module13/topics/link-tables-together/topic.bundle.json";
+import notNullJson from "./modules/module13/topics/not-null/topic.bundle.json";
+import primaryKeyJson from "./modules/module13/topics/primary-key/topic.bundle.json";
+import textTypesJson from "./modules/module13/topics/text-types/topic.bundle.json";
+import uniqueJson from "./modules/module13/topics/unique/topic.bundle.json";
+import whatCreateTableDoesJson from "./modules/module13/topics/what-create-table-does/topic.bundle.json";
+import avoidingDuplicateDataJson from "./modules/module14/topics/avoiding-duplicate-data/topic.bundle.json";
+import customerAndOrderModelJson from "./modules/module14/topics/customer-and-order-model/topic.bundle.json";
+import designForFutureQueriesJson from "./modules/module14/topics/design-for-future-queries/topic.bundle.json";
+import foreignKeyReviewJson from "./modules/module14/topics/foreign-key-review/topic.bundle.json";
+import keepTablesFocusedJson from "./modules/module14/topics/keep-tables-focused/topic.bundle.json";
+import linkingTablesProperlyJson from "./modules/module14/topics/linking-tables-properly/topic.bundle.json";
+import manyToManyIdeaJson from "./modules/module14/topics/many-to-many-idea/topic.bundle.json";
+import oneToManyJson from "./modules/module14/topics/one-to-many/topic.bundle.json";
+import oneToOneJson from "./modules/module14/topics/one-to-one/topic.bundle.json";
+import primaryKeyReviewJson from "./modules/module14/topics/primary-key-review/topic.bundle.json";
+import relatedDataJson from "./modules/module14/topics/related-data/topic.bundle.json";
+import separateRepeatedInformationJson from "./modules/module14/topics/separate-repeated-information/topic.bundle.json";
+import storeAndProductModelJson from "./modules/module14/topics/store-and-product-model/topic.bundle.json";
+import studentAndEnrollmentModelJson from "./modules/module14/topics/student-and-enrollment-model/topic.bundle.json";
+import turnDesignIntoSqlTablesJson from "./modules/module14/topics/turn-design-into-sql-tables/topic.bundle.json";
+import useIdsConsistentlyJson from "./modules/module14/topics/use-ids-consistently/topic.bundle.json";
 import andJson from "./modules/module2/topics/and/topic.bundle.json";
 import avoidingFilteringMistakesJson from "./modules/module2/topics/avoiding-filtering-mistakes/topic.bundle.json";
 import choosingTheRightComparisonJson from "./modules/module2/topics/choosing-the-right-comparison/topic.bundle.json";
@@ -156,6 +204,54 @@ const optionalColumns = optionalColumnsJson as SlimTopicManifest;
 const readingInsertedResults = readingInsertedResultsJson as SlimTopicManifest;
 const whatInsertIntoDoes = whatInsertIntoDoesJson as SlimTopicManifest;
 const whyColumnListsMatter = whyColumnListsMatterJson as SlimTopicManifest;
+const backupsAndCaution = backupsAndCautionJson as SlimTopicManifest;
+const changeStatuses = changeStatusesJson as SlimTopicManifest;
+const changingMultipleColumns = changingMultipleColumnsJson as SlimTopicManifest;
+const changingOneColumn = changingOneColumnJson as SlimTopicManifest;
+const dangersOfMissingWhere = dangersOfMissingWhereJson as SlimTopicManifest;
+const deleteTestRows = deleteTestRowsJson as SlimTopicManifest;
+const deletingSelectedRows = deletingSelectedRowsJson as SlimTopicManifest;
+const previewBeforeUpdateDelete = previewBeforeUpdateDeleteJson as SlimTopicManifest;
+const safeDataModificationWorkflow = safeDataModificationWorkflowJson as SlimTopicManifest;
+const safeDeleteHabits = safeDeleteHabitsJson as SlimTopicManifest;
+const thinkingBeforeChangingData = thinkingBeforeChangingDataJson as SlimTopicManifest;
+const updatePrices = updatePricesJson as SlimTopicManifest;
+const usingSelectFirst = usingSelectFirstJson as SlimTopicManifest;
+const whatDeleteDoes = whatDeleteDoesJson as SlimTopicManifest;
+const whatUpdateDoes = whatUpdateDoesJson as SlimTopicManifest;
+const whyWhereIsCritical = whyWhereIsCriticalJson as SlimTopicManifest;
+const choosingColumnNames = choosingColumnNamesJson as SlimTopicManifest;
+const choosingDataTypes = choosingDataTypesJson as SlimTopicManifest;
+const createAProductsTable = createAProductsTableJson as SlimTopicManifest;
+const createAStudentsTable = createAStudentsTableJson as SlimTopicManifest;
+const createAnOrdersTable = createAnOrdersTableJson as SlimTopicManifest;
+const datesAndTimes = datesAndTimesJson as SlimTopicManifest;
+const decimalNumbers = decimalNumbersJson as SlimTopicManifest;
+const designingForClarity = designingForClarityJson as SlimTopicManifest;
+const foreignKey = foreignKeyJson as SlimTopicManifest;
+const integers = integersJson as SlimTopicManifest;
+const linkTablesTogether = linkTablesTogetherJson as SlimTopicManifest;
+const notNull = notNullJson as SlimTopicManifest;
+const primaryKey = primaryKeyJson as SlimTopicManifest;
+const textTypes = textTypesJson as SlimTopicManifest;
+const unique = uniqueJson as SlimTopicManifest;
+const whatCreateTableDoes = whatCreateTableDoesJson as SlimTopicManifest;
+const avoidingDuplicateData = avoidingDuplicateDataJson as SlimTopicManifest;
+const customerAndOrderModel = customerAndOrderModelJson as SlimTopicManifest;
+const designForFutureQueries = designForFutureQueriesJson as SlimTopicManifest;
+const foreignKeyReview = foreignKeyReviewJson as SlimTopicManifest;
+const keepTablesFocused = keepTablesFocusedJson as SlimTopicManifest;
+const linkingTablesProperly = linkingTablesProperlyJson as SlimTopicManifest;
+const manyToManyIdea = manyToManyIdeaJson as SlimTopicManifest;
+const oneToMany = oneToManyJson as SlimTopicManifest;
+const oneToOne = oneToOneJson as SlimTopicManifest;
+const primaryKeyReview = primaryKeyReviewJson as SlimTopicManifest;
+const relatedData = relatedDataJson as SlimTopicManifest;
+const separateRepeatedInformation = separateRepeatedInformationJson as SlimTopicManifest;
+const storeAndProductModel = storeAndProductModelJson as SlimTopicManifest;
+const studentAndEnrollmentModel = studentAndEnrollmentModelJson as SlimTopicManifest;
+const turnDesignIntoSqlTables = turnDesignIntoSqlTablesJson as SlimTopicManifest;
+const useIdsConsistently = useIdsConsistentlyJson as SlimTopicManifest;
 const and = andJson as SlimTopicManifest;
 const avoidingFilteringMistakes = avoidingFilteringMistakesJson as SlimTopicManifest;
 const choosingTheRightComparison = choosingTheRightComparisonJson as SlimTopicManifest;
@@ -257,6 +353,54 @@ export const TOPIC_MANIFESTS: TopicManifestRefMap = {
   "reading-inserted-results": readingInsertedResults,
   "what-insert-into-does": whatInsertIntoDoes,
   "why-column-lists-matter": whyColumnListsMatter,
+  "backups-and-caution": backupsAndCaution,
+  "change-statuses": changeStatuses,
+  "changing-multiple-columns": changingMultipleColumns,
+  "changing-one-column": changingOneColumn,
+  "dangers-of-missing-where": dangersOfMissingWhere,
+  "delete-test-rows": deleteTestRows,
+  "deleting-selected-rows": deletingSelectedRows,
+  "preview-before-update-delete": previewBeforeUpdateDelete,
+  "safe-data-modification-workflow": safeDataModificationWorkflow,
+  "safe-delete-habits": safeDeleteHabits,
+  "thinking-before-changing-data": thinkingBeforeChangingData,
+  "update-prices": updatePrices,
+  "using-select-first": usingSelectFirst,
+  "what-delete-does": whatDeleteDoes,
+  "what-update-does": whatUpdateDoes,
+  "why-where-is-critical": whyWhereIsCritical,
+  "choosing-column-names": choosingColumnNames,
+  "choosing-data-types": choosingDataTypes,
+  "create-a-products-table": createAProductsTable,
+  "create-a-students-table": createAStudentsTable,
+  "create-an-orders-table": createAnOrdersTable,
+  "dates-and-times": datesAndTimes,
+  "decimal-numbers": decimalNumbers,
+  "designing-for-clarity": designingForClarity,
+  "foreign-key": foreignKey,
+  "integers": integers,
+  "link-tables-together": linkTablesTogether,
+  "not-null": notNull,
+  "primary-key": primaryKey,
+  "text-types": textTypes,
+  "unique": unique,
+  "what-create-table-does": whatCreateTableDoes,
+  "avoiding-duplicate-data": avoidingDuplicateData,
+  "customer-and-order-model": customerAndOrderModel,
+  "design-for-future-queries": designForFutureQueries,
+  "foreign-key-review": foreignKeyReview,
+  "keep-tables-focused": keepTablesFocused,
+  "linking-tables-properly": linkingTablesProperly,
+  "many-to-many-idea": manyToManyIdea,
+  "one-to-many": oneToMany,
+  "one-to-one": oneToOne,
+  "primary-key-review": primaryKeyReview,
+  "related-data": relatedData,
+  "separate-repeated-information": separateRepeatedInformation,
+  "store-and-product-model": storeAndProductModel,
+  "student-and-enrollment-model": studentAndEnrollmentModel,
+  "turn-design-into-sql-tables": turnDesignIntoSqlTables,
+  "use-ids-consistently": useIdsConsistently,
   "and": and,
   "avoiding-filtering-mistakes": avoidingFilteringMistakes,
   "choosing-the-right-comparison": choosingTheRightComparison,

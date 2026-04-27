@@ -1,0 +1,173 @@
+{
+  "topicId": "choosing-data-types",
+  "subjectSlug": "sql",
+  "moduleSlug": "sql_module_13",
+  "sectionSlug": "section_13_1",
+  "prefix": "sql13",
+  "minutes": 15,
+  "topic": {
+    "labelKey": "topics.sql.sql_module_13.choosing-data-types.label",
+    "summaryKey": "topics.sql.sql_module_13.choosing-data-types.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_13.choosing-data-types.cards.sketch0.title",
+      "sketchId": "sketch-1",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_13.choosing-data-types.cards.sketch1.title",
+      "sketchId": "sketch-2",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql.sql_module_13.choosing-data-types.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 2,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.sql.sql_module_13.choosing-data-types.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "code_1",
+            "titleKey": "topics.sql.sql_module_13.choosing-data-types.projectSteps.code_1.title",
+            "exerciseKey": "code-1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "code_2",
+            "titleKey": "topics.sql.sql_module_13.choosing-data-types.projectSteps.code_2.title",
+            "exerciseKey": "code-2",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "code_3",
+            "titleKey": "topics.sql.sql_module_13.choosing-data-types.projectSteps.code_3.title",
+            "exerciseKey": "code-3",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch-1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_13.choosing-data-types.sketch-1.title",
+      "bodyKey": "sketches.sql.sql_module_13.choosing-data-types.sketch-1.bodyMarkdown"
+    },
+    {
+      "id": "sketch-2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_13.choosing-data-types.sketch-2.title",
+      "bodyKey": "sketches.sql.sql_module_13.choosing-data-types.sketch-2.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "code-1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_13.choosing-data-types.quiz.code-1",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "CREATE TABLE suppliers (\n  id INTEGER PRIMARY KEY,\n  name TEXT NOT NULL,\n  contact_email TEXT NOT NULL,\n  rating REAL NOT NULL\n);",
+        "checkSql": "SELECT name, sql FROM sqlite_master WHERE type = 'table' AND name = 'suppliers';"
+      }
+    },
+    {
+      "id": "code-2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_13.choosing-data-types.quiz.code-2",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "ALTER TABLE products ADD COLUMN weight_grams REAL;",
+        "checkSql": "SELECT name, sql FROM sqlite_master WHERE type = 'table' AND name = 'products';"
+      }
+    },
+    {
+      "id": "code-3",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_13.choosing-data-types.quiz.code-3",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "INSERT INTO products (id, name, category, price, stock, created_at) VALUES (7, 'Watercolor Paper', 'Art', 15.25, 40, '2026-03-01');",
+        "checkSql": "SELECT * FROM \"products\" ORDER BY 1;"
+      }
+    },
+    {
+      "id": "multi-1",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_13.choosing-data-types.quiz.multi-1",
+      "optionIds": [
+        "a",
+        "b"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a"
+        ]
+      }
+    },
+    {
+      "id": "fill-1",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_13.choosing-data-types.quiz.fill-1",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "TEXT"
+      }
+    }
+  ]
+}

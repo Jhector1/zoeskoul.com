@@ -1,4 +1,4 @@
-import type { XpSourceType } from "@prisma/client";
+import type { XpSourceType } from "@zoeskoul/db";
 
 export type GamificationAwardSourceType = Extract<
     XpSourceType,

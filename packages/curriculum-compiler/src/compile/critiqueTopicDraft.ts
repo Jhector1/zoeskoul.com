@@ -122,6 +122,7 @@ export async function critiqueTopicDraft(args: {
     const review = await reviewPreparedTopicDraft({
         seed,
         draft: repairedDraft,
+        topicBundle: saved.topicBundle as any,
         profileServices,
     });
 
@@ -133,6 +134,7 @@ export async function critiqueTopicDraft(args: {
         repairReport: saved.repairReport,
         critiqueReport: review.critiqueReport,
         semanticReport: review.semanticReport,
+        goldenReport: review.goldenReport,
         topicBundle: saved.topicBundle,
     });
 
@@ -160,5 +162,6 @@ export async function critiqueTopicDraft(args: {
         repairReport: saved.repairReport,
         critiqueReport: review.critiqueReport,
         semanticReport: review.semanticReport,
+        goldenReport: review.goldenReport,
     };
 }

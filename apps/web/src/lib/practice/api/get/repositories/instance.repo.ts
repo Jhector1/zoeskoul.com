@@ -1,9 +1,9 @@
-import type { PrismaClient } from "@prisma/client";
+import type { PrismaClient } from "@/lib/prisma";
 import {
     PracticeDifficulty as DbPracticeDifficulty,
     PracticeKind,
     PracticePurpose,
-} from "@prisma/client";
+} from "@zoeskoul/db";
 
 import { toDbTopicSlug } from "@/lib/practice/topicSlugs";
 import type { Difficulty, Exercise, TopicSlug } from "@/lib/practice/types";

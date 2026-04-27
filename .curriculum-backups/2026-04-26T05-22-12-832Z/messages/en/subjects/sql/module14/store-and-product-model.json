@@ -1,0 +1,129 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_14": {
+        "store-and-product-model": {
+          "label": "Store and product model",
+          "summary": "Explore how to model stores and products using relational database design principles. Learn to identify relationships, reduce duplication, and structure tables for clarity and efficiency.",
+          "cards": {
+            "sketch0": {
+              "title": "Why separate stores and products?"
+            },
+            "sketch1": {
+              "title": "Example: Products table"
+            },
+            "sketch2": {
+              "title": "One-to-many vs. many-to-many"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Practice"
+            }
+          },
+          "projectSteps": {
+            "code_1": {
+              "title": "Querying products by category"
+            }
+          },
+          "quiz": {
+            "fill-blank-1": {
+              "title": "Identify the relationship type",
+              "prompt": "If each product can be sold by multiple stores, and each store can sell multiple products, what type of relationship is this?",
+              "hint": "Think about whether both sides can have many connections.",
+              "help": {
+                "concept": "A the missing term relationship occurs when multiple records in one table relate to multiple records in another.",
+                "hint_1": "If both stores and products can be linked to many of each other, it's not one-to-many.",
+                "hint_2": "This is the relationship where you need a join table to connect both sides."
+              },
+              "template": "This is a ___ relationship.",
+              "choices": [
+                "one-to-one",
+                "one-to-many",
+                "many-to-many",
+                "self-referencing"
+              ]
+            },
+            "fill-blank-2": {
+              "title": "Purpose of separating tables",
+              "prompt": "Why do we create separate tables for stores and products instead of combining all information in one table?",
+              "hint": "Think about what happens if you repeat the same information in many rows.",
+              "help": {
+                "concept": "Separating tables reduces redundancy and makes updates easier.",
+                "hint_1": "Combining all info in one table would mean repeating product or store details.",
+                "hint_2": "The main goal is to avoid having the same data in multiple places."
+              },
+              "template": "We separate tables to avoid ___ data.",
+              "choices": [
+                "duplicating",
+                "losing",
+                "encrypting",
+                "indexing"
+              ]
+            },
+            "single-1": {
+              "title": "Choosing the best table design",
+              "prompt": "Which table design best supports tracking which products are sold by which stores?",
+              "hint": "Think about how to connect stores and products efficiently.",
+              "help": {
+                "concept": "A join table allows you to represent many-to-many relationships between stores and products.",
+                "hint_1": "A single table would repeat a lot of information.",
+                "hint_2": "The best design uses separate tables and a join table to link them."
+              },
+              "options": {
+                "a": "[object Object]",
+                "b": "A command"
+              }
+            },
+            "multi-1": {
+              "title": "Benefits of normalization",
+              "prompt": "Which of the following are benefits of separating stores and products into different tables? (Choose all that apply.)",
+              "hint": "Think about how normalization affects data quality and query flexibility.",
+              "help": {
+                "concept": "Normalization reduces redundancy, simplifies updates, and enables complex queries.",
+                "hint_1": "Look for options that mention reducing repetition or making changes easier.",
+                "hint_2": "Normalization should not increase errors; it should help prevent them."
+              },
+              "options": {
+                "a": "[object Object]",
+                "b": "A command"
+              }
+            },
+            "code-1": {
+              "title": "Querying products by category",
+              "prompt": "Write a SQL query to select the names and prices of all products in the 'Art' category from the products table.",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+                "hint_1": "Eliminate choices or interpretations that do not match the task.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "starterCode": "-- Write your SQL query below"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_14": {
+        "store-and-product-model": {
+          "sketch-1": {
+            "title": "Why separate stores and products?",
+            "bodyMarkdown": "In a relational database, it's important to avoid repeating the same information in multiple places. For example, if a store sells many products, and each product can be sold by many stores, storing all the details in one table would lead to lots of duplication. Instead, we create separate tables for **stores** and **products**. This makes updates easier and keeps the data clean."
+          },
+          "sketch-2": {
+            "title": "Example: Products table",
+            "bodyMarkdown": "Here's a sample `products` table from our art store database:\n\n| id | name              | category    | price  | stock | created_at  |\n|----|-------------------|-------------|--------|-------|-------------|\n| 1  | Sketchbook        | Art         | 12.99  | 25    | 2026-01-10  |\n| 2  | Acrylic Paint Set | Art         | 24.50  | 10    | 2026-02-02  |\n| 3  | Desk Lamp         | Home        | 39.99  | 8     | 2025-12-20  |\n\nEach row represents a single product. If we wanted to track which store sells which product, we'd need another table to show that relationship."
+          },
+          "sketch-3": {
+            "title": "One-to-many vs. many-to-many",
+            "bodyMarkdown": "A **one-to-many** relationship means one record in a table can be related to many records in another table (e.g., one store has many products). A **many-to-many** relationship means records in both tables can relate to many records in the other (e.g., many stores can sell many products). In SQL, we use a third table (a 'join table') to represent many-to-many relationships."
+          }
+        }
+      }
+    }
+  }
+}

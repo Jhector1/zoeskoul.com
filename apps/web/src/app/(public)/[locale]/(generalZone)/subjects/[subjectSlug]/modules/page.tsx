@@ -6,6 +6,7 @@ import { auth } from "@/lib/auth";
 import type { Actor } from "@/lib/practice/actor";
 import { getAccessSnapshot } from "@/lib/access/accessSnapshot";
 import { resolveModuleAccess } from "@/lib/access/resolveModuleAccess";
+import { resolvePrivilegedLearningAccess } from "@/lib/access/resolvePrivilegedLearningAccess";
 import {
   getResolvedSectionPresentationMap,
   getResolvedSubjectModulesFromManifest,
@@ -38,14 +39,10 @@ export default async function SubjectModulesPage({
   const userId: string | null = sessionUser?.id ?? null;
   const email: string | null = sessionUser?.email ?? null;
 
-  const user = userId
-      ? await prisma.user.findUnique({ where: { id: userId }, select: { roles: true } })
-      : email
-          ? await prisma.user.findUnique({ where: { email }, select: { roles: true } })
-          : null;
-
-  const roles: string[] = (user as any)?.roles ?? [];
-  const canUnlockAll = roles.includes("teacher") || roles.includes("admin");
+  const { canUnlockAll } = await resolvePrivilegedLearningAccess({
+    userId,
+    email,
+  });
 
   const actor: Actor = { userId, guestId: null };
 

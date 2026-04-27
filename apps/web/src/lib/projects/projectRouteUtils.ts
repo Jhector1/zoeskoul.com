@@ -1,8 +1,8 @@
 // src/lib/projects/projectRouteUtils.ts
 import { NextResponse } from "next/server";
-import { CodeProjectScopeKind, CodeProjectVisibility, Prisma } from "@prisma/client";
+import { CodeProjectScopeKind, CodeProjectVisibility } from "@zoeskoul/db";
 
-import { prisma } from "@/lib/prisma";
+import { Prisma, prisma } from "@/lib/prisma";
 import { checkIdeCapability } from "@/lib/access/ideCapabilityServer";
 import { getActor } from "@/lib/practice/actor";
 

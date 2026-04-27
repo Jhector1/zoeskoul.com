@@ -235,4 +235,98 @@ describe("validateSqlDatasetConsistency", () => {
 
         expect(issues).toEqual([]);
     });
+
+    it("flags CREATE TABLE against a table that already exists in the effective dataset", () => {
+        const issues = validateSqlDatasetConsistency({
+            seed: makeSeed({
+                moduleDataset: {
+                    id: "products_catalog",
+                    schemaSql: `
+CREATE TABLE products (
+  id INTEGER PRIMARY KEY,
+  name TEXT NOT NULL
+);
+                    `.trim(),
+                    tableSnapshots: {},
+                },
+                moduleRuntimeDefaults: {
+                    kind: "sql",
+                    datasetId: "products_catalog",
+                    fixedSqlDialect: "sqlite",
+                    resultShape: "table",
+                },
+            }),
+            draft: makeDraft({
+                quizDraft: [
+                    {
+                        id: "code-1",
+                        kind: "code_input",
+                        title: "Create products again",
+                        prompt: "Write a query.",
+                        hint: "Use SQL.",
+                        help: {
+                            concept: "Use SQL.",
+                            hint_1: "Write a query.",
+                            hint_2: "Return valid SQL.",
+                        },
+                        starterCode: "CREATE TABLE products (id INTEGER PRIMARY KEY);",
+                        solutionCode: "CREATE TABLE products (id INTEGER PRIMARY KEY);",
+                        recipeType: "sql_query",
+                        datasetId: "products_catalog",
+                    },
+                ],
+            }),
+        });
+
+        expect(issues).toContain(
+            'Exercise code-1 creates table "products" even though it already exists in effective dataset "products_catalog"',
+        );
+    });
+
+    it("allows CREATE TABLE when the table name is not already present in the effective dataset", () => {
+        const issues = validateSqlDatasetConsistency({
+            seed: makeSeed({
+                moduleDataset: {
+                    id: "products_catalog",
+                    schemaSql: `
+CREATE TABLE products (
+  id INTEGER PRIMARY KEY,
+  name TEXT NOT NULL
+);
+                    `.trim(),
+                    tableSnapshots: {},
+                },
+                moduleRuntimeDefaults: {
+                    kind: "sql",
+                    datasetId: "products_catalog",
+                    fixedSqlDialect: "sqlite",
+                    resultShape: "table",
+                },
+            }),
+            draft: makeDraft({
+                quizDraft: [
+                    {
+                        id: "code-1",
+                        kind: "code_input",
+                        title: "Create suppliers",
+                        prompt: "Write a query.",
+                        hint: "Use SQL.",
+                        help: {
+                            concept: "Use SQL.",
+                            hint_1: "Write a query.",
+                            hint_2: "Return valid SQL.",
+                        },
+                        starterCode:
+                            "CREATE TABLE suppliers (supplier_id INTEGER PRIMARY KEY);",
+                        solutionCode:
+                            "CREATE TABLE suppliers (supplier_id INTEGER PRIMARY KEY);",
+                        recipeType: "sql_query",
+                        datasetId: "products_catalog",
+                    },
+                ],
+            }),
+        });
+
+        expect(issues).toEqual([]);
+    });
 });

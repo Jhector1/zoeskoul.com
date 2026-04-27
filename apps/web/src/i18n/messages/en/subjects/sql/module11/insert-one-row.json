@@ -4,84 +4,95 @@
       "sql_module_11": {
         "insert-one-row": {
           "label": "Insert one row",
-          "summary": "Learn how to insert a single row into a table using SQL's INSERT statement, with a focus on explicit column lists and safe practices.",
+          "summary": "Learn how to insert a single row into a table using SQL's INSERT statement, with a focus on explicit column lists and handling required fields.",
           "cards": {
             "sketch0": {
-              "title": "Inserting a Single Row"
+              "title": "Why Use INSERT?"
             },
             "sketch1": {
-              "title": "Defaults and NULL Values"
+              "title": "Explicit Column Lists"
             },
             "quiz": {
               "title": "Quiz"
+            },
+            "project": {
+              "title": "Practice"
+            }
+          },
+          "projectSteps": {
+            "code_1": {
+              "title": "Insert a new inventory item"
+            },
+            "code_2": {
+              "title": "Insert with missing required column"
+            },
+            "code_3": {
+              "title": "Insert a row with a NULL value"
             }
           },
           "quiz": {
-            "code-1-insert-basic": {
+            "code-1": {
               "title": "Insert a new inventory item",
-              "prompt": "Write an SQL statement to insert a new row into `inventory_items` with the following values:\n- name: 'Mini Notebook'\n- category: 'Accessories'\n- price: 3.25\n- status: 'active'\n- is_test: 0\n- notes: NULL\n- last_updated: '2026-02-12'\n\nDo not include the `id` column in your statement.",
+              "prompt": "Write an SQL statement to insert a new row into `inventory_items` with the following values:\n- name: 'Notebook'\n- category: 'Accessories'\n- price: 3.50\n- status: 'active'\n- is_test: 0\n- notes: NULL\n- last_updated: '2026-02-12'\n\nUse an explicit column list and do not provide a value for `id`.",
               "hint": "Focus on the SQL task being asked for, not on copying final query text.",
               "help": {
                 "concept": "Build the query from the operation the exercise is testing.",
                 "hint_1": "Think about which clauses or functions are required for the task.",
                 "hint_2": "Construct the query based on what result the exercise expects, not by repeating exact solution wording."
               },
-              "starterCode": "-- Write your INSERT statement here"
+              "starterCode": "-- Write your INSERT statement below"
             },
-            "code-2-insert-with-defaults": {
-              "title": "Insert using default values",
-              "prompt": "Insert a new row into `inventory_items` with these values:\n- name: 'Trial Keychain'\n- category: 'Accessories'\n- price: 1.99\n- status: 'draft'\n- is_test: 1\n- last_updated: '2026-02-13'\n\nDo not provide a value for `notes`. Let it default.",
+            "code-2": {
+              "title": "Insert with missing required column",
+              "prompt": "Try to insert a row into `inventory_items` with only the columns: name, category, and price. Use these values:\n- name: 'Sample Cup'\n- category: 'Kitchen'\n- price: 6.00\n\nWhat happens if you omit required columns like `status` and `is_test`?",
               "hint": "Focus on the SQL task being asked for, not on copying final query text.",
               "help": {
                 "concept": "Build the query from the operation the exercise is testing.",
                 "hint_1": "Think about which clauses or functions are required for the task.",
                 "hint_2": "Construct the query based on what result the exercise expects, not by repeating exact solution wording."
               },
-              "starterCode": "-- Write your INSERT statement here"
+              "starterCode": "-- Try inserting with missing required columns"
             },
-            "code-3-insert-null-notes": {
-              "title": "Insert with NULL for notes",
-              "prompt": "Insert a new row into `inventory_items` with these values:\n- name: 'Sample Eraser'\n- category: 'Accessories'\n- price: 0.99\n- status: 'active'\n- is_test: 0\n- notes: NULL\n- last_updated: '2026-02-14'\n\nExplicitly set the `notes` column to NULL.",
+            "code-3": {
+              "title": "Insert a row with a NULL value",
+              "prompt": "Insert a new row into `inventory_items` where the `notes` column is intentionally set to NULL. Use these values:\n- name: 'Gift Card'\n- category: 'Accessories'\n- price: 25.00\n- status: 'active'\n- is_test: 0\n- notes: NULL\n- last_updated: '2026-02-15'\n\nDo not provide a value for `id`.",
               "hint": "Focus on the SQL task being asked for, not on copying final query text.",
               "help": {
                 "concept": "Build the query from the operation the exercise is testing.",
                 "hint_1": "Think about which clauses or functions are required for the task.",
                 "hint_2": "Construct the query based on what result the exercise expects, not by repeating exact solution wording."
               },
-              "starterCode": "-- Write your INSERT statement here"
+              "starterCode": "-- Insert a row with notes set to NULL"
             },
-            "multi-1-why-column-list": {
-              "title": "Why specify columns in INSERT?",
-              "prompt": "Why is it safer to specify the column list in an INSERT statement? (Choose all that apply.)",
-              "hint": "Think about what happens if the table structure changes.",
+            "multi-1": {
+              "title": "Benefits of explicit column lists",
+              "prompt": "Which of the following are benefits of specifying an explicit column list in an INSERT statement? Select all that apply.",
+              "hint": "Think about safety, clarity, and future-proofing your code.",
               "help": {
-                "concept": "Specifying columns in INSERT statements protects against errors if the table changes and makes your code clearer.",
-                "hint_1": "Consider how omitting the column list can cause data to go into the wrong columns.",
-                "hint_2": "Also think about future changes to the table, like adding new columns."
+                "concept": "Explicit column lists prevent errors if the table structure changes and make your code clearer.",
+                "hint_1": "Consider what happens if columns are added or reordered in the table.",
+                "hint_2": "Explicit lists help avoid mismatches and make your intent clear."
               },
               "options": {
-                "a": "A command",
-                "b": "A table name"
+                "a": "[object Object]",
+                "b": "A command"
               }
             },
-            "fill-1-insert-required-columns": {
-              "title": "Required columns in INSERT",
-              "prompt": "Which column must always be included in an INSERT statement for `inventory_items`? (Assume you are not inserting into the auto-increment id column.)",
-              "hint": "Look for columns that do not allow NULL and have no default.",
+            "fill-1": {
+              "title": "Default values in INSERT",
+              "prompt": "When you omit a column with a DEFAULT value in your INSERT statement, what value is used for that column?",
+              "hint": "Think about what the database does when a column is not mentioned but has a the missing term.",
               "help": {
-                "concept": "Columns that are NOT NULL and do not have a default value must be provided in every INSERT.",
-                "hint_1": "Check the schema for columns with NOT NULL and no DEFAULT.",
-                "hint_2": "Find a column that is required and not auto-generated."
+                "concept": "If a column has a the missing term value and is omitted from the INSERT, the database uses the the missing term for that column.",
+                "hint_1": "Check the table definition for the missing term values.",
+                "hint_2": "The database fills in the the missing term value automatically."
               },
-              "template": "The column that must always be included is: [[blank]].",
+              "template": "If you omit a column with a DEFAULT value in an INSERT, the database will use the ____ value for that column.",
               "choices": [
-                "name",
-                "category",
-                "price",
-                "status",
-                "is_test",
-                "notes",
-                "last_updated"
+                "DEFAULT",
+                "NULL",
+                "first",
+                "previous"
               ]
             }
           }
@@ -93,13 +104,13 @@
     "sql": {
       "sql_module_11": {
         "insert-one-row": {
-          "sketch-1-intro-insert": {
-            "title": "Inserting a Single Row",
-            "bodyMarkdown": "To add a new row to a table in SQL, use the `INSERT INTO` statement. It's best practice to specify the columns you want to insert values into. For example, to add a new item to the `inventory_items` table:\n\n```sql\nINSERT INTO inventory_items (name, category, price, status, is_test, notes, last_updated)\nVALUES ('Desk Organizer', 'Accessories', 13.50, 'active', 0, NULL, '2026-02-10');\n```\n\nThis statement adds a new row with the provided values. The `id` column is omitted here because it's an auto-increment primary key."
+          "sketch-1": {
+            "title": "Why Use INSERT?",
+            "bodyMarkdown": "The `INSERT` statement in SQL lets you add new rows to a table. This is essential for growing your dataset. For example, to add a new inventory item:\n\n```sql\nINSERT INTO inventory_items (name, category, price, status, is_test, notes, last_updated)\nVALUES ('Desk Lamp', 'Decor', 22.50, 'active', 0, NULL, '2026-02-10');\n```\n\nThis statement adds a new row with the specified values. Notice how each value matches a column in the list."
           },
-          "sketch-2-defaults-and-null": {
-            "title": "Defaults and NULL Values",
-            "bodyMarkdown": "If you omit a column in your `INSERT` statement, SQL will use the column's default value if one exists, or `NULL` if allowed. For example, the `notes` column in `inventory_items` allows `NULL`:\n\n```sql\nINSERT INTO inventory_items (name, category, price, status, is_test, last_updated)\nVALUES ('Sample Pen', 'Accessories', 2.99, 'draft', 1, '2026-02-11');\n```\n\nHere, `notes` will be set to `NULL` for this row."
+          "sketch-2": {
+            "title": "Explicit Column Lists",
+            "bodyMarkdown": "It's safer to specify the columns you want to insert into, rather than relying on the table's default column order. This helps avoid mistakes if the table structure changes.\n\nFor example:\n\n```sql\nINSERT INTO inventory_items (name, category, price)\nVALUES ('Mini Plant', 'Decor', 8.99);\n```\n\nIf you omit required columns (like `status`), the database may throw an error or use a default value if one exists."
           }
         }
       }

@@ -1,0 +1,126 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_14": {
+        "related-data": {
+          "label": "Related data",
+          "summary": "Explore how related data is organized in relational databases, why relationships matter, and how to avoid duplication by splitting information into focused tables.",
+          "cards": {
+            "sketch0": {
+              "title": "Why Relationships Matter"
+            },
+            "sketch1": {
+              "title": "Common Relationship Types"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Practice"
+            }
+          },
+          "projectSteps": {
+            "codeinput_select_categories": {
+              "title": "Query Distinct Categories"
+            }
+          },
+          "quiz": {
+            "fillblank-relationship-definition": {
+              "title": "Defining a Relationship",
+              "prompt": "Choose the best value for the first missing blank in the statement.",
+              "hint": "It's the core concept that links tables.",
+              "help": {
+                "concept": "A the missing term is a logical connection between tables, allowing data to be associated across different subjects.",
+                "hint_1": "Think about what links a product to its category or a customer to their orders.",
+                "hint_2": "It's not a row or column, but the way tables are connected."
+              },
+              "template": "The first missing value is [blank1].",
+              "choices": [
+                "relationship",
+                "row",
+                "column",
+                "function"
+              ]
+            },
+            "fillblank-duplication-risk": {
+              "title": "Risk of Data Duplication",
+              "prompt": "Choose the best value for the first missing blank in the statement.",
+              "hint": "It's what happens when the same data appears in more than one place.",
+              "help": {
+                "concept": "Data the missing term means the same piece of information is stored in multiple locations, which can lead to inconsistencies.",
+                "hint_1": "This is what normalization tries to prevent.",
+                "hint_2": "It's the opposite of keeping data unique and organized."
+              },
+              "template": "The first missing value is [blank1].",
+              "choices": [
+                "duplication",
+                "normalization",
+                "aggregation",
+                "indexing"
+              ]
+            },
+            "singlechoice-one-to-many": {
+              "title": "Understanding One-to-Many",
+              "prompt": "Which scenario best describes a one-to-many relationship?",
+              "hint": "Think about how categories and products are connected.",
+              "help": {
+                "concept": "A one-to-many relationship means one record in a table relates to multiple records in another table, but not the other way around.",
+                "hint_1": "Which option describes one thing being linked to many others?",
+                "hint_2": "Look for the answer where one category links to several products."
+              },
+              "options": {
+                "a": "a) One category can have many products, but each product has only one category.",
+                "b": "b) Each product can belong to many categories.",
+                "c": "c) Each product has a unique price.",
+                "d": "d) All products are stored in one table."
+              }
+            },
+            "multichoice-benefits-relationships": {
+              "title": "Benefits of Using Relationships",
+              "prompt": "Which of the following are benefits of organizing data into related tables? (Choose all that apply)",
+              "hint": "Think about why we avoid putting everything in one big table.",
+              "help": {
+                "concept": "Related tables help reduce redundancy, make maintenance easier, and improve data organization.",
+                "hint_1": "Which options mention reducing repetition or making things easier?",
+                "hint_2": "Ignore options that suggest putting all data in one place."
+              },
+              "options": {
+                "a": "a) Reduces data duplication",
+                "b": "b) Makes updates easier and safer",
+                "c": "c) Forces all data into one table",
+                "d": "d) Helps keep data organized"
+              }
+            },
+            "codeinput-select-categories": {
+              "title": "Query Distinct Categories",
+              "prompt": "Write a SQL query to list all unique product categories from the `products` table.",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+                "hint_1": "Eliminate choices or interpretations that do not match the task.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "starterCode": "-- Write a query to show all unique categories"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_14": {
+        "related-data": {
+          "sketch-why-relationships": {
+            "title": "Why Relationships Matter",
+            "bodyMarkdown": "Relational databases organize information into tables, each focused on a single subject. For example, in the `products_catalog` dataset, the `products` table lists items like Sketchbook, Desk Lamp, and Fountain Pen, each with details such as category and price. If you wanted to track suppliers or customer orders, you would create separate tables and relate them using keys. This reduces duplication and keeps data organized."
+          },
+          "sketch-relationship-types": {
+            "title": "Common Relationship Types",
+            "bodyMarkdown": "There are several ways tables can relate to each other:\n\n- **One-to-many**: One category (like 'Art') can have many products, but each product belongs to only one category.\n- **Many-to-many**: If you tracked which products appear in multiple bundles, both products and bundles could relate to many of each other (requires a linking table).\n\nDesigning tables with the right relationships avoids repeating the same information in many rows."
+          }
+        }
+      }
+    }
+  }
+}

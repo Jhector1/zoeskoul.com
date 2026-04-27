@@ -1,0 +1,112 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_11": {
+        "default-values": {
+          "label": "Default values",
+          "summary": "Default values in Inserting Data",
+          "cards": {
+            "sketch0": {
+              "title": "Understanding Default Values in INSERT"
+            },
+            "sketch1": {
+              "title": "NULL vs. Default Values"
+            },
+            "sketch2": {
+              "title": "How Default Values Are Set in Schema"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "quiz": {
+            "insert-defaults-code-1": {
+              "title": "Insert with omitted default columns",
+              "prompt": "Insert a new row into `inventory_items` with the following values: name = 'Desk Organizer', category = 'Accessories', price = 8.99, last_updated = '2026-02-12'. Do NOT specify the `status` or `is_test` columns. Write the SQL statement.",
+              "hint": "Focus on the SQL task being asked for, not on copying final query text.",
+              "help": {
+                "concept": "Build the query from the operation the exercise is testing.",
+                "hint_1": "Think about which clauses or functions are required for the task.",
+                "hint_2": "Construct the query based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "-- Write your INSERT statement here"
+            },
+            "insert-null-vs-default-code-2": {
+              "title": "Insert with explicit NULL and defaults",
+              "prompt": "Insert a new row into `inventory_items` with: name = 'Sample Coaster', category = 'Kitchen', price = 5.25, notes = NULL, last_updated = '2026-02-13'. Do NOT specify `status` or `is_test`. Write the SQL statement.",
+              "hint": "Focus on the SQL task being asked for, not on copying final query text.",
+              "help": {
+                "concept": "Build the query from the operation the exercise is testing.",
+                "hint_1": "Think about which clauses or functions are required for the task.",
+                "hint_2": "Construct the query based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "-- Write your INSERT statement here"
+            },
+            "insert-all-defaults-code-3": {
+              "title": "Insert using only required columns",
+              "prompt": "Insert a new row into `inventory_items` with: name = 'Trial Pen', category = 'Accessories', price = 1.99, last_updated = '2026-02-14'. Use only the required columns and let all columns with defaults fill automatically.",
+              "hint": "Focus on the SQL task being asked for, not on copying final query text.",
+              "help": {
+                "concept": "Build the query from the operation the exercise is testing.",
+                "hint_1": "Think about which clauses or functions are required for the task.",
+                "hint_2": "Construct the query based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "-- Write your INSERT statement here"
+            },
+            "multi-choice-defaults": {
+              "title": "Which columns will use default values?",
+              "prompt": "Suppose you run this statement:\n\n```sql\nINSERT INTO inventory_items (name, category, price, last_updated)\nVALUES ('Test Eraser', 'Accessories', 0.99, '2026-02-15');\n```\n\nWhich columns will use their default values? Select all that apply.",
+              "hint": "Look for columns not listed in the INSERT statement.",
+              "help": {
+                "concept": "Columns omitted from the INSERT and with defaults will use their default values. The primary key (id) will auto-increment if not provided.",
+                "hint_1": "Check which columns are omitted and have defaults or auto-increment.",
+                "hint_2": "status and is_test have defaults; id is auto-incremented."
+              },
+              "options": {
+                "a": "[object Object]",
+                "b": "A command"
+              }
+            },
+            "fill-blank-default-keyword": {
+              "title": "Keyword for default value",
+              "prompt": "What SQL keyword is used in a table schema to specify a default value for a column?",
+              "hint": "It's a word you see in CREATE TABLE statements before the value.",
+              "help": {
+                "concept": "The the missing term keyword in SQL is used to assign a the missing term value to a column in the table schema.",
+                "hint_1": "Look for the keyword that comes before the value in a column definition.",
+                "hint_2": "It's the same word used in 'status TEXT NOT NULL the missing term 'draft''."
+              },
+              "template": "The SQL keyword to set a default value in a column definition is: ____",
+              "choices": [
+                "DEFAULT",
+                "NULL",
+                "PRIMARY",
+                "UNIQUE"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_11": {
+        "default-values": {
+          "default-values-intro": {
+            "title": "Understanding Default Values in INSERT",
+            "bodyMarkdown": "When inserting data into a table, some columns may have default values defined in the schema. If you omit these columns in your INSERT statement, the database will automatically use the default value for those columns. For example, in the `inventory_items` table, the `status` column has a default value of `'draft'`, and `is_test` has a default of `0`.\n\n```sql\n-- This will use default values for status and is_test\nINSERT INTO inventory_items (name, category, price, last_updated)\nVALUES ('New Keychain', 'Accessories', 3.50, '2026-02-10');\n```\n\nAfter this insert, the new row will have `status = 'draft'` and `is_test = 0` unless you specify otherwise."
+          },
+          "null-vs-default": {
+            "title": "NULL vs. Default Values",
+            "bodyMarkdown": "If a column allows NULL and you explicitly insert NULL, the value will be NULL, not the default. But if you omit the column entirely, the default value is used (if defined). For example:\n\n```sql\n-- Explicitly inserting NULL into notes\nINSERT INTO inventory_items (name, category, price, notes, last_updated)\nVALUES ('Sample Magnet', 'Decor', 2.00, NULL, '2026-02-11');\n```\n\nHere, `notes` will be NULL, but other columns like `status` and `is_test` will use their defaults."
+          },
+          "default-value-schema": {
+            "title": "How Default Values Are Set in Schema",
+            "bodyMarkdown": "Default values are defined in the table schema using the `DEFAULT` keyword. For example, the `inventory_items` table has:\n\n```sql\nstatus TEXT NOT NULL DEFAULT 'draft',\nis_test INTEGER NOT NULL DEFAULT 0,\nlast_updated TEXT NOT NULL DEFAULT '2026-02-01'\n```\n\nThis means if you omit these columns in your INSERT, the database will fill in the default values."
+          }
+        }
+      }
+    }
+  }
+}

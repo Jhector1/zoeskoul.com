@@ -1,0 +1,113 @@
+{
+  "title": "Thinking before changing data",
+  "summary": "Learn why previewing and filtering are essential before updating or deleting data in SQL. Build safe habits to avoid accidental data loss and ensure only intended records are changed.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch-preview-before-change",
+      "title": "Preview Before You Change",
+      "bodyMarkdown": "Before running an `UPDATE` or `DELETE` statement, always preview the rows you intend to affect. Use a `SELECT` query with the same `WHERE` clause to see which records will be changed. For example:\n\n```sql\n-- Preview rows to be updated\nSELECT * FROM inventory_items WHERE status = 'draft';\n```\n\nThis helps you confirm that your filter is correct and prevents accidental changes to unintended rows."
+    },
+    {
+      "id": "sketch-why-where-important",
+      "title": "Why WHERE Is Critical",
+      "bodyMarkdown": "Running `UPDATE` or `DELETE` without a `WHERE` clause will affect **all rows** in the table. For example:\n\n```sql\nDELETE FROM inventory_items;\n```\n\nThis statement deletes every row! Always use a `WHERE` clause to target only the rows you want to change:\n\n```sql\nDELETE FROM inventory_items WHERE is_test = 1;\n```\n\nThis deletes only test items, keeping your real data safe."
+    },
+    {
+      "id": "sketch-accidental-data-loss",
+      "title": "Accidental Data Loss Is Hard to Undo",
+      "bodyMarkdown": "Unlike a bad `SELECT` query, which only displays data, a mistaken `UPDATE` or `DELETE` can permanently change or remove records. Restoring lost data is often difficult or impossible without a backup. That's why it's crucial to double-check your filters and preview the affected rows before making changes."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "code-preview-select",
+      "kind": "code_input",
+      "title": "Preview rows before updating",
+      "prompt": "Before updating all items with status 'draft' in the `inventory_items` table, write a SQL query to preview which rows would be affected.",
+      "starterCode": "-- Write a query to preview all draft items",
+      "solutionCode": "SELECT * FROM inventory_items WHERE status = 'draft';",
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query",
+      "hint": "Focus on the concept being tested.",
+      "help": {
+        "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+        "hint_1": "Eliminate choices or interpretations that do not match the task.",
+        "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+      }
+    },
+    {
+      "id": "code-safe-delete-test-items",
+      "kind": "code_input",
+      "title": "Safely delete only test items",
+      "prompt": "Write a SQL statement to delete only the rows in `inventory_items` where `is_test` is 1.",
+      "starterCode": "-- Delete only test items from inventory_items",
+      "solutionCode": "DELETE FROM inventory_items WHERE is_test = 1;",
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query",
+      "checkSql": "SELECT * FROM inventory_items WHERE is_test = 1;",
+      "hint": "Focus on the concept being tested.",
+      "help": {
+        "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+        "hint_1": "Eliminate choices or interpretations that do not match the task.",
+        "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+      }
+    },
+    {
+      "id": "code-update-status-inactive",
+      "kind": "code_input",
+      "title": "Update status for inactive decor items",
+      "prompt": "Write a SQL statement to update the `status` to 'archived' for all rows in `inventory_items` where `category` is 'Decor' and `status` is 'inactive'.",
+      "starterCode": "-- Update status for inactive decor items",
+      "solutionCode": "UPDATE inventory_items SET status = 'archived' WHERE category = 'Decor' AND status = 'inactive';",
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query",
+      "checkSql": "SELECT * FROM inventory_items WHERE category = 'Decor' AND status = 'archived';",
+      "hint": "Focus on the SQL task being asked for, not on copying final query text.",
+      "help": {
+        "concept": "Build the query from the operation the exercise is testing.",
+        "hint_1": "Think about which clauses or functions are required for the task.",
+        "hint_2": "Construct the query based on what result the exercise expects, not by repeating exact solution wording."
+      }
+    },
+    {
+      "id": "multi-why-preview-important",
+      "kind": "multi_choice",
+      "title": "Why is previewing with SELECT important before UPDATE or DELETE?",
+      "prompt": "Select all reasons why you should preview rows with a SELECT statement before running an UPDATE or DELETE.",
+      "options": [
+        "A command",
+        "A table name"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Think about what could go wrong if you skip the preview.",
+      "help": {
+        "concept": "Previewing helps you avoid mistakes and ensures only intended rows are changed or deleted.",
+        "hint_1": "Previewing shows which rows match your filter and helps prevent accidental changes.",
+        "hint_2": "It helps you catch mistakes before they affect your data."
+      }
+    },
+    {
+      "id": "fillblank-where-required",
+      "kind": "fill_blank_choice",
+      "title": "The role of WHERE in data changes",
+      "prompt": "Choose the best value for the first missing blank in the statement.",
+      "template": "The first missing value is [blank1].",
+      "choices": [
+        "ORDER BY",
+        "GROUP BY",
+        "WHERE",
+        "HAVING"
+      ],
+      "correctValue": "WHERE",
+      "hint": "It's the clause that filters which rows are affected.",
+      "help": {
+        "concept": "The the missing term clause limits the rows affected by UPDATE or DELETE.",
+        "hint_1": "It's the same clause used to filter rows in SELECT.",
+        "hint_2": "Without this clause, all rows would be changed."
+      }
+    }
+  ]
+}

@@ -1,0 +1,128 @@
+{
+  "title": "Link tables together",
+  "summary": "Learn how to design and connect tables in a relational database using foreign keys and proper schema structure.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch-1",
+      "title": "Why link tables?",
+      "bodyMarkdown": "Relational databases are powerful because they let you organize data into separate tables and connect them using relationships. For example, in the `products_catalog` dataset, you might want to track product sales or suppliers in separate tables and link them to the `products` table. This keeps data organized and avoids duplication."
+    },
+    {
+      "id": "sketch-2",
+      "title": "Foreign keys: the link between tables",
+      "bodyMarkdown": "A **foreign key** is a column in one table that refers to the primary key of another table. This creates a relationship between the two tables. For example, if you had a `suppliers` table and wanted to track which supplier provides each product, you could add a `supplier_id` column to the `products` table and set it as a foreign key referencing `suppliers(id)`."
+    },
+    {
+      "id": "sketch-3",
+      "title": "Example: Adding a related table",
+      "bodyMarkdown": "Suppose you want to track product reviews. You could create a `reviews` table:\n\n```sql\nCREATE TABLE reviews (\n  id INTEGER PRIMARY KEY,\n  product_id INTEGER NOT NULL,\n  review_text TEXT NOT NULL,\n  rating INTEGER NOT NULL,\n  FOREIGN KEY (product_id) REFERENCES products(id)\n);\n```\n\nHere, `product_id` in `reviews` links each review to a product in the `products` table."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "code-1",
+      "kind": "code_input",
+      "title": "Create a suppliers table",
+      "prompt": "Write a SQL statement to create a `suppliers` table with the following columns:\n- `id` as INTEGER PRIMARY KEY\n- `name` as TEXT NOT NULL\n- `contact_email` as TEXT\n\nDo not add any foreign keys yet.",
+      "hint": "Define each column with its type and constraints. Use PRIMARY KEY for the id.",
+      "help": {
+        "concept": "Creating tables involves specifying column names, data types, and constraints like PRIMARY KEY or NOT NULL.",
+        "hint_1": "Start with CREATE TABLE suppliers (...).",
+        "hint_2": "Remember to set id as INTEGER PRIMARY KEY and name as TEXT NOT NULL."
+      },
+      "starterCode": "",
+      "solutionCode": "CREATE TABLE suppliers (\n  id INTEGER PRIMARY KEY,\n  name TEXT NOT NULL,\n  contact_email TEXT\n);",
+      "datasetId": "products_catalog",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "code-2",
+      "kind": "code_input",
+      "title": "Add a supplier_id column to products",
+      "prompt": "Write a SQL statement to add a `supplier_id` column (INTEGER) to the `products` table.",
+      "hint": "Use ALTER TABLE to add a new column.",
+      "help": {
+        "concept": "ALTER TABLE lets you add new columns to an existing table. Specify the table name, the new column name, and its data type.",
+        "hint_1": "The syntax is ALTER TABLE table_name ADD COLUMN column_name type;",
+        "hint_2": "Make sure to use the correct table and column names."
+      },
+      "starterCode": "",
+      "solutionCode": "ALTER TABLE products ADD COLUMN supplier_id INTEGER;",
+      "datasetId": "products_catalog",
+      "recipeType": "sql_query",
+      "checkSql": "PRAGMA table_info(products);"
+    },
+    {
+      "id": "code-3",
+      "kind": "code_input",
+      "title": "Add a foreign key constraint",
+      "prompt": "Write a SQL statement to create a new table `product_suppliers` with these columns:\n- `product_id` INTEGER NOT NULL\n- `supplier_id` INTEGER NOT NULL\nAdd a foreign key constraint so that `product_id` references `products(id)` and `supplier_id` references `suppliers(id)`.",
+      "hint": "Use FOREIGN KEY constraints in the CREATE TABLE statement.",
+      "help": {
+        "concept": "Foreign keys enforce relationships between tables by referencing primary keys in another table.",
+        "hint_1": "List all columns, then add FOREIGN KEY clauses at the end.",
+        "hint_2": "Each FOREIGN KEY should reference the correct table and column."
+      },
+      "starterCode": "",
+      "solutionCode": "CREATE TABLE product_suppliers (\n  product_id INTEGER NOT NULL,\n  supplier_id INTEGER NOT NULL,\n  FOREIGN KEY (product_id) REFERENCES products(id),\n  FOREIGN KEY (supplier_id) REFERENCES suppliers(id)\n);",
+      "datasetId": "products_catalog",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "multi-1",
+      "kind": "multi_choice",
+      "title": "Benefits of using foreign keys",
+      "prompt": "Which of the following are benefits of using foreign keys in your database design? Select all that apply.",
+      "hint": "Think about data consistency and relationships.",
+      "help": {
+        "concept": "Foreign keys help maintain data integrity and define relationships between tables.",
+        "hint_1": "Foreign keys prevent invalid references and help organize related data.",
+        "hint_2": "They do not speed up queries directly, but they do enforce rules about data relationships."
+      },
+      "options": [
+        {
+          "id": "a",
+          "content": "They prevent invalid data from being entered in related tables."
+        },
+        {
+          "id": "b",
+          "content": "They help enforce relationships between tables."
+        },
+        {
+          "id": "c",
+          "content": "They automatically make queries run faster."
+        },
+        {
+          "id": "d",
+          "content": "They help keep data consistent across tables."
+        }
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ]
+    },
+    {
+      "id": "fill-1",
+      "kind": "fill_blank_choice",
+      "title": "Primary key purpose",
+      "prompt": "Fill in the blank: The main purpose of a primary key in a table is to ensure that each row is ____.",
+      "hint": "Think about what makes each row different from the others.",
+      "help": {
+        "concept": "A primary key uniquely identifies each row in a table.",
+        "hint_1": "No two rows can have the same primary key value.",
+        "hint_2": "The primary key must be unique for every row."
+      },
+      "template": "The main purpose of a primary key in a table is to ensure that each row is ____.",
+      "choices": [
+        "unique",
+        "indexed",
+        "related",
+        "nullable"
+      ],
+      "correctValue": "unique"
+    }
+  ]
+}

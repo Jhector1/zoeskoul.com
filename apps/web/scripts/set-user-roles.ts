@@ -1,7 +1,5 @@
 import { loadEnvConfig } from "@next/env";
-import { PrismaClient, UserRole } from "@prisma/client";
-import { PrismaPg } from "@prisma/adapter-pg";
-import { Pool } from "pg";
+import { prisma } from "@/lib/prisma";
 
 delete process.env.DATABASE_URL;
 
@@ -18,11 +16,9 @@ if (!databaseUrl) {
     );
 }
 
-const pool = new Pool({ connectionString: databaseUrl });
-const adapter = new PrismaPg(pool);
-const prisma = new PrismaClient({ adapter });
-
-const VALID_ROLES = new Set(Object.values(UserRole));
+const USER_ROLES = ["student", "teacher", "admin"] as const;
+type UserRole = (typeof USER_ROLES)[number];
+const VALID_ROLES = new Set<UserRole>(USER_ROLES);
 
 type Args = {
     id?: string;
@@ -99,5 +95,4 @@ main()
     })
     .finally(async () => {
         await prisma.$disconnect();
-        await pool.end();
     });

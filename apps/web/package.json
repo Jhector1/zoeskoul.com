@@ -3,35 +3,35 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "NODE_ENV=development tsx server.ts",
+    "dev": "next dev --port 3000",
     "build": "next build",
     "i18n:generate": "node scripts/generate-i18n-manifest.mjs",
     "gen:topic-manifests": "tsx scripts/generate-topic-manifests.ts",
     "gen:subject-manifests": "tsx scripts/generate-subject-manifests.ts",
     "gen:manifests": "pnpm i18n:generate && pnpm gen:topic-manifests && pnpm gen:subject-manifests",
-    "db:seed": "npx prisma db seed",
+    "db:seed": "pnpm --dir ../.. --filter @zoeskoul/db db:seed",
     "sync:curriculum": "pnpm gen:manifests && pnpm db:seed",
     "predev": "pnpm gen:manifests",
     "prebuild": "pnpm gen:manifests",
     "pretypecheck": "pnpm gen:manifests",
-    "start": "NODE_ENV=production tsx server.ts",
+    "start": "next start --port 3000",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
     "user:roles": "NODE_ENV=development tsx scripts/set-user-roles.ts",
-    "postinstall": "prisma generate",
-    "cleanup:onboarding": "tsx scripts/cleanup-guest-onboarding.ts",
-    "dev:next": "next dev",
-    "start:next": "next start"
+    "postinstall": "prisma generate --schema ../../packages/db/prisma/schema.prisma",
+    "cleanup:onboarding": "tsx scripts/cleanup-guest-onboarding.ts"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.11.1",
     "@monaco-editor/react": "^4.7.0",
     "@next/env": "^16.2.1",
-    "@prisma/client": "^7.4.0",
+    "@prisma/client": "latest",
     "@tailwindcss/typography": "^0.5.19",
     "@upstash/ratelimit": "^2.0.8",
     "@upstash/redis": "^1.36.3",
     "@zoeskoul/code-contracts": "workspace:*",
+    "@zoeskoul/curriculum-profiles": "workspace:*",
+    "@zoeskoul/db": "workspace:*",
     "@zoeskoul/pty-auth": "workspace:*",
     "@zoeskoul/curriculum-runtime": "workspace:*",
 
@@ -52,7 +52,6 @@
     "next-intl": "^4.7.0",
     "next-themes": "^0.4.6",
     "p5": "^2.1.2",
-    "pg": "^8.20.0",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "react-icons": "^5.5.0",
@@ -70,7 +69,6 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
-    "@prisma/adapter-pg": "^7.4.0",
     "@tailwindcss/container-queries": "^0.1.1",
     "@tailwindcss/postcss": "^4",
     "@types/better-sqlite3": "^7.6.13",
@@ -87,12 +85,9 @@
     "i": "^0.3.7",
     "npm": "^11.10.0",
     "pdfkit": "^0.17.2",
-    "prisma": "^7.4.0",
+    "prisma": "latest",
     "tailwindcss": "^4",
     "tsx": "^4.21.0",
     "typescript": "^5"
-  },
-  "prisma": {
-    "seed": "ts-node prisma/seed/seed.ts"
   }
 }

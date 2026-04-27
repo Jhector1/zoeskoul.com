@@ -1,0 +1,143 @@
+{
+  "title": "Separate repeated information",
+  "summary": "Learn why and how to separate repeated information in relational database design, using real examples from the products_catalog dataset.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch-why-separate",
+      "title": "Why separate repeated information?",
+      "bodyMarkdown": "In relational database design, storing the same information in multiple places leads to problems like data inconsistency and wasted storage. For example, if you store the category name for every product row in the `products` table, and later want to rename a category, you must update every row where it appears. Instead, it's better to separate repeated information into its own table and reference it."
+    },
+    {
+      "id": "sketch-example-products",
+      "title": "Example: Products and Categories",
+      "bodyMarkdown": "Suppose you have a `products` table with columns: `id`, `name`, `category`, `price`, `stock`, and `created_at`. If many products share the same category (like 'Art' or 'Stationery'), the category name is repeated in many rows. A better design is to create a separate `categories` table with unique category names, and store a `category_id` in the `products` table instead. This reduces duplication and makes updates easier."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "fillblank-why-separate",
+      "kind": "fill_blank_choice",
+      "title": "Main reason to separate repeated information",
+      "prompt": "What is the main reason to separate repeated information into its own table in a relational database?",
+      "template": "The main reason to separate repeated information is to avoid ___.",
+      "choices": [
+        "data duplication",
+        "faster queries",
+        "using more tables",
+        "adding more columns"
+      ],
+      "correctValue": "data duplication",
+      "hint": "Think about what happens if the same value appears in many rows.",
+      "help": {
+        "concept": "Separating repeated information helps prevent storing the same data in multiple places, which can lead to inconsistencies.",
+        "hint_1": "If you store the same value in many rows, you might have to update it everywhere if it changes.",
+        "hint_2": "The main goal is to reduce redundancy and keep the data consistent."
+      }
+    },
+    {
+      "id": "fillblank-category-design",
+      "kind": "fill_blank_choice",
+      "title": "Better design for categories",
+      "prompt": "When you notice the same category name repeated in many rows of the products table, what is a better way to store this information?",
+      "template": "A better design is to create a separate ___ table.",
+      "choices": [
+        "categories",
+        "prices",
+        "stock",
+        "dates"
+      ],
+      "correctValue": "categories",
+      "hint": "What kind of table would hold unique category names?",
+      "help": {
+        "concept": "A separate table for categories allows you to store each category only once and reference it from products.",
+        "hint_1": "Think about what information is being repeated.",
+        "hint_2": "The new table should contain unique values for the repeated information."
+      }
+    },
+    {
+      "id": "singlechoice-update-category",
+      "kind": "single_choice",
+      "title": "Updating a category name",
+      "prompt": "If you store category names directly in every row of the products table, what problem might you face when renaming a category?",
+      "options": [
+        {
+          "id": "a",
+          "content": "You must update every product row with that category."
+        },
+        {
+          "id": "b",
+          "content": "You only need to update one row."
+        },
+        {
+          "id": "c",
+          "content": "The database will update all rows automatically."
+        },
+        {
+          "id": "d",
+          "content": "You cannot rename categories at all."
+        }
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Think about how many places the old category name appears.",
+      "help": {
+        "concept": "When data is duplicated, changing it requires updating every instance, which is error-prone.",
+        "hint_1": "If the category name is in many rows, you must find and update them all.",
+        "hint_2": "This is why separating repeated information into its own table is helpful."
+      }
+    },
+    {
+      "id": "multichoice-benefits-separation",
+      "kind": "multi_choice",
+      "title": "Benefits of separating repeated information",
+      "prompt": "Which of the following are benefits of separating repeated information into its own table? (Choose all that apply.)",
+      "options": [
+        {
+          "id": "a",
+          "content": "Reduces data duplication"
+        },
+        {
+          "id": "b",
+          "content": "Makes updates easier"
+        },
+        {
+          "id": "c",
+          "content": "Increases risk of inconsistency"
+        },
+        {
+          "id": "d",
+          "content": "Improves data integrity"
+        }
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ],
+      "hint": "Think about how separating data affects duplication, updates, and consistency.",
+      "help": {
+        "concept": "Separating repeated information reduces duplication, makes updates easier, and helps keep data consistent.",
+        "hint_1": "Which options mention reducing redundancy or making maintenance easier?",
+        "hint_2": "Improving data integrity is also a benefit of this approach."
+      }
+    },
+    {
+      "id": "codeinput-select-distinct-categories",
+      "kind": "code_input",
+      "title": "Find all unique categories",
+      "prompt": "Write a SQL query to list all unique category names from the products table.",
+      "starterCode": "-- Write a query to list all unique category names\n",
+      "solutionCode": "SELECT DISTINCT category FROM products;",
+      "datasetId": "products_catalog",
+      "recipeType": "sql_query",
+      "hint": "Use SELECT with DISTINCT to get unique values from a column.",
+      "help": {
+        "concept": "The DISTINCT keyword returns only unique values from the selected column.",
+        "hint_1": "Use SELECT DISTINCT to avoid repeated values.",
+        "hint_2": "You only need to select the category column from products."
+      }
+    }
+  ]
+}

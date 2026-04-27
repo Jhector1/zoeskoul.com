@@ -8,16 +8,16 @@
   },
   "modules": {
     "sql": {
-      "sql_module_11": {
-        "title": "Inserting Data",
-        "description": "Shift from reading data to adding new rows carefully and correctly.",
+      "sql_module_12": {
+        "title": "Updating and Deleting Data",
+        "description": "Teach safe data changes and the habit of previewing before modifying records.",
         "outcomes": [
-          "Insert new rows with confidence.",
-          "Use explicit column lists for safer statements.",
-          "Recognize how defaults and NULL values affect inserts."
+          "Update and delete rows intentionally.",
+          "Preview affected rows before running changes.",
+          "Adopt safe habits that prevent accidental data loss."
         ],
         "why": [
-          "Builds confidence with inserting data.",
+          "Builds confidence with updating and deleting data.",
           "Prepares learners for the next skills in the course."
         ]
       }
@@ -25,49 +25,49 @@
   },
   "sections": {
     "sql": {
-      "sql_module_11": {
-        "section_11_1": {
-          "title": "Intro to Adding Data",
-          "description": "",
-          "weeks": null,
+      "sql_module_12": {
+        "section_12_1": {
+          "title": "Updating Rows",
+          "description": "Learn how UPDATE changes existing rows and why WHERE is critical before making changes.",
+          "weeks": "Module 12, Section 12.1",
           "bullets": [
-            "What INSERT INTO does",
-            "Insert one row",
-            "Insert multiple rows",
-            "Matching values to columns"
+            "What UPDATE does",
+            "Changing one column",
+            "Changing multiple columns",
+            "Why WHERE is critical"
           ]
         },
-        "section_11_2": {
-          "title": "Safe Inserting",
-          "description": "",
-          "weeks": null,
+        "section_12_2": {
+          "title": "Deleting Rows",
+          "description": "Use DELETE carefully by selecting target rows first and avoiding accidental full-table deletion.",
+          "weeks": "Module 12, Section 12.2",
           "bullets": [
-            "Why column lists matter",
-            "Data type awareness",
-            "Avoiding insert errors",
-            "Reading inserted results"
+            "What DELETE does",
+            "Deleting selected rows",
+            "Dangers of missing WHERE",
+            "Safe delete habits"
           ]
         },
-        "section_11_3": {
-          "title": "Insert with NULL and Defaults",
-          "description": "",
-          "weeks": null,
+        "section_12_3": {
+          "title": "Data Safety Mindset",
+          "description": "Build safe habits for previewing, backing up, and thinking before changing data.",
+          "weeks": "Module 12, Section 12.3",
           "bullets": [
-            "Missing values during insert",
-            "Default values",
-            "Optional columns",
-            "Insert behavior basics"
+            "Preview before update/delete",
+            "Using SELECT first",
+            "Backups and caution",
+            "Thinking before changing data"
           ]
         },
-        "section_11_4": {
-          "title": "Insert Practice",
-          "description": "",
-          "weeks": null,
+        "section_12_4": {
+          "title": "Practice with Data Changes",
+          "description": "Practice updating prices, changing statuses, deleting test rows, and following a safe modification workflow.",
+          "weeks": "Module 12, Section 12.4",
           "bullets": [
-            "Add a student",
-            "Add a product",
-            "Add multiple records",
-            "Check your inserted data"
+            "Update prices",
+            "Change statuses",
+            "Delete test rows",
+            "Safe data modification workflow"
           ]
         }
       }

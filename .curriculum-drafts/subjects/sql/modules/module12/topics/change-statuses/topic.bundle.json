@@ -1,0 +1,189 @@
+{
+  "topicId": "change-statuses",
+  "subjectSlug": "sql",
+  "moduleSlug": "sql_module_12",
+  "sectionSlug": "section_12_4",
+  "prefix": "sql12",
+  "minutes": 15,
+  "topic": {
+    "labelKey": "topics.sql.sql_module_12.change-statuses.label",
+    "summaryKey": "topics.sql.sql_module_12.change-statuses.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_12.change-statuses.cards.sketch0.title",
+      "sketchId": "sketch-1",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_12.change-statuses.cards.sketch1.title",
+      "sketchId": "sketch-2",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_12.change-statuses.cards.sketch2.title",
+      "sketchId": "sketch-3",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql.sql_module_12.change-statuses.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 2,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.sql.sql_module_12.change-statuses.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "code_1",
+            "titleKey": "topics.sql.sql_module_12.change-statuses.projectSteps.code_1.title",
+            "exerciseKey": "code-1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "code_2",
+            "titleKey": "topics.sql.sql_module_12.change-statuses.projectSteps.code_2.title",
+            "exerciseKey": "code-2",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "code_3",
+            "titleKey": "topics.sql.sql_module_12.change-statuses.projectSteps.code_3.title",
+            "exerciseKey": "code-3",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch-1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_12.change-statuses.sketch-1.title",
+      "bodyKey": "sketches.sql.sql_module_12.change-statuses.sketch-1.bodyMarkdown"
+    },
+    {
+      "id": "sketch-2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_12.change-statuses.sketch-2.title",
+      "bodyKey": "sketches.sql.sql_module_12.change-statuses.sketch-2.bodyMarkdown"
+    },
+    {
+      "id": "sketch-3",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_12.change-statuses.sketch-3.title",
+      "bodyKey": "sketches.sql.sql_module_12.change-statuses.sketch-3.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "code-1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_12.change-statuses.quiz.code-1",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "inventory_ops",
+        "resultShape": "table",
+        "solutionCode": "UPDATE inventory_items SET status = 'active' WHERE status = 'draft';",
+        "checkSql": "SELECT * FROM \"inventory_items\" ORDER BY 1;"
+      }
+    },
+    {
+      "id": "code-2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_12.change-statuses.quiz.code-2",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "inventory_ops",
+        "resultShape": "table",
+        "solutionCode": "DELETE FROM inventory_items WHERE is_test = 1;",
+        "checkSql": "SELECT * FROM \"inventory_items\" ORDER BY 1;"
+      }
+    },
+    {
+      "id": "code-3",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_12.change-statuses.quiz.code-3",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "inventory_ops",
+        "resultShape": "table",
+        "solutionCode": "SELECT * FROM inventory_items WHERE status = 'inactive';"
+      }
+    },
+    {
+      "id": "multi-1",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_12.change-statuses.quiz.multi-1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "fill-1",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_12.change-statuses.quiz.fill-1",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "draft"
+      }
+    }
+  ]
+}

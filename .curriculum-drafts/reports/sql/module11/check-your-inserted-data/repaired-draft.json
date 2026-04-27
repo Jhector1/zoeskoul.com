@@ -1,27 +1,27 @@
 {
   "title": "Check your inserted data",
-  "summary": "Learn how to verify your inserted rows in the inventory_items table, confirm changes, and understand how to check for correct data after an INSERT.",
+  "summary": "Learn how to verify that your INSERT statements worked as intended by querying and inspecting the affected table.",
   "minutes": 15,
   "sketchBlocks": [
     {
       "id": "sk1",
       "title": "Why check your inserted data?",
-      "bodyMarkdown": "After you run an `INSERT` statement, it's important to confirm that your data was added as expected. You can do this by running a `SELECT` query on the table. For example, after inserting a new inventory item, you might run:\n\n```sql\nSELECT * FROM inventory_items;\n```\n\nOr, to check for a specific row you just inserted:\n\n```sql\nSELECT * FROM inventory_items WHERE name = 'Sticker Pack';\n```\n\nThis helps you verify that all columns have the correct values and that no mistakes were made during the insert."
+      "bodyMarkdown": "After running an `INSERT` statement, it's important to confirm that your new data actually appears in the table as expected. This helps you catch mistakes early, such as missing values, typos, or unintended defaults.\n\nFor example, after inserting a new item into the `inventory_items` table, you can use a `SELECT` statement to view the current rows:\n\n```sql\nSELECT * FROM inventory_items;\n```\n\nThis will show all columns and rows, including any new data you just added."
     },
     {
       "id": "sk2",
-      "title": "Checking for specific values",
-      "bodyMarkdown": "If you want to confirm that a particular value was inserted, use a `WHERE` clause to filter the results. For example, to check if any items in the 'Accessories' category were added:\n\n```sql\nSELECT id, name, category FROM inventory_items WHERE category = 'Accessories';\n```\n\nThis will show only the rows matching your filter, making it easier to spot your new data."
+      "title": "Targeted checks with WHERE",
+      "bodyMarkdown": "If you only want to see the row(s) you just inserted, add a `WHERE` clause to your `SELECT` statement. For example, if you inserted a new item with the name 'Sample Poster', you can check for it specifically:\n\n```sql\nSELECT * FROM inventory_items WHERE name = 'Sample Poster';\n```\n\nThis helps you quickly confirm that the right data was added, and that all columns have the expected values."
     }
   ],
   "quizDraft": [
     {
       "id": "q1",
       "kind": "code_input",
-      "title": "Check for a newly inserted item by name",
-      "prompt": "Suppose you just inserted a new item called 'Eco Notebook' into the inventory_items table. Write a SQL query to display all columns for rows where the name is 'Eco Notebook'.",
-      "starterCode": "-- Write a query to show all columns for the item named 'Eco Notebook'",
-      "solutionCode": "SELECT * FROM inventory_items WHERE name = 'Eco Notebook';",
+      "title": "Check for a specific inserted item",
+      "prompt": "Suppose you just inserted a new row with the name 'Trial Tote'. Write a SQL query to display all columns for this item in the `inventory_items` table.",
+      "starterCode": "-- Write your query here",
+      "solutionCode": "SELECT * FROM inventory_items WHERE name = 'Trial Tote';",
       "datasetId": "inventory_ops",
       "recipeType": "sql_query",
       "hint": "Focus on the concept being tested.",
@@ -34,10 +34,10 @@
     {
       "id": "q2",
       "kind": "code_input",
-      "title": "Count rows after inserting data",
-      "prompt": "After inserting several new items, you want to check how many total rows are now in the inventory_items table. Write a SQL query to return the total count of rows.",
-      "starterCode": "-- Write a query to count all rows in inventory_items",
-      "solutionCode": "SELECT COUNT(*) FROM inventory_items;",
+      "title": "Check all items in a category",
+      "prompt": "You want to see all items in the 'Kitchen' category. Write a SQL query to display their names and prices from the `inventory_items` table.",
+      "starterCode": "-- Write your query here",
+      "solutionCode": "SELECT name, price FROM inventory_items WHERE category = 'Kitchen';",
       "datasetId": "inventory_ops",
       "recipeType": "sql_query",
       "hint": "Focus on the concept being tested.",
@@ -50,10 +50,10 @@
     {
       "id": "q3",
       "kind": "code_input",
-      "title": "Check inserted data with multiple filters",
-      "prompt": "You inserted a new item in the 'Kitchen' category with a price of 10.00. Write a SQL query to show all columns for items in the 'Kitchen' category with a price of 10.00.",
-      "starterCode": "-- Show all columns for Kitchen items with price 10.00",
-      "solutionCode": "SELECT * FROM inventory_items WHERE category = 'Kitchen' AND price = 10.00;",
+      "title": "Check the total number of items after insert",
+      "prompt": "After inserting new data, you want to know how many rows are in the `inventory_items` table. Write a SQL query to show the total count.",
+      "starterCode": "-- Write your query here",
+      "solutionCode": "SELECT COUNT(*) FROM inventory_items;",
       "datasetId": "inventory_ops",
       "recipeType": "sql_query",
       "hint": "Focus on the concept being tested.",
@@ -67,7 +67,7 @@
       "id": "q4",
       "kind": "multi_choice",
       "title": "Ways to check your inserted data",
-      "prompt": "Which of the following are good ways to check that your data was inserted correctly into the inventory_items table? Select all that apply.",
+      "prompt": "Which of the following are good ways to check that your INSERT statement worked? Select all that apply.",
       "options": [
         "A command",
         "A table name"
@@ -75,31 +75,31 @@
       "correctOptionIds": [
         "a"
       ],
-      "hint": "Think about how you can confirm the presence and correctness of new rows.",
+      "hint": "Think about how you can view or count the affected rows.",
       "help": {
-        "concept": "Verifying inserted data involves querying the table to confirm the new row is present and correct.",
-        "hint_1": "Look for methods that directly check the table's contents.",
-        "hint_2": "SELECT queries and row counts help confirm inserts; assuming or restarting does not."
+        "concept": "After inserting data, you can use SELECT queries to view the new rows or count the total rows to confirm your changes.",
+        "hint_1": "SELECT * and SELECT with WHERE are both useful. COUNT(*) can also help.",
+        "hint_2": "You can't check inserts by running another INSERT or by dropping the table."
       }
     },
     {
       "id": "q5",
       "kind": "fill_blank_choice",
-      "title": "Fill in the blank: Checking for a specific value",
-      "prompt": "Choose the best value for the first missing blank in the statement.",
-      "template": "The first missing value is [blank1].",
+      "title": "Fill in the blank: Checking a specific row",
+      "prompt": "Fill in the blank to complete the SQL query that checks for a row with the name 'Canvas Print' in the `inventory_items` table.",
+      "template": "SELECT * FROM inventory_items WHERE name = [blank];",
       "choices": [
-        "'Sample Poster'",
-        "Sample Poster",
-        "\"Sample Poster\"",
-        "'Poster'"
+        "'Canvas Print'",
+        "'canvas print'",
+        "'Sticker Pack'",
+        "Canvas Print"
       ],
-      "correctValue": "'Sample Poster'",
-      "hint": "The value should match the item name exactly as stored in the table.",
+      "correctValue": "'Canvas Print'",
+      "hint": "Focus on the missing SQL concept rather than the exact missing word.",
       "help": {
-        "concept": "String values in SQL queries must be enclosed in single quotes to match the exact value in the table.",
-        "hint_1": "Remember to use single quotes for string literals in SQL.",
-        "hint_2": "The value should be exactly as it appears in the table, with correct quoting."
+        "concept": "The blank should be filled with the SQL term that matches the job the statement is trying to perform.",
+        "hint_1": "Think about what the missing part is supposed to do in the statement.",
+        "hint_2": "Choose the SQL term that best completes the meaning of the statement."
       }
     }
   ]

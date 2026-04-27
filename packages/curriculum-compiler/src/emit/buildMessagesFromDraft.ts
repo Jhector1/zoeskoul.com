@@ -37,6 +37,36 @@ function splitQualifiedBase(messageBase: string): string[] {
         .filter(Boolean);
 }
 
+function uniqueNonEmpty(values: string[]) {
+    return Array.from(new Set(values.map((x) => x.trim()).filter(Boolean)));
+}
+
+function projectStepIdFromExerciseId(id: string) {
+    return id
+        .trim()
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "_")
+        .replace(/^_+|_+$/g, "");
+}
+
+function buildProjectStepIds(draft: TopicAuthoringDraft) {
+    const codeInputIds = draft.quizDraft
+        .filter((exercise) => exercise.kind === "code_input")
+        .map((exercise) => exercise.id);
+
+    const codeInputSet = new Set(codeInputIds);
+
+    const explicit = (draft.projectDraft?.stepIds ?? []).filter((id) =>
+        codeInputSet.has(id),
+    );
+
+    return uniqueNonEmpty([...explicit, ...codeInputIds]);
+}
+
+function hasQuizExercises(draft: TopicAuthoringDraft) {
+    return draft.quizDraft.some((exercise) => exercise.kind !== "code_input");
+}
+
 export function buildMessagesFromDraft(args: {
     shape: SubjectShapePack;
     seed: TopicSeed;
@@ -62,11 +92,23 @@ export function buildMessagesFromDraft(args: {
         setNested(out, [...topicPath, "cards", `sketch${index}`, "title"], block.title);
     });
 
-    if (draft.projectDraft) {
-        setNested(out, [...topicPath, "cards", "project", "title"], draft.projectDraft.title);
+    const projectStepIds = buildProjectStepIds(draft);
 
-        for (const stepId of draft.projectDraft.stepIds) {
-            const exercise = draft.quizDraft.find((q) => q.id === stepId);
+    if (hasQuizExercises(draft)) {
+        setNested(out, [...topicPath, "cards", "quiz", "title"], "Quiz");
+    }
+
+    if (projectStepIds.length > 0) {
+        setNested(
+            out,
+            [...topicPath, "cards", "project", "title"],
+            draft.projectDraft?.title || "Practice",
+        );
+
+        for (const exerciseId of projectStepIds) {
+            const stepId = projectStepIdFromExerciseId(exerciseId);
+            const exercise = draft.quizDraft.find((q) => q.id === exerciseId);
+
             setNested(
                 out,
                 [...topicPath, "projectSteps", stepId, "title"],
@@ -74,8 +116,6 @@ export function buildMessagesFromDraft(args: {
             );
         }
     }
-
-    setNested(out, [...topicPath, "cards", "quiz", "title"], "Quiz");
 
     for (const block of draft.sketchBlocks) {
         setNested(out, [...sketchPath, block.id, "title"], block.title);

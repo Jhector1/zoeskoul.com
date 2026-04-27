@@ -1,0 +1,117 @@
+{
+  "title": "Thinking before changing data",
+  "summary": "Learn why previewing and filtering are essential before updating or deleting data in SQL. Build safe habits to avoid accidental data loss and ensure only intended records are changed.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch-preview-before-change",
+      "title": "Preview Before You Change",
+      "bodyMarkdown": "Before running an `UPDATE` or `DELETE` statement, always preview the rows you intend to affect. Use a `SELECT` query with the same `WHERE` clause to see which records will be changed. For example:\n\n```sql\n-- Preview rows to be updated\nSELECT * FROM inventory_items WHERE status = 'draft';\n```\n\nThis helps you confirm that your filter is correct and prevents accidental changes to unintended rows."
+    },
+    {
+      "id": "sketch-why-where-important",
+      "title": "Why WHERE Is Critical",
+      "bodyMarkdown": "Running `UPDATE` or `DELETE` without a `WHERE` clause will affect **all rows** in the table. For example:\n\n```sql\nDELETE FROM inventory_items;\n```\n\nThis statement deletes every row! Always use a `WHERE` clause to target only the rows you want to change:\n\n```sql\nDELETE FROM inventory_items WHERE is_test = 1;\n```\n\nThis deletes only test items, keeping your real data safe."
+    },
+    {
+      "id": "sketch-accidental-data-loss",
+      "title": "Accidental Data Loss Is Hard to Undo",
+      "bodyMarkdown": "Unlike a bad `SELECT` query, which only displays data, a mistaken `UPDATE` or `DELETE` can permanently change or remove records. Restoring lost data is often difficult or impossible without a backup. That's why it's crucial to double-check your filters and preview the affected rows before making changes."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "code-preview-select",
+      "kind": "code_input",
+      "title": "Preview rows before updating",
+      "prompt": "Before updating all items with status 'draft' in the `inventory_items` table, write a SQL query to preview which rows would be affected.",
+      "hint": "Use SELECT with a WHERE clause matching the update condition.",
+      "help": {
+        "concept": "Previewing with SELECT lets you see which rows match your filter before making changes.",
+        "hint_1": "Write a SELECT statement using WHERE status = 'draft'.",
+        "hint_2": "SELECT * FROM inventory_items WHERE ... will show the rows you plan to update."
+      },
+      "starterCode": "-- Write a query to preview all draft items\n",
+      "solutionCode": "SELECT * FROM inventory_items WHERE status = 'draft';",
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "code-safe-delete-test-items",
+      "kind": "code_input",
+      "title": "Safely delete only test items",
+      "prompt": "Write a SQL statement to delete only the rows in `inventory_items` where `is_test` is 1.",
+      "hint": "Use DELETE with a WHERE clause to target test items.",
+      "help": {
+        "concept": "DELETE statements should always use a WHERE clause to avoid removing all data.",
+        "hint_1": "Add WHERE is_test = 1 to your DELETE statement.",
+        "hint_2": "DELETE FROM inventory_items WHERE ... will remove only test rows."
+      },
+      "starterCode": "-- Delete only test items from inventory_items\n",
+      "solutionCode": "DELETE FROM inventory_items WHERE is_test = 1;",
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query",
+      "checkSql": "SELECT * FROM inventory_items WHERE is_test = 1;"
+    },
+    {
+      "id": "code-update-status-inactive",
+      "kind": "code_input",
+      "title": "Update status for inactive decor items",
+      "prompt": "Write a SQL statement to update the `status` to 'archived' for all rows in `inventory_items` where `category` is 'Decor' and `status` is 'inactive'.",
+      "hint": "Use UPDATE with SET and a WHERE clause for both conditions.",
+      "help": {
+        "concept": "Combining multiple conditions in WHERE ensures only the intended rows are updated.",
+        "hint_1": "Use WHERE category = 'Decor' AND status = 'inactive'.",
+        "hint_2": "UPDATE inventory_items SET status = ... WHERE category = ... AND status = ... will target only those rows."
+      },
+      "starterCode": "-- Update status for inactive decor items\n",
+      "solutionCode": "UPDATE inventory_items SET status = 'archived' WHERE category = 'Decor' AND status = 'inactive';",
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query",
+      "checkSql": "SELECT * FROM inventory_items WHERE category = 'Decor' AND status = 'archived';"
+    },
+    {
+      "id": "multi-why-preview-important",
+      "kind": "multi_choice",
+      "title": "Why is previewing with SELECT important before UPDATE or DELETE?",
+      "prompt": "Select all reasons why you should preview rows with a SELECT statement before running an UPDATE or DELETE.",
+      "hint": "Think about what could go wrong if you skip the preview.",
+      "help": {
+        "concept": "Previewing helps you avoid mistakes and ensures only intended rows are changed or deleted.",
+        "hint_1": "Previewing shows which rows match your filter and helps prevent accidental changes.",
+        "hint_2": "It helps you catch mistakes before they affect your data."
+      },
+      "options": {
+        "a": "To confirm which rows will be affected",
+        "b": "To avoid accidentally changing or deleting the wrong rows",
+        "c": "To make the query run faster",
+        "d": "To double-check your WHERE clause logic"
+      },
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ]
+    },
+    {
+      "id": "fillblank-where-required",
+      "kind": "fill_blank_choice",
+      "title": "The role of WHERE in data changes",
+      "prompt": "Fill in the blank: In SQL, the ______ clause is essential in UPDATE and DELETE statements to ensure only specific rows are changed.",
+      "hint": "It's the clause that filters which rows are affected.",
+      "help": {
+        "concept": "The WHERE clause limits the rows affected by UPDATE or DELETE.",
+        "hint_1": "It's the same clause used to filter rows in SELECT.",
+        "hint_2": "Without this clause, all rows would be changed."
+      },
+      "template": "In SQL, the ______ clause is essential in UPDATE and DELETE statements to ensure only specific rows are changed.",
+      "choices": [
+        "ORDER BY",
+        "GROUP BY",
+        "WHERE",
+        "HAVING"
+      ],
+      "correctValue": "WHERE"
+    }
+  ]
+}

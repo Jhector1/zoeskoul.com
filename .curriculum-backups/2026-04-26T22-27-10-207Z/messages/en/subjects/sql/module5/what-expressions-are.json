@@ -1,0 +1,112 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_5": {
+        "what-expressions-are": {
+          "label": "What expressions are",
+          "summary": "Understand what expressions are in SQL, how they are used to create new values in queries, and why they are essential for calculated columns.",
+          "cards": {
+            "sketch0": {
+              "title": "What is an Expression in SQL?"
+            },
+            "sketch1": {
+              "title": "Expressions with Functions and Aliases"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "quiz": {
+            "code-1": {
+              "title": "Calculate a new column using an expression",
+              "prompt": "Write a SQL query to select `id`, `quantity`, `unit_price`, and a new column called `line_total` that multiplies `quantity` by `unit_price` from the `orders` table.",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+                "hint_1": "Eliminate choices or interpretations that do not match the task.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "starterCode": "SELECT id, quantity, unit_price\n-- Add your expression here\nFROM orders;"
+            },
+            "code-2": {
+              "title": "Using an expression with a function",
+              "prompt": "Write a SQL query to select `id` and a new column called `double_quantity` that is twice the value of `quantity` for each order.",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+                "hint_1": "Eliminate choices or interpretations that do not match the task.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "starterCode": "SELECT id,\n-- Your expression here\nFROM orders;"
+            },
+            "single-1": {
+              "title": "Identifying an expression",
+              "prompt": "Which of the following is an example of an expression in SQL?",
+              "hint": "Look for a calculation or transformation using columns or values.",
+              "help": {
+                "concept": "An expression is any valid combination of columns, values, operators, or functions that returns a single value.",
+                "hint_1": "Expressions often use arithmetic or functions.",
+                "hint_2": "Multiplying two columns is a classic example of an expression."
+              },
+              "options": {
+                "a": "a. SELECT * FROM orders;",
+                "b": "b. quantity * unit_price",
+                "c": "c. FROM orders",
+                "d": "d. AS line_total"
+              }
+            },
+            "multi-1": {
+              "title": "Which of the following are valid SQL expressions?",
+              "prompt": "Select all options that are valid SQL expressions.",
+              "hint": "Expressions can be arithmetic, functions, or direct column references.",
+              "help": {
+                "concept": "Valid expressions include arithmetic operations, function calls, and even single column references.",
+                "hint_1": "Think about what can appear in a SELECT clause to produce a value.",
+                "hint_2": "Both calculations and function calls are valid expressions."
+              },
+              "options": {
+                "a": "a. quantity + 10",
+                "b": "b. ROUND(unit_price, 1)",
+                "c": "c. orders",
+                "d": "d. status"
+              }
+            },
+            "fill-1": {
+              "title": "Fill in the blank: Expression result",
+              "prompt": "In SQL, an expression always produces a ______.",
+              "hint": "What does an expression return?",
+              "help": {
+                "concept": "An expression in SQL always evaluates to a the missing term.",
+                "hint_1": "Think about the output of a calculation or function.",
+                "hint_2": "It's not a table or a column name, but a single outcome."
+              },
+              "template": "In SQL, an expression always produces a {blank}.",
+              "choices": [
+                "table",
+                "single value",
+                "column name",
+                "row"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_5": {
+        "what-expressions-are": {
+          "sketch-1": {
+            "title": "What is an Expression in SQL?",
+            "bodyMarkdown": "An **expression** in SQL is any combination of values, columns, operators, and functions that produces a single value. Expressions are often used in the `SELECT` clause to calculate new columns or transform data. For example, you can multiply two columns to get a new value:\n\n```sql\nSELECT id, quantity * unit_price AS line_total\nFROM orders;\n```\n\nHere, `quantity * unit_price` is an expression that calculates the total price for each order line."
+          },
+          "sketch-2": {
+            "title": "Expressions with Functions and Aliases",
+            "bodyMarkdown": "Expressions can also use built-in SQL functions. For example, you can round a calculated value:\n\n```sql\nSELECT id, ROUND(quantity * unit_price, 2) AS rounded_total\nFROM orders;\n```\n\nThe `ROUND()` function is applied to the expression, and the result is given the alias `rounded_total` for clarity."
+          }
+        }
+      }
+    }
+  }
+}

@@ -6,21 +6,21 @@
       "code": "SQL_RUNNER_NOT_CONFIGURED",
       "category": "execution",
       "severity": "warn",
-      "exerciseId": "q1-code-insert-basic",
+      "exerciseId": "ex-1",
       "message": "No shared SQL runner is configured for compiler-side semantic validation."
     },
     {
       "code": "SQL_RUNNER_NOT_CONFIGURED",
       "category": "execution",
       "severity": "warn",
-      "exerciseId": "q2-code-insert-null",
+      "exerciseId": "ex-2",
       "message": "No shared SQL runner is configured for compiler-side semantic validation."
     },
     {
       "code": "SQL_RUNNER_NOT_CONFIGURED",
       "category": "execution",
       "severity": "warn",
-      "exerciseId": "q3-code-insert-default",
+      "exerciseId": "ex-3",
       "message": "No shared SQL runner is configured for compiler-side semantic validation."
     }
   ]

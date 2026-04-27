@@ -8,7 +8,7 @@ import { ArrowLeft, CheckCircle2, PlayCircle, Sparkles } from "lucide-react";
 import { cn } from "@/lib/cn";
 import { useReviewProgressMany } from "@/components/review/module/hooks/useReviewProgressMany";
 import { ROUTES } from "@/utils";
-import type { ModuleMeta } from "@/seed/data/subjects/_types";
+import type { ModuleMeta } from "@/lib/subjects/_core/defineModule";
 import NavButton from "@/components/ui/NavButton";
 
 type Props = {

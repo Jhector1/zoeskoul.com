@@ -1,7 +1,7 @@
 // src/lib/billing/enforceModuleAccessOrRedirect.ts
 import "server-only";
 import { redirect } from "next/navigation";
-import type { PrismaClient } from "@prisma/client";
+import type { PrismaClient } from "@/lib/prisma";
 import { checkModuleAccess } from "@/lib/access/moduleAccessServer";
 import { buildBillingHref } from "@/lib/billing/moduleAccess";
 import type { Actor } from "@/lib/practice/actor";

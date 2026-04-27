@@ -22,6 +22,7 @@ export type ValidateSqlAgainstSolutionResult = {
 export async function validateSqlAgainstSolution(args: {
     learnerSql: string;
     solutionSql: string;
+    checkSql?: string;
     dialect?: string;
     schemaSql?: string;
     seedSql?: string;
@@ -48,6 +49,7 @@ export async function validateSqlAgainstSolution(args: {
 
     const learnerRun = await runSql({
         code: args.learnerSql,
+        checkSql: args.checkSql,
         dialect,
         schemaSql: args.schemaSql,
         seedSql: args.seedSql,
@@ -77,6 +79,7 @@ export async function validateSqlAgainstSolution(args: {
 
     const solutionRun = await runSql({
         code: args.solutionSql,
+        checkSql: args.checkSql,
         dialect,
         schemaSql: args.schemaSql,
         seedSql: args.seedSql,

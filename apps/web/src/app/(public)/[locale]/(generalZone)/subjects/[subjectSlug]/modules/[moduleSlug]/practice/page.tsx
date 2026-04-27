@@ -1,8 +1,9 @@
 // src/app/(public)/[locale]/subjects/[subjectSlug]/modules/[moduleSlug]/practice/page.tsx
-import { prisma } from "@/lib/prisma";
 import { auth } from "@/lib/auth";
 import PracticeClient from "./practice-client";
 import { enforceModuleAccessOrRedirect } from "@/lib/billing/enforceModuleAccessOrRedirect";
+import { prisma } from "@/lib/prisma";
+import { resolvePrivilegedLearningAccess } from "@/lib/access/resolvePrivilegedLearningAccess";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -30,15 +31,13 @@ export default async function ModulePracticePage({
   const sp = await searchParams;
 
   const session = await auth();
-  const userId: string | null = (session as any)?.user?.id ?? null;
-
-  // teacher/admin bypass
-  let bypass = false;
-  if (userId) {
-    const u = await prisma.user.findUnique({ where: { id: userId }, select: { roles: true } });
-    const roles: string[] = (u as any)?.roles ?? [];
-    bypass = roles.includes("teacher") || roles.includes("admin");
-  }
+  const sessionUser: any = (session as any)?.user ?? null;
+  const userId: string | null = sessionUser?.id ?? null;
+  const email: string | null = sessionUser?.email ?? null;
+  const { bypass } = await resolvePrivilegedLearningAccess({
+    userId,
+    email,
+  });
 
   const nextPath =
       `/${encodeURIComponent(locale)}/subjects/${encodeURIComponent(subjectSlug)}` +

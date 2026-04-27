@@ -4,7 +4,7 @@
       "sql_module_11": {
         "avoiding-insert-errors": {
           "label": "Avoiding insert errors",
-          "summary": "Learn how to avoid common errors when inserting data into SQL tables by using explicit column lists, understanding required columns, and handling NULLs and defaults.",
+          "summary": "Learn how to avoid common errors when inserting data into tables by using explicit column lists, understanding required columns, and handling NULLs and defaults safely.",
           "cards": {
             "sketch0": {
               "title": "Why insert errors happen"
@@ -17,12 +17,26 @@
             },
             "quiz": {
               "title": "Quiz"
+            },
+            "project": {
+              "title": "Practice"
+            }
+          },
+          "projectSteps": {
+            "q1": {
+              "title": "Insert a new inventory item safely"
+            },
+            "q2": {
+              "title": "Insert with all required columns"
+            },
+            "q3": {
+              "title": "Insert with NULL for optional column"
             }
           },
           "quiz": {
-            "q1-explicit-columns-insert": {
-              "title": "Insert a new item safely",
-              "prompt": "Write an INSERT statement to add a new row to the `inventory_items` table with the following values:\n- name: 'Desk Mat'\n- category: 'Accessories'\n- price: 19.99\n- status: 'active'\n- is_test: 0\n- last_updated: '2026-02-12'\n\nDo not provide a value for `notes`. Use an explicit column list.",
+            "q1": {
+              "title": "Insert a new inventory item safely",
+              "prompt": "Write an INSERT statement to add a new row to `inventory_items` with the following values:\n- name: 'Desk Organizer'\n- category: 'Accessories'\n- price: 8.25\n- status: (use the default)\n- is_test: 0\n- notes: leave as NULL\n- last_updated: '2026-02-10'\n\nUse an explicit column list and do not provide a value for `status` or `notes`.",
               "hint": "Focus on the SQL task being asked for, not on copying final query text.",
               "help": {
                 "concept": "Build the query from the operation the exercise is testing.",
@@ -31,58 +45,58 @@
               },
               "starterCode": "-- Write your INSERT statement below"
             },
-            "q2-missing-required-column": {
-              "title": "Which INSERT statements will cause errors?",
-              "prompt": "Given the `inventory_items` table, which of the following INSERT statements would cause an error? Select all that apply.",
-              "hint": "Check for missing NOT NULL columns or mismatched value counts.",
+            "q2": {
+              "title": "Insert with all required columns",
+              "prompt": "Write an INSERT statement that adds a new inventory item with these details:\n- name: 'Ceramic Coaster'\n- category: 'Kitchen'\n- price: 5.00\n- status: 'active'\n- is_test: 0\n- notes: 'Limited edition'\n- last_updated: '2026-02-11'\n\nMake sure all NOT NULL columns are included.",
+              "hint": "Focus on the SQL task being asked for, not on copying final query text.",
               "help": {
-                "concept": "Omitting required (NOT NULL) columns or mismatching the number of columns and values in an INSERT statement will cause errors.",
-                "hint_1": "Look for statements missing required columns or with too many/few values.",
-                "hint_2": "Remember: `name`, `category`, `price`, `status`, `is_test`, and `last_updated` are NOT NULL."
+                "concept": "Build the query from the operation the exercise is testing.",
+                "hint_1": "Think about which clauses or functions are required for the task.",
+                "hint_2": "Construct the query based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "-- Write your INSERT statement below"
+            },
+            "q3": {
+              "title": "Insert with NULL for optional column",
+              "prompt": "Add a new row to `inventory_items` for a product called 'Sample Magnet' in the 'Decor' category, priced at 2.75. Set status to 'draft', is_test to 1, and last_updated to '2026-02-12'. Leave `notes` as NULL.",
+              "hint": "Focus on the SQL task being asked for, not on copying final query text.",
+              "help": {
+                "concept": "Build the query from the operation the exercise is testing.",
+                "hint_1": "Think about which clauses or functions are required for the task.",
+                "hint_2": "Construct the query based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "-- Write your INSERT statement below"
+            },
+            "q4": {
+              "title": "Which actions help avoid insert errors?",
+              "prompt": "Select all actions that help prevent errors when inserting data into a table.",
+              "hint": "Think about practices that make your intent clear and match the table structure.",
+              "help": {
+                "concept": "Using explicit column lists, providing all required values, and understanding defaults/NULLs help avoid insert errors.",
+                "hint_1": "Consider what happens if you omit a required column or mix up the order.",
+                "hint_2": "Actions that clarify which columns get which values are safest."
               },
               "options": {
                 "a": "A command",
                 "b": "A table name"
               }
             },
-            "q3-defaults-and-nulls": {
-              "title": "Understanding defaults and NULLs",
-              "prompt": "If you omit the `status` column in an INSERT statement for `inventory_items`, what value will it have by default?",
-              "hint": "Check the table schema for the default value of `status`.",
+            "q5": {
+              "title": "Default values in inserts",
+              "prompt": "Choose the best value for the first missing blank in the statement.",
+              "hint": "Think about what the database does when you don't provide a value for a column with a the missing term.",
               "help": {
-                "concept": "Columns with a DEFAULT value will use that value if not provided in an INSERT statement.",
-                "hint_1": "Look for the DEFAULT keyword in the table definition for `status`.",
-                "hint_2": "The default for `status` is a string value set in the schema."
+                "concept": "If a column has a the missing term value and you omit it from your INSERT, the database fills in the the missing term.",
+                "hint_1": "The database doesn't leave the column empty; it uses something specified in the table definition.",
+                "hint_2": "Check the table schema for the keyword that tells the database what to use if no value is provided."
               },
-              "template": "The default value for `status` is [blank].",
+              "template": "The first missing value is [blank1].",
               "choices": [
+                "default",
                 "NULL",
-                "draft",
-                "active",
-                "0"
+                "first",
+                "empty string"
               ]
-            },
-            "q4-insert-null-notes": {
-              "title": "Insert with NULL for notes",
-              "prompt": "Write an INSERT statement to add a new row to `inventory_items` with these values:\n- name: 'Sample Bag'\n- category: 'Accessories'\n- price: 12.00\n- status: 'active'\n- is_test: 0\n- notes: NULL\n- last_updated: '2026-02-15'\n\nUse an explicit column list.",
-              "hint": "Focus on the SQL task being asked for, not on copying final query text.",
-              "help": {
-                "concept": "Build the query from the operation the exercise is testing.",
-                "hint_1": "Think about which clauses or functions are required for the task.",
-                "hint_2": "Construct the query based on what result the exercise expects, not by repeating exact solution wording."
-              },
-              "starterCode": "-- Write your INSERT statement below"
-            },
-            "q5-insert-minimal-required": {
-              "title": "Insert with minimal required columns",
-              "prompt": "Write an INSERT statement that adds a new row to `inventory_items` with only the required columns, letting any columns with defaults or NULLs be handled automatically. Use these values:\n- name: 'Trial Cup'\n- category: 'Kitchen'\n- price: 5.00\n- is_test: 0\n- last_updated: '2026-02-16'\n\nDo not specify `status` or `notes`.",
-              "hint": "Omit columns that have defaults or allow NULL. Only include required columns.",
-              "help": {
-                "concept": "You can omit columns with defaults or that allow NULL. The database will use the default or NULL as needed.",
-                "hint_1": "Do not include `status` or `notes` in the column list.",
-                "hint_2": "List only the columns that are NOT NULL and have no default."
-              },
-              "starterCode": "-- Write your INSERT statement below"
             }
           }
         }
@@ -93,17 +107,17 @@
     "sql": {
       "sql_module_11": {
         "avoiding-insert-errors": {
-          "sketch-1": {
+          "sk1": {
             "title": "Why insert errors happen",
-            "bodyMarkdown": "When inserting data into a table, errors can occur if you omit required columns, provide values of the wrong type, or mismatch the order of values. For example, the `inventory_items` table requires `name`, `category`, `price`, `status`, `is_test`, and `last_updated` to be provided (unless they have defaults). Forgetting to specify a NOT NULL column or mixing up the order can cause errors."
+            "bodyMarkdown": "When inserting data into a table, errors often occur if you leave out required columns, mismatch column order, or provide the wrong data types. For example, the `inventory_items` table requires `name`, `category`, `price`, `status`, `is_test`, and `last_updated` to be provided, unless a default is set. Forgetting to specify a NOT NULL column or mixing up the order can cause your insert to fail."
           },
-          "sketch-2": {
+          "sk2": {
             "title": "Safer inserts with explicit columns",
-            "bodyMarkdown": "It's safer to always specify the columns you are inserting into. For example:\n\n```sql\nINSERT INTO inventory_items (name, category, price, status, is_test, last_updated)\nVALUES ('Notebook', 'Accessories', 6.50, 'active', 0, '2026-02-10');\n```\n\nThis ensures each value matches the correct column, and you avoid errors if the table structure changes."
+            "bodyMarkdown": "It's best practice to always specify the columns you are inserting into. For example:\n\n```sql\nINSERT INTO inventory_items (name, category, price, status, is_test, last_updated)\nVALUES ('New Keychain', 'Accessories', 3.50, 'active', 0, '2026-02-10');\n```\n\nThis makes your intent clear and avoids errors if the table structure changes."
           },
-          "sketch-3": {
+          "sk3": {
             "title": "Handling NULLs and defaults",
-            "bodyMarkdown": "Some columns allow NULL values or have default values. For example, `notes` can be omitted (it will be NULL), and `status` has a default of `'draft'` if not specified. However, columns like `name`, `category`, and `price` are NOT NULL and must be provided. Always check the table schema to know which columns require values."
+            "bodyMarkdown": "Some columns allow NULL values or have defaults. For example, `notes` is nullable, and `status` has a default of `'draft'`. If you omit `notes`, it will be NULL. If you omit `status`, it will default to `'draft'` unless you specify otherwise. Understanding which columns are required, nullable, or have defaults helps you avoid insert errors."
           }
         }
       }

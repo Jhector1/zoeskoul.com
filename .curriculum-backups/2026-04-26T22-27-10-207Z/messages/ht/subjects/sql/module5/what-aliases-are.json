@@ -1,0 +1,108 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_5": {
+        "what-aliases-are": {
+          "label": "Kisa alias yo ye",
+          "summary": "Kisa alias yo ye nan Kolòn Kalkile ak Ekspresyon SQL",
+          "cards": {
+            "sketch0": {
+              "title": "Entwodiksyon Alias nan SQL"
+            },
+            "sketch1": {
+              "title": "Poukisa Itilize Alias?"
+            },
+            "quiz": {
+              "title": "Kesyonè"
+            }
+          },
+          "quiz": {
+            "q1": {
+              "title": "Kreye yon kolòn kalkile ak yon alias",
+              "prompt": "Ekri yon demann SQL pou chwazi `customer_name` ak valè total chak lòd (kantite miltipliye pa pri inite) nan tab `orders`. Bay kolòn kalkile a non `order_value` ak yon alias.",
+              "hint": "Konsantre sou konsèp la yo ap teste a.",
+              "help": {
+                "concept": "Reflechi sou wòl oswa lide yo ap teste a olye pou repete repons lan.",
+                "hint_1": "Elimine chwa oswa entèpretasyon ki pa koresponn ak sa yo mande a.",
+                "hint_2": "Chwazi konsèp ki pi byen matche ak sa egzèsis la ap mande w fè."
+              },
+              "starterCode": "SELECT customer_name, \n       quantity * unit_price AS order_value\nFROM orders;"
+            },
+            "q2": {
+              "title": "Alias pou yon kolòn senp",
+              "prompt": "Ekri yon demann SQL pou chwazi kolòn `region` nan tab `orders`, men montre li kòm `area` nan rezilta a ak yon alias.",
+              "hint": "Konsantre sou konsèp la yo ap teste a.",
+              "help": {
+                "concept": "Reflechi sou wòl oswa lide yo ap teste a olye pou repete repons lan.",
+                "hint_1": "Elimine chwa oswa entèpretasyon ki pa koresponn ak sa yo mande a.",
+                "hint_2": "Chwazi konsèp ki pi byen matche ak sa egzèsis la ap mande w fè."
+              },
+              "starterCode": "SELECT region AS area\nFROM orders;"
+            },
+            "q3": {
+              "title": "Objektif alias kolòn yo",
+              "prompt": "Poukisa ou ta itilize yon alias kolòn nan yon demann SQL?",
+              "hint": "Reflechi sou kijan rezilta yo parèt pou yon moun k ap li yo.",
+              "help": {
+                "concept": "Alias kolòn yo fè rezilta yo pi fasil pou li ak konprann paske yo bay kolòn yo non ki gen sans.",
+                "hint_1": "Alias ede klè sa yon kolòn reprezante.",
+                "hint_2": "Yo itil espesyalman pou kolòn kalkile oswa lè non default yo pa klè."
+              },
+              "options": {
+                "a": "[object Object]",
+                "b": "Yon kòmand"
+              }
+            },
+            "q4": {
+              "title": "Itilizasyon valab alias yo",
+              "prompt": "Ki itilizasyon alias kolòn ki valab nan SQL? Chwazi tout sa ki aplikab.",
+              "hint": "Reflechi sou tou de kolòn kalkile ak kolòn regilye yo.",
+              "help": {
+                "concept": "Alias yo ka itilize pou kolòn kalkile ak pou chanje non kolòn ki egziste deja pou plis klè nan rezilta yo.",
+                "hint_1": "Ou ka itilize alias pou ekspresyon ak pou kolòn regilye.",
+                "hint_2": "Si ou vle chanje non yon kolòn oswa yon ekspresyon nan rezilta SELECT ou a, ou ka itilize yon alias."
+              },
+              "options": {
+                "a": "[object Object]",
+                "b": "Yon kòmand"
+              }
+            },
+            "q5": {
+              "title": "Sentaks pou alias kolòn",
+              "prompt": "Ranpli vid la pou asiyen yon alias kòrèkteman ak yon kolòn kalkile nan SQL.",
+              "hint": "Konsantre sou konsèp SQL ki manke a olye de mo ki manke a.",
+              "help": {
+                "concept": "Vid la dwe ranpli ak tèm SQL ki koresponn ak travay deklarasyon an ap eseye fè.",
+                "hint_1": "Reflechi sou sa pati ki manke a sipoze fè nan deklarasyon an.",
+                "hint_2": "Chwazi tèm SQL ki pi byen konplete sans deklarasyon an."
+              },
+              "template": "SELECT quantity * unit_price ___ total_price FROM orders;",
+              "choices": [
+                "AS",
+                "WITH",
+                "INTO",
+                "ON"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_5": {
+        "what-aliases-are": {
+          "sk1": {
+            "title": "Entwodiksyon Alias nan SQL",
+            "bodyMarkdown": "Nan SQL, yon **alias** se yon non tanporè ou bay yon kolòn oswa yon tab pandan yon demann. Alias fè rezilta ou yo pi fasil pou li epi demann ou yo pi fasil pou ekri, espesyalman lè w ap itilize kolòn kalkile oswa ekspresyon. Ou kreye yon alias ak mo kle `AS` la.\n\nPa egzanp, si ou vle montre valè total chak lòd nan tab `orders`, ou ka miltipliye `quantity` ak `unit_price` epi bay rezilta a yon non klè:\n\n```sql\nSELECT id, customer_name, quantity * unit_price AS line_total\nFROM orders;\n```\n\nLa a, `line_total` se yon alias pou kolòn kalkile a."
+          },
+          "sk2": {
+            "title": "Poukisa Itilize Alias?",
+            "bodyMarkdown": "Alias ede fè rezilta demann SQL ou yo pi fasil pou konprann. San alias, kolòn kalkile oswa ekspresyon yo ta parèt ak non jeneral oswa ki konfizyon. Pa egzanp, `quantity * unit_price` ta parèt kòm yon kolòn ki rele egzakteman sa, ki pa twò fasil pou itilizatè konprann.\n\nLè ou itilize yon alias, ou ka bay kolòn sa a yon non ki gen sans, tankou `line_total` oswa `total_price`, sa ki fè rapò ou yo pi klè pou nenpòt moun k ap li yo."
+          }
+        }
+      }
+    }
+  }
+}

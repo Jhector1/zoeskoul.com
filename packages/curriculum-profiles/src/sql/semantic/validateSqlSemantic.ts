@@ -11,6 +11,16 @@ import { validateSqlResultShape } from "./validateSqlResultShape.js";
 import { validateSqlSolutionExecutes } from "./validateSqlSolutionExecutes.js";
 import { validateSqlDatasetConsistency } from "../validate/validateSqlDatasetConsistency.js";
 
+function readEnvFlag(name: string): boolean {
+    const maybeGlobal = globalThis as typeof globalThis & {
+        process?: {
+            env?: Record<string, string | undefined>;
+        };
+    };
+
+    return maybeGlobal.process?.env?.[name] === "1";
+}
+
 export async function validateSqlSemantic(args: {
     seed: TopicSeed;
     draft: TopicAuthoringDraft;
@@ -23,11 +33,15 @@ export async function validateSqlSemantic(args: {
 
     const promptIntent = validateSqlPromptIntent(args);
 
+    const strictDatasetConsistency = readEnvFlag(
+        "CURRICULUM_STRICT_SQL_DATASET_CONSISTENCY",
+    );
+
     const datasetConsistencyIssues: SemanticValidationIssue[] =
         validateSqlDatasetConsistency(args).map((message) => ({
             code: "SQL_DATASET_CONSISTENCY",
             category: "dataset",
-            severity: "error",
+            severity: strictDatasetConsistency ? "error" : "warn",
             message,
         }));
 

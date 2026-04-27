@@ -4,33 +4,39 @@
       "sql_module_11": {
         "missing-values-during-insert": {
           "label": "Missing values during insert",
-          "summary": "Learn how SQL handles missing values during INSERT operations, including the use of NULL and DEFAULT values in the inventory_items table.",
+          "summary": "Learn how SQL handles missing values during INSERT, including the use of NULL and DEFAULT values in the inventory_items table.",
           "cards": {
             "sketch0": {
-              "title": "How SQL Handles Missing Values in INSERT"
+              "title": "Handling Missing Values in INSERT"
             },
             "sketch1": {
-              "title": "INSERT Examples with NULL and DEFAULT"
+              "title": "Explicit NULL vs. Omitted Columns"
+            },
+            "sketch2": {
+              "title": "What Happens If You Omit a NOT NULL Column?"
             },
             "quiz": {
               "title": "Quiz"
+            },
+            "project": {
+              "title": "Practice"
+            }
+          },
+          "projectSteps": {
+            "code_1": {
+              "title": "Insert with omitted columns using defaults"
+            },
+            "code_2": {
+              "title": "Insert with explicit NULL"
+            },
+            "code_3": {
+              "title": "Insert with all required columns, omitting optional"
             }
           },
           "quiz": {
-            "q1": {
-              "title": "Insert with omitted DEFAULT and NULL columns",
-              "prompt": "Insert a new row into `inventory_items` with the following values:\n- id: 9\n- name: 'Test Notebook'\n- category: 'Stationery'\n- price: 5.00\n- is_test: 1\n- last_updated: '2026-02-09'\n\nDo NOT specify values for `status` or `notes`. Write the SQL statement.",
-              "hint": "Focus on the SQL task being asked for, not the final solution text.",
-              "help": {
-                "concept": "Build the query from the operation the exercise is testing.",
-                "hint_1": "Eliminate choices or interpretations that do not match the task.",
-                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
-              },
-              "starterCode": "-- Write your INSERT statement here"
-            },
-            "q2": {
-              "title": "Insert with explicit NULL value",
-              "prompt": "Insert a new row into `inventory_items` with these values:\n- id: 10\n- name: 'Sample Pen'\n- category: 'Stationery'\n- price: 1.50\n- status: 'active'\n- is_test: 0\n- notes: NULL\n- last_updated: '2026-02-10'\n\nWrite the SQL statement.",
+            "code-1": {
+              "title": "Insert with omitted columns using defaults",
+              "prompt": "Insert a new inventory item named 'Gift Card' in the 'Accessories' category with a price of 25.00. Only provide values for name, category, and price. The other columns should use their default values or NULL where allowed.",
               "hint": "Focus on the SQL task being asked for, not on copying final query text.",
               "help": {
                 "concept": "Build the query from the operation the exercise is testing.",
@@ -39,9 +45,9 @@
               },
               "starterCode": "-- Write your INSERT statement here"
             },
-            "q3": {
-              "title": "Insert that fails due to missing NOT NULL column",
-              "prompt": "Try to insert a row into `inventory_items` with these values:\n- id: 11\n- category: 'Decor'\n- price: 8.00\n- status: 'active'\n- is_test: 0\n- last_updated: '2026-02-11'\n\nDo NOT specify a value for `name`. Write the SQL statement.",
+            "code-2": {
+              "title": "Insert with explicit NULL",
+              "prompt": "Insert a new inventory item named 'Sample Notebook' in the 'Accessories' category with a price of 8.00. Set the notes column to NULL explicitly. Use only the required columns and notes.",
               "hint": "Focus on the SQL task being asked for, not on copying final query text.",
               "help": {
                 "concept": "Build the query from the operation the exercise is testing.",
@@ -50,36 +56,46 @@
               },
               "starterCode": "-- Write your INSERT statement here"
             },
-            "q4": {
+            "code-3": {
+              "title": "Insert with all required columns, omitting optional",
+              "prompt": "Insert a new inventory item named 'Trial Keychain' in the 'Accessories' category with a price of 2.50. Do not provide a value for notes. Only include the required columns.",
+              "hint": "Focus on the SQL task being asked for, not on copying final query text.",
+              "help": {
+                "concept": "Build the query from the operation the exercise is testing.",
+                "hint_1": "Think about which clauses or functions are required for the task.",
+                "hint_2": "Construct the query based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "-- Write your INSERT statement here"
+            },
+            "multi-1": {
               "title": "Which columns can be omitted in an INSERT?",
-              "prompt": "Which columns in the `inventory_items` table can you safely omit from an INSERT statement (when using a column list)? Select all that apply.",
-              "hint": "Look for columns that have a DEFAULT or allow NULL.",
+              "prompt": "Which of the following columns in the inventory_items table can be omitted from an INSERT statement and still allow the row to be inserted successfully? Select all that apply.",
+              "hint": "Look for columns that have a DEFAULT value or allow NULL.",
               "help": {
                 "concept": "Columns with a DEFAULT value or that allow NULL can be omitted from an INSERT statement.",
-                "hint_1": "Check the table definition for DEFAULT values and NULL constraints.",
-                "hint_2": "Columns like 'status', 'is_test', and 'notes' can be omitted because they have a DEFAULT or allow NULL."
+                "hint_1": "Check the schema for columns with DEFAULT or NULL allowed.",
+                "hint_2": "Omit columns like notes, status, is_test, and last_updated if they have defaults or allow NULL."
               },
               "options": {
                 "a": "[object Object]",
                 "b": "A command"
               }
             },
-            "q5": {
-              "title": "Default value for omitted column",
-              "prompt": "If you omit the `status` column in an INSERT into `inventory_items`, what value will it have?",
-              "hint": "Check the DEFAULT value for the 'status' column in the table definition.",
+            "fill-1": {
+              "title": "Default value for status",
+              "prompt": "What value will the status column have if you omit it in an INSERT statement for inventory_items?",
+              "hint": "Check the DEFAULT value for status in the table schema.",
               "help": {
-                "concept": "When a column with a DEFAULT is omitted in an INSERT, SQL uses the DEFAULT value.",
-                "hint_1": "Look at the CREATE TABLE statement for the default value of 'status'.",
-                "hint_2": "The default is a text value set in single quotes."
+                "concept": "If a column has a DEFAULT value and is omitted in an INSERT, SQL uses the DEFAULT.",
+                "hint_1": "Look at the CREATE TABLE statement for the default value of status.",
+                "hint_2": "The default for status is a string set in the schema."
               },
-              "template": "The value of 'status' will be: ___",
+              "template": "If you omit the status column in an INSERT, its value will be: ___",
               "choices": [
-                "NULL",
-                "0",
                 "draft",
+                "NULL",
                 "active",
-                "''"
+                "0"
               ]
             }
           }
@@ -91,13 +107,17 @@
     "sql": {
       "sql_module_11": {
         "missing-values-during-insert": {
-          "sk1": {
-            "title": "How SQL Handles Missing Values in INSERT",
-            "bodyMarkdown": "When inserting data into a table, you don't always have to provide a value for every column. If you omit a column in your INSERT statement, SQL will use the column's DEFAULT value if one is defined, or NULL if the column allows it. However, if a column is defined as NOT NULL and has no DEFAULT, you must provide a value, or the statement will fail.\n\nFor example, in the `inventory_items` table:\n\n```sql\nCREATE TABLE inventory_items (\n  id INTEGER PRIMARY KEY,\n  name TEXT NOT NULL,\n  category TEXT NOT NULL,\n  price REAL NOT NULL,\n  status TEXT NOT NULL DEFAULT 'draft',\n  is_test INTEGER NOT NULL DEFAULT 0,\n  notes TEXT NULL,\n  last_updated TEXT NOT NULL DEFAULT '2026-02-01'\n);\n```\n\nIf you insert a row without specifying `status`, it will default to `'draft'`. If you omit `notes`, it will be set to NULL. But if you omit `name`, the insert will fail because `name` is NOT NULL and has no default."
+          "sketch-1": {
+            "title": "Handling Missing Values in INSERT",
+            "bodyMarkdown": "When inserting data into a table like `inventory_items`, you don't always have to provide a value for every column. If a column allows NULL or has a DEFAULT value, you can omit it in your INSERT statement. For example:\n\n```sql\nINSERT INTO inventory_items (name, category, price) VALUES ('Desk Mat', 'Accessories', 19.99);\n```\n\nHere, columns like `status`, `is_test`, and `last_updated` will use their DEFAULT values, and `notes` will be set to NULL (since it allows NULLs)."
           },
-          "sk2": {
-            "title": "INSERT Examples with NULL and DEFAULT",
-            "bodyMarkdown": "Let's see some INSERT examples:\n\n```sql\n-- Omitting 'status' and 'notes'\nINSERT INTO inventory_items (id, name, category, price, is_test, last_updated)\nVALUES (7, 'Sample Keychain', 'Accessories', 3.00, 0, '2026-02-07');\n```\n\nHere, `status` will be set to its default `'draft'`, and `notes` will be NULL.\n\n```sql\n-- Explicitly inserting NULL for 'notes'\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES (8, 'Demo Magnet', 'Decor', 2.50, 'active', 0, NULL, '2026-02-08');\n```\n\nYou can insert NULL into columns that allow it, like `notes`."
+          "sketch-2": {
+            "title": "Explicit NULL vs. Omitted Columns",
+            "bodyMarkdown": "You can explicitly insert NULL into a column that allows it:\n\n```sql\nINSERT INTO inventory_items (name, category, price, notes) VALUES ('Sample Coaster', 'Kitchen', 3.50, NULL);\n```\n\nOr, you can simply omit the column from your column list, and SQL will use the DEFAULT value (if defined) or NULL (if allowed)."
+          },
+          "sketch-3": {
+            "title": "What Happens If You Omit a NOT NULL Column?",
+            "bodyMarkdown": "If you try to insert a row without providing a value for a NOT NULL column that has no DEFAULT, SQL will return an error. Always check your table schema to know which columns require values and which can be omitted."
           }
         }
       }

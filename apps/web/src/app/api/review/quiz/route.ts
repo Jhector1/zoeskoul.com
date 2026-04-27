@@ -1,5 +1,5 @@
 // src/app/api/review/quiz/route.ts
-import { PracticeKind } from "@prisma/client";
+import { PracticeKind } from "@zoeskoul/db";
 import { prisma } from "@/lib/prisma";
 import {
   getActor,

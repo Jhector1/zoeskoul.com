@@ -1,0 +1,122 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_13": {
+        "what-create-table-does": {
+          "label": "What CREATE TABLE does",
+          "summary": "Understand what the CREATE TABLE statement does in SQL, how it defines a table's structure, and why schema design matters for future queries.",
+          "cards": {
+            "sketch0": {
+              "title": "What is CREATE TABLE?"
+            },
+            "sketch1": {
+              "title": "Why Table Structure Matters"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Practice"
+            }
+          },
+          "projectSteps": {
+            "q1": {
+              "title": "Create a Simple Table"
+            },
+            "q2": {
+              "title": "Add a New Table for Suppliers"
+            },
+            "q3": {
+              "title": "Create a Table with Multiple Constraints"
+            }
+          },
+          "quiz": {
+            "q1": {
+              "title": "Create a Simple Table",
+              "prompt": "Write a SQL statement to create a table named `categories` with the following columns:\n- `id` as an INTEGER PRIMARY KEY\n- `name` as TEXT and NOT NULL",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+                "hint_1": "Eliminate choices or interpretations that do not match the task.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "starterCode": "-- Write your CREATE TABLE statement here"
+            },
+            "q2": {
+              "title": "Add a New Table for Suppliers",
+              "prompt": "Write a SQL statement to create a table called `suppliers` with these columns:\n- `supplier_id` as INTEGER PRIMARY KEY\n- `supplier_name` as TEXT NOT NULL\n- `contact_email` as TEXT",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+                "hint_1": "Eliminate choices or interpretations that do not match the task.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "starterCode": "-- Write your CREATE TABLE statement here"
+            },
+            "q3": {
+              "title": "Create a Table with Multiple Constraints",
+              "prompt": "Write a SQL statement to create a table named `inventory` with these columns:\n- `inventory_id` as INTEGER PRIMARY KEY\n- `product_id` as INTEGER NOT NULL\n- `quantity` as INTEGER NOT NULL\n- `last_updated` as TEXT NOT NULL",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+                "hint_1": "Eliminate choices or interpretations that do not match the task.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "starterCode": "-- Write your CREATE TABLE statement here"
+            },
+            "q4": {
+              "title": "Understanding CREATE TABLE Effects",
+              "prompt": "Which of the following are true about the SQL CREATE TABLE statement? Select all that apply.",
+              "hint": "Think about what CREATE TABLE actually does in the database.",
+              "help": {
+                "concept": "CREATE TABLE defines a new table's structure, including columns and constraints, but does not add any data.",
+                "hint_1": "Does CREATE TABLE add data or just define structure? Does it affect existing tables?",
+                "hint_2": "Consider if CREATE TABLE creates, modifies, or deletes tables, and whether it inserts any rows."
+              },
+              "options": {
+                "a": "a. It defines the columns and data types for a new table.",
+                "b": "b. It can include constraints like PRIMARY KEY or NOT NULL.",
+                "c": "c. It automatically adds one empty row to the new table.",
+                "d": "d. It does not insert any data into the table.",
+                "e": "e. It deletes any existing table with the same name."
+              }
+            },
+            "q5": {
+              "title": "Fill in the Blank: Table Creation",
+              "prompt": "Choose the best value for the first missing blank in the statement.",
+              "hint": "What must you define for each column besides its name?",
+              "help": {
+                "concept": "Each column in a table must have a the missing term, which tells the database what kind of values it can store.",
+                "hint_1": "Think about what follows the column name in a CREATE TABLE statement.",
+                "hint_2": "It's something like INTEGER, TEXT, or REAL."
+              },
+              "template": "The first missing value is [blank1].",
+              "choices": [
+                "data type",
+                "default value",
+                "index",
+                "table name"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_13": {
+        "what-create-table-does": {
+          "sk1": {
+            "title": "What is CREATE TABLE?",
+            "bodyMarkdown": "The `CREATE TABLE` statement in SQL is used to define a new table in a database. When you run this command, you specify the table's name and its columns, including each column's data type and any constraints (like `PRIMARY KEY` or `NOT NULL`).\n\nFor example, in the `products_catalog` database, the following SQL creates a `products` table:\n\n```sql\nCREATE TABLE products (\n  id INTEGER PRIMARY KEY,\n  name TEXT NOT NULL,\n  category TEXT NOT NULL,\n  price REAL NOT NULL,\n  stock INTEGER NOT NULL,\n  created_at TEXT NOT NULL\n);\n```\n\nThis defines the structure of the table, but does not add any data yet."
+          },
+          "sk2": {
+            "title": "Why Table Structure Matters",
+            "bodyMarkdown": "The structure you define with `CREATE TABLE` determines what data can be stored and how you can query it later. For example, making `id` the `PRIMARY KEY` ensures each product has a unique identifier. Using `NOT NULL` on `name`, `category`, `price`, `stock`, and `created_at` means every product must have these values.\n\nGood table design helps prevent errors and makes future queries easier and more reliable."
+          }
+        }
+      }
+    }
+  }
+}

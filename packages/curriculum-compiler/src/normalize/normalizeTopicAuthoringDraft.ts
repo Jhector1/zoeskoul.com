@@ -427,6 +427,79 @@ function normalizeFillBlankChoice(item: Record<string, unknown>): DraftQuizItem 
     };
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function inferCodeInputLanguage(item: Record<string, unknown>): string | undefined {
+    const fixedLanguage =
+        typeof item.fixedLanguage === "string" ? item.fixedLanguage.trim() : "";
+
+    const language =
+        typeof item.language === "string" ? item.language.trim() : "";
+
+    const runtime =
+        item.runtime && typeof item.runtime === "object"
+            ? (item.runtime as Record<string, unknown>)
+            : null;
+
+    const runtimeKind =
+        typeof runtime?.kind === "string" ? runtime.kind.trim() : "";
+
+    if (fixedLanguage) return fixedLanguage;
+    if (language) return language;
+    if (runtimeKind === "sql") return "sql";
+
+    return undefined;
+}
+
+function defaultStarterCodeForCodeInput(item: Record<string, unknown>): string {
+    const language = inferCodeInputLanguage(item);
+    const recipeType =
+        typeof item.recipeType === "string"
+            ? item.recipeType.trim()
+            : typeof item.type === "string"
+                ? item.type.trim()
+                : "";
+
+    const hasDatasetId =
+        typeof item.datasetId === "string" && item.datasetId.trim().length > 0;
+
+    if (language === "sql" || recipeType === "sql_query" || hasDatasetId) {
+        return "-- Write your SQL answer below\n";
+    }
+
+    if (language === "python") {
+        return "# Write your answer below\n";
+    }
+
+    if (language === "bash") {
+        return "# Write your command below\n";
+    }
+
+    if (language === "javascript" || language === "java" || language === "c" || language === "cpp") {
+        return "// Write your answer below\n";
+    }
+
+    return "// Write your answer below\n";
+}
+
 function normalizeCodeInput(item: Record<string, unknown>): DraftQuizItem {
     const title =
         asOptionalString(item.title) ??
@@ -440,36 +513,43 @@ function normalizeCodeInput(item: Record<string, unknown>): DraftQuizItem {
         title;
 
     const recipeType =
-        typeof item.type === "string"
-            ? item.type.trim()
-            : typeof item.recipeType === "string"
-                ? item.recipeType.trim()
+        typeof item.recipeType === "string"
+            ? item.recipeType.trim()
+            : typeof item.type === "string"
+                ? item.type.trim()
                 : undefined;
+
+    const starterCode =
+        typeof item.starterCode === "string" && item.starterCode.trim().length > 0
+            ? item.starterCode
+            : defaultStarterCodeForCodeInput(item);
 
     return {
         id: String(item.id ?? "").trim(),
         kind: "code_input",
         title,
         prompt,
-        starterCode:
-            typeof item.starterCode === "string"
-                ? item.starterCode
-                : "-- Write your answer below\n",
+        starterCode,
         solutionCode:
             typeof item.solutionCode === "string" ? item.solutionCode : "",
-        datasetId: typeof item.datasetId === "string" ? item.datasetId.trim() || undefined : undefined,
+        datasetId:
+            typeof item.datasetId === "string"
+                ? item.datasetId.trim() || undefined
+                : undefined,
         recipeType:
             recipeType === "sql_query" ||
             recipeType === "template_io" ||
             recipeType === "fixed_tests"
                 ? recipeType
                 : undefined,
+        checkSql:
+            typeof item.checkSql === "string"
+                ? item.checkSql.trim() || undefined
+                : undefined,
         hint: asOptionalString(item.hint) ?? fallbackHint(title, "code_input"),
         help: normalizeHelp(item, title, "code_input"),
     };
-}
-
-function normalizeQuizItem(item: Record<string, unknown>): DraftQuizItem {
+}function normalizeQuizItem(item: Record<string, unknown>): DraftQuizItem {
     const rawKind = typeof item.kind === "string" ? item.kind : "";
 
     if (rawKind === "single_choice") return normalizeSingleChoice(item);

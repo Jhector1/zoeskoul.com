@@ -1,0 +1,105 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_11": {
+        "add-a-student": {
+          "label": "Add a student",
+          "summary": "Add a student in Inserting Data",
+          "cards": {
+            "sketch0": {
+              "title": "Inserting a New Row"
+            },
+            "sketch1": {
+              "title": "Why Specify Columns?"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "quiz": {
+            "code-1": {
+              "title": "Insert a new student badge",
+              "prompt": "Write an SQL statement to add a new row to the `inventory_items` table with these values:\n- name: 'Student Badge'\n- category: 'Accessories'\n- price: 2.50\n- status: 'active'\n- is_test: 0\n- notes: 'Welcome gift'\n- last_updated: '2026-02-10'\n\nUse an explicit column list. Do not provide a value for `id`.",
+              "hint": "Focus on the SQL task being asked for, not on copying final query text.",
+              "help": {
+                "concept": "Build the query from the operation the exercise is testing.",
+                "hint_1": "Think about which clauses or functions are required for the task.",
+                "hint_2": "Construct the query based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "-- Write your SQL INSERT statement here"
+            },
+            "code-2": {
+              "title": "Insert a test item with minimal info",
+              "prompt": "Insert a new row into `inventory_items` with the following values:\n- name: 'Test Keychain'\n- category: 'Accessories'\n- price: 1.00\n- status: 'draft'\n- is_test: 1\n- notes: NULL\n- last_updated: '2026-02-11'\n\nDo not insert a value for `id`. Use NULL for the notes column.",
+              "hint": "Focus on the SQL task being asked for, not the final solution text.",
+              "help": {
+                "concept": "Build the query from the operation the exercise is testing.",
+                "hint_1": "Eliminate choices or interpretations that do not match the task.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "starterCode": "-- Insert a test item with NULL notes"
+            },
+            "code-3": {
+              "title": "Insert an item using default values",
+              "prompt": "Add a new row to `inventory_items` for a 'Student Notebook' in the 'Accessories' category, priced at 3.00. Let the `status`, `is_test`, and `last_updated` columns use their default values. Set `notes` to NULL. Do not provide a value for `id`.",
+              "hint": "Focus on the SQL task being asked for, not on copying final query text.",
+              "help": {
+                "concept": "Build the query from the operation the exercise is testing.",
+                "hint_1": "Think about which clauses or functions are required for the task.",
+                "hint_2": "Construct the query based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "-- Insert a notebook, using defaults for some columns"
+            },
+            "multi-1": {
+              "title": "Choosing columns for INSERT",
+              "prompt": "Which of the following are good reasons to always specify a column list in your INSERT statements? Select all that apply.",
+              "hint": "Think about table changes and code clarity.",
+              "help": {
+                "concept": "Specifying columns in INSERT statements makes your code safer and more maintainable.",
+                "hint_1": "Consider what happens if the table structure changes.",
+                "hint_2": "Think about how specifying columns can prevent errors and improve readability."
+              },
+              "options": {
+                "a": "A command",
+                "b": "A table name"
+              }
+            },
+            "fill-1": {
+              "title": "Default values in INSERT",
+              "prompt": "Choose the best value for the first missing blank in the statement.",
+              "hint": "Think about what SQL uses when you don't provide a value.",
+              "help": {
+                "concept": "If a column has a the missing term value and you don't specify it in your INSERT, SQL uses the the missing term.",
+                "hint_1": "SQL will not leave the value empty if a the missing term is set.",
+                "hint_2": "The database uses the value defined in the table schema for that column."
+              },
+              "template": "The first missing value is [blank1].",
+              "choices": [
+                "default",
+                "name",
+                "type",
+                "primary key"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_11": {
+        "add-a-student": {
+          "sketch-1": {
+            "title": "Inserting a New Row",
+            "bodyMarkdown": "To add a new row to a table in SQL, use the `INSERT INTO` statement. It's best practice to specify the columns you want to insert values into, especially when the table has many columns or defaults. For example, to add a new inventory item:\n\n```sql\nINSERT INTO inventory_items (name, category, price, status, is_test, notes, last_updated)\nVALUES ('Student Badge', 'Accessories', 2.50, 'active', 0, 'Welcome gift', '2026-02-10');\n```\n\nThis statement adds a new row to the `inventory_items` table with the provided values for each column."
+          },
+          "sketch-2": {
+            "title": "Why Specify Columns?",
+            "bodyMarkdown": "Specifying columns in your `INSERT` statement makes your code safer and more readable. If the table structure changes (for example, if a new column is added), your statement will still work as long as you provide values for the columns you list. Omitting the column list can lead to errors if the order of columns changes or if there are columns with default values."
+          }
+        }
+      }
+    }
+  }
+}

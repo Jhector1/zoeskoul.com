@@ -2,7 +2,7 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { getActor } from "@/lib/practice/actor";
-import { PracticeDifficulty, PracticeSessionStatus } from "@prisma/client";
+import { PracticeDifficulty, PracticeSessionStatus } from "@zoeskoul/db";
 
 export const runtime = "nodejs";
 

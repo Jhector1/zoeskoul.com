@@ -1,0 +1,126 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_13": {
+        "designing-for-clarity": {
+          "label": "Designing for clarity",
+          "summary": "Learn how to design SQL tables with clear, meaningful structure and constraints to ensure data quality and make future queries easier.",
+          "cards": {
+            "sketch0": {
+              "title": "Why Table Design Matters"
+            },
+            "sketch1": {
+              "title": "Choosing Clear Column Names"
+            },
+            "sketch2": {
+              "title": "Data Types and Constraints"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Practice"
+            }
+          },
+          "projectSteps": {
+            "code_create_table_basic": {
+              "title": "Create a simple table for suppliers"
+            },
+            "code_insert_product": {
+              "title": "Insert a new product"
+            },
+            "code_add_not_null_column": {
+              "title": "Add a NOT NULL column to an existing table"
+            }
+          },
+          "quiz": {
+            "code-create-table-basic": {
+              "title": "Create a simple table for suppliers",
+              "prompt": "Write a SQL statement to create a `suppliers` table with the following columns:\n- `id` as an integer primary key\n- `name` as text, not null\n- `contact_email` as text, not null",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+                "hint_1": "Eliminate choices or interpretations that do not match the task.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "starterCode": "-- Write your CREATE TABLE statement here"
+            },
+            "code-insert-product": {
+              "title": "Insert a new product",
+              "prompt": "Insert a new row into the `products` table for a product named 'Watercolor Paper' in the 'Art' category, priced at 15.50, with 20 in stock, and a created_at date of '2026-03-01'.",
+              "hint": "Focus on the SQL task being asked for, not on copying final query text.",
+              "help": {
+                "concept": "Build the query from the operation the exercise is testing.",
+                "hint_1": "Think about which clauses or functions are required for the task.",
+                "hint_2": "Construct the query based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "-- Insert a new product into the products table"
+            },
+            "code-add-not-null-column": {
+              "title": "Add a NOT NULL column to an existing table",
+              "prompt": "Write a SQL statement to add a new column `supplier_id` (INTEGER, NOT NULL) to the `products` table.",
+              "hint": "Focus on the SQL task being asked for, not on copying final query text.",
+              "help": {
+                "concept": "Build the query from the operation the exercise is testing.",
+                "hint_1": "Think about which clauses or functions are required for the task.",
+                "hint_2": "Construct the query based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "-- Add a NOT NULL column to products"
+            },
+            "multi-choice-table-design": {
+              "title": "Good practices for table design",
+              "prompt": "Which of the following are good practices when designing a SQL table? Select all that apply.",
+              "hint": "Think about clarity, data quality, and future use.",
+              "help": {
+                "concept": "Clear names, appropriate data types, and constraints help maintain data quality and usability.",
+                "hint_1": "Avoid abbreviations and unclear names. Use constraints to prevent bad data.",
+                "hint_2": "Choose options that help others understand and safely use the table."
+              },
+              "options": {
+                "a": "[object Object]",
+                "b": "A command"
+              }
+            },
+            "fill-blank-primary-key": {
+              "title": "Purpose of a primary key",
+              "prompt": "Choose the best value for the first missing blank in the statement.",
+              "hint": "Focus on the missing SQL concept rather than the exact missing word.",
+              "help": {
+                "concept": "The blank should be filled with the SQL term that matches the job the statement is trying to perform.",
+                "hint_1": "Think about what the missing part is supposed to do in the statement.",
+                "hint_2": "Choose the SQL term that best completes the meaning of the statement."
+              },
+              "template": "The first missing value is [blank1].",
+              "choices": [
+                "unique",
+                "nullable",
+                "indexed",
+                "ordered"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_13": {
+        "designing-for-clarity": {
+          "sketch-clarity-intro": {
+            "title": "Why Table Design Matters",
+            "bodyMarkdown": "A well-designed table makes your data easier to understand and use. For example, in the `products` table:\n\n```sql\nCREATE TABLE products (\n  id INTEGER PRIMARY KEY,\n  name TEXT NOT NULL,\n  category TEXT NOT NULL,\n  price REAL NOT NULL,\n  stock INTEGER NOT NULL,\n  created_at TEXT NOT NULL\n);\n```\n\nEach column has a clear purpose and data type. Constraints like `PRIMARY KEY` and `NOT NULL` help protect data quality. Good design choices make queries simpler and prevent mistakes."
+          },
+          "sketch-column-names": {
+            "title": "Choosing Clear Column Names",
+            "bodyMarkdown": "Column names should be descriptive and unambiguous. For example, `price` is better than `p` or `value`, and `created_at` clearly indicates a timestamp. Avoid abbreviations that might confuse future users."
+          },
+          "sketch-data-types-constraints": {
+            "title": "Data Types and Constraints",
+            "bodyMarkdown": "Selecting the right data type (like `INTEGER`, `REAL`, or `TEXT`) ensures that only valid data can be stored. Constraints such as `NOT NULL` prevent missing values, while `PRIMARY KEY` ensures each row is unique. For example, the `id` column in `products` is an `INTEGER PRIMARY KEY`, making it a unique identifier for each product."
+          }
+        }
+      }
+    }
+  }
+}

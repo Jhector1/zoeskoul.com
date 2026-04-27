@@ -1,7 +1,7 @@
 // src/lib/review/api/access/resolveReviewAccess.ts
 import "server-only";
 
-import type { PrismaClient } from "@prisma/client";
+import type { PrismaClient } from "@/lib/prisma";
 import type { Actor } from "@/lib/practice/actor";
 import { resolvePracticeAccess } from "@/lib/practice/access/resolvePracticeAccess";
 import { bodyJsonResponse } from "@/lib/practice/api/shared/http";

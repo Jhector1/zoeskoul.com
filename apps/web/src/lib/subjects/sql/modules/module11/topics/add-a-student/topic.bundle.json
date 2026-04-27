@@ -25,6 +25,13 @@
       "height": 420
     },
     {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_11.add-a-student.cards.sketch2.title",
+      "sketchId": "sketch-3",
+      "height": 420
+    },
+    {
       "id": "quiz",
       "kind": "quiz",
       "titleKey": "topics.sql.sql_module_11.add-a-student.cards.quiz.title",
@@ -89,6 +96,12 @@
       "archetype": "paragraph",
       "titleKey": "sketches.sql.sql_module_11.add-a-student.sketch-2.title",
       "bodyKey": "sketches.sql.sql_module_11.add-a-student.sketch-2.bodyMarkdown"
+    },
+    {
+      "id": "sketch-3",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_11.add-a-student.sketch-3.title",
+      "bodyKey": "sketches.sql.sql_module_11.add-a-student.sketch-3.bodyMarkdown"
     }
   ],
   "exercises": [
@@ -104,7 +117,8 @@
         "type": "sql_query",
         "datasetId": "inventory_ops",
         "resultShape": "table",
-        "solutionCode": "INSERT INTO inventory_items (name, category, price, status, is_test, notes, last_updated)\nVALUES ('Student Badge', 'Accessories', 2.50, 'active', 0, 'Welcome gift', '2026-02-10');"
+        "solutionCode": "INSERT INTO inventory_items (name, category, price, status, is_test, notes, last_updated)\nVALUES ('Student Badge', 'Accessories', 2.50, 'active', 0, NULL, '2026-02-10');",
+        "checkSql": "SELECT * FROM \"inventory_items\" ORDER BY 1;"
       }
     },
     {
@@ -119,7 +133,8 @@
         "type": "sql_query",
         "datasetId": "inventory_ops",
         "resultShape": "table",
-        "solutionCode": "INSERT INTO inventory_items (name, category, price, status, is_test, notes, last_updated)\nVALUES ('Test Keychain', 'Accessories', 1.00, 'draft', 1, NULL, '2026-02-11');"
+        "solutionCode": "INSERT INTO inventory_items (name, category, price)\nVALUES ('Sample Lanyard', 'Accessories', 5.00);",
+        "checkSql": "SELECT * FROM \"inventory_items\" ORDER BY 1;"
       }
     },
     {
@@ -134,7 +149,8 @@
         "type": "sql_query",
         "datasetId": "inventory_ops",
         "resultShape": "table",
-        "solutionCode": "INSERT INTO inventory_items (name, category, price, notes)\nVALUES ('Student Notebook', 'Accessories', 3.00, NULL);"
+        "solutionCode": "INSERT INTO inventory_items (name, category, price, status, is_test, notes, last_updated)\nVALUES ('Test Eraser', 'Accessories', 1.25, 'draft', 1, 'Test batch', '2026-02-11'),\n       ('Trial Pen', 'Accessories', 1.50, 'draft', 1, 'Trial batch', '2026-02-11');",
+        "checkSql": "SELECT * FROM \"inventory_items\" ORDER BY 1;"
       }
     },
     {
@@ -163,7 +179,7 @@
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "default"
+        "value": "draft"
       }
     }
   ]

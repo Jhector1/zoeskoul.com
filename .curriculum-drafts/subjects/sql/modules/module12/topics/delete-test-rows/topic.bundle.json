@@ -1,0 +1,172 @@
+{
+  "topicId": "delete-test-rows",
+  "subjectSlug": "sql",
+  "moduleSlug": "sql_module_12",
+  "sectionSlug": "section_12_4",
+  "prefix": "sql12",
+  "minutes": 15,
+  "topic": {
+    "labelKey": "topics.sql.sql_module_12.delete-test-rows.label",
+    "summaryKey": "topics.sql.sql_module_12.delete-test-rows.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_12.delete-test-rows.cards.sketch0.title",
+      "sketchId": "sketch-why-preview-delete",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_12.delete-test-rows.cards.sketch1.title",
+      "sketchId": "sketch-where-clause-safety",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql.sql_module_12.delete-test-rows.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 2,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.sql.sql_module_12.delete-test-rows.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "delete_preview_code",
+            "titleKey": "topics.sql.sql_module_12.delete-test-rows.projectSteps.delete_preview_code.title",
+            "exerciseKey": "delete-preview-code",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "delete_test_rows_code",
+            "titleKey": "topics.sql.sql_module_12.delete-test-rows.projectSteps.delete_test_rows_code.title",
+            "exerciseKey": "delete-test-rows-code",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "delete_single_test_row_code",
+            "titleKey": "topics.sql.sql_module_12.delete-test-rows.projectSteps.delete_single_test_row_code.title",
+            "exerciseKey": "delete-single-test-row-code",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch-why-preview-delete",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_12.delete-test-rows.sketch-why-preview-delete.title",
+      "bodyKey": "sketches.sql.sql_module_12.delete-test-rows.sketch-why-preview-delete.bodyMarkdown"
+    },
+    {
+      "id": "sketch-where-clause-safety",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_12.delete-test-rows.sketch-where-clause-safety.title",
+      "bodyKey": "sketches.sql.sql_module_12.delete-test-rows.sketch-where-clause-safety.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "delete-preview-code",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_12.delete-test-rows.quiz.delete-preview-code",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "inventory_ops",
+        "resultShape": "table",
+        "solutionCode": "SELECT * FROM inventory_items WHERE is_test = 1;"
+      }
+    },
+    {
+      "id": "delete-test-rows-code",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_12.delete-test-rows.quiz.delete-test-rows-code",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "inventory_ops",
+        "resultShape": "table",
+        "solutionCode": "DELETE FROM inventory_items WHERE is_test = 1;",
+        "checkSql": "SELECT * FROM inventory_items WHERE is_test = 1;"
+      }
+    },
+    {
+      "id": "delete-single-test-row-code",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_12.delete-test-rows.quiz.delete-single-test-row-code",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "inventory_ops",
+        "resultShape": "table",
+        "solutionCode": "DELETE FROM inventory_items WHERE id = 4;",
+        "checkSql": "SELECT * FROM inventory_items WHERE id = 4;"
+      }
+    },
+    {
+      "id": "delete-why-preview-multi",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_12.delete-test-rows.quiz.delete-why-preview-multi",
+      "optionIds": [
+        "a",
+        "b"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a"
+        ]
+      }
+    },
+    {
+      "id": "delete-blank-choice",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_12.delete-test-rows.quiz.delete-blank-choice",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "is_test = 1"
+      }
+    }
+  ]
+}

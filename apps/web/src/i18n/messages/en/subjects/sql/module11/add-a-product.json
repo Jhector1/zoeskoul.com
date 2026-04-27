@@ -4,22 +4,39 @@
       "sql_module_11": {
         "add-a-product": {
           "label": "Add a product",
-          "summary": "Learn how to insert a new product into the inventory_items table, understand the importance of specifying columns, and practice safe data insertion in SQL.",
+          "summary": "Practice inserting new products into the inventory_items table. Learn to use explicit column lists, handle required fields, and understand how defaults and NULLs work in INSERT statements.",
           "cards": {
             "sketch0": {
-              "title": "Why use INSERT statements?"
+              "title": "Why use INSERT?"
             },
             "sketch1": {
-              "title": "Explicit column lists for safety"
+              "title": "Explicit column lists"
+            },
+            "sketch2": {
+              "title": "Defaults and NULLs"
             },
             "quiz": {
               "title": "Quiz"
+            },
+            "project": {
+              "title": "Practice"
+            }
+          },
+          "projectSteps": {
+            "q1": {
+              "title": "Insert a new product row"
+            },
+            "q2": {
+              "title": "Insert with default values"
+            },
+            "q3": {
+              "title": "Insert multiple products at once"
             }
           },
           "quiz": {
             "q1": {
               "title": "Insert a new product row",
-              "prompt": "Write an SQL statement to add a new product called 'Travel Journal' in the 'Accessories' category, priced at 11.99, with status 'active', is_test 0, no notes, and last_updated '2026-02-11' to the inventory_items table. Use an explicit column list (do not include the id column).",
+              "prompt": "Insert a new row into the inventory_items table for a product called 'Ceramic Mug' in the 'Kitchen' category, priced at 8.75. Set status to 'active', is_test to 0, notes to NULL, and last_updated to '2026-02-15'. Omit the id column.",
               "hint": "Focus on the SQL task being asked for, not on copying final query text.",
               "help": {
                 "concept": "Build the query from the operation the exercise is testing.",
@@ -29,8 +46,8 @@
               "starterCode": "-- Write your INSERT statement below"
             },
             "q2": {
-              "title": "Insert multiple products at once",
-              "prompt": "Write an SQL statement to insert two new products into inventory_items at once:\n1. 'Desk Lamp', category 'Office', price 22.50, status 'draft', is_test 0, notes 'LED', last_updated '2026-02-13'\n2. 'Sample Keychain', category 'Accessories', price 3.00, status 'inactive', is_test 1, notes 'Promo item', last_updated '2026-02-14'\nDo not include the id column.",
+              "title": "Insert with default values",
+              "prompt": "Insert a new product called 'Mini Poster' in the 'Decor' category, priced at 5.00. Set is_test to 0 and last_updated to '2026-02-16'. Do not specify status or notes. Omit id.",
               "hint": "Focus on the SQL task being asked for, not on copying final query text.",
               "help": {
                 "concept": "Build the query from the operation the exercise is testing.",
@@ -40,8 +57,8 @@
               "starterCode": "-- Write your INSERT statement below"
             },
             "q3": {
-              "title": "Insert with default and NULL values",
-              "prompt": "Write an SQL statement to insert a product called 'Eco Notebook' in the 'Office' category, priced at 7.25. Omit the status and is_test columns so they use their default values. Set notes to NULL and last_updated to '2026-02-15'. Do not include the id column.",
+              "title": "Insert multiple products at once",
+              "prompt": "Insert two new rows into inventory_items in a single statement:\n1. 'Sticker Sheet', 'Accessories', 2.50, status 'active', is_test 0, notes NULL, last_updated '2026-02-17'\n2. 'Sample Coaster', 'Kitchen', 3.00, status 'draft', is_test 1, notes 'Test batch', last_updated '2026-02-18'\nOmit id for both.",
               "hint": "Focus on the SQL task being asked for, not on copying final query text.",
               "help": {
                 "concept": "Build the query from the operation the exercise is testing.",
@@ -51,34 +68,34 @@
               "starterCode": "-- Write your INSERT statement below"
             },
             "q4": {
-              "title": "Why specify columns in INSERT?",
-              "prompt": "Which of the following are reasons to always specify column names in your INSERT statements? Select all that apply.",
-              "hint": "Think about what could go wrong if you don't specify columns.",
+              "title": "Which columns can be omitted?",
+              "prompt": "When inserting a new row into inventory_items, which columns can you safely omit from the column list? (Choose all that apply.)",
+              "hint": "Look for columns with defaults or that allow NULL.",
               "help": {
-                "concept": "Specifying columns in INSERT statements helps prevent errors and makes your code more robust to schema changes.",
-                "hint_1": "Consider what happens if the table structure changes or the order of columns is different.",
-                "hint_2": "Not specifying columns can cause data to be inserted into the wrong fields or lead to errors."
+                "concept": "Columns with default values or that allow NULL can be omitted from the INSERT column list.",
+                "hint_1": "Check which columns have a default or are nullable.",
+                "hint_2": "id is auto-incremented, status has a default, notes allows NULL."
               },
               "options": {
-                "a": "A command",
-                "b": "A table name"
+                "a": "[object Object]",
+                "b": "A command"
               }
             },
             "q5": {
-              "title": "Default values in INSERT",
-              "prompt": "When you omit a column with a default value in your INSERT statement, SQL will use the ______ value for that column.",
-              "hint": "Think about what SQL does when you don't provide a value for a column that has a the missing term.",
+              "title": "Default value for status",
+              "prompt": "What is the default value for the status column in inventory_items if you omit it in an INSERT statement?",
+              "hint": "Check the table definition for the default.",
               "help": {
-                "concept": "If a column has a the missing term value and you don't specify it in your INSERT, SQL uses the the missing term.",
-                "hint_1": "The value comes from the table definition, not from your statement.",
-                "hint_2": "It's not NULL unless the the missing term is NULL."
+                "concept": "The default value is used when a column is omitted and has a DEFAULT clause.",
+                "hint_1": "Look for the DEFAULT keyword in the schema.",
+                "hint_2": "status is set to a specific string if not provided."
               },
-              "template": "When you omit a column with a default value in your INSERT statement, SQL will use the {blank} value for that column.",
+              "template": "The default value for status is [blank].",
               "choices": [
-                "default",
-                "NULL",
-                "first",
-                "previous"
+                "active",
+                "inactive",
+                "draft",
+                "NULL"
               ]
             }
           }
@@ -91,12 +108,16 @@
       "sql_module_11": {
         "add-a-product": {
           "sk1": {
-            "title": "Why use INSERT statements?",
-            "bodyMarkdown": "The `INSERT` statement in SQL allows you to add new rows to a table. For example, to add a new product to the `inventory_items` table, you can use:\n\n```sql\nINSERT INTO inventory_items (name, category, price, status, is_test, notes, last_updated)\nVALUES ('Enamel Pin', 'Accessories', 6.50, 'active', 0, NULL, '2026-02-10');\n```\n\nThis adds a new product called 'Enamel Pin' to the inventory. Notice that we specify the columns explicitly, which helps prevent mistakes if the table structure changes."
+            "title": "Why use INSERT?",
+            "bodyMarkdown": "The `INSERT` statement lets you add new rows to a table. For example, to add a new product to the `inventory_items` table, you can write:\n\n```sql\nINSERT INTO inventory_items (name, category, price, status, is_test, notes, last_updated)\nVALUES ('Enamel Pin', 'Accessories', 6.50, 'active', 0, NULL, '2026-02-10');\n```\n\nThis adds a new item with the specified details. Notice that the `id` column is omitted because it's an `INTEGER PRIMARY KEY` and will auto-increment."
           },
           "sk2": {
-            "title": "Explicit column lists for safety",
-            "bodyMarkdown": "It's best practice to list the columns you are inserting into. This makes your SQL more robust and readable. For example:\n\n```sql\nINSERT INTO inventory_items (name, category, price, status, is_test, notes, last_updated)\nVALUES ('Desk Organizer', 'Office', 18.00, 'draft', 0, 'New office item', '2026-02-12');\n```\n\nIf you omit the column list, you must provide values for every column in the table, in the correct order. This can lead to errors if the table changes."
+            "title": "Explicit column lists",
+            "bodyMarkdown": "It's safer to specify the columns you want to insert into. This avoids errors if the table structure changes. For example:\n\n```sql\nINSERT INTO inventory_items (name, category, price, status, is_test, notes, last_updated)\nVALUES ('Desk Mat', 'Accessories', 19.99, 'draft', 0, NULL, '2026-02-11');\n```\n\nIf you omit a NOT NULL column without a default, the statement will fail."
+          },
+          "sk3": {
+            "title": "Defaults and NULLs",
+            "bodyMarkdown": "Some columns have default values or allow NULLs. For example, `status` defaults to `'draft'`, and `notes` can be NULL. If you don't specify a value for `status`, it will use the default:\n\n```sql\nINSERT INTO inventory_items (name, category, price, is_test, last_updated)\nVALUES ('Sample Keychain', 'Accessories', 3.99, 0, '2026-02-12');\n```\n\nHere, `status` becomes `'draft'` and `notes` is NULL."
           }
         }
       }

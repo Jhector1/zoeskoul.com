@@ -25,6 +25,13 @@
       "height": 420
     },
     {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_11.add-a-product.cards.sketch2.title",
+      "sketchId": "sk3",
+      "height": 420
+    },
+    {
       "id": "quiz",
       "kind": "quiz",
       "titleKey": "topics.sql.sql_module_11.add-a-product.cards.quiz.title",
@@ -34,6 +41,46 @@
         "allowReveal": true,
         "preferKind": null,
         "maxAttempts": 10
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.sql.sql_module_11.add-a-product.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "q1",
+            "titleKey": "topics.sql.sql_module_11.add-a-product.projectSteps.q1.title",
+            "exerciseKey": "q1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "q2",
+            "titleKey": "topics.sql.sql_module_11.add-a-product.projectSteps.q2.title",
+            "exerciseKey": "q2",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "q3",
+            "titleKey": "topics.sql.sql_module_11.add-a-product.projectSteps.q3.title",
+            "exerciseKey": "q3",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
       }
     }
   ],
@@ -49,13 +96,19 @@
       "archetype": "paragraph",
       "titleKey": "sketches.sql.sql_module_11.add-a-product.sk2.title",
       "bodyKey": "sketches.sql.sql_module_11.add-a-product.sk2.bodyMarkdown"
+    },
+    {
+      "id": "sk3",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_11.add-a-product.sk3.title",
+      "bodyKey": "sketches.sql.sql_module_11.add-a-product.sk3.bodyMarkdown"
     }
   ],
   "exercises": [
     {
       "id": "q1",
       "kind": "code_input",
-      "purpose": "quiz",
+      "purpose": "project",
       "weight": 1,
       "messageBase": "topics.sql.sql_module_11.add-a-product.quiz.q1",
       "language": "sql",
@@ -64,13 +117,14 @@
         "type": "sql_query",
         "datasetId": "inventory_ops",
         "resultShape": "table",
-        "solutionCode": "INSERT INTO inventory_items (name, category, price, status, is_test, notes, last_updated)\nVALUES ('Travel Journal', 'Accessories', 11.99, 'active', 0, NULL, '2026-02-11');"
+        "solutionCode": "INSERT INTO inventory_items (name, category, price, status, is_test, notes, last_updated)\nVALUES ('Ceramic Mug', 'Kitchen', 8.75, 'active', 0, NULL, '2026-02-15');",
+        "checkSql": "SELECT * FROM \"inventory_items\" ORDER BY 1;"
       }
     },
     {
       "id": "q2",
       "kind": "code_input",
-      "purpose": "quiz",
+      "purpose": "project",
       "weight": 1,
       "messageBase": "topics.sql.sql_module_11.add-a-product.quiz.q2",
       "language": "sql",
@@ -79,13 +133,14 @@
         "type": "sql_query",
         "datasetId": "inventory_ops",
         "resultShape": "table",
-        "solutionCode": "INSERT INTO inventory_items (name, category, price, status, is_test, notes, last_updated)\nVALUES ('Desk Lamp', 'Office', 22.50, 'draft', 0, 'LED', '2026-02-13'),\n       ('Sample Keychain', 'Accessories', 3.00, 'inactive', 1, 'Promo item', '2026-02-14');"
+        "solutionCode": "INSERT INTO inventory_items (name, category, price, is_test, last_updated)\nVALUES ('Mini Poster', 'Decor', 5.00, 0, '2026-02-16');",
+        "checkSql": "SELECT * FROM \"inventory_items\" ORDER BY 1;"
       }
     },
     {
       "id": "q3",
       "kind": "code_input",
-      "purpose": "quiz",
+      "purpose": "project",
       "weight": 1,
       "messageBase": "topics.sql.sql_module_11.add-a-product.quiz.q3",
       "language": "sql",
@@ -94,7 +149,8 @@
         "type": "sql_query",
         "datasetId": "inventory_ops",
         "resultShape": "table",
-        "solutionCode": "INSERT INTO inventory_items (name, category, price, notes, last_updated)\nVALUES ('Eco Notebook', 'Office', 7.25, NULL, '2026-02-15');"
+        "solutionCode": "INSERT INTO inventory_items (name, category, price, status, is_test, notes, last_updated)\nVALUES\n  ('Sticker Sheet', 'Accessories', 2.50, 'active', 0, NULL, '2026-02-17'),\n  ('Sample Coaster', 'Kitchen', 3.00, 'draft', 1, 'Test batch', '2026-02-18');",
+        "checkSql": "SELECT * FROM \"inventory_items\" ORDER BY 1;"
       }
     },
     {
@@ -123,7 +179,7 @@
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "default"
+        "value": "draft"
       }
     }
   ]

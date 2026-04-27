@@ -1,0 +1,112 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_5": {
+        "discount-calculations": {
+          "label": "Kalkil rabè",
+          "summary": "Aprann kijan pou kalkile rabè epi kreye nouvo kolòn lè w itilize ekspresyon SQL ak alyas nan dataset sales_kpi a.",
+          "cards": {
+            "sketch0": {
+              "title": "Kisa kalkil rabè yo ye nan SQL?"
+            },
+            "sketch1": {
+              "title": "Itilize plizyè kolòn nan ekspresyon"
+            },
+            "quiz": {
+              "title": "Kesyonè"
+            }
+          },
+          "quiz": {
+            "q1": {
+              "title": "Kalkile yon pri ak rabè 20%",
+              "prompt": "Ekri yon demann SQL pou montre id chak lòd, customer_name, unit_price, ak yon nouvo kolòn ki rele discounted_price ki montre unit_price apre yon rabè 20%. Sèvi ak tablo orders la.",
+              "hint": "Konsantre sou konsèp egzamen an ap teste a.",
+              "help": {
+                "concept": "Panse ak wòl oswa lide egzamen an ap teste a olye pou w repete repons lan.",
+                "hint_1": "Elimine chwa oswa entèpretasyon ki pa matche ak sa yo mande w fè a.",
+                "hint_2": "Chwazi konsèp ki pi byen koresponn ak sa egzèsis la mande w fè."
+              },
+              "starterCode": "SELECT id, customer_name, unit_price, \n       -- your expression here\nFROM orders;"
+            },
+            "q2": {
+              "title": "Kalkile total liy ak rabè",
+              "prompt": "Ekri yon demann SQL pou montre id, quantity, unit_price, ak yon nouvo kolòn discounted_total ki montre pri total pou chak lòd apre yon rabè 10%. Sèvi ak tablo orders la.",
+              "hint": "Konsantre sou konsèp egzamen an ap teste a.",
+              "help": {
+                "concept": "Panse ak wòl oswa lide egzamen an ap teste a olye pou w repete repons lan.",
+                "hint_1": "Elimine chwa oswa entèpretasyon ki pa matche ak sa yo mande w fè a.",
+                "hint_2": "Chwazi konsèp ki pi byen koresponn ak sa egzèsis la mande w fè."
+              },
+              "starterCode": "SELECT id, quantity, unit_price, \n       -- your expression here\nFROM orders;"
+            },
+            "q3": {
+              "title": "Objektif alyas kolòn yo",
+              "prompt": "Poukisa ou ta dwe itilize alyas kolòn lè w ap kalkile rabè nan SQL?",
+              "hint": "Panse kijan rezilta a ap parèt pou yon moun k ap li li.",
+              "help": {
+                "concept": "Alyas fè kolòn rezilta yo pi fasil pou konprann paske yo bay non ki klè ak deskriptif.",
+                "hint_1": "Alyas ede fè rezilta a pi fasil pou li.",
+                "hint_2": "San alyas, kolòn kalkile yo ka gen non ki konfizyon oswa pa klè."
+              },
+              "options": {
+                "a": "a. Pou fè kolòn rezilta yo pi fasil pou konprann",
+                "b": "b. Pou akselere ekzekisyon demann lan",
+                "c": "c. Pou evite itilize aritmetik nan SQL",
+                "d": "d. Pou kache kolòn nan rezilta a"
+              }
+            },
+            "q4": {
+              "title": "Ki ekspresyon ki kalkile yon rabè 25%?",
+              "prompt": "Chwazi tout ekspresyon ki byen kalkile yon rabè 25% sou unit_price.",
+              "hint": "Yon rabè 25% vle di ou kenbe 75% nan pri a.",
+              "help": {
+                "concept": "Pou aplike yon rabè 25%, miltipliye pri a pa 0.75 oswa soustrè 25% nan pri a soti nan orijinal la.",
+                "hint_1": "Miltipliye pa 0.75 oswa soustrè unit_price * 0.25 tou de mache.",
+                "hint_2": "Gade ki opsyon ki kenbe 75% nan pri a oswa ki soustrè 25% soti nan orijinal la."
+              },
+              "options": {
+                "a": "a. unit_price * 0.75",
+                "b": "b. unit_price - (unit_price * 0.25)",
+                "c": "c. unit_price * 1.25",
+                "d": "d. unit_price + (unit_price * 0.25)"
+              }
+            },
+            "q5": {
+              "title": "Ranpli vid la: faktè rabè",
+              "prompt": "Si ou vle aplike yon rabè 15% sou unit_price, ki nimewo ou ta dwe miltipliye unit_price la ak li?",
+              "hint": "Soustrè pousantaj rabè a soti nan 1.",
+              "help": {
+                "concept": "Faktè rabè a se 1 retire pousantaj rabè a (kòm yon desimal).",
+                "hint_1": "Yon rabè 15% vle di ou kenbe 85% nan pri a.",
+                "hint_2": "Konvèti 85% an desimal."
+              },
+              "template": "unit_price * [BLANK]",
+              "choices": [
+                "0.85",
+                "0.15",
+                "1.15",
+                "0.75"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_5": {
+        "discount-calculations": {
+          "sk1": {
+            "title": "Kisa kalkil rabè yo ye nan SQL?",
+            "bodyMarkdown": "Kalkil rabè nan SQL enplike itilize ekspresyon aritmetik pou kalkile nouvo valè baze sou kolòn ki egziste deja yo. Pa egzanp, ou ka kalkile yon pri ak rabè lè w miltipliye pri orijinal la ak pousantaj rabè a. Kalkil sa yo souvan fèt nan kloz `SELECT` la epi yo ka resevwa non ki fasil pou li lè w itilize alyas.\n\nEgzanp:\n\n```sql\nSELECT id, customer_name, unit_price, unit_price * 0.9 AS discounted_price\nFROM orders;\n```\n\nDemann sa a montre pri orijinal chak lòd ak pri apre yon rabè 10%."
+          },
+          "sk2": {
+            "title": "Itilize plizyè kolòn nan ekspresyon",
+            "bodyMarkdown": "Ou ka konbine kolòn nan ekspresyon SQL pou kalkile valè tankou total liy oswa aplike rabè sou total yo. Pa egzanp, pou jwenn pri total pou chak liy lòd apre yon rabè 15%:\n\n```sql\nSELECT id, quantity, unit_price, quantity * unit_price AS line_total,\n       quantity * unit_price * 0.85 AS discounted_total\nFROM orders;\n```\n\nSa a miltipliye kantite ak pri inite pou total orijinal la, epi aplike yon rabè 15%."
+          }
+        }
+      }
+    }
+  }
+}

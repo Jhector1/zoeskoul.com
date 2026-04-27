@@ -1,0 +1,121 @@
+{
+  "title": "UNIQUE",
+  "summary": "Learn how to use the UNIQUE constraint in SQL to ensure that values in a column or a set of columns are not duplicated, helping maintain data integrity in your tables.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch-unique-intro",
+      "title": "What is the UNIQUE Constraint?",
+      "bodyMarkdown": "The **UNIQUE** constraint in SQL ensures that all values in a column or a group of columns are different from each other. This helps prevent duplicate entries, which is important for maintaining data quality. For example, if you want to make sure that each product name in your `products` table is unique, you can add a UNIQUE constraint to the `name` column.\n\n```sql\nCREATE TABLE products (\n  id INTEGER PRIMARY KEY,\n  name TEXT NOT NULL UNIQUE,\n  category TEXT NOT NULL,\n  price REAL NOT NULL,\n  stock INTEGER NOT NULL,\n  created_at TEXT NOT NULL\n);\n```\n\nNow, if you try to insert two products with the same name, the database will reject the second insert."
+    },
+    {
+      "id": "sketch-unique-multicolumn",
+      "title": "UNIQUE on Multiple Columns",
+      "bodyMarkdown": "You can also apply the UNIQUE constraint to a combination of columns. This means that the combination of values in those columns must be unique across the table. For example, to ensure that the combination of `name` and `category` is unique in the `products` table:\n\n```sql\nCREATE TABLE products (\n  id INTEGER PRIMARY KEY,\n  name TEXT NOT NULL,\n  category TEXT NOT NULL,\n  price REAL NOT NULL,\n  stock INTEGER NOT NULL,\n  created_at TEXT NOT NULL,\n  UNIQUE(name, category)\n);\n```\n\nThis allows the same product name in different categories, but not the same name in the same category."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "unique-code-1",
+      "kind": "code_input",
+      "title": "Add a UNIQUE Constraint to a Column",
+      "prompt": "Modify the `products` table so that the `name` column must be unique. Write a CREATE TABLE statement that enforces this rule.",
+      "hint": "Add UNIQUE to the column definition for `name`.",
+      "help": {
+        "concept": "The UNIQUE constraint ensures that no two rows have the same value in the specified column.",
+        "hint_1": "In the CREATE TABLE statement, add UNIQUE after the data type for the `name` column.",
+        "hint_2": "The syntax is: `column_name DATA_TYPE UNIQUE`."
+      },
+      "starterCode": "CREATE TABLE products (\n  id INTEGER PRIMARY KEY,\n  name TEXT NOT NULL,\n  category TEXT NOT NULL,\n  price REAL NOT NULL,\n  stock INTEGER NOT NULL,\n  created_at TEXT NOT NULL\n);",
+      "solutionCode": "CREATE TABLE products (\n  id INTEGER PRIMARY KEY,\n  name TEXT NOT NULL UNIQUE,\n  category TEXT NOT NULL,\n  price REAL NOT NULL,\n  stock INTEGER NOT NULL,\n  created_at TEXT NOT NULL\n);",
+      "datasetId": "products_catalog",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "unique-code-2",
+      "kind": "code_input",
+      "title": "UNIQUE Constraint on Multiple Columns",
+      "prompt": "Write a CREATE TABLE statement for `products` that ensures the combination of `name` and `category` is unique, but allows duplicate names in different categories.",
+      "hint": "Use a table-level UNIQUE constraint with both columns listed.",
+      "help": {
+        "concept": "A table-level UNIQUE constraint can enforce uniqueness across a combination of columns.",
+        "hint_1": "After listing all columns, add a UNIQUE constraint with both `name` and `category` in parentheses.",
+        "hint_2": "The syntax is: `UNIQUE(column1, column2)` at the end of the column list."
+      },
+      "starterCode": "CREATE TABLE products (\n  id INTEGER PRIMARY KEY,\n  name TEXT NOT NULL,\n  category TEXT NOT NULL,\n  price REAL NOT NULL,\n  stock INTEGER NOT NULL,\n  created_at TEXT NOT NULL\n);",
+      "solutionCode": "CREATE TABLE products (\n  id INTEGER PRIMARY KEY,\n  name TEXT NOT NULL,\n  category TEXT NOT NULL,\n  price REAL NOT NULL,\n  stock INTEGER NOT NULL,\n  created_at TEXT NOT NULL,\n  UNIQUE(name, category)\n);",
+      "datasetId": "products_catalog",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "unique-code-3",
+      "kind": "code_input",
+      "title": "Insert Duplicate Value with UNIQUE Constraint",
+      "prompt": "Suppose the `products` table has a UNIQUE constraint on the `name` column. Write an INSERT statement that would fail if a product named 'Notebook' already exists.",
+      "hint": "Try inserting a row with a name that already exists in the table.",
+      "help": {
+        "concept": "A UNIQUE constraint prevents inserting duplicate values in the constrained column.",
+        "hint_1": "If 'Notebook' is already present, inserting another 'Notebook' will violate the constraint.",
+        "hint_2": "Write an INSERT statement for a product with the name 'Notebook'."
+      },
+      "starterCode": "-- Write an INSERT statement for a product named 'Notebook'\n",
+      "solutionCode": "INSERT INTO products (id, name, category, price, stock, created_at) VALUES (7, 'Notebook', 'Stationery', 7.50, 40, '2026-03-01');",
+      "datasetId": "products_catalog",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "unique-multi-1",
+      "kind": "multi_choice",
+      "title": "Understanding UNIQUE Constraints",
+      "prompt": "Which of the following statements about the UNIQUE constraint are true? Select all that apply.",
+      "hint": "Think about what UNIQUE does and where it can be applied.",
+      "help": {
+        "concept": "The UNIQUE constraint enforces that values in a column or group of columns are not duplicated.",
+        "hint_1": "UNIQUE can be used on single or multiple columns.",
+        "hint_2": "UNIQUE is not the same as PRIMARY KEY, but both prevent duplicates."
+      },
+      "options": [
+        {
+          "id": "a",
+          "content": "UNIQUE can be applied to more than one column at a time."
+        },
+        {
+          "id": "b",
+          "content": "A table can have multiple UNIQUE constraints."
+        },
+        {
+          "id": "c",
+          "content": "UNIQUE allows duplicate values in the constrained columns."
+        },
+        {
+          "id": "d",
+          "content": "UNIQUE and PRIMARY KEY are exactly the same."
+        }
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ]
+    },
+    {
+      "id": "unique-fill-1",
+      "kind": "fill_blank_choice",
+      "title": "Purpose of UNIQUE",
+      "prompt": "Fill in the blank: The UNIQUE constraint is used to ensure that no two rows in a table have the same value in a specified ____.",
+      "hint": "Think about what UNIQUE is applied to.",
+      "help": {
+        "concept": "UNIQUE can be applied to a column or a set of columns to prevent duplicate values.",
+        "hint_1": "UNIQUE is most often used on columns.",
+        "hint_2": "It can also be used on a group of columns, but the blank asks for the singular."
+      },
+      "template": "The UNIQUE constraint is used to ensure that no two rows in a table have the same value in a specified ____.",
+      "choices": [
+        "column",
+        "table",
+        "database",
+        "row"
+      ],
+      "correctValue": "column"
+    }
+  ]
+}

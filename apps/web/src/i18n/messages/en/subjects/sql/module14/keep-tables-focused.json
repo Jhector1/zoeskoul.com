@@ -1,0 +1,122 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_14": {
+        "keep-tables-focused": {
+          "label": "Keep tables focused",
+          "summary": "Learn why each table in a relational database should focus on one main subject, and how this habit helps avoid data problems.",
+          "cards": {
+            "sketch0": {
+              "title": "Why Keep Tables Focused?"
+            },
+            "sketch1": {
+              "title": "Example: Focused vs. Unfocused Table"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Practice"
+            }
+          },
+          "projectSteps": {
+            "code_1": {
+              "title": "Query Focused Table"
+            }
+          },
+          "quiz": {
+            "fill-1": {
+              "title": "Main Subject of a Table",
+              "prompt": "What is the main subject of the `products` table in the art store catalog?",
+              "hint": "Think about what each row in the table represents.",
+              "help": {
+                "concept": "A table should represent one main entity or subject, such as the missing term, customers, or orders.",
+                "hint_1": "Look at the columns: name, category, price, stock, created_at. What do they all describe?",
+                "hint_2": "Each row is a single item for sale in the store."
+              },
+              "template": "The `products` table is focused on ____.",
+              "choices": [
+                "products",
+                "customers",
+                "orders",
+                "suppliers"
+              ]
+            },
+            "fill-2": {
+              "title": "Problem with Mixing Subjects",
+              "prompt": "Why is it a problem to store customer names in the `products` table?",
+              "hint": "What happens if the same product is bought by many customers?",
+              "help": {
+                "concept": "Mixing unrelated subjects in one table often causes repeated or inconsistent data.",
+                "hint_1": "If a product is bought by multiple customers, how would you record that in one row?",
+                "hint_2": "You might end up repeating the product information for each customer."
+              },
+              "template": "Storing customer names in the `products` table can lead to ____.",
+              "choices": [
+                "duplicate data",
+                "simpler queries",
+                "missing information",
+                "confusing structure"
+              ]
+            },
+            "single-1": {
+              "title": "Best Practice for Table Design",
+              "prompt": "Which of the following is the best practice when designing tables in a relational database?",
+              "hint": "Think about what makes data easier to manage and less error-prone.",
+              "help": {
+                "concept": "Focusing each table on a single subject keeps data organized and reduces errors.",
+                "hint_1": "Mixing subjects can cause duplication and confusion.",
+                "hint_2": "The best design keeps each table about one thing, like products or customers."
+              },
+              "options": {
+                "a": "[object Object]",
+                "b": "A command"
+              }
+            },
+            "multi-1": {
+              "title": "Consequences of Unfocused Tables",
+              "prompt": "Which of the following problems can happen if a table tries to store information about more than one subject? (Choose all that apply.)",
+              "hint": "Think about what happens when unrelated data is mixed together.",
+              "help": {
+                "concept": "Unfocused tables can cause repeated data, make updates difficult, and confuse users.",
+                "hint_1": "Mixing subjects often leads to repeated rows and tricky updates.",
+                "hint_2": "It rarely makes queries easier, and usually makes the table harder to understand."
+              },
+              "options": {
+                "a": "[object Object]",
+                "b": "A command"
+              }
+            },
+            "code-1": {
+              "title": "Query Focused Table",
+              "prompt": "Write a SQL query to select the name and category of all products in the `products` table.",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+                "hint_1": "Eliminate choices or interpretations that do not match the task.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "starterCode": "-- Write your query below"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_14": {
+        "keep-tables-focused": {
+          "sketch-1": {
+            "title": "Why Keep Tables Focused?",
+            "bodyMarkdown": "A well-designed table should represent one main subject or entity. For example, in the `products` table from our art store catalog, each row describes a single product, with columns for its name, category, price, stock, and creation date. \n\nIf we tried to store unrelated information—like customer orders or supplier details—in the same table, it would quickly become confusing and lead to repeated or missing data. Keeping tables focused makes queries simpler and helps prevent mistakes."
+          },
+          "sketch-2": {
+            "title": "Example: Focused vs. Unfocused Table",
+            "bodyMarkdown": "Suppose we tried to add a `customer_name` column to the `products` table to track who bought each product. This would not work well, because:\n- Products can be bought by many customers over time.\n- The same product would appear in multiple rows, or we'd have to store multiple customer names in one cell.\n\nInstead, we keep `products` focused on product details, and use a separate table (like `orders`) to track purchases. This keeps each table simple and avoids duplication."
+          }
+        }
+      }
+    }
+  }
+}

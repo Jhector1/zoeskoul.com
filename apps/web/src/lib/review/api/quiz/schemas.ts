@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { PracticeKind } from "@prisma/client";
+import { PracticeKind } from "@zoeskoul/db";
 import { pickModuleSlug } from "../shared/schemas";
 
 const StepSchema = z.object({

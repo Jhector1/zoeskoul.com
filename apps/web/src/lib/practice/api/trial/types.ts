@@ -1,4 +1,4 @@
-import type { PrismaClient } from "@prisma/client";
+import type { PrismaClient } from "@/lib/prisma";
 import type { Actor } from "@/lib/practice/actor";
 import type { TrialStartBody } from "./schemas";
 

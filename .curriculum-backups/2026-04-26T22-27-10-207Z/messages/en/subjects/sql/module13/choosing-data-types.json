@@ -1,0 +1,119 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_13": {
+        "choosing-data-types": {
+          "label": "Choosing data types",
+          "summary": "Learn how to choose appropriate data types for columns when designing SQL tables. Understand the impact of data types on storage, accuracy, and future queries using the products_catalog dataset.",
+          "cards": {
+            "sketch0": {
+              "title": "Why Data Types Matter"
+            },
+            "sketch1": {
+              "title": "Example: products Table"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Practice"
+            }
+          },
+          "projectSteps": {
+            "code_1": {
+              "title": "Create a table with appropriate data types"
+            },
+            "code_2": {
+              "title": "Add a new column with a suitable data type"
+            },
+            "code_3": {
+              "title": "Insert data using correct types"
+            }
+          },
+          "quiz": {
+            "code-1": {
+              "title": "Create a table with appropriate data types",
+              "prompt": "Create a new table called `suppliers` with the following columns:\n- `id`: unique integer, primary key\n- `name`: supplier name, text, required\n- `contact_email`: email address, text, required\n- `rating`: supplier rating, decimal number (e.g., 4.5), required\nChoose the most appropriate SQL data types for each column.",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+                "hint_1": "Eliminate choices or interpretations that do not match the task.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "starterCode": "-- Write your CREATE TABLE statement below"
+            },
+            "code-2": {
+              "title": "Add a new column with a suitable data type",
+              "prompt": "The `products` table needs a new column called `weight_grams` to store the weight of each product in grams (e.g., 250.0). Write an ALTER TABLE statement to add this column with the most appropriate data type.",
+              "hint": "Focus on the SQL task being asked for, not on copying final query text.",
+              "help": {
+                "concept": "Build the query from the operation the exercise is testing.",
+                "hint_1": "Think about which clauses or functions are required for the task.",
+                "hint_2": "Construct the query based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "-- Write your ALTER TABLE statement below"
+            },
+            "code-3": {
+              "title": "Insert data using correct types",
+              "prompt": "Insert a new product into the `products` table with the following values:\n- id: 7\n- name: 'Watercolor Paper'\n- category: 'Art'\n- price: 15.25\n- stock: 40\n- created_at: '2026-03-01'\nMake sure each value matches the column's data type.",
+              "hint": "Focus on the SQL task being asked for, not on copying final query text.",
+              "help": {
+                "concept": "Build the query from the operation the exercise is testing.",
+                "hint_1": "Think about which clauses or functions are required for the task.",
+                "hint_2": "Construct the query based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "-- Write your INSERT statement below"
+            },
+            "multi-1": {
+              "title": "Which data types are appropriate?",
+              "prompt": "Which of the following data types are appropriate for the columns in the `products` table? Select all that apply.",
+              "hint": "Think about the kind of data each column stores.",
+              "help": {
+                "concept": "Each column should use a data type that matches the kind of information it stores. For example, use INTEGER for counts, TEXT for strings, and REAL for decimal numbers.",
+                "hint_1": "Consider what type of data is stored in columns like price, name, and stock.",
+                "hint_2": "Some columns need to store text, some numbers, and some decimals."
+              },
+              "options": {
+                "a": "[object Object]",
+                "b": "A command"
+              }
+            },
+            "fill-1": {
+              "title": "Choose the best data type for a date",
+              "prompt": "In the `products` table, which data type is used for the `created_at` column?",
+              "hint": "Look at the table schema and see how dates are stored.",
+              "help": {
+                "concept": "SQLite does not have a dedicated DATE type. Dates are often stored as the missing term in ISO format.",
+                "hint_1": "Check the CREATE TABLE statement for the products table.",
+                "hint_2": "The column is defined to store date strings."
+              },
+              "template": "The best data type for the `created_at` column is [blank].",
+              "choices": [
+                "TEXT",
+                "INTEGER",
+                "REAL",
+                "BOOLEAN"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_13": {
+        "choosing-data-types": {
+          "sketch-1": {
+            "title": "Why Data Types Matter",
+            "bodyMarkdown": "When creating a table in SQL, each column must be assigned a data type. Data types define what kind of data can be stored (such as numbers, text, or dates) and help the database optimize storage and enforce data integrity. For example, in the `products` table of the `products_catalog` dataset, the `price` column uses the `REAL` type for decimal numbers, while `name` uses `TEXT` for product names."
+          },
+          "sketch-2": {
+            "title": "Example: products Table",
+            "bodyMarkdown": "Here's the schema for the `products` table:\n\n```sql\nCREATE TABLE products (\n  id INTEGER PRIMARY KEY,\n  name TEXT NOT NULL,\n  category TEXT NOT NULL,\n  price REAL NOT NULL,\n  stock INTEGER NOT NULL,\n  created_at TEXT NOT NULL\n);\n```\n\nNotice how each column's data type matches the kind of data it stores. For example, `stock` is an `INTEGER` because it counts whole items, and `created_at` is `TEXT` to store date strings."
+          }
+        }
+      }
+    }
+  }
+}

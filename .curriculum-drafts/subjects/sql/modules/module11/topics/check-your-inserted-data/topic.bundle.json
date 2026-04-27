@@ -35,6 +35,46 @@
         "preferKind": null,
         "maxAttempts": 10
       }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.sql.sql_module_11.check-your-inserted-data.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "q1",
+            "titleKey": "topics.sql.sql_module_11.check-your-inserted-data.projectSteps.q1.title",
+            "exerciseKey": "q1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "q2",
+            "titleKey": "topics.sql.sql_module_11.check-your-inserted-data.projectSteps.q2.title",
+            "exerciseKey": "q2",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "q3",
+            "titleKey": "topics.sql.sql_module_11.check-your-inserted-data.projectSteps.q3.title",
+            "exerciseKey": "q3",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
     }
   ],
   "sketches": [
@@ -55,7 +95,7 @@
     {
       "id": "q1",
       "kind": "code_input",
-      "purpose": "quiz",
+      "purpose": "project",
       "weight": 1,
       "messageBase": "topics.sql.sql_module_11.check-your-inserted-data.quiz.q1",
       "language": "sql",
@@ -64,13 +104,13 @@
         "type": "sql_query",
         "datasetId": "inventory_ops",
         "resultShape": "table",
-        "solutionCode": "SELECT * FROM inventory_items WHERE name = 'Eco Notebook';"
+        "solutionCode": "SELECT * FROM inventory_items WHERE name = 'Trial Tote';"
       }
     },
     {
       "id": "q2",
       "kind": "code_input",
-      "purpose": "quiz",
+      "purpose": "project",
       "weight": 1,
       "messageBase": "topics.sql.sql_module_11.check-your-inserted-data.quiz.q2",
       "language": "sql",
@@ -79,13 +119,13 @@
         "type": "sql_query",
         "datasetId": "inventory_ops",
         "resultShape": "table",
-        "solutionCode": "SELECT COUNT(*) FROM inventory_items;"
+        "solutionCode": "SELECT name, price FROM inventory_items WHERE category = 'Kitchen';"
       }
     },
     {
       "id": "q3",
       "kind": "code_input",
-      "purpose": "quiz",
+      "purpose": "project",
       "weight": 1,
       "messageBase": "topics.sql.sql_module_11.check-your-inserted-data.quiz.q3",
       "language": "sql",
@@ -94,7 +134,7 @@
         "type": "sql_query",
         "datasetId": "inventory_ops",
         "resultShape": "table",
-        "solutionCode": "SELECT * FROM inventory_items WHERE category = 'Kitchen' AND price = 10.00;"
+        "solutionCode": "SELECT COUNT(*) FROM inventory_items;"
       }
     },
     {
@@ -123,7 +163,7 @@
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "'Sample Poster'"
+        "value": "'Canvas Print'"
       }
     }
   ]

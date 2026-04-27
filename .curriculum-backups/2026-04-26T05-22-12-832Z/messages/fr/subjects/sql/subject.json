@@ -1,0 +1,76 @@
+{
+  "subjects": {
+    "sql": {
+      "title": "SQL pour débutants",
+      "description": "Apprenez SQL à partir de zéro avec des exercices pratiques.",
+      "moreComingSoon": "D'autres leçons SQL pour débutants arrivent bientôt."
+    }
+  },
+  "modules": {
+    "sql": {
+      "sql_module_5": {
+        "title": "Colonnes calculées et expressions SQL",
+        "description": "Apprenez à créer de nouvelles valeurs à partir de données existantes pour transformer des tables brutes en rapports utiles.",
+        "outcomes": [
+          "Utiliser des opérations arithmétiques et des expressions dans SELECT.",
+          "Renommer les résultats avec des alias pour plus de lisibilité.",
+          "Appliquer des fonctions intégrées simples en toute sécurité."
+        ],
+        "why": [
+          "Renforce la confiance avec les colonnes calculées et les expressions SQL.",
+          "Prépare les apprenants aux compétences suivantes du cours."
+        ]
+      }
+    }
+  },
+  "sections": {
+    "sql": {
+      "sql_module_5": {
+        "section_5_1": {
+          "title": "Créer de nouvelles valeurs dans les requêtes",
+          "description": "",
+          "weeks": null,
+          "bullets": [
+            "Ce que sont les expressions",
+            "Les mathématiques en SQL",
+            "Additionner et soustraire",
+            "Multiplier et diviser"
+          ]
+        },
+        "section_5_2": {
+          "title": "Alias de colonnes",
+          "description": "",
+          "weeks": null,
+          "bullets": [
+            "Ce que sont les alias",
+            "AS",
+            "Renommer les colonnes de résultats",
+            "Écrire des résultats lisibles"
+          ]
+        },
+        "section_5_3": {
+          "title": "Fonctions simples",
+          "description": "",
+          "weeks": null,
+          "bullets": [
+            "Introduction aux fonctions",
+            "Fonctions sur les chaînes de caractères",
+            "Fonctions numériques",
+            "Sensibilisation aux fonctions de date"
+          ]
+        },
+        "section_5_4": {
+          "title": "Pratique des expressions",
+          "description": "",
+          "weeks": null,
+          "bullets": [
+            "Calculs de prix total",
+            "Calculs de remise",
+            "Renommer les résultats",
+            "Requêtes de rapports simples"
+          ]
+        }
+      }
+    }
+  }
+}

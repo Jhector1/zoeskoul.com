@@ -1,0 +1,115 @@
+{
+  "title": "Change statuses",
+  "summary": "Practice updating and deleting status fields safely in the inventory_items table. Learn to preview affected rows, use WHERE clauses, and avoid accidental data loss.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch-1",
+      "title": "Why preview before changing data?",
+      "bodyMarkdown": "When you update or delete rows in SQL, it's important to know exactly which records will be affected. Running a `SELECT` query with your intended `WHERE` clause lets you preview the target rows before making changes. This habit helps prevent accidental updates or deletions, especially in tables like `inventory_items` where a mistake could affect real inventory data."
+    },
+    {
+      "id": "sketch-2",
+      "title": "Updating status fields",
+      "bodyMarkdown": "Suppose you want to activate all draft items in the `inventory_items` table. You can preview which rows will be affected:\n\n```sql\nSELECT id, name, status FROM inventory_items WHERE status = 'draft';\n```\n\nOnce you're sure, run the update:\n\n```sql\nUPDATE inventory_items SET status = 'active' WHERE status = 'draft';\n```\n\nAlways use a `WHERE` clause to avoid updating every row by mistake."
+    },
+    {
+      "id": "sketch-3",
+      "title": "Deleting obsolete test data",
+      "bodyMarkdown": "To clean up test items, first preview them:\n\n```sql\nSELECT id, name FROM inventory_items WHERE is_test = 1;\n```\n\nThen, delete only those rows:\n\n```sql\nDELETE FROM inventory_items WHERE is_test = 1;\n```\n\nNever run a `DELETE` without a `WHERE` unless you intend to remove all data!"
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "code-1",
+      "kind": "code_input",
+      "title": "Update all draft items to active",
+      "prompt": "Write a SQL statement to update the status of all items in the inventory_items table from 'draft' to 'active'.",
+      "starterCode": "-- Update all draft items to active",
+      "solutionCode": "UPDATE inventory_items SET status = 'active' WHERE status = 'draft';",
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query",
+      "hint": "Focus on the SQL task being asked for, not on copying final query text.",
+      "help": {
+        "concept": "Build the query from the operation the exercise is testing.",
+        "hint_1": "Think about which clauses or functions are required for the task.",
+        "hint_2": "Construct the query based on what result the exercise expects, not by repeating exact solution wording."
+      }
+    },
+    {
+      "id": "code-2",
+      "kind": "code_input",
+      "title": "Delete all test items",
+      "prompt": "Write a SQL statement to delete all rows from inventory_items where is_test is 1.",
+      "starterCode": "-- Delete all test items",
+      "solutionCode": "DELETE FROM inventory_items WHERE is_test = 1;",
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query",
+      "hint": "Focus on the concept being tested.",
+      "help": {
+        "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+        "hint_1": "Eliminate choices or interpretations that do not match the task.",
+        "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+      }
+    },
+    {
+      "id": "code-3",
+      "kind": "code_input",
+      "title": "Preview items before updating",
+      "prompt": "Write a SQL SELECT statement to preview all items in inventory_items that have status 'inactive'.",
+      "starterCode": "-- Preview inactive items",
+      "solutionCode": "SELECT * FROM inventory_items WHERE status = 'inactive';",
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query",
+      "hint": "Focus on the concept being tested.",
+      "help": {
+        "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+        "hint_1": "Eliminate choices or interpretations that do not match the task.",
+        "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+      }
+    },
+    {
+      "id": "multi-1",
+      "kind": "multi_choice",
+      "title": "Safe habits for changing data",
+      "prompt": "Which of the following are good habits when updating or deleting data in SQL? Select all that apply.",
+      "options": [
+        "a. Preview affected rows with a SELECT before running UPDATE or DELETE.",
+        "b. Always use a WHERE clause to target specific rows.",
+        "c. Run UPDATE or DELETE without WHERE to save time.",
+        "d. Make a backup before making major changes."
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ],
+      "hint": "Think about ways to avoid accidental changes.",
+      "help": {
+        "concept": "Previewing changes and using WHERE clauses help prevent mistakes. Backups are also important.",
+        "hint_1": "Previewing with SELECT and using WHERE are both safe practices.",
+        "hint_2": "Avoid running UPDATE or DELETE without WHERE, and always check which rows will be affected."
+      }
+    },
+    {
+      "id": "fill-1",
+      "kind": "fill_blank_choice",
+      "title": "Default status value",
+      "prompt": "What is the default value for the status column in the inventory_items table?",
+      "template": "The default value for status is [blank].",
+      "choices": [
+        "active",
+        "draft",
+        "inactive",
+        "pending"
+      ],
+      "correctValue": "draft",
+      "hint": "Check the table definition for the default value.",
+      "help": {
+        "concept": "The default value is set in the CREATE TABLE statement for a column.",
+        "hint_1": "Look for DEFAULT in the schema for the status column.",
+        "hint_2": "The status column is set to a value if none is provided during INSERT."
+      }
+    }
+  ]
+}

@@ -10,8 +10,6 @@ const CODE_LANGS = new Set<InteractiveLanguage>([
     "javascript",
     "c",
     "cpp",
-    "bash",
-    "web",
 ]);
 
 const SQL_DIALECTS = new Set<SqlDialect>([

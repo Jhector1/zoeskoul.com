@@ -25,6 +25,13 @@
       "height": 420
     },
     {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_11.add-a-student.cards.sketch2.title",
+      "sketchId": "sketch-3",
+      "height": 420
+    },
+    {
       "id": "quiz",
       "kind": "quiz",
       "titleKey": "topics.sql.sql_module_11.add-a-student.cards.quiz.title",
@@ -34,6 +41,46 @@
         "allowReveal": true,
         "preferKind": null,
         "maxAttempts": 10
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.sql.sql_module_11.add-a-student.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "code_1",
+            "titleKey": "topics.sql.sql_module_11.add-a-student.projectSteps.code_1.title",
+            "exerciseKey": "code-1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "code_2",
+            "titleKey": "topics.sql.sql_module_11.add-a-student.projectSteps.code_2.title",
+            "exerciseKey": "code-2",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "code_3",
+            "titleKey": "topics.sql.sql_module_11.add-a-student.projectSteps.code_3.title",
+            "exerciseKey": "code-3",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
       }
     }
   ],
@@ -49,13 +96,19 @@
       "archetype": "paragraph",
       "titleKey": "sketches.sql.sql_module_11.add-a-student.sketch-2.title",
       "bodyKey": "sketches.sql.sql_module_11.add-a-student.sketch-2.bodyMarkdown"
+    },
+    {
+      "id": "sketch-3",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_11.add-a-student.sketch-3.title",
+      "bodyKey": "sketches.sql.sql_module_11.add-a-student.sketch-3.bodyMarkdown"
     }
   ],
   "exercises": [
     {
       "id": "code-1",
       "kind": "code_input",
-      "purpose": "quiz",
+      "purpose": "project",
       "weight": 1,
       "messageBase": "topics.sql.sql_module_11.add-a-student.quiz.code-1",
       "language": "sql",
@@ -64,13 +117,14 @@
         "type": "sql_query",
         "datasetId": "inventory_ops",
         "resultShape": "table",
-        "solutionCode": "INSERT INTO inventory_items (name, category, price, status, is_test, notes, last_updated)\nVALUES ('Student Badge', 'Accessories', 2.50, 'active', 0, 'Welcome gift', '2026-02-10');"
+        "solutionCode": "INSERT INTO inventory_items (name, category, price, status, is_test, notes, last_updated)\nVALUES ('Student Badge', 'Accessories', 2.50, 'active', 0, NULL, '2026-02-10');",
+        "checkSql": "SELECT * FROM \"inventory_items\" ORDER BY 1;"
       }
     },
     {
       "id": "code-2",
       "kind": "code_input",
-      "purpose": "quiz",
+      "purpose": "project",
       "weight": 1,
       "messageBase": "topics.sql.sql_module_11.add-a-student.quiz.code-2",
       "language": "sql",
@@ -79,13 +133,14 @@
         "type": "sql_query",
         "datasetId": "inventory_ops",
         "resultShape": "table",
-        "solutionCode": "INSERT INTO inventory_items (name, category, price, status, is_test, notes, last_updated)\nVALUES ('Test Keychain', 'Accessories', 1.00, 'draft', 1, NULL, '2026-02-11');"
+        "solutionCode": "INSERT INTO inventory_items (name, category, price)\nVALUES ('Sample Lanyard', 'Accessories', 5.00);",
+        "checkSql": "SELECT * FROM \"inventory_items\" ORDER BY 1;"
       }
     },
     {
       "id": "code-3",
       "kind": "code_input",
-      "purpose": "quiz",
+      "purpose": "project",
       "weight": 1,
       "messageBase": "topics.sql.sql_module_11.add-a-student.quiz.code-3",
       "language": "sql",
@@ -94,7 +149,8 @@
         "type": "sql_query",
         "datasetId": "inventory_ops",
         "resultShape": "table",
-        "solutionCode": "INSERT INTO inventory_items (name, category, price, notes)\nVALUES ('Student Notebook', 'Accessories', 3.00, NULL);"
+        "solutionCode": "INSERT INTO inventory_items (name, category, price, status, is_test, notes, last_updated)\nVALUES ('Test Eraser', 'Accessories', 1.25, 'draft', 1, 'Test batch', '2026-02-11'),\n       ('Trial Pen', 'Accessories', 1.50, 'draft', 1, 'Trial batch', '2026-02-11');",
+        "checkSql": "SELECT * FROM \"inventory_items\" ORDER BY 1;"
       }
     },
     {
@@ -123,7 +179,7 @@
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "default"
+        "value": "draft"
       }
     }
   ]

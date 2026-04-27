@@ -1,0 +1,129 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_13": {
+        "choosing-column-names": {
+          "label": "Choosing column names",
+          "summary": "Learn best practices for naming columns when designing SQL tables, including clarity, consistency, and avoiding common pitfalls.",
+          "cards": {
+            "sketch0": {
+              "title": "Why Column Names Matter"
+            },
+            "sketch1": {
+              "title": "Best Practices for Naming Columns"
+            },
+            "sketch2": {
+              "title": "Examples of Good and Bad Column Names"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Practice"
+            }
+          },
+          "projectSteps": {
+            "code_1": {
+              "title": "Create a products table with clear column names"
+            },
+            "code_2": {
+              "title": "Rename a column for clarity"
+            },
+            "code_3": {
+              "title": "Identify and fix a poor column name"
+            }
+          },
+          "quiz": {
+            "code-1": {
+              "title": "Create a products table with clear column names",
+              "prompt": "Write a SQL statement to create a table named `products` with these columns:\n- id (integer, primary key)\n- name (text, not null)\n- category (text, not null)\n- price (real, not null)\n- stock (integer, not null)\n- created_at (text, not null)\nUse clear and consistent column names.",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+                "hint_1": "Eliminate choices or interpretations that do not match the task.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "starterCode": "-- Write your CREATE TABLE statement here"
+            },
+            "code-2": {
+              "title": "Rename a column for clarity",
+              "prompt": "Suppose your `products` table uses a generic column name `category`, and you want a clearer name. Write an ALTER TABLE statement to rename `category` to `product_category`.",
+              "hint": "Focus on the SQL task being asked for, not on copying final query text.",
+              "help": {
+                "concept": "Build the query from the operation the exercise is testing.",
+                "hint_1": "Think about which clauses or functions are required for the task.",
+                "hint_2": "Construct the query based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "-- Write your ALTER TABLE statement here"
+            },
+            "code-3": {
+              "title": "Identify and fix a poor column name",
+              "prompt": "You are reviewing a table definition:\n\n```sql\nCREATE TABLE products (\n  id INTEGER PRIMARY KEY,\n  n TEXT NOT NULL,\n  c TEXT NOT NULL,\n  p REAL NOT NULL,\n  s INTEGER NOT NULL,\n  d TEXT NOT NULL\n);\n```\n\nRewrite the CREATE TABLE statement using clear, descriptive column names for each field.",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+                "hint_1": "Eliminate choices or interpretations that do not match the task.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "starterCode": "-- Rewrite the CREATE TABLE statement with better column names"
+            },
+            "multi-1": {
+              "title": "Best practices for column naming",
+              "prompt": "Which of the following are good practices when choosing column names? Select all that apply.",
+              "hint": "Think about clarity, consistency, and avoiding confusion.",
+              "help": {
+                "concept": "Good column names are clear, descriptive, and consistent. Avoid abbreviations and reserved words.",
+                "hint_1": "Consider if the name describes the data and is easy to understand.",
+                "hint_2": "Avoid using single letters, special characters, or SQL keywords."
+              },
+              "options": {
+                "a": "a. Use full words instead of abbreviations",
+                "b": "b. Avoid using SQL reserved words",
+                "c": "c. Include spaces in column names for readability",
+                "d": "d. Use underscores to separate words",
+                "e": "e. Use special characters like $ or #"
+              }
+            },
+            "fill-1": {
+              "title": "Choose the most descriptive column name",
+              "prompt": "Which column name is the most descriptive for storing the date a product was added?",
+              "hint": "Look for a name that clearly indicates what the date represents.",
+              "help": {
+                "concept": "Descriptive column names help clarify the meaning of the data stored.",
+                "hint_1": "The name should specify that it's the creation or addition date.",
+                "hint_2": "Avoid generic names like 'date' or 'd'."
+              },
+              "template": "The best column name for this purpose is [blank].",
+              "choices": [
+                "date",
+                "created_at",
+                "d",
+                "added"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_13": {
+        "choosing-column-names": {
+          "sketch-1": {
+            "title": "Why Column Names Matter",
+            "bodyMarkdown": "When designing a table, the names you choose for columns are important. Good column names make your database easier to understand and maintain. For example, in the `products` table:\n\n```sql\nCREATE TABLE products (\n  id INTEGER PRIMARY KEY,\n  name TEXT NOT NULL,\n  category TEXT NOT NULL,\n  price REAL NOT NULL,\n  stock INTEGER NOT NULL,\n  created_at TEXT NOT NULL\n);\n```\n\nEach column name describes the data it stores. Clear, descriptive names help everyone know what each column means."
+          },
+          "sketch-2": {
+            "title": "Best Practices for Naming Columns",
+            "bodyMarkdown": "- Use lowercase letters and underscores to separate words (e.g., `created_at`).\n- Be specific: use `price` instead of `value`.\n- Avoid spaces and special characters.\n- Do not use reserved SQL keywords (like `select`, `table`).\n- Stay consistent across your tables."
+          },
+          "sketch-3": {
+            "title": "Examples of Good and Bad Column Names",
+            "bodyMarkdown": "| Good Name      | Bad Name    | Why?                         |\n|---------------|------------|------------------------------|\n| `created_at`  | `date`     | More specific                |\n| `stock`       | `s`        | Avoids abbreviations         |\n| `category`    | `cat`      | Full word is clearer         |\n| `price`       | `cost$`    | No special characters        |\n| `name`        | `product`  | Avoids confusion with table  |"
+          }
+        }
+      }
+    }
+  }
+}

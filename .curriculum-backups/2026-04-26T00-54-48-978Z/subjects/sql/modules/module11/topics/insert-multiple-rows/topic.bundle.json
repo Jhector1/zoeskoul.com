@@ -1,0 +1,183 @@
+{
+  "topicId": "insert-multiple-rows",
+  "subjectSlug": "sql",
+  "moduleSlug": "sql_module_11",
+  "sectionSlug": "section_11_1",
+  "prefix": "sql11",
+  "minutes": 15,
+  "topic": {
+    "labelKey": "topics.sql.sql_module_11.insert-multiple-rows.label",
+    "summaryKey": "topics.sql.sql_module_11.insert-multiple-rows.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_11.insert-multiple-rows.cards.sketch0.title",
+      "sketchId": "sketch-1",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_11.insert-multiple-rows.cards.sketch1.title",
+      "sketchId": "sketch-2",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_11.insert-multiple-rows.cards.sketch2.title",
+      "sketchId": "sketch-3",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql.sql_module_11.insert-multiple-rows.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 2,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.sql.sql_module_11.insert-multiple-rows.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "q1_insert_multi_basic",
+            "titleKey": "topics.sql.sql_module_11.insert-multiple-rows.projectSteps.q1_insert_multi_basic.title",
+            "exerciseKey": "q1-insert-multi-basic",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "q2_insert_multi_null",
+            "titleKey": "topics.sql.sql_module_11.insert-multiple-rows.projectSteps.q2_insert_multi_null.title",
+            "exerciseKey": "q2-insert-multi-null",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "q3_insert_multi_explicit_cols",
+            "titleKey": "topics.sql.sql_module_11.insert-multiple-rows.projectSteps.q3_insert_multi_explicit_cols.title",
+            "exerciseKey": "q3-insert-multi-explicit-cols",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch-1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_11.insert-multiple-rows.sketch-1.title",
+      "bodyKey": "sketches.sql.sql_module_11.insert-multiple-rows.sketch-1.bodyMarkdown"
+    },
+    {
+      "id": "sketch-2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_11.insert-multiple-rows.sketch-2.title",
+      "bodyKey": "sketches.sql.sql_module_11.insert-multiple-rows.sketch-2.bodyMarkdown"
+    },
+    {
+      "id": "sketch-3",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_11.insert-multiple-rows.sketch-3.title",
+      "bodyKey": "sketches.sql.sql_module_11.insert-multiple-rows.sketch-3.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "q1-insert-multi-basic",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_11.insert-multiple-rows.quiz.q1-insert-multi-basic",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "inventory_ops",
+        "resultShape": "table",
+        "solutionCode": "INSERT INTO inventory_items (name, category, price, status, is_test, notes, last_updated)\nVALUES\n  ('Travel Mug', 'Kitchen', 13.00, 'active', 0, NULL, '2026-02-12'),\n  ('Sticker Sheet', 'Accessories', 2.50, 'draft', 0, 'Limited edition', '2026-02-12');"
+      }
+    },
+    {
+      "id": "q2-insert-multi-null",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_11.insert-multiple-rows.quiz.q2-insert-multi-null",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "inventory_ops",
+        "resultShape": "table",
+        "solutionCode": "INSERT INTO inventory_items (name, category, price, is_test, notes, last_updated)\nVALUES\n  ('Sample Pen', 'Accessories', 1.25, 1, NULL, '2026-02-13'),\n  ('Test Apron', 'Kitchen', 11.00, 1, NULL, '2026-02-13');"
+      }
+    },
+    {
+      "id": "q3-insert-multi-explicit-cols",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_11.insert-multiple-rows.quiz.q3-insert-multi-explicit-cols",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "inventory_ops",
+        "resultShape": "table",
+        "solutionCode": "INSERT INTO inventory_items (name, category, price, status, last_updated)\nVALUES\n  ('Gift Card', 'Accessories', 20.00, 'active', '2026-02-14'),\n  ('Sample Plate', 'Kitchen', 6.00, 'draft', '2026-02-14');"
+      }
+    },
+    {
+      "id": "q4-insert-multi-benefits",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_11.insert-multiple-rows.quiz.q4-insert-multi-benefits",
+      "optionIds": [
+        "a",
+        "b"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a"
+        ]
+      }
+    },
+    {
+      "id": "q5-insert-multi-syntax",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_11.insert-multiple-rows.quiz.q5-insert-multi-syntax",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "comma"
+      }
+    }
+  ]
+}

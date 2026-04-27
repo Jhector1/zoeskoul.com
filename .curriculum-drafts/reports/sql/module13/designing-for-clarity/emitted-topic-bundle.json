@@ -1,0 +1,186 @@
+{
+  "topicId": "designing-for-clarity",
+  "subjectSlug": "sql",
+  "moduleSlug": "sql_module_13",
+  "sectionSlug": "section_13_1",
+  "prefix": "sql13",
+  "minutes": 15,
+  "topic": {
+    "labelKey": "topics.sql.sql_module_13.designing-for-clarity.label",
+    "summaryKey": "topics.sql.sql_module_13.designing-for-clarity.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_13.designing-for-clarity.cards.sketch0.title",
+      "sketchId": "sketch-clarity-intro",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_13.designing-for-clarity.cards.sketch1.title",
+      "sketchId": "sketch-column-names",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_13.designing-for-clarity.cards.sketch2.title",
+      "sketchId": "sketch-data-types-constraints",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql.sql_module_13.designing-for-clarity.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 2,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.sql.sql_module_13.designing-for-clarity.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "code_create_table_basic",
+            "titleKey": "topics.sql.sql_module_13.designing-for-clarity.projectSteps.code_create_table_basic.title",
+            "exerciseKey": "code-create-table-basic",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "code_insert_product",
+            "titleKey": "topics.sql.sql_module_13.designing-for-clarity.projectSteps.code_insert_product.title",
+            "exerciseKey": "code-insert-product",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "code_add_not_null_column",
+            "titleKey": "topics.sql.sql_module_13.designing-for-clarity.projectSteps.code_add_not_null_column.title",
+            "exerciseKey": "code-add-not-null-column",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch-clarity-intro",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_13.designing-for-clarity.sketch-clarity-intro.title",
+      "bodyKey": "sketches.sql.sql_module_13.designing-for-clarity.sketch-clarity-intro.bodyMarkdown"
+    },
+    {
+      "id": "sketch-column-names",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_13.designing-for-clarity.sketch-column-names.title",
+      "bodyKey": "sketches.sql.sql_module_13.designing-for-clarity.sketch-column-names.bodyMarkdown"
+    },
+    {
+      "id": "sketch-data-types-constraints",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_13.designing-for-clarity.sketch-data-types-constraints.title",
+      "bodyKey": "sketches.sql.sql_module_13.designing-for-clarity.sketch-data-types-constraints.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "code-create-table-basic",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_13.designing-for-clarity.quiz.code-create-table-basic",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "CREATE TABLE suppliers (\n  id INTEGER PRIMARY KEY,\n  name TEXT NOT NULL,\n  contact_email TEXT NOT NULL\n);",
+        "checkSql": "SELECT name, sql FROM sqlite_master WHERE type = 'table' AND name = 'suppliers';"
+      }
+    },
+    {
+      "id": "code-insert-product",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_13.designing-for-clarity.quiz.code-insert-product",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "INSERT INTO products (id, name, category, price, stock, created_at) VALUES (7, 'Watercolor Paper', 'Art', 15.50, 20, '2026-03-01');",
+        "checkSql": "SELECT * FROM \"products\" ORDER BY 1;"
+      }
+    },
+    {
+      "id": "code-add-not-null-column",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_13.designing-for-clarity.quiz.code-add-not-null-column",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "ALTER TABLE products ADD COLUMN supplier_id INTEGER NOT NULL DEFAULT 1;",
+        "checkSql": "SELECT name, sql FROM sqlite_master WHERE type = 'table' AND name = 'products';"
+      }
+    },
+    {
+      "id": "multi-choice-table-design",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_13.designing-for-clarity.quiz.multi-choice-table-design",
+      "optionIds": [
+        "a",
+        "b"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a"
+        ]
+      }
+    },
+    {
+      "id": "fill-blank-primary-key",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_13.designing-for-clarity.quiz.fill-blank-primary-key",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "unique"
+      }
+    }
+  ]
+}

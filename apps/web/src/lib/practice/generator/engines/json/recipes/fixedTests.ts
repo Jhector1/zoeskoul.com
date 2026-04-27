@@ -2,17 +2,15 @@ import { makeCodeInputOut } from "@/lib/practice/generator/engines/utils";
 import type { RecipeHandler } from "./types";
 import type { ManifestCodeInput } from "@/lib/subjects/_core/manifestTypes";
 import { buildTerminalExpectedExample } from "./expectedExample";
+import { buildFixedTestsExpected } from "@zoeskoul-code-input-expected";
 
 export const buildFixedTestsRecipe: RecipeHandler<any> = (
     def: ManifestCodeInput & { recipe: { type: "fixed_tests"; tests: any[]; solutionCode?: string } },
     args,
     resolved,
 ) => {
-    const tests = def.recipe.tests.map((t: any) => ({
-        stdin: t.stdin,
-        stdout: t.stdout,
-        match: t.match ?? "exact",
-    }));
+    const expected = buildFixedTestsExpected(def.recipe);
+    const tests = expected.tests;
 
     const expectedExample = buildTerminalExpectedExample({
         def,
@@ -32,11 +30,7 @@ export const buildFixedTestsRecipe: RecipeHandler<any> = (
         help: resolved.help,
         hint: resolved.hint,
         fixedSqlDialect: def.fixedSqlDialect,
-        expected: {
-            kind: "code_input",
-            tests,
-            ...(def.recipe.solutionCode ? { solutionCode: def.recipe.solutionCode } : {}),
-        } as any,
+        expected: expected as any,
         expectedExample,
     });
 };

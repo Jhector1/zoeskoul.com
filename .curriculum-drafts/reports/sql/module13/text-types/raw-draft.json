@@ -1,0 +1,133 @@
+{
+  "title": "Text types",
+  "summary": "Explore how SQL text types are used in table design, focusing on the TEXT type in SQLite and its role in storing string data for products and categories.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sk1",
+      "title": "What are text types in SQL?",
+      "bodyMarkdown": "Text types in SQL are used to store string data, such as names, descriptions, or categories. In SQLite, the main text type is `TEXT`. This type can hold any length of string, making it flexible for storing product names, categories, or other descriptive information. For example, in the `products` table:\n\n```sql\nCREATE TABLE products (\n  id INTEGER PRIMARY KEY,\n  name TEXT NOT NULL,\n  category TEXT NOT NULL,\n  price REAL NOT NULL,\n  stock INTEGER NOT NULL,\n  created_at TEXT NOT NULL\n);\n```\nHere, both `name` and `category` use the `TEXT` type."
+    },
+    {
+      "id": "sk2",
+      "title": "Why use TEXT for dates in SQLite?",
+      "bodyMarkdown": "SQLite does not have a dedicated DATE or DATETIME type. Instead, dates and times are often stored as `TEXT` in a standard format (like 'YYYY-MM-DD'). This allows for easy sorting and comparison. In the `products` table, the `created_at` column uses `TEXT` to store the date each product was added."
+    },
+    {
+      "id": "sk3",
+      "title": "Choosing the right type for each column",
+      "bodyMarkdown": "When designing a table, choose `TEXT` for columns that will store words, sentences, or any kind of string data. Use it for things like product names, categories, or notes. For numbers, use types like `INTEGER` or `REAL`. For dates in SQLite, use `TEXT` and stick to a consistent format."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "q1",
+      "kind": "code_input",
+      "title": "Add a new text column",
+      "prompt": "Add a new column called `description` to the `products` table. The column should store text about each product and allow NULL values.",
+      "hint": "Use ALTER TABLE to add a column with the TEXT type.",
+      "help": {
+        "concept": "To add a new column to an existing table in SQLite, use the ALTER TABLE statement. Specify the column name and its data type. TEXT is used for string data.",
+        "hint_1": "Remember the syntax: ALTER TABLE table_name ADD COLUMN column_name data_type;",
+        "hint_2": "The new column should be called description and use the TEXT type. Allowing NULL is the default."
+      },
+      "starterCode": "-- Add a description column to products\n",
+      "solutionCode": "ALTER TABLE products ADD COLUMN description TEXT;",
+      "datasetId": "products_catalog",
+      "recipeType": "sql_query",
+      "checkSql": "PRAGMA table_info(products);"
+    },
+    {
+      "id": "q2",
+      "kind": "code_input",
+      "title": "Insert a product with a text value",
+      "prompt": "Insert a new product into the `products` table with the following values:\n- id: 7\n- name: 'Watercolor Paper'\n- category: 'Art'\n- price: 15.25\n- stock: 20\n- created_at: '2026-03-01'\n\nMake sure the name and category are stored as text.",
+      "hint": "Use INSERT INTO with all columns. Enclose text values in single quotes.",
+      "help": {
+        "concept": "When inserting data into a table, string values for TEXT columns must be enclosed in single quotes. The order of values should match the columns.",
+        "hint_1": "Write INSERT INTO products (columns...) VALUES (...);",
+        "hint_2": "Remember to quote 'Watercolor Paper' and 'Art' for the name and category columns."
+      },
+      "starterCode": "-- Insert a new product with text values\n",
+      "solutionCode": "INSERT INTO products (id, name, category, price, stock, created_at) VALUES (7, 'Watercolor Paper', 'Art', 15.25, 20, '2026-03-01');",
+      "datasetId": "products_catalog",
+      "recipeType": "sql_query",
+      "checkSql": "SELECT * FROM products WHERE id = 7;"
+    },
+    {
+      "id": "q3",
+      "kind": "code_input",
+      "title": "Query products by text category",
+      "prompt": "Write a query to select the names of all products in the 'Stationery' category.",
+      "hint": "Use SELECT and WHERE to filter by category.",
+      "help": {
+        "concept": "To filter rows by a text value, use the WHERE clause with the column name and the desired string in single quotes.",
+        "hint_1": "Write SELECT name FROM products WHERE category = ...",
+        "hint_2": "The category value should be 'Stationery', enclosed in single quotes."
+      },
+      "starterCode": "-- Select product names in the Stationery category\n",
+      "solutionCode": "SELECT name FROM products WHERE category = 'Stationery';",
+      "datasetId": "products_catalog",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "q4",
+      "kind": "multi_choice",
+      "title": "Which columns use the TEXT type?",
+      "prompt": "Select all columns in the `products` table that use the TEXT type.",
+      "hint": "Look for columns that store words or dates.",
+      "help": {
+        "concept": "TEXT columns are used for string data, such as names, categories, and dates (in SQLite).",
+        "hint_1": "Check the schema for columns like name, category, and created_at.",
+        "hint_2": "There are three columns in products that use TEXT."
+      },
+      "options": [
+        {
+          "id": "a",
+          "content": "name"
+        },
+        {
+          "id": "b",
+          "content": "category"
+        },
+        {
+          "id": "c",
+          "content": "price"
+        },
+        {
+          "id": "d",
+          "content": "stock"
+        },
+        {
+          "id": "e",
+          "content": "created_at"
+        }
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "e"
+      ]
+    },
+    {
+      "id": "q5",
+      "kind": "fill_blank_choice",
+      "title": "Default text type in SQLite",
+      "prompt": "Fill in the blank: In SQLite, the main data type for storing strings is ____.",
+      "hint": "It's the same type used for the name and category columns.",
+      "help": {
+        "concept": "SQLite uses the TEXT type for columns that store string data.",
+        "hint_1": "Look at the schema for the products table to see which type is used for names.",
+        "hint_2": "The answer is a four-letter word starting with T."
+      },
+      "template": "In SQLite, the main data type for storing strings is ____.",
+      "choices": [
+        "TEXT",
+        "VARCHAR",
+        "CHAR",
+        "STRING"
+      ],
+      "correctValue": "TEXT"
+    }
+  ]
+}

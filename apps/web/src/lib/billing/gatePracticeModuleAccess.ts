@@ -1,6 +1,6 @@
 // src/lib/billing/gatePracticeModuleAccess.ts
 import { NextResponse } from "next/server";
-import type { PrismaClient } from "@prisma/client";
+import type { PrismaClient } from "@/lib/prisma";
 import { checkModuleAccess } from "@/lib/access/moduleAccessServer";
 import { buildBillingHref, safeInternalPath } from "@/lib/billing/moduleAccess";
 import type { Actor } from "@/lib/practice/actor";

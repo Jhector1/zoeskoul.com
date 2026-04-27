@@ -14,21 +14,21 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.sql.sql_module_11.what-insert-into-does.cards.sketch0.title",
-      "sketchId": "sk1",
+      "sketchId": "sketch-1",
       "height": 420
     },
     {
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.sql.sql_module_11.what-insert-into-does.cards.sketch1.title",
-      "sketchId": "sk2",
+      "sketchId": "sketch-2",
       "height": 420
     },
     {
       "id": "sketch2",
       "kind": "sketch",
       "titleKey": "topics.sql.sql_module_11.what-insert-into-does.cards.sketch2.title",
-      "sketchId": "sk3",
+      "sketchId": "sketch-3",
       "height": 420
     },
     {
@@ -54,27 +54,27 @@
         "maxAttempts": 10,
         "steps": [
           {
-            "id": "q1",
-            "titleKey": "topics.sql.sql_module_11.what-insert-into-does.projectSteps.q1.title",
-            "exerciseKey": "q1",
+            "id": "quiz_1",
+            "titleKey": "topics.sql.sql_module_11.what-insert-into-does.projectSteps.quiz_1.title",
+            "exerciseKey": "quiz-1",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": 10
           },
           {
-            "id": "q2",
-            "titleKey": "topics.sql.sql_module_11.what-insert-into-does.projectSteps.q2.title",
-            "exerciseKey": "q2",
+            "id": "quiz_2",
+            "titleKey": "topics.sql.sql_module_11.what-insert-into-does.projectSteps.quiz_2.title",
+            "exerciseKey": "quiz-2",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": 10
           },
           {
-            "id": "q3",
-            "titleKey": "topics.sql.sql_module_11.what-insert-into-does.projectSteps.q3.title",
-            "exerciseKey": "q3",
+            "id": "quiz_3",
+            "titleKey": "topics.sql.sql_module_11.what-insert-into-does.projectSteps.quiz_3.title",
+            "exerciseKey": "quiz-3",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
@@ -86,76 +86,79 @@
   ],
   "sketches": [
     {
-      "id": "sk1",
+      "id": "sketch-1",
       "archetype": "paragraph",
-      "titleKey": "sketches.sql.sql_module_11.what-insert-into-does.sk1.title",
-      "bodyKey": "sketches.sql.sql_module_11.what-insert-into-does.sk1.bodyMarkdown"
+      "titleKey": "sketches.sql.sql_module_11.what-insert-into-does.sketch-1.title",
+      "bodyKey": "sketches.sql.sql_module_11.what-insert-into-does.sketch-1.bodyMarkdown"
     },
     {
-      "id": "sk2",
+      "id": "sketch-2",
       "archetype": "paragraph",
-      "titleKey": "sketches.sql.sql_module_11.what-insert-into-does.sk2.title",
-      "bodyKey": "sketches.sql.sql_module_11.what-insert-into-does.sk2.bodyMarkdown"
+      "titleKey": "sketches.sql.sql_module_11.what-insert-into-does.sketch-2.title",
+      "bodyKey": "sketches.sql.sql_module_11.what-insert-into-does.sketch-2.bodyMarkdown"
     },
     {
-      "id": "sk3",
+      "id": "sketch-3",
       "archetype": "paragraph",
-      "titleKey": "sketches.sql.sql_module_11.what-insert-into-does.sk3.title",
-      "bodyKey": "sketches.sql.sql_module_11.what-insert-into-does.sk3.bodyMarkdown"
+      "titleKey": "sketches.sql.sql_module_11.what-insert-into-does.sketch-3.title",
+      "bodyKey": "sketches.sql.sql_module_11.what-insert-into-does.sketch-3.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "q1",
+      "id": "quiz-1",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_11.what-insert-into-does.quiz.q1",
+      "messageBase": "topics.sql.sql_module_11.what-insert-into-does.quiz.quiz-1",
       "language": "sql",
       "fixedSqlDialect": "sqlite",
       "recipe": {
         "type": "sql_query",
         "datasetId": "inventory_ops",
         "resultShape": "table",
-        "solutionCode": "INSERT INTO inventory_items (name, category, price, status, is_test, notes, last_updated)\nVALUES ('Desk Organizer', 'Accessories', 8.75, 'active', 0, NULL, '2026-02-10');"
+        "solutionCode": "INSERT INTO inventory_items (name, category, price, status, is_test, notes, last_updated)\nVALUES ('Desk Organizer', 'Accessories', 8.50, 'active', 0, NULL, '2026-02-08');",
+        "checkSql": "SELECT * FROM \"inventory_items\" ORDER BY 1;"
       }
     },
     {
-      "id": "q2",
+      "id": "quiz-2",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_11.what-insert-into-does.quiz.q2",
+      "messageBase": "topics.sql.sql_module_11.what-insert-into-does.quiz.quiz-2",
       "language": "sql",
       "fixedSqlDialect": "sqlite",
       "recipe": {
         "type": "sql_query",
         "datasetId": "inventory_ops",
         "resultShape": "table",
-        "solutionCode": "INSERT INTO inventory_items (name, category, price, notes, last_updated)\nVALUES ('Sample Coaster', 'Kitchen', 3.00, 'Promotional item', '2026-02-12');"
+        "solutionCode": "INSERT INTO inventory_items (name, category, price, is_test)\nVALUES ('Sample Keychain', 'Accessories', 2.50, 1);",
+        "checkSql": "SELECT * FROM \"inventory_items\" ORDER BY 1;"
       }
     },
     {
-      "id": "q3",
+      "id": "quiz-3",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_11.what-insert-into-does.quiz.q3",
+      "messageBase": "topics.sql.sql_module_11.what-insert-into-does.quiz.quiz-3",
       "language": "sql",
       "fixedSqlDialect": "sqlite",
       "recipe": {
         "type": "sql_query",
         "datasetId": "inventory_ops",
         "resultShape": "table",
-        "solutionCode": "INSERT INTO inventory_items (name, category, price, status, is_test, notes, last_updated)\nVALUES ('Gift Bag', 'Accessories', 1.50, 'active', 0, NULL, '2026-02-13'),\n       ('Trial Apron', 'Kitchen', 12.00, 'draft', 1, 'Test batch', '2026-02-14');"
+        "solutionCode": "INSERT INTO inventory_items (name, category, price, status, is_test, notes, last_updated)\nVALUES\n  ('Gift Card', 'Accessories', 20.00, 'active', 0, NULL, '2026-02-09'),\n  ('Apron', 'Kitchen', 12.00, 'draft', 1, 'Limited edition', '2026-02-10');",
+        "checkSql": "SELECT * FROM \"inventory_items\" ORDER BY 1;"
       }
     },
     {
-      "id": "q4",
+      "id": "quiz-4",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_11.what-insert-into-does.quiz.q4",
+      "messageBase": "topics.sql.sql_module_11.what-insert-into-does.quiz.quiz-4",
       "optionIds": [
         "a",
         "b"
@@ -168,11 +171,11 @@
       }
     },
     {
-      "id": "q5",
+      "id": "quiz-5",
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_11.what-insert-into-does.quiz.q5",
+      "messageBase": "topics.sql.sql_module_11.what-insert-into-does.quiz.quiz-5",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",

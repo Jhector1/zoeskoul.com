@@ -1,5 +1,5 @@
 // src/lib/practice/generator/generatorTypes.ts
-import { PracticeKind } from "@prisma/client";
+import { PracticeKind } from "@zoeskoul/db";
 import type { Difficulty, ExerciseKind, TopicSlug } from "../types";
 import {SubjectModuleGenerator} from "@/lib/practice/generator/engines/utils";
 

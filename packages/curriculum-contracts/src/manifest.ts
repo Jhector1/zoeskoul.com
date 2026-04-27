@@ -172,6 +172,7 @@ export type ManifestRecipe =
       type: "sql_query";
       datasetId?: string;
       solutionCode: string;
+      checkSql?: string;
       resultShape?: "table";
       ignoreRowOrder?: boolean;
     }

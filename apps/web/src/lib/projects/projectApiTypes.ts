@@ -5,7 +5,7 @@ import type {
     CodeProjectScopeKind,
     CodeProjectVisibility,
     CodeProjectRole,
-} from "@prisma/client";
+} from "@zoeskoul/db";
 import { WorkspaceStateV2 } from "@/components/ide/types";
 
 export type ProjectScopeInput = {

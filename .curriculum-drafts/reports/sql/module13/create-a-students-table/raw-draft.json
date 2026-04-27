@@ -1,0 +1,113 @@
+{
+  "title": "Create a students table",
+  "summary": "Learn how to design and create a students table, including choosing appropriate columns, data types, and constraints to ensure data quality.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch-1",
+      "title": "Why Table Design Matters",
+      "bodyMarkdown": "A well-designed table makes it easier to store, retrieve, and protect data. For example, the `products` table in the `products_catalog` dataset uses columns like `id INTEGER PRIMARY KEY`, `name TEXT NOT NULL`, and `price REAL NOT NULL` to ensure each product is uniquely identified and important fields are always filled in. When designing a `students` table, you should also consider what information is essential and how to enforce data quality."
+    },
+    {
+      "id": "sketch-2",
+      "title": "Choosing Columns and Data Types",
+      "bodyMarkdown": "Think about what information you need to store for each student. Common columns include a unique student ID, name, enrollment date, and possibly grade level. Choose data types that match the kind of data: use `INTEGER` for IDs, `TEXT` for names, and `TEXT` or `DATE` for dates. For example:\n\n```sql\nCREATE TABLE students (\n  id INTEGER PRIMARY KEY,\n  name TEXT NOT NULL,\n  enrollment_date TEXT NOT NULL\n);\n```"
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "code-1",
+      "kind": "code_input",
+      "title": "Create a basic students table",
+      "prompt": "Write a SQL statement to create a `students` table with the following columns:\n- `id` as an integer primary key\n- `name` as text and required\n- `enrollment_date` as text and required",
+      "hint": "Use CREATE TABLE and specify data types and constraints for each column.",
+      "help": {
+        "concept": "A table is created using the CREATE TABLE statement. Each column should have a name, data type, and constraints like PRIMARY KEY or NOT NULL as needed.",
+        "hint_1": "Remember to set the id as INTEGER PRIMARY KEY and use NOT NULL for required fields.",
+        "hint_2": "List each column with its data type and constraints inside the parentheses after CREATE TABLE students."
+      },
+      "starterCode": "-- Write your CREATE TABLE statement here",
+      "solutionCode": "CREATE TABLE students (\n  id INTEGER PRIMARY KEY,\n  name TEXT NOT NULL,\n  enrollment_date TEXT NOT NULL\n);",
+      "datasetId": "products_catalog",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "code-2",
+      "kind": "code_input",
+      "title": "Add a grade_level column",
+      "prompt": "Modify the `students` table to include a `grade_level` column as an integer that is required (cannot be NULL). Write the full CREATE TABLE statement.",
+      "hint": "Add a new column for grade_level with INTEGER type and NOT NULL constraint.",
+      "help": {
+        "concept": "To add a new required column, include it in the CREATE TABLE statement with the correct data type and NOT NULL constraint.",
+        "hint_1": "Place the grade_level column after the existing columns, using INTEGER NOT NULL.",
+        "hint_2": "Your CREATE TABLE should now have four columns, all required except the primary key which is also required by default."
+      },
+      "starterCode": "-- Write your CREATE TABLE statement here",
+      "solutionCode": "CREATE TABLE students (\n  id INTEGER PRIMARY KEY,\n  name TEXT NOT NULL,\n  enrollment_date TEXT NOT NULL,\n  grade_level INTEGER NOT NULL\n);",
+      "datasetId": "products_catalog",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "code-3",
+      "kind": "code_input",
+      "title": "Insert a student record",
+      "prompt": "Insert a student named 'Alex Kim' who enrolled on '2026-03-01' in grade level 10 into the `students` table. Assume the table already exists.",
+      "hint": "Use the INSERT INTO statement and provide values for all columns.",
+      "help": {
+        "concept": "INSERT INTO adds a new row to a table. You must specify values for all NOT NULL columns.",
+        "hint_1": "List the columns in the INSERT statement and match the order of values.",
+        "hint_2": "Remember to provide a value for id, name, enrollment_date, and grade_level."
+      },
+      "starterCode": "-- Write your INSERT statement here",
+      "solutionCode": "INSERT INTO students (id, name, enrollment_date, grade_level)\nVALUES (1, 'Alex Kim', '2026-03-01', 10);",
+      "datasetId": "products_catalog",
+      "recipeType": "sql_query",
+      "checkSql": "SELECT * FROM students WHERE id = 1 AND name = 'Alex Kim' AND enrollment_date = '2026-03-01' AND grade_level = 10;"
+    },
+    {
+      "id": "multi-1",
+      "kind": "multi_choice",
+      "title": "Choosing good columns for a students table",
+      "prompt": "Which of the following columns are appropriate for a `students` table? Select all that apply.",
+      "hint": "Think about what information is essential for identifying and tracking students.",
+      "help": {
+        "concept": "A students table should include columns that uniquely identify each student and store key information like name and enrollment date.",
+        "hint_1": "Consider columns that are directly related to student identity and academic status.",
+        "hint_2": "Columns like student ID, name, enrollment date, and grade level are typical; unrelated columns like product price are not."
+      },
+      "options": {
+        "a": "id",
+        "b": "name",
+        "c": "enrollment_date",
+        "d": "grade_level",
+        "e": "price"
+      },
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ]
+    },
+    {
+      "id": "fill-1",
+      "kind": "fill_blank_choice",
+      "title": "Primary key purpose",
+      "prompt": "In a table, the primary key ensures that each row is ____.",
+      "hint": "Think about what a primary key prevents in a table.",
+      "help": {
+        "concept": "A primary key uniquely identifies each row in a table, preventing duplicate entries.",
+        "hint_1": "A primary key means no two rows can have the same value in that column.",
+        "hint_2": "It guarantees that every row can be distinguished from all others."
+      },
+      "template": "In a table, the primary key ensures that each row is ____.",
+      "choices": [
+        "unique",
+        "required",
+        "indexed",
+        "nullable"
+      ],
+      "correctValue": "unique"
+    }
+  ]
+}

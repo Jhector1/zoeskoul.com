@@ -1,0 +1,136 @@
+{
+  "subjects": {
+    "sql": {
+      "title": "SQL for Beginners",
+      "description": "Learn SQL from zero with hands-on practice.",
+      "moreComingSoon": "More SQL for Beginners lessons are coming soon."
+    }
+  },
+  "modules": {
+    "sql": {
+      "sql_module_5": {
+        "title": "Expressions, Aliases, and Simple Functions",
+        "description": "Create useful calculated values, rename outputs clearly, and use beginner-friendly SQL functions.",
+        "outcomes": [
+          "Create calculated columns with arithmetic expressions.",
+          "Use aliases to make query results easier to read.",
+          "Apply simple text, number, and date functions.",
+          "Build small report-style outputs from raw table data."
+        ],
+        "why": [
+          "Real reports often need values that are calculated from existing columns.",
+          "Readable output helps learners explain query results clearly."
+        ]
+      },
+      "sql_module_11": {
+        "title": "Inserting Data",
+        "description": "Shift from reading data to adding new rows carefully and correctly.",
+        "outcomes": [
+          "Insert new rows with confidence.",
+          "Use explicit column lists for safer statements.",
+          "Recognize how defaults and NULL values affect inserts."
+        ],
+        "why": [
+          "Builds confidence with inserting data.",
+          "Prepares learners for the next skills in the course."
+        ]
+      }
+    }
+  },
+  "sections": {
+    "sql": {
+      "sql_module_5": {
+        "section_5_1": {
+          "title": "Creating New Values in Queries",
+          "description": "Create useful calculated values directly inside SELECT statements using arithmetic and expressions.",
+          "weeks": "Module 5, Section 5.1",
+          "bullets": [
+            "Creating new values in queries",
+            "Arithmetic in SELECT",
+            "Calculated columns",
+            "Price calculations"
+          ]
+        },
+        "section_5_2": {
+          "title": "Column Aliases",
+          "description": "Rename selected and calculated columns so query results are easier to read and explain.",
+          "weeks": "Module 5, Section 5.2",
+          "bullets": [
+            "What aliases do",
+            "Alias calculated columns",
+            "Readable column names",
+            "Aliases in reports"
+          ]
+        },
+        "section_5_3": {
+          "title": "Simple SQL Functions",
+          "description": "Explore beginner-friendly SQL functions for text, numbers, and dates without overcomplicating the query.",
+          "weeks": "Module 5, Section 5.3",
+          "bullets": [
+            "Simple text functions",
+            "Simple number functions",
+            "Date function basics",
+            "Function output practice"
+          ]
+        },
+        "section_5_4": {
+          "title": "Expression Practice",
+          "description": "Use expressions and aliases to build simple report-style outputs such as discounts, totals, and renamed columns.",
+          "weeks": "Module 5, Section 5.4",
+          "bullets": [
+            "Discount calculations",
+            "Total inventory value",
+            "Formatting report output",
+            "Expression mini project"
+          ]
+        }
+      },
+      "sql_module_11": {
+        "section_11_1": {
+          "title": "Intro to Adding Data",
+          "description": "Learn what INSERT INTO does and how SQL adds new rows to a table safely.",
+          "weeks": "Module 11, Section 11.1",
+          "bullets": [
+            "What INSERT INTO does",
+            "Insert one row",
+            "Insert multiple rows",
+            "Matching values to columns"
+          ]
+        },
+        "section_11_2": {
+          "title": "Safe Inserting",
+          "description": "Use explicit column lists, data type awareness, and careful checks to avoid insert mistakes.",
+          "weeks": "Module 11, Section 11.2",
+          "bullets": [
+            "Why column lists matter",
+            "Data type awareness",
+            "Avoiding insert errors",
+            "Reading inserted results"
+          ]
+        },
+        "section_11_3": {
+          "title": "Insert with NULL and Defaults",
+          "description": "Understand how NULL, default values, optional columns, and required fields affect INSERT statements.",
+          "weeks": "Module 11, Section 11.3",
+          "bullets": [
+            "Missing values during insert",
+            "Default values",
+            "Optional columns",
+            "Insert behavior basics"
+          ]
+        },
+        "section_11_4": {
+          "title": "Insert Practice",
+          "description": "Practice adding records to realistic tables and checking that inserted data appears correctly.",
+          "weeks": "Module 11, Section 11.4",
+          "bullets": [
+            "Add a student",
+            "Add a product",
+            "Add multiple records",
+            "Check your inserted data"
+          ]
+        }
+      }
+    }
+  }
+}

@@ -14,21 +14,21 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.sql.sql_module_11.avoiding-insert-errors.cards.sketch0.title",
-      "sketchId": "sketch-1",
+      "sketchId": "sk1",
       "height": 420
     },
     {
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.sql.sql_module_11.avoiding-insert-errors.cards.sketch1.title",
-      "sketchId": "sketch-2",
+      "sketchId": "sk2",
       "height": 420
     },
     {
       "id": "sketch2",
       "kind": "sketch",
       "titleKey": "topics.sql.sql_module_11.avoiding-insert-errors.cards.sketch2.title",
-      "sketchId": "sketch-3",
+      "sketchId": "sk3",
       "height": 420
     },
     {
@@ -54,27 +54,27 @@
         "maxAttempts": 10,
         "steps": [
           {
-            "id": "q1_explicit_columns_insert",
-            "titleKey": "topics.sql.sql_module_11.avoiding-insert-errors.projectSteps.q1_explicit_columns_insert.title",
-            "exerciseKey": "q1-explicit-columns-insert",
+            "id": "q1",
+            "titleKey": "topics.sql.sql_module_11.avoiding-insert-errors.projectSteps.q1.title",
+            "exerciseKey": "q1",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": 10
           },
           {
-            "id": "q4_insert_null_notes",
-            "titleKey": "topics.sql.sql_module_11.avoiding-insert-errors.projectSteps.q4_insert_null_notes.title",
-            "exerciseKey": "q4-insert-null-notes",
+            "id": "q2",
+            "titleKey": "topics.sql.sql_module_11.avoiding-insert-errors.projectSteps.q2.title",
+            "exerciseKey": "q2",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": 10
           },
           {
-            "id": "q5_insert_minimal_required",
-            "titleKey": "topics.sql.sql_module_11.avoiding-insert-errors.projectSteps.q5_insert_minimal_required.title",
-            "exerciseKey": "q5-insert-minimal-required",
+            "id": "q3",
+            "titleKey": "topics.sql.sql_module_11.avoiding-insert-errors.projectSteps.q3.title",
+            "exerciseKey": "q3",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
@@ -86,46 +86,79 @@
   ],
   "sketches": [
     {
-      "id": "sketch-1",
+      "id": "sk1",
       "archetype": "paragraph",
-      "titleKey": "sketches.sql.sql_module_11.avoiding-insert-errors.sketch-1.title",
-      "bodyKey": "sketches.sql.sql_module_11.avoiding-insert-errors.sketch-1.bodyMarkdown"
+      "titleKey": "sketches.sql.sql_module_11.avoiding-insert-errors.sk1.title",
+      "bodyKey": "sketches.sql.sql_module_11.avoiding-insert-errors.sk1.bodyMarkdown"
     },
     {
-      "id": "sketch-2",
+      "id": "sk2",
       "archetype": "paragraph",
-      "titleKey": "sketches.sql.sql_module_11.avoiding-insert-errors.sketch-2.title",
-      "bodyKey": "sketches.sql.sql_module_11.avoiding-insert-errors.sketch-2.bodyMarkdown"
+      "titleKey": "sketches.sql.sql_module_11.avoiding-insert-errors.sk2.title",
+      "bodyKey": "sketches.sql.sql_module_11.avoiding-insert-errors.sk2.bodyMarkdown"
     },
     {
-      "id": "sketch-3",
+      "id": "sk3",
       "archetype": "paragraph",
-      "titleKey": "sketches.sql.sql_module_11.avoiding-insert-errors.sketch-3.title",
-      "bodyKey": "sketches.sql.sql_module_11.avoiding-insert-errors.sketch-3.bodyMarkdown"
+      "titleKey": "sketches.sql.sql_module_11.avoiding-insert-errors.sk3.title",
+      "bodyKey": "sketches.sql.sql_module_11.avoiding-insert-errors.sk3.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "q1-explicit-columns-insert",
+      "id": "q1",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_11.avoiding-insert-errors.quiz.q1-explicit-columns-insert",
+      "messageBase": "topics.sql.sql_module_11.avoiding-insert-errors.quiz.q1",
       "language": "sql",
       "fixedSqlDialect": "sqlite",
       "recipe": {
         "type": "sql_query",
         "datasetId": "inventory_ops",
         "resultShape": "table",
-        "solutionCode": "INSERT INTO inventory_items (name, category, price, status, is_test, last_updated)\nVALUES ('Desk Mat', 'Accessories', 19.99, 'active', 0, '2026-02-12');"
+        "solutionCode": "INSERT INTO inventory_items (name, category, price, is_test, last_updated)\nVALUES ('Desk Organizer', 'Accessories', 8.25, 0, '2026-02-10');",
+        "checkSql": "SELECT * FROM \"inventory_items\" ORDER BY 1;"
       }
     },
     {
-      "id": "q2-missing-required-column",
+      "id": "q2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_11.avoiding-insert-errors.quiz.q2",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "inventory_ops",
+        "resultShape": "table",
+        "solutionCode": "INSERT INTO inventory_items (name, category, price, status, is_test, notes, last_updated)\nVALUES ('Ceramic Coaster', 'Kitchen', 5.00, 'active', 0, 'Limited edition', '2026-02-11');",
+        "checkSql": "SELECT * FROM \"inventory_items\" ORDER BY 1;"
+      }
+    },
+    {
+      "id": "q3",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_11.avoiding-insert-errors.quiz.q3",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "inventory_ops",
+        "resultShape": "table",
+        "solutionCode": "INSERT INTO inventory_items (name, category, price, status, is_test, last_updated)\nVALUES ('Sample Magnet', 'Decor', 2.75, 'draft', 1, '2026-02-12');",
+        "checkSql": "SELECT * FROM \"inventory_items\" ORDER BY 1;"
+      }
+    },
+    {
+      "id": "q4",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_11.avoiding-insert-errors.quiz.q2-missing-required-column",
+      "messageBase": "topics.sql.sql_module_11.avoiding-insert-errors.quiz.q4",
       "optionIds": [
         "a",
         "b"
@@ -138,45 +171,15 @@
       }
     },
     {
-      "id": "q3-defaults-and-nulls",
+      "id": "q5",
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_11.avoiding-insert-errors.quiz.q3-defaults-and-nulls",
+      "messageBase": "topics.sql.sql_module_11.avoiding-insert-errors.quiz.q5",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "draft"
-      }
-    },
-    {
-      "id": "q4-insert-null-notes",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.sql.sql_module_11.avoiding-insert-errors.quiz.q4-insert-null-notes",
-      "language": "sql",
-      "fixedSqlDialect": "sqlite",
-      "recipe": {
-        "type": "sql_query",
-        "datasetId": "inventory_ops",
-        "resultShape": "table",
-        "solutionCode": "INSERT INTO inventory_items (name, category, price, status, is_test, notes, last_updated)\nVALUES ('Sample Bag', 'Accessories', 12.00, 'active', 0, NULL, '2026-02-15');"
-      }
-    },
-    {
-      "id": "q5-insert-minimal-required",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.sql.sql_module_11.avoiding-insert-errors.quiz.q5-insert-minimal-required",
-      "language": "sql",
-      "fixedSqlDialect": "sqlite",
-      "recipe": {
-        "type": "sql_query",
-        "datasetId": "inventory_ops",
-        "resultShape": "table",
-        "solutionCode": "INSERT INTO inventory_items (name, category, price, is_test, last_updated)\nVALUES ('Trial Cup', 'Kitchen', 5.00, 0, '2026-02-16');"
+        "value": "default"
       }
     }
   ]

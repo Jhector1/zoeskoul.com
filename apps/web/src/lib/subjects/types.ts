@@ -1,4 +1,4 @@
-import type { PracticeKind } from "@prisma/client";
+import type { PracticeKind } from "@zoeskoul/db";
 import type { ManifestRuntimeDefaults } from "@/lib/subjects/_core/manifestTypes";
 
 export type ReviewQuestion =

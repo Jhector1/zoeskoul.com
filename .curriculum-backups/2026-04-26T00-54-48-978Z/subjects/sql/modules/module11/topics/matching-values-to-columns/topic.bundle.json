@@ -1,0 +1,188 @@
+{
+  "topicId": "matching-values-to-columns",
+  "subjectSlug": "sql",
+  "moduleSlug": "sql_module_11",
+  "sectionSlug": "section_11_1",
+  "prefix": "sql11",
+  "minutes": 15,
+  "topic": {
+    "labelKey": "topics.sql.sql_module_11.matching-values-to-columns.label",
+    "summaryKey": "topics.sql.sql_module_11.matching-values-to-columns.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_11.matching-values-to-columns.cards.sketch0.title",
+      "sketchId": "sketch-1",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_11.matching-values-to-columns.cards.sketch1.title",
+      "sketchId": "sketch-2",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_11.matching-values-to-columns.cards.sketch2.title",
+      "sketchId": "sketch-3",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql.sql_module_11.matching-values-to-columns.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 2,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.sql.sql_module_11.matching-values-to-columns.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "q1_code_insert_basic",
+            "titleKey": "topics.sql.sql_module_11.matching-values-to-columns.projectSteps.q1_code_insert_basic.title",
+            "exerciseKey": "q1-code-insert-basic",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "q2_code_insert_null",
+            "titleKey": "topics.sql.sql_module_11.matching-values-to-columns.projectSteps.q2_code_insert_null.title",
+            "exerciseKey": "q2-code-insert-null",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "q3_code_insert_default",
+            "titleKey": "topics.sql.sql_module_11.matching-values-to-columns.projectSteps.q3_code_insert_default.title",
+            "exerciseKey": "q3-code-insert-default",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch-1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_11.matching-values-to-columns.sketch-1.title",
+      "bodyKey": "sketches.sql.sql_module_11.matching-values-to-columns.sketch-1.bodyMarkdown"
+    },
+    {
+      "id": "sketch-2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_11.matching-values-to-columns.sketch-2.title",
+      "bodyKey": "sketches.sql.sql_module_11.matching-values-to-columns.sketch-2.bodyMarkdown"
+    },
+    {
+      "id": "sketch-3",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_11.matching-values-to-columns.sketch-3.title",
+      "bodyKey": "sketches.sql.sql_module_11.matching-values-to-columns.sketch-3.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "q1-code-insert-basic",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_11.matching-values-to-columns.quiz.q1-code-insert-basic",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "inventory_ops",
+        "resultShape": "table",
+        "solutionCode": "INSERT INTO inventory_items (name, category, price, status, is_test, notes, last_updated)\nVALUES ('Mini Notebook', 'Accessories', 5.25, 'active', 0, 'Back to school', '2026-02-15');"
+      }
+    },
+    {
+      "id": "q2-code-insert-null",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_11.matching-values-to-columns.quiz.q2-code-insert-null",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "inventory_ops",
+        "resultShape": "table",
+        "solutionCode": "INSERT INTO inventory_items (name, category, price, status, is_test, notes, last_updated)\nVALUES ('Sample Pen', 'Accessories', 2.00, 'active', 1, NULL, '2026-02-16');"
+      }
+    },
+    {
+      "id": "q3-code-insert-default",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_11.matching-values-to-columns.quiz.q3-code-insert-default",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "inventory_ops",
+        "resultShape": "table",
+        "solutionCode": "INSERT INTO inventory_items (name, category, price, notes, last_updated)\nVALUES ('Trial Eraser', 'Accessories', 1.50, NULL, '2026-02-17');"
+      }
+    },
+    {
+      "id": "q4-multi-choice-column-matching",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_11.matching-values-to-columns.quiz.q4-multi-choice-column-matching",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "q5-fill-blank-choice-column-list",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_11.matching-values-to-columns.quiz.q5-fill-blank-choice-column-list",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "list"
+      }
+    }
+  ]
+}

@@ -4,123 +4,115 @@
   "minutes": 15,
   "sketchBlocks": [
     {
-      "id": "sketch-1",
-      "title": "Why column lists matter in INSERT",
-      "bodyMarkdown": "When adding new rows with `INSERT`, it's safer to specify which columns you're providing values for. This avoids mistakes if the table structure changes or if some columns have defaults or allow NULLs. For example:\n\n```sql\nINSERT INTO inventory_items (name, category, price, status, is_test)\nVALUES ('Keychain', 'Accessories', 3.99, 'active', 0);\n```\n\nHere, columns like `notes` (nullable) and `last_updated` (has a default) will be filled automatically."
+      "id": "sketch1",
+      "title": "Why use explicit column lists in INSERT?",
+      "bodyMarkdown": "When inserting data into a table, it's best practice to specify the columns you are inserting into. This makes your SQL more robust against schema changes and avoids accidental data misplacement. For example:\n\n```sql\nINSERT INTO inventory_items (name, category, price, status, is_test)\nVALUES ('New Keychain', 'Accessories', 3.99, 'active', 0);\n```\n\nIf you omit the column list, the values must match the table's column order exactly, which can lead to errors if the schema changes."
     },
     {
-      "id": "sketch-2",
-      "title": "NULLs and defaults in action",
-      "bodyMarkdown": "If you leave out a column in your INSERT and it allows NULL or has a DEFAULT, SQL will use those. For example, omitting `notes` (nullable) and `last_updated` (default):\n\n```sql\nINSERT INTO inventory_items (name, category, price, status, is_test)\nVALUES ('Sample Coaster', 'Kitchen', 2.50, 'draft', 1);\n```\n\n- `notes` becomes NULL\n- `last_updated` becomes '2026-02-01' (the default)\n\nBut if you omit a NOT NULL column with no default, you'll get an error."
+      "id": "sketch2",
+      "title": "Handling NULL and DEFAULT values",
+      "bodyMarkdown": "Some columns allow NULL values, while others have DEFAULT values or are required (NOT NULL). For example, the `notes` column in `inventory_items` can be NULL, while `status` has a default value of `'draft'` if not specified. If you omit a NOT NULL column without a default, the insert will fail.\n\n```sql\nINSERT INTO inventory_items (name, category, price)\nVALUES ('Sample Magnet', 'Accessories', 2.50);\n```\n\nThis works because `status`, `is_test`, and `last_updated` have defaults, and `notes` allows NULL."
+    },
+    {
+      "id": "sketch3",
+      "title": "What happens if you omit required columns?",
+      "bodyMarkdown": "If you try to insert a row without providing a value for a NOT NULL column that has no default, the database will return an error. Always check the table schema to know which columns are required and which have defaults or allow NULLs.\n\nFor example, omitting `name` or `category` in `inventory_items` will cause an error, since both are NOT NULL and have no default."
     }
   ],
   "quizDraft": [
     {
-      "id": "ex-1",
+      "id": "q1-insert-defaults",
       "kind": "code_input",
-      "title": "Insert with omitted nullable and default columns",
-      "prompt": "Insert a new inventory item named 'Desk Mat' in the 'Accessories' category, priced at 18.00, with status 'active' and is_test 0. Omit the `notes` and `last_updated` columns from your INSERT statement. Write the SQL query.",
-      "hint": "Use an explicit column list and leave out `notes` and `last_updated`.",
+      "title": "Insert with omitted columns using defaults",
+      "prompt": "Insert a new row into `inventory_items` with the following values:\n- name: 'Mini Notebook'\n- category: 'Stationery'\n- price: 5.25\n\nDo not specify values for `status`, `is_test`, `notes`, or `last_updated`. Write an INSERT statement that works and uses defaults where possible.",
+      "hint": "Only include the columns you have values for. The rest will use defaults or NULL if allowed.",
       "help": {
-        "concept": "When you omit nullable or defaulted columns in an INSERT, SQL fills them with NULL or the default value.",
-        "hint_1": "List only the columns you want to provide values for. The database will use defaults or NULLs for the rest.",
-        "hint_2": "Your column list should include name, category, price, status, and is_test only."
+        "concept": "When inserting, columns not listed will use their DEFAULT value if defined, or NULL if allowed.",
+        "hint_1": "List only name, category, and price in your INSERT column list.",
+        "hint_2": "Omitted columns like status and last_updated will use their default values."
       },
       "starterCode": "-- Write your INSERT statement here",
-      "solutionCode": "INSERT INTO inventory_items (name, category, price, status, is_test)\nVALUES ('Desk Mat', 'Accessories', 18.00, 'active', 0);",
+      "solutionCode": "INSERT INTO inventory_items (name, category, price)\nVALUES ('Mini Notebook', 'Stationery', 5.25);",
       "datasetId": "inventory_ops",
       "recipeType": "sql_query"
     },
     {
-      "id": "ex-2",
+      "id": "q2-insert-null",
       "kind": "code_input",
-      "title": "Insert with explicit NULL",
-      "prompt": "Insert a new inventory item named 'Sample Magnet' in the 'Decor' category, priced at 2.25, with status 'draft', is_test 1, and notes set to NULL. Let `last_updated` use its default. Write the SQL query.",
-      "hint": "Include the `notes` column in your column list and set its value to NULL.",
+      "title": "Insert with an explicit NULL value",
+      "prompt": "Insert a new row into `inventory_items` with these values:\n- name: 'Gift Card'\n- category: 'Accessories'\n- price: 10.00\n- notes: NULL\n\nSet `notes` explicitly to NULL. Use 'active' for status and 0 for is_test. Use today's date '2026-02-10' for last_updated.",
+      "hint": "Include all columns you have values for, and use NULL for notes.",
       "help": {
-        "concept": "You can explicitly insert NULL into columns that allow it by listing the column and using the NULL keyword.",
-        "hint_1": "In your column list, include notes and set its value to NULL.",
-        "hint_2": "Don't provide a value for last_updated; let the default apply."
+        "concept": "You can insert NULL into columns that allow it by specifying NULL in the VALUES list.",
+        "hint_1": "Include notes in your column list and use NULL as its value.",
+        "hint_2": "Remember to provide values for all NOT NULL columns."
       },
       "starterCode": "-- Write your INSERT statement here",
-      "solutionCode": "INSERT INTO inventory_items (name, category, price, status, is_test, notes)\nVALUES ('Sample Magnet', 'Decor', 2.25, 'draft', 1, NULL);",
+      "solutionCode": "INSERT INTO inventory_items (name, category, price, status, is_test, notes, last_updated)\nVALUES ('Gift Card', 'Accessories', 10.00, 'active', 0, NULL, '2026-02-10');",
       "datasetId": "inventory_ops",
       "recipeType": "sql_query"
     },
     {
-      "id": "ex-3",
+      "id": "q3-insert-missing-required",
       "kind": "code_input",
-      "title": "Error from missing required column",
-      "prompt": "Try to insert a new inventory item with only the `name`, `category`, and `price` columns. What happens and why? Write an INSERT statement that would cause this error.",
-      "hint": "Omitting NOT NULL columns with no default causes an error.",
+      "title": "What happens if you omit a required column?",
+      "prompt": "Try to insert a row into `inventory_items` with only the following values:\n- category: 'Decor'\n- price: 20.00\n\nDo not include the `name` column. What will happen? Write the INSERT statement that would cause this issue.",
+      "hint": "Omitting a NOT NULL column with no default causes an error.",
       "help": {
-        "concept": "If you omit a NOT NULL column that doesn't have a default, SQL will reject the insert.",
-        "hint_1": "Try leaving out columns like status or is_test, which are NOT NULL and have no default.",
-        "hint_2": "Write an INSERT that only includes name, category, and price. The database will complain about missing required columns."
+        "concept": "If you omit a required (NOT NULL, no default) column, the database will reject the insert.",
+        "hint_1": "Try writing the INSERT without the name column.",
+        "hint_2": "The statement will fail because name is required."
       },
       "starterCode": "-- Write your INSERT statement here",
-      "solutionCode": "INSERT INTO inventory_items (name, category, price)\nVALUES ('Test Item', 'Accessories', 5.00);",
+      "solutionCode": "INSERT INTO inventory_items (category, price)\nVALUES ('Decor', 20.00);",
       "datasetId": "inventory_ops",
       "recipeType": "sql_query"
     },
     {
-      "id": "ex-4",
+      "id": "q4-multi-choice-defaults",
       "kind": "multi_choice",
-      "title": "Which columns can be omitted safely?",
-      "prompt": "Which columns in the inventory_items table can you safely omit from an INSERT statement and still have the row inserted successfully? (Choose all that apply.)",
-      "hint": "Check which columns are nullable or have a default value.",
+      "title": "Which columns use defaults or allow NULL?",
+      "prompt": "For the `inventory_items` table, which columns will automatically get a value if you omit them in an INSERT? (Select all that apply.)",
+      "hint": "Look for columns with DEFAULT values or that allow NULL.",
       "help": {
-        "concept": "Columns that are nullable or have a default value can be omitted from an INSERT statement.",
-        "hint_1": "Look for columns with DEFAULT or that allow NULL in the schema.",
-        "hint_2": "Notes is nullable; last_updated and status have defaults; others may be required."
+        "concept": "Columns with DEFAULT values or that allow NULL can be omitted in an INSERT and will be filled automatically.",
+        "hint_1": "Check the schema for DEFAULT or NULL settings.",
+        "hint_2": "Notes allows NULL; status, is_test, and last_updated have defaults."
       },
-      "options": [
-        {
-          "id": "a",
-          "content": "notes"
-        },
-        {
-          "id": "b",
-          "content": "last_updated"
-        },
-        {
-          "id": "c",
-          "content": "status"
-        },
-        {
-          "id": "d",
-          "content": "is_test"
-        },
-        {
-          "id": "e",
-          "content": "name"
-        }
-      ],
+      "options": {
+        "a": "status",
+        "b": "is_test",
+        "c": "notes",
+        "d": "last_updated",
+        "e": "category"
+      },
       "correctOptionIds": [
         "a",
         "b",
-        "c"
+        "c",
+        "d"
       ]
     },
     {
-      "id": "ex-5",
+      "id": "q5-fill-blank-choice-required",
       "kind": "fill_blank_choice",
-      "title": "Default value for last_updated",
-      "prompt": "When you omit the `last_updated` column in an INSERT, what value will it have by default?",
-      "hint": "Check the table's schema for the default value.",
+      "title": "Identify a required column",
+      "prompt": "Which column in `inventory_items` is required and does NOT have a default value?",
+      "hint": "Look for a NOT NULL column with no DEFAULT.",
       "help": {
-        "concept": "Columns with a DEFAULT clause will use that value if omitted in an INSERT.",
-        "hint_1": "Look for the DEFAULT value for last_updated in the schema.",
-        "hint_2": "It's a date string set in the CREATE TABLE statement."
+        "concept": "A required column is NOT NULL and lacks a DEFAULT value, so you must provide it in every insert.",
+        "hint_1": "Check the schema for NOT NULL columns without DEFAULT.",
+        "hint_2": "The column is essential for each new row."
       },
-      "template": "If you omit last_updated in an INSERT, its value will be: ____",
+      "template": "The required column is: [blank]",
       "choices": [
-        "NULL",
-        "2026-02-01",
-        "CURRENT_DATE",
-        "1970-01-01"
+        "name",
+        "status",
+        "is_test",
+        "notes",
+        "last_updated"
       ],
-      "correctValue": "2026-02-01"
+      "correctValue": "name"
     }
   ]
 }

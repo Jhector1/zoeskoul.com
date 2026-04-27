@@ -9,6 +9,10 @@
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
+    },
+    "./sql-datasets": {
+      "types": "./dist/sql/datasets/index.d.ts",
+      "default": "./dist/sql/datasets/index.js"
     }
   },
   "scripts": {

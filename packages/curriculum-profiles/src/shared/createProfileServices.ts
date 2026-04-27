@@ -5,7 +5,7 @@ import type {
 
 export type FamilyProfileServices = Pick<
     ProfileServices,
-    "repairDraft" | "critiqueDraft" | "validateProfile" | "validateSemantic"
+    "repairDraft" | "critiqueDraft" | "validateProfile" | "validateSemantic" | "validateGolden"
 >;
 
 export type ProfileServiceOverrides = Partial<FamilyProfileServices>;
@@ -24,6 +24,7 @@ export function createProfileServices(args: {
         critiqueDraft: overrides.critiqueDraft ?? args.family.critiqueDraft,
         validateProfile: overrides.validateProfile ?? args.family.validateProfile,
         validateSemantic: overrides.validateSemantic ?? args.family.validateSemantic,
+        validateGolden: overrides.validateGolden ?? args.family.validateGolden,
         getTrustPolicy: args.getTrustPolicy,
     };
 }

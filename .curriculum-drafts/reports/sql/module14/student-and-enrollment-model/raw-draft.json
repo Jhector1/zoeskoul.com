@@ -1,0 +1,119 @@
+{
+  "title": "Student and enrollment model",
+  "summary": "Explore how to design a student and enrollment model in relational databases, focusing on separating entities and understanding many-to-many relationships.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sk1",
+      "title": "Why separate students and enrollments?",
+      "bodyMarkdown": "In relational database design, it's important to avoid repeating information. For example, if you store every student's course enrollments in the same table as their personal details, you risk duplicating student data for each enrollment. Instead, you should create a separate **students** table for student details and an **enrollments** table to track which students are enrolled in which courses. This approach reduces duplication and makes updates easier."
+    },
+    {
+      "id": "sk2",
+      "title": "Modeling many-to-many relationships",
+      "bodyMarkdown": "A student can enroll in many courses, and each course can have many students. This is a classic **many-to-many** relationship. To represent this in SQL, you use a third table (often called a join or linking table), such as **enrollments**, which contains references (foreign keys) to both the **students** and **courses** tables. This way, each enrollment links one student to one course, and you can track all enrollments without duplicating data."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "fb1",
+      "kind": "fill_blank_choice",
+      "title": "Identify the linking table",
+      "prompt": "In a student enrollment system, which table connects students and courses in a many-to-many relationship?",
+      "template": "The table that connects students and courses is called the ___.",
+      "choices": [
+        "enrollments",
+        "students",
+        "courses",
+        "grades"
+      ],
+      "correctValue": "enrollments",
+      "hint": "It's not the table with student or course details.",
+      "help": {
+        "concept": "A linking table is used to represent many-to-many relationships by storing pairs of related IDs.",
+        "hint_1": "The linking table contains references to both students and courses.",
+        "hint_2": "This table tracks which students are enrolled in which courses."
+      }
+    },
+    {
+      "id": "fb2",
+      "kind": "fill_blank_choice",
+      "title": "Purpose of separating tables",
+      "prompt": "Why do we keep student details and enrollment records in separate tables?",
+      "template": "We separate student details and enrollments to avoid ___.",
+      "choices": [
+        "data duplication",
+        "faster typing",
+        "more columns",
+        "using more storage"
+      ],
+      "correctValue": "data duplication",
+      "hint": "Think about what happens if you repeat student info for every enrollment.",
+      "help": {
+        "concept": "Separating tables prevents repeating the same information multiple times, which can lead to errors.",
+        "hint_1": "Keeping data in one place makes updates easier and more accurate.",
+        "hint_2": "Repeating the same student info for each enrollment is inefficient and risky."
+      }
+    },
+    {
+      "id": "sc1",
+      "kind": "single_choice",
+      "title": "Relationship type",
+      "prompt": "What type of relationship exists between students and courses in an enrollment system?",
+      "options": [
+        "Many-to-many",
+        "One-to-one",
+        "One-to-many",
+        "Self-referencing"
+      ],
+      "correctOptionIds": [
+        "Many-to-many"
+      ],
+      "hint": "Can a student enroll in more than one course? Can a course have more than one student?",
+      "help": {
+        "concept": "A many-to-many relationship means both entities can be associated with multiple records from the other entity.",
+        "hint_1": "Each student can enroll in several courses, and each course can have several students.",
+        "hint_2": "This is not a one-to-one or one-to-many relationship."
+      }
+    },
+    {
+      "id": "mc1",
+      "kind": "multi_choice",
+      "title": "Benefits of using a linking table",
+      "prompt": "Which of the following are benefits of using a linking (enrollments) table in a student-course model? Select all that apply.",
+      "options": [
+        "Reduces data duplication",
+        "Makes it easier to update student or course info",
+        "Allows tracking of which students are in which courses",
+        "Forces all students to enroll in every course"
+      ],
+      "correctOptionIds": [
+        "Reduces data duplication",
+        "Makes it easier to update student or course info",
+        "Allows tracking of which students are in which courses"
+      ],
+      "hint": "Think about maintenance, accuracy, and flexibility.",
+      "help": {
+        "concept": "A linking table helps keep data organized and avoids repeating information.",
+        "hint_1": "It helps you update student or course details in one place.",
+        "hint_2": "It does not require every student to enroll in every course."
+      }
+    },
+    {
+      "id": "ci1",
+      "kind": "code_input",
+      "title": "Create a linking table for enrollments",
+      "prompt": "Write a SQL statement to create an enrollments table that links students and courses by their IDs. Assume both students and courses tables already exist with primary keys student_id and course_id.",
+      "starterCode": "-- Write a CREATE TABLE statement for enrollments\n",
+      "solutionCode": "CREATE TABLE enrollments (\n  student_id INTEGER NOT NULL,\n  course_id INTEGER NOT NULL,\n  PRIMARY KEY (student_id, course_id),\n  FOREIGN KEY (student_id) REFERENCES students(student_id),\n  FOREIGN KEY (course_id) REFERENCES courses(course_id)\n);",
+      "datasetId": "ddl_blank",
+      "recipeType": "sql_query",
+      "hint": "You need two columns, each referencing a primary key from another table.",
+      "help": {
+        "concept": "A linking table uses foreign keys to connect two other tables and often has a composite primary key.",
+        "hint_1": "Include both student_id and course_id as columns.",
+        "hint_2": "Set both columns as a composite primary key and add foreign key constraints."
+      }
+    }
+  ]
+}

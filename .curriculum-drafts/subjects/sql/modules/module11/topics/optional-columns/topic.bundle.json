@@ -14,21 +14,21 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.sql.sql_module_11.optional-columns.cards.sketch0.title",
-      "sketchId": "sketch-optional-columns-intro",
+      "sketchId": "sk1",
       "height": 420
     },
     {
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.sql.sql_module_11.optional-columns.cards.sketch1.title",
-      "sketchId": "sketch-insert-without-optional",
+      "sketchId": "sk2",
       "height": 420
     },
     {
       "id": "sketch2",
       "kind": "sketch",
       "titleKey": "topics.sql.sql_module_11.optional-columns.cards.sketch2.title",
-      "sketchId": "sketch-insert-null-explicit",
+      "sketchId": "sk3",
       "height": 420
     },
     {
@@ -42,80 +42,123 @@
         "preferKind": null,
         "maxAttempts": 10
       }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.sql.sql_module_11.optional-columns.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "q1",
+            "titleKey": "topics.sql.sql_module_11.optional-columns.projectSteps.q1.title",
+            "exerciseKey": "q1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "q2",
+            "titleKey": "topics.sql.sql_module_11.optional-columns.projectSteps.q2.title",
+            "exerciseKey": "q2",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "q3",
+            "titleKey": "topics.sql.sql_module_11.optional-columns.projectSteps.q3.title",
+            "exerciseKey": "q3",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
     }
   ],
   "sketches": [
     {
-      "id": "sketch-optional-columns-intro",
+      "id": "sk1",
       "archetype": "paragraph",
-      "titleKey": "sketches.sql.sql_module_11.optional-columns.sketch-optional-columns-intro.title",
-      "bodyKey": "sketches.sql.sql_module_11.optional-columns.sketch-optional-columns-intro.bodyMarkdown"
+      "titleKey": "sketches.sql.sql_module_11.optional-columns.sk1.title",
+      "bodyKey": "sketches.sql.sql_module_11.optional-columns.sk1.bodyMarkdown"
     },
     {
-      "id": "sketch-insert-without-optional",
+      "id": "sk2",
       "archetype": "paragraph",
-      "titleKey": "sketches.sql.sql_module_11.optional-columns.sketch-insert-without-optional.title",
-      "bodyKey": "sketches.sql.sql_module_11.optional-columns.sketch-insert-without-optional.bodyMarkdown"
+      "titleKey": "sketches.sql.sql_module_11.optional-columns.sk2.title",
+      "bodyKey": "sketches.sql.sql_module_11.optional-columns.sk2.bodyMarkdown"
     },
     {
-      "id": "sketch-insert-null-explicit",
+      "id": "sk3",
       "archetype": "paragraph",
-      "titleKey": "sketches.sql.sql_module_11.optional-columns.sketch-insert-null-explicit.title",
-      "bodyKey": "sketches.sql.sql_module_11.optional-columns.sketch-insert-null-explicit.bodyMarkdown"
+      "titleKey": "sketches.sql.sql_module_11.optional-columns.sk3.title",
+      "bodyKey": "sketches.sql.sql_module_11.optional-columns.sk3.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "code-insert-omit-optional",
+      "id": "q1",
       "kind": "code_input",
-      "purpose": "quiz",
+      "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_11.optional-columns.quiz.code-insert-omit-optional",
+      "messageBase": "topics.sql.sql_module_11.optional-columns.quiz.q1",
       "language": "sql",
       "fixedSqlDialect": "sqlite",
       "recipe": {
         "type": "sql_query",
         "datasetId": "inventory_ops",
         "resultShape": "table",
-        "solutionCode": "INSERT INTO inventory_items (id, name, category, price)\nVALUES (9, 'Desk Mat', 'Accessories', 12.50);"
+        "solutionCode": "INSERT INTO inventory_items (id, name, category, price) VALUES (10, 'Mini Poster', 'Decor', 5.00);",
+        "checkSql": "SELECT * FROM \"inventory_items\" ORDER BY 1;"
       }
     },
     {
-      "id": "code-insert-null-notes",
+      "id": "q2",
       "kind": "code_input",
-      "purpose": "quiz",
+      "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_11.optional-columns.quiz.code-insert-null-notes",
+      "messageBase": "topics.sql.sql_module_11.optional-columns.quiz.q2",
       "language": "sql",
       "fixedSqlDialect": "sqlite",
       "recipe": {
         "type": "sql_query",
         "datasetId": "inventory_ops",
         "resultShape": "table",
-        "solutionCode": "INSERT INTO inventory_items (id, name, category, price, notes)\nVALUES (10, 'Travel Mug', 'Kitchen', 18.00, NULL);"
+        "solutionCode": "INSERT INTO inventory_items (id, name, category, price, notes) VALUES (11, 'Test Magnet', 'Accessories', 2.50, NULL);",
+        "checkSql": "SELECT * FROM \"inventory_items\" ORDER BY 1;"
       }
     },
     {
-      "id": "code-insert-override-default",
+      "id": "q3",
       "kind": "code_input",
-      "purpose": "quiz",
+      "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_11.optional-columns.quiz.code-insert-override-default",
+      "messageBase": "topics.sql.sql_module_11.optional-columns.quiz.q3",
       "language": "sql",
       "fixedSqlDialect": "sqlite",
       "recipe": {
         "type": "sql_query",
         "datasetId": "inventory_ops",
         "resultShape": "table",
-        "solutionCode": "INSERT INTO inventory_items (id, name, category, price, status)\nVALUES (11, 'Art Print', 'Decor', 30.00, 'active');"
+        "solutionCode": "INSERT INTO inventory_items (id, name, category, price, status) VALUES (12, 'Sample Bottle', 'Kitchen', 12.00, DEFAULT);",
+        "checkSql": "SELECT * FROM \"inventory_items\" ORDER BY 1;"
       }
     },
     {
-      "id": "multi-choice-optional-columns",
+      "id": "q4",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_11.optional-columns.quiz.multi-choice-optional-columns",
+      "messageBase": "topics.sql.sql_module_11.optional-columns.quiz.q4",
       "optionIds": [
         "a",
         "b"
@@ -128,12 +171,12 @@
       }
     },
     {
-      "id": "fill-blank-choice-default-status",
+      "id": "q5",
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_11.optional-columns.quiz.fill-blank-choice-default-status",
-      "choiceCount": 5,
+      "messageBase": "topics.sql.sql_module_11.optional-columns.quiz.q5",
+      "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
         "value": "draft"

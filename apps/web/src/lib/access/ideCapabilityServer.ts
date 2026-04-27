@@ -1,6 +1,7 @@
 import "server-only";
 
-import { FeatureKey, type PrismaClient } from "@prisma/client";
+import { FeatureKey } from "@zoeskoul/db";
+import type { PrismaClient } from "@/lib/prisma";
 import { getAccessSnapshot } from "./accessSnapshot";
 import {
     hasIdeCapability,

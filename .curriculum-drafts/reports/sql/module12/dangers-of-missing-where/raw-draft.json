@@ -1,0 +1,111 @@
+{
+  "title": "Dangers of missing WHERE",
+  "summary": "Dangers of missing WHERE in Updating and Deleting Data",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch-why-where-important",
+      "title": "Why WHERE is Important in DELETE and UPDATE",
+      "bodyMarkdown": "When you run an UPDATE or DELETE statement in SQL, the WHERE clause determines which rows are affected. If you forget to include a WHERE clause, **every row in the table** will be updated or deleted. This can lead to accidental data loss or unwanted changes. For example:\n\n```sql\n-- Dangerous! Deletes all items\nDELETE FROM inventory_items;\n\n-- Safe: Deletes only test items\nDELETE FROM inventory_items WHERE is_test = 1;\n```\n\nAlways double-check your WHERE clause before running data-changing commands."
+    },
+    {
+      "id": "sketch-preview-before-delete",
+      "title": "Preview Before You Change",
+      "bodyMarkdown": "A safe habit is to run a SELECT query with your intended WHERE clause before running UPDATE or DELETE. This lets you preview which rows will be affected:\n\n```sql\n-- Preview rows to be deleted\nSELECT * FROM inventory_items WHERE is_test = 1;\n\n-- Then delete only those rows\nDELETE FROM inventory_items WHERE is_test = 1;\n```\n\nThis helps prevent accidental changes to the wrong data."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "multi-accidental-delete-effects",
+      "kind": "multi_choice",
+      "title": "Consequences of Missing WHERE",
+      "prompt": "Which of the following can happen if you run a DELETE statement without a WHERE clause? Select all that apply.",
+      "options": {
+        "a": "All rows in the table are deleted.",
+        "b": "Only one row is deleted.",
+        "c": "You may lose important data.",
+        "d": "The table structure is dropped.",
+        "e": "You might need to restore from backup."
+      },
+      "correctOptionIds": [
+        "a",
+        "c",
+        "e"
+      ],
+      "hint": "Think about what happens when no filter is applied.",
+      "help": {
+        "concept": "A DELETE without WHERE affects every row, causing total data loss. Recovery may require backups.",
+        "hint_1": "No WHERE means no filter—every row is deleted.",
+        "hint_2": "Losing all rows can mean lost data and the need for backup restoration."
+      }
+    },
+    {
+      "id": "fillblank-where-purpose",
+      "kind": "fill_blank_choice",
+      "title": "Purpose of WHERE in DELETE",
+      "prompt": "Fill in the blank: The WHERE clause in a DELETE statement is used to ______.",
+      "template": "The WHERE clause in a DELETE statement is used to {blank}.",
+      "choices": [
+        "filter which rows are deleted",
+        "sort the results",
+        "change column names",
+        "create a new table"
+      ],
+      "correctValue": "filter which rows are deleted",
+      "hint": "Think about how WHERE limits which data is affected.",
+      "help": {
+        "concept": "WHERE specifies which rows are targeted in UPDATE or DELETE statements.",
+        "hint_1": "It acts as a filter for the operation.",
+        "hint_2": "Without WHERE, all rows are affected; with WHERE, only matching rows are changed."
+      }
+    },
+    {
+      "id": "codeinput-delete-without-where",
+      "kind": "code_input",
+      "title": "Delete All Rows (Dangerous Example)",
+      "prompt": "Write a SQL statement that deletes all rows from the inventory_items table. (This is dangerous and should be avoided in real scenarios!)",
+      "starterCode": "-- Delete all rows from inventory_items\n",
+      "solutionCode": "DELETE FROM inventory_items;",
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query",
+      "hint": "Omit the WHERE clause to affect every row.",
+      "help": {
+        "concept": "A DELETE statement without WHERE removes every row from the table.",
+        "hint_1": "Just use DELETE FROM table_name with no WHERE.",
+        "hint_2": "DELETE FROM inventory_items; will delete all rows."
+      }
+    },
+    {
+      "id": "codeinput-safe-delete-test-items",
+      "kind": "code_input",
+      "title": "Safely Delete Only Test Items",
+      "prompt": "Write a SQL statement to delete only the rows in inventory_items where is_test is 1.",
+      "starterCode": "-- Delete only test items\n",
+      "solutionCode": "DELETE FROM inventory_items WHERE is_test = 1;",
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query",
+      "hint": "Use a WHERE clause to target only test items.",
+      "help": {
+        "concept": "WHERE lets you delete only rows matching a condition, preventing accidental data loss.",
+        "hint_1": "Add WHERE is_test = 1 to your DELETE statement.",
+        "hint_2": "DELETE FROM inventory_items WHERE is_test = 1; deletes only test items."
+      }
+    },
+    {
+      "id": "codeinput-preview-before-delete",
+      "kind": "code_input",
+      "title": "Preview Rows Before Deleting",
+      "prompt": "Write a SQL SELECT statement to preview all rows in inventory_items that would be deleted by DELETE FROM inventory_items WHERE status = 'draft';",
+      "starterCode": "-- Preview rows with status 'draft'\n",
+      "solutionCode": "SELECT * FROM inventory_items WHERE status = 'draft';",
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query",
+      "hint": "Use SELECT * with the same WHERE condition as your intended DELETE.",
+      "help": {
+        "concept": "Previewing with SELECT helps you see which rows will be affected before running DELETE.",
+        "hint_1": "Copy the WHERE condition from your DELETE statement.",
+        "hint_2": "SELECT * FROM inventory_items WHERE status = 'draft'; previews the rows."
+      }
+    }
+  ]
+}

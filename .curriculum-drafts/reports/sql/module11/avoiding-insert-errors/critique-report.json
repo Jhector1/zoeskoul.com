@@ -6,14 +6,14 @@
       "code": "SQL_WEAK_DISTRACTORS",
       "category": "pedagogy",
       "severity": "warn",
-      "exerciseId": "q2-missing-required-column",
+      "exerciseId": "q4",
       "message": "Multi-choice exercise has too few options for strong distractors."
     },
     {
       "code": "MULTI_CHOICE_TOO_FEW_CORRECT_OPTIONS",
       "category": "clarity",
       "severity": "warn",
-      "message": "Multi-choice exercise \"q2-missing-required-column\" looks like it should have multiple correct answers, but only 1 correct option is marked."
+      "message": "Multi-choice exercise \"q4\" looks like it should have multiple correct answers, but only 1 correct option is marked."
     }
   ]
 }

@@ -1,0 +1,185 @@
+{
+  "topicId": "safe-data-modification-workflow",
+  "subjectSlug": "sql",
+  "moduleSlug": "sql_module_12",
+  "sectionSlug": "section_12_4",
+  "prefix": "sql12",
+  "minutes": 15,
+  "topic": {
+    "labelKey": "topics.sql.sql_module_12.safe-data-modification-workflow.label",
+    "summaryKey": "topics.sql.sql_module_12.safe-data-modification-workflow.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_12.safe-data-modification-workflow.cards.sketch0.title",
+      "sketchId": "sketch-1-preview-before-modify",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_12.safe-data-modification-workflow.cards.sketch1.title",
+      "sketchId": "sketch-2-where-clause-safety",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_12.safe-data-modification-workflow.cards.sketch2.title",
+      "sketchId": "sketch-3-safe-update-example",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql.sql_module_12.safe-data-modification-workflow.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 2,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.sql.sql_module_12.safe-data-modification-workflow.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "code_1_preview_select",
+            "titleKey": "topics.sql.sql_module_12.safe-data-modification-workflow.projectSteps.code_1_preview_select.title",
+            "exerciseKey": "code-1-preview-select",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "code_2_safe_update",
+            "titleKey": "topics.sql.sql_module_12.safe-data-modification-workflow.projectSteps.code_2_safe_update.title",
+            "exerciseKey": "code-2-safe-update",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "code_3_safe_delete",
+            "titleKey": "topics.sql.sql_module_12.safe-data-modification-workflow.projectSteps.code_3_safe_delete.title",
+            "exerciseKey": "code-3-safe-delete",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch-1-preview-before-modify",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_12.safe-data-modification-workflow.sketch-1-preview-before-modify.title",
+      "bodyKey": "sketches.sql.sql_module_12.safe-data-modification-workflow.sketch-1-preview-before-modify.bodyMarkdown"
+    },
+    {
+      "id": "sketch-2-where-clause-safety",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_12.safe-data-modification-workflow.sketch-2-where-clause-safety.title",
+      "bodyKey": "sketches.sql.sql_module_12.safe-data-modification-workflow.sketch-2-where-clause-safety.bodyMarkdown"
+    },
+    {
+      "id": "sketch-3-safe-update-example",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_12.safe-data-modification-workflow.sketch-3-safe-update-example.title",
+      "bodyKey": "sketches.sql.sql_module_12.safe-data-modification-workflow.sketch-3-safe-update-example.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "code-1-preview-select",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_12.safe-data-modification-workflow.quiz.code-1-preview-select",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "inventory_ops",
+        "resultShape": "table",
+        "solutionCode": "SELECT * FROM inventory_items WHERE status = 'draft';"
+      }
+    },
+    {
+      "id": "code-2-safe-update",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_12.safe-data-modification-workflow.quiz.code-2-safe-update",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "inventory_ops",
+        "resultShape": "table",
+        "solutionCode": "UPDATE inventory_items SET status = 'inactive' WHERE is_test = 1;",
+        "checkSql": "SELECT * FROM \"inventory_items\" ORDER BY 1;"
+      }
+    },
+    {
+      "id": "code-3-safe-delete",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_12.safe-data-modification-workflow.quiz.code-3-safe-delete",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "inventory_ops",
+        "resultShape": "table",
+        "solutionCode": "DELETE FROM inventory_items WHERE is_test = 1;",
+        "checkSql": "SELECT * FROM inventory_items WHERE is_test = 1;"
+      }
+    },
+    {
+      "id": "multi-1-why-preview",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_12.safe-data-modification-workflow.quiz.multi-1-why-preview",
+      "optionIds": [
+        "a",
+        "b"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a"
+        ]
+      }
+    },
+    {
+      "id": "fill-1-where-required",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_12.safe-data-modification-workflow.quiz.fill-1-where-required",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "WHERE"
+      }
+    }
+  ]
+}

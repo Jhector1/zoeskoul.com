@@ -1,6 +1,7 @@
 import type {
     TopicAuthoringDraft,
     TopicSeed,
+    TopicBundleManifest,
 } from "@zoeskoul/curriculum-contracts";
 
 export type RepairSeverity = "low" | "medium" | "high";
@@ -78,6 +79,30 @@ export type SemanticValidationReport = {
     issues: SemanticValidationIssue[];
 };
 
+export type GoldenValidationSeverity = "warn" | "error";
+
+export type GoldenValidationCategory =
+    | "recipe"
+    | "runtime"
+    | "bundle"
+    | "tests"
+    | "dataset"
+    | "other";
+
+export type GoldenValidationIssue = {
+    code: string;
+    category: GoldenValidationCategory;
+    severity: GoldenValidationSeverity;
+    exerciseId?: string;
+    message: string;
+};
+
+export type GoldenValidationReport = {
+    topicId: string;
+    ok: boolean;
+    issues: GoldenValidationIssue[];
+};
+
 export type ProfileTrustPolicy = {
     profileId: string;
     autoPublishEnabled: boolean;
@@ -113,6 +138,12 @@ export type ProfileServices = {
         seed: TopicSeed;
         draft: TopicAuthoringDraft;
     }): Promise<SemanticValidationReport>;
+
+    validateGolden(args: {
+        seed: TopicSeed;
+        draft: TopicAuthoringDraft;
+        topicBundle: TopicBundleManifest;
+    }): Promise<GoldenValidationReport>;
 
     getTrustPolicy(): ProfileTrustPolicy;
 };

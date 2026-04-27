@@ -1,4 +1,5 @@
-import { FeatureKey, type PrismaClient } from "@prisma/client";
+import { FeatureKey } from "@zoeskoul/db";
+import type { PrismaClient } from "@/lib/prisma";
 import { Actor, actorKeyOf } from "@/lib/practice/actor";
 
 function isWithinWindow(now: Date, startsAt?: Date | null, endsAt?: Date | null) {

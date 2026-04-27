@@ -1,7 +1,7 @@
 // src/lib/access/moduleAccessServer.ts
 import "server-only";
 
-import type { PrismaClient } from "@prisma/client";
+import type { PrismaClient } from "@/lib/prisma";
 import { getAccessSnapshot } from "./accessSnapshot";
 import { resolveModuleAccess } from "./resolveModuleAccess";
 import {Actor} from "@/lib/practice/actor";

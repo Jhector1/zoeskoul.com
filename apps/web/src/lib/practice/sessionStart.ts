@@ -1,6 +1,6 @@
 import "server-only";
 
-import type { Prisma, PrismaClient } from "@prisma/client";
+import type { Prisma, PrismaClient } from "@/lib/prisma";
 import type { Actor } from "@/lib/practice/actor";
 
 export function ownerWhereForActor(actor: Actor): Prisma.PracticeSessionWhereInput | null {

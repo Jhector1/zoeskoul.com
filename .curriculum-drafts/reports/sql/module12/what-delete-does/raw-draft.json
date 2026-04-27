@@ -1,0 +1,105 @@
+{
+  "title": "What DELETE does",
+  "summary": "Understand the purpose and effects of the SQL DELETE statement, including how it removes rows from a table and why careful targeting is essential.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch-1",
+      "title": "What the DELETE Statement Does",
+      "bodyMarkdown": "The SQL `DELETE` statement is used to remove rows from a table. When you run a `DELETE` command, the specified rows are permanently removed from the table—they cannot be recovered unless you have a backup. \n\nFor example, to delete all test items from the `inventory_items` table:\n\n```sql\nDELETE FROM inventory_items WHERE is_test = 1;\n```\n\nThis command deletes every row where the `is_test` column is set to 1. If you omit the `WHERE` clause, **all rows in the table will be deleted**. Always double-check your `WHERE` condition before running a `DELETE` statement."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "code-1",
+      "kind": "code_input",
+      "title": "Delete all draft items",
+      "prompt": "Write a SQL statement to delete all rows from `inventory_items` where the `status` is 'draft'.",
+      "hint": "Use DELETE FROM with a WHERE clause filtering on status.",
+      "help": {
+        "concept": "The DELETE statement removes rows matching the WHERE condition from a table.",
+        "hint_1": "Target the inventory_items table and filter rows where status equals 'draft'.",
+        "hint_2": "Your WHERE clause should compare the status column to the string 'draft'."
+      },
+      "starterCode": "-- Write your DELETE statement below\n",
+      "solutionCode": "DELETE FROM inventory_items WHERE status = 'draft';",
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "code-2",
+      "kind": "code_input",
+      "title": "Delete a specific test item by name",
+      "prompt": "Write a SQL statement to delete the row from `inventory_items` where the `name` is 'Test Mug'.",
+      "hint": "Use DELETE FROM and filter by the name column.",
+      "help": {
+        "concept": "DELETE can target a single row by specifying a unique value in the WHERE clause.",
+        "hint_1": "Use WHERE name = 'Test Mug' to match the correct row.",
+        "hint_2": "Make sure to use the exact string for the name column."
+      },
+      "starterCode": "-- Write your DELETE statement below\n",
+      "solutionCode": "DELETE FROM inventory_items WHERE name = 'Test Mug';",
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "code-3",
+      "kind": "code_input",
+      "title": "Delete all items in the 'Decor' category",
+      "prompt": "Write a SQL statement to delete all rows from `inventory_items` where the `category` is 'Decor'.",
+      "hint": "Use DELETE FROM and filter by category.",
+      "help": {
+        "concept": "You can delete multiple rows at once by filtering on a column value.",
+        "hint_1": "The WHERE clause should match category = 'Decor'.",
+        "hint_2": "Rows with category 'Decor' will be removed from the table."
+      },
+      "starterCode": "-- Write your DELETE statement below\n",
+      "solutionCode": "DELETE FROM inventory_items WHERE category = 'Decor';",
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query"
+    },
+    {
+      "id": "multi-1",
+      "kind": "multi_choice",
+      "title": "Effects of DELETE without WHERE",
+      "prompt": "Which of the following statements about DELETE without a WHERE clause are true? Select all that apply.",
+      "hint": "Think about what happens if you don't filter the rows to delete.",
+      "help": {
+        "concept": "A DELETE statement without a WHERE clause removes every row from the table.",
+        "hint_1": "Consider the scope of DELETE when no condition is set.",
+        "hint_2": "Does it affect one row, some rows, or all rows?"
+      },
+      "options": [
+        "a. All rows in the table will be deleted.",
+        "b. The table structure remains, but it becomes empty.",
+        "c. Only the first row will be deleted.",
+        "d. The table is dropped from the database.",
+        "e. You can recover the deleted rows using SELECT."
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ]
+    },
+    {
+      "id": "fill-1",
+      "kind": "fill_blank_choice",
+      "title": "Purpose of the WHERE clause in DELETE",
+      "prompt": "Fill in the blank: The WHERE clause in a DELETE statement is used to ______ which rows are removed from the table.",
+      "hint": "Think about how SQL decides which rows to delete.",
+      "help": {
+        "concept": "The WHERE clause specifies the condition that rows must meet to be deleted.",
+        "hint_1": "It helps SQL know which rows to target.",
+        "hint_2": "Without it, all rows are deleted."
+      },
+      "template": "The WHERE clause in a DELETE statement is used to ______ which rows are removed from the table.",
+      "choices": [
+        "select",
+        "specify",
+        "ignore",
+        "sort"
+      ],
+      "correctValue": "specify"
+    }
+  ]
+}

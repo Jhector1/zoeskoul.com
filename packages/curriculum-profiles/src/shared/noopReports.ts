@@ -1,5 +1,6 @@
 import type {
     CritiqueReport,
+    GoldenValidationReport,
     RepairReport,
     SemanticValidationReport,
 } from "./profileServices.js";
@@ -22,6 +23,16 @@ export function makeEmptyCritiqueReport(topicId: string): CritiqueReport {
 export function makeEmptySemanticValidationReport(
     topicId: string,
 ): SemanticValidationReport {
+    return {
+        topicId,
+        ok: true,
+        issues: [],
+    };
+}
+
+export function makeEmptyGoldenValidationReport(
+    topicId: string,
+): GoldenValidationReport {
     return {
         topicId,
         ok: true,

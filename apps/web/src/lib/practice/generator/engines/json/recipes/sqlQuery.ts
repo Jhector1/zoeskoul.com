@@ -27,12 +27,15 @@ export const buildSqlQueryRecipe: RecipeHandler<any> = (def, args, resolved) => 
     const resultShape = recipe.resultShape ?? "table";
 
     const expected = makeSqlExpected({
-        datasetId: recipe.datasetId,
+        recipe: {
+            type: "sql_query",
+            datasetId: recipe.datasetId,
+            solutionCode,
+            checkSql,
+            resultShape,
+            ignoreRowOrder: recipe.ignoreRowOrder,
+        },
         fixedSqlDialect,
-        resultShape,
-        ignoreRowOrder: recipe.ignoreRowOrder,
-        solutionCode,
-        checkSql,
     });
 
     const resolvedSql = resolveSqlRunnerConfig({
@@ -72,7 +75,7 @@ export const buildSqlQueryRecipe: RecipeHandler<any> = (def, args, resolved) => 
             datasetId: recipe.datasetId,
             resultShape,
         },
-        expected,
+        expected: expected as any,
         expectedExample,
     });
 };

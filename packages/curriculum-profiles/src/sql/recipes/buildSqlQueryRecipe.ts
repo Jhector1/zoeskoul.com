@@ -1,5 +1,10 @@
+import { buildSqlQueryExpected } from "../../base/codeInputExpected.js";
 import { buildSqlExpectedExample } from "../../base/expectedExample.js";
 import { getSqlDatasetById } from "../datasets/index.js";
+
+function cleanSql(value: unknown): string {
+  return String(value ?? "").trim();
+}
 
 export const buildSqlQueryRecipe = (def: any, args: any, resolved: any) => {
   if (!def.recipe.datasetId) {
@@ -13,12 +18,24 @@ export const buildSqlQueryRecipe = (def: any, args: any, resolved: any) => {
     );
   }
 
+  const solutionCode = cleanSql(def.recipe.solutionCode);
+  const resultShape = def.recipe.resultShape ?? "table";
+  const fixedSqlDialect = def.fixedSqlDialect ?? "sqlite";
+  const expected = buildSqlQueryExpected({
+    recipe: def.recipe,
+    fixedSqlDialect,
+  });
+  const firstSqlTest = expected.tests[0];
+  const checkSql =
+      firstSqlTest && "checkSql" in firstSqlTest ? firstSqlTest.checkSql : undefined;
+
   const expectedExample = buildSqlExpectedExample({
     def,
     resolved,
     schemaSql: dataset.schemaSql,
     seedSql: dataset.seedSql,
-    solutionCode: def.recipe.solutionCode,
+    solutionCode,
+    checkSql,
   });
 
   return {
@@ -33,37 +50,13 @@ export const buildSqlQueryRecipe = (def: any, args: any, resolved: any) => {
     starterCode: resolved.starterCode,
     help: resolved.help,
     hint: resolved.hint,
-    fixedSqlDialect: def.fixedSqlDialect ?? "sqlite",
+    fixedSqlDialect,
     runtime: {
       kind: "sql",
       datasetId: def.recipe.datasetId,
-      resultShape: def.recipe.resultShape ?? "table",
+      resultShape,
     },
-    expected: {
-      kind: "code_input",
-      language: "sql",
-      fixedSqlDialect: "sqlite",
-      runtime: {
-        kind: "sql",
-        datasetId: def.recipe.datasetId,
-        resultShape: def.recipe.resultShape ?? "table",
-      },
-      tests: [
-        {
-          kind: "sql",
-          sqlDialect: "sqlite",
-          runtime: {
-            kind: "sql",
-            datasetId: def.recipe.datasetId,
-            resultShape: def.recipe.resultShape ?? "table",
-          },
-          compareTo: "solution",
-          match: "table_exact",
-          ignoreRowOrder: def.recipe.ignoreRowOrder ?? false,
-        },
-      ],
-      solutionCode: def.recipe.solutionCode,
-    },
+    expected,
     expectedExample,
   };
 };

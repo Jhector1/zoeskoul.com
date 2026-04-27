@@ -1,35 +1,33 @@
 {
-  "subjectSlug": "python",
+  "subjectSlug": "python-for-beginners",
   "profileId": "python",
   "sourceLocale": "en",
-  "targetLocales": ["fr", "ht", "es"],
+  "targetLocales": [],
   "title": "Python for Beginners",
-  "description": "Learn Python step by step with hands-on practice.",
+  "description": "A practical beginner Python course from first program through functions, files, classes, testing, and a capstone project.",
   "level": "beginner",
-  "audience": ["absolute beginners", "students", "career switchers"],
-  "goals": [
-    "understand variables and expressions",
-    "use conditionals and loops",
-    "write functions",
-    "read and write simple programs"
+  "audience": [
+    "absolute beginners",
+    "students learning programming fundamentals",
+    "tutoring students who need Python practice",
+    "learners preparing for data science, automation, or backend development"
   ],
-  "constraints": {
-    "moduleCount": 8,
-    "topicsPerModuleMin": 4,
-    "topicsPerModuleMax": 6
-  },
+  "goals": [
+    "Write and run beginner Python programs",
+    "Use variables, strings, numbers, conditionals, loops, collections, and functions",
+    "Read and write files safely",
+    "Handle common errors and debug simple programs",
+    "Build small projects with tests and clear organization"
+  ],
   "teachingStyle": {
-    "tone": "clear, supportive, beginner-friendly",
-    "quizWeight": 0.4,
-    "projectWeight": 0.25,
-    "codeInputWeight": 0.35
+    "tone": "friendly, practical, beginner-safe, and project-oriented",
+    "quizWeight": 0.35,
+    "projectWeight": 0.35,
+    "codeInputWeight": 0.5
   },
-  "seedModules": [
-    "Getting Started",
-    "Variables and Data Types",
-    "Conditionals",
-    "Loops",
-    "Functions",
-    "Collections"
-  ]
+  "constraints": {
+    "moduleCount": 10,
+    "topicsPerModuleMin": 6,
+    "topicsPerModuleMax": 6
+  }
 }

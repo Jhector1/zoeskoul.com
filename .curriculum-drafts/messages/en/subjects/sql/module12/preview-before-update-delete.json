@@ -1,0 +1,119 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_12": {
+        "preview-before-update-delete": {
+          "label": "Preview before update/delete",
+          "summary": "Learn how to safely preview the rows affected by UPDATE and DELETE statements in SQL before making changes, using the inventory_items table.",
+          "cards": {
+            "sketch0": {
+              "title": "Why preview before changing data?"
+            },
+            "sketch1": {
+              "title": "Preview before deleting"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Practice"
+            }
+          },
+          "projectSteps": {
+            "code_preview_select_before_update": {
+              "title": "Preview rows before updating"
+            },
+            "code_preview_select_before_delete": {
+              "title": "Preview rows before deleting"
+            },
+            "code_update_after_preview": {
+              "title": "Update after previewing"
+            }
+          },
+          "quiz": {
+            "code-preview-select-before-update": {
+              "title": "Preview rows before updating",
+              "prompt": "You want to update the status of all items in the 'Accessories' category to 'inactive'. Write a SQL statement to preview which rows will be affected.",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+                "hint_1": "Eliminate choices or interpretations that do not match the task.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "starterCode": "-- Write your preview query here"
+            },
+            "code-preview-select-before-delete": {
+              "title": "Preview rows before deleting",
+              "prompt": "Before deleting all test items (where is_test = 1), write a SQL statement to preview which rows will be deleted.",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+                "hint_1": "Eliminate choices or interpretations that do not match the task.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "starterCode": "-- Preview rows to be deleted"
+            },
+            "code-update-after-preview": {
+              "title": "Update after previewing",
+              "prompt": "After previewing, update all items in the 'Kitchen' category to set their status to 'inactive'. Write the SQL UPDATE statement.",
+              "hint": "Focus on the SQL task being asked for, not on copying final query text.",
+              "help": {
+                "concept": "Build the query from the operation the exercise is testing.",
+                "hint_1": "Think about which clauses or functions are required for the task.",
+                "hint_2": "Construct the query based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "-- Update status for Kitchen items"
+            },
+            "multi-why-preview-important": {
+              "title": "Why is previewing before UPDATE or DELETE important?",
+              "prompt": "Select all reasons why previewing affected rows before running UPDATE or DELETE is important.",
+              "hint": "Think about risks and benefits of previewing.",
+              "help": {
+                "concept": "Previewing helps prevent mistakes and data loss by showing you which rows will be affected.",
+                "hint_1": "Consider both data safety and error prevention.",
+                "hint_2": "Previewing helps avoid accidental changes and lets you confirm your WHERE clause."
+              },
+              "options": {
+                "a": "[object Object]",
+                "b": "A command"
+              }
+            },
+            "fill-blank-preview-where": {
+              "title": "Key clause for safe updates/deletes",
+              "prompt": "Choose the best value for the first missing blank in the statement.",
+              "hint": "This clause filters which rows are affected.",
+              "help": {
+                "concept": "The the missing term clause specifies which rows to update or delete, preventing changes to all rows.",
+                "hint_1": "It's the clause that limits the affected rows.",
+                "hint_2": "Without this clause, all rows would be updated or deleted."
+              },
+              "template": "The first missing value is [blank1].",
+              "choices": [
+                "ORDER BY",
+                "GROUP BY",
+                "WHERE",
+                "HAVING"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_12": {
+        "preview-before-update-delete": {
+          "sketch-preview-select": {
+            "title": "Why preview before changing data?",
+            "bodyMarkdown": "When you run an UPDATE or DELETE statement in SQL, you are making permanent changes to your data. Unlike SELECT, these changes can't be undone with a simple command. That's why it's a best practice to **preview** which rows will be affected before you run the actual UPDATE or DELETE.\n\nFor example, if you want to update the status of all test items in the `inventory_items` table, first run a SELECT with the same WHERE clause:\n\n```sql\nSELECT * FROM inventory_items WHERE is_test = 1;\n```\n\nThis shows you exactly which rows will be changed. Once you're sure, you can run:\n\n```sql\nUPDATE inventory_items SET status = 'archived' WHERE is_test = 1;\n```\n\nPreviewing helps prevent accidental data loss or unwanted changes."
+          },
+          "sketch-preview-delete": {
+            "title": "Preview before deleting",
+            "bodyMarkdown": "Deleting data is even riskier than updating it, because deleted rows are gone for good unless you have a backup. Always preview which rows will be deleted by running a SELECT statement with the same WHERE clause first.\n\nFor example, to delete all test items:\n\n```sql\nSELECT * FROM inventory_items WHERE is_test = 1;\n```\n\nIf the results look correct, then run:\n\n```sql\nDELETE FROM inventory_items WHERE is_test = 1;\n```\n\nThis habit helps you avoid deleting the wrong data by mistake."
+          }
+        }
+      }
+    }
+  }
+}

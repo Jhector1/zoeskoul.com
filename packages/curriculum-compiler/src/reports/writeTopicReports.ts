@@ -2,6 +2,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import type {
     CritiqueReport,
+    GoldenValidationReport,
     RepairReport,
     SemanticValidationReport,
 } from "@zoeskoul/curriculum-profiles";
@@ -26,6 +27,7 @@ export async function writeTopicReports(args: {
     repairReport?: RepairReport;
     critiqueReport?: CritiqueReport;
     semanticReport?: SemanticValidationReport;
+    goldenReport?: GoldenValidationReport;
     topicBundle?: unknown;
 }) {
     const baseDir = path.join(
@@ -54,6 +56,10 @@ export async function writeTopicReports(args: {
 
     if (args.semanticReport) {
         await writeJsonAtomic(path.join(baseDir, "semantic-report.json"), args.semanticReport);
+    }
+
+    if (args.goldenReport) {
+        await writeJsonAtomic(path.join(baseDir, "golden-report.json"), args.goldenReport);
     }
 
     if (args.topicBundle !== undefined) {

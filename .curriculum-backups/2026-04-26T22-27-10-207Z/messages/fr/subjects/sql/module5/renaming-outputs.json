@@ -1,0 +1,115 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_5": {
+        "renaming-outputs": {
+          "label": "Renommer les sorties",
+          "summary": "Renommer les sorties dans les colonnes calculées et les expressions SQL",
+          "cards": {
+            "sketch0": {
+              "title": "Pourquoi renommer les sorties ?"
+            },
+            "sketch1": {
+              "title": "Syntaxe des alias"
+            },
+            "sketch2": {
+              "title": "Exemple pratique"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "quiz": {
+            "q1": {
+              "title": "Renommer une colonne calculée",
+              "prompt": "Écrivez une requête SQL pour sélectionner `customer_name` et la valeur totale de chaque commande (quantité multipliée par unit_price) depuis la table `orders`. Nommez la colonne calculée `order_value`.",
+              "hint": "Concentrez-vous sur le concept testé.",
+              "help": {
+                "concept": "Réfléchissez au rôle ou à l'idée testée plutôt que de répéter la formulation de la réponse.",
+                "hint_1": "Éliminez les choix ou interprétations qui ne correspondent pas à la tâche.",
+                "hint_2": "Choisissez le concept qui correspond le mieux à ce que l'exercice vous demande de faire."
+              },
+              "starterCode": "SELECT customer_name, \n       \nFROM orders;"
+            },
+            "q2": {
+              "title": "Plusieurs alias dans une requête",
+              "prompt": "Écrivez une requête SQL pour sélectionner `region` comme `sales_region` et `status` comme `order_status` depuis la table `orders`.",
+              "hint": "Concentrez-vous sur le concept testé.",
+              "help": {
+                "concept": "Réfléchissez au rôle ou à l'idée testée plutôt que de répéter la formulation de la réponse.",
+                "hint_1": "Éliminez les choix ou interprétations qui ne correspondent pas à la tâche.",
+                "hint_2": "Choisissez le concept qui correspond le mieux à ce que l'exercice vous demande de faire."
+              },
+              "starterCode": "SELECT \nFROM orders;"
+            },
+            "q3": {
+              "title": "But des alias",
+              "prompt": "Pourquoi les alias (utilisation de AS) sont-ils utiles dans les requêtes SQL ?",
+              "hint": "Pensez à la façon dont le résultat apparaît à quelqu'un qui lit les résultats.",
+              "help": {
+                "concept": "Les alias rendent les colonnes de résultat plus compréhensibles en leur donnant des noms explicites.",
+                "hint_1": "Considérez comment les noms de colonnes apparaissent dans la table de sortie.",
+                "hint_2": "Les alias aident à rendre les rapports ou les données exportées plus lisibles."
+              },
+              "options": {
+                "a": "[object Object]",
+                "b": "Une commande"
+              }
+            },
+            "q4": {
+              "title": "Utilisations valides des alias",
+              "prompt": "Lesquelles des propositions suivantes sont des utilisations valides des alias en SQL ? Sélectionnez toutes les réponses qui conviennent.",
+              "hint": "Réfléchissez à l'endroit où les alias peuvent être appliqués dans une instruction SELECT.",
+              "help": {
+                "concept": "Les alias peuvent être utilisés pour renommer des colonnes, des expressions et même parfois des tables pour plus de clarté.",
+                "hint_1": "Considérez à la fois les colonnes calculées et les colonnes classiques.",
+                "hint_2": "Vous pouvez utiliser des alias pour les expressions et les colonnes dans la liste SELECT."
+              },
+              "options": {
+                "a": "[object Object]",
+                "b": "Une commande"
+              }
+            },
+            "q5": {
+              "title": "Syntaxe des alias",
+              "prompt": "Complétez l'espace vide pour renommer correctement la colonne `category` en `product_type` dans une instruction SELECT.",
+              "hint": "Concentrez-vous sur le concept SQL manquant plutôt que sur le mot exact manquant.",
+              "help": {
+                "concept": "L'espace vide doit être complété par le terme SQL qui correspond à la fonction que l'instruction cherche à accomplir.",
+                "hint_1": "Réfléchissez à ce que la partie manquante est censée faire dans l'instruction.",
+                "hint_2": "Choisissez le terme SQL qui complète le mieux le sens de l'instruction."
+              },
+              "template": "SELECT category ___ product_type FROM orders;",
+              "choices": [
+                "AS",
+                "INTO",
+                "=",
+                "LIKE"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_5": {
+        "renaming-outputs": {
+          "sk1": {
+            "title": "Pourquoi renommer les sorties ?",
+            "bodyMarkdown": "Lorsque vous utilisez des expressions ou des calculs dans une instruction SELECT en SQL, les colonnes résultantes ont souvent des noms génériques ou peu clairs. Renommer ces sorties avec des **alias** à l'aide du mot-clé `AS` rend vos résultats plus faciles à lire et à comprendre. Par exemple :\n\n```sql\nSELECT customer_name, quantity * unit_price AS line_total\nFROM orders;\n```\n\nIci, `quantity * unit_price` reçoit l'alias `line_total`, ce qui rend la colonne de sortie claire et explicite."
+          },
+          "sk2": {
+            "title": "Syntaxe des alias",
+            "bodyMarkdown": "Pour renommer une colonne ou une expression en SQL, utilisez le mot-clé `AS` :\n\n```sql\nSELECT column_or_expression AS alias_name\nFROM table_name;\n```\n\nVous pouvez aussi utiliser des alias sans `AS`, mais l'utilisation de `AS` est plus claire et plus lisible. Par exemple :\n\n```sql\nSELECT region AS sales_region FROM orders;\n```"
+          },
+          "sk3": {
+            "title": "Exemple pratique",
+            "bodyMarkdown": "Supposons que vous vouliez afficher pour chaque commande le client, le prix total et le statut. Vous pouvez écrire :\n\n```sql\nSELECT customer_name, quantity * unit_price AS total_price, status\nFROM orders;\n```\n\nCette requête calcule le prix total de chaque commande et nomme la colonne `total_price` pour plus de clarté."
+          }
+        }
+      }
+    }
+  }
+}

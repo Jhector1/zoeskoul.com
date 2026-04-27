@@ -1,0 +1,126 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_12": {
+        "safe-data-modification-workflow": {
+          "label": "Safe data modification workflow",
+          "summary": "Learn how to safely update and delete data in SQL by previewing affected rows and using WHERE clauses to avoid accidental data loss.",
+          "cards": {
+            "sketch0": {
+              "title": "Preview Before Modifying Data"
+            },
+            "sketch1": {
+              "title": "Always Use WHERE with UPDATE and DELETE"
+            },
+            "sketch2": {
+              "title": "Safe Update Example"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Practice"
+            }
+          },
+          "projectSteps": {
+            "code_1_preview_select": {
+              "title": "Preview rows before updating"
+            },
+            "code_2_safe_update": {
+              "title": "Update only test items"
+            },
+            "code_3_safe_delete": {
+              "title": "Delete only test items"
+            }
+          },
+          "quiz": {
+            "code-1-preview-select": {
+              "title": "Preview rows before updating",
+              "prompt": "Write a SQL query to preview all rows in `inventory_items` that have `status` set to 'draft'.",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+                "hint_1": "Eliminate choices or interpretations that do not match the task.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "starterCode": "-- Write your SELECT query here"
+            },
+            "code-2-safe-update": {
+              "title": "Update only test items",
+              "prompt": "Write a SQL statement to update the `status` to 'inactive' for all rows in `inventory_items` where `is_test` is 1.",
+              "hint": "Focus on the SQL task being asked for, not on copying final query text.",
+              "help": {
+                "concept": "Build the query from the operation the exercise is testing.",
+                "hint_1": "Think about which clauses or functions are required for the task.",
+                "hint_2": "Construct the query based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "-- Write your UPDATE statement here"
+            },
+            "code-3-safe-delete": {
+              "title": "Delete only test items",
+              "prompt": "Write a SQL statement to delete all rows from `inventory_items` where `is_test` is 1.",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+                "hint_1": "Eliminate choices or interpretations that do not match the task.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "starterCode": "-- Write your DELETE statement here"
+            },
+            "multi-1-why-preview": {
+              "title": "Why preview before modifying data?",
+              "prompt": "Which of the following are reasons to preview rows before running UPDATE or DELETE statements? Select all that apply.",
+              "hint": "Think about what could go wrong if you skip the preview step.",
+              "help": {
+                "concept": "Previewing helps you avoid accidental changes and confirms your WHERE clause targets the right rows.",
+                "hint_1": "Previewing can prevent mistakes and data loss.",
+                "hint_2": "It helps you confirm the affected rows and avoid deleting or updating the wrong data."
+              },
+              "options": {
+                "a": "A command",
+                "b": "A table name"
+              }
+            },
+            "fill-1-where-required": {
+              "title": "Importance of WHERE clause",
+              "prompt": "Choose the best value for the first missing blank in the statement.",
+              "hint": "It's the clause that filters which rows are changed.",
+              "help": {
+                "concept": "The the missing term clause limits the rows affected by UPDATE or DELETE statements.",
+                "hint_1": "This clause is used to specify which rows to target.",
+                "hint_2": "Without this clause, every row in the table could be changed or deleted."
+              },
+              "template": "The first missing value is [blank1].",
+              "choices": [
+                "ORDER BY",
+                "GROUP BY",
+                "WHERE",
+                "HAVING"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_12": {
+        "safe-data-modification-workflow": {
+          "sketch-1-preview-before-modify": {
+            "title": "Preview Before Modifying Data",
+            "bodyMarkdown": "Before running an UPDATE or DELETE statement, it's a best practice to preview the rows that will be affected. You can do this by writing a SELECT query with the same WHERE clause you plan to use. For example, if you want to update all draft items in the `inventory_items` table:\n\n```sql\nSELECT * FROM inventory_items WHERE status = 'draft';\n```\n\nThis shows you which rows will be changed, helping prevent accidental updates or deletions."
+          },
+          "sketch-2-where-clause-safety": {
+            "title": "Always Use WHERE with UPDATE and DELETE",
+            "bodyMarkdown": "Using UPDATE or DELETE without a WHERE clause will affect **all rows** in the table. This can lead to massive, unintended data loss. Always include a WHERE clause to target only the intended rows. For example:\n\n```sql\nDELETE FROM inventory_items WHERE is_test = 1;\n```\n\nThis statement safely deletes only test items, not your entire inventory."
+          },
+          "sketch-3-safe-update-example": {
+            "title": "Safe Update Example",
+            "bodyMarkdown": "Suppose you want to mark all test items as inactive. First, preview the target rows:\n\n```sql\nSELECT id, name, status FROM inventory_items WHERE is_test = 1;\n```\n\nThen, run the update:\n\n```sql\nUPDATE inventory_items SET status = 'inactive' WHERE is_test = 1;\n```\n\nPreviewing first helps you confirm exactly which rows will be changed."
+          }
+        }
+      }
+    }
+  }
+}

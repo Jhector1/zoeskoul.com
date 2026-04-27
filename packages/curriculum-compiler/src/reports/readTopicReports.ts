@@ -2,6 +2,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import type {
     CritiqueReport,
+    GoldenValidationReport,
     RepairReport,
     SemanticValidationReport,
 } from "@zoeskoul/curriculum-profiles";
@@ -15,6 +16,7 @@ export type TopicReportBundle = {
     repairReport?: RepairReport;
     critiqueReport?: CritiqueReport;
     semanticReport?: SemanticValidationReport;
+    goldenReport?: GoldenValidationReport;
     topicBundle?: unknown;
 };
 
@@ -55,6 +57,7 @@ export async function readTopicReports(args: {
         repairReport: await readJsonIfExists(path.join(baseDir, "repair-report.json")),
         critiqueReport: await readJsonIfExists(path.join(baseDir, "critique-report.json")),
         semanticReport: await readJsonIfExists(path.join(baseDir, "semantic-report.json")),
+        goldenReport: await readJsonIfExists(path.join(baseDir, "golden-report.json")),
         topicBundle: await readJsonIfExists(path.join(baseDir, "emitted-topic-bundle.json")),
     };
 }

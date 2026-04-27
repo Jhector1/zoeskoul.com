@@ -1,0 +1,185 @@
+{
+  "topicId": "thinking-before-changing-data",
+  "subjectSlug": "sql",
+  "moduleSlug": "sql_module_12",
+  "sectionSlug": "section_12_3",
+  "prefix": "sql12",
+  "minutes": 15,
+  "topic": {
+    "labelKey": "topics.sql.sql_module_12.thinking-before-changing-data.label",
+    "summaryKey": "topics.sql.sql_module_12.thinking-before-changing-data.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_12.thinking-before-changing-data.cards.sketch0.title",
+      "sketchId": "sketch-preview-before-change",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_12.thinking-before-changing-data.cards.sketch1.title",
+      "sketchId": "sketch-why-where-important",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_12.thinking-before-changing-data.cards.sketch2.title",
+      "sketchId": "sketch-accidental-data-loss",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql.sql_module_12.thinking-before-changing-data.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 2,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.sql.sql_module_12.thinking-before-changing-data.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "code_preview_select",
+            "titleKey": "topics.sql.sql_module_12.thinking-before-changing-data.projectSteps.code_preview_select.title",
+            "exerciseKey": "code-preview-select",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "code_safe_delete_test_items",
+            "titleKey": "topics.sql.sql_module_12.thinking-before-changing-data.projectSteps.code_safe_delete_test_items.title",
+            "exerciseKey": "code-safe-delete-test-items",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "code_update_status_inactive",
+            "titleKey": "topics.sql.sql_module_12.thinking-before-changing-data.projectSteps.code_update_status_inactive.title",
+            "exerciseKey": "code-update-status-inactive",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch-preview-before-change",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_12.thinking-before-changing-data.sketch-preview-before-change.title",
+      "bodyKey": "sketches.sql.sql_module_12.thinking-before-changing-data.sketch-preview-before-change.bodyMarkdown"
+    },
+    {
+      "id": "sketch-why-where-important",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_12.thinking-before-changing-data.sketch-why-where-important.title",
+      "bodyKey": "sketches.sql.sql_module_12.thinking-before-changing-data.sketch-why-where-important.bodyMarkdown"
+    },
+    {
+      "id": "sketch-accidental-data-loss",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_12.thinking-before-changing-data.sketch-accidental-data-loss.title",
+      "bodyKey": "sketches.sql.sql_module_12.thinking-before-changing-data.sketch-accidental-data-loss.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "code-preview-select",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_12.thinking-before-changing-data.quiz.code-preview-select",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "inventory_ops",
+        "resultShape": "table",
+        "solutionCode": "SELECT * FROM inventory_items WHERE status = 'draft';"
+      }
+    },
+    {
+      "id": "code-safe-delete-test-items",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_12.thinking-before-changing-data.quiz.code-safe-delete-test-items",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "inventory_ops",
+        "resultShape": "table",
+        "solutionCode": "DELETE FROM inventory_items WHERE is_test = 1;",
+        "checkSql": "SELECT * FROM inventory_items WHERE is_test = 1;"
+      }
+    },
+    {
+      "id": "code-update-status-inactive",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_12.thinking-before-changing-data.quiz.code-update-status-inactive",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "inventory_ops",
+        "resultShape": "table",
+        "solutionCode": "UPDATE inventory_items SET status = 'archived' WHERE category = 'Decor' AND status = 'inactive';",
+        "checkSql": "SELECT * FROM inventory_items WHERE category = 'Decor' AND status = 'archived';"
+      }
+    },
+    {
+      "id": "multi-why-preview-important",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_12.thinking-before-changing-data.quiz.multi-why-preview-important",
+      "optionIds": [
+        "a",
+        "b"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a"
+        ]
+      }
+    },
+    {
+      "id": "fillblank-where-required",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_12.thinking-before-changing-data.quiz.fillblank-where-required",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "WHERE"
+      }
+    }
+  ]
+}

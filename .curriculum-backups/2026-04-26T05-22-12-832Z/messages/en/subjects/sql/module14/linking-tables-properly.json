@@ -1,0 +1,133 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_14": {
+        "linking-tables-properly": {
+          "label": "Linking tables properly",
+          "summary": "Learn how to link tables in a relational database, understand the importance of relationships, and avoid common design mistakes.",
+          "cards": {
+            "sketch0": {
+              "title": "Why link tables?"
+            },
+            "sketch1": {
+              "title": "Types of relationships"
+            },
+            "sketch2": {
+              "title": "Avoiding duplication"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Practice"
+            }
+          },
+          "projectSteps": {
+            "code_1": {
+              "title": "Designing a related table"
+            }
+          },
+          "quiz": {
+            "fill-1": {
+              "title": "Purpose of linking tables",
+              "prompt": "Why do we link tables in a relational database?",
+              "hint": "Think about what happens if you store the same information in multiple places.",
+              "help": {
+                "concept": "Linking tables allows you to store related data in separate places, reducing repeated information.",
+                "hint_1": "Linking tables is about minimizing repeated data.",
+                "hint_2": "The main benefit is to avoid storing the same details in many rows."
+              },
+              "template": "Linking tables helps to ___.",
+              "choices": [
+                "reduce duplication",
+                "increase duplication",
+                "make updates harder",
+                "organize data efficiently"
+              ]
+            },
+            "fill-2": {
+              "title": "Relationship type in products table",
+              "prompt": "What type of relationship exists between `category` and `products` in the `products` table?",
+              "hint": "Look at how the missing term products can share the same category.",
+              "help": {
+                "concept": "A one-to-the missing term relationship means one value in one table relates to the missing term rows in another.",
+                "hint_1": "Multiple products can have the same category.",
+                "hint_2": "Think about how the missing term products are labeled 'Art' or 'Home'."
+              },
+              "template": "One category can have ___ products.",
+              "choices": [
+                "many",
+                "one",
+                "zero",
+                "exactly two"
+              ]
+            },
+            "single-1": {
+              "title": "Main risk of duplicate data",
+              "prompt": "What is a main risk of storing duplicate data in multiple tables?",
+              "hint": "What happens if you change a value in one place but forget another?",
+              "help": {
+                "concept": "Duplicate data can lead to inconsistencies when updates are not applied everywhere.",
+                "hint_1": "If you have the same info in two places, you might forget to update both.",
+                "hint_2": "This can cause errors if some rows have old values and others have new ones."
+              },
+              "options": {
+                "a": "Data becomes inconsistent if not all copies are updated",
+                "b": "Queries run faster",
+                "c": "It is easier to add new columns",
+                "d": "It improves normalization"
+              }
+            },
+            "multi-1": {
+              "title": "Benefits of using relationships",
+              "prompt": "Which of the following are benefits of linking tables with relationships? (Choose all that apply)",
+              "hint": "Think about organization, updates, and duplication.",
+              "help": {
+                "concept": "Relationships help keep data organized, reduce repetition, and make maintenance easier.",
+                "hint_1": "Linked tables help avoid repeating information and make changes simpler.",
+                "hint_2": "Not all tables need the same columns; relationships allow for specialization."
+              },
+              "options": {
+                "a": "Reduces data duplication",
+                "b": "Makes updates easier",
+                "c": "Allows for more organized data",
+                "d": "Forces all tables to have the same columns"
+              }
+            },
+            "code-1": {
+              "title": "Designing a related table",
+              "prompt": "Suppose you want to track product reviews for each product in the `products` table. Write a SQL statement to create a new table called `reviews` with columns: `id` (primary key), `product_id` (integer), `review_text` (text), and `rating` (integer). Make sure to link `product_id` to the `id` column in `products`.",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+                "hint_1": "Eliminate choices or interpretations that do not match the task.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "starterCode": "-- Write a CREATE TABLE statement for reviews"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_14": {
+        "linking-tables-properly": {
+          "sketch-1": {
+            "title": "Why link tables?",
+            "bodyMarkdown": "In relational databases, linking tables helps organize data efficiently and reduces duplication. For example, in the `products` table of the `products_catalog` dataset, each product has a unique `id`, but if we wanted to track product sales, we would create a separate `sales` table and link it to `products` using the `product_id` as a foreign key. This keeps product details in one place and sales records in another, connected by a relationship."
+          },
+          "sketch-2": {
+            "title": "Types of relationships",
+            "bodyMarkdown": "Common relationship types include:\n- **One-to-many**: One product category can have many products. In the `products` table, the `category` column shows this: many products can share the same category.\n- **Many-to-many**: If products could belong to multiple categories (not in this dataset), we would need a linking table (e.g., `product_categories`) to connect them.\n- **One-to-one**: Rare, but sometimes used for splitting rarely-used details into a separate table."
+          },
+          "sketch-3": {
+            "title": "Avoiding duplication",
+            "bodyMarkdown": "If you store the same information in multiple places, it becomes hard to update and can lead to errors. For example, if you repeated the product name in every sales record, a name change would require updating many rows. By linking tables, you only store the product name once, in the `products` table."
+          }
+        }
+      }
+    }
+  }
+}

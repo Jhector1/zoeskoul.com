@@ -25,6 +25,13 @@
       "height": 420
     },
     {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_11.data-type-awareness.cards.sketch2.title",
+      "sketchId": "sketch-3",
+      "height": 420
+    },
+    {
       "id": "quiz",
       "kind": "quiz",
       "titleKey": "topics.sql.sql_module_11.data-type-awareness.cards.quiz.title",
@@ -89,6 +96,12 @@
       "archetype": "paragraph",
       "titleKey": "sketches.sql.sql_module_11.data-type-awareness.sketch-2.title",
       "bodyKey": "sketches.sql.sql_module_11.data-type-awareness.sketch-2.bodyMarkdown"
+    },
+    {
+      "id": "sketch-3",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_11.data-type-awareness.sketch-3.title",
+      "bodyKey": "sketches.sql.sql_module_11.data-type-awareness.sketch-3.bodyMarkdown"
     }
   ],
   "exercises": [
@@ -104,7 +117,8 @@
         "type": "sql_query",
         "datasetId": "inventory_ops",
         "resultShape": "table",
-        "solutionCode": "INSERT INTO inventory_items (name, category, price, status, is_test, notes, last_updated)\nVALUES ('Desk Organizer', 'Accessories', 13.25, 'active', 0, NULL, '2026-02-12');"
+        "solutionCode": "INSERT INTO inventory_items (name, category, price, status, is_test, notes, last_updated)\nVALUES ('Desk Organizer', 'Accessories', 8.75, 'active', 0, NULL, '2026-02-10');",
+        "checkSql": "SELECT * FROM \"inventory_items\" ORDER BY 1;"
       }
     },
     {
@@ -119,7 +133,7 @@
         "type": "sql_query",
         "datasetId": "inventory_ops",
         "resultShape": "table",
-        "solutionCode": "INSERT INTO inventory_items (name, category, price, status, is_test, last_updated)\nVALUES ('Travel Mug', 'Kitchen', 11.00, 'draft', 1, '2026-02-13');"
+        "solutionCode": "-- This will fail because status, is_test, and last_updated are NOT NULL and not provided.\n-- Example of a correct insert (for learning):\n-- INSERT INTO inventory_items (name, category, price, status, is_test, last_updated)\n-- VALUES ('Mini Lamp', 'Decor', 14.99, 'active', 0, '2026-02-11');"
       }
     },
     {
@@ -134,7 +148,8 @@
         "type": "sql_query",
         "datasetId": "inventory_ops",
         "resultShape": "table",
-        "solutionCode": "INSERT INTO inventory_items (name, category, price, status, is_test, notes, last_updated)\nVALUES ('Sample Notebook', 'Accessories', 6.75, 'active', 1, 'Limited edition', '2026-02-14');"
+        "solutionCode": "INSERT INTO inventory_items (name, category, price, is_test, last_updated)\nVALUES ('Sample Keychain', 'Accessories', 2.50, 1, '2026-02-12');",
+        "checkSql": "SELECT * FROM \"inventory_items\" ORDER BY 1;"
       }
     },
     {
@@ -163,7 +178,7 @@
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "REAL"
+        "value": "draft"
       }
     }
   ]

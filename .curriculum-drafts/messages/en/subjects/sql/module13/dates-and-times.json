@@ -1,0 +1,119 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_13": {
+        "dates-and-times": {
+          "label": "Dates and times",
+          "summary": "Learn how to store and work with dates and times in SQL tables. Understand the common data types, formatting, and best practices for handling date and time values in your database schema.",
+          "cards": {
+            "sketch0": {
+              "title": "Storing Dates and Times in SQL"
+            },
+            "sketch1": {
+              "title": "Why Use TEXT for Dates?"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Practice"
+            }
+          },
+          "projectSteps": {
+            "code_1": {
+              "title": "Select products created after a specific date"
+            },
+            "code_2": {
+              "title": "Add a new product with today's date"
+            },
+            "code_3": {
+              "title": "Update the created_at date for a product"
+            }
+          },
+          "quiz": {
+            "code-1": {
+              "title": "Select products created after a specific date",
+              "prompt": "Write a SQL query to select the name and created_at columns for all products that were created after January 31, 2026.",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+                "hint_1": "Eliminate choices or interpretations that do not match the task.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "starterCode": "-- Write your query below"
+            },
+            "code-2": {
+              "title": "Add a new product with today's date",
+              "prompt": "Insert a new product called 'Watercolor Set' in the 'Art' category, priced at 19.99, with 20 in stock, and a created_at date of '2026-03-01'.",
+              "hint": "Focus on the SQL task being asked for, not on copying final query text.",
+              "help": {
+                "concept": "Build the query from the operation the exercise is testing.",
+                "hint_1": "Think about which clauses or functions are required for the task.",
+                "hint_2": "Construct the query based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "-- Insert the new product"
+            },
+            "code-3": {
+              "title": "Update the created_at date for a product",
+              "prompt": "The 'Desk Lamp' product was entered with the wrong created_at date. Update its created_at value to '2026-02-20'.",
+              "hint": "Focus on the SQL task being asked for, not on copying final query text.",
+              "help": {
+                "concept": "Build the query from the operation the exercise is testing.",
+                "hint_1": "Think about which clauses or functions are required for the task.",
+                "hint_2": "Construct the query based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "-- Update the created_at date"
+            },
+            "multi-1": {
+              "title": "Common ways to store dates in SQLite",
+              "prompt": "Which of the following are common ways to store date and time values in SQLite? Select all that apply.",
+              "hint": "Think about the data types SQLite supports for storing dates.",
+              "help": {
+                "concept": "SQLite allows dates to be stored as TEXT, REAL, or INTEGER, depending on the use case.",
+                "hint_1": "Consider if storing as a formatted string, a number, or a timestamp is possible.",
+                "hint_2": "More than one data type can be used for dates in SQLite."
+              },
+              "options": {
+                "a": "[object Object]",
+                "b": "A command"
+              }
+            },
+            "fill-1": {
+              "title": "Date format for sorting",
+              "prompt": "Choose the best value for the first missing blank in the statement.",
+              "hint": "It's a standard format that sorts correctly and is easy to compare.",
+              "help": {
+                "concept": "The ISO 8601 format 'the missing term' is recommended for storing dates as TEXT in SQLite.",
+                "hint_1": "The format starts with the year, then month, then day.",
+                "hint_2": "It looks like 2026-01-10."
+              },
+              "template": "The first missing value is [blank1].",
+              "choices": [
+                "YYYY-MM-DD",
+                "MM/DD/YYYY",
+                "DD-MM-YYYY",
+                "Month Day, Year"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_13": {
+        "dates-and-times": {
+          "sketch-1": {
+            "title": "Storing Dates and Times in SQL",
+            "bodyMarkdown": "Dates and times are essential for tracking when records are created, updated, or relevant. In SQLite, dates and times are often stored as TEXT in the format 'YYYY-MM-DD' or 'YYYY-MM-DD HH:MM:SS'. For example, the `products` table in the `products_catalog` database has a `created_at` column:\n\n```sql\nCREATE TABLE products (\n  id INTEGER PRIMARY KEY,\n  name TEXT NOT NULL,\n  category TEXT NOT NULL,\n  price REAL NOT NULL,\n  stock INTEGER NOT NULL,\n  created_at TEXT NOT NULL\n);\n```\n\nSample row:\n\n| id | name             | category   | price | stock | created_at  |\n|----|------------------|------------|-------|-------|-------------|\n| 1  | Sketchbook       | Art        | 12.99 | 25    | 2026-01-10  |\n\nThis format makes it easy to sort and filter by date."
+          },
+          "sketch-2": {
+            "title": "Why Use TEXT for Dates?",
+            "bodyMarkdown": "SQLite does not have a dedicated DATE or DATETIME type. Instead, dates and times are usually stored as TEXT, REAL, or INTEGER. The most common approach is to use TEXT in the ISO 8601 format ('YYYY-MM-DD' or 'YYYY-MM-DD HH:MM:SS'), which sorts correctly and is easy to read.\n\nFor example, to find all products added after January 31, 2026:\n\n```sql\nSELECT * FROM products WHERE created_at > '2026-01-31';\n```\n\nThis query works because the TEXT format allows for correct chronological comparison."
+          }
+        }
+      }
+    }
+  }
+}

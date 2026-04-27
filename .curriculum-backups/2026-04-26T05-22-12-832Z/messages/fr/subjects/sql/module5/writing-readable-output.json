@@ -1,0 +1,115 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_5": {
+        "writing-readable-output": {
+          "label": "Rédiger une sortie lisible",
+          "summary": "Apprenez à utiliser des alias de colonnes et des expressions en SQL pour rendre les résultats de vos requêtes clairs et prêts à être présentés.",
+          "cards": {
+            "sketch0": {
+              "title": "Pourquoi la lisibilité de la sortie est importante"
+            },
+            "sketch1": {
+              "title": "Utiliser des alias de colonnes dans SELECT"
+            },
+            "sketch2": {
+              "title": "Préparer les rapports pour la présentation"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "quiz": {
+            "q1": {
+              "title": "Calculer et nommer une nouvelle colonne",
+              "prompt": "Écrivez une requête SQL pour afficher l’`id` de chaque commande, le `customer_name`, et la valeur totale de la commande sous le nom `line_total` (calculée comme `quantity * unit_price`).",
+              "hint": "Concentrez-vous sur le concept testé.",
+              "help": {
+                "concept": "Réfléchissez au rôle ou à l’idée testée plutôt que de répéter la formulation de la réponse.",
+                "hint_1": "Éliminez les choix ou interprétations qui ne correspondent pas à la tâche.",
+                "hint_2": "Choisissez le concept qui correspond le mieux à ce que l’exercice vous demande de faire."
+              },
+              "starterCode": "-- Écrivez votre requête ici"
+            },
+            "q2": {
+              "title": "Formater la sortie avec des noms de colonnes lisibles",
+              "prompt": "Écrivez une requête SQL pour afficher `customer_name` sous le nom « Customer Name » et `region` sous le nom « Region » pour toutes les commandes.",
+              "hint": "Concentrez-vous sur le concept testé.",
+              "help": {
+                "concept": "Réfléchissez au rôle ou à l’idée testée plutôt que de répéter la formulation de la réponse.",
+                "hint_1": "Éliminez les choix ou interprétations qui ne correspondent pas à la tâche.",
+                "hint_2": "Choisissez le concept qui correspond le mieux à ce que l’exercice vous demande de faire."
+              },
+              "starterCode": "-- Écrivez votre requête ici"
+            },
+            "q3": {
+              "title": "But des alias de colonnes",
+              "prompt": "Pourquoi devriez-vous utiliser des alias de colonnes dans vos requêtes SQL ?",
+              "hint": "Pensez à l’apparence de la sortie pour quelqu’un qui lit les résultats.",
+              "help": {
+                "concept": "Les alias de colonnes servent à améliorer la lisibilité des résultats de vos requêtes.",
+                "hint_1": "Les alias influencent l’étiquetage des colonnes dans le résultat, pas la performance ni les types de données.",
+                "hint_2": "Ils aident les autres à comprendre ce que chaque colonne représente."
+              },
+              "options": {
+                "a": "Une commande",
+                "b": "Un nom de table"
+              }
+            },
+            "q4": {
+              "title": "Identifier les utilisations valides des alias",
+              "prompt": "Lesquelles des propositions suivantes sont des raisons valides d’utiliser des alias de colonnes ? (Cochez toutes les réponses qui s’appliquent)",
+              "hint": "Considérez comment les alias affectent la sortie et la compréhension des résultats.",
+              "help": {
+                "concept": "Les alias aident à clarifier, formater et lever les ambiguïtés sur les colonnes dans les ensembles de résultats.",
+                "hint_1": "Ils ne servent pas à filtrer, mais à nommer et clarifier.",
+                "hint_2": "Pensez aux colonnes calculées, aux fonctions et à la lisibilité des rapports."
+              },
+              "options": {
+                "a": "Une commande",
+                "b": "Un nom de table"
+              }
+            },
+            "q5": {
+              "title": "Syntaxe pour attribuer un alias",
+              "prompt": "Choisissez la meilleure valeur pour le premier blanc manquant dans l’énoncé.",
+              "hint": "Concentrez-vous sur le concept SQL manquant plutôt que sur le mot exact manquant.",
+              "help": {
+                "concept": "Le blanc doit être complété par le terme SQL qui correspond à la fonction que l’énoncé cherche à réaliser.",
+                "hint_1": "Réfléchissez à ce que la partie manquante est censée faire dans l’énoncé.",
+                "hint_2": "Choisissez le terme SQL qui complète le mieux le sens de l’énoncé."
+              },
+              "template": "La première valeur manquante est [blank1].",
+              "choices": [
+                "AS",
+                "BY",
+                "WITH",
+                "ON"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_5": {
+        "writing-readable-output": {
+          "sk1": {
+            "title": "Pourquoi la lisibilité de la sortie est importante",
+            "bodyMarkdown": "Lorsque vous écrivez des requêtes SQL, les noms de colonnes par défaut dans vos résultats proviennent souvent directement de la table ou de vos expressions. Ces noms peuvent être peu clairs, surtout lorsque vous utilisez des calculs ou des fonctions. Utiliser des **alias de colonnes** permet de rendre votre sortie plus compréhensible pour toute personne lisant vos rapports."
+          },
+          "sk2": {
+            "title": "Utiliser des alias de colonnes dans SELECT",
+            "bodyMarkdown": "Vous pouvez renommer les colonnes dans votre ensemble de résultats en utilisant le mot-clé `AS`. Par exemple, pour afficher la valeur totale de chaque commande dans la table `orders` :\n\n```sql\nSELECT id, quantity * unit_price AS line_total\nFROM orders;\n```\n\nIci, `line_total` est un alias pour la colonne calculée."
+          },
+          "sk3": {
+            "title": "Préparer les rapports pour la présentation",
+            "bodyMarkdown": "Des noms de colonnes lisibles sont particulièrement importants lorsque vous partagez des résultats avec d’autres personnes. Par exemple, vous pouvez utiliser des espaces dans les alias en les entourant de guillemets doubles :\n\n```sql\nSELECT customer_name AS \"Customer Name\", region AS \"Region\"\nFROM orders;\n```\n\nCela donne à votre sortie l’apparence d’un rapport finalisé."
+          }
+        }
+      }
+    }
+  }
+}

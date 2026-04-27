@@ -54,27 +54,27 @@
         "maxAttempts": 10,
         "steps": [
           {
-            "id": "q1_code_insert_basic",
-            "titleKey": "topics.sql.sql_module_11.matching-values-to-columns.projectSteps.q1_code_insert_basic.title",
-            "exerciseKey": "q1-code-insert-basic",
+            "id": "ex_1",
+            "titleKey": "topics.sql.sql_module_11.matching-values-to-columns.projectSteps.ex_1.title",
+            "exerciseKey": "ex-1",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": 10
           },
           {
-            "id": "q2_code_insert_null",
-            "titleKey": "topics.sql.sql_module_11.matching-values-to-columns.projectSteps.q2_code_insert_null.title",
-            "exerciseKey": "q2-code-insert-null",
+            "id": "ex_2",
+            "titleKey": "topics.sql.sql_module_11.matching-values-to-columns.projectSteps.ex_2.title",
+            "exerciseKey": "ex-2",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": 10
           },
           {
-            "id": "q3_code_insert_default",
-            "titleKey": "topics.sql.sql_module_11.matching-values-to-columns.projectSteps.q3_code_insert_default.title",
-            "exerciseKey": "q3-code-insert-default",
+            "id": "ex_3",
+            "titleKey": "topics.sql.sql_module_11.matching-values-to-columns.projectSteps.ex_3.title",
+            "exerciseKey": "ex-3",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
@@ -106,82 +106,80 @@
   ],
   "exercises": [
     {
-      "id": "q1-code-insert-basic",
+      "id": "ex-1",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_11.matching-values-to-columns.quiz.q1-code-insert-basic",
+      "messageBase": "topics.sql.sql_module_11.matching-values-to-columns.quiz.ex-1",
       "language": "sql",
       "fixedSqlDialect": "sqlite",
       "recipe": {
         "type": "sql_query",
         "datasetId": "inventory_ops",
         "resultShape": "table",
-        "solutionCode": "INSERT INTO inventory_items (name, category, price, status, is_test, notes, last_updated)\nVALUES ('Mini Notebook', 'Accessories', 5.25, 'active', 0, 'Back to school', '2026-02-15');"
+        "solutionCode": "INSERT INTO inventory_items (name, category, price, status, is_test, notes, last_updated)\nVALUES ('Mini Notebook', 'Accessories', 5.25, 'active', 0, NULL, '2026-02-15');",
+        "checkSql": "SELECT * FROM \"inventory_items\" ORDER BY 1;"
       }
     },
     {
-      "id": "q2-code-insert-null",
+      "id": "ex-2",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_11.matching-values-to-columns.quiz.q2-code-insert-null",
+      "messageBase": "topics.sql.sql_module_11.matching-values-to-columns.quiz.ex-2",
       "language": "sql",
       "fixedSqlDialect": "sqlite",
       "recipe": {
         "type": "sql_query",
         "datasetId": "inventory_ops",
         "resultShape": "table",
-        "solutionCode": "INSERT INTO inventory_items (name, category, price, status, is_test, notes, last_updated)\nVALUES ('Sample Pen', 'Accessories', 2.00, 'active', 1, NULL, '2026-02-16');"
+        "solutionCode": "INSERT INTO inventory_items (name, category, price, is_test, notes, last_updated)\nVALUES ('Trial Pen', 'Accessories', 2.00, 1, 'Test batch', '2026-02-16');",
+        "checkSql": "SELECT * FROM \"inventory_items\" ORDER BY 1;"
       }
     },
     {
-      "id": "q3-code-insert-default",
+      "id": "ex-3",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_11.matching-values-to-columns.quiz.q3-code-insert-default",
+      "messageBase": "topics.sql.sql_module_11.matching-values-to-columns.quiz.ex-3",
       "language": "sql",
       "fixedSqlDialect": "sqlite",
       "recipe": {
         "type": "sql_query",
         "datasetId": "inventory_ops",
         "resultShape": "table",
-        "solutionCode": "INSERT INTO inventory_items (name, category, price, notes, last_updated)\nVALUES ('Trial Eraser', 'Accessories', 1.50, NULL, '2026-02-17');"
+        "solutionCode": "INSERT INTO inventory_items (name, category, price, status, is_test, notes, last_updated)\nVALUES ('Sample Eraser', 'Accessories', 1.50, 'draft', 1, NULL, '2026-02-17');",
+        "checkSql": "SELECT * FROM \"inventory_items\" ORDER BY 1;"
       }
     },
     {
-      "id": "q4-multi-choice-column-matching",
+      "id": "ex-4",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_11.matching-values-to-columns.quiz.q4-multi-choice-column-matching",
+      "messageBase": "topics.sql.sql_module_11.matching-values-to-columns.quiz.ex-4",
       "optionIds": [
         "a",
-        "b",
-        "c",
-        "d",
-        "e"
+        "b"
       ],
       "expected": {
         "kind": "multi_choice",
         "optionIds": [
-          "a",
-          "b",
-          "d"
+          "a"
         ]
       }
     },
     {
-      "id": "q5-fill-blank-choice-column-list",
+      "id": "ex-5",
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_11.matching-values-to-columns.quiz.q5-fill-blank-choice-column-list",
+      "messageBase": "topics.sql.sql_module_11.matching-values-to-columns.quiz.ex-5",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "list"
+        "value": "default value"
       }
     }
   ]

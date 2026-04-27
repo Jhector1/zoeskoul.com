@@ -1,4 +1,4 @@
-import { PracticeKind, PracticePurpose } from "@prisma/client";
+import { PracticeKind, PracticePurpose } from "@zoeskoul/db";
 
 import type { Difficulty, Exercise, GenKey, TopicSlug } from "@/lib/practice/types";
 import type { TopicContext } from "@/lib/practice/generator/generatorTypes";

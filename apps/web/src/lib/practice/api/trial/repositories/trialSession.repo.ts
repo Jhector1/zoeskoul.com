@@ -1,4 +1,4 @@
-import type { Prisma, PrismaClient } from "@prisma/client";
+import type { Prisma, PrismaClient } from "@/lib/prisma";
 
 export async function findActiveTrialSession(args: {
     prisma: PrismaClient;

@@ -1,5 +1,6 @@
 export type RunSqlFn = (args: {
     code: string;
+    checkSql?: string;
     dialect: string;
     schemaSql?: string;
     seedSql?: string;

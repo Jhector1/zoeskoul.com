@@ -1,0 +1,115 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_5": {
+        "writing-readable-output": {
+          "label": "Escribir salidas legibles",
+          "summary": "Aprende cómo usar alias de columnas y expresiones en SQL para que los resultados de tus consultas sean claros y listos para presentar.",
+          "cards": {
+            "sketch0": {
+              "title": "Por qué importa una salida legible"
+            },
+            "sketch1": {
+              "title": "Usar alias de columna en SELECT"
+            },
+            "sketch2": {
+              "title": "Preparar informes para presentación"
+            },
+            "quiz": {
+              "title": "Cuestionario"
+            }
+          },
+          "quiz": {
+            "q1": {
+              "title": "Calcular y etiquetar una nueva columna",
+              "prompt": "Escribe una consulta SQL para mostrar el `id` de cada pedido, el `customer_name` y el valor total del pedido como `line_total` (calculado como `quantity * unit_price`).",
+              "hint": "Concéntrate en el concepto que se está evaluando.",
+              "help": {
+                "concept": "Piensa en el rol o la idea que se está evaluando en lugar de repetir la respuesta.",
+                "hint_1": "Elimina opciones o interpretaciones que no coincidan con la tarea.",
+                "hint_2": "Elige el concepto que mejor se ajuste a lo que te pide el ejercicio."
+              },
+              "starterCode": "-- Escribe tu consulta aquí"
+            },
+            "q2": {
+              "title": "Formatear la salida con nombres de columna legibles",
+              "prompt": "Escribe una consulta SQL para mostrar `customer_name` como \"Customer Name\" y `region` como \"Region\" para todos los pedidos.",
+              "hint": "Concéntrate en el concepto que se está evaluando.",
+              "help": {
+                "concept": "Piensa en el rol o la idea que se está evaluando en lugar de repetir la respuesta.",
+                "hint_1": "Elimina opciones o interpretaciones que no coincidan con la tarea.",
+                "hint_2": "Elige el concepto que mejor se ajuste a lo que te pide el ejercicio."
+              },
+              "starterCode": "-- Escribe tu consulta aquí"
+            },
+            "q3": {
+              "title": "Propósito de los alias de columna",
+              "prompt": "¿Por qué deberías usar alias de columna en tus consultas SQL?",
+              "hint": "Piensa en cómo se ve la salida para alguien que lee los resultados.",
+              "help": {
+                "concept": "Los alias de columna se usan para mejorar la legibilidad de los resultados de tus consultas.",
+                "hint_1": "Los alias afectan cómo se etiquetan las columnas en el resultado, no el rendimiento ni los tipos de datos.",
+                "hint_2": "Ayudan a otros a entender qué representa cada columna."
+              },
+              "options": {
+                "a": "Un comando",
+                "b": "Un nombre de tabla"
+              }
+            },
+            "q4": {
+              "title": "Identificar usos válidos de alias",
+              "prompt": "¿Cuáles de las siguientes son razones válidas para usar alias de columna? (Elige todas las que correspondan)",
+              "hint": "Considera cómo los alias afectan la salida y la comprensión de los resultados.",
+              "help": {
+                "concept": "Los alias ayudan a clarificar, formatear y desambiguar columnas en los conjuntos de resultados.",
+                "hint_1": "No se usan para filtrar, sino para etiquetar y dar claridad.",
+                "hint_2": "Piensa en columnas calculadas, funciones y en hacer los informes legibles."
+              },
+              "options": {
+                "a": "Un comando",
+                "b": "Un nombre de tabla"
+              }
+            },
+            "q5": {
+              "title": "Sintaxis para asignar un alias",
+              "prompt": "Elige el mejor valor para el primer espacio en blanco que falta en la declaración.",
+              "hint": "Concéntrate en el concepto SQL que falta, no en la palabra exacta.",
+              "help": {
+                "concept": "El espacio en blanco debe llenarse con el término SQL que coincida con la función que la declaración intenta realizar.",
+                "hint_1": "Piensa en lo que se supone que debe hacer la parte que falta en la declaración.",
+                "hint_2": "Elige el término SQL que mejor complete el significado de la declaración."
+              },
+              "template": "El primer valor que falta es [blank1].",
+              "choices": [
+                "AS",
+                "BY",
+                "WITH",
+                "ON"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_5": {
+        "writing-readable-output": {
+          "sk1": {
+            "title": "Por qué importa una salida legible",
+            "bodyMarkdown": "Cuando escribes consultas SQL, los nombres de columna predeterminados en tus resultados suelen venir directamente de la tabla o de tus expresiones. Estos nombres pueden ser poco claros, especialmente cuando usas cálculos o funciones. Usar **alias de columna** ayuda a que tu salida sea más comprensible para cualquiera que lea tus informes."
+          },
+          "sk2": {
+            "title": "Usar alias de columna en SELECT",
+            "bodyMarkdown": "Puedes renombrar columnas en tu conjunto de resultados usando la palabra clave `AS`. Por ejemplo, para mostrar el valor total de cada pedido en la tabla `orders`:\n\n```sql\nSELECT id, quantity * unit_price AS line_total\nFROM orders;\n```\n\nAquí, `line_total` es un alias para la columna calculada."
+          },
+          "sk3": {
+            "title": "Preparar informes para presentación",
+            "bodyMarkdown": "Los nombres de columna legibles son especialmente importantes al compartir resultados con otros. Por ejemplo, puedes usar espacios en los alias envolviéndolos entre comillas dobles:\n\n```sql\nSELECT customer_name AS \"Customer Name\", region AS \"Region\"\nFROM orders;\n```\n\nEsto hace que tu salida se vea más como un informe terminado."
+          }
+        }
+      }
+    }
+  }
+}

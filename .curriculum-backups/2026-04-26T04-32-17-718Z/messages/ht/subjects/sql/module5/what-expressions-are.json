@@ -1,0 +1,112 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_5": {
+        "what-expressions-are": {
+          "label": "Kisa ekspresyon ye",
+          "summary": "Konprann kisa ekspresyon ye nan SQL, kijan yo itilize yo pou kreye nouvo valè nan rechèch, epi poukisa yo esansyèl pou kolòn kalkile yo.",
+          "cards": {
+            "sketch0": {
+              "title": "Kisa yon Ekspresyon ye nan SQL?"
+            },
+            "sketch1": {
+              "title": "Ekspresyon ak Fonksyon ak Alias"
+            },
+            "quiz": {
+              "title": "Kesyonè"
+            }
+          },
+          "quiz": {
+            "code-1": {
+              "title": "Kalkile yon nouvo kolòn ak yon ekspresyon",
+              "prompt": "Ekri yon rechèch SQL pou chwazi `id`, `quantity`, `unit_price`, ak yon nouvo kolòn ki rele `line_total` ki miltipliye `quantity` ak `unit_price` soti nan tab `orders` la.",
+              "hint": "Konsantre sou konsèp la yo ap teste a.",
+              "help": {
+                "concept": "Panse a wòl oswa lide yo ap teste a olye pou w repete repons lan.",
+                "hint_1": "Elimine chwa oswa entèpretasyon ki pa koresponn ak sa yo mande a.",
+                "hint_2": "Chwazi konsèp ki pi byen adapte ak sa egzèsis la mande w fè a."
+              },
+              "starterCode": "SELECT id, quantity, unit_price\n-- Add your expression here\nFROM orders;"
+            },
+            "code-2": {
+              "title": "Itilize yon ekspresyon ak yon fonksyon",
+              "prompt": "Ekri yon rechèch SQL pou chwazi `id` ak yon nouvo kolòn ki rele `double_quantity` ki se de fwa valè `quantity` pou chak lòd.",
+              "hint": "Konsantre sou konsèp la yo ap teste a.",
+              "help": {
+                "concept": "Panse a wòl oswa lide yo ap teste a olye pou w repete repons lan.",
+                "hint_1": "Elimine chwa oswa entèpretasyon ki pa koresponn ak sa yo mande a.",
+                "hint_2": "Chwazi konsèp ki pi byen adapte ak sa egzèsis la mande w fè a."
+              },
+              "starterCode": "SELECT id,\n-- Your expression here\nFROM orders;"
+            },
+            "single-1": {
+              "title": "Idantifye yon ekspresyon",
+              "prompt": "Ki nan sa ki annapre yo ki se yon egzanp ekspresyon nan SQL?",
+              "hint": "Chèche yon kalkil oswa transfòmasyon ki itilize kolòn oswa valè.",
+              "help": {
+                "concept": "Yon ekspresyon se nenpòt konbinezon valab de kolòn, valè, operatè, oswa fonksyon ki retounen yon sèl valè.",
+                "hint_1": "Ekspresyon souvan itilize aritmetik oswa fonksyon.",
+                "hint_2": "Miltipliye de kolòn se yon egzanp klasik ekspresyon."
+              },
+              "options": {
+                "a": "a. SELECT * FROM orders;",
+                "b": "b. quantity * unit_price",
+                "c": "c. FROM orders",
+                "d": "d. AS line_total"
+              }
+            },
+            "multi-1": {
+              "title": "Ki nan sa ki annapre yo ki se ekspresyon SQL valab?",
+              "prompt": "Chwazi tout opsyon ki se ekspresyon SQL valab.",
+              "hint": "Ekspresyon yo ka aritmetik, fonksyon, oswa referans dirèk kolòn.",
+              "help": {
+                "concept": "Ekspresyon valab yo enkli operasyon aritmetik, apèl fonksyon, e menm referans yon sèl kolòn.",
+                "hint_1": "Panse a sa ki ka parèt nan yon SELECT pou pwodwi yon valè.",
+                "hint_2": "Tou de kalkil ak apèl fonksyon se ekspresyon valab."
+              },
+              "options": {
+                "a": "a. quantity + 10",
+                "b": "b. ROUND(unit_price, 1)",
+                "c": "c. orders",
+                "d": "d. status"
+              }
+            },
+            "fill-1": {
+              "title": "Ranpli espas vid la: Rezilta ekspresyon",
+              "prompt": "Nan SQL, yon ekspresyon toujou pwodui yon ______.",
+              "hint": "Kisa yon ekspresyon retounen?",
+              "help": {
+                "concept": "Yon ekspresyon nan SQL toujou evalye a tèm ki manke a.",
+                "hint_1": "Panse a sa yon kalkil oswa fonksyon bay kòm rezilta.",
+                "hint_2": "Se pa yon tab oswa non kolòn, men yon sèl rezilta."
+              },
+              "template": "Nan SQL, yon ekspresyon toujou pwodui yon {blank}.",
+              "choices": [
+                "tab",
+                "yon sèl valè",
+                "non kolòn",
+                "liy"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_5": {
+        "what-expressions-are": {
+          "sketch-1": {
+            "title": "Kisa yon Ekspresyon ye nan SQL?",
+            "bodyMarkdown": "Yon **ekspresyon** nan SQL se nenpòt konbinezon de valè, kolòn, operatè, ak fonksyon ki pwodui yon sèl valè. Ekspresyon yo souvan itilize nan klaoz `SELECT` la pou kalkile nouvo kolòn oswa transfòme done. Pa egzanp, ou ka miltipliye de kolòn pou jwenn yon nouvo valè:\n\n```sql\nSELECT id, quantity * unit_price AS line_total\nFROM orders;\n```\n\nIsit la, `quantity * unit_price` se yon ekspresyon ki kalkile pri total pou chak liy lòd."
+          },
+          "sketch-2": {
+            "title": "Ekspresyon ak Fonksyon ak Alias",
+            "bodyMarkdown": "Ekspresyon yo ka itilize tou fonksyon SQL ki deja egziste. Pa egzanp, ou ka awondi yon valè kalkile:\n\n```sql\nSELECT id, ROUND(quantity * unit_price, 2) AS rounded_total\nFROM orders;\n```\n\nFonksyon `ROUND()` lan aplike sou ekspresyon an, epi rezilta a resevwa alias `rounded_total` pou plis klarte."
+          }
+        }
+      }
+    }
+  }
+}

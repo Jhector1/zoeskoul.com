@@ -1,4 +1,4 @@
-import { PracticeKind } from "@prisma/client";
+import { PracticeKind } from "@zoeskoul/db";
 
 function toNumberGrid(x: any): number[][] | null {
     if (!x) return null;

@@ -1,0 +1,106 @@
+{
+  "title": "Changing multiple columns",
+  "summary": "Learn how to update more than one column at a time in a SQL UPDATE statement, using the inventory_items table as an example.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch-1",
+      "title": "Updating Multiple Columns at Once",
+      "bodyMarkdown": "You can update several columns in a single SQL UPDATE statement by separating each column assignment with a comma. For example, suppose you want to set both the `status` and `last_updated` columns for all draft items in the `inventory_items` table:\n\n```sql\nUPDATE inventory_items\nSET status = 'active', last_updated = '2026-02-10'\nWHERE status = 'draft';\n```\n\nThis statement changes the `status` and `last_updated` fields for every row where `status` is currently `'draft'`. Always use a WHERE clause to avoid updating every row by accident."
+    },
+    {
+      "id": "sketch-2",
+      "title": "Preview Before Updating",
+      "bodyMarkdown": "Before running an UPDATE that changes multiple columns, it's a good habit to preview which rows will be affected. You can do this with a SELECT statement using the same WHERE condition:\n\n```sql\nSELECT id, name, status, last_updated\nFROM inventory_items\nWHERE status = 'draft';\n```\n\nThis helps you confirm that your UPDATE will only affect the intended rows."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "q1-multi-update-code",
+      "kind": "code_input",
+      "title": "Update two columns for test items",
+      "prompt": "Update all rows in the inventory_items table where is_test = 1. Set status to 'inactive' and last_updated to '2026-02-15'.",
+      "starterCode": "-- Write your SQL UPDATE statement here",
+      "solutionCode": "UPDATE inventory_items\nSET status = 'inactive', last_updated = '2026-02-15'\nWHERE is_test = 1;",
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query",
+      "hint": "Focus on the SQL task being asked for, not on copying final query text.",
+      "help": {
+        "concept": "Build the query from the operation the exercise is testing.",
+        "hint_1": "Think about which clauses or functions are required for the task.",
+        "hint_2": "Construct the query based on what result the exercise expects, not by repeating exact solution wording."
+      }
+    },
+    {
+      "id": "q2-preview-select-code",
+      "kind": "code_input",
+      "title": "Preview rows before updating",
+      "prompt": "Write a SELECT statement to preview all rows in inventory_items where category is 'Accessories' and status is 'draft'. Show id, name, and status.",
+      "starterCode": "-- Write your SELECT statement here",
+      "solutionCode": "SELECT id, name, status\nFROM inventory_items\nWHERE category = 'Accessories' AND status = 'draft';",
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query",
+      "hint": "Focus on the concept being tested.",
+      "help": {
+        "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+        "hint_1": "Eliminate choices or interpretations that do not match the task.",
+        "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+      }
+    },
+    {
+      "id": "q3-update-multi-columns-code",
+      "kind": "code_input",
+      "title": "Update price and notes for a specific item",
+      "prompt": "Update the inventory_items table so that the item with id = 3 has price set to 49.99 and notes set to 'Price updated'.",
+      "starterCode": "-- Write your SQL UPDATE statement here",
+      "solutionCode": "UPDATE inventory_items\nSET price = 49.99, notes = 'Price updated'\nWHERE id = 3;",
+      "datasetId": "inventory_ops",
+      "recipeType": "sql_query",
+      "hint": "Focus on the SQL task being asked for, not on copying final query text.",
+      "help": {
+        "concept": "Build the query from the operation the exercise is testing.",
+        "hint_1": "Think about which clauses or functions are required for the task.",
+        "hint_2": "Construct the query based on what result the exercise expects, not by repeating exact solution wording."
+      }
+    },
+    {
+      "id": "q4-multi-choice-when-update-multi-columns",
+      "kind": "multi_choice",
+      "title": "When should you update multiple columns at once?",
+      "prompt": "Which of the following are good reasons to update multiple columns in a single UPDATE statement? Select all that apply.",
+      "options": [
+        "[object Object]",
+        "A command"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Think about efficiency and data consistency.",
+      "help": {
+        "concept": "Updating multiple columns at once is useful when you want to keep related data changes together and reduce the number of queries.",
+        "hint_1": "Consider if the changes are related or need to happen together.",
+        "hint_2": "Also think about minimizing the number of database operations."
+      }
+    },
+    {
+      "id": "q5-fill-blank-choice-keyword",
+      "kind": "fill_blank_choice",
+      "title": "Keyword for updating multiple columns",
+      "prompt": "Which SQL keyword is used to assign new values to columns in an UPDATE statement?",
+      "template": "UPDATE inventory_items ___ status = 'active', last_updated = '2026-02-10' WHERE id = 1;",
+      "choices": [
+        "SET",
+        "WHERE",
+        "FROM",
+        "VALUES"
+      ],
+      "correctValue": "SET",
+      "hint": "It's the word that comes after UPDATE and before the column assignments.",
+      "help": {
+        "concept": "The the missing term keyword is used in SQL to specify which columns should be updated and their new values.",
+        "hint_1": "It's a three-letter word.",
+        "hint_2": "It comes right before listing the columns and values to update."
+      }
+    }
+  ]
+}

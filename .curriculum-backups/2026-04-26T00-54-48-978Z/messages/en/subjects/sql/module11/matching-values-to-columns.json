@@ -1,0 +1,115 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_11": {
+        "matching-values-to-columns": {
+          "label": "Matching values to columns",
+          "summary": "Learn how to correctly match values to columns when inserting data into a table. Understand why specifying columns in your INSERT statements is safer, and how to handle missing or default values.",
+          "cards": {
+            "sketch0": {
+              "title": "Why match values to columns?"
+            },
+            "sketch1": {
+              "title": "What happens if you skip a column?"
+            },
+            "sketch2": {
+              "title": "Safer inserts with explicit columns"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
+          "quiz": {
+            "q1-code-insert-basic": {
+              "title": "Insert a new inventory item with all columns specified",
+              "prompt": "Write an INSERT statement that adds a new row to the `inventory_items` table with these values:\n- name: 'Mini Notebook'\n- category: 'Accessories'\n- price: 5.25\n- status: 'active'\n- is_test: 0\n- notes: 'Back to school'\n- last_updated: '2026-02-15'\n\nMake sure to specify all columns except `id` (which is auto-incremented).",
+              "hint": "Focus on the SQL task being asked for, not on copying final query text.",
+              "help": {
+                "concept": "Build the query from the operation the exercise is testing.",
+                "hint_1": "Think about which clauses or functions are required for the task.",
+                "hint_2": "Construct the query based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "-- Write your INSERT statement below"
+            },
+            "q2-code-insert-null": {
+              "title": "Insert a row with a NULL value",
+              "prompt": "Add a new item to `inventory_items` with these values:\n- name: 'Sample Pen'\n- category: 'Accessories'\n- price: 2.00\n- status: 'active'\n- is_test: 1\n- notes: (leave blank)\n- last_updated: '2026-02-16'\n\nInsert the row so that the `notes` column is set to NULL.",
+              "hint": "Focus on the SQL task being asked for, not on copying final query text.",
+              "help": {
+                "concept": "Build the query from the operation the exercise is testing.",
+                "hint_1": "Think about which clauses or functions are required for the task.",
+                "hint_2": "Construct the query based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "-- Write your INSERT statement below"
+            },
+            "q3-code-insert-default": {
+              "title": "Insert a row using default values",
+              "prompt": "Insert a new inventory item with these values:\n- name: 'Trial Eraser'\n- category: 'Accessories'\n- price: 1.50\n- last_updated: '2026-02-17'\n\nLet the `status` and `is_test` columns use their default values, and set `notes` to NULL. Only specify the columns you are providing values for.",
+              "hint": "Focus on the SQL task being asked for, not on copying final query text.",
+              "help": {
+                "concept": "Build the query from the operation the exercise is testing.",
+                "hint_1": "Think about which clauses or functions are required for the task.",
+                "hint_2": "Construct the query based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "-- Write your INSERT statement below"
+            },
+            "q4-multi-choice-column-matching": {
+              "title": "Which statements about matching values to columns are true?",
+              "prompt": "Select all statements that are true about matching values to columns in INSERT statements.",
+              "hint": "Think about safety, readability, and what happens if you omit columns.",
+              "help": {
+                "concept": "Explicitly listing columns in INSERT statements helps prevent errors and makes your code more robust.",
+                "hint_1": "Consider what happens if the table structure changes or if you omit a column.",
+                "hint_2": "Remember that default values and NULLs can be used for omitted columns, but only if allowed."
+              },
+              "options": {
+                "a": "a. Listing columns in the INSERT statement makes your code safer.",
+                "b": "b. If you omit a column with a default value, the default will be used.",
+                "c": "c. You must always provide a value for every column, even if it has a default.",
+                "d": "d. Omitting the column list can cause data to be inserted into the wrong columns if the table changes.",
+                "e": "e. You cannot insert NULL into any column."
+              }
+            },
+            "q5-fill-blank-choice-column-list": {
+              "title": "Fill in the blank: safer INSERT statements",
+              "prompt": "Choose the best value for the first missing blank in the statement.",
+              "hint": "Think about what you do with the column names in the INSERT statement.",
+              "help": {
+                "concept": "Explicitly naming columns in your INSERT statement reduces errors and improves clarity.",
+                "hint_1": "Do you write out the column names or leave them out?",
+                "hint_2": "The answer is a verb describing what you do with the columns in the statement."
+              },
+              "template": "The first missing value is [blank1].",
+              "choices": [
+                "list",
+                "ignore",
+                "delete",
+                "rename"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_11": {
+        "matching-values-to-columns": {
+          "sketch-1": {
+            "title": "Why match values to columns?",
+            "bodyMarkdown": "When inserting data into a table, it's important to match each value to the correct column. This is especially true if the table structure changes or if not all columns are being filled. For example, in the `inventory_items` table, you can insert a new row by explicitly listing the columns:\n\n```sql\nINSERT INTO inventory_items (name, category, price, status, is_test, notes, last_updated)\nVALUES ('Desk Organizer', 'Accessories', 13.50, 'active', 0, NULL, '2026-02-10');\n```\n\nHere, each value matches the column by position. If you omit the column list, you must provide a value for every column in the table, in the correct order."
+          },
+          "sketch-2": {
+            "title": "What happens if you skip a column?",
+            "bodyMarkdown": "If you skip a column in your INSERT statement, you must either provide a default value, allow NULL, or explicitly list only the columns you want to fill. For example, the `notes` column in `inventory_items` allows NULL, so you can omit it:\n\n```sql\nINSERT INTO inventory_items (name, category, price, status, is_test, last_updated)\nVALUES ('Sample Keychain', 'Accessories', 3.00, 'active', 0, '2026-02-11');\n```\n\nThe `notes` column will be set to NULL for this row."
+          },
+          "sketch-3": {
+            "title": "Safer inserts with explicit columns",
+            "bodyMarkdown": "Always specifying the column names in your INSERT statement makes your code safer and more readable. If the table structure changes (for example, a new column is added), your insert statements are less likely to break or insert data into the wrong columns. For example:\n\n```sql\nINSERT INTO inventory_items (name, category, price, status, is_test, notes, last_updated)\nVALUES ('Travel Mug', 'Kitchen', 8.99, 'draft', 1, 'Promo item', '2026-02-12');\n```\n\nThis approach avoids accidental data mismatches."
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,7 +1,7 @@
 // src/app/api/practice/session/start/route.ts
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { PracticeDifficulty } from "@prisma/client";
+import { PracticeDifficulty } from "@zoeskoul/db";
 import { getActor } from "@/lib/practice/actor";
 // import { getPracticeActor } from "@/lib/practice/actor";
 

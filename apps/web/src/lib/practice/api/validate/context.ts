@@ -1,4 +1,4 @@
-import type { PrismaClient } from "@prisma/client";
+import type { PrismaClient } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
 import { attachGuestCookie } from "@/lib/practice/actor";

@@ -1,4 +1,4 @@
-import { FeatureKey } from "@prisma/client";
+import { FeatureKey } from "@zoeskoul/db";
 import type { AccessSnapshot } from "./accessSnapshot";
 
 export type IdeCapability =

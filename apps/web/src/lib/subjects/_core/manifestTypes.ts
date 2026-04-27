@@ -1,5 +1,5 @@
 import type { ExerciseKind, WorkspaceLanguage, SqlDialect } from "@/lib/practice/types";
-import type { PracticeKind } from "@prisma/client";
+import type { PracticeKind } from "@zoeskoul/db";
 
 export type ManifestSqlRuntimeDefaults = {
     kind: "sql";
@@ -167,6 +167,7 @@ export type ManifestRecipe =
     type: "sql_query";
     datasetId?: string;
     solutionCode: string;
+    checkSql?: string;
     resultShape?: "table";
     ignoreRowOrder?: boolean;
 }

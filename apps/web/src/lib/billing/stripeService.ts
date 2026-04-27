@@ -3,7 +3,7 @@ import "server-only";
 import {prisma} from "@/lib/prisma";
 import {stripe} from "@/lib/stripe";
 import type Stripe from "stripe";
-import type {StripeSubscriptionStatus} from "@prisma/client";
+import type { StripeSubscriptionStatus } from "@zoeskoul/db";
 import { formatMoneyMinor } from "@/i18n/money";
 
 function priceUnitAmountMinor(p: Stripe.Price): number | null {

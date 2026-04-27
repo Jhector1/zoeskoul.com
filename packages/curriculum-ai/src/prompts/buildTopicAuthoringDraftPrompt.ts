@@ -1,6 +1,6 @@
-import type { TopicSeed } from "@zoeskoul/curriculum-contracts";
-import type { SubjectShapePack } from "@zoeskoul/curriculum-profiles";
-import { renderExercisePolicyPrompt } from "./renderExercisePolicyPrompt.js";
+import type {TopicSeed} from "@zoeskoul/curriculum-contracts";
+import type {SubjectShapePack} from "@zoeskoul/curriculum-profiles";
+import {renderExercisePolicyPrompt} from "./renderExercisePolicyPrompt.js";
 
 export function buildTopicAuthoringDraftPrompt(args: {
     seed: TopicSeed;
@@ -28,6 +28,18 @@ export function buildTopicAuthoringDraftPrompt(args: {
                 "",
                 "The seed also includes moduleDataset when available.",
                 "Use its schema, table names, columns, and sample rows to design examples and exercises that fit the real dataset.",
+                "",
+                "For SQL relationship/join topics:",
+                "- If the module dataset does not contain two related tables, do not generate SELECT JOIN code_input exercises.",
+                "- If teaching relationships with a single-table dataset, use conceptual quiz questions or CREATE TABLE schema-design exercises with checkSql.",
+                "- Never invent tables like orders, customers, enrollments, or order_items unless they exist in moduleDataset.schemaSql or the exercise itself creates them.",
+                "- SQL code_input exercises that use SELECT do not need checkSql.",
+                "- SQL code_input exercises that use INSERT, UPDATE, DELETE, REPLACE, CREATE, ALTER, or DROP should include checkSql.",
+                "- checkSql must be a SELECT-style query that verifies the final database state after the statement runs.",
+                "- For INSERT, checkSql should select the inserted row or final table state.",
+                "- For UPDATE, checkSql should select the updated rows or final table state.",
+                "- For DELETE, checkSql should select the final table state.",
+                "- For CREATE TABLE or ALTER TABLE, checkSql can query sqlite_master to verify the table definition.",
             ]
             : [];
 
@@ -123,6 +135,12 @@ export function buildTopicAuthoringDraftPrompt(args: {
             '- "solutionCode"',
             '- optional "datasetId"',
             '- optional "recipeType"',
+            '- optional "checkSql" for SQL mutation statements',
+            "",
+            "Publishing rule:",
+            "- code_input authoring items are published as project practice automatically.",
+            "- single_choice, multi_choice, drag_reorder, and fill_blank_choice are published as quiz practice.",
+            "- You may include projectDraft, but the compiler will also create a project card automatically for code_input exercises.",
             "",
             ...sqlDatasetRules,
             "",

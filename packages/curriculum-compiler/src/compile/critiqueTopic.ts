@@ -12,6 +12,7 @@ import {
 import { validateBlueprint } from "../validate/validateBlueprint.js";
 import { evaluateTopicDraft } from "../quality/evaluateTopicDraft.js";
 import { writeTopicReports } from "../reports/writeTopicReports.js";
+import { buildTopicBundleFromDraft } from "../emit/buildTopicBundleFromDraft.js";
 import type { CompileProgressCallback } from "./compileProgress.js";
 import { resolvePlan } from "../spec/resolvePlan.js";
 import { findTopicPlanNode } from "../plan/findTopicPlanNode.js";
@@ -122,6 +123,18 @@ export async function critiqueTopic(args: {
     });
 
     const repairedDraft = evaluation.draft as TopicAuthoringDraft;
+    const topicBundle = buildTopicBundleFromDraft({
+        shape,
+        seed,
+        draft: repairedDraft,
+        moduleOrder: node.moduleIndex,
+        sectionOrder: node.sectionOrder,
+    });
+    const goldenReport = await profileServices.validateGolden({
+        seed,
+        draft: repairedDraft,
+        topicBundle,
+    });
 
     await writeTopicReports({
         subjectSlug: args.blueprint.subjectSlug,
@@ -132,6 +145,8 @@ export async function critiqueTopic(args: {
         repairReport: evaluation.repairReport,
         critiqueReport: evaluation.critiqueReport,
         semanticReport: evaluation.semanticReport,
+        goldenReport,
+        topicBundle,
     });
 
     advanceProgress({
@@ -158,5 +173,6 @@ export async function critiqueTopic(args: {
         repairReport: evaluation.repairReport,
         critiqueReport: evaluation.critiqueReport,
         semanticReport: evaluation.semanticReport,
+        goldenReport,
     };
 }

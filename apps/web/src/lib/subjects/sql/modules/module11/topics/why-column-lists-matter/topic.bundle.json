@@ -14,14 +14,14 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.sql.sql_module_11.why-column-lists-matter.cards.sketch0.title",
-      "sketchId": "sketch-1",
+      "sketchId": "sketch-why-column-lists",
       "height": 420
     },
     {
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.sql.sql_module_11.why-column-lists-matter.cards.sketch1.title",
-      "sketchId": "sketch-2",
+      "sketchId": "sketch-defaults-and-nulls",
       "height": 420
     },
     {
@@ -47,27 +47,27 @@
         "maxAttempts": 10,
         "steps": [
           {
-            "id": "ex_1",
-            "titleKey": "topics.sql.sql_module_11.why-column-lists-matter.projectSteps.ex_1.title",
-            "exerciseKey": "ex-1",
+            "id": "code_insert_without_column_list",
+            "titleKey": "topics.sql.sql_module_11.why-column-lists-matter.projectSteps.code_insert_without_column_list.title",
+            "exerciseKey": "code-insert-without-column-list",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": 10
           },
           {
-            "id": "ex_2",
-            "titleKey": "topics.sql.sql_module_11.why-column-lists-matter.projectSteps.ex_2.title",
-            "exerciseKey": "ex-2",
+            "id": "code_insert_with_column_list",
+            "titleKey": "topics.sql.sql_module_11.why-column-lists-matter.projectSteps.code_insert_with_column_list.title",
+            "exerciseKey": "code-insert-with-column-list",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": 10
           },
           {
-            "id": "ex_3",
-            "titleKey": "topics.sql.sql_module_11.why-column-lists-matter.projectSteps.ex_3.title",
-            "exerciseKey": "ex-3",
+            "id": "code_insert_missing_required",
+            "titleKey": "topics.sql.sql_module_11.why-column-lists-matter.projectSteps.code_insert_missing_required.title",
+            "exerciseKey": "code-insert-missing-required",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
@@ -79,97 +79,94 @@
   ],
   "sketches": [
     {
-      "id": "sketch-1",
+      "id": "sketch-why-column-lists",
       "archetype": "paragraph",
-      "titleKey": "sketches.sql.sql_module_11.why-column-lists-matter.sketch-1.title",
-      "bodyKey": "sketches.sql.sql_module_11.why-column-lists-matter.sketch-1.bodyMarkdown"
+      "titleKey": "sketches.sql.sql_module_11.why-column-lists-matter.sketch-why-column-lists.title",
+      "bodyKey": "sketches.sql.sql_module_11.why-column-lists-matter.sketch-why-column-lists.bodyMarkdown"
     },
     {
-      "id": "sketch-2",
+      "id": "sketch-defaults-and-nulls",
       "archetype": "paragraph",
-      "titleKey": "sketches.sql.sql_module_11.why-column-lists-matter.sketch-2.title",
-      "bodyKey": "sketches.sql.sql_module_11.why-column-lists-matter.sketch-2.bodyMarkdown"
+      "titleKey": "sketches.sql.sql_module_11.why-column-lists-matter.sketch-defaults-and-nulls.title",
+      "bodyKey": "sketches.sql.sql_module_11.why-column-lists-matter.sketch-defaults-and-nulls.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "ex-1",
+      "id": "code-insert-without-column-list",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_11.why-column-lists-matter.quiz.ex-1",
+      "messageBase": "topics.sql.sql_module_11.why-column-lists-matter.quiz.code-insert-without-column-list",
       "language": "sql",
       "fixedSqlDialect": "sqlite",
       "recipe": {
         "type": "sql_query",
         "datasetId": "inventory_ops",
         "resultShape": "table",
-        "solutionCode": "INSERT INTO inventory_items (name, category, price) VALUES ('Desk Organizer', 'Accessories', 8.50);",
-        "checkSql": "SELECT name, category, price, status, is_test, notes FROM inventory_items WHERE name = 'Desk Organizer';"
+        "solutionCode": "INSERT INTO inventory_items VALUES (9, 'Sample Coaster', 'Accessories', 3.50, 'active', 0, NULL, '2026-02-12');",
+        "checkSql": "SELECT * FROM \"inventory_items\" ORDER BY 1;"
       }
     },
     {
-      "id": "ex-2",
+      "id": "code-insert-with-column-list",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_11.why-column-lists-matter.quiz.ex-2",
+      "messageBase": "topics.sql.sql_module_11.why-column-lists-matter.quiz.code-insert-with-column-list",
       "language": "sql",
       "fixedSqlDialect": "sqlite",
       "recipe": {
         "type": "sql_query",
         "datasetId": "inventory_ops",
         "resultShape": "table",
-        "solutionCode": "INSERT INTO inventory_items VALUES (8, 'Sample Lamp', 'Decor', 22.00, 'active', 0, NULL, '2026-02-11');",
-        "checkSql": "SELECT id, name, category, price, status, is_test, notes, last_updated FROM inventory_items WHERE id = 8;"
+        "solutionCode": "INSERT INTO inventory_items (id, name, category, price, last_updated) VALUES (10, 'Test Keychain', 'Accessories', 2.00, '2026-02-13');",
+        "checkSql": "SELECT * FROM \"inventory_items\" ORDER BY 1;"
       }
     },
     {
-      "id": "ex-3",
+      "id": "code-insert-missing-required",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_11.why-column-lists-matter.quiz.ex-3",
+      "messageBase": "topics.sql.sql_module_11.why-column-lists-matter.quiz.code-insert-missing-required",
       "language": "sql",
       "fixedSqlDialect": "sqlite",
       "recipe": {
         "type": "sql_query",
         "datasetId": "inventory_ops",
         "resultShape": "table",
-        "solutionCode": "INSERT INTO inventory_items (name, category, price, notes) VALUES ('Trial Pen', 'Accessories', 2.00, NULL);",
-        "checkSql": "SELECT name, category, price, status, is_test, notes FROM inventory_items WHERE name = 'Trial Pen';"
+        "solutionCode": "INSERT INTO inventory_items (id, category, price, last_updated) VALUES (11, 'Decor', 6.00, '2026-02-14'); -- This will fail because 'name' is required",
+        "checkSql": "SELECT * FROM \"inventory_items\" ORDER BY 1;"
       }
     },
     {
-      "id": "ex-4",
+      "id": "multi-why-column-list",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_11.why-column-lists-matter.quiz.ex-4",
+      "messageBase": "topics.sql.sql_module_11.why-column-lists-matter.quiz.multi-why-column-list",
       "optionIds": [
         "a",
-        "b",
-        "c",
-        "d"
+        "b"
       ],
       "expected": {
         "kind": "multi_choice",
         "optionIds": [
-          "a",
-          "b"
+          "a"
         ]
       }
     },
     {
-      "id": "ex-5",
+      "id": "fill-blank-default-value",
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_11.why-column-lists-matter.quiz.ex-5",
+      "messageBase": "topics.sql.sql_module_11.why-column-lists-matter.quiz.fill-blank-default-value",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "default value"
+        "value": "'draft'"
       }
     }
   ]

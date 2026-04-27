@@ -1,16 +1,20 @@
 import { buildTerminalExpectedExample } from "../expectedExample.js";
-
-function fillTemplate(template: string, vars: Record<string, string | number>) {
-  return template.replace(/\{([a-zA-Z0-9_]+)\}/g, (_, key) => String(vars[key] ?? ""));
-}
+import {
+  buildTemplateIoExpected,
+  fillTemplate,
+  resolveTemplateIoVars,
+} from "../codeInputExpected.js";
 
 export const buildTemplateIoRecipe = (def: any, args: any, resolved: any) => {
-  const vars: Record<string, string | number> = args.vars ?? {};
-  const tests = def.recipe.tests.map((t: any) => ({
-    stdin: t.stdinTemplate ? fillTemplate(t.stdinTemplate, vars) : undefined,
-    stdout: fillTemplate(t.stdoutTemplate, vars),
-    match: t.match ?? "exact"
-  }));
+  const vars = resolveTemplateIoVars({
+    recipe: def.recipe,
+    vars: args.vars,
+  });
+  const expected = buildTemplateIoExpected({
+    recipe: def.recipe,
+    vars,
+  });
+  const tests = expected.tests;
 
   const expectedExample = buildTerminalExpectedExample({ def, resolved, tests });
 
@@ -26,13 +30,7 @@ export const buildTemplateIoRecipe = (def: any, args: any, resolved: any) => {
     starterCode: resolved.starterCode,
     help: resolved.help,
     hint: resolved.hint,
-    expected: {
-      kind: "code_input",
-      tests,
-      ...(def.recipe.solutionTemplate
-        ? { solutionCode: fillTemplate(def.recipe.solutionTemplate, vars) }
-        : {})
-    },
+    expected,
     expectedExample
   };
 };

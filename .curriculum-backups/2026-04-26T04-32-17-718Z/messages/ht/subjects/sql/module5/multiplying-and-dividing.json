@@ -1,0 +1,115 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_5": {
+        "multiplying-and-dividing": {
+          "label": "Miltiplikasyon ak divizyon",
+          "summary": "Miltipliye ak divize nan Kolòn Kalkile ak Ekspresyon SQL",
+          "cards": {
+            "sketch0": {
+              "title": "Miltipliye Kolòn nan SQL"
+            },
+            "sketch1": {
+              "title": "Divize Kolòn nan SQL"
+            },
+            "sketch2": {
+              "title": "Itilize Alias pou Fasilite Lekti"
+            },
+            "quiz": {
+              "title": "Kesyonè"
+            }
+          },
+          "quiz": {
+            "q1": {
+              "title": "Kalkile total liy pou chak kòmann",
+              "prompt": "Ekri yon demann SQL pou chwazi `id`, `quantity`, `unit_price`, ak yon nouvo kolòn ki rele `line_total` (ki se `quantity` miltipliye pa `unit_price`) nan tablo `orders` la.",
+              "hint": "Konsantre sou konsèp yo ap teste a.",
+              "help": {
+                "concept": "Reflechi sou wòl oswa lide yo ap teste a olye pou w repete repons lan.",
+                "hint_1": "Elimine chwa oswa entèpretasyon ki pa koresponn ak sa yo mande a.",
+                "hint_2": "Chwazi konsèp ki pi byen adapte ak sa egzèsis la mande w fè a."
+              },
+              "starterCode": "SELECT id, quantity, unit_price\nFROM orders;"
+            },
+            "q2": {
+              "title": "Kalkile pri inite mwayèn pa kòmann",
+              "prompt": "Ekri yon demann SQL pou chwazi `id`, `quantity`, `unit_price`, ak yon nouvo kolòn ki rele `avg_price` ki divize valè total kòmann lan (`quantity * unit_price`) pa `quantity` pou chak kòmann.",
+              "hint": "Konsantre sou konsèp yo ap teste a.",
+              "help": {
+                "concept": "Reflechi sou wòl oswa lide yo ap teste a olye pou w repete repons lan.",
+                "hint_1": "Elimine chwa oswa entèpretasyon ki pa koresponn ak sa yo mande a.",
+                "hint_2": "Chwazi konsèp ki pi byen adapte ak sa egzèsis la mande w fè a."
+              },
+              "starterCode": "SELECT id, quantity, unit_price\nFROM orders;"
+            },
+            "q3": {
+              "title": "Objektif itilizasyon alias nan kolòn kalkile",
+              "prompt": "Poukisa ou ta dwe itilize mo kle `AS` pou bay yon alias nan yon kolòn kalkile nan SQL?",
+              "hint": "Panse a kijan rezilta a parèt epi kijan ou refere w ak kolòn yo.",
+              "help": {
+                "concept": "Alias fè rezilta ou pi fasil pou li epi pèmèt ou refere w ak kolòn kalkile yo ak yon non klè.",
+                "hint_1": "San alias, non kolòn nan se tout ekspresyon an.",
+                "hint_2": "Alias amelyore fasilite lekti epi fè li pi fasil pou itilize kolòn nan nan lòt demann."
+              },
+              "options": {
+                "a": "[object Object]",
+                "b": "Yon kòmand"
+              }
+            },
+            "q4": {
+              "title": "Idantifye itilizasyon valab miltiplikasyon ak divizyon nan SQL",
+              "prompt": "Ki nan sa ki annapre yo ki se fason valab pou itilize miltiplikasyon ak divizyon nan yon deklarasyon SQL SELECT? Chwazi tout sa ki aplike.",
+              "hint": "Konsidere tou de operasyon ant kolòn ak ant kolòn ak konstan.",
+              "help": {
+                "concept": "SQL pèmèt operasyon aritmetik ant kolòn, ant yon kolòn ak yon konstan, oswa ant konstan.",
+                "hint_1": "Ou ka miltipliye oswa divize kolòn, oswa itilize konstan nan ekspresyon yo.",
+                "hint_2": "Chèche opsyon ki itilize bon sentaks SQL pou aritmetik nan SELECT."
+              },
+              "options": {
+                "a": "[object Object]",
+                "b": "Yon kòmand"
+              }
+            },
+            "q5": {
+              "title": "Chwazi bon operatè pou divizyon",
+              "prompt": "Chwazi pi bon valè pou premye espas ki manke nan deklarasyon an.",
+              "hint": "Panse ak senbòl yo itilize pou divizyon nan SQL.",
+              "help": {
+                "concept": "SQL itilize senbòl aritmetik estanda pou operasyon yo, enkli divizyon.",
+                "hint_1": "Se menm senbòl ak nan matematik debaz pou divizyon.",
+                "hint_2": "Chèche senbòl ki separe numerator ak denominator an."
+              },
+              "template": "Premye valè ki manke a se [blank1].",
+              "choices": [
+                "/",
+                "*",
+                "+",
+                "-"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_5": {
+        "multiplying-and-dividing": {
+          "sk1": {
+            "title": "Miltipliye Kolòn nan SQL",
+            "bodyMarkdown": "Nan SQL, ou ka miltipliye de kolòn ansanm pou kreye yon nouvo valè kalkile nan deklarasyon SELECT ou a. Pa egzanp, pou kalkile valè total chak kòmann nan tablo `orders` la, ou ka miltipliye `quantity` ak `unit_price`:\n\n```sql\nSELECT id, quantity, unit_price, quantity * unit_price AS line_total\nFROM orders;\n```\n\nDemann sa a ajoute yon nouvo kolòn ki rele `line_total` ki montre rezilta miltiplikasyon an pou chak liy."
+          },
+          "sk2": {
+            "title": "Divize Kolòn nan SQL",
+            "bodyMarkdown": "Ou ka itilize divizyon tou nan ekspresyon SQL. Pa egzanp, si ou vle konnen pri mwayèn pa atik pou chak kòmann, ou ka divize valè total la pa kantite a:\n\n```sql\nSELECT id, quantity, unit_price, (quantity * unit_price) / quantity AS avg_price\nFROM orders;\n```\n\nSa ap retounen pri mwayèn pa atik pou chak kòmann. Fè atansyon pou pa divize pa zewo."
+          },
+          "sk3": {
+            "title": "Itilize Alias pou Fasilite Lekti",
+            "bodyMarkdown": "Lè w ap itilize aritmetik nan SQL, li itil pou itilize mo kle `AS` pou bay kolòn kalkile ou yo non klè (alias). Sa fè rezilta ou yo pi fasil pou li ak konprann. Pa egzanp:\n\n```sql\nSELECT customer_name, quantity * unit_price AS total_amount\nFROM orders;\n```\n\nIsit la, `total_amount` se yon alias pou valè kalkile a."
+          }
+        }
+      }
+    }
+  }
+}

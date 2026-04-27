@@ -1,6 +1,6 @@
 // src/lib/billing/entitlement.ts
 import { prisma } from "@/lib/prisma";
-import type { StripeSubscriptionStatus } from "@prisma/client";
+import type { StripeSubscriptionStatus } from "@zoeskoul/db";
 
 type DenyReason =
   | "none"

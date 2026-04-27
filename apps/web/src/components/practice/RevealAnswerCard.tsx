@@ -48,7 +48,8 @@ type RevealModel = {
 };
 
 const REVEAL_PANEL = "ui-surface-muted p-3";
-const REVEAL_CHIP = "ui-pill-neutral";
+const REVEAL_CHIP =
+    "ui-pill-neutral max-w-full min-w-0 h-auto items-start px-2 py-1 text-left leading-relaxed whitespace-normal break-words [overflow-wrap:anywhere]";
 const REVEAL_PRE =
     "mt-1 overflow-x-auto rounded-md border p-3 font-mono text-xs leading-relaxed ui-border ui-bg-surface ui-text";
 const REVEAL_SMALL_LABEL = "ui-meta-strong";
@@ -275,12 +276,12 @@ export default function RevealAnswerCard({
                 copyText,
                 fillPatch: copyText ? ({ text: copyText, single: copyText } as Partial<QItem>) : null,
                 node: (
-                    <div className={REVEAL_PANEL}>
+                    <div className={`${REVEAL_PANEL} min-w-0`}>
                         <div className={REVEAL_SMALL_LABEL}>
                             {kind === "text_input" ? "Accepted" : "Answer"}
                         </div>
 
-                        <div className="mt-2 flex flex-wrap gap-2">
+                        <div className="mt-2 flex min-w-0 flex-wrap gap-2">
                             {answers.length ? (
                                 answers.map((a: string) => (
                                     <span key={a} className={REVEAL_CHIP}>
@@ -335,11 +336,11 @@ export default function RevealAnswerCard({
                 copyText,
                 fillPatch: optionIds.length ? ({ multi: optionIds } as Partial<QItem>) : null,
                 node: (
-                    <div className={REVEAL_PANEL}>
+                    <div className={`${REVEAL_PANEL} min-w-0`}>
                         <div className={REVEAL_SMALL_LABEL}>Options</div>
 
                         {optionIds.length ? (
-                            <div className="mt-2 flex flex-wrap gap-2">
+                            <div className="mt-2 flex min-w-0 flex-wrap gap-2">
                                 {optionIds.map((id: any) => (
                                     <span key={id} className={REVEAL_CHIP}>
                                         {byId.get(id) ?? id}
@@ -431,19 +432,23 @@ export default function RevealAnswerCard({
     }
 
     return (
-        <div ref={rootRef} className="mt-3">
-            <div className="flex flex-wrap items-center justify-between gap-2">
-                <div className="ui-meta-strong">{title}</div>
+        <div ref={rootRef} className="mt-3 min-w-0">
+            <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
+                <div className="min-w-0 ui-meta-strong">{title}</div>
 
-                <div className="flex flex-wrap gap-2">
-                    <button onClick={onCopy} disabled={!m.copyText} className="ui-btn-secondary">
+                <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:flex-wrap">
+                    <button
+                        onClick={onCopy}
+                        disabled={!m.copyText}
+                        className="ui-btn-secondary w-full justify-center sm:w-auto"
+                    >
                         {copied ? "Copied ✓" : "Copy"}
                     </button>
 
                     <button
                         onClick={onFill}
                         disabled={!m.fillPatch}
-                        className="ui-btn-secondary"
+                        className="ui-btn-secondary w-full justify-center sm:w-auto"
                         title="Fill the input with the revealed answer"
                     >
                         {filled ? "Filled ✓" : "Fill answer"}
@@ -451,7 +456,7 @@ export default function RevealAnswerCard({
                 </div>
             </div>
 
-            <div className="mt-2">{m.node}</div>
+            <div className="mt-2 min-w-0">{m.node}</div>
         </div>
     );
 }

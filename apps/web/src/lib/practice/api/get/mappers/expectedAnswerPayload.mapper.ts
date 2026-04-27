@@ -1,4 +1,4 @@
-import { PracticeKind } from "@prisma/client";
+import { PracticeKind } from "@zoeskoul/db";
 
 export function buildExpectedAnswerPayload(kind: PracticeKind, expectedCanon: any) {
     if (kind === PracticeKind.code_input) return null;

@@ -58,6 +58,108 @@ function byteLen(s: string) {
     return Buffer.byteLength(String(s ?? ""), "utf8");
 }
 
+function splitSqlStatements(sql: string): string[] {
+    const src = String(sql ?? "");
+    const parts: string[] = [];
+    let start = 0;
+    let i = 0;
+    let inSingle = false;
+    let inDouble = false;
+    let inBacktick = false;
+    let inLineComment = false;
+    let inBlockComment = false;
+
+    while (i < src.length) {
+        const ch = src[i];
+        const next = src[i + 1];
+
+        if (inLineComment) {
+            if (ch === "\n") inLineComment = false;
+            i += 1;
+            continue;
+        }
+
+        if (inBlockComment) {
+            if (ch === "*" && next === "/") {
+                inBlockComment = false;
+                i += 2;
+                continue;
+            }
+            i += 1;
+            continue;
+        }
+
+        if (inSingle) {
+            if (ch === "'" && next === "'") {
+                i += 2;
+                continue;
+            }
+            if (ch === "'") inSingle = false;
+            i += 1;
+            continue;
+        }
+
+        if (inDouble) {
+            if (ch === '"' && next === '"') {
+                i += 2;
+                continue;
+            }
+            if (ch === '"') inDouble = false;
+            i += 1;
+            continue;
+        }
+
+        if (inBacktick) {
+            if (ch === "`") inBacktick = false;
+            i += 1;
+            continue;
+        }
+
+        if (ch === "-" && next === "-") {
+            inLineComment = true;
+            i += 2;
+            continue;
+        }
+
+        if (ch === "/" && next === "*") {
+            inBlockComment = true;
+            i += 2;
+            continue;
+        }
+
+        if (ch === "'") {
+            inSingle = true;
+            i += 1;
+            continue;
+        }
+
+        if (ch === '"') {
+            inDouble = true;
+            i += 1;
+            continue;
+        }
+
+        if (ch === "`") {
+            inBacktick = true;
+            i += 1;
+            continue;
+        }
+
+        if (ch === ";") {
+            const stmt = src.slice(start, i).trim();
+            if (stmt) parts.push(stmt);
+            start = i + 1;
+        }
+
+        i += 1;
+    }
+
+    const tail = src.slice(start).trim();
+    if (tail) parts.push(tail);
+
+    return parts;
+}
+
 function normalizeCell(v: unknown): SqlScalar {
     if (v == null) return null;
     if (typeof v === "string" || typeof v === "number" || typeof v === "boolean") {
@@ -414,7 +516,90 @@ async function executeSqliteLocally(req: SqlRunReq): Promise<SqlRunResult> {
             } as any);
         }
 
-        const stmt = db.prepare(normalized.code);
+        const statements = splitSqlStatements(normalized.code);
+        const hasMultipleStatements = statements.length > 1;
+        const executableSql = hasMultipleStatements
+            ? statements[statements.length - 1]!
+            : normalized.code;
+
+        if (hasMultipleStatements) {
+            const beforeChanges = Number(
+                db.prepare("SELECT total_changes() AS count").get()?.count ?? 0,
+            );
+            db.exec(normalized.code);
+            const afterChanges = Number(
+                db.prepare("SELECT total_changes() AS count").get()?.count ?? 0,
+            );
+            const affected = Math.max(0, afterChanges - beforeChanges);
+            const stmt = db.prepare(executableSql);
+
+            if (stmt.reader) {
+                const collected = collectRowsFromReader({
+                    stmt,
+                    maxRows,
+                    maxBytes,
+                });
+
+                const tableSnapshots = await readSqliteTableSnapshots({
+                    db,
+                    maxRows,
+                    maxBytes,
+                });
+
+                const elapsedMs = Date.now() - started;
+                const notices: string[] = [
+                    `Executed ${statements.length} SQL statements.`,
+                ];
+
+                if (collected.truncatedByRows) notices.push(`Showing first ${maxRows} rows.`);
+                if (collected.truncatedByBytes) notices.push(`Output truncated to ${maxBytes} bytes.`);
+
+                const rendered = renderAsciiTable(
+                    collected.columns.map((c) => c.name),
+                    collected.rows,
+                );
+
+                const limitedStdout = limitTextBytes(rendered, maxBytes);
+
+                if (
+                    limitedStdout.truncated &&
+                    !notices.includes(`Output truncated to ${maxBytes} bytes.`)
+                ) {
+                    notices.push(`Output truncated to ${maxBytes} bytes.`);
+                }
+
+                return okSql({
+                    dialect: normalized.dialect,
+                    columns: collected.columns,
+                    rows: collected.rows,
+                    rowCount: collected.rows.length,
+                    notices,
+                    stdout: limitedStdout.text,
+                    time: (elapsedMs / 1000).toFixed(3),
+                    tableSnapshots,
+                } as any);
+            }
+
+            const tableSnapshots = await readSqliteTableSnapshots({
+                db,
+                maxRows,
+                maxBytes,
+            });
+
+            const elapsedMs = Date.now() - started;
+
+            return okSql({
+                dialect: normalized.dialect,
+                affectedRows: affected,
+                rowCount: affected,
+                notices: [`Executed ${statements.length} SQL statements.`],
+                stdout: `Query OK. ${affected} row(s) affected.`,
+                time: (elapsedMs / 1000).toFixed(3),
+                tableSnapshots,
+            } as any);
+        }
+
+        const stmt = db.prepare(executableSql);
 
         if (stmt.reader) {
             const collected = collectRowsFromReader({

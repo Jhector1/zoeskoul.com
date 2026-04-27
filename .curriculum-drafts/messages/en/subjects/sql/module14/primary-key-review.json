@@ -1,0 +1,126 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_14": {
+        "primary-key-review": {
+          "label": "Primary key review",
+          "summary": "Review the concept of primary keys in relational database design, focusing on their purpose, properties, and how they are used in real SQL tables.",
+          "cards": {
+            "sketch0": {
+              "title": "What is a Primary Key?"
+            },
+            "sketch1": {
+              "title": "Why Primary Keys Matter"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Practice"
+            }
+          },
+          "projectSteps": {
+            "code_input_1": {
+              "title": "Create a Table with a Primary Key"
+            }
+          },
+          "quiz": {
+            "fill-blank-1": {
+              "title": "Purpose of a Primary Key",
+              "prompt": "Choose the best value for the first missing blank in the statement.",
+              "hint": "Think about what makes each row special.",
+              "help": {
+                "concept": "A primary key is used to ensure each row in a table is unique and can be referenced individually.",
+                "hint_1": "The primary key is what lets you tell one row apart from another.",
+                "hint_2": "It's about making sure you can find or refer to a specific row without confusion."
+              },
+              "template": "The first missing value is [blank1].",
+              "choices": [
+                "identify",
+                "sort",
+                "group",
+                "delete"
+              ]
+            },
+            "fill-blank-2": {
+              "title": "Primary Key Properties",
+              "prompt": "Choose the best value for the first missing blank in the statement.",
+              "hint": "Primary keys must always have a value.",
+              "help": {
+                "concept": "Primary keys require every row to have a unique, non-missing value.",
+                "hint_1": "A primary key can't be empty for any row.",
+                "hint_2": "The database will reject rows where the primary key is missing."
+              },
+              "template": "The first missing value is [blank1].",
+              "choices": [
+                "NULL",
+                "duplicate",
+                "text",
+                "zero"
+              ]
+            },
+            "single-choice-1": {
+              "title": "Choosing a Primary Key",
+              "prompt": "Which column would be the best choice for a primary key in the products table?",
+              "hint": "Look for the column that is unique for every product.",
+              "help": {
+                "concept": "A primary key should be unique for every row and not change over time.",
+                "hint_1": "Think about which column never repeats and is always filled in.",
+                "hint_2": "The 'id' column is designed to be unique for each product."
+              },
+              "options": {
+                "a": "a. id",
+                "b": "b. name",
+                "c": "c. category",
+                "d": "d. price"
+              }
+            },
+            "multi-choice-1": {
+              "title": "Primary Key Rules",
+              "prompt": "Which of the following are true about primary keys? (Choose all that apply)",
+              "hint": "Consider the uniqueness and restrictions of primary keys.",
+              "help": {
+                "concept": "Primary keys enforce uniqueness and non-null constraints, and help maintain data integrity.",
+                "hint_1": "Think about what makes a primary key different from other columns.",
+                "hint_2": "Primary keys must be unique, not NULL, and help prevent duplicates. A table can only have one primary key."
+              },
+              "options": {
+                "a": "a. A primary key must be unique for each row.",
+                "b": "b. A table can have more than one primary key.",
+                "c": "c. A primary key column cannot contain NULL values.",
+                "d": "d. Primary keys help prevent duplicate rows."
+              }
+            },
+            "code-input-1": {
+              "title": "Create a Table with a Primary Key",
+              "prompt": "Write a SQL statement to create a table called `categories` with columns `id` (integer primary key) and `name` (text, not null).",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+                "hint_1": "Eliminate choices or interpretations that do not match the task.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "starterCode": "-- Write your CREATE TABLE statement below"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_14": {
+        "primary-key-review": {
+          "sketch-1": {
+            "title": "What is a Primary Key?",
+            "bodyMarkdown": "A **primary key** is a column (or set of columns) in a table that uniquely identifies each row. Every table should have a primary key to ensure that each record can be referenced without confusion. For example, in the `products` table below, the `id` column is the primary key:\n\n```sql\nCREATE TABLE products (\n  id INTEGER PRIMARY KEY,\n  name TEXT NOT NULL,\n  category TEXT NOT NULL,\n  price REAL NOT NULL,\n  stock INTEGER NOT NULL,\n  created_at TEXT NOT NULL\n);\n```\n\nHere, each product has a unique `id` value."
+          },
+          "sketch-2": {
+            "title": "Why Primary Keys Matter",
+            "bodyMarkdown": "Primary keys prevent duplicate rows and make it possible to reference specific records from other tables. Without a primary key, it would be difficult to update or delete the correct row, and relationships between tables would be unreliable."
+          }
+        }
+      }
+    }
+  }
+}

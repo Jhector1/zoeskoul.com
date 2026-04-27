@@ -262,6 +262,43 @@ export async function compileTopic(args: {
         sectionOrder: node.sectionOrder,
     });
 
+    const goldenReport = await profileServices.validateGolden({
+        seed,
+        draft,
+        topicBundle,
+    });
+
+    await writeTopicReports({
+        subjectSlug: args.blueprint.subjectSlug,
+        moduleOrder: node.moduleIndex,
+        topicId: node.topic.topicId,
+        rawDraft,
+        repairedDraft: draft,
+        repairReport: evaluation.repairReport,
+        critiqueReport: evaluation.critiqueReport,
+        semanticReport: evaluation.semanticReport,
+        goldenReport,
+        topicBundle,
+    });
+
+    if (!goldenReport.ok) {
+        const goldenErrors = goldenReport.issues.filter(
+            (issue) => issue.severity === "error",
+        );
+
+        if (goldenErrors.length) {
+            throw new Error(
+                [
+                    `Golden validation failed for topic "${node.topic.topicId}"`,
+                    `Module: ${node.module.moduleSlug}`,
+                    `Section: ${node.section.sectionSlug}`,
+                    `Report dir: .curriculum-drafts/reports/${args.blueprint.subjectSlug}/module${node.moduleIndex}/${node.topic.topicId}`,
+                    ...goldenErrors.map((x) => `- ${x.message}`),
+                ].join("\n"),
+            );
+        }
+    }
+
     const sourceMessages = buildMessagesFromDraft({
         shape,
         seed,
@@ -310,18 +347,6 @@ export async function compileTopic(args: {
         topicId: node.topic.topicId,
         topicBundle,
         messagesByLocale,
-    });
-
-    await writeTopicReports({
-        subjectSlug: args.blueprint.subjectSlug,
-        moduleOrder: node.moduleIndex,
-        topicId: node.topic.topicId,
-        rawDraft,
-        repairedDraft: draft,
-        repairReport: evaluation.repairReport,
-        critiqueReport: evaluation.critiqueReport,
-        semanticReport: evaluation.semanticReport,
-        topicBundle,
     });
 
     advanceProgress({

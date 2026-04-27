@@ -1,5 +1,5 @@
 // src/lib/practice/api/practiceGet/topicResolver.service.ts
-import type { PrismaClient } from "@prisma/client";
+import type { PrismaClient } from "@/lib/prisma";
 import type { TopicSlug } from "@/lib/practice/types";
 import { rngFromActor } from "@/lib/practice/catalog";
 import { toDbTopicSlug } from "@/lib/practice/topicSlugs";

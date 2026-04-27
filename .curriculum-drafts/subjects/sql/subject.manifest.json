@@ -24,11 +24,11 @@
   },
   "modules": [
     {
-      "slug": "sql_module_11",
-      "prefix": "sql11",
-      "order": 11,
-      "titleKey": "modules.sql.sql_module_11.title",
-      "descriptionKey": "modules.sql.sql_module_11.description",
+      "slug": "sql_module_12",
+      "prefix": "sql12",
+      "order": 12,
+      "titleKey": "modules.sql.sql_module_12.title",
+      "descriptionKey": "modules.sql.sql_module_12.description",
       "weekStart": null,
       "weekEnd": null,
       "accessOverride": null,
@@ -41,106 +41,106 @@
       "meta": {
         "estimatedMinutes": 240,
         "prereqKeys": [
-          "modules.sql.sql_module_10.title"
+          "modules.sql.sql_module_11.title"
         ],
         "outcomeKeys": [
-          "modules.sql.sql_module_11.outcomes.0",
-          "modules.sql.sql_module_11.outcomes.1",
-          "modules.sql.sql_module_11.outcomes.2",
-          "modules.sql.sql_module_11.outcomes.3"
+          "modules.sql.sql_module_12.outcomes.0",
+          "modules.sql.sql_module_12.outcomes.1",
+          "modules.sql.sql_module_12.outcomes.2",
+          "modules.sql.sql_module_12.outcomes.3"
         ],
         "whyKeys": [
-          "modules.sql.sql_module_11.why.0",
-          "modules.sql.sql_module_11.why.1"
+          "modules.sql.sql_module_12.why.0",
+          "modules.sql.sql_module_12.why.1"
         ]
       },
       "sections": [
         {
-          "slug": "section_11_1",
+          "slug": "section_12_1",
           "order": 1,
-          "titleKey": "sections.sql.sql_module_11.section_11_1.title",
-          "descriptionKey": "sections.sql.sql_module_11.section_11_1.description",
+          "titleKey": "sections.sql.sql_module_12.section_12_1.title",
+          "descriptionKey": "sections.sql.sql_module_12.section_12_1.description",
           "meta": {
-            "module": 11,
-            "weeksKey": "sections.sql.sql_module_11.section_11_1.weeks",
+            "module": 12,
+            "weeksKey": "sections.sql.sql_module_12.section_12_1.weeks",
             "bulletKeys": [
-              "sections.sql.sql_module_11.section_11_1.bullets.0",
-              "sections.sql.sql_module_11.section_11_1.bullets.1",
-              "sections.sql.sql_module_11.section_11_1.bullets.2",
-              "sections.sql.sql_module_11.section_11_1.bullets.3"
+              "sections.sql.sql_module_12.section_12_1.bullets.0",
+              "sections.sql.sql_module_12.section_12_1.bullets.1",
+              "sections.sql.sql_module_12.section_12_1.bullets.2",
+              "sections.sql.sql_module_12.section_12_1.bullets.3"
             ]
           },
           "topics": [
-            "what-insert-into-does",
-            "insert-one-row",
-            "insert-multiple-rows",
-            "matching-values-to-columns"
+            "what-update-does",
+            "changing-one-column",
+            "changing-multiple-columns",
+            "why-where-is-critical"
           ]
         },
         {
-          "slug": "section_11_2",
+          "slug": "section_12_2",
           "order": 2,
-          "titleKey": "sections.sql.sql_module_11.section_11_2.title",
-          "descriptionKey": "sections.sql.sql_module_11.section_11_2.description",
+          "titleKey": "sections.sql.sql_module_12.section_12_2.title",
+          "descriptionKey": "sections.sql.sql_module_12.section_12_2.description",
           "meta": {
-            "module": 11,
-            "weeksKey": "sections.sql.sql_module_11.section_11_2.weeks",
+            "module": 12,
+            "weeksKey": "sections.sql.sql_module_12.section_12_2.weeks",
             "bulletKeys": [
-              "sections.sql.sql_module_11.section_11_2.bullets.0",
-              "sections.sql.sql_module_11.section_11_2.bullets.1",
-              "sections.sql.sql_module_11.section_11_2.bullets.2",
-              "sections.sql.sql_module_11.section_11_2.bullets.3"
+              "sections.sql.sql_module_12.section_12_2.bullets.0",
+              "sections.sql.sql_module_12.section_12_2.bullets.1",
+              "sections.sql.sql_module_12.section_12_2.bullets.2",
+              "sections.sql.sql_module_12.section_12_2.bullets.3"
             ]
           },
           "topics": [
-            "why-column-lists-matter",
-            "data-type-awareness",
-            "avoiding-insert-errors",
-            "reading-inserted-results"
+            "what-delete-does",
+            "deleting-selected-rows",
+            "dangers-of-missing-where",
+            "safe-delete-habits"
           ]
         },
         {
-          "slug": "section_11_3",
+          "slug": "section_12_3",
           "order": 3,
-          "titleKey": "sections.sql.sql_module_11.section_11_3.title",
-          "descriptionKey": "sections.sql.sql_module_11.section_11_3.description",
+          "titleKey": "sections.sql.sql_module_12.section_12_3.title",
+          "descriptionKey": "sections.sql.sql_module_12.section_12_3.description",
           "meta": {
-            "module": 11,
-            "weeksKey": "sections.sql.sql_module_11.section_11_3.weeks",
+            "module": 12,
+            "weeksKey": "sections.sql.sql_module_12.section_12_3.weeks",
             "bulletKeys": [
-              "sections.sql.sql_module_11.section_11_3.bullets.0",
-              "sections.sql.sql_module_11.section_11_3.bullets.1",
-              "sections.sql.sql_module_11.section_11_3.bullets.2",
-              "sections.sql.sql_module_11.section_11_3.bullets.3"
+              "sections.sql.sql_module_12.section_12_3.bullets.0",
+              "sections.sql.sql_module_12.section_12_3.bullets.1",
+              "sections.sql.sql_module_12.section_12_3.bullets.2",
+              "sections.sql.sql_module_12.section_12_3.bullets.3"
             ]
           },
           "topics": [
-            "missing-values-during-insert",
-            "default-values",
-            "optional-columns",
-            "insert-behavior-basics"
+            "preview-before-update-delete",
+            "using-select-first",
+            "backups-and-caution",
+            "thinking-before-changing-data"
           ]
         },
         {
-          "slug": "section_11_4",
+          "slug": "section_12_4",
           "order": 4,
-          "titleKey": "sections.sql.sql_module_11.section_11_4.title",
-          "descriptionKey": "sections.sql.sql_module_11.section_11_4.description",
+          "titleKey": "sections.sql.sql_module_12.section_12_4.title",
+          "descriptionKey": "sections.sql.sql_module_12.section_12_4.description",
           "meta": {
-            "module": 11,
-            "weeksKey": "sections.sql.sql_module_11.section_11_4.weeks",
+            "module": 12,
+            "weeksKey": "sections.sql.sql_module_12.section_12_4.weeks",
             "bulletKeys": [
-              "sections.sql.sql_module_11.section_11_4.bullets.0",
-              "sections.sql.sql_module_11.section_11_4.bullets.1",
-              "sections.sql.sql_module_11.section_11_4.bullets.2",
-              "sections.sql.sql_module_11.section_11_4.bullets.3"
+              "sections.sql.sql_module_12.section_12_4.bullets.0",
+              "sections.sql.sql_module_12.section_12_4.bullets.1",
+              "sections.sql.sql_module_12.section_12_4.bullets.2",
+              "sections.sql.sql_module_12.section_12_4.bullets.3"
             ]
           },
           "topics": [
-            "add-a-student",
-            "add-a-product",
-            "add-multiple-records",
-            "check-your-inserted-data"
+            "update-prices",
+            "change-statuses",
+            "delete-test-rows",
+            "safe-data-modification-workflow"
           ]
         }
       ]

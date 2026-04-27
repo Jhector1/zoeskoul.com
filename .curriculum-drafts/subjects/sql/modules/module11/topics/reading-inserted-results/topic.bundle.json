@@ -25,13 +25,6 @@
       "height": 420
     },
     {
-      "id": "sketch2",
-      "kind": "sketch",
-      "titleKey": "topics.sql.sql_module_11.reading-inserted-results.cards.sketch2.title",
-      "sketchId": "sketch-3",
-      "height": 420
-    },
-    {
       "id": "quiz",
       "kind": "quiz",
       "titleKey": "topics.sql.sql_module_11.reading-inserted-results.cards.quiz.title",
@@ -41,6 +34,46 @@
         "allowReveal": true,
         "preferKind": null,
         "maxAttempts": 10
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.sql.sql_module_11.reading-inserted-results.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "ex_1",
+            "titleKey": "topics.sql.sql_module_11.reading-inserted-results.projectSteps.ex_1.title",
+            "exerciseKey": "ex-1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "ex_2",
+            "titleKey": "topics.sql.sql_module_11.reading-inserted-results.projectSteps.ex_2.title",
+            "exerciseKey": "ex-2",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "ex_3",
+            "titleKey": "topics.sql.sql_module_11.reading-inserted-results.projectSteps.ex_3.title",
+            "exerciseKey": "ex-3",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
       }
     }
   ],
@@ -56,90 +89,85 @@
       "archetype": "paragraph",
       "titleKey": "sketches.sql.sql_module_11.reading-inserted-results.sketch-2.title",
       "bodyKey": "sketches.sql.sql_module_11.reading-inserted-results.sketch-2.bodyMarkdown"
-    },
-    {
-      "id": "sketch-3",
-      "archetype": "paragraph",
-      "titleKey": "sketches.sql.sql_module_11.reading-inserted-results.sketch-3.title",
-      "bodyKey": "sketches.sql.sql_module_11.reading-inserted-results.sketch-3.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "code-1",
+      "id": "ex-1",
       "kind": "code_input",
-      "purpose": "quiz",
+      "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_11.reading-inserted-results.quiz.code-1",
+      "messageBase": "topics.sql.sql_module_11.reading-inserted-results.quiz.ex-1",
       "language": "sql",
       "fixedSqlDialect": "sqlite",
       "recipe": {
         "type": "sql_query",
         "datasetId": "inventory_ops",
         "resultShape": "table",
-        "solutionCode": "SELECT * FROM inventory_items WHERE name = 'Travel Mug';"
+        "solutionCode": "INSERT INTO inventory_items (name, category, price) VALUES ('Desk Organizer', 'Accessories', 13.50);\nSELECT * FROM inventory_items WHERE name = 'Desk Organizer';",
+        "checkSql": "SELECT * FROM \"inventory_items\" ORDER BY 1;"
       }
     },
     {
-      "id": "code-2",
+      "id": "ex-2",
       "kind": "code_input",
-      "purpose": "quiz",
+      "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_11.reading-inserted-results.quiz.code-2",
+      "messageBase": "topics.sql.sql_module_11.reading-inserted-results.quiz.ex-2",
       "language": "sql",
       "fixedSqlDialect": "sqlite",
       "recipe": {
         "type": "sql_query",
         "datasetId": "inventory_ops",
         "resultShape": "table",
-        "solutionCode": "SELECT status, is_test FROM inventory_items WHERE name = 'Sample Notebook';"
+        "solutionCode": "INSERT INTO inventory_items (name, category, price) VALUES ('Sample Coaster', 'Kitchen', 3.25);\nSELECT * FROM inventory_items WHERE name = 'Sample Coaster';",
+        "checkSql": "SELECT * FROM \"inventory_items\" ORDER BY 1;"
       }
     },
     {
-      "id": "code-3",
+      "id": "ex-3",
       "kind": "code_input",
-      "purpose": "quiz",
+      "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_11.reading-inserted-results.quiz.code-3",
+      "messageBase": "topics.sql.sql_module_11.reading-inserted-results.quiz.ex-3",
       "language": "sql",
       "fixedSqlDialect": "sqlite",
       "recipe": {
         "type": "sql_query",
         "datasetId": "inventory_ops",
         "resultShape": "table",
-        "solutionCode": "SELECT id FROM inventory_items WHERE name = 'Desk Organizer';"
+        "solutionCode": "INSERT INTO inventory_items (name, category, price) VALUES ('Mini Poster', 'Decor', 6.00), ('Travel Cup', 'Kitchen', 8.75);\nSELECT * FROM inventory_items WHERE category = 'Kitchen';",
+        "checkSql": "SELECT * FROM \"inventory_items\" ORDER BY 1;"
       }
     },
     {
-      "id": "multi-1",
+      "id": "ex-4",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_11.reading-inserted-results.quiz.multi-1",
+      "messageBase": "topics.sql.sql_module_11.reading-inserted-results.quiz.ex-4",
       "optionIds": [
         "a",
         "b",
         "c",
-        "d",
-        "e"
+        "d"
       ],
       "expected": {
         "kind": "multi_choice",
         "optionIds": [
           "a",
           "b",
-          "c",
-          "e"
+          "c"
         ]
       }
     },
     {
-      "id": "fill-1",
+      "id": "ex-5",
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql.sql_module_11.reading-inserted-results.quiz.fill-1",
-      "choiceCount": 5,
+      "messageBase": "topics.sql.sql_module_11.reading-inserted-results.quiz.ex-5",
+      "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
         "value": "draft"

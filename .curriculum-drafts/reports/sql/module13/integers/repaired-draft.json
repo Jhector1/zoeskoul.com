@@ -1,0 +1,111 @@
+{
+  "title": "Integers",
+  "summary": "Learn how to use integer data types when creating tables in SQL. Understand where and why to use INTEGER columns, see real examples from the products_catalog dataset, and practice writing CREATE TABLE statements with integer fields.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch-1",
+      "title": "What are Integers in SQL?",
+      "bodyMarkdown": "In SQL, the `INTEGER` data type is used to store whole numbers (both positive and negative, including zero). Integers do not have decimal places. They are commonly used for values like IDs, counts, or quantities. For example, in the `products` table of the `products_catalog` dataset, the `id` and `stock` columns are both defined as `INTEGER`:\n\n```sql\nCREATE TABLE products (\n  id INTEGER PRIMARY KEY,\n  name TEXT NOT NULL,\n  category TEXT NOT NULL,\n  price REAL NOT NULL,\n  stock INTEGER NOT NULL,\n  created_at TEXT NOT NULL\n);\n```\nHere, `id` uniquely identifies each product, and `stock` shows how many units are available."
+    },
+    {
+      "id": "sketch-2",
+      "title": "Why Use Integers?",
+      "bodyMarkdown": "Integers are efficient for storage and fast for calculations. Use them for columns that represent counts, identifiers, or anything that should never have a fractional value. For example, the `stock` column in the `products` table tracks the number of items in inventory. Using an integer ensures you can't accidentally store a non-whole number, like 3.5 units."
+    },
+    {
+      "id": "sketch-3",
+      "title": "Example: Adding an Integer Column",
+      "bodyMarkdown": "Suppose you want to track how many times a product has been viewed. You could add a `views` column to the `products` table:\n\n```sql\nALTER TABLE products ADD COLUMN views INTEGER DEFAULT 0;\n```\nThis creates a new integer column called `views` and sets its default value to 0 for all products."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "code-1",
+      "kind": "code_input",
+      "title": "Create a Table with an Integer Column",
+      "prompt": "Write a SQL statement to create a table called `categories` with two columns: `id` (an integer primary key) and `name` (text, not null).",
+      "starterCode": "-- Write your CREATE TABLE statement below",
+      "solutionCode": "CREATE TABLE categories (\n  id INTEGER PRIMARY KEY,\n  name TEXT NOT NULL\n);",
+      "datasetId": "products_catalog",
+      "recipeType": "sql_query",
+      "hint": "Focus on the concept being tested.",
+      "help": {
+        "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+        "hint_1": "Eliminate choices or interpretations that do not match the task.",
+        "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+      }
+    },
+    {
+      "id": "code-2",
+      "kind": "code_input",
+      "title": "Add an Integer Column to an Existing Table",
+      "prompt": "Write a SQL statement to add a new column called `reorder_level` (an integer) to the `products` table.",
+      "starterCode": "-- Add the integer column to products",
+      "solutionCode": "ALTER TABLE products ADD COLUMN reorder_level INTEGER;",
+      "datasetId": "products_catalog",
+      "recipeType": "sql_query",
+      "hint": "Focus on the SQL task being asked for, not on copying final query text.",
+      "help": {
+        "concept": "Build the query from the operation the exercise is testing.",
+        "hint_1": "Think about which clauses or functions are required for the task.",
+        "hint_2": "Construct the query based on what result the exercise expects, not by repeating exact solution wording."
+      }
+    },
+    {
+      "id": "code-3",
+      "kind": "code_input",
+      "title": "Insert a Row with Integer Values",
+      "prompt": "Insert a new product into the `products` table with these values: id 7, name 'Marker Set', category 'Art', price 9.99, stock 40, created_at '2026-03-01'.",
+      "starterCode": "-- Insert the new product",
+      "solutionCode": "INSERT INTO products (id, name, category, price, stock, created_at) VALUES (7, 'Marker Set', 'Art', 9.99, 40, '2026-03-01');",
+      "datasetId": "products_catalog",
+      "recipeType": "sql_query",
+      "hint": "Focus on the SQL task being asked for, not on copying final query text.",
+      "help": {
+        "concept": "Build the query from the operation the exercise is testing.",
+        "hint_1": "Think about which clauses or functions are required for the task.",
+        "hint_2": "Construct the query based on what result the exercise expects, not by repeating exact solution wording."
+      }
+    },
+    {
+      "id": "multi-1",
+      "kind": "multi_choice",
+      "title": "Which Columns Should Be Integers?",
+      "prompt": "Which of the following columns in the `products` table are best stored as integers? Select all that apply.",
+      "options": [
+        "[object Object]",
+        "A command"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Look for columns that represent whole numbers.",
+      "help": {
+        "concept": "Columns that store whole numbers, such as IDs or counts, should use the INTEGER type. Text or decimal values need other types.",
+        "hint_1": "Check which columns represent counts or unique identifiers.",
+        "hint_2": "Ignore columns that store text or decimal numbers."
+      }
+    },
+    {
+      "id": "fill-1",
+      "kind": "fill_blank_choice",
+      "title": "Fill in the Blank: Integer Data Type",
+      "prompt": "Choose the best value for the first missing blank in the statement.",
+      "template": "The first missing value is [blank1].",
+      "choices": [
+        "INTEGER",
+        "REAL",
+        "TEXT",
+        "DATE"
+      ],
+      "correctValue": "INTEGER",
+      "hint": "It's the same word as the type used for the id column in products.",
+      "help": {
+        "concept": "The the missing term data type is used for whole numbers in SQL.",
+        "hint_1": "Check the CREATE TABLE statement for products to see the type for id.",
+        "hint_2": "It's spelled in all capital letters."
+      }
+    }
+  ]
+}

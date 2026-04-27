@@ -6,7 +6,11 @@ import type {
 import type { RepairReport } from "../../shared/profileServices.js";
 import { makeEmptyRepairReport } from "../../shared/noopReports.js";
 import { getSqlDatasetById } from "../datasets/index.js";
-
+import {
+    prepareSqlForExistingColumnReferenceScan,
+    stripSqlComments,
+    stripSqlStringLiterals,
+} from "../shared/sqlReferenceScan.js";
 function extractSqlCodeBlocks(markdown: string): string[] {
     const matches = markdown.match(/```sql\s*[\s\S]*?```/gi) ?? [];
     const tildeMatches = markdown.match(/~~~sql\s*[\s\S]*?~~~/gi) ?? [];
@@ -72,6 +76,36 @@ const SQL_NON_COLUMN_WORDS = new Set([
     "in",
     "like",
     "between",
+    "create",
+    "table",
+    "temporary",
+    "temp",
+    "if",
+    "exists",
+    "integer",
+    "int",
+    "real",
+    "text",
+    "numeric",
+    "boolean",
+    "primary",
+    "key",
+    "foreign",
+    "references",
+    "constraint",
+    "default",
+    "unique",
+    "check",
+    "on",
+    "cascade",
+    "restrict",
+    "no",
+    "action",
+    "set",
+    "autoincrement",
+    "alter",
+    "add",
+    "drop",
 ]);
 
 const SQL_PLACEHOLDER_IDENTIFIERS = new Set([
@@ -126,18 +160,6 @@ function extractReferencedTables(sql: string): string[] {
                 .filter((name) => name && !isPlaceholderIdentifier(name)),
         ),
     ];
-}
-
-function stripSqlComments(sql: string): string {
-    return sql
-        .replace(/--.*$/gm, " ")
-        .replace(/\/\*[\s\S]*?\*\//g, " ");
-}
-
-function stripSqlStringLiterals(sql: string): string {
-    return sql
-        .replace(/'([^']|'')*'/g, " ")
-        .replace(/"([^"]|"")*"/g, " ");
 }
 
 function splitTopLevelCommaSeparated(text: string): string[] {
@@ -286,7 +308,6 @@ function getAllowedColumns(dataset: SqlDatasetArtifact) {
         ),
     );
 }
-
 function sketchSqlNeedsRewrite(args: {
     sql: string;
     dataset: SqlDatasetArtifact;
@@ -294,9 +315,10 @@ function sketchSqlNeedsRewrite(args: {
     const allowedTables = getAllowedTables(args.dataset);
     const allowedColumns = getAllowedColumns(args.dataset);
 
-    const tables = extractReferencedTables(args.sql);
-    const columns = extractReferencedColumns(args.sql);
+    const sqlForReferenceScan = prepareSqlForExistingColumnReferenceScan(args.sql);
 
+    const tables = extractReferencedTables(sqlForReferenceScan);
+    const columns = extractReferencedColumns(sqlForReferenceScan);
     if (tables.some((t) => !allowedTables.has(t))) return true;
     if (columns.some((c) => !allowedColumns.has(c) && !allowedTables.has(c))) return true;
 

@@ -1,6 +1,6 @@
 // src/lib/practice/generator/expected.ts
 import type { Exercise, ExerciseKind, Vec3 } from "../../types";
-import { PracticePurpose } from "@prisma/client";
+import { PracticePurpose } from "@zoeskoul/db";
 
 // Expected payloads (grading only)
 // Keep these shapes aligned with your validator.

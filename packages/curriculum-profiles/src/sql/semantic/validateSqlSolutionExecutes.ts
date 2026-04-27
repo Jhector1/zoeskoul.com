@@ -83,6 +83,7 @@ export async function validateSqlSolutionExecutes(args: {
 
         const run = await runSql({
             code: exercise.solutionCode,
+            checkSql: exercise.checkSql,
             dialect,
             schemaSql: resolved.dataset?.schemaSql ?? "",
             seedSql: resolved.dataset?.seedSql ?? "",

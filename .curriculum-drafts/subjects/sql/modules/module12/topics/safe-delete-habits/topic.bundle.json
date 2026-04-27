@@ -1,0 +1,172 @@
+{
+  "topicId": "safe-delete-habits",
+  "subjectSlug": "sql",
+  "moduleSlug": "sql_module_12",
+  "sectionSlug": "section_12_2",
+  "prefix": "sql12",
+  "minutes": 15,
+  "topic": {
+    "labelKey": "topics.sql.sql_module_12.safe-delete-habits.label",
+    "summaryKey": "topics.sql.sql_module_12.safe-delete-habits.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_12.safe-delete-habits.cards.sketch0.title",
+      "sketchId": "sketch-safe-delete-intro",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_12.safe-delete-habits.cards.sketch1.title",
+      "sketchId": "sketch-preview-before-delete",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql.sql_module_12.safe-delete-habits.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 2,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.sql.sql_module_12.safe-delete-habits.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "code_preview_delete_test_items",
+            "titleKey": "topics.sql.sql_module_12.safe-delete-habits.projectSteps.code_preview_delete_test_items.title",
+            "exerciseKey": "code-preview-delete-test-items",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "code_delete_inactive_items",
+            "titleKey": "topics.sql.sql_module_12.safe-delete-habits.projectSteps.code_delete_inactive_items.title",
+            "exerciseKey": "code-delete-inactive-items",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "code_delete_single_test_item",
+            "titleKey": "topics.sql.sql_module_12.safe-delete-habits.projectSteps.code_delete_single_test_item.title",
+            "exerciseKey": "code-delete-single-test-item",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch-safe-delete-intro",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_12.safe-delete-habits.sketch-safe-delete-intro.title",
+      "bodyKey": "sketches.sql.sql_module_12.safe-delete-habits.sketch-safe-delete-intro.bodyMarkdown"
+    },
+    {
+      "id": "sketch-preview-before-delete",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_12.safe-delete-habits.sketch-preview-before-delete.title",
+      "bodyKey": "sketches.sql.sql_module_12.safe-delete-habits.sketch-preview-before-delete.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "code-preview-delete-test-items",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_12.safe-delete-habits.quiz.code-preview-delete-test-items",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "inventory_ops",
+        "resultShape": "table",
+        "solutionCode": "SELECT * FROM inventory_items WHERE is_test = 1;"
+      }
+    },
+    {
+      "id": "code-delete-inactive-items",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_12.safe-delete-habits.quiz.code-delete-inactive-items",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "inventory_ops",
+        "resultShape": "table",
+        "solutionCode": "DELETE FROM inventory_items WHERE status = 'inactive';",
+        "checkSql": "SELECT * FROM inventory_items WHERE status = 'inactive';"
+      }
+    },
+    {
+      "id": "code-delete-single-test-item",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_12.safe-delete-habits.quiz.code-delete-single-test-item",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "inventory_ops",
+        "resultShape": "table",
+        "solutionCode": "DELETE FROM inventory_items WHERE id = 6;",
+        "checkSql": "SELECT * FROM inventory_items WHERE id = 6;"
+      }
+    },
+    {
+      "id": "multi-choice-safe-delete-habits",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_12.safe-delete-habits.quiz.multi-choice-safe-delete-habits",
+      "optionIds": [
+        "a",
+        "b"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a"
+        ]
+      }
+    },
+    {
+      "id": "fill-blank-why-preview-delete",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql.sql_module_12.safe-delete-habits.quiz.fill-blank-why-preview-delete",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "prevent"
+      }
+    }
+  ]
+}

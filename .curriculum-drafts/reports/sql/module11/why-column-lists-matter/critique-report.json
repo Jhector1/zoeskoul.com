@@ -6,14 +6,14 @@
       "code": "SQL_WEAK_DISTRACTORS",
       "category": "pedagogy",
       "severity": "warn",
-      "exerciseId": "ex-4",
+      "exerciseId": "multi-why-column-list",
       "message": "Multi-choice exercise has too few options for strong distractors."
     },
     {
       "code": "MULTI_CHOICE_TOO_FEW_CORRECT_OPTIONS",
       "category": "clarity",
       "severity": "warn",
-      "message": "Multi-choice exercise \"ex-4\" looks like it should have multiple correct answers, but only 1 correct option is marked."
+      "message": "Multi-choice exercise \"multi-why-column-list\" looks like it should have multiple correct answers, but only 1 correct option is marked."
     }
   ]
 }

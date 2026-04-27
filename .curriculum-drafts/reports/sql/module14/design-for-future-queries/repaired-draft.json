@@ -1,0 +1,113 @@
+{
+  "title": "Design for future queries",
+  "summary": "Learn how to design relational database tables with future queries in mind, using the products_catalog dataset as a practical example.",
+  "minutes": 15,
+  "sketchBlocks": [
+    {
+      "id": "sketch-why-plan-queries",
+      "title": "Why Plan for Future Queries?",
+      "bodyMarkdown": "When designing a database, it's important to think ahead about the types of questions you'll want to answer. For example, if you want to track products by category or see which products are low in stock, your table should include columns like `category` and `stock`. Planning for future queries helps you avoid missing important data and keeps your database flexible."
+    },
+    {
+      "id": "sketch-example-products-table",
+      "title": "Example: Products Table",
+      "bodyMarkdown": "Consider the `products` table in the `products_catalog` dataset:\n\n```sql\nCREATE TABLE products (\n  id INTEGER PRIMARY KEY,\n  name TEXT NOT NULL,\n  category TEXT NOT NULL,\n  price REAL NOT NULL,\n  stock INTEGER NOT NULL,\n  created_at TEXT NOT NULL\n);\n```\n\nThis design allows you to easily query for products by category, check inventory levels, or see when products were added."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "fillblank-why-include-category",
+      "kind": "fill_blank_choice",
+      "title": "Why include a 'category' column?",
+      "prompt": "Why is it useful to include a `category` column in the `products` table?",
+      "template": "Including a `category` column makes it easier to ______ products in future queries.",
+      "choices": [
+        "group",
+        "delete",
+        "rename",
+        "ignore"
+      ],
+      "correctValue": "group",
+      "hint": "Focus on the missing SQL concept rather than the exact missing word.",
+      "help": {
+        "concept": "The blank should be filled with the SQL term that matches the job the statement is trying to perform.",
+        "hint_1": "Think about what the missing part is supposed to do in the statement.",
+        "hint_2": "Choose the SQL term that best completes the meaning of the statement."
+      }
+    },
+    {
+      "id": "fillblank-stock-column-purpose",
+      "kind": "fill_blank_choice",
+      "title": "Purpose of the 'stock' column",
+      "prompt": "What is the main reason to include a `stock` column in the `products` table?",
+      "template": "The `stock` column helps track how many units of each product are ______.",
+      "choices": [
+        "available",
+        "expensive",
+        "sold",
+        "named"
+      ],
+      "correctValue": "available",
+      "hint": "Think about inventory management.",
+      "help": {
+        "concept": "The `stock` column shows the current inventory for each product, which is important for managing supply.",
+        "hint_1": "It tells you how many items you have left.",
+        "hint_2": "If you want to know which products need restocking, you check this column."
+      }
+    },
+    {
+      "id": "singlechoice-design-flexibility",
+      "kind": "single_choice",
+      "title": "Designing for Flexibility",
+      "prompt": "Which design choice makes a table more flexible for future queries?",
+      "options": [
+        "[object Object]",
+        "A command"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Think about how you would answer different questions using the table.",
+      "help": {
+        "concept": "A flexible design includes columns for key details you might want to query later.",
+        "hint_1": "More specific columns allow for more types of queries.",
+        "hint_2": "If you want to filter or group by a detail, it needs its own column."
+      }
+    },
+    {
+      "id": "multichoice-good-design-habits",
+      "kind": "multi_choice",
+      "title": "Good Beginner Design Habits",
+      "prompt": "Which of the following are good habits when designing tables for future queries? (Choose all that apply)",
+      "options": [
+        "[object Object]",
+        "A command"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Consider which habits help you write useful queries later.",
+      "help": {
+        "concept": "Good design habits include planning for future needs, capturing important data, and making the schema easy to understand.",
+        "hint_1": "Avoid duplication and unclear names.",
+        "hint_2": "Columns should be useful and understandable for future queries."
+      }
+    },
+    {
+      "id": "codeinput-query-products-by-category",
+      "kind": "code_input",
+      "title": "Query products by category",
+      "prompt": "Write a SQL query to select the name and price of all products in the 'Art' category from the `products` table.",
+      "starterCode": "-- Write your SQL query below",
+      "solutionCode": "SELECT name, price FROM products WHERE category = 'Art';",
+      "datasetId": "products_catalog",
+      "recipeType": "sql_query",
+      "hint": "Focus on the concept being tested.",
+      "help": {
+        "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+        "hint_1": "Eliminate choices or interpretations that do not match the task.",
+        "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+      }
+    }
+  ]
+}
