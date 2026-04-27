@@ -35,16 +35,17 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
-# env files
+# env files anywhere in repo
 .env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+.env.*
+**/.env
+**/.env.*
 
 # keep example envs
 !.env.example
+!**/.env.example
 !.env*.example
+!**/.env*.example
 
 # OS / editor
 .DS_Store
