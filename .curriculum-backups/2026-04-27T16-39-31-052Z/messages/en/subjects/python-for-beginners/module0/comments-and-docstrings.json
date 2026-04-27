@@ -1,0 +1,119 @@
+{
+  "topics": {
+    "python-for-beginners": {
+      "python-0": {
+        "comments-and-docstrings": {
+          "label": "Comments and Docstrings",
+          "summary": "Understand the importance of comments and documentation in code.",
+          "cards": {
+            "sketch0": {
+              "title": "Importance of Comments"
+            },
+            "sketch1": {
+              "title": "Using Docstrings"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Practice"
+            }
+          },
+          "projectSteps": {
+            "q1": {
+              "title": "Write a Function with a Docstring"
+            },
+            "q2": {
+              "title": "Commenting Code"
+            },
+            "q3": {
+              "title": "Docstring for a Class"
+            }
+          },
+          "quiz": {
+            "q1": {
+              "title": "Write a Function with a Docstring",
+              "prompt": "Create a function named `add_numbers` that takes two parameters and returns their sum. Include a docstring that describes what the function does.",
+              "hint": "Focus on the programming task being asked for, not on copying final solution text.",
+              "help": {
+                "concept": "Build the solution from the behavior the exercise is testing.",
+                "hint_1": "Think about which steps, functions, or statements are required for the task.",
+                "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "def add_numbers(a, b):\n    # Your code here"
+            },
+            "q2": {
+              "title": "Commenting Code",
+              "prompt": "Add comments to the following code to explain what each part does.",
+              "hint": "Use comments to clarify the purpose of each line.",
+              "help": {
+                "concept": "Comments help others understand your code by explaining the logic behind it.",
+                "hint_1": "Start each comment with a `#` symbol.",
+                "hint_2": "Be clear and concise in your explanations."
+              },
+              "starterCode": "x = 10\nresult = x * 2\nprint(result)"
+            },
+            "q3": {
+              "title": "Docstring for a Class",
+              "prompt": "Create a class named `Calculator` with a method `multiply` that takes two numbers and returns their product. Include a docstring for the class and the method.",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Build the solution from the behavior the exercise is testing.",
+                "hint_1": "Think about which steps, functions, or statements are needed.",
+                "hint_2": "Construct the solution from the result the prompt asks for."
+              },
+              "starterCode": "class Calculator:\n    def multiply(self, a, b):\n        # Your code here"
+            },
+            "q4": {
+              "title": "Fill in the Blank with the Correct Term",
+              "prompt": "In Python, a __________ is used to document a function, class, or method.",
+              "hint": "Focus on the missing concept or keyword.",
+              "help": {
+                "concept": "This task checks the key idea behind fill in the blank with the correct term.",
+                "hint_1": "Look for the word or phrase that best matches the lesson concept.",
+                "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
+              },
+              "template": "In Python, a {blank} is used to document a function, class, or method.",
+              "choices": [
+                "comment",
+                "docstring",
+                "annotation"
+              ]
+            },
+            "q5": {
+              "title": "Purpose of Comments",
+              "prompt": "What is the primary purpose of comments in code?",
+              "hint": "Think about how comments help others understand your code.",
+              "help": {
+                "concept": "Comments are used to explain and clarify code for anyone reading it.",
+                "hint_1": "They help in understanding the logic behind the code.",
+                "hint_2": "Comments are not executed as part of the program."
+              },
+              "options": {
+                "a": "To make the code run faster",
+                "b": "To explain the code to others",
+                "c": "To increase the size of the code"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-for-beginners": {
+      "python-0": {
+        "comments-and-docstrings": {
+          "1": {
+            "title": "Importance of Comments",
+            "bodyMarkdown": "Comments are essential for explaining the purpose of code, making it easier for others (and yourself) to understand it later."
+          },
+          "2": {
+            "title": "Using Docstrings",
+            "bodyMarkdown": "Docstrings provide a convenient way of associating documentation with Python modules, functions, classes, and methods."
+          }
+        }
+      }
+    }
+  }
+}

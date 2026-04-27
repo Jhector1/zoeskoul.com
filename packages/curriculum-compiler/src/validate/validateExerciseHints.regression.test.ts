@@ -69,6 +69,33 @@ describe("validateExerciseHints regressions", () => {
         expect(warnings).toEqual([]);
     });
 
+    it("does not flag generic boolean operator words as leaked answers", () => {
+        const warnings = validateExerciseHints({
+            title: "Boolean operators",
+            summary: "Combine conditions",
+            minutes: 15,
+            sketchBlocks: [],
+            quizDraft: [
+                {
+                    id: "multi-boolean-ops",
+                    kind: "multi_choice",
+                    title: "Boolean operators",
+                    prompt: "Which of the following are boolean operators?",
+                    hint: "Focus on operators that combine or invert conditions.",
+                    help: {
+                        concept: "Boolean operators are used to combine or modify conditions.",
+                        hint_1: "Think about operators used in logical expressions.",
+                        hint_2: "Ignore control-flow keywords that are not operators.",
+                    },
+                    options: ["AND", "OR", "IF", "NOT"],
+                    correctOptionIds: ["a", "b", "d"],
+                },
+            ],
+        } as any);
+
+        expect(warnings).toEqual([]);
+    });
+
     it("flags single_choice hints that reveal exact correct option text", () => {
         const warnings = validateExerciseHints({
             title: "Ordering",

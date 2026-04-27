@@ -1,0 +1,95 @@
+{
+  "title": "Nested Conditionals",
+  "summary": "Learn about nested if statements and their applications.",
+  "minutes": 30,
+  "sketchBlocks": [
+    {
+      "id": "1",
+      "title": "Understanding Nested Conditionals",
+      "bodyMarkdown": "Nested conditionals allow you to evaluate multiple conditions in a structured way. They are essential for making decisions based on complex criteria."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "q1",
+      "kind": "code_input",
+      "title": "Implement a Nested If Statement",
+      "prompt": "Write a function that checks if a number is positive, negative, or zero using nested if statements.",
+      "hint": "Think about how you can use if-else statements to categorize the number.",
+      "help": {
+        "concept": "Nested if statements allow you to check multiple conditions in a hierarchy.",
+        "hint_1": "Start by checking if the number is greater than zero.",
+        "hint_2": "If it's not greater than zero, check if it's less than zero."
+      },
+      "starterCode": "def check_number(num):\n    # Your code here\n",
+      "solutionCode": "def check_number(num):\n    if num > 0:\n        return 'Positive'\n    else:\n        if num < 0:\n            return 'Negative'\n        else:\n            return 'Zero'"
+    },
+    {
+      "id": "q2",
+      "kind": "code_input",
+      "title": "Nested Conditionals with Age",
+      "prompt": "Create a function that determines if a person is a child, teenager, or adult based on their age using nested conditionals.",
+      "hint": "Consider how you can use age ranges to classify the person.",
+      "help": {
+        "concept": "You can use nested if statements to check age ranges effectively.",
+        "hint_1": "Start by checking if the age is less than 13.",
+        "hint_2": "Then check if the age is less than 20 for teenagers."
+      },
+      "starterCode": "def classify_age(age):\n    # Your code here\n",
+      "solutionCode": "def classify_age(age):\n    if age < 13:\n        return 'Child'\n    else:\n        if age < 20:\n            return 'Teenager'\n        else:\n            return 'Adult'"
+    },
+    {
+      "id": "q3",
+      "kind": "code_input",
+      "title": "Grade Classification",
+      "prompt": "Write a function that assigns a letter grade based on a numeric score using nested if statements.",
+      "hint": "Think about the score ranges for each letter grade.",
+      "help": {
+        "concept": "Nested if statements can help you categorize scores into grades.",
+        "hint_1": "Start by checking if the score is 90 or above.",
+        "hint_2": "Then check for the next ranges downwards."
+      },
+      "starterCode": "def assign_grade(score):\n    # Your code here\n",
+      "solutionCode": "def assign_grade(score):\n    if score >= 90:\n        return 'A'\n    else:\n        if score >= 80:\n            return 'B'\n        elif score >= 70:\n            return 'C'\n        elif score >= 60:\n            return 'D'\n        else:\n            return 'F'"
+    },
+    {
+      "id": "q4",
+      "kind": "fill_blank_choice",
+      "title": "Understanding Nested Conditionals",
+      "prompt": "Nested conditionals are used to evaluate multiple conditions in a structured way. They are essential for making decisions based on ______.",
+      "hint": "Think about what kind of criteria you might evaluate.",
+      "help": {
+        "concept": "Nested conditionals help in making decisions based on complex criteria.",
+        "hint_1": "Consider the types of decisions you make.",
+        "hint_2": "What do you need to evaluate to make a decision?"
+      },
+      "template": "Nested conditionals are used to evaluate multiple conditions in a structured way. They are essential for making decisions based on {blank}.",
+      "choices": [
+        "simple criteria",
+        "complex criteria",
+        "random choices"
+      ],
+      "correctValue": "complex criteria"
+    },
+    {
+      "id": "q5",
+      "kind": "single_choice",
+      "title": "Identify Nested Conditionals",
+      "prompt": "Which of the following is an example of a nested conditional?",
+      "hint": "Look for an if statement inside another if statement.",
+      "help": {
+        "concept": "Nested conditionals involve placing one if statement inside another.",
+        "hint_1": "Check for multiple layers of conditions.",
+        "hint_2": "Identify the structure of the statements."
+      },
+      "options": [
+        "if x > 10: if y < 5: print('A')",
+        "if x > 10: print('A')",
+        "if x > 10: else: print('B')"
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    }
+  ]
+}

@@ -17,6 +17,7 @@ import {
     resolveModuleRuntimePolicy,
     runtimePolicyToTopicRuntimeDefaults,
 } from "../spec/resolveModuleRuntimePolicy.js";
+import { resolveLogicalSectionSlug } from "./resolveLogicalSectionSlug.js";
 
 const SQL_DIALECTS = ["sqlite", "postgres", "mysql", "mssql"] as const;
 
@@ -106,10 +107,13 @@ export function buildSubjectManifestFromPlan(args: {
 
         const sections: SubjectSectionManifest[] = module.sections.map(
             (section) => {
-                const sectionSlug = shape.subjectManifest.sectionSlug(
-                    moduleIndex,
-                    section.order,
-                );
+                const sectionSlug = resolveLogicalSectionSlug({
+                    subjectSlug: blueprint.subjectSlug,
+                    rawSectionSlug: shape.subjectManifest.sectionSlug(
+                        moduleIndex,
+                        section.order,
+                    ),
+                });
 
                 return {
                     slug: sectionSlug,

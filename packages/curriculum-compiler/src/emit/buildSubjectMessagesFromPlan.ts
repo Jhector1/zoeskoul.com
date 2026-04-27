@@ -4,6 +4,7 @@ import type {
 } from "@zoeskoul/curriculum-contracts";
 import type { SubjectShapePack } from "@zoeskoul/curriculum-profiles";
 import { moduleOrderToIndex } from "../spec/moduleOrder.js";
+import { resolveLogicalSectionSlug } from "./resolveLogicalSectionSlug.js";
 
 
 
@@ -128,10 +129,13 @@ export function buildSubjectMessagesFromPlan(args: {
         sectionMessages[logicalModuleSlug] = {};
 
         for (const section of module.sections) {
-            const logicalSectionSlug = shape.subjectManifest.sectionSlug(
-                moduleIndex,
-                section.order,
-            );
+            const logicalSectionSlug = resolveLogicalSectionSlug({
+                subjectSlug,
+                rawSectionSlug: shape.subjectManifest.sectionSlug(
+                    moduleIndex,
+                    section.order,
+                ),
+            });
 
             const topicTitles = section.topics.map((topic) => topic.title);
 

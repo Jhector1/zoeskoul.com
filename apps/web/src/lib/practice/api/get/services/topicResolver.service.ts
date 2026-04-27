@@ -44,6 +44,14 @@ async function topicInModule(prisma: PrismaClient, moduleId: string, topic: { id
   return Boolean(link);
 }
 
+async function findModuleIdBySlug(prisma: PrismaClient, moduleSlug: string) {
+  const row = await prisma.practiceModule.findUnique({
+    where: { slug: moduleSlug },
+    select: { id: true },
+  });
+  return row?.id ?? null;
+}
+
 export async function resolveTopicFromScope
 (args: {
   prisma: PrismaClient;
@@ -215,6 +223,28 @@ export async function resolveTopicFromScope
     if (!moduleIdFromSession && sectionSlug) {
       const ok = await topicInSection(prisma, sectionSlug, row.id);
       if (!ok) {
+        const requestedModuleId = moduleSlug
+            ? await findModuleIdBySlug(prisma, moduleSlug)
+            : null;
+
+        if (requestedModuleId) {
+          const okInRequestedModule = await topicInModule(prisma, requestedModuleId, row);
+          if (okInRequestedModule) {
+            return {
+              kind: "ok",
+              topicId: row.id,
+              topicSlug: row.slug as TopicSlug,
+              genKey: row.genKey ? String(row.genKey) : null,
+              variant: readVariantFromMeta(row),
+              meta: row.meta ?? null,
+
+              requestedTopic,
+              topicFallbackUsed: true,
+              topicFallbackReason: "requested_topic_section_mismatch_fell_back_to_module",
+            };
+          }
+        }
+
         if (!fallbackOnMissing)
           return { kind: "missing", message: `Topic "${dbSlug}" is not in section "${sectionSlug}".` };
 
@@ -357,13 +387,29 @@ export async function resolveTopicFromScope
       },
     });
 
-    if (!sectionRow) return { kind: "missing", message: `Section "${sectionSlug}" not found.` };
+    if (!sectionRow) {
+      if (moduleSlug) {
+        return resolveTopicFromScope({
+          ...args,
+          sectionSlug: undefined,
+        });
+      }
+      return { kind: "missing", message: `Section "${sectionSlug}" not found.` };
+    }
 
     const pool = (sectionRow.topics ?? [])
         .map((x) => x.topic)
         .filter((t) => t?.genKey && !excluded.has(String(t.slug))) as any[];
 
-    if (!pool.length) return { kind: "missing", message: `Section "${sectionSlug}" has no eligible topics.` };
+    if (!pool.length) {
+      if (moduleSlug) {
+        return resolveTopicFromScope({
+          ...args,
+          sectionSlug: undefined,
+        });
+      }
+      return { kind: "missing", message: `Section "${sectionSlug}" has no eligible topics.` };
+    }
 
     const picked = rng.pick(pool);
     return {

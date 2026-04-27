@@ -1,0 +1,118 @@
+{
+  "title": "If, Elif, and Else",
+  "summary": "Control which code runs based on conditions.",
+  "minutes": 25,
+  "sketchBlocks": [
+    {
+      "id": "intro-to-conditional-statements",
+      "title": "Introduction to Conditional Statements",
+      "bodyMarkdown": "Conditional statements allow you to execute different blocks of code based on certain conditions. The most common conditional statements are `if`, `elif`, and `else`."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "code-input-1",
+      "kind": "code_input",
+      "title": "Grade Checker",
+      "prompt": "Write a program that checks a student's grade and prints whether they passed or failed.",
+      "hint": "Use if-elif-else to determine the result based on the grade.",
+      "help": {
+        "concept": "You can use conditional statements to check the value of the grade and decide the output accordingly.",
+        "hint_1": "Consider what grade is needed to pass.",
+        "hint_2": "Think about how to structure your if-elif-else statements."
+      },
+      "starterCode": "grade = int(input('Enter the grade: '))\n\n# Your code here\n",
+      "solutionCode": "grade = int(input('Enter the grade: '))\nif grade >= 60:\n    print('Passed')\nelif grade < 60:\n    print('Failed')",
+      "tests": [
+        {
+          "stdin": "75\n",
+          "stdout": "Passed\n"
+        },
+        {
+          "stdin": "45\n",
+          "stdout": "Failed\n"
+        }
+      ]
+    },
+    {
+      "id": "code-input-2",
+      "kind": "code_input",
+      "title": "Eligibility Checker",
+      "prompt": "Create a program that checks if a person is eligible to vote based on their age.",
+      "hint": "Use a conditional statement to check if the age is 18 or older.",
+      "help": {
+        "concept": "Eligibility can be determined using a simple comparison of age.",
+        "hint_1": "Check if the age variable meets the minimum voting age.",
+        "hint_2": "Use if-else to print the eligibility message."
+      },
+      "starterCode": "age = int(input('Enter your age: '))\n\n# Your code here\n",
+      "solutionCode": "age = int(input('Enter your age: '))\nif age >= 18:\n    print('Eligible to vote')\nelse:\n    print('Not eligible to vote')",
+      "tests": [
+        {
+          "stdin": "20\n",
+          "stdout": "Eligible to vote\n"
+        },
+        {
+          "stdin": "16\n",
+          "stdout": "Not eligible to vote\n"
+        }
+      ]
+    },
+    {
+      "id": "single-choice-1",
+      "kind": "single_choice",
+      "title": "Understanding If Statements",
+      "prompt": "What will be the output of the following code?\n\n```python\nx = 10\nif x > 5:\n    print('Greater')\nelse:\n    print('Smaller')\n```",
+      "hint": "Think about the comparison being made.",
+      "help": {
+        "concept": "The if statement checks if the condition is true or false.",
+        "hint_1": "Consider the value of x in relation to 5.",
+        "hint_2": "What happens if the condition is true?"
+      },
+      "options": [
+        "Greater",
+        "Smaller",
+        "No output"
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    },
+    {
+      "id": "multi-choice-1",
+      "kind": "multi_choice",
+      "title": "Identifying Conditional Statements",
+      "prompt": "Which of the following are valid conditional statements in Python? Select all that apply.",
+      "hint": "Look for the correct syntax used in Python for conditionals.",
+      "help": {
+        "concept": "Conditional statements must follow specific syntax rules.",
+        "hint_1": "Check if the statements use the correct keywords.",
+        "hint_2": "Remember that indentation is important in Python."
+      },
+      "options": [
+        "if x > 10:",
+        "elif x < 5:",
+        "else x == 0:",
+        "if (x == 0):"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ]
+    },
+    {
+      "id": "fill-blank-choice-1",
+      "kind": "fill_blank_choice",
+      "title": "Complete the Conditional Statement",
+      "prompt": "Fill in the blank: In Python, the `if` statement is used to check a condition and execute a block of code if the condition is _____.",
+      "template": "In Python, the `if` statement is used to check a condition and execute a block of code if the condition is {blank}.",
+      "choices": [
+        "true",
+        "false",
+        "none"
+      ],
+      "correctValue": "true"
+    }
+  ]
+}

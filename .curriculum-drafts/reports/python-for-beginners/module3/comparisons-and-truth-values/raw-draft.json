@@ -1,0 +1,121 @@
+{
+  "title": "Comparisons and Truth Values",
+  "summary": "Use comparison operators and understand True and False results.",
+  "minutes": 22,
+  "sketchBlocks": [
+    {
+      "id": "intro-to-comparisons",
+      "title": "Introduction to Comparisons",
+      "bodyMarkdown": "In Python, comparisons are made using operators like `==`, `!=`, `<`, `>`, `<=`, and `>=`. These operators help us determine the relationship between values."
+    },
+    {
+      "id": "truth-values",
+      "title": "Understanding Truth Values",
+      "bodyMarkdown": "In Python, every value has a truth value. For example, non-zero numbers and non-empty strings are considered `True`, while zero and empty strings are `False`."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "comparison-operators",
+      "kind": "single_choice",
+      "title": "What does the `==` operator do?",
+      "prompt": "Select the correct answer.",
+      "hint": "It checks for equality.",
+      "help": {
+        "concept": "The `==` operator compares two values to see if they are equal.",
+        "hint_1": "Think about how you would check if two numbers are the same.",
+        "hint_2": "This operator returns `True` if both values are equal, otherwise it returns `False`."
+      },
+      "options": [
+        "Checks if two values are equal",
+        "Checks if two values are not equal",
+        "Compares the size of two values",
+        "Checks if one value is greater than the other"
+      ],
+      "correctOptionIds": [
+        "0"
+      ]
+    },
+    {
+      "id": "truthiness-in-python",
+      "kind": "multi_choice",
+      "title": "Which of the following values are considered `False` in Python?",
+      "prompt": "Select all that apply.",
+      "hint": "Think about what values are treated as `False`.",
+      "help": {
+        "concept": "In Python, certain values are inherently `False`, such as `0`, `None`, and empty collections.",
+        "hint_1": "Consider numbers and collections that might be empty.",
+        "hint_2": "Remember that `False` is a specific boolean value."
+      },
+      "options": [
+        "0",
+        "'' (empty string)",
+        "None",
+        "'False'",
+        "[] (empty list)"
+      ],
+      "correctOptionIds": [
+        "0",
+        "1",
+        "2",
+        "4"
+      ]
+    },
+    {
+      "id": "fill-in-the-blank-true-false",
+      "kind": "fill_blank_choice",
+      "title": "Fill in the blank: The expression `5 > 3` evaluates to ___",
+      "prompt": "What is the result of the expression?",
+      "template": "The expression `5 > 3` evaluates to ___",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "correctValue": "True"
+    },
+    {
+      "id": "compare-numbers",
+      "kind": "code_input",
+      "title": "Compare Two Numbers",
+      "prompt": "Write a program that compares two numbers and prints whether the first is greater than, less than, or equal to the second.",
+      "starterCode": "def compare_numbers(a, b):\n    # Your code here\n",
+      "solutionCode": "def compare_numbers(a, b):\n    if a > b:\n        print('First number is greater')\n    elif a < b:\n        print('First number is less')\n    else:\n        print('Both numbers are equal')\n\n# Example usage\ncompare_numbers(5, 3)",
+      "tests": [
+        {
+          "stdin": "5 3",
+          "stdout": "First number is greater"
+        },
+        {
+          "stdin": "2 4",
+          "stdout": "First number is less"
+        },
+        {
+          "stdin": "3 3",
+          "stdout": "Both numbers are equal"
+        }
+      ]
+    },
+    {
+      "id": "truthiness-check",
+      "kind": "code_input",
+      "title": "Check Truthiness of a Value",
+      "prompt": "Write a program that checks if a value is truthy or falsy and prints the result.",
+      "starterCode": "def check_truthiness(value):\n    # Your code here\n",
+      "solutionCode": "def check_truthiness(value):\n    if value:\n        print('Value is truthy')\n    else:\n        print('Value is falsy')\n\n# Example usage\ncheck_truthiness(0)\ncheck_truthiness('Hello')",
+      "tests": [
+        {
+          "stdin": "0",
+          "stdout": "Value is falsy"
+        },
+        {
+          "stdin": "'Hello'",
+          "stdout": "Value is truthy"
+        },
+        {
+          "stdin": "''",
+          "stdout": "Value is falsy"
+        }
+      ]
+    }
+  ]
+}

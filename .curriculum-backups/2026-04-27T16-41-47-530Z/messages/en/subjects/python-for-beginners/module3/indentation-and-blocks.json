@@ -1,0 +1,123 @@
+{
+  "topics": {
+    "python-for-beginners": {
+      "python-3": {
+        "indentation-and-blocks": {
+          "label": "Indentation and Blocks",
+          "summary": "Understand why indentation controls structure in Python.",
+          "cards": {
+            "sketch0": {
+              "title": "Understanding Indentation"
+            },
+            "sketch1": {
+              "title": "Why Indentation Matters"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Practice"
+            }
+          },
+          "projectSteps": {
+            "quiz_4": {
+              "title": "Create a simple conditional statement."
+            },
+            "quiz_5": {
+              "title": "Check for even or odd."
+            }
+          },
+          "quiz": {
+            "quiz_1": {
+              "title": "What does indentation control in Python?",
+              "prompt": "Select the correct answer.",
+              "hint": "Think about how Python interprets code structure.",
+              "help": {
+                "concept": "Indentation in Python defines the grouping of statements. It is crucial for creating blocks of code that belong together.",
+                "hint_1": "Consider how other programming languages handle code blocks.",
+                "hint_2": "Remember, indentation is not just for looks; it affects how the code runs."
+              },
+              "options": {
+                "a": "It controls the execution flow.",
+                "b": "It defines variable scope.",
+                "c": "It indicates comments.",
+                "d": "It controls the structure of the code."
+              }
+            },
+            "quiz_2": {
+              "title": "Which of the following are true about indentation in Python?",
+              "prompt": "Select all that apply.",
+              "hint": "Think about the consequences of incorrect indentation.",
+              "help": {
+                "concept": "Indentation affects how Python interprets the code, and incorrect indentation can lead to errors.",
+                "hint_1": "Consider what happens if you mix tabs and spaces.",
+                "hint_2": "Think about how indentation relates to control structures like loops and conditionals."
+              },
+              "options": {
+                "a": "It can cause syntax errors.",
+                "b": "It is optional in Python.",
+                "c": "It defines code blocks.",
+                "d": "It can affect the logic of the program."
+              }
+            },
+            "quiz_3": {
+              "title": "Complete the statement about indentation.",
+              "prompt": "In Python, indentation is used to define a ________.",
+              "hint": "Focus on the missing concept or keyword.",
+              "help": {
+                "concept": "This task checks the key idea behind complete the statement about indentation..",
+                "hint_1": "Look for the word or phrase that best matches the lesson concept.",
+                "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
+              },
+              "template": "In Python, indentation is used to define a {blank}.",
+              "choices": [
+                "block",
+                "variable",
+                "function",
+                "loop"
+              ]
+            },
+            "quiz_4": {
+              "title": "Create a simple conditional statement.",
+              "prompt": "Write a program that checks if a number is positive, negative, or zero.",
+              "hint": "Focus on the programming task being asked for, not on copying final solution text.",
+              "help": {
+                "concept": "Build the solution from the behavior the exercise is testing.",
+                "hint_1": "Think about which steps, functions, or statements are required for the task.",
+                "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "number = int(input('Enter a number: '))\n\n# Your code here"
+            },
+            "quiz_5": {
+              "title": "Check for even or odd.",
+              "prompt": "Write a program that checks if a number is even or odd.",
+              "hint": "Focus on the programming task being asked for, not on copying final solution text.",
+              "help": {
+                "concept": "Build the solution from the behavior the exercise is testing.",
+                "hint_1": "Think about which steps, functions, or statements are required for the task.",
+                "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "number = int(input('Enter a number: '))\n\n# Your code here"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-for-beginners": {
+      "python-3": {
+        "indentation-and-blocks": {
+          "sketch_1": {
+            "title": "Understanding Indentation",
+            "bodyMarkdown": "In Python, indentation is not just for readability; it defines the structure of the code. Blocks of code are defined by their indentation level."
+          },
+          "sketch_2": {
+            "title": "Why Indentation Matters",
+            "bodyMarkdown": "Incorrect indentation can lead to errors or unexpected behavior in your program. Always ensure your code blocks are properly indented."
+          }
+        }
+      }
+    }
+  }
+}

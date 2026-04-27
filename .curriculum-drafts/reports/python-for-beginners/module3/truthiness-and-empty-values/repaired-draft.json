@@ -1,0 +1,141 @@
+{
+  "title": "Truthiness and Empty Values",
+  "summary": "Understand how empty strings, zero, None, and collections behave in conditions.",
+  "minutes": 20,
+  "sketchBlocks": [
+    {
+      "id": "1",
+      "title": "Understanding Truthiness",
+      "bodyMarkdown": "In Python, certain values are considered 'falsy', meaning they evaluate to False in a boolean context. These include: empty strings, zero, None, and empty collections (like lists and dictionaries)."
+    },
+    {
+      "id": "2",
+      "title": "Using Conditions",
+      "bodyMarkdown": "When using if statements, it's important to understand how Python evaluates these values. For example, an if statement will not execute its block if the condition evaluates to False."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "q1",
+      "kind": "code_input",
+      "title": "Check Truthiness of Values",
+      "prompt": "Write a function that takes a value and returns 'Truthy' if the value is truthy and 'Falsy' if it is falsy.",
+      "starterCode": "def check_truthiness(value):\n    # Your code here",
+      "solutionCode": "def check_truthiness(value):\n    return 'Truthy' if value else 'Falsy'",
+      "tests": [
+        {
+          "stdin": "0",
+          "stdout": "Falsy"
+        },
+        {
+          "stdin": "''",
+          "stdout": "Falsy"
+        },
+        {
+          "stdin": "None",
+          "stdout": "Falsy"
+        },
+        {
+          "stdin": "[1, 2, 3]",
+          "stdout": "Truthy"
+        }
+      ],
+      "hint": "Focus on the programming task being asked for, not on copying final solution text.",
+      "help": {
+        "concept": "Build the solution from the behavior the exercise is testing.",
+        "hint_1": "Think about which steps, functions, or statements are required for the task.",
+        "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
+      }
+    },
+    {
+      "id": "q2",
+      "kind": "fill_blank_choice",
+      "title": "Identify Falsy Values",
+      "prompt": "Choose the best value for the first missing blank in the statement.",
+      "template": "The first missing value is [blank1].",
+      "choices": [
+        "0",
+        "1",
+        "True",
+        "None"
+      ],
+      "correctValue": "0",
+      "hint": "Think of values that do not evaluate to True.",
+      "help": {
+        "concept": "Falsy values in Python include the missing term, '', None, and empty collections.",
+        "hint_1": "Consider the numeric and string representations.",
+        "hint_2": "Remember that empty lists and dictionaries are also falsy."
+      }
+    },
+    {
+      "id": "q3",
+      "kind": "single_choice",
+      "title": "Which is Falsy?",
+      "prompt": "Which of the following values is considered falsy in Python?",
+      "options": [
+        "0",
+        "1",
+        "True",
+        "5"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Focus on the main concept being tested and eliminate choices that describe something different.",
+      "help": {
+        "concept": "Choose the option that matches the core idea described in the question without relying on repeated wording from the answer choices.",
+        "hint_1": "Rule out options that describe a different role, behavior, or concept than the question is testing.",
+        "hint_2": "Pick the option that best matches the concept, not the one that simply repeats familiar wording."
+      }
+    },
+    {
+      "id": "q4",
+      "kind": "multi_choice",
+      "title": "Select Falsy Values",
+      "prompt": "Select all values that are considered falsy in Python.",
+      "options": [
+        "0",
+        "''",
+        "5",
+        "None"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ],
+      "hint": "Focus on the main concept being tested and eliminate choices that describe something different.",
+      "help": {
+        "concept": "Choose the option that matches the core idea described in the question without relying on repeated wording from the answer choices.",
+        "hint_1": "Rule out options that describe a different role, behavior, or concept than the question is testing.",
+        "hint_2": "Pick the option that best matches the concept, not the one that simply repeats familiar wording."
+      }
+    },
+    {
+      "id": "policy_code_input_1",
+      "kind": "code_input",
+      "title": "Check whether a list has items",
+      "prompt": "Read a line of text. Print `True` when the line is not empty and `False` when it is empty.",
+      "starterCode": "text = input()\n# Your code here",
+      "solutionCode": "text = input()\nif text:\n    print(True)\nelse:\n    print(False)",
+      "tests": [
+        {
+          "stdin": "hello\n",
+          "stdout": "True\n",
+          "match": "exact"
+        },
+        {
+          "stdin": "\n",
+          "stdout": "False\n",
+          "match": "exact"
+        }
+      ],
+      "hint": "Focus on the concept being tested.",
+      "help": {
+        "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+        "hint_1": "Eliminate choices or interpretations that do not match the task.",
+        "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+      }
+    }
+  ]
+}

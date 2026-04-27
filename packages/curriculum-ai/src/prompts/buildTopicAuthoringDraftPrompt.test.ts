@@ -50,4 +50,35 @@ describe("buildTopicAuthoringDraftPrompt", () => {
         expect(prompt.system).toContain("If profileId is sql:");
         expect(prompt.system).toContain('code_input recipeType must be "sql_query"');
     });
+
+    it("includes fixed test guidance for non-sql code_input exercises", () => {
+        const prompt = buildTopicAuthoringDraftPrompt({
+            locale: "en",
+            seed: {
+                profileId: "python",
+                exercisePolicy: undefined,
+            } as any,
+            shape: {} as any,
+        });
+
+        expect(prompt.system).toContain('prefer code_input recipeType "fixed_tests"');
+        expect(prompt.system).toContain("include at least one real stdin/stdout test case");
+    });
+
+    it("includes teaching-quality guidance for sketches and programming examples", () => {
+        const prompt = buildTopicAuthoringDraftPrompt({
+            locale: "en",
+            seed: {
+                profileId: "python",
+                exercisePolicy: undefined,
+            } as any,
+            shape: {} as any,
+        });
+
+        expect(prompt.system).toContain("Teaching-quality rules for sketchBlocks in every subject:");
+        expect(prompt.system).toContain("Include at least one concrete worked example");
+        expect(prompt.system).toContain("Extra teaching rules for programming-family profiles:");
+        expect(prompt.system).toContain("explain it step by step or line by line");
+        expect(prompt.system).toContain("Include a small 'Try it yourself' follow-up");
+    });
 });

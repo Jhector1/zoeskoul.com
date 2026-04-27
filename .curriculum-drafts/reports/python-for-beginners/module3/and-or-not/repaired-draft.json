@@ -1,0 +1,124 @@
+{
+  "title": "And, Or, and Not",
+  "summary": "Combine conditions with boolean operators.",
+  "minutes": 25,
+  "sketchBlocks": [
+    {
+      "id": "1",
+      "title": "Understanding Boolean Logic",
+      "bodyMarkdown": "Boolean logic is fundamental in programming, allowing us to combine conditions using operators like AND, OR, and NOT."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "1",
+      "kind": "code_input",
+      "title": "Check Eligibility for a Discount",
+      "prompt": "Write a program that checks if a customer is eligible for a discount based on their membership status and purchase amount.",
+      "starterCode": "membership = input('Enter membership status (gold/silver/none): ')\npurchase_amount = float(input('Enter purchase amount: '))\n\n# Your code here",
+      "solutionCode": "membership = input('Enter membership status (gold/silver/none): ')\npurchase_amount = float(input('Enter purchase amount: '))\n\nif (membership == 'gold' or membership == 'silver') and purchase_amount > 100:\n    print('Eligible for discount')\nelse:\n    print('Not eligible for discount')",
+      "tests": [
+        {
+          "stdin": "gold\n150\n",
+          "stdout": "Eligible for discount\n"
+        },
+        {
+          "stdin": "silver\n50\n",
+          "stdout": "Not eligible for discount\n"
+        }
+      ],
+      "hint": "Focus on the programming task being asked for, not on copying final solution text.",
+      "help": {
+        "concept": "Build the solution from the behavior the exercise is testing.",
+        "hint_1": "Think about which steps, functions, or statements are required for the task.",
+        "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
+      }
+    },
+    {
+      "id": "2",
+      "kind": "code_input",
+      "title": "Determine Voting Eligibility",
+      "prompt": "Create a program that checks if a person is eligible to vote based on their age and citizenship status.",
+      "starterCode": "age = int(input('Enter your age: '))\ncitizenship = input('Are you a citizen? (yes/no): ')\n\n# Your code here",
+      "solutionCode": "age = int(input('Enter your age: '))\ncitizenship = input('Are you a citizen? (yes/no): ')\n\nif age >= 18 and citizenship == 'yes':\n    print('Eligible to vote')\nelse:\n    print('Not eligible to vote')",
+      "tests": [
+        {
+          "stdin": "20\nyes\n",
+          "stdout": "Eligible to vote\n"
+        },
+        {
+          "stdin": "16\nno\n",
+          "stdout": "Not eligible to vote\n"
+        }
+      ],
+      "hint": "Focus on the programming task being asked for, not on copying final solution text.",
+      "help": {
+        "concept": "Build the solution from the behavior the exercise is testing.",
+        "hint_1": "Think about which steps, functions, or statements are required for the task.",
+        "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
+      }
+    },
+    {
+      "id": "3",
+      "kind": "single_choice",
+      "title": "Understanding AND Operator",
+      "prompt": "What does the AND operator do in boolean logic?",
+      "options": [
+        "Returns true if at least one condition is true.",
+        "Returns true only if both conditions are true.",
+        "Returns false if both conditions are true."
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Focus on the main concept being tested and eliminate choices that describe something different.",
+      "help": {
+        "concept": "Choose the option that matches the core idea described in the question without relying on repeated wording from the answer choices.",
+        "hint_1": "Rule out options that describe a different role, behavior, or concept than the question is testing.",
+        "hint_2": "Pick the option that best matches the concept, not the one that simply repeats familiar wording."
+      }
+    },
+    {
+      "id": "4",
+      "kind": "multi_choice",
+      "title": "Identifying Boolean Operators",
+      "prompt": "Which of the following are boolean operators?",
+      "options": [
+        "AND",
+        "OR",
+        "IF",
+        "NOT"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ],
+      "hint": "Focus on the concept being tested.",
+      "help": {
+        "concept": "Think about the idea the question is checking, not the exact answer wording.",
+        "hint_1": "Eliminate options that do not match the concept being tested.",
+        "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+      }
+    },
+    {
+      "id": "5",
+      "kind": "fill_blank_choice",
+      "title": "Complete the Logic Statement",
+      "prompt": "Fill in the blank: The expression 'x > 5 _____ y < 10' will evaluate to true if both conditions are true.",
+      "template": "The expression 'x > 5 {blank} y < 10' will evaluate to true if both conditions are true.",
+      "choices": [
+        "AND",
+        "OR",
+        "NOT"
+      ],
+      "correctValue": "AND",
+      "hint": "Think about how to combine conditions.",
+      "help": {
+        "concept": "You can use boolean operators to combine conditions in logical expressions.",
+        "hint_1": "Consider which operator requires both conditions to be true.",
+        "hint_2": "This operator is commonly used in programming."
+      }
+    }
+  ]
+}

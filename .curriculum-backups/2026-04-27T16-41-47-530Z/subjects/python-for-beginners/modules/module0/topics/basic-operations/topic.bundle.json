@@ -1,0 +1,156 @@
+{
+  "topicId": "basic-operations",
+  "subjectSlug": "python-for-beginners",
+  "moduleSlug": "python-0",
+  "sectionSlug": "python-0-core-building-blocks",
+  "prefix": "py0",
+  "minutes": 30,
+  "topic": {
+    "labelKey": "topics.python-for-beginners.python-0.basic-operations.label",
+    "summaryKey": "topics.python-for-beginners.python-0.basic-operations.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python-for-beginners.python-0.basic-operations.cards.sketch0.title",
+      "sketchId": "1",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.python-for-beginners.python-0.basic-operations.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 2,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python-for-beginners.python-0.basic-operations.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "q3",
+            "titleKey": "topics.python-for-beginners.python-0.basic-operations.projectSteps.q3.title",
+            "exerciseKey": "q3",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "q4",
+            "titleKey": "topics.python-for-beginners.python-0.basic-operations.projectSteps.q4.title",
+            "exerciseKey": "q4",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "q5",
+            "titleKey": "topics.python-for-beginners.python-0.basic-operations.projectSteps.q5.title",
+            "exerciseKey": "q5",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-for-beginners.python-0.basic-operations.1.title",
+      "bodyKey": "sketches.python-for-beginners.python-0.basic-operations.1.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "q1",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-for-beginners.python-0.basic-operations.quiz.q1",
+      "optionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "q2",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-for-beginners.python-0.basic-operations.quiz.q2",
+      "choiceCount": 3,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "6"
+      }
+    },
+    {
+      "id": "q3",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-for-beginners.python-0.basic-operations.quiz.q3",
+      "language": "python",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "template_io",
+        "vars": {},
+        "tests": [],
+        "solutionTemplate": "def calculate_average(a, b):\n    return (a + b) / 2"
+      }
+    },
+    {
+      "id": "q4",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-for-beginners.python-0.basic-operations.quiz.q4",
+      "language": "python",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "template_io",
+        "vars": {},
+        "tests": [],
+        "solutionTemplate": "def multiply(a, b):\n    return a * b"
+      }
+    },
+    {
+      "id": "q5",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-for-beginners.python-0.basic-operations.quiz.q5",
+      "language": "python",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "template_io",
+        "vars": {},
+        "tests": [],
+        "solutionTemplate": "def divide(a, b):\n    if b == 0:\n        return 'Cannot divide by zero'\n    return a / b"
+      }
+    }
+  ]
+}

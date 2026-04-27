@@ -1,0 +1,112 @@
+{
+  "topics": {
+    "python-for-beginners": {
+      "python-1": {
+        "elif-and-else": {
+          "label": "Elif and Else",
+          "summary": "Explore how to use elif and else for multiple conditions.",
+          "cards": {
+            "sketch0": {
+              "title": "Understanding Elif and Else"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Practice"
+            }
+          },
+          "projectSteps": {
+            "1": {
+              "title": "Using Elif in Python"
+            },
+            "2": {
+              "title": "Elif and Else Logic"
+            },
+            "3": {
+              "title": "Complex Elif Statements"
+            }
+          },
+          "quiz": {
+            "1": {
+              "title": "Using Elif in Python",
+              "prompt": "Write a function that checks the value of a variable and returns a string based on its value using elif.",
+              "hint": "Focus on the programming task being asked for, not on copying final solution text.",
+              "help": {
+                "concept": "Build the solution from the behavior the exercise is testing.",
+                "hint_1": "Think about which steps, functions, or statements are required for the task.",
+                "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "def check_value(x):\n    # Your code here"
+            },
+            "2": {
+              "title": "Elif and Else Logic",
+              "prompt": "Create a function that categorizes a number as positive, negative, or zero using elif and else.",
+              "hint": "Focus on the programming task being asked for, not on copying final solution text.",
+              "help": {
+                "concept": "Build the solution from the behavior the exercise is testing.",
+                "hint_1": "Think about which steps, functions, or statements are required for the task.",
+                "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "def categorize_number(num):\n    # Your code here"
+            },
+            "3": {
+              "title": "Complex Elif Statements",
+              "prompt": "Implement a function that checks the grade based on a score using elif statements.",
+              "hint": "Focus on the programming task being asked for, not on copying final solution text.",
+              "help": {
+                "concept": "Build the solution from the behavior the exercise is testing.",
+                "hint_1": "Think about which steps, functions, or statements are required for the task.",
+                "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "def get_grade(score):\n    # Your code here"
+            },
+            "4": {
+              "title": "Understanding Elif Syntax",
+              "prompt": "Choose the best value for the first missing blank in the statement.",
+              "hint": "It's a combination of 'else' and 'if'.",
+              "help": {
+                "concept": "This task checks the key idea behind understanding the missing term syntax.",
+                "hint_1": "Look for the word or phrase that best matches the lesson concept.",
+                "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
+              },
+              "template": "The first missing value is [blank1].",
+              "choices": [
+                "elif",
+                "else",
+                "if"
+              ]
+            },
+            "5": {
+              "title": "Elif Usage",
+              "prompt": "Which of the following is a correct use of elif in Python?",
+              "hint": "Look for the structure that includes if, elif, and else.",
+              "help": {
+                "concept": "Elif must follow an if statement and can be followed by an else statement.",
+                "hint_1": "Check the syntax carefully.",
+                "hint_2": "Remember that elif is used for additional conditions."
+              },
+              "options": {
+                "a": "if x > 10: print('Greater') elif x < 5: print('Smaller')",
+                "b": "elif x > 10: print('Greater') if x < 5: print('Smaller')",
+                "c": "if x > 10: print('Greater') else: print('Smaller') elif x < 5: print('Smaller')"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-for-beginners": {
+      "python-1": {
+        "elif-and-else": {
+          "1": {
+            "title": "Understanding Elif and Else",
+            "bodyMarkdown": "In Python, `elif` and `else` are used to handle multiple conditions in control flow. They allow you to execute different blocks of code based on the evaluation of conditions."
+          }
+        }
+      }
+    }
+  }
+}

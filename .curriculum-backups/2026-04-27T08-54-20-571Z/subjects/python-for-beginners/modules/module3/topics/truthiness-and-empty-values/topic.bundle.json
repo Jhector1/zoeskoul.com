@@ -1,0 +1,211 @@
+{
+  "topicId": "truthiness-and-empty-values",
+  "subjectSlug": "python-for-beginners",
+  "moduleSlug": "python-3",
+  "sectionSlug": "python-3-core-building-blocks",
+  "prefix": "py3",
+  "minutes": 20,
+  "topic": {
+    "labelKey": "topics.python-for-beginners.python-3.truthiness-and-empty-values.label",
+    "summaryKey": "topics.python-for-beginners.python-3.truthiness-and-empty-values.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python-for-beginners.python-3.truthiness-and-empty-values.cards.sketch0.title",
+      "sketchId": "1",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python-for-beginners.python-3.truthiness-and-empty-values.cards.sketch1.title",
+      "sketchId": "2",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.python-for-beginners.python-3.truthiness-and-empty-values.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 3,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python-for-beginners.python-3.truthiness-and-empty-values.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "q1",
+            "titleKey": "topics.python-for-beginners.python-3.truthiness-and-empty-values.projectSteps.q1.title",
+            "exerciseKey": "q1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "q2",
+            "titleKey": "topics.python-for-beginners.python-3.truthiness-and-empty-values.projectSteps.q2.title",
+            "exerciseKey": "q2",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-for-beginners.python-3.truthiness-and-empty-values.1.title",
+      "bodyKey": "sketches.python-for-beginners.python-3.truthiness-and-empty-values.1.bodyMarkdown"
+    },
+    {
+      "id": "2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-for-beginners.python-3.truthiness-and-empty-values.2.title",
+      "bodyKey": "sketches.python-for-beginners.python-3.truthiness-and-empty-values.2.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "q1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-for-beginners.python-3.truthiness-and-empty-values.quiz.q1",
+      "language": "python",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "''",
+            "stdout": "False",
+            "match": "exact"
+          },
+          {
+            "stdin": "'Hello'",
+            "stdout": "True",
+            "match": "exact"
+          },
+          {
+            "stdin": "0",
+            "stdout": "False",
+            "match": "exact"
+          },
+          {
+            "stdin": "42",
+            "stdout": "True",
+            "match": "exact"
+          },
+          {
+            "stdin": "None",
+            "stdout": "False",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "def is_truthy(value):\n    return bool(value)"
+      }
+    },
+    {
+      "id": "q2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-for-beginners.python-3.truthiness-and-empty-values.quiz.q2",
+      "language": "python",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "[]",
+            "stdout": "False",
+            "match": "exact"
+          },
+          {
+            "stdin": "[0, '', None]",
+            "stdout": "False",
+            "match": "exact"
+          },
+          {
+            "stdin": "[0, 'Hello', None]",
+            "stdout": "True",
+            "match": "exact"
+          },
+          {
+            "stdin": "[False, 0, 1]",
+            "stdout": "True",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "def has_truthy_value(lst):\n    for item in lst:\n        if item:\n            return True\n    return False"
+      }
+    },
+    {
+      "id": "q3",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-for-beginners.python-3.truthiness-and-empty-values.quiz.q3",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "q4",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-for-beginners.python-3.truthiness-and-empty-values.quiz.q4",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "q5",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-for-beginners.python-3.truthiness-and-empty-values.quiz.q5",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "'Hello'"
+      }
+    }
+  ]
+}

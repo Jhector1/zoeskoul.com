@@ -1,0 +1,129 @@
+{
+  "title": "Indentation and Blocks",
+  "summary": "Understand why indentation controls structure in Python.",
+  "minutes": 18,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Understanding Indentation",
+      "bodyMarkdown": "In Python, indentation is not just for readability; it defines the structure of the code. Blocks of code are defined by their indentation level."
+    },
+    {
+      "id": "sketch2",
+      "title": "Blocks and Control Flow",
+      "bodyMarkdown": "Control flow statements like if, elif, and else rely on indentation to determine which statements belong to which block."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "quiz1",
+      "kind": "single_choice",
+      "title": "What does indentation control in Python?",
+      "prompt": "Choose the correct statement about indentation.",
+      "hint": "Think about how Python interprets code structure.",
+      "help": {
+        "concept": "Indentation in Python defines the grouping of statements. It is essential for the correct execution of control flow.",
+        "hint_1": "Indentation is not just for aesthetics; it has functional importance.",
+        "hint_2": "Consider how blocks of code are formed in other programming languages."
+      },
+      "options": [
+        "It controls the execution speed of the program.",
+        "It defines the structure of code blocks.",
+        "It is optional and can be ignored.",
+        "It is used only for comments."
+      ],
+      "correctOptionIds": [
+        "b"
+      ]
+    },
+    {
+      "id": "quiz2",
+      "kind": "multi_choice",
+      "title": "Which of the following statements about blocks in Python are true?",
+      "prompt": "Select all that apply.",
+      "hint": "Think about how Python handles multiple conditions.",
+      "help": {
+        "concept": "Blocks in Python are defined by indentation and are crucial for control flow.",
+        "hint_1": "Blocks can contain multiple statements.",
+        "hint_2": "Indentation levels can vary within the same block."
+      },
+      "options": [
+        "Blocks can contain multiple statements.",
+        "Each block must start with a new indentation level.",
+        "Blocks can be nested within other blocks.",
+        "Indentation can be mixed with tabs and spaces."
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c"
+      ]
+    },
+    {
+      "id": "quiz3",
+      "kind": "fill_blank_choice",
+      "title": "Complete the statement about indentation.",
+      "prompt": "In Python, indentation is used to define a ______.",
+      "template": "In Python, indentation is used to define a {blank}.",
+      "choices": [
+        "variable",
+        "function",
+        "block",
+        "loop"
+      ],
+      "correctValue": "block"
+    },
+    {
+      "id": "quiz4",
+      "kind": "code_input",
+      "title": "Create a simple if-else statement.",
+      "prompt": "Write a program that checks if a number is positive or negative.",
+      "hint": "Use an if statement to check the number.",
+      "help": {
+        "concept": "Use if-else statements to control the flow based on conditions.",
+        "hint_1": "Remember to use indentation to define the blocks.",
+        "hint_2": "Consider how you would print the result based on the condition."
+      },
+      "starterCode": "number = int(input('Enter a number: '))\n\n# Your code here\n",
+      "solutionCode": "number = int(input('Enter a number: '))\n\nif number > 0:\n    print('Positive number')\nelif number < 0:\n    print('Negative number')\nelse:\n    print('Zero')",
+      "tests": [
+        {
+          "stdin": "5\n",
+          "stdout": "Positive number\n"
+        },
+        {
+          "stdin": "-3\n",
+          "stdout": "Negative number\n"
+        },
+        {
+          "stdin": "0\n",
+          "stdout": "Zero\n"
+        }
+      ]
+    },
+    {
+      "id": "quiz5",
+      "kind": "code_input",
+      "title": "Check for even or odd.",
+      "prompt": "Write a program that checks if a number is even or odd.",
+      "hint": "Use the modulus operator to determine evenness.",
+      "help": {
+        "concept": "The modulus operator (%) can help determine if a number is even or odd.",
+        "hint_1": "An even number will have a remainder of 0 when divided by 2.",
+        "hint_2": "Think about how you would structure your if statement."
+      },
+      "starterCode": "number = int(input('Enter a number: '))\n\n# Your code here\n",
+      "solutionCode": "number = int(input('Enter a number: '))\n\nif number % 2 == 0:\n    print('Even')\nelse:\n    print('Odd')",
+      "tests": [
+        {
+          "stdin": "4\n",
+          "stdout": "Even\n"
+        },
+        {
+          "stdin": "7\n",
+          "stdout": "Odd\n"
+        }
+      ]
+    }
+  ]
+}

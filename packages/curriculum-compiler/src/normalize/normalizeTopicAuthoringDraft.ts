@@ -524,6 +524,30 @@ function normalizeCodeInput(item: Record<string, unknown>): DraftQuizItem {
             ? item.starterCode
             : defaultStarterCodeForCodeInput(item);
 
+    const tests = Array.isArray(item.tests)
+        ? item.tests
+            .filter((x): x is Record<string, unknown> => !!x && typeof x === "object")
+            .map((x) => {
+                const match: "exact" | "includes" | undefined =
+                    x.match === "includes" || x.match === "exact"
+                        ? x.match
+                        : undefined;
+
+                return {
+                    stdin:
+                        typeof x.stdin === "string"
+                            ? x.stdin
+                            : undefined,
+                    stdout:
+                        typeof x.stdout === "string"
+                            ? x.stdout
+                            : "",
+                    match,
+                };
+            })
+            .filter((x) => x.stdout.trim().length > 0)
+        : undefined;
+
     return {
         id: String(item.id ?? "").trim(),
         kind: "code_input",
@@ -532,6 +556,7 @@ function normalizeCodeInput(item: Record<string, unknown>): DraftQuizItem {
         starterCode,
         solutionCode:
             typeof item.solutionCode === "string" ? item.solutionCode : "",
+        ...(tests?.length ? { tests } : {}),
         datasetId:
             typeof item.datasetId === "string"
                 ? item.datasetId.trim() || undefined

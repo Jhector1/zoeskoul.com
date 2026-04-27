@@ -4,6 +4,12 @@ export type ExerciseHelpDraft = {
     hint_2: string;
 };
 
+export type ProgrammingCodeInputTestDraft = {
+    stdin?: string;
+    stdout: string;
+    match?: "exact" | "includes";
+};
+
 type DraftCommon = {
     id: string;
     title: string;
@@ -56,6 +62,7 @@ export type TopicAuthoringDraft = {
         kind: "code_input";
         starterCode: string;
         solutionCode: string;
+        tests?: ProgrammingCodeInputTestDraft[];
         datasetId?: string;
         recipeType?: "sql_query" | "template_io" | "fixed_tests";
 

@@ -1,0 +1,122 @@
+{
+  "topics": {
+    "python-for-beginners": {
+      "python-3": {
+        "comparisons-and-truth-values": {
+          "label": "Comparisons and Truth Values",
+          "summary": "Use comparison operators and understand True and False results.",
+          "cards": {
+            "sketch0": {
+              "title": "Introduction to Comparisons"
+            },
+            "sketch1": {
+              "title": "Understanding Truth Values"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Practice"
+            }
+          },
+          "projectSteps": {
+            "boolean_logic_example": {
+              "title": "Implement a simple boolean logic checker"
+            },
+            "evaluate_conditions": {
+              "title": "Create a program to evaluate multiple conditions"
+            }
+          },
+          "quiz": {
+            "comparison-operators": {
+              "title": "What does the '==' operator do?",
+              "prompt": "Select the correct answer.",
+              "hint": "It's used to compare two values.",
+              "help": {
+                "concept": "The '==' operator checks if two values are equal.",
+                "hint_1": "Think about equality.",
+                "hint_2": "It returns True if both values are the same."
+              },
+              "options": {
+                "a": "Assigns a value",
+                "b": "Compares two values for equality",
+                "c": "Checks if one value is greater than another",
+                "d": "Checks if one value is less than another"
+              }
+            },
+            "truthiness-in-python": {
+              "title": "Which of the following are considered False in Python?",
+              "prompt": "Select all that apply.",
+              "hint": "Focus on the main concept being tested and eliminate choices that describe something different.",
+              "help": {
+                "concept": "Choose the option that matches the core idea described in the question without relying on repeated wording from the answer choices.",
+                "hint_1": "Rule out options that describe a different role, behavior, or concept than the question is testing.",
+                "hint_2": "Pick the option that best matches the concept, not the one that simply repeats familiar wording."
+              },
+              "options": {
+                "a": "0",
+                "b": "None",
+                "c": "'' (empty string)",
+                "d": "[] (empty list)",
+                "e": "1"
+              }
+            },
+            "fill-in-blank-logic": {
+              "title": "Fill in the blank: The expression '5 > 3' evaluates to ____.",
+              "prompt": "Choose the best value for the missing blank in the statement.",
+              "hint": "It's a basic comparison.",
+              "help": {
+                "concept": "This task checks the key idea behind fill in the blank: the expression '5 > 3' evaluates to ____..",
+                "hint_1": "Look for the word or phrase that best matches the lesson concept.",
+                "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
+              },
+              "template": "The missing value is [blank1].",
+              "choices": [
+                "True",
+                "False"
+              ]
+            },
+            "boolean-logic-example": {
+              "title": "Implement a simple boolean logic checker",
+              "prompt": "Write a program that checks if a number is both greater than 10 and less than 20.",
+              "hint": "Focus on the programming task being asked for, not on copying final solution text.",
+              "help": {
+                "concept": "Build the solution from the behavior the exercise is testing.",
+                "hint_1": "Think about which steps, functions, or statements are required for the task.",
+                "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "def check_number(num):\n    # Your code here"
+            },
+            "evaluate-conditions": {
+              "title": "Create a program to evaluate multiple conditions",
+              "prompt": "Write a program that checks if a number is even and greater than 10.",
+              "hint": "Use the modulus operator to check for evenness.",
+              "help": {
+                "concept": "You can use 'and' to combine checks for evenness and size.",
+                "hint_1": "Check if the number is even using num % 2.",
+                "hint_2": "Combine both conditions in your if statement."
+              },
+              "starterCode": "def evaluate_conditions(num):\n    # Your code here"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-for-beginners": {
+      "python-3": {
+        "comparisons-and-truth-values": {
+          "intro-to-comparisons": {
+            "title": "Introduction to Comparisons",
+            "bodyMarkdown": "In Python, comparison operators are used to compare two values. The result of a comparison is a boolean value: either True or False."
+          },
+          "truth-values": {
+            "title": "Understanding Truth Values",
+            "bodyMarkdown": "Truth values in Python can be derived from various expressions. Knowing how to evaluate these expressions is crucial for controlling program flow."
+          }
+        }
+      }
+    }
+  }
+}

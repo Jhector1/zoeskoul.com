@@ -1,0 +1,90 @@
+{
+  "title": "Elif and Else",
+  "summary": "Explore how to use elif and else for multiple conditions.",
+  "minutes": 30,
+  "sketchBlocks": [
+    {
+      "id": "1",
+      "title": "Understanding Elif and Else",
+      "bodyMarkdown": "In Python, `elif` and `else` are used to handle multiple conditions in control flow. They allow you to execute different blocks of code based on the evaluation of conditions."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "1",
+      "kind": "code_input",
+      "title": "Using Elif in Python",
+      "prompt": "Write a function that checks the value of a variable and returns a string based on its value using elif.",
+      "hint": "Think about how you can chain conditions together.",
+      "help": {
+        "concept": "Elif allows you to check multiple conditions sequentially. If the first condition is false, it checks the next one.",
+        "hint_1": "Consider using multiple if statements with elif for different ranges.",
+        "hint_2": "Remember to handle the case when none of the conditions are met."
+      },
+      "starterCode": "def check_value(x):\n    # Your code here\n",
+      "solutionCode": "def check_value(x):\n    if x > 10:\n        return 'Greater than 10'\n    elif x == 10:\n        return 'Equal to 10'\n    else:\n        return 'Less than 10'"
+    },
+    {
+      "id": "2",
+      "kind": "code_input",
+      "title": "Elif and Else Logic",
+      "prompt": "Create a function that categorizes a number as positive, negative, or zero using elif and else.",
+      "hint": "You will need to check if the number is greater than, less than, or equal to zero.",
+      "help": {
+        "concept": "Using elif and else helps in categorizing values based on conditions.",
+        "hint_1": "Start by checking if the number is zero first.",
+        "hint_2": "Make sure to cover all possible cases."
+      },
+      "starterCode": "def categorize_number(num):\n    # Your code here\n",
+      "solutionCode": "def categorize_number(num):\n    if num > 0:\n        return 'Positive'\n    elif num < 0:\n        return 'Negative'\n    else:\n        return 'Zero'"
+    },
+    {
+      "id": "3",
+      "kind": "code_input",
+      "title": "Complex Elif Statements",
+      "prompt": "Implement a function that checks the grade based on a score using elif statements.",
+      "hint": "You will need to define ranges for different grades.",
+      "help": {
+        "concept": "Elif statements can be used to define multiple ranges for grading.",
+        "hint_1": "Consider what score corresponds to each grade.",
+        "hint_2": "Make sure to cover all possible score ranges."
+      },
+      "starterCode": "def get_grade(score):\n    # Your code here\n",
+      "solutionCode": "def get_grade(score):\n    if score >= 90:\n        return 'A'\n    elif score >= 80:\n        return 'B'\n    elif score >= 70:\n        return 'C'\n    elif score >= 60:\n        return 'D'\n    else:\n        return 'F'"
+    },
+    {
+      "id": "4",
+      "kind": "fill_blank_choice",
+      "title": "Understanding Elif Syntax",
+      "prompt": "Fill in the blank: The keyword used to introduce additional conditions in Python is ___.",
+      "hint": "It's a combination of 'else' and 'if'.",
+      "template": "The keyword used to introduce additional conditions in Python is ___.",
+      "choices": [
+        "elif",
+        "else",
+        "if"
+      ],
+      "correctValue": "elif"
+    },
+    {
+      "id": "5",
+      "kind": "single_choice",
+      "title": "Elif Usage",
+      "prompt": "Which of the following is a correct use of elif in Python?",
+      "hint": "Look for the structure that includes if, elif, and else.",
+      "help": {
+        "concept": "Elif must follow an if statement and can be followed by an else statement.",
+        "hint_1": "Check the syntax carefully.",
+        "hint_2": "Remember that elif is used for additional conditions."
+      },
+      "options": [
+        "if x > 10: print('Greater') elif x < 5: print('Smaller')",
+        "elif x > 10: print('Greater') if x < 5: print('Smaller')",
+        "if x > 10: print('Greater') else: print('Smaller') elif x < 5: print('Smaller')"
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    }
+  ]
+}

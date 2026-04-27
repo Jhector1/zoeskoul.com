@@ -1,0 +1,139 @@
+{
+  "title": "Truthiness and Empty Values",
+  "summary": "Understand how empty strings, zero, None, and collections behave in conditions.",
+  "minutes": 20,
+  "sketchBlocks": [
+    {
+      "id": "1",
+      "title": "Understanding Truthiness",
+      "bodyMarkdown": "In Python, certain values are considered 'falsy', meaning they evaluate to False in a boolean context. These include: empty strings, zero, None, and empty collections (like lists and dictionaries)."
+    },
+    {
+      "id": "2",
+      "title": "Using Conditions",
+      "bodyMarkdown": "When using if statements, it's important to understand how Python evaluates these values. For example, an if statement will not execute its block if the condition evaluates to False."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "q1",
+      "kind": "code_input",
+      "title": "Check Truthiness of Values",
+      "prompt": "Write a function that takes a value and returns 'Truthy' if the value is truthy and 'Falsy' if it is falsy.",
+      "hint": "Consider how Python evaluates different types of values.",
+      "help": {
+        "concept": "In Python, certain values like 0, '', None, and empty collections are considered falsy.",
+        "hint_1": "Think about what values would return False in a condition.",
+        "hint_2": "You can use the 'if' statement to check the value directly."
+      },
+      "starterCode": "def check_truthiness(value):\n    # Your code here\n",
+      "solutionCode": "def check_truthiness(value):\n    return 'Truthy' if value else 'Falsy'",
+      "tests": [
+        {
+          "stdin": "0",
+          "stdout": "Falsy"
+        },
+        {
+          "stdin": "''",
+          "stdout": "Falsy"
+        },
+        {
+          "stdin": "None",
+          "stdout": "Falsy"
+        },
+        {
+          "stdin": "[1, 2, 3]",
+          "stdout": "Truthy"
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "kind": "fill_blank_choice",
+      "title": "Identify Falsy Values",
+      "prompt": "Fill in the blank: In Python, the value ___ is considered falsy.",
+      "hint": "Think of values that do not evaluate to True.",
+      "help": {
+        "concept": "Falsy values in Python include 0, '', None, and empty collections.",
+        "hint_1": "Consider the numeric and string representations.",
+        "hint_2": "Remember that empty lists and dictionaries are also falsy."
+      },
+      "template": "In Python, the value ___ is considered falsy.",
+      "choices": [
+        "0",
+        "1",
+        "True",
+        "None"
+      ],
+      "correctValue": "0"
+    },
+    {
+      "id": "q3",
+      "kind": "single_choice",
+      "title": "Which is Falsy?",
+      "prompt": "Which of the following values is considered falsy in Python?",
+      "hint": "Only one of these values evaluates to False.",
+      "help": {
+        "concept": "Falsy values in Python include 0, '', None, and empty collections.",
+        "hint_1": "Think about the numeric and string representations.",
+        "hint_2": "Remember that empty lists and dictionaries are also falsy."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "0"
+        },
+        {
+          "id": "b",
+          "text": "1"
+        },
+        {
+          "id": "c",
+          "text": "True"
+        },
+        {
+          "id": "d",
+          "text": "5"
+        }
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    },
+    {
+      "id": "q4",
+      "kind": "multi_choice",
+      "title": "Select Falsy Values",
+      "prompt": "Select all values that are considered falsy in Python.",
+      "hint": "There are multiple correct answers.",
+      "help": {
+        "concept": "Falsy values in Python include 0, '', None, and empty collections.",
+        "hint_1": "Consider both numeric and string representations.",
+        "hint_2": "Remember that empty lists and dictionaries are also falsy."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "0"
+        },
+        {
+          "id": "b",
+          "text": "''"
+        },
+        {
+          "id": "c",
+          "text": "5"
+        },
+        {
+          "id": "d",
+          "text": "None"
+        }
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ]
+    }
+  ]
+}

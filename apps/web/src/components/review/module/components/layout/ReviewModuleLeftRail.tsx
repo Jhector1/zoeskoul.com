@@ -27,7 +27,7 @@ export default function ReviewModuleLeftRail({
         <>
             <aside
                 className={cn(
-                    "min-h-0 transition-[width] duration-300 ease-out overflow-hidden",
+                    "min-h-0 shrink-0 transition-[width] duration-300 ease-out overflow-hidden",
                     leftCollapsed && "w-0",
                 )}
                 style={{ width: leftCollapsed ? 0 : leftW }}
@@ -40,7 +40,7 @@ export default function ReviewModuleLeftRail({
             {!leftCollapsed ? (
                 <div
                     onMouseDown={onResizeStart}
-                    className="w-2 cursor-col-resize rounded-xl bg-neutral-200/60 hover:bg-neutral-200 dark:bg-white/5 dark:hover:bg-white/10"
+                    className="w-2 shrink-0 cursor-col-resize rounded-xl bg-neutral-200/60 hover:bg-neutral-200 dark:bg-white/5 dark:hover:bg-white/10"
                     title="Drag to resize sidebar"
                 />
             ) : null}

@@ -1,0 +1,103 @@
+{
+  "title": "Your First Python Program",
+  "summary": "Write and run your first Python program: Hello, World!",
+  "minutes": 30,
+  "sketchBlocks": [
+    {
+      "id": "1",
+      "title": "Introduction to Python",
+      "bodyMarkdown": "In this lesson, you will learn how to write and execute your first Python program, which will print 'Hello, World!' to the console."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "q1",
+      "kind": "code_input",
+      "title": "Write Your First Program",
+      "prompt": "Create a Python script that prints 'Hello, World!'",
+      "starterCode": "// Write your answer below",
+      "solutionCode": "print('Hello, World!')",
+      "hint": "Use the print function.",
+      "help": {
+        "concept": "The print function in Python outputs text to the console.",
+        "hint_1": "Remember to use parentheses with the print function.",
+        "hint_2": "Make sure to include quotes around the text."
+      }
+    },
+    {
+      "id": "q2",
+      "kind": "code_input",
+      "title": "Modify Your Program",
+      "prompt": "Change your program to print 'Hello, [Your Name]!'",
+      "starterCode": "print('Hello, World!')",
+      "solutionCode": "print('Hello, Zoe!')",
+      "hint": "You can replace 'World' with your name.",
+      "help": {
+        "concept": "You can customize the output of the print function by changing the string inside it.",
+        "hint_1": "Make sure to keep the print function intact.",
+        "hint_2": "Use your actual name in the string."
+      }
+    },
+    {
+      "id": "q3",
+      "kind": "code_input",
+      "title": "Add a New Line",
+      "prompt": "Modify your program to print 'Hello, [Your Name]!' on one line and 'Welcome to Python!' on the next line.",
+      "starterCode": "print('Hello, Zoe!')",
+      "solutionCode": "print('Hello, Zoe!\\nWelcome to Python!')",
+      "hint": "Focus on the programming task being asked for, not on copying final solution text.",
+      "help": {
+        "concept": "Build the solution from the behavior the exercise is testing.",
+        "hint_1": "Think about which steps, functions, or statements are required for the task.",
+        "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
+      }
+    },
+    {
+      "id": "q4",
+      "kind": "fill_blank_choice",
+      "title": "Identify the Output",
+      "prompt": "What will the following code output? `print('Hello, World!')` The output will be: `Hello, ____!`",
+      "template": "Hello, {blank}!",
+      "choices": [
+        "World",
+        "Python",
+        "Zoe"
+      ],
+      "correctValue": "World",
+      "hint": "Think about what the print function does.",
+      "help": {
+        "concept": "The print function outputs the string exactly as it is written.",
+        "hint_1": "Focus on the text inside the quotes.",
+        "hint_2": "Remember that 'the missing term' is part of the output."
+      }
+    },
+    {
+      "id": "q5",
+      "kind": "single_choice",
+      "title": "Understanding Print Function",
+      "prompt": "What does the print function do in Python?",
+      "options": [
+        "It creates a variable.",
+        "It outputs text to the console.",
+        "It reads input from the user."
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Focus on the main concept being tested and eliminate choices that describe something different.",
+      "help": {
+        "concept": "Choose the option that matches the core idea described in the question without relying on repeated wording from the answer choices.",
+        "hint_1": "Rule out options that describe a different role, behavior, or concept than the question is testing.",
+        "hint_2": "Pick the option that best matches the concept, not the one that simply repeats familiar wording."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Python Basics Project",
+    "stepIds": [
+      "q1",
+      "q2",
+      "q3"
+    ]
+  }
+}

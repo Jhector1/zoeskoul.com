@@ -1,0 +1,1174 @@
+{
+  "authoringFormatVersion": "2.0",
+  "subjectSlug": "python-for-beginners",
+  "profileId": "python",
+  "title": "Python for Beginners",
+  "subtitle": "A practical beginner path from first program to capstone project",
+  "intendedFor": "Students, career changers, tutors, and self-learners who want a practical Python foundation before data science, automation, or web development.",
+  "sourceLocale": "en",
+  "targetLocales": [],
+  "courseOverview": {
+    "recommendedSequence": "Complete modules in order. Each module adds one core programming skill and ends with a small project-style outcome.",
+    "summary": "This Python course teaches practical programming fundamentals using short explanations, prediction practice, small coding tasks, and portfolio-friendly mini projects.",
+    "moduleSummary": [
+      {
+        "moduleNumber": 1,
+        "title": "Getting Started with Python",
+        "coreSkill": "Help learners run Python, read simple programs, and build confidence with the basic syntax.",
+        "outputFocus": "Build a small personal introduction script that prints formatted information about the learner."
+      },
+      {
+        "moduleNumber": 2,
+        "title": "Variables, Input, and Strings",
+        "coreSkill": "Teach learners how programs remember values, accept user input, and produce readable text.",
+        "outputFocus": "Build a simple profile card generator that asks for user details and prints a formatted result."
+      },
+      {
+        "moduleNumber": 3,
+        "title": "Conditions and Logic",
+        "coreSkill": "Help learners make programs choose different paths using comparisons and conditionals.",
+        "outputFocus": "Build a grade or eligibility checker that explains why a result was selected."
+      },
+      {
+        "moduleNumber": 4,
+        "title": "Loops and Iteration",
+        "coreSkill": "Teach learners to repeat actions, process sequences, and control loop behavior.",
+        "outputFocus": "Build a mini number game or text analyzer that repeats until a condition is met."
+      },
+      {
+        "moduleNumber": 5,
+        "title": "Lists, Tuples, and Dictionaries",
+        "coreSkill": "Teach learners how to organize multiple values and choose the right collection type.",
+        "outputFocus": "Build a small contact book or inventory tracker using lists and dictionaries."
+      },
+      {
+        "moduleNumber": 6,
+        "title": "Functions and Modularity",
+        "coreSkill": "Help learners organize code into reusable functions with clear inputs and outputs.",
+        "outputFocus": "Refactor a calculator or text utility into several reusable functions."
+      },
+      {
+        "moduleNumber": 7,
+        "title": "Files, Exceptions, and Data Cleaning",
+        "coreSkill": "Teach learners how to read/write files and handle messy data without crashing programs.",
+        "outputFocus": "Build a small log or CSV cleaner that reads a file, validates rows, and writes a summary."
+      },
+      {
+        "moduleNumber": 8,
+        "title": "Object-Oriented Programming",
+        "coreSkill": "Introduce classes and objects as a way to model related state and behavior.",
+        "outputFocus": "Build a simple class-based gradebook, game character, or bank account model."
+      },
+      {
+        "moduleNumber": 9,
+        "title": "Testing, Debugging, and Style",
+        "coreSkill": "Help learners verify code behavior, debug systematically, and write readable Python.",
+        "outputFocus": "Take a buggy utility program, add tests, fix the bugs, and improve readability."
+      },
+      {
+        "moduleNumber": 10,
+        "title": "Capstone Automation Project",
+        "coreSkill": "Guide learners through a complete beginner Python project that combines core skills.",
+        "outputFocus": "Complete a capstone such as a task tracker, expense summarizer, text analyzer, or quiz game."
+      }
+    ]
+  },
+  "releasePlan": {
+    "currentRelease": {
+      "name": "python-foundations-v1",
+      "startModuleNumber": 3,
+      "endModuleNumber": 3
+    },
+    "releases": [
+      {
+        "name": "python-foundations-v1",
+        "startModuleNumber": 3,
+        "endModuleNumber": 3
+      }
+    ]
+  },
+  "policy": {
+    "exercisePolicy": {
+      "defaultMix": {
+        "single_choice": 0.12,
+        "multi_choice": 0.1,
+        "drag_reorder": 0.1,
+        "fill_blank_choice": 0.18,
+        "code_input": 0.5
+      },
+      "minimums": {
+        "technicalTopicCodeInputMin": 1,
+        "topicExerciseMin": 4
+      }
+    },
+    "projectPolicy": {
+      "minProjectsBeforeCapstone": 3,
+      "capstoneRequired": true
+    },
+    "qualityPolicy": {
+      "allowBlankTopicIds": false,
+      "allowDuplicateTopicIds": false,
+      "requireUniqueModuleSlugs": true,
+      "requireUniqueSectionSlugs": true,
+      "requireModuleProject": true,
+      "maxModuleProjectLength": 320
+    }
+  },
+  "authoringGuidance": [
+    "This course must always use profileId python and subjectSlug python-for-beginners.",
+    "Do not use SQL datasets, SQL tables, sql_query recipes, datasetId, fixedSqlDialect, resultShape, or checkSql in Python lessons.",
+    "Python code_input exercises should prefer recipeType fixed_tests and include explicit stdin/stdout tests.",
+    "Write code_input solutions as complete runnable programs that read input and print output so the grader can validate them deterministically.",
+    "Keep examples beginner friendly: variables, strings, lists, dictionaries, functions, files, classes, testing, and capstone integration."
+  ],
+  "assessmentAndDelivery": {
+    "suggestedBeginnerRhythm": "Two or three short lessons per week, with one module project after each module.",
+    "recommendedCourseDeliverables": [
+      "Short concept sketches",
+      "Prediction quizzes",
+      "Fill-in syntax checks",
+      "Small Python code-input exercises",
+      "Module projects",
+      "Capstone project"
+    ],
+    "toolingSuggestions": [
+      "Python 3.11+",
+      "Browser runner or local VS Code",
+      "Simple test runner for function-based exercises"
+    ],
+    "closingNote": "Learners finish with enough Python foundation to continue into data science, web backends, scripting, or algorithms."
+  },
+  "modules": [
+    {
+      "moduleNumber": 1,
+      "moduleSlug": "python-1-getting-started",
+      "prefix": "py1",
+      "title": "Getting Started with Python",
+      "purpose": "Help learners run Python, read simple programs, and build confidence with the basic syntax.",
+      "learningObjectives": [
+        "Run Python code in a beginner-friendly environment",
+        "Explain how statements, expressions, and comments work",
+        "Use print output to observe program behavior"
+      ],
+      "guidedExercises": [
+        "Print messages",
+        "Fix syntax errors",
+        "Trace simple statements"
+      ],
+      "quizFocus": [
+        "program flow",
+        "syntax basics",
+        "output prediction"
+      ],
+      "moduleProject": "Build a small personal introduction script that prints formatted information about the learner.",
+      "sections": [
+        {
+          "sectionSlug": "python-1-setup-and-first-programs",
+          "title": "Setup and First Programs",
+          "topics": [
+            {
+              "topicId": "what-python-is",
+              "title": "What Python Is Used For",
+              "summary": "Understand Python's role in automation, web apps, data, scripting, and AI.",
+              "minutes": 12,
+              "technical": false,
+              "learningGoals": [
+                "Describe common Python use cases",
+                "Identify when Python is a good tool"
+              ]
+            },
+            {
+              "topicId": "running-python-code",
+              "title": "Running Python Code",
+              "summary": "Use a REPL, script file, or notebook-style runner to execute Python.",
+              "minutes": 18,
+              "technical": true,
+              "learningGoals": [
+                "Run a Python statement",
+                "Recognize execution errors"
+              ]
+            },
+            {
+              "topicId": "print-comments-and-errors",
+              "title": "Print, Comments, and First Errors",
+              "summary": "Use print statements and comments while learning how syntax errors appear.",
+              "minutes": 20,
+              "technical": true,
+              "learningGoals": [
+                "Write comments",
+                "Use print",
+                "Fix basic syntax mistakes"
+              ]
+            }
+          ]
+        },
+        {
+          "sectionSlug": "python-1-values-and-expressions",
+          "title": "Values and Expressions",
+          "topics": [
+            {
+              "topicId": "values-types-and-literals",
+              "title": "Values, Types, and Literals",
+              "summary": "Recognize strings, integers, floats, booleans, and None.",
+              "minutes": 20,
+              "technical": true,
+              "learningGoals": [
+                "Identify common value types",
+                "Use literals correctly"
+              ]
+            },
+            {
+              "topicId": "operators-and-expressions",
+              "title": "Operators and Expressions",
+              "summary": "Combine values with arithmetic, comparison, and boolean operators.",
+              "minutes": 22,
+              "technical": true,
+              "learningGoals": [
+                "Evaluate expressions",
+                "Predict operator results"
+              ]
+            },
+            {
+              "topicId": "reading-error-messages",
+              "title": "Reading Error Messages",
+              "summary": "Learn how to read tracebacks and locate the line that needs attention.",
+              "minutes": 18,
+              "technical": true,
+              "learningGoals": [
+                "Locate an error line",
+                "Explain a simple traceback"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleNumber": 2,
+      "moduleSlug": "python-2-variables-input-and-strings",
+      "prefix": "py2",
+      "title": "Variables, Input, and Strings",
+      "purpose": "Teach learners how programs remember values, accept user input, and produce readable text.",
+      "learningObjectives": [
+        "Create and update variables",
+        "Convert input values safely",
+        "Build strings with common methods and f-strings"
+      ],
+      "guidedExercises": [
+        "Store values",
+        "Convert input",
+        "Format output"
+      ],
+      "quizFocus": [
+        "assignment",
+        "type conversion",
+        "string operations"
+      ],
+      "moduleProject": "Build a simple profile card generator that asks for user details and prints a formatted result.",
+      "sections": [
+        {
+          "sectionSlug": "python-2-variables-and-assignment",
+          "title": "Variables and Assignment",
+          "topics": [
+            {
+              "topicId": "naming-and-assigning-variables",
+              "title": "Naming and Assigning Variables",
+              "summary": "Use clear variable names and understand reassignment.",
+              "minutes": 22,
+              "technical": true,
+              "learningGoals": [
+                "Create variables",
+                "Explain reassignment"
+              ]
+            },
+            {
+              "topicId": "input-and-type-conversion",
+              "title": "Input and Type Conversion",
+              "summary": "Use input, int, float, and str to handle user-entered values.",
+              "minutes": 25,
+              "technical": true,
+              "learningGoals": [
+                "Collect input",
+                "Convert input to useful types"
+              ]
+            },
+            {
+              "topicId": "common-variable-mistakes",
+              "title": "Common Variable Mistakes",
+              "summary": "Avoid undefined names, accidental strings, and confusing names.",
+              "minutes": 18,
+              "technical": true,
+              "learningGoals": [
+                "Recognize NameError",
+                "Fix type conversion mistakes"
+              ]
+            }
+          ]
+        },
+        {
+          "sectionSlug": "python-2-string-foundations",
+          "title": "String Foundations",
+          "topics": [
+            {
+              "topicId": "string-indexing-and-slicing",
+              "title": "String Indexing and Slicing",
+              "summary": "Access characters and substrings using indexes and slices.",
+              "minutes": 25,
+              "technical": true,
+              "learningGoals": [
+                "Use positive and negative indexes",
+                "Slice strings"
+              ]
+            },
+            {
+              "topicId": "string-methods",
+              "title": "Useful String Methods",
+              "summary": "Use methods like lower, strip, replace, split, and join.",
+              "minutes": 25,
+              "technical": true,
+              "learningGoals": [
+                "Clean text",
+                "Transform strings"
+              ]
+            },
+            {
+              "topicId": "f-strings-and-formatting",
+              "title": "F-Strings and Formatting",
+              "summary": "Create readable output with f-strings and formatted values.",
+              "minutes": 22,
+              "technical": true,
+              "learningGoals": [
+                "Write f-strings",
+                "Format numeric output"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleNumber": 3,
+      "moduleSlug": "python-3-conditions-and-logic",
+      "prefix": "py3",
+      "title": "Conditions and Logic",
+      "purpose": "Help learners make programs choose different paths using comparisons and conditionals.",
+      "learningObjectives": [
+        "Write if, elif, and else blocks",
+        "Use comparison and boolean logic",
+        "Design clear branching rules"
+      ],
+      "guidedExercises": [
+        "Classify values",
+        "Validate inputs",
+        "Predict branches"
+      ],
+      "quizFocus": [
+        "branching",
+        "truthiness",
+        "boolean logic"
+      ],
+      "moduleProject": "Build a grade or eligibility checker that explains why a result was selected.",
+      "sections": [
+        {
+          "sectionSlug": "python-3-conditional-basics",
+          "title": "Conditional Basics",
+          "topics": [
+            {
+              "topicId": "if-elif-else",
+              "title": "If, Elif, and Else",
+              "summary": "Control which code runs based on conditions.",
+              "minutes": 25,
+              "technical": true,
+              "learningGoals": [
+                "Write conditional blocks",
+                "Trace branch selection"
+              ]
+            },
+            {
+              "topicId": "comparisons-and-truth-values",
+              "title": "Comparisons and Truth Values",
+              "summary": "Use comparison operators and understand True and False results.",
+              "minutes": 22,
+              "technical": true,
+              "learningGoals": [
+                "Use comparison operators",
+                "Predict boolean results"
+              ]
+            },
+            {
+              "topicId": "indentation-and-blocks",
+              "title": "Indentation and Blocks",
+              "summary": "Understand why indentation controls structure in Python.",
+              "minutes": 18,
+              "technical": true,
+              "learningGoals": [
+                "Identify code blocks",
+                "Fix indentation errors"
+              ]
+            }
+          ]
+        },
+        {
+          "sectionSlug": "python-3-combining-conditions",
+          "title": "Combining Conditions",
+          "topics": [
+            {
+              "topicId": "and-or-not",
+              "title": "And, Or, and Not",
+              "summary": "Combine conditions with boolean operators.",
+              "minutes": 25,
+              "technical": true,
+              "learningGoals": [
+                "Use and/or/not",
+                "Avoid confusing compound conditions"
+              ]
+            },
+            {
+              "topicId": "truthiness-and-empty-values",
+              "title": "Truthiness and Empty Values",
+              "summary": "Understand how empty strings, zero, None, and collections behave in conditions.",
+              "minutes": 20,
+              "technical": true,
+              "learningGoals": [
+                "Explain truthy and falsy values",
+                "Use truthiness intentionally"
+              ]
+            },
+            {
+              "topicId": "guard-clauses",
+              "title": "Guard Clauses for Cleaner Logic",
+              "summary": "Use early checks to simplify nested conditionals.",
+              "minutes": 22,
+              "technical": true,
+              "learningGoals": [
+                "Reduce nested code",
+                "Design clear validation checks"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleNumber": 4,
+      "moduleSlug": "python-4-loops-and-iteration",
+      "prefix": "py4",
+      "title": "Loops and Iteration",
+      "purpose": "Teach learners to repeat actions, process sequences, and control loop behavior.",
+      "learningObjectives": [
+        "Use for loops and while loops",
+        "Trace loop state",
+        "Apply break, continue, and range"
+      ],
+      "guidedExercises": [
+        "Loop over strings",
+        "Count with range",
+        "Stop loops safely"
+      ],
+      "quizFocus": [
+        "iteration",
+        "loop variables",
+        "off-by-one errors"
+      ],
+      "moduleProject": "Build a mini number game or text analyzer that repeats until a condition is met.",
+      "sections": [
+        {
+          "sectionSlug": "python-4-for-loops",
+          "title": "For Loops",
+          "topics": [
+            {
+              "topicId": "for-loops-over-sequences",
+              "title": "For Loops Over Sequences",
+              "summary": "Loop through strings and lists one item at a time.",
+              "minutes": 25,
+              "technical": true,
+              "learningGoals": [
+                "Write for loops",
+                "Trace loop variables"
+              ]
+            },
+            {
+              "topicId": "range-and-counting",
+              "title": "Range and Counting Patterns",
+              "summary": "Use range to repeat code a controlled number of times.",
+              "minutes": 22,
+              "technical": true,
+              "learningGoals": [
+                "Use range",
+                "Avoid off-by-one errors"
+              ]
+            },
+            {
+              "topicId": "accumulators-and-counters",
+              "title": "Accumulators and Counters",
+              "summary": "Build totals, counts, and running summaries in loops.",
+              "minutes": 25,
+              "technical": true,
+              "learningGoals": [
+                "Use accumulator variables",
+                "Update state correctly"
+              ]
+            }
+          ]
+        },
+        {
+          "sectionSlug": "python-4-while-loops",
+          "title": "While Loops",
+          "topics": [
+            {
+              "topicId": "while-loop-basics",
+              "title": "While Loop Basics",
+              "summary": "Repeat code until a condition becomes false.",
+              "minutes": 24,
+              "technical": true,
+              "learningGoals": [
+                "Write while loops",
+                "Prevent infinite loops"
+              ]
+            },
+            {
+              "topicId": "break-and-continue",
+              "title": "Break and Continue",
+              "summary": "Control loop flow using break and continue.",
+              "minutes": 20,
+              "technical": true,
+              "learningGoals": [
+                "Use break",
+                "Use continue safely"
+              ]
+            },
+            {
+              "topicId": "loop-debugging",
+              "title": "Loop Debugging",
+              "summary": "Trace loop values to find repeated or skipped work.",
+              "minutes": 20,
+              "technical": true,
+              "learningGoals": [
+                "Debug loop state",
+                "Find loop boundary issues"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleNumber": 5,
+      "moduleSlug": "python-5-lists-tuples-and-dictionaries",
+      "prefix": "py5",
+      "title": "Lists, Tuples, and Dictionaries",
+      "purpose": "Teach learners how to organize multiple values and choose the right collection type.",
+      "learningObjectives": [
+        "Create and modify lists",
+        "Use tuples for fixed grouped values",
+        "Store key-value data in dictionaries"
+      ],
+      "guidedExercises": [
+        "Build lists",
+        "Look up dictionary values",
+        "Transform collections"
+      ],
+      "quizFocus": [
+        "collection choice",
+        "indexing",
+        "dictionary operations"
+      ],
+      "moduleProject": "Build a small contact book or inventory tracker using lists and dictionaries.",
+      "sections": [
+        {
+          "sectionSlug": "python-5-list-basics",
+          "title": "List Basics",
+          "topics": [
+            {
+              "topicId": "creating-and-indexing-lists",
+              "title": "Creating and Indexing Lists",
+              "summary": "Create lists and access items by position.",
+              "minutes": 24,
+              "technical": true,
+              "learningGoals": [
+                "Create lists",
+                "Index and slice lists"
+              ]
+            },
+            {
+              "topicId": "list-methods-and-mutation",
+              "title": "List Methods and Mutation",
+              "summary": "Use append, remove, pop, sort, and understand mutation.",
+              "minutes": 26,
+              "technical": true,
+              "learningGoals": [
+                "Modify lists",
+                "Explain mutation"
+              ]
+            },
+            {
+              "topicId": "looping-through-lists",
+              "title": "Looping Through Lists",
+              "summary": "Process each list item and build derived results.",
+              "minutes": 24,
+              "technical": true,
+              "learningGoals": [
+                "Loop through lists",
+                "Build new list results"
+              ]
+            }
+          ]
+        },
+        {
+          "sectionSlug": "python-5-dictionaries",
+          "title": "Dictionaries",
+          "topics": [
+            {
+              "topicId": "dictionary-basics",
+              "title": "Dictionary Basics",
+              "summary": "Store and retrieve values using keys.",
+              "minutes": 25,
+              "technical": true,
+              "learningGoals": [
+                "Create dictionaries",
+                "Access values by key"
+              ]
+            },
+            {
+              "topicId": "updating-and-looping-dictionaries",
+              "title": "Updating and Looping Dictionaries",
+              "summary": "Add, update, remove, and loop through dictionary data.",
+              "minutes": 26,
+              "technical": true,
+              "learningGoals": [
+                "Update dictionaries",
+                "Loop through keys and values"
+              ]
+            },
+            {
+              "topicId": "nested-data-structures",
+              "title": "Nested Data Structures",
+              "summary": "Represent real-world data with lists of dictionaries and nested containers.",
+              "minutes": 28,
+              "technical": true,
+              "learningGoals": [
+                "Read nested data",
+                "Choose nested structures"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleNumber": 6,
+      "moduleSlug": "python-6-functions-and-modularity",
+      "prefix": "py6",
+      "title": "Functions and Modularity",
+      "purpose": "Help learners organize code into reusable functions with clear inputs and outputs.",
+      "learningObjectives": [
+        "Define functions",
+        "Use parameters and return values",
+        "Separate program logic into small pieces"
+      ],
+      "guidedExercises": [
+        "Write helper functions",
+        "Refactor repeated code",
+        "Test return values"
+      ],
+      "quizFocus": [
+        "function calls",
+        "scope",
+        "return vs print"
+      ],
+      "moduleProject": "Refactor a calculator or text utility into several reusable functions.",
+      "sections": [
+        {
+          "sectionSlug": "python-6-function-basics",
+          "title": "Function Basics",
+          "topics": [
+            {
+              "topicId": "defining-and-calling-functions",
+              "title": "Defining and Calling Functions",
+              "summary": "Create functions and call them with arguments.",
+              "minutes": 26,
+              "technical": true,
+              "learningGoals": [
+                "Define functions",
+                "Call functions correctly"
+              ]
+            },
+            {
+              "topicId": "parameters-and-return-values",
+              "title": "Parameters and Return Values",
+              "summary": "Pass data into functions and return results.",
+              "minutes": 28,
+              "technical": true,
+              "learningGoals": [
+                "Use parameters",
+                "Return computed values"
+              ]
+            },
+            {
+              "topicId": "print-vs-return",
+              "title": "Print vs Return",
+              "summary": "Understand when to display output and when to return data.",
+              "minutes": 22,
+              "technical": true,
+              "learningGoals": [
+                "Distinguish print from return",
+                "Fix function output mistakes"
+              ]
+            }
+          ]
+        },
+        {
+          "sectionSlug": "python-6-function-design",
+          "title": "Function Design",
+          "topics": [
+            {
+              "topicId": "scope-and-local-variables",
+              "title": "Scope and Local Variables",
+              "summary": "Understand where variables exist and why local scope matters.",
+              "minutes": 24,
+              "technical": true,
+              "learningGoals": [
+                "Explain local scope",
+                "Avoid accidental globals"
+              ]
+            },
+            {
+              "topicId": "decomposition-and-refactoring",
+              "title": "Decomposition and Refactoring",
+              "summary": "Break a larger task into clear helper functions.",
+              "minutes": 26,
+              "technical": true,
+              "learningGoals": [
+                "Identify repeated logic",
+                "Refactor into helpers"
+              ]
+            },
+            {
+              "topicId": "docstrings-and-function-contracts",
+              "title": "Docstrings and Function Contracts",
+              "summary": "Document what a function expects and returns.",
+              "minutes": 20,
+              "technical": true,
+              "learningGoals": [
+                "Write docstrings",
+                "Describe inputs and outputs"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleNumber": 7,
+      "moduleSlug": "python-7-files-exceptions-and-data-cleaning",
+      "prefix": "py7",
+      "title": "Files, Exceptions, and Data Cleaning",
+      "purpose": "Teach learners how to read/write files and handle messy data without crashing programs.",
+      "learningObjectives": [
+        "Read and write text files",
+        "Handle exceptions",
+        "Clean structured text data"
+      ],
+      "guidedExercises": [
+        "Read files",
+        "Catch conversion errors",
+        "Clean CSV-like data"
+      ],
+      "quizFocus": [
+        "file modes",
+        "exception flow",
+        "data cleaning patterns"
+      ],
+      "moduleProject": "Build a small log or CSV cleaner that reads a file, validates rows, and writes a summary.",
+      "sections": [
+        {
+          "sectionSlug": "python-7-file-io",
+          "title": "File Input and Output",
+          "topics": [
+            {
+              "topicId": "reading-text-files",
+              "title": "Reading Text Files",
+              "summary": "Open files, read text, and close resources safely.",
+              "minutes": 25,
+              "technical": true,
+              "learningGoals": [
+                "Read text files",
+                "Use with blocks"
+              ]
+            },
+            {
+              "topicId": "writing-text-files",
+              "title": "Writing Text Files",
+              "summary": "Write output to files using safe file modes.",
+              "minutes": 22,
+              "technical": true,
+              "learningGoals": [
+                "Write files",
+                "Choose file modes"
+              ]
+            },
+            {
+              "topicId": "working-with-paths",
+              "title": "Working With Paths",
+              "summary": "Understand relative paths and simple file organization.",
+              "minutes": 18,
+              "technical": true,
+              "learningGoals": [
+                "Use relative paths",
+                "Avoid path confusion"
+              ]
+            }
+          ]
+        },
+        {
+          "sectionSlug": "python-7-exceptions-and-cleaning",
+          "title": "Exceptions and Cleaning",
+          "topics": [
+            {
+              "topicId": "try-except-basics",
+              "title": "Try/Except Basics",
+              "summary": "Catch expected errors and keep programs usable.",
+              "minutes": 24,
+              "technical": true,
+              "learningGoals": [
+                "Use try/except",
+                "Catch specific exceptions"
+              ]
+            },
+            {
+              "topicId": "validating-and-cleaning-input",
+              "title": "Validating and Cleaning Input",
+              "summary": "Clean text, check missing values, and reject invalid rows.",
+              "minutes": 26,
+              "technical": true,
+              "learningGoals": [
+                "Validate input",
+                "Clean simple records"
+              ]
+            },
+            {
+              "topicId": "simple-csv-processing",
+              "title": "Simple CSV Processing",
+              "summary": "Read comma-separated rows and transform them into dictionaries.",
+              "minutes": 28,
+              "technical": true,
+              "learningGoals": [
+                "Parse CSV-like text",
+                "Summarize row data"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleNumber": 8,
+      "moduleSlug": "python-8-object-oriented-programming",
+      "prefix": "py8",
+      "title": "Object-Oriented Programming",
+      "purpose": "Introduce classes and objects as a way to model related state and behavior.",
+      "learningObjectives": [
+        "Define simple classes",
+        "Create instances",
+        "Use methods and attributes"
+      ],
+      "guidedExercises": [
+        "Create classes",
+        "Add methods",
+        "Model real objects"
+      ],
+      "quizFocus": [
+        "instances",
+        "attributes",
+        "methods"
+      ],
+      "moduleProject": "Build a simple class-based gradebook, game character, or bank account model.",
+      "sections": [
+        {
+          "sectionSlug": "python-8-class-basics",
+          "title": "Class Basics",
+          "topics": [
+            {
+              "topicId": "classes-and-instances",
+              "title": "Classes and Instances",
+              "summary": "Define classes and create individual objects.",
+              "minutes": 28,
+              "technical": true,
+              "learningGoals": [
+                "Define a class",
+                "Instantiate objects"
+              ]
+            },
+            {
+              "topicId": "attributes-and-init",
+              "title": "Attributes and __init__",
+              "summary": "Initialize object state with constructor parameters.",
+              "minutes": 28,
+              "technical": true,
+              "learningGoals": [
+                "Use __init__",
+                "Set attributes"
+              ]
+            },
+            {
+              "topicId": "methods-and-self",
+              "title": "Methods and self",
+              "summary": "Add behavior to classes with instance methods.",
+              "minutes": 26,
+              "technical": true,
+              "learningGoals": [
+                "Write methods",
+                "Use self correctly"
+              ]
+            }
+          ]
+        },
+        {
+          "sectionSlug": "python-8-design-with-objects",
+          "title": "Design With Objects",
+          "topics": [
+            {
+              "topicId": "encapsulation-and-responsibility",
+              "title": "Encapsulation and Responsibility",
+              "summary": "Keep related data and behavior together in a class.",
+              "minutes": 22,
+              "technical": true,
+              "learningGoals": [
+                "Describe class responsibility",
+                "Avoid scattered state"
+              ]
+            },
+            {
+              "topicId": "lists-of-objects",
+              "title": "Lists of Objects",
+              "summary": "Manage multiple instances and summarize their data.",
+              "minutes": 24,
+              "technical": true,
+              "learningGoals": [
+                "Store objects in lists",
+                "Loop over objects"
+              ]
+            },
+            {
+              "topicId": "class-debugging-patterns",
+              "title": "Class Debugging Patterns",
+              "summary": "Fix common attribute, method, and constructor mistakes.",
+              "minutes": 22,
+              "technical": true,
+              "learningGoals": [
+                "Debug AttributeError",
+                "Trace method calls"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleNumber": 9,
+      "moduleSlug": "python-9-testing-debugging-and-style",
+      "prefix": "py9",
+      "title": "Testing, Debugging, and Style",
+      "purpose": "Help learners verify code behavior, debug systematically, and write readable Python.",
+      "learningObjectives": [
+        "Write simple tests",
+        "Use debugging techniques",
+        "Apply Python style conventions"
+      ],
+      "guidedExercises": [
+        "Test functions",
+        "Debug failing cases",
+        "Improve readability"
+      ],
+      "quizFocus": [
+        "test cases",
+        "edge cases",
+        "style"
+      ],
+      "moduleProject": "Take a buggy utility program, add tests, fix the bugs, and improve readability.",
+      "sections": [
+        {
+          "sectionSlug": "python-9-testing-basics",
+          "title": "Testing Basics",
+          "topics": [
+            {
+              "topicId": "writing-test-cases",
+              "title": "Writing Test Cases",
+              "summary": "Design examples that prove a function works.",
+              "minutes": 25,
+              "technical": true,
+              "learningGoals": [
+                "Write test cases",
+                "Pick edge cases"
+              ]
+            },
+            {
+              "topicId": "assertions-and-expected-results",
+              "title": "Assertions and Expected Results",
+              "summary": "Use assertions to compare actual and expected outputs.",
+              "minutes": 22,
+              "technical": true,
+              "learningGoals": [
+                "Use assert",
+                "Explain expected results"
+              ]
+            },
+            {
+              "topicId": "testing-edge-cases",
+              "title": "Testing Edge Cases",
+              "summary": "Check empty inputs, boundaries, and unusual values.",
+              "minutes": 24,
+              "technical": true,
+              "learningGoals": [
+                "Identify edge cases",
+                "Improve confidence with tests"
+              ]
+            }
+          ]
+        },
+        {
+          "sectionSlug": "python-9-debugging-and-style",
+          "title": "Debugging and Style",
+          "topics": [
+            {
+              "topicId": "debugging-with-print-and-trace",
+              "title": "Debugging With Print and Trace",
+              "summary": "Use temporary output and tracing to find bugs.",
+              "minutes": 22,
+              "technical": true,
+              "learningGoals": [
+                "Trace variable values",
+                "Narrow down bugs"
+              ]
+            },
+            {
+              "topicId": "readable-python-style",
+              "title": "Readable Python Style",
+              "summary": "Use naming, spacing, and small functions to make code easier to understand.",
+              "minutes": 20,
+              "technical": true,
+              "learningGoals": [
+                "Use clear names",
+                "Apply basic PEP 8 style"
+              ]
+            },
+            {
+              "topicId": "refactoring-safely",
+              "title": "Refactoring Safely",
+              "summary": "Improve code structure while keeping behavior the same.",
+              "minutes": 24,
+              "technical": true,
+              "learningGoals": [
+                "Refactor small steps",
+                "Use tests to protect behavior"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleNumber": 10,
+      "moduleSlug": "python-10-capstone-automation-project",
+      "prefix": "py10",
+      "title": "Capstone Automation Project",
+      "purpose": "Guide learners through a complete beginner Python project that combines core skills.",
+      "learningObjectives": [
+        "Plan a small program",
+        "Build and test multiple functions",
+        "Present a finished Python project"
+      ],
+      "guidedExercises": [
+        "Plan features",
+        "Build modules",
+        "Test and polish"
+      ],
+      "quizFocus": [
+        "project planning",
+        "integration",
+        "debugging"
+      ],
+      "moduleProject": "Complete a capstone such as a task tracker, expense summarizer, text analyzer, or quiz game.",
+      "sections": [
+        {
+          "sectionSlug": "python-10-project-planning",
+          "title": "Project Planning",
+          "topics": [
+            {
+              "topicId": "choosing-a-capstone-scope",
+              "title": "Choosing a Capstone Scope",
+              "summary": "Pick a project that is useful, small enough, and testable.",
+              "minutes": 20,
+              "technical": false,
+              "learningGoals": [
+                "Define project scope",
+                "Choose core features"
+              ]
+            },
+            {
+              "topicId": "breaking-projects-into-functions",
+              "title": "Breaking Projects Into Functions",
+              "summary": "Plan functions, inputs, outputs, and data flow before coding.",
+              "minutes": 25,
+              "technical": true,
+              "learningGoals": [
+                "Design function boundaries",
+                "Plan data flow"
+              ]
+            },
+            {
+              "topicId": "data-model-for-a-small-app",
+              "title": "Data Model for a Small App",
+              "summary": "Choose lists, dictionaries, files, or classes to represent project data.",
+              "minutes": 25,
+              "technical": true,
+              "learningGoals": [
+                "Choose data structures",
+                "Explain tradeoffs"
+              ]
+            }
+          ]
+        },
+        {
+          "sectionSlug": "python-10-building-and-polishing",
+          "title": "Building and Polishing",
+          "topics": [
+            {
+              "topicId": "implementing-the-core-loop",
+              "title": "Implementing the Core Loop",
+              "summary": "Build the main interaction loop or workflow for the project.",
+              "minutes": 28,
+              "technical": true,
+              "learningGoals": [
+                "Write a main workflow",
+                "Handle user choices"
+              ]
+            },
+            {
+              "topicId": "testing-the-capstone",
+              "title": "Testing the Capstone",
+              "summary": "Test the most important functions and realistic user paths.",
+              "minutes": 26,
+              "technical": true,
+              "learningGoals": [
+                "Test project features",
+                "Fix integration bugs"
+              ]
+            },
+            {
+              "topicId": "presenting-and-documenting-the-project",
+              "title": "Presenting and Documenting the Project",
+              "summary": "Write a short README-style explanation and show how to run the project.",
+              "minutes": 20,
+              "technical": false,
+              "learningGoals": [
+                "Document usage",
+                "Explain project decisions"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

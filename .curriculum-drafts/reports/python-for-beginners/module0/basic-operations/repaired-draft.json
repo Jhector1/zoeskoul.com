@@ -1,0 +1,95 @@
+{
+  "title": "Basic Operations",
+  "summary": "Learn how to perform basic operations with Python.",
+  "minutes": 30,
+  "sketchBlocks": [
+    {
+      "id": "1",
+      "title": "Introduction to Basic Operations",
+      "bodyMarkdown": "In this section, we will explore how to perform basic arithmetic operations using Python. These operations include addition, subtraction, multiplication, and division."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "q1",
+      "kind": "single_choice",
+      "title": "What is the result of 5 + 3?",
+      "prompt": "Choose the correct answer.",
+      "options": [
+        "8",
+        "7",
+        "9"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Think about how addition works.",
+      "help": {
+        "concept": "Addition combines two numbers into a larger number.",
+        "hint_1": "5 plus 3 equals what?",
+        "hint_2": "Consider the total when you add 5 and 3."
+      }
+    },
+    {
+      "id": "q2",
+      "kind": "fill_blank_choice",
+      "title": "Complete the operation",
+      "prompt": "Fill in the blank: 10 - ___ = 4",
+      "template": "10 - {blank} = 4",
+      "choices": [
+        "6",
+        "5",
+        "4"
+      ],
+      "correctValue": "6",
+      "hint": "Think about what number you need to subtract from 10 to get 4.",
+      "help": {
+        "concept": "Subtraction finds the difference between two numbers.",
+        "hint_1": "What number do you need to subtract from 10?",
+        "hint_2": "10 minus what equals 4?"
+      }
+    },
+    {
+      "id": "q3",
+      "kind": "code_input",
+      "title": "Calculate the average",
+      "prompt": "Write a function to calculate the average of two numbers.",
+      "starterCode": "def calculate_average(a, b):\n    # Your code here",
+      "solutionCode": "def calculate_average(a, b):\n    return (a + b) / 2",
+      "hint": "Focus on the programming task being asked for, not on copying final solution text.",
+      "help": {
+        "concept": "Build the solution from the behavior the exercise is testing.",
+        "hint_1": "Think about which steps, functions, or statements are required for the task.",
+        "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
+      }
+    },
+    {
+      "id": "q4",
+      "kind": "code_input",
+      "title": "Perform multiplication",
+      "prompt": "Create a function that multiplies two numbers.",
+      "starterCode": "def multiply(a, b):\n    # Your code here",
+      "solutionCode": "def multiply(a, b):\n    return a * b",
+      "hint": "Focus on the programming task being asked for, not on copying final solution text.",
+      "help": {
+        "concept": "Build the solution from the behavior the exercise is testing.",
+        "hint_1": "Think about which steps, functions, or statements are required for the task.",
+        "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
+      }
+    },
+    {
+      "id": "q5",
+      "kind": "code_input",
+      "title": "Divide two numbers",
+      "prompt": "Write a function to divide two numbers.",
+      "starterCode": "def divide(a, b):\n    # Your code here",
+      "solutionCode": "def divide(a, b):\n    if b == 0:\n        return 'Cannot divide by zero'\n    return a / b",
+      "hint": "Focus on the programming task being asked for, not on copying final solution text.",
+      "help": {
+        "concept": "Build the solution from the behavior the exercise is testing.",
+        "hint_1": "Think about which steps, functions, or statements are required for the task.",
+        "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
+      }
+    }
+  ]
+}

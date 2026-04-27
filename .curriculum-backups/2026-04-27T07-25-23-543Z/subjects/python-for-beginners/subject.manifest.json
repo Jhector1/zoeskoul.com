@@ -1,0 +1,126 @@
+{
+  "subject": {
+    "slug": "python-for-beginners",
+    "genKey": "python_part1",
+    "order": 30,
+    "accessPolicy": "free",
+    "status": "active",
+    "imagePublicId": null,
+    "imageAlt": null,
+    "titleKey": "subjects.python-for-beginners.title",
+    "descriptionKey": "subjects.python-for-beginners.description",
+    "meta": {
+      "curriculum": {
+        "plannedModuleCount": 2,
+        "isTerminalRelease": false,
+        "moreComingMessageKey": "subjects.python-for-beginners.moreComingSoon"
+      },
+      "completionPolicy": {
+        "requireAllPublishedModules": true,
+        "rewardEnabledByDefault": true,
+        "certificateEnabledByDefault": true
+      }
+    }
+  },
+  "modules": [
+    {
+      "slug": "python-0",
+      "prefix": "py0",
+      "order": 0,
+      "titleKey": "modules.python-for-beginners.python-0.title",
+      "descriptionKey": "modules.python-for-beginners.python-0.description",
+      "weekStart": 1,
+      "weekEnd": 1,
+      "accessOverride": "free",
+      "meta": {
+        "estimatedMinutes": 180,
+        "prereqKeys": [],
+        "outcomeKeys": [
+          "modules.python-for-beginners.python-0.outcomes.0",
+          "modules.python-for-beginners.python-0.outcomes.1",
+          "modules.python-for-beginners.python-0.outcomes.2",
+          "modules.python-for-beginners.python-0.outcomes.3"
+        ],
+        "whyKeys": [
+          "modules.python-for-beginners.python-0.why.0",
+          "modules.python-for-beginners.python-0.why.1"
+        ]
+      },
+      "sections": [
+        {
+          "slug": "python-0-core-building-blocks",
+          "order": 1,
+          "titleKey": "sections.python-for-beginners.python-0.python-0-core-building-blocks.title",
+          "descriptionKey": "sections.python-for-beginners.python-0.python-0-core-building-blocks.description",
+          "meta": {
+            "module": 0,
+            "weeksKey": "sections.python-for-beginners.python-0.python-0-core-building-blocks.weeks",
+            "bulletKeys": [
+              "sections.python-for-beginners.python-0.python-0-core-building-blocks.bullets.0",
+              "sections.python-for-beginners.python-0.python-0-core-building-blocks.bullets.1",
+              "sections.python-for-beginners.python-0.python-0-core-building-blocks.bullets.2",
+              "sections.python-for-beginners.python-0.python-0-core-building-blocks.bullets.3"
+            ]
+          },
+          "topics": [
+            "installing-python",
+            "first-program",
+            "python-syntax",
+            "variables-and-data-types",
+            "basic-operations",
+            "comments-and-docstrings"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "python-1",
+      "prefix": "py1",
+      "order": 1,
+      "titleKey": "modules.python-for-beginners.python-1.title",
+      "descriptionKey": "modules.python-for-beginners.python-1.description",
+      "weekStart": 2,
+      "weekEnd": 2,
+      "accessOverride": "free",
+      "meta": {
+        "estimatedMinutes": 90,
+        "prereqKeys": [
+          "modules.python-for-beginners.python-0.title"
+        ],
+        "outcomeKeys": [
+          "modules.python-for-beginners.python-1.outcomes.0",
+          "modules.python-for-beginners.python-1.outcomes.1",
+          "modules.python-for-beginners.python-1.outcomes.2",
+          "modules.python-for-beginners.python-1.outcomes.3"
+        ],
+        "whyKeys": [
+          "modules.python-for-beginners.python-1.why.0",
+          "modules.python-for-beginners.python-1.why.1"
+        ]
+      },
+      "sections": [
+        {
+          "slug": "python-1-core-building-blocks",
+          "order": 1,
+          "titleKey": "sections.python-for-beginners.python-1.python-1-core-building-blocks.title",
+          "descriptionKey": "sections.python-for-beginners.python-1.python-1-core-building-blocks.description",
+          "meta": {
+            "module": 1,
+            "weeksKey": "sections.python-for-beginners.python-1.python-1-core-building-blocks.weeks",
+            "bulletKeys": [
+              "sections.python-for-beginners.python-1.python-1-core-building-blocks.bullets.0",
+              "sections.python-for-beginners.python-1.python-1-core-building-blocks.bullets.1",
+              "sections.python-for-beginners.python-1.python-1-core-building-blocks.bullets.2",
+              "sections.python-for-beginners.python-1.python-1-core-building-blocks.bullets.3"
+            ]
+          },
+          "topics": [
+            "if-statements",
+            "elif-and-else",
+            "nested-conditionals"
+          ]
+        }
+      ]
+    }
+  ]
+}

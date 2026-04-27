@@ -1,0 +1,120 @@
+{
+  "topics": {
+    "python-for-beginners": {
+      "python-3": {
+        "and-or-not": {
+          "label": "And, Or, and Not",
+          "summary": "Combine conditions with boolean operators.",
+          "cards": {
+            "sketch0": {
+              "title": "Understanding Boolean Logic"
+            },
+            "sketch1": {
+              "title": "Using AND, OR, and NOT"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Practice"
+            }
+          },
+          "projectSteps": {
+            "1": {
+              "title": "Check Eligibility for a Discount"
+            },
+            "2": {
+              "title": "Determine Voting Eligibility"
+            }
+          },
+          "quiz": {
+            "1": {
+              "title": "Check Eligibility for a Discount",
+              "prompt": "Write a program that checks if a customer is eligible for a discount based on their membership status and purchase amount.",
+              "hint": "Focus on the programming task being asked for, not on copying final solution text.",
+              "help": {
+                "concept": "Build the solution from the behavior the exercise is testing.",
+                "hint_1": "Think about which steps, functions, or statements are required for the task.",
+                "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "membership = input().strip()\npurchase_amount = int(input())\n# Your code here"
+            },
+            "2": {
+              "title": "Determine Voting Eligibility",
+              "prompt": "Create a program that checks if a person is eligible to vote based on age and citizenship.",
+              "hint": "Focus on the programming task being asked for, not on copying final solution text.",
+              "help": {
+                "concept": "Build the solution from the behavior the exercise is testing.",
+                "hint_1": "Think about which steps, functions, or statements are required for the task.",
+                "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "age = int(input())\nis_citizen = input().strip() == 'True'\n# Your code here"
+            },
+            "3": {
+              "title": "What does the AND operator do?",
+              "prompt": "Select the correct statement about the AND operator.",
+              "hint": "Focus on the main concept being tested and eliminate choices that describe something different.",
+              "help": {
+                "concept": "Choose the option that matches the core idea described in the question without relying on repeated wording from the answer choices.",
+                "hint_1": "Rule out options that describe a different role, behavior, or concept than the question is testing.",
+                "hint_2": "Pick the option that best matches the concept, not the one that simply repeats familiar wording."
+              },
+              "options": {
+                "a": "Returns True if at least one condition is True.",
+                "b": "Returns True only if both conditions are True.",
+                "c": "Returns False if both conditions are False."
+              }
+            },
+            "4": {
+              "title": "Which of the following are boolean operators?",
+              "prompt": "Select all that apply.",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the idea the question is checking, not the exact answer wording.",
+                "hint_1": "Eliminate options that do not match the concept being tested.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "options": {
+                "a": "AND",
+                "b": "OR",
+                "c": "NOT",
+                "d": "IF"
+              }
+            },
+            "5": {
+              "title": "Complete the statement about NOT operator",
+              "prompt": "Choose the best value for the first missing blank in the statement.",
+              "hint": "Focus on the missing concept or keyword.",
+              "help": {
+                "concept": "This task checks the key idea behind complete the statement about not operator.",
+                "hint_1": "Look for the word or phrase that best matches the lesson concept.",
+                "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
+              },
+              "template": "The first missing value is [blank1].",
+              "choices": [
+                "True",
+                "False"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-for-beginners": {
+      "python-3": {
+        "and-or-not": {
+          "1": {
+            "title": "Understanding Boolean Logic",
+            "bodyMarkdown": "Boolean logic is a form of algebra where all values are either TRUE or FALSE. The basic operators are AND, OR, and NOT."
+          },
+          "2": {
+            "title": "Using AND, OR, and NOT",
+            "bodyMarkdown": "These operators allow you to combine multiple conditions. For example, `A AND B` is TRUE only if both A and B are TRUE."
+          }
+        }
+      }
+    }
+  }
+}

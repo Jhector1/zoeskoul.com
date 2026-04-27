@@ -9,7 +9,8 @@ export const pythonShape: SubjectShapePack = {
         genKey: "python_part1",
         moduleSlug: (order) => `python-${order}`,
         modulePrefix: (order) => `py${order}`,
-        sectionSlug: (moduleOrder) => `python-${moduleOrder}-core-building-blocks`,
+        sectionSlug: (moduleOrder, sectionOrder) =>
+            `python-${moduleOrder}-core-building-blocks-${sectionOrder}`,
         accessPolicyDefault: "free",
         statusDefault: "active",
         completionPolicy: {

@@ -1,0 +1,131 @@
+{
+  "title": "Guard Clauses for Cleaner Logic",
+  "summary": "Use early checks to simplify nested conditionals.",
+  "minutes": 22,
+  "sketchBlocks": [
+    {
+      "id": "1",
+      "title": "Introduction to Guard Clauses",
+      "bodyMarkdown": "Guard clauses are a programming pattern that allows you to simplify your code by handling edge cases early, thus avoiding deep nesting of conditionals."
+    },
+    {
+      "id": "2",
+      "title": "Benefits of Guard Clauses",
+      "bodyMarkdown": "Using guard clauses can make your code more readable and maintainable. It helps in clearly defining the conditions that lead to early exits from a function."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "q1",
+      "kind": "code_input",
+      "title": "Implement a Guard Clause",
+      "prompt": "Write a function that checks if a number is positive. If it is not, return 'Not positive'. Otherwise, return 'Positive'.",
+      "starterCode": "def check_positive(num):\n    # Your code here",
+      "solutionCode": "def check_positive(num):\n    if num <= 0:\n        return 'Not positive'\n    return 'Positive'",
+      "tests": [
+        {
+          "stdin": "5",
+          "stdout": "Positive"
+        },
+        {
+          "stdin": "-3",
+          "stdout": "Not positive"
+        }
+      ],
+      "hint": "Focus on the concept being tested.",
+      "help": {
+        "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+        "hint_1": "Think about which steps, functions, or statements are needed.",
+        "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+      }
+    },
+    {
+      "id": "q2",
+      "kind": "code_input",
+      "title": "Validate User Input",
+      "prompt": "Create a function that validates user input for age. If the age is less than 0 or greater than 120, return 'Invalid age'. Otherwise, return 'Valid age'.",
+      "starterCode": "def validate_age(age):\n    # Your code here",
+      "solutionCode": "def validate_age(age):\n    if age < 0 or age > 120:\n        return 'Invalid age'\n    return 'Valid age'",
+      "tests": [
+        {
+          "stdin": "25",
+          "stdout": "Valid age"
+        },
+        {
+          "stdin": "150",
+          "stdout": "Invalid age"
+        }
+      ],
+      "hint": "Focus on the programming task being asked for, not on copying final solution text.",
+      "help": {
+        "concept": "Build the solution from the behavior the exercise is testing.",
+        "hint_1": "Think about which steps, functions, or statements are required for the task.",
+        "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
+      }
+    },
+    {
+      "id": "q3",
+      "kind": "single_choice",
+      "title": "Understanding Guard Clauses",
+      "prompt": "What is the main purpose of using guard clauses in programming?",
+      "options": [
+        "To make code more complex",
+        "To handle edge cases early",
+        "To increase nesting of conditionals",
+        "To avoid using functions"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Focus on the main concept being tested and eliminate choices that describe something different.",
+      "help": {
+        "concept": "Choose the option that matches the core idea described in the question without relying on repeated wording from the answer choices.",
+        "hint_1": "Rule out options that describe a different role, behavior, or concept than the question is testing.",
+        "hint_2": "Pick the option that best matches the concept, not the one that simply repeats familiar wording."
+      }
+    },
+    {
+      "id": "q4",
+      "kind": "multi_choice",
+      "title": "Benefits of Guard Clauses",
+      "prompt": "Which of the following are benefits of using guard clauses?",
+      "options": [
+        "Improves code readability",
+        "Reduces nesting of conditionals",
+        "Makes debugging harder",
+        "Simplifies logic flow"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ],
+      "hint": "Think about code clarity and maintenance.",
+      "help": {
+        "concept": "Guard clauses improve code clarity and reduce complexity.",
+        "hint_1": "They help in avoiding deep nesting.",
+        "hint_2": "They can make debugging easier."
+      }
+    },
+    {
+      "id": "q5",
+      "kind": "fill_blank_choice",
+      "title": "Complete the Guard Clause",
+      "prompt": "A guard clause is used to handle __________ early in a function.",
+      "template": "A guard clause is used to handle {blank} early in a function.",
+      "choices": [
+        "edge cases",
+        "main logic",
+        "return values",
+        "exceptions"
+      ],
+      "correctValue": "edge cases",
+      "hint": "Think about what conditions might cause a function to exit early.",
+      "help": {
+        "concept": "This task checks the key idea behind complete the guard clause.",
+        "hint_1": "Look for the word or phrase that best matches the lesson concept.",
+        "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
+      }
+    }
+  ]
+}

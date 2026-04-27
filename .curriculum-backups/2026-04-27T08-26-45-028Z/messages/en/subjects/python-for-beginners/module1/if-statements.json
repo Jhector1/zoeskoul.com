@@ -1,0 +1,110 @@
+{
+  "topics": {
+    "python-for-beginners": {
+      "python-1": {
+        "if-statements": {
+          "label": "If Statements",
+          "summary": "Learn how to use if statements to control program flow.",
+          "cards": {
+            "sketch0": {
+              "title": "Introduction to If Statements"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Practice"
+            }
+          },
+          "projectSteps": {
+            "1": {
+              "title": "Basic If Statement"
+            },
+            "2": {
+              "title": "If-Else Statement"
+            },
+            "3": {
+              "title": "Nested If Statement"
+            }
+          },
+          "quiz": {
+            "1": {
+              "title": "Basic If Statement",
+              "prompt": "Write a Python function that checks if a number is positive. Return 'Positive' if it is, otherwise return 'Not Positive'.",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+                "hint_1": "Think about which steps, functions, or statements are needed.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "starterCode": "def check_number(num):\n    # Your code here"
+            },
+            "2": {
+              "title": "If-Else Statement",
+              "prompt": "Create a function that takes a temperature in Celsius and returns 'Freezing', 'Cold', 'Warm', or 'Hot' based on the temperature value.",
+              "hint": "Focus on the programming task being asked for, not on copying final solution text.",
+              "help": {
+                "concept": "Build the solution from the behavior the exercise is testing.",
+                "hint_1": "Think about which steps, functions, or statements are required for the task.",
+                "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "def temperature_check(temp):\n    # Your code here"
+            },
+            "3": {
+              "title": "Nested If Statement",
+              "prompt": "Write a function that checks if a number is even or odd and also checks if it is positive or negative.",
+              "hint": "Focus on the programming task being asked for, not on copying final solution text.",
+              "help": {
+                "concept": "Build the solution from the behavior the exercise is testing.",
+                "hint_1": "Think about which steps, functions, or statements are required for the task.",
+                "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "def even_or_odd(num):\n    # Your code here"
+            },
+            "4": {
+              "title": "Understanding If Statements",
+              "prompt": "Choose the best value for the first missing blank in the statement.",
+              "hint": "Think about the outcome of the condition being checked.",
+              "help": {
+                "concept": "If statements execute their code block when the condition evaluates to the missing term.",
+                "hint_1": "Consider what it means for a condition to be satisfied.",
+                "hint_2": "The opposite of the missing term is false."
+              },
+              "template": "The first missing value is [blank1].",
+              "choices": [
+                "true",
+                "false"
+              ]
+            },
+            "5": {
+              "title": "Identifying If Statement Syntax",
+              "prompt": "Which of the following is the correct syntax for an if statement in Python?",
+              "hint": "Look for the correct use of indentation and colons.",
+              "help": {
+                "concept": "The syntax of an if statement includes the keyword 'if', a condition, and a colon followed by an indented block of code.",
+                "hint_1": "Remember that the condition must be followed by a colon.",
+                "hint_2": "Indentation is crucial in Python for defining code blocks."
+              },
+              "options": {
+                "a": "if x > 0: print(x)",
+                "b": "A command"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-for-beginners": {
+      "python-1": {
+        "if-statements": {
+          "1": {
+            "title": "Introduction to If Statements",
+            "bodyMarkdown": "If statements allow you to execute certain pieces of code based on whether a condition is true or false. This is fundamental for controlling the flow of your program."
+          }
+        }
+      }
+    }
+  }
+}

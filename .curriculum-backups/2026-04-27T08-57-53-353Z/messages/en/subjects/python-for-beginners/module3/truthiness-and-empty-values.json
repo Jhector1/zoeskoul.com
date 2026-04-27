@@ -1,0 +1,123 @@
+{
+  "topics": {
+    "python-for-beginners": {
+      "python-3": {
+        "truthiness-and-empty-values": {
+          "label": "Truthiness and Empty Values",
+          "summary": "Understand how empty strings, zero, None, and collections behave in conditions.",
+          "cards": {
+            "sketch0": {
+              "title": "Understanding Truthiness"
+            },
+            "sketch1": {
+              "title": "Empty Values"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Practice"
+            }
+          },
+          "projectSteps": {
+            "q1": {
+              "title": "Check Truthiness of Values"
+            },
+            "q2": {
+              "title": "Evaluate Collection Truthiness"
+            }
+          },
+          "quiz": {
+            "q1": {
+              "title": "Check Truthiness of Values",
+              "prompt": "Write a function that checks if a given value is truthy or falsy.",
+              "hint": "Focus on the programming task being asked for, not on copying final solution text.",
+              "help": {
+                "concept": "Build the solution from the behavior the exercise is testing.",
+                "hint_1": "Think about which steps, functions, or statements are required for the task.",
+                "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "def is_truthy(value):\n    # Your code here"
+            },
+            "q2": {
+              "title": "Evaluate Collection Truthiness",
+              "prompt": "Create a function that evaluates a list and returns True if it has any truthy values.",
+              "hint": "Focus on the programming task being asked for, not on copying final solution text.",
+              "help": {
+                "concept": "Build the solution from the behavior the exercise is testing.",
+                "hint_1": "Think about which steps, functions, or statements are required for the task.",
+                "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "def has_truthy_value(lst):\n    # Your code here"
+            },
+            "q3": {
+              "title": "Identify Falsy Values",
+              "prompt": "Which of the following values is considered falsy in Python?",
+              "hint": "Focus on the main concept being tested and eliminate choices that describe something different.",
+              "help": {
+                "concept": "Choose the option that matches the core idea described in the question without relying on repeated wording from the answer choices.",
+                "hint_1": "Rule out options that describe a different role, behavior, or concept than the question is testing.",
+                "hint_2": "Pick the option that best matches the concept, not the one that simply repeats familiar wording."
+              },
+              "options": {
+                "a": "0",
+                "b": "'Hello'",
+                "c": "[1, 2, 3]",
+                "d": "None"
+              }
+            },
+            "q4": {
+              "title": "Select Truthy Values",
+              "prompt": "Which of the following values are considered truthy in Python? Select all that apply.",
+              "hint": "Think about non-empty and non-zero values.",
+              "help": {
+                "concept": "Truthy values in Python are those that evaluate to True in a boolean context. This includes non-empty strings, non-zero numbers, and non-empty collections.",
+                "hint_1": "Consider what values are not empty or zero.",
+                "hint_2": "Remember that any non-empty collection is also truthy."
+              },
+              "options": {
+                "a": "'Hello'",
+                "b": "0",
+                "c": "[1, 2, 3]",
+                "d": "''"
+              }
+            },
+            "q5": {
+              "title": "Fill in the Blank: Truthy Value",
+              "prompt": "Choose the best value for the first missing blank in the statement.",
+              "hint": "Think of a common non-empty value.",
+              "help": {
+                "concept": "Truthy values are those that evaluate to True in a boolean context. Non-empty strings and non-zero numbers are examples.",
+                "hint_1": "Consider a common string or number.",
+                "hint_2": "Remember that any non-zero number is truthy."
+              },
+              "template": "The first missing value is [blank1].",
+              "choices": [
+                "0",
+                "'Hello'",
+                "''",
+                "None"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-for-beginners": {
+      "python-3": {
+        "truthiness-and-empty-values": {
+          "1": {
+            "title": "Understanding Truthiness",
+            "bodyMarkdown": "In Python, values can be evaluated as True or False in a boolean context. This concept is known as truthiness. For example, non-empty strings, non-zero numbers, and non-empty collections are considered True, while empty strings, zero, None, and empty collections are considered False."
+          },
+          "2": {
+            "title": "Empty Values",
+            "bodyMarkdown": "Empty values in Python include '', 0, None, [], and {}. Understanding how these values behave in conditions is crucial for writing effective conditional statements."
+          }
+        }
+      }
+    }
+  }
+}

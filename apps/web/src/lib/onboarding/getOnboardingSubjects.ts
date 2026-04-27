@@ -1,6 +1,7 @@
 import "server-only";
 
 import { prisma } from "@/lib/prisma";
+import { getResolvedSubjectCatalogMap } from "@/lib/subjects/server/resolveSubjectPresentation";
 
 export type OnboardingSubjectOption = {
     id?: string;
@@ -22,36 +23,44 @@ function badgeFromSubject(input: {
 }
 
 export async function getOnboardingSubjects(): Promise<OnboardingSubjectOption[]> {
-    const subjects = await prisma.practiceSubject.findMany({
-        where: {
-            status: "active",
-            showInOnboarding: true,
-        },
-        orderBy: [{ order: "asc" }, { title: "asc" }],
-        select: {
-            id: true,
-            slug: true,
-            title: true,
-            description: true,
-            imagePublicId: true,
-            imageAlt: true,
-            accessPolicy: true,
-            entitlementKey: true,
-        },
-    });
-
-    return subjects.map((s) => ({
-        id: s.id,
-        slug: s.slug,
-        title: s.title,
-        description: s.description ?? "",
-        badge: badgeFromSubject({
-            accessPolicy: s.accessPolicy,
-            entitlementKey: s.entitlementKey ?? null,
+    const [subjects, manifestMap] = await Promise.all([
+        prisma.practiceSubject.findMany({
+            where: {
+                status: "active",
+                showInOnboarding: true,
+            },
+            orderBy: [{ order: "asc" }, { title: "asc" }],
+            select: {
+                id: true,
+                slug: true,
+                title: true,
+                description: true,
+                imagePublicId: true,
+                imageAlt: true,
+                accessPolicy: true,
+                entitlementKey: true,
+            },
         }),
-        imageUrl: s.imagePublicId
-            ? `https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/${s.imagePublicId}`
-            : null,
-        imageAlt: s.imageAlt ?? s.title,
-    }));
+        getResolvedSubjectCatalogMap(),
+    ]);
+
+    return subjects.map((s) => {
+        const resolved = manifestMap[s.slug];
+        const imagePublicId = resolved?.imagePublicId ?? s.imagePublicId;
+
+        return {
+            id: s.id,
+            slug: s.slug,
+            title: resolved?.title ?? s.title,
+            description: resolved?.description ?? s.description ?? "",
+            badge: badgeFromSubject({
+                accessPolicy: s.accessPolicy,
+                entitlementKey: s.entitlementKey ?? null,
+            }),
+            imageUrl: imagePublicId
+                ? `https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/${imagePublicId}`
+                : null,
+            imageAlt: resolved?.imageAlt ?? s.imageAlt ?? resolved?.title ?? s.title,
+        };
+    });
 }

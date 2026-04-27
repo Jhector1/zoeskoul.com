@@ -1,0 +1,114 @@
+{
+  "topics": {
+    "python-for-beginners": {
+      "python-3": {
+        "guard-clauses": {
+          "label": "Guard Clauses for Cleaner Logic",
+          "summary": "Use early checks to simplify nested conditionals.",
+          "cards": {
+            "sketch0": {
+              "title": "Understanding Guard Clauses"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Practice"
+            }
+          },
+          "projectSteps": {
+            "1": {
+              "title": "Implement a Guard Clause"
+            },
+            "2": {
+              "title": "Validate User Input"
+            }
+          },
+          "quiz": {
+            "1": {
+              "title": "Implement a Guard Clause",
+              "prompt": "Write a function that checks if a number is positive. If it is not, return 'Not positive'. Otherwise, return the number itself.",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+                "hint_1": "Think about which steps, functions, or statements are needed.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "starterCode": "def check_positive(num):\n    # Your code here"
+            },
+            "2": {
+              "title": "Validate User Input",
+              "prompt": "Create a function that validates user input for age. If the age is less than 0 or greater than 120, return 'Invalid age'. Otherwise, return 'Valid age'.",
+              "hint": "Focus on the programming task being asked for, not on copying final solution text.",
+              "help": {
+                "concept": "Build the solution from the behavior the exercise is testing.",
+                "hint_1": "Think about which steps, functions, or statements are required for the task.",
+                "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "def validate_age(age):\n    # Your code here"
+            },
+            "3": {
+              "title": "Identify Guard Clause Usage",
+              "prompt": "What is the primary benefit of using guard clauses in your code?",
+              "hint": "Think about how they affect code readability and structure.",
+              "help": {
+                "concept": "Guard clauses improve code readability by reducing nesting and handling edge cases early.",
+                "hint_1": "They help to keep the main logic of the function clear.",
+                "hint_2": "Consider how they can simplify complex conditional structures."
+              },
+              "options": {
+                "a": "They make the code longer.",
+                "b": "They reduce nesting and improve readability.",
+                "c": "They are only useful in large functions."
+              }
+            },
+            "4": {
+              "title": "Benefits of Guard Clauses",
+              "prompt": "Which of the following are benefits of using guard clauses? Select all that apply.",
+              "hint": "Consider how guard clauses affect code structure and logic flow.",
+              "help": {
+                "concept": "Guard clauses streamline code by handling edge cases early, leading to clearer logic.",
+                "hint_1": "They can help avoid deep nesting of conditionals.",
+                "hint_2": "Think about how they can make error handling more straightforward."
+              },
+              "options": {
+                "a": "They simplify error handling.",
+                "b": "They increase code complexity.",
+                "c": "They reduce the need for nested conditionals.",
+                "d": "They make the code harder to read."
+              }
+            },
+            "5": {
+              "title": "Complete the Guard Clause",
+              "prompt": "In a guard clause, if the condition is not met, you typically want to return _____.",
+              "hint": "Think about what you would return when an early exit is needed.",
+              "help": {
+                "concept": "Guard clauses often return the missing term or a default value when conditions are not met.",
+                "hint_1": "Consider what type of value would indicate an issue.",
+                "hint_2": "What would you return to signify that the input is invalid?"
+              },
+              "template": "In a guard clause, if the condition is not met, you typically want to return {blank}.",
+              "choices": [
+                "None",
+                "An error message",
+                "A default value"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-for-beginners": {
+      "python-3": {
+        "guard-clauses": {
+          "1": {
+            "title": "Understanding Guard Clauses",
+            "bodyMarkdown": "Guard clauses are a way to simplify your code by handling edge cases early, allowing for cleaner and more readable logic."
+          }
+        }
+      }
+    }
+  }
+}

@@ -27,7 +27,7 @@ function safeChoiceHelp() {
         hint: "Focus on the concept being tested.",
         help: {
             concept: "Think about the idea the question is checking, not the exact answer wording.",
-            hint_1: "Eliminate options that do not match the SQL concept being tested.",
+            hint_1: "Eliminate options that do not match the concept being tested.",
             hint_2: "Choose the option or options that best fit the task described.",
         },
     };
@@ -35,9 +35,9 @@ function safeChoiceHelp() {
 
 function safeFillBlankHelp() {
     return {
-        hint: "Focus on the missing SQL concept rather than the exact missing term.",
+        hint: "Focus on the missing concept rather than the exact missing term.",
         help: {
-            concept: "The blank should be completed with the SQL term that fits the job being described.",
+            concept: "The blank should be completed with the term that fits the job being described.",
             hint_1: "Think about what the missing part needs to do in the statement.",
             hint_2: "Choose the term that best completes the meaning of the statement.",
         },
@@ -46,7 +46,7 @@ function safeFillBlankHelp() {
 
 function safeDragHelp() {
     return {
-        hint: "Focus on the logical order of the SQL parts.",
+        hint: "Focus on the logical order of the parts.",
         help: {
             concept: "Arrange the pieces according to the structure of the statement.",
             hint_1: "Think about which part must come first.",
@@ -57,11 +57,11 @@ function safeDragHelp() {
 
 function safeCodeHelp() {
     return {
-        hint: "Focus on the SQL task being asked for, not the final solution text.",
+        hint: "Focus on the programming task being asked for, not the final solution text.",
         help: {
-            concept: "Build the query from the operation the exercise is testing.",
-            hint_1: "Think about which clauses or functions are needed.",
-            hint_2: "Construct the query from the result the prompt asks for.",
+            concept: "Build the solution from the behavior the exercise is testing.",
+            hint_1: "Think about which steps, functions, or statements are needed.",
+            hint_2: "Construct the solution from the result the prompt asks for.",
         },
     };
 }

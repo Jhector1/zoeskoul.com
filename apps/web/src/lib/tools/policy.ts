@@ -36,6 +36,7 @@ export function toolsPolicyForSubject(subjectSlug: string, meta?: any) {
     // Default heuristics (edit freely)
     const PROGRAMMING = new Set([
         "python",
+        "python-for-beginners",
         "java",
         "javascript",
         "typescript",
@@ -45,5 +46,17 @@ export function toolsPolicyForSubject(subjectSlug: string, meta?: any) {
         "bash",
     ]);
 
-    return { codeEnabled: PROGRAMMING.has(subjectSlug) };
+    const slug = String(subjectSlug ?? "").trim().toLowerCase();
+    const codeEnabled =
+        PROGRAMMING.has(slug) ||
+        slug.startsWith("python-") ||
+        slug.startsWith("java-") ||
+        slug.startsWith("javascript-") ||
+        slug.startsWith("typescript-") ||
+        slug.startsWith("sql-") ||
+        slug.startsWith("c-") ||
+        slug.startsWith("cpp-") ||
+        slug.startsWith("bash-");
+
+    return { codeEnabled };
 }

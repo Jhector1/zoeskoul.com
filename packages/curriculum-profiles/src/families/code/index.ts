@@ -6,6 +6,7 @@ import {
     makeEmptySemanticValidationReport,
 } from "../../shared/noopReports.js";
 import { validateGoldenTopicBundle } from "../../shared/validateGoldenTopicBundle.js";
+import { validateProgrammingTeachingSketches } from "../../shared/validateProgrammingTeachingSketches.js";
 
 export const codeFamilyTrustPolicy: ProfileTrustPolicy = {
     profileId: "code-family",
@@ -52,7 +53,15 @@ export const codeFamilyServices: FamilyProfileServices = {
     },
 
     async validateSemantic(args) {
-        return makeEmptySemanticValidationReport(args.seed.topicId);
+        const report = makeEmptySemanticValidationReport(args.seed.topicId);
+        report.issues.push(
+            ...validateProgrammingTeachingSketches({
+                profileId: "code-family",
+                draft: args.draft,
+            }),
+        );
+        report.ok = !report.issues.some((issue) => issue.severity === "error");
+        return report;
     },
 
     async validateGolden(args) {

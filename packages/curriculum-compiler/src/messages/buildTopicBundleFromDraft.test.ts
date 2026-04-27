@@ -63,6 +63,67 @@ function makeSeed() {
     } as any;
 }
 
+function makePythonShapePack() {
+    return {
+        profileId: "python",
+        subjectManifest: {
+            moduleSlug: (moduleOrder: number) => `python-${moduleOrder}`,
+            sectionSlug: (moduleOrder: number, sectionOrder: number) =>
+                `python-${moduleOrder}-section-${sectionOrder}`,
+            modulePrefix: (moduleOrder: number) => `py${moduleOrder}`,
+            keyPatterns: {
+                topicCardTitleKey: (
+                    subjectSlug: string,
+                    moduleSlug: string,
+                    topicId: string,
+                    cardId: string,
+                ) => `topics.${subjectSlug}.${moduleSlug}.${topicId}.cards.${cardId}.title`,
+                topicProjectStepTitleKey: (
+                    subjectSlug: string,
+                    moduleSlug: string,
+                    topicId: string,
+                    stepId: string,
+                ) => `topics.${subjectSlug}.${moduleSlug}.${topicId}.project.${stepId}.title`,
+                sketchTitleKey: (
+                    subjectSlug: string,
+                    moduleSlug: string,
+                    topicId: string,
+                    sketchId: string,
+                ) => `sketches.${subjectSlug}.${moduleSlug}.${topicId}.${sketchId}.title`,
+                sketchBodyKey: (
+                    subjectSlug: string,
+                    moduleSlug: string,
+                    topicId: string,
+                    sketchId: string,
+                ) => `sketches.${subjectSlug}.${moduleSlug}.${topicId}.${sketchId}.bodyMarkdown`,
+                topicLabelKey: (
+                    subjectSlug: string,
+                    moduleSlug: string,
+                    topicId: string,
+                ) => `topics.${subjectSlug}.${moduleSlug}.${topicId}.label`,
+                topicSummaryKey: (
+                    subjectSlug: string,
+                    moduleSlug: string,
+                    topicId: string,
+                ) => `topics.${subjectSlug}.${moduleSlug}.${topicId}.summary`,
+                exerciseMessageBase: (exerciseId: string) => `quiz.${exerciseId}`,
+            },
+        },
+    } as any;
+}
+
+function makePythonSeed() {
+    return {
+        profileId: "python",
+        subjectSlug: "python-for-beginners",
+        topicId: "read-and-add",
+        moduleRuntimeDefaults: {
+            kind: "code",
+            language: "python",
+        },
+    } as any;
+}
+
 function makeDraftWithExercise(exercise: any) {
     return {
         title: "What SQL Means",
@@ -235,5 +296,64 @@ describe("buildTopicBundleFromDraft messageBase integration", () => {
         expect(first.exercises[0]?.messageBase).not.toBe(
             second.exercises[0]?.messageBase,
         );
+    });
+
+    it("publishes programming code_input as fixed_tests using explicit authoring tests", () => {
+        const bundle = buildTopicBundleFromDraft({
+            shape: makePythonShapePack(),
+            seed: makePythonSeed(),
+            moduleOrder: 1,
+            sectionOrder: 1,
+            draft: makeDraftWithExercise({
+                id: "code-1",
+                kind: "code_input",
+                title: "Read and add",
+                prompt: "Read a number and print the number plus one.",
+                starterCode: "n = int(input())\n# your code\n",
+                solutionCode: "n = int(input())\nprint(n + 1)\n",
+                tests: [{ stdin: "3\n", stdout: "4\n", match: "exact" }],
+                hint: "Convert the input before adding.",
+                help: {
+                    concept: "Use int(input()) for numeric input.",
+                    hint_1: "Store the input in a variable.",
+                    hint_2: "Print the final result.",
+                },
+            }),
+        });
+
+        expect(bundle.exercises[0]).toMatchObject({
+            kind: "code_input",
+            language: "python",
+            recipe: {
+                type: "fixed_tests",
+                tests: [{ stdin: "3\n", stdout: "4\n", match: "exact" }],
+                solutionCode: "n = int(input())\nprint(n + 1)\n",
+            },
+        });
+    });
+
+    it("throws when programming code_input exercises omit explicit tests", () => {
+        expect(() =>
+            buildTopicBundleFromDraft({
+                shape: makePythonShapePack(),
+                seed: makePythonSeed(),
+                moduleOrder: 1,
+                sectionOrder: 1,
+                draft: makeDraftWithExercise({
+                    id: "code-1",
+                    kind: "code_input",
+                    title: "Read and add",
+                    prompt: "Read a number and print the number plus one.",
+                    starterCode: "n = int(input())\n# your code\n",
+                    solutionCode: "n = int(input())\nprint(n + 1)\n",
+                    hint: "Convert the input before adding.",
+                    help: {
+                        concept: "Use int(input()) for numeric input.",
+                        hint_1: "Store the input in a variable.",
+                        hint_2: "Print the final result.",
+                    },
+                }),
+            }),
+        ).toThrow(/needs at least one stdin\/stdout test case/i);
     });
 });

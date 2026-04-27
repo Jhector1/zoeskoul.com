@@ -6,7 +6,7 @@ import { safeGet, safeSet } from "../utils/storage";
 import { TOOL_SPECS } from "../registry";
 
 function storageKey(ctx: ToolsCtx) {
-    return `learnoir:tools:active:v1:${ctx.subjectSlug}:${ctx.moduleId}:${ctx.locale}`;
+    return `learnoir:tools:active:v2:${ctx.subjectSlug}:${ctx.moduleId}:${ctx.locale}`;
 }
 
 function pickDefault(ctx: ToolsCtx): ToolId {
@@ -27,6 +27,13 @@ export function useActiveTool(ctx: ToolsCtx) {
     useEffect(() => {
         const raw = safeGet(key);
         const candidate = (raw ?? "") as ToolId;
+
+        // If code just became available for this subject/module, prefer opening
+        // the code pane instead of restoring a stale notes-only selection.
+        if (ctx.codeEnabled && candidate === "notes") {
+            setActive(pickDefault(ctx));
+            return;
+        }
 
         const spec = TOOL_SPECS.find((t) => t.id === candidate);
         if (spec && spec.enabled(ctx)) {

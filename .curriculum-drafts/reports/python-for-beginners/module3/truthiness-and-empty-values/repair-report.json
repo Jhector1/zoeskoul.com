@@ -1,0 +1,12 @@
+{
+  "topicId": "truthiness-and-empty-values",
+  "repairs": [
+    {
+      "code": "PYTHON_POLICY_CODE_INPUT_SYNTHESIZED",
+      "category": "other",
+      "severity": "medium",
+      "field": "policy_code_input_1",
+      "message": "Added a fallback code_input exercise to satisfy the planned exercise mix for \"truthiness-and-empty-values\"."
+    }
+  ]
+}

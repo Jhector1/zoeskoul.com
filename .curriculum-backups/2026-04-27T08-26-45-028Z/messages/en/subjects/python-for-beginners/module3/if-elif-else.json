@@ -1,0 +1,116 @@
+{
+  "topics": {
+    "python-for-beginners": {
+      "python-3": {
+        "if-elif-else": {
+          "label": "If, Elif, and Else",
+          "summary": "Control which code runs based on conditions.",
+          "cards": {
+            "sketch0": {
+              "title": "Understanding Conditionals"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Practice"
+            }
+          },
+          "projectSteps": {
+            "1": {
+              "title": "Implementing a Simple Conditional"
+            },
+            "2": {
+              "title": "Grade Checker"
+            }
+          },
+          "quiz": {
+            "1": {
+              "title": "Implementing a Simple Conditional",
+              "prompt": "Write a function that checks if a number is positive, negative, or zero.",
+              "hint": "Focus on the programming task being asked for, not on copying final solution text.",
+              "help": {
+                "concept": "Build the solution from the behavior the exercise is testing.",
+                "hint_1": "Think about which steps, functions, or statements are required for the task.",
+                "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "def check_number(num):\n    # Your code here"
+            },
+            "2": {
+              "title": "Grade Checker",
+              "prompt": "Create a function that returns a grade based on a score.",
+              "hint": "Focus on the programming task being asked for, not on copying final solution text.",
+              "help": {
+                "concept": "Build the solution from the behavior the exercise is testing.",
+                "hint_1": "Think about which steps, functions, or statements are required for the task.",
+                "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "def get_grade(score):\n    # Your code here"
+            },
+            "3": {
+              "title": "Understanding If Statements",
+              "prompt": "What does an if statement do?",
+              "hint": "It checks a condition.",
+              "help": {
+                "concept": "An if statement evaluates a condition and executes code based on whether the condition is true or false.",
+                "hint_1": "It can lead to different code paths.",
+                "hint_2": "Think about how it controls the flow of execution."
+              },
+              "options": {
+                "a": "It always executes the code inside.",
+                "b": "It checks a condition and executes code if true.",
+                "c": "It repeats code multiple times.",
+                "d": "It defines a function."
+              }
+            },
+            "4": {
+              "title": "Identifying Conditional Statements",
+              "prompt": "Which of the following are valid conditional statements in Python?",
+              "hint": "Look for the use of if, elif, and else.",
+              "help": {
+                "concept": "Conditional statements control the flow of execution based on conditions.",
+                "hint_1": "They must include comparison operators.",
+                "hint_2": "Check for the correct syntax."
+              },
+              "options": {
+                "a": "if x > 10:\n    print('x is greater than 10')",
+                "b": "elif x < 5:\n    print('x is less than 5')",
+                "c": "else:\n    print('x is between 5 and 10')",
+                "d": "for x in range(10):\n    print(x)"
+              }
+            },
+            "5": {
+              "title": "Complete the Conditional Statement",
+              "prompt": "Choose the best value for the first missing blank in the statement.",
+              "hint": "Think about what action you would take.",
+              "help": {
+                "concept": "Use a verb that describes an action you would take based on the condition.",
+                "hint_1": "Consider what you would do to cool down.",
+                "hint_2": "It's a common action in hot weather."
+              },
+              "template": "The first missing value is [blank1].",
+              "choices": [
+                "turn on",
+                "turn off",
+                "ignore",
+                "buy"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-for-beginners": {
+      "python-3": {
+        "if-elif-else": {
+          "1": {
+            "title": "Understanding Conditionals",
+            "bodyMarkdown": "Conditionals allow your program to make decisions based on certain conditions. This is essential for controlling the flow of your program."
+          }
+        }
+      }
+    }
+  }
+}

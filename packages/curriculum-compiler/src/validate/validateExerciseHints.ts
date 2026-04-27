@@ -17,6 +17,29 @@ function containsWholeText(haystack: string, needle: string): boolean {
     return pattern.test(h);
 }
 
+function isTooGenericAnswerText(value: string): boolean {
+    const normalized = normalize(value)
+        .replace(/[`"'.,;:!?()[\]{}]/g, "")
+        .replace(/\s+/g, " ");
+
+    if (!normalized) return true;
+
+    const genericKeywords = new Set([
+        "and",
+        "or",
+        "not",
+        "if",
+        "elif",
+        "else",
+        "true",
+        "false",
+        "yes",
+        "no",
+    ]);
+
+    return genericKeywords.has(normalized);
+}
+
 function canonicalOptionIds(count: number): string[] {
     return Array.from({ length: count }, (_, i) => String.fromCharCode(97 + i));
 }
@@ -43,6 +66,7 @@ export function validateExerciseHints(draft: TopicAuthoringDraft): string[] {
                 .filter(Boolean);
 
             for (const answerText of correctOptionTexts) {
+                if (isTooGenericAnswerText(answerText)) continue;
                 if (texts.some((text) => containsWholeText(text, answerText))) {
                     warnings.push(`Hint reveals answer in exercise ${exercise.id}`);
                     break;

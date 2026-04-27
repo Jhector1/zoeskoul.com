@@ -6,7 +6,7 @@ export const pythonTrustPolicy: ProfileTrustPolicy = {
     profileId: "python",
     autoPublishEnabled: false,
     requiresCritiquePass: true,
-    requiresSemanticValidation: false,
+    requiresSemanticValidation: true,
     maxHintWarnings: 0,
     maxMediumRepairs: 0,
     allowHighSeverityRepairs: false,

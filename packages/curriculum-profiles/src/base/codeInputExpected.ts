@@ -176,6 +176,10 @@ export function resolveTemplateIoVars(args: {
 export function buildFixedTestsExpected(
     recipe: FixedTestsRecipe,
 ): TerminalCodeInputExpectedPayload {
+    if (!Array.isArray(recipe.tests) || recipe.tests.length < 1) {
+        throw new Error("Programming fixed_tests code_input recipes require at least one test.");
+    }
+
     return {
         kind: "code_input",
         tests: recipe.tests.map((test) => ({
@@ -192,6 +196,10 @@ export function buildTemplateIoExpected(args: {
     rng?: TemplateIoRng;
     vars?: Record<string, TemplateIoVarValue>;
 }): TerminalCodeInputExpectedPayload {
+    if (!Array.isArray(args.recipe.tests) || args.recipe.tests.length < 1) {
+        throw new Error("Programming template_io code_input recipes require at least one test.");
+    }
+
     const vars = resolveTemplateIoVars(args);
 
     return {

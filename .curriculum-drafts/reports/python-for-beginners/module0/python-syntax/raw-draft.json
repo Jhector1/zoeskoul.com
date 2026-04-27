@@ -1,0 +1,97 @@
+{
+  "title": "Understanding Python Syntax",
+  "summary": "Learn the basic syntax and structure of Python code.",
+  "minutes": 30,
+  "sketchBlocks": [
+    {
+      "id": "1",
+      "title": "Introduction to Python Syntax",
+      "bodyMarkdown": "In this section, we will explore the fundamental syntax of Python, including variables, data types, and control structures."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "q1",
+      "kind": "code_input",
+      "title": "Print Hello World",
+      "prompt": "Write a Python program that prints 'Hello, World!' to the console.",
+      "hint": "Use the print function.",
+      "help": {
+        "concept": "The print function is used to output data to the console in Python.",
+        "hint_1": "Remember to use parentheses with the print function.",
+        "hint_2": "Make sure to include the text in quotes."
+      },
+      "starterCode": "",
+      "solutionCode": "print('Hello, World!')"
+    },
+    {
+      "id": "q2",
+      "kind": "code_input",
+      "title": "Calculate Sum of Two Numbers",
+      "prompt": "Write a Python function that takes two numbers as arguments and returns their sum.",
+      "hint": "Define a function and use the + operator.",
+      "help": {
+        "concept": "Functions in Python are defined using the def keyword, and you can return values using the return statement.",
+        "hint_1": "Make sure to define your function with parameters.",
+        "hint_2": "Use the return statement to send back the result."
+      },
+      "starterCode": "def sum_numbers(a, b):",
+      "solutionCode": "    return a + b"
+    },
+    {
+      "id": "q3",
+      "kind": "code_input",
+      "title": "Check Even or Odd",
+      "prompt": "Write a Python function that checks if a number is even or odd.",
+      "hint": "Use the modulus operator to determine evenness.",
+      "help": {
+        "concept": "The modulus operator (%) returns the remainder of a division, which can help identify even and odd numbers.",
+        "hint_1": "An even number has a remainder of 0 when divided by 2.",
+        "hint_2": "Use an if statement to check the condition."
+      },
+      "starterCode": "def is_even(num):",
+      "solutionCode": "    return num % 2 == 0"
+    },
+    {
+      "id": "q4",
+      "kind": "fill_blank_choice",
+      "title": "Complete the Syntax",
+      "prompt": "Fill in the blank: In Python, a variable is created using the ____ keyword.",
+      "hint": "Think about how variables are defined in Python.",
+      "help": {
+        "concept": "In Python, variables can be created without a specific keyword, unlike some other programming languages.",
+        "hint_1": "You simply assign a value to a variable name.",
+        "hint_2": "Look for the common way to define a variable in Python."
+      },
+      "template": "In Python, a variable is created using the ____ keyword.",
+      "choices": [
+        "var",
+        "let",
+        "const",
+        "None"
+      ],
+      "correctValue": "None"
+    },
+    {
+      "id": "q5",
+      "kind": "single_choice",
+      "title": "Identify the Correct Syntax",
+      "prompt": "Which of the following is the correct way to define a function in Python?",
+      "hint": "Look for the def keyword.",
+      "help": {
+        "concept": "Functions in Python are defined using the def keyword followed by the function name and parentheses.",
+        "hint_1": "The function definition must end with a colon.",
+        "hint_2": "Check the options for the correct structure."
+      },
+      "options": [
+        "function myFunction()",
+        "def myFunction():",
+        "myFunction() def",
+        "define myFunction()"
+      ],
+      "correctOptionIds": [
+        "b"
+      ]
+    }
+  ]
+}

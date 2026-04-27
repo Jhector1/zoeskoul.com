@@ -2,6 +2,7 @@ import type {
     ManifestCard,
     ManifestExercise,
     ManifestSketch,
+    ProgrammingCodeInputTestDraft,
     TopicAuthoringDraft,
     TopicBundleManifest,
     TopicSeed,
@@ -9,6 +10,7 @@ import type {
 import type { SubjectShapePack } from "@zoeskoul/curriculum-profiles";
 import { buildExerciseMessageKeys } from "../messages/buildMessageKeys.js";
 import { validateTopicMessageBases } from "../messages/validateTopicMessageBases.js";
+import { resolveLogicalSectionSlug } from "./resolveLogicalSectionSlug.js";
 
 type DraftExercise = TopicAuthoringDraft["quizDraft"][number];
 
@@ -216,10 +218,13 @@ export function buildTopicBundleFromDraft(args: {
     const kp = shape.subjectManifest.keyPatterns;
 
     const logicalModuleSlug = shape.subjectManifest.moduleSlug(moduleOrder);
-    const logicalSectionSlug = shape.subjectManifest.sectionSlug(
-        moduleOrder,
-        sectionOrder,
-    );
+    const logicalSectionSlug = resolveLogicalSectionSlug({
+        subjectSlug: seed.subjectSlug,
+        rawSectionSlug: shape.subjectManifest.sectionSlug(
+            moduleOrder,
+            sectionOrder,
+        ),
+    });
     const prefix = shape.subjectManifest.modulePrefix(moduleOrder);
 
     const projectStepIds = buildProjectStepIds(draft);
@@ -552,19 +557,40 @@ export function buildTopicBundleFromDraft(args: {
                 messageBase,
                 language: "python" as const,
                 showExpectedExample: true,
-                recipe:
-                    exercise.recipeType === "fixed_tests"
-                        ? {
-                            type: "fixed_tests" as const,
-                            tests: [],
-                            solutionCode: exercise.solutionCode,
-                        }
-                        : {
-                            type: "template_io" as const,
-                            vars: {},
-                            tests: [],
-                            solutionTemplate: exercise.solutionCode,
-                        },
+                recipe: (() => {
+                    const tests = Array.isArray(exercise.tests)
+                        ? exercise.tests
+                            .map((test: ProgrammingCodeInputTestDraft) => {
+                                const match: "exact" | "includes" =
+                                    test.match === "includes" ? "includes" : "exact";
+
+                                return {
+                                    ...(typeof test.stdin === "string"
+                                        ? { stdin: test.stdin }
+                                        : {}),
+                                    stdout: String(test.stdout ?? ""),
+                                    match,
+                                };
+                            })
+                            .filter((test: { stdout: string }) => test.stdout.trim().length > 0)
+                        : [];
+
+                    if (tests.length < 1) {
+                        throw new Error(
+                            [
+                                `Programming code_input exercise "${exercise.id}" needs at least one stdin/stdout test case.`,
+                                `Topic: ${seed.topicId}`,
+                                `Use the authoring draft "tests" field so the compiler can publish a valid fixed_tests recipe.`,
+                            ].join("\n"),
+                        );
+                    }
+
+                    return {
+                        type: "fixed_tests" as const,
+                        tests,
+                        solutionCode: exercise.solutionCode,
+                    };
+                })(),
             };
         }
 

@@ -1,0 +1,102 @@
+{
+  "title": "Variables and Data Types",
+  "summary": "Explore variables and different data types in Python.",
+  "minutes": 30,
+  "sketchBlocks": [
+    {
+      "id": "1",
+      "title": "Understanding Variables",
+      "bodyMarkdown": "Variables are used to store information that can be referenced and manipulated in a program. In Python, you can create a variable by simply assigning a value to it."
+    },
+    {
+      "id": "2",
+      "title": "Data Types in Python",
+      "bodyMarkdown": "Python has various data types including integers, floats, strings, and booleans. Each data type serves a different purpose and has its own characteristics."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "1",
+      "kind": "code_input",
+      "title": "Create a Variable",
+      "prompt": "Define a variable named `age` and assign it the value of your age.",
+      "hint": "Use the assignment operator to create the variable.",
+      "help": {
+        "concept": "Variables in Python are created by assigning a value to a name using the equals sign.",
+        "hint_1": "Remember to choose a meaningful name for your variable.",
+        "hint_2": "The syntax is: variable_name = value."
+      },
+      "starterCode": "",
+      "solutionCode": "age = 25"
+    },
+    {
+      "id": "2",
+      "kind": "code_input",
+      "title": "Identify Data Types",
+      "prompt": "Create a variable `price` and assign it a float value. Then, create a variable `is_available` and assign it a boolean value.",
+      "hint": "Make sure to use the correct data types for each variable.",
+      "help": {
+        "concept": "Data types in Python include integers, floats, strings, and booleans.",
+        "hint_1": "A float is a number with a decimal point.",
+        "hint_2": "A boolean can be either True or False."
+      },
+      "starterCode": "",
+      "solutionCode": "price = 19.99\nis_available = True"
+    },
+    {
+      "id": "3",
+      "kind": "code_input",
+      "title": "Using Strings",
+      "prompt": "Create a variable `greeting` and assign it a string that says 'Hello, World!'.",
+      "hint": "Strings are enclosed in quotes.",
+      "help": {
+        "concept": "Strings are sequences of characters used to represent text in Python.",
+        "hint_1": "You can use either single or double quotes for strings.",
+        "hint_2": "The syntax is: variable_name = 'string_value'."
+      },
+      "starterCode": "",
+      "solutionCode": "greeting = 'Hello, World!'"
+    },
+    {
+      "id": "4",
+      "kind": "fill_blank_choice",
+      "title": "Fill in the Blank: Data Types",
+      "prompt": "In Python, the data type used to represent true or false values is called ___.",
+      "hint": "Think about the logical values.",
+      "help": {
+        "concept": "Booleans are the data type that can hold True or False values.",
+        "hint_1": "This data type is often used in conditional statements.",
+        "hint_2": "It is named after a mathematician."
+      },
+      "template": "In Python, the data type used to represent true or false values is called ___.",
+      "choices": [
+        "integer",
+        "string",
+        "boolean",
+        "float"
+      ],
+      "correctValue": "boolean"
+    },
+    {
+      "id": "5",
+      "kind": "single_choice",
+      "title": "Identify a Data Type",
+      "prompt": "Which of the following is a valid string in Python?",
+      "hint": "Strings must be enclosed in quotes.",
+      "help": {
+        "concept": "Strings in Python are sequences of characters enclosed in quotes.",
+        "hint_1": "Look for the option that uses quotes correctly.",
+        "hint_2": "Remember that both single and double quotes are valid."
+      },
+      "options": [
+        "'Hello'",
+        "Hello",
+        "123",
+        "True"
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    }
+  ]
+}

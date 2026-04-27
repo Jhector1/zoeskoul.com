@@ -1,0 +1,119 @@
+{
+  "topics": {
+    "python-for-beginners": {
+      "python-3": {
+        "comparisons-and-truth-values": {
+          "label": "Comparisons and Truth Values",
+          "summary": "Use comparison operators and understand True and False results.",
+          "cards": {
+            "sketch0": {
+              "title": "Understanding Comparisons"
+            },
+            "sketch1": {
+              "title": "Truth Values"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Practice"
+            }
+          },
+          "projectSteps": {
+            "q1": {
+              "title": "Implement a Comparison"
+            },
+            "q2": {
+              "title": "Check Even or Odd"
+            }
+          },
+          "quiz": {
+            "q1": {
+              "title": "Implement a Comparison",
+              "prompt": "Write a function that checks if a number is greater than 10.",
+              "hint": "Focus on the programming task being asked for, not on copying final solution text.",
+              "help": {
+                "concept": "Build the solution from the behavior the exercise is testing.",
+                "hint_1": "Think about which steps, functions, or statements are required for the task.",
+                "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "def is_greater_than_ten(num):\n    # Your code here"
+            },
+            "q2": {
+              "title": "Check Even or Odd",
+              "prompt": "Create a function that checks if a number is even.",
+              "hint": "Focus on the programming task being asked for, not on copying final solution text.",
+              "help": {
+                "concept": "Build the solution from the behavior the exercise is testing.",
+                "hint_1": "Think about which steps, functions, or statements are required for the task.",
+                "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "def is_even(num):\n    # Your code here"
+            },
+            "q3": {
+              "title": "True or False?",
+              "prompt": "What is the result of 5 < 3?",
+              "hint": "Focus on the main concept being tested and eliminate choices that describe something different.",
+              "help": {
+                "concept": "Choose the option that matches the core idea described in the question without relying on repeated wording from the answer choices.",
+                "hint_1": "Rule out options that describe a different role, behavior, or concept than the question is testing.",
+                "hint_2": "Pick the option that best matches the concept, not the one that simply repeats familiar wording."
+              },
+              "options": {
+                "a": "True",
+                "b": "False"
+              }
+            },
+            "q4": {
+              "title": "Which are Truthy?",
+              "prompt": "Select all values that are considered truthy in Python.",
+              "hint": "Think about what values evaluate to True.",
+              "help": {
+                "concept": "In Python, certain values are considered truthy, meaning they evaluate to True in a boolean context.",
+                "hint_1": "Non-zero numbers and non-empty collections are typically truthy.",
+                "hint_2": "Remember that 0 and empty collections are falsy."
+              },
+              "options": {
+                "a": "1",
+                "b": "0",
+                "c": "[]",
+                "d": "'Hello'"
+              }
+            },
+            "q5": {
+              "title": "Fill in the Blank",
+              "prompt": "The expression 10 == 10 evaluates to ___.",
+              "hint": "Focus on the missing concept or keyword.",
+              "help": {
+                "concept": "This task checks the key idea behind fill in the blank.",
+                "hint_1": "Look for the word or phrase that best matches the lesson concept.",
+                "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
+              },
+              "template": "The expression 10 == 10 evaluates to {blank}.",
+              "choices": [
+                "True",
+                "False"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-for-beginners": {
+      "python-3": {
+        "comparisons-and-truth-values": {
+          "1": {
+            "title": "Understanding Comparisons",
+            "bodyMarkdown": "In Python, comparison operators are used to compare two values. The result of a comparison is a boolean value: either True or False."
+          },
+          "2": {
+            "title": "Truth Values",
+            "bodyMarkdown": "Truth values in Python are determined by the evaluation of expressions. Understanding how to interpret these values is crucial for controlling program flow."
+          }
+        }
+      }
+    }
+  }
+}

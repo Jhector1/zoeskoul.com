@@ -1,0 +1,112 @@
+{
+  "title": "Your First Python Program",
+  "summary": "Write and run your first Python program: Hello, World!",
+  "minutes": 30,
+  "sketchBlocks": [
+    {
+      "id": "1",
+      "title": "Introduction to Python",
+      "bodyMarkdown": "In this lesson, you will learn how to write and execute your first Python program, which will print 'Hello, World!' to the console."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "q1",
+      "kind": "code_input",
+      "title": "Write Your First Program",
+      "prompt": "Create a Python script that prints 'Hello, World!'",
+      "hint": "Use the print function.",
+      "help": {
+        "concept": "The print function in Python outputs text to the console.",
+        "hint_1": "Remember to use parentheses with the print function.",
+        "hint_2": "Make sure to include quotes around the text."
+      },
+      "starterCode": "",
+      "solutionCode": "print('Hello, World!')"
+    },
+    {
+      "id": "q2",
+      "kind": "code_input",
+      "title": "Modify Your Program",
+      "prompt": "Change your program to print 'Hello, [Your Name]!'",
+      "hint": "You can replace 'World' with your name.",
+      "help": {
+        "concept": "You can customize the output of the print function by changing the string inside it.",
+        "hint_1": "Make sure to keep the print function intact.",
+        "hint_2": "Use your actual name in the string."
+      },
+      "starterCode": "print('Hello, World!')",
+      "solutionCode": "print('Hello, Zoe!')"
+    },
+    {
+      "id": "q3",
+      "kind": "code_input",
+      "title": "Add a New Line",
+      "prompt": "Modify your program to print 'Hello, [Your Name]!' on one line and 'Welcome to Python!' on the next line.",
+      "hint": "Use the newline character.",
+      "help": {
+        "concept": "In Python, you can use '\\n' to create a new line in the output.",
+        "hint_1": "Make sure to include both print statements.",
+        "hint_2": "Combine the strings with '\\n' between them."
+      },
+      "starterCode": "print('Hello, Zoe!')",
+      "solutionCode": "print('Hello, Zoe!\\nWelcome to Python!')"
+    },
+    {
+      "id": "q4",
+      "kind": "fill_blank_choice",
+      "title": "Identify the Output",
+      "prompt": "What will the following code output? `print('Hello, World!')` The output will be: `Hello, ____!`",
+      "hint": "Think about what the print function does.",
+      "help": {
+        "concept": "The print function outputs the string exactly as it is written.",
+        "hint_1": "Focus on the text inside the quotes.",
+        "hint_2": "Remember that 'World' is part of the output."
+      },
+      "template": "Hello, {blank}!",
+      "choices": [
+        "World",
+        "Python",
+        "Zoe"
+      ],
+      "correctValue": "World"
+    },
+    {
+      "id": "q5",
+      "kind": "single_choice",
+      "title": "Understanding Print Function",
+      "prompt": "What does the print function do in Python?",
+      "hint": "It outputs text to the console.",
+      "help": {
+        "concept": "The print function is used to display information to the user.",
+        "hint_1": "It can print strings, numbers, and more.",
+        "hint_2": "Think about where you see the output when you run a program."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "It creates a variable."
+        },
+        {
+          "id": "b",
+          "text": "It outputs text to the console."
+        },
+        {
+          "id": "c",
+          "text": "It reads input from the user."
+        }
+      ],
+      "correctOptionIds": [
+        "b"
+      ]
+    }
+  ],
+  "projectDraft": {
+    "title": "Python Basics Project",
+    "stepIds": [
+      "q1",
+      "q2",
+      "q3"
+    ]
+  }
+}

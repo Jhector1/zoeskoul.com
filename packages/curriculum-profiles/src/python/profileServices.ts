@@ -4,6 +4,7 @@ import { pythonTrustPolicy } from "./trustPolicy.js";
 import { repairPythonDraft } from "./repair/repairPythonDraft.js";
 import { critiquePythonDraft } from "./critique/critiquePythonDraft.js";
 import { validatePythonSemantic } from "./semantic/validatePythonSemantic.js";
+import { validatePythonGolden } from "./validatePythonGolden.js";
 
 export const pythonProfileServices = createProfileServices({
     profileId: "python",
@@ -12,6 +13,7 @@ export const pythonProfileServices = createProfileServices({
         repairDraft: repairPythonDraft,
         critiqueDraft: critiquePythonDraft,
         validateSemantic: validatePythonSemantic,
+        validateGolden: validatePythonGolden,
     },
     getTrustPolicy() {
         return pythonTrustPolicy;

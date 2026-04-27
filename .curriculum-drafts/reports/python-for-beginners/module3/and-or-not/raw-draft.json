@@ -1,0 +1,145 @@
+{
+  "title": "And, Or, and Not",
+  "summary": "Combine conditions with boolean operators.",
+  "minutes": 25,
+  "sketchBlocks": [
+    {
+      "id": "1",
+      "title": "Understanding Boolean Logic",
+      "bodyMarkdown": "Boolean logic is fundamental in programming, allowing us to combine conditions using operators like AND, OR, and NOT."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "1",
+      "kind": "code_input",
+      "title": "Check Eligibility for a Discount",
+      "prompt": "Write a program that checks if a customer is eligible for a discount based on their membership status and purchase amount.",
+      "hint": "Consider both membership status and purchase amount in your conditions.",
+      "help": {
+        "concept": "You can use boolean operators to combine multiple conditions. For example, use AND to check if both conditions are true.",
+        "hint_1": "Think about how to structure your if statements to check both conditions.",
+        "hint_2": "Remember to use the correct logical operators to combine your conditions."
+      },
+      "starterCode": "membership = input('Enter membership status (gold/silver/none): ')\npurchase_amount = float(input('Enter purchase amount: '))\n\n# Your code here\n",
+      "solutionCode": "membership = input('Enter membership status (gold/silver/none): ')\npurchase_amount = float(input('Enter purchase amount: '))\n\nif (membership == 'gold' or membership == 'silver') and purchase_amount > 100:\n    print('Eligible for discount')\nelse:\n    print('Not eligible for discount')",
+      "tests": [
+        {
+          "stdin": "gold\n150\n",
+          "stdout": "Eligible for discount\n"
+        },
+        {
+          "stdin": "silver\n50\n",
+          "stdout": "Not eligible for discount\n"
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "kind": "code_input",
+      "title": "Determine Voting Eligibility",
+      "prompt": "Create a program that checks if a person is eligible to vote based on their age and citizenship status.",
+      "hint": "You need to check both age and citizenship.",
+      "help": {
+        "concept": "Eligibility can be determined by combining conditions with AND. Both conditions must be true for eligibility.",
+        "hint_1": "Consider how to structure your if statement to check both age and citizenship.",
+        "hint_2": "Make sure to use the correct logical operator to combine your checks."
+      },
+      "starterCode": "age = int(input('Enter your age: '))\ncitizenship = input('Are you a citizen? (yes/no): ')\n\n# Your code here\n",
+      "solutionCode": "age = int(input('Enter your age: '))\ncitizenship = input('Are you a citizen? (yes/no): ')\n\nif age >= 18 and citizenship == 'yes':\n    print('Eligible to vote')\nelse:\n    print('Not eligible to vote')",
+      "tests": [
+        {
+          "stdin": "20\nyes\n",
+          "stdout": "Eligible to vote\n"
+        },
+        {
+          "stdin": "16\nno\n",
+          "stdout": "Not eligible to vote\n"
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "kind": "single_choice",
+      "title": "Understanding AND Operator",
+      "prompt": "What does the AND operator do in boolean logic?",
+      "hint": "It requires both conditions to be true.",
+      "help": {
+        "concept": "The AND operator combines two conditions and returns true only if both conditions are true.",
+        "hint_1": "Think about how AND works in everyday logic.",
+        "hint_2": "If one condition is false, the entire expression is false."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Returns true if at least one condition is true."
+        },
+        {
+          "id": "b",
+          "text": "Returns true only if both conditions are true."
+        },
+        {
+          "id": "c",
+          "text": "Returns false if both conditions are true."
+        }
+      ],
+      "correctOptionIds": [
+        "b"
+      ]
+    },
+    {
+      "id": "4",
+      "kind": "multi_choice",
+      "title": "Identifying Boolean Operators",
+      "prompt": "Which of the following are boolean operators?",
+      "hint": "Look for operators that combine conditions.",
+      "help": {
+        "concept": "Boolean operators are used to combine conditions in logical expressions.",
+        "hint_1": "Common boolean operators include AND, OR, and NOT.",
+        "hint_2": "Consider which of the options can be used to combine logical statements."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "AND"
+        },
+        {
+          "id": "b",
+          "text": "OR"
+        },
+        {
+          "id": "c",
+          "text": "IF"
+        },
+        {
+          "id": "d",
+          "text": "NOT"
+        }
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ]
+    },
+    {
+      "id": "5",
+      "kind": "fill_blank_choice",
+      "title": "Complete the Logic Statement",
+      "prompt": "Fill in the blank: The expression 'x > 5 _____ y < 10' will evaluate to true if both conditions are true.",
+      "hint": "Think about how to combine conditions.",
+      "help": {
+        "concept": "You can use boolean operators to combine conditions in logical expressions.",
+        "hint_1": "Consider which operator requires both conditions to be true.",
+        "hint_2": "This operator is commonly used in programming."
+      },
+      "template": "The expression 'x > 5 {blank} y < 10' will evaluate to true if both conditions are true.",
+      "choices": [
+        "AND",
+        "OR",
+        "NOT"
+      ],
+      "correctValue": "AND"
+    }
+  ]
+}

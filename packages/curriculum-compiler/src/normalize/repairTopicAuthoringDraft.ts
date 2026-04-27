@@ -111,7 +111,7 @@ function makeSafeChoiceHelp() {
             concept:
                 "Choose the option that matches the core idea described in the question without relying on repeated wording from the answer choices.",
             hint_1:
-                "Rule out options that describe a different role, behavior, or SQL concept than the question is testing.",
+                "Rule out options that describe a different role, behavior, or concept than the question is testing.",
             hint_2:
                 "Pick the option that best matches the concept, not the one that simply repeats familiar wording.",
         },
@@ -120,24 +120,24 @@ function makeSafeChoiceHelp() {
 
 function makeSafeFillBlankHelp() {
     return {
-        hint: "Focus on the missing SQL concept rather than the exact missing word.",
+        hint: "Focus on the missing concept rather than the exact missing word.",
         help: {
             concept:
-                "The blank should be filled with the SQL term that matches the job the statement is trying to perform.",
+                "The blank should be filled with the term that matches the job the statement is trying to perform.",
             hint_1:
                 "Think about what the missing part is supposed to do in the statement.",
             hint_2:
-                "Choose the SQL term that best completes the meaning of the statement.",
+                "Choose the term that best completes the meaning of the statement.",
         },
     };
 }
 
 function makeSafeDragReorderHelp() {
     return {
-        hint: "Focus on the logical order of the SQL parts being tested.",
+        hint: "Focus on the logical order of the parts being tested.",
         help: {
             concept:
-                "Arrange the pieces according to how the SQL statement is structured.",
+                "Arrange the pieces according to how the statement is structured.",
             hint_1:
                 "Think about which piece must appear first and which depends on it.",
             hint_2:
@@ -148,14 +148,14 @@ function makeSafeDragReorderHelp() {
 
 function makeSafeCodeHelp() {
     return {
-        hint: "Focus on the SQL task being asked for, not on copying final query text.",
+        hint: "Focus on the programming task being asked for, not on copying final solution text.",
         help: {
             concept:
-                "Build the query from the operation the exercise is testing.",
+                "Build the solution from the behavior the exercise is testing.",
             hint_1:
-                "Think about which clauses or functions are required for the task.",
+                "Think about which steps, functions, or statements are required for the task.",
             hint_2:
-                "Construct the query based on what result the exercise expects, not by repeating exact solution wording.",
+                "Construct the solution based on what result the exercise expects, not by repeating exact solution wording.",
         },
     };
 }

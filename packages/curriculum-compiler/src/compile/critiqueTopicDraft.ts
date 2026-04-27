@@ -9,6 +9,9 @@ import { validateBlueprint } from "../validate/validateBlueprint.js";
 import { readTopicReports } from "../reports/readTopicReports.js";
 import { writeTopicReports } from "../reports/writeTopicReports.js";
 import { reviewPreparedTopicDraft } from "../quality/reviewPreparedTopicDraft.js";
+import { normalizeTopicAuthoringDraft } from "../normalize/normalizeTopicAuthoringDraft.js";
+import { repairTopicAuthoringDraft } from "../normalize/repairTopicAuthoringDraft.js";
+import { sanitizeHintLeaksInDraft } from "../normalize/sanitizeHintLeaksInDraft.js";
 import type { CompileProgressCallback } from "./compileProgress.js";
 import { resolvePlan } from "../spec/resolvePlan.js";
 import { findTopicPlanNode } from "../plan/findTopicPlanNode.js";
@@ -119,9 +122,29 @@ export async function critiqueTopicDraft(args: {
         sectionSlug: node.section.sectionSlug,
     });
 
+    let preparedDraft = normalizeTopicAuthoringDraft(repairedDraft);
+    preparedDraft = repairTopicAuthoringDraft(preparedDraft);
+    preparedDraft = sanitizeHintLeaksInDraft(preparedDraft);
+
+    const refreshedRepair = await profileServices.repairDraft({
+        seed,
+        draft: preparedDraft,
+    });
+
+    preparedDraft = repairTopicAuthoringDraft(refreshedRepair.draft);
+    preparedDraft = sanitizeHintLeaksInDraft(preparedDraft);
+
+    const mergedRepairReport = {
+        topicId: seed.topicId,
+        repairs: [
+            ...(saved.repairReport?.repairs ?? []),
+            ...(refreshedRepair.report.repairs ?? []),
+        ],
+    };
+
     const review = await reviewPreparedTopicDraft({
         seed,
-        draft: repairedDraft,
+        draft: preparedDraft,
         topicBundle: saved.topicBundle as any,
         profileServices,
     });
@@ -130,8 +153,8 @@ export async function critiqueTopicDraft(args: {
         subjectSlug: args.blueprint.subjectSlug,
         moduleOrder: node.moduleIndex,
         topicId: node.topic.topicId,
-        repairedDraft,
-        repairReport: saved.repairReport,
+        repairedDraft: preparedDraft,
+        repairReport: mergedRepairReport,
         critiqueReport: review.critiqueReport,
         semanticReport: review.semanticReport,
         goldenReport: review.goldenReport,
@@ -159,7 +182,7 @@ export async function critiqueTopicDraft(args: {
             `module${node.moduleIndex}`,
             node.topic.topicId,
         ),
-        repairReport: saved.repairReport,
+        repairReport: mergedRepairReport,
         critiqueReport: review.critiqueReport,
         semanticReport: review.semanticReport,
         goldenReport: review.goldenReport,

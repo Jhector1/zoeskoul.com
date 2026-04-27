@@ -1,9 +1,11 @@
 import { buildArtifacts } from "./_core/buildArtifacts";
 import { PYTHON } from "./python";
-import {SQL} from "@/lib/subjects/sql";
+import { PYTHON_FOR_BEGINNERS } from "./python-for-beginners";
+import { SQL } from "@/lib/subjects/sql";
 
 export const COURSE_BUNDLES = [
     PYTHON,
+    PYTHON_FOR_BEGINNERS,
     SQL,
 ] as const;
 

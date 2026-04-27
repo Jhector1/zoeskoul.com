@@ -1,0 +1,126 @@
+{
+  "title": "Guard Clauses for Cleaner Logic",
+  "summary": "Use early checks to simplify nested conditionals.",
+  "minutes": 22,
+  "sketchBlocks": [
+    {
+      "id": "1",
+      "title": "Introduction to Guard Clauses",
+      "bodyMarkdown": "Guard clauses are a programming pattern that allows you to simplify your code by handling edge cases early, thus avoiding deep nesting of conditionals."
+    },
+    {
+      "id": "2",
+      "title": "Benefits of Guard Clauses",
+      "bodyMarkdown": "Using guard clauses can make your code more readable and maintainable. It helps in clearly defining the conditions that lead to early exits from a function."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "q1",
+      "kind": "code_input",
+      "title": "Implement a Guard Clause",
+      "prompt": "Write a function that checks if a number is positive. If it is not, return 'Not positive'. Otherwise, return 'Positive'.",
+      "hint": "Think about how to handle the negative case first.",
+      "help": {
+        "concept": "Guard clauses allow you to exit a function early if certain conditions are met.",
+        "hint_1": "Check if the number is less than or equal to zero.",
+        "hint_2": "Use a return statement to exit the function if the condition is true."
+      },
+      "starterCode": "def check_positive(num):\n    # Your code here\n",
+      "solutionCode": "def check_positive(num):\n    if num <= 0:\n        return 'Not positive'\n    return 'Positive'",
+      "tests": [
+        {
+          "stdin": "5",
+          "stdout": "Positive"
+        },
+        {
+          "stdin": "-3",
+          "stdout": "Not positive"
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "kind": "code_input",
+      "title": "Validate User Input",
+      "prompt": "Create a function that validates user input for age. If the age is less than 0 or greater than 120, return 'Invalid age'. Otherwise, return 'Valid age'.",
+      "hint": "Consider the boundaries for valid age.",
+      "help": {
+        "concept": "Guard clauses can help you validate input by checking for invalid cases first.",
+        "hint_1": "Check if the age is outside the valid range.",
+        "hint_2": "Use an if statement to return 'Invalid age' for out-of-range values."
+      },
+      "starterCode": "def validate_age(age):\n    # Your code here\n",
+      "solutionCode": "def validate_age(age):\n    if age < 0 or age > 120:\n        return 'Invalid age'\n    return 'Valid age'",
+      "tests": [
+        {
+          "stdin": "25",
+          "stdout": "Valid age"
+        },
+        {
+          "stdin": "150",
+          "stdout": "Invalid age"
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "kind": "single_choice",
+      "title": "Understanding Guard Clauses",
+      "prompt": "What is the main purpose of using guard clauses in programming?",
+      "hint": "They help simplify the logic in your functions.",
+      "help": {
+        "concept": "Guard clauses are used to handle edge cases early in a function.",
+        "hint_1": "They reduce the need for nested conditionals.",
+        "hint_2": "They improve code readability."
+      },
+      "options": [
+        "To make code more complex",
+        "To handle edge cases early",
+        "To increase nesting of conditionals",
+        "To avoid using functions"
+      ],
+      "correctOptionIds": [
+        "b"
+      ]
+    },
+    {
+      "id": "q4",
+      "kind": "multi_choice",
+      "title": "Benefits of Guard Clauses",
+      "prompt": "Which of the following are benefits of using guard clauses?",
+      "hint": "Think about code clarity and maintenance.",
+      "help": {
+        "concept": "Guard clauses improve code clarity and reduce complexity.",
+        "hint_1": "They help in avoiding deep nesting.",
+        "hint_2": "They can make debugging easier."
+      },
+      "options": [
+        "Improves code readability",
+        "Reduces nesting of conditionals",
+        "Makes debugging harder",
+        "Simplifies logic flow"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ]
+    },
+    {
+      "id": "q5",
+      "kind": "fill_blank_choice",
+      "title": "Complete the Guard Clause",
+      "prompt": "A guard clause is used to handle __________ early in a function.",
+      "template": "A guard clause is used to handle {blank} early in a function.",
+      "choices": [
+        "edge cases",
+        "main logic",
+        "return values",
+        "exceptions"
+      ],
+      "correctValue": "edge cases",
+      "hint": "Think about what conditions might cause a function to exit early."
+    }
+  ]
+}

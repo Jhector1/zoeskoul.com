@@ -1,0 +1,122 @@
+{
+  "topics": {
+    "python-for-beginners": {
+      "python-3": {
+        "comparisons-and-truth-values": {
+          "label": "Comparisons and Truth Values",
+          "summary": "Use comparison operators and understand True and False results.",
+          "cards": {
+            "sketch0": {
+              "title": "Introduction to Comparisons"
+            },
+            "sketch1": {
+              "title": "Understanding Truth Values"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Practice"
+            }
+          },
+          "projectSteps": {
+            "compare_numbers": {
+              "title": "Compare Two Numbers"
+            },
+            "truthiness_check": {
+              "title": "Check Truthiness of a Value"
+            }
+          },
+          "quiz": {
+            "comparison-operators": {
+              "title": "What does the `==` operator do?",
+              "prompt": "Select the correct answer.",
+              "hint": "It checks for equality.",
+              "help": {
+                "concept": "The `==` operator compares two values to see if they are equal.",
+                "hint_1": "Think about how you would check if two numbers are the same.",
+                "hint_2": "This operator returns `True` if both values are equal, otherwise it returns `False`."
+              },
+              "options": {
+                "a": "Checks if two values are equal",
+                "b": "Checks if two values are not equal",
+                "c": "Compares the size of two values",
+                "d": "Checks if one value is greater than the other"
+              }
+            },
+            "truthiness-in-python": {
+              "title": "Which of the following values are considered `False` in Python?",
+              "prompt": "Select all that apply.",
+              "hint": "Focus on the main concept being tested and eliminate choices that describe something different.",
+              "help": {
+                "concept": "Choose the option that matches the core idea described in the question without relying on repeated wording from the answer choices.",
+                "hint_1": "Rule out options that describe a different role, behavior, or concept than the question is testing.",
+                "hint_2": "Pick the option that best matches the concept, not the one that simply repeats familiar wording."
+              },
+              "options": {
+                "a": "0",
+                "b": "'' (empty string)",
+                "c": "None",
+                "d": "'False'",
+                "e": "[] (empty list)"
+              }
+            },
+            "fill-in-the-blank-true-false": {
+              "title": "Fill in the blank: The expression `5 > 3` evaluates to ___",
+              "prompt": "What is the result of the expression?",
+              "hint": "Focus on the missing concept or keyword.",
+              "help": {
+                "concept": "This task checks the key idea behind fill in the blank: the expression `5 > 3` evaluates to ___.",
+                "hint_1": "Look for the word or phrase that best matches the lesson concept.",
+                "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
+              },
+              "template": "The expression `5 > 3` evaluates to ___",
+              "choices": [
+                "True",
+                "False"
+              ]
+            },
+            "compare-numbers": {
+              "title": "Compare Two Numbers",
+              "prompt": "Write a program that compares two numbers and prints whether the first is greater than, less than, or equal to the second.",
+              "hint": "Focus on the programming task being asked for, not on copying final solution text.",
+              "help": {
+                "concept": "Build the solution from the behavior the exercise is testing.",
+                "hint_1": "Think about which steps, functions, or statements are required for the task.",
+                "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "def compare_numbers(a, b):\n    # Your code here"
+            },
+            "truthiness-check": {
+              "title": "Check Truthiness of a Value",
+              "prompt": "Write a program that checks if a value is truthy or falsy and prints the result.",
+              "hint": "Focus on the programming task being asked for, not on copying final solution text.",
+              "help": {
+                "concept": "Build the solution from the behavior the exercise is testing.",
+                "hint_1": "Think about which steps, functions, or statements are required for the task.",
+                "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "def check_truthiness(value):\n    # Your code here"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-for-beginners": {
+      "python-3": {
+        "comparisons-and-truth-values": {
+          "intro-to-comparisons": {
+            "title": "Introduction to Comparisons",
+            "bodyMarkdown": "In Python, comparisons are made using operators like `==`, `!=`, `<`, `>`, `<=`, and `>=`. These operators help us determine the relationship between values."
+          },
+          "truth-values": {
+            "title": "Understanding Truth Values",
+            "bodyMarkdown": "In Python, every value has a truth value. For example, non-zero numbers and non-empty strings are considered `True`, while zero and empty strings are `False`."
+          }
+        }
+      }
+    }
+  }
+}
