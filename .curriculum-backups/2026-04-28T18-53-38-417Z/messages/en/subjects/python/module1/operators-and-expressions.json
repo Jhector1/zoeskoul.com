@@ -1,0 +1,126 @@
+{
+  "topics": {
+    "python": {
+      "python-1": {
+        "operators-and-expressions": {
+          "label": "Operators and Expressions",
+          "summary": "Using operators to manipulate data.",
+          "cards": {
+            "sketch0": {
+              "title": "Introduction to Operators"
+            },
+            "sketch1": {
+              "title": "Creating Expressions"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Practice"
+            }
+          },
+          "projectSteps": {
+            "code_input_operators": {
+              "title": "Implement an Expression"
+            }
+          },
+          "quiz": {
+            "fill-blank-operator": {
+              "title": "Fill in the Blank: Basic Operator",
+              "prompt": "In Python, the operator used for subtraction is `___`.",
+              "hint": "Focus on the missing concept or keyword.",
+              "help": {
+                "concept": "This task checks the key idea behind fill in the blank: basic operator.",
+                "hint_1": "Look for the word or phrase that best matches the lesson concept.",
+                "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
+              },
+              "template": "In Python, the operator used for subtraction is `{{blank}}`.",
+              "choices": [
+                "-",
+                "+",
+                "*",
+                "/"
+              ]
+            },
+            "fill-blank-expression": {
+              "title": "Fill in the Blank: Expression Evaluation",
+              "prompt": "The expression `5 + 2 * 3` evaluates to `___`.",
+              "hint": "Focus on the missing concept or keyword.",
+              "help": {
+                "concept": "This task checks the key idea behind fill in the blank: expression evaluation.",
+                "hint_1": "Look for the word or phrase that best matches the lesson concept.",
+                "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
+              },
+              "template": "The expression `5 + 2 * 3` evaluates to `{{blank}}`.",
+              "choices": [
+                "11",
+                "16",
+                "21",
+                "8"
+              ]
+            },
+            "single-choice-operators": {
+              "title": "Identify the Operator",
+              "prompt": "Which of the following is a comparison operator in Python?",
+              "hint": "Think about the main idea behind identify the operator.",
+              "help": {
+                "concept": "Focus on the core concept behind identify the operator.",
+                "hint_1": "Eliminate choices that do not match the main idea of the lesson.",
+                "hint_2": "Match the wording of the prompt to the concept practiced in the topic."
+              },
+              "options": {
+                "a": "+",
+                "b": "-",
+                "c": "==",
+                "d": "*"
+              }
+            },
+            "multi-choice-expressions": {
+              "title": "Select All Correct Expressions",
+              "prompt": "Which of the following are valid expressions in Python?",
+              "hint": "Think about the main idea behind select all correct expressions.",
+              "help": {
+                "concept": "Focus on the core concept behind select all correct expressions.",
+                "hint_1": "Eliminate choices that do not match the main idea of the lesson.",
+                "hint_2": "Match the wording of the prompt to the concept practiced in the topic."
+              },
+              "options": {
+                "a": "3 + 4",
+                "b": "5 * (2 + 3)",
+                "c": "10 / 0",
+                "d": "2 ** 3"
+              }
+            },
+            "code-input-operators": {
+              "title": "Implement an Expression",
+              "prompt": "Write a Python function that calculates the result of the expression `x + y * z`. Then read the input values, call the function, and print the returned result.",
+              "hint": "Break the task into the main query or code steps first.",
+              "help": {
+                "concept": "This task checks whether you can apply implement an expression in a working solution.",
+                "hint_1": "Identify the table, columns, and condition or operation before writing the full solution.",
+                "hint_2": "Build the statement one piece at a time: select the right fields, then add the condition or operation that matches the prompt."
+              },
+              "starterCode": "def calculate_expression(x, y, z):\n    # Your code here\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nx = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\ny = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\nz = _parse_arg(_inputs[2]) if len(_inputs) > 2 else \"\"\n\nprint(calculate_expression(x, y, z))"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python": {
+      "python-1": {
+        "operators-and-expressions": {
+          "intro-to-operators": {
+            "title": "Introduction to Operators",
+            "bodyMarkdown": "In Python, operators are special symbols that perform operations on variables and values. For example, the `+` operator adds two numbers together. Here's a simple example:\n\n```python\n# Adding two numbers\nresult = 5 + 3\nprint(result)  # Output: 8\n```\n\nTry it yourself: Change the numbers and see what happens!\n\nLine by line: read the first statement to see which value is stored or checked, then follow each conditional branch in order to see which path prints the final result."
+          },
+          "using-expressions": {
+            "title": "Creating Expressions",
+            "bodyMarkdown": "An expression is a combination of values and operators that can be evaluated to produce a result. For instance, `2 * (3 + 4)` is an expression that evaluates to `14`. Let's break it down:\n- First, the parentheses are evaluated: `3 + 4` gives `7`.\n- Then, `2 * 7` gives `14`.\n\nHere's how you can write it in Python:\n\n```python\n# Evaluating an expression\nresult = 2 * (3 + 4)\nprint(result)  # Output: 14\n```\n\nYour turn: Modify the expression to see different results!\n\nLine by line: read the first statement to see which value is stored or checked, then follow each conditional branch in order to see which path prints the final result."
+          }
+        }
+      }
+    }
+  }
+}

@@ -5,13 +5,14 @@ import { runCritiqueTopic } from "./commands/critique-topic.js";
 import { runCritiqueTopicDraft } from "./commands/critique-topic-draft.js";
 import { runCritiqueSubject } from "./commands/critique-subject.js";
 import { runCritiqueSubjectDraft } from "./commands/critique-subject-draft.js";
+import { runReviewDraft } from "./commands/review-draft.js";
 import { runValidateDraft } from "./commands/validate.js";
 import { runPublish } from "./commands/publish.js";
 import { runPublishAuto } from "./commands/publish-auto.js";
 import {runValidateSpec} from "./commands/validate-spec.js";
 
 async function main() {
-  const [, , command, arg1, arg2] = process.argv;
+  const [, , command, arg1, arg2, ...rest] = process.argv;
 
   switch (command) {
     case "plan": {
@@ -78,6 +79,16 @@ async function main() {
       return;
     }
 
+    case "review-draft": {
+      if (!arg1) {
+        throw new Error(
+            "Usage: curriculum-cli review-draft <blueprintPath> [--module <moduleSlug|moduleIndex>] [--topic <topicId>] [--fix] [--fail-on-errors]",
+        );
+      }
+      await runReviewDraft(arg1, [arg2, ...rest].filter(Boolean) as string[]);
+      return;
+    }
+
     case "validate": {
       if (!arg1) {
         throw new Error("Usage: curriculum-cli validate <subjectSlug>");
@@ -113,7 +124,7 @@ async function main() {
 
     default: {
       throw new Error(
-          "Usage: curriculum-cli <plan|compile-subject|compile-topic|critique-topic|critique-topic-draft|critique-subject|critique-subject-draft|validate|validate-spec|publish|publish-auto> <blueprintPath|subjectSlug> [topicId]",      );
+          "Usage: curriculum-cli <plan|compile-subject|compile-topic|critique-topic|critique-topic-draft|critique-subject|critique-subject-draft|review-draft|validate|validate-spec|publish|publish-auto> <blueprintPath|subjectSlug> [topicId|options]",      );
     }
   }
 }

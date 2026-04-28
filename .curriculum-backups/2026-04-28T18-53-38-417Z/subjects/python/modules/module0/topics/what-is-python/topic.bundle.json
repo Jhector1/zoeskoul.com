@@ -1,0 +1,160 @@
+{
+  "topicId": "what-is-python",
+  "subjectSlug": "python",
+  "moduleSlug": "python-0",
+  "sectionSlug": "python-0-core-building-blocks-1",
+  "prefix": "py0",
+  "minutes": 30,
+  "topic": {
+    "labelKey": "topics.python.python-0.what-is-python.label",
+    "summaryKey": "topics.python.python-0.what-is-python.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python.python-0.what-is-python.cards.sketch0.title",
+      "sketchId": "1",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python.python-0.what-is-python.cards.sketch1.title",
+      "sketchId": "2",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.python.python-0.what-is-python.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python.python-0.what-is-python.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "5",
+            "titleKey": "topics.python.python-0.what-is-python.projectSteps.5.title",
+            "exerciseKey": "5",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python.python-0.what-is-python.1.title",
+      "bodyKey": "sketches.python.python-0.what-is-python.1.bodyMarkdown"
+    },
+    {
+      "id": "2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python.python-0.what-is-python.2.title",
+      "bodyKey": "sketches.python.python-0.what-is-python.2.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "1",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python.python-0.what-is-python.quiz.1",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "high-level"
+      }
+    },
+    {
+      "id": "2",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python.python-0.what-is-python.quiz.2",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "web"
+      }
+    },
+    {
+      "id": "3",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python.python-0.what-is-python.quiz.3",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "4",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python.python-0.what-is-python.quiz.4",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "5",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python.python-0.what-is-python.quiz.5",
+      "language": "python",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Hello, World!",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "from flask import Flask\napp = Flask(__name__)\n\n@app.route('/')\ndef home():\n    return 'Hello, World!'\n\nif __name__ == '__main__':\n    app.run(debug=True)"
+      }
+    }
+  ]
+}

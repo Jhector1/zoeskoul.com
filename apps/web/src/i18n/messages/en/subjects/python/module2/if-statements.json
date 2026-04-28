@@ -1,0 +1,123 @@
+{
+  "topics": {
+    "python": {
+      "python-2": {
+        "if-statements": {
+          "label": "If Statements",
+          "summary": "Using if statements to control program flow.",
+          "cards": {
+            "sketch0": {
+              "title": "Understanding If Statements"
+            },
+            "sketch1": {
+              "title": "Nested If Statements"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Practice"
+            }
+          },
+          "projectSteps": {
+            "q5": {
+              "title": "Implement an If Statement"
+            }
+          },
+          "quiz": {
+            "q1": {
+              "title": "Complete the If Statement",
+              "prompt": "Choose the best value for the first missing blank in the statement.",
+              "hint": "What condition do you want to check?",
+              "help": {
+                "concept": "An if statement checks a condition and executes code if that condition is true.",
+                "hint_1": "Think about what you want to compare.",
+                "hint_2": "Consider using a variable or a value."
+              },
+              "template": "The first missing value is [blank1].",
+              "choices": [
+                "x > 10",
+                "x < 5",
+                "x == 0"
+              ]
+            },
+            "q2": {
+              "title": "Identify the Correct Condition",
+              "prompt": "Choose the best value for the first missing blank in the statement.",
+              "hint": "What operator checks for divisibility?",
+              "help": {
+                "concept": "To check if a number is even, you need to use the modulus operator.",
+                "hint_1": "Think about how to find the remainder.",
+                "hint_2": "Use the correct operator for division."
+              },
+              "template": "The first missing value is [blank1].",
+              "choices": [
+                "%",
+                "/",
+                "=="
+              ]
+            },
+            "q3": {
+              "title": "What Does This Code Print?",
+              "prompt": "What will the following code print?\n\n```python\nx = 10\nif x > 5:\n    print('Greater')\nelse:\n    print('Smaller')\n```",
+              "hint": "Focus on the main concept being tested and eliminate choices that describe something different.",
+              "help": {
+                "concept": "Choose the option that matches the core idea described in the question without relying on repeated wording from the answer choices.",
+                "hint_1": "Rule out options that describe a different role, behavior, or concept than the question is testing.",
+                "hint_2": "Pick the option that best matches the concept, not the one that simply repeats familiar wording."
+              },
+              "options": {
+                "a": "Greater",
+                "b": "Smaller",
+                "c": "Nothing"
+              }
+            },
+            "q4": {
+              "title": "Select All Valid If Statements",
+              "prompt": "Which of the following are valid if statements?",
+              "hint": "Look for proper syntax.",
+              "help": {
+                "concept": "An if statement must start with 'if' followed by a condition.",
+                "hint_1": "Check for correct use of colons and indentation.",
+                "hint_2": "Remember the structure of an if statement."
+              },
+              "options": {
+                "a": "if x > 10:",
+                "b": "if (x < 5)",
+                "c": "if x == 0:",
+                "d": "if x = 1:"
+              }
+            },
+            "q5": {
+              "title": "Implement an If Statement",
+              "prompt": "Write a program that checks if a number is positive, negative, or zero.",
+              "hint": "Break the task into the main query or code steps first.",
+              "help": {
+                "concept": "This task checks whether you can apply implement an if statement in a working solution.",
+                "hint_1": "Identify the table, columns, and condition or operation before writing the full solution.",
+                "hint_2": "Build the statement one piece at a time: select the right fields, then add the condition or operation that matches the prompt."
+              },
+              "starterCode": "number = int(input())\n# Add your if statements here"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python": {
+      "python-2": {
+        "if-statements": {
+          "1": {
+            "title": "Understanding If Statements",
+            "bodyMarkdown": "If statements allow you to execute certain parts of your code only when specific conditions are met. For example, consider the following code:\n\n```python\nage = 18\nif age >= 18:\n    print('You are an adult.')\n```\nIn this example, the message 'You are an adult.' will only be printed if the variable `age` is 18 or older. \n\n**Your turn:** Try changing the value of `age` and see how the output changes!\n\nLine by line: read the first statement to see which value is stored or checked, then follow each conditional branch in order to see which path prints the final result."
+          },
+          "2": {
+            "title": "Nested If Statements",
+            "bodyMarkdown": "You can also nest if statements within each other. This allows for more complex decision-making. For example:\n\n```python\nage = 20\nif age >= 18:\n    print('You are an adult.')\n    if age >= 21:\n        print('You can drink alcohol.')\n```\nHere, the second message will only print if the first condition is true and the age is also 21 or older.\n\n**Try this:** Modify the age and see how the output changes based on the conditions!\n\nLine by line: read the first statement to see which value is stored or checked, then follow each conditional branch in order to see which path prints the final result."
+          }
+        }
+      }
+    }
+  }
+}

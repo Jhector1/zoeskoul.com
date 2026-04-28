@@ -1,0 +1,81 @@
+{
+  "subjects": {
+    "python": {
+      "title": "Python for Beginners",
+      "description": "Learn Python step by step with beginner-friendly lessons and hands-on practice.",
+      "moreComingSoon": "More Python for Beginners lessons are coming soon."
+    }
+  },
+  "modules": {
+    "python": {
+      "python-0": {
+        "title": "Foundations",
+        "description": "Introduction to Python and setting up the environment.",
+        "outcomes": [],
+        "why": [
+          "Builds confidence with foundations.",
+          "Prepares learners for the next skills in the course."
+        ]
+      },
+      "python-1": {
+        "title": "Core Building Blocks",
+        "description": "Learn the fundamental building blocks of Python programming.",
+        "outcomes": [],
+        "why": [
+          "Builds confidence with core building blocks.",
+          "Prepares learners for the next skills in the course."
+        ]
+      },
+      "python-2": {
+        "title": "Control Flow + Collections",
+        "description": "Learn to control the flow of your programs and work with collections of data.",
+        "outcomes": [],
+        "why": [
+          "Builds confidence with control flow + collections.",
+          "Prepares learners for the next skills in the course."
+        ]
+      }
+    }
+  },
+  "sections": {
+    "python": {
+      "python-0": {
+        "python-0-core-building-blocks-1": {
+          "title": "Introduction to Python",
+          "description": "Overview of Python and its applications.",
+          "weeks": "Weeks 1–2",
+          "bullets": [
+            "What is Python?",
+            "Setting Up the Environment",
+            "Your First Python Program",
+            "Input → Processing → Output Model"
+          ]
+        }
+      },
+      "python-1": {
+        "python-1-core-building-blocks-1": {
+          "title": "Variables and Data Types",
+          "description": "Understanding variables and basic data types in Python.",
+          "weeks": "Weeks 3–5",
+          "bullets": [
+            "Variables in Python",
+            "Basic Data Types",
+            "Operators and Expressions",
+            "Formatted Output"
+          ]
+        }
+      },
+      "python-2": {
+        "python-2-core-building-blocks-1": {
+          "title": "Conditionals and Loops",
+          "description": "Control the flow of your program using conditionals and loops.",
+          "weeks": "Weeks 6–8",
+          "bullets": [
+            "If Statements",
+            "Loops in Python"
+          ]
+        }
+      }
+    }
+  }
+}

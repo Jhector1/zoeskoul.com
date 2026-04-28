@@ -1,0 +1,315 @@
+{
+  "topicId": "loops_basics",
+  "minutes": 10,
+
+  "topic": {
+    "labelKey": "topics.python.python-2.loops_basics.label",
+    "summaryKey": "topics.python.python-2.loops_basics.summary"
+  },
+
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python.python-2.loops_basics.cards.sketch0.title",
+      "sketchId": "why_loops",
+      "height": 360
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python.python-2.loops_basics.cards.sketch1.title",
+      "sketchId": "while_loops",
+      "height": 440
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python.python-2.loops_basics.cards.sketch2.title",
+      "sketchId": "break_continue",
+      "height": 460
+    },
+    {
+      "id": "sketch3",
+      "kind": "sketch",
+      "titleKey": "topics.python.python-2.loops_basics.cards.sketch3.title",
+      "sketchId": "for_loops",
+      "height": 460
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python.python-2.loops_basics.cards.quiz.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "guess_until_7",
+            "titleKey": "topics.python.python-2.loops_basics.projectSteps.guess_until_7.title",
+            "exerciseKey": "m2_loop_guess_until_secret_code",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "validate_1_10",
+            "titleKey": "topics.python.python-2.loops_basics.projectSteps.validate_1_10.title",
+            "exerciseKey": "m2_loop_keep_asking_valid_code",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "echo_until_quit",
+            "titleKey": "topics.python.python-2.loops_basics.projectSteps.echo_until_quit.title",
+            "exerciseKey": "m2_loop_echo_until_quit_code",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
+    }
+  ],
+
+  "sketches": [
+    {
+      "id": "why_loops",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python.python-2.loops_basics.why_loops.title",
+      "bodyKey": "sketches.python.python-2.loops_basics.why_loops.bodyMarkdown"
+    },
+    {
+      "id": "while_loops",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python.python-2.loops_basics.while_loops.title",
+      "bodyKey": "sketches.python.python-2.loops_basics.while_loops.bodyMarkdown"
+    },
+    {
+      "id": "break_continue",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python.python-2.loops_basics.break_continue.title",
+      "bodyKey": "sketches.python.python-2.loops_basics.break_continue.bodyMarkdown"
+    },
+    {
+      "id": "for_loops",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python.python-2.loops_basics.for_loops.title",
+      "bodyKey": "sketches.python.python-2.loops_basics.for_loops.bodyMarkdown"
+    }
+  ],
+
+  "exercises": [
+    {
+      "id": "m2_loop_guess_until_secret_code",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "quiz.m2_loop_guess_until_secret_code",
+      "language": "python",
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "3\n5\n7\n",
+            "stdout": "You got it!\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "guess = int(input())\nwhile guess != 7:\n    guess = int(input())\nprint(\"You got it!\")\n"
+      }
+    },
+    {
+      "id": "m2_loop_keep_asking_valid_code",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "quiz.m2_loop_keep_asking_valid_code",
+      "language": "python",
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "12\n0\n8\n",
+            "stdout": "OK: 8\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "n = int(input())\nwhile n < 1 or n > 10:\n    n = int(input())\nprint(f\"OK: {n}\")\n"
+      }
+    },
+    {
+      "id": "m2_loop_echo_until_quit_code",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "quiz.m2_loop_echo_until_quit_code",
+      "language": "python",
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "hello\nabc\nquit\n",
+            "stdout": "You typed: hello\nYou typed: abc\nBye!\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "cmd = input().strip()\nwhile cmd != \"quit\":\n    print(f\"You typed: {cmd}\")\n    cmd = input().strip()\nprint(\"Bye!\")\n"
+      }
+    },
+
+    {
+      "id": "m2_loop_while_meaning_sc",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_loop_while_meaning_sc",
+      "optionIds": ["a", "b", "c"],
+      "expected": { "kind": "single_choice", "optionId": "b" }
+    },
+    {
+      "id": "m2_loop_break_sc",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_loop_break_sc",
+      "optionIds": ["a", "b", "c"],
+      "expected": { "kind": "single_choice", "optionId": "a" }
+    },
+    {
+      "id": "m2_loop_range_five_sc",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_loop_range_five_sc",
+      "optionIds": ["a", "b", "c"],
+      "expected": { "kind": "single_choice", "optionId": "c" }
+    },
+
+    {
+      "id": "m2_loop_continue_truths_mc",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_loop_continue_truths_mc",
+      "optionIds": ["a", "b", "c", "d"],
+      "expected": { "kind": "multi_choice", "optionIds": ["a", "c"] }
+    },
+    {
+      "id": "m2_loop_validation_pattern_mc",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_loop_validation_pattern_mc",
+      "optionIds": ["a", "b", "c", "d"],
+      "expected": { "kind": "multi_choice", "optionIds": ["a", "b", "d"] }
+    },
+    {
+      "id": "m2_loop_menu_loop_parts_mc",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_loop_menu_loop_parts_mc",
+      "optionIds": ["a", "b", "c", "d"],
+      "expected": { "kind": "multi_choice", "optionIds": ["a", "b", "c"] }
+    },
+
+    {
+      "id": "m2_loop_fill_while_meaning",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_loop_fill_while_meaning",
+      "choiceCount": 4,
+      "expected": { "kind": "fill_blank_choice", "value": "True" }
+    },
+    {
+      "id": "m2_loop_fill_break_meaning",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_loop_fill_break_meaning",
+      "choiceCount": 4,
+      "expected": { "kind": "fill_blank_choice", "value": "stop" }
+    },
+    {
+      "id": "m2_loop_fill_continue_meaning",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_loop_fill_continue_meaning",
+      "choiceCount": 4,
+      "expected": { "kind": "fill_blank_choice", "value": "next" }
+    },
+    {
+      "id": "m2_loop_fill_range_end",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_loop_fill_range_end",
+      "choiceCount": 4,
+      "expected": { "kind": "fill_blank_choice", "value": "not included" }
+    },
+    {
+      "id": "m2_loop_fill_validation_goal",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_loop_fill_validation_goal",
+      "choiceCount": 4,
+      "expected": { "kind": "fill_blank_choice", "value": "valid" }
+    },
+
+    {
+      "id": "m2_loop_reorder_while_flow",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_loop_reorder_while_flow",
+      "tokenIds": ["t1", "t2", "t3"],
+      "expected": { "kind": "drag_reorder", "tokenIds": ["t1", "t2", "t3"] }
+    },
+    {
+      "id": "m2_loop_reorder_guess_game",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_loop_reorder_guess_game",
+      "tokenIds": ["t1", "t2", "t3"],
+      "expected": { "kind": "drag_reorder", "tokenIds": ["t1", "t2", "t3"] }
+    },
+    {
+      "id": "m2_loop_reorder_validation_flow",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_loop_reorder_validation_flow",
+      "tokenIds": ["t1", "t2", "t3", "t4"],
+      "expected": { "kind": "drag_reorder", "tokenIds": ["t1", "t2", "t3", "t4"] }
+    },
+    {
+      "id": "m2_loop_reorder_menu_loop",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_loop_reorder_menu_loop",
+      "tokenIds": ["t1", "t2", "t3", "t4"],
+      "expected": { "kind": "drag_reorder", "tokenIds": ["t1", "t2", "t3", "t4"] }
+    },
+    {
+      "id": "m2_loop_reorder_for_range",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_loop_reorder_for_range",
+      "tokenIds": ["t1", "t2", "t3"],
+      "expected": { "kind": "drag_reorder", "tokenIds": ["t1", "t2", "t3"] }
+    }
+  ]
+}

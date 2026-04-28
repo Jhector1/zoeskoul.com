@@ -1,0 +1,160 @@
+{
+  "topicId": "data-types",
+  "subjectSlug": "python",
+  "moduleSlug": "python-1",
+  "sectionSlug": "python-1-core-building-blocks-1",
+  "prefix": "py1",
+  "minutes": 30,
+  "topic": {
+    "labelKey": "topics.python.python-1.data-types.label",
+    "summaryKey": "topics.python.python-1.data-types.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python.python-1.data-types.cards.sketch0.title",
+      "sketchId": "1",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python.python-1.data-types.cards.sketch1.title",
+      "sketchId": "2",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.python.python-1.data-types.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python.python-1.data-types.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "q5",
+            "titleKey": "topics.python.python-1.data-types.projectSteps.q5.title",
+            "exerciseKey": "q5",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python.python-1.data-types.1.title",
+      "bodyKey": "sketches.python.python-1.data-types.1.bodyMarkdown"
+    },
+    {
+      "id": "2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python.python-1.data-types.2.title",
+      "bodyKey": "sketches.python.python-1.data-types.2.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "q1",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python.python-1.data-types.quiz.q1",
+      "choiceCount": 3,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "float"
+      }
+    },
+    {
+      "id": "q2",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python.python-1.data-types.quiz.q2",
+      "choiceCount": 3,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "string"
+      }
+    },
+    {
+      "id": "q3",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python.python-1.data-types.quiz.q3",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "c"
+      }
+    },
+    {
+      "id": "q4",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python.python-1.data-types.quiz.q4",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "q5",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python.python-1.data-types.quiz.q5",
+      "language": "python",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "25\n5.9\nZoe\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "age = 25\nheight = 5.9\nname = 'Zoe'\n\n# Print the variables\nprint(age)\nprint(height)\nprint(name)"
+      }
+    }
+  ]
+}

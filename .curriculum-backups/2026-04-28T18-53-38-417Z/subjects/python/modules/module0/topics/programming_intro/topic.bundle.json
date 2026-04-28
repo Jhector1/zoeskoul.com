@@ -1,0 +1,79 @@
+{
+  "topicId": "programming_intro",
+  "minutes": 8,
+
+  "topic": {
+    "labelKey": "topics.python.python-0.programming_intro.label",
+    "summaryKey": "topics.python.python-0.programming_intro.summary"
+  },
+
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python.python-0.programming_intro.cards.sketch0.title",
+      "sketchId": "intro",
+      "height": 520
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.python.python-0.programming_intro.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 3,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    }
+  ],
+
+  "sketches": [
+    {
+      "id": "intro",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python.python-0.programming_intro.intro.title",
+      "bodyKey": "sketches.python.python-0.programming_intro.intro.bodyMarkdown"
+    }
+  ],
+
+  "exercises": [
+    {
+      "id": "m0_prog_language_definition",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m0_prog_language_definition",
+      "optionIds": ["a", "b", "c", "d"],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "m0_prog_python_is_language",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m0_prog_python_is_language",
+      "optionIds": ["a", "b", "c", "d"],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "m0_prog_instructions_precise",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m0_prog_instructions_precise",
+      "optionIds": ["a", "b", "c", "d"],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    }
+  ]
+}

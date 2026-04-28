@@ -1,0 +1,126 @@
+{
+  "topics": {
+    "python": {
+      "python-2": {
+        "loops": {
+          "label": "Loops in Python",
+          "summary": "Using loops to repeat actions in your programs.",
+          "cards": {
+            "sketch0": {
+              "title": "Understanding Loops"
+            },
+            "sketch1": {
+              "title": "Using Loops with Collections"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Practice"
+            }
+          },
+          "projectSteps": {
+            "5": {
+              "title": "Create a Countdown Loop"
+            }
+          },
+          "quiz": {
+            "1": {
+              "title": "Complete the Loop",
+              "prompt": "Fill in the blank to complete the loop that prints numbers from 0 to 4.",
+              "hint": "Focus on the missing concept or keyword.",
+              "help": {
+                "concept": "This task checks the key idea behind complete the loop.",
+                "hint_1": "Look for the word or phrase that best matches the lesson concept.",
+                "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
+              },
+              "template": "for i in range(__):\n    print(i)",
+              "choices": [
+                "5",
+                "4",
+                "3",
+                "2"
+              ]
+            },
+            "2": {
+              "title": "Loop with a List",
+              "prompt": "Fill in the blank to correctly iterate over the list of fruits.",
+              "hint": "Focus on the missing concept or keyword.",
+              "help": {
+                "concept": "This task checks the key idea behind loop with a list.",
+                "hint_1": "Look for the word or phrase that best matches the lesson concept.",
+                "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
+              },
+              "template": "fruits = ['apple', 'banana', 'cherry']\nfor __ in fruits:\n    print(fruit)",
+              "choices": [
+                "fruit",
+                "fruits",
+                "item",
+                "i"
+              ]
+            },
+            "3": {
+              "title": "Identify the Loop Type",
+              "prompt": "Which type of loop is used to iterate a specific number of times?",
+              "hint": "Focus on the main concept being tested and eliminate choices that describe something different.",
+              "help": {
+                "concept": "Choose the option that matches the core idea described in the question without relying on repeated wording from the answer choices.",
+                "hint_1": "Rule out options that describe a different role, behavior, or concept than the question is testing.",
+                "hint_2": "Pick the option that best matches the concept, not the one that simply repeats familiar wording."
+              },
+              "options": {
+                "a": "while loop",
+                "b": "for loop",
+                "c": "do-while loop",
+                "d": "nested loop"
+              }
+            },
+            "4": {
+              "title": "Correct Loop Usage",
+              "prompt": "Select all that apply for correct loop usage in Python.",
+              "hint": "Consider how loops can be structured.",
+              "help": {
+                "concept": "Loops can be used with both lists and conditions.",
+                "hint_1": "Think about the types of collections.",
+                "hint_2": "What conditions can loops check?"
+              },
+              "options": {
+                "a": "Loops can iterate over lists.",
+                "b": "Loops can only use numbers.",
+                "c": "Loops can check conditions.",
+                "d": "Loops can iterate over dictionaries."
+              }
+            },
+            "5": {
+              "title": "Create a Countdown Loop",
+              "prompt": "Write a loop that counts down from 5 to 1 and prints each number.",
+              "hint": "Focus on the programming task being asked for, not on copying final solution text.",
+              "help": {
+                "concept": "Build the solution from the behavior the exercise is testing.",
+                "hint_1": "Think about which steps, functions, or statements are required for the task.",
+                "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "count = 5\nwhile count > 0:\n    # Your code here"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python": {
+      "python-2": {
+        "loops": {
+          "1": {
+            "title": "Understanding Loops",
+            "bodyMarkdown": "Loops are a fundamental concept in programming that allow you to repeat a block of code multiple times. In Python, there are two main types of loops: `for` loops and `while` loops.\n\n### Example of a `for` loop:\n```python\nfor i in range(5):\n    print(i)\n```\nThis loop will print the numbers 0 to 4. The `range(5)` function generates a sequence of numbers from 0 to 4, and the loop iterates over each number, assigning it to `i` and executing the print statement.\n\n### Example of a `while` loop:\n```python\ncount = 0\nwhile count < 5:\n    print(count)\n    count += 1\n```\nThis loop will also print the numbers 0 to 4. It continues to execute as long as the condition `count < 5` is true.\n\n**Your turn:** Try creating your own loop that counts down from 5 to 1!\n\nLine by line: read the first statement to see which value is stored or checked, then follow each conditional branch in order to see which path prints the final result."
+          },
+          "2": {
+            "title": "Using Loops with Collections",
+            "bodyMarkdown": "Loops can also be used to iterate over collections like lists or dictionaries. This allows you to perform actions on each item in the collection.\n\n### Example with a list:\n```python\nfruits = ['apple', 'banana', 'cherry']\nfor fruit in fruits:\n    print(fruit)\n```\nThis loop will print each fruit in the list. \n\n### Example with a dictionary:\n```python\nages = {'Alice': 25, 'Bob': 30}\nfor name, age in ages.items():\n    print(name, age)\n```\nThis loop will print each name along with their age.\n\n**Try this:** Create a list of your favorite colors and use a loop to print each color!\n\nLine by line: read the first statement to see which value is stored or checked, then follow each conditional branch in order to see which path prints the final result."
+          }
+        }
+      }
+    }
+  }
+}

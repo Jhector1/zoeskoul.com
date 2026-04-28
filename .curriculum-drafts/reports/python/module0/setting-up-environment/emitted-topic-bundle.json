@@ -1,0 +1,160 @@
+{
+  "topicId": "setting-up-environment",
+  "subjectSlug": "python",
+  "moduleSlug": "python-0",
+  "sectionSlug": "python-0-core-building-blocks-1",
+  "prefix": "py0",
+  "minutes": 45,
+  "topic": {
+    "labelKey": "topics.python.python-0.setting-up-environment.label",
+    "summaryKey": "topics.python.python-0.setting-up-environment.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python.python-0.setting-up-environment.cards.sketch0.title",
+      "sketchId": "intro-to-python-installation",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python.python-0.setting-up-environment.cards.sketch1.title",
+      "sketchId": "setting-up-ide",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.python.python-0.setting-up-environment.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python.python-0.setting-up-environment.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "python_ide_setup",
+            "titleKey": "topics.python.python-0.setting-up-environment.projectSteps.python_ide_setup.title",
+            "exerciseKey": "python-ide-setup",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "intro-to-python-installation",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python.python-0.setting-up-environment.intro-to-python-installation.title",
+      "bodyKey": "sketches.python.python-0.setting-up-environment.intro-to-python-installation.bodyMarkdown"
+    },
+    {
+      "id": "setting-up-ide",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python.python-0.setting-up-environment.setting-up-ide.title",
+      "bodyKey": "sketches.python.python-0.setting-up-environment.setting-up-ide.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "python-installation-quiz",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python.python-0.setting-up-environment.quiz.python-installation-quiz",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "PATH"
+      }
+    },
+    {
+      "id": "ide-setup-quiz",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python.python-0.setting-up-environment.quiz.ide-setup-quiz",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "interpreter"
+      }
+    },
+    {
+      "id": "python-installation-check",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python.python-0.setting-up-environment.quiz.python-installation-check",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "ide-choice-quiz",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python.python-0.setting-up-environment.quiz.ide-choice-quiz",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "python-ide-setup",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python.python-0.setting-up-environment.quiz.python-ide-setup",
+      "language": "python",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Hello, World!\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "print('Hello, World!')"
+      }
+    }
+  ]
+}

@@ -1,0 +1,107 @@
+{
+  "title": "If Statements",
+  "summary": "Using if statements to control program flow.",
+  "minutes": 30,
+  "sketchBlocks": [
+    {
+      "id": "1",
+      "title": "Understanding If Statements",
+      "bodyMarkdown": "If statements allow you to execute certain parts of your code only when specific conditions are met. For example, consider the following code:\n\n```python\nage = 18\nif age >= 18:\n    print('You are an adult.')\n```\nIn this example, the message 'You are an adult.' will only be printed if the variable `age` is 18 or older. \n\n**Your turn:** Try changing the value of `age` and see how the output changes!"
+    },
+    {
+      "id": "2",
+      "title": "Nested If Statements",
+      "bodyMarkdown": "You can also nest if statements within each other. This allows for more complex decision-making. For example:\n\n```python\nage = 20\nif age >= 18:\n    print('You are an adult.')\n    if age >= 21:\n        print('You can drink alcohol.')\n```\nHere, the second message will only print if the first condition is true and the age is also 21 or older.\n\n**Try this:** Modify the age and see how the output changes based on the conditions!"
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "q1",
+      "kind": "fill_blank_choice",
+      "title": "Complete the If Statement",
+      "prompt": "Fill in the blank to complete the if statement: `if ___:`",
+      "hint": "What condition do you want to check?",
+      "help": {
+        "concept": "An if statement checks a condition and executes code if that condition is true.",
+        "hint_1": "Think about what you want to compare.",
+        "hint_2": "Consider using a variable or a value."
+      },
+      "template": "if ___:",
+      "choices": [
+        "x > 10",
+        "x < 5",
+        "x == 0"
+      ],
+      "correctValue": "x > 10"
+    },
+    {
+      "id": "q2",
+      "kind": "fill_blank_choice",
+      "title": "Identify the Correct Condition",
+      "prompt": "Choose the correct condition to check if a number is even: `if number ___ 2 == 0:`",
+      "hint": "What operator checks for divisibility?",
+      "help": {
+        "concept": "To check if a number is even, you need to use the modulus operator.",
+        "hint_1": "Think about how to find the remainder.",
+        "hint_2": "Use the correct operator for division."
+      },
+      "template": "if number ___ 2 == 0:",
+      "choices": [
+        "%",
+        "/",
+        "=="
+      ],
+      "correctValue": "%"
+    },
+    {
+      "id": "q3",
+      "kind": "single_choice",
+      "title": "What Does This Code Print?",
+      "prompt": "What will the following code print?\n\n```python\nx = 10\nif x > 5:\n    print('Greater')\nelse:\n    print('Smaller')\n```",
+      "hint": "Consider the value of x and the condition.",
+      "help": {
+        "concept": "The if statement checks if x is greater than 5.",
+        "hint_1": "What is 10 compared to 5?",
+        "hint_2": "Think about which block of code will execute."
+      },
+      "options": [
+        "Greater",
+        "Smaller",
+        "Nothing"
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    },
+    {
+      "id": "q4",
+      "kind": "multi_choice",
+      "title": "Select All Valid If Statements",
+      "prompt": "Which of the following are valid if statements?",
+      "hint": "Look for proper syntax.",
+      "help": {
+        "concept": "An if statement must start with 'if' followed by a condition.",
+        "hint_1": "Check for correct use of colons and indentation.",
+        "hint_2": "Remember the structure of an if statement."
+      },
+      "options": [
+        "if x > 10:",
+        "if (x < 5)",
+        "if x == 0:",
+        "if x = 1:"
+      ],
+      "correctOptionIds": [
+        "a",
+        "c"
+      ]
+    },
+    {
+      "id": "q5",
+      "kind": "code_input",
+      "title": "Implement an If Statement",
+      "prompt": "Write a program that checks if a number is positive, negative, or zero.",
+      "starterCode": "number = int(input('Enter a number: '))\n# Add your if statements here\n",
+      "solutionCode": "number = int(input('Enter a number: '))\nif number > 0:\n    print('Positive')\nelif number < 0:\n    print('Negative')\nelse:\n    print('Zero')"
+    }
+  ]
+}

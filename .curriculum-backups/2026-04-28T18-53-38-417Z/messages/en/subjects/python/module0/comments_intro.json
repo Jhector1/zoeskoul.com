@@ -1,0 +1,469 @@
+{
+
+  "topics": {
+    "python": {
+      "python-0": {
+        "comments_intro": {
+          "label": "Comments: Notes to Humans (Python Ignores Them)",
+          "summary": "Use comments to explain intent, label steps, and temporarily disable code while debugging.",
+          "cards": {
+            "sketch0": {
+              "title": "Why Comments Matter"
+            },
+            "sketch1": {
+              "title": "Single-Line and Multi-Line Comments"
+            },
+            "sketch2": {
+              "title": "Using Comments While Debugging"
+            },
+            "sketch3": {
+              "title": "Good Comments vs Weak Comments"
+            },
+            "quiz": {
+              "title": "Quick check: comments"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python": {
+      "python-0": {
+        "comments_intro": {
+          "why_comments": {
+            "title": "Why Comments Matter",
+            "bodyMarkdown": "When you write code, you’re writing for **two audiences**:\n\n1. the computer\n2. future you and other humans\n\nA **comment** is a note for humans that Python ignores.\n\nThink of comments like sticky notes on a recipe.\nThey help you remember **why** you did something, not just **what** you typed.\n\nComments are useful when you want to:\n\n- explain intent\n- label steps in a small program\n- leave yourself a reminder\n- temporarily disable a line while debugging"
+          },
+          "comment_styles": {
+            "title": "Single-Line and Multi-Line Comments",
+            "bodyMarkdown": "## Single-line comments: `#`\n\nAnything after `#` on a line is ignored by Python.\n\n~~~python\n# This is a comment.\nprint(\"Hello\")  # prints: Hello\n~~~\n\n## Multi-line notes\n\nThe recommended style is to use multiple `#` lines.\n\n~~~python\n# Step 1: ask the user for input\n# Step 2: convert it to a number\n# Step 3: do the math\n# Step 4: print the result\n~~~\n\nSome people also use triple quotes for note-like blocks.\n\n~~~python\n\"\"\"\nMulti-line note:\n- This is a string literal\n- People sometimes use it like a block comment\n\"\"\"\n~~~\n\nUse triple quotes mainly for **docstrings**. For regular comments, prefer `#` lines."
+          },
+          "debugging_with_comments": {
+            "title": "Using Comments While Debugging",
+            "bodyMarkdown": "## Comments can disable code\n\nOne practical use for comments is temporarily turning off a line while you test the rest of the program.\n\n~~~python\n# Step 1: store values in variables\nprice = 4.99\nqty = 3\n\n# Step 2: compute\ntotal = price * qty\n\n# Step 3: show output\nprint(\"total =\", total)  # prints: total = 14.97\n~~~\n\nNow comment out the line that computes `total`:\n\n~~~python\nprice = 4.99\nqty = 3\n\n# total = price * qty\n\nprint(\"total =\", total)  # NameError because total was never created\n~~~\n\nThat error is expected.\nIt shows that comments really do remove a line from execution."
+          },
+          "good_vs_bad_comments": {
+            "title": "Good Comments vs Weak Comments",
+            "bodyMarkdown": "## Good comments explain intent\n\nA useful comment explains **why** a step exists.\n\n~~~python\n# Convert input text into a number so we can do math\nage = int(input(\"Age: \"))\n~~~\n\nA weak comment only repeats the code.\n\n~~~python\n# Set age to input\nage = int(input(\"Age: \"))\n~~~\n\n## Main idea\n\nGood comments help humans read code more easily.\n\nThey should:\n\n- explain intent\n- label a tricky step\n- help future readers\n\nThey should not just restate obvious code."
+          }
+        }
+      }
+    }
+  }
+,
+
+  "quiz": {
+    "m0_comments_symbol": {
+      "title": "Comment symbol (#)",
+      "prompt": "Which symbol starts a single-line comment in Python?",
+      "options": {
+        "a": "`//`",
+        "b": "`#`",
+        "c": "`/* ... */`"
+      },
+      "hint": "Python uses `#` for single-line comments.",
+      "help": {
+        "concept": "Python has its own comment syntax. A comment is a note for humans that the interpreter ignores.",
+        "hint_1": "Think about the symbol you place before a note on a Python line.",
+        "hint_2": "Rule out symbols from languages like Java, JavaScript, or C-style block comments."
+      }
+    },
+
+    "m0_comments_ignored_by_python": {
+      "title": "Python ignores comments",
+      "prompt": "Comments are mainly for:",
+      "options": {
+        "a": "Humans reading the code",
+        "b": "Making Python run faster",
+        "c": "Changing the output automatically"
+      },
+      "hint": "Python ignores comments; they help humans understand the code.",
+      "help": {
+        "concept": "Comments do not change how Python executes code. Their main job is to help people understand what the code is doing or why it exists.",
+        "hint_1": "Ask yourself who actually reads comments if Python ignores them.",
+        "hint_2": "Choose the option about readability, not speed or automatic behavior changes."
+      }
+    },
+
+    "m0_comments_best_reason": {
+      "title": "Best reason to comment",
+      "prompt": "Which is the best reason to write a comment?",
+      "options": {
+        "a": "To repeat exactly what the code already says",
+        "b": "To explain intent or a tricky step",
+        "c": "To make the file longer"
+      },
+      "hint": "Good comments explain intent (the why), not obvious code (the what).",
+      "help": {
+        "concept": "A strong comment adds meaning that the code alone does not show clearly. The best comments explain intent, decisions, or tricky steps.",
+        "hint_1": "Good comments usually answer “why?” more than “what?”",
+        "hint_2": "Avoid the choice that just repeats obvious code."
+      }
+    },
+
+    "m0_comments_multiline_true": {
+      "title": "Multi-line comments",
+      "prompt": "Which is the recommended way to write multi-line comments in Python?",
+      "options": {
+        "a": "Use `/* ... */`",
+        "b": "Use multiple lines starting with `#`",
+        "c": "Use `//` on each line"
+      },
+      "hint": "Python doesn’t use `/* */` or `//`. For multi-line notes, use multiple `#` lines.",
+      "help": {
+        "concept": "Python’s real comment syntax uses `#`. For longer notes, the usual style is to write several comment lines, each starting with `#`.",
+        "hint_1": "Think about the normal Python comment symbol, then extend it across several lines.",
+        "hint_2": "Do not choose comment styles borrowed from C, Java, or JavaScript."
+      }
+    },
+
+    "m0_comments_docstring_vs_comment": {
+      "title": "Docstring vs comment",
+      "prompt": "Which statement is true about docstrings (triple quotes) vs comments?",
+      "options": {
+        "a": "Docstrings are ignored by Python exactly like `#` comments",
+        "b": "Docstrings only work at the top of a file, nowhere else",
+        "c": "Docstrings are strings used for documentation; `#` is the real comment symbol",
+        "d": "Python does not support docstrings"
+      },
+      "hint": "Docstrings are strings used for documentation (e.g., function docs). `#` is the comment syntax.",
+      "help": {
+        "concept": "Triple-quoted docstrings and `#` comments are related to explanation, but they are not the same thing. Docstrings are string literals used for documentation.",
+        "hint_1": "One of the choices distinguishes documentation strings from true comment syntax.",
+        "hint_2": "Look for the option that says `#` is the real comment symbol."
+      }
+    },
+
+    "m0_comments_inline_comment": {
+      "title": "Inline comments",
+      "prompt": "Which line correctly uses an inline comment in Python?",
+      "options": {
+        "a": "`total = price * qty  # compute total`",
+        "b": "`total = price * qty  // compute total`",
+        "c": "`total = price * qty  /* compute total */`",
+        "d": "`total = price * qty  -- compute total`"
+      },
+      "hint": "Inline comments use `#` after code: `value = ...  # explanation`.",
+      "help": {
+        "concept": "An inline comment appears on the same line as code. In Python, the comment part begins where `#` appears.",
+        "hint_1": "Find the option where valid Python code comes first and the comment marker comes after it.",
+        "hint_2": "Ignore operators or comment symbols from SQL, C, or JavaScript."
+      }
+    },
+
+    "m0_comments_multiline_valid_ways": {
+      "title": "Valid ways to write multi-line notes",
+      "prompt": "Which are valid ways to write multi-line notes/comments in Python? (Choose all that apply.)",
+      "options": {
+        "a": "Multiple lines starting with `#`",
+        "b": "A docstring-style triple-quoted string used as a note",
+        "c": "`/* ... */` blocks",
+        "d": "`//` at the start of each line"
+      },
+      "hint": "Python’s real comments are `#` lines. Triple quotes can be used as docstrings/notes, but `/* */` and `//` are not Python.",
+      "help": {
+        "concept": "Python officially uses `#` for comments. Triple-quoted strings are sometimes used as note-like blocks, but C-style and JavaScript-style comment symbols are not Python syntax.",
+        "hint_1": "Pick Python-native approaches, not symbols borrowed from other languages.",
+        "hint_2": "There should be two good choices here."
+      }
+    },
+
+    "m0_comments_which_lines_are_comments": {
+      "title": "Find the comment lines",
+      "prompt": "Look at the lines below. Which lines are comments? (Choose all that apply.)\n\n1) `# Hello`\n2) `print(\"Hi\")`\n3) `x = 3  # set x`\n4) `#x = 10`\n",
+      "options": {
+        "a": "Line 1",
+        "b": "Line 2",
+        "c": "Line 3",
+        "d": "Line 4"
+      },
+      "hint": "A comment line starts with `#`. Code can also have an inline comment after it.",
+      "help": {
+        "concept": "A full-line comment begins with `#`. Python also allows inline comments after code on the same line.",
+        "hint_1": "Separate full comment lines from code lines that merely contain a comment part.",
+        "hint_2": "There are two full comment lines and one code line with an inline comment."
+      }
+    },
+
+    "m0_comments_multi_good_comment_goals": {
+      "title": "What good comments should do",
+      "prompt": "Which goals match a useful comment? (Choose all that apply.)",
+      "options": {
+        "a": "Explain intent",
+        "b": "Label a tricky step",
+        "c": "Make the file look longer",
+        "d": "Help future readers"
+      },
+      "hint": "Useful comments help humans understand why a step exists.",
+      "help": {
+        "concept": "Useful comments improve understanding. They explain intent, clarify tricky steps, and help future readers follow the logic.",
+        "hint_1": "Choose goals tied to readability and understanding.",
+        "hint_2": "There are three good goals and one obviously weak one."
+      }
+    },
+
+    "m0_comments_multi_valid_python_comment_forms": {
+      "title": "Valid Python comment forms",
+      "prompt": "Which are valid ways people write comment-like notes in Python? (Choose all that apply.)",
+      "options": {
+        "a": "A line starting with `#`",
+        "b": "A triple-quoted note used like a block comment",
+        "c": "`/* ... */`",
+        "d": "`-- comment`"
+      },
+      "hint": "Python officially uses `#`, and triple quotes are sometimes used as notes/docstrings.",
+      "help": {
+        "concept": "In Python, `#` is the actual comment form. Triple-quoted strings are also sometimes used for note-like documentation, but `/* */` and `--` are not Python comment syntax.",
+        "hint_1": "Pick the Python-friendly forms, not the SQL or C-style ones.",
+        "hint_2": "There should be two valid-looking choices."
+      }
+    },
+
+    "m0_comments_multi_when_comments_help": {
+      "title": "When comments help most",
+      "prompt": "When are comments especially useful? (Choose all that apply.)",
+      "options": {
+        "a": "When explaining a tricky reason",
+        "b": "When labeling a program step",
+        "c": "When replacing all variable names",
+        "d": "When temporarily disabling a line"
+      },
+      "hint": "Think about intent, steps, and debugging.",
+      "help": {
+        "concept": "Comments are especially helpful when they explain intent, label a step in a program, or help during debugging by disabling code temporarily.",
+        "hint_1": "Choose uses that help humans understand or test code.",
+        "hint_2": "There are three valid situations here."
+      }
+    },
+
+    "m0_comments_multi_python_ignores": {
+      "title": "What Python ignores here",
+      "prompt": "Which parts are ignored by Python when the code runs? (Choose all that apply.)",
+      "options": {
+        "a": "Text after `#` on a line",
+        "b": "Normal math expressions",
+        "c": "A fully commented-out line",
+        "d": "Every string literal"
+      },
+      "hint": "Comments are ignored. Ordinary expressions and strings are not automatically ignored.",
+      "help": {
+        "concept": "Python ignores comments, not normal code. Text after `#` and fully commented-out lines are skipped during execution.",
+        "hint_1": "Only comment content is ignored automatically.",
+        "hint_2": "There are two ignored parts here."
+      }
+    },
+
+    "m0_comments_multi_disable_line_effect": {
+      "title": "Effect of commenting out a line",
+      "prompt": "What can happen when you comment out a line? (Choose all that apply.)",
+      "options": {
+        "a": "That line stops running",
+        "b": "It can help debug a program",
+        "c": "Python turns it into HTML",
+        "d": "It always makes the program faster"
+      },
+      "hint": "Comments can remove a line from execution and help isolate a bug.",
+      "help": {
+        "concept": "Commenting out a line removes it from execution. This is often useful in debugging because you can isolate a problem without deleting the code.",
+        "hint_1": "Think about what happens when a line becomes a comment.",
+        "hint_2": "There are two realistic effects here."
+      }
+    },
+
+    "m0_comments_fill_comment_symbol": {
+      "title": "Complete the comment symbol",
+      "prompt": "Fill in the blank with the symbol Python uses for a single-line comment.",
+      "template": "In Python, a single-line comment starts with ____.",
+      "choices": {
+        "0": "#",
+        "1": "//",
+        "2": "/*",
+        "3": "--"
+      },
+      "hint": "Python uses one main symbol for single-line comments.",
+      "help": {
+        "concept": "Python uses one standard marker to start a normal single-line comment.",
+        "hint_1": "Think of the symbol you place before a note for humans.",
+        "hint_2": "It is not the JavaScript, SQL, or C block-comment symbol."
+      }
+    },
+
+    "m0_comments_fill_human_audience": {
+      "title": "Who comments are for",
+      "prompt": "Complete the sentence with the best word.",
+      "template": "Comments are mainly written for ____ reading the code.",
+      "choices": {
+        "0": "humans",
+        "1": "compilers",
+        "2": "printers",
+        "3": "monitors"
+      },
+      "hint": "Python ignores comments, but people read them.",
+      "help": {
+        "concept": "Comments help readers understand code. They are mainly for people, not for changing how Python runs the program.",
+        "hint_1": "Choose the audience that benefits from explanation.",
+        "hint_2": "Think about future you and other programmers."
+      }
+    },
+
+    "m0_comments_fill_explain_why": {
+      "title": "What good comments explain",
+      "prompt": "Fill in the blank with the best answer.",
+      "template": "Good comments often explain ____ the code exists.",
+      "choices": {
+        "0": "why",
+        "1": "where",
+        "2": "which",
+        "3": "when"
+      },
+      "hint": "A useful comment explains intent.",
+      "help": {
+        "concept": "Strong comments often explain purpose and intent, not just location or repetition of the code.",
+        "hint_1": "Good comments answer a purpose question.",
+        "hint_2": "The missing word is usually paired with “intent.”"
+      }
+    },
+
+    "m0_comments_fill_multiline_recommended": {
+      "title": "Recommended multi-line style",
+      "prompt": "Complete the sentence with the best symbol.",
+      "template": "For multi-line notes, the recommended style is multiple lines starting with ____.",
+      "choices": {
+        "0": "#",
+        "1": "//",
+        "2": "/*",
+        "3": "\"\"\""
+      },
+      "hint": "Use the normal Python comment symbol on each line.",
+      "help": {
+        "concept": "For regular multi-line comments in Python, the common style is to repeat the normal comment marker on each line.",
+        "hint_1": "Think of Python’s standard comment symbol, then reuse it line by line.",
+        "hint_2": "Do not choose the option mainly associated with docstrings."
+      }
+    },
+
+    "m0_comments_fill_docstring_use": {
+      "title": "Docstrings are for",
+      "prompt": "Fill in the blank with the best word.",
+      "template": "Triple-quoted docstrings are mainly used for ____.",
+      "choices": {
+        "0": "documentation",
+        "1": "deletion",
+        "2": "looping",
+        "3": "sorting"
+      },
+      "hint": "Docstrings help document functions, classes, and code.",
+      "help": {
+        "concept": "A docstring is a documentation string. Its purpose is to describe code such as modules, functions, and classes.",
+        "hint_1": "Choose the word connected to explaining code.",
+        "hint_2": "It is not an action like looping or sorting."
+      }
+    },
+
+    "m0_comments_reorder_program_steps": {
+      "title": "Order the labeled steps",
+      "prompt": "Reorder the steps into a sensible mini-program flow.",
+      "tokens": {
+        "t1": "ask for input",
+        "t2": "convert it to a number",
+        "t3": "do the math",
+        "t4": "print the result"
+      },
+      "hint": "Think: ask, convert, compute, print.",
+      "help": {
+        "concept": "A beginner mini-program often follows a simple flow: get input, prepare it, use it, then show the result.",
+        "hint_1": "Start with getting a value from the user before doing anything else.",
+        "hint_2": "The ending step is the one where the program shows output."
+      }
+    },
+
+    "m0_comments_reorder_comment_purpose": {
+      "title": "Order the comment idea",
+      "prompt": "Reorder the parts to form the main idea of a useful comment.",
+      "tokens": {
+        "t1": "explain",
+        "t2": "the intent",
+        "t3": "why"
+      },
+      "hint": "A good comment explains why a step exists.",
+      "help": {
+        "concept": "A useful comment is centered on purpose and intent, not on repeating code word for word.",
+        "hint_1": "Start with the action word.",
+        "hint_2": "The phrase should read like a short sentence about purpose."
+      }
+    },
+
+    "m0_comments_reorder_inline_pattern": {
+      "title": "Order an inline comment pattern",
+      "prompt": "Reorder the parts to show the basic inline-comment pattern.",
+      "tokens": {
+        "t1": "code",
+        "t2": "#",
+        "t3": "explanation"
+      },
+      "hint": "Code first, then #, then the comment text.",
+      "help": {
+        "concept": "Inline comments come after a piece of code on the same line.",
+        "hint_1": "Think about what appears first: the actual statement or the comment marker.",
+        "hint_2": "The explanation belongs after the comment symbol."
+      }
+    },
+
+    "m0_comments_reorder_debug_flow": {
+      "title": "Order the debugging flow",
+      "prompt": "Reorder the actions for using comments while debugging.",
+      "tokens": {
+        "t1": "find the bad line",
+        "t2": "comment it out",
+        "t3": "run again"
+      },
+      "hint": "You identify the bad line before disabling it.",
+      "help": {
+        "concept": "When debugging with comments, you first identify the suspicious code, then disable it, then test again.",
+        "hint_1": "You cannot comment out a problem line until you know which line is suspicious.",
+        "hint_2": "The final step is testing the program after the change."
+      }
+    },
+
+    "m0_comments_reorder_good_comment": {
+      "title": "Build a useful comment",
+      "prompt": "Reorder the parts into a useful beginner comment.",
+      "tokens": {
+        "t1": "Convert input",
+        "t2": "to a number",
+        "t3": "so we can",
+        "t4": "do math"
+      },
+      "hint": "This matches the strong example from the lesson.",
+      "help": {
+        "concept": "A good comment explains both the action and the reason for it.",
+        "hint_1": "Begin with the action being taken.",
+        "hint_2": "The reason comes after the phrase “so we can”."
+      }
+    },
+
+    "m0_comments_disable_error_line": {
+      "title": "Fix by commenting out a line",
+      "prompt": "The program crashes because of one bad line.\n\nYour task:\n- Comment out the line that causes the error\n- Keep the other lines\n- The output should be:\n  - `Start`\n  - `End`\n",
+      "starterCode": "print(\"Start\")\nprint(10 / 0)\nprint(\"End\")\n",
+      "hint": "Put `#` at the start of the failing line or remove that line.",
+      "help": {
+        "concept": "Commenting out a line can temporarily remove a crash while letting the rest of the program run.",
+        "hint_1": "Find the line that causes an error during execution.",
+        "hint_2": "You want only the middle line disabled so the first and last prints still run."
+      }
+    },
+
+    "m0_comments_disable_wrong_math_line": {
+      "title": "Disable the wrong math line",
+      "prompt": "The program computes a total correctly, then one extra line ruins it.\n\nYour task:\n- Comment out ONLY the wrong line\n- The program should print `12`\n",
+      "starterCode": "total = 12\ntotal = total + 100\nprint(total)\n",
+      "hint": "The second line is the bug.",
+      "help": {
+        "concept": "A debugging comment can disable the line that changes a correct value into a wrong one.",
+        "hint_1": "One line changes `total` after it already has the right value.",
+        "hint_2": "Keep the assignment and the print; disable only the line in between."
+      }
+    }
+  }}

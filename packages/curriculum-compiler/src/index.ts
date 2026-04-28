@@ -50,6 +50,8 @@ export { critiqueTopic } from "./compile/critiqueTopic.js";
 export { critiqueTopicDraft } from "./compile/critiqueTopicDraft.js";
 export { critiqueSubject } from "./compile/critiqueSubject.js";
 export { critiqueSubjectDraft } from "./compile/critiqueSubjectDraft.js";
+export { reviewSubjectDraft } from "./compile/reviewSubjectDraft.js";
+export type { CompileProgressInfo } from "./compile/compileProgress.js";
 
 
 export * from "./spec/loadCourseSpec.js";

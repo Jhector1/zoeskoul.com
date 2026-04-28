@@ -1,0 +1,99 @@
+{
+  "title": "Loops in Python",
+  "summary": "Using loops to repeat actions in your programs.",
+  "minutes": 30,
+  "sketchBlocks": [
+    {
+      "id": "1",
+      "title": "Understanding Loops",
+      "bodyMarkdown": "Loops are a fundamental concept in programming that allow you to repeat a block of code multiple times. In Python, there are two main types of loops: `for` loops and `while` loops.\n\n### Example of a `for` loop:\n```python\nfor i in range(5):\n    print(i)\n```\nThis loop will print the numbers 0 to 4. The `range(5)` function generates a sequence of numbers from 0 to 4, and the loop iterates over each number, assigning it to `i` and executing the print statement.\n\n### Example of a `while` loop:\n```python\ncount = 0\nwhile count < 5:\n    print(count)\n    count += 1\n```\nThis loop will also print the numbers 0 to 4. It continues to execute as long as the condition `count < 5` is true.\n\n**Your turn:** Try creating your own loop that counts down from 5 to 1!"
+    },
+    {
+      "id": "2",
+      "title": "Using Loops with Collections",
+      "bodyMarkdown": "Loops can also be used to iterate over collections like lists or dictionaries. This allows you to perform actions on each item in the collection.\n\n### Example with a list:\n```python\nfruits = ['apple', 'banana', 'cherry']\nfor fruit in fruits:\n    print(fruit)\n```\nThis loop will print each fruit in the list. \n\n### Example with a dictionary:\n```python\nages = {'Alice': 25, 'Bob': 30}\nfor name, age in ages.items():\n    print(name, age)\n```\nThis loop will print each name along with their age.\n\n**Try this:** Create a list of your favorite colors and use a loop to print each color!"
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "1",
+      "kind": "fill_blank_choice",
+      "title": "Complete the Loop",
+      "prompt": "Fill in the blank to complete the loop that prints numbers from 0 to 4.",
+      "template": "for i in range(__):\n    print(i)",
+      "choices": [
+        "5",
+        "4",
+        "3",
+        "2"
+      ],
+      "correctValue": "5"
+    },
+    {
+      "id": "2",
+      "kind": "fill_blank_choice",
+      "title": "Loop with a List",
+      "prompt": "Fill in the blank to correctly iterate over the list of fruits.",
+      "template": "fruits = ['apple', 'banana', 'cherry']\nfor __ in fruits:\n    print(fruit)",
+      "choices": [
+        "fruit",
+        "fruits",
+        "item",
+        "i"
+      ],
+      "correctValue": "fruit"
+    },
+    {
+      "id": "3",
+      "kind": "single_choice",
+      "title": "Identify the Loop Type",
+      "prompt": "Which type of loop is used to iterate a specific number of times?",
+      "hint": "Think about how many times you want the loop to run.",
+      "help": {
+        "concept": "A `for` loop is typically used when you know in advance how many times you want to iterate.",
+        "hint_1": "This loop uses a range.",
+        "hint_2": "It's not a `while` loop."
+      },
+      "options": [
+        "while loop",
+        "for loop",
+        "do-while loop",
+        "nested loop"
+      ],
+      "correctOptionIds": [
+        "b"
+      ]
+    },
+    {
+      "id": "4",
+      "kind": "multi_choice",
+      "title": "Correct Loop Usage",
+      "prompt": "Select all that apply for correct loop usage in Python.",
+      "hint": "Consider how loops can be structured.",
+      "help": {
+        "concept": "Loops can be used with both lists and conditions.",
+        "hint_1": "Think about the types of collections.",
+        "hint_2": "What conditions can loops check?"
+      },
+      "options": [
+        "Loops can iterate over lists.",
+        "Loops can only use numbers.",
+        "Loops can check conditions.",
+        "Loops can iterate over dictionaries."
+      ],
+      "correctOptionIds": [
+        "a",
+        "c",
+        "d"
+      ]
+    },
+    {
+      "id": "5",
+      "kind": "code_input",
+      "title": "Create a Countdown Loop",
+      "prompt": "Write a loop that counts down from 5 to 1 and prints each number.",
+      "starterCode": "count = 5\nwhile count > 0:\n    # Your code here\n",
+      "solutionCode": "count = 5\nwhile count > 0:\n    print(count)\n    count -= 1"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "topicId": "first-program",
+  "repairs": [
+    {
+      "code": "PYTHON_TESTS_DERIVED_FROM_SOLUTION",
+      "category": "recipe",
+      "severity": "high",
+      "field": "q5",
+      "message": "Derived stdin/stdout tests by running a no-input Python solution that already prints output."
+    }
+  ]
+}

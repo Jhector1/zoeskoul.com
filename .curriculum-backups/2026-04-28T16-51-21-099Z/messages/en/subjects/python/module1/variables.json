@@ -1,0 +1,326 @@
+{
+  "topics": {
+    "python": {
+      "python-1": {
+        "variables_intro": {
+          "label": "Variables: Labeled Boxes That Hold Values",
+          "summary": "Understand variables as labeled boxes, assign values with '=', and practice updating values with real-world mini tasks.",
+          "cards": {
+            "sketch0": {
+              "title": "Variables: Labels for Stored Data"
+            },
+            "sketch1": {
+              "title": "Creating Variables and Showing Values"
+            },
+            "sketch2": {
+              "title": "Updating Variables"
+            },
+            "sketch3": {
+              "title": "Variable Names and the Main Idea"
+            },
+            "project": {
+              "title": "Project: Store → Swap → Total"
+            }
+          },
+          "projectSteps": {
+            "boxes_print": {
+              "title": "Store inputs in variables and print cleanly"
+            },
+            "swap_values": {
+              "title": "Swap two values (real-world correction)"
+            },
+            "running_total": {
+              "title": "Compute a running total (3-day steps)"
+            }
+          }
+        }
+      }
+    }
+  },
+
+  "sketches": {
+    "python": {
+      "python-1": {
+        "variables_intro": {
+          "boxes_intro": {
+            "title": "Variables: Labels for Stored Data",
+            "bodyMarkdown": "Imagine your computer's memory as a **huge storage room**.\n\nInside that room, the computer keeps many pieces of information:\n\n- numbers\n- text\n- results of calculations\n\nIf everything were thrown into that room without any organization, it would be hard to find anything.\n\nSo we use **labeled boxes**.\n\nEach box holds a piece of data, and the **label tells us what’s inside**.\n\nFor example, you might have boxes labeled:\n\n- **snacks**\n- **homework**\n- **cables**\n- **important_stuff**\n\nInstead of searching the whole room, you can look for the **label**.\n\nIn Python, a **variable** works the same way.\n\nA variable is a **name that refers to a value stored in memory**."
+          },
+          "boxes_assignment": {
+            "title": "Creating Variables and Showing Values",
+            "bodyMarkdown": "## The display tool: `print(...)`\n\nYou’ll see `print(...)` used often.\n\nFor now, think of `print(...)` as a **display tool**.\n\n> Whatever you put inside `print(...)` appears in the **terminal output** when the program runs.\n\nWe’ll learn more about these tools with parentheses later.\n\n---\n\n## The moment a variable is created\n\nIn Python, a variable is created when you assign a value to it.\n\n~~~python\nage = 16\nname = \"Maya\"\n~~~\n\nRead this like a story:\n\n- Put **16** in a box labeled **age**\n- Put **\"Maya\"** in a box labeled **name**\n\nPython uses the symbol `=` for **assignment**.\n\nIn math, `=` means **is equal to**.\nIn programming, it means:\n\n> Store this value inside this variable.\n\n*(Later, when we compare values, we use `==`.)*\n\n---\n\n## Try it\n\n~~~python\nage = 16\nname = \"Maya\"\n\nprint(\"age =\", age)    # prints: age = 16\nprint(\"name =\", name)  # prints: name = Maya\n~~~\n\nNow change the values and run it again."
+          },
+          "boxes_update": {
+            "title": "Updating Variables",
+            "bodyMarkdown": "## Variables can change\n\nVariables are useful because the value inside the box can **change**.\n\n~~~python\nscore = 10\nscore = score + 5\nprint(score)  # prints: 15\n~~~\n\nThat second line means:\n\n> Take the value inside **score**, add 5, and store the new result back into **score**.\n\nThe label stays the same, but the **value inside the box changes**.\n\n---\n\n## Try it\n\n~~~python\nscore = 10\nprint(\"start:\", score)      # prints: start: 10\n\nscore = score + 5\nprint(\"after +5:\", score)   # prints: after +5: 15\n\nscore = score - 2\nprint(\"after -2:\", score)   # prints: after -2: 13\n~~~\n\nChange the `+5` and `-2` to other numbers and run the code again.\n\nWatch how the value keeps updating."
+          },
+          "boxes_names": {
+            "title": "Variable Names and the Main Idea",
+            "bodyMarkdown": "## Variable names\n\nBecause variables are **labels**, they must follow some rules.\n\n✅ Allowed:\n- letters\n- numbers\n- underscores\n\n❗ But they **cannot start with a number**.\n\n❌ Not allowed:\n- spaces\n- symbols like `$` or `@`\n- Python keywords like `class`, `for`, `if`\n\nExamples:\n\n~~~python\nstudent_name = \"Ayo\"   # good\nstudentName = \"Ayo\"    # also valid\n2cool = \"nope\"         # invalid\n~~~\n\n---\n\n## Quick mental model\n\nA variable is **not the value itself**.\n\nIt is a **name tag** that helps you reuse and organize data.\n\n~~~python\nprice = 4.99\ntax = 0.10\ntotal = price + (price * tax)\n\nprint(total)            # prints: 5.489\n~~~\n\nWithout variables, you would repeat numbers everywhere.\n\nWith variables, your programs become:\n\n- easier to read\n- easier to change\n- easier to understand"
+          }
+        }
+      }
+    }
+  }
+,
+  "common": {
+    "terminalInputLabel": "input",
+    "terminalOutputLabel": "output"
+  },
+  "quiz": {
+    "m1_vars_what_is_variable_sc": {
+      "title": "What is a variable?",
+      "prompt": "What is a variable in Python?",
+      "hint": "Think of a variable like a labeled box that stores a value.",
+      "help": {
+        "concept": "A variable is a name that points to a value stored in memory.",
+        "hint_1": "The lesson compares it to a labeled box.",
+        "hint_2": "The variable is the label, not the value itself."
+      },
+      "options": {
+        "a": "A labeled box that stores a value",
+        "b": "A type of loop",
+        "c": "A Python error message"
+      }
+    },
+    "m1_vars_assignment_operator_sc": {
+      "title": "The assignment operator",
+      "prompt": "Which symbol is used to assign a value to a variable?",
+      "hint": "Assignment in Python uses a single equals sign.",
+      "help": {
+        "concept": "A single equals sign stores a value in a variable.",
+        "hint_1": "`==` is for comparison, not assignment.",
+        "hint_2": "The correct symbol is `=`."
+      },
+      "options": {
+        "a": "==",
+        "b": "=",
+        "c": "+"
+      }
+    },
+    "m1_vars_valid_name_sc": {
+      "title": "Valid variable name",
+      "prompt": "Which of these is a valid Python variable name?",
+      "hint": "Variable names cannot start with a number.",
+      "help": {
+        "concept": "Valid variable names can use letters, numbers, and underscores, but they cannot start with a number.",
+        "hint_1": "Hyphens are not allowed in variable names.",
+        "hint_2": "Look for the one that uses an underscore."
+      },
+      "options": {
+        "a": "2name",
+        "b": "first-name",
+        "c": "first_name"
+      }
+    },
+    "m1_vars_update_value_sc": {
+      "title": "Updating a variable",
+      "prompt": "If `score = 10` and then `score = 15`, what is the value of `score` now?",
+      "hint": "The new assignment replaces the old value.",
+      "help": {
+        "concept": "Assigning a new value updates what the variable refers to.",
+        "hint_1": "The second assignment replaces the first.",
+        "hint_2": "The current value is the most recent one."
+      },
+      "options": {
+        "a": "15",
+        "b": "10",
+        "c": "25"
+      }
+    },
+    "m1_vars_fill_variable_meaning": {
+      "title": "Variable idea",
+      "prompt": "Fill in the blank with the best word.",
+      "template": "A variable is a ____ for stored data.",
+      "choices": {
+        "0": "label",
+        "1": "screen",
+        "2": "keyboard",
+        "3": "loop"
+      },
+      "hint": "Think of the labeled box idea.",
+      "help": {
+        "concept": "Variables work like labels that help you find stored values.",
+        "hint_1": "The lesson compares them to box labels.",
+        "hint_2": "The answer is label."
+      }
+    },
+    "m1_vars_fill_assignment_symbol": {
+      "title": "Assignment symbol",
+      "prompt": "Complete the sentence with the best symbol.",
+      "template": "Python uses ____ to store a value in a variable.",
+      "choices": {
+        "0": "=",
+        "1": "==",
+        "2": "+",
+        "3": "%"
+      },
+      "hint": "It is the single equals sign.",
+      "help": {
+        "concept": "Assignment stores values using the single equals sign.",
+        "hint_1": "Comparison uses two equals signs instead.",
+        "hint_2": "The symbol is `=`."
+      }
+    },
+    "m1_vars_fill_update_idea": {
+      "title": "Variable updates",
+      "prompt": "Fill in the blank with the best word.",
+      "template": "Variables are useful because their values can ____.",
+      "choices": {
+        "0": "change",
+        "1": "vanish",
+        "2": "sleep",
+        "3": "freeze"
+      },
+      "hint": "Think about score changing from 10 to 15.",
+      "help": {
+        "concept": "Variables can be updated to hold new values over time.",
+        "hint_1": "The label stays, but the value can be different later.",
+        "hint_2": "The missing word is change."
+      }
+    },
+    "m1_vars_fill_valid_name_rule": {
+      "title": "Naming rule",
+      "prompt": "Complete the sentence with the best word.",
+      "template": "A variable name cannot start with a ____.",
+      "choices": {
+        "0": "number",
+        "1": "letter",
+        "2": "word",
+        "3": "value"
+      },
+      "hint": "Think about `2cool`.",
+      "help": {
+        "concept": "Variable names may include numbers, but not as the first character.",
+        "hint_1": "Names like `first_name` are okay.",
+        "hint_2": "The forbidden first character here is a number."
+      }
+    },
+    "m1_vars_fill_print_tool": {
+      "title": "Output tool",
+      "prompt": "Fill in the blank with the best word.",
+      "template": "We often use ____ to show values in the terminal.",
+      "choices": {
+        "0": "print",
+        "1": "input",
+        "2": "type",
+        "3": "range"
+      },
+      "hint": "It displays things on the screen.",
+      "help": {
+        "concept": "print() is the beginner display tool for terminal output.",
+        "hint_1": "It shows values rather than reading them.",
+        "hint_2": "The answer is print."
+      }
+    },
+    "m1_vars_reorder_box_model": {
+      "title": "Order the box model",
+      "prompt": "Reorder the lesson’s variable idea.",
+      "tokens": {
+        "t1": "value goes in memory",
+        "t2": "variable names the value",
+        "t3": "you can reuse it later"
+      },
+      "hint": "The name helps after the value is stored.",
+      "help": {
+        "concept": "Variables help you organize stored data so you can use it again later.",
+        "hint_1": "The value is stored before you reuse it.",
+        "hint_2": "The name connects you to that stored value."
+      }
+    },
+    "m1_vars_reorder_assignment_flow": {
+      "title": "Order the assignment flow",
+      "prompt": "Reorder what happens in `age = 16`.",
+      "tokens": {
+        "t1": "take the value 16",
+        "t2": "store it in age",
+        "t3": "use age later"
+      },
+      "hint": "Storage comes before reuse.",
+      "help": {
+        "concept": "Assignment means taking a value and storing it under a variable name.",
+        "hint_1": "The number comes first.",
+        "hint_2": "Then the variable can be reused."
+      }
+    },
+    "m1_vars_reorder_update_flow": {
+      "title": "Order the update flow",
+      "prompt": "Reorder the steps for `score = score + 5`.",
+      "tokens": {
+        "t1": "read the old score",
+        "t2": "add 5",
+        "t3": "store the new score"
+      },
+      "hint": "Python uses the old value before storing the new one.",
+      "help": {
+        "concept": "Updating a variable means computing from the old value, then saving the new value back.",
+        "hint_1": "The current value is used first.",
+        "hint_2": "Storage of the new result is last."
+      }
+    },
+    "m1_vars_reorder_swap_steps": {
+      "title": "Order the swap process",
+      "prompt": "Reorder the swap idea.",
+      "tokens": {
+        "t1": "read a and b",
+        "t2": "swap them",
+        "t3": "print new a and b"
+      },
+      "hint": "Printing happens after swapping.",
+      "help": {
+        "concept": "The swap task reads values, changes them, then displays the corrected result.",
+        "hint_1": "You cannot swap before reading the values.",
+        "hint_2": "Printing comes last."
+      }
+    },
+    "m1_vars_reorder_running_total": {
+      "title": "Order the running total flow",
+      "prompt": "Reorder the running-total process.",
+      "tokens": {
+        "t1": "read day1, day2, day3",
+        "t2": "store them in variables",
+        "t3": "compute total",
+        "t4": "print total"
+      },
+      "hint": "The sum is printed last.",
+      "help": {
+        "concept": "A total program stores each input, computes the combined value, and then shows it.",
+        "hint_1": "All three values must be read before the total is computed.",
+        "hint_2": "Printing comes after computation."
+      }
+    },
+    "m1_vars_boxes_print_code": {
+      "title": "Boxes: store and print",
+      "prompt": "Read TWO inputs:\n1) name\n2) age\n\nStore them in variables and print EXACTLY:\nname = <name>\nage = <age>",
+      "hint": "Read each input into a variable, then print the two labeled lines.",
+      "starterCode": "# Read inputs\n# TODO\n\n# Print exactly:\n# name = <name>\n# age = <age>\n",
+      "help": {
+        "concept": "This checks whether you can store user input in variables and print labeled output lines.",
+        "hint_1": "Use one variable for name and one for age.",
+        "hint_2": "Print the exact two lines with the correct labels."
+      }
+    },
+    "m1_vars_swap_values_code": {
+      "title": "Swap two values",
+      "prompt": "Read TWO integers a and b.\n\nSwap their values, then print:\n- the new value of a\n- the new value of b\n\nEach on its own line.",
+      "hint": "Python can swap values with `a, b = b, a`.",
+      "starterCode": "a = int(input())\nb = int(input())\n# TODO: swap a and b\n# TODO: print a then b\n",
+      "help": {
+        "concept": "This exercise checks whether you can update variables by exchanging their contents.",
+        "hint_1": "Read both integers first.",
+        "hint_2": "Use `a, b = b, a`, then print `a` and `b` on separate lines."
+      }
+    },
+    "m1_vars_running_total_code": {
+      "title": "Running total",
+      "prompt": "Read THREE integers:\nday1\nday2\nday3\n\nStore them in variables, compute the total, and print:\nTotal = <total>",
+      "hint": "Add the three variables, store the result in `total`, then print it.",
+      "starterCode": "day1 = int(input())\nday2 = int(input())\nday3 = int(input())\n# TODO\n",
+      "help": {
+        "concept": "This checks whether you can store several inputs, compute a combined result, and show it clearly.",
+        "hint_1": "Keep each day in its own variable.",
+        "hint_2": "Add them into `total`, then print `Total = <total>` exactly."
+      }
+    }
+  }
+}

@@ -1,0 +1,165 @@
+{
+  "topicId": "operators-and-expressions",
+  "subjectSlug": "python",
+  "moduleSlug": "python-1",
+  "sectionSlug": "python-1-core-building-blocks-1",
+  "prefix": "py1",
+  "minutes": 30,
+  "topic": {
+    "labelKey": "topics.python.python-1.operators-and-expressions.label",
+    "summaryKey": "topics.python.python-1.operators-and-expressions.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python.python-1.operators-and-expressions.cards.sketch0.title",
+      "sketchId": "intro-to-operators",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python.python-1.operators-and-expressions.cards.sketch1.title",
+      "sketchId": "using-expressions",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.python.python-1.operators-and-expressions.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python.python-1.operators-and-expressions.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "code_input_operators",
+            "titleKey": "topics.python.python-1.operators-and-expressions.projectSteps.code_input_operators.title",
+            "exerciseKey": "code-input-operators",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "intro-to-operators",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python.python-1.operators-and-expressions.intro-to-operators.title",
+      "bodyKey": "sketches.python.python-1.operators-and-expressions.intro-to-operators.bodyMarkdown"
+    },
+    {
+      "id": "using-expressions",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python.python-1.operators-and-expressions.using-expressions.title",
+      "bodyKey": "sketches.python.python-1.operators-and-expressions.using-expressions.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "fill-blank-operator",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python.python-1.operators-and-expressions.quiz.fill-blank-operator",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "-"
+      }
+    },
+    {
+      "id": "fill-blank-expression",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python.python-1.operators-and-expressions.quiz.fill-blank-expression",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "11"
+      }
+    },
+    {
+      "id": "single-choice-operators",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python.python-1.operators-and-expressions.quiz.single-choice-operators",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "c"
+      }
+    },
+    {
+      "id": "multi-choice-expressions",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python.python-1.operators-and-expressions.quiz.multi-choice-expressions",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "code-input-operators",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python.python-1.operators-and-expressions.quiz.code-input-operators",
+      "language": "python",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "2, 3, 4",
+            "stdout": "14",
+            "match": "exact"
+          },
+          {
+            "stdin": "1, 5, 2",
+            "stdout": "11",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "def calculate_expression(x, y, z):\n    return x + y * z\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nx = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\ny = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\nz = _parse_arg(_inputs[2]) if len(_inputs) > 2 else \"\"\n\nprint(calculate_expression(x, y, z))"
+      }
+    }
+  ]
+}

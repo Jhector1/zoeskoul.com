@@ -1,0 +1,328 @@
+{
+  "topicId": "conditionals_basics",
+  "minutes": 10,
+
+  "topic": {
+    "labelKey": "topics.python.python-2.conditionals_basics.label",
+    "summaryKey": "topics.python.python-2.conditionals_basics.summary"
+  },
+
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python.python-2.conditionals_basics.cards.sketch0.title",
+      "sketchId": "decision_intro",
+      "height": 380
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python.python-2.conditionals_basics.cards.sketch1.title",
+      "sketchId": "if_else_basics",
+      "height": 480
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python.python-2.conditionals_basics.cards.sketch2.title",
+      "sketchId": "elif_and_logic",
+      "height": 520
+    },
+    {
+      "id": "sketch3",
+      "kind": "sketch",
+      "titleKey": "topics.python.python-2.conditionals_basics.cards.sketch3.title",
+      "sketchId": "truthy_falsey",
+      "height": 420
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python.python-2.conditionals_basics.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "age_gate",
+            "titleKey": "topics.python.python-2.conditionals_basics.projectSteps.age_gate.title",
+            "exerciseKey": "m2_cond_age_gate_code",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "member_discount",
+            "titleKey": "topics.python.python-2.conditionals_basics.projectSteps.member_discount.title",
+            "exerciseKey": "m2_cond_member_discount_code",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "password_check",
+            "titleKey": "topics.python.python-2.conditionals_basics.projectSteps.password_check.title",
+            "exerciseKey": "m2_cond_password_check_code",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.python.python-2.conditionals_basics.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    }
+  ],
+
+  "sketches": [
+    {
+      "id": "decision_intro",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python.python-2.conditionals_basics.decision_intro.title",
+      "bodyKey": "sketches.python.python-2.conditionals_basics.decision_intro.bodyMarkdown"
+    },
+    {
+      "id": "if_else_basics",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python.python-2.conditionals_basics.if_else_basics.title",
+      "bodyKey": "sketches.python.python-2.conditionals_basics.if_else_basics.bodyMarkdown"
+    },
+    {
+      "id": "elif_and_logic",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python.python-2.conditionals_basics.elif_and_logic.title",
+      "bodyKey": "sketches.python.python-2.conditionals_basics.elif_and_logic.bodyMarkdown"
+    },
+    {
+      "id": "truthy_falsey",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python.python-2.conditionals_basics.truthy_falsey.title",
+      "bodyKey": "sketches.python.python-2.conditionals_basics.truthy_falsey.bodyMarkdown"
+    }
+  ],
+
+  "exercises": [
+    {
+      "id": "m2_cond_age_gate_code",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "quiz.m2_cond_age_gate_code",
+      "language": "python",
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          { "stdin": "18\n", "stdout": "ALLOWED\n", "match": "exact" },
+          { "stdin": "17\n", "stdout": "DENIED\n", "match": "exact" }
+        ],
+        "solutionCode": "age = int(input())\nif age >= 18:\n    print(\"ALLOWED\")\nelse:\n    print(\"DENIED\")\n"
+      }
+    },
+    {
+      "id": "m2_cond_member_discount_code",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "quiz.m2_cond_member_discount_code",
+      "language": "python",
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          { "stdin": "100\ny\n", "stdout": "Total = 90\n", "match": "exact" },
+          { "stdin": "100\nY\n", "stdout": "Total = 90\n", "match": "exact" },
+          { "stdin": "100\nn\n", "stdout": "Total = 100\n", "match": "exact" }
+        ],
+        "solutionCode": "subtotal = int(input())\nmember = input().strip()\nif member.lower() == \"y\":\n    discount = subtotal * 10 // 100\n    total = subtotal - discount\nelse:\n    total = subtotal\nprint(f\"Total = {total}\")\n"
+      }
+    },
+    {
+      "id": "m2_cond_password_check_code",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "quiz.m2_cond_password_check_code",
+      "language": "python",
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          { "stdin": "letmein\n", "stdout": "Logged in\n", "match": "exact" },
+          { "stdin": "hello\n", "stdout": "Wrong password\n", "match": "exact" }
+        ],
+        "solutionCode": "password = input()\nif password == \"letmein\":\n    print(\"Logged in\")\nelse:\n    print(\"Wrong password\")\n"
+      }
+    },
+
+    {
+      "id": "m2_cond_elif_meaning_sc",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_cond_elif_meaning_sc",
+      "optionIds": ["a", "b", "c"],
+      "expected": { "kind": "single_choice", "optionId": "b" }
+    },
+    {
+      "id": "m2_cond_indent_matters_sc",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_cond_indent_matters_sc",
+      "optionIds": ["a", "b", "c", "d"],
+      "expected": { "kind": "single_choice", "optionId": "c" }
+    },
+    {
+      "id": "m2_cond_elif_order_sc",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_cond_elif_order_sc",
+      "optionIds": ["a", "b", "c"],
+      "expected": { "kind": "single_choice", "optionId": "b" }
+    },
+    {
+      "id": "m2_cond_comparison_vs_assignment_sc",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_cond_comparison_vs_assignment_sc",
+      "optionIds": ["a", "b", "c", "d"],
+      "expected": { "kind": "single_choice", "optionId": "a" }
+    },
+    {
+      "id": "m2_cond_and_or_sc",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_cond_and_or_sc",
+      "optionIds": ["a", "b", "c"],
+      "expected": { "kind": "single_choice", "optionId": "b" }
+    },
+
+    {
+      "id": "m2_cond_falsey_values_mc",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_cond_falsey_values_mc",
+      "optionIds": ["a", "b", "c", "d"],
+      "expected": { "kind": "multi_choice", "optionIds": ["a", "b", "c"] }
+    },
+    {
+      "id": "m2_cond_logical_ops_mc",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_cond_logical_ops_mc",
+      "optionIds": ["a", "b", "c", "d"],
+      "expected": { "kind": "multi_choice", "optionIds": ["a", "b", "c"] }
+    },
+
+    {
+      "id": "m2_cond_fill_if_meaning",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_cond_fill_if_meaning",
+      "choiceCount": 4,
+      "expected": { "kind": "fill_blank_choice", "value": "True" }
+    },
+    {
+      "id": "m2_cond_fill_else_role",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_cond_fill_else_role",
+      "choiceCount": 4,
+      "expected": { "kind": "fill_blank_choice", "value": "otherwise" }
+    },
+    {
+      "id": "m2_cond_fill_and_meaning",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_cond_fill_and_meaning",
+      "choiceCount": 4,
+      "expected": { "kind": "fill_blank_choice", "value": "both" }
+    },
+    {
+      "id": "m2_cond_fill_or_meaning",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_cond_fill_or_meaning",
+      "choiceCount": 4,
+      "expected": { "kind": "fill_blank_choice", "value": "one" }
+    },
+    {
+      "id": "m2_cond_fill_falsey_empty",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_cond_fill_falsey_empty",
+      "choiceCount": 4,
+      "expected": { "kind": "fill_blank_choice", "value": "empty" }
+    },
+
+    {
+      "id": "m2_cond_reorder_if_else",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_cond_reorder_if_else",
+      "tokenIds": ["t1", "t2", "t3"],
+      "expected": { "kind": "drag_reorder", "tokenIds": ["t1", "t2", "t3"] }
+    },
+    {
+      "id": "m2_cond_reorder_elif_chain",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_cond_reorder_elif_chain",
+      "tokenIds": ["t1", "t2", "t3", "t4"],
+      "expected": { "kind": "drag_reorder", "tokenIds": ["t1", "t2", "t3", "t4"] }
+    },
+    {
+      "id": "m2_cond_reorder_password_check",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_cond_reorder_password_check",
+      "tokenIds": ["t1", "t2", "t3"],
+      "expected": { "kind": "drag_reorder", "tokenIds": ["t1", "t2", "t3"] }
+    },
+    {
+      "id": "m2_cond_reorder_member_discount",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_cond_reorder_member_discount",
+      "tokenIds": ["t1", "t2", "t3", "t4"],
+      "expected": { "kind": "drag_reorder", "tokenIds": ["t1", "t2", "t3", "t4"] }
+    },
+    {
+      "id": "m2_cond_reorder_truthy_check",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_cond_reorder_truthy_check",
+      "tokenIds": ["t1", "t2", "t3"],
+      "expected": { "kind": "drag_reorder", "tokenIds": ["t1", "t2", "t3"] }
+    }
+  ]
+}

@@ -1,0 +1,127 @@
+{
+  "topics": {
+    "python": {
+      "python-1": {
+        "variables": {
+          "label": "Variables in Python",
+          "summary": "How to create and use variables.",
+          "cards": {
+            "sketch0": {
+              "title": "What are Variables?"
+            },
+            "sketch1": {
+              "title": "Using Variables in Expressions"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Practice"
+            }
+          },
+          "projectSteps": {
+            "5": {
+              "title": "Calculate Area"
+            }
+          },
+          "quiz": {
+            "1": {
+              "title": "Creating a Variable",
+              "prompt": "Choose the best value for the first missing blank in the statement.",
+              "hint": "It's the same symbol used for assignment.",
+              "help": {
+                "concept": "In Python, you assign a value to a variable using the equals sign.",
+                "hint_1": "Think about how you assign values.",
+                "hint_2": "It's a single character that looks like a letter 'E' but is not."
+              },
+              "template": "The first missing value is [blank1].",
+              "choices": [
+                "+",
+                "=",
+                "-",
+                "*"
+              ]
+            },
+            "2": {
+              "title": "Variable Naming Rules",
+              "prompt": "Choose the best value for the first missing blank in the statement.",
+              "hint": "Think about what characters are typically used in names.",
+              "help": {
+                "concept": "Variable names must start with a letter or an underscore, not a the missing term.",
+                "hint_1": "Consider the first character of a name.",
+                "hint_2": "It's a digit."
+              },
+              "template": "The first missing value is [blank1].",
+              "choices": [
+                "letter",
+                "number",
+                "underscore",
+                "symbol"
+              ]
+            },
+            "3": {
+              "title": "Understanding Variables",
+              "prompt": "What is the purpose of a variable in programming?",
+              "hint": "Think about what you use variables for.",
+              "help": {
+                "concept": "Focus on the core concept behind understanding variables.",
+                "hint_1": "Eliminate choices that do not match the main idea of the lesson.",
+                "hint_2": "Match the wording of the prompt to the concept practiced in the topic."
+              },
+              "options": {
+                "a": "To store data values",
+                "b": "To perform calculations",
+                "c": "To display output",
+                "d": "To create functions"
+              }
+            },
+            "4": {
+              "title": "Valid Variable Names",
+              "prompt": "Which of the following are valid variable names in Python? Select all that apply.",
+              "hint": "Remember the rules for naming variables.",
+              "help": {
+                "concept": "Focus on the core concept behind valid variable names.",
+                "hint_1": "Eliminate choices that do not match the main idea of the lesson.",
+                "hint_2": "Match the wording of the prompt to the concept practiced in the topic."
+              },
+              "options": {
+                "a": "my_variable",
+                "b": "2ndVariable",
+                "c": "variable-1",
+                "d": "_privateVar",
+                "e": "var!"
+              }
+            },
+            "5": {
+              "title": "Calculate Area",
+              "prompt": "Write a program that calculates the area of a rectangle. Use variables for width and height.",
+              "hint": "Focus on the programming task being asked for, not on copying final solution text.",
+              "help": {
+                "concept": "Build the solution from the behavior the exercise is testing.",
+                "hint_1": "Think about which steps, functions, or statements are required for the task.",
+                "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "width = 5\nheight = 10\n# Calculate area\narea ="
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python": {
+      "python-1": {
+        "variables": {
+          "1": {
+            "title": "What are Variables?",
+            "bodyMarkdown": "Variables are like containers that store data values. In Python, you can create a variable by simply assigning a value to it using the equals sign (`=`).\n\n**Example:**\n```python\nage = 25\nname = 'Zoe'\n```\nIn this example, `age` is a variable that holds the integer `25`, and `name` is a variable that holds the string `'Zoe'`.\n\n**Your turn:** Try creating your own variables!\n\nLine by line: read the first statement to see which value is stored or checked, then follow each conditional branch in order to see which path prints the final result."
+          },
+          "2": {
+            "title": "Using Variables in Expressions",
+            "bodyMarkdown": "You can use variables in expressions to perform calculations or manipulate data. For example:\n\n**Example:**\n```python\nx = 10\n y = 5\nresult = x + y\nprint(result)  # This will print 15\n```\nIn this example, `x` and `y` are added together, and the result is stored in the variable `result`.\n\n**Try it yourself:** Modify the values of `x` and `y` and see what happens!\n\nLine by line: read the first statement to see which value is stored or checked, then follow each conditional branch in order to see which path prints the final result."
+          }
+        }
+      }
+    }
+  }
+}

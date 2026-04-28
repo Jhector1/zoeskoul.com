@@ -1,0 +1,126 @@
+{
+  "topics": {
+    "python": {
+      "python-0": {
+        "setting-up-environment": {
+          "label": "Setting Up the Environment",
+          "summary": "Guide to installing Python and setting up the IDE.",
+          "cards": {
+            "sketch0": {
+              "title": "Installing Python"
+            },
+            "sketch1": {
+              "title": "Setting Up Your IDE"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Practice"
+            }
+          },
+          "projectSteps": {
+            "python_ide_setup": {
+              "title": "Create a Simple Python Script"
+            }
+          },
+          "quiz": {
+            "python-installation-quiz": {
+              "title": "Completing the Installation",
+              "prompt": "To ensure Python is correctly installed, you should check if it is added to your _____.",
+              "hint": "Focus on the missing concept or keyword.",
+              "help": {
+                "concept": "This task checks the key idea behind completing the installation.",
+                "hint_1": "Look for the word or phrase that best matches the lesson concept.",
+                "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
+              },
+              "template": "To ensure Python is correctly installed, you should check if it is added to your {blank}.",
+              "choices": [
+                "PATH",
+                "IDE",
+                "system",
+                "environment"
+              ]
+            },
+            "ide-setup-quiz": {
+              "title": "Setting Up Your IDE",
+              "prompt": "When creating a new project in PyCharm, you need to select the correct _____.",
+              "hint": "Focus on the missing concept or keyword.",
+              "help": {
+                "concept": "This task checks the key idea behind setting up your ide.",
+                "hint_1": "Look for the word or phrase that best matches the lesson concept.",
+                "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
+              },
+              "template": "When creating a new project in PyCharm, you need to select the correct {blank}.",
+              "choices": [
+                "interpreter",
+                "file",
+                "directory",
+                "language"
+              ]
+            },
+            "python-installation-check": {
+              "title": "Python Installation Check",
+              "prompt": "What should you do after downloading Python?",
+              "hint": "Make sure to configure your installation.",
+              "help": {
+                "concept": "After downloading Python, you need to run the installer and follow the setup instructions.",
+                "hint_1": "Look for an option to add Python to your system PATH.",
+                "hint_2": "This step is crucial for running Python from the command line."
+              },
+              "options": {
+                "a": "Run the installer and follow the instructions",
+                "b": "Open Python directly from the download folder",
+                "c": "Ignore the installer and use a different version",
+                "d": "Delete the downloaded file"
+              }
+            },
+            "ide-choice-quiz": {
+              "title": "Choosing an IDE",
+              "prompt": "Which of the following are popular IDEs for Python? Select all that apply.",
+              "hint": "Look for environments specifically designed for Python development.",
+              "help": {
+                "concept": "Popular IDEs for Python include those that provide features like code completion and debugging.",
+                "hint_1": "One of them is known for its powerful features and is developed by JetBrains.",
+                "hint_2": "Another is a simple text editor that supports Python syntax highlighting."
+              },
+              "options": {
+                "a": "PyCharm",
+                "b": "Visual Studio Code",
+                "c": "Notepad",
+                "d": "Eclipse"
+              }
+            },
+            "python-ide-setup": {
+              "title": "Create a Simple Python Script",
+              "prompt": "Create a Python script that prints 'Hello, World!' to the console.",
+              "hint": "Break the task into the main query or code steps first.",
+              "help": {
+                "concept": "This task checks whether you can apply create a simple python script in a working solution.",
+                "hint_1": "Identify the table, columns, and condition or operation before writing the full solution.",
+                "hint_2": "Build the statement one piece at a time: select the right fields, then add the condition or operation that matches the prompt."
+              },
+              "starterCode": "print('Hello, World!')"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python": {
+      "python-0": {
+        "setting-up-environment": {
+          "intro-to-python-installation": {
+            "title": "Installing Python",
+            "bodyMarkdown": "To start coding in Python, you first need to install it on your computer. Visit the official [Python website](https://www.python.org/downloads/) and download the latest version suitable for your operating system. Follow the installation instructions provided on the website. \n\n**Example:** After downloading, run the installer and ensure to check the box that says 'Add Python to PATH'. This will make it easier to run Python from the command line.\n\n**Your turn:** Try installing Python on your machine!"
+          },
+          "setting-up-ide": {
+            "title": "Setting Up Your IDE",
+            "bodyMarkdown": "An Integrated Development Environment (IDE) helps you write and manage your code efficiently. A popular choice for Python is [PyCharm](https://www.jetbrains.com/pycharm/). Download and install it, then create a new project. \n\n**Example:** In PyCharm, you can create a new project by selecting 'New Project' from the welcome screen. Choose a location and ensure the interpreter is set to the Python version you installed.\n\n**Try this:** Open PyCharm and create a new project!"
+          }
+        }
+      }
+    }
+  }
+}

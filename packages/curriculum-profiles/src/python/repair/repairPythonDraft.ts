@@ -539,6 +539,100 @@ function rewriteFunctionReturnExercise(
     };
 }
 
+function stripInputPromptArguments(source: string): string {
+    return String(source ?? "").replace(
+        /input\s*\(\s*(["'`])(?:\\.|(?!\1).)*\1\s*\)/g,
+        "input()",
+    );
+}
+
+function rewritePromptedInputExercise(
+    exercise: PythonCodeInputExercise,
+): PythonCodeInputExercise | null {
+    const starterCode = String(exercise.starterCode ?? "");
+    const solutionCode = String(exercise.solutionCode ?? "");
+
+    if (!/input\s*\(\s*["'`]/.test(`${starterCode}\n${solutionCode}`)) {
+        return null;
+    }
+
+    return {
+        ...exercise,
+        starterCode: stripInputPromptArguments(starterCode),
+        solutionCode: stripInputPromptArguments(solutionCode),
+    };
+}
+
+function stripTrailingFunctionExampleUsage(args: {
+    source: string;
+    functionName: string;
+}) {
+    const lines = String(args.source ?? "").split("\n");
+    let cutIndex = lines.length;
+
+    for (let index = 0; index < lines.length; index += 1) {
+        const trimmed = (lines[index] ?? "").trim();
+
+        if (/^#\s*example usage\b/i.test(trimmed)) {
+            cutIndex = Math.min(cutIndex, index);
+            break;
+        }
+
+        if (
+            new RegExp(`^print\\s*\\(\\s*${args.functionName}\\s*\\(`).test(trimmed) ||
+            new RegExp(`^${args.functionName}\\s*\\(`).test(trimmed)
+        ) {
+            cutIndex = Math.min(cutIndex, index);
+            break;
+        }
+    }
+
+    return lines.slice(0, cutIndex).join("\n").trimEnd();
+}
+
+function rewriteHardcodedFunctionExampleExercise(
+    exercise: PythonCodeInputExercise,
+): PythonCodeInputExercise | null {
+    const signature = extractFunctionSignature(exercise);
+    if (!signature) return null;
+    if (hasInputCalls(exercise)) return null;
+    if (/\b_parse_arg\b/.test(String(exercise.solutionCode ?? ""))) return null;
+    if (
+        !(Array.isArray(exercise.tests) &&
+            exercise.tests.some((test) => String(test.stdin ?? "").trim().length > 0))
+    ) {
+        return null;
+    }
+
+    const solutionCode = String(exercise.solutionCode ?? "");
+    const starterCode = String(exercise.starterCode ?? "");
+    const hasHardcodedCall =
+        new RegExp(`print\\s*\\(\\s*${signature.name}\\s*\\(`).test(solutionCode) ||
+        new RegExp(`\\b${signature.name}\\s*\\(`).test(solutionCode.split("\n").slice(-3).join("\n"));
+
+    if (!hasHardcodedCall) return null;
+
+    const strippedSolution = stripTrailingFunctionExampleUsage({
+        source: solutionCode,
+        functionName: signature.name,
+    });
+    const strippedStarter = stripTrailingFunctionExampleUsage({
+        source: starterCode,
+        functionName: signature.name,
+    });
+    const wrapper = buildFunctionStdoutWrapper({
+        functionName: signature.name,
+        params: signature.params,
+    });
+
+    return {
+        ...exercise,
+        prompt: `${String(exercise.prompt ?? "").trim()} Then read the input values, call the function, and print the returned result.`,
+        starterCode: `${strippedStarter}\n${wrapper}`.trim(),
+        solutionCode: `${strippedSolution}\n${wrapper}`.trim(),
+    };
+}
+
 function looksLikeEmbeddedPythonHarness(stdin: string): boolean {
     const lines = String(stdin ?? "")
         .split("\n")
@@ -1385,9 +1479,41 @@ export async function repairPythonDraft(args: {
                 });
             }
 
-            const functionRuntimeRepair = rewriteFunctionReturnExercise(withAlignedTests);
+            const promptedInputRepair =
+                rewritePromptedInputExercise(withAlignedTests);
+            const afterPromptedInputRepair =
+                promptedInputRepair ?? withAlignedTests;
+
+            if (promptedInputRepair) {
+                report.repairs.push({
+                    code: "PYTHON_INPUT_PROMPT_REMOVED",
+                    category: "recipe",
+                    severity: "medium",
+                    field: exercise.id,
+                    message:
+                        "Removed interactive input prompts from Python code_input starter and solution code so fixed tests only validate program output.",
+                });
+            }
+
+            const hardcodedFunctionExampleRepair =
+                rewriteHardcodedFunctionExampleExercise(afterPromptedInputRepair);
+            const afterHardcodedFunctionRepair =
+                hardcodedFunctionExampleRepair ?? afterPromptedInputRepair;
+
+            if (hardcodedFunctionExampleRepair) {
+                report.repairs.push({
+                    code: "PYTHON_HARDCODED_FUNCTION_EXAMPLE_REPAIRED",
+                    category: "recipe",
+                    severity: "high",
+                    field: exercise.id,
+                    message:
+                        "Replaced hardcoded example usage in a function exercise with a stdin/stdout wrapper so published tests validate the intended behavior.",
+                });
+            }
+
+            const functionRuntimeRepair = rewriteFunctionReturnExercise(afterHardcodedFunctionRepair);
             const afterFunctionRuntimeRepair =
-                functionRuntimeRepair ?? withAlignedTests;
+                functionRuntimeRepair ?? afterHardcodedFunctionRepair;
 
             if (functionRuntimeRepair) {
                 report.repairs.push({

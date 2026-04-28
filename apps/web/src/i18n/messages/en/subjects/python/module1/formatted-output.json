@@ -1,0 +1,126 @@
+{
+  "topics": {
+    "python": {
+      "python-1": {
+        "formatted-output": {
+          "label": "Formatted Output",
+          "summary": "Displaying output in a user-friendly way.",
+          "cards": {
+            "sketch0": {
+              "title": "Understanding Formatted Output"
+            },
+            "sketch1": {
+              "title": "Using Format Specifiers"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Practice"
+            }
+          },
+          "projectSteps": {
+            "5": {
+              "title": "Create a formatted output"
+            }
+          },
+          "quiz": {
+            "1": {
+              "title": "Complete the formatted string",
+              "prompt": "Fill in the blank to complete the formatted string: `My favorite color is {____}.`",
+              "hint": "Think of a color you like.",
+              "help": {
+                "concept": "You can use formatted strings to insert variables into text.",
+                "hint_1": "Consider common colors.",
+                "hint_2": "It should be a single word."
+              },
+              "template": "My favorite color is {color}.",
+              "choices": [
+                "blue",
+                "green",
+                "red",
+                "yellow"
+              ]
+            },
+            "2": {
+              "title": "Format a number",
+              "prompt": "Fill in the blank to format the number correctly: `The price is ${____:.2f}.`",
+              "hint": "Think of a price you would pay.",
+              "help": {
+                "concept": "You can format numbers to control decimal places.",
+                "hint_1": "It should be a numerical value.",
+                "hint_2": "Make sure to include cents."
+              },
+              "template": "The price is ${price:.2f}.",
+              "choices": [
+                "10",
+                "10.5",
+                "10.99",
+                "11.50"
+              ]
+            },
+            "3": {
+              "title": "What does f-string stand for?",
+              "prompt": "What does the 'f' in f-string represent?",
+              "hint": "Focus on the main concept being tested and eliminate choices that describe something different.",
+              "help": {
+                "concept": "Choose the option that matches the core idea described in the question without relying on repeated wording from the answer choices.",
+                "hint_1": "Rule out options that describe a different role, behavior, or concept than the question is testing.",
+                "hint_2": "Pick the option that best matches the concept, not the one that simply repeats familiar wording."
+              },
+              "options": {
+                "a": "formatted",
+                "b": "function",
+                "c": "float",
+                "d": "fixed"
+              }
+            },
+            "4": {
+              "title": "Which of the following are valid format specifiers?",
+              "prompt": "Select all that apply.",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the idea the question is checking, not the exact answer wording.",
+                "hint_1": "Eliminate options that do not match the concept being tested.",
+                "hint_2": "Choose the option or options that best fit the task described."
+              },
+              "options": {
+                "a": "{:.2f}",
+                "b": "{:d}",
+                "c": "{:s}",
+                "d": "{:.3f}"
+              }
+            },
+            "5": {
+              "title": "Create a formatted output",
+              "prompt": "Write a Python program that takes a name and age, and prints a formatted string.",
+              "hint": "Break the task into the main query or code steps first.",
+              "help": {
+                "concept": "This task checks whether you can apply create a formatted output in a working solution.",
+                "hint_1": "Identify the table, columns, and condition or operation before writing the full solution.",
+                "hint_2": "Build the statement one piece at a time: select the right fields, then add the condition or operation that matches the prompt."
+              },
+              "starterCode": "name = 'John'\nage = 25\n# Your code here"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python": {
+      "python-1": {
+        "formatted-output": {
+          "1": {
+            "title": "Understanding Formatted Output",
+            "bodyMarkdown": "Formatted output in Python allows you to present data in a way that is easy to read and understand. For example, you can use formatted strings to control how numbers and text are displayed.\n\n### Example:\n```python\nname = 'Alice'\nage = 30\nprint(f'My name is {name} and I am {age} years old.')\n```\nThis code will output: `My name is Alice and I am 30 years old.`\n\n**Your turn:** Try changing the values of `name` and `age` to see how the output changes!\n\nLine by line: read the first statement to see which value is stored or checked, then follow each conditional branch in order to see which path prints the final result."
+          },
+          "2": {
+            "title": "Using Format Specifiers",
+            "bodyMarkdown": "You can also use format specifiers to control the appearance of numbers. For instance, you can format a floating-point number to display only two decimal places.\n\n### Example:\n```python\npi = 3.14159\nprint(f'The value of pi is approximately {pi:.2f}.')\n```\nThis code will output: `The value of pi is approximately 3.14.`\n\n**Try it yourself:** Modify the code to display `pi` with four decimal places instead.\n\nLine by line: read the first statement to see which value is stored or checked, then follow each conditional branch in order to see which path prints the final result."
+          }
+        }
+      }
+    }
+  }
+}

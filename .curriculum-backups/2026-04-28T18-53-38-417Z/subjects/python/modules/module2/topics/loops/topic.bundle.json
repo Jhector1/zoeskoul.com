@@ -1,0 +1,160 @@
+{
+  "topicId": "loops",
+  "subjectSlug": "python",
+  "moduleSlug": "python-2",
+  "sectionSlug": "python-2-core-building-blocks-1",
+  "prefix": "py2",
+  "minutes": 30,
+  "topic": {
+    "labelKey": "topics.python.python-2.loops.label",
+    "summaryKey": "topics.python.python-2.loops.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python.python-2.loops.cards.sketch0.title",
+      "sketchId": "intro-to-loops",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python.python-2.loops.cards.sketch1.title",
+      "sketchId": "while-loops",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.python.python-2.loops.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python.python-2.loops.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "code_input_loop_example",
+            "titleKey": "topics.python.python-2.loops.projectSteps.code_input_loop_example.title",
+            "exerciseKey": "code-input-loop-example",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "intro-to-loops",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python.python-2.loops.intro-to-loops.title",
+      "bodyKey": "sketches.python.python-2.loops.intro-to-loops.bodyMarkdown"
+    },
+    {
+      "id": "while-loops",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python.python-2.loops.while-loops.title",
+      "bodyKey": "sketches.python.python-2.loops.while-loops.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "fill-blank-loop-1",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python.python-2.loops.quiz.fill-blank-loop-1",
+      "choiceCount": 3,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "6"
+      }
+    },
+    {
+      "id": "fill-blank-while-loop",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python.python-2.loops.quiz.fill-blank-while-loop",
+      "choiceCount": 3,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "5"
+      }
+    },
+    {
+      "id": "single-choice-loop-type",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python.python-2.loops.quiz.single-choice-loop-type",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "multi-choice-loop-usage",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python.python-2.loops.quiz.multi-choice-loop-usage",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "code-input-loop-example",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python.python-2.loops.quiz.code-input-loop-example",
+      "language": "python",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "2\n4\n6\n8\n10\n12\n14\n16\n18\n20\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "for i in range(1, 21):\n    if i % 2 == 0:\n        print(i)"
+      }
+    }
+  ]
+}

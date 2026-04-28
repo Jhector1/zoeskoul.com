@@ -1,0 +1,364 @@
+{
+  "topicId": "errors_intro",
+  "minutes": 10,
+
+  "topic": {
+    "labelKey": "topics.python.python-1.errors_intro.label",
+    "summaryKey": "topics.python.python-1.errors_intro.summary"
+  },
+
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python.python-1.errors_intro.cards.sketch0.title",
+      "sketchId": "errors_intro",
+      "height": 360
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python.python-1.errors_intro.cards.sketch1.title",
+      "sketchId": "name_error",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python.python-1.errors_intro.cards.sketch2.title",
+      "sketchId": "type_and_value_error",
+      "height": 460
+    },
+    {
+      "id": "sketch3",
+      "kind": "sketch",
+      "titleKey": "topics.python.python-1.errors_intro.cards.sketch3.title",
+      "sketchId": "debug_flow",
+      "height": 380
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python.python-1.errors_intro.cards.quiz.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "identify_error",
+            "titleKey": "topics.python.python-1.errors_intro.projectSteps.identify_error.title",
+            "exerciseKey": "m1_err_identify_error_code",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "fix_type_mismatch",
+            "titleKey": "topics.python.python-1.errors_intro.projectSteps.fix_type_mismatch.title",
+            "exerciseKey": "m1_err_fix_type_mismatch_code",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "avoid_valueerror",
+            "titleKey": "topics.python.python-1.errors_intro.projectSteps.avoid_valueerror.title",
+            "exerciseKey": "m1_err_parse_age_safely_code",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
+    }
+  ],
+
+  "sketches": [
+    {
+      "id": "errors_intro",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python.python-1.errors_intro.errors_intro.title",
+      "bodyKey": "sketches.python.python-1.errors_intro.errors_intro.bodyMarkdown"
+    },
+    {
+      "id": "name_error",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python.python-1.errors_intro.name_error.title",
+      "bodyKey": "sketches.python.python-1.errors_intro.name_error.bodyMarkdown"
+    },
+    {
+      "id": "type_and_value_error",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python.python-1.errors_intro.type_and_value_error.title",
+      "bodyKey": "sketches.python.python-1.errors_intro.type_and_value_error.bodyMarkdown"
+    },
+    {
+      "id": "debug_flow",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python.python-1.errors_intro.debug_flow.title",
+      "bodyKey": "sketches.python.python-1.errors_intro.debug_flow.bodyMarkdown"
+    }
+  ],
+
+  "exercises": [
+    {
+      "id": "m1_types_errors_sc",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_types_errors_sc",
+      "optionIds": ["a", "b", "c"],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "m1_err_nameerror_sc",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_err_nameerror_sc",
+      "optionIds": ["a", "b", "c"],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "m1_err_typeerror_sc",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_err_typeerror_sc",
+      "optionIds": ["a", "b", "c"],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "m1_err_valueerror_sc",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_err_valueerror_sc",
+      "optionIds": ["a", "b", "c"],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "c"
+      }
+    },
+    {
+      "id": "m1_err_debug_combo_sc",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_err_debug_combo_sc",
+      "optionIds": ["a", "b", "c"],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+
+    {
+      "id": "m1_err_fill_nameerror_meaning",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_err_fill_nameerror_meaning",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "doesn't exist"
+      }
+    },
+    {
+      "id": "m1_err_fill_typeerror_meaning",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_err_fill_typeerror_meaning",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "types"
+      }
+    },
+    {
+      "id": "m1_err_fill_valueerror_meaning",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_err_fill_valueerror_meaning",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "format"
+      }
+    },
+    {
+      "id": "m1_err_fill_debug_value",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_err_fill_debug_value",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "value"
+      }
+    },
+    {
+      "id": "m1_err_fill_debug_type",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_err_fill_debug_type",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "type"
+      }
+    },
+
+    {
+      "id": "m1_err_reorder_debug_steps",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_err_reorder_debug_steps",
+      "tokenIds": ["t1", "t2", "t3", "t4"],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": ["t1", "t2", "t3", "t4"]
+      }
+    },
+    {
+      "id": "m1_err_reorder_nameerror_fix",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_err_reorder_nameerror_fix",
+      "tokenIds": ["t1", "t2", "t3"],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": ["t1", "t2", "t3"]
+      }
+    },
+    {
+      "id": "m1_err_reorder_type_fix",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_err_reorder_type_fix",
+      "tokenIds": ["t1", "t2", "t3"],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": ["t1", "t2", "t3"]
+      }
+    },
+    {
+      "id": "m1_err_reorder_safe_parse",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_err_reorder_safe_parse",
+      "tokenIds": ["t1", "t2", "t3", "t4"],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": ["t1", "t2", "t3", "t4"]
+      }
+    },
+    {
+      "id": "m1_err_reorder_error_models",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_err_reorder_error_models",
+      "tokenIds": ["t1", "t2", "t3"],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": ["t1", "t2", "t3"]
+      }
+    },
+
+    {
+      "id": "m1_err_identify_error_code",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "quiz.m1_err_identify_error_code",
+      "language": "python",
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdout": "NameError\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "print(\"NameError\")\n"
+      }
+    },
+    {
+      "id": "m1_err_fix_type_mismatch_code",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "quiz.m1_err_fix_type_mismatch_code",
+      "language": "python",
+      "showExpectedExample": true,
+
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "3\n5\n",
+            "stdout": "8\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "10\n12\n",
+            "stdout": "22\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "a = int(input())\nb = int(input())\nprint(a + b)\n"
+      }
+    },
+    {
+      "id": "m1_err_parse_age_safely_code",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "quiz.m1_err_parse_age_safely_code",
+      "language": "python",
+      "showExpectedExample": true,
+
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "12\n",
+            "stdout": "Next year = 13\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "twelve\n",
+            "stdout": "Invalid age\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "text = input().strip()\nif text.isdigit():\n    age = int(text)\n    print(f\"Next year = {age + 1}\")\nelse:\n    print(\"Invalid age\")\n"
+      }
+    }
+  ]
+}

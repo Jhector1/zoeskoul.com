@@ -1,0 +1,123 @@
+{
+  "topics": {
+    "python": {
+      "python-1": {
+        "data-types": {
+          "label": "Basic Data Types",
+          "summary": "Introduction to strings, integers, and floats.",
+          "cards": {
+            "sketch0": {
+              "title": "Understanding Data Types"
+            },
+            "sketch1": {
+              "title": "Using Data Types in Python"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Practice"
+            }
+          },
+          "projectSteps": {
+            "5": {
+              "title": "Create Variables"
+            }
+          },
+          "quiz": {
+            "1": {
+              "title": "Identify the Data Type",
+              "prompt": "Choose the best value for the first missing blank in the statement.",
+              "hint": "Think about the type of number it represents.",
+              "help": {
+                "concept": "3.14 is a number with a decimal point, which classifies it as a specific type of number.",
+                "hint_1": "It's not a whole number.",
+                "hint_2": "It represents a fractional value."
+              },
+              "template": "The first missing value is [blank1].",
+              "choices": [
+                "integer",
+                "float",
+                "string"
+              ]
+            },
+            "2": {
+              "title": "Complete the String",
+              "prompt": "Choose the best value for the first missing blank in the statement.",
+              "hint": "Strings are enclosed in specific characters.",
+              "help": {
+                "concept": "Strings in Python are created by enclosing text in the missing term.",
+                "hint_1": "You can use single or double the missing term.",
+                "hint_2": "Think about how you would write a sentence."
+              },
+              "template": "The first missing value is [blank1].",
+              "choices": [
+                "parentheses",
+                "brackets",
+                "quotes"
+              ]
+            },
+            "3": {
+              "title": "Identify the Integer",
+              "prompt": "Which of the following is an integer?",
+              "hint": "Look for a whole number without a decimal.",
+              "help": {
+                "concept": "Integers are whole numbers that do not have a fractional part.",
+                "hint_1": "Decimals and text are not integers.",
+                "hint_2": "Only whole numbers qualify."
+              },
+              "options": {
+                "a": "3.5",
+                "b": "7",
+                "c": "'Hello'"
+              }
+            },
+            "4": {
+              "title": "Select All Data Types",
+              "prompt": "Which of the following are valid data types in Python? Select all that apply.",
+              "hint": "Think about the types of data you can work with.",
+              "help": {
+                "concept": "Python supports various data types including numbers and text.",
+                "hint_1": "Consider both numeric and non-numeric types.",
+                "hint_2": "Remember the common types we discussed."
+              },
+              "options": {
+                "a": "integer",
+                "b": "string",
+                "c": "list",
+                "d": "float"
+              }
+            },
+            "5": {
+              "title": "Create Variables",
+              "prompt": "Write a Python program that creates an integer, a float, and a string variable. Print their values.",
+              "hint": "Focus on the programming task being asked for, not on copying final solution text.",
+              "help": {
+                "concept": "Build the solution from the behavior the exercise is testing.",
+                "hint_1": "Think about which steps, functions, or statements are required for the task.",
+                "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "age = \nheight = \nname = \n\n# Print the variables\nprint(age)\nprint(height)\nprint(name)"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python": {
+      "python-1": {
+        "data-types": {
+          "1": {
+            "title": "Understanding Data Types",
+            "bodyMarkdown": "In Python, data types are categories of data that tell the interpreter how to handle the data. The most common data types are:\n\n1. **Integers**: Whole numbers, e.g., `5`, `-3`, `42`.\n2. **Floats**: Decimal numbers, e.g., `3.14`, `-0.001`.\n3. **Strings**: Text data, e.g., `'Hello, World!'`, `'Python'`.\n\n### Example:\n```python\nage = 25  # This is an integer\nheight = 5.9  # This is a float\nname = 'Zoe'  # This is a string\n```\n\n### Your turn:\nTry creating your own variables using different data types!\n\nLine by line: read the first statement to see which value is stored or checked, then follow each conditional branch in order to see which path prints the final result."
+          },
+          "2": {
+            "title": "Using Data Types in Python",
+            "bodyMarkdown": "You can perform various operations on different data types. For example:\n\n- Adding two integers results in an integer.\n- Adding an integer and a float results in a float.\n- Strings can be concatenated using the `+` operator.\n\n### Example:\n```python\nx = 10  # integer\n\ny = 5.5  # float\n\nresult = x + y  # result is a float\n\ngreeting = 'Hello' + ' ' + 'World!'  # concatenates strings\n```\n\n### Try it yourself:\nModify the example to create your own calculations and string manipulations!\n\nLine by line: read the first statement to see which value is stored or checked, then follow each conditional branch in order to see which path prints the final result."
+          }
+        }
+      }
+    }
+  }
+}

@@ -278,7 +278,9 @@ describe("repairPythonDraft", () => {
         expect(exercise.solutionCode).toContain("print(is_greater_than_ten(num))");
         expect(
             result.report.repairs.some(
-                (repair) => repair.code === "PYTHON_FUNCTION_STDOUT_TASK_REPAIRED",
+                (repair) =>
+                    repair.code === "PYTHON_FUNCTION_STDOUT_TASK_REPAIRED" ||
+                    repair.code === "PYTHON_HARDCODED_FUNCTION_EXAMPLE_REPAIRED",
             ),
         ).toBe(true);
     });
@@ -863,6 +865,104 @@ describe("repairPythonDraft", () => {
         expect(countBooks.tests).toEqual([
             { stdin: "", stdout: "1\n", match: "exact" },
         ]);
+    });
+
+    it("rewrites hardcoded function example usage into stdin stdout execution", async () => {
+        const result = await repairPythonDraft({
+            seed: {
+                topicId: "operators-and-expressions",
+                title: "Operators and Expressions",
+                summary: "Use operators to calculate values.",
+            } as any,
+            draft: {
+                title: "Operators and Expressions",
+                summary: "Summary",
+                minutes: 10,
+                sketchBlocks: [],
+                quizDraft: [
+                    {
+                        id: "q5",
+                        kind: "code_input",
+                        title: "Calculate the area of a rectangle.",
+                        prompt:
+                            "Write a Python function that calculates the area of a rectangle given its width and height.",
+                        hint: "Multiply width and height.",
+                        help: {
+                            concept: "Area comes from multiplication.",
+                            hint_1: "Return width times height.",
+                            hint_2: "Read the tested values from input and print the result.",
+                        },
+                        starterCode:
+                            "def calculate_area(width, height):\n    # Your code here\n    pass",
+                        solutionCode:
+                            "def calculate_area(width, height):\n    area = width * height\n    return area\n\n# Example usage:\nprint(calculate_area(5, 10))",
+                        tests: [
+                            { stdin: "5\n10\n", stdout: "50\n", match: "exact" },
+                            { stdin: "7\n3\n", stdout: "21\n", match: "exact" },
+                        ],
+                    },
+                ],
+            } as any,
+        });
+
+        const exercise = result.draft.quizDraft[0] as any;
+        expect(exercise.solutionCode).toContain("import ast");
+        expect(exercise.solutionCode).toContain("print(calculate_area(width, height))");
+        expect(exercise.solutionCode).not.toContain("# Example usage:");
+        expect(
+            result.report.repairs.some(
+                (repair) =>
+                    repair.code === "PYTHON_HARDCODED_FUNCTION_EXAMPLE_REPAIRED",
+            ),
+        ).toBe(true);
+    });
+
+    it("removes input prompt text from fixed-test python programs", async () => {
+        const result = await repairPythonDraft({
+            seed: {
+                topicId: "if-statements",
+                title: "If Statements",
+                summary: "Branch on conditions.",
+            } as any,
+            draft: {
+                title: "If Statements",
+                summary: "Summary",
+                minutes: 10,
+                sketchBlocks: [],
+                quizDraft: [
+                    {
+                        id: "5",
+                        kind: "code_input",
+                        title: "Implement an If Statement",
+                        prompt:
+                            "Write a program that checks if a number is positive, negative, or zero.",
+                        hint: "Use if elif else.",
+                        help: {
+                            concept: "Check each case in order.",
+                            hint_1: "Compare the number with zero.",
+                            hint_2: "Print one matching label.",
+                        },
+                        starterCode:
+                            "number = int(input('Enter a number: '))\n# Your code here",
+                        solutionCode:
+                            "number = int(input('Enter a number: '))\nif number > 0:\n    print('Positive')\nelif number < 0:\n    print('Negative')\nelse:\n    print('Zero')",
+                        tests: [
+                            { stdin: "5\n", stdout: "Positive\n", match: "exact" },
+                        ],
+                    },
+                ],
+            } as any,
+        });
+
+        const exercise = result.draft.quizDraft[0] as any;
+        expect(exercise.starterCode).toContain("input()");
+        expect(exercise.solutionCode).toContain("input()");
+        expect(exercise.solutionCode).not.toContain("Enter a number:");
+        expect(
+            result.report.repairs.some(
+                (repair) => repair.code === "PYTHON_INPUT_PROMPT_REMOVED",
+            ),
+        ).toBe(true);
     });
 
     it("makes no-output class method exercises observable", async () => {

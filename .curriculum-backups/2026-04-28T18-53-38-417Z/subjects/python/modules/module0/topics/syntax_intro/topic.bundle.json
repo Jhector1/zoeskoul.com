@@ -1,0 +1,201 @@
+{
+  "topicId": "syntax_intro",
+  "minutes": 8,
+
+  "topic": {
+    "labelKey": "topics.python.python-0.syntax_intro.label",
+    "summaryKey": "topics.python.python-0.syntax_intro.summary"
+  },
+
+  "cards": [
+    {
+      "id": "sketch",
+      "kind": "sketch",
+      "titleKey": "topics.python.python-0.syntax_intro.cards.sketch.title",
+      "sketchId": "intro",
+      "height": 520
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.python.python-0.syntax_intro.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 3,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    }
+  ],
+
+  "sketches": [
+    {
+      "id": "intro",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python.python-0.syntax_intro.intro.title",
+      "bodyKey": "sketches.python.python-0.syntax_intro.intro.bodyMarkdown"
+    }
+  ],
+
+  "exercises": [
+    {
+      "id": "m0_syntax_definition",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m0_syntax_definition",
+      "optionIds": ["a", "b", "c"],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "m0_syntax_syntaxerror",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m0_syntax_syntaxerror",
+      "optionIds": ["a", "b", "c"],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "m0_syntax_indentation_rule",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m0_syntax_indentation_rule",
+      "optionIds": ["a", "b", "c"],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+
+    {
+      "id": "m0_syntax_fill_rules_word",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m0_syntax_fill_rules_word",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "rules"
+      }
+    },
+    {
+      "id": "m0_syntax_fill_error_name",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m0_syntax_fill_error_name",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "SyntaxError"
+      }
+    },
+    {
+      "id": "m0_syntax_fill_python_structure",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m0_syntax_fill_python_structure",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "indentation"
+      }
+    },
+    {
+      "id": "m0_syntax_fill_understand_code",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m0_syntax_fill_understand_code",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "understand"
+      }
+    },
+    {
+      "id": "m0_syntax_fill_language_name",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m0_syntax_fill_language_name",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "Python"
+      }
+    },
+
+    {
+      "id": "m0_syntax_reorder_write_flow",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m0_syntax_reorder_write_flow",
+      "tokenIds": ["t1", "t2", "t3"],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": ["t1", "t2", "t3"]
+      }
+    },
+    {
+      "id": "m0_syntax_reorder_breaking_rules",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m0_syntax_reorder_breaking_rules",
+      "tokenIds": ["t1", "t2", "t3"],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": ["t1", "t2", "t3"]
+      }
+    },
+    {
+      "id": "m0_syntax_reorder_indent_idea",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m0_syntax_reorder_indent_idea",
+      "tokenIds": ["t1", "t2", "t3"],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": ["t1", "t2", "t3"]
+      }
+    },
+    {
+      "id": "m0_syntax_reorder_language_rules",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m0_syntax_reorder_language_rules",
+      "tokenIds": ["t1", "t2", "t3", "t4"],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": ["t1", "t2", "t3", "t4"]
+      }
+    },
+    {
+      "id": "m0_syntax_reorder_clear_code_goal",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m0_syntax_reorder_clear_code_goal",
+      "tokenIds": ["t1", "t2", "t3"],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": ["t1", "t2", "t3"]
+      }
+    }
+  ]
+}

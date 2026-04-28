@@ -1,0 +1,123 @@
+{
+  "topics": {
+    "python": {
+      "python-2": {
+        "if-statements": {
+          "label": "If Statements",
+          "summary": "Using if statements to control program flow.",
+          "cards": {
+            "sketch0": {
+              "title": "Understanding If Statements"
+            },
+            "sketch1": {
+              "title": "Using Else and Elif"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Practice"
+            }
+          },
+          "projectSteps": {
+            "5": {
+              "title": "Implement a Simple If Statement"
+            }
+          },
+          "quiz": {
+            "1": {
+              "title": "Complete the If Statement",
+              "prompt": "Choose the best value for the first missing blank in the statement.",
+              "hint": "Think about what condition would make this statement true.",
+              "help": {
+                "concept": "The if statement checks if x is the missing term.",
+                "hint_1": "Consider what x being the missing term implies.",
+                "hint_2": "The blank should describe x's relationship to 10."
+              },
+              "template": "The first missing value is [blank1].",
+              "choices": [
+                "greater than 10",
+                "less than 10",
+                "equal to 10"
+              ]
+            },
+            "2": {
+              "title": "Identify the Output",
+              "prompt": "Choose the best value for the missing blank in the statement.",
+              "hint": "Consider the condition being checked.",
+              "help": {
+                "concept": "The else statement handles cases where the condition is false.",
+                "hint_1": "Think about what happens when x is not greater than 0.",
+                "hint_2": "The output will depend on the value of x."
+              },
+              "template": "The missing value is [blank1].",
+              "choices": [
+                "Positive",
+                "Not Positive"
+              ]
+            },
+            "3": {
+              "title": "What is the purpose of an if statement?",
+              "prompt": "Select the correct answer.",
+              "hint": "It controls the flow of the program based on conditions.",
+              "help": {
+                "concept": "If statements allow for conditional execution of code.",
+                "hint_1": "They help in making decisions in code.",
+                "hint_2": "Think about how they affect which code runs."
+              },
+              "options": {
+                "a": "To repeat code multiple times",
+                "b": "To control the flow of the program based on conditions",
+                "c": "To define functions",
+                "d": "To declare variables"
+              }
+            },
+            "4": {
+              "title": "Which of the following are valid uses of if statements?",
+              "prompt": "Select all that apply.",
+              "hint": "Think about different scenarios where conditions are checked.",
+              "help": {
+                "concept": "If statements can be used in various situations to control program flow.",
+                "hint_1": "They can check for equality, greater than, or less than.",
+                "hint_2": "Consider all logical comparisons."
+              },
+              "options": {
+                "a": "Checking if a number is even",
+                "b": "Determining if a user is logged in",
+                "c": "Looping through a list",
+                "d": "Validating user input"
+              }
+            },
+            "5": {
+              "title": "Implement a Simple If Statement",
+              "prompt": "Write a program that checks if a number is positive, negative, or zero.",
+              "hint": "Break the task into the main query or code steps first.",
+              "help": {
+                "concept": "This task checks whether you can apply implement a simple if statement in a working solution.",
+                "hint_1": "Identify the table, columns, and condition or operation before writing the full solution.",
+                "hint_2": "Build the statement one piece at a time: select the right fields, then add the condition or operation that matches the prompt."
+              },
+              "starterCode": "number = int(input())\n# Your code here"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python": {
+      "python-2": {
+        "if-statements": {
+          "1": {
+            "title": "Understanding If Statements",
+            "bodyMarkdown": "If statements allow you to execute certain parts of your code based on conditions. For example, if you want to check if a number is positive, you can use an if statement like this:\n\n```python\nnumber = 5\nif number > 0:\n    print('The number is positive')\n```\n\nIn this example, the message will be printed only if the condition `number > 0` is true. \n\n**Try it yourself:** Change the value of `number` to see how the output changes.\n\nLine by line: read the first statement to see which value is stored or checked, then follow each conditional branch in order to see which path prints the final result."
+          },
+          "2": {
+            "title": "Using Else and Elif",
+            "bodyMarkdown": "You can extend if statements with `else` and `elif` to handle multiple conditions. For instance:\n\n```python\nnumber = -3\nif number > 0:\n    print('The number is positive')\nelif number < 0:\n    print('The number is negative')\nelse:\n    print('The number is zero')\n```\n\nHere, the program checks if the number is positive, negative, or zero and prints the corresponding message.\n\n**Your turn:** Add another condition to check if the number is even or odd.\n\nLine by line: read the first statement to see which value is stored or checked, then follow each conditional branch in order to see which path prints the final result."
+          }
+        }
+      }
+    }
+  }
+}

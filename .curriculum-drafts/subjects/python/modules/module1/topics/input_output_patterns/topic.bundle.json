@@ -1,0 +1,404 @@
+{
+  "topicId": "input_output_patterns",
+
+  "minutes": 10,
+
+  "topic": {
+    "labelKey": "topics.python.python-1.input_output_patterns.label",
+    "summaryKey": "topics.python.python-1.input_output_patterns.summary"
+  },
+
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python.python-1.input_output_patterns.cards.sketch0.title",
+      "sketchId": "pattern_overview",
+      "height": 360
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python.python-1.input_output_patterns.cards.sketch1.title",
+      "sketchId": "input_returns_text",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python.python-1.input_output_patterns.cards.sketch2.title",
+      "sketchId": "convert_and_compute",
+      "height": 500
+    },
+    {
+      "id": "sketch3",
+      "kind": "sketch",
+      "titleKey": "topics.python.python-1.input_output_patterns.cards.sketch3.title",
+      "sketchId": "show_results",
+      "height": 420
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python.python-1.input_output_patterns.cards.quiz.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "age_next_year",
+            "titleKey": "topics.python.python-1.input_output_patterns.projectSteps.age_next_year.title",
+            "exerciseKey": "m1_io_age_next_year",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "tip_calc",
+            "titleKey": "topics.python.python-1.input_output_patterns.projectSteps.tip_calc.title",
+            "exerciseKey": "m1_io_tip_total",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "temp_convert",
+            "titleKey": "topics.python.python-1.input_output_patterns.projectSteps.temp_convert.title",
+            "exerciseKey": "m1_io_c_to_f",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
+    }
+  ],
+
+  "sketches": [
+    {
+      "id": "pattern_overview",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python.python-1.input_output_patterns.pattern_overview.title",
+      "bodyKey": "sketches.python.python-1.input_output_patterns.pattern_overview.bodyMarkdown"
+    },
+    {
+      "id": "input_returns_text",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python.python-1.input_output_patterns.input_returns_text.title",
+      "bodyKey": "sketches.python.python-1.input_output_patterns.input_returns_text.bodyMarkdown"
+    },
+    {
+      "id": "convert_and_compute",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python.python-1.input_output_patterns.convert_and_compute.title",
+      "bodyKey": "sketches.python.python-1.input_output_patterns.convert_and_compute.bodyMarkdown"
+    },
+    {
+      "id": "show_results",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python.python-1.input_output_patterns.show_results.title",
+      "bodyKey": "sketches.python.python-1.input_output_patterns.show_results.bodyMarkdown"
+    }
+  ],
+
+  "exercises": [
+    {
+      "id": "m1_io_age_next_year",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "quiz.m1_io_age_next_year",
+      "language": "python",
+      "showExpectedExample": true,
+
+      "recipe": {
+        "type": "template_io",
+        "vars": {
+          "name": {
+            "source": "pick",
+            "from": ["Maya", "Jordan", "Alex", "Sam"]
+          },
+          "age": {
+            "source": "int",
+            "min": 10,
+            "max": 40
+          }
+        },
+        "computed": {
+          "age_next": {
+            "op": "add",
+            "left": "age",
+            "right": 1
+          }
+        },
+        "tests": [
+          {
+            "stdinTemplate": "{name}\n{age}\n",
+            "stdoutTemplate": "Hi {name}! Next year you'll be {age_next}.\n",
+            "match": "exact"
+          }
+        ],
+        "solutionTemplate": "name = input()\nage = int(input())\nprint(f\"Hi {name}! Next year you'll be {age + 1}.\")\n"
+      }
+    },
+    {
+      "id": "m1_io_tip_total",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "quiz.m1_io_tip_total",
+      "language": "python",
+      "showExpectedExample": true,
+
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "40\n15\n",
+            "stdout": "Tip = 6\nTotal = 46\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "25\n20\n",
+            "stdout": "Tip = 5\nTotal = 30\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "bill = int(input())\npct = int(input())\ntip = bill * pct // 100\ntotal = bill + tip\nprint(f\"Tip = {tip}\")\nprint(f\"Total = {total}\")\n"
+      }
+    },
+    {
+      "id": "m1_io_c_to_f",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "quiz.m1_io_c_to_f",
+      "language": "python",
+      "recipe": {
+        "type": "template_io",
+        "vars": {
+          "c": {
+            "source": "int",
+            "min": -10,
+            "max": 35
+          }
+        },
+        "computed": {
+          "f": {
+            "op": "c_to_f_int",
+            "left": "c"
+          }
+        },
+        "tests": [
+          {
+            "stdinTemplate": "{c}\n",
+            "stdoutTemplate": "{f}\n",
+            "match": "exact"
+          }
+        ],
+        "solutionTemplate": "c = int(input())\nf = int(c * 9 / 5 + 32)\nprint(f)\n"
+      }
+    },
+
+    {
+      "id": "m1_io_input_returns_str",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_io_input_returns_str",
+      "optionIds": ["a", "b", "c", "d"],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "c"
+      }
+    },
+    {
+      "id": "m1_io_tip_integer_math",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_io_tip_integer_math",
+      "optionIds": ["a", "b", "c", "d"],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "m1_io_c_to_f_formula",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_io_c_to_f_formula",
+      "optionIds": ["a", "b", "c", "d"],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+
+    {
+      "id": "m1_io_age_next_year_parts",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_io_age_next_year_parts",
+      "optionIds": ["a", "b", "c", "d", "e"],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": ["a", "b", "c"]
+      }
+    },
+    {
+      "id": "m1_io_tip_output_lines",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_io_tip_output_lines",
+      "optionIds": ["a", "b", "c", "d"],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": ["a", "b"]
+      }
+    },
+    {
+      "id": "m1_io_convert_then_compute_truths",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_io_convert_then_compute_truths",
+      "optionIds": ["a", "b", "c", "d", "e"],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": ["a", "b", "d"]
+      }
+    },
+
+    {
+      "id": "m1_io_fill_pattern_name",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_io_fill_pattern_name",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "Convert"
+      }
+    },
+    {
+      "id": "m1_io_fill_input_type",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_io_fill_input_type",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "string"
+      }
+    },
+    {
+      "id": "m1_io_fill_show_step",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_io_fill_show_step",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "Show"
+      }
+    },
+    {
+      "id": "m1_io_fill_output_tool",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_io_fill_output_tool",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "print"
+      }
+    },
+    {
+      "id": "m1_io_fill_fstring_use",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_io_fill_fstring_use",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "variables"
+      }
+    },
+
+    {
+      "id": "m1_io_reorder_main_pattern",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_io_reorder_main_pattern",
+      "tokenIds": ["t1", "t2", "t3", "t4"],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": ["t1", "t2", "t3", "t4"]
+      }
+    },
+    {
+      "id": "m1_io_reorder_age_program",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_io_reorder_age_program",
+      "tokenIds": ["t1", "t2", "t3", "t4"],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": ["t1", "t2", "t3", "t4"]
+      }
+    },
+    {
+      "id": "m1_io_reorder_tip_program",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_io_reorder_tip_program",
+      "tokenIds": ["t1", "t2", "t3", "t4"],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": ["t1", "t2", "t3", "t4"]
+      }
+    },
+    {
+      "id": "m1_io_reorder_temp_program",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_io_reorder_temp_program",
+      "tokenIds": ["t1", "t2", "t3", "t4"],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": ["t1", "t2", "t3", "t4"]
+      }
+    },
+    {
+      "id": "m1_io_reorder_fstring_idea",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_io_reorder_fstring_idea",
+      "tokenIds": ["t1", "t2", "t3"],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": ["t1", "t2", "t3"]
+      }
+    }
+  ]
+}

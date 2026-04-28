@@ -1,0 +1,97 @@
+{
+  "title": "Your First Python Program",
+  "summary": "Writing and running your first Python script.",
+  "minutes": 30,
+  "sketchBlocks": [
+    {
+      "id": "1",
+      "title": "Introduction to Python",
+      "bodyMarkdown": "In this lesson, you'll learn how to write and run your first Python program. Python is a versatile programming language that's great for beginners. Let's start with a simple program that prints a message to the screen.\n\n### Example\nHere's a basic example of a Python program:\n```python\nprint('Hello, World!')\n```\nThis program uses the `print` function to display the text 'Hello, World!' on the screen.\n\n### Your turn\nTry it yourself! Write a Python program that prints your name."
+    },
+    {
+      "id": "2",
+      "title": "Running Your Python Script",
+      "bodyMarkdown": "Once you've written your Python program, the next step is to run it. You can do this in several ways, such as using an Integrated Development Environment (IDE) or the command line.\n\n### Example\nTo run your script from the command line, you would navigate to the directory where your script is saved and type:\n```bash\npython your_script.py\n```\nReplace `your_script.py` with the name of your Python file.\n\n### Try this\nMake sure to run your program and see the output!"
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "q1",
+      "kind": "fill_blank_choice",
+      "title": "Complete the print statement",
+      "prompt": "Fill in the blank to complete the print statement that outputs 'Hello, World!'",
+      "template": "print('______')",
+      "choices": [
+        "Hello, World!",
+        "Hello World!",
+        "Hello, World"
+      ],
+      "correctValue": "Hello, World!"
+    },
+    {
+      "id": "q2",
+      "kind": "fill_blank_choice",
+      "title": "Identify the correct command to run a Python script",
+      "prompt": "Fill in the blank with the correct command to run a Python script.",
+      "template": "To run a Python script, type: python ______",
+      "choices": [
+        "script.py",
+        "your_script.py",
+        "my_script.py"
+      ],
+      "correctValue": "your_script.py"
+    },
+    {
+      "id": "q3",
+      "kind": "single_choice",
+      "title": "What does the print function do?",
+      "prompt": "What is the purpose of the print function in Python?",
+      "hint": "It displays output to the screen.",
+      "help": {
+        "concept": "The print function is used to output text or variables to the console in Python.",
+        "hint_1": "It shows information to the user.",
+        "hint_2": "It can display strings, numbers, and more."
+      },
+      "options": [
+        "It stores data in a variable.",
+        "It displays output to the screen.",
+        "It creates a new function.",
+        "It ends the program."
+      ],
+      "correctOptionIds": [
+        "b"
+      ]
+    },
+    {
+      "id": "q4",
+      "kind": "multi_choice",
+      "title": "Which of the following are valid ways to run a Python script?",
+      "prompt": "Select all that apply.",
+      "hint": "Think about different environments where Python can be executed.",
+      "help": {
+        "concept": "Python scripts can be run in various environments, including command line and IDEs.",
+        "hint_1": "You can use an IDE or the command line.",
+        "hint_2": "Consider how you would execute a script in different setups."
+      },
+      "options": [
+        "Using an IDE",
+        "Running from the command line",
+        "Sending it via email",
+        "Using an online interpreter"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ]
+    },
+    {
+      "id": "q5",
+      "kind": "code_input",
+      "title": "Write a simple Python program",
+      "prompt": "Write a Python program that prints your favorite quote.",
+      "starterCode": "print('')",
+      "solutionCode": "print('Your favorite quote here.')"
+    }
+  ]
+}

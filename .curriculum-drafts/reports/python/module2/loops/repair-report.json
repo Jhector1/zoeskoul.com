@@ -1,0 +1,26 @@
+{
+  "topicId": "loops",
+  "repairs": [
+    {
+      "code": "PYTHON_SKETCH_LINE_BY_LINE_EXPLANATION_ADDED",
+      "category": "text",
+      "severity": "medium",
+      "field": "sketchBlocks.1.bodyMarkdown",
+      "message": "Added a short line-by-line explanation after a multi-line code example."
+    },
+    {
+      "code": "PYTHON_SKETCH_LINE_BY_LINE_EXPLANATION_ADDED",
+      "category": "text",
+      "severity": "medium",
+      "field": "sketchBlocks.2.bodyMarkdown",
+      "message": "Added a short line-by-line explanation after a multi-line code example."
+    },
+    {
+      "code": "PYTHON_TESTS_DERIVED_FROM_SOLUTION",
+      "category": "recipe",
+      "severity": "high",
+      "field": "5",
+      "message": "Derived stdin/stdout tests by running a no-input Python solution that already prints output."
+    }
+  ]
+}

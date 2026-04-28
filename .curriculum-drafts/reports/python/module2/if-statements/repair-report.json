@@ -1,0 +1,33 @@
+{
+  "topicId": "if-statements",
+  "repairs": [
+    {
+      "code": "PYTHON_SKETCH_LINE_BY_LINE_EXPLANATION_ADDED",
+      "category": "text",
+      "severity": "medium",
+      "field": "sketchBlocks.1.bodyMarkdown",
+      "message": "Added a short line-by-line explanation after a multi-line code example."
+    },
+    {
+      "code": "PYTHON_SKETCH_LINE_BY_LINE_EXPLANATION_ADDED",
+      "category": "text",
+      "severity": "medium",
+      "field": "sketchBlocks.2.bodyMarkdown",
+      "message": "Added a short line-by-line explanation after a multi-line code example."
+    },
+    {
+      "code": "PYTHON_TESTS_SYNTHESIZED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "q5",
+      "message": "Added fallback stdin/stdout tests to an input-driven or top-level-function Python code_input exercise after real execution could not derive them."
+    },
+    {
+      "code": "PYTHON_INPUT_PROMPT_REMOVED",
+      "category": "recipe",
+      "severity": "medium",
+      "field": "q5",
+      "message": "Removed interactive input prompts from Python code_input starter and solution code so fixed tests only validate program output."
+    }
+  ]
+}
