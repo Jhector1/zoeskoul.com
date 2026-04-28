@@ -145,30 +145,36 @@ Example single-choice exercise:
 pnpm gen:manifests
 ```
 
-## 9. Hook into the Subject Generator
+## 9. Generator Registration Is Automatic
 
-Create a subject engine such as:
+For manifest-driven subjects, you do not need to create a manual generator file or
+register a `genKey` by hand.
 
-```ts
-import type { TopicContext } from "../../generatorTypes";
-import type { SubjectModuleGenerator } from "@/lib/practice/generator/engines/utils";
+After you run:
 
-import subjectManifest from "@/lib/subjects/python/subject.manifest.json";
-import { TOPIC_MANIFESTS } from "@/lib/subjects/python/topics.generated";
-import { makeSubjectGeneratorFromManifest } from "@/lib/practice/generator/engines/json/makeSubjectGeneratorFromManifest";
-
-export function makeGenPythonForBeginners(
-  ctx: TopicContext,
-): SubjectModuleGenerator {
-  return makeSubjectGeneratorFromManifest({
-    manifest: subjectManifest,
-    topicManifests: TOPIC_MANIFESTS,
-    ctx,
-  });
-}
+```bash
+pnpm gen:subject-manifests
 ```
 
-Then register that generator under the same `genKey` used by the subject manifest.
+the generated subject registry automatically exposes:
+
+- the subject manifest
+- the topic manifests
+- the subject `genKey`
+- a default manifest-backed practice generator
+
+This means a normal course with supported exercise kinds such as:
+
+- `single_choice`
+- `multi_choice`
+- `fill_blank_choice`
+- `drag_reorder`
+- `code_input`
+
+can publish without any manual generator wiring.
+
+Only add a manual generator override when a course truly needs custom runtime
+behavior beyond the shared manifest system.
 
 ## 10. Add Messages
 

@@ -1,0 +1,200 @@
+{
+  "topicId": "class-debugging-patterns",
+  "subjectSlug": "python-for-beginners",
+  "moduleSlug": "python-8",
+  "sectionSlug": "python-for-beginners-python-8-core-building-blocks-2",
+  "prefix": "py8",
+  "minutes": 22,
+  "topic": {
+    "labelKey": "topics.python-for-beginners.python-8.class-debugging-patterns.label",
+    "summaryKey": "topics.python-for-beginners.python-8.class-debugging-patterns.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python-for-beginners.python-8.class-debugging-patterns.cards.sketch0.title",
+      "sketchId": "1",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python-for-beginners.python-8.class-debugging-patterns.cards.sketch1.title",
+      "sketchId": "2",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python-for-beginners.python-8.class-debugging-patterns.cards.sketch2.title",
+      "sketchId": "3",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.python-for-beginners.python-8.class-debugging-patterns.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 2,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python-for-beginners.python-8.class-debugging-patterns.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "q1",
+            "titleKey": "topics.python-for-beginners.python-8.class-debugging-patterns.projectSteps.q1.title",
+            "exerciseKey": "q1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "q3",
+            "titleKey": "topics.python-for-beginners.python-8.class-debugging-patterns.projectSteps.q3.title",
+            "exerciseKey": "q3",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "q5",
+            "titleKey": "topics.python-for-beginners.python-8.class-debugging-patterns.projectSteps.q5.title",
+            "exerciseKey": "q5",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-for-beginners.python-8.class-debugging-patterns.1.title",
+      "bodyKey": "sketches.python-for-beginners.python-8.class-debugging-patterns.1.bodyMarkdown"
+    },
+    {
+      "id": "2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-for-beginners.python-8.class-debugging-patterns.2.title",
+      "bodyKey": "sketches.python-for-beginners.python-8.class-debugging-patterns.2.bodyMarkdown"
+    },
+    {
+      "id": "3",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-for-beginners.python-8.class-debugging-patterns.3.title",
+      "bodyKey": "sketches.python-for-beginners.python-8.class-debugging-patterns.3.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "q1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-for-beginners.python-8.class-debugging-patterns.quiz.q1",
+      "language": "python",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "Dog",
+            "stdout": "Dog",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "class Animal:\n    def __init__(self, name):\n        self.name = name\n\nmy_animal = Animal('Dog')\nprint(my_animal.name)"
+      }
+    },
+    {
+      "id": "q2",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-for-beginners.python-8.class-debugging-patterns.quiz.q2",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "q3",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-for-beginners.python-8.class-debugging-patterns.quiz.q3",
+      "language": "python",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "Buddy",
+            "stdout": "Woof!",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "class Dog:\n    def __init__(self, name):\n        self.name = name\n    def bark(self):\n        print('Woof!')\n\nmy_dog = Dog('Buddy')\nmy_dog.bark()"
+      }
+    },
+    {
+      "id": "q4",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-for-beginners.python-8.class-debugging-patterns.quiz.q4",
+      "choiceCount": 3,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "Animal"
+      }
+    },
+    {
+      "id": "q5",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-for-beginners.python-8.class-debugging-patterns.quiz.q5",
+      "language": "python",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "1984, George Orwell",
+            "stdout": "1984\nGeorge Orwell",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "class Book:\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\nmy_book = Book('1984', 'George Orwell')\nprint(my_book.title)\nprint(my_book.author)"
+      }
+    }
+  ]
+}

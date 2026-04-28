@@ -1,0 +1,176 @@
+{
+  "topicId": "attributes-and-init",
+  "subjectSlug": "python-for-beginners",
+  "moduleSlug": "python-8",
+  "sectionSlug": "python-for-beginners-python-8-core-building-blocks-1",
+  "prefix": "py8",
+  "minutes": 28,
+  "topic": {
+    "labelKey": "topics.python-for-beginners.python-8.attributes-and-init.label",
+    "summaryKey": "topics.python-for-beginners.python-8.attributes-and-init.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python-for-beginners.python-8.attributes-and-init.cards.sketch0.title",
+      "sketchId": "1",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.python-for-beginners.python-8.attributes-and-init.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 2,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python-for-beginners.python-8.attributes-and-init.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "q1",
+            "titleKey": "topics.python-for-beginners.python-8.attributes-and-init.projectSteps.q1.title",
+            "exerciseKey": "q1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "q2",
+            "titleKey": "topics.python-for-beginners.python-8.attributes-and-init.projectSteps.q2.title",
+            "exerciseKey": "q2",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "q3",
+            "titleKey": "topics.python-for-beginners.python-8.attributes-and-init.projectSteps.q3.title",
+            "exerciseKey": "q3",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-for-beginners.python-8.attributes-and-init.1.title",
+      "bodyKey": "sketches.python-for-beginners.python-8.attributes-and-init.1.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "q1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-for-beginners.python-8.attributes-and-init.quiz.q1",
+      "language": "python",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Toyota\nCorolla\n2020",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "class Car:\n    def __init__(self, make, model, year):\n        self.make = make\n        self.model = model\n        self.year = year\n\nmy_car = Car('Toyota', 'Corolla', 2020)\nprint(my_car.make)\nprint(my_car.model)\nprint(my_car.year)"
+      }
+    },
+    {
+      "id": "q2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-for-beginners.python-8.attributes-and-init.quiz.q2",
+      "language": "python",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "2020 Toyota Corolla",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "class Car:\n    def __init__(self, make, model, year):\n        self.make = make\n        self.model = model\n        self.year = year\n\n    def car_info(self):\n        return f'{self.year} {self.make} {self.model}'\n\nmy_car = Car('Toyota', 'Corolla', 2020)\nprint(my_car.car_info())"
+      }
+    },
+    {
+      "id": "q3",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-for-beginners.python-8.attributes-and-init.quiz.q3",
+      "language": "python",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Camry",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "class Car:\n    def __init__(self, make, model, year):\n        self.make = make\n        self.model = model\n        self.year = year\n\n    def update_model(self, new_model):\n        self.model = new_model\n\nmy_car = Car('Toyota', 'Corolla', 2020)\nmy_car.update_model('Camry')\nprint(my_car.model)"
+      }
+    },
+    {
+      "id": "q4",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-for-beginners.python-8.attributes-and-init.quiz.q4",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "c",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "q5",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-for-beginners.python-8.attributes-and-init.quiz.q5",
+      "choiceCount": 3,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "constructor"
+      }
+    }
+  ]
+}

@@ -33,6 +33,19 @@ function validatePythonExerciseShape(args: {
             (test) => typeof test.stdout === "string" && test.stdout.trim().length > 0,
         );
         const solutionPrints = /\bprint\s*\(/.test(solutionCode);
+        const booleanOnlyOutputs =
+            tests.length > 0 &&
+            tests.every((test) => {
+                const out = String(test.stdout ?? "").trim().toLowerCase();
+                return out === "true" || out === "false";
+            });
+        const expectsNamedStringOutputs =
+            /'eligible'|'not eligible'|'positive'|'negative'|'zero'|'a'|'b'|'c'|'f'/i.test(
+                exercise.prompt,
+            ) ||
+            /print\('(?:Eligible|Not eligible|Positive|Negative|Zero|A|B|C|F)'\)|print\("(?:Eligible|Not eligible|Positive|Negative|Zero|A|B|C|F)"\)/.test(
+                solutionCode,
+            );
 
         if (exercise.recipeType === "sql_query") {
             issues.push({
@@ -75,6 +88,17 @@ function validatePythonExerciseShape(args: {
                 exerciseId: exercise.id,
                 message:
                     `Exercise "${exercise.id}" is missing programming tests. Python code_input exercises must include at least one stdin/stdout test case.`,
+            });
+        }
+
+        if (booleanOnlyOutputs && expectsNamedStringOutputs) {
+            issues.push({
+                code: "PYTHON_PLACEHOLDER_BOOLEAN_TESTS_MISMATCH",
+                category: "tests",
+                severity: "error",
+                exerciseId: exercise.id,
+                message:
+                    `Exercise "${exercise.id}" uses placeholder True/False stdout tests, but the prompt/solution expects named string outputs such as Eligible, A/B/C/F, or similar labels.`,
             });
         }
 

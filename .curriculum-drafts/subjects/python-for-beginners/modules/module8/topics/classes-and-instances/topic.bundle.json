@@ -1,0 +1,188 @@
+{
+  "topicId": "classes-and-instances",
+  "subjectSlug": "python-for-beginners",
+  "moduleSlug": "python-8",
+  "sectionSlug": "python-for-beginners-python-8-core-building-blocks-1",
+  "prefix": "py8",
+  "minutes": 28,
+  "topic": {
+    "labelKey": "topics.python-for-beginners.python-8.classes-and-instances.label",
+    "summaryKey": "topics.python-for-beginners.python-8.classes-and-instances.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python-for-beginners.python-8.classes-and-instances.cards.sketch0.title",
+      "sketchId": "1",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python-for-beginners.python-8.classes-and-instances.cards.sketch1.title",
+      "sketchId": "2",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.python-for-beginners.python-8.classes-and-instances.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 2,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python-for-beginners.python-8.classes-and-instances.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "1",
+            "titleKey": "topics.python-for-beginners.python-8.classes-and-instances.projectSteps.1.title",
+            "exerciseKey": "1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "2",
+            "titleKey": "topics.python-for-beginners.python-8.classes-and-instances.projectSteps.2.title",
+            "exerciseKey": "2",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "3",
+            "titleKey": "topics.python-for-beginners.python-8.classes-and-instances.projectSteps.3.title",
+            "exerciseKey": "3",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-for-beginners.python-8.classes-and-instances.1.title",
+      "bodyKey": "sketches.python-for-beginners.python-8.classes-and-instances.1.bodyMarkdown"
+    },
+    {
+      "id": "2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-for-beginners.python-8.classes-and-instances.2.title",
+      "bodyKey": "sketches.python-for-beginners.python-8.classes-and-instances.2.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-for-beginners.python-8.classes-and-instances.quiz.1",
+      "language": "python",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "1984\nGeorge Orwell\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "class Book:\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\nmy_book = Book('1984', 'George Orwell')\nprint(my_book.title)\nprint(my_book.author)"
+      }
+    },
+    {
+      "id": "2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-for-beginners.python-8.classes-and-instances.quiz.2",
+      "language": "python",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "1984 by George Orwell\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "class Book:\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def description(self):\n        return f'{self.title} by {self.author}'\n\nmy_book = Book('1984', 'George Orwell')\nprint(my_book.description())"
+      }
+    },
+    {
+      "id": "3",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-for-beginners.python-8.classes-and-instances.quiz.3",
+      "language": "python",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "1984 by George Orwell\nBrave New World by Aldous Huxley\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "class Book:\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def description(self):\n        return f'{self.title} by {self.author}'\n\nbook1 = Book('1984', 'George Orwell')\nbook2 = Book('Brave New World', 'Aldous Huxley')\nprint(book1.description())\nprint(book2.description())"
+      }
+    },
+    {
+      "id": "4",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-for-beginners.python-8.classes-and-instances.quiz.4",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "5",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-for-beginners.python-8.classes-and-instances.quiz.5",
+      "choiceCount": 3,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "Dog"
+      }
+    }
+  ]
+}

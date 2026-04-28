@@ -1,7 +1,5 @@
-import type {
-    SemanticValidationIssue,
-    TopicAuthoringDraft,
-} from "./profileServices.js";
+import type { TopicAuthoringDraft } from "@zoeskoul/curriculum-contracts";
+import type { SemanticValidationIssue } from "./profileServices.js";
 
 function hasCodeFence(text: string): boolean {
     return /```[\s\S]*?```/.test(text);
@@ -44,10 +42,10 @@ function hasTryItYourself(text: string): boolean {
 }
 
 function hasMultilineCodeExample(text: string): boolean {
-    return codeFenceBlocks(text).some((block) => {
+    return codeFenceBlocks(text).some((block: string) => {
         const lines = block
             .split("\n")
-            .map((line) => line.trim())
+            .map((line: string) => line.trim())
             .filter(Boolean);
         return lines.length >= 2;
     });
@@ -59,10 +57,12 @@ export function validateProgrammingTeachingSketches(args: {
 }): SemanticValidationIssue[] {
     const issues: SemanticValidationIssue[] = [];
     const blocks = Array.isArray(args.draft.sketchBlocks) ? args.draft.sketchBlocks : [];
-    const bodies = blocks.map((block) => String(block.bodyMarkdown ?? ""));
+    const bodies = blocks.map((block: TopicAuthoringDraft["sketchBlocks"][number]) =>
+        String(block.bodyMarkdown ?? ""),
+    );
     const combined = bodies.join("\n\n");
 
-    if (!bodies.some((body) => hasWorkedExample(body))) {
+    if (!bodies.some((body: string) => hasWorkedExample(body))) {
         issues.push({
             code: "PROGRAMMING_WORKED_EXAMPLE_MISSING",
             category: "pedagogy",
@@ -72,7 +72,10 @@ export function validateProgrammingTeachingSketches(args: {
         });
     }
 
-    if (hasMultilineCodeExample(combined) && !bodies.some((body) => hasLineByLineExplanation(body))) {
+    if (
+        hasMultilineCodeExample(combined) &&
+        !bodies.some((body: string) => hasLineByLineExplanation(body))
+    ) {
         issues.push({
             code: "PROGRAMMING_LINE_BY_LINE_EXPLANATION_MISSING",
             category: "pedagogy",
@@ -82,7 +85,7 @@ export function validateProgrammingTeachingSketches(args: {
         });
     }
 
-    if (!bodies.some((body) => hasTryItYourself(body))) {
+    if (!bodies.some((body: string) => hasTryItYourself(body))) {
         issues.push({
             code: "PROGRAMMING_TRY_IT_YOURSELF_MISSING",
             category: "pedagogy",

@@ -22,6 +22,12 @@ import guardClausesJson from "./modules/module3/topics/guard-clauses/topic.bundl
 import ifElifElseJson from "./modules/module3/topics/if-elif-else/topic.bundle.json";
 import indentationAndBlocksJson from "./modules/module3/topics/indentation-and-blocks/topic.bundle.json";
 import truthinessAndEmptyValuesJson from "./modules/module3/topics/truthiness-and-empty-values/topic.bundle.json";
+import attributesAndInitJson from "./modules/module8/topics/attributes-and-init/topic.bundle.json";
+import classDebuggingPatternsJson from "./modules/module8/topics/class-debugging-patterns/topic.bundle.json";
+import classesAndInstancesJson from "./modules/module8/topics/classes-and-instances/topic.bundle.json";
+import encapsulationAndResponsibilityJson from "./modules/module8/topics/encapsulation-and-responsibility/topic.bundle.json";
+import listsOfObjectsJson from "./modules/module8/topics/lists-of-objects/topic.bundle.json";
+import methodsAndSelfJson from "./modules/module8/topics/methods-and-self/topic.bundle.json";
 
 
 const basicOperations = basicOperationsJson as SlimTopicManifest;
@@ -39,6 +45,12 @@ const guardClauses = guardClausesJson as SlimTopicManifest;
 const ifElifElse = ifElifElseJson as SlimTopicManifest;
 const indentationAndBlocks = indentationAndBlocksJson as SlimTopicManifest;
 const truthinessAndEmptyValues = truthinessAndEmptyValuesJson as SlimTopicManifest;
+const attributesAndInit = attributesAndInitJson as SlimTopicManifest;
+const classDebuggingPatterns = classDebuggingPatternsJson as SlimTopicManifest;
+const classesAndInstances = classesAndInstancesJson as SlimTopicManifest;
+const encapsulationAndResponsibility = encapsulationAndResponsibilityJson as SlimTopicManifest;
+const listsOfObjects = listsOfObjectsJson as SlimTopicManifest;
+const methodsAndSelf = methodsAndSelfJson as SlimTopicManifest;
 
 export const TOPIC_MANIFESTS: TopicManifestRefMap = {
   "basic-operations": basicOperations,
@@ -56,4 +68,10 @@ export const TOPIC_MANIFESTS: TopicManifestRefMap = {
   "if-elif-else": ifElifElse,
   "indentation-and-blocks": indentationAndBlocks,
   "truthiness-and-empty-values": truthinessAndEmptyValues,
+  "attributes-and-init": attributesAndInit,
+  "class-debugging-patterns": classDebuggingPatterns,
+  "classes-and-instances": classesAndInstances,
+  "encapsulation-and-responsibility": encapsulationAndResponsibility,
+  "lists-of-objects": listsOfObjects,
+  "methods-and-self": methodsAndSelf,
 };

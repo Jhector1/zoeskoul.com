@@ -10,7 +10,7 @@
               "title": "Understanding Truthiness"
             },
             "sketch1": {
-              "title": "Using Conditions"
+              "title": "Using Truthiness in Conditions"
             },
             "quiz": {
               "title": "Quiz"
@@ -20,44 +20,38 @@
             }
           },
           "projectSteps": {
-            "q1": {
-              "title": "Check Truthiness of Values"
+            "1": {
+              "title": "Check Truthiness of Input"
             },
-            "policy_code_input_1": {
-              "title": "Check whether a list has items"
+            "2": {
+              "title": "Evaluate Collection Truthiness"
             }
           },
           "quiz": {
-            "q1": {
-              "title": "Check Truthiness of Values",
-              "prompt": "Write a function that takes a value and returns 'Truthy' if the value is truthy and 'Falsy' if it is falsy.",
+            "1": {
+              "title": "Check Truthiness of Input",
+              "prompt": "Write a function that checks if the input value is truthy or falsy and returns a corresponding message. Then read the input value, call the function, and print the returned result.",
               "hint": "Focus on the programming task being asked for, not on copying final solution text.",
               "help": {
                 "concept": "Build the solution from the behavior the exercise is testing.",
                 "hint_1": "Think about which steps, functions, or statements are required for the task.",
                 "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
               },
-              "starterCode": "def check_truthiness(value):\n    # Your code here"
+              "starterCode": "def check_truthiness(value):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nvalue = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(check_truthiness(value))"
             },
-            "q2": {
-              "title": "Identify Falsy Values",
-              "prompt": "Choose the best value for the first missing blank in the statement.",
-              "hint": "Think of values that do not evaluate to True.",
+            "2": {
+              "title": "Evaluate Collection Truthiness",
+              "prompt": "Create a function that checks if a list is empty or not and returns a message. Then read the input value, call the function, and print the returned result.",
+              "hint": "Focus on the programming task being asked for, not the final solution text.",
               "help": {
-                "concept": "Falsy values in Python include the missing term, '', None, and empty collections.",
-                "hint_1": "Consider the numeric and string representations.",
-                "hint_2": "Remember that empty lists and dictionaries are also falsy."
+                "concept": "Build the solution from the behavior the exercise is testing.",
+                "hint_1": "Think about which steps, functions, or statements are needed.",
+                "hint_2": "Construct the solution from the result the prompt asks for."
               },
-              "template": "The first missing value is [blank1].",
-              "choices": [
-                "0",
-                "1",
-                "True",
-                "None"
-              ]
+              "starterCode": "def check_list(lst):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nlst = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(check_list(lst))"
             },
-            "q3": {
-              "title": "Which is Falsy?",
+            "3": {
+              "title": "Identify Falsy Values",
               "prompt": "Which of the following values is considered falsy in Python?",
               "hint": "Focus on the main concept being tested and eliminate choices that describe something different.",
               "help": {
@@ -66,14 +60,14 @@
                 "hint_2": "Pick the option that best matches the concept, not the one that simply repeats familiar wording."
               },
               "options": {
-                "a": "0",
-                "b": "1",
+                "a": "1",
+                "b": "'' (empty string)",
                 "c": "True",
-                "d": "5"
+                "d": "[] (empty list)"
               }
             },
-            "q4": {
-              "title": "Select Falsy Values",
+            "4": {
+              "title": "Select All Falsy Values",
               "prompt": "Select all values that are considered falsy in Python.",
               "hint": "Focus on the main concept being tested and eliminate choices that describe something different.",
               "help": {
@@ -83,21 +77,27 @@
               },
               "options": {
                 "a": "0",
-                "b": "''",
-                "c": "5",
-                "d": "None"
+                "b": "None",
+                "c": "False",
+                "d": "{} (empty dictionary)"
               }
             },
-            "policy_code_input_1": {
-              "title": "Check whether a list has items",
-              "prompt": "Read a line of text. Print `True` when the line is not empty and `False` when it is empty.",
-              "hint": "Focus on the concept being tested.",
+            "policy_fill_blank_choice_1": {
+              "title": "Choose the missing conditional keyword",
+              "prompt": "Fill in the missing Python keyword to continue the conditional chain correctly.",
+              "hint": "Focus on the missing concept rather than the exact missing word.",
               "help": {
-                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
-                "hint_1": "Eliminate choices or interpretations that do not match the task.",
-                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+                "concept": "The blank should be filled with the term that matches the job the statement is trying to perform.",
+                "hint_1": "Think about what the missing part is supposed to do in the statement.",
+                "hint_2": "Choose the term that best completes the meaning of the statement."
               },
-              "starterCode": "text = input()\n# Your code here"
+              "template": "if score >= 90:\n    print('A')\n___ score >= 80:\n    print('B')\nelse:\n    print('C')",
+              "choices": [
+                "elif",
+                "for",
+                "def",
+                "while"
+              ]
             }
           }
         }
@@ -110,11 +110,11 @@
         "truthiness-and-empty-values": {
           "1": {
             "title": "Understanding Truthiness",
-            "bodyMarkdown": "In Python, certain values are considered 'falsy', meaning they evaluate to False in a boolean context. These include: empty strings, zero, None, and empty collections (like lists and dictionaries)."
+            "bodyMarkdown": "In Python, certain values are considered 'falsy', meaning they evaluate to `False` in a boolean context. These include:\n- `0` (zero)\n- `''` (empty string)\n- `None`\n- `[]` (empty list)\n- `{}` (empty dictionary)\n\nFor example, if you check if a variable is truthy:\n```python\nvalue = ''\nif value:\n    print('This is truthy')\nelse:\n    print('This is falsy')\n```\nThis will print 'This is falsy' because an empty string is falsy.\n\n**Your turn:** Try changing the value to `0` or `None` and see what happens!\n\nLine by line: read the first statement to see which value is stored or checked, then follow each conditional branch in order to see which path prints the final result."
           },
           "2": {
-            "title": "Using Conditions",
-            "bodyMarkdown": "When using if statements, it's important to understand how Python evaluates these values. For example, an if statement will not execute its block if the condition evaluates to False."
+            "title": "Using Truthiness in Conditions",
+            "bodyMarkdown": "You can use truthiness to control the flow of your program. For example:\n```python\nuser_input = input('Enter something: ')\nif user_input:\n    print('You entered:', user_input)\nelse:\n    print('You did not enter anything.')\n```\nIn this code, if the user enters an empty string, the program will inform them that they did not enter anything.\n\n**Try this:** Modify the code to check for a specific string, like 'exit', and print a different message.\n\nLine by line: read the first statement to see which value is stored or checked, then follow each conditional branch in order to see which path prints the final result."
           }
         }
       }

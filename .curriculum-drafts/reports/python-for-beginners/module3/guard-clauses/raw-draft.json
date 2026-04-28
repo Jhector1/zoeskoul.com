@@ -5,122 +5,108 @@
   "sketchBlocks": [
     {
       "id": "1",
-      "title": "Introduction to Guard Clauses",
-      "bodyMarkdown": "Guard clauses are a programming pattern that allows you to simplify your code by handling edge cases early, thus avoiding deep nesting of conditionals."
+      "title": "Understanding Guard Clauses",
+      "bodyMarkdown": "Guard clauses are a way to simplify complex conditional logic by checking for conditions early and exiting the function if those conditions are not met. This helps to avoid deep nesting of if statements.\n\n**Example:**\n```python\ndef process_order(order):\n    if not order:\n        return 'No order provided'\n    if order['amount'] <= 0:\n        return 'Invalid order amount'\n    # Process the order\n    return 'Order processed'\n```\nIn this example, we check if the order is valid before proceeding with the processing logic. This keeps our code clean and easy to read.\n\n**Your turn:** Try implementing a guard clause in your own function!"
     },
     {
       "id": "2",
       "title": "Benefits of Guard Clauses",
-      "bodyMarkdown": "Using guard clauses can make your code more readable and maintainable. It helps in clearly defining the conditions that lead to early exits from a function."
+      "bodyMarkdown": "Using guard clauses can make your code more readable and maintainable. Instead of having multiple levels of nested if statements, you can handle edge cases upfront.\n\n**Example:**\n```python\ndef login(user):\n    if not user:\n        return 'User not found'\n    if not user.is_active:\n        return 'User is inactive'\n    return 'Login successful'\n```\nThis approach allows you to quickly see the conditions that prevent further execution. \n\n**Try this:** Implement a guard clause in a function that checks user permissions."
     }
   ],
   "quizDraft": [
     {
-      "id": "q1",
+      "id": "1",
       "kind": "code_input",
       "title": "Implement a Guard Clause",
-      "prompt": "Write a function that checks if a number is positive. If it is not, return 'Not positive'. Otherwise, return 'Positive'.",
-      "hint": "Think about how to handle the negative case first.",
-      "help": {
-        "concept": "Guard clauses allow you to exit a function early if certain conditions are met.",
-        "hint_1": "Check if the number is less than or equal to zero.",
-        "hint_2": "Use a return statement to exit the function if the condition is true."
-      },
-      "starterCode": "def check_positive(num):\n    # Your code here\n",
-      "solutionCode": "def check_positive(num):\n    if num <= 0:\n        return 'Not positive'\n    return 'Positive'",
+      "prompt": "Write a function that checks if a number is positive. If it is not, return 'Not a positive number'. Otherwise, return 'Positive number'.",
+      "starterCode": "def check_positive(number):\n    # Your code here\n",
+      "solutionCode": "def check_positive(number):\n    if number <= 0:\n        return 'Not a positive number'\n    return 'Positive number'",
       "tests": [
         {
-          "stdin": "5",
-          "stdout": "Positive"
+          "input": "5\n",
+          "output": "Positive number"
         },
         {
-          "stdin": "-3",
-          "stdout": "Not positive"
+          "input": "-3\n",
+          "output": "Not a positive number"
         }
       ]
     },
     {
-      "id": "q2",
+      "id": "2",
       "kind": "code_input",
-      "title": "Validate User Input",
-      "prompt": "Create a function that validates user input for age. If the age is less than 0 or greater than 120, return 'Invalid age'. Otherwise, return 'Valid age'.",
-      "hint": "Consider the boundaries for valid age.",
-      "help": {
-        "concept": "Guard clauses can help you validate input by checking for invalid cases first.",
-        "hint_1": "Check if the age is outside the valid range.",
-        "hint_2": "Use an if statement to return 'Invalid age' for out-of-range values."
-      },
-      "starterCode": "def validate_age(age):\n    # Your code here\n",
-      "solutionCode": "def validate_age(age):\n    if age < 0 or age > 120:\n        return 'Invalid age'\n    return 'Valid age'",
+      "title": "Validate User Age",
+      "prompt": "Create a function that checks if a user is old enough to vote. If the age is less than 18, return 'Too young to vote'. Otherwise, return 'Eligible to vote'.",
+      "starterCode": "def check_voting_age(age):\n    # Your code here\n",
+      "solutionCode": "def check_voting_age(age):\n    if age < 18:\n        return 'Too young to vote'\n    return 'Eligible to vote'",
       "tests": [
         {
-          "stdin": "25",
-          "stdout": "Valid age"
+          "input": "20\n",
+          "output": "Eligible to vote"
         },
         {
-          "stdin": "150",
-          "stdout": "Invalid age"
+          "input": "16\n",
+          "output": "Too young to vote"
         }
       ]
     },
     {
-      "id": "q3",
+      "id": "3",
       "kind": "single_choice",
-      "title": "Understanding Guard Clauses",
-      "prompt": "What is the main purpose of using guard clauses in programming?",
-      "hint": "They help simplify the logic in your functions.",
-      "help": {
-        "concept": "Guard clauses are used to handle edge cases early in a function.",
-        "hint_1": "They reduce the need for nested conditionals.",
-        "hint_2": "They improve code readability."
-      },
+      "title": "What is a guard clause?",
+      "prompt": "A guard clause is used to:",
       "options": [
-        "To make code more complex",
-        "To handle edge cases early",
-        "To increase nesting of conditionals",
-        "To avoid using functions"
+        "Simplify complex conditional logic",
+        "Increase the number of nested conditions",
+        "Make code harder to read",
+        "None of the above"
       ],
       "correctOptionIds": [
-        "b"
-      ]
+        "a"
+      ],
+      "hint": "Think about how guard clauses affect code structure.",
+      "help": {
+        "concept": "Guard clauses help streamline logic by handling edge cases early.",
+        "hint_1": "They reduce nesting in conditional statements.",
+        "hint_2": "They allow for early exits from functions."
+      }
     },
     {
-      "id": "q4",
+      "id": "4",
       "kind": "multi_choice",
-      "title": "Benefits of Guard Clauses",
-      "prompt": "Which of the following are benefits of using guard clauses?",
-      "hint": "Think about code clarity and maintenance.",
-      "help": {
-        "concept": "Guard clauses improve code clarity and reduce complexity.",
-        "hint_1": "They help in avoiding deep nesting.",
-        "hint_2": "They can make debugging easier."
-      },
+      "title": "Benefits of Using Guard Clauses",
+      "prompt": "Select all the benefits of using guard clauses.",
       "options": [
         "Improves code readability",
-        "Reduces nesting of conditionals",
-        "Makes debugging harder",
-        "Simplifies logic flow"
+        "Reduces nesting of conditions",
+        "Makes debugging easier",
+        "Increases code complexity"
       ],
       "correctOptionIds": [
         "a",
         "b",
-        "d"
-      ]
+        "c"
+      ],
+      "hint": "Consider how guard clauses change the structure of your code.",
+      "help": {
+        "concept": "Guard clauses enhance clarity and maintainability.",
+        "hint_1": "They help in identifying edge cases quickly.",
+        "hint_2": "Think about how they affect the flow of logic."
+      }
     },
     {
-      "id": "q5",
+      "id": "5",
       "kind": "fill_blank_choice",
       "title": "Complete the Guard Clause",
-      "prompt": "A guard clause is used to handle __________ early in a function.",
-      "template": "A guard clause is used to handle {blank} early in a function.",
+      "prompt": "In the function below, fill in the blank to create a guard clause that checks if the input is empty.\n```python\ndef process_input(data):\n    if _____:\n        return 'No data provided'\n    return 'Data processed'\n```",
+      "template": "In the function below, fill in the blank to create a guard clause that checks if the input is empty.",
       "choices": [
-        "edge cases",
-        "main logic",
-        "return values",
-        "exceptions"
+        "not data",
+        "data == ''",
+        "data is None"
       ],
-      "correctValue": "edge cases",
-      "hint": "Think about what conditions might cause a function to exit early."
+      "correctValue": "not data"
     }
   ]
 }

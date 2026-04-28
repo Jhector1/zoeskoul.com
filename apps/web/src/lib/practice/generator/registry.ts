@@ -1,45 +1,58 @@
-import type { Difficulty, GenKey } from "../types";
 import type { TopicContext } from "./generatorTypes";
-import type { RNG } from "./shared/rng";
-import type {
-    GeneratorOut,
-    SubjectModuleGenerator,
-} from "@/lib/practice/generator/engines/utils";
-
-import { makeGenPythonStatementsPart1 } from "./engines/python/python_part1";
-import {makeGenSqlStatementsSqlForBeginners} from "@/lib/practice/generator/engines/sql/sql_for_beginners";
+import type { SubjectModuleGenerator } from "@/lib/practice/generator/engines/utils";
+import { makeSubjectGeneratorFromManifest } from "@/lib/practice/generator/engines/json/makeSubjectGeneratorFromManifest";
+import { resolveModuleFromTopicSlug } from "@/lib/practice/generator/engines/json/resolveModuleFromTopicSlug";
+import {
+    SUBJECT_GENERATOR_SOURCES_BY_GENKEY,
+    type GeneratedSubjectGenKey,
+} from "@/lib/subjects/subjects.generated";
 
 export type TopicGeneratorFactory = (ctx: TopicContext) => SubjectModuleGenerator;
 
-export type GenFn = (
-    rng: RNG,
-    diff: Difficulty,
-    id: string,
-    opts?: {
-        variant?: string | null;
-        topicSlug?: string;
-        subject?: string | null;
-        seed?: unknown;
-    },
-) => { exercise: unknown; expected: unknown; archetype?: string };
+function makeManifestTopicGeneratorFactory(args: {
+    sources: (typeof SUBJECT_GENERATOR_SOURCES_BY_GENKEY)[GeneratedSubjectGenKey];
+}): TopicGeneratorFactory {
+    return (ctx) => {
+        const subjectSlug = String(ctx.subjectSlug ?? "").trim();
+        const topicSlug = String(ctx.topicSlug ?? "").trim();
 
-function wrapGenFn(fn: GenFn): TopicGeneratorFactory {
-    return (ctx) => (rng, diff, id): GeneratorOut => {
-        const out = fn(rng, diff, id, {
-            variant: (ctx as { variant?: string | null }).variant ?? null,
-            topicSlug: String((ctx as { topicSlug?: string }).topicSlug ?? ""),
-            subject: (ctx as { subjectSlug?: string | null }).subjectSlug ?? null,
+        const bySubject =
+            subjectSlug.length > 0
+                ? args.sources.find((source) => source.subjectSlug === subjectSlug)
+                : null;
+
+        const source =
+            bySubject ??
+            args.sources.find((candidate) =>
+                Boolean(
+                    resolveModuleFromTopicSlug({
+                        manifest: candidate.manifest,
+                        topicSlug,
+                    }),
+                ),
+            ) ??
+            args.sources[0];
+
+        return makeSubjectGeneratorFromManifest({
+            manifest: source.manifest,
+            topicManifests: source.topicManifests,
+            ctx,
         });
-
-        return {
-            archetype: String(out.archetype ?? "default"),
-            exercise: out.exercise,
-            expected: out.expected,
-        } as GeneratorOut;
     };
 }
 
-export const TOPIC_GENERATORS: Record<GenKey, TopicGeneratorFactory> = {
-    python_part1: (ctx) => makeGenPythonStatementsPart1(ctx),
-    sql_for_beginners: (ctx) =>makeGenSqlStatementsSqlForBeginners(ctx)
+const AUTO_TOPIC_GENERATORS = Object.fromEntries(
+    Object.entries(SUBJECT_GENERATOR_SOURCES_BY_GENKEY).map(([genKey, source]) => [
+        genKey,
+        makeManifestTopicGeneratorFactory({
+            sources: source,
+        }),
+    ]),
+) as Record<GeneratedSubjectGenKey, TopicGeneratorFactory>;
+
+const MANUAL_TOPIC_GENERATORS: Partial<Record<string, TopicGeneratorFactory>> = {};
+
+export const TOPIC_GENERATORS: Record<string, TopicGeneratorFactory> = {
+    ...AUTO_TOPIC_GENERATORS,
+    ...MANUAL_TOPIC_GENERATORS,
 };

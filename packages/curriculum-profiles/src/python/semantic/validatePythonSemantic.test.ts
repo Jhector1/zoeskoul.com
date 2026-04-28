@@ -208,6 +208,43 @@ describe("validatePythonSemantic", () => {
         expect(result.ok).toBe(false);
     });
 
+    it("flags placeholder boolean tests when the exercise expects named string outputs", async () => {
+        const result = await validatePythonSemantic({
+            seed: { topicId: "python-topic" } as any,
+            draft: {
+                title: "Topic",
+                summary: "Summary",
+                minutes: 10,
+                sketchBlocks: [],
+                quizDraft: [
+                    {
+                        id: "code-1",
+                        kind: "code_input",
+                        title: "Eligibility Checker",
+                        prompt:
+                            "Create a program that checks if a person is eligible to vote. Print 'Eligible' or 'Not eligible'.",
+                        hint: "Use an and condition.",
+                        help: {
+                            concept: "Check both conditions.",
+                            hint_1: "Use age and citizenship.",
+                            hint_2: "Print the matching label.",
+                        },
+                        starterCode: "age = 20\nis_citizen = True\n",
+                        solutionCode:
+                            "age = 20\nis_citizen = True\nif age >= 18 and is_citizen:\n    print('Eligible')\nelse:\n    print('Not eligible')\n",
+                        tests: [{ stdin: "1\n", stdout: "True\n", match: "exact" }],
+                        recipeType: "fixed_tests",
+                    },
+                ],
+            } as any,
+        });
+
+        expect(result.issues.map((issue) => issue.code)).toContain(
+            "PYTHON_PLACEHOLDER_BOOLEAN_TESTS_MISMATCH",
+        );
+        expect(result.ok).toBe(false);
+    });
+
     it("flags Python drafts that do not teach with an example and try-it-yourself sketch", async () => {
         const result = await validatePythonSemantic({
             seed: { topicId: "python-topic" } as any,

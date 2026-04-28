@@ -537,10 +537,14 @@ function normalizeCodeInput(item: Record<string, unknown>): DraftQuizItem {
                     stdin:
                         typeof x.stdin === "string"
                             ? x.stdin
+                            : typeof x.input === "string"
+                                ? x.input
                             : undefined,
                     stdout:
                         typeof x.stdout === "string"
                             ? x.stdout
+                            : typeof x.output === "string"
+                                ? x.output
                             : "",
                     match,
                 };

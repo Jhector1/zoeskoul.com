@@ -1,0 +1,197 @@
+{
+  "topicId": "comparisons-and-truth-values",
+  "subjectSlug": "python-for-beginners",
+  "moduleSlug": "python-3",
+  "sectionSlug": "python-for-beginners-python-3-core-building-blocks-1",
+  "prefix": "py3",
+  "minutes": 22,
+  "topic": {
+    "labelKey": "topics.python-for-beginners.python-3.comparisons-and-truth-values.label",
+    "summaryKey": "topics.python-for-beginners.python-3.comparisons-and-truth-values.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python-for-beginners.python-3.comparisons-and-truth-values.cards.sketch0.title",
+      "sketchId": "intro-to-comparisons",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python-for-beginners.python-3.comparisons-and-truth-values.cards.sketch1.title",
+      "sketchId": "truth-values",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.python-for-beginners.python-3.comparisons-and-truth-values.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 3,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python-for-beginners.python-3.comparisons-and-truth-values.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "compare_numbers",
+            "titleKey": "topics.python-for-beginners.python-3.comparisons-and-truth-values.projectSteps.compare_numbers.title",
+            "exerciseKey": "compare-numbers",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "truthiness_check",
+            "titleKey": "topics.python-for-beginners.python-3.comparisons-and-truth-values.projectSteps.truthiness_check.title",
+            "exerciseKey": "truthiness-check",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "intro-to-comparisons",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-for-beginners.python-3.comparisons-and-truth-values.intro-to-comparisons.title",
+      "bodyKey": "sketches.python-for-beginners.python-3.comparisons-and-truth-values.intro-to-comparisons.bodyMarkdown"
+    },
+    {
+      "id": "truth-values",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-for-beginners.python-3.comparisons-and-truth-values.truth-values.title",
+      "bodyKey": "sketches.python-for-beginners.python-3.comparisons-and-truth-values.truth-values.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "comparison-operators",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-for-beginners.python-3.comparisons-and-truth-values.quiz.comparison-operators",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "truthiness-in-python",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-for-beginners.python-3.comparisons-and-truth-values.quiz.truthiness-in-python",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "fill-in-the-blank-true-false",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-for-beginners.python-3.comparisons-and-truth-values.quiz.fill-in-the-blank-true-false",
+      "choiceCount": 2,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "True"
+      }
+    },
+    {
+      "id": "compare-numbers",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-for-beginners.python-3.comparisons-and-truth-values.quiz.compare-numbers",
+      "language": "python",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "5\n3\n",
+            "stdout": "First number is greater\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "2\n4\n",
+            "stdout": "First number is less\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "3\n3\n",
+            "stdout": "Both numbers are equal\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "a = int(input())\nb = int(input())\n\nif a > b:\n    print('First number is greater')\nelif a < b:\n    print('First number is less')\nelse:\n    print('Both numbers are equal')\n"
+      }
+    },
+    {
+      "id": "truthiness-check",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-for-beginners.python-3.comparisons-and-truth-values.quiz.truthiness-check",
+      "language": "python",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "0\n",
+            "stdout": "Value is falsy\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "'Hello'\n",
+            "stdout": "Value is truthy\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "''\n",
+            "stdout": "Value is falsy\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "import ast\n\nraw = input()\ntry:\n    value = ast.literal_eval(raw)\nexcept Exception:\n    value = raw\n\nif value:\n    print('Value is truthy')\nelse:\n    print('Value is falsy')\n"
+      }
+    }
+  ]
+}

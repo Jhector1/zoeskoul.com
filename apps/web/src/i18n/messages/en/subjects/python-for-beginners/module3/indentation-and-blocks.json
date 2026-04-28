@@ -10,7 +10,7 @@
               "title": "Understanding Indentation"
             },
             "sketch1": {
-              "title": "Blocks and Control Flow"
+              "title": "Common Indentation Errors"
             },
             "quiz": {
               "title": "Quiz"
@@ -20,84 +20,83 @@
             }
           },
           "projectSteps": {
-            "quiz4": {
-              "title": "Create a simple if-else statement."
+            "indentation_quiz_1": {
+              "title": "Fix the Indentation"
             },
-            "quiz5": {
-              "title": "Check for even or odd."
+            "indentation_quiz_2": {
+              "title": "Create an Indented Block"
             }
           },
           "quiz": {
-            "quiz1": {
+            "indentation-quiz-1": {
+              "title": "Fix the Indentation",
+              "prompt": "Your task is to correct the indentation in the following code snippet:",
+              "hint": "Break the task into the main query or code steps first.",
+              "help": {
+                "concept": "This task checks whether you can apply fix the indentation in a working solution.",
+                "hint_1": "Identify the table, columns, and condition or operation before writing the full solution.",
+                "hint_2": "Build the statement one piece at a time: select the right fields, then add the condition or operation that matches the prompt."
+              },
+              "starterCode": "if x > 10:\nprint('x is greater than 10')\nelse:\nprint('x is 10 or less')"
+            },
+            "indentation-quiz-2": {
+              "title": "Create an Indented Block",
+              "prompt": "Write a Python function that checks if a number is even or odd and prints the result. Ensure proper indentation.",
+              "hint": "Break the task into the main query or code steps first.",
+              "help": {
+                "concept": "This task checks whether you can apply create an indented block in a working solution.",
+                "hint_1": "Identify the table, columns, and condition or operation before writing the full solution.",
+                "hint_2": "Build the statement one piece at a time: select the right fields, then add the condition or operation that matches the prompt."
+              },
+              "starterCode": "def check_even_odd(num):\n# Your code here"
+            },
+            "indentation-quiz-3": {
               "title": "What does indentation control in Python?",
-              "prompt": "Choose the correct statement about indentation.",
-              "hint": "Think about how Python interprets code structure.",
+              "prompt": "What is the primary purpose of indentation in Python?",
+              "hint": "Think about how Python interprets your code.",
               "help": {
-                "concept": "Indentation in Python defines the grouping of statements. It is essential for the correct execution of control flow.",
-                "hint_1": "Indentation is not just for aesthetics; it has functional importance.",
-                "hint_2": "Consider how blocks of code are formed in other programming languages."
+                "concept": "Indentation in Python is crucial as it defines the blocks of code that belong together, such as those under an if statement.",
+                "hint_1": "It's not just about aesthetics.",
+                "hint_2": "Consider how other programming languages handle code blocks."
               },
               "options": {
-                "a": "It controls the execution speed of the program.",
-                "b": "It defines the structure of code blocks.",
-                "c": "It is optional and can be ignored.",
-                "d": "It is used only for comments."
+                "a": "To make the code look nice",
+                "b": "To define the structure of the code",
+                "c": "To increase execution speed",
+                "d": "To comment out code"
               }
             },
-            "quiz2": {
-              "title": "Which of the following statements about blocks in Python are true?",
-              "prompt": "Select all that apply.",
-              "hint": "Focus on the main concept being tested and eliminate choices that describe something different.",
+            "indentation-quiz-4": {
+              "title": "Identify Indentation Errors",
+              "prompt": "Select all the code snippets that contain indentation errors.",
+              "hint": "Look for inconsistent indentation.",
               "help": {
-                "concept": "Choose the option that matches the core idea described in the question without relying on repeated wording from the answer choices.",
-                "hint_1": "Rule out options that describe a different role, behavior, or concept than the question is testing.",
-                "hint_2": "Pick the option that best matches the concept, not the one that simply repeats familiar wording."
+                "concept": "Indentation errors occur when the code blocks are not properly aligned.",
+                "hint_1": "Check for lines that should be indented but aren't.",
+                "hint_2": "Remember that all lines in a block must have the same indentation level."
               },
               "options": {
-                "a": "Blocks can contain multiple statements.",
-                "b": "Each block must start with a new indentation level.",
-                "c": "Blocks can be nested within other blocks.",
-                "d": "Indentation can be mixed with tabs and spaces."
+                "a": "if x > 5:\nprint('x is greater than 5')",
+                "b": "print('This is outside any block')",
+                "c": "if x > 5:\n    print('x is greater than 5')\n  print('This is also inside the block')"
               }
             },
-            "quiz3": {
-              "title": "Complete the statement about indentation.",
-              "prompt": "In Python, indentation is used to define a ______.",
+            "indentation-quiz-5": {
+              "title": "Complete the Indentation Rule",
+              "prompt": "Choose the best value for the first missing blank in the statement.",
               "hint": "Focus on the missing concept or keyword.",
               "help": {
-                "concept": "This task checks the key idea behind complete the statement about indentation..",
+                "concept": "This task checks the key idea behind complete the indentation rule.",
                 "hint_1": "Look for the word or phrase that best matches the lesson concept.",
                 "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
               },
-              "template": "In Python, indentation is used to define a {blank}.",
+              "template": "The first missing value is [blank1].",
               "choices": [
-                "variable",
-                "function",
-                "block",
-                "loop"
+                "variables",
+                "functions",
+                "code blocks",
+                "comments"
               ]
-            },
-            "quiz4": {
-              "title": "Create a simple if-else statement.",
-              "prompt": "Write a program that checks if a number is positive or negative.",
-              "hint": "Focus on the programming task being asked for, not on copying final solution text.",
-              "help": {
-                "concept": "Build the solution from the behavior the exercise is testing.",
-                "hint_1": "Think about which steps, functions, or statements are required for the task.",
-                "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
-              },
-              "starterCode": "number = int(input('Enter a number: '))\n\n# Your code here"
-            },
-            "quiz5": {
-              "title": "Check for even or odd.",
-              "prompt": "Write a program that checks if a number is even or odd.",
-              "hint": "Focus on the programming task being asked for, not on copying final solution text.",
-              "help": {
-                "concept": "Build the solution from the behavior the exercise is testing.",
-                "hint_1": "Think about which steps, functions, or statements are required for the task.",
-                "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
-              },
-              "starterCode": "number = int(input('Enter a number: '))\n\n# Your code here"
             }
           }
         }
@@ -108,13 +107,13 @@
     "python-for-beginners": {
       "python-3": {
         "indentation-and-blocks": {
-          "sketch1": {
+          "indentation-basics": {
             "title": "Understanding Indentation",
-            "bodyMarkdown": "In Python, indentation is not just for readability; it defines the structure of the code. Blocks of code are defined by their indentation level."
+            "bodyMarkdown": "In Python, indentation is not just for readability; it defines the structure of your code. For example:\n\n```python\nif condition:\n    # This block is executed if the condition is true\n    print('Condition is true')\nelse:\n    # This block is executed if the condition is false\n    print('Condition is false')\n```\n\nIn this example, the indented lines under `if` and `else` are part of their respective blocks. If you forget to indent, Python will raise an `IndentationError`. \n\n**Your turn:** Try writing your own `if` statement with an `else` block!\n\nLine by line: read the first statement to see which value is stored or checked, then follow each conditional branch in order to see which path prints the final result."
           },
-          "sketch2": {
-            "title": "Blocks and Control Flow",
-            "bodyMarkdown": "Control flow statements like if, elif, and else rely on indentation to determine which statements belong to which block."
+          "indentation-error": {
+            "title": "Common Indentation Errors",
+            "bodyMarkdown": "Indentation errors can be frustrating. For instance, if you mix tabs and spaces, Python will not know how to interpret your code. Here's an example of a common mistake:\n\n```python\nif condition:\nprint('This will cause an error')\n```\n\nIn this case, the print statement should be indented. Always use either spaces or tabs consistently throughout your code.\n\n**Try this:** Fix the indentation in the example above.\n\nLine by line: read the first statement to see which value is stored or checked, then follow each conditional branch in order to see which path prints the final result."
           }
         }
       }

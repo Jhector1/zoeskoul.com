@@ -1,0 +1,29 @@
+export type RunCodeFn = (args: {
+    language: string;
+    code: string;
+    stdin?: string;
+    limits?: {
+        timeoutMs?: number;
+    };
+}) => Promise<{
+    ok: boolean;
+    stdout?: string;
+    stderr?: string;
+    exitCode?: number | null;
+    error?: string;
+    timedOut?: boolean;
+}>;
+
+let currentCodeRunner: RunCodeFn | null = null;
+
+export function setCodeRunner(fn: RunCodeFn) {
+    currentCodeRunner = fn;
+}
+
+export function clearCodeRunner() {
+    currentCodeRunner = null;
+}
+
+export function getCodeRunner(): RunCodeFn | null {
+    return currentCodeRunner;
+}

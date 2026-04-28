@@ -9,4 +9,7 @@ export * from "./review/buildReviewFromManifest.js";
 export * from "./review/reviewBuilders.js";
 export * from "./sketches/buildSketchesFromManifest.js";
 export * from "./topic/defineTopicBundle.js";
+export * from "./code/runner.js";
+export * from "./code/localRunner.js";
+export * from "./code/validateCodeAgainstTests.js";
 export * from "./sql/index.js";

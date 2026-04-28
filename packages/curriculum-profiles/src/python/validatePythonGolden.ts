@@ -17,16 +17,15 @@ export async function validatePythonGolden(args: {
 }): Promise<GoldenValidationReport> {
     const shared = await validateGoldenTopicBundle(args);
     const report = makeEmptyGoldenValidationReport(args.seed.topicId);
+    const codeGolden = await validateCodeProfileGolden({
+        profileId: "python",
+        expectedLanguage: "python",
+        allowedRecipeTypes: ["fixed_tests", "template_io"],
+        topicBundle: args.topicBundle,
+    });
 
     report.issues.push(...shared.issues);
-    report.issues.push(
-        ...validateCodeProfileGolden({
-            profileId: "python",
-            expectedLanguage: "python",
-            allowedRecipeTypes: ["fixed_tests", "template_io"],
-            topicBundle: args.topicBundle,
-        }),
-    );
+    report.issues.push(...codeGolden);
 
     report.ok = !report.issues.some((issue) => issue.severity === "error");
     return report;

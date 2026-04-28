@@ -62,7 +62,31 @@ describe("buildTopicAuthoringDraftPrompt", () => {
         });
 
         expect(prompt.system).toContain('prefer code_input recipeType "fixed_tests"');
-        expect(prompt.system).toContain("include at least one real stdin/stdout test case");
+        expect(prompt.system).toContain(
+            "include a tests array with one or more real stdin/stdout cases.",
+        );
+    });
+
+    it("renders exercise kind rules from a shared generic-to-specific contract", () => {
+        const prompt = buildTopicAuthoringDraftPrompt({
+            locale: "en",
+            seed: {
+                profileId: "python",
+                exercisePolicy: undefined,
+            } as any,
+            shape: {} as any,
+        });
+
+        expect(prompt.system).toContain("Exercise-kind contract (generic to specific):");
+        expect(prompt.system).toContain(
+            "single_choice: course-agnostic knowledge check with exactly one correct answer.",
+        );
+        expect(prompt.system).toContain(
+            "multi_choice: course-agnostic knowledge check with two or more genuinely correct answers when appropriate.",
+        );
+        expect(prompt.system).toContain(
+            "code_input: implementation exercise whose runtime/recipe details may vary by profile, language, and execution model.",
+        );
     });
 
     it("includes teaching-quality guidance for sketches and programming examples", () => {

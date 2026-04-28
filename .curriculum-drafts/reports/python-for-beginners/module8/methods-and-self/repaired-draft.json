@@ -1,0 +1,133 @@
+{
+  "title": "Methods and self",
+  "summary": "Add behavior to classes with instance methods.",
+  "minutes": 26,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Understanding Methods and Self",
+      "bodyMarkdown": "In Python, methods are functions that belong to a class. They define the behaviors of the objects created from that class. The first parameter of a method is always `self`, which refers to the instance of the class. This allows access to the attributes and other methods of the class.\n\n**Example:**\n```python\nclass Dog:\n    def __init__(self, name):\n        self.name = name\n\n    def bark(self):\n        return f'{self.name} says woof!'\n```\nIn this example, `Dog` is a class with an `__init__` method that initializes the dog's name and a `bark` method that uses `self` to access the name attribute.\n\n**Your turn:** Try creating your own class with methods!\n\nLine by line: read the first statement to see which value is stored or checked, then follow each conditional branch in order to see which path prints the final result."
+    },
+    {
+      "id": "sketch2",
+      "title": "Creating and Using Methods",
+      "bodyMarkdown": "To create a method, define it inside a class using the `def` keyword. Remember to include `self` as the first parameter. You can call methods on an instance of the class using the dot notation.\n\n**Example:**\n```python\nmy_dog = Dog('Buddy')\nprint(my_dog.bark())  # Output: Buddy says woof!\n```\nThis creates an instance of `Dog` named 'Buddy' and calls the `bark` method.\n\n**Try this:** Create a class `Cat` with a method `meow` that returns a string with the cat's name.\n\nLine by line: read the first statement to see which value is stored or checked, then follow each conditional branch in order to see which path prints the final result."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "quiz1",
+      "kind": "code_input",
+      "title": "Implement a Simple Class",
+      "prompt": "Create a class `Car` with an `__init__` method that initializes the `make` and `model` attributes. Add a method `describe` that returns a string describing the car. Use the provided object creation code to print the final result.",
+      "starterCode": "class Car:\n    def __init__(self, make, model):\n        # Initialize attributes\n        \n    def describe(self):\n        # Return a description of the car\n\nmy_car = Car('Toyota', 'Corolla')\nprint(my_car.describe())",
+      "solutionCode": "class Car:\n    def __init__(self, make, model):\n        self.make = make\n        self.model = model\n\n    def describe(self):\n        return f'This car is a {self.make} {self.model}.'\n\nmy_car = Car('Toyota', 'Corolla')\nprint(my_car.describe())",
+      "tests": [
+        {
+          "stdin": "",
+          "stdout": "This car is a Toyota Corolla.\n",
+          "match": "exact"
+        }
+      ],
+      "hint": "Focus on the programming task being asked for, not on copying final solution text.",
+      "help": {
+        "concept": "Build the solution from the behavior the exercise is testing.",
+        "hint_1": "Think about which steps, functions, or statements are required for the task.",
+        "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
+      }
+    },
+    {
+      "id": "quiz2",
+      "kind": "code_input",
+      "title": "Add a Method to a Class",
+      "prompt": "Extend the `Car` class by adding a method `start_engine` that returns a string indicating the engine has started. Use the provided object creation code to print the final result.",
+      "starterCode": "class Car:\n    def __init__(self, make, model):\n        self.make = make\n        self.model = model\n\n    def start_engine(self):\n        # Return a message that the engine has started\n\nmy_car = Car('Honda', 'Civic')\nprint(my_car.start_engine())",
+      "solutionCode": "class Car:\n    def __init__(self, make, model):\n        self.make = make\n        self.model = model\n\n    def start_engine(self):\n        return 'The engine has started.'\n\nmy_car = Car('Honda', 'Civic')\nprint(my_car.start_engine())",
+      "tests": [
+        {
+          "stdin": "",
+          "stdout": "The engine has started.\n",
+          "match": "exact"
+        }
+      ],
+      "hint": "Focus on the programming task being asked for, not the final solution text.",
+      "help": {
+        "concept": "Build the solution from the behavior the exercise is testing.",
+        "hint_1": "Think about which steps, functions, or statements are needed.",
+        "hint_2": "Construct the solution from the result the prompt asks for."
+      }
+    },
+    {
+      "id": "quiz3",
+      "kind": "multi_choice",
+      "title": "Identifying Class Components",
+      "prompt": "Which of the following are components of a class in Python?",
+      "options": [
+        "Attributes",
+        "Methods",
+        "Instances",
+        "Functions"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "hint": "Think about what defines a class.",
+      "help": {
+        "concept": "Focus on the core concept behind identifying class components.",
+        "hint_1": "Eliminate choices that do not match the main idea of the lesson.",
+        "hint_2": "Match the wording of the prompt to the concept practiced in the topic."
+      }
+    },
+    {
+      "id": "quiz4",
+      "kind": "fill_blank_choice",
+      "title": "Understanding Self",
+      "prompt": "In a class method, the first parameter is always called ______.",
+      "template": "In a class method, the first parameter is always called {blank}.",
+      "choices": [
+        "self",
+        "this",
+        "instance",
+        "object"
+      ],
+      "correctValue": "self",
+      "hint": "Focus on the missing concept or keyword.",
+      "help": {
+        "concept": "This task checks the key idea behind understanding the missing term.",
+        "hint_1": "Look for the word or phrase that best matches the lesson concept.",
+        "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
+      }
+    },
+    {
+      "id": "quiz5",
+      "kind": "code_input",
+      "title": "Create a Method for a Class",
+      "prompt": "Create a class `Book` with an `__init__` method that initializes the `title` and `author`. Add a method `info` that returns a string with the book's title and author. Use the provided object creation code to print the final result.",
+      "starterCode": "class Book:\n    def __init__(self, title, author):\n        # Initialize title and author\n        \n    def info(self):\n        # Return book information\n\nmy_book = Book('1984', 'George Orwell')\nprint(my_book.info())",
+      "solutionCode": "class Book:\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def info(self):\n        return f'Title: {self.title}, Author: {self.author}'\n\nmy_book = Book('1984', 'George Orwell')\nprint(my_book.info())",
+      "tests": [
+        {
+          "stdin": "",
+          "stdout": "Title: 1984, Author: George Orwell\n",
+          "match": "exact"
+        }
+      ],
+      "hint": "Focus on the programming task being asked for, not on copying final solution text.",
+      "help": {
+        "concept": "Build the solution from the behavior the exercise is testing.",
+        "hint_1": "Think about which steps, functions, or statements are required for the task.",
+        "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Build a Simple Gradebook",
+    "stepIds": [
+      "quiz1",
+      "quiz2",
+      "quiz5"
+    ]
+  }
+}

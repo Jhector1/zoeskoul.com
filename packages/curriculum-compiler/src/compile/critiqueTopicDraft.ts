@@ -4,7 +4,10 @@ import type {
     TopicAuthoringDraft,
 } from "@zoeskoul/curriculum-contracts";
 import type { AiProvider } from "@zoeskoul/curriculum-ai";
-import { getProfileServices } from "@zoeskoul/curriculum-profiles";
+import {
+    getProfileServices,
+    getSubjectShape,
+} from "@zoeskoul/curriculum-profiles";
 import { validateBlueprint } from "../validate/validateBlueprint.js";
 import { readTopicReports } from "../reports/readTopicReports.js";
 import { writeTopicReports } from "../reports/writeTopicReports.js";
@@ -12,6 +15,7 @@ import { reviewPreparedTopicDraft } from "../quality/reviewPreparedTopicDraft.js
 import { normalizeTopicAuthoringDraft } from "../normalize/normalizeTopicAuthoringDraft.js";
 import { repairTopicAuthoringDraft } from "../normalize/repairTopicAuthoringDraft.js";
 import { sanitizeHintLeaksInDraft } from "../normalize/sanitizeHintLeaksInDraft.js";
+import { buildTopicBundleFromDraft } from "../emit/buildTopicBundleFromDraft.js";
 import type { CompileProgressCallback } from "./compileProgress.js";
 import { resolvePlan } from "../spec/resolvePlan.js";
 import { findTopicPlanNode } from "../plan/findTopicPlanNode.js";
@@ -83,6 +87,7 @@ export async function critiqueTopicDraft(args: {
         throw new Error(`Topic not found in resolved course structure: ${args.topicId}`);
     }
 
+    const shape = getSubjectShape(args.blueprint.profileId as "sql" | "python");
     const profileServices = getProfileServices(args.blueprint.profileId);
 
     const seed = buildTopicSeedFromPlanNode({
@@ -106,8 +111,8 @@ export async function critiqueTopicDraft(args: {
         topicId: node.topic.topicId,
     });
 
-    const repairedDraft = (saved.repairedDraft ??
-        saved.rawDraft) as TopicAuthoringDraft | undefined;
+    const repairedDraft = (saved.rawDraft ??
+        saved.repairedDraft) as TopicAuthoringDraft | undefined;
 
     if (!repairedDraft) {
         throw new Error(
@@ -136,16 +141,21 @@ export async function critiqueTopicDraft(args: {
 
     const mergedRepairReport = {
         topicId: seed.topicId,
-        repairs: [
-            ...(saved.repairReport?.repairs ?? []),
-            ...(refreshedRepair.report.repairs ?? []),
-        ],
+        repairs: refreshedRepair.report.repairs ?? [],
     };
+
+    const topicBundle = buildTopicBundleFromDraft({
+        shape,
+        seed,
+        draft: preparedDraft,
+        moduleOrder: node.moduleIndex,
+        sectionOrder: node.sectionOrder,
+    });
 
     const review = await reviewPreparedTopicDraft({
         seed,
         draft: preparedDraft,
-        topicBundle: saved.topicBundle as any,
+        topicBundle,
         profileServices,
     });
 
@@ -158,7 +168,7 @@ export async function critiqueTopicDraft(args: {
         critiqueReport: review.critiqueReport,
         semanticReport: review.semanticReport,
         goldenReport: review.goldenReport,
-        topicBundle: saved.topicBundle,
+        topicBundle,
     });
 
     advanceProgress({

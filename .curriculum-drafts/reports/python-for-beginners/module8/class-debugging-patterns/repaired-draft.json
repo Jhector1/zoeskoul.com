@@ -1,0 +1,124 @@
+{
+  "title": "Class Debugging Patterns",
+  "summary": "Fix common attribute, method, and constructor mistakes.",
+  "minutes": 22,
+  "sketchBlocks": [
+    {
+      "id": "1",
+      "title": "Understanding Class Attributes",
+      "bodyMarkdown": "In Python, class attributes are variables that belong to the class itself. For example, if we have a class `Car`, we might have an attribute `number_of_wheels` that is common to all cars. Here's how you can define it:\n\n```python\nclass Car:\n    number_of_wheels = 4\n\nmy_car = Car()\nprint(my_car.number_of_wheels)  # Output: 4\n```\n\nTry it yourself: Create a class `Dog` with an attribute `species` set to 'Canine'.\n\nLine by line: read the first statement to see which value is stored or checked, then follow each conditional branch in order to see which path prints the final result."
+    },
+    {
+      "id": "2",
+      "title": "Defining Methods in Classes",
+      "bodyMarkdown": "Methods are functions defined inside a class that describe the behaviors of an object. For instance, in our `Car` class, we can define a method `drive` that prints a message:\n\n```python\nclass Car:\n    def drive(self):\n        print('The car is driving.')\n\nmy_car = Car()\nmy_car.drive()  # Output: The car is driving.\n```\n\nTry this: Add a method `stop` to the `Car` class that prints 'The car has stopped.'\n\nLine by line: read the first statement to see which value is stored or checked, then follow each conditional branch in order to see which path prints the final result."
+    },
+    {
+      "id": "3",
+      "title": "Constructors in Classes",
+      "bodyMarkdown": "Constructors are special methods that are called when an object is created. In Python, the constructor is defined using the `__init__` method. Here's an example:\n\n```python\nclass Car:\n    def __init__(self, color):\n        self.color = color\n\nmy_car = Car('red')\nprint(my_car.color)  # Output: red\n```\n\nYour turn: Modify the `Car` class to include a constructor that takes `make` and `model` as parameters.\n\nLine by line: read the first statement to see which value is stored or checked, then follow each conditional branch in order to see which path prints the final result."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "q1",
+      "kind": "code_input",
+      "title": "Fix the Class Constructor",
+      "prompt": "The following code has a mistake in the constructor. Fix it so that it correctly initializes the `name` attribute.\n\n```python\nclass Animal:\n    def __init__(self):\n        self.name = name\n\nmy_animal = Animal('Dog')\nprint(my_animal.name)\n```",
+      "starterCode": "class Animal:\n    def __init__(self, name):\n        self.name = name\n\nmy_animal = Animal('Dog')\nprint(my_animal.name)",
+      "solutionCode": "class Animal:\n    def __init__(self, name):\n        self.name = name\n\nmy_animal = Animal('Dog')\nprint(my_animal.name)",
+      "tests": [
+        {
+          "stdin": "Dog",
+          "stdout": "Dog"
+        }
+      ],
+      "hint": "Focus on the programming task being asked for, not on copying final solution text.",
+      "help": {
+        "concept": "Build the solution from the behavior the exercise is testing.",
+        "hint_1": "Think about which steps, functions, or statements are required for the task.",
+        "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
+      }
+    },
+    {
+      "id": "q2",
+      "kind": "multi_choice",
+      "title": "Identify Class Attributes",
+      "prompt": "Which of the following are class attributes?",
+      "options": [
+        "Attributes defined inside methods",
+        "Attributes defined outside methods but inside the class",
+        "Attributes defined in the constructor",
+        "Attributes defined in the global scope"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Think about where attributes are defined.",
+      "help": {
+        "concept": "Class attributes are defined within the class but outside of any methods.",
+        "hint_1": "Look for attributes that are not tied to any specific instance.",
+        "hint_2": "Attributes defined in the constructor are instance attributes."
+      }
+    },
+    {
+      "id": "q3",
+      "kind": "code_input",
+      "title": "Implement a Method",
+      "prompt": "Implement a method `bark` in the following `Dog` class that prints 'Woof!'.\n\n```python\nclass Dog:\n    def __init__(self, name):\n        self.name = name\n\nmy_dog = Dog('Buddy')\nmy_dog.bark()\n```",
+      "starterCode": "class Dog:\n    def __init__(self, name):\n        self.name = name\n\nmy_dog = Dog('Buddy')\n\n# Implement the bark method here",
+      "solutionCode": "class Dog:\n    def __init__(self, name):\n        self.name = name\n    def bark(self):\n        print('Woof!')\n\nmy_dog = Dog('Buddy')\nmy_dog.bark()",
+      "tests": [
+        {
+          "stdin": "Buddy",
+          "stdout": "Woof!"
+        }
+      ],
+      "hint": "Break the task into the main query or code steps first.",
+      "help": {
+        "concept": "This task checks whether you can apply implement a method in a working solution.",
+        "hint_1": "Identify the table, columns, and condition or operation before writing the full solution.",
+        "hint_2": "Build the statement one piece at a time: select the right fields, then add the condition or operation that matches the prompt."
+      }
+    },
+    {
+      "id": "q4",
+      "kind": "fill_blank_choice",
+      "title": "Complete the Class Definition",
+      "prompt": "Choose the best value for the first missing blank in the statement.",
+      "template": "The first missing value is [blank1].",
+      "choices": [
+        "Animal",
+        "Dog",
+        "Car"
+      ],
+      "correctValue": "Animal",
+      "hint": "Focus on the missing concept or keyword.",
+      "help": {
+        "concept": "This task checks the key idea behind complete the class definition.",
+        "hint_1": "Look for the word or phrase that best matches the lesson concept.",
+        "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
+      }
+    },
+    {
+      "id": "q5",
+      "kind": "code_input",
+      "title": "Create a Class with Attributes",
+      "prompt": "Create a class `Book` with attributes `title` and `author`. Initialize these attributes in the constructor.",
+      "starterCode": "class Book:\n    def __init__(self, title, author):\n        # Initialize attributes here\n\nmy_book = Book('1984', 'George Orwell')\nprint(my_book.title)\nprint(my_book.author)",
+      "solutionCode": "class Book:\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\nmy_book = Book('1984', 'George Orwell')\nprint(my_book.title)\nprint(my_book.author)",
+      "tests": [
+        {
+          "stdin": "1984, George Orwell",
+          "stdout": "1984\nGeorge Orwell"
+        }
+      ],
+      "hint": "Focus on the programming task being asked for, not on copying final solution text.",
+      "help": {
+        "concept": "Build the solution from the behavior the exercise is testing.",
+        "hint_1": "Think about which steps, functions, or statements are required for the task.",
+        "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
+      }
+    }
+  ]
+}

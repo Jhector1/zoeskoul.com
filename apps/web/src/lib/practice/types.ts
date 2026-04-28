@@ -9,6 +9,7 @@ import type {
     Vec3,
     WorkspaceLanguage,
 } from "@zoeskoul/practice-contracts";
+import type { GeneratedSubjectGenKey } from "@/lib/subjects/subjects.generated";
 
 // src/lib/practice/types.ts
 
@@ -27,8 +28,8 @@ export type Topic = TopicSlug;
  * Generator engine keys (ONLY engines you implement).
  */
 export type GenKey =
-    | "python_part1"
-    | "sql_for_beginners";
+    | GeneratedSubjectGenKey
+    | (string & {});
 
 export type ExerciseBase = {
     id: string;

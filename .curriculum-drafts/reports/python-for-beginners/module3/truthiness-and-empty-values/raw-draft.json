@@ -6,134 +6,104 @@
     {
       "id": "1",
       "title": "Understanding Truthiness",
-      "bodyMarkdown": "In Python, certain values are considered 'falsy', meaning they evaluate to False in a boolean context. These include: empty strings, zero, None, and empty collections (like lists and dictionaries)."
+      "bodyMarkdown": "In Python, certain values are considered 'falsy', meaning they evaluate to `False` in a boolean context. These include:\n- `0` (zero)\n- `''` (empty string)\n- `None`\n- `[]` (empty list)\n- `{}` (empty dictionary)\n\nFor example, if you check if a variable is truthy:\n```python\nvalue = ''\nif value:\n    print('This is truthy')\nelse:\n    print('This is falsy')\n```\nThis will print 'This is falsy' because an empty string is falsy.\n\n**Your turn:** Try changing the value to `0` or `None` and see what happens!"
     },
     {
       "id": "2",
-      "title": "Using Conditions",
-      "bodyMarkdown": "When using if statements, it's important to understand how Python evaluates these values. For example, an if statement will not execute its block if the condition evaluates to False."
+      "title": "Using Truthiness in Conditions",
+      "bodyMarkdown": "You can use truthiness to control the flow of your program. For example:\n```python\nuser_input = input('Enter something: ')\nif user_input:\n    print('You entered:', user_input)\nelse:\n    print('You did not enter anything.')\n```\nIn this code, if the user enters an empty string, the program will inform them that they did not enter anything.\n\n**Try this:** Modify the code to check for a specific string, like 'exit', and print a different message."
     }
   ],
   "quizDraft": [
     {
-      "id": "q1",
+      "id": "1",
       "kind": "code_input",
-      "title": "Check Truthiness of Values",
-      "prompt": "Write a function that takes a value and returns 'Truthy' if the value is truthy and 'Falsy' if it is falsy.",
-      "hint": "Consider how Python evaluates different types of values.",
-      "help": {
-        "concept": "In Python, certain values like 0, '', None, and empty collections are considered falsy.",
-        "hint_1": "Think about what values would return False in a condition.",
-        "hint_2": "You can use the 'if' statement to check the value directly."
-      },
+      "title": "Check Truthiness of Input",
+      "prompt": "Write a function that checks if the input value is truthy or falsy and returns a corresponding message.",
       "starterCode": "def check_truthiness(value):\n    # Your code here\n",
-      "solutionCode": "def check_truthiness(value):\n    return 'Truthy' if value else 'Falsy'",
+      "solutionCode": "def check_truthiness(value):\n    if value:\n        return 'This value is truthy.'\n    else:\n        return 'This value is falsy.'",
       "tests": [
         {
-          "stdin": "0",
-          "stdout": "Falsy"
+          "input": "''",
+          "output": "This value is falsy."
         },
         {
-          "stdin": "''",
-          "stdout": "Falsy"
+          "input": "'Hello'",
+          "output": "This value is truthy."
         },
         {
-          "stdin": "None",
-          "stdout": "Falsy"
+          "input": "0",
+          "output": "This value is falsy."
         },
         {
-          "stdin": "[1, 2, 3]",
-          "stdout": "Truthy"
+          "input": "None",
+          "output": "This value is falsy."
         }
       ]
     },
     {
-      "id": "q2",
-      "kind": "fill_blank_choice",
-      "title": "Identify Falsy Values",
-      "prompt": "Fill in the blank: In Python, the value ___ is considered falsy.",
-      "hint": "Think of values that do not evaluate to True.",
-      "help": {
-        "concept": "Falsy values in Python include 0, '', None, and empty collections.",
-        "hint_1": "Consider the numeric and string representations.",
-        "hint_2": "Remember that empty lists and dictionaries are also falsy."
-      },
-      "template": "In Python, the value ___ is considered falsy.",
-      "choices": [
-        "0",
-        "1",
-        "True",
-        "None"
-      ],
-      "correctValue": "0"
+      "id": "2",
+      "kind": "code_input",
+      "title": "Evaluate Collection Truthiness",
+      "prompt": "Create a function that checks if a list is empty or not and returns a message.",
+      "starterCode": "def check_list(lst):\n    # Your code here\n",
+      "solutionCode": "def check_list(lst):\n    if lst:\n        return 'The list is not empty.'\n    else:\n        return 'The list is empty.'",
+      "tests": [
+        {
+          "input": "[]",
+          "output": "The list is empty."
+        },
+        {
+          "input": "[1, 2, 3]",
+          "output": "The list is not empty."
+        }
+      ]
     },
     {
-      "id": "q3",
+      "id": "3",
       "kind": "single_choice",
-      "title": "Which is Falsy?",
+      "title": "Identify Falsy Values",
       "prompt": "Which of the following values is considered falsy in Python?",
-      "hint": "Only one of these values evaluates to False.",
-      "help": {
-        "concept": "Falsy values in Python include 0, '', None, and empty collections.",
-        "hint_1": "Think about the numeric and string representations.",
-        "hint_2": "Remember that empty lists and dictionaries are also falsy."
-      },
       "options": [
-        {
-          "id": "a",
-          "text": "0"
-        },
-        {
-          "id": "b",
-          "text": "1"
-        },
-        {
-          "id": "c",
-          "text": "True"
-        },
-        {
-          "id": "d",
-          "text": "5"
-        }
+        "1",
+        "'' (empty string)",
+        "True",
+        "[] (empty list)"
       ],
       "correctOptionIds": [
-        "a"
-      ]
+        "b",
+        "d"
+      ],
+      "hint": "Think about what values evaluate to False in conditions.",
+      "help": {
+        "concept": "In Python, certain values like empty strings and empty collections are considered falsy.",
+        "hint_1": "Look for values that represent 'nothing' or 'zero'.",
+        "hint_2": "Remember that both empty strings and empty lists are falsy."
+      }
     },
     {
-      "id": "q4",
+      "id": "4",
       "kind": "multi_choice",
-      "title": "Select Falsy Values",
+      "title": "Select All Falsy Values",
       "prompt": "Select all values that are considered falsy in Python.",
-      "hint": "There are multiple correct answers.",
-      "help": {
-        "concept": "Falsy values in Python include 0, '', None, and empty collections.",
-        "hint_1": "Consider both numeric and string representations.",
-        "hint_2": "Remember that empty lists and dictionaries are also falsy."
-      },
       "options": [
-        {
-          "id": "a",
-          "text": "0"
-        },
-        {
-          "id": "b",
-          "text": "''"
-        },
-        {
-          "id": "c",
-          "text": "5"
-        },
-        {
-          "id": "d",
-          "text": "None"
-        }
+        "0",
+        "None",
+        "False",
+        "{} (empty dictionary)"
       ],
       "correctOptionIds": [
         "a",
         "b",
+        "c",
         "d"
-      ]
+      ],
+      "hint": "Consider values that represent absence or emptiness.",
+      "help": {
+        "concept": "Falsy values in Python include zero, None, False, and empty collections.",
+        "hint_1": "Think about what values would not contribute to a true condition.",
+        "hint_2": "All of these options are examples of falsy values."
+      }
     }
   ]
 }

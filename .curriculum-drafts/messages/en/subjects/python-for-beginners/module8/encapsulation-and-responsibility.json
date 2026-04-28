@@ -1,0 +1,120 @@
+{
+  "topics": {
+    "python-for-beginners": {
+      "python-8": {
+        "encapsulation-and-responsibility": {
+          "label": "Encapsulation and Responsibility",
+          "summary": "Keep related data and behavior together in a class.",
+          "cards": {
+            "sketch0": {
+              "title": "Understanding Encapsulation"
+            },
+            "sketch1": {
+              "title": "The Importance of Responsibility"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Practice"
+            }
+          },
+          "projectSteps": {
+            "1": {
+              "title": "Create a Simple Class"
+            },
+            "2": {
+              "title": "Implement a Method"
+            },
+            "3": {
+              "title": "Add a Method to Calculate Age"
+            }
+          },
+          "quiz": {
+            "1": {
+              "title": "Create a Simple Class",
+              "prompt": "Define a class named `Book` that has attributes for `title` and `author`, and a method `get_info` that returns a string with the book's title and author. Use the provided object creation code to print the final result.",
+              "hint": "Focus on the programming task being asked for, not on copying final solution text.",
+              "help": {
+                "concept": "Build the solution from the behavior the exercise is testing.",
+                "hint_1": "Think about which steps, functions, or statements are required for the task.",
+                "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "class Book:\n    def __init__(self, title, author):\n        # Initialize attributes\n        \n    def get_info(self):\n        # Return book information\n\nbook = Book('1984', 'George Orwell')\nprint(book.get_info())"
+            },
+            "2": {
+              "title": "Implement a Method",
+              "prompt": "Add a method `update_author` to the `Book` class that allows changing the author of the book. Use the provided object creation code to print the final result.",
+              "hint": "Break the task into the main query or code steps first.",
+              "help": {
+                "concept": "This task checks whether you can apply implement a method in a working solution.",
+                "hint_1": "Identify the table, columns, and condition or operation before writing the full solution.",
+                "hint_2": "Build the statement one piece at a time: select the right fields, then add the condition or operation that matches the prompt."
+              },
+              "starterCode": "class Book:\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def get_info(self):\n        return f'Title: {self.title}, Author: {self.author}'\n\n    def update_author(self, new_author):\n        # Update the author here\n\nbook = Book('1984', 'George Orwell')\nbook.update_author('Orwell')\nprint(book.get_info())"
+            },
+            "3": {
+              "title": "Add a Method to Calculate Age",
+              "prompt": "Extend the `Dog` class to include a method `calculate_human_age` that converts the dog's age to human years (1 dog year = 7 human years). Use the provided object creation code to print the final result.",
+              "hint": "Focus on the programming task being asked for, not on copying final solution text.",
+              "help": {
+                "concept": "Build the solution from the behavior the exercise is testing.",
+                "hint_1": "Think about which steps, functions, or statements are required for the task.",
+                "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "class Dog:\n    def __init__(self, name, age):\n        self.name = name\n        self.age = age\n\n    def bark(self):\n        return 'Woof!'\n\n    def calculate_human_age(self):\n        # Calculate human age here\n\ndog = Dog('Buddy', 3)\nprint(dog.calculate_human_age())"
+            },
+            "4": {
+              "title": "Identify Encapsulation",
+              "prompt": "Which of the following statements correctly describe encapsulation?",
+              "hint": "Think about how classes manage their data.",
+              "help": {
+                "concept": "Encapsulation is about bundling data and methods that operate on that data, while also restricting direct access to some of the object's components.",
+                "hint_1": "Look for statements that mention combining data and methods.",
+                "hint_2": "Remember, encapsulation is not just about hiding data."
+              },
+              "options": {
+                "a": "Encapsulation hides the internal state of an object.",
+                "b": "Encapsulation allows direct access to an object's attributes.",
+                "c": "Encapsulation combines data and methods in a single unit.",
+                "d": "Encapsulation is only about data hiding."
+              }
+            },
+            "5": {
+              "title": "Complete the Definition of Encapsulation",
+              "prompt": "Encapsulation is the concept of _____ data and methods together in a class.",
+              "hint": "Focus on the missing concept or keyword.",
+              "help": {
+                "concept": "This task checks the key idea behind complete the definition of encapsulation.",
+                "hint_1": "Look for the word or phrase that best matches the lesson concept.",
+                "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
+              },
+              "template": "Encapsulation is the concept of {blank} data and methods together in a class.",
+              "choices": [
+                "combining",
+                "separating",
+                "ignoring"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-for-beginners": {
+      "python-8": {
+        "encapsulation-and-responsibility": {
+          "1": {
+            "title": "Understanding Encapsulation",
+            "bodyMarkdown": "Encapsulation is a fundamental concept in object-oriented programming. It refers to the bundling of data (attributes) and methods (functions) that operate on the data into a single unit, or class. This helps in organizing code and protecting the internal state of an object.\n\n**Example:**\n```python\nclass Dog:\n    def __init__(self, name, age):\n        self.name = name  # attribute\n        self.age = age    # attribute\n\n    def bark(self):\n        return 'Woof!'\n```\nIn this example, the `Dog` class encapsulates the `name` and `age` attributes along with the `bark` method. \n\n**Your turn:** Try creating your own class for a `Car` with attributes like `make` and `model`, and a method that describes the car.\n\nLine by line: read the first statement to see which value is stored or checked, then follow each conditional branch in order to see which path prints the final result."
+          },
+          "2": {
+            "title": "The Importance of Responsibility",
+            "bodyMarkdown": "In object-oriented design, each class should have a clear responsibility. This means that a class should only contain methods and attributes that are relevant to its purpose. This principle helps in maintaining clean and manageable code.\n\n**Example:**\n```python\nclass BankAccount:\n    def __init__(self, balance=0):\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n\n    def withdraw(self, amount):\n        if amount <= self.balance:\n            self.balance -= amount\n        else:\n            return 'Insufficient funds'\n```\nIn this example, the `BankAccount` class is responsible for managing the account balance and providing methods to deposit and withdraw money. \n\n**Try this:** Create a `Student` class that manages a student's name and grades.\n\nLine by line: read the first statement to see which value is stored or checked, then follow each conditional branch in order to see which path prints the final result."
+          }
+        }
+      }
+    }
+  }
+}

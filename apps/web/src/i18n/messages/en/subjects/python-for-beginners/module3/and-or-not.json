@@ -7,7 +7,10 @@
           "summary": "Combine conditions with boolean operators.",
           "cards": {
             "sketch0": {
-              "title": "Understanding Boolean Logic"
+              "title": "Understanding Boolean Operators"
+            },
+            "sketch1": {
+              "title": "Using 'or' and 'not'"
             },
             "quiz": {
               "title": "Quiz"
@@ -18,53 +21,54 @@
           },
           "projectSteps": {
             "1": {
-              "title": "Check Eligibility for a Discount"
+              "title": "Check Eligibility for Discount"
             },
             "2": {
-              "title": "Determine Voting Eligibility"
+              "title": "Membership Check"
             }
           },
           "quiz": {
             "1": {
-              "title": "Check Eligibility for a Discount",
-              "prompt": "Write a program that checks if a customer is eligible for a discount based on their membership status and purchase amount.",
-              "hint": "Focus on the programming task being asked for, not on copying final solution text.",
+              "title": "Check Eligibility for Discount",
+              "prompt": "Write a function that checks if a person is eligible for a discount based on their age and student status. Then read the input values, call the function, and print the returned result.",
+              "hint": "Focus on the concept being tested.",
               "help": {
-                "concept": "Build the solution from the behavior the exercise is testing.",
-                "hint_1": "Think about which steps, functions, or statements are required for the task.",
-                "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
+                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+                "hint_1": "Think about which steps, functions, or statements are needed.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
               },
-              "starterCode": "membership = input('Enter membership status (gold/silver/none): ')\npurchase_amount = float(input('Enter purchase amount: '))\n\n# Your code here"
+              "starterCode": "def check_discount(age, is_student):\n    # Your code here\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nage = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nis_student = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(check_discount(age, is_student))"
             },
             "2": {
-              "title": "Determine Voting Eligibility",
-              "prompt": "Create a program that checks if a person is eligible to vote based on their age and citizenship status.",
+              "title": "Membership Check",
+              "prompt": "Create a function that checks if a user is a member and returns a welcome message or a sign-up prompt. Then read the input value, call the function, and print the returned result.",
               "hint": "Focus on the programming task being asked for, not on copying final solution text.",
               "help": {
                 "concept": "Build the solution from the behavior the exercise is testing.",
                 "hint_1": "Think about which steps, functions, or statements are required for the task.",
                 "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
               },
-              "starterCode": "age = int(input('Enter your age: '))\ncitizenship = input('Are you a citizen? (yes/no): ')\n\n# Your code here"
+              "starterCode": "def membership_status(is_member):\n    # Your code here\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nis_member = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(membership_status(is_member))"
             },
             "3": {
-              "title": "Understanding AND Operator",
-              "prompt": "What does the AND operator do in boolean logic?",
-              "hint": "Focus on the main concept being tested and eliminate choices that describe something different.",
+              "title": "What does the 'and' operator do?",
+              "prompt": "Select the correct description of the 'and' operator.",
+              "hint": "Think about the main idea behind what does the 'and' operator do?.",
               "help": {
-                "concept": "Choose the option that matches the core idea described in the question without relying on repeated wording from the answer choices.",
-                "hint_1": "Rule out options that describe a different role, behavior, or concept than the question is testing.",
-                "hint_2": "Pick the option that best matches the concept, not the one that simply repeats familiar wording."
+                "concept": "Focus on the core concept behind what does the 'and' operator do?.",
+                "hint_1": "Eliminate choices that do not match the main idea of the lesson.",
+                "hint_2": "Match the wording of the prompt to the concept practiced in the topic."
               },
               "options": {
-                "a": "Returns true if at least one condition is true.",
-                "b": "Returns true only if both conditions are true.",
-                "c": "Returns false if both conditions are true."
+                "a": "It checks if both conditions are true.",
+                "b": "It checks if at least one condition is true.",
+                "c": "It negates a condition.",
+                "d": "It combines multiple conditions into one."
               }
             },
             "4": {
-              "title": "Identifying Boolean Operators",
-              "prompt": "Which of the following are boolean operators?",
+              "title": "Which of the following are boolean operators?",
+              "prompt": "Select all that apply.",
               "hint": "Focus on the concept being tested.",
               "help": {
                 "concept": "Think about the idea the question is checking, not the exact answer wording.",
@@ -72,26 +76,27 @@
                 "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
               },
               "options": {
-                "a": "AND",
-                "b": "OR",
-                "c": "IF",
-                "d": "NOT"
+                "a": "and",
+                "b": "or",
+                "c": "not",
+                "d": "if"
               }
             },
             "5": {
-              "title": "Complete the Logic Statement",
-              "prompt": "Fill in the blank: The expression 'x > 5 _____ y < 10' will evaluate to true if both conditions are true.",
-              "hint": "Think about how to combine conditions.",
+              "title": "Complete the statement.",
+              "prompt": "Choose the best value for the first missing blank in the statement.",
+              "hint": "Focus on the missing concept or keyword.",
               "help": {
-                "concept": "You can use boolean operators to combine conditions in logical expressions.",
-                "hint_1": "Consider which operator requires both conditions to be true.",
-                "hint_2": "This operator is commonly used in programming."
+                "concept": "This task checks the key idea behind complete the statement..",
+                "hint_1": "Look for the word or phrase that best matches the lesson concept.",
+                "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
               },
-              "template": "The expression 'x > 5 {blank} y < 10' will evaluate to true if both conditions are true.",
+              "template": "The first missing value is [blank1].",
               "choices": [
-                "AND",
-                "OR",
-                "NOT"
+                "negate",
+                "combine",
+                "evaluate",
+                "ignore"
               ]
             }
           }
@@ -104,8 +109,12 @@
       "python-3": {
         "and-or-not": {
           "1": {
-            "title": "Understanding Boolean Logic",
-            "bodyMarkdown": "Boolean logic is fundamental in programming, allowing us to combine conditions using operators like AND, OR, and NOT."
+            "title": "Understanding Boolean Operators",
+            "bodyMarkdown": "In Python, boolean operators like `and`, `or`, and `not` are used to combine conditional statements. For example:\n\n```python\nage = 20\nis_student = True\n\nif age >= 18 and is_student:\n    print('Eligible for student discount')\nelse:\n    print('Not eligible')\n```\n\nIn this example, the program checks if the person is both an adult and a student. If both conditions are true, it prints a message. \n\n**Try it yourself:** Modify the `age` or `is_student` variables to see how the output changes.\n\nLine by line: read the first statement to see which value is stored or checked, then follow each conditional branch in order to see which path prints the final result."
+          },
+          "2": {
+            "title": "Using 'or' and 'not'",
+            "bodyMarkdown": "The `or` operator allows you to check if at least one condition is true. The `not` operator negates a condition. For example:\n\n```python\nis_member = False\n\nif not is_member:\n    print('You need to sign up to access this feature')\nelse:\n    print('Welcome back!')\n```\n\nHere, if `is_member` is `False`, the message prompts the user to sign up. \n\n**Your turn:** Change the `is_member` variable to `True` and see what happens.\n\nLine by line: read the first statement to see which value is stored or checked, then follow each conditional branch in order to see which path prints the final result."
           }
         }
       }

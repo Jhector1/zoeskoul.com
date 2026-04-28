@@ -47,18 +47,18 @@
         "maxAttempts": 10,
         "steps": [
           {
-            "id": "q1",
-            "titleKey": "topics.python-for-beginners.python-3.truthiness-and-empty-values.projectSteps.q1.title",
-            "exerciseKey": "q1",
+            "id": "1",
+            "titleKey": "topics.python-for-beginners.python-3.truthiness-and-empty-values.projectSteps.1.title",
+            "exerciseKey": "1",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": 10
           },
           {
-            "id": "policy_code_input_1",
-            "titleKey": "topics.python-for-beginners.python-3.truthiness-and-empty-values.projectSteps.policy_code_input_1.title",
-            "exerciseKey": "policy_code_input_1",
+            "id": "2",
+            "titleKey": "topics.python-for-beginners.python-3.truthiness-and-empty-values.projectSteps.2.title",
+            "exerciseKey": "2",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
@@ -84,58 +84,71 @@
   ],
   "exercises": [
     {
-      "id": "q1",
+      "id": "1",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-for-beginners.python-3.truthiness-and-empty-values.quiz.q1",
+      "messageBase": "topics.python-for-beginners.python-3.truthiness-and-empty-values.quiz.1",
       "language": "python",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "0",
-            "stdout": "Falsy",
+            "stdin": "''",
+            "stdout": "This value is falsy.",
             "match": "exact"
           },
           {
-            "stdin": "''",
-            "stdout": "Falsy",
+            "stdin": "'Hello'",
+            "stdout": "This value is truthy.",
+            "match": "exact"
+          },
+          {
+            "stdin": "0",
+            "stdout": "This value is falsy.",
             "match": "exact"
           },
           {
             "stdin": "None",
-            "stdout": "Falsy",
+            "stdout": "This value is falsy.",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "def check_truthiness(value):\n    if value:\n        return 'This value is truthy.'\n    else:\n        return 'This value is falsy.'\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nvalue = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(check_truthiness(value))"
+      }
+    },
+    {
+      "id": "2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-for-beginners.python-3.truthiness-and-empty-values.quiz.2",
+      "language": "python",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "[]",
+            "stdout": "The list is empty.",
             "match": "exact"
           },
           {
             "stdin": "[1, 2, 3]",
-            "stdout": "Truthy",
+            "stdout": "The list is not empty.",
             "match": "exact"
           }
         ],
-        "solutionCode": "def check_truthiness(value):\n    return 'Truthy' if value else 'Falsy'"
+        "solutionCode": "def check_list(lst):\n    if lst:\n        return 'The list is not empty.'\n    else:\n        return 'The list is empty.'\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nlst = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(check_list(lst))"
       }
     },
     {
-      "id": "q2",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-for-beginners.python-3.truthiness-and-empty-values.quiz.q2",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "0"
-      }
-    },
-    {
-      "id": "q3",
+      "id": "3",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-for-beginners.python-3.truthiness-and-empty-values.quiz.q3",
+      "messageBase": "topics.python-for-beginners.python-3.truthiness-and-empty-values.quiz.3",
       "optionIds": [
         "a",
         "b",
@@ -144,15 +157,15 @@
       ],
       "expected": {
         "kind": "single_choice",
-        "optionId": "a"
+        "optionId": "b"
       }
     },
     {
-      "id": "q4",
+      "id": "4",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-for-beginners.python-3.truthiness-and-empty-values.quiz.q4",
+      "messageBase": "topics.python-for-beginners.python-3.truthiness-and-empty-values.quiz.4",
       "optionIds": [
         "a",
         "b",
@@ -164,33 +177,21 @@
         "optionIds": [
           "a",
           "b",
+          "c",
           "d"
         ]
       }
     },
     {
-      "id": "policy_code_input_1",
-      "kind": "code_input",
-      "purpose": "project",
+      "id": "policy_fill_blank_choice_1",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-for-beginners.python-3.truthiness-and-empty-values.quiz.policy_code_input_1",
-      "language": "python",
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "hello\n",
-            "stdout": "True\n",
-            "match": "exact"
-          },
-          {
-            "stdin": "\n",
-            "stdout": "False\n",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "text = input()\nif text:\n    print(True)\nelse:\n    print(False)"
+      "messageBase": "topics.python-for-beginners.python-3.truthiness-and-empty-values.quiz.policy_fill_blank_choice_1",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "elif"
       }
     }
   ]

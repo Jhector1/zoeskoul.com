@@ -1,0 +1,96 @@
+{
+  "title": "Encapsulation and Responsibility",
+  "summary": "Keep related data and behavior together in a class.",
+  "minutes": 22,
+  "sketchBlocks": [
+    {
+      "id": "1",
+      "title": "Understanding Encapsulation",
+      "bodyMarkdown": "Encapsulation is a fundamental concept in object-oriented programming. It refers to the bundling of data (attributes) and methods (functions) that operate on the data into a single unit, or class. This helps in organizing code and protecting the internal state of an object.\n\n**Example:**\n```python\nclass Dog:\n    def __init__(self, name, age):\n        self.name = name  # attribute\n        self.age = age    # attribute\n\n    def bark(self):\n        return 'Woof!'\n```\nIn this example, the `Dog` class encapsulates the `name` and `age` attributes along with the `bark` method. \n\n**Your turn:** Try creating your own class for a `Car` with attributes like `make` and `model`, and a method that describes the car."
+    },
+    {
+      "id": "2",
+      "title": "The Importance of Responsibility",
+      "bodyMarkdown": "In object-oriented design, each class should have a clear responsibility. This means that a class should only contain methods and attributes that are relevant to its purpose. This principle helps in maintaining clean and manageable code.\n\n**Example:**\n```python\nclass BankAccount:\n    def __init__(self, balance=0):\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n\n    def withdraw(self, amount):\n        if amount <= self.balance:\n            self.balance -= amount\n        else:\n            return 'Insufficient funds'\n```\nIn this example, the `BankAccount` class is responsible for managing the account balance and providing methods to deposit and withdraw money. \n\n**Try this:** Create a `Student` class that manages a student's name and grades."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "1",
+      "kind": "code_input",
+      "title": "Create a Simple Class",
+      "prompt": "Define a class named `Book` that has attributes for `title` and `author`, and a method `get_info` that returns a string with the book's title and author.",
+      "starterCode": "class Book:\n    def __init__(self, title, author):\n        # Initialize attributes\n        \n    def get_info(self):\n        # Return book information\n        ",
+      "solutionCode": "class Book:\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def get_info(self):\n        return f'Title: {self.title}, Author: {self.author}'",
+      "tests": [
+        {
+          "input": "book = Book('1984', 'George Orwell')\nprint(book.get_info())",
+          "output": "Title: 1984, Author: George Orwell"
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "kind": "code_input",
+      "title": "Implement a Method",
+      "prompt": "Add a method `update_author` to the `Book` class that allows changing the author of the book.",
+      "starterCode": "class Book:\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def get_info(self):\n        return f'Title: {self.title}, Author: {self.author}'\n\n    def update_author(self, new_author):\n        # Update the author here\n        ",
+      "solutionCode": "class Book:\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def get_info(self):\n        return f'Title: {self.title}, Author: {self.author}'\n\n    def update_author(self, new_author):\n        self.author = new_author",
+      "tests": [
+        {
+          "input": "book = Book('1984', 'George Orwell')\nbook.update_author('Orwell')\nprint(book.get_info())",
+          "output": "Title: 1984, Author: Orwell"
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "kind": "code_input",
+      "title": "Add a Method to Calculate Age",
+      "prompt": "Extend the `Dog` class to include a method `calculate_human_age` that converts the dog's age to human years (1 dog year = 7 human years).",
+      "starterCode": "class Dog:\n    def __init__(self, name, age):\n        self.name = name\n        self.age = age\n\n    def bark(self):\n        return 'Woof!'\n\n    def calculate_human_age(self):\n        # Calculate human age here\n        ",
+      "solutionCode": "class Dog:\n    def __init__(self, name, age):\n        self.name = name\n        self.age = age\n\n    def bark(self):\n        return 'Woof!'\n\n    def calculate_human_age(self):\n        return self.age * 7",
+      "tests": [
+        {
+          "input": "dog = Dog('Buddy', 3)\nprint(dog.calculate_human_age())",
+          "output": "21"
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "kind": "multi_choice",
+      "title": "Identify Encapsulation",
+      "prompt": "Which of the following statements correctly describe encapsulation?",
+      "options": [
+        "Encapsulation hides the internal state of an object.",
+        "Encapsulation allows direct access to an object's attributes.",
+        "Encapsulation combines data and methods in a single unit.",
+        "Encapsulation is only about data hiding."
+      ],
+      "correctOptionIds": [
+        "a",
+        "c"
+      ],
+      "hint": "Think about how classes manage their data.",
+      "help": {
+        "concept": "Encapsulation is about bundling data and methods that operate on that data, while also restricting direct access to some of the object's components.",
+        "hint_1": "Look for statements that mention combining data and methods.",
+        "hint_2": "Remember, encapsulation is not just about hiding data."
+      }
+    },
+    {
+      "id": "5",
+      "kind": "fill_blank_choice",
+      "title": "Complete the Definition of Encapsulation",
+      "prompt": "Encapsulation is the concept of _____ data and methods together in a class.",
+      "template": "Encapsulation is the concept of {blank} data and methods together in a class.",
+      "choices": [
+        "combining",
+        "separating",
+        "ignoring"
+      ],
+      "correctValue": "combining"
+    }
+  ]
+}

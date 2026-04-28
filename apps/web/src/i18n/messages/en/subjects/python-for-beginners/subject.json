@@ -8,16 +8,16 @@
   },
   "modules": {
     "python-for-beginners": {
-      "python-3": {
-        "title": "Conditions and Logic",
-        "description": "Help learners make programs choose different paths using comparisons and conditionals.",
+      "python-8": {
+        "title": "Object-Oriented Programming",
+        "description": "Introduce classes and objects as a way to model related state and behavior.",
         "outcomes": [
-          "Write if, elif, and else blocks",
-          "Use comparison and boolean logic",
-          "Design clear branching rules"
+          "Define simple classes",
+          "Create instances",
+          "Use methods and attributes"
         ],
         "why": [
-          "Builds confidence with conditions and logic.",
+          "Builds confidence with object-oriented programming.",
           "Prepares learners for the next skills in the course."
         ]
       }
@@ -25,25 +25,25 @@
   },
   "sections": {
     "python-for-beginners": {
-      "python-3": {
-        "python-for-beginners-python-3-core-building-blocks-1": {
-          "title": "Conditional Basics",
-          "description": "Learn if, elif, and else, comparisons and truth values, indentation and blocks through focused examples and practice.",
+      "python-8": {
+        "python-for-beginners-python-8-core-building-blocks-1": {
+          "title": "Class Basics",
+          "description": "Learn classes and instances, attributes and __init__, methods and self through focused examples and practice.",
           "weeks": null,
           "bullets": [
-            "If, Elif, and Else",
-            "Comparisons and Truth Values",
-            "Indentation and Blocks"
+            "Classes and Instances",
+            "Attributes and __init__",
+            "Methods and self"
           ]
         },
-        "python-for-beginners-python-3-core-building-blocks-2": {
-          "title": "Combining Conditions",
-          "description": "Learn and, or, and not, truthiness and empty values, guard clauses for cleaner logic through focused examples and practice.",
+        "python-for-beginners-python-8-core-building-blocks-2": {
+          "title": "Design With Objects",
+          "description": "Learn encapsulation and responsibility, lists of objects, class debugging patterns through focused examples and practice.",
           "weeks": null,
           "bullets": [
-            "And, Or, and Not",
-            "Truthiness and Empty Values",
-            "Guard Clauses for Cleaner Logic"
+            "Encapsulation and Responsibility",
+            "Lists of Objects",
+            "Class Debugging Patterns"
           ]
         }
       }

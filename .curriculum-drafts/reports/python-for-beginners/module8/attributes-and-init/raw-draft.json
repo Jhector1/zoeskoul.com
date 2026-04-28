@@ -1,0 +1,92 @@
+{
+  "title": "Attributes and __init__",
+  "summary": "Initialize object state with constructor parameters.",
+  "minutes": 28,
+  "sketchBlocks": [
+    {
+      "id": "1",
+      "title": "Understanding Attributes and __init__",
+      "bodyMarkdown": "In Python, classes are blueprints for creating objects. The `__init__` method is a special method called when an object is created. It allows you to initialize the object's attributes with values. For example:\n\n```python\nclass Dog:\n    def __init__(self, name, age):\n        self.name = name\n        self.age = age\n\nmy_dog = Dog('Buddy', 3)\nprint(my_dog.name)  # Output: Buddy\nprint(my_dog.age)   # Output: 3\n```\n\nIn this example, we created a `Dog` class with `name` and `age` attributes. The `__init__` method sets these attributes when we create a new `Dog` object. \n\n**Your turn:** Try creating your own class with an `__init__` method!"
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "q1",
+      "kind": "code_input",
+      "title": "Create a Class with Attributes",
+      "prompt": "Define a class called `Car` that has attributes for `make`, `model`, and `year`. Implement the `__init__` method to initialize these attributes.",
+      "starterCode": "class Car:\n    def __init__(self, make, model, year):\n        # Initialize attributes here\n        pass\n\n# Create an instance of Car\nmy_car = Car('Toyota', 'Corolla', 2020)\nprint(my_car.make)\nprint(my_car.model)\nprint(my_car.year)",
+      "solutionCode": "class Car:\n    def __init__(self, make, model, year):\n        self.make = make\n        self.model = model\n        self.year = year\n\nmy_car = Car('Toyota', 'Corolla', 2020)\nprint(my_car.make)\nprint(my_car.model)\nprint(my_car.year)",
+      "tests": [
+        {
+          "input": "",
+          "output": "Toyota\nCorolla\n2020"
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "kind": "code_input",
+      "title": "Add a Method to Your Class",
+      "prompt": "Add a method called `car_info` to the `Car` class that returns a string with the car's details.",
+      "starterCode": "class Car:\n    def __init__(self, make, model, year):\n        self.make = make\n        self.model = model\n        self.year = year\n\n    # Add car_info method here\n    pass\n\nmy_car = Car('Toyota', 'Corolla', 2020)\nprint(my_car.car_info())",
+      "solutionCode": "class Car:\n    def __init__(self, make, model, year):\n        self.make = make\n        self.model = model\n        self.year = year\n\n    def car_info(self):\n        return f'{self.year} {self.make} {self.model}'\n\nmy_car = Car('Toyota', 'Corolla', 2020)\nprint(my_car.car_info())",
+      "tests": [
+        {
+          "input": "",
+          "output": "2020 Toyota Corolla"
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "kind": "code_input",
+      "title": "Modify Your Class",
+      "prompt": "Modify the `Car` class to include a method that updates the car's model.",
+      "starterCode": "class Car:\n    def __init__(self, make, model, year):\n        self.make = make\n        self.model = model\n        self.year = year\n\n    def update_model(self, new_model):\n        # Update the model here\n        pass\n\nmy_car = Car('Toyota', 'Corolla', 2020)\nmy_car.update_model('Camry')\nprint(my_car.model)",
+      "solutionCode": "class Car:\n    def __init__(self, make, model, year):\n        self.make = make\n        self.model = model\n        self.year = year\n\n    def update_model(self, new_model):\n        self.model = new_model\n\nmy_car = Car('Toyota', 'Corolla', 2020)\nmy_car.update_model('Camry')\nprint(my_car.model)",
+      "tests": [
+        {
+          "input": "",
+          "output": "Camry"
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "kind": "multi_choice",
+      "title": "Understanding Class Attributes",
+      "prompt": "Which of the following statements about class attributes are true? Select all that apply.",
+      "options": [
+        "Attributes are defined inside the class using the __init__ method.",
+        "Attributes can only be strings.",
+        "Attributes can be accessed using the dot notation.",
+        "Attributes are unique to each instance of the class."
+      ],
+      "correctOptionIds": [
+        "a",
+        "c",
+        "d"
+      ],
+      "hint": "Think about how attributes are created and accessed in a class.",
+      "help": {
+        "concept": "Class attributes are defined in the __init__ method and can be accessed using dot notation. They can be of any data type and are typically unique to each instance.",
+        "hint_1": "Attributes are not limited to strings.",
+        "hint_2": "Consider how you create and access attributes in your class."
+      }
+    },
+    {
+      "id": "q5",
+      "kind": "fill_blank_choice",
+      "title": "Fill in the Blank",
+      "prompt": "The __init__ method is also known as the __________ method.",
+      "template": "The __init__ method is also known as the __________ method.",
+      "choices": [
+        "constructor",
+        "destructor",
+        "initializer"
+      ],
+      "correctValue": "constructor"
+    }
+  ]
+}

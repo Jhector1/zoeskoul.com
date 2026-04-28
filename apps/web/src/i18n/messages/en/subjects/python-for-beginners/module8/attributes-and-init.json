@@ -1,0 +1,113 @@
+{
+  "topics": {
+    "python-for-beginners": {
+      "python-8": {
+        "attributes-and-init": {
+          "label": "Attributes and __init__",
+          "summary": "Initialize object state with constructor parameters.",
+          "cards": {
+            "sketch0": {
+              "title": "Understanding Attributes and __init__"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Practice"
+            }
+          },
+          "projectSteps": {
+            "q1": {
+              "title": "Create a Class with Attributes"
+            },
+            "q2": {
+              "title": "Add a Method to Your Class"
+            },
+            "q3": {
+              "title": "Modify Your Class"
+            }
+          },
+          "quiz": {
+            "q1": {
+              "title": "Create a Class with Attributes",
+              "prompt": "Define a class called `Car` that has attributes for `make`, `model`, and `year`. Implement the `__init__` method to initialize these attributes.",
+              "hint": "Focus on the programming task being asked for, not on copying final solution text.",
+              "help": {
+                "concept": "Build the solution from the behavior the exercise is testing.",
+                "hint_1": "Think about which steps, functions, or statements are required for the task.",
+                "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "class Car:\n    def __init__(self, make, model, year):\n        # Initialize attributes here\n        pass\n\n# Create an instance of Car\nmy_car = Car('Toyota', 'Corolla', 2020)\nprint(my_car.make)\nprint(my_car.model)\nprint(my_car.year)"
+            },
+            "q2": {
+              "title": "Add a Method to Your Class",
+              "prompt": "Add a method called `car_info` to the `Car` class that returns a string with the car's details.",
+              "hint": "Focus on the programming task being asked for, not on copying final solution text.",
+              "help": {
+                "concept": "Build the solution from the behavior the exercise is testing.",
+                "hint_1": "Think about which steps, functions, or statements are required for the task.",
+                "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "class Car:\n    def __init__(self, make, model, year):\n        self.make = make\n        self.model = model\n        self.year = year\n\n    # Add car_info method here\n    pass\n\nmy_car = Car('Toyota', 'Corolla', 2020)\nprint(my_car.car_info())"
+            },
+            "q3": {
+              "title": "Modify Your Class",
+              "prompt": "Modify the `Car` class to include a method that updates the car's model.",
+              "hint": "Focus on the programming task being asked for, not on copying final solution text.",
+              "help": {
+                "concept": "Build the solution from the behavior the exercise is testing.",
+                "hint_1": "Think about which steps, functions, or statements are required for the task.",
+                "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "class Car:\n    def __init__(self, make, model, year):\n        self.make = make\n        self.model = model\n        self.year = year\n\n    def update_model(self, new_model):\n        # Update the model here\n        pass\n\nmy_car = Car('Toyota', 'Corolla', 2020)\nmy_car.update_model('Camry')\nprint(my_car.model)"
+            },
+            "q4": {
+              "title": "Understanding Class Attributes",
+              "prompt": "Which of the following statements about class attributes are true? Select all that apply.",
+              "hint": "Think about how attributes are created and accessed in a class.",
+              "help": {
+                "concept": "Class attributes are defined in the __init__ method and can be accessed using dot notation. They can be of any data type and are typically unique to each instance.",
+                "hint_1": "Attributes are not limited to strings.",
+                "hint_2": "Consider how you create and access attributes in your class."
+              },
+              "options": {
+                "a": "Attributes are defined inside the class using the __init__ method.",
+                "b": "Attributes can only be strings.",
+                "c": "Attributes can be accessed using the dot notation.",
+                "d": "Attributes are unique to each instance of the class."
+              }
+            },
+            "q5": {
+              "title": "Fill in the Blank",
+              "prompt": "Choose the best value for the first missing blank in the statement.",
+              "hint": "Focus on the missing concept or keyword.",
+              "help": {
+                "concept": "This task checks the key idea behind fill in the blank.",
+                "hint_1": "Look for the word or phrase that best matches the lesson concept.",
+                "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
+              },
+              "template": "The first missing value is [blank1].",
+              "choices": [
+                "constructor",
+                "destructor",
+                "initializer"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-for-beginners": {
+      "python-8": {
+        "attributes-and-init": {
+          "1": {
+            "title": "Understanding Attributes and __init__",
+            "bodyMarkdown": "In Python, classes are blueprints for creating objects. The `__init__` method is a special method called when an object is created. It allows you to initialize the object's attributes with values. For example:\n\n```python\nclass Dog:\n    def __init__(self, name, age):\n        self.name = name\n        self.age = age\n\nmy_dog = Dog('Buddy', 3)\nprint(my_dog.name)  # Output: Buddy\nprint(my_dog.age)   # Output: 3\n```\n\nIn this example, we created a `Dog` class with `name` and `age` attributes. The `__init__` method sets these attributes when we create a new `Dog` object. \n\n**Your turn:** Try creating your own class with an `__init__` method!\n\nLine by line: read the first statement to see which value is stored or checked, then follow each conditional branch in order to see which path prints the final result."
+          }
+        }
+      }
+    }
+  }
+}

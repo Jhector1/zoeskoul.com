@@ -20,6 +20,7 @@ const outputFile = path.join(subjectsRoot, "subjects.generated.ts");
 type SubjectManifestJson = {
     subject?: {
         slug?: string;
+        genKey?: string;
     };
 };
 
@@ -28,8 +29,11 @@ async function main() {
 
     const subjectEntries: Array<{
         slug: string;
+        genKey: string;
         importName: string;
+        topicsImportName: string;
         importPath: string;
+        topicsImportPath: string;
     }> = [];
 
     for (const subjectName of subjectDirs) {
@@ -42,6 +46,7 @@ async function main() {
 
         const json = await readJsonFile<SubjectManifestJson>(manifestFile);
         const manifestSlug = String(json.subject?.slug ?? subjectName);
+        const genKey = String(json.subject?.genKey ?? "").trim();
 
         if (json.subject?.slug && json.subject.slug !== subjectName) {
             throw new Error(
@@ -51,10 +56,17 @@ async function main() {
             );
         }
 
+        if (!genKey) {
+            throw new Error(`Missing subject.genKey in ${manifestFile}`);
+        }
+
         subjectEntries.push({
             slug: manifestSlug,
+            genKey,
             importName: toSafeIdentifier(manifestSlug, "subjectManifest", "s"),
+            topicsImportName: toSafeIdentifier(`${manifestSlug}_topic_manifests`, "topicManifests", "t"),
             importPath: `./${subjectName}/subject.manifest.json`,
+            topicsImportPath: `./${subjectName}/topics.generated`,
         });
     }
 
@@ -63,25 +75,72 @@ async function main() {
         "subject slug",
         outputFile,
     );
-
-    const importLines = subjectEntries.map(
-        (entry) => `import ${entry.importName} from "${entry.importPath}";`,
-    );
+    const importLines = subjectEntries.flatMap((entry) => [
+        `import ${entry.importName} from "${entry.importPath}";`,
+        `import { TOPIC_MANIFESTS as ${entry.topicsImportName} } from "${entry.topicsImportPath}";`,
+    ]);
 
     const mapLines = subjectEntries.map(
         (entry) =>
             `  ${JSON.stringify(entry.slug)}: ${entry.importName} as SubjectManifest,`,
     );
 
+    const uniqueGenKeys = Array.from(new Set(subjectEntries.map((entry) => entry.genKey)));
+    const genKeyType =
+        uniqueGenKeys.length > 0
+            ? uniqueGenKeys.map((genKey) => JSON.stringify(genKey)).join(" | ")
+            : "never";
+
+    const sourceLines = subjectEntries.map(
+        (entry) => `  ${JSON.stringify(entry.slug)}: {
+    subjectSlug: ${JSON.stringify(entry.slug)},
+    genKey: ${JSON.stringify(entry.genKey)},
+    manifest: ${entry.importName} as SubjectManifest,
+    topicManifests: ${entry.topicsImportName} as TopicManifestRefMap,
+  },`,
+    );
+
+    const sourceByGenKeyLines = uniqueGenKeys.map(
+        (genKey) =>
+            `  ${JSON.stringify(genKey)}: [${subjectEntries
+                .filter((entry) => entry.genKey === genKey)
+                .map((entry) => `SUBJECT_GENERATOR_SOURCES[${JSON.stringify(entry.slug)}]`)
+                .join(", ")}],`,
+    );
+
     const fileContents = `/* eslint-disable */
 // AUTO-GENERATED FILE. DO NOT EDIT.
 // Run: pnpm gen:subject-manifests
 
-import type { SubjectManifest } from "@/lib/subjects/_core/subjectManifestTypes";
+import type {
+  SubjectManifest,
+  TopicManifestRefMap,
+} from "@/lib/subjects/_core/subjectManifestTypes";
 ${importLines.length ? `\n${importLines.join("\n")}\n` : ""}
+
+export type GeneratedSubjectGenKey = ${genKeyType};
 
 export const SUBJECT_MANIFESTS: Record<string, SubjectManifest> = {
 ${mapLines.join("\n")}
+};
+
+export const SUBJECT_GENERATOR_SOURCES: Record<
+  string,
+  {
+    subjectSlug: string;
+    genKey: GeneratedSubjectGenKey;
+    manifest: SubjectManifest;
+    topicManifests: TopicManifestRefMap;
+  }
+> = {
+${sourceLines.join("\n")}
+};
+
+export const SUBJECT_GENERATOR_SOURCES_BY_GENKEY: Record<
+  GeneratedSubjectGenKey,
+  Array<(typeof SUBJECT_GENERATOR_SOURCES)[keyof typeof SUBJECT_GENERATOR_SOURCES]>
+> = {
+${sourceByGenKeyLines.join("\n")}
 };
 `;
 

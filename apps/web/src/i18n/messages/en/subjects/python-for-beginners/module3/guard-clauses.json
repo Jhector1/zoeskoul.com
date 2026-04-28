@@ -7,7 +7,7 @@
           "summary": "Use early checks to simplify nested conditionals.",
           "cards": {
             "sketch0": {
-              "title": "Introduction to Guard Clauses"
+              "title": "Understanding Guard Clauses"
             },
             "sketch1": {
               "title": "Benefits of Guard Clauses"
@@ -20,83 +20,82 @@
             }
           },
           "projectSteps": {
-            "q1": {
+            "1": {
               "title": "Implement a Guard Clause"
             },
-            "q2": {
-              "title": "Validate User Input"
+            "2": {
+              "title": "Validate User Age"
             }
           },
           "quiz": {
-            "q1": {
+            "1": {
               "title": "Implement a Guard Clause",
-              "prompt": "Write a function that checks if a number is positive. If it is not, return 'Not positive'. Otherwise, return 'Positive'.",
-              "hint": "Focus on the concept being tested.",
+              "prompt": "Write a function that checks if a number is positive. If it is not, return 'Not a positive number'. Otherwise, return 'Positive number'. Then read the input value, call the function, and print the returned result.",
+              "hint": "Break the task into the main query or code steps first.",
               "help": {
-                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
-                "hint_1": "Think about which steps, functions, or statements are needed.",
-                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+                "concept": "This task checks whether you can apply implement a guard clause in a working solution.",
+                "hint_1": "Identify the table, columns, and condition or operation before writing the full solution.",
+                "hint_2": "Build the statement one piece at a time: select the right fields, then add the condition or operation that matches the prompt."
               },
-              "starterCode": "def check_positive(num):\n    # Your code here"
+              "starterCode": "def check_positive(number):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnumber = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(check_positive(number))"
             },
-            "q2": {
-              "title": "Validate User Input",
-              "prompt": "Create a function that validates user input for age. If the age is less than 0 or greater than 120, return 'Invalid age'. Otherwise, return 'Valid age'.",
-              "hint": "Focus on the programming task being asked for, not on copying final solution text.",
+            "2": {
+              "title": "Validate User Age",
+              "prompt": "Create a function that checks if a user is old enough to vote. If the age is less than 18, return 'Too young to vote'. Otherwise, return 'Eligible to vote'. Then read the input value, call the function, and print the returned result.",
+              "hint": "Break the task into the main query or code steps first.",
               "help": {
-                "concept": "Build the solution from the behavior the exercise is testing.",
-                "hint_1": "Think about which steps, functions, or statements are required for the task.",
-                "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
+                "concept": "This task checks whether you can apply validate user age in a working solution.",
+                "hint_1": "Identify the table, columns, and condition or operation before writing the full solution.",
+                "hint_2": "Build the statement one piece at a time: select the right fields, then add the condition or operation that matches the prompt."
               },
-              "starterCode": "def validate_age(age):\n    # Your code here"
+              "starterCode": "def check_voting_age(age):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nage = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(check_voting_age(age))"
             },
-            "q3": {
-              "title": "Understanding Guard Clauses",
-              "prompt": "What is the main purpose of using guard clauses in programming?",
-              "hint": "Focus on the main concept being tested and eliminate choices that describe something different.",
+            "3": {
+              "title": "What is a guard clause?",
+              "prompt": "A guard clause is used to:",
+              "hint": "Think about how guard clauses affect code structure.",
               "help": {
-                "concept": "Choose the option that matches the core idea described in the question without relying on repeated wording from the answer choices.",
-                "hint_1": "Rule out options that describe a different role, behavior, or concept than the question is testing.",
-                "hint_2": "Pick the option that best matches the concept, not the one that simply repeats familiar wording."
+                "concept": "Guard clauses help streamline logic by handling edge cases early.",
+                "hint_1": "They reduce nesting in conditional statements.",
+                "hint_2": "They allow for early exits from functions."
               },
               "options": {
-                "a": "To make code more complex",
-                "b": "To handle edge cases early",
-                "c": "To increase nesting of conditionals",
-                "d": "To avoid using functions"
+                "a": "Simplify complex conditional logic",
+                "b": "Increase the number of nested conditions",
+                "c": "Make code harder to read",
+                "d": "None of the above"
               }
             },
-            "q4": {
-              "title": "Benefits of Guard Clauses",
-              "prompt": "Which of the following are benefits of using guard clauses?",
-              "hint": "Think about code clarity and maintenance.",
+            "4": {
+              "title": "Benefits of Using Guard Clauses",
+              "prompt": "Select all the benefits of using guard clauses.",
+              "hint": "Consider how guard clauses change the structure of your code.",
               "help": {
-                "concept": "Guard clauses improve code clarity and reduce complexity.",
-                "hint_1": "They help in avoiding deep nesting.",
-                "hint_2": "They can make debugging easier."
+                "concept": "Guard clauses enhance clarity and maintainability.",
+                "hint_1": "They help in identifying edge cases quickly.",
+                "hint_2": "Think about how they affect the flow of logic."
               },
               "options": {
                 "a": "Improves code readability",
-                "b": "Reduces nesting of conditionals",
-                "c": "Makes debugging harder",
-                "d": "Simplifies logic flow"
+                "b": "Reduces nesting of conditions",
+                "c": "Makes debugging easier",
+                "d": "Increases code complexity"
               }
             },
-            "q5": {
+            "5": {
               "title": "Complete the Guard Clause",
-              "prompt": "A guard clause is used to handle __________ early in a function.",
-              "hint": "Think about what conditions might cause a function to exit early.",
+              "prompt": "In the function below, fill in the blank to create a guard clause that checks if the input is empty.\n```python\ndef process_input(data):\n    if _____:\n        return 'No data provided'\n    return 'Data processed'\n```",
+              "hint": "Focus on the missing concept or keyword.",
               "help": {
                 "concept": "This task checks the key idea behind complete the guard clause.",
                 "hint_1": "Look for the word or phrase that best matches the lesson concept.",
                 "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
               },
-              "template": "A guard clause is used to handle {blank} early in a function.",
+              "template": "In the function below, fill in the blank to create a guard clause that checks if the input is empty.",
               "choices": [
-                "edge cases",
-                "main logic",
-                "return values",
-                "exceptions"
+                "not data",
+                "data == ''",
+                "data is None"
               ]
             }
           }
@@ -109,12 +108,12 @@
       "python-3": {
         "guard-clauses": {
           "1": {
-            "title": "Introduction to Guard Clauses",
-            "bodyMarkdown": "Guard clauses are a programming pattern that allows you to simplify your code by handling edge cases early, thus avoiding deep nesting of conditionals."
+            "title": "Understanding Guard Clauses",
+            "bodyMarkdown": "Guard clauses are a way to simplify complex conditional logic by checking for conditions early and exiting the function if those conditions are not met. This helps to avoid deep nesting of if statements.\n\n**Example:**\n```python\ndef process_order(order):\n    if not order:\n        return 'No order provided'\n    if order['amount'] <= 0:\n        return 'Invalid order amount'\n    # Process the order\n    return 'Order processed'\n```\nIn this example, we check if the order is valid before proceeding with the processing logic. This keeps our code clean and easy to read.\n\n**Your turn:** Try implementing a guard clause in your own function!\n\nLine by line: read the first statement to see which value is stored or checked, then follow each conditional branch in order to see which path prints the final result."
           },
           "2": {
             "title": "Benefits of Guard Clauses",
-            "bodyMarkdown": "Using guard clauses can make your code more readable and maintainable. It helps in clearly defining the conditions that lead to early exits from a function."
+            "bodyMarkdown": "Using guard clauses can make your code more readable and maintainable. Instead of having multiple levels of nested if statements, you can handle edge cases upfront.\n\n**Example:**\n```python\ndef login(user):\n    if not user:\n        return 'User not found'\n    if not user.is_active:\n        return 'User is inactive'\n    return 'Login successful'\n```\nThis approach allows you to quickly see the conditions that prevent further execution. \n\n**Try this:** Implement a guard clause in a function that checks user permissions.\n\nLine by line: read the first statement to see which value is stored or checked, then follow each conditional branch in order to see which path prints the final result."
           }
         }
       }

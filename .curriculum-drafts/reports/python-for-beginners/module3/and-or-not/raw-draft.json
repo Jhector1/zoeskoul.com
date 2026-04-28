@@ -5,141 +5,101 @@
   "sketchBlocks": [
     {
       "id": "1",
-      "title": "Understanding Boolean Logic",
-      "bodyMarkdown": "Boolean logic is fundamental in programming, allowing us to combine conditions using operators like AND, OR, and NOT."
+      "title": "Understanding Boolean Operators",
+      "bodyMarkdown": "In Python, boolean operators like `and`, `or`, and `not` are used to combine conditional statements. For example:\n\n```python\nage = 20\nis_student = True\n\nif age >= 18 and is_student:\n    print('Eligible for student discount')\nelse:\n    print('Not eligible')\n```\n\nIn this example, the program checks if the person is both an adult and a student. If both conditions are true, it prints a message. \n\n**Try it yourself:** Modify the `age` or `is_student` variables to see how the output changes."
+    },
+    {
+      "id": "2",
+      "title": "Using 'or' and 'not'",
+      "bodyMarkdown": "The `or` operator allows you to check if at least one condition is true. The `not` operator negates a condition. For example:\n\n```python\nis_member = False\n\nif not is_member:\n    print('You need to sign up to access this feature')\nelse:\n    print('Welcome back!')\n```\n\nHere, if `is_member` is `False`, the message prompts the user to sign up. \n\n**Your turn:** Change the `is_member` variable to `True` and see what happens."
     }
   ],
   "quizDraft": [
     {
       "id": "1",
       "kind": "code_input",
-      "title": "Check Eligibility for a Discount",
-      "prompt": "Write a program that checks if a customer is eligible for a discount based on their membership status and purchase amount.",
-      "hint": "Consider both membership status and purchase amount in your conditions.",
-      "help": {
-        "concept": "You can use boolean operators to combine multiple conditions. For example, use AND to check if both conditions are true.",
-        "hint_1": "Think about how to structure your if statements to check both conditions.",
-        "hint_2": "Remember to use the correct logical operators to combine your conditions."
-      },
-      "starterCode": "membership = input('Enter membership status (gold/silver/none): ')\npurchase_amount = float(input('Enter purchase amount: '))\n\n# Your code here\n",
-      "solutionCode": "membership = input('Enter membership status (gold/silver/none): ')\npurchase_amount = float(input('Enter purchase amount: '))\n\nif (membership == 'gold' or membership == 'silver') and purchase_amount > 100:\n    print('Eligible for discount')\nelse:\n    print('Not eligible for discount')",
+      "title": "Check Eligibility for Discount",
+      "prompt": "Write a function that checks if a person is eligible for a discount based on their age and student status.",
+      "starterCode": "def check_discount(age, is_student):\n    # Your code here\n    pass",
+      "solutionCode": "def check_discount(age, is_student):\n    if age >= 18 and is_student:\n        return 'Eligible for discount'\n    else:\n        return 'Not eligible'",
       "tests": [
         {
-          "stdin": "gold\n150\n",
-          "stdout": "Eligible for discount\n"
+          "input": "20, True",
+          "output": "Eligible for discount"
         },
         {
-          "stdin": "silver\n50\n",
-          "stdout": "Not eligible for discount\n"
+          "input": "17, True",
+          "output": "Not eligible"
+        },
+        {
+          "input": "19, False",
+          "output": "Not eligible"
         }
       ]
     },
     {
       "id": "2",
       "kind": "code_input",
-      "title": "Determine Voting Eligibility",
-      "prompt": "Create a program that checks if a person is eligible to vote based on their age and citizenship status.",
-      "hint": "You need to check both age and citizenship.",
-      "help": {
-        "concept": "Eligibility can be determined by combining conditions with AND. Both conditions must be true for eligibility.",
-        "hint_1": "Consider how to structure your if statement to check both age and citizenship.",
-        "hint_2": "Make sure to use the correct logical operator to combine your checks."
-      },
-      "starterCode": "age = int(input('Enter your age: '))\ncitizenship = input('Are you a citizen? (yes/no): ')\n\n# Your code here\n",
-      "solutionCode": "age = int(input('Enter your age: '))\ncitizenship = input('Are you a citizen? (yes/no): ')\n\nif age >= 18 and citizenship == 'yes':\n    print('Eligible to vote')\nelse:\n    print('Not eligible to vote')",
+      "title": "Membership Check",
+      "prompt": "Create a function that checks if a user is a member and returns a welcome message or a sign-up prompt.",
+      "starterCode": "def membership_status(is_member):\n    # Your code here\n    pass",
+      "solutionCode": "def membership_status(is_member):\n    if not is_member:\n        return 'You need to sign up to access this feature'\n    else:\n        return 'Welcome back!'",
       "tests": [
         {
-          "stdin": "20\nyes\n",
-          "stdout": "Eligible to vote\n"
+          "input": "False",
+          "output": "You need to sign up to access this feature"
         },
         {
-          "stdin": "16\nno\n",
-          "stdout": "Not eligible to vote\n"
+          "input": "True",
+          "output": "Welcome back!"
         }
       ]
     },
     {
       "id": "3",
       "kind": "single_choice",
-      "title": "Understanding AND Operator",
-      "prompt": "What does the AND operator do in boolean logic?",
-      "hint": "It requires both conditions to be true.",
-      "help": {
-        "concept": "The AND operator combines two conditions and returns true only if both conditions are true.",
-        "hint_1": "Think about how AND works in everyday logic.",
-        "hint_2": "If one condition is false, the entire expression is false."
-      },
+      "title": "What does the 'and' operator do?",
+      "prompt": "Select the correct description of the 'and' operator.",
       "options": [
-        {
-          "id": "a",
-          "text": "Returns true if at least one condition is true."
-        },
-        {
-          "id": "b",
-          "text": "Returns true only if both conditions are true."
-        },
-        {
-          "id": "c",
-          "text": "Returns false if both conditions are true."
-        }
+        "It checks if both conditions are true.",
+        "It checks if at least one condition is true.",
+        "It negates a condition.",
+        "It combines multiple conditions into one."
       ],
       "correctOptionIds": [
-        "b"
+        "a"
       ]
     },
     {
       "id": "4",
       "kind": "multi_choice",
-      "title": "Identifying Boolean Operators",
-      "prompt": "Which of the following are boolean operators?",
-      "hint": "Look for operators that combine conditions.",
-      "help": {
-        "concept": "Boolean operators are used to combine conditions in logical expressions.",
-        "hint_1": "Common boolean operators include AND, OR, and NOT.",
-        "hint_2": "Consider which of the options can be used to combine logical statements."
-      },
+      "title": "Which of the following are boolean operators?",
+      "prompt": "Select all that apply.",
       "options": [
-        {
-          "id": "a",
-          "text": "AND"
-        },
-        {
-          "id": "b",
-          "text": "OR"
-        },
-        {
-          "id": "c",
-          "text": "IF"
-        },
-        {
-          "id": "d",
-          "text": "NOT"
-        }
+        "and",
+        "or",
+        "not",
+        "if"
       ],
       "correctOptionIds": [
         "a",
         "b",
-        "d"
+        "c"
       ]
     },
     {
       "id": "5",
       "kind": "fill_blank_choice",
-      "title": "Complete the Logic Statement",
-      "prompt": "Fill in the blank: The expression 'x > 5 _____ y < 10' will evaluate to true if both conditions are true.",
-      "hint": "Think about how to combine conditions.",
-      "help": {
-        "concept": "You can use boolean operators to combine conditions in logical expressions.",
-        "hint_1": "Consider which operator requires both conditions to be true.",
-        "hint_2": "This operator is commonly used in programming."
-      },
-      "template": "The expression 'x > 5 {blank} y < 10' will evaluate to true if both conditions are true.",
+      "title": "Complete the statement.",
+      "prompt": "The `not` operator is used to _____ a condition.",
+      "template": "The `not` operator is used to _____ a condition.",
       "choices": [
-        "AND",
-        "OR",
-        "NOT"
+        "negate",
+        "combine",
+        "evaluate",
+        "ignore"
       ],
-      "correctValue": "AND"
+      "correctValue": "negate"
     }
   ]
 }

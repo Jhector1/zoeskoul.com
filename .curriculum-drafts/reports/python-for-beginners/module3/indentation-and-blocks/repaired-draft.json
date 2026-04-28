@@ -4,131 +4,123 @@
   "minutes": 18,
   "sketchBlocks": [
     {
-      "id": "sketch1",
+      "id": "indentation-basics",
       "title": "Understanding Indentation",
-      "bodyMarkdown": "In Python, indentation is not just for readability; it defines the structure of the code. Blocks of code are defined by their indentation level."
+      "bodyMarkdown": "In Python, indentation is not just for readability; it defines the structure of your code. For example:\n\n```python\nif condition:\n    # This block is executed if the condition is true\n    print('Condition is true')\nelse:\n    # This block is executed if the condition is false\n    print('Condition is false')\n```\n\nIn this example, the indented lines under `if` and `else` are part of their respective blocks. If you forget to indent, Python will raise an `IndentationError`. \n\n**Your turn:** Try writing your own `if` statement with an `else` block!\n\nLine by line: read the first statement to see which value is stored or checked, then follow each conditional branch in order to see which path prints the final result."
     },
     {
-      "id": "sketch2",
-      "title": "Blocks and Control Flow",
-      "bodyMarkdown": "Control flow statements like if, elif, and else rely on indentation to determine which statements belong to which block."
+      "id": "indentation-error",
+      "title": "Common Indentation Errors",
+      "bodyMarkdown": "Indentation errors can be frustrating. For instance, if you mix tabs and spaces, Python will not know how to interpret your code. Here's an example of a common mistake:\n\n```python\nif condition:\nprint('This will cause an error')\n```\n\nIn this case, the print statement should be indented. Always use either spaces or tabs consistently throughout your code.\n\n**Try this:** Fix the indentation in the example above.\n\nLine by line: read the first statement to see which value is stored or checked, then follow each conditional branch in order to see which path prints the final result."
     }
   ],
   "quizDraft": [
     {
-      "id": "quiz1",
+      "id": "indentation-quiz-1",
+      "kind": "code_input",
+      "title": "Fix the Indentation",
+      "prompt": "Your task is to correct the indentation in the following code snippet:",
+      "starterCode": "if x > 10:\nprint('x is greater than 10')\nelse:\nprint('x is 10 or less')",
+      "solutionCode": "if x > 10:\n    print('x is greater than 10')\nelse:\n    print('x is 10 or less')",
+      "hint": "Break the task into the main query or code steps first.",
+      "help": {
+        "concept": "This task checks whether you can apply fix the indentation in a working solution.",
+        "hint_1": "Identify the table, columns, and condition or operation before writing the full solution.",
+        "hint_2": "Build the statement one piece at a time: select the right fields, then add the condition or operation that matches the prompt."
+      },
+      "tests": [
+        {
+          "stdin": "15\n",
+          "stdout": "True\n",
+          "match": "exact"
+        },
+        {
+          "stdin": "5\n",
+          "stdout": "False\n",
+          "match": "exact"
+        }
+      ]
+    },
+    {
+      "id": "indentation-quiz-2",
+      "kind": "code_input",
+      "title": "Create an Indented Block",
+      "prompt": "Write a Python function that checks if a number is even or odd and prints the result. Ensure proper indentation.",
+      "starterCode": "def check_even_odd(num):\n# Your code here",
+      "solutionCode": "def check_even_odd(num):\n    if num % 2 == 0:\n        print('Even')\n    else:\n        print('Odd')",
+      "hint": "Break the task into the main query or code steps first.",
+      "help": {
+        "concept": "This task checks whether you can apply create an indented block in a working solution.",
+        "hint_1": "Identify the table, columns, and condition or operation before writing the full solution.",
+        "hint_2": "Build the statement one piece at a time: select the right fields, then add the condition or operation that matches the prompt."
+      },
+      "tests": [
+        {
+          "stdin": "1\n",
+          "stdout": "True\n",
+          "match": "exact"
+        }
+      ]
+    },
+    {
+      "id": "indentation-quiz-3",
       "kind": "single_choice",
       "title": "What does indentation control in Python?",
-      "prompt": "Choose the correct statement about indentation.",
+      "prompt": "What is the primary purpose of indentation in Python?",
       "options": [
-        "It controls the execution speed of the program.",
-        "It defines the structure of code blocks.",
-        "It is optional and can be ignored.",
-        "It is used only for comments."
+        "To make the code look nice",
+        "To define the structure of the code",
+        "To increase execution speed",
+        "To comment out code"
       ],
       "correctOptionIds": [
         "b"
       ],
-      "hint": "Think about how Python interprets code structure.",
+      "hint": "Think about how Python interprets your code.",
       "help": {
-        "concept": "Indentation in Python defines the grouping of statements. It is essential for the correct execution of control flow.",
-        "hint_1": "Indentation is not just for aesthetics; it has functional importance.",
-        "hint_2": "Consider how blocks of code are formed in other programming languages."
+        "concept": "Indentation in Python is crucial as it defines the blocks of code that belong together, such as those under an if statement.",
+        "hint_1": "It's not just about aesthetics.",
+        "hint_2": "Consider how other programming languages handle code blocks."
       }
     },
     {
-      "id": "quiz2",
+      "id": "indentation-quiz-4",
       "kind": "multi_choice",
-      "title": "Which of the following statements about blocks in Python are true?",
-      "prompt": "Select all that apply.",
+      "title": "Identify Indentation Errors",
+      "prompt": "Select all the code snippets that contain indentation errors.",
       "options": [
-        "Blocks can contain multiple statements.",
-        "Each block must start with a new indentation level.",
-        "Blocks can be nested within other blocks.",
-        "Indentation can be mixed with tabs and spaces."
+        "if x > 5:\nprint('x is greater than 5')",
+        "print('This is outside any block')",
+        "if x > 5:\n    print('x is greater than 5')\n  print('This is also inside the block')"
       ],
       "correctOptionIds": [
-        "a",
-        "b",
-        "c"
+        "a"
       ],
-      "hint": "Focus on the main concept being tested and eliminate choices that describe something different.",
+      "hint": "Look for inconsistent indentation.",
       "help": {
-        "concept": "Choose the option that matches the core idea described in the question without relying on repeated wording from the answer choices.",
-        "hint_1": "Rule out options that describe a different role, behavior, or concept than the question is testing.",
-        "hint_2": "Pick the option that best matches the concept, not the one that simply repeats familiar wording."
+        "concept": "Indentation errors occur when the code blocks are not properly aligned.",
+        "hint_1": "Check for lines that should be indented but aren't.",
+        "hint_2": "Remember that all lines in a block must have the same indentation level."
       }
     },
     {
-      "id": "quiz3",
+      "id": "indentation-quiz-5",
       "kind": "fill_blank_choice",
-      "title": "Complete the statement about indentation.",
-      "prompt": "In Python, indentation is used to define a ______.",
-      "template": "In Python, indentation is used to define a {blank}.",
+      "title": "Complete the Indentation Rule",
+      "prompt": "Choose the best value for the first missing blank in the statement.",
+      "template": "The first missing value is [blank1].",
       "choices": [
-        "variable",
-        "function",
-        "block",
-        "loop"
+        "variables",
+        "functions",
+        "code blocks",
+        "comments"
       ],
-      "correctValue": "block",
+      "correctValue": "code blocks",
       "hint": "Focus on the missing concept or keyword.",
       "help": {
-        "concept": "This task checks the key idea behind complete the statement about indentation..",
+        "concept": "This task checks the key idea behind complete the indentation rule.",
         "hint_1": "Look for the word or phrase that best matches the lesson concept.",
         "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
-      }
-    },
-    {
-      "id": "quiz4",
-      "kind": "code_input",
-      "title": "Create a simple if-else statement.",
-      "prompt": "Write a program that checks if a number is positive or negative.",
-      "starterCode": "number = int(input('Enter a number: '))\n\n# Your code here",
-      "solutionCode": "number = int(input('Enter a number: '))\n\nif number > 0:\n    print('Positive number')\nelif number < 0:\n    print('Negative number')\nelse:\n    print('Zero')",
-      "tests": [
-        {
-          "stdin": "5\n",
-          "stdout": "Positive number\n"
-        },
-        {
-          "stdin": "-3\n",
-          "stdout": "Negative number\n"
-        },
-        {
-          "stdin": "0\n",
-          "stdout": "Zero\n"
-        }
-      ],
-      "hint": "Focus on the programming task being asked for, not on copying final solution text.",
-      "help": {
-        "concept": "Build the solution from the behavior the exercise is testing.",
-        "hint_1": "Think about which steps, functions, or statements are required for the task.",
-        "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
-      }
-    },
-    {
-      "id": "quiz5",
-      "kind": "code_input",
-      "title": "Check for even or odd.",
-      "prompt": "Write a program that checks if a number is even or odd.",
-      "starterCode": "number = int(input('Enter a number: '))\n\n# Your code here",
-      "solutionCode": "number = int(input('Enter a number: '))\n\nif number % 2 == 0:\n    print('Even')\nelse:\n    print('Odd')",
-      "tests": [
-        {
-          "stdin": "4\n",
-          "stdout": "Even\n"
-        },
-        {
-          "stdin": "7\n",
-          "stdout": "Odd\n"
-        }
-      ],
-      "hint": "Focus on the programming task being asked for, not on copying final solution text.",
-      "help": {
-        "concept": "Build the solution from the behavior the exercise is testing.",
-        "hint_1": "Think about which steps, functions, or statements are required for the task.",
-        "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
       }
     }
   ]

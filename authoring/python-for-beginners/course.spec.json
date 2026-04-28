@@ -76,14 +76,14 @@
   "releasePlan": {
     "currentRelease": {
       "name": "python-foundations-v1",
-      "startModuleNumber": 3,
-      "endModuleNumber": 3
+      "startModuleNumber": 8,
+      "endModuleNumber": 8
     },
     "releases": [
       {
         "name": "python-foundations-v1",
-        "startModuleNumber": 3,
-        "endModuleNumber": 3
+        "startModuleNumber": 8,
+        "endModuleNumber": 8
       }
     ]
   },

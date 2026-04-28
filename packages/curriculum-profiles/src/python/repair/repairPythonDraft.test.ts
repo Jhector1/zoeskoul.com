@@ -34,7 +34,7 @@ describe("repairPythonDraft", () => {
         expect(exercise.help.concept).toContain("Build the program");
         expect(exercise.help.hint_1).toContain("Python statements");
         expect(exercise.help.hint_2).toContain("Construct the code");
-        expect(result.report.repairs.length).toBe(4);
+        expect(result.report.repairs.length).toBe(5);
     });
 
     it("adds a fallback fill_blank_choice when the planned mix requires one", async () => {
@@ -224,8 +224,742 @@ describe("repairPythonDraft", () => {
             result.draft.quizDraft.some(
                 (exercise: any) =>
                     exercise.kind === "code_input" &&
-                    exercise.solutionCode.includes("has_items"),
+                    Array.isArray(exercise.tests) &&
+                    exercise.tests.length > 0 &&
+                    typeof exercise.solutionCode === "string" &&
+                    exercise.solutionCode.includes("print("),
             ),
         ).toBe(true);
+    });
+
+    it("rewrites function-return tasks into runnable stdin/stdout programs", async () => {
+        const result = await repairPythonDraft({
+            seed: {
+                topicId: "comparisons-and-truth-values",
+                title: "Comparisons and Truth Values",
+                summary: "Use comparisons and truthiness.",
+            } as any,
+            draft: {
+                title: "Comparisons and Truth Values",
+                summary: "Summary",
+                minutes: 10,
+                sketchBlocks: [],
+                quizDraft: [
+                    {
+                        id: "code-input-1",
+                        kind: "code_input",
+                        title: "Check if a number is greater than ten",
+                        prompt:
+                            "Write a function `is_greater_than_ten(num)` that returns True if `num` is greater than 10, otherwise returns False.",
+                        hint: "Use a comparison.",
+                        help: {
+                            concept: "Return the comparison result.",
+                            hint_1: "Compare the number with 10.",
+                            hint_2: "Return True or False.",
+                        },
+                        starterCode:
+                            "def is_greater_than_ten(num):\n    # Your code here\n    pass\n",
+                        solutionCode:
+                            "def is_greater_than_ten(num):\n    return num > 10\n",
+                        tests: [
+                            { stdin: "15\n", stdout: "True\n" },
+                            { stdin: "5\n", stdout: "False\n" },
+                        ],
+                    },
+                ],
+            } as any,
+        });
+
+        const exercise = result.draft.quizDraft[0] as any;
+        expect(exercise.prompt).toContain("print the returned result");
+        expect(exercise.starterCode).toContain("import ast");
+        expect(exercise.starterCode).toContain("print(is_greater_than_ten(num))");
+        expect(exercise.solutionCode).toContain("return num > 10");
+        expect(exercise.solutionCode).toContain("print(is_greater_than_ten(num))");
+        expect(
+            result.report.repairs.some(
+                (repair) => repair.code === "PYTHON_FUNCTION_STDOUT_TASK_REPAIRED",
+            ),
+        ).toBe(true);
+    });
+
+    it("synthesizes tests for a missing positive-negative-zero beginner exercise", async () => {
+        const result = await repairPythonDraft({
+            seed: {
+                topicId: "guard-clauses",
+                title: "Guard Clauses",
+                summary: "Use early returns with conditionals.",
+            } as any,
+            draft: {
+                title: "Guard Clauses",
+                summary: "Summary",
+                minutes: 10,
+                sketchBlocks: [],
+                quizDraft: [
+                    {
+                        id: "guard-clauses-quiz-1",
+                        kind: "code_input",
+                        title: "Implement Guard Clauses",
+                        prompt:
+                            "Write a function that checks if a number is positive, negative, or zero using guard clauses.",
+                        hint: "Use guard clauses.",
+                        help: {
+                            concept: "Return the right label.",
+                            hint_1: "Check positive, negative, and zero cases.",
+                            hint_2: "Return the matching result.",
+                        },
+                        starterCode: "def check_number(num):\n    # Your code here\n",
+                        solutionCode:
+                            "def check_number(num):\n    if num > 0:\n        return 'Positive'\n    if num < 0:\n        return 'Negative'\n    return 'Zero'\n",
+                    },
+                ],
+            } as any,
+        });
+
+        const exercise = result.draft.quizDraft[0] as any;
+        expect(exercise.tests).toEqual([
+            { stdin: "5\n", stdout: "Positive\n", match: "exact" },
+            { stdin: "-2\n", stdout: "Negative\n", match: "exact" },
+            { stdin: "0\n", stdout: "Zero\n", match: "exact" },
+        ]);
+        expect(exercise.solutionCode).toContain("print(check_number(num))");
+        expect(
+            result.report.repairs.some((repair) => repair.code === "PYTHON_TESTS_SYNTHESIZED"),
+        ).toBe(true);
+    });
+
+    it("repairs placeholder boolean tests when the prompt expects string outputs", async () => {
+        const result = await repairPythonDraft({
+            seed: {
+                topicId: "if-elif-else",
+                title: "If, Elif, and Else",
+                summary: "Control which code runs based on conditions.",
+            } as any,
+            draft: {
+                title: "If, Elif, and Else",
+                summary: "Summary",
+                minutes: 10,
+                sketchBlocks: [],
+                quizDraft: [
+                    {
+                        id: "eligibility",
+                        kind: "code_input",
+                        title: "Eligibility Checker",
+                        prompt:
+                            "Create a program that checks if a person is eligible to vote. A person must be at least 18 years old and a citizen. Print 'Eligible' if both conditions are met, otherwise print 'Not eligible'.",
+                        hint: "Use and.",
+                        help: {
+                            concept: "Check both conditions.",
+                            hint_1: "Read age and citizenship.",
+                            hint_2: "Print the matching message.",
+                        },
+                        starterCode: "age = 20\nis_citizen = True\n# Your code here\n",
+                        solutionCode:
+                            "age = 20\nis_citizen = True\nif age >= 18 and is_citizen:\n    print('Eligible')\nelse:\n    print('Not eligible')\n",
+                        tests: [{ stdin: "1\n", stdout: "True\n", match: "exact" }],
+                    },
+                ],
+            } as any,
+        });
+
+        const exercise = result.draft.quizDraft[0] as any;
+        expect(exercise.starterCode).toContain("age = int(input())");
+        expect(exercise.starterCode).toContain("is_citizen = input().strip().lower() == 'true'");
+        expect(exercise.tests).toEqual([
+            { stdin: "20\ntrue\n", stdout: "Eligible\n", match: "exact" },
+            { stdin: "16\ntrue\n", stdout: "Not eligible\n", match: "exact" },
+            { stdin: "20\nfalse\n", stdout: "Not eligible\n", match: "exact" },
+        ]);
+        expect(
+            result.report.repairs.some(
+                (repair) => repair.code === "PYTHON_PLACEHOLDER_TESTS_REPAIRED",
+            ),
+        ).toBe(true);
+    });
+
+    it("replaces placeholder boolean tests for no-input class exercises with real solution stdout", async () => {
+        const result = await repairPythonDraft({
+            seed: {
+                topicId: "attributes-and-init",
+                title: "Attributes and __init__",
+                summary: "Initialize object state with constructor parameters.",
+            } as any,
+            draft: {
+                title: "Attributes and __init__",
+                summary: "Summary",
+                minutes: 10,
+                sketchBlocks: [],
+                quizDraft: [
+                    {
+                        id: "1",
+                        kind: "code_input",
+                        title: "Create a Class with Attributes",
+                        prompt:
+                            "Define a class called `Car` that has attributes for `make`, `model`, and `year`. Implement the `__init__` method to initialize these attributes.",
+                        hint: "Use __init__.",
+                        help: {
+                            concept: "Initialize attributes in the constructor.",
+                            hint_1: "Assign each parameter to self.",
+                            hint_2: "Print the values after creating the object.",
+                        },
+                        starterCode:
+                            "class Car:\n    def __init__(self, make, model, year):\n        pass\n\nmy_car = Car('Toyota', 'Corolla', 2020)\nprint(my_car.make)\nprint(my_car.model)\nprint(my_car.year)\n",
+                        solutionCode:
+                            "class Car:\n    def __init__(self, make, model, year):\n        self.make = make\n        self.model = model\n        self.year = year\n\nmy_car = Car('Toyota', 'Corolla', 2020)\nprint(my_car.make)\nprint(my_car.model)\nprint(my_car.year)\n",
+                        tests: [{ stdin: "1\n", stdout: "True\n", match: "exact" }],
+                    },
+                ],
+            } as any,
+        });
+
+        const exercise = result.draft.quizDraft[0] as any;
+        expect(exercise.tests).toEqual([
+            { stdin: "", stdout: "Toyota\nCorolla\n2020\n", match: "exact" },
+        ]);
+        expect(
+            result.report.repairs.some(
+                (repair) =>
+                    repair.code === "PYTHON_PLACEHOLDER_TESTS_EXECUTION_REPAIRED",
+            ),
+        ).toBe(true);
+    });
+
+    it("converts embedded python harness text in tests.stdin into runnable starter and solution code", async () => {
+        const result = await repairPythonDraft({
+            seed: {
+                topicId: "encapsulation-and-responsibility",
+                title: "Encapsulation and Responsibility",
+                summary: "Keep related data and behavior together in a class.",
+            } as any,
+            draft: {
+                title: "Encapsulation and Responsibility",
+                summary: "Summary",
+                minutes: 10,
+                sketchBlocks: [],
+                quizDraft: [
+                    {
+                        id: "1",
+                        kind: "code_input",
+                        title: "Create a Simple Class",
+                        prompt:
+                            "Define a class called `Car` with attributes for `make`, `model`, and `year`. Include a method `get_info` that returns a string with the car's details.",
+                        hint: "Use a class.",
+                        help: {
+                            concept: "Keep data and behavior together.",
+                            hint_1: "Store values in __init__.",
+                            hint_2: "Return the description from the method.",
+                        },
+                        starterCode:
+                            "class Car:\n    def __init__(self, make, model, year):\n        # Initialize attributes\n        pass\n\n    def get_info(self):\n        # Return car details\n        pass",
+                        solutionCode:
+                            "class Car:\n    def __init__(self, make, model, year):\n        self.make = make\n        self.model = model\n        self.year = year\n\n    def get_info(self):\n        return f'{self.year} {self.make} {self.model}'",
+                        tests: [
+                            {
+                                stdin: "my_car = Car('Toyota', 'Corolla', 2020)\nmy_car.get_info()",
+                                stdout: "2020 Toyota Corolla",
+                            },
+                        ],
+                    },
+                ],
+            } as any,
+        });
+
+        const exercise = result.draft.quizDraft[0] as any;
+        expect(exercise.prompt).toContain("print the final result");
+        expect(exercise.starterCode).toContain("my_car = Car('Toyota', 'Corolla', 2020)");
+        expect(exercise.starterCode).toContain("print(my_car.get_info())");
+        expect(exercise.solutionCode).toContain("print(my_car.get_info())");
+        expect(exercise.tests).toEqual([
+            { stdin: "", stdout: "2020 Toyota Corolla\n", match: "exact" },
+        ]);
+        expect(
+            result.report.repairs.some(
+                (repair) => repair.code === "PYTHON_EMBEDDED_HARNESS_REPAIRED",
+            ),
+        ).toBe(true);
+    });
+
+    it("does not print bare class constructor harness lines because object reprs are nondeterministic", async () => {
+        const result = await repairPythonDraft({
+            seed: {
+                topicId: "class-debugging-patterns",
+                title: "Class Debugging Patterns",
+                summary: "Fix common class mistakes.",
+            } as any,
+            draft: {
+                title: "Class Debugging Patterns",
+                summary: "Summary",
+                minutes: 10,
+                sketchBlocks: [],
+                quizDraft: [
+                    {
+                        id: "debugging-attributes",
+                        kind: "code_input",
+                        title: "Fix the Dog Class",
+                        prompt:
+                            "The following Dog class has an error in its constructor. Fix it so that the name attribute is correctly initialized.",
+                        hint: "Use self.name.",
+                        help: {
+                            concept: "Store constructor values on self.",
+                            hint_1: "Assign name to self.name.",
+                            hint_2: "Print the stable attribute value.",
+                        },
+                        starterCode:
+                            "class Dog:\n    def __init__(self, name):\n        name = name\n\nmy_dog = Dog('Buddy')\nprint(my_dog.name)",
+                        solutionCode:
+                            "class Dog:\n    def __init__(self, name):\n        self.name = name\n\nmy_dog = Dog('Buddy')\nprint(my_dog.name)",
+                        tests: [
+                            {
+                                stdin: "Dog('Buddy')",
+                                stdout: "Buddy",
+                                match: "exact",
+                            },
+                        ],
+                    },
+                ],
+            } as any,
+        });
+
+        const exercise = result.draft.quizDraft[0] as any;
+        expect(exercise.solutionCode).toContain("Dog('Buddy')");
+        expect(exercise.solutionCode).not.toContain("print(Dog('Buddy'))");
+        expect(exercise.tests).toEqual([
+            { stdin: "", stdout: "Buddy\n", match: "exact" },
+        ]);
+    });
+
+    it("does not duplicate existing example harness code and normalizes expected stdout from execution", async () => {
+        const result = await repairPythonDraft({
+            seed: {
+                topicId: "methods-and-self",
+                title: "Methods and self",
+                summary: "Add behavior to classes with instance methods.",
+            } as any,
+            draft: {
+                title: "Methods and self",
+                summary: "Summary",
+                minutes: 10,
+                sketchBlocks: [],
+                quizDraft: [
+                    {
+                        id: "q1",
+                        kind: "code_input",
+                        title: "Create a Simple Class",
+                        prompt:
+                            "Define a class `Book` with an instance method `get_title` that returns the title of the book.",
+                        hint: "Use self.",
+                        help: {
+                            concept: "Instance methods use self.",
+                            hint_1: "Store the title.",
+                            hint_2: "Return the title.",
+                        },
+                        starterCode:
+                            "class Book:\n    def __init__(self, title):\n        # Initialize the title attribute\n        pass\n\n    def get_title(self):\n        # Return the title of the book\n        pass\n\n# Example usage:\nmy_book = Book('1984')\nprint(my_book.get_title())  # Should print '1984'",
+                        solutionCode:
+                            "class Book:\n    def __init__(self, title):\n        self.title = title\n\n    def get_title(self):\n        return self.title\n\n# Example usage:\nmy_book = Book('1984')\nprint(my_book.get_title())  # Should print '1984'",
+                        tests: [
+                            {
+                                stdin: "my_book = Book('1984')\nmy_book.get_title()",
+                                stdout: "'1984'",
+                                match: "exact",
+                            },
+                        ],
+                    },
+                ],
+            } as any,
+        });
+
+        const exercise = result.draft.quizDraft[0] as any;
+        expect(exercise.solutionCode.match(/my_book = Book\('1984'\)/g)).toHaveLength(1);
+        expect(exercise.solutionCode.match(/print\(my_book\.get_title\(\)\)/g)).toHaveLength(1);
+        expect(exercise.tests).toEqual([
+            { stdin: "", stdout: "1984\n", match: "exact" },
+        ]);
+    });
+
+    it("makes class-dependent project steps self-contained by merging sibling class methods", async () => {
+        const result = await repairPythonDraft({
+            seed: {
+                topicId: "classes-and-instances",
+                title: "Classes and Instances",
+                summary: "Define classes and create individual objects.",
+            } as any,
+            draft: {
+                title: "Classes and Instances",
+                summary: "Summary",
+                minutes: 10,
+                sketchBlocks: [],
+                quizDraft: [
+                    {
+                        id: "1",
+                        kind: "code_input",
+                        title: "Create a Simple Class",
+                        prompt: "Define a class named `Book` with a `get_info()` method.",
+                        hint: "Use a class.",
+                        help: {
+                            concept: "Define attributes and a method.",
+                            hint_1: "Store title and author.",
+                            hint_2: "Return book info.",
+                        },
+                        starterCode: "",
+                        solutionCode:
+                            "class Book:\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def get_info(self):\n        return f'Title: {self.title}, Author: {self.author}'\n",
+                        tests: [{ stdin: "", stdout: "", match: "exact" }],
+                    },
+                    {
+                        id: "2",
+                        kind: "code_input",
+                        title: "Add a Method to Your Class",
+                        prompt: "Add an `is_long()` method.",
+                        hint: "Use len.",
+                        help: {
+                            concept: "Methods can inspect attributes.",
+                            hint_1: "Use the title length.",
+                            hint_2: "Return a boolean.",
+                        },
+                        starterCode: "",
+                        solutionCode:
+                            "class Book:\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def is_long(self):\n        return len(self.title) > 10\n",
+                    },
+                    {
+                        id: "3",
+                        kind: "code_input",
+                        title: "Instantiate and Use Your Class",
+                        prompt:
+                            "Create an instance of the `Book` class with the title 'To Kill a Mockingbird' and author 'Harper Lee'. Print the book info and check if it's long.",
+                        hint: "Create the object.",
+                        help: {
+                            concept: "Use the class after defining it.",
+                            hint_1: "Instantiate Book.",
+                            hint_2: "Call both methods.",
+                        },
+                        starterCode:
+                            "book = Book('To Kill a Mockingbird', 'Harper Lee')\n# Print book info\n# Check if the book title is long",
+                        solutionCode:
+                            "book = Book('To Kill a Mockingbird', 'Harper Lee')\nprint(book.get_info())\nprint(book.is_long())",
+                        tests: [{ stdin: "1\n", stdout: "True\n", match: "exact" }],
+                    },
+                ],
+            } as any,
+        });
+
+        const exercise = result.draft.quizDraft[2] as any;
+        expect(exercise.solutionCode).toContain("class Book:");
+        expect(exercise.solutionCode).toContain("def get_info(self):");
+        expect(exercise.solutionCode).toContain("def is_long(self):");
+        expect(exercise.tests).toEqual([
+            {
+                stdin: "",
+                stdout: "Title: To Kill a Mockingbird, Author: Harper Lee\nTrue\n",
+                match: "exact",
+            },
+        ]);
+        expect(
+            result.report.repairs.some(
+                (repair) =>
+                    repair.code === "PYTHON_CROSS_EXERCISE_CLASS_CONTEXT_REPAIRED",
+            ),
+        ).toBe(true);
+        expect(
+            result.report.repairs.some(
+                (repair) => repair.code === "PYTHON_CROSS_EXERCISE_TESTS_REPAIRED",
+            ),
+        ).toBe(true);
+    });
+
+    it("adds missing oop support getters used by a generated solution", async () => {
+        const result = await repairPythonDraft({
+            seed: {
+                topicId: "encapsulation-and-responsibility",
+                title: "Encapsulation and Responsibility",
+                summary: "Keep related data and behavior together in a class.",
+            } as any,
+            draft: {
+                title: "Encapsulation and Responsibility",
+                summary: "Summary",
+                minutes: 10,
+                sketchBlocks: [],
+                quizDraft: [
+                    {
+                        id: "3",
+                        kind: "code_input",
+                        title: "Create a Private Attribute",
+                        prompt:
+                            "Modify the `BankAccount` class to include a method `withdraw` that decreases the balance by a specified amount, ensuring that the balance does not go negative. Use the provided object creation code to print the final result.",
+                        hint: "Use a method.",
+                        help: {
+                            concept: "Private attributes should be read through methods.",
+                            hint_1: "Subtract only when enough balance exists.",
+                            hint_2: "Print the balance after withdrawing.",
+                        },
+                        starterCode:
+                            "class BankAccount:\n    def __init__(self, balance):\n        self.__balance = balance\n\n    def deposit(self, amount):\n        self.__balance += amount\n\n    # Add withdraw method here\n\naccount = BankAccount(100)\naccount.withdraw(50)\nprint(account.get_balance())",
+                        solutionCode:
+                            "class BankAccount:\n    def __init__(self, balance):\n        self.__balance = balance\n\n    def deposit(self, amount):\n        self.__balance += amount\n\n    def withdraw(self, amount):\n        if amount <= self.__balance:\n            self.__balance -= amount\n        else:\n            return 'Insufficient funds'\n\naccount = BankAccount(100)\naccount.withdraw(50)\nprint(account.get_balance())",
+                        tests: [{ stdin: "", stdout: "50", match: "exact" }],
+                    },
+                ],
+            } as any,
+        });
+
+        const exercise = result.draft.quizDraft[0] as any;
+        expect(exercise.starterCode).toContain("def get_balance(self):");
+        expect(exercise.solutionCode).toContain("def get_balance(self):");
+        expect(exercise.tests).toEqual([
+            { stdin: "", stdout: "50\n", match: "exact" },
+        ]);
+        expect(
+            result.report.repairs.some(
+                (repair) =>
+                    repair.code === "PYTHON_MISSING_OOP_SUPPORT_METHOD_REPAIRED",
+            ),
+        ).toBe(true);
+    });
+
+    it("makes no-output list construction exercises observable", async () => {
+        const result = await repairPythonDraft({
+            seed: {
+                topicId: "lists-of-objects",
+                title: "Lists of Objects",
+                summary: "Manage multiple instances and summarize their data.",
+            } as any,
+            draft: {
+                title: "Lists of Objects",
+                summary: "Summary",
+                minutes: 10,
+                sketchBlocks: [],
+                quizDraft: [
+                    {
+                        id: "1",
+                        kind: "code_input",
+                        title: "Create a List of Objects",
+                        prompt:
+                            "Define a class `Book` with attributes `title` and `author`. Create a list of at least three `Book` instances.",
+                        hint: "Create several objects.",
+                        help: {
+                            concept: "Lists can hold object instances.",
+                            hint_1: "Instantiate the class more than once.",
+                            hint_2: "Store the objects in a list.",
+                        },
+                        starterCode:
+                            "class Book:\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n# Create your list of Book instances here\nbooks = []",
+                        solutionCode:
+                            "class Book:\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\nbook1 = Book('1984', 'George Orwell')\nbook2 = Book('To Kill a Mockingbird', 'Harper Lee')\nbook3 = Book('The Great Gatsby', 'F. Scott Fitzgerald')\nbooks = [book1, book2, book3]",
+                        tests: [{ stdin: "1\n", stdout: "True\n", match: "exact" }],
+                    },
+                ],
+            } as any,
+        });
+
+        const exercise = result.draft.quizDraft[0] as any;
+        expect(exercise.prompt).toContain("print the number of items");
+        expect(exercise.starterCode).toContain("print(len(books))");
+        expect(exercise.solutionCode).toContain("print(len(books))");
+        expect(exercise.tests).toEqual([
+            { stdin: "", stdout: "3\n", match: "exact" },
+        ]);
+        expect(
+            result.report.repairs.some(
+                (repair) => repair.code === "PYTHON_NO_OUTPUT_LIST_TASK_REPAIRED",
+            ),
+        ).toBe(true);
+    });
+
+    it("repairs narrative placeholder tests and shared list setup across object-list steps", async () => {
+        const result = await repairPythonDraft({
+            seed: {
+                topicId: "lists-of-objects",
+                title: "Lists of Objects",
+                summary: "Manage multiple instances and summarize their data.",
+            } as any,
+            draft: {
+                title: "Lists of Objects",
+                summary: "Summary",
+                minutes: 10,
+                sketchBlocks: [],
+                quizDraft: [
+                    {
+                        id: "1",
+                        kind: "code_input",
+                        title: "Create a List of Objects",
+                        prompt:
+                            "Define a class `Book` with attributes `title` and `author`. Create at least three instances of `Book` and store them in a list.",
+                        hint: "Create several objects.",
+                        help: {
+                            concept: "Lists can hold object instances.",
+                            hint_1: "Instantiate the class more than once.",
+                            hint_2: "Store the objects in a list.",
+                        },
+                        starterCode: "",
+                        solutionCode:
+                            "class Book:\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\nbook1 = Book('1984', 'George Orwell')\nbook2 = Book('To Kill a Mockingbird', 'Harper Lee')\nbook3 = Book('The Great Gatsby', 'F. Scott Fitzgerald')\nbooks = [book1, book2, book3]",
+                        tests: [
+                            {
+                                stdin: "",
+                                stdout: "books should contain 3 Book instances.",
+                            },
+                        ],
+                    },
+                    {
+                        id: "2",
+                        kind: "code_input",
+                        title: "Print Books",
+                        prompt:
+                            "Using the list of `Book` objects you created, write a function that prints the title and author of each book.",
+                        hint: "Loop over books.",
+                        help: {
+                            concept: "Use objects stored in a list.",
+                            hint_1: "Read each object's attributes.",
+                            hint_2: "Print stable values.",
+                        },
+                        starterCode: "",
+                        solutionCode:
+                            "def print_books(books):\n    for book in books:\n        print(f'Title: {book.title}, Author: {book.author}')\n\nprint_books(books)",
+                        tests: [
+                            {
+                                stdin: "",
+                                stdout: "Should print the title and author of each book.",
+                            },
+                        ],
+                    },
+                    {
+                        id: "3",
+                        kind: "code_input",
+                        title: "Count Books by Author",
+                        prompt:
+                            "Write a function that counts how many books are written by a specific author from the list of `Book` objects.",
+                        hint: "Compare the author.",
+                        help: {
+                            concept: "Functions can summarize a list of objects.",
+                            hint_1: "Loop over books.",
+                            hint_2: "Return the count.",
+                        },
+                        starterCode: "",
+                        solutionCode:
+                            "def count_books_by_author(books, author):\n    count = 0\n    for book in books:\n        if book.author == author:\n            count += 1\n    return count\n\ncount_books_by_author(books, 'George Orwell')",
+                        tests: [
+                            {
+                                stdin: "",
+                                stdout: "Should return the count of books by the specified author.",
+                            },
+                        ],
+                    },
+                ],
+            } as any,
+        });
+
+        const createList = result.draft.quizDraft[0] as any;
+        const printBooks = result.draft.quizDraft[1] as any;
+        const countBooks = result.draft.quizDraft[2] as any;
+
+        expect(createList.tests).toEqual([
+            { stdin: "", stdout: "3\n", match: "exact" },
+        ]);
+        expect(printBooks.solutionCode).toContain("books = [book1, book2, book3]");
+        expect(printBooks.tests[0].stdout).toContain("Title: 1984, Author: George Orwell");
+        expect(countBooks.solutionCode).toContain(
+            "print(count_books_by_author(books, 'George Orwell'))",
+        );
+        expect(countBooks.tests).toEqual([
+            { stdin: "", stdout: "1\n", match: "exact" },
+        ]);
+    });
+
+    it("makes no-output class method exercises observable", async () => {
+        const result = await repairPythonDraft({
+            seed: {
+                topicId: "methods-and-self",
+                title: "Methods and self",
+                summary: "Add behavior to classes with instance methods.",
+            } as any,
+            draft: {
+                title: "Methods and self",
+                summary: "Summary",
+                minutes: 10,
+                sketchBlocks: [],
+                quizDraft: [
+                    {
+                        id: "create-method",
+                        kind: "code_input",
+                        title: "Create a Method",
+                        prompt:
+                            "Define a class `Car` with a method `drive` that returns a string indicating the car is driving.",
+                        hint: "Use self.",
+                        help: {
+                            concept: "Methods belong inside classes.",
+                            hint_1: "Create the method with self.",
+                            hint_2: "Return a string from the method.",
+                        },
+                        starterCode:
+                            "class Car:\n    def __init__(self, model):\n        self.model = model\n\n    # Define the drive method here",
+                        solutionCode:
+                            "class Car:\n    def __init__(self, model):\n        self.model = model\n\n    def drive(self):\n        return f'The {self.model} is driving!'",
+                        tests: [{ stdin: "1\n", stdout: "True\n", match: "exact" }],
+                    },
+                ],
+            } as any,
+        });
+
+        const exercise = result.draft.quizDraft[0] as any;
+        expect(exercise.prompt).toContain("print the method result");
+        expect(exercise.starterCode).toContain("car = Car('Corolla')");
+        expect(exercise.starterCode).toContain("print(car.drive())");
+        expect(exercise.solutionCode).toContain("car = Car('Corolla')");
+        expect(exercise.solutionCode).toContain("print(car.drive())");
+        expect(exercise.tests).toEqual([
+            { stdin: "", stdout: "The Corolla is driving!\n", match: "exact" },
+        ]);
+        expect(
+            result.report.repairs.some(
+                (repair) =>
+                    repair.code === "PYTHON_NO_OUTPUT_CLASS_METHOD_TASK_REPAIRED",
+            ),
+        ).toBe(true);
+    });
+
+    it("makes no-test class method exercises observable before publishing fixed tests", async () => {
+        const result = await repairPythonDraft({
+            seed: {
+                topicId: "methods-and-self",
+                title: "Methods and self",
+                summary: "Add behavior to classes with instance methods.",
+            } as any,
+            draft: {
+                title: "Methods and self",
+                summary: "Summary",
+                minutes: 10,
+                sketchBlocks: [],
+                quizDraft: [
+                    {
+                        id: "create-method",
+                        kind: "code_input",
+                        title: "Create a Method",
+                        prompt:
+                            "Create a Car class with a drive method that returns a message.",
+                        hint: "Use self.",
+                        help: {
+                            concept: "Methods define object behavior.",
+                            hint_1: "Define the method inside the class.",
+                            hint_2: "Return a string from the method.",
+                        },
+                        starterCode:
+                            "class Car:\n    def __init__(self, model):\n        self.model = model\n\n    def drive(self):\n        pass",
+                        solutionCode:
+                            "class Car:\n    def __init__(self, model):\n        self.model = model\n\n    def drive(self):\n        return f'The {self.model} is driving!'",
+                    },
+                ],
+            } as any,
+        });
+
+        const exercise = result.draft.quizDraft[0] as any;
+        expect(exercise.solutionCode).toContain("car = Car('Corolla')");
+        expect(exercise.solutionCode).toContain("print(car.drive())");
+        expect(exercise.tests).toEqual([
+            {
+                stdin: "",
+                stdout: "The Corolla is driving!\n",
+                match: "exact",
+            },
+        ]);
     });
 });

@@ -1,0 +1,188 @@
+{
+  "topicId": "encapsulation-and-responsibility",
+  "subjectSlug": "python-for-beginners",
+  "moduleSlug": "python-8",
+  "sectionSlug": "python-for-beginners-python-8-core-building-blocks-2",
+  "prefix": "py8",
+  "minutes": 22,
+  "topic": {
+    "labelKey": "topics.python-for-beginners.python-8.encapsulation-and-responsibility.label",
+    "summaryKey": "topics.python-for-beginners.python-8.encapsulation-and-responsibility.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python-for-beginners.python-8.encapsulation-and-responsibility.cards.sketch0.title",
+      "sketchId": "1",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python-for-beginners.python-8.encapsulation-and-responsibility.cards.sketch1.title",
+      "sketchId": "2",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.python-for-beginners.python-8.encapsulation-and-responsibility.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 2,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python-for-beginners.python-8.encapsulation-and-responsibility.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "1",
+            "titleKey": "topics.python-for-beginners.python-8.encapsulation-and-responsibility.projectSteps.1.title",
+            "exerciseKey": "1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "2",
+            "titleKey": "topics.python-for-beginners.python-8.encapsulation-and-responsibility.projectSteps.2.title",
+            "exerciseKey": "2",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "3",
+            "titleKey": "topics.python-for-beginners.python-8.encapsulation-and-responsibility.projectSteps.3.title",
+            "exerciseKey": "3",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-for-beginners.python-8.encapsulation-and-responsibility.1.title",
+      "bodyKey": "sketches.python-for-beginners.python-8.encapsulation-and-responsibility.1.bodyMarkdown"
+    },
+    {
+      "id": "2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-for-beginners.python-8.encapsulation-and-responsibility.2.title",
+      "bodyKey": "sketches.python-for-beginners.python-8.encapsulation-and-responsibility.2.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-for-beginners.python-8.encapsulation-and-responsibility.quiz.1",
+      "language": "python",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Title: 1984, Author: George Orwell\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "class Book:\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def get_info(self):\n        return f'Title: {self.title}, Author: {self.author}'\n\nbook = Book('1984', 'George Orwell')\nprint(book.get_info())"
+      }
+    },
+    {
+      "id": "2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-for-beginners.python-8.encapsulation-and-responsibility.quiz.2",
+      "language": "python",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Title: 1984, Author: Orwell\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "class Book:\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def get_info(self):\n        return f'Title: {self.title}, Author: {self.author}'\n\n    def update_author(self, new_author):\n        self.author = new_author\n\nbook = Book('1984', 'George Orwell')\nbook.update_author('Orwell')\nprint(book.get_info())"
+      }
+    },
+    {
+      "id": "3",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-for-beginners.python-8.encapsulation-and-responsibility.quiz.3",
+      "language": "python",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "21\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "class Dog:\n    def __init__(self, name, age):\n        self.name = name\n        self.age = age\n\n    def bark(self):\n        return 'Woof!'\n\n    def calculate_human_age(self):\n        return self.age * 7\n\ndog = Dog('Buddy', 3)\nprint(dog.calculate_human_age())"
+      }
+    },
+    {
+      "id": "4",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-for-beginners.python-8.encapsulation-and-responsibility.quiz.4",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "5",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-for-beginners.python-8.encapsulation-and-responsibility.quiz.5",
+      "choiceCount": 3,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "combining"
+      }
+    }
+  ]
+}

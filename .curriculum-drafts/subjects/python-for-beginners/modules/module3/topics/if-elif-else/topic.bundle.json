@@ -14,7 +14,14 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.python-for-beginners.python-3.if-elif-else.cards.sketch0.title",
-      "sketchId": "intro-to-conditional-statements",
+      "sketchId": "1",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python-for-beginners.python-3.if-elif-else.cards.sketch1.title",
+      "sketchId": "2",
       "height": 420
     },
     {
@@ -40,18 +47,18 @@
         "maxAttempts": 10,
         "steps": [
           {
-            "id": "code_input_1",
-            "titleKey": "topics.python-for-beginners.python-3.if-elif-else.projectSteps.code_input_1.title",
-            "exerciseKey": "code-input-1",
+            "id": "1",
+            "titleKey": "topics.python-for-beginners.python-3.if-elif-else.projectSteps.1.title",
+            "exerciseKey": "1",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": 10
           },
           {
-            "id": "code_input_2",
-            "titleKey": "topics.python-for-beginners.python-3.if-elif-else.projectSteps.code_input_2.title",
-            "exerciseKey": "code-input-2",
+            "id": "2",
+            "titleKey": "topics.python-for-beginners.python-3.if-elif-else.projectSteps.2.title",
+            "exerciseKey": "2",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
@@ -63,85 +70,82 @@
   ],
   "sketches": [
     {
-      "id": "intro-to-conditional-statements",
+      "id": "1",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-for-beginners.python-3.if-elif-else.intro-to-conditional-statements.title",
-      "bodyKey": "sketches.python-for-beginners.python-3.if-elif-else.intro-to-conditional-statements.bodyMarkdown"
+      "titleKey": "sketches.python-for-beginners.python-3.if-elif-else.1.title",
+      "bodyKey": "sketches.python-for-beginners.python-3.if-elif-else.1.bodyMarkdown"
+    },
+    {
+      "id": "2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-for-beginners.python-3.if-elif-else.2.title",
+      "bodyKey": "sketches.python-for-beginners.python-3.if-elif-else.2.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "code-input-1",
+      "id": "1",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-for-beginners.python-3.if-elif-else.quiz.code-input-1",
+      "messageBase": "topics.python-for-beginners.python-3.if-elif-else.quiz.1",
       "language": "python",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "75\n",
-            "stdout": "Passed\n",
-            "match": "exact"
-          },
-          {
-            "stdin": "45\n",
-            "stdout": "Failed\n",
+            "stdin": "1\n",
+            "stdout": "True\n",
             "match": "exact"
           }
         ],
-        "solutionCode": "grade = int(input('Enter the grade: '))\nif grade >= 60:\n    print('Passed')\nelif grade < 60:\n    print('Failed')"
+        "solutionCode": "grade = 85\nif grade >= 90:\n    print('A')\nelif grade >= 80:\n    print('B')\nelif grade >= 70:\n    print('C')\nelse:\n    print('F')"
       }
     },
     {
-      "id": "code-input-2",
+      "id": "2",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-for-beginners.python-3.if-elif-else.quiz.code-input-2",
+      "messageBase": "topics.python-for-beginners.python-3.if-elif-else.quiz.2",
       "language": "python",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "20\n",
-            "stdout": "Eligible to vote\n",
-            "match": "exact"
-          },
-          {
-            "stdin": "16\n",
-            "stdout": "Not eligible to vote\n",
+            "stdin": "1\n",
+            "stdout": "True\n",
             "match": "exact"
           }
         ],
-        "solutionCode": "age = int(input('Enter your age: '))\nif age >= 18:\n    print('Eligible to vote')\nelse:\n    print('Not eligible to vote')"
+        "solutionCode": "age = 20\nis_citizen = True\nif age >= 18 and is_citizen:\n    print('Eligible')\nelse:\n    print('Not eligible')"
       }
     },
     {
-      "id": "single-choice-1",
+      "id": "3",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-for-beginners.python-3.if-elif-else.quiz.single-choice-1",
+      "messageBase": "topics.python-for-beginners.python-3.if-elif-else.quiz.3",
       "optionIds": [
         "a",
         "b",
-        "c"
+        "c",
+        "d"
       ],
       "expected": {
         "kind": "single_choice",
-        "optionId": "a"
+        "optionId": "b"
       }
     },
     {
-      "id": "multi-choice-1",
+      "id": "4",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-for-beginners.python-3.if-elif-else.quiz.multi-choice-1",
+      "messageBase": "topics.python-for-beginners.python-3.if-elif-else.quiz.4",
       "optionIds": [
         "a",
         "b",
@@ -153,20 +157,20 @@
         "optionIds": [
           "a",
           "b",
-          "d"
+          "c"
         ]
       }
     },
     {
-      "id": "fill-blank-choice-1",
+      "id": "5",
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-for-beginners.python-3.if-elif-else.quiz.fill-blank-choice-1",
-      "choiceCount": 3,
+      "messageBase": "topics.python-for-beginners.python-3.if-elif-else.quiz.5",
+      "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "true"
+        "value": "if"
       }
     }
   ]

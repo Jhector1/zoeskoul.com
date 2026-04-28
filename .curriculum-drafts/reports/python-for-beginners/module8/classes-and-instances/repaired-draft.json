@@ -1,0 +1,120 @@
+{
+  "title": "Classes and Instances",
+  "summary": "Define classes and create individual objects.",
+  "minutes": 28,
+  "sketchBlocks": [
+    {
+      "id": "1",
+      "title": "Understanding Classes",
+      "bodyMarkdown": "In Python, a class is a blueprint for creating objects. An object is an instance of a class. For example, if you have a class called `Dog`, you can create multiple instances of `Dog`, like `dog1` and `dog2`. Each dog can have its own attributes like `name` and `age`.\n\n```python\nclass Dog:\n    def __init__(self, name, age):\n        self.name = name\n        self.age = age\n\n# Creating instances of Dog\nmy_dog = Dog('Buddy', 3)\nyour_dog = Dog('Max', 5)\n```\n\nIn this example, `my_dog` and `your_dog` are instances of the `Dog` class. Each dog has its own `name` and `age`. \n\n**Try it yourself:** Create a class called `Car` with attributes `make` and `model`.\n\nLine by line: read the first statement to see which value is stored or checked, then follow each conditional branch in order to see which path prints the final result."
+    },
+    {
+      "id": "2",
+      "title": "Adding Methods to Classes",
+      "bodyMarkdown": "Classes can also have methods, which are functions defined inside the class. For example, you can add a method to the `Dog` class that allows the dog to bark:\n\n```python\nclass Dog:\n    def __init__(self, name, age):\n        self.name = name\n        self.age = age\n\n    def bark(self):\n        return f'{self.name} says woof!'\n```\n\nNow, if you call `my_dog.bark()`, it will return 'Buddy says woof!'. \n\n**Your turn:** Add a method to the `Car` class that returns a string describing the car.\n\nLine by line: read the first statement to see which value is stored or checked, then follow each conditional branch in order to see which path prints the final result."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "1",
+      "kind": "code_input",
+      "title": "Create a Simple Class",
+      "prompt": "Define a class called `Book` with attributes `title` and `author`. Create an instance of `Book` and print its attributes.",
+      "starterCode": "class Book:\n    def __init__(self, title, author):\n        # Initialize attributes here\n\n# Create an instance of Book\nmy_book = Book('1984', 'George Orwell')\n\n# Print the attributes",
+      "solutionCode": "class Book:\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\nmy_book = Book('1984', 'George Orwell')\nprint(my_book.title)\nprint(my_book.author)",
+      "tests": [
+        {
+          "stdin": "",
+          "stdout": "1984\nGeorge Orwell\n"
+        }
+      ],
+      "hint": "Focus on the programming task being asked for, not on copying final solution text.",
+      "help": {
+        "concept": "Build the solution from the behavior the exercise is testing.",
+        "hint_1": "Think about which steps, functions, or statements are required for the task.",
+        "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
+      }
+    },
+    {
+      "id": "2",
+      "kind": "code_input",
+      "title": "Add a Method to Your Class",
+      "prompt": "Add a method to the `Book` class that returns a string describing the book. Then create an instance and call this method.",
+      "starterCode": "class Book:\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    # Add method here\n\nmy_book = Book('1984', 'George Orwell')\n# Call the method",
+      "solutionCode": "class Book:\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def description(self):\n        return f'{self.title} by {self.author}'\n\nmy_book = Book('1984', 'George Orwell')\nprint(my_book.description())",
+      "tests": [
+        {
+          "stdin": "",
+          "stdout": "1984 by George Orwell\n"
+        }
+      ],
+      "hint": "Focus on the programming task being asked for, not on copying final solution text.",
+      "help": {
+        "concept": "Build the solution from the behavior the exercise is testing.",
+        "hint_1": "Think about which steps, functions, or statements are required for the task.",
+        "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
+      }
+    },
+    {
+      "id": "3",
+      "kind": "code_input",
+      "title": "Instantiate Multiple Objects",
+      "prompt": "Create two instances of the `Book` class and print their descriptions.",
+      "starterCode": "class Book:\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def description(self):\n        return f'{self.title} by {self.author}'\n\n# Create instances here\n\n# Print descriptions",
+      "solutionCode": "class Book:\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def description(self):\n        return f'{self.title} by {self.author}'\n\nbook1 = Book('1984', 'George Orwell')\nbook2 = Book('Brave New World', 'Aldous Huxley')\nprint(book1.description())\nprint(book2.description())",
+      "tests": [
+        {
+          "stdin": "",
+          "stdout": "1984 by George Orwell\nBrave New World by Aldous Huxley\n"
+        }
+      ],
+      "hint": "Break the task into the main query or code steps first.",
+      "help": {
+        "concept": "This task checks whether you can apply instantiate multiple objects in a working solution.",
+        "hint_1": "Identify the table, columns, and condition or operation before writing the full solution.",
+        "hint_2": "Build the statement one piece at a time: select the right fields, then add the condition or operation that matches the prompt."
+      }
+    },
+    {
+      "id": "4",
+      "kind": "multi_choice",
+      "title": "Class Attributes vs Instance Attributes",
+      "prompt": "Which of the following statements are true regarding class attributes and instance attributes?",
+      "options": [
+        "Class attributes are shared across all instances.",
+        "Instance attributes are unique to each instance.",
+        "Class attributes can be modified by instances.",
+        "Instance attributes can be accessed by the class."
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ],
+      "hint": "Think about how attributes are stored and accessed.",
+      "help": {
+        "concept": "Class attributes belong to the class itself, while instance attributes belong to individual instances.",
+        "hint_1": "Consider how attributes behave when you create multiple instances.",
+        "hint_2": "Remember that class attributes are shared, while instance attributes are not."
+      }
+    },
+    {
+      "id": "5",
+      "kind": "fill_blank_choice",
+      "title": "Complete the Class Definition",
+      "prompt": "Choose the best value for the first missing blank in the statement.",
+      "template": "The first missing value is [blank1].",
+      "choices": [
+        "Dog",
+        "Animal",
+        "Car"
+      ],
+      "correctValue": "Dog",
+      "hint": "Focus on the missing concept or keyword.",
+      "help": {
+        "concept": "This task checks the key idea behind complete the class definition.",
+        "hint_1": "Look for the word or phrase that best matches the lesson concept.",
+        "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
+      }
+    }
+  ]
+}
