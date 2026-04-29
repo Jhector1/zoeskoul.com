@@ -296,6 +296,7 @@ export default function HeaderSlick({
   const NAV: NavItem[] = useMemo(
       () => [
         { href: ROUTES.home, label: t("home") },
+        { href: ROUTES.catalogs, label: t("catalogs") },
         { href: ROUTES.catalog, label: t("subjects") },
         { href: ROUTES.pricing, label: t("billing") },
       ],

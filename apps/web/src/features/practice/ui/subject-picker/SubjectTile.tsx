@@ -8,14 +8,6 @@ import { cn } from "@/lib/cn";
 import Pill from "./Pill";
 import { useTaggedT } from "@/i18n/tagged";
 
-function publicIdFallback(slug: string) {
-  const map: Record<string, string> = {
-    "linear-algebra": "learnoir/subjects/linear-algebra",
-    python: "learnoir/subjects/python",
-  };
-  return map[slug] ?? "learnoir/subjects/_default";
-}
-
 export default function SubjectTile({
                                       s,
                                       onPick,
@@ -29,20 +21,17 @@ export default function SubjectTile({
 
   const isComingSoon = s.status === "coming_soon";
   const disabled = !s.defaultModuleSlug || enrolling || isComingSoon;
-
-  const publicId = s.imagePublicId ?? publicIdFallback(s.slug);
-
-  const url = cloudinaryImageUrl(publicId, {
-    w: 1400,
-    h: 760,
-    crop: "fill",
-    gravity: "auto",
-    quality: "auto",
-    format: "auto",
-    dpr: "auto",
-  });
-
-  const imgSrc = url || "/subjects/_default.png";
+  const imageUrl = s.imagePublicId
+      ? cloudinaryImageUrl(s.imagePublicId, {
+          w: 1400,
+          h: 760,
+          crop: "fill",
+          gravity: "auto",
+          quality: "auto",
+          format: "auto",
+          dpr: "auto",
+        })
+      : null;
 
   const cta = useMemo(() => {
     if (isComingSoon) return t("comingSoon");
@@ -65,19 +54,31 @@ export default function SubjectTile({
           )}
       >
         <div className="relative h-40 border-b border-neutral-200 dark:border-white/10 sm:h-44">
-          <Image
-              src={imgSrc}
-              alt={s.imageAlt ?? s.title}
-              fill
-              sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
-              className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
-          />
-
-          <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/12 to-transparent" />
+          {imageUrl ? (
+              <>
+                <Image
+                    src={imageUrl}
+                    alt={s.imageAlt ?? s.title}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
+                    className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/12 to-transparent" />
+              </>
+          ) : (
+              <div className="absolute inset-0 bg-gradient-to-br from-slate-200 via-slate-100 to-white dark:from-slate-800 dark:via-slate-900 dark:to-slate-800">
+                <div className="absolute inset-0 opacity-[0.22] [background-image:radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.9),transparent_32%),radial-gradient(circle_at_80%_20%,rgba(255,255,255,0.7),transparent_28%),radial-gradient(circle_at_60%_70%,rgba(255,255,255,0.55),transparent_34%)]" />
+              </div>
+          )}
 
           <div className="absolute left-4 right-4 top-4 flex items-start justify-between gap-3">
             <div className="min-w-0">
-              <div className="inline-flex items-center rounded-md bg-black/35 px-2 py-1 text-[10px] font-medium uppercase tracking-[0.12em] text-white/95 backdrop-blur-sm">
+              <div className={cn(
+                  "inline-flex items-center rounded-md px-2 py-1 text-[10px] font-medium uppercase tracking-[0.12em] backdrop-blur-sm",
+                  imageUrl
+                      ? "bg-black/35 text-white/95"
+                      : "bg-white/70 text-neutral-800 dark:bg-black/25 dark:text-white/90",
+              )}>
                 {s.slug}
               </div>
             </div>
@@ -92,7 +93,10 @@ export default function SubjectTile({
           </div>
 
           <div className="absolute inset-x-4 bottom-4">
-            <div className="text-lg font-semibold tracking-tight text-white sm:text-xl">
+            <div className={cn(
+                "text-lg font-semibold tracking-tight sm:text-xl",
+                imageUrl ? "text-white" : "text-neutral-900 dark:text-white",
+            )}>
               {s.title}
             </div>
           </div>

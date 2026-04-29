@@ -1,6 +1,7 @@
 {
   "subject": {
     "slug": "sql",
+    "catalogSlug": "sql",
     "genKey": "sql_for_beginners",
     "order": 20,
     "accessPolicy": "free",

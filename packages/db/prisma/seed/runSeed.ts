@@ -1,7 +1,7 @@
 import "dotenv/config";
 import { Prisma, prisma } from "../../src/client.js";
 
-import { SUBJECTS, MODULES, TOPICS, SECTIONS } from "./data";
+import { CATALOGS, SUBJECTS, MODULES, TOPICS, SECTIONS } from "./data";
 
 function toJson(value: unknown): Prisma.InputJsonValue | undefined {
   if (value === undefined) return undefined;
@@ -14,14 +14,55 @@ export async function runSeed() {
   try {
     return await prisma.$transaction(async (tx) => {
       // -------------------------
-      // 1) Subjects
+      // 1) Catalogs
+      // -------------------------
+      const catalogIdBySlug = new Map<string, string>();
+
+      for (const c of CATALOGS) {
+        const row = await tx.practiceCatalog.upsert({
+          where: { slug: c.slug },
+          update: {
+            order: c.order,
+            title: c.title,
+            description: c.description ?? null,
+            meta: toJson(c.meta),
+            imagePublicId: c.imagePublicId ?? null,
+            imageAlt: c.imageAlt ?? null,
+            defaultSubjectSlug: c.defaultSubjectSlug ?? null,
+            status: c.status ?? "active",
+          },
+          create: {
+            slug: c.slug,
+            order: c.order,
+            title: c.title,
+            description: c.description ?? null,
+            meta: toJson(c.meta),
+            imagePublicId: c.imagePublicId ?? null,
+            imageAlt: c.imageAlt ?? null,
+            defaultSubjectSlug: c.defaultSubjectSlug ?? null,
+            status: c.status ?? "active",
+          },
+        });
+
+        catalogIdBySlug.set(c.slug, row.id);
+      }
+
+      // -------------------------
+      // 2) Subjects
       // -------------------------
       const subjectIdBySlug = new Map<string, string>();
 
       for (const s of SUBJECTS) {
+        const catalogId = catalogIdBySlug.get(s.catalogSlug) ?? null;
+
+        if (!catalogId) {
+          throw new Error(`Missing catalogId for subject ${s.slug} (${s.catalogSlug})`);
+        }
+
         const row = await tx.practiceSubject.upsert({
           where: { slug: s.slug },
           update: {
+            catalogId,
             order: s.order,
             title: s.title,
             description: s.description ?? null,
@@ -34,6 +75,7 @@ export async function runSeed() {
           },
           create: {
             slug: s.slug,
+            catalogId,
             order: s.order,
             title: s.title,
             description: s.description ?? null,
@@ -50,7 +92,7 @@ export async function runSeed() {
       }
 
       // -------------------------
-      // 2) Modules
+      // 3) Modules
       // -------------------------
       const moduleIdBySlug = new Map<string, string>();
 
@@ -89,7 +131,7 @@ export async function runSeed() {
 
 
       // -------------------------
-      // 3) Topics
+      // 4) Topics
       // -------------------------
       const topicIdBySlug = new Map<string, string>();
 
@@ -130,7 +172,7 @@ export async function runSeed() {
         topicIdBySlug.set(t.slug, row.id);
       }
       // -------------------------
-      // 4) Sections + section-topic links
+      // 5) Sections + section-topic links
       // -------------------------
       for (const s of SECTIONS) {
         const subjectId = subjectIdBySlug.get(s.subjectSlug) ?? null;
@@ -179,6 +221,7 @@ export async function runSeed() {
 
       return {
         ok: true as const,
+        catalogs: CATALOGS.length,
         subjects: SUBJECTS.length,
         modules: MODULES.length,
         topics: TOPICS.length,

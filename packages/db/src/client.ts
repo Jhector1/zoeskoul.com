@@ -87,6 +87,7 @@ export type {
     ReviewProgress,
     PracticeSession,
     PracticeAttempt,
+    PracticeCatalog,
     PracticeSubject,
     PracticeModule,
     PracticeTopic,

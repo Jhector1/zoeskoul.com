@@ -1,9 +1,12 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { getResolvedSubjectCatalogMap } from "@/lib/subjects/server/resolveSubjectPresentation";
+import {
+    getResolvedCatalogMap,
+    getResolvedSubjectCardMap,
+} from "@/lib/subjects/server/resolveSubjectPresentation";
 
 export async function GET() {
-    const [subjects, manifestMap] = await Promise.all([
+    const [subjects, subjectMap, catalogMap] = await Promise.all([
         prisma.practiceSubject.findMany({
             orderBy: { order: "asc" },
             include: {
@@ -17,12 +20,14 @@ export async function GET() {
                 },
             },
         }),
-        getResolvedSubjectCatalogMap(),
+        getResolvedSubjectCardMap(),
+        getResolvedCatalogMap(),
     ]);
 
     return NextResponse.json({
+        catalogs: Object.values(catalogMap),
         subjects: subjects.map((subject) => {
-            const resolved = manifestMap[subject.slug];
+            const resolved = subjectMap[subject.slug];
 
             return {
                 ...subject,

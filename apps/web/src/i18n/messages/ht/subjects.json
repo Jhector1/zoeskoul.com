@@ -7,12 +7,12 @@
     }
   },
   "subjectsUi": {
-    "headerTitle": "Chwazi yon sijè",
-    "headerSubtitle": "Kòmanse aprann nan kèk minit. Chwazi yon sijè pou ouvri modil li yo.",
-    "searchPlaceholder": "Chèche sijè yo…",
+    "headerTitle": "Chwazi yon kou",
+    "headerSubtitle": "Kòmanse aprann nan kèk minit. Chwazi yon kou pou ouvri modil li yo.",
+    "searchPlaceholder": "Chèche kou yo…",
     "searchClear": "Efase",
-    "resultsCount": "{count, plural, =0 {Pa gen sijè} one {# sijè} other {# sijè}}",
-    "noSubjectsFound": "Nou pa jwenn okenn sijè.",
+    "resultsCount": "{count, plural, =0 {Pa gen kou} one {# kou} other {# kou}}",
+    "noSubjectsFound": "Nou pa jwenn okenn kou.",
     "enrolled": "Ou enskri",
     "enrolling": "N ap enskri…",
     "continue": "Kontinye",

@@ -1,6 +1,7 @@
 import "server-only";
 
 import { SUBJECT_ARTIFACTS } from "@/lib/subjects";
+import { CATALOG_MANIFESTS } from "@/lib/subjects/catalogs.generated";
 import { resolveTaggedOnServer } from "@/i18n/resolveTaggedOnServer";
 import {
     getRawReviewModule,
@@ -28,6 +29,11 @@ function sortByOrderThenSlug<T extends { order: number; slug: string }>(a: T, b:
     return a.order - b.order || a.slug.localeCompare(b.slug);
 }
 
+function getSubjectStatus(subject: unknown): "active" | "coming_soon" | "disabled" {
+    const value = (subject as { status?: unknown } | null)?.status;
+    return value === "coming_soon" || value === "disabled" ? value : "active";
+}
+
 export type ResolvedSubjectCatalogItem = {
     slug: string;
     title: string;
@@ -38,6 +44,23 @@ export type ResolvedSubjectCatalogItem = {
 };
 
 export type ResolvedSubjectCatalogMap = Record<string, ResolvedSubjectCatalogItem>;
+
+export type ResolvedCatalogSubjectItem = ResolvedSubjectCatalogItem & {
+    status: "active" | "coming_soon" | "disabled";
+};
+
+export type ResolvedCatalogItem = {
+    slug: string;
+    title: string;
+    description: string;
+    imagePublicId: string | null;
+    imageAlt: string | null;
+    defaultSubjectSlug: string | null;
+    status: "active" | "coming_soon" | "disabled";
+    subjects: ResolvedCatalogSubjectItem[];
+};
+
+export type ResolvedCatalogMap = Record<string, ResolvedCatalogItem>;
 
 export type ResolvedSectionPresentation = {
     slug: string;
@@ -183,36 +206,93 @@ function normalizeSection(section: ReviewModuleSection): ReviewModuleSection {
     };
 }
 
-export async function getResolvedSubjectCatalogMap(): Promise<ResolvedSubjectCatalogMap> {
+async function resolveSubjectCatalogItem(
+    subjectSlug: string,
+): Promise<ResolvedCatalogSubjectItem | null> {
+    const subject = subjectBySlug[subjectSlug];
+    if (!subject) return null;
+
+    const resolved = await resolveTaggedOnServer({
+        slug: subject.slug,
+        title: subject.title,
+        description: subject.description ?? "",
+        imagePublicId: subject.imagePublicId ?? null,
+        imageAlt: subject.imageAlt ?? null,
+    });
+
+    const defaultModuleSlug =
+        SUBJECT_ARTIFACTS.modules
+            .filter((m) => m.subjectSlug === subject.slug)
+            .sort(sortByOrderThenSlug)[0]?.slug ?? null;
+
+    return {
+        slug: subject.slug,
+        title: resolved.title,
+        description: resolved.description ?? "",
+        imagePublicId: resolved.imagePublicId ?? null,
+        imageAlt: resolved.imageAlt ?? resolved.title ?? subject.slug,
+        defaultModuleSlug,
+        status: getSubjectStatus(subject),
+    };
+}
+
+export async function getResolvedSubjectCardMap(): Promise<ResolvedSubjectCatalogMap> {
     const out: ResolvedSubjectCatalogMap = {};
 
     for (const subject of SUBJECT_ARTIFACTS.subjects) {
-        const raw = {
-            slug: subject.slug,
-            title: subject.title,
-            description: subject.description ?? "",
-            imagePublicId: subject.imagePublicId ?? null,
-            imageAlt: subject.imageAlt ?? null,
-        };
+        const item = await resolveSubjectCatalogItem(subject.slug);
+        if (item) out[subject.slug] = item;
+    }
 
-        const resolved = await resolveTaggedOnServer(raw);
+    return out;
+}
 
-        const defaultModuleSlug =
-            SUBJECT_ARTIFACTS.modules
-                .filter((m) => m.subjectSlug === subject.slug)
-                .sort(sortByOrderThenSlug)[0]?.slug ?? null;
+export async function getResolvedSubjectCatalogMap(): Promise<ResolvedSubjectCatalogMap> {
+    return getResolvedSubjectCardMap();
+}
 
-        out[subject.slug] = {
-            slug: subject.slug,
-            title: resolved.title,
-            description: resolved.description ?? "",
-            imagePublicId: resolved.imagePublicId ?? null,
-            imageAlt: resolved.imageAlt ?? resolved.title ?? subject.slug,
-            defaultModuleSlug,
+export async function getResolvedCatalogMap(): Promise<ResolvedCatalogMap> {
+    const out: ResolvedCatalogMap = {};
+
+    const catalogEntries = Object.values(CATALOG_MANIFESTS)
+        .map((entry) => entry.catalog)
+        .sort(sortByOrderThenSlug);
+
+    for (const catalog of catalogEntries) {
+        const subjects = (
+            await Promise.all(
+                catalog.subjectSlugs.map((subjectSlug) =>
+                    resolveSubjectCatalogItem(subjectSlug),
+                ),
+            )
+        )
+            .filter((value): value is ResolvedCatalogSubjectItem => Boolean(value))
+            .sort((a, b) => {
+                const leftOrder = Number(subjectBySlug[a.slug]?.order ?? 0);
+                const rightOrder = Number(subjectBySlug[b.slug]?.order ?? 0);
+                return leftOrder - rightOrder || a.slug.localeCompare(b.slug);
+            });
+
+        out[catalog.slug] = {
+            slug: catalog.slug,
+            title: catalog.title,
+            description: catalog.description ?? "",
+            imagePublicId: catalog.imagePublicId ?? null,
+            imageAlt: catalog.imageAlt ?? catalog.title,
+            defaultSubjectSlug: catalog.defaultSubjectSlug ?? subjects[0]?.slug ?? null,
+            status: catalog.status ?? "active",
+            subjects,
         };
     }
 
     return out;
+}
+
+export async function getResolvedCatalogBySlug(
+    catalogSlug: string,
+): Promise<ResolvedCatalogItem | null> {
+    const map = await getResolvedCatalogMap();
+    return map[catalogSlug] ?? null;
 }
 
 export async function getResolvedSubjectModulesFromManifest(

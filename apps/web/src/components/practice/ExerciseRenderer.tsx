@@ -185,76 +185,52 @@ function CodeInputWithTools(props: {
             ? exercise.sqlInitialTableSnapshots
             : undefined;
     const onPatch = useCallback((patch: any) => updateCurrent(patch), [updateCurrent]);
-
-    // register once for lifecycle / binding
-    useEffect(() => {
-        registerCodeInput(codeInputId, {
+    const registerArgs = useMemo(
+        () => ({
             lang: curLang,
             code: curCode,
             stdin: curStdin,
-
             sqlDialect: curLang === "sql" ? exerciseSqlDialect : undefined,
             sqlDatasetId: curLang === "sql" ? exerciseSqlDatasetId : undefined,
             sqlSchemaSql: curLang === "sql" ? exerciseSqlSchemaSql : undefined,
             sqlSeedSql: curLang === "sql" ? exerciseSqlSeedSql : undefined,
             sqlInitialTableSnapshots:
                 curLang === "sql" ? exerciseSqlInitialTableSnapshots : undefined,
-
             onPatch,
-        });
+        }),
+        [
+            curLang,
+            curCode,
+            curStdin,
+            exerciseSqlDialect,
+            exerciseSqlDatasetId,
+            exerciseSqlSchemaSql,
+            exerciseSqlSeedSql,
+            exerciseSqlInitialTableSnapshots,
+            onPatch,
+        ],
+    );
+    const unregisterRef = useRef(unregisterCodeInput);
 
-        return () => unregisterCodeInput(codeInputId);
-    }, [
-        registerCodeInput,
-        unregisterCodeInput,
-        codeInputId,
-        onPatch,
-        curLang,
-        curCode,
-        curStdin,
-        exerciseSqlDialect,
-        exerciseSqlDatasetId,
-        exerciseSqlSchemaSql,
-        exerciseSqlSeedSql,
-        exerciseSqlInitialTableSnapshots,
-    ]);
+    useEffect(() => {
+        unregisterRef.current = unregisterCodeInput;
+    }, [unregisterCodeInput]);
+
+    // Register on mount, unregister only on actual unmount.
+    useEffect(() => {
+        registerCodeInput(codeInputId, registerArgs);
+
+        return () => unregisterRef.current(codeInputId);
+        // Intentionally not coupled to live register args. Live snapshot sync happens below.
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [codeInputId]);
     const toolsBoundToThis = isBound(codeInputId);
     const toolsUnbound = boundId == null;
 
-    // IMPORTANT:
-    // only seed from current while NOT bound.
-    // once bound, Tools/registry own the live code.
+    // Keep the registry snapshot fresh without treating every change like a remount.
     useEffect(() => {
-        if (toolsBoundToThis) return;
-
-        registerCodeInput(codeInputId, {
-            lang: curLang,
-            code: curCode,
-            stdin: curStdin,
-
-            sqlDialect: curLang === "sql" ? exerciseSqlDialect : undefined,
-            sqlDatasetId: curLang === "sql" ? exerciseSqlDatasetId : undefined,
-            sqlSchemaSql: curLang === "sql" ? exerciseSqlSchemaSql : undefined,
-            sqlSeedSql: curLang === "sql" ? exerciseSqlSeedSql : undefined,
-            sqlInitialTableSnapshots:
-                curLang === "sql" ? exerciseSqlInitialTableSnapshots : undefined,
-
-            onPatch,
-        });
-    }, [
-        toolsBoundToThis,
-        registerCodeInput,
-        codeInputId,
-        curLang,
-        curCode,
-        curStdin,
-        onPatch,
-        exerciseSqlDialect,
-        exerciseSqlDatasetId,
-        exerciseSqlSchemaSql,
-        exerciseSqlSeedSql,
-        exerciseSqlInitialTableSnapshots,
-    ]);
+        registerCodeInput(codeInputId, registerArgs);
+    }, [registerCodeInput, codeInputId, registerArgs]);
     const runEntry = getRunFeedbackEntry?.(codeInputId) ?? null;
     const toolRunFeedback = runEntry?.feedback ?? null;
     const toolRunTick = runEntry?.tick ?? 0;
@@ -761,7 +737,6 @@ export default function ExerciseRenderer({
         );
     }
 }
-
 
 
 

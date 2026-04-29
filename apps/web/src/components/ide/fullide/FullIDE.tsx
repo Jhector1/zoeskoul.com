@@ -26,6 +26,10 @@ import IdeExplorerPane from "@/components/ide/fullide/panes/IdeExplorerPane";
 import type { FullIDEProps } from "../types";
 import { CodeRunnerRuntime, ExecutionBackend } from "@/components/code/runner/runtime";
 import { mergeTerminalSnapshotIntoWorkspace } from "@/lib/projects/mergeTerminalSnapshotIntoWorkspace";
+import {
+    FullIDEServices,
+    resolveFullIDEServices,
+} from "@/components/ide/fullide/services";
 
 type WorkspaceHookResult = ReturnType<typeof useIdeWorkspace>;
 
@@ -42,12 +46,15 @@ type FullIDEInnerProps = {
     projectTitle?: string | null;
     projectDescription?: string | null;
     projectScope: FullIDEProps["projectScope"];
-    showTopLanguageButtons: boolean;
     router: ReturnType<typeof useRouter>;
     splitRef: React.RefObject<HTMLDivElement | null>;
     editorHostRef: React.RefObject<HTMLDivElement | null>;
     showMobileExplorer: boolean;
     setShowMobileExplorer: React.Dispatch<React.SetStateAction<boolean>>;
+    services: FullIDEServices;
+    onBeforeRun?: FullIDEProps["onBeforeRun"];
+    onRunResult?: FullIDEProps["onRunResult"];
+    sqlInitialTableSnapshots?: FullIDEProps["sqlInitialTableSnapshots"];
     sqlDialect: any;
     setSqlDialect: React.Dispatch<React.SetStateAction<any>>;
     onChangeLanguage?: FullIDEProps["onChangeLanguage"];
@@ -126,12 +133,15 @@ function FullIDEInner({
                           projectTitle,
                           projectDescription,
                           projectScope,
-                          showTopLanguageButtons,
                           router,
                           splitRef,
                           editorHostRef,
                           showMobileExplorer,
                           setShowMobileExplorer,
+                          services,
+                          onBeforeRun,
+                          onRunResult,
+                          sqlInitialTableSnapshots,
                           sqlDialect,
                           setSqlDialect,
                           onChangeLanguage,
@@ -197,17 +207,24 @@ function FullIDEInner({
         refreshProjects: projects.refresh,
     });
 
+    const handleCloseMobileExplorer = useCallback(() => {
+        setShowMobileExplorer(false);
+    }, [setShowMobileExplorer]);
+
     const viewport = useIdeViewport({
         height,
         activeFileId,
-        showMobileExplorer,
+        showMobileExplorer: services.explorer.enabled && showMobileExplorer,
         editorHostRef,
-        onCloseMobileExplorer: () => setShowMobileExplorer(false),
+        onCloseMobileExplorer: handleCloseMobileExplorer,
     });
 
     const isSql = language === "sql";
+    const canUseWorkspaceTerminal =
+        services.runner.enableWorkspaceTerminal && language !== "sql" && language !== "web";
 
-    const codeBackend: ExecutionBackend = isSql ? "judge0" : "pty";
+    const codeBackend: ExecutionBackend =
+        isSql || !canUseWorkspaceTerminal ? "judge0" : "pty";
 
     const runnerRuntime: CodeRunnerRuntime =
         codeBackend === "pty"
@@ -298,6 +315,7 @@ function FullIDEInner({
             canRedo={history.canRedo}
             onUndo={actions.undo}
             onRedo={actions.redo}
+            services={services}
             actions={{
                 setInlineEdit: actions.setInlineEdit,
                 setToast: actions.setToast,
@@ -348,10 +366,13 @@ function FullIDEInner({
             language={language}
             sqlDialect={sqlDialect}
             runtime={runnerRuntime}
+            services={services}
             onChangeLanguage={setLangUI}
             isAuthenticated={access.hasUser}
             onChangeCode={actions.onChangeCode}
             onChangeSqlDialect={setSqlDialect}
+            onBeforeRun={onBeforeRun}
+            onRunResult={onRunResult}
             onRun={runner.onRunProject}
             setActiveFileId={(id) => actions.setActiveFileId(id ?? "")}
             closeTab={actions.closeTab}
@@ -359,6 +380,7 @@ function FullIDEInner({
             projectId={projectSession.projectId}
             terminalHistoryScopeKey={terminalHistoryScopeKey}
             onApplyTerminalSnapshotFiles={applyTerminalSnapshotFiles}
+            sqlInitialTableSnapshots={sqlInitialTableSnapshots}
         />
     );
 
@@ -383,6 +405,9 @@ function FullIDEInner({
         projectSession.setSaveAsOpen(true);
     };
 
+    const showProjectsUi =
+        services.projects.showProjectSwitcher || services.projects.showCloudProjects;
+
     return (
         <>
             <IdeToastHost toast={toast} />
@@ -404,38 +429,53 @@ function FullIDEInner({
                 />
             ) : null}
 
-            <IdeHeader
-                isDesktop={viewport.isDesktop}
-                showTopLanguageButtons={showTopLanguageButtons}
-                language={language}
-                sqlDialect={sqlDialect}
-                onChangeSqlDialect={setSqlDialect}
-                onChangeLanguage={setLangUI}
-                onBack={goBack}
-                onOpenFiles={() => setShowMobileExplorer(true)}
-                onOpenProjects={() => projectSession.setProjectsOpen(true)}
-                activePath={activeFile ? pathOf(nodes, activeFile.id) : "No file selected"}
-                projectTitle={headerProjectTitle}
-                dirty={dirty.isDirty}
-                conflict={!!projectSession.conflictInfo}
-                lastSavedAt={projectSession.lastSavedAt}
-                lessonHref={lessonHref}
-                lessonLabel={lessonLabel}
-                saveDisabled={
-                    projectSession.isSavingProject ||
-                    projectSession.loadingProject ||
-                    !currentWorkspace
-                }
-                saveBusy={projectSession.isSavingProject}
-                saveAsDisabled={projectSession.loadingProject || !currentWorkspace}
-                canSaveCloud={access.canSaveCloud}
-                hasUser={access.hasUser}
-                onSave={handlePrimarySave}
-                onSaveAs={handleSaveAsIntent}
-            />
+            {services.chrome.showHeader ? (
+                <IdeHeader
+                    isDesktop={viewport.isDesktop}
+                    showTopLanguageButtons={services.chrome.showTopLanguageButtons}
+                    showBackButton={services.chrome.showBackButton}
+                    showMobileFilesButton={
+                        services.explorer.enabled && services.explorer.allowMobileDrawer
+                    }
+                    showProjectSwitcher={services.projects.showProjectSwitcher}
+                    showActivePath={services.chrome.showActivePath}
+                    showStatus={services.chrome.showStatus}
+                    showSaveControls={services.projects.showSaveControls}
+                    showSaveAs={services.projects.showSaveAs}
+                    showLessonLink={services.chrome.showLessonLink}
+                    language={language}
+                    sqlDialect={sqlDialect}
+                    onChangeSqlDialect={setSqlDialect}
+                    onChangeLanguage={setLangUI}
+                    onBack={goBack}
+                    onOpenFiles={() => setShowMobileExplorer(true)}
+                    onOpenProjects={() => {
+                        if (!showProjectsUi) return;
+                        projectSession.setProjectsOpen(true);
+                    }}
+                    activePath={activeFile ? pathOf(nodes, activeFile.id) : "No file selected"}
+                    projectTitle={headerProjectTitle}
+                    dirty={dirty.isDirty}
+                    conflict={!!projectSession.conflictInfo}
+                    lastSavedAt={projectSession.lastSavedAt}
+                    lessonHref={lessonHref}
+                    lessonLabel={lessonLabel}
+                    saveDisabled={
+                        projectSession.isSavingProject ||
+                        projectSession.loadingProject ||
+                        !currentWorkspace
+                    }
+                    saveBusy={projectSession.isSavingProject}
+                    saveAsDisabled={projectSession.loadingProject || !currentWorkspace}
+                    canSaveCloud={access.canSaveCloud}
+                    hasUser={access.hasUser}
+                    onSave={handlePrimarySave}
+                    onSaveAs={handleSaveAsIntent}
+                />
+            ) : null}
 
             <div className="min-h-0 flex-1">
-                {viewport.isDesktop ? (
+                {services.explorer.enabled && viewport.isDesktop ? (
                     <IdeDesktopLayout
                         splitRef={splitRef}
                         leftPct={leftPct}
@@ -446,17 +486,23 @@ function FullIDEInner({
                         explorer={explorerPane}
                         editor={editorPane}
                     />
-                ) : (
+                ) : services.explorer.enabled ? (
                     <IdeMobileLayout
-                        open={showMobileExplorer}
-                        onClose={() => setShowMobileExplorer(false)}
+                        open={services.explorer.allowMobileDrawer && showMobileExplorer}
+                        onClose={handleCloseMobileExplorer}
                         explorer={explorerPane}
                         editor={editorPane}
                     />
+                ) : (
+                    <div className="h-full min-h-0 min-w-0 overflow-hidden">{editorPane}</div>
                 )}
             </div>
 
             <IdeProjectModals
+                showDeleteModal={services.explorer.showActions}
+                showProjects={showProjectsUi}
+                showSaveAs={services.projects.showSaveAs}
+                showRename={services.projects.showCloudProjects}
                 nodes={nodes}
                 pendingDeleteId={pendingDeleteId}
                 onCancelDelete={() => actions.setPendingDeleteId(null)}
@@ -523,6 +569,15 @@ export default function FullIDE(props: FullIDEProps) {
         projectScope,
         draftStorageMode = "local",
         onReadyChange,
+        servicePreset,
+        services: serviceOverrides,
+        initialWorkspace,
+        externalWorkspace,
+        onWorkspaceChange,
+        onBeforeRun,
+        onRunResult,
+        initialSqlDialect = DEFAULT_SQL_DIALECT,
+        sqlInitialTableSnapshots,
     } = props;
 
     const router = useRouter();
@@ -532,8 +587,12 @@ export default function FullIDE(props: FullIDEProps) {
     const editorHostRef = useRef<HTMLDivElement | null>(null);
 
     const [showMobileExplorer, setShowMobileExplorer] = useState(false);
-    const [sqlDialect, setSqlDialect] = useState(DEFAULT_SQL_DIALECT);
+    const [sqlDialect, setSqlDialect] = useState(initialSqlDialect);
     const [guestActorKey, setGuestActorKey] = useState<string>("guest:pending");
+
+    useEffect(() => {
+        setSqlDialect(initialSqlDialect);
+    }, [initialSqlDialect]);
 
     useEffect(() => {
         if (access.hasUser) return;
@@ -571,17 +630,46 @@ export default function FullIDE(props: FullIDEProps) {
         return `${storageKey}:${scopeKey ?? "global"}`;
     }, [storageKey, scopeKey]);
 
+    const services = useMemo(
+        () =>
+            resolveFullIDEServices({
+                preset: servicePreset ?? "runner",
+                showTopLanguageButtons,
+                overrides: serviceOverrides,
+            }),
+        [serviceOverrides, servicePreset, showTopLanguageButtons],
+    );
+
     const workspace = useIdeWorkspace({
         storageKey: scopedStorageKey,
         forcedLanguage,
         resetOnForcedLanguageChange,
         access,
+        initialWorkspace,
         actorKey,
         projectId: draftStorageMode === "local" ? null : initialProjectId,
         scopeKey,
         draftStorageMode: (draftStorageMode ?? "local") as "off" | "local",
         localWorkspaceId,
     });
+
+    const externalWorkspaceJson = useMemo(
+        () => JSON.stringify(externalWorkspace ?? null),
+        [externalWorkspace],
+    );
+    const lastAppliedExternalWorkspaceJsonRef = useRef<string | null>(null);
+
+    useEffect(() => {
+        if (!externalWorkspace) return;
+        if (lastAppliedExternalWorkspaceJsonRef.current === externalWorkspaceJson) return;
+
+        workspace.actions.replaceWorkspace(externalWorkspace);
+        lastAppliedExternalWorkspaceJsonRef.current = externalWorkspaceJson;
+    }, [externalWorkspace, externalWorkspaceJson, workspace.actions]);
+
+    useEffect(() => {
+        onWorkspaceChange?.(workspace.derived.currentWorkspace);
+    }, [onWorkspaceChange, workspace.derived.currentWorkspace]);
 
     const sessionRemountKey = useMemo(
         () =>
@@ -648,12 +736,15 @@ export default function FullIDE(props: FullIDEProps) {
                 projectTitle={projectTitle}
                 projectDescription={projectDescription}
                 projectScope={projectScope}
-                showTopLanguageButtons={showTopLanguageButtons}
                 router={router}
                 splitRef={splitRef}
                 editorHostRef={editorHostRef}
                 showMobileExplorer={showMobileExplorer}
                 setShowMobileExplorer={setShowMobileExplorer}
+                services={services}
+                onBeforeRun={onBeforeRun}
+                onRunResult={onRunResult}
+                sqlInitialTableSnapshots={sqlInitialTableSnapshots}
                 sqlDialect={sqlDialect}
                 setSqlDialect={setSqlDialect}
                 onChangeLanguage={onChangeLanguage}

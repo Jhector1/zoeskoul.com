@@ -21,6 +21,7 @@ export function buildBaseSubjectManifest(
   return {
     subject: {
       slug: blueprint.subjectSlug,
+      catalogSlug: blueprint.catalogSlug ?? blueprint.subjectSlug,
       genKey: blueprint.subjectSlug,
       order: 10,
       accessPolicy: "free",

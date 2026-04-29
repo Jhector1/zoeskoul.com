@@ -418,6 +418,7 @@ export default function ProgrammingIdeSandbox({
                                         "h-full transition-opacity duration-200",
                                         ideReady ? "opacity-100" : "opacity-0",
                                     )}
+                                    servicePreset="workspace"
                                     title={title}
                                     fullHeight
                                     storageKey={storageKey}

@@ -7,13 +7,13 @@
     }
   },
   "subjectsUi": {
-    "headerTitle": "Choisir une matière",
-    "headerSubtitle": "Commencez en quelques minutes. Choisissez une matière pour ouvrir ses modules.",
-    "searchPlaceholder": "Rechercher des matières…",
+    "headerTitle": "Choisir un cours",
+    "headerSubtitle": "Commencez en quelques minutes. Choisissez un cours pour ouvrir ses modules.",
+    "searchPlaceholder": "Rechercher des cours…",
     "searchClear": "Effacer",
-    "resultsCount": "{count, plural, =0 {Aucune matière} one {# matière} other {# matières}}",
+    "resultsCount": "{count, plural, =0 {Aucun cours} one {# cours} other {# cours}}",
 
-      "noSubjectsFound": "Aucun sujet trouvé.",
+      "noSubjectsFound": "Aucun cours trouvé.",
       "enrolled": "Inscrit",
       "enrolling": "Inscription…",
       "continue": "Continuer",

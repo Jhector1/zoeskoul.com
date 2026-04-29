@@ -2,6 +2,7 @@
 {
   "subject": {
     "slug": "python",
+    "catalogSlug": "python",
     "genKey": "python_part1",
     "order": 30,
     "accessPolicy": "free",

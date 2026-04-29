@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useMemo, useState } from "react";
-import { useRouter } from "@/i18n/navigation";
+import { Link, useRouter } from "@/i18n/navigation";
 import SubjectTile from "./SubjectTile";
 import Pill from "./Pill";
 import { ROUTES } from "@/utils";
@@ -35,8 +35,24 @@ function SectionKicker({ children }: { children: React.ReactNode }) {
 
 export default function SubjectPicker({
                                           initialSubjects,
+                                          pageTitle,
+                                          pageKicker,
+                                          pageSubtitle,
+                                          emptyTitle,
+                                          emptySubtitle,
+                                          browseHref,
+                                          browseLabel,
+                                          allowEnrollment = true,
                                       }: {
     initialSubjects: SubjectCard[];
+    pageTitle?: string;
+    pageKicker?: string;
+    pageSubtitle?: string;
+    emptyTitle?: string;
+    emptySubtitle?: string;
+    browseHref?: string | null;
+    browseLabel?: string;
+    allowEnrollment?: boolean;
 }) {
     const router = useRouter();
     const { t } = useTaggedT("subjectsUi");
@@ -81,7 +97,7 @@ export default function SubjectPicker({
         if (!s.defaultModuleSlug) return;
         if (enrollingSlug) return;
 
-        if (!s.enrolled) {
+        if (allowEnrollment && !s.enrolled) {
             setEnrollingSlug(s.slug);
 
             try {
@@ -107,14 +123,14 @@ export default function SubjectPicker({
                     <Surface className="p-4 sm:p-5">
                         <div className="grid gap-5 lg:grid-cols-[minmax(0,1.3fr)_minmax(320px,0.85fr)] lg:gap-6">
                             <div className="min-w-0">
-                                <SectionKicker>{t("headerTitle")}</SectionKicker>
+                                <SectionKicker>{pageKicker ?? t("headerTitle")}</SectionKicker>
 
                                 <h1 className="mt-2 text-2xl font-semibold tracking-tight sm:text-3xl lg:text-4xl">
-                                    {t("headerTitle")}
+                                    {pageTitle ?? t("headerTitle")}
                                 </h1>
 
                                 <p className="mt-3 max-w-3xl text-sm leading-6 text-neutral-600 dark:text-white/70">
-                                    {t("headerSubtitle")}
+                                    {pageSubtitle ?? t("headerSubtitle")}
                                 </p>
 
                                 <div className="mt-4 flex flex-wrap gap-2">
@@ -125,6 +141,11 @@ export default function SubjectPicker({
                                     <Pill tone="neutral">{counts.active} active</Pill>
                                     {counts.comingSoon > 0 ? (
                                         <Pill tone="warn">{counts.comingSoon} coming soon</Pill>
+                                    ) : null}
+                                    {browseHref && browseLabel ? (
+                                        <Link href={browseHref} className="ui-btn-secondary">
+                                            {browseLabel}
+                                        </Link>
                                     ) : null}
                                 </div>
                             </div>
@@ -179,11 +200,11 @@ export default function SubjectPicker({
                             </div>
 
                             <div className="mt-4 text-lg font-semibold tracking-tight">
-                                {t("noSubjectsFound")}
+                                {emptyTitle ?? t("noSubjectsFound")}
                             </div>
 
                             <div className="mt-2 text-sm text-neutral-600 dark:text-white/65">
-                                Try a different keyword or clear the search field.
+                                {emptySubtitle ?? "Try a different keyword or clear the search field."}
                             </div>
 
                             {q.trim() ? (
@@ -195,6 +216,12 @@ export default function SubjectPicker({
                                     >
                                         {t("searchClear")}
                                     </button>
+                                </div>
+                            ) : browseHref && browseLabel ? (
+                                <div className="mt-4">
+                                    <Link href={browseHref} className="ui-btn-secondary">
+                                        {browseLabel}
+                                    </Link>
                                 </div>
                             ) : null}
                         </Surface>

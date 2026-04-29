@@ -3,6 +3,7 @@
 import React from "react";
 import CodeRunner from "@/components/code/CodeRunner";
 import type { CodeRunnerRuntime } from "@/components/code/runner/runtime";
+import type { FullIDEServices } from "@/components/ide/fullide/services";
 
 import TabsBar from "../TabsBar";
 import { PANEL_CARD_CLASS } from "../../constants";
@@ -34,10 +35,22 @@ type Props = {
     onChangeLanguage: (language: any) => void;
     onChangeCode: (code: string) => void;
     onChangeSqlDialect: (dialect: any) => void;
+    onBeforeRun?: () => void | Promise<void>;
+    onRunResult?: (args: { result: any; runArgs: any }) => void;
     onRun: (args: any) => Promise<any>;
     setActiveFileId: (id: string | null) => void;
     closeTab: (id: string) => void;
     isDesktop: boolean;
+    services: FullIDEServices;
+    sqlInitialTableSnapshots?: Record<
+        string,
+        {
+            name: string;
+            columns: Array<{ name: string; type?: string | null }>;
+            rows: unknown[][];
+            rowCount: number;
+        }
+    >;
 };
 
 function resolveEditorLanguage(workspaceLanguage: string, fileName?: string | null) {
@@ -74,11 +87,15 @@ export default function IdeEditorPane({
                                           onChangeLanguage,
                                           onChangeCode,
                                           onChangeSqlDialect,
+                                          onBeforeRun,
+                                          onRunResult,
                                           onRun,
                                           setActiveFileId,
                                           closeTab,
                                           isDesktop,
                                           isAuthenticated,
+                                          services,
+                                          sqlInitialTableSnapshots,
                                       }: Props) {
     const isWeb = language === "web";
 
@@ -109,15 +126,17 @@ export default function IdeEditorPane({
 
     return (
         <div className="flex h-full min-h-0 min-w-0 flex-col overflow-hidden">
-            <div className={PANEL_CARD_CLASS}>
-                <TabsBar
-                    nodes={nodes}
-                    tabFiles={tabFiles}
-                    activeFileId={activeFileId}
-                    setActiveFileId={setActiveFileId}
-                    closeTab={closeTab}
-                />
-            </div>
+            {services.editor.showTabs ? (
+                <div className={PANEL_CARD_CLASS}>
+                    <TabsBar
+                        nodes={nodes}
+                        tabFiles={tabFiles}
+                        activeFileId={activeFileId}
+                        setActiveFileId={setActiveFileId}
+                        closeTab={closeTab}
+                    />
+                </div>
+            ) : null}
 
             <div ref={panelRef} className="min-h-0 min-w-0 flex-1 overflow-hidden">
                 {activeFile ? (
@@ -135,28 +154,45 @@ export default function IdeEditorPane({
                             onChangeSqlDialect={onChangeSqlDialect}
                             sqlSchemaSql={schemaSql}
                             sqlSeedSql={seedSql}
+                            sqlInitialTableSnapshots={sqlInitialTableSnapshots}
                             showLanguagePicker={false}
-                            showSqlDialectPicker
+                            showSqlDialectPicker={services.runner.showSqlDialectPicker}
                             allowReset={isDesktop}
-                            allowRun={!isWeb}
+                            allowRun={services.runner.allowRun && !isWeb}
                             runtime={runtime}
-                            showEditorThemeToggle={false}
-                            showTerminalDockToggle={isDesktop}
+                            showTerminal={services.runner.showTerminal}
+                            showEditorThemeToggle={services.runner.showThemeToggle}
+                            showTerminalDockToggle={
+                                services.runner.showTerminalDockToggle && isDesktop
+                            }
                             resetTerminalOnRun={true}
-                            onRun={isAuthenticated && !isWeb ? onRun : undefined}
+                            onBeforeRun={onBeforeRun}
+                            onRun={
+                                isAuthenticated && !isWeb
+                                    ? async (runArgs: any) => {
+                                          const result = await onRun(runArgs);
+                                          onRunResult?.({ result, runArgs });
+                                          return result;
+                                      }
+                                    : undefined
+                            }
                             isAuthenticated={isAuthenticated}
                             webPreviewEntries={workspaceEntries}
-                            workspaceTerminal={{
-                                enabled: !isSql && !isWeb,
-                                projectId: projectId ?? undefined,
-                                cwd: "/workspace",
-                                initialFiles: workspaceEntries,
-                                getWorkspaceFiles: () => workspaceEntries,
-                                onTerminalSnapshotFiles: onApplyTerminalSnapshotFiles,
-                                lazy: true,
-                                title: "Terminal",
-                                historyScopeKey: terminalHistoryScopeKey,
-                            }}
+                            workspaceTerminal={
+                                services.runner.enableWorkspaceTerminal
+                                    ? {
+                                          enabled: !isSql && !isWeb,
+                                          projectId: projectId ?? undefined,
+                                          cwd: "/workspace",
+                                          initialFiles: workspaceEntries,
+                                          getWorkspaceFiles: () => workspaceEntries,
+                                          onTerminalSnapshotFiles: onApplyTerminalSnapshotFiles,
+                                          lazy: true,
+                                          title: "Terminal",
+                                          historyScopeKey: terminalHistoryScopeKey,
+                                      }
+                                    : undefined
+                            }
                             editorModelKey={activeFileId ?? "no-file"}
                         />
                     </div>

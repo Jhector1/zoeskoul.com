@@ -19,6 +19,7 @@ export type BlueprintRuntimePolicy = {
 
 export type CourseBlueprint = {
   subjectSlug: string;
+  catalogSlug?: string;
   profileId: CourseProfileId;
   sourceLocale: "en";
   targetLocales: LocaleCode[];

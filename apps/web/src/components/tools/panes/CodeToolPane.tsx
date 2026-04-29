@@ -1,16 +1,16 @@
 "use client";
 
-import React, { useCallback, useEffect, useState } from "react";
-import CodeRunner from "@/components/code/runner/CodeRunner";
-import type { WorkspaceLanguage, SqlDialect } from "@/lib/practice/types";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import FullIDE from "@/components/ide/fullide/FullIDE";
+import type { WorkspaceStateV2 } from "@/components/ide/types";
+import { createDefaultStateForLanguage } from "@/components/ide/workspaceHook/workspace.normalization";
+import type { SqlDialect } from "@/lib/practice/types";
 import { useElementSize } from "@/components/tools/hooks/useElementSize";
-import { runViaApi } from "@/lib/code/runClient";
 import { pickRunFeedbackFromResult } from "@/lib/code/feedback";
 import type { CodeFeedback } from "@/lib/code/feedback/types";
 import CodeFeedbackCallout from "@/components/practice/kinds/CodeFeedbackCallout";
 import { useReviewTools } from "@/components/review/module/context/ReviewToolsContext";
-import type { OnRun } from "@/components/code/runner/types";
-import {RunnerLanguage} from "@zoeskoul/code-contracts";
+import { RunnerLanguage } from "@zoeskoul/code-contracts";
 
 type SqlTableSnapshot = {
     name: string;
@@ -24,6 +24,71 @@ type SqlTableSnapshot = {
 
 type SqlTableSnapshots = Record<string, SqlTableSnapshot>;
 
+function buildToolWorkspace(args: {
+    base: WorkspaceStateV2;
+    language: RunnerLanguage;
+    code: string;
+    stdin: string;
+    sqlSchemaSql?: string;
+    sqlSeedSql?: string;
+}): WorkspaceStateV2 {
+    const nextNodes = args.base.nodes.map((node) => {
+        if (node.kind !== "file") return node;
+
+        if (args.language === "sql") {
+            if (node.name === "schema.sql") {
+                return { ...node, content: args.sqlSchemaSql ?? "" };
+            }
+
+            if (node.name === "seed.sql") {
+                return { ...node, content: args.sqlSeedSql ?? "" };
+            }
+
+            if (node.name === "query.sql") {
+                return { ...node, content: args.code };
+            }
+
+            return node;
+        }
+
+        if (node.id === args.base.activeFileId || node.id === args.base.entryFileId) {
+            return { ...node, content: args.code };
+        }
+
+        return node;
+    });
+
+    return {
+        ...args.base,
+        nodes: nextNodes,
+        stdin: args.stdin,
+    };
+}
+
+function extractWorkspaceSnapshot(workspace: WorkspaceStateV2 | null) {
+    if (!workspace) {
+        return {
+            code: "",
+            stdin: "",
+        };
+    }
+
+    const activeFile =
+        workspace.nodes.find(
+            (node) => node.kind === "file" && node.id === workspace.activeFileId,
+        ) ??
+        workspace.nodes.find(
+            (node) => node.kind === "file" && node.id === workspace.entryFileId,
+        ) ??
+        workspace.nodes.find((node) => node.kind === "file") ??
+        null;
+
+    return {
+        code: activeFile?.kind === "file" ? activeFile.content ?? "" : "",
+        stdin: workspace.stdin ?? "",
+    };
+}
+
 export default function CodeToolPane(props: {
     height: number;
     toolLang: RunnerLanguage;
@@ -32,12 +97,10 @@ export default function CodeToolPane(props: {
     onChangeCode: (c: string) => void;
     onChangeStdin: (s: string) => void;
     onBeforeRun?: () => void | Promise<void>;
-
-    // SQL lesson-controlled config
     sqlDialect?: SqlDialect;
     sqlSchemaSql?: string;
     sqlSeedSql?: string;
-    sqlSetupSql?: string; // optional legacy alias
+    sqlSetupSql?: string;
     sqlInitialTableSnapshots?: SqlTableSnapshots;
 }) {
     const {
@@ -62,111 +125,139 @@ export default function CodeToolPane(props: {
 
     const { ref, size } = useElementSize<HTMLDivElement>();
     const runnerH = Math.max(320, size.h);
+    const isSql = toolLang === "sql";
 
     const [runFeedback, setRunFeedback] = useState<CodeFeedback | null>(null);
+    const lastEmittedRef = useRef<{ code: string; stdin: string } | null>(null);
+    const lastIncomingRef = useRef<{ code: string; stdin: string } | null>(null);
+    const baseWorkspace = useMemo(
+        () => createDefaultStateForLanguage(toolLang),
+        [toolLang],
+    );
+
+    const externalWorkspace = useMemo(
+        () =>
+            buildToolWorkspace({
+                base: baseWorkspace,
+                language: toolLang,
+                code: toolCode,
+                stdin: toolStdin,
+                sqlSchemaSql: sqlSchemaSql ?? sqlSetupSql ?? "",
+                sqlSeedSql: sqlSeedSql ?? "",
+            }),
+        [
+            baseWorkspace,
+            toolLang,
+            toolCode,
+            toolStdin,
+            sqlSchemaSql,
+            sqlSeedSql,
+            sqlSetupSql,
+        ],
+    );
 
     useEffect(() => {
         setRunFeedback(null);
         if (boundId) clearRunFeedback?.(boundId);
     }, [toolLang, toolCode, toolStdin, boundId, clearRunFeedback]);
 
-    const handleRun = useCallback<OnRun>(
-        async (args: any) => {
-            const result =
-                args.language === "sql"
-                    ? await runViaApi(
-                        {
-                            kind: "sql",
-                            language: "sql",
-                            dialect: sqlDialect,
-                            code: args.code,
-                            schemaSql: sqlSchemaSql ?? sqlSetupSql ?? "",
-                            seedSql: sqlSeedSql ?? "",
-                        },
-                        args.signal,
-                    )
-                    : await runViaApi(
-                        {
-                            kind: "code",
-                            language: args.language,
-                            code: args.code,
-                            stdin: args.stdin ?? "",
-                        },
-                        args.signal,
-                    );
+    useEffect(() => {
+        lastIncomingRef.current = {
+            code: toolCode,
+            stdin: toolStdin,
+        };
+    }, [toolCode, toolStdin]);
 
-            const feedback = pickRunFeedbackFromResult({
-                result,
-                language: args.language,
-                code: args.code,
+    const handleWorkspaceChange = useCallback((workspace: WorkspaceStateV2 | null) => {
+        const next = extractWorkspaceSnapshot(workspace);
+        const prevEmitted = lastEmittedRef.current;
+        const prevIncoming = lastIncomingRef.current;
+
+        if (prevEmitted && prevEmitted.code === next.code && prevEmitted.stdin === next.stdin) {
+            return;
+        }
+
+        if (prevIncoming && prevIncoming.code === next.code && prevIncoming.stdin === next.stdin) {
+            lastEmittedRef.current = next;
+            return;
+        }
+
+        lastEmittedRef.current = next;
+        setRunFeedback(null);
+
+        if (boundId) {
+            clearRunFeedback?.(boundId);
+        }
+
+        onChangeCode(next.code);
+        onChangeStdin(next.stdin);
+
+        if (boundId) {
+            syncCodeInputSnapshot?.(boundId, {
+                code: next.code,
+                codeStdin: next.stdin,
+                submitted: false,
+                result: null,
             });
+        }
+    }, [
+        boundId,
+        clearRunFeedback,
+        onChangeCode,
+        onChangeStdin,
+        syncCodeInputSnapshot,
+    ]);
 
-            setRunFeedback(feedback);
+    const handleBeforeRun = useCallback(async () => {
+        setRunFeedback(null);
+        if (boundId) clearRunFeedback?.(boundId);
+        await onBeforeRun?.();
+    }, [boundId, clearRunFeedback, onBeforeRun]);
 
-            if (boundId) {
-                setRunFeedbackForCard?.(boundId, feedback);
-            }
+    const handleRunResult = useCallback(({ result, runArgs }: { result: any; runArgs: any }) => {
+        const feedback = pickRunFeedbackFromResult({
+            result,
+            language: runArgs.language,
+            code: runArgs.code,
+        });
 
-            return result;
-        },
-        [boundId, setRunFeedbackForCard, sqlDialect, sqlSchemaSql, sqlSeedSql, sqlSetupSql],
-    );
+        setRunFeedback(feedback);
 
-    const isSql = toolLang === "sql";
+        if (boundId) {
+            setRunFeedbackForCard?.(boundId, feedback);
+        }
+    }, [boundId, setRunFeedbackForCard]);
 
     return (
         <div ref={ref} className="flex h-full min-h-0 w-full flex-col overflow-hidden">
-            <CodeRunner
-                frame="plain"
+            <FullIDE
                 title={isSql ? "Run SQL" : "Run code"}
-                showHint={false}
                 height={runnerH - 50}
-                showTerminalDockToggle
-                runtime={{ backend: "judge0", terminalView: "plain" }}
-                showEditorThemeToggle
-                fixedLanguage={toolLang}
-                showLanguagePicker={false}
-                code={toolCode}
-                stdin={toolStdin}
-                fixedSqlDialect={isSql ? sqlDialect : undefined}
-                showSqlDialectPicker={false}
-                sqlSchemaSql={isSql ? (sqlSchemaSql ?? sqlSetupSql ?? "") : undefined}
-                sqlSeedSql={isSql ? (sqlSeedSql ?? "") : undefined}
-                sqlInitialTableSnapshots={isSql ? sqlInitialTableSnapshots : undefined}
-                onChangeCode={(c: string) => {
-                    setRunFeedback(null);
-                    if (boundId) clearRunFeedback?.(boundId);
-
-                    onChangeCode(c);
-
-                    if (boundId) {
-                        syncCodeInputSnapshot?.(boundId, {
-                            code: c,
-                            submitted: false,
-                            result: null,
-                        });
-                    }
+                fullHeight
+                language={toolLang}
+                access={{
+                    hasUser: true,
+                    canUseMultiFile: isSql,
+                    canSaveCloud: false,
+                    canCreateProjects: false,
                 }}
-                onChangeStdin={(s: string) => {
-                    setRunFeedback(null);
-                    if (boundId) clearRunFeedback?.(boundId);
-
-                    onChangeStdin(s);
-
-                    if (boundId) {
-                        syncCodeInputSnapshot?.(boundId, {
-                            codeStdin: s,
-                            submitted: false,
-                            result: null,
-                        });
-                    }
+                loginHref="/authenticate"
+                billingHref="/billing"
+                draftStorageMode="off"
+                servicePreset="runner"
+                services={{
+                    runner: {
+                        showThemeToggle: true,
+                        showSqlDialectPicker: false,
+                    },
                 }}
-                onBeforeRun={async () => {
-                    setRunFeedback(null);
-                    if (boundId) clearRunFeedback?.(boundId);
-                    await onBeforeRun?.();
-                }}
-                onRun={handleRun}
+                initialWorkspace={externalWorkspace}
+                externalWorkspace={externalWorkspace}
+                onWorkspaceChange={handleWorkspaceChange}
+                onBeforeRun={handleBeforeRun}
+                onRunResult={handleRunResult}
+                initialSqlDialect={sqlDialect}
+                sqlInitialTableSnapshots={sqlInitialTableSnapshots}
             />
 
             {!isSql && runFeedback ? (

@@ -3,12 +3,25 @@ import { PracticeKind } from "@prisma/client";
 import type { Prisma } from "@prisma/client";
 
 export type SubjectSlug = string;
+export type CatalogSlug = string;
 export type ModuleSlug = string;
 export type SectionSlug = string;
 export type TopicSlug = string;
 export type GenKey = string;
 
 export type SubjectStatus = "active" | "coming_soon" | "disabled";
+
+export type CatalogSeed = {
+  slug: CatalogSlug;
+  order: number;
+  title: string;
+  description?: string | null;
+  imagePublicId?: string | null;
+  imageAlt?: string | null;
+  defaultSubjectSlug?: SubjectSlug | null;
+  meta?: SeedJsonObject | null;
+  status?: SubjectStatus;
+};
 
 export type SeedJson = Prisma.InputJsonValue;
 export type SeedJsonObject = Prisma.InputJsonObject;
@@ -38,6 +51,7 @@ export type TopicMeta = {
 
 export type SubjectSeed = {
   slug: SubjectSlug;
+  catalogSlug: CatalogSlug;
   order: number;
   title: string;
   description?: string | null;

@@ -14,6 +14,7 @@ import { IconFile, IconFolder } from "../icons";
 import { cn } from "@/lib/cn";
 import { PlusIcon, Redo2, Undo2 } from "lucide-react";
 import Tooltip from "@/components/ui/Tooltip";
+import type { FullIDEServices } from "@/components/ide/fullide/services";
 
 type Props = {
     isSql: boolean;
@@ -37,6 +38,7 @@ type Props = {
     canRedo: boolean;
     onUndo: () => void;
     onRedo: () => void;
+    services: FullIDEServices;
     actions: {
         setInlineEdit: (value: any) => void;
         setToast: React.Dispatch<React.SetStateAction<Toast>>;
@@ -135,6 +137,7 @@ export default function IdeExplorerPane({
                                             canRedo,
                                             onUndo,
                                             onRedo,
+                                            services,
                                         }: Props) {
     const fileInputRef = useRef<HTMLInputElement | null>(null);
     const folderInputRef = useRef<HTMLInputElement | null>(null);
@@ -240,45 +243,47 @@ export default function IdeExplorerPane({
                 </div>
 
                 <div className="flex items-center gap-2">
-                    <div className="flex items-center gap-1">
-                        <Tooltip tip="Undo (Ctrl/Cmd+Z)" side="bottom">
-              <span className="inline-flex">
-                <button
-                    type="button"
-                    onClick={onUndo}
-                    disabled={!canUndo}
-                    aria-label="Undo"
-                    className={cn(
-                        "grid h-8 w-8 place-items-center rounded-lg border transition-colors",
-                        canUndo
-                            ? "border-neutral-200 bg-white text-neutral-700 hover:bg-neutral-50 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/75 dark:hover:bg-white/[0.08]"
-                            : "cursor-not-allowed border-neutral-200/70 bg-neutral-100 text-neutral-400 dark:border-white/10 dark:bg-white/[0.03] dark:text-white/25",
-                    )}
-                >
-                  <Undo2 className="h-3.5 w-3.5" />
-                </button>
-              </span>
-                        </Tooltip>
+                    {services.explorer.showHistoryControls ? (
+                        <div className="flex items-center gap-1">
+                            <Tooltip tip="Undo (Ctrl/Cmd+Z)" side="bottom">
+                                <span className="inline-flex">
+                                    <button
+                                        type="button"
+                                        onClick={onUndo}
+                                        disabled={!canUndo}
+                                        aria-label="Undo"
+                                        className={cn(
+                                            "grid h-8 w-8 place-items-center rounded-lg border transition-colors",
+                                            canUndo
+                                                ? "border-neutral-200 bg-white text-neutral-700 hover:bg-neutral-50 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/75 dark:hover:bg-white/[0.08]"
+                                                : "cursor-not-allowed border-neutral-200/70 bg-neutral-100 text-neutral-400 dark:border-white/10 dark:bg-white/[0.03] dark:text-white/25",
+                                        )}
+                                    >
+                                        <Undo2 className="h-3.5 w-3.5" />
+                                    </button>
+                                </span>
+                            </Tooltip>
 
-                        <Tooltip tip="Redo (Ctrl/Cmd+Shift+Z / Ctrl/Cmd+Y)" side="bottom">
-              <span className="inline-flex">
-                <button
-                    type="button"
-                    onClick={onRedo}
-                    disabled={!canRedo}
-                    aria-label="Redo"
-                    className={cn(
-                        "grid h-8 w-8 place-items-center rounded-lg border transition-colors",
-                        canRedo
-                            ? "border-neutral-200 bg-white text-neutral-700 hover:bg-neutral-50 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/75 dark:hover:bg-white/[0.08]"
-                            : "cursor-not-allowed border-neutral-200/70 bg-neutral-100 text-neutral-400 dark:border-white/10 dark:bg-white/[0.03] dark:text-white/25",
-                    )}
-                >
-                  <Redo2 className="h-3.5 w-3.5" />
-                </button>
-              </span>
-                        </Tooltip>
-                    </div>
+                            <Tooltip tip="Redo (Ctrl/Cmd+Shift+Z / Ctrl/Cmd+Y)" side="bottom">
+                                <span className="inline-flex">
+                                    <button
+                                        type="button"
+                                        onClick={onRedo}
+                                        disabled={!canRedo}
+                                        aria-label="Redo"
+                                        className={cn(
+                                            "grid h-8 w-8 place-items-center rounded-lg border transition-colors",
+                                            canRedo
+                                                ? "border-neutral-200 bg-white text-neutral-700 hover:bg-neutral-50 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/75 dark:hover:bg-white/[0.08]"
+                                                : "cursor-not-allowed border-neutral-200/70 bg-neutral-100 text-neutral-400 dark:border-white/10 dark:bg-white/[0.03] dark:text-white/25",
+                                        )}
+                                    >
+                                        <Redo2 className="h-3.5 w-3.5" />
+                                    </button>
+                                </span>
+                            </Tooltip>
+                        </div>
+                    ) : null}
 
                     <div className="min-w-0 text-[11px] font-extrabold text-neutral-500 dark:text-white/50">
                         {isSql ? (
@@ -290,16 +295,18 @@ export default function IdeExplorerPane({
                 </div>
             </div>
 
-            <div className="border-b border-neutral-200 p-3 dark:border-white/10">
-                <input
-                    value={filter}
-                    onChange={(e) => onChangeFilter(e.target.value)}
-                    placeholder={isSql ? "Filter SQL files…" : "Filter files…"}
-                    className="h-10 w-full rounded-lg border border-neutral-200 bg-white px-3 text-sm font-semibold text-neutral-900 outline-none transition placeholder:text-neutral-400 focus:border-emerald-400 dark:border-white/10 dark:bg-black/30 dark:text-white/80"
-                />
-            </div>
+            {services.explorer.showFilter ? (
+                <div className="border-b border-neutral-200 p-3 dark:border-white/10">
+                    <input
+                        value={filter}
+                        onChange={(e) => onChangeFilter(e.target.value)}
+                        placeholder={isSql ? "Filter SQL files…" : "Filter files…"}
+                        className="h-10 w-full rounded-lg border border-neutral-200 bg-white px-3 text-sm font-semibold text-neutral-900 outline-none transition placeholder:text-neutral-400 focus:border-emerald-400 dark:border-white/10 dark:bg-black/30 dark:text-white/80"
+                    />
+                </div>
+            ) : null}
 
-            {(showNewFile || showNewFolder || showOpenFile || showOpenFolder) ? (
+            {services.explorer.showActions && (showNewFile || showNewFolder || showOpenFile || showOpenFolder) ? (
                 <div className="border-b border-neutral-200 p-3 dark:border-white/10">
                     <div className="grid grid-cols-2 gap-1.5">
                         {showNewFile ? (
@@ -418,7 +425,7 @@ export default function IdeExplorerPane({
                 />
             </div>
 
-            {isSql ? (
+            {services.explorer.showFooter && isSql ? (
                 <div className="border-t border-neutral-200 p-3 dark:border-white/10">
                     <div className="text-[11px] font-extrabold uppercase tracking-[0.14em] text-neutral-600 dark:text-white/60">
                         SQL Mode
@@ -436,7 +443,7 @@ export default function IdeExplorerPane({
                         </div>
                     </div>
                 </div>
-            ) : language === "web" ? (
+            ) : services.explorer.showFooter && language === "web" ? (
                 <div className="border-t border-neutral-200 p-3 dark:border-white/10">
                     <div className="text-[11px] font-extrabold uppercase tracking-[0.14em] text-neutral-600 dark:text-white/60">
                         Web Preview
@@ -452,7 +459,7 @@ export default function IdeExplorerPane({
                         </div>
                     </div>
                 </div>
-            ) : (
+            ) : services.explorer.showFooter && services.explorer.showStdin ? (
                 <div className="border-t border-neutral-200 p-3 dark:border-white/10">
                     <div className="text-[11px] font-extrabold uppercase tracking-[0.14em] text-neutral-600 dark:text-white/60">
                         Shared stdin
@@ -464,7 +471,7 @@ export default function IdeExplorerPane({
                         className="mt-2 h-28 w-full resize-none rounded-lg border border-neutral-200 bg-white p-3 text-sm text-neutral-900 outline-none transition placeholder:text-neutral-400 focus:border-emerald-400 dark:border-white/10 dark:bg-black/30 dark:text-white/80"
                     />
                 </div>
-            )}
+            ) : null}
         </div>
     );
 }

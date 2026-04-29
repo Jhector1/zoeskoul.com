@@ -8,6 +8,7 @@ import type {
 export type SubjectManifest = {
   subject: {
     slug: string;
+    catalogSlug?: string | null;
     genKey: string;
     order: number;
     accessPolicy?: "free" | "paid";

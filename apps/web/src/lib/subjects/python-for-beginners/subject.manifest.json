@@ -1,6 +1,7 @@
 {
   "subject": {
     "slug": "python-for-beginners",
+    "catalogSlug": "python",
     "genKey": "python_part1",
     "order": 30,
     "accessPolicy": "free",

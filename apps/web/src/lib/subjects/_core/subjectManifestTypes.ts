@@ -21,6 +21,7 @@ export type SubjectCompletionPolicyManifestMeta = {
 export type SubjectManifest = {
     subject: {
         slug: string;
+        catalogSlug?: string | null;
         genKey: string;
         order: number;
         accessPolicy?: "free" | "paid";
@@ -69,6 +70,21 @@ export type SubjectSectionManifest = {
     topics: string[];
 };
 
+export type CatalogManifest = {
+    catalog: {
+        slug: string;
+        order: number;
+        title: string;
+        description?: string | null;
+        imagePublicId?: string | null;
+        imageAlt?: string | null;
+        defaultSubjectSlug?: string | null;
+        status?: "active" | "coming_soon" | "disabled";
+        subjectSlugs: string[];
+        meta?: Record<string, unknown> | null;
+    };
+};
+
 export type ResolvedSubjectCatalogItem = {
     slug: string;
     title: string;
@@ -79,6 +95,21 @@ export type ResolvedSubjectCatalogItem = {
 };
 
 export type ResolvedSubjectCatalogMap = Record<string, ResolvedSubjectCatalogItem>;
+
+export type ResolvedCatalogSubjectItem = ResolvedSubjectCatalogItem & {
+    status: "active" | "coming_soon" | "disabled";
+};
+
+export type ResolvedCatalogItem = {
+    slug: string;
+    title: string;
+    description: string;
+    imagePublicId: string | null;
+    imageAlt: string | null;
+    defaultSubjectSlug: string | null;
+    status: "active" | "coming_soon" | "disabled";
+    subjects: ResolvedCatalogSubjectItem[];
+};
 
 export type ResolvedModuleIntroView = {
     subject: {

@@ -202,6 +202,7 @@ export function buildSubjectManifestFromPlan(args: {
     return {
         subject: {
             slug: blueprint.subjectSlug,
+            catalogSlug: blueprint.catalogSlug ?? blueprint.subjectSlug,
             genKey: shape.subjectManifest.genKey,
             order: blueprint.subjectSlug === "sql" ? 20 : 30,
             accessPolicy: shape.subjectManifest.accessPolicyDefault,

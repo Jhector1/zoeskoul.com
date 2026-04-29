@@ -2,6 +2,7 @@ import { prisma } from "@/lib/prisma";
 import SubjectPicker from "@/features/practice/ui/subject-picker/SubjectPicker";
 import { getActor, actorKeyOf } from "@/lib/practice/actor";
 import { getResolvedSubjectCatalogMap } from "@/lib/subjects/server/resolveSubjectPresentation";
+import { ROUTES } from "@/utils";
 
 type SubjectStatus = "active" | "coming_soon" | "disabled";
 
@@ -47,7 +48,7 @@ export default async function PracticePage() {
     const manifestMap = await getResolvedSubjectCatalogMap();
 
     const cards = subjects
-        .filter((s) => s.status !== "disabled")
+        .filter((s) => s.status !== "disabled" && enrolledSet.has(s.id))
         .map((s) => {
             const view = manifestMap[s.slug];
 
@@ -63,5 +64,17 @@ export default async function PracticePage() {
             };
         });
 
-    return <SubjectPicker initialSubjects={cards} />;
+    return (
+        <SubjectPicker
+            initialSubjects={cards}
+            pageKicker="My learning"
+            pageTitle="My Courses"
+            pageSubtitle="Continue the courses you are already enrolled in, and use catalogs to discover new learning paths."
+            emptyTitle="No enrolled courses yet"
+            emptySubtitle="Browse the catalog to find a course, and enrolling from a catalog will bring it back here automatically."
+            browseHref={ROUTES.catalogs}
+            browseLabel="Browse catalogs"
+            allowEnrollment={false}
+        />
+    );
 }

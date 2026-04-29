@@ -3,6 +3,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import type {
+  CatalogSeed,
   ModuleSeed,
   SectionSeed,
   SubjectSeed,
@@ -12,6 +13,7 @@ import type {
 type SubjectManifest = {
   subject: {
     slug: string;
+    catalogSlug?: string | null;
     genKey: string;
     order: number;
     titleKey: string;
@@ -56,6 +58,21 @@ type SubjectManifest = {
   }>;
 };
 
+type CatalogManifest = {
+  catalog: {
+    slug: string;
+    order: number;
+    title: string;
+    description?: string | null;
+    imagePublicId?: string | null;
+    imageAlt?: string | null;
+    defaultSubjectSlug?: string | null;
+    status?: SubjectSeed["status"];
+    subjectSlugs: string[];
+    meta?: Record<string, unknown> | null;
+  };
+};
+
 type TopicBundleManifest = {
   topicId: string;
   minutes: number;
@@ -75,6 +92,7 @@ type TopicBundleManifest = {
 const dataDir = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(dataDir, "../../../../..");
 const subjectsRoot = path.join(repoRoot, "apps/web/src/lib/subjects");
+const authoringCatalogsRoot = path.join(repoRoot, "authoring", "catalogs");
 
 function readJson<T>(filePath: string): T {
   return JSON.parse(fs.readFileSync(filePath, "utf8")) as T;
@@ -88,6 +106,10 @@ function loadSubjectManifest(subjectSlug: string): SubjectManifest {
   return readJson<SubjectManifest>(
     path.join(subjectsRoot, subjectSlug, "subject.manifest.json"),
   );
+}
+
+function loadCatalogManifest(fileName: string): CatalogManifest {
+  return readJson<CatalogManifest>(path.join(authoringCatalogsRoot, fileName));
 }
 
 function loadTopicBundle(args: {
@@ -119,18 +141,79 @@ function listSubjectSlugs() {
     .sort();
 }
 
+function listCatalogFileNames() {
+  if (!fs.existsSync(authoringCatalogsRoot)) return [];
+
+  return fs
+    .readdirSync(authoringCatalogsRoot, { withFileTypes: true })
+    .filter((entry) => entry.isFile() && entry.name.endsWith(".catalog.json"))
+    .map((entry) => entry.name)
+    .sort();
+}
+
 function buildSeedData() {
+  const catalogs: CatalogSeed[] = [];
   const subjects: SubjectSeed[] = [];
   const modules: ModuleSeed[] = [];
   const sections: SectionSeed[] = [];
   const topics: TopicSeed[] = [];
+  const subjectToCatalog = new Map<string, string>();
+
+  for (const fileName of listCatalogFileNames()) {
+    const manifest = loadCatalogManifest(fileName);
+    const catalog = manifest.catalog;
+
+    catalogs.push({
+      slug: catalog.slug,
+      order: catalog.order,
+      title: catalog.title,
+      description: catalog.description ?? null,
+      imagePublicId: catalog.imagePublicId ?? null,
+      imageAlt: catalog.imageAlt ?? null,
+      defaultSubjectSlug: catalog.defaultSubjectSlug ?? catalog.subjectSlugs[0] ?? null,
+      status: catalog.status ?? "active",
+      meta: catalog.meta ?? null,
+    });
+
+    for (const subjectSlug of catalog.subjectSlugs) {
+      const existing = subjectToCatalog.get(subjectSlug);
+      if (existing && existing !== catalog.slug) {
+        throw new Error(
+          `Subject "${subjectSlug}" is assigned to multiple catalogs: "${existing}" and "${catalog.slug}"`,
+        );
+      }
+
+      subjectToCatalog.set(subjectSlug, catalog.slug);
+    }
+  }
 
   for (const subjectSlug of listSubjectSlugs()) {
     const manifest = loadSubjectManifest(subjectSlug);
     const subject = manifest.subject;
+    const catalogSlug = String(
+      subject.catalogSlug ?? subjectToCatalog.get(subject.slug) ?? subject.slug,
+    ).trim();
+
+    if (!catalogSlug) {
+      throw new Error(`Subject "${subject.slug}" is missing a catalogSlug`);
+    }
+
+    const expectedCatalogSlug = subjectToCatalog.get(subject.slug);
+    if (!expectedCatalogSlug) {
+      throw new Error(
+        `Subject "${subject.slug}" is not listed in any authoring/catalogs/*.catalog.json file`,
+      );
+    }
+
+    if (expectedCatalogSlug && expectedCatalogSlug !== catalogSlug) {
+      throw new Error(
+        `Subject "${subject.slug}" points to catalog "${catalogSlug}" but catalog manifests assign "${expectedCatalogSlug}"`,
+      );
+    }
 
     subjects.push({
       slug: subject.slug,
+      catalogSlug,
       order: subject.order,
       title: tag(subject.titleKey) ?? subject.slug,
       description: tag(subject.descriptionKey),
@@ -221,6 +304,7 @@ function buildSeedData() {
   }
 
   return {
+    catalogs,
     subjects,
     modules,
     topics,
@@ -230,6 +314,7 @@ function buildSeedData() {
 
 const seedData = buildSeedData();
 
+export const CATALOGS = seedData.catalogs;
 export const SUBJECTS = seedData.subjects;
 export const MODULES = seedData.modules;
 export const TOPICS = seedData.topics;

@@ -67,6 +67,10 @@ import type {
     ProjectSummary,
     SaveProjectRequest,
 } from "@/lib/projects/projectApiTypes";
+import type {
+    FullIDEServicePreset,
+    FullIDEServicesInput,
+} from "@/components/ide/fullide/services";
 
 // export type ToastKind = "info" | "success" | "error";
 
@@ -101,7 +105,23 @@ export type FullIDEProps = {
     projectScope?: ProjectScopeInput;
     draftStorageMode?: "off" | "local";
     onReadyChange?: (ready: boolean) => void;
-
+    servicePreset?: FullIDEServicePreset;
+    services?: FullIDEServicesInput;
+    initialWorkspace?: WorkspaceStateV2 | null;
+    externalWorkspace?: WorkspaceStateV2 | null;
+    onWorkspaceChange?: (workspace: WorkspaceStateV2 | null) => void;
+    onBeforeRun?: () => void | Promise<void>;
+    onRunResult?: (args: { result: RunResult; runArgs: any }) => void;
+    initialSqlDialect?: SqlDialect;
+    sqlInitialTableSnapshots?: Record<
+        string,
+        {
+            name: string;
+            columns: Array<{ name: string; type?: string | null }>;
+            rows: unknown[][];
+            rowCount: number;
+        }
+    >;
 };
 
 export type ProjectsHookResult = {

@@ -1,6 +1,8 @@
 export const ROUTES = {
     home: "/",
     catalog: "/subjects",
+    catalogs: "/catalogs",
+    catalogDetail: (catalogSlug: string) => `/catalogs/${catalogSlug}`,
 
     subjectModules: (subjectSlug: string) => `/subjects/${subjectSlug}/modules`,
 

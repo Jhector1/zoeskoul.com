@@ -7,6 +7,10 @@ import ProjectsDrawer from "@/components/code/projects/ProjectsDrawer";
 import SaveBeforeSwitchModal from "@/components/code/projects/SaveBeforeSwitchModal";
 
 export default function IdeProjectModals({
+  showDeleteModal = true,
+  showProjects = true,
+  showSaveAs = true,
+  showRename = true,
   nodes,
   pendingDeleteId,
   onCancelDelete,
@@ -43,7 +47,7 @@ export default function IdeProjectModals({
 }: any) {
   return (
     <>
-      {pendingDeleteId ? (
+      {showDeleteModal && pendingDeleteId ? (
         <DeleteModal
           nodes={nodes}
           pendingDeleteId={pendingDeleteId}
@@ -52,23 +56,25 @@ export default function IdeProjectModals({
         />
       ) : null}
 
-      <ProjectsDrawer
-        open={projectsOpen}
-        onOpenChange={onProjectsOpenChange}
-        currentProjectId={projectId}
-        currentProjectTitle={headerProjectTitle}
-        currentLanguage={language}
-        canCreateProjects={canCreateProjects}
-        loading={loadingProjects}
-        error={projectsError}
-        projects={projects}
-        onRefresh={onRefreshProjects}
-        onSelectProject={onSelectProject}
-        onCreateBlankProject={onCreateBlankProject}
-        onSaveAsProject={onSaveAsIntent}
-        onRenameProject={onRenameIntent}
-        onArchiveProject={onArchiveProject}
-      />
+      {showProjects ? (
+        <ProjectsDrawer
+          open={projectsOpen}
+          onOpenChange={onProjectsOpenChange}
+          currentProjectId={projectId}
+          currentProjectTitle={headerProjectTitle}
+          currentLanguage={language}
+          canCreateProjects={canCreateProjects}
+          loading={loadingProjects}
+          error={projectsError}
+          projects={projects}
+          onRefresh={onRefreshProjects}
+          onSelectProject={onSelectProject}
+          onCreateBlankProject={onCreateBlankProject}
+          onSaveAsProject={onSaveAsIntent}
+          onRenameProject={onRenameIntent}
+          onArchiveProject={onArchiveProject}
+        />
+      ) : null}
 
       <SaveBeforeSwitchModal
         open={confirmSwitchOpen}
@@ -78,27 +84,31 @@ export default function IdeProjectModals({
         onCancel={onCancelSwitch}
       />
 
-      <ProjectNameModal
-        open={saveAsOpen}
-        busy={isSavingProject}
-        title="Save as new project"
-        description="Create a new saved project from your current local workspace."
-        confirmLabel="Save As"
-        initialValue={saveAsInitialValue}
-        onConfirm={onSaveAsConfirm}
-        onCancel={onSaveAsCancel}
-      />
+      {showSaveAs ? (
+        <ProjectNameModal
+          open={saveAsOpen}
+          busy={isSavingProject}
+          title="Save as new project"
+          description="Create a new saved project from your current local workspace."
+          confirmLabel="Save As"
+          initialValue={saveAsInitialValue}
+          onConfirm={onSaveAsConfirm}
+          onCancel={onSaveAsCancel}
+        />
+      ) : null}
 
-      <ProjectNameModal
-        open={renameOpen}
-        busy={projectModalBusy}
-        title="Rename project"
-        description="Update the saved project name."
-        confirmLabel="Rename"
-        initialValue={renameInitialValue}
-        onConfirm={onRenameConfirm}
-        onCancel={onRenameCancel}
-      />
+      {showRename ? (
+        <ProjectNameModal
+          open={renameOpen}
+          busy={projectModalBusy}
+          title="Rename project"
+          description="Update the saved project name."
+          confirmLabel="Rename"
+          initialValue={renameInitialValue}
+          onConfirm={onRenameConfirm}
+          onCancel={onRenameCancel}
+        />
+      ) : null}
     </>
   );
 }

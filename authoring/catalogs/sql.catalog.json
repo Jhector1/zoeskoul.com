@@ -1,0 +1,18 @@
+{
+  "catalog": {
+    "slug": "sql",
+    "order": 20,
+    "title": "SQL",
+    "description": "SQL courses focused on querying, reporting, data modeling, and practical database thinking.",
+    "imagePublicId": null,
+    "imageAlt": "SQL catalog cover",
+    "defaultSubjectSlug": "sql",
+    "status": "active",
+    "subjectSlugs": [
+      "sql"
+    ],
+    "meta": {
+      "family": "data"
+    }
+  }
+}

@@ -7,12 +7,12 @@
     }
   },
   "subjectsUi": {
-    "headerTitle": "Choose a subject",
-    "headerSubtitle": "Start learning in minutes. Pick a subject to open its modules.",
-    "searchPlaceholder": "Search subjects…",
+    "headerTitle": "Choose a course",
+    "headerSubtitle": "Start learning in minutes. Pick a course to open its modules.",
+    "searchPlaceholder": "Search courses…",
     "searchClear": "Clear",
-    "resultsCount": "{count, plural, =0 {No subjects} one {# subject} other {# subjects}}",
-    "noSubjectsFound": "No subjects found.",
+    "resultsCount": "{count, plural, =0 {No courses} one {# course} other {# courses}}",
+    "noSubjectsFound": "No courses found.",
     "enrolled": "Enrolled",
     "enrolling": "Enrolling…",
     "continue": "Continue",

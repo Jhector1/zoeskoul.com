@@ -85,6 +85,14 @@ function StatusChip({
 export default function IdeHeader({
                                       isDesktop,
                                       showTopLanguageButtons,
+                                      showBackButton,
+                                      showMobileFilesButton,
+                                      showProjectSwitcher,
+                                      showActivePath,
+                                      showStatus,
+                                      showSaveControls,
+                                      showSaveAs,
+                                      showLessonLink,
                                       language,
                                       sqlDialect,
                                       onChangeSqlDialect,
@@ -109,6 +117,14 @@ export default function IdeHeader({
                                   }: {
     isDesktop: boolean;
     showTopLanguageButtons: boolean;
+    showBackButton: boolean;
+    showMobileFilesButton: boolean;
+    showProjectSwitcher: boolean;
+    showActivePath: boolean;
+    showStatus: boolean;
+    showSaveControls: boolean;
+    showSaveAs: boolean;
+    showLessonLink: boolean;
     language: WorkspaceLanguage;
     sqlDialect: SqlDialect;
     onChangeSqlDialect: (dialect: SqlDialect) => void;
@@ -185,18 +201,20 @@ export default function IdeHeader({
     return (
         <div className="border-b border-neutral-200 bg-white/92 backdrop-blur dark:border-white/10 dark:bg-neutral-950/92">
             <div className="flex items-center gap-1.5 px-2.5 py-2">
-                <button
-                    type="button"
-                    onClick={onBack}
-                    className={IDE_TOOL_BTN}
-                    aria-label="Go back"
-                    title="Go back"
-                >
-                    <span aria-hidden="true" className="text-sm leading-none">←</span>
-                    <span className="hidden sm:inline">Back</span>
-                </button>
+                {showBackButton ? (
+                    <button
+                        type="button"
+                        onClick={onBack}
+                        className={IDE_TOOL_BTN}
+                        aria-label="Go back"
+                        title="Go back"
+                    >
+                        <span aria-hidden="true" className="text-sm leading-none">←</span>
+                        <span className="hidden sm:inline">Back</span>
+                    </button>
+                ) : null}
 
-                {!isDesktop ? (
+                {!isDesktop && showMobileFilesButton ? (
                     <button
                         type="button"
                         onClick={onOpenFiles}
@@ -206,55 +224,71 @@ export default function IdeHeader({
                     </button>
                 ) : null}
 
-                <ProjectSwitcherButton
-                    title={projectTitle}
-                    dirty={dirty || conflict}
-                    onClick={onOpenProjects}
-                />
-
-                <div className="hidden min-w-0 flex-1 md:block">
-                    <div
-                        className="truncate text-[11px] font-medium text-neutral-500 dark:text-white/45"
-                        title={activePath}
-                    >
-                        {activePath}
+                {showProjectSwitcher ? (
+                    <ProjectSwitcherButton
+                        title={projectTitle}
+                        dirty={dirty || conflict}
+                        onClick={onOpenProjects}
+                    />
+                ) : (
+                    <div className="min-w-0 max-w-[240px] truncate px-2.5 text-[11px] font-medium text-neutral-700 dark:text-white/75">
+                        {projectTitle}
                     </div>
-                </div>
+                )}
+
+                {showActivePath ? (
+                    <div className="hidden min-w-0 flex-1 md:block">
+                        <div
+                            className="truncate text-[11px] font-medium text-neutral-500 dark:text-white/45"
+                            title={activePath}
+                        >
+                            {activePath}
+                        </div>
+                    </div>
+                ) : (
+                    <div className="flex-1" />
+                )}
 
                 <div className="ml-auto flex items-center gap-1">
-                    <StatusChip
-                        conflict={conflict}
-                        dirty={dirty}
-                        saveBusy={saveBusy}
-                        lastSavedAt={lastSavedAt}
-                    />
+                    {showStatus ? (
+                        <StatusChip
+                            conflict={conflict}
+                            dirty={dirty}
+                            saveBusy={saveBusy}
+                            lastSavedAt={lastSavedAt}
+                        />
+                    ) : null}
 
-                    <button
-                        type="button"
-                        onClick={onSaveAs}
-                        disabled={saveAsDisabled}
-                        className={IDE_PRIMARY_BTN}
-                    >
-                        {conflict ? "Save Copy" : "Save As"}
-                    </button>
+                    {showSaveAs ? (
+                        <button
+                            type="button"
+                            onClick={onSaveAs}
+                            disabled={saveAsDisabled}
+                            className={IDE_PRIMARY_BTN}
+                        >
+                            {conflict ? "Save Copy" : "Save As"}
+                        </button>
+                    ) : null}
 
-                    <button
-                        type="button"
-                        onClick={onSave}
-                        disabled={saveDisabled}
-                        className={cn(
-                            IDE_SAVE_BTN,
-                            conflict &&
-                            "border-amber-300/30 bg-amber-50 text-amber-900 hover:bg-amber-100 dark:border-amber-300/20 dark:bg-amber-300/10 dark:text-amber-100 dark:hover:bg-amber-300/15",
-                            !conflict &&
-                            !canSaveCloud &&
-                            "border-amber-300/30 bg-amber-50 text-amber-900 hover:bg-amber-100 dark:border-amber-300/20 dark:bg-amber-300/10 dark:text-amber-100 dark:hover:bg-amber-300/15",
-                        )}
-                    >
-                        {saveButtonLabel}
-                    </button>
+                    {showSaveControls ? (
+                        <button
+                            type="button"
+                            onClick={onSave}
+                            disabled={saveDisabled}
+                            className={cn(
+                                IDE_SAVE_BTN,
+                                conflict &&
+                                    "border-amber-300/30 bg-amber-50 text-amber-900 hover:bg-amber-100 dark:border-amber-300/20 dark:bg-amber-300/10 dark:text-amber-100 dark:hover:bg-amber-300/15",
+                                !conflict &&
+                                    !canSaveCloud &&
+                                    "border-amber-300/30 bg-amber-50 text-amber-900 hover:bg-amber-100 dark:border-amber-300/20 dark:bg-amber-300/10 dark:text-amber-100 dark:hover:bg-amber-300/15",
+                            )}
+                        >
+                            {saveButtonLabel}
+                        </button>
+                    ) : null}
 
-                    {lessonHref ? (
+                    {showLessonLink && lessonHref ? (
                         <Link
                             href={lessonHref}
                             className={IDE_TOOL_BTN}
