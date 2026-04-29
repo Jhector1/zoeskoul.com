@@ -24,6 +24,8 @@ const LOADING_TIMEOUT_MS = 8000;
 export default function QuizPracticeCard(props: {
   q: Extract<ReviewQuestion, { kind: "practice" }>;
   ps?: PracticeState;
+  toolScopedId?: string;
+  toolsActive?: boolean;
 
   unlocked: boolean;
   isCompleted: boolean;
@@ -44,6 +46,8 @@ export default function QuizPracticeCard(props: {
   const {
     q,
     ps,
+    toolScopedId,
+    toolsActive = true,
     unlocked,
     isCompleted,
     locked,
@@ -73,7 +77,8 @@ export default function QuizPracticeCard(props: {
       toolsEnabled && isCodeInput ? "tools" : "embedded";
 
   const codeTools = toolsEnabled && isCodeInput ? (tools as any) : null;
-  const codeInputId = toolsEnabled && isCodeInput ? q.id : undefined;
+  const effectiveToolId = toolScopedId ?? q.id;
+  const codeInputId = toolsEnabled && isCodeInput ? effectiveToolId : undefined;
 
   const updateItemSafe = useCallback(
       (patch: any) => {
@@ -107,9 +112,9 @@ export default function QuizPracticeCard(props: {
 
     const doneForFlow =
         ps.ok === true || excused || (!strictSequential && attemptsCapped);
-    const eligible = unlocked && !locked && !isCompleted && !excused;
+    const eligible = toolsActive && unlocked && !locked && !isCompleted && !excused;
 
-    tools.setCodeInputMeta(q.id, {
+    tools.setCodeInputMeta(effectiveToolId, {
       order: seqOrder,
       eligible,
       done: doneForFlow,
@@ -119,7 +124,8 @@ export default function QuizPracticeCard(props: {
     tools,
     ex,
     ps,
-    q.id,
+    effectiveToolId,
+    toolsActive,
     unlocked,
     locked,
     isCompleted,

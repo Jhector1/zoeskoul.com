@@ -205,6 +205,7 @@ function CodeInputWithTools(props: {
             curLang,
             curCode,
             curStdin,
+            exercise.ideConfig,
             exerciseSqlDialect,
             exerciseSqlDatasetId,
             exerciseSqlSchemaSql,
@@ -740,7 +741,6 @@ export default function ExerciseRenderer({
         );
     }
 }
-
 
 
 

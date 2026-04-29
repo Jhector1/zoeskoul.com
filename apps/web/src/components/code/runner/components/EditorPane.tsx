@@ -145,6 +145,7 @@ export default function EditorPane(props: {
     const isEditorFocusedRef = useRef(false);
     const pendingExternalValueRef = useRef<string | null>(null);
     const lastLocalValueRef = useRef<string>(String(code ?? ""));
+    const prevPathRef = useRef<string>("");
 
     const [isNarrowScreen, setIsNarrowScreen] = useState(false);
     const [mobileEditing, setMobileEditing] = useState(false);
@@ -311,6 +312,9 @@ export default function EditorPane(props: {
             return;
         }
 
+        const pathChanged = prevPathRef.current !== path;
+        prevPathRef.current = path;
+
         const current = model.getValue?.() ?? "";
         if (current === next) {
             lastLocalValueRef.current = next;
@@ -318,7 +322,7 @@ export default function EditorPane(props: {
             return;
         }
 
-        if (isEditorFocusedRef.current) {
+        if (isEditorFocusedRef.current && !pathChanged) {
             pendingExternalValueRef.current = next;
             return;
         }

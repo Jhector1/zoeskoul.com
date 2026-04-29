@@ -12,6 +12,7 @@ import type { WorkspaceStateV2 } from "@/components/ide/types";
 
 export type CodeToolProps = {
     height: number;
+    toolScopeKey?: string;
 
     toolLang: RunnerLanguage;
     toolCode: string;

@@ -81,6 +81,7 @@ export type CommonProps = {
     className?: string;
     hintMarkdown?: string;
     editorModelKey?: string;
+    toolScopeKey?: string;
 
     preserveCodeOnLanguageSwitch?: boolean;
 

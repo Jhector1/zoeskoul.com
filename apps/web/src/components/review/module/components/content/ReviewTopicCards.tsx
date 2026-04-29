@@ -65,6 +65,12 @@ export default function ReviewTopicCards({
                                              scrollToNextActionable,
                                              setCardEl,
                                          }: Props) {
+    const flushSketches = sketch.flushAll;
+
+    React.useEffect(() => {
+        flushSketches?.();
+    }, [activeCardIndex, flushSketches]);
+
     return (
         <div className="flex min-h-0 flex-col shrink-0">
             <AnimatePresence initial={false} mode="wait">
@@ -103,6 +109,7 @@ export default function ReviewTopicCards({
                                 <div key={card.id} ref={setCardEl(card.id)}>
                                     <CardRenderer
                                         card={card}
+                                        active={cardIndex === activeCardIndex}
                                         done={done}
                                         cardIndex={cardIndex}
                                         quizNavMode={navModes.quiz}

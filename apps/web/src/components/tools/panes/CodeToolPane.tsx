@@ -137,6 +137,7 @@ function patchToolWorkspaceSource(args: {
 
 export default function CodeToolPane(props: {
     height: number;
+    toolScopeKey?: string;
     toolLang: RunnerLanguage;
     toolCode: string;
     toolStdin: string;
@@ -153,6 +154,7 @@ export default function CodeToolPane(props: {
     sqlInitialTableSnapshots?: SqlTableSnapshots;
 }) {
     const {
+        toolScopeKey,
         toolLang,
         toolCode,
         toolStdin,
@@ -187,19 +189,30 @@ export default function CodeToolPane(props: {
     const workspaceContextKey = useMemo(
         () =>
             JSON.stringify({
+                scope: toolScopeKey ?? "general",
                 boundId: boundId ?? "unbound",
                 language: toolLang,
                 sqlSchemaSql: sqlSchemaSql ?? sqlSetupSql ?? "",
                 sqlSeedSql: sqlSeedSql ?? "",
                 workspaceShell: usesWorkspaceShell,
             }),
-        [boundId, sqlSchemaSql, sqlSeedSql, sqlSetupSql, toolLang, usesWorkspaceShell],
+        [
+            boundId,
+            sqlSchemaSql,
+            sqlSeedSql,
+            sqlSetupSql,
+            toolLang,
+            toolScopeKey,
+            usesWorkspaceShell,
+        ],
     );
     const runnerH = Math.max(usesWorkspaceShell ? 480 : 320, size.h);
 
     const [runFeedback, setRunFeedback] = useState<CodeFeedback | null>(null);
     const lastEmittedRef = useRef<{ code: string; stdin: string } | null>(null);
     const lastIncomingRef = useRef<{ code: string; stdin: string } | null>(null);
+    const persistTimerRef = useRef<number | null>(null);
+    const lastUpstreamWorkspaceKeyRef = useRef<string>("");
     const baseWorkspace = useMemo(
         () => createDefaultStateForLanguage(toolLang),
         [toolLang],
@@ -225,15 +238,21 @@ export default function CodeToolPane(props: {
             sqlSetupSql,
         ],
     );
+    const latestWorkspaceRef = useRef<WorkspaceStateV2 | null>(toolWorkspace ?? externalWorkspace);
     const [workspaceBridge, setWorkspaceBridge] = useState<WorkspaceStateV2>(
         toolWorkspace ?? externalWorkspace,
     );
     const lastContextKeyRef = useRef<string>("");
 
     useEffect(() => {
+        latestWorkspaceRef.current = workspaceBridge;
+    }, [workspaceBridge]);
+
+    useEffect(() => {
         if (lastContextKeyRef.current !== workspaceContextKey) {
             lastContextKeyRef.current = workspaceContextKey;
             setWorkspaceBridge(toolWorkspace ?? externalWorkspace);
+            latestWorkspaceRef.current = toolWorkspace ?? externalWorkspace;
             lastEmittedRef.current = null;
             return;
         }
@@ -251,7 +270,7 @@ export default function CodeToolPane(props: {
         setWorkspaceBridge((prev) => {
             const prevSnapshot = extractWorkspaceSnapshot(prev);
             if (prevSnapshot.code === toolCode && prevSnapshot.stdin === toolStdin) {
-                return patchToolWorkspaceSource({
+                const nextWorkspace = patchToolWorkspaceSource({
                     workspace: prev,
                     language: toolLang,
                     code: toolCode,
@@ -259,6 +278,8 @@ export default function CodeToolPane(props: {
                     sqlSchemaSql: sqlSchemaSql ?? sqlSetupSql ?? "",
                     sqlSeedSql: sqlSeedSql ?? "",
                 });
+                latestWorkspaceRef.current = nextWorkspace;
+                return nextWorkspace;
             }
 
             return prev;
@@ -283,16 +304,26 @@ export default function CodeToolPane(props: {
     }, [toolLang, toolCode, toolStdin, boundId, clearRunFeedback]);
 
     useEffect(() => {
+        return () => {
+            if (persistTimerRef.current != null) {
+                window.clearTimeout(persistTimerRef.current);
+                persistTimerRef.current = null;
+            }
+        };
+    }, []);
+
+    useEffect(() => {
         lastIncomingRef.current = {
             code: toolCode,
             stdin: toolStdin,
         };
     }, [toolCode, toolStdin]);
 
-    const handleWorkspaceChange = useCallback((workspace: WorkspaceStateV2 | null) => {
-        if (workspace) {
-            setWorkspaceBridge(workspace);
-        }
+    const emitWorkspaceUpstream = useCallback((workspace: WorkspaceStateV2 | null) => {
+        const workspaceKey = JSON.stringify(workspace ?? null);
+        if (lastUpstreamWorkspaceKeyRef.current === workspaceKey) return;
+        lastUpstreamWorkspaceKeyRef.current = workspaceKey;
+
         onChangeWorkspace?.(workspace);
 
         const next = extractWorkspaceSnapshot(workspace);
@@ -334,6 +365,43 @@ export default function CodeToolPane(props: {
         onChangeWorkspace,
         syncCodeInputSnapshot,
     ]);
+    const emitWorkspaceUpstreamRef = useRef(emitWorkspaceUpstream);
+
+    useEffect(() => {
+        emitWorkspaceUpstreamRef.current = emitWorkspaceUpstream;
+    }, [emitWorkspaceUpstream]);
+
+    const handleWorkspaceChange = useCallback((workspace: WorkspaceStateV2 | null) => {
+        if (workspace) {
+            setWorkspaceBridge(workspace);
+        }
+        latestWorkspaceRef.current = workspace;
+
+        if (!usesWorkspaceShell) {
+            emitWorkspaceUpstream(workspace);
+            return;
+        }
+
+        if (persistTimerRef.current != null) {
+            window.clearTimeout(persistTimerRef.current);
+        }
+
+        persistTimerRef.current = window.setTimeout(() => {
+            persistTimerRef.current = null;
+            emitWorkspaceUpstreamRef.current(latestWorkspaceRef.current);
+        }, 220);
+    }, [emitWorkspaceUpstream, usesWorkspaceShell]);
+
+    useEffect(() => {
+        return () => {
+            if (!usesWorkspaceShell) return;
+            if (persistTimerRef.current != null) {
+                window.clearTimeout(persistTimerRef.current);
+                persistTimerRef.current = null;
+            }
+            emitWorkspaceUpstreamRef.current(latestWorkspaceRef.current);
+        };
+    }, [workspaceContextKey, usesWorkspaceShell]);
 
     const handleBeforeRun = useCallback(async () => {
         setRunFeedback(null);

@@ -114,19 +114,6 @@ export function useReviewModuleController({
 
     const sketch = useDebouncedSketchState({ setProgress, viewTid });
 
-    const tool = useToolCodeRunnerState({
-        progress,
-        progressHydrated,
-        setProgress,
-        viewTid,
-        defaultLang: runtime.toolDefaults.defaultLang,
-        defaultCode: runtime.toolDefaults.defaultCode,
-        defaultStdin: runtime.toolDefaults.defaultStdin,
-        defaultSqlDialect: runtime.toolDefaults.defaultSqlDialect,
-        rightCollapsed: panels.rightCollapsed,
-        rightW: panels.rightW,
-    });
-
     useEffect(() => {
         if (!progressHydrated) return;
         if (!topics.length) return;
@@ -288,6 +275,21 @@ export function useReviewModuleController({
         reduceMotion,
         unlockAll,
         showSkeleton,
+    });
+    const activeCard = viewCards[scrollSync.activeCardIndex] ?? null;
+
+    const tool = useToolCodeRunnerState({
+        progress,
+        progressHydrated,
+        setProgress,
+        viewTid,
+        scopeKey: activeCard?.id ? `card:${activeCard.id}` : "card:general",
+        defaultLang: runtime.toolDefaults.defaultLang,
+        defaultCode: runtime.toolDefaults.defaultCode,
+        defaultStdin: runtime.toolDefaults.defaultStdin,
+        defaultSqlDialect: runtime.toolDefaults.defaultSqlDialect,
+        rightCollapsed: panels.rightCollapsed,
+        rightW: panels.rightW,
     });
 
     const prereqsForAllQuizzes = unlockAll
@@ -610,6 +612,9 @@ export function useReviewModuleController({
                 onCollapse: panels.handleCollapseRight,
                 onUnbind: tool.unbindCodeInput,
                 boundId: tool.boundId,
+                toolScopeKey: tool.boundId
+                    ? `${subjectSlug}:${moduleSlug}:${viewTid}:exercise:${tool.boundId}`
+                    : `${subjectSlug}:${moduleSlug}:${viewTid}:${activeCard?.id ?? "general"}:general`,
                 rightBodyRef: tool.rightBodyRef,
                 codeRunnerRegionH: tool.codeRunnerRegionH,
                 toolLang: tool.toolLang,

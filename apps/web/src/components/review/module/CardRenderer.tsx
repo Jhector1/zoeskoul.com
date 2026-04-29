@@ -34,6 +34,7 @@ function CardTitle({ title }: { title?: string | null }) {
 
 export default function CardRenderer(props: {
     card: ReviewCard;
+    active?: boolean;
     cardIndex?: number;
 
     done: boolean;
@@ -59,6 +60,7 @@ export default function CardRenderer(props: {
 
     const {
         card,
+        active = true,
         cardIndex = 0,
         done,
         onMarkDone,
@@ -136,6 +138,7 @@ export default function CardRenderer(props: {
                             key={key}
                             quizId={card.id}
                             quizCardId={card.id}
+                            toolsActive={active}
                             spec={card.spec as any}
                             quizKey={key}
                             passScore={quizBlockProps.passScore}

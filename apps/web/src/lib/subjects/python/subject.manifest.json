@@ -29,21 +29,7 @@
       "slug": "python-0",
 
 
-      "runtimeDefaults": {
-        "kind": "code",
-        "language": "python"
-      },
-      "serviceDefaults": {
-        "preset": "lesson",
-        "runnerBackend": "pty",
-        "requires": {
-          "files": true,
-          "terminal": true,
-          "multiFile": true,
-          "projectPersistence": false,
-          "cloudProjects": false
-        }
-      },
+
       "prefix": "py0",
       "order": 0,
       "titleKey": "modules.python.python-0.title",
@@ -96,6 +82,24 @@
     {
       "slug": "python-1",
       "prefix": "py1",
+
+
+
+      "runtimeDefaults": {
+        "kind": "code",
+        "language": "python"
+      },
+      "serviceDefaults": {
+        "preset": "lesson",
+        "runnerBackend": "pty",
+        "requires": {
+          "files": true,
+          "terminal": true,
+          "multiFile": true,
+          "projectPersistence": false,
+          "cloudProjects": false
+        }
+      },
       "order": 1,
       "titleKey": "modules.python.python-1.title",
       "descriptionKey": "modules.python.python-1.description",

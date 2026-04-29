@@ -116,6 +116,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         sqlDatasetId,
         onRun,
         editorModelKey,
+        toolScopeKey,
         onBeforeRun,
         isAuthenticated,
         editorLanguage,
@@ -498,6 +499,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     const showStdinEditorUI = showStdinEditor && showEditor && lang !== "sql" && !isWeb;
     const showWorkspaceTerminalTab = workspaceTerminalEnabled;
     const effectiveEditorLanguage = editorLanguage ?? (isWeb ? "html" : lang);
+    const effectiveEditorModelKey = editorModelKey ?? toolScopeKey;
 
     const outputModel: OutputSurfaceModel = useMemo(() => {
         if (isWeb) {
@@ -515,7 +517,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                 sqlSchemaSql: sqlSchemaSql ?? sqlSetupSql ?? "",
                 sqlInitialTableSnapshots,
                 sqlViewKey: [
-                    editorModelKey ?? "",
+                    effectiveEditorModelKey ?? "",
                     sqlDatasetId ?? "",
                     lang,
                     sqlDialect,
@@ -535,7 +537,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         sqlSchemaSql,
         sqlSetupSql,
         sqlInitialTableSnapshots,
-        editorModelKey,
+        effectiveEditorModelKey,
         sqlDatasetId,
         sqlDialect,
     ]);
@@ -629,7 +631,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                 theme={editorTheme}
                 height={editorHeight}
                 disabled={disabled || term.busy}
-                modelKey={editorModelKey}
+                modelKey={effectiveEditorModelKey}
                 onMount={(ed) => {
                     monacoEditorRef.current = ed;
                     requestLayout();

@@ -640,6 +640,9 @@ export default function FullIDE(props: FullIDEProps) {
         return `${storageKey}:${scopeKey ?? "global"}`;
     }, [storageKey, scopeKey]);
 
+    const requestedDraftStorageMode = (draftStorageMode ?? "local") as "off" | "local";
+    const effectiveDraftStorageMode = actorReady ? requestedDraftStorageMode : "off";
+
     const services = useMemo(
         () =>
             resolveFullIDEServices({
@@ -657,9 +660,9 @@ export default function FullIDE(props: FullIDEProps) {
         access,
         initialWorkspace,
         actorKey,
-        projectId: draftStorageMode === "local" ? null : initialProjectId,
+        projectId: effectiveDraftStorageMode === "local" ? null : initialProjectId,
         scopeKey,
-        draftStorageMode: (draftStorageMode ?? "local") as "off" | "local",
+        draftStorageMode: effectiveDraftStorageMode,
         localWorkspaceId,
     });
 

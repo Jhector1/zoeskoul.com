@@ -81,6 +81,7 @@ export default function QuizBlock({
                                     strictSequential = false,
                                     onReset,
                                     orderBase = 0,
+                                    toolsActive = true,
                                   }: {
   prereqsMet?: boolean;
   quizId: string;
@@ -102,6 +103,7 @@ export default function QuizBlock({
 
   onReset?: () => void;
   orderBase?: number;
+  toolsActive?: boolean;
 }) {
   const initState = initialState ?? null;
 
@@ -637,6 +639,24 @@ export default function QuizBlock({
     } as SavedQuizState);
   }, [resetKey]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  useEffect(() => {
+    if (!onStateChange || !questions.length) return;
+
+    const flush = () => emitter.flush();
+    const onVisibilityChange = () => {
+      if (document.visibilityState === "hidden") flush();
+    };
+
+    window.addEventListener("pagehide", flush);
+    document.addEventListener("visibilitychange", onVisibilityChange);
+
+    return () => {
+      flush();
+      window.removeEventListener("pagehide", flush);
+      document.removeEventListener("visibilitychange", onVisibilityChange);
+    };
+  }, [emitter.flush, onStateChange, questions.length]);
+
   async function resetThisQuiz() {
     const key = (serverQuizKey || stableKey).trim();
     if (!key) return;
@@ -686,6 +706,8 @@ export default function QuizBlock({
               <QuizPracticeCard
                   q={q}
                   ps={practiceBank.practice[q.id]}
+                  toolScopedId={`${stableKey}:${q.id}`}
+                  toolsActive={toolsActive}
                   unlocked={unlocked}
                   isCompleted={isCompleted}
                   locked={locked}

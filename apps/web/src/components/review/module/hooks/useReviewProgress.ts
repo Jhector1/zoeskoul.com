@@ -122,19 +122,6 @@ export function useReviewProgress(args: {
 
             if (body === lastCommittedRef.current) return;
 
-            if (typeof navigator !== "undefined" && "sendBeacon" in navigator) {
-                try {
-                    if (body.length < 60000) {
-                        const blob = new Blob([body], { type: "application/json" });
-                        const ok = (navigator as any).sendBeacon("/api/review/progress", blob);
-                        if (ok) {
-                            lastCommittedRef.current = body;
-                            return;
-                        }
-                    }
-                } catch {}
-            }
-
             try {
                 const res = await fetch("/api/review/progress", {
                     method: "PUT",
@@ -233,6 +220,15 @@ export function useReviewProgress(args: {
     cancel();
     void putProgressNow(progressRef.current);
   }, hydrated);
+
+  useEffect(() => {
+    if (!hydrated) return;
+
+    return () => {
+      cancel();
+      void putProgressNow(progressRef.current);
+    };
+  }, [hydrated, subjectSlug, moduleSlug, locale, cancel, putProgressNow]);
 
   return {
     hydrated,

@@ -29,6 +29,7 @@ export type ToolsPanelProps = {
     onCollapse: () => void;
     onUnbind?: () => void;
     boundId?: string | null;
+    toolScopeKey?: string;
 
     rightBodyRef: React.RefObject<HTMLDivElement | null>;
     codeRunnerRegionH: number;
@@ -113,6 +114,7 @@ function ToolsPanelInner(props: ToolsPanelProps) {
                         isActive={active === "code"}
                         codeEnabled={ctx.codeEnabled}
                         height={props.codeRunnerRegionH}
+                        toolScopeKey={props.toolScopeKey}
                         toolLang={props.toolLang}
                         toolCode={props.toolCode}
                         toolStdin={props.toolStdin}
@@ -227,6 +229,7 @@ function CodePaneLayer(props: {
     isActive: boolean;
     codeEnabled: boolean;
     height: number;
+    toolScopeKey?: string;
     toolLang: WorkspaceLanguage;
     toolCode: string;
     toolStdin: string;
@@ -265,6 +268,7 @@ function CodePaneLayer(props: {
     } else if (CODE_SPEC) {
         pane = CODE_SPEC.render({
             height: props.height,
+            toolScopeKey: props.toolScopeKey,
             toolLang: props.toolLang,
             toolCode: props.toolCode,
             toolStdin: props.toolStdin,
@@ -306,6 +310,7 @@ const MemoCodePaneLayer = React.memo(
         prev.isActive === next.isActive &&
         prev.codeEnabled === next.codeEnabled &&
         prev.height === next.height &&
+        prev.toolScopeKey === next.toolScopeKey &&
         prev.toolLang === next.toolLang &&
         prev.toolCode === next.toolCode &&
         prev.toolStdin === next.toolStdin &&
@@ -364,6 +369,7 @@ function areToolsPanelPropsEqual(prev: ToolsPanelProps, next: ToolsPanelProps) {
         prev.onCollapse === next.onCollapse &&
         prev.onUnbind === next.onUnbind &&
         prev.boundId === next.boundId &&
+        prev.toolScopeKey === next.toolScopeKey &&
         prev.rightBodyRef === next.rightBodyRef &&
         prev.codeRunnerRegionH === next.codeRunnerRegionH &&
         prev.toolLang === next.toolLang &&

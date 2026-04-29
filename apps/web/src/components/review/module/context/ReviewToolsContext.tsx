@@ -226,6 +226,15 @@ export function ReviewToolsProvider({
         clearRunFeedback(id);
         syncCodeInputSnapshot(id, patch);
 
+        const nextSnap = registryRef.current.get(id);
+        if (nextSnap) {
+            ensureVisible?.();
+            onBindToToolsPanel({ id, ...nextSnap });
+            setBoundId(id);
+            setRequestedId(null);
+            return;
+        }
+
         const current = (externalBoundId ?? boundId) ?? null;
         if (current !== id) {
             bindNow(id);
@@ -233,6 +242,8 @@ export function ReviewToolsProvider({
     }, [
         bindNow,
         clearRunFeedback,
+        ensureVisible,
+        onBindToToolsPanel,
         syncCodeInputSnapshot,
         externalBoundId,
         boundId,
