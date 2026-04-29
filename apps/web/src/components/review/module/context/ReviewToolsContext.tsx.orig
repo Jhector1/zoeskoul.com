@@ -12,7 +12,6 @@ import React, {
 import {WorkspaceLanguage, type SqlDialect} from "@/lib/practice/types";
 import type { CodeFeedback } from "@/lib/code/feedback/types";
 import type { LearningIdeConfig } from "@/lib/ide/learningIdeConfig";
-import type { WorkspaceStateV2 } from "@/components/ide/types";
 
 type SqlTableSnapshot = {
     name: string;
@@ -31,15 +30,6 @@ export type RegisterArgs = {
     code: string;
     stdin?: string;
     ideConfig?: LearningIdeConfig | null;
-    workspace?: WorkspaceStateV2 | null;
-    ownerCardId?: string | null;
-
-    /**
-     * True when a user action (for example Fill/Reveal answer) explicitly patched
-     * the exercise. The tools panel must prefer this fresh card snapshot over any
-     * older saved toolState for the same exercise id.
-     */
-    preferSnapshot?: boolean;
 
     sqlDialect?: SqlDialect;
     sqlDatasetId?: string;
@@ -93,29 +83,6 @@ function defer(fn: () => void) {
     else Promise.resolve().then(fn);
 }
 
-
-function workspaceKeyOf(workspace: WorkspaceStateV2 | null | undefined) {
-    return JSON.stringify(workspace ?? null);
-}
-
-function registerArgsKey(args: RegisterArgs | undefined) {
-    if (!args) return "";
-    return JSON.stringify({
-        lang: args.lang,
-        code: args.code,
-        stdin: args.stdin ?? "",
-        ideConfig: args.ideConfig ?? null,
-        workspace: args.workspace ?? null,
-        ownerCardId: args.ownerCardId ?? null,
-        preferSnapshot: Boolean(args.preferSnapshot),
-        sqlDialect: args.sqlDialect ?? null,
-        sqlDatasetId: args.sqlDatasetId ?? null,
-        sqlSchemaSql: args.sqlSchemaSql ?? null,
-        sqlSeedSql: args.sqlSeedSql ?? null,
-        sqlInitialTableSnapshots: args.sqlInitialTableSnapshots ?? null,
-    });
-}
-
 export function ReviewToolsProvider({
                                         children,
                                         ensureVisible,
@@ -123,7 +90,7 @@ export function ReviewToolsProvider({
                                         onUnbindFromToolsPanel,
                                         externalBoundId,
                                         enabled = true,
-                                        mode = "manual",
+                                        mode = "first_unanswered",
                                         resetKey,
                                     }: {
     children: React.ReactNode;
@@ -132,7 +99,7 @@ export function ReviewToolsProvider({
     onUnbindFromToolsPanel?: () => void;
     externalBoundId?: string | null;
     enabled?: boolean;
-    mode?: "manual" | "first_unanswered" | "first_registered";
+    mode?: "first_unanswered" | "first_registered";
     resetKey?: string;
 }) {
     const enabledRef = useRef(Boolean(enabled));
@@ -211,15 +178,6 @@ export function ReviewToolsProvider({
                         ? patch.stdin
                         : cur.stdin,
             ideConfig: patch?.ideConfig ?? cur.ideConfig,
-            workspace:
-                patch?.workspace && typeof patch.workspace === "object"
-                    ? (patch.workspace as WorkspaceStateV2)
-                    : patch?.codeWorkspace && typeof patch.codeWorkspace === "object"
-                        ? (patch.codeWorkspace as WorkspaceStateV2)
-                        : patch?.ideWorkspace && typeof patch.ideWorkspace === "object"
-                            ? (patch.ideWorkspace as WorkspaceStateV2)
-                            : cur.workspace,
-            preferSnapshot: patch?.preferSnapshot === true,
 
             sqlDialect:
                 patch?.codeSqlDialect ?? patch?.sqlDialect ?? cur.sqlDialect,
@@ -266,16 +224,7 @@ export function ReviewToolsProvider({
         if (!id) return;
 
         clearRunFeedback(id);
-        syncCodeInputSnapshot(id, { ...patch, preferSnapshot: true });
-
-        // const nextSnap = registryRef.current.get(id);
-        // if (nextSnap) {
-        //     ensureVisible?.();
-        //     onBindToToolsPanel({ id, ...nextSnap });
-        //     setBoundId(id);
-        //     setRequestedId(null);
-        //     return;
-        // }
+        syncCodeInputSnapshot(id, patch);
 
         const nextSnap = registryRef.current.get(id);
         if (nextSnap) {
@@ -414,7 +363,6 @@ export function ReviewToolsProvider({
 
     const reconcileBinding = useCallback(() => {
         if (!enabledRef.current) return;
-        if (mode === "manual") return;
 
         const effectiveBound = (externalBoundId ?? boundId) ?? null;
 
@@ -457,8 +405,6 @@ export function ReviewToolsProvider({
         (afterId: string) => {
             if (!enabledRef.current) return;
 
-            if (mode === "manual") return;
-
             const ordered = orderRef.current.filter((id) => registryRef.current.has(id));
             const startIndex = ordered.indexOf(afterId);
 
@@ -476,7 +422,7 @@ export function ReviewToolsProvider({
 
             reconcileBinding();
         },
-        [bindNow, reconcileBinding, mode],
+        [bindNow, reconcileBinding],
     );
 
     const setCodeInputMeta = useCallback((id: string, patch: Partial<CodeInputMeta>) => {
@@ -506,36 +452,11 @@ export function ReviewToolsProvider({
             clearUnbindTimer(id);
 
             const had = registryRef.current.has(id);
-            const prev = registryRef.current.get(id);
             if (!orderRef.current.includes(id)) orderRef.current.push(id);
 
-            let nextArgs: RegisterArgs = args;
+            registryRef.current.set(id, args);
 
-            if (prev?.preferSnapshot) {
-                const incomingMatchesPatchedSnapshot =
-                    prev.lang === args.lang &&
-                    prev.code === args.code &&
-                    (prev.stdin ?? "") === (args.stdin ?? "") &&
-                    workspaceKeyOf(prev.workspace ?? null) === workspaceKeyOf(args.workspace ?? null);
-
-                nextArgs = incomingMatchesPatchedSnapshot
-                    ? { ...args, preferSnapshot: false }
-                    : {
-                        ...args,
-                        lang: prev.lang,
-                        code: prev.code,
-                        stdin: prev.stdin,
-                        workspace: prev.workspace,
-                        preferSnapshot: true,
-                    };
-            }
-
-            const prevKey = registerArgsKey(prev);
-            const nextKey = registerArgsKey(nextArgs);
-
-            registryRef.current.set(id, nextArgs);
-
-            if (!had || prevKey !== nextKey) setRegistryTick((x) => x + 1);
+            if (!had) setRegistryTick((x) => x + 1);
 
             if (requestedId === id) {
                 defer(() => bindNow(id));
@@ -543,8 +464,8 @@ export function ReviewToolsProvider({
             }
 
             const curBound = (externalBoundId ?? boundId) ?? null;
-            if (curBound === id && nextArgs.preferSnapshot === true && prevKey !== nextKey) {
-                defer(() => onBindToToolsPanel({ id, ...nextArgs }));
+            if (curBound === id) {
+                defer(() => onBindToToolsPanel({ id, ...args }));
             }
         },
         [

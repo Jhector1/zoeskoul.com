@@ -277,13 +277,32 @@ export function useReviewModuleController({
         showSkeleton,
     });
     const activeCard = viewCards[scrollSync.activeCardIndex] ?? null;
+    const [requestedExerciseTarget, setRequestedExerciseTarget] = useState<{
+        topicId: string;
+        cardId: string;
+        exerciseId: string;
+    } | null>(null);
+    const activeExerciseTarget = useMemo(() => {
+        if (!requestedExerciseTarget) return null;
+        if (requestedExerciseTarget.topicId !== viewTid) return null;
+
+        const activeCardId = activeCard?.id ?? null;
+        if (!activeCardId) return null;
+        if (requestedExerciseTarget.cardId !== activeCardId) return null;
+
+        return requestedExerciseTarget;
+    }, [requestedExerciseTarget, viewTid, activeCard?.id]);
 
     const tool = useToolCodeRunnerState({
         progress,
         progressHydrated,
         setProgress,
         viewTid,
-        scopeKey: activeCard?.id ? `card:${activeCard.id}` : "card:general",
+        scopeKey: activeExerciseTarget
+            ? `exercise:${activeExerciseTarget.exerciseId}`
+            : activeCard?.id
+                ? `card:${activeCard.id}`
+                : "card:general",
         defaultLang: runtime.toolDefaults.defaultLang,
         defaultCode: runtime.toolDefaults.defaultCode,
         defaultStdin: runtime.toolDefaults.defaultStdin,
@@ -510,20 +529,29 @@ export function useReviewModuleController({
 
     const handleBindToToolsPanel = useCallback(
         (args: Parameters<typeof tool.bindCodeInput>[0]) => {
+            void tool.flushLatest();
+            const ownerCardId = args.ownerCardId?.trim() || activeCard?.id || "general";
+            setRequestedExerciseTarget({
+                topicId: viewTid,
+                cardId: ownerCardId,
+                exerciseId: args.id,
+            });
             tool.bindCodeInput(args);
         },
-        [tool.bindCodeInput],
+        [tool.bindCodeInput, tool.flushLatest, activeCard?.id, viewTid],
     );
 
     const handleUnbindFromToolsPanel = useCallback(() => {
+        void tool.flushLatest();
+        setRequestedExerciseTarget(null);
         tool.unbindCodeInput();
-    }, [tool.unbindCodeInput]);
+    }, [tool.flushLatest, tool.unbindCodeInput]);
 
     const toolsProvider = useMemo(
         () => ({
             enabled: panels.toolsUiEnabled,
             resetKey: `${viewTid}:${versionStr}`,
-            externalBoundId: tool.boundId,
+            externalBoundId: activeExerciseTarget?.exerciseId ?? null,
             ensureVisible: handleEnsureToolsVisible,
             onBindToToolsPanel: handleBindToToolsPanel,
             onUnbindFromToolsPanel: handleUnbindFromToolsPanel,
@@ -532,7 +560,7 @@ export function useReviewModuleController({
             panels.toolsUiEnabled,
             viewTid,
             versionStr,
-            tool.boundId,
+            activeExerciseTarget?.exerciseId,
             handleEnsureToolsVisible,
             handleBindToToolsPanel,
             handleUnbindFromToolsPanel,
@@ -610,13 +638,14 @@ export function useReviewModuleController({
             onResizeStart: panels.onMouseDownRightHandle,
             toolsPanelProps: {
                 onCollapse: panels.handleCollapseRight,
-                onUnbind: tool.unbindCodeInput,
-                boundId: tool.boundId,
-                toolScopeKey: tool.boundId
-                    ? `${subjectSlug}:${moduleSlug}:${viewTid}:exercise:${tool.boundId}`
+                onUnbind: handleUnbindFromToolsPanel,
+                boundId: activeExerciseTarget?.exerciseId ?? null,
+                toolScopeKey: activeExerciseTarget
+                    ? `${subjectSlug}:${moduleSlug}:${viewTid}:exercise:${activeExerciseTarget.exerciseId}`
                     : `${subjectSlug}:${moduleSlug}:${viewTid}:${activeCard?.id ?? "general"}:general`,
                 rightBodyRef: tool.rightBodyRef,
                 codeRunnerRegionH: tool.codeRunnerRegionH,
+                toolHydrated: tool.toolHydrated,
                 toolLang: tool.toolLang,
                 toolCode: tool.toolCode,
                 toolStdin: tool.toolStdin,

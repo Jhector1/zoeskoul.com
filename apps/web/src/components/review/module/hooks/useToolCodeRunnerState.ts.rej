@@ -1,0 +1,432 @@
+--- review/module/hooks/useToolCodeRunnerState.ts
++++ review/module/hooks/useToolCodeRunnerState.ts
+@@ -15,6 +15,9 @@
+ type BoundTarget = { id: string; onPatch: (patch: any) => void };
+ 
+ type ToolSnap = {
++    topicId: string;
++    toolKey: string;
++
+     lang: WorkspaceLanguage;
+     code: string;
+     stdin: string;
+@@ -31,6 +34,8 @@
+ 
+ function snapKey(s: ToolSnap) {
+     return [
++        s.topicId,
++        s.toolKey,
+         s.lang,
+         s.sqlDialect,
+         s.sqlDatasetId ?? "",
+@@ -103,12 +108,15 @@
+     }, []);
+ 
+     const effectiveToolKey = boundId ? `exercise:${boundId}` : scopeKey;
++    const toolIdentity = useMemo(
++        () => `${viewTid}::${effectiveToolKey}::${versionStr}`,
++        [viewTid, effectiveToolKey, versionStr],
++    );
+ 
+     const saved = useMemo(() => {
+         return (progress as any)?.topics?.[viewTid]?.toolState?.[effectiveToolKey] ?? null;
+     }, [progress, viewTid, effectiveToolKey]);
+ 
+-
+     const initialLang = (saved?.lang as WorkspaceLanguage) ?? defaultLang;
+     const initialCode = typeof saved?.code === "string" ? saved.code : defaultCode;
+     const initialStdin = typeof saved?.stdin === "string" ? saved.stdin : defaultStdin;
+@@ -152,16 +160,29 @@
+         useState<string | undefined>(initialResolvedSql.sqlSeedSql);
+     const [toolSqlInitialTableSnapshots, setToolSqlInitialTableSnapshots0] =
+         useState<SqlTableSnapshots | undefined>(initialResolvedSql.sqlInitialTableSnapshots);
+-    const [toolIdeConfig, setToolIdeConfig] = useState<LearningIdeConfig | null>(null);
+-    const [hydratedToolKey, setHydratedToolKey] = useState(effectiveToolKey);
++
++    const [toolIdeConfig, setToolIdeConfig0] = useState<LearningIdeConfig | null>(null);
++    const toolIdeConfigKeyRef = useRef<string>(ideConfigKey(null));
++    const [hydratedToolIdentity, setHydratedToolIdentity] = useState<string>("");
++    const toolHydrated = hydratedToolIdentity === toolIdentity;
++
++    const setToolIdeConfigIfChanged = useCallback((config: LearningIdeConfig | null | undefined) => {
++        const nextConfig = config ?? null;
++        const nextKey = ideConfigKey(nextConfig);
++        if (toolIdeConfigKeyRef.current === nextKey) return;
++        toolIdeConfigKeyRef.current = nextKey;
++        setToolIdeConfig0(nextConfig);
++    }, []);
+ 
+     useEffect(() => {
+         if (boundId == null) {
+-            setToolIdeConfig(null);
++            setToolIdeConfigIfChanged(null);
+         }
+-    }, [boundId]);
++    }, [boundId, setToolIdeConfigIfChanged]);
+ 
+     const latestSnapRef = useRef<ToolSnap>({
++        topicId: viewTid,
++        toolKey: effectiveToolKey,
+         lang: initialLang,
+         code: initialCode,
+         stdin: initialStdin,
+@@ -176,6 +197,8 @@
+ 
+     const toolSnap = useMemo<ToolSnap>(
+         () => ({
++            topicId: viewTid,
++            toolKey: effectiveToolKey,
+             lang: toolLang,
+             code: toolCode,
+             stdin: toolStdin,
+@@ -188,6 +211,8 @@
+             sqlInitialTableSnapshots: toolSqlInitialTableSnapshots,
+         }),
+         [
++            viewTid,
++            effectiveToolKey,
+             toolLang,
+             toolCode,
+             toolStdin,
+@@ -203,9 +228,13 @@
+ 
+     const commitToolToProgress = useCallback(
+         async (latest: ToolSnap) => {
++            const topicId = latest.topicId;
++            const toolKey = latest.toolKey;
++            if (!topicId || !toolKey) return;
++
+             setProgress((p: any) => {
+-                const tp0: any = p?.topics?.[viewTid] ?? {};
+-                const prevToolState = tp0?.toolState?.[effectiveToolKey] ?? null;
++                const tp0: any = p?.topics?.[topicId] ?? {};
++                const prevToolState = tp0?.toolState?.[toolKey] ?? null;
+ 
+                 if (
+                     prevToolState?.lang === latest.lang &&
+@@ -223,7 +252,7 @@
+                 }
+ 
+                 const toolState = { ...(tp0.toolState ?? {}) };
+-                toolState[effectiveToolKey] = {
++                toolState[toolKey] = {
+                     lang: latest.lang,
+                     code: latest.code,
+                     stdin: latest.stdin,
+@@ -239,17 +268,17 @@
+                     ...p,
+                     topics: {
+                         ...(p?.topics ?? {}),
+-                        [viewTid]: { ...tp0, toolState },
++                        [topicId]: { ...tp0, toolState },
+                     },
+                 };
+             });
+         },
+-        [setProgress, viewTid, effectiveToolKey],
++        [setProgress],
+     );
+ 
+     const { prime, flush, cancel } = useDebouncedCommit({
+         value: toolSnap,
+-        enabled: progressHydrated,
++        enabled: progressHydrated && toolHydrated,
+         delayMs: toolSaveDelayMs,
+         serialize: snapKey,
+         commit: async (latest) => {
+@@ -261,9 +290,12 @@
+         cancel();
+ 
+         const latest = latestSnapRef.current;
++        if (!progressHydrated) return;
++        if (`${latest.topicId}::${latest.toolKey}::${versionStr}` !== toolIdentity) return;
++
+         prime(latest);
+         await commitToolToProgress(latest);
+-    }, [cancel, prime, commitToolToProgress]);
++    }, [cancel, prime, commitToolToProgress, progressHydrated, toolIdentity, versionStr]);
+ 
+     useEffect(() => {
+         clearBoundState();
+@@ -312,19 +344,19 @@
+             defaultSqlDialect,
+         });
+ 
++        const nextWorkspace =
++            s?.workspace && typeof s.workspace === "object"
++                ? (s.workspace as WorkspaceStateV2)
++                : null;
++
+         const nextSnap: ToolSnap = {
++            topicId: viewTid,
++            toolKey: effectiveToolKey,
+             lang: nextLang,
+             code: nextCode,
+             stdin: nextStdin,
+-            workspace:
+-                s?.workspace && typeof s.workspace === "object"
+-                    ? (s.workspace as WorkspaceStateV2)
+-                    : null,
+-            workspaceKey: workspaceKeyOf(
+-                s?.workspace && typeof s.workspace === "object"
+-                    ? (s.workspace as WorkspaceStateV2)
+-                    : null,
+-            ),
++            workspace: nextWorkspace,
++            workspaceKey: workspaceKeyOf(nextWorkspace),
+             sqlDialect: resolvedSql.sqlDialect,
+             sqlDatasetId: resolvedSql.sqlDatasetId,
+             sqlSchemaSql: resolvedSql.sqlSchemaSql,
+@@ -332,8 +364,19 @@
+             sqlInitialTableSnapshots: resolvedSql.sqlInitialTableSnapshots,
+         };
+ 
++        const latest = latestSnapRef.current;
++        const latestIdentity = `${latest.topicId}::${latest.toolKey}::${versionStr}`;
++        const hasUnsavedLocalEdits =
++            hydratedToolIdentity === toolIdentity &&
++            latestIdentity === toolIdentity &&
++            snapKey(latest) !== snapKey(nextSnap);
++
++        if (hasUnsavedLocalEdits) {
++            return;
++        }
++
+         latestSnapRef.current = nextSnap;
+-        setHydratedToolKey(effectiveToolKey);
++        setHydratedToolIdentity(toolIdentity);
+ 
+         setToolLang0((prev) => (prev === nextSnap.lang ? prev : nextSnap.lang));
+         setToolCode0((prev) => (prev === nextSnap.code ? prev : nextSnap.code));
+@@ -371,12 +414,14 @@
+         progressHydrated,
+         versionStr,
+         effectiveToolKey,
++        toolIdentity,
+         progress,
+         defaultLang,
+         defaultCode,
+         defaultStdin,
+         defaultSqlDialect,
+         prime,
++        hydratedToolIdentity,
+     ]);
+ 
+     const bindCodeInput = useCallback(
+@@ -387,6 +432,7 @@
+             stdin?: string;
+             ideConfig?: LearningIdeConfig | null;
+             workspace?: WorkspaceStateV2 | null;
++            preferSnapshot?: boolean;
+             sqlDialect?: SqlDialect;
+             sqlDatasetId?: string;
+             sqlSchemaSql?: string;
+@@ -404,35 +450,96 @@
+                 defaultSqlDialect,
+             });
+ 
++            const nextWorkspace = args2.workspace ?? null;
++            const preferIncomingSnapshot = Boolean(args2.preferSnapshot);
++            const nextToolKey = `exercise:${args2.id}`;
++            const nextIdentity = `${viewTid}::${nextToolKey}::${versionStr}`;
++            const savedForBind =
++                (progress as any)?.topics?.[viewTid]?.toolState?.[nextToolKey] ?? null;
++            const savedWorkspace =
++                savedForBind?.workspace && typeof savedForBind.workspace === "object"
++                    ? (savedForBind.workspace as WorkspaceStateV2)
++                    : null;
++
+             const nextSnap: ToolSnap = {
+-                lang: args2.lang,
+-                code: typeof args2.code === "string" ? args2.code : "",
+-                stdin: typeof args2.stdin === "string" ? args2.stdin : "",
+-                workspace: args2.workspace ?? null,
+-                workspaceKey: workspaceKeyOf(args2.workspace ?? null),
+-                sqlDialect: resolvedSql.sqlDialect,
+-                sqlDatasetId: resolvedSql.sqlDatasetId,
+-                sqlSchemaSql: resolvedSql.sqlSchemaSql,
+-                sqlSeedSql: resolvedSql.sqlSeedSql,
+-                sqlInitialTableSnapshots: resolvedSql.sqlInitialTableSnapshots,
++                topicId: viewTid,
++                toolKey: nextToolKey,
++                lang: !preferIncomingSnapshot && savedForBind?.lang
++                    ? (savedForBind.lang as WorkspaceLanguage)
++                    : args2.lang,
++                code:
++                    !preferIncomingSnapshot && typeof savedForBind?.code === "string"
++                        ? savedForBind.code
++                        : typeof args2.code === "string"
++                            ? args2.code
++                            : "",
++                stdin:
++                    !preferIncomingSnapshot && typeof savedForBind?.stdin === "string"
++                        ? savedForBind.stdin
++                        : typeof args2.stdin === "string"
++                            ? args2.stdin
++                            : "",
++                workspace: !preferIncomingSnapshot && savedWorkspace ? savedWorkspace : nextWorkspace,
++                workspaceKey: workspaceKeyOf(!preferIncomingSnapshot && savedWorkspace ? savedWorkspace : nextWorkspace),
++                sqlDialect: !preferIncomingSnapshot && savedForBind?.sqlDialect
++                    ? (savedForBind.sqlDialect as SqlDialect)
++                    : resolvedSql.sqlDialect,
++                sqlDatasetId:
++                    !preferIncomingSnapshot && typeof savedForBind?.sqlDatasetId === "string"
++                        ? savedForBind.sqlDatasetId
++                        : resolvedSql.sqlDatasetId,
++                sqlSchemaSql:
++                    !preferIncomingSnapshot && typeof savedForBind?.sqlSchemaSql === "string"
++                        ? savedForBind.sqlSchemaSql
++                        : resolvedSql.sqlSchemaSql,
++                sqlSeedSql:
++                    !preferIncomingSnapshot && typeof savedForBind?.sqlSeedSql === "string"
++                        ? savedForBind.sqlSeedSql
++                        : resolvedSql.sqlSeedSql,
++                sqlInitialTableSnapshots:
++                    !preferIncomingSnapshot &&
++                    savedForBind?.sqlInitialTableSnapshots &&
++                    typeof savedForBind.sqlInitialTableSnapshots === "object"
++                        ? (savedForBind.sqlInitialTableSnapshots as SqlTableSnapshots)
++                        : resolvedSql.sqlInitialTableSnapshots,
+             };
+ 
+-            const nextBindKey = `${args2.id}::${snapKey(nextSnap)}::${ideConfigKey(args2.ideConfig)}`;
++            const incomingWorkspaceKey = workspaceKeyOf(nextWorkspace);
++            if (
++                savedForBind &&
++                !preferIncomingSnapshot &&
++                (nextSnap.code !== args2.code ||
++                    nextSnap.stdin !== (args2.stdin ?? "") ||
++                    nextSnap.lang !== args2.lang ||
++                    nextSnap.workspaceKey !== incomingWorkspaceKey)
++            ) {
++                args2.onPatch({
++                    codeLang: nextSnap.lang,
++                    code: nextSnap.code,
++                    codeStdin: nextSnap.stdin,
++                    workspace: nextSnap.workspace ?? null,
++                    submitted: false,
++                    result: null,
++                });
++            }
++
++            const nextBindKey = `${nextIdentity}::${args2.id}::${snapKey(nextSnap)}::${ideConfigKey(args2.ideConfig)}::${preferIncomingSnapshot ? "prefer-incoming" : "prefer-saved"}`;
+ 
+             if (lastBindKeyRef.current === nextBindKey) {
+                 boundRef.current = { id: args2.id, onPatch: args2.onPatch };
+-                setToolIdeConfig((prev) => (prev === args2.ideConfig ? prev : (args2.ideConfig ?? null)));
++                setToolIdeConfigIfChanged(args2.ideConfig ?? null);
++                if (hydratedToolIdentity !== nextIdentity) setHydratedToolIdentity(nextIdentity);
+                 return;
+             }
+ 
+             lastBindKeyRef.current = nextBindKey;
+             boundRef.current = { id: args2.id, onPatch: args2.onPatch };
+             setBoundId((prev) => (prev === args2.id ? prev : args2.id));
+-            setToolIdeConfig(args2.ideConfig ?? null);
++            setToolIdeConfigIfChanged(args2.ideConfig ?? null);
+ 
+             boundDirtyRef.current = false;
+             latestSnapRef.current = nextSnap;
+-            setHydratedToolKey(`exercise:${args2.id}`);
++            setHydratedToolIdentity(nextIdentity);
+ 
+             setToolLang0((prev) => (prev === nextSnap.lang ? prev : nextSnap.lang));
+             setToolCode0((prev) => (prev === nextSnap.code ? prev : nextSnap.code));
+@@ -466,14 +573,22 @@
+ 
+             prime(nextSnap);
+         },
+-        [prime, defaultSqlDialect],
++        [
++            prime,
++            defaultSqlDialect,
++            setToolIdeConfigIfChanged,
++            viewTid,
++            versionStr,
++            hydratedToolIdentity,
++            progress,
++        ],
+     );
+ 
+     const unbindCodeInput = useCallback(() => {
+         cancel();
+         clearBoundState();
+-        setToolIdeConfig(null);
+-    }, [cancel, clearBoundState]);
++        setToolIdeConfigIfChanged(null);
++    }, [cancel, clearBoundState, setToolIdeConfigIfChanged]);
+ 
+     useFlushOnPageExit(() => {
+         cancel();
+@@ -483,9 +598,16 @@
+     useEffect(() => {
+         return () => {
+             cancel();
+-            void commitToolToProgress(latestSnapRef.current);
++            const latest = latestSnapRef.current;
++            if (
++                progressHydrated &&
++                toolHydrated &&
++                `${latest.topicId}::${latest.toolKey}::${versionStr}` === toolIdentity
++            ) {
++                void commitToolToProgress(latest);
++            }
+         };
+-    }, [effectiveToolKey, cancel, commitToolToProgress]);
++    }, [toolIdentity, versionStr, progressHydrated, toolHydrated, cancel, commitToolToProgress]);
+ 
+     useEffect(() => {
+         return () => {
+@@ -534,6 +656,13 @@
+             workspace,
+             workspaceKey: nextWorkspaceKey,
+         };
++
++        const b = boundRef.current;
++        if (b) {
++            boundDirtyRef.current = true;
++            b.onPatch({ workspace, submitted: false, result: null });
++        }
++
+         if (toolWorkspaceKeyRef.current === nextWorkspaceKey) return;
+ 
+         toolWorkspaceKeyRef.current = nextWorkspaceKey;
+@@ -581,19 +710,34 @@
+         const el = rightBodyRef.current;
+         if (!el) return;
+ 
+-        const update = () => setRightBodyH(el.clientHeight - 100 || 520);
++        let raf = 0;
++        const update = () => {
++            if (raf) window.cancelAnimationFrame(raf);
++            raf = window.requestAnimationFrame(() => {
++                raf = 0;
++                const next = Math.max(280, el.clientHeight - 100 || 520);
++                setRightBodyH((prev) => (Math.abs(prev - next) < 1 ? prev : next));
++            });
++        };
+         update();
+ 
+-        if (typeof ResizeObserver === "undefined") return;
++        if (typeof ResizeObserver === "undefined") {
++            return () => {
++                if (raf) window.cancelAnimationFrame(raf);
++            };
++        }
+ 
+         const ro = new ResizeObserver(() => update());
+         ro.observe(el);
+ 
+-        return () => ro.disconnect();
++        return () => {
++            if (raf) window.cancelAnimationFrame(raf);
++            ro.disconnect();
++        };
+     }, [rightCollapsed, rightW]);
+ 
+     const codeRunnerRegionH = Math.max(280, rightBodyH);
+-    const displayHydrated = hydratedToolKey === effectiveToolKey;
++    const displayHydrated = toolHydrated;
+ 
+     return {
+         boundId,

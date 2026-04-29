@@ -705,6 +705,7 @@ export default function QuizBlock({
           {q.kind === "practice" ? (
               <QuizPracticeCard
                   q={q}
+                  ownerCardId={quizCardId ?? quizId}
                   ps={practiceBank.practice[q.id]}
                   toolScopedId={`${stableKey}:${q.id}`}
                   toolsActive={toolsActive}

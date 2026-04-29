@@ -28,6 +28,10 @@ type SqlTableSnapshot = {
 
 type SqlTableSnapshots = Record<string, SqlTableSnapshot>;
 
+function workspaceKeyOf(workspace: WorkspaceStateV2 | null | undefined) {
+    return JSON.stringify(workspace ?? null);
+}
+
 function buildToolWorkspace(args: {
     base: WorkspaceStateV2;
     language: RunnerLanguage;
@@ -138,6 +142,7 @@ function patchToolWorkspaceSource(args: {
 export default function CodeToolPane(props: {
     height: number;
     toolScopeKey?: string;
+    toolHydrated: boolean;
     toolLang: RunnerLanguage;
     toolCode: string;
     toolStdin: string;
@@ -155,6 +160,7 @@ export default function CodeToolPane(props: {
 }) {
     const {
         toolScopeKey,
+        toolHydrated,
         toolLang,
         toolCode,
         toolStdin,
@@ -209,6 +215,7 @@ export default function CodeToolPane(props: {
     const runnerH = Math.max(usesWorkspaceShell ? 480 : 320, size.h);
 
     const [runFeedback, setRunFeedback] = useState<CodeFeedback | null>(null);
+    const [ideReady, setIdeReady] = useState(false);
     const lastEmittedRef = useRef<{ code: string; stdin: string } | null>(null);
     const lastIncomingRef = useRef<{ code: string; stdin: string } | null>(null);
     const persistTimerRef = useRef<number | null>(null);
@@ -238,65 +245,82 @@ export default function CodeToolPane(props: {
             sqlSetupSql,
         ],
     );
-    const latestWorkspaceRef = useRef<WorkspaceStateV2 | null>(toolWorkspace ?? externalWorkspace);
-    const [workspaceBridge, setWorkspaceBridge] = useState<WorkspaceStateV2>(
-        toolWorkspace ?? externalWorkspace,
-    );
-    const lastContextKeyRef = useRef<string>("");
-
-    useEffect(() => {
-        latestWorkspaceRef.current = workspaceBridge;
-    }, [workspaceBridge]);
-
-    useEffect(() => {
-        if (lastContextKeyRef.current !== workspaceContextKey) {
-            lastContextKeyRef.current = workspaceContextKey;
-            setWorkspaceBridge(toolWorkspace ?? externalWorkspace);
-            latestWorkspaceRef.current = toolWorkspace ?? externalWorkspace;
-            lastEmittedRef.current = null;
-            return;
+    const resolvedIncomingWorkspace = useMemo(() => {
+        if (!usesWorkspaceShell) {
+            return externalWorkspace;
         }
 
-        if (!usesWorkspaceShell) {
-            setWorkspaceBridge(externalWorkspace);
-            return;
+        if (!toolHydrated) {
+            return externalWorkspace;
         }
 
         if (toolWorkspace) {
-            setWorkspaceBridge(toolWorkspace);
-            return;
+            return patchToolWorkspaceSource({
+                workspace: toolWorkspace,
+                language: toolLang,
+                code: toolCode,
+                stdin: toolStdin,
+                sqlSchemaSql: sqlSchemaSql ?? sqlSetupSql ?? "",
+                sqlSeedSql: sqlSeedSql ?? "",
+            });
         }
 
-        setWorkspaceBridge((prev) => {
-            const prevSnapshot = extractWorkspaceSnapshot(prev);
-            if (prevSnapshot.code === toolCode && prevSnapshot.stdin === toolStdin) {
-                const nextWorkspace = patchToolWorkspaceSource({
-                    workspace: prev,
-                    language: toolLang,
-                    code: toolCode,
-                    stdin: toolStdin,
-                    sqlSchemaSql: sqlSchemaSql ?? sqlSetupSql ?? "",
-                    sqlSeedSql: sqlSeedSql ?? "",
-                });
-                latestWorkspaceRef.current = nextWorkspace;
-                return nextWorkspace;
-            }
-
-            return prev;
-        });
+        return externalWorkspace;
     }, [
-        boundId,
         externalWorkspace,
-        toolWorkspace,
         sqlSchemaSql,
         sqlSeedSql,
         sqlSetupSql,
         toolCode,
+        toolHydrated,
         toolLang,
         toolStdin,
+        toolWorkspace,
         usesWorkspaceShell,
-        workspaceContextKey,
     ]);
+    const latestWorkspaceRef = useRef<WorkspaceStateV2 | null>(toolWorkspace ?? externalWorkspace);
+    const [workspaceBridge, setWorkspaceBridge] = useState<WorkspaceStateV2>(
+        toolWorkspace ?? externalWorkspace,
+    );
+    const workspaceBridgeKeyRef = useRef(workspaceKeyOf(toolWorkspace ?? externalWorkspace));
+    const lastContextKeyRef = useRef<string>("");
+
+    useEffect(() => {
+        latestWorkspaceRef.current = workspaceBridge;
+        workspaceBridgeKeyRef.current = workspaceKeyOf(workspaceBridge);
+    }, [workspaceBridge]);
+
+    const setWorkspaceBridgeIfChanged = useCallback((workspace: WorkspaceStateV2) => {
+        const nextKey = workspaceKeyOf(workspace);
+
+        latestWorkspaceRef.current = workspace;
+
+        if (workspaceBridgeKeyRef.current === nextKey) {
+            return;
+        }
+
+        workspaceBridgeKeyRef.current = nextKey;
+        setWorkspaceBridge(workspace);
+    }, []);
+
+    useEffect(() => {
+        if (lastContextKeyRef.current !== workspaceContextKey) {
+            lastContextKeyRef.current = workspaceContextKey;
+            setWorkspaceBridgeIfChanged(resolvedIncomingWorkspace);
+            lastEmittedRef.current = null;
+            return;
+        }
+
+        setWorkspaceBridgeIfChanged(resolvedIncomingWorkspace);
+    }, [
+        resolvedIncomingWorkspace,
+        workspaceContextKey,
+        setWorkspaceBridgeIfChanged,
+    ]);
+
+    useEffect(() => {
+        setIdeReady(false);
+    }, [workspaceContextKey]);
 
     useEffect(() => {
         setRunFeedback(null);
@@ -329,6 +353,24 @@ export default function CodeToolPane(props: {
         const next = extractWorkspaceSnapshot(workspace);
         const prevEmitted = lastEmittedRef.current;
         const prevIncoming = lastIncomingRef.current;
+        const workspacePatch =
+            workspace && typeof workspace === "object"
+                ? {
+                    workspace,
+                    codeWorkspace: workspace,
+                    ideWorkspace: workspace,
+                }
+                : {};
+
+        if (boundId) {
+            syncCodeInputSnapshot?.(boundId, {
+                ...workspacePatch,
+                code: next.code,
+                codeStdin: next.stdin,
+                submitted: false,
+                result: null,
+            });
+        }
 
         if (prevEmitted && prevEmitted.code === next.code && prevEmitted.stdin === next.stdin) {
             return;
@@ -349,14 +391,6 @@ export default function CodeToolPane(props: {
         onChangeCode(next.code);
         onChangeStdin(next.stdin);
 
-        if (boundId) {
-            syncCodeInputSnapshot?.(boundId, {
-                code: next.code,
-                codeStdin: next.stdin,
-                submitted: false,
-                result: null,
-            });
-        }
     }, [
         boundId,
         clearRunFeedback,
@@ -373,9 +407,10 @@ export default function CodeToolPane(props: {
 
     const handleWorkspaceChange = useCallback((workspace: WorkspaceStateV2 | null) => {
         if (workspace) {
-            setWorkspaceBridge(workspace);
+            setWorkspaceBridgeIfChanged(workspace);
+        } else {
+            latestWorkspaceRef.current = null;
         }
-        latestWorkspaceRef.current = workspace;
 
         if (!usesWorkspaceShell) {
             emitWorkspaceUpstream(workspace);
@@ -390,7 +425,7 @@ export default function CodeToolPane(props: {
             persistTimerRef.current = null;
             emitWorkspaceUpstreamRef.current(latestWorkspaceRef.current);
         }, 220);
-    }, [emitWorkspaceUpstream, usesWorkspaceShell]);
+    }, [emitWorkspaceUpstream, setWorkspaceBridgeIfChanged, usesWorkspaceShell]);
 
     useEffect(() => {
         return () => {
@@ -423,41 +458,55 @@ export default function CodeToolPane(props: {
         }
     }, [boundId, setRunFeedbackForCard]);
 
+    const showLoadingMask = usesWorkspaceShell && (!toolHydrated || !ideReady);
+
     return (
         <div ref={ref} className="flex h-full min-h-0 w-full flex-col overflow-hidden">
-            <FullIDE
-                key={workspaceContextKey}
-                title={isSql ? "Run SQL" : "Run code"}
-                height={runnerH - 50}
-                fullHeight
-                language={toolLang}
-                access={{
-                    hasUser: true,
-                    canUseMultiFile: isSql || ideShell.access.canUseMultiFile,
-                    canSaveCloud: ideShell.access.canSaveCloud,
-                    canCreateProjects: ideShell.access.canCreateProjects,
-                }}
-                loginHref="/authenticate"
-                billingHref="/billing"
-                draftStorageMode="off"
-                servicePreset={ideShell.servicePreset}
-                forceDesktopLayout={shouldForceDesktopLayout}
-                services={{
-                    ...ideShell.services,
-                    runner: {
-                        ...(ideShell.services.runner ?? {}),
-                        showThemeToggle: true,
-                        showSqlDialectPicker: false,
-                    },
-                }}
-                initialWorkspace={workspaceBridge}
-                externalWorkspace={usesWorkspaceShell ? null : workspaceBridge}
-                onWorkspaceChange={handleWorkspaceChange}
-                onBeforeRun={handleBeforeRun}
-                onRunResult={handleRunResult}
-                initialSqlDialect={sqlDialect}
-                sqlInitialTableSnapshots={sqlInitialTableSnapshots}
-            />
+            <div className="relative h-full min-h-0 flex-1">
+                <FullIDE
+                    key={workspaceContextKey}
+                    title={isSql ? "Run SQL" : "Run code"}
+                    height={runnerH - 50}
+                    fullHeight
+                    language={toolLang}
+                    access={{
+                        hasUser: true,
+                        canUseMultiFile: isSql || ideShell.access.canUseMultiFile,
+                        canSaveCloud: ideShell.access.canSaveCloud,
+                        canCreateProjects: ideShell.access.canCreateProjects,
+                    }}
+                    loginHref="/authenticate"
+                    billingHref="/billing"
+                    draftStorageMode="off"
+                    servicePreset={ideShell.servicePreset}
+                    forceDesktopLayout={shouldForceDesktopLayout}
+                    services={{
+                        ...ideShell.services,
+                        runner: {
+                            ...(ideShell.services.runner ?? {}),
+                            showThemeToggle: true,
+                            showSqlDialectPicker: false,
+                        },
+                    }}
+                    initialWorkspace={workspaceBridge}
+                    externalWorkspace={usesWorkspaceShell ? null : workspaceBridge}
+                    onWorkspaceChange={handleWorkspaceChange}
+                    onBeforeRun={handleBeforeRun}
+                    onRunResult={handleRunResult}
+                    onReadyChange={setIdeReady}
+                    initialSqlDialect={sqlDialect}
+                    sqlInitialTableSnapshots={sqlInitialTableSnapshots}
+                />
+
+                {showLoadingMask ? (
+                    <div className="absolute inset-0 z-20 flex items-center justify-center bg-neutral-950/70 backdrop-blur-sm">
+                        <div className="flex items-center gap-3 rounded-full border border-white/10 bg-black/40 px-4 py-2 text-sm font-semibold text-white/80">
+                            <span className="inline-block h-2.5 w-2.5 animate-pulse rounded-full bg-emerald-400" />
+                            Loading editor...
+                        </div>
+                    </div>
+                ) : null}
+            </div>
 
             {!isSql && runFeedback ? (
                 <div className="mt-3">

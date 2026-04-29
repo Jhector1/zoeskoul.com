@@ -109,16 +109,33 @@ export default function RevealAnswerCard({
             const lang = String(reveal.language ?? current.codeLang ?? "python");
             const code = String(reveal.solutionCode ?? reveal.code ?? "");
             const stdin = String(reveal.stdin ?? "");
+
+            const workspace =
+                reveal.workspace && typeof reveal.workspace === "object"
+                    ? reveal.workspace
+                    : reveal.solutionWorkspace && typeof reveal.solutionWorkspace === "object"
+                        ? reveal.solutionWorkspace
+                        : reveal.codeWorkspace && typeof reveal.codeWorkspace === "object"
+                            ? reveal.codeWorkspace
+                            : null;
+
             const copyText = code.trim() ? code : "";
 
             return {
                 title: `Solution code (${lang})`,
                 copyText,
-                fillPatch: copyText
+                fillPatch: copyText || workspace
                     ? ({
                         code: copyText,
                         codeLang: lang as any,
                         codeStdin: stdin,
+                        ...(workspace
+                            ? {
+                                workspace,
+                                codeWorkspace: workspace,
+                                ideWorkspace: workspace,
+                            }
+                            : {}),
                     } as Partial<QItem>)
                     : null,
                 node: (
@@ -412,21 +429,26 @@ export default function RevealAnswerCard({
     function onFill() {
         if (!m.fillPatch) return;
 
-        const patch = { ...m.fillPatch, submitted: false, result: null };
+        const patch = {
+            ...m.fillPatch,
+            ...(String(reveal?.kind ?? exercise?.kind ?? "") === "code_input"
+                ? { codeTouched: true }
+                : {}),
+            submitted: false,
+            result: null,
+        };
 
+        // Always update the real exercise item first.
+        // Do not depend only on the tools registry because it may be stale,
+        // not mounted yet, or bound to another card.
+        updateCurrent(patch);
+
+        // Also patch the right tools pane when this is a code exercise.
+        // This makes Fill Answer update both the saved card state and the open editor.
         if (String(reveal?.kind ?? exercise?.kind ?? "") === "code_input" && codeInputId) {
-            if (tools?.patchCodeInput) {
-                tools.patchCodeInput(codeInputId, patch);
-            } else {
-                updateCurrent(patch);
-            }
-
-            setFilled(true);
-            window.setTimeout(() => setFilled(false), 1200);
-            return;
+            tools?.patchCodeInput?.(codeInputId, patch);
         }
 
-        updateCurrent(patch);
         setFilled(true);
         window.setTimeout(() => setFilled(false), 1200);
     }

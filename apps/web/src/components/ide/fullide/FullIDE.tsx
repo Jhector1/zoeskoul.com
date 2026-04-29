@@ -670,15 +670,77 @@ export default function FullIDE(props: FullIDEProps) {
         () => JSON.stringify(externalWorkspace ?? null),
         [externalWorkspace],
     );
+    const hasExternalWorkspaceProp = Object.prototype.hasOwnProperty.call(
+        props as Record<string, unknown>,
+        "externalWorkspace",
+    );
+    const initialWorkspaceJson = useMemo(
+        () => JSON.stringify(initialWorkspace ?? null),
+        [initialWorkspace],
+    );
     const lastAppliedExternalWorkspaceJsonRef = useRef<string | null>(null);
 
-    useEffect(() => {
-        if (!externalWorkspace) return;
-        if (lastAppliedExternalWorkspaceJsonRef.current === externalWorkspaceJson) return;
 
-        workspace.actions.replaceWorkspace(externalWorkspace);
-        lastAppliedExternalWorkspaceJsonRef.current = externalWorkspaceJson;
-    }, [externalWorkspace, externalWorkspaceJson, workspace.actions]);
+    const replaceWorkspaceActionRef = useRef(workspace.actions.replaceWorkspace);
+    const resetWorkspaceForLanguageActionRef = useRef(workspace.actions.resetWorkspaceForLanguage);
+    const workspaceLanguageRef = useRef(workspace.state.language);
+
+    useEffect(() => {
+        replaceWorkspaceActionRef.current = workspace.actions.replaceWorkspace;
+        resetWorkspaceForLanguageActionRef.current = workspace.actions.resetWorkspaceForLanguage;
+        workspaceLanguageRef.current = workspace.state.language;
+    }, [
+        workspace.actions.replaceWorkspace,
+        workspace.actions.resetWorkspaceForLanguage,
+        workspace.state.language,
+    ]);
+
+    const currentWorkspaceJson = useMemo(
+        () => JSON.stringify(workspace.derived.currentWorkspace ?? null),
+        [workspace.derived.currentWorkspace],
+    );
+    const externalWorkspaceRef = useRef(externalWorkspace);
+    const initialWorkspaceRef = useRef(initialWorkspace);
+    const currentWorkspaceJsonRef = useRef(currentWorkspaceJson);
+
+    useEffect(() => {
+        externalWorkspaceRef.current = externalWorkspace;
+        initialWorkspaceRef.current = initialWorkspace;
+    }, [externalWorkspace, initialWorkspace]);
+
+    useEffect(() => {
+        currentWorkspaceJsonRef.current = currentWorkspaceJson;
+    }, [currentWorkspaceJson]);
+
+    useEffect(() => {
+        if (!hasExternalWorkspaceProp) return;
+
+        const applyKey = `${externalWorkspaceJson}::initial:${initialWorkspaceJson}`;
+        if (lastAppliedExternalWorkspaceJsonRef.current === applyKey) return;
+
+        const nextWorkspace = externalWorkspaceRef.current ?? initialWorkspaceRef.current ?? null;
+        const nextWorkspaceJson = JSON.stringify(nextWorkspace ?? null);
+
+        // Mark as applied before calling into workspace actions.
+        // Those actions synchronously schedule React state updates, so the guard must
+        // already be set before the next render/effect pass.
+        lastAppliedExternalWorkspaceJsonRef.current = applyKey;
+
+        if (nextWorkspace) {
+            if (nextWorkspaceJson !== currentWorkspaceJsonRef.current) {
+                replaceWorkspaceActionRef.current(nextWorkspace);
+            }
+        } else {
+            resetWorkspaceForLanguageActionRef.current(
+                forcedLanguage ?? workspaceLanguageRef.current,
+            );
+        }
+    }, [
+        hasExternalWorkspaceProp,
+        externalWorkspaceJson,
+        initialWorkspaceJson,
+        forcedLanguage,
+    ]);
 
     useEffect(() => {
         onWorkspaceChange?.(workspace.derived.currentWorkspace);

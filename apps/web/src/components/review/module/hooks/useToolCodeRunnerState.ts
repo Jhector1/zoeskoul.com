@@ -98,16 +98,29 @@ export function useToolCodeRunnerState(args: {
     const [boundId, setBoundId] = useState<string | null>(null);
     const boundDirtyRef = useRef(false);
     const lastBindKeyRef = useRef<string>("");
-    const isBound = useCallback((id: string) => boundRef.current?.id === id, []);
+    const bindingContext = useMemo(
+        () => `${viewTid}::${scopeKey}::${versionStr}`,
+        [viewTid, scopeKey, versionStr],
+    );
+    const boundContextRef = useRef<string>("");
+    const effectiveBoundId =
+        boundContextRef.current === bindingContext ? boundId : null;
+    const isBound = useCallback(
+        (id: string) =>
+            boundContextRef.current === bindingContext && boundRef.current?.id === id,
+        [bindingContext],
+    );
 
     const clearBoundState = useCallback(() => {
         boundRef.current = null;
+        boundContextRef.current = "";
         boundDirtyRef.current = false;
         lastBindKeyRef.current = "";
         setBoundId((prev) => (prev === null ? prev : null));
+        setHydratedToolIdentity("");
     }, []);
 
-    const effectiveToolKey = boundId ? `exercise:${boundId}` : scopeKey;
+    const effectiveToolKey = effectiveBoundId ? `exercise:${effectiveBoundId}` : scopeKey;
     const toolIdentity = useMemo(
         () => `${viewTid}::${effectiveToolKey}::${versionStr}`,
         [viewTid, effectiveToolKey, versionStr],
@@ -175,10 +188,10 @@ export function useToolCodeRunnerState(args: {
     }, []);
 
     useEffect(() => {
-        if (boundId == null) {
+        if (effectiveBoundId == null) {
             setToolIdeConfigIfChanged(null);
         }
-    }, [boundId, setToolIdeConfigIfChanged]);
+    }, [effectiveBoundId, setToolIdeConfigIfChanged]);
 
     const latestSnapRef = useRef<ToolSnap>({
         topicId: viewTid,
@@ -298,8 +311,11 @@ export function useToolCodeRunnerState(args: {
     }, [cancel, prime, commitToolToProgress, progressHydrated, toolIdentity, versionStr]);
 
     useEffect(() => {
+        if (progressHydrated) {
+            void commitToolToProgress(latestSnapRef.current);
+        }
         clearBoundState();
-    }, [viewTid, scopeKey, clearBoundState]);
+    }, [viewTid, scopeKey, progressHydrated, commitToolToProgress, clearBoundState]);
 
     const lastVersionRef = useRef<string | null>(null);
 
@@ -312,6 +328,7 @@ export function useToolCodeRunnerState(args: {
         }
 
         if (lastVersionRef.current !== versionStr) {
+            void commitToolToProgress(latestSnapRef.current);
             clearBoundState();
         }
 
@@ -427,6 +444,7 @@ export function useToolCodeRunnerState(args: {
     const bindCodeInput = useCallback(
         (args2: {
             id: string;
+            ownerCardId?: string | null;
             lang: WorkspaceLanguage;
             code: string;
             stdin?: string;
@@ -437,6 +455,7 @@ export function useToolCodeRunnerState(args: {
             sqlSchemaSql?: string;
             sqlSeedSql?: string;
             sqlInitialTableSnapshots?: SqlTableSnapshots;
+            preferSnapshot?: boolean;
             onPatch: (patch: any) => void;
         }) => {
             const resolvedSql = resolveSqlRunnerConfig({
@@ -452,8 +471,11 @@ export function useToolCodeRunnerState(args: {
             const nextWorkspace = args2.workspace ?? null;
             const nextToolKey = `exercise:${args2.id}`;
             const nextIdentity = `${viewTid}::${nextToolKey}::${versionStr}`;
+            const snapshotOverridesSaved = args2.preferSnapshot === true;
             const savedForBind =
-                (progress as any)?.topics?.[viewTid]?.toolState?.[nextToolKey] ?? null;
+                snapshotOverridesSaved
+                    ? null
+                    : (progress as any)?.topics?.[viewTid]?.toolState?.[nextToolKey] ?? null;
             const savedWorkspace =
                 savedForBind?.workspace && typeof savedForBind.workspace === "object"
                     ? (savedForBind.workspace as WorkspaceStateV2)
@@ -516,6 +538,7 @@ export function useToolCodeRunnerState(args: {
 
             if (lastBindKeyRef.current === nextBindKey) {
                 boundRef.current = { id: args2.id, onPatch: args2.onPatch };
+                boundContextRef.current = bindingContext;
                 setToolIdeConfigIfChanged(args2.ideConfig ?? null);
                 if (hydratedToolIdentity !== nextIdentity) setHydratedToolIdentity(nextIdentity);
                 return;
@@ -523,6 +546,7 @@ export function useToolCodeRunnerState(args: {
 
             lastBindKeyRef.current = nextBindKey;
             boundRef.current = { id: args2.id, onPatch: args2.onPatch };
+            boundContextRef.current = bindingContext;
             setBoundId((prev) => (prev === args2.id ? prev : args2.id));
             setToolIdeConfigIfChanged(args2.ideConfig ?? null);
 
@@ -560,12 +584,18 @@ export function useToolCodeRunnerState(args: {
                     : nextSnap.sqlInitialTableSnapshots,
             );
 
-            prime(nextSnap);
+            if (snapshotOverridesSaved) {
+                void commitToolToProgress(nextSnap);
+            } else {
+                prime(nextSnap);
+            }
         },
         [
             prime,
+            commitToolToProgress,
             defaultSqlDialect,
             setToolIdeConfigIfChanged,
+            bindingContext,
             viewTid,
             versionStr,
             hydratedToolIdentity,
@@ -574,10 +604,19 @@ export function useToolCodeRunnerState(args: {
     );
 
     const unbindCodeInput = useCallback(() => {
+        if (progressHydrated) {
+            void commitToolToProgress(latestSnapRef.current);
+        }
         cancel();
         clearBoundState();
         setToolIdeConfigIfChanged(null);
-    }, [cancel, clearBoundState, setToolIdeConfigIfChanged]);
+    }, [
+        cancel,
+        clearBoundState,
+        setToolIdeConfigIfChanged,
+        progressHydrated,
+        commitToolToProgress,
+    ]);
 
     useFlushOnPageExit(() => {
         cancel();
@@ -610,33 +649,33 @@ export function useToolCodeRunnerState(args: {
         setToolLang0((prev) => (prev === l ? prev : l));
 
         const b = boundRef.current;
-        if (b) {
+        if (b && effectiveBoundId && boundContextRef.current === bindingContext) {
             boundDirtyRef.current = true;
             b.onPatch({ codeLang: l, submitted: false, result: null });
         }
-    }, []);
+    }, [effectiveBoundId, bindingContext]);
 
     const setToolCode = useCallback((c: string) => {
         latestSnapRef.current = { ...latestSnapRef.current, code: c };
         setToolCode0((prev) => (prev === c ? prev : c));
 
         const b = boundRef.current;
-        if (b) {
+        if (b && effectiveBoundId && boundContextRef.current === bindingContext) {
             boundDirtyRef.current = true;
             b.onPatch({ code: c, submitted: false, result: null });
         }
-    }, []);
+    }, [effectiveBoundId, bindingContext]);
 
     const setToolStdin = useCallback((s: string) => {
         latestSnapRef.current = { ...latestSnapRef.current, stdin: s };
         setToolStdin0((prev) => (prev === s ? prev : s));
 
         const b = boundRef.current;
-        if (b) {
+        if (b && effectiveBoundId && boundContextRef.current === bindingContext) {
             boundDirtyRef.current = true;
             b.onPatch({ codeStdin: s, submitted: false, result: null });
         }
-    }, []);
+    }, [effectiveBoundId, bindingContext]);
 
     const setToolWorkspace = useCallback((workspace: WorkspaceStateV2 | null) => {
         const nextWorkspaceKey = workspaceKeyOf(workspace);
@@ -657,11 +696,11 @@ export function useToolCodeRunnerState(args: {
         setToolSqlDialect0((prev) => (prev === d ? prev : d));
 
         const b = boundRef.current;
-        if (b) {
+        if (b && effectiveBoundId && boundContextRef.current === bindingContext) {
             boundDirtyRef.current = true;
             b.onPatch({ codeSqlDialect: d, submitted: false, result: null });
         }
-    }, []);
+    }, [effectiveBoundId, bindingContext]);
 
     const resolvedSql = useMemo(() => {
         return resolveSqlRunnerConfig({
@@ -722,10 +761,11 @@ export function useToolCodeRunnerState(args: {
     const displayHydrated = toolHydrated;
 
     return {
-        boundId,
+        boundId: effectiveBoundId,
         isBound,
         bindCodeInput,
         unbindCodeInput,
+        toolHydrated: displayHydrated,
 
         toolLang: displayHydrated ? toolLang : initialLang,
         toolCode: displayHydrated ? toolCode : initialCode,

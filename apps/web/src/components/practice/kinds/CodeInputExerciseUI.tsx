@@ -26,7 +26,7 @@ import {isRunnerLanguage, RunnerLanguage} from "@zoeskoul/code-contracts";
 
 type CodeInputExercise = Extract<Exercise, { kind: "code_input" }>;
 
-export type CodeInputAutoBindMode = "never" | "whenUnbound" | "whenActive";
+export type CodeInputAutoBindMode = "never" | "whenUnbound" | "whenActive" | "always";
 
 function join(...xs: Array<string | false | null | undefined>) {
     return xs.filter(Boolean).join(" ");

@@ -34,6 +34,7 @@ export type ToolsPanelProps = {
     rightBodyRef: React.RefObject<HTMLDivElement | null>;
     codeRunnerRegionH: number;
 
+    toolHydrated: boolean;
     toolLang: WorkspaceLanguage;
     toolCode: string;
     toolStdin: string;
@@ -84,7 +85,7 @@ function ToolsPanelInner(props: ToolsPanelProps) {
 
     const { active, setActive } = useActiveTool(ctx);
 
-    const scopeKey = props.boundId ? `exercise:${props.boundId}` : "general";
+    const scopeKey = props.toolScopeKey ?? (props.boundId ? `exercise:${props.boundId}` : "general");
 
     const noteKey = useMemo(
         () => ({
@@ -115,6 +116,7 @@ function ToolsPanelInner(props: ToolsPanelProps) {
                         codeEnabled={ctx.codeEnabled}
                         height={props.codeRunnerRegionH}
                         toolScopeKey={props.toolScopeKey}
+                        toolHydrated={props.toolHydrated}
                         toolLang={props.toolLang}
                         toolCode={props.toolCode}
                         toolStdin={props.toolStdin}
@@ -230,6 +232,7 @@ function CodePaneLayer(props: {
     codeEnabled: boolean;
     height: number;
     toolScopeKey?: string;
+    toolHydrated: boolean;
     toolLang: WorkspaceLanguage;
     toolCode: string;
     toolStdin: string;
@@ -269,6 +272,7 @@ function CodePaneLayer(props: {
         pane = CODE_SPEC.render({
             height: props.height,
             toolScopeKey: props.toolScopeKey,
+            toolHydrated: props.toolHydrated,
             toolLang: props.toolLang,
             toolCode: props.toolCode,
             toolStdin: props.toolStdin,
@@ -311,6 +315,7 @@ const MemoCodePaneLayer = React.memo(
         prev.codeEnabled === next.codeEnabled &&
         prev.height === next.height &&
         prev.toolScopeKey === next.toolScopeKey &&
+        prev.toolHydrated === next.toolHydrated &&
         prev.toolLang === next.toolLang &&
         prev.toolCode === next.toolCode &&
         prev.toolStdin === next.toolStdin &&

@@ -23,6 +23,7 @@ const LOADING_TIMEOUT_MS = 8000;
 
 export default function QuizPracticeCard(props: {
   q: Extract<ReviewQuestion, { kind: "practice" }>;
+  ownerCardId?: string;
   ps?: PracticeState;
   toolScopedId?: string;
   toolsActive?: boolean;
@@ -45,6 +46,7 @@ export default function QuizPracticeCard(props: {
 }) {
   const {
     q,
+    ownerCardId,
     ps,
     toolScopedId,
     toolsActive = true,
@@ -349,6 +351,8 @@ export default function QuizPracticeCard(props: {
                     codeRunnerMode={codeRunnerMode}
                     codeTools={codeTools}
                     codeInputId={codeInputId}
+                    codeOwnerCardId={ownerCardId ?? null}
+                    codeToolsAutoOpen={toolsActive}
                 />
               </div>
 

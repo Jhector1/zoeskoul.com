@@ -134,6 +134,50 @@ function remapExpandedFolderIds(
     return out;
 }
 
+
+
+function arrayShallowEqual<T>(a: readonly T[], b: readonly T[]) {
+    if (a === b) return true;
+    if (a.length !== b.length) return false;
+
+    for (let i = 0; i < a.length; i += 1) {
+        if (a[i] !== b[i]) return false;
+    }
+
+    return true;
+}
+
+function setShallowEqual<T>(a: ReadonlySet<T>, b: ReadonlySet<T>) {
+    if (a === b) return true;
+    if (a.size !== b.size) return false;
+
+    for (const value of a) {
+        if (!b.has(value)) return false;
+    }
+
+    return true;
+}
+
+function nodesHydrationKey(nodes: readonly FSNode[]) {
+    return JSON.stringify(nodes);
+}
+
+function workspaceStateHydrationKey(ws: Pick<
+    WorkspaceStateV2,
+    "language" | "nodes" | "openTabs" | "activeFileId" | "entryFileId" | "stdin" | "expanded" | "leftPct"
+>) {
+    return JSON.stringify({
+        language: ws.language,
+        nodes: ws.nodes,
+        openTabs: ws.openTabs?.length ? ws.openTabs : [ws.activeFileId],
+        activeFileId: ws.activeFileId,
+        entryFileId: ws.entryFileId,
+        stdin: ws.stdin ?? "",
+        expanded: ws.expanded ?? [],
+        leftPct: ws.leftPct ?? 26,
+    });
+}
+
 export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResult {
     const baseStorageKey = opts?.storageKey ?? STORAGE_KEY_V2;
     const forcedLanguage = opts?.forcedLanguage;
@@ -224,9 +268,9 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
     }, [toast]);
 
     const clearTransientUi = useCallback(() => {
-        setFilter("");
-        setInlineEdit(null);
-        setPendingDeleteId(null);
+        setFilter((prev) => (prev === "" ? prev : ""));
+        setInlineEdit((prev) => (prev == null ? prev : null));
+        setPendingDeleteId((prev) => (prev == null ? prev : null));
     }, []);
 
     const materializeWorkspaceForAccess = useCallback(
@@ -237,20 +281,60 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
         [access.canUseMultiFile],
     );
 
+
+    const lastHydratedWorkspaceKeyRef = useRef<string>("");
+
     const hydrateWorkspace = useCallback(
         (ws: WorkspaceStateV2) => {
             const normalized = normalizeWorkspaceForAccess(ws, access);
+            const nextOpenTabs = normalized.openTabs?.length
+                ? normalized.openTabs
+                : [normalized.activeFileId];
+            const nextExpanded = new Set(normalized.expanded ?? []);
+            const nextLeftPct = normalized.leftPct ?? 26;
+            const nextKey = workspaceStateHydrationKey({
+                ...normalized,
+                openTabs: nextOpenTabs,
+                expanded: Array.from(nextExpanded),
+                leftPct: nextLeftPct,
+            });
 
-            setLanguageState(normalized.language);
-            setNodes(normalized.nodes);
-            setOpenTabs(
-                normalized.openTabs?.length ? normalized.openTabs : [normalized.activeFileId],
+            // Critical loop guard:
+            // FullIDE and tool bindings may ask us to hydrate the same workspace many times.
+            // Hydrating the same workspace must be a no-op.
+            if (lastHydratedWorkspaceKeyRef.current === nextKey) {
+                return;
+            }
+
+            lastHydratedWorkspaceKeyRef.current = nextKey;
+
+            setLanguageState((prev) => (prev === normalized.language ? prev : normalized.language));
+
+            setNodes((prev) =>
+                nodesHydrationKey(prev) === nodesHydrationKey(normalized.nodes)
+                    ? prev
+                    : normalized.nodes,
             );
-            setActiveFileId(normalized.activeFileId);
-            setEntryFileId(normalized.entryFileId);
-            setStdin(normalized.stdin ?? "");
-            setExpanded(new Set(normalized.expanded ?? []));
-            setLeftPct(normalized.leftPct ?? 26);
+
+            setOpenTabs((prev) =>
+                arrayShallowEqual(prev, nextOpenTabs) ? prev : nextOpenTabs,
+            );
+
+            setActiveFileId((prev) =>
+                prev === normalized.activeFileId ? prev : normalized.activeFileId,
+            );
+
+            setEntryFileId((prev) =>
+                prev === normalized.entryFileId ? prev : normalized.entryFileId,
+            );
+
+            setStdin((prev) => (prev === (normalized.stdin ?? "") ? prev : normalized.stdin ?? ""));
+
+            setExpanded((prev) =>
+                setShallowEqual(prev, nextExpanded) ? prev : nextExpanded,
+            );
+
+            setLeftPct((prev) => (prev === nextLeftPct ? prev : nextLeftPct));
         },
         [access],
     );
@@ -379,14 +463,16 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
                 normalized.nodes,
             );
 
-            hydrateWorkspace({
+            const nextWorkspace = {
                 ...normalized,
                 expanded: preservedExpanded,
-            });
+            };
+
+            hydrateWorkspace(nextWorkspace);
 
             clearTransientUi();
-            setToast(null);
-            setStorageHydrated(true);
+            setToast((prev) => (prev == null ? prev : null));
+            setStorageHydrated((prev) => (prev === true ? prev : true));
         },
         [hydrateWorkspace, clearTransientUi, access, nodes, expanded],
     );
@@ -396,7 +482,7 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
             const base = createDefaultStateForLanguage(next);
             hydrateWorkspace(materializeWorkspaceForAccess(next, base));
             clearTransientUi();
-            setStorageHydrated(true);
+            setStorageHydrated((prev) => (prev === true ? prev : true));
         },
         [hydrateWorkspace, clearTransientUi, materializeWorkspaceForAccess],
     );

@@ -28,6 +28,7 @@ import {resolveDeepTagged} from "@/i18n/resolveDeepTagged";
 import {useTaggedT} from "@/i18n/tagged";
 import {RunnerLanguage} from "@zoeskoul/code-contracts";
 import type { LearningIdeConfig } from "@/lib/ide/learningIdeConfig";
+import type { WorkspaceStateV2 } from "@/components/ide/types";
 
 // ✅ minimal tools API (don’t import review context from practice layer)
 // ...imports unchanged
@@ -71,6 +72,9 @@ type CodeToolsApi = {
             code: string;
             stdin?: string;
             ideConfig?: LearningIdeConfig | null;
+            workspace?: WorkspaceStateV2 | null;
+            ownerCardId?: string | null;
+            preferSnapshot?: boolean;
 
             sqlDialect?: SqlDialect;
             sqlDatasetId?: string;
@@ -110,9 +114,11 @@ function CodeInputWithTools(props: {
 
     codeTools: CodeToolsApi;
     codeInputId: string;
+    ownerCardId?: string | null;
 
     updateCurrent: (patch: any) => void;
     showPrompt: boolean;
+    toolAutoOpen?: boolean;
 
     feedback?: any;
     explanation?: string | null;
@@ -127,8 +133,10 @@ function CodeInputWithTools(props: {
         resetCheckPatch,
         codeTools,
         codeInputId,
+        ownerCardId,
         updateCurrent,
         showPrompt,
+        toolAutoOpen = true,
         feedback,
         explanation,
     } = props;
@@ -149,6 +157,18 @@ function CodeInputWithTools(props: {
 
     const curCode = (current as any).code ?? exercise.starterCode ?? "";
     const curStdin = (current as any).codeStdin ?? "";
+    const curWorkspace =
+        (current as any).workspace && typeof (current as any).workspace === "object"
+            ? ((current as any).workspace as WorkspaceStateV2)
+            : (current as any).codeWorkspace && typeof (current as any).codeWorkspace === "object"
+                ? ((current as any).codeWorkspace as WorkspaceStateV2)
+                : (current as any).ideWorkspace && typeof (current as any).ideWorkspace === "object"
+                    ? ((current as any).ideWorkspace as WorkspaceStateV2)
+                    : (exercise as any).workspace && typeof (exercise as any).workspace === "object"
+                        ? ((exercise as any).workspace as WorkspaceStateV2)
+                        : (exercise as any).initialWorkspace && typeof (exercise as any).initialWorkspace === "object"
+                            ? ((exercise as any).initialWorkspace as WorkspaceStateV2)
+                            : null;
 
     const isSqlExercise =
         curLang === "sql" ||
@@ -186,13 +206,39 @@ function CodeInputWithTools(props: {
         typeof exercise.sqlInitialTableSnapshots === "object"
             ? exercise.sqlInitialTableSnapshots
             : undefined;
-    const onPatch = useCallback((patch: any) => updateCurrent(patch), [updateCurrent]);
+    const onPatch = useCallback(
+        (patch: any) => {
+            const workspace =
+                patch?.workspace && typeof patch.workspace === "object"
+                    ? patch.workspace
+                    : patch?.codeWorkspace && typeof patch.codeWorkspace === "object"
+                        ? patch.codeWorkspace
+                        : patch?.ideWorkspace && typeof patch.ideWorkspace === "object"
+                            ? patch.ideWorkspace
+                            : null;
+
+            updateCurrent({
+                ...patch,
+                ...(workspace
+                    ? {
+                        workspace,
+                        codeWorkspace: workspace,
+                        ideWorkspace: workspace,
+                    }
+                    : {}),
+            });
+        },
+        [updateCurrent],
+    );
     const registerArgs = useMemo(
         () => ({
             lang: curLang,
             code: curCode,
             stdin: curStdin,
             ideConfig: exercise.ideConfig ?? null,
+            workspace: curWorkspace,
+            ownerCardId,
+            preferSnapshot: false,
             sqlDialect: curLang === "sql" ? exerciseSqlDialect : undefined,
             sqlDatasetId: curLang === "sql" ? exerciseSqlDatasetId : undefined,
             sqlSchemaSql: curLang === "sql" ? exerciseSqlSchemaSql : undefined,
@@ -205,7 +251,9 @@ function CodeInputWithTools(props: {
             curLang,
             curCode,
             curStdin,
+            curWorkspace,
             exercise.ideConfig,
+            ownerCardId,
             exerciseSqlDialect,
             exerciseSqlDatasetId,
             exerciseSqlSchemaSql,
@@ -255,7 +303,7 @@ function CodeInputWithTools(props: {
             variant="tools"
             toolsBound={toolsBoundToThis}
             toolsUnbound={toolsUnbound}
-            autoBindMode="never"
+            autoBindMode={toolAutoOpen ? "whenUnbound" : "never"}
             showPrompt={showPrompt}
             feedback={feedback ?? null}
             explanation={explanation ?? null}
@@ -284,6 +332,8 @@ export default function ExerciseRenderer({
                                              codeRunnerMode = "embedded",
                                              codeTools = null,
                                              codeInputId,
+                                             codeOwnerCardId,
+                                             codeToolsAutoOpen = true,
                                              showPrompt = true,
 
                                          }: {
@@ -301,6 +351,8 @@ export default function ExerciseRenderer({
     codeRunnerMode?: "embedded" | "tools";
     codeTools?: CodeToolsApi | null;
     codeInputId?: string;
+    codeOwnerCardId?: string | null;
+    codeToolsAutoOpen?: boolean;
     showPrompt?: boolean;
 
 }) {
@@ -691,8 +743,10 @@ export default function ExerciseRenderer({
                     resetCheckPatch={resetCheckPatch}
                     codeTools={codeTools!}
                     codeInputId={codeInputId!}
+                    ownerCardId={codeOwnerCardId}
                     updateCurrent={updateCurrent}
                     showPrompt={showPrompt}
+                    toolAutoOpen={codeToolsAutoOpen}
                     feedback={codeFeedback}
                     explanation={codeExplanation}
                 />
@@ -741,6 +795,3 @@ export default function ExerciseRenderer({
         );
     }
 }
-
-
-

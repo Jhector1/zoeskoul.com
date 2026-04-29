@@ -55,7 +55,7 @@ export default function ReviewModulePage(props: ReviewModulePageProps) {
 
     return (
         <ReviewToolsProvider
-            mode="first_unanswered"
+            mode="manual"
             resetKey={vm.toolsProvider.resetKey}
             externalBoundId={vm.toolsProvider.externalBoundId}
             ensureVisible={vm.toolsProvider.ensureVisible}

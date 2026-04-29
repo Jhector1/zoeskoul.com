@@ -4,6 +4,20 @@ import * as React from "react";
 import type { TerminalDock } from "../types";
 import { clamp } from "../utils/text";
 
+type Size = {
+    w: number;
+    h: number;
+};
+
+function safeRoundSize(value: number) {
+    if (!Number.isFinite(value)) return 0;
+    return Math.max(0, Math.round(value));
+}
+
+function sameSize(a: Size, b: Size) {
+    return a.w === b.w && a.h === b.h;
+}
+
 export function useSplitSizing(args: {
     height: number;
 
@@ -53,28 +67,92 @@ export function useSplitSizing(args: {
 
     const hasSplit = showEditor && showTerminal;
 
-    const [mainW, setMainW] = React.useState(0);
-    const [mainH, setMainH] = React.useState(0);
+    const [mainSize, setMainSize] = React.useState<Size>({ w: 0, h: 0 });
+    const mainSizeRef = React.useRef<Size>({ w: 0, h: 0 });
+    const resizeRafRef = React.useRef<number | null>(null);
+    const layoutRafRef = React.useRef<number | null>(null);
+    const mountedRef = React.useRef(false);
+    const requestLayoutRef = React.useRef(requestLayout);
+
+    requestLayoutRef.current = requestLayout;
+
+    React.useEffect(() => {
+        mountedRef.current = true;
+        return () => {
+            mountedRef.current = false;
+
+            if (resizeRafRef.current != null) {
+                cancelAnimationFrame(resizeRafRef.current);
+                resizeRafRef.current = null;
+            }
+
+            if (layoutRafRef.current != null) {
+                cancelAnimationFrame(layoutRafRef.current);
+                layoutRafRef.current = null;
+            }
+        };
+    }, []);
+
+    const measureMain = React.useCallback(() => {
+        const el = mainRef.current;
+        if (!el || !mountedRef.current) return;
+
+        const r = el.getBoundingClientRect();
+        const next: Size = {
+            w: safeRoundSize(r.width),
+            h: safeRoundSize(r.height),
+        };
+
+        if (sameSize(mainSizeRef.current, next)) return;
+
+        mainSizeRef.current = next;
+        setMainSize((prev) => (sameSize(prev, next) ? prev : next));
+    }, [mainRef]);
+
+    const scheduleMeasureMain = React.useCallback(() => {
+        if (resizeRafRef.current != null) return;
+
+        resizeRafRef.current = requestAnimationFrame(() => {
+            resizeRafRef.current = null;
+            measureMain();
+        });
+    }, [measureMain]);
 
     React.useEffect(() => {
         const el = mainRef.current;
         if (!el) return;
 
-        const update = () => {
-            const r = el.getBoundingClientRect();
-            setMainW(r.width);
-            setMainH(r.height);
-        };
+        measureMain();
 
-        const ro = new ResizeObserver(update);
+        if (typeof ResizeObserver === "undefined") {
+            window.addEventListener("resize", scheduleMeasureMain);
+            return () => {
+                window.removeEventListener("resize", scheduleMeasureMain);
+                if (resizeRafRef.current != null) {
+                    cancelAnimationFrame(resizeRafRef.current);
+                    resizeRafRef.current = null;
+                }
+            };
+        }
+
+        const ro = new ResizeObserver(() => {
+            scheduleMeasureMain();
+        });
+
         ro.observe(el);
-        update();
 
-        return () => ro.disconnect();
-    }, [mainRef]);
+        return () => {
+            ro.disconnect();
 
-    const totalH = Math.max(0, mainH || height);
-    const totalW = Math.max(0, mainW || 0);
+            if (resizeRafRef.current != null) {
+                cancelAnimationFrame(resizeRafRef.current);
+                resizeRafRef.current = null;
+            }
+        };
+    }, [mainRef, measureMain, scheduleMeasureMain]);
+
+    const totalH = Math.max(0, mainSize.h || height);
+    const totalW = Math.max(0, mainSize.w || 0);
 
     const [termH, setTermH] = React.useState<number>(() =>
         clamp(initialTerminalSize, hardMinTermH, 720),
@@ -85,24 +163,14 @@ export function useSplitSizing(args: {
 
     const userResizedRef = React.useRef(false);
     const restoreFocusRef = React.useRef<HTMLElement | null>(null);
-    const layoutRafRef = React.useRef<number | null>(null);
 
     const scheduleLayout = React.useCallback(() => {
         if (layoutRafRef.current != null) return;
 
         layoutRafRef.current = requestAnimationFrame(() => {
             layoutRafRef.current = null;
-            requestLayout();
+            requestLayoutRef.current?.();
         });
-    }, [requestLayout]);
-
-    React.useEffect(() => {
-        return () => {
-            if (layoutRafRef.current != null) {
-                cancelAnimationFrame(layoutRafRef.current);
-                layoutRafRef.current = null;
-            }
-        };
     }, []);
 
     const bottomMaxTerm = hasSplit
@@ -159,8 +227,9 @@ export function useSplitSizing(args: {
             hardMinTermH,
         });
 
+        const clamped = clamp(next, hardMinTermH, maxTerm);
         userResizedRef.current = true;
-        setTermH(clamp(next, hardMinTermH, maxTerm));
+        setTermH((prev) => (prev === clamped ? prev : clamped));
         scheduleLayout();
     }, [
         totalH,
@@ -182,8 +251,9 @@ export function useSplitSizing(args: {
             hardMinTermW,
         });
 
+        const clamped = clamp(next, hardMinTermW, maxTerm);
         userResizedRef.current = true;
-        setTermW(clamp(next, hardMinTermW, maxTerm));
+        setTermW((prev) => (prev === clamped ? prev : clamped));
         scheduleLayout();
     }, [
         totalW,
@@ -364,8 +434,8 @@ export function useSplitSizing(args: {
         bottomTermH,
         bottomEditorH,
 
-        mainW,
-        mainH,
+        mainW: mainSize.w,
+        mainH: mainSize.h,
 
         bottomMaxTerm,
         rightMaxTerm,

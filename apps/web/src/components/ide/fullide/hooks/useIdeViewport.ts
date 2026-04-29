@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 type Args = {
   height: number;
@@ -11,6 +11,12 @@ type Args = {
   editorHostRef: React.RefObject<HTMLDivElement | null>;
   onCloseMobileExplorer: () => void;
 };
+
+function safeHeight(value: number, fallback: number) {
+  if (!Number.isFinite(value)) return fallback;
+  const next = Math.floor(value);
+  return next > 0 ? next : fallback;
+}
 
 export function useIdeViewport({
   height,
@@ -24,19 +30,43 @@ export function useIdeViewport({
   const [isDesktop, setIsDesktop] = useState(false);
   const [editorHeight, setEditorHeight] = useState(height);
 
+  const heightRef = useRef(height);
+  const rafRef = useRef<number | null>(null);
+  const mountedRef = useRef(false);
+  const onCloseMobileExplorerRef = useRef(onCloseMobileExplorer);
+
+  heightRef.current = height;
+  onCloseMobileExplorerRef.current = onCloseMobileExplorer;
+
+  useEffect(() => {
+    mountedRef.current = true;
+
+    return () => {
+      mountedRef.current = false;
+
+      if (rafRef.current != null) {
+        cancelAnimationFrame(rafRef.current);
+        rafRef.current = null;
+      }
+    };
+  }, []);
+
   useEffect(() => {
     if (forceDesktopLayout) {
-      setIsDesktop(true);
+      setIsDesktop((prev) => (prev === true ? prev : true));
       return;
     }
 
     if (isDesktopForcedOff) {
-      setIsDesktop(false);
+      setIsDesktop((prev) => (prev === false ? prev : false));
       return;
     }
 
     const mq = window.matchMedia("(min-width: 1024px)");
-    const apply = () => setIsDesktop(mq.matches);
+    const apply = () => {
+      const next = mq.matches;
+      setIsDesktop((prev) => (prev === next ? prev : next));
+    };
 
     apply();
 
@@ -50,8 +80,8 @@ export function useIdeViewport({
   }, [forceDesktopLayout, isDesktopForcedOff]);
 
   useEffect(() => {
-    if (isDesktop) onCloseMobileExplorer();
-  }, [isDesktop, onCloseMobileExplorer]);
+    if (isDesktop) onCloseMobileExplorerRef.current();
+  }, [isDesktop]);
 
   useEffect(() => {
     if (!showMobileExplorer || isDesktop) return;
@@ -68,33 +98,79 @@ export function useIdeViewport({
     if (!showMobileExplorer) return;
 
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onCloseMobileExplorer();
+      if (e.key === "Escape") onCloseMobileExplorerRef.current();
     };
 
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [showMobileExplorer, onCloseMobileExplorer]);
+  }, [showMobileExplorer]);
 
-  useEffect(() => {
+  const measureNow = useCallback(() => {
+    if (!mountedRef.current) return;
+
     const el = editorHostRef.current;
     if (!el) return;
 
-    const measure = () => {
-      const next = Math.floor(el.getBoundingClientRect().height);
-      setEditorHeight(next > 0 ? next : height);
-    };
+    const next = safeHeight(el.getBoundingClientRect().height, heightRef.current);
 
-    measure();
+    setEditorHeight((prev) => (prev === next ? prev : next));
+  }, [editorHostRef]);
 
-    const ro = new ResizeObserver(measure);
+  const scheduleMeasure = useCallback(() => {
+    if (rafRef.current != null) return;
+
+    rafRef.current = requestAnimationFrame(() => {
+      rafRef.current = null;
+      measureNow();
+    });
+  }, [measureNow]);
+
+  useEffect(() => {
+    const el = editorHostRef.current;
+    if (!el) {
+      setEditorHeight((prev) => (prev === height ? prev : height));
+      return;
+    }
+
+    scheduleMeasure();
+
+    if (typeof ResizeObserver === "undefined") {
+      window.addEventListener("resize", scheduleMeasure);
+
+      return () => {
+        window.removeEventListener("resize", scheduleMeasure);
+
+        if (rafRef.current != null) {
+          cancelAnimationFrame(rafRef.current);
+          rafRef.current = null;
+        }
+      };
+    }
+
+    const ro = new ResizeObserver(() => {
+      scheduleMeasure();
+    });
+
     ro.observe(el);
-    window.addEventListener("resize", measure);
+    window.addEventListener("resize", scheduleMeasure);
 
     return () => {
       ro.disconnect();
-      window.removeEventListener("resize", measure);
+      window.removeEventListener("resize", scheduleMeasure);
+
+      if (rafRef.current != null) {
+        cancelAnimationFrame(rafRef.current);
+        rafRef.current = null;
+      }
     };
-  }, [height, isDesktop, showMobileExplorer, activeFileId, editorHostRef]);
+  }, [
+    height,
+    activeFileId,
+    showMobileExplorer,
+    isDesktop,
+    editorHostRef,
+    scheduleMeasure,
+  ]);
 
   return {
     isDesktop,

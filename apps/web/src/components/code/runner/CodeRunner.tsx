@@ -267,15 +267,31 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     const monacoEditorRef = useRef<any>(null);
     const terminalAutoOpenRequestedRef = useRef(false);
 
-    const requestLayout = () => {
-        const ed = monacoEditorRef.current;
-        if (!ed) return;
-        requestAnimationFrame(() => {
+    const layoutRafRef = useRef<number | null>(null);
+
+    const requestLayout = useCallback(() => {
+        if (layoutRafRef.current != null) return;
+
+        layoutRafRef.current = requestAnimationFrame(() => {
+            layoutRafRef.current = null;
+
+            const ed = monacoEditorRef.current;
+            if (!ed) return;
+
             try {
                 ed.layout?.();
             } catch {}
         });
-    };
+    }, []);
+
+    useEffect(() => {
+        return () => {
+            if (layoutRafRef.current != null) {
+                cancelAnimationFrame(layoutRafRef.current);
+                layoutRafRef.current = null;
+            }
+        };
+    }, []);
 
     const mainRef = useRef<HTMLDivElement | null>(null);
     const numericHeight = typeof height === "number" ? height : 320;

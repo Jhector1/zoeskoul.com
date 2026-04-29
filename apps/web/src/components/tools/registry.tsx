@@ -14,6 +14,7 @@ export type CodeToolProps = {
     height: number;
     toolScopeKey?: string;
 
+    toolHydrated: boolean;
     toolLang: RunnerLanguage;
     toolCode: string;
     toolStdin: string;

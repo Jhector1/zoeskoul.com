@@ -1,0 +1,11 @@
+--- review/module/context/ReviewToolsContext.tsx
++++ review/module/context/ReviewToolsContext.tsx
+@@ -282,6 +331,8 @@
+     }, [
+         bindNow,
+         clearRunFeedback,
++        ensureVisible,
++        onBindToToolsPanel,
+         syncCodeInputSnapshot,
+         externalBoundId,
+         boundId,

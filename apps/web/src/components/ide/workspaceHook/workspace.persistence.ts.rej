@@ -1,0 +1,38 @@
+--- ide/workspaceHook/workspace.persistence.ts
++++ ide/workspaceHook/workspace.persistence.ts
+@@ -5,6 +5,7 @@
+   loadV2,
+   saveV2,
+   storageKeyForWorkspace,
++  legacyStorageKeyForWorkspace,
+   tryMigrateV1,
+   STORAGE_KEY_V2,
+ } from "../storage";
+@@ -78,7 +79,26 @@
+     localWorkspaceId: args.localWorkspaceId,
+   });
+ 
+-  return await loadV2(key, args.next);
++  const loaded = await loadV2(key, args.next);
++  if (loaded) return loaded;
++
++  const legacyKey = legacyStorageKeyForWorkspace({
++    baseKey: args.baseStorageKey,
++    language: args.next,
++    actorKey: args.actorKey,
++    projectId: args.projectId,
++    scopeKey: args.scopeKey,
++    localWorkspaceId: args.localWorkspaceId,
++  });
++
++  if (legacyKey === key) return null;
++
++  const legacyLoaded = await loadV2(legacyKey, args.next);
++  if (legacyLoaded) {
++    void saveV2(key, legacyLoaded);
++  }
++
++  return legacyLoaded;
+ }
+ 
+ export function saveWorkspaceForLanguage(args: {

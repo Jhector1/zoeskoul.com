@@ -1,0 +1,39 @@
+--- ide/storage.ts
++++ ide/storage.ts
+@@ -26,7 +26,11 @@
+     return `${baseKey}:${language}`;
+ }
+ 
+-export function storageKeyForWorkspace(args: {
++function encodeStoragePart(value: string) {
++    return encodeURIComponent(value);
++}
++
++export function legacyStorageKeyForWorkspace(args: {
+     baseKey: string;
+     language: WorkspaceLanguage;
+     actorKey?: string | null;
+@@ -41,6 +45,23 @@
+ 
+     return `${args.baseKey}:${actorPart}:${scopePart}:${workspacePart}:${args.language}`;
+ }
++
++export function storageKeyForWorkspace(args: {
++    baseKey: string;
++    language: WorkspaceLanguage;
++    actorKey?: string | null;
++    projectId?: string | null;
++    scopeKey?: string | null;
++    localWorkspaceId?: string | null;
++}) {
++    const actorPart = encodeStoragePart(args.actorKey?.trim() || "anonymous");
++    const scopePart = encodeStoragePart(args.scopeKey?.trim() || "global");
++    const workspacePart = encodeStoragePart(
++        args.projectId?.trim() || args.localWorkspaceId?.trim() || "local",
++    );
++
++    return `${args.baseKey}:${actorPart}:${scopePart}:${workspacePart}:${args.language}`;
++}
+ 
+ function now() {
+     return Date.now();
