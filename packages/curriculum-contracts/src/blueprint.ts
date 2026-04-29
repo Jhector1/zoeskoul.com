@@ -1,4 +1,5 @@
 import type { LocaleCode } from "./locales.js";
+import type { ManifestIdeServiceConfig } from "./ide-services.js";
 
 export type CourseProfileId =
     | "sql"
@@ -41,4 +42,8 @@ export type CourseBlueprint = {
   };
   seedModules?: string[];
   runtimePolicy?: BlueprintRuntimePolicy;
+  idePolicy?: {
+    defaultServices?: ManifestIdeServiceConfig;
+    moduleServiceDefaults?: Record<string, ManifestIdeServiceConfig>;
+  };
 };

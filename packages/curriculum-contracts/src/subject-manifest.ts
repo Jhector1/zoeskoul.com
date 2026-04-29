@@ -4,6 +4,7 @@ import type {
   ManifestRuntimeDefaults,
   ManifestSketch,
 } from "./manifest.js";
+import type { ManifestIdeServiceConfig } from "./ide-services.js";
 
 export type SubjectManifest = {
   subject: {
@@ -17,6 +18,7 @@ export type SubjectManifest = {
     imageAlt?: string | null;
     titleKey: string;
     descriptionKey?: string | null;
+    serviceDefaults?: ManifestIdeServiceConfig | null;
     meta?: {
       curriculum?: {
         plannedModuleCount?: number;
@@ -42,6 +44,7 @@ export type SubjectModuleManifest = {
   weekStart?: number | null;
   weekEnd?: number | null;
   accessOverride?: "free" | "paid" | null;
+  serviceDefaults?: ManifestIdeServiceConfig | null;
   runtimeDefaults?: ManifestRuntimeDefaults | null;
   meta?: {
     estimatedMinutes?: number;
@@ -57,6 +60,7 @@ export type SubjectSectionManifest = {
   order: number;
   titleKey: string;
   descriptionKey?: string | null;
+  serviceDefaults?: ManifestIdeServiceConfig | null;
   meta?: {
     module?: number;
     weeksKey?: string;
@@ -125,6 +129,7 @@ export type SlimTopicManifest = {
     labelKey: string;
     summaryKey: string;
   };
+  serviceDefaults?: ManifestIdeServiceConfig | null;
   runtimeDefaults?: ManifestRuntimeDefaults | null;
   cards: ManifestCard[];
   sketches: ManifestSketch[];

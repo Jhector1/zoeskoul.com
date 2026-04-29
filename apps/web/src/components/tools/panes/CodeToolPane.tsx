@@ -11,6 +11,10 @@ import type { CodeFeedback } from "@/lib/code/feedback/types";
 import CodeFeedbackCallout from "@/components/practice/kinds/CodeFeedbackCallout";
 import { useReviewTools } from "@/components/review/module/context/ReviewToolsContext";
 import { RunnerLanguage } from "@zoeskoul/code-contracts";
+import {
+    type LearningIdeConfig,
+    resolveFullIDEConfigFromLearningIde,
+} from "@/lib/ide/learningIdeConfig";
 
 type SqlTableSnapshot = {
     name: string;
@@ -89,14 +93,59 @@ function extractWorkspaceSnapshot(workspace: WorkspaceStateV2 | null) {
     };
 }
 
+function patchToolWorkspaceSource(args: {
+    workspace: WorkspaceStateV2;
+    language: RunnerLanguage;
+    code: string;
+    stdin: string;
+    sqlSchemaSql?: string;
+    sqlSeedSql?: string;
+}): WorkspaceStateV2 {
+    const nextNodes = args.workspace.nodes.map((node) => {
+        if (node.kind !== "file") return node;
+
+        if (args.language === "sql") {
+            if (node.name === "schema.sql") {
+                return { ...node, content: args.sqlSchemaSql ?? "" };
+            }
+
+            if (node.name === "seed.sql") {
+                return { ...node, content: args.sqlSeedSql ?? "" };
+            }
+
+            if (node.id === args.workspace.activeFileId || node.id === args.workspace.entryFileId) {
+                return { ...node, content: args.code };
+            }
+
+            return node;
+        }
+
+        if (node.id === args.workspace.activeFileId || node.id === args.workspace.entryFileId) {
+            return { ...node, content: args.code };
+        }
+
+        return node;
+    });
+
+    return {
+        ...args.workspace,
+        language: args.language,
+        nodes: nextNodes,
+        stdin: args.stdin,
+    };
+}
+
 export default function CodeToolPane(props: {
     height: number;
     toolLang: RunnerLanguage;
     toolCode: string;
     toolStdin: string;
+    toolWorkspace?: WorkspaceStateV2 | null;
     onChangeCode: (c: string) => void;
     onChangeStdin: (s: string) => void;
+    onChangeWorkspace?: (workspace: WorkspaceStateV2 | null) => void;
     onBeforeRun?: () => void | Promise<void>;
+    ideConfig?: LearningIdeConfig | null;
     sqlDialect?: SqlDialect;
     sqlSchemaSql?: string;
     sqlSeedSql?: string;
@@ -107,9 +156,12 @@ export default function CodeToolPane(props: {
         toolLang,
         toolCode,
         toolStdin,
+        toolWorkspace,
         onChangeCode,
         onChangeStdin,
+        onChangeWorkspace,
         onBeforeRun,
+        ideConfig,
         sqlDialect = "sqlite",
         sqlSchemaSql,
         sqlSeedSql,
@@ -124,8 +176,26 @@ export default function CodeToolPane(props: {
     const syncCodeInputSnapshot = tools?.syncCodeInputSnapshot;
 
     const { ref, size } = useElementSize<HTMLDivElement>();
-    const runnerH = Math.max(320, size.h);
     const isSql = toolLang === "sql";
+    const ideShell = useMemo(
+        () => resolveFullIDEConfigFromLearningIde({ ideConfig }),
+        [ideConfig],
+    );
+    const shouldForceDesktopLayout = ideShell.services.explorer?.enabled === true;
+    const usesWorkspaceShell =
+        shouldForceDesktopLayout || ideShell.access.canUseMultiFile;
+    const workspaceContextKey = useMemo(
+        () =>
+            JSON.stringify({
+                boundId: boundId ?? "unbound",
+                language: toolLang,
+                sqlSchemaSql: sqlSchemaSql ?? sqlSetupSql ?? "",
+                sqlSeedSql: sqlSeedSql ?? "",
+                workspaceShell: usesWorkspaceShell,
+            }),
+        [boundId, sqlSchemaSql, sqlSeedSql, sqlSetupSql, toolLang, usesWorkspaceShell],
+    );
+    const runnerH = Math.max(usesWorkspaceShell ? 480 : 320, size.h);
 
     const [runFeedback, setRunFeedback] = useState<CodeFeedback | null>(null);
     const lastEmittedRef = useRef<{ code: string; stdin: string } | null>(null);
@@ -155,6 +225,57 @@ export default function CodeToolPane(props: {
             sqlSetupSql,
         ],
     );
+    const [workspaceBridge, setWorkspaceBridge] = useState<WorkspaceStateV2>(
+        toolWorkspace ?? externalWorkspace,
+    );
+    const lastContextKeyRef = useRef<string>("");
+
+    useEffect(() => {
+        if (lastContextKeyRef.current !== workspaceContextKey) {
+            lastContextKeyRef.current = workspaceContextKey;
+            setWorkspaceBridge(toolWorkspace ?? externalWorkspace);
+            lastEmittedRef.current = null;
+            return;
+        }
+
+        if (!usesWorkspaceShell) {
+            setWorkspaceBridge(externalWorkspace);
+            return;
+        }
+
+        if (toolWorkspace) {
+            setWorkspaceBridge(toolWorkspace);
+            return;
+        }
+
+        setWorkspaceBridge((prev) => {
+            const prevSnapshot = extractWorkspaceSnapshot(prev);
+            if (prevSnapshot.code === toolCode && prevSnapshot.stdin === toolStdin) {
+                return patchToolWorkspaceSource({
+                    workspace: prev,
+                    language: toolLang,
+                    code: toolCode,
+                    stdin: toolStdin,
+                    sqlSchemaSql: sqlSchemaSql ?? sqlSetupSql ?? "",
+                    sqlSeedSql: sqlSeedSql ?? "",
+                });
+            }
+
+            return prev;
+        });
+    }, [
+        boundId,
+        externalWorkspace,
+        toolWorkspace,
+        sqlSchemaSql,
+        sqlSeedSql,
+        sqlSetupSql,
+        toolCode,
+        toolLang,
+        toolStdin,
+        usesWorkspaceShell,
+        workspaceContextKey,
+    ]);
 
     useEffect(() => {
         setRunFeedback(null);
@@ -169,6 +290,11 @@ export default function CodeToolPane(props: {
     }, [toolCode, toolStdin]);
 
     const handleWorkspaceChange = useCallback((workspace: WorkspaceStateV2 | null) => {
+        if (workspace) {
+            setWorkspaceBridge(workspace);
+        }
+        onChangeWorkspace?.(workspace);
+
         const next = extractWorkspaceSnapshot(workspace);
         const prevEmitted = lastEmittedRef.current;
         const prevIncoming = lastIncomingRef.current;
@@ -205,6 +331,7 @@ export default function CodeToolPane(props: {
         clearRunFeedback,
         onChangeCode,
         onChangeStdin,
+        onChangeWorkspace,
         syncCodeInputSnapshot,
     ]);
 
@@ -231,28 +358,32 @@ export default function CodeToolPane(props: {
     return (
         <div ref={ref} className="flex h-full min-h-0 w-full flex-col overflow-hidden">
             <FullIDE
+                key={workspaceContextKey}
                 title={isSql ? "Run SQL" : "Run code"}
                 height={runnerH - 50}
                 fullHeight
                 language={toolLang}
                 access={{
                     hasUser: true,
-                    canUseMultiFile: isSql,
-                    canSaveCloud: false,
-                    canCreateProjects: false,
+                    canUseMultiFile: isSql || ideShell.access.canUseMultiFile,
+                    canSaveCloud: ideShell.access.canSaveCloud,
+                    canCreateProjects: ideShell.access.canCreateProjects,
                 }}
                 loginHref="/authenticate"
                 billingHref="/billing"
                 draftStorageMode="off"
-                servicePreset="runner"
+                servicePreset={ideShell.servicePreset}
+                forceDesktopLayout={shouldForceDesktopLayout}
                 services={{
+                    ...ideShell.services,
                     runner: {
+                        ...(ideShell.services.runner ?? {}),
                         showThemeToggle: true,
                         showSqlDialectPicker: false,
                     },
                 }}
-                initialWorkspace={externalWorkspace}
-                externalWorkspace={externalWorkspace}
+                initialWorkspace={workspaceBridge}
+                externalWorkspace={usesWorkspaceShell ? null : workspaceBridge}
                 onWorkspaceChange={handleWorkspaceChange}
                 onBeforeRun={handleBeforeRun}
                 onRunResult={handleRunResult}

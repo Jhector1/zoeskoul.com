@@ -13,10 +13,10 @@ export function useResizablePanels(args?: {
 }) {
     const {
         leftDefault = 300,
-        rightDefault = 520,
+        rightDefault = 700,
         leftMin = 220,
         leftMax = 520,
-        rightMin = 320,
+        rightMin = 520,
         rightMax = 820,
     } = args ?? {};
 

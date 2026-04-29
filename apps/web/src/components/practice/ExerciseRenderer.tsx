@@ -27,6 +27,7 @@ import {useTranslations} from "next-intl";
 import {resolveDeepTagged} from "@/i18n/resolveDeepTagged";
 import {useTaggedT} from "@/i18n/tagged";
 import {RunnerLanguage} from "@zoeskoul/code-contracts";
+import type { LearningIdeConfig } from "@/lib/ide/learningIdeConfig";
 
 // ✅ minimal tools API (don’t import review context from practice layer)
 // ...imports unchanged
@@ -69,6 +70,7 @@ type CodeToolsApi = {
             lang: RunnerLanguage;
             code: string;
             stdin?: string;
+            ideConfig?: LearningIdeConfig | null;
 
             sqlDialect?: SqlDialect;
             sqlDatasetId?: string;
@@ -190,6 +192,7 @@ function CodeInputWithTools(props: {
             lang: curLang,
             code: curCode,
             stdin: curStdin,
+            ideConfig: exercise.ideConfig ?? null,
             sqlDialect: curLang === "sql" ? exerciseSqlDialect : undefined,
             sqlDatasetId: curLang === "sql" ? exerciseSqlDatasetId : undefined,
             sqlSchemaSql: curLang === "sql" ? exerciseSqlSchemaSql : undefined,
@@ -737,7 +740,6 @@ export default function ExerciseRenderer({
         );
     }
 }
-
 
 
 

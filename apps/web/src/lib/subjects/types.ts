@@ -1,5 +1,6 @@
 import type { PracticeKind } from "@zoeskoul/db";
 import type { ManifestRuntimeDefaults } from "@/lib/subjects/_core/manifestTypes";
+import type { LearningIdeConfig } from "@/lib/ide/learningIdeConfig";
 
 export type ReviewQuestion =
     | {
@@ -141,6 +142,7 @@ export type ReviewTopic = {
     summary?: string;
     meta?: {
         runtimeDefaults?: ManifestRuntimeDefaults | null;
+        serviceDefaults?: LearningIdeConfig | null;
         [key: string]: unknown;
     } | null;
     cards: ReadonlyArray<ReviewCard>;
@@ -164,6 +166,7 @@ export type ReviewModule = {
     subtitle?: string | null;
     startPracticeSectionSlug: string;
     runtimeDefaults?: ManifestRuntimeDefaults | null;
+    serviceDefaults?: LearningIdeConfig | null;
 
     /**
      * Keep required.

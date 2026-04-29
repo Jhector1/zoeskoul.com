@@ -11,6 +11,7 @@ import React, {
 } from "react";
 import {WorkspaceLanguage, type SqlDialect} from "@/lib/practice/types";
 import type { CodeFeedback } from "@/lib/code/feedback/types";
+import type { LearningIdeConfig } from "@/lib/ide/learningIdeConfig";
 
 type SqlTableSnapshot = {
     name: string;
@@ -28,6 +29,7 @@ export type RegisterArgs = {
     lang: WorkspaceLanguage;
     code: string;
     stdin?: string;
+    ideConfig?: LearningIdeConfig | null;
 
     sqlDialect?: SqlDialect;
     sqlDatasetId?: string;
@@ -175,6 +177,7 @@ export function ReviewToolsProvider({
                     : typeof patch?.stdin === "string"
                         ? patch.stdin
                         : cur.stdin,
+            ideConfig: patch?.ideConfig ?? cur.ideConfig,
 
             sqlDialect:
                 patch?.codeSqlDialect ?? patch?.sqlDialect ?? cur.sqlDialect,

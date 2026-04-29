@@ -15,3 +15,4 @@ export * from "./course-spec.js";
 
 
 export * from "./exercise-policy.js";
+export * from "./ide-services.js";

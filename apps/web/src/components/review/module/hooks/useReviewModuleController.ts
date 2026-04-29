@@ -615,11 +615,14 @@ export function useReviewModuleController({
                 toolLang: tool.toolLang,
                 toolCode: tool.toolCode,
                 toolStdin: tool.toolStdin,
+                toolWorkspace: tool.toolWorkspace,
                 toolSqlDialect: tool.toolSqlDatasetId
                     ? tool.toolSqlDialect
                     : (runtime.topicSqlFallback?.sqlDialect ?? tool.toolSqlDialect),
+                ideConfig: tool.toolIdeConfig ?? runtime.effectiveIdeConfig,
                 onChangeCode: tool.setToolCode,
                 onChangeStdin: tool.setToolStdin,
+                onChangeWorkspace: tool.setToolWorkspace,
                 onBeforeRun: tool.flushLatest,
                 subjectSlug,
                 moduleId: moduleSlug,

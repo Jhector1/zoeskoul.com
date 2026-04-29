@@ -9,6 +9,8 @@ import { TOOL_SPECS } from "./registry";
 import type { ToolsCtx, ToolId } from "./types";
 import { useActiveTool } from "./hooks/useActiveTool";
 import type { WorkspaceLanguage, SqlDialect } from "@/lib/practice/types";
+import type { LearningIdeConfig } from "@/lib/ide/learningIdeConfig";
+import type { WorkspaceStateV2 } from "@/components/ide/types";
 
 const PANE_ANIM = {
     show: { opacity: 1, scale: 1, y: 0, filter: "blur(0px)" },
@@ -34,9 +36,12 @@ export type ToolsPanelProps = {
     toolLang: WorkspaceLanguage;
     toolCode: string;
     toolStdin: string;
+    toolWorkspace?: WorkspaceStateV2 | null;
     toolSqlDialect: SqlDialect;
+    ideConfig?: LearningIdeConfig | null;
     onChangeCode: (c: string) => void;
     onChangeStdin: (s: string) => void;
+    onChangeWorkspace?: (workspace: WorkspaceStateV2 | null) => void;
 
     onBeforeRun?: () => void | Promise<void>;
 
@@ -111,10 +116,13 @@ function ToolsPanelInner(props: ToolsPanelProps) {
                         toolLang={props.toolLang}
                         toolCode={props.toolCode}
                         toolStdin={props.toolStdin}
+                        toolWorkspace={props.toolWorkspace}
                         toolSqlDialect={props.toolSqlDialect}
+                        ideConfig={props.ideConfig}
                         onChangeLang={props.onChangeLang}
                         onChangeCode={props.onChangeCode}
                         onChangeStdin={props.onChangeStdin}
+                        onChangeWorkspace={props.onChangeWorkspace}
                         onChangeSqlDialect={props.onChangeSqlDialect}
                         onBeforeRun={props.onBeforeRun}
                         sqlSchemaSql={props.sqlSchemaSql}
@@ -222,10 +230,13 @@ function CodePaneLayer(props: {
     toolLang: WorkspaceLanguage;
     toolCode: string;
     toolStdin: string;
+    toolWorkspace?: WorkspaceStateV2 | null;
     toolSqlDialect: SqlDialect;
+    ideConfig?: LearningIdeConfig | null;
     onChangeLang?: (l: WorkspaceLanguage) => void;
     onChangeCode: (c: string) => void;
     onChangeStdin: (s: string) => void;
+    onChangeWorkspace?: (workspace: WorkspaceStateV2 | null) => void;
     onChangeSqlDialect?: (d: SqlDialect) => void;
     onBeforeRun?: () => void | Promise<void>;
     sqlSchemaSql?: string;
@@ -257,10 +268,13 @@ function CodePaneLayer(props: {
             toolLang: props.toolLang,
             toolCode: props.toolCode,
             toolStdin: props.toolStdin,
+            toolWorkspace: props.toolWorkspace,
             toolSqlDialect: props.toolSqlDialect,
+            ideConfig: props.ideConfig,
             onChangeLang: props.onChangeLang,
             onChangeCode: props.onChangeCode,
             onChangeStdin: props.onChangeStdin,
+            onChangeWorkspace: props.onChangeWorkspace,
             onChangeSqlDialect: props.onChangeSqlDialect,
             onBeforeRun: props.onBeforeRun,
             sqlSchemaSql: props.sqlSchemaSql,
@@ -295,10 +309,13 @@ const MemoCodePaneLayer = React.memo(
         prev.toolLang === next.toolLang &&
         prev.toolCode === next.toolCode &&
         prev.toolStdin === next.toolStdin &&
+        prev.toolWorkspace === next.toolWorkspace &&
         prev.toolSqlDialect === next.toolSqlDialect &&
+        prev.ideConfig === next.ideConfig &&
         prev.onChangeLang === next.onChangeLang &&
         prev.onChangeCode === next.onChangeCode &&
         prev.onChangeStdin === next.onChangeStdin &&
+        prev.onChangeWorkspace === next.onChangeWorkspace &&
         prev.onChangeSqlDialect === next.onChangeSqlDialect &&
         prev.onBeforeRun === next.onBeforeRun &&
         prev.sqlSchemaSql === next.sqlSchemaSql &&
@@ -352,9 +369,12 @@ function areToolsPanelPropsEqual(prev: ToolsPanelProps, next: ToolsPanelProps) {
         prev.toolLang === next.toolLang &&
         prev.toolCode === next.toolCode &&
         prev.toolStdin === next.toolStdin &&
+        prev.toolWorkspace === next.toolWorkspace &&
         prev.toolSqlDialect === next.toolSqlDialect &&
+        prev.ideConfig === next.ideConfig &&
         prev.onChangeCode === next.onChangeCode &&
         prev.onChangeStdin === next.onChangeStdin &&
+        prev.onChangeWorkspace === next.onChangeWorkspace &&
         prev.onBeforeRun === next.onBeforeRun &&
         prev.subjectSlug === next.subjectSlug &&
         prev.moduleId === next.moduleId &&

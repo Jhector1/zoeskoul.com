@@ -34,6 +34,10 @@ export function buildGeneratorTopicsForModule(args: {
                 moduleSlug: moduleManifest.slug,
                 sectionSlug: section.slug,
                 prefix: moduleManifest.prefix,
+                subjectServiceDefaults: manifest.subject.serviceDefaults ?? null,
+                moduleRuntimeDefaults: moduleManifest.runtimeDefaults ?? null,
+                moduleServiceDefaults: moduleManifest.serviceDefaults ?? null,
+                sectionServiceDefaults: section.serviceDefaults ?? null,
             });
 
             return defineJsonGeneratorTopic(fullManifest);

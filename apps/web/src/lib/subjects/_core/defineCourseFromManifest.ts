@@ -32,7 +32,10 @@ export function defineCourseFromManifest(args: {
                         moduleSlug: moduleManifest.slug,
                         sectionSlug: sectionManifest.slug,
                         prefix: moduleManifest.prefix,
+                        subjectServiceDefaults: manifest.subject.serviceDefaults ?? null,
                         moduleRuntimeDefaults: moduleManifest.runtimeDefaults ?? null,
+                        moduleServiceDefaults: moduleManifest.serviceDefaults ?? null,
+                        sectionServiceDefaults: sectionManifest.serviceDefaults ?? null,
                     }),
                 );
             });
@@ -101,6 +104,7 @@ export function defineCourseFromManifest(args: {
                     ? { weekEnd: moduleManifest.weekEnd }
                     : {}),
                 runtimeDefaults: moduleManifest.runtimeDefaults ?? null,
+                serviceDefaults: moduleManifest.serviceDefaults ?? null,
                 ...(moduleManifest.accessOverride
                     ? { accessOverride: moduleManifest.accessOverride }
                     : {}),

@@ -1,6 +1,4 @@
 
-
-
 import {
     makeSingleChoiceOut,
     makeMultiChoiceOut,
@@ -8,7 +6,11 @@ import {
     makeFillBlankChoiceOut,
 } from "@/lib/practice/generator/engines/utils";
 import type { HandlerArgs } from "@/lib/practice/generator/engines/utils";
-import type { ManifestExercise, ManifestCodeInput } from "@/lib/subjects/_core/manifestTypes";
+import type {
+    ManifestExercise,
+    ManifestCodeInput,
+    TopicBundleManifest,
+} from "@/lib/subjects/_core/manifestTypes";
 import {
     resolveChoicesByCount,
     resolveHelp,
@@ -17,6 +19,7 @@ import {
     t,
 } from "./i18nResolve";
 import { RECIPE_REGISTRY } from "./recipes/registry";
+import { mergeLearningIdeConfigs } from "@/lib/ide/learningIdeConfig";
 
 function maybeT(key: string): string | undefined {
     try {
@@ -50,8 +53,16 @@ function buildCodeInput(def: ManifestCodeInput, args: HandlerArgs) {
     return recipeHandler(def as any, args, resolved);
 }
 
-export function buildExerciseFromManifest(def: ManifestExercise, args: HandlerArgs) {
+export function buildExerciseFromManifest(
+    def: ManifestExercise,
+    args: HandlerArgs,
+    manifest?: Pick<TopicBundleManifest, "serviceDefaults">,
+) {
     const resolved = resolveBase(def.messageBase);
+    const ideConfig = mergeLearningIdeConfigs(
+        manifest?.serviceDefaults ?? null,
+        def.serviceOverrides ?? null,
+    );
 
     switch (def.kind) {
         case "single_choice":
@@ -112,7 +123,13 @@ export function buildExerciseFromManifest(def: ManifestExercise, args: HandlerAr
             });
 
         case "code_input":
-            return buildCodeInput(def, args);
+            return buildCodeInput(
+                {
+                    ...def,
+                    serviceOverrides: ideConfig,
+                },
+                args,
+            );
 
         default:
             throw new Error(`Unsupported exercise kind`);

@@ -6,6 +6,7 @@ type Args = {
   height: number;
   activeFileId: string | null;
   showMobileExplorer: boolean;
+  forceDesktopLayout?: boolean;
   isDesktopForcedOff?: boolean;
   editorHostRef: React.RefObject<HTMLDivElement | null>;
   onCloseMobileExplorer: () => void;
@@ -15,6 +16,7 @@ export function useIdeViewport({
   height,
   activeFileId,
   showMobileExplorer,
+  forceDesktopLayout = false,
   isDesktopForcedOff = false,
   editorHostRef,
   onCloseMobileExplorer,
@@ -23,6 +25,11 @@ export function useIdeViewport({
   const [editorHeight, setEditorHeight] = useState(height);
 
   useEffect(() => {
+    if (forceDesktopLayout) {
+      setIsDesktop(true);
+      return;
+    }
+
     if (isDesktopForcedOff) {
       setIsDesktop(false);
       return;
@@ -40,7 +47,7 @@ export function useIdeViewport({
 
     mq.addListener(apply);
     return () => mq.removeListener(apply);
-  }, [isDesktopForcedOff]);
+  }, [forceDesktopLayout, isDesktopForcedOff]);
 
   useEffect(() => {
     if (isDesktop) onCloseMobileExplorer();

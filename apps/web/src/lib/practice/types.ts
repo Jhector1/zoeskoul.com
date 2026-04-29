@@ -1,4 +1,5 @@
 import { PracticeKind } from "@zoeskoul/db";
+import type { LearningIdeConfig } from "@/lib/ide/learningIdeConfig";
 import type {
     CodeExpectedExample,
     Difficulty,
@@ -96,6 +97,7 @@ export type CodeInputExercise = ExerciseBase & {
     fixedSqlDialect?: SqlDialect;
     runtime?: SqlRuntimeSpec;
     expectedExample?: CodeExpectedExample | null;
+    ideConfig?: LearningIdeConfig | null;
 };
 
 export type TextInputExercise = ExerciseBase & {

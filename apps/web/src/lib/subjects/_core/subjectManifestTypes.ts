@@ -5,6 +5,7 @@ import type {
     ManifestRuntimeDefaults,
     TopicBundleManifest as BaseTopicBundleManifest,
 } from "@/lib/subjects/_core/manifestTypes";
+import type { LearningIdeConfig } from "@/lib/ide/learningIdeConfig";
 
 export type SubjectCurriculumManifestMeta = {
     plannedModuleCount?: number;
@@ -30,6 +31,7 @@ export type SubjectManifest = {
         imageAlt?: string | null;
         titleKey: string;
         descriptionKey?: string | null;
+        serviceDefaults?: LearningIdeConfig | null;
         meta?: {
             curriculum?: SubjectCurriculumManifestMeta;
             completionPolicy?: SubjectCompletionPolicyManifestMeta;
@@ -47,6 +49,7 @@ export type SubjectModuleManifest = {
     weekStart?: number | null;
     weekEnd?: number | null;
     accessOverride?: "free" | "paid" | null;
+    serviceDefaults?: LearningIdeConfig | null;
     runtimeDefaults?: ManifestRuntimeDefaults | null;
     meta?: {
         estimatedMinutes?: number;
@@ -62,6 +65,7 @@ export type SubjectSectionManifest = {
     order: number;
     titleKey: string;
     descriptionKey?: string | null;
+    serviceDefaults?: LearningIdeConfig | null;
     meta?: {
         module?: number;
         weeksKey?: string;
@@ -162,6 +166,7 @@ export type SlimTopicManifest = {
         labelKey: string;
         summaryKey: string;
     };
+    serviceDefaults?: LearningIdeConfig | null;
     runtimeDefaults?: ManifestRuntimeDefaults | null;
     cards: ManifestCard[];
     sketches: ManifestSketch[];

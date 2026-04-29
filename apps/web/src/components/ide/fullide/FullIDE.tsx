@@ -54,6 +54,7 @@ type FullIDEInnerProps = {
     services: FullIDEServices;
     onBeforeRun?: FullIDEProps["onBeforeRun"];
     onRunResult?: FullIDEProps["onRunResult"];
+    forceDesktopLayout?: boolean;
     sqlInitialTableSnapshots?: FullIDEProps["sqlInitialTableSnapshots"];
     sqlDialect: any;
     setSqlDialect: React.Dispatch<React.SetStateAction<any>>;
@@ -141,6 +142,7 @@ function FullIDEInner({
                           services,
                           onBeforeRun,
                           onRunResult,
+                          forceDesktopLayout,
                           sqlInitialTableSnapshots,
                           sqlDialect,
                           setSqlDialect,
@@ -215,6 +217,7 @@ function FullIDEInner({
         height,
         activeFileId,
         showMobileExplorer: services.explorer.enabled && showMobileExplorer,
+        forceDesktopLayout,
         editorHostRef,
         onCloseMobileExplorer: handleCloseMobileExplorer,
     });
@@ -246,8 +249,14 @@ function FullIDEInner({
         viewport.isDesktop ? 360 : 320,
         viewport.editorHeight || height,
     );
+    const shouldShowUpgradeText =
+        services.projects.showSaveControls ||
+        services.projects.showCloudProjects ||
+        services.explorer.showFooter;
 
-    const upgradeText = !access.hasUser
+    const upgradeText = !shouldShowUpgradeText
+        ? null
+        : !access.hasUser
         ? "Log in to unlock multiple files and cloud save."
         : !access.canSaveCloud
             ? "Subscribe to save projects to your account."
@@ -577,6 +586,7 @@ export default function FullIDE(props: FullIDEProps) {
         onBeforeRun,
         onRunResult,
         initialSqlDialect = DEFAULT_SQL_DIALECT,
+        forceDesktopLayout = false,
         sqlInitialTableSnapshots,
     } = props;
 
@@ -744,6 +754,7 @@ export default function FullIDE(props: FullIDEProps) {
                 services={services}
                 onBeforeRun={onBeforeRun}
                 onRunResult={onRunResult}
+                forceDesktopLayout={forceDesktopLayout}
                 sqlInitialTableSnapshots={sqlInitialTableSnapshots}
                 sqlDialect={sqlDialect}
                 setSqlDialect={setSqlDialect}

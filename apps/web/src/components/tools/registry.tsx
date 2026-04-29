@@ -7,6 +7,8 @@ import CodeToolPane from "./panes/CodeToolPane";
 import{ SqlDialect } from "@/lib/practice/types";
 import {RunnerLanguage} from "@zoeskoul/code-contracts";
 import NotesToolPane from "@/components/tools/panes/NotesToolPane";
+import type { LearningIdeConfig } from "@/lib/ide/learningIdeConfig";
+import type { WorkspaceStateV2 } from "@/components/ide/types";
 
 export type CodeToolProps = {
     height: number;
@@ -14,11 +16,14 @@ export type CodeToolProps = {
     toolLang: RunnerLanguage;
     toolCode: string;
     toolStdin: string;
+    toolWorkspace?: WorkspaceStateV2 | null;
     toolSqlDialect?: SqlDialect;
+    ideConfig?: LearningIdeConfig | null;
 
     onChangeLang?: (l: RunnerLanguage) => void;
     onChangeCode: (c: string) => void;
     onChangeStdin: (s: string) => void;
+    onChangeWorkspace?: (workspace: WorkspaceStateV2 | null) => void;
     onChangeSqlDialect?: (d: SqlDialect) => void;
 
     onBeforeRun?: () => void | Promise<void>;

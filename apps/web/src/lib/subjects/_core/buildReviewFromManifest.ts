@@ -26,6 +26,7 @@ export function buildReviewFromManifest(args: {
         summary: tag(manifest.topic.summaryKey) as any,
         meta: {
             runtimeDefaults: manifest.runtimeDefaults ?? null,
+            serviceDefaults: manifest.serviceDefaults ?? null,
         },
         cards: manifest.cards.map((card, index) => {
             if (card.kind === "sketch") {
@@ -107,6 +108,7 @@ export function buildReviewFromManifest(args: {
         meta: {
             ...(baseDef.meta ?? {}),
             runtimeDefaults: manifest.runtimeDefaults ?? null,
+            serviceDefaults: manifest.serviceDefaults ?? null,
         },
     };
 

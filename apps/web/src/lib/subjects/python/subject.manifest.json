@@ -27,6 +27,23 @@
   "modules": [
     {
       "slug": "python-0",
+
+
+      "runtimeDefaults": {
+        "kind": "code",
+        "language": "python"
+      },
+      "serviceDefaults": {
+        "preset": "lesson",
+        "runnerBackend": "pty",
+        "requires": {
+          "files": true,
+          "terminal": true,
+          "multiFile": true,
+          "projectPersistence": false,
+          "cloudProjects": false
+        }
+      },
       "prefix": "py0",
       "order": 0,
       "titleKey": "modules.python.python-0.title",

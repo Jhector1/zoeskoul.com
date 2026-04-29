@@ -1,5 +1,6 @@
 import type { ExerciseKind, WorkspaceLanguage, SqlDialect } from "@/lib/practice/types";
 import type { PracticeKind } from "@zoeskoul/db";
+import type { LearningIdeConfig } from "@/lib/ide/learningIdeConfig";
 
 export type ManifestSqlRuntimeDefaults = {
     kind: "sql";
@@ -107,6 +108,7 @@ export type ManifestBaseExercise = {
     purpose?: "quiz" | "project";
     weight?: number;
     messageBase: string;
+    serviceOverrides?: LearningIdeConfig | null;
 };
 
 export type ManifestSingleChoice = ManifestBaseExercise & {
@@ -210,6 +212,7 @@ export type TopicBundleManifest = {
         summaryKey: string;
     };
 
+    serviceDefaults?: LearningIdeConfig | null;
     runtimeDefaults?: ManifestRuntimeDefaults | null;
 
     cards: ManifestCard[];

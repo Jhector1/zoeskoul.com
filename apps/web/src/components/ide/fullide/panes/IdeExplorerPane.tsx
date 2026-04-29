@@ -144,8 +144,9 @@ export default function IdeExplorerPane({
 
     const showNewFile = policy.canCreateFiles;
     const showNewFolder = policy.canCreateFolders;
-    const showOpenFile = policy.canUploadFiles;
-    const showOpenFolder = policy.canUploadFiles && policy.canCreateFolders;
+    const showOpenFile = services.explorer.showFooter && policy.canUploadFiles;
+    const showOpenFolder =
+        services.explorer.showFooter && policy.canUploadFiles && policy.canCreateFolders;
 
     const uploadHint = useMemo(() => {
         if (!policy.canUploadFiles) {
@@ -382,9 +383,11 @@ export default function IdeExplorerPane({
                         />
                     ) : null}
 
-                    <div className="mt-2 text-[11px] font-semibold text-neutral-500 dark:text-white/50">
-                        {uploadHint}
-                    </div>
+                    {showOpenFile || showOpenFolder ? (
+                        <div className="mt-2 text-[11px] font-semibold text-neutral-500 dark:text-white/50">
+                            {uploadHint}
+                        </div>
+                    ) : null}
                 </div>
             ) : null}
 

@@ -37,5 +37,6 @@ export const buildTemplateIoRecipe: RecipeHandler<any> = (def, args, resolved) =
         fixedSqlDialect: def.fixedSqlDialect,
         expected: expected as any,
         expectedExample,
+        ideConfig: def.serviceOverrides ?? null,
     });
 };

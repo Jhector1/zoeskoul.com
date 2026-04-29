@@ -113,6 +113,7 @@ export type FullIDEProps = {
     onBeforeRun?: () => void | Promise<void>;
     onRunResult?: (args: { result: RunResult; runArgs: any }) => void;
     initialSqlDialect?: SqlDialect;
+    forceDesktopLayout?: boolean;
     sqlInitialTableSnapshots?: Record<
         string,
         {

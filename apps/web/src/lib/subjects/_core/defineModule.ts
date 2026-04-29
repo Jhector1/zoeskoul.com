@@ -1,6 +1,7 @@
 // src/lib/subjects/_core/defineModule.ts
 import type { ManifestRuntimeDefaults } from "./manifestTypes";
 import type { SectionBundle } from "./defineSection";
+import type { LearningIdeConfig } from "@/lib/ide/learningIdeConfig";
 
 export type ModuleMeta = {
     // legacy display fields
@@ -35,6 +36,7 @@ export type ModuleInput = {
     meta?: ModuleMeta;
 
     runtimeDefaults?: ManifestRuntimeDefaults | null;
+    serviceDefaults?: LearningIdeConfig | null;
 
     accessOverride?: "inherit" | "free" | "paid";
     entitlementKey?: string | null;

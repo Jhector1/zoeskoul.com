@@ -105,6 +105,7 @@ export function getRawReviewModule(
         subtitle: makeSubtitle(moduleSlug),
         startPracticeSectionSlug: section?.slug ?? moduleEntry.sectionSlug,
         runtimeDefaults: mod?.runtimeDefaults ?? moduleEntry.runtimeDefaults ?? null,
+        serviceDefaults: mod?.serviceDefaults ?? moduleEntry.serviceDefaults ?? null,
         topics,
         sections,
     };

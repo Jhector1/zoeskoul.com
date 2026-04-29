@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import type { WorkspaceStateV2 } from "@/components/ide/types";
 import type { WorkspaceLanguage, SqlDialect } from "@/lib/practice/types";
 import { useDebouncedCommit } from "@/lib/client/persistence/useDebouncedCommit";
 import { useFlushOnPageExit } from "@/lib/client/persistence/useFlushOnPageExit";
@@ -9,6 +10,7 @@ import {
     resolveSqlRunnerConfig,
     type SqlTableSnapshots,
 } from "@/lib/subjects/sql/runtime/resolveSqlRunnerConfig";
+import type { LearningIdeConfig } from "@/lib/ide/learningIdeConfig";
 
 type BoundTarget = { id: string; onPatch: (patch: any) => void };
 
@@ -16,6 +18,7 @@ type ToolSnap = {
     lang: WorkspaceLanguage;
     code: string;
     stdin: string;
+    workspace?: WorkspaceStateV2 | null;
 
     sqlDialect: SqlDialect;
     sqlDatasetId?: string;
@@ -32,10 +35,15 @@ function snapKey(s: ToolSnap) {
         s.sqlDatasetId ?? "",
         s.stdin,
         s.code,
+        JSON.stringify(s.workspace ?? null),
         s.sqlSchemaSql ?? "",
         s.sqlSeedSql ?? "",
         JSON.stringify(s.sqlInitialTableSnapshots ?? {}),
     ].join("::");
+}
+
+function ideConfigKey(config: LearningIdeConfig | null | undefined) {
+    return JSON.stringify(config ?? null);
 }
 
 export function useToolCodeRunnerState(args: {
@@ -97,6 +105,10 @@ export function useToolCodeRunnerState(args: {
     const initialLang = (saved?.lang as WorkspaceLanguage) ?? defaultLang;
     const initialCode = typeof saved?.code === "string" ? saved.code : defaultCode;
     const initialStdin = typeof saved?.stdin === "string" ? saved.stdin : defaultStdin;
+    const initialWorkspace =
+        saved?.workspace && typeof saved.workspace === "object"
+            ? (saved.workspace as WorkspaceStateV2)
+            : null;
 
     const initialResolvedSql = resolveSqlRunnerConfig({
         language: initialLang,
@@ -117,6 +129,7 @@ export function useToolCodeRunnerState(args: {
     const [toolLang, setToolLang0] = useState<WorkspaceLanguage>(initialLang);
     const [toolCode, setToolCode0] = useState<string>(initialCode);
     const [toolStdin, setToolStdin0] = useState<string>(initialStdin);
+    const [toolWorkspace, setToolWorkspace0] = useState<WorkspaceStateV2 | null>(initialWorkspace);
 
     const [toolSqlDialect, setToolSqlDialect0] =
         useState<SqlDialect>(initialResolvedSql.sqlDialect);
@@ -129,11 +142,19 @@ export function useToolCodeRunnerState(args: {
         useState<string | undefined>(initialResolvedSql.sqlSeedSql);
     const [toolSqlInitialTableSnapshots, setToolSqlInitialTableSnapshots0] =
         useState<SqlTableSnapshots | undefined>(initialResolvedSql.sqlInitialTableSnapshots);
+    const [toolIdeConfig, setToolIdeConfig] = useState<LearningIdeConfig | null>(null);
+
+    useEffect(() => {
+        if (boundId == null) {
+            setToolIdeConfig(null);
+        }
+    }, [boundId]);
 
     const latestSnapRef = useRef<ToolSnap>({
         lang: initialLang,
         code: initialCode,
         stdin: initialStdin,
+        workspace: initialWorkspace,
         sqlDialect: initialResolvedSql.sqlDialect,
         sqlDatasetId: initialResolvedSql.sqlDatasetId,
         sqlSchemaSql: initialResolvedSql.sqlSchemaSql,
@@ -146,6 +167,7 @@ export function useToolCodeRunnerState(args: {
             lang: toolLang,
             code: toolCode,
             stdin: toolStdin,
+            workspace: toolWorkspace,
             sqlDialect: toolSqlDialect,
             sqlDatasetId: toolSqlDatasetId,
             sqlSchemaSql: toolSqlSchemaSql,
@@ -156,6 +178,7 @@ export function useToolCodeRunnerState(args: {
             toolLang,
             toolCode,
             toolStdin,
+            toolWorkspace,
             toolSqlDialect,
             toolSqlDatasetId,
             toolSqlSchemaSql,
@@ -174,6 +197,8 @@ export function useToolCodeRunnerState(args: {
                     prevToolState?.lang === latest.lang &&
                     prevToolState?.code === latest.code &&
                     prevToolState?.stdin === latest.stdin &&
+                    JSON.stringify(prevToolState?.workspace ?? null) ===
+                    JSON.stringify(latest.workspace ?? null) &&
                     prevToolState?.sqlDialect === latest.sqlDialect &&
                     prevToolState?.sqlDatasetId === latest.sqlDatasetId &&
                     prevToolState?.sqlSchemaSql === latest.sqlSchemaSql &&
@@ -189,6 +214,7 @@ export function useToolCodeRunnerState(args: {
                     lang: latest.lang,
                     code: latest.code,
                     stdin: latest.stdin,
+                    workspace: latest.workspace ?? null,
                     sqlDialect: latest.sqlDialect,
                     sqlDatasetId: latest.sqlDatasetId,
                     sqlSchemaSql: latest.sqlSchemaSql,
@@ -277,6 +303,10 @@ export function useToolCodeRunnerState(args: {
             lang: nextLang,
             code: nextCode,
             stdin: nextStdin,
+            workspace:
+                s?.workspace && typeof s.workspace === "object"
+                    ? (s.workspace as WorkspaceStateV2)
+                    : null,
             sqlDialect: resolvedSql.sqlDialect,
             sqlDatasetId: resolvedSql.sqlDatasetId,
             sqlSchemaSql: resolvedSql.sqlSchemaSql,
@@ -289,6 +319,11 @@ export function useToolCodeRunnerState(args: {
         setToolLang0((prev) => (prev === nextSnap.lang ? prev : nextSnap.lang));
         setToolCode0((prev) => (prev === nextSnap.code ? prev : nextSnap.code));
         setToolStdin0((prev) => (prev === nextSnap.stdin ? prev : nextSnap.stdin));
+        setToolWorkspace0((prev) =>
+            JSON.stringify(prev ?? null) === JSON.stringify(nextSnap.workspace ?? null)
+                ? prev
+                : (nextSnap.workspace ?? null),
+        );
         setToolSqlDialect0((prev) =>
             prev === nextSnap.sqlDialect ? prev : nextSnap.sqlDialect,
         );
@@ -327,6 +362,8 @@ export function useToolCodeRunnerState(args: {
             lang: WorkspaceLanguage;
             code: string;
             stdin?: string;
+            ideConfig?: LearningIdeConfig | null;
+            workspace?: WorkspaceStateV2 | null;
             sqlDialect?: SqlDialect;
             sqlDatasetId?: string;
             sqlSchemaSql?: string;
@@ -348,6 +385,7 @@ export function useToolCodeRunnerState(args: {
                 lang: args2.lang,
                 code: typeof args2.code === "string" ? args2.code : "",
                 stdin: typeof args2.stdin === "string" ? args2.stdin : "",
+                workspace: args2.workspace ?? null,
                 sqlDialect: resolvedSql.sqlDialect,
                 sqlDatasetId: resolvedSql.sqlDatasetId,
                 sqlSchemaSql: resolvedSql.sqlSchemaSql,
@@ -355,16 +393,18 @@ export function useToolCodeRunnerState(args: {
                 sqlInitialTableSnapshots: resolvedSql.sqlInitialTableSnapshots,
             };
 
-            const nextBindKey = `${args2.id}::${snapKey(nextSnap)}`;
+            const nextBindKey = `${args2.id}::${snapKey(nextSnap)}::${ideConfigKey(args2.ideConfig)}`;
 
             if (lastBindKeyRef.current === nextBindKey) {
                 boundRef.current = { id: args2.id, onPatch: args2.onPatch };
+                setToolIdeConfig((prev) => (prev === args2.ideConfig ? prev : (args2.ideConfig ?? null)));
                 return;
             }
 
             lastBindKeyRef.current = nextBindKey;
             boundRef.current = { id: args2.id, onPatch: args2.onPatch };
             setBoundId((prev) => (prev === args2.id ? prev : args2.id));
+            setToolIdeConfig(args2.ideConfig ?? null);
 
             boundDirtyRef.current = false;
             latestSnapRef.current = nextSnap;
@@ -372,6 +412,11 @@ export function useToolCodeRunnerState(args: {
             setToolLang0((prev) => (prev === nextSnap.lang ? prev : nextSnap.lang));
             setToolCode0((prev) => (prev === nextSnap.code ? prev : nextSnap.code));
             setToolStdin0((prev) => (prev === nextSnap.stdin ? prev : nextSnap.stdin));
+            setToolWorkspace0((prev) =>
+                JSON.stringify(prev ?? null) === JSON.stringify(nextSnap.workspace ?? null)
+                    ? prev
+                    : (nextSnap.workspace ?? null),
+            );
             setToolSqlDialect0((prev) =>
                 prev === nextSnap.sqlDialect ? prev : nextSnap.sqlDialect,
             );
@@ -398,6 +443,7 @@ export function useToolCodeRunnerState(args: {
     const unbindCodeInput = useCallback(() => {
         cancel();
         clearBoundState();
+        setToolIdeConfig(null);
     }, [cancel, clearBoundState]);
 
     useFlushOnPageExit(() => {
@@ -443,6 +489,15 @@ export function useToolCodeRunnerState(args: {
             boundDirtyRef.current = true;
             b.onPatch({ codeStdin: s, submitted: false, result: null });
         }
+    }, []);
+
+    const setToolWorkspace = useCallback((workspace: WorkspaceStateV2 | null) => {
+        latestSnapRef.current = { ...latestSnapRef.current, workspace };
+        setToolWorkspace0((prev) =>
+            JSON.stringify(prev ?? null) === JSON.stringify(workspace ?? null)
+                ? prev
+                : workspace,
+        );
     }, []);
 
     const setToolSqlDialect = useCallback((d: SqlDialect) => {
@@ -507,16 +562,19 @@ export function useToolCodeRunnerState(args: {
         toolLang,
         toolCode,
         toolStdin,
+        toolWorkspace,
 
         toolSqlDialect: resolvedSql.sqlDialect,
         toolSqlDatasetId,
         toolSqlSchemaSql: resolvedSql.sqlSchemaSql,
         toolSqlSeedSql: resolvedSql.sqlSeedSql,
         toolSqlInitialTableSnapshots: resolvedSql.sqlInitialTableSnapshots,
+        toolIdeConfig,
 
         setToolLang,
         setToolCode,
         setToolStdin,
+        setToolWorkspace,
         setToolSqlDialect,
 
         rightBodyRef,

@@ -5,6 +5,7 @@ import type { ModuleBundle } from "./defineModule";
 import type { SectionBundle } from "./defineSection";
 import type { SubjectTopicBundle, TopicMeta } from "./defineTopicBundle";
 import type { ManifestRuntimeDefaults } from "./manifestTypes";
+import type { LearningIdeConfig } from "@/lib/ide/learningIdeConfig";
 
 type TopicGeneratorRegistration = NonNullable<SubjectTopicBundle["generator"]>;
 
@@ -70,6 +71,7 @@ export type BuiltCatalog = Record<
                 topicIds: string[];
                 topics: Record<string, string>;
                 runtimeDefaults?: ManifestRuntimeDefaults | null;
+                serviceDefaults?: LearningIdeConfig | null;
             }
         >;
     }
@@ -237,6 +239,7 @@ export function buildArtifacts(courses: readonly CourseBundle[]): BuiltArtifacts
                 topicIds: [...new Set(moduleTopicIds)],
                 topics: moduleTopicMap,
                 runtimeDefaults: mod.module.runtimeDefaults ?? null,
+                serviceDefaults: mod.module.serviceDefaults ?? null,
             };
         }
 

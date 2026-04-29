@@ -77,5 +77,6 @@ export const buildSqlQueryRecipe: RecipeHandler<any> = (def, args, resolved) => 
         },
         expected: expected as any,
         expectedExample,
+        ideConfig: def.serviceOverrides ?? null,
     });
 };

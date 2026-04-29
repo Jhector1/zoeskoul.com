@@ -12,6 +12,7 @@ import type {
     MultiChoiceExercise,
     SingleChoiceExercise, SqlDialect, SqlRuntimeSpec,
 } from "@/lib/practice/types";
+import type { LearningIdeConfig } from "@/lib/ide/learningIdeConfig";
 
 import { tag } from "@/lib/practice/generator/shared/i18n";
 import {ExerciseHelpSpec} from "@/lib/practice/types";
@@ -671,6 +672,7 @@ export function makeCodeInputOut(args: {
     runtime?: SqlRuntimeSpec;
 
     expectedExample?: CodeExpectedExample | null;
+    ideConfig?: LearningIdeConfig | null;
 }): GenOut<"code_input"> {
     const exercise: CodeInputExercise = {
         id: args.id,
@@ -694,6 +696,7 @@ export function makeCodeInputOut(args: {
         ...(args.fixedSqlDialect ? { fixedSqlDialect: args.fixedSqlDialect } : {}),
         ...(args.runtime ? { runtime: args.runtime } : {}),
         ...(args.expectedExample ? { expectedExample: args.expectedExample } : {}),
+        ...(args.ideConfig ? { ideConfig: args.ideConfig } : {}),
     };
 
     return {

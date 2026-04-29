@@ -2,6 +2,7 @@ import type { ReviewTopicShape } from "@/lib/subjects/types";
 import type { SketchEntry } from "@/components/sketches/subjects";
 import type { TopicBundle as GeneratorTopicBundle } from "@/lib/practice/generator/engines/utils";
 import type { ManifestRuntimeDefaults } from "@/lib/subjects/_core/manifestTypes";
+import type { LearningIdeConfig } from "@/lib/ide/learningIdeConfig";
 
 export type JsonObject = { readonly [key: string]: unknown };
 
@@ -18,6 +19,7 @@ export type TopicMeta = {
     preferKind?: string | null;
     pool?: readonly TopicPoolItem[];
     runtimeDefaults?: ManifestRuntimeDefaults | null;
+    serviceDefaults?: LearningIdeConfig | null;
 };
 
 export type TopicDefInput = {

@@ -1,3 +1,5 @@
+import type { ManifestIdeServiceConfig } from "./ide-services.js";
+
 export type ExerciseKind =
   | "single_choice"
   | "multi_choice"
@@ -122,6 +124,7 @@ export type ManifestBaseExercise = {
   purpose?: "quiz" | "project";
   weight?: number;
   messageBase: string;
+  serviceOverrides?: ManifestIdeServiceConfig | null;
 };
 
 export type ManifestSingleChoice = ManifestBaseExercise & {
@@ -218,6 +221,7 @@ export type TopicBundleManifest = {
     labelKey: string;
     summaryKey: string;
   };
+  serviceDefaults?: ManifestIdeServiceConfig | null;
   runtimeDefaults?: ManifestRuntimeDefaults | null;
   cards: ManifestCard[];
   sketches: ManifestSketch[];
