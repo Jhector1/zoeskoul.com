@@ -2,7 +2,7 @@
 
 
 import type { HandlerArgs, AnyGenOut } from "@/lib/practice/generator/engines/utils";
-import type { ManifestCodeInput, ManifestRecipe } from "@/lib/subjects/_core/manifestTypes";
+import {ManifestCodeInput, ManifestRecipe} from "@zoeskoul/curriculum-contracts";
 
 export type RecipeHandler<T extends ManifestRecipe = ManifestRecipe> = (
     def: ManifestCodeInput & { recipe: T },

@@ -1,8 +1,8 @@
 import { makeCodeInputOut } from "@/lib/practice/generator/engines/utils";
 import type { RecipeHandler } from "./types";
-import type { ManifestCodeInput } from "@/lib/subjects/_core/manifestTypes";
 import { buildTerminalExpectedExample } from "./expectedExample";
 import { buildFixedTestsExpected } from "@zoeskoul-code-input-expected";
+import {ManifestCodeInput} from "@zoeskoul/curriculum-contracts";
 
 export const buildFixedTestsRecipe: RecipeHandler<any> = (
     def: ManifestCodeInput & { recipe: { type: "fixed_tests"; tests: any[]; solutionCode?: string } },
@@ -27,6 +27,17 @@ export const buildFixedTestsRecipe: RecipeHandler<any> = (
         prompt: resolved.prompt,
         language: def.language ?? "python",
         starterCode: resolved.starterCode,
+
+        workspace: def.workspace,
+        starterFiles: def.starterFiles,
+        initialStdin: def.initialStdin,
+        entryFile:
+            def.entryFile ??
+            def.workspace?.entryFile ??
+            def.workspace?.entryFilePath ??
+            def.workspace?.mainFile ??
+            def.workspace?.mainFilePath,
+
         help: resolved.help,
         hint: resolved.hint,
         fixedSqlDialect: def.fixedSqlDialect,

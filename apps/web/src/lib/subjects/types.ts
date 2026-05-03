@@ -1,6 +1,6 @@
 import type { PracticeKind } from "@zoeskoul/db";
-import type { ManifestRuntimeDefaults } from "@/lib/subjects/_core/manifestTypes";
 import type { LearningIdeConfig } from "@/lib/ide/learningIdeConfig";
+import {ManifestRuntimeDefaults} from "@zoeskoul/curriculum-contracts";
 
 export type ReviewQuestion =
     | {

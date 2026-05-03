@@ -67,6 +67,17 @@ export const buildSqlQueryRecipe: RecipeHandler<any> = (def, args, resolved) => 
         prompt: resolved.prompt,
         language: def.language ?? "sql",
         starterCode: resolved.starterCode,
+
+        workspace: def.workspace,
+        starterFiles: def.starterFiles,
+        initialStdin: def.initialStdin,
+        entryFile:
+            def.entryFile ??
+            def.workspace?.entryFile ??
+            def.workspace?.entryFilePath ??
+            def.workspace?.mainFile ??
+            def.workspace?.mainFilePath,
+
         help: resolved.help,
         hint: resolved.hint,
         fixedSqlDialect,

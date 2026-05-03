@@ -98,6 +98,18 @@ export type CodeInputExercise = ExerciseBase & {
     runtime?: SqlRuntimeSpec;
     expectedExample?: CodeExpectedExample | null;
     ideConfig?: LearningIdeConfig | null;
+
+    /**
+     * Optional manifest-driven workspace seed.
+     *
+     * The review runtime turns this into WorkspaceStateV2 once.
+     * After that, saved workspace state wins so starter files do not overwrite
+     * learner edits while navigating between cards/exercises.
+     */
+    workspace?: any;
+    starterFiles?: any;
+    initialStdin?: string;
+    entryFile?: string;
 };
 
 export type TextInputExercise = ExerciseBase & {

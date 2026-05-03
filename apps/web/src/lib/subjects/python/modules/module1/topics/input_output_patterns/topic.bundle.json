@@ -84,25 +84,73 @@
       "id": "pattern_overview",
       "archetype": "paragraph",
       "titleKey": "sketches.python.python-1.input_output_patterns.pattern_overview.title",
-      "bodyKey": "sketches.python.python-1.input_output_patterns.pattern_overview.bodyMarkdown"
+      "bodyKey": "sketches.python.python-1.input_output_patterns.pattern_overview.bodyMarkdown",
+      "runtime": {
+        "kind": "code",
+        "language": "python"
+      },
+      "workspace": {
+        "entryFile": "main.py",
+        "initialStdin": "",
+        "starterFiles": {
+          "main.py": "# Input → Convert → Compute → Show\n\nname = input(\"Name: \")\nage_text = input(\"Age: \")\n\nage = int(age_text)\nnext_age = age + 1\n\nprint(f\"Hi {name}! Next year you'll be {next_age}.\")\n",
+          "README.md": "This sketch shows the main beginner Python input/output pattern:\n\n1. Get input with input()\n2. Convert text when needed\n3. Compute a result\n4. Show the result with print()\n"
+        }
+      }
     },
     {
       "id": "input_returns_text",
       "archetype": "paragraph",
       "titleKey": "sketches.python.python-1.input_output_patterns.input_returns_text.title",
-      "bodyKey": "sketches.python.python-1.input_output_patterns.input_returns_text.bodyMarkdown"
+      "bodyKey": "sketches.python.python-1.input_output_patterns.input_returns_text.bodyMarkdown",
+      "runtime": {
+        "kind": "code",
+        "language": "python"
+      },
+      "workspace": {
+        "entryFile": "main.py",
+        "initialStdin": "25\n",
+        "starterFiles": {
+          "main.py": "age_text = input()\n\nprint(age_text)\nprint(type(age_text))\n\n# Try changing the input to 25.\n# Even though it looks like a number, input() gives you text first.\n",
+          "notes.md": "Key idea:\n\ninput() always returns a string.\n\nIf you want to do math, convert it first with int() or float().\n"
+        }
+      }
     },
     {
       "id": "convert_and_compute",
       "archetype": "paragraph",
       "titleKey": "sketches.python.python-1.input_output_patterns.convert_and_compute.title",
-      "bodyKey": "sketches.python.python-1.input_output_patterns.convert_and_compute.bodyMarkdown"
+      "bodyKey": "sketches.python.python-1.input_output_patterns.convert_and_compute.bodyMarkdown",
+      "runtime": {
+        "kind": "code",
+        "language": "python"
+      },
+      "workspace": {
+        "entryFile": "main.py",
+        "initialStdin": "10\n",
+        "starterFiles": {
+          "main.py": "celsius_text = input()\n\ncelsius = int(celsius_text)\nfahrenheit = int(celsius * 9 / 5 + 32)\n\nprint(fahrenheit)\n",
+          "formula.md": "Celsius to Fahrenheit formula:\n\nfahrenheit = celsius * 9 / 5 + 32\n"
+        }
+      }
     },
     {
       "id": "show_results",
       "archetype": "paragraph",
       "titleKey": "sketches.python.python-1.input_output_patterns.show_results.title",
-      "bodyKey": "sketches.python.python-1.input_output_patterns.show_results.bodyMarkdown"
+      "bodyKey": "sketches.python.python-1.input_output_patterns.show_results.bodyMarkdown",
+      "runtime": {
+        "kind": "code",
+        "language": "python"
+      },
+      "workspace": {
+        "entryFile": "main.py",
+        "initialStdin": "40\n15\n",
+        "starterFiles": {
+          "main.py": "bill = int(input())\npct = int(input())\n\ntip = bill * pct // 100\ntotal = bill + tip\n\nprint(f\"Tip = {tip}\")\nprint(f\"Total = {total}\")\n",
+          "README.md": "This example prints two output lines.\n\nThe expected format is important:\n\nTip = 6\nTotal = 46\n"
+        }
+      }
     }
   ],
 
@@ -115,6 +163,15 @@
       "messageBase": "quiz.m1_io_age_next_year",
       "language": "python",
       "showExpectedExample": true,
+
+      "workspace": {
+        "entryFile": "main.py",
+        "initialStdin": "Maya\n18\n",
+        "starterFiles": {
+          "main.py": "name = input()\nage = int(input())\n\n# TODO: compute age next year\nage_next = age\n\n# TODO: print the final message\nprint(f\"Hi {name}! Next year you'll be {age_next}.\")\n",
+          "README.md": "Goal:\n\nRead a name and an age.\nPrint the age the person will be next year.\n\nExample input:\nMaya\n18\n\nExample output:\nHi Maya! Next year you'll be 19.\n"
+        }
+      },
 
       "recipe": {
         "type": "template_io",
@@ -155,6 +212,15 @@
       "language": "python",
       "showExpectedExample": true,
 
+      "workspace": {
+        "entryFile": "main.py",
+        "initialStdin": "40\n15\n",
+        "starterFiles": {
+          "main.py": "bill = int(input())\npct = int(input())\n\n# TODO: calculate the tip using integer math\n# Example: bill 40 and pct 15 should give tip 6\ntip = 0\n\n# TODO: calculate the total\ntotal = 0\n\nprint(f\"Tip = {tip}\")\nprint(f\"Total = {total}\")\n",
+          "helper_notes.md": "Use integer division for this beginner exercise:\n\ntip = bill * pct // 100\n\ntotal = bill + tip\n"
+        }
+      },
+
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -179,6 +245,16 @@
       "weight": 1,
       "messageBase": "quiz.m1_io_c_to_f",
       "language": "python",
+
+      "workspace": {
+        "entryFile": "main.py",
+        "initialStdin": "10\n",
+        "starterFiles": {
+          "main.py": "c = int(input())\n\n# TODO: convert Celsius to Fahrenheit\nf = 0\n\nprint(f)\n",
+          "formula.md": "Use this formula:\n\nf = int(c * 9 / 5 + 32)\n\nThe int() keeps the result as a whole number for this exercise.\n"
+        }
+      },
+
       "recipe": {
         "type": "template_io",
         "vars": {

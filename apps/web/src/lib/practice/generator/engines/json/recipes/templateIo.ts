@@ -11,10 +11,12 @@ export const buildTemplateIoRecipe: RecipeHandler<any> = (def, args, resolved) =
         recipe: def.recipe,
         rng: args.rng,
     });
+
     const expected = buildTemplateIoExpected({
         recipe: def.recipe,
         vars,
     });
+
     const tests = expected.tests;
 
     const expectedExample = buildTerminalExpectedExample({
@@ -32,6 +34,17 @@ export const buildTemplateIoRecipe: RecipeHandler<any> = (def, args, resolved) =
         prompt: resolved.prompt,
         language: def.language ?? "python",
         starterCode: resolved.starterCode,
+
+        workspace: def.workspace,
+        starterFiles: def.starterFiles,
+        initialStdin: def.initialStdin,
+        entryFile:
+            def.entryFile ??
+            def.workspace?.entryFile ??
+            def.workspace?.entryFilePath ??
+            def.workspace?.mainFile ??
+            def.workspace?.mainFilePath,
+
         help: resolved.help,
         hint: resolved.hint,
         fixedSqlDialect: def.fixedSqlDialect,

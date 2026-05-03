@@ -646,7 +646,6 @@ export function buildTaggedHelpSteps(
 
 
 
-
 export function makeCodeInputOut(args: {
     archetype: string;
     id: string;
@@ -658,6 +657,11 @@ export function makeCodeInputOut(args: {
 
     language?: WorkspaceLanguage;
     expected: CodeExpectedInput;
+
+    workspace?: any;
+    starterFiles?: any;
+    initialStdin?: string;
+    entryFile?: string;
 
     hint?: string;
     help?: ExerciseHelpSpec;
@@ -683,6 +687,11 @@ export function makeCodeInputOut(args: {
         prompt: args.prompt,
         language: args.language ?? "python",
         starterCode: args.starterCode,
+
+        ...(args.workspace ? { workspace: args.workspace } : {}),
+        ...(args.starterFiles ? { starterFiles: args.starterFiles } : {}),
+        ...(args.initialStdin != null ? { initialStdin: args.initialStdin } : {}),
+        ...(args.entryFile ? { entryFile: args.entryFile } : {}),
 
         ...(args.help ? { help: args.help } : {}),
         ...(args.hint ? { hint: args.hint } : {}),

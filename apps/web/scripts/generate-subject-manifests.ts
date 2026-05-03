@@ -112,10 +112,7 @@ async function main() {
 // AUTO-GENERATED FILE. DO NOT EDIT.
 // Run: pnpm gen:subject-manifests
 
-import type {
-  SubjectManifest,
-  TopicManifestRefMap,
-} from "@/lib/subjects/_core/subjectManifestTypes";
+
 ${importLines.length ? `\n${importLines.join("\n")}\n` : ""}
 
 export type GeneratedSubjectGenKey = ${genKeyType};
