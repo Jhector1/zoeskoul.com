@@ -1,11 +1,9 @@
 import React, { useCallback, useEffect, useMemo, useState, useTransition } from "react";
 import { useParams, useRouter } from "next/navigation";
 
-import type { ReviewCard } from "@/lib/subjects/types";
 import type { ReviewProgressState } from "@/lib/subjects/progressTypes";
 
 import { ROUTES } from "@/utils";
-import { cn } from "@/lib/cn";
 
 import { useReviewProgress } from "@/components/review/module/hooks/useReviewProgress";
 import { useAssignmentStatus } from "@/components/review/module/hooks/useAssignmentStatus";
@@ -64,17 +62,6 @@ export function useReviewModuleController({
     const sectionSlug = (params as any)?.sectionSlug;
     const unlockAll = Boolean(canUnlockAll);
 
-    const navModes = useMemo(
-        () => ({
-            ...({
-                cards: "scroll",
-                quiz: "scroll",
-            } as any),
-            ...(navigationMode ? {} : {}),
-        }),
-        [navigationMode],
-    );
-
     const resolvedNavModes = useMemo(() => {
         const { resolveFlowNavigationConfig } = require("@/components/review/navigation/FlowNavigator");
         return resolveFlowNavigationConfig(navigationMode);
@@ -92,7 +79,6 @@ export function useReviewModuleController({
         viewTopicId,
         setViewTopicId,
         flushNow,
-        flush: flushDebounced,
     } = useReviewProgress({ subjectSlug, moduleSlug, locale, firstTopicId });
 
     const store = useReviewRuntimeStore();

@@ -7,7 +7,6 @@ import type { SavedQuizState } from "@/lib/subjects/progressTypes";
 import MathMarkdown from "@/components/markdown/MathMarkdown";
 import QuizBlock from "@/components/review/QuizBlock";
 import { buildReviewQuizKey } from "@/lib/subjects/quizClient";
-import { cn } from "@/lib/cn";
 
 import SketchBlock from "@/components/sketches/subjects/SketchBlock";
 import { useTaggedT } from "@/i18n/tagged";
@@ -111,7 +110,6 @@ export default function CardRenderer(props: {
 
         if (typeof window !== "undefined") {
             const enabled =
-                (window as any).__ZOE_DEBUG_STARTER_FILES__ === true ||
                 window.localStorage.getItem("zoe:debug:starter-files") === "1";
 
             if (enabled) {
