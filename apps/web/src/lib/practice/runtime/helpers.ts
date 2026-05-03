@@ -22,13 +22,39 @@ export function coerceMaxAttempts(v: unknown): number | null {
     return Math.max(1, Math.floor(n));
 }
 
+function isWorkspaceStateForCode(value: unknown) {
+    return (
+        !!value &&
+        typeof value === "object" &&
+        (value as any).version === 2 &&
+        Array.isArray((value as any).nodes)
+    );
+}
+
+function getWorkspaceEntryCodeForCodeLike(workspace: any) {
+    if (!isWorkspaceStateForCode(workspace)) return null;
+
+    const entryId = workspace.entryFileId || workspace.activeFileId;
+    const file = workspace.nodes.find(
+        (node: any) => node?.kind === "file" && node.id === entryId,
+    );
+
+    return file?.kind === "file" ? String(file.content ?? "") : null;
+}
+
 export function extractCodeLike(p: any) {
+    const workspace =
+        p?.workspace ?? p?.codeWorkspace ?? p?.ideWorkspace ?? null;
+    const workspaceCode = getWorkspaceEntryCodeForCodeLike(workspace);
+
     const code =
-        typeof p?.code === "string"
-            ? p.code
-            : typeof p?.source === "string"
-                ? p.source
-                : null;
+        workspaceCode != null
+            ? workspaceCode
+            : typeof p?.code === "string"
+                ? p.code
+                : typeof p?.source === "string"
+                    ? p.source
+                    : null;
 
     const stdin =
         typeof p?.codeStdin === "string"
@@ -76,7 +102,7 @@ export function isEmptyPracticeAnswer(
     }
 
     if (ex.kind === "code_input") {
-        const code = (item as any).code ?? (item as any).source;
+        const { code } = extractCodeLike(item as any);
         return !(code && String(code).trim().length > 0);
     }
 

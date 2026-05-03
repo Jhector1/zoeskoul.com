@@ -105,11 +105,86 @@ function sanitizePathPart(x: string) {
 
 function buildModelPath(args: {
     modelKey?: string;
+    exerciseStateKey?: string;
     instanceKey: string;
     lang: string;
 }) {
-    const base = sanitizePathPart(args.modelKey || args.instanceKey);
+    /**
+     * Never use a random instance key for review/practice editors if a modelKey exists.
+     * Random paths caused remounts to reload starter code like print("Hello Python!").
+     */
+    const modelPart = sanitizePathPart(args.modelKey || args.instanceKey);
+    const scopePart = sanitizePathPart(args.exerciseStateKey || args.modelKey || modelPart);
+
+    const base = scopePart ? `${scopePart}/${modelPart}` : modelPart;
     return `inmemory://zoeskoul-runner/${base}.${extForLang(args.lang)}`;
+}
+
+function isDisposedModel(model: any) {
+    try {
+        return !model || model.isDisposed?.() === true;
+    } catch {
+        return true;
+    }
+}
+
+function getLiveEditorModel(ed: any) {
+    try {
+        if (!ed || ed.isDisposed?.() === true) return null;
+        const model = ed.getModel?.();
+        if (isDisposedModel(model)) return null;
+        return model;
+    } catch {
+        return null;
+    }
+}
+
+function safeEditorValue(ed: any, fallback = "") {
+    try {
+        const model = getLiveEditorModel(ed);
+        if (!model) return fallback;
+        return String(model.getValue?.() ?? fallback);
+    } catch {
+        return fallback;
+    }
+}
+
+function editorCacheKey(scope: string, path: string) {
+    return `zoe:editor-cache:${scope}:${path}`;
+}
+
+function readCachedEditorValue(scope: string, path: string): string | null {
+    if (typeof window === "undefined") return null;
+
+    try {
+        const raw = window.sessionStorage.getItem(editorCacheKey(scope, path));
+        if (!raw) return null;
+
+        const parsed = JSON.parse(raw);
+        return typeof parsed?.value === "string" ? parsed.value : null;
+    } catch {
+        return null;
+    }
+}
+
+function writeCachedEditorValue(scope: string, path: string, value: string) {
+    if (typeof window === "undefined") return;
+
+    try {
+        window.sessionStorage.setItem(
+            editorCacheKey(scope, path),
+            JSON.stringify({
+                value,
+                updatedAt: Date.now(),
+            }),
+        );
+    } catch {
+        // Ignore storage quota/private-mode failures.
+    }
+}
+
+function looksLikePythonHelloStarter(value: string) {
+    return /^\s*print\((["'])Hello Python!\1\)\s*;?\s*$/.test(value);
 }
 
 export default function EditorPane(props: {
@@ -121,6 +196,8 @@ export default function EditorPane(props: {
     disabled?: boolean;
     onMount?: (ed: any) => void;
     modelKey?: string;
+    exerciseStateKey?: string;
+    workspace?: any;
     frame?: RunnerFrame;
     mobileEditMode?: MobileEditMode;
 }) {
@@ -133,6 +210,8 @@ export default function EditorPane(props: {
         disabled = false,
         onMount,
         modelKey,
+        exerciseStateKey,
+        workspace,
         frame = "card",
         mobileEditMode = "auto",
     } = props;
@@ -140,6 +219,21 @@ export default function EditorPane(props: {
     const reactId = useId();
     const instanceKeyRef = useRef(`editor-${reactId.replace(/[:]/g, "")}`);
     const editorRef = useRef<any>(null);
+    const editorDisposablesRef = useRef<Array<{ dispose: () => void }>>([]);
+    const mountedRef = useRef(false);
+
+    const disposeEditorListeners = useCallback(() => {
+        const disposables = editorDisposablesRef.current;
+        editorDisposablesRef.current = [];
+
+        for (const disposable of disposables) {
+            try {
+                disposable.dispose?.();
+            } catch {
+                // Ignore Monaco disposal races during card navigation.
+            }
+        }
+    }, []);
 
     const applyingExternalRef = useRef(false);
     const isEditorFocusedRef = useRef(false);
@@ -153,13 +247,64 @@ export default function EditorPane(props: {
 
     const normalizedLang = useMemo(() => normalizeEditorLanguage(lang), [lang]);
 
+    const effectiveModelKey = useMemo(
+        () => modelKey || exerciseStateKey || instanceKeyRef.current,
+        [modelKey, exerciseStateKey],
+    );
+
+    const effectiveExerciseStateKey = useMemo(
+        () => exerciseStateKey || modelKey || effectiveModelKey,
+        [exerciseStateKey, modelKey, effectiveModelKey],
+    );
+
+    const hasRealExerciseScope =
+        typeof exerciseStateKey === "string" &&
+        exerciseStateKey.trim() !== "" &&
+        !exerciseStateKey.startsWith("code-runner:");
+
+    const cacheScope = useMemo(
+        () =>
+            hasRealExerciseScope
+                ? `${exerciseStateKey}`
+                : "",
+        [hasRealExerciseScope, exerciseStateKey],
+    );
+
+    useEffect(() => {
+        mountedRef.current = true;
+
+        return () => {
+            mountedRef.current = false;
+            disposeEditorListeners();
+            editorRef.current = null;
+            pendingExternalValueRef.current = null;
+            isEditorFocusedRef.current = false;
+            applyingExternalRef.current = false;
+        };
+    }, [disposeEditorListeners]);
+
     const path = useMemo(() => {
-        return buildModelPath({
-            modelKey,
+        const p = buildModelPath({
+            modelKey: effectiveModelKey,
+            exerciseStateKey: effectiveExerciseStateKey,
             instanceKey: instanceKeyRef.current,
             lang: normalizedLang,
         });
-    }, [modelKey, normalizedLang]);
+
+        if (process.env.NODE_ENV === "development" && localStorage.getItem("zoe:debugReview") === "1") {
+            console.log("[EditorMount] editor input", {
+                exerciseStateKey: effectiveExerciseStateKey,
+                rawExerciseStateKey: exerciseStateKey,
+                modelKey: effectiveModelKey,
+                rawModelKey: modelKey,
+                lang,
+                code: code?.slice(0, 50),
+                path: p,
+            });
+        }
+
+        return p;
+    }, [effectiveModelKey, effectiveExerciseStateKey, exerciseStateKey, modelKey, normalizedLang]);
 
     useEffect(() => {
         if (typeof window === "undefined" || !window.matchMedia) return;
@@ -180,7 +325,7 @@ export default function EditorPane(props: {
 
     const refreshMobileEditNeed = useCallback(() => {
         const ed = editorRef.current;
-        if (!ed) {
+        if (!mountedRef.current || !ed || ed.isDisposed?.() === true) {
             setNeedsMobileEditToggle(false);
             return;
         }
@@ -203,13 +348,13 @@ export default function EditorPane(props: {
 
     const applyExternalValue = useCallback(
         (next: string) => {
+            if (!mountedRef.current) return;
+
             const ed = editorRef.current;
-            if (!ed) return;
+            const model = getLiveEditorModel(ed);
+            if (!ed || !model) return;
 
-            const model = ed.getModel?.();
-            if (!model) return;
-
-            const current = model.getValue?.() ?? "";
+            const current = safeEditorValue(ed, "");
             if (current === next) {
                 lastLocalValueRef.current = next;
                 pendingExternalValueRef.current = null;
@@ -222,6 +367,8 @@ export default function EditorPane(props: {
             const selection = ed.getSelection?.();
 
             try {
+                if (isDisposedModel(model)) return;
+
                 ed.pushUndoStop?.();
                 ed.executeEdits?.("external-sync", [
                     {
@@ -232,11 +379,21 @@ export default function EditorPane(props: {
                 ]);
                 ed.pushUndoStop?.();
             } catch {
-                model.setValue?.(next);
+                try {
+                    if (!isDisposedModel(model)) {
+                        model.setValue?.(next);
+                    }
+                } catch {
+                    // Monaco can dispose models during sketch/card navigation.
+                }
             }
 
-            if (viewState) ed.restoreViewState?.(viewState);
-            if (selection) ed.setSelection?.(selection);
+            try {
+                if (viewState && ed.isDisposed?.() !== true) ed.restoreViewState?.(viewState);
+                if (selection && ed.isDisposed?.() !== true) ed.setSelection?.(selection);
+            } catch {
+                // Ignore view-state restore races after navigation.
+            }
 
             applyingExternalRef.current = false;
             lastLocalValueRef.current = next;
@@ -289,25 +446,42 @@ export default function EditorPane(props: {
 
     useEffect(() => {
         const ed = editorRef.current;
-        if (!ed) return;
+        if (!mountedRef.current || !ed || ed.isDisposed?.() === true) return;
 
-        ed.updateOptions?.({
-            readOnly: effectiveReadOnly,
-            readOnlyMessage: { value: "" },
-            domReadOnly: true,
-        });
+        try {
+            ed.updateOptions?.({
+                readOnly: effectiveReadOnly,
+                readOnlyMessage: { value: "" },
+                domReadOnly: true,
+            });
+        } catch {
+            // Ignore Monaco disposal races during card navigation.
+        }
     }, [effectiveReadOnly]);
 
     useEffect(() => {
-        const next = String(code ?? "");
-        const ed = editorRef.current;
-        if (!ed) {
-            lastLocalValueRef.current = next;
-            return;
+        let next = String(code ?? "");
+        const cached = cacheScope ? readCachedEditorValue(cacheScope, path) : null;
+
+        /**
+         * Safety net:
+         * If parent state remounts with the starter while this editor path has
+         * a newer local edit, keep the local edit and push it back upstream.
+         */
+        if (
+            cached != null &&
+            cached !== next &&
+            (looksLikePythonHelloStarter(next) || next === "") &&
+            !looksLikePythonHelloStarter(cached) &&
+            cached !== ""
+        ) {
+            next = cached;
+            queueMicrotask(() => onChange(cached));
         }
 
-        const model = ed.getModel?.();
-        if (!model) {
+        const ed = editorRef.current;
+        const model = getLiveEditorModel(ed);
+        if (!mountedRef.current || !ed || !model) {
             lastLocalValueRef.current = next;
             return;
         }
@@ -315,7 +489,7 @@ export default function EditorPane(props: {
         const pathChanged = prevPathRef.current !== path;
         prevPathRef.current = path;
 
-        const current = model.getValue?.() ?? "";
+        const current = safeEditorValue(ed, "");
         if (current === next) {
             lastLocalValueRef.current = next;
             pendingExternalValueRef.current = null;
@@ -328,7 +502,7 @@ export default function EditorPane(props: {
         }
 
         applyExternalValue(next);
-    }, [code, path, applyExternalValue]);
+    }, [code, path, cacheScope, applyExternalValue, onChange]);
 
     const options = useMemo<editor.IStandaloneEditorConstructionOptions>(() => {
         return {
@@ -373,49 +547,95 @@ export default function EditorPane(props: {
                 style={{ touchAction: isNarrowScreen ? "pan-y" : "auto" }}
             >
                 <Monaco
+                    key={path}
                     height={height}
                     path={path}
                     language={normalizedLang}
-                    defaultValue={String(code ?? "")}
+                    defaultValue={(() => {
+                        if (!cacheScope) return String(code ?? "");
+                        const cached = readCachedEditorValue(cacheScope, path);
+                        if (cached === null) return String(code ?? "");
+                        // Don't restore an empty cache over non-empty incoming code
+                        if (cached === "" && code) return String(code);
+                        return cached;
+                    })()}
                     theme={theme}
                     saveViewState
                     onMount={(ed: any) => {
+                        disposeEditorListeners();
+
+                        if (!mountedRef.current || !ed || ed.isDisposed?.() === true) {
+                            return;
+                        }
+
                         editorRef.current = ed;
-                        lastLocalValueRef.current = ed.getValue?.() ?? String(code ?? "");
+                        lastLocalValueRef.current = safeEditorValue(ed, String(code ?? ""));
                         onMount?.(ed);
 
                         refreshMobileEditNeed();
 
-                        ed.onDidFocusEditorText?.(() => {
-                            isEditorFocusedRef.current = true;
-                        });
+                        const disposables: Array<{ dispose: () => void }> = [];
 
-                        ed.onDidBlurEditorText?.(() => {
-                            isEditorFocusedRef.current = false;
+                        const track = (disposable: any) => {
+                            if (disposable && typeof disposable.dispose === "function") {
+                                disposables.push(disposable);
+                            }
+                        };
 
-                            if (isNarrowScreen) setMobileEditing(false);
-                            flushPendingExternal();
-                        });
+                        track(
+                            ed.onDidFocusEditorText?.(() => {
+                                if (!mountedRef.current || ed.isDisposed?.() === true) return;
+                                isEditorFocusedRef.current = true;
+                            }),
+                        );
 
-                        ed.onDidBlurEditorWidget?.(() => {
-                            isEditorFocusedRef.current = false;
+                        track(
+                            ed.onDidBlurEditorText?.(() => {
+                                if (!mountedRef.current || ed.isDisposed?.() === true) return;
+                                isEditorFocusedRef.current = false;
 
-                            if (isNarrowScreen) setMobileEditing(false);
-                            flushPendingExternal();
-                        });
+                                if (isNarrowScreen) setMobileEditing(false);
+                                flushPendingExternal();
+                            }),
+                        );
 
-                        ed.onDidContentSizeChange?.(() => {
-                            refreshMobileEditNeed();
-                        });
+                        track(
+                            ed.onDidBlurEditorWidget?.(() => {
+                                if (!mountedRef.current || ed.isDisposed?.() === true) return;
+                                isEditorFocusedRef.current = false;
 
-                        ed.onDidLayoutChange?.(() => {
-                            refreshMobileEditNeed();
-                        });
+                                if (isNarrowScreen) setMobileEditing(false);
+                                flushPendingExternal();
+                            }),
+                        );
+
+                        track(
+                            ed.onDidContentSizeChange?.(() => {
+                                if (!mountedRef.current || ed.isDisposed?.() === true) return;
+                                refreshMobileEditNeed();
+                            }),
+                        );
+
+                        track(
+                            ed.onDidLayoutChange?.(() => {
+                                if (!mountedRef.current || ed.isDisposed?.() === true) return;
+                                refreshMobileEditNeed();
+                            }),
+                        );
+
+                        editorDisposablesRef.current = disposables;
                     }}
                     onChange={(v) => {
-                        if (applyingExternalRef.current) return;
+                        if (!mountedRef.current || applyingExternalRef.current) return;
+
+                        const ed = editorRef.current;
+                        if (ed?.isDisposed?.() === true) return;
+
                         const next = v ?? "";
                         lastLocalValueRef.current = next;
+                        if (cacheScope) {
+                            writeCachedEditorValue(cacheScope, path, next);
+                        }
                         onChange(next);
                     }}
                     options={options}

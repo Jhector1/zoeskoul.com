@@ -15,7 +15,6 @@ type Props = {
     viewCards: ReviewCard[];
     viewTid: string;
     activeCardIndex: number;
-    onActiveCardIndexChange: (index: number) => void;
     navModes: { cards: "scroll" | "slideshow"; quiz: "scroll" | "slideshow" };
     reduceMotion: boolean;
     tp: any;
@@ -25,6 +24,9 @@ type Props = {
     sketch: any;
     setProgress: React.Dispatch<any>;
     flushNow: (next: any) => void;
+    onRun?: () => void;
+    onReveal?: () => void;
+    onSubmit?: () => void;
     scrollToNextActionable: (fromIndex: number, nextProgress: any) => void;
     setCardEl: (id: string) => (el: HTMLDivElement | null) => void;
     viewIsComplete: boolean;
@@ -32,39 +34,47 @@ type Props = {
     continueLabel?: string;
     showSubjectFinish: boolean;
     subjectSlug: string;
+    moduleSlug: string;
+    sectionSlug?: string;
     subjectFinish: any;
     onOpenCertificate: () => void;
+    onActiveCardIndexChange?: (index: number) => void;
 };
 
 export default function ReviewTopicStage({
-                                             leftCollapsedEff,
-                                             onOpenTopics,
-                                             mainScrollRef,
-                                             padStyle,
-                                             viewTopic,
-                                             viewCards,
-                                             viewTid,
-                                             activeCardIndex,
-                                             onActiveCardIndexChange,
-                                             navModes,
-                                             reduceMotion,
-                                             tp,
-                                             progressHydrated,
-                                             versionStr,
-                                             prereqsForAllQuizzes,
-                                             sketch,
-                                             setProgress,
-                                             flushNow,
-                                             scrollToNextActionable,
-                                             setCardEl,
-                                             viewIsComplete,
-                                             onContinue,
-                                             continueLabel,
-                                             showSubjectFinish,
-                                             subjectSlug,
-                                             subjectFinish,
-                                             onOpenCertificate,
-                                         }: Props) {
+    leftCollapsedEff,
+    onOpenTopics,
+    mainScrollRef,
+    padStyle,
+    viewTopic,
+    viewCards,
+    viewTid,
+    activeCardIndex,
+    navModes,
+    reduceMotion,
+    tp,
+    progressHydrated,
+    versionStr,
+    prereqsForAllQuizzes,
+    sketch,
+    setProgress,
+    flushNow,
+    onRun,
+    onReveal,
+    onSubmit,
+    scrollToNextActionable,
+    setCardEl,
+    viewIsComplete,
+    onContinue,
+    continueLabel,
+    showSubjectFinish,
+    subjectSlug,
+    moduleSlug,
+    sectionSlug,
+    subjectFinish,
+    onOpenCertificate,
+    onActiveCardIndexChange,
+}: Props) {
     return (
         <main
             ref={mainScrollRef}
@@ -89,7 +99,6 @@ export default function ReviewTopicStage({
                         motionKey={`${viewTid}:${versionStr}`}
                         viewCards={viewCards}
                         activeCardIndex={activeCardIndex}
-                        onActiveCardIndexChange={onActiveCardIndexChange}
                         navModes={navModes}
                         reduceMotion={reduceMotion}
                         tp={tp}
@@ -100,8 +109,15 @@ export default function ReviewTopicStage({
                         sketch={sketch}
                         setProgress={setProgress}
                         flushNow={flushNow}
+                        onRun={onRun}
+                        onReveal={onReveal}
+                        onSubmit={onSubmit}
                         scrollToNextActionable={scrollToNextActionable}
                         setCardEl={setCardEl}
+                        subjectSlug={subjectSlug}
+                        moduleSlug={moduleSlug}
+                        sectionSlug={sectionSlug}
+                        onActiveCardIndexChange={onActiveCardIndexChange}
                     />
 
                     <ReviewTopicCompletion

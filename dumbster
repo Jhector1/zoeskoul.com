@@ -84,6 +84,13 @@ pnpm curr:compile authoring/sql/course.blueprint.json
 pnpm curr:publish authoring/sql/course.blueprint.json
 
 
+git status
+git reset --hard HEAD
+git clean -fdn
+git clean -fd
+git status
+
+
 
 
 

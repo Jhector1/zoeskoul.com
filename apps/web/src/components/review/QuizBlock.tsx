@@ -23,6 +23,10 @@ import QuizLocalCard from "./quiz/components/QuizLocalCard";
 import QuizFooter from "./quiz/components/QuizFooter";
 import { emitSfx } from "@/lib/sfx/bus";
 import { QuizBlockSkeleton } from "@/components/review/quiz/components/QuizBlockSkeleton";
+import { useReviewRuntimeStore } from "@/components/review/module/runtime/reviewRuntimeStore";
+import { reviewDebug, summarizePracticePatch } from "@/components/review/module/runtime/reviewDebug";
+import { exerciseDebug, summarizeExercisePatch } from "@/components/review/module/runtime/exerciseDebug";
+import { deriveEntryCode, isWorkspace } from "@/components/review/module/runtime/exerciseWorkspaceResolver";
 
 import { scrollIntoViewSmart } from "@/lib/ui/flowScroll";
 import { useTaggedT } from "@/i18n/tagged";
@@ -62,6 +66,109 @@ function serializePracticeItemForSave(item: any, exercise: any) {
   }
 
   return rest;
+}
+
+function getStablePracticeQuestionKey(q: ReviewQuestion) {
+  if (q.kind !== "practice") return q.id;
+
+  const anyQ = q as any;
+  return (
+      anyQ.fetch?.exerciseKey ??
+      anyQ.fetch?.stepId ??
+      anyQ.exerciseKey ??
+      anyQ.stepId ??
+      anyQ.sourceStepId ??
+      anyQ.key ??
+      q.id
+  );
+}
+
+
+function getRuntimePracticePatchForQuestion(q: ReviewQuestion) {
+  if (q.kind !== "practice") return null;
+
+  const stablePracticeKey = getStablePracticeQuestionKey(q);
+  const runtime = useReviewRuntimeStore.getState();
+  const exercises = runtime.exercises ?? {};
+
+  /**
+   * Match loosely because the exercise key is namespaced:
+   * subject:module:section:topic:card:exerciseId
+   *
+   * The final segment should match q5/create-method/etc.
+   */
+  const estate =
+      exercises[stablePracticeKey] ??
+      exercises[q.id] ??
+      Object.values(exercises).find((item: any) => {
+        if (!item) return false;
+
+        return (
+            item.exerciseId === stablePracticeKey ||
+            item.exerciseId === q.id ||
+            item.exerciseKey === stablePracticeKey ||
+            item.exerciseKey === q.id ||
+            String(item.exerciseKey ?? "").endsWith(`:${stablePracticeKey}`) ||
+            String(item.exerciseKey ?? "").endsWith(`:${q.id}`)
+        );
+      });
+
+  if (!estate) return null;
+
+  const workspace =
+      isWorkspace((estate as any).workspace)
+          ? (estate as any).workspace
+          : isWorkspace((estate as any).codeWorkspace)
+              ? (estate as any).codeWorkspace
+              : isWorkspace((estate as any).ideWorkspace)
+                  ? (estate as any).ideWorkspace
+                  : null;
+
+  const workspaceCode = deriveEntryCode(workspace);
+
+  const code =
+      workspaceCode ||
+      (typeof (estate as any).code === "string"
+          ? (estate as any).code
+          : typeof (estate as any).source === "string"
+              ? (estate as any).source
+              : "");
+
+  const stdin =
+      typeof (estate as any).codeStdin === "string"
+          ? (estate as any).codeStdin
+          : typeof (estate as any).stdin === "string"
+              ? (estate as any).stdin
+              : typeof workspace?.stdin === "string"
+                  ? workspace.stdin
+                  : "";
+
+  const lang =
+      typeof (estate as any).codeLang === "string"
+          ? (estate as any).codeLang
+          : typeof (estate as any).lang === "string"
+              ? (estate as any).lang
+              : typeof (estate as any).language === "string"
+                  ? (estate as any).language
+                  : typeof workspace?.language === "string"
+                      ? workspace.language
+                      : "python";
+
+  return {
+    code,
+    codeLang: lang,
+    lang,
+    stdin,
+    codeStdin: stdin,
+    ...(workspace
+        ? {
+          workspace,
+          codeWorkspace: workspace,
+          ideWorkspace: workspace,
+        }
+        : {}),
+    updatedAt: (estate as any).updatedAt ?? Date.now(),
+  };
 }
 export default function QuizBlock({
                                     prereqsMet = true,
@@ -133,7 +240,9 @@ export default function QuizBlock({
   const [confirmResetQuiz, setConfirmResetQuiz] = useState(false);
   const [awaitNextQid, setAwaitNextQid] = useState<string | null>(null);
   const [pendingScrollQid, setPendingScrollQid] = useState<string | null>(null);
-  const [pendingScrollMode, setPendingScrollMode] = useState<"explain" | "end">("end");
+  const [pendingScrollMode, setPendingScrollMode] = useState<"explain" | "end">(
+      "end",
+  );
 
   const onPassRef = useRef(onPass);
   const autoKeyRef = useRef<string>("");
@@ -175,6 +284,13 @@ export default function QuizBlock({
     local.hydrate(initState);
   }, [resetKey]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  function getPracticeStateForQuestion(q: ReviewQuestion) {
+    if (q.kind !== "practice") return null;
+
+    const stablePracticeKey = getStablePracticeQuestionKey(q);
+    return practiceBank.practice[stablePracticeKey] ?? practiceBank.practice[q.id] ?? null;
+  }
+
   function getQuestionOk(q: ReviewQuestion): boolean | null {
     if (q.kind === "mcq") {
       if (!local.checkedById[q.id]) return null;
@@ -188,7 +304,7 @@ export default function QuizBlock({
       return Math.abs(v - q.answer) <= tol;
     }
     if (q.kind === "practice") {
-      const ps = practiceBank.practice[q.id];
+      const ps = getPracticeStateForQuestion(q);
       return ps ? ps.ok : null;
     }
     return null;
@@ -202,6 +318,18 @@ export default function QuizBlock({
 
   function isUnlocked(index: number): boolean {
     if (!prereqsMet) return false;
+
+    const current = questions[index];
+
+    /**
+     * Practice/code exercises should behave like sketch cards:
+     * each visible exercise can be opened, edited, checked, and navigated
+     * independently.
+     *
+     * Sequential gating is still kept for non-practice quiz questions.
+     */
+    if (current?.kind === "practice") return true;
+
     if (!sequential) return true;
     if (index === 0) return true;
 
@@ -214,7 +342,7 @@ export default function QuizBlock({
       if (strictSequential) return false;
 
       if (prev.kind === "practice") {
-        const ps = practiceBank.practice[prev.id];
+        const ps = getPracticeStateForQuestion(prev);
         const maxA = ps?.maxAttempts;
         const attemptsCapped =
             !!ps &&
@@ -260,7 +388,14 @@ export default function QuizBlock({
       passed,
       excusedCount,
     };
-  }, [questions, local.checkedById, local.answers, practiceBank.practice, passScore, excusedById]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [
+    questions,
+    local.checkedById,
+    local.answers,
+    practiceBank.practice,
+    passScore,
+    excusedById,
+  ]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (!prereqsMet || locked || isCompleted) return;
@@ -283,16 +418,120 @@ export default function QuizBlock({
     for (const q of questions) {
       if (q.kind !== "practice") continue;
 
-      const ps = practiceBank.practice[q.id];
+      const stablePracticeKey = getStablePracticeQuestionKey(q);
+      const ps = practiceBank.practice[stablePracticeKey] ?? practiceBank.practice[q.id];
+
       if (ps) {
-        practiceMeta[q.id] = {
-          attempts: ps.attempts ?? practiceMeta[q.id]?.attempts ?? 0,
-          ok: ps.ok ?? practiceMeta[q.id]?.ok ?? null,
+        const nextMeta = {
+          attempts:
+              ps.attempts ??
+              practiceMeta[stablePracticeKey]?.attempts ??
+              practiceMeta[q.id]?.attempts ??
+              0,
+          ok:
+              ps.ok ??
+              practiceMeta[stablePracticeKey]?.ok ??
+              practiceMeta[q.id]?.ok ??
+              null,
         };
+
+        practiceMeta[stablePracticeKey] = nextMeta;
+
+        // Backward compatibility for older saved states that still read by q.id.
+        if (stablePracticeKey !== q.id) {
+          practiceMeta[q.id] = nextMeta;
+        }
       }
 
       if (ps?.item) {
-        practiceItemPatch[q.id] = serializePracticeItemForSave(ps.item, ps.exercise);
+        const serialized = serializePracticeItemForSave(ps.item, ps.exercise);
+        const runtimePatch = getRuntimePracticePatchForQuestion(q);
+        const mergedSerialized = runtimePatch
+            ? {
+              ...serialized,
+              ...runtimePatch,
+              workspace:
+                  runtimePatch.workspace ??
+                  serialized.workspace ??
+                  serialized.codeWorkspace ??
+                  serialized.ideWorkspace,
+              codeWorkspace:
+                  runtimePatch.codeWorkspace ??
+                  runtimePatch.workspace ??
+                  serialized.codeWorkspace ??
+                  serialized.workspace,
+              ideWorkspace:
+                  runtimePatch.ideWorkspace ??
+                  runtimePatch.workspace ??
+                  serialized.ideWorkspace ??
+                  serialized.workspace,
+              code:
+                  typeof runtimePatch.code === "string"
+                      ? runtimePatch.code
+                      : serialized.code,
+              codeStdin:
+                  typeof runtimePatch.codeStdin === "string"
+                      ? runtimePatch.codeStdin
+                      : serialized.codeStdin,
+              stdin:
+                  typeof runtimePatch.stdin === "string"
+                      ? runtimePatch.stdin
+                      : serialized.stdin,
+              lang:
+                  runtimePatch.lang ??
+                  runtimePatch.codeLang ??
+                  serialized.lang,
+              codeLang:
+                  runtimePatch.codeLang ??
+                  runtimePatch.lang ??
+                  serialized.codeLang,
+            }
+            : serialized;
+
+        exerciseDebug("I_QuizBlock_emit_practiceItemPatch", {
+          qid: q.id,
+          stablePracticeKey,
+          serialized: summarizeExercisePatch(serialized),
+          runtimePatch: summarizeExercisePatch(runtimePatch),
+          merged: summarizeExercisePatch(mergedSerialized),
+        });
+
+        reviewDebug("8_QUIZBLOCK_EMIT QuizBlock.nextState.practiceItemPatch", {
+          qid: q.id,
+          stablePracticeKey,
+          serializedSummary: summarizePracticePatch(serialized),
+          runtimePatchSummary: summarizePracticePatch(runtimePatch),
+          mergedSummary: summarizePracticePatch(mergedSerialized),
+        });
+
+        practiceItemPatch[stablePracticeKey] = mergedSerialized;
+
+        // Backward compatibility for older saved states that still read by q.id.
+        if (stablePracticeKey !== q.id) {
+          practiceItemPatch[q.id] = mergedSerialized;
+        }
+      } else {
+        /**
+         * Important:
+         * During fast card/sketch navigation, React may unmount before
+         * practiceBank.practice has the newest ps.item, but Zustand already
+         * has the editor workspace. Persist it anyway.
+         */
+        const runtimePatch = getRuntimePracticePatchForQuestion(q);
+
+        if (runtimePatch) {
+          practiceItemPatch[stablePracticeKey] = {
+            ...(practiceItemPatch[stablePracticeKey] ?? {}),
+            ...runtimePatch,
+          };
+
+          if (stablePracticeKey !== q.id) {
+            practiceItemPatch[q.id] = {
+              ...(practiceItemPatch[q.id] ?? {}),
+              ...runtimePatch,
+            };
+          }
+        }
       }
     }
 
@@ -303,7 +542,14 @@ export default function QuizBlock({
       practiceMeta,
       excusedById,
     };
-  }, [questions, local.answers, local.checkedById, practiceBank.practice, initState, excusedById]);
+  }, [
+    questions,
+    local.answers,
+    local.checkedById,
+    practiceBank.practice,
+    initState,
+    excusedById,
+  ]);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -401,7 +647,9 @@ export default function QuizBlock({
         if (!root) return;
 
         const target =
-            root.querySelector<HTMLElement>('[data-flow-focus]:not([disabled])') ??
+            root.querySelector<HTMLElement>(
+                "[data-flow-focus]:not([disabled])",
+            ) ??
             root.querySelector<HTMLElement>(
                 "button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled])",
             );
@@ -516,7 +764,12 @@ export default function QuizBlock({
   function scrollToFooter() {
     const el = footerElRef.current;
     if (!el) return;
-    scrollIntoViewSmart(el, { reduceMotion, block: "start", force: true, offsetPx: 12 });
+    scrollIntoViewSmart(el, {
+      reduceMotion,
+      block: "start",
+      force: true,
+      offsetPx: 12,
+    });
   }
 
   function findNextUnlockedIndex(fromIdx: number) {
@@ -560,7 +813,7 @@ export default function QuizBlock({
     if (isExcused(q.id)) return true;
 
     if (q.kind === "practice") {
-      const ps = practiceBank.practice[q.id];
+      const ps = getPracticeStateForQuestion(q);
       if (ps?.ok === true) return true;
 
       const maxA = ps?.maxAttempts;
@@ -622,12 +875,21 @@ export default function QuizBlock({
     autoAdvance,
   ]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const emitState = useCallback((s: SavedQuizState) => onStateChange?.(s), [onStateChange]);
+  const emitState = useCallback(
+      (s: SavedQuizState) => onStateChange?.(s),
+      [onStateChange],
+  );
   const ui = useTaggedT("reviewQuizUi");
   const emitter = useDebouncedEmit(nextState, emitState, {
     delayMs: 400,
     enabled: Boolean(onStateChange && questions.length),
   });
+
+  const emitterFlushRef = useRef<() => void>(() => {});
+
+  useEffect(() => {
+    emitterFlushRef.current = () => emitter.flush();
+  }, [emitter.flush]);
 
   useLayoutEffect(() => {
     emitter.prime({
@@ -642,7 +904,8 @@ export default function QuizBlock({
   useEffect(() => {
     if (!onStateChange || !questions.length) return;
 
-    const flush = () => emitter.flush();
+    const flush = () => emitterFlushRef.current();
+
     const onVisibilityChange = () => {
       if (document.visibilityState === "hidden") flush();
     };
@@ -651,11 +914,10 @@ export default function QuizBlock({
     document.addEventListener("visibilitychange", onVisibilityChange);
 
     return () => {
-      flush();
       window.removeEventListener("pagehide", flush);
       document.removeEventListener("visibilitychange", onVisibilityChange);
     };
-  }, [emitter.flush, onStateChange, questions.length]);
+  }, [onStateChange, questions.length]);
 
   async function resetThisQuiz() {
     const key = (serverQuizKey || stableKey).trim();
@@ -681,7 +943,11 @@ export default function QuizBlock({
   }
 
   if (!questions.length) {
-    return <div className="mt-2 ui-quiz-status-soft">{ui.t("noQuestions", {}, "No questions.")}</div>;
+    return (
+        <div className="mt-2 ui-quiz-status-soft">
+          {ui.t("noQuestions", {}, "No questions.")}
+        </div>
+    );
   }
 
   const nextSlideIndex =
@@ -689,6 +955,21 @@ export default function QuizBlock({
 
   function renderQuestionItem(q: ReviewQuestion, idx: number) {
     const unlocked = isUnlocked(idx);
+    const stablePracticeKey = getStablePracticeQuestionKey(q);
+
+    /**
+     * Important:
+     * This is the exercise-level navigation inside the Exercises card.
+     * Do not rely on the main review card navigation for exercise binding.
+     *
+     * Only the currently active exercise should auto-bind the tools editor.
+     * Otherwise exercise1, exercise2, exercise3 can all register and the
+     * right-side editor can keep/carry the wrong exercise workspace.
+     */
+    const canAutoBindToolsForExercise =
+        toolsActive &&
+        unlocked &&
+        (navigationMode !== "slideshow" || idx === activeIndex);
 
     const showNext =
         awaitNextQid === q.id &&
@@ -701,33 +982,40 @@ export default function QuizBlock({
     const isLast = nextIdx < 0;
 
     return (
-        <div className="ui-page-surface" key={q.id} ref={setQuestionEl(q.id)} data-qid={q.id}>
+        <div
+            className="ui-page-surface"
+            key={q.id}
+            ref={setQuestionEl(q.id)}
+            data-qid={q.id}
+        >
           {q.kind === "practice" ? (
               <QuizPracticeCard
                   q={q}
                   ownerCardId={quizCardId ?? quizId}
-                  ps={practiceBank.practice[q.id]}
-                  toolScopedId={`${stableKey}:${q.id}`}
-                  toolsActive={toolsActive}
+                  ps={practiceBank.practice[stablePracticeKey] ?? practiceBank.practice[q.id]}
+                  toolScopedId={`${stableKey}:${stablePracticeKey}`}
+                  toolsActive={canAutoBindToolsForExercise}
                   unlocked={unlocked}
                   isCompleted={isCompleted}
                   locked={locked}
                   unlimitedAttempts={unlimitedAttempts}
                   strictSequential={strictSequential}
                   seqOrder={orderBase + idx}
-                  padRef={practiceBank.getPadRef(q.id) as any}
+                  padRef={practiceBank.getPadRef(stablePracticeKey) as any}
                   excused={isExcused(q.id)}
-                  onRetryExercise={() => practiceBank.retryPracticeQuestion(q.id)}
+                  onRetryExercise={() => practiceBank.retryPracticeQuestion(stablePracticeKey)}
                   onExcused={() => {
                     if (!unlocked) return;
-                    const ps0 = practiceBank.practice[q.id];
+                    const ps0 = practiceBank.practice[stablePracticeKey] ?? practiceBank.practice[q.id];
                     if (!ps0?.error) return;
 
                     setExcusedById((prev) => ({ ...prev, [q.id]: true }));
                     lastActionQidRef.current = q.id;
                     scheduleScroll(q.id, "end");
                   }}
-                  onUpdateItem={(patch) => practiceBank.updatePracticeItem(q.id, patch)}
+                  onUpdateItem={(patch) =>
+                      practiceBank.updatePracticeItem(stablePracticeKey, patch)
+                  }
                   onSubmit={() => {
                     lastActionQidRef.current = q.id;
                     scheduleScroll(q.id, "end");
@@ -799,7 +1087,11 @@ export default function QuizBlock({
             reduceMotion={reduceMotion}
             getKey={(q) => q.id}
             getProgressLabel={(index, total) =>
-                ui.t("progress.question", { current: index + 1, total }, `Question ${index + 1} of ${total}`)
+                ui.t(
+                    "progress.question",
+                    { current: index + 1, total },
+                    `Question ${index + 1} of ${total}`,
+                )
             }
             canGoPrev={activeIndex > 0}
             canGoNext={nextSlideIndex >= 0}
@@ -854,8 +1146,20 @@ export default function QuizBlock({
               <div className="grid gap-2">
                 <div>{ui.t("resetDialog.intro", {}, "This will:")}</div>
                 <ul className="list-disc space-y-1 pl-5">
-                  <li>{ui.t("resetDialog.b1", {}, "Clear your selected answers and checked status.")}</li>
-                  <li>{ui.t("resetDialog.b2", {}, "Clear practice attempts and local state for this quiz.")}</li>
+                  <li>
+                    {ui.t(
+                        "resetDialog.b1",
+                        {},
+                        "Clear your selected answers and checked status.",
+                    )}
+                  </li>
+                  <li>
+                    {ui.t(
+                        "resetDialog.b2",
+                        {},
+                        "Clear practice attempts and local state for this quiz.",
+                    )}
+                  </li>
                   <li>
                     {ui.t(
                         "resetDialog.b3",

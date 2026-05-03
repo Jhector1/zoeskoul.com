@@ -2,6 +2,7 @@ import type { RunResult } from "@/lib/code/types";
 import type { WorkspaceLanguage, SqlDialect } from "@/lib/practice/types";
 import { CodeRunnerRuntime } from "@/components/code/runner/runtime";
 import { InteractiveLanguage } from "@zoeskoul/code-contracts";
+import type { WorkspaceStateV2 } from "@/components/ide/types";
 
 export type TerminalDock = "bottom" | "right";
 
@@ -82,6 +83,8 @@ export type CommonProps = {
     hintMarkdown?: string;
     editorModelKey?: string;
     toolScopeKey?: string;
+    exerciseStateKey?: string;
+    workspace?: WorkspaceStateV2 | null;
 
     preserveCodeOnLanguageSwitch?: boolean;
 

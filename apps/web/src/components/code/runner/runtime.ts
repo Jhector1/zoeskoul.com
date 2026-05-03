@@ -7,6 +7,7 @@ import type {
 import type { RunResult } from "@/lib/code/types";
 import type { BatchRunResult } from "@/lib/code/types/batch";
 import type { SqlDialect } from "@/lib/practice/types";
+import type { WorkspaceStateV2 } from "@/components/ide/types";
 import type { OnRun, RunnerState, TermLine } from "./types";
 
 export type { WorkspaceSyncEntry };
@@ -44,6 +45,8 @@ export type SharedRunnerArgs = {
     sqlSeedSql?: string;
     sqlSetupSql?: string;
     sqlDatasetId?: string;
+    workspace?: WorkspaceStateV2 | null;
+    exerciseStateKey?: string;
     disabled: boolean;
     allowRun: boolean;
     resetTerminalOnRun: boolean;
@@ -59,6 +62,7 @@ export type WorkspaceTerminalConfig = {
     lazy?: boolean;
     title?: string;
     historyScopeKey?: string;
+    exerciseStateKey?: string;
 
     getWorkspaceFiles?: () => WorkspaceSyncEntry[];
     onTerminalSnapshotFiles?: (

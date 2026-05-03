@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import type { RunResult } from "@/lib/code/types";
+import type { WorkspaceStateV2 } from "@/components/ide/types";
 import type { TermLine, OnRun, RunnerState } from "../types";
 import { cleanTermText, toLines } from "../utils/text";
 import { inferInputPlan } from "../utils/input";
@@ -172,6 +173,8 @@ export function useTerminalRunner(args: {
     sqlSeedSql?: string;
     sqlSetupSql?: string;
     sqlDatasetId?: string;
+    workspace?: WorkspaceStateV2 | null;
+    exerciseStateKey?: string;
     disabled: boolean;
     allowRun: boolean;
     resetTerminalOnRun: boolean;

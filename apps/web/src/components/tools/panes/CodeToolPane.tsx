@@ -15,6 +15,8 @@ import {
     type LearningIdeConfig,
     resolveFullIDEConfigFromLearningIde,
 } from "@/lib/ide/learningIdeConfig";
+import { useReviewRuntimeStore } from "@/components/review/module/runtime/reviewRuntimeStore";
+import { deriveEntryCode } from "@/components/review/module/runtime/exerciseWorkspaceResolver";
 
 type SqlTableSnapshot = {
     name: string;
@@ -59,7 +61,7 @@ function buildToolWorkspace(args: {
             return node;
         }
 
-        if (node.id === args.base.activeFileId || node.id === args.base.entryFileId) {
+        if (node.id === (args.base.entryFileId || args.base.activeFileId)) {
             return { ...node, content: args.code };
         }
 
@@ -97,6 +99,72 @@ function extractWorkspaceSnapshot(workspace: WorkspaceStateV2 | null) {
     };
 }
 
+function isExerciseEditorScope(value: string | null | undefined) {
+    if (!value) return false;
+    if (value === "general") return false;
+    if (value.startsWith("card:")) return false;
+    if (value.endsWith(":general")) return false;
+    if (value.includes(":card:general")) return false;
+    if (value.startsWith("code-runner:")) return false;
+    return value.split(":").length >= 5;
+}
+
+function isCardEditorScope(value: string | null | undefined) {
+    if (!value) return false;
+    if (value.startsWith("card:")) return true;
+    if (value.endsWith(":general")) return true;
+    return false;
+}
+
+function cardIdFromEditorScope(value: string) {
+    if (value.startsWith("card:")) return value.replace(/^card:/, "");
+
+    const parts = value.split(":").filter(Boolean);
+    if (parts.length >= 2 && parts[parts.length - 1] === "general") {
+        return parts[parts.length - 2];
+    }
+
+    return value;
+}
+
+function readCardToolWorkspaceBackupForEditorScope(scopeKey: string | null | undefined) {
+    if (typeof window === "undefined") return null;
+    if (!scopeKey || !isCardEditorScope(scopeKey)) return null;
+
+    const cardId = cardIdFromEditorScope(scopeKey);
+    const prefix = "zoe:review-card-tool-workspace:";
+
+    function parse(raw: string | null) {
+        if (!raw) return null;
+
+        try {
+            const parsed = JSON.parse(raw);
+            if (!parsed?.workspace || parsed.workspace.version !== 2) return null;
+            return parsed.workspace as WorkspaceStateV2;
+        } catch {
+            return null;
+        }
+    }
+
+    // Exact scan by card id. This covers:
+    // zoe:review-card-tool-workspace:<topic>:card:<cardId>
+    // zoe:review-card-tool-workspace:<topic>:subject:module:topic:<cardId>:general
+    for (let i = 0; i < window.localStorage.length; i += 1) {
+        const key = window.localStorage.key(i);
+        if (!key || !key.startsWith(prefix)) continue;
+
+        const storedToolKey = key.slice(prefix.length).split(":").slice(1).join(":");
+        const storedCardId = cardIdFromEditorScope(storedToolKey);
+
+        if (storedCardId !== cardId) continue;
+
+        const workspace = parse(window.localStorage.getItem(key));
+        if (workspace) return workspace;
+    }
+
+    return null;
+}
+
 function patchToolWorkspaceSource(args: {
     workspace: WorkspaceStateV2;
     language: RunnerLanguage;
@@ -105,36 +173,19 @@ function patchToolWorkspaceSource(args: {
     sqlSchemaSql?: string;
     sqlSeedSql?: string;
 }): WorkspaceStateV2 {
-    const nextNodes = args.workspace.nodes.map((node) => {
-        if (node.kind !== "file") return node;
-
-        if (args.language === "sql") {
-            if (node.name === "schema.sql") {
-                return { ...node, content: args.sqlSchemaSql ?? "" };
-            }
-
-            if (node.name === "seed.sql") {
-                return { ...node, content: args.sqlSeedSql ?? "" };
-            }
-
-            if (node.id === args.workspace.activeFileId || node.id === args.workspace.entryFileId) {
-                return { ...node, content: args.code };
-            }
-
-            return node;
-        }
-
-        if (node.id === args.workspace.activeFileId || node.id === args.workspace.entryFileId) {
-            return { ...node, content: args.code };
-        }
-
-        return node;
-    });
-
+    /**
+     * WorkspaceStateV2 is canonical.
+     *
+     * Do NOT patch file node contents from toolCode here.
+     * In multi-file mode, toolCode is only a compatibility mirror of the active
+     * file. Writing it back into the workspace can overwrite both the active
+     * file and entry/main file at the same time.
+     *
+     * FullIDE already sends the full updated workspace through onWorkspaceChange.
+     */
     return {
         ...args.workspace,
         language: args.language,
-        nodes: nextNodes,
         stdin: args.stdin,
     };
 }
@@ -184,7 +235,59 @@ export default function CodeToolPane(props: {
     const syncCodeInputSnapshot = tools?.syncCodeInputSnapshot;
 
     const { ref, size } = useElementSize<HTMLDivElement>();
+
+    const editorExerciseStateKey = useMemo(() => {
+        const rawToolScope =
+            typeof toolScopeKey === "string" && toolScopeKey.trim()
+                ? toolScopeKey
+                : null;
+
+        const scopedToolKey =
+            rawToolScope && isExerciseEditorScope(rawToolScope)
+                ? rawToolScope
+                : null;
+
+        const scopedBoundId =
+            boundId && isExerciseEditorScope(boundId)
+                ? boundId
+                : null;
+
+        /**
+         * Valid modes:
+         *
+         * 1. Exercise mode:
+         *    Prefer toolScopeKey because the right rail passes the canonical
+         *    full exercise key there.
+         *
+         * 2. Card/sketch mode:
+         *    Use the current card toolScopeKey.
+         *
+         * Do not prefer boundId first; in this app it can be the legacy
+         * review-quiz/input id, which makes CodeRunner bind to the wrong model.
+         */
+        if (scopedToolKey) return scopedToolKey;
+        if (scopedBoundId) return scopedBoundId;
+        if (rawToolScope) return rawToolScope;
+
+        return "general";
+    }, [toolScopeKey, boundId]);
+
+    const exerciseKey = isExerciseEditorScope(editorExerciseStateKey)
+        ? editorExerciseStateKey
+        : null;
+
+    const storeExercise = useReviewRuntimeStore((s) =>
+        exerciseKey ? s.exercises[exerciseKey] : null,
+    );
+    const patchExercise = useReviewRuntimeStore((s) => s.patchExercise);
+
     const isSql = toolLang === "sql";
+
+    const localCardToolWorkspace = useMemo(
+        () => readCardToolWorkspaceBackupForEditorScope(editorExerciseStateKey),
+        [editorExerciseStateKey],
+    );
+
     const ideShell = useMemo(
         () => resolveFullIDEConfigFromLearningIde({ ideConfig }),
         [ideConfig],
@@ -195,7 +298,7 @@ export default function CodeToolPane(props: {
     const workspaceContextKey = useMemo(
         () =>
             JSON.stringify({
-                scope: toolScopeKey ?? "general",
+                scope: editorExerciseStateKey ?? "general",
                 boundId: boundId ?? "unbound",
                 language: toolLang,
                 sqlSchemaSql: sqlSchemaSql ?? sqlSetupSql ?? "",
@@ -209,6 +312,7 @@ export default function CodeToolPane(props: {
             sqlSetupSql,
             toolLang,
             toolScopeKey,
+            editorExerciseStateKey,
             usesWorkspaceShell,
         ],
     );
@@ -246,8 +350,23 @@ export default function CodeToolPane(props: {
         ],
     );
     const resolvedIncomingWorkspace = useMemo(() => {
+        if (storeExercise?.workspace) {
+            return storeExercise.workspace;
+        }
+
         if (!usesWorkspaceShell) {
             return externalWorkspace;
+        }
+
+        if (!isExerciseEditorScope(editorExerciseStateKey) && localCardToolWorkspace) {
+            return patchToolWorkspaceSource({
+                workspace: localCardToolWorkspace,
+                language: toolLang,
+                code: toolCode,
+                stdin: toolStdin,
+                sqlSchemaSql: sqlSchemaSql ?? sqlSetupSql ?? "",
+                sqlSeedSql: sqlSeedSql ?? "",
+            });
         }
 
         if (!toolHydrated) {
@@ -267,7 +386,10 @@ export default function CodeToolPane(props: {
 
         return externalWorkspace;
     }, [
+        storeExercise?.workspace,
+        editorExerciseStateKey,
         externalWorkspace,
+        localCardToolWorkspace,
         sqlSchemaSql,
         sqlSeedSql,
         sqlSetupSql,
@@ -278,12 +400,20 @@ export default function CodeToolPane(props: {
         toolWorkspace,
         usesWorkspaceShell,
     ]);
-    const latestWorkspaceRef = useRef<WorkspaceStateV2 | null>(toolWorkspace ?? externalWorkspace);
+    const latestWorkspaceRef = useRef<WorkspaceStateV2 | null>(resolvedIncomingWorkspace);
     const [workspaceBridge, setWorkspaceBridge] = useState<WorkspaceStateV2>(
-        toolWorkspace ?? externalWorkspace,
+        resolvedIncomingWorkspace,
     );
-    const workspaceBridgeKeyRef = useRef(workspaceKeyOf(toolWorkspace ?? externalWorkspace));
-    const lastContextKeyRef = useRef<string>("");
+    const workspaceBridgeKeyRef = useRef(workspaceKeyOf(resolvedIncomingWorkspace));
+    const [prevContextKey, setPrevContextKey] = useState(workspaceContextKey);
+
+    // Derived-state sync: update workspaceBridge synchronously before FullIDE remounts so
+    // it always receives the correct initialWorkspace when workspaceContextKey changes.
+    if (prevContextKey !== workspaceContextKey) {
+        setPrevContextKey(workspaceContextKey);
+        setWorkspaceBridge(resolvedIncomingWorkspace);
+        workspaceBridgeKeyRef.current = workspaceKeyOf(resolvedIncomingWorkspace);
+    }
 
     useEffect(() => {
         latestWorkspaceRef.current = workspaceBridge;
@@ -304,23 +434,21 @@ export default function CodeToolPane(props: {
     }, []);
 
     useEffect(() => {
-        if (lastContextKeyRef.current !== workspaceContextKey) {
-            lastContextKeyRef.current = workspaceContextKey;
-            setWorkspaceBridgeIfChanged(resolvedIncomingWorkspace);
-            lastEmittedRef.current = null;
-            return;
-        }
-
         setWorkspaceBridgeIfChanged(resolvedIncomingWorkspace);
-    }, [
-        resolvedIncomingWorkspace,
-        workspaceContextKey,
-        setWorkspaceBridgeIfChanged,
-    ]);
+    }, [resolvedIncomingWorkspace, setWorkspaceBridgeIfChanged]);
 
     useEffect(() => {
         setIdeReady(false);
-    }, [workspaceContextKey]);
+
+        // New exercise/tool scope: do not let previous exercise emission guards
+        // suppress or reuse the new exercise workspace.
+        lastEmittedRef.current = null;
+        lastIncomingRef.current = null;
+        lastUpstreamWorkspaceKeyRef.current = "";
+
+        // Force the currently active exercise workspace into FullIDE.
+        setWorkspaceBridgeIfChanged(resolvedIncomingWorkspace);
+    }, [workspaceContextKey, resolvedIncomingWorkspace, setWorkspaceBridgeIfChanged]);
 
     useEffect(() => {
         setRunFeedback(null);
@@ -369,8 +497,7 @@ export default function CodeToolPane(props: {
                 codeStdin: next.stdin,
                 submitted: false,
                 result: null,
-            });
-        }
+            });        }
 
         if (prevEmitted && prevEmitted.code === next.code && prevEmitted.stdin === next.stdin) {
             return;
@@ -408,6 +535,29 @@ export default function CodeToolPane(props: {
     const handleWorkspaceChange = useCallback((workspace: WorkspaceStateV2 | null) => {
         if (workspace) {
             setWorkspaceBridgeIfChanged(workspace);
+
+            if (exerciseKey) {
+                const entryCode = deriveEntryCode(workspace) ?? "";
+                patchExercise(exerciseKey, {
+                    workspace,
+                    code: entryCode,
+                    stdin: workspace.stdin ?? "",
+                });
+            }
+
+            if (boundId) {
+                const snap = extractWorkspaceSnapshot(workspace);
+
+                syncCodeInputSnapshot?.(boundId, {
+                    workspace,
+                    codeWorkspace: workspace,
+                    ideWorkspace: workspace,
+                    code: snap.code,
+                    codeStdin: snap.stdin,
+                    submitted: false,
+                    result: null,
+                });
+            }
         } else {
             latestWorkspaceRef.current = null;
         }
@@ -425,7 +575,15 @@ export default function CodeToolPane(props: {
             persistTimerRef.current = null;
             emitWorkspaceUpstreamRef.current(latestWorkspaceRef.current);
         }, 220);
-    }, [emitWorkspaceUpstream, setWorkspaceBridgeIfChanged, usesWorkspaceShell]);
+    }, [
+        exerciseKey,
+        patchExercise,
+        boundId,
+        emitWorkspaceUpstream,
+        setWorkspaceBridgeIfChanged,
+        syncCodeInputSnapshot,
+        usesWorkspaceShell,
+    ]);
 
     useEffect(() => {
         return () => {
@@ -460,11 +618,23 @@ export default function CodeToolPane(props: {
 
     const showLoadingMask = usesWorkspaceShell && (!toolHydrated || !ideReady);
 
+    /**
+     * FullIDE treats initialWorkspace like an initial value.
+     *
+     * During exercise navigation, toolHydrated is briefly false and the bridge can
+     * contain a blank/default workspace. If FullIDE mounts during that moment, it
+     * can stay blank even after the real exercise workspace arrives.
+     *
+     * Include hydration state in the key so FullIDE remounts once when the real
+     * exercise workspace is ready.
+     */
+    const fullIdeKey = `${workspaceContextKey}:${toolHydrated ? "hydrated" : "loading"}`;
+
     return (
         <div ref={ref} className="flex h-full min-h-0 w-full flex-col overflow-hidden">
             <div className="relative h-full min-h-0 flex-1">
                 <FullIDE
-                    key={workspaceContextKey}
+                    key={fullIdeKey}
                     title={isSql ? "Run SQL" : "Run code"}
                     height={runnerH - 50}
                     fullHeight
@@ -490,6 +660,11 @@ export default function CodeToolPane(props: {
                     }}
                     initialWorkspace={workspaceBridge}
                     externalWorkspace={usesWorkspaceShell ? null : workspaceBridge}
+                    exerciseStateKey={editorExerciseStateKey}
+                    projectScope={{
+                        kind: "review-tool" as any,
+                        scopeKey: `review-tool:${editorExerciseStateKey ?? "general"}`,
+                    }}
                     onWorkspaceChange={handleWorkspaceChange}
                     onBeforeRun={handleBeforeRun}
                     onRunResult={handleRunResult}
@@ -498,14 +673,14 @@ export default function CodeToolPane(props: {
                     sqlInitialTableSnapshots={sqlInitialTableSnapshots}
                 />
 
-                {showLoadingMask ? (
-                    <div className="absolute inset-0 z-20 flex items-center justify-center bg-neutral-950/70 backdrop-blur-sm">
-                        <div className="flex items-center gap-3 rounded-full border border-white/10 bg-black/40 px-4 py-2 text-sm font-semibold text-white/80">
-                            <span className="inline-block h-2.5 w-2.5 animate-pulse rounded-full bg-emerald-400" />
-                            Loading editor...
-                        </div>
-                    </div>
-                ) : null}
+                {/*{showLoadingMask ? (*/}
+                {/*    <div className="absolute inset-0 z-20 flex items-center justify-center bg-neutral-950/70 backdrop-blur-sm">*/}
+                {/*        <div className="flex items-center gap-3 rounded-full border border-white/10 bg-black/40 px-4 py-2 text-sm font-semibold text-white/80">*/}
+                {/*            <span className="inline-block h-2.5 w-2.5 animate-pulse rounded-full bg-emerald-400" />*/}
+                {/*            Loading editor...*/}
+                {/*        </div>*/}
+                {/*    </div>*/}
+                {/*) : null}*/}
             </div>
 
             {!isSql && runFeedback ? (

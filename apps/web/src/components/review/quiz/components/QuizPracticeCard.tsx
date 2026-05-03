@@ -7,8 +7,11 @@ import { isEmptyPracticeAnswer } from "@/components/review/quiz/hooks/useQuizPra
 import type { VectorPadState } from "@/components/vectorpad/types";
 
 import ExerciseRenderer from "@/components/practice/ExerciseRenderer";
+import { exerciseDebug, summarizeExercisePatch } from "@/components/review/module/runtime/exerciseDebug";
 import PracticeHelpPanel from "@/components/practice/PracticeHelpPanel";
 import { useReviewTools } from "@/components/review/module/context/ReviewToolsContext";
+import { getExerciseStateKey } from "@/components/review/module/runtime/exerciseKeys";
+import { useReviewRuntimeStore } from "@/components/review/module/runtime/reviewRuntimeStore";
 
 import { useTaggedT } from "@/i18n/tagged";
 import { resolveDeepTagged } from "@/i18n/resolveDeepTagged";
@@ -20,6 +23,40 @@ import {
 } from "@/lib/practice/help/steps";
 
 const LOADING_TIMEOUT_MS = 8000;
+
+function getStableExerciseSlotId(
+    q: Extract<ReviewQuestion, { kind: "practice" }>,
+) {
+  const anyQ = q as any;
+
+  return (
+      anyQ.fetch?.exerciseKey ??
+      anyQ.fetch?.stepId ??
+      anyQ.exerciseKey ??
+      anyQ.stepId ??
+      anyQ.sourceStepId ??
+      anyQ.key ??
+      q.id
+  );
+}
+
+function getWorkspaceEntryCodeForPracticeCard(workspace: any) {
+  if (
+      !workspace ||
+      typeof workspace !== "object" ||
+      workspace.version !== 2 ||
+      !Array.isArray(workspace.nodes)
+  ) {
+    return "";
+  }
+
+  const entryId = workspace.entryFileId || workspace.activeFileId;
+  const file =
+      workspace.nodes.find((node: any) => node?.kind === "file" && node.id === entryId) ??
+      workspace.nodes.find((node: any) => node?.kind === "file");
+
+  return file?.kind === "file" ? String(file.content ?? "") : "";
+}
 
 export default function QuizPracticeCard(props: {
   q: Extract<ReviewQuestion, { kind: "practice" }>;
@@ -63,6 +100,7 @@ export default function QuizPracticeCard(props: {
   } = props;
 
   const tools = useReviewTools();
+  const toolsAny = tools as any;
   const excused = Boolean(props.excused);
 
   const ui = useTaggedT("reviewQuizUi");
@@ -73,14 +111,41 @@ export default function QuizPracticeCard(props: {
     return resolveDeepTagged(ps.exercise, (key) => raw(key, "")) as Exercise;
   }, [ps?.exercise, raw]);
 
-  const toolsEnabled = Boolean(tools?.enabled);
+  const toolsEnabled = Boolean(toolsAny?.enabled);
   const isCodeInput = ex?.kind === "code_input";
   const codeRunnerMode: "embedded" | "tools" =
       toolsEnabled && isCodeInput ? "tools" : "embedded";
 
-  const codeTools = toolsEnabled && isCodeInput ? (tools as any) : null;
-  const effectiveToolId = toolScopedId ?? q.id;
+  const codeTools = toolsEnabled && isCodeInput ? toolsAny : null;
+
+  const stableExerciseSlotId = useMemo(() => getStableExerciseSlotId(q), [q]);
+
+  const effectiveToolId = toolScopedId ?? stableExerciseSlotId;
   const codeInputId = toolsEnabled && isCodeInput ? effectiveToolId : undefined;
+
+  const exerciseKeyForTools = useMemo(() => {
+    return getExerciseStateKey(
+      {
+        subjectSlug: (q as any).fetch?.subject ?? "",
+        moduleSlug: (q as any).fetch?.module ?? "",
+        sectionSlug: (q as any).fetch?.section,
+        topicId: (q as any).fetch?.topic ?? "",
+        cardId: ownerCardId ?? "",
+      },
+      stableExerciseSlotId,
+    );
+  }, [q, ownerCardId, stableExerciseSlotId]);
+
+  const runtimeExercise = useReviewRuntimeStore(
+      (s) => s.exercises[exerciseKeyForTools] ?? null,
+  );
+
+  const runtimeExerciseCode = useMemo(() => {
+    return (
+        getWorkspaceEntryCodeForPracticeCard(runtimeExercise?.workspace) ||
+        (typeof runtimeExercise?.code === "string" ? runtimeExercise.code : "")
+    );
+  }, [runtimeExercise]);
 
   const updateItemSafe = useCallback(
       (patch: any) => {
@@ -102,12 +167,17 @@ export default function QuizPracticeCard(props: {
 
   const hasInput = useMemo(() => {
     if (!ex || !ps?.item) return false;
+
+    if (ex.kind === "code_input" && runtimeExerciseCode.trim().length > 0) {
+      return true;
+    }
+
     return !isEmptyPracticeAnswer(ex, ps.item, padRef?.current);
-  }, [ex, ps?.item, padRef]);
+  }, [ex, ps?.item, padRef, runtimeExerciseCode]);
 
   useEffect(() => {
     if (!toolsEnabled) return;
-    if (!tools) return;
+    if (!toolsAny) return;
     if (!ex) return;
     if (ex.kind !== "code_input") return;
     if (!ps) return;
@@ -116,14 +186,14 @@ export default function QuizPracticeCard(props: {
         ps.ok === true || excused || (!strictSequential && attemptsCapped);
     const eligible = toolsActive && unlocked && !locked && !isCompleted && !excused;
 
-    tools.setCodeInputMeta(effectiveToolId, {
+    toolsAny.setCodeInputMeta?.(effectiveToolId, {
       order: seqOrder,
       eligible,
       done: doneForFlow,
     });
   }, [
     toolsEnabled,
-    tools,
+    toolsAny,
     ex,
     ps,
     effectiveToolId,
@@ -137,10 +207,55 @@ export default function QuizPracticeCard(props: {
     seqOrder,
   ]);
 
+  useEffect(() => {
+    if (!toolsActive) {
+      lastToolsBindKeyRef.current = null;
+      return;
+    }
+    if (!toolsEnabled) return;
+    if (!toolsAny) return;
+    if (!isCodeInput) return;
+    if (!codeInputId) return;
+    if (!ex) return;
+    if (!ps?.item) return;
+
+    /**
+     * Exercise navigation lives inside QuizBlock/FlowNavigator.
+     * Bind once when the active exercise identity changes.
+     */
+    const bindKey = `${codeInputId}:${exerciseKeyForTools}`;
+    if (lastToolsBindKeyRef.current === bindKey) return;
+    lastToolsBindKeyRef.current = bindKey;
+
+    const timer = window.setTimeout(() => {
+      toolsAny.requestBind?.(codeInputId);
+    }, 0);
+
+    return () => window.clearTimeout(timer);
+  }, [
+    toolsActive,
+    toolsEnabled,
+    toolsAny,
+    isCodeInput,
+    codeInputId,
+    ex,
+    Boolean(ps?.item),
+    exerciseKeyForTools,
+  ]);
+
+  const isCodeExerciseWithInput =
+      ex?.kind === "code_input" && hasInput;
+
   const disableCheck =
-      !unlocked ||
+      /**
+       * Code exercises are editor-driven and should behave like sketch cards:
+       * each visible exercise can be edited/checked independently.
+       *
+       * Non-code quiz items can still use strict sequential unlocking.
+       */
+      (!isCodeExerciseWithInput && !unlocked) ||
       isCompleted ||
-      locked ||
+      (locked && !isCodeExerciseWithInput) ||
       excused ||
       (ps?.busy ?? false) ||
       attemptsCapped ||
@@ -163,9 +278,9 @@ export default function QuizPracticeCard(props: {
       : null;
 
   const disableHelp =
-      !unlocked ||
+      (!isCodeExerciseWithInput && !unlocked) ||
       isCompleted ||
-      locked ||
+      (locked && !isCodeExerciseWithInput) ||
       excused ||
       (ps?.busy ?? false) ||
       ps?.ok === true ||
@@ -193,10 +308,9 @@ export default function QuizPracticeCard(props: {
   const hasBlockingError = Boolean(ps?.error && !hasExercise);
   const hasInlineError = Boolean(ps?.error && hasExercise);
 
-  // Defensive UI layer:
-  // even if the hook ever regresses, the user should never stare at an endless spinner.
   const [loadTimedOut, setLoadTimedOut] = useState(false);
   const autoRetriedRef = useRef<string | null>(null);
+  const lastToolsBindKeyRef = useRef<string | null>(null);
 
   useEffect(() => {
     setLoadTimedOut(false);
@@ -339,9 +453,29 @@ export default function QuizPracticeCard(props: {
               ) : null}
 
               <div className="mt-2">
+                {exerciseDebug("A_QuizPracticeCard_before_ExerciseRenderer", {
+                  qId: q.id,
+                  ownerCardId,
+                  stableExerciseSlotId,
+                  codeInputId,
+                  codeRunnerMode,
+                  toolsActive,
+                  fetchExerciseKey: (q as any).fetch?.exerciseKey,
+                  fetchStepId: (q as any).fetch?.stepId,
+                  qExerciseKey: (q as any).exerciseKey,
+                  qStepId: (q as any).stepId,
+                  psExerciseKind: ps.exercise?.kind,
+                  psItem: summarizeExercisePatch(ps.item),
+                  exKind: ex.kind,
+                  exId: (ex as any).id,
+                  exExerciseKey: (ex as any).exerciseKey,
+                  fetchTopic: (q as any).fetch?.topic,
+                }) as any}
                 <ExerciseRenderer
+                    key={stableExerciseSlotId}
                     exercise={ex}
                     current={ps.item}
+                    exerciseStateId={stableExerciseSlotId}
                     busy={ps.busy || !unlocked || isCompleted || locked}
                     isAssignmentRun={false}
                     maxAttempts={maxForRenderer as any}
@@ -353,6 +487,11 @@ export default function QuizPracticeCard(props: {
                     codeInputId={codeInputId}
                     codeOwnerCardId={ownerCardId ?? null}
                     codeToolsAutoOpen={toolsActive}
+                    subjectSlug={(q as any).fetch?.subject}
+                    moduleSlug={(q as any).fetch?.module}
+                    sectionSlug={(q as any).fetch?.section}
+                    topicId={(q as any).fetch?.topic}
+                    cardId={ownerCardId}
                 />
               </div>
 
@@ -364,7 +503,8 @@ export default function QuizPracticeCard(props: {
                       disabled={disableCheck}
                       data-flow-focus="1"
                       className={[
-                        "ui-quiz-anction","ui-btn-primary",
+                        "ui-quiz-action",
+                        "ui-btn-primary",
                         disableCheck ? "ui-quiz-action--disabled" : "ui-btn-primary",
                       ].join(" ")}
                   >
@@ -390,7 +530,10 @@ export default function QuizPracticeCard(props: {
               <span className="whitespace-normal">
                 {ui.t(
                     "practice.attempts",
-                    { n: ps.attempts, max: ps.maxAttempts == null ? "∞" : ps.maxAttempts },
+                    {
+                      n: ps.attempts,
+                      max: ps.maxAttempts == null ? "∞" : ps.maxAttempts,
+                    },
                     `Attempts: ${ps.attempts}/${ps.maxAttempts == null ? "∞" : ps.maxAttempts}`,
                 )}
               </span>

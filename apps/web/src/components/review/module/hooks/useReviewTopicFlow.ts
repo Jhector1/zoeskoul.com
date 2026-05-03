@@ -10,6 +10,7 @@ type Args = {
     setActiveTopicId: (tid: string) => void;
     viewTopicId: string;
     setViewTopicId: (tid: string) => void;
+    onBeforeNavigate?: () => void | Promise<void>;
 };
 
 export function useReviewTopicFlow({
@@ -20,6 +21,7 @@ export function useReviewTopicFlow({
                                        setActiveTopicId,
                                        viewTopicId,
                                        setViewTopicId,
+                                       onBeforeNavigate,
                                    }: Args) {
     const safeTopics = Array.isArray(topics) ? topics : [];
 
@@ -53,7 +55,7 @@ export function useReviewTopicFlow({
     const nextTopic = viewIdx >= 0 ? safeTopics[viewIdx + 1] : null;
 
     const goToTopic = useCallback(
-        (tid: string) => {
+        async (tid: string) => {
             if (!tid) return;
 
             const idx = safeTopics.findIndex((x) => x.id === tid);
@@ -65,10 +67,12 @@ export function useReviewTopicFlow({
                 if (!isEarlierOrActive && !canGoForward) return;
             }
 
+            if (onBeforeNavigate) await onBeforeNavigate();
+
             if (idx > activeIdx) setActiveTopicId(tid);
             setViewTopicId(tid);
         },
-        [safeTopics, unlockAll, activeIdx, topicUnlocked, setActiveTopicId, setViewTopicId],
+        [safeTopics, unlockAll, activeIdx, topicUnlocked, setActiveTopicId, setViewTopicId, onBeforeNavigate],
     );
 
     const goPrevTopic = useCallback(() => {

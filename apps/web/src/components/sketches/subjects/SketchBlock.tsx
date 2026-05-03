@@ -23,6 +23,7 @@ function mergeSpec(base: SketchSpec, patch?: Record<string, unknown>): SketchSpe
 
 export default function SketchBlock(props: {
     cardId: string;
+    stateKey?: string;
     title?: string;
     sketchId: string;
     height?: number;
@@ -39,6 +40,7 @@ export default function SketchBlock(props: {
 
     const {
         cardId,
+        stateKey,
         title,
         sketchId,
         height,
@@ -50,6 +52,12 @@ export default function SketchBlock(props: {
         prereqsMet = true,
         locked = false,
     } = props;
+
+    const sketchStateKey = stateKey ?? cardId;
+    const initialStateKey = useMemo(
+        () => JSON.stringify(initialState ?? null),
+        [initialState],
+    );
 
     const entry: SketchEntry | null = useMemo(() => getSketchEntry(sketchId), [sketchId]);
     const [confirmReset, setConfirmReset] = useState(false);
@@ -73,7 +81,7 @@ export default function SketchBlock(props: {
     React.useEffect(() => {
         setState(resolved?.state ?? null);
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [cardId, sketchId]);
+    }, [sketchStateKey, sketchId, initialStateKey]);
 
     const emit = useCallback((s: SavedSketchState) => onStateChange?.(s), [onStateChange]);
     useDebouncedEmit(state, (s) => s && emit(s), { enabled: Boolean(onStateChange), delayMs: 350 });

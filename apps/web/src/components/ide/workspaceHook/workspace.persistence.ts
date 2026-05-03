@@ -46,6 +46,7 @@ export function readWorkspaceMeta(baseKey: string): WorkspaceMeta | null {
               : "anonymous",
       projectId: normalizeNullableString(parsed.projectId),
       scopeKey: normalizeNullableString(parsed.scopeKey),
+      exerciseStateKey: normalizeNullableString(parsed.exerciseStateKey),
       localWorkspaceId: normalizeNullableString(parsed.localWorkspaceId),
     };
   } catch {
@@ -66,6 +67,7 @@ export async function loadWorkspaceForLanguage(args: {
   actorKey?: string | null;
   projectId?: string | null;
   scopeKey?: string | null;
+  exerciseStateKey?: string | null;
   localWorkspaceId?: string | null;
 }) {
   if (args.draftStorageMode !== "local") return null;
@@ -76,6 +78,7 @@ export async function loadWorkspaceForLanguage(args: {
     actorKey: args.actorKey,
     projectId: args.projectId,
     scopeKey: args.scopeKey,
+    exerciseStateKey: args.exerciseStateKey,
     localWorkspaceId: args.localWorkspaceId,
   });
 
@@ -108,6 +111,7 @@ export function saveWorkspaceForLanguage(args: {
   actorKey?: string | null;
   projectId?: string | null;
   scopeKey?: string | null;
+  exerciseStateKey?: string | null;
   localWorkspaceId?: string | null;
 }) {
   const {
@@ -117,6 +121,7 @@ export function saveWorkspaceForLanguage(args: {
     actorKey,
     projectId,
     scopeKey,
+    exerciseStateKey,
     localWorkspaceId,
   } = args;
 
@@ -129,6 +134,7 @@ export function saveWorkspaceForLanguage(args: {
     actorKey,
     projectId,
     scopeKey,
+    exerciseStateKey,
     localWorkspaceId,
   });
 
@@ -137,6 +143,7 @@ export function saveWorkspaceForLanguage(args: {
     actorKey: actorKey?.trim() || "anonymous",
     projectId: projectId ?? null,
     scopeKey: scopeKey ?? null,
+    exerciseStateKey: exerciseStateKey ?? null,
     localWorkspaceId: localWorkspaceId ?? null,
   });
 

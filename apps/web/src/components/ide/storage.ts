@@ -52,15 +52,17 @@ export function storageKeyForWorkspace(args: {
     actorKey?: string | null;
     projectId?: string | null;
     scopeKey?: string | null;
+    exerciseStateKey?: string | null;
     localWorkspaceId?: string | null;
 }) {
     const actorPart = encodeStoragePart(args.actorKey?.trim() || "anonymous");
     const scopePart = encodeStoragePart(args.scopeKey?.trim() || "global");
+    const exercisePart = encodeStoragePart(args.exerciseStateKey?.trim() || "none");
     const workspacePart = encodeStoragePart(
         args.projectId?.trim() || args.localWorkspaceId?.trim() || "local",
     );
 
-    return `${args.baseKey}:${actorPart}:${scopePart}:${workspacePart}:${args.language}`;
+    return `${args.baseKey}:${actorPart}:${scopePart}:${exercisePart}:${workspacePart}:${args.language}`;
 }
 
 function now() {

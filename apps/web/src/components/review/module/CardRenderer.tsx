@@ -12,6 +12,7 @@ import { cn } from "@/lib/cn";
 import SketchBlock from "@/components/sketches/subjects/SketchBlock";
 import { useTaggedT } from "@/i18n/tagged";
 import {FlowNavMode} from "@/components/review/navigation/FlowNavigator";
+import { useReviewRuntimeStore } from "@/components/review/module/runtime/reviewRuntimeStore";
 
 type SavedSketchState = any;
 
@@ -54,6 +55,14 @@ export default function CardRenderer(props: {
     savedSketch: SavedSketchState | null;
     quizNavMode?: FlowNavMode;
     onSketchStateChange: (sketchCardId: string, s: SavedSketchState) => void;
+
+    onRun?: () => void;
+    onReveal?: () => void;
+    onSubmit?: () => void;
+
+    cardKey: string;
+    topicId: string;
+    tp: any;
 }) {
     const ui = useTaggedT("cardUi");
     const tt = useTaggedT();
@@ -75,7 +84,28 @@ export default function CardRenderer(props: {
         savedSketch,
         quizNavMode = "scroll",
         onSketchStateChange,
+        onRun,
+        onReveal,
+        onSubmit,
+        cardKey,
+        topicId,
+        tp,
     } = props;
+
+    const ensureCard = useReviewRuntimeStore((s) => s.ensureCard);
+
+    React.useEffect(() => {
+        if (progressHydrated) {
+            ensureCard({
+                cardKey,
+                topicId,
+                cardId: card.id,
+                initial: {
+                    sketch: tp?.sketchState?.[card.id] || null,
+                },
+            });
+        }
+    }, [progressHydrated, cardKey, topicId, card.id, tp, ensureCard]);
 
     const wrapCls = "ui-surface-muted rounded-none p-4";
 
@@ -184,6 +214,8 @@ export default function CardRenderer(props: {
         return (
             <div>
                 <SketchBlock
+                    key={cardKey}
+                    stateKey={cardKey}
                     cardId={card.id}
                     title={card.title}
                     sketchId={card.sketchId}

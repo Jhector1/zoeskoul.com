@@ -33,6 +33,7 @@ export type UseIdeWorkspaceOpts = {
   actorKey?: string | null;
   projectId?: string | null;
   scopeKey?: string | null;
+  exerciseStateKey?: string | null;
   localWorkspaceId?: string | null;
 
   policy?: IdeWorkspacePolicy;
@@ -43,6 +44,7 @@ export type WorkspaceMeta = {
   actorKey: string;
   projectId: string | null;
   scopeKey: string | null;
+  exerciseStateKey: string | null;
   localWorkspaceId: string | null;
 };
 

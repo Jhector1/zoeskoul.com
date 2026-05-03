@@ -29,6 +29,7 @@ import { resolveRuntime } from "@/components/code/runner/hooks/controller/useRes
 import XtermTerminal from "@/components/code/runner/components/XtermTerminal";
 import { useWorkspaceTerminalController } from "@/components/code/runner/hooks/pty/useWorkspaceTerminalController";
 import type { WorkspaceSyncEntry, WorkspaceTerminalConfig } from "@/components/code/runner/runtime";
+import { WorkspaceStateV2 } from "@/components/ide/types";
 import { cx } from "@/components/tools/utils/cx";
 import HeaderBar from "@/components/code/runner/components/HeaderBar";
 
@@ -39,6 +40,7 @@ type CodeRunnerWithStdinProps = CodeRunnerProps & {
     stdin?: string;
     initialStdin?: string;
     onChangeStdin?: (value: string) => void;
+    onChangeWorkspace?: (workspace: WorkspaceStateV2) => void;
     showStdinEditor?: boolean;
     stdinPlaceholder?: string;
     workspaceTerminal?: WorkspaceTerminalConfig;
@@ -117,6 +119,8 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         onRun,
         editorModelKey,
         toolScopeKey,
+        exerciseStateKey,
+        workspace,
         onBeforeRun,
         isAuthenticated,
         editorLanguage,
@@ -226,7 +230,27 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     };
 
     const setCode = (c: string) => {
-        controlled ? (props as any).onChangeCode(c) : setUCode(c);
+        if (controlled) {
+            (props as any).onChangeCode(c);
+        } else {
+            setUCode(c);
+        }
+
+        if (props.workspace && props.onChangeWorkspace) {
+            const entryId = props.workspace.entryFileId || props.workspace.activeFileId;
+            if (entryId) {
+                const nextNodes = props.workspace.nodes.map((node) => {
+                    if (node.id === entryId && node.kind === "file") {
+                        return { ...node, content: c, updatedAt: Date.now() };
+                    }
+                    return node;
+                });
+                props.onChangeWorkspace({
+                    ...props.workspace,
+                    nodes: nextNodes,
+                });
+            }
+        }
     };
 
     const setSqlDialect = (d: SqlDialect) => {
@@ -241,6 +265,13 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     const setStdin = (value: string) => {
         if (typeof onChangeStdin === "function") onChangeStdin(value);
         if (!stdinControlled) setUStdin(value);
+
+        if (props.workspace && props.onChangeWorkspace) {
+            props.onChangeWorkspace({
+                ...props.workspace,
+                stdin: value,
+            });
+        }
     };
 
     const [uDock, setUDock] = useState<TerminalDock>(
@@ -337,6 +368,45 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     const runnerLang = (isWeb ? "javascript" : lang) as any;
     const effectiveAllowRun = allowRun && !isWeb;
 
+    const workspaceFileIdForIdentity =
+        workspace && typeof workspace === "object"
+            ? String(
+                (workspace as any).entryFileId ||
+                (workspace as any).activeFileId ||
+                "",
+            )
+            : "";
+
+    const stableFallbackIdentity = [
+        "code-runner",
+        typeof title === "string" && title.trim() ? title.trim() : "untitled",
+        String(lang || "python"),
+        workspaceFileIdForIdentity || "no-workspace-file",
+    ]
+        .join(":")
+        .replace(/\s+/g, "-");
+
+    /**
+     * Never allow EditorPane to use its random internal model key.
+     *
+     * If exerciseStateKey is missing, fallback to toolScopeKey, then workspace file id,
+     * then a deterministic runner identity. This prevents Monaco from creating a fresh
+     * random model after sketch/card navigation.
+     */
+    const validToolScopeKey =
+        typeof toolScopeKey === "string" && toolScopeKey.trim()
+            ? toolScopeKey
+            : undefined;
+
+    const effectiveExerciseStateKey =
+        exerciseStateKey ??
+        validToolScopeKey ??
+        stableFallbackIdentity;
+
+    const effectiveEditorModelKey =
+        editorModelKey ??
+        `${effectiveExerciseStateKey}:${workspaceFileIdForIdentity || "entry"}`;
+
     const term = useCodeRunnerController({
         runtime,
         lang: runnerLang,
@@ -347,6 +417,8 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         sqlSeedSql,
         sqlSetupSql,
         sqlDatasetId,
+        workspace,
+        exerciseStateKey: effectiveExerciseStateKey,
         disabled,
         allowRun: effectiveAllowRun,
         resetTerminalOnRun,
@@ -370,6 +442,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         lazy: workspaceTerminal?.lazy ?? true,
         title: workspaceTerminal?.title,
         historyScopeKey: workspaceTerminal?.historyScopeKey,
+        exerciseStateKey: effectiveExerciseStateKey,
     });
 
     useEffect(() => {
@@ -515,7 +588,6 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     const showStdinEditorUI = showStdinEditor && showEditor && lang !== "sql" && !isWeb;
     const showWorkspaceTerminalTab = workspaceTerminalEnabled;
     const effectiveEditorLanguage = editorLanguage ?? (isWeb ? "html" : lang);
-    const effectiveEditorModelKey = editorModelKey ?? toolScopeKey;
 
     const outputModel: OutputSurfaceModel = useMemo(() => {
         if (isWeb) {
@@ -638,6 +710,20 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
             className={PANEL_EDITOR}
             style={{ touchAction: isNarrowScreen ? "pan-y" : "auto", height: "100%" }}
         >
+            {process.env.NODE_ENV === "development"
+                ? (console.log("[CodeRunner before EditorPane]", {
+                    title,
+                    toolScopeKey,
+                    exerciseStateKey,
+                    effectiveExerciseStateKey,
+                    editorModelKey,
+                    effectiveEditorModelKey,
+                    hasWorkspace: !!workspace,
+                    workspaceEntryFileId: (workspace as any)?.entryFileId,
+                    workspaceActiveFileId: (workspace as any)?.activeFileId,
+                    codePreview: String(code ?? "").slice(0, 120),
+                }) as any)
+                : null}
             <EditorPane
                 frame={frame}
                 lang={effectiveEditorLanguage}
@@ -648,6 +734,8 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                 height={editorHeight}
                 disabled={disabled || term.busy}
                 modelKey={effectiveEditorModelKey}
+                exerciseStateKey={effectiveExerciseStateKey}
+                workspace={workspace}
                 onMount={(ed) => {
                     monacoEditorRef.current = ed;
                     requestLayout();

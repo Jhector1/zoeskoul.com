@@ -87,6 +87,8 @@ function ToolsPanelInner(props: ToolsPanelProps) {
 
     const scopeKey = props.toolScopeKey ?? (props.boundId ? `exercise:${props.boundId}` : "general");
 
+
+
     const noteKey = useMemo(
         () => ({
             subjectSlug: props.subjectSlug,
@@ -115,7 +117,7 @@ function ToolsPanelInner(props: ToolsPanelProps) {
                         isActive={active === "code"}
                         codeEnabled={ctx.codeEnabled}
                         height={props.codeRunnerRegionH}
-                        toolScopeKey={props.toolScopeKey}
+                        toolScopeKey={scopeKey}
                         toolHydrated={props.toolHydrated}
                         toolLang={props.toolLang}
                         toolCode={props.toolCode}

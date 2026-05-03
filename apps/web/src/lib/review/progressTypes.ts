@@ -20,6 +20,12 @@ export type ReviewTopicProgress = {
     sketchState?: Record<string, any>;
     completed?: boolean;
     completedAt?: string;
+
+    // Phase 7: Integrated Zustand runtime state
+    runtimeStateV2?: {
+        cards?: Record<string, any>;
+        exercises?: Record<string, any>;
+    };
 };
 
 export type ReviewProgressState = {

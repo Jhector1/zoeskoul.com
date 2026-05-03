@@ -1,8 +1,8 @@
 "use client";
 
-import React, {useCallback, useEffect, useMemo, useRef} from "react";
-import type {Exercise, SqlDialect} from "@/lib/practice/types";
-import type {VectorPadState} from "@/components/vectorpad/types";
+import React, { useCallback, useEffect, useMemo, useRef } from "react";
+import type { Exercise, SqlDialect } from "@/lib/practice/types";
+import type { VectorPadState } from "@/components/vectorpad/types";
 
 import NumericExerciseUI from "./kinds/NumericExerciseUI";
 import SingleChoiceExerciseUI from "./kinds/SingleChoiceExerciseUI";
@@ -10,34 +10,26 @@ import MultiChoiceExerciseUI from "./kinds/MultiChoiceExerciseUI";
 import VectorDragTargetExerciseUI from "./kinds/VectorDragTargetExerciseUI";
 import VectorDragDotExerciseUI from "./kinds/VectorDragDotExerciseUI";
 import CodeInputExerciseUI from "./kinds/CodeInputExerciseUI";
-
-// ✅ NEW kinds
 import TextInputExerciseUI from "./kinds/TextInputExerciseUI";
 import DragReorderExerciseUI from "./kinds/DragReorderExerciseUI";
 import VoiceInputExerciseUI from "./kinds/VoiceInputExerciseUI";
 
-import type {QItem} from "./practiceType";
+import type { QItem } from "./practiceType";
 import MatrixInputPanel from "./MatrixInputPanel";
-import {resizeGrid} from "@/lib/practice/matrixHelpers";
+import { resizeGrid } from "@/lib/practice/matrixHelpers";
 import FillBlankChoiceExerciseUI from "@/components/practice/kinds/FillBlankChoiceExerciseUI";
 import ListenBuildExerciseUI from "@/components/practice/kinds/ListenBuildExerciseUI";
-import WordBankArrangeExerciseUI from "@/components/practice/kinds/WordBankArrangeExerciseUI";
-import {TFn} from "@/components/practice/PracticeShell";
-import {useTranslations} from "next-intl";
-import {resolveDeepTagged} from "@/i18n/resolveDeepTagged";
-import {useTaggedT} from "@/i18n/tagged";
-import {RunnerLanguage} from "@zoeskoul/code-contracts";
+import { resolveDeepTagged } from "@/i18n/resolveDeepTagged";
+import { useTaggedT } from "@/i18n/tagged";
+import type { RunnerLanguage } from "@zoeskoul/code-contracts";
 import type { LearningIdeConfig } from "@/lib/ide/learningIdeConfig";
 import type { WorkspaceStateV2 } from "@/components/ide/types";
+import { useReviewRuntimeStore } from "@/components/review/module/runtime/reviewRuntimeStore";
+import { getExerciseStateKey } from "@/components/review/module/runtime/exerciseKeys";
+import { exerciseDebug, summarizeExercisePatch, summarizeExerciseWorkspace } from "@/components/review/module/runtime/exerciseDebug";
+import { resolveExerciseWorkspace, deriveEntryCode } from "@/components/review/module/runtime/exerciseWorkspaceResolver";
 
-// ✅ minimal tools API (don’t import review context from practice layer)
-// ...imports unchanged
-// "use client";
 
-// import React, { useCallback, useEffect, useRef } from "react";
-// keep the rest of your imports
-
-// ✅ minimal tools API (don’t import review context from practice layer)
 type SqlTableSnapshot = {
     name: string;
     columns: Array<{
@@ -49,6 +41,7 @@ type SqlTableSnapshot = {
 };
 
 type SqlTableSnapshots = Record<string, SqlTableSnapshot>;
+
 type CodeInputExerciseWithSqlExtras = Extract<Exercise, { kind: "code_input" }> & {
     sqlSchemaSql?: string;
     sqlSeedSql?: string;
@@ -64,10 +57,12 @@ type CodeInputExerciseWithSqlExtras = Extract<Exercise, { kind: "code_input" }> 
         datasetId?: string;
     } | null;
 };
+
 type CodeToolsApi = {
     registerCodeInput: (
         id: string,
         args: {
+            exerciseKey?: string;
             lang: RunnerLanguage;
             code: string;
             stdin?: string;
@@ -102,7 +97,29 @@ type CodeToolsApi = {
 
     syncCodeInputSnapshot?: (id: string, patch: any) => void;
     patchCodeInput?: (id: string, patch: any) => void;
+    sketch?: any;
 };
+
+function getStableExerciseId(args: {
+    exerciseStateId?: string;
+    exercise?: any;
+    current?: any;
+}) {
+    const { exerciseStateId, exercise, current } = args;
+
+    return (
+        exerciseStateId ||
+        exercise?.exerciseKey ||
+        exercise?.stableKey ||
+        exercise?.key ||
+        current?.exerciseKey ||
+        current?.stableExerciseId ||
+        current?.key ||
+        exercise?.id ||
+        "default"
+    );
+}
+
 function CodeInputWithTools(props: {
     exercise: CodeInputExerciseWithSqlExtras;
     current: any;
@@ -121,6 +138,12 @@ function CodeInputWithTools(props: {
     toolAutoOpen?: boolean;
 
     feedback?: any;
+    topicId?: string;
+    cardId?: string;
+    subjectSlug?: string;
+    moduleSlug?: string;
+    sectionSlug?: string;
+    exerciseStateId?: string;
     explanation?: string | null;
 }) {
     const {
@@ -139,6 +162,12 @@ function CodeInputWithTools(props: {
         toolAutoOpen = true,
         feedback,
         explanation,
+        subjectSlug,
+        moduleSlug,
+        sectionSlug,
+        topicId,
+        cardId,
+        exerciseStateId,
     } = props;
 
     const {
@@ -149,45 +178,75 @@ function CodeInputWithTools(props: {
         ensureVisible,
         requestBind,
         getRunFeedbackEntry,
+        sketch,
     } = codeTools;
 
     const curLang = ((current as any).codeLang ??
         exercise?.language ??
-        (exercise?.fixedSqlDialect || exercise?.runtime?.datasetId ? "sql" : "python")) as RunnerLanguage;
+        ((exercise as any)?.fixedSqlDialect || (exercise as any)?.runtime?.datasetId
+            ? "sql"
+            : "python")) as RunnerLanguage;
 
     const curCode = (current as any).code ?? exercise.starterCode ?? "";
     const curStdin = (current as any).codeStdin ?? "";
+
     const curWorkspace =
-        (current as any).workspace && typeof (current as any).workspace === "object"
+        (current as any).workspace && (current as any).workspace.version === 2
             ? ((current as any).workspace as WorkspaceStateV2)
-            : (current as any).codeWorkspace && typeof (current as any).codeWorkspace === "object"
+            : (current as any).codeWorkspace && (current as any).codeWorkspace.version === 2
                 ? ((current as any).codeWorkspace as WorkspaceStateV2)
-                : (current as any).ideWorkspace && typeof (current as any).ideWorkspace === "object"
+                : (current as any).ideWorkspace && (current as any).ideWorkspace.version === 2
                     ? ((current as any).ideWorkspace as WorkspaceStateV2)
-                    : (exercise as any).workspace && typeof (exercise as any).workspace === "object"
+                    : (exercise as any).workspace && (exercise as any).workspace.version === 2
                         ? ((exercise as any).workspace as WorkspaceStateV2)
-                        : (exercise as any).initialWorkspace && typeof (exercise as any).initialWorkspace === "object"
+                        : (exercise as any).initialWorkspace &&
+                        (exercise as any).initialWorkspace.version === 2
                             ? ((exercise as any).initialWorkspace as WorkspaceStateV2)
-                            : null;
+                            : resolveExerciseWorkspace({
+                                language: curLang as any,
+                                manifest: exercise,
+                            });
+
+    const stableExerciseId = getStableExerciseId({
+        exerciseStateId,
+        exercise,
+        current,
+    });
+
+    const commonExerciseKey = getExerciseStateKey(
+        {
+            subjectSlug: subjectSlug || "",
+            moduleSlug: moduleSlug || "",
+            sectionSlug: sectionSlug,
+            topicId: topicId || "",
+            cardId: cardId || "",
+        },
+        stableExerciseId,
+    );
+
+    const exerciseKey = commonExerciseKey;
+
+    const ensureExercise = useReviewRuntimeStore((s) => s.ensureExercise);
+    const patchExercise = useReviewRuntimeStore((s) => s.patchExercise);
+    const storeExercise = useReviewRuntimeStore((s) => s.exercises[exerciseKey]);
 
     const isSqlExercise =
         curLang === "sql" ||
         exercise?.language === "sql" ||
-        Boolean(exercise?.fixedSqlDialect) ||
-        Boolean(exercise?.runtime?.datasetId) ||
+        Boolean((exercise as any)?.fixedSqlDialect) ||
+        Boolean((exercise as any)?.runtime?.datasetId) ||
         typeof exercise?.sqlSchemaSql === "string" ||
         typeof exercise?.sqlSeedSql === "string";
 
-    const exerciseSqlDialect =
-        isSqlExercise ? exercise?.fixedSqlDialect : undefined;
+    const exerciseSqlDialect = isSqlExercise ? exercise?.fixedSqlDialect : undefined;
 
     const exerciseSqlDatasetId =
         isSqlExercise
-            ? (typeof exercise?.runtime?.datasetId === "string"
-                ? exercise.runtime.datasetId
+            ? typeof (exercise as any)?.runtime?.datasetId === "string"
+                ? (exercise as any).runtime.datasetId
                 : typeof exercise?.sqlDatasetId === "string"
                     ? exercise.sqlDatasetId
-                    : undefined)
+                    : undefined
             : undefined;
 
     const exerciseSqlSchemaSql =
@@ -206,53 +265,78 @@ function CodeInputWithTools(props: {
         typeof exercise.sqlInitialTableSnapshots === "object"
             ? exercise.sqlInitialTableSnapshots
             : undefined;
+
+    useEffect(() => {
+        if (exercise.kind !== "code_input") return;
+
+        ensureExercise({
+            exerciseKey,
+            subjectSlug: subjectSlug || "",
+            moduleSlug: moduleSlug || "",
+            sectionSlug: sectionSlug,
+            topicId: topicId || "",
+            cardId: cardId || "",
+            manifest: exercise,
+            saved: current,
+        });
+    }, [
+        exerciseKey,
+        exercise,
+        current,
+        ensureExercise,
+        subjectSlug,
+        moduleSlug,
+        sectionSlug,
+        topicId,
+        cardId,
+    ]);
+
     const onPatch = useCallback(
         (patch: any) => {
-            const workspace =
-                patch?.workspace && typeof patch.workspace === "object"
-                    ? patch.workspace
-                    : patch?.codeWorkspace && typeof patch.codeWorkspace === "object"
-                        ? patch.codeWorkspace
-                        : patch?.ideWorkspace && typeof patch.ideWorkspace === "object"
-                            ? patch.ideWorkspace
-                            : null;
-
-            updateCurrent({
-                ...patch,
-                ...(workspace
-                    ? {
-                        workspace,
-                        codeWorkspace: workspace,
-                        ideWorkspace: workspace,
-                    }
-                    : {}),
-            });
+            patchExercise(exerciseKey, patch);
+            updateCurrent(patch as any);
         },
-        [updateCurrent],
+        [patchExercise, exerciseKey, updateCurrent],
     );
+
+    const activeWorkspace = storeExercise?.workspace ?? curWorkspace;
+    const activeCode =
+        deriveEntryCode(activeWorkspace) ??
+        storeExercise?.code ??
+        (current as any).code ??
+        exercise.starterCode ??
+        "";
+    const activeStdin = activeWorkspace?.stdin ?? storeExercise?.stdin ?? (current as any).codeStdin ?? "";
+    const activeLanguage = (storeExercise?.language || activeWorkspace?.language || (exercise as any).language || "python") as RunnerLanguage;
+    const activeSketch = storeExercise?.sketch || null;
+
+
+
     const registerArgs = useMemo(
         () => ({
-            lang: curLang,
-            code: curCode,
-            stdin: curStdin,
+            exerciseKey,
+            lang: activeLanguage,
+            code: activeCode,
+            stdin: activeStdin,
             ideConfig: exercise.ideConfig ?? null,
-            workspace: curWorkspace,
+            workspace: activeWorkspace,
             ownerCardId,
             preferSnapshot: false,
-            sqlDialect: curLang === "sql" ? exerciseSqlDialect : undefined,
-            sqlDatasetId: curLang === "sql" ? exerciseSqlDatasetId : undefined,
-            sqlSchemaSql: curLang === "sql" ? exerciseSqlSchemaSql : undefined,
-            sqlSeedSql: curLang === "sql" ? exerciseSqlSeedSql : undefined,
+            sqlDialect: activeLanguage === "sql" ? exerciseSqlDialect : undefined,
+            sqlDatasetId: activeLanguage === "sql" ? exerciseSqlDatasetId : undefined,
+            sqlSchemaSql: activeLanguage === "sql" ? exerciseSqlSchemaSql : undefined,
+            sqlSeedSql: activeLanguage === "sql" ? exerciseSqlSeedSql : undefined,
             sqlInitialTableSnapshots:
-                curLang === "sql" ? exerciseSqlInitialTableSnapshots : undefined,
+                activeLanguage === "sql" ? exerciseSqlInitialTableSnapshots : undefined,
             onPatch,
         }),
         [
-            curLang,
-            curCode,
-            curStdin,
-            curWorkspace,
+            exerciseKey,
+            activeLanguage,
+            activeCode,
+            activeStdin,
             exercise.ideConfig,
+            activeWorkspace,
             ownerCardId,
             exerciseSqlDialect,
             exerciseSqlDatasetId,
@@ -262,40 +346,82 @@ function CodeInputWithTools(props: {
             onPatch,
         ],
     );
+
     const unregisterRef = useRef(unregisterCodeInput);
 
     useEffect(() => {
         unregisterRef.current = unregisterCodeInput;
     }, [unregisterCodeInput]);
 
-    // Register on mount, unregister only on actual unmount.
     useEffect(() => {
         registerCodeInput(codeInputId, registerArgs);
-
         return () => unregisterRef.current(codeInputId);
-        // Intentionally not coupled to live register args. Live snapshot sync happens below.
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [codeInputId]);
-    const toolsBoundToThis = isBound(codeInputId);
-    const toolsUnbound = boundId == null;
 
-    // Keep the registry snapshot fresh without treating every change like a remount.
+    const lastAutoBindKeyRef = useRef<string | null>(null);
+
     useEffect(() => {
         registerCodeInput(codeInputId, registerArgs);
     }, [registerCodeInput, codeInputId, registerArgs]);
+
+    /**
+     * Critical:
+     * In tools mode, the right-side editor must follow the currently rendered
+     * exercise. But this must be idempotent; otherwise requestBind causes a
+     * Zustand update, which rerenders this component, which calls requestBind
+     * again forever.
+     */
+    useEffect(() => {
+        if (!toolAutoOpen) return;
+
+        const autoBindKey = `${codeInputId}::${exerciseKey}`;
+        if (lastAutoBindKeyRef.current === autoBindKey) return;
+
+        lastAutoBindKeyRef.current = autoBindKey;
+
+        queueMicrotask(() => {
+            ensureVisible?.();
+            requestBind(codeInputId);
+        });
+
+        // Intentionally depend only on the active exercise identity.
+        // ensureVisible/requestBind/isBound can change as a result of binding
+        // and must not retrigger this effect.
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [toolAutoOpen, codeInputId, exerciseKey]);
+
+    const toolsBoundToThis = isBound(codeInputId);
+    const toolsUnbound = boundId == null;
     const runEntry = getRunFeedbackEntry?.(codeInputId) ?? null;
     const toolRunFeedback = runEntry?.feedback ?? null;
     const toolRunTick = runEntry?.tick ?? 0;
+    const savedSketch = storeExercise?.sketch || null;
 
     return (
         <CodeInputExerciseUI
             exercise={exercise}
-            code={curCode}
-            stdin={curStdin}
-            language={curLang}
-            onChangeCode={(code) => updateCurrent({ code, ...resetCheckPatch() })}
-            onChangeStdin={(codeStdin) => updateCurrent({ codeStdin, ...resetCheckPatch() })}
-            onChangeLanguage={(codeLang) => updateCurrent({ codeLang, ...resetCheckPatch() })}
+            code={activeCode}
+            stdin={activeStdin}
+            exerciseKey={exerciseKey}
+            subjectSlug={subjectSlug}
+            moduleSlug={moduleSlug}
+            sectionSlug={sectionSlug}
+            topicId={topicId}
+            cardId={cardId}
+            workspace={activeWorkspace}
+            language={activeLanguage}
+            sketch={activeSketch}
+            savedSketch={savedSketch}
+            onChangeCode={(code) => onPatch({ code, ...resetCheckPatch() })}
+            onChangeStdin={(stdin) => onPatch({ stdin, ...resetCheckPatch() })}
+            onChangeLanguage={(language) => onPatch({ language, ...resetCheckPatch() })}
+            onChangeWorkspace={(workspace) => {
+                onPatch({
+                    workspace,
+                    ...resetCheckPatch(),
+                });
+            }}
             disabled={lockInputs}
             checked={checked}
             ok={ok}
@@ -303,7 +429,7 @@ function CodeInputWithTools(props: {
             variant="tools"
             toolsBound={toolsBoundToThis}
             toolsUnbound={toolsUnbound}
-            autoBindMode={toolAutoOpen ? "whenUnbound" : "never"}
+            autoBindMode={toolAutoOpen ? "always" : "never"}
             showPrompt={showPrompt}
             feedback={feedback ?? null}
             explanation={explanation ?? null}
@@ -313,11 +439,10 @@ function CodeInputWithTools(props: {
                 ensureVisible?.();
                 requestBind(codeInputId);
             }}
+            onSketchStateChange={(state) => sketch?.saveSketchDebounced?.(exerciseKey, state, true)}
         />
     );
 }
-// ...rest of ExerciseRenderer unchanged
-
 
 export default function ExerciseRenderer({
                                              exercise,
@@ -336,12 +461,18 @@ export default function ExerciseRenderer({
                                              codeToolsAutoOpen = true,
                                              showPrompt = true,
 
+                                             subjectSlug,
+                                             moduleSlug,
+                                             sectionSlug,
+                                             topicId,
+                                             cardId,
+                                             exerciseStateId,
                                          }: {
     exercise: Exercise;
     current: QItem;
     busy: boolean;
     isAssignmentRun: boolean;
-    maxAttempts: number | null; // ✅ CHANGED
+    maxAttempts: number | null;
     padRef: React.MutableRefObject<VectorPadState>;
     updateCurrent: (patch: Partial<QItem>) => void;
     readOnly?: boolean;
@@ -355,27 +486,71 @@ export default function ExerciseRenderer({
     codeToolsAutoOpen?: boolean;
     showPrompt?: boolean;
 
+    subjectSlug?: string;
+    moduleSlug?: string;
+    sectionSlug?: string;
+    topicId?: string;
+    cardId?: string;
+    exerciseStateId?: string;
 }) {
-    // const attempts = current.attempts ?? 0;
-    //
-    // // ✅ "any result exists" includes reveal result objects (even when ok=null)
-    // const hasAnyResult = Boolean(current.submitted || current.result);
-    //
-    // // ✅ only treat ok as graded when boolean (reveal often sets ok=null)
-    // const ok: boolean | null = typeof current.result?.ok === "boolean" ? current.result.ok : null;
-    //
-    // // ✅ checked for STYLING should mean "graded", not merely "result object exists"
-    // // (prevents Reveal from forcing red/green states)
-    // const checked = Boolean(current.submitted || ok !== null);
-    //
-    // const outOfAttempts = isAssignmentRun && attempts >= maxAttempts && ok !== true;
-    //
-    // // lock if readOnly, busy, already correct, or no attempts left
-    // const lockInputs = readOnly || busy || ok === true || outOfAttempts;
+    const { raw } = useTaggedT();
 
+    const ex = useMemo(() => {
+        return resolveDeepTagged(exercise, (key) => raw(key, "")) as Exercise;
+    }, [exercise, raw]);
 
-    // const t = useTranslations("ExerciseRenderer");
+    const ensureExercise = useReviewRuntimeStore((s) => s.ensureExercise);
 
+    const stableExerciseId = useMemo(() => {
+        return getStableExerciseId({
+            exerciseStateId,
+            exercise: ex as any,
+            current,
+        });
+    }, [exerciseStateId, ex, current]);
+
+    const exerciseKey = useMemo(() => {
+        return getExerciseStateKey(
+            { subjectSlug, moduleSlug, sectionSlug, topicId, cardId },
+            stableExerciseId,
+        );
+    }, [subjectSlug, moduleSlug, sectionSlug, topicId, cardId, stableExerciseId]);
+
+    const storeExercise = useReviewRuntimeStore((s) => s.exercises[exerciseKey]);
+    const patchExercise = useReviewRuntimeStore((s) => s.patchExercise);
+
+    useEffect(() => {
+        if (ex.kind !== "code_input") return;
+
+        ensureExercise({
+            exerciseKey,
+            subjectSlug: subjectSlug || "",
+            moduleSlug: moduleSlug || "",
+            sectionSlug,
+            topicId: topicId || "",
+            cardId: cardId || "",
+            manifest: ex,
+            saved: current,
+        });
+    }, [
+        ex,
+        exerciseKey,
+        ensureExercise,
+        subjectSlug,
+        moduleSlug,
+        sectionSlug,
+        topicId,
+        cardId,
+        current,
+    ]);
+
+    const onPatch = useCallback(
+        (patch: any) => {
+            patchExercise(exerciseKey, patch);
+            updateCurrent(patch as any);
+        },
+        [patchExercise, exerciseKey, updateCurrent],
+    );
 
     const maxA =
         maxAttempts == null || !Number.isFinite(maxAttempts)
@@ -383,74 +558,80 @@ export default function ExerciseRenderer({
             : Math.max(1, Math.floor(maxAttempts));
 
     const attempts = (current as any).attempts ?? 0;
-    // any result exists (including reveal objects)
     const hasAnyResult = Boolean((current as any).submitted || (current as any).result);
 
-// ✅ detect reveal (your API returns revealAnswer, and we can also support revealUsed)
     const isRevealResult = Boolean(
         (current as any)?.result?.revealUsed ||
-        (current as any)?.result?.revealAnswer
+        (current as any)?.result?.revealAnswer,
     );
-    // const { t: tSafe } = useTaggedT(); // safe + no throw
 
-// ✅ Translate tagged "@:..." in the whole exercise object once.
-    const { raw } = useTaggedT();
+    const exRef = useRef(ex);
+    exRef.current = ex;
 
-    const ex = useMemo(() => {
-        return resolveDeepTagged(exercise, (key) => raw(key, "")) as Exercise;
-    }, [exercise, raw]);
-// ✅ ok should be null on reveal (prevents red/green UI)
     const ok: boolean | null =
         !isRevealResult && typeof (current as any).result?.ok === "boolean"
             ? (current as any).result.ok
             : null;
 
-// ✅ checked for styling only when actually graded/submitted
     const checked = Boolean((current as any).submitted || ok !== null);
-
-// any result exists (including reveal objects)
-//     const hasAnyResult = Boolean((current as any).submitted || (current as any).result);
-
-// ok graded only when boolean
-//     const ok: boolean | null =
-//         typeof (current as any).result?.ok === "boolean" ? (current as any).result.ok : null;
-
-// checked for styling = graded (or submitted)
-//     const checked = Boolean((current as any).submitted || ok !== null);
-
-// ✅ server truth for locking
     const finalized = Boolean((current as any)?.result?.finalized);
 
-// out of attempts if server finalized OR finite cap reached
     const outOfAttempts =
         finalized || (maxA !== Number.POSITIVE_INFINITY && attempts >= maxA && ok !== true);
 
-// lock if readOnly/busy/correct/finalized
     const lockInputs = readOnly || busy || ok === true || outOfAttempts;
-
-
-
-
-
-
-
-
-
 
     function resetCheckPatch() {
         if (readOnly) return {};
-        return hasAnyResult ? {submitted: false, result: null} : {};
+        return hasAnyResult ? { submitted: false, result: null } : {};
     }
 
-    // -----------------------------
-    // numeric
-    // -----------------------------
+    useEffect(() => {
+        if (ex.kind !== "code_input") return;
+
+        const store = useReviewRuntimeStore.getState().exercises[exerciseKey];
+
+        const workspace =
+            store?.workspace ??
+            ((current as any).workspace?.version === 2
+                ? (current as any).workspace
+                : (current as any).codeWorkspace?.version === 2
+                    ? (current as any).codeWorkspace
+                    : (current as any).ideWorkspace?.version === 2
+                        ? (current as any).ideWorkspace
+                        : null);
+
+        if (!workspace || workspace.version !== 2) return;
+
+        const workspaceCode = deriveEntryCode(workspace) ?? "";
+        const workspaceStdin = workspace.stdin ?? "";
+
+        const currentCode = (current as any).code;
+        const currentStdin = (current as any).codeStdin;
+        const currentWorkspace = (current as any).workspace;
+
+        const needsSync =
+            currentCode !== workspaceCode ||
+            currentStdin !== workspaceStdin ||
+            currentWorkspace !== workspace;
+
+        if (!needsSync) return;
+
+        updateCurrent({
+            workspace,
+            codeWorkspace: workspace,
+            ideWorkspace: workspace,
+            code: workspaceCode,
+            codeStdin: workspaceStdin,
+        } as any);
+    }, [ex.kind, exerciseKey, current, updateCurrent]);
+
     if (ex.kind === "numeric") {
         return (
             <NumericExerciseUI
                 exercise={ex}
                 value={current.num}
-                onChange={(num) => updateCurrent({num, ...resetCheckPatch()})}
+                onChange={(num) => updateCurrent({ num, ...resetCheckPatch() })}
                 disabled={lockInputs}
                 checked={checked}
                 ok={ok}
@@ -458,9 +639,6 @@ export default function ExerciseRenderer({
         );
     }
 
-    // -----------------------------
-    // single_choice
-    // -----------------------------
     if (ex.kind === "single_choice") {
         const reviewCorrectId =
             reviewCorrectItem && typeof (reviewCorrectItem as any).single === "string"
@@ -471,19 +649,15 @@ export default function ExerciseRenderer({
             <SingleChoiceExerciseUI
                 exercise={ex}
                 value={current.single}
-                onChange={(id) => updateCurrent({single: id, ...resetCheckPatch()})}
+                onChange={(id) => updateCurrent({ single: id, ...resetCheckPatch() })}
                 disabled={lockInputs}
                 checked={checked}
                 ok={ok}
                 reviewCorrectId={reviewCorrectId}
-                // t={t}
             />
         );
     }
 
-    // -----------------------------
-    // multi_choice
-    // -----------------------------
     if (ex.kind === "multi_choice") {
         const reviewCorrectIds =
             reviewCorrectItem && Array.isArray((reviewCorrectItem as any).multi)
@@ -494,7 +668,7 @@ export default function ExerciseRenderer({
             <MultiChoiceExerciseUI
                 exercise={ex}
                 value={current.multi}
-                onChange={(ids) => updateCurrent({multi: ids, ...resetCheckPatch()})}
+                onChange={(ids) => updateCurrent({ multi: ids, ...resetCheckPatch() })}
                 disabled={lockInputs}
                 checked={checked}
                 ok={ok}
@@ -503,9 +677,6 @@ export default function ExerciseRenderer({
         );
     }
 
-    // -----------------------------
-    // text_input ✅
-    // -----------------------------
     if (ex.kind === "text_input") {
         const reviewCorrectText =
             reviewCorrectItem && typeof (reviewCorrectItem as any).text === "string"
@@ -516,7 +687,7 @@ export default function ExerciseRenderer({
             <TextInputExerciseUI
                 exercise={ex as any}
                 value={(current as any).text ?? ""}
-                onChange={(text) => updateCurrent({text, ...resetCheckPatch()})}
+                onChange={(text) => updateCurrent({ text, ...resetCheckPatch() })}
                 disabled={lockInputs}
                 checked={checked}
                 ok={ok}
@@ -525,16 +696,12 @@ export default function ExerciseRenderer({
         );
     }
 
-    // -----------------------------
-    // drag_reorder ✅
-    // -----------------------------
     if (ex.kind === "drag_reorder") {
-        const curOrder =
-            Array.isArray((current as any).reorder)
-                ? (current as any).reorder.map(String)
-                : Array.isArray((current as any).reorderIds)
-                    ? (current as any).reorderIds.map(String)
-                    : [];
+        const curOrder = Array.isArray((current as any).reorder)
+            ? (current as any).reorder.map(String)
+            : Array.isArray((current as any).reorderIds)
+                ? (current as any).reorderIds.map(String)
+                : [];
 
         const reviewCorrectTokenIds =
             reviewCorrectItem && Array.isArray((reviewCorrectItem as any).reorder)
@@ -563,9 +730,8 @@ export default function ExerciseRenderer({
                 reviewCorrectTokenIds={reviewCorrectTokenIds}
             />
         );
-    }   // -----------------------------
-    // voice_input ✅
-    // -----------------------------
+    }
+
     if (ex.kind === "voice_input") {
         const reviewCorrectTranscript =
             reviewCorrectItem && typeof (reviewCorrectItem as any).voiceTranscript === "string"
@@ -577,7 +743,7 @@ export default function ExerciseRenderer({
                 exercise={ex as any}
                 transcript={(current as any).voiceTranscript ?? ""}
                 onChangeTranscript={(voiceTranscript) =>
-                    updateCurrent({voiceTranscript, ...resetCheckPatch()})
+                    updateCurrent({ voiceTranscript, ...resetCheckPatch() })
                 }
                 disabled={lockInputs}
                 checked={checked}
@@ -587,9 +753,6 @@ export default function ExerciseRenderer({
         );
     }
 
-    // -----------------------------
-    // matrix_input
-    // -----------------------------
     if (ex.kind === "matrix_input") {
         const exAny = ex as any;
         const allowResize = true;
@@ -610,22 +773,19 @@ export default function ExerciseRenderer({
                         matRows: r,
                         matCols: c,
                         mat: resizeGrid(current.mat, r, c),
-                        ...(hasAnyResult ? {submitted: false, result: null} : {}),
+                        ...(hasAnyResult ? { submitted: false, result: null } : {}),
                     });
                 }}
                 onChange={(next) =>
                     updateCurrent({
                         mat: next,
-                        ...(hasAnyResult ? {submitted: false, result: null} : {}),
+                        ...(hasAnyResult ? { submitted: false, result: null } : {}),
                     })
                 }
             />
         );
     }
 
-    // -----------------------------
-    // vector_drag_target
-    // -----------------------------
     if (ex.kind === "vector_drag_target") {
         return (
             <VectorDragTargetExerciseUI
@@ -633,54 +793,27 @@ export default function ExerciseRenderer({
                 exercise={ex}
                 a={current.dragA}
                 b={current.dragB}
-                onChange={(a, b) => updateCurrent({dragA: a, dragB: b, ...resetCheckPatch()})}
+                onChange={(a, b) => updateCurrent({ dragA: a, dragB: b, ...resetCheckPatch() })}
                 padRef={padRef}
                 disabled={lockInputs}
             />
         );
     }
-// -----------------------------
-// word_bank_arrange ✅
-// -----------------------------
-//     if (exercise.kind === "word_bank_arrange") {
-//         const reviewCorrectValue =
-//             reviewCorrectItem && typeof (reviewCorrectItem as any).text === "string"
-//                 ? String((reviewCorrectItem as any).text)
-//                 : (exercise as any).targetText ?? null;
-//
-//         return (
-//             <WordBankArrangeExerciseUI
-//                 exercise={exercise as any}
-//                 value={(current as any).text ?? ""} // ✅ store assembled sentence here
-//                 onChangeValue={(text) => updateCurrent({ text, ...resetCheckPatch() })}
-//                 disabled={lockInputs}
-//                 checked={checked}
-//                 ok={ok}
-//                 reviewCorrectValue={reviewCorrectValue}
-//             />
-//         );
-//     }
 
-// -----------------------------
-// listen_build ✅
-// -----------------------------
     if (ex.kind === "listen_build") {
         return (
             <ListenBuildExerciseUI
                 exercise={ex as any}
-                value={(current as any).text ?? ""} // ✅ store assembled sentence here
-                onChangeValue={(text) => updateCurrent({text, ...resetCheckPatch()})}
+                value={(current as any).text ?? ""}
+                onChangeValue={(text) => updateCurrent({ text, ...resetCheckPatch() })}
                 disabled={lockInputs}
                 checked={checked}
-                showTargetWhen={"never"}
+                showTargetWhen="never"
                 ok={ok}
             />
         );
     }
 
-// -----------------------------
-// fill_blank_choice ✅
-// -----------------------------
     if (ex.kind === "fill_blank_choice") {
         const reviewCorrectValue =
             reviewCorrectItem && typeof (reviewCorrectItem as any).text === "string"
@@ -692,37 +825,28 @@ export default function ExerciseRenderer({
         return (
             <FillBlankChoiceExerciseUI
                 exercise={ex as any}
-                value={(current as any).text ?? ""} // ✅ store selected choice here
-                onChangeValue={(text) => updateCurrent({text, single: text, ...resetCheckPatch()})}
+                value={(current as any).text ?? ""}
+                onChangeValue={(text) => updateCurrent({ text, single: text, ...resetCheckPatch() })}
                 disabled={lockInputs}
                 checked={checked}
                 ok={ok}
                 reviewCorrectValue={reviewCorrectValue}
-                // showHint={false}
             />
         );
     }
-    // -----------------------------
-    // vector_drag_dot
-    // -----------------------------
+
     if (ex.kind === "vector_drag_dot") {
         return (
             <VectorDragDotExerciseUI
                 exercise={ex}
                 a={current.dragA}
-                onChange={(a) => updateCurrent({dragA: a, ...resetCheckPatch()})}
+                onChange={(a) => updateCurrent({ dragA: a, ...resetCheckPatch() })}
                 padRef={padRef}
                 disabled={lockInputs}
             />
         );
     }
 
-    // -----------------------------
-// code_input ✅ ToolsPanel support
-// -----------------------------
-// -----------------------------
-// code_input ✅ ToolsPanel support
-// -----------------------------
     const resultAny = (current as any)?.result ?? null;
     const codeFeedback = resultAny?.feedback ?? null;
     const codeExplanation =
@@ -749,6 +873,12 @@ export default function ExerciseRenderer({
                     toolAutoOpen={codeToolsAutoOpen}
                     feedback={codeFeedback}
                     explanation={codeExplanation}
+                    subjectSlug={subjectSlug}
+                    moduleSlug={moduleSlug}
+                    sectionSlug={sectionSlug}
+                    topicId={topicId}
+                    cardId={cardId}
+                    exerciseStateId={stableExerciseId}
                 />
             );
         }
@@ -760,23 +890,55 @@ export default function ExerciseRenderer({
             (exCode as any).moduleRuntimeDefaults ??
             null;
 
-        const curLang = ((current as any).codeLang ??
-            exCode.language ??
-            "python") as RunnerLanguage;
+        const starterWorkspace = resolveExerciseWorkspace({
+            language: ((exCode as any).language || "python") as any,
+            manifest: exCode,
+            saved:
+                (current as any).workspace?.version === 2
+                    ? (current as any).workspace
+                    : (current as any).codeWorkspace?.version === 2
+                        ? (current as any).codeWorkspace
+                        : (current as any).ideWorkspace?.version === 2
+                            ? (current as any).ideWorkspace
+                            : null,
+        });
 
-        const curCode = (current as any).code ?? exCode.starterCode ?? "";
-        const curStdin = (current as any).codeStdin ?? "";
+        const activeWorkspace = storeExercise?.workspace ?? starterWorkspace;
+
+        const activeCode =
+            deriveEntryCode(activeWorkspace) ??
+            storeExercise?.code ??
+            (current as any).code ??
+            (exCode as any).starterCode ??
+            "";
+        const activeStdin = activeWorkspace?.stdin ?? storeExercise?.stdin ?? (current as any).codeStdin ?? "";
+        const activeLanguage = (storeExercise?.language || activeWorkspace?.language || (exCode as any).language || "python") as RunnerLanguage;
+
+
 
         return (
             <CodeInputExerciseUI
                 exercise={exCode}
-                code={curCode}
-                stdin={curStdin}
+                code={activeCode}
+                stdin={activeStdin}
+                workspace={activeWorkspace}
+                exerciseKey={exerciseKey}
+                subjectSlug={subjectSlug}
+                moduleSlug={moduleSlug}
+                sectionSlug={sectionSlug}
+                topicId={topicId}
+                cardId={cardId}
                 frame="card"
-                language={curLang}
-                onChangeCode={(code) => updateCurrent({ code, ...resetCheckPatch() })}
-                onChangeStdin={(codeStdin) => updateCurrent({ codeStdin, ...resetCheckPatch() })}
-                onChangeLanguage={(codeLang) => updateCurrent({ codeLang, ...resetCheckPatch() })}
+                language={activeLanguage}
+                onChangeCode={(code) => onPatch({ code, ...resetCheckPatch() })}
+                onChangeStdin={(codeStdin) => onPatch({ codeStdin, ...resetCheckPatch() })}
+                onChangeLanguage={(codeLang) => onPatch({ codeLang, ...resetCheckPatch() })}
+                onChangeWorkspace={(workspace) => {
+                    onPatch({
+                        workspace,
+                        ...resetCheckPatch(),
+                    });
+                }}
                 disabled={lockInputs}
                 checked={checked}
                 ok={ok}
@@ -786,7 +948,7 @@ export default function ExerciseRenderer({
                 feedback={codeFeedback}
                 explanation={codeExplanation}
                 sqlDialect={exCode.fixedSqlDialect ?? effectiveSqlRuntime?.fixedSqlDialect}
-                sqlDatasetId={exCode.runtime?.datasetId ?? effectiveSqlRuntime?.datasetId}
+                sqlDatasetId={(exCode as any).runtime?.datasetId ?? effectiveSqlRuntime?.datasetId}
                 sqlSchemaSql={(exCode as any).sqlSchemaSql}
                 sqlSeedSql={(exCode as any).sqlSeedSql}
                 sqlSetupSql={(exCode as any).sqlSetupSql}
@@ -794,4 +956,6 @@ export default function ExerciseRenderer({
             />
         );
     }
+
+    return null;
 }

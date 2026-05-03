@@ -24,6 +24,7 @@ type Props = {
     isAuthenticated: boolean;
     runtime: CodeRunnerRuntime;
     projectId?: string | null;
+    exerciseStateKey?: string;
     terminalHistoryScopeKey?: string;
     onApplyTerminalSnapshotFiles?: (
         files: Array<
@@ -82,6 +83,7 @@ export default function IdeEditorPane({
                                           sqlDialect,
                                           runtime,
                                           projectId,
+    exerciseStateKey,
                                           terminalHistoryScopeKey,
                                           onApplyTerminalSnapshotFiles,
                                           onChangeLanguage,
@@ -166,6 +168,12 @@ export default function IdeEditorPane({
                                 services.runner.showTerminalDockToggle && isDesktop
                             }
                             resetTerminalOnRun={true}
+                            exerciseStateKey={exerciseStateKey}
+                            editorModelKey={
+                                exerciseStateKey
+                                    ? `${exerciseStateKey}:${activeFileId ?? "no-file"}`
+                                    : activeFileId ?? "no-file"
+                            }
                             onBeforeRun={onBeforeRun}
                             onRun={
                                 isAuthenticated && !isWeb
@@ -193,7 +201,7 @@ export default function IdeEditorPane({
                                       }
                                     : undefined
                             }
-                            editorModelKey={activeFileId ?? "no-file"}
+
                         />
                     </div>
                 ) : (

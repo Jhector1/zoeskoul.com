@@ -55,6 +55,7 @@ type FullIDEInnerProps = {
     onBeforeRun?: FullIDEProps["onBeforeRun"];
     onRunResult?: FullIDEProps["onRunResult"];
     forceDesktopLayout?: boolean;
+    exerciseStateKey?: string;
     sqlInitialTableSnapshots?: FullIDEProps["sqlInitialTableSnapshots"];
     sqlDialect: any;
     setSqlDialect: React.Dispatch<React.SetStateAction<any>>;
@@ -134,6 +135,7 @@ function FullIDEInner({
                           projectTitle,
                           projectDescription,
                           projectScope,
+                          exerciseStateKey,
                           router,
                           splitRef,
                           editorHostRef,
@@ -387,6 +389,7 @@ function FullIDEInner({
             closeTab={actions.closeTab}
             isDesktop={viewport.isDesktop}
             projectId={projectSession.projectId}
+            exerciseStateKey={exerciseStateKey}
             terminalHistoryScopeKey={terminalHistoryScopeKey}
             onApplyTerminalSnapshotFiles={applyTerminalSnapshotFiles}
             sqlInitialTableSnapshots={sqlInitialTableSnapshots}
@@ -662,6 +665,7 @@ export default function FullIDE(props: FullIDEProps) {
         actorKey,
         projectId: effectiveDraftStorageMode === "local" ? null : initialProjectId,
         scopeKey,
+        exerciseStateKey: props.exerciseStateKey,
         draftStorageMode: effectiveDraftStorageMode,
         localWorkspaceId,
     });
@@ -753,8 +757,9 @@ export default function FullIDE(props: FullIDEProps) {
                 workspace.state.language,
                 initialProjectId ?? "local",
                 scopeKey ?? "global",
+                props.exerciseStateKey ?? "none",
             ].join("::"),
-        [actorKey, workspace.state.language, initialProjectId, scopeKey],
+        [actorKey, workspace.state.language, initialProjectId, scopeKey, props.exerciseStateKey],
     );
 
     const isIdeReady = !!(
@@ -811,6 +816,7 @@ export default function FullIDE(props: FullIDEProps) {
                 projectTitle={projectTitle}
                 projectDescription={projectDescription}
                 projectScope={projectScope}
+                exerciseStateKey={props.exerciseStateKey}
                 router={router}
                 splitRef={splitRef}
                 editorHostRef={editorHostRef}

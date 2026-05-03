@@ -114,6 +114,7 @@ export type FullIDEProps = {
     onRunResult?: (args: { result: RunResult; runArgs: any }) => void;
     initialSqlDialect?: SqlDialect;
     forceDesktopLayout?: boolean;
+    exerciseStateKey?: string;
     sqlInitialTableSnapshots?: Record<
         string,
         {

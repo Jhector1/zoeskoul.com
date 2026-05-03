@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import type { ReviewCard } from "@/lib/subjects/types";
 import { isCardDoneFromState, isQuizLikeCard } from "../progressKeys";
 import { prereqsMetForAnyQuizOrProject } from "../utils";
+import { useReviewRuntimeStore } from "../runtime/reviewRuntimeStore";
 
 type Args = {
     subjectSlug: string;
@@ -30,7 +31,9 @@ export function useReviewScrollSync({
                                         unlockAll,
                                         showSkeleton,
                                     }: Args) {
-    const [activeCardIndex, setActiveCardIndex] = useState(0);
+    const activeCardIndex = useReviewRuntimeStore((s) => s.activeCardIndex);
+    const setActiveCardIndex = useReviewRuntimeStore((s) => s.goToCard);
+
     const restoreActivityKeyRef = useRef<string>("");
     const mainScrollRef = useRef<HTMLElement | null>(null);
     const cardElRef = useRef(new Map<string, HTMLDivElement | null>());

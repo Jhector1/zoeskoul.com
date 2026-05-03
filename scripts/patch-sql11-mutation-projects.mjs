@@ -158,6 +158,3 @@ for (const file of files) {
     const result = await patchFile(file);
     if (result) changed.push(result);
 }
-
-console.log("Patched SQL module 11 mutation topics:");
-console.log(JSON.stringify(changed, null, 2));

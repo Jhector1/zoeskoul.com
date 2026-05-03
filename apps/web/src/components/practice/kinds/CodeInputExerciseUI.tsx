@@ -26,6 +26,12 @@ import {isRunnerLanguage, RunnerLanguage} from "@zoeskoul/code-contracts";
 
 type CodeInputExercise = Extract<Exercise, { kind: "code_input" }>;
 
+import { useReviewRuntimeStore } from "@/components/review/module/runtime/reviewRuntimeStore";
+import type { WorkspaceStateV2 } from "@/components/ide/types";
+import { resolveExerciseWorkspace } from "@/components/review/module/runtime/exerciseWorkspaceResolver";
+import { reviewDebug, summarizeWorkspace } from "@/components/review/module/runtime/reviewDebug";
+import { exerciseDebug, summarizeExerciseWorkspace } from "@/components/review/module/runtime/exerciseDebug";
+
 export type CodeInputAutoBindMode = "never" | "whenUnbound" | "whenActive" | "always";
 
 function join(...xs: Array<string | false | null | undefined>) {
@@ -145,12 +151,22 @@ export default function CodeInputExerciseUI({
                                                 explanation = null,
                                                 runFeedback = null,
                                                 runFeedbackTick = 0,
+                                                sketch,
+                                                savedSketch,
                                                 sqlDialect,
                                                 sqlDatasetId,
                                                 sqlSchemaSql,
                                                 sqlSeedSql,
                                                 sqlSetupSql,
                                                 sqlInitialTableSnapshots,
+                                                exerciseKey,
+                                                subjectSlug,
+                                                moduleSlug,
+                                                sectionSlug,
+                                                topicId,
+                                                cardId,
+                                                workspace,
+                                                onChangeWorkspace,
                                             }: {
     exercise: CodeInputExercise;
     code: string;
@@ -175,6 +191,8 @@ export default function CodeInputExerciseUI({
     ok?: boolean | null;
     reviewCorrect?: { language: RunnerLanguage; code: string; stdin: string } | null;
     readOnly?: boolean;
+    onSketchStateChange?: (s: any) => void;
+    savedSketch?: any;
     variant?: "embedded" | "tools";
     toolsBound?: boolean;
     toolsUnbound?: boolean;
@@ -187,6 +205,8 @@ export default function CodeInputExerciseUI({
     explanation?: string | null;
     runFeedback?: CodeFeedback | null;
     runFeedbackTick?: number;
+    sketch?: any;
+    // Removed duplicate savedSketch here if any
 
     sqlDialect?: SqlDialect;
     sqlDatasetId?: string;
@@ -194,13 +214,159 @@ export default function CodeInputExerciseUI({
     sqlSeedSql?: string;
     sqlSetupSql?: string;
     sqlInitialTableSnapshots?: SqlTableSnapshots;
+
+    exerciseKey?: string | null;
+    subjectSlug?: string | null;
+    moduleSlug?: string | null;
+    sectionSlug?: string | null;
+    topicId?: string | null;
+    cardId?: string | null;
+    workspace?: WorkspaceStateV2 | null;
+    onChangeWorkspace?: (workspace: WorkspaceStateV2) => void;
 }) {
+    const patchExercise = useReviewRuntimeStore((s) => s.patchExercise);
+
+    const lockLanguage = exercise.kind === "code_input" && Boolean(exercise.language);
+
+    const handleCodeChange = useCallback(
+        (nextCode: string) => {
+            if (readOnly) return;
+
+            if (workspace && onChangeWorkspace) {
+                const entryId = workspace.entryFileId || workspace.activeFileId;
+
+                const nextWorkspace: WorkspaceStateV2 = {
+                    ...workspace,
+                    nodes: workspace.nodes.map((node) => {
+                        if (node.kind === "file" && node.id === entryId) {
+                            return {
+                                ...node,
+                                content: nextCode,
+                                updatedAt: Date.now(),
+                            };
+                        }
+
+                        return node;
+                    }),
+                };
+
+                onChangeWorkspace(nextWorkspace);
+                return;
+            }
+
+            onChangeCode(nextCode);
+        },
+        [readOnly, workspace, onChangeWorkspace, onChangeCode],
+    );
+
+    const handleStdinChange = useCallback(
+        (nextStdin: string) => {
+            if (readOnly) return;
+
+            if (workspace && onChangeWorkspace) {
+                onChangeWorkspace({
+                    ...workspace,
+                    stdin: nextStdin,
+                });
+                return;
+            }
+
+            onChangeStdin(nextStdin);
+        },
+        [readOnly, workspace, onChangeWorkspace, onChangeStdin],
+    );
+
+    const handleWorkspaceChange = useCallback(
+        (nextWorkspace: WorkspaceStateV2) => {
+            if (readOnly) return;
+
+            const entryId = nextWorkspace.entryFileId || nextWorkspace.activeFileId;
+            const entryNode = nextWorkspace.nodes.find(
+                (node) => node.kind === "file" && node.id === entryId,
+            );
+
+            const nextCode =
+                entryNode && entryNode.kind === "file"
+                    ? entryNode.content ?? ""
+                    : "";
+
+            const nextStdin = nextWorkspace.stdin ?? "";
+
+            exerciseDebug("F_CodeInputExerciseUI_handleWorkspaceChange", {
+                exerciseKey,
+                exerciseId: exercise.id,
+                nextCode,
+                nextStdin,
+                workspace: summarizeExerciseWorkspace(nextWorkspace),
+            });
+
+            reviewDebug("1_EDITOR_EMIT CodeInputExerciseUI.handleWorkspaceChange", {
+                exerciseKey,
+                nextCode,
+                nextStdin,
+                workspace: summarizeWorkspace(nextWorkspace),
+            });
+
+            onChangeWorkspace?.(nextWorkspace);
+
+            if (exerciseKey) {
+                patchExercise(exerciseKey, {
+                    workspace: nextWorkspace,
+                    codeWorkspace: nextWorkspace,
+                    ideWorkspace: nextWorkspace,
+                    stdin: nextStdin,
+                    codeStdin: nextStdin,
+                    code: nextCode,
+                } as any);
+            }
+
+            if (nextCode !== code) {
+                onChangeCode(nextCode);
+            }
+
+            if (nextStdin !== stdin) {
+                onChangeStdin(nextStdin);
+            }
+        },
+        [
+            readOnly,
+            onChangeWorkspace,
+            exerciseKey,
+            patchExercise,
+            code,
+            stdin,
+            onChangeCode,
+            onChangeStdin,
+        ],
+    );
+
+    const handleWorkspaceLanguageChange = useCallback(
+        (l: RunnerLanguage) => {
+            if (readOnly || lockLanguage) return;
+            const newWorkspace = resolveExerciseWorkspace({
+                language: l as any,
+                manifest: exercise,
+            });
+            onChangeLanguage(l);
+            onChangeWorkspace?.(newWorkspace);
+        },
+        [readOnly, lockLanguage, onChangeLanguage, onChangeWorkspace, exercise],
+    );
+
     const showCorrect =
         checked && ok === false && reviewCorrect && typeof reviewCorrect.code === "string";
-
-    const lockLanguage = true;
     const didAutoBind = useRef(false);
     const didFirstSync = useRef(false);
+
+    /**
+     * React can reuse this component while QuizPracticeCard switches from
+     * exercise A to exercise B. If these refs are not reset, the new exercise
+     * may never bind to Tools, leaving the right editor showing exercise A.
+     */
+    useEffect(() => {
+        didAutoBind.current = false;
+        didFirstSync.current = false;
+    }, [exerciseKey, exercise.id, variant]);
     const ui = useTaggedT("practiceUi.codeInput");
 
     const [embeddedRunFeedback, setEmbeddedRunFeedback] = useState<CodeFeedback | null>(null);
@@ -314,16 +480,22 @@ export default function CodeInputExerciseUI({
     useEffect(() => {
         if (variant !== "tools") return;
         if (!onUseTools) return;
-        if (readOnly || disabled) return;
         if (toolsBound) return;
         if (didAutoBind.current) return;
 
         if (autoBindMode === "never") return;
         if (autoBindMode === "whenUnbound" && !toolsUnbound) return;
 
+        /**
+         * Exercise navigation is independent from main sketch/card navigation.
+         *
+         * Bind the active exercise to Tools even if the exercise is disabled,
+         * checked, or readOnly. Those flags should lock validation/input rules,
+         * not prevent Tools from switching to the active exercise workspace.
+         */
         didAutoBind.current = true;
         onUseTools();
-    }, [variant, onUseTools, readOnly, disabled, toolsBound, toolsUnbound, autoBindMode]);
+    }, [variant, onUseTools, toolsBound, toolsUnbound, autoBindMode, exerciseKey, exercise.id]);
 
     useEffect(() => {
         if (variant !== "tools") return;
@@ -337,13 +509,6 @@ export default function CodeInputExerciseUI({
 
         onSyncTools();
     }, [variant, toolsBound, code, stdin, language, onSyncTools, runFeedbackTick]);
-    const handleWorkspaceLanguageChange = useCallback(
-        (next: WorkspaceLanguage) => {
-            if (!isRunnerLanguage(next)) return;
-            onChangeLanguage(next);
-        },
-        [onChangeLanguage],
-    );
     if (variant === "tools") {
         return (
             <div className="grid gap-3">
@@ -381,9 +546,9 @@ export default function CodeInputExerciseUI({
                         <button
                             type="button"
                             onClick={onUseTools}
-                            disabled={disabled || readOnly || !onUseTools}
+                            disabled={!onUseTools}
                             className={
-                                disabled || readOnly || !onUseTools ? "ui-btn-disabled" : "ui-btn-secondary"
+                                !onUseTools ? "ui-btn-disabled" : "ui-btn-secondary"
                             }
                             title={ui.t("tools.bindTitle", {}, "Bind this question to the Tools panel")}
                         >
@@ -414,6 +579,43 @@ export default function CodeInputExerciseUI({
 
     const runnerTitle = showPrompt ? exercise.title : undefined;
 
+    const isWorkspaceValid =
+        workspace &&
+        workspace.version === 2 &&
+        Array.isArray(workspace.nodes) &&
+        workspace.nodes.some((n) => n.kind === "file") &&
+        workspace.activeFileId &&
+        workspace.entryFileId;
+
+    const runnerExerciseKey =
+        exerciseKey ||
+        [
+            "code-input",
+            subjectSlug || "subject",
+            moduleSlug || "module",
+            sectionSlug || "section",
+            topicId || "topic",
+            cardId || "card",
+            exercise.id || "exercise",
+        ].join(":");
+
+
+    const runnerEditorModelKey = [
+        runnerExerciseKey,
+        workspace?.entryFileId || workspace?.activeFileId || "entry",
+    ].join(":");
+
+    if (workspace && !isWorkspaceValid) {
+        if (process.env.NODE_ENV === "development") {
+            console.warn("[CodeInputExerciseUI] Invalid workspace provided:", workspace);
+        }
+        return (
+            <div className="p-4 border border-dashed border-ui-border rounded text-ui-soft text-sm italic">
+                Preparing workspace...
+            </div>
+        );
+    }
+
     return (
         <div className="grid gap-3">
             {showPrompt ? <ExercisePrompt exercise={exercise} /> : null}
@@ -423,6 +625,7 @@ export default function CodeInputExerciseUI({
             ) : null}
 
             <CodeRunner
+                key={`${runnerExerciseKey}:main`}
                 title={runnerTitle as any}
                 frame={frame}
                 hintMarkdown={exercise.hint}
@@ -434,11 +637,15 @@ export default function CodeInputExerciseUI({
                 showHint={false}
                 showEditorThemeToggle={!readOnly}
                 language={language}
-                onChangeLanguage={handleWorkspaceLanguageChange}
+                onChangeLanguage={handleWorkspaceLanguageChange as any}
                 fixedLanguage={lockLanguage ? language : undefined}
                 showLanguagePicker={lockLanguage ? false : true}
                 code={code}
                 stdin={stdin}
+                workspace={workspace}
+                onChangeWorkspace={handleWorkspaceChange}
+                exerciseStateKey={runnerExerciseKey}
+                editorModelKey={runnerEditorModelKey}
                 fixedSqlDialect={resolvedSql.isSql ? resolvedSql.sqlDialect : undefined}
                 showSqlDialectPicker={resolvedSql.isSql ? false : undefined}
                 sqlSchemaSql={resolvedSql.isSql ? (resolvedSql.sqlSchemaSql ?? "") : undefined}
@@ -446,8 +653,8 @@ export default function CodeInputExerciseUI({
                 sqlInitialTableSnapshots={
                     resolvedSql.isSql ? resolvedSql.sqlInitialTableSnapshots : undefined
                 }
-                onChangeCode={(c) => !readOnly && onChangeCode(c)}
-                onChangeStdin={(s) => !readOnly && onChangeStdin(s)}
+                onChangeCode={handleCodeChange}
+                onChangeStdin={handleStdinChange}
                 onRun={(args) =>
                     executeEmbeddedRun({
                         language: args.language,
@@ -471,6 +678,7 @@ export default function CodeInputExerciseUI({
 
                     <div className="mt-2">
                         <CodeRunner
+                            key={`${runnerExerciseKey}:correct`}
                             frame="plain"
                             title={undefined as any}
                             hintMarkdown={undefined as any}
@@ -485,6 +693,8 @@ export default function CodeInputExerciseUI({
                             language={reviewCorrect!.language}
                             fixedLanguage={reviewCorrect!.language}
                             onChangeLanguage={() => {}}
+                            exerciseStateKey={`${runnerExerciseKey}:correct`}
+                            editorModelKey={`${runnerExerciseKey}:correct`}
                             code={reviewCorrect!.code}
                             stdin={reviewCorrect!.stdin}
                             onChangeCode={() => {}}

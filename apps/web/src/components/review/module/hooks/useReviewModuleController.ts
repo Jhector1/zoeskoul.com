@@ -46,6 +46,7 @@ import {
 } from "../data/studentsSqlFallback";
 
 import type { ReviewModulePageProps, HeaderGamificationVm } from "../types";
+import { useReviewRuntimeStore } from "../runtime/reviewRuntimeStore";
 
 export function useReviewModuleController({
                                               mod,
@@ -60,6 +61,7 @@ export function useReviewModuleController({
     const locale = params?.locale ?? "en";
     const subjectSlug = params?.subjectSlug ?? "";
     const moduleSlug = params?.moduleSlug ?? "";
+    const sectionSlug = (params as any)?.sectionSlug;
     const unlockAll = Boolean(canUnlockAll);
 
     const navModes = useMemo(
@@ -90,7 +92,18 @@ export function useReviewModuleController({
         viewTopicId,
         setViewTopicId,
         flushNow,
+        flush: flushDebounced,
     } = useReviewProgress({ subjectSlug, moduleSlug, locale, firstTopicId });
+
+    const store = useReviewRuntimeStore();
+
+    const flushAll = useCallback(async () => {
+        store.flushBeforeNavigation({
+            flushProgress: () => {
+                void flushNow(progress);
+            }
+        });
+    }, [store, flushNow, progress]);
 
     const viewTopic = useMemo(
         () => getViewTopic(topics, viewTopicId),
@@ -112,7 +125,7 @@ export function useReviewModuleController({
 
     const panels = useReviewPanels({ footerInsetPx });
 
-    const sketch = useDebouncedSketchState({ setProgress, viewTid });
+    const sketch = useDebouncedSketchState({});
 
     useEffect(() => {
         if (!progressHydrated) return;
@@ -226,6 +239,7 @@ export function useReviewModuleController({
         setActiveTopicId,
         viewTopicId,
         setViewTopicId,
+        onBeforeNavigate: flushAll,
     });
 
     const showSkeleton = useSkeletonGate({
@@ -281,28 +295,38 @@ export function useReviewModuleController({
         topicId: string;
         cardId: string;
         exerciseId: string;
+        inputId: string;
     } | null>(null);
     const activeExerciseTarget = useMemo(() => {
         if (!requestedExerciseTarget) return null;
         if (requestedExerciseTarget.topicId !== viewTid) return null;
 
-        const activeCardId = activeCard?.id ?? null;
-        if (!activeCardId) return null;
-        if (requestedExerciseTarget.cardId !== activeCardId) return null;
-
+        /**
+         * Do not over-filter by activeCard here.
+         *
+         * The exercise carousel lives inside the active card and can rebind faster
+         * than the outer card state updates. Over-filtering makes the tools panel
+         * fall back to :general, which creates blank/no-workspace editors.
+         */
         return requestedExerciseTarget;
-    }, [requestedExerciseTarget, viewTid, activeCard?.id]);
+    }, [requestedExerciseTarget, viewTid]);
+
+    const activeToolScopeKey =
+        activeExerciseTarget?.exerciseId ??
+        (activeCard?.id ? `card:${activeCard.id}` : "card:general");
 
     const tool = useToolCodeRunnerState({
         progress,
         progressHydrated,
         setProgress,
         viewTid,
-        scopeKey: activeExerciseTarget
-            ? `exercise:${activeExerciseTarget.exerciseId}`
-            : activeCard?.id
-                ? `card:${activeCard.id}`
-                : "card:general",
+        /**
+         * Critical:
+         * The tool-state hook must hydrate from the active exercise scope
+         * when an exercise is active. If this stays on the outer card scope,
+         * the last sketch/card editor text can leak into the first exercise.
+         */
+        scopeKey: activeToolScopeKey,
         defaultLang: runtime.toolDefaults.defaultLang,
         defaultCode: runtime.toolDefaults.defaultCode,
         defaultStdin: runtime.toolDefaults.defaultStdin,
@@ -527,18 +551,66 @@ export function useReviewModuleController({
         }
     }, [panels.rightCollapsed, panels.setRightCollapsed]);
 
+    const handleRun = useCallback(() => {
+        void flushAll();
+    }, [flushAll]);
+
+    const handleReveal = useCallback(() => {
+        void flushAll();
+    }, [flushAll]);
+
+    const handleSubmit = useCallback(() => {
+        void flushAll();
+    }, [flushAll]);
+
     const handleBindToToolsPanel = useCallback(
         (args: Parameters<typeof tool.bindCodeInput>[0]) => {
-            void tool.flushLatest();
             const ownerCardId = args.ownerCardId?.trim() || activeCard?.id || "general";
-            setRequestedExerciseTarget({
-                topicId: viewTid,
-                cardId: ownerCardId,
-                exerciseId: args.id,
-            });
-            tool.bindCodeInput(args);
+            const targetExerciseKey = (args as any).exerciseKey ?? args.id;
+
+            const alreadyRequested =
+                requestedExerciseTarget?.topicId === viewTid &&
+                requestedExerciseTarget?.cardId === ownerCardId &&
+                requestedExerciseTarget?.exerciseId === targetExerciseKey &&
+                requestedExerciseTarget?.inputId === args.id;
+
+            const actuallyBound = tool.boundId === targetExerciseKey;
+
+            /**
+             * Bind is an exercise-navigation event.
+             *
+             * Do not return only because requestedExerciseTarget matches.
+             * The requested target can be set while the actual tool binding is
+             * still null/stale, which makes the right rail fall back to :general.
+             */
+            if (alreadyRequested && actuallyBound) return;
+
+            void tool.flushLatest();
+
+            if (!alreadyRequested) {
+                setRequestedExerciseTarget({
+                    topicId: viewTid,
+                    cardId: ownerCardId,
+                    exerciseId: targetExerciseKey,
+                    inputId: args.id,
+                });
+            }
+
+            if (!actuallyBound) {
+                tool.bindCodeInput(args as any);
+            }
         },
-        [tool.bindCodeInput, tool.flushLatest, activeCard?.id, viewTid],
+        [
+            tool.bindCodeInput,
+            tool.flushLatest,
+            tool.boundId,
+            activeCard?.id,
+            viewTid,
+            requestedExerciseTarget?.topicId,
+            requestedExerciseTarget?.cardId,
+            requestedExerciseTarget?.exerciseId,
+            requestedExerciseTarget?.inputId,
+        ],
     );
 
     const handleUnbindFromToolsPanel = useCallback(() => {
@@ -571,6 +643,21 @@ export function useReviewModuleController({
         (progress as any)?.topics?.[viewTid],
         viewTid,
     );
+
+    /**
+     * Exercise navigation happens inside the Exercises card, not through the
+     * outer card navigator. During exercise switching, activeExerciseTarget can
+     * briefly be null even though useToolCodeRunnerState already has the
+     * current bound exercise.
+     *
+     * The right rail must prefer the real exercise binding when available,
+     * otherwise ToolsPanel falls back to `${topic}:general` and the editor
+     * shows blank/stale state.
+     */
+    const rightRailExerciseKey =
+        activeExerciseTarget?.exerciseId ??
+        tool.boundId ??
+        null;
 
     return {
         toolsProvider,
@@ -639,9 +726,9 @@ export function useReviewModuleController({
             toolsPanelProps: {
                 onCollapse: panels.handleCollapseRight,
                 onUnbind: handleUnbindFromToolsPanel,
-                boundId: activeExerciseTarget?.exerciseId ?? null,
-                toolScopeKey: activeExerciseTarget
-                    ? `${subjectSlug}:${moduleSlug}:${viewTid}:exercise:${activeExerciseTarget.exerciseId}`
+                boundId: rightRailExerciseKey,
+                toolScopeKey: rightRailExerciseKey
+                    ? rightRailExerciseKey
                     : `${subjectSlug}:${moduleSlug}:${viewTid}:${activeCard?.id ?? "general"}:general`,
                 rightBodyRef: tool.rightBodyRef,
                 codeRunnerRegionH: tool.codeRunnerRegionH,
@@ -716,7 +803,6 @@ export function useReviewModuleController({
             viewCards,
             viewTid,
             activeCardIndex: scrollSync.activeCardIndex,
-            onActiveCardIndexChange: scrollSync.setActiveCardIndex,
             navModes: resolvedNavModes,
             reduceMotion,
             tp: viewProg,
@@ -726,6 +812,9 @@ export function useReviewModuleController({
             sketch,
             setProgress,
             flushNow,
+            onRun: handleRun,
+            onReveal: handleReveal,
+            onSubmit: handleSubmit,
             scrollToNextActionable: scrollSync.scrollToNextActionable,
             setCardEl: scrollSync.setCardEl,
             viewIsComplete,
@@ -733,8 +822,11 @@ export function useReviewModuleController({
             continueLabel: outroContinueLabel,
             showSubjectFinish: !topicFlow.nextTopic?.id,
             subjectSlug,
+            moduleSlug,
+            sectionSlug,
             subjectFinish,
             onOpenCertificate: handleOpenCertificate,
+            onActiveCardIndexChange: scrollSync.setActiveCardIndex,
         },
 
         celebrations: {

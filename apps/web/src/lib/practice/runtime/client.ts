@@ -23,6 +23,63 @@ import {
     normalizePracticeHelpPolicy,
 } from "@/lib/practice/help/steps";
 
+function isWorkspaceStateForPatch(value: unknown) {
+    return (
+        !!value &&
+        typeof value === "object" &&
+        (value as any).version === 2 &&
+        Array.isArray((value as any).nodes)
+    );
+}
+
+function getWorkspaceEntryCodeForPatch(workspace: any) {
+    if (!isWorkspaceStateForPatch(workspace)) return null;
+
+    const entryId = workspace.entryFileId || workspace.activeFileId;
+    const file = workspace.nodes.find(
+        (node: any) => node?.kind === "file" && node.id === entryId,
+    );
+
+    return file?.kind === "file" ? String(file.content ?? "") : null;
+}
+
+function normalizeCodePatchFromWorkspace<T extends Partial<QItem> | null>(patch: T): T {
+    if (!patch) return patch;
+
+    const workspace =
+        (patch as any).workspace ??
+        (patch as any).codeWorkspace ??
+        (patch as any).ideWorkspace ??
+        null;
+
+    const workspaceCode = getWorkspaceEntryCodeForPatch(workspace);
+    if (workspaceCode == null) return patch;
+
+    const workspaceStdin =
+        typeof workspace?.stdin === "string" ? workspace.stdin : undefined;
+
+    const workspaceLanguage =
+        typeof workspace?.language === "string" ? workspace.language : undefined;
+
+    return {
+        ...(patch as any),
+        code: workspaceCode,
+        source: workspaceCode,
+        ...(workspaceStdin !== undefined
+            ? {
+                stdin: workspaceStdin,
+                codeStdin: workspaceStdin,
+              }
+            : {}),
+        ...(workspaceLanguage
+            ? {
+                language: workspaceLanguage,
+                codeLang: workspaceLanguage,
+              }
+            : {}),
+    } as T;
+}
+
 export async function fetchResolvedPracticeItem(args: {
     request: Record<string, any>;
     signal?: AbortSignal;
@@ -57,9 +114,11 @@ export async function fetchResolvedPracticeItem(args: {
         item = transformItem(item, resolvedExercise);
     }
 
-    const resolvedPatch = savedPatch
-        ? (resolveDeepTagged(savedPatch, resolvers.raw) as Partial<QItem>)
-        : null;
+    const resolvedPatch = normalizeCodePatchFromWorkspace(
+        savedPatch
+            ? (resolveDeepTagged(savedPatch, resolvers.raw) as Partial<QItem>)
+            : null,
+    );
 
     if (resolvedPatch) {
         item = {

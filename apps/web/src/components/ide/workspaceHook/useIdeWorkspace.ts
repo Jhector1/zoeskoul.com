@@ -213,6 +213,7 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
 
     const projectId = draftStorageMode === "local" ? null : (opts?.projectId ?? null);
     const scopeKey = opts?.scopeKey ?? null;
+    const exerciseStateKey = opts?.exerciseStateKey ?? null;
 
     // const [language, setLanguageState] = useState<WorkspaceLanguage>("python");
     const [nodes, setNodes] = useState<FSNode[]>([]);
@@ -245,9 +246,10 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
                 actorKey,
                 projectId,
                 scopeKey,
+                exerciseStateKey,
                 localWorkspaceId: projectId ? null : localWorkspaceIdRef.current,
             }),
-        [actorKey, projectId, scopeKey],
+        [actorKey, projectId, scopeKey, exerciseStateKey],
     );
 
     const hydrationIdentity = useMemo(
@@ -515,9 +517,17 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
                 actorKey,
                 projectId,
                 scopeKey,
+                exerciseStateKey,
                 localWorkspaceId: projectId ? null : localWorkspaceIdRef.current,
             }),
-        [baseStorageKey, draftStorageMode, actorKey, projectId, scopeKey],
+        [
+            baseStorageKey,
+            draftStorageMode,
+            actorKey,
+            projectId,
+            scopeKey,
+            exerciseStateKey,
+        ],
     );
 
     const saveWorkspaceForLanguage = useCallback(
@@ -529,9 +539,17 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
                 actorKey,
                 projectId,
                 scopeKey,
+                exerciseStateKey,
                 localWorkspaceId: projectId ? null : localWorkspaceIdRef.current,
             }),
-        [baseStorageKey, draftStorageMode, actorKey, projectId, scopeKey],
+        [
+            baseStorageKey,
+            draftStorageMode,
+            actorKey,
+            projectId,
+            scopeKey,
+            exerciseStateKey,
+        ],
     );
 
     const switchLanguage = useCallback(

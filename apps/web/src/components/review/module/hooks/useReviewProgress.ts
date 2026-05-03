@@ -11,6 +11,28 @@ import { stableJson } from "@/lib/client/persistence/stableJson";
 import { useDebouncedCommit } from "@/lib/client/persistence/useDebouncedCommit";
 import { useFlushOnPageExit } from "@/lib/client/persistence/useFlushOnPageExit";
 import {emitGamificationUpdate} from "@/lib/gamification/browserEvents";
+import { useReviewRuntimeStore } from "../runtime/reviewRuntimeStore";
+import { mergeRuntimeIntoProgress } from "../runtime/runtimeProgressBridge";
+import { reviewDebug, summarizePracticePatch, summarizeWorkspace } from "../runtime/reviewDebug";
+
+function isPersistedCardToolKey(toolKey: string) {
+    if (!toolKey) return false;
+    if (toolKey.startsWith("exercise:")) return false;
+    if (toolKey.startsWith("card:")) return true;
+    if (toolKey.endsWith(":general")) return true;
+    return false;
+}
+
+function cardIdFromPersistedToolKey(toolKey: string) {
+    if (toolKey.startsWith("card:")) return toolKey.replace(/^card:/, "");
+
+    const parts = toolKey.split(":").filter(Boolean);
+    if (parts.length >= 2 && parts[parts.length - 1] === "general") {
+        return parts[parts.length - 2];
+    }
+
+    return toolKey;
+}
 
 export function useReviewProgress(args: {
     subjectSlug: string;
@@ -36,6 +58,12 @@ export function useReviewProgress(args: {
     activeTopicIdRef.current = id;
     _setActiveTopicId(id);
   }, []);
+
+  const store = useReviewRuntimeStore();
+
+  useEffect(() => {
+    store.setTopicIds(activeTopicId, viewTopicId);
+  }, [activeTopicId, viewTopicId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const setProgressSafe = useCallback((updater: any) => {
     setProgress((prev: any) => {
@@ -110,17 +138,50 @@ export function useReviewProgress(args: {
         async (state: ReviewProgressState) => {
             if (!subjectSlug || !moduleSlug) return;
 
+            const stateWithRuntime = mergeRuntimeIntoProgress(
+                state,
+                useReviewRuntimeStore.getState(),
+            );
+
+            progressRef.current = stateWithRuntime;
+
+            const activeTopic = activeTopicIdRef.current
+              ? (stateWithRuntime as any).topics?.[activeTopicIdRef.current]
+              : null;
+
+            reviewDebug("9_API_SAVE useReviewProgress.putProgressNow", {
+              subjectSlug,
+              moduleSlug,
+              activeTopicId: activeTopicIdRef.current,
+              topicKeys: Object.keys((stateWithRuntime as any).topics ?? {}),
+              activeTopicRuntimeExerciseKeys: Object.keys(
+                activeTopic?.runtimeStateV2?.exercises ?? {},
+              ),
+              activeTopicQuizCards: Object.keys(activeTopic?.quizState ?? {}),
+              activeTopicPracticePatchByCard: Object.fromEntries(
+                Object.entries(activeTopic?.quizState ?? {}).map(([cardId, cardState]: any) => [
+                  cardId,
+                  Object.fromEntries(
+                    Object.entries(cardState?.practiceItemPatch ?? {}).map(
+                      ([key, patch]: any) => [key, summarizePracticePatch(patch)],
+                    ),
+                  ),
+                ]),
+              ),
+            });
+
             const nextPayload = buildReviewProgressPayload({
                 subjectSlug,
                 moduleSlug,
                 locale,
-                state,
+                state: stateWithRuntime,
                 activeTopicId: activeTopicIdRef.current,
             });
 
             const body = stableJson(nextPayload);
 
-            if (body === lastCommittedRef.current) return;
+
+
 
             try {
                 const res = await fetch("/api/review/progress", {
@@ -130,6 +191,8 @@ export function useReviewProgress(args: {
                     keepalive: true,
                     cache: "no-store",
                 });
+
+
 
                 if (res.ok) {
                     lastCommittedRef.current = body;
@@ -169,7 +232,93 @@ export function useReviewProgress(args: {
           signal: ctrl.signal,
         });
 
+        const getBody = JSON.stringify(p);
+
+
         setProgressSafe(p);
+
+        // Phase 7: Hydrate Zustand store from progress
+        if (p.topics) {
+            Object.entries(p.topics).forEach(([tid, tp]) => {
+                /**
+                 * Hydrate card/sketch Tools workspace from persisted toolState.
+                 * This must run even if runtimeStateV2 is missing.
+                 */
+                if ((tp as any).toolState) {
+                    Object.entries((tp as any).toolState).forEach(([toolKey, toolEntry]) => {
+                        const key = String(toolKey);
+                        if (!isPersistedCardToolKey(key)) return;
+
+                        const entry = toolEntry as any;
+                        if (!entry?.workspace) return;
+
+                        const cardId = cardIdFromPersistedToolKey(key);
+                        const cardKey = `${tid}:${cardId}`;
+
+                        store.ensureCard({
+                            cardKey,
+                            topicId: tid,
+                            cardId,
+                            initial: {
+                                cardKey,
+                                topicId: tid,
+                                cardId,
+                                visited: false,
+                                completed: false,
+                                toolKey: key,
+                                toolWorkspace: entry.workspace,
+                                toolCode: entry.code,
+                                toolStdin: entry.stdin,
+                                toolLang: entry.lang,
+                                updatedAt: Date.now(),
+                            } as any,
+                        });
+
+                        store.patchCard(cardKey, {
+                            topicId: tid,
+                            cardId,
+                            toolKey: key,
+                            toolWorkspace: entry.workspace,
+                            toolCode: entry.code,
+                            toolStdin: entry.stdin,
+                            toolLang: entry.lang,
+                        } as any);
+                    });
+                }
+
+                if (tp.runtimeStateV2) {
+                    if (tp.runtimeStateV2.cards) {
+                        Object.entries(tp.runtimeStateV2.cards).forEach(([ckey, cstate]) => {
+                            store.ensureCard({
+                                cardKey: ckey,
+                                topicId: tid,
+                                cardId: (cstate as any).cardId || "",
+                                initial: cstate as any,
+                            });
+                        });
+                    }
+                    if (tp.runtimeStateV2.exercises) {
+                        Object.entries(tp.runtimeStateV2.exercises).forEach(([ekey, estate]) => {
+                            const est = estate as any;
+                            store.ensureExercise({
+                                exerciseKey: ekey,
+                                subjectSlug: est.subjectSlug || subjectSlug || "",
+                                moduleSlug: est.moduleSlug || moduleSlug || "",
+                                sectionSlug: est.sectionSlug,
+                                topicId: est.topicId || tid,
+                                cardId: est.cardId || "",
+                                manifest: estate as any,
+                                saved: estate,
+                            });
+                            // Force immediate patch if saved state has more recent data
+                            if (est.workspace || est.code || est.sketch) {
+                                store.patchExercise(ekey, est);
+                            }
+                        });
+                    }
+                }
+            });
+        }
 
         const nextActive = (p as any).activeTopicId || firstTopicId;
         setActiveTopicId(nextActive);
@@ -230,6 +379,20 @@ export function useReviewProgress(args: {
     };
   }, [hydrated, subjectSlug, moduleSlug, locale, cancel, putProgressNow]);
 
+  // Bridge Zustand runtime changes into persisted review progress.
+  // This keeps per-exercise workspaces from falling back to starter code
+  // when the user navigates away and returns.
+  useEffect(() => {
+    if (!hydrated) return;
+
+    const unsub = useReviewRuntimeStore.subscribe((runtimeState) => {
+      setProgressSafe((prev: ReviewProgressState) =>
+        mergeRuntimeIntoProgress(prev, runtimeState),
+      );
+    });
+
+    return () => unsub();
+  }, [hydrated, setProgressSafe]);
   return {
     hydrated,
 

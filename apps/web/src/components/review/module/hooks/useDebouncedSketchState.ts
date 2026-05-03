@@ -1,31 +1,19 @@
 "use client";
 
 import { useCallback, useEffect, useRef } from "react";
-
-function makeSketchKey(topicId: string, sketchCardId: string) {
-    return JSON.stringify([topicId, sketchCardId]);
-}
-
-function parseSketchKey(key: string): [string, string] | null {
-    try {
-        const parsed = JSON.parse(key);
-        if (Array.isArray(parsed) && typeof parsed[0] === "string" && typeof parsed[1] === "string") {
-            return [parsed[0], parsed[1]];
-        }
-    } catch {}
-    return null;
-}
+import { useReviewRuntimeStore } from "../runtime/reviewRuntimeStore";
 
 export function useDebouncedSketchState(args: {
-    setProgress: (updater: any) => void;
-    viewTid: string;
     delayMs?: number;
 }) {
-    const { setProgress, viewTid, delayMs = 900 } = args;
+    const { delayMs = 900 } = args;
+
+    const patchCard = useReviewRuntimeStore((s) => s.patchCard);
+    const patchExercise = useReviewRuntimeStore((s) => s.patchExercise);
 
     const timersRef = useRef<Map<string, number>>(new Map());
     const lastHashRef = useRef<Map<string, string>>(new Map());
-    const latestRef = useRef<Map<string, any>>(new Map());
+    const latestRef = useRef<Map<string, { state: any; isExercise: boolean }>>(new Map());
 
     const clearTimer = useCallback((key: string) => {
         const timer = timersRef.current.get(key);
@@ -34,37 +22,20 @@ export function useDebouncedSketchState(args: {
     }, []);
 
     const commitNow = useCallback(
-        (topicId: string, sketchCardId: string) => {
-            const key = makeSketchKey(topicId, sketchCardId);
+        (key: string) => {
             clearTimer(key);
 
-            if (!latestRef.current.has(key)) return;
-            const s = latestRef.current.get(key);
-            const nextHash = JSON.stringify(s ?? null);
+            const record = latestRef.current.get(key);
+            if (!record) return;
+            const { state, isExercise } = record;
 
-            setProgress((p: any) => {
-                const tp0: any = p?.topics?.[topicId] ?? {};
-                const sketchState0: any = tp0?.sketchState ?? {};
-                const prevHash = JSON.stringify(sketchState0?.[sketchCardId] ?? null);
-
-                if (prevHash === nextHash) return p;
-
-                return {
-                    ...p,
-                    topics: {
-                        ...(p?.topics ?? {}),
-                        [topicId]: {
-                            ...tp0,
-                            sketchState: {
-                                ...sketchState0,
-                                [sketchCardId]: s,
-                            },
-                        },
-                    },
-                };
-            });
+            if (isExercise) {
+                patchExercise(key, { sketch: state });
+            } else {
+                patchCard(key, { sketch: state });
+            }
         },
-        [clearTimer, setProgress],
+        [clearTimer, patchCard, patchExercise],
     );
 
     const flushAll = useCallback(() => {
@@ -74,36 +45,27 @@ export function useDebouncedSketchState(args: {
         }
 
         for (const key of latestRef.current.keys()) {
-            const parsed = parseSketchKey(key);
-            if (!parsed) continue;
-            commitNow(parsed[0], parsed[1]);
+            commitNow(key);
         }
     }, [commitNow]);
 
     const saveSketchDebounced = useCallback(
-        (topicId: string, sketchCardId: string, s: any) => {
-            const key = makeSketchKey(topicId, sketchCardId);
+        (key: string, s: any, isExercise: boolean) => {
             const nextHash = JSON.stringify(s ?? null);
 
             if (lastHashRef.current.get(key) === nextHash) return;
             lastHashRef.current.set(key, nextHash);
-            latestRef.current.set(key, s);
+            latestRef.current.set(key, { state: s, isExercise });
 
             clearTimer(key);
             const timer = window.setTimeout(() => {
                 timersRef.current.delete(key);
-                commitNow(topicId, sketchCardId);
+                commitNow(key);
             }, delayMs);
             timersRef.current.set(key, timer);
         },
         [clearTimer, commitNow, delayMs],
     );
-
-    // Flush pending sketch updates before switching topics.
-    useEffect(() => {
-        flushAll();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [viewTid]);
 
     useEffect(() => {
         const onHide = () => flushAll();

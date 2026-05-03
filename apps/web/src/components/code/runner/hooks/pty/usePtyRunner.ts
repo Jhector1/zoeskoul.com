@@ -133,6 +133,8 @@ export function usePtyRunner(args: SharedRunnerArgs): CodeRunnerController {
     const {
         lang,
         code,
+        workspace,
+        exerciseStateKey,
         disabled,
         allowRun,
         resetTerminalOnRun,
@@ -215,6 +217,8 @@ export function usePtyRunner(args: SharedRunnerArgs): CodeRunnerController {
                 const started = await onRun({
                     language: lang,
                     code,
+                    workspace,
+                    exerciseStateKey,
                     stdin: "",
                 } as any);
 
@@ -228,7 +232,9 @@ export function usePtyRunner(args: SharedRunnerArgs): CodeRunnerController {
                 mode: "interactive",
                 language: lang,
                 code,
-            });
+                workspace,
+                exerciseStateKey,
+            } as any);
         } catch (e: any) {
             pushChunk("err", `${e?.message ?? "Failed to start session."}\r\n`);
             setBusy(false);
@@ -244,6 +250,8 @@ export function usePtyRunner(args: SharedRunnerArgs): CodeRunnerController {
         session,
         lang,
         code,
+        workspace,
+        exerciseStateKey,
         onRun,
         pushChunk,
     ]);
