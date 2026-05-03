@@ -34,6 +34,55 @@ function workspaceKeyOf(workspace: WorkspaceStateV2 | null | undefined) {
     return JSON.stringify(workspace ?? null);
 }
 
+function stableWorkspaceHash(value: string) {
+    let hash = 0;
+
+    for (let i = 0; i < value.length; i += 1) {
+        hash = (hash * 31 + value.charCodeAt(i)) | 0;
+    }
+
+    return Math.abs(hash).toString(36);
+}
+
+function repairWorkspaceSelection(
+    workspace: WorkspaceStateV2 | null | undefined,
+): WorkspaceStateV2 | null {
+    if (!workspace || workspace.version !== 2 || !Array.isArray(workspace.nodes)) {
+        return workspace ?? null;
+    }
+
+    const files = workspace.nodes.filter((node: any) => node?.kind === "file");
+    const firstFile = files[0] as any;
+
+    if (!firstFile) return workspace;
+
+    const activeExists = files.some((file: any) => file.id === workspace.activeFileId);
+    const entryExists = files.some((file: any) => file.id === workspace.entryFileId);
+
+    const entryFileId = entryExists
+        ? workspace.entryFileId
+        : activeExists
+            ? workspace.activeFileId
+            : firstFile.id;
+
+    const activeFileId = activeExists
+        ? workspace.activeFileId
+        : entryFileId;
+
+    if (
+        workspace.entryFileId === entryFileId &&
+        workspace.activeFileId === activeFileId
+    ) {
+        return workspace;
+    }
+
+    return {
+        ...workspace,
+        entryFileId,
+        activeFileId,
+    };
+}
+
 function buildToolWorkspace(args: {
     base: WorkspaceStateV2;
     language: RunnerLanguage;
@@ -102,67 +151,91 @@ function extractWorkspaceSnapshot(workspace: WorkspaceStateV2 | null) {
 function isExerciseEditorScope(value: string | null | undefined) {
     if (!value) return false;
     if (value === "general") return false;
-    if (value.startsWith("card:")) return false;
     if (value.endsWith(":general")) return false;
-    if (value.includes(":card:general")) return false;
     if (value.startsWith("code-runner:")) return false;
     return value.split(":").length >= 5;
 }
 
 function isCardEditorScope(value: string | null | undefined) {
     if (!value) return false;
-    if (value.startsWith("card:")) return true;
-    if (value.endsWith(":general")) return true;
-    return false;
+    return value.endsWith(":general");
 }
 
-function cardIdFromEditorScope(value: string) {
-    if (value.startsWith("card:")) return value.replace(/^card:/, "");
 
-    const parts = value.split(":").filter(Boolean);
-    if (parts.length >= 2 && parts[parts.length - 1] === "general") {
-        return parts[parts.length - 2];
+function workspaceCardStarterSchemaVersion(workspace: WorkspaceStateV2 | null | undefined) {
+    return workspace && typeof (workspace as any).cardStarterSchemaVersion === "number"
+        ? Number((workspace as any).cardStarterSchemaVersion)
+        : 0;
+}
+
+function workspaceCardStarterSourceKey(workspace: WorkspaceStateV2 | null | undefined) {
+    return workspace && typeof (workspace as any).cardStarterSourceKey === "string"
+        ? String((workspace as any).cardStarterSourceKey)
+        : null;
+}
+
+function workspaceFileCount(workspace: WorkspaceStateV2 | null | undefined) {
+    if (!workspace || workspace.version !== 2 || !Array.isArray(workspace.nodes)) {
+        return 0;
     }
 
-    return value;
+    return workspace.nodes.filter((node: any) => node?.kind === "file").length;
 }
 
-function readCardToolWorkspaceBackupForEditorScope(scopeKey: string | null | undefined) {
-    if (typeof window === "undefined") return null;
-    if (!scopeKey || !isCardEditorScope(scopeKey)) return null;
+function chooseWorkspaceWithMostFiles(
+    ...workspaces: Array<WorkspaceStateV2 | null | undefined>
+) {
+    let best: WorkspaceStateV2 | null = null;
+    let bestCount = -1;
 
-    const cardId = cardIdFromEditorScope(scopeKey);
-    const prefix = "zoe:review-card-tool-workspace:";
+    for (const workspace of workspaces) {
+        const count = workspaceFileCount(workspace);
 
-    function parse(raw: string | null) {
-        if (!raw) return null;
-
-        try {
-            const parsed = JSON.parse(raw);
-            if (!parsed?.workspace || parsed.workspace.version !== 2) return null;
-            return parsed.workspace as WorkspaceStateV2;
-        } catch {
-            return null;
+        if (workspace && count > bestCount) {
+            best = workspace;
+            bestCount = count;
         }
     }
 
-    // Exact scan by card id. This covers:
-    // zoe:review-card-tool-workspace:<topic>:card:<cardId>
-    // zoe:review-card-tool-workspace:<topic>:subject:module:topic:<cardId>:general
-    for (let i = 0; i < window.localStorage.length; i += 1) {
-        const key = window.localStorage.key(i);
-        if (!key || !key.startsWith(prefix)) continue;
+    return best;
+}
 
-        const storedToolKey = key.slice(prefix.length).split(":").slice(1).join(":");
-        const storedCardId = cardIdFromEditorScope(storedToolKey);
+function shouldIgnoreIncomingWorkspaceFromIde(args: {
+    incoming: WorkspaceStateV2 | null;
+    current: WorkspaceStateV2 | null;
+    isCardScope?: boolean;
+}) {
+    const { incoming, current, isCardScope } = args;
 
-        if (storedCardId !== cardId) continue;
+    const incomingCount = workspaceFileCount(incoming);
+    const currentCount = workspaceFileCount(current);
 
-        const workspace = parse(window.localStorage.getItem(key));
-        if (workspace) return workspace;
+    /**
+     * Strong card-scope guard:
+     *
+     * If the current card workspace has multiple files, never let FullIDE's
+     * smaller mount/default workspace replace it, even if custom metadata was
+     * stripped from the emitted workspace.
+     */
+    if (isCardScope && currentCount > 1 && incomingCount < currentCount) {
+        return true;
     }
 
-    return null;
+    const currentSourceKey = workspaceCardStarterSourceKey(current);
+    const currentSchema = workspaceCardStarterSchemaVersion(current);
+
+    if (!currentSourceKey || currentSchema < 8) {
+        return false;
+    }
+
+    const incomingSourceKey = workspaceCardStarterSourceKey(incoming);
+    const incomingSchema = workspaceCardStarterSchemaVersion(incoming);
+
+    if (!incomingSourceKey || incomingSchema < currentSchema) {
+        return currentCount > 1 && incomingCount < currentCount;
+    }
+
+    return incomingSourceKey !== currentSourceKey;
 }
 
 function patchToolWorkspaceSource(args: {
@@ -183,11 +256,11 @@ function patchToolWorkspaceSource(args: {
      *
      * FullIDE already sends the full updated workspace through onWorkspaceChange.
      */
-    return {
+    return repairWorkspaceSelection({
         ...args.workspace,
         language: args.language,
         stdin: args.stdin,
-    };
+    }) as WorkspaceStateV2;
 }
 
 export default function CodeToolPane(props: {
@@ -272,21 +345,22 @@ export default function CodeToolPane(props: {
         return "general";
     }, [toolScopeKey, boundId]);
 
-    const exerciseKey = isExerciseEditorScope(editorExerciseStateKey)
-        ? editorExerciseStateKey
-        : null;
+    const exerciseKey =
+        !isCardEditorScope(editorExerciseStateKey) &&
+        isExerciseEditorScope(editorExerciseStateKey)
+            ? editorExerciseStateKey
+            : null;
 
     const storeExercise = useReviewRuntimeStore((s) =>
         exerciseKey ? s.exercises[exerciseKey] : null,
     );
     const patchExercise = useReviewRuntimeStore((s) => s.patchExercise);
+    const patchExerciseSafe =
+        typeof patchExercise === "function"
+            ? patchExercise
+            : null;
 
     const isSql = toolLang === "sql";
-
-    const localCardToolWorkspace = useMemo(
-        () => readCardToolWorkspaceBackupForEditorScope(editorExerciseStateKey),
-        [editorExerciseStateKey],
-    );
 
     const ideShell = useMemo(
         () => resolveFullIDEConfigFromLearningIde({ ideConfig }),
@@ -324,6 +398,7 @@ export default function CodeToolPane(props: {
     const lastIncomingRef = useRef<{ code: string; stdin: string } | null>(null);
     const persistTimerRef = useRef<number | null>(null);
     const lastUpstreamWorkspaceKeyRef = useRef<string>("");
+    const isCardWorkspaceScope = isCardEditorScope(editorExerciseStateKey);
     const baseWorkspace = useMemo(
         () => createDefaultStateForLanguage(toolLang),
         [toolLang],
@@ -331,14 +406,16 @@ export default function CodeToolPane(props: {
 
     const externalWorkspace = useMemo(
         () =>
-            buildToolWorkspace({
-                base: baseWorkspace,
-                language: toolLang,
-                code: toolCode,
-                stdin: toolStdin,
-                sqlSchemaSql: sqlSchemaSql ?? sqlSetupSql ?? "",
-                sqlSeedSql: sqlSeedSql ?? "",
-            }),
+            repairWorkspaceSelection(
+                buildToolWorkspace({
+                    base: baseWorkspace,
+                    language: toolLang,
+                    code: toolCode,
+                    stdin: toolStdin,
+                    sqlSchemaSql: sqlSchemaSql ?? sqlSetupSql ?? "",
+                    sqlSeedSql: sqlSeedSql ?? "",
+                }),
+            ) as WorkspaceStateV2,
         [
             baseWorkspace,
             toolLang,
@@ -351,29 +428,14 @@ export default function CodeToolPane(props: {
     );
     const resolvedIncomingWorkspace = useMemo(() => {
         if (storeExercise?.workspace) {
-            return storeExercise.workspace;
-        }
-
-        if (!usesWorkspaceShell) {
-            return externalWorkspace;
-        }
-
-        if (!isExerciseEditorScope(editorExerciseStateKey) && localCardToolWorkspace) {
-            return patchToolWorkspaceSource({
-                workspace: localCardToolWorkspace,
-                language: toolLang,
-                code: toolCode,
-                stdin: toolStdin,
-                sqlSchemaSql: sqlSchemaSql ?? sqlSetupSql ?? "",
-                sqlSeedSql: sqlSeedSql ?? "",
-            });
-        }
-
-        if (!toolHydrated) {
-            return externalWorkspace;
+            return repairWorkspaceSelection(storeExercise.workspace) as WorkspaceStateV2;
         }
 
         if (toolWorkspace) {
+            if (isCardWorkspaceScope) {
+                return repairWorkspaceSelection(toolWorkspace) as WorkspaceStateV2;
+            }
+
             return patchToolWorkspaceSource({
                 workspace: toolWorkspace,
                 language: toolLang,
@@ -384,12 +446,23 @@ export default function CodeToolPane(props: {
             });
         }
 
-        return externalWorkspace;
+        if (isCardWorkspaceScope) {
+            return null;
+        }
+
+        if (!usesWorkspaceShell) {
+            return repairWorkspaceSelection(externalWorkspace) as WorkspaceStateV2;
+        }
+
+        if (!toolHydrated) {
+            return repairWorkspaceSelection(externalWorkspace) as WorkspaceStateV2;
+        }
+
+        return repairWorkspaceSelection(externalWorkspace) as WorkspaceStateV2;
     }, [
         storeExercise?.workspace,
-        editorExerciseStateKey,
         externalWorkspace,
-        localCardToolWorkspace,
+        isCardWorkspaceScope,
         sqlSchemaSql,
         sqlSeedSql,
         sqlSetupSql,
@@ -401,7 +474,7 @@ export default function CodeToolPane(props: {
         usesWorkspaceShell,
     ]);
     const latestWorkspaceRef = useRef<WorkspaceStateV2 | null>(resolvedIncomingWorkspace);
-    const [workspaceBridge, setWorkspaceBridge] = useState<WorkspaceStateV2>(
+    const [workspaceBridge, setWorkspaceBridge] = useState<WorkspaceStateV2 | null>(
         resolvedIncomingWorkspace,
     );
     const workspaceBridgeKeyRef = useRef(workspaceKeyOf(resolvedIncomingWorkspace));
@@ -420,7 +493,7 @@ export default function CodeToolPane(props: {
         workspaceBridgeKeyRef.current = workspaceKeyOf(workspaceBridge);
     }, [workspaceBridge]);
 
-    const setWorkspaceBridgeIfChanged = useCallback((workspace: WorkspaceStateV2) => {
+    const setWorkspaceBridgeIfChanged = useCallback((workspace: WorkspaceStateV2 | null) => {
         const nextKey = workspaceKeyOf(workspace);
 
         latestWorkspaceRef.current = workspace;
@@ -532,17 +605,83 @@ export default function CodeToolPane(props: {
         emitWorkspaceUpstreamRef.current = emitWorkspaceUpstream;
     }, [emitWorkspaceUpstream]);
 
-    const handleWorkspaceChange = useCallback((workspace: WorkspaceStateV2 | null) => {
+    const handleWorkspaceChange = useCallback((incomingWorkspace: WorkspaceStateV2 | null) => {
+        let workspace = incomingWorkspace;
+
+        const protectedWorkspace = chooseWorkspaceWithMostFiles(
+            latestWorkspaceRef.current,
+            toolWorkspace,
+            workspaceBridge,
+        );
+
+        if (
+            workspace &&
+            shouldIgnoreIncomingWorkspaceFromIde({
+                incoming: workspace,
+                current: protectedWorkspace,
+                isCardScope: isCardEditorScope(editorExerciseStateKey),
+            })
+        ) {
+            if (typeof window !== "undefined") {
+                const enabled =
+                    (window as any).__ZOE_DEBUG_STARTER_FILES__ === true ||
+                    window.localStorage.getItem("zoe:debug:starter-files") === "1";
+
+                if (enabled) {
+                    console.warn("[starter-files] CodeToolPane hard-ignored incoming IDE workspace", {
+                        reason: "incoming workspace has fewer files than protected card workspace",
+                        incomingFileCount: workspaceFileCount(workspace),
+                        protectedFileCount: workspaceFileCount(protectedWorkspace),
+                        incomingFiles: workspace.nodes
+                            ?.filter((node: any) => node?.kind === "file")
+                            ?.map((node: any) => ({
+                                name: node.name,
+                                contentPreview: String(node.content ?? "").slice(0, 80),
+                                contentLength: String(node.content ?? "").length,
+                            })),
+                        protectedFiles: protectedWorkspace?.nodes
+                            ?.filter((node: any) => node?.kind === "file")
+                            ?.map((node: any) => ({
+                                name: node.name,
+                                contentPreview: String(node.content ?? "").slice(0, 80),
+                                contentLength: String(node.content ?? "").length,
+                            })),
+                        incomingSourceKey: workspaceCardStarterSourceKey(workspace),
+                        protectedSourceKey: workspaceCardStarterSourceKey(protectedWorkspace),
+                        incomingSchema: workspaceCardStarterSchemaVersion(workspace),
+                        protectedSchema: workspaceCardStarterSchemaVersion(protectedWorkspace),
+                    });
+                }
+            }
+
+            return;
+        }
+
         if (workspace) {
             setWorkspaceBridgeIfChanged(workspace);
 
-            if (exerciseKey) {
+            if (exerciseKey && !isCardEditorScope(editorExerciseStateKey)) {
                 const entryCode = deriveEntryCode(workspace) ?? "";
-                patchExercise(exerciseKey, {
-                    workspace,
-                    code: entryCode,
-                    stdin: workspace.stdin ?? "",
-                });
+
+                if (patchExerciseSafe) {
+                    patchExerciseSafe(exerciseKey, {
+                        workspace,
+                        code: entryCode,
+                        stdin: workspace.stdin ?? "",
+                    });
+                } else if (typeof window !== "undefined") {
+                    const enabled =
+                        (window as any).__ZOE_DEBUG_STARTER_FILES__ === true ||
+                        window.localStorage.getItem("zoe:debug:starter-files") === "1";
+
+                    if (enabled) {
+                        console.warn("[starter-files] CodeToolPane missing patchExercise", {
+                            exerciseKey,
+                            workspace,
+                            entryCode,
+                        });
+                    }
+                }
             }
 
             if (boundId) {
@@ -577,12 +716,14 @@ export default function CodeToolPane(props: {
         }, 220);
     }, [
         exerciseKey,
-        patchExercise,
+        patchExerciseSafe,
         boundId,
         emitWorkspaceUpstream,
         setWorkspaceBridgeIfChanged,
         syncCodeInputSnapshot,
+        toolWorkspace,
         usesWorkspaceShell,
+        workspaceBridge,
     ]);
 
     useEffect(() => {
@@ -616,7 +757,85 @@ export default function CodeToolPane(props: {
         }
     }, [boundId, setRunFeedbackForCard]);
 
-    const showLoadingMask = usesWorkspaceShell && (!toolHydrated || !ideReady);
+    const reviewToolLocalWorkspaceId = useMemo(() => {
+        /**
+         * This must be stable per review card/exercise scope.
+         *
+         * Do NOT include workspaceBridge/workspace hash here. Changing this id
+         * when activeFileId/code changes makes FullIDE rehydrate its local
+         * workspace state repeatedly, which causes the tree to blink and can
+         * fall back to the one-file src/main.py workspace.
+         */
+        return `review-tool:${editorExerciseStateKey ?? "general"}`;
+    }, [editorExerciseStateKey]);
+
+    /**
+     * ONE-SOURCE CARD WORKSPACE RULE:
+     *
+     * For sketch/card tools, do not mount FullIDE until the runtime card
+     * workspace exists.
+     *
+     * If FullIDE mounts before toolWorkspace is ready, it creates/emits the
+     * generic one-file workspace:
+     *
+     *   src/main.py
+     *
+     * That default workspace is the root of the tree blanking/collapse bug.
+     */
+    const cardWorkspaceReady =
+        !isCardWorkspaceScope ||
+        !!toolWorkspace;
+
+    const showLoadingMask =
+        usesWorkspaceShell &&
+        (!toolHydrated || !ideReady || !cardWorkspaceReady);
+
+    if (typeof window !== "undefined") {
+        const enabled =
+            (window as any).__ZOE_DEBUG_STARTER_FILES__ === true ||
+            window.localStorage.getItem("zoe:debug:starter-files") === "1";
+
+        if (enabled) {
+            console.log("[starter-files] CodeToolPane.workspace-handoff", {
+                editorExerciseStateKey,
+                toolScopeKey,
+                toolHydrated,
+                usesWorkspaceShell,
+                cardWorkspaceIsSourceOfTruth: isCardWorkspaceScope,
+                cardWorkspaceReady,
+                cardWorkspaceReadyReason: !isCardWorkspaceScope
+                    ? "not-card"
+                    : toolWorkspace
+                        ? "toolWorkspace"
+                        : workspaceFileCount(workspaceBridge) > 0
+                            ? "workspaceBridge"
+                            : "not-ready",
+                toolWorkspaceFileCount: workspaceFileCount(toolWorkspace),
+                workspaceBridgeFileCount: workspaceFileCount(workspaceBridge),
+                exerciseKey,
+                willPatchExercise: !!exerciseKey && !isCardEditorScope(editorExerciseStateKey),
+                toolWorkspaceFiles: toolWorkspace?.nodes
+                    ?.filter((node: any) => node?.kind === "file")
+                    ?.map((node: any) => ({
+                        name: node.name,
+                        contentPreview: String(node.content ?? "").slice(0, 80),
+                        contentLength: String(node.content ?? "").length,
+                    })),
+                workspaceBridgeFiles: workspaceBridge?.nodes
+                    ?.filter((node: any) => node?.kind === "file")
+                    ?.map((node: any) => ({
+                        name: node.name,
+                        contentPreview: String(node.content ?? "").slice(0, 80),
+                        contentLength: String(node.content ?? "").length,
+                    })),
+                workspaceBridgeEntryFileId: workspaceBridge?.entryFileId,
+                workspaceBridgeActiveFileId: workspaceBridge?.activeFileId,
+                workspaceBridgeHash: stableWorkspaceHash(workspaceKeyOf(workspaceBridge)),
+                reviewToolLocalWorkspaceId,
+                starterSignature: (workspaceBridge as any)?.starterSignature ?? null,
+            });
+        }
+    }
 
     /**
      * FullIDE treats initialWorkspace like an initial value.
@@ -628,7 +847,18 @@ export default function CodeToolPane(props: {
      * Include hydration state in the key so FullIDE remounts once when the real
      * exercise workspace is ready.
      */
+
     const fullIdeKey = `${workspaceContextKey}:${toolHydrated ? "hydrated" : "loading"}`;
+
+    if (!cardWorkspaceReady) {
+        return (
+            <div ref={ref} className="flex h-full min-h-0 w-full flex-col overflow-hidden">
+                <div className="flex h-full min-h-[320px] flex-1 items-center justify-center rounded-2xl border border-neutral-200 bg-white text-sm font-semibold text-neutral-500 dark:border-white/10 dark:bg-neutral-950 dark:text-neutral-400">
+                    Loading sketch workspace...
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div ref={ref} className="flex h-full min-h-0 w-full flex-col overflow-hidden">
@@ -641,13 +871,28 @@ export default function CodeToolPane(props: {
                     language={toolLang}
                     access={{
                         hasUser: true,
-                        canUseMultiFile: isSql || ideShell.access.canUseMultiFile,
+                        /**
+                         * Important:
+                         *
+                         * If the learning IDE shell enables the explorer, the
+                         * workspace must be allowed to stay multi-file.
+                         *
+                         * Otherwise useIdeWorkspace.normalizeWorkspaceForAccess()
+                         * collapses the starter workspace into one default file:
+                         *
+                         *   src/main.py
+                         *
+                         * That is why sketch starter files like README.md,
+                         * notes.md, and formula.md disappear.
+                         */
+                        canUseMultiFile: isSql || usesWorkspaceShell,
                         canSaveCloud: ideShell.access.canSaveCloud,
                         canCreateProjects: ideShell.access.canCreateProjects,
                     }}
                     loginHref="/authenticate"
                     billingHref="/billing"
                     draftStorageMode="off"
+                    localWorkspaceId={reviewToolLocalWorkspaceId}
                     servicePreset={ideShell.servicePreset}
                     forceDesktopLayout={shouldForceDesktopLayout}
                     services={{
@@ -659,7 +904,7 @@ export default function CodeToolPane(props: {
                         },
                     }}
                     initialWorkspace={workspaceBridge}
-                    externalWorkspace={usesWorkspaceShell ? null : workspaceBridge}
+                    externalWorkspace={workspaceBridge}
                     exerciseStateKey={editorExerciseStateKey}
                     projectScope={{
                         kind: "review-tool" as any,

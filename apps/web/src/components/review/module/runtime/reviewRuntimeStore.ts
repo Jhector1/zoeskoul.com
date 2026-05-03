@@ -5,6 +5,7 @@ import type {
   ExerciseRuntimeState,
   ReviewRuntimeStore,
 } from "./reviewRuntimeTypes";
+import { getCardStateKey } from "./exerciseKeys";
 import { resolveExerciseWorkspace } from "./exerciseWorkspaceResolver";
 import { resolveSketchState } from "./sketchResolver";
 import { reviewDebug, summarizeWorkspace } from "./reviewDebug";
@@ -34,6 +35,43 @@ function deriveCodeFromWorkspace(workspace: WorkspaceStateV2 | null | undefined)
   return entryNode && entryNode.kind === "file"
     ? String(entryNode.content ?? "")
     : "";
+}
+
+function cardWorkspaceFileSummary(workspace: WorkspaceStateV2 | null | undefined) {
+  if (!isWorkspace(workspace)) return [];
+
+  return workspace.nodes
+    .filter((node: any) => node?.kind === "file")
+    .map((node: any) => String(node.name ?? ""));
+}
+
+function manifestStarterFileNames(manifest: any) {
+  const starterFiles =
+    manifest?.workspace?.starterFiles ??
+    manifest?.starterFiles ??
+    manifest?.files ??
+    manifest?.initialFiles ??
+    manifest?.workspaceFiles ??
+    manifest?.recipe?.starterFiles ??
+    null;
+
+  if (!starterFiles || typeof starterFiles !== "object") return [];
+
+  return Object.keys(starterFiles)
+    .map((name) => String(name).split("/").filter(Boolean).pop() || String(name))
+    .filter(Boolean)
+    .sort();
+}
+
+function workspaceContainsStarterFileNames(
+  workspace: WorkspaceStateV2 | null | undefined,
+  starterFileNames: string[],
+) {
+  if (!starterFileNames.length) return true;
+  if (!isWorkspace(workspace)) return false;
+
+  const existingNames = new Set(cardWorkspaceFileSummary(workspace));
+  return starterFileNames.every((name) => existingNames.has(name));
 }
 
 function normalizeWorkspacePatch(args: {
@@ -71,10 +109,330 @@ function getPatchWorkspace(
   if (isWorkspace(patch.ideWorkspace)) return patch.ideWorkspace;
   return existing?.workspace ?? null;
 }
+function workspaceStarterSignature(workspace: unknown) {
+  return isWorkspace(workspace) && typeof (workspace as any).starterSignature === "string"
+    ? String((workspace as any).starterSignature)
+    : null;
+}
 
+function manifestHasStarterWorkspaceSeed(manifest: any) {
+  return !!(
+    manifest?.workspace ||
+    manifest?.starterFiles ||
+    manifest?.files ||
+    manifest?.initialFiles ||
+    manifest?.workspaceFiles ||
+    manifest?.recipe?.starterFiles
+  );
+}
+
+function workspaceLooksLikeUnseededCardDefault(
+  workspace: WorkspaceStateV2 | null | undefined,
+) {
+  if (!isWorkspace(workspace)) return false;
+
+  if (typeof (workspace as any).starterSignature === "string") {
+    return false;
+  }
+
+  const files = workspace.nodes.filter((node: any) => node?.kind === "file") as any[];
+
+  if (files.length === 0) return true;
+  if (files.length > 1) return false;
+
+  const onlyFile = files[0];
+  const name = String(onlyFile?.name ?? "").toLowerCase();
+  const content = String(onlyFile?.content ?? "").trim();
+
+  if (content === "") return true;
+
+  const defaultishName =
+    name === "main.py" ||
+    name === "untitled.py" ||
+    name === "index.js" ||
+    name === "script.js";
+
+  const defaultishContent =
+    content === 'print("Hello World!")' ||
+    content === "print('Hello World!')" ||
+    content === 'console.log("Hello World!");' ||
+    content === "console.log('Hello World!');";
+
+  return defaultishName && defaultishContent;
+}
+
+function cardWorkspaceOwnerKey(args: {
+  topicId: string;
+  cardId: string;
+  cardKey: string;
+}) {
+  return `${args.topicId}::${args.cardId}::${args.cardKey}`;
+}
+
+function workspaceCardOwnerKey(workspace: unknown) {
+  return isWorkspace(workspace) && typeof (workspace as any).cardStarterOwnerKey === "string"
+    ? String((workspace as any).cardStarterOwnerKey)
+    : null;
+}
+
+function workspaceFileCount(workspace: WorkspaceStateV2 | null | undefined) {
+  if (!isWorkspace(workspace)) return 0;
+
+  return workspace.nodes.filter((node: any) => node?.kind === "file").length;
+}
+
+function workspaceFileContentSignature(workspace: WorkspaceStateV2 | null | undefined) {
+  if (!isWorkspace(workspace)) return null;
+
+  const byId = new Map<string, any>();
+
+  for (const node of workspace.nodes as any[]) {
+    byId.set(String(node.id), node);
+  }
+
+  const pathCache = new Map<string, string>();
+
+  function nodePath(node: any): string {
+    const id = String(node.id);
+    const cached = pathCache.get(id);
+    if (cached) return cached;
+
+    const name = String(node.name ?? "");
+    const parent =
+      node.parentId != null && byId.has(String(node.parentId))
+        ? byId.get(String(node.parentId))
+        : null;
+
+    const path = parent ? `${nodePath(parent)}/${name}` : name;
+    pathCache.set(id, path);
+    return path;
+  }
+
+  const files = (workspace.nodes as any[])
+    .filter((node: any) => node?.kind === "file")
+    .map((node: any) => ({
+      path: nodePath(node),
+      content: String(node.content ?? ""),
+    }))
+    .sort((a, b) => a.path.localeCompare(b.path));
+
+  return JSON.stringify(files);
+}
+
+
+function workspaceCardBaseFileSignature(workspace: unknown) {
+  return isWorkspace(workspace) &&
+    typeof (workspace as any).cardStarterBaseFileSignature === "string"
+    ? String((workspace as any).cardStarterBaseFileSignature)
+    : null;
+}
+
+function stableJson(value: any): string {
+  if (value == null) return "null";
+
+  if (Array.isArray(value)) {
+    return `[${value.map((item: any) => stableJson(item)).join(",")}]`;
+  }
+
+  if (typeof value === "object") {
+    return `{${Object.keys(value)
+      .sort()
+      .map((key: string) => `${JSON.stringify(key)}:${stableJson(value[key])}`)
+      .join(",")}}`;
+  }
+
+  return JSON.stringify(value);
+}
+
+function cardStarterManifestKey(manifest: any) {
+  if (!manifestHasStarterWorkspaceSeed(manifest)) return null;
+
+  return stableJson({
+    runtime: manifest?.runtime ?? null,
+    language: manifest?.language ?? null,
+    workspace: manifest?.workspace ?? null,
+    starterFiles: manifest?.starterFiles ?? null,
+    files: manifest?.files ?? null,
+    initialFiles: manifest?.initialFiles ?? null,
+    workspaceFiles: manifest?.workspaceFiles ?? null,
+    recipeStarterFiles: manifest?.recipe?.starterFiles ?? null,
+  });
+}
+
+function workspaceCardStarterManifestKey(workspace: unknown) {
+  return isWorkspace(workspace) &&
+    typeof (workspace as any).cardStarterManifestKey === "string"
+    ? String((workspace as any).cardStarterManifestKey)
+    : null;
+}
+
+function cardStarterSourceKey(args: {
+  topicId: string;
+  cardId: string;
+  cardKey: string;
+  manifest: any;
+}) {
+  if (!manifestHasStarterWorkspaceSeed(args.manifest)) return null;
+
+  return stableJson({
+    topicId: args.topicId,
+    cardId: args.cardId,
+    cardKey: args.cardKey,
+    runtime: args.manifest?.runtime ?? null,
+    language: args.manifest?.language ?? null,
+    workspace: args.manifest?.workspace ?? null,
+    starterFiles: args.manifest?.starterFiles ?? null,
+    files: args.manifest?.files ?? null,
+    initialFiles: args.manifest?.initialFiles ?? null,
+    workspaceFiles: args.manifest?.workspaceFiles ?? null,
+    recipeStarterFiles: args.manifest?.recipe?.starterFiles ?? null,
+  });
+}
+
+function workspaceCardStarterSourceKey(workspace: unknown) {
+  return isWorkspace(workspace) &&
+    typeof (workspace as any).cardStarterSourceKey === "string"
+    ? String((workspace as any).cardStarterSourceKey)
+    : null;
+}
+
+const CARD_STARTER_SCHEMA_VERSION = 12;
+
+function workspaceCardStarterSchemaVersion(workspace: unknown) {
+  return isWorkspace(workspace) && typeof (workspace as any).cardStarterSchemaVersion === "number"
+    ? Number((workspace as any).cardStarterSchemaVersion)
+    : 0;
+}
+
+function shortDebugHash(value: string | null | undefined) {
+  if (!value) return null;
+
+  let hash = 0;
+  for (let i = 0; i < value.length; i += 1) {
+    hash = (hash * 31 + value.charCodeAt(i)) | 0;
+  }
+
+  return `${Math.abs(hash).toString(36)}:${value.length}`;
+}
+
+function attachCardWorkspaceOwner(
+  workspace: WorkspaceStateV2 | null | undefined,
+  ownerKey: string,
+  starterSignature: string | null,
+  baseFileSignature: string | null,
+  manifestKey: string | null,
+  sourceKey: string | null,
+): WorkspaceStateV2 | null {
+  if (!isWorkspace(workspace)) return workspace ?? null;
+
+  return {
+    ...workspace,
+    cardStarterOwnerKey: ownerKey,
+    cardStarterSignature: starterSignature,
+    cardStarterBaseFileSignature: baseFileSignature,
+    cardStarterManifestKey: manifestKey,
+    cardStarterSourceKey: sourceKey,
+    cardStarterSchemaVersion: CARD_STARTER_SCHEMA_VERSION,
+  } as WorkspaceStateV2;
+}
+
+
+function workspaceDebugSummary(workspace: WorkspaceStateV2 | null | undefined) {
+  if (!isWorkspace(workspace)) {
+    return {
+      isWorkspace: false,
+      fileCount: 0,
+      files: [],
+      entryFileId: null,
+      activeFileId: null,
+      stdin: null,
+      starterSignature: null,
+    };
+  }
+
+  return {
+    isWorkspace: true,
+    fileCount: workspace.nodes.filter((node) => node.kind === "file").length,
+    files: workspace.nodes
+        .filter((node) => node.kind === "file")
+        .map((node: any) => ({
+          id: node.id,
+          name: node.name,
+          parentId: node.parentId,
+          contentPreview: String(node.content ?? "").slice(0, 80),
+          contentLength: String(node.content ?? "").length,
+        })),
+    entryFileId: workspace.entryFileId,
+    activeFileId: workspace.activeFileId,
+    stdin: workspace.stdin,
+    starterSignature: (workspace as any).starterSignature ?? null,
+    cardStarterOwnerKey: (workspace as any).cardStarterOwnerKey ?? null,
+    cardStarterSignature: (workspace as any).cardStarterSignature ?? null,
+    cardStarterBaseFileSignature: (workspace as any).cardStarterBaseFileSignature ?? null,
+    cardStarterManifestKey: (workspace as any).cardStarterManifestKey ?? null,
+    cardStarterSchemaVersion: (workspace as any).cardStarterSchemaVersion ?? null,
+    fileContentSignatureHash: shortDebugHash(workspaceFileContentSignature(workspace)),
+    cardStarterBaseFileSignatureHash: shortDebugHash((workspace as any).cardStarterBaseFileSignature ?? null),
+    cardStarterManifestKeyHash: shortDebugHash((workspace as any).cardStarterManifestKey ?? null),
+  };
+}
+
+function starterDebug(label: string, payload: Record<string, any>) {
+  if (typeof window === "undefined") return;
+
+  const enabled =
+      (window as any).__ZOE_DEBUG_STARTER_FILES__ === true ||
+      window.localStorage.getItem("zoe:debug:starter-files") === "1";
+
+  if (!enabled) return;
+
+  console.groupCollapsed(`[starter-files] ${label}`);
+  console.log(payload);
+  console.groupEnd();
+}
 function getFinalExerciseIdFromKey(key: string) {
   const parts = String(key ?? "").split(":").filter(Boolean);
   return parts[parts.length - 1] || key;
+}
+
+function canonicalCardKeyForState(args: {
+  state: ReviewRuntimeStore;
+  key: string;
+  topicId?: string | null;
+  cardId?: string | null;
+}) {
+  if (typeof args.key === "string" && args.key.includes(":") && !args.key.endsWith(":general")) {
+    return args.key;
+  }
+
+  if (!args.topicId || !args.cardId) {
+    return args.key;
+  }
+
+  return getCardStateKey({
+    subjectSlug: args.state.subjectSlug,
+    moduleSlug: args.state.moduleSlug,
+    sectionSlug: args.state.sectionSlug,
+    topicId: args.topicId,
+    cardId: args.cardId,
+  });
+}
+
+function cardStateEqual(a: CardRuntimeState | undefined, b: CardRuntimeState) {
+  if (!a) return false;
+
+  return (
+    a.cardKey === b.cardKey &&
+    a.topicId === b.topicId &&
+    a.cardId === b.cardId &&
+    a.visited === b.visited &&
+    a.completed === b.completed &&
+    JSON.stringify(a.sketch ?? null) === JSON.stringify(b.sketch ?? null) &&
+    JSON.stringify(a.toolWorkspace ?? null) === JSON.stringify(b.toolWorkspace ?? null) &&
+    String(a.toolCode ?? "") === String(b.toolCode ?? "") &&
+    String(a.toolStdin ?? "") === String(b.toolStdin ?? "") &&
+    String(a.toolLang ?? "") === String(b.toolLang ?? "")
+  );
 }
 
 export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
@@ -144,7 +502,19 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
     } = args;
 
     set((state) => {
-      if (state.exercises[exerciseKey]) return state;
+      const existing = state.exercises[exerciseKey];
+
+      /**
+       * Critical:
+       * ensureExercise creates the runtime exercise once.
+       *
+       * After the exercise exists, IDE edits must flow through patchExercise /
+       * setToolWorkspace. Re-running starter resolution here can create update
+       * loops while the learner edits files.
+       */
+      if (existing) {
+        return state;
+      }
 
       const language =
         manifest?.language ??
@@ -184,19 +554,6 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
                     : "";
 
       const normalized = normalizeWorkspacePatch({ workspace, stdin });
-
-      exerciseDebug("G_reviewRuntimeStore_ensureExercise_create", {
-        exerciseKey,
-        subjectSlug,
-        moduleSlug,
-        sectionSlug,
-        topicId,
-        cardId,
-        manifestId: manifest?.id,
-        savedPatch: summarizeExercisePatch(saved),
-        resolvedWorkspace: summarizeExerciseWorkspace(workspace),
-        stdin,
-      });
 
       const exercise: ExerciseRuntimeState = {
         exerciseKey,
@@ -239,7 +596,7 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
         codeWorkspace: normalized.workspace,
         ideWorkspace: normalized.workspace,
         codeStdin: stdin,
-      };
+      } as any;
 
       return {
         exercises: {
@@ -249,6 +606,8 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
       };
     });
   },
+
+
 
   patchExercise: (key, patch) => {
     set((state) => {
@@ -391,60 +750,158 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
   },
 
   ensureCard: (args) => {
-    const { cardKey, topicId, cardId, initial, starterSketch } = args;
+    const {
+      cardKey,
+      topicId,
+      cardId,
+      initial,
+      starterToolManifest,
+    } = args as any;
 
     set((state) => {
-      if (state.cards[cardKey]) return state;
-
-      const card: CardRuntimeState = {
-        cardKey,
+      const canonicalCardKey = canonicalCardKeyForState({
+        state,
+        key: cardKey,
         topicId,
         cardId,
-        visited: initial?.visited ?? false,
-        completed: initial?.completed ?? false,
-        sketch: resolveSketchState({
-          savedSketch: initial?.sketch ?? null,
-          starterSketch: starterSketch ?? null,
-        }),
-        updatedAt:
-          typeof initial?.updatedAt === "number" ? initial.updatedAt : Date.now(),
-      };
+      });
+      const existing = state.cards[canonicalCardKey];
 
-      return {
-        cards: {
-          ...state.cards,
-          [cardKey]: card,
-        },
-      };
-    });
-  },
+      const enabled =
+          typeof window !== "undefined" &&
+          (window.localStorage.getItem("zoe:debug:starter-files") === "1" ||
+              (window as any).__ZOE_DEBUG_STARTER_FILES__ === true);
 
-  patchCard: (key, patch) => {
-    set((state) => {
-      const existing = state.cards[key];
+      const starterLanguage =
+          starterToolManifest?.runtime?.language ??
+          starterToolManifest?.language ??
+          "python";
 
-      const nextPending = new Set(state.persistence.pendingCardKeys);
-      nextPending.add(key);
+      const hasStarterWorkspaceSeed = manifestHasStarterWorkspaceSeed(starterToolManifest);
+      const expectedStarterFileNames = manifestStarterFileNames(starterToolManifest);
 
-      const fallback: CardRuntimeState = {
-        cardKey: key,
-        topicId: existing?.topicId ?? state.viewTopicId ?? "unknown",
-        cardId: existing?.cardId ?? key,
-        visited: existing?.visited ?? false,
-        completed: existing?.completed ?? false,
-        sketch: existing?.sketch ?? null,
+      /**
+       * For starter-backed sketch/card workspaces, never blindly trust existing
+       * runtime state. It may have been polluted by an exercise workspace from
+       * a previous bad path.
+       *
+       * Example bug:
+       *   current sketch expects: main.py + notes.md
+       *   existing workspace has: main.py + helper_notes.md
+       *
+       * That existing workspace must be rejected and reseeded from the current
+       * sketch manifest.
+       */
+      const existingMatchesCurrentStarter =
+        !hasStarterWorkspaceSeed ||
+        workspaceContainsStarterFileNames(
+          existing?.toolWorkspace,
+          expectedStarterFileNames,
+        );
+
+      const shouldReseedStarterWorkspace =
+        hasStarterWorkspaceSeed &&
+        (
+          !existing?.toolWorkspace ||
+          !existingMatchesCurrentStarter
+        );
+
+      const starterWorkspace = shouldReseedStarterWorkspace
+        ? resolveExerciseWorkspace({
+            language: starterLanguage,
+            manifest: starterToolManifest,
+            saved: null,
+          })
+        : null;
+
+      const toolWorkspace =
+        hasStarterWorkspaceSeed
+          ? existingMatchesCurrentStarter
+            ? existing?.toolWorkspace ?? starterWorkspace ?? null
+            : starterWorkspace
+          : existing?.toolWorkspace ??
+            initial?.toolWorkspace ??
+            starterWorkspace ??
+            null;
+
+      const toolCode =
+        hasStarterWorkspaceSeed
+          ? deriveCodeFromWorkspace(toolWorkspace)
+          : typeof existing?.toolCode === "string"
+            ? existing.toolCode
+            : typeof initial?.toolCode === "string"
+              ? initial.toolCode
+              : deriveCodeFromWorkspace(toolWorkspace);
+
+      const toolStdin =
+        hasStarterWorkspaceSeed
+          ? typeof toolWorkspace?.stdin === "string"
+            ? toolWorkspace.stdin
+            : ""
+          : typeof existing?.toolStdin === "string"
+            ? existing.toolStdin
+            : typeof initial?.toolStdin === "string"
+              ? initial.toolStdin
+              : typeof toolWorkspace?.stdin === "string"
+                ? toolWorkspace.stdin
+                : "";
+
+      const nextCard: CardRuntimeState = {
+        cardKey: canonicalCardKey,
+        topicId: existing?.topicId ?? topicId,
+        cardId: existing?.cardId ?? cardId,
+        visited: initial?.visited ?? existing?.visited ?? false,
+        completed: initial?.completed ?? existing?.completed ?? false,
+        sketch: initial?.sketch ?? existing?.sketch ?? null,
+        toolKey:
+          existing?.toolKey ??
+          (typeof initial?.toolKey === "string" ? initial.toolKey : `${canonicalCardKey}:general`),
+        toolWorkspace,
+        toolCode,
+        toolStdin,
+        toolLang:
+          existing?.toolLang ??
+          initial?.toolLang ??
+          toolWorkspace?.language ??
+          starterLanguage,
         updatedAt: Date.now(),
       };
 
+      if (enabled) {
+          console.groupCollapsed(`[starter-files] ensureCard: ${canonicalCardKey}`);
+          console.log({
+              action: shouldReseedStarterWorkspace
+                ? "reseeded-from-current-starter"
+                : existing?.toolWorkspace
+                  ? "trusted"
+                  : starterWorkspace
+                    ? "created"
+                    : "seeded",
+              cardKey: canonicalCardKey,
+              topicId,
+              cardId,
+              hasStarterWorkspaceSeed,
+              expectedStarterFileNames,
+              existingMatchesCurrentStarter,
+              shouldReseedStarterWorkspace,
+              existingFiles: cardWorkspaceFileSummary(existing?.toolWorkspace),
+              nextFiles: cardWorkspaceFileSummary(nextCard.toolWorkspace),
+              starterManifest: starterToolManifest,
+          });
+          console.groupEnd();
+      }
+
+      if (cardStateEqual(existing, nextCard)) {
+        return state;
+      }
+
+      const nextPending = new Set(state.persistence.pendingCardKeys);
+      nextPending.add(canonicalCardKey);
+
       return {
         cards: {
           ...state.cards,
-          [key]: {
-            ...fallback,
-            ...existing,
-            ...patch,
-            updatedAt: Date.now(),
-          },
+          [canonicalCardKey]: nextCard,
         },
         persistence: {
           ...state.persistence,
@@ -456,6 +913,90 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
 
     get().queueAutosave();
   },
+
+
+
+
+  patchCard: (key, patch) => {
+    set((state) => {
+      const incomingTopicId =
+        typeof (patch as any)?.topicId === "string"
+          ? String((patch as any).topicId)
+          : null;
+
+      const incomingCardId =
+        typeof (patch as any)?.cardId === "string"
+          ? String((patch as any).cardId)
+          : null;
+
+      const targetKey = canonicalCardKeyForState({
+        state,
+        key,
+        topicId: incomingTopicId,
+        cardId: incomingCardId,
+      });
+      const existing = state.cards[targetKey];
+
+      const fallback: CardRuntimeState = {
+        cardKey: targetKey,
+        topicId:
+          existing?.topicId ??
+          (typeof (patch as any)?.topicId === "string"
+            ? String((patch as any).topicId)
+            : state.viewTopicId ?? "unknown"),
+        cardId:
+          existing?.cardId ??
+          (typeof (patch as any)?.cardId === "string"
+            ? String((patch as any).cardId)
+            : targetKey),
+        visited: existing?.visited ?? false,
+        completed: existing?.completed ?? false,
+        sketch: existing?.sketch ?? null,
+        updatedAt: Date.now(),
+      };
+
+      const nextCard: CardRuntimeState = {
+        ...fallback,
+        ...existing,
+        ...patch,
+        cardKey: targetKey,
+        topicId:
+          typeof (patch as any)?.topicId === "string"
+            ? String((patch as any).topicId)
+            : existing?.topicId ?? fallback.topicId,
+        cardId:
+          typeof (patch as any)?.cardId === "string"
+            ? String((patch as any).cardId)
+            : existing?.cardId ?? fallback.cardId,
+        updatedAt: Date.now(),
+      };
+
+      if (cardStateEqual(existing, nextCard)) {
+        return state;
+      }
+
+      const nextPending = new Set(state.persistence.pendingCardKeys);
+      nextPending.add(targetKey);
+
+      const nextCards = { ...state.cards, [targetKey]: nextCard };
+
+      if (key !== targetKey && nextCards[key]) {
+        delete nextCards[key];
+      }
+
+      return {
+        cards: nextCards,
+        persistence: {
+          ...state.persistence,
+          dirty: true,
+          pendingCardKeys: nextPending,
+        },
+      };
+    });
+
+    get().queueAutosave();
+  },
+
 
   bindExerciseTool: (key) => {
     const current = get().tool.boundExerciseKey;

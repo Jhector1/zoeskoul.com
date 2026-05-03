@@ -138,13 +138,21 @@ export type ReviewRuntimeActions = {
     patch: Partial<ExerciseRuntimeState> & Record<string, any>,
   ) => void;
 
-  ensureCard: (args: {
-    cardKey: CardStateKey;
-    topicId: string;
-    cardId: string;
-    initial?: Partial<CardRuntimeState>;
-    starterSketch?: SketchState | null;
-  }) => void;
+    ensureCard: (args: {
+        cardKey: CardStateKey;
+        topicId: string;
+        cardId: string;
+        initial?: Partial<CardRuntimeState>;
+        starterSketch?: SketchState | null;
+
+        /**
+         * Optional sketch/card-level IDE seed.
+         *
+         * This is used only when the card does not already have saved
+         * toolWorkspace state.
+         */
+        starterToolManifest?: any | null;
+    }) => void;
 
   patchCard: (
     key: CardStateKey,

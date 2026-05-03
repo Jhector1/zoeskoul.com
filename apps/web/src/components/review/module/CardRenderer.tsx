@@ -94,18 +94,73 @@ export default function CardRenderer(props: {
 
     const ensureCard = useReviewRuntimeStore((s) => s.ensureCard);
 
+    const canonicalCardKey = cardKey;
+
+    const savedCardSketch = tp?.sketchState?.[card.id] || null;
+
     React.useEffect(() => {
-        if (progressHydrated) {
-            ensureCard({
-                cardKey,
-                topicId,
-                cardId: card.id,
-                initial: {
-                    sketch: tp?.sketchState?.[card.id] || null,
-                },
-            });
+        if (!progressHydrated) return;
+
+        const starterToolManifest =
+            card.type === "sketch"
+                ? {
+                    runtime: card.spec?.runtime ?? null,
+                    workspace: card.spec?.workspace ?? null,
+                }
+                : null;
+
+        if (typeof window !== "undefined") {
+            const enabled =
+                (window as any).__ZOE_DEBUG_STARTER_FILES__ === true ||
+                window.localStorage.getItem("zoe:debug:starter-files") === "1";
+
+            if (enabled) {
+                console.groupCollapsed("[starter-files] CardRenderer.ensureCard");
+                console.log({
+                    cardId: card.id,
+                    cardType: card.type,
+                    canonicalCardKey,
+                    topicId,
+                    specRuntime: card.spec?.runtime ?? null,
+                    specWorkspace: card.spec?.workspace ?? null,
+                    specWorkspaceFiles:
+                        card.spec?.workspace?.starterFiles
+                            ? Object.keys(card.spec.workspace.starterFiles)
+                            : null,
+                    specWorkspaceMainPreview:
+                        typeof card.spec?.workspace?.starterFiles?.["main.py"] === "string"
+                            ? card.spec.workspace.starterFiles["main.py"].slice(0, 120)
+                            : null,
+                    savedCardSketch,
+                    starterToolManifest,
+                });
+                console.groupEnd();
+            }
         }
-    }, [progressHydrated, cardKey, topicId, card.id, tp, ensureCard]);
+
+        ensureCard({
+            cardKey: canonicalCardKey,
+            topicId,
+            cardId: card.id,
+            initial: {
+                visited: done,
+                completed: done,
+                sketch: savedCardSketch,
+            },
+            starterToolManifest,
+        });
+    }, [
+        progressHydrated,
+        canonicalCardKey,
+        topicId,
+        card.id,
+        card.type,
+        card.spec?.runtime,
+        card.spec?.workspace,
+        savedCardSketch,
+        ensureCard,
+        done,
+    ]);
 
     const wrapCls = "ui-surface-muted rounded-none p-4";
 

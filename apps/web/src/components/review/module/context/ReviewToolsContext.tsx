@@ -516,6 +516,7 @@ export function ReviewToolsProvider({
 
         if (
           !registryRef.current.has(id) &&
+          currentBound &&
           (currentBound === id || currentBound === targetKeyBeforeDelete)
         ) {
           storeUnbindExerciseTool(currentBound);

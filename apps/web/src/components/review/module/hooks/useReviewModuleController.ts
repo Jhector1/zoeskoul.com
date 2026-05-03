@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useState, useTransition } from "react";
-import { useParams } from "next/navigation";
-import { useRouter } from "@/i18n/navigation";
+import { useParams, useRouter } from "next/navigation";
 
 import type { ReviewCard } from "@/lib/subjects/types";
 import type { ReviewProgressState } from "@/lib/subjects/progressTypes";
@@ -47,6 +46,7 @@ import {
 
 import type { ReviewModulePageProps, HeaderGamificationVm } from "../types";
 import { useReviewRuntimeStore } from "../runtime/reviewRuntimeStore";
+import { getCardStateKey } from "../runtime/exerciseKeys";
 
 export function useReviewModuleController({
                                               mod,
@@ -302,18 +302,40 @@ export function useReviewModuleController({
         if (requestedExerciseTarget.topicId !== viewTid) return null;
 
         /**
-         * Do not over-filter by activeCard here.
+         * Keep the exercise binding only while its owning card is still active.
          *
-         * The exercise carousel lives inside the active card and can rebind faster
-         * than the outer card state updates. Over-filtering makes the tools panel
-         * fall back to :general, which creates blank/no-workspace editors.
+         * Without this guard, navigating from a project/exercise card back to a
+         * sketch card leaves the right-side IDE scoped to the old exercise.
+         * Then the sketch's card workspace never becomes the active tool workspace.
          */
+        if (
+            activeCard?.id &&
+            requestedExerciseTarget.cardId &&
+            activeCard.id !== requestedExerciseTarget.cardId
+        ) {
+            return null;
+        }
+
         return requestedExerciseTarget;
-    }, [requestedExerciseTarget, viewTid]);
+    }, [
+        requestedExerciseTarget,
+        viewTid,
+        activeCard?.id,
+    ]);
+
+    const activeCardToolScopeKey = activeCard?.id
+        ? `${getCardStateKey({
+            subjectSlug,
+            moduleSlug,
+            sectionSlug,
+            topicId: viewTid,
+            cardId: activeCard.id,
+        })}:general`
+        : "general";
 
     const activeToolScopeKey =
         activeExerciseTarget?.exerciseId ??
-        (activeCard?.id ? `card:${activeCard.id}` : "card:general");
+        activeCardToolScopeKey;
 
     const tool = useToolCodeRunnerState({
         progress,
@@ -334,7 +356,23 @@ export function useReviewModuleController({
         rightCollapsed: panels.rightCollapsed,
         rightW: panels.rightW,
     });
+    useEffect(() => {
+        if (!requestedExerciseTarget) return;
+        if (!activeCard?.id) return;
 
+        if (
+            requestedExerciseTarget.topicId === viewTid &&
+            requestedExerciseTarget.cardId !== activeCard.id
+        ) {
+            setRequestedExerciseTarget(null);
+            tool.unbindCodeInput();
+        }
+    }, [
+        requestedExerciseTarget,
+        activeCard?.id,
+        viewTid,
+        tool.unbindCodeInput,
+    ]);
     const prereqsForAllQuizzes = unlockAll
         ? true
         : prereqsMetForAnyQuizOrProject(viewCards, viewProg, viewTid);
@@ -385,7 +423,7 @@ export function useReviewModuleController({
 
         if (assignmentSessionId && assignmentStatus.phase !== "idle") {
             router.push(
-                `/${ROUTES.practicePath(
+                `/${locale}${ROUTES.practicePath(
                     encodeURIComponent(subjectSlug),
                     encodeURIComponent(moduleSlug),
                 )}` +
@@ -418,7 +456,7 @@ export function useReviewModuleController({
         flushNow(next);
 
         router.push(
-            `/${ROUTES.practicePath(
+            `/${locale}${ROUTES.practicePath(
                 encodeURIComponent(subjectSlug),
                 encodeURIComponent(practiceModuleSlug),
             )}` +
@@ -452,14 +490,14 @@ export function useReviewModuleController({
     const goModule = useCallback(
         (mid: string) => {
             router.push(
-                ROUTES.learningPath(
+                `/${locale}${ROUTES.learningPath(
                     encodeURIComponent(subjectSlug),
                     encodeURIComponent(mid),
-                ),
+                )}`,
             );
             router.refresh();
         },
-        [router, subjectSlug],
+        [router, locale, subjectSlug],
     );
 
     const goUnlockNext = useCallback(() => {
@@ -729,7 +767,7 @@ export function useReviewModuleController({
                 boundId: rightRailExerciseKey,
                 toolScopeKey: rightRailExerciseKey
                     ? rightRailExerciseKey
-                    : `${subjectSlug}:${moduleSlug}:${viewTid}:${activeCard?.id ?? "general"}:general`,
+                    : activeToolScopeKey,
                 rightBodyRef: tool.rightBodyRef,
                 codeRunnerRegionH: tool.codeRunnerRegionH,
                 toolHydrated: tool.toolHydrated,

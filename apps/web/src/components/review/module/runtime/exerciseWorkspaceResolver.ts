@@ -12,17 +12,22 @@ import { uid } from "@/components/ide/utils";
 type AnyRecord = Record<string, any>;
 
 type StarterFile =
-  | string
-  | {
-      path?: string;
-      filePath?: string;
-      filename?: string;
-      name?: string;
-      content?: string;
-      text?: string;
-      code?: string;
-      source?: string;
-    };
+    | string
+    | {
+  path?: string;
+  filePath?: string;
+  filename?: string;
+  name?: string;
+  content?: string;
+  text?: string;
+  code?: string;
+  source?: string;
+};
+
+type NormalizedStarterFile = {
+  path: string;
+  content: string;
+};
 
 function isRecord(value: unknown): value is AnyRecord {
   return !!value && typeof value === "object" && !Array.isArray(value);
@@ -30,10 +35,10 @@ function isRecord(value: unknown): value is AnyRecord {
 
 export function isWorkspace(value: unknown): value is WorkspaceStateV2 {
   return (
-    !!value &&
-    typeof value === "object" &&
-    (value as any).version === 2 &&
-    Array.isArray((value as any).nodes)
+      !!value &&
+      typeof value === "object" &&
+      (value as any).version === 2 &&
+      Array.isArray((value as any).nodes)
   );
 }
 
@@ -41,8 +46,8 @@ function cloneWorkspace(workspace: WorkspaceStateV2): WorkspaceStateV2 {
   return {
     ...workspace,
     nodes: Array.isArray(workspace.nodes)
-      ? workspace.nodes.map((node) => ({ ...node }))
-      : [],
+        ? workspace.nodes.map((node) => ({ ...node }))
+        : [],
     openTabs: Array.isArray(workspace.openTabs) ? [...workspace.openTabs] : [],
     expanded: Array.isArray(workspace.expanded) ? [...workspace.expanded] : [],
   };
@@ -52,11 +57,11 @@ function normalizePath(input: unknown, fallback: string) {
   const raw = typeof input === "string" && input.trim() ? input : fallback;
 
   const parts = raw
-    .replace(/\\/g, "/")
-    .replace(/^\/+/, "")
-    .split("/")
-    .map((part) => part.trim())
-    .filter((part) => part && part !== "." && part !== "..");
+      .replace(/\\/g, "/")
+      .replace(/^\/+/, "")
+      .split("/")
+      .map((part) => part.trim())
+      .filter((part) => part && part !== "." && part !== "..");
 
   return parts.join("/") || fallback;
 }
@@ -66,8 +71,8 @@ function starterFilePath(file: StarterFile, fallback: string) {
   if (!isRecord(file)) return fallback;
 
   return normalizePath(
-    file.path ?? file.filePath ?? file.filename ?? file.name,
-    fallback,
+      file.path ?? file.filePath ?? file.filename ?? file.name,
+      fallback,
   );
 }
 
@@ -83,15 +88,15 @@ function starterFileContent(file: StarterFile) {
 }
 
 function normalizeStarterFiles(
-  raw: unknown,
-  fallbackEntryFile: string,
-): Array<{ path: string; content: string }> {
-  const files: Array<{ path: string; content: string }> = [];
+    raw: unknown,
+    fallbackEntryFile: string,
+): NormalizedStarterFile[] {
+  const files: NormalizedStarterFile[] = [];
 
   if (Array.isArray(raw)) {
     raw.forEach((file, index) => {
       const fallback =
-        index === 0 ? fallbackEntryFile : `file-${String(index + 1)}.txt`;
+          index === 0 ? fallbackEntryFile : `file-${String(index + 1)}.txt`;
 
       files.push({
         path: starterFilePath(file, fallback),
@@ -99,7 +104,7 @@ function normalizeStarterFiles(
       });
     });
 
-    return files;
+    return dedupeStarterFiles(files, fallbackEntryFile);
   }
 
   if (isRecord(raw)) {
@@ -107,16 +112,48 @@ function normalizeStarterFiles(
       files.push({
         path: normalizePath(path, fallbackEntryFile),
         content:
-          typeof value === "string"
-            ? value
-            : isRecord(value)
-              ? starterFileContent(value)
-              : "",
+            typeof value === "string"
+                ? value
+                : isRecord(value)
+                    ? starterFileContent(value)
+                    : "",
       });
     }
   }
 
-  return files;
+  return dedupeStarterFiles(files, fallbackEntryFile);
+}
+
+function dedupeStarterFiles(
+    files: NormalizedStarterFile[],
+    fallbackEntryFile: string,
+) {
+  const seen = new Set<string>();
+  const result: NormalizedStarterFile[] = [];
+
+  for (const file of files) {
+    const path = normalizePath(file.path, fallbackEntryFile);
+    if (seen.has(path)) continue;
+
+    seen.add(path);
+    result.push({
+      path,
+      content: file.content ?? "",
+    });
+  }
+
+  return result;
+}
+
+function getWorkspaceSeed(manifest: AnyRecord) {
+  if (isRecord(manifest.workspace) && !isWorkspace(manifest.workspace)) {
+    return manifest.workspace;
+  }
+
+  if (isRecord(manifest.workspaceSeed)) return manifest.workspaceSeed;
+  if (isRecord(manifest.initialWorkspaceSeed)) return manifest.initialWorkspaceSeed;
+
+  return {};
 }
 
 function getEntryFile(args: {
@@ -124,48 +161,63 @@ function getEntryFile(args: {
   language: WorkspaceLanguage;
 }) {
   const { manifest, language } = args;
+  const workspace = getWorkspaceSeed(manifest);
 
   return normalizePath(
-    manifest.workspace?.entryFile ??
+      workspace.entryFile ??
+      workspace.entryFilePath ??
+      workspace.mainFile ??
+      workspace.mainFilePath ??
       manifest.entryFile ??
       manifest.entryFilePath ??
       manifest.mainFile ??
       manifest.mainFilePath ??
       manifest.recipe?.entryFile ??
       manifest.recipe?.entryFilePath,
-    defaultMainFile(language),
+      defaultMainFile(language),
   );
 }
 
 function getInitialStdin(manifest: AnyRecord) {
+  const workspace = getWorkspaceSeed(manifest);
+
   return (
-    manifest.workspace?.initialStdin ??
-    manifest.initialStdin ??
-    manifest.stdin ??
-    manifest.recipe?.initialStdin ??
-    manifest.recipe?.stdin ??
-    ""
+      workspace.initialStdin ??
+      workspace.stdin ??
+      manifest.initialStdin ??
+      manifest.stdin ??
+      manifest.starterStdin ??
+      manifest.recipe?.initialStdin ??
+      manifest.recipe?.stdin ??
+      ""
   );
 }
 
 function getStarterFilesSource(manifest: AnyRecord) {
+  const workspace = getWorkspaceSeed(manifest);
+
   return (
-    manifest.workspace?.starterFiles ??
-    manifest.starterFiles ??
-    manifest.files ??
-    manifest.initialFiles ??
-    manifest.workspaceFiles ??
-    manifest.recipe?.starterFiles ??
-    null
+      workspace.starterFiles ??
+      workspace.files ??
+      workspace.initialFiles ??
+      workspace.workspaceFiles ??
+      manifest.starterFiles ??
+      manifest.files ??
+      manifest.initialFiles ??
+      manifest.workspaceFiles ??
+      manifest.recipe?.starterFiles ??
+      null
   );
 }
 
 function getStarterCode(manifest: AnyRecord) {
+  const workspace = getWorkspaceSeed(manifest);
+
   return (
-    manifest.workspace?.starterCode ??
-    manifest.starterCode ??
-    manifest.recipe?.starterCode ??
-    ""
+      workspace.starterCode ??
+      manifest.starterCode ??
+      manifest.recipe?.starterCode ??
+      ""
   );
 }
 
@@ -179,9 +231,9 @@ function patchEntryFileContent(args: {
   return {
     ...workspace,
     nodes: workspace.nodes.map((node) =>
-      node.kind === "file" && node.id === entryFileId
-        ? { ...node, content, updatedAt: Date.now() }
-        : node,
+        node.kind === "file" && node.id === entryFileId
+            ? { ...node, content, updatedAt: Date.now() }
+            : node,
     ),
   };
 }
@@ -189,7 +241,7 @@ function patchEntryFileContent(args: {
 function buildWorkspaceFromStarterFiles(args: {
   language: WorkspaceLanguage;
   entryFile: string;
-  starterFiles: Array<{ path: string; content: string }>;
+  starterFiles: NormalizedStarterFile[];
   stdin: string;
 }): WorkspaceStateV2 {
   const now = Date.now();
@@ -212,6 +264,7 @@ function buildWorkspaceFromStarterFiles(args: {
       }
 
       const id = uid();
+
       const node: FolderNode = {
         id,
         kind: "folder",
@@ -230,13 +283,8 @@ function buildWorkspaceFromStarterFiles(args: {
     return parentId;
   }
 
-  const seenPaths = new Set<string>();
-
   for (const file of args.starterFiles) {
     const path = normalizePath(file.path, args.entryFile);
-    if (seenPaths.has(path)) continue;
-    seenPaths.add(path);
-
     const parts = path.split("/");
     const name = parts.pop() || defaultMainFile(args.language);
     const parentId = ensureFolder(parts);
@@ -256,11 +304,16 @@ function buildWorkspaceFromStarterFiles(args: {
     fileByPath.set(path, id);
   }
 
+  const normalizedEntry = normalizePath(
+      args.entryFile,
+      defaultMainFile(args.language),
+  );
+
   const entryFileId =
-    fileByPath.get(args.entryFile) ??
-    fileByPath.get(defaultMainFile(args.language)) ??
-    [...fileByPath.values()][0] ??
-    "";
+      fileByPath.get(normalizedEntry) ??
+      fileByPath.get(defaultMainFile(args.language)) ??
+      [...fileByPath.values()][0] ??
+      "";
 
   return {
     version: 2,
@@ -283,17 +336,18 @@ function buildDefaultWorkspace(args: {
 }): WorkspaceStateV2 {
   const now = Date.now();
   const id = uid();
-  const normalizedEntry = normalizePath(args.entryFile, defaultMainFile(args.language));
+  const normalizedEntry = normalizePath(
+      args.entryFile,
+      defaultMainFile(args.language),
+  );
   const parts = normalizedEntry.split("/");
   const fileName = parts.pop() || defaultMainFile(args.language);
 
   const nodes: FSNode[] = [];
   let parentId: NodeId | null = null;
-  let currentPath = "";
   const expanded: NodeId[] = [];
 
   for (const part of parts) {
-    currentPath = currentPath ? `${currentPath}/${part}` : part;
     const folderId = uid();
 
     nodes.push({
@@ -334,26 +388,316 @@ function buildDefaultWorkspace(args: {
 
 function isWorkspaceStateV2(value: unknown): value is WorkspaceStateV2 {
   return (
-    !!value &&
-    typeof value === "object" &&
-    (value as any).version === 2 &&
-    Array.isArray((value as any).nodes)
+      !!value &&
+      typeof value === "object" &&
+      (value as any).version === 2 &&
+      Array.isArray((value as any).nodes)
   );
 }
 
 export function deriveEntryCode(
-  workspace: WorkspaceStateV2 | null | undefined,
+    workspace: WorkspaceStateV2 | null | undefined,
 ): string | null {
   if (!isWorkspaceStateV2(workspace)) return null;
 
   const entryId = workspace.entryFileId || workspace.activeFileId;
   const entryNode = workspace.nodes.find(
-    (node) => node.kind === "file" && node.id === entryId,
+      (node) => node.kind === "file" && node.id === entryId,
   );
 
   return entryNode && entryNode.kind === "file"
-    ? String(entryNode.content ?? "")
-    : null;
+      ? String(entryNode.content ?? "")
+      : null;
+}
+
+function nodePathById(workspace: WorkspaceStateV2) {
+  const byId = new Map<NodeId, FSNode>();
+
+  for (const node of workspace.nodes) {
+    byId.set(node.id, node);
+  }
+
+  const cache = new Map<NodeId, string>();
+
+  function getPath(node: FSNode): string {
+    const cached = cache.get(node.id);
+    if (cached) return cached;
+
+    const parent =
+        node.parentId && byId.has(node.parentId) ? byId.get(node.parentId) : null;
+
+    const path = parent ? `${getPath(parent)}/${node.name}` : node.name;
+    const normalized = normalizePath(path, node.name);
+
+    cache.set(node.id, normalized);
+    return normalized;
+  }
+
+  const result = new Map<NodeId, string>();
+
+  for (const node of workspace.nodes) {
+    result.set(node.id, getPath(node));
+  }
+
+  return result;
+}
+
+function getFilePathMap(workspace: WorkspaceStateV2) {
+  const pathById = nodePathById(workspace);
+  const files = new Map<string, FileNode>();
+
+  for (const node of workspace.nodes) {
+    if (node.kind !== "file") continue;
+
+    const path = pathById.get(node.id);
+    if (!path) continue;
+
+    files.set(normalizePath(path, node.name), node as FileNode);
+  }
+
+  return files;
+}
+
+function getFolderPathMap(workspace: WorkspaceStateV2) {
+  const pathById = nodePathById(workspace);
+  const folders = new Map<string, FolderNode>();
+
+  for (const node of workspace.nodes) {
+    if (node.kind !== "folder") continue;
+
+    const path = pathById.get(node.id);
+    if (!path) continue;
+
+    folders.set(normalizePath(path, node.name), node as FolderNode);
+  }
+
+  return folders;
+}
+
+function ensureFolderInNodes(args: {
+  nodes: FSNode[];
+  foldersByPath: Map<string, FolderNode>;
+  expanded: NodeId[];
+  folderParts: string[];
+  now: number;
+}) {
+  const { nodes, foldersByPath, expanded, folderParts, now } = args;
+
+  let parentId: NodeId | null = null;
+  let currentPath = "";
+
+  for (const part of folderParts) {
+    currentPath = currentPath ? `${currentPath}/${part}` : part;
+
+    const existing = foldersByPath.get(currentPath);
+    if (existing) {
+      parentId = existing.id;
+      continue;
+    }
+
+    const id = uid();
+
+    const folder: FolderNode = {
+      id,
+      kind: "folder",
+      name: part,
+      parentId,
+      createdAt: now,
+      updatedAt: now,
+    };
+
+    nodes.push(folder);
+    foldersByPath.set(currentPath, folder);
+
+    if (!expanded.includes(id)) {
+      expanded.push(id);
+    }
+
+    parentId = id;
+  }
+
+  return parentId;
+}
+
+function shouldReplaceExistingFileWithStarter(args: {
+  existingFile: FileNode;
+  starterContent: string;
+}) {
+  const existingContent = String(args.existingFile.content ?? "");
+  const starterContent = String(args.starterContent ?? "");
+
+  if (!starterContent) return false;
+
+  /**
+   * Safe migration:
+   * If the existing file is blank, it is usually an old auto-created main.py.
+   * Fill it with the starter file content.
+   */
+  if (existingContent.trim() === "") return true;
+
+  return false;
+}
+
+function starterSignature(args: {
+  language: WorkspaceLanguage;
+  entryFile: string;
+  stdin: string;
+  starterFiles: NormalizedStarterFile[];
+  starterCode: string;
+}) {
+  return JSON.stringify({
+    language: args.language,
+    entryFile: args.entryFile,
+    stdin: args.stdin,
+    starterFiles: args.starterFiles.map((file) => ({
+      path: normalizePath(file.path, args.entryFile),
+      content: file.content ?? "",
+    })),
+    starterCode: args.starterCode ?? "",
+  });
+}
+
+function attachStarterSignature(
+    workspace: WorkspaceStateV2,
+    signature: string,
+): WorkspaceStateV2 {
+  return {
+    ...workspace,
+    starterSignature: signature,
+  } as WorkspaceStateV2;
+}
+
+function mergeStarterFilesIntoSavedWorkspace(args: {
+  saved: WorkspaceStateV2;
+  language: WorkspaceLanguage;
+  entryFile: string;
+  stdin: string;
+  starterFiles: NormalizedStarterFile[];
+  signature: string;
+}): WorkspaceStateV2 {
+  const now = Date.now();
+  const workspace = cloneWorkspace(args.saved);
+
+  const nodes = Array.isArray(workspace.nodes)
+      ? workspace.nodes.map((node) => ({ ...node }))
+      : [];
+
+  const expanded = Array.isArray(workspace.expanded)
+      ? [...workspace.expanded]
+      : [];
+
+  const filesByPath = getFilePathMap({
+    ...workspace,
+    nodes,
+  });
+
+  const foldersByPath = getFolderPathMap({
+    ...workspace,
+    nodes,
+  });
+
+  let entryFileId = workspace.entryFileId || workspace.activeFileId || "";
+  let changed = false;
+
+  for (const starter of args.starterFiles) {
+    const path = normalizePath(starter.path, args.entryFile);
+    const existingFile = filesByPath.get(path);
+
+    if (existingFile) {
+      if (
+          shouldReplaceExistingFileWithStarter({
+            existingFile,
+            starterContent: starter.content,
+          })
+      ) {
+        const index = nodes.findIndex((node) => node.id === existingFile.id);
+
+        if (index >= 0 && nodes[index]?.kind === "file") {
+          nodes[index] = {
+            ...nodes[index],
+            content: starter.content,
+            updatedAt: now,
+          } as FileNode;
+
+          changed = true;
+        }
+      }
+
+      if (path === normalizePath(args.entryFile, defaultMainFile(args.language))) {
+        entryFileId = existingFile.id;
+      }
+
+      continue;
+    }
+
+    const parts = path.split("/");
+    const name = parts.pop() || defaultMainFile(args.language);
+
+    const parentId = ensureFolderInNodes({
+      nodes,
+      foldersByPath,
+      expanded,
+      folderParts: parts,
+      now,
+    });
+
+    const id = uid();
+
+    const file: FileNode = {
+      id,
+      kind: "file",
+      name,
+      parentId,
+      content: starter.content ?? "",
+      createdAt: now,
+      updatedAt: now,
+    };
+
+    nodes.push(file);
+    filesByPath.set(path, file);
+    changed = true;
+
+    if (path === normalizePath(args.entryFile, defaultMainFile(args.language))) {
+      entryFileId = id;
+    }
+  }
+
+  if (!entryFileId) {
+    const entryPath = normalizePath(args.entryFile, defaultMainFile(args.language));
+    entryFileId =
+        filesByPath.get(entryPath)?.id ??
+        nodes.find((node) => node.kind === "file")?.id ??
+        "";
+  }
+
+  const openTabs = Array.isArray(workspace.openTabs)
+      ? [...workspace.openTabs]
+      : [];
+
+  if (entryFileId && !openTabs.includes(entryFileId)) {
+    openTabs.unshift(entryFileId);
+    changed = true;
+  }
+
+  const nextWorkspace: WorkspaceStateV2 = {
+    ...workspace,
+    language: args.language,
+    nodes,
+    expanded,
+    openTabs,
+    activeFileId: workspace.activeFileId || entryFileId,
+    entryFileId,
+    stdin:
+        typeof workspace.stdin === "string" && workspace.stdin !== ""
+            ? workspace.stdin
+            : args.stdin,
+  };
+
+  /**
+   * Always attach the signature once we have considered starter files.
+   * This prevents constantly re-running migration logic for the same manifest.
+   */
+  return attachStarterSignature(nextWorkspace, args.signature);
 }
 
 export function resolveExerciseWorkspace(args: {
@@ -364,29 +708,71 @@ export function resolveExerciseWorkspace(args: {
   const language = (args.language || "python") as WorkspaceLanguage;
   const manifest = (args.manifest ?? {}) as AnyRecord;
 
+  const entryFile = getEntryFile({ manifest, language });
+  const stdin = String(getInitialStdin(manifest) ?? "");
+  const starterFiles = normalizeStarterFiles(
+      getStarterFilesSource(manifest),
+      entryFile,
+  );
+  const starterCode = String(getStarterCode(manifest) ?? "");
+
+  const signature = starterSignature({
+    language,
+    entryFile,
+    stdin,
+    starterFiles,
+    starterCode,
+  });
+
+  /**
+   * Important:
+   * Saved workspace should NOT block starter files.
+   *
+   * Old behavior:
+   *   saved workspace exists -> return saved workspace
+   *
+   * New behavior:
+   *   saved workspace exists + starterFiles exist -> merge missing starter files
+   *   saved learner-edited files still win
+   */
   if (isWorkspace(args.saved)) {
+    if (starterFiles.length > 0) {
+      return mergeStarterFilesIntoSavedWorkspace({
+        saved: args.saved,
+        language,
+        entryFile,
+        stdin,
+        starterFiles,
+        signature,
+      });
+    }
+
     return cloneWorkspace(args.saved);
   }
 
   const savedFromManifest =
-    manifest.workspace && isWorkspace(manifest.workspace)
-      ? manifest.workspace
-      : manifest.initialWorkspace && isWorkspace(manifest.initialWorkspace)
-        ? manifest.initialWorkspace
-        : manifest.starterWorkspace && isWorkspace(manifest.starterWorkspace)
-          ? manifest.starterWorkspace
-          : null;
+      manifest.workspace && isWorkspace(manifest.workspace)
+          ? manifest.workspace
+          : manifest.initialWorkspace && isWorkspace(manifest.initialWorkspace)
+              ? manifest.initialWorkspace
+              : manifest.starterWorkspace && isWorkspace(manifest.starterWorkspace)
+                  ? manifest.starterWorkspace
+                  : null;
 
   if (savedFromManifest) {
+    if (starterFiles.length > 0) {
+      return mergeStarterFilesIntoSavedWorkspace({
+        saved: savedFromManifest,
+        language,
+        entryFile,
+        stdin,
+        starterFiles,
+        signature,
+      });
+    }
+
     return cloneWorkspace(savedFromManifest);
   }
-
-  const entryFile = getEntryFile({ manifest, language });
-  const stdin = String(getInitialStdin(manifest) ?? "");
-  const starterFiles = normalizeStarterFiles(
-    getStarterFilesSource(manifest),
-    entryFile,
-  );
 
   if (starterFiles.length > 0) {
     const starterWorkspace = buildWorkspaceFromStarterFiles({
@@ -396,25 +782,30 @@ export function resolveExerciseWorkspace(args: {
       stdin,
     });
 
-    const starterCode = getStarterCode(manifest);
     const fileCount = starterWorkspace.nodes.filter(
-      (node) => node.kind === "file",
+        (node) => node.kind === "file",
     ).length;
 
-    if (typeof starterCode === "string" && starterCode && fileCount <= 1) {
-      return patchEntryFileContent({
-        workspace: starterWorkspace,
-        content: starterCode,
-      });
+    if (starterCode && fileCount <= 1) {
+      return attachStarterSignature(
+          patchEntryFileContent({
+            workspace: starterWorkspace,
+            content: starterCode,
+          }),
+          signature,
+      );
     }
 
-    return starterWorkspace;
+    return attachStarterSignature(starterWorkspace, signature);
   }
 
-  return buildDefaultWorkspace({
-    language,
-    entryFile,
-    code: String(getStarterCode(manifest) ?? ""),
-    stdin,
-  });
+  return attachStarterSignature(
+      buildDefaultWorkspace({
+        language,
+        entryFile,
+        code: starterCode,
+        stdin,
+      }),
+      signature,
+  );
 }
