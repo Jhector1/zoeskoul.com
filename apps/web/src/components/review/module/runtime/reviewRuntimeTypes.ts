@@ -48,8 +48,8 @@ export type ExerciseRuntimeState = {
   };
 
   sketch?: SketchState | null;
-
   status: ExerciseRuntimeStatus;
+  workspaceStatus: "pending" | "ready" | "error";
   updatedAt: number;
 
   /**
@@ -70,17 +70,33 @@ export type CardRuntimeState = {
   visited: boolean;
   completed: boolean;
   sketch?: SketchState | null;
+  workspaceStatus: "pending" | "ready" | "error";
+  workspaceSeedMode?: "starter" | "empty" | "restored";
 
   /**
    * Card/sketch-scoped Tools editor workspace.
    * This stores created files/folders from the Tools IDE when no exercise is active.
    */
   toolKey?: string;
-  toolWorkspace?: any | null;
+  toolWorkspace?: WorkspaceStateV2 | null;
   toolCode?: string;
   toolStdin?: string;
   toolLang?: string;
 
+  updatedAt: number;
+};
+
+export type EditorRuntimeState = {
+  ownerKey: string;
+  ownerKind: "card" | "exercise";
+  targetKey: string;
+  toolScopeKey: string;
+  language: string;
+  workspaceStatus: "pending" | "ready" | "error";
+  workspaceSeedMode: "starter" | "empty" | "restored";
+  workspace: WorkspaceStateV2 | null;
+  code: string;
+  stdin: string;
   updatedAt: number;
 };
 
@@ -94,8 +110,16 @@ export type ReviewRuntimeState = {
   activeCardIndex: number;
   activeExerciseKey: ExerciseStateKey | null;
 
+  /**
+   * The current workspace used by the side-car tool (e.g. CodeToolPane).
+   * Having this in the root state ensures we have a stable reference
+   * that updates immediately when switching exercises.
+   */
+  boundToolWorkspace: WorkspaceStateV2 | null;
+
   cards: Record<CardStateKey, CardRuntimeState>;
   exercises: Record<ExerciseStateKey, ExerciseRuntimeState>;
+  editorRuntimes: Record<string, EditorRuntimeState>;
 
   tool: {
     boundExerciseKey: ExerciseStateKey | null;
@@ -106,9 +130,13 @@ export type ReviewRuntimeState = {
     pendingExerciseKeys: Set<ExerciseStateKey>;
     pendingCardKeys: Set<CardStateKey>;
   };
+
+  targetRegistry: import("./reviewTargetRegistry").ReviewTargetRegistry | null;
 };
 
 export type ReviewRuntimeActions = {
+  setTargetRegistry: (registry: import("./reviewTargetRegistry").ReviewTargetRegistry) => void;
+
   setReviewScope: (scope: {
     subjectSlug?: string | null;
     moduleSlug?: string | null;
@@ -129,7 +157,7 @@ export type ReviewRuntimeActions = {
     sectionSlug?: string;
     topicId: string;
     cardId: string;
-    manifest: any;
+    manifest?: any;
     saved?: any;
   }) => void;
 
@@ -138,25 +166,29 @@ export type ReviewRuntimeActions = {
     patch: Partial<ExerciseRuntimeState> & Record<string, any>,
   ) => void;
 
-    ensureCard: (args: {
-        cardKey: CardStateKey;
-        topicId: string;
-        cardId: string;
-        initial?: Partial<CardRuntimeState>;
-        starterSketch?: SketchState | null;
-
-        /**
-         * Optional sketch/card-level IDE seed.
-         *
-         * This is used only when the card does not already have saved
-         * toolWorkspace state.
-         */
-        starterToolManifest?: any | null;
-    }) => void;
+  ensureCard: (args: {
+    cardKey: CardStateKey;
+    topicId: string;
+    cardId: string;
+    initial?: Partial<CardRuntimeState>;
+    starterSketch?: SketchState | null;
+    toolLanguage?: string;
+    toolManifest?: any;
+    toolKey?: string;
+  }) => void;
 
   patchCard: (
     key: CardStateKey,
     patch: Partial<CardRuntimeState>,
+  ) => void;
+
+  ensureEditorSource: (
+    source: import("./deterministicEditorSource").ReviewDeterministicEditorSource,
+  ) => void;
+
+  patchEditorWorkspace: (
+    ownerKey: string,
+    workspace: WorkspaceStateV2 | null,
   ) => void;
 
   bindExerciseTool: (key: ExerciseStateKey) => void;
@@ -181,6 +213,8 @@ export type ReviewRuntimeActions = {
       flushProgress?: () => void;
     },
   ) => void;
+
+  syncActiveTarget: (target: import("./reviewRoute").ReviewResolvedRouteTarget | null) => void;
 
   queueAutosave: () => void;
   flushNow: () => Promise<void>;

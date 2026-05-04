@@ -29,6 +29,7 @@ export type ToolsPanelProps = {
     onCollapse: () => void;
     onUnbind?: () => void;
     boundId?: string | null;
+    editorOwnerKey?: string | null;
     toolScopeKey?: string;
 
     rightBodyRef: React.RefObject<HTMLDivElement | null>;
@@ -117,6 +118,7 @@ function ToolsPanelInner(props: ToolsPanelProps) {
                         isActive={active === "code"}
                         codeEnabled={ctx.codeEnabled}
                         height={props.codeRunnerRegionH}
+                        editorOwnerKey={props.editorOwnerKey}
                         toolScopeKey={scopeKey}
                         toolHydrated={props.toolHydrated}
                         toolLang={props.toolLang}
@@ -233,6 +235,7 @@ function CodePaneLayer(props: {
     isActive: boolean;
     codeEnabled: boolean;
     height: number;
+    editorOwnerKey?: string | null;
     toolScopeKey?: string;
     toolHydrated: boolean;
     toolLang: WorkspaceLanguage;
@@ -273,6 +276,7 @@ function CodePaneLayer(props: {
     } else if (CODE_SPEC) {
         pane = CODE_SPEC.render({
             height: props.height,
+            editorOwnerKey: props.editorOwnerKey,
             toolScopeKey: props.toolScopeKey,
             toolHydrated: props.toolHydrated,
             toolLang: props.toolLang,
@@ -316,6 +320,7 @@ const MemoCodePaneLayer = React.memo(
         prev.isActive === next.isActive &&
         prev.codeEnabled === next.codeEnabled &&
         prev.height === next.height &&
+        prev.editorOwnerKey === next.editorOwnerKey &&
         prev.toolScopeKey === next.toolScopeKey &&
         prev.toolHydrated === next.toolHydrated &&
         prev.toolLang === next.toolLang &&

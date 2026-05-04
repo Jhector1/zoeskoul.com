@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useState, useTransition } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
 
 import type { ReviewProgressState } from "@/lib/subjects/progressTypes";
 
@@ -45,6 +46,46 @@ import {
 import type { ReviewModulePageProps, HeaderGamificationVm } from "../types";
 import { useReviewRuntimeStore } from "../runtime/reviewRuntimeStore";
 import { getCardStateKey } from "../runtime/exerciseKeys";
+import {
+    buildReviewCardRouteTarget,
+    buildReviewExerciseRouteTarget,
+    parseReviewRouteFromPath,
+    buildReviewRoutePath,
+    resolveReviewRouteTarget,
+    type ReviewResolvedRouteTarget,
+} from "../runtime/reviewRoute";
+
+import { buildReviewTargetRegistry } from "../runtime/reviewTargetRegistry";
+
+function registryEntryToRouteTarget(entry: any): ReviewResolvedRouteTarget | null {
+    if (!entry) return null;
+
+    if (entry.ownerKind === "exercise" && entry.exerciseId && entry.exerciseStateKey) {
+        return {
+            kind: "exercise",
+            sectionSlug: entry.sectionSlug,
+            topicId: entry.topicId,
+            topicSlug: entry.topicSlug,
+            cardId: entry.cardId,
+            cardType: entry.cardType,
+            targetKind: "exercise",
+            targetSlug: entry.targetSlug,
+            exerciseId: entry.exerciseId,
+            exerciseStateKey: entry.exerciseStateKey,
+        };
+    }
+
+    return {
+        kind: "card",
+        sectionSlug: entry.sectionSlug,
+        topicId: entry.topicId,
+        topicSlug: entry.topicSlug,
+        cardId: entry.cardId,
+        cardType: entry.cardType,
+        targetKind: entry.targetKind,
+        targetSlug: entry.targetSlug,
+    };
+}
 
 export function useReviewModuleController({
                                               mod,
@@ -53,10 +94,21 @@ export function useReviewModuleController({
                                               footerInsetPx = 0,
                                               navigationMode,
                                           }: ReviewModulePageProps) {
-    const params = useParams<{ locale: string; subjectSlug: string; moduleSlug: string }>();
+    const params = useParams<{
+        locale: string;
+        catalogSlug?: string;
+        subjectSlug: string;
+        moduleSlug: string;
+        sectionSlug?: string;
+        topicId?: string;
+        topicSlug?: string;
+        targetKind?: string;
+        targetSlug?: string;
+    }>();
     const router = useRouter();
 
     const locale = params?.locale ?? "en";
+    const catalogSlug = params?.catalogSlug ?? null;
     const subjectSlug = params?.subjectSlug ?? "";
     const moduleSlug = params?.moduleSlug ?? "";
     const sectionSlug = (params as any)?.sectionSlug;
@@ -83,6 +135,21 @@ export function useReviewModuleController({
 
     const store = useReviewRuntimeStore();
 
+    const targetRegistry = useMemo(() => {
+        if (!mod) return null;
+        return buildReviewTargetRegistry({
+            mod,
+            subjectSlug,
+            moduleSlug,
+        });
+    }, [mod, moduleSlug, subjectSlug]);
+
+    useEffect(() => {
+        if (targetRegistry) {
+            store.setTargetRegistry(targetRegistry);
+        }
+    }, [targetRegistry]); // Removed 'store' from dependencies to avoid loop if it changes (though it shouldn't)
+
     const flushAll = useCallback(async () => {
         store.flushBeforeNavigation({
             flushProgress: () => {
@@ -91,9 +158,132 @@ export function useReviewModuleController({
         });
     }, [store, flushNow, progress]);
 
+    const initialRouteTarget = useMemo(() => {
+        if (targetRegistry && params?.sectionSlug && params?.topicSlug && params?.targetKind && params?.targetSlug) {
+            const routeKey = `${params.sectionSlug}/${params.topicSlug}/${params.targetKind}/${params.targetSlug}`;
+            const targetKey = targetRegistry.byRoute[routeKey];
+            if (targetKey) {
+                const entry = targetRegistry.byKey[targetKey];
+                if (entry) {
+                    const direct = registryEntryToRouteTarget(entry);
+                    if (direct) return direct;
+                }
+            }
+        }
+
+        return resolveReviewRouteTarget({
+            mod,
+            subjectSlug,
+            moduleSlug,
+            route: {
+                sectionSlug: params?.sectionSlug,
+                topicId: params?.topicId,
+                topicSlug: params?.topicSlug,
+                targetKind: params?.targetKind,
+                targetSlug: params?.targetSlug,
+            },
+        });
+    }, [
+        mod,
+        moduleSlug,
+        params?.sectionSlug,
+        params?.targetKind,
+        params?.targetSlug,
+        params?.topicId,
+        params?.topicSlug,
+        subjectSlug,
+        targetRegistry,
+    ]);
+    const [routeTarget, setRouteTarget] = useState<ReviewResolvedRouteTarget | null>(initialRouteTarget);
+
+    useEffect(() => {
+        setRouteTarget(initialRouteTarget);
+    }, [initialRouteTarget]);
+
+    const routeEditorEntry = useMemo(() => {
+        if (!routeTarget || !targetRegistry) return null;
+        const routeKey = `${routeTarget.sectionSlug}/${routeTarget.topicSlug}/${routeTarget.targetKind}/${routeTarget.targetSlug}`;
+        const targetKey = targetRegistry.byRoute[routeKey];
+        return targetKey ? targetRegistry.byKey[targetKey] ?? null : null;
+    }, [routeTarget, targetRegistry]);
+
+    const routeEditorOwnerKey = routeEditorEntry?.ownerKey ?? null;
+    const routeEditorToolScopeKey = routeEditorEntry?.toolScopeKey ?? routeEditorOwnerKey ?? null;
+
+    useEffect(() => {
+        if (!routeTarget) return;
+
+        const normalizedPath = buildReviewRoutePath({
+            locale,
+            catalogSlug,
+            subjectSlug,
+            moduleSlug,
+            target: routeTarget,
+        });
+        const currentPath = typeof window !== "undefined" ? window.location.pathname : "";
+
+        if (currentPath !== normalizedPath && typeof window !== "undefined") {
+            window.history.replaceState(window.history.state, "", normalizedPath);
+        }
+    }, [catalogSlug, locale, moduleSlug, routeTarget, subjectSlug]);
+
+    useEffect(() => {
+        if (typeof window === "undefined") return;
+
+        const syncFromLocation = () => {
+            const nextRoute = parseReviewRouteFromPath({
+                pathname: window.location.pathname,
+                locale,
+                catalogSlug,
+                subjectSlug,
+                moduleSlug,
+            });
+
+            const resolved = resolveReviewRouteTarget({
+                mod,
+                subjectSlug,
+                moduleSlug,
+                route: nextRoute ?? {},
+            });
+            const registryResolved =
+                nextRoute && targetRegistry
+                    ? registryEntryToRouteTarget(
+                        targetRegistry.byKey[
+                            targetRegistry.byRoute[
+                                `${nextRoute.sectionSlug}/${nextRoute.topicSlug}/${nextRoute.targetKind}/${nextRoute.targetSlug}`
+                            ] ?? ""
+                        ],
+                    )
+                    : null;
+            const nextResolved = registryResolved ?? resolved;
+
+            setRouteTarget((prev) => {
+                if (
+                    prev?.kind === nextResolved?.kind &&
+                    prev?.topicId === nextResolved?.topicId &&
+                    prev?.cardId === nextResolved?.cardId &&
+                    prev?.targetKind === nextResolved?.targetKind &&
+                    prev?.targetSlug === nextResolved?.targetSlug &&
+                    (prev?.kind !== "exercise" ||
+                        nextResolved?.kind !== "exercise" ||
+                        prev.exerciseStateKey === nextResolved.exerciseStateKey)
+                ) {
+                    return prev;
+                }
+
+                return nextResolved;
+            });
+        };
+
+        window.addEventListener("popstate", syncFromLocation);
+        return () => window.removeEventListener("popstate", syncFromLocation);
+    }, [catalogSlug, locale, mod, moduleSlug, subjectSlug, targetRegistry]);
+
+    const effectiveViewTopicId = routeTarget?.topicId ?? viewTopicId;
+
     const viewTopic = useMemo(
-        () => getViewTopic(topics, viewTopicId),
-        [topics, viewTopicId],
+        () => getViewTopic(topics, effectiveViewTopicId),
+        [topics, effectiveViewTopicId],
     );
 
     const viewCards = useMemo(
@@ -101,7 +291,7 @@ export function useReviewModuleController({
         [viewTopic],
     );
 
-    const viewTid = viewTopic?.id ?? firstTopicId ?? "";
+    const viewTid = viewTopic?.id ?? effectiveViewTopicId ?? firstTopicId ?? "";
 
     const runtime = useReviewModuleRuntime({
         subjectSlug,
@@ -109,9 +299,32 @@ export function useReviewModuleController({
         viewTopic,
     });
 
+    const syncActiveTarget = useReviewRuntimeStore((s) => s.syncActiveTarget);
+    useEffect(() => {
+        if (progressHydrated) {
+            syncActiveTarget(routeTarget);
+        }
+    }, [routeTarget, progressHydrated, syncActiveTarget]);
+
     const panels = useReviewPanels({ footerInsetPx });
 
     const sketch = useDebouncedSketchState({});
+
+    useEffect(() => {
+        if (!routeTarget?.topicId) return;
+        if (viewTopicId !== routeTarget.topicId) {
+            setViewTopicId(routeTarget.topicId);
+        }
+        if (activeTopicId !== routeTarget.topicId) {
+            setActiveTopicId(routeTarget.topicId);
+        }
+    }, [
+        activeTopicId,
+        routeTarget?.topicId,
+        setActiveTopicId,
+        setViewTopicId,
+        viewTopicId,
+    ]);
 
     useEffect(() => {
         if (!progressHydrated) return;
@@ -228,6 +441,33 @@ export function useReviewModuleController({
         onBeforeNavigate: flushAll,
     });
 
+    const navigateToResolvedTarget = useCallback(
+        async (target: ReviewResolvedRouteTarget | null, mode: "push" | "replace" = "push") => {
+            if (!target) return;
+
+            const href = buildReviewRoutePath({
+                locale,
+                catalogSlug,
+                subjectSlug,
+                moduleSlug,
+                target,
+            });
+
+            await flushAll();
+
+            if (typeof window !== "undefined") {
+                if (mode === "replace") {
+                    window.history.replaceState(window.history.state, "", href);
+                } else {
+                    window.history.pushState(window.history.state, "", href);
+                }
+            }
+
+            setRouteTarget(target);
+        },
+        [catalogSlug, flushAll, locale, moduleSlug, subjectSlug],
+    );
+
     const showSkeleton = useSkeletonGate({
         ready: progressHydrated,
         swapKey: `${subjectSlug}:${moduleSlug}:${locale}`,
@@ -238,6 +478,18 @@ export function useReviewModuleController({
 
     const reduceMotion = useReduceMotion();
     const [showMask, setShowMask] = useState(false);
+
+    const handleNavigateCardIndex = useCallback((index: number) => {
+        const nextCard = viewCards[Math.max(0, Math.min(viewCards.length - 1, index))] ?? null;
+        if (!nextCard) return;
+        void navigateToResolvedTarget(
+            buildReviewCardRouteTarget({
+                mod,
+                topicId: viewTid,
+                card: nextCard,
+            }),
+        );
+    }, [mod, navigateToResolvedTarget, viewCards, viewTid]);
 
     useEffect(() => {
         if (reduceMotion) return;
@@ -275,53 +527,44 @@ export function useReviewModuleController({
         reduceMotion,
         unlockAll,
         showSkeleton,
+        routeOwned: true,
+        onNavigateToCardIndex: handleNavigateCardIndex,
     });
-    const activeCard = viewCards[scrollSync.activeCardIndex] ?? null;
-    const [requestedExerciseTarget, setRequestedExerciseTarget] = useState<{
-        topicId: string;
-        cardId: string;
-        exerciseId: string;
-        inputId: string;
-    } | null>(null);
+    const routeCardIndex = useMemo(() => {
+        if (!routeTarget?.cardId) return -1;
+        return viewCards.findIndex((card) => card.id === routeTarget.cardId);
+    }, [routeTarget?.cardId, viewCards]);
+
+    const activeCardIndex = routeCardIndex >= 0 ? routeCardIndex : 0;
+    const activeCard = viewCards[activeCardIndex] ?? null;
+
+    useEffect(() => {
+        useReviewRuntimeStore.getState().goToCard(Math.max(0, activeCardIndex));
+    }, [activeCardIndex]);
+
     const activeExerciseTarget = useMemo(() => {
-        if (!requestedExerciseTarget) return null;
-        if (requestedExerciseTarget.topicId !== viewTid) return null;
-
-        /**
-         * Keep the exercise binding only while its owning card is still active.
-         *
-         * Without this guard, navigating from a project/exercise card back to a
-         * sketch card leaves the right-side IDE scoped to the old exercise.
-         * Then the sketch's card workspace never becomes the active tool workspace.
-         */
-        if (
-            activeCard?.id &&
-            requestedExerciseTarget.cardId &&
-            activeCard.id !== requestedExerciseTarget.cardId
-        ) {
-            return null;
+        if (routeTarget?.kind === "exercise") {
+            return {
+                topicId: routeTarget.topicId,
+                cardId: routeTarget.cardId,
+                exerciseId: routeTarget.exerciseStateKey,
+                inputId: routeTarget.exerciseId,
+            };
         }
-
-        return requestedExerciseTarget;
-    }, [
-        requestedExerciseTarget,
-        viewTid,
-        activeCard?.id,
-    ]);
-
-    const activeCardToolScopeKey = activeCard?.id
-        ? `${getCardStateKey({
-            subjectSlug,
-            moduleSlug,
-            sectionSlug,
-            topicId: viewTid,
-            cardId: activeCard.id,
-        })}:general`
-        : "general";
+        return null;
+    }, [routeTarget]);
 
     const activeToolScopeKey =
         activeExerciseTarget?.exerciseId ??
-        activeCardToolScopeKey;
+        (activeCard?.id
+            ? `${getCardStateKey({
+                subjectSlug,
+                moduleSlug,
+                sectionSlug: routeTarget?.sectionSlug ?? sectionSlug,
+                topicId: viewTid,
+                cardId: activeCard.id,
+            })}:general`
+            : "general");
 
     const tool = useToolCodeRunnerState({
         progress,
@@ -342,23 +585,7 @@ export function useReviewModuleController({
         rightCollapsed: panels.rightCollapsed,
         rightW: panels.rightW,
     });
-    useEffect(() => {
-        if (!requestedExerciseTarget) return;
-        if (!activeCard?.id) return;
 
-        if (
-            requestedExerciseTarget.topicId === viewTid &&
-            requestedExerciseTarget.cardId !== activeCard.id
-        ) {
-            setRequestedExerciseTarget(null);
-            tool.unbindCodeInput();
-        }
-    }, [
-        requestedExerciseTarget,
-        activeCard?.id,
-        viewTid,
-        tool.unbindCodeInput,
-    ]);
     const prereqsForAllQuizzes = unlockAll
         ? true
         : prereqsMetForAnyQuizOrProject(viewCards, viewProg, viewTid);
@@ -409,7 +636,7 @@ export function useReviewModuleController({
 
         if (assignmentSessionId && assignmentStatus.phase !== "idle") {
             router.push(
-                `/${locale}${ROUTES.practicePath(
+                `/${ROUTES.practicePath(
                     encodeURIComponent(subjectSlug),
                     encodeURIComponent(moduleSlug),
                 )}` +
@@ -442,7 +669,7 @@ export function useReviewModuleController({
         flushNow(next);
 
         router.push(
-            `/${locale}${ROUTES.practicePath(
+            `/${ROUTES.practicePath(
                 encodeURIComponent(subjectSlug),
                 encodeURIComponent(practiceModuleSlug),
             )}` +
@@ -476,14 +703,14 @@ export function useReviewModuleController({
     const goModule = useCallback(
         (mid: string) => {
             router.push(
-                `/${locale}${ROUTES.learningPath(
+                ROUTES.learningPath(
                     encodeURIComponent(subjectSlug),
                     encodeURIComponent(mid),
-                )}`,
+                ),
             );
             router.refresh();
         },
-        [router, locale, subjectSlug],
+        [router, subjectSlug],
     );
 
     const goUnlockNext = useCallback(() => {
@@ -493,7 +720,17 @@ export function useReviewModuleController({
 
     const handleOutroContinue = useCallback(() => {
         if (topicFlow.nextTopic?.id) {
-            topicFlow.goNextTopic();
+            const nextTopic = topics.find((topic) => topic.id === topicFlow.nextTopic?.id) ?? null;
+            const nextCard = nextTopic?.cards?.[0] ?? null;
+            if (nextTopic && nextCard) {
+                void navigateToResolvedTarget(
+                    buildReviewCardRouteTarget({
+                        mod,
+                        topicId: nextTopic.id,
+                        card: nextCard,
+                    }),
+                );
+            }
             return;
         }
 
@@ -507,8 +744,11 @@ export function useReviewModuleController({
 
         goModule(nav.nextModuleId);
     }, [
+        buildReviewCardRouteTarget,
+        mod,
+        navigateToResolvedTarget,
         topicFlow.nextTopic?.id,
-        topicFlow.goNextTopic,
+        topics,
         nav?.nextModuleId,
         canGoNextModule,
         nextLocked,
@@ -592,35 +832,31 @@ export function useReviewModuleController({
             const ownerCardId = args.ownerCardId?.trim() || activeCard?.id || "general";
             const targetExerciseKey = (args as any).exerciseKey ?? args.id;
 
-            const alreadyRequested =
-                requestedExerciseTarget?.topicId === viewTid &&
-                requestedExerciseTarget?.cardId === ownerCardId &&
-                requestedExerciseTarget?.exerciseId === targetExerciseKey &&
-                requestedExerciseTarget?.inputId === args.id;
-
-            const actuallyBound = tool.boundId === targetExerciseKey;
-
-            /**
-             * Bind is an exercise-navigation event.
-             *
-             * Do not return only because requestedExerciseTarget matches.
-             * The requested target can be set while the actual tool binding is
-             * still null/stale, which makes the right rail fall back to :general.
-             */
-            if (alreadyRequested && actuallyBound) return;
-
             void tool.flushLatest();
 
-            if (!alreadyRequested) {
-                setRequestedExerciseTarget({
-                    topicId: viewTid,
-                    cardId: ownerCardId,
-                    exerciseId: targetExerciseKey,
-                    inputId: args.id,
-                });
+            const routeExerciseId =
+                typeof args.id === "string" && args.id.trim()
+                    ? args.id
+                    : targetExerciseKey;
+            const nextTarget = buildReviewExerciseRouteTarget({
+                mod,
+                topicId: viewTid,
+                cardId: ownerCardId,
+                exerciseId: routeExerciseId,
+                subjectSlug,
+                moduleSlug,
+                sectionSlug: routeTarget?.sectionSlug ?? sectionSlug,
+            });
+
+            const routeAlreadyActive =
+                routeTarget?.kind === "exercise" &&
+                routeTarget.exerciseStateKey === nextTarget.exerciseStateKey;
+
+            if (!routeAlreadyActive) {
+                void navigateToResolvedTarget(nextTarget, "push");
             }
 
-            if (!actuallyBound) {
+            if (tool.boundId !== targetExerciseKey) {
                 tool.bindCodeInput(args as any);
             }
         },
@@ -628,19 +864,29 @@ export function useReviewModuleController({
             tool.bindCodeInput,
             tool.flushLatest,
             tool.boundId,
-            activeCard?.id,
+            navigateToResolvedTarget,
+            mod,
+            moduleSlug,
+            routeTarget?.sectionSlug,
+            routeTarget?.kind,
+            routeTarget?.exerciseStateKey,
+            sectionSlug,
+            subjectSlug,
             viewTid,
-            requestedExerciseTarget?.topicId,
-            requestedExerciseTarget?.cardId,
-            requestedExerciseTarget?.exerciseId,
-            requestedExerciseTarget?.inputId,
         ],
     );
 
     const handleUnbindFromToolsPanel = useCallback(() => {
         void tool.flushLatest();
-        setRequestedExerciseTarget(null);
         tool.unbindCodeInput();
+        /**
+         * Route is the durable source of truth.
+         *
+         * A transient unbind during mount/unmount or tools reconciliation must
+         * not downgrade an exercise route back to the outer project card route,
+         * otherwise starter-backed exercise workspaces never get a chance to
+         * hydrate under their canonical exercise owner key.
+         */
     }, [tool.flushLatest, tool.unbindCodeInput]);
 
     const toolsProvider = useMemo(
@@ -679,9 +925,7 @@ export function useReviewModuleController({
      * shows blank/stale state.
      */
     const rightRailExerciseKey =
-        activeExerciseTarget?.exerciseId ??
-        tool.boundId ??
-        null;
+        activeExerciseTarget?.exerciseId ?? null;
 
     return {
         toolsProvider,
@@ -707,8 +951,36 @@ export function useReviewModuleController({
             onToggleLeftPanel: panels.handleToggleLeftPanel,
             onToggleRightPanel: panels.handleToggleRightPanel,
             onResetCurrentTopic: handleResetCurrentTopic,
-            onPrevTopic: topicFlow.goPrevTopic,
-            onNextTopic: topicFlow.goNextTopic,
+            onPrevTopic: topicFlow.prevTopic?.id
+                ? () => {
+                    const topic = topics.find((item) => item.id === topicFlow.prevTopic?.id) ?? null;
+                    const card = topic?.cards?.[0] ?? null;
+                    if (topic && card) {
+                        void navigateToResolvedTarget(
+                            buildReviewCardRouteTarget({
+                                mod,
+                                topicId: topic.id,
+                                card,
+                            }),
+                        );
+                    }
+                }
+                : undefined,
+            onNextTopic: topicFlow.nextTopic?.id
+                ? () => {
+                    const topic = topics.find((item) => item.id === topicFlow.nextTopic?.id) ?? null;
+                    const card = topic?.cards?.[0] ?? null;
+                    if (topic && card) {
+                        void navigateToResolvedTarget(
+                            buildReviewCardRouteTarget({
+                                mod,
+                                topicId: topic.id,
+                                card,
+                            }),
+                        );
+                    }
+                }
+                : undefined,
             prevTopic: topicFlow.prevTopic,
             nextTopic: topicFlow.nextTopic,
             unlockAll,
@@ -727,7 +999,19 @@ export function useReviewModuleController({
                 topicItems: sidebarTopicItems,
                 unlockAll,
                 moduleProgress,
-                onGoToTopic: topicFlow.goToTopic,
+                onGoToTopic: (tid: string) => {
+                    const topic = topics.find((item) => item.id === tid) ?? null;
+                    const card = topic?.cards?.[0] ?? null;
+                    if (topic && card) {
+                        void navigateToResolvedTarget(
+                            buildReviewCardRouteTarget({
+                                mod,
+                                topicId: topic.id,
+                                card,
+                            }),
+                        );
+                    }
+                },
                 onResetModule: resetFlow.requestResetModule,
                 onCollapse: panels.handleCollapseLeft,
                 assignmentPct: assignmentRightPct,
@@ -751,9 +1035,12 @@ export function useReviewModuleController({
                 onCollapse: panels.handleCollapseRight,
                 onUnbind: handleUnbindFromToolsPanel,
                 boundId: rightRailExerciseKey,
-                toolScopeKey: rightRailExerciseKey
-                    ? rightRailExerciseKey
-                    : activeToolScopeKey,
+                editorOwnerKey: routeEditorOwnerKey,
+                toolScopeKey: routeEditorToolScopeKey
+                    ? routeEditorToolScopeKey
+                    : rightRailExerciseKey
+                        ? rightRailExerciseKey
+                        : activeToolScopeKey,
                 rightBodyRef: tool.rightBodyRef,
                 codeRunnerRegionH: tool.codeRunnerRegionH,
                 toolHydrated: tool.toolHydrated,
@@ -801,7 +1088,17 @@ export function useReviewModuleController({
                 unlockAll,
                 moduleProgress,
                 onGoToTopic: (tid: string) => {
-                    topicFlow.goToTopic(tid);
+                    const topic = topics.find((item) => item.id === tid) ?? null;
+                    const card = topic?.cards?.[0] ?? null;
+                    if (topic && card) {
+                        void navigateToResolvedTarget(
+                            buildReviewCardRouteTarget({
+                                mod,
+                                topicId: topic.id,
+                                card,
+                            }),
+                        );
+                    }
                     panels.setMobileTopicsOpen(false);
                 },
                 onResetModule: resetFlow.requestResetModule,
@@ -826,7 +1123,7 @@ export function useReviewModuleController({
             viewTopic,
             viewCards,
             viewTid,
-            activeCardIndex: scrollSync.activeCardIndex,
+            activeCardIndex,
             navModes: resolvedNavModes,
             reduceMotion,
             tp: viewProg,
@@ -848,9 +1145,10 @@ export function useReviewModuleController({
             subjectSlug,
             moduleSlug,
             sectionSlug,
+            defaultToolLanguage: runtime.toolDefaults.defaultLang,
             subjectFinish,
             onOpenCertificate: handleOpenCertificate,
-            onActiveCardIndexChange: scrollSync.setActiveCardIndex,
+            onActiveCardIndexChange: handleNavigateCardIndex,
         },
 
         celebrations: {

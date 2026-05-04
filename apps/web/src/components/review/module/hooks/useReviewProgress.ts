@@ -15,6 +15,25 @@ import { useReviewRuntimeStore } from "../runtime/reviewRuntimeStore";
 import { mergeRuntimeIntoProgress } from "../runtime/runtimeProgressBridge";
 import { reviewDebug, summarizePracticePatch, summarizeWorkspace } from "../runtime/reviewDebug";
 
+function isPersistedCardToolKey(toolKey: string) {
+    if (!toolKey) return false;
+    if (toolKey.startsWith("exercise:")) return false;
+    if (toolKey.startsWith("card:")) return true;
+    if (toolKey.endsWith(":general")) return true;
+    return false;
+}
+
+function cardIdFromPersistedToolKey(toolKey: string) {
+    if (toolKey.startsWith("card:")) return toolKey.replace(/^card:/, "");
+
+    const parts = toolKey.split(":").filter(Boolean);
+    if (parts.length >= 2 && parts[parts.length - 1] === "general") {
+        return parts[parts.length - 2];
+    }
+
+    return toolKey;
+}
+
 export function useReviewProgress(args: {
     subjectSlug: string;
     moduleSlug: string;
@@ -221,6 +240,52 @@ export function useReviewProgress(args: {
         // Phase 7: Hydrate Zustand store from progress
         if (p.topics) {
             Object.entries(p.topics).forEach(([tid, tp]) => {
+                /**
+                 * Hydrate card/sketch Tools workspace from persisted toolState.
+                 * This must run even if runtimeStateV2 is missing.
+                 */
+                if ((tp as any).toolState) {
+                    Object.entries((tp as any).toolState).forEach(([toolKey, toolEntry]) => {
+                        const key = String(toolKey);
+                        if (!isPersistedCardToolKey(key)) return;
+
+                        const entry = toolEntry as any;
+                        if (!entry?.workspace) return;
+
+                        const cardId = cardIdFromPersistedToolKey(key);
+                        const cardKey = `${tid}:${cardId}`;
+
+                        store.ensureCard({
+                            cardKey,
+                            topicId: tid,
+                            cardId,
+                            initial: {
+                                cardKey,
+                                topicId: tid,
+                                cardId,
+                                visited: false,
+                                completed: false,
+                                toolKey: key,
+                                toolWorkspace: entry.workspace,
+                                toolCode: entry.code,
+                                toolStdin: entry.stdin,
+                                toolLang: entry.lang,
+                                updatedAt: Date.now(),
+                            } as any,
+                        });
+
+                        store.patchCard(cardKey, {
+                            topicId: tid,
+                            cardId,
+                            toolKey: key,
+                            toolWorkspace: entry.workspace,
+                            toolCode: entry.code,
+                            toolStdin: entry.stdin,
+                            toolLang: entry.lang,
+                        } as any);
+                    });
+                }
+
                 if (tp.runtimeStateV2) {
                     if (tp.runtimeStateV2.cards) {
                         Object.entries(tp.runtimeStateV2.cards).forEach(([ckey, cstate]) => {

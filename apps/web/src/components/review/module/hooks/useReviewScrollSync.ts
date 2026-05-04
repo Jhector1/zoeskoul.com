@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import type { ReviewCard } from "@/lib/subjects/types";
 import { isCardDoneFromState, isQuizLikeCard } from "../progressKeys";
 import { prereqsMetForAnyQuizOrProject } from "../utils";
@@ -16,6 +16,8 @@ type Args = {
     reduceMotion: boolean;
     unlockAll: boolean;
     showSkeleton: boolean;
+    routeOwned?: boolean;
+    onNavigateToCardIndex?: (index: number) => void;
 };
 
 export function useReviewScrollSync({
@@ -30,6 +32,8 @@ export function useReviewScrollSync({
                                         reduceMotion,
                                         unlockAll,
                                         showSkeleton,
+                                        routeOwned = false,
+                                        onNavigateToCardIndex,
                                     }: Args) {
     const activeCardIndex = useReviewRuntimeStore((s) => s.activeCardIndex);
     const setActiveCardIndex = useReviewRuntimeStore((s) => s.goToCard);
@@ -183,6 +187,10 @@ export function useReviewScrollSync({
             if (nextIndex < 0) return;
 
             if (navModes.cards === "slideshow") {
+                if (routeOwned && onNavigateToCardIndex) {
+                    onNavigateToCardIndex(nextIndex);
+                    return;
+                }
                 setActiveCardIndex(nextIndex);
                 return;
             }
@@ -191,7 +199,15 @@ export function useReviewScrollSync({
             if (!nextCard) return;
             requestAnimationFrame(() => scrollToCardId(nextCard.id));
         },
-        [findNextActionableCardIndex, navModes.cards, viewCards, scrollToCardId],
+        [
+            findNextActionableCardIndex,
+            navModes.cards,
+            onNavigateToCardIndex,
+            routeOwned,
+            setActiveCardIndex,
+            viewCards,
+            scrollToCardId,
+        ],
     );
 
     useEffect(() => {
@@ -213,6 +229,7 @@ export function useReviewScrollSync({
         if (!progressHydrated) return;
         if (showSkeleton) return;
         if (!viewTid) return;
+        if (routeOwned) return;
         if (userIsInteracting()) return;
 
         const restoreKey = `${subjectSlug}:${moduleSlug}:${topicMotionKey}:restore`;
@@ -244,6 +261,8 @@ export function useReviewScrollSync({
         findCurrentActivityCardIndex,
         scrollToCardId,
         navModes.cards,
+        routeOwned,
+        setActiveCardIndex,
         userIsInteracting,
     ]);
 

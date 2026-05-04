@@ -1,23 +1,22 @@
 import type { ManifestIdeServiceConfig } from "./ide-services.js";
 
 export type ExerciseKind =
-    | "single_choice"
-    | "multi_choice"
-    | "drag_reorder"
-    | "fill_blank_choice"
-    | "code_input";
+  | "single_choice"
+  | "multi_choice"
+  | "drag_reorder"
+  | "fill_blank_choice"
+  | "code_input";
 
 export type SqlDialect = "sqlite" | "postgres" | "mysql" | "mssql";
-
 export type WorkspaceLanguage =
-    | "sql"
-    | "python"
-    | "java"
-    | "javascript"
-    | "c"
-    | "cpp"
-    | "bash"
-    | "web";
+  | "sql"
+  | "python"
+  | "java"
+  | "javascript"
+  | "c"
+  | "cpp"
+  | "bash"
+  | "web";
 
 export type ManifestSqlRuntimeDefaults = {
   kind: "sql";
@@ -32,52 +31,8 @@ export type ManifestCodeRuntimeDefaults = {
 };
 
 export type ManifestRuntimeDefaults =
-    | ManifestSqlRuntimeDefaults
-    | ManifestCodeRuntimeDefaults;
-
-export type ManifestStarterFile =
-    | string
-    | {
-  path?: string;
-  filePath?: string;
-  filename?: string;
-  name?: string;
-  content?: string;
-  text?: string;
-  code?: string;
-  source?: string;
-};
-
-export type ManifestStarterFiles =
-    | ManifestStarterFile[]
-    | Record<
-    string,
-    | string
-    | {
-  content?: string;
-  text?: string;
-  code?: string;
-  source?: string;
-}
->;
-
-export type ManifestWorkspaceSeed = {
-  entryFile?: string;
-  entryFilePath?: string;
-  mainFile?: string;
-  mainFilePath?: string;
-  initialStdin?: string;
-  stdin?: string;
-  starterCode?: string;
-  starterFiles?: ManifestStarterFiles;
-
-  /**
-   * Optional aliases supported by the app-side resolver.
-   */
-  files?: ManifestStarterFiles;
-  initialFiles?: ManifestStarterFiles;
-  workspaceFiles?: ManifestStarterFiles;
-};
+  | ManifestSqlRuntimeDefaults
+  | ManifestCodeRuntimeDefaults;
 
 export type ManifestProjectStep = {
   id: string;
@@ -90,93 +45,78 @@ export type ManifestProjectStep = {
 };
 
 export type ManifestCard =
-    | {
-  id: string;
-  kind: "sketch";
-  titleKey: string;
-  sketchId: string;
-  height?: number;
-}
-    | {
-  id: string;
-  kind: "quiz";
-  titleKey: string;
-  quiz: {
-    difficulty: "easy" | "medium" | "hard";
-    n: number;
-    allowReveal?: boolean;
-    preferKind?: ExerciseKind | null;
-    maxAttempts?: number;
-  };
-}
-    | {
-  id: string;
-  kind: "project";
-  titleKey: string;
-  project: {
-    difficulty: "easy" | "medium" | "hard";
-    allowReveal?: boolean;
-    preferKind?: ExerciseKind | null;
-    maxAttempts?: number;
-    steps: ManifestProjectStep[];
-  };
-};
+  | {
+      id: string;
+      kind: "sketch";
+      titleKey: string;
+      sketchId: string;
+      height?: number;
+    }
+  | {
+      id: string;
+      kind: "quiz";
+      titleKey: string;
+      quiz: {
+        difficulty: "easy" | "medium" | "hard";
+        n: number;
+        allowReveal?: boolean;
+        preferKind?: ExerciseKind | null;
+        maxAttempts?: number;
+      };
+    }
+  | {
+      id: string;
+      kind: "project";
+      titleKey: string;
+      project: {
+        difficulty: "easy" | "medium" | "hard";
+        allowReveal?: boolean;
+        preferKind?: ExerciseKind | null;
+        maxAttempts?: number;
+        steps: ManifestProjectStep[];
+      };
+    };
 
 export type ManifestSketch =
-    | {
-  id: string;
-  archetype: "paragraph";
-  titleKey: string;
-  bodyKey: string;
-  runtime?: ManifestRuntimeDefaults | null;
-
-  /**
-   * Optional starter workspace for the sketch/card IDE.
-   *
-   * This is not persisted as starter data. The web runtime converts it into
-   * WorkspaceStateV2 and then normal workspace persistence takes over.
-   */
-  workspace?: ManifestWorkspaceSeed | null;
-
-  images?: Array<{
-    id: string;
-    publicId: string;
-    alt?: string;
-    width?: number;
-    height?: number;
-  }>;
-}
-    | {
-  id: string;
-  archetype: "image";
-  titleKey: string;
-  src?: string;
-  publicId?: string;
-  altKey?: string;
-  captionKey?: string;
-  runtime?: ManifestRuntimeDefaults | null;
-
-  /**
-   * Optional starter workspace for the sketch/card IDE.
-   */
-  workspace?: ManifestWorkspaceSeed | null;
-
-  aspectRatio?: number;
-  markers?: Array<{
-    id: string;
-    x: number;
-    y: number;
-    labelKey: string;
-  }>;
-  initialZoom?: number;
-  minZoom?: number;
-  maxZoom?: number;
-  zoomStep?: number;
-  allowPan?: boolean;
-  allowWheelZoom?: boolean;
-  allowDoubleClickReset?: boolean;
-  showControls?: boolean;
-};
+  | {
+      id: string;
+      archetype: "paragraph";
+      titleKey: string;
+      bodyKey: string;
+      runtime?: ManifestRuntimeDefaults | null;
+      images?: Array<{
+        id: string;
+        publicId: string;
+        alt?: string;
+        width?: number;
+        height?: number;
+      }>;
+    }
+  | {
+      id: string;
+      archetype: "image";
+      titleKey: string;
+      src?: string;
+      publicId?: string;
+      altKey?: string;
+      captionKey?: string;
+      runtime?: ManifestRuntimeDefaults | null;
+      aspectRatio?: number;
+      markers?: Array<{
+        id: string;
+        x: number;
+        y: number;
+        labelKey: string;
+      }>;
+      initialZoom?: number;
+      minZoom?: number;
+      maxZoom?: number;
+      zoomStep?: number;
+      allowPan?: boolean;
+      allowWheelZoom?: boolean;
+      allowDoubleClickReset?: boolean;
+      showControls?: boolean;
+    };
 
 export type ManifestBaseExercise = {
   id: string;
@@ -190,132 +130,85 @@ export type ManifestBaseExercise = {
 export type ManifestSingleChoice = ManifestBaseExercise & {
   kind: "single_choice";
   optionIds: string[];
-  expected: {
-    kind: "single_choice";
-    optionId: string;
-  };
+  expected: { kind: "single_choice"; optionId: string };
 };
 
 export type ManifestMultiChoice = ManifestBaseExercise & {
   kind: "multi_choice";
   optionIds: string[];
-  expected: {
-    kind: "multi_choice";
-    optionIds: string[];
-  };
+  expected: { kind: "multi_choice"; optionIds: string[] };
 };
 
 export type ManifestDragReorder = ManifestBaseExercise & {
   kind: "drag_reorder";
   tokenIds: string[];
-  expected: {
-    kind: "drag_reorder";
-    tokenIds: string[];
-  };
+  expected: { kind: "drag_reorder"; tokenIds: string[] };
 };
 
 export type ManifestFillBlankChoice = ManifestBaseExercise & {
   kind: "fill_blank_choice";
   choiceCount: number;
-  expected: {
-    kind: "fill_blank_choice";
-    value: string;
-  };
+  expected: { kind: "fill_blank_choice"; value: string };
 };
 
 export type ManifestVarSpec =
-    | { source: "int"; min: number; max: number }
-    | { source: "pick"; from: string[] }
-    | { source: "pickDifferentFromVar"; from: string[]; var: string }
-    | { source: "intDifferentFromVar"; min: number; max: number; var: string };
+  | { source: "int"; min: number; max: number }
+  | { source: "pick"; from: string[] }
+  | { source: "pickDifferentFromVar"; from: string[]; var: string }
+  | { source: "intDifferentFromVar"; min: number; max: number; var: string };
 
 export type ManifestComputedSpec =
-    | { op: "add"; left: string; right: number }
-    | { op: "sub"; left: string; right: number }
-    | { op: "mul"; left: string; right: number }
-    | { op: "floor_div"; left: string; right: number }
-    | { op: "c_to_f_int"; left: string }
-    | { op: "mul_div_floor"; left: string; right: string; divisor: number };
+  | { op: "add"; left: string; right: number }
+  | { op: "sub"; left: string; right: number }
+  | { op: "mul"; left: string; right: number }
+  | { op: "floor_div"; left: string; right: number }
+  | { op: "c_to_f_int"; left: string }
+  | { op: "mul_div_floor"; left: string; right: string; divisor: number };
 
 export type ManifestRecipe =
-    | {
-  type: "fixed_tests";
-  tests: Array<{
-    stdin?: string;
-    stdout: string;
-    match?: "exact" | "includes";
-  }>;
-  solutionCode?: string;
-  starterFiles?: ManifestStarterFiles;
-  initialStdin?: string;
-  stdin?: string;
-  entryFile?: string;
-  entryFilePath?: string;
-}
-    | {
-  type: "sql_query";
-  datasetId?: string;
-  solutionCode: string;
-  checkSql?: string;
-  resultShape?: "table";
-  ignoreRowOrder?: boolean;
-  starterFiles?: ManifestStarterFiles;
-  initialStdin?: string;
-  stdin?: string;
-  entryFile?: string;
-  entryFilePath?: string;
-}
-    | {
-  type: "template_io";
-  vars: Record<string, ManifestVarSpec>;
-  computed?: Record<string, ManifestComputedSpec>;
-  tests: Array<{
-    stdinTemplate?: string;
-    stdoutTemplate: string;
-    match?: "exact" | "includes";
-  }>;
-  solutionTemplate?: string;
-  starterFiles?: ManifestStarterFiles;
-  initialStdin?: string;
-  stdin?: string;
-  entryFile?: string;
-  entryFilePath?: string;
-};
+  | {
+      type: "fixed_tests";
+      tests: Array<{ stdin?: string; stdout: string; match?: "exact" | "includes" }>;
+      solutionCode?: string;
+    }
+  | {
+      type: "sql_query";
+      datasetId?: string;
+      solutionCode: string;
+      checkSql?: string;
+      resultShape?: "table";
+      ignoreRowOrder?: boolean;
+    }
+  | {
+      type: "template_io";
+      vars: Record<string, ManifestVarSpec>;
+      computed?: Record<string, ManifestComputedSpec>;
+      tests: Array<{
+        stdinTemplate?: string;
+        stdoutTemplate: string;
+        match?: "exact" | "includes";
+      }>;
+      solutionTemplate?: string;
+    };
 
 export type ManifestCodeInputExpectedExample =
-    | boolean
-    | {
-  metaKey?: string;
-};
+  | boolean
+  | { metaKey?: string };
 
 export type ManifestCodeInput = ManifestBaseExercise & {
   kind: "code_input";
   language?: WorkspaceLanguage;
   fixedSqlDialect?: SqlDialect;
-
-  /**
-   * Optional starter workspace for exercise IDE.
-   */
-  workspace?: ManifestWorkspaceSeed | null;
-  starterFiles?: ManifestStarterFiles;
-  initialStdin?: string;
-  stdin?: string;
-  starterStdin?: string;
-  entryFile?: string;
-  entryFilePath?: string;
-  mainFile?: string;
-  mainFilePath?: string;
-
   recipe: ManifestRecipe;
   showExpectedExample?: ManifestCodeInputExpectedExample;
 };
 
 export type ManifestExercise =
-    | ManifestSingleChoice
-    | ManifestMultiChoice
-    | ManifestDragReorder
-    | ManifestFillBlankChoice
-    | ManifestCodeInput;
+  | ManifestSingleChoice
+  | ManifestMultiChoice
+  | ManifestDragReorder
+  | ManifestFillBlankChoice
+  | ManifestCodeInput;
 
 export type TopicBundleManifest = {
   topicId: string;

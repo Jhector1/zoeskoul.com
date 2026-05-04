@@ -1,8 +1,8 @@
 import { makeCodeInputOut } from "@/lib/practice/generator/engines/utils";
 import type { RecipeHandler } from "./types";
+import type { ManifestCodeInput } from "@/lib/subjects/_core/manifestTypes";
 import { buildTerminalExpectedExample } from "./expectedExample";
 import { buildFixedTestsExpected } from "@zoeskoul-code-input-expected";
-import {ManifestCodeInput} from "@zoeskoul/curriculum-contracts";
 
 export const buildFixedTestsRecipe: RecipeHandler<any> = (
     def: ManifestCodeInput & { recipe: { type: "fixed_tests"; tests: any[]; solutionCode?: string } },

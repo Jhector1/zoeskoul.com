@@ -56,8 +56,12 @@ export function getStablePracticeQuestionKey(q: ReviewQuestion) {
 
   return (
       anyQ.fetch?.exerciseKey ??
-      anyQ.fetch?.stepId ??
       anyQ.exerciseKey ??
+      anyQ.item?.exerciseKey ??
+      anyQ.exercise?.exerciseKey ??
+      anyQ.exercise?.id ??
+      anyQ.fetch?.stepId ??
+      anyQ.item?.id ??
       anyQ.stepId ??
       anyQ.sourceStepId ??
       anyQ.key ??
@@ -498,7 +502,11 @@ export function useQuizPracticeBank(args: {
                   salt: (q as any).fetch.salt ?? undefined,
                   preferPurpose: "mixed",
                   purposePolicy: "fallback",
-                  exerciseKey: (q as any).fetch.exerciseKey ?? undefined,
+                  exerciseKey:
+                    (q as any).exercise?.id ??
+                    (q as any).item?.id ??
+                    (q as any).fetch.exerciseKey ??
+                    undefined,
                   seedPolicy: (q as any).fetch.seedPolicy ?? undefined,
                 },
                 resolvers: {

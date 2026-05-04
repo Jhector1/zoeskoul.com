@@ -368,54 +368,20 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     const runnerLang = (isWeb ? "javascript" : lang) as any;
     const effectiveAllowRun = allowRun && !isWeb;
 
-    const workspaceFilePathForIdentity = useMemo(() => {
-        if (!workspace || typeof workspace !== "object" || !Array.isArray((workspace as any).nodes)) {
-            return "";
-        }
-
-        const nodes = (workspace as any).nodes;
-        const nodeById = new Map(
-            nodes.map((node: any) => [String(node?.id ?? ""), node]),
-        );
-
-        const pathOf = (node: any) => {
-            if (!node) return "";
-
-            const parts: string[] = [];
-            let current = node;
-            let guard = 0;
-
-            while (current && guard < 200) {
-                if (typeof current.name === "string" && current.name) {
-                    parts.unshift(current.name);
-                }
-
-                if (!current.parentId) break;
-                current = nodeById.get(String(current.parentId ?? "")) ?? null;
-                guard += 1;
-            }
-
-            return parts.join("/");
-        };
-
-        const targetId = String(
-            (workspace as any).entryFileId ||
-            (workspace as any).activeFileId ||
-            "",
-        );
-
-        const targetNode =
-            nodes.find((node: any) => node?.kind === "file" && String(node.id ?? "") === targetId) ??
-            nodes.find((node: any) => node?.kind === "file");
-
-        return pathOf(targetNode);
-    }, [workspace]);
+    const workspaceFileIdForIdentity =
+        workspace && typeof workspace === "object"
+            ? String(
+                (workspace as any).entryFileId ||
+                (workspace as any).activeFileId ||
+                "",
+            )
+            : "";
 
     const stableFallbackIdentity = [
         "code-runner",
         typeof title === "string" && title.trim() ? title.trim() : "untitled",
         String(lang || "python"),
-        workspaceFilePathForIdentity || "no-workspace-file",
+        workspaceFileIdForIdentity || "no-workspace-file",
     ]
         .join(":")
         .replace(/\s+/g, "-");
@@ -439,7 +405,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
 
     const effectiveEditorModelKey =
         editorModelKey ??
-        `${effectiveExerciseStateKey}:${workspaceFilePathForIdentity || "entry"}`;
+        `${effectiveExerciseStateKey}:${workspaceFileIdForIdentity || "entry"}`;
 
     const term = useCodeRunnerController({
         runtime,

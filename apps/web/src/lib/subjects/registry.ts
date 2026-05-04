@@ -4,6 +4,10 @@ import type {
     ReviewTopicShape,
 } from "@/lib/subjects/types";
 import { SUBJECT_ARTIFACTS } from "@/lib/subjects";
+import { TOPIC_MANIFESTS as PYTHON_TOPIC_MANIFESTS } from "@/lib/subjects/python/topics.generated";
+import { TOPIC_MANIFESTS as PYTHON_FOR_BEGINNERS_TOPIC_MANIFESTS } from "@/lib/subjects/python-for-beginners/topics.generated";
+import { TOPIC_MANIFESTS as SQL_TOPIC_MANIFESTS } from "@/lib/subjects/sql/topics.generated";
+import type { SlimTopicManifest } from "@/lib/subjects/_core/subjectManifestTypes";
 
 function indexBy<T extends { slug: string }>(items: readonly T[]) {
     return Object.fromEntries(items.map((x) => [x.slug, x])) as Record<string, T>;
@@ -21,37 +25,65 @@ function makeSubtitle(moduleSlug: string): string {
     return mod?.description ?? "";
 }
 
-function cloneReviewTopic(topic: ReviewTopicShape): ReviewTopicShape {
+function cloneReviewTopic(
+    topic: ReviewTopicShape,
+    rawManifest?: SlimTopicManifest | null,
+): ReviewTopicShape {
     return {
         ...topic,
-        meta: topic.meta ?? null,
+        meta: {
+            ...(topic.meta ?? {}),
+            rawManifest: rawManifest ?? null,
+        },
         cards: [...topic.cards],
     };
 }
 
-function getReviewTopicBySlug(topicSlug: string): ReviewTopicShape | null {
+function getTopicManifestForSubject(
+    subjectSlug: string,
+    topicSlugOrId: string,
+): SlimTopicManifest | null {
+    const topicId = String(topicSlugOrId ?? "").includes(".")
+        ? String(topicSlugOrId).split(".").slice(1).join(".")
+        : String(topicSlugOrId ?? "");
+
+    if (!topicId) return null;
+
+    switch (subjectSlug) {
+        case "python":
+            return PYTHON_TOPIC_MANIFESTS[topicId] ?? null;
+        case "python-for-beginners":
+            return PYTHON_FOR_BEGINNERS_TOPIC_MANIFESTS[topicId] ?? null;
+        case "sql":
+            return SQL_TOPIC_MANIFESTS[topicId] ?? null;
+        default:
+            return null;
+    }
+}
+
+function getReviewTopicBySlug(subjectSlug: string, topicSlug: string): ReviewTopicShape | null {
     const topic = SUBJECT_ARTIFACTS.reviewTopicsBySlug[topicSlug];
     if (!topic) return null;
-    return cloneReviewTopic(topic);
+    return cloneReviewTopic(topic, getTopicManifestForSubject(subjectSlug, topicSlug));
 }
 
 function getFallbackModuleTopics(moduleEntry: {
     topicIds: string[];
     topics: Record<string, string>;
-}): ReviewTopicShape[] {
+}, subjectSlug: string): ReviewTopicShape[] {
     return moduleEntry.topicIds
         .map((topicId) => moduleEntry.topics[topicId])
-        .map(getReviewTopicBySlug)
+        .map((topicSlug) => getReviewTopicBySlug(subjectSlug, topicSlug))
         .filter((topic): topic is ReviewTopicShape => Boolean(topic));
 }
 
-function getModuleSections(moduleSlug: string): ReviewModuleSection[] {
+function getModuleSections(moduleSlug: string, subjectSlug: string): ReviewModuleSection[] {
     return SUBJECT_ARTIFACTS.sections
         .filter((section) => section.moduleSlug === moduleSlug)
         .sort(sortByOrderThenSlug)
         .map((section) => {
             const topics = section.topicSlugs
-                .map(getReviewTopicBySlug)
+                .map((topicSlug) => getReviewTopicBySlug(subjectSlug, topicSlug))
                 .filter((topic): topic is ReviewTopicShape => Boolean(topic));
 
             return {
@@ -91,13 +123,13 @@ export function getRawReviewModule(
      * Keep this flat list based on moduleEntry.topicIds.
      * This preserves the current behavior for progress, navigation, and rendering.
      */
-    const topics = getFallbackModuleTopics(moduleEntry);
+    const topics = getFallbackModuleTopics(moduleEntry, subjectSlug);
 
     /**
      * New sidebar structure.
      * This is additive only.
      */
-    const sections = getModuleSections(moduleSlug);
+    const sections = getModuleSections(moduleSlug, subjectSlug);
 
     return {
         id: moduleSlug,

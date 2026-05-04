@@ -36,6 +36,7 @@ type Props = {
     subjectSlug: string;
     moduleSlug: string;
     sectionSlug?: string;
+    defaultToolLanguage?: string;
     subjectFinish: any;
     onOpenCertificate: () => void;
     onActiveCardIndexChange?: (index: number) => void;
@@ -71,6 +72,7 @@ export default function ReviewTopicStage({
     subjectSlug,
     moduleSlug,
     sectionSlug,
+    defaultToolLanguage,
     subjectFinish,
     onOpenCertificate,
     onActiveCardIndexChange,
@@ -117,6 +119,7 @@ export default function ReviewTopicStage({
                         subjectSlug={subjectSlug}
                         moduleSlug={moduleSlug}
                         sectionSlug={sectionSlug}
+                        defaultToolLanguage={defaultToolLanguage}
                         onActiveCardIndexChange={onActiveCardIndexChange}
                     />
 

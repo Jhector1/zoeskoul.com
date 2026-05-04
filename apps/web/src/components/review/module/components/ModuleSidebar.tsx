@@ -428,37 +428,31 @@ function ModuleSidebar({
     const [openSectionId, setOpenSectionId] = React.useState<string>("");
     const lastAutoOpenedSectionRef = React.useRef<string | null>(null);
 
-    const sectionIdsKey = React.useMemo(() => {
-        return resolvedSections.map((section) => section.id).join("::");
-    }, [resolvedSections]);
-
     React.useEffect(() => {
-        const validIds = new Set(resolvedSections.map((section) => section.id));
-        const fallbackId = currentSectionId || resolvedSections[0]?.id || "";
+        setOpenSectionId((prev) => {
+            const validIds = new Set(resolvedSections.map((section) => section.id));
+            const fallbackId = currentSectionId || resolvedSections[0]?.id || "";
 
-        let nextOpenSectionId = openSectionId;
+            if (!fallbackId) return "";
 
-        if (!fallbackId) {
-            nextOpenSectionId = "";
-        } else if (
-            currentSectionId &&
-            lastAutoOpenedSectionRef.current !== currentSectionId
-        ) {
-            nextOpenSectionId = currentSectionId;
-        } else if (openSectionId && validIds.has(openSectionId)) {
-            nextOpenSectionId = openSectionId;
-        } else {
-            nextOpenSectionId = fallbackId;
-        }
+            if (
+                currentSectionId &&
+                lastAutoOpenedSectionRef.current !== currentSectionId
+            ) {
+                return currentSectionId;
+            }
+
+            if (prev && validIds.has(prev)) {
+                return prev;
+            }
+
+            return fallbackId;
+        });
 
         if (currentSectionId && lastAutoOpenedSectionRef.current !== currentSectionId) {
             lastAutoOpenedSectionRef.current = currentSectionId;
         }
-
-        if (nextOpenSectionId !== openSectionId) {
-            setOpenSectionId(nextOpenSectionId);
-        }
-    }, [currentSectionId, sectionIdsKey, openSectionId]);
+    }, [currentSectionId, resolvedSections]);
 
     const handleToggleSection = React.useCallback((sectionId: string) => {
         setOpenSectionId((prev) => (prev === sectionId ? "" : sectionId));

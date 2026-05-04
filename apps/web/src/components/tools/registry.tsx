@@ -12,6 +12,7 @@ import type { WorkspaceStateV2 } from "@/components/ide/types";
 
 export type CodeToolProps = {
     height: number;
+    editorOwnerKey?: string | null;
     toolScopeKey?: string;
 
     toolHydrated: boolean;

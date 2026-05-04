@@ -74,8 +74,12 @@ function getStablePracticeQuestionKey(q: ReviewQuestion) {
   const anyQ = q as any;
   return (
       anyQ.fetch?.exerciseKey ??
-      anyQ.fetch?.stepId ??
       anyQ.exerciseKey ??
+      anyQ.item?.exerciseKey ??
+      anyQ.exercise?.exerciseKey ??
+      anyQ.exercise?.id ??
+      anyQ.fetch?.stepId ??
+      anyQ.item?.id ??
       anyQ.stepId ??
       anyQ.sourceStepId ??
       anyQ.key ??
@@ -243,6 +247,7 @@ export default function QuizBlock({
   const [pendingScrollMode, setPendingScrollMode] = useState<"explain" | "end">(
       "end",
   );
+  const activeRuntimeExerciseKey = useReviewRuntimeStore((s) => s.activeExerciseKey);
 
   const onPassRef = useRef(onPass);
   const autoKeyRef = useRef<string>("");
@@ -254,6 +259,19 @@ export default function QuizBlock({
   const footerElRef = useRef<HTMLDivElement | null>(null);
   const endAnchorRef = useRef(new Map<string, HTMLDivElement | null>());
   const explainRef = useRef(new Map<string, HTMLDivElement | null>());
+
+  const routeExerciseIndex = useMemo(() => {
+    if (!activeRuntimeExerciseKey) return -1;
+
+    return questions.findIndex((q) => {
+      if (q.kind !== "practice") return false;
+      const stablePracticeKey = getStablePracticeQuestionKey(q);
+      return (
+          activeRuntimeExerciseKey === stablePracticeKey ||
+          activeRuntimeExerciseKey.endsWith(`:${stablePracticeKey}`)
+      );
+    });
+  }, [activeRuntimeExerciseKey, questions]);
 
   useEffect(() => {
     onPassRef.current = onPass;
@@ -761,6 +779,11 @@ export default function QuizBlock({
     navigationMode,
   ]);
 
+  useEffect(() => {
+    if (routeExerciseIndex < 0) return;
+    setActiveIndex((prev) => (prev === routeExerciseIndex ? prev : routeExerciseIndex));
+  }, [routeExerciseIndex]);
+
   function scrollToFooter() {
     const el = footerElRef.current;
     if (!el) return;
@@ -993,7 +1016,7 @@ export default function QuizBlock({
                   q={q}
                   ownerCardId={quizCardId ?? quizId}
                   ps={practiceBank.practice[stablePracticeKey] ?? practiceBank.practice[q.id]}
-                  toolScopedId={`${stableKey}:${stablePracticeKey}`}
+                  toolScopedId={stablePracticeKey}
                   toolsActive={canAutoBindToolsForExercise}
                   unlocked={unlocked}
                   isCompleted={isCompleted}

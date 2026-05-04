@@ -2,11 +2,14 @@ import { create } from "zustand";
 import type { WorkspaceStateV2 } from "@/components/ide/types";
 import type {
   CardRuntimeState,
+  EditorRuntimeState,
   ExerciseRuntimeState,
+  ReviewRuntimeState,
   ReviewRuntimeStore,
 } from "./reviewRuntimeTypes";
 import { getCardStateKey } from "./exerciseKeys";
 import { resolveExerciseWorkspace } from "./exerciseWorkspaceResolver";
+import { resolveDeterministicEditorSource, type ReviewDeterministicEditorSource } from "./deterministicEditorSource";
 import { resolveSketchState } from "./sketchResolver";
 import { reviewDebug, summarizeWorkspace } from "./reviewDebug";
 import { exerciseDebug, summarizeExercisePatch, summarizeExerciseWorkspace } from "./exerciseDebug";
@@ -17,73 +20,102 @@ type InternalStore = ReviewRuntimeStore & {
 
 function isWorkspace(value: unknown): value is WorkspaceStateV2 {
   return (
-    !!value &&
-    typeof value === "object" &&
-    (value as any).version === 2 &&
-    Array.isArray((value as any).nodes)
+      !!value &&
+      typeof value === "object" &&
+      (value as any).version === 2 &&
+      Array.isArray((value as any).nodes)
   );
 }
-
 function deriveCodeFromWorkspace(workspace: WorkspaceStateV2 | null | undefined) {
   if (!workspace) return "";
 
   const entryId = workspace.entryFileId || workspace.activeFileId;
   const entryNode = workspace.nodes.find(
-    (node) => node.kind === "file" && node.id === entryId,
+      (node) => node.kind === "file" && node.id === entryId,
   );
 
   return entryNode && entryNode.kind === "file"
-    ? String(entryNode.content ?? "")
-    : "";
+      ? String(entryNode.content ?? "")
+      : "";
 }
 
-function cardWorkspaceFileSummary(workspace: WorkspaceStateV2 | null | undefined) {
-  if (!isWorkspace(workspace)) return [];
-
-  return workspace.nodes
-    .filter((node: any) => node?.kind === "file")
-    .map((node: any) => String(node.name ?? ""));
+function workspaceFileCount(workspace: WorkspaceStateV2 | null | undefined) {
+  if (!workspace || workspace.version !== 2 || !Array.isArray(workspace.nodes)) {
+    return 0;
+  }
+  return workspace.nodes.filter((node: any) => node?.kind === "file").length;
 }
 
-function manifestStarterFileNames(manifest: any) {
-  const starterFiles =
-    manifest?.workspace?.starterFiles ??
-    manifest?.starterFiles ??
-    manifest?.files ??
-    manifest?.initialFiles ??
-    manifest?.workspaceFiles ??
-    manifest?.recipe?.starterFiles ??
-    null;
+function workspaceContentKey(workspace: WorkspaceStateV2 | null | undefined) {
+  if (!workspace || workspace.version !== 2 || !Array.isArray(workspace.nodes)) {
+    return "null";
+  }
 
-  if (!starterFiles || typeof starterFiles !== "object") return [];
+  const folderPathById = new Map<string, string>();
 
-  return Object.keys(starterFiles)
-    .map((name) => String(name).split("/").filter(Boolean).pop() || String(name))
-    .filter(Boolean)
-    .sort();
+  let changed = true;
+  while (changed) {
+    changed = false;
+
+    for (const node of workspace.nodes as any[]) {
+      if (!node || node.kind !== "folder") continue;
+
+      const id = String(node.id ?? "");
+      if (!id || folderPathById.has(id)) continue;
+
+      const name = String(node.name ?? "");
+      const parentId = node.parentId == null ? null : String(node.parentId);
+      if (parentId && !folderPathById.has(parentId)) continue;
+
+      const parentPath = parentId ? folderPathById.get(parentId) || "" : "";
+      folderPathById.set(id, parentPath ? `${parentPath}/${name}` : name);
+      changed = true;
+    }
+  }
+
+  const filePath = (node: any) => {
+    const name = String(node?.name ?? "");
+    const parentId = node?.parentId == null ? null : String(node.parentId);
+    const parentPath = parentId ? folderPathById.get(parentId) || "" : "";
+    return parentPath ? `${parentPath}/${name}` : name;
+  };
+
+  const files = (workspace.nodes as any[])
+      .filter((node) => node?.kind === "file")
+      .map((node) => ({
+        path: filePath(node),
+        content: String(node.content ?? ""),
+      }))
+      .sort((a, b) => a.path.localeCompare(b.path));
+
+  const activeNode = (workspace.nodes as any[]).find(
+      (node) => node?.kind === "file" && node.id === workspace.activeFileId,
+  );
+  const entryNode = (workspace.nodes as any[]).find(
+      (node) => node?.kind === "file" && node.id === workspace.entryFileId,
+  );
+
+  return JSON.stringify({
+    version: 2,
+    language: workspace.language ?? null,
+    stdin: typeof workspace.stdin === "string" ? workspace.stdin : "",
+    activePath: activeNode ? filePath(activeNode) : null,
+    entryPath: entryNode ? filePath(entryNode) : null,
+    files,
+  });
 }
 
-function workspaceContainsStarterFileNames(
-  workspace: WorkspaceStateV2 | null | undefined,
-  starterFileNames: string[],
-) {
-  if (!starterFileNames.length) return true;
-  if (!isWorkspace(workspace)) return false;
-
-  const existingNames = new Set(cardWorkspaceFileSummary(workspace));
-  return starterFileNames.every((name) => existingNames.has(name));
-}
 
 function normalizeWorkspacePatch(args: {
   workspace: WorkspaceStateV2;
   stdin?: string;
 }) {
   const stdin =
-    typeof args.stdin === "string"
-      ? args.stdin
-      : typeof args.workspace.stdin === "string"
-        ? args.workspace.stdin
-        : "";
+      typeof args.stdin === "string"
+          ? args.stdin
+          : typeof args.workspace.stdin === "string"
+              ? args.workspace.stdin
+              : "";
 
   const workspace = {
     ...args.workspace,
@@ -101,125 +133,545 @@ function normalizeWorkspacePatch(args: {
 }
 
 function getPatchWorkspace(
-  patch: Record<string, any>,
-  existing?: ExerciseRuntimeState,
+    patch: Record<string, any>,
+    existing?: ExerciseRuntimeState,
 ) {
   if (isWorkspace(patch.workspace)) return patch.workspace;
   if (isWorkspace(patch.codeWorkspace)) return patch.codeWorkspace;
   if (isWorkspace(patch.ideWorkspace)) return patch.ideWorkspace;
   return existing?.workspace ?? null;
 }
-function manifestHasStarterWorkspaceSeed(manifest: any) {
-  return !!(
-    manifest?.workspace ||
-    manifest?.starterFiles ||
-    manifest?.files ||
-    manifest?.initialFiles ||
-    manifest?.workspaceFiles ||
-    manifest?.recipe?.starterFiles
-  );
-}
 
-function workspaceFileCount(workspace: WorkspaceStateV2 | null | undefined) {
-  if (!isWorkspace(workspace)) return 0;
-
-  return workspace.nodes.filter((node: any) => node?.kind === "file").length;
-}
-
-function workspaceSemanticKey(workspace: WorkspaceStateV2 | null | undefined) {
-  if (!isWorkspace(workspace)) return "null";
-
-  const nodeById = new Map(
-    workspace.nodes.map((node: any) => [String(node?.id ?? ""), node]),
-  );
-
-  const pathOf = (node: any) => {
-    if (!node) return "";
-
-    const parts: string[] = [];
-    let current = node;
-    let guard = 0;
-
-    while (current && guard < 200) {
-      if (typeof current.name === "string" && current.name) {
-        parts.unshift(current.name);
-      }
-
-      if (!current.parentId) break;
-      current = nodeById.get(String(current.parentId ?? "")) ?? null;
-      guard += 1;
-    }
-
-    return parts.join("/");
-  };
-
-  const files = workspace.nodes
-    .filter((node: any) => node?.kind === "file")
-    .map((node: any) => ({
-      path: pathOf(node),
-      content: String(node.content ?? ""),
-    }))
-    .sort((a, b) => a.path.localeCompare(b.path));
-
-  const entryNode = workspace.nodes.find(
-    (node: any) => node?.kind === "file" && node.id === workspace.entryFileId,
-  );
-  const activeNode = workspace.nodes.find(
-    (node: any) => node?.kind === "file" && node.id === workspace.activeFileId,
-  );
-
-  return JSON.stringify({
-    version: 2,
-    language: workspace.language ?? null,
-    stdin: typeof workspace.stdin === "string" ? workspace.stdin : "",
-    entryFilePath: pathOf(entryNode),
-    activeFilePath: pathOf(activeNode),
-    files,
-  });
-}
 function getFinalExerciseIdFromKey(key: string) {
   const parts = String(key ?? "").split(":").filter(Boolean);
   return parts[parts.length - 1] || key;
 }
 
-function canonicalCardKeyForState(args: {
-  state: ReviewRuntimeStore;
-  key: string;
-  topicId?: string | null;
-  cardId?: string | null;
-}) {
-  if (typeof args.key === "string" && args.key.includes(":") && !args.key.endsWith(":general")) {
-    return args.key;
-  }
 
-  if (!args.topicId || !args.cardId) {
-    return args.key;
-  }
-
-  return getCardStateKey({
-    subjectSlug: args.state.subjectSlug,
-    moduleSlug: args.state.moduleSlug,
-    sectionSlug: args.state.sectionSlug,
-    topicId: args.topicId,
-    cardId: args.cardId,
-  });
+function normalizeLookupToken(value: unknown) {
+  return String(value ?? "")
+      .trim()
+      .toLowerCase()
+      .replace(/_/g, "-");
 }
 
-function cardStateEqual(a: CardRuntimeState | undefined, b: CardRuntimeState) {
-  if (!a) return false;
+function keyContainsToken(key: string, token: unknown) {
+  const normalizedKey = normalizeLookupToken(key);
+  const normalizedToken = normalizeLookupToken(token);
+  return Boolean(normalizedToken && normalizedKey.includes(normalizedToken));
+}
 
-  return (
-    a.cardKey === b.cardKey &&
-    a.topicId === b.topicId &&
-    a.cardId === b.cardId &&
-    a.visited === b.visited &&
-    a.completed === b.completed &&
-    JSON.stringify(a.sketch ?? null) === JSON.stringify(b.sketch ?? null) &&
-    workspaceSemanticKey(a.toolWorkspace ?? null) === workspaceSemanticKey(b.toolWorkspace ?? null) &&
-    String(a.toolCode ?? "") === String(b.toolCode ?? "") &&
-    String(a.toolStdin ?? "") === String(b.toolStdin ?? "") &&
-    String(a.toolLang ?? "") === String(b.toolLang ?? "")
+function keyContainsAnyToken(key: string, tokens: unknown[]) {
+  return tokens.some((token) => keyContainsToken(key, token));
+}
+
+function extractRouteLikeTargetSlug(key: string) {
+  const raw = String(key ?? "");
+
+  const stepMatch = raw.match(/(?:^|[|:])steps=([^|:]+)/);
+  if (stepMatch?.[1]) return stepMatch[1];
+
+  const quizCardMatch = raw.match(/(?:^|[|:])quizCard=([^|:]+)/);
+  if (quizCardMatch?.[1]) return quizCardMatch[1];
+
+  const cardMatch = raw.match(/(?:^|[|:])card=([^|:]+)/);
+  if (cardMatch?.[1]) return cardMatch[1];
+
+  const parts = raw.split(":").filter(Boolean);
+  if (parts.length >= 2 && parts[parts.length - 1] === "general") {
+    return parts[parts.length - 2];
+  }
+
+  return parts[parts.length - 1] ?? raw;
+}
+
+function findTargetRegistryEntry(
+    registry: import("./reviewTargetRegistry").ReviewTargetRegistry | null | undefined,
+    key: string,
+    hints?: {
+      topicId?: string | null;
+      topicSlug?: string | null;
+      sectionSlug?: string | null;
+      cardId?: string | null;
+      targetKind?: string | null;
+    },
+): import("./reviewTargetRegistry").ReviewTargetEntry | null {
+  if (!registry) return null;
+
+  const direct = registry.byKey[key];
+  if (direct) return direct;
+
+  const normalizedKey = normalizeLookupToken(key);
+  const routeTargetSlug = extractRouteLikeTargetSlug(key);
+
+  let best:
+      | {
+    entry: import("./reviewTargetRegistry").ReviewTargetEntry;
+    score: number;
+    reason: string;
+  }
+      | null = null;
+
+  for (const entry of Object.values(registry.byKey)) {
+    let score = 0;
+    const reasons: string[] = [];
+
+    if (normalizedKey.includes(normalizeLookupToken(entry.targetKey))) {
+      score += 100;
+      reasons.push("targetKey");
+    }
+
+    if (keyContainsToken(key, entry.targetSlug)) {
+      score += 40;
+      reasons.push("targetSlug");
+    }
+
+    if (
+        routeTargetSlug &&
+        normalizeLookupToken(routeTargetSlug) === normalizeLookupToken(entry.targetSlug)
+    ) {
+      score += 60;
+      reasons.push("routeTargetSlug");
+    }
+
+    if (keyContainsToken(key, entry.cardId)) {
+      score += 25;
+      reasons.push("cardId");
+    }
+
+    if (keyContainsAnyToken(key, [entry.topicId, entry.topicSlug])) {
+      score += 20;
+      reasons.push("topic");
+    }
+
+    if (keyContainsToken(key, entry.sectionSlug)) {
+      score += 10;
+      reasons.push("section");
+    }
+
+    if (hints?.topicId && normalizeLookupToken(hints.topicId) === normalizeLookupToken(entry.topicId)) {
+      score += 30;
+      reasons.push("hintTopicId");
+    }
+
+    if (hints?.topicSlug && normalizeLookupToken(hints.topicSlug) === normalizeLookupToken(entry.topicSlug)) {
+      score += 30;
+      reasons.push("hintTopicSlug");
+    }
+
+    if (hints?.sectionSlug && normalizeLookupToken(hints.sectionSlug) === normalizeLookupToken(entry.sectionSlug)) {
+      score += 10;
+      reasons.push("hintSection");
+    }
+
+    if (hints?.cardId && normalizeLookupToken(hints.cardId) === normalizeLookupToken(entry.cardId)) {
+      score += 35;
+      reasons.push("hintCardId");
+    }
+
+    if (hints?.targetKind && normalizeLookupToken(hints.targetKind) === normalizeLookupToken(entry.targetKind)) {
+      score += 15;
+      reasons.push("hintKind");
+    }
+
+    // Need at least a target/card match. Topic-only is too broad.
+    const hasTargetMatch =
+        reasons.includes("targetKey") ||
+        reasons.includes("targetSlug") ||
+        reasons.includes("routeTargetSlug") ||
+        reasons.includes("cardId") ||
+        reasons.includes("hintCardId");
+
+    if (!hasTargetMatch) continue;
+
+    if (!best || score > best.score) {
+      best = { entry, score, reason: reasons.join("+") };
+    }
+  }
+
+  if (best) {
+    reviewDebug("starter-files registry.flex-match", {
+      key,
+      routeTargetSlug,
+      matchedTargetKey: best.entry.targetKey,
+      matchedTargetSlug: best.entry.targetSlug,
+      matchedKind: best.entry.targetKind,
+      score: best.score,
+      reason: best.reason,
+    });
+  } else {
+    reviewDebug("starter-files registry.no-match", {
+      key,
+      routeTargetSlug,
+      hints,
+      registrySize: Object.keys(registry.byKey).length,
+      sampleKeys: Object.keys(registry.byKey).slice(0, 8),
+    });
+  }
+
+  return best?.entry ?? null;
+}
+
+function targetHasStarter(entryOrManifest: any, maybeEntry?: import("./reviewTargetRegistry").ReviewTargetEntry | null) {
+  const entry =
+      maybeEntry ??
+      (entryOrManifest &&
+      typeof entryOrManifest === "object" &&
+      "targetKey" in entryOrManifest
+          ? (entryOrManifest as import("./reviewTargetRegistry").ReviewTargetEntry)
+          : null);
+  const item = maybeEntry ? entryOrManifest : entry?.item ?? entryOrManifest;
+  const source = item?.spec ?? item ?? {};
+  const workspace = source?.workspace ?? {};
+  const hasFiles = (value: unknown) =>
+      Array.isArray(value)
+          ? value.length > 0
+          : !!value && typeof value === "object" && Object.keys(value as Record<string, unknown>).length > 0;
+  const isWorkspaceValue = (value: unknown) =>
+      !!value &&
+      typeof value === "object" &&
+      (value as any).version === 2 &&
+      Array.isArray((value as any).nodes);
+
+  return Boolean(
+      hasFiles(entry?.starterFiles) ||
+      hasFiles(entry?.solutionFiles) ||
+      String(entry?.starterCode ?? "").trim() ||
+      String(entry?.solutionCode ?? "").trim() ||
+      entry?.starterWorkspace ||
+      isWorkspaceValue(workspace) ||
+      isWorkspaceValue(source?.initialWorkspace) ||
+      isWorkspaceValue(source?.starterWorkspace) ||
+      hasFiles(workspace?.solutionFiles) ||
+      hasFiles(workspace?.starterFiles) ||
+      hasFiles(workspace?.files) ||
+      hasFiles(workspace?.initialFiles) ||
+      hasFiles(workspace?.workspaceFiles) ||
+      String(workspace?.solutionCode ?? "").trim() ||
+      String(workspace?.starterCode ?? "").trim() ||
+      String(workspace?.code ?? "").trim() ||
+      String(workspace?.content ?? "").trim() ||
+      String(workspace?.source ?? "").trim() ||
+      hasFiles(source?.solutionFiles) ||
+      hasFiles(source?.starterFiles) ||
+      hasFiles(source?.files) ||
+      hasFiles(source?.initialFiles) ||
+      hasFiles(source?.workspaceFiles) ||
+      String(source?.solutionCode ?? "").trim() ||
+      String(source?.starterCode ?? "").trim() ||
+      String(source?.code ?? "").trim() ||
+      String(source?.content ?? "").trim() ||
+      String(source?.source ?? "").trim() ||
+      hasFiles(source?.recipe?.solutionFiles) ||
+      String(source?.recipe?.solutionCode ?? "").trim() ||
+      hasFiles(source?.recipe?.starterFiles) ||
+      hasFiles(source?.recipe?.files) ||
+      hasFiles(source?.recipe?.initialFiles) ||
+      String(source?.recipe?.starterCode ?? "").trim() ||
+      String(source?.recipe?.solutionTemplate ?? "").trim(),
   );
+}
+
+function workspaceHasUsableFile(workspace: WorkspaceStateV2 | null | undefined) {
+  if (!workspace || workspace.version !== 2 || !Array.isArray(workspace.nodes)) return false;
+  return workspace.nodes.some((node: any) => node?.kind === "file");
+}
+
+
+function starterLoopTrace(label: string, payload: Record<string, any>) {
+  try {
+    if (typeof window === "undefined") return;
+    if (window.localStorage.getItem("zoe:debug:starter-files") !== "1") return;
+  } catch {
+    return;
+  }
+
+  const win = window as any;
+  win.__ZOE_STARTER_LOOP__ ??= {
+    seq: 0,
+    counts: {},
+    last: {},
+    startedAt: Date.now(),
+  };
+
+  const store = win.__ZOE_STARTER_LOOP__;
+  const key = String(
+      payload.key ??
+      payload.cardKey ??
+      payload.exerciseKey ??
+      payload.targetKey ??
+      payload.workspaceContextKey ??
+      "global",
+  );
+
+  const fingerprint = JSON.stringify({
+    label,
+    key,
+    workspaceKey: payload.workspaceKey ?? payload.nextWorkspaceKey ?? payload.incomingWorkspaceKey ?? null,
+    existingWorkspaceKey: payload.existingWorkspaceKey ?? payload.currentWorkspaceKey ?? null,
+    codeLength: payload.codeLength ?? payload.nextCodeLength ?? payload.incomingCodeLength ?? null,
+    status: payload.workspaceStatus ?? payload.status ?? null,
+    seedMode: payload.workspaceSeedMode ?? payload.seedMode ?? null,
+    reason: payload.reason ?? null,
+    patched: payload.patched ?? null,
+    noop: payload.noop ?? null,
+  });
+
+  const counterKey = `${label}:${key}:${fingerprint}`;
+  store.seq += 1;
+  store.counts[counterKey] = (store.counts[counterKey] ?? 0) + 1;
+  store.last[key] = {
+    label,
+    payload,
+    fingerprint,
+    seq: store.seq,
+    count: store.counts[counterKey],
+    at: Date.now(),
+  };
+
+  const count = store.counts[counterKey];
+  const method = count > 10 ? "warn" : "debug";
+
+  console[method](`[starter-loop:${label}] #${store.seq} count=${count}`, {
+    key,
+    ...payload,
+    fingerprint,
+  });
+
+  if (count === 11) {
+    console.warn("[starter-loop] repeated same transition more than 10 times", {
+      label,
+      key,
+      payload,
+      hint: "This is likely the loop edge. Compare workspaceKey/currentWorkspaceKey and patched/noop.",
+      inspect: "window.__ZOE_STARTER_LOOP__",
+    });
+  }
+}
+
+function resolveCardToolSeed(args: {
+  language: string;
+  toolManifest?: any;
+  existing?: CardRuntimeState;
+  entry?: import("./reviewTargetRegistry").ReviewTargetEntry | null;
+}) {
+  const manifest = args.toolManifest ?? args.entry?.item;
+  const hasStarter = targetHasStarter(manifest, args.entry);
+
+  if (args.existing?.toolWorkspace && !hasStarter) {
+    reviewDebug("review-runtime source-selected", {
+      key: args.entry?.cardKey ?? args.existing?.cardKey ?? null,
+      entryFound: !!args.entry,
+      targetKind: args.entry?.targetKind ?? "card",
+      starterFilesCount: Array.isArray(args.entry?.starterFiles) ? args.entry.starterFiles.length : 0,
+      starterCodeLength: typeof args.entry?.starterCode === "string" ? args.entry.starterCode.length : 0,
+      hasStarter,
+      workspaceFileCount: workspaceFileCount(args.existing.toolWorkspace),
+      workspaceNonEmpty: workspaceHasUsableFile(args.existing.toolWorkspace),
+      sourceType: "existing",
+    });
+    return {
+      workspaceStatus: args.existing.workspaceStatus ?? "ready",
+      workspaceSeedMode: args.existing.workspaceSeedMode ?? "restored",
+      workspace: args.existing.toolWorkspace,
+      code: args.existing.toolCode ?? deriveCodeFromWorkspace(args.existing.toolWorkspace),
+      stdin:
+          args.existing.toolStdin ??
+          (typeof args.existing.toolWorkspace?.stdin === "string"
+              ? args.existing.toolWorkspace.stdin
+              : ""),
+      lang: args.existing.toolLang ?? args.language,
+      sourceType: "existing",
+    };
+  }
+
+  if (manifest || args.entry) {
+    const workspace = resolveExerciseWorkspace({
+      language: args.entry?.language ?? args.language,
+      manifest,
+      entry: args.entry,
+    });
+
+    const seedMode = hasStarter
+        ? "starter"
+        : "empty";
+
+    const workspaceNonEmpty = workspaceHasUsableFile(workspace);
+
+    reviewDebug("review-runtime source-selected", {
+      key: args.entry?.cardKey ?? args.existing?.cardKey ?? null,
+      entryFound: !!args.entry,
+      targetKind: args.entry?.targetKind ?? "card",
+      starterFilesCount: Array.isArray(args.entry?.starterFiles) ? args.entry!.starterFiles!.length : 0,
+      starterCodeLength: typeof args.entry?.starterCode === "string" ? args.entry.starterCode.length : 0,
+      hasStarter,
+      workspaceFileCount: workspaceFileCount(workspace),
+      workspaceNonEmpty,
+      sourceType: "manifest",
+    });
+
+    if (seedMode === "starter" && (!workspace || !workspaceNonEmpty)) {
+      console.error("[review-runtime] starter-backed target resolved blank workspace", {
+        key: args.entry?.cardKey ?? args.existing?.cardKey ?? null,
+        entryTargetKey: args.entry?.targetKey,
+        entryTargetSlug: args.entry?.targetSlug,
+        starterFiles: args.entry?.starterFiles,
+        starterCodeLength: typeof args.entry?.starterCode === "string" ? args.entry.starterCode.length : 0,
+        itemWorkspace: args.entry?.item?.workspace ?? manifest?.workspace ?? null,
+      });
+      return {
+        workspaceStatus: "error" as const,
+        workspaceSeedMode: "starter" as const,
+        workspace: null,
+        code: "",
+        stdin: "",
+        lang: args.entry?.language ?? args.language,
+        sourceType: "starter-error",
+      };
+    }
+
+    return {
+      workspaceStatus: "ready" as const,
+      workspaceSeedMode: seedMode as "starter" | "empty",
+      workspace,
+      code: deriveCodeFromWorkspace(workspace),
+      stdin: typeof workspace.stdin === "string" ? workspace.stdin : "",
+      lang: args.entry?.language ?? args.language,
+      sourceType: seedMode === "starter" ? "starter" : "empty",
+    };
+  }
+
+  return {
+    workspaceStatus: "pending" as const,
+    workspaceSeedMode: undefined,
+    workspace: null,
+    code: "",
+    stdin: "",
+    lang: args.language,
+    sourceType: "pending",
+  };
+}
+
+function resolveEditorRuntimeSeed(args: {
+  source: ReviewDeterministicEditorSource;
+  existing?: EditorRuntimeState | null;
+  existingCard?: CardRuntimeState | null;
+  existingExercise?: ExerciseRuntimeState | null;
+}) {
+  if (
+      args.existing?.workspace &&
+      args.source.workspaceSeedMode !== "starter"
+  ) {
+    reviewDebug("review-runtime source-selected", {
+      key: args.source.ownerKey,
+      entryFound: !!args.source.entry,
+      targetKind: args.source.entry?.targetKind ?? args.source.ownerKind,
+      starterFilesCount: Array.isArray(args.source.entry?.starterFiles) ? args.source.entry.starterFiles.length : 0,
+      starterCodeLength: typeof args.source.entry?.starterCode === "string" ? args.source.entry.starterCode.length : 0,
+      hasStarter: args.source.workspaceSeedMode === "starter",
+      workspaceFileCount: workspaceFileCount(args.existing.workspace),
+      workspaceNonEmpty: workspaceHasUsableFile(args.existing.workspace),
+      sourceType: "existing-runtime",
+    });
+    return {
+      workspaceStatus: args.existing.workspaceStatus ?? "ready",
+      workspaceSeedMode: args.existing.workspaceSeedMode ?? "restored",
+      workspace: args.existing.workspace,
+      code: args.existing.code ?? deriveCodeFromWorkspace(args.existing.workspace),
+      stdin:
+          args.existing.stdin ??
+          (typeof args.existing.workspace?.stdin === "string" ? args.existing.workspace.stdin : ""),
+      language: args.existing.language ?? args.source.language,
+    };
+  }
+
+  const legacyWorkspace =
+      args.source.ownerKind === "exercise"
+          ? args.existingExercise?.workspace ?? null
+          : args.existingCard?.toolWorkspace ?? null;
+
+  if (
+      legacyWorkspace &&
+      args.source.workspaceSeedMode !== "starter"
+  ) {
+    reviewDebug("review-runtime source-selected", {
+      key: args.source.ownerKey,
+      entryFound: !!args.source.entry,
+      targetKind: args.source.entry?.targetKind ?? args.source.ownerKind,
+      starterFilesCount: Array.isArray(args.source.entry?.starterFiles) ? args.source.entry.starterFiles.length : 0,
+      starterCodeLength: typeof args.source.entry?.starterCode === "string" ? args.source.entry.starterCode.length : 0,
+      hasStarter: args.source.workspaceSeedMode === "starter",
+      workspaceFileCount: workspaceFileCount(legacyWorkspace),
+      workspaceNonEmpty: workspaceHasUsableFile(legacyWorkspace),
+      sourceType: "legacy-runtime",
+    });
+    return {
+      workspaceStatus: "ready" as const,
+      workspaceSeedMode: "restored" as const,
+      workspace: legacyWorkspace,
+      code:
+          (args.source.ownerKind === "exercise"
+              ? args.existingExercise?.code
+              : args.existingCard?.toolCode) ??
+          deriveCodeFromWorkspace(legacyWorkspace),
+      stdin:
+          (args.source.ownerKind === "exercise"
+              ? args.existingExercise?.stdin
+              : args.existingCard?.toolStdin) ??
+          (typeof legacyWorkspace.stdin === "string" ? legacyWorkspace.stdin : ""),
+      language:
+          (args.source.ownerKind === "exercise"
+              ? args.existingExercise?.language ?? args.existingExercise?.lang
+              : args.existingCard?.toolLang) ?? args.source.language,
+    };
+  }
+
+  const workspace = resolveExerciseWorkspace({
+    language: args.source.language,
+    manifest: args.source.manifest,
+    entry: args.source.entry,
+  });
+  const workspaceNonEmpty = workspaceHasUsableFile(workspace);
+
+  reviewDebug("review-runtime source-selected", {
+    key: args.source.ownerKey,
+    entryFound: !!args.source.entry,
+    targetKind: args.source.entry?.targetKind ?? args.source.ownerKind,
+    starterFilesCount: Array.isArray(args.source.entry?.starterFiles) ? args.source.entry.starterFiles.length : 0,
+    starterCodeLength: typeof args.source.entry?.starterCode === "string" ? args.source.entry.starterCode.length : 0,
+    hasStarter: args.source.workspaceSeedMode === "starter",
+    workspaceFileCount: workspaceFileCount(workspace),
+    workspaceNonEmpty,
+    sourceType: args.source.workspaceSeedMode === "starter" ? "starter" : "empty",
+  });
+
+  if (args.source.workspaceSeedMode === "starter" && !workspaceNonEmpty) {
+    console.error("[review-runtime] starter-backed target resolved blank workspace", {
+      key: args.source.ownerKey,
+      entryTargetKey: args.source.entry?.targetKey,
+      entryTargetSlug: args.source.entry?.targetSlug,
+      starterFiles: args.source.entry?.starterFiles,
+      starterCodeLength: typeof args.source.entry?.starterCode === "string" ? args.source.entry.starterCode.length : 0,
+      itemWorkspace: args.source.entry?.item?.workspace ?? args.source.manifest?.workspace ?? null,
+    });
+    return {
+      workspaceStatus: "error" as const,
+      workspaceSeedMode: "starter" as const,
+      workspace: null,
+      code: "",
+      stdin: "",
+      language: args.source.language,
+    };
+  }
+
+  return {
+    workspaceStatus: "ready" as const,
+    workspaceSeedMode: args.source.workspaceSeedMode,
+    workspace,
+    code: deriveCodeFromWorkspace(workspace),
+    stdin: typeof workspace.stdin === "string" ? workspace.stdin : "",
+    language: args.source.language,
+  };
 }
 
 export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
@@ -231,9 +683,11 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
   viewTopicId: null,
   activeCardIndex: 0,
   activeExerciseKey: null,
+  boundToolWorkspace: null,
 
   cards: {},
   exercises: {},
+  editorRuntimes: {},
 
   tool: {
     boundExerciseKey: null,
@@ -245,30 +699,37 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
     pendingCardKeys: new Set(),
   },
 
+  targetRegistry: null,
+
   _flushToolSnapshotCb: null,
+
+  setTargetRegistry: (registry) => {
+    if (get().targetRegistry === registry) return;
+    set({ targetRegistry: registry });
+  },
 
   setReviewScope: (scope) => {
     set((state) => ({
       subjectSlug:
-        typeof scope.subjectSlug !== "undefined"
-          ? scope.subjectSlug
-          : state.subjectSlug,
+          typeof scope.subjectSlug !== "undefined"
+              ? scope.subjectSlug
+              : state.subjectSlug,
       moduleSlug:
-        typeof scope.moduleSlug !== "undefined"
-          ? scope.moduleSlug
-          : state.moduleSlug,
+          typeof scope.moduleSlug !== "undefined"
+              ? scope.moduleSlug
+              : state.moduleSlug,
       sectionSlug:
-        typeof scope.sectionSlug !== "undefined"
-          ? scope.sectionSlug
-          : state.sectionSlug,
+          typeof scope.sectionSlug !== "undefined"
+              ? scope.sectionSlug
+              : state.sectionSlug,
       activeTopicId:
-        typeof scope.activeTopicId !== "undefined"
-          ? scope.activeTopicId
-          : state.activeTopicId,
+          typeof scope.activeTopicId !== "undefined"
+              ? scope.activeTopicId
+              : state.activeTopicId,
       viewTopicId:
-        typeof scope.viewTopicId !== "undefined"
-          ? scope.viewTopicId
-          : state.viewTopicId,
+          typeof scope.viewTopicId !== "undefined"
+              ? scope.viewTopicId
+              : state.viewTopicId,
     }));
   },
 
@@ -290,57 +751,122 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
 
     set((state) => {
       const existing = state.exercises[exerciseKey];
+      const entry =
+          state.targetRegistry?.byKey?.[`exercise:${exerciseKey}`] ??
+          findTargetRegistryEntry(state.targetRegistry, exerciseKey, {
+            topicId,
+            sectionSlug,
+            cardId,
+            targetKind: "exercise",
+          });
+      const effectiveManifest = manifest ?? entry?.item;
 
-      /**
-       * Critical:
-       * ensureExercise creates the runtime exercise once.
-       *
-       * After the exercise exists, IDE edits must flow through patchExercise /
-       * setToolWorkspace. Re-running starter resolution here can create update
-       * loops while the learner edits files.
-       */
-      if (existing) {
+      const existingWorkspaceLooksEmpty = !workspaceHasUsableFile(existing?.workspace);
+
+      const registryHasStarter = targetHasStarter(effectiveManifest, entry);
+
+      reviewDebug("starter-files ensureExercise.seed-source", {
+        exerciseKey,
+        entryFound: !!entry,
+        entryTargetKey: entry?.targetKey,
+        entryTargetSlug: entry?.targetSlug,
+        entryKind: entry?.targetKind,
+        entryStarterFilesCount: Array.isArray(entry?.starterFiles) ? entry.starterFiles.length : null,
+        entryStarterCodeLength: typeof entry?.starterCode === "string" ? entry.starterCode.length : null,
+        manifestId: effectiveManifest?.id,
+        registryHasStarter,
+        existingWorkspaceLooksEmpty,
+      });
+
+      // Starter files are authoritative. If this target has starter files/code,
+      // rebuild the exercise workspace from the starter every time ensureExercise runs.
+      // This intentionally overwrites any existing/fallback workspace content.
+      if (existing && !registryHasStarter) {
         return state;
       }
 
       const language =
-        manifest?.language ??
-        manifest?.lang ??
-        saved?.language ??
-        saved?.lang ??
-        "python";
+          effectiveManifest?.language ??
+          effectiveManifest?.lang ??
+          saved?.language ??
+          saved?.lang ??
+          entry?.language ??
+          "python";
 
-      const savedWorkspace =
-        saved && isWorkspace(saved.workspace)
-          ? saved.workspace
-          : saved && isWorkspace(saved.codeWorkspace)
-            ? saved.codeWorkspace
-            : saved && isWorkspace(saved.ideWorkspace)
-              ? saved.ideWorkspace
-              : null;
+      const rawSavedWorkspace =
+          saved && isWorkspace(saved.workspace)
+              ? saved.workspace
+              : saved && isWorkspace(saved.codeWorkspace)
+                  ? saved.codeWorkspace
+                  : saved && isWorkspace(saved.ideWorkspace)
+                      ? saved.ideWorkspace
+                      : null;
+
+      const savedWorkspaceCode = deriveCodeFromWorkspace(rawSavedWorkspace);
+      // When starter files exist, ignore saved/restored/editor workspaces.
+      // This forces starter files to load no matter what is already in the editor.
+      const savedWorkspace = registryHasStarter ? null : rawSavedWorkspace;
 
       const workspace = resolveExerciseWorkspace({
         language,
-        manifest,
+        manifest: effectiveManifest,
         saved: savedWorkspace,
+        entry,
+      });
+      const workspaceNonEmpty = workspaceHasUsableFile(workspace);
+
+      reviewDebug("review-runtime source-selected", {
+        key: exerciseKey,
+        entryFound: !!entry,
+        targetKind: entry?.targetKind ?? "exercise",
+        starterFilesCount: Array.isArray(entry?.starterFiles) ? entry.starterFiles.length : 0,
+        starterCodeLength: typeof entry?.starterCode === "string" ? entry.starterCode.length : 0,
+        hasStarter: registryHasStarter,
+        workspaceFileCount: workspaceFileCount(workspace),
+        workspaceNonEmpty,
+        sourceType: savedWorkspace ? "saved-or-restored" : registryHasStarter ? "starter" : "empty",
       });
 
+      if (registryHasStarter && !workspaceNonEmpty) {
+        console.error("[review-runtime] starter-backed target resolved blank workspace", {
+          key: exerciseKey,
+          entryTargetKey: entry?.targetKey,
+          entryTargetSlug: entry?.targetSlug,
+          starterFiles: entry?.starterFiles,
+          starterCodeLength: typeof entry?.starterCode === "string" ? entry.starterCode.length : 0,
+          itemWorkspace: entry?.item?.workspace ?? effectiveManifest?.workspace ?? null,
+        });
+      }
+
       const stdin =
-        typeof saved?.stdin === "string"
-          ? saved.stdin
-          : typeof saved?.codeStdin === "string"
-            ? saved.codeStdin
-            : typeof workspace.stdin === "string"
-              ? workspace.stdin
-              : typeof manifest?.workspace?.initialStdin === "string"
-                ? manifest.workspace.initialStdin
-                : typeof manifest?.initialStdin === "string"
-                  ? manifest.initialStdin
-                  : typeof manifest?.stdin === "string"
-                    ? manifest.stdin
-                    : "";
+          typeof saved?.stdin === "string"
+              ? saved.stdin
+              : typeof saved?.codeStdin === "string"
+                  ? saved.codeStdin
+                  : typeof workspace.stdin === "string"
+                      ? workspace.stdin
+                      : typeof effectiveManifest?.workspace?.initialStdin === "string"
+                          ? effectiveManifest.workspace.initialStdin
+                          : typeof effectiveManifest?.initialStdin === "string"
+                              ? effectiveManifest.initialStdin
+                              : typeof effectiveManifest?.stdin === "string"
+                                  ? effectiveManifest.stdin
+                                  : "";
 
       const normalized = normalizeWorkspacePatch({ workspace, stdin });
+
+      exerciseDebug("G_reviewRuntimeStore_ensureExercise_create", {
+        exerciseKey,
+        subjectSlug,
+        moduleSlug,
+        sectionSlug,
+        topicId,
+        cardId,
+        manifestId: effectiveManifest?.id,
+        savedPatch: summarizeExercisePatch(saved),
+        resolvedWorkspace: summarizeExerciseWorkspace(workspace),
+        stdin,
+      });
 
       const exercise: ExerciseRuntimeState = {
         exerciseKey,
@@ -350,11 +876,11 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
         topicId,
         cardId,
         exerciseId:
-          typeof saved?.exerciseId === "string"
-            ? saved.exerciseId
-            : typeof saved?.stableExerciseId === "string"
-              ? saved.stableExerciseId
-              : getFinalExerciseIdFromKey(exerciseKey),
+            typeof saved?.exerciseId === "string"
+                ? saved.exerciseId
+                : typeof saved?.stableExerciseId === "string"
+                    ? saved.stableExerciseId
+                    : getFinalExerciseIdFromKey(exerciseKey),
         language,
         workspace: normalized.workspace,
         stdin,
@@ -362,41 +888,98 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
         answer: saved?.answer ?? {
           revealed: false,
           solutionCode:
-            manifest?.recipe?.solutionCode ??
-            manifest?.solutionCode ??
-            undefined,
+              effectiveManifest?.recipe?.solutionCode ??
+              effectiveManifest?.solutionCode ??
+              undefined,
           solutionFiles:
-            manifest?.recipe?.solutionFiles ??
-            manifest?.solutionFiles ??
-            undefined,
+              effectiveManifest?.recipe?.solutionFiles ??
+              effectiveManifest?.solutionFiles ??
+              undefined,
         },
         sketch: resolveSketchState({
           savedSketch: saved?.sketch ?? null,
-          starterSketch: manifest?.starterSketch ?? null,
+          starterSketch: effectiveManifest?.starterSketch ?? null,
         }),
         status: saved?.status ?? "not_started",
+        workspaceStatus: registryHasStarter && !workspaceNonEmpty ? "error" : "ready",
         updatedAt:
-          typeof saved?.updatedAt === "number" ? saved.updatedAt : Date.now(),
+            typeof saved?.updatedAt === "number" ? saved.updatedAt : Date.now(),
 
         code: typeof saved?.code === "string" ? saved.code : normalized.code,
         lang: typeof saved?.lang === "string" ? saved.lang : language,
         codeWorkspace: normalized.workspace,
         ideWorkspace: normalized.workspace,
         codeStdin: stdin,
-      } as any;
+      };
 
-      return {
+      const existingWorkspaceKey = workspaceContentKey(existing?.workspace ?? null);
+      const nextWorkspaceKey = workspaceContentKey(exercise.workspace ?? null);
+      const existingCode = String(existing?.code ?? deriveCodeFromWorkspace(existing?.workspace ?? null) ?? "");
+      const nextCode = String(exercise.code ?? "");
+      const existingStdin = String(existing?.stdin ?? existing?.codeStdin ?? "");
+      const nextStdin = String(exercise.stdin ?? exercise.codeStdin ?? "");
+      const existingLanguage = String(existing?.language ?? existing?.lang ?? "");
+      const nextLanguage = String(exercise.language ?? exercise.lang ?? "");
+      const existingStatus = String(existing?.status ?? "");
+      const nextStatus = String(exercise.status ?? "");
+      const existingWorkspaceStatus = String((existing as any)?.workspaceStatus ?? "");
+      const nextWorkspaceStatus = String((exercise as any)?.workspaceStatus ?? "");
+      const existingExerciseId = String(existing?.exerciseId ?? "");
+      const nextExerciseId = String(exercise.exerciseId ?? "");
+
+      const noMeaningfulChange = Boolean(
+          existing &&
+          existingWorkspaceKey === nextWorkspaceKey &&
+          existingCode === nextCode &&
+          existingStdin === nextStdin &&
+          existingLanguage === nextLanguage &&
+          existingStatus === nextStatus &&
+          existingWorkspaceStatus === nextWorkspaceStatus &&
+          existingExerciseId === nextExerciseId,
+      );
+
+      starterLoopTrace("runtime.ensureExercise.compare", {
+        key: exerciseKey,
+        existingWorkspaceKey,
+        nextWorkspaceKey,
+        existingCodeLength: existingCode.length,
+        nextCodeLength: nextCode.length,
+        existingStdinLength: existingStdin.length,
+        nextStdinLength: nextStdin.length,
+        existingLanguage,
+        nextLanguage,
+        existingStatus,
+        nextStatus,
+        existingWorkspaceStatus,
+        nextWorkspaceStatus,
+        existingExerciseId,
+        nextExerciseId,
+        noop: noMeaningfulChange,
+        registryHasStarter,
+      });
+
+      if (noMeaningfulChange) {
+        return state;
+      }
+
+      const nextState: Partial<ReviewRuntimeState> = {
         exercises: {
           ...state.exercises,
           [exerciseKey]: exercise,
         },
       };
+
+      if (state.activeExerciseKey === exerciseKey) {
+        nextState.boundToolWorkspace = normalized.workspace;
+      }
+
+      return nextState;
     });
   },
 
-
-
   patchExercise: (key, patch) => {
+    let didPatch = false;
+
     set((state) => {
       const existing = state.exercises[key];
       const incomingWorkspace = getPatchWorkspace(patch, existing);
@@ -404,17 +987,17 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
       if (!existing && !incomingWorkspace) return state;
 
       const stdin =
-        typeof patch.stdin === "string"
-          ? patch.stdin
-          : typeof patch.codeStdin === "string"
-            ? patch.codeStdin
-            : typeof incomingWorkspace?.stdin === "string"
-              ? incomingWorkspace.stdin
-              : existing?.stdin ?? "";
+          typeof patch.stdin === "string"
+              ? patch.stdin
+              : typeof patch.codeStdin === "string"
+                  ? patch.codeStdin
+                  : typeof incomingWorkspace?.stdin === "string"
+                      ? incomingWorkspace.stdin
+                      : existing?.stdin ?? "";
 
       const normalized = incomingWorkspace
-        ? normalizeWorkspacePatch({ workspace: incomingWorkspace, stdin })
-        : null;
+          ? normalizeWorkspacePatch({ workspace: incomingWorkspace, stdin })
+          : null;
 
       const workspace = normalized?.workspace ?? existing!.workspace;
 
@@ -426,9 +1009,9 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
        * print("Hello Python!")
        */
       const code =
-        normalized?.code ??
-        deriveCodeFromWorkspace(workspace) ??
-        (typeof patch.code === "string" ? patch.code : "");
+          normalized?.code ??
+          deriveCodeFromWorkspace(workspace) ??
+          (typeof patch.code === "string" ? patch.code : "");
 
       exerciseDebug("H_reviewRuntimeStore_patchExercise", {
         key,
@@ -452,6 +1035,63 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
         patchExerciseId: (patch as any).exerciseId,
       });
 
+      const nextLanguage =
+          typeof patch.language === "string"
+              ? patch.language
+              : typeof patch.lang === "string"
+                  ? patch.lang
+                  : existing?.language ?? workspace.language ?? "python";
+
+      const nextLang =
+          typeof patch.lang === "string"
+              ? patch.lang
+              : typeof patch.language === "string"
+                  ? patch.language
+                  : existing?.lang ?? nextLanguage;
+
+      const existingWorkspaceKey = workspaceContentKey(existing?.workspace ?? null);
+      const nextWorkspaceKey = workspaceContentKey(workspace ?? null);
+      const existingCode = String(
+          existing?.code ?? deriveCodeFromWorkspace(existing?.workspace ?? null) ?? "",
+      );
+      const nextCode = String(code ?? "");
+      const existingStdin = String(existing?.stdin ?? existing?.codeStdin ?? "");
+      const nextStdin = String(stdin ?? "");
+      const existingLanguage = String(existing?.language ?? existing?.lang ?? "");
+      const nextLanguageComparable = String(nextLanguage ?? nextLang ?? "");
+
+      const noMeaningfulChange = Boolean(
+          existing &&
+          existingWorkspaceKey === nextWorkspaceKey &&
+          existingCode === nextCode &&
+          existingStdin === nextStdin &&
+          existingLanguage === nextLanguageComparable,
+      );
+
+      starterLoopTrace("runtime.patchExercise.compare", {
+        key,
+        existingWorkspaceKey,
+        nextWorkspaceKey,
+        existingCodeLength: existingCode.length,
+        nextCodeLength: nextCode.length,
+        existingStdinLength: existingStdin.length,
+        nextStdinLength: nextStdin.length,
+        existingLanguage,
+        nextLanguage: nextLanguageComparable,
+        noop: noMeaningfulChange,
+        patchKeys: Object.keys(patch ?? {}),
+      });
+
+      if (noMeaningfulChange) {
+        reviewDebug("2_RUNTIME_PATCH reviewRuntimeStore.patchExercise.noop", {
+          key,
+          workspaceKey: nextWorkspaceKey,
+          codeLength: nextCode.length,
+          stdinLength: nextStdin.length,
+        });
+        return state;
+      }
+
       const nextPending = new Set(state.persistence.pendingExerciseKeys);
       nextPending.add(key);
 
@@ -463,15 +1103,10 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
         topicId: existing?.topicId ?? state.viewTopicId ?? "unknown",
         cardId: existing?.cardId ?? "unknown",
         exerciseId:
-          typeof patch.exerciseId === "string"
-            ? patch.exerciseId
-            : getFinalExerciseIdFromKey(key),
-        language:
-          typeof patch.language === "string"
-            ? patch.language
-            : typeof patch.lang === "string"
-              ? patch.lang
-              : existing?.language ?? workspace.language ?? "python",
+            typeof patch.exerciseId === "string"
+                ? patch.exerciseId
+                : getFinalExerciseIdFromKey(key),
+        language: nextLanguage,
         workspace,
         stdin,
         runner: existing?.runner ?? {},
@@ -480,12 +1115,7 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
         status: existing?.status ?? "in_progress",
         updatedAt: Date.now(),
         code,
-        lang:
-          typeof patch.lang === "string"
-            ? patch.lang
-            : typeof patch.language === "string"
-              ? patch.language
-              : existing?.lang ?? workspace.language ?? "python",
+        lang: nextLang,
         codeWorkspace: workspace,
         ideWorkspace: workspace,
         codeStdin: stdin,
@@ -501,26 +1131,16 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
         stdin,
         codeStdin: stdin,
         code,
-        language:
-          typeof patch.language === "string"
-            ? patch.language
-            : typeof patch.lang === "string"
-              ? patch.lang
-              : existing?.language ?? fallback.language,
-        lang:
-          typeof patch.lang === "string"
-            ? patch.lang
-            : typeof patch.language === "string"
-              ? patch.language
-              : existing?.lang ?? fallback.lang,
+        language: nextLanguage,
+        lang: nextLang,
         status:
-          existing?.status === "not_started" || !existing
-            ? "in_progress"
-            : existing.status,
+            existing?.status === "not_started" || !existing
+                ? "in_progress"
+                : existing.status,
         updatedAt: Date.now(),
       };
 
-      return {
+      const nextState: Partial<ReviewRuntimeStore> = {
         exercises: {
           ...state.exercises,
           [key]: nextExercise,
@@ -531,247 +1151,214 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
           pendingExerciseKeys: nextPending,
         },
       };
+
+      if (
+          state.activeExerciseKey === key &&
+          workspaceContentKey(state.boundToolWorkspace ?? null) !== workspaceContentKey(workspace ?? null)
+      ) {
+        nextState.boundToolWorkspace = workspace;
+      }
+
+      starterLoopTrace("runtime.patchExercise.write", {
+        key,
+        workspaceKey: nextWorkspaceKey,
+        codeLength: nextCode.length,
+        stdinLength: nextStdin.length,
+        patched: true,
+        willUpdateBoundToolWorkspace:
+            state.activeExerciseKey === key &&
+            workspaceContentKey(state.boundToolWorkspace ?? null) !== workspaceContentKey(workspace ?? null),
+      });
+
+      didPatch = true;
+      return nextState;
     });
 
-    get().queueAutosave();
+    if (didPatch) {
+      get().queueAutosave();
+    }
   },
 
   ensureCard: (args) => {
-    const {
-      cardKey,
-      topicId,
-      cardId,
-      initial,
-      starterToolManifest,
-    } = args as any;
+    const { cardKey, topicId, cardId, initial, starterSketch, toolLanguage = "python", toolManifest, toolKey } = args;
 
     set((state) => {
-      const canonicalCardKey = canonicalCardKeyForState({
-        state,
-        key: cardKey,
+      const existing = state.cards[cardKey];
+      const entry =
+          state.targetRegistry?.byKey?.[`card:${cardKey}`] ??
+          findTargetRegistryEntry(state.targetRegistry, cardKey, {
+            topicId,
+            cardId,
+            targetKind: "card",
+          });
+
+      reviewDebug("starter-files ensureCard.seed-source", {
+        cardKey,
         topicId,
         cardId,
+        entryFound: !!entry,
+        entryTargetKey: entry?.targetKey,
+        entryTargetSlug: entry?.targetSlug,
+        entryKind: entry?.targetKind,
+        entryStarterFilesCount: Array.isArray(entry?.starterFiles) ? entry.starterFiles.length : null,
+        entryStarterCodeLength: typeof entry?.starterCode === "string" ? entry.starterCode.length : null,
+        toolManifestId: toolManifest?.id,
       });
-      const existing = state.cards[canonicalCardKey];
 
-      const enabled =
-          typeof window !== "undefined" &&
-          window.localStorage.getItem("zoe:debug:starter-files") === "1";
+      const resolvedTool = resolveCardToolSeed({
+        language: toolLanguage,
+        toolManifest,
+        existing,
+        entry,
+      });
 
-      const starterLanguage =
-          starterToolManifest?.runtime?.language ??
-          starterToolManifest?.language ??
-          "python";
+      starterLoopTrace("runtime.ensureCard.compare", {
+        cardKey,
+        existingWorkspaceKey: workspaceContentKey(existing?.toolWorkspace ?? null),
+        nextWorkspaceKey: workspaceContentKey(resolvedTool.workspace ?? null),
+        existingStatus: existing?.workspaceStatus,
+        nextStatus: resolvedTool.workspaceStatus,
+        existingSeedMode: existing?.workspaceSeedMode,
+        nextSeedMode: resolvedTool.workspaceSeedMode,
+        existingCodeLength: String(existing?.toolCode ?? "").length,
+        nextCodeLength: String(resolvedTool.code ?? "").length,
+        noop: Boolean(
+            existing &&
+            workspaceContentKey(existing.toolWorkspace ?? null) === workspaceContentKey(resolvedTool.workspace ?? null) &&
+            existing.workspaceStatus === resolvedTool.workspaceStatus &&
+            existing.workspaceSeedMode === resolvedTool.workspaceSeedMode &&
+            String(existing.toolCode ?? "") === String(resolvedTool.code ?? "") &&
+            String(existing.toolStdin ?? "") === String(resolvedTool.stdin ?? "") &&
+            String(existing.toolLang ?? "") === String(resolvedTool.lang ?? "")
+        ),
+      });
 
-      const hasStarterWorkspaceSeed = manifestHasStarterWorkspaceSeed(starterToolManifest);
-      const expectedStarterFileNames = manifestStarterFileNames(starterToolManifest);
-
-      /**
-       * For starter-backed sketch/card workspaces, never blindly trust existing
-       * runtime state. It may have been polluted by an exercise workspace from
-       * a previous bad path.
-       *
-       * Example bug:
-       *   current sketch expects: main.py + notes.md
-       *   existing workspace has: main.py + helper_notes.md
-       *
-       * That existing workspace must be rejected and reseeded from the current
-       * sketch manifest.
-       */
-      const existingMatchesCurrentStarter =
-        !hasStarterWorkspaceSeed ||
-        workspaceContainsStarterFileNames(
-          existing?.toolWorkspace,
-          expectedStarterFileNames,
-        );
-
-      const shouldReseedStarterWorkspace =
-        hasStarterWorkspaceSeed &&
-        (
-          !existing?.toolWorkspace ||
-          !existingMatchesCurrentStarter
-        );
-
-      const starterWorkspace = shouldReseedStarterWorkspace
-        ? resolveExerciseWorkspace({
-            language: starterLanguage,
-            manifest: starterToolManifest,
-            saved: null,
-          })
-        : null;
-
-      const toolWorkspace =
-        hasStarterWorkspaceSeed
-          ? existingMatchesCurrentStarter
-            ? existing?.toolWorkspace ?? starterWorkspace ?? null
-            : starterWorkspace
-          : existing?.toolWorkspace ??
-            initial?.toolWorkspace ??
-            starterWorkspace ??
-            null;
-
-      const toolCode =
-        hasStarterWorkspaceSeed
-          ? deriveCodeFromWorkspace(toolWorkspace)
-          : typeof existing?.toolCode === "string"
-            ? existing.toolCode
-            : typeof initial?.toolCode === "string"
-              ? initial.toolCode
-              : deriveCodeFromWorkspace(toolWorkspace);
-
-      const toolStdin =
-        hasStarterWorkspaceSeed
-          ? typeof toolWorkspace?.stdin === "string"
-            ? toolWorkspace.stdin
-            : ""
-          : typeof existing?.toolStdin === "string"
-            ? existing.toolStdin
-            : typeof initial?.toolStdin === "string"
-              ? initial.toolStdin
-              : typeof toolWorkspace?.stdin === "string"
-                ? toolWorkspace.stdin
-                : "";
-
-      const nextCard: CardRuntimeState = {
-        cardKey: canonicalCardKey,
-        topicId: existing?.topicId ?? topicId,
-        cardId: existing?.cardId ?? cardId,
-        visited: initial?.visited ?? existing?.visited ?? false,
-        completed: initial?.completed ?? existing?.completed ?? false,
-        sketch: initial?.sketch ?? existing?.sketch ?? null,
-        toolKey:
-          existing?.toolKey ??
-          (typeof initial?.toolKey === "string" ? initial.toolKey : `${canonicalCardKey}:general`),
-        toolWorkspace,
-        toolCode,
-        toolStdin,
-        toolLang:
-          existing?.toolLang ??
-          initial?.toolLang ??
-          toolWorkspace?.language ??
-          starterLanguage,
-        updatedAt: Date.now(),
-      };
-
-      if (enabled) {
-          console.groupCollapsed(`[starter-files] ensureCard: ${canonicalCardKey}`);
-          console.log({
-              action: shouldReseedStarterWorkspace
-                ? "reseeded-from-current-starter"
-                : existing?.toolWorkspace
-                  ? "trusted"
-                  : starterWorkspace
-                    ? "created"
-                    : "seeded",
-              cardKey: canonicalCardKey,
-              topicId,
-              cardId,
-              hasStarterWorkspaceSeed,
-              expectedStarterFileNames,
-              existingMatchesCurrentStarter,
-              shouldReseedStarterWorkspace,
-              existingFiles: cardWorkspaceFileSummary(existing?.toolWorkspace),
-              nextFiles: cardWorkspaceFileSummary(nextCard.toolWorkspace),
-              starterManifest: starterToolManifest,
-          });
-          console.groupEnd();
-      }
-
-      if (cardStateEqual(existing, nextCard)) {
+      if (
+          existing &&
+          workspaceContentKey(existing.toolWorkspace ?? null) === workspaceContentKey(resolvedTool.workspace ?? null) &&
+          existing.workspaceStatus === resolvedTool.workspaceStatus &&
+          existing.workspaceSeedMode === resolvedTool.workspaceSeedMode &&
+          String(existing.toolCode ?? "") === String(resolvedTool.code ?? "") &&
+          String(existing.toolStdin ?? "") === String(resolvedTool.stdin ?? "") &&
+          String(existing.toolLang ?? "") === String(resolvedTool.lang ?? "")
+      ) {
         return state;
       }
 
-      const nextPending = new Set(state.persistence.pendingCardKeys);
-      nextPending.add(canonicalCardKey);
+      const card: CardRuntimeState = {
+        cardKey,
+        topicId,
+        cardId,
+        visited: existing?.visited ?? initial?.visited ?? false,
+        completed: existing?.completed ?? initial?.completed ?? false,
+        sketch: resolveSketchState({
+          savedSketch: existing?.sketch ?? initial?.sketch ?? null,
+          starterSketch: starterSketch ?? null,
+        }),
+        workspaceStatus: resolvedTool.workspaceStatus,
+        workspaceSeedMode: resolvedTool.workspaceSeedMode,
+        toolKey: existing?.toolKey ?? toolKey ?? `${cardKey}:general`,
+        toolWorkspace: resolvedTool.workspace,
+        toolCode: resolvedTool.code,
+        toolStdin: resolvedTool.stdin,
+        toolLang: resolvedTool.lang,
+        updatedAt:
+            typeof existing?.updatedAt === "number"
+                ? existing.updatedAt
+                : typeof initial?.updatedAt === "number"
+                    ? initial.updatedAt
+                    : Date.now(),
+      };
 
       return {
         cards: {
           ...state.cards,
-          [canonicalCardKey]: nextCard,
-        },
-        persistence: {
-          ...state.persistence,
-          dirty: true,
-          pendingCardKeys: nextPending,
+          [cardKey]: card,
         },
       };
     });
-
-    get().queueAutosave();
   },
 
-
-
-
   patchCard: (key, patch) => {
+    let didPatch = false;
+
     set((state) => {
-      const incomingTopicId =
-        typeof (patch as any)?.topicId === "string"
-          ? String((patch as any).topicId)
-          : null;
-
-      const incomingCardId =
-        typeof (patch as any)?.cardId === "string"
-          ? String((patch as any).cardId)
-          : null;
-
-      const targetKey = canonicalCardKeyForState({
-        state,
-        key,
-        topicId: incomingTopicId,
-        cardId: incomingCardId,
-      });
-      const existing = state.cards[targetKey];
+      const existing = state.cards[key];
 
       const fallback: CardRuntimeState = {
-        cardKey: targetKey,
-        topicId:
-          existing?.topicId ??
-          (typeof (patch as any)?.topicId === "string"
-            ? String((patch as any).topicId)
-            : state.viewTopicId ?? "unknown"),
-        cardId:
-          existing?.cardId ??
-          (typeof (patch as any)?.cardId === "string"
-            ? String((patch as any).cardId)
-            : targetKey),
+        cardKey: key,
+        topicId: existing?.topicId ?? state.viewTopicId ?? "unknown",
+        cardId: existing?.cardId ?? key,
         visited: existing?.visited ?? false,
         completed: existing?.completed ?? false,
         sketch: existing?.sketch ?? null,
-        updatedAt: Date.now(),
+        workspaceStatus: existing?.workspaceStatus ?? "pending",
+        workspaceSeedMode: existing?.workspaceSeedMode,
+        toolWorkspace: existing?.toolWorkspace ?? null,
+        toolCode: existing?.toolCode ?? "",
+        toolStdin: existing?.toolStdin ?? "",
+        toolLang: existing?.toolLang ?? "python",
+        updatedAt: existing?.updatedAt ?? Date.now(),
       };
 
       const nextCard: CardRuntimeState = {
         ...fallback,
         ...existing,
         ...patch,
-        cardKey: targetKey,
-        topicId:
-          typeof (patch as any)?.topicId === "string"
-            ? String((patch as any).topicId)
-            : existing?.topicId ?? fallback.topicId,
-        cardId:
-          typeof (patch as any)?.cardId === "string"
-            ? String((patch as any).cardId)
-            : existing?.cardId ?? fallback.cardId,
-        updatedAt: Date.now(),
+        updatedAt: existing?.updatedAt ?? fallback.updatedAt,
       };
 
-      if (cardStateEqual(existing, nextCard)) {
+      const noMeaningfulChange = Boolean(
+          existing &&
+          existing.topicId === nextCard.topicId &&
+          existing.cardId === nextCard.cardId &&
+          existing.visited === nextCard.visited &&
+          existing.completed === nextCard.completed &&
+          existing.workspaceStatus === nextCard.workspaceStatus &&
+          existing.workspaceSeedMode === nextCard.workspaceSeedMode &&
+          workspaceContentKey(existing.toolWorkspace ?? null) === workspaceContentKey(nextCard.toolWorkspace ?? null) &&
+          String(existing.toolCode ?? "") === String(nextCard.toolCode ?? "") &&
+          String(existing.toolStdin ?? "") === String(nextCard.toolStdin ?? "") &&
+          String(existing.toolLang ?? "") === String(nextCard.toolLang ?? "") &&
+          JSON.stringify(existing.sketch ?? null) === JSON.stringify(nextCard.sketch ?? null)
+      );
+
+      starterLoopTrace("runtime.patchCard.compare", {
+        key,
+        existingWorkspaceKey: workspaceContentKey(existing?.toolWorkspace ?? null),
+        nextWorkspaceKey: workspaceContentKey(nextCard.toolWorkspace ?? null),
+        existingStatus: existing?.workspaceStatus,
+        nextStatus: nextCard.workspaceStatus,
+        existingSeedMode: existing?.workspaceSeedMode,
+        nextSeedMode: nextCard.workspaceSeedMode,
+        existingCodeLength: String(existing?.toolCode ?? "").length,
+        nextCodeLength: String(nextCard.toolCode ?? "").length,
+        noop: noMeaningfulChange,
+        patchKeys: Object.keys(patch ?? {}),
+      });
+
+      if (noMeaningfulChange) {
+        reviewDebug("2_RUNTIME_PATCH reviewRuntimeStore.patchCard.noop", {
+          key,
+          workspaceKey: workspaceContentKey(nextCard.toolWorkspace ?? null),
+          codeLength: String(nextCard.toolCode ?? "").length,
+        });
         return state;
       }
 
       const nextPending = new Set(state.persistence.pendingCardKeys);
-      nextPending.add(targetKey);
+      nextPending.add(key);
 
-      const nextCards = { ...state.cards, [targetKey]: nextCard };
-
-      if (key !== targetKey && nextCards[key]) {
-        delete nextCards[key];
-      }
+      didPatch = true;
 
       return {
-        cards: nextCards,
+        cards: {
+          ...state.cards,
+          [key]: {
+            ...nextCard,
+            updatedAt: Date.now(),
+          },
+        },
         persistence: {
           ...state.persistence,
           dirty: true,
@@ -780,9 +1367,145 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
       };
     });
 
-    get().queueAutosave();
+    if (didPatch) {
+      get().queueAutosave();
+    }
   },
 
+  ensureEditorSource: (source) => {
+    set((state) => {
+      const existing = state.editorRuntimes[source.ownerKey] ?? null;
+      const existingCard = source.ownerKind === "card" ? state.cards[source.ownerKey] ?? null : null;
+      const existingExercise =
+          source.ownerKind === "exercise" ? state.exercises[source.ownerKey] ?? null : null;
+
+      const resolved = resolveEditorRuntimeSeed({
+        source,
+        existing,
+        existingCard,
+        existingExercise,
+      });
+
+      const nextRuntime: EditorRuntimeState = {
+        ownerKey: source.ownerKey,
+        ownerKind: source.ownerKind,
+        targetKey: source.targetKey,
+        toolScopeKey: source.toolScopeKey,
+        language: resolved.language,
+        workspaceStatus: resolved.workspaceStatus,
+        workspaceSeedMode: resolved.workspaceSeedMode,
+        workspace: resolved.workspace,
+        code: String(resolved.code ?? ""),
+        stdin: String(resolved.stdin ?? ""),
+        updatedAt: existing?.updatedAt ?? Date.now(),
+      };
+
+      const noMeaningfulChange =
+          existing &&
+          existing.ownerKind === nextRuntime.ownerKind &&
+          existing.targetKey === nextRuntime.targetKey &&
+          existing.toolScopeKey === nextRuntime.toolScopeKey &&
+          existing.language === nextRuntime.language &&
+          existing.workspaceStatus === nextRuntime.workspaceStatus &&
+          existing.workspaceSeedMode === nextRuntime.workspaceSeedMode &&
+          existing.code === nextRuntime.code &&
+          existing.stdin === nextRuntime.stdin &&
+          workspaceContentKey(existing.workspace ?? null) === workspaceContentKey(nextRuntime.workspace ?? null);
+
+      if (noMeaningfulChange) return state;
+
+      return {
+        editorRuntimes: {
+          ...state.editorRuntimes,
+          [source.ownerKey]: nextRuntime,
+        },
+      };
+    });
+  },
+
+  patchEditorWorkspace: (ownerKey, workspace) => {
+    let didPatch = false;
+
+    set((state) => {
+      const existing = state.editorRuntimes[ownerKey];
+      if (!existing) return state;
+
+      const nextCode = deriveCodeFromWorkspace(workspace) ?? "";
+      const nextStdin =
+          typeof workspace?.stdin === "string" ? workspace.stdin : existing.stdin ?? "";
+      const nextWorkspaceKey = workspaceContentKey(workspace ?? null);
+      const existingWorkspaceKey = workspaceContentKey(existing.workspace ?? null);
+
+      if (
+          existingWorkspaceKey === nextWorkspaceKey &&
+          String(existing.code ?? "") === String(nextCode) &&
+          String(existing.stdin ?? "") === String(nextStdin)
+      ) {
+        return state;
+      }
+
+      const nextEditorRuntime: EditorRuntimeState = {
+        ...existing,
+        workspace,
+        code: nextCode,
+        stdin: nextStdin,
+        workspaceStatus: workspace ? "ready" : "pending",
+        workspaceSeedMode: workspace ? "restored" : existing.workspaceSeedMode,
+        updatedAt: Date.now(),
+      };
+
+      const nextState: Partial<ReviewRuntimeState> = {
+        editorRuntimes: {
+          ...state.editorRuntimes,
+          [ownerKey]: nextEditorRuntime,
+        },
+      };
+
+      if (existing.ownerKind === "exercise") {
+        const ex = state.exercises[ownerKey];
+        if (ex) {
+          nextState.exercises = {
+            ...state.exercises,
+            [ownerKey]: {
+              ...ex,
+              workspace: workspace ?? ex.workspace,
+              stdin: nextStdin,
+              code: nextCode,
+              codeWorkspace: workspace ?? ex.workspace,
+              ideWorkspace: workspace ?? ex.workspace,
+              codeStdin: nextStdin,
+              workspaceStatus: workspace ? "ready" : ex.workspaceStatus,
+              updatedAt: Date.now(),
+            },
+          };
+        }
+      } else {
+        const card = state.cards[ownerKey];
+        if (card) {
+          nextState.cards = {
+            ...state.cards,
+            [ownerKey]: {
+              ...card,
+              toolWorkspace: workspace,
+              toolCode: nextCode,
+              toolStdin: nextStdin,
+              toolLang: existing.language,
+              workspaceStatus: workspace ? "ready" : card.workspaceStatus,
+              workspaceSeedMode: workspace ? "restored" : card.workspaceSeedMode,
+              updatedAt: Date.now(),
+            },
+          };
+        }
+      }
+
+      didPatch = true;
+      return nextState;
+    });
+
+    if (didPatch) {
+      get().queueAutosave();
+    }
+  },
 
   bindExerciseTool: (key) => {
     const current = get().tool.boundExerciseKey;
@@ -802,14 +1525,17 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
 
     set((state) => {
       if (
-        state.tool.boundExerciseKey === key &&
-        state.activeExerciseKey === key
+          state.tool.boundExerciseKey === key &&
+          state.activeExerciseKey === key
       ) {
         return state;
       }
 
+      const exercise = state.exercises[key];
+
       return {
         activeExerciseKey: key,
+        boundToolWorkspace: exercise?.workspace ?? null,
         tool: {
           ...state.tool,
           boundExerciseKey: key,
@@ -826,7 +1552,8 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
 
     set((state) => ({
       activeExerciseKey:
-        state.activeExerciseKey === key ? null : state.activeExerciseKey,
+          state.activeExerciseKey === key ? null : state.activeExerciseKey,
+      boundToolWorkspace: state.activeExerciseKey === key ? null : state.boundToolWorkspace,
       tool: {
         ...state.tool,
         boundExerciseKey: null,
@@ -837,6 +1564,8 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
   patchBoundToolWorkspace: (workspace) => {
     const key = get().tool.boundExerciseKey;
     if (!key) return;
+
+    set({ boundToolWorkspace: workspace });
 
     const normalized = normalizeWorkspacePatch({ workspace });
 
@@ -862,6 +1591,60 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
   goToCard: (index, callbacks) => {
     get().flushBeforeNavigation(callbacks);
     set({ activeCardIndex: index });
+  },
+
+  /**
+   * DETERMINISTIC TARGET SYNC
+   *
+   * This is the single entry point for ensuring the runtime store is ready
+   * for a given route target.
+   */
+  syncActiveTarget: (target) => {
+    if (!target) return;
+
+    const { targetRegistry, subjectSlug, moduleSlug } = get();
+    const routeKey = `${target.sectionSlug}/${target.topicSlug}/${target.targetKind}/${target.targetSlug}`;
+    const targetKey = targetRegistry?.byRoute?.[routeKey] ?? null;
+    const registryEntry = targetKey ? targetRegistry?.byKey?.[targetKey] ?? null : null;
+    const editorSource = resolveDeterministicEditorSource(registryEntry);
+
+    if (editorSource) {
+      get().ensureEditorSource(editorSource);
+    }
+
+    if (target.kind === "exercise") {
+      get().ensureExercise({
+        exerciseKey: target.exerciseStateKey,
+        subjectSlug: subjectSlug ?? "",
+        moduleSlug: moduleSlug ?? "",
+        sectionSlug: target.sectionSlug,
+        topicId: target.topicId,
+        cardId: target.cardId,
+        manifest: registryEntry?.toolManifest ?? registryEntry?.item,
+      });
+      // Automatically bind if it's an exercise target
+      get().bindExerciseTool(target.exerciseStateKey);
+    } else if (target.kind === "card") {
+      const cardKey =
+          registryEntry?.cardKey ??
+          getCardStateKey({
+            subjectSlug: subjectSlug ?? "",
+            moduleSlug: moduleSlug ?? "",
+            sectionSlug: target.sectionSlug,
+            topicId: target.topicId,
+            cardId: target.cardId,
+          });
+      get().ensureCard({
+        cardKey,
+        topicId: target.topicId,
+        cardId: target.cardId,
+        toolLanguage: registryEntry?.language ?? "python",
+        toolManifest: registryEntry?.toolManifest ?? registryEntry?.item ?? null,
+        toolKey: registryEntry?.toolScopeKey ?? `${cardKey}:general`,
+      });
+      // Unbind exercise if we moved to a regular card
+      get().unbindExerciseTool(get().tool.boundExerciseKey ?? "");
+    }
   },
 
   queueAutosave: () => {

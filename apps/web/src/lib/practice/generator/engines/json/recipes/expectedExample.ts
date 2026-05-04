@@ -1,5 +1,5 @@
 import type { CodeExpectedExample } from "@/lib/practice/types";
-import {ManifestCodeInput} from "@zoeskoul/curriculum-contracts";
+import type { ManifestCodeInput } from "@/lib/subjects/_core/manifestTypes";
 
 type ResolvedRecipeContext = {
     expectedExampleMeta?: string;

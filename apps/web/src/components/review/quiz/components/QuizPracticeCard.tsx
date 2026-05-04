@@ -9,7 +9,7 @@ import type { VectorPadState } from "@/components/vectorpad/types";
 import ExerciseRenderer from "@/components/practice/ExerciseRenderer";
 import { exerciseDebug, summarizeExercisePatch } from "@/components/review/module/runtime/exerciseDebug";
 import PracticeHelpPanel from "@/components/practice/PracticeHelpPanel";
-import { useReviewTools } from "@/components/review/module/context/ReviewToolsContext";
+import { useOptionalReviewTools } from "@/components/review/module/context/ReviewToolsContext";
 import { getExerciseStateKey } from "@/components/review/module/runtime/exerciseKeys";
 import { useReviewRuntimeStore } from "@/components/review/module/runtime/reviewRuntimeStore";
 
@@ -31,8 +31,12 @@ function getStableExerciseSlotId(
 
   return (
       anyQ.fetch?.exerciseKey ??
-      anyQ.fetch?.stepId ??
       anyQ.exerciseKey ??
+      anyQ.item?.exerciseKey ??
+      anyQ.exercise?.exerciseKey ??
+      anyQ.exercise?.id ??
+      anyQ.fetch?.stepId ??
+      anyQ.item?.id ??
       anyQ.stepId ??
       anyQ.sourceStepId ??
       anyQ.key ??
@@ -99,7 +103,7 @@ export default function QuizPracticeCard(props: {
     onHelp,
   } = props;
 
-  const tools = useReviewTools();
+  const tools = useOptionalReviewTools();
   const toolsAny = tools as any;
   const excused = Boolean(props.excused);
 

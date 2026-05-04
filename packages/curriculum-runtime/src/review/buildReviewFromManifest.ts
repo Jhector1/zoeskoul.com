@@ -23,31 +23,15 @@ export function buildReviewFromManifest(args: {
     summary: tag(manifest.topic.summaryKey),
     meta: {
       runtimeDefaults: manifest.runtimeDefaults ?? null,
-      serviceDefaults: manifest.serviceDefaults ?? null,
     },
     cards: manifest.cards.map((card: any, index: number) => {
       if (card.kind === "sketch") {
-        const sketchManifest =
-            Array.isArray(manifest.sketches)
-                ? manifest.sketches.find((sketch: any) => sketch?.id === card.sketchId)
-                : null;
-
         return makeSketchCard({
           topicId: manifest.topicId,
           index,
           title: tag(card.titleKey),
           sketchId: `${manifest.subjectSlug}.${manifest.moduleSlug}.${manifest.topicId}.${card.sketchId}`,
           height: card.height ?? 520,
-
-          /**
-           * Critical:
-           * Preserve sketch runtime/workspace on the review card so the app can
-           * seed the sketch/card IDE through ensureCard.
-           */
-          spec: {
-            runtime: sketchManifest?.runtime ?? null,
-            workspace: sketchManifest?.workspace ?? null,
-          },
         });
       }
 
@@ -87,19 +71,16 @@ export function buildReviewFromManifest(args: {
             maxAttempts: card.project.maxAttempts ?? 10,
             runtime: manifest.runtimeDefaults ?? null,
             steps: card.project.steps.map((step: any) =>
-                makeProjectStep({
-                  id: step.id,
-                  title: tag(step.titleKey),
-                  topic: topicSlug,
-                  difficulty: step.difficulty ?? card.project.difficulty,
-                  preferKind: step.preferKind ?? card.project.preferKind ?? null,
-                  exerciseKey: step.exerciseKey,
-                  seedPolicy:
-                      step.seedPolicy === "step"
-                          ? "actor"
-                          : (step.seedPolicy ?? "global"),
-                  maxAttempts: step.maxAttempts ?? card.project.maxAttempts ?? 10,
-                }),
+              makeProjectStep({
+                id: step.id,
+                title: tag(step.titleKey),
+                topic: topicSlug,
+                difficulty: step.difficulty ?? card.project.difficulty,
+                preferKind: step.preferKind ?? card.project.preferKind ?? null,
+                exerciseKey: step.exerciseKey,
+                seedPolicy: step.seedPolicy === "step" ? "actor" : (step.seedPolicy ?? "global"),
+                maxAttempts: step.maxAttempts ?? card.project.maxAttempts ?? 10,
+              }),
             ),
           }),
         });
@@ -121,7 +102,6 @@ export function buildReviewFromManifest(args: {
     meta: {
       ...(baseDef.meta ?? {}),
       runtimeDefaults: manifest.runtimeDefaults ?? null,
-      serviceDefaults: manifest.serviceDefaults ?? null,
     },
   };
 

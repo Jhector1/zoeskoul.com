@@ -317,6 +317,40 @@ export function mergeRuntimeIntoProgress(
       }
     }
 
+    /**
+     * Card/sketch Tools workspace compatibility write.
+     *
+     * Created files in the Tools IDE while on a sketch/card are not exercise
+     * workspaces, so they must be persisted under the card toolState key.
+     */
+    if (cstate.toolWorkspace) {
+      const exactToolKey =
+        typeof cstate.toolKey === "string" && cstate.toolKey
+          ? cstate.toolKey
+          : `card:${cardId}`;
+
+      const legacyToolKey = `card:${cardId}`;
+      const oldToolState = topic.toolState ?? {};
+
+      const buildToolEntry = (oldEntry: any) => ({
+        ...oldEntry,
+        lang: cstate.toolLang ?? oldEntry?.lang ?? "python",
+        code: cstate.toolCode ?? oldEntry?.code ?? "",
+        stdin: cstate.toolStdin ?? oldEntry?.stdin ?? "",
+        workspace: clonePlain(cstate.toolWorkspace),
+      });
+
+      const nextToolState = {
+        ...oldToolState,
+        [exactToolKey]: buildToolEntry(oldToolState[exactToolKey]),
+        [legacyToolKey]: buildToolEntry(oldToolState[legacyToolKey]),
+      };
+
+      if (stableJson(oldToolState) !== stableJson(nextToolState)) {
+        topic.toolState = nextToolState;
+        changed = true;
+      }
+    }
   }
 
   if (!changed) return progress;

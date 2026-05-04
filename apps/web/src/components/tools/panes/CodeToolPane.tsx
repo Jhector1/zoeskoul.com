@@ -1,9 +1,8 @@
 "use client";
 
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import FullIDE from "@/components/ide/fullide/FullIDE";
 import type { WorkspaceStateV2 } from "@/components/ide/types";
-import { createDefaultStateForLanguage } from "@/components/ide/workspaceHook/workspace.normalization";
 import type { SqlDialect } from "@/lib/practice/types";
 import { useElementSize } from "@/components/tools/hooks/useElementSize";
 import { pickRunFeedbackFromResult } from "@/lib/code/feedback";
@@ -16,7 +15,74 @@ import {
     resolveFullIDEConfigFromLearningIde,
 } from "@/lib/ide/learningIdeConfig";
 import { useReviewRuntimeStore } from "@/components/review/module/runtime/reviewRuntimeStore";
-import { deriveEntryCode } from "@/components/review/module/runtime/exerciseWorkspaceResolver";
+
+
+function starterPaneTrace(label: string, payload: Record<string, any>) {
+    try {
+        if (typeof window === "undefined") return;
+        if (window.localStorage.getItem("zoe:debug:starter-files") !== "1") return;
+    } catch {
+        return;
+    }
+
+    const win = window as any;
+    win.__ZOE_STARTER_LOOP__ ??= {
+        seq: 0,
+        counts: {},
+        last: {},
+        startedAt: Date.now(),
+    };
+
+    const store = win.__ZOE_STARTER_LOOP__;
+    const key = String(
+        payload.exerciseKey ??
+        payload.cardRuntimeKey ??
+        payload.workspaceContextKey ??
+        payload.boundId ??
+        "global",
+    );
+
+    const fingerprint = JSON.stringify({
+        label,
+        key,
+        workspaceKey: payload.workspaceKey ?? payload.incomingWorkspaceKey ?? payload.currentWorkspaceKey ?? null,
+        bridgeKey: payload.bridgeKey ?? null,
+        canRenderEditor: payload.canRenderEditor ?? null,
+        showLoadingMask: payload.showLoadingMask ?? null,
+        patched: payload.patched ?? null,
+        reason: payload.reason ?? null,
+    });
+
+    const counterKey = `${label}:${key}:${fingerprint}`;
+    store.seq += 1;
+    store.counts[counterKey] = (store.counts[counterKey] ?? 0) + 1;
+    store.last[key] = {
+        label,
+        payload,
+        fingerprint,
+        seq: store.seq,
+        count: store.counts[counterKey],
+        at: Date.now(),
+    };
+
+    const count = store.counts[counterKey];
+    const method = count > 10 ? "warn" : "debug";
+
+    console[method](`[starter-loop:${label}] #${store.seq} count=${count}`, {
+        key,
+        ...payload,
+        fingerprint,
+    });
+
+    if (count === 11) {
+        console.warn("[starter-loop] repeated pane transition more than 10 times", {
+            label,
+            key,
+            payload,
+            inspect: "window.__ZOE_STARTER_LOOP__",
+        });
+    }
+}
 
 type SqlTableSnapshot = {
     name: string;
@@ -29,108 +95,77 @@ type SqlTableSnapshot = {
 };
 
 type SqlTableSnapshots = Record<string, SqlTableSnapshot>;
+function reviewWorkspaceHasNonEmptyFile(workspace: WorkspaceStateV2 | null | undefined) {
+    // Starter/review workspaces are authoritative. Any workspace with at least
+    // one file node counts as usable, even if that file contains fallback text.
+    return Boolean(workspace?.nodes?.some((node: any) => node?.kind === "file"));
+}
 
-function workspaceSemanticKey(workspace: WorkspaceStateV2 | null | undefined) {
+function forceWorkspaceHasContent(workspace: WorkspaceStateV2 | null | undefined) {
+    // Starter/review workspaces are authoritative. Any workspace with at least
+    // one file node counts as content.
+    return Boolean(workspace?.nodes?.some((node: any) => node?.kind === "file"));
+}
+
+function workspaceKeyOf(workspace: WorkspaceStateV2 | null | undefined) {
     if (!workspace || workspace.version !== 2 || !Array.isArray(workspace.nodes)) {
         return "null";
     }
 
-    const nodeById = new Map(
-        workspace.nodes.map((node: any) => [String(node?.id ?? ""), node]),
-    );
+    const folderPathById = new Map<string, string>();
 
-    const pathOf = (node: any) => {
-        if (!node) return "";
+    let changed = true;
+    while (changed) {
+        changed = false;
 
-        const parts: string[] = [];
-        let current = node;
-        let guard = 0;
+        for (const node of workspace.nodes as any[]) {
+            if (!node || node.kind !== "folder") continue;
 
-        while (current && guard < 200) {
-            if (typeof current.name === "string" && current.name) {
-                parts.unshift(current.name);
-            }
+            const id = String(node.id ?? "");
+            if (!id || folderPathById.has(id)) continue;
 
-            if (!current.parentId) break;
-            current = nodeById.get(String(current.parentId ?? "")) ?? null;
-            guard += 1;
+            const name = String(node.name ?? "");
+            const parentId = node.parentId == null ? null : String(node.parentId);
+            if (parentId && !folderPathById.has(parentId)) continue;
+
+            const parentPath = parentId ? folderPathById.get(parentId) || "" : "";
+            folderPathById.set(id, parentPath ? `${parentPath}/${name}` : name);
+            changed = true;
         }
+    }
 
-        return parts.join("/");
+    const filePath = (node: any) => {
+        const name = String(node?.name ?? "");
+        const parentId = node?.parentId == null ? null : String(node.parentId);
+        const parentPath = parentId ? folderPathById.get(parentId) || "" : "";
+        return parentPath ? `${parentPath}/${name}` : name;
     };
 
-    const files = workspace.nodes
-        .filter((node: any) => node?.kind === "file")
-        .map((node: any) => ({
-            path: pathOf(node),
+    const files = (workspace.nodes as any[])
+        .filter((node) => node?.kind === "file")
+        .map((node) => ({
+            path: filePath(node),
             content: String(node.content ?? ""),
         }))
         .sort((a, b) => a.path.localeCompare(b.path));
 
-    const entryNode = workspace.nodes.find(
-        (node: any) => node?.kind === "file" && node.id === workspace.entryFileId,
+    const activeNode = (workspace.nodes as any[]).find(
+        (node) => node?.kind === "file" && node.id === workspace.activeFileId,
     );
-    const activeNode = workspace.nodes.find(
-        (node: any) => node?.kind === "file" && node.id === workspace.activeFileId,
+    const entryNode = (workspace.nodes as any[]).find(
+        (node) => node?.kind === "file" && node.id === workspace.entryFileId,
     );
 
     return JSON.stringify({
         version: 2,
         language: workspace.language ?? null,
         stdin: typeof workspace.stdin === "string" ? workspace.stdin : "",
-        entryFilePath: pathOf(entryNode),
-        activeFilePath: pathOf(activeNode),
+        activePath: activeNode ? filePath(activeNode) : null,
+        entryPath: entryNode ? filePath(entryNode) : null,
         files,
     });
 }
 
-function workspaceStateKeyForScope(args: {
-    workspace: WorkspaceStateV2 | null | undefined;
-    isCardScope: boolean;
-}) {
-    return args.isCardScope
-        ? workspaceSemanticKey(args.workspace)
-        : JSON.stringify(args.workspace ?? null);
-}
-
-function repairWorkspaceSelection(
-    workspace: WorkspaceStateV2 | null | undefined,
-): WorkspaceStateV2 | null {
-    if (!workspace || workspace.version !== 2 || !Array.isArray(workspace.nodes)) {
-        return workspace ?? null;
-    }
-
-    const files = workspace.nodes.filter((node: any) => node?.kind === "file");
-    const firstFile = files[0] as any;
-
-    if (!firstFile) return workspace;
-
-    const activeExists = files.some((file: any) => file.id === workspace.activeFileId);
-    const entryExists = files.some((file: any) => file.id === workspace.entryFileId);
-
-    const entryFileId = entryExists
-        ? workspace.entryFileId
-        : activeExists
-            ? workspace.activeFileId
-            : firstFile.id;
-
-    const activeFileId = activeExists
-        ? workspace.activeFileId
-        : entryFileId;
-
-    if (
-        workspace.entryFileId === entryFileId &&
-        workspace.activeFileId === activeFileId
-    ) {
-        return workspace;
-    }
-
-    return {
-        ...workspace,
-        entryFileId,
-        activeFileId,
-    };
-}
 
 function buildToolWorkspace(args: {
     base: WorkspaceStateV2;
@@ -200,91 +235,67 @@ function extractWorkspaceSnapshot(workspace: WorkspaceStateV2 | null) {
 function isExerciseEditorScope(value: string | null | undefined) {
     if (!value) return false;
     if (value === "general") return false;
+    if (value.startsWith("card:")) return false;
     if (value.endsWith(":general")) return false;
+    if (value.includes(":card:general")) return false;
     if (value.startsWith("code-runner:")) return false;
     return value.split(":").length >= 5;
 }
 
 function isCardEditorScope(value: string | null | undefined) {
     if (!value) return false;
-    return value.endsWith(":general");
+    if (value.startsWith("card:")) return true;
+    if (value.endsWith(":general")) return true;
+    return false;
 }
 
+function cardIdFromEditorScope(value: string) {
+    if (value.startsWith("card:")) return value.replace(/^card:/, "");
 
-function workspaceCardStarterSchemaVersion(workspace: WorkspaceStateV2 | null | undefined) {
-    return workspace && typeof (workspace as any).cardStarterSchemaVersion === "number"
-        ? Number((workspace as any).cardStarterSchemaVersion)
-        : 0;
-}
-
-function workspaceCardStarterSourceKey(workspace: WorkspaceStateV2 | null | undefined) {
-    return workspace && typeof (workspace as any).cardStarterSourceKey === "string"
-        ? String((workspace as any).cardStarterSourceKey)
-        : null;
-}
-
-function workspaceFileCount(workspace: WorkspaceStateV2 | null | undefined) {
-    if (!workspace || workspace.version !== 2 || !Array.isArray(workspace.nodes)) {
-        return 0;
+    const parts = value.split(":").filter(Boolean);
+    if (parts.length >= 2 && parts[parts.length - 1] === "general") {
+        return parts[parts.length - 2];
     }
 
-    return workspace.nodes.filter((node: any) => node?.kind === "file").length;
+    return value;
 }
 
-function chooseWorkspaceWithMostFiles(
-    ...workspaces: Array<WorkspaceStateV2 | null | undefined>
-) {
-    let best: WorkspaceStateV2 | null = null;
-    let bestCount = -1;
+function readCardToolWorkspaceBackupForEditorScope(scopeKey: string | null | undefined) {
+    if (typeof window === "undefined") return null;
+    if (!scopeKey || !isCardEditorScope(scopeKey)) return null;
 
-    for (const workspace of workspaces) {
-        const count = workspaceFileCount(workspace);
+    const cardId = cardIdFromEditorScope(scopeKey);
+    const prefix = "zoe:review-card-tool-workspace:";
 
-        if (workspace && count > bestCount) {
-            best = workspace;
-            bestCount = count;
+    function parse(raw: string | null) {
+        if (!raw) return null;
+
+        try {
+            const parsed = JSON.parse(raw);
+            if (!parsed?.workspace || parsed.workspace.version !== 2) return null;
+            return parsed.workspace as WorkspaceStateV2;
+        } catch {
+            return null;
         }
     }
 
-    return best;
-}
+    // Exact scan by card id. This covers:
+    // zoe:review-card-tool-workspace:<topic>:card:<cardId>
+    // zoe:review-card-tool-workspace:<topic>:subject:module:topic:<cardId>:general
+    for (let i = 0; i < window.localStorage.length; i += 1) {
+        const key = window.localStorage.key(i);
+        if (!key || !key.startsWith(prefix)) continue;
 
-function shouldIgnoreIncomingWorkspaceFromIde(args: {
-    incoming: WorkspaceStateV2 | null;
-    current: WorkspaceStateV2 | null;
-    isCardScope?: boolean;
-}) {
-    const { incoming, current, isCardScope } = args;
+        const storedToolKey = key.slice(prefix.length).split(":").slice(1).join(":");
+        const storedCardId = cardIdFromEditorScope(storedToolKey);
 
-    const incomingCount = workspaceFileCount(incoming);
-    const currentCount = workspaceFileCount(current);
+        if (storedCardId !== cardId) continue;
 
-    /**
-     * Strong card-scope guard:
-     *
-     * If the current card workspace has multiple files, never let FullIDE's
-     * smaller mount/default workspace replace it, even if custom metadata was
-     * stripped from the emitted workspace.
-     */
-    if (isCardScope && currentCount > 1 && incomingCount < currentCount) {
-        return true;
+        const workspace = parse(window.localStorage.getItem(key));
+        if (workspace) return workspace;
     }
 
-    const currentSourceKey = workspaceCardStarterSourceKey(current);
-    const currentSchema = workspaceCardStarterSchemaVersion(current);
-
-    if (!currentSourceKey || currentSchema < 8) {
-        return false;
-    }
-
-    const incomingSourceKey = workspaceCardStarterSourceKey(incoming);
-    const incomingSchema = workspaceCardStarterSchemaVersion(incoming);
-
-    if (!incomingSourceKey || incomingSchema < currentSchema) {
-        return currentCount > 1 && incomingCount < currentCount;
-    }
-
-    return incomingSourceKey !== currentSourceKey;
+    return null;
 }
 
 function patchToolWorkspaceSource(args: {
@@ -305,15 +316,16 @@ function patchToolWorkspaceSource(args: {
      *
      * FullIDE already sends the full updated workspace through onWorkspaceChange.
      */
-    return repairWorkspaceSelection({
+    return {
         ...args.workspace,
         language: args.language,
         stdin: args.stdin,
-    }) as WorkspaceStateV2;
+    };
 }
 
 export default function CodeToolPane(props: {
     height: number;
+    editorOwnerKey?: string | null;
     toolScopeKey?: string;
     toolHydrated: boolean;
     toolLang: RunnerLanguage;
@@ -333,6 +345,7 @@ export default function CodeToolPane(props: {
 }) {
     const {
         toolScopeKey,
+        editorOwnerKey,
         toolHydrated,
         toolLang,
         toolCode,
@@ -394,22 +407,44 @@ export default function CodeToolPane(props: {
         return "general";
     }, [toolScopeKey, boundId]);
 
-    const exerciseKey =
-        !isCardEditorScope(editorExerciseStateKey) &&
-        isExerciseEditorScope(editorExerciseStateKey)
-            ? editorExerciseStateKey
-            : null;
+    const exerciseKey = isExerciseEditorScope(editorExerciseStateKey)
+        ? editorExerciseStateKey
+        : null;
 
-    const storeExercise = useReviewRuntimeStore((s) =>
-        exerciseKey ? s.exercises[exerciseKey] : null,
+    const cardRuntimeKey = useMemo(() => {
+        if (!isCardEditorScope(editorExerciseStateKey)) return null;
+        if (editorExerciseStateKey.startsWith("card:")) {
+            return editorExerciseStateKey.replace(/^card:/, "");
+        }
+        return editorExerciseStateKey.replace(/:general$/, "");
+    }, [editorExerciseStateKey]);
+    const derivedEditorOwnerKey = exerciseKey ?? cardRuntimeKey ?? null;
+    const resolvedEditorOwnerKey =
+        typeof editorOwnerKey === "string" && editorOwnerKey.trim()
+            ? editorOwnerKey.trim()
+            : derivedEditorOwnerKey;
+    const editorRuntime = useReviewRuntimeStore((s) =>
+        resolvedEditorOwnerKey ? s.editorRuntimes[resolvedEditorOwnerKey] ?? null : null,
     );
-    const patchExercise = useReviewRuntimeStore((s) => s.patchExercise);
-    const patchExerciseSafe =
-        typeof patchExercise === "function"
-            ? patchExercise
+    const patchEditorWorkspace = useReviewRuntimeStore((s) => s.patchEditorWorkspace);
+
+    /**
+     * REVIEW DIRECT WORKSPACE MODE
+     *
+     * This bypasses the legacy bridge/hydration path for route-owned review
+     * targets. If the current exercise/card runtime has a ready workspace,
+     * that workspace is the only source for FullIDE.
+     */
+    const reviewDirectWorkspace =
+        editorRuntime?.workspaceStatus === "ready" && editorRuntime.workspace
+            ? editorRuntime.workspace
             : null;
 
-    const isSql = toolLang === "sql";
+    const reviewDirectWorkspaceReady = !!reviewDirectWorkspace;
+    const isReviewRouteMode = Boolean(resolvedEditorOwnerKey);
+    const reviewDirectWorkspaceError = editorRuntime?.workspaceStatus === "error";
+    const effectiveLanguage = (isReviewRouteMode ? editorRuntime?.language : null) ?? toolLang;
+    const isSql = effectiveLanguage === "sql";
 
     const ideShell = useMemo(
         () => resolveFullIDEConfigFromLearningIde({ ideConfig }),
@@ -418,171 +453,82 @@ export default function CodeToolPane(props: {
     const shouldForceDesktopLayout = ideShell.services.explorer?.enabled === true;
     const usesWorkspaceShell =
         shouldForceDesktopLayout || ideShell.access.canUseMultiFile;
+    const workspaceOwnerKey = resolvedEditorOwnerKey ?? editorExerciseStateKey ?? toolScopeKey ?? boundId ?? "general";
+
     const workspaceContextKey = useMemo(
         () =>
             JSON.stringify({
-                scope: editorExerciseStateKey ?? "general",
-                boundId: boundId ?? "unbound",
-                language: toolLang,
+                ownerKey: workspaceOwnerKey,
+                language: effectiveLanguage,
                 sqlSchemaSql: sqlSchemaSql ?? sqlSetupSql ?? "",
                 sqlSeedSql: sqlSeedSql ?? "",
                 workspaceShell: usesWorkspaceShell,
             }),
         [
-            boundId,
+            workspaceOwnerKey,
             sqlSchemaSql,
             sqlSeedSql,
             sqlSetupSql,
-            toolLang,
-            toolScopeKey,
-            editorExerciseStateKey,
+            effectiveLanguage,
             usesWorkspaceShell,
         ],
     );
     const runnerH = Math.max(usesWorkspaceShell ? 480 : 320, size.h);
 
     const [runFeedback, setRunFeedback] = useState<CodeFeedback | null>(null);
+    const [ideReady, setIdeReady] = useState(false);
     const lastEmittedRef = useRef<{ code: string; stdin: string } | null>(null);
     const lastIncomingRef = useRef<{ code: string; stdin: string } | null>(null);
     const persistTimerRef = useRef<number | null>(null);
     const lastUpstreamWorkspaceKeyRef = useRef<string>("");
-    const isCardWorkspaceScope = isCardEditorScope(editorExerciseStateKey);
-    const baseWorkspace = useMemo(
-        () => createDefaultStateForLanguage(toolLang),
-        [toolLang],
-    );
 
-    const externalWorkspace = useMemo(
-        () =>
-            repairWorkspaceSelection(
-                buildToolWorkspace({
-                    base: baseWorkspace,
-                    language: toolLang,
-                    code: toolCode,
-                    stdin: toolStdin,
-                    sqlSchemaSql: sqlSchemaSql ?? sqlSetupSql ?? "",
-                    sqlSeedSql: sqlSeedSql ?? "",
-                }),
-            ) as WorkspaceStateV2,
-        [
-            baseWorkspace,
-            toolLang,
-            toolCode,
-            toolStdin,
-            sqlSchemaSql,
-            sqlSeedSql,
-            sqlSetupSql,
-        ],
-    );
-    const resolvedIncomingWorkspace = useMemo(() => {
-        if (storeExercise?.workspace) {
-            return repairWorkspaceSelection(storeExercise.workspace) as WorkspaceStateV2;
-        }
+    const exerciseWorkspaceReady = Boolean(exerciseKey && editorRuntime?.workspaceStatus === "ready" && editorRuntime.workspace);
+    const cardWorkspaceReady = Boolean(cardRuntimeKey && editorRuntime?.workspaceStatus === "ready" && editorRuntime.workspace);
+    const runtimeWorkspaceError = Boolean(isReviewRouteMode && editorRuntime?.workspaceStatus === "error");
 
-        if (toolWorkspace) {
-            if (isCardWorkspaceScope) {
-                return repairWorkspaceSelection(toolWorkspace) as WorkspaceStateV2;
-            }
-
-            return patchToolWorkspaceSource({
-                workspace: toolWorkspace,
-                language: toolLang,
-                code: toolCode,
-                stdin: toolStdin,
-                sqlSchemaSql: sqlSchemaSql ?? sqlSetupSql ?? "",
-                sqlSeedSql: sqlSeedSql ?? "",
-            });
-        }
-
-        if (isCardWorkspaceScope) {
-            /**
-             * Card/sketch scope with no starter/runtime workspace:
-             *
-             * Once the tool has hydrated and there is still no card workspace,
-             * show an empty default editor instead of returning null forever.
-             *
-             * Starter-backed cards still take the toolWorkspace path above.
-             */
-            return toolHydrated
-                ? repairWorkspaceSelection(externalWorkspace) as WorkspaceStateV2
+    const directRuntimeWorkspace = useMemo(() => {
+        if (isReviewRouteMode) {
+            return editorRuntime?.workspaceStatus === "ready"
+                ? (editorRuntime?.workspace ?? null)
                 : null;
         }
 
-        if (!usesWorkspaceShell) {
-            return repairWorkspaceSelection(externalWorkspace) as WorkspaceStateV2;
+        if (reviewWorkspaceHasNonEmptyFile(toolWorkspace)) {
+            return toolWorkspace ?? null;
         }
 
-        if (!toolHydrated) {
-            return repairWorkspaceSelection(externalWorkspace) as WorkspaceStateV2;
-        }
-
-        return repairWorkspaceSelection(externalWorkspace) as WorkspaceStateV2;
+        return toolWorkspace ?? null;
     }, [
-        storeExercise?.workspace,
-        externalWorkspace,
-        isCardWorkspaceScope,
-        sqlSchemaSql,
-        sqlSeedSql,
-        sqlSetupSql,
-        toolCode,
-        toolHydrated,
-        toolLang,
-        toolStdin,
+        isReviewRouteMode,
+        editorRuntime?.workspaceStatus,
+        editorRuntime?.workspace,
         toolWorkspace,
-        usesWorkspaceShell,
     ]);
-    const latestWorkspaceRef = useRef<WorkspaceStateV2 | null>(resolvedIncomingWorkspace);
-    const [workspaceBridge, setWorkspaceBridge] = useState<WorkspaceStateV2 | null>(
-        resolvedIncomingWorkspace,
+
+    const finalReviewWorkspace = directRuntimeWorkspace;
+
+    const canRenderEditor = Boolean(
+        finalReviewWorkspace &&
+        !runtimeWorkspaceError &&
+        forceWorkspaceHasContent(finalReviewWorkspace),
     );
-    const workspaceBridgeKeyRef = useRef(workspaceSemanticKey(resolvedIncomingWorkspace));
-    const [prevContextKey, setPrevContextKey] = useState(workspaceContextKey);
 
-    // Derived-state sync: update workspaceBridge synchronously before FullIDE remounts so
-    // it always receives the correct initialWorkspace when workspaceContextKey changes.
-    if (prevContextKey !== workspaceContextKey) {
-        setPrevContextKey(workspaceContextKey);
-        setWorkspaceBridge(resolvedIncomingWorkspace);
-        workspaceBridgeKeyRef.current = workspaceSemanticKey(resolvedIncomingWorkspace);
-    }
+    const showLoadingMask =
+        !runtimeWorkspaceError &&
+        !canRenderEditor &&
+        (isReviewRouteMode || usesWorkspaceShell);
 
     useEffect(() => {
-        latestWorkspaceRef.current = workspaceBridge;
-        workspaceBridgeKeyRef.current = workspaceSemanticKey(workspaceBridge);
-    }, [workspaceBridge]);
-
-    const setWorkspaceBridgeIfChanged = useCallback((workspace: WorkspaceStateV2 | null) => {
-        const nextKey = workspaceSemanticKey(workspace);
-
-        latestWorkspaceRef.current = workspace;
-
-        if (workspaceBridgeKeyRef.current === nextKey) {
-            return;
-        }
-
-        workspaceBridgeKeyRef.current = nextKey;
-        setWorkspaceBridge(workspace);
-    }, []);
-
-    useEffect(() => {
-        setWorkspaceBridgeIfChanged(resolvedIncomingWorkspace);
-    }, [resolvedIncomingWorkspace, setWorkspaceBridgeIfChanged]);
-
-    useEffect(() => {
-        // New exercise/tool scope: do not let previous exercise emission guards
-        // suppress or reuse the new exercise workspace.
+        setIdeReady(false);
         lastEmittedRef.current = null;
         lastIncomingRef.current = null;
         lastUpstreamWorkspaceKeyRef.current = "";
-
-        // Force the currently active exercise workspace into FullIDE.
-        setWorkspaceBridgeIfChanged(resolvedIncomingWorkspace);
-    }, [workspaceContextKey, resolvedIncomingWorkspace, setWorkspaceBridgeIfChanged]);
+    }, [workspaceContextKey]);
 
     useEffect(() => {
         setRunFeedback(null);
         if (boundId) clearRunFeedback?.(boundId);
-    }, [toolLang, toolCode, toolStdin, boundId, clearRunFeedback]);
+    }, [effectiveLanguage, toolCode, toolStdin, boundId, clearRunFeedback]);
 
     useEffect(() => {
         return () => {
@@ -600,15 +546,28 @@ export default function CodeToolPane(props: {
         };
     }, [toolCode, toolStdin]);
 
+    starterPaneTrace("pane.renderGate", {
+        exerciseKey,
+        cardRuntimeKey,
+        editorOwnerKey: resolvedEditorOwnerKey,
+        workspaceContextKey,
+        directRuntimeWorkspaceKey: workspaceKeyOf(directRuntimeWorkspace ?? null),
+        finalReviewWorkspaceKey: workspaceKeyOf(finalReviewWorkspace ?? null),
+        finalReviewWorkspaceHasContent: forceWorkspaceHasContent(finalReviewWorkspace),
+        directRuntimeWorkspaceHasContent: reviewWorkspaceHasNonEmptyFile(directRuntimeWorkspace),
+        exerciseWorkspaceReady,
+        cardWorkspaceReady,
+        runtimeWorkspaceError,
+        canRenderEditor,
+        showLoadingMask,
+        storeExerciseStatus: exerciseKey ? editorRuntime?.workspaceStatus : null,
+        storeCardStatus: cardRuntimeKey ? editorRuntime?.workspaceStatus : null,
+    });
+
     const emitWorkspaceUpstream = useCallback((workspace: WorkspaceStateV2 | null) => {
-        const workspaceKey = workspaceStateKeyForScope({
-            workspace,
-            isCardScope: isCardWorkspaceScope,
-        });
+        const workspaceKey = workspaceKeyOf(workspace ?? null);
         if (lastUpstreamWorkspaceKeyRef.current === workspaceKey) return;
         lastUpstreamWorkspaceKeyRef.current = workspaceKey;
-
-        onChangeWorkspace?.(workspace);
 
         const next = extractWorkspaceSnapshot(workspace);
         const prevEmitted = lastEmittedRef.current;
@@ -647,16 +606,24 @@ export default function CodeToolPane(props: {
             clearRunFeedback?.(boundId);
         }
 
+        if (isReviewRouteMode && resolvedEditorOwnerKey) {
+            patchEditorWorkspace(resolvedEditorOwnerKey, workspace);
+            return;
+        }
+
+        onChangeWorkspace?.(workspace);
         onChangeCode(next.code);
         onChangeStdin(next.stdin);
 
     }, [
         boundId,
         clearRunFeedback,
-        isCardWorkspaceScope,
+        resolvedEditorOwnerKey,
+        isReviewRouteMode,
         onChangeCode,
         onChangeStdin,
         onChangeWorkspace,
+        patchEditorWorkspace,
         syncCodeInputSnapshot,
     ]);
     const emitWorkspaceUpstreamRef = useRef(emitWorkspaceUpstream);
@@ -665,83 +632,8 @@ export default function CodeToolPane(props: {
         emitWorkspaceUpstreamRef.current = emitWorkspaceUpstream;
     }, [emitWorkspaceUpstream]);
 
-    const handleWorkspaceChange = useCallback((incomingWorkspace: WorkspaceStateV2 | null) => {
-        let workspace = incomingWorkspace;
-
-        const protectedWorkspace = chooseWorkspaceWithMostFiles(
-            latestWorkspaceRef.current,
-            toolWorkspace,
-            workspaceBridge,
-        );
-
-        if (
-            workspace &&
-            shouldIgnoreIncomingWorkspaceFromIde({
-                incoming: workspace,
-                current: protectedWorkspace,
-                isCardScope: isCardEditorScope(editorExerciseStateKey),
-            })
-        ) {
-            if (typeof window !== "undefined") {
-                const enabled =
-                    window.localStorage.getItem("zoe:debug:starter-files") === "1";
-
-                if (enabled) {
-                    console.warn("[starter-files] CodeToolPane hard-ignored incoming IDE workspace", {
-                        reason: "incoming workspace has fewer files than protected card workspace",
-                        incomingFileCount: workspaceFileCount(workspace),
-                        protectedFileCount: workspaceFileCount(protectedWorkspace),
-                        incomingFiles: workspace.nodes
-                            ?.filter((node: any) => node?.kind === "file")
-                            ?.map((node: any) => ({
-                                name: node.name,
-                                contentPreview: String(node.content ?? "").slice(0, 80),
-                                contentLength: String(node.content ?? "").length,
-                            })),
-                        protectedFiles: protectedWorkspace?.nodes
-                            ?.filter((node: any) => node?.kind === "file")
-                            ?.map((node: any) => ({
-                                name: node.name,
-                                contentPreview: String(node.content ?? "").slice(0, 80),
-                                contentLength: String(node.content ?? "").length,
-                            })),
-                        incomingSourceKey: workspaceCardStarterSourceKey(workspace),
-                        protectedSourceKey: workspaceCardStarterSourceKey(protectedWorkspace),
-                        incomingSchema: workspaceCardStarterSchemaVersion(workspace),
-                        protectedSchema: workspaceCardStarterSchemaVersion(protectedWorkspace),
-                    });
-                }
-            }
-
-            return;
-        }
-
+    const handleWorkspaceChange = useCallback((workspace: WorkspaceStateV2 | null) => {
         if (workspace) {
-            setWorkspaceBridgeIfChanged(workspace);
-
-            if (exerciseKey && !isCardEditorScope(editorExerciseStateKey)) {
-                const entryCode = deriveEntryCode(workspace) ?? "";
-
-                if (patchExerciseSafe) {
-                    patchExerciseSafe(exerciseKey, {
-                        workspace,
-                        code: entryCode,
-                        stdin: workspace.stdin ?? "",
-                    });
-                } else if (typeof window !== "undefined") {
-                    const enabled =
-                        window.localStorage.getItem("zoe:debug:starter-files") === "1";
-
-                    if (enabled) {
-                        console.warn("[starter-files] CodeToolPane missing patchExercise", {
-                            exerciseKey,
-                            workspace,
-                            entryCode,
-                        });
-                    }
-                }
-            }
-
             if (boundId) {
                 const snap = extractWorkspaceSnapshot(workspace);
 
@@ -755,8 +647,6 @@ export default function CodeToolPane(props: {
                     result: null,
                 });
             }
-        } else {
-            latestWorkspaceRef.current = null;
         }
 
         if (!usesWorkspaceShell) {
@@ -770,18 +660,13 @@ export default function CodeToolPane(props: {
 
         persistTimerRef.current = window.setTimeout(() => {
             persistTimerRef.current = null;
-            emitWorkspaceUpstreamRef.current(latestWorkspaceRef.current);
+            emitWorkspaceUpstreamRef.current(workspace);
         }, 220);
     }, [
-        exerciseKey,
-        patchExerciseSafe,
         boundId,
         emitWorkspaceUpstream,
-        setWorkspaceBridgeIfChanged,
         syncCodeInputSnapshot,
-        toolWorkspace,
         usesWorkspaceShell,
-        workspaceBridge,
     ]);
 
     useEffect(() => {
@@ -791,7 +676,6 @@ export default function CodeToolPane(props: {
                 window.clearTimeout(persistTimerRef.current);
                 persistTimerRef.current = null;
             }
-            emitWorkspaceUpstreamRef.current(latestWorkspaceRef.current);
         };
     }, [workspaceContextKey, usesWorkspaceShell]);
 
@@ -815,176 +699,69 @@ export default function CodeToolPane(props: {
         }
     }, [boundId, setRunFeedbackForCard]);
 
-    const reviewToolLocalWorkspaceId = useMemo(() => {
-        /**
-         * This must be stable per review card/exercise scope.
-         *
-         * Do NOT include workspaceBridge/workspace hash here. Changing this id
-         * when activeFileId/code changes makes FullIDE rehydrate its local
-         * workspace state repeatedly, which causes the tree to blink and can
-         * fall back to the one-file src/main.py workspace.
-         */
-        return `review-tool:${editorExerciseStateKey ?? "general"}`;
-    }, [editorExerciseStateKey]);
-
     /**
-     * ONE-SOURCE CARD WORKSPACE RULE:
+     * DIRECT REVIEW WORKSPACE MODE
      *
-     * For sketch/card tools, do not mount FullIDE until the runtime card
-     * workspace exists.
+     * For route-owned review targets, the runtime store is the source of truth.
+     * Do not wait for workspaceBridge handoff to decide whether FullIDE can mount.
      *
-     * If FullIDE mounts before toolWorkspace is ready, it creates/emits the
-     * generic one-file workspace:
-     *
-     *   src/main.py
-     *
-     * That default workspace is the root of the tree blanking/collapse bug.
+     * route target -> runtime store workspace -> FullIDE
      */
-    const cardWorkspaceReady =
-        !isCardWorkspaceScope ||
-        !!toolWorkspace ||
-        !!workspaceBridge ||
-        !!resolvedIncomingWorkspace ||
-        toolHydrated;
-
-    if (typeof window !== "undefined") {
-        const enabled =
-            window.localStorage.getItem("zoe:debug:starter-files") === "1";
-
-        if (enabled) {
-            console.log("[starter-files] CodeToolPane.workspace-handoff", {
-                editorExerciseStateKey,
-                toolScopeKey,
-                toolHydrated,
-                usesWorkspaceShell,
-                cardWorkspaceIsSourceOfTruth: isCardWorkspaceScope,
-                cardWorkspaceReady,
-                cardWorkspaceReadyReason: !isCardWorkspaceScope
-                    ? "not-card"
-                    : toolWorkspace
-                        ? "toolWorkspace"
-                        : workspaceBridge
-                            ? "workspaceBridge"
-                            : resolvedIncomingWorkspace
-                                ? "resolvedIncomingWorkspace"
-                            : toolHydrated
-                                ? "hydrated-empty-default"
-                                : "not-ready",
-                toolWorkspaceFileCount: workspaceFileCount(toolWorkspace),
-                workspaceBridgeFileCount: workspaceFileCount(workspaceBridge),
-                exerciseKey,
-                willPatchExercise: !!exerciseKey && !isCardEditorScope(editorExerciseStateKey),
-                toolWorkspaceFiles: toolWorkspace?.nodes
-                    ?.filter((node: any) => node?.kind === "file")
-                    ?.map((node: any) => ({
-                        name: node.name,
-                        contentPreview: String(node.content ?? "").slice(0, 80),
-                        contentLength: String(node.content ?? "").length,
-                    })),
-                workspaceBridgeFiles: workspaceBridge?.nodes
-                    ?.filter((node: any) => node?.kind === "file")
-                    ?.map((node: any) => ({
-                        name: node.name,
-                        contentPreview: String(node.content ?? "").slice(0, 80),
-                        contentLength: String(node.content ?? "").length,
-                    })),
-                workspaceBridgeEntryFileId: workspaceBridge?.entryFileId,
-                workspaceBridgeActiveFileId: workspaceBridge?.activeFileId,
-                workspaceBridgeKey: workspaceSemanticKey(workspaceBridge),
-                reviewToolLocalWorkspaceId,
-                starterSignature: (workspaceBridge as any)?.starterSignature ?? null,
-            });
-        }
-    }
-
-    /**
-     * FullIDE treats initialWorkspace like an initial value.
-     *
-     * During exercise navigation, toolHydrated is briefly false and the bridge can
-     * contain a blank/default workspace. If FullIDE mounts during that moment, it
-     * can stay blank even after the real exercise workspace arrives.
-     *
-     * Include hydration state in the key so FullIDE remounts once when the real
-     * exercise workspace is ready.
-     */
-
-    const fullIdeKey = workspaceContextKey;
-
-    if (!cardWorkspaceReady) {
-        return (
-            <div ref={ref} className="flex h-full min-h-0 w-full flex-col overflow-hidden">
-                <div className="flex h-full min-h-[320px] flex-1 items-center justify-center rounded-2xl border border-neutral-200 bg-white text-sm font-semibold text-neutral-500 dark:border-white/10 dark:bg-neutral-950 dark:text-neutral-400">
-                    Loading sketch workspace...
-                </div>
-            </div>
-        );
-    }
+    const fullIdeKey = `${workspaceOwnerKey}:${effectiveLanguage}:${usesWorkspaceShell ? "workspace" : "single"}`;
 
     return (
         <div ref={ref} className="flex h-full min-h-0 w-full flex-col overflow-hidden">
             <div className="relative h-full min-h-0 flex-1">
-                <FullIDE
-                    key={fullIdeKey}
-                    title={isSql ? "Run SQL" : "Run code"}
-                    height={runnerH - 50}
-                    fullHeight
-                    language={toolLang}
-                    access={{
-                        hasUser: true,
-                        /**
-                         * Important:
-                         *
-                         * If the learning IDE shell enables the explorer, the
-                         * workspace must be allowed to stay multi-file.
-                         *
-                         * Otherwise useIdeWorkspace.normalizeWorkspaceForAccess()
-                         * collapses the starter workspace into one default file:
-                         *
-                         *   src/main.py
-                         *
-                         * That is why sketch starter files like README.md,
-                         * notes.md, and formula.md disappear.
-                         */
-                        canUseMultiFile: isSql || usesWorkspaceShell || isCardWorkspaceScope,
-                        canSaveCloud: ideShell.access.canSaveCloud,
-                        canCreateProjects: ideShell.access.canCreateProjects,
-                    }}
-                    loginHref="/authenticate"
-                    billingHref="/billing"
-                    draftStorageMode="off"
-                    localWorkspaceId={reviewToolLocalWorkspaceId}
-                    servicePreset={ideShell.servicePreset}
-                    forceDesktopLayout={shouldForceDesktopLayout}
-                    services={{
-                        ...ideShell.services,
-                        runner: {
-                            ...(ideShell.services.runner ?? {}),
-                            showThemeToggle: true,
-                            showSqlDialectPicker: false,
-                        },
-                    }}
-                    initialWorkspace={workspaceBridge}
-                    externalWorkspace={workspaceBridge}
-                    exerciseStateKey={editorExerciseStateKey}
-                    projectScope={{
-                        kind: "review-tool" as any,
-                        scopeKey: `review-tool:${editorExerciseStateKey ?? "general"}`,
-                    }}
-                    onWorkspaceChange={handleWorkspaceChange}
-                    onBeforeRun={handleBeforeRun}
-                    onRunResult={handleRunResult}
-                    initialSqlDialect={sqlDialect}
-                    sqlInitialTableSnapshots={sqlInitialTableSnapshots}
-                />
+                {canRenderEditor ? (
+                    <FullIDE
+                        key={fullIdeKey}
+                        title={isSql ? "Run SQL" : "Run code"}
+                        height={runnerH - 50}
+                        fullHeight
+                        language={effectiveLanguage}
+                        access={{
+                            hasUser: true,
+                            canUseMultiFile: isSql || ideShell.access.canUseMultiFile,
+                            canSaveCloud: ideShell.access.canSaveCloud,
+                            canCreateProjects: ideShell.access.canCreateProjects,
+                        }}
+                        loginHref="/authenticate"
+                        billingHref="/billing"
+                        draftStorageMode="off"
+                        servicePreset={ideShell.servicePreset}
+                        forceDesktopLayout={shouldForceDesktopLayout}
+                        services={{
+                            ...ideShell.services,
+                            runner: {
+                                ...(ideShell.services.runner ?? {}),
+                                showThemeToggle: true,
+                                showSqlDialectPicker: false,
+                            },
+                        }}
+                        initialWorkspace={finalReviewWorkspace}
+                        externalWorkspace={finalReviewWorkspace}
+                        exerciseStateKey={workspaceOwnerKey}
+                        projectScope={{
+                            kind: "review-tool" as any,
+                            scopeKey: `review-tool:${workspaceOwnerKey}`,
+                        }}
+                        onWorkspaceChange={handleWorkspaceChange}
+                        onBeforeRun={handleBeforeRun}
+                        onRunResult={handleRunResult}
+                        onReadyChange={setIdeReady}
+                        initialSqlDialect={sqlDialect}
+                        sqlInitialTableSnapshots={sqlInitialTableSnapshots}
+                    />
+                ) : null}
 
-                {/*{showLoadingMask ? (*/}
-                {/*    <div className="absolute inset-0 z-20 flex items-center justify-center bg-neutral-950/70 backdrop-blur-sm">*/}
-                {/*        <div className="flex items-center gap-3 rounded-full border border-white/10 bg-black/40 px-4 py-2 text-sm font-semibold text-white/80">*/}
-                {/*            <span className="inline-block h-2.5 w-2.5 animate-pulse rounded-full bg-emerald-400" />*/}
-                {/*            Loading editor...*/}
-                {/*        </div>*/}
-                {/*    </div>*/}
-                {/*) : null}*/}
+                {showLoadingMask ? (
+                    <div className="absolute inset-0 z-20 flex items-center justify-center bg-neutral-950/70 backdrop-blur-sm">
+                        <div className="flex items-center gap-3 rounded-full border border-white/10 bg-black/40 px-4 py-2 text-sm font-semibold text-white/80">
+                            <span className="inline-block h-2.5 w-2.5 animate-pulse rounded-full bg-emerald-400" />
+                            {cardRuntimeKey ? "Loading sketch workspace..." : "Loading editor..."}
+                        </div>
+                    </div>
+                ) : null}
             </div>
 
             {!isSql && runFeedback ? (

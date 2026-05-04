@@ -51,134 +51,65 @@ function snapKey(s: ToolSnap) {
 }
 
 function workspaceKeyOf(workspace: WorkspaceStateV2 | null | undefined) {
-    return JSON.stringify(workspace ?? null);
-}
-function workspaceHasFiles(workspace: WorkspaceStateV2 | null | undefined) {
-    return !!workspace?.nodes?.some((node: any) => node?.kind === "file");
-}
+    if (!workspace || workspace.version !== 2 || !Array.isArray(workspace.nodes)) {
+        return "null";
+    }
 
-function workspaceHasNonBlankCode(workspace: WorkspaceStateV2 | null | undefined) {
-    return !!workspace?.nodes?.some((node: any) => {
-        return (
-            node?.kind === "file" &&
-            typeof node?.content === "string" &&
-            node.content.trim() !== ""
-        );
+    const folderPathById = new Map<string, string>();
+
+    let changed = true;
+    while (changed) {
+        changed = false;
+
+        for (const node of workspace.nodes as any[]) {
+            if (!node || node.kind !== "folder") continue;
+
+            const id = String(node.id ?? "");
+            if (!id || folderPathById.has(id)) continue;
+
+            const name = String(node.name ?? "");
+            const parentId = node.parentId == null ? null : String(node.parentId);
+            if (parentId && !folderPathById.has(parentId)) continue;
+
+            const parentPath = parentId ? folderPathById.get(parentId) || "" : "";
+            folderPathById.set(id, parentPath ? `${parentPath}/${name}` : name);
+            changed = true;
+        }
+    }
+
+    const filePath = (node: any) => {
+        const name = String(node?.name ?? "");
+        const parentId = node?.parentId == null ? null : String(node.parentId);
+        const parentPath = parentId ? folderPathById.get(parentId) || "" : "";
+        return parentPath ? `${parentPath}/${name}` : name;
+    };
+
+    const files = (workspace.nodes as any[])
+        .filter((node) => node?.kind === "file")
+        .map((node) => ({
+            path: filePath(node),
+            content: String(node.content ?? ""),
+        }))
+        .sort((a, b) => a.path.localeCompare(b.path));
+
+    const activeNode = (workspace.nodes as any[]).find(
+        (node) => node?.kind === "file" && node.id === workspace.activeFileId,
+    );
+    const entryNode = (workspace.nodes as any[]).find(
+        (node) => node?.kind === "file" && node.id === workspace.entryFileId,
+    );
+
+    return JSON.stringify({
+        version: 2,
+        language: workspace.language ?? null,
+        stdin: typeof workspace.stdin === "string" ? workspace.stdin : "",
+        activePath: activeNode ? filePath(activeNode) : null,
+        entryPath: entryNode ? filePath(entryNode) : null,
+        files,
     });
 }
 
-function workspaceHasStarterSignature(workspace: WorkspaceStateV2 | null | undefined) {
-    return !!workspace && typeof (workspace as any).starterSignature === "string";
-}
 
-const CARD_STARTER_SCHEMA_VERSION = 12;
-
-function workspaceCardStarterSchemaVersion(workspace: WorkspaceStateV2 | null | undefined) {
-    return workspace && typeof (workspace as any).cardStarterSchemaVersion === "number"
-        ? Number((workspace as any).cardStarterSchemaVersion)
-        : 0;
-}
-
-function workspaceCardStarterSourceKey(workspace: WorkspaceStateV2 | null | undefined) {
-    return workspace && typeof (workspace as any).cardStarterSourceKey === "string"
-        ? String((workspace as any).cardStarterSourceKey)
-        : null;
-}
-
-function workspaceFileCount(workspace: WorkspaceStateV2 | null | undefined) {
-    if (!workspace || workspace.version !== 2 || !Array.isArray(workspace.nodes)) {
-        return 0;
-    }
-
-    return workspace.nodes.filter((node: any) => node?.kind === "file").length;
-}
-
-function attachRuntimeCardStarterMetadata(args: {
-    incoming: WorkspaceStateV2 | null;
-    runtimeWorkspace: WorkspaceStateV2 | null | undefined;
-}) {
-    const { incoming, runtimeWorkspace } = args;
-
-    if (!incoming || incoming.version !== 2) return incoming;
-
-    const runtimeSourceKey = workspaceCardStarterSourceKey(runtimeWorkspace);
-    const runtimeSchema = workspaceCardStarterSchemaVersion(runtimeWorkspace);
-
-    if (!runtimeSourceKey || runtimeSchema < CARD_STARTER_SCHEMA_VERSION) {
-        return incoming;
-    }
-
-    return {
-        ...incoming,
-        cardStarterSchemaVersion: runtimeSchema,
-        cardStarterSourceKey: runtimeSourceKey,
-        cardStarterOwnerKey: (runtimeWorkspace as any)?.cardStarterOwnerKey ?? null,
-        cardStarterSignature: (runtimeWorkspace as any)?.cardStarterSignature ?? null,
-        cardStarterBaseFileSignature:
-            (runtimeWorkspace as any)?.cardStarterBaseFileSignature ?? null,
-        cardStarterManifestKey: (runtimeWorkspace as any)?.cardStarterManifestKey ?? null,
-    } as WorkspaceStateV2;
-}
-
-function shouldIgnoreIncomingCardWorkspace(args: {
-    incoming: WorkspaceStateV2 | null;
-    runtimeWorkspace: WorkspaceStateV2 | null | undefined;
-    currentWorkspace?: WorkspaceStateV2 | null;
-}) {
-    const { incoming, runtimeWorkspace, currentWorkspace } = args;
-
-    const incomingCount = workspaceFileCount(incoming);
-    const protectedCount = Math.max(
-        workspaceFileCount(runtimeWorkspace),
-        workspaceFileCount(currentWorkspace),
-    );
-
-    /**
-     * Strong guard:
-     * If the active card workspace currently has multiple files, reject a
-     * smaller incoming workspace even when metadata is missing/stripped.
-     */
-    if (protectedCount > 1 && incomingCount < protectedCount) {
-        return true;
-    }
-
-    const runtimeSourceKey = workspaceCardStarterSourceKey(runtimeWorkspace);
-    const runtimeSchema = workspaceCardStarterSchemaVersion(runtimeWorkspace);
-
-    if (!runtimeSourceKey || runtimeSchema < CARD_STARTER_SCHEMA_VERSION) {
-        return false;
-    }
-
-    const incomingSourceKey = workspaceCardStarterSourceKey(incoming);
-    const incomingSchema = workspaceCardStarterSchemaVersion(incoming);
-
-    if (!incomingSourceKey || incomingSchema < CARD_STARTER_SCHEMA_VERSION) {
-        const runtimeCount = workspaceFileCount(runtimeWorkspace);
-        return runtimeCount > 1 && incomingCount < runtimeCount;
-    }
-
-    return incomingSourceKey !== runtimeSourceKey;
-}
-function latestSnapIsBlankCardDefault(snap: ToolSnap) {
-    return (
-        isCardToolKey(snap.toolKey) &&
-        !workspaceHasNonBlankCode(snap.workspace) &&
-        String(snap.code ?? "").trim() === "" &&
-        String(snap.stdin ?? "").trim() === ""
-    );
-}
-
-function nextSnapIsRuntimeStarterWorkspace(snap: ToolSnap) {
-    return (
-        isCardToolKey(snap.toolKey) &&
-        !!snap.workspace &&
-        (
-            workspaceHasStarterSignature(snap.workspace) ||
-            workspaceHasFiles(snap.workspace) ||
-            workspaceHasNonBlankCode(snap.workspace)
-        )
-    );
-}
 function ideConfigKey(config: LearningIdeConfig | null | undefined) {
     return JSON.stringify(config ?? null);
 }
@@ -218,12 +149,23 @@ function isExerciseToolKey(toolKey: string | null | undefined) {
 function isCardToolKey(toolKey: string | null | undefined) {
     if (typeof toolKey !== "string" || !toolKey.trim()) return false;
     if (isExerciseToolKey(toolKey)) return false;
-    return toolKey.endsWith(":general");
+
+    // Legacy card scope.
+    if (toolKey.startsWith("card:")) return true;
+
+    // Current review card/sketch scope shape:
+    // subject:module:topic:cardId:general
+    if (toolKey.endsWith(":general")) return true;
+
+    return false;
 }
 
 function cardIdFromToolKey(toolKey: string) {
-    const parts = toolKey.split(":").filter(Boolean);
+    if (toolKey.startsWith("card:")) {
+        return toolKey.replace(/^card:/, "");
+    }
 
+    const parts = toolKey.split(":").filter(Boolean);
     if (parts.length >= 2 && parts[parts.length - 1] === "general") {
         return parts[parts.length - 2];
     }
@@ -231,29 +173,17 @@ function cardIdFromToolKey(toolKey: string) {
     return toolKey;
 }
 
-function canonicalCardKeyFromToolKey(toolKey: string) {
-    if (!toolKey.endsWith(":general")) return null;
-
-    const parts = toolKey.split(":").filter(Boolean);
-    if (parts.length < 2) return null;
-
-    return parts.slice(0, -1).join(":");
+function cardStateKeyFromToolKey(toolKey: string) {
+    if (toolKey.startsWith("card:")) return toolKey.replace(/^card:/, "");
+    if (toolKey.endsWith(":general")) return toolKey.replace(/:general$/, "");
+    return toolKey;
 }
 
-function findRuntimeCardEntryForCard(args: {
-    cards: Record<string, any>;
-    effectiveToolKey: string;
-}) {
-    const canonicalCardKey = canonicalCardKeyFromToolKey(args.effectiveToolKey);
-
-    if (!canonicalCardKey) return null;
-
-    const card = args.cards?.[canonicalCardKey] ?? null;
-    return card ? ([canonicalCardKey, card] as [string, any]) : null;
+function cardToolWorkspaceStorageKey(topicId: string, toolKey: string) {
+    return `zoe:review-card-tool-workspace:${topicId}:${toolKey}`;
 }
 
-
-function writeCardToolWorkspaceBackup(_args: {
+function writeCardToolWorkspaceBackup(args: {
     topicId: string;
     toolKey: string;
     snap: {
@@ -263,132 +193,84 @@ function writeCardToolWorkspaceBackup(_args: {
         workspace?: WorkspaceStateV2 | null;
     };
 }) {
-    /**
-     * Disabled.
-     *
-     * Card/sketch workspaces are now owned by reviewRuntimeStore.cards.
-     * Local backup aliases are unsafe because they can restore stale workspace
-     * files under another sketch card.
-     */
-}
-
-
-function starterToolDebug(label: string, payload: Record<string, any>) {
     if (typeof window === "undefined") return;
+    if (!args.snap.workspace) return;
 
-    const enabled = window.localStorage.getItem("zoe:debug:starter-files") === "1";
+    const cardId = cardIdFromToolKey(args.toolKey);
 
-    if (!enabled) return;
-
-    console.groupCollapsed(`[starter-files] tool:${label}`);
-    console.log(payload);
-    console.groupEnd();
-}
-
-function cardWorkspaceSemanticKey(workspace: WorkspaceStateV2 | null | undefined) {
-    if (!workspace || workspace.version !== 2 || !Array.isArray(workspace.nodes)) {
-        return "null";
-    }
-
-    const nodeById = new Map(
-        workspace.nodes.map((node: any) => [String(node?.id ?? ""), node]),
+    const aliases = Array.from(
+        new Set([
+            args.toolKey,
+            `card:${cardId}`,
+        ]),
     );
 
-    const pathOf = (node: any) => {
-        if (!node) return "";
-
-        const parts: string[] = [];
-        let current = node;
-        let guard = 0;
-
-        while (current && guard < 200) {
-            if (typeof current.name === "string" && current.name) {
-                parts.unshift(current.name);
-            }
-
-            if (!current.parentId) break;
-            current = nodeById.get(String(current.parentId ?? "")) ?? null;
-            guard += 1;
-        }
-
-        return parts.join("/");
-    };
-
-    const files = workspace.nodes
-        .filter((node: any) => node?.kind === "file")
-        .map((node: any) => ({
-            path: pathOf(node),
-            content: String(node.content ?? ""),
-        }))
-        .sort((a, b) => a.path.localeCompare(b.path));
-
-    const entryPath =
-        workspace.nodes.find((node: any) => node?.kind === "file" && node.id === workspace.entryFileId) ??
-        null;
-    const activePath =
-        workspace.nodes.find((node: any) => node?.kind === "file" && node.id === workspace.activeFileId) ??
-        null;
-
-    return JSON.stringify({
-        version: 2,
-        language: workspace.language ?? null,
-        stdin: typeof workspace.stdin === "string" ? workspace.stdin : "",
-        entryFilePath: pathOf(entryPath),
-        activeFilePath: pathOf(activePath),
-        files,
+    const payload = JSON.stringify({
+        savedAt: Date.now(),
+        lang: args.snap.lang,
+        code: args.snap.code,
+        stdin: args.snap.stdin,
+        workspace: args.snap.workspace,
     });
+
+    try {
+        aliases.forEach((toolKey) => {
+            window.localStorage.setItem(
+                cardToolWorkspaceStorageKey(args.topicId, toolKey),
+                payload,
+            );
+        });
+    } catch {
+        // local backup is best-effort
+    }
 }
 
-function workspaceStateKeyForTool(args: {
-    toolKey: string;
-    workspace: WorkspaceStateV2 | null | undefined;
-}) {
-    return isCardToolKey(args.toolKey)
-        ? cardWorkspaceSemanticKey(args.workspace)
-        : workspaceKeyOf(args.workspace);
-}
+function readCardToolWorkspaceBackup(topicId: string, toolKey: string) {
+    if (typeof window === "undefined") return null;
 
-function debugWorkspaceSummary(workspace: WorkspaceStateV2 | null | undefined) {
-    if (!workspace || workspace.version !== 2 || !Array.isArray(workspace.nodes)) {
-        return {
-            isWorkspace: false,
-            fileCount: 0,
-            files: [],
-            entryFileId: null,
-            activeFileId: null,
-            stdin: null,
-            starterSignature: null,
-        };
+    const cardId = cardIdFromToolKey(toolKey);
+
+    function parse(raw: string | null) {
+        if (!raw) return null;
+
+        try {
+            const parsed = JSON.parse(raw);
+            if (!parsed?.workspace || parsed.workspace.version !== 2) return null;
+            return parsed;
+        } catch {
+            return null;
+        }
     }
 
-    return {
-        isWorkspace: true,
-        fileCount: workspace.nodes.filter((node: any) => node.kind === "file").length,
-        files: workspace.nodes
-            .filter((node: any) => node.kind === "file")
-            .map((node: any) => ({
-                id: node.id,
-                name: node.name,
-                parentId: node.parentId,
-                contentPreview: String(node.content ?? "").slice(0, 80),
-                contentLength: String(node.content ?? "").length,
-            })),
-        entryFileId: workspace.entryFileId,
-        activeFileId: workspace.activeFileId,
-        stdin: workspace.stdin,
-        starterSignature: (workspace as any).starterSignature ?? null,
-    };
-}
+    const exact = parse(
+        window.localStorage.getItem(
+            cardToolWorkspaceStorageKey(topicId, toolKey),
+        ),
+    );
+    if (exact) return exact;
 
-function readCardToolWorkspaceBackup(
-    _topicId: string,
-    _toolKey: string,
-) {
-    /**
-     * Disabled.
-     *
-     * Runtime card state is the only workspace source of truth.
-     */
+    const legacyToolKey = `card:${cardId}`;
+    const legacy = parse(
+        window.localStorage.getItem(
+            cardToolWorkspaceStorageKey(topicId, legacyToolKey),
+        ),
+    );
+    if (legacy) return legacy;
+
+    const prefix = `zoe:review-card-tool-workspace:${topicId}:`;
+
+    for (let i = 0; i < window.localStorage.length; i += 1) {
+        const key = window.localStorage.key(i);
+        if (!key || !key.startsWith(prefix)) continue;
+
+        const storedToolKey = key.slice(prefix.length);
+
+        if (cardIdFromToolKey(storedToolKey) !== cardId) continue;
+
+        const candidate = parse(window.localStorage.getItem(key));
+        if (candidate) return candidate;
+    }
+
     return null;
 }
 
@@ -415,7 +297,7 @@ export function useToolCodeRunnerState(args: {
         progressHydrated,
         setProgress,
         viewTid,
-        scopeKey = "general",
+        scopeKey = "card:general",
         defaultLang = "python",
         defaultCode = `print("Hello World!")`,
         defaultStdin = "",
@@ -426,7 +308,6 @@ export function useToolCodeRunnerState(args: {
     } = args;
 
     const exercises = useReviewRuntimeStore((s) => s.exercises);
-    const runtimeCards = useReviewRuntimeStore((s) => s.cards);
     const patchCard = useReviewRuntimeStore((s) => s.patchCard);
 
     const versionStr = useMemo(() => {
@@ -468,6 +349,9 @@ export function useToolCodeRunnerState(args: {
     );
 
     const saved = useMemo(() => {
+        if (isCardToolKey(effectiveToolKey)) {
+            return null;
+        }
         if (effectiveBoundId) {
             const storeKey = resolveExerciseStoreKey(exercises, effectiveBoundId);
             const found = storeKey ? exercises[storeKey] ?? null : null;
@@ -475,21 +359,6 @@ export function useToolCodeRunnerState(args: {
 
             if (effectiveBoundId.includes(":")) return null;
         }
-
-        /**
-         * Bomb-wipe rule:
-         *
-         * Card/sketch tools do NOT hydrate from progress.topics[tid].toolState.
-         * That legacy path stores loose aliases and stale workspaces, which is
-         * exactly how sketch0 files leak into sketch1/2/3.
-         *
-         * Card/sketch source of truth is only:
-         *   reviewRuntimeStore.cards[canonicalCardKey].toolWorkspace
-         */
-        if (isCardToolKey(effectiveToolKey)) {
-            return null;
-        }
-
         return (progress as any)?.topics?.[viewTid]?.toolState?.[effectiveToolKey] ?? null;
     }, [progress, viewTid, effectiveToolKey, effectiveBoundId, exercises]);
 
@@ -505,10 +374,7 @@ export function useToolCodeRunnerState(args: {
             : typeof saved?.stdin === "string"
                 ? saved.stdin
                 : defaultStdin;
-    const initialWorkspaceKey = workspaceStateKeyForTool({
-        toolKey: effectiveToolKey,
-        workspace: initialWorkspace,
-    });
+    const initialWorkspaceKey = workspaceKeyOf(initialWorkspace);
 
     const initialResolvedSql = resolveSqlRunnerConfig({
         language: initialLang,
@@ -615,31 +481,7 @@ export function useToolCodeRunnerState(args: {
             const topicId = latest.topicId;
             const toolKey = latest.toolKey;
             if (!topicId || !toolKey) return;
-
-            const workspaceCode = deriveEntryCode(latest.workspace);
-
-            /**
-             * Bomb-wipe rule:
-             *
-             * Card/sketch workspaces are persisted only into the runtime card
-             * store. Do NOT mirror them into progress.toolState and do NOT write
-             * `card:${cardId}` aliases.
-             *
-             * This gives sketch cards the same clean ownership model as exercises:
-             *
-             *   canonicalCardKey -> card.toolWorkspace
-             */
-            if (isCardToolKey(toolKey)) {
-                /**
-                 * ONE-SOURCE RULE:
-                 *
-                 * Card/sketch tools do not write progress.toolState here and do
-                 * not do a second runtime patch here.
-                 *
-                 * The only writer is setToolWorkspace -> patchCard(canonicalKey).
-                 */
-                return;
-            }
+            if (isCardToolKey(toolKey)) return;
 
             setProgress((p: any) => {
                 const tp0: any = p?.topics?.[topicId] ?? {};
@@ -660,9 +502,13 @@ export function useToolCodeRunnerState(args: {
                     return p;
                 }
 
+                const workspaceCode = deriveEntryCode(latest.workspace);
+
+
+
                 const toolState = { ...(tp0.toolState ?? {}) };
 
-                toolState[toolKey] = {
+                const nextToolEntry = {
                     lang: latest.lang,
                     code: workspaceCode || latest.code,
                     stdin: latest.stdin,
@@ -674,6 +520,7 @@ export function useToolCodeRunnerState(args: {
                     sqlInitialTableSnapshots: latest.sqlInitialTableSnapshots,
                 };
 
+                toolState[toolKey] = nextToolEntry;
                 return {
                     ...p,
                     topics: {
@@ -683,9 +530,8 @@ export function useToolCodeRunnerState(args: {
                 };
             });
         },
-        [setProgress, patchCard],
+        [setProgress],
     );
-
 
     const flushToolSnapshot = useReviewRuntimeStore((s) => s.flushToolSnapshot);
 
@@ -746,65 +592,22 @@ export function useToolCodeRunnerState(args: {
             const storeKey = resolveExerciseStoreKey(exercises, effectiveBoundId);
             s = storeKey ? exercises[storeKey] ?? null : null;
         } else {
-            const canonicalCardKey = canonicalCardKeyFromToolKey(effectiveToolKey);
-            const cardId = canonicalCardKey
-                ? cardIdFromToolKey(effectiveToolKey)
-                : null;
-            const runtimeCardEntry = canonicalCardKey
-                ? findRuntimeCardEntryForCard({
-                    cards: runtimeCards ?? {},
-                    effectiveToolKey,
-                })
+            const cardKey = isCardToolKey(effectiveToolKey)
+                ? cardStateKeyFromToolKey(effectiveToolKey)
                 : null;
 
-            const runtimeCard = runtimeCardEntry?.[1] ?? null;
+            const runtimeCards = useReviewRuntimeStore.getState().cards ?? {};
+            const runtimeCard = cardKey
+                ? runtimeCards[cardKey] ?? null
+                : null;
 
-            const enabled =
-                typeof window !== "undefined" &&
-                window.localStorage.getItem("zoe:debug:starter-files") === "1";
-
-            if (enabled) {
-                console.groupCollapsed(`[starter-files] useToolCodeRunnerState hydrate: ${effectiveToolKey}`);
-                console.log({
-                    effectiveToolKey,
-                    canonicalCardKey,
-                    cardId,
-                    runtimeCardEntryKey: runtimeCardEntry?.[0] ?? null,
-                    runtimeCardFiles: runtimeCard?.toolWorkspace ? workspaceFileCount(runtimeCard.toolWorkspace) : 0,
-                    runtimeCard: runtimeCard ? {
-                        cardKey: runtimeCard.cardKey,
-                        toolWorkspace: debugWorkspaceSummary(runtimeCard.toolWorkspace),
-                    } : null,
-                });
-                console.groupEnd();
-            }
-
-            if (runtimeCard?.toolWorkspace) {
-                const workspaceCode = deriveEntryCode(runtimeCard.toolWorkspace);
-
+            if (runtimeCard?.workspaceStatus === "ready" && runtimeCard?.toolWorkspace) {
                 s = {
-                    lang:
-                        runtimeCard.toolLang ??
-                        runtimeCard.toolWorkspace?.language ??
-                        defaultLang,
-                    code:
-                        workspaceCode ?? "",
-                    stdin:
-                        typeof runtimeCard.toolWorkspace?.stdin === "string"
-                            ? runtimeCard.toolWorkspace.stdin
-                            : runtimeCard.toolStdin ?? defaultStdin,
+                    lang: runtimeCard.toolLang ?? defaultLang,
+                    code: runtimeCard.toolCode ?? "",
+                    stdin: runtimeCard.toolStdin ?? "",
                     workspace: runtimeCard.toolWorkspace,
                 };
-            } else {
-                s = null;
-
-                starterToolDebug("hydrate-card-fallback-disabled", {
-                    viewTid,
-                    effectiveToolKey,
-                    canonicalCardKey,
-                    cardId,
-                    chosen: null,
-                });
             }
         }
         /**
@@ -822,9 +625,7 @@ export function useToolCodeRunnerState(args: {
                 ? (s.workspace as WorkspaceStateV2)
                 : null;
 
-        const nextCode = isCardToolKey(effectiveToolKey)
-            ? (deriveEntryCode(nextWorkspace) ?? "")
-            : (deriveEntryCode(nextWorkspace) || (typeof s?.code === "string" ? s.code : defaultCode));
+        const nextCode = deriveEntryCode(nextWorkspace) || (typeof s?.code === "string" ? s.code : defaultCode);
         const nextStdin =
             typeof nextWorkspace?.stdin === "string"
                 ? nextWorkspace.stdin
@@ -855,10 +656,7 @@ export function useToolCodeRunnerState(args: {
             code: nextCode,
             stdin: nextStdin,
             workspace: nextWorkspace,
-            workspaceKey: workspaceStateKeyForTool({
-                toolKey: effectiveToolKey,
-                workspace: nextWorkspace,
-            }),
+            workspaceKey: workspaceKeyOf(nextWorkspace),
             sqlDialect: resolvedSql.sqlDialect,
             sqlDatasetId: resolvedSql.sqlDatasetId,
             sqlSchemaSql: resolvedSql.sqlSchemaSql,
@@ -866,191 +664,16 @@ export function useToolCodeRunnerState(args: {
             sqlInitialTableSnapshots: resolvedSql.sqlInitialTableSnapshots,
         };
 
-        if (isCardToolKey(effectiveToolKey) && !nextWorkspace) {
-            /**
-             * Card/sketch with no starter/runtime workspace:
-             *
-             * This is a valid hydrated-empty state. Mark it hydrated so
-             * CodeToolPane can render the blank/default editor instead of
-             * staying forever on "Loading sketch workspace...".
-             */
-            latestSnapRef.current = nextSnap;
-            setHydratedToolIdentity(toolIdentity);
-            setToolLang0((prev) => (prev === nextSnap.lang ? prev : nextSnap.lang));
-            setToolCode0((prev) => (prev === nextSnap.code ? prev : nextSnap.code));
-            setToolStdin0((prev) => (prev === nextSnap.stdin ? prev : nextSnap.stdin));
-            setToolWorkspace0((prev) => (prev === null ? prev : null));
-            if (toolWorkspaceKeyRef.current !== nextSnap.workspaceKey) {
-                toolWorkspaceKeyRef.current = nextSnap.workspaceKey;
-                setToolWorkspaceKey(nextSnap.workspaceKey);
-            }
-            setToolSqlDialect0((prev) =>
-                prev === nextSnap.sqlDialect ? prev : nextSnap.sqlDialect,
-            );
-            setToolSqlDatasetId0((prev) =>
-                prev === nextSnap.sqlDatasetId ? prev : nextSnap.sqlDatasetId,
-            );
-            setToolSqlSchemaSql0((prev) =>
-                prev === nextSnap.sqlSchemaSql ? prev : nextSnap.sqlSchemaSql,
-            );
-            setToolSqlSeedSql0((prev) =>
-                prev === nextSnap.sqlSeedSql ? prev : nextSnap.sqlSeedSql,
-            );
-            setToolSqlInitialTableSnapshots0((prev) =>
-                JSON.stringify(prev ?? {}) === JSON.stringify(nextSnap.sqlInitialTableSnapshots ?? {})
-                    ? prev
-                    : nextSnap.sqlInitialTableSnapshots,
-            );
-
-            starterToolDebug("hydrate-card-empty-apply", {
-                viewTid,
-                effectiveToolKey,
-                toolIdentity,
-                nextSnap: {
-                    lang: nextSnap.lang,
-                    code: nextSnap.code,
-                    stdin: nextSnap.stdin,
-                    workspace: debugWorkspaceSummary(nextSnap.workspace),
-                },
-            });
-
-            return;
-        }
-
         const latest = latestSnapRef.current;
-
-        const sameLiveTool =
-            hydratedToolIdentity === toolIdentity &&
-            latest.topicId === viewTid &&
-            latest.toolKey === effectiveToolKey;
-
-        const changedSnap = snapKey(latest) !== snapKey(nextSnap);
-
-        const latestCode = String(latest.code ?? "").trim();
-        const latestWorkspaceCode = String(deriveEntryCode(latest.workspace) ?? "").trim();
-        const defaultCodeTrimmed = String(defaultCode ?? "").trim();
-
-        /**
-         * Sketch/card starter workspace case:
-         *
-         * A sketch/card tool can hydrate first with the generic default editor state
-         * before ensureCard finishes resolving sketch.workspace.starterFiles.
-         *
-         * That generic default may be blank, or it may be something like:
-         *
-         *   print("Hello World!")
-         *
-         * If the current card state still looks like that default state, allow the
-         * runtime card starter workspace to replace it.
-         *
-         * If the learner typed real code, block the replacement.
-         */
-        const latestLooksLikeReplaceableCardDefault =
-            isCardToolKey(latest.toolKey) &&
-            !workspaceHasStarterSignature(latest.workspace) &&
-            (
-                latestCode === "" ||
-                latestCode === defaultCodeTrimmed ||
-                latestWorkspaceCode === "" ||
-                latestWorkspaceCode === defaultCodeTrimmed
-            );
-
-        const nextWorkspaceSchemaVersion =
-            workspaceCardStarterSchemaVersion(nextSnap.workspace);
-
-        const latestWorkspaceSchemaVersion =
-            workspaceCardStarterSchemaVersion(latest.workspace);
-
-        const nextWorkspaceSourceKey =
-            workspaceCardStarterSourceKey(nextSnap.workspace);
-
-        const latestWorkspaceSourceKey =
-            workspaceCardStarterSourceKey(latest.workspace);
-
-        const allowStarterWorkspaceToReplaceDefaultCardState =
-            sameLiveTool &&
-            changedSnap &&
-            latestLooksLikeReplaceableCardDefault &&
-            nextSnapIsRuntimeStarterWorkspace(nextSnap);
-
-        const allowV5StarterWorkspaceToReplaceOldOrWrongCardState =
-            sameLiveTool &&
-            changedSnap &&
-            isCardToolKey(effectiveToolKey) &&
-            nextWorkspaceSchemaVersion >= CARD_STARTER_SCHEMA_VERSION &&
-            !!nextWorkspaceSourceKey &&
-            (
-                latestWorkspaceSchemaVersion < CARD_STARTER_SCHEMA_VERSION ||
-                latestWorkspaceSourceKey !== nextWorkspaceSourceKey
-            );
-
-        /**
-         * ONE-SOURCE RULE:
-         *
-         * For card/sketch tools, runtimeCard.toolWorkspace is the source of truth.
-         * Do not block runtime-card hydration as "unsaved local edits".
-         *
-         * The old guard was leaving toolWorkspace null, which made CodeToolPane
-         * stay forever on "Loading sketch workspace..." even though the runtime
-         * card already had the correct starter files.
-         */
+        const latestIdentity = `${latest.topicId}::${latest.toolKey}::${versionStr}`;
         const hasUnsavedLocalEdits =
-            !isCardToolKey(effectiveToolKey) &&
-            sameLiveTool &&
-            changedSnap &&
-            !allowStarterWorkspaceToReplaceDefaultCardState &&
-            !allowV5StarterWorkspaceToReplaceOldOrWrongCardState;
-
-        starterToolDebug("hydrate-guard", {
-            viewTid,
-            effectiveToolKey,
-            toolIdentity,
-            hydratedToolIdentity,
-            sameLiveTool,
-            changedSnap,
-            latestCode,
-            latestWorkspaceCode,
-            defaultCodeTrimmed,
-            latestLooksLikeReplaceableCardDefault,
-            allowStarterWorkspaceToReplaceDefaultCardState,
-            nextWorkspaceSchemaVersion,
-            latestWorkspaceSchemaVersion,
-            nextWorkspaceSourceKey,
-            latestWorkspaceSourceKey,
-            allowV5StarterWorkspaceToReplaceOldOrWrongCardState,
-            hasUnsavedLocalEdits,
-            latest: {
-                topicId: latest.topicId,
-                toolKey: latest.toolKey,
-                lang: latest.lang,
-                code: latest.code,
-                stdin: latest.stdin,
-                workspace: debugWorkspaceSummary(latest.workspace),
-            },
-            nextSnap: {
-                topicId: nextSnap.topicId,
-                toolKey: nextSnap.toolKey,
-                lang: nextSnap.lang,
-                code: nextSnap.code,
-                stdin: nextSnap.stdin,
-                workspace: debugWorkspaceSummary(nextSnap.workspace),
-            },
-        });
+            hydratedToolIdentity === toolIdentity &&
+            latestIdentity === toolIdentity &&
+            snapKey(latest) !== snapKey(nextSnap);
 
         if (hasUnsavedLocalEdits) {
             return;
         }
-
-        starterToolDebug("hydrate-apply", {
-            viewTid,
-            effectiveToolKey,
-            nextSnap: {
-                lang: nextSnap.lang,
-                code: nextSnap.code,
-                stdin: nextSnap.stdin,
-                workspace: debugWorkspaceSummary(nextSnap.workspace),
-            },
-        });
 
         latestSnapRef.current = nextSnap;
         setHydratedToolIdentity(toolIdentity);
@@ -1100,7 +723,6 @@ export function useToolCodeRunnerState(args: {
         prime,
         hydratedToolIdentity,
         exercises,
-        runtimeCards,
         effectiveBoundId,
     ]);
 
@@ -1198,10 +820,7 @@ export function useToolCodeRunnerState(args: {
                                 ? args2.stdin
                                 : "",
                 workspace: workspaceForBind,
-                workspaceKey: workspaceStateKeyForTool({
-                    toolKey: nextToolKey,
-                    workspace: workspaceForBind,
-                }),
+                workspaceKey: workspaceKeyOf(workspaceForBind),
                 sqlDialect: (savedForBind?.workspace as any)?.sqlDialect ?? resolvedSql.sqlDialect,
                 sqlDatasetId:
                     (savedForBind?.workspace as any)?.sqlDatasetId ??
@@ -1392,146 +1011,8 @@ export function useToolCodeRunnerState(args: {
         }
     }, [effectiveBoundId, bindingContext, viewTid, effectiveToolKey]);
 
-    const setToolWorkspace = useCallback((incomingWorkspace: WorkspaceStateV2 | null) => {
-        let workspace = incomingWorkspace;
-
-        if (isCardToolKey(effectiveToolKey)) {
-            const cardId = cardIdFromToolKey(effectiveToolKey);
-            const canonicalCardKey = canonicalCardKeyFromToolKey(effectiveToolKey);
-
-            if (!canonicalCardKey || !workspace) {
-                starterToolDebug("setToolWorkspace-card-rejected", {
-                    reason: !canonicalCardKey ? "missing canonicalCardKey" : "missing workspace",
-                    viewTid,
-                    effectiveToolKey,
-                    cardId,
-                    incomingWorkspace: debugWorkspaceSummary(incomingWorkspace),
-                });
-                return;
-            }
-
-            const runtimeCardEntry = findRuntimeCardEntryForCard({
-                cards: useReviewRuntimeStore.getState().cards ?? {},
-                effectiveToolKey,
-            }) as [string, any] | undefined;
-
-            const runtimeCardWorkspace =
-                runtimeCardEntry?.[1]?.toolWorkspace ?? null;
-
-            if (
-                shouldIgnoreIncomingCardWorkspace({
-                    incoming: workspace,
-                    runtimeWorkspace: runtimeCardWorkspace,
-                    currentWorkspace: latestSnapRef.current.workspace,
-                })
-            ) {
-                starterToolDebug("setToolWorkspace-card-ignored", {
-                    reason: "incoming workspace is smaller/wrong than protected card workspace",
-                    viewTid,
-                    effectiveToolKey,
-                    cardId,
-                    canonicalCardKey,
-                    runtimeCardEntryKey: runtimeCardEntry?.[0] ?? null,
-                    incomingWorkspace: debugWorkspaceSummary(incomingWorkspace),
-                    runtimeCardWorkspace: debugWorkspaceSummary(runtimeCardWorkspace),
-                    latestWorkspace: debugWorkspaceSummary(latestSnapRef.current.workspace),
-                });
-                return;
-            }
-
-            const nextWorkspaceKey = workspaceStateKeyForTool({
-                toolKey: effectiveToolKey,
-                workspace,
-            });
-            const workspaceCode = deriveEntryCode(workspace);
-            const workspaceStdin =
-                typeof workspace.stdin === "string"
-                    ? workspace.stdin
-                    : latestSnapRef.current.stdin;
-
-            const nextSnap = {
-                ...latestSnapRef.current,
-                topicId: viewTid,
-                toolKey: effectiveToolKey,
-                code: workspaceCode ?? "",
-                stdin: workspaceStdin,
-                workspace,
-                workspaceKey: nextWorkspaceKey,
-            };
-
-            latestSnapRef.current = nextSnap;
-
-            setToolCode0((prev) => (prev === nextSnap.code ? prev : nextSnap.code));
-            setToolStdin0((prev) => (prev === nextSnap.stdin ? prev : nextSnap.stdin));
-
-            if (toolWorkspaceKeyRef.current !== nextWorkspaceKey) {
-                toolWorkspaceKeyRef.current = nextWorkspaceKey;
-                setToolWorkspace0(workspace);
-                setToolWorkspaceKey(nextWorkspaceKey);
-            }
-
-            const runtimeSemanticKey = cardWorkspaceSemanticKey(runtimeCardWorkspace ?? null);
-            const nextSemanticKey = cardWorkspaceSemanticKey(workspace);
-            const runtimeCode = deriveEntryCode(runtimeCardWorkspace ?? null) ?? "";
-            const runtimeStdin =
-                typeof runtimeCardWorkspace?.stdin === "string"
-                    ? runtimeCardWorkspace.stdin
-                    : typeof runtimeCardEntry?.[1]?.toolStdin === "string"
-                        ? runtimeCardEntry[1].toolStdin
-                        : "";
-
-            const runtimeAlreadyMatches =
-                runtimeSemanticKey === nextSemanticKey &&
-                runtimeCode === nextSnap.code &&
-                runtimeStdin === nextSnap.stdin &&
-                runtimeCardEntry?.[1]?.toolKey === effectiveToolKey;
-
-            if (runtimeAlreadyMatches) {
-                starterToolDebug("setToolWorkspace-card-skip-canonical-patch", {
-                    reason: "incoming workspace already matches canonical runtime card",
-                    viewTid,
-                    effectiveToolKey,
-                    cardId,
-                    canonicalCardKey,
-                    runtimeCardEntryKey: runtimeCardEntry?.[0] ?? null,
-                    semanticMatch: runtimeSemanticKey === nextSemanticKey,
-                    workspace: debugWorkspaceSummary(workspace),
-                    runtimeWorkspace: debugWorkspaceSummary(runtimeCardWorkspace),
-                    code: nextSnap.code,
-                    stdin: nextSnap.stdin,
-                });
-
-                return;
-            }
-
-            starterToolDebug("setToolWorkspace-card-patch-canonical-only", {
-                viewTid,
-                effectiveToolKey,
-                cardId,
-                canonicalCardKey,
-                runtimeCardEntryKey: runtimeCardEntry?.[0] ?? null,
-                workspace: debugWorkspaceSummary(workspace),
-                code: nextSnap.code,
-                stdin: nextSnap.stdin,
-            });
-
-            patchCard(canonicalCardKey, {
-                topicId: viewTid,
-                cardId,
-                toolKey: effectiveToolKey,
-                toolWorkspace: workspace,
-                toolCode: nextSnap.code,
-                toolStdin: nextSnap.stdin,
-                toolLang: nextSnap.lang,
-            } as any);
-
-            return;
-        }
-
-        const nextWorkspaceKey = workspaceStateKeyForTool({
-            toolKey: effectiveToolKey,
-            workspace,
-        });
+    const setToolWorkspace = useCallback((workspace: WorkspaceStateV2 | null) => {
+        const nextWorkspaceKey = workspaceKeyOf(workspace);
         const workspaceCode = deriveEntryCode(workspace);
         const workspaceStdin =
             typeof workspace?.stdin === "string"
@@ -1542,7 +1023,7 @@ export function useToolCodeRunnerState(args: {
             ...latestSnapRef.current,
             topicId: viewTid,
             toolKey: effectiveToolKey,
-            code: workspaceCode ?? "",
+            code: workspaceCode || latestSnapRef.current.code,
             stdin: workspaceStdin,
             workspace,
             workspaceKey: nextWorkspaceKey,
@@ -1553,10 +1034,45 @@ export function useToolCodeRunnerState(args: {
         setToolCode0((prev) => (prev === nextSnap.code ? prev : nextSnap.code));
         setToolStdin0((prev) => (prev === nextSnap.stdin ? prev : nextSnap.stdin));
 
-        if (toolWorkspaceKeyRef.current !== nextWorkspaceKey) {
+        const workspaceChanged = toolWorkspaceKeyRef.current !== nextWorkspaceKey;
+
+        if (workspaceChanged) {
             toolWorkspaceKeyRef.current = nextWorkspaceKey;
             setToolWorkspace0(workspace);
             setToolWorkspaceKey(nextWorkspaceKey);
+        }
+
+        /**
+         * Critical:
+         * Workspace edits from FullIDE must be written into progress.
+         * Otherwise navigation works in-memory, but refresh restores old DB state.
+         */
+        if (isCardToolKey(effectiveToolKey)) {
+            const cardKey = cardStateKeyFromToolKey(effectiveToolKey);
+            const cardId = cardIdFromToolKey(effectiveToolKey);
+            const existingCard = useReviewRuntimeStore.getState().cards?.[cardKey] ?? null;
+
+            const cardAlreadyMatches = Boolean(
+                existingCard &&
+                    workspaceKeyOf(existingCard.toolWorkspace ?? null) === nextWorkspaceKey &&
+                    String(existingCard.toolCode ?? "") === String(nextSnap.code ?? "") &&
+                    String(existingCard.toolStdin ?? "") === String(nextSnap.stdin ?? "") &&
+                    String(existingCard.toolLang ?? "") === String(nextSnap.lang ?? ""),
+            );
+
+            if (!cardAlreadyMatches) {
+                patchCard(cardKey, {
+                    topicId: viewTid,
+                    cardId,
+                    toolKey: effectiveToolKey,
+                    toolWorkspace: workspace,
+                    toolCode: nextSnap.code,
+                    toolStdin: nextSnap.stdin,
+                    toolLang: nextSnap.lang,
+                    workspaceStatus: workspace ? "ready" : "pending",
+                    workspaceSeedMode: workspace ? "restored" : undefined,
+                } as any);
+            }
         }
 
         if (progressHydrated) {
@@ -1581,14 +1097,13 @@ export function useToolCodeRunnerState(args: {
     }, [
         bindingContext,
         commitToolToProgress,
+        patchCard,
         effectiveBoundId,
         effectiveToolKey,
-        patchCard,
         prime,
         progressHydrated,
         viewTid,
     ]);
-
 
     const setToolSqlDialect = useCallback((d: SqlDialect) => {
         latestSnapRef.current = { ...latestSnapRef.current, sqlDialect: d };
@@ -1657,62 +1172,7 @@ export function useToolCodeRunnerState(args: {
     }, [rightCollapsed, rightW]);
 
     const codeRunnerRegionH = Math.max(280, rightBodyH);
-
-    /**
-     * ONE-SOURCE CARD WORKSPACE RETURN:
-     *
-     * For card/sketch tools, do not depend on the hook's local toolWorkspace
-     * state being updated before CodeToolPane renders.
-     *
-     * The canonical runtime card is the source of truth, so return its
-     * toolWorkspace directly when it exists.
-     */
-    const returnCanonicalCardKey = isCardToolKey(effectiveToolKey)
-        ? canonicalCardKeyFromToolKey(effectiveToolKey)
-        : null;
-
-    const returnRuntimeCard = returnCanonicalCardKey
-        ? runtimeCards?.[returnCanonicalCardKey] ?? null
-        : null;
-
-    const returnRuntimeWorkspace =
-        returnRuntimeCard?.toolWorkspace &&
-        typeof returnRuntimeCard.toolWorkspace === "object"
-            ? (returnRuntimeCard.toolWorkspace as WorkspaceStateV2)
-            : null;
-
-    const returnRuntimeCode = deriveEntryCode(returnRuntimeWorkspace) ?? "";
-    const returnRuntimeStdin =
-        typeof returnRuntimeWorkspace?.stdin === "string"
-            ? returnRuntimeWorkspace.stdin
-            : typeof returnRuntimeCard?.toolStdin === "string"
-                ? returnRuntimeCard.toolStdin
-                : defaultStdin;
-
-    const displayHydrated = toolHydrated || !!returnRuntimeWorkspace;
-
-    const returnedToolWorkspace =
-        returnRuntimeWorkspace ??
-        (displayHydrated ? toolWorkspace : initialWorkspace);
-
-    const returnedToolCode =
-        returnRuntimeWorkspace
-            ? returnRuntimeCode
-            : displayHydrated
-                ? toolCode
-                : initialCode;
-
-    const returnedToolStdin =
-        returnRuntimeWorkspace
-            ? returnRuntimeStdin
-            : displayHydrated
-                ? toolStdin
-                : initialStdin;
-
-    const returnedToolLang =
-        (returnRuntimeCard?.toolLang as WorkspaceLanguage | undefined) ??
-        returnRuntimeWorkspace?.language ??
-        (displayHydrated ? toolLang : initialLang);
+    const displayHydrated = toolHydrated;
 
     return {
         boundId: effectiveBoundId,
@@ -1721,10 +1181,10 @@ export function useToolCodeRunnerState(args: {
         unbindCodeInput,
         toolHydrated: displayHydrated,
 
-        toolLang: returnedToolLang,
-        toolCode: returnedToolCode,
-        toolStdin: returnedToolStdin,
-        toolWorkspace: returnedToolWorkspace,
+        toolLang: displayHydrated ? toolLang : initialLang,
+        toolCode: displayHydrated ? toolCode : initialCode,
+        toolStdin: displayHydrated ? toolStdin : initialStdin,
+        toolWorkspace: displayHydrated ? toolWorkspace : initialWorkspace,
 
         toolSqlDialect: displayHydrated ? resolvedSql.sqlDialect : initialResolvedSql.sqlDialect,
         toolSqlDatasetId: displayHydrated ? toolSqlDatasetId : initialResolvedSql.sqlDatasetId,

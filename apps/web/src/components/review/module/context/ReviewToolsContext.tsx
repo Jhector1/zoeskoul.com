@@ -516,7 +516,6 @@ export function ReviewToolsProvider({
 
         if (
           !registryRef.current.has(id) &&
-          currentBound &&
           (currentBound === id || currentBound === targetKeyBeforeDelete)
         ) {
           storeUnbindExerciseTool(currentBound);
@@ -765,4 +764,8 @@ export function useReviewTools() {
     throw new Error("useReviewTools must be used within ReviewToolsProvider");
   }
   return ctx;
+}
+
+export function useOptionalReviewTools() {
+  return useContext(Ctx);
 }

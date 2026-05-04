@@ -56,6 +56,7 @@ type Props = {
   subjectSlug: string;
   moduleSlug: string;
   sectionSlug?: string;
+  defaultToolLanguage?: string;
 
   onActiveCardIndexChange?: (index: number) => void;
 };
@@ -82,9 +83,9 @@ export default function ReviewTopicCards({
   subjectSlug,
   moduleSlug,
   sectionSlug,
+  defaultToolLanguage = "python",
   onActiveCardIndexChange,
 }: Props) {
-  const goToCard = useReviewRuntimeStore((s) => s.goToCard);
   const storeCards = useReviewRuntimeStore((s) => s.cards);
 
   const handleNavigate = React.useCallback(
@@ -122,14 +123,11 @@ export default function ReviewTopicCards({
         return next;
       });
 
-      goToCard(clampedIndex);
-
       onActiveCardIndexChange?.(clampedIndex);
     },
     [
       activeCardIndex,
       flushNow,
-      goToCard,
       onActiveCardIndexChange,
       setProgress,
       sketch,
@@ -201,6 +199,7 @@ export default function ReviewTopicCards({
                     onRun={onRun}
                     onReveal={onReveal}
                     onSubmit={onSubmit}
+                    defaultToolLanguage={defaultToolLanguage}
                     onSketchStateChange={(_sketchCardId, state) => {
                       sketch?.saveSketchDebounced?.(cardKey, state, false);
                     }}

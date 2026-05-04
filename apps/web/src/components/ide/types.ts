@@ -112,7 +112,6 @@ export type FullIDEProps = {
     onWorkspaceChange?: (workspace: WorkspaceStateV2 | null) => void;
     onBeforeRun?: () => void | Promise<void>;
     onRunResult?: (args: { result: RunResult; runArgs: any }) => void;
-    localWorkspaceId?: string;
     initialSqlDialect?: SqlDialect;
     forceDesktopLayout?: boolean;
     exerciseStateKey?: string;

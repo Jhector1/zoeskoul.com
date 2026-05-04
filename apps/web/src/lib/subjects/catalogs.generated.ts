@@ -2,6 +2,7 @@
 // AUTO-GENERATED FILE. DO NOT EDIT.
 // Run: pnpm gen:catalog-manifests
 
+import type { CatalogManifest } from "@/lib/subjects/_core/subjectManifestTypes";
 
 export const CATALOG_MANIFESTS: Record<string, CatalogManifest> = {
   "python": {

@@ -51,10 +51,9 @@ export default function ReviewModulePage(props: ReviewModulePageProps) {
         </>
     );
 
-    if (!vm.toolsProvider.enabled) return page;
-
     return (
         <ReviewToolsProvider
+            enabled={vm.toolsProvider.enabled}
             mode="manual"
             resetKey={vm.toolsProvider.resetKey}
             externalBoundId={vm.toolsProvider.externalBoundId}
