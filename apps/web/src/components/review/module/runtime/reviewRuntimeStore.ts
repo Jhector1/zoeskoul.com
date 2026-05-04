@@ -46,6 +46,96 @@ function workspaceFileCount(workspace: WorkspaceStateV2 | null | undefined) {
   return workspace.nodes.filter((node: any) => node?.kind === "file").length;
 }
 
+function workspaceStructureKey(workspace: WorkspaceStateV2 | null | undefined) {
+  if (!workspace || workspace.version !== 2 || !Array.isArray(workspace.nodes)) {
+    return "null";
+  }
+
+  const folderPathById = new Map<string, string>();
+
+  let changed = true;
+  while (changed) {
+    changed = false;
+
+    for (const node of workspace.nodes as any[]) {
+      if (!node || node.kind !== "folder") continue;
+
+      const id = String(node.id ?? "");
+      if (!id || folderPathById.has(id)) continue;
+
+      const name = String(node.name ?? "");
+      const parentId = node.parentId == null ? null : String(node.parentId);
+      if (parentId && !folderPathById.has(parentId)) continue;
+
+      const parentPath = parentId ? folderPathById.get(parentId) || "" : "";
+      folderPathById.set(id, parentPath ? `${parentPath}/${name}` : name);
+      changed = true;
+    }
+  }
+
+  const filePath = (node: any) => {
+    const name = String(node?.name ?? "");
+    const parentId = node?.parentId == null ? null : String(node.parentId);
+    const parentPath = parentId ? folderPathById.get(parentId) || "" : "";
+    return parentPath ? `${parentPath}/${name}` : name;
+  };
+
+  const files = (workspace.nodes as any[])
+      .filter((node) => node?.kind === "file")
+      .map((node) => filePath(node))
+      .sort((a, b) => a.localeCompare(b));
+
+  const activeNode = (workspace.nodes as any[]).find(
+      (node) => node?.kind === "file" && node.id === workspace.activeFileId,
+  );
+  const entryNode = (workspace.nodes as any[]).find(
+      (node) => node?.kind === "file" && node.id === workspace.entryFileId,
+  );
+
+  return JSON.stringify({
+    version: 2,
+    language: workspace.language ?? null,
+    activePath: activeNode ? filePath(activeNode) : null,
+    entryPath: entryNode ? filePath(entryNode) : null,
+    files,
+  });
+}
+
+function workspaceHasAnyText(workspace: WorkspaceStateV2 | null | undefined) {
+  if (!workspace || workspace.version !== 2 || !Array.isArray(workspace.nodes)) {
+    return false;
+  }
+
+  return workspace.nodes.some(
+      (node: any) =>
+          node?.kind === "file" &&
+          String(node.content ?? "").trim().length > 0,
+  );
+}
+
+function shouldPreserveSavedWorkspace(
+    saved: WorkspaceStateV2 | null | undefined,
+    starter: WorkspaceStateV2 | null | undefined,
+) {
+  if (!saved || !workspaceHasUsableFile(saved)) return false;
+
+  const savedKey = workspaceContentKey(saved);
+  const starterKey = workspaceContentKey(starter);
+  if (savedKey === starterKey) return true;
+
+  const savedStructure = workspaceStructureKey(saved);
+  const starterStructure = workspaceStructureKey(starter);
+  if (savedStructure !== starterStructure) return true;
+
+  if (workspaceHasAnyText(saved)) return true;
+
+  const savedStdin = typeof saved.stdin === "string" ? saved.stdin.trim() : "";
+  const starterStdin = typeof starter?.stdin === "string" ? starter.stdin.trim() : "";
+  if (savedStdin && savedStdin !== starterStdin) return true;
+
+  return false;
+}
+
 function workspaceContentKey(workspace: WorkspaceStateV2 | null | undefined) {
   if (!workspace || workspace.version !== 2 || !Array.isArray(workspace.nodes)) {
     return "null";
@@ -457,8 +547,19 @@ function resolveCardToolSeed(args: {
 }) {
   const manifest = args.toolManifest ?? args.entry?.item;
   const hasStarter = targetHasStarter(manifest, args.entry);
+  const starterWorkspace =
+      manifest || args.entry
+          ? resolveExerciseWorkspace({
+              language: args.entry?.language ?? args.language,
+              manifest,
+              entry: args.entry,
+            })
+          : null;
 
-  if (args.existing?.toolWorkspace && !hasStarter) {
+  if (
+      args.existing?.toolWorkspace &&
+      (!hasStarter || shouldPreserveSavedWorkspace(args.existing.toolWorkspace, starterWorkspace))
+  ) {
     reviewDebug("review-runtime source-selected", {
       key: args.entry?.cardKey ?? args.existing?.cardKey ?? null,
       entryFound: !!args.entry,
@@ -486,11 +587,13 @@ function resolveCardToolSeed(args: {
   }
 
   if (manifest || args.entry) {
-    const workspace = resolveExerciseWorkspace({
-      language: args.entry?.language ?? args.language,
-      manifest,
-      entry: args.entry,
-    });
+    const workspace =
+        starterWorkspace ??
+        resolveExerciseWorkspace({
+          language: args.entry?.language ?? args.language,
+          manifest,
+          entry: args.entry,
+        });
 
     const seedMode = hasStarter
         ? "starter"
@@ -558,9 +661,18 @@ function resolveEditorRuntimeSeed(args: {
   existingCard?: CardRuntimeState | null;
   existingExercise?: ExerciseRuntimeState | null;
 }) {
+  const starterWorkspace = resolveExerciseWorkspace({
+    language: args.source.language,
+    manifest: args.source.manifest,
+    entry: args.source.entry,
+  });
+
   if (
       args.existing?.workspace &&
-      args.source.workspaceSeedMode !== "starter"
+      (
+          args.source.workspaceSeedMode !== "starter" ||
+          shouldPreserveSavedWorkspace(args.existing.workspace, starterWorkspace)
+      )
   ) {
     reviewDebug("review-runtime source-selected", {
       key: args.source.ownerKey,
@@ -592,7 +704,10 @@ function resolveEditorRuntimeSeed(args: {
 
   if (
       legacyWorkspace &&
-      args.source.workspaceSeedMode !== "starter"
+      (
+          args.source.workspaceSeedMode !== "starter" ||
+          shouldPreserveSavedWorkspace(legacyWorkspace, starterWorkspace)
+      )
   ) {
     reviewDebug("review-runtime source-selected", {
       key: args.source.ownerKey,
@@ -626,11 +741,7 @@ function resolveEditorRuntimeSeed(args: {
     };
   }
 
-  const workspace = resolveExerciseWorkspace({
-    language: args.source.language,
-    manifest: args.source.manifest,
-    entry: args.source.entry,
-  });
+  const workspace = starterWorkspace;
   const workspaceNonEmpty = workspaceHasUsableFile(workspace);
 
   reviewDebug("review-runtime source-selected", {
@@ -778,13 +889,6 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
         existingWorkspaceLooksEmpty,
       });
 
-      // Starter files are authoritative. If this target has starter files/code,
-      // rebuild the exercise workspace from the starter every time ensureExercise runs.
-      // This intentionally overwrites any existing/fallback workspace content.
-      if (existing && !registryHasStarter) {
-        return state;
-      }
-
       const language =
           effectiveManifest?.language ??
           effectiveManifest?.lang ??
@@ -802,10 +906,28 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
                       ? saved.ideWorkspace
                       : null;
 
-      const savedWorkspaceCode = deriveCodeFromWorkspace(rawSavedWorkspace);
-      // When starter files exist, ignore saved/restored/editor workspaces.
-      // This forces starter files to load no matter what is already in the editor.
-      const savedWorkspace = registryHasStarter ? null : rawSavedWorkspace;
+      const starterWorkspace = resolveExerciseWorkspace({
+        language,
+        manifest: effectiveManifest,
+        entry,
+      });
+
+      if (
+          existing &&
+          (
+              !registryHasStarter ||
+              shouldPreserveSavedWorkspace(existing.workspace, starterWorkspace)
+          )
+      ) {
+        return state;
+      }
+
+      const savedWorkspace =
+          registryHasStarter
+              ? shouldPreserveSavedWorkspace(rawSavedWorkspace, starterWorkspace)
+                  ? rawSavedWorkspace
+                  : null
+              : rawSavedWorkspace;
 
       const workspace = resolveExerciseWorkspace({
         language,
