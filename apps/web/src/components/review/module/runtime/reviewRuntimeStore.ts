@@ -125,6 +125,58 @@ function workspaceFileCount(workspace: WorkspaceStateV2 | null | undefined) {
 
   return workspace.nodes.filter((node: any) => node?.kind === "file").length;
 }
+
+function workspaceSemanticKey(workspace: WorkspaceStateV2 | null | undefined) {
+  if (!isWorkspace(workspace)) return "null";
+
+  const nodeById = new Map(
+    workspace.nodes.map((node: any) => [String(node?.id ?? ""), node]),
+  );
+
+  const pathOf = (node: any) => {
+    if (!node) return "";
+
+    const parts: string[] = [];
+    let current = node;
+    let guard = 0;
+
+    while (current && guard < 200) {
+      if (typeof current.name === "string" && current.name) {
+        parts.unshift(current.name);
+      }
+
+      if (!current.parentId) break;
+      current = nodeById.get(String(current.parentId ?? "")) ?? null;
+      guard += 1;
+    }
+
+    return parts.join("/");
+  };
+
+  const files = workspace.nodes
+    .filter((node: any) => node?.kind === "file")
+    .map((node: any) => ({
+      path: pathOf(node),
+      content: String(node.content ?? ""),
+    }))
+    .sort((a, b) => a.path.localeCompare(b.path));
+
+  const entryNode = workspace.nodes.find(
+    (node: any) => node?.kind === "file" && node.id === workspace.entryFileId,
+  );
+  const activeNode = workspace.nodes.find(
+    (node: any) => node?.kind === "file" && node.id === workspace.activeFileId,
+  );
+
+  return JSON.stringify({
+    version: 2,
+    language: workspace.language ?? null,
+    stdin: typeof workspace.stdin === "string" ? workspace.stdin : "",
+    entryFilePath: pathOf(entryNode),
+    activeFilePath: pathOf(activeNode),
+    files,
+  });
+}
 function getFinalExerciseIdFromKey(key: string) {
   const parts = String(key ?? "").split(":").filter(Boolean);
   return parts[parts.length - 1] || key;
@@ -163,7 +215,7 @@ function cardStateEqual(a: CardRuntimeState | undefined, b: CardRuntimeState) {
     a.visited === b.visited &&
     a.completed === b.completed &&
     JSON.stringify(a.sketch ?? null) === JSON.stringify(b.sketch ?? null) &&
-    JSON.stringify(a.toolWorkspace ?? null) === JSON.stringify(b.toolWorkspace ?? null) &&
+    workspaceSemanticKey(a.toolWorkspace ?? null) === workspaceSemanticKey(b.toolWorkspace ?? null) &&
     String(a.toolCode ?? "") === String(b.toolCode ?? "") &&
     String(a.toolStdin ?? "") === String(b.toolStdin ?? "") &&
     String(a.toolLang ?? "") === String(b.toolLang ?? "")

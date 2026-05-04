@@ -30,18 +30,67 @@ type SqlTableSnapshot = {
 
 type SqlTableSnapshots = Record<string, SqlTableSnapshot>;
 
-function workspaceKeyOf(workspace: WorkspaceStateV2 | null | undefined) {
-    return JSON.stringify(workspace ?? null);
-}
-
-function stableWorkspaceHash(value: string) {
-    let hash = 0;
-
-    for (let i = 0; i < value.length; i += 1) {
-        hash = (hash * 31 + value.charCodeAt(i)) | 0;
+function workspaceSemanticKey(workspace: WorkspaceStateV2 | null | undefined) {
+    if (!workspace || workspace.version !== 2 || !Array.isArray(workspace.nodes)) {
+        return "null";
     }
 
-    return Math.abs(hash).toString(36);
+    const nodeById = new Map(
+        workspace.nodes.map((node: any) => [String(node?.id ?? ""), node]),
+    );
+
+    const pathOf = (node: any) => {
+        if (!node) return "";
+
+        const parts: string[] = [];
+        let current = node;
+        let guard = 0;
+
+        while (current && guard < 200) {
+            if (typeof current.name === "string" && current.name) {
+                parts.unshift(current.name);
+            }
+
+            if (!current.parentId) break;
+            current = nodeById.get(String(current.parentId ?? "")) ?? null;
+            guard += 1;
+        }
+
+        return parts.join("/");
+    };
+
+    const files = workspace.nodes
+        .filter((node: any) => node?.kind === "file")
+        .map((node: any) => ({
+            path: pathOf(node),
+            content: String(node.content ?? ""),
+        }))
+        .sort((a, b) => a.path.localeCompare(b.path));
+
+    const entryNode = workspace.nodes.find(
+        (node: any) => node?.kind === "file" && node.id === workspace.entryFileId,
+    );
+    const activeNode = workspace.nodes.find(
+        (node: any) => node?.kind === "file" && node.id === workspace.activeFileId,
+    );
+
+    return JSON.stringify({
+        version: 2,
+        language: workspace.language ?? null,
+        stdin: typeof workspace.stdin === "string" ? workspace.stdin : "",
+        entryFilePath: pathOf(entryNode),
+        activeFilePath: pathOf(activeNode),
+        files,
+    });
+}
+
+function workspaceStateKeyForScope(args: {
+    workspace: WorkspaceStateV2 | null | undefined;
+    isCardScope: boolean;
+}) {
+    return args.isCardScope
+        ? workspaceSemanticKey(args.workspace)
+        : JSON.stringify(args.workspace ?? null);
 }
 
 function repairWorkspaceSelection(
@@ -393,7 +442,6 @@ export default function CodeToolPane(props: {
     const runnerH = Math.max(usesWorkspaceShell ? 480 : 320, size.h);
 
     const [runFeedback, setRunFeedback] = useState<CodeFeedback | null>(null);
-    const [ideReady, setIdeReady] = useState(false);
     const lastEmittedRef = useRef<{ code: string; stdin: string } | null>(null);
     const lastIncomingRef = useRef<{ code: string; stdin: string } | null>(null);
     const persistTimerRef = useRef<number | null>(null);
@@ -447,7 +495,17 @@ export default function CodeToolPane(props: {
         }
 
         if (isCardWorkspaceScope) {
-            return null;
+            /**
+             * Card/sketch scope with no starter/runtime workspace:
+             *
+             * Once the tool has hydrated and there is still no card workspace,
+             * show an empty default editor instead of returning null forever.
+             *
+             * Starter-backed cards still take the toolWorkspace path above.
+             */
+            return toolHydrated
+                ? repairWorkspaceSelection(externalWorkspace) as WorkspaceStateV2
+                : null;
         }
 
         if (!usesWorkspaceShell) {
@@ -477,7 +535,7 @@ export default function CodeToolPane(props: {
     const [workspaceBridge, setWorkspaceBridge] = useState<WorkspaceStateV2 | null>(
         resolvedIncomingWorkspace,
     );
-    const workspaceBridgeKeyRef = useRef(workspaceKeyOf(resolvedIncomingWorkspace));
+    const workspaceBridgeKeyRef = useRef(workspaceSemanticKey(resolvedIncomingWorkspace));
     const [prevContextKey, setPrevContextKey] = useState(workspaceContextKey);
 
     // Derived-state sync: update workspaceBridge synchronously before FullIDE remounts so
@@ -485,16 +543,16 @@ export default function CodeToolPane(props: {
     if (prevContextKey !== workspaceContextKey) {
         setPrevContextKey(workspaceContextKey);
         setWorkspaceBridge(resolvedIncomingWorkspace);
-        workspaceBridgeKeyRef.current = workspaceKeyOf(resolvedIncomingWorkspace);
+        workspaceBridgeKeyRef.current = workspaceSemanticKey(resolvedIncomingWorkspace);
     }
 
     useEffect(() => {
         latestWorkspaceRef.current = workspaceBridge;
-        workspaceBridgeKeyRef.current = workspaceKeyOf(workspaceBridge);
+        workspaceBridgeKeyRef.current = workspaceSemanticKey(workspaceBridge);
     }, [workspaceBridge]);
 
     const setWorkspaceBridgeIfChanged = useCallback((workspace: WorkspaceStateV2 | null) => {
-        const nextKey = workspaceKeyOf(workspace);
+        const nextKey = workspaceSemanticKey(workspace);
 
         latestWorkspaceRef.current = workspace;
 
@@ -511,8 +569,6 @@ export default function CodeToolPane(props: {
     }, [resolvedIncomingWorkspace, setWorkspaceBridgeIfChanged]);
 
     useEffect(() => {
-        setIdeReady(false);
-
         // New exercise/tool scope: do not let previous exercise emission guards
         // suppress or reuse the new exercise workspace.
         lastEmittedRef.current = null;
@@ -545,7 +601,10 @@ export default function CodeToolPane(props: {
     }, [toolCode, toolStdin]);
 
     const emitWorkspaceUpstream = useCallback((workspace: WorkspaceStateV2 | null) => {
-        const workspaceKey = JSON.stringify(workspace ?? null);
+        const workspaceKey = workspaceStateKeyForScope({
+            workspace,
+            isCardScope: isCardWorkspaceScope,
+        });
         if (lastUpstreamWorkspaceKeyRef.current === workspaceKey) return;
         lastUpstreamWorkspaceKeyRef.current = workspaceKey;
 
@@ -594,6 +653,7 @@ export default function CodeToolPane(props: {
     }, [
         boundId,
         clearRunFeedback,
+        isCardWorkspaceScope,
         onChangeCode,
         onChangeStdin,
         onChangeWorkspace,
@@ -624,7 +684,6 @@ export default function CodeToolPane(props: {
         ) {
             if (typeof window !== "undefined") {
                 const enabled =
-                    (window as any).__ZOE_DEBUG_STARTER_FILES__ === true ||
                     window.localStorage.getItem("zoe:debug:starter-files") === "1";
 
                 if (enabled) {
@@ -671,7 +730,6 @@ export default function CodeToolPane(props: {
                     });
                 } else if (typeof window !== "undefined") {
                     const enabled =
-                        (window as any).__ZOE_DEBUG_STARTER_FILES__ === true ||
                         window.localStorage.getItem("zoe:debug:starter-files") === "1";
 
                     if (enabled) {
@@ -784,15 +842,13 @@ export default function CodeToolPane(props: {
      */
     const cardWorkspaceReady =
         !isCardWorkspaceScope ||
-        !!toolWorkspace;
-
-    const showLoadingMask =
-        usesWorkspaceShell &&
-        (!toolHydrated || !ideReady || !cardWorkspaceReady);
+        !!toolWorkspace ||
+        !!workspaceBridge ||
+        !!resolvedIncomingWorkspace ||
+        toolHydrated;
 
     if (typeof window !== "undefined") {
         const enabled =
-            (window as any).__ZOE_DEBUG_STARTER_FILES__ === true ||
             window.localStorage.getItem("zoe:debug:starter-files") === "1";
 
         if (enabled) {
@@ -807,9 +863,13 @@ export default function CodeToolPane(props: {
                     ? "not-card"
                     : toolWorkspace
                         ? "toolWorkspace"
-                        : workspaceFileCount(workspaceBridge) > 0
+                        : workspaceBridge
                             ? "workspaceBridge"
-                            : "not-ready",
+                            : resolvedIncomingWorkspace
+                                ? "resolvedIncomingWorkspace"
+                            : toolHydrated
+                                ? "hydrated-empty-default"
+                                : "not-ready",
                 toolWorkspaceFileCount: workspaceFileCount(toolWorkspace),
                 workspaceBridgeFileCount: workspaceFileCount(workspaceBridge),
                 exerciseKey,
@@ -830,7 +890,7 @@ export default function CodeToolPane(props: {
                     })),
                 workspaceBridgeEntryFileId: workspaceBridge?.entryFileId,
                 workspaceBridgeActiveFileId: workspaceBridge?.activeFileId,
-                workspaceBridgeHash: stableWorkspaceHash(workspaceKeyOf(workspaceBridge)),
+                workspaceBridgeKey: workspaceSemanticKey(workspaceBridge),
                 reviewToolLocalWorkspaceId,
                 starterSignature: (workspaceBridge as any)?.starterSignature ?? null,
             });
@@ -848,7 +908,7 @@ export default function CodeToolPane(props: {
      * exercise workspace is ready.
      */
 
-    const fullIdeKey = `${workspaceContextKey}:${toolHydrated ? "hydrated" : "loading"}`;
+    const fullIdeKey = workspaceContextKey;
 
     if (!cardWorkspaceReady) {
         return (
@@ -885,7 +945,7 @@ export default function CodeToolPane(props: {
                          * That is why sketch starter files like README.md,
                          * notes.md, and formula.md disappear.
                          */
-                        canUseMultiFile: isSql || usesWorkspaceShell,
+                        canUseMultiFile: isSql || usesWorkspaceShell || isCardWorkspaceScope,
                         canSaveCloud: ideShell.access.canSaveCloud,
                         canCreateProjects: ideShell.access.canCreateProjects,
                     }}
@@ -913,7 +973,6 @@ export default function CodeToolPane(props: {
                     onWorkspaceChange={handleWorkspaceChange}
                     onBeforeRun={handleBeforeRun}
                     onRunResult={handleRunResult}
-                    onReadyChange={setIdeReady}
                     initialSqlDialect={sqlDialect}
                     sqlInitialTableSnapshots={sqlInitialTableSnapshots}
                 />

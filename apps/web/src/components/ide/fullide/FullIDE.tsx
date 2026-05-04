@@ -33,6 +33,65 @@ import {
 
 type WorkspaceHookResult = ReturnType<typeof useIdeWorkspace>;
 
+function workspaceSemanticKey(workspace: any) {
+    if (!workspace || workspace.version !== 2 || !Array.isArray(workspace.nodes)) {
+        return "null";
+    }
+
+    const nodeById = new Map(
+        workspace.nodes.map((node: any) => [String(node?.id ?? ""), node]),
+    );
+
+    const pathOf = (node: any) => {
+        if (!node) return "";
+
+        const parts: string[] = [];
+        let current = node;
+        let guard = 0;
+
+        while (current && guard < 200) {
+            if (typeof current.name === "string" && current.name) {
+                parts.unshift(current.name);
+            }
+
+            if (!current.parentId) break;
+            current = nodeById.get(String(current.parentId ?? "")) ?? null;
+            guard += 1;
+        }
+
+        return parts.join("/");
+    };
+
+    const files = workspace.nodes
+        .filter((node: any) => node?.kind === "file")
+        .map((node: any) => ({
+            path: pathOf(node),
+            content: String(node.content ?? ""),
+        }))
+        .sort((a, b) => a.path.localeCompare(b.path));
+
+    const entryNode = workspace.nodes.find(
+        (node: any) => node?.kind === "file" && node.id === workspace.entryFileId,
+    );
+    const activeNode = workspace.nodes.find(
+        (node: any) => node?.kind === "file" && node.id === workspace.activeFileId,
+    );
+
+    return JSON.stringify({
+        version: 2,
+        language: workspace.language ?? null,
+        stdin: typeof workspace.stdin === "string" ? workspace.stdin : "",
+        entryFilePath: pathOf(entryNode),
+        activeFilePath: pathOf(activeNode),
+        openTabs: Array.isArray(workspace.openTabs)
+            ? workspace.openTabs
+                .map((id: any) => pathOf(nodeById.get(String(id ?? "")) ?? null))
+                .sort()
+            : [],
+        files,
+    });
+}
+
 type FullIDEInnerProps = {
     actorKey: string;
     title: string;
@@ -671,7 +730,7 @@ export default function FullIDE(props: FullIDEProps) {
     });
 
     const externalWorkspaceJson = useMemo(
-        () => JSON.stringify(externalWorkspace ?? null),
+        () => workspaceSemanticKey(externalWorkspace ?? null),
         [externalWorkspace],
     );
     const hasExternalWorkspaceProp = Object.prototype.hasOwnProperty.call(
@@ -679,7 +738,7 @@ export default function FullIDE(props: FullIDEProps) {
         "externalWorkspace",
     );
     const initialWorkspaceJson = useMemo(
-        () => JSON.stringify(initialWorkspace ?? null),
+        () => workspaceSemanticKey(initialWorkspace ?? null),
         [initialWorkspace],
     );
     const lastAppliedExternalWorkspaceJsonRef = useRef<string | null>(null);
@@ -700,7 +759,7 @@ export default function FullIDE(props: FullIDEProps) {
     ]);
 
     const currentWorkspaceJson = useMemo(
-        () => JSON.stringify(workspace.derived.currentWorkspace ?? null),
+        () => workspaceSemanticKey(workspace.derived.currentWorkspace ?? null),
         [workspace.derived.currentWorkspace],
     );
     const externalWorkspaceRef = useRef(externalWorkspace);
@@ -723,7 +782,7 @@ export default function FullIDE(props: FullIDEProps) {
         if (lastAppliedExternalWorkspaceJsonRef.current === applyKey) return;
 
         const nextWorkspace = externalWorkspaceRef.current ?? initialWorkspaceRef.current ?? null;
-        const nextWorkspaceJson = JSON.stringify(nextWorkspace ?? null);
+        const nextWorkspaceJson = workspaceSemanticKey(nextWorkspace ?? null);
 
         // Mark as applied before calling into workspace actions.
         // Those actions synchronously schedule React state updates, so the guard must
