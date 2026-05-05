@@ -31,6 +31,7 @@ import type { WorkspaceStateV2 } from "@/components/ide/types";
 import { resolveExerciseWorkspace } from "@/components/review/module/runtime/exerciseWorkspaceResolver";
 import { reviewDebug, summarizeWorkspace } from "@/components/review/module/runtime/reviewDebug";
 import { exerciseDebug, summarizeExerciseWorkspace } from "@/components/review/module/runtime/exerciseDebug";
+import { reviewSaveDebug, summarizeWorkspaceForSave } from "@/components/review/module/runtime/reviewSaveDebug";
 
 export type CodeInputAutoBindMode = "never" | "whenUnbound" | "whenActive" | "always";
 
@@ -307,6 +308,14 @@ export default function CodeInputExerciseUI({
                 workspace: summarizeWorkspace(nextWorkspace),
             });
 
+            reviewSaveDebug("exercise editor changed", {
+                exerciseKey,
+                exerciseId: exercise.id,
+                nextCodeLength: String(nextCode ?? "").length,
+                nextStdinLength: String(nextStdin ?? "").length,
+                workspace: summarizeWorkspaceForSave(nextWorkspace),
+            });
+
             onChangeWorkspace?.(nextWorkspace);
 
             if (exerciseKey) {
@@ -317,6 +326,12 @@ export default function CodeInputExerciseUI({
                     stdin: nextStdin,
                     codeStdin: nextStdin,
                     code: nextCode,
+                    source: nextCode,
+                    language: nextWorkspace.language ?? language,
+                    lang: nextWorkspace.language ?? language,
+                    userEdited: true,
+                    workspaceOrigin: "user",
+                    updatedAt: Date.now(),
                 } as any);
             }
 

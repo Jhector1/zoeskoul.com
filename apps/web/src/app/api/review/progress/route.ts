@@ -11,11 +11,15 @@ import {
     readJsonSafe,
 } from "@/lib/practice/api/shared/http";
 import { pickLocale } from "@/lib/review/api/shared/schemas";
-import type { ReviewProgressState } from "@/lib/subjects/progressTypes";
+import type { ReviewProgressState, ReviewTopicProgress } from "@/lib/review/progressTypes";
+import {
+    mergeTopicProgressStates,
+    normalizeProgressTopics,
+    normalizeTopicProgressKey,
+} from "@/lib/review/progressTopicKeys";
 import { ReviewProgressWriteSchema } from "@/lib/review/api/progress/schemas";
 import { resolveReviewModuleForSubject } from "@/lib/review/api/shared/modules";
-import {awardReviewProgressGamification} from "@/lib/gamification/awardReviewProgressGamification";
-// import { awardReviewProgressGamification } from "@/lib/gamification/awardReviewProgressGamification";
+import { awardReviewProgressGamification } from "@/lib/gamification/awardReviewProgressGamification";
 
 async function resolveReviewProgressScope(args: {
     subjectSlug: string;
@@ -32,10 +36,98 @@ async function resolveReviewProgressScope(args: {
     return { actor, setGuestId, resolved };
 }
 
+function getSaveRevision(state: any) {
+    const n = Number(state?.__saveRevision ?? 0);
+    return Number.isFinite(n) ? n : 0;
+}
+
+function stateBytes(state: any) {
+    try {
+        return JSON.stringify(state ?? null).length;
+    } catch {
+        return 0;
+    }
+}
+
+function topicKeys(state: any) {
+    return Object.keys(state?.topics ?? {});
+}
+
+function topicSummary(state: any) {
+    return Object.fromEntries(
+        Object.entries((state?.topics ?? {}) as Record<string, any>).map(([topicKey, topic]) => [
+            topicKey,
+            {
+                runtimeExerciseKeys: Object.keys(topic?.runtimeStateV2?.exercises ?? {}),
+                runtimeCardKeys: Object.keys(topic?.runtimeStateV2?.cards ?? {}),
+                toolStateKeys: Object.keys(topic?.toolState ?? {}),
+                quizStateKeys: Object.keys(topic?.quizState ?? {}),
+            },
+        ]),
+    );
+}
+
+function timeMs(value: unknown) {
+    const n = Number(new Date(String(value ?? "")));
+    return Number.isFinite(n) ? n : 0;
+}
+
+function pickLatestIso(a: unknown, b: unknown) {
+    const aMs = timeMs(a);
+    const bMs = timeMs(b);
+    if (!aMs && !bMs) return undefined;
+    return bMs >= aMs ? (b as string | undefined) : (a as string | undefined);
+}
+
+function mergeReviewProgressForSave(args: {
+    previousState: ReviewProgressState | null;
+    incomingState: ReviewProgressState;
+    saveRevision: number;
+}) {
+    const previous = normalizeProgressTopics(args.previousState ?? {});
+    const incoming = normalizeProgressTopics(args.incomingState ?? {});
+    const nextTopics: Record<string, ReviewTopicProgress> = {
+        ...(previous.topics ?? {}),
+    };
+
+    for (const [topicKey, incomingTopic] of Object.entries(incoming.topics ?? {})) {
+        const normalizedTopicKey = normalizeTopicProgressKey(topicKey);
+        const previousTopic = nextTopics[normalizedTopicKey];
+        const mergedTopic = mergeTopicProgressStates(previousTopic, incomingTopic);
+
+        if (previousTopic?.completed || incomingTopic?.completed) {
+            mergedTopic.completed = true;
+        }
+
+        mergedTopic.completedAt = pickLatestIso(
+            previousTopic?.completedAt,
+            incomingTopic?.completedAt,
+        );
+
+        nextTopics[normalizedTopicKey] = mergedTopic;
+    }
+
+    return {
+        ...previous,
+        ...incoming,
+        quizVersion: Math.max(Number(previous.quizVersion ?? 0), Number(incoming.quizVersion ?? 0)),
+        moduleCompleted: Boolean(previous.moduleCompleted || incoming.moduleCompleted),
+        moduleCompletedAt: pickLatestIso(previous.moduleCompletedAt, incoming.moduleCompletedAt),
+        activeTopicId: normalizeTopicProgressKey(incoming.activeTopicId ?? previous.activeTopicId),
+        assignmentSessionId: incoming.assignmentSessionId ?? previous.assignmentSessionId,
+        topics: nextTopics,
+        __saveRevision: args.saveRevision,
+    } as ReviewProgressState & { __saveRevision: number };
+}
+
 export async function GET(req: Request) {
     const { searchParams } = new URL(req.url);
     const subjectSlug = (searchParams.get("subjectSlug") ?? "").trim();
-    const moduleSlug = (searchParams.get("moduleSlug") ?? searchParams.get("moduleId") ?? "").trim();
+    const moduleSlug = (
+        searchParams.get("moduleSlug") ??
+        searchParams.get("moduleId") ??
+        ""
+    ).trim();
     const locale = pickLocale(searchParams.get("locale"), "en");
 
     if (!subjectSlug || !moduleSlug) {
@@ -71,9 +163,23 @@ export async function GET(req: Request) {
         },
     });
 
+    const state = (row?.state ?? null) as ReviewProgressState | null;
+
+    console.log("[review-progress] loaded", {
+        actorKey,
+        subjectSlug,
+        moduleId: resolved.module.slug,
+        locale,
+        hasState: Boolean(state),
+        saveRevision: getSaveRevision(state),
+        stateBytes: stateBytes(state),
+        topicKeys: topicKeys(state),
+        topicSummary: topicSummary(state),
+    });
+
     return bodyJsonWithGuestCookie(
         {
-            progress: (row?.state ?? null) as ReviewProgressState | null,
+            progress: state,
         },
         200,
         setGuestId,
@@ -142,6 +248,46 @@ export async function PUT(req: Request) {
         },
     });
 
+    const previousState = (previous?.state ?? null) as ReviewProgressState | null;
+    const existingRevision = getSaveRevision(previousState);
+    const incomingRevision = getSaveRevision(state);
+
+    if (previous && incomingRevision < existingRevision) {
+        console.warn("[review-progress] ignored stale save", {
+            actorKey,
+            subjectSlug,
+            moduleId: resolved.module.slug,
+            locale,
+            incomingRevision,
+            existingRevision,
+            incomingBytes: stateBytes(state),
+            existingBytes: stateBytes(previousState),
+            incomingTopicKeys: topicKeys(state),
+            existingTopicKeys: topicKeys(previousState),
+            incomingTopicSummary: topicSummary(state),
+            existingTopicSummary: topicSummary(previousState),
+        });
+
+        return bodyJsonWithGuestCookie(
+            {
+                ok: true,
+                ignored: true,
+                reason: "stale_revision",
+                incomingRevision,
+                existingRevision,
+            },
+            200,
+            setGuestId,
+        );
+    }
+
+    const nextRevision = Math.max(existingRevision + 1, incomingRevision, Date.now());
+    const stateToPersist = mergeReviewProgressForSave({
+        previousState,
+        incomingState: state as ReviewProgressState,
+        saveRevision: nextRevision,
+    });
+
     const saved = await prisma.reviewProgress.upsert({
         where: {
             actorKey_subjectSlug_moduleId_locale: {
@@ -156,10 +302,10 @@ export async function PUT(req: Request) {
             subjectSlug,
             moduleId: resolved.module.slug,
             locale,
-            state,
+            state: stateToPersist,
         },
         update: {
-            state,
+            state: stateToPersist,
         },
         select: {
             id: true,
@@ -167,15 +313,29 @@ export async function PUT(req: Request) {
         },
     });
 
+    console.log("[review-progress] saved", {
+        actorKey,
+        subjectSlug,
+        moduleId: resolved.module.slug,
+        locale,
+        updatedAt: saved.updatedAt,
+        incomingRevision,
+        saveRevision: getSaveRevision(stateToPersist),
+        stateBytes: stateBytes(stateToPersist),
+        topicKeys: topicKeys(stateToPersist),
+        topicSummary: topicSummary(stateToPersist),
+    });
+
     let gamification = null;
+
     try {
         gamification = await awardReviewProgressGamification({
             prisma,
             actor,
             subjectSlug,
             moduleSlug: resolved.module.slug,
-            previousState: (previous?.state ?? null) as ReviewProgressState | null,
-            nextState: state,
+            previousState,
+            nextState: stateToPersist,
         });
     } catch (e) {
         console.error("awardReviewProgressGamification failed", {
@@ -204,7 +364,11 @@ export async function DELETE(req: Request) {
 
     const { searchParams } = new URL(req.url);
     const subjectSlug = (searchParams.get("subjectSlug") ?? "").trim();
-    const moduleSlug = (searchParams.get("moduleSlug") ?? searchParams.get("moduleId") ?? "").trim();
+    const moduleSlug = (
+        searchParams.get("moduleSlug") ??
+        searchParams.get("moduleId") ??
+        ""
+    ).trim();
     const locale = pickLocale(searchParams.get("locale"), "en");
 
     if (!subjectSlug || !moduleSlug) {
@@ -250,5 +414,11 @@ export async function DELETE(req: Request) {
         }),
     ]);
 
-    return bodyJsonWithGuestCookie({ ok: true }, 200, setGuestId);
+    return bodyJsonWithGuestCookie(
+        {
+            ok: true,
+        },
+        200,
+        setGuestId,
+    );
 }

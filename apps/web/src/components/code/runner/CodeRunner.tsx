@@ -230,14 +230,15 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     };
 
     const setCode = (c: string) => {
-        if (controlled) {
-            (props as any).onChangeCode(c);
-        } else {
-            setUCode(c);
-        }
-
         if (props.workspace && props.onChangeWorkspace) {
-            const entryId = props.workspace.entryFileId || props.workspace.activeFileId;
+            const preferredEntryId = props.workspace.entryFileId || props.workspace.activeFileId;
+            const fallbackFile = props.workspace.nodes.find((node) => node.kind === "file");
+            const entryId = props.workspace.nodes.some(
+                (node) => node.kind === "file" && node.id === preferredEntryId,
+            )
+                ? preferredEntryId
+                : fallbackFile?.id;
+
             if (entryId) {
                 const nextNodes = props.workspace.nodes.map((node) => {
                     if (node.id === entryId && node.kind === "file") {
@@ -245,11 +246,18 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                     }
                     return node;
                 });
-                props.onChangeWorkspace({
+                const nextWorkspace = {
                     ...props.workspace,
                     nodes: nextNodes,
-                });
+                };
+                props.onChangeWorkspace(nextWorkspace);
             }
+        }
+
+        if (controlled) {
+            (props as any).onChangeCode(c);
+        } else {
+            setUCode(c);
         }
     };
 

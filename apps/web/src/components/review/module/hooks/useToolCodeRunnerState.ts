@@ -13,6 +13,8 @@ import {
 import type { LearningIdeConfig } from "@/lib/ide/learningIdeConfig";
 import { useReviewRuntimeStore } from "../runtime/reviewRuntimeStore";
 import { deriveEntryCode } from "../runtime/exerciseWorkspaceResolver";
+import { reviewSaveDebug, summarizeWorkspaceForSave } from "../runtime/reviewSaveDebug";
+import { getTopicProgressState, normalizeTopicProgressKey } from "@/lib/review/progressTopicKeys";
 
 type BoundTarget = { id: string; exerciseKey?: string; onPatch: (patch: any) => void };
 
@@ -109,6 +111,40 @@ function workspaceKeyOf(workspace: WorkspaceStateV2 | null | undefined) {
     });
 }
 
+function workspaceWithEntryCode(
+    workspace: WorkspaceStateV2 | null | undefined,
+    code: string,
+): WorkspaceStateV2 | null {
+    if (!workspace || workspace.version !== 2 || !Array.isArray(workspace.nodes)) {
+        return workspace ?? null;
+    }
+
+    const preferredEntryId = workspace.entryFileId || workspace.activeFileId;
+    const fallbackFile = workspace.nodes.find((node) => node.kind === "file");
+    const entryId = workspace.nodes.some(
+        (node) => node.kind === "file" && node.id === preferredEntryId,
+    )
+        ? preferredEntryId
+        : fallbackFile?.id;
+    if (!entryId) return workspace;
+
+    let changed = false;
+
+    const nodes = workspace.nodes.map((node) => {
+        if (node.kind !== "file" || node.id !== entryId) return node;
+        if (String(node.content ?? "") === code) return node;
+
+        changed = true;
+        return {
+            ...node,
+            content: code,
+            updatedAt: Date.now(),
+        };
+    });
+
+    return changed ? { ...workspace, nodes } : workspace;
+}
+
 
 function ideConfigKey(config: LearningIdeConfig | null | undefined) {
     return JSON.stringify(config ?? null);
@@ -120,8 +156,11 @@ function resolveExerciseStoreKey(
     inputId: string | null | undefined,
     explicitExerciseKey?: string | null,
 ) {
-    if (explicitExerciseKey && exercises[explicitExerciseKey]) return explicitExerciseKey;
-    if (explicitExerciseKey) return explicitExerciseKey;
+    const canonicalExplicitExerciseKey = canonicalizeExerciseStateKey(explicitExerciseKey);
+    if (canonicalExplicitExerciseKey && exercises[canonicalExplicitExerciseKey]) {
+        return canonicalExplicitExerciseKey;
+    }
+    if (canonicalExplicitExerciseKey) return canonicalExplicitExerciseKey;
 
     if (inputId && exercises[inputId]) return inputId;
 
@@ -142,6 +181,30 @@ function resolveExerciseStoreKey(
     return inputId ?? null;
 }
 
+function canonicalizeExerciseStateKey(exerciseKey: string | null | undefined) {
+    if (typeof exerciseKey !== "string") return null;
+
+    const raw = exerciseKey.trim();
+    if (!raw) return null;
+
+    const parts = raw.split(":").filter(Boolean);
+    if (parts.length < 6) return raw;
+
+    const [subjectSlug, moduleSlug, sectionSlug, topicId, cardId, ...exerciseParts] = parts;
+    if (!exerciseParts.length) return raw;
+
+    const normalizedTopicId = normalizeTopicProgressKey(topicId);
+
+    return [
+        subjectSlug,
+        moduleSlug,
+        sectionSlug,
+        normalizedTopicId,
+        cardId,
+        ...exerciseParts,
+    ].join(":");
+}
+
 function isExerciseToolKey(toolKey: string | null | undefined) {
     return typeof toolKey === "string" && toolKey.startsWith("exercise:");
 }
@@ -153,11 +216,14 @@ function isCardToolKey(toolKey: string | null | undefined) {
     // Legacy card scope.
     if (toolKey.startsWith("card:")) return true;
 
-    // Current review card/sketch scope shape:
+    // Current review card/sketch scope shapes:
     // subject:module:topic:cardId:general
-    if (toolKey.endsWith(":general")) return true;
-
-    return false;
+    // subject:module:section:topic:cardId
+    //
+    // The second shape is what CodeRunner logs as editorOwnerKey/cardRuntimeKey.
+    // Treat any non-exercise review tool key as a card/sketch tool key so edits
+    // are persisted through patchCard.
+    return true;
 }
 
 function cardIdFromToolKey(toolKey: string) {
@@ -166,16 +232,20 @@ function cardIdFromToolKey(toolKey: string) {
     }
 
     const parts = toolKey.split(":").filter(Boolean);
+
     if (parts.length >= 2 && parts[parts.length - 1] === "general") {
         return parts[parts.length - 2];
     }
 
-    return toolKey;
+    return parts[parts.length - 1] || toolKey;
 }
 
 function cardStateKeyFromToolKey(toolKey: string) {
     if (toolKey.startsWith("card:")) return toolKey.replace(/^card:/, "");
     if (toolKey.endsWith(":general")) return toolKey.replace(/:general$/, "");
+
+    // Keep the full current review scope key.
+    // This must match CodeToolPane/CodeRunner editorOwnerKey/cardRuntimeKey.
     return toolKey;
 }
 
@@ -359,7 +429,8 @@ export function useToolCodeRunnerState(args: {
 
             if (effectiveBoundId.includes(":")) return null;
         }
-        return (progress as any)?.topics?.[viewTid]?.toolState?.[effectiveToolKey] ?? null;
+        const resolved = getTopicProgressState((progress as any)?.topics ?? {}, viewTid);
+        return (resolved.topic as any)?.toolState?.[effectiveToolKey] ?? null;
     }, [progress, viewTid, effectiveToolKey, effectiveBoundId, exercises]);
 
     const initialLang = (saved?.lang as WorkspaceLanguage) ?? defaultLang;
@@ -482,9 +553,10 @@ export function useToolCodeRunnerState(args: {
             const toolKey = latest.toolKey;
             if (!topicId || !toolKey) return;
             if (isCardToolKey(toolKey)) return;
+            const topicKey = normalizeTopicProgressKey(topicId);
 
             setProgress((p: any) => {
-                const tp0: any = p?.topics?.[topicId] ?? {};
+                const tp0: any = p?.topics?.[topicKey] ?? {};
                 const prevToolState = tp0?.toolState?.[toolKey] ?? null;
 
                 if (
@@ -525,7 +597,7 @@ export function useToolCodeRunnerState(args: {
                     ...p,
                     topics: {
                         ...(p?.topics ?? {}),
-                        [topicId]: { ...tp0, toolState },
+                        [topicKey]: { ...tp0, toolState },
                     },
                 };
             });
@@ -772,8 +844,8 @@ export function useToolCodeRunnerState(args: {
                 snapshotOverridesSaved
                     ? null
                     : exercises[targetKey] ??
-                      (progress as any)?.topics?.[viewTid]?.toolState?.[nextToolKey] ??
-                      null;
+                      ((getTopicProgressState((progress as any)?.topics ?? {}, viewTid).topic as any)?.toolState?.[nextToolKey] ??
+                      null);
             const savedWorkspace =
                 savedForBind?.workspace && typeof savedForBind.workspace === "object"
                     ? (savedForBind.workspace as WorkspaceStateV2)
@@ -975,41 +1047,144 @@ export function useToolCodeRunnerState(args: {
         const b = boundRef.current;
         if (b && effectiveBoundId && boundContextRef.current === bindingContext) {
             boundDirtyRef.current = true;
+            const latest = latestSnapRef.current;
+
+            reviewSaveDebug("bound exercise tool patch", {
+                boundId: b.id,
+                exerciseKey: b.exerciseKey,
+                effectiveBoundId,
+                codeLength: String(latest.code ?? "").length,
+                stdinLength: String(latest.stdin ?? "").length,
+                workspace: summarizeWorkspaceForSave(latest.workspace),
+            });
+
             b.onPatch({ codeLang: l, submitted: false, result: null });
         }
     }, [effectiveBoundId, bindingContext, viewTid, effectiveToolKey]);
 
     const setToolCode = useCallback((c: string) => {
+        const currentWorkspace = latestSnapRef.current.workspace ?? null;
+        const nextWorkspace = workspaceWithEntryCode(currentWorkspace, c);
+        const nextWorkspaceKey = workspaceKeyOf(nextWorkspace);
+
         latestSnapRef.current = {
             ...latestSnapRef.current,
             topicId: viewTid,
             toolKey: effectiveToolKey,
             code: c,
+            workspace: nextWorkspace,
+            workspaceKey: nextWorkspaceKey,
         };
+
         setToolCode0((prev) => (prev === c ? prev : c));
+        if (toolWorkspaceKeyRef.current !== nextWorkspaceKey) {
+            toolWorkspaceKeyRef.current = nextWorkspaceKey;
+            setToolWorkspace0(nextWorkspace);
+            setToolWorkspaceKey(nextWorkspaceKey);
+        }
+
+        if (isCardToolKey(effectiveToolKey)) {
+            const cardKey = cardStateKeyFromToolKey(effectiveToolKey);
+            const cardId = cardIdFromToolKey(effectiveToolKey);
+
+            patchCard(cardKey, {
+                topicId: viewTid,
+                cardId,
+                toolKey: effectiveToolKey,
+                toolWorkspace: nextWorkspace,
+                toolCode: c,
+                toolStdin: latestSnapRef.current.stdin,
+                toolLang: latestSnapRef.current.lang,
+                workspaceStatus: nextWorkspace ? "ready" : "pending",
+                workspaceSeedMode: nextWorkspace ? "restored" : undefined,
+                workspaceOrigin: "user",
+                userEdited: true,
+            } as any);
+        }
 
         const b = boundRef.current;
         if (b && effectiveBoundId && boundContextRef.current === bindingContext) {
             boundDirtyRef.current = true;
-            b.onPatch({ code: c, submitted: false, result: null });
+            b.onPatch({
+                ...(nextWorkspace
+                    ? {
+                        workspace: nextWorkspace,
+                        codeWorkspace: nextWorkspace,
+                        ideWorkspace: nextWorkspace,
+                    }
+                    : {}),
+                code: c,
+                submitted: false,
+                result: null,
+                userEdited: true,
+                workspaceOrigin: "user",
+            });
         }
-    }, [effectiveBoundId, bindingContext, viewTid, effectiveToolKey]);
+    }, [effectiveBoundId, bindingContext, viewTid, effectiveToolKey, patchCard]);
 
     const setToolStdin = useCallback((s: string) => {
+        const currentWorkspace = latestSnapRef.current.workspace ?? null;
+        const nextWorkspace =
+            currentWorkspace && currentWorkspace.version === 2
+                ? { ...currentWorkspace, stdin: s }
+                : currentWorkspace;
+        const nextWorkspaceKey = workspaceKeyOf(nextWorkspace);
+
         latestSnapRef.current = {
             ...latestSnapRef.current,
             topicId: viewTid,
             toolKey: effectiveToolKey,
             stdin: s,
+            workspace: nextWorkspace,
+            workspaceKey: nextWorkspaceKey,
         };
+
         setToolStdin0((prev) => (prev === s ? prev : s));
+        if (toolWorkspaceKeyRef.current !== nextWorkspaceKey) {
+            toolWorkspaceKeyRef.current = nextWorkspaceKey;
+            setToolWorkspace0(nextWorkspace);
+            setToolWorkspaceKey(nextWorkspaceKey);
+        }
+
+        if (isCardToolKey(effectiveToolKey)) {
+            const cardKey = cardStateKeyFromToolKey(effectiveToolKey);
+            const cardId = cardIdFromToolKey(effectiveToolKey);
+
+            patchCard(cardKey, {
+                topicId: viewTid,
+                cardId,
+                toolKey: effectiveToolKey,
+                toolWorkspace: nextWorkspace,
+                toolCode: latestSnapRef.current.code,
+                toolStdin: s,
+                toolLang: latestSnapRef.current.lang,
+                workspaceStatus: nextWorkspace ? "ready" : "pending",
+                workspaceSeedMode: nextWorkspace ? "restored" : undefined,
+                workspaceOrigin: "user",
+                userEdited: true,
+            } as any);
+        }
 
         const b = boundRef.current;
         if (b && effectiveBoundId && boundContextRef.current === bindingContext) {
             boundDirtyRef.current = true;
-            b.onPatch({ codeStdin: s, submitted: false, result: null });
+            b.onPatch({
+                ...(nextWorkspace
+                    ? {
+                        workspace: nextWorkspace,
+                        codeWorkspace: nextWorkspace,
+                        ideWorkspace: nextWorkspace,
+                    }
+                    : {}),
+                codeStdin: s,
+                stdin: s,
+                submitted: false,
+                result: null,
+                userEdited: true,
+                workspaceOrigin: "user",
+            });
         }
-    }, [effectiveBoundId, bindingContext, viewTid, effectiveToolKey]);
+    }, [effectiveBoundId, bindingContext, viewTid, effectiveToolKey, patchCard]);
 
     const setToolWorkspace = useCallback((workspace: WorkspaceStateV2 | null) => {
         const nextWorkspaceKey = workspaceKeyOf(workspace);
@@ -1061,6 +1236,16 @@ export function useToolCodeRunnerState(args: {
             );
 
             if (!cardAlreadyMatches) {
+                reviewSaveDebug("card tool editor changed", {
+                    topicId: viewTid,
+                    cardId,
+                    cardKey,
+                    effectiveToolKey,
+                    codeLength: String(nextSnap.code ?? "").length,
+                    stdinLength: String(nextSnap.stdin ?? "").length,
+                    workspace: summarizeWorkspaceForSave(workspace),
+                });
+
                 patchCard(cardKey, {
                     topicId: viewTid,
                     cardId,
@@ -1071,6 +1256,8 @@ export function useToolCodeRunnerState(args: {
                     toolLang: nextSnap.lang,
                     workspaceStatus: workspace ? "ready" : "pending",
                     workspaceSeedMode: workspace ? "restored" : undefined,
+                    workspaceOrigin: "user",
+                    userEdited: true,
                 } as any);
             }
         }
@@ -1092,6 +1279,8 @@ export function useToolCodeRunnerState(args: {
                 stdin: nextSnap.stdin,
                 submitted: false,
                 result: null,
+                userEdited: true,
+                workspaceOrigin: "user",
             });
         }
     }, [

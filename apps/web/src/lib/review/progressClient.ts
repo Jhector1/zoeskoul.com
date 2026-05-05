@@ -1,6 +1,7 @@
 "use client";
 
 import type { ReviewProgressState } from "@/lib/review/progressTypes";
+import { normalizeProgressTopics, normalizeTopicProgressKey } from "@/lib/review/progressTopicKeys";
 
 export function emptyReviewProgress(): ReviewProgressState {
     return {
@@ -43,8 +44,8 @@ export function buildReviewProgressPayload(args: {
          moduleSlug, // keep server schema compatibility for now
         locale,
         state: {
-            ...state,
-            ...(activeTopicId ? { activeTopicId } : {}),
+            ...normalizeProgressTopics(state),
+            ...(activeTopicId ? { activeTopicId: normalizeTopicProgressKey(activeTopicId) } : {}),
         },
     };
 }
@@ -66,5 +67,7 @@ export async function fetchReviewProgressGET(args: {
     if (!res.ok) return emptyReviewProgress();
 
     const data = await res.json().catch(() => null);
-    return (data?.progress ?? null) as ReviewProgressState | null ?? emptyReviewProgress();
+    return normalizeProgressTopics(
+        ((data?.progress ?? null) as ReviewProgressState | null) ?? emptyReviewProgress(),
+    );
 }

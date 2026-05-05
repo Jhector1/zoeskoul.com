@@ -283,6 +283,8 @@ export function ReviewToolsProvider({
         stdin: snap.stdin ?? "",
         codeStdin: snap.stdin ?? "",
         code: getWorkspaceEntryCode(snap.workspace) ?? snap.code,
+        userEdited: true,
+        workspaceOrigin: "user",
       } as any);
     },
     [getRegistryEntryForToolKey, patchExercise],
@@ -381,6 +383,8 @@ export function ReviewToolsProvider({
         stdin: next.stdin ?? "",
         codeStdin: next.stdin ?? "",
         code: getWorkspaceEntryCode(next.workspace) ?? next.code,
+        userEdited: true,
+        workspaceOrigin: "user",
       } as any);
     },
     [patchExercise],

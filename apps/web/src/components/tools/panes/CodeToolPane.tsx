@@ -3,7 +3,7 @@
 import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import FullIDE from "@/components/ide/fullide/FullIDE";
 import type { WorkspaceStateV2 } from "@/components/ide/types";
-import type { SqlDialect } from "@/lib/practice/types";
+import type { SqlDialect, WorkspaceLanguage } from "@/lib/practice/types";
 import { useElementSize } from "@/components/tools/hooks/useElementSize";
 import { pickRunFeedbackFromResult } from "@/lib/code/feedback";
 import type { CodeFeedback } from "@/lib/code/feedback/types";
@@ -15,6 +15,7 @@ import {
     resolveFullIDEConfigFromLearningIde,
 } from "@/lib/ide/learningIdeConfig";
 import { useReviewRuntimeStore } from "@/components/review/module/runtime/reviewRuntimeStore";
+import { reviewSaveDebug, summarizeWorkspaceForSave } from "@/components/review/module/runtime/reviewSaveDebug";
 
 
 function starterPaneTrace(label: string, payload: Record<string, any>) {
@@ -82,6 +83,24 @@ function starterPaneTrace(label: string, payload: Record<string, any>) {
             inspect: "window.__ZOE_STARTER_LOOP__",
         });
     }
+}
+
+function asWorkspaceLanguage(language: string | null | undefined): WorkspaceLanguage {
+    const value = String(language ?? "");
+    if (
+        value === "python" ||
+        value === "java" ||
+        value === "javascript" ||
+        value === "c" ||
+        value === "cpp" ||
+        value === "sql" ||
+        value === "bash" ||
+        value === "web"
+    ) {
+        return value as WorkspaceLanguage;
+    }
+
+    return "python";
 }
 
 type SqlTableSnapshot = {
@@ -440,6 +459,26 @@ export default function CodeToolPane(props: {
             ? editorRuntime.workspace
             : null;
 
+    useEffect(() => {
+        reviewSaveDebug("visible CodeToolPane runtime", {
+            resolvedEditorOwnerKey,
+            workspaceStatus: editorRuntime?.workspaceStatus,
+            workspaceOrigin: editorRuntime?.workspaceOrigin,
+            userEdited: editorRuntime?.userEdited,
+            language: editorRuntime?.language,
+            codeLength: String(editorRuntime?.code ?? "").length,
+            workspace: summarizeWorkspaceForSave(editorRuntime?.workspace),
+        });
+    }, [
+        resolvedEditorOwnerKey,
+        editorRuntime?.workspaceStatus,
+        editorRuntime?.workspaceOrigin,
+        editorRuntime?.userEdited,
+        editorRuntime?.language,
+        editorRuntime?.code,
+        editorRuntime?.workspace,
+    ]);
+
     const reviewDirectWorkspaceReady = !!reviewDirectWorkspace;
     const isReviewRouteMode = Boolean(resolvedEditorOwnerKey);
     const reviewDirectWorkspaceError = editorRuntime?.workspaceStatus === "error";
@@ -574,6 +613,16 @@ export default function CodeToolPane(props: {
         storeCardStatus: cardRuntimeKey ? editorRuntime?.workspaceStatus : null,
     });
 
+    reviewSaveDebug("visible exercise editor", {
+        boundId,
+        resolvedEditorOwnerKey,
+        exerciseKey,
+        cardRuntimeKey,
+        workspaceOrigin: editorRuntime?.workspaceOrigin,
+        userEdited: editorRuntime?.userEdited,
+        workspace: summarizeWorkspaceForSave(finalReviewWorkspace),
+    });
+
     const emitWorkspaceUpstream = useCallback((workspace: WorkspaceStateV2 | null) => {
         const workspaceKey = workspaceKeyOf(workspace ?? null);
         if (lastUpstreamWorkspaceKeyRef.current === workspaceKey) return;
@@ -595,10 +644,18 @@ export default function CodeToolPane(props: {
             syncCodeInputSnapshot?.(boundId, {
                 ...workspacePatch,
                 code: next.code,
+                source: next.code,
+                stdin: next.stdin,
                 codeStdin: next.stdin,
+                language: effectiveLanguage,
+                lang: effectiveLanguage,
                 submitted: false,
                 result: null,
-            });        }
+                userEdited: true,
+                workspaceOrigin: "user",
+                updatedAt: Date.now(),
+            });
+        }
 
         if (prevEmitted && prevEmitted.code === next.code && prevEmitted.stdin === next.stdin) {
             return;
@@ -628,6 +685,7 @@ export default function CodeToolPane(props: {
     }, [
         boundId,
         clearRunFeedback,
+        effectiveLanguage,
         resolvedEditorOwnerKey,
         isReviewRouteMode,
         onChangeCode,
@@ -652,9 +710,16 @@ export default function CodeToolPane(props: {
                     codeWorkspace: workspace,
                     ideWorkspace: workspace,
                     code: snap.code,
+                    source: snap.code,
+                    stdin: snap.stdin,
                     codeStdin: snap.stdin,
+                    language: effectiveLanguage,
+                    lang: effectiveLanguage,
                     submitted: false,
                     result: null,
+                    userEdited: true,
+                    workspaceOrigin: "user",
+                    updatedAt: Date.now(),
                 });
             }
         }
@@ -674,6 +739,7 @@ export default function CodeToolPane(props: {
         }, 220);
     }, [
         boundId,
+        effectiveLanguage,
         emitWorkspaceUpstream,
         syncCodeInputSnapshot,
         usesWorkspaceShell,
@@ -718,6 +784,7 @@ export default function CodeToolPane(props: {
      * route target -> runtime store workspace -> FullIDE
      */
     const fullIdeKey = `${workspaceOwnerKey}:${effectiveLanguage}:${usesWorkspaceShell ? "workspace" : "single"}`;
+    const fullIdeLanguage = asWorkspaceLanguage(effectiveLanguage);
 
     return (
         <div ref={ref} className="flex h-full min-h-0 w-full flex-col overflow-hidden">
@@ -728,7 +795,7 @@ export default function CodeToolPane(props: {
                         title={isSql ? "Run SQL" : "Run code"}
                         height={runnerH - 50}
                         fullHeight
-                        language={effectiveLanguage}
+                        language={fullIdeLanguage}
                         access={{
                             hasUser: true,
                             canUseMultiFile: isSql || reviewDirectWorkspaceReady || ideShell.access.canUseMultiFile,

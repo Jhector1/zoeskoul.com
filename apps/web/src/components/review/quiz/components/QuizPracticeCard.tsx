@@ -12,6 +12,7 @@ import PracticeHelpPanel from "@/components/practice/PracticeHelpPanel";
 import { useOptionalReviewTools } from "@/components/review/module/context/ReviewToolsContext";
 import { getExerciseStateKey } from "@/components/review/module/runtime/exerciseKeys";
 import { useReviewRuntimeStore } from "@/components/review/module/runtime/reviewRuntimeStore";
+import { normalizeTopicProgressKey } from "@/lib/review/progressTopicKeys";
 
 import { useTaggedT } from "@/i18n/tagged";
 import { resolveDeepTagged } from "@/i18n/resolveDeepTagged";
@@ -133,7 +134,7 @@ export default function QuizPracticeCard(props: {
         subjectSlug: (q as any).fetch?.subject ?? "",
         moduleSlug: (q as any).fetch?.module ?? "",
         sectionSlug: (q as any).fetch?.section,
-        topicId: (q as any).fetch?.topic ?? "",
+        topicId: normalizeTopicProgressKey((q as any).fetch?.topic ?? ""),
         cardId: ownerCardId ?? "",
       },
       stableExerciseSlotId,
@@ -494,7 +495,7 @@ export default function QuizPracticeCard(props: {
                     subjectSlug={(q as any).fetch?.subject}
                     moduleSlug={(q as any).fetch?.module}
                     sectionSlug={(q as any).fetch?.section}
-                    topicId={(q as any).fetch?.topic}
+                    topicId={normalizeTopicProgressKey((q as any).fetch?.topic)}
                     cardId={ownerCardId}
                 />
               </div>

@@ -6,6 +6,7 @@ import type {
   ExerciseRuntimeState,
   ReviewRuntimeState,
   ReviewRuntimeStore,
+  WorkspaceOrigin,
 } from "./reviewRuntimeTypes";
 import { getCardStateKey } from "./exerciseKeys";
 import { resolveExerciseWorkspace } from "./exerciseWorkspaceResolver";
@@ -13,6 +14,7 @@ import { resolveDeterministicEditorSource, type ReviewDeterministicEditorSource 
 import { resolveSketchState } from "./sketchResolver";
 import { reviewDebug, summarizeWorkspace } from "./reviewDebug";
 import { exerciseDebug, summarizeExercisePatch, summarizeExerciseWorkspace } from "./exerciseDebug";
+import { reviewSaveDebug, summarizeWorkspaceForSave } from "./reviewSaveDebug";
 
 type InternalStore = ReviewRuntimeStore & {
   _flushToolSnapshotCb: (() => void) | null;
@@ -29,14 +31,49 @@ function isWorkspace(value: unknown): value is WorkspaceStateV2 {
 function deriveCodeFromWorkspace(workspace: WorkspaceStateV2 | null | undefined) {
   if (!workspace) return "";
 
-  const entryId = workspace.entryFileId || workspace.activeFileId;
+  const preferredEntryId = workspace.entryFileId || workspace.activeFileId;
+  const fallbackFile = workspace.nodes.find((node) => node.kind === "file");
   const entryNode = workspace.nodes.find(
-      (node) => node.kind === "file" && node.id === entryId,
-  );
+      (node) => node.kind === "file" && node.id === preferredEntryId,
+  ) ?? fallbackFile;
 
   return entryNode && entryNode.kind === "file"
       ? String(entryNode.content ?? "")
       : "";
+}
+
+function workspaceWithEntryCode(
+    workspace: WorkspaceStateV2 | null | undefined,
+    code: string,
+): WorkspaceStateV2 | null {
+  if (!workspace || workspace.version !== 2 || !Array.isArray(workspace.nodes)) {
+    return workspace ?? null;
+  }
+
+  const preferredEntryId = workspace.entryFileId || workspace.activeFileId;
+  const fallbackFile = workspace.nodes.find((node) => node.kind === "file");
+  const entryId = workspace.nodes.some(
+      (node) => node.kind === "file" && node.id === preferredEntryId,
+  )
+      ? preferredEntryId
+      : fallbackFile?.id;
+  if (!entryId) return workspace;
+
+  let changed = false;
+
+  const nodes = workspace.nodes.map((node) => {
+    if (node.kind !== "file" || node.id !== entryId) return node;
+    if (String(node.content ?? "") === code) return node;
+
+    changed = true;
+    return {
+      ...node,
+      content: code,
+      updatedAt: Date.now(),
+    };
+  });
+
+  return changed ? { ...workspace, nodes } : workspace;
 }
 
 function workspaceFileCount(workspace: WorkspaceStateV2 | null | undefined) {
@@ -101,18 +138,6 @@ function workspaceStructureKey(workspace: WorkspaceStateV2 | null | undefined) {
   });
 }
 
-function workspaceHasAnyText(workspace: WorkspaceStateV2 | null | undefined) {
-  if (!workspace || workspace.version !== 2 || !Array.isArray(workspace.nodes)) {
-    return false;
-  }
-
-  return workspace.nodes.some(
-      (node: any) =>
-          node?.kind === "file" &&
-          String(node.content ?? "").trim().length > 0,
-  );
-}
-
 function shouldPreserveSavedWorkspace(
     saved: WorkspaceStateV2 | null | undefined,
     starter: WorkspaceStateV2 | null | undefined,
@@ -127,13 +152,26 @@ function shouldPreserveSavedWorkspace(
   const starterStructure = workspaceStructureKey(starter);
   if (savedStructure !== starterStructure) return true;
 
-  if (workspaceHasAnyText(saved)) return true;
-
   const savedStdin = typeof saved.stdin === "string" ? saved.stdin.trim() : "";
   const starterStdin = typeof starter?.stdin === "string" ? starter.stdin.trim() : "";
   if (savedStdin && savedStdin !== starterStdin) return true;
 
-  return false;
+  // Legacy saves may not have userEdited/workspaceOrigin yet. If the saved
+  // workspace differs only by file contents, preserve it instead of silently
+  // replacing a learner's small edit with the manifest starter.
+  return savedKey !== starterKey;
+}
+
+function parseRuntimeOwnerKey(ownerKey: string) {
+  const parts = String(ownerKey ?? "").split(":").filter(Boolean);
+  return {
+    subjectSlug: parts[0] ?? "unknown",
+    moduleSlug: parts[1] ?? "unknown",
+    sectionSlug: parts[2] ?? undefined,
+    topicId: parts[3] ?? "unknown",
+    cardId: parts[4] ?? "general",
+    exerciseId: parts.slice(5).join(":") || parts[parts.length - 1] || ownerKey,
+  };
 }
 
 function workspaceContentKey(workspace: WorkspaceStateV2 | null | undefined) {
@@ -467,6 +505,42 @@ function workspaceHasUsableFile(workspace: WorkspaceStateV2 | null | undefined) 
   return workspace.nodes.some((node: any) => node?.kind === "file");
 }
 
+function workspaceHash(workspace: WorkspaceStateV2 | null | undefined) {
+  return workspaceContentKey(workspace);
+}
+
+function isUserWorkspaceState(value: any) {
+  return (
+      value?.userEdited === true ||
+      value?.workspaceOrigin === "user" ||
+      value?.workspaceOrigin === "saved"
+  );
+}
+
+function shouldUseSavedUserWorkspace(args: {
+  savedState: any;
+  savedWorkspace: WorkspaceStateV2 | null | undefined;
+  starterWorkspace: WorkspaceStateV2 | null | undefined;
+}) {
+  if (!args.savedWorkspace || !workspaceHasUsableFile(args.savedWorkspace)) return false;
+
+  if (isUserWorkspaceState(args.savedState)) return true;
+
+  if (
+      args.savedState?.workspaceOrigin === "starter" ||
+      args.savedState?.workspaceOrigin === "empty" ||
+      args.savedState?.userEdited === false
+  ) {
+    return false;
+  }
+
+  if (typeof args.savedState?.starterHash === "string" && args.savedState.starterHash) {
+    return workspaceHash(args.savedWorkspace) !== args.savedState.starterHash;
+  }
+
+  return shouldPreserveSavedWorkspace(args.savedWorkspace, args.starterWorkspace);
+}
+
 
 function starterLoopTrace(label: string, payload: Record<string, any>) {
   try {
@@ -555,10 +629,16 @@ function resolveCardToolSeed(args: {
               entry: args.entry,
             })
           : null;
+  const starterWorkspaceHash = workspaceHash(starterWorkspace);
+  const useExistingUserWorkspace = shouldUseSavedUserWorkspace({
+    savedState: args.existing,
+    savedWorkspace: args.existing?.toolWorkspace,
+    starterWorkspace,
+  });
 
   if (
       args.existing?.toolWorkspace &&
-      (!hasStarter || shouldPreserveSavedWorkspace(args.existing.toolWorkspace, starterWorkspace))
+      (!hasStarter || useExistingUserWorkspace)
   ) {
     reviewDebug("review-runtime source-selected", {
       key: args.entry?.cardKey ?? args.existing?.cardKey ?? null,
@@ -574,6 +654,9 @@ function resolveCardToolSeed(args: {
     return {
       workspaceStatus: args.existing.workspaceStatus ?? "ready",
       workspaceSeedMode: args.existing.workspaceSeedMode ?? "restored",
+      workspaceOrigin: args.existing.workspaceOrigin ?? "saved",
+      userEdited: Boolean(args.existing.userEdited ?? isUserWorkspaceState(args.existing)),
+      starterHash: args.existing.starterHash ?? starterWorkspaceHash,
       workspace: args.existing.toolWorkspace,
       code: args.existing.toolCode ?? deriveCodeFromWorkspace(args.existing.toolWorkspace),
       stdin:
@@ -636,6 +719,9 @@ function resolveCardToolSeed(args: {
     return {
       workspaceStatus: "ready" as const,
       workspaceSeedMode: seedMode as "starter" | "empty",
+      workspaceOrigin: (seedMode === "starter" ? "starter" : "empty") as WorkspaceOrigin,
+      userEdited: false,
+      starterHash: starterWorkspaceHash,
       workspace,
       code: deriveCodeFromWorkspace(workspace),
       stdin: typeof workspace.stdin === "string" ? workspace.stdin : "",
@@ -647,6 +733,9 @@ function resolveCardToolSeed(args: {
   return {
     workspaceStatus: "pending" as const,
     workspaceSeedMode: undefined,
+    workspaceOrigin: undefined,
+    userEdited: false,
+    starterHash: starterWorkspaceHash,
     workspace: null,
     code: "",
     stdin: "",
@@ -666,12 +755,18 @@ function resolveEditorRuntimeSeed(args: {
     manifest: args.source.manifest,
     entry: args.source.entry,
   });
+  const starterWorkspaceHash = workspaceHash(starterWorkspace);
+  const useExistingRuntimeWorkspace = shouldUseSavedUserWorkspace({
+    savedState: args.existing,
+    savedWorkspace: args.existing?.workspace,
+    starterWorkspace,
+  });
 
   if (
       args.existing?.workspace &&
       (
           args.source.workspaceSeedMode !== "starter" ||
-          shouldPreserveSavedWorkspace(args.existing.workspace, starterWorkspace)
+          useExistingRuntimeWorkspace
       )
   ) {
     reviewDebug("review-runtime source-selected", {
@@ -688,6 +783,9 @@ function resolveEditorRuntimeSeed(args: {
     return {
       workspaceStatus: args.existing.workspaceStatus ?? "ready",
       workspaceSeedMode: args.existing.workspaceSeedMode ?? "restored",
+      workspaceOrigin: args.existing.workspaceOrigin ?? "saved",
+      userEdited: Boolean(args.existing.userEdited ?? isUserWorkspaceState(args.existing)),
+      starterHash: args.existing.starterHash ?? starterWorkspaceHash,
       workspace: args.existing.workspace,
       code: args.existing.code ?? deriveCodeFromWorkspace(args.existing.workspace),
       stdin:
@@ -701,12 +799,21 @@ function resolveEditorRuntimeSeed(args: {
       args.source.ownerKind === "exercise"
           ? args.existingExercise?.workspace ?? null
           : args.existingCard?.toolWorkspace ?? null;
+  const legacyState =
+      args.source.ownerKind === "exercise"
+          ? args.existingExercise
+          : args.existingCard;
+  const useLegacyWorkspace = shouldUseSavedUserWorkspace({
+    savedState: legacyState,
+    savedWorkspace: legacyWorkspace,
+    starterWorkspace,
+  });
 
   if (
       legacyWorkspace &&
       (
           args.source.workspaceSeedMode !== "starter" ||
-          shouldPreserveSavedWorkspace(legacyWorkspace, starterWorkspace)
+          useLegacyWorkspace
       )
   ) {
     reviewDebug("review-runtime source-selected", {
@@ -723,6 +830,9 @@ function resolveEditorRuntimeSeed(args: {
     return {
       workspaceStatus: "ready" as const,
       workspaceSeedMode: "restored" as const,
+      workspaceOrigin: legacyState?.workspaceOrigin ?? "saved",
+      userEdited: Boolean(legacyState?.userEdited ?? isUserWorkspaceState(legacyState)),
+      starterHash: legacyState?.starterHash ?? starterWorkspaceHash,
       workspace: legacyWorkspace,
       code:
           (args.source.ownerKind === "exercise"
@@ -778,6 +888,9 @@ function resolveEditorRuntimeSeed(args: {
   return {
     workspaceStatus: "ready" as const,
     workspaceSeedMode: args.source.workspaceSeedMode,
+    workspaceOrigin: args.source.workspaceSeedMode === "starter" ? "starter" : "empty",
+    userEdited: false,
+    starterHash: starterWorkspaceHash,
     workspace,
     code: deriveCodeFromWorkspace(workspace),
     stdin: typeof workspace.stdin === "string" ? workspace.stdin : "",
@@ -912,6 +1025,16 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
         entry,
       });
 
+      const trustedExistingWorkspace = shouldUseSavedUserWorkspace({
+        savedState: existing,
+        savedWorkspace: existing?.workspace,
+        starterWorkspace,
+      });
+
+      if (existing && isUserWorkspaceState(existing)) {
+        return state;
+      }
+
       if (existing && !registryHasStarter) {
         return state;
       }
@@ -920,14 +1043,20 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
           existing &&
           registryHasStarter &&
           existing.workspaceStatus === "ready" &&
-          shouldPreserveSavedWorkspace(existing.workspace, starterWorkspace)
+          trustedExistingWorkspace
       ) {
         return state;
       }
 
+      const trustedSavedWorkspace = shouldUseSavedUserWorkspace({
+        savedState: saved,
+        savedWorkspace: rawSavedWorkspace,
+        starterWorkspace,
+      });
+
       const savedWorkspace =
           registryHasStarter
-              ? shouldPreserveSavedWorkspace(rawSavedWorkspace, starterWorkspace)
+              ? trustedSavedWorkspace
                   ? rawSavedWorkspace
                   : null
               : rawSavedWorkspace;
@@ -964,9 +1093,9 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
       }
 
       const stdin =
-          typeof saved?.stdin === "string"
+          trustedSavedWorkspace && typeof saved?.stdin === "string"
               ? saved.stdin
-              : typeof saved?.codeStdin === "string"
+              : trustedSavedWorkspace && typeof saved?.codeStdin === "string"
                   ? saved.codeStdin
                   : typeof workspace.stdin === "string"
                       ? workspace.stdin
@@ -979,6 +1108,18 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
                                   : "";
 
       const normalized = normalizeWorkspacePatch({ workspace, stdin });
+      const starterHash = workspaceHash(starterWorkspace);
+      const savedUserEdited = Boolean(
+          saved?.userEdited === true ||
+          saved?.workspaceOrigin === "user" ||
+          saved?.workspaceOrigin === "saved",
+      );
+      const workspaceOrigin: WorkspaceOrigin =
+          savedWorkspace
+              ? "saved"
+              : registryHasStarter
+                  ? "starter"
+                  : "empty";
 
       exerciseDebug("G_reviewRuntimeStore_ensureExercise_create", {
         exerciseKey,
@@ -1027,11 +1168,14 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
         }),
         status: saved?.status ?? "not_started",
         workspaceStatus: registryHasStarter && !workspaceNonEmpty ? "error" : "ready",
+        workspaceOrigin,
+        userEdited: savedUserEdited,
+        starterHash,
         updatedAt:
             typeof saved?.updatedAt === "number" ? saved.updatedAt : Date.now(),
 
-        code: typeof saved?.code === "string" ? saved.code : normalized.code,
-        lang: typeof saved?.lang === "string" ? saved.lang : language,
+        code: trustedSavedWorkspace && typeof saved?.code === "string" ? saved.code : normalized.code,
+        lang: trustedSavedWorkspace && typeof saved?.lang === "string" ? saved.lang : language,
         codeWorkspace: normalized.workspace,
         ideWorkspace: normalized.workspace,
         codeStdin: stdin,
@@ -1051,6 +1195,12 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
       const nextWorkspaceStatus = String((exercise as any)?.workspaceStatus ?? "");
       const existingExerciseId = String(existing?.exerciseId ?? "");
       const nextExerciseId = String(exercise.exerciseId ?? "");
+      const existingWorkspaceOrigin = String(existing?.workspaceOrigin ?? "");
+      const nextWorkspaceOrigin = String(exercise.workspaceOrigin ?? "");
+      const existingStarterHash = String(existing?.starterHash ?? "");
+      const nextStarterHash = String(exercise.starterHash ?? "");
+      const existingUserEdited = Boolean(existing?.userEdited);
+      const nextUserEdited = Boolean(exercise.userEdited);
 
       const noMeaningfulChange = Boolean(
           existing &&
@@ -1060,7 +1210,10 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
           existingLanguage === nextLanguage &&
           existingStatus === nextStatus &&
           existingWorkspaceStatus === nextWorkspaceStatus &&
-          existingExerciseId === nextExerciseId,
+          existingExerciseId === nextExerciseId &&
+          existingWorkspaceOrigin === nextWorkspaceOrigin &&
+          existingStarterHash === nextStarterHash &&
+          existingUserEdited === nextUserEdited,
       );
 
       starterLoopTrace("runtime.ensureExercise.compare", {
@@ -1107,7 +1260,17 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
 
     set((state) => {
       const existing = state.exercises[key];
-      const incomingWorkspace = getPatchWorkspace(patch, existing);
+      const patchHasWorkspace =
+          isWorkspace(patch.workspace) ||
+          isWorkspace(patch.codeWorkspace) ||
+          isWorkspace(patch.ideWorkspace);
+      const rawIncomingWorkspace = getPatchWorkspace(patch, existing);
+      const incomingWorkspace =
+          !patchHasWorkspace &&
+          typeof patch.code === "string" &&
+          (patch.userEdited === true || patch.workspaceOrigin === "user")
+              ? workspaceWithEntryCode(rawIncomingWorkspace, patch.code)
+              : rawIncomingWorkspace;
 
       if (!existing && !incomingWorkspace) return state;
 
@@ -1160,6 +1323,18 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
         patchExerciseId: (patch as any).exerciseId,
       });
 
+      reviewSaveDebug("runtime patchExercise", {
+        exerciseKey: key,
+        patchKeys: Object.keys(patch ?? {}),
+        patchUserEdited: (patch as any).userEdited,
+        patchWorkspaceOrigin: (patch as any).workspaceOrigin,
+        existingUserEdited: existing?.userEdited,
+        existingWorkspaceOrigin: existing?.workspaceOrigin,
+        nextCodeLength: String(code ?? "").length,
+        stdinLength: String(stdin ?? "").length,
+        workspace: summarizeWorkspaceForSave(workspace),
+      });
+
       const nextLanguage =
           typeof patch.language === "string"
               ? patch.language
@@ -1173,6 +1348,21 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
               : typeof patch.language === "string"
                   ? patch.language
                   : existing?.lang ?? nextLanguage;
+      const nextWorkspaceOrigin: WorkspaceOrigin =
+          patch.userEdited === true || patch.workspaceOrigin === "user"
+              ? "user"
+              : typeof patch.workspaceOrigin === "string"
+                  ? patch.workspaceOrigin as WorkspaceOrigin
+                  : existing?.workspaceOrigin ?? "restored";
+      const nextUserEdited =
+          patch.userEdited === true ||
+          patch.workspaceOrigin === "user" ||
+          patch.workspaceOrigin === "saved" ||
+          existing?.userEdited === true;
+      const nextStarterHash =
+          typeof patch.starterHash === "string"
+              ? patch.starterHash
+              : existing?.starterHash;
 
       const existingWorkspaceKey = workspaceContentKey(existing?.workspace ?? null);
       const nextWorkspaceKey = workspaceContentKey(workspace ?? null);
@@ -1190,7 +1380,10 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
           existingWorkspaceKey === nextWorkspaceKey &&
           existingCode === nextCode &&
           existingStdin === nextStdin &&
-          existingLanguage === nextLanguageComparable,
+          existingLanguage === nextLanguageComparable &&
+          existing.workspaceOrigin === nextWorkspaceOrigin &&
+          Boolean(existing.userEdited) === Boolean(nextUserEdited) &&
+          String(existing.starterHash ?? "") === String(nextStarterHash ?? ""),
       );
 
       starterLoopTrace("runtime.patchExercise.compare", {
@@ -1238,8 +1431,13 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
         answer: existing?.answer ?? { revealed: false },
         sketch: existing?.sketch ?? null,
         status: existing?.status ?? "in_progress",
+        workspaceStatus: existing?.workspaceStatus ?? "ready",
+        workspaceOrigin: nextWorkspaceOrigin,
+        userEdited: nextUserEdited,
+        starterHash: nextStarterHash,
         updatedAt: Date.now(),
         code,
+        source: code,
         lang: nextLang,
         codeWorkspace: workspace,
         ideWorkspace: workspace,
@@ -1256,8 +1454,12 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
         stdin,
         codeStdin: stdin,
         code,
+        source: code,
         language: nextLanguage,
         lang: nextLang,
+        workspaceOrigin: nextWorkspaceOrigin,
+        userEdited: nextUserEdited,
+        starterHash: nextStarterHash,
         status:
             existing?.status === "not_started" || !existing
                 ? "in_progress"
@@ -1352,6 +1554,9 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
             workspaceContentKey(existing.toolWorkspace ?? null) === workspaceContentKey(resolvedTool.workspace ?? null) &&
             existing.workspaceStatus === resolvedTool.workspaceStatus &&
             existing.workspaceSeedMode === resolvedTool.workspaceSeedMode &&
+            existing.workspaceOrigin === resolvedTool.workspaceOrigin &&
+            Boolean(existing.userEdited) === Boolean(resolvedTool.userEdited) &&
+            String(existing.starterHash ?? "") === String(resolvedTool.starterHash ?? "") &&
             String(existing.toolCode ?? "") === String(resolvedTool.code ?? "") &&
             String(existing.toolStdin ?? "") === String(resolvedTool.stdin ?? "") &&
             String(existing.toolLang ?? "") === String(resolvedTool.lang ?? "")
@@ -1363,6 +1568,9 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
           workspaceContentKey(existing.toolWorkspace ?? null) === workspaceContentKey(resolvedTool.workspace ?? null) &&
           existing.workspaceStatus === resolvedTool.workspaceStatus &&
           existing.workspaceSeedMode === resolvedTool.workspaceSeedMode &&
+          existing.workspaceOrigin === resolvedTool.workspaceOrigin &&
+          Boolean(existing.userEdited) === Boolean(resolvedTool.userEdited) &&
+          String(existing.starterHash ?? "") === String(resolvedTool.starterHash ?? "") &&
           String(existing.toolCode ?? "") === String(resolvedTool.code ?? "") &&
           String(existing.toolStdin ?? "") === String(resolvedTool.stdin ?? "") &&
           String(existing.toolLang ?? "") === String(resolvedTool.lang ?? "")
@@ -1382,6 +1590,9 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
         }),
         workspaceStatus: resolvedTool.workspaceStatus,
         workspaceSeedMode: resolvedTool.workspaceSeedMode,
+        workspaceOrigin: resolvedTool.workspaceOrigin,
+        userEdited: resolvedTool.userEdited,
+        starterHash: resolvedTool.starterHash,
         toolKey: existing?.toolKey ?? toolKey ?? `${cardKey}:general`,
         toolWorkspace: resolvedTool.workspace,
         toolCode: resolvedTool.code,
@@ -1419,6 +1630,9 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
         sketch: existing?.sketch ?? null,
         workspaceStatus: existing?.workspaceStatus ?? "pending",
         workspaceSeedMode: existing?.workspaceSeedMode,
+        workspaceOrigin: existing?.workspaceOrigin,
+        userEdited: existing?.userEdited ?? false,
+        starterHash: existing?.starterHash,
         toolWorkspace: existing?.toolWorkspace ?? null,
         toolCode: existing?.toolCode ?? "",
         toolStdin: existing?.toolStdin ?? "",
@@ -1430,7 +1644,19 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
         ...fallback,
         ...existing,
         ...patch,
-        updatedAt: existing?.updatedAt ?? fallback.updatedAt,
+        workspaceOrigin:
+            patch.userEdited === true || patch.workspaceOrigin === "user"
+                ? "user"
+                : patch.workspaceOrigin ?? existing?.workspaceOrigin ?? fallback.workspaceOrigin,
+        userEdited:
+            patch.userEdited === true ||
+            patch.workspaceOrigin === "user" ||
+            existing?.userEdited === true,
+        starterHash:
+            typeof patch.starterHash === "string"
+                ? patch.starterHash
+                : existing?.starterHash ?? fallback.starterHash,
+        updatedAt: Date.now(),
       };
 
       const noMeaningfulChange = Boolean(
@@ -1441,6 +1667,9 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
           existing.completed === nextCard.completed &&
           existing.workspaceStatus === nextCard.workspaceStatus &&
           existing.workspaceSeedMode === nextCard.workspaceSeedMode &&
+          existing.workspaceOrigin === nextCard.workspaceOrigin &&
+          Boolean(existing.userEdited) === Boolean(nextCard.userEdited) &&
+          String(existing.starterHash ?? "") === String(nextCard.starterHash ?? "") &&
           workspaceContentKey(existing.toolWorkspace ?? null) === workspaceContentKey(nextCard.toolWorkspace ?? null) &&
           String(existing.toolCode ?? "") === String(nextCard.toolCode ?? "") &&
           String(existing.toolStdin ?? "") === String(nextCard.toolStdin ?? "") &&
@@ -1460,6 +1689,20 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
         nextCodeLength: String(nextCard.toolCode ?? "").length,
         noop: noMeaningfulChange,
         patchKeys: Object.keys(patch ?? {}),
+      });
+
+      reviewSaveDebug("runtime patchCard incoming", {
+        cardKey: key,
+        topicId: nextCard.topicId,
+        cardId: nextCard.cardId,
+        toolKey: nextCard.toolKey,
+        patchKeys: Object.keys(patch ?? {}),
+        userEdited: nextCard.userEdited,
+        workspaceOrigin: nextCard.workspaceOrigin,
+        workspaceStatus: nextCard.workspaceStatus,
+        toolCodeLength: String(nextCard.toolCode ?? "").length,
+        toolStdinLength: String(nextCard.toolStdin ?? "").length,
+        toolWorkspace: summarizeWorkspaceForSave(nextCard.toolWorkspace),
       });
 
       if (noMeaningfulChange) {
@@ -1519,6 +1762,9 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
         language: resolved.language,
         workspaceStatus: resolved.workspaceStatus,
         workspaceSeedMode: resolved.workspaceSeedMode,
+        workspaceOrigin: resolved.workspaceOrigin as WorkspaceOrigin | undefined,
+        userEdited: resolved.userEdited,
+        starterHash: resolved.starterHash,
         workspace: resolved.workspace,
         code: String(resolved.code ?? ""),
         stdin: String(resolved.stdin ?? ""),
@@ -1533,6 +1779,9 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
           existing.language === nextRuntime.language &&
           existing.workspaceStatus === nextRuntime.workspaceStatus &&
           existing.workspaceSeedMode === nextRuntime.workspaceSeedMode &&
+          existing.workspaceOrigin === nextRuntime.workspaceOrigin &&
+          Boolean(existing.userEdited) === Boolean(nextRuntime.userEdited) &&
+          String(existing.starterHash ?? "") === String(nextRuntime.starterHash ?? "") &&
           existing.code === nextRuntime.code &&
           existing.stdin === nextRuntime.stdin &&
           workspaceContentKey(existing.workspace ?? null) === workspaceContentKey(nextRuntime.workspace ?? null);
@@ -1576,9 +1825,15 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
         stdin: nextStdin,
         workspaceStatus: workspace ? "ready" : "pending",
         workspaceSeedMode: workspace ? "restored" : existing.workspaceSeedMode,
+        workspaceOrigin: workspace ? "user" : existing.workspaceOrigin,
+        userEdited: workspace ? true : existing.userEdited,
         updatedAt: Date.now(),
       };
 
+      const nextPendingExerciseKeys = new Set(state.persistence.pendingExerciseKeys);
+      const nextPendingCardKeys = new Set(state.persistence.pendingCardKeys);
+      let persistenceDirty = false;
+      const now = Date.now();
       const nextState: Partial<ReviewRuntimeState> = {
         editorRuntimes: {
           ...state.editorRuntimes,
@@ -1588,39 +1843,108 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
 
       if (existing.ownerKind === "exercise") {
         const ex = state.exercises[ownerKey];
-        if (ex) {
-          nextState.exercises = {
-            ...state.exercises,
-            [ownerKey]: {
-              ...ex,
-              workspace: workspace ?? ex.workspace,
-              stdin: nextStdin,
-              code: nextCode,
-              codeWorkspace: workspace ?? ex.workspace,
-              ideWorkspace: workspace ?? ex.workspace,
-              codeStdin: nextStdin,
-              workspaceStatus: workspace ? "ready" : ex.workspaceStatus,
-              updatedAt: Date.now(),
-            },
-          };
-        }
+        const parsed = parseRuntimeOwnerKey(ownerKey);
+        const baseExercise: ExerciseRuntimeState = ex ?? {
+          exerciseKey: ownerKey,
+          subjectSlug: state.subjectSlug ?? parsed.subjectSlug,
+          moduleSlug: state.moduleSlug ?? parsed.moduleSlug,
+          sectionSlug: state.sectionSlug ?? parsed.sectionSlug,
+          topicId: parsed.topicId,
+          cardId: parsed.cardId,
+          exerciseId: parsed.exerciseId,
+          language: existing.language,
+          workspace: workspace ?? null,
+          stdin: nextStdin,
+          runner: {},
+          answer: { revealed: false },
+          sketch: null,
+          status: "in_progress",
+          workspaceStatus: workspace ? "ready" : "pending",
+          workspaceOrigin: workspace ? "user" : existing.workspaceOrigin,
+          userEdited: workspace ? true : existing.userEdited,
+          starterHash: existing.starterHash,
+          updatedAt: now,
+          code: nextCode,
+          lang: existing.language,
+          codeWorkspace: workspace ?? undefined,
+          ideWorkspace: workspace ?? undefined,
+          codeStdin: nextStdin,
+        } as ExerciseRuntimeState;
+
+        nextState.exercises = {
+          ...state.exercises,
+          [ownerKey]: {
+            ...baseExercise,
+            workspace: workspace ?? baseExercise.workspace,
+            stdin: nextStdin,
+            code: nextCode,
+            language: existing.language,
+            lang: existing.language,
+            codeWorkspace: workspace ?? baseExercise.workspace,
+            ideWorkspace: workspace ?? baseExercise.workspace,
+            codeStdin: nextStdin,
+            workspaceStatus: workspace ? "ready" : baseExercise.workspaceStatus,
+            workspaceOrigin: workspace ? "user" : baseExercise.workspaceOrigin,
+            userEdited: workspace ? true : baseExercise.userEdited,
+            starterHash: baseExercise.starterHash ?? existing.starterHash,
+            status: baseExercise.status === "not_started" ? "in_progress" : baseExercise.status,
+            updatedAt: now,
+          },
+        };
+        nextPendingExerciseKeys.add(ownerKey);
+        persistenceDirty = true;
       } else {
         const card = state.cards[ownerKey];
-        if (card) {
-          nextState.cards = {
-            ...state.cards,
-            [ownerKey]: {
-              ...card,
-              toolWorkspace: workspace,
-              toolCode: nextCode,
-              toolStdin: nextStdin,
-              toolLang: existing.language,
-              workspaceStatus: workspace ? "ready" : card.workspaceStatus,
-              workspaceSeedMode: workspace ? "restored" : card.workspaceSeedMode,
-              updatedAt: Date.now(),
-            },
-          };
-        }
+        const parsed = parseRuntimeOwnerKey(ownerKey);
+        const baseCard: CardRuntimeState = card ?? {
+          cardKey: ownerKey,
+          topicId: parsed.topicId,
+          cardId: parsed.cardId,
+          visited: true,
+          completed: false,
+          sketch: null,
+          workspaceStatus: workspace ? "ready" : "pending",
+          workspaceSeedMode: workspace ? "restored" : existing.workspaceSeedMode,
+          workspaceOrigin: workspace ? "user" : existing.workspaceOrigin,
+          userEdited: workspace ? true : existing.userEdited,
+          starterHash: existing.starterHash,
+          toolKey: existing.toolScopeKey || `${ownerKey}:general`,
+          toolWorkspace: workspace,
+          toolCode: nextCode,
+          toolStdin: nextStdin,
+          toolLang: existing.language,
+          updatedAt: now,
+        };
+
+        nextState.cards = {
+          ...state.cards,
+          [ownerKey]: {
+            ...baseCard,
+            toolKey: baseCard.toolKey ?? existing.toolScopeKey ?? `${ownerKey}:general`,
+            toolWorkspace: workspace,
+            toolCode: nextCode,
+            toolStdin: nextStdin,
+            toolLang: existing.language,
+            workspaceStatus: workspace ? "ready" : baseCard.workspaceStatus,
+            workspaceSeedMode: workspace ? "restored" : baseCard.workspaceSeedMode,
+            workspaceOrigin: workspace ? "user" : baseCard.workspaceOrigin,
+            userEdited: workspace ? true : baseCard.userEdited,
+            starterHash: baseCard.starterHash ?? existing.starterHash,
+            visited: true,
+            updatedAt: now,
+          },
+        };
+        nextPendingCardKeys.add(ownerKey);
+        persistenceDirty = true;
+      }
+
+      if (persistenceDirty) {
+        nextState.persistence = {
+          ...state.persistence,
+          dirty: true,
+          pendingExerciseKeys: nextPendingExerciseKeys,
+          pendingCardKeys: nextPendingCardKeys,
+        };
       }
 
       didPatch = true;
@@ -1694,7 +2018,11 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
 
     const normalized = normalizeWorkspacePatch({ workspace });
 
-    get().patchExercise(key, normalized);
+    get().patchExercise(key, {
+      ...normalized,
+      userEdited: true,
+      workspaceOrigin: "user",
+    });
   },
 
   setFlushToolSnapshotCallback: (cb) => {

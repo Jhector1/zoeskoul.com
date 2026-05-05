@@ -139,6 +139,13 @@ function getRuntimePracticePatchForQuestion(q: Extract<ReviewQuestion, { kind: "
                       : "python";
 
   return {
+    exerciseKey: estate.exerciseKey,
+    exerciseId: estate.exerciseId,
+    subjectSlug: estate.subjectSlug,
+    moduleSlug: estate.moduleSlug,
+    sectionSlug: estate.sectionSlug,
+    topicId: estate.topicId,
+    cardId: estate.cardId,
     code,
     source: code,
     stdin,
@@ -146,6 +153,14 @@ function getRuntimePracticePatchForQuestion(q: Extract<ReviewQuestion, { kind: "
     lang,
     language: lang,
     codeLang: lang,
+    userEdited:
+        estate.userEdited === true ||
+        estate.workspaceOrigin === "user" ||
+        estate.workspaceOrigin === "saved",
+    workspaceOrigin:
+        estate.workspaceOrigin ??
+        (estate.userEdited === true ? "user" : "saved"),
+    starterHash: estate.starterHash,
     ...(workspace
         ? {
           workspace,

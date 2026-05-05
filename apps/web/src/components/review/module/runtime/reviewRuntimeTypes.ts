@@ -14,6 +14,13 @@ export type ExerciseRuntimeStatus =
   | "in_progress"
   | "completed";
 
+export type WorkspaceOrigin =
+  | "starter"
+  | "empty"
+  | "user"
+  | "saved"
+  | "restored";
+
 export type ExerciseRuntimeState = {
   exerciseKey: ExerciseStateKey;
 
@@ -50,6 +57,9 @@ export type ExerciseRuntimeState = {
   sketch?: SketchState | null;
   status: ExerciseRuntimeStatus;
   workspaceStatus: "pending" | "ready" | "error";
+  workspaceOrigin?: WorkspaceOrigin;
+  userEdited?: boolean;
+  starterHash?: string;
   updatedAt: number;
 
   /**
@@ -57,6 +67,7 @@ export type ExerciseRuntimeState = {
    * These are derived from workspace so older components can continue to work.
    */
   code?: string;
+  source?: string;
   lang?: string;
   codeWorkspace?: WorkspaceStateV2;
   ideWorkspace?: WorkspaceStateV2;
@@ -72,6 +83,9 @@ export type CardRuntimeState = {
   sketch?: SketchState | null;
   workspaceStatus: "pending" | "ready" | "error";
   workspaceSeedMode?: "starter" | "empty" | "restored";
+  workspaceOrigin?: WorkspaceOrigin;
+  userEdited?: boolean;
+  starterHash?: string;
 
   /**
    * Card/sketch-scoped Tools editor workspace.
@@ -94,6 +108,9 @@ export type EditorRuntimeState = {
   language: string;
   workspaceStatus: "pending" | "ready" | "error";
   workspaceSeedMode: "starter" | "empty" | "restored";
+  workspaceOrigin?: WorkspaceOrigin;
+  userEdited?: boolean;
+  starterHash?: string;
   workspace: WorkspaceStateV2 | null;
   code: string;
   stdin: string;

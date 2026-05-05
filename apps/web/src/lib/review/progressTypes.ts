@@ -18,6 +18,7 @@ export type ReviewTopicProgress = {
     quizzesDone?: Record<string, boolean>;
     quizState?: Record<string, SavedQuizState>;
     sketchState?: Record<string, any>;
+    toolState?: Record<string, any>;
     completed?: boolean;
     completedAt?: string;
 

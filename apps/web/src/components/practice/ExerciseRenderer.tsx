@@ -116,8 +116,33 @@ function getStableExerciseId(args: {
         current?.stableExerciseId ||
         current?.key ||
         exercise?.id ||
-        "default"
+      "default"
     );
+}
+
+function codeWorkspacePatch(
+    workspace: WorkspaceStateV2,
+    language?: RunnerLanguage | string | null,
+) {
+    const code = deriveEntryCode(workspace) ?? "";
+    const stdin = workspace.stdin ?? "";
+    const lang = (workspace.language || language || "python") as RunnerLanguage;
+
+    return {
+        workspace,
+        codeWorkspace: workspace,
+        ideWorkspace: workspace,
+        code,
+        source: code,
+        stdin,
+        codeStdin: stdin,
+        language: lang,
+        codeLang: lang,
+        lang,
+        userEdited: true,
+        workspaceOrigin: "user",
+        updatedAt: Date.now(),
+    };
 }
 
 function CodeInputWithTools(props: {
@@ -413,12 +438,40 @@ function CodeInputWithTools(props: {
             language={activeLanguage}
             sketch={activeSketch}
             savedSketch={savedSketch}
-            onChangeCode={(code) => onPatch({ code, ...resetCheckPatch() })}
-            onChangeStdin={(stdin) => onPatch({ stdin, ...resetCheckPatch() })}
-            onChangeLanguage={(language) => onPatch({ language, ...resetCheckPatch() })}
+            onChangeCode={(code) =>
+                onPatch({
+                    code,
+                    source: code,
+                    userEdited: true,
+                    workspaceOrigin: "user",
+                    updatedAt: Date.now(),
+                    ...resetCheckPatch(),
+                })
+            }
+            onChangeStdin={(stdin) =>
+                onPatch({
+                    stdin,
+                    codeStdin: stdin,
+                    userEdited: true,
+                    workspaceOrigin: "user",
+                    updatedAt: Date.now(),
+                    ...resetCheckPatch(),
+                })
+            }
+            onChangeLanguage={(language) =>
+                onPatch({
+                    language,
+                    codeLang: language,
+                    lang: language,
+                    userEdited: true,
+                    workspaceOrigin: "user",
+                    updatedAt: Date.now(),
+                    ...resetCheckPatch(),
+                })
+            }
             onChangeWorkspace={(workspace) => {
                 onPatch({
-                    workspace,
+                    ...codeWorkspacePatch(workspace, activeLanguage),
                     ...resetCheckPatch(),
                 });
             }}
@@ -622,7 +675,13 @@ export default function ExerciseRenderer({
             codeWorkspace: workspace,
             ideWorkspace: workspace,
             code: workspaceCode,
+            source: workspaceCode,
+            stdin: workspaceStdin,
             codeStdin: workspaceStdin,
+            userEdited: store?.userEdited === true || store?.workspaceOrigin === "user" || store?.workspaceOrigin === "saved",
+            workspaceOrigin: store?.workspaceOrigin ?? "saved",
+            starterHash: store?.starterHash,
+            updatedAt: store?.updatedAt ?? Date.now(),
         } as any);
     }, [ex.kind, exerciseKey, current, updateCurrent]);
 
@@ -930,12 +989,40 @@ export default function ExerciseRenderer({
                 cardId={cardId}
                 frame="card"
                 language={activeLanguage}
-                onChangeCode={(code) => onPatch({ code, ...resetCheckPatch() })}
-                onChangeStdin={(codeStdin) => onPatch({ codeStdin, ...resetCheckPatch() })}
-                onChangeLanguage={(codeLang) => onPatch({ codeLang, ...resetCheckPatch() })}
+                onChangeCode={(code) =>
+                    onPatch({
+                        code,
+                        source: code,
+                        userEdited: true,
+                        workspaceOrigin: "user",
+                        updatedAt: Date.now(),
+                        ...resetCheckPatch(),
+                    })
+                }
+                onChangeStdin={(codeStdin) =>
+                    onPatch({
+                        stdin: codeStdin,
+                        codeStdin,
+                        userEdited: true,
+                        workspaceOrigin: "user",
+                        updatedAt: Date.now(),
+                        ...resetCheckPatch(),
+                    })
+                }
+                onChangeLanguage={(codeLang) =>
+                    onPatch({
+                        language: codeLang,
+                        codeLang,
+                        lang: codeLang,
+                        userEdited: true,
+                        workspaceOrigin: "user",
+                        updatedAt: Date.now(),
+                        ...resetCheckPatch(),
+                    })
+                }
                 onChangeWorkspace={(workspace) => {
                     onPatch({
-                        workspace,
+                        ...codeWorkspacePatch(workspace, activeLanguage),
                         ...resetCheckPatch(),
                     });
                 }}

@@ -1,8 +1,10 @@
 import type { ReviewProgressState } from "@/lib/review/progressTypes";
+import { normalizeTopicProgressKey } from "@/lib/review/progressTopicKeys";
 import { stableJson } from "@/lib/client/persistence/stableJson";
 import type { ReviewRuntimeStore } from "./reviewRuntimeTypes";
 import { reviewDebug, summarizePracticePatch, summarizeWorkspace } from "./reviewDebug";
 import { deriveEntryCode } from "./exerciseWorkspaceResolver";
+import { reviewSaveDebug } from "./reviewSaveDebug";
 
 type RuntimeLike = Pick<ReviewRuntimeStore, "exercises" | "cards">;
 
@@ -109,6 +111,11 @@ function getExercisePatchForQuizState(estate: any) {
             ? estate.language
             : "python";
 
+  const userEdited =
+    estate.userEdited === true ||
+    estate.workspaceOrigin === "user" ||
+    estate.workspaceOrigin === "saved";
+
   return {
     code,
     source: code,
@@ -117,6 +124,9 @@ function getExercisePatchForQuizState(estate: any) {
     lang,
     stdin,
     codeStdin: stdin,
+    userEdited,
+    workspaceOrigin: estate.workspaceOrigin ?? (userEdited ? "saved" : undefined),
+    starterHash: estate.starterHash,
     ...(workspace
       ? {
           workspace,
@@ -174,13 +184,14 @@ export function mergeRuntimeIntoProgress(
         : null;
 
     if (!topicId) continue;
+    const topicKey = normalizeTopicProgressKey(topicId);
 
     const cardId =
       typeof estate.cardId === "string" && estate.cardId
         ? estate.cardId
         : null;
 
-    const topic = touchTopic(topicId);
+    const topic = touchTopic(topicKey);
 
     const oldRuntime = topic.runtimeStateV2 ?? {};
     const oldRuntimeExercises = oldRuntime.exercises ?? {};
@@ -224,6 +235,7 @@ export function mergeRuntimeIntoProgress(
 
       reviewDebug("3_BRIDGE_WRITE runtimeProgressBridge.practiceItemPatch", {
         topicId,
+        topicKey,
         cardId,
         exerciseKey,
         aliases,
@@ -270,13 +282,14 @@ export function mergeRuntimeIntoProgress(
         : null;
 
     if (!topicId) continue;
+    const topicKey = normalizeTopicProgressKey(topicId);
 
     const cardId =
       typeof cstate.cardId === "string" && cstate.cardId
         ? cstate.cardId
         : cardKey;
 
-    const topic = touchTopic(topicId);
+    const topic = touchTopic(topicKey);
 
     const oldRuntime = topic.runtimeStateV2 ?? {};
     const oldRuntimeCards = oldRuntime.cards ?? {};
@@ -337,6 +350,10 @@ export function mergeRuntimeIntoProgress(
         lang: cstate.toolLang ?? oldEntry?.lang ?? "python",
         code: cstate.toolCode ?? oldEntry?.code ?? "",
         stdin: cstate.toolStdin ?? oldEntry?.stdin ?? "",
+        userEdited: Boolean(cstate.userEdited),
+        workspaceOrigin: cstate.workspaceOrigin,
+        starterHash: cstate.starterHash,
+        updatedAt: cstate.updatedAt ?? oldEntry?.updatedAt ?? Date.now(),
         workspace: clonePlain(cstate.toolWorkspace),
       });
 
@@ -354,9 +371,34 @@ export function mergeRuntimeIntoProgress(
   }
 
   if (!changed) return progress;
-
-  return {
+  const next = {
     ...(progress as any),
     topics: nextTopics,
   } as ReviewProgressState;
+
+  reviewSaveDebug("mergeRuntimeIntoProgress", {
+    changed,
+    activeTopicId: (progress as any)?.activeTopicId ?? null,
+    activeTopicKey: normalizeTopicProgressKey((progress as any)?.activeTopicId),
+    runtimeExerciseKeys: Object.keys(runtime.exercises ?? {}),
+    runtimeCardKeys: Object.keys(runtime.cards ?? {}),
+    outputTopicKeys: Object.keys(next.topics ?? {}),
+    topicSummary: Object.fromEntries(
+      Object.entries(next.topics ?? {}).map(([topicKey, topic]: any) => [
+        topicKey,
+        {
+          exercises: Object.keys(topic?.runtimeStateV2?.exercises ?? {}),
+          savedExerciseKeys: Object.keys(topic?.runtimeStateV2?.exercises ?? {}),
+          cards: Object.keys(topic?.runtimeStateV2?.cards ?? {}),
+          tools: Object.keys(topic?.toolState ?? {}),
+          quizCards: Object.keys(topic?.quizState ?? {}),
+          practicePatchExerciseKeys: Object.values(topic?.quizState ?? {}).flatMap(
+            (quizState: any) => Object.keys(quizState?.practiceItemPatch ?? {}),
+          ),
+        },
+      ]),
+    ),
+  });
+
+  return next;
 }

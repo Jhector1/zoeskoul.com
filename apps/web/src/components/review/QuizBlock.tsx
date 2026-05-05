@@ -159,11 +159,28 @@ function getRuntimePracticePatchForQuestion(q: ReviewQuestion) {
                       : "python";
 
   return {
+    exerciseKey: (estate as any).exerciseKey,
+    exerciseId: (estate as any).exerciseId,
+    subjectSlug: (estate as any).subjectSlug,
+    moduleSlug: (estate as any).moduleSlug,
+    sectionSlug: (estate as any).sectionSlug,
+    topicId: (estate as any).topicId,
+    cardId: (estate as any).cardId,
     code,
+    source: code,
     codeLang: lang,
     lang,
+    language: lang,
     stdin,
     codeStdin: stdin,
+    userEdited:
+        (estate as any).userEdited === true ||
+        (estate as any).workspaceOrigin === "user" ||
+        (estate as any).workspaceOrigin === "saved",
+    workspaceOrigin:
+        (estate as any).workspaceOrigin ??
+        ((estate as any).userEdited === true ? "user" : "saved"),
+    starterHash: (estate as any).starterHash,
     ...(workspace
         ? {
           workspace,
