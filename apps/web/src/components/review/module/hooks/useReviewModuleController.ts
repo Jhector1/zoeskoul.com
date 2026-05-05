@@ -301,10 +301,8 @@ export function useReviewModuleController({
 
     const syncActiveTarget = useReviewRuntimeStore((s) => s.syncActiveTarget);
     useEffect(() => {
-        if (progressHydrated) {
-            syncActiveTarget(routeTarget);
-        }
-    }, [routeTarget, progressHydrated, syncActiveTarget]);
+        syncActiveTarget(routeTarget);
+    }, [routeTarget, syncActiveTarget]);
 
     const panels = useReviewPanels({ footerInsetPx });
 

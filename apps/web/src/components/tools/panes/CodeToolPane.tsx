@@ -451,8 +451,13 @@ export default function CodeToolPane(props: {
         [ideConfig],
     );
     const shouldForceDesktopLayout = ideShell.services.explorer?.enabled === true;
+
+// Important:
+// Review runtime always passes a WorkspaceStateV2, even for one-file starters.
+// So force workspace shell whenever review runtime has a ready workspace.
+// Otherwise single-file starter can get stuck in the legacy "single" loading path.
     const usesWorkspaceShell =
-        shouldForceDesktopLayout || ideShell.access.canUseMultiFile;
+        reviewDirectWorkspaceReady || shouldForceDesktopLayout || ideShell.access.canUseMultiFile;
     const workspaceOwnerKey = resolvedEditorOwnerKey ?? editorExerciseStateKey ?? toolScopeKey ?? boundId ?? "general";
 
     const workspaceContextKey = useMemo(
@@ -506,6 +511,10 @@ export default function CodeToolPane(props: {
     ]);
 
     const finalReviewWorkspace = directRuntimeWorkspace;
+    const runtimeWorkspacePending =
+        isReviewRouteMode &&
+        !runtimeWorkspaceError &&
+        (!editorRuntime || editorRuntime.workspaceStatus === "pending");
 
     const canRenderEditor = Boolean(
         finalReviewWorkspace &&
@@ -516,7 +525,7 @@ export default function CodeToolPane(props: {
     const showLoadingMask =
         !runtimeWorkspaceError &&
         !canRenderEditor &&
-        (isReviewRouteMode || usesWorkspaceShell);
+        (runtimeWorkspacePending || (!isReviewRouteMode && usesWorkspaceShell));
 
     useEffect(() => {
         setIdeReady(false);
@@ -558,6 +567,7 @@ export default function CodeToolPane(props: {
         exerciseWorkspaceReady,
         cardWorkspaceReady,
         runtimeWorkspaceError,
+        runtimeWorkspacePending,
         canRenderEditor,
         showLoadingMask,
         storeExerciseStatus: exerciseKey ? editorRuntime?.workspaceStatus : null,
@@ -721,7 +731,7 @@ export default function CodeToolPane(props: {
                         language={effectiveLanguage}
                         access={{
                             hasUser: true,
-                            canUseMultiFile: isSql || ideShell.access.canUseMultiFile,
+                            canUseMultiFile: isSql || reviewDirectWorkspaceReady || ideShell.access.canUseMultiFile,
                             canSaveCloud: ideShell.access.canSaveCloud,
                             canCreateProjects: ideShell.access.canCreateProjects,
                         }}
@@ -729,7 +739,8 @@ export default function CodeToolPane(props: {
                         billingHref="/billing"
                         draftStorageMode="off"
                         servicePreset={ideShell.servicePreset}
-                        forceDesktopLayout={shouldForceDesktopLayout}
+                        // forceDesktopLayout={shouldForceDesktopLayout}
+                        forceDesktopLayout={usesWorkspaceShell}
                         services={{
                             ...ideShell.services,
                             runner: {

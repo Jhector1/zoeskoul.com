@@ -10,8 +10,6 @@ import { defaultMainFile } from "@/components/ide/languageDefaults";
 
 type AnyRecord = Record<string, any>;
 
-
-
 function looksLikePythonStarterCode(value: string) {
   const s = String(value ?? "").trim();
   if (!s) return false;
@@ -42,7 +40,10 @@ function extractCodeFence(value: string) {
   return "";
 }
 
-function extractStarterCodeFromLooseContent(input: unknown, seen = new WeakSet<object>()): string {
+function extractStarterCodeFromLooseContent(
+    input: unknown,
+    seen = new WeakSet<object>(),
+): string {
   if (input == null) return "";
 
   if (typeof input === "string") {
@@ -71,7 +72,6 @@ function extractStarterCodeFromLooseContent(input: unknown, seen = new WeakSet<o
     "solutionCode",
     "solutionTemplate",
     "code",
-    "content",
     "content",
     "source",
     "body",
@@ -112,18 +112,21 @@ function explicitStarterCodeFromManifest(manifest: any) {
   const explicit =
       manifest?.workspace?.solutionCode ??
       manifest?.workspace?.starterCode ??
+      manifest?.workspace?.solutionTemplate ??
       manifest?.workspace?.code ??
       manifest?.workspace?.content ??
       manifest?.workspace?.source ??
       manifest?.solutionCode ??
       manifest?.starterCode ??
+      manifest?.solutionTemplate ??
       manifest?.code ??
       manifest?.content ??
       manifest?.source ??
       manifest?.recipe?.solutionCode ??
       manifest?.recipe?.starterCode ??
       manifest?.recipe?.solutionTemplate ??
-      manifest?.solutionTemplate ??
+      manifest?.recipe?.code ??
+      manifest?.recipe?.content ??
       "";
 
   const explicitString = String(explicit ?? "").trim();
@@ -224,7 +227,15 @@ function starterFileContent(file: StarterFile): string {
   if (typeof file === "string") return "";
   if (!isRecord(file)) return "";
 
-  for (const key of ["content", "contents", "text", "code", "source", "body", "value"] as const) {
+  for (const key of [
+    "content",
+    "contents",
+    "text",
+    "code",
+    "source",
+    "body",
+    "value",
+  ] as const) {
     if (typeof file[key] === "string") return file[key];
   }
 
@@ -269,7 +280,16 @@ function normalizeStarterFiles(
 
   if (isRecord(source)) {
     for (const [path, value] of Object.entries(source)) {
-      if (["entryFile", "entryFilePath", "mainFile", "mainFilePath", "language", "lang"].includes(path)) {
+      if (
+          [
+            "entryFile",
+            "entryFilePath",
+            "mainFile",
+            "mainFilePath",
+            "language",
+            "lang",
+          ].includes(path)
+      ) {
         continue;
       }
 
@@ -342,23 +362,6 @@ export function getStarterCode(manifest: AnyRecord) {
   return explicitStarterCodeFromManifest(manifest);
 }
 
-function patchEntryFileContent(args: {
-  workspace: WorkspaceStateV2;
-  content: string;
-}) {
-  const { workspace, content } = args;
-  const entryFileId = workspace.entryFileId || workspace.activeFileId;
-
-  return {
-    ...workspace,
-    nodes: workspace.nodes.map((node) =>
-        node.kind === "file" && node.id === entryFileId
-            ? { ...node, content, updatedAt: Date.now() }
-            : node,
-    ),
-  };
-}
-
 function stableStarterNodeId(kind: "file" | "folder", path: string): NodeId {
   const safe = String(path || "root")
       .replace(/\\/g, "/")
@@ -376,9 +379,6 @@ function buildWorkspaceFromStarterFiles(args: {
   starterFiles: Array<{ path: string; content: string }>;
   stdin: string;
 }): WorkspaceStateV2 {
-  // Starter workspaces must be deterministic. If ids/timestamps change on
-  // every resolve, FullIDE/Monaco receives a new model key and can stay stuck
-  // in Loading... while hydration repeats.
   const now = 0;
   const nodes: FSNode[] = [];
   const folderByPath = new Map<string, NodeId>();
@@ -468,11 +468,12 @@ function buildDefaultWorkspace(args: {
   code: string;
   stdin: string;
 }): WorkspaceStateV2 {
-  // Keep default/no-starter workspaces deterministic too. A blank default
-  // workspace should not get a new file id on every render/hydration.
   const now = 0;
-  const id = stableStarterNodeId("file", normalizePath(args.entryFile, defaultMainFile(args.language)));
-  const normalizedEntry = normalizePath(args.entryFile, defaultMainFile(args.language));
+  const normalizedEntry = normalizePath(
+      args.entryFile,
+      defaultMainFile(args.language),
+  );
+  const id = stableStarterNodeId("file", normalizedEntry);
   const parts = normalizedEntry.split("/");
   const fileName = parts.pop() || defaultMainFile(args.language);
 
@@ -563,64 +564,76 @@ export function resolveExerciseWorkspace(args: {
   saved?: WorkspaceStateV2 | null;
   entry?: import("./reviewTargetRegistry").ReviewTargetEntry | null;
 }): WorkspaceStateV2 {
-  const language = (args.language || args.entry?.language || "python") as WorkspaceLanguage;
+  const language = (args.language ||
+      args.entry?.language ||
+      "python") as WorkspaceLanguage;
+
   const manifest = normalizeManifestShape(args.manifest ?? args.entry?.item ?? {});
-  const starterFilesSource = getStarterFilesSource(manifest) || args.entry?.starterFiles;
+
+  // Preserve real saved user work when the runtime intentionally passes it in.
+  // This prevents user edits from being overwritten on refresh/re-render.
+  if (isWorkspace(args.saved)) {
+    return cloneWorkspace(args.saved);
+  }
+
+  // If the registry already has a complete starter workspace, use it.
+  if (args.entry?.starterWorkspace && isWorkspace(args.entry.starterWorkspace)) {
+    return cloneWorkspace(args.entry.starterWorkspace);
+  }
+
+  const savedFromManifest =
+      manifest.workspace && isWorkspace(manifest.workspace)
+          ? manifest.workspace
+          : manifest.initialWorkspace && isWorkspace(manifest.initialWorkspace)
+              ? manifest.initialWorkspace
+              : manifest.starterWorkspace && isWorkspace(manifest.starterWorkspace)
+                  ? manifest.starterWorkspace
+                  : null;
+
+  if (savedFromManifest) {
+    return cloneWorkspace(savedFromManifest);
+  }
+
+  const starterFilesSource =
+      getStarterFilesSource(manifest) || args.entry?.starterFiles;
+
   const explicitEntryFile = getEntryFile({ manifest, language });
   const entryFromStarterFiles = getEntryFileFromStarterFiles(starterFilesSource);
   const entryFile = entryFromStarterFiles || explicitEntryFile;
   const stdin = String(getInitialStdin(manifest) ?? "");
-  const starterWorkspace =
-      args.entry?.starterWorkspace && isWorkspace(args.entry.starterWorkspace)
-          ? args.entry.starterWorkspace
-          : manifest.workspace && isWorkspace(manifest.workspace)
-              ? manifest.workspace
-              : manifest.initialWorkspace && isWorkspace(manifest.initialWorkspace)
-                  ? manifest.initialWorkspace
-                  : manifest.starterWorkspace && isWorkspace(manifest.starterWorkspace)
-                      ? manifest.starterWorkspace
-                      : null;
 
-  if (starterWorkspace) {
-    return cloneWorkspace(starterWorkspace);
-  }
-
-  const starterFiles = normalizeStarterFiles(
-      starterFilesSource,
-      entryFile,
+  const starterCode = String(
+      getStarterCode(manifest) ?? args.entry?.starterCode ?? "",
   );
 
+  let starterFiles = normalizeStarterFiles(starterFilesSource, entryFile);
+
+  // Critical single-file fix:
+  // If this exercise only has starterCode / solutionCode / solutionTemplate,
+  // convert it into a normal one-file starterFiles workspace.
+  // That makes single-file and multi-file starters use the same builder.
+  if (starterFiles.length === 0 && starterCode.trim()) {
+    starterFiles = [
+      {
+        path: entryFile,
+        content: starterCode,
+      },
+    ];
+  }
+
   if (starterFiles.length > 0) {
-    const starterWorkspace = buildWorkspaceFromStarterFiles({
+    return buildWorkspaceFromStarterFiles({
       language,
       entryFile,
       starterFiles,
       stdin,
     });
-
-    const starterCode = getStarterCode(manifest) || args.entry?.starterCode;
-    const fileCount = starterWorkspace.nodes.filter(
-        (node) => node.kind === "file",
-    ).length;
-
-    if (typeof starterCode === "string" && starterCode && fileCount <= 1) {
-      return patchEntryFileContent({
-        workspace: starterWorkspace,
-        content: starterCode,
-      });
-    }
-
-    return starterWorkspace;
-  }
-
-  if (isWorkspace(args.saved)) {
-    return cloneWorkspace(args.saved);
   }
 
   return buildDefaultWorkspace({
     language,
     entryFile,
-    code: String(getStarterCode(manifest) ?? args.entry?.starterCode ?? ""),
+    code: "",
     stdin,
   });
 }
