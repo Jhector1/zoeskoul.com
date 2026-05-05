@@ -912,12 +912,15 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
         entry,
       });
 
+      if (existing && !registryHasStarter) {
+        return state;
+      }
+
       if (
           existing &&
-          (
-              !registryHasStarter ||
-              shouldPreserveSavedWorkspace(existing.workspace, starterWorkspace)
-          )
+          registryHasStarter &&
+          existing.workspaceStatus === "ready" &&
+          shouldPreserveSavedWorkspace(existing.workspace, starterWorkspace)
       ) {
         return state;
       }
