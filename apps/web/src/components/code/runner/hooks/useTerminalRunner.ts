@@ -396,6 +396,20 @@ export function useTerminalRunner(args: {
                     setRunState((prev) => (prev === "canceling" ? "canceling" : "running"));
                 }
 
+                if (isSql && !sqlDatasetId && !resolvedSchemaSql.trim()) {
+                    const data: RunResult = {
+                        ok: false,
+                        status: "Error",
+                        error:
+                            "SQL runtime has no dataset configured. Define runtime.datasetId on this SQL exercise/sketch or module runtimeDefaults.datasetId.",
+                    };
+                    if (mountedRef.current) {
+                        setLastResult(data);
+                        setRunState("idle");
+                    }
+                    return data;
+                }
+
                 const data = isSql
                     ? await onRun({
                         language: "sql",

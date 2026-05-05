@@ -10,6 +10,7 @@ import type {
 } from "./reviewRuntimeTypes";
 import { getCardStateKey } from "./exerciseKeys";
 import { resolveExerciseWorkspace } from "./exerciseWorkspaceResolver";
+import { resolveCourseLanguage, resolveCourseSqlRunnerConfig } from "./courseProfiles";
 import { resolveDeterministicEditorSource, type ReviewDeterministicEditorSource } from "./deterministicEditorSource";
 import { resolveSketchState } from "./sketchResolver";
 import { reviewDebug, summarizeWorkspace } from "./reviewDebug";
@@ -463,35 +464,27 @@ function targetHasStarter(entryOrManifest: any, maybeEntry?: import("./reviewTar
 
   return Boolean(
       hasFiles(entry?.starterFiles) ||
-      hasFiles(entry?.solutionFiles) ||
       String(entry?.starterCode ?? "").trim() ||
-      String(entry?.solutionCode ?? "").trim() ||
       entry?.starterWorkspace ||
       isWorkspaceValue(workspace) ||
       isWorkspaceValue(source?.initialWorkspace) ||
       isWorkspaceValue(source?.starterWorkspace) ||
-      hasFiles(workspace?.solutionFiles) ||
       hasFiles(workspace?.starterFiles) ||
       hasFiles(workspace?.files) ||
       hasFiles(workspace?.initialFiles) ||
       hasFiles(workspace?.workspaceFiles) ||
-      String(workspace?.solutionCode ?? "").trim() ||
       String(workspace?.starterCode ?? "").trim() ||
       String(workspace?.code ?? "").trim() ||
       String(workspace?.content ?? "").trim() ||
       String(workspace?.source ?? "").trim() ||
-      hasFiles(source?.solutionFiles) ||
       hasFiles(source?.starterFiles) ||
       hasFiles(source?.files) ||
       hasFiles(source?.initialFiles) ||
       hasFiles(source?.workspaceFiles) ||
-      String(source?.solutionCode ?? "").trim() ||
       String(source?.starterCode ?? "").trim() ||
       String(source?.code ?? "").trim() ||
       String(source?.content ?? "").trim() ||
       String(source?.source ?? "").trim() ||
-      hasFiles(source?.recipe?.solutionFiles) ||
-      String(source?.recipe?.solutionCode ?? "").trim() ||
       hasFiles(source?.recipe?.starterFiles) ||
       hasFiles(source?.recipe?.files) ||
       hasFiles(source?.recipe?.initialFiles) ||
@@ -1002,13 +995,17 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
         existingWorkspaceLooksEmpty,
       });
 
-      const language =
+      const language = resolveCourseLanguage({
+        subjectSlug,
+        language:
           effectiveManifest?.language ??
           effectiveManifest?.lang ??
           saved?.language ??
           saved?.lang ??
-          entry?.language ??
-          "python";
+          entry?.language,
+        runtimeDefaults: entry?.runtimeDefaults ?? entry?.topicRuntimeDefaults ?? entry?.moduleRuntimeDefaults ?? null,
+        target: effectiveManifest ?? entry?.item ?? null,
+      });
 
       const rawSavedWorkspace =
           saved && isWorkspace(saved.workspace)
@@ -1089,6 +1086,24 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
           starterFiles: entry?.starterFiles,
           starterCodeLength: typeof entry?.starterCode === "string" ? entry.starterCode.length : 0,
           itemWorkspace: entry?.item?.workspace ?? effectiveManifest?.workspace ?? null,
+        });
+      }
+
+      const sqlRuntime = resolveCourseSqlRunnerConfig({
+        subjectSlug,
+        language,
+        target: effectiveManifest ?? entry?.item ?? null,
+        topicRuntimeDefaults: entry?.topicRuntimeDefaults ?? null,
+        moduleRuntimeDefaults: entry?.moduleRuntimeDefaults ?? null,
+        runtimeDefaults: entry?.runtimeDefaults ?? null,
+      });
+
+      if (sqlRuntime.isSql && !sqlRuntime.sqlDatasetId) {
+        console.warn("[review-runtime] SQL exercise has no resolved dataset", {
+          exerciseKey,
+          manifestId: effectiveManifest?.id,
+          source: sqlRuntime.datasetResolution.source,
+          error: sqlRuntime.datasetResolution.error,
         });
       }
 
@@ -1179,6 +1194,23 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
         codeWorkspace: normalized.workspace,
         ideWorkspace: normalized.workspace,
         codeStdin: stdin,
+        ...(sqlRuntime.isSql
+          ? {
+              fixedSqlDialect: sqlRuntime.sqlDialect,
+              sqlDialect: sqlRuntime.sqlDialect,
+              sqlDatasetId: sqlRuntime.sqlDatasetId,
+              sqlDatasetResolutionSource: sqlRuntime.datasetResolution.source,
+              sqlDatasetResolutionError: sqlRuntime.datasetResolution.error,
+              sqlSchemaSql: sqlRuntime.sqlSchemaSql,
+              sqlSeedSql: sqlRuntime.sqlSeedSql,
+              sqlInitialTableSnapshots: sqlRuntime.sqlInitialTableSnapshots,
+              runtime: {
+                kind: "sql",
+                datasetId: sqlRuntime.sqlDatasetId,
+                resultShape: "table",
+              },
+            }
+          : {}),
       };
 
       const existingWorkspaceKey = workspaceContentKey(existing?.workspace ?? null);

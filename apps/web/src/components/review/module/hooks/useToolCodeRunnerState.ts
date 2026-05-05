@@ -893,17 +893,24 @@ export function useToolCodeRunnerState(args: {
                                 : "",
                 workspace: workspaceForBind,
                 workspaceKey: workspaceKeyOf(workspaceForBind),
-                sqlDialect: (savedForBind?.workspace as any)?.sqlDialect ?? resolvedSql.sqlDialect,
+                sqlDialect:
+                    (savedForBind as any)?.sqlDialect ??
+                    (savedForBind?.workspace as any)?.sqlDialect ??
+                    resolvedSql.sqlDialect,
                 sqlDatasetId:
+                    (savedForBind as any)?.sqlDatasetId ??
                     (savedForBind?.workspace as any)?.sqlDatasetId ??
                     resolvedSql.sqlDatasetId,
                 sqlSchemaSql:
+                    (savedForBind as any)?.sqlSchemaSql ??
                     (savedForBind?.workspace as any)?.sqlSchemaSql ??
                     resolvedSql.sqlSchemaSql,
                 sqlSeedSql:
+                    (savedForBind as any)?.sqlSeedSql ??
                     (savedForBind?.workspace as any)?.sqlSeedSql ??
                     resolvedSql.sqlSeedSql,
                 sqlInitialTableSnapshots:
+                    (savedForBind as any)?.sqlInitialTableSnapshots ??
                     (savedForBind?.workspace as any)?.sqlInitialTableSnapshots ??
                     resolvedSql.sqlInitialTableSnapshots,
             };

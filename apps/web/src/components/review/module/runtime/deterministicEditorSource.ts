@@ -38,16 +38,12 @@ function manifestHasStarter(manifest: any, entry: ReviewTargetEntry) {
   return Boolean(
     isWorkspace ||
       hasFiles(entry.starterFiles) ||
-      hasFiles((entry as any).solutionFiles) ||
       (typeof entry.starterCode === "string" && entry.starterCode.length > 0) ||
       hasFiles(workspaceContainer?.starterFiles) ||
-      hasFiles(workspaceContainer?.solutionFiles) ||
       hasFiles(workspaceContainer?.files) ||
       hasFiles(workspaceContainer?.initialFiles) ||
       hasFiles(workspaceContainer?.workspaceFiles) ||
-      (typeof workspaceContainer?.solutionCode === "string" && workspaceContainer.solutionCode.trim().length > 0) ||
       hasFiles(source?.starterFiles) ||
-      hasFiles(source?.solutionFiles) ||
       hasFiles(source?.files) ||
       hasFiles(source?.initialFiles) ||
       hasFiles(source?.workspaceFiles) ||
@@ -55,18 +51,14 @@ function manifestHasStarter(manifest: any, entry: ReviewTargetEntry) {
       (typeof workspaceContainer?.code === "string" && workspaceContainer.code.trim().length > 0) ||
       (typeof workspaceContainer?.content === "string" && workspaceContainer.content.trim().length > 0) ||
       (typeof workspaceContainer?.source === "string" && workspaceContainer.source.trim().length > 0) ||
-      (typeof source?.solutionCode === "string" && source.solutionCode.trim().length > 0) ||
       (typeof source?.starterCode === "string" && source.starterCode.trim().length > 0) ||
       (typeof source?.code === "string" && source.code.trim().length > 0) ||
       (typeof source?.content === "string" && source.content.trim().length > 0) ||
       (typeof source?.source === "string" && source.source.trim().length > 0) ||
-      hasFiles(source?.recipe?.solutionFiles) ||
-      (typeof source?.recipe?.solutionCode === "string" && source.recipe.solutionCode.trim().length > 0) ||
       hasFiles(source?.recipe?.starterFiles) ||
       hasFiles(source?.recipe?.files) ||
       hasFiles(source?.recipe?.initialFiles) ||
-      (typeof source?.recipe?.starterCode === "string" && source.recipe.starterCode.trim().length > 0) ||
-      (typeof source?.recipe?.solutionTemplate === "string" && source.recipe.solutionTemplate.trim().length > 0)
+      (typeof source?.recipe?.starterCode === "string" && source.recipe.starterCode.trim().length > 0)
   );
 }
 

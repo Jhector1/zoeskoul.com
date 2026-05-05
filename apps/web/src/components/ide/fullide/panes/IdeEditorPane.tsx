@@ -43,6 +43,10 @@ type Props = {
     closeTab: (id: string) => void;
     isDesktop: boolean;
     services: FullIDEServices;
+    sqlDatasetId?: string;
+    sqlSchemaSql?: string;
+    sqlSeedSql?: string;
+    sqlSetupSql?: string;
     sqlInitialTableSnapshots?: Record<
         string,
         {
@@ -97,6 +101,10 @@ export default function IdeEditorPane({
                                           isDesktop,
                                           isAuthenticated,
                                           services,
+                                          sqlDatasetId,
+                                          sqlSchemaSql,
+                                          sqlSeedSql,
+                                          sqlSetupSql,
                                           sqlInitialTableSnapshots,
                                       }: Props) {
     const isWeb = language === "web";
@@ -106,16 +114,16 @@ export default function IdeEditorPane({
             (n: any) =>
                 n?.kind === "file" && String(n?.name ?? "").toLowerCase() === "schema.sql",
         );
-        return file?.content ?? "";
-    }, [nodes]);
+        return file?.content ?? sqlSchemaSql ?? sqlSetupSql ?? "";
+    }, [nodes, sqlSchemaSql, sqlSetupSql]);
 
     const seedSql = React.useMemo(() => {
         const file = nodes.find(
             (n: any) =>
                 n?.kind === "file" && String(n?.name ?? "").toLowerCase() === "seed.sql",
         );
-        return file?.content ?? "";
-    }, [nodes]);
+        return file?.content ?? sqlSeedSql ?? "";
+    }, [nodes, sqlSeedSql]);
 
     const workspaceEntries = React.useMemo(() => {
         return exportWorkspaceEntries(nodes);
@@ -154,8 +162,10 @@ export default function IdeEditorPane({
                             onChangeCode={onChangeCode}
                             sqlDialect={sqlDialect}
                             onChangeSqlDialect={onChangeSqlDialect}
+                            sqlDatasetId={sqlDatasetId}
                             sqlSchemaSql={schemaSql}
                             sqlSeedSql={seedSql}
+                            sqlSetupSql={sqlSetupSql}
                             sqlInitialTableSnapshots={sqlInitialTableSnapshots}
                             showLanguagePicker={false}
                             showSqlDialectPicker={services.runner.showSqlDialectPicker}

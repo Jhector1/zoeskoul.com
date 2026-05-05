@@ -56,6 +56,10 @@ type FullIDEInnerProps = {
     onRunResult?: FullIDEProps["onRunResult"];
     forceDesktopLayout?: boolean;
     exerciseStateKey?: string;
+    sqlDatasetId?: FullIDEProps["sqlDatasetId"];
+    sqlSchemaSql?: FullIDEProps["sqlSchemaSql"];
+    sqlSeedSql?: FullIDEProps["sqlSeedSql"];
+    sqlSetupSql?: FullIDEProps["sqlSetupSql"];
     sqlInitialTableSnapshots?: FullIDEProps["sqlInitialTableSnapshots"];
     sqlDialect: any;
     setSqlDialect: React.Dispatch<React.SetStateAction<any>>;
@@ -145,6 +149,10 @@ function FullIDEInner({
                           onBeforeRun,
                           onRunResult,
                           forceDesktopLayout,
+                          sqlDatasetId,
+                          sqlSchemaSql,
+                          sqlSeedSql,
+                          sqlSetupSql,
                           sqlInitialTableSnapshots,
                           sqlDialect,
                           setSqlDialect,
@@ -392,6 +400,10 @@ function FullIDEInner({
             exerciseStateKey={exerciseStateKey}
             terminalHistoryScopeKey={terminalHistoryScopeKey}
             onApplyTerminalSnapshotFiles={applyTerminalSnapshotFiles}
+            sqlDatasetId={sqlDatasetId}
+            sqlSchemaSql={sqlSchemaSql}
+            sqlSeedSql={sqlSeedSql}
+            sqlSetupSql={sqlSetupSql}
             sqlInitialTableSnapshots={sqlInitialTableSnapshots}
         />
     );
@@ -590,6 +602,10 @@ export default function FullIDE(props: FullIDEProps) {
         onRunResult,
         initialSqlDialect = DEFAULT_SQL_DIALECT,
         forceDesktopLayout = false,
+        sqlDatasetId,
+        sqlSchemaSql,
+        sqlSeedSql,
+        sqlSetupSql,
         sqlInitialTableSnapshots,
     } = props;
 
@@ -826,6 +842,10 @@ export default function FullIDE(props: FullIDEProps) {
                 onBeforeRun={onBeforeRun}
                 onRunResult={onRunResult}
                 forceDesktopLayout={forceDesktopLayout}
+                sqlDatasetId={sqlDatasetId}
+                sqlSchemaSql={sqlSchemaSql}
+                sqlSeedSql={sqlSeedSql}
+                sqlSetupSql={sqlSetupSql}
                 sqlInitialTableSnapshots={sqlInitialTableSnapshots}
                 sqlDialect={sqlDialect}
                 setSqlDialect={setSqlDialect}

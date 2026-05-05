@@ -72,6 +72,17 @@ export type ExerciseRuntimeState = {
   codeWorkspace?: WorkspaceStateV2;
   ideWorkspace?: WorkspaceStateV2;
   codeStdin?: string;
+
+  /** SQL-only runtime metadata. Non-SQL courses must leave these unset. */
+  fixedSqlDialect?: string;
+  sqlDialect?: string;
+  sqlDatasetId?: string;
+  sqlDatasetResolutionSource?: string;
+  sqlDatasetResolutionError?: string;
+  sqlSchemaSql?: string;
+  sqlSeedSql?: string;
+  sqlInitialTableSnapshots?: unknown;
+  runtime?: { kind: "sql"; datasetId?: string; resultShape?: "table" } | Record<string, unknown>;
 };
 
 export type CardRuntimeState = {

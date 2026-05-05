@@ -12,8 +12,27 @@ import { TablesTab } from "./components/tabs/TablesTab";
 import { useSqlResultsPaneState } from "./hooks/useSqlResultsPaneState";
 import { parseSchemaSql } from "./lib/schema";
 import { SURFACE } from "./SqlResultsPane.constants";
-import type { SqlTableSnapshots } from "./SqlResultsPane.types";
+import type { SchemaModel, SqlTableSnapshots } from "./SqlResultsPane.types";
 import {cn} from "@/components/ide/utils";
+
+function buildSchemaFromSnapshots(snapshots?: SqlTableSnapshots | null): SchemaModel {
+    const tables = Object.values(snapshots ?? {})
+        .filter((snapshot) => snapshot && typeof snapshot.name === "string")
+        .map((snapshot) => ({
+            id: snapshot.name,
+            name: snapshot.name,
+            columns: (snapshot.columns ?? []).map((column) => ({
+                name: column.name,
+                type: column.type ?? "",
+                nullable: true,
+                isPk: false,
+                isFk: false,
+                isUnique: false,
+            })),
+        }));
+
+    return { tables, relations: [] };
+}
 
 export default function SqlResultsPane(props: {
     result: SqlRunResult | null;
@@ -32,7 +51,11 @@ export default function SqlResultsPane(props: {
         viewKey = "",
     } = props;
 
-    const schema = React.useMemo(() => parseSchemaSql(schemaSql), [schemaSql]);
+    const schema = React.useMemo(() => {
+        const parsed = parseSchemaSql(schemaSql);
+        if (parsed.tables.length > 0) return parsed;
+        return buildSchemaFromSnapshots(initialTableSnapshots);
+    }, [schemaSql, initialTableSnapshots]);
 
     const {
         tab,

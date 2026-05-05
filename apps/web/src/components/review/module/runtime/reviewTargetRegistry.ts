@@ -1,5 +1,6 @@
 import type { ReviewCard, ReviewModule } from "@/lib/subjects/types";
 import { getCardStateKey, getExerciseStateKey } from "./exerciseKeys";
+import { resolveCourseLanguage, resolveCourseFileSeed, resolveRuntimeDefaultDataset } from "./courseProfiles";
 
 export type ReviewTargetKind = "sketch" | "exercise" | "quiz" | "card" | "project" | "text" | "video";
 
@@ -20,11 +21,17 @@ export type ReviewTargetEntry = {
   exerciseId?: string;
   exerciseStateKey?: string;
   language?: string;
-  starterFiles?: Array<{ path: string; content: string; language?: string; entry?: boolean }>;
-  solutionFiles?: Array<{ path: string; content: string; language?: string; entry?: boolean }>;
+  starterFiles?: any;
+  solutionFiles?: any;
   starterCode?: string;
   solutionCode?: string;
   starterWorkspace?: any;
+  runtimeDefaults?: any;
+  topicRuntimeDefaults?: any;
+  moduleRuntimeDefaults?: any;
+  sqlDatasetId?: string;
+  sqlDatasetResolutionSource?: string;
+  sqlDatasetResolutionError?: string;
   toolManifest?: any;
   item: any;
 };
@@ -137,8 +144,6 @@ function extractRegistryStarterCodeFromLooseContent(input: unknown, seen = new W
 
   const preferredKeys = [
     "starterCode",
-    "solutionCode",
-    "solutionTemplate",
     "code",
     "content",
     "source",
@@ -178,59 +183,90 @@ function extractRegistryStarterCodeFromLooseContent(input: unknown, seen = new W
 }
 
 
-function pickStarterFiles(item: any) {
-  const source = item?.spec ?? item;
-  return (
-    source?.workspace?.solutionFiles ??
-    source?.workspace?.starterFiles ??
-    source?.workspace?.files ??
-    source?.workspace?.initialFiles ??
-    source?.workspace?.workspaceFiles ??
-    source?.solutionFiles ??
-    source?.starterFiles ??
-    source?.files ??
-    source?.initialFiles ??
-    source?.workspaceFiles ??
-    source?.recipe?.solutionFiles ??
-    source?.recipe?.starterFiles ??
-    source?.recipe?.files ??
-    source?.recipe?.initialFiles ??
-    undefined
-  );
+function pickStarterFiles(item: any, subjectSlug: string, language?: string) {
+  return resolveCourseFileSeed({ subjectSlug, language, target: item }).starterFiles;
 }
 
-function pickStarterCode(item: any) {
-  const source = item?.spec ?? item;
+function pickSolutionFiles(item: any, subjectSlug: string, language?: string) {
+  return resolveCourseFileSeed({ subjectSlug, language, target: item }).solutionFiles;
+}
 
-  const explicit =
-    source?.workspace?.solutionCode ??
-    source?.workspace?.starterCode ??
-    source?.workspace?.code ??
-    source?.workspace?.content ??
-    source?.workspace?.source ??
-    source?.solutionCode ??
-    source?.starterCode ??
-    source?.code ??
-    source?.content ??
-    source?.source ??
-    source?.recipe?.solutionCode ??
-    source?.recipe?.starterCode ??
-    source?.recipe?.solutionTemplate ??
-    source?.solutionTemplate ??
-    "";
-
-  const explicitString = String(explicit ?? "").trim();
-  if (explicitString) return explicitString;
+function pickStarterCode(item: any, subjectSlug: string, language?: string) {
+  const explicit = resolveCourseFileSeed({ subjectSlug, language, target: item }).starterCode;
+  if (explicit) return explicit;
 
   // Important: scan the full item, not only item.spec.
-  // Some lesson/project/sketch code examples live on card.content/body/blocks,
-  // while spec only has runtime/workspace metadata.
+  // Some lesson/project/sketch Python examples live on card.content/body/blocks,
+  // while spec only has runtime/workspace metadata. This remains a fallback only.
   return extractRegistryStarterCodeFromLooseContent(item) || undefined;
 }
 
-function pickLanguage(item: any) {
-  const source = item?.spec ?? item;
-  return source?.language ?? source?.lang ?? source?.workspace?.language ?? source?.recipe?.language ?? "python";
+function pickSolutionCode(item: any, subjectSlug: string, language?: string) {
+  return resolveCourseFileSeed({ subjectSlug, language, target: item }).solutionCode;
+}
+
+function defaultLanguageForSubject(subjectSlug: string) {
+  switch (subjectSlug) {
+    case "sql":
+      return "sql";
+    case "java":
+      return "java";
+    case "javascript":
+      return "javascript";
+    case "c":
+      return "c";
+    case "cpp":
+      return "cpp";
+    case "python":
+    case "python-for-beginners":
+    default:
+      return "python";
+  }
+}
+
+function inferRuntimeDefaultLanguage(runtimeDefaults: any, subjectSlug: string) {
+  const explicit = String(runtimeDefaults?.language ?? runtimeDefaults?.lang ?? "").trim();
+  if (explicit) return explicit;
+
+  if (String(runtimeDefaults?.kind ?? "").toLowerCase() === "sql") {
+    return "sql";
+  }
+
+  return defaultLanguageForSubject(subjectSlug);
+}
+
+function pickLanguage(item: any, fallbackLanguage: string, subjectSlug: string, runtimeDefaults: any) {
+  return resolveCourseLanguage({
+    subjectSlug,
+    language: fallbackLanguage,
+    runtimeDefaults,
+    target: item,
+  });
+}
+
+function buildRuntimeEntryContext(args: {
+  subjectSlug: string;
+  item: any;
+  topicRuntimeDefaults: any;
+  moduleRuntimeDefaults: any;
+  fallbackLanguage: string;
+}) {
+  const language = pickLanguage(
+    args.item,
+    args.fallbackLanguage,
+    args.subjectSlug,
+    args.topicRuntimeDefaults ?? args.moduleRuntimeDefaults,
+  );
+  const datasetResolution = resolveRuntimeDefaultDataset({
+    subjectSlug: args.subjectSlug,
+    language,
+    target: args.item,
+    topicRuntimeDefaults: args.topicRuntimeDefaults,
+    moduleRuntimeDefaults: args.moduleRuntimeDefaults,
+    runtimeDefaults: args.topicRuntimeDefaults ?? args.moduleRuntimeDefaults,
+  });
+
+  return { language, datasetResolution };
 }
 
 function buildRouteKey(args: {
@@ -308,6 +344,18 @@ export function buildReviewTargetRegistry(args: {
       const topicId = topic.id;
       const topicSlug = getTopicRouteSlug(topicId);
       const rawManifest = (topic.meta as any)?.rawManifest ?? null;
+      const moduleRuntimeDefaults =
+        (mod as any)?.runtimeDefaults ??
+        (mod as any)?.meta?.runtimeDefaults ??
+        null;
+      const topicRuntimeDefaults =
+        (topic as any)?.meta?.runtimeDefaults ??
+        moduleRuntimeDefaults ??
+        null;
+      const topicFallbackLanguage = inferRuntimeDefaultLanguage(
+        topicRuntimeDefaults,
+        subjectSlug,
+      );
       const rawSketches = Array.isArray(rawManifest?.sketches) ? rawManifest.sketches : [];
       const rawExercises = Array.isArray(rawManifest?.exercises) ? rawManifest.exercises : [];
       const cards = Array.isArray(topic.cards) ? topic.cards : [];
@@ -332,6 +380,13 @@ export function buildReviewTargetRegistry(args: {
           targetKind: cardTargetKind,
           targetSlug: cardTargetSlug,
         });
+        const cardRuntimeContext = buildRuntimeEntryContext({
+          subjectSlug,
+          item: rawSketch ?? card,
+          topicRuntimeDefaults,
+          moduleRuntimeDefaults,
+          fallbackLanguage: topicFallbackLanguage,
+        });
         const cardEntry: ReviewTargetEntry = {
           targetKey: `card:${cardKey}`,
           routeKey: cardRouteKey,
@@ -346,11 +401,17 @@ export function buildReviewTargetRegistry(args: {
           ownerKey: cardKey,
           cardKey,
           toolScopeKey: `${cardKey}:general`,
-          language: pickLanguage(rawSketch ?? card),
-          starterFiles: pickStarterFiles(rawSketch ?? card),
-          solutionFiles: pickStarterFiles(rawSketch ?? card),
-          starterCode: pickStarterCode(rawSketch ?? card),
-          solutionCode: pickStarterCode(rawSketch ?? card),
+          language: cardRuntimeContext.language,
+          starterFiles: pickStarterFiles(rawSketch ?? card, subjectSlug, cardRuntimeContext.language),
+          solutionFiles: pickSolutionFiles(rawSketch ?? card, subjectSlug, cardRuntimeContext.language),
+          starterCode: pickStarterCode(rawSketch ?? card, subjectSlug, cardRuntimeContext.language),
+          solutionCode: pickSolutionCode(rawSketch ?? card, subjectSlug, cardRuntimeContext.language),
+          runtimeDefaults: topicRuntimeDefaults,
+          topicRuntimeDefaults,
+          moduleRuntimeDefaults,
+          sqlDatasetId: cardRuntimeContext.datasetResolution.datasetId,
+          sqlDatasetResolutionSource: cardRuntimeContext.datasetResolution.source,
+          sqlDatasetResolutionError: cardRuntimeContext.datasetResolution.error,
           starterWorkspace: rawSketch?.workspace ?? (card.spec as any)?.workspace ?? null,
           toolManifest: rawSketch
             ? {
@@ -389,6 +450,13 @@ export function buildReviewTargetRegistry(args: {
             targetKind: "exercise",
             targetSlug: exercise.routeSlug,
           });
+          const exerciseRuntimeContext = buildRuntimeEntryContext({
+            subjectSlug,
+            item: rawExercise ?? exercise.step,
+            topicRuntimeDefaults,
+            moduleRuntimeDefaults,
+            fallbackLanguage: topicFallbackLanguage,
+          });
           const exerciseEntry: ReviewTargetEntry = {
             targetKey: `exercise:${exerciseStateKey}`,
             routeKey: exerciseRouteKey,
@@ -405,11 +473,17 @@ export function buildReviewTargetRegistry(args: {
             toolScopeKey: exerciseStateKey,
             exerciseId: exercise.exerciseId,
             exerciseStateKey,
-            language: pickLanguage(rawExercise ?? exercise.step),
-            starterFiles: pickStarterFiles(rawExercise ?? exercise.step),
-            solutionFiles: pickStarterFiles(rawExercise ?? exercise.step),
-            starterCode: pickStarterCode(rawExercise ?? exercise.step),
-            solutionCode: pickStarterCode(rawExercise ?? exercise.step),
+            language: exerciseRuntimeContext.language,
+            starterFiles: pickStarterFiles(rawExercise ?? exercise.step, subjectSlug, exerciseRuntimeContext.language),
+            solutionFiles: pickSolutionFiles(rawExercise ?? exercise.step, subjectSlug, exerciseRuntimeContext.language),
+            starterCode: pickStarterCode(rawExercise ?? exercise.step, subjectSlug, exerciseRuntimeContext.language),
+            solutionCode: pickSolutionCode(rawExercise ?? exercise.step, subjectSlug, exerciseRuntimeContext.language),
+            runtimeDefaults: topicRuntimeDefaults,
+            topicRuntimeDefaults,
+            moduleRuntimeDefaults,
+            sqlDatasetId: exerciseRuntimeContext.datasetResolution.datasetId,
+            sqlDatasetResolutionSource: exerciseRuntimeContext.datasetResolution.source,
+            sqlDatasetResolutionError: exerciseRuntimeContext.datasetResolution.error,
             starterWorkspace: rawExercise?.workspace ?? exercise.step?.workspace ?? null,
             toolManifest: rawExercise ?? exercise.step ?? null,
             item: rawExercise ?? exercise.step,

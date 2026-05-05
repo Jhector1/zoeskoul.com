@@ -31,6 +31,7 @@ export type CodeToolProps = {
 
     onBeforeRun?: () => void | Promise<void>;
 
+    sqlDatasetId?: string;
     sqlSchemaSql?: string;
     sqlSeedSql?: string;
     sqlSetupSql?: string;

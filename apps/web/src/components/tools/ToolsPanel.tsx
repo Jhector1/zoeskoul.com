@@ -56,6 +56,7 @@ export type ToolsPanelProps = {
     onChangeLang?: (l: WorkspaceLanguage) => void;
     onChangeSqlDialect?: (d: SqlDialect) => void;
 
+    sqlDatasetId?: string;
     sqlSchemaSql?: string;
     sqlSeedSql?: string;
     sqlSetupSql?: string;
@@ -133,6 +134,7 @@ function ToolsPanelInner(props: ToolsPanelProps) {
                         onChangeWorkspace={props.onChangeWorkspace}
                         onChangeSqlDialect={props.onChangeSqlDialect}
                         onBeforeRun={props.onBeforeRun}
+                        sqlDatasetId={props.sqlDatasetId}
                         sqlSchemaSql={props.sqlSchemaSql}
                         sqlSeedSql={props.sqlSeedSql}
                         sqlSetupSql={props.sqlSetupSql}
@@ -250,6 +252,7 @@ function CodePaneLayer(props: {
     onChangeWorkspace?: (workspace: WorkspaceStateV2 | null) => void;
     onChangeSqlDialect?: (d: SqlDialect) => void;
     onBeforeRun?: () => void | Promise<void>;
+    sqlDatasetId?: string;
     sqlSchemaSql?: string;
     sqlSeedSql?: string;
     sqlSetupSql?: string;
@@ -291,6 +294,7 @@ function CodePaneLayer(props: {
             onChangeWorkspace: props.onChangeWorkspace,
             onChangeSqlDialect: props.onChangeSqlDialect,
             onBeforeRun: props.onBeforeRun,
+            sqlDatasetId: props.sqlDatasetId,
             sqlSchemaSql: props.sqlSchemaSql,
             sqlSeedSql: props.sqlSeedSql,
             sqlSetupSql: props.sqlSetupSql,
@@ -335,6 +339,7 @@ const MemoCodePaneLayer = React.memo(
         prev.onChangeWorkspace === next.onChangeWorkspace &&
         prev.onChangeSqlDialect === next.onChangeSqlDialect &&
         prev.onBeforeRun === next.onBeforeRun &&
+        prev.sqlDatasetId === next.sqlDatasetId &&
         prev.sqlSchemaSql === next.sqlSchemaSql &&
         prev.sqlSeedSql === next.sqlSeedSql &&
         prev.sqlSetupSql === next.sqlSetupSql &&
@@ -400,6 +405,7 @@ function areToolsPanelPropsEqual(prev: ToolsPanelProps, next: ToolsPanelProps) {
         prev.codeEnabled === next.codeEnabled &&
         prev.onChangeLang === next.onChangeLang &&
         prev.onChangeSqlDialect === next.onChangeSqlDialect &&
+        prev.sqlDatasetId === next.sqlDatasetId &&
         prev.sqlSchemaSql === next.sqlSchemaSql &&
         prev.sqlSeedSql === next.sqlSeedSql &&
         prev.sqlSetupSql === next.sqlSetupSql &&

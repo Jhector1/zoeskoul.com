@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { toolsPolicyForSubject } from "@/lib/tools/policy";
 import { resolveToolDefaults } from "@/components/tools/resolveToolDefaults";
-import { resolveSqlRunnerConfig } from "@/lib/subjects/sql/runtime/resolveSqlRunnerConfig";
+import { resolveCourseSqlRunnerConfig } from "@/components/review/module/runtime/courseProfiles";
 import type { ReviewModule } from "@/lib/subjects/types";
 import {
     type LearningIdeConfig,
@@ -48,15 +48,18 @@ export function useReviewModuleRuntime({ subjectSlug, mod, viewTopic }: Args) {
     );
 
     const topicSqlFallback = useMemo(() => {
-        if (effectiveRuntime?.kind !== "sql" || !effectiveRuntime.datasetId) return null;
-
-        return resolveSqlRunnerConfig({
-            language: "sql",
-            sqlDialect: effectiveRuntime.fixedSqlDialect,
-            sqlDatasetId: effectiveRuntime.datasetId,
+        const resolved = resolveCourseSqlRunnerConfig({
+            subjectSlug,
+            language: effectiveRuntime?.language,
+            topicRuntimeDefaults: (viewTopic as any)?.meta?.runtimeDefaults ?? null,
+            moduleRuntimeDefaults: moduleRuntime,
+            runtimeDefaults: effectiveRuntime,
             defaultSqlDialect: toolDefaults.defaultSqlDialect,
         });
-    }, [effectiveRuntime, toolDefaults.defaultSqlDialect]);
+
+        if (!resolved.isSql || !resolved.sqlDatasetId) return null;
+        return resolved;
+    }, [subjectSlug, effectiveRuntime, viewTopic, moduleRuntime, toolDefaults.defaultSqlDialect]);
 
     return {
         codeEnabled,

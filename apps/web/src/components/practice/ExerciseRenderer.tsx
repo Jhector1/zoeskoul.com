@@ -347,12 +347,12 @@ function CodeInputWithTools(props: {
             workspace: activeWorkspace,
             ownerCardId,
             preferSnapshot: false,
-            sqlDialect: activeLanguage === "sql" ? exerciseSqlDialect : undefined,
-            sqlDatasetId: activeLanguage === "sql" ? exerciseSqlDatasetId : undefined,
-            sqlSchemaSql: activeLanguage === "sql" ? exerciseSqlSchemaSql : undefined,
-            sqlSeedSql: activeLanguage === "sql" ? exerciseSqlSeedSql : undefined,
+            sqlDialect: activeLanguage === "sql" ? ((storeExercise as any)?.sqlDialect ?? exerciseSqlDialect) : undefined,
+            sqlDatasetId: activeLanguage === "sql" ? ((storeExercise as any)?.sqlDatasetId ?? exerciseSqlDatasetId) : undefined,
+            sqlSchemaSql: activeLanguage === "sql" ? ((storeExercise as any)?.sqlSchemaSql ?? exerciseSqlSchemaSql) : undefined,
+            sqlSeedSql: activeLanguage === "sql" ? ((storeExercise as any)?.sqlSeedSql ?? exerciseSqlSeedSql) : undefined,
             sqlInitialTableSnapshots:
-                activeLanguage === "sql" ? exerciseSqlInitialTableSnapshots : undefined,
+                activeLanguage === "sql" ? ((storeExercise as any)?.sqlInitialTableSnapshots ?? exerciseSqlInitialTableSnapshots) : undefined,
             onPatch,
         }),
         [
@@ -1034,12 +1034,12 @@ export default function ExerciseRenderer({
                 variant="embedded"
                 feedback={codeFeedback}
                 explanation={codeExplanation}
-                sqlDialect={exCode.fixedSqlDialect ?? effectiveSqlRuntime?.fixedSqlDialect}
-                sqlDatasetId={(exCode as any).runtime?.datasetId ?? effectiveSqlRuntime?.datasetId}
-                sqlSchemaSql={(exCode as any).sqlSchemaSql}
-                sqlSeedSql={(exCode as any).sqlSeedSql}
+                sqlDialect={(storeExercise as any)?.sqlDialect ?? exCode.fixedSqlDialect ?? effectiveSqlRuntime?.fixedSqlDialect}
+                sqlDatasetId={(storeExercise as any)?.sqlDatasetId ?? (exCode as any).runtime?.datasetId ?? effectiveSqlRuntime?.datasetId}
+                sqlSchemaSql={(storeExercise as any)?.sqlSchemaSql ?? (exCode as any).sqlSchemaSql}
+                sqlSeedSql={(storeExercise as any)?.sqlSeedSql ?? (exCode as any).sqlSeedSql}
                 sqlSetupSql={(exCode as any).sqlSetupSql}
-                sqlInitialTableSnapshots={(exCode as any).sqlInitialTableSnapshots}
+                sqlInitialTableSnapshots={(storeExercise as any)?.sqlInitialTableSnapshots ?? (exCode as any).sqlInitialTableSnapshots}
             />
         );
     }

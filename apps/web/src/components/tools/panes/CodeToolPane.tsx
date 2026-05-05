@@ -357,6 +357,7 @@ export default function CodeToolPane(props: {
     onBeforeRun?: () => void | Promise<void>;
     ideConfig?: LearningIdeConfig | null;
     sqlDialect?: SqlDialect;
+    sqlDatasetId?: string;
     sqlSchemaSql?: string;
     sqlSeedSql?: string;
     sqlSetupSql?: string;
@@ -376,6 +377,7 @@ export default function CodeToolPane(props: {
         onBeforeRun,
         ideConfig,
         sqlDialect = "sqlite",
+        sqlDatasetId,
         sqlSchemaSql,
         sqlSeedSql,
         sqlSetupSql,
@@ -504,12 +506,14 @@ export default function CodeToolPane(props: {
             JSON.stringify({
                 ownerKey: workspaceOwnerKey,
                 language: effectiveLanguage,
+                sqlDatasetId: sqlDatasetId ?? "",
                 sqlSchemaSql: sqlSchemaSql ?? sqlSetupSql ?? "",
                 sqlSeedSql: sqlSeedSql ?? "",
                 workspaceShell: usesWorkspaceShell,
             }),
         [
             workspaceOwnerKey,
+            sqlDatasetId,
             sqlSchemaSql,
             sqlSeedSql,
             sqlSetupSql,
@@ -828,6 +832,10 @@ export default function CodeToolPane(props: {
                         onRunResult={handleRunResult}
                         onReadyChange={setIdeReady}
                         initialSqlDialect={sqlDialect}
+                        sqlDatasetId={sqlDatasetId}
+                        sqlSchemaSql={sqlSchemaSql ?? sqlSetupSql}
+                        sqlSeedSql={sqlSeedSql}
+                        sqlSetupSql={sqlSetupSql}
                         sqlInitialTableSnapshots={sqlInitialTableSnapshots}
                     />
                 ) : null}

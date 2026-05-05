@@ -1060,18 +1060,21 @@ export function useReviewModuleController({
                 codeEnabled: runtime.codeEnabled,
                 showLanguagePicker: false,
                 showSqlDialectPicker: false,
+                sqlDatasetId:
+                    tool.toolSqlDatasetId ??
+                    runtime.topicSqlFallback?.sqlDatasetId,
                 sqlSchemaSql:
                     tool.toolSqlSchemaSql ??
                     runtime.topicSqlFallback?.sqlSchemaSql ??
-                    STUDENTS_SQL_SCHEMA,
+                    (tool.toolLang === "sql" ? undefined : STUDENTS_SQL_SCHEMA),
                 sqlSeedSql:
                     tool.toolSqlSeedSql ??
                     runtime.topicSqlFallback?.sqlSeedSql ??
-                    STUDENTS_SQL_SEED,
+                    (tool.toolLang === "sql" ? undefined : STUDENTS_SQL_SEED),
                 sqlInitialTableSnapshots:
                     tool.toolSqlInitialTableSnapshots ??
                     runtime.topicSqlFallback?.sqlInitialTableSnapshots ??
-                    STUDENTS_INITIAL_TABLE_SNAPSHOTS,
+                    (tool.toolLang === "sql" ? undefined : STUDENTS_INITIAL_TABLE_SNAPSHOTS),
             },
         },
 

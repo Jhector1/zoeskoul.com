@@ -69,8 +69,6 @@ function extractStarterCodeFromLooseContent(
 
   const preferredKeys = [
     "starterCode",
-    "solutionCode",
-    "solutionTemplate",
     "code",
     "content",
     "source",
@@ -110,21 +108,15 @@ function extractStarterCodeFromLooseContent(
 
 function explicitStarterCodeFromManifest(manifest: any) {
   const explicit =
-      manifest?.workspace?.solutionCode ??
       manifest?.workspace?.starterCode ??
-      manifest?.workspace?.solutionTemplate ??
       manifest?.workspace?.code ??
       manifest?.workspace?.content ??
       manifest?.workspace?.source ??
-      manifest?.solutionCode ??
       manifest?.starterCode ??
-      manifest?.solutionTemplate ??
       manifest?.code ??
       manifest?.content ??
       manifest?.source ??
-      manifest?.recipe?.solutionCode ??
       manifest?.recipe?.starterCode ??
-      manifest?.recipe?.solutionTemplate ??
       manifest?.recipe?.code ??
       manifest?.recipe?.content ??
       "";
@@ -246,7 +238,6 @@ function unwrapStarterFiles(raw: unknown): unknown {
   if (!isRecord(raw)) return raw;
 
   return (
-      raw.solutionFiles ??
       raw.starterFiles ??
       raw.files ??
       raw.initialFiles ??
@@ -340,17 +331,14 @@ function getInitialStdin(manifest: AnyRecord) {
 export function getStarterFilesSource(manifest: AnyRecord) {
   const normalized = normalizeManifestShape(manifest);
   return (
-      normalized.workspace?.solutionFiles ??
       normalized.workspace?.starterFiles ??
       normalized.workspace?.files ??
       normalized.workspace?.initialFiles ??
       normalized.workspace?.workspaceFiles ??
-      normalized.solutionFiles ??
       normalized.starterFiles ??
       normalized.files ??
       normalized.initialFiles ??
       normalized.workspaceFiles ??
-      normalized.recipe?.solutionFiles ??
       normalized.recipe?.starterFiles ??
       normalized.recipe?.files ??
       normalized.recipe?.initialFiles ??
@@ -609,8 +597,8 @@ export function resolveExerciseWorkspace(args: {
   let starterFiles = normalizeStarterFiles(starterFilesSource, entryFile);
 
   // Critical single-file fix:
-  // If this exercise only has starterCode / solutionCode / solutionTemplate,
-  // convert it into a normal one-file starterFiles workspace.
+  // If this exercise only has explicit starterCode, convert it into a normal
+  // one-file starterFiles workspace.
   // That makes single-file and multi-file starters use the same builder.
   if (starterFiles.length === 0 && starterCode.trim()) {
     starterFiles = [

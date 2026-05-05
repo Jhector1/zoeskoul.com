@@ -59,33 +59,32 @@ export function resolveSqlRunnerConfig(
         sqlDatasetId && isSql ? getSqlDataset(sqlDatasetId) : null;
 
     const resolvedDialect =
-        sqlDialect ??
-        dataset?.dialect ??
-        defaultSqlDialect;
+        isSql
+            ? sqlDialect ?? dataset?.dialect ?? defaultSqlDialect
+            : defaultSqlDialect;
 
     const resolvedSchemaSql =
-        sqlSchemaSql ??
-        sqlSetupSql ??
-        dataset?.schemaSql ??
-        undefined;
+        isSql
+            ? sqlSchemaSql ?? sqlSetupSql ?? dataset?.schemaSql ?? undefined
+            : undefined;
 
     const resolvedSeedSql =
-        sqlSeedSql ??
-        dataset?.seedSql ??
-        undefined;
+        isSql
+            ? sqlSeedSql ?? dataset?.seedSql ?? undefined
+            : undefined;
 
     const resolvedSnapshots =
-        sqlInitialTableSnapshots ??
-        dataset?.tableSnapshots ??
-        undefined;
+        isSql
+            ? sqlInitialTableSnapshots ?? dataset?.tableSnapshots ?? undefined
+            : undefined;
 
     return {
         isSql,
         sqlDialect: resolvedDialect,
-        sqlDatasetId: sqlDatasetId ?? undefined,
+        sqlDatasetId: isSql ? sqlDatasetId ?? undefined : undefined,
         sqlSchemaSql: resolvedSchemaSql,
         sqlSeedSql: resolvedSeedSql,
-        sqlSetupSql: sqlSetupSql ?? undefined,
+        sqlSetupSql: isSql ? sqlSetupSql ?? undefined : undefined,
         sqlInitialTableSnapshots: resolvedSnapshots,
     };
 }

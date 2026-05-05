@@ -115,6 +115,10 @@ export type FullIDEProps = {
     initialSqlDialect?: SqlDialect;
     forceDesktopLayout?: boolean;
     exerciseStateKey?: string;
+    sqlDatasetId?: string;
+    sqlSchemaSql?: string;
+    sqlSeedSql?: string;
+    sqlSetupSql?: string;
     sqlInitialTableSnapshots?: Record<
         string,
         {
