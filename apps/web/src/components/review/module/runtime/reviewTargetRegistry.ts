@@ -183,6 +183,33 @@ function extractRegistryStarterCodeFromLooseContent(input: unknown, seen = new W
 }
 
 
+function mergeManifestParts<T extends Record<string, any>>(primary: T | null | undefined, secondary: T | null | undefined): T | any {
+  if (!primary && !secondary) return null;
+  if (!primary) return secondary;
+  if (!secondary) return primary;
+
+  return {
+    ...secondary,
+    ...primary,
+    runtime: {
+      ...(secondary as any).runtime,
+      ...(primary as any).runtime,
+    },
+    workspace: {
+      ...(secondary as any).workspace,
+      ...(primary as any).workspace,
+    },
+    recipe: {
+      ...(secondary as any).recipe,
+      ...(primary as any).recipe,
+    },
+    starterFiles: (primary as any).starterFiles ?? (secondary as any).starterFiles,
+    solutionFiles: (primary as any).solutionFiles ?? (secondary as any).solutionFiles,
+    starterCode: (primary as any).starterCode ?? (secondary as any).starterCode,
+    solutionCode: (primary as any).solutionCode ?? (secondary as any).solutionCode,
+  };
+}
+
 function pickStarterFiles(item: any, subjectSlug: string, language?: string) {
   return resolveCourseFileSeed({ subjectSlug, language, target: item }).starterFiles;
 }
@@ -380,9 +407,10 @@ export function buildReviewTargetRegistry(args: {
           targetKind: cardTargetKind,
           targetSlug: cardTargetSlug,
         });
+        const mergedCardManifest = mergeManifestParts(rawSketch, card as any);
         const cardRuntimeContext = buildRuntimeEntryContext({
           subjectSlug,
-          item: rawSketch ?? card,
+          item: mergedCardManifest,
           topicRuntimeDefaults,
           moduleRuntimeDefaults,
           fallbackLanguage: topicFallbackLanguage,
@@ -402,25 +430,19 @@ export function buildReviewTargetRegistry(args: {
           cardKey,
           toolScopeKey: `${cardKey}:general`,
           language: cardRuntimeContext.language,
-          starterFiles: pickStarterFiles(rawSketch ?? card, subjectSlug, cardRuntimeContext.language),
-          solutionFiles: pickSolutionFiles(rawSketch ?? card, subjectSlug, cardRuntimeContext.language),
-          starterCode: pickStarterCode(rawSketch ?? card, subjectSlug, cardRuntimeContext.language),
-          solutionCode: pickSolutionCode(rawSketch ?? card, subjectSlug, cardRuntimeContext.language),
+          starterFiles: pickStarterFiles(mergedCardManifest, subjectSlug, cardRuntimeContext.language),
+          solutionFiles: pickSolutionFiles(mergedCardManifest, subjectSlug, cardRuntimeContext.language),
+          starterCode: pickStarterCode(mergedCardManifest, subjectSlug, cardRuntimeContext.language),
+          solutionCode: pickSolutionCode(mergedCardManifest, subjectSlug, cardRuntimeContext.language),
           runtimeDefaults: topicRuntimeDefaults,
           topicRuntimeDefaults,
           moduleRuntimeDefaults,
           sqlDatasetId: cardRuntimeContext.datasetResolution.datasetId,
           sqlDatasetResolutionSource: cardRuntimeContext.datasetResolution.source,
           sqlDatasetResolutionError: cardRuntimeContext.datasetResolution.error,
-          starterWorkspace: rawSketch?.workspace ?? (card.spec as any)?.workspace ?? null,
-          toolManifest: rawSketch
-            ? {
-                ...rawSketch,
-                runtime: rawSketch.runtime ?? (card.spec as any)?.runtime ?? null,
-                workspace: rawSketch.workspace ?? (card.spec as any)?.workspace ?? null,
-              }
-            : buildToolManifest(card),
-          item: rawSketch ?? card,
+          starterWorkspace: mergedCardManifest?.workspace ?? (card.spec as any)?.workspace ?? null,
+          toolManifest: mergedCardManifest ?? buildToolManifest(card),
+          item: mergedCardManifest,
         };
 
         byKey[cardEntry.targetKey] = cardEntry;
@@ -450,9 +472,10 @@ export function buildReviewTargetRegistry(args: {
             targetKind: "exercise",
             targetSlug: exercise.routeSlug,
           });
+          const mergedExerciseManifest = mergeManifestParts(rawExercise, exercise.step as any);
           const exerciseRuntimeContext = buildRuntimeEntryContext({
             subjectSlug,
-            item: rawExercise ?? exercise.step,
+            item: mergedExerciseManifest,
             topicRuntimeDefaults,
             moduleRuntimeDefaults,
             fallbackLanguage: topicFallbackLanguage,
@@ -474,19 +497,19 @@ export function buildReviewTargetRegistry(args: {
             exerciseId: exercise.exerciseId,
             exerciseStateKey,
             language: exerciseRuntimeContext.language,
-            starterFiles: pickStarterFiles(rawExercise ?? exercise.step, subjectSlug, exerciseRuntimeContext.language),
-            solutionFiles: pickSolutionFiles(rawExercise ?? exercise.step, subjectSlug, exerciseRuntimeContext.language),
-            starterCode: pickStarterCode(rawExercise ?? exercise.step, subjectSlug, exerciseRuntimeContext.language),
-            solutionCode: pickSolutionCode(rawExercise ?? exercise.step, subjectSlug, exerciseRuntimeContext.language),
+            starterFiles: pickStarterFiles(mergedExerciseManifest, subjectSlug, exerciseRuntimeContext.language),
+            solutionFiles: pickSolutionFiles(mergedExerciseManifest, subjectSlug, exerciseRuntimeContext.language),
+            starterCode: pickStarterCode(mergedExerciseManifest, subjectSlug, exerciseRuntimeContext.language),
+            solutionCode: pickSolutionCode(mergedExerciseManifest, subjectSlug, exerciseRuntimeContext.language),
             runtimeDefaults: topicRuntimeDefaults,
             topicRuntimeDefaults,
             moduleRuntimeDefaults,
             sqlDatasetId: exerciseRuntimeContext.datasetResolution.datasetId,
             sqlDatasetResolutionSource: exerciseRuntimeContext.datasetResolution.source,
             sqlDatasetResolutionError: exerciseRuntimeContext.datasetResolution.error,
-            starterWorkspace: rawExercise?.workspace ?? exercise.step?.workspace ?? null,
-            toolManifest: rawExercise ?? exercise.step ?? null,
-            item: rawExercise ?? exercise.step,
+            starterWorkspace: mergedExerciseManifest?.workspace ?? null,
+            toolManifest: mergedExerciseManifest,
+            item: mergedExerciseManifest,
           };
 
           byKey[exerciseEntry.targetKey] = exerciseEntry;

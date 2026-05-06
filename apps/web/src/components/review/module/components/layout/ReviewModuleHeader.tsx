@@ -21,6 +21,8 @@ type Props = {
     unlockAll: boolean;
     viewIsComplete: boolean;
     headerGamification: HeaderGamificationVm | null;
+    saveStatus?: "idle" | "saving" | "saved" | "error" | "conflict";
+    lastSaveError?: string | null;
 };
 
 export default function ReviewModuleHeader({
@@ -39,6 +41,8 @@ export default function ReviewModuleHeader({
                                                unlockAll,
                                                viewIsComplete,
                                                headerGamification,
+                                               saveStatus = "idle",
+                                               lastSaveError,
                                            }: Props) {
     return (
         <HeaderSlick
@@ -113,8 +117,24 @@ export default function ReviewModuleHeader({
                         </button>
                     </div>
 
+                    <div className="hidden sm:flex shrink-0 items-center gap-2">
+                        {saveStatus && saveStatus !== "idle" ? (
+                            <div
+                                className="rounded-full border border-[rgb(var(--ui-border)/0.9)] bg-[rgb(var(--ui-surface)/0.88)] px-2.5 py-1 text-xs font-semibold text-[rgb(var(--ui-text)/0.96)]"
+                                title={lastSaveError ?? undefined}
+                            >
+                                {saveStatus === "saving"
+                                    ? "Saving..."
+                                    : saveStatus === "error"
+                                        ? "Save failed"
+                                        : saveStatus === "conflict"
+                                            ? "Sync conflict"
+                                            : "Saved"}
+                            </div>
+                        ) : null}
+
                     {headerGamification ? (
-                        <div className="hidden sm:flex shrink-0 items-center gap-2">
+                        <>
                             <div className="rounded-full border border-[rgb(var(--ui-border)/0.9)] bg-[rgb(var(--ui-surface)/0.88)] px-2.5 py-1 text-xs font-semibold text-[rgb(var(--ui-text)/0.96)]">
                                 🔥 {headerGamification.currentStreak}
                             </div>
@@ -126,8 +146,9 @@ export default function ReviewModuleHeader({
                             <div className="rounded-full border border-[rgb(var(--ui-border)/0.9)] bg-[rgb(var(--ui-surface)/0.88)] px-2.5 py-1 text-xs font-semibold text-[rgb(var(--ui-text)/0.96)]">
                                 {headerGamification.totalXp.toLocaleString()} XP
                             </div>
-                        </div>
+                        </>
                     ) : null}
+                    </div>
                 </div>
             }
             isBillingStatus={false}

@@ -2088,9 +2088,11 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
     if (!target) return;
 
     const { targetRegistry, subjectSlug, moduleSlug } = get();
+    if (!targetRegistry) return;
     const routeKey = `${target.sectionSlug}/${target.topicSlug}/${target.targetKind}/${target.targetSlug}`;
     const targetKey = targetRegistry?.byRoute?.[routeKey] ?? null;
     const registryEntry = targetKey ? targetRegistry?.byKey?.[targetKey] ?? null : null;
+    if (!registryEntry) return;
     const editorSource = resolveDeterministicEditorSource(registryEntry);
 
     if (editorSource) {

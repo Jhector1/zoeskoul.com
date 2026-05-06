@@ -58,6 +58,7 @@ type FullIDEInnerProps = {
     exerciseStateKey?: string;
     sqlDatasetId?: FullIDEProps["sqlDatasetId"];
     sqlResultShape?: FullIDEProps["sqlResultShape"];
+    sqlPaneOptions?: FullIDEProps["sqlPaneOptions"];
     sqlSchemaSql?: FullIDEProps["sqlSchemaSql"];
     sqlSeedSql?: FullIDEProps["sqlSeedSql"];
     sqlSetupSql?: FullIDEProps["sqlSetupSql"];
@@ -152,6 +153,7 @@ function FullIDEInner({
                           forceDesktopLayout,
                           sqlDatasetId,
                           sqlResultShape,
+                          sqlPaneOptions,
                           sqlSchemaSql,
                           sqlSeedSql,
                           sqlSetupSql,
@@ -409,6 +411,7 @@ function FullIDEInner({
             onApplyTerminalSnapshotFiles={applyTerminalSnapshotFiles}
             sqlDatasetId={sqlDatasetId}
             sqlResultShape={sqlResultShape}
+            sqlPaneOptions={sqlPaneOptions}
             sqlSchemaSql={sqlSchemaSql}
             sqlSeedSql={sqlSeedSql}
             sqlSetupSql={sqlSetupSql}
@@ -612,6 +615,7 @@ export default function FullIDE(props: FullIDEProps) {
         forceDesktopLayout = false,
         sqlDatasetId,
         sqlResultShape,
+        sqlPaneOptions,
         sqlSchemaSql,
         sqlSeedSql,
         sqlSetupSql,
@@ -853,6 +857,7 @@ export default function FullIDE(props: FullIDEProps) {
                 forceDesktopLayout={forceDesktopLayout}
                 sqlDatasetId={sqlDatasetId}
                 sqlResultShape={sqlResultShape}
+                sqlPaneOptions={sqlPaneOptions}
                 sqlSchemaSql={sqlSchemaSql}
                 sqlSeedSql={sqlSeedSql}
                 sqlSetupSql={sqlSetupSql}

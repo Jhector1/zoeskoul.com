@@ -3,6 +3,7 @@ import type { WorkspaceLanguage, SqlDialect } from "@/lib/practice/types";
 import { CodeRunnerRuntime } from "@/components/code/runner/runtime";
 import { InteractiveLanguage } from "@zoeskoul/code-contracts";
 import type { WorkspaceStateV2 } from "@/components/ide/types";
+import type { SqlPaneOptions } from "@/components/code/runner/components/sql/results-pane";
 
 export type TerminalDock = "bottom" | "right";
 
@@ -29,6 +30,7 @@ export type OnRunArgs =
     setupSql?: string;
     datasetId?: string;
     sqlResultShape?: "table";
+    sqlPaneOptions?: SqlPaneOptions;
     signal?: AbortSignal;
 };
 
@@ -107,6 +109,7 @@ export type CommonProps = {
     sqlSetupSql?: string;
     sqlDatasetId?: string;
     sqlResultShape?: "table";
+    sqlPaneOptions?: SqlPaneOptions;
 
     allowReset?: boolean;
     allowRun?: boolean;

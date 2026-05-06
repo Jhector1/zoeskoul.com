@@ -11,6 +11,7 @@ import { useActiveTool } from "./hooks/useActiveTool";
 import type { WorkspaceLanguage, SqlDialect } from "@/lib/practice/types";
 import type { LearningIdeConfig } from "@/lib/ide/learningIdeConfig";
 import type { WorkspaceStateV2 } from "@/components/ide/types";
+import type { SqlPaneOptions } from "@/components/code/runner/components/sql/results-pane";
 
 const PANE_ANIM = {
     show: { opacity: 1, scale: 1, y: 0, filter: "blur(0px)" },
@@ -58,6 +59,7 @@ export type ToolsPanelProps = {
 
     sqlDatasetId?: string;
     sqlResultShape?: "table";
+    sqlPaneOptions?: SqlPaneOptions;
     sqlSchemaSql?: string;
     sqlSeedSql?: string;
     sqlSetupSql?: string;
@@ -137,6 +139,7 @@ function ToolsPanelInner(props: ToolsPanelProps) {
                         onBeforeRun={props.onBeforeRun}
                         sqlDatasetId={props.sqlDatasetId}
                         sqlResultShape={props.sqlResultShape}
+                        sqlPaneOptions={props.sqlPaneOptions}
                         sqlSchemaSql={props.sqlSchemaSql}
                         sqlSeedSql={props.sqlSeedSql}
                         sqlSetupSql={props.sqlSetupSql}
@@ -256,6 +259,7 @@ function CodePaneLayer(props: {
     onBeforeRun?: () => void | Promise<void>;
     sqlDatasetId?: string;
     sqlResultShape?: "table";
+    sqlPaneOptions?: SqlPaneOptions;
     sqlSchemaSql?: string;
     sqlSeedSql?: string;
     sqlSetupSql?: string;
@@ -299,6 +303,7 @@ function CodePaneLayer(props: {
             onBeforeRun: props.onBeforeRun,
             sqlDatasetId: props.sqlDatasetId,
             sqlResultShape: props.sqlResultShape,
+            sqlPaneOptions: props.sqlPaneOptions,
             sqlSchemaSql: props.sqlSchemaSql,
             sqlSeedSql: props.sqlSeedSql,
             sqlSetupSql: props.sqlSetupSql,
@@ -345,6 +350,7 @@ const MemoCodePaneLayer = React.memo(
         prev.onBeforeRun === next.onBeforeRun &&
         prev.sqlDatasetId === next.sqlDatasetId &&
         prev.sqlResultShape === next.sqlResultShape &&
+        prev.sqlPaneOptions === next.sqlPaneOptions &&
         prev.sqlSchemaSql === next.sqlSchemaSql &&
         prev.sqlSeedSql === next.sqlSeedSql &&
         prev.sqlSetupSql === next.sqlSetupSql &&
@@ -412,6 +418,7 @@ function areToolsPanelPropsEqual(prev: ToolsPanelProps, next: ToolsPanelProps) {
         prev.onChangeSqlDialect === next.onChangeSqlDialect &&
         prev.sqlDatasetId === next.sqlDatasetId &&
         prev.sqlResultShape === next.sqlResultShape &&
+        prev.sqlPaneOptions === next.sqlPaneOptions &&
         prev.sqlSchemaSql === next.sqlSchemaSql &&
         prev.sqlSeedSql === next.sqlSeedSql &&
         prev.sqlSetupSql === next.sqlSetupSql &&

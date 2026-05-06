@@ -17,6 +17,7 @@ import type {
     DiagramPositions,
     DiagramTabKey,
     SchemaModel,
+    SqlPaneOptions,
     SqlTableSnapshots,
     TabKey,
 } from "../SqlResultsPane.types";
@@ -29,6 +30,7 @@ export function useSqlResultsPaneState(args: {
     schemaSql: string;
     initialTableSnapshots?: SqlTableSnapshots;
     viewKey?: string;
+    paneOptions?: SqlPaneOptions;
 }) {
     const {
         result,
@@ -37,9 +39,39 @@ export function useSqlResultsPaneState(args: {
         schemaSql,
         initialTableSnapshots,
         viewKey = "",
+        paneOptions,
     } = args;
 
-    const [tab, setTab] = React.useState<TabKey>("tables");
+    const availableTabs = React.useMemo<TabKey[]>(() => {
+        const showResults = paneOptions?.showResults !== false;
+        const showTables = paneOptions?.showTables !== false;
+        const showErd = Boolean(
+            paneOptions?.showErd ??
+            paneOptions?.showCrowFoot ??
+            paneOptions?.showCrowfoot ??
+            paneOptions?.showCrowsFoot
+        );
+        const showChen = paneOptions?.showChen === true;
+
+        const tabs: TabKey[] = [];
+        if (showResults) tabs.push("results");
+        if (showTables) tabs.push("tables");
+        if (showErd) tabs.push("erd");
+        if (showChen) tabs.push("chen");
+        return tabs.length > 0 ? tabs : ["results", "tables"];
+    }, [paneOptions]);
+
+    const defaultTab = React.useMemo<TabKey>(() => {
+        const requested = paneOptions?.defaultTab;
+        if (requested && availableTabs.includes(requested)) return requested;
+        if (availableTabs.includes("tables")) return "tables";
+        return availableTabs[0] ?? "results";
+    }, [availableTabs, paneOptions?.defaultTab]);
+
+    const [tab, rawSetTab] = React.useState<TabKey>(defaultTab);
+    const setTab = React.useCallback((next: TabKey) => {
+        rawSetTab(availableTabs.includes(next) ? next : defaultTab);
+    }, [availableTabs, defaultTab]);
     const [positions, setPositions] = React.useState<DiagramPositions>({});
 
     const sourceKey = React.useMemo(() => {
@@ -81,12 +113,18 @@ export function useSqlResultsPaneState(args: {
         setAcceptedResult(null);
         setPersistedSnapshots(fallbackSnapshots);
         setPositions({});
-        setTab(busy ? "results" : "tables");
-    }, [sourceKey, fallbackSnapshots, result, busy]);
+        setTab(busy && availableTabs.includes("results") ? "results" : defaultTab);
+    }, [sourceKey, fallbackSnapshots, result, busy, availableTabs, defaultTab, setTab]);
+
+    React.useEffect(() => {
+        if (!availableTabs.includes(tab)) {
+            rawSetTab(defaultTab);
+        }
+    }, [availableTabs, defaultTab, tab]);
 
     React.useEffect(() => {
         if (busy) {
-            setTab("results");
+            setTab(availableTabs.includes("results") ? "results" : defaultTab);
             return;
         }
 
@@ -106,7 +144,7 @@ export function useSqlResultsPaneState(args: {
                 Object.keys(nextSnapshots).length > 0 ? nextSnapshots : fallbackSnapshots,
             );
         }
-    }, [busy, result, fallbackSnapshots]);
+    }, [busy, result, fallbackSnapshots, availableTabs, defaultTab, setTab]);
 
     const tableSnapshots = React.useMemo(() => {
         return Object.keys(persistedSnapshots).length > 0
@@ -177,5 +215,6 @@ export function useSqlResultsPaneState(args: {
         tableSnapshots,
         displayResult: acceptedResult,
         handleMove,
+        availableTabs,
     };
 }

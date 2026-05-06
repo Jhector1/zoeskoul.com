@@ -45,6 +45,7 @@ type Props = {
     services: FullIDEServices;
     sqlDatasetId?: string;
     sqlResultShape?: "table";
+    sqlPaneOptions?: import("@/components/code/runner/components/sql/results-pane").SqlPaneOptions;
     sqlSchemaSql?: string;
     sqlSeedSql?: string;
     sqlSetupSql?: string;
@@ -104,6 +105,7 @@ export default function IdeEditorPane({
                                           services,
                                           sqlDatasetId,
                                           sqlResultShape,
+                                          sqlPaneOptions,
                                           sqlSchemaSql,
                                           sqlSeedSql,
                                           sqlSetupSql,
@@ -166,6 +168,7 @@ export default function IdeEditorPane({
                             onChangeSqlDialect={onChangeSqlDialect}
                             sqlDatasetId={sqlDatasetId}
                             sqlResultShape={sqlResultShape}
+                            sqlPaneOptions={sqlPaneOptions}
                             sqlSchemaSql={schemaSql}
                             sqlSeedSql={seedSql}
                             sqlSetupSql={sqlSetupSql}

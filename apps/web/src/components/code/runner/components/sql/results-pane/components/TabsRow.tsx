@@ -1,4 +1,3 @@
-
 import React from "react";
 import {
     UI_BTN,
@@ -29,23 +28,34 @@ function TabButton(props: {
 export function TabsRow(props: {
     tab: TabKey;
     setTab: (tab: TabKey) => void;
+    availableTabs?: TabKey[];
 }) {
-    const { tab, setTab } = props;
+    const { tab, setTab, availableTabs = ["results", "tables"] } = props;
+
+    const hasTab = (key: TabKey) => availableTabs.includes(key);
 
     return (
         <div className="flex flex-wrap items-center gap-1.5 p-1">
-            <TabButton active={tab === "results"} onClick={() => setTab("results")}>
-                Results
-            </TabButton>
-            <TabButton active={tab === "tables"} onClick={() => setTab("tables")}>
-                Tables
-            </TabButton>
-            <TabButton active={tab === "erd"} onClick={() => setTab("erd")}>
-                ERD
-            </TabButton>
-            <TabButton active={tab === "chen"} onClick={() => setTab("chen")}>
-                Chen
-            </TabButton>
+            {hasTab("results") ? (
+                <TabButton active={tab === "results"} onClick={() => setTab("results")}>
+                    Results
+                </TabButton>
+            ) : null}
+            {hasTab("tables") ? (
+                <TabButton active={tab === "tables"} onClick={() => setTab("tables")}>
+                    Tables
+                </TabButton>
+            ) : null}
+            {hasTab("erd") ? (
+                <TabButton active={tab === "erd"} onClick={() => setTab("erd")}>
+                    ERD
+                </TabButton>
+            ) : null}
+            {hasTab("chen") ? (
+                <TabButton active={tab === "chen"} onClick={() => setTab("chen")}>
+                    Chen
+                </TabButton>
+            ) : null}
         </div>
     );
 }

@@ -236,13 +236,13 @@ export async function PUT(req: Request) {
 
         return bodyJsonWithGuestCookie(
             {
-                ok: true,
+                ok: false,
                 ignored: true,
                 reason: "stale_revision",
                 incomingRevision,
                 existingRevision,
             },
-            200,
+            409,
             setGuestId,
         );
     }

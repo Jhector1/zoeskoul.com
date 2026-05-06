@@ -1,4 +1,5 @@
 import {WorkspaceLanguage} from "@/lib/practice/types";
+import type { SqlPaneOptions } from "@/components/code/runner/components/sql/results-pane";
 
 
 export type NodeId = string;
@@ -117,6 +118,7 @@ export type FullIDEProps = {
     exerciseStateKey?: string;
     sqlDatasetId?: string;
     sqlResultShape?: "table";
+    sqlPaneOptions?: SqlPaneOptions;
     sqlSchemaSql?: string;
     sqlSeedSql?: string;
     sqlSetupSql?: string;

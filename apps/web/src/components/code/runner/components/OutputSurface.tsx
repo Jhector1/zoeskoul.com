@@ -4,6 +4,7 @@ import React from "react";
 import type { CodeRunnerController, WorkspaceSyncEntry } from "@/components/code/runner/runtime";
 import RunnerOutputSurface from "./RunnerOutputSurface";
 import SqlOutputSurface from "./SqlOutputSurface";
+import type { SqlPaneOptions } from "@/components/code/runner/components/sql/results-pane";
 import WebPreview from "./WebPreview";
 
 export type OutputSurfaceModel =
@@ -25,6 +26,7 @@ export type OutputSurfaceModel =
         }
     >;
     sqlViewKey?: string;
+    sqlPaneOptions?: SqlPaneOptions;
 }
     | {
     kind: "web-preview";
@@ -46,6 +48,7 @@ export default function OutputSurface(props: {
                     sqlSchemaSql={model.sqlSchemaSql}
                     sqlInitialTableSnapshots={model.sqlInitialTableSnapshots}
                     sqlViewKey={model.sqlViewKey}
+                    sqlPaneOptions={model.sqlPaneOptions}
                 />
             );
 

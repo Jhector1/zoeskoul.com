@@ -21,6 +21,8 @@ export function useToolDoc(key: ToolDocKey, opts?: { format?: "markdown" | "plai
     const [updatedAt, setUpdatedAt] = useState<string | null>(null);
 
     const lastSavedRef = useRef("");
+    const loadedRef = useRef(false);
+    const latestBodyRef = useRef("");
     const timerRef = useRef<number | null>(null);
     const inflightRef = useRef<AbortController | null>(null);
 
@@ -29,9 +31,14 @@ export function useToolDoc(key: ToolDocKey, opts?: { format?: "markdown" | "plai
         return p.toString();
     }, [key]);
 
+    useEffect(() => {
+        latestBodyRef.current = body;
+    }, [body]);
+
     // Load
     useEffect(() => {
         let alive = true;
+        loadedRef.current = false;
         setState("loading");
 
         (async () => {
@@ -43,11 +50,14 @@ export function useToolDoc(key: ToolDocKey, opts?: { format?: "markdown" | "plai
 
                 const v = String(j?.body ?? "");
                 setBody(v);
+                latestBodyRef.current = v;
                 lastSavedRef.current = v;
+                loadedRef.current = true;
                 setUpdatedAt(j?.updatedAt ? String(j.updatedAt) : null);
                 setState("idle");
             } catch {
                 if (!alive) return;
+                loadedRef.current = true;
                 setState("error");
             }
         })();
@@ -59,57 +69,71 @@ export function useToolDoc(key: ToolDocKey, opts?: { format?: "markdown" | "plai
 
     // Debounced save
     useEffect(() => {
-        if (state === "loading") return;
+        if (!loadedRef.current) return;
         if (body === lastSavedRef.current) return;
 
         if (timerRef.current) window.clearTimeout(timerRef.current);
 
         timerRef.current = window.setTimeout(async () => {
-            try {
-                setState("saving");
+            const bodyToSave = latestBodyRef.current;
+            if (bodyToSave === lastSavedRef.current) return;
 
+            let savingUiTimer: number | null = null;
+            try {
                 inflightRef.current?.abort();
                 const ac = new AbortController();
                 inflightRef.current = ac;
 
+                // Do not flip the whole UI into a busy state for fast saves.
+                savingUiTimer = window.setTimeout(() => setState("saving"), 350);
+
+                const requestTimeout = window.setTimeout(() => ac.abort(), 12000);
                 const res = await fetch(`/api/tools/doc`, {
                     method: "PUT",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ ...key, format, body }),
+                    body: JSON.stringify({ ...key, format, body: bodyToSave }),
                     signal: ac.signal,
-                });
+                }).finally(() => window.clearTimeout(requestTimeout));
 
                 if (!res.ok) throw new Error("save failed");
                 const j = await res.json();
 
-                lastSavedRef.current = body;
+                lastSavedRef.current = bodyToSave;
                 setUpdatedAt(j?.updatedAt ? String(j.updatedAt) : null);
                 setState("saved");
 
-                window.setTimeout(() => setState("idle"), 600);
+                window.setTimeout(() => {
+                    if (latestBodyRef.current === lastSavedRef.current) setState("idle");
+                }, 600);
             } catch (e: any) {
-                if (e?.name === "AbortError") return;
+                if (e?.name === "AbortError") {
+                    setState("idle");
+                    return;
+                }
                 setState("error");
+            } finally {
+                if (savingUiTimer != null) window.clearTimeout(savingUiTimer);
             }
-        }, debounceMs);
+        }, Math.max(debounceMs, 900));
 
         return () => {
             if (timerRef.current) window.clearTimeout(timerRef.current);
         };
-    }, [body, key, format, debounceMs, state]);
+    }, [body, key, format, debounceMs]);
 
     async function flush() {
-        if (body === lastSavedRef.current) return;
+        const bodyToSave = latestBodyRef.current;
+        if (bodyToSave === lastSavedRef.current) return;
         try {
             const res = await fetch(`/api/tools/doc`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ ...key, format, body }),
+                body: JSON.stringify({ ...key, format, body: bodyToSave }),
                 keepalive: true,
             });
             if (!res.ok) throw new Error("flush failed");
             const j = await res.json();
-            lastSavedRef.current = body;
+            lastSavedRef.current = bodyToSave;
             setUpdatedAt(j?.updatedAt ? String(j.updatedAt) : null);
             setState("idle");
         } catch {

@@ -1,6 +1,5 @@
 import type { ReviewProgressState } from "@/lib/review/progressTypes";
 import { normalizeTopicProgressKey } from "@/lib/review/progressTopicKeys";
-import { stableJson } from "@/lib/client/persistence/stableJson";
 import type { ReviewRuntimeStore } from "./reviewRuntimeTypes";
 import { reviewDebug, summarizePracticePatch, summarizeWorkspace } from "./reviewDebug";
 import { deriveEntryCode } from "./exerciseWorkspaceResolver";
@@ -213,10 +212,8 @@ export function mergeRuntimeIntoProgress(
         },
       };
 
-      if (stableJson(oldRuntime) !== stableJson(nextRuntime)) {
-        topic.runtimeStateV2 = nextRuntime;
-        changed = true;
-      }
+      topic.runtimeStateV2 = nextRuntime;
+      changed = true;
     }
 
     /**
@@ -266,10 +263,8 @@ export function mergeRuntimeIntoProgress(
         [cardId]: nextCardQuiz,
       };
 
-      if (stableJson(oldQuizState) !== stableJson(nextQuizState)) {
-        topic.quizState = nextQuizState;
-        changed = true;
-      }
+      topic.quizState = nextQuizState;
+      changed = true;
     }
   }
 
@@ -311,10 +306,8 @@ export function mergeRuntimeIntoProgress(
         },
       };
 
-      if (stableJson(oldRuntime) !== stableJson(nextRuntime)) {
-        topic.runtimeStateV2 = nextRuntime;
-        changed = true;
-      }
+      topic.runtimeStateV2 = nextRuntime;
+      changed = true;
     }
 
     if (cstate.sketch) {
@@ -324,10 +317,8 @@ export function mergeRuntimeIntoProgress(
         [cardId]: clonePlain(cstate.sketch),
       };
 
-      if (stableJson(oldSketchState) !== stableJson(nextSketchState)) {
-        topic.sketchState = nextSketchState;
-        changed = true;
-      }
+      topic.sketchState = nextSketchState;
+      changed = true;
     }
 
     /**
@@ -363,10 +354,8 @@ export function mergeRuntimeIntoProgress(
         [legacyToolKey]: buildToolEntry(oldToolState[legacyToolKey]),
       };
 
-      if (stableJson(oldToolState) !== stableJson(nextToolState)) {
-        topic.toolState = nextToolState;
-        changed = true;
-      }
+      topic.toolState = nextToolState;
+      changed = true;
     }
   }
 

@@ -3,7 +3,7 @@
 import React from "react";
 import { isSqlRunResult } from "@/lib/code/types";
 import type { CodeRunnerController } from "@/components/code/runner/runtime";
-import SqlResultsPane from "@/components/code/runner/components/sql/results-pane";
+import SqlResultsPane, { type SqlPaneOptions } from "@/components/code/runner/components/sql/results-pane";
 
 function SqlErrorPane(props: { message: string }) {
     return (
@@ -32,12 +32,14 @@ export default function SqlOutputSurface(props: {
         }
     >;
     sqlViewKey?: string;
+    sqlPaneOptions?: SqlPaneOptions;
 }) {
     const {
         controller,
         sqlSchemaSql = "",
         sqlInitialTableSnapshots,
         sqlViewKey,
+        sqlPaneOptions,
     } = props;
 
     const sqlResult =
@@ -68,6 +70,7 @@ export default function SqlOutputSurface(props: {
             schemaSql={sqlSchemaSql}
             initialTableSnapshots={sqlInitialTableSnapshots}
             viewKey={sqlViewKey}
+            paneOptions={sqlPaneOptions}
         />
     );
 }

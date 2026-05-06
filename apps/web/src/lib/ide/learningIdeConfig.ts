@@ -1,3 +1,4 @@
+import type { SqlPaneOptions } from "@/components/code/runner/components/sql/results-pane";
 import type {
     FullIDEServicePreset,
     FullIDEServicesInput,
@@ -19,6 +20,8 @@ export type LearningIdeConfig = {
     preset?: LearningIdeServicePreset;
     runnerBackend?: LearningIdeRunnerBackend;
     requires?: LearningIdeServiceRequirements;
+    /** SQL result pane controls. Results/Tables are visible by default; ERD/Chen are opt-in. */
+    sqlPane?: SqlPaneOptions;
 };
 
 export function mergeLearningIdeConfigs(
@@ -34,6 +37,7 @@ export function mergeLearningIdeConfigs(
             ...(merged ?? {}),
             ...(config.preset ? { preset: config.preset } : {}),
             ...(config.runnerBackend ? { runnerBackend: config.runnerBackend } : {}),
+            ...(config.sqlPane ? { sqlPane: { ...(merged?.sqlPane ?? {}), ...config.sqlPane } } : {}),
             requires: {
                 ...previousRequires,
                 ...(config.requires ?? {}),
@@ -55,6 +59,7 @@ export function resolveFullIDEConfigFromLearningIde(args?: {
 }): {
     servicePreset: FullIDEServicePreset;
     services: FullIDEServicesInput;
+    sqlPaneOptions?: SqlPaneOptions;
     access: {
         canUseMultiFile: boolean;
         canSaveCloud: boolean;
@@ -123,6 +128,7 @@ export function resolveFullIDEConfigFromLearningIde(args?: {
     return {
         servicePreset: ideConfig?.preset ?? "runner",
         services,
+        sqlPaneOptions: ideConfig?.sqlPane,
         access: {
             canUseMultiFile: wantsMultiFile,
             canSaveCloud: wantsProjectPersistence,

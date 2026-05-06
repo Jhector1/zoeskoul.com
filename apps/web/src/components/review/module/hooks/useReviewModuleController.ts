@@ -138,6 +138,8 @@ export function useReviewModuleController({
         viewTopicId,
         setViewTopicId,
         flushNow,
+        saveStatus,
+        lastSaveError,
     } = useReviewProgress({ subjectSlug, moduleSlug, locale, firstTopicId });
 
     const store = useReviewRuntimeStore();
@@ -308,8 +310,9 @@ export function useReviewModuleController({
 
     const syncActiveTarget = useReviewRuntimeStore((s) => s.syncActiveTarget);
     useEffect(() => {
+        if (!targetRegistry) return;
         syncActiveTarget(routeTarget);
-    }, [routeTarget, progressHydrated, syncActiveTarget]);
+    }, [routeTarget, progressHydrated, syncActiveTarget, targetRegistry]);
 
     const panels = useReviewPanels({ footerInsetPx });
 
@@ -991,6 +994,8 @@ export function useReviewModuleController({
             unlockAll,
             viewIsComplete,
             headerGamification,
+            saveStatus,
+            lastSaveError,
         },
 
         leftRail: {
@@ -1073,6 +1078,7 @@ export function useReviewModuleController({
                     Boolean(runtime.topicSqlFallback?.sqlDatasetId)
                         ? ("table" as const)
                         : undefined,
+                sqlPaneOptions: runtime.effectiveIdeConfig?.sqlPane,
                 sqlDatasetId: firstNonBlank(
                     tool.toolSqlDatasetId,
                     runtime.topicSqlFallback?.sqlDatasetId,

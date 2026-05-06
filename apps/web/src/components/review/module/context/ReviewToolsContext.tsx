@@ -535,7 +535,9 @@ export function ReviewToolsProvider({
           !registryRef.current.has(id) &&
           (currentBound === id || currentBound === targetKeyBeforeDelete)
         ) {
-          storeUnbindExerciseTool(currentBound);
+          if (currentBound) {
+            storeUnbindExerciseTool(currentBound);
+          }
           onUnbindFromToolsPanel?.();
         }
       }, 0);

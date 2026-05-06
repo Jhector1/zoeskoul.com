@@ -50,6 +50,11 @@
           "multiFile": true,
           "projectPersistence": false,
           "cloudProjects": false
+        },
+        "sqlPane": {
+          "showCrowFoot": true,
+          "showChen": true,
+          "defaultTab": "tables"
         }
       },
       "meta": {

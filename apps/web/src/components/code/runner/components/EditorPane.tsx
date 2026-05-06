@@ -10,7 +10,7 @@ import React, {
 } from "react";
 import dynamic from "next/dynamic";
 import { cn } from "@/components/ide/utils";
-import { editor } from "monaco-editor";
+import type { editor } from "monaco-editor";
 
 const Monaco = dynamic(() => import("@monaco-editor/react"), { ssr: false });
 

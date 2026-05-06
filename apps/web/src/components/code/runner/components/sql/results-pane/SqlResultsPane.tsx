@@ -12,7 +12,7 @@ import { TablesTab } from "./components/tabs/TablesTab";
 import { useSqlResultsPaneState } from "./hooks/useSqlResultsPaneState";
 import { parseSchemaSql } from "./lib/schema";
 import { SURFACE } from "./SqlResultsPane.constants";
-import type { SchemaModel, SqlTableSnapshots } from "./SqlResultsPane.types";
+import type { SchemaModel, SqlPaneOptions, SqlTableSnapshots } from "./SqlResultsPane.types";
 import {cn} from "@/components/ide/utils";
 
 function buildSchemaFromSnapshots(snapshots?: SqlTableSnapshots | null): SchemaModel {
@@ -41,6 +41,7 @@ export default function SqlResultsPane(props: {
     schemaSql?: string;
     initialTableSnapshots?: SqlTableSnapshots;
     viewKey?: string;
+    paneOptions?: SqlPaneOptions;
 }) {
     const {
         result,
@@ -49,6 +50,7 @@ export default function SqlResultsPane(props: {
         schemaSql = "",
         initialTableSnapshots,
         viewKey = "",
+        paneOptions,
     } = props;
 
     const schema = React.useMemo(() => {
@@ -64,6 +66,7 @@ export default function SqlResultsPane(props: {
         tableSnapshots,
         displayResult,
         handleMove,
+        availableTabs,
     } = useSqlResultsPaneState({
         result,
         busy,
@@ -71,7 +74,52 @@ export default function SqlResultsPane(props: {
         schemaSql,
         initialTableSnapshots,
         viewKey,
+        paneOptions,
     });
+
+    const renderTab = (fallback: React.ReactNode = null) => {
+        if (tab === "results") {
+            if (!displayResult) return fallback;
+            return displayResult.ok ? (
+                <ResultsTab result={displayResult} />
+            ) : (
+                <SqlErrorState result={displayResult} />
+            );
+        }
+
+        if (tab === "tables") {
+            return (
+                <TablesTab
+                    schema={schema}
+                    positions={positions}
+                    onMove={handleMove}
+                    tableSnapshots={tableSnapshots}
+                />
+            );
+        }
+
+        if (tab === "erd" && availableTabs.includes("erd")) {
+            return (
+                <ErdTab
+                    schema={schema}
+                    positions={positions}
+                    onMove={handleMove}
+                />
+            );
+        }
+
+        if (tab === "chen" && availableTabs.includes("chen")) {
+            return (
+                <ChenTab
+                    schema={schema}
+                    positions={positions}
+                    onMove={handleMove}
+                />
+            );
+        }
+
+        return fallback;
+    };
 
     if (busy) {
         return (
@@ -97,28 +145,9 @@ export default function SqlResultsPane(props: {
     if (!displayResult) {
         return (
             <div className={cn("flex h-full min-h-0 flex-col gap-3", className)}>
-                <TabsRow tab={tab} setTab={setTab} />
+                <TabsRow tab={tab} setTab={setTab} availableTabs={availableTabs} />
                 <div className="min-h-0 flex-1">
-                    {tab === "tables" ? (
-                        <TablesTab
-                            schema={schema}
-                            positions={positions}
-                            onMove={handleMove}
-                            tableSnapshots={tableSnapshots}
-                        />
-                    ) : tab === "erd" ? (
-                        <ErdTab
-                            schema={schema}
-                            positions={positions}
-                            onMove={handleMove}
-                        />
-                    ) : tab === "chen" ? (
-                        <ChenTab
-                            schema={schema}
-                            positions={positions}
-                            onMove={handleMove}
-                        />
-                    ) : (
+                    {renderTab(
                         <EmptySchemaState
                             title="No SQL result yet"
                             subtitle="Run the query to view rows, columns, notices, and execution details."
@@ -132,30 +161,9 @@ export default function SqlResultsPane(props: {
     if (!displayResult.ok) {
         return (
             <div className={cn("flex h-full min-h-0 flex-col gap-3", className)}>
-                <TabsRow tab={tab} setTab={setTab} />
+                <TabsRow tab={tab} setTab={setTab} availableTabs={availableTabs} />
                 <div className="min-h-0 flex-1">
-                    {tab === "results" ? (
-                        <SqlErrorState result={displayResult} />
-                    ) : tab === "tables" ? (
-                        <TablesTab
-                            schema={schema}
-                            positions={positions}
-                            onMove={handleMove}
-                            tableSnapshots={tableSnapshots}
-                        />
-                    ) : tab === "erd" ? (
-                        <ErdTab
-                            schema={schema}
-                            positions={positions}
-                            onMove={handleMove}
-                        />
-                    ) : (
-                        <ChenTab
-                            schema={schema}
-                            positions={positions}
-                            onMove={handleMove}
-                        />
-                    )}
+                    {renderTab()}
                 </div>
             </div>
         );
@@ -163,30 +171,9 @@ export default function SqlResultsPane(props: {
 
     return (
         <div className={cn("flex h-full min-h-0 flex-col gap-3", className)}>
-            <TabsRow tab={tab} setTab={setTab} />
+            <TabsRow tab={tab} setTab={setTab} availableTabs={availableTabs} />
             <div className="min-h-0 flex-1">
-                {tab === "results" ? (
-                    <ResultsTab result={displayResult} />
-                ) : tab === "tables" ? (
-                    <TablesTab
-                        schema={schema}
-                        positions={positions}
-                        onMove={handleMove}
-                        tableSnapshots={tableSnapshots}
-                    />
-                ) : tab === "erd" ? (
-                    <ErdTab
-                        schema={schema}
-                        positions={positions}
-                        onMove={handleMove}
-                    />
-                ) : (
-                    <ChenTab
-                        schema={schema}
-                        positions={positions}
-                        onMove={handleMove}
-                    />
-                )}
+                {renderTab()}
             </div>
         </div>
     );

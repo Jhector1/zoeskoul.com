@@ -32,6 +32,7 @@ import type { WorkspaceSyncEntry, WorkspaceTerminalConfig } from "@/components/c
 import { WorkspaceStateV2 } from "@/components/ide/types";
 import { cx } from "@/components/tools/utils/cx";
 import HeaderBar from "@/components/code/runner/components/HeaderBar";
+import type { SqlPaneOptions } from "@/components/code/runner/components/sql/results-pane";
 
 type MobilePane = "editor" | "output";
 type OutputTab = "output" | "terminal";
@@ -54,6 +55,7 @@ type CodeRunnerWithStdinProps = CodeRunnerProps & {
             rowCount: number;
         }
     >;
+    sqlPaneOptions?: SqlPaneOptions;
 };
 
 const RUNNER_SURFACE =
@@ -132,6 +134,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         showStdinEditor = false,
         webPreviewEntries = [],
         sqlInitialTableSnapshots,
+        sqlPaneOptions,
         stdinPlaceholder = "Type stdin here. Each new line becomes one input line.",
         workspaceTerminal,
     } = props as any;
@@ -621,6 +624,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                     lang,
                     sqlDialect,
                 ].join("::"),
+                sqlPaneOptions,
             };
         }
 
@@ -636,6 +640,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         sqlSchemaSql,
         sqlSetupSql,
         sqlInitialTableSnapshots,
+        sqlPaneOptions,
         effectiveEditorModelKey,
         sqlDatasetId,
         sqlDialect,

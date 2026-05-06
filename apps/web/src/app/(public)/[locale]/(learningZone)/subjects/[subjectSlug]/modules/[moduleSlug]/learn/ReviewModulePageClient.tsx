@@ -112,7 +112,12 @@ export default function ReviewModulePageClient({
         const el = footerRef.current;
         if (!el) return;
 
-        const measure = () => setFooterH(Math.ceil(el.getBoundingClientRect().height));
+        const measure = () => {
+            const nextHeight = Math.ceil(el.getBoundingClientRect().height);
+            setFooterH((currentHeight) =>
+                currentHeight === nextHeight ? currentHeight : nextHeight,
+            );
+        };
         measure();
 
         if (typeof ResizeObserver === "undefined") {

@@ -1,4 +1,18 @@
 export type TabKey = "results" | "tables" | "erd" | "chen";
+
+export type SqlPaneOptions = {
+    /** Results and Tables are always available by default. */
+    showResults?: boolean;
+    showTables?: boolean;
+    /** Crow's-foot/table relationship diagram. Hidden unless enabled by manifest. */
+    showErd?: boolean;
+    showCrowFoot?: boolean;
+    showCrowfoot?: boolean;
+    showCrowsFoot?: boolean;
+    /** Chen ERD diagram. Hidden unless enabled by manifest. */
+    showChen?: boolean;
+    defaultTab?: TabKey;
+};
 export type Cardinality = "1" | "0..1" | "many" | "0..many";
 
 export type ColumnModel = {
