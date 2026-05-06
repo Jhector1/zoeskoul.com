@@ -16,6 +16,19 @@ function getUpdatedAt(value: any) {
   return Number(value?.updatedAt ?? 0);
 }
 
+
+function workspaceSummary(value: any) {
+  const workspace = value?.workspace ?? value?.codeWorkspace ?? value?.ideWorkspace ?? value?.toolWorkspace ?? null;
+  if (!workspace || workspace.version !== 2 || !Array.isArray(workspace.nodes)) {
+    return { hasWorkspace: false, fileCount: 0 };
+  }
+
+  return {
+    hasWorkspace: true,
+    fileCount: workspace.nodes.filter((node: any) => node?.kind === "file").length,
+  };
+}
+
 function pickPreferredEntry<T>(existing: T | undefined, incoming: T | undefined): T | undefined {
   if (!existing) return incoming;
   if (!incoming) return existing;
@@ -29,14 +42,23 @@ function pickPreferredEntry<T>(existing: T | undefined, incoming: T | undefined)
 
   const existingUpdatedAt = getUpdatedAt(existing);
   const incomingUpdatedAt = getUpdatedAt(incoming);
+
+  // Canonical conflict rule: the freshest persisted record wins first. File
+  // count is only a tie-breaker. This prevents an older browser/tab with a
+  // richer local workspace from hiding the newer DB record on another machine.
   if (incomingUpdatedAt !== existingUpdatedAt) {
     return incomingUpdatedAt > existingUpdatedAt ? incoming : existing;
   }
 
-  const existingHasWorkspace = Boolean((existing as any)?.workspace || (existing as any)?.toolWorkspace);
-  const incomingHasWorkspace = Boolean((incoming as any)?.workspace || (incoming as any)?.toolWorkspace);
-  if (existingHasWorkspace !== incomingHasWorkspace) {
-    return incomingHasWorkspace ? incoming : existing;
+  const existingWorkspace = workspaceSummary(existing);
+  const incomingWorkspace = workspaceSummary(incoming);
+
+  if (existingWorkspace.hasWorkspace !== incomingWorkspace.hasWorkspace) {
+    return incomingWorkspace.hasWorkspace ? incoming : existing;
+  }
+
+  if (existingWorkspace.fileCount !== incomingWorkspace.fileCount) {
+    return incomingWorkspace.fileCount > existingWorkspace.fileCount ? incoming : existing;
   }
 
   return incoming;

@@ -102,6 +102,88 @@ function starterPaneTrace(label: string, payload: Record<string, any>) {
     }
 }
 
+
+
+type ReviewWorkspaceDraft = {
+    savedAt: number;
+    workspace: WorkspaceStateV2;
+};
+
+function reviewWorkspaceDraftKey(ownerKey: string) {
+    return `zoe:review-workspace-draft:${ownerKey}`;
+}
+
+function isWorkspaceState(value: unknown): value is WorkspaceStateV2 {
+    return Boolean(
+        value &&
+        typeof value === "object" &&
+        (value as any).version === 2 &&
+        Array.isArray((value as any).nodes),
+    );
+}
+
+function readReviewWorkspaceDraft(ownerKey: string | null | undefined): ReviewWorkspaceDraft | null {
+    if (typeof window === "undefined") return null;
+    const key = String(ownerKey ?? "").trim();
+    if (!key) return null;
+
+    try {
+        const raw = window.localStorage.getItem(reviewWorkspaceDraftKey(key));
+        if (!raw) return null;
+
+        const parsed = JSON.parse(raw) as Partial<ReviewWorkspaceDraft>;
+        if (!isWorkspaceState(parsed.workspace)) return null;
+
+        const savedAt = Number(parsed.savedAt ?? 0);
+        return {
+            savedAt: Number.isFinite(savedAt) ? savedAt : 0,
+            workspace: parsed.workspace,
+        };
+    } catch {
+        return null;
+    }
+}
+
+function writeReviewWorkspaceDraft(ownerKey: string | null | undefined, workspace: WorkspaceStateV2 | null) {
+    if (typeof window === "undefined") return;
+    const key = String(ownerKey ?? "").trim();
+    if (!key || !workspace || !isWorkspaceState(workspace)) return;
+
+    try {
+        window.localStorage.setItem(
+            reviewWorkspaceDraftKey(key),
+            JSON.stringify({ savedAt: Date.now(), workspace } satisfies ReviewWorkspaceDraft),
+        );
+    } catch {
+        // localStorage can be full/disabled. DB/runtime saving remains canonical.
+    }
+}
+
+function workspaceFileCount(workspace: WorkspaceStateV2 | null | undefined) {
+    if (!workspace || workspace.version !== 2 || !Array.isArray(workspace.nodes)) return 0;
+    return workspace.nodes.filter((node: any) => node?.kind === "file").length;
+}
+
+function shouldUseLocalReviewDraft(_args: {
+    draft: ReviewWorkspaceDraft | null;
+    runtimeWorkspace: WorkspaceStateV2 | null | undefined;
+    runtimeUpdatedAt?: number | null;
+    runtimeUserEdited?: boolean | null;
+    runtimeOrigin?: string | null;
+}) {
+    /**
+     * DB-canonical contract: never use localStorage to choose what appears in a
+     * logged-in/review editor. Local drafts caused two computers opening the
+     * same sketch to show different content because each browser could restore
+     * its own stale copy before the DB copy won.
+     *
+     * The review progress row is the only source of truth. If it is empty, the
+     * runtime resolver should seed from the lesson starter, not from a browser
+     * draft.
+     */
+    return false;
+}
+
 function asWorkspaceLanguage(language: string | null | undefined): WorkspaceLanguage {
     const value = String(language ?? "");
     if (
@@ -532,6 +614,16 @@ export default function CodeToolPane(props: {
     const lastHandledWorkspaceKeyRef = useRef<string>("");
     const lastHandledStructureKeyRef = useRef<string>("");
     const lastUpstreamWorkspaceKeyRef = useRef<string>("");
+    const [localWorkspaceDraft, setLocalWorkspaceDraft] = useState<ReviewWorkspaceDraft | null>(null);
+
+    useEffect(() => {
+        if (!isReviewRouteMode || !resolvedEditorOwnerKey) {
+            setLocalWorkspaceDraft(null);
+            return;
+        }
+
+        setLocalWorkspaceDraft(readReviewWorkspaceDraft(resolvedEditorOwnerKey));
+    }, [isReviewRouteMode, resolvedEditorOwnerKey, workspaceContextKey]);
 
     const exerciseWorkspaceReady = Boolean(exerciseKey && editorRuntime?.workspaceStatus === "ready" && editorRuntime.workspace);
     const cardWorkspaceReady = Boolean(cardRuntimeKey && editorRuntime?.workspaceStatus === "ready" && editorRuntime.workspace);
@@ -556,7 +648,29 @@ export default function CodeToolPane(props: {
         toolWorkspace,
     ]);
 
-    const finalReviewWorkspace = directRuntimeWorkspace;
+    const finalReviewWorkspace = useMemo(() => {
+        if (
+            isReviewRouteMode &&
+            shouldUseLocalReviewDraft({
+                draft: localWorkspaceDraft,
+                runtimeWorkspace: directRuntimeWorkspace,
+                runtimeUpdatedAt: editorRuntime?.updatedAt,
+                runtimeUserEdited: editorRuntime?.userEdited,
+                runtimeOrigin: editorRuntime?.workspaceOrigin,
+            })
+        ) {
+            return localWorkspaceDraft?.workspace ?? directRuntimeWorkspace;
+        }
+
+        return directRuntimeWorkspace;
+    }, [
+        directRuntimeWorkspace,
+        editorRuntime?.updatedAt,
+        editorRuntime?.userEdited,
+        editorRuntime?.workspaceOrigin,
+        isReviewRouteMode,
+        localWorkspaceDraft,
+    ]);
     const runtimeWorkspacePending = Boolean(
         isReviewRouteMode &&
         !runtimeWorkspaceError &&
@@ -696,6 +810,9 @@ export default function CodeToolPane(props: {
     }
 
     const emitWorkspaceUpstream = useCallback((workspace: WorkspaceStateV2 | null) => {
+        // Do not write review editor workspaces to localStorage. The DB/runtime
+        // state is canonical so the same logged-in sketch resolves identically
+        // on every computer.
         const workspaceKey = workspaceKeyOf(workspace ?? null);
         if (lastUpstreamWorkspaceKeyRef.current === workspaceKey) return;
         lastUpstreamWorkspaceKeyRef.current = workspaceKey;

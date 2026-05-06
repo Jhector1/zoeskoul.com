@@ -33,6 +33,7 @@ export function PanZoomCanvas(props: PanZoomCanvasProps) {
         vw: 0,
         vh: 0,
     });
+    const viewportSizeRef = React.useRef({ vw: 0, vh: 0 });
 
     const [view, setView] = React.useState({
         scale: 1,
@@ -57,6 +58,12 @@ export function PanZoomCanvas(props: PanZoomCanvasProps) {
         viewRef.current = view;
     }, [view]);
 
+    const hasSameView = React.useCallback(
+        (a: { scale: number; x: number; y: number }, b: { scale: number; x: number; y: number }) =>
+            a.scale === b.scale && a.x === b.x && a.y === b.y,
+        [],
+    );
+
     const dragRef = React.useRef<{
         pointerId: number;
         startClientX: number;
@@ -77,18 +84,21 @@ export function PanZoomCanvas(props: PanZoomCanvasProps) {
             ? { vw: el.clientWidth, vh: el.clientHeight }
             : { vw: 0, vh: 0 };
 
-        setViewportSize((prev) =>
-            prev.vw === next.vw && prev.vh === next.vh ? prev : next,
-        );
+        const prev = viewportSizeRef.current;
+        if (prev.vw === next.vw && prev.vh === next.vh) {
+            return next;
+        }
 
+        viewportSizeRef.current = next;
+        setViewportSize(next);
         return next;
     }, []);
 
     const getViewportSize = React.useCallback(() => {
         const el = viewportRef.current;
-        if (!el) return viewportSize;
+        if (!el) return viewportSizeRef.current;
         return { vw: el.clientWidth, vh: el.clientHeight };
-    }, [viewportSize]);
+    }, []);
 
     const resolveStageMetrics = React.useCallback(
         (vw: number, vh: number) => {
@@ -123,10 +133,13 @@ export function PanZoomCanvas(props: PanZoomCanvasProps) {
 
     const applyView = React.useCallback(
         (next: { scale: number; x: number; y: number }) => {
+            const prev = viewRef.current;
+            if (hasSameView(prev, next)) return;
+
             viewRef.current = next;
             setView(next);
         },
-        [],
+        [hasSameView],
     );
 
     const clampOffset = React.useCallback(
@@ -211,44 +224,64 @@ export function PanZoomCanvas(props: PanZoomCanvasProps) {
         applyView,
     ]);
 
-    React.useLayoutEffect(() => {
-        measureViewport();
+    React.useEffect(() => {
+        // Measure after paint instead of in a layout effect. Calling setState from
+        // a layout effect can create a synchronous render/measure loop when the
+        // SQL diagram is mounted inside resizable panes or Next's dev overlay.
+        const frame = requestAnimationFrame(() => {
+            measureViewport();
+        });
+
+        return () => cancelAnimationFrame(frame);
     }, [measureViewport]);
 
     React.useEffect(() => {
         const el = viewportRef.current;
         if (!el || typeof ResizeObserver === "undefined") return;
 
+        let frame: number | null = null;
         const ro = new ResizeObserver(() => {
-            measureViewport();
+            if (frame != null) return;
+
+            frame = requestAnimationFrame(() => {
+                frame = null;
+                measureViewport();
+            });
         });
 
         ro.observe(el);
-        return () => ro.disconnect();
+        return () => {
+            if (frame != null) cancelAnimationFrame(frame);
+            ro.disconnect();
+        };
     }, [measureViewport]);
 
-    React.useLayoutEffect(() => {
+    React.useEffect(() => {
         if (!viewportSize.vw || !viewportSize.vh) return;
 
-        const fitKeyChanged = lastFitKeyRef.current !== fitKey;
+        const frame = requestAnimationFrame(() => {
+            const fitKeyChanged = lastFitKeyRef.current !== fitKey;
 
-        if (!didInitialFitRef.current || fitKeyChanged) {
-            fitToView();
-            didInitialFitRef.current = true;
-            lastFitKeyRef.current = fitKey;
-            return;
-        }
+            if (!didInitialFitRef.current || fitKeyChanged) {
+                fitToView();
+                didInitialFitRef.current = true;
+                lastFitKeyRef.current = fitKey;
+                return;
+            }
 
-        const current = viewRef.current;
-        const clamped = clampOffset({ x: current.x, y: current.y }, current.scale);
+            const current = viewRef.current;
+            const clamped = clampOffset({ x: current.x, y: current.y }, current.scale);
 
-        if (clamped.x !== current.x || clamped.y !== current.y) {
-            applyView({
-                ...current,
-                x: clamped.x,
-                y: clamped.y,
-            });
-        }
+            if (clamped.x !== current.x || clamped.y !== current.y) {
+                applyView({
+                    ...current,
+                    x: clamped.x,
+                    y: clamped.y,
+                });
+            }
+        });
+
+        return () => cancelAnimationFrame(frame);
     }, [viewportSize.vw, viewportSize.vh, fitKey, fitToView, clampOffset, applyView]);
 
     React.useEffect(() => {

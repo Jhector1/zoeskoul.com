@@ -276,6 +276,7 @@ export async function PUT(req: Request) {
         select: {
             id: true,
             updatedAt: true,
+            state: true,
         },
     });
 
@@ -303,6 +304,7 @@ export async function PUT(req: Request) {
         {
             ok: true,
             saved,
+            state: saved.state,
             gamification,
         },
         200,

@@ -60,6 +60,20 @@ function numericUpdatedAt(value: any) {
     return Number.isFinite(n) ? n : 0;
 }
 
+
+function savedWorkspaceSummary(value: any) {
+    const workspace =
+        value?.workspace ?? value?.codeWorkspace ?? value?.ideWorkspace ?? value?.toolWorkspace ?? null;
+    if (!workspace || workspace.version !== 2 || !Array.isArray(workspace.nodes)) {
+        return { hasWorkspace: false, fileCount: 0 };
+    }
+
+    return {
+        hasWorkspace: true,
+        fileCount: workspace.nodes.filter((node: any) => node?.kind === "file").length,
+    };
+}
+
 function chooseSavedValue<T = any>(existing: T | undefined, incoming: T | undefined): T | undefined {
     const a: any = existing;
     const b: any = incoming;
@@ -73,9 +87,27 @@ function chooseSavedValue<T = any>(existing: T | undefined, incoming: T | undefi
     if (bIsUser && !aIsUser) return incoming;
     if (aIsUser && !bIsUser) return existing;
 
-    if (numericUpdatedAt(b) > numericUpdatedAt(a)) return incoming;
+    const aUpdatedAt = numericUpdatedAt(a);
+    const bUpdatedAt = numericUpdatedAt(b);
 
-    return existing;
+    // Canonical conflict rule: the freshest persisted record wins. File-count
+    // heuristics are only a tie-breaker, never a reason for an older local copy
+    // to hide a newer DB version on another computer.
+    if (bUpdatedAt > aUpdatedAt) return incoming;
+    if (aUpdatedAt > bUpdatedAt) return existing;
+
+    const aWorkspace = savedWorkspaceSummary(a);
+    const bWorkspace = savedWorkspaceSummary(b);
+
+    if (aWorkspace.hasWorkspace !== bWorkspace.hasWorkspace) {
+        return bWorkspace.hasWorkspace ? incoming : existing;
+    }
+
+    if (aWorkspace.fileCount !== bWorkspace.fileCount) {
+        return bWorkspace.fileCount > aWorkspace.fileCount ? incoming : existing;
+    }
+
+    return incoming;
 }
 
 function mergeRecordMap<T = any>(
@@ -159,6 +191,49 @@ function normalizeProgressTopics(state: ReviewProgressState | null | undefined):
 function getSaveRevision(state: any) {
     const n = Number(state?.__saveRevision ?? 0);
     return Number.isFinite(n) ? n : 0;
+}
+
+
+function mergeProgressStatesForSave(
+    remoteState: ReviewProgressState | null | undefined,
+    localState: ReviewProgressState | null | undefined,
+): ReviewProgressState {
+    const remote = normalizeProgressTopics(remoteState ?? emptyReviewProgress());
+    const local = normalizeProgressTopics(localState ?? emptyReviewProgress());
+    const nextTopics: Record<string, ReviewTopicProgress> = {
+        ...(remote.topics ?? {}),
+    };
+
+    for (const [topicKey, localTopic] of Object.entries(local.topics ?? {})) {
+        const canonicalTopicKey = normalizeTopicProgressKey(topicKey);
+        nextTopics[canonicalTopicKey] = mergeTopicProgressStates(
+            nextTopics[canonicalTopicKey],
+            localTopic as ReviewTopicProgress,
+        );
+    }
+
+    return {
+        ...remote,
+        ...local,
+        quizVersion: Math.max(Number((remote as any).quizVersion ?? 0), Number((local as any).quizVersion ?? 0)),
+        moduleCompleted: Boolean((remote as any).moduleCompleted || (local as any).moduleCompleted),
+        moduleCompletedAt: pickLatestIsoLike((remote as any).moduleCompletedAt, (local as any).moduleCompletedAt),
+        activeTopicId: normalizeTopicProgressKey((local as any).activeTopicId ?? (remote as any).activeTopicId),
+        topics: nextTopics,
+        __saveRevision: Math.max(getSaveRevision(remote), getSaveRevision(local), Date.now()),
+    } as ReviewProgressState;
+}
+
+function timeMsLike(value: unknown) {
+    const n = Number(new Date(String(value ?? "")));
+    return Number.isFinite(n) ? n : 0;
+}
+
+function pickLatestIsoLike(a: unknown, b: unknown) {
+    const aMs = timeMsLike(a);
+    const bMs = timeMsLike(b);
+    if (!aMs && !bMs) return undefined;
+    return bMs >= aMs ? (b as string | undefined) : (a as string | undefined);
 }
 
 function withoutSaveRevision(value: any): any {
@@ -437,8 +512,9 @@ export function useReviewProgress(args: {
 
     const savePayloadToApi = useCallback(
         async (nextPayload: typeof payload, options?: { keepalive?: boolean; reason?: string }) => {
-            const body = stableJson(nextPayload);
-            const meaningfulBody = meaningfulBodyForPayload(nextPayload);
+            let payloadToSave = nextPayload;
+            let body = stableJson(payloadToSave);
+            let meaningfulBody = meaningfulBodyForPayload(payloadToSave);
 
             if (meaningfulBody === lastSavedMeaningfulBodyRef.current) {
                 lastCommittedRef.current = body;
@@ -448,19 +524,95 @@ export function useReviewProgress(args: {
                 return;
             }
 
+            /**
+             * Cross-device safety:
+             * Before a normal autosave, fetch the newest DB progress and merge
+             * this tab's workspace changes on top of it. This prevents a stale
+             * tab/device from writing an older snapshot that hides SQL/Python
+             * files created elsewhere. Page-exit keepalive saves skip the extra
+             * GET because browsers may cancel that request; the server still
+             * performs its own merge/revision check for those emergency saves.
+             */
+            if (!options?.keepalive) {
+                try {
+                    const latestRemote = await fetchReviewProgressGET({
+                        subjectSlug: payloadToSave.subjectSlug,
+                        moduleSlug: payloadToSave.moduleSlug,
+                        locale: payloadToSave.locale,
+                    });
+
+                    const remoteRevision = getSaveRevision(latestRemote);
+                    const localRevision = getSaveRevision(payloadToSave.state);
+
+                    if (remoteRevision > localRevision || remoteRevision > 0) {
+                        const mergedState = mergeProgressStatesForSave(
+                            latestRemote,
+                            payloadToSave.state as ReviewProgressState,
+                        );
+
+                        payloadToSave = buildReviewProgressPayload({
+                            subjectSlug: payloadToSave.subjectSlug,
+                            moduleSlug: payloadToSave.moduleSlug,
+                            locale: payloadToSave.locale,
+                            state: mergedState,
+                            activeTopicId: normalizeTopicProgressKey(
+                                (payloadToSave.state as any).activeTopicId ?? activeTopicIdRef.current,
+                            ),
+                        }) as typeof payload;
+
+                        progressRef.current = payloadToSave.state as ReviewProgressState;
+                        body = stableJson(payloadToSave);
+                        meaningfulBody = meaningfulBodyForPayload(payloadToSave);
+                    }
+                } catch (error: any) {
+                    console.warn("[review-progress] pre-save remote merge failed", {
+                        reason: options?.reason,
+                        message: error?.message ?? String(error),
+                    });
+                }
+            }
+
             const ac = options?.keepalive ? null : new AbortController();
             const timeout = ac ? window.setTimeout(() => ac.abort(), 15000) : null;
 
-            const res = await fetch("/api/review/progress", {
-                method: "PUT",
-                headers: { "Content-Type": "application/json" },
-                body,
-                keepalive: options?.keepalive === true,
-                cache: "no-store",
-                signal: ac?.signal,
-            }).finally(() => {
+            const putOnce = async (requestBody: string) => {
+                return fetch("/api/review/progress", {
+                    method: "PUT",
+                    headers: { "Content-Type": "application/json" },
+                    body: requestBody,
+                    keepalive: options?.keepalive === true,
+                    cache: "no-store",
+                    signal: ac?.signal,
+                });
+            };
+
+            let res = await putOnce(body).finally(() => {
                 if (timeout != null) window.clearTimeout(timeout);
             });
+
+            if (res.status === 409 && !options?.keepalive) {
+                const latestRemote = await fetchReviewProgressGET({
+                    subjectSlug: payloadToSave.subjectSlug,
+                    moduleSlug: payloadToSave.moduleSlug,
+                    locale: payloadToSave.locale,
+                });
+                const mergedState = mergeProgressStatesForSave(
+                    latestRemote,
+                    payloadToSave.state as ReviewProgressState,
+                );
+                payloadToSave = buildReviewProgressPayload({
+                    subjectSlug: payloadToSave.subjectSlug,
+                    moduleSlug: payloadToSave.moduleSlug,
+                    locale: payloadToSave.locale,
+                    state: mergedState,
+                    activeTopicId: normalizeTopicProgressKey(
+                        (payloadToSave.state as any).activeTopicId ?? activeTopicIdRef.current,
+                    ),
+                }) as typeof payload;
+                body = stableJson(payloadToSave);
+                meaningfulBody = meaningfulBodyForPayload(payloadToSave);
+                res = await putOnce(body);
+            }
 
             if (!res.ok) {
                 const message = await res.text().catch(() => "");
@@ -473,8 +625,22 @@ export function useReviewProgress(args: {
             }
 
             const data = await res.json().catch(() => null);
-            lastCommittedRef.current = body;
-            lastSavedMeaningfulBodyRef.current = meaningfulBody;
+            const canonicalState = data?.state
+                ? normalizeProgressTopics(data.state as ReviewProgressState)
+                : (payloadToSave.state as ReviewProgressState);
+            const canonicalPayload = buildReviewProgressPayload({
+                subjectSlug: payloadToSave.subjectSlug,
+                moduleSlug: payloadToSave.moduleSlug,
+                locale: payloadToSave.locale,
+                state: canonicalState,
+                activeTopicId: normalizeTopicProgressKey(
+                    (canonicalState as any).activeTopicId ?? activeTopicIdRef.current,
+                ),
+            }) as typeof payload;
+
+            progressRef.current = canonicalState;
+            lastCommittedRef.current = stableJson(canonicalPayload);
+            lastSavedMeaningfulBodyRef.current = meaningfulBodyForPayload(canonicalPayload);
             localDirtyRef.current = false;
             setSaveStatus("saved");
             setLastSaveError(null);
@@ -1078,8 +1244,28 @@ export function useReviewProgress(args: {
 
                 const remoteRevision = getSaveRevision(remoteProgress);
                 const localRevision = getSaveRevision(progressRef.current);
+                const remotePayload = buildReviewProgressPayload({
+                    subjectSlug,
+                    moduleSlug,
+                    locale,
+                    state: remoteProgress,
+                    activeTopicId: normalizeTopicProgressKey(
+                        (remoteProgress as any).activeTopicId || activeTopicIdRef.current || firstTopicId,
+                    ),
+                });
+                const remoteMeaningfulBody = meaningfulBodyForPayload(remotePayload as typeof payload);
+                const localPayload = buildReviewProgressPayload({
+                    subjectSlug,
+                    moduleSlug,
+                    locale,
+                    state: progressRef.current,
+                    activeTopicId: normalizeTopicProgressKey(
+                        (progressRef.current as any).activeTopicId || activeTopicIdRef.current || firstTopicId,
+                    ),
+                });
+                const localMeaningfulBody = meaningfulBodyForPayload(localPayload as typeof payload);
 
-                if (!remoteRevision || remoteRevision <= localRevision) {
+                if (remoteRevision <= localRevision && remoteMeaningfulBody === localMeaningfulBody) {
                     return;
                 }
 
@@ -1098,17 +1284,17 @@ export function useReviewProgress(args: {
                 setViewTopicId(nextActive);
                 localDirtyRef.current = false;
 
-                const remotePayload = buildReviewProgressPayload({
+                const canonicalRemotePayload = buildReviewProgressPayload({
                     subjectSlug,
                     moduleSlug,
                     locale,
                     state: remoteProgress,
                     activeTopicId: nextActive,
                 });
-                prime(remotePayload);
+                prime(canonicalRemotePayload);
                 lastSavedMeaningfulBodyRef.current = stableJson({
-                    ...remotePayload,
-                    state: withoutSaveRevision(remotePayload.state),
+                    ...canonicalRemotePayload,
+                    state: withoutSaveRevision(canonicalRemotePayload.state),
                 });
 
             } catch (error: any) {
@@ -1133,6 +1319,7 @@ export function useReviewProgress(args: {
             firstTopicId,
             setProgressSafe,
             setActiveTopicId,
+            meaningfulBodyForPayload,
             prime,
         ],
     );
@@ -1150,9 +1337,13 @@ export function useReviewProgress(args: {
 
         const interval = window.setInterval(() => {
             if (document.visibilityState !== "visible") return;
+            // Controlled live sync: only pull remote changes when this tab has
+            // no unsaved local work and no save/sync is in flight. That lets a
+            // second computer's newer DB save appear automatically without
+            // racing against active editing in the current tab.
             if (localDirtyRef.current || remoteSyncInFlightRef.current || saveInFlightRef.current) return;
             poll("poll");
-        }, 10000);
+        }, 4000);
 
         const onVisibilityChange = () => {
             if (document.visibilityState === "visible") {
