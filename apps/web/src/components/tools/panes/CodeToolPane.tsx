@@ -358,6 +358,7 @@ export default function CodeToolPane(props: {
     ideConfig?: LearningIdeConfig | null;
     sqlDialect?: SqlDialect;
     sqlDatasetId?: string;
+    sqlResultShape?: "table";
     sqlSchemaSql?: string;
     sqlSeedSql?: string;
     sqlSetupSql?: string;
@@ -378,6 +379,7 @@ export default function CodeToolPane(props: {
         ideConfig,
         sqlDialect = "sqlite",
         sqlDatasetId,
+        sqlResultShape,
         sqlSchemaSql,
         sqlSeedSql,
         sqlSetupSql,
@@ -833,6 +835,7 @@ export default function CodeToolPane(props: {
                         onReadyChange={setIdeReady}
                         initialSqlDialect={sqlDialect}
                         sqlDatasetId={sqlDatasetId}
+                        sqlResultShape={sqlResultShape}
                         sqlSchemaSql={sqlSchemaSql ?? sqlSetupSql}
                         sqlSeedSql={sqlSeedSql}
                         sqlSetupSql={sqlSetupSql}

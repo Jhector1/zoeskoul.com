@@ -52,6 +52,7 @@ export type SqlRunReq = {
     language: "sql";
     dialect: SqlDialect;
     code: string;
+    resultShape?: "table";
 
     /**
      * Optional post-check SQL for mutation exercises.

@@ -17,6 +17,11 @@ type Args = {
     activeFileId: string | null;
     entryFileId: string | null;
     sqlDialect: SqlDialect;
+    sqlDatasetId?: string;
+    sqlResultShape?: "table";
+    sqlSchemaSql?: string;
+    sqlSeedSql?: string;
+    sqlSetupSql?: string;
     canUseMultiFile: boolean;
     backend: ExecutionBackend;
 };
@@ -26,6 +31,11 @@ type IdeRunArgs =
     language: "sql";
     code?: string;
     sqlDialect?: SqlDialect;
+    datasetId?: string;
+    sqlResultShape?: "table";
+    sqlSchemaSql?: string;
+    sqlSeedSql?: string;
+    sqlSetupSql?: string;
     signal?: AbortSignal;
 }
     | {
@@ -48,9 +58,18 @@ type ProjectSqlReq = {
     language: "sql";
     dialect: SqlDialect;
     code: string;
-    schemaSql: string;
-    seedSql: string;
+    schemaSql?: string;
+    seedSql?: string;
+    datasetId?: string;
+    resultShape?: "table";
 };
+
+function firstNonBlank(...values: Array<string | null | undefined>) {
+    for (const value of values) {
+        if (typeof value === "string" && value.trim()) return value;
+    }
+    return undefined;
+}
 
 type ProjectCodeReq =
     | {
@@ -73,6 +92,11 @@ function buildProjectRunRequest(args: {
     activeFileId: string | null;
     entryFileId: string | null;
     sqlDialect: SqlDialect;
+    sqlDatasetId?: string;
+    sqlResultShape?: "table";
+    sqlSchemaSql?: string;
+    sqlSeedSql?: string;
+    sqlSetupSql?: string;
     canUseMultiFile: boolean;
     code?: string;
 }): ProjectSqlReq | ProjectCodeReq {
@@ -84,6 +108,11 @@ function buildProjectRunRequest(args: {
         activeFileId,
         entryFileId,
         sqlDialect,
+        sqlDatasetId,
+        sqlResultShape,
+        sqlSchemaSql,
+        sqlSeedSql,
+        sqlSetupSql,
         canUseMultiFile,
         code,
     } = args;
@@ -119,8 +148,17 @@ function buildProjectRunRequest(args: {
             language: "sql",
             dialect: sqlDialect,
             code: activeQuery,
-            schemaSql: canUseMultiFile ? (schemaFile?.content ?? "") : "",
-            seedSql: canUseMultiFile ? (seedFile?.content ?? "") : "",
+            schemaSql: firstNonBlank(
+                canUseMultiFile ? schemaFile?.content : undefined,
+                sqlSchemaSql,
+                sqlSetupSql,
+            ),
+            seedSql: firstNonBlank(
+                canUseMultiFile ? seedFile?.content : undefined,
+                sqlSeedSql,
+            ),
+            datasetId: firstNonBlank(sqlDatasetId),
+            resultShape: sqlResultShape,
         };
     }
     const shouldUseMultiFile = canUseMultiFile && files.length > 1;
@@ -160,6 +198,11 @@ export function useIdeRunner({
                                  activeFileId,
                                  entryFileId,
                                  sqlDialect,
+                                 sqlDatasetId,
+                                 sqlResultShape,
+                                 sqlSchemaSql,
+                                 sqlSeedSql,
+                                 sqlSetupSql,
                                  canUseMultiFile,
                                  backend,
                              }: Args) {
@@ -174,6 +217,16 @@ export function useIdeRunner({
                 entryFileId,
                 sqlDialect:
                     args.language === "sql" ? (args.sqlDialect ?? sqlDialect) : sqlDialect,
+                sqlDatasetId:
+                    args.language === "sql" ? (args.datasetId ?? sqlDatasetId) : undefined,
+                sqlResultShape:
+                    args.language === "sql" ? (args.sqlResultShape ?? sqlResultShape) : undefined,
+                sqlSchemaSql:
+                    args.language === "sql" ? (args.sqlSchemaSql ?? sqlSchemaSql) : undefined,
+                sqlSeedSql:
+                    args.language === "sql" ? (args.sqlSeedSql ?? sqlSeedSql) : undefined,
+                sqlSetupSql:
+                    args.language === "sql" ? (args.sqlSetupSql ?? sqlSetupSql) : undefined,
                 canUseMultiFile,
                 code: args.code,
             });
@@ -207,6 +260,11 @@ export function useIdeRunner({
             activeFileId,
             entryFileId,
             sqlDialect,
+            sqlDatasetId,
+            sqlResultShape,
+            sqlSchemaSql,
+            sqlSeedSql,
+            sqlSetupSql,
             canUseMultiFile,
             backend,
         ],

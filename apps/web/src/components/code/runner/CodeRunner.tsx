@@ -116,6 +116,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         sqlSeedSql,
         sqlSetupSql,
         sqlDatasetId,
+        sqlResultShape,
         onRun,
         editorModelKey,
         toolScopeKey,
@@ -357,6 +358,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                     schemaSql: args.sqlSchemaSql ?? args.setupSql,
                     seedSql: args.sqlSeedSql,
                     datasetId: args.datasetId,
+                    resultShape: args.sqlResultShape,
                 },
                 args.signal,
             );
@@ -425,6 +427,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         sqlSeedSql,
         sqlSetupSql,
         sqlDatasetId,
+        sqlResultShape,
         workspace,
         exerciseStateKey: effectiveExerciseStateKey,
         disabled,

@@ -116,6 +116,7 @@ export type FullIDEProps = {
     forceDesktopLayout?: boolean;
     exerciseStateKey?: string;
     sqlDatasetId?: string;
+    sqlResultShape?: "table";
     sqlSchemaSql?: string;
     sqlSeedSql?: string;
     sqlSetupSql?: string;

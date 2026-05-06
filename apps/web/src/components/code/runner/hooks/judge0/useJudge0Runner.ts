@@ -13,6 +13,7 @@ export function useJudge0Runner(args: SharedRunnerArgs): CodeRunnerController {
         sqlSeedSql: args.sqlSeedSql,
         sqlSetupSql: args.sqlSetupSql,
         sqlDatasetId: args.sqlDatasetId,
+        sqlResultShape: args.sqlResultShape,
         workspace: args.workspace,
         exerciseStateKey: args.exerciseStateKey,
         disabled: args.disabled,

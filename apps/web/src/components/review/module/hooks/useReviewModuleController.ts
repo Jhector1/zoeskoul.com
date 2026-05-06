@@ -87,6 +87,13 @@ function registryEntryToRouteTarget(entry: any): ReviewResolvedRouteTarget | nul
     };
 }
 
+function firstNonBlank(...values: Array<string | null | undefined>) {
+    for (const value of values) {
+        if (typeof value === "string" && value.trim()) return value;
+    }
+    return undefined;
+}
+
 export function useReviewModuleController({
                                               mod,
                                               onModuleCompleteChange,
@@ -1060,17 +1067,26 @@ export function useReviewModuleController({
                 codeEnabled: runtime.codeEnabled,
                 showLanguagePicker: false,
                 showSqlDialectPicker: false,
-                sqlDatasetId:
-                    tool.toolSqlDatasetId ??
+                sqlResultShape:
+                    tool.toolLang === "sql" ||
+                    Boolean(tool.toolSqlDatasetId) ||
+                    Boolean(runtime.topicSqlFallback?.sqlDatasetId)
+                        ? ("table" as const)
+                        : undefined,
+                sqlDatasetId: firstNonBlank(
+                    tool.toolSqlDatasetId,
                     runtime.topicSqlFallback?.sqlDatasetId,
-                sqlSchemaSql:
-                    tool.toolSqlSchemaSql ??
-                    runtime.topicSqlFallback?.sqlSchemaSql ??
-                    (tool.toolLang === "sql" ? undefined : STUDENTS_SQL_SCHEMA),
-                sqlSeedSql:
-                    tool.toolSqlSeedSql ??
-                    runtime.topicSqlFallback?.sqlSeedSql ??
-                    (tool.toolLang === "sql" ? undefined : STUDENTS_SQL_SEED),
+                ),
+                sqlSchemaSql: firstNonBlank(
+                    tool.toolSqlSchemaSql,
+                    runtime.topicSqlFallback?.sqlSchemaSql,
+                    tool.toolLang === "sql" ? undefined : STUDENTS_SQL_SCHEMA,
+                ),
+                sqlSeedSql: firstNonBlank(
+                    tool.toolSqlSeedSql,
+                    runtime.topicSqlFallback?.sqlSeedSql,
+                    tool.toolLang === "sql" ? undefined : STUDENTS_SQL_SEED,
+                ),
                 sqlInitialTableSnapshots:
                     tool.toolSqlInitialTableSnapshots ??
                     runtime.topicSqlFallback?.sqlInitialTableSnapshots ??

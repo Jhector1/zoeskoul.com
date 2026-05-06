@@ -102,6 +102,13 @@ function getWorkspaceEntryCode(workspace: WorkspaceStateV2 | null | undefined) {
   return file && file.kind === "file" ? String(file.content ?? "") : null;
 }
 
+function firstNonBlank(...values: Array<string | null | undefined>) {
+  for (const value of values) {
+    if (typeof value === "string" && value.trim()) return value.trim();
+  }
+  return undefined;
+}
+
 function registerArgsKey(args: RegisterArgs | undefined) {
   if (!args) return "";
 
@@ -358,12 +365,18 @@ export function ReviewToolsProvider({
         workspace,
         preferSnapshot: patch?.preferSnapshot === true,
         sqlDialect: patch?.codeSqlDialect ?? patch?.sqlDialect ?? cur.sqlDialect,
-        sqlDatasetId:
-          typeof patch?.sqlDatasetId === "string" ? patch.sqlDatasetId : cur.sqlDatasetId,
-        sqlSchemaSql:
-          typeof patch?.sqlSchemaSql === "string" ? patch.sqlSchemaSql : cur.sqlSchemaSql,
-        sqlSeedSql:
-          typeof patch?.sqlSeedSql === "string" ? patch.sqlSeedSql : cur.sqlSeedSql,
+        sqlDatasetId: firstNonBlank(
+          typeof patch?.sqlDatasetId === "string" ? patch.sqlDatasetId : undefined,
+          cur.sqlDatasetId,
+        ),
+        sqlSchemaSql: firstNonBlank(
+          typeof patch?.sqlSchemaSql === "string" ? patch.sqlSchemaSql : undefined,
+          cur.sqlSchemaSql,
+        ),
+        sqlSeedSql: firstNonBlank(
+          typeof patch?.sqlSeedSql === "string" ? patch.sqlSeedSql : undefined,
+          cur.sqlSeedSql,
+        ),
         sqlInitialTableSnapshots:
           patch?.sqlInitialTableSnapshots && typeof patch.sqlInitialTableSnapshots === "object"
             ? patch.sqlInitialTableSnapshots

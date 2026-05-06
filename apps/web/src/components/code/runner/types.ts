@@ -28,6 +28,7 @@ export type OnRunArgs =
     sqlSeedSql?: string;
     setupSql?: string;
     datasetId?: string;
+    sqlResultShape?: "table";
     signal?: AbortSignal;
 };
 
@@ -105,6 +106,7 @@ export type CommonProps = {
     sqlSeedSql?: string;
     sqlSetupSql?: string;
     sqlDatasetId?: string;
+    sqlResultShape?: "table";
 
     allowReset?: boolean;
     allowRun?: boolean;

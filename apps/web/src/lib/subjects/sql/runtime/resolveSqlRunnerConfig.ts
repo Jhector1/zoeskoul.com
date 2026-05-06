@@ -19,6 +19,7 @@ export type ResolveSqlRunnerConfigArgs = {
 
     sqlDialect?: SqlDialect | null;
     sqlDatasetId?: string | null;
+    sqlResultShape?: "table" | null;
 
     sqlSchemaSql?: string | null;
     sqlSeedSql?: string | null;
@@ -29,10 +30,22 @@ export type ResolveSqlRunnerConfigArgs = {
     defaultSqlDialect?: SqlDialect;
 };
 
+function firstNonBlank(...values: Array<string | null | undefined>) {
+    for (const value of values) {
+        if (typeof value === "string" && value.trim()) return value;
+    }
+    return undefined;
+}
+
+function cleanOptionalNonBlank(value: string | null | undefined) {
+    return typeof value === "string" && value.trim() ? value.trim() : undefined;
+}
+
 export type ResolvedSqlRunnerConfig = {
     isSql: boolean;
     sqlDialect: SqlDialect;
     sqlDatasetId?: string;
+    sqlResultShape?: "table";
     sqlSchemaSql?: string;
     sqlSeedSql?: string;
     sqlSetupSql?: string;
@@ -46,6 +59,7 @@ export function resolveSqlRunnerConfig(
         language,
         sqlDialect,
         sqlDatasetId,
+        sqlResultShape,
         sqlSchemaSql,
         sqlSeedSql,
         sqlSetupSql,
@@ -55,8 +69,10 @@ export function resolveSqlRunnerConfig(
 
 
     const isSql = String(language ?? "").toLowerCase() === "sql";
+    const normalizedDatasetId = cleanOptionalNonBlank(sqlDatasetId);
+    const normalizedSetupSql = cleanOptionalNonBlank(sqlSetupSql);
     const dataset =
-        sqlDatasetId && isSql ? getSqlDataset(sqlDatasetId) : null;
+        normalizedDatasetId && isSql ? getSqlDataset(normalizedDatasetId) : null;
 
     const resolvedDialect =
         isSql
@@ -65,12 +81,12 @@ export function resolveSqlRunnerConfig(
 
     const resolvedSchemaSql =
         isSql
-            ? sqlSchemaSql ?? sqlSetupSql ?? dataset?.schemaSql ?? undefined
+            ? firstNonBlank(sqlSchemaSql, normalizedSetupSql, dataset?.schemaSql)
             : undefined;
 
     const resolvedSeedSql =
         isSql
-            ? sqlSeedSql ?? dataset?.seedSql ?? undefined
+            ? firstNonBlank(sqlSeedSql, dataset?.seedSql)
             : undefined;
 
     const resolvedSnapshots =
@@ -81,10 +97,11 @@ export function resolveSqlRunnerConfig(
     return {
         isSql,
         sqlDialect: resolvedDialect,
-        sqlDatasetId: isSql ? sqlDatasetId ?? undefined : undefined,
+        sqlDatasetId: isSql ? normalizedDatasetId : undefined,
+        sqlResultShape: isSql ? (sqlResultShape ?? "table") : undefined,
         sqlSchemaSql: resolvedSchemaSql,
         sqlSeedSql: resolvedSeedSql,
-        sqlSetupSql: isSql ? sqlSetupSql ?? undefined : undefined,
+        sqlSetupSql: isSql ? normalizedSetupSql : undefined,
         sqlInitialTableSnapshots: resolvedSnapshots,
     };
 }

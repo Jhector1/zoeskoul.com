@@ -44,6 +44,7 @@ type Props = {
     isDesktop: boolean;
     services: FullIDEServices;
     sqlDatasetId?: string;
+    sqlResultShape?: "table";
     sqlSchemaSql?: string;
     sqlSeedSql?: string;
     sqlSetupSql?: string;
@@ -102,6 +103,7 @@ export default function IdeEditorPane({
                                           isAuthenticated,
                                           services,
                                           sqlDatasetId,
+                                          sqlResultShape,
                                           sqlSchemaSql,
                                           sqlSeedSql,
                                           sqlSetupSql,
@@ -163,6 +165,7 @@ export default function IdeEditorPane({
                             sqlDialect={sqlDialect}
                             onChangeSqlDialect={onChangeSqlDialect}
                             sqlDatasetId={sqlDatasetId}
+                            sqlResultShape={sqlResultShape}
                             sqlSchemaSql={schemaSql}
                             sqlSeedSql={seedSql}
                             sqlSetupSql={sqlSetupSql}

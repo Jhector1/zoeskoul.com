@@ -45,6 +45,7 @@ export type SharedRunnerArgs = {
     sqlSeedSql?: string;
     sqlSetupSql?: string;
     sqlDatasetId?: string;
+    sqlResultShape?: "table";
     workspace?: WorkspaceStateV2 | null;
     exerciseStateKey?: string;
     disabled: boolean;

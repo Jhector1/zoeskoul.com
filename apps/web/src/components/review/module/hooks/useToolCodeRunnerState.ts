@@ -111,6 +111,13 @@ function workspaceKeyOf(workspace: WorkspaceStateV2 | null | undefined) {
     });
 }
 
+function firstNonBlank(...values: Array<string | null | undefined>) {
+    for (const value of values) {
+        if (typeof value === "string" && value.trim()) return value;
+    }
+    return undefined;
+}
+
 function workspaceWithEntryCode(
     workspace: WorkspaceStateV2 | null | undefined,
     code: string,
@@ -897,18 +904,21 @@ export function useToolCodeRunnerState(args: {
                     (savedForBind as any)?.sqlDialect ??
                     (savedForBind?.workspace as any)?.sqlDialect ??
                     resolvedSql.sqlDialect,
-                sqlDatasetId:
-                    (savedForBind as any)?.sqlDatasetId ??
-                    (savedForBind?.workspace as any)?.sqlDatasetId ??
+                sqlDatasetId: firstNonBlank(
+                    (savedForBind as any)?.sqlDatasetId,
+                    (savedForBind?.workspace as any)?.sqlDatasetId,
                     resolvedSql.sqlDatasetId,
-                sqlSchemaSql:
-                    (savedForBind as any)?.sqlSchemaSql ??
-                    (savedForBind?.workspace as any)?.sqlSchemaSql ??
+                ),
+                sqlSchemaSql: firstNonBlank(
+                    (savedForBind as any)?.sqlSchemaSql,
+                    (savedForBind?.workspace as any)?.sqlSchemaSql,
                     resolvedSql.sqlSchemaSql,
-                sqlSeedSql:
-                    (savedForBind as any)?.sqlSeedSql ??
-                    (savedForBind?.workspace as any)?.sqlSeedSql ??
+                ),
+                sqlSeedSql: firstNonBlank(
+                    (savedForBind as any)?.sqlSeedSql,
+                    (savedForBind?.workspace as any)?.sqlSeedSql,
                     resolvedSql.sqlSeedSql,
+                ),
                 sqlInitialTableSnapshots:
                     (savedForBind as any)?.sqlInitialTableSnapshots ??
                     (savedForBind?.workspace as any)?.sqlInitialTableSnapshots ??

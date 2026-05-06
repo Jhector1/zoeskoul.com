@@ -156,6 +156,7 @@ export default function CodeInputExerciseUI({
                                                 savedSketch,
                                                 sqlDialect,
                                                 sqlDatasetId,
+                                                sqlResultShape,
                                                 sqlSchemaSql,
                                                 sqlSeedSql,
                                                 sqlSetupSql,
@@ -183,6 +184,7 @@ export default function CodeInputExerciseUI({
         stdin: string;
         sqlDialect?: SqlDialect;
         sqlDatasetId?: string;
+        sqlResultShape?: "table";
         sqlSchemaSql?: string;
         sqlSeedSql?: string;
         sqlSetupSql?: string;
@@ -211,6 +213,7 @@ export default function CodeInputExerciseUI({
 
     sqlDialect?: SqlDialect;
     sqlDatasetId?: string;
+    sqlResultShape?: "table";
     sqlSchemaSql?: string;
     sqlSeedSql?: string;
     sqlSetupSql?: string;
@@ -404,6 +407,7 @@ export default function CodeInputExerciseUI({
         language,
         sqlDialect,
         sqlDatasetId,
+        sqlResultShape,
         sqlSchemaSql,
         sqlSeedSql,
         sqlSetupSql,
@@ -415,16 +419,23 @@ export default function CodeInputExerciseUI({
             language: RunnerLanguage;
             code: string;
             stdin: string;
+            sqlDialect?: SqlDialect;
+            sqlDatasetId?: string;
+            sqlResultShape?: "table";
+            sqlSchemaSql?: string;
+            sqlSeedSql?: string;
+            sqlSetupSql?: string;
         }) => {
             setEmbeddedRunFeedback(null);
 
             const nextResolvedSql = resolveSqlRunnerConfig({
                 language: args.language,
-                sqlDialect,
-                sqlDatasetId,
-                sqlSchemaSql,
-                sqlSeedSql,
-                sqlSetupSql,
+                sqlDialect: args.sqlDialect ?? sqlDialect,
+                sqlDatasetId: args.sqlDatasetId ?? sqlDatasetId,
+                sqlResultShape: args.sqlResultShape ?? sqlResultShape,
+                sqlSchemaSql: args.sqlSchemaSql ?? sqlSchemaSql,
+                sqlSeedSql: args.sqlSeedSql ?? sqlSeedSql,
+                sqlSetupSql: args.sqlSetupSql ?? sqlSetupSql,
                 sqlInitialTableSnapshots,
             });
 
@@ -435,6 +446,7 @@ export default function CodeInputExerciseUI({
                     stdin: args.stdin,
                     sqlDialect: nextResolvedSql.isSql ? nextResolvedSql.sqlDialect : undefined,
                     sqlDatasetId: nextResolvedSql.isSql ? nextResolvedSql.sqlDatasetId : undefined,
+                    sqlResultShape: nextResolvedSql.isSql ? nextResolvedSql.sqlResultShape : undefined,
                     sqlSchemaSql: nextResolvedSql.isSql ? nextResolvedSql.sqlSchemaSql : undefined,
                     sqlSeedSql: nextResolvedSql.isSql ? nextResolvedSql.sqlSeedSql : undefined,
                     sqlSetupSql: nextResolvedSql.isSql ? nextResolvedSql.sqlSetupSql : undefined,
@@ -452,6 +464,8 @@ export default function CodeInputExerciseUI({
                                 code: args.code,
                                 schemaSql: nextResolvedSql.sqlSchemaSql ?? "",
                                 seedSql: nextResolvedSql.sqlSeedSql ?? "",
+                                datasetId: nextResolvedSql.sqlDatasetId,
+                                resultShape: nextResolvedSql.sqlResultShape,
                             },
                             undefined,
                         );
@@ -485,6 +499,7 @@ export default function CodeInputExerciseUI({
             onRun,
             sqlDialect,
             sqlDatasetId,
+            sqlResultShape,
             sqlSchemaSql,
             sqlSeedSql,
             sqlSetupSql,
@@ -663,8 +678,11 @@ export default function CodeInputExerciseUI({
                 editorModelKey={runnerEditorModelKey}
                 fixedSqlDialect={resolvedSql.isSql ? resolvedSql.sqlDialect : undefined}
                 showSqlDialectPicker={resolvedSql.isSql ? false : undefined}
+                sqlDatasetId={resolvedSql.isSql ? resolvedSql.sqlDatasetId : undefined}
+                sqlResultShape={resolvedSql.isSql ? resolvedSql.sqlResultShape : undefined}
                 sqlSchemaSql={resolvedSql.isSql ? (resolvedSql.sqlSchemaSql ?? "") : undefined}
                 sqlSeedSql={resolvedSql.isSql ? (resolvedSql.sqlSeedSql ?? "") : undefined}
+                sqlSetupSql={resolvedSql.isSql ? resolvedSql.sqlSetupSql : undefined}
                 sqlInitialTableSnapshots={
                     resolvedSql.isSql ? resolvedSql.sqlInitialTableSnapshots : undefined
                 }
@@ -675,6 +693,12 @@ export default function CodeInputExerciseUI({
                         language: args.language,
                         code: args.code,
                         stdin: args.stdin ?? "",
+                        sqlDialect: (args as any).sqlDialect,
+                        sqlDatasetId: (args as any).sqlDatasetId,
+                        sqlResultShape: (args as any).sqlResultShape,
+                        sqlSchemaSql: (args as any).sqlSchemaSql,
+                        sqlSeedSql: (args as any).sqlSeedSql,
+                        sqlSetupSql: (args as any).sqlSetupSql,
                     })
                 }
                 fixedTerminalDock="bottom"

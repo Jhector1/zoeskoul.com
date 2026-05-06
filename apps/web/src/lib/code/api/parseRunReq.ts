@@ -34,6 +34,15 @@ function asOptionalString(v: unknown, field: string, maxLen: number) {
     return asString(v, field, maxLen);
 }
 
+function asOptionalSqlResultShape(v: unknown) {
+    const raw = asOptionalString(v, "resultShape", 32);
+    if (raw == null || raw.trim() === "") return undefined;
+    if (raw.trim() !== "table") {
+        throw new Error('SQL resultShape must be "table".');
+    }
+    return "table" as const;
+}
+
 function asBoolean(v: unknown, field: string) {
     if (typeof v !== "boolean") throw new Error(`${field} must be a boolean.`);
     return v;
@@ -230,6 +239,7 @@ export function parseRunReq(input: unknown): RunReq {
             language: "sql",
             dialect: dialect as SqlDialect,
             code: asString(input.code, "code", 300_000),
+            resultShape: asOptionalSqlResultShape(input.resultShape),
             checkSql: asOptionalString(input.checkSql, "checkSql", 300_000),
             schemaSql: asOptionalString(
                 input.schemaSql ?? input.setupSql,

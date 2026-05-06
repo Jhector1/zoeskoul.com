@@ -68,6 +68,13 @@ function normalizePromptList(prompts?: string[] | null) {
     return (prompts ?? []).map((p) => normalizePromptText(p));
 }
 
+function firstNonBlank(...values: Array<string | null | undefined>) {
+    for (const value of values) {
+        if (typeof value === "string" && value.trim()) return value;
+    }
+    return undefined;
+}
+
 function unescapeCStringContent(x: string) {
     const s = String(x ?? "");
     let out = "";
@@ -173,6 +180,7 @@ export function useTerminalRunner(args: {
     sqlSeedSql?: string;
     sqlSetupSql?: string;
     sqlDatasetId?: string;
+    sqlResultShape?: "table";
     workspace?: WorkspaceStateV2 | null;
     exerciseStateKey?: string;
     disabled: boolean;
@@ -189,6 +197,8 @@ export function useTerminalRunner(args: {
         sqlSeedSql,
         sqlSetupSql,
         sqlDatasetId,
+        sqlResultShape,
+        exerciseStateKey,
         disabled,
         allowRun,
         resetTerminalOnRun,
@@ -260,7 +270,8 @@ export function useTerminalRunner(args: {
 
     const isSql = lang === "sql";
     const resolvedSqlDialect = sqlDialect ?? "sqlite";
-    const resolvedSchemaSql = sqlSchemaSql ?? sqlSetupSql ?? "";
+    const resolvedSchemaSql = firstNonBlank(sqlSchemaSql, sqlSetupSql) ?? "";
+    const resolvedSqlResultShape = isSql ? (sqlResultShape ?? "table") : undefined;
 
     const replaceRunLines = React.useCallback((runId: number, lines: TermLine[]) => {
         const tagged = lines.map((l) => ({ ...l, runId }));
@@ -411,15 +422,32 @@ export function useTerminalRunner(args: {
                 }
 
                 const data = isSql
-                    ? await onRun({
-                        language: "sql",
-                        code,
-                        sqlDialect: resolvedSqlDialect,
-                        sqlSchemaSql: resolvedSchemaSql,
-                        sqlSeedSql,
-                        datasetId: sqlDatasetId,
-                        signal: ctrl.signal,
-                    } as any)
+                    ? await (() => {
+                        if (process.env.NODE_ENV !== "production") {
+                            console.log(
+                                "[sql-run] client request",
+                                JSON.stringify({
+                                    exerciseStateKey: exerciseStateKey ?? null,
+                                    datasetId: sqlDatasetId ?? null,
+                                    dialect: resolvedSqlDialect,
+                                    resultShape: resolvedSqlResultShape ?? null,
+                                    hasSchemaSql: Boolean(resolvedSchemaSql.trim()),
+                                    hasSeedSql: Boolean(String(sqlSeedSql ?? "").trim()),
+                                }),
+                            );
+                        }
+
+                        return onRun({
+                            language: "sql",
+                            code,
+                            sqlDialect: resolvedSqlDialect,
+                            sqlSchemaSql: resolvedSchemaSql,
+                            sqlSeedSql,
+                            datasetId: sqlDatasetId,
+                            sqlResultShape: resolvedSqlResultShape,
+                            signal: ctrl.signal,
+                        } as any);
+                    })()
                     : await onRun({
                         language: lang,
                         code,
@@ -495,6 +523,8 @@ export function useTerminalRunner(args: {
             resolvedSchemaSql,
             sqlSeedSql,
             sqlDatasetId,
+            resolvedSqlResultShape,
+            exerciseStateKey,
         ],
     );
 

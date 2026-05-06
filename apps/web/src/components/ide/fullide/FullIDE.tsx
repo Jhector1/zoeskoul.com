@@ -57,6 +57,7 @@ type FullIDEInnerProps = {
     forceDesktopLayout?: boolean;
     exerciseStateKey?: string;
     sqlDatasetId?: FullIDEProps["sqlDatasetId"];
+    sqlResultShape?: FullIDEProps["sqlResultShape"];
     sqlSchemaSql?: FullIDEProps["sqlSchemaSql"];
     sqlSeedSql?: FullIDEProps["sqlSeedSql"];
     sqlSetupSql?: FullIDEProps["sqlSetupSql"];
@@ -150,6 +151,7 @@ function FullIDEInner({
                           onRunResult,
                           forceDesktopLayout,
                           sqlDatasetId,
+                          sqlResultShape,
                           sqlSchemaSql,
                           sqlSeedSql,
                           sqlSetupSql,
@@ -251,6 +253,11 @@ function FullIDEInner({
         activeFileId,
         entryFileId,
         sqlDialect,
+        sqlDatasetId,
+        sqlResultShape,
+        sqlSchemaSql,
+        sqlSeedSql,
+        sqlSetupSql,
         canUseMultiFile: access.canUseMultiFile,
         backend: runnerRuntime.backend,
     });
@@ -401,6 +408,7 @@ function FullIDEInner({
             terminalHistoryScopeKey={terminalHistoryScopeKey}
             onApplyTerminalSnapshotFiles={applyTerminalSnapshotFiles}
             sqlDatasetId={sqlDatasetId}
+            sqlResultShape={sqlResultShape}
             sqlSchemaSql={sqlSchemaSql}
             sqlSeedSql={sqlSeedSql}
             sqlSetupSql={sqlSetupSql}
@@ -603,6 +611,7 @@ export default function FullIDE(props: FullIDEProps) {
         initialSqlDialect = DEFAULT_SQL_DIALECT,
         forceDesktopLayout = false,
         sqlDatasetId,
+        sqlResultShape,
         sqlSchemaSql,
         sqlSeedSql,
         sqlSetupSql,
@@ -843,6 +852,7 @@ export default function FullIDE(props: FullIDEProps) {
                 onRunResult={onRunResult}
                 forceDesktopLayout={forceDesktopLayout}
                 sqlDatasetId={sqlDatasetId}
+                sqlResultShape={sqlResultShape}
                 sqlSchemaSql={sqlSchemaSql}
                 sqlSeedSql={sqlSeedSql}
                 sqlSetupSql={sqlSetupSql}

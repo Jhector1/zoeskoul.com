@@ -13,6 +13,7 @@ import type {
     SqlScalar,
 } from "../types";
 import { renderAsciiTable } from "./formatAsciiTable";
+import { getSqlDataset } from "@/lib/subjects/sql/datasets";
 
 const DEFAULT_SQL_LIMITS = {
     statementTimeoutMs: 4000,
@@ -24,12 +25,33 @@ function clampNumber(n: number, lo: number, hi: number) {
     return Math.max(lo, Math.min(hi, n));
 }
 
+function firstNonBlank(...values: Array<string | null | undefined>) {
+    for (const value of values) {
+        if (typeof value === "string" && value.trim()) return value;
+    }
+    return undefined;
+}
+
+function logSqlDev(stage: string, data: Record<string, unknown>) {
+    if (process.env.NODE_ENV === "production") return;
+    console.log("[sql-run]", stage, data);
+}
+
 function normalizeSqlReq(req: SqlRunReq): SqlRunReq {
     const limits = req.limits ?? {};
+    const datasetId =
+        typeof req.datasetId === "string" && req.datasetId.trim()
+            ? req.datasetId.trim()
+            : undefined;
+    const dataset = datasetId ? getSqlDataset(datasetId) : null;
 
     return {
         ...req,
-        schemaSql: req.schemaSql ?? req.setupSql,
+        dialect: req.dialect ?? dataset?.dialect ?? "sqlite",
+        datasetId,
+        resultShape: req.resultShape ?? "table",
+        schemaSql: firstNonBlank(req.schemaSql, req.setupSql, dataset?.schemaSql),
+        seedSql: firstNonBlank(req.seedSql, dataset?.seedSql),
         checkSql:
             typeof req.checkSql === "string" && req.checkSql.trim()
                 ? req.checkSql.trim()
@@ -56,6 +78,19 @@ function normalizeSqlReq(req: SqlRunReq): SqlRunReq {
 
 function byteLen(s: string) {
     return Buffer.byteLength(String(s ?? ""), "utf8");
+}
+
+function listSqliteTableNames(db: any) {
+    try {
+        const rows = db
+            .prepare(
+                "SELECT name FROM sqlite_master WHERE type = 'table' AND name NOT LIKE 'sqlite_%' ORDER BY name",
+            )
+            .all() as Array<{ name?: string | null }>;
+        return rows.map((row) => String(row?.name ?? "")).filter(Boolean);
+    } catch {
+        return [];
+    }
 }
 
 function splitSqlStatements(sql: string): string[] {
@@ -430,6 +465,25 @@ async function executeSqliteLocally(req: SqlRunReq): Promise<SqlRunResult> {
             return errSql(normalized.dialect, "SQL query is empty.");
         }
 
+        if (
+            !normalized.datasetId &&
+            !String(normalized.schemaSql ?? "").trim() &&
+            !String(normalized.seedSql ?? "").trim()
+        ) {
+            return errSql(
+                normalized.dialect,
+                "SQL runtime has no setup configured. Provide datasetId, schemaSql, or seedSql before running this query.",
+            );
+        }
+
+        logSqlDev("executor.normalize", {
+            datasetId: normalized.datasetId ?? null,
+            dialect: normalized.dialect,
+            resultShape: normalized.resultShape ?? null,
+            hasSchemaSql: Boolean(String(normalized.schemaSql ?? "").trim()),
+            hasSeedSql: Boolean(String(normalized.seedSql ?? "").trim()),
+        });
+
         const mod = await import("better-sqlite3");
         const BetterSqlite3 = (mod as any).default ?? mod;
 
@@ -458,6 +512,11 @@ async function executeSqliteLocally(req: SqlRunReq): Promise<SqlRunResult> {
         if (normalized.seedSql?.trim()) {
             db.exec(normalized.seedSql);
         }
+
+        logSqlDev("executor.sqlite.setup", {
+            datasetId: normalized.datasetId ?? null,
+            tablesInitialized: listSqliteTableNames(db),
+        });
 
         const started = Date.now();
         const maxRows = Math.max(1, normalized.limits?.maxRows ?? 200);

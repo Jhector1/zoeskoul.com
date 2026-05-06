@@ -23,6 +23,15 @@ export async function POST(req: Request) {
 
     const raw = await req.json();
     const body = parseRunReq(raw);
+    if (process.env.NODE_ENV !== "production" && body.language === "sql") {
+      console.log("[sql-run] api request", {
+        datasetId: (body as any).datasetId ?? null,
+        dialect: (body as any).dialect ?? null,
+        resultShape: (body as any).resultShape ?? null,
+        hasSchemaSql: Boolean(String((body as any).schemaSql ?? "").trim()),
+        hasSeedSql: Boolean(String((body as any).seedSql ?? "").trim()),
+      });
+    }
     const actor0 = await getActor();
     const ensured = ensureGuestId(actor0);
     const actor = ensured.actor;

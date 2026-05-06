@@ -57,6 +57,7 @@ export type ToolsPanelProps = {
     onChangeSqlDialect?: (d: SqlDialect) => void;
 
     sqlDatasetId?: string;
+    sqlResultShape?: "table";
     sqlSchemaSql?: string;
     sqlSeedSql?: string;
     sqlSetupSql?: string;
@@ -135,6 +136,7 @@ function ToolsPanelInner(props: ToolsPanelProps) {
                         onChangeSqlDialect={props.onChangeSqlDialect}
                         onBeforeRun={props.onBeforeRun}
                         sqlDatasetId={props.sqlDatasetId}
+                        sqlResultShape={props.sqlResultShape}
                         sqlSchemaSql={props.sqlSchemaSql}
                         sqlSeedSql={props.sqlSeedSql}
                         sqlSetupSql={props.sqlSetupSql}
@@ -253,6 +255,7 @@ function CodePaneLayer(props: {
     onChangeSqlDialect?: (d: SqlDialect) => void;
     onBeforeRun?: () => void | Promise<void>;
     sqlDatasetId?: string;
+    sqlResultShape?: "table";
     sqlSchemaSql?: string;
     sqlSeedSql?: string;
     sqlSetupSql?: string;
@@ -295,6 +298,7 @@ function CodePaneLayer(props: {
             onChangeSqlDialect: props.onChangeSqlDialect,
             onBeforeRun: props.onBeforeRun,
             sqlDatasetId: props.sqlDatasetId,
+            sqlResultShape: props.sqlResultShape,
             sqlSchemaSql: props.sqlSchemaSql,
             sqlSeedSql: props.sqlSeedSql,
             sqlSetupSql: props.sqlSetupSql,
@@ -340,6 +344,7 @@ const MemoCodePaneLayer = React.memo(
         prev.onChangeSqlDialect === next.onChangeSqlDialect &&
         prev.onBeforeRun === next.onBeforeRun &&
         prev.sqlDatasetId === next.sqlDatasetId &&
+        prev.sqlResultShape === next.sqlResultShape &&
         prev.sqlSchemaSql === next.sqlSchemaSql &&
         prev.sqlSeedSql === next.sqlSeedSql &&
         prev.sqlSetupSql === next.sqlSetupSql &&
@@ -406,6 +411,7 @@ function areToolsPanelPropsEqual(prev: ToolsPanelProps, next: ToolsPanelProps) {
         prev.onChangeLang === next.onChangeLang &&
         prev.onChangeSqlDialect === next.onChangeSqlDialect &&
         prev.sqlDatasetId === next.sqlDatasetId &&
+        prev.sqlResultShape === next.sqlResultShape &&
         prev.sqlSchemaSql === next.sqlSchemaSql &&
         prev.sqlSeedSql === next.sqlSeedSql &&
         prev.sqlSetupSql === next.sqlSetupSql &&

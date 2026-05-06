@@ -145,6 +145,13 @@ function codeWorkspacePatch(
     };
 }
 
+function firstNonBlank(...values: Array<string | null | undefined>) {
+    for (const value of values) {
+        if (typeof value === "string" && value.trim()) return value;
+    }
+    return undefined;
+}
+
 function CodeInputWithTools(props: {
     exercise: CodeInputExerciseWithSqlExtras;
     current: any;
@@ -267,11 +274,12 @@ function CodeInputWithTools(props: {
 
     const exerciseSqlDatasetId =
         isSqlExercise
-            ? typeof (exercise as any)?.runtime?.datasetId === "string"
-                ? (exercise as any).runtime.datasetId
-                : typeof exercise?.sqlDatasetId === "string"
-                    ? exercise.sqlDatasetId
-                    : undefined
+            ? firstNonBlank(
+                (exercise as any)?.runtime?.datasetId,
+                exercise?.sqlDatasetId,
+                (exercise as any)?.topicRuntimeDefaults?.datasetId,
+                (exercise as any)?.moduleRuntimeDefaults?.datasetId,
+            )
             : undefined;
 
     const exerciseSqlSchemaSql =
@@ -348,9 +356,18 @@ function CodeInputWithTools(props: {
             ownerCardId,
             preferSnapshot: false,
             sqlDialect: activeLanguage === "sql" ? ((storeExercise as any)?.sqlDialect ?? exerciseSqlDialect) : undefined,
-            sqlDatasetId: activeLanguage === "sql" ? ((storeExercise as any)?.sqlDatasetId ?? exerciseSqlDatasetId) : undefined,
-            sqlSchemaSql: activeLanguage === "sql" ? ((storeExercise as any)?.sqlSchemaSql ?? exerciseSqlSchemaSql) : undefined,
-            sqlSeedSql: activeLanguage === "sql" ? ((storeExercise as any)?.sqlSeedSql ?? exerciseSqlSeedSql) : undefined,
+            sqlDatasetId:
+                activeLanguage === "sql"
+                    ? firstNonBlank((storeExercise as any)?.sqlDatasetId, exerciseSqlDatasetId)
+                    : undefined,
+            sqlSchemaSql:
+                activeLanguage === "sql"
+                    ? firstNonBlank((storeExercise as any)?.sqlSchemaSql, exerciseSqlSchemaSql)
+                    : undefined,
+            sqlSeedSql:
+                activeLanguage === "sql"
+                    ? firstNonBlank((storeExercise as any)?.sqlSeedSql, exerciseSqlSeedSql)
+                    : undefined,
             sqlInitialTableSnapshots:
                 activeLanguage === "sql" ? ((storeExercise as any)?.sqlInitialTableSnapshots ?? exerciseSqlInitialTableSnapshots) : undefined,
             onPatch,
@@ -948,6 +965,20 @@ export default function ExerciseRenderer({
             (exCode as any).topicRuntimeDefaults ??
             (exCode as any).moduleRuntimeDefaults ??
             null;
+        const effectiveSqlDatasetId = firstNonBlank(
+            (storeExercise as any)?.sqlDatasetId,
+            (exCode as any)?.runtime?.datasetId,
+            (exCode as any)?.sqlDatasetId,
+            effectiveSqlRuntime?.datasetId,
+        );
+        const effectiveSqlSchemaSql = firstNonBlank(
+            (storeExercise as any)?.sqlSchemaSql,
+            (exCode as any)?.sqlSchemaSql,
+        );
+        const effectiveSqlSeedSql = firstNonBlank(
+            (storeExercise as any)?.sqlSeedSql,
+            (exCode as any)?.sqlSeedSql,
+        );
 
         const starterWorkspace = resolveExerciseWorkspace({
             language: ((exCode as any).language || "python") as any,
@@ -1035,9 +1066,14 @@ export default function ExerciseRenderer({
                 feedback={codeFeedback}
                 explanation={codeExplanation}
                 sqlDialect={(storeExercise as any)?.sqlDialect ?? exCode.fixedSqlDialect ?? effectiveSqlRuntime?.fixedSqlDialect}
-                sqlDatasetId={(storeExercise as any)?.sqlDatasetId ?? (exCode as any).runtime?.datasetId ?? effectiveSqlRuntime?.datasetId}
-                sqlSchemaSql={(storeExercise as any)?.sqlSchemaSql ?? (exCode as any).sqlSchemaSql}
-                sqlSeedSql={(storeExercise as any)?.sqlSeedSql ?? (exCode as any).sqlSeedSql}
+                sqlDatasetId={effectiveSqlDatasetId}
+                sqlResultShape={
+                    (storeExercise as any)?.runtime?.resultShape ??
+                    (exCode as any)?.runtime?.resultShape ??
+                    effectiveSqlRuntime?.resultShape
+                }
+                sqlSchemaSql={effectiveSqlSchemaSql}
+                sqlSeedSql={effectiveSqlSeedSql}
                 sqlSetupSql={(exCode as any).sqlSetupSql}
                 sqlInitialTableSnapshots={(storeExercise as any)?.sqlInitialTableSnapshots ?? (exCode as any).sqlInitialTableSnapshots}
             />
