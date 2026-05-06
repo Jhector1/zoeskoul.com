@@ -82,13 +82,35 @@
       "id": "sketch-1",
       "archetype": "paragraph",
       "titleKey": "sketches.sql.sql_module_12.changing-one-column.sketch-1.title",
-      "bodyKey": "sketches.sql.sql_module_12.changing-one-column.sketch-1.bodyMarkdown"
+      "bodyKey": "sketches.sql.sql_module_12.changing-one-column.sketch-1.bodyMarkdown",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "entry": true,
+          "content": "-- Preview the row before changing it.\n-- This helps you make sure your WHERE clause is safe.\n\nSELECT *\nFROM inventory_items\nWHERE name = 'Test Mug';\n"
+        },
+        {
+          "path": "notes.md",
+          "content": "# Preview Before UPDATE\n\nBefore changing data, use `SELECT` with the same `WHERE` clause you plan to use in your `UPDATE`.\n\n## Target\n\n- Table: `inventory_items`\n- Row to find: `name = 'Test Mug'`\n\nIf the preview returns the correct row, your `WHERE` clause is probably safe to use.\n"
+        }
+      ]
     },
     {
       "id": "sketch-2",
       "archetype": "paragraph",
       "titleKey": "sketches.sql.sql_module_12.changing-one-column.sketch-2.title",
-      "bodyKey": "sketches.sql.sql_module_12.changing-one-column.sketch-2.bodyMarkdown"
+      "bodyKey": "sketches.sql.sql_module_12.changing-one-column.sketch-2.bodyMarkdown",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "entry": true,
+          "content": "-- Change one column for one specific row.\n-- The WHERE clause keeps the update from changing every row.\n\nUPDATE inventory_items\nSET status = 'inactive'\nWHERE name = 'Test Mug';\n\nSELECT *\nFROM inventory_items\nORDER BY 1;\n"
+        },
+        {
+          "path": "notes.md",
+          "content": "# UPDATE One Column\n\nBasic pattern:\n\n```sql\nUPDATE table_name\nSET column_name = new_value\nWHERE condition;\n```\n\n## Important\n\nThe `WHERE` clause decides which rows change.\n\nWithout `WHERE`, the database may update every row in the table.\n"
+        }
+      ]
     }
   ],
   "exercises": [
@@ -100,6 +122,17 @@
       "messageBase": "topics.sql.sql_module_12.changing-one-column.quiz.code-1",
       "language": "sql",
       "fixedSqlDialect": "sqlite",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "entry": true,
+          "content": "-- Task: Update Test Mug so it becomes inactive.\n-- Use UPDATE with a WHERE clause so only the correct row changes.\n\nUPDATE inventory_items\nSET status = 'inactive'\nWHERE name = 'Test Mug';\n"
+        },
+        {
+          "path": "notes.md",
+          "content": "# Goal\n\nChange one column for one specific row.\n\n## Task\n\nUpdate the `status` column for `Test Mug`.\n\n## Details\n\n- Table: `inventory_items`\n- Target row: item where `name = 'Test Mug'`\n- Column to update: `status`\n- New value: `'inactive'`\n\n## Reminder\n\nAlways use a `WHERE` clause when updating a specific row.\n"
+        }
+      ],
       "recipe": {
         "type": "sql_query",
         "datasetId": "inventory_ops",
@@ -116,6 +149,17 @@
       "messageBase": "topics.sql.sql_module_12.changing-one-column.quiz.code-2",
       "language": "sql",
       "fixedSqlDialect": "sqlite",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "entry": true,
+          "content": "-- Task: Update Trial Tote so its price becomes 10.50.\n-- Use WHERE so only Trial Tote changes.\n\nUPDATE inventory_items\nSET price = 10.50\nWHERE name = 'Trial Tote';\n"
+        },
+        {
+          "path": "notes.md",
+          "content": "# Goal\n\nChange the price for one specific item.\n\n## Task\n\nUpdate the `price` column for `Trial Tote`.\n\n## Details\n\n- Table: `inventory_items`\n- Target row: item where `name = 'Trial Tote'`\n- Column to update: `price`\n- New value: `10.50`\n\n## Reminder\n\nWithout a `WHERE` clause, every row could be updated.\n"
+        }
+      ],
       "recipe": {
         "type": "sql_query",
         "datasetId": "inventory_ops",
@@ -132,6 +176,17 @@
       "messageBase": "topics.sql.sql_module_12.changing-one-column.quiz.code-3",
       "language": "sql",
       "fixedSqlDialect": "sqlite",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "entry": true,
+          "content": "-- Task: Update Sample Poster notes.\n-- Use WHERE so only Sample Poster changes.\n\nUPDATE inventory_items\nSET notes = 'Tested and archived'\nWHERE name = 'Sample Poster';\n"
+        },
+        {
+          "path": "notes.md",
+          "content": "# Goal\n\nUpdate the notes for one specific item.\n\n## Task\n\nUpdate the `notes` column for `Sample Poster`.\n\n## Details\n\n- Table: `inventory_items`\n- Target row: item where `name = 'Sample Poster'`\n- Column to update: `notes`\n- New value: `'Tested and archived'`\n\n## Reminder\n\nUse quotes around text values in SQL.\n"
+        }
+      ],
       "recipe": {
         "type": "sql_query",
         "datasetId": "inventory_ops",

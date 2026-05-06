@@ -39,6 +39,19 @@
         "fixedSqlDialect": "sqlite",
         "resultShape": "table"
       },
+
+
+
+      "serviceDefaults": {
+        "preset": "lesson",
+        "requires": {
+          "files": true,
+          "terminal": false,
+          "multiFile": true,
+          "projectPersistence": false,
+          "cloudProjects": false
+        }
+      },
       "meta": {
         "estimatedMinutes": 240,
         "prereqKeys": [

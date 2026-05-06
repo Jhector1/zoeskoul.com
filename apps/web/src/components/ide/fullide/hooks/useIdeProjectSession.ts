@@ -6,7 +6,6 @@ import type {
     ProjectConflictResponse,
     SaveProjectRequest,
 } from "@/lib/projects/projectApiTypes";
-import { stableJson } from "@/lib/client/persistence/stableJson";
 import {
     buildSingleFileWorkspace,
     createDefaultStateForLanguage,
@@ -140,7 +139,6 @@ export function useIdeProjectSession({
                                          activeFile,
                                          entryFile,
                                          replaceWorkspace,
-                                         flushWorkspaceSave,
                                          markLoaded,
                                          markSaved,
                                          clearSavedBaseline,
@@ -177,11 +175,6 @@ export function useIdeProjectSession({
     const [conflictInfo, setConflictInfo] = useState<ProjectConflictInfo | null>(
         null,
     );
-    const cloudAutosaveTimerRef = useRef<number | null>(null);
-    const cloudAutosaveInFlightRef = useRef(false);
-    const pendingCloudAutosaveRef = useRef<SaveProjectRequest["workspace"] | null>(null);
-    const lastCloudSavedSnapshotRef = useRef<string>("");
-    const baseVersionRef = useRef<number | null>(null);
 
     const [projectsOpen, setProjectsOpen] = useState(false);
     const [confirmSwitchOpen, setConfirmSwitchOpen] = useState(false);
@@ -201,10 +194,6 @@ export function useIdeProjectSession({
     const goToUpgrade = useCallback(() => {
         routerPush(access.hasUser ? billingHref : loginHref);
     }, [routerPush, access.hasUser, billingHref, loginHref]);
-
-    useEffect(() => {
-        baseVersionRef.current = baseVersion;
-    }, [baseVersion]);
 
     const persistLocalMeta = useCallback(
         (next: {
@@ -226,13 +215,10 @@ export function useIdeProjectSession({
         (opts?: { keepProjectsOpen?: boolean; keepSaveError?: boolean }) => {
             loadedProjectIdRef.current = null;
             projectIdSourceRef.current = null;
-            lastCloudSavedSnapshotRef.current = "";
-            pendingCloudAutosaveRef.current = null;
             setProjectId(null);
             setCurrentProjectName(projectTitle ?? title);
             setLastSavedAt(null);
             setBaseVersion(null);
-            baseVersionRef.current = null;
             setConflictInfo(null);
             setPendingProjectId(null);
             setPendingStartBlank(false);
@@ -252,13 +238,10 @@ export function useIdeProjectSession({
         (message: string) => {
             loadedProjectIdRef.current = null;
             projectIdSourceRef.current = null;
-            lastCloudSavedSnapshotRef.current = "";
-            pendingCloudAutosaveRef.current = null;
             setProjectId(null);
             setCurrentProjectName(projectTitle ?? title);
             setLastSavedAt(null);
             setBaseVersion(null);
-            baseVersionRef.current = null;
             setConflictInfo(null);
             setPendingProjectId(null);
             setPendingStartBlank(false);
@@ -336,7 +319,6 @@ export function useIdeProjectSession({
             setCurrentProjectName(projectTitle ?? title);
             setLastSavedAt(null);
             setBaseVersion(null);
-            baseVersionRef.current = null;
             setConflictInfo(null);
             setPendingProjectId(null);
             setPendingStartBlank(false);
@@ -353,7 +335,6 @@ export function useIdeProjectSession({
             setCurrentProjectName(meta.currentProjectName || projectTitle || title);
             setLastSavedAt(meta.lastSavedAt ?? null);
             setBaseVersion(meta.baseVersion ?? null);
-            baseVersionRef.current = meta.baseVersion ?? null;
             setConflictInfo(null);
             setPendingProjectId(null);
             setPendingStartBlank(false);
@@ -420,7 +401,6 @@ export function useIdeProjectSession({
             loadAbortRef.current = controller;
 
             try {
-                await flushWorkspaceSave?.();
                 setLoadingProject(true);
                 setSaveError(null);
 
@@ -508,7 +488,6 @@ export function useIdeProjectSession({
 
                 replaceWorkspace(data.project.workspace);
                 markLoaded(data.project.workspace);
-                lastCloudSavedSnapshotRef.current = stableJson(data.project.workspace);
 
                 loadedProjectIdRef.current = data.project.id;
                 projectIdSourceRef.current = "session";
@@ -516,7 +495,6 @@ export function useIdeProjectSession({
                 setCurrentProjectName(data.project.title);
                 setLastSavedAt(data.project.updatedAt);
                 setBaseVersion(data.project.currentVersion ?? null);
-                baseVersionRef.current = data.project.currentVersion ?? null;
                 setConflictInfo(null);
                 setPendingProjectId(null);
                 setPendingStartBlank(false);
@@ -544,7 +522,6 @@ export function useIdeProjectSession({
         },
         [
             access.canSaveCloud,
-            flushWorkspaceSave,
             handleProjectApiFailure,
             detachMissingProject,
             language,
@@ -589,13 +566,8 @@ export function useIdeProjectSession({
             targetProjectId?: string | null;
             forcedTitle?: string | null;
             createRevision?: boolean;
-            revisionNote?: string | null;
-            workspace?: SaveProjectRequest["workspace"] | null;
-            silent?: boolean;
         }): Promise<PersistProjectResult> => {
-            const workspaceToPersist = args?.workspace ?? currentWorkspace;
-
-            if (!workspaceToPersist) {
+            if (!currentWorkspace) {
                 setToast({kind: "error", text: "Nothing to save yet."});
                 return {ok: false};
             }
@@ -616,25 +588,21 @@ export function useIdeProjectSession({
                 projectTitle ||
                 title;
 
-            await flushWorkspaceSave?.();
-
             const body: SaveProjectRequest = {
                 title: titleToUse,
                 description: projectDescription,
                 language,
-                workspace: workspaceToPersist,
+                workspace: currentWorkspace,
                 entryPath: entryFile ? pathOf(nodes, entryFile.id) : null,
                 activePath: activeFile ? pathOf(nodes, activeFile.id) : null,
                 visibility: "private",
                 scope: projectScope,
                 createRevision: args?.createRevision ?? true,
-                revisionNote:
-                    args?.revisionNote ??
-                    (targetProjectId ? "Manual save" : "Created from Save As"),
+                revisionNote: targetProjectId ? "Manual save" : "Created from Save As",
                 settings: {sqlDialect},
                 meta: {source: "full-ide"},
                 baseVersion: targetProjectId
-                    ? (baseVersionRef.current ?? localMeta?.baseVersion ?? null)
+                    ? (baseVersion ?? localMeta?.baseVersion ?? null)
                     : null,
                 clientInstanceId,
                 clientDraftUpdatedAt: new Date().toISOString(),
@@ -672,9 +640,7 @@ export function useIdeProjectSession({
             } catch (e: any) {
                 const message = e?.message ?? "Failed to save project.";
                 setSaveError(message);
-                if (!args?.silent) {
-                    setToast({kind: "error", text: message});
-                }
+                setToast({kind: "error", text: message});
                 return {ok: false};
             } finally {
                 setIsSavingProject(false);
@@ -682,7 +648,6 @@ export function useIdeProjectSession({
         },
         [
             currentWorkspace,
-            flushWorkspaceSave,
             access.canSaveCloud,
             goToUpgrade,
             projectId,
@@ -700,6 +665,7 @@ export function useIdeProjectSession({
             detachMissingProject,
             setToast,
             sessionKey,
+            baseVersion,
             clientInstanceId,
         ],
     );
@@ -746,12 +712,10 @@ export function useIdeProjectSession({
 
         loadedProjectIdRef.current = data.project.id;
         projectIdSourceRef.current = "session";
-        lastCloudSavedSnapshotRef.current = stableJson(workspaceToSave);
         setProjectId(data.project.id);
         setCurrentProjectName(nextName);
         setLastSavedAt(data.project.updatedAt);
         setBaseVersion(nextVersion);
-        baseVersionRef.current = nextVersion;
         setConflictInfo(null);
         setPendingProjectId(null);
         setPendingStartBlank(false);
@@ -807,12 +771,10 @@ export function useIdeProjectSession({
 
             loadedProjectIdRef.current = data.project.id;
             projectIdSourceRef.current = "session";
-            lastCloudSavedSnapshotRef.current = stableJson(workspaceToSave);
             setProjectId(data.project.id);
             setCurrentProjectName(nextName);
             setLastSavedAt(data.project.updatedAt);
             setBaseVersion(nextVersion);
-            baseVersionRef.current = nextVersion;
             setConflictInfo(null);
             setPendingProjectId(null);
             setPendingStartBlank(false);
@@ -839,154 +801,6 @@ export function useIdeProjectSession({
             setToast,
         ],
     );
-
-    const autosaveProjectWorkspace = useCallback(
-        async (workspaceToAutosave: SaveProjectRequest["workspace"]) => {
-            const localMeta = readProjectSessionMeta(sessionKey);
-            const targetProjectId = projectId ?? localMeta?.projectId ?? null;
-
-            if (!targetProjectId) return;
-            if (!access.canSaveCloud) return;
-            if (loadingProject) return;
-            if (isSavingProject) return;
-            if (conflictInfo) return;
-
-            const serialized = stableJson(workspaceToAutosave);
-            if (serialized === lastCloudSavedSnapshotRef.current) return;
-
-            if (cloudAutosaveInFlightRef.current) {
-                pendingCloudAutosaveRef.current = workspaceToAutosave;
-                return;
-            }
-
-            cloudAutosaveInFlightRef.current = true;
-
-            try {
-                let nextWorkspace: SaveProjectRequest["workspace"] | null =
-                    workspaceToAutosave;
-
-                while (nextWorkspace) {
-                    const workspaceForSave = nextWorkspace;
-                    nextWorkspace = null;
-                    pendingCloudAutosaveRef.current = null;
-
-                    const nextSerialized = stableJson(workspaceForSave);
-                    if (nextSerialized === lastCloudSavedSnapshotRef.current) {
-                        continue;
-                    }
-
-                    const result = await persistProject({
-                        targetProjectId,
-                        workspace: workspaceForSave,
-                        createRevision: false,
-                        revisionNote: "Autosave",
-                        silent: true,
-                    });
-
-                    if (!result.ok) {
-                        pendingCloudAutosaveRef.current = null;
-                        return;
-                    }
-
-                    const data = result.data;
-                    const nextVersion =
-                        typeof data.project.currentVersion === "number"
-                            ? data.project.currentVersion
-                            : null;
-                    const nextName =
-                        data.project.title ??
-                        currentProjectName ??
-                        localMeta?.currentProjectName ??
-                        projectTitle ??
-                        title;
-
-                    loadedProjectIdRef.current = data.project.id;
-                    projectIdSourceRef.current = "session";
-                    lastCloudSavedSnapshotRef.current = nextSerialized;
-                    setProjectId(data.project.id);
-                    setCurrentProjectName(nextName);
-                    setLastSavedAt(data.project.updatedAt);
-                    setBaseVersion(nextVersion);
-                    baseVersionRef.current = nextVersion;
-                    setSaveError(null);
-
-                    persistLocalMeta({
-                        projectId: data.project.id,
-                        currentProjectName: nextName,
-                        lastSavedAt: data.project.updatedAt ?? null,
-                        baseVersion: nextVersion,
-                    });
-
-                    markSaved(workspaceForSave);
-
-                    nextWorkspace = pendingCloudAutosaveRef.current;
-                }
-            } finally {
-                cloudAutosaveInFlightRef.current = false;
-            }
-        },
-        [
-            access.canSaveCloud,
-            conflictInfo,
-            currentProjectName,
-            isSavingProject,
-            loadingProject,
-            markSaved,
-            persistLocalMeta,
-            persistProject,
-            projectId,
-            projectTitle,
-            sessionKey,
-            title,
-        ],
-    );
-
-    useEffect(() => {
-        if (!currentWorkspace) return;
-        if (!projectId) return;
-            if (!access.canSaveCloud) return;
-            if (!isDirty) return;
-            if (loadingProject) return;
-            if (isSavingProject) return;
-            if (conflictInfo) return;
-
-        const serialized = stableJson(currentWorkspace);
-        if (serialized === lastCloudSavedSnapshotRef.current) return;
-
-        if (cloudAutosaveTimerRef.current != null) {
-            window.clearTimeout(cloudAutosaveTimerRef.current);
-        }
-
-        cloudAutosaveTimerRef.current = window.setTimeout(() => {
-            cloudAutosaveTimerRef.current = null;
-            void autosaveProjectWorkspace(currentWorkspace);
-        }, 2500);
-
-        return () => {
-            if (cloudAutosaveTimerRef.current != null) {
-                window.clearTimeout(cloudAutosaveTimerRef.current);
-                cloudAutosaveTimerRef.current = null;
-            }
-        };
-    }, [
-        access.canSaveCloud,
-        autosaveProjectWorkspace,
-            conflictInfo,
-            currentWorkspace,
-            isDirty,
-            isSavingProject,
-            loadingProject,
-            projectId,
-        ]);
-
-    useEffect(() => {
-        return () => {
-            if (cloudAutosaveTimerRef.current != null) {
-                window.clearTimeout(cloudAutosaveTimerRef.current);
-                cloudAutosaveTimerRef.current = null;
-            }
-        };
-    }, []);
 
     const renameProject = useCallback(
         async (nextTitle: string) => {

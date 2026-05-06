@@ -21,7 +21,6 @@ import {
     isWorkspaceLanguage,
     loadWorkspaceForLanguage as loadWorkspaceForLanguageRaw,
     readWorkspaceMeta,
-    flushWorkspaceForLanguage as flushWorkspaceForLanguageRaw,
     saveWorkspaceForLanguage as saveWorkspaceForLanguageRaw,
     tryMigrateInitialWorkspace,
 } from "./workspace.persistence";
@@ -532,30 +531,8 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
     );
 
     const saveWorkspaceForLanguage = useCallback(
-        async (ws: WorkspaceStateV2 | null) =>
-            await saveWorkspaceForLanguageRaw({
-                baseStorageKey,
-                ws,
-                draftStorageMode,
-                actorKey,
-                projectId,
-                scopeKey,
-                exerciseStateKey,
-                localWorkspaceId: projectId ? null : localWorkspaceIdRef.current,
-            }),
-        [
-            baseStorageKey,
-            draftStorageMode,
-            actorKey,
-            projectId,
-            scopeKey,
-            exerciseStateKey,
-        ],
-    );
-
-    const flushWorkspaceSave = useCallback(
-        async (ws: WorkspaceStateV2 | null = currentWorkspaceRef.current) =>
-            await flushWorkspaceForLanguageRaw({
+        (ws: WorkspaceStateV2 | null) =>
+            saveWorkspaceForLanguageRaw({
                 baseStorageKey,
                 ws,
                 draftStorageMode,
@@ -583,9 +560,10 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
             const requestId = ++hydrateRequestIdRef.current;
             setStorageHydrated(false);
 
+            saveWorkspaceForLanguage(currentWorkspaceRef.current);
+
             void (async () => {
                 try {
-                    await flushWorkspaceSave(currentWorkspaceRef.current);
                     const loaded = await loadWorkspaceForLanguage(next);
 
                     if (hydrateRequestIdRef.current !== requestId) {
@@ -622,7 +600,7 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
         },
         [
             language,
-            flushWorkspaceSave,
+            saveWorkspaceForLanguage,
             loadWorkspaceForLanguage,
             hydrateWorkspace,
             clearTransientUi,
@@ -774,7 +752,7 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
         if (draftStorageMode !== "local") return;
 
         const id = window.setTimeout(() => {
-            void saveWorkspaceForLanguage(currentWorkspace);
+            saveWorkspaceForLanguage(currentWorkspace);
         }, SAVE_DEBOUNCE_MS);
 
         return () => window.clearTimeout(id);
@@ -785,24 +763,26 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
         if (draftStorageMode !== "local") return;
 
         const flush = () => {
-            void flushWorkspaceSave(currentWorkspaceRef.current);
+            saveWorkspaceForLanguage(currentWorkspaceRef.current);
         };
 
         window.addEventListener("pagehide", flush);
+        window.addEventListener("beforeunload", flush);
 
         return () => {
             window.removeEventListener("pagehide", flush);
+            window.removeEventListener("beforeunload", flush);
         };
-    }, [flushWorkspaceSave, draftStorageMode, storageHydrated]);
+    }, [saveWorkspaceForLanguage, draftStorageMode, storageHydrated]);
 
     useEffect(() => {
         if (!storageHydrated) return;
         if (draftStorageMode !== "local") return;
 
         return () => {
-            void flushWorkspaceSave(currentWorkspaceRef.current);
+            saveWorkspaceForLanguage(currentWorkspaceRef.current);
         };
-    }, [flushWorkspaceSave, draftStorageMode, storageHydrated]);
+    }, [saveWorkspaceForLanguage, draftStorageMode, storageHydrated]);
 
     useEffect(() => {
         if (!hydratedRef.current || !storageHydrated) return;
@@ -810,7 +790,7 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
 
         const onVisibilityChange = () => {
             if (document.visibilityState === "hidden") {
-                void flushWorkspaceSave(currentWorkspaceRef.current);
+                saveWorkspaceForLanguage(currentWorkspaceRef.current);
             }
         };
 
@@ -819,7 +799,7 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
         return () => {
             document.removeEventListener("visibilitychange", onVisibilityChange);
         };
-    }, [flushWorkspaceSave, draftStorageMode, storageHydrated]);
+    }, [saveWorkspaceForLanguage, draftStorageMode, storageHydrated]);
 
     useEffect(() => {
         if (!hydratedRef.current || !storageHydrated) return;
@@ -1123,7 +1103,6 @@ export function useIdeWorkspace(opts?: UseIdeWorkspaceOpts): UseIdeWorkspaceResu
             importExternalFiles,
             replaceWorkspace,
             resetWorkspaceForLanguage,
-            flushWorkspaceSave,
             switchLanguage,
             openFile,
             closeTab,

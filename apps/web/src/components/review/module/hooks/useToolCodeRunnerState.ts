@@ -256,6 +256,102 @@ function cardStateKeyFromToolKey(toolKey: string) {
     return toolKey;
 }
 
+function cardToolWorkspaceStorageKey(topicId: string, toolKey: string) {
+    return `zoe:review-card-tool-workspace:${topicId}:${toolKey}`;
+}
+
+function writeCardToolWorkspaceBackup(args: {
+    topicId: string;
+    toolKey: string;
+    snap: {
+        lang?: string;
+        code?: string;
+        stdin?: string;
+        workspace?: WorkspaceStateV2 | null;
+    };
+}) {
+    if (typeof window === "undefined") return;
+    if (!args.snap.workspace) return;
+
+    const cardId = cardIdFromToolKey(args.toolKey);
+
+    const aliases = Array.from(
+        new Set([
+            args.toolKey,
+            `card:${cardId}`,
+        ]),
+    );
+
+    const payload = JSON.stringify({
+        savedAt: Date.now(),
+        lang: args.snap.lang,
+        code: args.snap.code,
+        stdin: args.snap.stdin,
+        workspace: args.snap.workspace,
+    });
+
+    try {
+        aliases.forEach((toolKey) => {
+            window.localStorage.setItem(
+                cardToolWorkspaceStorageKey(args.topicId, toolKey),
+                payload,
+            );
+        });
+    } catch {
+        // local backup is best-effort
+    }
+}
+
+function readCardToolWorkspaceBackup(topicId: string, toolKey: string) {
+    if (typeof window === "undefined") return null;
+
+    const cardId = cardIdFromToolKey(toolKey);
+
+    function parse(raw: string | null) {
+        if (!raw) return null;
+
+        try {
+            const parsed = JSON.parse(raw);
+            if (!parsed?.workspace || parsed.workspace.version !== 2) return null;
+            return parsed;
+        } catch {
+            return null;
+        }
+    }
+
+    const exact = parse(
+        window.localStorage.getItem(
+            cardToolWorkspaceStorageKey(topicId, toolKey),
+        ),
+    );
+    if (exact) return exact;
+
+    const legacyToolKey = `card:${cardId}`;
+    const legacy = parse(
+        window.localStorage.getItem(
+            cardToolWorkspaceStorageKey(topicId, legacyToolKey),
+        ),
+    );
+    if (legacy) return legacy;
+
+    const prefix = `zoe:review-card-tool-workspace:${topicId}:`;
+
+    for (let i = 0; i < window.localStorage.length; i += 1) {
+        const key = window.localStorage.key(i);
+        if (!key || !key.startsWith(prefix)) continue;
+
+        const storedToolKey = key.slice(prefix.length);
+
+        if (cardIdFromToolKey(storedToolKey) !== cardId) continue;
+
+        const candidate = parse(window.localStorage.getItem(key));
+        if (candidate) return candidate;
+    }
+
+    return null;
+}
+
+
 export function useToolCodeRunnerState(args: {
     progress: any;
     progressHydrated: boolean;
@@ -970,14 +1066,14 @@ export function useToolCodeRunnerState(args: {
             boundDirtyRef.current = true;
             const latest = latestSnapRef.current;
 
-            reviewSaveDebug("bound exercise tool patch", () => ({
+            reviewSaveDebug("bound exercise tool patch", {
                 boundId: b.id,
                 exerciseKey: b.exerciseKey,
                 effectiveBoundId,
                 codeLength: String(latest.code ?? "").length,
                 stdinLength: String(latest.stdin ?? "").length,
                 workspace: summarizeWorkspaceForSave(latest.workspace),
-            }));
+            });
 
             b.onPatch({ codeLang: l, submitted: false, result: null });
         }
@@ -1157,7 +1253,7 @@ export function useToolCodeRunnerState(args: {
             );
 
             if (!cardAlreadyMatches) {
-                reviewSaveDebug("card tool editor changed", () => ({
+                reviewSaveDebug("card tool editor changed", {
                     topicId: viewTid,
                     cardId,
                     cardKey,
@@ -1165,7 +1261,7 @@ export function useToolCodeRunnerState(args: {
                     codeLength: String(nextSnap.code ?? "").length,
                     stdinLength: String(nextSnap.stdin ?? "").length,
                     workspace: summarizeWorkspaceForSave(workspace),
-                }));
+                });
 
                 patchCard(cardKey, {
                     topicId: viewTid,

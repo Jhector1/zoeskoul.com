@@ -21,8 +21,6 @@ import { ReviewProgressWriteSchema } from "@/lib/review/api/progress/schemas";
 import { resolveReviewModuleForSubject } from "@/lib/review/api/shared/modules";
 import { awardReviewProgressGamification } from "@/lib/gamification/awardReviewProgressGamification";
 
-const REVIEW_PROGRESS_DEBUG = process.env.REVIEW_PROGRESS_DEBUG === "true";
-
 async function resolveReviewProgressScope(args: {
     subjectSlug: string;
     moduleSlug: string;
@@ -49,11 +47,6 @@ function stateBytes(state: any) {
     } catch {
         return 0;
     }
-}
-
-function reviewProgressDebug(message: string, data: Record<string, unknown>) {
-    if (!REVIEW_PROGRESS_DEBUG) return;
-    console.log(message, data);
 }
 
 function timeMs(value: unknown) {
@@ -154,15 +147,6 @@ export async function GET(req: Request) {
 
     const state = (row?.state ?? null) as ReviewProgressState | null;
 
-    reviewProgressDebug("[review-progress-debug] load", {
-        subjectSlug,
-        moduleId: resolved.module.slug,
-        locale,
-        hasState: Boolean(state),
-        saveRevision: getSaveRevision(state),
-        stateBytes: stateBytes(state),
-    });
-
     return bodyJsonWithGuestCookie(
         {
             progress: state,
@@ -239,12 +223,15 @@ export async function PUT(req: Request) {
     const incomingRevision = getSaveRevision(state);
 
     if (previous && incomingRevision < existingRevision) {
-        reviewProgressDebug("[review-progress-debug] stale-save", {
+        console.warn("[review-progress] ignored stale save", {
+            actorKey,
             subjectSlug,
             moduleId: resolved.module.slug,
             locale,
             incomingRevision,
             existingRevision,
+            incomingBytes: stateBytes(state),
+            existingBytes: stateBytes(previousState),
         });
 
         return bodyJsonWithGuestCookie(
@@ -290,15 +277,6 @@ export async function PUT(req: Request) {
             id: true,
             updatedAt: true,
         },
-    });
-
-    reviewProgressDebug("[review-progress-debug] save", {
-        subjectSlug,
-        moduleId: resolved.module.slug,
-        locale,
-        incomingRevision,
-        saveRevision: getSaveRevision(stateToPersist),
-        stateBytes: stateBytes(stateToPersist),
     });
 
     let gamification = null;
