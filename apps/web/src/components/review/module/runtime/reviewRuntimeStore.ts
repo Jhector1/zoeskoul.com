@@ -1355,7 +1355,7 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
         patchExerciseId: (patch as any).exerciseId,
       });
 
-      reviewSaveDebug("runtime patchExercise", {
+      reviewSaveDebug("runtime patchExercise", () => ({
         exerciseKey: key,
         patchKeys: Object.keys(patch ?? {}),
         patchUserEdited: (patch as any).userEdited,
@@ -1365,7 +1365,7 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
         nextCodeLength: String(code ?? "").length,
         stdinLength: String(stdin ?? "").length,
         workspace: summarizeWorkspaceForSave(workspace),
-      });
+      }));
 
       const nextLanguage =
           typeof patch.language === "string"
@@ -1723,7 +1723,7 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
         patchKeys: Object.keys(patch ?? {}),
       });
 
-      reviewSaveDebug("runtime patchCard incoming", {
+      reviewSaveDebug("runtime patchCard incoming", () => ({
         cardKey: key,
         topicId: nextCard.topicId,
         cardId: nextCard.cardId,
@@ -1735,7 +1735,7 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
         toolCodeLength: String(nextCard.toolCode ?? "").length,
         toolStdinLength: String(nextCard.toolStdin ?? "").length,
         toolWorkspace: summarizeWorkspaceForSave(nextCard.toolWorkspace),
-      });
+      }));
 
       if (noMeaningfulChange) {
         reviewDebug("2_RUNTIME_PATCH reviewRuntimeStore.patchCard.noop", {

@@ -213,6 +213,7 @@ function FullIDEInner({
         activeFile,
         entryFile,
         replaceWorkspace: actions.replaceWorkspace,
+        flushWorkspaceSave: actions.flushWorkspaceSave,
         markLoaded: dirty.markLoaded,
         markSaved: dirty.markSaved,
         clearSavedBaseline: dirty.clearSavedBaseline,
@@ -289,12 +290,18 @@ function FullIDEInner({
         projectSession.currentProjectName || projectTitle || title;
 
     const setLangUI = useCallback(
-        (nextLanguage: any) => {
+        async (nextLanguage: any) => {
+            await actions.flushWorkspaceSave();
             if (onChangeLanguage) onChangeLanguage(nextLanguage);
             else actions.switchLanguage(nextLanguage);
         },
         [onChangeLanguage, actions],
     );
+
+    const handleBeforeRun = useCallback(async () => {
+        await actions.flushWorkspaceSave();
+        await onBeforeRun?.();
+    }, [actions, onBeforeRun]);
 
     const goBack = useCallback(() => {
         router.push("/sandbox");
@@ -397,7 +404,7 @@ function FullIDEInner({
             isAuthenticated={access.hasUser}
             onChangeCode={actions.onChangeCode}
             onChangeSqlDialect={setSqlDialect}
-            onBeforeRun={onBeforeRun}
+            onBeforeRun={handleBeforeRun}
             onRunResult={onRunResult}
             onRun={runner.onRunProject}
             setActiveFileId={(id) => actions.setActiveFileId(id ?? "")}

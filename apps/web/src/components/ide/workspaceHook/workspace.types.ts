@@ -93,6 +93,7 @@ export type IdeWorkspaceActions = {
   importExternalFiles: (files: ImportedWorkspaceFile[]) => void;
   replaceWorkspace: (ws: WorkspaceStateV2) => void;
   resetWorkspaceForLanguage: (next: WorkspaceLanguage) => void;
+  flushWorkspaceSave: () => Promise<void>;
   switchLanguage: (next: WorkspaceLanguage) => void;
 
   openFile: (id: NodeId) => void;

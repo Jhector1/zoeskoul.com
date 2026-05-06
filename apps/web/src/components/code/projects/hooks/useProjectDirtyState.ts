@@ -3,9 +3,18 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import type { WorkspaceStateV2 } from "@/components/ide/types";
 import type { WorkspaceLanguage } from "@/lib/practice/types";
+import { stableJson } from "@/lib/client/persistence/stableJson";
 
 function snapshotOfWorkspace(ws: WorkspaceStateV2 | null | undefined) {
-    return JSON.stringify(ws ?? null);
+    if (!ws) return "null";
+
+    return stableJson({
+        version: ws.version,
+        language: ws.language,
+        nodes: ws.nodes,
+        entryFileId: ws.entryFileId,
+        stdin: ws.stdin,
+    });
 }
 
 export function useProjectDirtyState(

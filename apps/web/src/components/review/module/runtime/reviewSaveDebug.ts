@@ -1,21 +1,29 @@
-export function reviewSaveDebug(label: string, data: Record<string, any> = {}) {
+export function isReviewSaveDebugEnabled() {
   try {
     if (typeof window !== "undefined") {
-      const enabled =
+      return (
         window.localStorage.getItem("zoe:debug:review-save") === "1" ||
-        window.localStorage.getItem("zoe:debug:starter-files") === "1";
-
-      if (!enabled) return;
-    } else if (process.env.NODE_ENV === "production") {
-      return;
+        window.localStorage.getItem("zoe:debug:starter-files") === "1"
+      );
     }
+
+    return process.env.NODE_ENV !== "production";
   } catch {
-    return;
+    return false;
   }
+}
+
+export function reviewSaveDebug(
+  label: string,
+  data: Record<string, any> | (() => Record<string, any>) = {},
+) {
+  if (!isReviewSaveDebugEnabled()) return;
+
+  const payload = typeof data === "function" ? data() : data;
 
   console.log(`[review-save-debug] ${label}`, {
     at: new Date().toISOString(),
-    ...data,
+    ...payload,
   });
 }
 

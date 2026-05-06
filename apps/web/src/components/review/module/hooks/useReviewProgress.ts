@@ -13,10 +13,17 @@ import { useFlushOnPageExit } from "@/lib/client/persistence/useFlushOnPageExit"
 import { emitGamificationUpdate } from "@/lib/gamification/browserEvents";
 import { useReviewRuntimeStore } from "../runtime/reviewRuntimeStore";
 import { mergeRuntimeIntoProgress } from "../runtime/runtimeProgressBridge";
-import { reviewDebug, summarizePracticePatch } from "../runtime/reviewDebug";
 import { reviewSaveDebug, summarizeWorkspaceForSave } from "../runtime/reviewSaveDebug";
 import { getExerciseStateKey } from "../runtime/exerciseKeys";
 import { deriveEntryCode } from "../runtime/exerciseWorkspaceResolver";
+
+const REVIEW_PROGRESS_DEBUG =
+    process.env.NEXT_PUBLIC_REVIEW_PROGRESS_DEBUG === "true";
+
+function reviewProgressDebug(message: string, data: Record<string, unknown>) {
+    if (!REVIEW_PROGRESS_DEBUG) return;
+    console.log(message, data);
+}
 
 function isPersistedCardToolKey(toolKey: string) {
     if (typeof toolKey !== "string" || !toolKey.trim()) return false;
@@ -206,6 +213,36 @@ function getSaveRevision(state: any) {
     return Number.isFinite(n) ? n : 0;
 }
 
+function stripTransientProgressFields<T>(value: T): T {
+    if (Array.isArray(value)) {
+        return value.map((entry) => stripTransientProgressFields(entry)) as T;
+    }
+
+    if (!value || typeof value !== "object") {
+        return value;
+    }
+
+    const out: Record<string, unknown> = {};
+
+    for (const [key, entry] of Object.entries(value as Record<string, unknown>)) {
+        if (key === "__saveRevision" || key === "updatedAt") continue;
+        out[key] = stripTransientProgressFields(entry);
+    }
+
+    return out as T;
+}
+
+function serializeProgressStateForDedupe(state: ReviewProgressState) {
+    return stableJson(stripTransientProgressFields(state));
+}
+
+function serializeProgressPayloadForDedupe(payload: ReturnType<typeof buildReviewProgressPayload>) {
+    return stableJson({
+        ...payload,
+        state: stripTransientProgressFields(payload.state),
+    });
+}
+
 function canonicalizeExerciseStateKey(
     exerciseKey: string | null | undefined,
     fallbackTopicId?: string | null,
@@ -290,21 +327,6 @@ function getSavedExerciseLanguage(value: any, workspace: any, fallback = "python
     return fallback;
 }
 
-function summarizeTopicExerciseWorkspaces(topic: any) {
-    return Object.fromEntries(
-        Object.entries(topic?.runtimeStateV2?.exercises ?? {})
-            .slice(0, 5)
-            .map(([key, value]: any) => [
-                key,
-                {
-                    userEdited: value?.userEdited,
-                    workspaceOrigin: value?.workspaceOrigin,
-                    workspace: summarizeWorkspaceForSave(getSavedWorkspace(value)),
-                },
-            ]),
-    );
-}
-
 function looksLikeBetterExerciseRestoreCandidate(existing: any, incoming: any) {
     if (!incoming) return false;
     if (!existing) return true;
@@ -351,14 +373,25 @@ export function useReviewProgress(args: {
 
     const progressRef = useRef(progress);
     const activeTopicIdRef = useRef(firstTopicId);
-    const saveSeqRef = useRef(0);
     const hydrationCompleteRef = useRef(false);
     const applyingRemoteRef = useRef(false);
     const localDirtyRef = useRef(false);
     const remoteSyncInFlightRef = useRef(false);
+    const saveInFlightRef = useRef(false);
+    const saveInFlightBodyRef = useRef("");
+    const pendingSaveRef = useRef<{
+        state: ReviewProgressState;
+        reason: string;
+        keepalive?: boolean;
+        syncProgressState?: boolean;
+    } | null>(null);
+    const lastMergedProgressRef = useRef(
+        serializeProgressStateForDedupe(emptyReviewProgress()),
+    );
 
     useEffect(() => {
         progressRef.current = progress;
+        lastMergedProgressRef.current = serializeProgressStateForDedupe(progress);
     }, [progress]);
 
     const setActiveTopicId = useCallback((id: string) => {
@@ -379,6 +412,20 @@ export function useReviewProgress(args: {
             return next;
         });
     }, []);
+
+    const buildPayloadForState = useCallback(
+        (state: ReviewProgressState, activeTopicIdOverride?: string) =>
+            buildReviewProgressPayload({
+                subjectSlug,
+                moduleSlug,
+                locale,
+                state,
+                activeTopicId: normalizeTopicProgressKey(
+                    activeTopicIdOverride ?? activeTopicIdRef.current,
+                ),
+            }),
+        [subjectSlug, moduleSlug, locale],
+    );
 
     const payload = useMemo(
         () =>
@@ -409,57 +456,101 @@ export function useReviewProgress(args: {
         return stateToSave;
     }
 
-    const commitProgress = useCallback(
-        async (_payload: typeof payload, _body: string, signal: AbortSignal) => {
-            if (!subjectSlug || !moduleSlug) return;
-            if (!hydrationCompleteRef.current) return;
+    const performProgressSave = useCallback(
+        async (args: {
+            state: ReviewProgressState;
+            reason: string;
+            signal?: AbortSignal;
+            keepalive?: boolean;
+            syncProgressState?: boolean;
+        }) => {
+            if (!subjectSlug || !moduleSlug) return { committed: false };
+            if (!hydrationCompleteRef.current) return { committed: false };
+
+            const latestRuntime = useReviewRuntimeStore.getState();
+            const mergedState = mergeRuntimeIntoProgress(args.state, latestRuntime);
+            const candidatePayload = buildPayloadForState(mergedState);
+            const candidateSerialized = serializeProgressPayloadForDedupe(candidatePayload);
+
+            if (candidateSerialized === lastCommittedRef.current) {
+                localDirtyRef.current = false;
+                return { committed: false };
+            }
+
+            if (
+                saveInFlightRef.current &&
+                saveInFlightBodyRef.current === candidateSerialized
+            ) {
+                return { committed: false };
+            }
+
+            const stateToSave = makeSaveState(mergedState);
+            const nextPayload = buildPayloadForState(stateToSave);
+            const requestBody = stableJson(nextPayload);
+            const requestSerialized = serializeProgressPayloadForDedupe(nextPayload);
+
+            if (requestSerialized === lastCommittedRef.current) {
+                localDirtyRef.current = false;
+                return { committed: false };
+            }
+
+            if (
+                saveInFlightRef.current &&
+                saveInFlightBodyRef.current === requestSerialized
+            ) {
+                return { committed: false };
+            }
+
+            if (saveInFlightRef.current) {
+                pendingSaveRef.current = {
+                    state: mergedState,
+                    reason: args.reason,
+                    keepalive: args.keepalive,
+                    syncProgressState: args.syncProgressState,
+                };
+                localDirtyRef.current = true;
+                return { committed: false };
+            }
+
+            saveInFlightRef.current = true;
+            saveInFlightBodyRef.current = requestSerialized;
+
+            reviewProgressDebug("[review-progress-debug] save", {
+                reason: args.reason,
+                stateBytes: requestBody.length,
+                saveRevision: getSaveRevision(stateToSave),
+            });
+
+            let result: { committed: boolean } = { committed: false };
 
             try {
-                const stateToSave = makeSaveState(progressRef.current);
-                const activeTopicKey = normalizeTopicProgressKey(activeTopicIdRef.current);
-
-                const nextPayload = buildReviewProgressPayload({
-                    subjectSlug,
-                    moduleSlug,
-                    locale,
-                    state: stateToSave,
-                    activeTopicId: activeTopicKey,
-                });
-
-                const body = stableJson(nextPayload);
-                const latestRuntime = useReviewRuntimeStore.getState();
-                const activeTopic =
-                    (stateToSave as any).topics?.[activeTopicKey] ?? null;
-
-                console.log("[review-progress] save requested", {
-                    reason: "debounce",
-                    stateBytes: body.length,
-                    saveRevision: getSaveRevision(stateToSave),
-                    activeTopicId: activeTopicIdRef.current,
-                    activeTopicKey,
-                    topicKeys: Object.keys((stateToSave as any).topics ?? {}),
-                    runtimeExerciseKeys: Object.keys(latestRuntime.exercises ?? {}),
-                    runtimeCardKeys: Object.keys(latestRuntime.cards ?? {}),
-                    activeTopicExerciseKeys: Object.keys(
-                        activeTopic?.runtimeStateV2?.exercises ?? {},
-                    ),
-                    activeTopicExerciseWorkspaces: summarizeTopicExerciseWorkspaces(activeTopic),
-                });
-
                 const res = await fetch("/api/review/progress", {
                     method: "PUT",
                     headers: { "Content-Type": "application/json" },
-                    body,
+                    body: requestBody,
+                    keepalive: args.keepalive === true,
                     cache: "no-store",
-                    signal,
+                    signal: args.signal,
                 });
 
                 if (!res.ok) {
-                    throw new Error(`Progress save failed: ${res.status}`);
+                    const message = await res.text().catch(() => "");
+                    console.error("[review-progress] save failed", {
+                        status: res.status,
+                        message,
+                    });
+                    return { committed: false };
+                }
+
+                lastCommittedRef.current = requestSerialized;
+                localDirtyRef.current = false;
+                lastMergedProgressRef.current = serializeProgressStateForDedupe(stateToSave);
+
+                if (args.syncProgressState) {
+                    setProgressSafe(stateToSave);
                 }
 
                 const data = await res.json().catch(() => null);
-                localDirtyRef.current = false;
                 const gamification = data?.gamification ?? null;
 
                 if (gamification?.summary) {
@@ -471,13 +562,42 @@ export function useReviewProgress(args: {
                         summary: gamification.summary,
                     });
                 }
-            } catch (e: any) {
-                if (signal.aborted) return;
-                if (e?.name === "AbortError") return;
-                throw e;
+
+                result = { committed: true };
+            } catch (error: any) {
+                if (args.signal?.aborted || error?.name === "AbortError") {
+                    return { committed: false };
+                }
+                console.error("[review-progress] save request failed", error);
+                return { committed: false };
+            } finally {
+                if (saveInFlightBodyRef.current === requestSerialized) {
+                    saveInFlightRef.current = false;
+                    saveInFlightBodyRef.current = "";
+                }
             }
+
+            const pending = pendingSaveRef.current;
+            if (pending && !saveInFlightRef.current) {
+                pendingSaveRef.current = null;
+                return performProgressSave(pending);
+            }
+
+            return result;
         },
-        [subjectSlug, moduleSlug, locale],
+        [buildPayloadForState, moduleSlug, setProgressSafe, subjectSlug],
+    );
+
+    const commitProgress = useCallback(
+        async (_payload: typeof payload, _body: string, signal: AbortSignal) => {
+            return performProgressSave({
+                state: progressRef.current,
+                reason: "debounce",
+                signal,
+                syncProgressState: false,
+            });
+        },
+        [performProgressSave],
     );
 
     const {
@@ -485,11 +605,12 @@ export function useReviewProgress(args: {
         flush,
         cancel,
         lastCommittedRef,
+        hasPendingRef,
     } = useDebouncedCommit({
         value: payload,
         enabled: hydrated && Boolean(subjectSlug && moduleSlug),
         delayMs: 900,
-        serialize: stableJson,
+        serialize: serializeProgressPayloadForDedupe,
         commit: commitProgress,
     });
 
@@ -501,134 +622,14 @@ export function useReviewProgress(args: {
                 reason?: string;
             },
         ) => {
-            if (!subjectSlug || !moduleSlug) return;
-            if (!hydrationCompleteRef.current) return;
-
-            const latestRuntime = useReviewRuntimeStore.getState();
-            const mergedState = mergeRuntimeIntoProgress(state, latestRuntime);
-            const activeTopicKey = normalizeTopicProgressKey(activeTopicIdRef.current);
-            const candidatePayload = buildReviewProgressPayload({
-                subjectSlug,
-                moduleSlug,
-                locale,
-                state: mergedState,
-                activeTopicId: activeTopicKey,
-            });
-            const candidateBody = stableJson(candidatePayload);
-
-            if (candidateBody === lastCommittedRef.current) {
-                localDirtyRef.current = false;
-                return;
-            }
-
-            const saveSeq = ++saveSeqRef.current;
-            const stateToSave = makeSaveState(mergedState);
-
-            const activeTopic = activeTopicKey
-                ? (stateToSave as any).topics?.[activeTopicKey]
-                : null;
-
-            reviewDebug("9_API_SAVE useReviewProgress.putProgressNow", {
+            await performProgressSave({
+                state,
                 reason: options?.reason ?? "manual",
-                saveSeq,
-                subjectSlug,
-                moduleSlug,
-                activeTopicId: activeTopicIdRef.current,
-                activeTopicKey,
-                saveRevision: getSaveRevision(stateToSave),
-                topicKeys: Object.keys((stateToSave as any).topics ?? {}),
-                activeTopicRuntimeExerciseKeys: Object.keys(
-                    activeTopic?.runtimeStateV2?.exercises ?? {},
-                ),
-                activeTopicRuntimeCardKeys: Object.keys(
-                    activeTopic?.runtimeStateV2?.cards ?? {},
-                ),
-                activeTopicQuizCards: Object.keys(activeTopic?.quizState ?? {}),
-                activeTopicToolKeys: Object.keys(activeTopic?.toolState ?? {}),
-                activeTopicPracticePatchByCard: Object.fromEntries(
-                    Object.entries(activeTopic?.quizState ?? {}).map(
-                        ([cardId, cardState]: any) => [
-                            cardId,
-                            Object.fromEntries(
-                                Object.entries(cardState?.practiceItemPatch ?? {}).map(
-                                    ([key, patch]: any) => [
-                                        key,
-                                        summarizePracticePatch(patch),
-                                    ],
-                                ),
-                            ),
-                        ],
-                    ),
-                ),
+                keepalive: options?.keepalive,
+                syncProgressState: true,
             });
-
-            const nextPayload = buildReviewProgressPayload({
-                subjectSlug,
-                moduleSlug,
-                locale,
-                state: stateToSave,
-                activeTopicId: activeTopicKey,
-            });
-
-            const body = stableJson(nextPayload);
-
-            console.log("[review-progress] save requested", {
-                reason: options?.reason ?? "manual",
-                saveSeq,
-                stateBytes: body.length,
-                saveRevision: getSaveRevision(stateToSave),
-                activeTopicId: activeTopicIdRef.current,
-                activeTopicKey,
-                topicKeys: Object.keys((stateToSave as any).topics ?? {}),
-                runtimeExerciseKeys: Object.keys(latestRuntime.exercises ?? {}),
-                runtimeCardKeys: Object.keys(latestRuntime.cards ?? {}),
-                activeTopicExerciseKeys: Object.keys(
-                    activeTopic?.runtimeStateV2?.exercises ?? {},
-                ),
-                activeTopicExerciseWorkspaces: summarizeTopicExerciseWorkspaces(activeTopic),
-            });
-
-            try {
-                const res = await fetch("/api/review/progress", {
-                    method: "PUT",
-                    headers: { "Content-Type": "application/json" },
-                    body,
-                    keepalive: options?.keepalive === true,
-                    cache: "no-store",
-                });
-
-                if (!res.ok) {
-                    const message = await res.text().catch(() => "");
-                    console.error("[review-progress] save failed", {
-                        status: res.status,
-                        message,
-                    });
-                    return;
-                }
-
-                if (saveSeq === saveSeqRef.current) {
-                    lastCommittedRef.current = body;
-                    setProgressSafe(stateToSave);
-                    localDirtyRef.current = false;
-                }
-
-                const data = await res.json().catch(() => null);
-                const gamification = data?.gamification ?? null;
-
-                if (gamification?.summary) {
-                    emitGamificationUpdate({
-                        source: "review_progress",
-                        xpGained: gamification.xpGained ?? 0,
-                        leveledUp: Boolean(gamification.leveledUp),
-                        streakExtended: Boolean(gamification.streakExtended),
-                        summary: gamification.summary,
-                    });
-                }
-            } catch (error) {
-                console.error("[review-progress] save request failed", error);
-            }
         },
-        [subjectSlug, moduleSlug, locale, lastCommittedRef, setProgressSafe],
+        [performProgressSave],
     );
 
     const hydrateRuntimeFromProgress = useCallback(
@@ -641,19 +642,10 @@ export function useReviewProgress(args: {
                 (normalizedProgress as any).activeTopicId || firstTopicId,
             );
 
-            console.log("[review-progress] hydrate topic", {
+            reviewProgressDebug("[review-progress-debug] hydrate", {
                 reason,
                 activeTopicId: (normalizedProgress as any).activeTopicId || firstTopicId,
                 resolvedTopicKey: resolvedForLog.topicKey,
-                availableTopicKeys: Object.keys(topics ?? {}),
-                runtimeExerciseKeys: Object.keys(
-                    (resolvedForLog.topic as any)?.runtimeStateV2?.exercises ?? {},
-                ),
-                runtimeCardKeys: Object.keys(
-                    (resolvedForLog.topic as any)?.runtimeStateV2?.cards ?? {},
-                ),
-                quizCards: Object.keys((resolvedForLog.topic as any)?.quizState ?? {}),
-                toolKeys: Object.keys((resolvedForLog.topic as any)?.toolState ?? {}),
             });
 
             const resolveExerciseKey = (rawKey: string, saved: any, tid: string, cardIdHint = "") => {
@@ -793,7 +785,7 @@ export function useReviewProgress(args: {
                     return;
                 }
 
-                reviewSaveDebug("hydrate exercise from DB", {
+                reviewSaveDebug("hydrate exercise from DB", () => ({
                     reason,
                     source,
                     rawKey,
@@ -803,7 +795,7 @@ export function useReviewProgress(args: {
                     userEdited: incomingExercise.userEdited,
                     workspaceOrigin: incomingExercise.workspaceOrigin,
                     workspace: summarizeWorkspaceForSave(workspace),
-                });
+                }));
 
                 const runtimeApi = useReviewRuntimeStore.getState();
                 runtimeApi.ensureExercise({
@@ -846,7 +838,7 @@ export function useReviewProgress(args: {
                         const cardKey = cardStateKeyFromPersistedToolKey(key);
                         const userEdited = isUserSavedState(entry);
 
-                        reviewSaveDebug("hydrate toolState from DB", {
+                        reviewSaveDebug("hydrate toolState from DB", () => ({
                             reason,
                             persistedToolKey: key,
                             hydratedCardKey: cardKey,
@@ -855,7 +847,7 @@ export function useReviewProgress(args: {
                             userEdited,
                             workspaceOrigin: entry.workspaceOrigin,
                             workspace: summarizeWorkspaceForSave(workspace),
-                        });
+                        }));
 
                         const runtimeApi = useReviewRuntimeStore.getState();
                         runtimeApi.ensureCard({
@@ -904,7 +896,7 @@ export function useReviewProgress(args: {
                         const savedCard = cstate as any;
                         const userEdited = isUserSavedState(savedCard);
 
-                        reviewSaveDebug("hydrate card from DB", {
+                        reviewSaveDebug("hydrate card from DB", () => ({
                             reason,
                             cardKey: ckey,
                             topicId: tid,
@@ -913,7 +905,7 @@ export function useReviewProgress(args: {
                             workspaceOrigin: savedCard.workspaceOrigin,
                             toolKey: savedCard.toolKey,
                             toolWorkspace: summarizeWorkspaceForSave(savedCard.toolWorkspace),
-                        });
+                        }));
 
                         useReviewRuntimeStore.getState().ensureCard({
                             cardKey: ckey,
@@ -980,6 +972,7 @@ export function useReviewProgress(args: {
                 });
 
                 const normalizedProgress = normalizeProgressTopics(fetchedProgress);
+                applyingRemoteRef.current = true;
 
                 setProgressSafe(normalizedProgress);
                 hydrateRuntimeFromProgress(normalizedProgress, "initial");
@@ -991,34 +984,23 @@ export function useReviewProgress(args: {
                 setActiveTopicId(nextActive);
                 setViewTopicId(nextActive);
 
-                prime(
-                    buildReviewProgressPayload({
-                        subjectSlug,
-                        moduleSlug,
-                        locale,
-                        state: normalizedProgress,
-                        activeTopicId: nextActive,
-                    }),
-                );
+                prime(buildPayloadForState(normalizedProgress, nextActive));
                 localDirtyRef.current = false;
+                lastMergedProgressRef.current =
+                    serializeProgressStateForDedupe(normalizedProgress);
             } catch {
                 const ep = emptyReviewProgress();
+                applyingRemoteRef.current = true;
 
                 setProgressSafe(ep);
                 setActiveTopicId(firstTopicId);
                 setViewTopicId(firstTopicId);
 
-                prime(
-                    buildReviewProgressPayload({
-                        subjectSlug,
-                        moduleSlug,
-                        locale,
-                        state: ep,
-                        activeTopicId: normalizeTopicProgressKey(firstTopicId),
-                    }),
-                );
+                prime(buildPayloadForState(ep, firstTopicId));
                 localDirtyRef.current = false;
+                lastMergedProgressRef.current = serializeProgressStateForDedupe(ep);
             } finally {
+                applyingRemoteRef.current = false;
                 hydrationCompleteRef.current = true;
                 setHydrated(true);
             }
@@ -1033,6 +1015,7 @@ export function useReviewProgress(args: {
         setProgressSafe,
         setActiveTopicId,
         prime,
+        buildPayloadForState,
         hydrateRuntimeFromProgress,
     ]);
 
@@ -1043,29 +1026,15 @@ export function useReviewProgress(args: {
             if (typeof document !== "undefined" && document.visibilityState !== "visible") {
                 return;
             }
+            if (localDirtyRef.current) return;
+            if (saveInFlightRef.current) return;
             if (remoteSyncInFlightRef.current) return;
+            if (hasPendingRef.current) return;
 
             remoteSyncInFlightRef.current = true;
 
             let applied = false;
-            let logReason = "not-newer";
-            let localRevision = getSaveRevision(progressRef.current);
-            let remoteRevision = 0;
-            let topicKeys: string[] = [];
-
             try {
-                if (localDirtyRef.current) {
-                    logReason = "flushed-local-first";
-                    await flush();
-                    localDirtyRef.current = false;
-                    localRevision = getSaveRevision(progressRef.current);
-                }
-
-                if (localDirtyRef.current) {
-                    logReason = "local-dirty";
-                    return;
-                }
-
                 const remoteProgress = normalizeProgressTopics(
                     await fetchReviewProgressGET({
                         subjectSlug,
@@ -1075,12 +1044,10 @@ export function useReviewProgress(args: {
                     }),
                 );
 
-                remoteRevision = getSaveRevision(remoteProgress);
-                topicKeys = Object.keys((remoteProgress as any).topics ?? {});
-                localRevision = getSaveRevision(progressRef.current);
+                const remoteRevision = getSaveRevision(remoteProgress);
+                const localRevision = getSaveRevision(progressRef.current);
 
                 if (!remoteRevision || remoteRevision <= localRevision) {
-                    logReason = "not-newer";
                     return;
                 }
 
@@ -1098,50 +1065,37 @@ export function useReviewProgress(args: {
                 setActiveTopicId(nextActive);
                 setViewTopicId(nextActive);
                 localDirtyRef.current = false;
+                lastMergedProgressRef.current =
+                    serializeProgressStateForDedupe(remoteProgress);
 
-                prime(
-                    buildReviewProgressPayload({
-                        subjectSlug,
-                        moduleSlug,
-                        locale,
-                        state: remoteProgress,
-                        activeTopicId: nextActive,
-                    }),
-                );
+                prime(buildPayloadForState(remoteProgress, nextActive));
 
                 applied = true;
-                logReason = "applied";
             } catch (error: any) {
                 if (signal?.aborted || error?.name === "AbortError") return;
-                logReason = "error";
-                console.warn("[review-progress] remote sync failed", {
-                    reason,
-                    message: error?.message ?? String(error),
-                });
+                console.error("[review-progress] remote sync failed", error);
             } finally {
                 applyingRemoteRef.current = false;
                 remoteSyncInFlightRef.current = false;
-                console.log("[review-progress] remote sync", {
-                    localRevision,
-                    remoteRevision,
-                    applied,
-                    reason: logReason === "applied" ? reason : logReason,
-                    topicKeys,
-                });
+                if (REVIEW_PROGRESS_DEBUG && applied) {
+                    reviewProgressDebug("[review-progress-debug] remote-sync", {
+                        reason,
+                    });
+                }
             }
         },
         [
             subjectSlug,
             moduleSlug,
-            locale,
             hydrated,
-            flush,
             cancel,
             hydrateRuntimeFromProgress,
             firstTopicId,
             setProgressSafe,
             setActiveTopicId,
             prime,
+            buildPayloadForState,
+            hasPendingRef,
         ],
     );
 
@@ -1158,11 +1112,19 @@ export function useReviewProgress(args: {
 
         const interval = window.setInterval(() => {
             if (document.visibilityState !== "visible") return;
+            if (localDirtyRef.current) return;
+            if (saveInFlightRef.current) return;
+            if (remoteSyncInFlightRef.current) return;
+            if (hasPendingRef.current) return;
             poll("poll");
-        }, 7000);
+        }, 30000);
 
         const onVisibilityChange = () => {
             if (document.visibilityState === "visible") {
+                if (localDirtyRef.current) return;
+                if (saveInFlightRef.current) return;
+                if (remoteSyncInFlightRef.current) return;
+                if (hasPendingRef.current) return;
                 poll("visible");
             }
         };
@@ -1174,7 +1136,7 @@ export function useReviewProgress(args: {
             document.removeEventListener("visibilitychange", onVisibilityChange);
             ctrl.abort();
         };
-    }, [subjectSlug, moduleSlug, hydrated, syncRemoteProgress]);
+    }, [subjectSlug, moduleSlug, hydrated, syncRemoteProgress, hasPendingRef]);
 
     useFlushOnPageExit(() => {
         if (!hydrated || !hydrationCompleteRef.current) return;
@@ -1223,7 +1185,12 @@ export function useReviewProgress(args: {
 
             setProgressSafe((prev: ReviewProgressState) => {
                 const next = mergeRuntimeIntoProgress(prev, runtimeState);
-                if (next === prev) return prev;
+                const prevSerialized = lastMergedProgressRef.current;
+                const nextSerialized = serializeProgressStateForDedupe(next);
+
+                if (nextSerialized === prevSerialized) return prev;
+
+                lastMergedProgressRef.current = nextSerialized;
                 localDirtyRef.current = true;
                 progressRef.current = next;
                 return next;
@@ -1233,7 +1200,7 @@ export function useReviewProgress(args: {
         return () => {
             unsub();
         };
-    }, [hydrated, setProgressSafe, putProgressNow]);
+    }, [hydrated, setProgressSafe]);
 
     return {
         hydrated,

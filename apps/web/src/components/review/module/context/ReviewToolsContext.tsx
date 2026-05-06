@@ -86,7 +86,62 @@ export type ReviewToolsValue = {
 const Ctx = createContext<ReviewToolsValue | null>(null);
 
 function workspaceKeyOf(workspace: WorkspaceStateV2 | null | undefined) {
-  return JSON.stringify(workspace ?? null);
+  if (!workspace || workspace.version !== 2 || !Array.isArray(workspace.nodes)) {
+    return "null";
+  }
+
+  const folderPathById = new Map<string, string>();
+
+  let changed = true;
+  while (changed) {
+    changed = false;
+
+    for (const node of workspace.nodes as any[]) {
+      if (!node || node.kind !== "folder") continue;
+
+      const id = String(node.id ?? "");
+      if (!id || folderPathById.has(id)) continue;
+
+      const name = String(node.name ?? "");
+      const parentId = node.parentId == null ? null : String(node.parentId);
+      if (parentId && !folderPathById.has(parentId)) continue;
+
+      const parentPath = parentId ? folderPathById.get(parentId) || "" : "";
+      folderPathById.set(id, parentPath ? `${parentPath}/${name}` : name);
+      changed = true;
+    }
+  }
+
+  const filePath = (node: any) => {
+    const name = String(node?.name ?? "");
+    const parentId = node?.parentId == null ? null : String(node.parentId);
+    const parentPath = parentId ? folderPathById.get(parentId) || "" : "";
+    return parentPath ? `${parentPath}/${name}` : name;
+  };
+
+  const files = (workspace.nodes as any[])
+    .filter((node) => node?.kind === "file")
+    .map((node) => ({
+      path: filePath(node),
+      content: String(node.content ?? ""),
+    }))
+    .sort((a, b) => a.path.localeCompare(b.path));
+
+  const activeNode = (workspace.nodes as any[]).find(
+    (node) => node?.kind === "file" && node.id === workspace.activeFileId,
+  );
+  const entryNode = (workspace.nodes as any[]).find(
+    (node) => node?.kind === "file" && node.id === workspace.entryFileId,
+  );
+
+  return JSON.stringify({
+    version: 2,
+    language: workspace.language ?? null,
+    stdin: typeof workspace.stdin === "string" ? workspace.stdin : "",
+    activePath: activeNode ? filePath(activeNode) : null,
+    entryPath: entryNode ? filePath(entryNode) : null,
+    files,
+  });
 }
 
 function getWorkspaceEntryCode(workspace: WorkspaceStateV2 | null | undefined) {
@@ -118,7 +173,7 @@ function registerArgsKey(args: RegisterArgs | undefined) {
     code: args.code,
     stdin: args.stdin ?? "",
     ideConfig: args.ideConfig ?? null,
-    workspace: args.workspace ?? null,
+    workspaceKey: workspaceKeyOf(args.workspace ?? null),
     ownerCardId: args.ownerCardId ?? null,
     preferSnapshot: Boolean(args.preferSnapshot),
     sqlDialect: args.sqlDialect ?? null,
@@ -383,11 +438,17 @@ export function ReviewToolsProvider({
             : cur.sqlInitialTableSnapshots,
       };
 
+      const prevKey = registerArgsKey(cur);
+      const nextKey = registerArgsKey(next);
+      if (prevKey === nextKey) {
+        return;
+      }
+
       registryRef.current.set(id, next);
       cur.onPatch?.(patch);
 
       const targetKey = next.exerciseKey ?? id;
-      patchExercise(targetKey, {
+      const runtimePatch: Record<string, any> = {
         language: next.lang,
         lang: next.lang,
         workspace: next.workspace ?? undefined,
@@ -396,9 +457,19 @@ export function ReviewToolsProvider({
         stdin: next.stdin ?? "",
         codeStdin: next.stdin ?? "",
         code: getWorkspaceEntryCode(next.workspace) ?? next.code,
-        userEdited: true,
-        workspaceOrigin: "user",
-      } as any);
+      };
+
+      if (patch?.userEdited === true) {
+        runtimePatch.userEdited = true;
+      }
+      if (typeof patch?.workspaceOrigin === "string") {
+        runtimePatch.workspaceOrigin = patch.workspaceOrigin;
+      }
+      if (typeof patch?.updatedAt === "number" && Number.isFinite(patch.updatedAt)) {
+        runtimePatch.updatedAt = patch.updatedAt;
+      }
+
+      patchExercise(targetKey, runtimePatch as any);
     },
     [patchExercise],
   );
@@ -535,7 +606,9 @@ export function ReviewToolsProvider({
           !registryRef.current.has(id) &&
           (currentBound === id || currentBound === targetKeyBeforeDelete)
         ) {
-          storeUnbindExerciseTool(currentBound);
+          if (currentBound) {
+            storeUnbindExerciseTool(currentBound);
+          }
           onUnbindFromToolsPanel?.();
         }
       }, 0);

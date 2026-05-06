@@ -36,9 +36,9 @@ function createPrismaClient() {
     return new PrismaClient({
         adapter: new PrismaPg(pool),
         log:
-            process.env.NODE_ENV === "development"
+            process.env.PRISMA_QUERY_LOG === "true"
                 ? ["query", "error", "warn"]
-                : ["error"],
+                : ["error", "warn"],
     });
 }
 

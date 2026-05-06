@@ -21,6 +21,8 @@ import { ReviewProgressWriteSchema } from "@/lib/review/api/progress/schemas";
 import { resolveReviewModuleForSubject } from "@/lib/review/api/shared/modules";
 import { awardReviewProgressGamification } from "@/lib/gamification/awardReviewProgressGamification";
 
+const REVIEW_PROGRESS_DEBUG = process.env.REVIEW_PROGRESS_DEBUG === "true";
+
 async function resolveReviewProgressScope(args: {
     subjectSlug: string;
     moduleSlug: string;
@@ -49,22 +51,9 @@ function stateBytes(state: any) {
     }
 }
 
-function topicKeys(state: any) {
-    return Object.keys(state?.topics ?? {});
-}
-
-function topicSummary(state: any) {
-    return Object.fromEntries(
-        Object.entries((state?.topics ?? {}) as Record<string, any>).map(([topicKey, topic]) => [
-            topicKey,
-            {
-                runtimeExerciseKeys: Object.keys(topic?.runtimeStateV2?.exercises ?? {}),
-                runtimeCardKeys: Object.keys(topic?.runtimeStateV2?.cards ?? {}),
-                toolStateKeys: Object.keys(topic?.toolState ?? {}),
-                quizStateKeys: Object.keys(topic?.quizState ?? {}),
-            },
-        ]),
-    );
+function reviewProgressDebug(message: string, data: Record<string, unknown>) {
+    if (!REVIEW_PROGRESS_DEBUG) return;
+    console.log(message, data);
 }
 
 function timeMs(value: unknown) {
@@ -165,16 +154,13 @@ export async function GET(req: Request) {
 
     const state = (row?.state ?? null) as ReviewProgressState | null;
 
-    console.log("[review-progress] loaded", {
-        actorKey,
+    reviewProgressDebug("[review-progress-debug] load", {
         subjectSlug,
         moduleId: resolved.module.slug,
         locale,
         hasState: Boolean(state),
         saveRevision: getSaveRevision(state),
         stateBytes: stateBytes(state),
-        topicKeys: topicKeys(state),
-        topicSummary: topicSummary(state),
     });
 
     return bodyJsonWithGuestCookie(
@@ -253,19 +239,12 @@ export async function PUT(req: Request) {
     const incomingRevision = getSaveRevision(state);
 
     if (previous && incomingRevision < existingRevision) {
-        console.warn("[review-progress] ignored stale save", {
-            actorKey,
+        reviewProgressDebug("[review-progress-debug] stale-save", {
             subjectSlug,
             moduleId: resolved.module.slug,
             locale,
             incomingRevision,
             existingRevision,
-            incomingBytes: stateBytes(state),
-            existingBytes: stateBytes(previousState),
-            incomingTopicKeys: topicKeys(state),
-            existingTopicKeys: topicKeys(previousState),
-            incomingTopicSummary: topicSummary(state),
-            existingTopicSummary: topicSummary(previousState),
         });
 
         return bodyJsonWithGuestCookie(
@@ -313,17 +292,13 @@ export async function PUT(req: Request) {
         },
     });
 
-    console.log("[review-progress] saved", {
-        actorKey,
+    reviewProgressDebug("[review-progress-debug] save", {
         subjectSlug,
         moduleId: resolved.module.slug,
         locale,
-        updatedAt: saved.updatedAt,
         incomingRevision,
         saveRevision: getSaveRevision(stateToPersist),
         stateBytes: stateBytes(stateToPersist),
-        topicKeys: topicKeys(stateToPersist),
-        topicSummary: topicSummary(stateToPersist),
     });
 
     let gamification = null;

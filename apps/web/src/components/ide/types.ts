@@ -209,6 +209,7 @@ export type UseIdeProjectSessionArgs = {
     entryFile: any | null;
     replaceWorkspace: (ws: SaveProjectRequest["workspace"]) => void;
     resetWorkspaceForLanguage?: (language: WorkspaceLanguage) => void;
+    flushWorkspaceSave?: () => Promise<void>;
     markLoaded: DirtyStateApi["markLoaded"];
     markSaved: DirtyStateApi["markSaved"];
     clearSavedBaseline: DirtyStateApi["clearSavedBaseline"];

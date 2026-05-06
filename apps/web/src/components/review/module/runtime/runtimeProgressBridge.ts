@@ -4,7 +4,6 @@ import { stableJson } from "@/lib/client/persistence/stableJson";
 import type { ReviewRuntimeStore } from "./reviewRuntimeTypes";
 import { reviewDebug, summarizePracticePatch, summarizeWorkspace } from "./reviewDebug";
 import { deriveEntryCode } from "./exerciseWorkspaceResolver";
-import { reviewSaveDebug } from "./reviewSaveDebug";
 
 type RuntimeLike = Pick<ReviewRuntimeStore, "exercises" | "cards">;
 
@@ -375,30 +374,6 @@ export function mergeRuntimeIntoProgress(
     ...(progress as any),
     topics: nextTopics,
   } as ReviewProgressState;
-
-  reviewSaveDebug("mergeRuntimeIntoProgress", {
-    changed,
-    activeTopicId: (progress as any)?.activeTopicId ?? null,
-    activeTopicKey: normalizeTopicProgressKey((progress as any)?.activeTopicId),
-    runtimeExerciseKeys: Object.keys(runtime.exercises ?? {}),
-    runtimeCardKeys: Object.keys(runtime.cards ?? {}),
-    outputTopicKeys: Object.keys(next.topics ?? {}),
-    topicSummary: Object.fromEntries(
-      Object.entries(next.topics ?? {}).map(([topicKey, topic]: any) => [
-        topicKey,
-        {
-          exercises: Object.keys(topic?.runtimeStateV2?.exercises ?? {}),
-          savedExerciseKeys: Object.keys(topic?.runtimeStateV2?.exercises ?? {}),
-          cards: Object.keys(topic?.runtimeStateV2?.cards ?? {}),
-          tools: Object.keys(topic?.toolState ?? {}),
-          quizCards: Object.keys(topic?.quizState ?? {}),
-          practicePatchExerciseKeys: Object.values(topic?.quizState ?? {}).flatMap(
-            (quizState: any) => Object.keys(quizState?.practiceItemPatch ?? {}),
-          ),
-        },
-      ]),
-    ),
-  });
 
   return next;
 }

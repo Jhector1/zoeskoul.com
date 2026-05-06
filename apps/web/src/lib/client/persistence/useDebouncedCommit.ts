@@ -7,7 +7,7 @@ type CommitFn<T> = (
     value: T,
     serialized: string,
     signal: AbortSignal,
-) => Promise<void> | void;
+) => Promise<void | { committed?: boolean }> | void | { committed?: boolean };
 
 export function useDebouncedCommit<T>(args: {
     value: T;
@@ -30,6 +30,8 @@ export function useDebouncedCommit<T>(args: {
     const lastCommittedRef = useRef<string>("");
     const timerRef = useRef<number | null>(null);
     const abortRef = useRef<AbortController | null>(null);
+    const hasPendingRef = useRef(false);
+    const isFlushingRef = useRef(false);
 
     useEffect(() => {
         latestValueRef.current = value;
@@ -40,6 +42,7 @@ export function useDebouncedCommit<T>(args: {
             window.clearTimeout(timerRef.current);
             timerRef.current = null;
         }
+        hasPendingRef.current = false;
         abortRef.current?.abort();
         abortRef.current = null;
     }, []);
@@ -48,6 +51,7 @@ export function useDebouncedCommit<T>(args: {
         (next: T) => {
             latestValueRef.current = next;
             lastCommittedRef.current = serializeValue(next);
+            hasPendingRef.current = false;
         },
         [serializeValue],
     );
@@ -63,23 +67,43 @@ export function useDebouncedCommit<T>(args: {
         const next = latestValueRef.current;
         const serialized = serializeValue(next);
 
-        if (serialized === lastCommittedRef.current) return;
+        if (serialized === lastCommittedRef.current) {
+            hasPendingRef.current = false;
+            return;
+        }
 
-        abortRef.current?.abort();
+        if (isFlushingRef.current) {
+            hasPendingRef.current = true;
+            return;
+        }
 
         const ctrl = new AbortController();
         abortRef.current = ctrl;
+        isFlushingRef.current = true;
+        hasPendingRef.current = false;
 
         try {
-            await commit(next, serialized, ctrl.signal);
-            lastCommittedRef.current = serialized;
+            const result = await commit(next, serialized, ctrl.signal);
+            const committed =
+                typeof result === "object" && result !== null
+                    ? result.committed !== false
+                    : true;
+            if (committed) {
+                lastCommittedRef.current = serialized;
+            }
         } catch (e: any) {
             if (ctrl.signal.aborted) return;
             if (e?.name === "AbortError") return;
             throw e;
         } finally {
+            isFlushingRef.current = false;
             if (abortRef.current === ctrl) {
                 abortRef.current = null;
+            }
+
+            const latestSerialized = serializeValue(latestValueRef.current);
+            if (enabled && hasPendingRef.current && latestSerialized !== lastCommittedRef.current) {
+                void flush();
             }
         }
     }, [enabled, serializeValue, commit]);
@@ -93,6 +117,7 @@ export function useDebouncedCommit<T>(args: {
             window.clearTimeout(timerRef.current);
         }
 
+        hasPendingRef.current = true;
         timerRef.current = window.setTimeout(() => {
             void flush();
         }, delayMs);
@@ -102,6 +127,7 @@ export function useDebouncedCommit<T>(args: {
                 window.clearTimeout(timerRef.current);
                 timerRef.current = null;
             }
+            hasPendingRef.current = false;
         };
     }, [value, enabled, delayMs, serializeValue, flush]);
 
@@ -111,6 +137,7 @@ export function useDebouncedCommit<T>(args: {
                 window.clearTimeout(timerRef.current);
                 timerRef.current = null;
             }
+            hasPendingRef.current = false;
             abortRef.current?.abort();
             abortRef.current = null;
         };
@@ -121,5 +148,7 @@ export function useDebouncedCommit<T>(args: {
         flush,
         cancel,
         lastCommittedRef,
+        hasPendingRef,
+        isFlushingRef,
     };
 }

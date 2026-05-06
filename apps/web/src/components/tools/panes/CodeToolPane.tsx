@@ -15,75 +15,6 @@ import {
     resolveFullIDEConfigFromLearningIde,
 } from "@/lib/ide/learningIdeConfig";
 import { useReviewRuntimeStore } from "@/components/review/module/runtime/reviewRuntimeStore";
-import { reviewSaveDebug, summarizeWorkspaceForSave } from "@/components/review/module/runtime/reviewSaveDebug";
-
-
-function starterPaneTrace(label: string, payload: Record<string, any>) {
-    try {
-        if (typeof window === "undefined") return;
-        if (window.localStorage.getItem("zoe:debug:starter-files") !== "1") return;
-    } catch {
-        return;
-    }
-
-    const win = window as any;
-    win.__ZOE_STARTER_LOOP__ ??= {
-        seq: 0,
-        counts: {},
-        last: {},
-        startedAt: Date.now(),
-    };
-
-    const store = win.__ZOE_STARTER_LOOP__;
-    const key = String(
-        payload.exerciseKey ??
-        payload.cardRuntimeKey ??
-        payload.workspaceContextKey ??
-        payload.boundId ??
-        "global",
-    );
-
-    const fingerprint = JSON.stringify({
-        label,
-        key,
-        workspaceKey: payload.workspaceKey ?? payload.incomingWorkspaceKey ?? payload.currentWorkspaceKey ?? null,
-        bridgeKey: payload.bridgeKey ?? null,
-        canRenderEditor: payload.canRenderEditor ?? null,
-        showLoadingMask: payload.showLoadingMask ?? null,
-        patched: payload.patched ?? null,
-        reason: payload.reason ?? null,
-    });
-
-    const counterKey = `${label}:${key}:${fingerprint}`;
-    store.seq += 1;
-    store.counts[counterKey] = (store.counts[counterKey] ?? 0) + 1;
-    store.last[key] = {
-        label,
-        payload,
-        fingerprint,
-        seq: store.seq,
-        count: store.counts[counterKey],
-        at: Date.now(),
-    };
-
-    const count = store.counts[counterKey];
-    const method = count > 10 ? "warn" : "debug";
-
-    console[method](`[starter-loop:${label}] #${store.seq} count=${count}`, {
-        key,
-        ...payload,
-        fingerprint,
-    });
-
-    if (count === 11) {
-        console.warn("[starter-loop] repeated pane transition more than 10 times", {
-            label,
-            key,
-            payload,
-            inspect: "window.__ZOE_STARTER_LOOP__",
-        });
-    }
-}
 
 function asWorkspaceLanguage(language: string | null | undefined): WorkspaceLanguage {
     const value = String(language ?? "");
@@ -279,44 +210,6 @@ function cardIdFromEditorScope(value: string) {
     return value;
 }
 
-function readCardToolWorkspaceBackupForEditorScope(scopeKey: string | null | undefined) {
-    if (typeof window === "undefined") return null;
-    if (!scopeKey || !isCardEditorScope(scopeKey)) return null;
-
-    const cardId = cardIdFromEditorScope(scopeKey);
-    const prefix = "zoe:review-card-tool-workspace:";
-
-    function parse(raw: string | null) {
-        if (!raw) return null;
-
-        try {
-            const parsed = JSON.parse(raw);
-            if (!parsed?.workspace || parsed.workspace.version !== 2) return null;
-            return parsed.workspace as WorkspaceStateV2;
-        } catch {
-            return null;
-        }
-    }
-
-    // Exact scan by card id. This covers:
-    // zoe:review-card-tool-workspace:<topic>:card:<cardId>
-    // zoe:review-card-tool-workspace:<topic>:subject:module:topic:<cardId>:general
-    for (let i = 0; i < window.localStorage.length; i += 1) {
-        const key = window.localStorage.key(i);
-        if (!key || !key.startsWith(prefix)) continue;
-
-        const storedToolKey = key.slice(prefix.length).split(":").slice(1).join(":");
-        const storedCardId = cardIdFromEditorScope(storedToolKey);
-
-        if (storedCardId !== cardId) continue;
-
-        const workspace = parse(window.localStorage.getItem(key));
-        if (workspace) return workspace;
-    }
-
-    return null;
-}
-
 function patchToolWorkspaceSource(args: {
     workspace: WorkspaceStateV2;
     language: RunnerLanguage;
@@ -463,26 +356,6 @@ export default function CodeToolPane(props: {
             ? editorRuntime.workspace
             : null;
 
-    useEffect(() => {
-        reviewSaveDebug("visible CodeToolPane runtime", {
-            resolvedEditorOwnerKey,
-            workspaceStatus: editorRuntime?.workspaceStatus,
-            workspaceOrigin: editorRuntime?.workspaceOrigin,
-            userEdited: editorRuntime?.userEdited,
-            language: editorRuntime?.language,
-            codeLength: String(editorRuntime?.code ?? "").length,
-            workspace: summarizeWorkspaceForSave(editorRuntime?.workspace),
-        });
-    }, [
-        resolvedEditorOwnerKey,
-        editorRuntime?.workspaceStatus,
-        editorRuntime?.workspaceOrigin,
-        editorRuntime?.userEdited,
-        editorRuntime?.language,
-        editorRuntime?.code,
-        editorRuntime?.workspace,
-    ]);
-
     const reviewDirectWorkspaceReady = !!reviewDirectWorkspace;
     const isReviewRouteMode = Boolean(resolvedEditorOwnerKey);
     const reviewDirectWorkspaceError = editorRuntime?.workspaceStatus === "error";
@@ -527,10 +400,10 @@ export default function CodeToolPane(props: {
 
     const [runFeedback, setRunFeedback] = useState<CodeFeedback | null>(null);
     const [ideReady, setIdeReady] = useState(false);
-    const lastEmittedRef = useRef<{ code: string; stdin: string } | null>(null);
-    const lastIncomingRef = useRef<{ code: string; stdin: string } | null>(null);
     const persistTimerRef = useRef<number | null>(null);
     const lastUpstreamWorkspaceKeyRef = useRef<string>("");
+    const lastHandledWorkspaceKeyRef = useRef<string>("");
+    const applyingExternalWorkspaceRef = useRef(false);
 
     const exerciseWorkspaceReady = Boolean(exerciseKey && editorRuntime?.workspaceStatus === "ready" && editorRuntime.workspace);
     const cardWorkspaceReady = Boolean(cardRuntimeKey && editorRuntime?.workspaceStatus === "ready" && editorRuntime.workspace);
@@ -556,6 +429,10 @@ export default function CodeToolPane(props: {
     ]);
 
     const finalReviewWorkspace = directRuntimeWorkspace;
+    const finalReviewWorkspaceKey = useMemo(
+        () => workspaceKeyOf(finalReviewWorkspace ?? null),
+        [finalReviewWorkspace],
+    );
     const runtimeWorkspacePending =
         isReviewRouteMode &&
         !runtimeWorkspaceError &&
@@ -574,10 +451,10 @@ export default function CodeToolPane(props: {
 
     useEffect(() => {
         setIdeReady(false);
-        lastEmittedRef.current = null;
-        lastIncomingRef.current = null;
-        lastUpstreamWorkspaceKeyRef.current = "";
-    }, [workspaceContextKey]);
+        lastUpstreamWorkspaceKeyRef.current = finalReviewWorkspaceKey;
+        lastHandledWorkspaceKeyRef.current = finalReviewWorkspaceKey;
+        applyingExternalWorkspaceRef.current = true;
+    }, [workspaceContextKey, finalReviewWorkspaceKey]);
 
     useEffect(() => {
         setRunFeedback(null);
@@ -593,50 +470,13 @@ export default function CodeToolPane(props: {
         };
     }, []);
 
-    useEffect(() => {
-        lastIncomingRef.current = {
-            code: toolCode,
-            stdin: toolStdin,
-        };
-    }, [toolCode, toolStdin]);
-
-    starterPaneTrace("pane.renderGate", {
-        exerciseKey,
-        cardRuntimeKey,
-        editorOwnerKey: resolvedEditorOwnerKey,
-        workspaceContextKey,
-        directRuntimeWorkspaceKey: workspaceKeyOf(directRuntimeWorkspace ?? null),
-        finalReviewWorkspaceKey: workspaceKeyOf(finalReviewWorkspace ?? null),
-        finalReviewWorkspaceHasContent: forceWorkspaceHasContent(finalReviewWorkspace),
-        directRuntimeWorkspaceHasContent: reviewWorkspaceHasNonEmptyFile(directRuntimeWorkspace),
-        exerciseWorkspaceReady,
-        cardWorkspaceReady,
-        runtimeWorkspaceError,
-        runtimeWorkspacePending,
-        canRenderEditor,
-        showLoadingMask,
-        storeExerciseStatus: exerciseKey ? editorRuntime?.workspaceStatus : null,
-        storeCardStatus: cardRuntimeKey ? editorRuntime?.workspaceStatus : null,
-    });
-
-    reviewSaveDebug("visible exercise editor", {
-        boundId,
-        resolvedEditorOwnerKey,
-        exerciseKey,
-        cardRuntimeKey,
-        workspaceOrigin: editorRuntime?.workspaceOrigin,
-        userEdited: editorRuntime?.userEdited,
-        workspace: summarizeWorkspaceForSave(finalReviewWorkspace),
-    });
-
     const emitWorkspaceUpstream = useCallback((workspace: WorkspaceStateV2 | null) => {
         const workspaceKey = workspaceKeyOf(workspace ?? null);
         if (lastUpstreamWorkspaceKeyRef.current === workspaceKey) return;
         lastUpstreamWorkspaceKeyRef.current = workspaceKey;
+        lastHandledWorkspaceKeyRef.current = workspaceKey;
 
         const next = extractWorkspaceSnapshot(workspace);
-        const prevEmitted = lastEmittedRef.current;
-        const prevIncoming = lastIncomingRef.current;
         const workspacePatch =
             workspace && typeof workspace === "object"
                 ? {
@@ -659,20 +499,9 @@ export default function CodeToolPane(props: {
                 result: null,
                 userEdited: true,
                 workspaceOrigin: "user",
-                updatedAt: Date.now(),
+                    updatedAt: Date.now(),
             });
         }
-
-        if (prevEmitted && prevEmitted.code === next.code && prevEmitted.stdin === next.stdin) {
-            return;
-        }
-
-        if (prevIncoming && prevIncoming.code === next.code && prevIncoming.stdin === next.stdin) {
-            lastEmittedRef.current = next;
-            return;
-        }
-
-        lastEmittedRef.current = next;
         setRunFeedback(null);
 
         if (boundId) {
@@ -707,28 +536,24 @@ export default function CodeToolPane(props: {
     }, [emitWorkspaceUpstream]);
 
     const handleWorkspaceChange = useCallback((workspace: WorkspaceStateV2 | null) => {
-        if (workspace) {
-            if (boundId) {
-                const snap = extractWorkspaceSnapshot(workspace);
+        const nextWorkspaceKey = workspaceKeyOf(workspace ?? null);
 
-                syncCodeInputSnapshot?.(boundId, {
-                    workspace,
-                    codeWorkspace: workspace,
-                    ideWorkspace: workspace,
-                    code: snap.code,
-                    source: snap.code,
-                    stdin: snap.stdin,
-                    codeStdin: snap.stdin,
-                    language: effectiveLanguage,
-                    lang: effectiveLanguage,
-                    submitted: false,
-                    result: null,
-                    userEdited: true,
-                    workspaceOrigin: "user",
-                    updatedAt: Date.now(),
-                });
-            }
+        if (
+            applyingExternalWorkspaceRef.current &&
+            nextWorkspaceKey === lastUpstreamWorkspaceKeyRef.current
+        ) {
+            applyingExternalWorkspaceRef.current = false;
+            lastHandledWorkspaceKeyRef.current = nextWorkspaceKey;
+            return;
         }
+
+        applyingExternalWorkspaceRef.current = false;
+
+        if (lastHandledWorkspaceKeyRef.current === nextWorkspaceKey) {
+            return;
+        }
+
+        lastHandledWorkspaceKeyRef.current = nextWorkspaceKey;
 
         if (!usesWorkspaceShell) {
             emitWorkspaceUpstream(workspace);
@@ -743,13 +568,7 @@ export default function CodeToolPane(props: {
             persistTimerRef.current = null;
             emitWorkspaceUpstreamRef.current(workspace);
         }, 220);
-    }, [
-        boundId,
-        effectiveLanguage,
-        emitWorkspaceUpstream,
-        syncCodeInputSnapshot,
-        usesWorkspaceShell,
-    ]);
+    }, [emitWorkspaceUpstream, usesWorkspaceShell]);
 
     useEffect(() => {
         return () => {
