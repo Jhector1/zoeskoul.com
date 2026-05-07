@@ -36,27 +36,17 @@ function manifestHasStarter(manifest: any, entry: ReviewTargetEntry) {
     Array.isArray((workspaceCandidate as WorkspaceStateV2).nodes);
 
   return Boolean(
-    isWorkspace ||
       hasFiles(entry.starterFiles) ||
       (typeof entry.starterCode === "string" && entry.starterCode.length > 0) ||
       hasFiles(workspaceContainer?.starterFiles) ||
-      hasFiles(workspaceContainer?.files) ||
       hasFiles(workspaceContainer?.initialFiles) ||
       hasFiles(workspaceContainer?.workspaceFiles) ||
       hasFiles(source?.starterFiles) ||
-      hasFiles(source?.files) ||
       hasFiles(source?.initialFiles) ||
       hasFiles(source?.workspaceFiles) ||
       (typeof workspaceContainer?.starterCode === "string" && workspaceContainer.starterCode.trim().length > 0) ||
-      (typeof workspaceContainer?.code === "string" && workspaceContainer.code.trim().length > 0) ||
-      (typeof workspaceContainer?.content === "string" && workspaceContainer.content.trim().length > 0) ||
-      (typeof workspaceContainer?.source === "string" && workspaceContainer.source.trim().length > 0) ||
       (typeof source?.starterCode === "string" && source.starterCode.trim().length > 0) ||
-      (typeof source?.code === "string" && source.code.trim().length > 0) ||
-      (typeof source?.content === "string" && source.content.trim().length > 0) ||
-      (typeof source?.source === "string" && source.source.trim().length > 0) ||
       hasFiles(source?.recipe?.starterFiles) ||
-      hasFiles(source?.recipe?.files) ||
       hasFiles(source?.recipe?.initialFiles) ||
       (typeof source?.recipe?.starterCode === "string" && source.recipe.starterCode.trim().length > 0)
   );

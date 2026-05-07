@@ -88,100 +88,6 @@ function getCardTargetSlug(card: ReviewCard) {
 }
 
 
-function registryLooksLikePythonStarterCode(value: string) {
-  const s = String(value ?? "").trim();
-  if (!s || s.length > 5000) return false;
-
-  return (
-    /\bprint\s*\(/.test(s) ||
-    /\binput\s*\(/.test(s) ||
-    /\bint\s*\(/.test(s) ||
-    /\bfloat\s*\(/.test(s) ||
-    /\bstr\s*\(/.test(s) ||
-    /\bdef\s+[a-zA-Z_][a-zA-Z0-9_]*\s*\(/.test(s) ||
-    /^\s*[a-zA-Z_][a-zA-Z0-9_]*\s*=/.test(s) ||
-    /#\s*TODO/i.test(s)
-  );
-}
-
-function extractRegistryCodeFence(value: string) {
-  const source = String(value ?? "");
-
-  const preferred = source.match(/```(?:python|py)\s*([\s\S]*?)```/i);
-  if (preferred?.[1]?.trim()) return preferred[1].trim();
-
-  const generic = source.match(/```\s*([\s\S]*?)```/);
-  if (generic?.[1]?.trim() && registryLooksLikePythonStarterCode(generic[1])) {
-    return generic[1].trim();
-  }
-
-  return "";
-}
-
-function extractRegistryStarterCodeFromLooseContent(input: unknown, seen = new WeakSet<object>()): string {
-  if (input == null) return "";
-
-  if (typeof input === "string") {
-    const fenced = extractRegistryCodeFence(input);
-    if (fenced) return fenced;
-    return registryLooksLikePythonStarterCode(input) ? input.trim() : "";
-  }
-
-  if (typeof input !== "object") return "";
-
-  if (seen.has(input as object)) return "";
-  seen.add(input as object);
-
-  if (Array.isArray(input)) {
-    for (const item of input) {
-      const found = extractRegistryStarterCodeFromLooseContent(item, seen);
-      if (found) return found;
-    }
-    return "";
-  }
-
-  const obj = input as Record<string, unknown>;
-
-  const preferredKeys = [
-    "starterCode",
-    "code",
-    "content",
-    "source",
-    "body",
-    "markdown",
-    "md",
-    "text",
-    "prompt",
-    "instructions",
-    "description",
-    "example",
-    "examples",
-    "steps",
-    "cards",
-    "blocks",
-    "children",
-    "items",
-    "recipe",
-    "workspace",
-    "spec"
-  ];
-
-  for (const key of preferredKeys) {
-    if (key in obj) {
-      const found = extractRegistryStarterCodeFromLooseContent(obj[key], seen);
-      if (found) return found;
-    }
-  }
-
-  for (const [key, value] of Object.entries(obj)) {
-    if (preferredKeys.includes(key)) continue;
-    const found = extractRegistryStarterCodeFromLooseContent(value, seen);
-    if (found) return found;
-  }
-
-  return "";
-}
-
 
 function mergeManifestParts<T extends Record<string, any>>(primary: T | null | undefined, secondary: T | null | undefined): T | any {
   if (!primary && !secondary) return null;
@@ -219,13 +125,10 @@ function pickSolutionFiles(item: any, subjectSlug: string, language?: string) {
 }
 
 function pickStarterCode(item: any, subjectSlug: string, language?: string) {
-  const explicit = resolveCourseFileSeed({ subjectSlug, language, target: item }).starterCode;
-  if (explicit) return explicit;
-
-  // Important: scan the full item, not only item.spec.
-  // Some lesson/project/sketch Python examples live on card.content/body/blocks,
-  // while spec only has runtime/workspace metadata. This remains a fallback only.
-  return extractRegistryStarterCodeFromLooseContent(item) || undefined;
+  // Only explicit starterCode may seed the code input pane.
+  // Do not infer starter code from prompt/body/example fields, because those
+  // can include solution code and should never appear in the learner editor.
+  return resolveCourseFileSeed({ subjectSlug, language, target: item }).starterCode;
 }
 
 function pickSolutionCode(item: any, subjectSlug: string, language?: string) {

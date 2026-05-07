@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useCallback, useEffect, useMemo, useRef } from "react";
-import type { Exercise, SqlDialect } from "@/lib/practice/types";
-import type { VectorPadState } from "@/components/vectorpad/types";
+import React, {useCallback, useEffect, useMemo, useRef} from "react";
+import type {Exercise, SqlDialect} from "@/lib/practice/types";
+import type {VectorPadState} from "@/components/vectorpad/types";
 
 import NumericExerciseUI from "./kinds/NumericExerciseUI";
 import SingleChoiceExerciseUI from "./kinds/SingleChoiceExerciseUI";
@@ -14,20 +14,24 @@ import TextInputExerciseUI from "./kinds/TextInputExerciseUI";
 import DragReorderExerciseUI from "./kinds/DragReorderExerciseUI";
 import VoiceInputExerciseUI from "./kinds/VoiceInputExerciseUI";
 
-import type { QItem } from "./practiceType";
+import type {QItem} from "./practiceType";
 import MatrixInputPanel from "./MatrixInputPanel";
-import { resizeGrid } from "@/lib/practice/matrixHelpers";
+import {resizeGrid} from "@/lib/practice/matrixHelpers";
 import FillBlankChoiceExerciseUI from "@/components/practice/kinds/FillBlankChoiceExerciseUI";
 import ListenBuildExerciseUI from "@/components/practice/kinds/ListenBuildExerciseUI";
-import { resolveDeepTagged } from "@/i18n/resolveDeepTagged";
-import { useTaggedT } from "@/i18n/tagged";
-import type { RunnerLanguage } from "@zoeskoul/code-contracts";
-import type { LearningIdeConfig } from "@/lib/ide/learningIdeConfig";
-import type { WorkspaceStateV2 } from "@/components/ide/types";
-import { useReviewRuntimeStore } from "@/components/review/module/runtime/reviewRuntimeStore";
-import { getExerciseStateKey } from "@/components/review/module/runtime/exerciseKeys";
-import { exerciseDebug, summarizeExercisePatch, summarizeExerciseWorkspace } from "@/components/review/module/runtime/exerciseDebug";
-import { resolveExerciseWorkspace, deriveEntryCode } from "@/components/review/module/runtime/exerciseWorkspaceResolver";
+import {resolveDeepTagged} from "@/i18n/resolveDeepTagged";
+import {useTaggedT} from "@/i18n/tagged";
+import type {RunnerLanguage} from "@zoeskoul/code-contracts";
+import type {LearningIdeConfig} from "@/lib/ide/learningIdeConfig";
+import type {WorkspaceStateV2} from "@/components/ide/types";
+import {useReviewRuntimeStore} from "@/components/review/module/runtime/reviewRuntimeStore";
+import {getExerciseStateKey} from "@/components/review/module/runtime/exerciseKeys";
+import {
+    exerciseDebug,
+    summarizeExercisePatch,
+    summarizeExerciseWorkspace
+} from "@/components/review/module/runtime/exerciseDebug";
+import {resolveExerciseWorkspace, deriveEntryCode} from "@/components/review/module/runtime/exerciseWorkspaceResolver";
 
 
 type SqlTableSnapshot = {
@@ -105,7 +109,7 @@ function getStableExerciseId(args: {
     exercise?: any;
     current?: any;
 }) {
-    const { exerciseStateId, exercise, current } = args;
+    const {exerciseStateId, exercise, current} = args;
 
     return (
         exerciseStateId ||
@@ -116,7 +120,7 @@ function getStableExerciseId(args: {
         current?.stableExerciseId ||
         current?.key ||
         exercise?.id ||
-      "default"
+        "default"
     );
 }
 
@@ -158,6 +162,7 @@ function CodeInputWithTools(props: {
     lockInputs: boolean;
     checked: boolean;
     ok: boolean | null;
+    feedbackDismissed: boolean;
     readOnly: boolean;
     resetCheckPatch: () => any;
 
@@ -184,6 +189,7 @@ function CodeInputWithTools(props: {
         lockInputs,
         checked,
         ok,
+        feedbackDismissed,
         readOnly,
         resetCheckPatch,
         codeTools,
@@ -344,7 +350,6 @@ function CodeInputWithTools(props: {
     const activeSketch = storeExercise?.sketch || null;
 
 
-
     const registerArgs = useMemo(
         () => ({
             exerciseKey,
@@ -503,6 +508,7 @@ function CodeInputWithTools(props: {
             showPrompt={showPrompt}
             feedback={feedback ?? null}
             explanation={explanation ?? null}
+            feedbackDismissed={feedbackDismissed}
             runFeedback={toolRunFeedback}
             runFeedbackTick={toolRunTick}
             onUseTools={() => {
@@ -563,7 +569,7 @@ export default function ExerciseRenderer({
     cardId?: string;
     exerciseStateId?: string;
 }) {
-    const { raw } = useTaggedT();
+    const {raw} = useTaggedT();
 
     const ex = useMemo(() => {
         return resolveDeepTagged(exercise, (key) => raw(key, "")) as Exercise;
@@ -581,7 +587,7 @@ export default function ExerciseRenderer({
 
     const exerciseKey = useMemo(() => {
         return getExerciseStateKey(
-            { subjectSlug, moduleSlug, sectionSlug, topicId, cardId },
+            {subjectSlug, moduleSlug, sectionSlug, topicId, cardId},
             stableExerciseId,
         );
     }, [subjectSlug, moduleSlug, sectionSlug, topicId, cardId, stableExerciseId]);
@@ -638,14 +644,24 @@ export default function ExerciseRenderer({
     const exRef = useRef(ex);
     exRef.current = ex;
 
-    const ok: boolean | null =
+    const resultOk =
         !isRevealResult && typeof (current as any).result?.ok === "boolean"
             ? (current as any).result.ok
             : null;
 
-    const checked = Boolean((current as any).submitted || ok !== null);
-    const finalized = Boolean((current as any)?.result?.finalized);
+    const feedbackDismissed = Boolean((current as any).feedbackDismissed);
 
+    const ok: boolean | null =
+        feedbackDismissed && resultOk === false
+            ? null
+            : resultOk;
+
+    const checked = Boolean(
+        !feedbackDismissed &&
+        ((current as any).submitted || ok !== null)
+    );
+
+    const finalized = Boolean((current as any)?.result?.finalized);
     const outOfAttempts =
         finalized || (maxA !== Number.POSITIVE_INFINITY && attempts >= maxA && ok !== true);
 
@@ -653,7 +669,25 @@ export default function ExerciseRenderer({
 
     function resetCheckPatch() {
         if (readOnly) return {};
-        return hasAnyResult ? { submitted: false, result: null } : {};
+
+        /**
+         * Do not remove result here.
+         *
+         * item.result stores the latest checked result.
+         * item.feedbackDismissed controls whether wrong feedback is visible.
+         *
+         * Only real learner edits should call this function.
+         */
+        return hasAnyResult
+            ? {
+                submitted: false,
+                feedbackDismissed: true,
+                dismissFeedbackOnEdit: true,
+                updateOrigin: "user",
+                userEdited: true,
+                workspaceOrigin: "user",
+            }
+            : {};
     }
 
     useEffect(() => {
@@ -707,7 +741,7 @@ export default function ExerciseRenderer({
             <NumericExerciseUI
                 exercise={ex}
                 value={current.num}
-                onChange={(num) => updateCurrent({ num, ...resetCheckPatch() })}
+                onChange={(num) => updateCurrent({num, ...resetCheckPatch()})}
                 disabled={lockInputs}
                 checked={checked}
                 ok={ok}
@@ -725,7 +759,7 @@ export default function ExerciseRenderer({
             <SingleChoiceExerciseUI
                 exercise={ex}
                 value={current.single}
-                onChange={(id) => updateCurrent({ single: id, ...resetCheckPatch() })}
+                onChange={(id) => updateCurrent({single: id, ...resetCheckPatch()})}
                 disabled={lockInputs}
                 checked={checked}
                 ok={ok}
@@ -744,7 +778,7 @@ export default function ExerciseRenderer({
             <MultiChoiceExerciseUI
                 exercise={ex}
                 value={current.multi}
-                onChange={(ids) => updateCurrent({ multi: ids, ...resetCheckPatch() })}
+                onChange={(ids) => updateCurrent({multi: ids, ...resetCheckPatch()})}
                 disabled={lockInputs}
                 checked={checked}
                 ok={ok}
@@ -763,7 +797,7 @@ export default function ExerciseRenderer({
             <TextInputExerciseUI
                 exercise={ex as any}
                 value={(current as any).text ?? ""}
-                onChange={(text) => updateCurrent({ text, ...resetCheckPatch() })}
+                onChange={(text) => updateCurrent({text, ...resetCheckPatch()})}
                 disabled={lockInputs}
                 checked={checked}
                 ok={ok}
@@ -819,7 +853,7 @@ export default function ExerciseRenderer({
                 exercise={ex as any}
                 transcript={(current as any).voiceTranscript ?? ""}
                 onChangeTranscript={(voiceTranscript) =>
-                    updateCurrent({ voiceTranscript, ...resetCheckPatch() })
+                    updateCurrent({voiceTranscript, ...resetCheckPatch()})
                 }
                 disabled={lockInputs}
                 checked={checked}
@@ -849,13 +883,27 @@ export default function ExerciseRenderer({
                         matRows: r,
                         matCols: c,
                         mat: resizeGrid(current.mat, r, c),
-                        ...(hasAnyResult ? { submitted: false, result: null } : {}),
+                        ...(hasAnyResult
+                            ? {
+                                submitted: false,
+                                feedbackDismissed: true,
+                                dismissFeedbackOnEdit: true,
+                                updateOrigin: "user",
+                            }
+                            : {}),
                     });
                 }}
                 onChange={(next) =>
                     updateCurrent({
                         mat: next,
-                        ...(hasAnyResult ? { submitted: false, result: null } : {}),
+                        ...(hasAnyResult
+                            ? {
+                                submitted: false,
+                                feedbackDismissed: true,
+                                dismissFeedbackOnEdit: true,
+                                updateOrigin: "user",
+                            }
+                            : {}),
                     })
                 }
             />
@@ -869,7 +917,7 @@ export default function ExerciseRenderer({
                 exercise={ex}
                 a={current.dragA}
                 b={current.dragB}
-                onChange={(a, b) => updateCurrent({ dragA: a, dragB: b, ...resetCheckPatch() })}
+                onChange={(a, b) => updateCurrent({dragA: a, dragB: b, ...resetCheckPatch()})}
                 padRef={padRef}
                 disabled={lockInputs}
             />
@@ -881,7 +929,7 @@ export default function ExerciseRenderer({
             <ListenBuildExerciseUI
                 exercise={ex as any}
                 value={(current as any).text ?? ""}
-                onChangeValue={(text) => updateCurrent({ text, ...resetCheckPatch() })}
+                onChangeValue={(text) => updateCurrent({text, ...resetCheckPatch()})}
                 disabled={lockInputs}
                 checked={checked}
                 showTargetWhen="never"
@@ -902,7 +950,7 @@ export default function ExerciseRenderer({
             <FillBlankChoiceExerciseUI
                 exercise={ex as any}
                 value={(current as any).text ?? ""}
-                onChangeValue={(text) => updateCurrent({ text, single: text, ...resetCheckPatch() })}
+                onChangeValue={(text) => updateCurrent({text, single: text, ...resetCheckPatch()})}
                 disabled={lockInputs}
                 checked={checked}
                 ok={ok}
@@ -916,7 +964,7 @@ export default function ExerciseRenderer({
             <VectorDragDotExerciseUI
                 exercise={ex}
                 a={current.dragA}
-                onChange={(a) => updateCurrent({ dragA: a, ...resetCheckPatch() })}
+                onChange={(a) => updateCurrent({dragA: a, ...resetCheckPatch()})}
                 padRef={padRef}
                 disabled={lockInputs}
             />
@@ -939,6 +987,7 @@ export default function ExerciseRenderer({
                     lockInputs={lockInputs}
                     checked={checked}
                     ok={ok}
+                    feedbackDismissed={feedbackDismissed}
                     readOnly={readOnly}
                     resetCheckPatch={resetCheckPatch}
                     codeTools={codeTools!}
@@ -1005,7 +1054,6 @@ export default function ExerciseRenderer({
         const activeLanguage = (storeExercise?.language || activeWorkspace?.language || (exCode as any).language || "python") as RunnerLanguage;
 
 
-
         return (
             <CodeInputExerciseUI
                 exercise={exCode}
@@ -1065,6 +1113,7 @@ export default function ExerciseRenderer({
                 variant="embedded"
                 feedback={codeFeedback}
                 explanation={codeExplanation}
+                feedbackDismissed={feedbackDismissed}
                 sqlDialect={(storeExercise as any)?.sqlDialect ?? exCode.fixedSqlDialect ?? effectiveSqlRuntime?.fixedSqlDialect}
                 sqlDatasetId={effectiveSqlDatasetId}
                 sqlResultShape={

@@ -435,7 +435,9 @@ export default function RevealAnswerCard({
                 ? { codeTouched: true }
                 : {}),
             submitted: false,
-            result: null,
+            feedbackDismissed: true,
+dismissFeedbackOnEdit: true,
+            updateOrigin: "user",
         };
 
         // Always update the real exercise item first.

@@ -935,8 +935,7 @@ export function useToolCodeRunnerState(args: {
                     codeLang: nextSnap.lang,
                     code: nextSnap.code,
                     codeStdin: nextSnap.stdin,
-                    submitted: false,
-                    result: null,
+                    updateOrigin: "sync",
                 });
             }
 
@@ -1075,7 +1074,13 @@ export function useToolCodeRunnerState(args: {
                 workspace: summarizeWorkspaceForSave(latest.workspace),
             });
 
-            b.onPatch({ codeLang: l, submitted: false, result: null });
+            b.onPatch({
+                codeLang: l,
+                submitted: false,
+                feedbackDismissed: true,
+dismissFeedbackOnEdit: true,
+                updateOrigin: "user",
+            });
         }
     }, [effectiveBoundId, bindingContext, viewTid, effectiveToolKey]);
 
@@ -1132,7 +1137,9 @@ export function useToolCodeRunnerState(args: {
                     : {}),
                 code: c,
                 submitted: false,
-                result: null,
+                feedbackDismissed: true,
+dismissFeedbackOnEdit: true,
+                updateOrigin: "user",
                 userEdited: true,
                 workspaceOrigin: "user",
             });
@@ -1196,7 +1203,9 @@ export function useToolCodeRunnerState(args: {
                 codeStdin: s,
                 stdin: s,
                 submitted: false,
-                result: null,
+                feedbackDismissed: true,
+dismissFeedbackOnEdit: true,
+                updateOrigin: "user",
                 userEdited: true,
                 workspaceOrigin: "user",
             });
@@ -1295,7 +1304,9 @@ export function useToolCodeRunnerState(args: {
                 codeStdin: nextSnap.stdin,
                 stdin: nextSnap.stdin,
                 submitted: false,
-                result: null,
+                feedbackDismissed: true,
+dismissFeedbackOnEdit: true,
+                updateOrigin: "user",
                 userEdited: true,
                 workspaceOrigin: "user",
             });
@@ -1318,7 +1329,13 @@ export function useToolCodeRunnerState(args: {
         const b = boundRef.current;
         if (b && effectiveBoundId && boundContextRef.current === bindingContext) {
             boundDirtyRef.current = true;
-            b.onPatch({ codeSqlDialect: d, submitted: false, result: null });
+            b.onPatch({
+                codeSqlDialect: d,
+                submitted: false,
+                feedbackDismissed: true,
+dismissFeedbackOnEdit: true,
+                updateOrigin: "user",
+            });
         }
     }, [effectiveBoundId, bindingContext]);
 

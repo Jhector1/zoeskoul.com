@@ -111,6 +111,10 @@ export default function QuizPracticeCard(props: {
   const ui = useTaggedT("reviewQuizUi");
   const { raw } = useTaggedT();
 
+  const [loadTimedOut, setLoadTimedOut] = useState(false);
+  const autoRetriedRef = useRef<string | null>(null);
+  const lastToolsBindKeyRef = useRef<string | null>(null);
+
   const ex: Exercise | null = useMemo(() => {
     if (!ps?.exercise) return null;
     return resolveDeepTagged(ps.exercise, (key) => raw(key, "")) as Exercise;
@@ -130,14 +134,14 @@ export default function QuizPracticeCard(props: {
 
   const exerciseKeyForTools = useMemo(() => {
     return getExerciseStateKey(
-      {
-        subjectSlug: (q as any).fetch?.subject ?? "",
-        moduleSlug: (q as any).fetch?.module ?? "",
-        sectionSlug: (q as any).fetch?.section,
-        topicId: normalizeTopicProgressKey((q as any).fetch?.topic ?? ""),
-        cardId: ownerCardId ?? "",
-      },
-      stableExerciseSlotId,
+        {
+          subjectSlug: (q as any).fetch?.subject ?? "",
+          moduleSlug: (q as any).fetch?.module ?? "",
+          sectionSlug: (q as any).fetch?.section,
+          topicId: normalizeTopicProgressKey((q as any).fetch?.topic ?? ""),
+          cardId: ownerCardId ?? "",
+        },
+        stableExerciseSlotId,
     );
   }, [q, ownerCardId, stableExerciseSlotId]);
 
@@ -151,14 +155,6 @@ export default function QuizPracticeCard(props: {
         (typeof runtimeExercise?.code === "string" ? runtimeExercise.code : "")
     );
   }, [runtimeExercise]);
-
-  const updateItemSafe = useCallback(
-      (patch: any) => {
-        if (!unlocked || isCompleted || locked || excused) return;
-        onUpdateItem(patch);
-      },
-      [unlocked, isCompleted, locked, excused, onUpdateItem],
-  );
 
   const attemptsCapped = useMemo(() => {
     if (!ps) return false;
@@ -180,6 +176,34 @@ export default function QuizPracticeCard(props: {
     return !isEmptyPracticeAnswer(ex, ps.item, padRef?.current);
   }, [ex, ps?.item, padRef, runtimeExerciseCode]);
 
+  const isCodeExerciseWithInput = ex?.kind === "code_input" && hasInput;
+
+  const feedbackDismissed = Boolean((ps?.item as any)?.feedbackDismissed);
+
+  const resultOk =
+      typeof (ps?.item as any)?.result?.ok === "boolean"
+          ? Boolean((ps?.item as any).result.ok)
+          : null;
+
+  const isCorrect =
+      (Boolean((ps?.item as any)?.result?.finalized) && resultOk === true) ||
+      (!feedbackDismissed && (ps?.ok === true || resultOk === true));
+
+  const isFinalized =
+      Boolean((ps?.item as any)?.result?.finalized) ||
+      isCorrect ||
+      attemptsCapped ||
+      isCompleted ||
+      locked;
+
+  const updateItemSafe = useCallback(
+      (patch: any) => {
+        if (!unlocked || isCompleted || locked || excused || isFinalized) return;
+        onUpdateItem(patch);
+      },
+      [unlocked, isCompleted, locked, excused, isFinalized, onUpdateItem],
+  );
+
   useEffect(() => {
     if (!toolsEnabled) return;
     if (!toolsAny) return;
@@ -188,8 +212,10 @@ export default function QuizPracticeCard(props: {
     if (!ps) return;
 
     const doneForFlow =
-        ps.ok === true || excused || (!strictSequential && attemptsCapped);
-    const eligible = toolsActive && unlocked && !locked && !isCompleted && !excused;
+        isCorrect || isFinalized || excused || (!strictSequential && attemptsCapped);
+
+    const eligible =
+        toolsActive && unlocked && !locked && !isCompleted && !excused && !isFinalized;
 
     toolsAny.setCodeInputMeta?.(effectiveToolId, {
       order: seqOrder,
@@ -209,6 +235,8 @@ export default function QuizPracticeCard(props: {
     excused,
     strictSequential,
     attemptsCapped,
+    isCorrect,
+    isFinalized,
     seqOrder,
   ]);
 
@@ -223,11 +251,8 @@ export default function QuizPracticeCard(props: {
     if (!codeInputId) return;
     if (!ex) return;
     if (!ps?.item) return;
+    if (isFinalized) return;
 
-    /**
-     * Exercise navigation lives inside QuizBlock/FlowNavigator.
-     * Bind once when the active exercise identity changes.
-     */
     const bindKey = `${codeInputId}:${exerciseKeyForTools}`;
     if (lastToolsBindKeyRef.current === bindKey) return;
     lastToolsBindKeyRef.current = bindKey;
@@ -246,25 +271,16 @@ export default function QuizPracticeCard(props: {
     ex,
     Boolean(ps?.item),
     exerciseKeyForTools,
+    isFinalized,
   ]);
 
-  const isCodeExerciseWithInput =
-      ex?.kind === "code_input" && hasInput;
-
   const disableCheck =
-      /**
-       * Code exercises are editor-driven and should behave like sketch cards:
-       * each visible exercise can be edited/checked independently.
-       *
-       * Non-code quiz items can still use strict sequential unlocking.
-       */
       (!isCodeExerciseWithInput && !unlocked) ||
       isCompleted ||
       (locked && !isCodeExerciseWithInput) ||
       excused ||
       (ps?.busy ?? false) ||
-      attemptsCapped ||
-      ps?.ok === true ||
+      isFinalized ||
       !hasInput;
 
   const enabledHelpSteps = ps?.helpPolicy?.stepKeys?.length
@@ -288,11 +304,11 @@ export default function QuizPracticeCard(props: {
       (locked && !isCodeExerciseWithInput) ||
       excused ||
       (ps?.busy ?? false) ||
-      ps?.ok === true ||
+      isFinalized ||
       !nextHelpStepKey;
 
   const disableSkip =
-      !unlocked || isCompleted || locked || excused || ps?.ok === true;
+      !unlocked || isCompleted || locked || excused || isFinalized;
 
   const hasOpenedHelp = Boolean(ps?.item?.help?.openedStepKeys?.length);
 
@@ -312,10 +328,6 @@ export default function QuizPracticeCard(props: {
   const isRefreshing = Boolean(ps?.loading && hasExercise);
   const hasBlockingError = Boolean(ps?.error && !hasExercise);
   const hasInlineError = Boolean(ps?.error && hasExercise);
-
-  const [loadTimedOut, setLoadTimedOut] = useState(false);
-  const autoRetriedRef = useRef<string | null>(null);
-  const lastToolsBindKeyRef = useRef<string | null>(null);
 
   useEffect(() => {
     setLoadTimedOut(false);
@@ -476,17 +488,18 @@ export default function QuizPracticeCard(props: {
                   exExerciseKey: (ex as any).exerciseKey,
                   fetchTopic: (q as any).fetch?.topic,
                 }) as any}
+
                 <ExerciseRenderer
                     key={stableExerciseSlotId}
                     exercise={ex}
                     current={ps.item}
                     exerciseStateId={stableExerciseSlotId}
-                    busy={ps.busy || !unlocked || isCompleted || locked}
+                    busy={ps.busy || !unlocked || isCompleted || locked || isFinalized}
                     isAssignmentRun={false}
                     maxAttempts={maxForRenderer as any}
                     padRef={padRef as any}
                     updateCurrent={updateItemSafe}
-                    readOnly={!unlocked || isCompleted || locked}
+                    readOnly={!unlocked || isCompleted || locked || isFinalized}
                     codeRunnerMode={codeRunnerMode}
                     codeTools={codeTools}
                     codeInputId={codeInputId}
@@ -543,14 +556,14 @@ export default function QuizPracticeCard(props: {
                 )}
               </span>
 
-                  {ps.ok === true ? (
+                  {isCorrect ? (
                       <span className="ml-2 whitespace-nowrap ui-quiz-status-good">
-                  ✓ Correct
-                </span>
-                  ) : ps.ok === false && ps.item?.result ? (
+      ✓ Correct
+    </span>
+                  ) : !feedbackDismissed && resultOk === false && ps.item?.result ? (
                       <span className="ml-2 whitespace-nowrap ui-quiz-status-danger">
-                  ✕ Not correct
-                </span>
+      ✕ Not correct
+    </span>
                   ) : null}
                 </div>
               </div>

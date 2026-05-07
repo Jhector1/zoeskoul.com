@@ -138,6 +138,7 @@ export default function CodeInputExerciseUI({
                                                 onRun,
                                                 checked = false,
                                                 ok = null,
+                                                feedbackDismissed = false,
                                                 reviewCorrect = null,
                                                 readOnly = false,
                                                 variant = "embedded",
@@ -192,6 +193,7 @@ export default function CodeInputExerciseUI({
     }) => Promise<RunResult>;
     checked?: boolean;
     ok?: boolean | null;
+    feedbackDismissed?: boolean;
     reviewCorrect?: { language: RunnerLanguage; code: string; stdin: string } | null;
     readOnly?: boolean;
     onSketchStateChange?: (s: any) => void;
@@ -393,14 +395,25 @@ export default function CodeInputExerciseUI({
         setEmbeddedRunFeedback(null);
     }, [code, stdin, language, sqlDialect, sqlDatasetId, sqlSchemaSql, sqlSeedSql]);
 
-    const checkedFeedback = checked && ok === false ? feedback ?? null : null;
-    const checkedExplanation = checked && ok === false ? explanation ?? null : null;
+    /**
+     * Checked-answer feedback is durable until the learner edits.
+     * Runtime sync, hydration, and tool rebinding must not hide it.
+     */
+    const checkedFeedback =
+        !feedbackDismissed && checked && ok === false ? feedback ?? null : null;
+    const checkedExplanation =
+        !feedbackDismissed && checked && ok === false ? explanation ?? null : null;
 
     const activeFeedback =
-        checkedFeedback ??
-        (variant === "tools" ? runFeedback ?? null : embeddedRunFeedback);
+        !feedbackDismissed && checked && ok === false
+            ? checkedFeedback
+            : variant === "tools"
+                ? runFeedback ?? null
+                : embeddedRunFeedback;
 
-    const activeExplanation = checkedFeedback ? checkedExplanation : null;
+    const activeExplanation =
+        !feedbackDismissed && checked && ok === false ? checkedExplanation : null;
+
     const showFeedback = Boolean(activeFeedback || activeExplanation);
 
     const resolvedSql = resolveSqlRunnerConfig({

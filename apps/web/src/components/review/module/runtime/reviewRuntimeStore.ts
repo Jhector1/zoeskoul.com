@@ -463,33 +463,19 @@ function targetHasStarter(entryOrManifest: any, maybeEntry?: import("./reviewTar
       Array.isArray((value as any).nodes);
 
   return Boolean(
-      hasFiles(entry?.starterFiles) ||
-      String(entry?.starterCode ?? "").trim() ||
-      entry?.starterWorkspace ||
-      isWorkspaceValue(workspace) ||
       isWorkspaceValue(source?.initialWorkspace) ||
       isWorkspaceValue(source?.starterWorkspace) ||
       hasFiles(workspace?.starterFiles) ||
-      hasFiles(workspace?.files) ||
       hasFiles(workspace?.initialFiles) ||
       hasFiles(workspace?.workspaceFiles) ||
       String(workspace?.starterCode ?? "").trim() ||
-      String(workspace?.code ?? "").trim() ||
-      String(workspace?.content ?? "").trim() ||
-      String(workspace?.source ?? "").trim() ||
       hasFiles(source?.starterFiles) ||
-      hasFiles(source?.files) ||
       hasFiles(source?.initialFiles) ||
       hasFiles(source?.workspaceFiles) ||
       String(source?.starterCode ?? "").trim() ||
-      String(source?.code ?? "").trim() ||
-      String(source?.content ?? "").trim() ||
-      String(source?.source ?? "").trim() ||
       hasFiles(source?.recipe?.starterFiles) ||
-      hasFiles(source?.recipe?.files) ||
       hasFiles(source?.recipe?.initialFiles) ||
-      String(source?.recipe?.starterCode ?? "").trim() ||
-      String(source?.recipe?.solutionTemplate ?? "").trim(),
+      String(source?.recipe?.starterCode ?? "").trim(),
   );
 }
 

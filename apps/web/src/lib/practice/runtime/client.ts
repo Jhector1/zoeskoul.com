@@ -79,7 +79,83 @@ function normalizeCodePatchFromWorkspace<T extends Partial<QItem> | null>(patch:
             : {}),
     } as T;
 }
+function getExerciseStarterCode(exercise: Exercise) {
+    return String((exercise as any)?.starterCode ?? "").trim();
+}
 
+function isBlankWorkspacePatch(value: unknown) {
+    if (
+        !value ||
+        typeof value !== "object" ||
+        (value as any).version !== 2 ||
+        !Array.isArray((value as any).nodes)
+    ) {
+        return true;
+    }
+
+    const entryId = (value as any).entryFileId || (value as any).activeFileId;
+    const file =
+        (value as any).nodes.find(
+            (node: any) => node?.kind === "file" && node.id === entryId,
+        ) ??
+        (value as any).nodes.find((node: any) => node?.kind === "file");
+
+    const content = file?.kind === "file" ? String(file.content ?? "") : "";
+
+    return !content.trim();
+}
+
+function sanitizeSavedPatchForResolvedExercise<T extends Partial<QItem> | null>(
+    patch: T,
+    exercise: Exercise,
+): T {
+    if (!patch) return patch;
+    if (exercise.kind !== "code_input") return patch;
+
+    const starterCode = getExerciseStarterCode(exercise);
+    if (!starterCode) return patch;
+
+    const patchAny = patch as any;
+
+    const userEdited =
+        patchAny.userEdited === true ||
+        patchAny.workspaceOrigin === "user" ||
+        patchAny.workspaceOrigin === "saved";
+
+    /**
+     * Important:
+     * If this code exercise has starterCode, a blank auto/sync patch must not
+     * overwrite the starter. This happens when an old saved/runtime patch contains
+     * code: "" or an empty workspace before starterCode was added.
+     *
+     * Real user edits are still preserved.
+     */
+    if (userEdited) return patch;
+
+    const next = { ...patchAny };
+
+    if (typeof next.code === "string" && !next.code.trim()) {
+        delete next.code;
+    }
+
+    if (typeof next.source === "string" && !next.source.trim()) {
+        delete next.source;
+    }
+
+    if (isBlankWorkspacePatch(next.workspace)) {
+        delete next.workspace;
+    }
+
+    if (isBlankWorkspacePatch(next.codeWorkspace)) {
+        delete next.codeWorkspace;
+    }
+
+    if (isBlankWorkspacePatch(next.ideWorkspace)) {
+        delete next.ideWorkspace;
+    }
+
+    return next as T;
+}
 export async function fetchResolvedPracticeItem(args: {
     request: Record<string, any>;
     signal?: AbortSignal;
@@ -114,10 +190,13 @@ export async function fetchResolvedPracticeItem(args: {
         item = transformItem(item, resolvedExercise);
     }
 
-    const resolvedPatch = normalizeCodePatchFromWorkspace(
-        savedPatch
-            ? (resolveDeepTagged(savedPatch, resolvers.raw) as Partial<QItem>)
-            : null,
+    const resolvedPatch = sanitizeSavedPatchForResolvedExercise(
+        normalizeCodePatchFromWorkspace(
+            savedPatch
+                ? (resolveDeepTagged(savedPatch, resolvers.raw) as Partial<QItem>)
+                : null,
+        ),
+        resolvedExercise,
     );
 
     if (resolvedPatch) {

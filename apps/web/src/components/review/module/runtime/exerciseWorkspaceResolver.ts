@@ -10,121 +10,20 @@ import { defaultMainFile } from "@/components/ide/languageDefaults";
 
 type AnyRecord = Record<string, any>;
 
-function looksLikePythonStarterCode(value: string) {
-  const s = String(value ?? "").trim();
-  if (!s) return false;
-  if (s.length > 3000) return false;
 
-  return (
-      /\bprint\s*\(/.test(s) ||
-      /\binput\s*\(/.test(s) ||
-      /\bint\s*\(/.test(s) ||
-      /\bfloat\s*\(/.test(s) ||
-      /\bstr\s*\(/.test(s) ||
-      /\bdef\s+[a-zA-Z_][a-zA-Z0-9_]*\s*\(/.test(s) ||
-      /^\s*[a-zA-Z_][a-zA-Z0-9_]*\s*=/.test(s) ||
-      /#\s*TODO/i.test(s)
-  );
-}
 
-function extractCodeFence(value: string) {
-  const source = String(value ?? "");
-  const preferred = source.match(/```(?:python|py)\s*([\s\S]*?)```/i);
-  if (preferred?.[1]?.trim()) return preferred[1].trim();
-
-  const generic = source.match(/```\s*([\s\S]*?)```/);
-  if (generic?.[1]?.trim() && looksLikePythonStarterCode(generic[1])) {
-    return generic[1].trim();
-  }
-
-  return "";
-}
-
-function extractStarterCodeFromLooseContent(
-    input: unknown,
-    seen = new WeakSet<object>(),
-): string {
-  if (input == null) return "";
-
-  if (typeof input === "string") {
-    const fenced = extractCodeFence(input);
-    if (fenced) return fenced;
-    return looksLikePythonStarterCode(input) ? input.trim() : "";
-  }
-
-  if (typeof input !== "object") return "";
-
-  if (seen.has(input as object)) return "";
-  seen.add(input as object);
-
-  if (Array.isArray(input)) {
-    for (const item of input) {
-      const found = extractStarterCodeFromLooseContent(item, seen);
-      if (found) return found;
-    }
-    return "";
-  }
-
-  const obj = input as Record<string, unknown>;
-
-  const preferredKeys = [
-    "starterCode",
-    "code",
-    "content",
-    "source",
-    "body",
-    "markdown",
-    "md",
-    "text",
-    "prompt",
-    "instructions",
-    "description",
-    "example",
-    "examples",
-    "steps",
-    "cards",
-    "blocks",
-    "children",
-    "items",
-    "recipe",
-    "workspace",
-  ];
-
-  for (const key of preferredKeys) {
-    if (key in obj) {
-      const found = extractStarterCodeFromLooseContent(obj[key], seen);
-      if (found) return found;
-    }
-  }
-
-  for (const [key, value] of Object.entries(obj)) {
-    if (preferredKeys.includes(key)) continue;
-    const found = extractStarterCodeFromLooseContent(value, seen);
-    if (found) return found;
-  }
-
-  return "";
-}
 
 function explicitStarterCodeFromManifest(manifest: any) {
+  // Only explicit starter fields are allowed to seed the code input pane.
+  // Do not fall back to generic code/content/source fields or loose prompt scans,
+  // because those fields may contain solution text, examples, or explanations.
   const explicit =
       manifest?.workspace?.starterCode ??
-      manifest?.workspace?.code ??
-      manifest?.workspace?.content ??
-      manifest?.workspace?.source ??
       manifest?.starterCode ??
-      manifest?.code ??
-      manifest?.content ??
-      manifest?.source ??
       manifest?.recipe?.starterCode ??
-      manifest?.recipe?.code ??
-      manifest?.recipe?.content ??
       "";
 
-  const explicitString = String(explicit ?? "").trim();
-  if (explicitString) return explicitString;
-
-  return extractStarterCodeFromLooseContent(manifest);
+  return String(explicit ?? "").trim();
 }
 
 type StarterFile =

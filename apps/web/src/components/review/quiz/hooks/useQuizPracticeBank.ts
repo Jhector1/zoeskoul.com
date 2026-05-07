@@ -69,6 +69,102 @@ export function getStablePracticeQuestionKey(q: ReviewQuestion) {
   );
 }
 
+
+function stablePracticeValue(value: unknown) {
+  try {
+    return JSON.stringify(value ?? null);
+  } catch {
+    return String(value ?? "");
+  }
+}
+
+function getPatchWorkspace(patch: any) {
+  if (patch?.workspace?.version === 2) return patch.workspace;
+  if (patch?.codeWorkspace?.version === 2) return patch.codeWorkspace;
+  if (patch?.ideWorkspace?.version === 2) return patch.ideWorkspace;
+  return null;
+}
+
+function getCurrentWorkspace(item: any) {
+  if (item?.workspace?.version === 2) return item.workspace;
+  if (item?.codeWorkspace?.version === 2) return item.codeWorkspace;
+  if (item?.ideWorkspace?.version === 2) return item.ideWorkspace;
+  return null;
+}
+
+function patchChangesLearnerAnswer(currentItem: any, patch: any) {
+  if (!currentItem || !patch) return false;
+
+  const answerKeys = [
+    "num",
+    "single",
+    "multi",
+    "text",
+    "voiceTranscript",
+    "mat",
+    "matRows",
+    "matCols",
+    "reorder",
+    "reorderIds",
+    "dragA",
+    "dragB",
+    "code",
+    "source",
+    "stdin",
+    "codeStdin",
+    "language",
+    "codeLang",
+    "lang",
+  ];
+
+  for (const key of answerKeys) {
+    if (!(key in patch)) continue;
+
+    if (stablePracticeValue((currentItem as any)[key]) !== stablePracticeValue((patch as any)[key])) {
+      return true;
+    }
+  }
+
+  const patchWorkspace = getPatchWorkspace(patch);
+  if (patchWorkspace) {
+    const currentWorkspace = getCurrentWorkspace(currentItem);
+
+    const patchCode = getWorkspaceEntryCodeForPracticeBank(patchWorkspace);
+    const currentCode =
+        getWorkspaceEntryCodeForPracticeBank(currentWorkspace) ||
+        String(currentItem.code ?? currentItem.source ?? "");
+
+    if (patchCode !== currentCode) return true;
+
+    const patchStdin = String(patchWorkspace.stdin ?? "");
+    const currentStdin = String(
+        currentWorkspace?.stdin ?? currentItem.codeStdin ?? currentItem.stdin ?? "",
+    );
+
+    if (patchStdin !== currentStdin) return true;
+
+    const patchLanguage = String(patchWorkspace.language ?? patch.language ?? patch.codeLang ?? "");
+    const currentLanguage = String(
+        currentWorkspace?.language ??
+        currentItem.language ??
+        currentItem.codeLang ??
+        currentItem.lang ??
+        "",
+    );
+
+    if (patchLanguage && patchLanguage !== currentLanguage) return true;
+  }
+
+  return false;
+}
+
+function removeResultResetFromPatch<T extends Record<string, any>>(patch: T): T {
+  const next = { ...patch };
+  delete next.submitted;
+  delete next.result;
+  return next;
+}
+
 function getWorkspaceEntryCodeForPracticeBank(workspace: any) {
   if (
       !workspace ||
@@ -279,22 +375,62 @@ function stablePracticeJson(value: any) {
 function mergeSavedPatchIntoPracticeItem(item: any, savedPatch: any) {
   if (!item || !savedPatch) return item;
 
+  const isCodeInput = item?.exercise?.kind === "code_input";
+  const starterCode = String(item?.exercise?.starterCode ?? "").trim();
+
+  const userEdited =
+      savedPatch.userEdited === true ||
+      savedPatch.workspaceOrigin === "user" ||
+      savedPatch.workspaceOrigin === "saved";
+
+  const patch = { ...savedPatch };
+
+  /**
+   * Do not let a blank non-user saved/sync patch erase starterCode.
+   * This preserves:
+   *   - starterCode on first load
+   *   - real user edits when userEdited/workspaceOrigin says it is user data
+   */
+  if (isCodeInput && starterCode && !userEdited) {
+    if (typeof patch.code === "string" && !patch.code.trim()) {
+      delete patch.code;
+    }
+
+    if (typeof patch.source === "string" && !patch.source.trim()) {
+      delete patch.source;
+    }
+
+    const workspace =
+        patch.workspace ??
+        patch.codeWorkspace ??
+        patch.ideWorkspace ??
+        null;
+
+    const workspaceCode = getWorkspaceEntryCodeForPracticeBank(workspace);
+
+    if (!workspaceCode.trim()) {
+      delete patch.workspace;
+      delete patch.codeWorkspace;
+      delete patch.ideWorkspace;
+    }
+  }
+
   const workspace =
-    savedPatch.workspace ??
-    savedPatch.codeWorkspace ??
-    savedPatch.ideWorkspace ??
-    null;
+      patch.workspace ??
+      patch.codeWorkspace ??
+      patch.ideWorkspace ??
+      null;
 
   const next = {
     ...item,
-    ...savedPatch,
+    ...patch,
     ...(workspace
-      ? {
+        ? {
           workspace,
           codeWorkspace: workspace,
           ideWorkspace: workspace,
         }
-      : {}),
+        : {}),
   };
 
   return stablePracticeJson(next) === stablePracticeJson(item) ? item : next;
@@ -682,29 +818,72 @@ export function useQuizPracticeBank(args: {
           const ps = prev[key] ?? prev[id];
           if (!ps?.item) return prev;
 
+          /**
+           * item.result stores the latest checked result.
+           * item.feedbackDismissed controls whether wrong feedback is visible.
+           *
+           * Runtime/tool sync may update workspace/code fields, but it must never
+           * clear result, submitted, or dismiss feedback.
+           *
+           * Only a real learner edit may dismiss feedback by sending:
+           *   feedbackDismissed: true
+           *   dismissFeedbackOnEdit: true
+           */
+          const explicitUserDismiss =
+              Boolean((patch as any).dismissFeedbackOnEdit) &&
+              Boolean((patch as any).feedbackDismissed);
+
+          const patchForItem = { ...(patch as any) };
+          delete patchForItem.dismissFeedbackOnEdit;
+
+          if (!explicitUserDismiss) {
+            if (patchForItem.feedbackDismissed === true) {
+              delete patchForItem.feedbackDismissed;
+            }
+
+            if (patchForItem.submitted === false) {
+              delete patchForItem.submitted;
+            }
+
+            if ("result" in patchForItem && patchForItem.result == null) {
+              delete patchForItem.result;
+            }
+          }
+
+          const nextFeedbackDismissed =
+              patchForItem.feedbackDismissed === false
+                  ? false
+                  : explicitUserDismiss
+                      ? true
+                      : Boolean((ps.item as any).feedbackDismissed);
+
           const nextItem = {
             ...ps.item,
-            ...patch,
-            help: patch.help
+            ...patchForItem,
+
+            feedbackDismissed: nextFeedbackDismissed,
+
+            result:
+                "result" in patchForItem && patchForItem.result != null
+                    ? patchForItem.result
+                    : (ps.item as any).result,
+
+            help: patchForItem.help
                 ? {
                   ...ps.item.help,
-                  ...patch.help,
+                  ...patchForItem.help,
                   entries: {
                     ...ps.item.help.entries,
-                    ...(patch.help.entries ?? {}),
+                    ...(patchForItem.help.entries ?? {}),
                   },
                 }
                 : ps.item.help,
           };
 
-          const isReset =
-              ("submitted" in patch && (patch as any).submitted === false) ||
-              ("result" in patch && (patch as any).result == null);
-
           const nextState: PracticeState = {
             ...ps,
             item: nextItem,
-            ok: isReset ? null : ps.ok,
+            ok: explicitUserDismiss ? null : ps.ok,
           };
 
           if (q) {
@@ -715,8 +894,7 @@ export function useQuizPracticeBank(args: {
             ...prev,
             [key]: nextState,
           };
-        });
-      },
+        });        },
       [questions],
   );
 
@@ -795,11 +973,21 @@ export function useQuizPracticeBank(args: {
                 ...current.item,
                 ...(runtimePatch ?? {}),
                 ...(submitted.statePatch ?? {}),
-                result: submitted.data as any,
+                result: {
+                  ...(submitted.data as any),
+                  ok: submitted.ok,
+                  finalized: submitted.finalized,
+                },
                 submitted: true,
+
+                /**
+                 * New check result should show feedback again.
+                 * If wrong, feedback stays visible until the learner edits.
+                 */
+                feedbackDismissed: false,
+
                 attempts: nextAttempts,
-              } as any,
-            };
+              } as any,            };
 
             return setPracticeForQuestion(prev, q, nextState);
           });

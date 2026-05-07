@@ -829,6 +829,15 @@ export default function CodeToolPane(props: {
                 }
                 : {};
 
+
+
+        const codeMatchesPreviousEmission =
+            prevEmitted?.code === next.code && prevEmitted?.stdin === next.stdin;
+        const codeMatchesIncomingProps =
+            prevIncoming?.code === next.code && prevIncoming?.stdin === next.stdin;
+        const shouldEmitCodeFields = !codeMatchesPreviousEmission && !codeMatchesIncomingProps;
+
+        lastEmittedRef.current = next;
         if (boundId) {
             syncCodeInputSnapshot?.(boundId, {
                 ...workspacePatch,
@@ -838,23 +847,19 @@ export default function CodeToolPane(props: {
                 codeStdin: next.stdin,
                 language: effectiveLanguage,
                 lang: effectiveLanguage,
-                submitted: false,
-                result: null,
-                userEdited: true,
-                workspaceOrigin: "user",
+
+                /**
+                 * This path is a workspace/tool synchronization path.
+                 * It must NEVER dismiss checked-answer feedback.
+                 *
+                 * Real typing/editing is handled by the direct tool edit handlers
+                 * such as setToolCode, setToolStdin, setToolWorkspace, etc.
+                 */
+                updateOrigin: "sync",
+                workspaceOrigin: "sync",
                 updatedAt: Date.now(),
             });
-        }
-
-        const codeMatchesPreviousEmission =
-            prevEmitted?.code === next.code && prevEmitted?.stdin === next.stdin;
-        const codeMatchesIncomingProps =
-            prevIncoming?.code === next.code && prevIncoming?.stdin === next.stdin;
-        const shouldEmitCodeFields = !codeMatchesPreviousEmission && !codeMatchesIncomingProps;
-
-        lastEmittedRef.current = next;
-
-        if (shouldEmitCodeFields) {
+        }        if (shouldEmitCodeFields) {
             setRunFeedback(null);
 
             if (boundId) {

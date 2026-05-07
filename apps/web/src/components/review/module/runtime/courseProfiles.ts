@@ -179,16 +179,9 @@ export function resolveFileSeed(target: unknown): FileSeed {
       recipe.solutionFiles,
     ),
     starterCode: firstCode(
-      workspace.starterCode,
-      workspace.code,
-      workspace.content,
-      workspace.source,
-      source.starterCode,
-      source.code,
-      source.content,
-      source.source,
-      recipe.starterCode,
-
+        workspace.starterCode,
+        source.starterCode,
+        recipe.starterCode,
     ),
     solutionCode: firstCode(
       workspace.solutionCode,
