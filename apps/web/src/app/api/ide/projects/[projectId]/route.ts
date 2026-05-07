@@ -17,7 +17,8 @@ import {
     toPrismaJson,
     toPrismaNullableJson, toWorkspaceAccessFromProjectGate,
 } from "@/lib/projects/projectRouteUtils";
-import {resolveWorkspacePolicy, validateWorkspaceNodes} from "@/components/ide/workspaceHook/workspace.policy";
+import { enforceSameOriginPost } from "@/lib/practice/api/shared/http";
+import { resolveWorkspacePolicy, validateWorkspaceState } from "@/lib/ide/workspacePolicy";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -84,6 +85,10 @@ export async function PATCH(
     let parsedBody: ReturnType<typeof parseSaveProjectRequest> | null = null;
 
     try {
+        if (!enforceSameOriginPost(req)) {
+            return jsonNoStore({ ok: false, error: "Forbidden." }, 403);
+        }
+
         const gate = await requireProjectCapability("save_cloud");
         if (!gate.ok) return gate.res;
 
@@ -99,7 +104,8 @@ export async function PATCH(
         const access = toWorkspaceAccessFromProjectGate(gate);
 
         const policy = resolveWorkspacePolicy(access, parsedBody.language);
-        const error = validateWorkspaceNodes(parsedBody.workspace.nodes, policy);
+        const issues = validateWorkspaceState(parsedBody.workspace, policy);
+        const error = issues[0] ?? null;
 
         if (error) {
             return jsonNoStore({ ok: false, error }, 400);
@@ -181,9 +187,13 @@ export async function PATCH(
 }
 
 export async function DELETE(
-    _req: Request,
+    req: Request,
     ctx: { params: Promise<{ projectId: string }> },
 ) {
+    if (!enforceSameOriginPost(req)) {
+        return jsonNoStore({ ok: false, error: "Forbidden." }, 403);
+    }
+
     const gate = await requireProjectCapability("save_cloud");
     if (!gate.ok) return gate.res;
 

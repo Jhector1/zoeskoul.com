@@ -11,7 +11,8 @@ import {
     toPrismaJson,
     toPrismaNullableJson, toWorkspaceAccessFromProjectGate,
 } from "@/lib/projects/projectRouteUtils";
-import {resolveWorkspacePolicy, validateWorkspaceNodes} from "@/components/ide/workspaceHook/workspace.policy";
+import { enforceSameOriginPost } from "@/lib/practice/api/shared/http";
+import { resolveWorkspacePolicy, validateWorkspaceState } from "@/lib/ide/workspacePolicy";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -60,6 +61,10 @@ export async function GET(req: Request) {
 
 export async function POST(req: Request) {
     try {
+        if (!enforceSameOriginPost(req)) {
+            return jsonNoStore({ ok: false, error: "Forbidden." }, 403);
+        }
+
         const gate = await requireProjectCapability("create_project");
         if (!gate.ok) return gate.res;
 
@@ -73,7 +78,8 @@ export async function POST(req: Request) {
         const body = parseSaveProjectRequest(await req.json());
         const access = toWorkspaceAccessFromProjectGate(gate);
         const policy = resolveWorkspacePolicy(access, body.language);
-        const error = validateWorkspaceNodes(body.workspace.nodes, policy);
+        const issues = validateWorkspaceState(body.workspace, policy);
+        const error = issues[0] ?? null;
 
         if (error) {
             return jsonNoStore({ ok: false, error }, 400);

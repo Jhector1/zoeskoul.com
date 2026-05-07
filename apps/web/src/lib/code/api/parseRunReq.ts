@@ -19,6 +19,9 @@ const SQL_DIALECTS = new Set<SqlDialect>([
     "mssql",
 ]);
 
+const MAX_MULTI_FILE_RUN_FILES = 20;
+const MAX_MULTI_FILE_RUN_TOTAL_BYTES = 1_000_000;
+
 function isRecord(v: unknown): v is Record<string, unknown> {
     return Boolean(v) && typeof v === "object" && !Array.isArray(v);
 }
@@ -32,6 +35,10 @@ function asString(v: unknown, field: string, maxLen: number) {
 function asOptionalString(v: unknown, field: string, maxLen: number) {
     if (v == null) return undefined;
     return asString(v, field, maxLen);
+}
+
+function bytesOfText(input: string) {
+    return new TextEncoder().encode(String(input ?? "")).length;
 }
 
 function asOptionalSqlResultShape(v: unknown) {
@@ -196,24 +203,51 @@ function parseSqlLimits(v: unknown): SqlRunLimits | undefined {
 
 function parseFiles(v: unknown) {
     if (Array.isArray(v)) {
-        return v.map((item, i) => {
+        if (v.length > MAX_MULTI_FILE_RUN_FILES) {
+            throw new Error(`files must contain at most ${MAX_MULTI_FILE_RUN_FILES} files.`);
+        }
+
+        const files = v.map((item, i) => {
             if (!isRecord(item)) throw new Error(`files[${i}] must be an object.`);
             return {
                 path: asString(item.path, `files[${i}].path`, 512),
                 content: asString(item.content, `files[${i}].content`, 300_000),
             };
         });
+
+        const totalBytes = files.reduce(
+            (sum, file) => sum + bytesOfText(file.content),
+            0,
+        );
+        if (totalBytes > MAX_MULTI_FILE_RUN_TOTAL_BYTES) {
+            throw new Error(`files total content exceeds the ${MAX_MULTI_FILE_RUN_TOTAL_BYTES} byte limit.`);
+        }
+
+        return files;
     }
 
     if (isRecord(v)) {
-        const out: Record<string, string> = {};
+        const entries = Object.entries(v);
+        if (entries.length > MAX_MULTI_FILE_RUN_FILES) {
+            throw new Error(`files must contain at most ${MAX_MULTI_FILE_RUN_FILES} files.`);
+        }
 
-        for (const [path, content] of Object.entries(v)) {
-            out[asString(path, "files key", 512)] = asString(
+        const out: Record<string, string> = {};
+        let totalBytes = 0;
+
+        for (const [path, content] of entries) {
+            const safePath = asString(path, "files key", 512);
+            const safeContent = asString(
                 content,
                 `files["${path}"]`,
                 300_000,
             );
+            totalBytes += bytesOfText(safeContent);
+            out[safePath] = safeContent;
+        }
+
+        if (totalBytes > MAX_MULTI_FILE_RUN_TOTAL_BYTES) {
+            throw new Error(`files total content exceeds the ${MAX_MULTI_FILE_RUN_TOTAL_BYTES} byte limit.`);
         }
 
         return out;

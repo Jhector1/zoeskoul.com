@@ -20,7 +20,13 @@
     "typecheck": "tsc --noEmit",
     "user:roles": "NODE_ENV=development tsx scripts/set-user-roles.ts",
     "postinstall": "prisma generate --schema ../../packages/db/prisma/schema.prisma",
-    "cleanup:onboarding": "tsx scripts/cleanup-guest-onboarding.ts"
+    "cleanup:onboarding": "tsx scripts/cleanup-guest-onboarding.ts",
+
+    "test:e2e": "playwright test",
+    "test:e2e:headed": "playwright test --headed",
+    "test:e2e:harness": "playwright test tests/e2e/e2e-sketch-save-harness.spec.ts",
+    "test:e2e:manual": "playwright test tests/e2e/manual",
+    "test:e2e:real": "E2E_REAL_PROGRESS_API=1 E2E_REVIEW_URL=/en/catalog/python/subjects/python/modules/python-1/learn/python-1-core-building-blocks/variables-intro/exercise/boxes-print playwright test tests/e2e/review-code-workspace-real-api.spec.ts"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.11.1",
@@ -69,6 +75,7 @@
     "zustand": "^5.0.12"
   },
   "devDependencies": {
+    "@playwright/test": "^1.59.1",
     "@tailwindcss/container-queries": "^0.1.1",
     "@tailwindcss/postcss": "^4",
     "@types/better-sqlite3": "^7.6.13",

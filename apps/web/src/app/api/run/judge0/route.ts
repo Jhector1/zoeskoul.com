@@ -2,10 +2,19 @@ import { NextResponse } from "next/server";
 import { submitRun } from "@/lib/code/runCode";
 import { parseRunReq } from "@/lib/code/api/parseRunReq";
 import {checkIdeCapability} from "@/lib/access/ideCapabilityServer";
-import {ensureGuestId, getActor} from "@/lib/practice/actor";
+import { actorKeyOf, ensureGuestId, getActor } from "@/lib/practice/actor";
+import {
+  enforceSameOriginPost,
+  exceedsContentLength,
+  getClientIp,
+} from "@/lib/practice/api/shared/http";
 import { prisma } from "@/lib/prisma";
+import { rateLimit } from "@/lib/security/ratelimit";
+import type { RunReq } from "@/lib/code/types";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
+
+const MAX_RUN_REQUEST_BYTES = 2 * 1024 * 1024;
 
 function jsonNoStore(body: unknown, status: number) {
   return NextResponse.json(body, {
@@ -18,11 +27,56 @@ function jsonNoStore(body: unknown, status: number) {
 
 export async function POST(req: Request) {
   try {
+    if (!enforceSameOriginPost(req)) {
+      return jsonNoStore({ ok: false, error: "Forbidden." }, 403);
+    }
 
+    if (exceedsContentLength(req, MAX_RUN_REQUEST_BYTES)) {
+      return jsonNoStore(
+          { ok: false, error: `Payload exceeds the ${MAX_RUN_REQUEST_BYTES} byte limit.` },
+          413,
+      );
+    }
 
+    const actor0 = await getActor();
+    const ensured = ensureGuestId(actor0);
+    const actor = ensured.actor;
+    const actorKey = actorKeyOf(actor);
+    const rateLimitKey = actorKey === "g:missing" ? getClientIp(req) : actorKey;
+
+    try {
+      const rl = await rateLimit(`run:${rateLimitKey}`, {
+        bucket: "code-execution",
+        limit: 40,
+        window: "60 s",
+      });
+
+      if (!rl.ok) {
+        const res = jsonNoStore(
+            { ok: false, error: "Too many requests." },
+            429,
+        );
+        const retryAfter = Math.max(1, Math.ceil((rl.resetMs - Date.now()) / 1000));
+        res.headers.set("Retry-After", String(retryAfter));
+        return res;
+      }
+    } catch {
+      return jsonNoStore({ ok: false, error: "Service unavailable." }, 503);
+    }
 
     const raw = await req.json();
-    const body = parseRunReq(raw);
+    const parsed = parseRunReq(raw);
+    const body: RunReq =
+        parsed.kind === "sql"
+            ? parsed
+            : {
+                ...parsed,
+                limits: {
+                  ...(parsed.limits ?? {}),
+                  enable_network: false,
+                },
+              };
+
     if (process.env.NODE_ENV !== "production" && body.language === "sql") {
       console.log("[sql-run] api request", {
         datasetId: (body as any).datasetId ?? null,
@@ -32,9 +86,7 @@ export async function POST(req: Request) {
         hasSeedSql: Boolean(String((body as any).seedSql ?? "").trim()),
       });
     }
-    const actor0 = await getActor();
-    const ensured = ensureGuestId(actor0);
-    const actor = ensured.actor;
+
     const hasMultipleFiles =
         body.kind === "code" &&
         "files" in body &&
@@ -60,9 +112,6 @@ export async function POST(req: Request) {
         );
       }
     }
-
-
-
     const out = await submitRun(body);
 
     return jsonNoStore(out, out.ok ? 200 : 502);

@@ -8,6 +8,8 @@ import {
     bodyJsonResponse,
     bodyJsonWithGuestCookie,
     enforceSameOriginPost,
+    exceedsContentLength,
+    getClientIp,
     readJsonSafe,
 } from "@/lib/practice/api/shared/http";
 import { pickLocale } from "@/lib/review/api/shared/schemas";
@@ -17,9 +19,13 @@ import {
     normalizeProgressTopics,
     normalizeTopicProgressKey,
 } from "@/lib/review/progressTopicKeys";
-import { ReviewProgressWriteSchema } from "@/lib/review/api/progress/schemas";
+import {
+    REVIEW_PROGRESS_LIMITS,
+    ReviewProgressWriteSchema,
+} from "@/lib/review/api/progress/schemas";
 import { resolveReviewModuleForSubject } from "@/lib/review/api/shared/modules";
 import { awardReviewProgressGamification } from "@/lib/gamification/awardReviewProgressGamification";
+import { rateLimit } from "@/lib/security/ratelimit";
 
 async function resolveReviewProgressScope(args: {
     subjectSlug: string;
@@ -165,6 +171,15 @@ export async function PUT(req: Request) {
         return bodyJsonResponse({ message: "Forbidden." }, 403);
     }
 
+    if (exceedsContentLength(req, REVIEW_PROGRESS_LIMITS.maxPayloadBytes)) {
+        return bodyJsonResponse(
+            {
+                message: `Payload exceeds the ${REVIEW_PROGRESS_LIMITS.maxPayloadBytes} byte limit.`,
+            },
+            413,
+        );
+    }
+
     const body = await readJsonSafe(req);
     if (!body) {
         return bodyJsonResponse({ message: "Invalid JSON body." }, 400);
@@ -203,6 +218,36 @@ export async function PUT(req: Request) {
     }
 
     const actorKey = actorKeyOf(actor);
+    const rateLimitActorKey = actorKey === "g:missing" ? getClientIp(req) : actorKey;
+
+    try {
+        const rl = await rateLimit(`review-progress:${rateLimitActorKey}`, {
+            bucket: "review-progress-save",
+            limit: 180,
+            window: "60 s",
+        });
+
+        if (!rl.ok) {
+            const res = bodyJsonWithGuestCookie(
+                {
+                    message: "Too many requests.",
+                },
+                429,
+                setGuestId,
+            );
+            const retryAfter = Math.max(1, Math.ceil((rl.resetMs - Date.now()) / 1000));
+            res.headers.set("Retry-After", String(retryAfter));
+            return res;
+        }
+    } catch {
+        return bodyJsonWithGuestCookie(
+            {
+                message: "Service unavailable.",
+            },
+            503,
+            setGuestId,
+        );
+    }
 
     const previous = await prisma.reviewProgress.findUnique({
         where: {

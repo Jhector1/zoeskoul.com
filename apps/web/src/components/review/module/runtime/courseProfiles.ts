@@ -188,7 +188,7 @@ export function resolveFileSeed(target: unknown): FileSeed {
       source.content,
       source.source,
       recipe.starterCode,
-      recipe.solutionTemplate,
+
     ),
     solutionCode: firstCode(
       workspace.solutionCode,

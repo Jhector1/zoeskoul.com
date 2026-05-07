@@ -291,7 +291,12 @@ export default function EditorPane(props: {
             lang: normalizedLang,
         });
 
-        if (process.env.NODE_ENV === "development" && localStorage.getItem("zoe:debugReview") === "1") {
+        const debugReview =
+            process.env.NODE_ENV === "development" &&
+            typeof window !== "undefined" &&
+            window.localStorage?.getItem("zoe:debugReview") === "1";
+
+        if (debugReview) {
             console.log("[EditorMount] editor input", {
                 exerciseStateKey: effectiveExerciseStateKey,
                 rawExerciseStateKey: exerciseStateKey,

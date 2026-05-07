@@ -15,10 +15,24 @@ function mustGet(name: string) {
 }
 
 // Singleton (module-level) clients
-let _ratelimit: Ratelimit | null = null;
+const ratelimitCache = new Map<string, Ratelimit>();
 
-function getRatelimit(): Ratelimit {
-    if (_ratelimit) return _ratelimit;
+type RateLimitConfig = {
+    bucket: string;
+    limit: number;
+    window: `${number} s` | `${number} m` | `${number} h`;
+};
+
+const DEFAULT_CONFIG: RateLimitConfig = {
+    bucket: "default",
+    limit: 120,
+    window: "60 s",
+};
+
+function getRatelimit(config: RateLimitConfig = DEFAULT_CONFIG): Ratelimit {
+    const cacheKey = `${config.bucket}:${config.limit}:${config.window}`;
+    const cached = ratelimitCache.get(cacheKey);
+    if (cached) return cached;
 
     // Fail-closed in production: no Redis env => no API access (safer than “no limits”)
     const url = process.env.UPSTASH_REDIS_REST_URL;
@@ -40,20 +54,29 @@ function getRatelimit(): Ratelimit {
 
     const redis = new Redis({ url, token });
 
-    _ratelimit = new Ratelimit({
+    const limiter = new Ratelimit({
         redis,
-        // Choose limits that fit your traffic. This is a safe baseline:
-        // - 120 requests / 60 seconds per actor+ip key
-        limiter: Ratelimit.slidingWindow(120, "60 s"),
+        limiter: Ratelimit.slidingWindow(config.limit, config.window),
         analytics: true,
-        prefix: "learnoir:rl",
+        prefix: `learnoir:rl:${config.bucket}`,
     });
 
-    return _ratelimit;
+    ratelimitCache.set(cacheKey, limiter);
+    return limiter;
 }
 
-export async function rateLimit(key: string): Promise<LimitResult> {
-    const rl = getRatelimit();
+export async function rateLimit(
+    key: string,
+    config?: Partial<RateLimitConfig>,
+): Promise<LimitResult> {
+    const mergedConfig: RateLimitConfig = {
+        ...DEFAULT_CONFIG,
+        ...(config ?? {}),
+        bucket: config?.bucket ?? DEFAULT_CONFIG.bucket,
+        limit: config?.limit ?? DEFAULT_CONFIG.limit,
+        window: config?.window ?? DEFAULT_CONFIG.window,
+    };
+    const rl = getRatelimit(mergedConfig);
     const out = await rl.limit(key);
 
     return {

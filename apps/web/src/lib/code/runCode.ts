@@ -92,9 +92,9 @@ function normalizeCodeLimits(input?: RunLimits): RunLimits {
         1,
         120,
     ),
-    enable_network: Boolean(
-        src.enable_network ?? DEFAULT_CODE_LIMITS.enable_network,
-    ),
+    // Production safety: code execution never gets outbound network access,
+    // regardless of what a caller sends.
+    enable_network: false,
     number_of_runs: clampNumber(
         Number(src.number_of_runs ?? DEFAULT_CODE_LIMITS.number_of_runs),
         1,

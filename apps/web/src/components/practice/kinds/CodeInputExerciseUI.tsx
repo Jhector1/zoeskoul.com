@@ -647,7 +647,11 @@ export default function CodeInputExerciseUI({
     }
 
     return (
-        <div className="grid gap-3">
+        <div
+            className="grid gap-3"
+            data-testid="code-input-exercise"
+            data-exercise-key={runnerExerciseKey}
+        >
             {showPrompt ? <ExercisePrompt exercise={exercise} /> : null}
 
             {exercise.expectedExample ? (
@@ -656,6 +660,12 @@ export default function CodeInputExerciseUI({
 
             <CodeRunner
                 key={`${runnerExerciseKey}:main`}
+                testId="code-runner"
+                editorTestId="code-editor"
+                stdinTestId="code-stdin"
+                outputTestId="code-output"
+                mobileEditorTabTestId="code-mobile-editor-tab"
+                mobileOutputTabTestId="code-mobile-output-tab"
                 title={runnerTitle as any}
                 frame={frame}
                 hintMarkdown={exercise.hint}
@@ -663,6 +673,7 @@ export default function CodeInputExerciseUI({
                 disabled={disabled || readOnly}
                 allowReset={!readOnly}
                 allowRun={!readOnly}
+                showStdinEditor
                 runtime={{ backend: "judge0", terminalView: "plain" }}
                 showHint={false}
                 showEditorThemeToggle={!readOnly}

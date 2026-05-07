@@ -68,6 +68,18 @@ export function getClientIp(req: Request) {
     return "unknown";
 }
 
+export function getContentLength(req: Request) {
+    const raw = req.headers.get("content-length");
+    if (!raw) return null;
+    const value = Number(raw);
+    return Number.isFinite(value) && value >= 0 ? value : null;
+}
+
+export function exceedsContentLength(req: Request, maxBytes: number) {
+    const contentLength = getContentLength(req);
+    return contentLength != null && contentLength > maxBytes;
+}
+
 export function safeSameOriginUrl(req: Request, input: string | null | undefined) {
     if (!input) return null;
     if (input.startsWith("/")) return input;

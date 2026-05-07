@@ -46,6 +46,18 @@ type CodeRunnerWithStdinProps = CodeRunnerProps & {
     stdinPlaceholder?: string;
     workspaceTerminal?: WorkspaceTerminalConfig;
     webPreviewEntries?: WorkspaceSyncEntry[];
+
+    /**
+     * Stable selectors for browser tests.
+     * These should not affect runtime behavior.
+     */
+    testId?: string;
+    editorTestId?: string;
+    stdinTestId?: string;
+    outputTestId?: string;
+    mobileEditorTabTestId?: string;
+    mobileOutputTabTestId?: string;
+
     sqlInitialTableSnapshots?: Record<
         string,
         {
@@ -137,6 +149,13 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         sqlPaneOptions,
         stdinPlaceholder = "Type stdin here. Each new line becomes one input line.",
         workspaceTerminal,
+
+        testId,
+        editorTestId,
+        stdinTestId,
+        outputTestId,
+        mobileEditorTabTestId,
+        mobileOutputTabTestId,
     } = props as any;
 
     const controlled = isControlled(props as any);
@@ -669,6 +688,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     const renderOutputPane = (panelHeight?: number, panelWidth?: number) => {
         return (
             <div
+                data-testid={outputTestId}
                 className="min-h-0 flex flex-col"
                 style={{
                     ...(typeof panelHeight === "number" ? { height: panelHeight } : {}),
@@ -723,6 +743,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
 
     const renderEditorPane = (editorHeight: number) => (
         <div
+            data-testid={editorTestId}
             className={PANEL_EDITOR}
             style={{ touchAction: isNarrowScreen ? "pan-y" : "auto", height: "100%" }}
         >
@@ -740,6 +761,21 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                     codePreview: String(code ?? "").slice(0, 120),
                 }) as any)
                 : null}
+            {process.env.NODE_ENV !== "production" ? (
+                <textarea
+                    data-testid="code-editor-e2e-input"
+                    aria-label="E2E code editor input"
+                    value={code}
+                    onChange={(e) => setCode(e.target.value)}
+                    style={{
+                        position: "absolute",
+                        width: 1,
+                        height: 1,
+                        opacity: 0,
+                        pointerEvents: "auto",
+                    }}
+                />
+            ) : null}
             <EditorPane
                 frame={frame}
                 lang={effectiveEditorLanguage}
@@ -761,7 +797,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     );
 
     return (
-        <div className={outerCls}>
+        <div className={outerCls} data-testid={testId}>
             {showHeaderBar ? (
                 <div className="relative px-2 z-20 overflow-visible @container">
                     <HeaderBar
@@ -832,6 +868,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                         </div>
 
                         <textarea
+                            data-testid={stdinTestId}
                             value={stdin}
                             onChange={(e) => setStdin(e.target.value)}
                             placeholder={stdinPlaceholder}
@@ -865,6 +902,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                                     <div className="grid grid-cols-2 gap-2">
                                         <button
                                             type="button"
+                                            data-testid={mobileEditorTabTestId}
                                             onClick={() => setMobilePane("editor")}
                                             className={cx(
                                                 MOBILE_TAB_BASE,
@@ -877,6 +915,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
 
                                         <button
                                             type="button"
+                                            data-testid={mobileOutputTabTestId}
                                             onClick={() => setMobilePane("output")}
                                             className={cx(
                                                 MOBILE_TAB_BASE,
