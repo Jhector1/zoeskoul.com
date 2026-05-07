@@ -37,6 +37,7 @@
     "@upstash/ratelimit": "^2.0.8",
     "@upstash/redis": "^1.36.3",
     "@zoeskoul/code-contracts": "workspace:*",
+    "@zoeskoul/curriculum-contracts": "workspace:*",
     "@zoeskoul/curriculum-profiles": "workspace:*",
     "@zoeskoul/curriculum-runtime": "workspace:*",
     "@zoeskoul/db": "workspace:*",

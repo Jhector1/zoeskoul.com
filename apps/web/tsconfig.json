@@ -15,6 +15,7 @@
     ],
     "paths": {
       "@/*": ["./src/*"],
+      "@zoeskoul/curriculum-contracts": ["../../packages/curriculum-contracts/src/index.ts"],
       "@zoeskoul-sql-datasets": ["../../packages/curriculum-profiles/dist/sql/datasets/index.js"],
       "@zoeskoul-code-input-expected": ["../../packages/curriculum-profiles/dist/base/codeInputExpected.js"]
     }

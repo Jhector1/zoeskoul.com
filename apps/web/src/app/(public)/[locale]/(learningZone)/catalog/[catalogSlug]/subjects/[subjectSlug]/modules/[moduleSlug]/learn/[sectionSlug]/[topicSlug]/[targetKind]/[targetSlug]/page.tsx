@@ -1,7 +1,7 @@
 import ReviewModulePageClient from "@/app/(public)/[locale]/(learningZone)/subjects/[subjectSlug]/modules/[moduleSlug]/learn/ReviewModulePageClient";
 import { loadReviewModulePageData } from "@/app/(public)/[locale]/(learningZone)/subjects/[subjectSlug]/modules/[moduleSlug]/learn/loadReviewModulePageData";
 import { resolveReviewRouteTarget } from "@/components/review/module/runtime/reviewRoute";
-import { redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 
 export const runtime = "nodejs";
 
@@ -34,6 +34,10 @@ export default async function Page({
         subjectSlug,
         moduleSlug,
     });
+
+    if (!mod) {
+        notFound();
+    }
 
     const target = resolveReviewRouteTarget({
         mod,

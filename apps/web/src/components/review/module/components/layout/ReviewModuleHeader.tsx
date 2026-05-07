@@ -14,8 +14,8 @@ type Props = {
     onToggleLeftPanel: () => void;
     onToggleRightPanel: () => void;
     onResetCurrentTopic: () => void;
-    onPrevTopic: () => void;
-    onNextTopic: () => void;
+    onPrevTopic?: () => void;
+    onNextTopic?: () => void;
     prevTopic: { id?: string } | null;
     nextTopic: { id?: string } | null;
     unlockAll: boolean;

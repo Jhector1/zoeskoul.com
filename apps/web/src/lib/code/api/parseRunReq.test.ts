@@ -90,6 +90,9 @@ describe("parseRunReq", () => {
         });
 
         expect(parsed.kind).toBe("code");
+        if (parsed.kind !== "code") {
+            throw new Error("Expected code run request.");
+        }
         expect(parsed.limits?.enable_network).toBe(true);
     });
 });

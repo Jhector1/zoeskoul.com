@@ -167,7 +167,7 @@ export function useReviewModuleController({
         });
     }, [store, flushNow, progress]);
 
-    const initialRouteTarget = useMemo(() => {
+    const initialRouteTarget = useMemo<ReviewResolvedRouteTarget | null>(() => {
         if (targetRegistry && params?.sectionSlug && params?.topicSlug && params?.targetKind && params?.targetSlug) {
             const routeKey = `${params.sectionSlug}/${params.topicSlug}/${params.targetKind}/${params.targetSlug}`;
             const targetKey = targetRegistry.byRoute[routeKey];
@@ -266,7 +266,7 @@ export function useReviewModuleController({
                     : null;
             const nextResolved = registryResolved ?? resolved;
 
-            setRouteTarget((prev) => {
+            setRouteTarget((prev): ReviewResolvedRouteTarget | null => {
                 if (
                     prev?.kind === nextResolved?.kind &&
                     prev?.topicId === nextResolved?.topicId &&
@@ -855,10 +855,11 @@ export function useReviewModuleController({
                 moduleSlug,
                 sectionSlug: routeTarget?.sectionSlug ?? sectionSlug,
             });
+            const currentExerciseStateKey =
+                routeTarget?.kind === "exercise" ? routeTarget.exerciseStateKey : null;
 
             const routeAlreadyActive =
-                routeTarget?.kind === "exercise" &&
-                routeTarget.exerciseStateKey === nextTarget.exerciseStateKey;
+                currentExerciseStateKey === nextTarget.exerciseStateKey;
 
             if (!routeAlreadyActive) {
                 void navigateToResolvedTarget(nextTarget, "push");
@@ -877,7 +878,7 @@ export function useReviewModuleController({
             moduleSlug,
             routeTarget?.sectionSlug,
             routeTarget?.kind,
-            routeTarget?.exerciseStateKey,
+            routeTarget?.kind === "exercise" ? routeTarget.exerciseStateKey : null,
             sectionSlug,
             subjectSlug,
             viewTid,

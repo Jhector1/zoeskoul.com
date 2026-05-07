@@ -1,4 +1,8 @@
-import type { TopicBundleManifest } from "./manifestTypes";
+import type {
+    ManifestCard,
+    ManifestProjectStep,
+    TopicBundleManifest,
+} from "./manifestTypes";
 import type { TopicDefInput } from "@/lib/subjects/_core/defineTopicBundle";
 import type { ReviewTopicShape } from "@/lib/subjects/types";
 import {
@@ -28,7 +32,7 @@ export function buildReviewFromManifest(args: {
             runtimeDefaults: manifest.runtimeDefaults ?? null,
             serviceDefaults: manifest.serviceDefaults ?? null,
         },
-        cards: manifest.cards.map((card, index) => {
+        cards: manifest.cards.map((card: ManifestCard, index: number) => {
             if (card.kind === "sketch") {
                 const sketchManifest = manifest.sketches.find(
                     (sketch) => sketch.id === card.sketchId,
@@ -82,7 +86,7 @@ export function buildReviewFromManifest(args: {
                         preferKind: card.project.preferKind ?? null,
                         maxAttempts: card.project.maxAttempts ?? 10,
                         runtime: manifest.runtimeDefaults ?? null,
-                        steps: card.project.steps.map((step) =>
+                        steps: card.project.steps.map((step: ManifestProjectStep) =>
                             makeProjectStep({
                                 id: step.id,
                                 title: tag(step.titleKey),

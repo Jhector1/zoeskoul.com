@@ -66,11 +66,11 @@ function isProtectedPath(pathname: string) {
   // pathname is locale-stripped
   return (
       pathname === "/sandbox/programming/shell"
-      // ||
-      // pathname.startsWith("/admin") ||
-      // pathname.startsWith("/assignments") ||
-      // pathname.startsWith("/profile") ||
-      // pathname.startsWith("/subjects")
+      ||
+      pathname.startsWith("/admin") ||
+      pathname.startsWith("/assignments") ||
+      pathname.startsWith("/profile") ||
+      pathname.startsWith("/subjects")
   );
 }
 

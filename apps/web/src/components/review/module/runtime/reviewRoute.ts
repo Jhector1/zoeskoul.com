@@ -25,6 +25,9 @@ export type ReviewResolvedRouteTarget =
         exerciseStateKey: string;
     };
 
+type ReviewCardRouteTarget = Extract<ReviewResolvedRouteTarget, { kind: "card" }>;
+type ReviewExerciseRouteTarget = Extract<ReviewResolvedRouteTarget, { kind: "exercise" }>;
+
 type TopicLookup = {
     sectionSlug: string;
     topic: ReviewModule["topics"][number];
@@ -156,7 +159,7 @@ export function resolveReviewRouteTarget(args: {
         targetKind?: string | null;
         targetSlug?: string | null;
     };
-}) {
+}): ReviewResolvedRouteTarget | null {
     const { mod, subjectSlug, moduleSlug, route } = args;
     const topicMap = getTopicLookup(mod);
 
@@ -307,7 +310,7 @@ export function buildReviewCardRouteTarget(args: {
     mod: ReviewModule;
     topicId: string;
     card: ReviewCard;
-}) {
+}): ReviewCardRouteTarget {
     const lookup = getTopicLookup(args.mod).get(args.topicId);
     const sectionSlug = lookup?.sectionSlug ?? "general";
 
@@ -331,7 +334,7 @@ export function buildReviewExerciseRouteTarget(args: {
     subjectSlug: string;
     moduleSlug: string;
     sectionSlug?: string;
-}) {
+}): ReviewExerciseRouteTarget {
     const lookup = getTopicLookup(args.mod).get(args.topicId);
     const sectionSlug = args.sectionSlug ?? lookup?.sectionSlug ?? "general";
     const topic = lookup?.topic ?? null;

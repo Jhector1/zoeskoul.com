@@ -15,7 +15,10 @@ export function defineJsonGeneratorTopic(manifest: TopicBundleManifest): TopicBu
     const handlers: Record<string, AnyHandler> = Object.fromEntries(
         manifest.exercises.map((ex) => [
             ex.id,
-            (args) => buildExerciseFromManifest(ex, args, manifest),
+            (args) =>
+                buildExerciseFromManifest(ex, args, {
+                    serviceDefaults: manifest.serviceDefaults ?? null,
+                }),
         ]),
     );
 

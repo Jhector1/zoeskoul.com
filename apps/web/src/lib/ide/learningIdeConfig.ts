@@ -32,12 +32,13 @@ export function mergeLearningIdeConfigs(
     for (const config of configs) {
         if (!config) continue;
         const previousRequires: LearningIdeServiceRequirements = merged?.requires ?? {};
+        const previousSqlPane: SqlPaneOptions = merged?.sqlPane ?? {};
 
         merged = {
             ...(merged ?? {}),
             ...(config.preset ? { preset: config.preset } : {}),
             ...(config.runnerBackend ? { runnerBackend: config.runnerBackend } : {}),
-            ...(config.sqlPane ? { sqlPane: { ...(merged?.sqlPane ?? {}), ...config.sqlPane } } : {}),
+            ...(config.sqlPane ? { sqlPane: { ...previousSqlPane, ...config.sqlPane } } : {}),
             requires: {
                 ...previousRequires,
                 ...(config.requires ?? {}),

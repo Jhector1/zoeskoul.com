@@ -2,12 +2,12 @@ import type {
     ExerciseKind,
     ManifestBaseExercise,
     ManifestCard,
-    ManifestCodeInput,
+    ManifestCodeInput as SharedManifestCodeInput,
     ManifestCodeInputExpectedExample,
     ManifestCodeRuntimeDefaults,
     ManifestComputedSpec,
     ManifestDragReorder,
-    ManifestExercise,
+    ManifestExercise as SharedManifestExercise,
     ManifestFillBlankChoice,
     ManifestMultiChoice,
     ManifestProjectStep,
@@ -15,10 +15,7 @@ import type {
     ManifestRuntimeDefaults,
     ManifestSingleChoice,
     ManifestSqlRuntimeDefaults,
-    ManifestStarterFile,
-    ManifestStarterFiles,
     ManifestVarSpec,
-    ManifestWorkspaceSeed,
     SqlDialect,
     TopicBundleManifest as SharedTopicBundleManifest,
     WorkspaceLanguage,
@@ -39,12 +36,30 @@ export type {
     ManifestRuntimeDefaults,
     ManifestSingleChoice,
     ManifestSqlRuntimeDefaults,
-    ManifestStarterFile,
-    ManifestStarterFiles,
     ManifestVarSpec,
-    ManifestWorkspaceSeed,
     SqlDialect,
     WorkspaceLanguage,
+};
+
+export type ManifestStarterFile = {
+    path: string;
+    content: string;
+    entry?: boolean;
+};
+
+export type ManifestStarterFiles = ManifestStarterFile[];
+
+export type ManifestWorkspaceSeed = {
+    language?: WorkspaceLanguage;
+    activeFileId?: string;
+    entryFileId?: string;
+    entryFile?: string;
+    entryFilePath?: string;
+    mainFile?: string;
+    mainFilePath?: string;
+    openTabs?: string[];
+    stdin?: string;
+    starterFiles?: ManifestStarterFiles;
 };
 
 /**
@@ -102,7 +117,7 @@ export type ManifestSketch =
  * This preserves compatibility with local app fields while still relying on
  * the shared contract for the base portable shape.
  */
-export type AppManifestCodeInput = ManifestCodeInput & {
+export type AppManifestCodeInput = SharedManifestCodeInput & {
     workspace?: ManifestWorkspaceSeed | null;
     starterFiles?: ManifestStarterFiles;
     initialStdin?: string;
@@ -139,4 +154,4 @@ export type TopicBundleManifest = Omit<
 };
 
 export type ManifestCodeInput = AppManifestCodeInput;
-export type ManifestExercise = AppManifestExercise;
+export type ManifestExercise = SharedManifestExercise | AppManifestExercise;
