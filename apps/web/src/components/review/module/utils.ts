@@ -20,7 +20,24 @@ export function clamp01(n: number) {
     if (n >= 1) return 1;
     return n;
 }
+export function languagesCompatible(a: unknown, b: unknown) {
+    const left = String(a ?? "").trim().toLowerCase();
+    const right = String(b ?? "").trim().toLowerCase();
 
+    if (!left || !right) return true;
+    if (left === right) return true;
+
+    if (left === "py" && right === "python") return true;
+    if (left === "python" && right === "py") return true;
+
+    if (left === "js" && right === "javascript") return true;
+    if (left === "javascript" && right === "js") return true;
+
+    if (left === "ts" && right === "typescript") return true;
+    if (left === "typescript" && right === "ts") return true;
+
+    return false;
+}
 export function countAnswered(
     cards: readonly ReviewCard[],
     topicState: any,

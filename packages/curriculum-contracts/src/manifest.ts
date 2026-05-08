@@ -201,6 +201,55 @@ export type ManifestRecipe =
 export type ManifestCodeInputExpectedExample =
   | boolean
   | { metaKey?: string };
+export type ManifestStarterFile = {
+  path?: string;
+  name?: string;
+  content?: string;
+  language?: WorkspaceLanguage;
+  isEntry?: boolean;
+
+  /**
+   * Backward-compatible alias used by older app-side starter file shapes.
+   */
+  entry?: boolean;
+};
+
+export type ManifestStarterFiles =
+    | ManifestStarterFile[]
+    | Record<
+    string,
+    | string
+    | {
+  content?: string;
+  language?: WorkspaceLanguage;
+  isEntry?: boolean;
+  entry?: boolean;
+}
+>;
+
+export type ManifestWorkspaceSeed = {
+  language?: WorkspaceLanguage;
+
+  activeFileId?: string;
+  entryFileId?: string;
+
+  entryFile?: string;
+  entryPath?: string;
+  entryFilePath?: string;
+
+  mainFile?: string;
+  mainFilePath?: string;
+
+  openTabs?: string[];
+  stdin?: string;
+
+  starterCode?: string;
+  starterFiles?: ManifestStarterFiles;
+
+  files?: ManifestStarterFiles;
+  initialFiles?: ManifestStarterFiles;
+  workspaceFiles?: ManifestStarterFiles;
+};
 
 export type ManifestCodeInput = ManifestBaseExercise & {
   kind: "code_input";
@@ -208,8 +257,16 @@ export type ManifestCodeInput = ManifestBaseExercise & {
   fixedSqlDialect?: SqlDialect;
   recipe: ManifestRecipe;
   showExpectedExample?: ManifestCodeInputExpectedExample;
-};
 
+  /**
+   * Safe learner starter code for the editor.
+   * Never use recipe.solutionCode as starter code.
+   */
+  starterCode?: string;
+
+  starterFiles?: ManifestStarterFiles;
+  workspace?: ManifestWorkspaceSeed | null;
+};
 export type ManifestExercise =
   | ManifestSingleChoice
   | ManifestMultiChoice

@@ -1,6 +1,7 @@
 import type { ReviewCard, ReviewModule } from "@/lib/subjects/types";
 import { getCardStateKey, getExerciseStateKey } from "./exerciseKeys";
 import { resolveCourseLanguage, resolveCourseFileSeed, resolveRuntimeDefaultDataset } from "./courseProfiles";
+import {tag} from "@/lib/practice/generator/shared/i18n";
 
 export type ReviewTargetKind = "sketch" | "exercise" | "quiz" | "card" | "project" | "text" | "video";
 
@@ -66,7 +67,21 @@ function lastIdSegment(value: unknown) {
 function getTopicRouteSlug(topicId: string) {
   return cleanSegment(topicId, "topic");
 }
+function pickStarterCodeFromMessageBase(item: any) {
+  const messageBase =
+      typeof item?.messageBase === "string" && item.messageBase.trim()
+          ? item.messageBase.trim()
+          : "";
 
+  if (!messageBase) return undefined;
+
+  const key = `${messageBase}.starterCode`;
+  const value = tag(key);
+
+  if (!value || value === key) return undefined;
+
+  return value;
+}
 function getCardTargetKind(card: ReviewCard): ReviewTargetKind {
   switch (card.type) {
     case "sketch":
@@ -125,10 +140,33 @@ function pickSolutionFiles(item: any, subjectSlug: string, language?: string) {
 }
 
 function pickStarterCode(item: any, subjectSlug: string, language?: string) {
-  // Only explicit starterCode may seed the code input pane.
-  // Do not infer starter code from prompt/body/example fields, because those
-  // can include solution code and should never appear in the learner editor.
-  return resolveCourseFileSeed({ subjectSlug, language, target: item }).starterCode;
+  /**
+   * Only explicit starter sources may seed the editor.
+   *
+   * Priority:
+   * 1. raw manifest starterCode / starterFiles / workspace starter
+   * 2. localized messageBase.starterCode
+   *
+   * Never use solutionCode, recipe.solutionCode, prompt, body, code, source,
+   * content, or examples as starter code.
+   */
+  const explicit = resolveCourseFileSeed({
+    subjectSlug,
+    language,
+    target: item,
+  }).starterCode;
+
+  if (explicit && explicit.trim()) {
+    return explicit;
+  }
+
+  const fromMessageBase = pickStarterCodeFromMessageBase(item);
+
+  if (fromMessageBase && fromMessageBase.trim()) {
+    return fromMessageBase;
+  }
+
+  return undefined;
 }
 
 function pickSolutionCode(item: any, subjectSlug: string, language?: string) {

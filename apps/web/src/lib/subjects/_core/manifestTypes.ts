@@ -15,7 +15,10 @@ import type {
     ManifestRuntimeDefaults,
     ManifestSingleChoice,
     ManifestSqlRuntimeDefaults,
+    ManifestStarterFile,
+    ManifestStarterFiles,
     ManifestVarSpec,
+    ManifestWorkspaceSeed,
     SqlDialect,
     TopicBundleManifest as SharedTopicBundleManifest,
     WorkspaceLanguage,
@@ -36,36 +39,18 @@ export type {
     ManifestRuntimeDefaults,
     ManifestSingleChoice,
     ManifestSqlRuntimeDefaults,
+    ManifestStarterFile,
+    ManifestStarterFiles,
     ManifestVarSpec,
+    ManifestWorkspaceSeed,
     SqlDialect,
     WorkspaceLanguage,
-};
-
-export type ManifestStarterFile = {
-    path: string;
-    content: string;
-    entry?: boolean;
-};
-
-export type ManifestStarterFiles = ManifestStarterFile[];
-
-export type ManifestWorkspaceSeed = {
-    language?: WorkspaceLanguage;
-    activeFileId?: string;
-    entryFileId?: string;
-    entryFile?: string;
-    entryFilePath?: string;
-    mainFile?: string;
-    mainFilePath?: string;
-    openTabs?: string[];
-    stdin?: string;
-    starterFiles?: ManifestStarterFiles;
 };
 
 /**
  * App-side sketch extension.
  *
- * The shared contract should contain the portable fields.
+ * The shared contract contains the portable fields.
  * This type keeps the app tolerant of older/local sketch shapes.
  */
 export type ManifestSketch =
@@ -114,12 +99,16 @@ export type ManifestSketch =
 /**
  * App-side code input extension.
  *
- * This preserves compatibility with local app fields while still relying on
- * the shared contract for the base portable shape.
+ * The portable manifest shape comes from @zoeskoul/curriculum-contracts.
+ * This app type only adds legacy/app-only convenience fields.
  */
 export type AppManifestCodeInput = SharedManifestCodeInput & {
     workspace?: ManifestWorkspaceSeed | null;
     starterFiles?: ManifestStarterFiles;
+
+    /**
+     * App-only compatibility fields.
+     */
     initialStdin?: string;
     stdin?: string;
     starterStdin?: string;
@@ -154,4 +143,19 @@ export type TopicBundleManifest = Omit<
 };
 
 export type ManifestCodeInput = AppManifestCodeInput;
-export type ManifestExercise = SharedManifestExercise | AppManifestExercise;
+
+/**
+ * Important:
+ * Do not union SharedManifestExercise back in here.
+ *
+ * AppManifestExercise already includes the shared non-code exercise shapes and
+ * the enriched app code_input shape. Adding SharedManifestExercise reintroduces
+ * the less-specific shared code_input branch and can cause type narrowing issues.
+ */
+export type ManifestExercise = AppManifestExercise;
+
+/**
+ * Kept only as an escape hatch for files that explicitly need the raw shared
+ * exercise union.
+ */
+export type SharedPortableManifestExercise = SharedManifestExercise;

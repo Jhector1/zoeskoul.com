@@ -16,7 +16,7 @@ export const buildFixedTestsRecipe = (def: any, args: any, resolved: any) => {
     title: resolved.title,
     prompt: resolved.prompt,
     language: def.language ?? "python",
-    starterCode: resolved.starterCode,
+  starterCode: String(def.starterCode ?? resolved.starterCode ?? ""),
     help: resolved.help,
     hint: resolved.hint,
     expected,

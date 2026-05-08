@@ -17,6 +17,7 @@ import {
 } from "@/lib/ide/learningIdeConfig";
 import { useReviewRuntimeStore } from "@/components/review/module/runtime/reviewRuntimeStore";
 import { reviewSaveDebug, summarizeWorkspaceForSave } from "@/components/review/module/runtime/reviewSaveDebug";
+import {languagesCompatible} from "@/components/review/module/utils";
 
 const FullIDE = dynamic(() => import("@/components/ide/fullide/FullIDE"), {
     ssr: false,
@@ -568,7 +569,6 @@ export default function CodeToolPane(props: {
     const reviewDirectWorkspaceError = editorRuntime?.workspaceStatus === "error";
     const effectiveLanguage = (isReviewRouteMode ? editorRuntime?.language : null) ?? toolLang;
     const isSql = effectiveLanguage === "sql";
-
     const ideShell = useMemo(
         () => resolveFullIDEConfigFromLearningIde({ ideConfig }),
         [ideConfig],
@@ -671,6 +671,16 @@ export default function CodeToolPane(props: {
         isReviewRouteMode,
         localWorkspaceDraft,
     ]);
+
+    const finalReviewWorkspaceLanguage = String(
+        (finalReviewWorkspace as any)?.language ?? "",
+    ).toLowerCase();
+
+    const finalWorkspaceMatchesLanguage =
+        !finalReviewWorkspaceLanguage ||
+        !effectiveLanguage ||
+        languagesCompatible(finalReviewWorkspaceLanguage, effectiveLanguage);
+
     const runtimeWorkspacePending = Boolean(
         isReviewRouteMode &&
         !runtimeWorkspaceError &&
@@ -684,9 +694,9 @@ export default function CodeToolPane(props: {
     const canRenderEditor = Boolean(
         finalReviewWorkspace &&
         !runtimeWorkspaceError &&
+        finalWorkspaceMatchesLanguage &&
         forceWorkspaceHasContent(finalReviewWorkspace),
     );
-
     /**
      * Do not show the editor loading fallback when the tools rail is not bound
      * to an exercise/sketch/code target. In that state there is no workspace to

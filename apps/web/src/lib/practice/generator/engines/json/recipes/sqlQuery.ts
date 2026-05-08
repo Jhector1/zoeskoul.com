@@ -66,7 +66,7 @@ export const buildSqlQueryRecipe: RecipeHandler<any> = (def, args, resolved) => 
         title: resolved.title,
         prompt: resolved.prompt,
         language: def.language ?? "sql",
-        starterCode: resolved.starterCode,
+      starterCode: String(def.starterCode ?? resolved.starterCode ?? ""),
 
         workspace: def.workspace,
         starterFiles: def.starterFiles,

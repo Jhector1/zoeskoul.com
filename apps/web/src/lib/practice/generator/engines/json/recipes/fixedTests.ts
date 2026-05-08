@@ -26,7 +26,7 @@ export const buildFixedTestsRecipe: RecipeHandler<any> = (
         title: resolved.title,
         prompt: resolved.prompt,
         language: def.language ?? "python",
-        starterCode: resolved.starterCode,
+      starterCode: String(def.starterCode ?? resolved.starterCode ?? ""),
 
         workspace: def.workspace,
         starterFiles: def.starterFiles,

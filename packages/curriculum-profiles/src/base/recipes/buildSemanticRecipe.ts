@@ -12,7 +12,7 @@ export const buildSemanticRecipe = (def: any, args: any, resolved: any) => {
     title: resolved.title,
     prompt: resolved.prompt,
     language: def.language ?? def.recipe.language ?? "python",
-    starterCode: resolved.starterCode,
+  starterCode: String(def.starterCode ?? resolved.starterCode ?? ""),
     help: resolved.help,
     hint: resolved.hint,
     expected,

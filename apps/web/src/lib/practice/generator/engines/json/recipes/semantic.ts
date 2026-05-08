@@ -13,7 +13,7 @@ export const buildSemanticRecipe: RecipeHandler<any> = (def, args, resolved) => 
         title: resolved.title,
         prompt: resolved.prompt,
         language: def.language ?? def.recipe.language ?? "python",
-        starterCode: resolved.starterCode,
+      starterCode: String(def.starterCode ?? resolved.starterCode ?? ""),
         workspace: def.workspace,
         starterFiles: def.starterFiles,
         initialStdin: def.initialStdin,

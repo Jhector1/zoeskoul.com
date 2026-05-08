@@ -319,31 +319,21 @@ function hasSavedExerciseContent(value: any) {
     const workspace = getSavedWorkspace(value);
     const userSaved = isUserSavedState(value);
 
-    /**
-     * Important:
-     * Blank auto/sync/runtime patches should not count as saved learner work.
-     * Otherwise they overwrite starterCode and the editor renders blank.
-     *
-     * Real user edits still count, even if the learner intentionally cleared
-     * the editor.
-     */
-    if (userSaved) {
-        return Boolean(
-            workspace ||
-            typeof value?.code === "string" ||
-            typeof value?.source === "string" ||
-            value?.sketch,
-        );
-    }
-
-    return Boolean(
+    const hasNonBlankCode =
         workspaceHasNonBlankCode(workspace) ||
         (typeof value?.code === "string" && value.code.trim().length > 0) ||
-        (typeof value?.source === "string" && value.source.trim().length > 0) ||
-        value?.sketch,
-    );
-}
+        (typeof value?.source === "string" && value.source.trim().length > 0);
 
+    /**
+     * Blank saved code/workspace should not count as learner work.
+     * Otherwise old blank patches erase starterCode.
+     */
+    if (userSaved) {
+        return Boolean(hasNonBlankCode || value?.sketch);
+    }
+
+    return Boolean(hasNonBlankCode || value?.sketch);
+}
 function getSavedExerciseCode(value: any, workspace: any) {
     const workspaceCode = deriveEntryCode(workspace) ?? "";
     if (workspaceCode) return workspaceCode;

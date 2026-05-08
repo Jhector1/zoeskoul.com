@@ -16,6 +16,7 @@ import { resolveSketchState } from "./sketchResolver";
 import { reviewDebug, summarizeWorkspace } from "./reviewDebug";
 import { exerciseDebug, summarizeExercisePatch, summarizeExerciseWorkspace } from "./exerciseDebug";
 import { reviewSaveDebug, summarizeWorkspaceForSave } from "./reviewSaveDebug";
+import {languagesCompatible} from "@/components/review/module/utils";
 
 type InternalStore = ReviewRuntimeStore & {
   _flushToolSnapshotCb: (() => void) | null;
@@ -484,6 +485,24 @@ function workspaceHasUsableFile(workspace: WorkspaceStateV2 | null | undefined) 
   return workspace.nodes.some((node: any) => node?.kind === "file");
 }
 
+
+function workspaceLanguage(workspace: WorkspaceStateV2 | null | undefined) {
+  return String((workspace as any)?.language ?? "").trim().toLowerCase();
+}
+
+
+function workspaceHasNonBlankFile(workspace: WorkspaceStateV2 | null | undefined) {
+  if (!workspace || workspace.version !== 2 || !Array.isArray(workspace.nodes)) {
+    return false;
+  }
+
+  return workspace.nodes.some((node: any) => {
+    if (node?.kind !== "file") return false;
+    return String(node.content ?? "").trim().length > 0;
+  });
+}
+
+
 function workspaceHash(workspace: WorkspaceStateV2 | null | undefined) {
   return workspaceContentKey(workspace);
 }
@@ -500,8 +519,49 @@ function shouldUseSavedUserWorkspace(args: {
   savedState: any;
   savedWorkspace: WorkspaceStateV2 | null | undefined;
   starterWorkspace: WorkspaceStateV2 | null | undefined;
+  language?: string | null;
 }) {
-  if (!args.savedWorkspace || !workspaceHasUsableFile(args.savedWorkspace)) return false;
+  if (!args.savedWorkspace || !workspaceHasUsableFile(args.savedWorkspace)) {
+    return false;
+  }
+
+  const expectedLanguage = String(
+      args.language ??
+      workspaceLanguage(args.starterWorkspace) ??
+      "",
+  ).trim();
+
+  const savedLanguage = String(
+      args.savedState?.language ??
+      args.savedState?.lang ??
+      workspaceLanguage(args.savedWorkspace) ??
+      "",
+  ).trim();
+
+  /**
+   * Critical:
+   * Do not restore a Python workspace into a SQL target, or any other
+   * cross-language target. This is what caused main.py / Car code to appear
+   * inside SQL exercises.
+   */
+  if (
+      expectedLanguage &&
+      savedLanguage &&
+      !languagesCompatible(savedLanguage, expectedLanguage)
+  ) {
+    return false;
+  }
+
+  const starterHasCode = workspaceHasNonBlankFile(args.starterWorkspace);
+  const savedHasCode = workspaceHasNonBlankFile(args.savedWorkspace);
+
+  /**
+   * If this exercise has starter code, do not let a blank saved workspace
+   * erase it.
+   */
+  if (starterHasCode && !savedHasCode) {
+    return false;
+  }
 
   if (isUserWorkspaceState(args.savedState)) return true;
 
@@ -613,6 +673,7 @@ function resolveCardToolSeed(args: {
     savedState: args.existing,
     savedWorkspace: args.existing?.toolWorkspace,
     starterWorkspace,
+    language: args.entry?.language ?? args.language,
   });
 
   if (
@@ -739,6 +800,7 @@ function resolveEditorRuntimeSeed(args: {
     savedState: args.existing,
     savedWorkspace: args.existing?.workspace,
     starterWorkspace,
+    language: args.source.language,
   });
 
   if (
@@ -786,6 +848,7 @@ function resolveEditorRuntimeSeed(args: {
     savedState: legacyState,
     savedWorkspace: legacyWorkspace,
     starterWorkspace,
+    language: args.source.language,
   });
 
   if (
@@ -1012,21 +1075,46 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
         savedState: existing,
         savedWorkspace: existing?.workspace,
         starterWorkspace,
+        language,
       });
 
-      if (existing && isUserWorkspaceState(existing)) {
-        return state;
-      }
+      const existingLanguageMatchesTarget = existing
+          ? languagesCompatible(
+              existing.language ?? existing.lang ?? workspaceLanguage(existing.workspace),
+              language,
+          )
+          : false;
 
-      if (existing && !registryHasStarter) {
+      /**
+       * Critical:
+       * Never preserve an existing runtime state across a target/language change.
+       * This prevents Python workspaces/files from leaking into SQL exercises, and
+       * vice versa.
+       */
+      if (
+          existing &&
+          existingLanguageMatchesTarget &&
+          trustedExistingWorkspace &&
+          isUserWorkspaceState(existing)
+      ) {
         return state;
       }
 
       if (
           existing &&
+          existingLanguageMatchesTarget &&
+          trustedExistingWorkspace &&
+          !registryHasStarter
+      ) {
+        return state;
+      }
+
+      if (
+          existing &&
+          existingLanguageMatchesTarget &&
+          trustedExistingWorkspace &&
           registryHasStarter &&
-          existing.workspaceStatus === "ready" &&
-          trustedExistingWorkspace
+          existing.workspaceStatus === "ready"
       ) {
         return state;
       }
@@ -1035,14 +1123,12 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
         savedState: saved,
         savedWorkspace: rawSavedWorkspace,
         starterWorkspace,
+        language,
       });
-
       const savedWorkspace =
-          registryHasStarter
-              ? trustedSavedWorkspace && workspaceHasUsableFile(rawSavedWorkspace)
-                  ? rawSavedWorkspace
-                  : null
-              : rawSavedWorkspace;
+          trustedSavedWorkspace && workspaceHasUsableFile(rawSavedWorkspace)
+              ? rawSavedWorkspace
+              : null;
 
       const workspace = resolveExerciseWorkspace({
         language,
