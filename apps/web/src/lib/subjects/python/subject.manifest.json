@@ -96,17 +96,7 @@
         "kind": "code",
         "language": "python"
       },
-      "serviceDefaults": {
-        "preset": "lesson",
-        "runnerBackend": "pty",
-        "requires": {
-          "files": true,
-          "terminal": true,
-          "multiFile": true,
-          "projectPersistence": false,
-          "cloudProjects": false
-        }
-      },
+
       "order": 1,
       "titleKey": "modules.python.python-1.title",
       "descriptionKey": "modules.python.python-1.description",
