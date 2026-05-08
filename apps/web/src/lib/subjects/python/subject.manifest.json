@@ -13,8 +13,8 @@
     "descriptionKey": "subjects.python.description",
     "meta": {
       "curriculum": {
-        "plannedModuleCount": 8,
-        "isTerminalRelease": false,
+        "plannedModuleCount": 3,
+        "isTerminalRelease": true,
         "moreComingMessageKey": "subjects.sql.moreComingSoon"
       },
 

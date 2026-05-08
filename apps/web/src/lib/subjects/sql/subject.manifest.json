@@ -11,8 +11,8 @@
     "descriptionKey": "subjects.sql.description",
     "meta": {
       "curriculum": {
-        "plannedModuleCount": 8,
-        "isTerminalRelease": false,
+        "plannedModuleCount": 4,
+        "isTerminalRelease": true,
         "moreComingMessageKey": "subjects.sql.moreComingSoon"
       },
       "versioning": {
