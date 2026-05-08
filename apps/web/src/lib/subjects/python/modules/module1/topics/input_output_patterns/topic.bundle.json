@@ -1,10 +1,13 @@
 {
   "topicId": "input_output_patterns",
+
   "minutes": 10,
+
   "topic": {
     "labelKey": "topics.python.python-1.input_output_patterns.label",
     "summaryKey": "topics.python.python-1.input_output_patterns.summary"
   },
+
   "cards": [
     {
       "id": "sketch0",
@@ -75,68 +78,34 @@
       }
     }
   ],
+
   "sketches": [
     {
       "id": "pattern_overview",
       "archetype": "paragraph",
       "titleKey": "sketches.python.python-1.input_output_patterns.pattern_overview.title",
-      "bodyKey": "sketches.python.python-1.input_output_patterns.pattern_overview.bodyMarkdown",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "entry": true,
-          "content": "from patterns import show_pattern\n\nname = input()\nshow_pattern(name)\n"
-        },
-        {
-          "path": "patterns.py",
-          "content": "def show_pattern(name):\n    # Input / Convert / Compute / Show pattern\n    print(\"1. Input\")\n    print(\"2. Convert\")\n    print(\"3. Compute\")\n    print(\"4. Show\")\n    print(f\"Example name: {name}\")\n"
-        }
-      ]
+      "bodyKey": "sketches.python.python-1.input_output_patterns.pattern_overview.bodyMarkdown"
     },
     {
       "id": "input_returns_text",
       "archetype": "paragraph",
       "titleKey": "sketches.python.python-1.input_output_patterns.input_returns_text.title",
-      "bodyKey": "sketches.python.python-1.input_output_patterns.input_returns_text.bodyMarkdown",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "entry": true,
-          "content": "# input() always gives you text\n\nage_text = input()\n\n# Convert text to a number before doing math\nage = int(age_text)\n\nprint(age + 1)\n"
-        }
-      ]
+      "bodyKey": "sketches.python.python-1.input_output_patterns.input_returns_text.bodyMarkdown"
     },
     {
       "id": "convert_and_compute",
       "archetype": "paragraph",
       "titleKey": "sketches.python.python-1.input_output_patterns.convert_and_compute.title",
-      "bodyKey": "sketches.python.python-1.input_output_patterns.convert_and_compute.bodyMarkdown",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "entry": true,
-          "content": "from tip_utils import calculate_tip, calculate_total\n\nbill = int(input())\npct = int(input())\n\ntip = calculate_tip(bill, pct)\ntotal = calculate_total(bill, tip)\n\nprint(f\"Tip = {tip}\")\nprint(f\"Total = {total}\")\n"
-        },
-        {
-          "path": "tip_utils.py",
-          "content": "def calculate_tip(bill, pct):\n    return bill * pct // 100\n\n\ndef calculate_total(bill, tip):\n    return bill + tip\n"
-        }
-      ]
+      "bodyKey": "sketches.python.python-1.input_output_patterns.convert_and_compute.bodyMarkdown"
     },
     {
       "id": "show_results",
       "archetype": "paragraph",
       "titleKey": "sketches.python.python-1.input_output_patterns.show_results.title",
-      "bodyKey": "sketches.python.python-1.input_output_patterns.show_results.bodyMarkdown",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "entry": true,
-          "content": "# Use print() to show results\n\nname = input()\nage = int(input())\n\nprint(f\"Hi {name}!\")\nprint(f\"Next year you'll be {age + 1}.\")\n"
-        }
-      ]
+      "bodyKey": "sketches.python.python-1.input_output_patterns.show_results.bodyMarkdown"
     }
   ],
+
   "exercises": [
     {
       "id": "m1_io_age_next_year",
@@ -146,28 +115,13 @@
       "messageBase": "quiz.m1_io_age_next_year",
       "language": "python",
       "showExpectedExample": true,
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "entry": true,
-          "content": "from messages import next_year_message\n\nname = input()\nage = int(input())\n\nprint(next_year_message(name, age))\n"
-        },
-        {
-          "path": "messages.py",
-          "content": "def next_year_message(name, age):\n    # TODO: return this exact format:\n    # Hi Maya! Next year you'll be 18.\n    return \"\"\n"
-        }
-      ],
+
       "recipe": {
         "type": "template_io",
         "vars": {
           "name": {
             "source": "pick",
-            "from": [
-              "Maya",
-              "Jordan",
-              "Alex",
-              "Sam"
-            ]
+            "from": ["Maya", "Jordan", "Alex", "Sam"]
           },
           "age": {
             "source": "int",
@@ -190,8 +144,7 @@
           }
         ],
         "solutionTemplate": "name = input()\nage = int(input())\nprint(f\"Hi {name}! Next year you'll be {age + 1}.\")\n"
-      },
-      "starterCode": "# TODO\n"
+      }
     },
     {
       "id": "m1_io_tip_total",
@@ -201,17 +154,7 @@
       "messageBase": "quiz.m1_io_tip_total",
       "language": "python",
       "showExpectedExample": true,
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "entry": true,
-          "content": "from tip_utils import calculate_tip, calculate_total\n\nbill = int(input())\npct = int(input())\n\ntip = calculate_tip(bill, pct)\ntotal = calculate_total(bill, tip)\n\nprint(f\"Tip = {tip}\")\nprint(f\"Total = {total}\")\n"
-        },
-        {
-          "path": "tip_utils.py",
-          "content": "def calculate_tip(bill, pct):\n    # TODO: calculate tip using integer math\n    return 0\n\n\ndef calculate_total(bill, tip):\n    # TODO: calculate total\n    return 0\n"
-        }
-      ],
+
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -227,8 +170,7 @@
           }
         ],
         "solutionCode": "bill = int(input())\npct = int(input())\ntip = bill * pct // 100\ntotal = bill + tip\nprint(f\"Tip = {tip}\")\nprint(f\"Total = {total}\")\n"
-      },
-      "starterCode": "bill = int(input())\npct = int(input())\n# TODO\n"
+      }
     },
     {
       "id": "m1_io_c_to_f",
@@ -237,17 +179,6 @@
       "weight": 1,
       "messageBase": "quiz.m1_io_c_to_f",
       "language": "python",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "entry": true,
-          "content": "from temperature import celsius_to_fahrenheit\n\nc = int(input())\nf = celsius_to_fahrenheit(c)\nprint(f)\n"
-        },
-        {
-          "path": "temperature.py",
-          "content": "def celsius_to_fahrenheit(c):\n    # TODO: convert Celsius to Fahrenheit\n    # Formula: c * 9 / 5 + 32\n    return 0\n"
-        }
-      ],
       "recipe": {
         "type": "template_io",
         "vars": {
@@ -271,21 +202,16 @@
           }
         ],
         "solutionTemplate": "c = int(input())\nf = int(c * 9 / 5 + 32)\nprint(f)\n"
-      },
-      "starterCode": "c = int(input())\n# TODO\n"
+      }
     },
+
     {
       "id": "m1_io_input_returns_str",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_io_input_returns_str",
-      "optionIds": [
-        "a",
-        "b",
-        "c",
-        "d"
-      ],
+      "optionIds": ["a", "b", "c", "d"],
       "expected": {
         "kind": "single_choice",
         "optionId": "c"
@@ -297,12 +223,7 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_io_tip_integer_math",
-      "optionIds": [
-        "a",
-        "b",
-        "c",
-        "d"
-      ],
+      "optionIds": ["a", "b", "c", "d"],
       "expected": {
         "kind": "single_choice",
         "optionId": "b"
@@ -314,37 +235,23 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_io_c_to_f_formula",
-      "optionIds": [
-        "a",
-        "b",
-        "c",
-        "d"
-      ],
+      "optionIds": ["a", "b", "c", "d"],
       "expected": {
         "kind": "single_choice",
         "optionId": "a"
       }
     },
+
     {
       "id": "m1_io_age_next_year_parts",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_io_age_next_year_parts",
-      "optionIds": [
-        "a",
-        "b",
-        "c",
-        "d",
-        "e"
-      ],
+      "optionIds": ["a", "b", "c", "d", "e"],
       "expected": {
         "kind": "multi_choice",
-        "optionIds": [
-          "a",
-          "b",
-          "c"
-        ]
+        "optionIds": ["a", "b", "c"]
       }
     },
     {
@@ -353,18 +260,10 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_io_tip_output_lines",
-      "optionIds": [
-        "a",
-        "b",
-        "c",
-        "d"
-      ],
+      "optionIds": ["a", "b", "c", "d"],
       "expected": {
         "kind": "multi_choice",
-        "optionIds": [
-          "a",
-          "b"
-        ]
+        "optionIds": ["a", "b"]
       }
     },
     {
@@ -373,22 +272,13 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_io_convert_then_compute_truths",
-      "optionIds": [
-        "a",
-        "b",
-        "c",
-        "d",
-        "e"
-      ],
+      "optionIds": ["a", "b", "c", "d", "e"],
       "expected": {
         "kind": "multi_choice",
-        "optionIds": [
-          "a",
-          "b",
-          "d"
-        ]
+        "optionIds": ["a", "b", "d"]
       }
     },
+
     {
       "id": "m1_io_fill_pattern_name",
       "kind": "fill_blank_choice",
@@ -449,26 +339,17 @@
         "value": "variables"
       }
     },
+
     {
       "id": "m1_io_reorder_main_pattern",
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_io_reorder_main_pattern",
-      "tokenIds": [
-        "t1",
-        "t2",
-        "t3",
-        "t4"
-      ],
+      "tokenIds": ["t1", "t2", "t3", "t4"],
       "expected": {
         "kind": "drag_reorder",
-        "tokenIds": [
-          "t1",
-          "t2",
-          "t3",
-          "t4"
-        ]
+        "tokenIds": ["t1", "t2", "t3", "t4"]
       }
     },
     {
@@ -477,20 +358,10 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_io_reorder_age_program",
-      "tokenIds": [
-        "t1",
-        "t2",
-        "t3",
-        "t4"
-      ],
+      "tokenIds": ["t1", "t2", "t3", "t4"],
       "expected": {
         "kind": "drag_reorder",
-        "tokenIds": [
-          "t1",
-          "t2",
-          "t3",
-          "t4"
-        ]
+        "tokenIds": ["t1", "t2", "t3", "t4"]
       }
     },
     {
@@ -499,20 +370,10 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_io_reorder_tip_program",
-      "tokenIds": [
-        "t1",
-        "t2",
-        "t3",
-        "t4"
-      ],
+      "tokenIds": ["t1", "t2", "t3", "t4"],
       "expected": {
         "kind": "drag_reorder",
-        "tokenIds": [
-          "t1",
-          "t2",
-          "t3",
-          "t4"
-        ]
+        "tokenIds": ["t1", "t2", "t3", "t4"]
       }
     },
     {
@@ -521,20 +382,10 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_io_reorder_temp_program",
-      "tokenIds": [
-        "t1",
-        "t2",
-        "t3",
-        "t4"
-      ],
+      "tokenIds": ["t1", "t2", "t3", "t4"],
       "expected": {
         "kind": "drag_reorder",
-        "tokenIds": [
-          "t1",
-          "t2",
-          "t3",
-          "t4"
-        ]
+        "tokenIds": ["t1", "t2", "t3", "t4"]
       }
     },
     {
@@ -543,18 +394,10 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_io_reorder_fstring_idea",
-      "tokenIds": [
-        "t1",
-        "t2",
-        "t3"
-      ],
+      "tokenIds": ["t1", "t2", "t3"],
       "expected": {
         "kind": "drag_reorder",
-        "tokenIds": [
-          "t1",
-          "t2",
-          "t3"
-        ]
+        "tokenIds": ["t1", "t2", "t3"]
       }
     }
   ]

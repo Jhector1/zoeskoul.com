@@ -7,7 +7,24 @@ import {
 } from "./types";
 
 export const ProgrammingLanguageSchema = z.enum(PROGRAMMING_LANGUAGES);
+type JsonValue =
+    | string
+    | number
+    | boolean
+    | null
+    | JsonValue[]
+    | { [key: string]: JsonValue };
 
+const JsonValueSchema: z.ZodType<JsonValue> = z.lazy(() =>
+    z.union([
+        z.string(),
+        z.number(),
+        z.boolean(),
+        z.null(),
+        z.array(JsonValueSchema),
+        z.record(JsonValueSchema),
+    ]),
+);
 export const ProgrammingCodeTestSchema = z.object({
     stdin: z.string().optional().default(""),
     stdout: z.string().optional().default(""),
@@ -36,10 +53,10 @@ export const SemanticCheckSchema = z.discriminatedUnion("type", [
     z.object({
         type: z.literal("method_returns"),
         className: z.string().min(1),
-        constructorArgs: z.array(z.unknown()).optional().default([]),
+        constructorArgs: z.array(JsonValueSchema).optional().default([]),
         methodName: z.string().min(1),
-        methodArgs: z.array(z.unknown()).optional().default([]),
-        expected: z.unknown(),
+        methodArgs: z.array(JsonValueSchema).optional().default([]),
+        expected: JsonValueSchema,
         message: z.string().optional(),
     }),
     z.object({
