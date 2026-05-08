@@ -1,5 +1,6 @@
 import type { CourseProfile, CourseProfileAdapter, RecipeHandler } from "./types.js";
 import { buildFixedTestsRecipe } from "./base/recipes/buildFixedTestsRecipe.js";
+import { buildSemanticRecipe } from "./base/recipes/buildSemanticRecipe.js";
 import { buildTemplateIoRecipe } from "./base/recipes/buildTemplateIoRecipe.js";
 import { sqlProfile, sqlProfileAdapter } from "./sql/index.js";
 import { pythonProfile, pythonProfileAdapter } from "./python/index.js";
@@ -19,6 +20,7 @@ export const PROFILE_REGISTRY = Object.fromEntries(profiles.map((p) => [p.id, p]
 export const PROFILE_ADAPTER_REGISTRY = Object.fromEntries(adapters.map((p) => [p.id, p])) as Record<string, CourseProfileAdapter>;
 
 export const BASE_RECIPE_REGISTRY: Record<string, RecipeHandler> = {  fixed_tests: buildFixedTestsRecipe,
+  semantic: buildSemanticRecipe,
   template_io: buildTemplateIoRecipe,
 };
 

@@ -11,7 +11,23 @@ import type { SubjectShapePack } from "@zoeskoul/curriculum-profiles";
 import { buildExerciseMessageKeys } from "../messages/buildMessageKeys.js";
 import { validateTopicMessageBases } from "../messages/validateTopicMessageBases.js";
 import { resolveLogicalSectionSlug } from "./resolveLogicalSectionSlug.js";
+import {SemanticCheck, SemanticCheckSchema} from "@zoeskoul/practice-checks";
 
+
+function requireSemanticChecks(value: unknown, exerciseId: string): SemanticCheck[] {
+    const parsed = SemanticCheckSchema.array().safeParse(value);
+
+    if (!parsed.success || parsed.data.length < 1) {
+        throw new Error(
+            [
+                `Semantic code_input exercise "${exerciseId}" needs at least one valid semantic check.`,
+                `Received: ${JSON.stringify(value, null, 2)}`,
+            ].join("\n"),
+        );
+    }
+
+    return parsed.data;
+}
 type DraftExercise = TopicAuthoringDraft["quizDraft"][number];
 
 function optionIdsFromCount(count: number) {
@@ -536,13 +552,12 @@ export function buildTopicBundleFromDraft(args: {
                     weight: 1,
                     messageBase,
                     language: "sql" as const,
-                    fixedSqlDialect:
-                        moduleDialect === "sqlite" ? "sqlite" : "sqlite",
+                    starterCode: normalizeText(exercise.starterCode),
+                    fixedSqlDialect: moduleDialect === "sqlite" ? "sqlite" : "sqlite",
                     recipe: {
                         type: "sql_query" as const,
                         datasetId: effectiveDatasetId,
-                        resultShape:
-                            moduleResultShape === "table" ? "table" : "table",
+                        resultShape: moduleResultShape === "table" ? "table" : "table",
                         solutionCode,
                         ...(checkSql ? { checkSql } : {}),
                     },
@@ -556,8 +571,21 @@ export function buildTopicBundleFromDraft(args: {
                 weight: 1,
                 messageBase,
                 language: "python" as const,
-                showExpectedExample: true,
+                starterCode: normalizeText(exercise.starterCode),
+                showExpectedExample: exercise.recipeType === "semantic" ? false : true,
                 recipe: (() => {
+                    if (exercise.recipeType === "semantic") {
+                        return {
+                            type: "semantic" as const,
+                            language: "python" as const,
+                            solutionCode: normalizeText(exercise.solutionCode),
+                            semanticChecks: requireSemanticChecks(
+                                exercise.semanticChecks,
+                                exercise.id,
+                            ),
+                        };
+                    }
+
                     const tests = Array.isArray(exercise.tests)
                         ? exercise.tests
                             .map((test: ProgrammingCodeInputTestDraft) => {
@@ -572,7 +600,10 @@ export function buildTopicBundleFromDraft(args: {
                                     match,
                                 };
                             })
-                            .filter((test: { stdout: string }) => test.stdout.trim().length > 0)
+                            .filter(
+                                (test: { stdout: string }) =>
+                                    test.stdout.trim().length > 0,
+                            )
                         : [];
 
                     if (tests.length < 1) {
@@ -588,11 +619,10 @@ export function buildTopicBundleFromDraft(args: {
                     return {
                         type: "fixed_tests" as const,
                         tests,
-                        solutionCode: exercise.solutionCode,
+                        solutionCode: normalizeText(exercise.solutionCode),
                     };
                 })(),
-            };
-        }
+            };        }
 
         throw new Error(
             `Unsupported exercise kind: ${(exercise as { kind: string }).kind}`,

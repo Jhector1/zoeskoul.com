@@ -1,3 +1,5 @@
+import type { SemanticCheck } from "@zoeskoul/practice-checks";
+
 export type ExerciseHelpDraft = {
     concept: string;
     hint_1: string;
@@ -63,8 +65,9 @@ export type TopicAuthoringDraft = {
         starterCode: string;
         solutionCode: string;
         tests?: ProgrammingCodeInputTestDraft[];
+        semanticChecks?: SemanticCheck[];
         datasetId?: string;
-        recipeType?: "sql_query" | "template_io" | "fixed_tests";
+        recipeType?: "sql_query" | "template_io" | "fixed_tests" | "semantic";
 
         /**
          * SQL mutation post-check.

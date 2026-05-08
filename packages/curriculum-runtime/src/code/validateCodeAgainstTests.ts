@@ -1,24 +1,12 @@
 import { runLocalCode } from "./localRunner.js";
 import { getCodeRunner } from "./runner.js";
+import { stdoutMatches } from "@zoeskoul/practice-checks";
 
 export type RuntimeCodeTest = {
     stdin?: string;
     stdout: string;
     match?: "exact" | "includes";
 };
-
-function normOut(s: string) {
-    return String(s ?? "")
-        .replace(/\r\n/g, "\n")
-        .replace(/[ \t]+\n/g, "\n")
-        .trimEnd();
-}
-
-function matches(got: string, want: string, mode: "exact" | "includes" = "exact") {
-    const G = normOut(got);
-    const W = normOut(want);
-    return mode === "includes" ? G.includes(W.trim()) : G === W;
-}
 
 export async function validateCodeAgainstTests(args: {
     language: string;
@@ -71,7 +59,13 @@ export async function validateCodeAgainstTests(args: {
             };
         }
 
-        if (!matches(run.stdout ?? "", test.stdout ?? "", test.match ?? "exact")) {
+        if (
+            !stdoutMatches({
+                got: run.stdout ?? "",
+                want: test.stdout ?? "",
+                mode: test.match ?? "exact",
+            })
+        ) {
             return {
                 ok: false,
                 reason: "output_mismatch",

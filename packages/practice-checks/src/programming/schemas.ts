@@ -1,0 +1,90 @@
+import { z } from "zod";
+import {
+    PROGRAMMING_LANGUAGES,
+    makeProgrammingExpected,
+    type ProgrammingExpected,
+    type ProgrammingExpectedInput,
+} from "./types";
+
+export const ProgrammingLanguageSchema = z.enum(PROGRAMMING_LANGUAGES);
+
+export const ProgrammingCodeTestSchema = z.object({
+    stdin: z.string().optional().default(""),
+    stdout: z.string().optional().default(""),
+    match: z.enum(["exact", "includes"]).optional().default("exact"),
+});
+
+export const SemanticCheckSchema = z.discriminatedUnion("type", [
+    z.object({
+        type: z.literal("defines_class"),
+        className: z.string().min(1),
+        message: z.string().optional(),
+    }),
+    z.object({
+        type: z.literal("constructible"),
+        className: z.string().min(1),
+        constructorArgs: z.array(z.unknown()).optional().default([]),
+        message: z.string().optional(),
+    }),
+    z.object({
+        type: z.literal("instance_attributes"),
+        className: z.string().min(1),
+        constructorArgs: z.array(z.unknown()).optional().default([]),
+        attributes: z.array(z.string().min(1)).min(1),
+        message: z.string().optional(),
+    }),
+    z.object({
+        type: z.literal("method_returns"),
+        className: z.string().min(1),
+        constructorArgs: z.array(z.unknown()).optional().default([]),
+        methodName: z.string().min(1),
+        methodArgs: z.array(z.unknown()).optional().default([]),
+        expected: z.unknown(),
+        message: z.string().optional(),
+    }),
+    z.object({
+        type: z.literal("created_instances"),
+        className: z.string().min(1),
+        min: z.number().int().min(1).default(1),
+        message: z.string().optional(),
+    }),
+    z.object({
+        type: z.literal("printed_line_count"),
+        min: z.number().int().min(1).default(1),
+        message: z.string().optional(),
+    }),
+]);
+
+export const ProgrammingExpectedSchema = z
+    .object({
+        kind: z.literal("code_input"),
+        language: ProgrammingLanguageSchema.optional(),
+        checkMode: z.enum(["stdout", "semantic"]).optional(),
+        tests: z.array(ProgrammingCodeTestSchema).optional(),
+        stdin: z.string().optional(),
+        stdout: z.string().optional(),
+        match: z.enum(["exact", "includes"]).optional(),
+        semanticChecks: z.array(SemanticCheckSchema).optional(),
+        solutionCode: z.string().optional(),
+    })
+    .transform((value): ProgrammingExpected => makeProgrammingExpected(value as ProgrammingExpectedInput))
+    .superRefine((value: ProgrammingExpected, ctx) => {
+        if (value.checkMode === "semantic") {
+            if (!Array.isArray(value.semanticChecks) || value.semanticChecks.length < 1) {
+                ctx.addIssue({
+                    code: "custom",
+                    path: ["semanticChecks"],
+                    message: "semantic code_input expected must include semanticChecks[].",
+                });
+            }
+            return;
+        }
+
+        if (!Array.isArray(value.tests) || value.tests.length < 1) {
+            ctx.addIssue({
+                code: "custom",
+                path: ["tests"],
+                message: "programming code_input expected must include tests[]",
+            });
+        }
+    });

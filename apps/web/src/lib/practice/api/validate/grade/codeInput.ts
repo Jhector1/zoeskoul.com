@@ -3,12 +3,9 @@ import { CodeExpectedSchema, type SubmitAnswer } from "../schemas";
 import type { LoadedValidateInstance } from "@/lib/practice/api/validate/repositories/instance.repo";
 import { gradeProgrammingCodeInput } from "./codeInput.programming";
 import { gradeSqlCodeInput } from "./codeInput.sql";
+import {GradeResult} from "@/lib/practice/api/validate/grade/index";
 
-type GradeResult = {
-  ok: boolean;
-  explanation: string;
-  feedback?: any;
-};
+
 
 export async function gradeCodeInput(args: {
   instance: LoadedValidateInstance;

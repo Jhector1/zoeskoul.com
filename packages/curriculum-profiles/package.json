@@ -22,7 +22,8 @@
   "dependencies": {
     "@zoeskoul/curriculum-contracts": "workspace:*",
     "@zoeskoul/curriculum-core": "workspace:*",
-    "@zoeskoul/curriculum-runtime": "workspace:*"
+    "@zoeskoul/curriculum-runtime": "workspace:*",
+    "@zoeskoul/practice-checks": "workspace:*"
 
   }
 }

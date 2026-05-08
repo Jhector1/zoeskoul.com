@@ -306,11 +306,40 @@ function getSavedWorkspace(value: any) {
     return null;
 }
 
+function workspaceHasNonBlankCode(workspace: any) {
+    if (!workspace || workspace.version !== 2 || !Array.isArray(workspace.nodes)) {
+        return false;
+    }
+
+    const code = deriveEntryCode(workspace);
+    return typeof code === "string" && code.trim().length > 0;
+}
+
 function hasSavedExerciseContent(value: any) {
+    const workspace = getSavedWorkspace(value);
+    const userSaved = isUserSavedState(value);
+
+    /**
+     * Important:
+     * Blank auto/sync/runtime patches should not count as saved learner work.
+     * Otherwise they overwrite starterCode and the editor renders blank.
+     *
+     * Real user edits still count, even if the learner intentionally cleared
+     * the editor.
+     */
+    if (userSaved) {
+        return Boolean(
+            workspace ||
+            typeof value?.code === "string" ||
+            typeof value?.source === "string" ||
+            value?.sketch,
+        );
+    }
+
     return Boolean(
-        getSavedWorkspace(value) ||
-        typeof value?.code === "string" ||
-        typeof value?.source === "string" ||
+        workspaceHasNonBlankCode(workspace) ||
+        (typeof value?.code === "string" && value.code.trim().length > 0) ||
+        (typeof value?.source === "string" && value.source.trim().length > 0) ||
         value?.sketch,
     );
 }

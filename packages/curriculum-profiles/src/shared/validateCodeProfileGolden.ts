@@ -3,10 +3,12 @@ import type {
     TopicBundleManifest,
     WorkspaceLanguage,
 } from "@zoeskoul/curriculum-contracts";
-import { validateCodeAgainstTests } from "@zoeskoul/curriculum-runtime";
 import {
-    buildFixedTestsExpected,
-    buildTemplateIoExpected,
+    validateCodeAgainstTests,
+    validateSemanticCode,
+} from "@zoeskoul/curriculum-runtime";
+import {
+    buildCodeInputExpected,
 } from "../base/codeInputExpected.js";
 import type { GoldenValidationIssue } from "./profileServices.js";
 
@@ -80,46 +82,42 @@ export async function validateCodeProfileGolden(args: {
             });
         }
 
-        if (
-            exercise.language === args.expectedLanguage &&
-            (exercise.recipe.type === "fixed_tests" ||
-                exercise.recipe.type === "template_io")
-        ) {
-            const expected =
-                exercise.recipe.type === "fixed_tests"
-                    ? buildFixedTestsExpected(exercise.recipe)
-                    : buildTemplateIoExpected({ recipe: exercise.recipe });
+        if (exercise.language !== args.expectedLanguage) {
+            continue;
+        }
 
-            const solutionCode = String(expected.solutionCode ?? "").trim();
-            if (!solutionCode) {
-                issues.push({
-                    code: "CODE_PROFILE_SOLUTION_CODE_MISSING",
-                    category: "tests",
-                    severity: "error",
-                    exerciseId: exercise.id,
-                    message: `Exercise "${exercise.id}" has no solutionCode to validate against its tests.`,
-                });
-                continue;
-            }
+        const expected = buildCodeInputExpected(exercise);
+        const solutionCode = String(expected.solutionCode ?? "").trim();
 
-            const run = await validateCodeAgainstTests({
+        if (!solutionCode) {
+            issues.push({
+                code: "CODE_PROFILE_SOLUTION_CODE_MISSING",
+                category: "tests",
+                severity: "error",
+                exerciseId: exercise.id,
+                message: `Exercise "${exercise.id}" has no solutionCode to validate against its tests.`,
+            });
+            continue;
+        }
+
+        if (expected.strategy !== "programming") {
+            continue;
+        }
+
+        if (expected.checkMode === "semantic") {
+            const run = await validateSemanticCode({
                 language: exercise.language,
                 solutionCode,
-                tests: expected.tests.map((test) => ({
-                    stdin: "stdin" in test ? test.stdin : undefined,
-                    stdout: test.stdout,
-                    match: "match" in test ? test.match : "exact",
-                })),
-                limits: { timeoutMs: 4000 },
+                expected,
             });
 
             if (!run.ok) {
                 const code =
                     run.reason === "runner_unavailable"
                         ? "CODE_PROFILE_SOLUTION_RUNNER_UNAVAILABLE"
-                        : run.reason === "execution_failed"
-                            ? "CODE_PROFILE_SOLUTION_EXECUTION_FAILED"
-                            : "CODE_PROFILE_SOLUTION_OUTPUT_MISMATCH";
+                        : run.reason === "unsupported_language"
+                            ? "CODE_PROFILE_SEMANTIC_LANGUAGE_UNSUPPORTED"
+                            : "CODE_PROFILE_SOLUTION_SEMANTIC_MISMATCH";
 
                 issues.push({
                     code,
@@ -127,11 +125,44 @@ export async function validateCodeProfileGolden(args: {
                     severity: "error",
                     exerciseId: exercise.id,
                     message:
-                        run.reason === "output_mismatch"
-                            ? `Exercise "${exercise.id}" solutionCode does not satisfy its published tests.`
-                            : `Exercise "${exercise.id}" solutionCode could not be validated against its published tests: ${run.message}`,
+                        run.reason === "semantic_mismatch"
+                            ? `Exercise "${exercise.id}" solutionCode does not satisfy its semantic checks.`
+                            : `Exercise "${exercise.id}" semantic validation failed: ${run.message}`,
                 });
             }
+
+            continue;
+        }
+
+        const run = await validateCodeAgainstTests({
+            language: exercise.language,
+            solutionCode,
+            tests: expected.tests.map((test) => ({
+                stdin: test.stdin,
+                stdout: test.stdout ?? "",
+                match: test.match ?? "exact",
+            })),
+            limits: { timeoutMs: 4000 },
+        });
+
+        if (!run.ok) {
+            const code =
+                run.reason === "runner_unavailable"
+                    ? "CODE_PROFILE_SOLUTION_RUNNER_UNAVAILABLE"
+                    : run.reason === "execution_failed"
+                        ? "CODE_PROFILE_SOLUTION_EXECUTION_FAILED"
+                        : "CODE_PROFILE_SOLUTION_OUTPUT_MISMATCH";
+
+            issues.push({
+                code,
+                category: "tests",
+                severity: "error",
+                exerciseId: exercise.id,
+                message:
+                    run.reason === "output_mismatch"
+                        ? `Exercise "${exercise.id}" solutionCode does not satisfy its published tests.`
+                        : `Exercise "${exercise.id}" solutionCode could not be validated against its published tests: ${run.message}`,
+            });
         }
     }
 

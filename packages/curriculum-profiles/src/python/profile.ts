@@ -49,7 +49,7 @@ export const pythonProfile: CourseProfile = {
         "fill_blank_choice",
         "code_input",
     ],
-    allowedRecipeTypes: ["fixed_tests", "template_io"],
+    allowedRecipeTypes: ["fixed_tests", "template_io", "semantic"],
     buildModuleRuntimeDefaults() {
         return { kind: "code", language: "python" };
     },
@@ -60,4 +60,3 @@ export const pythonProfile: CourseProfile = {
         return [];
     },
 };
-

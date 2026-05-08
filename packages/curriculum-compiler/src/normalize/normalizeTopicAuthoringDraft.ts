@@ -1,4 +1,5 @@
 import type { TopicAuthoringDraft } from "@zoeskoul/curriculum-contracts";
+import {SemanticCheck, SemanticCheckSchema} from "@zoeskoul/practice-checks";
 
 type DraftQuizItem = TopicAuthoringDraft["quizDraft"][number];
 type DraftHelp = DraftQuizItem["help"];
@@ -551,6 +552,14 @@ function normalizeCodeInput(item: Record<string, unknown>): DraftQuizItem {
             })
             .filter((x) => x.stdout.trim().length > 0)
         : undefined;
+    const semanticChecksResult = SemanticCheckSchema.array().safeParse(
+        (item as { semanticChecks?: unknown }).semanticChecks,
+    );
+
+    const semanticChecks =
+        semanticChecksResult.success && semanticChecksResult.data.length
+            ? semanticChecksResult.data
+            : undefined;
 
     return {
         id: String(item.id ?? "").trim(),
@@ -568,9 +577,11 @@ function normalizeCodeInput(item: Record<string, unknown>): DraftQuizItem {
         recipeType:
             recipeType === "sql_query" ||
             recipeType === "template_io" ||
-            recipeType === "fixed_tests"
+            recipeType === "fixed_tests" ||
+            recipeType === "semantic"
                 ? recipeType
                 : undefined,
+        ...(semanticChecks?.length ? { semanticChecks } : {}),
         checkSql:
             typeof item.checkSql === "string"
                 ? item.checkSql.trim() || undefined

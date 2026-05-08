@@ -167,10 +167,12 @@ export async function repairIncompleteExercises(args: {
                 | "sql_query"
                 | "template_io"
                 | "fixed_tests"
+                | "semantic"
                 | undefined =
                 rawRecipeType === "sql_query" ||
                 rawRecipeType === "template_io" ||
-                rawRecipeType === "fixed_tests"
+                rawRecipeType === "fixed_tests" ||
+                rawRecipeType === "semantic"
                     ? rawRecipeType
                     : profileIsSql
                         ? "sql_query"

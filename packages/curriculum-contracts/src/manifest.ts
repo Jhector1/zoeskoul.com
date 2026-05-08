@@ -1,4 +1,5 @@
 import type { ManifestIdeServiceConfig } from "./ide-services.js";
+import type { SemanticCheck } from "@zoeskoul/practice-checks";
 
 export type ExerciseKind =
   | "single_choice"
@@ -189,6 +190,12 @@ export type ManifestRecipe =
         match?: "exact" | "includes";
       }>;
       solutionTemplate?: string;
+    }
+  | {
+      type: "semantic";
+      language: Exclude<WorkspaceLanguage, "sql" | "bash" | "web">;
+      solutionCode: string;
+      semanticChecks: SemanticCheck[];
     };
 
 export type ManifestCodeInputExpectedExample =

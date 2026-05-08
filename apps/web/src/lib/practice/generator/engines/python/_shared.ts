@@ -12,17 +12,6 @@ import {
     type SubjectModuleGenerator,
     type TopicBundle,
 } from "@/lib/practice/generator/engines/utils";
-import {
-    makeCodeExpected,
-    terminalFence,
-    type CodeExpected,
-    type CodeTest,
-    type ProgrammingCodeTest,
-    type SqlCell,
-    type SqlCodeTest,
-    type SqlExpectedTable,
-    type SqlRuntimeSpec,
-} from "@/lib/practice/expected/codeExpected";
 
 /* -------------------------------- random helpers -------------------------------- */
 

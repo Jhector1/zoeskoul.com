@@ -1,15 +1,5 @@
 import type { SqlCell, SqlRunResult, SqlTable } from "./types.js";
-
-function normalizeSqlCell(v: unknown): SqlCell {
-    if (v == null) return null;
-    if (typeof v === "string") return v.trim();
-    if (typeof v === "number" || typeof v === "boolean") return v;
-    return String(v).trim();
-}
-
-function normalizeRows(rows: unknown[][]): SqlCell[][] {
-    return rows.map((row) => row.map(normalizeSqlCell));
-}
+import { normalizeSqlRows } from "@zoeskoul/practice-checks";
 
 export function extractFirstSqlTable(run: SqlRunResult | null | undefined): SqlTable | null {
     const topLevelColumns = Array.isArray(run?.columns)
@@ -21,7 +11,7 @@ export function extractFirstSqlTable(run: SqlRunResult | null | undefined): SqlT
     if (topLevelColumns && topLevelRows) {
         return {
             columns: topLevelColumns,
-            rows: normalizeRows(topLevelRows),
+            rows: normalizeSqlRows(topLevelRows),
         };
     }
 
@@ -38,7 +28,7 @@ export function extractFirstSqlTable(run: SqlRunResult | null | undefined): SqlT
         ? raw.columns.map((c) => (typeof c === "string" ? c : String(c?.name ?? "")))
         : [];
 
-    const rows = Array.isArray(raw.rows) ? normalizeRows(raw.rows) : [];
+    const rows = Array.isArray(raw.rows) ? normalizeSqlRows(raw.rows) : [];
 
     if (!columns.length && !rows.length) return null;
 

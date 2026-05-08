@@ -20,7 +20,7 @@ export async function validatePythonGolden(args: {
     const codeGolden = await validateCodeProfileGolden({
         profileId: "python",
         expectedLanguage: "python",
-        allowedRecipeTypes: ["fixed_tests", "template_io"],
+        allowedRecipeTypes: ["fixed_tests", "template_io", "semantic"],
         topicBundle: args.topicBundle,
     });
 

@@ -1,67 +1,32 @@
 import type {
     ManifestComputedSpec,
+    ManifestCodeInput,
     ManifestRecipe,
     ManifestSqlRuntimeDefaults,
     ManifestVarSpec,
-    SqlDialect,
 } from "@zoeskoul/curriculum-contracts";
+import {
+    makeProgrammingExpected,
+    makeSqlExpected,
+    type ProgrammingCodeTest,
+    type ProgrammingExpected,
+    type SemanticCheck,
+    type SqlDialect,
+    type SqlExpected,
+    type SqlExpectedTest,
+} from "@zoeskoul/practice-checks";
 
-export type TerminalExpectedTest = {
-    stdin?: string;
-    stdout: string;
-    match: "exact" | "includes";
-};
-
-export type SqlExpectedTest = {
-    kind: "sql";
-    sqlDialect: SqlDialect;
-    runtime: Required<Pick<ManifestSqlRuntimeDefaults, "kind">> & {
-        datasetId: string;
-        resultShape: "table";
-    };
-    compareTo: "solution";
-    match: "table_exact";
-    ignoreRowOrder: boolean;
-    checkSql?: string;
-};
-
-export type CodeInputExpectedPayload = {
-    kind: "code_input";
-    tests: Array<TerminalExpectedTest | SqlExpectedTest>;
-    solutionCode?: string;
-    language?: "sql";
-    fixedSqlDialect?: SqlDialect;
-    runtime?: {
-        kind: "sql";
-        datasetId: string;
-        resultShape: "table";
-    };
-};
-
-export type TerminalCodeInputExpectedPayload = {
-    kind: "code_input";
-    tests: TerminalExpectedTest[];
-    solutionCode?: string;
-};
-
-export type SqlCodeInputExpectedPayload = {
-    kind: "code_input";
-    language: "sql";
-    fixedSqlDialect: SqlDialect;
-    runtime: {
-        kind: "sql";
-        datasetId: string;
-        resultShape: "table";
-    };
-    tests: SqlExpectedTest[];
-    solutionCode: string;
-};
+export type TerminalExpectedTest = ProgrammingCodeTest;
+export type CodeInputExpectedPayload = ProgrammingExpected | SqlExpected;
+export type TerminalCodeInputExpectedPayload = ProgrammingExpected;
+export type SqlCodeInputExpectedPayload = SqlExpected;
 
 export type TemplateIoVarValue = string | number;
 
 type TemplateIoRecipe = Extract<ManifestRecipe, { type: "template_io" }>;
 type FixedTestsRecipe = Extract<ManifestRecipe, { type: "fixed_tests" }>;
 type SqlQueryRecipe = Extract<ManifestRecipe, { type: "sql_query" }>;
+type SemanticRecipe = Extract<ManifestRecipe, { type: "semantic" }>;
 
 type TemplateIoRng = {
     int(min: number, max: number): number;
@@ -180,15 +145,14 @@ export function buildFixedTestsExpected(
         throw new Error("Programming fixed_tests code_input recipes require at least one test.");
     }
 
-    return {
-        kind: "code_input",
+    return makeProgrammingExpected({
         tests: recipe.tests.map((test) => ({
             stdin: test.stdin,
             stdout: test.stdout,
             match: test.match ?? "exact",
         })),
-        ...(recipe.solutionCode ? { solutionCode: recipe.solutionCode } : {}),
-    };
+        solutionCode: recipe.solutionCode,
+    });
 }
 
 export function buildTemplateIoExpected(args: {
@@ -202,8 +166,7 @@ export function buildTemplateIoExpected(args: {
 
     const vars = resolveTemplateIoVars(args);
 
-    return {
-        kind: "code_input",
+    return makeProgrammingExpected({
         tests: args.recipe.tests.map((test) => ({
             stdin: test.stdinTemplate
                 ? fillTemplate(test.stdinTemplate, vars)
@@ -214,7 +177,26 @@ export function buildTemplateIoExpected(args: {
         ...(args.recipe.solutionTemplate
             ? { solutionCode: fillTemplate(args.recipe.solutionTemplate, vars) }
             : {}),
-    };
+    });
+}
+
+export function buildSemanticExpected(
+    recipe: SemanticRecipe,
+): TerminalCodeInputExpectedPayload {
+    const semanticChecks = Array.isArray(recipe.semanticChecks)
+        ? recipe.semanticChecks
+        : [];
+
+    if (!semanticChecks.length) {
+        throw new Error("Semantic code_input recipes require at least one semantic check.");
+    }
+
+    return makeProgrammingExpected({
+        language: recipe.language,
+        checkMode: "semantic",
+        semanticChecks: semanticChecks as SemanticCheck[],
+        solutionCode: recipe.solutionCode,
+    });
 }
 
 function stripSqlComments(sql: string): string {
@@ -309,8 +291,7 @@ export function buildSqlQueryExpected(args: {
         );
     }
 
-    return {
-        kind: "code_input",
+    return makeSqlExpected({
         language: "sql",
         fixedSqlDialect,
         runtime: {
@@ -331,8 +312,30 @@ export function buildSqlQueryExpected(args: {
                 match: "table_exact",
                 ignoreRowOrder: args.recipe.ignoreRowOrder ?? false,
                 ...(checkSql ? { checkSql } : {}),
-            },
+            } satisfies SqlExpectedTest,
         ],
         solutionCode,
-    };
+    });
+}
+
+export function buildCodeInputExpected(
+    exercise: Pick<ManifestCodeInput, "recipe" | "fixedSqlDialect">,
+): CodeInputExpectedPayload {
+    switch (exercise.recipe.type) {
+        case "fixed_tests":
+            return buildFixedTestsExpected(exercise.recipe);
+        case "template_io":
+            return buildTemplateIoExpected({ recipe: exercise.recipe });
+        case "semantic":
+            return buildSemanticExpected(exercise.recipe);
+        case "sql_query":
+            return buildSqlQueryExpected({
+                recipe: exercise.recipe,
+                fixedSqlDialect: exercise.fixedSqlDialect,
+            });
+        default:
+            throw new Error(
+                `Unsupported code_input recipe type "${String((exercise.recipe as { type?: unknown }).type ?? "")}".`,
+            );
+    }
 }

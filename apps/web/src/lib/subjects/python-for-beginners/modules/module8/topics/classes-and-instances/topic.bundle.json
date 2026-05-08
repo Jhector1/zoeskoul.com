@@ -99,17 +99,48 @@
       "weight": 1,
       "messageBase": "topics.python-for-beginners.python-8.classes-and-instances.quiz.1",
       "language": "python",
-      "showExpectedExample": true,
+      "showExpectedExample": false,
       "recipe": {
-        "type": "fixed_tests",
-        "tests": [
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class Book:\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\nmy_book = Book('1984', 'George Orwell')\nprint(my_book.title)\nprint(my_book.author)",
+        "semanticChecks": [
           {
-            "stdin": "",
-            "stdout": "1984\nGeorge Orwell\n",
-            "match": "exact"
+            "type": "defines_class",
+            "className": "Book"
+          },
+          {
+            "type": "constructible",
+            "className": "Book",
+            "constructorArgs": [
+              "Test Title",
+              "Test Author"
+            ]
+          },
+          {
+            "type": "instance_attributes",
+            "className": "Book",
+            "constructorArgs": [
+              "Test Title",
+              "Test Author"
+            ],
+            "attributes": [
+              "title",
+              "author"
+            ]
+          },
+          {
+            "type": "created_instances",
+            "className": "Book",
+            "min": 1,
+            "message": "Create at least one Book instance."
+          },
+          {
+            "type": "printed_line_count",
+            "min": 2,
+            "message": "Print the title and author."
           }
-        ],
-        "solutionCode": "class Book:\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\nmy_book = Book('1984', 'George Orwell')\nprint(my_book.title)\nprint(my_book.author)"
+        ]
       }
     },
     {
@@ -119,17 +150,58 @@
       "weight": 1,
       "messageBase": "topics.python-for-beginners.python-8.classes-and-instances.quiz.2",
       "language": "python",
-      "showExpectedExample": true,
+      "showExpectedExample": false,
       "recipe": {
-        "type": "fixed_tests",
-        "tests": [
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class Book:\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def description(self):\n        return f'{self.title} by {self.author}'\n\nmy_book = Book('1984', 'George Orwell')\nprint(my_book.description())",
+        "semanticChecks": [
           {
-            "stdin": "",
-            "stdout": "1984 by George Orwell\n",
-            "match": "exact"
+            "type": "defines_class",
+            "className": "Book"
+          },
+          {
+            "type": "constructible",
+            "className": "Book",
+            "constructorArgs": [
+              "Test Title",
+              "Test Author"
+            ]
+          },
+          {
+            "type": "instance_attributes",
+            "className": "Book",
+            "constructorArgs": [
+              "Test Title",
+              "Test Author"
+            ],
+            "attributes": [
+              "title",
+              "author"
+            ]
+          },
+          {
+            "type": "method_returns",
+            "className": "Book",
+            "constructorArgs": [
+              "Test Title",
+              "Test Author"
+            ],
+            "methodName": "description",
+            "expected": "Test Title by Test Author"
+          },
+          {
+            "type": "created_instances",
+            "className": "Book",
+            "min": 1,
+            "message": "Create at least one Book instance."
+          },
+          {
+            "type": "printed_line_count",
+            "min": 1,
+            "message": "Print the book description."
           }
-        ],
-        "solutionCode": "class Book:\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def description(self):\n        return f'{self.title} by {self.author}'\n\nmy_book = Book('1984', 'George Orwell')\nprint(my_book.description())"
+        ]
       }
     },
     {
@@ -139,17 +211,58 @@
       "weight": 1,
       "messageBase": "topics.python-for-beginners.python-8.classes-and-instances.quiz.3",
       "language": "python",
-      "showExpectedExample": true,
+      "showExpectedExample": false,
       "recipe": {
-        "type": "fixed_tests",
-        "tests": [
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class Book:\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def description(self):\n        return f'{self.title} by {self.author}'\n\nbook1 = Book('1984', 'George Orwell')\nbook2 = Book('Brave New World', 'Aldous Huxley')\nprint(book1.description())\nprint(book2.description())",
+        "semanticChecks": [
           {
-            "stdin": "",
-            "stdout": "1984 by George Orwell\nBrave New World by Aldous Huxley\n",
-            "match": "exact"
+            "type": "defines_class",
+            "className": "Book"
+          },
+          {
+            "type": "constructible",
+            "className": "Book",
+            "constructorArgs": [
+              "Test Title",
+              "Test Author"
+            ]
+          },
+          {
+            "type": "instance_attributes",
+            "className": "Book",
+            "constructorArgs": [
+              "Test Title",
+              "Test Author"
+            ],
+            "attributes": [
+              "title",
+              "author"
+            ]
+          },
+          {
+            "type": "method_returns",
+            "className": "Book",
+            "constructorArgs": [
+              "Test Title",
+              "Test Author"
+            ],
+            "methodName": "description",
+            "expected": "Test Title by Test Author"
+          },
+          {
+            "type": "created_instances",
+            "className": "Book",
+            "min": 2,
+            "message": "Create at least two Book instances."
+          },
+          {
+            "type": "printed_line_count",
+            "min": 2,
+            "message": "Print the descriptions for both Book instances."
           }
-        ],
-        "solutionCode": "class Book:\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def description(self):\n        return f'{self.title} by {self.author}'\n\nbook1 = Book('1984', 'George Orwell')\nbook2 = Book('Brave New World', 'Aldous Huxley')\nprint(book1.description())\nprint(book2.description())"
+        ]
       }
     },
     {

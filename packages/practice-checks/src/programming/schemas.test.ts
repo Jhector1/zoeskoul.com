@@ -1,0 +1,36 @@
+import { describe, expect, it } from "vitest";
+import { ProgrammingExpectedSchema } from "./schemas";
+
+describe("ProgrammingExpectedSchema", () => {
+    it("parses stdout expected", () => {
+        const parsed = ProgrammingExpectedSchema.parse({
+            kind: "code_input",
+            tests: [{ stdin: "3\n", stdout: "4\n", match: "exact" }],
+        });
+
+        expect(parsed.checkMode).toBe("stdout");
+        expect(parsed.tests).toHaveLength(1);
+    });
+
+    it("parses semantic expected", () => {
+        const parsed = ProgrammingExpectedSchema.parse({
+            kind: "code_input",
+            checkMode: "semantic",
+            language: "python",
+            semanticChecks: [{ type: "defines_class", className: "Book" }],
+        });
+
+        expect(parsed.checkMode).toBe("semantic");
+        expect(parsed.semanticChecks).toHaveLength(1);
+    });
+
+    it("fails when semantic expected has no semanticChecks", () => {
+        const parsed = ProgrammingExpectedSchema.safeParse({
+            kind: "code_input",
+            checkMode: "semantic",
+            language: "python",
+        });
+
+        expect(parsed.success).toBe(false);
+    });
+});

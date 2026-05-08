@@ -1,4 +1,17 @@
 import { z } from "zod";
+import {
+    CodeExpectedSchema as SharedCodeExpectedSchema,
+    ProgrammingExpectedSchema as SharedProgrammingExpectedSchema,
+    SqlExpectedSchema as SharedSqlExpectedSchema,
+    SqlRuntimeSchema,
+    SqlExpectedTestSchema as SqlTestSchema,
+    type ProgrammingExpected,
+    type SqlExpected,
+    type SqlRuntimeSpec as SqlRuntime,
+    type SqlExpectedTest as SqlTest,
+    type ProgrammingExpectedInput,
+    type SqlExpectedInput,
+} from "@zoeskoul/practice-checks";
 
 /* -------------------------------------------------------------------------- */
 /*                                   basics                                   */
@@ -25,200 +38,13 @@ export const SqlDialectSchema = z.enum([
     "mssql",
 ]);
 
-/* -------------------------------------------------------------------------- */
-/*                         code_input expected: programming                    */
-/* -------------------------------------------------------------------------- */
+export const ProgrammingExpectedSchema = SharedProgrammingExpectedSchema;
+export const SqlExpectedSchema = SharedSqlExpectedSchema;
+export const CodeExpectedSchema = SharedCodeExpectedSchema;
 
-const ProgrammingCodeTestSchema = z.object({
-    stdin: z.string().optional().default(""),
-    stdout: z.string().optional().default(""),
-    match: z.enum(["exact", "includes"]).optional().default("exact"),
-});
-
-/**
- * Programming code_input expected schema
- *
- * Accepts:
- * - canonical: { tests: [...] }
- * - legacy: { stdin, stdout, match }
- *
- * Transforms both into:
- * {
- *   kind: "code_input",
- *   strategy: "programming",
- *   language,
- *   tests,
- *   solutionCode
- * }
- */
-const ProgrammingExpectedSchema = z
-    .object({
-        kind: z.literal("code_input"),
-        language: ProgrammingLanguageSchema.optional(),
-
-        tests: z.array(ProgrammingCodeTestSchema).optional(),
-
-        // legacy support:
-        stdin: z.string().optional(),
-        stdout: z.string().optional(),
-        match: z.enum(["exact", "includes"]).optional(),
-
-        solutionCode: z.string().optional(),
-    })
-    .transform((v) => {
-        const tests =
-            Array.isArray(v.tests) && v.tests.length
-                ? v.tests
-                : [
-                    {
-                        stdin: typeof v.stdin === "string" ? v.stdin : "",
-                        stdout: typeof v.stdout === "string" ? v.stdout : "",
-                        match: v.match ?? "exact",
-                    },
-                ];
-
-        return {
-            kind: "code_input" as const,
-            strategy: "programming" as const,
-            language: v.language,
-            tests,
-            solutionCode: v.solutionCode,
-        };
-    })
-    .superRefine((v, ctx) => {
-        if (!Array.isArray(v.tests) || v.tests.length < 1) {
-            ctx.addIssue({
-                code: "custom",
-                path: ["tests"],
-                message: "programming code_input expected must include tests[]",
-            });
-            return;
-        }
-
-        for (let i = 0; i < v.tests.length; i++) {
-            const t = v.tests[i];
-            if (typeof t.stdout !== "string") {
-                ctx.addIssue({
-                    code: "custom",
-                    path: ["tests", i, "stdout"],
-                    message: "Missing stdout for programming test case.",
-                });
-            }
-        }
-    });
-
-/* -------------------------------------------------------------------------- */
-/*                             code_input expected: sql                       */
-/* -------------------------------------------------------------------------- */
-
-const SqlCellSchema = z.union([
-    z.string(),
-    z.number(),
-    z.boolean(),
-    z.null(),
-]);
-
-const SqlExpectedTableSchema = z.object({
-    columns: z.array(z.string()),
-    rows: z.array(z.array(SqlCellSchema)),
-});
-
-const SqlRuntimeSchema = z.object({
-    kind: z.literal("sql"),
-    datasetId: z.string().min(1).optional(),
-    resultShape: z.literal("table").optional(),
-});
-
-const SqlTestSchema = z
-    .object({
-        kind: z.literal("sql").default("sql"),
-        sqlDialect: SqlDialectSchema.optional(),
-        schemaSql: z.string().optional(),
-        seedSql: z.string().optional(),
-        runtime: SqlRuntimeSchema.optional(),
-        compareTo: z.enum(["solution", "expected_table"]).optional().default("solution"),
-        expectedTable: SqlExpectedTableSchema.optional(),
-        match: z.literal("table_exact").optional().default("table_exact"),
-        ignoreRowOrder: z.boolean().optional().default(false),
-
-        // NEW: used for INSERT / UPDATE / DELETE grading
-        checkSql: z.string().optional(),
-    })
-    .superRefine((v, ctx) => {
-        if ((v.compareTo ?? "solution") === "expected_table" && !v.expectedTable) {
-            ctx.addIssue({
-                code: "custom",
-                path: ["expectedTable"],
-                message: "expectedTable is required when compareTo is 'expected_table'.",
-            });
-        }
-    });
-
-/**
- * SQL code_input expected schema
- *
- * Canonical shape:
- * {
- *   kind: "code_input",
- *   language: "sql",
- *   fixedSqlDialect?: "sqlite" | "postgres" | "mysql" | "mssql",
- *   runtime?: { kind: "sql", datasetId?: string, resultShape?: "table" },
- *   tests: [...],
- *   solutionCode?: string
- * }
- *
- * Transforms into:
- * {
- *   ...,
- *   strategy: "sql"
- * }
- */
-const SqlExpectedSchema = z
-    .object({
-        kind: z.literal("code_input"),
-        language: z.literal("sql"),
-        fixedSqlDialect: SqlDialectSchema.optional(),
-        schemaSql: z.string().optional(),
-        seedSql: z.string().optional(),
-        runtime: SqlRuntimeSchema.optional(),
-        tests: z.array(SqlTestSchema).min(1),
-        solutionCode: z.string().optional(),
-    })
-    .transform((v) => ({
-        ...v,
-        strategy: "sql" as const,
-    }))
-    .superRefine((v, ctx) => {
-        const needsSolution = v.tests.some(
-            (t) => (t.compareTo ?? "solution") === "solution",
-        );
-
-        if (needsSolution && !String(v.solutionCode ?? "").trim()) {
-            ctx.addIssue({
-                code: "custom",
-                path: ["solutionCode"],
-                message: "solutionCode is required when SQL tests compare to the solution.",
-            });
-        }
-    });
-
-/**
- * Unified code_input expected schema
- *
- * Parsed result has:
- * - strategy: "programming" | "sql"
- */
-export const CodeExpectedSchema = z.union([
-    ProgrammingExpectedSchema,
-    SqlExpectedSchema,
-]);
-
-export type CodeExpected = z.infer<typeof CodeExpectedSchema>;
-export type ProgrammingExpected = Extract<CodeExpected, { strategy: "programming" }>;
-export type SqlExpected = Extract<CodeExpected, { strategy: "sql" }>;
-export type SqlRuntime = z.infer<typeof SqlRuntimeSchema>;
-export type SqlTest = z.infer<typeof SqlTestSchema>;
-export type CodeExpectedInput = z.input<typeof CodeExpectedSchema>;
+export type CodeExpected = ProgrammingExpected | SqlExpected;
+export type { ProgrammingExpected, SqlExpected, SqlRuntime, SqlTest };
+export type CodeExpectedInput = ProgrammingExpectedInput | SqlExpectedInput;
 
 /* -------------------------------------------------------------------------- */
 /*                                   keys                                     */

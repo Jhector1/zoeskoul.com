@@ -41,6 +41,7 @@
     "@zoeskoul/curriculum-profiles": "workspace:*",
     "@zoeskoul/curriculum-runtime": "workspace:*",
     "@zoeskoul/db": "workspace:*",
+    "@zoeskoul/practice-checks": "workspace:*",
     "@zoeskoul/practice-contracts": "workspace:*",
     "@zoeskoul/pty-auth": "workspace:*",
     "better-sqlite3": "^12.8.0",

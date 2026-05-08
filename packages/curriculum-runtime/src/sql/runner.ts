@@ -18,6 +18,10 @@ export function setSqlRunner(fn: RunSqlFn) {
     currentSqlRunner = fn;
 }
 
+export function clearSqlRunner() {
+    currentSqlRunner = null;
+}
+
 export function getSqlRunner(): RunSqlFn | null {
     return currentSqlRunner;
 }

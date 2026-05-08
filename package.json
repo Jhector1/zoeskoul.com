@@ -8,7 +8,7 @@
     "typecheck": "turbo run typecheck",
     "build:web": "turbo run build --filter=@zoeskoul/web",
 
-    "curr:build": "pnpm --filter @zoeskoul/curriculum-contracts build && pnpm --filter @zoeskoul/curriculum-runtime build && pnpm --filter @zoeskoul/curriculum-profiles build && pnpm --filter @zoeskoul/curriculum-compiler build && pnpm --filter @zoeskoul/curriculum-cli build",
+    "curr:build": "pnpm --filter @zoeskoul/practice-checks build && pnpm --filter @zoeskoul/curriculum-contracts build && pnpm --filter @zoeskoul/curriculum-runtime build && pnpm --filter @zoeskoul/curriculum-profiles build && pnpm --filter @zoeskoul/curriculum-compiler build && pnpm --filter @zoeskoul/curriculum-cli build",
 
     "curr:plan": "node packages/curriculum-cli/dist/index.js plan",
     "curr:compile": "node packages/curriculum-cli/dist/index.js compile-subject",

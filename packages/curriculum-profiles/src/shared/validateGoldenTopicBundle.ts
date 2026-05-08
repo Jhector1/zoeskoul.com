@@ -1,37 +1,22 @@
 import type {
-    ManifestCodeInput,
     TopicAuthoringDraft,
     TopicBundleManifest,
     TopicSeed,
 } from "@zoeskoul/curriculum-contracts";
 import {
-    buildFixedTestsExpected,
-    buildSqlQueryExpected,
-    buildTemplateIoExpected,
+    buildCodeInputExpected,
 } from "../base/codeInputExpected.js";
 import type { GoldenValidationReport } from "./profileServices.js";
 import { makeEmptyGoldenValidationReport } from "./noopReports.js";
+import { getSqlRunner, validateSqlAgainstSolution } from "@zoeskoul/curriculum-runtime/sql";
 
 function validateCodeInputRecipe(
-    exercise: ManifestCodeInput,
+    exercise: TopicBundleManifest["exercises"][number],
 ): string | null {
     try {
-        switch (exercise.recipe.type) {
-            case "fixed_tests":
-                buildFixedTestsExpected(exercise.recipe);
-                return null;
-            case "template_io":
-                buildTemplateIoExpected({ recipe: exercise.recipe });
-                return null;
-            case "sql_query":
-                buildSqlQueryExpected({
-                    recipe: exercise.recipe,
-                    fixedSqlDialect: exercise.fixedSqlDialect,
-                });
-                return null;
-            default:
-                return `Unsupported code_input recipe type "${String((exercise.recipe as { type?: unknown }).type ?? "")}".`;
-        }
+        if (exercise.kind !== "code_input") return null;
+        buildCodeInputExpected(exercise);
+        return null;
     } catch (error) {
         return error instanceof Error ? error.message : "Unknown golden validation failure.";
     }
@@ -56,6 +41,56 @@ export async function validateGoldenTopicBundle(args: {
             severity: "error",
             exerciseId: exercise.id,
             message: `Exercise "${exercise.id}" failed shared golden recipe validation: ${recipeError}`,
+        });
+    }
+
+    const runSql = getSqlRunner();
+
+    for (const exercise of args.topicBundle.exercises) {
+        if (exercise.kind !== "code_input") continue;
+        if (exercise.recipe.type !== "sql_query") continue;
+
+        let expected;
+        try {
+            expected = buildCodeInputExpected(exercise);
+        } catch {
+            continue;
+        }
+
+        if (expected.strategy !== "sql") continue;
+
+        if (!runSql) {
+            report.issues.push({
+                code: "GOLDEN_SQL_RUNNER_UNAVAILABLE",
+                category: "tests",
+                severity: "error",
+                exerciseId: exercise.id,
+                message: `Exercise "${exercise.id}" could not validate its SQL solution because no SQL runner is configured.`,
+            });
+            continue;
+        }
+
+        const firstTest = expected.tests[0];
+        const result = await validateSqlAgainstSolution({
+            learnerSql: expected.solutionCode ?? "",
+            solutionSql: expected.solutionCode ?? "",
+            checkSql: firstTest?.checkSql,
+            dialect: firstTest?.sqlDialect ?? expected.fixedSqlDialect ?? "sqlite",
+            schemaSql: firstTest?.schemaSql ?? expected.schemaSql,
+            seedSql: firstTest?.seedSql ?? expected.seedSql,
+            datasetId: firstTest?.runtime?.datasetId ?? expected.runtime?.datasetId,
+            ignoreRowOrder: firstTest?.ignoreRowOrder ?? false,
+            runSql,
+        });
+
+        if (result.ok) continue;
+
+        report.issues.push({
+            code: "GOLDEN_SQL_SOLUTION_MISMATCH",
+            category: "tests",
+            severity: "error",
+            exerciseId: exercise.id,
+            message: `Exercise "${exercise.id}" SQL solution does not satisfy its published SQL contract: ${result.message ?? result.errorStage ?? "unknown error"}`,
         });
     }
 

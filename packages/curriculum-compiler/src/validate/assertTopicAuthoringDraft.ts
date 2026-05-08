@@ -230,6 +230,14 @@ export function assertTopicAuthoringDraft(
                 fail(`${label} code_input datasetId must be non-empty when provided`);
             }
 
+            if (
+                exercise.recipeType === "semantic" &&
+                (!Array.isArray((exercise as { semanticChecks?: unknown[] }).semanticChecks) ||
+                    (exercise as { semanticChecks?: unknown[] }).semanticChecks!.length < 1)
+            ) {
+                fail(`${label} semantic code_input needs semanticChecks`);
+            }
+
             return;
         }
 

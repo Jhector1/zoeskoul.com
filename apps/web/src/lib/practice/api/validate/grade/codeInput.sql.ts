@@ -1,5 +1,4 @@
 import { runCode } from "@/lib/code/runCode";
-import type { GradeResult } from "./codeInput.programming";
 import { SqlExpected } from "@/lib/practice/api/validate/schemas";
 import {
     classifySqlMissingResultTable,
@@ -13,6 +12,7 @@ import {
     validateSqlAgainstSolution,
     type SqlTable,
 } from "@zoeskoul/curriculum-runtime/sql";
+import {GradeResult} from "@/lib/practice/api/validate/grade/index";
 
 const DEFAULT_SQL_LIMITS = {
     statementTimeoutMs: 4000,

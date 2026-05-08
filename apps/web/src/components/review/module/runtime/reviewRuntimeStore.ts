@@ -1039,7 +1039,7 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
 
       const savedWorkspace =
           registryHasStarter
-              ? trustedSavedWorkspace
+              ? trustedSavedWorkspace && workspaceHasUsableFile(rawSavedWorkspace)
                   ? rawSavedWorkspace
                   : null
               : rawSavedWorkspace;
@@ -1175,7 +1175,12 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
         updatedAt:
             typeof saved?.updatedAt === "number" ? saved.updatedAt : Date.now(),
 
-        code: trustedSavedWorkspace && typeof saved?.code === "string" ? saved.code : normalized.code,
+        code:
+            trustedSavedWorkspace &&
+            workspaceHasUsableFile(rawSavedWorkspace) &&
+            typeof saved?.code === "string"
+                ? saved.code
+                : normalized.code,
         lang: trustedSavedWorkspace && typeof saved?.lang === "string" ? saved.lang : language,
         codeWorkspace: normalized.workspace,
         ideWorkspace: normalized.workspace,

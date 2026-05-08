@@ -2,6 +2,7 @@ import type {
     TopicAuthoringDraft,
     TopicSeed,
 } from "@zoeskoul/curriculum-contracts";
+import type { SemanticCheck } from "@zoeskoul/practice-checks";
 import type {
     SemanticValidationIssue,
     SemanticValidationReport,
@@ -25,11 +26,17 @@ function validatePythonExerciseShape(args: {
         const starterCode = String(exercise.starterCode ?? "");
         const solutionCode = String(exercise.solutionCode ?? "");
         const tests = Array.isArray(exercise.tests) ? exercise.tests : [];
+        const semanticChecks = Array.isArray(exercise.semanticChecks)
+            ? (exercise.semanticChecks as SemanticCheck[])
+            : [];
+        const isSemanticRecipe = exercise.recipeType === "semantic";
         const looksLikeFunctionExercise =
             /\b(create|write|define)\s+a?\s*function\b/.test(prompt) ||
             /\breturn\b/.test(prompt) ||
             starterCode.trimStart().startsWith("def ");
-        const usesStdoutTests = tests.some(
+        const usesStdoutTests =
+            !isSemanticRecipe &&
+            tests.some(
             (test) => typeof test.stdout === "string" && test.stdout.trim().length > 0,
         );
         const solutionPrints = /\bprint\s*\(/.test(solutionCode);
@@ -80,7 +87,18 @@ function validatePythonExerciseShape(args: {
             });
         }
 
-        if (!Array.isArray(exercise.tests) || exercise.tests.length < 1) {
+        if (isSemanticRecipe && semanticChecks.length < 1) {
+            issues.push({
+                code: "PYTHON_SEMANTIC_CHECKS_MISSING",
+                category: "tests",
+                severity: "error",
+                exerciseId: exercise.id,
+                message:
+                    `Exercise "${exercise.id}" is marked semantic but is missing semantic checks.`,
+            });
+        }
+
+        if (!isSemanticRecipe && (!Array.isArray(exercise.tests) || exercise.tests.length < 1)) {
             issues.push({
                 code: "PYTHON_TESTS_MISSING",
                 category: "tests",
