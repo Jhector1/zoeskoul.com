@@ -19,8 +19,7 @@
   },
   "dependencies": {
     "zod": "^3.25.0"
-  },
-  "devDependencies": {
-    "typescript": "workspace:*"
-  }
+  },"devDependencies": {
+  "typescript": "^5.9.3"
+}
 }

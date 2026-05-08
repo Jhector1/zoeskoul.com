@@ -469,8 +469,12 @@ importers:
   packages/practice-checks:
     dependencies:
       zod:
-        specifier: ^4.3.6
-        version: 4.3.6
+        specifier: ^3.25.0
+        version: 3.25.76
+    devDependencies:
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
 
   packages/practice-contracts:
     dependencies:
@@ -7976,8 +7980,8 @@ snapshots:
       '@babel/parser': 7.29.2
       eslint: 9.39.4(jiti@2.6.1)
       hermes-parser: 0.25.1
-      zod: 4.3.6
-      zod-validation-error: 4.0.2(zod@4.3.6)
+      zod: 3.25.76
+      zod-validation-error: 4.0.2(zod@3.25.76)
     transitivePeerDependencies:
       - supports-color
 
@@ -10829,9 +10833,9 @@ snapshots:
       grammex: 3.1.12
       graphmatch: 1.1.1
 
-  zod-validation-error@4.0.2(zod@4.3.6):
+  zod-validation-error@4.0.2(zod@3.25.76):
     dependencies:
-      zod: 4.3.6
+      zod: 3.25.76
 
   zod@3.25.76: {}
 
