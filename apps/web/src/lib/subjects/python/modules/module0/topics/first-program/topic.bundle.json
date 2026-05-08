@@ -149,12 +149,13 @@
         "tests": [
           {
             "stdin": "",
-            "stdout": "Your favorite quote here.\n",
+            "stdout": "Stay curious.\n",
             "match": "exact"
           }
         ],
-        "solutionCode": "print('Your favorite quote here.')"
-      }
+        "solutionCode": "print('Stay curious.')"
+      },
+      "starterCode": "print('')"
     }
   ]
 }

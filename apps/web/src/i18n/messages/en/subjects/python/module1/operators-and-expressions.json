@@ -94,14 +94,14 @@
             },
             "5": {
               "title": "Calculate the Area of a Rectangle",
-              "prompt": "Write a Python function that calculates the area of a rectangle given its width and height. Then read the input values, call the function, and print the returned result.",
-              "hint": "Focus on the programming task being asked for, not on copying final solution text.",
+              "prompt": "Write a function `calculate_area(width, height)` that returns `width * height`.\n\nThen read TWO integer inputs:\n1) width\n2) height\n\nCall the function and print ONLY the returned area.",
+              "hint": "Define the function first, then read the two integer inputs and print the function result.",
               "help": {
-                "concept": "Build the solution from the behavior the exercise is testing.",
-                "hint_1": "Think about which steps, functions, or statements are required for the task.",
-                "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
+                "concept": "This task checks whether you can write a function, call it with input values, and print the result.",
+                "hint_1": "Write the required Python steps first, then run the program with the sample input.",
+                "hint_2": "Make sure your final print output matches the prompt exactly."
               },
-              "starterCode": "def calculate_area(width, height):\n    # Your code here\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nwidth = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nheight = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(calculate_area(width, height))"
+              "starterCode": "def calculate_area(width, height):\n    # Return the area here\n    pass\n\nwidth = int(input())\nheight = int(input())\n\nprint(calculate_area(width, height))"
             }
           }
         }

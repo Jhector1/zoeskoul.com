@@ -154,7 +154,8 @@
           }
         ],
         "solutionCode": "print('Hello, World!')"
-      }
+      },
+      "starterCode": "print('Hello, World!')"
     }
   ]
 }

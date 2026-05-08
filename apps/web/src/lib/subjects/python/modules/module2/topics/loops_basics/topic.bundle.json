@@ -1,12 +1,10 @@
 {
   "topicId": "loops_basics",
   "minutes": 10,
-
   "topic": {
     "labelKey": "topics.python.python-2.loops_basics.label",
     "summaryKey": "topics.python.python-2.loops_basics.summary"
   },
-
   "cards": [
     {
       "id": "sketch0",
@@ -77,7 +75,6 @@
       }
     }
   ],
-
   "sketches": [
     {
       "id": "why_loops",
@@ -104,7 +101,6 @@
       "bodyKey": "sketches.python.python-2.loops_basics.for_loops.bodyMarkdown"
     }
   ],
-
   "exercises": [
     {
       "id": "m2_loop_guess_until_secret_code",
@@ -123,7 +119,8 @@
           }
         ],
         "solutionCode": "guess = int(input())\nwhile guess != 7:\n    guess = int(input())\nprint(\"You got it!\")\n"
-      }
+      },
+      "starterCode": "# secret is 7\nguess = int(input())\n# TODO: loop until guess == 7\n# TODO: print \"You got it!\""
     },
     {
       "id": "m2_loop_keep_asking_valid_code",
@@ -142,7 +139,8 @@
           }
         ],
         "solutionCode": "n = int(input())\nwhile n < 1 or n > 10:\n    n = int(input())\nprint(f\"OK: {n}\")\n"
-      }
+      },
+      "starterCode": "n = int(input())\n# TODO: keep reading while n is not 1..10\n# TODO: when valid, print OK: <n>"
     },
     {
       "id": "m2_loop_echo_until_quit_code",
@@ -161,17 +159,24 @@
           }
         ],
         "solutionCode": "cmd = input().strip()\nwhile cmd != \"quit\":\n    print(f\"You typed: {cmd}\")\n    cmd = input().strip()\nprint(\"Bye!\")\n"
-      }
+      },
+      "starterCode": "cmd = input().strip()\n# TODO: loop until cmd == \"quit\"\n# TODO: echo each non-quit command"
     },
-
     {
       "id": "m2_loop_while_meaning_sc",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m2_loop_while_meaning_sc",
-      "optionIds": ["a", "b", "c"],
-      "expected": { "kind": "single_choice", "optionId": "b" }
+      "optionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
     },
     {
       "id": "m2_loop_break_sc",
@@ -179,8 +184,15 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m2_loop_break_sc",
-      "optionIds": ["a", "b", "c"],
-      "expected": { "kind": "single_choice", "optionId": "a" }
+      "optionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
     },
     {
       "id": "m2_loop_range_five_sc",
@@ -188,18 +200,35 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m2_loop_range_five_sc",
-      "optionIds": ["a", "b", "c"],
-      "expected": { "kind": "single_choice", "optionId": "c" }
+      "optionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "c"
+      }
     },
-
     {
       "id": "m2_loop_continue_truths_mc",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m2_loop_continue_truths_mc",
-      "optionIds": ["a", "b", "c", "d"],
-      "expected": { "kind": "multi_choice", "optionIds": ["a", "c"] }
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      }
     },
     {
       "id": "m2_loop_validation_pattern_mc",
@@ -207,8 +236,20 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m2_loop_validation_pattern_mc",
-      "optionIds": ["a", "b", "c", "d"],
-      "expected": { "kind": "multi_choice", "optionIds": ["a", "b", "d"] }
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      }
     },
     {
       "id": "m2_loop_menu_loop_parts_mc",
@@ -216,10 +257,21 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m2_loop_menu_loop_parts_mc",
-      "optionIds": ["a", "b", "c", "d"],
-      "expected": { "kind": "multi_choice", "optionIds": ["a", "b", "c"] }
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "c"
+        ]
+      }
     },
-
     {
       "id": "m2_loop_fill_while_meaning",
       "kind": "fill_blank_choice",
@@ -227,7 +279,10 @@
       "weight": 1,
       "messageBase": "quiz.m2_loop_fill_while_meaning",
       "choiceCount": 4,
-      "expected": { "kind": "fill_blank_choice", "value": "True" }
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "True"
+      }
     },
     {
       "id": "m2_loop_fill_break_meaning",
@@ -236,7 +291,10 @@
       "weight": 1,
       "messageBase": "quiz.m2_loop_fill_break_meaning",
       "choiceCount": 4,
-      "expected": { "kind": "fill_blank_choice", "value": "stop" }
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "stop"
+      }
     },
     {
       "id": "m2_loop_fill_continue_meaning",
@@ -245,7 +303,10 @@
       "weight": 1,
       "messageBase": "quiz.m2_loop_fill_continue_meaning",
       "choiceCount": 4,
-      "expected": { "kind": "fill_blank_choice", "value": "next" }
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "next"
+      }
     },
     {
       "id": "m2_loop_fill_range_end",
@@ -254,7 +315,10 @@
       "weight": 1,
       "messageBase": "quiz.m2_loop_fill_range_end",
       "choiceCount": 4,
-      "expected": { "kind": "fill_blank_choice", "value": "not included" }
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "not included"
+      }
     },
     {
       "id": "m2_loop_fill_validation_goal",
@@ -263,17 +327,30 @@
       "weight": 1,
       "messageBase": "quiz.m2_loop_fill_validation_goal",
       "choiceCount": 4,
-      "expected": { "kind": "fill_blank_choice", "value": "valid" }
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "valid"
+      }
     },
-
     {
       "id": "m2_loop_reorder_while_flow",
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m2_loop_reorder_while_flow",
-      "tokenIds": ["t1", "t2", "t3"],
-      "expected": { "kind": "drag_reorder", "tokenIds": ["t1", "t2", "t3"] }
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
     },
     {
       "id": "m2_loop_reorder_guess_game",
@@ -281,8 +358,19 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m2_loop_reorder_guess_game",
-      "tokenIds": ["t1", "t2", "t3"],
-      "expected": { "kind": "drag_reorder", "tokenIds": ["t1", "t2", "t3"] }
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
     },
     {
       "id": "m2_loop_reorder_validation_flow",
@@ -290,8 +378,21 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m2_loop_reorder_validation_flow",
-      "tokenIds": ["t1", "t2", "t3", "t4"],
-      "expected": { "kind": "drag_reorder", "tokenIds": ["t1", "t2", "t3", "t4"] }
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
     },
     {
       "id": "m2_loop_reorder_menu_loop",
@@ -299,8 +400,21 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m2_loop_reorder_menu_loop",
-      "tokenIds": ["t1", "t2", "t3", "t4"],
-      "expected": { "kind": "drag_reorder", "tokenIds": ["t1", "t2", "t3", "t4"] }
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
     },
     {
       "id": "m2_loop_reorder_for_range",
@@ -308,8 +422,19 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m2_loop_reorder_for_range",
-      "tokenIds": ["t1", "t2", "t3"],
-      "expected": { "kind": "drag_reorder", "tokenIds": ["t1", "t2", "t3"] }
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
     }
   ]
 }

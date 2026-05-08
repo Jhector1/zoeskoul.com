@@ -1,13 +1,10 @@
 {
   "topicId": "input_output_patterns",
-
   "minutes": 10,
-
   "topic": {
     "labelKey": "topics.python.python-1.input_output_patterns.label",
     "summaryKey": "topics.python.python-1.input_output_patterns.summary"
   },
-
   "cards": [
     {
       "id": "sketch0",
@@ -78,7 +75,6 @@
       }
     }
   ],
-
   "sketches": [
     {
       "id": "pattern_overview",
@@ -141,7 +137,6 @@
       ]
     }
   ],
-
   "exercises": [
     {
       "id": "m1_io_age_next_year",
@@ -151,7 +146,6 @@
       "messageBase": "quiz.m1_io_age_next_year",
       "language": "python",
       "showExpectedExample": true,
-
       "starterFiles": [
         {
           "path": "main.py",
@@ -163,13 +157,17 @@
           "content": "def next_year_message(name, age):\n    # TODO: return this exact format:\n    # Hi Maya! Next year you'll be 18.\n    return \"\"\n"
         }
       ],
-
       "recipe": {
         "type": "template_io",
         "vars": {
           "name": {
             "source": "pick",
-            "from": ["Maya", "Jordan", "Alex", "Sam"]
+            "from": [
+              "Maya",
+              "Jordan",
+              "Alex",
+              "Sam"
+            ]
           },
           "age": {
             "source": "int",
@@ -192,7 +190,8 @@
           }
         ],
         "solutionTemplate": "name = input()\nage = int(input())\nprint(f\"Hi {name}! Next year you'll be {age + 1}.\")\n"
-      }
+      },
+      "starterCode": "# TODO\n"
     },
     {
       "id": "m1_io_tip_total",
@@ -202,7 +201,6 @@
       "messageBase": "quiz.m1_io_tip_total",
       "language": "python",
       "showExpectedExample": true,
-
       "starterFiles": [
         {
           "path": "main.py",
@@ -214,7 +212,6 @@
           "content": "def calculate_tip(bill, pct):\n    # TODO: calculate tip using integer math\n    return 0\n\n\ndef calculate_total(bill, tip):\n    # TODO: calculate total\n    return 0\n"
         }
       ],
-
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -230,7 +227,8 @@
           }
         ],
         "solutionCode": "bill = int(input())\npct = int(input())\ntip = bill * pct // 100\ntotal = bill + tip\nprint(f\"Tip = {tip}\")\nprint(f\"Total = {total}\")\n"
-      }
+      },
+      "starterCode": "bill = int(input())\npct = int(input())\n# TODO\n"
     },
     {
       "id": "m1_io_c_to_f",
@@ -239,7 +237,6 @@
       "weight": 1,
       "messageBase": "quiz.m1_io_c_to_f",
       "language": "python",
-
       "starterFiles": [
         {
           "path": "main.py",
@@ -251,7 +248,6 @@
           "content": "def celsius_to_fahrenheit(c):\n    # TODO: convert Celsius to Fahrenheit\n    # Formula: c * 9 / 5 + 32\n    return 0\n"
         }
       ],
-
       "recipe": {
         "type": "template_io",
         "vars": {
@@ -275,16 +271,21 @@
           }
         ],
         "solutionTemplate": "c = int(input())\nf = int(c * 9 / 5 + 32)\nprint(f)\n"
-      }
+      },
+      "starterCode": "c = int(input())\n# TODO\n"
     },
-
     {
       "id": "m1_io_input_returns_str",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_io_input_returns_str",
-      "optionIds": ["a", "b", "c", "d"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
       "expected": {
         "kind": "single_choice",
         "optionId": "c"
@@ -296,7 +297,12 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_io_tip_integer_math",
-      "optionIds": ["a", "b", "c", "d"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
       "expected": {
         "kind": "single_choice",
         "optionId": "b"
@@ -308,23 +314,37 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_io_c_to_f_formula",
-      "optionIds": ["a", "b", "c", "d"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
       "expected": {
         "kind": "single_choice",
         "optionId": "a"
       }
     },
-
     {
       "id": "m1_io_age_next_year_parts",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_io_age_next_year_parts",
-      "optionIds": ["a", "b", "c", "d", "e"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
       "expected": {
         "kind": "multi_choice",
-        "optionIds": ["a", "b", "c"]
+        "optionIds": [
+          "a",
+          "b",
+          "c"
+        ]
       }
     },
     {
@@ -333,10 +353,18 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_io_tip_output_lines",
-      "optionIds": ["a", "b", "c", "d"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
       "expected": {
         "kind": "multi_choice",
-        "optionIds": ["a", "b"]
+        "optionIds": [
+          "a",
+          "b"
+        ]
       }
     },
     {
@@ -345,13 +373,22 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_io_convert_then_compute_truths",
-      "optionIds": ["a", "b", "c", "d", "e"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
       "expected": {
         "kind": "multi_choice",
-        "optionIds": ["a", "b", "d"]
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
       }
     },
-
     {
       "id": "m1_io_fill_pattern_name",
       "kind": "fill_blank_choice",
@@ -412,17 +449,26 @@
         "value": "variables"
       }
     },
-
     {
       "id": "m1_io_reorder_main_pattern",
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_io_reorder_main_pattern",
-      "tokenIds": ["t1", "t2", "t3", "t4"],
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
       "expected": {
         "kind": "drag_reorder",
-        "tokenIds": ["t1", "t2", "t3", "t4"]
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
       }
     },
     {
@@ -431,10 +477,20 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_io_reorder_age_program",
-      "tokenIds": ["t1", "t2", "t3", "t4"],
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
       "expected": {
         "kind": "drag_reorder",
-        "tokenIds": ["t1", "t2", "t3", "t4"]
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
       }
     },
     {
@@ -443,10 +499,20 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_io_reorder_tip_program",
-      "tokenIds": ["t1", "t2", "t3", "t4"],
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
       "expected": {
         "kind": "drag_reorder",
-        "tokenIds": ["t1", "t2", "t3", "t4"]
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
       }
     },
     {
@@ -455,10 +521,20 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_io_reorder_temp_program",
-      "tokenIds": ["t1", "t2", "t3", "t4"],
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
       "expected": {
         "kind": "drag_reorder",
-        "tokenIds": ["t1", "t2", "t3", "t4"]
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
       }
     },
     {
@@ -467,10 +543,18 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_io_reorder_fstring_idea",
-      "tokenIds": ["t1", "t2", "t3"],
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
       "expected": {
         "kind": "drag_reorder",
-        "tokenIds": ["t1", "t2", "t3"]
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
       }
     }
   ]

@@ -154,7 +154,8 @@
           }
         ],
         "solutionCode": "age = 25\nheight = 5.9\nname = 'Zoe'\n\n# Print the variables\nprint(age)\nprint(height)\nprint(name)"
-      }
+      },
+      "starterCode": "age = \nheight = \nname = \n\n# Print the variables\nprint(age)\nprint(height)\nprint(name)"
     }
   ]
 }

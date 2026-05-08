@@ -5,7 +5,6 @@ import type {
 } from "@/lib/subjects/types";
 import { SUBJECT_ARTIFACTS } from "@/lib/subjects";
 import { TOPIC_MANIFESTS as PYTHON_TOPIC_MANIFESTS } from "@/lib/subjects/python/topics.generated";
-import { TOPIC_MANIFESTS as PYTHON_FOR_BEGINNERS_TOPIC_MANIFESTS } from "@/lib/subjects/python-for-beginners/topics.generated";
 import { TOPIC_MANIFESTS as SQL_TOPIC_MANIFESTS } from "@/lib/subjects/sql/topics.generated";
 import type { SlimTopicManifest } from "@/lib/subjects/_core/subjectManifestTypes";
 
@@ -52,8 +51,6 @@ function getTopicManifestForSubject(
     switch (subjectSlug) {
         case "python":
             return PYTHON_TOPIC_MANIFESTS[topicId] ?? null;
-        case "python-for-beginners":
-            return PYTHON_FOR_BEGINNERS_TOPIC_MANIFESTS[topicId] ?? null;
         case "sql":
             return SQL_TOPIC_MANIFESTS[topicId] ?? null;
         default:

@@ -1,0 +1,415 @@
+{
+  "topicId": "missing_data",
+  "subjectSlug": "sql",
+  "moduleSlug": "sql_module_4",
+  "sectionSlug": "section_4_1",
+  "prefix": "sql4",
+  "minutes": 8,
+
+  "topic": {
+    "labelKey": "topics.sql.sql_module_4.missing_data.label",
+    "summaryKey": "topics.sql.sql_module_4.missing_data.summary"
+  },
+
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_4.missing_data.cards.sketch0.title",
+      "sketchId": "what_null_means",
+      "height": 520
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_4.missing_data.cards.sketch1.title",
+      "sketchId": "is_null",
+      "height": 520
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_4.missing_data.cards.sketch2.title",
+      "sketchId": "is_not_null",
+      "height": 520
+    },
+    {
+      "id": "sketch3",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_4.missing_data.cards.sketch3.title",
+      "sketchId": "common_null_mistakes",
+      "height": 520
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.sql.sql_module_4.missing_data.cards.quiz.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "find_missing_emails",
+            "titleKey": "topics.sql.sql_module_4.missing_data.projectSteps.find_missing_emails.title",
+            "exerciseKey": "m4_s03_find_missing_emails",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "find_missing_cities",
+            "titleKey": "topics.sql.sql_module_4.missing_data.projectSteps.find_missing_cities.title",
+            "exerciseKey": "m4_s03_find_missing_cities",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "find_present_emails",
+            "titleKey": "topics.sql.sql_module_4.missing_data.projectSteps.find_present_emails.title",
+            "exerciseKey": "m4_s03_find_present_emails",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql.sql_module_4.missing_data.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 3,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    }
+  ],
+
+  "sketches": [
+    {
+      "id": "what_null_means",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_4.missing_data.what_null_means.title",
+      "bodyKey": "sketches.sql.sql_module_4.missing_data.what_null_means.bodyMarkdown"
+    },
+    {
+      "id": "is_null",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_4.missing_data.is_null.title",
+      "bodyKey": "sketches.sql.sql_module_4.missing_data.is_null.bodyMarkdown"
+    },
+    {
+      "id": "is_not_null",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_4.missing_data.is_not_null.title",
+      "bodyKey": "sketches.sql.sql_module_4.missing_data.is_not_null.bodyMarkdown"
+    },
+    {
+      "id": "common_null_mistakes",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_4.missing_data.common_null_mistakes.title",
+      "bodyKey": "sketches.sql.sql_module_4.missing_data.common_null_mistakes.bodyMarkdown"
+    }
+  ],
+
+  "exercises": [
+    {
+      "id": "m4_s03_find_missing_emails",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "quiz.m4_s03_find_missing_emails",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "customers_cleanup",
+        "resultShape": "table",
+        "solutionCode": "SELECT full_name, email FROM customers WHERE email IS NULL;"
+      }
+    },
+    {
+      "id": "m4_s03_find_missing_cities",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "quiz.m4_s03_find_missing_cities",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "customers_cleanup",
+        "resultShape": "table",
+        "solutionCode": "SELECT full_name, city FROM customers WHERE city IS NULL;"
+      }
+    },
+    {
+      "id": "m4_s03_find_present_emails",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "quiz.m4_s03_find_present_emails",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "customers_cleanup",
+        "resultShape": "table",
+        "solutionCode": "SELECT full_name, email FROM customers WHERE email IS NOT NULL;"
+      }
+    },
+
+    {
+      "id": "m4_s03_null_meaning",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m4_s03_null_meaning",
+      "optionIds": ["a", "b", "c", "d"],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "m4_s03_is_null_meaning",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m4_s03_is_null_meaning",
+      "optionIds": ["a", "b", "c", "d"],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "m4_s03_is_not_null_meaning",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m4_s03_is_not_null_meaning",
+      "optionIds": ["a", "b", "c", "d"],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "m4_s03_null_mistake_meaning",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m4_s03_null_mistake_meaning",
+      "optionIds": ["a", "b", "c", "d"],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "m4_s03_null_result_check",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m4_s03_null_result_check",
+      "optionIds": ["a", "b", "c", "d"],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+
+    {
+      "id": "m4_s03_null_true",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m4_s03_null_true",
+      "optionIds": ["a", "b", "c", "d", "e"],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": ["a", "b", "c", "e"]
+      }
+    },
+    {
+      "id": "m4_s03_is_null_true",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m4_s03_is_null_true",
+      "optionIds": ["a", "b", "c", "d", "e"],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": ["a", "b", "c", "e"]
+      }
+    },
+    {
+      "id": "m4_s03_is_not_null_true",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m4_s03_is_not_null_true",
+      "optionIds": ["a", "b", "c", "d", "e"],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": ["a", "b", "c", "e"]
+      }
+    },
+    {
+      "id": "m4_s03_null_mistakes_true",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m4_s03_null_mistakes_true",
+      "optionIds": ["a", "b", "c", "d", "e"],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": ["a", "b", "c", "e"]
+      }
+    },
+    {
+      "id": "m4_s03_missing_data_workflow_true",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m4_s03_missing_data_workflow_true",
+      "optionIds": ["a", "b", "c", "d", "e"],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": ["a", "b", "c", "d"]
+      }
+    },
+
+    {
+      "id": "m4_s03_reorder_null_meaning",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m4_s03_reorder_null_meaning",
+      "tokenIds": ["t1", "t2", "t3"],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": ["t1", "t2", "t3"]
+      }
+    },
+    {
+      "id": "m4_s03_reorder_is_null_logic",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m4_s03_reorder_is_null_logic",
+      "tokenIds": ["t1", "t2", "t3"],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": ["t1", "t2", "t3"]
+      }
+    },
+    {
+      "id": "m4_s03_reorder_is_not_null_logic",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m4_s03_reorder_is_not_null_logic",
+      "tokenIds": ["t1", "t2", "t3"],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": ["t1", "t2", "t3"]
+      }
+    },
+    {
+      "id": "m4_s03_reorder_null_mistake_logic",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m4_s03_reorder_null_mistake_logic",
+      "tokenIds": ["t1", "t2", "t3"],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": ["t1", "t2", "t3"]
+      }
+    },
+    {
+      "id": "m4_s03_reorder_missing_data_workflow",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m4_s03_reorder_missing_data_workflow",
+      "tokenIds": ["t1", "t2", "t3"],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": ["t1", "t2", "t3"]
+      }
+    },
+
+    {
+      "id": "m4_s03_fill_null_word",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m4_s03_fill_null_word",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "missing"
+      }
+    },
+    {
+      "id": "m4_s03_fill_is_null_keyword",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m4_s03_fill_is_null_keyword",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "IS NULL"
+      }
+    },
+    {
+      "id": "m4_s03_fill_is_not_null_keyword",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m4_s03_fill_is_not_null_keyword",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "IS NOT NULL"
+      }
+    },
+    {
+      "id": "m4_s03_fill_null_comparison_warning",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m4_s03_fill_null_comparison_warning",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "equality"
+      }
+    },
+    {
+      "id": "m4_s03_fill_missing_data_check",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m4_s03_fill_missing_data_check",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "present"
+      }
+    }
+  ]
+}

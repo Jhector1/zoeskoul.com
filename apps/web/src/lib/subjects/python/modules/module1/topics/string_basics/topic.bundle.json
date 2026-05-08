@@ -1,13 +1,10 @@
 {
   "topicId": "string_basics",
-
   "minutes": 10,
-
   "topic": {
     "labelKey": "topics.python.python-1.string_basics.label",
     "summaryKey": "topics.python.python-1.string_basics.summary"
   },
-
   "cards": [
     {
       "id": "sketch0",
@@ -78,7 +75,6 @@
       }
     }
   ],
-
   "sketches": [
     {
       "id": "strings_intro",
@@ -105,7 +101,6 @@
       "bodyKey": "sketches.python.python-1.string_basics.string_methods.bodyMarkdown"
     }
   ],
-
   "exercises": [
     {
       "id": "m1_str_concat_vs_comma_sc",
@@ -113,7 +108,11 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_str_concat_vs_comma_sc",
-      "optionIds": ["a", "b", "c"],
+      "optionIds": [
+        "a",
+        "b",
+        "c"
+      ],
       "expected": {
         "kind": "single_choice",
         "optionId": "b"
@@ -125,7 +124,11 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_str_fstring_placeholder_sc",
-      "optionIds": ["a", "b", "c"],
+      "optionIds": [
+        "a",
+        "b",
+        "c"
+      ],
       "expected": {
         "kind": "single_choice",
         "optionId": "b"
@@ -137,7 +140,11 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_str_strip_sc",
-      "optionIds": ["a", "b", "c"],
+      "optionIds": [
+        "a",
+        "b",
+        "c"
+      ],
       "expected": {
         "kind": "single_choice",
         "optionId": "a"
@@ -149,23 +156,35 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_str_lower_sc",
-      "optionIds": ["a", "b", "c"],
+      "optionIds": [
+        "a",
+        "b",
+        "c"
+      ],
       "expected": {
         "kind": "single_choice",
         "optionId": "c"
       }
     },
-
     {
       "id": "m1_str_username_steps_mc",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_str_username_steps_mc",
-      "optionIds": ["a", "b", "c", "d"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
       "expected": {
         "kind": "multi_choice",
-        "optionIds": ["a", "c", "d"]
+        "optionIds": [
+          "a",
+          "c",
+          "d"
+        ]
       }
     },
     {
@@ -174,10 +193,18 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_str_concat_truths_mc",
-      "optionIds": ["a", "b", "c", "d"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
       "expected": {
         "kind": "multi_choice",
-        "optionIds": ["a", "b"]
+        "optionIds": [
+          "a",
+          "b"
+        ]
       }
     },
     {
@@ -186,13 +213,20 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_str_indexing_first_char_mc",
-      "optionIds": ["a", "b", "c", "d"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
       "expected": {
         "kind": "multi_choice",
-        "optionIds": ["b", "d"]
+        "optionIds": [
+          "b",
+          "d"
+        ]
       }
     },
-
     {
       "id": "m1_str_fill_string_definition",
       "kind": "fill_blank_choice",
@@ -253,17 +287,26 @@
         "value": "spaces"
       }
     },
-
     {
       "id": "m1_str_reorder_username_steps",
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_str_reorder_username_steps",
-      "tokenIds": ["t1", "t2", "t3", "t4"],
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
       "expected": {
         "kind": "drag_reorder",
-        "tokenIds": ["t1", "t2", "t3", "t4"]
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
       }
     },
     {
@@ -272,10 +315,18 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_str_reorder_fstring_idea",
-      "tokenIds": ["t1", "t2", "t3"],
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
       "expected": {
         "kind": "drag_reorder",
-        "tokenIds": ["t1", "t2", "t3"]
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
       }
     },
     {
@@ -284,10 +335,18 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_str_reorder_clean_input",
-      "tokenIds": ["t1", "t2", "t3"],
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
       "expected": {
         "kind": "drag_reorder",
-        "tokenIds": ["t1", "t2", "t3"]
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
       }
     },
     {
@@ -296,10 +355,18 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_str_reorder_indexing_idea",
-      "tokenIds": ["t1", "t2", "t3"],
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
       "expected": {
         "kind": "drag_reorder",
-        "tokenIds": ["t1", "t2", "t3"]
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
       }
     },
     {
@@ -308,13 +375,20 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_str_reorder_print_options",
-      "tokenIds": ["t1", "t2", "t3"],
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
       "expected": {
         "kind": "drag_reorder",
-        "tokenIds": ["t1", "t2", "t3"]
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
       }
     },
-
     {
       "id": "m1_str_concat_vs_comma_code",
       "kind": "code_input",
@@ -332,7 +406,8 @@
           }
         ],
         "solutionCode": "name = input()\nage = int(input())\nprint(\"Hello\", name)\nprint(\"age:\", age)\n"
-      }
+      },
+      "starterCode": "# TODO\n"
     },
     {
       "id": "m1_str_fstring_greeting_code",
@@ -346,7 +421,12 @@
         "vars": {
           "name": {
             "source": "pick",
-            "from": ["Maya", "Jordan", "Alex", "Sam"]
+            "from": [
+              "Maya",
+              "Jordan",
+              "Alex",
+              "Sam"
+            ]
           }
         },
         "tests": [
@@ -357,7 +437,8 @@
           }
         ],
         "solutionTemplate": "name = input()\nprint(f\"Hello, {name}!\")\n"
-      }
+      },
+      "starterCode": "# TODO\n"
     },
     {
       "id": "m1_str_username_code",
@@ -378,10 +459,16 @@
             "stdin": " Alex \n Lee \n",
             "stdout": "alee\n",
             "match": "exact"
+          },
+          {
+            "stdin": "   \n Johnson \n",
+            "stdout": "johnson\n",
+            "match": "exact"
           }
         ],
-        "solutionCode": "first = input().strip()\nlast = input().strip()\nusername = (first[0] + last).lower()\nprint(username)\n"
-      }
+        "solutionCode": "first = input().strip()\nlast = input().strip()\nusername = (first[:1] + last).lower()\nprint(username)"
+      },
+      "starterCode": "first = input().strip()\nlast = input().strip()\n# Build and print the username here"
     }
   ]
 }

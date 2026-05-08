@@ -154,7 +154,8 @@
           }
         ],
         "solutionCode": "count = 5\nwhile count > 0:\n    print(count)\n    count -= 1"
-      }
+      },
+      "starterCode": "count = 5\nwhile count > 0:\n    # Your code here"
     }
   ]
 }

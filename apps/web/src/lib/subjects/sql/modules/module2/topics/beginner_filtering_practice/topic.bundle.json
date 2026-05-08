@@ -1,0 +1,403 @@
+{
+  "topicId": "beginner_filtering_practice",
+  "subjectSlug": "sql",
+  "moduleSlug": "sql_module_2",
+  "sectionSlug": "section_2_1",
+  "prefix": "sql2",
+  "minutes": 8,
+
+  "topic": {
+    "labelKey": "topics.sql.sql_module_2.beginner_filtering_practice.label",
+    "summaryKey": "topics.sql.sql_module_2.beginner_filtering_practice.summary"
+  },
+
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_2.beginner_filtering_practice.cards.sketch0.title",
+      "sketchId": "filter_by_number",
+      "height": 520
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_2.beginner_filtering_practice.cards.sketch1.title",
+      "sketchId": "filter_by_text",
+      "height": 520
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_2.beginner_filtering_practice.cards.sketch2.title",
+      "sketchId": "filter_by_more_than_one_rule",
+      "height": 520
+    },
+    {
+      "id": "sketch3",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_2.beginner_filtering_practice.cards.sketch3.title",
+      "sketchId": "avoiding_filtering_mistakes",
+      "height": 520
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.sql.sql_module_2.beginner_filtering_practice.cards.quiz.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "filter_by_number_stock_gt_10",
+            "titleKey": "topics.sql.sql_module_2.beginner_filtering_practice.projectSteps.filter_by_number_stock_gt_10.title",
+            "exerciseKey": "m2_s04_filter_by_number_stock_gt_10",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "filter_by_text_stationery",
+            "titleKey": "topics.sql.sql_module_2.beginner_filtering_practice.projectSteps.filter_by_text_stationery.title",
+            "exerciseKey": "m2_s04_filter_by_text_stationery",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "filter_more_than_one_rule",
+            "titleKey": "topics.sql.sql_module_2.beginner_filtering_practice.projectSteps.filter_more_than_one_rule.title",
+            "exerciseKey": "m2_s04_filter_more_than_one_rule",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql.sql_module_2.beginner_filtering_practice.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 3,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    }
+  ],
+
+  "sketches": [
+    {
+      "id": "filter_by_number",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_2.beginner_filtering_practice.filter_by_number.title",
+      "bodyKey": "sketches.sql.sql_module_2.beginner_filtering_practice.filter_by_number.bodyMarkdown"
+    },
+    {
+      "id": "filter_by_text",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_2.beginner_filtering_practice.filter_by_text.title",
+      "bodyKey": "sketches.sql.sql_module_2.beginner_filtering_practice.filter_by_text.bodyMarkdown"
+    },
+    {
+      "id": "filter_by_more_than_one_rule",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_2.beginner_filtering_practice.filter_by_more_than_one_rule.title",
+      "bodyKey": "sketches.sql.sql_module_2.beginner_filtering_practice.filter_by_more_than_one_rule.bodyMarkdown"
+    },
+    {
+      "id": "avoiding_filtering_mistakes",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_2.beginner_filtering_practice.avoiding_filtering_mistakes.title",
+      "bodyKey": "sketches.sql.sql_module_2.beginner_filtering_practice.avoiding_filtering_mistakes.bodyMarkdown"
+    }
+  ],
+
+  "exercises": [
+    {
+      "id": "m2_s04_filter_by_number_stock_gt_10",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "quiz.m2_s04_filter_by_number_stock_gt_10",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "SELECT name, stock FROM products WHERE stock > 10;"
+      }
+    },
+    {
+      "id": "m2_s04_filter_by_text_stationery",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "quiz.m2_s04_filter_by_text_stationery",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "SELECT name, category FROM products WHERE category = 'Stationery';"
+      }
+    },
+    {
+      "id": "m2_s04_filter_more_than_one_rule",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "quiz.m2_s04_filter_more_than_one_rule",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "SELECT name, category, price FROM products WHERE category = 'Art' AND price < 20;"
+      }
+    },
+
+    {
+      "id": "m2_s04_number_filter_meaning",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_s04_number_filter_meaning",
+      "optionIds": ["a", "b", "c", "d"],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "m2_s04_text_filter_meaning",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_s04_text_filter_meaning",
+      "optionIds": ["a", "b", "c", "d"],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "m2_s04_more_than_one_rule_meaning",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_s04_more_than_one_rule_meaning",
+      "optionIds": ["a", "b", "c", "d"],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "m2_s04_filtering_mistake_example",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_s04_filtering_mistake_example",
+      "optionIds": ["a", "b", "c", "d"],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "m2_s04_verify_filter_result",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_s04_verify_filter_result",
+      "optionIds": ["a", "b", "c", "d"],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+
+    {
+      "id": "m2_s04_filter_types_true",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_s04_filter_types_true",
+      "optionIds": ["a", "b", "c", "d", "e"],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": ["a", "b", "c", "e"]
+      }
+    },
+    {
+      "id": "m2_s04_text_number_handling_true",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_s04_text_number_handling_true",
+      "optionIds": ["a", "b", "c", "d", "e"],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": ["a", "b", "c", "e"]
+      }
+    },
+    {
+      "id": "m2_s04_mistake_avoidance_true",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_s04_mistake_avoidance_true",
+      "optionIds": ["a", "b", "c", "d", "e"],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": ["a", "b", "c", "d"]
+      }
+    },
+    {
+      "id": "m2_s04_filtering_workflow_true",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_s04_filtering_workflow_true",
+      "optionIds": ["a", "b", "c", "d", "e"],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": ["a", "b", "c", "d"]
+      }
+    },
+
+    {
+      "id": "m2_s04_reorder_number_filter_logic",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_s04_reorder_number_filter_logic",
+      "tokenIds": ["t1", "t2", "t3"],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": ["t1", "t2", "t3"]
+      }
+    },
+    {
+      "id": "m2_s04_reorder_text_filter_logic",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_s04_reorder_text_filter_logic",
+      "tokenIds": ["t1", "t2", "t3"],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": ["t1", "t2", "t3"]
+      }
+    },
+    {
+      "id": "m2_s04_reorder_multi_rule_logic",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_s04_reorder_multi_rule_logic",
+      "tokenIds": ["t1", "t2", "t3"],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": ["t1", "t2", "t3"]
+      }
+    },
+    {
+      "id": "m2_s04_reorder_mistake_checklist",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_s04_reorder_mistake_checklist",
+      "tokenIds": ["t1", "t2", "t3"],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": ["t1", "t2", "t3"]
+      }
+    },
+    {
+      "id": "m2_s04_reorder_filtering_workflow",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_s04_reorder_filtering_workflow",
+      "tokenIds": ["t1", "t2", "t3"],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": ["t1", "t2", "t3"]
+      }
+    },
+
+    {
+      "id": "m2_s04_fill_number_column_example",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_s04_fill_number_column_example",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "stock"
+      }
+    },
+    {
+      "id": "m2_s04_fill_text_column_example",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_s04_fill_text_column_example",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "category"
+      }
+    },
+    {
+      "id": "m2_s04_fill_text_value_style",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_s04_fill_text_value_style",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "quotes"
+      }
+    },
+    {
+      "id": "m2_s04_fill_logic_keyword",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_s04_fill_logic_keyword",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "logic"
+      }
+    },
+    {
+      "id": "m2_s04_fill_result_check",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m2_s04_fill_result_check",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "verify"
+      }
+    }
+  ]
+}

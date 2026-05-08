@@ -92,15 +92,15 @@
               }
             },
             "5": {
-              "title": "Create a formatted output",
-              "prompt": "Write a Python program that takes a name and age, and prints a formatted string.",
-              "hint": "Break the task into the main query or code steps first.",
+              "title": "Format a name and age",
+              "prompt": "Read TWO inputs:\n1) name\n2) age\n\nPrint exactly:\n{name} is {age} years old.",
+              "hint": "Read the name and age first, then use an f-string for the exact sentence.",
               "help": {
-                "concept": "This task checks whether you can apply create a formatted output in a working solution.",
-                "hint_1": "Identify the table, columns, and condition or operation before writing the full solution.",
-                "hint_2": "Build the statement one piece at a time: select the right fields, then add the condition or operation that matches the prompt."
+                "concept": "This task checks whether you can combine input values into a formatted string.",
+                "hint_1": "Write the required Python steps first, then run the program with the sample input.",
+                "hint_2": "Make sure your final print output matches the prompt exactly."
               },
-              "starterCode": "name = 'John'\nage = 25\n# Your code here"
+              "starterCode": "name = input()\nage = input()\n# Print the formatted sentence here"
             }
           }
         }

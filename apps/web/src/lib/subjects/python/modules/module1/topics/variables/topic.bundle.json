@@ -153,7 +153,8 @@
           }
         ],
         "solutionCode": "x = 10\ny = 20\n\ntotal = x + y\nprint(total)  # This will print 30"
-      }
+      },
+      "starterCode": "x = 10\ny = 20\n# Calculate total"
     }
   ]
 }

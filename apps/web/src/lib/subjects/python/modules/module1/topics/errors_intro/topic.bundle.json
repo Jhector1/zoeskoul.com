@@ -1,12 +1,10 @@
 {
   "topicId": "errors_intro",
   "minutes": 10,
-
   "topic": {
     "labelKey": "topics.python.python-1.errors_intro.label",
     "summaryKey": "topics.python.python-1.errors_intro.summary"
   },
-
   "cards": [
     {
       "id": "sketch0",
@@ -77,7 +75,6 @@
       }
     }
   ],
-
   "sketches": [
     {
       "id": "errors_intro",
@@ -104,7 +101,6 @@
       "bodyKey": "sketches.python.python-1.errors_intro.debug_flow.bodyMarkdown"
     }
   ],
-
   "exercises": [
     {
       "id": "m1_types_errors_sc",
@@ -112,7 +108,11 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_types_errors_sc",
-      "optionIds": ["a", "b", "c"],
+      "optionIds": [
+        "a",
+        "b",
+        "c"
+      ],
       "expected": {
         "kind": "single_choice",
         "optionId": "b"
@@ -124,7 +124,11 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_err_nameerror_sc",
-      "optionIds": ["a", "b", "c"],
+      "optionIds": [
+        "a",
+        "b",
+        "c"
+      ],
       "expected": {
         "kind": "single_choice",
         "optionId": "a"
@@ -136,7 +140,11 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_err_typeerror_sc",
-      "optionIds": ["a", "b", "c"],
+      "optionIds": [
+        "a",
+        "b",
+        "c"
+      ],
       "expected": {
         "kind": "single_choice",
         "optionId": "b"
@@ -148,7 +156,11 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_err_valueerror_sc",
-      "optionIds": ["a", "b", "c"],
+      "optionIds": [
+        "a",
+        "b",
+        "c"
+      ],
       "expected": {
         "kind": "single_choice",
         "optionId": "c"
@@ -160,13 +172,16 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_err_debug_combo_sc",
-      "optionIds": ["a", "b", "c"],
+      "optionIds": [
+        "a",
+        "b",
+        "c"
+      ],
       "expected": {
         "kind": "single_choice",
         "optionId": "a"
       }
     },
-
     {
       "id": "m1_err_fill_nameerror_meaning",
       "kind": "fill_blank_choice",
@@ -227,17 +242,26 @@
         "value": "type"
       }
     },
-
     {
       "id": "m1_err_reorder_debug_steps",
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_err_reorder_debug_steps",
-      "tokenIds": ["t1", "t2", "t3", "t4"],
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
       "expected": {
         "kind": "drag_reorder",
-        "tokenIds": ["t1", "t2", "t3", "t4"]
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
       }
     },
     {
@@ -246,10 +270,18 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_err_reorder_nameerror_fix",
-      "tokenIds": ["t1", "t2", "t3"],
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
       "expected": {
         "kind": "drag_reorder",
-        "tokenIds": ["t1", "t2", "t3"]
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
       }
     },
     {
@@ -258,10 +290,18 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_err_reorder_type_fix",
-      "tokenIds": ["t1", "t2", "t3"],
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
       "expected": {
         "kind": "drag_reorder",
-        "tokenIds": ["t1", "t2", "t3"]
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
       }
     },
     {
@@ -270,10 +310,20 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_err_reorder_safe_parse",
-      "tokenIds": ["t1", "t2", "t3", "t4"],
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
       "expected": {
         "kind": "drag_reorder",
-        "tokenIds": ["t1", "t2", "t3", "t4"]
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
       }
     },
     {
@@ -282,13 +332,20 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_err_reorder_error_models",
-      "tokenIds": ["t1", "t2", "t3"],
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
       "expected": {
         "kind": "drag_reorder",
-        "tokenIds": ["t1", "t2", "t3"]
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
       }
     },
-
     {
       "id": "m1_err_identify_error_code",
       "kind": "code_input",
@@ -306,7 +363,8 @@
           }
         ],
         "solutionCode": "print(\"NameError\")\n"
-      }
+      },
+      "starterCode": "# Print the error name\n"
     },
     {
       "id": "m1_err_fix_type_mismatch_code",
@@ -316,7 +374,6 @@
       "messageBase": "quiz.m1_err_fix_type_mismatch_code",
       "language": "python",
       "showExpectedExample": true,
-
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -332,7 +389,8 @@
           }
         ],
         "solutionCode": "a = int(input())\nb = int(input())\nprint(a + b)\n"
-      }
+      },
+      "starterCode": "a = input()\nb = input()\n# TODO: convert and print sum\n"
     },
     {
       "id": "m1_err_parse_age_safely_code",
@@ -342,7 +400,6 @@
       "messageBase": "quiz.m1_err_parse_age_safely_code",
       "language": "python",
       "showExpectedExample": true,
-
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -358,7 +415,8 @@
           }
         ],
         "solutionCode": "text = input().strip()\nif text.isdigit():\n    age = int(text)\n    print(f\"Next year = {age + 1}\")\nelse:\n    print(\"Invalid age\")\n"
-      }
+      },
+      "starterCode": "text = input().strip()\n# TODO\n"
     }
   ]
 }

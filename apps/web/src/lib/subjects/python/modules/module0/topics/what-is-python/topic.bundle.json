@@ -148,13 +148,19 @@
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "data.csv",
-            "stdout": "Expected output based on the contents of data.csv",
+            "stdin": "Python\n",
+            "stdout": "I am learning Python.\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "coding\n",
+            "stdout": "I am learning coding.\n",
             "match": "exact"
           }
         ],
-        "solutionCode": "import pandas as pd\n\ndef read_csv_file(file_name):\n    data = pd.read_csv(file_name)\n    print(data)\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nfile_name = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(read_csv_file(file_name))"
-      }
+        "solutionCode": "language = input()\nprint(f'I am learning {language}.')"
+      },
+      "starterCode": "language = input()\n# Print the learning message here"
     }
   ]
 }

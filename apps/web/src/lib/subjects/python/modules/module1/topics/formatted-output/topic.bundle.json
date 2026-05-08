@@ -148,13 +148,19 @@
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "",
-            "stdout": "My name is John and I am 25 years old.",
+            "stdin": "Maya\n16\n",
+            "stdout": "Maya is 16 years old.\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "Leo\n21\n",
+            "stdout": "Leo is 21 years old.\n",
             "match": "exact"
           }
         ],
-        "solutionCode": "name = 'John'\nage = 25\nprint(f'My name is {name} and I am {age} years old.')"
-      }
+        "solutionCode": "name = input()\nage = input()\nprint(f'{name} is {age} years old.')"
+      },
+      "starterCode": "name = input()\nage = input()\n# Print the formatted sentence here"
     }
   ]
 }

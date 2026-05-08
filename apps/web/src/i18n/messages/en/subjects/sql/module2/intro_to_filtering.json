@@ -1,0 +1,468 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_2": {
+        "intro_to_filtering": {
+          "label": "Intro to Filtering",
+          "summary": "Learn why filtering matters, how `WHERE` works, how exact matching works, and how to write beginner filters for both text and number values.",
+          "cards": {
+            "sketch0": {
+              "title": "Why does filtering matter?"
+            },
+            "sketch1": {
+              "title": "What does the `WHERE` clause do?"
+            },
+            "sketch2": {
+              "title": "How do you match exact values?"
+            },
+            "sketch3": {
+              "title": "How do you filter numbers and text?"
+            },
+            "quiz": {
+              "title": "Quiz: Intro to Filtering"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_2": {
+        "intro_to_filtering": {
+          "why_filtering_matters": {
+            "title": "Filtering matters because most questions only need part of a table.",
+            "bodyMarkdown": "A table can contain many rows, but most SQL questions are not about **every** row.\n\nUsually, you want only the rows that match a condition.\n\nFor example, in a `products` table, you might want:\n\n- only products in the `Art` category\n- only products with stock `10`\n- only the row for one specific product\n\nThat is why filtering matters.\n\nInstead of reading the whole table, you can ask SQL to keep only the rows that match your question.\n\nCode example:\n\n~~~sql\nSELECT *\nFROM products\nWHERE category = 'Art';\n~~~\n\nThis keeps only rows where the category is `Art`.\n\nSo the big idea is:\n\n> filtering helps you focus on the rows you actually need\n\n### Try it yourself\n\nRead this query:\n\n~~~sql\nSELECT *\nFROM products\nWHERE stock = 10;\n~~~\n\nAsk yourself:\n\n- will this return every row or only some rows?\n- what kind of products will stay in the result?\n- why is this more useful than always reading the full table?"
+          },
+          "the_where_clause": {
+            "title": "The `WHERE` clause tells SQL which rows to keep.",
+            "bodyMarkdown": "The keyword `WHERE` is used to filter rows.\n\nIt adds a condition to the query.\n\nBasic shape:\n\n~~~sql\nSELECT column_or_columns\nFROM table_name\nWHERE condition;\n~~~\n\nYou can read it like this:\n\n- `SELECT` → what to return\n- `FROM` → which table to read\n- `WHERE` → which rows should stay in the result\n\nRows that match the condition stay.\nRows that do not match are left out.\n\nCode example:\n\n~~~sql\nSELECT name, price\nFROM products\nWHERE category = 'Home';\n~~~\n\nThis returns only the `name` and `price` for rows whose category is `Home`.\n\nSo `WHERE` answers this question:\n\n> which rows match the condition?\n\n### Try it yourself\n\nLook at this query:\n\n~~~sql\nSELECT name\nFROM products\nWHERE id = 4;\n~~~\n\nAsk yourself:\n\n- what column is being returned?\n- what table is SQL reading from?\n- what does the `WHERE` part remove from the result?"
+          },
+          "matching_exact_values": {
+            "title": "Exact matching usually uses the equals sign.",
+            "bodyMarkdown": "A common beginner filter checks whether a value is **exactly equal** to something.\n\nThat uses the equals sign:\n\n- `=`\n\nExamples of exact matching:\n\n- a category equals `Art`\n- an id equals `4`\n- a stock value equals `10`\n\nCode example:\n\n~~~sql\nSELECT *\nFROM products\nWHERE name = 'Notebook';\n~~~\n\nThis keeps only the row where the `name` is exactly `Notebook`.\n\nSo the key idea is:\n\n> use `=` when you want an exact match\n\nThat means the row must match the value exactly to appear in the result.\n\n### Try it yourself\n\nCompare these two ideas:\n\n- `category = 'Art'`\n- `id = 4`\n\nAsk yourself:\n\n- which one is matching text?\n- which one is matching a number?\n- what do both have in common?"
+          },
+          "filtering_numbers_and_text": {
+            "title": "Text and numbers are filtered a little differently.",
+            "bodyMarkdown": "When filtering, SQL treats **text** and **numbers** a little differently.\n\nFor text values, you usually put the value in quotes.\n\nExamples of text values:\n\n- `Art`\n- `Home`\n- `Notebook`\n\nFor number values, you usually do **not** use quotes.\n\nExamples of number values:\n\n- `4`\n- `10`\n- `25`\n\nCode examples:\n\n~~~sql\nSELECT *\nFROM products\nWHERE category = 'Art';\n~~~\n\n~~~sql\nSELECT *\nFROM products\nWHERE stock = 10;\n~~~\n\nSo a strong beginner habit is:\n\n- text values → use quotes\n- number values → usually no quotes\n\nThat makes your filter clearer and helps SQL read the condition correctly.\n\n### Try it yourself\n\nLook at these two filters:\n\n- `WHERE name = 'Notebook'`\n- `WHERE id = 4`\n\nAsk yourself:\n\n- which one uses text?\n- which one uses a number?\n- why does only one of them use quotes?"
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "m2_s01_filter_art_products": {
+      "title": "Filter art products",
+      "prompt": "The SQLite workspace already has a table named `products`.\n\nWrite a query that shows **all columns** for products whose `category` is `Art`.\n\nThen click **Run** and read the **Results** tab.",
+      "help": {
+        "concept": "Filtering rows in SQL is done with `WHERE`. To match an exact text value, use `=` and put the text in quotes.",
+        "hint_1": "Start with the full-table query on `products`, then add a condition for `category`.",
+        "hint_2": "Build it in this order: show all columns from `products`, then keep only the rows where the category matches the text value `Art` exactly."
+      },
+      "hint": "Use `WHERE` with the category value in quotes.",
+      "starterCode": "-- Show only art products\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "resultShape": "table"
+      }
+    },
+    "m2_s01_filter_stock_10": {
+      "title": "Filter by stock value",
+      "prompt": "The `products` table already exists.\n\nWrite a query that shows **all columns** for products whose `stock` is `10`.\n\nRun it and notice that the result may be smaller than the full table.",
+      "help": {
+        "concept": "To filter exact number values, use `WHERE` with `=`. Number values usually do not need quotes.",
+        "hint_1": "Use `WHERE stock = ...`.",
+        "hint_2": "Begin with the full-table query on `products`, then add a condition that keeps only rows whose stock matches the number `10` exactly."
+      },
+      "hint": "Use an exact number match on `stock`.",
+      "starterCode": "-- Show products with stock 10\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "resultShape": "table"
+      }
+    },
+    "m2_s01_filter_id_4_name_price": {
+      "title": "Filter one product by id",
+      "prompt": "The `products` table already exists.\n\nWrite a query that returns only the `name` and `price` columns for the product whose `id` is `4`.\n\nRun it and read the result carefully.",
+      "help": {
+        "concept": "You can filter one specific row by matching an exact id value with `WHERE`.",
+        "hint_1": "Select only `name` and `price`, then filter by `id`.",
+        "hint_2": "Use a normal `SELECT ... FROM ...` query with the two requested columns, then add a condition that keeps only the row whose id matches the number `4`."
+      },
+      "hint": "Pick the two columns, then filter by id.",
+      "starterCode": "-- Show the name and price for product id 4\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "resultShape": "table"
+      }
+    },
+    "m2_s01_filter_home_names": {
+      "title": "Filter text and show one column",
+      "prompt": "The `products` table already exists.\n\nWrite a query that returns only the `name` column for products whose `category` is `Home`.\n\nThen click **Run**.",
+      "help": {
+        "concept": "A query can both choose specific columns and filter rows at the same time.",
+        "hint_1": "Select only `name`, then filter where `category` matches `Home`.",
+        "hint_2": "Write a one-column query on `products`, then add a text-matching condition that keeps only rows in the `Home` category."
+      },
+      "hint": "Use one selected column and a text filter.",
+      "starterCode": "-- Show only the names of home products\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "resultShape": "table"
+      }
+    },
+    "m2_s01_filter_notebook_row": {
+      "title": "Filter by exact product name",
+      "prompt": "The `products` table already exists.\n\nWrite a query that shows **all columns** for the product whose `name` is `Notebook`.\n\nRun it and check the result.",
+      "help": {
+        "concept": "Exact text matching uses `WHERE` with `=` and the text value in quotes.",
+        "hint_1": "Use the full-table query, then filter on the `name` column.",
+        "hint_2": "Start by showing all columns from `products`, then keep only the row where the name matches the text value `Notebook` exactly."
+      },
+      "hint": "Use an exact text match on `name`.",
+      "starterCode": "-- Show the full row for Notebook\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "resultShape": "table"
+      }
+    },
+    "m2_s01_filtering_products_project": {
+      "title": "Practice filtering with WHERE",
+      "prompt": "Use the SQL workspace on the right to practice filtering rows in the `products` table.\n\nFor each task:\n\n1. type the query in the editor\n2. click **Run**\n3. read the **Results** tab\n4. compare the filtered result with the full table\n\nTasks:\n\n1. Show all columns for products whose `category` is `Art`\n2. Show all columns for products whose `stock` is `10`\n3. Show only the `name` and `price` columns for the product whose `id` is `4`\n4. Show only the `name` column for products whose `category` is `Home`\n5. Show all columns for the product whose `name` is `Notebook`\n\nRun one query at a time.\nThis project is about using `WHERE` to keep only the rows you need.",
+      "help": {
+        "concept": "This project builds the habit of combining a basic `SELECT ... FROM ...` query with a `WHERE` clause to filter rows.",
+        "hint_1": "Each task uses the same table and the same filtering idea: keep only rows that match an exact value.",
+        "hint_2": "Solve the tasks one by one. Sometimes you will filter text, sometimes a number, but each query should use `WHERE` to keep only the matching rows."
+      },
+      "hint": "Use `WHERE` to keep only matching rows.",
+      "starterCode": "-- Task 1\n-- Show all Art products\n\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "resultShape": "table"
+      }
+    },
+    "m2_s01_why_filtering_matters": {
+      "title": "Why does filtering matter?",
+      "prompt": "Why is filtering useful in SQL?",
+      "help": {
+        "concept": "Filtering helps you focus on only the rows that match your question instead of reading the whole table every time.",
+        "hint_1": "Think about asking for only what you need.",
+        "hint_2": "Filtering is useful when you want part of a table, not all of it."
+      },
+      "hint": "Think only the needed rows.",
+      "options": {
+        "a": "It lets you keep only the rows that match your question",
+        "b": "It always shows every row in the table",
+        "c": "It removes the need for table names",
+        "d": "It automatically sorts the result"
+      }
+    },
+    "m2_s01_where_clause_job": {
+      "title": "What does WHERE do?",
+      "prompt": "What is the main job of the `WHERE` clause in a SQL query?",
+      "help": {
+        "concept": "`WHERE` adds a condition so SQL knows which rows to keep in the result.",
+        "hint_1": "Think about row conditions.",
+        "hint_2": "It is the part of the query that decides which rows match."
+      },
+      "hint": "Think which rows stay.",
+      "options": {
+        "a": "It filters rows based on a condition",
+        "b": "It renames the table",
+        "c": "It adds new columns to the table",
+        "d": "It changes every value in the result"
+      }
+    },
+    "m2_s01_exact_value_match": {
+      "title": "How do you match an exact value?",
+      "prompt": "Which operator is commonly used in beginner SQL to match an exact value?",
+      "help": {
+        "concept": "Exact matching usually uses the equals sign.",
+        "hint_1": "Think about checking whether two values are exactly the same.",
+        "hint_2": "The common exact-match operator is the one that looks like basic equality."
+      },
+      "hint": "Think equals sign.",
+      "options": {
+        "a": "=",
+        "b": "*",
+        "c": ";",
+        "d": ","
+      }
+    },
+    "m2_s01_text_vs_number_filter": {
+      "title": "How are text and numbers filtered?",
+      "prompt": "What is a good beginner rule for filtering text and numbers in SQL?",
+      "help": {
+        "concept": "Text values are usually written in quotes, while number values usually are not.",
+        "hint_1": "Think about `Art` versus `10`.",
+        "hint_2": "One is text and usually goes in quotes. The other is a number and usually does not."
+      },
+      "hint": "Think quotes for text.",
+      "options": {
+        "a": "Text usually uses quotes, numbers usually do not",
+        "b": "Numbers must always use quotes and text must never use quotes",
+        "c": "Text and numbers are filtered with no difference at all",
+        "d": "Filtering only works for text"
+      }
+    },
+    "m2_s01_reading_filtered_results": {
+      "title": "How should you read a filtered result?",
+      "prompt": "What is a good beginner way to read the result of a filtered query?",
+      "help": {
+        "concept": "After filtering, you should check the headers and then verify that the returned rows actually match the condition.",
+        "hint_1": "Read the result carefully, not just quickly.",
+        "hint_2": "A strong habit is to check both the column names and whether the remaining rows match the filter."
+      },
+      "hint": "Check headers, then check the matching rows.",
+      "options": {
+        "a": "Read the headers first, then confirm the rows match the filter",
+        "b": "Ignore the condition and read only the last row",
+        "c": "Assume the filter worked without checking",
+        "d": "Only count commas in the query"
+      }
+    },
+    "m2_s01_where_true": {
+      "title": "What is true about WHERE?",
+      "prompt": "Select all true statements about `WHERE` in beginner SQL.",
+      "help": {
+        "concept": "`WHERE` is used to filter rows by a condition.",
+        "hint_1": "Think condition and matching rows.",
+        "hint_2": "Choose the statements about how `WHERE` controls which rows stay in the result."
+      },
+      "hint": "Think filtering rows.",
+      "options": {
+        "a": "`WHERE` filters rows",
+        "b": "`WHERE` is used with a condition",
+        "c": "Rows that match the condition can stay in the result",
+        "d": "`WHERE` always means sort the rows",
+        "e": "`WHERE` can be used after `FROM`"
+      }
+    },
+    "m2_s01_exact_matching_true": {
+      "title": "What is true about exact matching?",
+      "prompt": "Select all true statements about matching exact values in SQL.",
+      "help": {
+        "concept": "Exact matching usually uses `=` and requires the row value to match the condition exactly.",
+        "hint_1": "Think equals sign and exact value.",
+        "hint_2": "Choose the ideas about strict matching, not broad searching."
+      },
+      "hint": "Think exact equals.",
+      "options": {
+        "a": "The `=` operator is commonly used for exact matching",
+        "b": "The row should match the value exactly",
+        "c": "Exact matching can be used for numbers",
+        "d": "Exact matching means return every row",
+        "e": "Exact matching can be used for text"
+      }
+    },
+    "m2_s01_numbers_and_text_true": {
+      "title": "What is true about filtering numbers and text?",
+      "prompt": "Select all true statements about filtering number values and text values.",
+      "help": {
+        "concept": "Text and number filters often look similar, but text values usually need quotes while numbers usually do not.",
+        "hint_1": "Think `Art` versus `10`.",
+        "hint_2": "Choose the statements about quoting text and leaving numbers as numbers."
+      },
+      "hint": "Think text in quotes.",
+      "options": {
+        "a": "Text values are usually written in quotes",
+        "b": "Number values usually do not need quotes",
+        "c": "Both text and numbers can be used in `WHERE` conditions",
+        "d": "Text filtering is impossible in SQL",
+        "e": "Number filtering is common for columns like `id` or `stock`"
+      }
+    },
+    "m2_s01_filtering_benefits_true": {
+      "title": "What are the benefits of filtering?",
+      "prompt": "Select all true statements about why filtering is useful.",
+      "help": {
+        "concept": "Filtering makes results smaller, more focused, and closer to the actual question you are asking.",
+        "hint_1": "Think focus and relevance.",
+        "hint_2": "Choose the statements about reducing extra rows and keeping only useful matches."
+      },
+      "hint": "Think focus and fewer rows.",
+      "options": {
+        "a": "Filtering can make results smaller",
+        "b": "Filtering helps focus on relevant rows",
+        "c": "Filtering can make results easier to read",
+        "d": "Filtering always removes the need for `SELECT`",
+        "e": "Filtering helps answer more specific questions"
+      }
+    },
+    "m2_s01_filtering_workflow_true": {
+      "title": "What matches the right beginner filtering workflow?",
+      "prompt": "Select all statements that match a good beginner workflow for filtering data.",
+      "help": {
+        "concept": "A good workflow is to decide what you want, write the condition, run the query, and verify the rows that remain.",
+        "hint_1": "Think choose, filter, run, verify.",
+        "hint_2": "Choose the steps that help you write a condition and then check whether the result actually matches it."
+      },
+      "hint": "Choose the condition, then verify the result.",
+      "options": {
+        "a": "Decide which rows you want to keep",
+        "b": "Write a `WHERE` condition that matches that idea",
+        "c": "Run the query and inspect the headers",
+        "d": "Check that the returned rows really match the filter",
+        "e": "Skip reading the result after running"
+      }
+    },
+    "m2_s01_reorder_filtering_purpose": {
+      "title": "Why filtering matters",
+      "prompt": "Reorder the ideas to explain why filtering is useful.",
+      "help": {
+        "concept": "Filtering helps you keep only the rows that match your question.",
+        "hint_1": "Start with many rows.",
+        "hint_2": "End with only the needed rows."
+      },
+      "hint": "Think big table to focused rows.",
+      "tokens": {
+        "t1": "a table can contain many rows",
+        "t2": "you often want only the rows that match your question",
+        "t3": "filtering helps keep only those rows"
+      }
+    },
+    "m2_s01_reorder_where_flow": {
+      "title": "What WHERE does",
+      "prompt": "Put the query ideas in order.",
+      "help": {
+        "concept": "WHERE tells SQL which rows to keep.",
+        "hint_1": "Start with what to return.",
+        "hint_2": "Then source table, then row condition."
+      },
+      "hint": "SELECT, FROM, WHERE.",
+      "tokens": {
+        "t1": "`SELECT` says what to return",
+        "t2": "`FROM` says which table to read",
+        "t3": "`WHERE` says which rows should stay"
+      }
+    },
+    "m2_s01_reorder_exact_match_logic": {
+      "title": "Exact matching",
+      "prompt": "Reorder the ideas to explain exact matching.",
+      "help": {
+        "concept": "The equals sign is used when a value must match exactly.",
+        "hint_1": "Start with the operator.",
+        "hint_2": "Then explain the exact match."
+      },
+      "hint": "Think equals means exact.",
+      "tokens": {
+        "t1": "use `=` for exact matching",
+        "t2": "the row value must match the condition exactly",
+        "t3": "only exact matches stay in the result"
+      }
+    },
+    "m2_s01_reorder_text_number_difference": {
+      "title": "Text and number filters",
+      "prompt": "Put the ideas in the best order.",
+      "help": {
+        "concept": "Text values usually use quotes, while numbers usually do not.",
+        "hint_1": "Start with text values.",
+        "hint_2": "Then compare with number values."
+      },
+      "hint": "Text first, numbers after.",
+      "tokens": {
+        "t1": "text values are usually written in quotes",
+        "t2": "number values usually do not need quotes",
+        "t3": "this helps SQL read the condition clearly"
+      }
+    },
+    "m2_s01_reorder_filtering_workflow": {
+      "title": "Good filtering workflow",
+      "prompt": "Reorder the beginner filtering workflow.",
+      "help": {
+        "concept": "A good filtering workflow is decide, write, run, verify.",
+        "hint_1": "Start with the rows you want.",
+        "hint_2": "End by checking the result."
+      },
+      "hint": "Choose first, verify last.",
+      "tokens": {
+        "t1": "decide which rows you want to keep",
+        "t2": "write a WHERE condition that matches that idea",
+        "t3": "run the query and verify the returned rows"
+      }
+    },
+    "m2_s01_fill_where_keyword": {
+      "title": "Filtering keyword",
+      "prompt": "Fill in the blank with the correct keyword.",
+      "help": {
+        "concept": "WHERE is the keyword used to filter rows.",
+        "hint_1": "It comes after FROM.",
+        "hint_2": "The keyword is WHERE."
+      },
+      "hint": "Think row condition keyword.",
+      "template": "The SQL keyword that filters rows is ____.",
+      "choices": ["WHERE", "TABLE", "SHOW", "VALUE"],
+      "correct": "WHERE"
+    },
+    "m2_s01_fill_exact_operator": {
+      "title": "Exact match operator",
+      "prompt": "Choose the symbol that completes the sentence.",
+      "help": {
+        "concept": "The equals sign is used for exact matching.",
+        "hint_1": "It is the basic equality operator.",
+        "hint_2": "The symbol is =."
+      },
+      "hint": "Think exact equality.",
+      "template": "An exact match in beginner SQL usually uses ____.",
+      "choices": ["=", "*", ";", ","],
+      "correct": "="
+    },
+    "m2_s01_fill_text_quotes": {
+      "title": "Text values",
+      "prompt": "Fill in the blank with the best word.",
+      "help": {
+        "concept": "Text values are usually written in quotes.",
+        "hint_1": "Think around words like Art or Home.",
+        "hint_2": "The missing word is quotes."
+      },
+      "hint": "Think text formatting.",
+      "template": "Text values in beginner SQL filters usually go in ____.",
+      "choices": ["quotes", "brackets", "headers", "comments"],
+      "correct": "quotes"
+    },
+    "m2_s01_fill_number_quotes": {
+      "title": "Number values",
+      "prompt": "Choose the best phrase to complete the sentence.",
+      "help": {
+        "concept": "Number values usually do not need quotes.",
+        "hint_1": "Think plain numeric values.",
+        "hint_2": "The lesson says usually no quotes."
+      },
+      "hint": "Think numbers as numbers.",
+      "template": "Number values in beginner SQL filters usually need ____.",
+      "choices": ["no quotes", "double quotes", "extra commas", "table aliases"],
+      "correct": "no quotes"
+    },
+    "m2_s01_fill_filter_goal": {
+      "title": "What filtering keeps",
+      "prompt": "Fill in the blank with the best word.",
+      "help": {
+        "concept": "Filtering helps you focus on the rows you actually need.",
+        "hint_1": "Think result entries.",
+        "hint_2": "The lesson uses the word rows."
+      },
+      "hint": "Think kept entries.",
+      "template": "Filtering helps you keep only the ____ you actually need.",
+      "choices": ["rows", "buttons", "themes", "queries"],
+      "correct": "rows"
+    }
+  }
+}

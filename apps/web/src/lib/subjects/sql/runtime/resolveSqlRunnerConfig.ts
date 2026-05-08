@@ -11,35 +11,38 @@ export type SqlTableSnapshot = {
     rows: unknown[][];
     rowCount: number;
 };
+function asSqlDialect(value: unknown): SqlDialect | null {
+    const dialect = String(value ?? "").trim().toLowerCase();
 
+    if (
+        dialect === "sqlite" ||
+        dialect === "postgres" ||
+        dialect === "mysql" ||
+        dialect === "mssql"
+    ) {
+        return dialect;
+    }
+
+    return null;
+}
 export type SqlTableSnapshots = Record<string, SqlTableSnapshot>;
 
 export type ResolveSqlRunnerConfigArgs = {
     language?: string | null;
-
-    sqlDialect?: SqlDialect | null;
+    sqlDialect?: string | null;
     sqlDatasetId?: string | null;
     sqlResultShape?: "table" | null;
-
     sqlSchemaSql?: string | null;
     sqlSeedSql?: string | null;
     sqlSetupSql?: string | null;
-
     sqlInitialTableSnapshots?: SqlTableSnapshots | null;
-
+    fixedSqlDialect?: SqlDialect | null;
     defaultSqlDialect?: SqlDialect;
+    runtime?: unknown;
+    runtimeDefaults?: unknown;
+    topicRuntimeDefaults?: unknown;
+    moduleRuntimeDefaults?: unknown;
 };
-
-function firstNonBlank(...values: Array<string | null | undefined>) {
-    for (const value of values) {
-        if (typeof value === "string" && value.trim()) return value;
-    }
-    return undefined;
-}
-
-function cleanOptionalNonBlank(value: string | null | undefined) {
-    return typeof value === "string" && value.trim() ? value.trim() : undefined;
-}
 
 export type ResolvedSqlRunnerConfig = {
     isSql: boolean;
@@ -64,44 +67,45 @@ export function resolveSqlRunnerConfig(
         sqlSeedSql,
         sqlSetupSql,
         sqlInitialTableSnapshots,
+        fixedSqlDialect,
         defaultSqlDialect = DEFAULT_SQL_DIALECT,
     } = args;
-
-
     const isSql = String(language ?? "").toLowerCase() === "sql";
-    const normalizedDatasetId = cleanOptionalNonBlank(sqlDatasetId);
-    const normalizedSetupSql = cleanOptionalNonBlank(sqlSetupSql);
-    const dataset =
-        normalizedDatasetId && isSql ? getSqlDataset(normalizedDatasetId) : null;
+    const dataset = sqlDatasetId && isSql ? getSqlDataset(sqlDatasetId) : null;
 
-    const resolvedDialect =
-        isSql
-            ? sqlDialect ?? dataset?.dialect ?? defaultSqlDialect
-            : defaultSqlDialect;
+    const resolvedDialect: SqlDialect =
+        asSqlDialect(sqlDialect) ??
+        asSqlDialect(fixedSqlDialect) ??
+        asSqlDialect(dataset?.dialect) ??
+        defaultSqlDialect;
 
     const resolvedSchemaSql =
-        isSql
-            ? firstNonBlank(sqlSchemaSql, normalizedSetupSql, dataset?.schemaSql)
-            : undefined;
+        sqlSchemaSql ??
+        sqlSetupSql ??
+        dataset?.schemaSql ??
+        undefined;
 
     const resolvedSeedSql =
-        isSql
-            ? firstNonBlank(sqlSeedSql, dataset?.seedSql)
-            : undefined;
+        sqlSeedSql ??
+        dataset?.seedSql ??
+        undefined;
 
     const resolvedSnapshots =
-        isSql
-            ? sqlInitialTableSnapshots ?? dataset?.tableSnapshots ?? undefined
-            : undefined;
+        sqlInitialTableSnapshots ??
+        dataset?.tableSnapshots ??
+        undefined;
+
+    const resolvedResultShape = sqlResultShape ?? "table";
 
     return {
         isSql,
         sqlDialect: resolvedDialect,
-        sqlDatasetId: isSql ? normalizedDatasetId : undefined,
-        sqlResultShape: isSql ? (sqlResultShape ?? "table") : undefined,
+        sqlDatasetId: sqlDatasetId ?? undefined,
+        sqlResultShape: resolvedResultShape,
         sqlSchemaSql: resolvedSchemaSql,
         sqlSeedSql: resolvedSeedSql,
-        sqlSetupSql: isSql ? normalizedSetupSql : undefined,
+        sqlSetupSql: sqlSetupSql ?? undefined,
         sqlInitialTableSnapshots: resolvedSnapshots,
     };
+
 }

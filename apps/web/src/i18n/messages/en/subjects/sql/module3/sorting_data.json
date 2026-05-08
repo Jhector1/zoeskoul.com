@@ -1,0 +1,468 @@
+{
+  "topics": {
+    "sql": {
+      "sql_module_3": {
+        "sorting_data": {
+          "label": "Sorting Data",
+          "summary": "Learn why sorting matters, how `ORDER BY` works, and how ascending and descending order change the way results are read.",
+          "cards": {
+            "sketch0": {
+              "title": "Why does sorting matter?"
+            },
+            "sketch1": {
+              "title": "What does `ORDER BY` do?"
+            },
+            "sketch2": {
+              "title": "What is ascending order?"
+            },
+            "sketch3": {
+              "title": "What is descending order?"
+            },
+            "quiz": {
+              "title": "Quiz: Sorting Data"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "sql": {
+      "sql_module_3": {
+        "sorting_data": {
+          "why_sorting_matters": {
+            "title": "Sorting matters because the same rows can feel much clearer in a useful order.",
+            "bodyMarkdown": "A query can return the right rows and still feel hard to read if the order is messy.\n\nSorting helps you:\n\n- find high or low values faster\n- read names in a predictable order\n- compare rows more easily\n\nCode example:\n\n~~~sql\nSELECT name, price\nFROM products\nORDER BY price ASC;\n~~~\n\nThis puts lower prices first, so the pattern in the result becomes easier to see.\n\nSo the big idea is:\n\n> sorting changes how quickly you can understand the answer\n\n### Try it yourself\n\nLook at this query:\n\n~~~sql\nSELECT name, stock\nFROM products\nORDER BY stock DESC;\n~~~\n\nAsk yourself:\n\n- which rows should appear first?\n- why might this be easier to read than an unsorted result?\n- what kind of question does this order help answer quickly?"
+          },
+          "order_by": {
+            "title": "`ORDER BY` tells SQL how to arrange the result rows.",
+            "bodyMarkdown": "The keyword `ORDER BY` is used to sort query results.\n\nExample shape:\n\n~~~sql\nSELECT column_or_columns\nFROM table_name\nORDER BY some_column;\n~~~\n\nYou can read it like this:\n\n- `SELECT` → what to return\n- `FROM` → where to read from\n- `ORDER BY` → how to arrange the rows\n\nCode example:\n\n~~~sql\nSELECT name, category\nFROM products\nORDER BY category;\n~~~\n\nThis arranges the rows by `category`.\n\nSo the key idea is:\n\n> `ORDER BY` controls the order of the result\n\n### Try it yourself\n\nRead this query:\n\n~~~sql\nSELECT name, created_at\nFROM products\nORDER BY created_at;\n~~~\n\nAsk yourself:\n\n- which column controls the order?\n- is the query changing the rows or only arranging them?\n- what would look different in the result after sorting?"
+          },
+          "ascending_order": {
+            "title": "Ascending order goes from smaller to larger or A to Z.",
+            "bodyMarkdown": "Ascending order is the default sort direction in many SQL queries.\n\nFor text, it often means:\n\n- A to Z\n\nFor numbers, it often means:\n\n- smallest to largest\n\nFor dates, it often means:\n\n- oldest to newest\n\nCode example:\n\n~~~sql\nSELECT name, price\nFROM products\nORDER BY price ASC;\n~~~\n\nThis places lower prices first and higher prices later.\n\nSo the main idea is:\n\n> ascending order moves forward in a natural direction\n\n### Try it yourself\n\nLook at this query:\n\n~~~sql\nSELECT name\nFROM products\nORDER BY name ASC;\n~~~\n\nAsk yourself:\n\n- what does ascending mean for text here?\n- which names should appear near the top?\n- how would the result change if the direction were reversed?"
+          },
+          "descending_order": {
+            "title": "Descending order goes from larger to smaller or Z to A.",
+            "bodyMarkdown": "Descending order is useful when you want the biggest or latest values first.\n\nFor text, it often means:\n\n- Z to A\n\nFor numbers, it often means:\n\n- largest to smallest\n\nFor dates, it often means:\n\n- newest to oldest\n\nCode example:\n\n~~~sql\nSELECT name, stock\nFROM products\nORDER BY stock DESC;\n~~~\n\nThis places higher stock values first.\n\nSo the main idea is:\n\n> descending order brings larger or later values to the top\n\n### Try it yourself\n\nRead this query:\n\n~~~sql\nSELECT name, created_at\nFROM products\nORDER BY created_at DESC;\n~~~\n\nAsk yourself:\n\n- what does descending mean for dates?\n- which rows should appear first?\n- why is this useful when you want the newest rows quickly?"
+          }
+        }
+      }
+    }
+  },
+  "quiz": {
+    "m3_s01_sort_names_asc": {
+      "title": "Sort product names",
+      "prompt": "The SQLite workspace already has a table named `products`.\n\nWrite a query that shows the `name` column from `products`, sorted by `name` in ascending order.\n\nThen click **Run**.",
+      "help": {
+        "concept": "Use `ORDER BY` to sort rows. Ascending order is the default in many SQL queries.",
+        "hint_1": "Select `name`, then sort by that same column.",
+        "hint_2": "Write a one-column query on `products`, then add an `ORDER BY` clause so names appear in normal alphabetical order."
+      },
+      "hint": "Use `ORDER BY name`.",
+      "starterCode": "-- Show product names in ascending order\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "resultShape": "table"
+      }
+    },
+    "m3_s01_sort_price_asc": {
+      "title": "Sort by price ascending",
+      "prompt": "The `products` table already exists.\n\nWrite a query that shows the `name` and `price` columns, sorted by `price` from lowest to highest.\n\nThen run it.",
+      "help": {
+        "concept": "Ascending order on a number column usually means smallest to largest.",
+        "hint_1": "Select `name` and `price`, then sort by `price`.",
+        "hint_2": "Build a two-column query on `products`, then add sorting so lower prices appear before higher prices."
+      },
+      "hint": "Sort by `price` in ascending order.",
+      "starterCode": "-- Show products from lowest to highest price\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "resultShape": "table"
+      }
+    },
+    "m3_s01_sort_stock_desc": {
+      "title": "Sort by stock descending",
+      "prompt": "The `products` table already exists.\n\nWrite a query that shows the `name` and `stock` columns, sorted by `stock` from highest to lowest.\n\nThen click **Run**.",
+      "help": {
+        "concept": "Descending order on a number column means largest to smallest.",
+        "hint_1": "Select `name` and `stock`, then sort by `stock` in the reverse direction.",
+        "hint_2": "Write a two-column query on `products`, then add sorting so higher stock values appear before lower ones."
+      },
+      "hint": "Use descending order on `stock`.",
+      "starterCode": "-- Show products from highest to lowest stock\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "resultShape": "table"
+      }
+    },
+    "m3_s01_sort_created_at_asc": {
+      "title": "Sort dates ascending",
+      "prompt": "The `products` table already exists.\n\nWrite a query that shows the `name` and `created_at` columns, sorted by `created_at` from oldest to newest.\n\nThen run it.",
+      "help": {
+        "concept": "Ascending order on a date column usually means oldest to newest.",
+        "hint_1": "Select `name` and `created_at`, then sort by the date column.",
+        "hint_2": "Build a two-column query on `products`, then add sorting so earlier dates appear before later dates."
+      },
+      "hint": "Sort by `created_at` in ascending order.",
+      "starterCode": "-- Show products from oldest to newest\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "resultShape": "table"
+      }
+    },
+    "m3_s01_sort_category_desc": {
+      "title": "Sort text descending",
+      "prompt": "The `products` table already exists.\n\nWrite a query that shows the `name` and `category` columns, sorted by `category` in descending order.\n\nThen click **Run**.",
+      "help": {
+        "concept": "Descending order on text usually means reverse alphabetical order.",
+        "hint_1": "Select `name` and `category`, then sort by `category`.",
+        "hint_2": "Write a two-column query on `products`, then add sorting so categories appear in reverse alphabetical order."
+      },
+      "hint": "Use descending order on `category`.",
+      "starterCode": "-- Show products with categories in descending order\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "resultShape": "table"
+      }
+    },
+    "m3_s01_sorting_project": {
+      "title": "Practice sorting results",
+      "prompt": "Use the SQL workspace on the right to practice sorting data from the `products` table.\n\nFor each task:\n\n1. type the query in the editor\n2. click **Run**\n3. read the **Results** tab\n4. check whether the rows are in the order you expected\n\nTasks:\n\n1. Show product names sorted by `name` ascending\n2. Show `name` and `price` sorted by `price` ascending\n3. Show `name` and `stock` sorted by `stock` descending\n4. Show `name` and `created_at` sorted by `created_at` ascending\n5. Show `name` and `category` sorted by `category` descending\n\nRun one query at a time.\nThis project is about using `ORDER BY` to control result order clearly.",
+      "help": {
+        "concept": "This project builds confidence with the core sorting patterns: text, numbers, dates, ascending, and descending.",
+        "hint_1": "Each task uses the same main idea: write a basic `SELECT ... FROM ...` query, then add `ORDER BY` for the requested column.",
+        "hint_2": "Before you run each query, say the expected order in plain English first. Then add the sorting rule that matches that meaning."
+      },
+      "hint": "Use `ORDER BY` to match the requested order.",
+      "starterCode": "-- Task 1\n-- Show names in ascending order\n\n",
+      "fixedLanguage": "sql",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "resultShape": "table"
+      }
+    },
+    "m3_s01_why_sorting": {
+      "title": "Why does sorting matter?",
+      "prompt": "Why is sorting useful in SQL?",
+      "help": {
+        "concept": "Sorting makes result sets easier to scan and helps important values appear in a useful order.",
+        "hint_1": "Think easier reading and comparison.",
+        "hint_2": "Sorting helps you bring rows into a predictable order instead of reading them in a random-looking sequence."
+      },
+      "hint": "Think clearer result order.",
+      "options": {
+        "a": "It makes results easier to scan and compare",
+        "b": "It removes the need for SELECT",
+        "c": "It always changes the table itself",
+        "d": "It only works for text"
+      }
+    },
+    "m3_s01_order_by_job": {
+      "title": "What does ORDER BY do?",
+      "prompt": "What is the main job of `ORDER BY` in a SQL query?",
+      "help": {
+        "concept": "`ORDER BY` arranges the order of the returned rows.",
+        "hint_1": "Think about row order.",
+        "hint_2": "It does not choose the rows. It decides how the result should be arranged."
+      },
+      "hint": "Think arrange the result rows.",
+      "options": {
+        "a": "It sorts the returned rows",
+        "b": "It filters rows out",
+        "c": "It renames columns",
+        "d": "It creates a new table"
+      }
+    },
+    "m3_s01_ascending_meaning": {
+      "title": "What is ascending order?",
+      "prompt": "What does ascending order usually mean in SQL?",
+      "help": {
+        "concept": "Ascending order usually means A to Z, smallest to largest, or oldest to newest.",
+        "hint_1": "Think natural upward order.",
+        "hint_2": "Ascending order places lower, earlier, or alphabetically earlier values first."
+      },
+      "hint": "Think A to Z or smallest to largest.",
+      "options": {
+        "a": "A to Z, smallest to largest, or oldest to newest",
+        "b": "Z to A, largest to smallest, or newest to oldest",
+        "c": "Only random order",
+        "d": "Only reverse number order"
+      }
+    },
+    "m3_s01_descending_meaning": {
+      "title": "What is descending order?",
+      "prompt": "What does descending order usually mean in SQL?",
+      "help": {
+        "concept": "Descending order usually means Z to A, largest to smallest, or newest to oldest.",
+        "hint_1": "Think reverse order.",
+        "hint_2": "Descending order brings higher, later, or alphabetically later values first."
+      },
+      "hint": "Think reverse order.",
+      "options": {
+        "a": "Z to A, largest to smallest, or newest to oldest",
+        "b": "A to Z, smallest to largest, or oldest to newest",
+        "c": "No ordering at all",
+        "d": "Only text order"
+      }
+    },
+    "m3_s01_sorting_result_check": {
+      "title": "How should you check a sorted result?",
+      "prompt": "After running a sorted query, what is a strong habit?",
+      "help": {
+        "concept": "You should verify that the rows really follow the requested order.",
+        "hint_1": "Think compare the result to the requested sort.",
+        "hint_2": "Do not just look at the headers. Check whether the values go in the correct direction."
+      },
+      "hint": "Check whether the rows follow the requested order.",
+      "options": {
+        "a": "Verify that the rows actually follow the requested order",
+        "b": "Ignore the row order after running",
+        "c": "Only count commas in the query",
+        "d": "Assume the sort worked without checking"
+      }
+    },
+    "m3_s01_order_by_true": {
+      "title": "What is true about ORDER BY?",
+      "prompt": "Select all true statements about `ORDER BY` in SQL.",
+      "help": {
+        "concept": "`ORDER BY` is used to sort the result rows of a query.",
+        "hint_1": "Think result order and readability.",
+        "hint_2": "Choose the statements about arranging returned rows, not filtering them."
+      },
+      "hint": "Think sorting the result.",
+      "options": {
+        "a": "`ORDER BY` controls the order of result rows",
+        "b": "`ORDER BY` can be used with text columns",
+        "c": "`ORDER BY` can be used with number columns",
+        "d": "`ORDER BY` means filter out rows",
+        "e": "`ORDER BY` can help make results easier to read"
+      }
+    },
+    "m3_s01_ascending_true": {
+      "title": "What is true about ascending order?",
+      "prompt": "Select all true statements about ascending order in SQL.",
+      "help": {
+        "concept": "Ascending order is the common default direction and usually goes upward in a natural way.",
+        "hint_1": "Think alphabetically earlier, numerically smaller, or chronologically earlier first.",
+        "hint_2": "Choose the statements about forward or increasing order."
+      },
+      "hint": "Think forward order.",
+      "options": {
+        "a": "Ascending text order is often A to Z",
+        "b": "Ascending number order is often smallest to largest",
+        "c": "Ascending date order is often oldest to newest",
+        "d": "Ascending always means reverse order",
+        "e": "Ascending order is useful for seeing lower values first"
+      }
+    },
+    "m3_s01_descending_true": {
+      "title": "What is true about descending order?",
+      "prompt": "Select all true statements about descending order in SQL.",
+      "help": {
+        "concept": "Descending order usually brings later, larger, or alphabetically later values to the top.",
+        "hint_1": "Think reverse or highest-first ordering.",
+        "hint_2": "Choose the statements about larger, later, or reverse order."
+      },
+      "hint": "Think reverse or highest first.",
+      "options": {
+        "a": "Descending text order is often Z to A",
+        "b": "Descending number order is often largest to smallest",
+        "c": "Descending date order is often newest to oldest",
+        "d": "Descending means the same as filtering",
+        "e": "Descending order is useful when you want the biggest values first"
+      }
+    },
+    "m3_s01_sorting_benefits_true": {
+      "title": "What are the benefits of sorting?",
+      "prompt": "Select all true statements about why sorting is useful.",
+      "help": {
+        "concept": "Sorting improves clarity and helps you notice important values more quickly.",
+        "hint_1": "Think readability, comparison, and finding highs or lows.",
+        "hint_2": "Choose the statements about better result organization."
+      },
+      "hint": "Think clearer and more useful order.",
+      "options": {
+        "a": "Sorting can make results easier to scan",
+        "b": "Sorting can help find highest or lowest values",
+        "c": "Sorting can make comparisons easier",
+        "d": "Sorting removes the need to read the result",
+        "e": "Sorting gives the rows a more predictable order"
+      }
+    },
+    "m3_s01_sorting_workflow_true": {
+      "title": "What matches the right workflow?",
+      "prompt": "Select all statements that match a good workflow for sorting data.",
+      "help": {
+        "concept": "A good workflow is to decide what order you want, add the sort, run the query, and verify the result.",
+        "hint_1": "Think desired order first, verification after.",
+        "hint_2": "Choose the steps that help connect the requested sort to the returned row order."
+      },
+      "hint": "Decide the order, then verify it.",
+      "options": {
+        "a": "Decide which column should control the order",
+        "b": "Decide whether the order should be ascending or descending",
+        "c": "Add `ORDER BY` to the query",
+        "d": "Run the query and check the returned order",
+        "e": "Ignore the row order after running"
+      }
+    },
+    "m3_s01_reorder_sorting_purpose": {
+      "title": "Why sorting matters",
+      "prompt": "Reorder the ideas to explain why sorting is useful.",
+      "help": {
+        "concept": "Sorting makes result sets easier to scan and understand.",
+        "hint_1": "Start with messy order.",
+        "hint_2": "End with clearer reading."
+      },
+      "hint": "Think messy to clear.",
+      "tokens": {
+        "t1": "query results can feel hard to read in messy order",
+        "t2": "sorting arranges rows in a useful direction",
+        "t3": "the result becomes easier to scan and compare"
+      }
+    },
+    "m3_s01_reorder_order_by_flow": {
+      "title": "What ORDER BY does",
+      "prompt": "Put the query ideas in order.",
+      "help": {
+        "concept": "ORDER BY tells SQL how to arrange the result rows.",
+        "hint_1": "Start with what to return.",
+        "hint_2": "Then source table, then row order."
+      },
+      "hint": "SELECT, FROM, ORDER BY.",
+      "tokens": {
+        "t1": "`SELECT` says what to return",
+        "t2": "`FROM` says which table to read",
+        "t3": "`ORDER BY` says how to arrange the rows"
+      }
+    },
+    "m3_s01_reorder_ascending_logic": {
+      "title": "Ascending order",
+      "prompt": "Reorder the ideas to explain ascending order.",
+      "help": {
+        "concept": "Ascending order moves upward in a natural direction.",
+        "hint_1": "Think text, numbers, dates.",
+        "hint_2": "Each one moves in a forward order."
+      },
+      "hint": "Think natural forward order.",
+      "tokens": {
+        "t1": "ascending text order is often A to Z",
+        "t2": "ascending number order is often smallest to largest",
+        "t3": "ascending date order is often oldest to newest"
+      }
+    },
+    "m3_s01_reorder_descending_logic": {
+      "title": "Descending order",
+      "prompt": "Put the descending idea in order.",
+      "help": {
+        "concept": "Descending order brings larger or later values to the top.",
+        "hint_1": "Think text, numbers, dates.",
+        "hint_2": "Each one moves in reverse order."
+      },
+      "hint": "Think reverse order.",
+      "tokens": {
+        "t1": "descending text order is often Z to A",
+        "t2": "descending number order is often largest to smallest",
+        "t3": "descending date order is often newest to oldest"
+      }
+    },
+    "m3_s01_reorder_sorting_workflow": {
+      "title": "Good sorting workflow",
+      "prompt": "Reorder the workflow for sorting.",
+      "help": {
+        "concept": "A good workflow is decide the order, write it, run it, verify it.",
+        "hint_1": "Start with the column and direction.",
+        "hint_2": "Verification comes last."
+      },
+      "hint": "Choose first, verify last.",
+      "tokens": {
+        "t1": "decide which column should control the order",
+        "t2": "decide whether the order should be ascending or descending",
+        "t3": "run the query and verify the returned order"
+      }
+    },
+    "m3_s01_fill_order_by_keyword": {
+      "title": "Sorting keyword",
+      "prompt": "Fill in the blank with the correct keyword.",
+      "help": {
+        "concept": "ORDER BY is the keyword used to sort result rows.",
+        "hint_1": "It comes after FROM.",
+        "hint_2": "The keyword is ORDER BY."
+      },
+      "hint": "Think sorting keyword.",
+      "template": "The SQL keyword used to sort result rows is ____.",
+      "choices": ["ORDER BY", "LIMIT", "WHERE", "GROUP"],
+      "correct": "ORDER BY"
+    },
+    "m3_s01_fill_ascending_text": {
+      "title": "Ascending text order",
+      "prompt": "Choose the best phrase to complete the sentence.",
+      "help": {
+        "concept": "Ascending text order is often alphabetical from A to Z.",
+        "hint_1": "Think normal alphabet direction.",
+        "hint_2": "The answer is A to Z."
+      },
+      "hint": "Think alphabetical forward order.",
+      "template": "Ascending text order is often ____.",
+      "choices": ["A to Z", "Z to A", "largest to smallest", "newest to oldest"],
+      "correct": "A to Z"
+    },
+    "m3_s01_fill_descending_numbers": {
+      "title": "Descending number order",
+      "prompt": "Fill in the blank with the best phrase.",
+      "help": {
+        "concept": "Descending number order means larger values first.",
+        "hint_1": "Think biggest first.",
+        "hint_2": "The answer is largest to smallest."
+      },
+      "hint": "Think biggest first.",
+      "template": "Descending number order is often ____.",
+      "choices": ["largest to smallest", "smallest to largest", "A to Z", "oldest to newest"],
+      "correct": "largest to smallest"
+    },
+    "m3_s01_fill_sorting_goal": {
+      "title": "What sorting controls",
+      "prompt": "Choose the best word to complete the sentence.",
+      "help": {
+        "concept": "Sorting controls the order of the result rows.",
+        "hint_1": "Think arrangement.",
+        "hint_2": "The missing word is order."
+      },
+      "hint": "Think arrangement.",
+      "template": "Sorting changes the ____ of the result rows.",
+      "choices": ["order", "table name", "dataset", "column count"],
+      "correct": "order"
+    },
+    "m3_s01_fill_sorting_check": {
+      "title": "What to verify after sorting",
+      "prompt": "Fill in the blank with the best phrase.",
+      "help": {
+        "concept": "After sorting, you should verify that rows follow the requested order.",
+        "hint_1": "Think expected direction.",
+        "hint_2": "The phrase is requested order."
+      },
+      "hint": "Think expected direction.",
+      "template": "After running a sorted query, verify that the rows follow the ____.",
+      "choices": ["requested order", "table border", "query comments", "toolbar layout"],
+      "correct": "requested order"
+    }
+  }
+}

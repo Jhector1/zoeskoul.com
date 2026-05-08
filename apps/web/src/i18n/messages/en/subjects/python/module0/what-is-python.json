@@ -90,15 +90,15 @@
               }
             },
             "5": {
-              "title": "Read and display data from a CSV file",
-              "prompt": "Write a Python program that reads a CSV file and displays its contents. Then read the input values, call the function, and print the returned result.",
-              "hint": "Focus on the programming task being asked for, not on copying final solution text.",
+              "title": "Read and print a learning message",
+              "prompt": "Read ONE input called `language`.\n\nPrint exactly:\nI am learning <language>.",
+              "hint": "Read the input into a variable, then use an f-string to print the sentence.",
               "help": {
-                "concept": "Build the solution from the behavior the exercise is testing.",
-                "hint_1": "Think about which steps, functions, or statements are required for the task.",
-                "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
+                "concept": "This task checks whether you can read one input and include it in printed output.",
+                "hint_1": "Write the required Python steps first, then run the program with the sample input.",
+                "hint_2": "Make sure your final print output matches the prompt exactly."
               },
-              "starterCode": "import pandas as pd\n\ndef read_csv_file(file_name):\n    # Your code here\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nfile_name = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(read_csv_file(file_name))"
+              "starterCode": "language = input()\n# Print the learning message here"
             }
           }
         }

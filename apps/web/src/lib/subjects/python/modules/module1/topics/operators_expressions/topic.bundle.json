@@ -1,13 +1,10 @@
 {
   "topicId": "operators_expressions",
-
   "minutes": 10,
-
   "topic": {
     "labelKey": "topics.python.python-1.operators_expressions.label",
     "summaryKey": "topics.python.python-1.operators_expressions.summary"
   },
-
   "cards": [
     {
       "id": "sketch0",
@@ -78,7 +75,6 @@
       }
     }
   ],
-
   "sketches": [
     {
       "id": "operators_intro",
@@ -105,7 +101,6 @@
       "bodyKey": "sketches.python.python-1.operators_expressions.mini_checkout.bodyMarkdown"
     }
   ],
-
   "exercises": [
     {
       "id": "m1_ops_precedence_rule_sc",
@@ -113,7 +108,11 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_ops_precedence_rule_sc",
-      "optionIds": ["a", "b", "c"],
+      "optionIds": [
+        "a",
+        "b",
+        "c"
+      ],
       "expected": {
         "kind": "single_choice",
         "optionId": "b"
@@ -125,7 +124,11 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_ops_mod_result_sc",
-      "optionIds": ["a", "b", "c"],
+      "optionIds": [
+        "a",
+        "b",
+        "c"
+      ],
       "expected": {
         "kind": "single_choice",
         "optionId": "c"
@@ -137,23 +140,34 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_ops_checkout_formula_sc",
-      "optionIds": ["a", "b", "c"],
+      "optionIds": [
+        "a",
+        "b",
+        "c"
+      ],
       "expected": {
         "kind": "single_choice",
         "optionId": "a"
       }
     },
-
     {
       "id": "m1_ops_precedence_parts_mc",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_ops_precedence_parts_mc",
-      "optionIds": ["a", "b", "c", "d"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
       "expected": {
         "kind": "multi_choice",
-        "optionIds": ["a", "c"]
+        "optionIds": [
+          "a",
+          "c"
+        ]
       }
     },
     {
@@ -162,10 +176,18 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_ops_evenodd_truths_mc",
-      "optionIds": ["a", "b", "c", "d"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
       "expected": {
         "kind": "multi_choice",
-        "optionIds": ["a", "d"]
+        "optionIds": [
+          "a",
+          "d"
+        ]
       }
     },
     {
@@ -174,13 +196,20 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_ops_checkout_outputs_mc",
-      "optionIds": ["a", "b", "c", "d"],
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
       "expected": {
         "kind": "multi_choice",
-        "optionIds": ["a", "b"]
+        "optionIds": [
+          "a",
+          "b"
+        ]
       }
     },
-
     {
       "id": "m1_ops_fill_expression_value",
       "kind": "fill_blank_choice",
@@ -241,17 +270,24 @@
         "value": "comparison"
       }
     },
-
     {
       "id": "m1_ops_reorder_precedence_idea",
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_ops_reorder_precedence_idea",
-      "tokenIds": ["t1", "t2", "t3"],
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
       "expected": {
         "kind": "drag_reorder",
-        "tokenIds": ["t1", "t2", "t3"]
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
       }
     },
     {
@@ -260,10 +296,18 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_ops_reorder_even_odd",
-      "tokenIds": ["t1", "t2", "t3"],
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
       "expected": {
         "kind": "drag_reorder",
-        "tokenIds": ["t1", "t2", "t3"]
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
       }
     },
     {
@@ -272,10 +316,20 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_ops_reorder_checkout_steps",
-      "tokenIds": ["t1", "t2", "t3", "t4"],
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
       "expected": {
         "kind": "drag_reorder",
-        "tokenIds": ["t1", "t2", "t3", "t4"]
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
       }
     },
     {
@@ -284,10 +338,18 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_ops_reorder_expression_parts",
-      "tokenIds": ["t1", "t2", "t3"],
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
       "expected": {
         "kind": "drag_reorder",
-        "tokenIds": ["t1", "t2", "t3"]
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
       }
     },
     {
@@ -296,13 +358,22 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "quiz.m1_ops_reorder_math_tools",
-      "tokenIds": ["t1", "t2", "t3", "t4"],
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
       "expected": {
         "kind": "drag_reorder",
-        "tokenIds": ["t1", "t2", "t3", "t4"]
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
       }
     },
-
     {
       "id": "m1_ops_precedence_sc",
       "kind": "code_input",
@@ -325,7 +396,8 @@
           }
         ],
         "solutionCode": "a = int(input())\nb = int(input())\nc = int(input())\nprint(a + b * c)\n"
-      }
+      },
+      "starterCode": "a = int(input())\nb = int(input())\nc = int(input())\n# TODO: print a + b * c\n"
     },
     {
       "id": "m1_ops_mod_evenodd_sc",
@@ -349,7 +421,8 @@
           }
         ],
         "solutionCode": "n = int(input())\nif n % 2 == 0:\n    print(\"even\")\nelse:\n    print(\"odd\")\n"
-      }
+      },
+      "starterCode": "n = int(input())\n# TODO: print \"even\" or \"odd\"\n"
     },
     {
       "id": "m1_ops_checkout_code",
@@ -373,7 +446,8 @@
           }
         ],
         "solutionCode": "subtotal = int(input())\ntaxPct = int(input())\ntax = subtotal * taxPct // 100\ntotal = subtotal + tax\nprint(f\"Tax = {tax}\")\nprint(f\"Total = {total}\")\n"
-      }
+      },
+      "starterCode": "subtotal = int(input())\ntaxPct = int(input())\n# TODO\n"
     }
   ]
 }

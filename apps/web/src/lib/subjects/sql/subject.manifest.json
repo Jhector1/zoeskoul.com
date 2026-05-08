@@ -1,20 +1,25 @@
 {
   "subject": {
     "slug": "sql",
-    "catalogSlug": "sql",
     "genKey": "sql_for_beginners",
     "order": 20,
     "accessPolicy": "free",
     "status": "active",
-    "imagePublicId": null,
-    "imageAlt": null,
+    "imagePublicId": "ChatGPT_Image_Apr_2_2026_11_17_44_PM_nocvno",
+    "imageAlt": "SQL subject cover",
     "titleKey": "subjects.sql.title",
     "descriptionKey": "subjects.sql.description",
     "meta": {
       "curriculum": {
-        "plannedModuleCount": 1,
+        "plannedModuleCount": 8,
         "isTerminalRelease": false,
         "moreComingMessageKey": "subjects.sql.moreComingSoon"
+      },
+      "versioning": {
+        "family": "sql",
+        "version": 1,
+        "status": "legacy",
+        "supersededBy": "sql-v1"
       },
       "completionPolicy": {
         "requireAllPublishedModules": true,
@@ -25,141 +30,276 @@
   },
   "modules": [
     {
-      "slug": "sql_module_12",
-      "prefix": "sql12",
-      "order": 12,
-      "titleKey": "modules.sql.sql_module_12.title",
-      "descriptionKey": "modules.sql.sql_module_12.description",
-      "weekStart": null,
-      "weekEnd": null,
-      "accessOverride": null,
-      "runtimeDefaults": {
-        "kind": "sql",
-        "datasetId": "inventory_ops",
-        "fixedSqlDialect": "sqlite",
-        "resultShape": "table"
-      },
+      "slug": "sql_module_0",
+      "prefix": "sql0",
+      "order": 0,
+      "titleKey": "modules.sql.sql_module_0.title",
+      "descriptionKey": "modules.sql.sql_module_0.description",
+      "weekStart": 1,
+      "weekEnd": 1,
+      "accessOverride": "free",
 
 
-
-      "serviceDefaults": {
-        "preset": "lesson",
-        "requires": {
-          "files": true,
-          "terminal": false,
-          "multiFile": true,
-          "projectPersistence": false,
-          "cloudProjects": false
-        },
-        "sqlPane": {
-          "showCrowFoot": true,
-          "showChen": true,
-          "defaultTab": "tables"
-        }
-      },
       "meta": {
-        "estimatedMinutes": 240,
-        "prereqKeys": [
-          "modules.sql.sql_module_11.title"
-        ],
+        "estimatedMinutes": 45,
+        "prereqKeys": [],
         "outcomeKeys": [
-          "modules.sql.sql_module_12.outcomes.0",
-          "modules.sql.sql_module_12.outcomes.1",
-          "modules.sql.sql_module_12.outcomes.2",
-          "modules.sql.sql_module_12.outcomes.3"
+          "modules.sql.sql_module_0.outcomes.0",
+          "modules.sql.sql_module_0.outcomes.1",
+          "modules.sql.sql_module_0.outcomes.2",
+          "modules.sql.sql_module_0.outcomes.3",
+          "modules.sql.sql_module_0.outcomes.4"
         ],
         "whyKeys": [
-          "modules.sql.sql_module_12.why.0",
-          "modules.sql.sql_module_12.why.1"
+          "modules.sql.sql_module_0.why.0",
+          "modules.sql.sql_module_0.why.1"
         ]
       },
       "sections": [
         {
-          "slug": "section_12_1",
+          "slug": "section_0_1",
           "order": 1,
-          "titleKey": "sections.sql.sql_module_12.section_12_1.title",
-          "descriptionKey": "sections.sql.sql_module_12.section_12_1.description",
+          "titleKey": "sections.sql.sql_module_0.section_0_1.title",
+          "descriptionKey": "sections.sql.sql_module_0.section_0_1.description",
           "meta": {
-            "module": 12,
-            "weeksKey": "sections.sql.sql_module_12.section_12_1.weeks",
+            "module": 0,
+            "weeksKey": "sections.sql.sql_module_0.section_0_1.weeks",
             "bulletKeys": [
-              "sections.sql.sql_module_12.section_12_1.bullets.0",
-              "sections.sql.sql_module_12.section_12_1.bullets.1",
-              "sections.sql.sql_module_12.section_12_1.bullets.2",
-              "sections.sql.sql_module_12.section_12_1.bullets.3"
+              "sections.sql.sql_module_0.section_0_1.bullets.0",
+              "sections.sql.sql_module_0.section_0_1.bullets.1",
+              "sections.sql.sql_module_0.section_0_1.bullets.2",
+              "sections.sql.sql_module_0.section_0_1.bullets.3"
             ]
           },
           "topics": [
-            "what-update-does",
-            "changing-one-column",
-            "changing-multiple-columns",
-            "why-where-is-critical"
+            "what_sql_is",
+            "understanding_tables",
+            "database_thinking",
+            "first_sql_environment"
           ]
-        },
+        }
+      ]
+    },
+    {
+      "slug": "sql_module_1",
+      "prefix": "sql1",
+      "order": 1,
+      "titleKey": "modules.sql.sql_module_1.title",
+      "descriptionKey": "modules.sql.sql_module_1.description",
+      "weekStart": 2,
+      "weekEnd": 2,
+      "accessOverride": "free",
+      "runtimeDefaults": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table"
+      },
+      "meta": {
+        "estimatedMinutes": 50,
+        "prereqKeys": [
+          "modules.sql.sql_module_0.title"
+        ],
+        "outcomeKeys": [
+          "modules.sql.sql_module_1.outcomes.0",
+          "modules.sql.sql_module_1.outcomes.1",
+          "modules.sql.sql_module_1.outcomes.2",
+          "modules.sql.sql_module_1.outcomes.3"
+        ],
+        "whyKeys": [
+          "modules.sql.sql_module_1.why.0",
+          "modules.sql.sql_module_1.why.1"
+        ]
+      },
+      "sections": [
         {
-          "slug": "section_12_2",
-          "order": 2,
-          "titleKey": "sections.sql.sql_module_12.section_12_2.title",
-          "descriptionKey": "sections.sql.sql_module_12.section_12_2.description",
+          "slug": "section_1_1",
+          "order": 1,
+          "titleKey": "sections.sql.sql_module_1.section_1_1.title",
+          "descriptionKey": "sections.sql.sql_module_1.section_1_1.description",
           "meta": {
-            "module": 12,
-            "weeksKey": "sections.sql.sql_module_12.section_12_2.weeks",
+            "module": 1,
+            "weeksKey": "sections.sql.sql_module_1.section_1_1.weeks",
             "bulletKeys": [
-              "sections.sql.sql_module_12.section_12_2.bullets.0",
-              "sections.sql.sql_module_12.section_12_2.bullets.1",
-              "sections.sql.sql_module_12.section_12_2.bullets.2",
-              "sections.sql.sql_module_12.section_12_2.bullets.3"
+              "sections.sql.sql_module_1.section_1_1.bullets.0",
+              "sections.sql.sql_module_1.section_1_1.bullets.1",
+              "sections.sql.sql_module_1.section_1_1.bullets.2",
+              "sections.sql.sql_module_1.section_1_1.bullets.3"
             ]
           },
           "topics": [
-            "what-delete-does",
-            "deleting-selected-rows",
-            "dangers-of-missing-where",
-            "safe-delete-habits"
+            "intro_to_select",
+            "reading_data_from_a_table",
+            "sql_syntax_basics",
+            "practice_with_basic_queries"
           ]
-        },
+        }
+      ]
+    },
+    {
+      "slug": "sql_module_2",
+      "prefix": "sql2",
+      "order": 2,
+      "titleKey": "modules.sql.sql_module_2.title",
+      "descriptionKey": "modules.sql.sql_module_2.description",
+      "weekStart": 3,
+      "weekEnd": 4,
+      "accessOverride": "free",
+      "runtimeDefaults": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table"
+      },
+      "meta": {
+        "estimatedMinutes": 60,
+        "prereqKeys": [
+          "modules.sql.sql_module_1.title"
+        ],
+        "outcomeKeys": [
+          "modules.sql.sql_module_2.outcomes.0",
+          "modules.sql.sql_module_2.outcomes.1",
+          "modules.sql.sql_module_2.outcomes.2"
+        ],
+        "whyKeys": [
+          "modules.sql.sql_module_2.why.0",
+          "modules.sql.sql_module_2.why.1"
+        ]
+      },
+      "sections": [
         {
-          "slug": "section_12_3",
-          "order": 3,
-          "titleKey": "sections.sql.sql_module_12.section_12_3.title",
-          "descriptionKey": "sections.sql.sql_module_12.section_12_3.description",
+          "slug": "section_2_1",
+          "order": 1,
+          "titleKey": "sections.sql.sql_module_2.section_2_1.title",
+          "descriptionKey": "sections.sql.sql_module_2.section_2_1.description",
           "meta": {
-            "module": 12,
-            "weeksKey": "sections.sql.sql_module_12.section_12_3.weeks",
+            "module": 2,
+            "weeksKey": "sections.sql.sql_module_2.section_2_1.weeks",
             "bulletKeys": [
-              "sections.sql.sql_module_12.section_12_3.bullets.0",
-              "sections.sql.sql_module_12.section_12_3.bullets.1",
-              "sections.sql.sql_module_12.section_12_3.bullets.2",
-              "sections.sql.sql_module_12.section_12_3.bullets.3"
+              "sections.sql.sql_module_2.section_2_1.bullets.0",
+              "sections.sql.sql_module_2.section_2_1.bullets.1",
+              "sections.sql.sql_module_2.section_2_1.bullets.2",
+              "sections.sql.sql_module_2.section_2_1.bullets.3"
             ]
           },
           "topics": [
-            "preview-before-update-delete",
-            "using-select-first",
-            "backups-and-caution",
-            "thinking-before-changing-data"
+            "intro_to_filtering",
+            "comparison_operators",
+            "filtering_with_multiple_conditions",
+            "beginner_filtering_practice"
           ]
-        },
+        }
+      ]
+    },
+    {
+      "slug": "sql_module_3",
+      "prefix": "sql3",
+      "order": 3,
+      "titleKey": "modules.sql.sql_module_3.title",
+      "descriptionKey": "modules.sql.sql_module_3.description",
+      "weekStart": 5,
+      "weekEnd": 6,
+      "accessOverride": "free",
+      "runtimeDefaults": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table"
+      },
+      "meta": {
+        "estimatedMinutes": 55,
+        "prereqKeys": [
+          "modules.sql.sql_module_2.title"
+        ],
+        "outcomeKeys": [
+          "modules.sql.sql_module_3.outcomes.0",
+          "modules.sql.sql_module_3.outcomes.1",
+          "modules.sql.sql_module_3.outcomes.2",
+          "modules.sql.sql_module_3.outcomes.3"
+        ],
+        "whyKeys": [
+          "modules.sql.sql_module_3.why.0",
+          "modules.sql.sql_module_3.why.1"
+        ]
+      },
+      "sections": [
         {
-          "slug": "section_12_4",
-          "order": 4,
-          "titleKey": "sections.sql.sql_module_12.section_12_4.title",
-          "descriptionKey": "sections.sql.sql_module_12.section_12_4.description",
+          "slug": "section_3_1",
+          "order": 1,
+          "titleKey": "sections.sql.sql_module_3.section_3_1.title",
+          "descriptionKey": "sections.sql.sql_module_3.section_3_1.description",
           "meta": {
-            "module": 12,
-            "weeksKey": "sections.sql.sql_module_12.section_12_4.weeks",
+            "module": 3,
+            "weeksKey": "sections.sql.sql_module_3.section_3_1.weeks",
             "bulletKeys": [
-              "sections.sql.sql_module_12.section_12_4.bullets.0",
-              "sections.sql.sql_module_12.section_12_4.bullets.1",
-              "sections.sql.sql_module_12.section_12_4.bullets.2",
-              "sections.sql.sql_module_12.section_12_4.bullets.3"
+              "sections.sql.sql_module_3.section_3_1.bullets.0",
+              "sections.sql.sql_module_3.section_3_1.bullets.1",
+              "sections.sql.sql_module_3.section_3_1.bullets.2",
+              "sections.sql.sql_module_3.section_3_1.bullets.3"
             ]
           },
           "topics": [
-            "update-prices",
-            "change-statuses",
-            "delete-test-rows",
-            "safe-data-modification-workflow"
+            "sorting_data",
+            "sorting_by_multiple_columns",
+            "limiting_output",
+            "practice_with_output_control"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "sql_module_4",
+      "prefix": "sql4",
+      "order": 4,
+      "titleKey": "modules.sql.sql_module_4.title",
+      "descriptionKey": "modules.sql.sql_module_4.description",
+      "weekStart": 7,
+      "weekEnd": 8,
+      "accessOverride": "free",
+      "runtimeDefaults": {
+        "kind": "sql",
+        "datasetId": "customers_cleanup",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table"
+      },
+      "meta": {
+        "estimatedMinutes": 60,
+        "prereqKeys": [
+          "modules.sql.sql_module_3.title"
+        ],
+        "outcomeKeys": [
+          "modules.sql.sql_module_4.outcomes.0",
+          "modules.sql.sql_module_4.outcomes.1",
+          "modules.sql.sql_module_4.outcomes.2",
+          "modules.sql.sql_module_4.outcomes.3",
+          "modules.sql.sql_module_4.outcomes.4"
+        ],
+        "whyKeys": [
+          "modules.sql.sql_module_4.why.0",
+          "modules.sql.sql_module_4.why.1"
+        ]
+      },
+      "sections": [
+        {
+          "slug": "section_4_1",
+          "order": 1,
+          "titleKey": "sections.sql.sql_module_4.section_4_1.title",
+          "descriptionKey": "sections.sql.sql_module_4.section_4_1.description",
+          "meta": {
+            "module": 4,
+            "weeksKey": "sections.sql.sql_module_4.section_4_1.weeks",
+            "bulletKeys": [
+              "sections.sql.sql_module_4.section_4_1.bullets.0",
+              "sections.sql.sql_module_4.section_4_1.bullets.1",
+              "sections.sql.sql_module_4.section_4_1.bullets.2",
+              "sections.sql.sql_module_4.section_4_1.bullets.3"
+            ]
+          },
+          "topics": [
+            "text_matching",
+            "lists_and_ranges",
+            "missing_data",
+            "search_and_cleanup_practice"
           ]
         }
       ]

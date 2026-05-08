@@ -90,13 +90,13 @@
               }
             },
             "q5": {
-              "title": "Write a simple Python program",
-              "prompt": "Write a Python program that prints your favorite quote.",
-              "hint": "Break the task into the main query or code steps first.",
+              "title": "Print an exact message",
+              "prompt": "Write a Python program that prints exactly:\nStay curious.",
+              "hint": "Use one print statement with the exact text from the prompt.",
               "help": {
-                "concept": "This task checks whether you can apply write a simple python program in a working solution.",
-                "hint_1": "Identify the table, columns, and condition or operation before writing the full solution.",
-                "hint_2": "Build the statement one piece at a time: select the right fields, then add the condition or operation that matches the prompt."
+                "concept": "This task checks whether you can write a simple Python program that prints exact text.",
+                "hint_1": "Write the required Python steps first, then run the program with the sample input.",
+                "hint_2": "Make sure your final print output matches the prompt exactly."
               },
               "starterCode": "print('')"
             }

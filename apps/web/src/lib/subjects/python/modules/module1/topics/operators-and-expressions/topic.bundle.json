@@ -150,18 +150,19 @@
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "5\n10",
-            "stdout": "50",
+            "stdin": "4\n5\n",
+            "stdout": "20\n",
             "match": "exact"
           },
           {
-            "stdin": "3\n7",
-            "stdout": "21",
+            "stdin": "7\n3\n",
+            "stdout": "21\n",
             "match": "exact"
           }
         ],
-        "solutionCode": "def calculate_area(width, height):\n    area = width * height\n    return area\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nwidth = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nheight = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(calculate_area(width, height))"
-      }
+        "solutionCode": "def calculate_area(width, height):\n    return width * height\n\nwidth = int(input())\nheight = int(input())\nprint(calculate_area(width, height))"
+      },
+      "starterCode": "def calculate_area(width, height):\n    # Return the area here\n    pass\n\nwidth = int(input())\nheight = int(input())\n\nprint(calculate_area(width, height))"
     }
   ]
 }

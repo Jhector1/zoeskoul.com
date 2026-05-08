@@ -94,11 +94,11 @@
             "python-ide-setup": {
               "title": "Create a Simple Python Script",
               "prompt": "Create a Python script that prints 'Hello, World!' to the console.",
-              "hint": "Break the task into the main query or code steps first.",
+              "hint": "Use a print statement with the exact text from the prompt.",
               "help": {
-                "concept": "This task checks whether you can apply create a simple python script in a working solution.",
-                "hint_1": "Identify the table, columns, and condition or operation before writing the full solution.",
-                "hint_2": "Build the statement one piece at a time: select the right fields, then add the condition or operation that matches the prompt."
+                "concept": "This task checks whether you can create a simple Python script that prints text.",
+                "hint_1": "Write the required Python steps first, then run the program with the sample input.",
+                "hint_2": "Make sure your final print output matches the prompt exactly."
               },
               "starterCode": "print('Hello, World!')"
             }

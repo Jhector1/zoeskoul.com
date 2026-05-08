@@ -17,6 +17,13 @@
         "isTerminalRelease": false,
         "moreComingMessageKey": "subjects.sql.moreComingSoon"
       },
+
+      "versioning": {
+        "family": "python",
+        "version": 1,
+        "status": "legacy",
+        "supersededBy": "python-v1"
+      },
       "completionPolicy": {
         "requireAllPublishedModules": true,
         "rewardEnabledByDefault": true,

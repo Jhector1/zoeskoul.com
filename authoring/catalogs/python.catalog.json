@@ -6,11 +6,11 @@
     "description": "Python learning paths from first steps through larger projects, deeper problem solving, and more advanced programming patterns.",
     "imagePublicId": "Screenshot_2026-02-03_at_1.19.20_AM_kdnlpk",
     "imageAlt": "Python catalog cover",
-    "defaultSubjectSlug": "python-for-beginners",
+    "defaultSubjectSlug": "python",
     "status": "active",
     "subjectSlugs": [
-      "python",
-      "python-for-beginners"
+      "python"
+
     ],
     "meta": {
       "family": "programming",

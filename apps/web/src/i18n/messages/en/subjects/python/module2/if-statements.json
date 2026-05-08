@@ -90,12 +90,12 @@
             },
             "q5": {
               "title": "Implement an If Statement",
-              "prompt": "Write a program that checks if a number is positive, negative, or zero.",
-              "hint": "Break the task into the main query or code steps first.",
+              "prompt": "Read ONE integer.\n\nIf it is greater than 0, print exactly:\nPositive\n\nIf it is less than 0, print exactly:\nNegative\n\nOtherwise, print exactly:\nZero",
+              "hint": "Compare the number to 0 and use if, elif, and else.",
               "help": {
-                "concept": "This task checks whether you can apply implement an if statement in a working solution.",
-                "hint_1": "Identify the table, columns, and condition or operation before writing the full solution.",
-                "hint_2": "Build the statement one piece at a time: select the right fields, then add the condition or operation that matches the prompt."
+                "concept": "This task checks whether you can choose the correct branch with an if/elif/else statement.",
+                "hint_1": "Write the required Python steps first, then run the program with the sample input.",
+                "hint_2": "Make sure your final print output matches the prompt exactly."
               },
               "starterCode": "number = int(input())\n# Add your if statements here"
             }

@@ -1,0 +1,415 @@
+{
+  "topicId": "practice_with_basic_queries",
+  "subjectSlug": "sql",
+  "moduleSlug": "sql_module_1",
+  "sectionSlug": "section_1_1",
+  "prefix": "sql1",
+  "minutes": 8,
+
+  "topic": {
+    "labelKey": "topics.sql.sql_module_1.practice_with_basic_queries.label",
+    "summaryKey": "topics.sql.sql_module_1.practice_with_basic_queries.summary"
+  },
+
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_1.practice_with_basic_queries.cards.sketch0.title",
+      "sketchId": "query_one_column",
+      "height": 520
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_1.practice_with_basic_queries.cards.sketch1.title",
+      "sketchId": "query_multiple_columns",
+      "height": 520
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_1.practice_with_basic_queries.cards.sketch2.title",
+      "sketchId": "query_full_tables",
+      "height": 520
+    },
+    {
+      "id": "sketch3",
+      "kind": "sketch",
+      "titleKey": "topics.sql.sql_module_1.practice_with_basic_queries.cards.sketch3.title",
+      "sketchId": "predicting_result_output",
+      "height": 520
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.sql.sql_module_1.practice_with_basic_queries.cards.quiz.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "query_one_column_name",
+            "titleKey": "topics.sql.sql_module_1.practice_with_basic_queries.projectSteps.query_one_column_name.title",
+            "exerciseKey": "m1_s04_query_one_column_name",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "query_two_columns_name_price",
+            "titleKey": "topics.sql.sql_module_1.practice_with_basic_queries.projectSteps.query_two_columns_name_price.title",
+            "exerciseKey": "m1_s04_query_two_columns_name_price",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "query_full_products_table",
+            "titleKey": "topics.sql.sql_module_1.practice_with_basic_queries.projectSteps.query_full_products_table.title",
+            "exerciseKey": "m1_s04_query_full_products_table",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.sql.sql_module_1.practice_with_basic_queries.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 3,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    }
+  ],
+
+  "sketches": [
+    {
+      "id": "query_one_column",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_1.practice_with_basic_queries.query_one_column.title",
+      "bodyKey": "sketches.sql.sql_module_1.practice_with_basic_queries.query_one_column.bodyMarkdown"
+    },
+    {
+      "id": "query_multiple_columns",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_1.practice_with_basic_queries.query_multiple_columns.title",
+      "bodyKey": "sketches.sql.sql_module_1.practice_with_basic_queries.query_multiple_columns.bodyMarkdown"
+    },
+    {
+      "id": "query_full_tables",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_1.practice_with_basic_queries.query_full_tables.title",
+      "bodyKey": "sketches.sql.sql_module_1.practice_with_basic_queries.query_full_tables.bodyMarkdown"
+    },
+    {
+      "id": "predicting_result_output",
+      "archetype": "paragraph",
+      "titleKey": "sketches.sql.sql_module_1.practice_with_basic_queries.predicting_result_output.title",
+      "bodyKey": "sketches.sql.sql_module_1.practice_with_basic_queries.predicting_result_output.bodyMarkdown"
+    }
+  ],
+
+  "exercises": [
+    {
+      "id": "m1_s04_query_one_column_name",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "quiz.m1_s04_query_one_column_name",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "SELECT name FROM products;"
+      }
+    },
+    {
+      "id": "m1_s04_query_two_columns_name_price",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "quiz.m1_s04_query_two_columns_name_price",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "SELECT name, price FROM products;"
+      }
+    },
+    {
+      "id": "m1_s04_query_full_products_table",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "quiz.m1_s04_query_full_products_table",
+      "language": "sql",
+      "fixedSqlDialect": "sqlite",
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "SELECT * FROM products;"
+      }
+    },
+
+    {
+      "id": "m1_s04_one_column_result_shape",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_s04_one_column_result_shape",
+      "optionIds": ["a", "b", "c", "d"],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "m1_s04_multiple_columns_result_shape",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_s04_multiple_columns_result_shape",
+      "optionIds": ["a", "b", "c", "d"],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "m1_s04_full_table_query_meaning",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_s04_full_table_query_meaning",
+      "optionIds": ["a", "b", "c", "d"],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "m1_s04_predict_before_run",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_s04_predict_before_run",
+      "optionIds": ["a", "b", "c", "d"],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "m1_s04_compare_results_habit",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_s04_compare_results_habit",
+      "optionIds": ["a", "b", "c", "d"],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+
+    {
+      "id": "m1_s04_basic_queries_true",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_s04_basic_queries_true",
+      "optionIds": ["a", "b", "c", "d", "e"],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": ["a", "b", "c", "e"]
+      }
+    },
+    {
+      "id": "m1_s04_prediction_true",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_s04_prediction_true",
+      "optionIds": ["a", "b", "c", "d", "e"],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": ["a", "b", "c", "e"]
+      }
+    },
+    {
+      "id": "m1_s04_result_output_true",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_s04_result_output_true",
+      "optionIds": ["a", "b", "c", "d", "e"],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": ["a", "b", "c", "e"]
+      }
+    },
+    {
+      "id": "m1_s04_query_types_true",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_s04_query_types_true",
+      "optionIds": ["a", "b", "c", "d", "e"],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": ["a", "b", "c", "e"]
+      }
+    },
+    {
+      "id": "m1_s04_basic_workflow_true",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_s04_basic_workflow_true",
+      "optionIds": ["a", "b", "c", "d", "e"],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": ["a", "b", "c", "d"]
+      }
+    },
+
+    {
+      "id": "m1_s04_reorder_one_column_focus",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_s04_reorder_one_column_focus",
+      "tokenIds": ["t1", "t2", "t3"],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": ["t1", "t2", "t3"]
+      }
+    },
+    {
+      "id": "m1_s04_reorder_multi_column_use",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_s04_reorder_multi_column_use",
+      "tokenIds": ["t1", "t2", "t3"],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": ["t1", "t2", "t3"]
+      }
+    },
+    {
+      "id": "m1_s04_reorder_full_table_workflow",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_s04_reorder_full_table_workflow",
+      "tokenIds": ["t1", "t2", "t3"],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": ["t1", "t2", "t3"]
+      }
+    },
+    {
+      "id": "m1_s04_reorder_predict_shape",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_s04_reorder_predict_shape",
+      "tokenIds": ["t1", "t2", "t3"],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": ["t1", "t2", "t3"]
+      }
+    },
+    {
+      "id": "m1_s04_reorder_predict_run_compare",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_s04_reorder_predict_run_compare",
+      "tokenIds": ["t1", "t2", "t3"],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": ["t1", "t2", "t3"]
+      }
+    },
+
+    {
+      "id": "m1_s04_fill_one_column_shape",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_s04_fill_one_column_shape",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "one result column"
+      }
+    },
+    {
+      "id": "m1_s04_fill_full_table_symbol",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_s04_fill_full_table_symbol",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "*"
+      }
+    },
+    {
+      "id": "m1_s04_fill_related_columns_goal",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_s04_fill_related_columns_goal",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "compare"
+      }
+    },
+    {
+      "id": "m1_s04_fill_predict_headers",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_s04_fill_predict_headers",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "headers"
+      }
+    },
+    {
+      "id": "m1_s04_fill_full_table_overview",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "quiz.m1_s04_fill_full_table_overview",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "overview"
+      }
+    }
+  ]
+}
