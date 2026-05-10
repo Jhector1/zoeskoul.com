@@ -110,7 +110,19 @@ function workspaceKeyOf(workspace: WorkspaceStateV2 | null | undefined) {
         files,
     });
 }
+function savedStarterStillMatches(args: {
+    saved: any;
+    currentStarterWorkspace: WorkspaceStateV2 | null;
+}) {
+    const savedStarterHash =
+        typeof args.saved?.starterHash === "string" ? args.saved.starterHash : "";
 
+    if (!savedStarterHash) {
+        return false;
+    }
+
+    return savedStarterHash === workspaceKeyOf(args.currentStarterWorkspace);
+}
 function firstNonBlank(...values: Array<string | null | undefined>) {
     for (const value of values) {
         if (typeof value === "string" && value.trim()) return value;
@@ -861,14 +873,20 @@ export function useToolCodeRunnerState(args: {
             const savedWorkspaceCode = deriveEntryCode(savedWorkspace);
             const incomingWorkspaceCode = deriveEntryCode(nextWorkspace);
 
+            const savedStarterMatchesCurrent = savedStarterStillMatches({
+                saved: savedForBind,
+                currentStarterWorkspace: nextWorkspace,
+            });
+
             /**
              * Important:
-             * A stale saved workspace can exist with an empty entry file from an old
-             * bad bind/general scope. Do not let that blank workspace override the
-             * current exercise's nonblank workspace.
+             * A saved workspace can only override the current exercise starter when it was
+             * saved against the same starter hash. This prevents old main.py content from
+             * sticking after curriculum/topic updates.
              */
             const shouldUseSavedWorkspace =
                 !!savedWorkspace &&
+                savedStarterMatchesCurrent &&
                 !(
                     String(savedWorkspaceCode ?? "").trim() === "" &&
                     String(incomingWorkspaceCode ?? "").trim() !== ""

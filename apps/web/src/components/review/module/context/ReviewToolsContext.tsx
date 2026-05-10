@@ -108,7 +108,15 @@ function firstNonBlank(...values: Array<string | null | undefined>) {
   }
   return undefined;
 }
-
+function isRealUserWorkspaceEdit(patch: any) {
+    return (
+        patch?.userEdited === true ||
+        patch?.workspaceOrigin === "user" ||
+        patch?.updateOrigin === "user" ||
+        patch?.dismissFeedbackOnEdit === true ||
+        patch?.preferSnapshot === true
+    );
+}
 function registerArgsKey(args: RegisterArgs | undefined) {
   if (!args) return "";
 
@@ -275,27 +283,33 @@ export function ReviewToolsProvider({
     [runFeedbackById],
   );
 
-  const flushByToolKey = useCallback(
-    (toolKey: string | null) => {
-      const entry = getRegistryEntryForToolKey(toolKey);
-      if (!entry) return;
+    const flushByToolKey = useCallback(
+        (toolKey: string | null) => {
+            const entry = getRegistryEntryForToolKey(toolKey);
+            if (!entry) return;
 
-      const { snap, targetKey } = entry;
-      patchExercise(targetKey, {
-        language: snap.lang,
-        lang: snap.lang,
-        workspace: snap.workspace ?? undefined,
-        codeWorkspace: snap.workspace ?? undefined,
-        ideWorkspace: snap.workspace ?? undefined,
-        stdin: snap.stdin ?? "",
-        codeStdin: snap.stdin ?? "",
-        code: getWorkspaceEntryCode(snap.workspace) ?? snap.code,
-        userEdited: true,
-        workspaceOrigin: "user",
-      } as any);
-    },
-    [getRegistryEntryForToolKey, patchExercise],
-  );
+            const { snap, targetKey } = entry;
+            const userEdited = snap.preferSnapshot === true;
+
+            patchExercise(targetKey, {
+                language: snap.lang,
+                lang: snap.lang,
+                workspace: snap.workspace ?? undefined,
+                codeWorkspace: snap.workspace ?? undefined,
+                ideWorkspace: snap.workspace ?? undefined,
+                stdin: snap.stdin ?? "",
+                codeStdin: snap.stdin ?? "",
+                code: getWorkspaceEntryCode(snap.workspace) ?? snap.code,
+                ...(userEdited
+                    ? {
+                        userEdited: true,
+                        workspaceOrigin: "user",
+                    }
+                    : {}),
+            } as any);
+        },
+        [getRegistryEntryForToolKey, patchExercise],
+    );
 
   useEffect(() => {
     const flush = () => {
@@ -386,7 +400,9 @@ export function ReviewToolsProvider({
       registryRef.current.set(id, next);
       cur.onPatch?.(patch);
 
-      const targetKey = next.exerciseKey ?? id;
+        const targetKey = next.exerciseKey ?? id;
+        const userEdited = isRealUserWorkspaceEdit(patch);
+
         const feedbackDismissPatch =
             patch?.dismissFeedbackOnEdit === true && patch?.feedbackDismissed === true
                 ? {
@@ -408,42 +424,33 @@ export function ReviewToolsProvider({
             stdin: next.stdin ?? "",
             codeStdin: next.stdin ?? "",
             code: getWorkspaceEntryCode(next.workspace) ?? next.code,
-            userEdited: true,
-            workspaceOrigin: "user",
+            ...(userEdited
+                ? {
+                    userEdited: true,
+                    workspaceOrigin: "user",
+                }
+                : {}),
             ...feedbackDismissPatch,
         } as any);
     },
     [patchExercise],
   );
 
-  const patchCodeInput = useCallback(
-    (id: string, patch: any) => {
-      if (!id) return;
+    const patchCodeInput = useCallback(
+        (id: string, patch: any) => {
+            if (!id) return;
 
-      clearRunFeedback(id);
-      syncCodeInputSnapshot(id, { ...patch, preferSnapshot: true });
-
-      const snap = registryRef.current.get(id);
-      if (!snap) {
-        bindNow(id);
-        return;
-      }
-
-      const targetKey = snap.exerciseKey ?? id;
-      ensureVisible?.();
-      onBindToToolsPanel({ id, ...snap, exerciseKey: targetKey });
-      bindExerciseTool(targetKey);
-      setRequestedId(null);
-    },
-    [
-      bindNow,
-      clearRunFeedback,
-      syncCodeInputSnapshot,
-      ensureVisible,
-      onBindToToolsPanel,
-      bindExerciseTool,
-    ],
-  );
+            clearRunFeedback(id);
+            syncCodeInputSnapshot(id, {
+                ...patch,
+                preferSnapshot: true,
+                userEdited: true,
+                updateOrigin: "user",
+                workspaceOrigin: "user",
+            });
+        },
+        [clearRunFeedback, syncCodeInputSnapshot],
+    );
 
   const requestBind = useCallback(
     (id: string) => {

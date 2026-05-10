@@ -183,24 +183,130 @@ function getWorkspaceEntryCodeForPracticeBank(workspace: any) {
   return file?.kind === "file" ? String(file.content ?? "") : "";
 }
 
-function getRuntimePracticePatchForQuestion(q: Extract<ReviewQuestion, { kind: "practice" }>) {
+function getRuntimePracticePatchForQuestion(
+    q: Extract<ReviewQuestion, { kind: "practice" }>,
+) {
   const stableKey = getStablePracticeQuestionKey(q);
-  const exercises = useReviewRuntimeStore.getState().exercises ?? {};
+  const runtime = useReviewRuntimeStore.getState();
+  const exercises = runtime.exercises ?? {};
 
-  const found = Object.entries(exercises).find(([key, value]: any) => {
-    if (!value) return false;
+  const qAny = q as any;
 
-    return (
-        key === stableKey ||
-        key.endsWith(`:${stableKey}`) ||
-        value.exerciseKey === stableKey ||
-        value.exerciseId === stableKey
-    );
-  });
+  const wantedIds = new Set(
+      [
+        stableKey,
+        q.id,
+        qAny.fetch?.exerciseKey,
+        qAny.fetch?.stepId,
+        qAny.exerciseKey,
+        qAny.stepId,
+        qAny.item?.id,
+        qAny.item?.exerciseKey,
+        qAny.exercise?.id,
+        qAny.exercise?.exerciseKey,
+      ]
+          .map((value) => String(value ?? "").trim())
+          .filter(Boolean),
+  );
+
+  const wantedTopic = String(
+      qAny.fetch?.topic ??
+      qAny.topicId ??
+      qAny.topic ??
+      "",
+  ).trim();
+
+  const wantedSubject = String(qAny.fetch?.subject ?? "").trim();
+  const wantedModule = String(qAny.fetch?.module ?? "").trim();
+  const wantedSection = String(qAny.fetch?.section ?? "").trim();
+
+  const activeExerciseKey = String(runtime.activeExerciseKey ?? "").trim();
+  const boundExerciseKey = String(runtime.tool?.boundExerciseKey ?? "").trim();
+
+  const candidates = Object.entries(exercises)
+      .map(([key, value]: any) => {
+        if (!value) return null;
+
+        const valueExerciseKey = String(value.exerciseKey ?? "").trim();
+        const valueExerciseId = String(value.exerciseId ?? "").trim();
+        const valueTopicId = String(value.topicId ?? "").trim();
+        const valueSubjectSlug = String(value.subjectSlug ?? "").trim();
+        const valueModuleSlug = String(value.moduleSlug ?? "").trim();
+        const valueSectionSlug = String(value.sectionSlug ?? "").trim();
+
+        let score = 0;
+
+        /**
+         * Strongest signal: this is the currently active/bound Tools exercise.
+         */
+        if (activeExerciseKey && key === activeExerciseKey) score += 3000;
+        if (boundExerciseKey && key === boundExerciseKey) score += 3000;
+        if (activeExerciseKey && valueExerciseKey === activeExerciseKey) score += 2500;
+        if (boundExerciseKey && valueExerciseKey === boundExerciseKey) score += 2500;
+
+        /**
+         * Exact question/exercise identity.
+         */
+        for (const wantedId of wantedIds) {
+          if (key === wantedId) score += 1200;
+          if (valueExerciseKey === wantedId) score += 1100;
+          if (valueExerciseId === wantedId) score += 1000;
+
+          if (key.endsWith(`:${wantedId}`)) score += 800;
+          if (valueExerciseKey.endsWith(`:${wantedId}`)) score += 750;
+        }
+
+        /**
+         * Route/course context. This prevents another q5 from another topic from
+         * winning just because it appears earlier in Object.entries().
+         */
+        if (wantedTopic && valueTopicId === wantedTopic) score += 300;
+        if (wantedSubject && valueSubjectSlug === wantedSubject) score += 100;
+        if (wantedModule && valueModuleSlug === wantedModule) score += 100;
+        if (wantedSection && valueSectionSlug === wantedSection) score += 100;
+
+        const hasIdentityMatch = Array.from(wantedIds).some((wantedId) => {
+          return (
+              key === wantedId ||
+              key.endsWith(`:${wantedId}`) ||
+              valueExerciseKey === wantedId ||
+              valueExerciseKey.endsWith(`:${wantedId}`) ||
+              valueExerciseId === wantedId
+          );
+        });
+
+        const hasActiveMatch =
+            Boolean(activeExerciseKey && key === activeExerciseKey) ||
+            Boolean(boundExerciseKey && key === boundExerciseKey) ||
+            Boolean(activeExerciseKey && valueExerciseKey === activeExerciseKey) ||
+            Boolean(boundExerciseKey && valueExerciseKey === boundExerciseKey);
+
+        /**
+         * Topic-only matches are too broad. Require actual identity or active/bound match.
+         */
+        if (!hasIdentityMatch && !hasActiveMatch) return null;
+
+        const updatedAt = Number(value.updatedAt ?? 0);
+
+        return {
+          key,
+          value,
+          score,
+          updatedAt: Number.isFinite(updatedAt) ? updatedAt : 0,
+        };
+      })
+      .filter(Boolean)
+      .sort((a: any, b: any) => {
+        if (b.score !== a.score) return b.score - a.score;
+        return b.updatedAt - a.updatedAt;
+      });
+
+  const found = candidates[0];
 
   if (!found) return null;
 
-  const [, estate] = found as any;
+  const estate = found.value;
+
   const workspace =
       estate.workspace ??
       estate.codeWorkspace ??
@@ -208,9 +314,15 @@ function getRuntimePracticePatchForQuestion(q: Extract<ReviewQuestion, { kind: "
       null;
 
   const workspaceCode = getWorkspaceEntryCodeForPracticeBank(workspace);
+
   const code =
-      workspaceCode ||
-      (typeof estate.code === "string" ? estate.code : "");
+      workspaceCode.trim().length > 0
+          ? workspaceCode
+          : typeof estate.code === "string" && estate.code.trim().length > 0
+              ? estate.code
+              : typeof estate.source === "string" && estate.source.trim().length > 0
+                  ? estate.source
+                  : "";
 
   if (!code.trim()) return null;
 
@@ -233,6 +345,21 @@ function getRuntimePracticePatchForQuestion(q: Extract<ReviewQuestion, { kind: "
                   : typeof estate.language === "string"
                       ? estate.language
                       : "python";
+
+  if (process.env.NODE_ENV !== "production") {
+    console.log("[practice-check-runtime-patch]", {
+      qid: q.id,
+      stableKey,
+      wantedIds: Array.from(wantedIds),
+      selectedRuntimeKey: found.key,
+      selectedExerciseId: estate.exerciseId,
+      selectedExerciseKey: estate.exerciseKey,
+      activeExerciseKey,
+      boundExerciseKey,
+      score: found.score,
+      submittedCode: code,
+    });
+  }
 
   return {
     exerciseKey: estate.exerciseKey,
@@ -257,6 +384,7 @@ function getRuntimePracticePatchForQuestion(q: Extract<ReviewQuestion, { kind: "
         estate.workspaceOrigin ??
         (estate.userEdited === true ? "user" : "saved"),
     starterHash: estate.starterHash,
+    updatedAt: estate.updatedAt ?? Date.now(),
     ...(workspace
         ? {
           workspace,
@@ -266,7 +394,6 @@ function getRuntimePracticePatchForQuestion(q: Extract<ReviewQuestion, { kind: "
         : {}),
   };
 }
-
 function sanitizeSavedPracticePatch(savedPatch: any, exerciseKind?: string) {
   if (!savedPatch) return null;
 
@@ -928,6 +1055,11 @@ export function useQuizPracticeBank(args: {
 
         try {
           useReviewRuntimeStore.getState().flushToolSnapshot();
+
+          await new Promise<void>((resolve) => {
+            requestAnimationFrame(() => resolve());
+          });
+
           const runtimePatch = getRuntimePracticePatchForQuestion(q);
           const itemForSubmit = runtimePatch
               ? {

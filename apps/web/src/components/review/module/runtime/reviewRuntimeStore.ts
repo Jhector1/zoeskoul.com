@@ -539,10 +539,7 @@ function shouldUseSavedUserWorkspace(args: {
   ).trim();
 
   /**
-   * Critical:
-   * Do not restore a Python workspace into a SQL target, or any other
-   * cross-language target. This is what caused main.py / Car code to appear
-   * inside SQL exercises.
+   * Never restore Python into SQL, SQL into Python, etc.
    */
   if (
       expectedLanguage &&
@@ -563,8 +560,27 @@ function shouldUseSavedUserWorkspace(args: {
     return false;
   }
 
-  if (isUserWorkspaceState(args.savedState)) return true;
+  const currentStarterHash = workspaceHash(args.starterWorkspace);
+  const savedStarterHash =
+      typeof args.savedState?.starterHash === "string"
+          ? args.savedState.starterHash
+          : "";
 
+  /**
+   * Most important stale-state guard:
+   * if the curriculum starter changed, old saved workspace must not override it.
+   */
+  if (
+      savedStarterHash &&
+      currentStarterHash &&
+      savedStarterHash !== currentStarterHash
+  ) {
+    return false;
+  }
+
+  /**
+   * Saved states explicitly marked as starter/empty are not learner work.
+   */
   if (
       args.savedState?.workspaceOrigin === "starter" ||
       args.savedState?.workspaceOrigin === "empty" ||
@@ -573,12 +589,33 @@ function shouldUseSavedUserWorkspace(args: {
     return false;
   }
 
-  if (typeof args.savedState?.starterHash === "string" && args.savedState.starterHash) {
-    return workspaceHash(args.savedWorkspace) !== args.savedState.starterHash;
+  /**
+   * Only trust real user/saved work after starter hash compatibility is checked.
+   */
+  if (isUserWorkspaceState(args.savedState)) {
+    return true;
+  }
+
+  /**
+   * If there is a starterHash, and it matched above, this workspace is safe only
+   * when it actually differs from the starter.
+   */
+  if (savedStarterHash) {
+    return workspaceHash(args.savedWorkspace) !== savedStarterHash;
+  }
+
+  /**
+   * Legacy no-hash saves are risky. Only preserve them if the current starter
+   * has no useful code. This prevents old bad main.py content from sticking
+   * after curriculum updates.
+   */
+  if (starterHasCode) {
+    return false;
   }
 
   return shouldPreserveSavedWorkspace(args.savedWorkspace, args.starterWorkspace);
 }
+
 
 
 function starterLoopTrace(label: string, payload: Record<string, any>) {

@@ -1,7 +1,7 @@
 import type { PracticeKind } from "@zoeskoul/db";
 import type { ManifestRuntimeDefaults } from "@/lib/subjects/_core/manifestTypes";
 import type { LearningIdeConfig } from "@/lib/ide/learningIdeConfig";
-
+import type { ReviewContentVersion } from "@/lib/review/contentVersionTypes";
 export type ReviewQuestion =
     | {
     kind: "mcq";
@@ -173,7 +173,11 @@ export type ReviewModule = {
      * Current progress, card rendering, navigation, and topic lookup depend on this.
      */
     topics: ReviewTopicShape[];
-
+    /**
+     * Published content patch version for this exact subject/module.
+     * This is used to detect stale loaded lesson/exercise content.
+     */
+    contentVersion?: ReviewContentVersion | null;
     /**
      * New optional structure for sidebar display:
      * module -> sections -> topics.

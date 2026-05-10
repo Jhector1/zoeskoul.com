@@ -16,6 +16,7 @@ import type {
     ReviewTopicShape,
 } from "@/lib/subjects/types";
 import type { ManifestRuntimeDefaults } from "@/lib/subjects/_core/manifestTypes";
+import {getReviewContentVersion} from "@/lib/review/contentVersion";
 
 function indexBy<T extends { slug: string }>(items: readonly T[]) {
     return Object.fromEntries(items.map((x) => [x.slug, x])) as Record<string, T>;
@@ -526,12 +527,18 @@ export async function getResolvedReviewModule(
         normalizeSection,
     );
 
+    const contentVersion = await getReviewContentVersion({
+        subjectSlug,
+        moduleSlug,
+    });
+
     return {
         id: resolved.id,
         title: resolved.title,
         subtitle: resolved.subtitle ?? null,
         startPracticeSectionSlug: resolved.startPracticeSectionSlug,
         runtimeDefaults: normalizeRuntimeDefaults(resolved.runtimeDefaults) ?? null,
+        contentVersion,
         topics,
         sections,
     } satisfies ReviewModule;

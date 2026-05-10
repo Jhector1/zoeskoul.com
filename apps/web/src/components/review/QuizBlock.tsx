@@ -95,29 +95,72 @@ function getRuntimePracticePatchForQuestion(q: ReviewQuestion) {
   const runtime = useReviewRuntimeStore.getState();
   const exercises = runtime.exercises ?? {};
 
-  /**
-   * Match loosely because the exercise key is namespaced:
-   * subject:module:section:topic:card:exerciseId
-   *
-   * The final segment should match q5/create-method/etc.
-   */
-  const estate =
-      exercises[stablePracticeKey] ??
-      exercises[q.id] ??
-      Object.values(exercises).find((item: any) => {
-        if (!item) return false;
+  const qAny = q as any;
 
-        return (
-            item.exerciseId === stablePracticeKey ||
-            item.exerciseId === q.id ||
-            item.exerciseKey === stablePracticeKey ||
-            item.exerciseKey === q.id ||
-            String(item.exerciseKey ?? "").endsWith(`:${stablePracticeKey}`) ||
-            String(item.exerciseKey ?? "").endsWith(`:${q.id}`)
-        );
+  const wantedIds = new Set(
+      [
+        stablePracticeKey,
+        q.id,
+        qAny.fetch?.exerciseKey,
+        qAny.fetch?.stepId,
+        qAny.exerciseKey,
+        qAny.stepId,
+        qAny.item?.id,
+        qAny.item?.exerciseKey,
+        qAny.exercise?.id,
+        qAny.exercise?.exerciseKey,
+      ]
+          .map((value) => String(value ?? "").trim())
+          .filter(Boolean),
+  );
+
+  const activeExerciseKey = String(runtime.activeExerciseKey ?? "").trim();
+  const boundExerciseKey = String(runtime.tool?.boundExerciseKey ?? "").trim();
+
+  const candidates = Object.entries(exercises)
+      .map(([key, value]: any) => {
+        if (!value) return null;
+
+        const valueExerciseKey = String(value.exerciseKey ?? "").trim();
+        const valueExerciseId = String(value.exerciseId ?? "").trim();
+
+        let score = 0;
+
+        if (activeExerciseKey && key === activeExerciseKey) score += 3000;
+        if (boundExerciseKey && key === boundExerciseKey) score += 3000;
+        if (activeExerciseKey && valueExerciseKey === activeExerciseKey) score += 2500;
+        if (boundExerciseKey && valueExerciseKey === boundExerciseKey) score += 2500;
+
+        for (const wantedId of wantedIds) {
+          if (key === wantedId) score += 1200;
+          if (valueExerciseKey === wantedId) score += 1100;
+          if (valueExerciseId === wantedId) score += 1000;
+
+          if (key.endsWith(`:${wantedId}`)) score += 800;
+          if (valueExerciseKey.endsWith(`:${wantedId}`)) score += 750;
+        }
+
+        if (score <= 0) return null;
+
+        const updatedAt = Number(value.updatedAt ?? 0);
+
+        return {
+          key,
+          value,
+          score,
+          updatedAt: Number.isFinite(updatedAt) ? updatedAt : 0,
+        };
+      })
+      .filter(Boolean)
+      .sort((a: any, b: any) => {
+        if (b.score !== a.score) return b.score - a.score;
+        return b.updatedAt - a.updatedAt;
       });
 
-  if (!estate) return null;
+  const found = candidates[0];
+  if (!found) return null;
+
+  const estate = found.value;
 
   const workspace =
       isWorkspace((estate as any).workspace)
@@ -139,23 +182,23 @@ function getRuntimePracticePatchForQuestion(q: ReviewQuestion) {
               : "");
 
   const stdin =
-      typeof (estate as any).codeStdin === "string"
-          ? (estate as any).codeStdin
-          : typeof (estate as any).stdin === "string"
-              ? (estate as any).stdin
-              : typeof workspace?.stdin === "string"
-                  ? workspace.stdin
+      typeof workspace?.stdin === "string"
+          ? workspace.stdin
+          : typeof (estate as any).codeStdin === "string"
+              ? (estate as any).codeStdin
+              : typeof (estate as any).stdin === "string"
+                  ? (estate as any).stdin
                   : "";
 
   const lang =
-      typeof (estate as any).codeLang === "string"
-          ? (estate as any).codeLang
-          : typeof (estate as any).lang === "string"
-              ? (estate as any).lang
-              : typeof (estate as any).language === "string"
-                  ? (estate as any).language
-                  : typeof workspace?.language === "string"
-                      ? workspace.language
+      typeof workspace?.language === "string"
+          ? workspace.language
+          : typeof (estate as any).codeLang === "string"
+              ? (estate as any).codeLang
+              : typeof (estate as any).lang === "string"
+                  ? (estate as any).lang
+                  : typeof (estate as any).language === "string"
+                      ? (estate as any).language
                       : "python";
 
   return {
@@ -181,6 +224,7 @@ function getRuntimePracticePatchForQuestion(q: ReviewQuestion) {
         (estate as any).workspaceOrigin ??
         ((estate as any).userEdited === true ? "user" : "saved"),
     starterHash: (estate as any).starterHash,
+    updatedAt: (estate as any).updatedAt ?? Date.now(),
     ...(workspace
         ? {
           workspace,
@@ -188,9 +232,12 @@ function getRuntimePracticePatchForQuestion(q: ReviewQuestion) {
           ideWorkspace: workspace,
         }
         : {}),
-    updatedAt: (estate as any).updatedAt ?? Date.now(),
   };
 }
+
+
+
+
 export default function QuizBlock({
                                     prereqsMet = true,
                                     quizId,

@@ -1,11 +1,11 @@
 "use client";
 
-import React, { useEffect, useMemo, useState, useTransition } from "react";
-import { useSearchParams } from "next/navigation";
-import { usePathname, useRouter } from "@/i18n/navigation";
-import { routing } from "@/i18n/routing";
-import { Loader2 } from "lucide-react";
-import { cn } from "@/lib/cn";
+import React, {useEffect, useMemo, useState, useTransition} from "react";
+import {useSearchParams} from "next/navigation";
+import {usePathname, useRouter} from "@/i18n/navigation";
+import {routing} from "@/i18n/routing";
+import {Loader2} from "lucide-react";
+import {cn} from "@/lib/cn";
 
 type NavHref = Parameters<ReturnType<typeof useRouter>["push"]>[0];
 
@@ -18,6 +18,17 @@ type NavButtonProps = {
     showSpinner?: boolean;
     prefetch?: boolean;
     onClick?: () => void;
+    style?: React.CSSProperties;
+    /**
+     * Use this when the current page must fully reload from the server.
+     * Good for course-content-update banners.
+     */
+    hardReload?: boolean;
+    hardReloadCurrent?: boolean;
+    /**
+     * Optional text while navigation/reload is happening.
+     */
+    loadingText?: React.ReactNode;
 };
 
 function normalizeHref(href: NavHref): NavHref {
@@ -50,6 +61,11 @@ export default function NavButton({
                                       showSpinner = true,
                                       prefetch = false,
                                       onClick,
+                                      hardReload = false,
+                                      hardReloadCurrent = false,
+
+                                      loadingText,
+                                      style = {}
                                   }: NavButtonProps) {
     const router = useRouter();
     const pathname = usePathname();
@@ -70,10 +86,10 @@ export default function NavButton({
     }, [currentUrl]);
 
     useEffect(() => {
-        if (prefetch) {
+        if (prefetch && !hardReload) {
             router.prefetch(normalizedHref);
         }
-    }, [normalizedHref, prefetch, router]);
+    }, [normalizedHref, prefetch, hardReload, router]);
 
     const loading = clicked || isPending;
     const isDisabled = disabled || loading;
@@ -89,6 +105,27 @@ export default function NavButton({
                 onClick?.();
                 setClicked(true);
 
+                if (hardReload || hardReloadCurrent) {
+                    /**
+                     * Let React paint the loading spinner before the browser reloads.
+                     */
+                    window.setTimeout(() => {
+                        if (hardReloadCurrent) {
+                            window.location.reload();
+                            return;
+                        }
+
+                        if (typeof normalizedHref === "string") {
+                            window.location.assign(normalizedHref);
+                            return;
+                        }
+
+                        window.location.reload();
+                    }, 80);
+
+                    return;
+                }
+
                 startTransition(() => {
                     router.push(normalizedHref);
                 });
@@ -99,11 +136,13 @@ export default function NavButton({
                 loading && "pointer-events-none",
                 className,
             )}
+            style={style}
         >
             {showSpinner && loading ? (
-                <Loader2 className="h-4 w-4 animate-spin shrink-0" />
+                <Loader2 className="h-4 w-4 shrink-0 animate-spin"/>
             ) : null}
-            <span>{children}</span>
+
+            <span>{loading && loadingText ? loadingText : children}</span>
         </button>
     );
 }

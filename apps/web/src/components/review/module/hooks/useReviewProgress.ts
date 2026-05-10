@@ -54,7 +54,49 @@ function isUserSavedState(value: any) {
         value?.workspaceOrigin === "saved"
     );
 }
+function workspaceContentHash(workspace: any) {
+    if (!workspace || workspace.version !== 2 || !Array.isArray(workspace.nodes)) {
+        return "null";
+    }
 
+    const files = workspace.nodes
+        .filter((node: any) => node?.kind === "file")
+        .map((node: any) => ({
+            id: String(node.id ?? ""),
+            name: String(node.name ?? ""),
+            content: String(node.content ?? ""),
+        }))
+        .sort((a: any, b: any) => a.id.localeCompare(b.id));
+
+    return JSON.stringify({
+        version: 2,
+        language: workspace.language ?? null,
+        stdin: typeof workspace.stdin === "string" ? workspace.stdin : "",
+        entryFileId: workspace.entryFileId ?? null,
+        activeFileId: workspace.activeFileId ?? null,
+        files,
+    });
+}
+
+function savedStarterHashMatchesRuntimeStarter(args: {
+    saved: any;
+    existingStarterHash?: string | null;
+    existingWorkspace?: any;
+}) {
+    const savedStarterHash =
+        typeof args.saved?.starterHash === "string" ? args.saved.starterHash : "";
+
+    if (!savedStarterHash) {
+        return false;
+    }
+
+    const runtimeStarterHash =
+        typeof args.existingStarterHash === "string" && args.existingStarterHash
+            ? args.existingStarterHash
+            : workspaceContentHash(args.existingWorkspace);
+
+    return savedStarterHash === runtimeStarterHash;
+}
 function numericUpdatedAt(value: any) {
     const n = Number(value?.updatedAt ?? 0);
     return Number.isFinite(n) ? n : 0;
@@ -317,23 +359,36 @@ function workspaceHasNonBlankCode(workspace: any) {
 
 function hasSavedExerciseContent(value: any) {
     const workspace = getSavedWorkspace(value);
-    const userSaved = isUserSavedState(value);
 
     const hasNonBlankCode =
         workspaceHasNonBlankCode(workspace) ||
         (typeof value?.code === "string" && value.code.trim().length > 0) ||
         (typeof value?.source === "string" && value.source.trim().length > 0);
 
-    /**
-     * Blank saved code/workspace should not count as learner work.
-     * Otherwise old blank patches erase starterCode.
-     */
-    if (userSaved) {
-        return Boolean(hasNonBlankCode || value?.sketch);
-    }
+    const hasSketch = Boolean(value?.sketch);
 
-    return Boolean(hasNonBlankCode || value?.sketch);
+    /**
+     * Progress-only state must still hydrate.
+     * This preserves checked/correct/submitted/completed progress even when
+     * stale editor code is intentionally dropped because the starter changed.
+     */
+    const hasProgressState =
+        value?.checked === true ||
+        value?.correct === true ||
+        value?.submitted === true ||
+        value?.completed === true ||
+        typeof value?.attempts === "number" ||
+        typeof value?.score === "number" ||
+        typeof value?.selectedChoice === "string" ||
+        Array.isArray(value?.selectedChoices) ||
+        Array.isArray(value?.orderedIds) ||
+        typeof value?.blankValue === "string" ||
+        typeof value?.answer === "string";
+
+    return Boolean(hasNonBlankCode || hasSketch || hasProgressState);
 }
+
+
 function getSavedExerciseCode(value: any, workspace: any) {
     const workspaceCode = deriveEntryCode(workspace) ?? "";
     if (workspaceCode) return workspaceCode;
@@ -908,23 +963,61 @@ export function useReviewProgress(args: {
                 const runtimeNow = useReviewRuntimeStore.getState();
                 const existingExercise = runtimeNow.exercises[canonicalExerciseKey] ?? null;
                 const parts = canonicalExerciseKey.split(":");
-                const workspace = getSavedWorkspace(saved);
-                const code = getSavedExerciseCode(saved, workspace);
-                const stdin = getSavedExerciseStdin(saved, workspace);
-                const language = getSavedExerciseLanguage(
+                const savedWorkspace = getSavedWorkspace(saved);
+
+                const savedMatchesCurrentStarter = savedStarterHashMatchesRuntimeStarter({
                     saved,
-                    workspace,
-                    existingExercise?.language ?? "python",
-                );
-                const userEdited =
-                    isUserSavedState(saved) ||
-                    (Boolean(workspace) &&
+                    existingStarterHash: existingExercise?.starterHash,
+                    existingWorkspace:
+                        existingExercise?.workspace ??
+                        existingExercise?.codeWorkspace ??
+                        existingExercise?.ideWorkspace,
+                });
+
+                /**
+                 * Important:
+                 * If the curriculum starter changed, do NOT restore old editor/workspace code.
+                 * But still hydrate saved progress fields like checked/correct/submitted.
+                 */
+                const shouldDropSavedWorkspace =
+                    !savedMatchesCurrentStarter && Boolean(existingExercise?.starterHash);
+
+                const workspace =
+                    shouldDropSavedWorkspace
+                        ? existingExercise?.workspace ??
+                        existingExercise?.codeWorkspace ??
+                        existingExercise?.ideWorkspace ??
+                        null
+                        : savedWorkspace;
+
+                const code = shouldDropSavedWorkspace
+                    ? existingExercise?.code ?? existingExercise?.source ?? undefined
+                    : getSavedExerciseCode(saved, savedWorkspace);
+
+                const stdin = shouldDropSavedWorkspace
+                    ? existingExercise?.stdin ?? existingExercise?.codeStdin ?? ""
+                    : getSavedExerciseStdin(saved, savedWorkspace);
+
+                const language = shouldDropSavedWorkspace
+                    ? existingExercise?.language ?? existingExercise?.lang ?? "python"
+                    : getSavedExerciseLanguage(
+                        saved,
+                        savedWorkspace,
+                        existingExercise?.language ?? "python",
+                    );
+
+                const userEdited = shouldDropSavedWorkspace
+                    ? existingExercise?.userEdited ?? false
+                    : isUserSavedState(saved) ||
+                    (Boolean(savedWorkspace) &&
                         saved?.workspaceOrigin !== "starter" &&
                         saved?.workspaceOrigin !== "empty" &&
                         saved?.userEdited !== false);
-                const workspaceOrigin =
-                    saved?.workspaceOrigin ??
-                    (userEdited ? "saved" : Boolean(workspace) ? "starter" : undefined);
+
+                const workspaceOrigin = shouldDropSavedWorkspace
+                    ? existingExercise?.workspaceOrigin ?? "starter"
+                    : saved?.workspaceOrigin ??
+                    (userEdited ? "saved" : Boolean(savedWorkspace) ? "starter" : undefined);
 
                 const incomingExercise = {
                     ...saved,
@@ -991,6 +1084,7 @@ export function useReviewProgress(args: {
                     cardIdHint,
                     userEdited: incomingExercise.userEdited,
                     workspaceOrigin: incomingExercise.workspaceOrigin,
+                    workspaceDroppedBecauseStarterChanged: shouldDropSavedWorkspace,
                     workspace: summarizeWorkspaceForSave(workspace),
                 });
 
@@ -1017,7 +1111,20 @@ export function useReviewProgress(args: {
                         const entry = toolEntry as any;
                         const workspace = getSavedWorkspace(entry);
                         if (!workspace) return;
+                        if (entry?.starterHash) {
+                            const runtimeNow = useReviewRuntimeStore.getState();
+                            const existingExercise =
+                                key.startsWith("exercise:")
+                                    ? runtimeNow.exercises[key.replace(/^exercise:/, "")]
+                                    : null;
 
+                            if (
+                                existingExercise?.starterHash &&
+                                entry.starterHash !== existingExercise.starterHash
+                            ) {
+                                return;
+                            }
+                        }
                         if (key.startsWith("exercise:")) {
                             hydrateExercise({
                                 source: "toolState",
