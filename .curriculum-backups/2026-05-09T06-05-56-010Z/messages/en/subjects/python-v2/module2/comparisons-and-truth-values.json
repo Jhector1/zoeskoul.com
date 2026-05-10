@@ -1,0 +1,121 @@
+{
+  "topics": {
+    "python-v2": {
+      "python-2": {
+        "comparisons-and-truth-values": {
+          "label": "Comparisons and Truth Values",
+          "summary": "Use comparison operators and understand True and False results.",
+          "cards": {
+            "sketch0": {
+              "title": "Understanding Comparisons"
+            },
+            "sketch1": {
+              "title": "Boolean Logic"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Practice"
+            }
+          },
+          "projectSteps": {
+            "exercise1": {
+              "title": "Check if a Number is Positive"
+            },
+            "exercise2": {
+              "title": "Determine Even or Odd"
+            },
+            "exercise3": {
+              "title": "Check for Leap Year"
+            }
+          },
+          "quiz": {
+            "exercise1": {
+              "title": "Check if a Number is Positive",
+              "prompt": "Write a function `is_positive` that returns `True` if a given number is positive, and `False` otherwise. Then read the input values, call the function, and print the returned result.",
+              "hint": "Focus on the programming task being asked for, not on copying final solution text.",
+              "help": {
+                "concept": "Build the solution from the behavior the exercise is testing.",
+                "hint_1": "Think about which steps, functions, or statements are required for the task.",
+                "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "def is_positive(number):\n    # Your code here\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnumber = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(is_positive(number))"
+            },
+            "exercise2": {
+              "title": "Determine Even or Odd",
+              "prompt": "Write a function `is_even` that returns `True` if a given number is even, and `False` otherwise. Then read the input values, call the function, and print the returned result.",
+              "hint": "Focus on the programming task being asked for, not on copying final solution text.",
+              "help": {
+                "concept": "Build the solution from the behavior the exercise is testing.",
+                "hint_1": "Think about which steps, functions, or statements are required for the task.",
+                "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "def is_even(number):\n    # Your code here\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnumber = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(is_even(number))"
+            },
+            "exercise3": {
+              "title": "Check for Leap Year",
+              "prompt": "Write a function `is_leap_year` that returns `True` if a given year is a leap year, and `False` otherwise. Then read the input value, call the function, and print the returned result.",
+              "hint": "Focus on the programming task being asked for, not on copying final solution text.",
+              "help": {
+                "concept": "Build the solution from the behavior the exercise is testing.",
+                "hint_1": "Think about which steps, functions, or statements are required for the task.",
+                "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "def is_leap_year(year):\n    # Your code here\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nyear = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(is_leap_year(year))"
+            },
+            "exercise4": {
+              "title": "Understanding Boolean Logic",
+              "prompt": "Which of the following statements about Boolean logic are true? Select all that apply.",
+              "hint": "Consider how each operator evaluates its operands.",
+              "help": {
+                "concept": "Boolean logic operators evaluate expressions to return true or false.",
+                "hint_1": "The `and` operator requires both conditions to be true.",
+                "hint_2": "The `or` operator requires at least one condition to be true."
+              },
+              "options": {
+                "a": "The `and` operator returns `True` if both operands are true.",
+                "b": "The `or` operator returns `True` if at least one operand is true.",
+                "c": "The `not` operator returns `True` if the operand is true.",
+                "d": "The `and` operator returns `False` if both operands are false."
+              }
+            },
+            "exercise5": {
+              "title": "Comparison Operators",
+              "prompt": "Choose the best value for the first missing blank in the statement.",
+              "hint": "Focus on the missing concept rather than the exact missing word.",
+              "help": {
+                "concept": "The blank should be filled with the term that matches the job the statement is trying to perform.",
+                "hint_1": "Think about what the missing part is supposed to do in the statement.",
+                "hint_2": "Choose the term that best completes the meaning of the statement."
+              },
+              "template": "The first missing value is [blank1].",
+              "choices": [
+                "==",
+                "!=",
+                ">",
+                "<"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-v2": {
+      "python-2": {
+        "comparisons-and-truth-values": {
+          "sketch1": {
+            "title": "Understanding Comparisons",
+            "bodyMarkdown": "Comparison operators in Python allow you to compare values. The result of a comparison is a Boolean value: either `True` or `False`. Here are some common comparison operators:\n\n- `==`: checks if two values are equal\n- `!=`: checks if two values are not equal\n- `>`: checks if the left value is greater than the right\n- `<`: checks if the left value is less than the right\n- `>=`: checks if the left value is greater than or equal to the right\n- `<=`: checks if the left value is less than or equal to the right\n\n### Example\n```python\nx = 5\ny = 10\nprint(x < y)  # Output: True\nprint(x == y)  # Output: False\n```\nTry it yourself: Change the values of `x` and `y` and see how the output changes.\n\nLine by line: read the first statement to see which value is stored or checked, then follow each conditional branch in order to see which path prints the final result."
+          },
+          "sketch2": {
+            "title": "Boolean Logic",
+            "bodyMarkdown": "Boolean logic is used to combine multiple conditions. The main logical operators are:\n\n- `and`: returns `True` if both conditions are true\n- `or`: returns `True` if at least one condition is true\n- `not`: inverts the Boolean value\n\n### Example\n```python\nx = 5\ny = 10\nprint(x < y and y < 15)  # Output: True\nprint(x > y or y < 15)  # Output: True\nprint(not (x == y))  # Output: True\n```\nYour turn: Modify the conditions and observe the results.\n\nLine by line: read the first statement to see which value is stored or checked, then follow each conditional branch in order to see which path prints the final result."
+          }
+        }
+      }
+    }
+  }
+}

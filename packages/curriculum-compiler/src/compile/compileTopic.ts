@@ -25,6 +25,12 @@ import type { CompileProgressCallback } from "./compileProgress.js";
 import { resolvePlan } from "../spec/resolvePlan.js";
 import { findTopicPlanNode } from "../plan/findTopicPlanNode.js";
 import { buildTopicSeedFromPlanNode } from "../seeds/buildTopicSeedFromPlanNode.js";
+import {resolveWorkspacePolicy} from "../policy/resolveWorkspacePolicy.js";
+import {validateWorkspacePolicy} from "../validate/validateWorkspacePolicy.js";
+import {validateTopicBundleIdentity} from "../validate/validateTopicBundleIdentity.js";
+import {validateTopicMessagesIdentity} from "../validate/validateTopicMessagesIdentity.js";
+import {validateGenericExerciseHelp} from "../validate/validateGenericExerciseHelp.js";
+import {validateStarterCodeDoesNotRevealSolution} from "../validate/validateStarterCodeDoesNotRevealSolution.js";
 
 export async function compileTopic(args: {
     blueprint: CourseBlueprint;
@@ -190,7 +196,11 @@ export async function compileTopic(args: {
     });
 
     const draft = evaluation.draft;
-
+    const workspacePolicy = resolveWorkspacePolicy({
+        blueprint: args.blueprint,
+        moduleNumber: node.module.order - 1,
+        topicId: node.topic.topicId,
+    });
     await writeTopicReports({
         subjectSlug: args.blueprint.subjectSlug,
         moduleOrder: node.moduleIndex,
@@ -201,6 +211,12 @@ export async function compileTopic(args: {
         critiqueReport: evaluation.critiqueReport,
         semanticReport: evaluation.semanticReport,
     });
+    validateWorkspacePolicy({
+        text: JSON.stringify(evaluation.draft),
+        policy: workspacePolicy,
+        location: `${node.module.moduleSlug}/${node.topic.topicId}`,
+    });
+
 
     advanceProgress({
         stage: "validating draft",
@@ -210,7 +226,14 @@ export async function compileTopic(args: {
     });
 
     assertTopicAuthoringDraft(draft);
-
+    validateStarterCodeDoesNotRevealSolution({
+        draft,
+        location: `${node.module.moduleSlug}/${node.section.sectionSlug}/${node.topic.topicId}`,
+    });
+    validateGenericExerciseHelp({
+        draft,
+        location: `${seed.moduleSlug}/${seed.sectionSlug}/${seed.topicId}`,
+    })
     if (!evaluation.critiqueReport.ok) {
         const critiqueErrors = evaluation.critiqueReport.issues.filter(
             (issue) => issue.severity === "error",
@@ -258,10 +281,12 @@ export async function compileTopic(args: {
         shape,
         seed,
         draft,
-        moduleOrder: node.moduleIndex,
-        sectionOrder: node.sectionOrder,
     });
-
+    validateTopicBundleIdentity({
+        seed,
+        topicBundle,
+        location: `${seed.moduleSlug}/${seed.sectionSlug}/${seed.topicId}`,
+    });
     const goldenReport = await profileServices.validateGolden({
         seed,
         draft,
@@ -303,7 +328,12 @@ export async function compileTopic(args: {
         shape,
         seed,
         draft,
-        moduleOrder: node.moduleIndex,
+
+    });
+    validateTopicMessagesIdentity({
+        seed,
+        messages: sourceMessages,
+        location: `${seed.moduleSlug}/${seed.sectionSlug}/${seed.topicId}`,
     });
 
     assertNonEmptyMessages({

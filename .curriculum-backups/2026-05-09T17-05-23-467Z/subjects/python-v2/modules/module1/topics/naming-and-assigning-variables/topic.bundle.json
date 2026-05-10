@@ -1,0 +1,191 @@
+{
+  "topicId": "naming-and-assigning-variables",
+  "subjectSlug": "python-v2",
+  "moduleSlug": "python-1",
+  "sectionSlug": "python-v2-python-1-core-building-blocks-1",
+  "prefix": "py1",
+  "minutes": 22,
+  "topic": {
+    "labelKey": "topics.python-v2.python-1.naming-and-assigning-variables.label",
+    "summaryKey": "topics.python-v2.python-1.naming-and-assigning-variables.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-1.naming-and-assigning-variables.cards.sketch0.title",
+      "sketchId": "what-is-a-variable",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-1.naming-and-assigning-variables.cards.sketch1.title",
+      "sketchId": "clear-names-and-rules",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-1.naming-and-assigning-variables.cards.sketch2.title",
+      "sketchId": "reassignment",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.python-v2.python-1.naming-and-assigning-variables.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 3,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python-v2.python-1.naming-and-assigning-variables.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "code_store_and_print",
+            "titleKey": "topics.python-v2.python-1.naming-and-assigning-variables.projectSteps.code_store_and_print.title",
+            "exerciseKey": "code-store-and-print",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "code_reassign_and_print",
+            "titleKey": "topics.python-v2.python-1.naming-and-assigning-variables.projectSteps.code_reassign_and_print.title",
+            "exerciseKey": "code-reassign-and-print",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "what-is-a-variable",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-1.naming-and-assigning-variables.what-is-a-variable.title",
+      "bodyKey": "sketches.python-v2.python-1.naming-and-assigning-variables.what-is-a-variable.bodyMarkdown"
+    },
+    {
+      "id": "clear-names-and-rules",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-1.naming-and-assigning-variables.clear-names-and-rules.title",
+      "bodyKey": "sketches.python-v2.python-1.naming-and-assigning-variables.clear-names-and-rules.bodyMarkdown"
+    },
+    {
+      "id": "reassignment",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-1.naming-and-assigning-variables.reassignment.title",
+      "bodyKey": "sketches.python-v2.python-1.naming-and-assigning-variables.reassignment.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "sc-clear-variable-name",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-1.naming-and-assigning-variables.quiz.sc-clear-variable-name",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "c"
+      }
+    },
+    {
+      "id": "mc-valid-variable-names",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-1.naming-and-assigning-variables.quiz.mc-valid-variable-names",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "fb-reassignment-meaning",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-1.naming-and-assigning-variables.quiz.fb-reassignment-meaning",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "reassigned"
+      }
+    },
+    {
+      "id": "code-store-and-print",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-1.naming-and-assigning-variables.quiz.code-store-and-print",
+      "language": "python",
+      "starterCode": "# Create the variables below\n\n# Print the values below",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Lina\n12\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "name = \"Lina\"\nage = 12\nprint(name)\nprint(age)"
+      }
+    },
+    {
+      "id": "code-reassign-and-print",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-1.naming-and-assigning-variables.quiz.code-reassign-and-print",
+      "language": "python",
+      "starterCode": "# Create points with a starting value\n\n# Reassign points\n\n# Print points",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "9\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "points = 5\npoints = 9\nprint(points)"
+      }
+    }
+  ]
+}

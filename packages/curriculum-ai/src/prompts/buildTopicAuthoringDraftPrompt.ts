@@ -2,7 +2,67 @@ import type {TopicSeed} from "@zoeskoul/curriculum-contracts";
 import type {SubjectShapePack} from "@zoeskoul/curriculum-profiles";
 import {renderExercisePolicyPrompt} from "./renderExercisePolicyPrompt.js";
 import { renderExerciseKindPromptRules } from "./exerciseKindPromptRules.js";
+import {TopicRetryContext} from "../types.js";
 
+
+function renderRetryGuidance(retry?: TopicRetryContext) {
+    if (!retry) return "";
+
+    return [
+        "",
+        "IMPORTANT: This is a retry for the same topic.",
+        `Retry attempt: ${retry.attempt} of ${retry.maxRetries}.`,
+        `Previous failure code: ${retry.previousErrorCode}`,
+        "Previous failure message:",
+        retry.previousErrorMessage,
+        "",
+        "You must fix the issue above without changing the topic identity.",
+        "Do not repeat the same validation mistake.",
+        "",
+        "If the failure mentions dummy fill_blank_choice questions:",
+        "- Every fill_blank_choice must have a meaningful prompt.",
+        "- Every template must contain real course-specific context.",
+        "- Do not use placeholder templates like `The missing value is [blank1].`",
+        "",
+        "If the failure mentions generic exercise help:",
+        "- Rewrite hints and help so they mention the exact question concept.",
+        "",
+        "If the failure mentions starterCode revealing solutionCode:",
+        "- Make starterCode scaffolding only. Keep the completed logic in solutionCode.",
+        "",
+        "If the failure mentions workspace policy:",
+        "- Do not mention files, .py filenames, terminals, command lines, package installation, or local workflows.",
+        "",
+    ].join("\n");
+}
+function renderWorkspacePolicy(seed: TopicSeed) {
+    const policy = seed.workspacePolicy;
+    if (!policy) return "";
+
+    const c = policy.workspace.capabilities;
+    const ui = policy.workspace.ui;
+
+    return [
+        "Learner workspace rules:",
+        `- Workspace: ${policy.workspace.name}`,
+        `- Editor label: ${ui.editorLabel ?? "editor"}`,
+        `- Run button label: ${ui.runButtonLabel ?? "Run"}`,
+        `- Output panel label: ${ui.outputPanelLabel ?? "output panel"}`,
+        `- Terminal available: ${c.terminal.enabled ? "yes" : "no"}`,
+        `- File creation available: ${c.filesystem.enabled ? "yes" : "no"}`,
+        `- Multi-file projects available: ${c.multiFileProjects.enabled ? "yes" : "no"}`,
+        `- Package installation available: ${c.packageInstall.enabled ? "yes" : "no"}`,
+        "",
+        "Preferred learner actions:",
+        ...policy.preferredActionLanguage.map((x) => `- ${x}`),
+        "",
+        "Forbidden learner actions/language:",
+        ...policy.forbiddenActionLanguage.map((x) => `- ${x}`),
+        "",
+        "Course notes:",
+        ...policy.notes.map((x) => `- ${x}`),
+    ].join("\n");
+}
 export function buildTopicAuthoringDraftPrompt(args: {
     seed: TopicSeed;
     locale: string;
@@ -101,10 +161,22 @@ export function buildTopicAuthoringDraftPrompt(args: {
             '- "hint_2"',
             "",
             "Writing rule for support fields:",
-            "- concept = explain the underlying idea clearly",
-            "- hint = shortest nudge",
-            "- hint_1 = stronger hint",
-            "- hint_2 = strongest hint before the answer",
+            "- concept = explain the specific underlying idea for this exact question.",
+            "- hint = shortest specific nudge tied to this exact question.",
+            "- hint_1 = stronger specific hint that points to the relevant concept, syntax, input/output behavior, or misconception.",
+            "- hint_2 = strongest specific hint before the answer, but still not the final answer.",
+            "",
+            "Support fields must be specific, not generic.",
+            "Do not use vague test-taking language such as:",
+            "- Focus on the main concept.",
+            "- Choose the option that matches the core idea.",
+            "- Eliminate choices that describe something different.",
+            "- Build the solution from the behavior being tested.",
+            "- Think about the role or idea being tested.",
+            "",
+            "For a question about Python use cases, a good hint is: 'Think about tasks where Python can automate repeated steps or process data.'",
+            "For a question about the browser runner, a good hint is: 'Look for the answer that uses the editor, Run button, and output panel.'",
+            "For a question about print output, a good hint is: 'Check exactly what print sends to the output panel, including spaces and punctuation.'",
             "",
             "Do not reveal the exact final answer in hint, hint_1, or hint_2.",
             "Do not give the final SQL query, final option letter, or final exact filled value in hints.",
@@ -130,8 +202,15 @@ export function buildTopicAuthoringDraftPrompt(args: {
             "- Every multi_choice includes ALL correct options, not only one.",
             "- Every fill_blank_choice has exactly one blank and exactly one correctValue.",
             "- Every code_input follows the profile-specific runtime and recipe rules.",
+            "Python code_input recipe rules:",
+            '- For normal beginner output exercises, set recipeType to "fixed_tests" and include tests[].',
+            '- For class, object, method, attribute, return-value, or structure-checking exercises, set recipeType to "semantic" and include semanticChecks[].',
+            '- If recipeType is "semantic", do not rely on stdout tests.',
+            '- If recipeType is "fixed_tests", include at least one stdin/stdout test.',
+            '- Never leave recipeType ambiguous for Python code_input exercises.',
             "- Hints explain the concept but do not reveal the final answer wording.",
             "- Sketch SQL examples must use the module dataset, not an exercise dataset.",
+            renderWorkspacePolicy(args.seed),
         ].join("\n"),
         user: JSON.stringify(
             {

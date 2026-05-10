@@ -17,6 +17,7 @@ import type { CompileProgressCallback } from "./compileProgress.js";
 import { resolvePlan } from "../spec/resolvePlan.js";
 import { findTopicPlanNode } from "../plan/findTopicPlanNode.js";
 import { buildTopicSeedFromPlanNode } from "../seeds/buildTopicSeedFromPlanNode.js";
+import {validateTopicBundleIdentity} from "../validate/validateTopicBundleIdentity.js";
 
 export async function critiqueTopic(args: {
     blueprint: CourseBlueprint;
@@ -127,8 +128,12 @@ export async function critiqueTopic(args: {
         shape,
         seed,
         draft: repairedDraft,
-        moduleOrder: node.moduleIndex,
-        sectionOrder: node.sectionOrder,
+
+    });
+    validateTopicBundleIdentity({
+        seed,
+        topicBundle,
+        location: `${seed.moduleSlug}/${seed.sectionSlug}/${seed.topicId}`,
     });
     const goldenReport = await profileServices.validateGolden({
         seed,

@@ -1,0 +1,123 @@
+{
+  "topics": {
+    "python-v2": {
+      "python-v2-1": {
+        "input-and-type-conversion": {
+          "label": "Input and Type Conversion",
+          "summary": "Use input, int, float, and str to handle user-entered values.",
+          "cards": {
+            "sketch0": {
+              "title": "Getting User Input"
+            },
+            "sketch1": {
+              "title": "Type Conversion"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Practice"
+            }
+          },
+          "projectSteps": {
+            "quiz_1": {
+              "title": "Convert User Input to Integer"
+            },
+            "policy_code_input_1": {
+              "title": "Print whether a number is positive"
+            }
+          },
+          "quiz": {
+            "quiz_1": {
+              "title": "Convert User Input to Integer",
+              "prompt": "Write a program that asks the user for their age and then prints out the age in 10 years.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "starterCode": "age = input()\n# Convert age to an integer"
+            },
+            "quiz_2": {
+              "title": "Fill in the Blank",
+              "prompt": "Choose the best value for the first missing blank in the statement.",
+              "hint": "Focus on the missing concept or keyword.",
+              "help": {
+                "concept": "This task checks the key idea behind fill in the blank.",
+                "hint_1": "Look for the word or phrase that best matches the lesson concept.",
+                "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
+              },
+              "template": "The first missing value is [blank1].",
+              "choices": [
+                "int",
+                "float",
+                "str",
+                "bool"
+              ]
+            },
+            "quiz_3": {
+              "title": "Understanding Type Conversion",
+              "prompt": "Which function would you use to convert a string to a floating-point number?",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "options": {
+                "a": "int()",
+                "b": "str()",
+                "c": "float()",
+                "d": "bool()"
+              }
+            },
+            "quiz_4": {
+              "title": "Identifying Correct Conversions",
+              "prompt": "Which of the following are valid type conversions in Python?",
+              "hint": "Consider which functions can take a string or number and convert it to another type.",
+              "help": {
+                "concept": "You can convert strings to integers, floats, and vice versa using the appropriate functions.",
+                "hint_1": "int() and float() can convert strings that represent numbers.",
+                "hint_2": "str() can convert numbers to strings."
+              },
+              "options": {
+                "a": "int('123')",
+                "b": "float('123.45')",
+                "c": "str(123)",
+                "d": "bool('False')"
+              }
+            },
+            "policy_code_input_1": {
+              "title": "Print whether a number is positive",
+              "prompt": "Read one integer. Print `True` when the number is greater than 0 and `False` otherwise.",
+              "hint": "Use a conditional check and return a boolean result.",
+              "help": {
+                "concept": "A conditional can decide which boolean value to print based on a comparison.",
+                "hint_1": "Compare the number with zero inside an if statement.",
+                "hint_2": "Print True when the condition passes; otherwise print False."
+              },
+              "starterCode": "n = int(input())\n# Your code here"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-v2": {
+      "python-v2-1": {
+        "input-and-type-conversion": {
+          "sketch_1": {
+            "title": "Getting User Input",
+            "bodyMarkdown": "In Python, you can get input from users using the `input()` function. This function waits for the user to type something and press Enter. For example:\n\n```python\nname = input('What is your name? ')\nprint('Hello, ' + name + '!')\n```\n\nIn this example, the program asks for the user's name and then greets them. \n\n**Your turn:** Try modifying the prompt to ask for your favorite color.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          },
+          "sketch_2": {
+            "title": "Type Conversion",
+            "bodyMarkdown": "When you get input from a user, it is always a string. To use it as a number, you need to convert it. You can use `int()` to convert a string to an integer and `float()` to convert it to a float. For example:\n\n```python\nage = input('How old are you? ')\nage = int(age)\nprint('In 5 years, you will be ' + str(age + 5) + ' years old.')\n```\n\nThis code takes the user's age as input, converts it to an integer, and then calculates what their age will be in 5 years.\n\n**Try it yourself:** Change the code to ask for your height in meters and convert it to centimeters.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          }
+        }
+      }
+    }
+  }
+}

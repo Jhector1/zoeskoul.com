@@ -7,7 +7,6 @@
       <excludeFolder url="file://$MODULE_DIR$/apps/runner/.turbo" />
       <excludeFolder url="file://$MODULE_DIR$/apps/runner/dist" />
       <excludeFolder url="file://$MODULE_DIR$/apps/web/.turbo" />
-      <excludeFolder url="file://$MODULE_DIR$/apps/web/src/lib/subjects/_core" />
       <excludeFolder url="file://$MODULE_DIR$/packages 2" />
       <excludeFolder url="file://$MODULE_DIR$/packages/code-contracts/.turbo" />
       <excludeFolder url="file://$MODULE_DIR$/packages/code-contracts/dist" />

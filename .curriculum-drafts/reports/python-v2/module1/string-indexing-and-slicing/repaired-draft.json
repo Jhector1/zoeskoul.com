@@ -1,0 +1,125 @@
+{
+  "title": "String Indexing and Slicing",
+  "summary": "Access characters and substrings using indexes and slices.",
+  "minutes": 25,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Understanding String Indexing",
+      "bodyMarkdown": "In Python, strings are sequences of characters. Each character in a string has a unique index, starting from 0. For example, in the string `\"Hello\"`, the character `H` is at index 0, `e` is at index 1, and so on. You can access a specific character using its index like this:\n\n```python\nmy_string = \"Hello\"\nprint(my_string[0])  # Output: H\n```\n\n**Try it yourself:** Access the character at index 1 in the string `\"Python\"`.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+    },
+    {
+      "id": "sketch2",
+      "title": "Slicing Strings",
+      "bodyMarkdown": "Slicing allows you to extract a substring from a string using a range of indices. The syntax is `string[start:end]`, where `start` is inclusive and `end` is exclusive. For example:\n\n```python\nmy_string = \"Hello, World!\"\nprint(my_string[0:5])  # Output: Hello\n```\n\nThis extracts characters from index 0 to 4. \n\n**Your turn:** Slice the string `\"Programming\"` to get `\"gram\"`.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "quiz1",
+      "kind": "single_choice",
+      "title": "What is the index of the first character in a string?",
+      "prompt": "In Python, string indexing starts at which number?",
+      "options": [
+        "1",
+        "0",
+        "2",
+        "None of the above"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "quiz2",
+      "kind": "multi_choice",
+      "title": "Which of the following are valid ways to slice a string?",
+      "prompt": "Select all valid string slicing methods.",
+      "options": [
+        "string[0:5]",
+        "string[5:0]",
+        "string[:5]"
+      ],
+      "correctOptionIds": [
+        "a",
+        "c"
+      ],
+      "hint": "Consider the syntax of slicing in Python.",
+      "help": {
+        "concept": "Slicing syntax uses start and end indices.",
+        "hint_1": "Look for options that follow the format `string[start:end]`.",
+        "hint_2": "Remember that the end index is exclusive."
+      }
+    },
+    {
+      "id": "quiz3",
+      "kind": "fill_blank_choice",
+      "title": "Fill in the blank: The slice `string[1:4]` will return ___ characters.",
+      "prompt": "What will be the output of `string[1:4]`?",
+      "template": "The slice `string[1:4]` will return ___ characters.",
+      "choices": [
+        "2",
+        "3",
+        "4",
+        "1"
+      ],
+      "correctValue": "3",
+      "hint": "Focus on the missing concept or keyword.",
+      "help": {
+        "concept": "This task checks the key idea behind fill in the blank: the slice `string[1:4]` will return ___ characters..",
+        "hint_1": "Look for the word or phrase that best matches the lesson concept.",
+        "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
+      }
+    },
+    {
+      "id": "quiz4",
+      "kind": "code_input",
+      "title": "Extract a substring",
+      "prompt": "Write a Python program to extract the substring from index 2 to 5 from the string `\"Hello, World!\"`.",
+      "starterCode": "my_string = \"Hello, World!\"\n# Your code here",
+      "solutionCode": "my_string = \"Hello, World!\"\nsubstring = my_string[2:5]\nprint(substring)  # Output: llo",
+      "recipeType": "fixed_tests",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      },
+      "tests": [
+        {
+          "stdin": "",
+          "stdout": "llo\n",
+          "match": "exact"
+        }
+      ]
+    },
+    {
+      "id": "quiz5",
+      "kind": "code_input",
+      "title": "Access a character by index",
+      "prompt": "Write a Python program to access the character at index 3 from the string `\"Python\"`.",
+      "starterCode": "my_string = \"Python\"\n# Your code here",
+      "solutionCode": "my_string = \"Python\"\ncharacter = my_string[3]\nprint(character)  # Output: h",
+      "recipeType": "fixed_tests",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      },
+      "tests": [
+        {
+          "stdin": "",
+          "stdout": "h\n",
+          "match": "exact"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "title": "Comparisons and Truth Values",
+  "summary": "Use comparison operators and understand True and False results.",
+  "minutes": 22,
+  "sketchBlocks": [
+    {
+      "id": "comparison_operators",
+      "title": "Understanding Comparison Operators",
+      "bodyMarkdown": "In Python, comparison operators are used to compare two values. The result of a comparison is either True or False. Here are some common comparison operators:\n\n- `==`: Equal to\n- `!=`: Not equal to\n- `>`: Greater than\n- `<`: Less than\n- `>=`: Greater than or equal to\n- `<=`: Less than or equal to\n\n**Example:**\n\n```python\nx = 5\nprint(x > 3)  # This will print True because 5 is greater than 3.\n```\n\n**Your turn:** Try changing the value of `x` and see how it affects the output."
+    },
+    {
+      "id": "truthiness",
+      "title": "Truthiness in Python",
+      "bodyMarkdown": "In Python, not only boolean values can be evaluated as True or False. Other values can also be considered 'truthy' or 'falsy'.\n\n- **Truthy values:** Non-zero numbers, non-empty strings, lists, etc.\n- **Falsy values:** 0, empty strings, empty lists, None.\n\n**Example:**\n\n```python\nvalue = \"\"\nif value:\n    print(\"This is truthy\")\nelse:\n    print(\"This is falsy\")  # This will print because the string is empty.\n```\n\n**Try it yourself:** Change `value` to a non-empty string and see what happens."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "multi_choice_1",
+      "kind": "multi_choice",
+      "title": "Identifying Truthy and Falsy Values",
+      "prompt": "Which of the following values are considered falsy in Python?",
+      "options": [
+        "0",
+        "\"Hello\"",
+        "[]",
+        "None"
+      ],
+      "correctOptionIds": [
+        "a",
+        "c",
+        "d"
+      ],
+      "hint": "Think about what values in Python evaluate to False.",
+      "help": {
+        "concept": "In Python, certain values are considered falsy, meaning they evaluate to False in a boolean context.",
+        "hint_1": "Remember that 0 and empty collections are falsy.",
+        "hint_2": "None is also a special value that is falsy."
+      }
+    },
+    {
+      "id": "code_input_1",
+      "kind": "code_input",
+      "starterCode": "def compare_numbers(a, b):\n    # Write your code here\n    pass",
+      "solutionCode": "def compare_numbers(a, b):\n    return a > b\n\n# Example usage:\nprint(compare_numbers(5, 3))  # Should return True\nprint(compare_numbers(2, 4))  # Should return False",
+      "tests": [
+        {
+          "input": "5, 3",
+          "output": "True"
+        },
+        {
+          "input": "2, 4",
+          "output": "False"
+        }
+      ]
+    },
+    {
+      "id": "code_input_2",
+      "kind": "code_input",
+      "starterCode": "def is_equal(a, b):\n    # Write your code here\n    pass",
+      "solutionCode": "def is_equal(a, b):\n    return a == b\n\n# Example usage:\nprint(is_equal(5, 5))  # Should return True\nprint(is_equal(5, 3))  # Should return False",
+      "tests": [
+        {
+          "input": "5, 5",
+          "output": "True"
+        },
+        {
+          "input": "5, 3",
+          "output": "False"
+        }
+      ]
+    },
+    {
+      "id": "code_input_3",
+      "kind": "code_input",
+      "starterCode": "def check_truthiness(value):\n    # Write your code here\n    pass",
+      "solutionCode": "def check_truthiness(value):\n    return bool(value)\n\n# Example usage:\nprint(check_truthiness(0))  # Should return False\nprint(check_truthiness(\"Hello\"))  # Should return True",
+      "tests": [
+        {
+          "input": "0",
+          "output": "False"
+        },
+        {
+          "input": "\"Hello\"",
+          "output": "True"
+        }
+      ]
+    },
+    {
+      "id": "fill_blank_choice_1",
+      "kind": "fill_blank_choice",
+      "template": "In Python, the expression `5 > 3` evaluates to ___.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "correctValue": "True"
+    }
+  ]
+}

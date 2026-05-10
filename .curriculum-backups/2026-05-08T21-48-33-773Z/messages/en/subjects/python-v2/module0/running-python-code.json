@@ -1,0 +1,125 @@
+{
+  "topics": {
+    "python-v2": {
+      "python-0": {
+        "running-python-code": {
+          "label": "Running Python Code",
+          "summary": "Use a REPL, script file, or notebook-style runner to execute Python.",
+          "cards": {
+            "sketch0": {
+              "title": "Introduction to Running Python Code"
+            },
+            "sketch1": {
+              "title": "Using a Script File"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Personal Introduction Script"
+            }
+          },
+          "projectSteps": {
+            "q5": {
+              "title": "Create a simple Python script"
+            }
+          },
+          "quiz": {
+            "q1": {
+              "title": "What does REPL stand for?",
+              "prompt": "Choose the correct answer.",
+              "hint": "Think about what each part of the acronym represents.",
+              "help": {
+                "concept": "REPL is an interactive programming environment that takes single user inputs, executes them, and returns the result to the user.",
+                "hint_1": "The first part is about reading input.",
+                "hint_2": "The second part involves evaluating the input."
+              },
+              "options": {
+                "a": "Read-Evaluate-Print Loop",
+                "b": "Run-Evaluate-Print Loop",
+                "c": "Read-Eval-Print Language",
+                "d": "Run-Eval-Print Loop"
+              }
+            },
+            "q2": {
+              "title": "Which command is used to run a Python script file?",
+              "prompt": "Select the correct command.",
+              "hint": "The command starts with the language name.",
+              "help": {
+                "concept": "To execute a Python script, you need to specify the Python interpreter followed by the script name.",
+                "hint_1": "Look for the command that includes 'python'.",
+                "hint_2": "The correct command has the script file name right after the interpreter."
+              },
+              "options": {
+                "a": "run python script.py",
+                "b": "execute script.py",
+                "c": "python script.py",
+                "d": "script.py run"
+              }
+            },
+            "q3": {
+              "title": "Which of the following are valid ways to run Python code?",
+              "prompt": "Select all that apply.",
+              "hint": "Consider environments where you can execute Python code.",
+              "help": {
+                "concept": "Python code can be executed in various environments, including interactive shells and script files.",
+                "hint_1": "Think about interactive environments and file execution.",
+                "hint_2": "Not all options allow for running code directly."
+              },
+              "options": {
+                "a": "Using a REPL",
+                "b": "Running a script file",
+                "c": "Using a text editor",
+                "d": "Using a Jupyter notebook"
+              }
+            },
+            "q4": {
+              "title": "Fill in the blank: To print a message in Python, you use the ______ function.",
+              "prompt": "Choose the correct word to complete the sentence.",
+              "hint": "Focus on the missing concept or keyword.",
+              "help": {
+                "concept": "This task checks the key idea behind fill in the blank: to the missing term a message in python, you use the ______ function..",
+                "hint_1": "Look for the word or phrase that best matches the lesson concept.",
+                "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
+              },
+              "template": "To print a message in Python, you use the ______ function.",
+              "choices": [
+                "echo",
+                "print",
+                "show",
+                "display"
+              ]
+            },
+            "q5": {
+              "title": "Create a simple Python script",
+              "prompt": "Write a Python script that prints your name.",
+              "hint": "Break the task into the main code steps first.",
+              "help": {
+                "concept": "This task checks whether you can apply create a simple python script in a working solution.",
+                "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
+                "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
+              },
+              "starterCode": "// Write your answer below"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-v2": {
+      "python-0": {
+        "running-python-code": {
+          "1": {
+            "title": "Introduction to Running Python Code",
+            "bodyMarkdown": "In Python, you can run your code in different environments such as a REPL (Read-Eval-Print Loop), script files, or Jupyter notebooks. Each of these environments allows you to execute Python code and see the results immediately.\n\n**Example:** In a REPL, you can type `print('Hello, World!')` and see the output right away. \n\n**Your turn:** Try running a simple print statement in your Python environment!"
+          },
+          "2": {
+            "title": "Using a Script File",
+            "bodyMarkdown": "A script file is a text file that contains Python code. You can create a file named `hello.py` and write the following code:\n\n```python\nprint('Hello from a script!')\n```\n\nTo run this script, you would use the command line and type `python hello.py`. This will execute the code in the file and print the message to the console.\n\n**Try it yourself:** Create a script file and run it to see the output!"
+          }
+        }
+      }
+    }
+  }
+}

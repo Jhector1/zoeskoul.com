@@ -38,6 +38,11 @@ export default function SingleChoiceExerciseUI({
 
     return (
         <div className="grid gap-2">
+            {exercise.title ? (
+                <div className="mt-1 line-clamp-2 ui-title-sm sm:text-[15px]">
+                    {String(exercise.title)}
+                </div>
+            ) : null}
             <ExercisePrompt exercise={exercise} />
 
             <div className="ui-meta-strong">

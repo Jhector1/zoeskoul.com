@@ -4,12 +4,11 @@ import type {
     CourseBlueprint,
     CoursePlan,
     ManifestRuntimeDefaults,
-    SqlDialect,
+
     SubjectManifest,
     SubjectModuleManifest,
     SubjectSectionManifest,
-    TopicSeedRuntimeDefaults,
-    WorkspaceLanguage,
+
 } from "@zoeskoul/curriculum-contracts";
 import type { SubjectShapePack } from "@zoeskoul/curriculum-profiles";
 import { moduleOrderToIndex } from "../spec/moduleOrder.js";
@@ -18,63 +17,65 @@ import {
     runtimePolicyToTopicRuntimeDefaults,
 } from "../spec/resolveModuleRuntimePolicy.js";
 import { resolveLogicalSectionSlug } from "./resolveLogicalSectionSlug.js";
+import {resolveWorkspacePolicy} from "../policy/resolveWorkspacePolicy.js";
+import {workspaceToRuntimeDefaults} from "../policy/workspaceToRuntimeDefaults.js";
 
-const SQL_DIALECTS = ["sqlite", "postgres", "mysql", "mssql"] as const;
+// const SQL_DIALECTS = ["sqlite", "postgres", "mysql", "mssql"] as const;
+//
+// const CODE_LANGUAGES = [
+//     "python",
+//     "java",
+//     "javascript",
+//     "c",
+//     "cpp",
+//     "bash",
+//     "web",
+// ] as const;
+//
+// type ManifestCodeLanguage = Exclude<WorkspaceLanguage, "sql">;
 
-const CODE_LANGUAGES = [
-    "python",
-    "java",
-    "javascript",
-    "c",
-    "cpp",
-    "bash",
-    "web",
-] as const;
+// function toSqlDialect(value: string | undefined): SqlDialect | undefined {
+//     if (!value) return undefined;
+//
+//     return SQL_DIALECTS.includes(value as SqlDialect)
+//         ? (value as SqlDialect)
+//         : undefined;
+// }
+//
+// function toManifestCodeLanguage(
+//     value: string | undefined,
+// ): ManifestCodeLanguage | undefined {
+//     if (!value) return undefined;
+//
+//     return CODE_LANGUAGES.includes(value as ManifestCodeLanguage)
+//         ? (value as ManifestCodeLanguage)
+//         : undefined;
+// }
 
-type ManifestCodeLanguage = Exclude<WorkspaceLanguage, "sql">;
-
-function toSqlDialect(value: string | undefined): SqlDialect | undefined {
-    if (!value) return undefined;
-
-    return SQL_DIALECTS.includes(value as SqlDialect)
-        ? (value as SqlDialect)
-        : undefined;
-}
-
-function toManifestCodeLanguage(
-    value: string | undefined,
-): ManifestCodeLanguage | undefined {
-    if (!value) return undefined;
-
-    return CODE_LANGUAGES.includes(value as ManifestCodeLanguage)
-        ? (value as ManifestCodeLanguage)
-        : undefined;
-}
-
-function toManifestRuntimeDefaults(
-    runtimeDefaults: TopicSeedRuntimeDefaults | null | undefined,
-): ManifestRuntimeDefaults | undefined {
-    if (!runtimeDefaults) return undefined;
-
-    if (runtimeDefaults.kind === "sql") {
-        return {
-            kind: "sql",
-            datasetId: runtimeDefaults.datasetId,
-            fixedSqlDialect:
-                toSqlDialect(runtimeDefaults.fixedSqlDialect) ?? "sqlite",
-            resultShape: "table",
-        };
-    }
-
-    if (runtimeDefaults.kind === "code") {
-        return {
-            kind: "code",
-            language: toManifestCodeLanguage(runtimeDefaults.language),
-        };
-    }
-
-    return undefined;
-}
+// function toManifestRuntimeDefaults(
+//     runtimeDefaults: TopicSeedRuntimeDefaults | null | undefined,
+// ): ManifestRuntimeDefaults | undefined {
+//     if (!runtimeDefaults) return undefined;
+//
+//     if (runtimeDefaults.kind === "sql") {
+//         return {
+//             kind: "sql",
+//             datasetId: runtimeDefaults.datasetId,
+//             fixedSqlDialect:
+//                 toSqlDialect(runtimeDefaults.fixedSqlDialect) ?? "sqlite",
+//             resultShape: "table",
+//         };
+//     }
+//
+//     if (runtimeDefaults.kind === "code") {
+//         return {
+//             kind: "code",
+//             language: toManifestCodeLanguage(runtimeDefaults.language),
+//         };
+//     }
+//
+//     return undefined;
+// }
 
 export function buildSubjectManifestFromPlan(args: {
     blueprint: CourseBlueprint;
@@ -86,8 +87,7 @@ export function buildSubjectManifestFromPlan(args: {
 
     const modules: SubjectModuleManifest[] = plan.modules.map((module) => {
         const moduleIndex = moduleOrderToIndex(module.order);
-        const logicalModuleSlug = shape.subjectManifest.moduleSlug(moduleIndex);
-
+        const logicalModuleSlug = module.moduleSlug;
         const resolvedRuntimePolicy = resolveModuleRuntimePolicy({
             blueprint,
             module: {
@@ -96,23 +96,39 @@ export function buildSubjectManifestFromPlan(args: {
                 runtimePolicy: module.runtimePolicy,
             },
         });
+        const workspacePolicy = resolveWorkspacePolicy({
+            blueprint,
+            moduleNumber: moduleIndex,
+        });
+
+        const workspaceRuntimeDefaults = workspaceToRuntimeDefaults({
+            policy: workspacePolicy,
+            profileId: blueprint.profileId,
+        });
 
         const topicRuntimeDefaults = runtimePolicyToTopicRuntimeDefaults({
             profileId: blueprint.profileId,
             runtimePolicy: resolvedRuntimePolicy,
         });
 
-        const runtimeDefaults =
-            toManifestRuntimeDefaults(topicRuntimeDefaults);
+        const runtimeDefaults: ManifestRuntimeDefaults =
+            workspaceRuntimeDefaults.kind === "sql" && topicRuntimeDefaults?.kind === "sql"
+                ? {
+                    ...workspaceRuntimeDefaults,
+                    datasetId: topicRuntimeDefaults.datasetId,
+                    fixedSqlDialect: topicRuntimeDefaults.fixedSqlDialect,
+                    resultShape: topicRuntimeDefaults.resultShape,
+                }
+                : workspaceRuntimeDefaults;
+
+        // const runtimeDefaults =
+        //     toManifestRuntimeDefaults(topicRuntimeDefaults);
 
         const sections: SubjectSectionManifest[] = module.sections.map(
             (section) => {
                 const sectionSlug = resolveLogicalSectionSlug({
                     subjectSlug: blueprint.subjectSlug,
-                    rawSectionSlug: shape.subjectManifest.sectionSlug(
-                        moduleIndex,
-                        section.order,
-                    ),
+                    rawSectionSlug: section.sectionSlug,
                 });
 
                 return {
@@ -151,7 +167,7 @@ export function buildSubjectManifestFromPlan(args: {
 
         return {
             slug: logicalModuleSlug,
-            prefix: shape.subjectManifest.modulePrefix(moduleIndex),
+            prefix: module.prefix,
             order: moduleIndex,
             titleKey: kp.moduleTitleKey(
                 blueprint.subjectSlug,
@@ -174,9 +190,8 @@ export function buildSubjectManifestFromPlan(args: {
                         ? [
                             kp.moduleTitleKey(
                                 blueprint.subjectSlug,
-                                shape.subjectManifest.moduleSlug(
-                                    moduleIndex - 1,
-                                ),
+                                plan.modules[moduleIndex - 1]?.moduleSlug ??
+                                shape.subjectManifest.moduleSlug(moduleIndex - 1),
                             ),
                         ]
                         : [],
@@ -220,6 +235,14 @@ export function buildSubjectManifestFromPlan(args: {
                     ),
                 },
                 completionPolicy: shape.subjectManifest.completionPolicy,
+                versioning: blueprint.versioning ?? {
+                    family: blueprint.catalogSlug ?? blueprint.subjectSlug,
+                    version: 1,
+                    status: "active",
+                    defaultForNewEnrollments: true,
+                    supersedes: null,
+                    supersededBy: null,
+                },
             },
         },
         modules,

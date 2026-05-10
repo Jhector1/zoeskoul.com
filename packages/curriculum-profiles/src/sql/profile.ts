@@ -1,7 +1,7 @@
 import type { CourseProfile } from "../types.js";
 import type { PlannedModule } from "@zoeskoul/curriculum-contracts";
 import { buildSqlQueryRecipe } from "./recipes/buildSqlQueryRecipe.js";
-import { getSqlModuleDatasetPolicy } from "./datasetPolicy.js";
+import { resolveSqlRuntimeDefaults } from "./runtimeDefaults.js";
 
 export { getSqlModuleDataset, getSqlModuleDatasetPolicy } from "./datasetPolicy.js";
 
@@ -15,27 +15,18 @@ export const sqlProfile: CourseProfile = {
         "code_input",
     ],
     allowedRecipeTypes: ["fixed_tests", "template_io", "sql_query"],
+
     buildModuleRuntimeDefaults(moduleOrder?: number, module?: PlannedModule) {
-        const resolvedOrder =
-            typeof module?.order === "number" ? Math.max(0, module.order - 1) : Math.max(0, (moduleOrder ?? 1) - 1);
-
-        const policy = getSqlModuleDatasetPolicy(resolvedOrder);
-
-        const runtime = module?.runtimePolicy;
-
-        return {
-            kind: "sql",
-            datasetId:
-                runtime?.datasetId ??
-                runtime?.preferredDatasetId ??
-                policy.datasetId,
-            fixedSqlDialect: runtime?.sqlDialect ?? "sqlite",
-            resultShape: runtime?.resultShape ?? "table",
-        };
+        return resolveSqlRuntimeDefaults({
+            moduleOrder,
+            module,
+        });
     },
+
     getRecipeRegistry() {
         return { sql_query: buildSqlQueryRecipe };
     },
+
     validateTopicBundle(bundle) {
         if (!bundle || typeof bundle !== "object") {
             return ["ERROR: topicBundle is missing or invalid"];

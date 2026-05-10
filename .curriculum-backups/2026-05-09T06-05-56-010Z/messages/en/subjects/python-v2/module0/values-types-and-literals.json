@@ -1,0 +1,124 @@
+{
+  "topics": {
+    "python-v2": {
+      "python-0": {
+        "values-types-and-literals": {
+          "label": "Values, Types, and Literals",
+          "summary": "Recognize strings, integers, floats, booleans, and None.",
+          "cards": {
+            "sketch0": {
+              "title": "Understanding Data Types"
+            },
+            "sketch1": {
+              "title": "Using the Print Function"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Practice"
+            }
+          },
+          "projectSteps": {
+            "q5": {
+              "title": "Create a variable of each data type"
+            }
+          },
+          "quiz": {
+            "q1": {
+              "title": "What is the data type of the value 3.14?",
+              "prompt": "Choose the correct data type for the value 3.14.",
+              "hint": "Focus on the main concept being tested and eliminate choices that describe something different.",
+              "help": {
+                "concept": "Choose the option that matches the core idea described in the question without relying on repeated wording from the answer choices.",
+                "hint_1": "Rule out options that describe a different role, behavior, or concept than the question is testing.",
+                "hint_2": "Pick the option that best matches the concept, not the one that simply repeats familiar wording."
+              },
+              "options": {
+                "a": "Integer",
+                "b": "String",
+                "c": "Float",
+                "d": "Boolean"
+              }
+            },
+            "q2": {
+              "title": "Which of the following is a valid string in Python?",
+              "prompt": "Select the option that correctly represents a string.",
+              "hint": "Strings are enclosed in quotes.",
+              "help": {
+                "concept": "Strings in Python must be enclosed in either single or double quotes.",
+                "hint_1": "Look for quotes around the text.",
+                "hint_2": "Only one option will have quotes."
+              },
+              "options": {
+                "a": "Hello, World!",
+                "b": "42",
+                "c": "True"
+              }
+            },
+            "q3": {
+              "title": "Which of the following are valid data types in Python?",
+              "prompt": "Select all that apply.",
+              "hint": "Focus on the main concept being tested and eliminate choices that describe something different.",
+              "help": {
+                "concept": "Choose the option that matches the core idea described in the question without relying on repeated wording from the answer choices.",
+                "hint_1": "Rule out options that describe a different role, behavior, or concept than the question is testing.",
+                "hint_2": "Pick the option that best matches the concept, not the one that simply repeats familiar wording."
+              },
+              "options": {
+                "a": "String",
+                "b": "Integer",
+                "c": "Float",
+                "d": "Character"
+              }
+            },
+            "q4": {
+              "title": "Fill in the blank: The value ___ represents the absence of a value in Python.",
+              "prompt": "Choose the correct term to fill in the blank.",
+              "hint": "Focus on the missing concept or keyword.",
+              "help": {
+                "concept": "This task checks the key idea behind fill in the blank: the value ___ represents the absence of a value in python..",
+                "hint_1": "Look for the word or phrase that best matches the lesson concept.",
+                "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
+              },
+              "template": "The value ___ represents the absence of a value in Python.",
+              "choices": [
+                "None",
+                "Null",
+                "False",
+                "0"
+              ]
+            },
+            "q5": {
+              "title": "Create a variable of each data type",
+              "prompt": "Write a Python program that creates variables for a string, integer, float, boolean, and None. Print each variable.",
+              "hint": "Break the task into the main code steps first.",
+              "help": {
+                "concept": "This task checks whether you can apply create a variable of each data type in a working solution.",
+                "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
+                "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
+              },
+              "starterCode": "# Create your variables here\n\n# Example:\nname = \"Your Name\"\n\n# Print your variables"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-v2": {
+      "python-0": {
+        "values-types-and-literals": {
+          "1": {
+            "title": "Understanding Data Types",
+            "bodyMarkdown": "In Python, data types are classifications of data items. The main built-in data types include:\n\n1. **Strings**: Text data enclosed in quotes. For example, `\"Hello, World!\"`.\n2. **Integers**: Whole numbers, like `42`.\n3. **Floats**: Decimal numbers, such as `3.14`.\n4. **Booleans**: Represents `True` or `False`.\n5. **None**: Represents the absence of a value.\n\n### Example:\n```python\n# Example of different data types\nname = \"Alice\"  # String\nage = 30        # Integer\nheight = 5.5    # Float\nis_student = True  # Boolean\nnothing = None   # None\n```\n\n### Your turn:\nTry creating variables of each type and print them!\n\nLine by line: read the first statement to see which value is stored or checked, then follow each conditional branch in order to see which path prints the final result."
+          },
+          "2": {
+            "title": "Using the Print Function",
+            "bodyMarkdown": "The `print()` function is used to display output in Python. You can print strings, numbers, and even the results of expressions.\n\n### Example:\n```python\n# Printing different data types\nprint(\"Name:\", name)\nprint(\"Age:\", age)\nprint(\"Height:\", height)\nprint(\"Is Student:\", is_student)\nprint(\"Nothing:\", nothing)\n```\n\n### Try this:\nModify the print statements to include your own values!\n\nLine by line: read the first statement to see which value is stored or checked, then follow each conditional branch in order to see which path prints the final result."
+          }
+        }
+      }
+    }
+  }
+}

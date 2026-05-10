@@ -71,11 +71,10 @@ export function buildMessagesFromDraft(args: {
     shape: SubjectShapePack;
     seed: TopicSeed;
     draft: TopicAuthoringDraft;
-    moduleOrder: number;
 }) {
-    const { shape, seed, draft, moduleOrder } = args;
+    const { seed, draft } = args;
 
-    const logicalModuleSlug = shape.subjectManifest.moduleSlug(moduleOrder);
+    const logicalModuleSlug = seed.moduleSlug;
 
     const out: Record<string, unknown> = {
         topics: {},

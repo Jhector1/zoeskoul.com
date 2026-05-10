@@ -1,0 +1,234 @@
+{
+  "topicId": "and-or-not",
+  "subjectSlug": "python-v2",
+  "moduleSlug": "python-2",
+  "sectionSlug": "python-v2-python-2-core-building-blocks-2",
+  "prefix": "py2",
+  "minutes": 25,
+  "topic": {
+    "labelKey": "topics.python-v2.python-2.and-or-not.label",
+    "summaryKey": "topics.python-v2.python-2.and-or-not.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-2.and-or-not.cards.sketch0.title",
+      "sketchId": "what-and-or-not-do",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-2.and-or-not.cards.sketch1.title",
+      "sketchId": "reading-combined-conditions",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-2.and-or-not.cards.sketch2.title",
+      "sketchId": "using-not-carefully",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.python-v2.python-2.and-or-not.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 2,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python-v2.python-2.and-or-not.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "code_eligibility_check",
+            "titleKey": "topics.python-v2.python-2.and-or-not.projectSteps.code_eligibility_check.title",
+            "exerciseKey": "code-eligibility-check",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "code_weekend_or_holiday",
+            "titleKey": "topics.python-v2.python-2.and-or-not.projectSteps.code_weekend_or_holiday.title",
+            "exerciseKey": "code-weekend-or-holiday",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "code_login_not_banned",
+            "titleKey": "topics.python-v2.python-2.and-or-not.projectSteps.code_login_not_banned.title",
+            "exerciseKey": "code-login-not-banned",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "what-and-or-not-do",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-2.and-or-not.what-and-or-not-do.title",
+      "bodyKey": "sketches.python-v2.python-2.and-or-not.what-and-or-not-do.bodyMarkdown"
+    },
+    {
+      "id": "reading-combined-conditions",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-2.and-or-not.reading-combined-conditions.title",
+      "bodyKey": "sketches.python-v2.python-2.and-or-not.reading-combined-conditions.bodyMarkdown"
+    },
+    {
+      "id": "using-not-carefully",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-2.and-or-not.using-not-carefully.title",
+      "bodyKey": "sketches.python-v2.python-2.and-or-not.using-not-carefully.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "mc-true-combinations",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-2.and-or-not.quiz.mc-true-combinations",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "fb-not-flips-boolean",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-2.and-or-not.quiz.fb-not-flips-boolean",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "reverses"
+      }
+    },
+    {
+      "id": "code-eligibility-check",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-2.and-or-not.quiz.code-eligibility-check",
+      "language": "python",
+      "starterCode": "age = int(input())\nhas_ticket = input().strip()\n\n# Write your code below",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "15\nyes\n",
+            "stdout": "eligible\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "12\nyes\n",
+            "stdout": "not eligible\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "16\nno\n",
+            "stdout": "not eligible\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "age = int(input())\nhas_ticket = input().strip()\n\nif age >= 13 and has_ticket == \"yes\":\n    print(\"eligible\")\nelse:\n    print(\"not eligible\")"
+      }
+    },
+    {
+      "id": "code-weekend-or-holiday",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-2.and-or-not.quiz.code-weekend-or-holiday",
+      "language": "python",
+      "starterCode": "is_weekend_text = input().strip()\nis_holiday_text = input().strip()\n\n# Convert the inputs and print the result",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "true\nfalse\n",
+            "stdout": "day off\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "false\ntrue\n",
+            "stdout": "day off\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "false\nfalse\n",
+            "stdout": "work day\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "is_weekend_text = input().strip()\nis_holiday_text = input().strip()\n\nis_weekend = is_weekend_text == \"true\"\nis_holiday = is_holiday_text == \"true\"\n\nif is_weekend or is_holiday:\n    print(\"day off\")\nelse:\n    print(\"work day\")"
+      }
+    },
+    {
+      "id": "code-login-not-banned",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-2.and-or-not.quiz.code-login-not-banned",
+      "language": "python",
+      "starterCode": "is_logged_in_text = input().strip()\nis_banned_text = input().strip()\n\n# Write your condition and print the result",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "true\nfalse\n",
+            "stdout": "access granted\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "true\ntrue\n",
+            "stdout": "access denied\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "false\nfalse\n",
+            "stdout": "access denied\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "is_logged_in_text = input().strip()\nis_banned_text = input().strip()\n\nis_logged_in = is_logged_in_text == \"true\"\nis_banned = is_banned_text == \"true\"\n\nif is_logged_in and not is_banned:\n    print(\"access granted\")\nelse:\n    print(\"access denied\")"
+      }
+    }
+  ]
+}

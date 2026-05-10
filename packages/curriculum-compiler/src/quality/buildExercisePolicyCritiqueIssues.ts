@@ -75,32 +75,45 @@ function buildCountBasedIssues(args: {
         const expected = plannedCounts.counts[kind] ?? 0;
         const actual = counts[kind] ?? 0;
 
-        if (actual < expected) {
+        if (actual === expected) continue;
+
+        const delta = Math.abs(actual - expected);
+
+        // Code input is the one kind that should stay strict because it affects
+        // whether technical topics have real coding practice.
+        if (kind === "code_input" && actual < expected) {
             issues.push({
-                code: "EXERCISE_POLICY_KIND_UNDER_TARGET",
+                code: "EXERCISE_POLICY_CODE_INPUT_UNDER_TARGET",
                 category: "clarity",
                 severity: "error",
-                message: `Exercise policy expects ${expected} "${kind}" exercise(s), but the draft has ${actual}.`,
+                message: `Exercise policy expects ${expected} "code_input" exercise(s), but the draft has ${actual}.`,
             });
+            continue;
         }
 
-        if (actual > expected) {
-            issues.push({
-                code: "EXERCISE_POLICY_KIND_OVER_TARGET",
-                category: "clarity",
-                severity: kind === plannedCounts.dominantKind ? "warn" : "error",
-                message: `Exercise policy expects ${expected} "${kind}" exercise(s), but the draft has ${actual}.`,
-            });
-        }
-    }
-    const actualDominants = dominantKinds(toMix(counts));
+        // For non-code exercise kinds, exact counts are guidance, not a hard
+        // correctness requirement. A one-exercise swap is common and usually okay.
+        issues.push({
+            code:
+                actual < expected
+                    ? "EXERCISE_POLICY_KIND_UNDER_TARGET"
+                    : "EXERCISE_POLICY_KIND_OVER_TARGET",
+            category: "clarity",
+            severity: delta <= 1 ? "warn" : "error",
+            message: `Exercise policy targets ${expected} "${kind}" exercise(s), but the draft has ${actual}.`,
+        });
+    }    const actualDominants = dominantKinds(toMix(counts));
 
     if (!actualDominants.includes(plannedCounts.dominantKind)) {
         issues.push({
             code: "EXERCISE_POLICY_DOMINANT_KIND_MISMATCH",
             category: "clarity",
-            severity: "error",
-            message: `Exercise policy expects "${plannedCounts.dominantKind}" to be dominant, but the draft is dominated by "${actualDominants.join(' / ')}".`,
+            severity:
+                plannedCounts.dominantKind === "code_input" &&
+                counts.code_input < (plannedCounts.counts.code_input ?? 0)
+                    ? "error"
+                    : "warn",
+            message: `Exercise policy expects "${plannedCounts.dominantKind}" to be dominant, but the draft is dominated by "${actualDominants.join(" / ")}".`,
         });
     }
 

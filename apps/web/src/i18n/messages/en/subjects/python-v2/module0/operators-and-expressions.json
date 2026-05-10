@@ -1,0 +1,125 @@
+{
+  "topics": {
+    "python-v2": {
+      "python-v2-0": {
+        "operators-and-expressions": {
+          "label": "Operators and Expressions",
+          "summary": "Combine values with arithmetic, comparison, and boolean operators.",
+          "cards": {
+            "sketch0": {
+              "title": "Understanding Operators"
+            },
+            "sketch1": {
+              "title": "Comparison Operators"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Practice"
+            }
+          },
+          "projectSteps": {
+            "q5": {
+              "title": "Calculate the sum of two numbers."
+            }
+          },
+          "quiz": {
+            "q1": {
+              "title": "What does the `+` operator do?",
+              "prompt": "Select the correct answer.",
+              "hint": "Think about how you combine numbers.",
+              "help": {
+                "concept": "The `+` operator is used for addition in Python.",
+                "hint_1": "It's commonly used to add two values together.",
+                "hint_2": "Look for the operator that increases the value."
+              },
+              "options": {
+                "a": "Subtracts two numbers",
+                "b": "Adds two numbers",
+                "c": "Divides two numbers",
+                "d": "Multiplies two numbers"
+              }
+            },
+            "q2": {
+              "title": "What will the expression `5 == 5` evaluate to?",
+              "prompt": "Choose the correct answer.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "options": {
+                "a": "True",
+                "b": "False",
+                "c": "None",
+                "d": "Error"
+              }
+            },
+            "q3": {
+              "title": "Which of the following are comparison operators?",
+              "prompt": "Select all that apply.",
+              "hint": "Look for operators that compare values.",
+              "help": {
+                "concept": "Comparison operators evaluate the relationship between two values.",
+                "hint_1": "They return True or False based on the comparison.",
+                "hint_2": "Think about which operators check for equality or order."
+              },
+              "options": {
+                "a": "==",
+                "b": ">",
+                "c": "+",
+                "d": "<="
+              }
+            },
+            "q4": {
+              "title": "Fill in the blank: The operator `>` is used to check if one value is ______ than another.",
+              "prompt": "Choose the correct word.",
+              "hint": "Focus on the missing concept or keyword.",
+              "help": {
+                "concept": "This task checks the key idea behind fill in the blank: the operator `>` is used to check if one value is ______ than another..",
+                "hint_1": "Look for the word or phrase that best matches the lesson concept.",
+                "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
+              },
+              "template": "The operator `>` is used to check if one value is ___ than another.",
+              "choices": [
+                "greater",
+                "less",
+                "equal",
+                "not equal"
+              ]
+            },
+            "q5": {
+              "title": "Calculate the sum of two numbers.",
+              "prompt": "Write a program that adds two numbers and prints the result.",
+              "hint": "Read the coding task and identify what the program should print.",
+              "help": {
+                "concept": "This coding exercise checks whether the program produces the requested output.",
+                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "starterCode": "num1 = 10\nnum2 = 5\n# Add the two numbers here\nresult ="
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-v2": {
+      "python-v2-0": {
+        "operators-and-expressions": {
+          "1": {
+            "title": "Understanding Operators",
+            "bodyMarkdown": "In Python, operators are special symbols that perform operations on variables and values. For example, the `+` operator adds two numbers together. Here's a simple example:\n\n```python\nresult = 5 + 3\nprint(result)  # This will output 8\n```\n\nTry it yourself: Change the numbers and see what happens!\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          },
+          "2": {
+            "title": "Comparison Operators",
+            "bodyMarkdown": "Comparison operators compare two values and return a boolean result (True or False). For example, the `==` operator checks if two values are equal:\n\n```python\nis_equal = (5 == 5)\nprint(is_equal)  # This will output True\n```\n\nYour turn: Try comparing different values!\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          }
+        }
+      }
+    }
+  }
+}

@@ -95,71 +95,76 @@ function stripAnswerLeakFromTexts(args: {
     }
 
     return {
-        hint: "Focus on the concept being tested.",
+        hint: "Use the lesson explanation and the wording of this question to narrow the answer.",
         help: {
-            concept: "Think about the role or idea being tested rather than repeating answer wording.",
-            hint_1: "Eliminate choices or interpretations that do not match the task.",
-            hint_2: "Choose the concept that best fits what the exercise is asking you to do.",
+            concept: "This support text was repaired because the original wording revealed the answer too directly.",
+            hint_1: "Compare the question to the lesson example and remove choices from unrelated topics.",
+            hint_2: "Choose the option that directly matches the question without relying on answer wording.",
         },
     };
 }
 
-function makeSafeChoiceHelp() {
+function makeSafeChoiceHelp(args: {
+    title: string;
+    prompt: string;
+    options: string[];
+}) {
+    const question = args.title || args.prompt || "this question";
+    const optionList = args.options.length
+        ? ` The choices are: ${args.options.join(", ")}.`
+        : "";
+
     return {
-        hint: "Focus on the main concept being tested and eliminate choices that describe something different.",
+        hint: `Connect the question "${question}" to the lesson example before choosing.${optionList}`,
         help: {
-            concept:
-                "Choose the option that matches the core idea described in the question without relying on repeated wording from the answer choices.",
-            hint_1:
-                "Rule out options that describe a different role, behavior, or concept than the question is testing.",
-            hint_2:
-                "Pick the option that best matches the concept, not the one that simply repeats familiar wording.",
+            concept: `This question checks the specific idea in: "${question}". Compare each choice to that idea.`,
+            hint_1: "Look for the choice that fits the exact topic named in the question.",
+            hint_2: "Ignore choices that belong to a different Python use case or concept.",
         },
     };
 }
-
 function makeSafeFillBlankHelp() {
     return {
-        hint: "Focus on the missing concept rather than the exact missing word.",
+        hint: "Read the sentence around the blank and decide what role the missing word plays.",
         help: {
             concept:
-                "The blank should be filled with the term that matches the job the statement is trying to perform.",
+                "The blank should be filled with the term that makes the statement accurate.",
             hint_1:
-                "Think about what the missing part is supposed to do in the statement.",
+                "Look at the words before and after the blank to infer what kind of term is needed.",
             hint_2:
-                "Choose the term that best completes the meaning of the statement.",
+                "Pick the choice that completes the statement with the clearest meaning.",
         },
     };
 }
-
 function makeSafeDragReorderHelp() {
     return {
-        hint: "Focus on the logical order of the parts being tested.",
+        hint: "Read each piece and arrange them in the order Python would read the statement.",
         help: {
             concept:
-                "Arrange the pieces according to how the statement is structured.",
+                "The pieces should form a valid statement in the same order Python expects.",
             hint_1:
-                "Think about which piece must appear first and which depends on it.",
+                "Start with the keyword or expression that begins the statement.",
             hint_2:
-                "Put the parts in the order that makes the statement logically valid.",
+                "Place dependent pieces after the part they belong to.",
         },
     };
 }
 
-function makeSafeCodeHelp() {
+function makeSafeCodeHelp(args: {
+    title: string;
+    prompt: string;
+}) {
+    const task = args.title || args.prompt || "this coding task";
+
     return {
-        hint: "Focus on the programming task being asked for, not on copying final solution text.",
+        hint: `Read the task "${task}" and identify what the program should print.`,
         help: {
-            concept:
-                "Build the solution from the behavior the exercise is testing.",
-            hint_1:
-                "Think about which steps, functions, or statements are required for the task.",
-            hint_2:
-                "Construct the solution based on what result the exercise expects, not by repeating exact solution wording.",
+            concept: `This coding exercise checks whether your code produces the requested output for: "${task}".`,
+            hint_1: "Use the Python statement or expression that matches the required output.",
+            hint_2: "Run the code and compare the output panel with the expected result.",
         },
     };
 }
-
 function inferChoiceIds(args: {
     options: string[];
     rawCorrectOptionIds?: string[];
@@ -585,8 +590,11 @@ export function repairTopicAuthoringDraft(
                         hint_2: base.help.hint_2,
                     },
                     bannedAnswers: correctOptionTexts,
-                    fallback: makeSafeChoiceHelp(),
-                });
+                    fallback: makeSafeChoiceHelp({
+                        title: base.title,
+                        prompt: base.prompt,
+                        options,
+                    }),                });
 
                 return {
                     ...base,
@@ -697,8 +705,10 @@ export function repairTopicAuthoringDraft(
                     hint_2: base.help.hint_2,
                 },
                 bannedAnswers,
-                fallback: makeSafeCodeHelp(),
-            });
+                fallback: makeSafeCodeHelp({
+                    title: base.title,
+                    prompt: base.prompt,
+                }),            });
 
             return {
                 ...base,

@@ -3,12 +3,25 @@ import type {
     CourseSpec,
     CourseSpecRuntimePolicy,
     PlannedModule,
+    SqlDialect,
     TopicSeedRuntimeDefaults,
 } from "@zoeskoul/curriculum-contracts";
 import { getSqlModuleDatasetPolicy } from "@zoeskoul/curriculum-profiles";
 
 function clean(value: unknown): string | undefined {
     return typeof value === "string" && value.trim() ? value.trim() : undefined;
+}
+
+function toSqlDialect(value: unknown): SqlDialect | undefined {
+    const v = clean(value);
+    if (v === "sqlite" || v === "postgres" || v === "mysql" || v === "mssql") {
+        return v;
+    }
+    return undefined;
+}
+
+function toResultShape(value: unknown): "table" | undefined {
+    return clean(value) === "table" ? "table" : undefined;
 }
 
 export function resolveModuleRuntimePolicy(args: {
@@ -40,10 +53,10 @@ export function resolveModuleRuntimePolicy(args: {
             : undefined);
 
     const sqlDialect =
-        clean(planModulePolicy?.sqlDialect) ??
-        clean(moduleSpecPolicy?.sqlDialect) ??
-        clean(specPolicy?.sqlDialect) ??
-        clean(blueprintPolicy?.sqlDialect);
+        toSqlDialect(planModulePolicy?.sqlDialect) ??
+        toSqlDialect(moduleSpecPolicy?.sqlDialect) ??
+        toSqlDialect(specPolicy?.sqlDialect) ??
+        toSqlDialect(blueprintPolicy?.sqlDialect);
 
     const datasetStrategy =
         planModulePolicy?.datasetStrategy ??
@@ -58,10 +71,10 @@ export function resolveModuleRuntimePolicy(args: {
         clean(blueprintPolicy?.preferredDatasetId);
 
     const resultShape =
-        clean(planModulePolicy?.resultShape) ??
-        clean(moduleSpecPolicy?.resultShape) ??
-        clean(specPolicy?.resultShape) ??
-        clean(blueprintPolicy?.resultShape);
+        toResultShape(planModulePolicy?.resultShape) ??
+        toResultShape(moduleSpecPolicy?.resultShape) ??
+        toResultShape(specPolicy?.resultShape) ??
+        toResultShape(blueprintPolicy?.resultShape);
 
     if (
         !sqlDialect &&
@@ -96,11 +109,13 @@ export function runtimePolicyToTopicRuntimeDefaults(args: {
         policy.preferredDatasetId ||
         policy.datasetStrategy
     ) {
+        const fixedSqlDialect: SqlDialect = policy.sqlDialect ?? "sqlite";
+
         return {
             kind: "sql",
             datasetId: policy.datasetId ?? policy.preferredDatasetId,
-            fixedSqlDialect: policy.sqlDialect ?? "sqlite",
-            resultShape: policy.resultShape ?? "table",
+            fixedSqlDialect,
+            resultShape: "table",
         };
     }
 

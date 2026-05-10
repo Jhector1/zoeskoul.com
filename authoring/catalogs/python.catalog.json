@@ -2,15 +2,16 @@
   "catalog": {
     "slug": "python",
     "order": 10,
+    "defaultSubjectSlug": "python-v2",
+
     "title": "Python",
     "description": "Python learning paths from first steps through larger projects, deeper problem solving, and more advanced programming patterns.",
-    "imagePublicId": "Screenshot_2026-02-03_at_1.19.20_AM_kdnlpk",
+    "imagePublicId": "bee933f4-cfee-44ae-9c5e-7d7b90b2f63a",
     "imageAlt": "Python catalog cover",
-    "defaultSubjectSlug": "python",
     "status": "active",
     "subjectSlugs": [
-      "python"
-
+      "python",
+      "python-v2"
     ],
     "meta": {
       "family": "programming",

@@ -29,3 +29,10 @@ export type TranslatedEntries = {
 export type AiProvider = {
   generateJson<T>(args: GenerateJsonArgs): Promise<T>;
 };
+
+export type TopicRetryContext = {
+  attempt: number;
+  maxRetries: number;
+  previousErrorCode: string;
+  previousErrorMessage: string;
+};

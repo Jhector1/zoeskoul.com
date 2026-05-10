@@ -1,0 +1,126 @@
+{
+  "title": "Comparisons and Truth Values",
+  "summary": "Use comparison operators and understand True and False results.",
+  "minutes": 22,
+  "sketchBlocks": [
+    {
+      "id": "comparison_operators",
+      "title": "Understanding Comparison Operators",
+      "bodyMarkdown": "In Python, comparison operators are used to compare two values. The result of a comparison is either True or False. Here are some common comparison operators:\n\n- `==`: Equal to\n- `!=`: Not equal to\n- `>`: Greater than\n- `<`: Less than\n- `>=`: Greater than or equal to\n- `<=`: Less than or equal to\n\n**Example:**\n\n```python\nx = 5\nprint(x > 3)  # This will print True because 5 is greater than 3.\n```\n\n**Your turn:** Try changing the value of `x` and see how it affects the output.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+    },
+    {
+      "id": "truthiness",
+      "title": "Truthiness in Python",
+      "bodyMarkdown": "In Python, not only boolean values can be evaluated as True or False. Other values can also be considered 'truthy' or 'falsy'.\n\n- **Truthy values:** Non-zero numbers, non-empty strings, lists, etc.\n- **Falsy values:** 0, empty strings, empty lists, None.\n\n**Example:**\n\n```python\nvalue = \"\"\nif value:\n    print(\"This is truthy\")\nelse:\n    print(\"This is falsy\")  # This will print because the string is empty.\n```\n\n**Try it yourself:** Change `value` to a non-empty string and see what happens.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "multi_choice_1",
+      "kind": "multi_choice",
+      "title": "Identifying Truthy and Falsy Values",
+      "prompt": "Which of the following values are considered falsy in Python?",
+      "options": [
+        "0",
+        "\"Hello\"",
+        "[]",
+        "None"
+      ],
+      "correctOptionIds": [
+        "a",
+        "c",
+        "d"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "code_input_1",
+      "kind": "code_input",
+      "title": "Untitled",
+      "prompt": "Untitled",
+      "starterCode": "def compare_numbers(a, b):\n    # Write your code here\n    pass",
+      "solutionCode": "def compare_numbers(a, b):\n    return a > b\n\n# Example usage:\nprint(compare_numbers(5, 3))  # Should return True\nprint(compare_numbers(2, 4))  # Should return False",
+      "tests": [
+        {
+          "stdin": "",
+          "stdout": "True\nFalse\n",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Break the task into the main code steps first.",
+      "help": {
+        "concept": "This task checks whether you can apply untitled in a working solution.",
+        "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
+        "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
+      }
+    },
+    {
+      "id": "code_input_2",
+      "kind": "code_input",
+      "title": "Untitled",
+      "prompt": "Untitled",
+      "starterCode": "def is_equal(a, b):\n    # Write your code here\n    pass",
+      "solutionCode": "def is_equal(a, b):\n    return a == b\n\n# Example usage:\nprint(is_equal(5, 5))  # Should return True\nprint(is_equal(5, 3))  # Should return False",
+      "tests": [
+        {
+          "stdin": "",
+          "stdout": "True\nFalse\n",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Break the task into the main code steps first.",
+      "help": {
+        "concept": "This task checks whether you can apply untitled in a working solution.",
+        "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
+        "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
+      }
+    },
+    {
+      "id": "code_input_3",
+      "kind": "code_input",
+      "title": "Untitled",
+      "prompt": "Untitled",
+      "starterCode": "def check_truthiness(value):\n    # Write your code here\n    pass",
+      "solutionCode": "def check_truthiness(value):\n    return bool(value)\n\n# Example usage:\nprint(check_truthiness(0))  # Should return False\nprint(check_truthiness(\"Hello\"))  # Should return True",
+      "tests": [
+        {
+          "stdin": "",
+          "stdout": "False\nTrue\n",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Break the task into the main code steps first.",
+      "help": {
+        "concept": "This task checks whether you can apply untitled in a working solution.",
+        "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
+        "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
+      }
+    },
+    {
+      "id": "fill_blank_choice_1",
+      "kind": "fill_blank_choice",
+      "title": "Untitled",
+      "prompt": "Untitled",
+      "template": "In Python, the expression `5 > 3` evaluates to ___.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "correctValue": "True",
+      "hint": "Focus on the missing concept or keyword.",
+      "help": {
+        "concept": "This task checks the key idea behind untitled.",
+        "hint_1": "Look for the word or phrase that best matches the lesson concept.",
+        "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
+      }
+    }
+  ]
+}

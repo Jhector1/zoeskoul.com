@@ -1,0 +1,127 @@
+{
+  "title": "If, Elif, and Else",
+  "summary": "Control which code runs based on conditions.",
+  "minutes": 25,
+  "sketchBlocks": [
+    {
+      "id": "1",
+      "title": "Understanding If, Elif, and Else",
+      "bodyMarkdown": "In Python, we use `if`, `elif`, and `else` statements to control the flow of our programs based on conditions. For example:\n\n```python\nage = 20\nif age < 18:\n    print('You are a minor.')\nelif age < 65:\n    print('You are an adult.')\nelse:\n    print('You are a senior.')\n```\n\nIn this example, the program checks the age and prints a message based on the condition that is true. \n\n**Your turn:** Try changing the age variable and see how the output changes!\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+    },
+    {
+      "id": "2",
+      "title": "Comparison Operators",
+      "bodyMarkdown": "Comparison operators are used to compare values. The most common ones are:\n- `==` (equal to)\n- `!=` (not equal to)\n- `>` (greater than)\n- `<` (less than)\n- `>=` (greater than or equal to)\n- `<=` (less than or equal to)\n\nFor example:\n\n```python\nnumber = 10\nif number >= 10:\n    print('Number is 10 or greater.')\n```\n\n**Try it yourself:** Modify the number and see what happens!\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "1",
+      "kind": "code_input",
+      "title": "Grade Checker",
+      "prompt": "Write a program that checks a student's grade and prints whether they passed or failed. A grade of 60 or above is a pass.",
+      "starterCode": "grade = 75\n# Check if the grade is passing\nif grade >= 60:\n    print('Pass')\nelse:\n    print('Fail')",
+      "solutionCode": "grade = 75\nif grade >= 60:\n    print('Pass')\nelse:\n    print('Fail')",
+      "recipeType": "fixed_tests",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      },
+      "tests": [
+        {
+          "stdin": "",
+          "stdout": "Pass\n",
+          "match": "exact"
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "kind": "code_input",
+      "title": "Eligibility Checker",
+      "prompt": "Create a program that checks if a person is eligible to vote. They must be at least 18 years old.",
+      "starterCode": "age = 17\n# Check eligibility\nif age >= 18:\n    print('Eligible to vote')\nelse:\n    print('Not eligible to vote')",
+      "solutionCode": "age = 17\nif age >= 18:\n    print('Eligible to vote')\nelse:\n    print('Not eligible to vote')",
+      "recipeType": "fixed_tests",
+      "hint": "Break the task into the main code steps first.",
+      "help": {
+        "concept": "This task checks whether you can apply eligibility checker in a working solution.",
+        "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
+        "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
+      },
+      "tests": [
+        {
+          "stdin": "",
+          "stdout": "Not eligible to vote\n",
+          "match": "exact"
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "kind": "code_input",
+      "title": "Temperature Checker",
+      "prompt": "Write a program that checks the temperature and prints whether it's hot, warm, or cold. Hot is above 30, warm is between 15 and 30, and cold is below 15.",
+      "starterCode": "temperature = 25\n# Check temperature\nif temperature > 30:\n    print('Hot')\nelif temperature >= 15:\n    print('Warm')\nelse:\n    print('Cold')",
+      "solutionCode": "temperature = 25\nif temperature > 30:\n    print('Hot')\nelif temperature >= 15:\n    print('Warm')\nelse:\n    print('Cold')",
+      "recipeType": "fixed_tests",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      },
+      "tests": [
+        {
+          "stdin": "",
+          "stdout": "Warm\n",
+          "match": "exact"
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "kind": "multi_choice",
+      "title": "Understanding Conditionals",
+      "prompt": "Which of the following statements are true about if, elif, and else in Python?",
+      "options": [
+        "You can have multiple elif statements.",
+        "An if statement must always be followed by an else statement.",
+        "You can nest if statements inside each other.",
+        "elif is used to check multiple conditions."
+      ],
+      "correctOptionIds": [
+        "a",
+        "c",
+        "d"
+      ],
+      "hint": "Think about the main idea behind understanding conditionals.",
+      "help": {
+        "concept": "Focus on the core concept behind understanding conditionals.",
+        "hint_1": "Eliminate choices that do not match the main idea of the lesson.",
+        "hint_2": "Match the wording of the prompt to the concept practiced in the topic."
+      }
+    },
+    {
+      "id": "5",
+      "kind": "fill_blank_choice",
+      "title": "Complete the Conditional Statement",
+      "prompt": "Choose the best value for the first missing blank in the statement.",
+      "template": "The first missing value is [blank1].",
+      "choices": [
+        "elif",
+        "else",
+        "switch"
+      ],
+      "correctValue": "else",
+      "hint": "Focus on the missing concept or keyword.",
+      "help": {
+        "concept": "This task checks the key idea behind complete the conditional statement.",
+        "hint_1": "Look for the word or phrase that best matches the lesson concept.",
+        "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
+      }
+    }
+  ]
+}

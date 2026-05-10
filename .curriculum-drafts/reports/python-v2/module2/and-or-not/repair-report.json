@@ -1,0 +1,47 @@
+{
+  "topicId": "and-or-not",
+  "repairs": [
+    {
+      "code": "PYTHON_SKETCH_LINE_BY_LINE_EXPLANATION_ADDED",
+      "category": "text",
+      "severity": "medium",
+      "field": "sketchBlocks.sketch_1.bodyMarkdown",
+      "message": "Added a short line-by-line explanation after a multi-line code example."
+    },
+    {
+      "code": "PYTHON_SKETCH_LINE_BY_LINE_EXPLANATION_ADDED",
+      "category": "text",
+      "severity": "medium",
+      "field": "sketchBlocks.sketch_2.bodyMarkdown",
+      "message": "Added a short line-by-line explanation after a multi-line code example."
+    },
+    {
+      "code": "PYTHON_SKETCH_LINE_BY_LINE_EXPLANATION_ADDED",
+      "category": "text",
+      "severity": "medium",
+      "field": "sketchBlocks.sketch_3.bodyMarkdown",
+      "message": "Added a short line-by-line explanation after a multi-line code example."
+    },
+    {
+      "code": "PYTHON_PLACEHOLDER_TESTS_EXECUTION_REPAIRED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "quiz_4",
+      "message": "Replaced placeholder boolean tests with the real stdout produced by the no-input Python solution."
+    },
+    {
+      "code": "PYTHON_PLACEHOLDER_TESTS_EXECUTION_REPAIRED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "quiz_5",
+      "message": "Replaced placeholder boolean tests with the real stdout produced by the no-input Python solution."
+    },
+    {
+      "code": "PYTHON_PLACEHOLDER_TESTS_EXECUTION_REPAIRED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "quiz_3",
+      "message": "Replaced placeholder boolean tests with the real stdout produced by the no-input Python solution."
+    }
+  ]
+}

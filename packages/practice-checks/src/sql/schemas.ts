@@ -5,7 +5,7 @@ import {
     type SqlExpected,
     type SqlExpectedInput,
     type SqlExpectedTest,
-} from "./types";
+} from "./types.js";
 
 export const SqlDialectSchema = z.enum(SQL_DIALECTS);
 

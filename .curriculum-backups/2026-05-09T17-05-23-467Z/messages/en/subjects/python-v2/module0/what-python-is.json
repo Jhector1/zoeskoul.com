@@ -1,0 +1,125 @@
+{
+  "topics": {
+    "python-v2": {
+      "python-0": {
+        "what-python-is": {
+          "label": "What Python Is Used For",
+          "summary": "Understand Python's role in automation, web apps, data, scripting, and AI.",
+          "cards": {
+            "sketch0": {
+              "title": "Python solves many kinds of problems"
+            },
+            "sketch1": {
+              "title": "From simple output to real applications"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Print a mini Python uses card"
+            }
+          },
+          "projectSteps": {
+            "code_print_uses": {
+              "title": "Print three ways Python is used"
+            }
+          },
+          "quiz": {
+            "sc-python-general-purpose": {
+              "title": "Python's role",
+              "prompt": "Which statement best describes Python?",
+              "hint": "Think about whether Python is limited to one job or used in many areas.",
+              "help": {
+                "concept": "Python is called a general-purpose language because it can be used for many kinds of tasks, from simple output programs to automation, web development, data work, and AI.",
+                "hint_1": "Look for the option that says Python can be used in several different fields.",
+                "hint_2": "Avoid choices that describe Python as useful for only one narrow type of task."
+              },
+              "options": {
+                "a": "Python is only for building video games.",
+                "b": "Python is a general-purpose language used in many areas.",
+                "c": "Python can only print text and nothing else.",
+                "d": "Python is only for designing web page layouts."
+              }
+            },
+            "sc-python-automation": {
+              "title": "A good automation example",
+              "prompt": "Which task is the best example of using Python for automation?",
+              "hint": "Automation usually means making a repeated task happen automatically.",
+              "help": {
+                "concept": "Automation means using code to handle repeated or routine work with less manual effort. Python is often used to describe a sequence of steps that a computer can repeat reliably.",
+                "hint_1": "Choose the option that sounds repetitive and rule-based.",
+                "hint_2": "Look for a task a computer could do again and again without changing the basic steps."
+              },
+              "options": {
+                "a": "Renaming hundreds of similar items using the same pattern",
+                "b": "Painting a picture by hand",
+                "c": "Learning to ride a bicycle",
+                "d": "Decorating a room with furniture"
+              }
+            },
+            "mc-python-uses": {
+              "title": "Common uses of Python",
+              "prompt": "Choose all tasks that are common uses of Python.",
+              "hint": "Think about the main areas introduced in the lesson.",
+              "help": {
+                "concept": "Python is commonly used for automation, web app logic, data work, and AI. A correct answer set should include the real programming-related uses and exclude unrelated physical activities.",
+                "hint_1": "More than one option is correct. Focus on tasks done by software.",
+                "hint_2": "Select the options connected to computing, data, or application logic, not hands-on physical tasks."
+              },
+              "options": {
+                "a": "Automating repeated computer tasks",
+                "b": "Building parts of web applications",
+                "c": "Analyzing data",
+                "d": "Washing dishes in a kitchen"
+              }
+            },
+            "fb-python-sequence": {
+              "title": "Programs run in order",
+              "prompt": "Complete the sentence with the best word.",
+              "hint": "Think about how the lesson described Python following instructions.",
+              "help": {
+                "concept": "A beginner-friendly model of Python is that it follows instructions in sequence. This helps learners understand why output appears line by line in the order the code is the missing term.",
+                "hint_1": "The missing word describes one step after another.",
+                "hint_2": "It is the idea of instructions being followed in sequence, not all at once."
+              },
+              "template": "Python usually follows instructions in ___ order.",
+              "choices": [
+                "random",
+                "backward",
+                "written",
+                "silent"
+              ]
+            },
+            "code-print-uses": {
+              "title": "Print three ways Python is used",
+              "prompt": "Write Python code that prints exactly these three lines in this order:\nAutomation\nWeb apps\nData",
+              "hint": "Use one print call for each line of output.",
+              "help": {
+                "concept": "The print function displays text in the output panel. Multiple print lines appear in the same order as the code, which is a simple way to represent steps or categories.",
+                "hint_1": "You need three separate lines of output.",
+                "hint_2": "Use text in quotes and print each item on its own line."
+              },
+              "starterCode": "// Write your answer below"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-v2": {
+      "python-0": {
+        "what-python-is": {
+          "python-many-uses": {
+            "title": "Python solves many kinds of problems",
+            "bodyMarkdown": "Python is a general-purpose programming language. That means people use it for many different kinds of work, not just one narrow task.\n\nCommon uses include:\n- **Automation**: repeating boring tasks automatically\n- **Web apps**: building the logic behind websites and online tools\n- **Data work**: cleaning, analyzing, and visualizing information\n- **AI and machine learning**: training systems to recognize patterns\n- **Small everyday programs**: quick tools for calculations, text processing, or simple output\n\nA beginner-friendly way to think about Python is: **you write instructions, and Python follows them in order**.\n\nHere is a tiny example:\n\n```python\nprint(\"Starting task\")\nprint(\"Checking data\")\nprint(\"Done\")\n```\n\nLine by line:\n1. The first line shows a starting message.\n2. The second line shows the next step.\n3. The third line shows that the task is finished.\n\nThis is simple, but it already shows an important idea: Python can describe a process step by step.\n\n**Worked example:** imagine you want a program that greets a user and shows a status message.\n\n```python\nprint(\"Hello, Maya!\")\nprint(\"Your report is ready.\")\n```\n\nWhen you click Run, the output panel shows both messages in order.\n\n**Try it yourself:** Type one of these examples in the code editor, click Run, and then change one message to something personal, like your name or a task you do often."
+          },
+          "python-real-world-examples": {
+            "title": "From simple output to real applications",
+            "bodyMarkdown": "Even though your first Python programs may only print text, the same language is used in much larger projects.\n\nFor example:\n- A company might use Python to rename hundreds of files automatically.\n- A website might use Python on the server to process user requests.\n- A data team might use Python to summarize sales numbers.\n- An AI team might use Python to test models and inspect results.\n\nThe beginner version of these ideas often starts with clear output.\n\n```python\nprint(\"Collecting sales data\")\nprint(\"Calculating totals\")\nprint(\"Showing summary\")\n```\n\nThis does not analyze real data yet, but it models the flow of a real task.\n\nWhy this matters: when you learn basic Python syntax now, you are learning the same core language used in bigger programs later.\n\n**Worked example:** suppose a shop owner wants to track a simple daily process.\n\n```python\nprint(\"Open store\")\nprint(\"Serve customers\")\nprint(\"Close store\")\n```\n\nThis is not a full business app, but it shows how Python can represent actions in sequence.\n\n**Your turn:** Type the example in the code editor, click Run, and replace the store steps with three steps from a real activity you know, such as studying, cooking, or exercising.\n\nLine by line: read the first statement to see which value is stored or checked, then follow each conditional branch in order to see which path prints the final result."
+          }
+        }
+      }
+    }
+  }
+}

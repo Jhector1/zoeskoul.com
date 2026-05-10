@@ -162,6 +162,13 @@ export function defineCourseFromManifest(args: {
             accessPolicy: manifest.subject.accessPolicy ?? "free",
             status: manifest.subject.status ?? "active",
             meta: {
+                ...(manifest.subject.meta?.versioning
+                    ? {
+                        versioning: {
+                            ...manifest.subject.meta.versioning,
+                        },
+                    }
+                    : {}),
                 ...(manifest.subject.meta?.curriculum
                     ? {
                         curriculum: {

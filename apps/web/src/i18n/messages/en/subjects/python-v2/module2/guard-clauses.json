@@ -1,0 +1,128 @@
+{
+  "topics": {
+    "python-v2": {
+      "python-2": {
+        "guard-clauses": {
+          "label": "Guard Clauses for Cleaner Logic",
+          "summary": "Use early checks to simplify nested conditionals.",
+          "cards": {
+            "sketch0": {
+              "title": "What a guard clause does"
+            },
+            "sketch1": {
+              "title": "Replacing deep nesting with early checks"
+            },
+            "sketch2": {
+              "title": "Using guard clauses with combined conditions"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Build a simple eligibility checker"
+            }
+          },
+          "projectSteps": {
+            "guard_output_invalid_score": {
+              "title": "Check invalid scores first"
+            },
+            "guard_membership_checker": {
+              "title": "Membership guard clauses"
+            },
+            "guard_even_positive": {
+              "title": "Accept only positive even numbers"
+            }
+          },
+          "quiz": {
+            "guard-output-invalid-score": {
+              "title": "Check invalid scores first",
+              "prompt": "Write Python code that reads one integer score from input. If the score is less than 0 or greater than 100, print `Invalid`. Otherwise, if the score is 50 or more, print `Pass`. In all other valid cases, print `Fail`.",
+              "hint": "Focus on the programming task being asked for, not on copying final solution text.",
+              "help": {
+                "concept": "Build the solution from the behavior the exercise is testing.",
+                "hint_1": "Think about which steps, functions, or statements are required for the task.",
+                "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "score = int(input())\n\n# Write your code below"
+            },
+            "guard-multi-reasons": {
+              "title": "Why use guard clauses?",
+              "prompt": "Choose all true statements about guard clauses.",
+              "hint": "Think about readability and early checks.",
+              "help": {
+                "concept": "Guard clauses handle special or invalid cases early so the main path is easier to read and less deeply nested.",
+                "hint_1": "Look for statements about reducing nesting and checking stop conditions first.",
+                "hint_2": "Avoid choices that claim guard clauses remove the need for conditions or always make code shorter in every case."
+              },
+              "options": {
+                "a": "They can reduce deep nesting by handling special cases early.",
+                "b": "They are useful for checking invalid input before main logic.",
+                "c": "They mean a program never needs if or elif again.",
+                "d": "They can make the main success path easier to read."
+              }
+            },
+            "guard-fill-not-submitted": {
+              "title": "Complete an early check",
+              "prompt": "Choose the best value for the first missing blank in the statement.",
+              "hint": "The condition should be true when there was no submission.",
+              "help": {
+                "concept": "The `the missing term` operator flips a boolean value. It is often used in guard clauses to catch a missing or false condition early.",
+                "hint_1": "If `submitted` is `False`, the guard should run.",
+                "hint_2": "Use the operator that turns `True` into `False` and `False` into `True`."
+              },
+              "template": "The first missing value is [blank1].",
+              "choices": [
+                "not",
+                "and",
+                "or",
+                "=="
+              ]
+            },
+            "guard-membership-checker": {
+              "title": "Membership guard clauses",
+              "prompt": "Write Python code that reads two inputs: an integer age on the first line and a word on the second line that is either `yes` or `no` for membership. If age is less than 0, print `Invalid age`. Else if the membership word is not `yes`, print `Members only`. Otherwise, if age is at least 18, print `Access granted`. In all other cases, print `Too young`.",
+              "hint": "Focus on the programming task being asked for, not on copying final solution text.",
+              "help": {
+                "concept": "Build the solution from the behavior the exercise is testing.",
+                "hint_1": "Think about which steps, functions, or statements are required for the task.",
+                "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "age = int(input())\nmembership = input().strip()\n\n# Write your code below"
+            },
+            "guard-even-positive": {
+              "title": "Accept only positive even numbers",
+              "prompt": "Write Python code that reads one integer. If the number is less than or equal to 0, print `Not positive`. Else if the number is odd, print `Not even`. Otherwise, print `Accepted`.",
+              "hint": "Focus on the programming task being asked for, not on copying final solution text.",
+              "help": {
+                "concept": "Build the solution from the behavior the exercise is testing.",
+                "hint_1": "Think about which steps, functions, or statements are required for the task.",
+                "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "number = int(input())\n\n# Write your code below"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-v2": {
+      "python-2": {
+        "guard-clauses": {
+          "guard-idea": {
+            "title": "What a guard clause does",
+            "bodyMarkdown": "A **guard clause** is an early check that handles a special case right away, so the rest of your logic can stay simple.\n\nInstead of wrapping your main logic inside many nested `if` blocks, you check for a problem first. If that problem is true, you print or return the result immediately.\n\nHere is a simple example:\n\n```python\nage = 15\n\nif age < 18:\n    print(\"Not eligible\")\nelse:\n    print(\"Eligible\")\n```\n\nThis is already clear, but guard clauses become especially helpful when there are several checks.\n\nFor example, imagine a program that only accepts positive even numbers:\n\n```python\nnumber = 7\n\nif number <= 0:\n    print(\"Number must be positive\")\nelif number % 2 != 0:\n    print(\"Number must be even\")\nelse:\n    print(\"Accepted\")\n```\n\nStep by step:\n- The first condition checks the earliest rule: is the number invalid because it is not positive?\n- The second condition checks another rule: is it odd?\n- Only if both checks fail do we reach the main success case.\n\nThis style keeps the important path easy to read.\n\n**Try it yourself:** Change `number` to `-4`, then `8`, then `11`. Click Run and check how the output changes."
+          },
+          "flatten-nesting": {
+            "title": "Replacing deep nesting with early checks",
+            "bodyMarkdown": "Beginners often write logic with deep nesting because it feels natural to keep putting one `if` inside another. Guard clauses help flatten that structure.\n\nNested version:\n\n```python\nscore = 72\nsubmitted = True\n\nif submitted:\n    if score >= 50:\n        print(\"Pass\")\n    else:\n        print(\"Fail\")\nelse:\n    print(\"No submission\")\n```\n\nA cleaner version checks the special case first:\n\n```python\nscore = 72\nsubmitted = True\n\nif not submitted:\n    print(\"No submission\")\nelif score >= 50:\n    print(\"Pass\")\nelse:\n    print(\"Fail\")\n```\n\nLine by line:\n- `if not submitted:` handles the case that stops everything else.\n- `elif score >= 50:` runs only when there was a submission.\n- `else:` handles the remaining case.\n\nThe second version is easier to scan because the main logic is not buried inside another block.\n\nA good guard clause often answers a question like:\n- Is the input missing?\n- Is the value invalid?\n- Is there a reason to stop early?\n\n**Your turn:** Change `submitted` to `False`. Then change it back to `True` and try scores like `49` and `88`."
+          },
+          "guard-with-boolean-logic": {
+            "title": "Using guard clauses with combined conditions",
+            "bodyMarkdown": "Guard clauses work well with **boolean logic** such as `and`, `or`, and `not`.\n\nSuppose a learner can join an activity only if they are at least 13 and have permission.\n\n```python\nage = 12\nhas_permission = True\n\nif age < 13 or not has_permission:\n    print(\"Cannot join\")\nelse:\n    print(\"Can join\")\n```\n\nHow this works:\n- `age < 13` checks one blocking reason.\n- `not has_permission` checks another blocking reason.\n- `or` means either blocking reason is enough to stop the learner.\n\nYou can also separate the checks if you want more specific messages:\n\n```python\nage = 12\nhas_permission = True\n\nif age < 13:\n    print(\"Too young\")\nelif not has_permission:\n    print(\"Permission needed\")\nelse:\n    print(\"Can join\")\n```\n\nThis version is longer, but it gives clearer feedback.\n\nA useful rule is:\n- Use one combined guard when one message is enough.\n- Use separate guards when each failed condition should explain something different.\n\n**Try this:** Change `age` and `has_permission` to test all paths. For example, try `15` with `False`, then `15` with `True`.\n\nLine by line: read the first statement to see which value is stored or checked, then follow each conditional branch in order to see which path prints the final result."
+          }
+        }
+      }
+    }
+  }
+}

@@ -6,6 +6,7 @@ import {
     finishProgressBar,
     renderProgressBar,
 } from "../utils/renderProgressBar.js";
+import {selectModelFromConsole} from "../utils/selectModel.js";
 
 function makeProgressLabel(info: {
     stage: string;
@@ -25,6 +26,8 @@ function makeProgressLabel(info: {
 }
 
 export async function runCompileTopic(blueprintPath: string, topicId: string) {
+    await selectModelFromConsole();
+
     const blueprint = await loadBlueprint(blueprintPath);
     let sawProgress = false;
 

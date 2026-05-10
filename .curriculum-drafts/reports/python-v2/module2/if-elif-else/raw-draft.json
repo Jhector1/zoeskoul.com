@@ -1,0 +1,73 @@
+{
+  "title": "If, Elif, and Else",
+  "summary": "Control which code runs based on conditions.",
+  "minutes": 25,
+  "sketchBlocks": [
+    {
+      "id": "1",
+      "title": "Understanding If, Elif, and Else",
+      "bodyMarkdown": "In Python, we use `if`, `elif`, and `else` statements to control the flow of our programs based on conditions. For example:\n\n```python\nage = 20\nif age < 18:\n    print('You are a minor.')\nelif age < 65:\n    print('You are an adult.')\nelse:\n    print('You are a senior.')\n```\n\nIn this example, the program checks the age and prints a message based on the condition that is true. \n\n**Your turn:** Try changing the age variable and see how the output changes!"
+    },
+    {
+      "id": "2",
+      "title": "Comparison Operators",
+      "bodyMarkdown": "Comparison operators are used to compare values. The most common ones are:\n- `==` (equal to)\n- `!=` (not equal to)\n- `>` (greater than)\n- `<` (less than)\n- `>=` (greater than or equal to)\n- `<=` (less than or equal to)\n\nFor example:\n\n```python\nnumber = 10\nif number >= 10:\n    print('Number is 10 or greater.')\n```\n\n**Try it yourself:** Modify the number and see what happens!"
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "1",
+      "kind": "code_input",
+      "title": "Grade Checker",
+      "prompt": "Write a program that checks a student's grade and prints whether they passed or failed. A grade of 60 or above is a pass.",
+      "starterCode": "grade = 75\n# Check if the grade is passing\nif grade >= 60:\n    print('Pass')\nelse:\n    print('Fail')",
+      "solutionCode": "grade = 75\nif grade >= 60:\n    print('Pass')\nelse:\n    print('Fail')"
+    },
+    {
+      "id": "2",
+      "kind": "code_input",
+      "title": "Eligibility Checker",
+      "prompt": "Create a program that checks if a person is eligible to vote. They must be at least 18 years old.",
+      "starterCode": "age = 17\n# Check eligibility\nif age >= 18:\n    print('Eligible to vote')\nelse:\n    print('Not eligible to vote')",
+      "solutionCode": "age = 17\nif age >= 18:\n    print('Eligible to vote')\nelse:\n    print('Not eligible to vote')"
+    },
+    {
+      "id": "3",
+      "kind": "code_input",
+      "title": "Temperature Checker",
+      "prompt": "Write a program that checks the temperature and prints whether it's hot, warm, or cold. Hot is above 30, warm is between 15 and 30, and cold is below 15.",
+      "starterCode": "temperature = 25\n# Check temperature\nif temperature > 30:\n    print('Hot')\nelif temperature >= 15:\n    print('Warm')\nelse:\n    print('Cold')",
+      "solutionCode": "temperature = 25\nif temperature > 30:\n    print('Hot')\nelif temperature >= 15:\n    print('Warm')\nelse:\n    print('Cold')"
+    },
+    {
+      "id": "4",
+      "kind": "multi_choice",
+      "title": "Understanding Conditionals",
+      "prompt": "Which of the following statements are true about if, elif, and else in Python?",
+      "options": [
+        "You can have multiple elif statements.",
+        "An if statement must always be followed by an else statement.",
+        "You can nest if statements inside each other.",
+        "elif is used to check multiple conditions."
+      ],
+      "correctOptionIds": [
+        "a",
+        "c",
+        "d"
+      ]
+    },
+    {
+      "id": "5",
+      "kind": "fill_blank_choice",
+      "title": "Complete the Conditional Statement",
+      "prompt": "Fill in the blank: In Python, the `if` statement is used to check a condition, and the `______` statement is used to provide an alternative if the condition is false.",
+      "template": "In Python, the `if` statement is used to check a condition, and the `______` statement is used to provide an alternative if the condition is false.",
+      "choices": [
+        "elif",
+        "else",
+        "switch"
+      ],
+      "correctValue": "else"
+    }
+  ]
+}

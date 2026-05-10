@@ -1,25 +1,10 @@
 import type { CourseProfileId } from "./blueprint.js";
 import type { SqlDatasetArtifact } from "./sql-dataset.js";
 import { ExerciseKindKey, ResolvedExercisePolicy } from "./exercise-policy.js";
+import {ModulePedagogyPolicy, TopicPedagogyPolicy, WorkspaceProfile} from "./workspace.js";
+import {ManifestRuntimeDefaults} from "./manifest";
 
-export type TopicSeedRuntimeDefaults =
-    | {
-    kind: "sql";
-    datasetId?: string;
-    fixedSqlDialect?: string;
-    resultShape?: string;
-}
-    | {
-    kind: "code";
-    language?: string;
-}
-    | {
-    kind: string;
-    datasetId?: string;
-    fixedSqlDialect?: string;
-    resultShape?: string;
-    language?: string;
-};
+export type TopicSeedRuntimeDefaults = ManifestRuntimeDefaults;
 
 export type SqlDatasetGrounding = {
     defaultDatasetId?: string;
@@ -29,6 +14,15 @@ export type SqlDatasetGrounding = {
     allowedTables: Record<string, string[]>;
 };
 
+export type TopicSeedWorkspacePolicy = {
+    workspace: WorkspaceProfile;
+    modulePolicy?: ModulePedagogyPolicy;
+    topicPolicy?: TopicPedagogyPolicy;
+    preferredActionLanguage: string[];
+    forbiddenActionLanguage: string[];
+    avoidTerms: string[];
+    notes: string[];
+};
 export type TopicSeed = {
     messageBase?: string;
     learningGoals?: string[];
@@ -62,4 +56,8 @@ export type TopicSeed = {
     sourceLocale: string;
     targetLocales: string[];
     exercisePolicy?: ResolvedExercisePolicy;
+    workspacePolicy?: TopicSeedWorkspacePolicy;
+    modulePrefix: string;
+    moduleOrder: number;
+    sectionOrder: number;
 };

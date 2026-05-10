@@ -187,7 +187,8 @@ export default function QuizPracticeCard(props: {
 
   const isCorrect =
       (Boolean((ps?.item as any)?.result?.finalized) && resultOk === true) ||
-      (!feedbackDismissed && (ps?.ok === true || resultOk === true));
+      ps?.ok === true ||
+      resultOk === true;
 
   const isFinalized =
       Boolean((ps?.item as any)?.result?.finalized) ||
@@ -198,7 +199,27 @@ export default function QuizPracticeCard(props: {
 
   const updateItemSafe = useCallback(
       (patch: any) => {
+        const isDismissFeedbackEdit =
+            Boolean(patch?.dismissFeedbackOnEdit) &&
+            Boolean(patch?.feedbackDismissed);
+
+        // Always allow real typing/edit patches to dismiss stale feedback.
+        // Even if the item is finalized/completed, the old red feedback should not remain visible.
+        if (isDismissFeedbackEdit) {
+          onUpdateItem({
+            ...patch,
+            feedbackDismissed: true,
+            dismissFeedbackOnEdit: true,
+            submitted: false,
+            userEdited: true,
+            updateOrigin: "user",
+            workspaceOrigin: "user",
+          });
+          return;
+        }
+
         if (!unlocked || isCompleted || locked || excused || isFinalized) return;
+
         onUpdateItem(patch);
       },
       [unlocked, isCompleted, locked, excused, isFinalized, onUpdateItem],
@@ -492,7 +513,14 @@ export default function QuizPracticeCard(props: {
                 <ExerciseRenderer
                     key={stableExerciseSlotId}
                     exercise={ex}
-                    current={ps.item}
+                    current={
+                      isCorrect || isCompleted
+                          ? {
+                            ...ps.item,
+                            feedbackDismissed: true,
+                          }
+                          : ps.item
+                    }
                     exerciseStateId={stableExerciseSlotId}
                     busy={ps.busy || !unlocked || isCompleted || locked || isFinalized}
                     isAssignmentRun={false}
@@ -510,6 +538,8 @@ export default function QuizPracticeCard(props: {
                     sectionSlug={(q as any).fetch?.section}
                     topicId={normalizeTopicProgressKey((q as any).fetch?.topic)}
                     cardId={ownerCardId}
+                    // showPrompt={true}
+
                 />
               </div>
 

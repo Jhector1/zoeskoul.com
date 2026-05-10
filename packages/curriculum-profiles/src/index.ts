@@ -12,5 +12,5 @@ export * from "./families/query/index.js";
 
 export * from "./sql/index.js";
 export * from "./python/index.js";
-
+export * from "./workspaceProfiles.js";
 export * from "./profileServicesRegistry.js";

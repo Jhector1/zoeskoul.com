@@ -1,0 +1,130 @@
+{
+  "topics": {
+    "python-v2": {
+      "python-1": {
+        "input-and-type-conversion": {
+          "label": "Input and Type Conversion",
+          "summary": "Use input(), int(), float(), and str() to work with values entered by a user.",
+          "cards": {
+            "sketch0": {
+              "title": "What input() gives you"
+            },
+            "sketch1": {
+              "title": "Converting input to int and float"
+            },
+            "sketch2": {
+              "title": "Using str() when building output"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Mini input practice"
+            }
+          },
+          "projectSteps": {
+            "ci_convert_and_add": {
+              "title": "Add two entered whole numbers"
+            },
+            "ci_format_user_message": {
+              "title": "Read a name and age, then print a message"
+            }
+          },
+          "quiz": {
+            "ci-convert-and-add": {
+              "title": "Add two entered whole numbers",
+              "prompt": "Write Python code that reads two lines of input. Each line contains a whole number. Convert both values to integers, add them, and print the sum.",
+              "hint": "Focus on the programming task being asked for, not on copying final solution text.",
+              "help": {
+                "concept": "Build the solution from the behavior the exercise is testing.",
+                "hint_1": "Think about which steps, functions, or statements are required for the task.",
+                "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "first = input()\nsecond = input()\n\n# Convert the inputs to whole numbers,\n# add them, and print the result."
+            },
+            "sc-input-returns-string": {
+              "title": "What type does input() return?",
+              "prompt": "A learner types `42` into `input()`. What type is the returned value before any conversion?",
+              "hint": "Focus on the main concept being tested and eliminate choices that describe something different.",
+              "help": {
+                "concept": "Choose the option that matches the core idea described in the question without relying on repeated wording from the answer choices.",
+                "hint_1": "Rule out options that describe a different role, behavior, or concept than the question is testing.",
+                "hint_2": "Pick the option that best matches the concept, not the one that simply repeats familiar wording."
+              },
+              "options": {
+                "a": "int",
+                "b": "float",
+                "c": "str",
+                "d": "bool"
+              }
+            },
+            "mc-choose-valid-conversions": {
+              "title": "Choose the useful conversions",
+              "prompt": "Which statements about type conversion in beginner Python are correct? Choose all correct answers.",
+              "hint": "Think about when you need numbers for math and text for messages.",
+              "help": {
+                "concept": "Use `int()` to convert text to a whole number, `float()` to convert text to a decimal number, and `str()` to convert other values into text for display.",
+                "hint_1": "Look for statements that match common uses of `int()`, `float()`, and `str()`.",
+                "hint_2": "A good check is: math needs numeric types, while joined messages need strings."
+              },
+              "options": {
+                "a": "`int()` can turn numeric text like `\"8\"` into a whole number",
+                "b": "`float()` can turn numeric text like `\"3.5\"` into a decimal number",
+                "c": "`str()` can turn a number into text for building output",
+                "d": "`input()` already returns an integer when the user types digits"
+              }
+            },
+            "fb-str-for-output": {
+              "title": "Complete the conversion",
+              "prompt": "Choose the correct value to complete the code.",
+              "hint": "Focus on the missing concept rather than the exact missing word.",
+              "help": {
+                "concept": "The blank should be filled with the term that matches the job the statement is trying to perform.",
+                "hint_1": "Think about what the missing part is supposed to do in the statement.",
+                "hint_2": "Choose the term that best completes the meaning of the statement."
+              },
+              "template": "count = 5\nprint(\"Count: \" + __(count))",
+              "choices": [
+                "int",
+                "float",
+                "str",
+                "input"
+              ]
+            },
+            "ci-format-user-message": {
+              "title": "Read a name and age, then print a message",
+              "prompt": "Write Python code that reads two lines of input: a name on the first line and an age on the second line. Convert the age to an integer, add 1, and print exactly: `Next year, NAME will be AGE.` using the updated age value.",
+              "hint": "Focus on the programming task being asked for, not on copying final solution text.",
+              "help": {
+                "concept": "Build the solution from the behavior the exercise is testing.",
+                "hint_1": "Think about which steps, functions, or statements are required for the task.",
+                "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "name = input()\nage_text = input()\n\n# Convert the age, add 1,\n# and print the required sentence."
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-v2": {
+      "python-1": {
+        "input-and-type-conversion": {
+          "what-input-returns": {
+            "title": "What input() gives you",
+            "bodyMarkdown": "When you use `input()`, Python waits for the user to type something and press Enter. The important beginner rule is this: **`input()` returns text**. That means the result is a string, even if the user typed digits.\n\n```python\nname = input(\"Enter your name: \")\nprint(\"Hello, \" + name)\n```\n\nStep by step:\n- `input(\"Enter your name: \")` shows a message.\n- The user types something.\n- That typed value is stored in `name` as a string.\n- `print()` shows the greeting.\n\nHere is a number example:\n\n```python\nage_text = input(\"Enter your age: \")\nprint(age_text)\nprint(type(age_text))\n```\n\nIf the user types `12`, the value is still text, not a number. That matters because text and numbers behave differently.\n\nFor example, with strings:\n\n```python\nx = input(\"Type a number: \")\nprint(x + x)\n```\n\nIf the user enters `5`, the output is `55`, not `10`, because Python is joining text.\n\nTry it yourself: Type code in the code editor that asks for a favorite color and prints a sentence using that value. Click Run and check the output panel."
+          },
+          "convert-to-numbers": {
+            "title": "Converting input to int and float",
+            "bodyMarkdown": "If you want to do math with user input, convert the text to a numeric type.\n\nUse `int()` for whole numbers:\n\n```python\nage = int(input(\"Enter your age: \"))\nnext_age = age + 1\nprint(next_age)\n```\n\nLine by line:\n- `input(...)` gets text from the user.\n- `int(...)` changes that text into a whole number.\n- `age + 1` does real arithmetic.\n- `print(next_age)` shows the result.\n\nUse `float()` for decimal numbers:\n\n```python\nprice = float(input(\"Enter a price: \"))\ntotal = price + 0.5\nprint(total)\n```\n\nIf the user enters `2.75`, `price` becomes a decimal number, so Python can calculate `3.25`.\n\nA worked example:\n- User enters `8` for hours.\n- `int(input(...))` stores the number `8`.\n- If you calculate `hours + 2`, the result is `10`.\n\nWithout conversion, `\"8\" + \"2\"` would become `\"82\"`.\n\nTry this: Ask for a whole number, convert it with `int()`, add 10, and print the result. Then change the code to use `float()` and test a decimal input."
+          },
+          "convert-back-to-strings": {
+            "title": "Using str() when building output",
+            "bodyMarkdown": "Sometimes you need to turn a number into text so it can be joined into a message. You can do that with `str()`.\n\n```python\nscore = 7\nmessage = \"Your score is \" + str(score)\nprint(message)\n```\n\nStep by step:\n- `score` stores a number.\n- `str(score)` changes the number into text.\n- The two text parts can now be joined with `+`.\n\nYou will also often see f-strings later, but `str()` is a simple and useful tool for understanding type conversion.\n\nWorked example:\n\n```python\nitems = 3\nprint(\"You bought \" + str(items) + \" items\")\n```\n\nThis prints a readable sentence because every part becomes text.\n\nA common mistake is trying this:\n\n```python\nitems = 3\nprint(\"You bought \" + items)\n```\n\nThat causes an error because Python cannot directly join a string and an integer.\n\nYour turn: Change the example so it prints a different number and a different label, such as books, games, or apples. Click Run and check the output panel."
+          }
+        }
+      }
+    }
+  }
+}

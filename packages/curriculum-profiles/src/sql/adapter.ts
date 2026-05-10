@@ -11,6 +11,7 @@ import type { CourseProfileAdapter } from "../types.js";
 import { sqlProfile } from "./profile.js";
 import { getSqlDatasetById } from "./datasets/index.js";
 import { getSqlModuleDatasetPolicy } from "./datasetPolicy.js";
+import {resolveSqlRuntimeDefaults} from "./runtimeDefaults.js";
 
 function buildSqlGrounding(args: {
     dataset: SqlDatasetArtifact | null;
@@ -42,39 +43,36 @@ export const sqlProfileAdapter: CourseProfileAdapter = {
     id: "sql",
 
     getTopicSeedRuntimeDefaults(args) {
-        const datasetId =
-            args.blueprint.runtimePolicy?.moduleDatasetIds?.[args.module.slug] ??
-            args.blueprint.runtimePolicy?.datasetId ??
-            args.blueprint.runtimePolicy?.preferredDatasetId;
 
-        const runtimeDefaults: TopicSeed["moduleRuntimeDefaults"] | null =
-            datasetId || args.blueprint.runtimePolicy?.sqlDialect
-                ? {
-                    kind: "sql",
-                    datasetId,
-                    fixedSqlDialect: args.blueprint.runtimePolicy?.sqlDialect ?? "sqlite",
-                    resultShape: args.blueprint.runtimePolicy?.resultShape ?? "table",
-                }
-                : null;
 
-        return runtimeDefaults ?? sqlProfile.buildModuleRuntimeDefaults(args.module.order);
+        const runtimeDefaults: TopicSeed["moduleRuntimeDefaults"] =
+            resolveSqlRuntimeDefaults({
+                moduleOrder: args.module.order,
+                blueprintRuntimePolicy: args.blueprint.runtimePolicy,
+            });
+
+        return runtimeDefaults;
     },
 
     buildTopicSeed(args: BuildTopicSeedArgs) {
         const fallbackRuntimeDefaults =
-            sqlProfile.buildModuleRuntimeDefaults(args.module.order, {
-                moduleSlug: args.module.slug,
-                prefix: "",
-                order: args.module.order,
-                title: args.module.title,
-                purpose: args.module.purpose,
-                learningObjectives: args.module.learningObjectives ?? [],
-                guidedExercises: args.module.guidedExercises ?? [],
-                quizFocus: args.module.quizFocus ?? [],
-                moduleProject: args.module.moduleProject,
-                runtimePolicy: undefined,
-                sections: [],
-            } as any) ?? undefined;
+            resolveSqlRuntimeDefaults({
+                moduleOrder: args.module.order,
+                module: {
+                    moduleSlug: args.module.slug,
+                    prefix: "",
+                    order: args.module.order,
+                    title: args.module.title,
+                    purpose: args.module.purpose,
+                    learningObjectives: args.module.learningObjectives ?? [],
+                    guidedExercises: args.module.guidedExercises ?? [],
+                    quizFocus: args.module.quizFocus ?? [],
+                    moduleProject: args.module.moduleProject,
+                    runtimePolicy: undefined,
+                    sections: [],
+                } as any,
+                blueprintRuntimePolicy: args.blueprint.runtimePolicy,
+            }) ?? undefined;
 
         const moduleRuntimeDefaults =
             args.module.runtimeDefaults ?? fallbackRuntimeDefaults ?? undefined;
@@ -123,6 +121,9 @@ export const sqlProfileAdapter: CourseProfileAdapter = {
             sourceLocale: args.blueprint.sourceLocale,
             targetLocales: args.blueprint.targetLocales ?? [],
             exercisePolicy: args.module.exercisePolicy,
+            modulePrefix: args.module.prefix,
+            moduleOrder: args.module.order,
+            sectionOrder: args.section.order,
         };
     },
 

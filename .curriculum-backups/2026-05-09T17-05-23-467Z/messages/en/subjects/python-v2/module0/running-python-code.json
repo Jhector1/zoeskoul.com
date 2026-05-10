@@ -1,0 +1,131 @@
+{
+  "topics": {
+    "python-v2": {
+      "python-0": {
+        "running-python-code": {
+          "label": "Running Python Code",
+          "summary": "Use the browser code editor to run simple Python, read output, and understand how Python executes statements from top to bottom.",
+          "cards": {
+            "sketch0": {
+              "title": "Running code in the browser editor"
+            },
+            "sketch1": {
+              "title": "Statements, comments, and what Python ignores"
+            },
+            "sketch2": {
+              "title": "What happens when syntax is wrong"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Run a tiny introduction program"
+            }
+          },
+          "projectSteps": {
+            "code_print_three_lines": {
+              "title": "Print three lines of output"
+            }
+          },
+          "quiz": {
+            "sc-output-panel-purpose": {
+              "title": "What print shows",
+              "prompt": "When you run `print(\"Hello\")` in the browser code editor, where should you look to see the result?",
+              "hint": "Focus on the main concept being tested and eliminate choices that describe something different.",
+              "help": {
+                "concept": "Choose the option that matches the core idea described in the question without relying on repeated wording from the answer choices.",
+                "hint_1": "Rule out options that describe a different role, behavior, or concept than the question is testing.",
+                "hint_2": "Pick the option that best matches the concept, not the one that simply repeats familiar wording."
+              },
+              "options": {
+                "a": "The output panel",
+                "b": "The comment line",
+                "c": "The Run button",
+                "d": "The title of the lesson"
+              }
+            },
+            "sc-comments-ignored": {
+              "title": "Comments and execution",
+              "prompt": "What does Python do with a line that starts with `#`?",
+              "hint": "Think about whether Python runs it or skips it.",
+              "help": {
+                "concept": "A comment is a note for humans reading the code. Python ignores comment lines when the program runs, so they do not produce output by themselves.",
+                "hint_1": "A comment can explain code, but it is not executed.",
+                "hint_2": "Python reads the line, recognizes it as a comment, and moves on."
+              },
+              "options": {
+                "a": "It prints the comment in the output panel",
+                "b": "It ignores the line while running the code",
+                "c": "It turns the next line into output",
+                "d": "It automatically fixes syntax errors"
+              }
+            },
+            "mc-valid-run-ready-code": {
+              "title": "Choose all valid lines",
+              "prompt": "Which lines are valid Python code that can run without a syntax error? Choose all correct answers.",
+              "hint": "Check quotes, parentheses, and comment syntax.",
+              "help": {
+                "concept": "Valid Python syntax means the code follows Python's rules. For beginner examples, matching quotes and parentheses are especially important, and comments begin with `#`.",
+                "hint_1": "Look for lines with balanced punctuation.",
+                "hint_2": "A proper comment line is valid, and a proper `print()` call needs matching quotes and parentheses."
+              },
+              "options": {
+                "a": "print(\"Hi\")",
+                "b": "# this is a comment",
+                "c": "print(Hello)"
+              }
+            },
+            "fb-top-to-bottom": {
+              "title": "Program flow",
+              "prompt": "Complete the sentence about simple Python programs.",
+              "hint": "Think about the usual direction Python follows through lines of code.",
+              "help": {
+                "concept": "In simple beginner programs, Python usually executes statements in order from the first line downward unless later topics introduce other control flow tools.",
+                "hint_1": "Start at the first line and move downward.",
+                "hint_2": "The missing phrase describes the normal reading order of lines."
+              },
+              "template": "Python usually runs simple statements from ___ in the code editor.",
+              "choices": [
+                "top to bottom",
+                "right to left",
+                "bottom to top",
+                "inside comments first"
+              ]
+            },
+            "code-print-three-lines": {
+              "title": "Print three lines of output",
+              "prompt": "Write Python code that prints exactly three lines in this order: `Start`, `Learning Python`, and `Done`.",
+              "hint": "Use one `print()` call for each line.",
+              "help": {
+                "concept": "Each `print()` call displays one line of output. To show multiple lines in a specific order, write multiple `print()` statements in that same order.",
+                "hint_1": "You need three separate output lines.",
+                "hint_2": "Use three `print()` calls, one for the first word, one for the middle phrase, and one for the last word."
+              },
+              "starterCode": "# Write Python code below"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-v2": {
+      "python-0": {
+        "running-python-code": {
+          "run-code-basics": {
+            "title": "Running code in the browser editor",
+            "bodyMarkdown": "Python code runs one statement at a time, usually from top to bottom. In ZoeSkoul, you can type code in the code editor, click **Run**, and then read the result in the **output panel**.\n\nA very common first example is `print()`. It shows text or values in the output panel.\n\n```python\nprint(\"Hello\")\nprint(\"Welcome to Python\")\n```\n\nIf you run this code, Python reads the first line, prints `Hello`, then reads the second line and prints `Welcome to Python`.\n\nStep by step:\n1. `print(\"Hello\")` displays the first message.\n2. `print(\"Welcome to Python\")` displays the second message on the next line.\n\nWorked example:\n\n```python\nprint(\"Maya\")\nprint(3 + 4)\n```\n\nThis produces:\n\n```text\nMaya\n7\n```\n\nThe first line prints text. The second line prints the result of an expression.\n\nTry it yourself: change `\"Maya\"` to your name, click **Run**, and check the output panel."
+          },
+          "statements-comments-output": {
+            "title": "Statements, comments, and what Python ignores",
+            "bodyMarkdown": "A **statement** is an instruction for Python to do something. A comment starts with `#` and is ignored by Python when the code runs.\n\n```python\n# This is a comment\nprint(\"Start\")\n# Python skips this line\nprint(\"End\")\n```\n\nLine by line:\n1. `# This is a comment` is ignored.\n2. `print(\"Start\")` runs and shows `Start`.\n3. `# Python skips this line` is ignored.\n4. `print(\"End\")` runs and shows `End`.\n\nSo the output is:\n\n```text\nStart\nEnd\n```\n\nComments are useful for notes to humans, but they do not appear in the output panel.\n\nWorked example:\n\n```python\nprint(\"A\")\n# print(\"B\")\nprint(\"C\")\n```\n\nEven though you can see `print(\"B\")`, it is inside a comment, so Python does not run it. The output is only `A` and `C`.\n\nYour turn: add a comment above a `print()` line, click **Run**, and notice that the comment does not change the output."
+          },
+          "syntax-errors-first-look": {
+            "title": "What happens when syntax is wrong",
+            "bodyMarkdown": "Python needs code to follow its rules exactly. If the syntax is wrong, the code will not run correctly.\n\nFor example, this line is missing a closing quote:\n\n```python\nprint(\"Hello)\n```\n\nPython cannot understand where the text ends, so it reports an error instead of showing normal output.\n\nHere is a correct version:\n\n```python\nprint(\"Hello\")\n```\n\nAnother common mistake is forgetting a closing parenthesis:\n\n```python\nprint(\"Hi\"\n```\n\nPython expects the `)` to finish the `print()` call.\n\nWorked example:\n\nWrong code:\n\n```python\nprint(\"Blue\"\nprint(\"Green\")\n```\n\nThe first line has a syntax problem, so Python stops before it can run the next line normally.\n\nFixed code:\n\n```python\nprint(\"Blue\")\nprint(\"Green\")\n```\n\nNow Python can run both lines from top to bottom.\n\nTry this: type a working `print()` line, run it, then remove one quote or one parenthesis and run it again to see the difference."
+          }
+        }
+      }
+    }
+  }
+}

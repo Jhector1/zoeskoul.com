@@ -1,0 +1,178 @@
+{
+  "topicId": "print-comments-and-errors",
+  "subjectSlug": "python-v2",
+  "moduleSlug": "python-0",
+  "sectionSlug": "python-v2-python-0-core-building-blocks-1",
+  "prefix": "py0",
+  "minutes": 20,
+  "topic": {
+    "labelKey": "topics.python-v2.python-0.print-comments-and-errors.label",
+    "summaryKey": "topics.python-v2.python-0.print-comments-and-errors.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-0.print-comments-and-errors.cards.sketch0.title",
+      "sketchId": "print-basics",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-0.print-comments-and-errors.cards.sketch1.title",
+      "sketchId": "comments-and-reading-code",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-0.print-comments-and-errors.cards.sketch2.title",
+      "sketchId": "first-errors",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.python-v2.python-0.print-comments-and-errors.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python-v2.python-0.print-comments-and-errors.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "code_fix_and_print",
+            "titleKey": "topics.python-v2.python-0.print-comments-and-errors.projectSteps.code_fix_and_print.title",
+            "exerciseKey": "code-fix-and-print",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "print-basics",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-0.print-comments-and-errors.print-basics.title",
+      "bodyKey": "sketches.python-v2.python-0.print-comments-and-errors.print-basics.bodyMarkdown"
+    },
+    {
+      "id": "comments-and-reading-code",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-0.print-comments-and-errors.comments-and-reading-code.title",
+      "bodyKey": "sketches.python-v2.python-0.print-comments-and-errors.comments-and-reading-code.bodyMarkdown"
+    },
+    {
+      "id": "first-errors",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-0.print-comments-and-errors.first-errors.title",
+      "bodyKey": "sketches.python-v2.python-0.print-comments-and-errors.first-errors.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "sc-print-purpose",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-0.print-comments-and-errors.quiz.sc-print-purpose",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "sc-syntax-error",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-0.print-comments-and-errors.quiz.sc-syntax-error",
+      "optionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "c"
+      }
+    },
+    {
+      "id": "mc-comments-true",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-0.print-comments-and-errors.quiz.mc-comments-true",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "fbc-comment-symbol",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-0.print-comments-and-errors.quiz.fbc-comment-symbol",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "#"
+      }
+    },
+    {
+      "id": "code-fix-and-print",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-0.print-comments-and-errors.quiz.code-fix-and-print",
+      "language": "python",
+      "starterCode": "# Add a comment\n# Then print the required lines below",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Learning Python\nStep by step\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "# This program prints two learning messages\nprint(\"Learning Python\")\nprint(\"Step by step\")"
+      }
+    }
+  ]
+}

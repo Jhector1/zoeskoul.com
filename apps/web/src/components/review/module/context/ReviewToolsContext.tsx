@@ -387,18 +387,31 @@ export function ReviewToolsProvider({
       cur.onPatch?.(patch);
 
       const targetKey = next.exerciseKey ?? id;
-      patchExercise(targetKey, {
-        language: next.lang,
-        lang: next.lang,
-        workspace: next.workspace ?? undefined,
-        codeWorkspace: next.workspace ?? undefined,
-        ideWorkspace: next.workspace ?? undefined,
-        stdin: next.stdin ?? "",
-        codeStdin: next.stdin ?? "",
-        code: getWorkspaceEntryCode(next.workspace) ?? next.code,
-        userEdited: true,
-        workspaceOrigin: "user",
-      } as any);
+        const feedbackDismissPatch =
+            patch?.dismissFeedbackOnEdit === true && patch?.feedbackDismissed === true
+                ? {
+                    submitted: false,
+                    feedbackDismissed: true,
+                    dismissFeedbackOnEdit: true,
+                    userEdited: true,
+                    updateOrigin: "user",
+                    workspaceOrigin: "user",
+                }
+                : {};
+
+        patchExercise(targetKey, {
+            language: next.lang,
+            lang: next.lang,
+            workspace: next.workspace ?? undefined,
+            codeWorkspace: next.workspace ?? undefined,
+            ideWorkspace: next.workspace ?? undefined,
+            stdin: next.stdin ?? "",
+            codeStdin: next.stdin ?? "",
+            code: getWorkspaceEntryCode(next.workspace) ?? next.code,
+            userEdited: true,
+            workspaceOrigin: "user",
+            ...feedbackDismissPatch,
+        } as any);
     },
     [patchExercise],
   );

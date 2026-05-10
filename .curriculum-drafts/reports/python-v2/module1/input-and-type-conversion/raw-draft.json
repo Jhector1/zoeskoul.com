@@ -1,0 +1,95 @@
+{
+  "title": "Input and Type Conversion",
+  "summary": "Use input, int, float, and str to handle user-entered values.",
+  "minutes": 25,
+  "sketchBlocks": [
+    {
+      "id": "sketch_1",
+      "title": "Getting User Input",
+      "bodyMarkdown": "In Python, you can get input from users using the `input()` function. This function waits for the user to type something and press Enter. For example:\n\n```python\nname = input('What is your name? ')\nprint('Hello, ' + name + '!')\n```\n\nIn this example, the program asks for the user's name and then greets them. \n\n**Your turn:** Try modifying the prompt to ask for your favorite color."
+    },
+    {
+      "id": "sketch_2",
+      "title": "Type Conversion",
+      "bodyMarkdown": "When you get input from a user, it is always a string. To use it as a number, you need to convert it. You can use `int()` to convert a string to an integer and `float()` to convert it to a float. For example:\n\n```python\nage = input('How old are you? ')\nage = int(age)\nprint('In 5 years, you will be ' + str(age + 5) + ' years old.')\n```\n\nThis code takes the user's age as input, converts it to an integer, and then calculates what their age will be in 5 years.\n\n**Try it yourself:** Change the code to ask for your height in meters and convert it to centimeters."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "quiz_1",
+      "kind": "code_input",
+      "title": "Convert User Input to Integer",
+      "prompt": "Write a program that asks the user for their age and then prints out the age in 10 years.",
+      "starterCode": "age = input('Enter your age: ')\n# Convert age to an integer\n",
+      "solutionCode": "age = input('Enter your age: ')\nage = int(age)\nprint('In 10 years, you will be ' + str(age + 10) + ' years old.')",
+      "tests": [
+        {
+          "input": "25\n",
+          "output": "In 10 years, you will be 35 years old."
+        },
+        {
+          "input": "30\n",
+          "output": "In 10 years, you will be 40 years old."
+        }
+      ]
+    },
+    {
+      "id": "quiz_2",
+      "kind": "fill_blank_choice",
+      "title": "Fill in the Blank",
+      "prompt": "The `input()` function always returns a value of type _____.",
+      "template": "The `input()` function always returns a value of type ___.",
+      "choices": [
+        "int",
+        "float",
+        "str",
+        "bool"
+      ],
+      "correctValue": "str"
+    },
+    {
+      "id": "quiz_3",
+      "kind": "single_choice",
+      "title": "Understanding Type Conversion",
+      "prompt": "Which function would you use to convert a string to a floating-point number?",
+      "options": [
+        "int()",
+        "str()",
+        "float()",
+        "bool()"
+      ],
+      "correctOptionIds": [
+        "c"
+      ],
+      "hint": "Think about which function is specifically designed for decimal numbers.",
+      "help": {
+        "concept": "The float() function converts a string representation of a number into a floating-point number.",
+        "hint_1": "Look for the function that deals with decimal values.",
+        "hint_2": "Remember that int() is for whole numbers."
+      }
+    },
+    {
+      "id": "quiz_4",
+      "kind": "multi_choice",
+      "title": "Identifying Correct Conversions",
+      "prompt": "Which of the following are valid type conversions in Python?",
+      "options": [
+        "int('123')",
+        "float('123.45')",
+        "str(123)",
+        "bool('False')"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "hint": "Consider which functions can take a string or number and convert it to another type.",
+      "help": {
+        "concept": "You can convert strings to integers, floats, and vice versa using the appropriate functions.",
+        "hint_1": "int() and float() can convert strings that represent numbers.",
+        "hint_2": "str() can convert numbers to strings."
+      }
+    }
+  ]
+}

@@ -1,0 +1,215 @@
+{
+  "topicId": "truthiness-and-empty-values",
+  "subjectSlug": "python-v2",
+  "moduleSlug": "python-v2-2",
+  "sectionSlug": "python-v2-2-combining-conditions",
+  "prefix": "pyv2_2",
+  "minutes": 20,
+  "topic": {
+    "labelKey": "topics.python-v2.python-v2-2.truthiness-and-empty-values.label",
+    "summaryKey": "topics.python-v2.python-v2-2.truthiness-and-empty-values.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-v2-2.truthiness-and-empty-values.cards.sketch0.title",
+      "sketchId": "1",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-v2-2.truthiness-and-empty-values.cards.sketch1.title",
+      "sketchId": "2",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.python-v2.python-v2-2.truthiness-and-empty-values.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 2,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python-v2.python-v2-2.truthiness-and-empty-values.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "3",
+            "titleKey": "topics.python-v2.python-v2-2.truthiness-and-empty-values.projectSteps.3.title",
+            "exerciseKey": "3",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "4",
+            "titleKey": "topics.python-v2.python-v2-2.truthiness-and-empty-values.projectSteps.4.title",
+            "exerciseKey": "4",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "5",
+            "titleKey": "topics.python-v2.python-v2-2.truthiness-and-empty-values.projectSteps.5.title",
+            "exerciseKey": "5",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-v2-2.truthiness-and-empty-values.1.title",
+      "bodyKey": "sketches.python-v2.python-v2-2.truthiness-and-empty-values.1.bodyMarkdown"
+    },
+    {
+      "id": "2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-v2-2.truthiness-and-empty-values.2.title",
+      "bodyKey": "sketches.python-v2.python-v2-2.truthiness-and-empty-values.2.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "1",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "2",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.2",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "None"
+      }
+    },
+    {
+      "id": "3",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.3",
+      "language": "python",
+      "starterCode": "def check_truthiness(value):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nvalue = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(check_truthiness(value))",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "''",
+            "stdout": "This value is falsy.",
+            "match": "exact"
+          },
+          {
+            "stdin": "0",
+            "stdout": "This value is falsy.",
+            "match": "exact"
+          },
+          {
+            "stdin": "None",
+            "stdout": "This value is falsy.",
+            "match": "exact"
+          },
+          {
+            "stdin": "'Hello'",
+            "stdout": "This value is truthy.",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "def check_truthiness(value):\n    if value:\n        return 'This value is truthy.'\n    else:\n        return 'This value is falsy.'\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nvalue = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(check_truthiness(value))"
+      }
+    },
+    {
+      "id": "4",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.4",
+      "language": "python",
+      "starterCode": "def evaluate_input(user_input):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nuser_input = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(evaluate_input(user_input))",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "''",
+            "stdout": "No input received.",
+            "match": "exact"
+          },
+          {
+            "stdin": "'Data'",
+            "stdout": "Input is provided.",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "def evaluate_input(user_input):\n    if user_input:\n        return 'Input is provided.'\n    else:\n        return 'No input received.'\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nuser_input = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(evaluate_input(user_input))"
+      }
+    },
+    {
+      "id": "5",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.5",
+      "language": "python",
+      "starterCode": "_inputs = []\nvalue = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\ndef check_multiple_values(*values):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\n*values = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(check_multiple_values(*values))",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "None, 0, 'Hello', '', 42",
+            "stdout": "['Hello', 42]",
+            "match": "exact"
+          },
+          {
+            "stdin": "0, '', None",
+            "stdout": "[]",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "_inputs = []\nvalue = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\ndef check_multiple_values(*values):\n    return [value for value in values if value]\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\n*values = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(check_multiple_values(*values))"
+      }
+    }
+  ]
+}

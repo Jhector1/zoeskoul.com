@@ -227,21 +227,16 @@ export function buildTopicBundleFromDraft(args: {
     shape: SubjectShapePack;
     seed: TopicSeed;
     draft: TopicAuthoringDraft;
-    moduleOrder: number;
-    sectionOrder: number;
 }): TopicBundleManifest {
-    const { shape, seed, draft, moduleOrder, sectionOrder } = args;
+    const { shape, seed, draft } = args;
     const kp = shape.subjectManifest.keyPatterns;
 
-    const logicalModuleSlug = shape.subjectManifest.moduleSlug(moduleOrder);
+    const logicalModuleSlug = seed.moduleSlug;
     const logicalSectionSlug = resolveLogicalSectionSlug({
         subjectSlug: seed.subjectSlug,
-        rawSectionSlug: shape.subjectManifest.sectionSlug(
-            moduleOrder,
-            sectionOrder,
-        ),
+        rawSectionSlug: seed.sectionSlug,
     });
-    const prefix = shape.subjectManifest.modulePrefix(moduleOrder);
+    const prefix = seed.modulePrefix;
 
     const projectStepIds = buildProjectStepIds(draft);
     const quizOnlyExercises = quizExercises(draft);
@@ -563,7 +558,14 @@ export function buildTopicBundleFromDraft(args: {
                     },
                 };
             }
+            const useSemantic =
+                exercise.recipeType === "semantic" ||
+                (Array.isArray(exercise.semanticChecks) &&
+                    exercise.semanticChecks.length > 0);
 
+            const useFixedTests =
+                exercise.recipeType === "fixed_tests" ||
+                (Array.isArray(exercise.tests) && exercise.tests.length > 0);
             return {
                 id: exercise.id,
                 kind: "code_input" as const,
@@ -572,9 +574,8 @@ export function buildTopicBundleFromDraft(args: {
                 messageBase,
                 language: "python" as const,
                 starterCode: normalizeText(exercise.starterCode),
-                showExpectedExample: exercise.recipeType === "semantic" ? false : true,
-                recipe: (() => {
-                    if (exercise.recipeType === "semantic") {
+                showExpectedExample: useSemantic ? false : true,                recipe: (() => {
+                    if (useSemantic) {
                         return {
                             type: "semantic" as const,
                             language: "python" as const,
@@ -585,7 +586,15 @@ export function buildTopicBundleFromDraft(args: {
                             ),
                         };
                     }
-
+                    if (!useFixedTests) {
+                        throw new Error(
+                            [
+                                `Programming code_input exercise "${exercise.id}" needs either tests or semanticChecks.`,
+                                `Topic: ${seed.topicId}`,
+                                `Use "tests" for fixed_tests or "semanticChecks" for semantic recipes.`,
+                            ].join("\n"),
+                        );
+                    }
                     const tests = Array.isArray(exercise.tests)
                         ? exercise.tests
                             .map((test: ProgrammingCodeInputTestDraft) => {
@@ -635,7 +644,7 @@ export function buildTopicBundleFromDraft(args: {
         moduleSlug: logicalModuleSlug,
         sectionSlug: logicalSectionSlug,
         prefix,
-        minutes: draft.minutes,
+        minutes: seed.minutes,
         topic: {
             labelKey: kp.topicLabelKey(
                 seed.subjectSlug,

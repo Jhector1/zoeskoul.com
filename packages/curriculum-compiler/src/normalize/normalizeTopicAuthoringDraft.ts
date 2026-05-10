@@ -47,7 +47,7 @@ function fallbackHint(title: string, kind: DraftQuizItem["kind"]): string {
         case "fill_blank_choice":
             return "Focus on the missing concept or keyword.";
         case "code_input":
-            return "Break the task into the main query or code steps first.";
+            return "Break the task into the main code steps first.";
         default:
             return `Think about the main idea behind ${title.toLowerCase()}.`;
     }
@@ -77,8 +77,8 @@ function fallbackHelp(title: string, kind: DraftQuizItem["kind"]): DraftHelp {
         case "code_input":
             return {
                 concept: `This task checks whether you can apply ${title.toLowerCase()} in a working solution.`,
-                hint_1: "Identify the table, columns, and condition or operation before writing the full solution.",
-                hint_2: "Build the statement one piece at a time: select the right fields, then add the condition or operation that matches the prompt.",
+                hint_1: "Identify the inputs, required steps, and expected result before writing the full solution.",
+                hint_2: "Build the solution one piece at a time, then check that its behavior matches the prompt.",
             };
         default:
             return {

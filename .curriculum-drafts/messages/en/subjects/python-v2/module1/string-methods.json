@@ -1,0 +1,144 @@
+{
+  "topics": {
+    "python-v2": {
+      "python-v2-1": {
+        "string-methods": {
+          "label": "Useful String Methods",
+          "summary": "Use methods like lower, strip, replace, split, and join.",
+          "cards": {
+            "sketch0": {
+              "title": "Introduction to String Methods"
+            },
+            "sketch1": {
+              "title": "Using the strip Method"
+            },
+            "sketch2": {
+              "title": "Replacing Substrings"
+            },
+            "sketch3": {
+              "title": "Splitting Strings"
+            },
+            "sketch4": {
+              "title": "Joining Strings"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Practice"
+            }
+          },
+          "projectSteps": {
+            "quiz4": {
+              "title": "Use the split method"
+            },
+            "quiz5": {
+              "title": "Join a list of strings"
+            }
+          },
+          "quiz": {
+            "quiz1": {
+              "title": "What does the lower() method do?",
+              "prompt": "Select the correct answer.",
+              "hint": "Think about how the method affects the case of letters.",
+              "help": {
+                "concept": "The lower() method is used to convert all characters in a string to lowercase.",
+                "hint_1": "This method is useful for standardizing input.",
+                "hint_2": "Look for the option that describes changing uppercase letters to lowercase."
+              },
+              "options": {
+                "a": "Converts a string to uppercase",
+                "b": "Converts a string to lowercase",
+                "c": "Removes whitespace from a string",
+                "d": "Replaces a substring in a string"
+              }
+            },
+            "quiz2": {
+              "title": "Which of the following methods can be used to manipulate strings?",
+              "prompt": "Select all that apply.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "options": {
+                "a": "strip()",
+                "b": "append()",
+                "c": "replace()",
+                "d": "split()"
+              }
+            },
+            "quiz3": {
+              "title": "Fill in the blank: The method used to remove whitespace from both ends of a string is called ___.",
+              "prompt": "Choose the correct method name.",
+              "hint": "Focus on the missing concept or keyword.",
+              "help": {
+                "concept": "This task checks the key idea behind fill in the blank: the method used to remove whitespace from both ends of a string is called ___..",
+                "hint_1": "Look for the word or phrase that best matches the lesson concept.",
+                "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
+              },
+              "template": "The method used to remove whitespace from both ends of a string is called ___.",
+              "choices": [
+                "strip()",
+                "trim()",
+                "remove()",
+                "clean()"
+              ]
+            },
+            "quiz4": {
+              "title": "Use the split method",
+              "prompt": "Write a program that splits the string 'apple,banana,cherry' into a list of fruits.",
+              "hint": "Break the task into the main code steps first.",
+              "help": {
+                "concept": "This task checks whether you can apply use the split method in a working solution.",
+                "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
+                "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
+              },
+              "starterCode": "fruits_string = 'apple,banana,cherry'\n# Your code here"
+            },
+            "quiz5": {
+              "title": "Join a list of strings",
+              "prompt": "Write a program that joins the list ['Python', 'is', 'fun'] into a single string with spaces.",
+              "hint": "Read the coding task and identify what the program should print.",
+              "help": {
+                "concept": "This coding exercise checks whether the program produces the requested output.",
+                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "starterCode": "words = ['Python', 'is', 'fun']\n# Your code here"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-v2": {
+      "python-v2-1": {
+        "string-methods": {
+          "sketch1": {
+            "title": "Introduction to String Methods",
+            "bodyMarkdown": "In Python, strings are sequences of characters. You can manipulate strings using various methods. For example, the `lower()` method converts all characters in a string to lowercase. Here's a simple example:\n\n```python\ntext = \"Hello World\"\nprint(text.lower())  # Output: hello world\n```\n\nTry it yourself! Use the `upper()` method to convert the string to uppercase.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          },
+          "sketch2": {
+            "title": "Using the strip Method",
+            "bodyMarkdown": "The `strip()` method removes any leading and trailing whitespace from a string. For example:\n\n```python\ntext = \"   Hello World   \"\nprint(text.strip())  # Output: 'Hello World'\n```\n\nYour turn! Try using `strip()` on a string with extra spaces.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          },
+          "sketch3": {
+            "title": "Replacing Substrings",
+            "bodyMarkdown": "You can replace parts of a string using the `replace()` method. For instance:\n\n```python\ntext = \"I like apples\"\nnew_text = text.replace(\"apples\", \"bananas\")\nprint(new_text)  # Output: I like bananas\n```\n\nTry this! Replace 'like' with 'love' in a string of your choice.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          },
+          "sketch4": {
+            "title": "Splitting Strings",
+            "bodyMarkdown": "The `split()` method divides a string into a list based on a specified delimiter. For example:\n\n```python\ntext = \"apple,banana,cherry\"\nfruits = text.split(',')\nprint(fruits)  # Output: ['apple', 'banana', 'cherry']\n```\n\nTry it yourself! Split a sentence into words.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          },
+          "sketch5": {
+            "title": "Joining Strings",
+            "bodyMarkdown": "You can join a list of strings into a single string using the `join()` method. For example:\n\n```python\nfruits = ['apple', 'banana', 'cherry']\nresult = ', '.join(fruits)\nprint(result)  # Output: apple, banana, cherry\n```\n\nYour turn! Join a list of your favorite hobbies into a single string.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          }
+        }
+      }
+    }
+  }
+}

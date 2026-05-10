@@ -25,6 +25,14 @@ export type SubjectManifest = {
         isTerminalRelease?: boolean;
         moreComingMessageKey?: string;
       };
+      versioning?: {
+        family: string;
+        version: number;
+        status: "draft" | "active" | "legacy" | "disabled";
+        defaultForNewEnrollments?: boolean;
+        supersedes?: string | null;
+        supersededBy?: string | null;
+      };
       completionPolicy?: {
         requireAllPublishedModules?: boolean;
         rewardEnabledByDefault?: boolean;

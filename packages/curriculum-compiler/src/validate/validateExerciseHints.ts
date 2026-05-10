@@ -31,6 +31,13 @@ function isTooGenericAnswerText(value: string): boolean {
         "if",
         "elif",
         "else",
+        "for",
+        "in",
+        "is",
+        "as",
+        "to",
+        "of",
+        "from",
         "true",
         "false",
         "yes",
@@ -75,6 +82,8 @@ export function validateExerciseHints(draft: TopicAuthoringDraft): string[] {
         }
 
         if (exercise.kind === "fill_blank_choice") {
+            if (isTooGenericAnswerText(exercise.correctValue)) return;
+
             if (texts.some((text) => containsWholeText(text, exercise.correctValue))) {
                 warnings.push(`Hint reveals fill_blank answer in exercise ${exercise.id}`);
             }

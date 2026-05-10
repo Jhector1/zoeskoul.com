@@ -1,0 +1,112 @@
+{
+  "title": "What Python Is Used For",
+  "summary": "Understand Python's role in automation, web apps, data, beginner programming, and AI.",
+  "minutes": 12,
+  "sketchBlocks": [
+    {
+      "id": "sketch_1",
+      "title": "Introduction to Python's Uses",
+      "bodyMarkdown": "Python is a versatile programming language used for various applications. It is popular in web development, data analysis, artificial intelligence, and automation. For example, you can use Python to automate repetitive tasks like sending emails or processing data files. **Try it yourself:** Think of a task in your daily life that could be automated using Python."
+    },
+    {
+      "id": "sketch_2",
+      "title": "Python in Data Science",
+      "bodyMarkdown": "In data science, Python is used to analyze and visualize data. Libraries like Pandas and Matplotlib make it easy to manipulate data and create graphs. For instance, you can load a dataset and plot a graph to visualize trends. Here's a simple example:\n\n```python\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\ndata = {'Year': [2020, 2021, 2022], 'Sales': [150, 200, 250]}\ndf = pd.DataFrame(data)\nplt.plot(df['Year'], df['Sales'])\nplt.title('Sales Over Years')\nplt.xlabel('Year')\nplt.ylabel('Sales')\nplt.show()\n```\n**Try this:** Modify the sales data and see how the graph changes."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "quiz_1",
+      "kind": "single_choice",
+      "title": "What is Python commonly used for?",
+      "prompt": "Select the most common use of Python.",
+      "options": [
+        "Creating mobile applications",
+        "Web development",
+        "Game development",
+        "Hardware programming"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Think about where Python is most popular.",
+      "help": {
+        "concept": "Python is widely used for web development due to its frameworks like Django and Flask.",
+        "hint_1": "Consider the areas where Python has a strong community and many resources.",
+        "hint_2": "Look for the option that mentions building websites or web applications."
+      }
+    },
+    {
+      "id": "quiz_2",
+      "kind": "single_choice",
+      "title": "Which library is used for data visualization in Python?",
+      "prompt": "Choose the library that helps in creating graphs and plots.",
+      "options": [
+        "NumPy",
+        "Matplotlib",
+        "Pandas",
+        "Scikit-learn"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "This library is specifically designed for plotting.",
+      "help": {
+        "concept": "Matplotlib is a popular library for creating static, animated, and interactive visualizations in Python.",
+        "hint_1": "Think about the library that starts with 'Mat' and is known for its plotting capabilities.",
+        "hint_2": "This library is often used alongside Pandas for data visualization."
+      }
+    },
+    {
+      "id": "quiz_3",
+      "kind": "multi_choice",
+      "title": "Select all areas where Python is used.",
+      "prompt": "Choose all correct applications of Python.",
+      "options": [
+        "Web development",
+        "Data analysis",
+        "Game development",
+        "Machine learning"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ],
+      "hint": "Python is used in various fields, not just one.",
+      "help": {
+        "concept": "Python is versatile and can be applied in web development, data analysis, and machine learning.",
+        "hint_1": "Think about the fields where Python has a strong presence.",
+        "hint_2": "Consider both traditional programming and emerging technologies."
+      }
+    },
+    {
+      "id": "quiz_4",
+      "kind": "fill_blank_choice",
+      "title": "Fill in the blank: Python is often used for ________ tasks.",
+      "prompt": "Complete the sentence with the correct word.",
+      "template": "Python is often used for ________ tasks.",
+      "choices": [
+        "automating",
+        "gaming",
+        "hardware",
+        "designing"
+      ],
+      "correctValue": "automating"
+    },
+    {
+      "id": "quiz_5",
+      "kind": "code_input",
+      "title": "Create a simple Python program.",
+      "prompt": "Write a Python program that prints 'Hello, World!'",
+      "starterCode": "",
+      "solutionCode": "print('Hello, World!')",
+      "tests": [
+        {
+          "input": "",
+          "output": "Hello, World!\n"
+        }
+      ]
+    }
+  ]
+}

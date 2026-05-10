@@ -1,0 +1,116 @@
+{
+  "title": "And, Or, and Not",
+  "summary": "Combine conditions with boolean operators.",
+  "minutes": 25,
+  "sketchBlocks": [
+    {
+      "id": "sketch_1",
+      "title": "Understanding Boolean Operators",
+      "bodyMarkdown": "In Python, boolean operators like `and`, `or`, and `not` help us combine conditions. For example, if we want to check if a number is both greater than 10 and less than 20, we can use the `and` operator:\n\n```python\nnumber = 15\nif number > 10 and number < 20:\n    print('The number is between 10 and 20')\n```\n\nThis code will print the message because both conditions are true. \n\n**Your turn:** Try changing the value of `number` to see how the output changes!"
+    },
+    {
+      "id": "sketch_2",
+      "title": "Using Or to Combine Conditions",
+      "bodyMarkdown": "The `or` operator allows us to check if at least one of multiple conditions is true. For example:\n\n```python\nnumber = 5\nif number < 10 or number > 20:\n    print('The number is either less than 10 or greater than 20')\n```\n\nIn this case, the output will be printed because the first condition is true. \n\n**Try this:** Change the value of `number` to test different outcomes."
+    },
+    {
+      "id": "sketch_3",
+      "title": "Negating Conditions with Not",
+      "bodyMarkdown": "The `not` operator negates a condition. For example:\n\n```python\nis_raining = False\nif not is_raining:\n    print('You can go outside!')\n```\n\nHere, the message will print because `is_raining` is false, and `not` makes it true. \n\n**Try it yourself:** Change the value of `is_raining` to see how it affects the output."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "quiz_1",
+      "kind": "multi_choice",
+      "title": "Identifying Boolean Logic",
+      "prompt": "Which of the following statements correctly uses boolean operators?",
+      "options": [
+        "if x > 5 and x < 10:",
+        "if x < 5 or x > 10:",
+        "if not x == 0:",
+        "All of the above"
+      ],
+      "correctOptionIds": [
+        "d"
+      ],
+      "hint": "Look for statements that correctly combine conditions.",
+      "help": {
+        "concept": "Boolean operators allow you to combine multiple conditions in an if statement.",
+        "hint_1": "Check if each statement uses `and`, `or`, or `not` correctly.",
+        "hint_2": "Remember that all statements can be valid if they use the operators correctly."
+      }
+    },
+    {
+      "id": "quiz_2",
+      "kind": "fill_blank_choice",
+      "title": "Complete the Condition",
+      "prompt": "Fill in the blank: `if x > 10 ___ x < 20:`",
+      "template": "if x > 10 ___ x < 20:",
+      "choices": [
+        "and",
+        "or",
+        "not"
+      ],
+      "correctValue": "and"
+    },
+    {
+      "id": "quiz_3",
+      "kind": "code_input",
+      "title": "Check Number Range",
+      "prompt": "Write a function that checks if a number is between 10 and 20 using boolean operators.",
+      "starterCode": "def check_number(num):\n    # Your code here\n",
+      "solutionCode": "def check_number(num):\n    if num > 10 and num < 20:\n        return True\n    else:\n        return False\n\n# Test the function\nprint(check_number(15))  # Expected output: True\nprint(check_number(25))  # Expected output: False",
+      "tests": [
+        {
+          "input": "15",
+          "output": "True"
+        },
+        {
+          "input": "25",
+          "output": "False"
+        }
+      ]
+    },
+    {
+      "id": "quiz_4",
+      "kind": "code_input",
+      "title": "Negate a Condition",
+      "prompt": "Write a function that checks if a value is not equal to zero.",
+      "starterCode": "def is_not_zero(value):\n    # Your code here\n",
+      "solutionCode": "def is_not_zero(value):\n    return not value == 0\n\n# Test the function\nprint(is_not_zero(5))  # Expected output: True\nprint(is_not_zero(0))  # Expected output: False",
+      "tests": [
+        {
+          "input": "5",
+          "output": "True"
+        },
+        {
+          "input": "0",
+          "output": "False"
+        }
+      ]
+    },
+    {
+      "id": "quiz_5",
+      "kind": "code_input",
+      "title": "Or Condition Check",
+      "prompt": "Create a function that checks if a number is less than 10 or greater than 20.",
+      "starterCode": "def check_or(num):\n    # Your code here\n",
+      "solutionCode": "def check_or(num):\n    return num < 10 or num > 20\n\n# Test the function\nprint(check_or(5))   # Expected output: True\nprint(check_or(15))  # Expected output: False\nprint(check_or(25))  # Expected output: True",
+      "tests": [
+        {
+          "input": "5",
+          "output": "True"
+        },
+        {
+          "input": "15",
+          "output": "False"
+        },
+        {
+          "input": "25",
+          "output": "True"
+        }
+      ]
+    }
+  ]
+}

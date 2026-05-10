@@ -1,0 +1,128 @@
+{
+  "topics": {
+    "python-v2": {
+      "python-2": {
+        "indentation-and-blocks": {
+          "label": "Indentation and Blocks",
+          "summary": "Understand why indentation controls structure in Python.",
+          "cards": {
+            "sketch0": {
+              "title": "Indentation shows which lines belong together"
+            },
+            "sketch1": {
+              "title": "Blocks must line up correctly"
+            },
+            "sketch2": {
+              "title": "Common mistakes with indentation"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Build a simple result checker"
+            }
+          },
+          "projectSteps": {
+            "code_fix_basic_indentation": {
+              "title": "Print a message only when the condition is true"
+            },
+            "code_elif_else_label": {
+              "title": "Label a number with if, elif, and else"
+            },
+            "code_two_line_branch": {
+              "title": "Use a multi-line block"
+            }
+          },
+          "quiz": {
+            "mc-indent-membership": {
+              "title": "Choose the lines inside the block",
+              "prompt": "Look at this code:\n\n```python\nvalue = 7\n\nif value > 5:\n    print(\"A\")\n    print(\"B\")\nprint(\"C\")\n```\n\nWhich statements are true? Choose all correct answers.",
+              "hint": "Focus on which lines are indented under the `if` line.",
+              "help": {
+                "concept": "In Python, indentation defines a block. Lines indented under `if`, `elif`, or `else` belong to that branch. A line that is not indented to the same level is outside the block.",
+                "hint_1": "Two lines are directly indented under the `if` statement.",
+                "hint_2": "The last `print` line starts at the left margin, so it is not part of the `if` block."
+              },
+              "options": {
+                "a": "The line `print(\"A\")` is inside the `if` block.",
+                "b": "The line `print(\"B\")` is inside the `if` block.",
+                "c": "The line `print(\"C\")` is inside the `if` block.",
+                "d": "All three `print` lines belong to the same block."
+              }
+            },
+            "fb-colon-starts-block": {
+              "title": "Complete the rule",
+              "prompt": "Fill in the missing word.",
+              "hint": "Think about what comes right after an `if` line ends with `:`.",
+              "help": {
+                "concept": "After a Python line such as `if condition:`, the next block must be the missing term. That indentation tells Python which statements belong to the condition.",
+                "hint_1": "The missing word describes moving code to the right.",
+                "hint_2": "It is the formatting rule that creates a block after `if`, `elif`, or `else`."
+              },
+              "template": "After an `if` line ending with `:`, the next statement in the block must be ____.",
+              "choices": [
+                "compared",
+                "printed",
+                "indented",
+                "repeated"
+              ]
+            },
+            "code-fix-basic-indentation": {
+              "title": "Print a message only when the condition is true",
+              "prompt": "Write Python code that reads one integer from input. If the number is greater than 0, print `Positive`. Then always print `Done` on the next line when appropriate.\n\nExamples:\n- Input `5` prints `Positive` and then `Done`\n- Input `0` prints only `Done`\n\nType code in the code editor, click Run, and check the output panel.",
+              "hint": "Use an `if` statement with one indented `print`, then another `print` outside the block.",
+              "help": {
+                "concept": "Indented lines belong to the `if` block and run only when the condition is true. A line with no indentation after the block runs regardless of the condition.",
+                "hint_1": "Read the number first, then test whether it is greater than zero.",
+                "hint_2": "One output line should be inside the `if` block, and the final output line should be outside it."
+              },
+              "starterCode": "n = int(input())\n\n# Write your code below"
+            },
+            "code-elif-else-label": {
+              "title": "Label a number with if, elif, and else",
+              "prompt": "Write Python code that reads one integer.\n- Print `negative` if the number is less than 0\n- Print `zero` if the number is exactly 0\n- Otherwise print `positive`\n\nUse an `if` / `elif` / `else` chain with correct indentation.",
+              "hint": "Focus on the programming task being asked for, not on copying final solution text.",
+              "help": {
+                "concept": "Build the solution from the behavior the exercise is testing.",
+                "hint_1": "Think about which steps, functions, or statements are required for the task.",
+                "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "n = int(input())\n\n# Write your code below"
+            },
+            "code-two-line-branch": {
+              "title": "Use a multi-line block",
+              "prompt": "Write Python code that reads one integer score.\n- If the score is 50 or more, print `Pass` and then print `You met the requirement`\n- Otherwise, print `Try again`\n\nUse indentation so the two success messages are in the same block.",
+              "hint": "Focus on the programming task being asked for, not on copying final solution text.",
+              "help": {
+                "concept": "Build the solution from the behavior the exercise is testing.",
+                "hint_1": "Think about which steps, functions, or statements are required for the task.",
+                "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "score = int(input())\n\n# Write your code below"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-v2": {
+      "python-2": {
+        "indentation-and-blocks": {
+          "indentation-defines-blocks": {
+            "title": "Indentation shows which lines belong together",
+            "bodyMarkdown": "In Python, indentation is not just for neat formatting. It tells Python which lines are inside a block.\n\nA block is a group of lines that belong to a statement like `if`, `elif`, or `else`.\n\n```python\nage = 16\n\nif age >= 18:\n    print(\"Adult\")\nprint(\"Done\")\n```\n\nStep by step:\n- `if age >= 18:` checks a condition.\n- The indented line under it belongs to the `if` block.\n- `print(\"Done\")` is not indented, so it is outside the block.\n\nBecause `age` is `16`, the program does not print `Adult`. It still prints `Done`.\n\nWorked example:\n\n```python\nscore = 82\n\nif score >= 50:\n    print(\"Pass\")\n    print(\"You met the requirement\")\nprint(\"Check complete\")\n```\n\nHere, both indented lines run only when the condition is true. The last line runs after the `if` block.\n\nTry it yourself: Type the example in the code editor, click Run, then change `score` to `40` and compare the output panel."
+          },
+          "matching-if-elif-else": {
+            "title": "Blocks must line up correctly",
+            "bodyMarkdown": "Python uses matching indentation to show which `elif` and `else` belong to an `if`.\n\n```python\ntemperature = 30\n\nif temperature > 30:\n    print(\"Hot\")\nelif temperature > 20:\n    print(\"Warm\")\nelse:\n    print(\"Cool\")\n```\n\nLine by line:\n- `if temperature > 30:` starts the first branch.\n- `elif temperature > 20:` lines up with `if`, so it is another branch in the same chain.\n- `else:` also lines up with `if`, so it belongs to that same decision.\n- Each `print` line is indented because it belongs to its branch.\n\nIf you indent `else` too far, Python treats it as being in the wrong place and raises an error.\n\nWorked example:\n- If `temperature` is `30`, the first condition is false.\n- The `elif` condition is true.\n- The program prints `Warm`.\n\nYour turn: Change `temperature` to `35`, then to `15`, click Run each time, and notice which block runs."
+          },
+          "common-indentation-mistakes": {
+            "title": "Common mistakes with indentation",
+            "bodyMarkdown": "A very common beginner mistake is forgetting to indent after a line ending with `:`.\n\nThis is wrong:\n\n```python\nnumber = 5\n\nif number > 0:\nprint(\"Positive\")\n```\n\nPython expects an indented block after `if number > 0:`.\n\nThis is correct:\n\n```python\nnumber = 5\n\nif number > 0:\n    print(\"Positive\")\n```\n\nAnother mistake is mixing lines that should be together:\n\n```python\npoints = 12\n\nif points >= 10:\n    print(\"Level up\")\n    print(\"Bonus unlocked\")\nprint(\"Round finished\")\n```\n\nIn this example:\n- The first two `print` lines are inside the `if` block.\n- `print(\"Round finished\")` is outside the block.\n\nSo if `points` were less than `10`, only `Round finished` would print.\n\nTry this: Type the example in the code editor, click Run, then change `points` to `8` and predict the output before checking the output panel.\n\nLine by line: read the first statement to see which value is stored or checked, then follow each conditional branch in order to see which path prints the final result."
+          }
+        }
+      }
+    }
+  }
+}

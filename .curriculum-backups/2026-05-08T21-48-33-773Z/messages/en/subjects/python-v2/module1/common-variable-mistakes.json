@@ -1,0 +1,130 @@
+{
+  "topics": {
+    "python-v2": {
+      "python-1": {
+        "common-variable-mistakes": {
+          "label": "Common Variable Mistakes",
+          "summary": "Avoid undefined names, accidental strings, and confusing names.",
+          "cards": {
+            "sketch0": {
+              "title": "Undefined Variables"
+            },
+            "sketch1": {
+              "title": "Accidental Strings"
+            },
+            "sketch2": {
+              "title": "Confusing Variable Names"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Practice"
+            }
+          },
+          "projectSteps": {
+            "quiz4": {
+              "title": "Variable Assignment"
+            },
+            "quiz5": {
+              "title": "String Concatenation"
+            }
+          },
+          "quiz": {
+            "quiz1": {
+              "title": "Identify the Error",
+              "prompt": "What is the error in the following code?\n\n```python\nprint(name)\n```",
+              "hint": "The variable 'name' has not been defined.",
+              "help": {
+                "concept": "A NameError occurs when you try to use a variable that hasn't been defined.",
+                "hint_1": "Check if the variable 'name' has been assigned a value.",
+                "hint_2": "Ensure all variables are defined before use."
+              },
+              "options": {
+                "a": "Syntax error",
+                "b": "NameError: name 'name' is not defined",
+                "c": "TypeError",
+                "d": "IndentationError"
+              }
+            },
+            "quiz2": {
+              "title": "Correct Variable Usage",
+              "prompt": "Which of the following are correct ways to define and use a variable in Python? (Choose all that apply)",
+              "hint": "Remember that the variable name must be on the left side of the assignment.",
+              "help": {
+                "concept": "Variables must be assigned a value before they can be used.",
+                "hint_1": "Check the syntax of each option.",
+                "hint_2": "Ensure the variable is defined before use."
+              },
+              "options": {
+                "a": "x = 10",
+                "b": "10 = x",
+                "c": "y = 'Hello'",
+                "d": "print(z)"
+              }
+            },
+            "quiz3": {
+              "title": "Fix the Code",
+              "prompt": "Choose the best value for the first missing blank in the statement.",
+              "hint": "Convert the input to an integer before adding.",
+              "help": {
+                "concept": "Use type conversion to ensure the input is treated as a number.",
+                "hint_1": "Use `int()` to convert a string to an integer.",
+                "hint_2": "Wrap the variable with `int()` in the print statement."
+              },
+              "template": "The first missing value is [blank1].",
+              "choices": [
+                "int(age)",
+                "age",
+                "str(age)",
+                "float(age)"
+              ]
+            },
+            "quiz4": {
+              "title": "Variable Assignment",
+              "prompt": "Write a Python program that assigns the value 42 to a variable named `answer` and prints it.",
+              "hint": "Assign the value to the variable and use the print function.",
+              "help": {
+                "concept": "Variable assignment stores a value in a variable, which can then be used in your program.",
+                "hint_1": "Use the assignment operator `=` to assign a value.",
+                "hint_2": "Use `print()` to display the variable's value."
+              },
+              "starterCode": "# Assign the value 42 to a variable and print it"
+            },
+            "quiz5": {
+              "title": "String Concatenation",
+              "prompt": "Create a Python program that asks the user for their first and last name, then prints a greeting using both names.",
+              "hint": "Focus on the programming task being asked for, not on copying final solution text.",
+              "help": {
+                "concept": "Build the solution from the behavior the exercise is testing.",
+                "hint_1": "Think about which steps, functions, or statements are required for the task.",
+                "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "# Ask for first and last name, then print a greeting"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-v2": {
+      "python-1": {
+        "common-variable-mistakes": {
+          "sketch1": {
+            "title": "Undefined Variables",
+            "bodyMarkdown": "An undefined variable is one that has been referenced in your code but hasn't been assigned a value. This often results in a runtime error. \n\nExample:\n\n```python\nprint(x)\n```\n\nThis will cause an error because `x` has not been defined. \n\nTry it yourself: Define a variable `x` and assign it a value before printing it."
+          },
+          "sketch2": {
+            "title": "Accidental Strings",
+            "bodyMarkdown": "Sometimes, variables are accidentally treated as strings due to incorrect assignment or input handling. \n\nExample:\n\n```python\nage = input('Enter your age: ')\nprint(age + 5)\n```\n\nThis will cause an error because `age` is a string. Convert it to an integer using `int()`.\n\nTry this: Modify the code to correctly add 5 to the age.\n\nLine by line: read the first statement to see which value is stored or checked, then follow each conditional branch in order to see which path prints the final result."
+          },
+          "sketch3": {
+            "title": "Confusing Variable Names",
+            "bodyMarkdown": "Using confusing or similar variable names can lead to mistakes and make your code hard to read. \n\nExample:\n\n```python\nvalue1 = 10\nvalue2 = 20\nvalue = value1 + value2\n```\n\nIt's better to use descriptive names like `first_value` and `second_value`.\n\nYour turn: Rename the variables to make the code clearer.\n\nLine by line: read the first statement to see which value is stored or checked, then follow each conditional branch in order to see which path prints the final result."
+          }
+        }
+      }
+    }
+  }
+}

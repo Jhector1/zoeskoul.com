@@ -53,7 +53,24 @@ function makeShapePack() {
 function makeSeed() {
     return {
         subjectSlug: "sql",
+        profileId: "sql",
+
+        moduleSlug: "sql_module_0",
+        modulePrefix: "sql0",
+        moduleOrder: 0,
+
+        sectionSlug: "section_0_1",
+        sectionOrder: 1,
+
         topicId: "what-sql-means",
+        order: 1,
+        title: "What SQL Means",
+        summary: "Intro topic",
+        minutes: 15,
+
+        sourceLocale: "en",
+        targetLocales: [],
+
         moduleRuntimeDefaults: {
             kind: "sql",
             datasetId: "students_intro",
@@ -111,12 +128,27 @@ function makePythonShapePack() {
         },
     } as any;
 }
-
 function makePythonSeed() {
     return {
         profileId: "python",
         subjectSlug: "python-for-beginners",
+
+        moduleSlug: "python-1",
+        modulePrefix: "py1",
+        moduleOrder: 1,
+
+        sectionSlug: "python-1-section-1",
+        sectionOrder: 1,
+
         topicId: "read-and-add",
+        order: 1,
+        title: "Read and Add",
+        summary: "Read input and add one.",
+        minutes: 15,
+
+        sourceLocale: "en",
+        targetLocales: [],
+
         moduleRuntimeDefaults: {
             kind: "code",
             language: "python",
@@ -145,8 +177,7 @@ describe("buildTopicBundleFromDraft messageBase integration", () => {
         const bundle = buildTopicBundleFromDraft({
             shape: makeShapePack(),
             seed: makeSeed(),
-            moduleOrder: 0,
-            sectionOrder: 1,
+
             draft: makeDraftWithExercise({
                 id: "single-1",
                 kind: "single_choice",
@@ -173,8 +204,7 @@ describe("buildTopicBundleFromDraft messageBase integration", () => {
         const bundle = buildTopicBundleFromDraft({
             shape: makeShapePack(),
             seed: makeSeed(),
-            moduleOrder: 0,
-            sectionOrder: 1,
+
             draft: makeDraftWithExercise({
                 id: "single-1",
                 messageBase: "quiz.table-definition",
@@ -241,8 +271,7 @@ describe("buildTopicBundleFromDraft messageBase integration", () => {
             buildTopicBundleFromDraft({
                 shape: makeShapePack(),
                 seed: makeSeed(),
-                moduleOrder: 0,
-                sectionOrder: 1,
+
                 draft,
             }),
         ).toThrow(/Duplicate messageBase/i);
@@ -271,8 +300,7 @@ describe("buildTopicBundleFromDraft messageBase integration", () => {
                 ...makeSeed(),
                 topicId: "topic-a",
             },
-            moduleOrder: 0,
-            sectionOrder: 1,
+
             draft: makeDraftWithExercise(exercise),
         });
 
@@ -282,8 +310,7 @@ describe("buildTopicBundleFromDraft messageBase integration", () => {
                 ...makeSeed(),
                 topicId: "topic-b",
             },
-            moduleOrder: 0,
-            sectionOrder: 1,
+
             draft: makeDraftWithExercise(exercise),
         });
 
@@ -302,8 +329,7 @@ describe("buildTopicBundleFromDraft messageBase integration", () => {
         const bundle = buildTopicBundleFromDraft({
             shape: makePythonShapePack(),
             seed: makePythonSeed(),
-            moduleOrder: 1,
-            sectionOrder: 1,
+
             draft: makeDraftWithExercise({
                 id: "code-1",
                 kind: "code_input",
@@ -337,8 +363,7 @@ describe("buildTopicBundleFromDraft messageBase integration", () => {
             buildTopicBundleFromDraft({
                 shape: makePythonShapePack(),
                 seed: makePythonSeed(),
-                moduleOrder: 1,
-                sectionOrder: 1,
+
                 draft: makeDraftWithExercise({
                     id: "code-1",
                     kind: "code_input",

@@ -3,6 +3,8 @@ import "server-only";
 import { prisma } from "@/lib/prisma";
 import { getResolvedSubjectCatalogMap } from "@/lib/subjects/server/resolveSubjectPresentation";
 
+import {selectVisibleSubjectsForActor, withSubjectEnrollment} from "@/lib/subjects/server/subjectVisibility";
+
 export type OnboardingSubjectOption = {
     id?: string;
     slug: string;
@@ -44,8 +46,26 @@ export async function getOnboardingSubjects(): Promise<OnboardingSubjectOption[]
         getResolvedSubjectCatalogMap(),
     ]);
 
-    return subjects.map((s) => {
-        const resolved = manifestMap[s.slug];
+    const mappedSubjects = subjects
+        .map((subject) => {
+            const resolved = manifestMap[subject.slug];
+
+            if (!resolved) return null;
+
+            return {
+                db: subject,
+                slug: subject.slug,
+                versioning: resolved.versioning,
+                resolved,
+            };
+        })
+        .filter((subject): subject is NonNullable<typeof subject> => Boolean(subject));
+
+    const visibleSubjects = selectVisibleSubjectsForActor(
+        await withSubjectEnrollment(mappedSubjects),
+    );
+
+    return visibleSubjects.map(({ db: s, resolved }) => {
         const imagePublicId = resolved?.imagePublicId ?? s.imagePublicId;
 
         return {
@@ -60,7 +80,11 @@ export async function getOnboardingSubjects(): Promise<OnboardingSubjectOption[]
             imageUrl: imagePublicId
                 ? `https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/${imagePublicId}`
                 : null,
-            imageAlt: resolved?.imageAlt ?? s.imageAlt ?? resolved?.title ?? s.title,
+            imageAlt:
+                resolved?.imageAlt ??
+                s.imageAlt ??
+                resolved?.title ??
+                s.title,
         };
     });
 }

@@ -12,7 +12,14 @@ export type SubjectCurriculumManifestMeta = {
     isTerminalRelease?: boolean;
     moreComingMessageKey?: string;
 };
-
+export type SubjectVersioningManifestMeta = {
+    family: string;
+    version: number;
+    status: "draft" | "active" | "legacy" | "disabled";
+    defaultForNewEnrollments?: boolean;
+    supersedes?: string | null;
+    supersededBy?: string | null;
+};
 export type SubjectCompletionPolicyManifestMeta = {
     requireAllPublishedModules?: boolean;
     rewardEnabledByDefault?: boolean;
@@ -33,6 +40,7 @@ export type SubjectManifest = {
         descriptionKey?: string | null;
         serviceDefaults?: LearningIdeConfig | null;
         meta?: {
+            versioning?: SubjectVersioningManifestMeta;
             curriculum?: SubjectCurriculumManifestMeta;
             completionPolicy?: SubjectCompletionPolicyManifestMeta;
         };

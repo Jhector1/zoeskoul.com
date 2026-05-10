@@ -1,0 +1,192 @@
+{
+  "topicId": "common-variable-mistakes",
+  "subjectSlug": "python-v2",
+  "moduleSlug": "python-1",
+  "sectionSlug": "python-v2-python-1-core-building-blocks-1",
+  "prefix": "py1",
+  "minutes": 18,
+  "topic": {
+    "labelKey": "topics.python-v2.python-1.common-variable-mistakes.label",
+    "summaryKey": "topics.python-v2.python-1.common-variable-mistakes.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-1.common-variable-mistakes.cards.sketch0.title",
+      "sketchId": "spot-undefined-names",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-1.common-variable-mistakes.cards.sketch1.title",
+      "sketchId": "numbers-vs-strings",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-1.common-variable-mistakes.cards.sketch2.title",
+      "sketchId": "clear-variable-names",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.python-v2.python-1.common-variable-mistakes.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 3,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python-v2.python-1.common-variable-mistakes.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "ci_fix_undefined_total",
+            "titleKey": "topics.python-v2.python-1.common-variable-mistakes.projectSteps.ci_fix_undefined_total.title",
+            "exerciseKey": "ci-fix-undefined-total",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "ci_fix_string_math",
+            "titleKey": "topics.python-v2.python-1.common-variable-mistakes.projectSteps.ci_fix_string_math.title",
+            "exerciseKey": "ci-fix-string-math",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "spot-undefined-names",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-1.common-variable-mistakes.spot-undefined-names.title",
+      "bodyKey": "sketches.python-v2.python-1.common-variable-mistakes.spot-undefined-names.bodyMarkdown"
+    },
+    {
+      "id": "numbers-vs-strings",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-1.common-variable-mistakes.numbers-vs-strings.title",
+      "bodyKey": "sketches.python-v2.python-1.common-variable-mistakes.numbers-vs-strings.bodyMarkdown"
+    },
+    {
+      "id": "clear-variable-names",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-1.common-variable-mistakes.clear-variable-names.title",
+      "bodyKey": "sketches.python-v2.python-1.common-variable-mistakes.clear-variable-names.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "ci-fix-undefined-total",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-1.common-variable-mistakes.quiz.ci-fix-undefined-total",
+      "language": "python",
+      "starterCode": "print(total)\ntotal = 15",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "15\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "total = 15\nprint(total)"
+      }
+    },
+    {
+      "id": "sc-quoted-number-meaning",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-1.common-variable-mistakes.quiz.sc-quoted-number-meaning",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "mc-good-variable-habits",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-1.common-variable-mistakes.quiz.mc-good-variable-habits",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "fb-int-conversion",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-1.common-variable-mistakes.quiz.fb-int-conversion",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "int"
+      }
+    },
+    {
+      "id": "ci-fix-string-math",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-1.common-variable-mistakes.quiz.ci-fix-string-math",
+      "language": "python",
+      "starterCode": "age = \"12\"\nprint(age + \"1\")",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "13\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "age = 12\nprint(age + 1)"
+      }
+    }
+  ]
+}

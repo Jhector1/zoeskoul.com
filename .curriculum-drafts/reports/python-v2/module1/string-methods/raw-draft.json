@@ -1,0 +1,108 @@
+{
+  "title": "Useful String Methods",
+  "summary": "Use methods like lower, strip, replace, split, and join.",
+  "minutes": 25,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Introduction to String Methods",
+      "bodyMarkdown": "In Python, strings are sequences of characters. You can manipulate strings using various methods. For example, the `lower()` method converts all characters in a string to lowercase. Here's a simple example:\n\n```python\ntext = \"Hello World\"\nprint(text.lower())  # Output: hello world\n```\n\nTry it yourself! Use the `upper()` method to convert the string to uppercase."
+    },
+    {
+      "id": "sketch2",
+      "title": "Using the strip Method",
+      "bodyMarkdown": "The `strip()` method removes any leading and trailing whitespace from a string. For example:\n\n```python\ntext = \"   Hello World   \"\nprint(text.strip())  # Output: 'Hello World'\n```\n\nYour turn! Try using `strip()` on a string with extra spaces."
+    },
+    {
+      "id": "sketch3",
+      "title": "Replacing Substrings",
+      "bodyMarkdown": "You can replace parts of a string using the `replace()` method. For instance:\n\n```python\ntext = \"I like apples\"\nnew_text = text.replace(\"apples\", \"bananas\")\nprint(new_text)  # Output: I like bananas\n```\n\nTry this! Replace 'like' with 'love' in a string of your choice."
+    },
+    {
+      "id": "sketch4",
+      "title": "Splitting Strings",
+      "bodyMarkdown": "The `split()` method divides a string into a list based on a specified delimiter. For example:\n\n```python\ntext = \"apple,banana,cherry\"\nfruits = text.split(',')\nprint(fruits)  # Output: ['apple', 'banana', 'cherry']\n```\n\nTry it yourself! Split a sentence into words."
+    },
+    {
+      "id": "sketch5",
+      "title": "Joining Strings",
+      "bodyMarkdown": "You can join a list of strings into a single string using the `join()` method. For example:\n\n```python\nfruits = ['apple', 'banana', 'cherry']\nresult = ', '.join(fruits)\nprint(result)  # Output: apple, banana, cherry\n```\n\nYour turn! Join a list of your favorite hobbies into a single string."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "quiz1",
+      "kind": "single_choice",
+      "title": "What does the lower() method do?",
+      "prompt": "Select the correct answer.",
+      "options": [
+        "Converts a string to uppercase",
+        "Converts a string to lowercase",
+        "Removes whitespace from a string",
+        "Replaces a substring in a string"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Think about how the method affects the case of letters.",
+      "help": {
+        "concept": "The lower() method is used to convert all characters in a string to lowercase.",
+        "hint_1": "This method is useful for standardizing input.",
+        "hint_2": "Look for the option that describes changing uppercase letters to lowercase."
+      }
+    },
+    {
+      "id": "quiz2",
+      "kind": "multi_choice",
+      "title": "Which of the following methods can be used to manipulate strings?",
+      "prompt": "Select all that apply.",
+      "options": [
+        "strip()",
+        "append()",
+        "replace()",
+        "split()"
+      ],
+      "correctOptionIds": [
+        "a",
+        "c",
+        "d"
+      ],
+      "hint": "Consider methods that are specifically designed for string operations.",
+      "help": {
+        "concept": "strip(), replace(), and split() are all methods that can be used on strings.",
+        "hint_1": "One of the options is not a string method.",
+        "hint_2": "Think about methods that modify or analyze string content."
+      }
+    },
+    {
+      "id": "quiz3",
+      "kind": "fill_blank_choice",
+      "title": "Fill in the blank: The method used to remove whitespace from both ends of a string is called ___.",
+      "prompt": "Choose the correct method name.",
+      "template": "The method used to remove whitespace from both ends of a string is called ___.",
+      "choices": [
+        "strip()",
+        "trim()",
+        "remove()",
+        "clean()"
+      ],
+      "correctValue": "strip()"
+    },
+    {
+      "id": "quiz4",
+      "kind": "code_input",
+      "title": "Use the split method",
+      "prompt": "Write a program that splits the string 'apple,banana,cherry' into a list of fruits.",
+      "starterCode": "fruits_string = 'apple,banana,cherry'\n# Your code here\n",
+      "solutionCode": "fruits_string = 'apple,banana,cherry'\nfruits_list = fruits_string.split(',')\nprint(fruits_list)"
+    },
+    {
+      "id": "quiz5",
+      "kind": "code_input",
+      "title": "Join a list of strings",
+      "prompt": "Write a program that joins the list ['Python', 'is', 'fun'] into a single string with spaces.",
+      "starterCode": "words = ['Python', 'is', 'fun']\n# Your code here\n",
+      "solutionCode": "words = ['Python', 'is', 'fun']\njoined_string = ' '.join(words)\nprint(joined_string)"
+    }
+  ]
+}

@@ -34,6 +34,15 @@ function getSubjectStatus(subject: unknown): "active" | "coming_soon" | "disable
     return value === "coming_soon" || value === "disabled" ? value : "active";
 }
 
+export type ResolvedSubjectVersioning = {
+    family: string;
+    version: number;
+    status: "draft" | "active" | "legacy" | "disabled";
+    defaultForNewEnrollments?: boolean;
+    supersedes?: string | null;
+    supersededBy?: string | null;
+};
+
 export type ResolvedSubjectCatalogItem = {
     slug: string;
     title: string;
@@ -41,6 +50,7 @@ export type ResolvedSubjectCatalogItem = {
     imagePublicId: string | null;
     imageAlt: string | null;
     defaultModuleSlug: string | null;
+    versioning?: ResolvedSubjectVersioning;
 };
 
 export type ResolvedSubjectCatalogMap = Record<string, ResolvedSubjectCatalogItem>;
@@ -132,14 +142,38 @@ function normalizeRuntimeDefaults(
             ...(typeof v.resultShape === "string"
                 ? { resultShape: v.resultShape as any }
                 : {}),
+            ...(typeof v.showSchema === "boolean" ? { showSchema: v.showSchema } : {}),
+            ...(typeof v.showErd === "boolean" ? { showErd: v.showErd } : {}),
+            ...(typeof v.showChen === "boolean" ? { showChen: v.showChen } : {}),
+            ...(typeof v.supportsTerminal === "boolean"
+                ? { supportsTerminal: v.supportsTerminal }
+                : {}),
+            ...(typeof v.supportsMultiFile === "boolean"
+                ? { supportsMultiFile: v.supportsMultiFile }
+                : {}),
+            ...(typeof v.supportsFileSystem === "boolean"
+                ? { supportsFileSystem: v.supportsFileSystem }
+                : {}),
         };
     }
-
     if (v.kind === "code") {
         return {
             kind: "code",
-            ...(typeof v.language === "string"
-                ? { language: v.language as any }
+            ...(typeof v.language === "string" ? { language: v.language as any } : {}),
+            ...(typeof v.supportsTerminal === "boolean"
+                ? { supportsTerminal: v.supportsTerminal }
+                : {}),
+            ...(typeof v.supportsMultiFile === "boolean"
+                ? { supportsMultiFile: v.supportsMultiFile }
+                : {}),
+            ...(typeof v.supportsFileSystem === "boolean"
+                ? { supportsFileSystem: v.supportsFileSystem }
+                : {}),
+            ...(typeof v.supportsStdInStdOut === "boolean"
+                ? { supportsStdInStdOut: v.supportsStdInStdOut }
+                : {}),
+            ...(typeof v.supportsPackageInstall === "boolean"
+                ? { supportsPackageInstall: v.supportsPackageInstall }
                 : {}),
         };
     }
@@ -233,7 +267,7 @@ async function resolveSubjectCatalogItem(
         imageAlt: resolved.imageAlt ?? resolved.title ?? subject.slug,
         defaultModuleSlug,
         status: getSubjectStatus(subject),
-    };
+        versioning: subject.meta?.versioning as ResolvedSubjectVersioning | undefined,    };
 }
 
 export async function getResolvedSubjectCardMap(): Promise<ResolvedSubjectCatalogMap> {

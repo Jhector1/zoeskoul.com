@@ -9,6 +9,8 @@ import type {
 
 import python from "./python/subject.manifest.json";
 import { TOPIC_MANIFESTS as pythonTopicManifests } from "./python/topics.generated";
+import pythonV2 from "./python-v2/subject.manifest.json";
+import { TOPIC_MANIFESTS as pythonV2TopicManifests } from "./python-v2/topics.generated";
 import sql from "./sql/subject.manifest.json";
 import { TOPIC_MANIFESTS as sqlTopicManifests } from "./sql/topics.generated";
 
@@ -17,6 +19,7 @@ export type GeneratedSubjectGenKey = "python_part1" | "sql_for_beginners";
 
 export const SUBJECT_MANIFESTS: Record<string, SubjectManifest> = {
   "python": python as SubjectManifest,
+  "python-v2": pythonV2 as SubjectManifest,
   "sql": sql as SubjectManifest,
 };
 
@@ -35,6 +38,12 @@ export const SUBJECT_GENERATOR_SOURCES: Record<
     manifest: python as SubjectManifest,
     topicManifests: pythonTopicManifests as TopicManifestRefMap,
   },
+  "python-v2": {
+    subjectSlug: "python-v2",
+    genKey: "python_part1",
+    manifest: pythonV2 as SubjectManifest,
+    topicManifests: pythonV2TopicManifests as TopicManifestRefMap,
+  },
   "sql": {
     subjectSlug: "sql",
     genKey: "sql_for_beginners",
@@ -47,6 +56,6 @@ export const SUBJECT_GENERATOR_SOURCES_BY_GENKEY: Record<
   GeneratedSubjectGenKey,
   Array<(typeof SUBJECT_GENERATOR_SOURCES)[keyof typeof SUBJECT_GENERATOR_SOURCES]>
 > = {
-  "python_part1": [SUBJECT_GENERATOR_SOURCES["python"]],
+  "python_part1": [SUBJECT_GENERATOR_SOURCES["python"], SUBJECT_GENERATOR_SOURCES["python-v2"]],
   "sql_for_beginners": [SUBJECT_GENERATOR_SOURCES["sql"]],
 };

@@ -12,7 +12,7 @@ export * from "./sql-dataset.js";
 export * from "./publish-gate.js";
 
 export * from "./course-spec.js";
-
+export * from "./workspace.js";
 
 export * from "./exercise-policy.js";
 export * from "./ide-services.js";

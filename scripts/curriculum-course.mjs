@@ -1,20 +1,29 @@
-import { existsSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { spawnSync } from "node:child_process";
 import path from "node:path";
+
 const args = process.argv.slice(2).filter((arg) => arg !== "--");
 
-const [action, courseSlug] = args;
+const [action, courseSlug, ...flags] = args;
+const force = flags.includes("--force");
+const resume = flags.includes("--resume");
 if (!action || !courseSlug) {
   console.error(`
 Usage:
-  pnpm curr:course -- <action> <courseSlug>
+  pnpm curr:course -- <action> <courseSlug> [flags]
 
 Examples:
-  pnpm curr:course -- compile python-for-beginners
-  pnpm curr:course -- validate python-for-beginners
-  pnpm curr:course -- publish python-for-beginners
-  pnpm curr:course -- check python-for-beginners
+  pnpm curr:course -- compile python
+  pnpm curr:course -- compile python --resume
+  pnpm curr:course -- validate python
+  pnpm curr:course -- publish python
+  pnpm curr:course -- check python --resume
+  pnpm curr:course -- publish python-v2
+pnpm curr:course -- publish python-v2 --force
 
+Flags:
+ --resume    Skip topics that already have completed draft artifacts
+  --force     Allow publish/publish-auto to overwrite an existing subject release
 Actions:
   compile
   validate
@@ -31,7 +40,40 @@ Actions:
 const root = process.cwd();
 const courseDir = path.join(root, "authoring", courseSlug);
 const blueprintPath = path.join(courseDir, "course.blueprint.json");
+function readBlueprint() {
+  return JSON.parse(readFileSync(blueprintPath, "utf8"));
+}
 
+function assertPublishSafe() {
+  const blueprint = readBlueprint();
+  const subjectSlug = blueprint.subjectSlug;
+
+  const liveManifestPath = path.join(
+      root,
+      "apps",
+      "web",
+      "src",
+      "lib",
+      "subjects",
+      subjectSlug,
+      "subject.manifest.json"
+  );
+
+  if (!force && existsSync(liveManifestPath)) {
+    console.error(`
+Refusing to publish because this subject release already exists:
+
+  ${liveManifestPath}
+
+This could overwrite an existing course release.
+
+Use --force only if you intentionally want to replace this exact release:
+
+  pnpm curr:course -- ${action} ${courseSlug} --force
+`);
+    process.exit(1);
+  }
+}
 function run(command, args) {
   console.log(`\n> ${command} ${args.join(" ")}\n`);
 
@@ -65,7 +107,11 @@ if (
 
 switch (action) {
   case "compile":
-    cli(["compile-subject", blueprintPath]);
+    cli([
+      "compile-subject",
+      blueprintPath,
+      ...(resume ? ["--resume"] : []),
+    ]);
     break;
 
   case "validate":
@@ -77,10 +123,12 @@ switch (action) {
     break;
 
   case "publish":
+    assertPublishSafe();
     cli(["publish", blueprintPath]);
     break;
 
   case "publish-auto":
+    assertPublishSafe();
     cli(["publish-auto", blueprintPath]);
     break;
 
@@ -95,7 +143,11 @@ switch (action) {
   case "check":
     run("pnpm", ["curr:build"]);
     cli(["validate-spec", courseSlug]);
-    cli(["compile-subject", blueprintPath]);
+    cli([
+      "compile-subject",
+      blueprintPath,
+      ...(resume ? ["--resume"] : []),
+    ]);
     cli(["validate", courseSlug]);
     cli(["critique-subject-draft", blueprintPath]);
     run("pnpm", ["curr:test:golden"]);

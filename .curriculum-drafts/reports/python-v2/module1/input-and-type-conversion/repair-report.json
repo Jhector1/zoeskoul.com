@@ -1,0 +1,33 @@
+{
+  "topicId": "input-and-type-conversion",
+  "repairs": [
+    {
+      "code": "PYTHON_SKETCH_LINE_BY_LINE_EXPLANATION_ADDED",
+      "category": "text",
+      "severity": "medium",
+      "field": "sketchBlocks.sketch_1.bodyMarkdown",
+      "message": "Added a short line-by-line explanation after a multi-line code example."
+    },
+    {
+      "code": "PYTHON_SKETCH_LINE_BY_LINE_EXPLANATION_ADDED",
+      "category": "text",
+      "severity": "medium",
+      "field": "sketchBlocks.sketch_2.bodyMarkdown",
+      "message": "Added a short line-by-line explanation after a multi-line code example."
+    },
+    {
+      "code": "PYTHON_INPUT_PROMPT_REMOVED",
+      "category": "recipe",
+      "severity": "medium",
+      "field": "quiz_1",
+      "message": "Removed interactive input prompts from Python code_input starter and solution code so fixed tests only validate program output."
+    },
+    {
+      "code": "PYTHON_POLICY_CODE_INPUT_SYNTHESIZED",
+      "category": "other",
+      "severity": "medium",
+      "field": "policy_code_input_1",
+      "message": "Added a fallback code_input exercise to satisfy the planned exercise mix for \"input-and-type-conversion\"."
+    }
+  ]
+}

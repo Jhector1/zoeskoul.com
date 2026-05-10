@@ -1,0 +1,180 @@
+{
+  "topicId": "naming-and-assigning-variables",
+  "subjectSlug": "python-v2",
+  "moduleSlug": "python-v2-1",
+  "sectionSlug": "python-v2-1-variables-and-assignment",
+  "prefix": "pyv2_1",
+  "minutes": 22,
+  "topic": {
+    "labelKey": "topics.python-v2.python-v2-1.naming-and-assigning-variables.label",
+    "summaryKey": "topics.python-v2.python-v2-1.naming-and-assigning-variables.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-v2-1.naming-and-assigning-variables.cards.sketch0.title",
+      "sketchId": "1",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-v2-1.naming-and-assigning-variables.cards.sketch1.title",
+      "sketchId": "2",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.python-v2.python-v2-1.naming-and-assigning-variables.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 3,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python-v2.python-v2-1.naming-and-assigning-variables.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "1",
+            "titleKey": "topics.python-v2.python-v2-1.naming-and-assigning-variables.projectSteps.1.title",
+            "exerciseKey": "1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "5",
+            "titleKey": "topics.python-v2.python-v2-1.naming-and-assigning-variables.projectSteps.5.title",
+            "exerciseKey": "5",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-v2-1.naming-and-assigning-variables.1.title",
+      "bodyKey": "sketches.python-v2.python-v2-1.naming-and-assigning-variables.1.bodyMarkdown"
+    },
+    {
+      "id": "2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-v2-1.naming-and-assigning-variables.2.title",
+      "bodyKey": "sketches.python-v2.python-v2-1.naming-and-assigning-variables.2.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.naming-and-assigning-variables.quiz.1",
+      "language": "python",
+      "starterCode": "score = 10\n# Reassign score here\n\nprint(score)",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "20\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "score = 10\nscore = 20\nprint(score)"
+      }
+    },
+    {
+      "id": "2",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.naming-and-assigning-variables.quiz.2",
+      "choiceCount": 3,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "greeting"
+      }
+    },
+    {
+      "id": "3",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.naming-and-assigning-variables.quiz.3",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "c"
+      }
+    },
+    {
+      "id": "4",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.naming-and-assigning-variables.quiz.4",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "d",
+          "e"
+        ]
+      }
+    },
+    {
+      "id": "5",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.naming-and-assigning-variables.quiz.5",
+      "language": "python",
+      "starterCode": "# Create your variables here\n\n# Print your variables here",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "YourFirstName YourLastName\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "first_name = 'YourFirstName'\nlast_name = 'YourLastName'\nprint(first_name, last_name)"
+      }
+    }
+  ]
+}

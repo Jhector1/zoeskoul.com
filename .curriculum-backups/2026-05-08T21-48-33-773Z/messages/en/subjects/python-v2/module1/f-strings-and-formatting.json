@@ -1,0 +1,123 @@
+{
+  "topics": {
+    "python-v2": {
+      "python-1": {
+        "f-strings-and-formatting": {
+          "label": "F-Strings and Formatting",
+          "summary": "Create readable output with f-strings and formatted values.",
+          "cards": {
+            "sketch0": {
+              "title": "Introduction to F-Strings"
+            },
+            "sketch1": {
+              "title": "Formatting with F-Strings"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Practice"
+            }
+          },
+          "projectSteps": {
+            "q4": {
+              "title": "Format a Greeting"
+            },
+            "q5": {
+              "title": "Calculate and Format"
+            }
+          },
+          "quiz": {
+            "q1": {
+              "title": "Basic F-String Usage",
+              "prompt": "What is the output of the following code?\n\n```python\nname = \"Bob\"\nage = 25\nprint(f\"{name} is {age} years old.\")\n```",
+              "hint": "F-strings allow embedding variables directly into strings.",
+              "help": {
+                "concept": "F-strings are used to embed expressions inside string literals.",
+                "hint_1": "Look at how variables are embedded in the string.",
+                "hint_2": "The variables `name` and `age` are directly inserted into the string."
+              },
+              "options": {
+                "a": "Bob is 25 years old.",
+                "b": "Bob is 25.",
+                "c": "25 is Bob years old.",
+                "d": "Error: invalid syntax."
+              }
+            },
+            "q2": {
+              "title": "F-String Features",
+              "prompt": "Which of the following are true about f-strings? (Choose all that apply)",
+              "hint": "Consider the capabilities and requirements of f-strings.",
+              "help": {
+                "concept": "F-strings allow embedding expressions and formatting directly in strings.",
+                "hint_1": "F-strings are a feature of newer Python versions.",
+                "hint_2": "Think about how f-strings handle expressions and formatting."
+              },
+              "options": {
+                "a": "They can embed expressions directly.",
+                "b": "They require Python 3.6 or newer.",
+                "c": "They use the `%` operator for formatting.",
+                "d": "They can format numbers with precision."
+              }
+            },
+            "q3": {
+              "title": "F-String Syntax",
+              "prompt": "Choose the best value for the missing blank in the statement.",
+              "hint": "Consider how to format a floating-point number.",
+              "help": {
+                "concept": "F-strings can format numbers with specific precision.",
+                "hint_1": "The format specifier `.2f` is used for two decimal places.",
+                "hint_2": "Ensure the variable `price` is formatted with two decimal places."
+              },
+              "template": "The missing value is [blank1].",
+              "choices": [
+                "{price:.2f}",
+                "{price}",
+                "{:.2f}",
+                "{price:2f}"
+              ]
+            },
+            "q4": {
+              "title": "Format a Greeting",
+              "prompt": "Write a program that uses an f-string to print a greeting message that includes a user's name and age. The output should be in the format: `Hello, [name]! You are [age] years old.`",
+              "hint": "Use an f-string to embed the variables in the greeting.",
+              "help": {
+                "concept": "F-strings allow you to embed variables directly into strings.",
+                "hint_1": "Use curly braces `{}` to include variables in the string.",
+                "hint_2": "Ensure the greeting matches the specified format."
+              },
+              "starterCode": "name = \"John\"\nage = 28\n# Write your code below"
+            },
+            "q5": {
+              "title": "Calculate and Format",
+              "prompt": "Write a program that calculates the area of a circle given its radius and prints the result using an f-string. The output should be formatted to two decimal places.",
+              "hint": "Focus on the programming task being asked for, not on copying final solution text.",
+              "help": {
+                "concept": "Build the solution from the behavior the exercise is testing.",
+                "hint_1": "Think about which steps, functions, or statements are required for the task.",
+                "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "import math\nradius = 5\n# Calculate the area and print it"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-v2": {
+      "python-1": {
+        "f-strings-and-formatting": {
+          "1": {
+            "title": "Introduction to F-Strings",
+            "bodyMarkdown": "F-strings, introduced in Python 3.6, provide a way to embed expressions inside string literals, using curly braces `{}`. This makes it easier to format strings dynamically. For example:\n\n```python\nname = \"Alice\"\nage = 30\nprint(f\"{name} is {age} years old.\")\n```\n\nThis will output: `Alice is 30 years old.`\n\nTry it yourself: Change the values of `name` and `age` to see how the output changes.\n\nLine by line: read the first statement to see which value is stored or checked, then follow each conditional branch in order to see which path prints the final result."
+          },
+          "2": {
+            "title": "Formatting with F-Strings",
+            "bodyMarkdown": "F-strings can also be used to format numbers and other data types. For example, you can specify the number of decimal places for a floating-point number:\n\n```python\nvalue = 123.456789\nprint(f\"Value: {value:.2f}\")\n```\n\nThis will output: `Value: 123.46`\n\nLine by line:\n- `value = 123.456789` assigns a floating-point number to `value`.\n- `print(f\"Value: {value:.2f}\")` formats `value` to two decimal places.\n\nYour turn: Try changing the number of decimal places in the format specifier."
+          }
+        }
+      }
+    }
+  }
+}

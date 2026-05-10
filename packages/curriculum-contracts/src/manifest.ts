@@ -24,11 +24,22 @@ export type ManifestSqlRuntimeDefaults = {
   datasetId?: string;
   fixedSqlDialect?: SqlDialect;
   resultShape?: "table";
+  showSchema?: boolean;
+  showErd?: boolean;
+  showChen?: boolean;
+  supportsTerminal?: boolean;
+  supportsMultiFile?: boolean;
+  supportsFileSystem?: boolean;
 };
 
 export type ManifestCodeRuntimeDefaults = {
   kind: "code";
   language?: Exclude<WorkspaceLanguage, "sql">;
+  supportsTerminal?: boolean;
+  supportsMultiFile?: boolean;
+  supportsFileSystem?: boolean;
+  supportsStdInStdOut?: boolean;
+  supportsPackageInstall?: boolean;
 };
 
 export type ManifestRuntimeDefaults =

@@ -24,11 +24,11 @@ function sanitizeText(text: string, answers: string[], fallback: string): string
 
 function safeChoiceHelp() {
     return {
-        hint: "Focus on the concept being tested.",
+        hint: "Read the question and connect it to the specific lesson example.",
         help: {
-            concept: "Think about the idea the question is checking, not the exact answer wording.",
-            hint_1: "Eliminate options that do not match the concept being tested.",
-            hint_2: "Choose the option or options that best fit the task described.",
+            concept: "This question checks a specific idea from the lesson, not general test-taking strategy.",
+            hint_1: "Compare each option to the exact topic named in the question.",
+            hint_2: "Remove options from unrelated Python areas, then choose the one that fits the question.",
         },
     };
 }
@@ -57,11 +57,11 @@ function safeDragHelp() {
 
 function safeCodeHelp() {
     return {
-        hint: "Focus on the programming task being asked for, not the final solution text.",
+        hint: "Read the coding task and identify what the program should print.",
         help: {
-            concept: "Build the solution from the behavior the exercise is testing.",
-            hint_1: "Think about which steps, functions, or statements are needed.",
-            hint_2: "Construct the solution from the result the prompt asks for.",
+            concept: "This coding exercise checks whether the program produces the requested output.",
+            hint_1: "Use the Python statement or expression that matches the required output.",
+            hint_2: "Run the code and compare the output panel with the expected result.",
         },
     };
 }

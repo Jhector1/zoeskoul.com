@@ -19,9 +19,10 @@ const PYTHON_SQL_LEAK_RULES = [
     {
         code: "PYTHON_SQL_QUERY_LEAKAGE",
         severity: "error",
-        pattern: /\bselect\b[\s\S]{0,80}\bfrom\b/i,
+        pattern:
+            /\bselect\s+(?:\*|[a-z_][\w.]*|\w+\s*\([^)]*\))(?:\s*,\s*(?:[a-z_][\w.]*|\w+\s*\([^)]*\)))*\s+from\s+(?:[a-z_][\w.]*|"[^"]+"|`[^`]+`|\[[^\]]+\])/i,
         message:
-            "Python course content contains SELECT ... FROM wording that belongs to SQL rather than Python.",
+            "Python course content contains SQL SELECT query syntax that belongs to SQL rather than Python.",
     },
     {
         code: "PYTHON_SQL_CLAUSE_LEAKAGE",

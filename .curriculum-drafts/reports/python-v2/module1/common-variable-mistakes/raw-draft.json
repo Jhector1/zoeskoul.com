@@ -1,0 +1,92 @@
+{
+  "title": "Common Variable Mistakes",
+  "summary": "Avoid undefined names, accidental strings, and confusing names.",
+  "minutes": 18,
+  "sketchBlocks": [
+    {
+      "id": "1",
+      "title": "Understanding Variable Names",
+      "bodyMarkdown": "In Python, variable names are used to store data. It's important to choose names that are clear and descriptive. For example, instead of using `x` or `y`, use `age` or `name`.\n\n**Example:**\n```python\nage = 25\nname = 'Alice'\n```\n\n**Your turn:** Try creating your own variables with meaningful names!"
+    },
+    {
+      "id": "2",
+      "title": "Common Mistakes with Strings",
+      "bodyMarkdown": "Sometimes, you might accidentally create a string when you meant to use a variable. For example:\n\n```python\nname = 'Alice'\nprint(name)\n```\nIf you forget to use the variable and just write `print('name')`, it will print 'name' instead of the value stored in the variable.\n\n**Try this:** Fix the code to print the variable value instead."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "q1",
+      "kind": "code_input",
+      "title": "Fix the Variable Name",
+      "prompt": "Correct the variable name in the code below to avoid an undefined name error.",
+      "starterCode": "print(value)",
+      "solutionCode": "value = 10\nprint(value)",
+      "tests": [
+        {
+          "input": "",
+          "output": "10\n"
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "kind": "fill_blank_choice",
+      "title": "Identify the Mistake",
+      "prompt": "Fill in the blank to correct the mistake in the following code: `print('____')`.",
+      "template": "print('____')",
+      "choices": [
+        "name",
+        "value",
+        "age"
+      ],
+      "correctValue": "value"
+    },
+    {
+      "id": "q3",
+      "kind": "single_choice",
+      "title": "Best Variable Name",
+      "prompt": "Which of the following is the best variable name?",
+      "options": [
+        "x",
+        "data",
+        "user_age",
+        "temp"
+      ],
+      "correctOptionIds": [
+        "c"
+      ]
+    },
+    {
+      "id": "q4",
+      "kind": "multi_choice",
+      "title": "Common Variable Mistakes",
+      "prompt": "Select all common mistakes when using variables.",
+      "options": [
+        "Using a variable before it is defined",
+        "Using quotes around variable names",
+        "Using special characters in variable names",
+        "Using descriptive names"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c"
+      ]
+    },
+    {
+      "id": "q5",
+      "kind": "code_input",
+      "title": "Correct the String Usage",
+      "prompt": "Modify the code to correctly print the variable instead of the string.",
+      "starterCode": "name = 'Bob'\nprint('name')",
+      "solutionCode": "name = 'Bob'\nprint(name)",
+      "tests": [
+        {
+          "input": "",
+          "output": "Bob\n"
+        }
+      ]
+    }
+  ]
+}

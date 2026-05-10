@@ -1,0 +1,202 @@
+{
+  "topicId": "range-and-counting",
+  "subjectSlug": "python-v2",
+  "moduleSlug": "python-3",
+  "sectionSlug": "python-v2-python-3-core-building-blocks-1",
+  "prefix": "py3",
+  "minutes": 22,
+  "topic": {
+    "labelKey": "topics.python-v2.python-3.range-and-counting.label",
+    "summaryKey": "topics.python-v2.python-3.range-and-counting.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-3.range-and-counting.cards.sketch0.title",
+      "sketchId": "range-basics",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-3.range-and-counting.cards.sketch1.title",
+      "sketchId": "start-stop-step",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-3.range-and-counting.cards.sketch2.title",
+      "sketchId": "off-by-one",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.python-v2.python-3.range-and-counting.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 3,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python-v2.python-3.range-and-counting.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "code_print_1_to_n",
+            "titleKey": "topics.python-v2.python-3.range-and-counting.projectSteps.code_print_1_to_n.title",
+            "exerciseKey": "code-print-1-to-n",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "code_count_by_twos",
+            "titleKey": "topics.python-v2.python-3.range-and-counting.projectSteps.code_count_by_twos.title",
+            "exerciseKey": "code-count-by-twos",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "range-basics",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-3.range-and-counting.range-basics.title",
+      "bodyKey": "sketches.python-v2.python-3.range-and-counting.range-basics.bodyMarkdown"
+    },
+    {
+      "id": "start-stop-step",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-3.range-and-counting.start-stop-step.title",
+      "bodyKey": "sketches.python-v2.python-3.range-and-counting.start-stop-step.bodyMarkdown"
+    },
+    {
+      "id": "off-by-one",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-3.range-and-counting.off-by-one.title",
+      "bodyKey": "sketches.python-v2.python-3.range-and-counting.off-by-one.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "sc-range-stop-before",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-3.range-and-counting.quiz.sc-range-stop-before",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "mc-range-true-statements",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-3.range-and-counting.quiz.mc-range-true-statements",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "c",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "fb-range-three-times",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-3.range-and-counting.quiz.fb-range-three-times",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "3"
+      }
+    },
+    {
+      "id": "code-print-1-to-n",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-3.range-and-counting.quiz.code-print-1-to-n",
+      "language": "python",
+      "starterCode": "n = int(input())\n\n# Print the numbers from 1 to n, one per line.",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "5\n",
+            "stdout": "1\n2\n3\n4\n5\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "1\n",
+            "stdout": "1\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "n = int(input())\nfor i in range(1, n + 1):\n    print(i)"
+      }
+    },
+    {
+      "id": "code-count-by-twos",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-3.range-and-counting.quiz.code-count-by-twos",
+      "language": "python",
+      "starterCode": "n = int(input())\n\n# Print even numbers from 2 up to n, one per line.",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "8\n",
+            "stdout": "2\n4\n6\n8\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "3\n",
+            "stdout": "2\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "n = int(input())\nfor i in range(2, n + 1, 2):\n    print(i)"
+      }
+    }
+  ]
+}

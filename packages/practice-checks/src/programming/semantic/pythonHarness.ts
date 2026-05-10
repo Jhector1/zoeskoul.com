@@ -1,4 +1,4 @@
-import type { SemanticCheck } from "../types";
+import type { SemanticCheck } from "../types.js";
 
 export const SEMANTIC_HARNESS_SENTINEL = "__ZOE_SEMANTIC_RESULT__";
 

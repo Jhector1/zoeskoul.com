@@ -1,0 +1,211 @@
+{
+  "topicId": "accumulators-and-counters",
+  "subjectSlug": "python-v2",
+  "moduleSlug": "python-3",
+  "sectionSlug": "python-v2-python-3-core-building-blocks-1",
+  "prefix": "py3",
+  "minutes": 25,
+  "topic": {
+    "labelKey": "topics.python-v2.python-3.accumulators-and-counters.label",
+    "summaryKey": "topics.python-v2.python-3.accumulators-and-counters.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-3.accumulators-and-counters.cards.sketch0.title",
+      "sketchId": "what-are-accumulators-and-counters",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-3.accumulators-and-counters.cards.sketch1.title",
+      "sketchId": "counting-only-when-a-condition-is-true",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-3.accumulators-and-counters.cards.sketch2.title",
+      "sketchId": "building-a-running-total",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.python-v2.python-3.accumulators-and-counters.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 3,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python-v2.python-3.accumulators-and-counters.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "code_sum_input_numbers",
+            "titleKey": "topics.python-v2.python-3.accumulators-and-counters.projectSteps.code_sum_input_numbers.title",
+            "exerciseKey": "code-sum-input-numbers",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "code_count_positive",
+            "titleKey": "topics.python-v2.python-3.accumulators-and-counters.projectSteps.code_count_positive.title",
+            "exerciseKey": "code-count-positive",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "what-are-accumulators-and-counters",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-3.accumulators-and-counters.what-are-accumulators-and-counters.title",
+      "bodyKey": "sketches.python-v2.python-3.accumulators-and-counters.what-are-accumulators-and-counters.bodyMarkdown"
+    },
+    {
+      "id": "counting-only-when-a-condition-is-true",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-3.accumulators-and-counters.counting-only-when-a-condition-is-true.title",
+      "bodyKey": "sketches.python-v2.python-3.accumulators-and-counters.counting-only-when-a-condition-is-true.bodyMarkdown"
+    },
+    {
+      "id": "building-a-running-total",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-3.accumulators-and-counters.building-a-running-total.title",
+      "bodyKey": "sketches.python-v2.python-3.accumulators-and-counters.building-a-running-total.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "sc-counter-vs-accumulator",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-3.accumulators-and-counters.quiz.sc-counter-vs-accumulator",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "mc-when-to-update",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-3.accumulators-and-counters.quiz.mc-when-to-update",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "fb-initialize-before-loop",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-3.accumulators-and-counters.quiz.fb-initialize-before-loop",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "0"
+      }
+    },
+    {
+      "id": "code-sum-input-numbers",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-3.accumulators-and-counters.quiz.code-sum-input-numbers",
+      "language": "python",
+      "starterCode": "line = input()\n# Write Python code that prints the sum of the numbers.",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "3 5 2\n",
+            "stdout": "10\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "10 1 4 7\n",
+            "stdout": "22\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "8\n",
+            "stdout": "8\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "line = input()\nparts = line.split()\ntotal = 0\n\nfor part in parts:\n    total = total + int(part)\n\nprint(total)"
+      }
+    },
+    {
+      "id": "code-count-positive",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-3.accumulators-and-counters.quiz.code-count-positive",
+      "language": "python",
+      "starterCode": "line = input()\n# Write Python code that prints how many numbers are greater than 0.",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "-2 5 0 3 -1\n",
+            "stdout": "2\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "1 2 3 4\n",
+            "stdout": "4\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "-5 0 -1\n",
+            "stdout": "0\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "line = input()\nparts = line.split()\ncount = 0\n\nfor part in parts:\n    number = int(part)\n    if number > 0:\n        count = count + 1\n\nprint(count)"
+      }
+    }
+  ]
+}

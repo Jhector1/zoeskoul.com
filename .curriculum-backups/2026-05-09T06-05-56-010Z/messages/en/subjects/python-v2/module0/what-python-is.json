@@ -1,0 +1,125 @@
+{
+  "topics": {
+    "python-v2": {
+      "python-0": {
+        "what-python-is": {
+          "label": "What Python Is Used For",
+          "summary": "Understand Python's role in automation, web apps, data, scripting, and AI.",
+          "cards": {
+            "sketch0": {
+              "title": "Introduction to Python's Uses"
+            },
+            "sketch1": {
+              "title": "Python in Web Development"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Practice"
+            }
+          },
+          "projectSteps": {
+            "5": {
+              "title": "Create a Simple Automation Script"
+            }
+          },
+          "quiz": {
+            "1": {
+              "title": "What is Python commonly used for?",
+              "prompt": "Select the most common use of Python.",
+              "hint": "Focus on the main concept being tested and eliminate choices that describe something different.",
+              "help": {
+                "concept": "Choose the option that matches the core idea described in the question without relying on repeated wording from the answer choices.",
+                "hint_1": "Rule out options that describe a different role, behavior, or concept than the question is testing.",
+                "hint_2": "Pick the option that best matches the concept, not the one that simply repeats familiar wording."
+              },
+              "options": {
+                "a": "Game development",
+                "b": "Web development",
+                "c": "Hardware programming",
+                "d": "Mobile app development"
+              }
+            },
+            "2": {
+              "title": "Which of the following is NOT a use case for Python?",
+              "prompt": "Identify the option that does not typically involve Python.",
+              "hint": "Focus on the main concept being tested and eliminate choices that describe something different.",
+              "help": {
+                "concept": "Choose the option that matches the core idea described in the question without relying on repeated wording from the answer choices.",
+                "hint_1": "Rule out options that describe a different role, behavior, or concept than the question is testing.",
+                "hint_2": "Pick the option that best matches the concept, not the one that simply repeats familiar wording."
+              },
+              "options": {
+                "a": "Data analysis",
+                "b": "Machine learning",
+                "c": "Game development",
+                "d": "Web scraping"
+              }
+            },
+            "3": {
+              "title": "Select all areas where Python is used.",
+              "prompt": "Choose all the correct applications of Python.",
+              "hint": "Focus on the main concept being tested and eliminate choices that describe something different.",
+              "help": {
+                "concept": "Choose the option that matches the core idea described in the question without relying on repeated wording from the answer choices.",
+                "hint_1": "Rule out options that describe a different role, behavior, or concept than the question is testing.",
+                "hint_2": "Pick the option that best matches the concept, not the one that simply repeats familiar wording."
+              },
+              "options": {
+                "a": "Web development",
+                "b": "Data science",
+                "c": "Artificial intelligence",
+                "d": "Mobile app development"
+              }
+            },
+            "4": {
+              "title": "Complete the statement about Python.",
+              "prompt": "Choose the best value for the first missing blank in the statement.",
+              "hint": "Focus on the missing concept or keyword.",
+              "help": {
+                "concept": "This task checks the key idea behind complete the statement about python..",
+                "hint_1": "Look for the word or phrase that best matches the lesson concept.",
+                "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
+              },
+              "template": "The first missing value is [blank1].",
+              "choices": [
+                "automating",
+                "gaming",
+                "hardware",
+                "networking"
+              ]
+            },
+            "5": {
+              "title": "Create a Simple Automation Script",
+              "prompt": "Write a Python script that prints 'Automation is key!'",
+              "hint": "Break the task into the main code steps first.",
+              "help": {
+                "concept": "This task checks whether you can apply create a simple automation script in a working solution.",
+                "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
+                "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
+              },
+              "starterCode": "print('')"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-v2": {
+      "python-0": {
+        "what-python-is": {
+          "1": {
+            "title": "Introduction to Python's Uses",
+            "bodyMarkdown": "Python is a versatile programming language used in various domains such as web development, data analysis, artificial intelligence, and automation. For example, you can use Python to automate repetitive tasks like file management or data entry. **Try it yourself**: Think of a task in your daily life that could be automated using Python."
+          },
+          "2": {
+            "title": "Python in Web Development",
+            "bodyMarkdown": "Python is widely used for building web applications. Frameworks like Django and Flask make it easy to create dynamic websites. Here's a simple example of a Flask application:\n\n```python\nfrom flask import Flask\napp = Flask(__name__)\n\n@app.route('/')\ndef home():\n    return 'Hello, World!'\n\nif __name__ == '__main__':\n    app.run(debug=True)\n```\nThis code sets up a basic web server that responds with 'Hello, World!' when accessed. **Try this**: Modify the message returned by the `home` function.\n\nLine by line: read the first statement to see which value is stored or checked, then follow each conditional branch in order to see which path prints the final result."
+          }
+        }
+      }
+    }
+  }
+}

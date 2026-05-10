@@ -22,7 +22,9 @@ export function buildPlanFromSpec(args: {
         .map((module, moduleIndex) => {
             const normalizedOrder = normalizeSpecModuleOrder(module.order, moduleIndex);
             const logicalIndex = normalizedOrder - 1;
-
+            const schedule = args.blueprint.moduleSchedule?.find(
+                (entry) => entry.moduleNumber === logicalIndex,
+            );
             const sections: PlannedSection[] = module.sections.map((section, sectionIndex) => {
                 const topics: PlannedTopic[] = section.topics.map((topic, topicIndex) => ({
                     topicId: topic.topicId,
@@ -42,8 +44,8 @@ export function buildPlanFromSpec(args: {
                     title: section.title,
                     description: section.description,
 
-                    weekStart: section.weekStart ?? null,
-                    weekEnd: section.weekEnd ?? null,
+                    weekStart: module.weekStart ?? schedule?.weekStart ?? null,
+                    weekEnd: module.weekEnd ?? schedule?.weekEnd ?? null,
                     weeksLabel: section.weeksLabel ?? null,
 
                     bullets: section.bullets,

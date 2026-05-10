@@ -29,8 +29,7 @@ const GENERIC_EXERCISE_KIND_RULES: ExerciseKindRule[] = [
             "options must be plain strings, not objects.",
             "correctOptionIds must contain one or more valid option ids using a, b, c, d matching option positions.",
             "use multi_choice only when 2 or more options are genuinely correct.",
-            "when the prompt says select all that apply or equivalent plural wording, strongly prefer 2 or more correct options when appropriate.",
-            "include every correct option in correctOptionIds, not just one example correct answer.",
+            "when the prompt asks learners to choose all correct answers or uses equivalent plural wording, strongly prefer 2 or more correct options when appropriate.",            "include every correct option in correctOptionIds, not just one example correct answer.",
         ],
     },
     {

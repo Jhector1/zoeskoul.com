@@ -1,0 +1,188 @@
+{
+  "topicId": "string-indexing-and-slicing",
+  "subjectSlug": "python-v2",
+  "moduleSlug": "python-1",
+  "sectionSlug": "python-v2-python-1-core-building-blocks-2",
+  "prefix": "py1",
+  "minutes": 25,
+  "topic": {
+    "labelKey": "topics.python-v2.python-1.string-indexing-and-slicing.label",
+    "summaryKey": "topics.python-v2.python-1.string-indexing-and-slicing.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-1.string-indexing-and-slicing.cards.sketch0.title",
+      "sketchId": "sketch1",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-1.string-indexing-and-slicing.cards.sketch1.title",
+      "sketchId": "sketch2",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.python-v2.python-1.string-indexing-and-slicing.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 3,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python-v2.python-1.string-indexing-and-slicing.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "exercise4",
+            "titleKey": "topics.python-v2.python-1.string-indexing-and-slicing.projectSteps.exercise4.title",
+            "exerciseKey": "exercise4",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "exercise5",
+            "titleKey": "topics.python-v2.python-1.string-indexing-and-slicing.projectSteps.exercise5.title",
+            "exerciseKey": "exercise5",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-1.string-indexing-and-slicing.sketch1.title",
+      "bodyKey": "sketches.python-v2.python-1.string-indexing-and-slicing.sketch1.bodyMarkdown"
+    },
+    {
+      "id": "sketch2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-1.string-indexing-and-slicing.sketch2.title",
+      "bodyKey": "sketches.python-v2.python-1.string-indexing-and-slicing.sketch2.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "exercise1",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-1.string-indexing-and-slicing.quiz.exercise1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "d"
+      }
+    },
+    {
+      "id": "exercise2",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-1.string-indexing-and-slicing.quiz.exercise2",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "exercise3",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-1.string-indexing-and-slicing.quiz.exercise3",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "6:"
+      }
+    },
+    {
+      "id": "exercise4",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-1.string-indexing-and-slicing.quiz.exercise4",
+      "language": "python",
+      "starterCode": "def extract_substring(s, start, end):\n    # Your code here\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\ns = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nstart = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\nend = _parse_arg(_inputs[2]) if len(_inputs) > 2 else \"\"\n\nprint(extract_substring(s, start, end))",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "hello world\n0\n5\n",
+            "stdout": "hello\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "python programming\n7\n18\n",
+            "stdout": "programming\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "def extract_substring(s, start, end):\n    return s[start:end]\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\ns = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nstart = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\nend = _parse_arg(_inputs[2]) if len(_inputs) > 2 else \"\"\n\nprint(extract_substring(s, start, end))"
+      }
+    },
+    {
+      "id": "exercise5",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-1.string-indexing-and-slicing.quiz.exercise5",
+      "language": "python",
+      "starterCode": "def reverse_string(s):\n    # Your code here\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\ns = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(reverse_string(s))",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "hello\n",
+            "stdout": "olleh\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "world\n",
+            "stdout": "dlrow\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "def reverse_string(s):\n    return s[::-1]\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\ns = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(reverse_string(s))"
+      }
+    }
+  ]
+}

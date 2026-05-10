@@ -1,11 +1,13 @@
 import { buildArtifacts } from "./_core/buildArtifacts";
-import { PYTHON } from "./python";
-import { SQL } from "@/lib/subjects/sql";
+import { defineCourseFromManifest } from "@/lib/subjects/_core/defineCourseFromManifest";
+import { SUBJECT_GENERATOR_SOURCES } from "@/lib/subjects/subjects.generated";
 
-export const COURSE_BUNDLES = [
-    PYTHON,
-    SQL,
-] as const;
+export const COURSE_BUNDLES = Object.values(SUBJECT_GENERATOR_SOURCES).map((source) =>
+    defineCourseFromManifest({
+        manifest: source.manifest,
+        topicManifests: source.topicManifests,
+    }),
+);
 
 export const SUBJECT_ARTIFACTS = buildArtifacts(COURSE_BUNDLES);
 export const SUBJECTS = SUBJECT_ARTIFACTS.subjects;

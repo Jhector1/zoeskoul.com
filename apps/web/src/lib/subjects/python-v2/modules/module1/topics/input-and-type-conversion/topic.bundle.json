@@ -1,0 +1,189 @@
+{
+  "topicId": "input-and-type-conversion",
+  "subjectSlug": "python-v2",
+  "moduleSlug": "python-v2-1",
+  "sectionSlug": "python-v2-1-variables-and-assignment",
+  "prefix": "pyv2_1",
+  "minutes": 25,
+  "topic": {
+    "labelKey": "topics.python-v2.python-v2-1.input-and-type-conversion.label",
+    "summaryKey": "topics.python-v2.python-v2-1.input-and-type-conversion.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-v2-1.input-and-type-conversion.cards.sketch0.title",
+      "sketchId": "sketch_1",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-v2-1.input-and-type-conversion.cards.sketch1.title",
+      "sketchId": "sketch_2",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.python-v2.python-v2-1.input-and-type-conversion.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 3,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python-v2.python-v2-1.input-and-type-conversion.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "quiz_1",
+            "titleKey": "topics.python-v2.python-v2-1.input-and-type-conversion.projectSteps.quiz_1.title",
+            "exerciseKey": "quiz_1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "policy_code_input_1",
+            "titleKey": "topics.python-v2.python-v2-1.input-and-type-conversion.projectSteps.policy_code_input_1.title",
+            "exerciseKey": "policy_code_input_1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch_1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-v2-1.input-and-type-conversion.sketch_1.title",
+      "bodyKey": "sketches.python-v2.python-v2-1.input-and-type-conversion.sketch_1.bodyMarkdown"
+    },
+    {
+      "id": "sketch_2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-v2-1.input-and-type-conversion.sketch_2.title",
+      "bodyKey": "sketches.python-v2.python-v2-1.input-and-type-conversion.sketch_2.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "quiz_1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.input-and-type-conversion.quiz.quiz_1",
+      "language": "python",
+      "starterCode": "age = input()\n# Convert age to an integer",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "25\n",
+            "stdout": "In 10 years, you will be 35 years old.",
+            "match": "exact"
+          },
+          {
+            "stdin": "30\n",
+            "stdout": "In 10 years, you will be 40 years old.",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "age = input()\nage = int(age)\nprint('In 10 years, you will be ' + str(age + 10) + ' years old.')"
+      }
+    },
+    {
+      "id": "quiz_2",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.input-and-type-conversion.quiz.quiz_2",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "str"
+      }
+    },
+    {
+      "id": "quiz_3",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.input-and-type-conversion.quiz.quiz_3",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "c"
+      }
+    },
+    {
+      "id": "quiz_4",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.input-and-type-conversion.quiz.quiz_4",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "policy_code_input_1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.input-and-type-conversion.quiz.policy_code_input_1",
+      "language": "python",
+      "starterCode": "n = int(input())\n# Your code here",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "5\n",
+            "stdout": "True\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "0\n",
+            "stdout": "False\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "n = int(input())\nif n > 0:\n    print(True)\nelse:\n    print(False)"
+      }
+    }
+  ]
+}

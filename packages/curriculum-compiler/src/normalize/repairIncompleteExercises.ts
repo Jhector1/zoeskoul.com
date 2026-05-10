@@ -84,9 +84,21 @@ function applySeedDefaults(seed: TopicSeed, draft: TopicAuthoringDraft): TopicAu
                     ? normalizeText(seed.moduleRuntimeDefaults.datasetId)
                     : "");
 
+            const hasSemanticChecks =
+                Array.isArray(exercise.semanticChecks) && exercise.semanticChecks.length > 0;
+
+            const hasTests =
+                Array.isArray(exercise.tests) && exercise.tests.length > 0;
+
             const recipeType =
                 exercise.recipeType ||
-                (seed.profileId === "sql" ? "sql_query" : undefined);
+                (seed.profileId === "sql"
+                    ? "sql_query"
+                    : hasSemanticChecks
+                        ? "semantic"
+                        : hasTests
+                            ? "fixed_tests"
+                            : undefined);
 
             return {
                 ...exercise,
@@ -163,6 +175,12 @@ export async function repairIncompleteExercises(args: {
 
             const rawRecipeType = normalizeText(exercise.recipeType);
 
+            const hasSemanticChecks =
+                Array.isArray(exercise.semanticChecks) && exercise.semanticChecks.length > 0;
+
+            const hasTests =
+                Array.isArray(exercise.tests) && exercise.tests.length > 0;
+
             const recipeType:
                 | "sql_query"
                 | "template_io"
@@ -176,7 +194,11 @@ export async function repairIncompleteExercises(args: {
                     ? rawRecipeType
                     : profileIsSql
                         ? "sql_query"
-                        : undefined;
+                        : hasSemanticChecks
+                            ? "semantic"
+                            : hasTests
+                                ? "fixed_tests"
+                                : undefined;
 
             const datasetId =
                 normalizeText(exercise.datasetId) ||

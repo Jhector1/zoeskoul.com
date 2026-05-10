@@ -1,0 +1,47 @@
+{
+  "topicId": "truthiness-and-empty-values",
+  "repairs": [
+    {
+      "code": "PYTHON_SKETCH_LINE_BY_LINE_EXPLANATION_ADDED",
+      "category": "text",
+      "severity": "medium",
+      "field": "sketchBlocks.1.bodyMarkdown",
+      "message": "Added a short line-by-line explanation after a multi-line code example."
+    },
+    {
+      "code": "PYTHON_SKETCH_LINE_BY_LINE_EXPLANATION_ADDED",
+      "category": "text",
+      "severity": "medium",
+      "field": "sketchBlocks.2.bodyMarkdown",
+      "message": "Added a short line-by-line explanation after a multi-line code example."
+    },
+    {
+      "code": "PYTHON_FUNCTION_STDOUT_TASK_REPAIRED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "3",
+      "message": "Rewrote a function-return code_input exercise into a runnable stdin/stdout task so it matches fixed-tests grading."
+    },
+    {
+      "code": "PYTHON_FUNCTION_STDOUT_TASK_REPAIRED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "4",
+      "message": "Rewrote a function-return code_input exercise into a runnable stdin/stdout task so it matches fixed-tests grading."
+    },
+    {
+      "code": "PYTHON_HARDCODED_FUNCTION_EXAMPLE_REPAIRED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "5",
+      "message": "Replaced hardcoded example usage in a function exercise with a stdin/stdout wrapper so published tests validate the intended behavior."
+    },
+    {
+      "code": "PYTHON_CROSS_EXERCISE_CLASS_CONTEXT_REPAIRED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "5",
+      "message": "Prepended shared class/setup context needed by this code_input exercise so it can run independently."
+    }
+  ]
+}

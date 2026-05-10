@@ -1,0 +1,123 @@
+{
+  "topics": {
+    "python-v2": {
+      "python-1": {
+        "string-indexing-and-slicing": {
+          "label": "String Indexing and Slicing",
+          "summary": "Access characters and substrings using indexes and slices.",
+          "cards": {
+            "sketch0": {
+              "title": "Understanding String Indexing"
+            },
+            "sketch1": {
+              "title": "Slicing Strings"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Practice"
+            }
+          },
+          "projectSteps": {
+            "exercise4": {
+              "title": "Extracting Substrings"
+            },
+            "exercise5": {
+              "title": "Reverse a String"
+            }
+          },
+          "quiz": {
+            "exercise1": {
+              "title": "Basic String Indexing",
+              "prompt": "What is the index of the character 'o' in the string 'hello'?",
+              "hint": "Count the positions starting from 0.",
+              "help": {
+                "concept": "String indexing starts at 0. Each character has a unique index.",
+                "hint_1": "Start counting from the first character.",
+                "hint_2": "The character 'o' is the last one in 'hello'."
+              },
+              "options": {
+                "a": "0",
+                "b": "1",
+                "c": "2",
+                "d": "4"
+              }
+            },
+            "exercise2": {
+              "title": "String Slicing",
+              "prompt": "Which of the following slices will return 'hello' from the string 'hello world'?",
+              "hint": "Focus on the main concept being tested and eliminate choices that describe something different.",
+              "help": {
+                "concept": "Choose the option that matches the core idea described in the question without relying on repeated wording from the answer choices.",
+                "hint_1": "Rule out options that describe a different role, behavior, or concept than the question is testing.",
+                "hint_2": "Pick the option that best matches the concept, not the one that simply repeats familiar wording."
+              },
+              "options": {
+                "a": "greeting[0:5]",
+                "b": "greeting[:5]",
+                "c": "greeting[6:11]",
+                "d": "greeting[6:]"
+              }
+            },
+            "exercise3": {
+              "title": "Slice Notation",
+              "prompt": "Choose the best value for the first missing blank in the statement.",
+              "hint": "Focus on the missing concept rather than the exact missing word.",
+              "help": {
+                "concept": "The blank should be filled with the term that matches the job the statement is trying to perform.",
+                "hint_1": "Think about what the missing part is supposed to do in the statement.",
+                "hint_2": "Choose the term that best completes the meaning of the statement."
+              },
+              "template": "The first missing value is [blank1].",
+              "choices": [
+                "6:11",
+                "6:",
+                "5:10",
+                ":5"
+              ]
+            },
+            "exercise4": {
+              "title": "Extracting Substrings",
+              "prompt": "Write a function `extract_substring` that takes a string and two indices, and returns the substring between those indices. Then read the input values, call the function, and print the returned result.",
+              "hint": "Focus on the programming task being asked for, not on copying final solution text.",
+              "help": {
+                "concept": "Build the solution from the behavior the exercise is testing.",
+                "hint_1": "Think about which steps, functions, or statements are required for the task.",
+                "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "def extract_substring(s, start, end):\n    # Your code here\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\ns = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nstart = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\nend = _parse_arg(_inputs[2]) if len(_inputs) > 2 else \"\"\n\nprint(extract_substring(s, start, end))"
+            },
+            "exercise5": {
+              "title": "Reverse a String",
+              "prompt": "Write a function `reverse_string` that takes a string and returns it reversed. Then read the input values, call the function, and print the returned result.",
+              "hint": "Focus on the programming task being asked for, not on copying final solution text.",
+              "help": {
+                "concept": "Build the solution from the behavior the exercise is testing.",
+                "hint_1": "Think about which steps, functions, or statements are required for the task.",
+                "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "def reverse_string(s):\n    # Your code here\n    pass\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\ns = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(reverse_string(s))"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-v2": {
+      "python-1": {
+        "string-indexing-and-slicing": {
+          "sketch1": {
+            "title": "Understanding String Indexing",
+            "bodyMarkdown": "In Python, strings are sequences of characters. Each character in a string has a position, called an index. Indexing allows you to access individual characters in a string. For example, in the string `hello`, the character `h` is at index 0, `e` is at index 1, and so on.\n\n```python\nword = 'hello'\nprint(word[0])  # Output: h\nprint(word[1])  # Output: e\n```\n\nTry it yourself: What will `print(word[4])` output?\n\nLine by line: read the first statement to see which value is stored or checked, then follow each conditional branch in order to see which path prints the final result."
+          },
+          "sketch2": {
+            "title": "Slicing Strings",
+            "bodyMarkdown": "Slicing allows you to access a range of characters in a string. You specify a start index and an end index, and Python returns the substring from the start index up to, but not including, the end index.\n\n```python\ngreeting = 'hello world'\nprint(greeting[0:5])  # Output: hello\nprint(greeting[6:])   # Output: world\n```\n\nNotice how `greeting[0:5]` returns 'hello'. The slice starts at index 0 and ends at index 5, but does not include the character at index 5.\n\nYour turn: Try slicing `greeting` to get the word 'world'.\n\nLine by line: read the first statement to see which value is stored or checked, then follow each conditional branch in order to see which path prints the final result."
+          }
+        }
+      }
+    }
+  }
+}

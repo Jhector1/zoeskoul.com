@@ -1,0 +1,143 @@
+{
+  "title": "Truthiness and Empty Values",
+  "summary": "Understand how empty strings, zero, and None behave in conditions.",
+  "minutes": 20,
+  "sketchBlocks": [
+    {
+      "id": "1",
+      "title": "Understanding Truthiness",
+      "bodyMarkdown": "In Python, certain values are considered 'falsy', meaning they evaluate to `False` in a boolean context. These include:\n- `None`\n- `0` (zero)\n- `''` (empty string)\n- `[]` (empty list)\n- `{}` (empty dictionary)\n\nFor example:\n```python\nvalue = ''\nif value:\n    print('This is truthy')\nelse:\n    print('This is falsy')\n```\nIn this code, the output will be 'This is falsy' because an empty string is falsy.\n\n**Your turn:** Try changing the value to `0` and see what happens!\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+    },
+    {
+      "id": "2",
+      "title": "Using Truthiness in Conditions",
+      "bodyMarkdown": "You can use truthiness to simplify your conditions. For instance:\n```python\nuser_input = None\nif user_input:\n    print('Input received')\nelse:\n    print('No input')\n```\nHere, since `user_input` is `None`, the output will be 'No input'.\n\n**Try this:** Change `user_input` to an empty string and observe the output.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "1",
+      "kind": "multi_choice",
+      "title": "Identifying Falsy Values",
+      "prompt": "Which of the following values are considered falsy in Python?",
+      "options": [
+        "None",
+        "0",
+        "'' (empty string)",
+        "All of the above"
+      ],
+      "correctOptionIds": [
+        "d"
+      ],
+      "hint": "Think about which values evaluate to False in a condition.",
+      "help": {
+        "concept": "In Python, falsy values include None, zero, and empty collections.",
+        "hint_1": "Remember that empty strings and None are falsy.",
+        "hint_2": "Consider all the options and how they behave in a boolean context."
+      }
+    },
+    {
+      "id": "2",
+      "kind": "fill_blank_choice",
+      "title": "Complete the Condition",
+      "prompt": "Choose the best value for the first missing blank in the statement.",
+      "template": "The first missing value is [blank1].",
+      "choices": [
+        "None",
+        "True",
+        "1",
+        "Hello"
+      ],
+      "correctValue": "None",
+      "hint": "Focus on the missing concept or keyword.",
+      "help": {
+        "concept": "This task checks the key idea behind complete the condition.",
+        "hint_1": "Look for the word or phrase that best matches the lesson concept.",
+        "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
+      }
+    },
+    {
+      "id": "3",
+      "kind": "code_input",
+      "title": "Check Truthiness",
+      "prompt": "Write a function that checks if a given value is truthy or falsy and returns the appropriate message. Then read the input value, call the function, and print the returned result.",
+      "starterCode": "def check_truthiness(value):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nvalue = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(check_truthiness(value))",
+      "solutionCode": "def check_truthiness(value):\n    if value:\n        return 'This value is truthy.'\n    else:\n        return 'This value is falsy.'\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nvalue = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(check_truthiness(value))",
+      "tests": [
+        {
+          "stdin": "''",
+          "stdout": "This value is falsy."
+        },
+        {
+          "stdin": "0",
+          "stdout": "This value is falsy."
+        },
+        {
+          "stdin": "None",
+          "stdout": "This value is falsy."
+        },
+        {
+          "stdin": "'Hello'",
+          "stdout": "This value is truthy."
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Read the coding task and identify what the program should print.",
+      "help": {
+        "concept": "This coding exercise checks whether the program produces the requested output.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "4",
+      "kind": "code_input",
+      "title": "Evaluate User Input",
+      "prompt": "Create a function that takes user input and checks if it is empty or not. Then read the input value, call the function, and print the returned result.",
+      "starterCode": "def evaluate_input(user_input):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nuser_input = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(evaluate_input(user_input))",
+      "solutionCode": "def evaluate_input(user_input):\n    if user_input:\n        return 'Input is provided.'\n    else:\n        return 'No input received.'\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nuser_input = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(evaluate_input(user_input))",
+      "tests": [
+        {
+          "stdin": "''",
+          "stdout": "No input received."
+        },
+        {
+          "stdin": "'Data'",
+          "stdout": "Input is provided."
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "5",
+      "kind": "code_input",
+      "title": "Check Multiple Values",
+      "prompt": "Write a function that checks multiple values and returns a list of truthy values. Then read the input values, call the function, and print the returned result.",
+      "starterCode": "_inputs = []\nvalue = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\ndef check_multiple_values(*values):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\n*values = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(check_multiple_values(*values))",
+      "solutionCode": "_inputs = []\nvalue = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\ndef check_multiple_values(*values):\n    return [value for value in values if value]\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\n*values = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(check_multiple_values(*values))",
+      "tests": [
+        {
+          "stdin": "None, 0, 'Hello', '', 42",
+          "stdout": "['Hello', 42]"
+        },
+        {
+          "stdin": "0, '', None",
+          "stdout": "[]"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    }
+  ]
+}

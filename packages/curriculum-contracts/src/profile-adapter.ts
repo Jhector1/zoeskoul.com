@@ -3,12 +3,13 @@ import type { PlannedModule } from "./plan.js";
 import type { SubjectManifest } from "./subject-manifest.js";
 import type { TopicRecipe } from "./topic-recipe.js";
 import type { TopicSeed } from "./topic-seed.js";
-import { ResolvedExercisePolicy } from "./exercise-policy.js";
+import type { ResolvedExercisePolicy } from "./exercise-policy.js";
 
 export type BuildTopicSeedArgs = {
   blueprint: CourseBlueprint;
   module: {
     slug: string;
+    prefix: string;
     title: string;
     order: number;
     purpose?: TopicSeed["modulePurpose"];

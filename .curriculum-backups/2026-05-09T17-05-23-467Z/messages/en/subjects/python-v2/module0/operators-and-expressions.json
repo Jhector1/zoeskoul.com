@@ -1,0 +1,131 @@
+{
+  "topics": {
+    "python-v2": {
+      "python-0": {
+        "operators-and-expressions": {
+          "label": "Operators and Expressions",
+          "summary": "Combine values with arithmetic, comparison, and boolean operators.",
+          "cards": {
+            "sketch0": {
+              "title": "Expressions combine values into new results"
+            },
+            "sketch1": {
+              "title": "Comparison and boolean operators produce True or False"
+            },
+            "sketch2": {
+              "title": "Python follows an order when evaluating expressions"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Practice expression output"
+            }
+          },
+          "projectSteps": {
+            "code_output_expressions": {
+              "title": "Print expression results"
+            }
+          },
+          "quiz": {
+            "sc-arithmetic-expression": {
+              "title": "Identify an arithmetic expression",
+              "prompt": "Which line is an arithmetic expression that evaluates to the number 8?",
+              "hint": "Look for an operation with numbers that produces 8.",
+              "help": {
+                "concept": "An arithmetic expression uses operators like +, -, *, or / to combine numbers into a new numeric value.",
+                "hint_1": "Check each option by mentally evaluating it.",
+                "hint_2": "Only one option produces a numeric result of 8."
+              },
+              "options": {
+                "a": "3 + 5",
+                "b": "3 > 5",
+                "c": "True and False"
+              }
+            },
+            "sc-parentheses-order": {
+              "title": "Use parentheses to change the result",
+              "prompt": "What is printed by `print((2 + 3) * 4)`?",
+              "hint": "Evaluate the parentheses first.",
+              "help": {
+                "concept": "Parentheses tell Python to evaluate part of an expression before the rest of the operators.",
+                "hint_1": "Find the value inside the parentheses before multiplying.",
+                "hint_2": "After adding the two numbers, multiply that result by 4."
+              },
+              "options": {
+                "a": "9",
+                "b": "14",
+                "c": "20",
+                "d": "24"
+              }
+            },
+            "mc-boolean-results": {
+              "title": "Choose all expressions that are True",
+              "prompt": "Which expressions evaluate to `True`? Choose all correct answers.",
+              "hint": "Test each comparison or boolean expression one by one.",
+              "help": {
+                "concept": "Comparison operators produce True or False, and boolean operators combine those results.",
+                "hint_1": "Check the comparisons first, then apply `and` or `or`.",
+                "hint_2": "More than one option is correct, so do not stop after finding the first true expression."
+              },
+              "options": {
+                "a": "5 > 3",
+                "b": "2 == 5",
+                "c": "(4 < 6) and (1 < 2)",
+                "d": "False or False"
+              }
+            },
+            "fb-string-plus": {
+              "title": "Complete a string expression",
+              "prompt": "Choose the operator that joins the two strings.",
+              "hint": "In beginner Python, one operator is commonly used to join strings.",
+              "help": {
+                "concept": "Python can combine two strings into one larger string using string concatenation.",
+                "hint_1": "Think about the same symbol used for adding numbers and joining strings.",
+                "hint_2": "The correct choice is the operator that places the text together into one result."
+              },
+              "template": "print(\"Hello\" __ \" there\")",
+              "choices": [
+                "+",
+                "-",
+                "*",
+                "=="
+              ]
+            },
+            "code-output-expressions": {
+              "title": "Print expression results",
+              "prompt": "Write Python code that prints the result of these three expressions on separate lines, in this order: `2 + 3`, `7 > 10`, and `(4 == 4) and (1 < 2)`.",
+              "hint": "Use `print(...)` once for each expression.",
+              "help": {
+                "concept": "Python evaluates expressions first, then `print` shows the resulting value in the output panel.",
+                "hint_1": "You need three output lines, so use three print calls.",
+                "hint_2": "The second and third lines should print boolean results from comparison and boolean expressions."
+              },
+              "starterCode": "# Print the result of each expression on its own line"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-v2": {
+      "python-0": {
+        "operators-and-expressions": {
+          "what-is-an-expression": {
+            "title": "Expressions combine values into new results",
+            "bodyMarkdown": "An **expression** is code that Python can evaluate to produce a value. Operators are the symbols that help combine values, such as `+`, `-`, `*`, `/`, `==`, and `and`.\n\nHere is a simple example:\n\n```python\nprint(2 + 3)\nprint(10 - 4)\nprint(3 * 2)\n```\n\nStep by step:\n- `2 + 3` becomes `5`\n- `10 - 4` becomes `6`\n- `3 * 2` becomes `6`\n- `print(...)` shows each result in the output panel\n\nYou can also combine strings with `+`:\n\n```python\nprint(\"Hello, \" + \"Zoe\")\n```\n\nThis joins the two strings and prints `Hello, Zoe`.\n\nTry it yourself: Type one of these examples in the code editor, click Run, and then change one value to see how the output changes."
+          },
+          "comparison-and-boolean": {
+            "title": "Comparison and boolean operators produce True or False",
+            "bodyMarkdown": "Comparison operators check whether something is true. For example, `==` means “is equal to” and `>` means “is greater than.” Boolean operators like `and`, `or`, and `not` combine or change true/false results.\n\nExample:\n\n```python\nprint(5 > 3)\nprint(5 == 3)\nprint((5 > 3) and (2 < 4))\n```\n\nLine by line:\n- `5 > 3` is `True`\n- `5 == 3` is `False`\n- `(5 > 3) and (2 < 4)` is `True and True`, so the result is `True`\n\nThese expressions are useful when you want Python to check conditions.\n\nYour turn: Change one comparison so the final line becomes `False`. Click Run and check the output panel."
+          },
+          "order-of-operations": {
+            "title": "Python follows an order when evaluating expressions",
+            "bodyMarkdown": "When an expression has more than one operator, Python follows an order of operations. Parentheses are a clear way to control that order.\n\nExample:\n\n```python\nprint(2 + 3 * 4)\nprint((2 + 3) * 4)\n```\n\nStep by step:\n- In `2 + 3 * 4`, Python multiplies first: `3 * 4` becomes `12`, then adds `2`, so the result is `14`\n- In `(2 + 3) * 4`, Python evaluates the parentheses first: `2 + 3` becomes `5`, then multiplies by `4`, so the result is `20`\n\nThis is why parentheses matter: they can change the result.\n\nTry this: Type both lines in the code editor, click Run, and then replace `4` with another number to compare the new outputs."
+          }
+        }
+      }
+    }
+  }
+}

@@ -308,15 +308,14 @@ export async function reviewSubjectDraft(args: {
                     shape,
                     seed,
                     draft: repairedDraft,
-                    moduleOrder: node.moduleIndex,
-                    sectionOrder: node.sectionOrder,
+
                 });
                 const messagesByLocale = {
                     [args.blueprint.sourceLocale]: buildMessagesFromDraft({
                         shape,
                         seed,
                         draft: repairedDraft,
-                        moduleOrder: node.moduleIndex,
+
                     }),
                 };
 

@@ -2,8 +2,8 @@ import type {
     ProgrammingCodeTest,
     ProgrammingExpected,
     ProgrammingExpectedInput,
-} from "./types";
-import { makeProgrammingExpected } from "./types";
+} from "./types.js";
+import { makeProgrammingExpected } from "./types.js";
 
 export function toProgrammingCodeTests(
     expected: ProgrammingExpectedInput | ProgrammingExpected | unknown,

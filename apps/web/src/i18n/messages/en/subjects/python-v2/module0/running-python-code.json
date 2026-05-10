@@ -1,0 +1,123 @@
+{
+  "topics": {
+    "python-v2": {
+      "python-v2-0": {
+        "running-python-code": {
+          "label": "Running Python Code",
+          "summary": "Use the ZoeSkoul browser code editor, Run button, and output panel to execute Python code.",
+          "cards": {
+            "sketch0": {
+              "title": "Introduction to Running Python Code"
+            },
+            "sketch1": {
+              "title": "Understanding Output"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Practice"
+            }
+          },
+          "projectSteps": {
+            "quiz_5": {
+              "title": "Create a simple print program"
+            }
+          },
+          "quiz": {
+            "quiz_1": {
+              "title": "What does the print function do?",
+              "prompt": "Select the correct answer.",
+              "hint": "Think about what happens when you want to show information to the user.",
+              "help": {
+                "concept": "The print function is used to display output in Python.",
+                "hint_1": "Consider how you would show a message to someone.",
+                "hint_2": "Look for the option that describes showing information on the screen."
+              },
+              "options": {
+                "a": "It saves a file.",
+                "b": "It displays output on the screen.",
+                "c": "It creates a new variable.",
+                "d": "It runs a loop."
+              }
+            },
+            "quiz_2": {
+              "title": "What will the following code output?\n```python\nprint('Hello, Zoe!')\n```",
+              "prompt": "Choose the correct output.",
+              "hint": "Pay attention to the punctuation in the print statement.",
+              "help": {
+                "concept": "The print function outputs exactly what is inside the parentheses.",
+                "hint_1": "Look closely at the string and how it is formatted.",
+                "hint_2": "Think about how commas and spaces affect the output."
+              },
+              "options": {
+                "a": "Hello, Zoe!",
+                "b": "Zoe!"
+              }
+            },
+            "quiz_3": {
+              "title": "Which of the following are valid Python print statements?",
+              "prompt": "Select all that apply.",
+              "hint": "Check the syntax of each option carefully.",
+              "help": {
+                "concept": "Valid print statements must follow Python's syntax rules.",
+                "hint_1": "Look for the use of parentheses in the print function.",
+                "hint_2": "Remember that strings must be enclosed in quotes."
+              },
+              "options": {
+                "a": "print('Hello')",
+                "b": "print('Hello, World!')",
+                "c": "print Hello",
+                "d": "print('Hello' + ' World')"
+              }
+            },
+            "quiz_4": {
+              "title": "Complete the print statement: `print(___)`",
+              "prompt": "Fill in the blank with a valid string.",
+              "hint": "Focus on the missing concept or keyword.",
+              "help": {
+                "concept": "This task checks the key idea behind complete the print statement: `print(___)`.",
+                "hint_1": "Look for the word or phrase that best matches the lesson concept.",
+                "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
+              },
+              "template": "print('___')",
+              "choices": [
+                "'Hello, World!'",
+                "'Python is great!'",
+                "'123'",
+                "'"
+              ]
+            },
+            "quiz_5": {
+              "title": "Create a simple print program",
+              "prompt": "Write a Python program that prints your name.",
+              "hint": "Break the task into the main code steps first.",
+              "help": {
+                "concept": "This task checks whether you can apply create a simple print program in a working solution.",
+                "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
+                "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
+              },
+              "starterCode": "print('')"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-v2": {
+      "python-v2-0": {
+        "running-python-code": {
+          "sketch_1": {
+            "title": "Introduction to Running Python Code",
+            "bodyMarkdown": "In this section, you'll learn how to run Python code using the ZoeSkoul browser code editor. To start, type your code in the editor and click the 'Run' button. The output will appear in the output panel below.\n\n**Example:**\n```python\nprint('Hello, World!')\n```\nThis code will display 'Hello, World!' in the output panel when you run it.\n\n**Your turn:** Try typing your own print statement and see what happens!"
+          },
+          "sketch_2": {
+            "title": "Understanding Output",
+            "bodyMarkdown": "When you run your Python code, the output panel shows the results of your program. This is useful for checking if your code works as expected.\n\n**Example:**\nIf you run the following code:\n```python\nprint('Learning Python is fun!')\n```\nYou should see 'Learning Python is fun!' in the output panel.\n\n**Try this:** Modify the message in the print statement and run it again!"
+          }
+        }
+      }
+    }
+  }
+}

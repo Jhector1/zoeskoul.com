@@ -53,6 +53,9 @@ export const mathProfileAdapter: CourseProfileAdapter = {
       sourceLocale: args.blueprint.sourceLocale,
       targetLocales: args.blueprint.targetLocales ?? [],
       exercisePolicy: args.module.exercisePolicy,
+      modulePrefix: args.module.prefix,
+      moduleOrder: args.module.order,
+      sectionOrder: args.section.order,
     };
   },
   validateTopicRecipe(_recipe: TopicRecipe) {

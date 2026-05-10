@@ -1,0 +1,240 @@
+{
+  "topicId": "guard-clauses",
+  "subjectSlug": "python-v2",
+  "moduleSlug": "python-2",
+  "sectionSlug": "python-v2-python-2-core-building-blocks-2",
+  "prefix": "py2",
+  "minutes": 22,
+  "topic": {
+    "labelKey": "topics.python-v2.python-2.guard-clauses.label",
+    "summaryKey": "topics.python-v2.python-2.guard-clauses.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-2.guard-clauses.cards.sketch0.title",
+      "sketchId": "guard-idea",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-2.guard-clauses.cards.sketch1.title",
+      "sketchId": "flatten-nesting",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-2.guard-clauses.cards.sketch2.title",
+      "sketchId": "guard-with-boolean-logic",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.python-v2.python-2.guard-clauses.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 2,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python-v2.python-2.guard-clauses.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "guard_output_invalid_score",
+            "titleKey": "topics.python-v2.python-2.guard-clauses.projectSteps.guard_output_invalid_score.title",
+            "exerciseKey": "guard-output-invalid-score",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "guard_membership_checker",
+            "titleKey": "topics.python-v2.python-2.guard-clauses.projectSteps.guard_membership_checker.title",
+            "exerciseKey": "guard-membership-checker",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "guard_even_positive",
+            "titleKey": "topics.python-v2.python-2.guard-clauses.projectSteps.guard_even_positive.title",
+            "exerciseKey": "guard-even-positive",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "guard-idea",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-2.guard-clauses.guard-idea.title",
+      "bodyKey": "sketches.python-v2.python-2.guard-clauses.guard-idea.bodyMarkdown"
+    },
+    {
+      "id": "flatten-nesting",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-2.guard-clauses.flatten-nesting.title",
+      "bodyKey": "sketches.python-v2.python-2.guard-clauses.flatten-nesting.bodyMarkdown"
+    },
+    {
+      "id": "guard-with-boolean-logic",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-2.guard-clauses.guard-with-boolean-logic.title",
+      "bodyKey": "sketches.python-v2.python-2.guard-clauses.guard-with-boolean-logic.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "guard-output-invalid-score",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-2.guard-clauses.quiz.guard-output-invalid-score",
+      "language": "python",
+      "starterCode": "score = int(input())\n\n# Write your code below",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "-3\n",
+            "stdout": "Invalid\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "50\n",
+            "stdout": "Pass\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "12\n",
+            "stdout": "Fail\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "score = int(input())\n\nif score < 0 or score > 100:\n    print(\"Invalid\")\nelif score >= 50:\n    print(\"Pass\")\nelse:\n    print(\"Fail\")"
+      }
+    },
+    {
+      "id": "guard-multi-reasons",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-2.guard-clauses.quiz.guard-multi-reasons",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "guard-fill-not-submitted",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-2.guard-clauses.quiz.guard-fill-not-submitted",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "not"
+      }
+    },
+    {
+      "id": "guard-membership-checker",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-2.guard-clauses.quiz.guard-membership-checker",
+      "language": "python",
+      "starterCode": "age = int(input())\nmembership = input().strip()\n\n# Write your code below",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "-1\nyes\n",
+            "stdout": "Invalid age\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "20\nno\n",
+            "stdout": "Members only\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "17\nyes\n",
+            "stdout": "Too young\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "22\nyes\n",
+            "stdout": "Access granted\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "age = int(input())\nmembership = input().strip()\n\nif age < 0:\n    print(\"Invalid age\")\nelif membership != \"yes\":\n    print(\"Members only\")\nelif age >= 18:\n    print(\"Access granted\")\nelse:\n    print(\"Too young\")"
+      }
+    },
+    {
+      "id": "guard-even-positive",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-2.guard-clauses.quiz.guard-even-positive",
+      "language": "python",
+      "starterCode": "number = int(input())\n\n# Write your code below",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "0\n",
+            "stdout": "Not positive\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "7\n",
+            "stdout": "Not even\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "8\n",
+            "stdout": "Accepted\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "number = int(input())\n\nif number <= 0:\n    print(\"Not positive\")\nelif number % 2 != 0:\n    print(\"Not even\")\nelse:\n    print(\"Accepted\")"
+      }
+    }
+  ]
+}

@@ -927,6 +927,7 @@ export function useQuizPracticeBank(args: {
         });
 
         try {
+          useReviewRuntimeStore.getState().flushToolSnapshot();
           const runtimePatch = getRuntimePracticePatchForQuestion(q);
           const itemForSubmit = runtimePatch
               ? {
@@ -984,8 +985,7 @@ export function useQuizPracticeBank(args: {
                  * New check result should show feedback again.
                  * If wrong, feedback stays visible until the learner edits.
                  */
-                feedbackDismissed: false,
-
+                feedbackDismissed: submitted.ok ? true : false,
                 attempts: nextAttempts,
               } as any,            };
 

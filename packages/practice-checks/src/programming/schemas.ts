@@ -4,7 +4,7 @@ import {
     makeProgrammingExpected,
     type ProgrammingExpected,
     type ProgrammingExpectedInput,
-} from "./types";
+} from "./types.js";
 
 export const ProgrammingLanguageSchema = z.enum(PROGRAMMING_LANGUAGES);
 type JsonValue =

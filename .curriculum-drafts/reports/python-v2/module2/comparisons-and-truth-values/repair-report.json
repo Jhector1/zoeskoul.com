@@ -1,0 +1,40 @@
+{
+  "topicId": "comparisons-and-truth-values",
+  "repairs": [
+    {
+      "code": "PYTHON_SKETCH_LINE_BY_LINE_EXPLANATION_ADDED",
+      "category": "text",
+      "severity": "medium",
+      "field": "sketchBlocks.comparison_operators.bodyMarkdown",
+      "message": "Added a short line-by-line explanation after a multi-line code example."
+    },
+    {
+      "code": "PYTHON_SKETCH_LINE_BY_LINE_EXPLANATION_ADDED",
+      "category": "text",
+      "severity": "medium",
+      "field": "sketchBlocks.truthiness.bodyMarkdown",
+      "message": "Added a short line-by-line explanation after a multi-line code example."
+    },
+    {
+      "code": "PYTHON_PLACEHOLDER_TESTS_EXECUTION_REPAIRED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "code_input_2",
+      "message": "Replaced placeholder boolean tests with the real stdout produced by the no-input Python solution."
+    },
+    {
+      "code": "PYTHON_PLACEHOLDER_TESTS_EXECUTION_REPAIRED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "code_input_1",
+      "message": "Replaced placeholder boolean tests with the real stdout produced by the no-input Python solution."
+    },
+    {
+      "code": "PYTHON_PLACEHOLDER_TESTS_EXECUTION_REPAIRED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "code_input_3",
+      "message": "Replaced placeholder boolean tests with the real stdout produced by the no-input Python solution."
+    }
+  ]
+}

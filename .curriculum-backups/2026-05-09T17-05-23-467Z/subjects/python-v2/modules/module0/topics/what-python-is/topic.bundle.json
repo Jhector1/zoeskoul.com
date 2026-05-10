@@ -1,0 +1,166 @@
+{
+  "topicId": "what-python-is",
+  "subjectSlug": "python-v2",
+  "moduleSlug": "python-0",
+  "sectionSlug": "python-v2-python-0-core-building-blocks-1",
+  "prefix": "py0",
+  "minutes": 12,
+  "topic": {
+    "labelKey": "topics.python-v2.python-0.what-python-is.label",
+    "summaryKey": "topics.python-v2.python-0.what-python-is.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-0.what-python-is.cards.sketch0.title",
+      "sketchId": "python-many-uses",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-0.what-python-is.cards.sketch1.title",
+      "sketchId": "python-real-world-examples",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.python-v2.python-0.what-python-is.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python-v2.python-0.what-python-is.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "code_print_uses",
+            "titleKey": "topics.python-v2.python-0.what-python-is.projectSteps.code_print_uses.title",
+            "exerciseKey": "code-print-uses",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "python-many-uses",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-0.what-python-is.python-many-uses.title",
+      "bodyKey": "sketches.python-v2.python-0.what-python-is.python-many-uses.bodyMarkdown"
+    },
+    {
+      "id": "python-real-world-examples",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-0.what-python-is.python-real-world-examples.title",
+      "bodyKey": "sketches.python-v2.python-0.what-python-is.python-real-world-examples.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "sc-python-general-purpose",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-0.what-python-is.quiz.sc-python-general-purpose",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "sc-python-automation",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-0.what-python-is.quiz.sc-python-automation",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "mc-python-uses",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-0.what-python-is.quiz.mc-python-uses",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "fb-python-sequence",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-0.what-python-is.quiz.fb-python-sequence",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "written"
+      }
+    },
+    {
+      "id": "code-print-uses",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-0.what-python-is.quiz.code-print-uses",
+      "language": "python",
+      "starterCode": "// Write your answer below",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Automation\nWeb apps\nData\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "print(\"Automation\")\nprint(\"Web apps\")\nprint(\"Data\")"
+      }
+    }
+  ]
+}

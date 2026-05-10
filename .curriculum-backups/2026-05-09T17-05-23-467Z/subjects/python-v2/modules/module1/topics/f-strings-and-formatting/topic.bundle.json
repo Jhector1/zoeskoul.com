@@ -1,0 +1,201 @@
+{
+  "topicId": "f-strings-and-formatting",
+  "subjectSlug": "python-v2",
+  "moduleSlug": "python-1",
+  "sectionSlug": "python-v2-python-1-core-building-blocks-2",
+  "prefix": "py1",
+  "minutes": 22,
+  "topic": {
+    "labelKey": "topics.python-v2.python-1.f-strings-and-formatting.label",
+    "summaryKey": "topics.python-v2.python-1.f-strings-and-formatting.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-1.f-strings-and-formatting.cards.sketch0.title",
+      "sketchId": "what-is-an-f-string",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-1.f-strings-and-formatting.cards.sketch1.title",
+      "sketchId": "formatting-values",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-1.f-strings-and-formatting.cards.sketch2.title",
+      "sketchId": "f-strings-with-input",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.python-v2.python-1.f-strings-and-formatting.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 3,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python-v2.python-1.f-strings-and-formatting.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "code_greet_user",
+            "titleKey": "topics.python-v2.python-1.f-strings-and-formatting.projectSteps.code_greet_user.title",
+            "exerciseKey": "code-greet-user",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "code_format_price",
+            "titleKey": "topics.python-v2.python-1.f-strings-and-formatting.projectSteps.code_format_price.title",
+            "exerciseKey": "code-format-price",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "what-is-an-f-string",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-1.f-strings-and-formatting.what-is-an-f-string.title",
+      "bodyKey": "sketches.python-v2.python-1.f-strings-and-formatting.what-is-an-f-string.bodyMarkdown"
+    },
+    {
+      "id": "formatting-values",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-1.f-strings-and-formatting.formatting-values.title",
+      "bodyKey": "sketches.python-v2.python-1.f-strings-and-formatting.formatting-values.bodyMarkdown"
+    },
+    {
+      "id": "f-strings-with-input",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-1.f-strings-and-formatting.f-strings-with-input.title",
+      "bodyKey": "sketches.python-v2.python-1.f-strings-and-formatting.f-strings-with-input.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "sc-fstring-prefix",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-1.f-strings-and-formatting.quiz.sc-fstring-prefix",
+      "optionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "mc-why-use-fstrings",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-1.f-strings-and-formatting.quiz.mc-why-use-fstrings",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "fb-two-decimals",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-1.f-strings-and-formatting.quiz.fb-two-decimals",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": ":.2f"
+      }
+    },
+    {
+      "id": "code-greet-user",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-1.f-strings-and-formatting.quiz.code-greet-user",
+      "language": "python",
+      "starterCode": "name = input()\n# Print a greeting using an f-string",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "Lina\n",
+            "stdout": "Hello, Lina!\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "Omar\n",
+            "stdout": "Hello, Omar!\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "name = input()\nprint(f\"Hello, {name}!\")"
+      }
+    },
+    {
+      "id": "code-format-price",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-1.f-strings-and-formatting.quiz.code-format-price",
+      "language": "python",
+      "starterCode": "price = float(input())\n# Print the price with exactly two decimal places",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "7.5\n",
+            "stdout": "Price: $7.50\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "12\n",
+            "stdout": "Price: $12.00\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "price = float(input())\nprint(f\"Price: ${price:.2f}\")"
+      }
+    }
+  ]
+}

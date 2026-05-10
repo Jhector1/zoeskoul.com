@@ -4,6 +4,7 @@ import { normalizeLegacyCourseSpec } from "./normalizeLegacyCourseSpec.js";
 import { resolveSpecRelease } from "./resolveSpecRelease.js";
 import { validateCourseSpec } from "./validateCourseSpec.js";
 import fs from "node:fs/promises";
+import {validateCourseSpecWorkspaceLanguage} from "../validate/validateCourseSpecWorkspaceLanguage.js";
 
 async function pathExists(filePath: string) {
     try {
@@ -60,6 +61,7 @@ export async function validateCourseSpecForSubject(subjectSlug: string): Promise
 
     const releasedSpec = resolveSpecRelease(fullSpec);
     const releasedIssues = validateCourseSpec(releasedSpec);
+
     if (releasedIssues.length) {
         throw new Error(
             `Released course spec validation failed:\n- ${releasedIssues.join("\n- ")}`,
@@ -71,6 +73,12 @@ export async function validateCourseSpecForSubject(subjectSlug: string): Promise
             `Spec subjectSlug mismatch: expected "${subjectSlug}" but found "${fullSpec.subjectSlug}" in ${specPath}`,
         );
     }
+    if (releasedSpec.subjectSlug !== subjectSlug) {
+        throw new Error(
+            `Released spec subjectSlug mismatch: expected "${subjectSlug}" but found "${releasedSpec.subjectSlug}" in ${specPath}`,
+        );
+    }
+    validateCourseSpecWorkspaceLanguage({ spec:releasedSpec });
 
     return {
         subjectSlug: fullSpec.subjectSlug,

@@ -343,6 +343,8 @@ function normalizeModule(
     return {
         moduleNumber,
         moduleSlug: String(module?.moduleSlug ?? "").trim(),
+        prefix: cleanString(module?.prefix),
+
         order:
             typeof module?.order === "number" && Number.isFinite(module.order)
                 ? module.order
@@ -479,6 +481,20 @@ export function normalizeLegacyCourseSpec(raw: unknown): CourseSpec {
                         )
                         : [],
                 }
+                : undefined,
+        workspaceProfileId: cleanString(input.workspaceProfileId),
+        workspaceOverrides:
+            input.workspaceOverrides && typeof input.workspaceOverrides === "object"
+                ? input.workspaceOverrides
+                : undefined,
+        courseGenerationPolicy:
+            input.courseGenerationPolicy && typeof input.courseGenerationPolicy === "object"
+                ? input.courseGenerationPolicy
+                : undefined,
+        modulePolicies: Array.isArray(input.modulePolicies) ? input.modulePolicies : undefined,
+        topicPolicies:
+            input.topicPolicies && typeof input.topicPolicies === "object"
+                ? input.topicPolicies
                 : undefined,
     };
 }

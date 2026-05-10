@@ -1,0 +1,13 @@
+{
+  "topicId": "truthiness-and-empty-values",
+  "ok": false,
+  "issues": [
+    {
+      "code": "CODE_PROFILE_SOLUTION_EXECUTION_FAILED",
+      "category": "tests",
+      "severity": "error",
+      "exerciseId": "5",
+      "message": "Exercise \"5\" solutionCode could not be validated against its published tests: Solution code failed to execute for test #1."
+    }
+  ]
+}

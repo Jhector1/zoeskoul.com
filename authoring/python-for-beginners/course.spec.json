@@ -552,6 +552,8 @@
         }
       ]
     },
+
+
     {
       "moduleNumber": 5,
       "moduleSlug": "python-5-lists-tuples-and-dictionaries",
@@ -861,6 +863,8 @@
         }
       ]
     },
+
+
     {
       "moduleNumber": 8,
       "moduleSlug": "python-8-object-oriented-programming",

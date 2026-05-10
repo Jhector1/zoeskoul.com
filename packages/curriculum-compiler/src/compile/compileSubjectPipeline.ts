@@ -27,14 +27,64 @@ import { evaluateTopicDraft } from "../quality/evaluateTopicDraft.js";
 import type { CompileProgressCallback } from "./compileProgress.js";
 import { listTopicPlanNodes } from "../plan/listTopicPlanNodes.js";
 import { buildTopicSeedFromPlanNode } from "../seeds/buildTopicSeedFromPlanNode.js";
+import {getDraftTopicBundlePath, getDraftTopicMessagesPath} from "@zoeskoul/curriculum-core";
+import fs from "node:fs/promises";
+import {validateWorkspacePolicy} from "../validate/validateWorkspacePolicy.js";
+import {resolveWorkspacePolicy} from "../policy/resolveWorkspacePolicy.js";
+import {validateTopicBundleIdentity} from "../validate/validateTopicBundleIdentity.js";
+import {validateTopicMessagesIdentity} from "../validate/validateTopicMessagesIdentity.js";
+import {validateGenericExerciseHelp} from "../validate/validateGenericExerciseHelp.js";
+import {validateStarterCodeDoesNotRevealSolution} from "../validate/validateStarterCodeDoesNotRevealSolution.js";
+async function fileExists(filePath: string) {
+  try {
+    await fs.access(filePath);
+    return true;
+  } catch {
+    return false;
+  }
+}
 
+async function isTopicAlreadyCompiled(args: {
+  subjectSlug: string;
+  moduleOrder: number;
+  topicId: string;
+  locales: string[];
+}) {
+  const moduleDir = `module${args.moduleOrder}`;
+
+  const bundlePath = getDraftTopicBundlePath(
+      args.subjectSlug,
+      moduleDir,
+      args.topicId,
+  );
+
+  if (!(await fileExists(bundlePath))) {
+    return false;
+  }
+
+  for (const locale of args.locales) {
+    const messagesPath = getDraftTopicMessagesPath(
+        locale,
+        args.subjectSlug,
+        moduleDir,
+        args.topicId,
+    );
+
+    if (!(await fileExists(messagesPath))) {
+      return false;
+    }
+  }
+
+  return true;
+}
 export async function compileSubjectPipeline(args: {
   blueprint: CourseBlueprint;
   plan: CoursePlan;
   spec?: CourseSpec | null;
   provider: AiProvider;
   onProgress?: CompileProgressCallback;
-}) {
+  resume?: boolean;
+}){
   const shape = getSubjectShape(args.blueprint.profileId as "sql" | "python");
   const profileServices = getProfileServices(args.blueprint.profileId);
 
@@ -105,6 +155,29 @@ export async function compileSubjectPipeline(args: {
   });
 
   for (const node of topicNodes) {
+    if (args.resume) {
+      const alreadyCompiled = await isTopicAlreadyCompiled({
+        subjectSlug: args.blueprint.subjectSlug,
+        moduleOrder: node.moduleIndex,
+        topicId: node.topic.topicId,
+        locales: [sourceLocale, ...extraLocales],
+      });
+
+      if (alreadyCompiled) {
+        completedTopics += 1;
+
+        args.onProgress?.({
+          current: completedTopics,
+          total: totalTopics,
+          stage: "skipped completed topic",
+          topicId: node.topic.topicId,
+          moduleSlug: node.module.moduleSlug,
+          sectionSlug: node.section.sectionSlug,
+        });
+
+        continue;
+      }
+    }
     const seed = buildTopicSeedFromPlanNode({
       blueprint: args.blueprint,
       spec: args.spec ?? null,
@@ -145,7 +218,11 @@ export async function compileSubjectPipeline(args: {
     });
 
     const draft = evaluation.draft;
-
+    const workspacePolicy = resolveWorkspacePolicy({
+      blueprint: args.blueprint,
+      moduleNumber: node.module.order - 1,
+      topicId: node.topic.topicId,
+    });
     await writeTopicReports({
       subjectSlug: args.blueprint.subjectSlug,
       moduleOrder: node.moduleIndex,
@@ -156,6 +233,12 @@ export async function compileSubjectPipeline(args: {
       critiqueReport: evaluation.critiqueReport,
       semanticReport: evaluation.semanticReport,
     });
+    validateWorkspacePolicy({
+      text: JSON.stringify(evaluation.draft),
+      policy: workspacePolicy,
+      location: `${node.module.moduleSlug}/${node.topic.topicId}`,
+    });
+
 
     args.onProgress?.({
       current: completedTopics,
@@ -167,7 +250,14 @@ export async function compileSubjectPipeline(args: {
     });
 
     assertTopicAuthoringDraft(draft);
-
+    validateStarterCodeDoesNotRevealSolution({
+      draft,
+      location: `${node.module.moduleSlug}/${node.section.sectionSlug}/${node.topic.topicId}`,
+    });
+    validateGenericExerciseHelp({
+      draft,
+      location: `${node.module.moduleSlug}/${node.section.sectionSlug}/${node.topic.topicId}`,
+    });
     if (!evaluation.critiqueReport.ok) {
       const critiqueErrors = evaluation.critiqueReport.issues.filter(
           (issue) => issue.severity === "error",
@@ -217,10 +307,12 @@ export async function compileSubjectPipeline(args: {
       shape,
       seed,
       draft,
-      moduleOrder: node.moduleIndex,
-      sectionOrder: node.sectionOrder,
     });
-
+    validateTopicBundleIdentity({
+      seed,
+      topicBundle,
+      location: `${seed.moduleSlug}/${seed.sectionSlug}/${seed.topicId}`,
+    });
     const goldenReport = await profileServices.validateGolden({
       seed,
       draft,
@@ -262,7 +354,13 @@ export async function compileSubjectPipeline(args: {
       shape,
       seed,
       draft,
-      moduleOrder: node.moduleIndex,
+
+    });
+
+    validateTopicMessagesIdentity({
+      seed,
+      messages: sourceMessages,
+      location: `${seed.moduleSlug}/${seed.sectionSlug}/${seed.topicId}`,
     });
 
     assertNonEmptyMessages({
@@ -334,4 +432,103 @@ export async function compileSubjectPipeline(args: {
     shape,
     subjectManifest,
   };
+}
+import {
+  isRetryableTopicValidationError,
+} from "../validate/RetryableTopicValidationError.js";
+import { writeTopicAttemptReport } from "../reports/writeTopicAttemptReport.js";
+import { writeTopicCompileStatus } from "../reports/writeTopicCompileStatus.js";
+
+const MAX_TOPIC_RETRIES = 2;
+
+async function compileTopicWithRetries(args: {
+  node: ResolvedTopicNode;
+  reportDir: string;
+  compileOnce: (retry?: {
+    attempt: number;
+    maxRetries: number;
+    previousErrorCode: string;
+    previousErrorMessage: string;
+  }) => Promise<{
+    rawDraft?: unknown;
+    repairedDraft?: unknown;
+    repairReport?: unknown;
+    critiqueReport?: unknown;
+    semanticReport?: unknown;
+    goldenReport?: unknown;
+    result: unknown;
+  }>;
+}) {
+  let previousError: unknown = null;
+
+  for (let attempt = 0; attempt <= MAX_TOPIC_RETRIES; attempt += 1) {
+    const retryContext =
+        attempt > 0 && previousError instanceof Error
+            ? {
+              attempt,
+              maxRetries: MAX_TOPIC_RETRIES,
+              previousErrorCode: (previousError as any).code ?? "UNKNOWN",
+              previousErrorMessage: previousError.message,
+            }
+            : undefined;
+
+    try {
+      const result = await args.compileOnce(retryContext);
+
+      await writeTopicAttemptReport({
+        reportDir: args.reportDir,
+        attempt,
+        status: "success",
+        rawDraft: result.rawDraft,
+        repairedDraft: result.repairedDraft,
+        repairReport: result.repairReport,
+        critiqueReport: result.critiqueReport,
+        semanticReport: result.semanticReport,
+        goldenReport: result.goldenReport,
+      });
+
+      await writeTopicCompileStatus({
+        reportDir: args.reportDir,
+        status: "success",
+        attempts: attempt + 1,
+        finalAttempt: attempt,
+      });
+
+      return result.result;
+    } catch (error) {
+      previousError = error;
+
+      await writeTopicAttemptReport({
+        reportDir: args.reportDir,
+        attempt,
+        status: "failed",
+        error,
+      });
+
+      const canRetry =
+          attempt < MAX_TOPIC_RETRIES &&
+          isRetryableTopicValidationError(error);
+
+      if (canRetry) {
+        continue;
+      }
+
+      await writeTopicCompileStatus({
+        reportDir: args.reportDir,
+        status: "failed",
+        attempts: attempt + 1,
+        finalAttempt: attempt,
+        errorCode:
+            typeof error === "object" && error !== null
+                ? String((error as any).code ?? "UNKNOWN")
+                : "UNKNOWN",
+        errorMessage:
+            error instanceof Error ? error.message : String(error),
+      });
+
+      throw error;
+    }
+  }
+
+  throw previousError;
 }

@@ -1,0 +1,130 @@
+{
+  "topics": {
+    "python-v2": {
+      "python-1": {
+        "naming-and-assigning-variables": {
+          "label": "Naming and Assigning Variables",
+          "summary": "Use clear variable names, store values in variables, and understand that reassignment updates the stored value.",
+          "cards": {
+            "sketch0": {
+              "title": "Variables store values with names"
+            },
+            "sketch1": {
+              "title": "Choose clear names and follow naming rules"
+            },
+            "sketch2": {
+              "title": "Reassignment changes the stored value"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Practice variable naming and reassignment"
+            }
+          },
+          "projectSteps": {
+            "code_store_and_print": {
+              "title": "Store values in variables and print them"
+            },
+            "code_reassign_and_print": {
+              "title": "Update a variable with reassignment"
+            }
+          },
+          "quiz": {
+            "sc-clear-variable-name": {
+              "title": "Pick the clearest variable name",
+              "prompt": "Which variable name is the clearest choice for storing a person's age?",
+              "hint": "Choose the name that explains the value best.",
+              "help": {
+                "concept": "Good variable names make code easier to read. A clear name describes what the value represents, not just that it exists.",
+                "hint_1": "Look for the option that directly mentions age.",
+                "hint_2": "Prefer a descriptive name over a single letter or a vague word."
+              },
+              "options": {
+                "a": "x",
+                "b": "value",
+                "c": "person_age",
+                "d": "data"
+              }
+            },
+            "mc-valid-variable-names": {
+              "title": "Find valid Python variable names",
+              "prompt": "Choose all names that are valid Python variable names.",
+              "hint": "Check for spaces and whether the name starts with a number.",
+              "help": {
+                "concept": "Python variable names can use letters, numbers, and underscores, but they cannot contain spaces and cannot start with a number.",
+                "hint_1": "Names with underscores are often valid if they do not start with a digit.",
+                "hint_2": "Remove any option with a space or a leading number, then review what remains."
+              },
+              "options": {
+                "a": "user_name",
+                "b": "2score",
+                "c": "favoriteColor",
+                "d": "user name"
+              }
+            },
+            "fb-reassignment-meaning": {
+              "title": "Complete the idea of reassignment",
+              "prompt": "Fill in the blank to complete the sentence.",
+              "hint": "Think about what happens when a variable gets a new value.",
+              "help": {
+                "concept": "Reassignment means giving an existing variable a new value. The variable keeps its name, but the stored value changes.",
+                "hint_1": "The old value does not stay active in that variable after reassignment.",
+                "hint_2": "Choose the word that means the value is changed to a new one."
+              },
+              "template": "When you write `score = 8` after `score = 3`, the variable `score` is ___.",
+              "choices": [
+                "printed",
+                "reassigned",
+                "compared",
+                "deleted"
+              ]
+            },
+            "code-store-and-print": {
+              "title": "Store values in variables and print them",
+              "prompt": "Write Python code that creates a variable named `name` with the value `\"Lina\"` and a variable named `age` with the value `12`. Then print `name` on one line and `age` on the next line.",
+              "hint": "Focus on the programming task being asked for, not on copying final solution text.",
+              "help": {
+                "concept": "Build the solution from the behavior the exercise is testing.",
+                "hint_1": "Think about which steps, functions, or statements are required for the task.",
+                "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "# Create the variables below\n\n# Print the values below"
+            },
+            "code-reassign-and-print": {
+              "title": "Update a variable with reassignment",
+              "prompt": "Write Python code that creates a variable named `points` with the value `5`, then reassigns `points` to `9`, and finally prints the current value of `points`.",
+              "hint": "Assign once, assign again, then print the variable.",
+              "help": {
+                "concept": "Reassignment updates the value stored in a variable. After the second assignment, the variable holds the newer value.",
+                "hint_1": "Use the same variable name both times.",
+                "hint_2": "The printed result should come from the updated value, not the original one."
+              },
+              "starterCode": "# Create points with a starting value\n\n# Reassign points\n\n# Print points"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-v2": {
+      "python-1": {
+        "naming-and-assigning-variables": {
+          "what-is-a-variable": {
+            "title": "Variables store values with names",
+            "bodyMarkdown": "A variable is a name that points to a value. In Python, you create a variable with `=`.\n\n```python\nscore = 10\nprint(score)\n```\n\nThis prints `10`.\n\nLine by line:\n- `score = 10` stores the value `10` in a variable named `score`.\n- `print(score)` asks Python to show the value stored in `score`.\n\nGood variable names help you understand your code quickly. Names like `score`, `age`, and `city` are clearer than names like `x` or `thing`.\n\nWorked example:\n\n```python\ncity = \"Lagos\"\nprint(city)\n```\n\nHere, the variable `city` stores the text `\"Lagos\"`, and `print(city)` shows that value.\n\nTry it yourself: Type the example in the code editor, click Run, and then change `city` to a different place name. Check the output panel."
+          },
+          "clear-names-and-rules": {
+            "title": "Choose clear names and follow naming rules",
+            "bodyMarkdown": "A clear variable name tells you what the value means.\n\nFor example:\n\n```python\nuser_age = 14\nfavorite_color = \"blue\"\n```\n\nThese names are easier to read than:\n\n```python\na = 14\nb = \"blue\"\n```\n\nBeginner-friendly naming rules:\n- Use letters, numbers, and underscores.\n- Start with a letter or underscore, not a number.\n- Do not use spaces.\n- Names are case-sensitive, so `age` and `Age` are different.\n\nWorked example:\n- `student_name` is a good name because it explains the value.\n- `2name` is not valid because names cannot start with a number.\n- `student name` is not valid because spaces are not allowed.\n\nYour turn: Rename a variable like `x = 12` to something clearer such as `hours_studied = 12`. Then print it and check the output panel.\n\nLine by line: read the first statement to see which value is stored or checked, then follow each conditional branch in order to see which path prints the final result."
+          },
+          "reassignment": {
+            "title": "Reassignment changes the stored value",
+            "bodyMarkdown": "A variable can be updated. This is called **reassignment**.\n\n```python\ncount = 3\nprint(count)\ncount = 5\nprint(count)\n```\n\nThis prints:\n\n```python\n3\n5\n```\n\nStep by step:\n- `count = 3` stores `3`.\n- The first `print(count)` shows `3`.\n- `count = 5` replaces the old value with `5`.\n- The second `print(count)` shows the new value.\n\nWorked example:\n\n```python\nname = \"Ava\"\nprint(name)\nname = \"Mina\"\nprint(name)\n```\n\nThe second assignment does not keep both values. The variable now stores only `\"Mina\"`.\n\nTry this: Run the example, then change the second value to your own name and see how the output changes."
+          }
+        }
+      }
+    }
+  }
+}

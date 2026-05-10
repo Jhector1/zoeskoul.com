@@ -27,8 +27,7 @@ async function main() {
       if (!arg1) {
         throw new Error("Usage: curriculum-cli compile-subject <blueprintPath>");
       }
-      await runCompileSubject(arg1);
-      return;
+      await runCompileSubject(arg1, [arg2, ...rest].filter(Boolean) as string[]);      return;
     }
 
     case "compile-topic": {

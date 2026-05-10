@@ -11,12 +11,13 @@ export const CATALOG_MANIFESTS: Record<string, CatalogManifest> = {
       "order": 10,
       "title": "Python",
       "description": "Python learning paths from first steps through larger projects, deeper problem solving, and more advanced programming patterns.",
-      "imagePublicId": "Screenshot_2026-02-03_at_1.19.20_AM_kdnlpk",
+      "imagePublicId": "bee933f4-cfee-44ae-9c5e-7d7b90b2f63a",
       "imageAlt": "Python catalog cover",
-      "defaultSubjectSlug": "python",
+      "defaultSubjectSlug": "python-v2",
       "status": "active",
       "subjectSlugs": [
-        "python"
+        "python",
+        "python-v2"
       ],
       "meta": {
         "family": "programming",
@@ -46,5 +47,6 @@ export const CATALOG_MANIFESTS: Record<string, CatalogManifest> = {
 
 export const SUBJECT_CATALOG_SLUGS: Record<string, string> = {
   "python": "python",
+  "python-v2": "python",
   "sql": "sql",
 };

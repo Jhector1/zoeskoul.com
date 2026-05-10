@@ -1,0 +1,125 @@
+{
+  "topics": {
+    "python-v2": {
+      "python-0": {
+        "reading-error-messages": {
+          "label": "Reading Error Messages",
+          "summary": "Learn how to read tracebacks and locate the line that needs attention.",
+          "cards": {
+            "sketch0": {
+              "title": "Understanding Tracebacks"
+            },
+            "sketch1": {
+              "title": "Common Error Types"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Personal Introduction Script"
+            }
+          },
+          "projectSteps": {
+            "5": {
+              "title": "Debugging a Simple Program"
+            }
+          },
+          "quiz": {
+            "1": {
+              "title": "Identifying Error Types",
+              "prompt": "What type of error is raised when you try to divide by zero?",
+              "hint": "Focus on the main concept being tested and eliminate choices that describe something different.",
+              "help": {
+                "concept": "Choose the option that matches the core idea described in the question without relying on repeated wording from the answer choices.",
+                "hint_1": "Rule out options that describe a different role, behavior, or concept than the question is testing.",
+                "hint_2": "Pick the option that best matches the concept, not the one that simply repeats familiar wording."
+              },
+              "options": {
+                "a": "SyntaxError",
+                "b": "ZeroDivisionError",
+                "c": "TypeError",
+                "d": "NameError"
+              }
+            },
+            "2": {
+              "title": "Understanding Traceback",
+              "prompt": "What information does a traceback provide?",
+              "hint": "Tracebacks help you locate errors in your code.",
+              "help": {
+                "concept": "A traceback shows the sequence of calls leading to an error, including the line number.",
+                "hint_1": "It helps you find where to look in your code.",
+                "hint_2": "Focus on what happens when an error occurs."
+              },
+              "options": {
+                "a": "The output of the program",
+                "b": "The line number where the error occurred",
+                "c": "The type of variable used",
+                "d": "The result of the last calculation"
+              }
+            },
+            "3": {
+              "title": "Common Python Errors",
+              "prompt": "Which of the following are common Python error types? (Select all that apply)",
+              "hint": "Consider the errors that can occur during code execution.",
+              "help": {
+                "concept": "Common errors include syntax issues and runtime problems.",
+                "hint_1": "Think about errors that can happen while running a program.",
+                "hint_2": "Not all errors are related to syntax."
+              },
+              "options": {
+                "a": "SyntaxError",
+                "b": "ZeroDivisionError",
+                "c": "TypeError",
+                "d": "RuntimeError"
+              }
+            },
+            "4": {
+              "title": "Fixing Syntax Errors",
+              "prompt": "Choose the best value for the first missing blank in the statement.",
+              "hint": "Focus on the missing concept or keyword.",
+              "help": {
+                "concept": "This task checks the key idea behind fixing the missing term errors.",
+                "hint_1": "Look for the word or phrase that best matches the lesson concept.",
+                "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
+              },
+              "template": "The first missing value is [blank1].",
+              "choices": [
+                "syntax",
+                "logic",
+                "format",
+                "structure"
+              ]
+            },
+            "5": {
+              "title": "Debugging a Simple Program",
+              "prompt": "Fix the following code to avoid the error and print 'Hello, World!'.",
+              "hint": "Break the task into the main code steps first.",
+              "help": {
+                "concept": "This task checks whether you can apply debugging a simple program in a working solution.",
+                "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
+                "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
+              },
+              "starterCode": "print('Hello, World!'"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-v2": {
+      "python-0": {
+        "reading-error-messages": {
+          "1": {
+            "title": "Understanding Tracebacks",
+            "bodyMarkdown": "When your Python program encounters an error, it generates a traceback. This traceback shows the sequence of function calls that led to the error. For example:\n\n```python\nprint(10 / 0)\n```\nThis code will raise a `ZeroDivisionError`. The traceback will indicate the line number where the error occurred, helping you to quickly locate and fix the issue.\n\n**Your turn:** Try running the code above and observe the traceback."
+          },
+          "2": {
+            "title": "Common Error Types",
+            "bodyMarkdown": "There are several common error types in Python, such as `SyntaxError`, `TypeError`, and `NameError`. Each error type provides clues about what went wrong. For instance:\n\n```python\nprint('Hello'\n```\nThis code will raise a `SyntaxError` because of a missing parenthesis. The traceback will point to the exact location of the error.\n\n**Try this:** Modify the code to fix the error and run it again."
+          }
+        }
+      }
+    }
+  }
+}

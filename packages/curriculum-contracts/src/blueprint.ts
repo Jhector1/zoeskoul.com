@@ -1,5 +1,7 @@
 import type { LocaleCode } from "./locales.js";
 import type { ManifestIdeServiceConfig } from "./ide-services.js";
+import {CourseGenerationPolicy, ModulePedagogyPolicy, TopicPedagogyPolicy, WorkspaceProfile} from "./workspace";
+import {SqlDialect} from "./manifest";
 
 export type CourseProfileId =
     | "sql"
@@ -10,17 +12,21 @@ export type CourseProfileId =
     | "data_science";
 
 export type BlueprintRuntimePolicy = {
-  sqlDialect?: string;
   datasetStrategy?: "module_based" | "topic_based" | "manual";
   datasetId?: string;
   preferredDatasetId?: string;
-  resultShape?: string;
-  moduleDatasetIds?: Record<string, string>;
+  moduleDatasetIds?: Record<string, string>;   sqlDialect?: SqlDialect;
+  resultShape?: "table";
 };
-
+export type BlueprintModuleScheduleEntry = {
+  moduleNumber: number;
+  weekStart: number;
+  weekEnd: number;
+};
 export type CourseBlueprint = {
   subjectSlug: string;
   catalogSlug?: string;
+  moduleSchedule?: BlueprintModuleScheduleEntry[];
   profileId: CourseProfileId;
   sourceLocale: "en";
   targetLocales: LocaleCode[];
@@ -46,4 +52,20 @@ export type CourseBlueprint = {
     defaultServices?: ManifestIdeServiceConfig;
     moduleServiceDefaults?: Record<string, ManifestIdeServiceConfig>;
   };
+  versioning?: {
+    family: string;
+    version: number;
+    status: "draft" | "active" | "legacy" | "disabled";
+    defaultForNewEnrollments?: boolean;
+    supersedes?: string | null;
+    supersededBy?: string | null;
+  };
+
+  workspaceProfileId?: string;
+  workspaceOverrides?: Partial<WorkspaceProfile>;
+
+  courseGenerationPolicy?: CourseGenerationPolicy;
+
+  modulePolicies?: ModulePedagogyPolicy[];
+  topicPolicies?: Record<string, TopicPedagogyPolicy>;
 };

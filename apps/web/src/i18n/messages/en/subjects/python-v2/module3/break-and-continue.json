@@ -1,0 +1,130 @@
+{
+  "topics": {
+    "python-v2": {
+      "python-3": {
+        "break-and-continue": {
+          "label": "Break and Continue",
+          "summary": "Control loop flow using break and continue.",
+          "cards": {
+            "sketch0": {
+              "title": "Using break to stop a loop early"
+            },
+            "sketch1": {
+              "title": "Using continue to skip one loop turn"
+            },
+            "sketch2": {
+              "title": "Break vs continue"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Loop control practice"
+            }
+          },
+          "projectSteps": {
+            "code_skip_multiples_of_three": {
+              "title": "Print numbers except multiples of 3"
+            },
+            "code_stop_at_negative": {
+              "title": "Stop when a negative number appears"
+            }
+          },
+          "quiz": {
+            "sc-break-main-effect": {
+              "title": "What does break do?",
+              "prompt": "Inside a `while` loop, what is the main effect of `break`?",
+              "hint": "Think about whether the whole loop stops or just one turn is skipped.",
+              "help": {
+                "concept": "`break` ends the current loop immediately. After that, Python continues with the code after the loop.",
+                "hint_1": "Compare it with `continue`, which does not end the whole loop.",
+                "hint_2": "Ask yourself: after `break`, does Python come back for another loop turn?"
+              },
+              "options": {
+                "a": "It ends the whole loop immediately.",
+                "b": "It skips one loop turn and then continues looping.",
+                "c": "It restarts the loop from the beginning.",
+                "d": "It pauses the loop until input is given."
+              }
+            },
+            "mc-continue-true-statements": {
+              "title": "Choose the true statements about continue",
+              "prompt": "Which statements about `continue` are correct? Choose all that apply.",
+              "hint": "Focus on what happens to the current turn and to later turns.",
+              "help": {
+                "concept": "`continue` skips the rest of the current loop iteration, but the loop itself keeps running if its condition still allows more turns.",
+                "hint_1": "Look for statements about skipping one turn versus stopping everything.",
+                "hint_2": "More than one statement is correct. Think about whether code after `continue` in the same loop turn will run."
+              },
+              "options": {
+                "a": "It skips the rest of the current loop turn.",
+                "b": "It can be used to ignore one special case and keep looping.",
+                "c": "It always ends the loop completely.",
+                "d": "Code after `continue` in the same loop turn is skipped."
+              }
+            },
+            "fb-break-fill": {
+              "title": "Complete the loop statement",
+              "prompt": "Choose the best value for the missing blank in the statement.",
+              "hint": "You want to stop the loop completely when the condition is true.",
+              "help": {
+                "concept": "Use `the missing term` to exit a loop right away. Use `continue` to skip only the current turn.",
+                "hint_1": "The blank should be the keyword that ends the loop, not the one that skips one turn.",
+                "hint_2": "If the goal is to leave the loop and move on, choose the loop-exit keyword."
+              },
+              "template": "The missing value is [blank1].",
+              "choices": [
+                "break",
+                "continue",
+                "range",
+                "print"
+              ]
+            },
+            "code-skip-multiples-of-three": {
+              "title": "Print numbers except multiples of 3",
+              "prompt": "Write Python code that reads one integer `n`. Use a `while` loop to print the numbers from `1` to `n`, one per line, but skip numbers that are multiples of `3` using `continue`.",
+              "hint": "Focus on the programming task being asked for, not on copying final solution text.",
+              "help": {
+                "concept": "Build the solution from the behavior the exercise is testing.",
+                "hint_1": "Think about which steps, functions, or statements are required for the task.",
+                "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "n = int(input())\n\n# Print numbers from 1 to n.\n# Skip multiples of 3 using continue."
+            },
+            "code-stop-at-negative": {
+              "title": "Stop when a negative number appears",
+              "prompt": "Write Python code that reads integers one per line. Keep reading and adding them to a running total while the numbers are zero or positive. If a negative number appears, stop the loop with `break` and print the total of the non-negative numbers only.",
+              "hint": "Focus on the programming task being asked for, not on copying final solution text.",
+              "help": {
+                "concept": "Build the solution from the behavior the exercise is testing.",
+                "hint_1": "Think about which steps, functions, or statements are required for the task.",
+                "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "# Read integers one per line.\n# Stop when a negative number appears.\n# Print the total of the non-negative numbers."
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-v2": {
+      "python-3": {
+        "break-and-continue": {
+          "break-stops-loop": {
+            "title": "Using break to stop a loop early",
+            "bodyMarkdown": "A `break` statement ends the loop immediately. Python stops repeating and moves to the first line after the loop.\n\nHere is a simple example:\n\n```python\ncount = 1\nwhile count <= 5:\n    print(count)\n    if count == 3:\n        break\n    count += 1\n\nprint(\"done\")\n```\n\nStep by step:\n- `count` starts at `1`\n- The loop prints `1`, then `2`, then `3`\n- When `count == 3`, `break` runs\n- The loop ends right away\n- `print(\"done\")` runs after the loop\n\nSo the output is:\n\n```python\n1\n2\n3\ndone\n```\n\nA common use for `break` is stopping when you find what you need, like the first matching number or a special word.\n\nTry it yourself: Type the example in the code editor, click Run, and then change the stop value from `3` to `4`. Check how the output changes in the output panel."
+          },
+          "continue-skips-turn": {
+            "title": "Using continue to skip one loop turn",
+            "bodyMarkdown": "A `continue` statement does **not** end the whole loop. It skips the rest of the current loop turn and moves to the next repetition.\n\nExample:\n\n```python\ncount = 0\nwhile count < 5:\n    count += 1\n    if count == 3:\n        continue\n    print(count)\n```\n\nLine by line:\n- `count` starts at `0`\n- Each loop turn adds `1` first\n- When `count` becomes `3`, `continue` runs\n- That means `print(count)` is skipped for that turn only\n- The loop keeps going with the next value\n\nThe output is:\n\n```python\n1\n2\n4\n5\n```\n\nNotice that `3` is missing, but the loop still continues.\n\n`continue` is useful when you want to ignore one case, such as skipping invalid input or skipping even numbers.\n\nYour turn: Type the code in the code editor, click Run, and change the skipped value from `3` to `2`. Compare the new output with the old output."
+          },
+          "break-vs-continue": {
+            "title": "Break vs continue",
+            "bodyMarkdown": "Both `break` and `continue` change loop flow, but they do different jobs:\n\n- `break` = stop the whole loop now\n- `continue` = skip this turn and keep looping\n\nCompare these two examples.\n\nWith `break`:\n\n```python\nn = 1\nwhile n <= 5:\n    if n == 3:\n        break\n    print(n)\n    n += 1\n```\n\nThis prints:\n\n```python\n1\n2\n```\n\nThe loop stops before printing `3`.\n\nWith `continue`:\n\n```python\nn = 0\nwhile n < 5:\n    n += 1\n    if n == 3:\n        continue\n    print(n)\n```\n\nThis prints:\n\n```python\n1\n2\n4\n5\n```\n\nThe loop skips only the turn where `n` is `3`.\n\nBe careful with `while` loops: make sure your loop variable still changes. If you use `continue` before updating the variable, the loop can get stuck.\n\nTry this: In the code editor, change the examples so they react when the value is `4` instead of `3`. Click Run and explain to yourself which numbers appear and why.\n\nLine by line: read the first statement to see which value is stored or checked, then follow each conditional branch in order to see which path prints the final result."
+          }
+        }
+      }
+    }
+  }
+}

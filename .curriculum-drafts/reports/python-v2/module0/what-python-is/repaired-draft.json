@@ -1,0 +1,125 @@
+{
+  "title": "What Python Is Used For",
+  "summary": "Understand Python's role in automation, web apps, data, beginner programming, and AI.",
+  "minutes": 12,
+  "sketchBlocks": [
+    {
+      "id": "sketch_1",
+      "title": "Introduction to Python's Uses",
+      "bodyMarkdown": "Python is a versatile programming language used for various applications. It is popular in web development, data analysis, artificial intelligence, and automation. For example, you can use Python to automate repetitive tasks like sending emails or processing data files. **Try it yourself:** Think of a task in your daily life that could be automated using Python."
+    },
+    {
+      "id": "sketch_2",
+      "title": "Python in Data Science",
+      "bodyMarkdown": "In data science, Python is used to analyze and visualize data. Libraries like Pandas and Matplotlib make it easy to manipulate data and create graphs. For instance, you can load a dataset and plot a graph to visualize trends. Here's a simple example:\n\n```python\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\ndata = {'Year': [2020, 2021, 2022], 'Sales': [150, 200, 250]}\ndf = pd.DataFrame(data)\nplt.plot(df['Year'], df['Sales'])\nplt.title('Sales Over Years')\nplt.xlabel('Year')\nplt.ylabel('Sales')\nplt.show()\n```\n**Try this:** Modify the sales data and see how the graph changes.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "quiz_1",
+      "kind": "single_choice",
+      "title": "What is Python commonly used for?",
+      "prompt": "Select the most common use of Python.",
+      "options": [
+        "Creating mobile applications",
+        "Web development",
+        "Game development",
+        "Hardware programming"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "quiz_2",
+      "kind": "single_choice",
+      "title": "Which library is used for data visualization in Python?",
+      "prompt": "Choose the library that helps in creating graphs and plots.",
+      "options": [
+        "NumPy",
+        "Matplotlib",
+        "Pandas",
+        "Scikit-learn"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "quiz_3",
+      "kind": "multi_choice",
+      "title": "Select all areas where Python is used.",
+      "prompt": "Choose all correct applications of Python.",
+      "options": [
+        "Web development",
+        "Data analysis",
+        "Game development",
+        "Machine learning"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "quiz_4",
+      "kind": "fill_blank_choice",
+      "title": "Fill in the blank: Python is often used for ________ tasks.",
+      "prompt": "Complete the sentence with the correct word.",
+      "template": "Python is often used for ________ tasks.",
+      "choices": [
+        "automating",
+        "gaming",
+        "hardware",
+        "designing"
+      ],
+      "correctValue": "automating",
+      "hint": "Focus on the missing concept or keyword.",
+      "help": {
+        "concept": "This task checks the key idea behind fill in the blank: python is often used for ________ tasks..",
+        "hint_1": "Look for the word or phrase that best matches the lesson concept.",
+        "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
+      }
+    },
+    {
+      "id": "quiz_5",
+      "kind": "code_input",
+      "title": "Create a simple Python program.",
+      "prompt": "Write a Python program that prints 'Hello, World!'",
+      "starterCode": "// Write your answer below",
+      "solutionCode": "print('Hello, World!')",
+      "tests": [
+        {
+          "stdin": "",
+          "stdout": "Hello, World!\n"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Break the task into the main code steps first.",
+      "help": {
+        "concept": "This task checks whether you can apply create a simple python program. in a working solution.",
+        "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
+        "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
+      }
+    }
+  ]
+}

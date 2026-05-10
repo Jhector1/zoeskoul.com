@@ -222,6 +222,26 @@ export function assertTopicAuthoringDraft(
                 fail(`${label} code_input needs solutionCode`);
             }
 
+            const recipeType = (exercise as { recipeType?: string }).recipeType;
+            const tests = (exercise as { tests?: unknown[] }).tests;
+            const semanticChecks = (exercise as { semanticChecks?: unknown[] }).semanticChecks;
+
+            const hasTests = Array.isArray(tests) && tests.length > 0;
+            const hasSemanticChecks =
+                Array.isArray(semanticChecks) && semanticChecks.length > 0;
+
+            if (recipeType === "semantic" && !hasSemanticChecks) {
+                fail(`${label} semantic code_input needs semanticChecks`);
+            }
+
+            if (recipeType === "fixed_tests" && !hasTests) {
+                fail(`${label} fixed_tests code_input needs tests`);
+            }
+
+            if (recipeType !== "sql_query" && !hasTests && !hasSemanticChecks) {
+                fail(`${label} code_input needs either tests or semanticChecks`);
+            }
+
             if (
                 exercise.recipeType === "sql_query" &&
                 typeof exercise.datasetId !== "undefined" &&
@@ -230,13 +250,13 @@ export function assertTopicAuthoringDraft(
                 fail(`${label} code_input datasetId must be non-empty when provided`);
             }
 
-            if (
-                exercise.recipeType === "semantic" &&
-                (!Array.isArray((exercise as { semanticChecks?: unknown[] }).semanticChecks) ||
-                    (exercise as { semanticChecks?: unknown[] }).semanticChecks!.length < 1)
-            ) {
-                fail(`${label} semantic code_input needs semanticChecks`);
-            }
+            // if (
+            //     exercise.recipeType === "semantic" &&
+            //     (!Array.isArray((exercise as { semanticChecks?: unknown[] }).semanticChecks) ||
+            //         (exercise as { semanticChecks?: unknown[] }).semanticChecks!.length < 1)
+            // ) {
+            //     fail(`${label} semantic code_input needs semanticChecks`);
+            // }
 
             return;
         }

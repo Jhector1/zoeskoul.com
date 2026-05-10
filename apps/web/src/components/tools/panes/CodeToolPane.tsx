@@ -858,15 +858,18 @@ export default function CodeToolPane(props: {
                 language: effectiveLanguage,
                 lang: effectiveLanguage,
 
-                /**
-                 * This path is a workspace/tool synchronization path.
-                 * It must NEVER dismiss checked-answer feedback.
-                 *
-                 * Real typing/editing is handled by the direct tool edit handlers
-                 * such as setToolCode, setToolStdin, setToolWorkspace, etc.
-                 */
-                updateOrigin: "sync",
-                workspaceOrigin: "sync",
+                updateOrigin: shouldEmitCodeFields ? "user" : "sync",
+                workspaceOrigin: shouldEmitCodeFields ? "user" : "sync",
+
+                ...(shouldEmitCodeFields
+                    ? {
+                        submitted: false,
+                        feedbackDismissed: true,
+                        dismissFeedbackOnEdit: true,
+                        userEdited: true,
+                    }
+                    : {}),
+
                 updatedAt: Date.now(),
             });
         }        if (shouldEmitCodeFields) {

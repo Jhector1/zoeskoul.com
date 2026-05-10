@@ -1,5 +1,5 @@
-import type { SqlCell, SqlExpectedInput, SqlExpectedTable } from "./types";
-import { makeSqlExpected } from "./types";
+import type { SqlCell, SqlExpectedInput, SqlExpectedTable } from "./types.js";
+import { makeSqlExpected } from "./types.js";
 
 export function normalizeSqlCell(value: unknown): SqlCell {
     if (value == null) return null;

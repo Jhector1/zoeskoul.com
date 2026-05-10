@@ -22,7 +22,7 @@
         "family": "python",
         "version": 1,
         "status": "legacy",
-        "supersededBy": "python-v1"
+        "supersededBy": "python-v2"
       },
       "completionPolicy": {
         "requireAllPublishedModules": true,

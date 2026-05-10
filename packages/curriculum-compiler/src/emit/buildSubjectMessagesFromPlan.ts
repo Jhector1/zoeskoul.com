@@ -112,8 +112,7 @@ export function buildSubjectMessagesFromPlan(args: {
 
     for (const module of plan.modules) {
         const moduleIndex = moduleOrderToIndex(module.order);
-        const logicalModuleSlug = shape.subjectManifest.moduleSlug(moduleIndex);
-
+        const logicalModuleSlug = module.moduleSlug;
         moduleMessages[logicalModuleSlug] = {
             title: module.title,
             description: module.description ?? module.purpose ?? "",
@@ -131,10 +130,7 @@ export function buildSubjectMessagesFromPlan(args: {
         for (const section of module.sections) {
             const logicalSectionSlug = resolveLogicalSectionSlug({
                 subjectSlug,
-                rawSectionSlug: shape.subjectManifest.sectionSlug(
-                    moduleIndex,
-                    section.order,
-                ),
+                rawSectionSlug: section.sectionSlug,
             });
 
             const topicTitles = section.topics.map((topic) => topic.title);

@@ -1,0 +1,130 @@
+{
+  "topics": {
+    "python-v2": {
+      "python-1": {
+        "common-variable-mistakes": {
+          "label": "Common Variable Mistakes",
+          "summary": "Avoid undefined names, accidental strings, and confusing names.",
+          "cards": {
+            "sketch0": {
+              "title": "Using a variable before it exists"
+            },
+            "sketch1": {
+              "title": "Accidental strings instead of numbers"
+            },
+            "sketch2": {
+              "title": "Confusing names and overwritten values"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Repair two variable mistakes"
+            }
+          },
+          "projectSteps": {
+            "ci_fix_undefined_total": {
+              "title": "Fix the undefined variable"
+            },
+            "ci_fix_string_math": {
+              "title": "Fix accidental string math"
+            }
+          },
+          "quiz": {
+            "ci-fix-undefined-total": {
+              "title": "Fix the undefined variable",
+              "prompt": "The code tries to print `total` before it is assigned. Rewrite it so the program prints `15`.",
+              "hint": "Focus on the programming task being asked for, not on copying final solution text.",
+              "help": {
+                "concept": "Build the solution from the behavior the exercise is testing.",
+                "hint_1": "Think about which steps, functions, or statements are required for the task.",
+                "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "print(total)\ntotal = 15"
+            },
+            "sc-quoted-number-meaning": {
+              "title": "Quoted number or real number?",
+              "prompt": "What does `count = \"7\"` store in `count`?",
+              "hint": "Quotes usually mean text in Python.",
+              "help": {
+                "concept": "A value inside quotes is a string, even if it looks like a number. Strings are text values, not numeric values for math.",
+                "hint_1": "Focus on the quotes around 7.",
+                "hint_2": "Ask whether Python sees text characters or a numeric value when quotes are present."
+              },
+              "options": {
+                "a": "A string containing the text 7",
+                "b": "An integer with value 7",
+                "c": "A variable error",
+                "d": "A decimal number"
+              }
+            },
+            "mc-good-variable-habits": {
+              "title": "Choose the good habits",
+              "prompt": "Which actions help avoid common variable mistakes? Choose all correct answers.",
+              "hint": "Think about order, naming, and value types.",
+              "help": {
+                "concept": "Good variable habits include assigning before use, choosing clear names, and keeping track of whether a value is text or a number.",
+                "hint_1": "Look for choices about creating variables before reading them and using meaningful names.",
+                "hint_2": "Also check which choice helps you avoid treating text like a number."
+              },
+              "options": {
+                "a": "Assign a variable before using it",
+                "b": "Use clear names like `age` instead of vague names like `x` when possible",
+                "c": "Remember that quoted values are strings",
+                "d": "Assume Python will turn every string into a number automatically"
+              }
+            },
+            "fb-int-conversion": {
+              "title": "Convert text input before math",
+              "prompt": "Complete the code so the text value is converted to a number before adding 1.",
+              "hint": "Focus on the missing concept rather than the exact missing word.",
+              "help": {
+                "concept": "The blank should be filled with the term that matches the job the statement is trying to perform.",
+                "hint_1": "Think about what the missing part is supposed to do in the statement.",
+                "hint_2": "Choose the term that best completes the meaning of the statement."
+              },
+              "template": "age = ___(\"12\")\nprint(age + 1)",
+              "choices": [
+                "int",
+                "str",
+                "print",
+                "input"
+              ]
+            },
+            "ci-fix-string-math": {
+              "title": "Fix accidental string math",
+              "prompt": "The program should print `13`, but it currently treats the value as text. Change the code so it prints the correct number.",
+              "hint": "Use a numeric value or convert the text before adding.",
+              "help": {
+                "concept": "When a value is stored as a string, `+` may join text instead of doing math. To get numeric addition, work with integers instead of quoted text.",
+                "hint_1": "Check whether `age` is text or a number.",
+                "hint_2": "Either remove the quotes from the starting value or convert the value before adding 1."
+              },
+              "starterCode": "age = \"12\"\nprint(age + \"1\")"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-v2": {
+      "python-1": {
+        "common-variable-mistakes": {
+          "spot-undefined-names": {
+            "title": "Using a variable before it exists",
+            "bodyMarkdown": "A variable must be assigned a value before you use it. If Python sees a name that has not been created yet, it raises an error.\n\nExample:\n\n```python\nscore = 10\nprint(score)\n```\n\nThis works because `score` gets a value before `print(score)` runs.\n\nNow compare it with this:\n\n```python\nprint(score)\nscore = 10\n```\n\nThis fails because Python reaches `print(score)` first, but `score` does not exist yet.\n\nLine by line:\n- `print(score)` tries to read the value of `score`\n- Python looks for `score`\n- It has not been assigned yet, so Python raises an error\n- The next line never gets a chance to fix it\n\nA good habit is: assign first, use second.\n\nTry it yourself: Type the working example in the code editor, click Run, then move the assignment below `print(score)` and check the output panel to see what changes."
+          },
+          "numbers-vs-strings": {
+            "title": "Accidental strings instead of numbers",
+            "bodyMarkdown": "Quotes change a value into a string. That is useful for text, but it can cause mistakes when you meant to store a number.\n\nExample:\n\n```python\nage = \"12\"\nnext_age = age + \"1\"\nprint(next_age)\n```\n\nThis prints `121`, not `13`.\n\nWhy?\n- `age` is a string because it has quotes\n- `\"1\"` is also a string\n- `+` joins strings together\n- So Python combines them as text\n\nNow look at a numeric version:\n\n```python\nage = 12\nnext_age = age + 1\nprint(next_age)\n```\n\nThis prints `13` because both values are numbers.\n\nIf input gives you text and you want math, convert it first with `int()`.\n\n```python\nage_text = \"12\"\nage = int(age_text)\nprint(age + 1)\n```\n\nTry this: Change a quoted number to an unquoted number, click Run, and compare the output in the output panel.\n\nLine by line: read the first statement to see which value is stored or checked, then follow each conditional branch in order to see which path prints the final result."
+          },
+          "clear-variable-names": {
+            "title": "Confusing names and overwritten values",
+            "bodyMarkdown": "Variable names should help you remember what each value means. Confusing names can make code harder to read, and reusing a name carelessly can replace an old value.\n\nExample:\n\n```python\nname = \"Mina\"\nprint(name)\nname = \"Leo\"\nprint(name)\n```\n\nThis prints two different values because the second assignment updates the variable.\n\nLine by line:\n- `name = \"Mina\"` stores the first value\n- `print(name)` shows `Mina`\n- `name = \"Leo\"` replaces the old value\n- `print(name)` now shows `Leo`\n\nUpdating a variable is normal, but do it on purpose.\n\nAlso choose names that match the value:\n\n```python\ncity = \"Seoul\"\nscore = 95\n```\n\nThese are clearer than vague names like `x` and `thing`.\n\nYour turn: Type the example in the code editor, click Run, then rename `name` to something more specific like `first_player` and check that the output stays correct."
+          }
+        }
+      }
+    }
+  }
+}

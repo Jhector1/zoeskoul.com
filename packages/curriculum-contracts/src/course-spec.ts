@@ -1,5 +1,6 @@
 import type { BlueprintRuntimePolicy } from "./blueprint.js";
 import type { ExerciseKindMix } from "./exercise-policy.js";
+import type {CourseGenerationPolicy, ModulePedagogyPolicy, TopicPedagogyPolicy, WorkspaceProfile} from "./workspace.js";
 
 export type CourseSpecDifficulty = "beginner" | "intermediate" | "advanced";
 
@@ -134,4 +135,9 @@ export type CourseSpec = {
     authoringGuidance?: string[];
     modules: CourseSpecModule[];
     assessmentAndDelivery?: CourseSpecAssessmentAndDelivery;
+    workspaceProfileId?: string;
+    workspaceOverrides?: Partial<WorkspaceProfile>;
+    courseGenerationPolicy?: CourseGenerationPolicy;
+    modulePolicies?: ModulePedagogyPolicy[];
+    topicPolicies?: Record<string, TopicPedagogyPolicy>;
 };

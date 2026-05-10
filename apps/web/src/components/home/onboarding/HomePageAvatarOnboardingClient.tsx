@@ -132,6 +132,19 @@ function emptyValueForStep(stepId: StepId): OnboardingData[StepId] {
     }
     return "" as OnboardingData[StepId];
 }
+function normalizeOnboardingDataForSubjects(
+    data: OnboardingData,
+    subjects: SubjectCard[],
+): OnboardingData {
+    const allowedSubjectSlugs = new Set(subjects.map((subject) => subject.slug));
+
+    return {
+        ...data,
+        learningInterests: data.learningInterests.filter((slug) =>
+            allowedSubjectSlugs.has(slug),
+        ),
+    };
+}
 const TAGGED_STEP_META: Omit<StepConfig, "choices">[] = [
     {
         id: "preferredLanguage",
@@ -1376,7 +1389,7 @@ export default function HomePageAvatarOnboardingClient({
         setShowOnboarding(true);
         setBubbleCollapsed(false);
 
-        saveStoredOnboarding(false, onboardingData, resumeStepIndex, true);
+        // saveStoredOnboarding(false, onboardingData, resumeStepIndex, true);
 
         if (typeof window !== "undefined") {
             window.localStorage.removeItem(DISMISSED_KEY);
@@ -1398,7 +1411,12 @@ export default function HomePageAvatarOnboardingClient({
         const effectiveCompleted = stored.open ? false : stored.completed;
         const effectiveSkipped = stored.open ? false : dismissed;
 
-        setOnboardingData(stored.data);
+        const normalizedStoredData = normalizeOnboardingDataForSubjects(
+            stored.data,
+            subjects,
+        );
+
+        setOnboardingData(normalizedStoredData);
         setCompleted(effectiveCompleted);
         setSkipped(effectiveSkipped);
         setResumeStepIndex(stored.stepIndex);
@@ -1412,7 +1430,7 @@ export default function HomePageAvatarOnboardingClient({
         );
         setHydrated(true);
         setBootstrapped(true);
-    }, [isAuthenticated]);
+    }, [isAuthenticated, subjects]);
     useEffect(() => {
         const interests = onboardingData.learningInterests ?? [];
 

@@ -12,7 +12,8 @@ export async function compileSubject(args: {
   blueprint: CourseBlueprint;
   provider: AiProvider;
   onProgress?: CompileProgressCallback;
-}) {
+  resume?: boolean;
+}){
   validateBlueprint(args.blueprint);
 
   args.onProgress?.({
@@ -54,5 +55,6 @@ export async function compileSubject(args: {
     spec: resolved.spec,
     provider: args.provider,
     onProgress: args.onProgress,
+    resume: args.resume,
   });
 }

@@ -1,6 +1,6 @@
 import type {
     CourseBlueprint,
-    CourseSpec,
+    CourseSpec, ManifestRuntimeDefaults,
     PlannedModule,
     PlannedSection,
     PlannedTopic,
@@ -12,6 +12,8 @@ import {
     resolveModuleRuntimePolicy,
     runtimePolicyToTopicRuntimeDefaults,
 } from "../spec/resolveModuleRuntimePolicy.js";
+import {resolveWorkspacePolicy} from "../policy/resolveWorkspacePolicy.js";
+import {workspaceToRuntimeDefaults} from "../policy/workspaceToRuntimeDefaults.js";
 
 export function buildTopicSeedFromPlanNode(args: {
     blueprint: CourseBlueprint;
@@ -59,6 +61,7 @@ export function buildTopicSeedFromPlanNode(args: {
         blueprint: args.blueprint,
         module: {
             slug: args.module.moduleSlug,
+            prefix: args.module.prefix,
             title: args.module.title,
             order: args.module.order,
             purpose: args.module.purpose,
@@ -83,14 +86,49 @@ export function buildTopicSeedFromPlanNode(args: {
             minutes: args.topic.minutes,
         },
     });
+    const workspacePolicy = resolveWorkspacePolicy({
+        blueprint: args.blueprint,
+        moduleNumber: args.module.order - 1,
+        topicId: args.topic.topicId,
+    });
 
+    const workspaceRuntimeDefaults = workspaceToRuntimeDefaults({
+        policy: workspacePolicy,
+        profileId: args.blueprint.profileId,
+    });
+
+    const mergedRuntimeDefaults: ManifestRuntimeDefaults =
+        workspaceRuntimeDefaults.kind === "sql" && moduleRuntimeDefaults?.kind === "sql"
+            ? {
+                ...workspaceRuntimeDefaults,
+                datasetId: moduleRuntimeDefaults.datasetId,
+                fixedSqlDialect: moduleRuntimeDefaults.fixedSqlDialect,
+                resultShape: moduleRuntimeDefaults.resultShape,
+            }
+            : workspaceRuntimeDefaults;
     return {
         ...baseSeed,
+
+        // Resolved course-plan identity. These fields are the source of truth.
+        subjectSlug: args.blueprint.subjectSlug,
+        profileId: args.blueprint.profileId,
+        moduleSlug: args.module.moduleSlug,
+        modulePrefix: args.module.prefix,
+        moduleOrder: args.module.order,
+        sectionSlug: args.section.sectionSlug,
+        sectionOrder: args.section.order,
+        topicId: args.topic.topicId,
+        order: args.topic.order,
+        title: args.topic.title,
+        summary: args.topic.summary,
+        minutes: args.topic.minutes,
+
         exercisePolicy,
+        workspacePolicy,
         plannedExerciseCounts: planExerciseCounts({
             policy: exercisePolicy,
             total: 5,
         }),
-        moduleRuntimeDefaults: baseSeed.moduleRuntimeDefaults ?? moduleRuntimeDefaults,
+        moduleRuntimeDefaults: mergedRuntimeDefaults,
     };
 }

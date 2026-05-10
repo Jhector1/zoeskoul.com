@@ -150,7 +150,7 @@ function buildTruthinessCodeInputExercise(id: string): PythonDraftExercise {
     return {
         id,
         kind: "code_input",
-        title: "Check whether a list has items",
+        title: "Check whether text is empty",
         prompt:
             "Read a line of text. Print `True` when the line is not empty and `False` when it is empty.",
         starterCode: "text = input()\n# Your code here\n",
@@ -160,8 +160,7 @@ function buildTruthinessCodeInputExercise(id: string): PythonDraftExercise {
             { stdin: "hello\n", stdout: "True\n", match: "exact" },
             { stdin: "\n", stdout: "False\n", match: "exact" },
         ],
-        hint: "Use Python truthiness to decide whether the list has any items.",
-        help: {
+        hint: "Use Python truthiness to decide whether the text is empty or non-empty.",        help: {
             concept:
                 "In Python, an empty string is falsy and a non-empty string is truthy.",
             hint_1:
@@ -231,7 +230,52 @@ function hasTopLevelFunctionDefinition(exercise: PythonCodeInputExercise): boole
         `${exercise.starterCode}\n${exercise.solutionCode}`,
     );
 }
+function normalizeCommaSeparatedStdinForFunctionParams(
+    exercise: PythonCodeInputExercise,
+): PythonCodeInputExercise | null {
+    const signature = extractFunctionSignature(exercise);
+    if (!signature || signature.params.length < 2) return null;
 
+    const tests = Array.isArray(exercise.tests) ? exercise.tests : [];
+    if (tests.length < 1) return null;
+
+    let changed = false;
+
+    const nextTests = tests.map((test) => {
+        const stdin = String(test.stdin ?? "");
+
+        const lines = stdin
+            .split("\n")
+            .map((line) => line.trim())
+            .filter(Boolean);
+
+        // Only repair the common bad shape:
+        // "10, 10\n" for a two-param function.
+        if (lines.length !== 1) return test;
+        if (!lines[0]?.includes(",")) return test;
+
+        const parts = lines[0]
+            .split(",")
+            .map((part) => part.trim())
+            .filter(Boolean);
+
+        if (parts.length !== signature.params.length) return test;
+
+        changed = true;
+
+        return {
+            ...test,
+            stdin: `${parts.join("\n")}\n`,
+        };
+    });
+
+    if (!changed) return null;
+
+    return {
+        ...exercise,
+        tests: nextTests,
+    };
+}
 function synthesizeMissingTestsForExercise(
     exercise: PythonCodeInputExercise,
 ): PythonCodeInputExercise | null {
@@ -294,9 +338,85 @@ function synthesizeMissingTestsForExercise(
         };
     }
 
+
+
+
+    if (
+        /\b(vote|voting|eligible|eligibility)\b/.test(haystack) &&
+        /\bage\b/.test(haystack)
+    ) {
+        return {
+            ...exercise,
+            tests: [
+                {
+                    stdin: "17\n",
+                    stdout: "You are not eligible to vote.\n",
+                    match: "exact",
+                },
+                {
+                    stdin: "18\n",
+                    stdout: "You are eligible to vote.\n",
+                    match: "exact",
+                },
+                {
+                    stdin: "25\n",
+                    stdout: "You are eligible to vote.\n",
+                    match: "exact",
+                },
+            ],
+        };
+    }
+
+    if (
+        /\bgrade\b/.test(haystack) &&
+        /\bscore\b/.test(haystack)
+    ) {
+        return {
+            ...exercise,
+            tests: [
+                { stdin: "95\n", stdout: "Grade: A\n", match: "exact" },
+                { stdin: "85\n", stdout: "Grade: B\n", match: "exact" },
+                { stdin: "75\n", stdout: "Grade: C\n", match: "exact" },
+                { stdin: "65\n", stdout: "Grade: D\n", match: "exact" },
+                { stdin: "50\n", stdout: "Grade: F\n", match: "exact" },
+            ],
+        };
+    }
+
+    if (
+        /\btemperature\b/.test(haystack) &&
+        /\b(hot|warm|cold)\b/.test(haystack)
+    ) {
+        return {
+            ...exercise,
+            tests: [
+                { stdin: "35\n", stdout: "It is hot.\n", match: "exact" },
+                { stdin: "25\n", stdout: "It is warm.\n", match: "exact" },
+                { stdin: "10\n", stdout: "It is cold.\n", match: "exact" },
+            ],
+        };
+    }
     return null;
 }
+function rewriteBrowserSafeTracebackText(value: string): {
+    next: string;
+    changed: boolean;
+} {
+    const next = value
+        .replace(
+            /File\s+"[^"]+\.py",\s*line\s+(\d+),\s*in\s+<module>/g,
+            "line $1, in code editor",
+        )
+        .replace(
+            /\b[\w.-]+\.py\b/g,
+            "the code editor",
+        );
 
+    return {
+        next,
+        changed: next !== value,
+    };
+}
 function hasOnlyBooleanishOutputs(exercise: PythonCodeInputExercise): boolean {
     const tests = Array.isArray(exercise.tests) ? exercise.tests : [];
     if (tests.length < 1) return false;
@@ -378,7 +498,80 @@ async function rewritePlaceholderTestsFromSolutionExecution(
         ],
     };
 }
+function rewriteHardcodedInputVariableExercise(
+    exercise: PythonCodeInputExercise,
+): PythonCodeInputExercise | null {
+    const tests = Array.isArray(exercise.tests) ? exercise.tests : [];
+    if (tests.length < 1) return null;
 
+    const hasStdinTests = tests.some((test) =>
+        String(test.stdin ?? "").trim().length > 0,
+    );
+    if (!hasStdinTests) return null;
+
+    const solutionCode = String(exercise.solutionCode ?? "");
+    const starterCode = String(exercise.starterCode ?? "");
+    const haystack = `${exercise.title} ${exercise.prompt}`.toLowerCase();
+
+    // age checker: age = 20 -> age = int(input())
+    if (
+        /\bage\b/.test(haystack) &&
+        /^age\s*=\s*\d+\s*$/m.test(solutionCode) &&
+        !/\binput\s*\(/.test(solutionCode)
+    ) {
+        return {
+            ...exercise,
+            starterCode: starterCode.replace(
+                /^age\s*=\s*\d+\s*$/m,
+                "age = int(input())",
+            ),
+            solutionCode: solutionCode.replace(
+                /^age\s*=\s*\d+\s*$/m,
+                "age = int(input())",
+            ),
+        };
+    }
+
+    // even/odd checker: number = 4 -> number = int(input())
+    if (
+        /\b(even|odd|number)\b/.test(haystack) &&
+        /^number\s*=\s*-?\d+\s*$/m.test(solutionCode) &&
+        !/\binput\s*\(/.test(solutionCode)
+    ) {
+        return {
+            ...exercise,
+            starterCode: starterCode.replace(
+                /^number\s*=\s*-?\d+\s*$/m,
+                "number = int(input())",
+            ),
+            solutionCode: solutionCode.replace(
+                /^number\s*=\s*-?\d+\s*$/m,
+                "number = int(input())",
+            ),
+        };
+    }
+
+    // grade checker: score = 85 -> score = int(input())
+    if (
+        /\b(grade|score)\b/.test(haystack) &&
+        /^score\s*=\s*\d+\s*$/m.test(solutionCode) &&
+        !/\binput\s*\(/.test(solutionCode)
+    ) {
+        return {
+            ...exercise,
+            starterCode: starterCode.replace(
+                /^score\s*=\s*\d+\s*$/m,
+                "score = int(input())",
+            ),
+            solutionCode: solutionCode.replace(
+                /^score\s*=\s*\d+\s*$/m,
+                "score = int(input())",
+            ),
+        };
+    }
+
+    return null;
+}
 function rewriteHardcodedPromptAlignedExercise(
     exercise: PythonCodeInputExercise,
 ): PythonCodeInputExercise | null {
@@ -1393,24 +1586,44 @@ export async function repairPythonDraft(args: {
     let nextDraft: TopicAuthoringDraft = {
         ...args.draft,
         sketchBlocks: args.draft.sketchBlocks.map((block) => {
-            const bodyMarkdown = String(block.bodyMarkdown ?? "");
+            const originalBodyMarkdown = String(block.bodyMarkdown ?? "");
+            const tracebackRepair =
+                rewriteBrowserSafeTracebackText(originalBodyMarkdown);
 
-            if (!hasMultilineCodeFence(bodyMarkdown) || hasLineByLineExplanation(bodyMarkdown)) {
-                return block;
+            let bodyMarkdown = tracebackRepair.next;
+
+            if (tracebackRepair.changed) {
+                report.repairs.push({
+                    code: "PYTHON_BROWSER_TRACEBACK_FILENAME_REMOVED",
+                    category: "text",
+                    severity: "medium",
+                    field: `sketchBlocks.${block.id}.bodyMarkdown`,
+                    message:
+                        "Replaced .py filename traceback wording with browser code editor wording.",
+                });
             }
 
-            report.repairs.push({
-                code: "PYTHON_SKETCH_LINE_BY_LINE_EXPLANATION_ADDED",
-                category: "text",
-                severity: "medium",
-                field: `sketchBlocks.${block.id}.bodyMarkdown`,
-                message:
-                    "Added a short line-by-line explanation after a multi-line code example.",
-            });
+            if (
+                hasMultilineCodeFence(bodyMarkdown) &&
+                !hasLineByLineExplanation(bodyMarkdown)
+            ) {
+                report.repairs.push({
+                    code: "PYTHON_SKETCH_LINE_BY_LINE_EXPLANATION_ADDED",
+                    category: "text",
+                    severity: "medium",
+                    field: `sketchBlocks.${block.id}.bodyMarkdown`,
+                    message:
+                        "Added a short line-by-line explanation after a multi-line code example.",
+                });
+
+                bodyMarkdown = `${bodyMarkdown}\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show.`;
+            }
+
+            if (bodyMarkdown === originalBodyMarkdown) return block;
 
             return {
                 ...block,
-                bodyMarkdown: `${bodyMarkdown}\n\nLine by line: read the first statement to see which value is stored or checked, then follow each conditional branch in order to see which path prints the final result.`,
+                bodyMarkdown,
             };
         }),
         quizDraft: await Promise.all(args.draft.quizDraft.map(async (exercise) => {
@@ -1448,10 +1661,28 @@ export async function repairPythonDraft(args: {
                 });
             }
 
-            const placeholderTestRepair =
-                rewriteHardcodedPromptAlignedExercise(withTests);
-            const afterPromptAlignedRepair = placeholderTestRepair ?? withTests;
+            const hardcodedInputVariableRepair =
+                rewriteHardcodedInputVariableExercise(withTests);
 
+            const afterHardcodedInputVariableRepair =
+                hardcodedInputVariableRepair ?? withTests;
+
+            if (hardcodedInputVariableRepair) {
+                report.repairs.push({
+                    code: "PYTHON_HARDCODED_INPUT_VARIABLE_REPAIRED",
+                    category: "recipe",
+                    severity: "high",
+                    field: exercise.id,
+                    message:
+                        "Replaced a hardcoded beginner variable assignment with int(input()) so stdin/stdout tests validate the intended behavior.",
+                });
+            }
+
+            const placeholderTestRepair =
+                rewriteHardcodedPromptAlignedExercise(afterHardcodedInputVariableRepair);
+
+            const afterPromptAlignedRepair =
+                placeholderTestRepair ?? afterHardcodedInputVariableRepair;
             if (placeholderTestRepair) {
                 report.repairs.push({
                     code: "PYTHON_PLACEHOLDER_TESTS_REPAIRED",
@@ -1515,6 +1746,22 @@ export async function repairPythonDraft(args: {
             const afterFunctionRuntimeRepair =
                 functionRuntimeRepair ?? afterHardcodedFunctionRepair;
 
+            const commaSeparatedStdinRepair =
+                normalizeCommaSeparatedStdinForFunctionParams(afterFunctionRuntimeRepair);
+
+            const afterCommaSeparatedStdinRepair =
+                commaSeparatedStdinRepair ?? afterFunctionRuntimeRepair;
+
+            if (commaSeparatedStdinRepair) {
+                report.repairs.push({
+                    code: "PYTHON_COMMA_SEPARATED_STDIN_REPAIRED",
+                    category: "recipe",
+                    severity: "high",
+                    field: exercise.id,
+                    message:
+                        "Converted comma-separated stdin for a multi-parameter function into one input value per line.",
+                });
+            }
             if (functionRuntimeRepair) {
                 report.repairs.push({
                     code: "PYTHON_FUNCTION_STDOUT_TASK_REPAIRED",
@@ -1527,9 +1774,9 @@ export async function repairPythonDraft(args: {
             }
 
             const harnessRepair =
-                await rewriteEmbeddedHarnessStyleExercise(afterFunctionRuntimeRepair);
+                await rewriteEmbeddedHarnessStyleExercise(afterCommaSeparatedStdinRepair);
             const afterHarnessRepair =
-                harnessRepair ?? afterFunctionRuntimeRepair;
+                harnessRepair ?? afterCommaSeparatedStdinRepair;
 
             if (harnessRepair) {
                 report.repairs.push({
@@ -1590,12 +1837,21 @@ export async function repairPythonDraft(args: {
                 });
             }
 
-            const hintRepair = rewritePythonLeakText(repairedExercise.hint);
-            const conceptRepair = rewritePythonLeakText(repairedExercise.help.concept);
-            const hint1Repair = rewritePythonLeakText(repairedExercise.help.hint_1);
-            const hint2Repair = rewritePythonLeakText(repairedExercise.help.hint_2);
+            const hintLeakRepair = rewritePythonLeakText(repairedExercise.hint);
+            const conceptLeakRepair = rewritePythonLeakText(repairedExercise.help.concept);
+            const hint1LeakRepair = rewritePythonLeakText(repairedExercise.help.hint_1);
+            const hint2LeakRepair = rewritePythonLeakText(repairedExercise.help.hint_2);
+
+            const hintRepair = rewriteBrowserSafeTracebackText(hintLeakRepair.next);
+            const conceptRepair = rewriteBrowserSafeTracebackText(conceptLeakRepair.next);
+            const hint1Repair = rewriteBrowserSafeTracebackText(hint1LeakRepair.next);
+            const hint2Repair = rewriteBrowserSafeTracebackText(hint2LeakRepair.next);
 
             const changed =
+                hintLeakRepair.changed ||
+                conceptLeakRepair.changed ||
+                hint1LeakRepair.changed ||
+                hint2LeakRepair.changed ||
                 hintRepair.changed ||
                 conceptRepair.changed ||
                 hint1Repair.changed ||
@@ -1603,7 +1859,7 @@ export async function repairPythonDraft(args: {
 
             if (!changed) return repairedExercise;
 
-            if (hintRepair.changed) {
+            if (hintLeakRepair.changed) {
                 report.repairs.push({
                     code: "PYTHON_SQL_HINT_LEAK_REPAIRED",
                     category: "text",
@@ -1614,7 +1870,7 @@ export async function repairPythonDraft(args: {
                 });
             }
 
-            if (conceptRepair.changed) {
+            if (conceptLeakRepair.changed) {
                 report.repairs.push({
                     code: "PYTHON_SQL_HELP_LEAK_REPAIRED",
                     category: "text",
@@ -1625,7 +1881,7 @@ export async function repairPythonDraft(args: {
                 });
             }
 
-            if (hint1Repair.changed) {
+            if (hint1LeakRepair.changed) {
                 report.repairs.push({
                     code: "PYTHON_SQL_HELP_LEAK_REPAIRED",
                     category: "text",
@@ -1636,7 +1892,7 @@ export async function repairPythonDraft(args: {
                 });
             }
 
-            if (hint2Repair.changed) {
+            if (hint2LeakRepair.changed) {
                 report.repairs.push({
                     code: "PYTHON_SQL_HELP_LEAK_REPAIRED",
                     category: "text",
@@ -1644,6 +1900,26 @@ export async function repairPythonDraft(args: {
                     field: `${exercise.id}.help.hint_2`,
                     message:
                         "Rewrote SQL-flavored help text into Python-specific guidance.",
+                });
+            }
+
+            const tracebackFields = [
+                ["hint", hintRepair.changed],
+                ["help.concept", conceptRepair.changed],
+                ["help.hint_1", hint1Repair.changed],
+                ["help.hint_2", hint2Repair.changed],
+            ] as const;
+
+            for (const [field, fieldChanged] of tracebackFields) {
+                if (!fieldChanged) continue;
+
+                report.repairs.push({
+                    code: "PYTHON_BROWSER_TRACEBACK_FILENAME_REMOVED",
+                    category: "text",
+                    severity: "medium",
+                    field: `${exercise.id}.${field}`,
+                    message:
+                        "Replaced .py filename traceback wording with browser code editor wording.",
                 });
             }
 

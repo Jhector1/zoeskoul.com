@@ -148,8 +148,7 @@ export async function critiqueTopicDraft(args: {
         shape,
         seed,
         draft: preparedDraft,
-        moduleOrder: node.moduleIndex,
-        sectionOrder: node.sectionOrder,
+
     });
 
     const review = await reviewPreparedTopicDraft({

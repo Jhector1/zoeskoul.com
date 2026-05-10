@@ -1,0 +1,129 @@
+{
+  "topics": {
+    "python-v2": {
+      "python-1": {
+        "string-methods": {
+          "label": "Useful String Methods",
+          "summary": "Use methods like lower, strip, replace, split, and join.",
+          "cards": {
+            "sketch0": {
+              "title": "What string methods do"
+            },
+            "sketch1": {
+              "title": "Replace, split, and join"
+            },
+            "sketch2": {
+              "title": "Combining methods to clean text"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "String cleaner practice"
+            }
+          },
+          "projectSteps": {
+            "code_clean_username": {
+              "title": "Clean and print a username"
+            },
+            "code_split_join_words": {
+              "title": "Turn spaces into hyphens"
+            }
+          },
+          "quiz": {
+            "sc-string-method-call": {
+              "title": "Choose the method call",
+              "prompt": "Which expression changes the string in `word` to lowercase?",
+              "hint": "Look for the method that makes letters lowercase.",
+              "help": {
+                "concept": "A string method is called with a dot after the string or variable. The `lower()` method returns a lowercase version of the text.",
+                "hint_1": "You need a method call, not plain text.",
+                "hint_2": "Look for the option that uses `word` followed by a dot and the lowercase method."
+              },
+              "options": {
+                "a": "word.lower()",
+                "b": "lower(word)",
+                "c": "word = lower"
+              }
+            },
+            "mc-method-matches": {
+              "title": "Match methods to jobs",
+              "prompt": "Choose all statements that are correct about common string methods.",
+              "hint": "Think about what each method is used for.",
+              "help": {
+                "concept": "Different string methods do different jobs: `strip()` removes spaces at the ends, `split()` breaks text into parts, and `join()` combines parts into one string with a separator.",
+                "hint_1": "Check which options describe removing edge spaces, breaking text apart, or combining pieces.",
+                "hint_2": "More than one option is correct. Focus on `strip()`, `split()`, and `join()`."
+              },
+              "options": {
+                "a": "`strip()` can remove spaces from the start and end of a string.",
+                "b": "`split()` can break a string into smaller parts using a separator.",
+                "c": "`join()` can combine several strings into one string with a separator between them.",
+                "d": "`replace()` always removes every space from a string automatically."
+              }
+            },
+            "fb-strip-result": {
+              "title": "Complete the method",
+              "prompt": "Pick the method that removes spaces from both ends of a string.",
+              "hint": "It cleans the edges of the text.",
+              "help": {
+                "concept": "Use `the missing term()` when you want to remove whitespace from the beginning and end of a string, but not from the middle.",
+                "hint_1": "This method is often used to clean user input.",
+                "hint_2": "It is the method that trims the outside edges of the text."
+              },
+              "template": "clean = text.___()",
+              "choices": [
+                "lower",
+                "strip",
+                "split",
+                "join"
+              ]
+            },
+            "code-clean-username": {
+              "title": "Clean and print a username",
+              "prompt": "Write Python code that reads one line of input, removes spaces from both ends, converts the text to lowercase, and prints the result.",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+                "hint_1": "Eliminate choices or interpretations that do not match the task.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "starterCode": "text = input()\n# Clean the text and print the result"
+            },
+            "code-split-join-words": {
+              "title": "Turn spaces into hyphens",
+              "prompt": "Write Python code that reads one line of input, splits the text into words using spaces, joins the words with `-`, and prints the result. Assume words are separated by single spaces.",
+              "hint": "Focus on the concept being tested.",
+              "help": {
+                "concept": "Think about the role or idea being tested rather than repeating answer wording.",
+                "hint_1": "Eliminate choices or interpretations that do not match the task.",
+                "hint_2": "Choose the concept that best fits what the exercise is asking you to do."
+              },
+              "starterCode": "text = input()\n# Split the text into words and print them joined with hyphens"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-v2": {
+      "python-1": {
+        "string-methods": {
+          "what-string-methods-do": {
+            "title": "What string methods do",
+            "bodyMarkdown": "String methods are built-in tools that help you change or inspect text. You call a method with a dot after a string, like `text.lower()`.\n\nCommon beginner-friendly methods:\n\n- `lower()` makes letters lowercase\n- `strip()` removes spaces at the start and end\n- `replace()` swaps one piece of text for another\n- `split()` breaks text into parts\n- `join()` combines parts into one string\n\nHere is a simple example:\n\n```python\nname = \"  Ada Lovelace  \"\nclean_name = name.strip()\nprint(clean_name)\nprint(clean_name.lower())\n```\n\nStep by step:\n\n- `name` stores text with extra spaces around it.\n- `name.strip()` removes the spaces at both ends.\n- `clean_name.lower()` makes all letters lowercase.\n\nOutput:\n\n```python\nAda Lovelace\nada lovelace\n```\n\nTry it yourself: Type the example in the code editor, click Run, and then change the text to your own name with extra spaces."
+          },
+          "replace-split-join-example": {
+            "title": "Replace, split, and join",
+            "bodyMarkdown": "Some methods help you reshape text.\n\nExample:\n\n```python\nsentence = \"red,green,blue\"\nparts = sentence.split(\",\")\nprint(parts)\n\nnew_sentence = \" - \".join(parts)\nprint(new_sentence)\n\nfixed = new_sentence.replace(\"green\", \"yellow\")\nprint(fixed)\n```\n\nLine by line:\n\n- `split(\",\")` cuts the string wherever there is a comma.\n- `parts` becomes a list of smaller strings.\n- `\" - \".join(parts)` combines those parts with ` - ` between them.\n- `replace(\"green\", \"yellow\")` changes one word into another.\n\nThe output is:\n\n```python\n['red', 'green', 'blue']\nred - green - blue\nred - yellow - blue\n```\n\nA useful idea: strings do not change in place here. Each method gives you a new value, so you often store the result in a new variable.\n\nYour turn: Change the separator in `split()` or `join()` and see how the output changes."
+          },
+          "combining-methods-for-clean-input": {
+            "title": "Combining methods to clean text",
+            "bodyMarkdown": "You can chain methods together when you want to clean text in one expression.\n\nExample:\n\n```python\nraw_city = \"  LoNDoN  \"\nclean_city = raw_city.strip().lower()\nprint(clean_city)\n```\n\nWhat happens:\n\n- `strip()` removes the spaces around the text.\n- `lower()` then changes the cleaned text to lowercase.\n- The final result is stored in `clean_city`.\n\nOutput:\n\n```python\nlondon\n```\n\nThis is useful when a program gets text that may have extra spaces or mixed uppercase and lowercase letters.\n\nTry this: Replace `LoNDoN` with another city, or add more spaces around it, then click Run and check the output panel.\n\nLine by line: read the first statement to see which value is stored or checked, then follow each conditional branch in order to see which path prints the final result."
+          }
+        }
+      }
+    }
+  }
+}

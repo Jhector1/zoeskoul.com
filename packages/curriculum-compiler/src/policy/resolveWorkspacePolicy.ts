@@ -1,0 +1,80 @@
+import { WORKSPACE_PROFILES } from "@zoeskoul/curriculum-profiles";
+import type {
+    CourseBlueprint,
+    WorkspaceProfile,
+    ModulePedagogyPolicy,
+    TopicPedagogyPolicy,
+} from "@zoeskoul/curriculum-contracts";
+
+export type ResolvedWorkspacePolicy = {
+    workspace: WorkspaceProfile;
+    modulePolicy?: ModulePedagogyPolicy;
+    topicPolicy?: TopicPedagogyPolicy;
+    preferredActionLanguage: string[];
+    forbiddenActionLanguage: string[];
+    avoidTerms: string[];
+    notes: string[];
+};
+function deepMergeWorkspace<T>(base: T, override?: Partial<T>): T {
+    if (!override) return structuredClone(base);
+
+    const out: any = structuredClone(base);
+
+    for (const [key, value] of Object.entries(override as any)) {
+        if (
+            value &&
+            typeof value === "object" &&
+            !Array.isArray(value) &&
+            out[key] &&
+            typeof out[key] === "object" &&
+            !Array.isArray(out[key])
+        ) {
+            out[key] = deepMergeWorkspace(out[key], value);
+        } else if (value !== undefined) {
+            out[key] = value;
+        }
+    }
+
+    return out;
+}
+export function resolveWorkspacePolicy(args: {
+    blueprint: CourseBlueprint;
+    moduleNumber?: number;
+    topicId?: string;
+}): ResolvedWorkspacePolicy {
+    const base =
+        WORKSPACE_PROFILES[args.blueprint.workspaceProfileId ?? "browser-code-runner"];
+
+    const workspace = deepMergeWorkspace(base, args.blueprint.workspaceOverrides);
+
+    const modulePolicy = args.blueprint.modulePolicies?.find(
+        (policy) => policy.moduleNumber === args.moduleNumber,
+    );
+
+    const topicPolicy =
+        args.topicId && args.blueprint.topicPolicies
+            ? args.blueprint.topicPolicies[args.topicId]
+            : undefined;
+
+    const topicWorkspace = topicPolicy?.workspaceOverrides
+        ? deepMergeWorkspace(workspace, topicPolicy.workspaceOverrides)
+        : workspace;
+
+    return {
+        workspace: topicWorkspace,
+        modulePolicy,
+        topicPolicy,
+        preferredActionLanguage: topicWorkspace.preferredActionLanguage,
+        forbiddenActionLanguage: [
+            ...topicWorkspace.forbiddenActionLanguage,
+            ...(modulePolicy?.forbiddenActions ?? []),
+        ],
+
+        avoidTerms: args.blueprint.courseGenerationPolicy?.avoidTerms ?? [],
+        notes: [
+            ...(args.blueprint.courseGenerationPolicy?.notes ?? []),
+            ...(modulePolicy?.notes ?? []),
+            ...(topicPolicy?.notes ?? []),
+        ],
+    };
+}

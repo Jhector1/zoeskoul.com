@@ -1,0 +1,128 @@
+{
+  "topics": {
+    "python-v2": {
+      "python-2": {
+        "comparisons-and-truth-values": {
+          "label": "Comparisons and Truth Values",
+          "summary": "Use comparison operators to compare values and understand how Python produces True and False.",
+          "cards": {
+            "sketch0": {
+              "title": "What comparisons do"
+            },
+            "sketch1": {
+              "title": "Using True and False in decisions"
+            },
+            "sketch2": {
+              "title": "Comparing different kinds of values"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Build a simple eligibility checker"
+            }
+          },
+          "projectSteps": {
+            "code_compare_two_numbers": {
+              "title": "Print whether the first number is greater"
+            },
+            "code_check_equality": {
+              "title": "Check whether two words match"
+            },
+            "code_pass_checker": {
+              "title": "Print Pass or Fail"
+            }
+          },
+          "quiz": {
+            "code-compare-two-numbers": {
+              "title": "Print whether the first number is greater",
+              "prompt": "Write Python code that reads two integers from input, one per line. Print the result of checking whether the first number is greater than the second number.",
+              "hint": "Focus on the programming task being asked for, not on copying final solution text.",
+              "help": {
+                "concept": "Build the solution from the behavior the exercise is testing.",
+                "hint_1": "Think about which steps, functions, or statements are required for the task.",
+                "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "a = int(input())\nb = int(input())\n# Print whether the first number is greater than the second"
+            },
+            "code-check-equality": {
+              "title": "Check whether two words match",
+              "prompt": "Write Python code that reads two lines of input as strings. Print `True` if the two strings are equal, otherwise print `False`.",
+              "hint": "Focus on the programming task being asked for, not on copying final solution text.",
+              "help": {
+                "concept": "Build the solution from the behavior the exercise is testing.",
+                "hint_1": "Think about which steps, functions, or statements are required for the task.",
+                "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "first = input()\nsecond = input()\n# Print whether the two strings are equal"
+            },
+            "code-pass-checker": {
+              "title": "Print Pass or Fail",
+              "prompt": "Write Python code that reads one integer score from input. If the score is greater than or equal to 50, print `Pass`. Otherwise, print `Fail`.",
+              "hint": "Focus on the programming task being asked for, not on copying final solution text.",
+              "help": {
+                "concept": "Build the solution from the behavior the exercise is testing.",
+                "hint_1": "Think about which steps, functions, or statements are required for the task.",
+                "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "score = int(input())\n# Print Pass or Fail"
+            },
+            "multi-true-comparisons": {
+              "title": "Choose all comparisons that are True",
+              "prompt": "Which comparisons evaluate to `True`? Choose all that apply.",
+              "hint": "Check each comparison one by one.",
+              "help": {
+                "concept": "Each comparison must be tested separately. A statement is `True` only when the relationship shown by the operator really matches the values.",
+                "hint_1": "Look carefully at equality, inequality, and greater-than-or-equal-to.",
+                "hint_2": "Test each option mentally by replacing the operator with words like 'is equal to' or 'is greater than or equal to'."
+              },
+              "options": {
+                "a": "4 < 2",
+                "b": "6 == 6",
+                "c": "3 != 5",
+                "d": "7 <= 6"
+              }
+            },
+            "fill-boolean-name": {
+              "title": "Name the result type",
+              "prompt": "Complete the sentence with the correct word.",
+              "hint": "Comparisons produce one of two special values.",
+              "help": {
+                "concept": "In Python, comparison expressions return the missing term values. The the missing term type represents truth values such as `True` and `False`.",
+                "hint_1": "Think about the type that contains `True` and `False`.",
+                "hint_2": "It is the name used for truth values in programming, not a number or a string."
+              },
+              "template": "The result of `8 > 3` is a ______ value.",
+              "choices": [
+                "boolean",
+                "integer",
+                "string",
+                "list"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-v2": {
+      "python-2": {
+        "comparisons-and-truth-values": {
+          "compare-basics": {
+            "title": "What comparisons do",
+            "bodyMarkdown": "A comparison checks a relationship between two values. Python answers with a boolean value: `True` or `False`.\n\nCommon comparison operators:\n\n- `==` means equal to\n- `!=` means not equal to\n- `>` means greater than\n- `<` means less than\n- `>=` means greater than or equal to\n- `<=` means less than or equal to\n\nHere is a simple example:\n\n```python\nprint(5 > 3)\nprint(5 == 3)\nprint(7 != 7)\n```\n\nStep by step:\n\n- `5 > 3` is `True` because 5 is larger than 3.\n- `5 == 3` is `False` because 5 and 3 are different.\n- `7 != 7` is `False` because 7 is not different from 7.\n\nWorked example:\n\nIf a program checks whether a learner is old enough for a club:\n\n```python\nage = 12\nprint(age >= 10)\n```\n\nThis prints `True` because 12 is greater than or equal to 10.\n\nTry it yourself: change `age` to `9`, click Run, and check the output panel."
+          },
+          "truth-values-in-conditions": {
+            "title": "Using True and False in decisions",
+            "bodyMarkdown": "Comparison expressions are often used inside `if` statements. If the comparison is `True`, the `if` block runs. If it is `False`, Python skips that block.\n\nExample:\n\n```python\nscore = 85\nif score >= 50:\n    print(\"Pass\")\nelse:\n    print(\"Try again\")\n```\n\nLine by line:\n\n- `score = 85` stores a number.\n- `score >= 50` checks a rule.\n- Because the result is `True`, Python prints `\"Pass\"`.\n- The `else` block does not run.\n\nWorked example:\n\n```python\ntemperature = 18\nif temperature < 20:\n    print(\"Wear a jacket\")\nelse:\n    print(\"T-shirt is fine\")\n```\n\nSince 18 is less than 20, the output is `Wear a jacket`.\n\nYour turn: change `temperature` to `25`, click Run, and predict which message appears before you check the output panel."
+          },
+          "comparing-strings-and-numbers": {
+            "title": "Comparing different kinds of values",
+            "bodyMarkdown": "You can compare numbers, and you can also compare strings for equality.\n\nExamples:\n\n```python\nprint(\"yes\" == \"yes\")\nprint(\"yes\" != \"no\")\nprint(10 <= 10)\n```\n\nThese results are:\n\n- `\"yes\" == \"yes\"` → `True`\n- `\"yes\" != \"no\"` → `True`\n- `10 <= 10` → `True`\n\nA useful beginner pattern is checking user input after converting it to a number.\n\nWorked example:\n\n```python\nage = int(input())\nprint(age >= 18)\n```\n\nIf the input is `20`, the output is `True`.\nIf the input is `16`, the output is `False`.\n\nTry this: run the code twice with different inputs and compare the two boolean results.\n\nLine by line: read the first statement to see which value is stored or checked, then follow each conditional branch in order to see which path prints the final result."
+          }
+        }
+      }
+    }
+  }
+}

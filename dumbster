@@ -73,7 +73,7 @@ docker compose -f docker-compose.prod.yml logs -f runner
 
 
 
- set -a
+set -a
 source .env.local
 set +a
 
