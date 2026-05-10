@@ -14,14 +14,14 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.python-v2.python-v2-1.f-strings-and-formatting.cards.sketch0.title",
-      "sketchId": "sketch-1",
+      "sketchId": "sketch1",
       "height": 420
     },
     {
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.python-v2.python-v2-1.f-strings-and-formatting.cards.sketch1.title",
-      "sketchId": "sketch-2",
+      "sketchId": "sketch2",
       "height": 420
     },
     {
@@ -47,18 +47,18 @@
         "maxAttempts": 10,
         "steps": [
           {
-            "id": "quiz_1",
-            "titleKey": "topics.python-v2.python-v2-1.f-strings-and-formatting.projectSteps.quiz_1.title",
-            "exerciseKey": "quiz-1",
+            "id": "quiz4",
+            "titleKey": "topics.python-v2.python-v2-1.f-strings-and-formatting.projectSteps.quiz4.title",
+            "exerciseKey": "quiz4",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": 10
           },
           {
-            "id": "quiz_5",
-            "titleKey": "topics.python-v2.python-v2-1.f-strings-and-formatting.projectSteps.quiz_5.title",
-            "exerciseKey": "quiz-5",
+            "id": "quiz5",
+            "titleKey": "topics.python-v2.python-v2-1.f-strings-and-formatting.projectSteps.quiz5.title",
+            "exerciseKey": "quiz5",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
@@ -70,80 +70,41 @@
   ],
   "sketches": [
     {
-      "id": "sketch-1",
+      "id": "sketch1",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-v2.python-v2-1.f-strings-and-formatting.sketch-1.title",
-      "bodyKey": "sketches.python-v2.python-v2-1.f-strings-and-formatting.sketch-1.bodyMarkdown"
+      "titleKey": "sketches.python-v2.python-v2-1.f-strings-and-formatting.sketch1.title",
+      "bodyKey": "sketches.python-v2.python-v2-1.f-strings-and-formatting.sketch1.bodyMarkdown"
     },
     {
-      "id": "sketch-2",
+      "id": "sketch2",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-v2.python-v2-1.f-strings-and-formatting.sketch-2.title",
-      "bodyKey": "sketches.python-v2.python-v2-1.f-strings-and-formatting.sketch-2.bodyMarkdown"
+      "titleKey": "sketches.python-v2.python-v2-1.f-strings-and-formatting.sketch2.title",
+      "bodyKey": "sketches.python-v2.python-v2-1.f-strings-and-formatting.sketch2.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "quiz-1",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.quiz-1",
-      "language": "python",
-      "starterCode": "name = input()\nage = input()\n# Create a formatted string here",
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "Alice\n30\n",
-            "stdout": "My name is Alice and I am 30 years old.",
-            "match": "exact"
-          },
-          {
-            "stdin": "Bob\n25\n",
-            "stdout": "My name is Bob and I am 25 years old.",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "name = input()\nage = input()\nformatted_string = f'My name is {name} and I am {age} years old.'\nprint(formatted_string)"
-      }
-    },
-    {
-      "id": "quiz-2",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.quiz-2",
-      "choiceCount": 3,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "name"
-      }
-    },
-    {
-      "id": "quiz-3",
+      "id": "quiz1",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.quiz-3",
+      "messageBase": "topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.quiz1",
       "optionIds": [
         "a",
         "b",
-        "c",
-        "d"
+        "c"
       ],
       "expected": {
         "kind": "single_choice",
-        "optionId": "b"
+        "optionId": "a"
       }
     },
     {
-      "id": "quiz-4",
+      "id": "quiz2",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.quiz-4",
+      "messageBase": "topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.quiz2",
       "optionIds": [
         "a",
         "b",
@@ -155,34 +116,72 @@
         "optionIds": [
           "a",
           "b",
-          "c"
+          "d"
         ]
       }
     },
     {
-      "id": "quiz-5",
+      "id": "quiz3",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.quiz3",
+      "choiceCount": 3,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "name"
+      }
+    },
+    {
+      "id": "quiz4",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.quiz-5",
+      "messageBase": "topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.quiz4",
       "language": "python",
-      "starterCode": "name = input()\nage = input()\n# Create a formatted string using format() here",
+      "starterCode": "city = ''\n# Write your f-string below",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "Charlie\n22\n",
-            "stdout": "My name is Charlie and I am 22 years old.",
+            "stdin": "12\n",
+            "stdout": "I live in New York",
             "match": "exact"
           },
           {
-            "stdin": "Diana\n28\n",
-            "stdout": "My name is Diana and I am 28 years old.",
+            "stdin": "20\n",
+            "stdout": "I live in New York",
             "match": "exact"
           }
         ],
-        "solutionCode": "name = input()\nage = input()\nformatted_string = 'My name is {} and I am {} years old.'.format(name, age)\nprint(formatted_string)"
+        "solutionCode": "city = 'New York'\nprint(f'I live in {city}')"
+      }
+    },
+    {
+      "id": "quiz5",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.quiz5",
+      "language": "python",
+      "starterCode": "temperature = 0\n# Write your format method code below",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "12\n",
+            "stdout": "The temperature is 75 degrees.",
+            "match": "exact"
+          },
+          {
+            "stdin": "20\n",
+            "stdout": "The temperature is 75 degrees.",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "temperature = 75\nprint('The temperature is {} degrees.'.format(temperature))"
       }
     }
   ]

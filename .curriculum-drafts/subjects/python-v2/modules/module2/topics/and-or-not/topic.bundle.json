@@ -32,6 +32,13 @@
       "height": 420
     },
     {
+      "id": "sketch3",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-v2-2.and-or-not.cards.sketch3.title",
+      "sketchId": "sketch_4",
+      "height": 420
+    },
+    {
       "id": "quiz",
       "kind": "quiz",
       "titleKey": "topics.python-v2.python-v2-2.and-or-not.cards.quiz.title",
@@ -102,6 +109,12 @@
       "archetype": "paragraph",
       "titleKey": "sketches.python-v2.python-v2-2.and-or-not.sketch_3.title",
       "bodyKey": "sketches.python-v2.python-v2-2.and-or-not.sketch_3.bodyMarkdown"
+    },
+    {
+      "id": "sketch_4",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-v2-2.and-or-not.sketch_4.title",
+      "bodyKey": "sketches.python-v2.python-v2-2.and-or-not.sketch_4.bodyMarkdown"
     }
   ],
   "exercises": [
@@ -120,6 +133,8 @@
       "expected": {
         "kind": "multi_choice",
         "optionIds": [
+          "a",
+          "c",
           "d"
         ]
       }
@@ -143,18 +158,23 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-2.and-or-not.quiz.quiz_3",
       "language": "python",
-      "starterCode": "def check_number(num):\n    # Your code here",
+      "starterCode": "def is_between(num):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnum = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(is_between(num))",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "",
-            "stdout": "True\nFalse\n",
+            "stdin": "12\n",
+            "stdout": "True",
+            "match": "exact"
+          },
+          {
+            "stdin": "20\n",
+            "stdout": "True",
             "match": "exact"
           }
         ],
-        "solutionCode": "def check_number(num):\n    if num > 10 and num < 20:\n        return True\n    else:\n        return False\n\n# Test the function\nprint(check_number(15))  # Expected output: True\nprint(check_number(25))  # Expected output: False"
+        "solutionCode": "def is_between(num):\n    return num >= 10 and num <= 20\n\n# Test the function\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnum = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(is_between(num))"
       }
     },
     {
@@ -164,18 +184,23 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-2.and-or-not.quiz.quiz_4",
       "language": "python",
-      "starterCode": "def is_not_zero(value):\n    # Your code here",
+      "starterCode": "def is_not_empty(s):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\ns = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(is_not_empty(s))",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "",
-            "stdout": "True\nFalse\n",
+            "stdin": "12\n",
+            "stdout": "True",
+            "match": "exact"
+          },
+          {
+            "stdin": "20\n",
+            "stdout": "True",
             "match": "exact"
           }
         ],
-        "solutionCode": "def is_not_zero(value):\n    return not value == 0\n\n# Test the function\nprint(is_not_zero(5))  # Expected output: True\nprint(is_not_zero(0))  # Expected output: False"
+        "solutionCode": "def is_not_empty(s):\n    return not s == ''\n\n# Test the function\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\ns = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(is_not_empty(s))"
       }
     },
     {
@@ -185,18 +210,18 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-2.and-or-not.quiz.quiz_5",
       "language": "python",
-      "starterCode": "def check_or(num):\n    # Your code here",
+      "starterCode": "def is_eligible(age, is_member):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nage = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nis_member = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(is_eligible(age, is_member))",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "",
-            "stdout": "True\nFalse\nTrue\n",
+            "stdin": "20\n",
+            "stdout": "False",
             "match": "exact"
           }
         ],
-        "solutionCode": "def check_or(num):\n    return num < 10 or num > 20\n\n# Test the function\nprint(check_or(5))   # Expected output: True\nprint(check_or(15))  # Expected output: False\nprint(check_or(25))  # Expected output: True"
+        "solutionCode": "def is_eligible(age, is_member):\n    return (age < 18 or age > 65) and is_member\n\n# Test the function\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nage = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nis_member = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(is_eligible(age, is_member))"
       }
     }
   ]

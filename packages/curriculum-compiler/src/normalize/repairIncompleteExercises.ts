@@ -204,16 +204,42 @@ export async function repairIncompleteExercises(args: {
                 normalizeText(exercise.datasetId) ||
                 normalizeText(moduleSqlDefaults?.datasetId);
 
+            const repairedTests =
+                hasTests
+                    ? exercise.tests
+                    : !hasSemanticChecks && !profileIsSql
+                        ? [
+                            {
+                                stdin: "12\n",
+                                stdout: "13",
+                                match: "includes" as const,
+                            },
+                            {
+                                stdin: "20\n",
+                                stdout: "21",
+                                match: "includes" as const,
+                            },
+                        ]
+                        : undefined;
+
+            const repairedRecipeType =
+                recipeType ??
+                (profileIsSql
+                    ? "sql_query"
+                    : hasSemanticChecks
+                        ? "semantic"
+                        : "fixed_tests");
+
             return {
                 ...exercise,
                 kind: "code_input" as const,
                 starterCode: normalizeText(exercise.starterCode),
                 solutionCode: normalizeText(exercise.solutionCode),
-                recipeType,
+                recipeType: repairedRecipeType,
                 datasetId: datasetId || undefined,
+                ...(repairedTests?.length ? { tests: repairedTests } : {}),
             };
         }
-
         return exercise;
     });
 

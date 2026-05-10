@@ -1,0 +1,135 @@
+{
+  "title": "For Loops Over Text",
+  "summary": "Loop through a string one character at a time.",
+  "minutes": 25,
+  "sketchBlocks": [
+    {
+      "id": "intro-to-for-loops",
+      "title": "Introduction to For Loops",
+      "bodyMarkdown": "In Python, a for loop allows you to iterate over a sequence, such as a string. For example, if you have the string `\"hello\"`, you can loop through each character like this:\n\n```python\nfor char in \"hello\":\n    print(char)\n```\n\nThis code will print each character in the string on a new line. Try it yourself by changing the string to something else!\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+    },
+    {
+      "id": "counting-characters",
+      "title": "Counting Characters in a String",
+      "bodyMarkdown": "You can also use a for loop to count the number of characters in a string. Here's how:\n\n```python\ncount = 0\nfor char in \"hello\":\n    count += 1\nprint(count)\n```\n\nThis code initializes a counter and increments it for each character in the string. The final count will be printed. Your turn: Modify the string and see how the count changes!\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "quiz-1",
+      "kind": "code_input",
+      "title": "Print Each Character",
+      "prompt": "Write a program that prints each character of the string 'Python' on a new line.",
+      "starterCode": "string = 'Python'\n# Your code here",
+      "solutionCode": "string = 'Python'\nfor char in string:\n    print(char)",
+      "recipeType": "fixed_tests",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      },
+      "tests": [
+        {
+          "stdin": "12\n",
+          "stdout": "P\ny\nt\nh\no\nn",
+          "match": "exact"
+        },
+        {
+          "stdin": "20\n",
+          "stdout": "P\ny\nt\nh\no\nn",
+          "match": "exact"
+        }
+      ]
+    },
+    {
+      "id": "quiz-2",
+      "kind": "fill_blank_choice",
+      "title": "Complete the Loop",
+      "prompt": "Fill in the blank to complete the for loop that counts characters in a string:\n\n```python\ncount = 0\nfor char in \"____\":\n    count += 1\nprint(count)\n```",
+      "template": "",
+      "choices": [
+        "\"hello\"",
+        "\"world\"",
+        "\"Python\""
+      ],
+      "correctValue": "\"hello\"",
+      "hint": "Focus on the missing concept or keyword.",
+      "help": {
+        "concept": "This task checks the key idea behind complete the loop.",
+        "hint_1": "Look for the word or phrase that best matches the lesson concept.",
+        "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
+      }
+    },
+    {
+      "id": "quiz-3",
+      "kind": "single_choice",
+      "title": "Understanding For Loops",
+      "prompt": "What does the following code output?\n\n```python\nfor char in \"abc\":\n    print(char)\n```",
+      "options": [
+        "abc",
+        "a\nb\nc",
+        "Error"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Think about the main idea behind understanding for loops.",
+      "help": {
+        "concept": "Focus on the core concept behind understanding for loops.",
+        "hint_1": "Eliminate choices that do not match the main idea of the lesson.",
+        "hint_2": "Match the wording of the prompt to the concept practiced in the topic."
+      }
+    },
+    {
+      "id": "quiz-4",
+      "kind": "multi_choice",
+      "title": "Identify Loop Behavior",
+      "prompt": "Which of the following statements are true about for loops in Python? (Select all that apply)",
+      "options": [
+        "They can iterate over strings.",
+        "They can only iterate over lists.",
+        "They can be used to count characters.",
+        "They can be nested."
+      ],
+      "correctOptionIds": [
+        "a",
+        "c",
+        "d"
+      ],
+      "hint": "Think about the main idea behind identify loop behavior.",
+      "help": {
+        "concept": "Focus on the core concept behind identify loop behavior.",
+        "hint_1": "Eliminate choices that do not match the main idea of the lesson.",
+        "hint_2": "Match the wording of the prompt to the concept practiced in the topic."
+      }
+    },
+    {
+      "id": "quiz-5",
+      "kind": "code_input",
+      "title": "Count Characters in a String",
+      "prompt": "Write a program that counts the number of vowels in the string 'hello world'.",
+      "starterCode": "string = 'hello world'\nvowels = 'aeiou'\ncount = 0\n# Your code here",
+      "solutionCode": "string = 'hello world'\nvowels = 'aeiou'\ncount = 0\nfor char in string:\n    if char in vowels:\n        count += 1\nprint(count)",
+      "recipeType": "fixed_tests",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      },
+      "tests": [
+        {
+          "stdin": "12\n",
+          "stdout": "3",
+          "match": "exact"
+        },
+        {
+          "stdin": "20\n",
+          "stdout": "3",
+          "match": "exact"
+        }
+      ]
+    }
+  ]
+}

@@ -107,73 +107,8 @@
       "expected": {
         "kind": "multi_choice",
         "optionIds": [
-          "a",
-          "c",
-          "d"
+          "b"
         ]
-      }
-    },
-    {
-      "id": "code_input_1",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.code_input_1",
-      "language": "python",
-      "starterCode": "def compare_numbers(a, b):\n    # Write your code here\n    pass",
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "",
-            "stdout": "True\nFalse\n",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "def compare_numbers(a, b):\n    return a > b\n\n# Example usage:\nprint(compare_numbers(5, 3))  # Should return True\nprint(compare_numbers(2, 4))  # Should return False"
-      }
-    },
-    {
-      "id": "code_input_2",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.code_input_2",
-      "language": "python",
-      "starterCode": "def is_equal(a, b):\n    # Write your code here\n    pass",
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "",
-            "stdout": "True\nFalse\n",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "def is_equal(a, b):\n    return a == b\n\n# Example usage:\nprint(is_equal(5, 5))  # Should return True\nprint(is_equal(5, 3))  # Should return False"
-      }
-    },
-    {
-      "id": "code_input_3",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.code_input_3",
-      "language": "python",
-      "starterCode": "def check_truthiness(value):\n    # Write your code here\n    pass",
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "",
-            "stdout": "False\nTrue\n",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "def check_truthiness(value):\n    return bool(value)\n\n# Example usage:\nprint(check_truthiness(0))  # Should return False\nprint(check_truthiness(\"Hello\"))  # Should return True"
       }
     },
     {
@@ -186,6 +121,84 @@
       "expected": {
         "kind": "fill_blank_choice",
         "value": "True"
+      }
+    },
+    {
+      "id": "code_input_1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.code_input_1",
+      "language": "python",
+      "starterCode": "number = int(input())\n# Your code here",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "12\n",
+            "stdout": "Greater",
+            "match": "exact"
+          },
+          {
+            "stdin": "20\n",
+            "stdout": "Greater",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "number = int(input())\nif number > 10:\n    print('Greater')\nelse:\n    print('Smaller')"
+      }
+    },
+    {
+      "id": "code_input_2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.code_input_2",
+      "language": "python",
+      "starterCode": "value = ''\n# Your code here",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "12\n",
+            "stdout": "Falsy",
+            "match": "exact"
+          },
+          {
+            "stdin": "20\n",
+            "stdout": "Falsy",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "value = ''\nif value:\n    print('Truthy')\nelse:\n    print('Falsy')"
+      }
+    },
+    {
+      "id": "code_input_3",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.code_input_3",
+      "language": "python",
+      "starterCode": "age = 20\n# Your code here",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "12\n",
+            "stdout": "Adult",
+            "match": "exact"
+          },
+          {
+            "stdin": "20\n",
+            "stdout": "Adult",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "age = 20\nif age < 18:\n    print('Minor')\nelif age < 65:\n    print('Adult')\nelse:\n    print('Senior')"
       }
     }
   ]

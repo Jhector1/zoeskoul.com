@@ -1,0 +1,137 @@
+{
+  "title": "While Loop Basics",
+  "summary": "Repeat code until a condition becomes false.",
+  "minutes": 24,
+  "sketchBlocks": [
+    {
+      "id": "while-loop-introduction",
+      "title": "Introduction to While Loops",
+      "bodyMarkdown": "A while loop allows you to repeat a block of code as long as a specified condition is true. For example, if you want to count from 1 to 5, you can use a while loop. Here's how it works:\n\n```python\ncount = 1\nwhile count <= 5:\n    print(count)\n    count += 1\n```\nIn this example, the loop continues until `count` is greater than 5. Each time the loop runs, it prints the current value of `count` and then increases it by 1. \n\n**Your turn:** Try modifying the code to count from 1 to 10!\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+    },
+    {
+      "id": "while-loop-with-break",
+      "title": "Using Break in While Loops",
+      "bodyMarkdown": "You can use the `break` statement to exit a while loop prematurely. For example:\n\n```python\ncount = 1\nwhile True:\n    print(count)\n    if count >= 5:\n        break\n    count += 1\n```\nIn this case, the loop will run indefinitely until `count` reaches 5, at which point the `break` statement will stop the loop. \n\n**Try this:** Change the condition to stop the loop at 3 instead.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "while-loop-usage",
+      "kind": "single_choice",
+      "title": "What does a while loop do?",
+      "prompt": "A while loop repeats a block of code until a condition becomes false.",
+      "options": [
+        "It executes code only once.",
+        "It repeats code until a condition becomes false.",
+        "It runs indefinitely without stopping.",
+        "It only works with for loops."
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Think about how loops control the flow of execution based on conditions.",
+      "help": {
+        "concept": "A while loop continues to execute as long as its condition evaluates to true.",
+        "hint_1": "Look for the answer that describes repetition based on a condition.",
+        "hint_2": "Consider how the loop stops when the condition is no longer met."
+      }
+    },
+    {
+      "id": "while-loop-break",
+      "kind": "multi_choice",
+      "title": "Which statements correctly describe the use of break in while loops?",
+      "prompt": "Select all that apply.",
+      "options": [
+        "Break can stop a loop immediately.",
+        "Break can only be used in for loops.",
+        "Break allows you to exit a while loop based on a condition.",
+        "Using break can prevent infinite loops."
+      ],
+      "correctOptionIds": [
+        "a",
+        "c",
+        "d"
+      ],
+      "hint": "Think about how break affects loop execution.",
+      "help": {
+        "concept": "The break statement is used to exit a loop before it naturally finishes.",
+        "hint_1": "Consider when you might want to stop a loop early.",
+        "hint_2": "Look for statements that mention exiting the loop."
+      }
+    },
+    {
+      "id": "while-loop-blank",
+      "kind": "fill_blank_choice",
+      "title": "Complete the while loop statement.",
+      "prompt": "A while loop continues to execute as long as the condition is the missing choice.",
+      "template": "A while loop continues to execute as long as the condition is [blank1].",
+      "choices": [
+        "true",
+        "false",
+        "valid",
+        "met"
+      ],
+      "correctValue": "true",
+      "hint": "Focus on the missing concept or keyword.",
+      "help": {
+        "concept": "This task checks the key idea behind complete the while loop statement..",
+        "hint_1": "Look for the word or phrase that best matches the lesson concept.",
+        "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
+      }
+    },
+    {
+      "id": "while-loop-code-example-1",
+      "kind": "code_input",
+      "title": "Count to 5 with a While Loop",
+      "prompt": "Write a while loop that counts from 1 to 5 and prints each number.",
+      "starterCode": "count = 1\nwhile count <= 5:\n    # Your code here",
+      "solutionCode": "count = 1\nwhile count <= 5:\n    print(count)\n    count += 1",
+      "recipeType": "fixed_tests",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      },
+      "tests": [
+        {
+          "stdin": "12\n",
+          "stdout": "1\n2\n3\n4\n5",
+          "match": "exact"
+        },
+        {
+          "stdin": "20\n",
+          "stdout": "1\n2\n3\n4\n5",
+          "match": "exact"
+        }
+      ]
+    },
+    {
+      "id": "while-loop-code-example-2",
+      "kind": "code_input",
+      "title": "Using Break in a While Loop",
+      "prompt": "Write a while loop that prints numbers starting from 1 until it reaches 5, using a break statement.",
+      "starterCode": "count = 1\nwhile True:\n    # Your code here",
+      "solutionCode": "count = 1\nwhile True:\n    print(count)\n    if count >= 5:\n        break\n    count += 1",
+      "recipeType": "fixed_tests",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      },
+      "tests": [
+        {
+          "stdin": "12\n",
+          "stdout": "1\n2\n3\n4\n5",
+          "match": "exact"
+        },
+        {
+          "stdin": "20\n",
+          "stdout": "1\n2\n3\n4\n5",
+          "match": "exact"
+        }
+      ]
+    }
+  ]
+}

@@ -14,14 +14,14 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.python-v2.python-v2-1.string-indexing-and-slicing.cards.sketch0.title",
-      "sketchId": "sketch1",
+      "sketchId": "1",
       "height": 420
     },
     {
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.python-v2.python-v2-1.string-indexing-and-slicing.cards.sketch1.title",
-      "sketchId": "sketch2",
+      "sketchId": "2",
       "height": 420
     },
     {
@@ -47,18 +47,18 @@
         "maxAttempts": 10,
         "steps": [
           {
-            "id": "quiz4",
-            "titleKey": "topics.python-v2.python-v2-1.string-indexing-and-slicing.projectSteps.quiz4.title",
-            "exerciseKey": "quiz4",
+            "id": "1",
+            "titleKey": "topics.python-v2.python-v2-1.string-indexing-and-slicing.projectSteps.1.title",
+            "exerciseKey": "1",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": 10
           },
           {
-            "id": "quiz5",
-            "titleKey": "topics.python-v2.python-v2-1.string-indexing-and-slicing.projectSteps.quiz5.title",
-            "exerciseKey": "quiz5",
+            "id": "2",
+            "titleKey": "topics.python-v2.python-v2-1.string-indexing-and-slicing.projectSteps.2.title",
+            "exerciseKey": "2",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
@@ -70,25 +70,67 @@
   ],
   "sketches": [
     {
-      "id": "sketch1",
+      "id": "1",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-v2.python-v2-1.string-indexing-and-slicing.sketch1.title",
-      "bodyKey": "sketches.python-v2.python-v2-1.string-indexing-and-slicing.sketch1.bodyMarkdown"
+      "titleKey": "sketches.python-v2.python-v2-1.string-indexing-and-slicing.1.title",
+      "bodyKey": "sketches.python-v2.python-v2-1.string-indexing-and-slicing.1.bodyMarkdown"
     },
     {
-      "id": "sketch2",
+      "id": "2",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-v2.python-v2-1.string-indexing-and-slicing.sketch2.title",
-      "bodyKey": "sketches.python-v2.python-v2-1.string-indexing-and-slicing.sketch2.bodyMarkdown"
+      "titleKey": "sketches.python-v2.python-v2-1.string-indexing-and-slicing.2.title",
+      "bodyKey": "sketches.python-v2.python-v2-1.string-indexing-and-slicing.2.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "quiz1",
+      "id": "1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.1",
+      "language": "python",
+      "starterCode": "my_string = 'I love Python programming'\n# Your code here to extract 'Python'",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Python",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "my_string = 'I love Python programming'\nsubstring = my_string[7:13]\nprint(substring)"
+      }
+    },
+    {
+      "id": "2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.2",
+      "language": "python",
+      "starterCode": "my_string = 'Hello, World!'\n# Your code here to access the first character",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "H",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "my_string = 'Hello, World!'\nfirst_character = my_string[0]\nprint(first_character)"
+      }
+    },
+    {
+      "id": "3",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.quiz1",
+      "messageBase": "topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.3",
       "optionIds": [
         "a",
         "b",
@@ -97,15 +139,15 @@
       ],
       "expected": {
         "kind": "single_choice",
-        "optionId": "b"
+        "optionId": "a"
       }
     },
     {
-      "id": "quiz2",
+      "id": "4",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.quiz2",
+      "messageBase": "topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.4",
       "optionIds": [
         "a",
         "b",
@@ -115,62 +157,21 @@
         "kind": "multi_choice",
         "optionIds": [
           "a",
+          "b",
           "c"
         ]
       }
     },
     {
-      "id": "quiz3",
+      "id": "5",
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.quiz3",
-      "choiceCount": 4,
+      "messageBase": "topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.5",
+      "choiceCount": 3,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "3"
-      }
-    },
-    {
-      "id": "quiz4",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.quiz4",
-      "language": "python",
-      "starterCode": "my_string = \"Hello, World!\"\n# Your code here",
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "",
-            "stdout": "llo\n",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "my_string = \"Hello, World!\"\nsubstring = my_string[2:5]\nprint(substring)  # Output: llo"
-      }
-    },
-    {
-      "id": "quiz5",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.quiz5",
-      "language": "python",
-      "starterCode": "my_string = \"Python\"\n# Your code here",
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "",
-            "stdout": "h\n",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "my_string = \"Python\"\ncharacter = my_string[3]\nprint(character)  # Output: h"
+        "value": "length of string - 1"
       }
     }
   ]

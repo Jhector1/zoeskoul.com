@@ -1,0 +1,93 @@
+{
+  "title": "Naming and Assigning Variables",
+  "summary": "Use clear variable names and understand reassignment.",
+  "minutes": 22,
+  "sketchBlocks": [
+    {
+      "id": "1",
+      "title": "Understanding Variables",
+      "bodyMarkdown": "In Python, a variable is a name that refers to a value. For example, if you write `age = 25`, the variable `age` now holds the value `25`. You can change the value of `age` later by reassigning it, like `age = 30`. \n\n**Example:**\n```python\nname = 'Alice'\nage = 25\nprint(name, age)  # Output: Alice 25\n```\n\n**Your turn:** Try creating your own variables and print them out!"
+    },
+    {
+      "id": "2",
+      "title": "Variable Reassignment",
+      "bodyMarkdown": "Reassignment allows you to change the value stored in a variable. For instance, if you initially set `score = 10`, you can later update it with `score = 20`. This is useful for tracking changes over time in your program.\n\n**Example:**\n```python\nscore = 10\nprint(score)  # Output: 10\nscore = 20\nprint(score)  # Output: 20\n```\n\n**Try it yourself:** Change the value of a variable and print it again!"
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "q1",
+      "kind": "code_input",
+      "title": "Variable Assignment",
+      "prompt": "Create a variable named `city` and assign it your favorite city. Then print the variable.",
+      "starterCode": "city = ''\n# Assign your favorite city to the variable\n",
+      "solutionCode": "city = 'New York'\nprint(city)",
+      "tests": [
+        {
+          "input": "",
+          "output": "New York"
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "kind": "code_input",
+      "title": "Reassigning Variables",
+      "prompt": "Start with a variable `temperature` set to 20. Reassign it to 25 and print the value.",
+      "starterCode": "temperature = 20\n# Reassign the temperature\n",
+      "solutionCode": "temperature = 20\ntemperature = 25\nprint(temperature)",
+      "tests": [
+        {
+          "input": "",
+          "output": "25"
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "kind": "single_choice",
+      "title": "Variable Naming",
+      "prompt": "Which of the following is a valid variable name in Python?",
+      "options": [
+        "1st_variable",
+        "first variable",
+        "first-variable",
+        "first_variable"
+      ],
+      "correctOptionIds": [
+        "d"
+      ]
+    },
+    {
+      "id": "q4",
+      "kind": "multi_choice",
+      "title": "Variable Characteristics",
+      "prompt": "Select all characteristics of variables in Python.",
+      "options": [
+        "Variables can hold different types of data.",
+        "Variable names can start with a number.",
+        "Variables can be reassigned.",
+        "Variable names can include underscores."
+      ],
+      "correctOptionIds": [
+        "a",
+        "c",
+        "d"
+      ]
+    },
+    {
+      "id": "q5",
+      "kind": "fill_blank_choice",
+      "title": "Complete the Variable Assignment",
+      "prompt": "To assign a value to a variable, you use the `____` operator.",
+      "template": "To assign a value to a variable, you use the `____` operator.",
+      "choices": [
+        "=",
+        "==",
+        ":",
+        "->"
+      ],
+      "correctValue": "="
+    }
+  ]
+}

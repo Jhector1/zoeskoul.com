@@ -10,10 +10,13 @@
               "title": "Understanding Boolean Operators"
             },
             "sketch1": {
-              "title": "Using Or to Combine Conditions"
+              "title": "Using 'and' Operator"
             },
             "sketch2": {
-              "title": "Negating Conditions with Not"
+              "title": "Using 'or' Operator"
+            },
+            "sketch3": {
+              "title": "Using 'not' Operator"
             },
             "quiz": {
               "title": "Quiz"
@@ -24,42 +27,42 @@
           },
           "projectSteps": {
             "quiz_3": {
-              "title": "Check Number Range"
+              "title": "Implementing Boolean Logic"
             },
             "quiz_4": {
-              "title": "Negate a Condition"
+              "title": "Using 'not' in Conditions"
             },
             "quiz_5": {
-              "title": "Or Condition Check"
+              "title": "Combining Conditions"
             }
           },
           "quiz": {
             "quiz_1": {
               "title": "Identifying Boolean Logic",
-              "prompt": "Which of the following statements correctly uses boolean operators?",
-              "hint": "Look for statements that correctly combine conditions.",
+              "prompt": "Which of the following statements are true about boolean operators?",
+              "hint": "Think about how each operator functions in a conditional statement.",
               "help": {
-                "concept": "Boolean operators allow you to combine multiple conditions in an if statement.",
-                "hint_1": "Check if each statement uses `and`, `or`, or `not` correctly.",
-                "hint_2": "Remember that all statements can be valid if they use the operators correctly."
+                "concept": "Boolean operators are used to combine conditions in logical expressions.",
+                "hint_1": "Remember that 'and' needs both conditions to be true.",
+                "hint_2": "Consider how 'or' and 'not' operate differently from 'and'."
               },
               "options": {
-                "a": "if x > 5 and x < 10:",
-                "b": "if x < 5 or x > 10:",
-                "c": "if not x == 0:",
-                "d": "All of the above"
+                "a": "The 'and' operator requires both conditions to be true.",
+                "b": "The 'or' operator requires both conditions to be true.",
+                "c": "The 'not' operator can reverse the truth value of a condition.",
+                "d": "The 'and' operator can be used to check multiple conditions."
               }
             },
             "quiz_2": {
-              "title": "Complete the Condition",
-              "prompt": "Choose the best value for the first missing blank in the statement.",
+              "title": "Complete the Statement",
+              "prompt": "The expression `if x > 10 the missing choice y < 5:` uses the the missing choice operator.",
               "hint": "Focus on the missing concept or keyword.",
               "help": {
-                "concept": "This task checks the key idea behind complete the condition.",
+                "concept": "This task checks the key idea behind complete the statement.",
                 "hint_1": "Look for the word or phrase that best matches the lesson concept.",
                 "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
               },
-              "template": "The first missing value is [blank1].",
+              "template": "The expression `if x > 10 [blank1] y < 5:` uses the and operator.",
               "choices": [
                 "and",
                 "or",
@@ -67,37 +70,37 @@
               ]
             },
             "quiz_3": {
-              "title": "Check Number Range",
-              "prompt": "Write a function that checks if a number is between 10 and 20 using boolean operators.",
+              "title": "Implementing Boolean Logic",
+              "prompt": "Write a Python function that checks if a number is between 10 and 20 (inclusive) using boolean operators. Then read the input values, call the function, and print the returned result.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
                 "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "starterCode": "def check_number(num):\n    # Your code here"
+              "starterCode": "def is_between(num):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnum = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(is_between(num))"
             },
             "quiz_4": {
-              "title": "Negate a Condition",
-              "prompt": "Write a function that checks if a value is not equal to zero.",
+              "title": "Using 'not' in Conditions",
+              "prompt": "Create a function that returns True if a string is not empty using the 'not' operator. Then read the input values, call the function, and print the returned result.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
                 "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "starterCode": "def is_not_zero(value):\n    # Your code here"
+              "starterCode": "def is_not_empty(s):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\ns = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(is_not_empty(s))"
             },
             "quiz_5": {
-              "title": "Or Condition Check",
-              "prompt": "Create a function that checks if a number is less than 10 or greater than 20.",
+              "title": "Combining Conditions",
+              "prompt": "Write a function that checks if a user is eligible for a discount based on age and membership status using 'and' and 'or'. Then read the input values, call the function, and print the returned result.",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
                 "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "starterCode": "def check_or(num):\n    # Your code here"
+              "starterCode": "def is_eligible(age, is_member):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nage = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\nis_member = _parse_arg(_inputs[1]) if len(_inputs) > 1 else \"\"\n\nprint(is_eligible(age, is_member))"
             }
           }
         }
@@ -110,15 +113,19 @@
         "and-or-not": {
           "sketch_1": {
             "title": "Understanding Boolean Operators",
-            "bodyMarkdown": "In Python, boolean operators like `and`, `or`, and `not` help us combine conditions. For example, if we want to check if a number is both greater than 10 and less than 20, we can use the `and` operator:\n\n```python\nnumber = 15\nif number > 10 and number < 20:\n    print('The number is between 10 and 20')\n```\n\nThis code will print the message because both conditions are true. \n\n**Your turn:** Try changing the value of `number` to see how the output changes!\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+            "bodyMarkdown": "In Python, boolean operators allow you to combine multiple conditions. The three main operators are **and**, **or**, and **not**.\n\n### Example:\n- **and**: Both conditions must be true.\n- **or**: At least one condition must be true.\n- **not**: Reverses the truth value of a condition.\n\n### Try it yourself:\nThink of a situation where you might use these operators to make a decision in your code."
           },
           "sketch_2": {
-            "title": "Using Or to Combine Conditions",
-            "bodyMarkdown": "The `or` operator allows us to check if at least one of multiple conditions is true. For example:\n\n```python\nnumber = 5\nif number < 10 or number > 20:\n    print('The number is either less than 10 or greater than 20')\n```\n\nIn this case, the output will be printed because the first condition is true. \n\n**Try this:** Change the value of `number` to test different outcomes.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+            "title": "Using 'and' Operator",
+            "bodyMarkdown": "The **and** operator checks if both conditions are true. If both are true, the result is true; otherwise, it's false.\n\n### Example:\n```python\nage = 20\nhas_permission = True\nif age >= 18 and has_permission:\n    print('Access granted')\nelse:\n    print('Access denied')\n```\nIn this example, access is granted only if both conditions are met.\n\n### Your turn:\nModify the age or permission variable to see how it affects the output.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
           },
           "sketch_3": {
-            "title": "Negating Conditions with Not",
-            "bodyMarkdown": "The `not` operator negates a condition. For example:\n\n```python\nis_raining = False\nif not is_raining:\n    print('You can go outside!')\n```\n\nHere, the message will print because `is_raining` is false, and `not` makes it true. \n\n**Try it yourself:** Change the value of `is_raining` to see how it affects the output.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+            "title": "Using 'or' Operator",
+            "bodyMarkdown": "The **or** operator checks if at least one condition is true. If one or both are true, the result is true.\n\n### Example:\n```python\nis_weekend = True\nis_holiday = False\nif is_weekend or is_holiday:\n    print('Time to relax!')\nelse:\n    print('Back to work!')\n```\nIn this case, relaxation is allowed if either condition is true.\n\n### Try this:\nChange the values of `is_weekend` and `is_holiday` to see how the output changes.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          },
+          "sketch_4": {
+            "title": "Using 'not' Operator",
+            "bodyMarkdown": "The **not** operator negates a condition. If the condition is true, **not** makes it false, and vice versa.\n\n### Example:\n```python\nis_raining = False\nif not is_raining:\n    print('Let’s go for a walk!')\nelse:\n    print('Stay indoors!')\n```\nHere, the walk is only possible if it is not raining.\n\n### Your turn:\nChange the `is_raining` variable to see how it affects the decision.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
           }
         }
       }

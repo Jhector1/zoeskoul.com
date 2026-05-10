@@ -14,14 +14,14 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.python-v2.python-v2-1.input-and-type-conversion.cards.sketch0.title",
-      "sketchId": "sketch_1",
+      "sketchId": "sketch1",
       "height": 420
     },
     {
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.python-v2.python-v2-1.input-and-type-conversion.cards.sketch1.title",
-      "sketchId": "sketch_2",
+      "sketchId": "sketch2",
       "height": 420
     },
     {
@@ -47,18 +47,18 @@
         "maxAttempts": 10,
         "steps": [
           {
-            "id": "quiz_1",
-            "titleKey": "topics.python-v2.python-v2-1.input-and-type-conversion.projectSteps.quiz_1.title",
-            "exerciseKey": "quiz_1",
+            "id": "quiz1",
+            "titleKey": "topics.python-v2.python-v2-1.input-and-type-conversion.projectSteps.quiz1.title",
+            "exerciseKey": "quiz1",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": 10
           },
           {
-            "id": "policy_code_input_1",
-            "titleKey": "topics.python-v2.python-v2-1.input-and-type-conversion.projectSteps.policy_code_input_1.title",
-            "exerciseKey": "policy_code_input_1",
+            "id": "quiz5",
+            "titleKey": "topics.python-v2.python-v2-1.input-and-type-conversion.projectSteps.quiz5.title",
+            "exerciseKey": "quiz5",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
@@ -70,25 +70,25 @@
   ],
   "sketches": [
     {
-      "id": "sketch_1",
+      "id": "sketch1",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-v2.python-v2-1.input-and-type-conversion.sketch_1.title",
-      "bodyKey": "sketches.python-v2.python-v2-1.input-and-type-conversion.sketch_1.bodyMarkdown"
+      "titleKey": "sketches.python-v2.python-v2-1.input-and-type-conversion.sketch1.title",
+      "bodyKey": "sketches.python-v2.python-v2-1.input-and-type-conversion.sketch1.bodyMarkdown"
     },
     {
-      "id": "sketch_2",
+      "id": "sketch2",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-v2.python-v2-1.input-and-type-conversion.sketch_2.title",
-      "bodyKey": "sketches.python-v2.python-v2-1.input-and-type-conversion.sketch_2.bodyMarkdown"
+      "titleKey": "sketches.python-v2.python-v2-1.input-and-type-conversion.sketch2.title",
+      "bodyKey": "sketches.python-v2.python-v2-1.input-and-type-conversion.sketch2.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "quiz_1",
+      "id": "quiz1",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-1.input-and-type-conversion.quiz.quiz_1",
+      "messageBase": "topics.python-v2.python-v2-1.input-and-type-conversion.quiz.quiz1",
       "language": "python",
       "starterCode": "age = input()\n# Convert age to an integer",
       "showExpectedExample": true,
@@ -97,36 +97,36 @@
         "tests": [
           {
             "stdin": "25\n",
-            "stdout": "In 10 years, you will be 35 years old.",
+            "stdout": "In 10 years, you will be 35",
             "match": "exact"
           },
           {
             "stdin": "30\n",
-            "stdout": "In 10 years, you will be 40 years old.",
+            "stdout": "In 10 years, you will be 40",
             "match": "exact"
           }
         ],
-        "solutionCode": "age = input()\nage = int(age)\nprint('In 10 years, you will be ' + str(age + 10) + ' years old.')"
+        "solutionCode": "age = int(input())\nprint('In 10 years, you will be', age + 10)"
       }
     },
     {
-      "id": "quiz_2",
+      "id": "quiz2",
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-1.input-and-type-conversion.quiz.quiz_2",
+      "messageBase": "topics.python-v2.python-v2-1.input-and-type-conversion.quiz.quiz2",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "str"
+        "value": "int"
       }
     },
     {
-      "id": "quiz_3",
+      "id": "quiz3",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-1.input-and-type-conversion.quiz.quiz_3",
+      "messageBase": "topics.python-v2.python-v2-1.input-and-type-conversion.quiz.quiz3",
       "optionIds": [
         "a",
         "b",
@@ -135,15 +135,15 @@
       ],
       "expected": {
         "kind": "single_choice",
-        "optionId": "c"
+        "optionId": "b"
       }
     },
     {
-      "id": "quiz_4",
+      "id": "quiz4",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-1.input-and-type-conversion.quiz.quiz_4",
+      "messageBase": "topics.python-v2.python-v2-1.input-and-type-conversion.quiz.quiz4",
       "optionIds": [
         "a",
         "b",
@@ -160,29 +160,29 @@
       }
     },
     {
-      "id": "policy_code_input_1",
+      "id": "quiz5",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-1.input-and-type-conversion.quiz.policy_code_input_1",
+      "messageBase": "topics.python-v2.python-v2-1.input-and-type-conversion.quiz.quiz5",
       "language": "python",
-      "starterCode": "n = int(input())\n# Your code here",
+      "starterCode": "number = input()\n# Convert number to a float",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
           {
-            "stdin": "5\n",
-            "stdout": "True\n",
+            "stdin": "3.14\n",
+            "stdout": "The number is: 3.14",
             "match": "exact"
           },
           {
-            "stdin": "0\n",
-            "stdout": "False\n",
+            "stdin": "2\n",
+            "stdout": "The number is: 2.0",
             "match": "exact"
           }
         ],
-        "solutionCode": "n = int(input())\nif n > 0:\n    print(True)\nelse:\n    print(False)"
+        "solutionCode": "number = float(input())\nprint('The number is:', number)"
       }
     }
   ]

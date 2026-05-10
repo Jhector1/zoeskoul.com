@@ -1,0 +1,101 @@
+{
+  "title": "Useful String Methods",
+  "summary": "Use methods like lower, strip, replace, split, and join.",
+  "minutes": 25,
+  "sketchBlocks": [
+    {
+      "id": "string_methods_intro",
+      "title": "Introduction to String Methods",
+      "bodyMarkdown": "In Python, strings are sequences of characters. You can manipulate strings using various methods. For example, the `lower()` method converts all characters in a string to lowercase.\n\n**Example:**\n```python\ntext = 'Hello World'\nprint(text.lower())  # Output: hello world\n```\n\nTry it yourself: Use the `upper()` method to convert a string to uppercase."
+    },
+    {
+      "id": "string_methods_strip",
+      "title": "Using strip() Method",
+      "bodyMarkdown": "The `strip()` method removes any leading and trailing whitespace from a string.\n\n**Example:**\n```python\ntext = '   Hello World   '\nprint(text.strip())  # Output: 'Hello World'\n```\n\nTry this: Create a string with extra spaces and use `strip()` to clean it up."
+    },
+    {
+      "id": "string_methods_replace",
+      "title": "Using replace() Method",
+      "bodyMarkdown": "The `replace()` method replaces a specified phrase with another specified phrase in a string.\n\n**Example:**\n```python\ntext = 'Hello World'\nnew_text = text.replace('World', 'Python')\nprint(new_text)  # Output: Hello Python\n```\n\nYour turn: Replace 'Hello' with 'Hi' in a string."
+    },
+    {
+      "id": "string_methods_split_join",
+      "title": "Using split() and join() Methods",
+      "bodyMarkdown": "The `split()` method divides a string into a list based on a specified separator. The `join()` method combines elements of a list into a single string.\n\n**Example:**\n```python\ntext = 'apple,banana,cherry'\nfruits = text.split(',')\nprint(fruits)  # Output: ['apple', 'banana', 'cherry']\n\njoined_fruits = ', '.join(fruits)\nprint(joined_fruits)  # Output: apple, banana, cherry\n```\n\nTry it yourself: Split a string of your favorite colors and then join them back together."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "quiz_string_lower",
+      "kind": "single_choice",
+      "title": "Understanding lower() Method",
+      "prompt": "What does the `lower()` method do to a string?",
+      "hint": "It changes the case of the characters.",
+      "help": {
+        "concept": "The `lower()` method converts all uppercase letters in a string to lowercase.",
+        "hint_1": "Look for the method that alters the case of letters.",
+        "hint_2": "Consider how the method affects the string's appearance."
+      },
+      "options": [
+        "Converts all characters to uppercase",
+        "Removes whitespace from the string",
+        "Converts all characters to lowercase",
+        "Replaces characters in the string"
+      ],
+      "correctOptionIds": [
+        "c"
+      ]
+    },
+    {
+      "id": "quiz_string_strip",
+      "kind": "multi_choice",
+      "title": "Using strip() Method",
+      "prompt": "Which of the following statements are true about the `strip()` method?",
+      "hint": "Think about what happens to spaces in a string.",
+      "help": {
+        "concept": "The `strip()` method removes leading and trailing whitespace from a string.",
+        "hint_1": "It only affects spaces at the beginning and end.",
+        "hint_2": "It does not change spaces between words."
+      },
+      "options": [
+        "It removes leading whitespace",
+        "It removes trailing whitespace",
+        "It removes all whitespace",
+        "It does not change the string"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ]
+    },
+    {
+      "id": "quiz_string_replace",
+      "kind": "fill_blank_choice",
+      "title": "Using replace() Method",
+      "prompt": "The `replace()` method is used to replace a specified phrase in a string with another specified phrase. For example, 'Hello World'.replace('World', '___') will return 'Hello ___'.",
+      "choices": [
+        "Python",
+        "Java",
+        "C++"
+      ],
+      "template": "Hello World.replace('World', '___')",
+      "correctValue": "Python"
+    },
+    {
+      "id": "quiz_string_split_join",
+      "kind": "code_input",
+      "title": "Using split() and join() Methods",
+      "prompt": "Write a program that splits a string of fruits and then joins them back together with a comma and a space.",
+      "starterCode": "fruits = 'apple,banana,cherry'\n# Split the string here\n\n# Join the list back into a string here\n\n# Print the result",
+      "solutionCode": "fruits = 'apple,banana,cherry'\nfruits_list = fruits.split(',')\njoined_fruits = ', '.join(fruits_list)\nprint(joined_fruits)"
+    },
+    {
+      "id": "quiz_string_methods",
+      "kind": "code_input",
+      "title": "Using multiple string methods",
+      "prompt": "Create a string, strip it, convert it to lowercase, and replace a word. Print the final result.",
+      "starterCode": "text = '   Hello World   '\n# Strip the string here\n\n# Convert to lowercase here\n\n# Replace 'hello' with 'hi' here\n\n# Print the final result",
+      "solutionCode": "text = '   Hello World   '\nstripped_text = text.strip()\nlower_text = stripped_text.lower()\nfinal_text = lower_text.replace('hello', 'hi')\nprint(final_text)"
+    }
+  ]
+}

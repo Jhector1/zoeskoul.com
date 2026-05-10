@@ -1,0 +1,106 @@
+{
+  "title": "What Python Is Used For",
+  "summary": "Understand Python's role in automation, web apps, data, beginner programming, and AI.",
+  "minutes": 12,
+  "sketchBlocks": [
+    {
+      "id": "1",
+      "title": "Introduction to Python's Uses",
+      "bodyMarkdown": "Python is a versatile programming language used in various fields. It is popular for automation, web development, data analysis, and artificial intelligence. For example, you can use Python to automate repetitive tasks like renaming files or scraping data from websites. **Try it yourself:** Think of a task you do repeatedly that could be automated with Python."
+    },
+    {
+      "id": "2",
+      "title": "Python in Web Development",
+      "bodyMarkdown": "Python is widely used in web development with frameworks like Django and Flask. These frameworks help developers build robust web applications quickly. For instance, a simple web app can be created using Flask with just a few lines of code. Here’s a basic example:\n\n```python\nfrom flask import Flask\napp = Flask(__name__)\n\n@app.route('/')\ndef home():\n    return 'Hello, World!'\n\nif __name__ == '__main__':\n    app.run(debug=True)\n```\n\n**Try this:** Modify the message returned by the `home` function to greet yourself!"
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "q1",
+      "kind": "single_choice",
+      "title": "What is one common use of Python?",
+      "prompt": "Select one of the following options.",
+      "options": [
+        "Building mobile applications",
+        "Web development",
+        "Creating video games",
+        "Designing graphics"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Think about where Python is commonly applied in technology.",
+      "help": {
+        "concept": "Python is often used for web development due to its simplicity and powerful frameworks.",
+        "hint_1": "Consider the areas where Python excels compared to other languages.",
+        "hint_2": "Look for the option that mentions web applications."
+      }
+    },
+    {
+      "id": "q2",
+      "kind": "single_choice",
+      "title": "Which framework is commonly used for web development in Python?",
+      "prompt": "Choose the correct framework.",
+      "options": [
+        "Flask",
+        "Unity",
+        "Django",
+        "Both Flask and Django"
+      ],
+      "correctOptionIds": [
+        "d"
+      ],
+      "hint": "Think about the frameworks that help build web applications using Python.",
+      "help": {
+        "concept": "Flask and Django are both popular frameworks for web development in Python.",
+        "hint_1": "One is lightweight and easy to get started with, while the other is more feature-rich.",
+        "hint_2": "Both frameworks are widely recognized in the Python community."
+      }
+    },
+    {
+      "id": "q3",
+      "kind": "multi_choice",
+      "title": "Select all the areas where Python is commonly used.",
+      "prompt": "Choose all correct answers.",
+      "options": [
+        "Data analysis",
+        "Web development",
+        "Game development",
+        "Machine learning"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ],
+      "hint": "Think about the industries and fields that benefit from Python's capabilities.",
+      "help": {
+        "concept": "Python is versatile and used in various domains including data science and machine learning.",
+        "hint_1": "Consider the fields where Python's libraries are particularly strong.",
+        "hint_2": "Look for options that relate to data processing and AI."
+      }
+    },
+    {
+      "id": "q4",
+      "kind": "fill_blank_choice",
+      "title": "Python is widely used for __________.",
+      "prompt": "Fill in the blank with the correct term.",
+      "template": "Python is widely used for __________.",
+      "choices": [
+        "automation",
+        "cooking",
+        "painting",
+        "gardening"
+      ],
+      "correctValue": "automation"
+    },
+    {
+      "id": "q5",
+      "kind": "code_input",
+      "title": "Create a simple Python program that prints your name.",
+      "prompt": "Write Python code to print your name.",
+      "starterCode": "print('Your Name')",
+      "solutionCode": "print('Zoe Skoul')"
+    }
+  ]
+}

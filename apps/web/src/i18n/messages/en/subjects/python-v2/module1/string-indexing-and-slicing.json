@@ -10,7 +10,7 @@
               "title": "Understanding String Indexing"
             },
             "sketch1": {
-              "title": "Slicing Strings"
+              "title": "Exploring String Slicing"
             },
             "quiz": {
               "title": "Quiz"
@@ -20,17 +20,39 @@
             }
           },
           "projectSteps": {
-            "quiz4": {
-              "title": "Extract a substring"
+            "1": {
+              "title": "Extract a Substring"
             },
-            "quiz5": {
-              "title": "Access a character by index"
+            "2": {
+              "title": "Access a Character"
             }
           },
           "quiz": {
-            "quiz1": {
+            "1": {
+              "title": "Extract a Substring",
+              "prompt": "Write a Python program that extracts the substring 'Python' from the string 'I love Python programming'.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "starterCode": "my_string = 'I love Python programming'\n# Your code here to extract 'Python'"
+            },
+            "2": {
+              "title": "Access a Character",
+              "prompt": "Write a Python program that accesses the first character of the string 'Hello, World!'.",
+              "hint": "Break the task into the main code steps first.",
+              "help": {
+                "concept": "This task checks whether you can apply access a character in a working solution.",
+                "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
+                "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
+              },
+              "starterCode": "my_string = 'Hello, World!'\n# Your code here to access the first character"
+            },
+            "3": {
               "title": "What is the index of the first character in a string?",
-              "prompt": "In Python, string indexing starts at which number?",
+              "prompt": "In Python, what is the index of the first character in a string?",
               "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
                 "concept": "This support text was repaired because the original wording revealed the answer too directly.",
@@ -38,65 +60,42 @@
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
               "options": {
-                "a": "1",
-                "b": "0",
-                "c": "2",
-                "d": "None of the above"
+                "a": "0",
+                "b": "1",
+                "c": "-1",
+                "d": "None"
               }
             },
-            "quiz2": {
+            "4": {
               "title": "Which of the following are valid ways to slice a string?",
-              "prompt": "Select all valid string slicing methods.",
-              "hint": "Consider the syntax of slicing in Python.",
+              "prompt": "Select all valid ways to slice the string 'Hello, World!'",
+              "hint": "Slicing syntax is string[start:end].",
               "help": {
-                "concept": "Slicing syntax uses start and end indices.",
-                "hint_1": "Look for options that follow the format `string[start:end]`.",
-                "hint_2": "Remember that the end index is exclusive."
+                "concept": "All provided options are valid ways to slice a string in Python.",
+                "hint_1": "Remember that the end index is not included in the slice.",
+                "hint_2": "Check how omitting indices affects the slice."
               },
               "options": {
-                "a": "string[0:5]",
-                "b": "string[5:0]",
-                "c": "string[:5]"
+                "a": "my_string[0:5]",
+                "b": "my_string[7:12]",
+                "c": "my_string[:5]"
               }
             },
-            "quiz3": {
-              "title": "Fill in the blank: The slice `string[1:4]` will return ___ characters.",
-              "prompt": "What will be the output of `string[1:4]`?",
+            "5": {
+              "title": "Fill in the blank",
+              "prompt": "In Python, the last character of a string can be accessed using the index the missing choice .",
               "hint": "Focus on the missing concept or keyword.",
               "help": {
-                "concept": "This task checks the key idea behind fill in the blank: the slice `string[1:4]` will return ___ characters..",
+                "concept": "This task checks the key idea behind fill in the blank.",
                 "hint_1": "Look for the word or phrase that best matches the lesson concept.",
                 "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
               },
-              "template": "The slice `string[1:4]` will return ___ characters.",
+              "template": "In Python, the last character of a string can be accessed using the index [blank1] .",
               "choices": [
-                "2",
-                "3",
-                "4",
-                "1"
+                "-1",
+                "0",
+                "length of string - 1"
               ]
-            },
-            "quiz4": {
-              "title": "Extract a substring",
-              "prompt": "Write a Python program to extract the substring from index 2 to 5 from the string `\"Hello, World!\"`.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
-              "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
-              },
-              "starterCode": "my_string = \"Hello, World!\"\n# Your code here"
-            },
-            "quiz5": {
-              "title": "Access a character by index",
-              "prompt": "Write a Python program to access the character at index 3 from the string `\"Python\"`.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
-              "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
-              },
-              "starterCode": "my_string = \"Python\"\n# Your code here"
             }
           }
         }
@@ -107,13 +106,13 @@
     "python-v2": {
       "python-v2-1": {
         "string-indexing-and-slicing": {
-          "sketch1": {
+          "1": {
             "title": "Understanding String Indexing",
-            "bodyMarkdown": "In Python, strings are sequences of characters. Each character in a string has a unique index, starting from 0. For example, in the string `\"Hello\"`, the character `H` is at index 0, `e` is at index 1, and so on. You can access a specific character using its index like this:\n\n```python\nmy_string = \"Hello\"\nprint(my_string[0])  # Output: H\n```\n\n**Try it yourself:** Access the character at index 1 in the string `\"Python\"`.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+            "bodyMarkdown": "In Python, strings are sequences of characters. Each character in a string has a unique index, starting from 0. For example, in the string `\"Hello\"`, the character `H` is at index 0, `e` at index 1, and so on.\n\n**Example:**\n```python\nmy_string = \"Hello\"\nprint(my_string[0])  # Output: H\n```\n\n**Your turn:** Try accessing the character at index 1.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
           },
-          "sketch2": {
-            "title": "Slicing Strings",
-            "bodyMarkdown": "Slicing allows you to extract a substring from a string using a range of indices. The syntax is `string[start:end]`, where `start` is inclusive and `end` is exclusive. For example:\n\n```python\nmy_string = \"Hello, World!\"\nprint(my_string[0:5])  # Output: Hello\n```\n\nThis extracts characters from index 0 to 4. \n\n**Your turn:** Slice the string `\"Programming\"` to get `\"gram\"`.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          "2": {
+            "title": "Exploring String Slicing",
+            "bodyMarkdown": "String slicing allows you to extract a substring from a string. The syntax is `string[start:end]`, where `start` is the index of the first character and `end` is the index where the slice stops (not inclusive).\n\n**Example:**\n```python\nmy_string = \"Hello, World!\"\nprint(my_string[0:5])  # Output: Hello\n```\n\n**Try it yourself:** Modify the slice to get the substring `World`.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
           }
         }
       }

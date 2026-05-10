@@ -1,0 +1,139 @@
+{
+  "title": "Comparisons and Truth Values",
+  "summary": "Use comparison operators and understand True and False results.",
+  "minutes": 22,
+  "sketchBlocks": [
+    {
+      "id": "comparison_operators",
+      "title": "Understanding Comparison Operators",
+      "bodyMarkdown": "In Python, comparison operators are used to compare two values. The result of a comparison is either True or False. Here are the main comparison operators:\n\n- `==` (equal to)\n- `!=` (not equal to)\n- `>` (greater than)\n- `<` (less than)\n- `>=` (greater than or equal to)\n- `<=` (less than or equal to)\n\n### Example:\n```python\nx = 5\nprint(x == 5)  # This will print True\nprint(x > 3)    # This will print True\nprint(x < 2)    # This will print False\n```\n\n### Your turn:\nTry changing the value of `x` and see how the output changes!\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+    },
+    {
+      "id": "truthiness",
+      "title": "Understanding Truthiness",
+      "bodyMarkdown": "In Python, not all values are considered equal when it comes to truthiness. For example:\n- Non-zero numbers are considered True.\n- An empty string (`''`) is considered False.\n- The value `None` is also considered False.\n\n### Example:\n```python\nif x:\n    print('x is True')\nelse:\n    print('x is False')\n```\n\n### Try it yourself:\nChange `x` to different values like `0`, `1`, `''`, and `None` to see how the output changes!\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "multi_choice_1",
+      "kind": "multi_choice",
+      "title": "Identifying True and False Values",
+      "prompt": "Which of the following values are considered True in Python?",
+      "options": [
+        "0",
+        "1",
+        "''",
+        "None"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Think about which values are non-zero or non-empty.",
+      "help": {
+        "concept": "In Python, only non-zero numbers and non-empty strings are considered True.",
+        "hint_1": "Remember that 0 and empty strings are treated as False.",
+        "hint_2": "Focus on the values that are not zero or empty."
+      }
+    },
+    {
+      "id": "fill_blank_choice_1",
+      "kind": "fill_blank_choice",
+      "title": "Complete the Comparison",
+      "prompt": "The expression `5 > 3` evaluates to the missing choice.",
+      "template": "The expression `5 > 3` evaluates to [blank1].",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "correctValue": "True",
+      "hint": "Focus on the missing concept or keyword.",
+      "help": {
+        "concept": "This task checks the key idea behind complete the comparison.",
+        "hint_1": "Look for the word or phrase that best matches the lesson concept.",
+        "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
+      }
+    },
+    {
+      "id": "code_input_1",
+      "kind": "code_input",
+      "title": "Check Comparison",
+      "prompt": "Write a program that checks if a number is greater than 10 and prints 'Greater' or 'Smaller'.",
+      "starterCode": "number = int(input())\n# Your code here",
+      "solutionCode": "number = int(input())\nif number > 10:\n    print('Greater')\nelse:\n    print('Smaller')",
+      "recipeType": "fixed_tests",
+      "hint": "Break the task into the main code steps first.",
+      "help": {
+        "concept": "This task checks whether you can apply check comparison in a working solution.",
+        "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
+        "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
+      },
+      "tests": [
+        {
+          "stdin": "12\n",
+          "stdout": "Greater",
+          "match": "exact"
+        },
+        {
+          "stdin": "20\n",
+          "stdout": "Greater",
+          "match": "exact"
+        }
+      ]
+    },
+    {
+      "id": "code_input_2",
+      "kind": "code_input",
+      "title": "Truthiness Check",
+      "prompt": "Write a program that checks if a variable is truthy or falsy and prints the result.",
+      "starterCode": "value = ''\n# Your code here",
+      "solutionCode": "value = ''\nif value:\n    print('Truthy')\nelse:\n    print('Falsy')",
+      "recipeType": "fixed_tests",
+      "hint": "Break the task into the main code steps first.",
+      "help": {
+        "concept": "This task checks whether you can apply truthiness check in a working solution.",
+        "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
+        "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
+      },
+      "tests": [
+        {
+          "stdin": "12\n",
+          "stdout": "Falsy",
+          "match": "exact"
+        },
+        {
+          "stdin": "20\n",
+          "stdout": "Falsy",
+          "match": "exact"
+        }
+      ]
+    },
+    {
+      "id": "code_input_3",
+      "kind": "code_input",
+      "title": "Multiple Comparisons",
+      "prompt": "Write a program that checks multiple conditions and prints the appropriate message.",
+      "starterCode": "age = 20\n# Your code here",
+      "solutionCode": "age = 20\nif age < 18:\n    print('Minor')\nelif age < 65:\n    print('Adult')\nelse:\n    print('Senior')",
+      "recipeType": "fixed_tests",
+      "hint": "Break the task into the main code steps first.",
+      "help": {
+        "concept": "This task checks whether you can apply multiple comparisons in a working solution.",
+        "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
+        "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
+      },
+      "tests": [
+        {
+          "stdin": "12\n",
+          "stdout": "Adult",
+          "match": "exact"
+        },
+        {
+          "stdin": "20\n",
+          "stdout": "Adult",
+          "match": "exact"
+        }
+      ]
+    }
+  ]
+}

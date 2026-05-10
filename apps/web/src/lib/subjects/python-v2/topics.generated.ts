@@ -20,6 +20,7 @@ import namingAndAssigningVariablesJson from "./modules/module1/topics/naming-and
 import stringIndexingAndSlicingJson from "./modules/module1/topics/string-indexing-and-slicing/topic.bundle.json";
 import stringMethodsJson from "./modules/module1/topics/string-methods/topic.bundle.json";
 import andOrNotJson from "./modules/module2/topics/and-or-not/topic.bundle.json";
+import checkingSpecialCasesFirstJson from "./modules/module2/topics/checking-special-cases-first/topic.bundle.json";
 import comparisonsAndTruthValuesJson from "./modules/module2/topics/comparisons-and-truth-values/topic.bundle.json";
 import guardClausesJson from "./modules/module2/topics/guard-clauses/topic.bundle.json";
 import ifElifElseJson from "./modules/module2/topics/if-elif-else/topic.bundle.json";
@@ -28,6 +29,7 @@ import truthinessAndEmptyValuesJson from "./modules/module2/topics/truthiness-an
 import accumulatorsAndCountersJson from "./modules/module3/topics/accumulators-and-counters/topic.bundle.json";
 import breakAndContinueJson from "./modules/module3/topics/break-and-continue/topic.bundle.json";
 import forLoopsOverSequencesJson from "./modules/module3/topics/for-loops-over-sequences/topic.bundle.json";
+import forLoopsOverTextJson from "./modules/module3/topics/for-loops-over-text/topic.bundle.json";
 import loopDebuggingJson from "./modules/module3/topics/loop-debugging/topic.bundle.json";
 import rangeAndCountingJson from "./modules/module3/topics/range-and-counting/topic.bundle.json";
 import whileLoopBasicsJson from "./modules/module3/topics/while-loop-basics/topic.bundle.json";
@@ -46,6 +48,7 @@ const namingAndAssigningVariables = namingAndAssigningVariablesJson as SlimTopic
 const stringIndexingAndSlicing = stringIndexingAndSlicingJson as SlimTopicManifest;
 const stringMethods = stringMethodsJson as SlimTopicManifest;
 const andOrNot = andOrNotJson as SlimTopicManifest;
+const checkingSpecialCasesFirst = checkingSpecialCasesFirstJson as SlimTopicManifest;
 const comparisonsAndTruthValues = comparisonsAndTruthValuesJson as SlimTopicManifest;
 const guardClauses = guardClausesJson as SlimTopicManifest;
 const ifElifElse = ifElifElseJson as SlimTopicManifest;
@@ -54,6 +57,7 @@ const truthinessAndEmptyValues = truthinessAndEmptyValuesJson as SlimTopicManife
 const accumulatorsAndCounters = accumulatorsAndCountersJson as SlimTopicManifest;
 const breakAndContinue = breakAndContinueJson as SlimTopicManifest;
 const forLoopsOverSequences = forLoopsOverSequencesJson as SlimTopicManifest;
+const forLoopsOverText = forLoopsOverTextJson as SlimTopicManifest;
 const loopDebugging = loopDebuggingJson as SlimTopicManifest;
 const rangeAndCounting = rangeAndCountingJson as SlimTopicManifest;
 const whileLoopBasics = whileLoopBasicsJson as SlimTopicManifest;
@@ -72,6 +76,7 @@ export const TOPIC_MANIFESTS: TopicManifestRefMap = {
   "string-indexing-and-slicing": stringIndexingAndSlicing,
   "string-methods": stringMethods,
   "and-or-not": andOrNot,
+  "checking-special-cases-first": checkingSpecialCasesFirst,
   "comparisons-and-truth-values": comparisonsAndTruthValues,
   "guard-clauses": guardClauses,
   "if-elif-else": ifElifElse,
@@ -80,6 +85,7 @@ export const TOPIC_MANIFESTS: TopicManifestRefMap = {
   "accumulators-and-counters": accumulatorsAndCounters,
   "break-and-continue": breakAndContinue,
   "for-loops-over-sequences": forLoopsOverSequences,
+  "for-loops-over-text": forLoopsOverText,
   "loop-debugging": loopDebugging,
   "range-and-counting": rangeAndCounting,
   "while-loop-basics": whileLoopBasics,

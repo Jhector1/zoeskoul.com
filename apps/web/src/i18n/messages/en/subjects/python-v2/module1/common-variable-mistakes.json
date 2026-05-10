@@ -10,7 +10,10 @@
               "title": "Understanding Variable Names"
             },
             "sketch1": {
-              "title": "Common Mistakes with Strings"
+              "title": "Avoiding Undefined Names"
+            },
+            "sketch2": {
+              "title": "Accidental Strings"
             },
             "quiz": {
               "title": "Quiz"
@@ -21,82 +24,82 @@
           },
           "projectSteps": {
             "q1": {
-              "title": "Fix the Variable Name"
+              "title": "Define and Print a Variable"
             },
             "q5": {
-              "title": "Correct the String Usage"
+              "title": "Fix the Variable Name"
             }
           },
           "quiz": {
             "q1": {
-              "title": "Fix the Variable Name",
-              "prompt": "Correct the variable name in the code below to avoid an undefined name error.",
+              "title": "Define and Print a Variable",
+              "prompt": "Define a variable `animal` with the value 'dog' and print it.",
               "hint": "Break the task into the main code steps first.",
               "help": {
-                "concept": "This task checks whether you can apply fix the variable name in a working solution.",
+                "concept": "This task checks whether you can apply define and print a variable in a working solution.",
                 "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
                 "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
               },
-              "starterCode": "print(value)"
+              "starterCode": "animal = ''\nprint(animal)"
             },
             "q2": {
-              "title": "Identify the Mistake",
-              "prompt": "Choose the best value for the first missing blank in the statement.",
+              "title": "Complete the Variable Definition",
+              "prompt": "Fill in the blank to define a variable for your favorite fruit: `favorite_fruit = the missing choice`.",
               "hint": "Focus on the missing concept or keyword.",
               "help": {
-                "concept": "This task checks the key idea behind identify the mistake.",
+                "concept": "This task checks the key idea behind complete the variable definition.",
                 "hint_1": "Look for the word or phrase that best matches the lesson concept.",
                 "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
               },
-              "template": "The first missing value is [blank1].",
+              "template": "favorite_fruit = [blank1]",
               "choices": [
-                "name",
-                "value",
-                "age"
+                "'apple'",
+                "'banana'",
+                "'orange'"
               ]
             },
             "q3": {
-              "title": "Best Variable Name",
-              "prompt": "Which of the following is the best variable name?",
-              "hint": "Think about the main idea behind best variable name.",
+              "title": "Identifying Undefined Variable Error",
+              "prompt": "What happens if you try to print a variable that hasn't been defined yet?",
+              "hint": "Think about the main idea behind identifying undefined variable error.",
               "help": {
-                "concept": "Focus on the core concept behind best variable name.",
+                "concept": "Focus on the core concept behind identifying undefined variable error.",
                 "hint_1": "Eliminate choices that do not match the main idea of the lesson.",
                 "hint_2": "Match the wording of the prompt to the concept practiced in the topic."
               },
               "options": {
-                "a": "x",
-                "b": "data",
-                "c": "user_age",
-                "d": "temp"
+                "a": "It prints None.",
+                "b": "It raises a NameError.",
+                "c": "It prints an empty string.",
+                "d": "It does nothing."
               }
             },
             "q4": {
-              "title": "Common Variable Mistakes",
-              "prompt": "Select all common mistakes when using variables.",
-              "hint": "Think about the main idea behind common variable mistakes.",
+              "title": "Identifying Good Variable Names",
+              "prompt": "Which of the following are good variable names?",
+              "hint": "Think about the main idea behind identifying good variable names.",
               "help": {
-                "concept": "Focus on the core concept behind common variable mistakes.",
+                "concept": "Focus on the core concept behind identifying good variable names.",
                 "hint_1": "Eliminate choices that do not match the main idea of the lesson.",
                 "hint_2": "Match the wording of the prompt to the concept practiced in the topic."
               },
               "options": {
-                "a": "Using a variable before it is defined",
-                "b": "Using quotes around variable names",
-                "c": "Using special characters in variable names",
-                "d": "Using descriptive names"
+                "a": "1. age",
+                "b": "2. 1st_name",
+                "c": "3. favorite_color",
+                "d": "4. x"
               }
             },
             "q5": {
-              "title": "Correct the String Usage",
-              "prompt": "Modify the code to correctly print the variable instead of the string.",
-              "hint": "Break the task into the main code steps first.",
+              "title": "Fix the Variable Name",
+              "prompt": "The following code has an error. Fix the variable name and print it:\n```python\nprint(favorite color)\n```",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "This task checks whether you can apply correct the string usage in a working solution.",
-                "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
-                "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
+                "concept": "This coding exercise checks whether the program produces the requested output.",
+                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "starterCode": "name = 'Bob'\nprint('name')"
+              "starterCode": "print(favorite color)"
             }
           }
         }
@@ -109,11 +112,15 @@
         "common-variable-mistakes": {
           "1": {
             "title": "Understanding Variable Names",
-            "bodyMarkdown": "In Python, variable names are used to store data. It's important to choose names that are clear and descriptive. For example, instead of using `x` or `y`, use `age` or `name`.\n\n**Example:**\n```python\nage = 25\nname = 'Alice'\n```\n\n**Your turn:** Try creating your own variables with meaningful names!\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+            "bodyMarkdown": "In Python, variable names are used to store data. It's important to choose names that are clear and descriptive. For example, instead of using `x` or `y`, use `age` or `name`.\n\n**Example:**\n```python\nage = 25\nname = 'Alice'\n```\n\n**Your turn:** Try creating a variable to store your favorite color.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
           },
           "2": {
-            "title": "Common Mistakes with Strings",
-            "bodyMarkdown": "Sometimes, you might accidentally create a string when you meant to use a variable. For example:\n\n```python\nname = 'Alice'\nprint(name)\n```\nIf you forget to use the variable and just write `print('name')`, it will print 'name' instead of the value stored in the variable.\n\n**Try this:** Fix the code to print the variable value instead.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+            "title": "Avoiding Undefined Names",
+            "bodyMarkdown": "Using a variable before it has been defined will lead to an error. Always ensure that you assign a value to a variable before using it.\n\n**Example:**\n```python\n# This will cause an error\nprint(favorite_color)\n\n# Correct usage\nfavorite_color = 'blue'\nprint(favorite_color)\n```\n\n**Try this:** Define a variable `hobby` and print it.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          },
+          "3": {
+            "title": "Accidental Strings",
+            "bodyMarkdown": "Be careful not to confuse variable names with strings. If you want to use a variable, do not put it in quotes.\n\n**Example:**\n```python\n# This is a string\nfavorite_color = 'blue'\n\n# This is a variable\nprint(favorite_color)\n```\n\n**Try it yourself:** Create a variable `city` and print it without quotes.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
           }
         }
       }

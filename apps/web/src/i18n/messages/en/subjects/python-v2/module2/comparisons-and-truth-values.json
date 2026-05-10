@@ -10,7 +10,7 @@
               "title": "Understanding Comparison Operators"
             },
             "sketch1": {
-              "title": "Truthiness in Python"
+              "title": "Understanding Truthiness"
             },
             "quiz": {
               "title": "Quiz"
@@ -21,79 +21,79 @@
           },
           "projectSteps": {
             "code_input_1": {
-              "title": "Untitled"
+              "title": "Check Comparison"
             },
             "code_input_2": {
-              "title": "Untitled"
+              "title": "Truthiness Check"
             },
             "code_input_3": {
-              "title": "Untitled"
+              "title": "Multiple Comparisons"
             }
           },
           "quiz": {
             "multi_choice_1": {
-              "title": "Identifying Truthy and Falsy Values",
-              "prompt": "Which of the following values are considered falsy in Python?",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "title": "Identifying True and False Values",
+              "prompt": "Which of the following values are considered True in Python?",
+              "hint": "Think about which values are non-zero or non-empty.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "concept": "In Python, only non-zero numbers and non-empty strings are considered True.",
+                "hint_1": "Remember that 0 and empty strings are treated as False.",
+                "hint_2": "Focus on the values that are not zero or empty."
               },
               "options": {
                 "a": "0",
-                "b": "\"Hello\"",
-                "c": "[]",
+                "b": "1",
+                "c": "''",
                 "d": "None"
               }
             },
-            "code_input_1": {
-              "title": "Untitled",
-              "prompt": "Untitled",
-              "hint": "Break the task into the main code steps first.",
-              "help": {
-                "concept": "This task checks whether you can apply untitled in a working solution.",
-                "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
-                "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
-              },
-              "starterCode": "def compare_numbers(a, b):\n    # Write your code here\n    pass"
-            },
-            "code_input_2": {
-              "title": "Untitled",
-              "prompt": "Untitled",
-              "hint": "Break the task into the main code steps first.",
-              "help": {
-                "concept": "This task checks whether you can apply untitled in a working solution.",
-                "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
-                "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
-              },
-              "starterCode": "def is_equal(a, b):\n    # Write your code here\n    pass"
-            },
-            "code_input_3": {
-              "title": "Untitled",
-              "prompt": "Untitled",
-              "hint": "Break the task into the main code steps first.",
-              "help": {
-                "concept": "This task checks whether you can apply untitled in a working solution.",
-                "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
-                "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
-              },
-              "starterCode": "def check_truthiness(value):\n    # Write your code here\n    pass"
-            },
             "fill_blank_choice_1": {
-              "title": "Untitled",
-              "prompt": "Untitled",
+              "title": "Complete the Comparison",
+              "prompt": "The expression `5 > 3` evaluates to the missing choice.",
               "hint": "Focus on the missing concept or keyword.",
               "help": {
-                "concept": "This task checks the key idea behind untitled.",
+                "concept": "This task checks the key idea behind complete the comparison.",
                 "hint_1": "Look for the word or phrase that best matches the lesson concept.",
                 "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
               },
-              "template": "In Python, the expression `5 > 3` evaluates to ___.",
+              "template": "The expression `5 > 3` evaluates to [blank1].",
               "choices": [
                 "True",
                 "False"
               ]
+            },
+            "code_input_1": {
+              "title": "Check Comparison",
+              "prompt": "Write a program that checks if a number is greater than 10 and prints 'Greater' or 'Smaller'.",
+              "hint": "Break the task into the main code steps first.",
+              "help": {
+                "concept": "This task checks whether you can apply check comparison in a working solution.",
+                "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
+                "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
+              },
+              "starterCode": "number = int(input())\n# Your code here"
+            },
+            "code_input_2": {
+              "title": "Truthiness Check",
+              "prompt": "Write a program that checks if a variable is truthy or falsy and prints the result.",
+              "hint": "Break the task into the main code steps first.",
+              "help": {
+                "concept": "This task checks whether you can apply truthiness check in a working solution.",
+                "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
+                "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
+              },
+              "starterCode": "value = ''\n# Your code here"
+            },
+            "code_input_3": {
+              "title": "Multiple Comparisons",
+              "prompt": "Write a program that checks multiple conditions and prints the appropriate message.",
+              "hint": "Break the task into the main code steps first.",
+              "help": {
+                "concept": "This task checks whether you can apply multiple comparisons in a working solution.",
+                "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
+                "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
+              },
+              "starterCode": "age = 20\n# Your code here"
             }
           }
         }
@@ -106,11 +106,11 @@
         "comparisons-and-truth-values": {
           "comparison_operators": {
             "title": "Understanding Comparison Operators",
-            "bodyMarkdown": "In Python, comparison operators are used to compare two values. The result of a comparison is either True or False. Here are some common comparison operators:\n\n- `==`: Equal to\n- `!=`: Not equal to\n- `>`: Greater than\n- `<`: Less than\n- `>=`: Greater than or equal to\n- `<=`: Less than or equal to\n\n**Example:**\n\n```python\nx = 5\nprint(x > 3)  # This will print True because 5 is greater than 3.\n```\n\n**Your turn:** Try changing the value of `x` and see how it affects the output.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+            "bodyMarkdown": "In Python, comparison operators are used to compare two values. The result of a comparison is either True or False. Here are the main comparison operators:\n\n- `==` (equal to)\n- `!=` (not equal to)\n- `>` (greater than)\n- `<` (less than)\n- `>=` (greater than or equal to)\n- `<=` (less than or equal to)\n\n### Example:\n```python\nx = 5\nprint(x == 5)  # This will print True\nprint(x > 3)    # This will print True\nprint(x < 2)    # This will print False\n```\n\n### Your turn:\nTry changing the value of `x` and see how the output changes!\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
           },
           "truthiness": {
-            "title": "Truthiness in Python",
-            "bodyMarkdown": "In Python, not only boolean values can be evaluated as True or False. Other values can also be considered 'truthy' or 'falsy'.\n\n- **Truthy values:** Non-zero numbers, non-empty strings, lists, etc.\n- **Falsy values:** 0, empty strings, empty lists, None.\n\n**Example:**\n\n```python\nvalue = \"\"\nif value:\n    print(\"This is truthy\")\nelse:\n    print(\"This is falsy\")  # This will print because the string is empty.\n```\n\n**Try it yourself:** Change `value` to a non-empty string and see what happens.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+            "title": "Understanding Truthiness",
+            "bodyMarkdown": "In Python, not all values are considered equal when it comes to truthiness. For example:\n- Non-zero numbers are considered True.\n- An empty string (`''`) is considered False.\n- The value `None` is also considered False.\n\n### Example:\n```python\nif x:\n    print('x is True')\nelse:\n    print('x is False')\n```\n\n### Try it yourself:\nChange `x` to different values like `0`, `1`, `''`, and `None` to see how the output changes!\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
           }
         }
       }

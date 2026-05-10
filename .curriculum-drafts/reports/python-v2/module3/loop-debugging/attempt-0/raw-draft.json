@@ -1,0 +1,98 @@
+{
+  "title": "Loop Debugging",
+  "summary": "Trace loop values to find repeated or skipped work.",
+  "minutes": 20,
+  "sketchBlocks": [
+    {
+      "id": "loop-debugging-intro",
+      "title": "Understanding Loop Debugging",
+      "bodyMarkdown": "When working with loops, it's essential to understand how the loop variable changes with each iteration. For example, consider the following code:\n\n```python\ncount = 0\nwhile count < 5:\n    print(count)\n    count += 1\n```\n\nIn this example, the loop will print the values from 0 to 4. If we forget to increment `count`, the loop will run indefinitely. \n\n**Your turn:** Modify the code to print numbers from 1 to 5."
+    },
+    {
+      "id": "common-errors",
+      "title": "Common Loop Errors",
+      "bodyMarkdown": "One common error in loops is the off-by-one error. This occurs when the loop iterates one time too many or too few. For example:\n\n```python\nfor i in range(5):\n    print(i)\n```\n\nThis will print 0 to 4, but if you wanted to print 1 to 5, you would need to adjust the range. \n\n**Try this:** Change the range to print numbers from 1 to 5."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "loop-debugging-quiz-1",
+      "kind": "code_input",
+      "title": "Fix the Infinite Loop",
+      "prompt": "The following code has an infinite loop. Identify and fix the issue.\n\n```python\ncount = 0\nwhile count < 10:\n    print(count)\n    # Fix the code here\n```",
+      "starterCode": "count = 0\nwhile count < 10:\n    print(count)\n    # Fix the code here\n",
+      "solutionCode": "count = 0\nwhile count < 10:\n    print(count)\n    count += 1\n",
+      "tests": [
+        {
+          "input": "",
+          "output": "0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n"
+        }
+      ]
+    },
+    {
+      "id": "loop-debugging-quiz-2",
+      "kind": "fill_blank_choice",
+      "title": "Complete the Loop",
+      "prompt": "Fill in the blank to complete the loop that prints numbers from 1 to 5:\n\n```python\nfor i in range(___):\n    print(i)\n```",
+      "template": "for i in range(___):\n    print(i)",
+      "choices": [
+        "5",
+        "6",
+        "1",
+        "0"
+      ],
+      "correctValue": "6"
+    },
+    {
+      "id": "loop-debugging-quiz-3",
+      "kind": "single_choice",
+      "title": "Identify the Error",
+      "prompt": "What is the main issue with the following loop?\n\n```python\ncount = 0\nwhile count < 5:\n    print(count)\n```",
+      "hint": "Think about how the loop variable is updated.",
+      "help": {
+        "concept": "The loop variable 'count' is not being updated, leading to an infinite loop.",
+        "hint_1": "Check if 'count' is being incremented inside the loop.",
+        "hint_2": "Make sure to update 'count' to avoid the infinite loop."
+      },
+      "options": [
+        "The loop will run indefinitely.",
+        "The loop will print numbers from 0 to 4.",
+        "The loop will never run.",
+        "The loop will print numbers from 1 to 5."
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    },
+    {
+      "id": "loop-debugging-quiz-4",
+      "kind": "multi_choice",
+      "title": "Choose All Correct Statements",
+      "prompt": "Which of the following statements about loops are true? (Select all that apply)",
+      "options": [
+        "A while loop can run indefinitely.",
+        "A for loop must always have a range.",
+        "You can use break to exit a loop.",
+        "Loops cannot be nested."
+      ],
+      "correctOptionIds": [
+        "a",
+        "c"
+      ]
+    },
+    {
+      "id": "loop-debugging-quiz-5",
+      "kind": "code_input",
+      "title": "Count Down with a While Loop",
+      "prompt": "Write a while loop that counts down from 5 to 1 and prints each number.",
+      "starterCode": "count = 5\nwhile count > 0:\n    # Write your code here\n",
+      "solutionCode": "count = 5\nwhile count > 0:\n    print(count)\n    count -= 1\n",
+      "tests": [
+        {
+          "input": "",
+          "output": "5\n4\n3\n2\n1\n"
+        }
+      ]
+    }
+  ]
+}

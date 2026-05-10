@@ -106,7 +106,8 @@
       "expected": {
         "kind": "multi_choice",
         "optionIds": [
-          "a"
+          "b",
+          "c"
         ]
       }
     },
@@ -116,7 +117,7 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-2.indentation-and-blocks.quiz.fill_blank_choice_1",
-      "choiceCount": 2,
+      "choiceCount": 3,
       "expected": {
         "kind": "fill_blank_choice",
         "value": "print('x is greater than 5')"
@@ -160,38 +161,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code_input_2",
       "language": "python",
-      "starterCode": "def check_even_odd(num):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnum = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(check_even_odd(num))",
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "12\n",
-            "stdout": "Even and greater than 10",
-            "match": "exact"
-          },
-          {
-            "stdin": "11\n",
-            "stdout": "Odd and greater than 10",
-            "match": "exact"
-          },
-          {
-            "stdin": "8\n",
-            "stdout": "Not greater than 10",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "def check_even_odd(num):\n    if num > 10:\n        if num % 2 == 0:\n            return 'Even and greater than 10'\n        else:\n            return 'Odd and greater than 10'\n    return 'Not greater than 10'\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnum = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(check_even_odd(num))"
-      }
-    },
-    {
-      "id": "code_input_3",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code_input_3",
-      "language": "python",
-      "starterCode": "def check_number(num):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnum = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(check_number(num))",
+      "starterCode": "def even_or_odd(num):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnum = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(even_or_odd(num))",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -208,11 +178,42 @@
           },
           {
             "stdin": "0\n",
-            "stdout": "Zero",
+            "stdout": "Negative Even",
             "match": "exact"
           }
         ],
-        "solutionCode": "def check_number(num):\n    if num > 0:\n        if num % 2 == 0:\n            return 'Positive Even'\n        else:\n            return 'Positive Odd'\n    elif num < 0:\n        if num % 2 == 0:\n            return 'Negative Even'\n        else:\n            return 'Negative Odd'\n    else:\n        return 'Zero'\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnum = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(check_number(num))"
+        "solutionCode": "def even_or_odd(num):\n    if num % 2 == 0:\n        if num > 0:\n            return 'Positive Even'\n        else:\n            return 'Negative Even'\n    else:\n        if num > 0:\n            return 'Positive Odd'\n        else:\n            return 'Negative Odd'\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnum = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(even_or_odd(num))"
+      }
+    },
+    {
+      "id": "code_input_3",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code_input_3",
+      "language": "python",
+      "starterCode": "def check_range(num):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnum = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(check_range(num))",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "5\n",
+            "stdout": "In range",
+            "match": "exact"
+          },
+          {
+            "stdin": "11\n",
+            "stdout": "Out of range",
+            "match": "exact"
+          },
+          {
+            "stdin": "1\n",
+            "stdout": "In range",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "def check_range(num):\n    if 1 <= num <= 10:\n        return 'In range'\n    else:\n        return 'Out of range'\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnum = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(check_range(num))"
       }
     }
   ]

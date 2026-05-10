@@ -1,0 +1,220 @@
+{
+  "topicId": "truthiness-and-empty-values",
+  "subjectSlug": "python-v2",
+  "moduleSlug": "python-2",
+  "sectionSlug": "python-v2-python-2-core-building-blocks-2",
+  "prefix": "py2",
+  "minutes": 20,
+  "topic": {
+    "labelKey": "topics.python-v2.python-2.truthiness-and-empty-values.label",
+    "summaryKey": "topics.python-v2.python-2.truthiness-and-empty-values.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-2.truthiness-and-empty-values.cards.sketch0.title",
+      "sketchId": "truthy-falsy-basics",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-2.truthiness-and-empty-values.cards.sketch1.title",
+      "sketchId": "empty-values-in-conditions",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-2.truthiness-and-empty-values.cards.sketch2.title",
+      "sketchId": "none-vs-empty",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.python-v2.python-2.truthiness-and-empty-values.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 2,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python-v2.python-2.truthiness-and-empty-values.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "truthy_code_1",
+            "titleKey": "topics.python-v2.python-2.truthiness-and-empty-values.projectSteps.truthy_code_1.title",
+            "exerciseKey": "truthy-code-1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "truthy_code_2",
+            "titleKey": "topics.python-v2.python-2.truthiness-and-empty-values.projectSteps.truthy_code_2.title",
+            "exerciseKey": "truthy-code-2",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "truthy_code_3",
+            "titleKey": "topics.python-v2.python-2.truthiness-and-empty-values.projectSteps.truthy_code_3.title",
+            "exerciseKey": "truthy-code-3",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "truthy-falsy-basics",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-2.truthiness-and-empty-values.truthy-falsy-basics.title",
+      "bodyKey": "sketches.python-v2.python-2.truthiness-and-empty-values.truthy-falsy-basics.bodyMarkdown"
+    },
+    {
+      "id": "empty-values-in-conditions",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-2.truthiness-and-empty-values.empty-values-in-conditions.title",
+      "bodyKey": "sketches.python-v2.python-2.truthiness-and-empty-values.empty-values-in-conditions.bodyMarkdown"
+    },
+    {
+      "id": "none-vs-empty",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-2.truthiness-and-empty-values.none-vs-empty.title",
+      "bodyKey": "sketches.python-v2.python-2.truthiness-and-empty-values.none-vs-empty.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "truthy-code-1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-2.truthiness-and-empty-values.quiz.truthy-code-1",
+      "language": "python",
+      "starterCode": "text = input()\n\n# Write your code below",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "hello\n",
+            "stdout": "has text\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "\n",
+            "stdout": "empty\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "text = input()\n\nif text:\n    print('has text')\nelse:\n    print('empty')"
+      }
+    },
+    {
+      "id": "truthy-multi-1",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-2.truthiness-and-empty-values.quiz.truthy-multi-1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "c",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "truthy-fill-1",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-2.truthiness-and-empty-values.quiz.truthy-fill-1",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "'cat'"
+      }
+    },
+    {
+      "id": "truthy-code-2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-2.truthiness-and-empty-values.quiz.truthy-code-2",
+      "language": "python",
+      "starterCode": "number = int(input())\n\n# Write your code below",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "5\n",
+            "stdout": "non-zero\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "0\n",
+            "stdout": "zero\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "number = int(input())\n\nif number:\n    print('non-zero')\nelse:\n    print('zero')"
+      }
+    },
+    {
+      "id": "truthy-code-3",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-2.truthiness-and-empty-values.quiz.truthy-code-3",
+      "language": "python",
+      "starterCode": "line = input()\n\n# Create the list and print the result",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "red blue green\n",
+            "stdout": "has items\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "\n",
+            "stdout": "empty list\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "line = input()\n\nif line:\n    items = line.split()\nelse:\n    items = []\n\nif items:\n    print('has items')\nelse:\n    print('empty list')"
+      }
+    }
+  ]
+}

@@ -389,29 +389,64 @@ function rewriteInvalidFillBlankAsSingleBlank(args: {
             hint_2: string;
         };
     };
+    template: string;
     choices: string[];
     correctValue: string;
     reason: "missing_blank" | "multiple_blanks";
-}): never {
-    throw new RetryableTopicValidationError({
-        code: "INVALID_FILL_BLANK_STRUCTURE",
-        message: [
-            `${args.base.id}: fill_blank_choice could not be safely repaired.`,
-            `Reason: ${args.reason}.`,
-            "",
-            "Regenerate this topic with a meaningful fill_blank_choice.",
-            "The prompt and template must include real course-specific context.",
-            "Do not use placeholder text like `The missing value is [blank1].`",
-        ].join("\n"),
-        details: {
-            exerciseId: args.base.id,
-            reason: args.reason,
-            prompt: args.base.prompt,
-            title: args.base.title,
-            choices: args.choices,
-            correctValue: args.correctValue,
+}) {
+    const safe = makeSafeFillBlankHelp();
+
+    const cleanedPrompt = normalizeText(args.base.prompt)
+        .replace(/\[blank\d*\]/gi, "the missing choice")
+        .replace(/_{2,}/g, "the missing choice");
+
+    let sawBlank = false;
+
+    let repairedTemplate = normalizeText(args.template)
+        .replace(/\[blank\d*\]/gi, () => {
+            if (!sawBlank) {
+                sawBlank = true;
+                return "[blank1]";
+            }
+
+            return args.correctValue || "value";
+        })
+        .replace(/_{2,}/g, () => {
+            if (!sawBlank) {
+                sawBlank = true;
+                return "[blank1]";
+            }
+
+            return args.correctValue || "value";
+        });
+
+    if (!sawBlank) {
+        repairedTemplate = repairedTemplate
+            ? `${repairedTemplate}\n\nAnswer: [blank1]`
+            : `${cleanedPrompt}\n\nAnswer: [blank1]`;
+    }
+
+    const sanitized = stripAnswerLeakFromTexts({
+        hint: args.base.hint || safe.hint,
+        help: {
+            concept: args.base.help.concept || safe.help.concept,
+            hint_1: args.base.help.hint_1 || safe.help.hint_1,
+            hint_2: args.base.help.hint_2 || safe.help.hint_2,
         },
+        bannedAnswers: args.correctValue ? [args.correctValue] : [],
+        fallback: safe,
     });
+
+    return {
+        ...args.base,
+        kind: "fill_blank_choice" as const,
+        prompt: cleanedPrompt,
+        template: repairedTemplate,
+        choices: args.choices,
+        correctValue: args.correctValue || args.choices[0] || "",
+        hint: sanitized.hint,
+        help: sanitized.help,
+    };
 }
 function dedupeCaseInsensitive(values: string[]): string[] {
     const seen = new Set<string>();
@@ -644,6 +679,7 @@ export function repairTopicAuthoringDraft(
                 if (blankCount === 0) {
                     return rewriteInvalidFillBlankAsSingleBlank({
                         base,
+                        template,
                         choices,
                         correctValue,
                         reason: "missing_blank",
@@ -653,9 +689,10 @@ export function repairTopicAuthoringDraft(
                 if (blankCount > 1) {
                     return rewriteInvalidFillBlankAsSingleBlank({
                         base,
+                        template,
                         choices,
                         correctValue,
-                        reason: "multiple_blanks",
+                        reason: "missing_blank",
                     });
                 }
 

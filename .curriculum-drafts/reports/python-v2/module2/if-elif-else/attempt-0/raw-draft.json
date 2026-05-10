@@ -1,0 +1,112 @@
+{
+  "title": "If, Elif, and Else",
+  "summary": "Control which code runs based on conditions.",
+  "minutes": 25,
+  "sketchBlocks": [
+    {
+      "id": "1",
+      "title": "Understanding If, Elif, and Else",
+      "bodyMarkdown": "In Python, we use `if`, `elif`, and `else` statements to control the flow of our programs based on conditions. \n\n### Example:\n```python\nage = 18\nif age < 18:\n    print('You are a minor.')\nelif age == 18:\n    print('You are just an adult!')\nelse:\n    print('You are an adult.')\n```\nIn this example, the program checks the value of `age`. If `age` is less than 18, it prints 'You are a minor.' If `age` is exactly 18, it prints 'You are just an adult!'. For any age greater than 18, it prints 'You are an adult.'\n\n### Your turn:\nTry changing the value of `age` and see how the output changes!"
+    },
+    {
+      "id": "2",
+      "title": "Comparison Operators",
+      "bodyMarkdown": "Comparison operators are used to compare two values. The most common ones are:\n- `==` (equal to)\n- `!=` (not equal to)\n- `>` (greater than)\n- `<` (less than)\n- `>=` (greater than or equal to)\n- `<=` (less than or equal to)\n\n### Example:\n```python\nnumber = 10\nif number > 5:\n    print('Number is greater than 5')\nelse:\n    print('Number is 5 or less')\n```\nIn this example, the program checks if `number` is greater than 5. If it is, it prints 'Number is greater than 5'. Otherwise, it prints 'Number is 5 or less'.\n\n### Try it yourself:\nChange the value of `number` and see how the output changes!"
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "1",
+      "kind": "code_input",
+      "title": "Determine Age Group",
+      "prompt": "Write a program that checks the age of a person and prints whether they are a child, a teenager, or an adult.",
+      "starterCode": "age = 15\n# Your code here\n",
+      "solutionCode": "age = 15\nif age < 13:\n    print('Child')\nelif age < 20:\n    print('Teenager')\nelse:\n    print('Adult')",
+      "tests": [
+        {
+          "input": "age = 10\nif age < 13:\n    print('Child')\nelif age < 20:\n    print('Teenager')\nelse:\n    print('Adult')\n",
+          "output": "Child"
+        },
+        {
+          "input": "age = 15\nif age < 13:\n    print('Child')\nelif age < 20:\n    print('Teenager')\nelse:\n    print('Adult')\n",
+          "output": "Teenager"
+        },
+        {
+          "input": "age = 25\nif age < 13:\n    print('Child')\nelif age < 20:\n    print('Teenager')\nelse:\n    print('Adult')\n",
+          "output": "Adult"
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "kind": "multi_choice",
+      "title": "Identify the Correct Output",
+      "prompt": "What will the following code print?\n```python\nx = 10\nif x < 5:\n    print('Less than 5')\nelif x < 15:\n    print('Less than 15')\nelse:\n    print('15 or more')\n```",
+      "options": [
+        "Less than 5",
+        "Less than 15",
+        "15 or more"
+      ],
+      "correctOptionIds": [
+        "b"
+      ]
+    },
+    {
+      "id": "3",
+      "kind": "fill_blank_choice",
+      "title": "Fill in the Blank",
+      "prompt": "In Python, the `___` statement is used to specify a block of code that runs if the condition is false.",
+      "template": "If the condition is false, the `___` block will execute.",
+      "choices": [
+        "if",
+        "elif",
+        "else"
+      ],
+      "correctValue": "else"
+    },
+    {
+      "id": "4",
+      "kind": "code_input",
+      "title": "Grade Checker",
+      "prompt": "Write a program that checks a student's score and prints their grade based on the following criteria:\n- 90 and above: A\n- 80 to 89: B\n- 70 to 79: C\n- 60 to 69: D\n- Below 60: F",
+      "starterCode": "score = 85\n# Your code here\n",
+      "solutionCode": "score = 85\nif score >= 90:\n    print('A')\nelif score >= 80:\n    print('B')\nelif score >= 70:\n    print('C')\nelif score >= 60:\n    print('D')\nelse:\n    print('F')",
+      "tests": [
+        {
+          "input": "score = 95\nif score >= 90:\n    print('A')\nelif score >= 80:\n    print('B')\nelif score >= 70:\n    print('C')\nelif score >= 60:\n    print('D')\nelse:\n    print('F')\n",
+          "output": "A"
+        },
+        {
+          "input": "score = 75\nif score >= 90:\n    print('A')\nelif score >= 80:\n    print('B')\nelif score >= 70:\n    print('C')\nelif score >= 60:\n    print('D')\nelse:\n    print('F')\n",
+          "output": "C"
+        },
+        {
+          "input": "score = 50\nif score >= 90:\n    print('A')\nelif score >= 80:\n    print('B')\nelif score >= 70:\n    print('C')\nelif score >= 60:\n    print('D')\nelse:\n    print('F')\n",
+          "output": "F"
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "kind": "code_input",
+      "title": "Temperature Checker",
+      "prompt": "Write a program that checks the temperature and prints whether it's cold, warm, or hot based on the following criteria:\n- Below 15: Cold\n- 15 to 25: Warm\n- Above 25: Hot",
+      "starterCode": "temperature = 20\n# Your code here\n",
+      "solutionCode": "temperature = 20\nif temperature < 15:\n    print('Cold')\nelif temperature <= 25:\n    print('Warm')\nelse:\n    print('Hot')",
+      "tests": [
+        {
+          "input": "temperature = 10\nif temperature < 15:\n    print('Cold')\nelif temperature <= 25:\n    print('Warm')\nelse:\n    print('Hot')\n",
+          "output": "Cold"
+        },
+        {
+          "input": "temperature = 20\nif temperature < 15:\n    print('Cold')\nelif temperature <= 25:\n    print('Warm')\nelse:\n    print('Hot')\n",
+          "output": "Warm"
+        },
+        {
+          "input": "temperature = 30\nif temperature < 15:\n    print('Cold')\nelif temperature <= 25:\n    print('Warm')\nelse:\n    print('Hot')\n",
+          "output": "Hot"
+        }
+      ]
+    }
+  ]
+}

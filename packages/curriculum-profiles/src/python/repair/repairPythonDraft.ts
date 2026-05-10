@@ -398,6 +398,95 @@ function synthesizeMissingTestsForExercise(
     }
     return null;
 }
+
+async function rewriteNoOutputNoArgFunctionExercise(
+    exercise: PythonCodeInputExercise,
+): Promise<PythonCodeInputExercise | null> {
+    if (!hasMissingOrBooleanishTests(exercise)) return null;
+    if (hasInputCalls(exercise)) return null;
+
+    const signature = extractFunctionSignature(exercise);
+    if (!signature) return null;
+    if (signature.params.length > 0) return null;
+
+    const starterCode = String(exercise.starterCode ?? "").trimEnd();
+    const solutionCode = String(exercise.solutionCode ?? "").trimEnd();
+
+    if (!solutionCode) return null;
+
+    const hasTopLevelCall = (source: string) => {
+        const callPattern = new RegExp(
+            `^(?:print\\s*\\(\\s*)?${signature.name}\\s*\\(`,
+        );
+
+        return String(source ?? "")
+            .split("\n")
+            .some((line) => {
+                if (/^\s/.test(line)) return false;
+
+                const trimmed = line.trim();
+
+                if (trimmed.startsWith("def ")) return false;
+                if (trimmed.startsWith("#")) return false;
+
+                return callPattern.test(trimmed);
+            });
+    };
+
+    if (hasTopLevelCall(solutionCode)) return null;
+
+    const runner = getCodeRunner() ?? runLocalCode;
+
+    const callOnlyCode = `${solutionCode}\n\n${signature.name}()`;
+
+    const callOnlyRun = await runner({
+        language: "python",
+        code: callOnlyCode,
+        stdin: "",
+        limits: { timeoutMs: 4000 },
+    });
+
+    if (callOnlyRun.ok && String(callOnlyRun.stdout ?? "").trim().length > 0) {
+        const repaired: PythonCodeInputExercise = {
+            ...exercise,
+            prompt: `${String(exercise.prompt ?? "").trim()} Then call the function so the output can be checked.`,
+            starterCode: `${starterCode}\n\n${signature.name}()`,
+            solutionCode: callOnlyCode,
+            recipeType: "fixed_tests" as const,
+        };
+
+        return (await makeTestsFromNoInputSolution(repaired)) ?? repaired;
+    }
+
+    const printReturnCode = `${solutionCode}\n\nprint(${signature.name}())`;
+
+    const printReturnRun = await runner({
+        language: "python",
+        code: printReturnCode,
+        stdin: "",
+        limits: { timeoutMs: 4000 },
+    });
+
+    const printReturnStdout = String(printReturnRun.stdout ?? "").trim();
+
+    if (
+        printReturnRun.ok &&
+        printReturnStdout.length > 0 &&
+        printReturnStdout !== "None"
+    ) {
+        const repaired: PythonCodeInputExercise = {
+            ...exercise,
+            prompt: `${String(exercise.prompt ?? "").trim()} Then call the function and print the returned result so it can be checked.`,
+            starterCode: `${starterCode}\n\nprint(${signature.name}())`,
+            solutionCode: printReturnCode,
+            recipeType: "fixed_tests" as const,
+        };
+
+        return (await makeTestsFromNoInputSolution(repaired)) ?? repaired;
+    }
+
+    return null;
+}
 function rewriteBrowserSafeTracebackText(value: string): {
     next: string;
     changed: boolean;
@@ -426,7 +515,58 @@ function hasOnlyBooleanishOutputs(exercise: PythonCodeInputExercise): boolean {
         return out === "true" || out === "false";
     });
 }
+async function rewriteTestsToMatchSolutionExecution(
+    exercise: PythonCodeInputExercise,
+): Promise<PythonCodeInputExercise | null> {
+    const tests = Array.isArray(exercise.tests) ? exercise.tests : [];
+    if (tests.length < 1) return null;
 
+    const solutionCode = String(exercise.solutionCode ?? "").trim();
+    if (!solutionCode) return null;
+
+    const runner = getCodeRunner() ?? runLocalCode;
+
+    const repairedTests = [];
+    let changed = false;
+
+    for (const test of tests) {
+        const run = await runner({
+            language: "python",
+            code: solutionCode,
+            stdin: String(test.stdin ?? ""),
+            limits: { timeoutMs: 4000 },
+        });
+
+        if (!run.ok) return null;
+
+        const actualStdout = String(run.stdout ?? "").trimEnd();
+        const expectedStdout = String(test.stdout ?? "").trimEnd();
+        const matchMode = test.match ?? "exact";
+
+        const alreadyMatches =
+            matchMode === "includes"
+                ? actualStdout.includes(expectedStdout.trim())
+                : actualStdout === expectedStdout;
+
+        if (!alreadyMatches) {
+            changed = true;
+        }
+
+        repairedTests.push({
+            ...test,
+            stdout: actualStdout,
+            match: "exact" as const,
+        });
+    }
+
+    if (!changed) return null;
+
+    return {
+        ...exercise,
+        recipeType: "fixed_tests",
+        tests: repairedTests,
+    };
+}
 function looksLikePlaceholderStdout(stdout: unknown): boolean {
     const out = String(stdout ?? "").trim();
     if (!out) return false;
@@ -1823,7 +1963,7 @@ export async function repairPythonDraft(args: {
 
             const noOutputListRepair =
                 await rewriteNoOutputListConstructionExercise(afterClassMethodRepair);
-            const repairedExercise =
+            const afterNoOutputListRepair =
                 noOutputListRepair ?? afterClassMethodRepair;
 
             if (noOutputListRepair) {
@@ -1834,6 +1974,40 @@ export async function repairPythonDraft(args: {
                     field: exercise.id,
                     message:
                         "Made a list-construction code_input exercise observable by printing the list length and regenerating its expected output.",
+                });
+            }
+
+            const noOutputNoArgFunctionRepair =
+                await rewriteNoOutputNoArgFunctionExercise(afterNoOutputListRepair);
+
+            const afterNoOutputNoArgFunctionRepair =
+                noOutputNoArgFunctionRepair ?? afterNoOutputListRepair;
+
+            if (noOutputNoArgFunctionRepair) {
+                report.repairs.push({
+                    code: "PYTHON_NO_OUTPUT_NO_ARG_FUNCTION_TASK_REPAIRED",
+                    category: "recipe",
+                    severity: "high",
+                    field: exercise.id,
+                    message:
+                        "Made a no-output no-argument function exercise observable by calling the function and regenerating expected stdout.",
+                });
+            }
+
+            const goldenTestRepair =
+                await rewriteTestsToMatchSolutionExecution(afterNoOutputNoArgFunctionRepair);
+
+            const repairedExercise =
+                goldenTestRepair ?? afterNoOutputNoArgFunctionRepair;
+
+            if (goldenTestRepair) {
+                report.repairs.push({
+                    code: "PYTHON_GOLDEN_TESTS_ALIGNED_WITH_SOLUTION",
+                    category: "recipe",
+                    severity: "high",
+                    field: exercise.id,
+                    message:
+                        "Regenerated Python code_input expected stdout from solutionCode so golden validation matches the published tests.",
                 });
             }
 

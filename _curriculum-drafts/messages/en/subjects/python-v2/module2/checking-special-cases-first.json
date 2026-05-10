@@ -1,0 +1,120 @@
+{
+  "topics": {
+    "python-v2": {
+      "python-v2-2": {
+        "checking-special-cases-first": {
+          "label": "Checking Special Cases First",
+          "summary": "Use clear early checks to make conditional logic easier to read.",
+          "cards": {
+            "sketch0": {
+              "title": "Understanding Conditional Logic"
+            },
+            "sketch1": {
+              "title": "Checking Special Cases"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Practice"
+            }
+          },
+          "projectSteps": {
+            "quiz_3": {
+              "title": "Implementing Early Checks"
+            },
+            "quiz_4": {
+              "title": "Validating User Input"
+            },
+            "quiz_5": {
+              "title": "Checking for Special Cases in Lists"
+            }
+          },
+          "quiz": {
+            "quiz_1": {
+              "title": "Identifying Special Cases",
+              "prompt": "Which of the following are examples of special cases that should be checked first in conditional logic?",
+              "hint": "Think about conditions that could cause errors if not handled first.",
+              "help": {
+                "concept": "Special cases are conditions that can lead to unexpected behavior if not checked early.",
+                "hint_1": "Consider scenarios where an input might not be valid.",
+                "hint_2": "Look for checks that prevent further processing if the input is not suitable."
+              },
+              "options": {
+                "a": "Checking if a variable is None",
+                "b": "Checking if a number is even",
+                "c": "Checking if a string is empty",
+                "d": "Checking if a list is not empty"
+              }
+            },
+            "quiz_2": {
+              "title": "Completing the Conditional Statement",
+              "prompt": "Fill in the blank: To check if a variable `x` is not None, we can use the condition `if x the missing choice:`.",
+              "hint": "Focus on the missing concept or keyword.",
+              "help": {
+                "concept": "This task checks the key idea behind completing the conditional statement.",
+                "hint_1": "Look for the word or phrase that best matches the lesson concept.",
+                "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
+              },
+              "template": "if x [blank1]:",
+              "choices": [
+                "is not None",
+                "is None",
+                "== None"
+              ]
+            },
+            "quiz_3": {
+              "title": "Implementing Early Checks",
+              "prompt": "Write a function that checks if a number is positive, negative, or zero. Ensure you check for zero first. Then read the input value, call the function, and print the returned result.",
+              "hint": "Break the task into the main code steps first.",
+              "help": {
+                "concept": "This task checks whether you can apply implementing early checks in a working solution.",
+                "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
+                "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
+              },
+              "starterCode": "def check_number(num):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nnum = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(check_number(num))"
+            },
+            "quiz_4": {
+              "title": "Validating User Input",
+              "prompt": "Create a function that checks if a user input is valid. It should return a message if the input is empty or if it's a number. Then read the input value, call the function, and print the returned result.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "starterCode": "def validate_input(user_input):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nuser_input = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(validate_input(user_input))"
+            },
+            "quiz_5": {
+              "title": "Checking for Special Cases in Lists",
+              "prompt": "Write a function that checks if a list is empty before processing it. Return a message if it is empty. Then read the input value, call the function, and print the returned result.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "starterCode": "def process_list(my_list):\n    # Your code here\n\nimport ast\n\ndef _parse_arg(raw):\n    try:\n        return ast.literal_eval(raw)\n    except Exception:\n        return raw\n\n_inputs = []\ntry:\n    while True:\n        _inputs.append(input())\nexcept EOFError:\n    pass\nmy_list = _parse_arg(_inputs[0]) if len(_inputs) > 0 else \"\"\n\nprint(process_list(my_list))"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-v2": {
+      "python-v2-2": {
+        "checking-special-cases-first": {
+          "sketch_1": {
+            "title": "Understanding Conditional Logic",
+            "bodyMarkdown": "In programming, we often need to make decisions based on certain conditions. For example, if we want to check if a number is positive, negative, or zero, we can use conditional statements. Here's a simple example:\n\n```python\nnumber = 5\nif number > 0:\n    print('Positive')\nelif number < 0:\n    print('Negative')\nelse:\n    print('Zero')\n```\n\nIn this code, we check if the number is greater than zero first. If it is, we print 'Positive'. If not, we check if it's less than zero. This way, we handle special cases first. **Try it yourself:** Change the value of `number` and see how the output changes.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          },
+          "sketch_2": {
+            "title": "Checking Special Cases",
+            "bodyMarkdown": "When writing conditions, it's often helpful to check for special cases first. For instance, if you're validating user input, you might want to check if the input is empty before proceeding with other checks. Here's an example:\n\n```python\nuser_input = ''\nif not user_input:\n    print('Input cannot be empty')\nelif user_input.isdigit():\n    print('Input is a number')\nelse:\n    print('Input is something else')\n```\n\nIn this example, we check if `user_input` is empty first. This makes our code clearer and prevents errors. **Your turn:** Modify the code to check for other special cases, like if the input is a letter.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          }
+        }
+      }
+    }
+  }
+}

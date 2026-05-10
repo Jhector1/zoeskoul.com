@@ -1,0 +1,126 @@
+{
+  "title": "What Python Is Used For",
+  "summary": "Understand Python's role in automation, web apps, data, beginner programming, and AI.",
+  "minutes": 12,
+  "sketchBlocks": [
+    {
+      "id": "1",
+      "title": "Introduction to Python's Uses",
+      "bodyMarkdown": "Python is a versatile programming language used in various fields. It is popular for automation, web development, data analysis, and artificial intelligence. For example, you can use Python to automate repetitive tasks like renaming files or scraping data from websites. **Try it yourself:** Think of a task you do repeatedly that could be automated with Python."
+    },
+    {
+      "id": "2",
+      "title": "Python in Web Development",
+      "bodyMarkdown": "Python is widely used in web development with frameworks like Django and Flask. These frameworks help developers build robust web applications quickly. For instance, a simple web app can be created using Flask with just a few lines of code. Here’s a basic example:\n\n```python\nfrom flask import Flask\napp = Flask(__name__)\n\n@app.route('/')\ndef home():\n    return 'Hello, World!'\n\nif __name__ == '__main__':\n    app.run(debug=True)\n```\n\n**Try this:** Modify the message returned by the `home` function to greet yourself!\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "q1",
+      "kind": "single_choice",
+      "title": "What is one common use of Python?",
+      "prompt": "Select one of the following options.",
+      "options": [
+        "Building mobile applications",
+        "Web development",
+        "Creating video games",
+        "Designing graphics"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "q2",
+      "kind": "single_choice",
+      "title": "Which framework is commonly used for web development in Python?",
+      "prompt": "Choose the correct framework.",
+      "options": [
+        "Flask",
+        "Unity",
+        "Django",
+        "Both Flask and Django"
+      ],
+      "correctOptionIds": [
+        "d"
+      ],
+      "hint": "Think about the frameworks that help build web applications using Python.",
+      "help": {
+        "concept": "Flask and Django are both popular frameworks for web development in Python.",
+        "hint_1": "One is lightweight and easy to get started with, while the other is more feature-rich.",
+        "hint_2": "Both frameworks are widely recognized in the Python community."
+      }
+    },
+    {
+      "id": "q3",
+      "kind": "multi_choice",
+      "title": "Select all the areas where Python is commonly used.",
+      "prompt": "Choose all correct answers.",
+      "options": [
+        "Data analysis",
+        "Web development",
+        "Game development",
+        "Machine learning"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "q4",
+      "kind": "fill_blank_choice",
+      "title": "Python is widely used for __________.",
+      "prompt": "Fill in the blank with the correct term.",
+      "template": "Python is widely used for __________.",
+      "choices": [
+        "automation",
+        "cooking",
+        "painting",
+        "gardening"
+      ],
+      "correctValue": "automation",
+      "hint": "Focus on the missing concept or keyword.",
+      "help": {
+        "concept": "This task checks the key idea behind python is widely used for __________..",
+        "hint_1": "Look for the word or phrase that best matches the lesson concept.",
+        "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
+      }
+    },
+    {
+      "id": "q5",
+      "kind": "code_input",
+      "title": "Create a simple Python program that prints your name.",
+      "prompt": "Write Python code to print your name.",
+      "starterCode": "print('Your Name')",
+      "solutionCode": "print('Zoe Skoul')",
+      "recipeType": "fixed_tests",
+      "hint": "Break the task into the main code steps first.",
+      "help": {
+        "concept": "This task checks whether you can apply create a simple python program that prints your name. in a working solution.",
+        "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
+        "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
+      },
+      "tests": [
+        {
+          "stdin": "",
+          "stdout": "Zoe Skoul\n",
+          "match": "exact"
+        }
+      ]
+    }
+  ]
+}

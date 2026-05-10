@@ -1,0 +1,148 @@
+{
+  "title": "If, Elif, and Else",
+  "summary": "Control which code runs based on conditions.",
+  "minutes": 25,
+  "sketchBlocks": [
+    {
+      "id": "1",
+      "title": "Understanding If, Elif, and Else",
+      "bodyMarkdown": "In Python, we use `if`, `elif`, and `else` statements to control the flow of our programs based on conditions. \n\n### Example:\n```python\nage = 18\nif age < 18:\n    print('You are a minor.')\nelif age == 18:\n    print('You are just an adult!')\nelse:\n    print('You are an adult.')\n```\nIn this example, the program checks the value of `age`. If `age` is less than 18, it prints 'You are a minor.' If `age` is exactly 18, it prints 'You are just an adult!'. For any age greater than 18, it prints 'You are an adult.'\n\n### Your turn:\nTry changing the value of `age` and see how the output changes!\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+    },
+    {
+      "id": "2",
+      "title": "Comparison Operators",
+      "bodyMarkdown": "Comparison operators are used to compare two values. The most common ones are:\n- `==` (equal to)\n- `!=` (not equal to)\n- `>` (greater than)\n- `<` (less than)\n- `>=` (greater than or equal to)\n- `<=` (less than or equal to)\n\n### Example:\n```python\nnumber = 10\nif number > 5:\n    print('Number is greater than 5')\nelse:\n    print('Number is 5 or less')\n```\nIn this example, the program checks if `number` is greater than 5. If it is, it prints 'Number is greater than 5'. Otherwise, it prints 'Number is 5 or less'.\n\n### Try it yourself:\nChange the value of `number` and see how the output changes!\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "1",
+      "kind": "code_input",
+      "title": "Determine Age Group",
+      "prompt": "Write a program that checks the age of a person and prints whether they are a child, a teenager, or an adult.",
+      "starterCode": "age = int(input())\n# Your code here",
+      "solutionCode": "age = int(input())\nif age < 13:\n    print('Child')\nelif age < 20:\n    print('Teenager')\nelse:\n    print('Adult')",
+      "tests": [
+        {
+          "stdin": "age = 10\nif age < 13:\n    print('Child')\nelif age < 20:\n    print('Teenager')\nelse:\n    print('Adult')\n",
+          "stdout": "Child"
+        },
+        {
+          "stdin": "age = 15\nif age < 13:\n    print('Child')\nelif age < 20:\n    print('Teenager')\nelse:\n    print('Adult')\n",
+          "stdout": "Teenager"
+        },
+        {
+          "stdin": "age = 25\nif age < 13:\n    print('Child')\nelif age < 20:\n    print('Teenager')\nelse:\n    print('Adult')\n",
+          "stdout": "Adult"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Break the task into the main code steps first.",
+      "help": {
+        "concept": "This task checks whether you can apply determine age group in a working solution.",
+        "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
+        "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
+      }
+    },
+    {
+      "id": "2",
+      "kind": "multi_choice",
+      "title": "Identify the Correct Output",
+      "prompt": "What will the following code print?\n```python\nx = 10\nif x < 5:\n    print('Less than 5')\nelif x < 15:\n    print('Less than 15')\nelse:\n    print('15 or more')\n```",
+      "options": [
+        "Less than 5",
+        "Less than 15",
+        "15 or more"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Think about the main idea behind identify the correct output.",
+      "help": {
+        "concept": "Focus on the core concept behind identify the correct output.",
+        "hint_1": "Eliminate choices that do not match the main idea of the lesson.",
+        "hint_2": "Match the wording of the prompt to the concept practiced in the topic."
+      }
+    },
+    {
+      "id": "3",
+      "kind": "fill_blank_choice",
+      "title": "Fill in the Blank",
+      "prompt": "In Python, the `the missing choice` statement is used to specify a block of code that runs if the condition is false.",
+      "template": "If the condition is false, the `[blank1]` block will execute.",
+      "choices": [
+        "if",
+        "elif",
+        "else"
+      ],
+      "correctValue": "else",
+      "hint": "Focus on the missing concept or keyword.",
+      "help": {
+        "concept": "This task checks the key idea behind fill in the blank.",
+        "hint_1": "Look for the word or phrase that best matches the lesson concept.",
+        "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
+      }
+    },
+    {
+      "id": "4",
+      "kind": "code_input",
+      "title": "Grade Checker",
+      "prompt": "Write a program that checks a student's score and prints their grade based on the following criteria:\n- 90 and above: A\n- 80 to 89: B\n- 70 to 79: C\n- 60 to 69: D\n- Below 60: F",
+      "starterCode": "score = int(input())\n# Your code here",
+      "solutionCode": "score = int(input())\nif score >= 90:\n    print('A')\nelif score >= 80:\n    print('B')\nelif score >= 70:\n    print('C')\nelif score >= 60:\n    print('D')\nelse:\n    print('F')",
+      "tests": [
+        {
+          "stdin": "score = 95\nif score >= 90:\n    print('A')\nelif score >= 80:\n    print('B')\nelif score >= 70:\n    print('C')\nelif score >= 60:\n    print('D')\nelse:\n    print('F')\n",
+          "stdout": "A"
+        },
+        {
+          "stdin": "score = 75\nif score >= 90:\n    print('A')\nelif score >= 80:\n    print('B')\nelif score >= 70:\n    print('C')\nelif score >= 60:\n    print('D')\nelse:\n    print('F')\n",
+          "stdout": "C"
+        },
+        {
+          "stdin": "score = 50\nif score >= 90:\n    print('A')\nelif score >= 80:\n    print('B')\nelif score >= 70:\n    print('C')\nelif score >= 60:\n    print('D')\nelse:\n    print('F')\n",
+          "stdout": "F"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Break the task into the main code steps first.",
+      "help": {
+        "concept": "This task checks whether you can apply grade checker in a working solution.",
+        "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
+        "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
+      }
+    },
+    {
+      "id": "5",
+      "kind": "code_input",
+      "title": "Temperature Checker",
+      "prompt": "Write a program that checks the temperature and prints whether it's cold, warm, or hot based on the following criteria:\n- Below 15: Cold\n- 15 to 25: Warm\n- Above 25: Hot",
+      "starterCode": "temperature = 20\n# Your code here",
+      "solutionCode": "temperature = 20\nif temperature < 15:\n    print('Cold')\nelif temperature <= 25:\n    print('Warm')\nelse:\n    print('Hot')",
+      "tests": [
+        {
+          "stdin": "temperature = 10\nif temperature < 15:\n    print('Cold')\nelif temperature <= 25:\n    print('Warm')\nelse:\n    print('Hot')\n",
+          "stdout": "Warm",
+          "match": "exact"
+        },
+        {
+          "stdin": "temperature = 20\nif temperature < 15:\n    print('Cold')\nelif temperature <= 25:\n    print('Warm')\nelse:\n    print('Hot')\n",
+          "stdout": "Warm",
+          "match": "exact"
+        },
+        {
+          "stdin": "temperature = 30\nif temperature < 15:\n    print('Cold')\nelif temperature <= 25:\n    print('Warm')\nelse:\n    print('Hot')\n",
+          "stdout": "Warm",
+          "match": "exact"
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    }
+  ]
+}

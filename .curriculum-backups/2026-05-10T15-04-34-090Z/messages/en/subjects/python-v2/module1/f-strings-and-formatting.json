@@ -1,0 +1,122 @@
+{
+  "topics": {
+    "python-v2": {
+      "python-v2-1": {
+        "f-strings-and-formatting": {
+          "label": "F-Strings and Formatting",
+          "summary": "Create readable output with f-strings and formatted values.",
+          "cards": {
+            "sketch0": {
+              "title": "Understanding F-Strings"
+            },
+            "sketch1": {
+              "title": "Using Format Method"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Practice"
+            }
+          },
+          "projectSteps": {
+            "quiz_1": {
+              "title": "Create a Formatted String"
+            },
+            "quiz_5": {
+              "title": "Using Format Method"
+            }
+          },
+          "quiz": {
+            "quiz-1": {
+              "title": "Create a Formatted String",
+              "prompt": "Write a program that takes a user's name and age, and prints a formatted string using f-strings.",
+              "hint": "Read the task \"Create a Formatted String\" and identify what the program should print.",
+              "help": {
+                "concept": "This coding exercise checks whether your code produces the requested output for: \"Create a Formatted String\".",
+                "hint_1": "Use the Python statement or expression that matches the required output.",
+                "hint_2": "Run the code and compare the output panel with the expected result."
+              },
+              "starterCode": "name = input()\nage = input()\n# Create a formatted string here"
+            },
+            "quiz-2": {
+              "title": "F-String Syntax",
+              "prompt": "Choose the best value for the first missing blank in the statement.",
+              "hint": "Focus on the missing concept or keyword.",
+              "help": {
+                "concept": "This task checks the key idea behind f-string syntax.",
+                "hint_1": "Look for the word or phrase that best matches the lesson concept.",
+                "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
+              },
+              "template": "The first missing value is [blank1].",
+              "choices": [
+                "name",
+                "age",
+                "greeting"
+              ]
+            },
+            "quiz-3": {
+              "title": "What does f-string allow?",
+              "prompt": "What is the main advantage of using f-strings in Python?",
+              "hint": "Think about the main idea behind what does f-string allow?.",
+              "help": {
+                "concept": "Focus on the core concept behind what does f-string allow?.",
+                "hint_1": "Eliminate choices that do not match the main idea of the lesson.",
+                "hint_2": "Match the wording of the prompt to the concept practiced in the topic."
+              },
+              "options": {
+                "a": "They are faster than other methods.",
+                "b": "They allow embedding expressions inside string literals.",
+                "c": "They require less memory.",
+                "d": "They can only be used with integers."
+              }
+            },
+            "quiz-4": {
+              "title": "String Formatting Methods",
+              "prompt": "Which of the following are valid methods for formatting strings in Python? (Select all that apply)",
+              "hint": "Think about the main idea behind string formatting methods.",
+              "help": {
+                "concept": "Focus on the core concept behind string formatting methods.",
+                "hint_1": "Eliminate choices that do not match the main idea of the lesson.",
+                "hint_2": "Match the wording of the prompt to the concept practiced in the topic."
+              },
+              "options": {
+                "a": "f-strings",
+                "b": "format() method",
+                "c": "concatenation",
+                "d": "join() method"
+              }
+            },
+            "quiz-5": {
+              "title": "Using Format Method",
+              "prompt": "Write a program that takes a user's name and age, and prints a formatted string using the format() method.",
+              "hint": "Read the task \"Using Format Method\" and identify what the program should print.",
+              "help": {
+                "concept": "This coding exercise checks whether your code produces the requested output for: \"Using Format Method\".",
+                "hint_1": "Use the Python statement or expression that matches the required output.",
+                "hint_2": "Run the code and compare the output panel with the expected result."
+              },
+              "starterCode": "name = input()\nage = input()\n# Create a formatted string using format() here"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-v2": {
+      "python-v2-1": {
+        "f-strings-and-formatting": {
+          "sketch-1": {
+            "title": "Understanding F-Strings",
+            "bodyMarkdown": "F-strings are a way to format strings in Python. They allow you to embed expressions inside string literals, using curly braces `{}`. For example:\n\n```python\nname = 'Alice'\nage = 30\nformatted_string = f'My name is {name} and I am {age} years old.'\nprint(formatted_string)\n```\n\nThis will output: `My name is Alice and I am 30 years old.`\n\n**Try it yourself:** Modify the variables `name` and `age` to see how the output changes.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          },
+          "sketch-2": {
+            "title": "Using Format Method",
+            "bodyMarkdown": "Another way to format strings is by using the `format()` method. Here's how you can do it:\n\n```python\nname = 'Bob'\nage = 25\nformatted_string = 'My name is {} and I am {} years old.'.format(name, age)\nprint(formatted_string)\n```\n\nThis will output: `My name is Bob and I am 25 years old.`\n\n**Your turn:** Change the values of `name` and `age` and see the new output.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          }
+        }
+      }
+    }
+  }
+}

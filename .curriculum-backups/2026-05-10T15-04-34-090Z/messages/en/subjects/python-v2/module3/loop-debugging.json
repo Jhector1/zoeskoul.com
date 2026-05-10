@@ -1,0 +1,123 @@
+{
+  "topics": {
+    "python-v2": {
+      "python-3": {
+        "loop-debugging": {
+          "label": "Loop Debugging",
+          "summary": "Trace loop values to find repeated or skipped work.",
+          "cards": {
+            "sketch0": {
+              "title": "Trace the loop state one step at a time"
+            },
+            "sketch1": {
+              "title": "Find repeated work and skipped work"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Loop Debugging Practice"
+            }
+          },
+          "projectSteps": {
+            "loop_debug_code_1": {
+              "title": "Fix skipped counting"
+            },
+            "loop_debug_code_2": {
+              "title": "Count down safely"
+            }
+          },
+          "quiz": {
+            "loop-debug-sc": {
+              "title": "Find the main bug",
+              "prompt": "A learner writes a `while` loop that keeps printing `1` forever. Which is the most likely cause?",
+              "hint": "Check whether the value used in the condition changes.",
+              "help": {
+                "concept": "A `while` loop repeats as long as its condition stays true. If the variable in that condition never changes, the loop can keep doing the same work forever.",
+                "hint_1": "Think about the counter or loop variable.",
+                "hint_2": "If the condition depends on one variable, that variable must usually be updated inside the loop."
+              },
+              "options": {
+                "a": "The loop variable is never updated",
+                "b": "The print statement is indented",
+                "c": "The loop uses a number instead of a string",
+                "d": "The condition uses < instead of >="
+              }
+            },
+            "loop-debug-mc": {
+              "title": "Choose all good debugging steps",
+              "prompt": "You want to debug a `while` loop that skips some numbers. Which actions are helpful? Choose all that apply.",
+              "hint": "Focus on the loop condition and the update step.",
+              "help": {
+                "concept": "To debug a loop, trace the starting value, check the condition each time, and watch how the loop variable changes after every iteration.",
+                "hint_1": "Useful steps include tracing values and checking how much the variable changes.",
+                "hint_2": "Look for actions that help you observe the loop variable and the condition, not actions unrelated to loop logic."
+              },
+              "options": {
+                "a": "Write down the loop variable value after each iteration",
+                "b": "Check whether the update changes the variable by too much",
+                "c": "Ignore the loop condition and only read the print line",
+                "d": "Add temporary print statements to see changing values"
+              }
+            },
+            "loop-debug-fill": {
+              "title": "Complete the idea",
+              "prompt": "Fill in the missing word.",
+              "hint": "A loop can repeat forever if its condition never becomes false.",
+              "help": {
+                "concept": "A `while` loop stops only when its condition becomes false. If the loop variable never changes in the needed way, the loop may never end.",
+                "hint_1": "Think about what kind of loop keeps running without stopping.",
+                "hint_2": "This word describes a loop that does not end on its own."
+              },
+              "template": "If a `while` loop condition stays true forever, the program may enter an ___ loop.",
+              "choices": [
+                "infinite",
+                "empty",
+                "nested",
+                "sorted"
+              ]
+            },
+            "loop-debug-code-1": {
+              "title": "Fix skipped counting",
+              "prompt": "Write Python code that uses a `while` loop to print the numbers 1 through 5, one per line. The goal is to avoid skipping any numbers.",
+              "hint": "Focus on the programming task being asked for, not on copying final solution text.",
+              "help": {
+                "concept": "Build the solution from the behavior the exercise is testing.",
+                "hint_1": "Think about which steps, functions, or statements are required for the task.",
+                "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "n = 1\n# Write your while loop below"
+            },
+            "loop-debug-code-2": {
+              "title": "Count down safely",
+              "prompt": "Write Python code that uses a `while` loop to print 3, 2, 1, and then `Go!`, each on its own line. Make sure the loop stops correctly.",
+              "hint": "Focus on the programming task being asked for, not on copying final solution text.",
+              "help": {
+                "concept": "Build the solution from the behavior the exercise is testing.",
+                "hint_1": "Think about which steps, functions, or statements are required for the task.",
+                "hint_2": "Construct the solution based on what result the exercise expects, not by repeating exact solution wording."
+              },
+              "starterCode": "n = 3\n# Write your while loop below\n# Then print Go!"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-v2": {
+      "python-3": {
+        "loop-debugging": {
+          "trace-while-state": {
+            "title": "Trace the loop state one step at a time",
+            "bodyMarkdown": "When you debug a `while` loop, the most useful question is: **what changes each time the loop runs?** Usually that is a counter or some other variable used in the condition.\n\nHere is a simple example:\n\n```python\ncount = 1\nwhile count <= 3:\n    print(count)\n    count += 1\n```\n\nStep by step:\n\n- `count` starts as `1`\n- `1 <= 3` is true, so the loop runs and prints `1`\n- `count += 1` changes `count` to `2`\n- `2 <= 3` is true, so it prints `2`\n- `count` becomes `3`\n- `3 <= 3` is true, so it prints `3`\n- `count` becomes `4`\n- `4 <= 3` is false, so the loop stops\n\nOutput:\n\n```python\n1\n2\n3\n```\n\nA common debugging trick is to trace the variable values on paper or add temporary `print()` calls.\n\n**Try it yourself:** Type the code in the code editor, click Run, and then change `count = 1` to `count = 0`. Check the output panel and notice how the starting value changes the result."
+          },
+          "spot-repeated-or-skipped-work": {
+            "title": "Find repeated work and skipped work",
+            "bodyMarkdown": "Many loop bugs come from updating the loop variable in the wrong place, or by the wrong amount.\n\nExample with skipped values:\n\n```python\nn = 1\nwhile n <= 5:\n    print(n)\n    n += 2\n```\n\nLine by line:\n\n- `n` starts at `1`\n- The loop prints `1`, then adds `2`\n- Next `n` is `3`, so it prints `3`\n- Then `n` becomes `5`, so it prints `5`\n- Then `n` becomes `7`, and the loop stops\n\nThis loop does **not** print every number from 1 to 5. It skips `2` and `4` because the update is `+ 2`.\n\nOutput:\n\n```python\n1\n3\n5\n```\n\nExample with repeated work risk:\n\n```python\nn = 1\nwhile n <= 3:\n    print(n)\n```\n\nThis loop never changes `n`, so the condition stays true forever. That means the same work repeats again and again.\n\n**Your turn:** Add `n += 1` inside the second loop, click Run, and check the output panel. Then move the update line around and see how the behavior changes."
+          }
+        }
+      }
+    }
+  }
+}

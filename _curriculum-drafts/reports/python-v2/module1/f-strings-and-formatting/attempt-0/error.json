@@ -1,0 +1,10 @@
+{
+  "name": "RetryableTopicValidationError",
+  "message": "Invalid TopicAuthoringDraft: quizDraft[1] fill_blank_choice needs template",
+  "stack": "RetryableTopicValidationError: Invalid TopicAuthoringDraft: quizDraft[1] fill_blank_choice needs template\n    at compileSubjectPipeline (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-compiler/dist/compile/compileSubjectPipeline.js:273:27)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async runCompileSubject (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-cli/dist/commands/compile-subject.js:24:21)\n    at async main (file:///Users/admin/Documents/NextJSProject/zoeskoul.com/packages/curriculum-cli/dist/index.js:27:13)",
+  "code": "INVALID_TOPIC_AUTHORING_DRAFT",
+  "retryable": true,
+  "details": {
+    "topicId": "f-strings-and-formatting"
+  }
+}

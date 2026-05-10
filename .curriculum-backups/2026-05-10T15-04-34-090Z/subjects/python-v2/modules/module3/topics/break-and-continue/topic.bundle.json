@@ -1,0 +1,202 @@
+{
+  "topicId": "break-and-continue",
+  "subjectSlug": "python-v2",
+  "moduleSlug": "python-3",
+  "sectionSlug": "python-v2-python-3-core-building-blocks-2",
+  "prefix": "py3",
+  "minutes": 20,
+  "topic": {
+    "labelKey": "topics.python-v2.python-3.break-and-continue.label",
+    "summaryKey": "topics.python-v2.python-3.break-and-continue.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-3.break-and-continue.cards.sketch0.title",
+      "sketchId": "break-stops-loop",
+      "height": 420
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-3.break-and-continue.cards.sketch1.title",
+      "sketchId": "continue-skips-turn",
+      "height": 420
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-3.break-and-continue.cards.sketch2.title",
+      "sketchId": "break-vs-continue",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.python-v2.python-3.break-and-continue.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 3,
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": 10
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python-v2.python-3.break-and-continue.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "code_skip_multiples_of_three",
+            "titleKey": "topics.python-v2.python-3.break-and-continue.projectSteps.code_skip_multiples_of_three.title",
+            "exerciseKey": "code-skip-multiples-of-three",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "code_stop_at_negative",
+            "titleKey": "topics.python-v2.python-3.break-and-continue.projectSteps.code_stop_at_negative.title",
+            "exerciseKey": "code-stop-at-negative",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "break-stops-loop",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-3.break-and-continue.break-stops-loop.title",
+      "bodyKey": "sketches.python-v2.python-3.break-and-continue.break-stops-loop.bodyMarkdown"
+    },
+    {
+      "id": "continue-skips-turn",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-3.break-and-continue.continue-skips-turn.title",
+      "bodyKey": "sketches.python-v2.python-3.break-and-continue.continue-skips-turn.bodyMarkdown"
+    },
+    {
+      "id": "break-vs-continue",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-3.break-and-continue.break-vs-continue.title",
+      "bodyKey": "sketches.python-v2.python-3.break-and-continue.break-vs-continue.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "sc-break-main-effect",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-3.break-and-continue.quiz.sc-break-main-effect",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "mc-continue-true-statements",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-3.break-and-continue.quiz.mc-continue-true-statements",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "fb-break-fill",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-3.break-and-continue.quiz.fb-break-fill",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "break"
+      }
+    },
+    {
+      "id": "code-skip-multiples-of-three",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-3.break-and-continue.quiz.code-skip-multiples-of-three",
+      "language": "python",
+      "starterCode": "n = int(input())\n\n# Print numbers from 1 to n.\n# Skip multiples of 3 using continue.",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "7\n",
+            "stdout": "1\n2\n4\n5\n7\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "3\n",
+            "stdout": "1\n2\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "n = int(input())\ncount = 0\n\nwhile count < n:\n    count += 1\n    if count % 3 == 0:\n        continue\n    print(count)"
+      }
+    },
+    {
+      "id": "code-stop-at-negative",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-3.break-and-continue.quiz.code-stop-at-negative",
+      "language": "python",
+      "starterCode": "# Read integers one per line.\n# Stop when a negative number appears.\n# Print the total of the non-negative numbers.",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "4\n6\n0\n-1\n",
+            "stdout": "10\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "5\n2\n3\n-9\n",
+            "stdout": "10\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "total = 0\n\nwhile True:\n    num = int(input())\n    if num < 0:\n        break\n    total += num\n\nprint(total)"
+      }
+    }
+  ]
+}

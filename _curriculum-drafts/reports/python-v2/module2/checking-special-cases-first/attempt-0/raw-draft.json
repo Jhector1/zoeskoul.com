@@ -1,0 +1,116 @@
+{
+  "title": "Checking Special Cases First",
+  "summary": "Use clear early checks to make conditional logic easier to read.",
+  "minutes": 22,
+  "sketchBlocks": [
+    {
+      "id": "sketch_1",
+      "title": "Understanding Conditional Logic",
+      "bodyMarkdown": "In programming, we often need to make decisions based on certain conditions. For example, if we want to check if a number is positive, negative, or zero, we can use conditional statements. Here's a simple example:\n\n```python\nnumber = 5\nif number > 0:\n    print('Positive')\nelif number < 0:\n    print('Negative')\nelse:\n    print('Zero')\n```\n\nIn this code, we check if the number is greater than zero first. If it is, we print 'Positive'. If not, we check if it's less than zero. This way, we handle special cases first. **Try it yourself:** Change the value of `number` and see how the output changes."
+    },
+    {
+      "id": "sketch_2",
+      "title": "Checking Special Cases",
+      "bodyMarkdown": "When writing conditions, it's often helpful to check for special cases first. For instance, if you're validating user input, you might want to check if the input is empty before proceeding with other checks. Here's an example:\n\n```python\nuser_input = ''\nif not user_input:\n    print('Input cannot be empty')\nelif user_input.isdigit():\n    print('Input is a number')\nelse:\n    print('Input is something else')\n```\n\nIn this example, we check if `user_input` is empty first. This makes our code clearer and prevents errors. **Your turn:** Modify the code to check for other special cases, like if the input is a letter."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "quiz_1",
+      "kind": "multi_choice",
+      "title": "Identifying Special Cases",
+      "prompt": "Which of the following are examples of special cases that should be checked first in conditional logic?",
+      "options": [
+        "Checking if a variable is None",
+        "Checking if a number is even",
+        "Checking if a string is empty",
+        "Checking if a list is not empty"
+      ],
+      "correctOptionIds": [
+        "a",
+        "c"
+      ],
+      "hint": "Think about conditions that could cause errors if not handled first.",
+      "help": {
+        "concept": "Special cases are conditions that can lead to unexpected behavior if not checked early.",
+        "hint_1": "Consider scenarios where an input might not be valid.",
+        "hint_2": "Look for checks that prevent further processing if the input is not suitable."
+      }
+    },
+    {
+      "id": "quiz_2",
+      "kind": "fill_blank_choice",
+      "title": "Completing the Conditional Statement",
+      "prompt": "Fill in the blank: To check if a variable `x` is not None, we can use the condition `if x ______:`.",
+      "template": "if x ______:",
+      "choices": [
+        "is not None",
+        "is None",
+        "== None"
+      ],
+      "correctValue": "is not None"
+    },
+    {
+      "id": "quiz_3",
+      "kind": "code_input",
+      "title": "Implementing Early Checks",
+      "prompt": "Write a function that checks if a number is positive, negative, or zero. Ensure you check for zero first.",
+      "starterCode": "def check_number(num):\n    # Your code here\n",
+      "solutionCode": "def check_number(num):\n    if num == 0:\n        return 'Zero'\n    elif num > 0:\n        return 'Positive'\n    else:\n        return 'Negative'",
+      "tests": [
+        {
+          "input": "0",
+          "output": "Zero"
+        },
+        {
+          "input": "5",
+          "output": "Positive"
+        },
+        {
+          "input": "-3",
+          "output": "Negative"
+        }
+      ]
+    },
+    {
+      "id": "quiz_4",
+      "kind": "code_input",
+      "title": "Validating User Input",
+      "prompt": "Create a function that checks if a user input is valid. It should return a message if the input is empty or if it's a number.",
+      "starterCode": "def validate_input(user_input):\n    # Your code here\n",
+      "solutionCode": "def validate_input(user_input):\n    if not user_input:\n        return 'Input cannot be empty'\n    elif user_input.isdigit():\n        return 'Input is a number'\n    else:\n        return 'Input is something else'",
+      "tests": [
+        {
+          "input": "''",
+          "output": "Input cannot be empty"
+        },
+        {
+          "input": "'123'",
+          "output": "Input is a number"
+        },
+        {
+          "input": "'abc'",
+          "output": "Input is something else"
+        }
+      ]
+    },
+    {
+      "id": "quiz_5",
+      "kind": "code_input",
+      "title": "Checking for Special Cases in Lists",
+      "prompt": "Write a function that checks if a list is empty before processing it. Return a message if it is empty.",
+      "starterCode": "def process_list(my_list):\n    # Your code here\n",
+      "solutionCode": "def process_list(my_list):\n    if not my_list:\n        return 'List is empty'\n    return 'Processing list'",
+      "tests": [
+        {
+          "input": "[]",
+          "output": "List is empty"
+        },
+        {
+          "input": "[1, 2, 3]",
+          "output": "Processing list"
+        }
+      ]
+    }
+  ]
+}

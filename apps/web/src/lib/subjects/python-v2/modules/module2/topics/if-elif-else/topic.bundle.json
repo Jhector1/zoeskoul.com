@@ -47,27 +47,27 @@
         "maxAttempts": 10,
         "steps": [
           {
-            "id": "1",
-            "titleKey": "topics.python-v2.python-v2-2.if-elif-else.projectSteps.1.title",
-            "exerciseKey": "1",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "maxAttempts": 10
-          },
-          {
-            "id": "2",
-            "titleKey": "topics.python-v2.python-v2-2.if-elif-else.projectSteps.2.title",
-            "exerciseKey": "2",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "maxAttempts": 10
-          },
-          {
             "id": "3",
             "titleKey": "topics.python-v2.python-v2-2.if-elif-else.projectSteps.3.title",
             "exerciseKey": "3",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "4",
+            "titleKey": "topics.python-v2.python-v2-2.if-elif-else.projectSteps.4.title",
+            "exerciseKey": "4",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "5",
+            "titleKey": "topics.python-v2.python-v2-2.if-elif-else.projectSteps.5.title",
+            "exerciseKey": "5",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
@@ -94,73 +94,10 @@
   "exercises": [
     {
       "id": "1",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.1",
-      "language": "python",
-      "starterCode": "grade = 75\n# Check if the grade is passing\nif grade >= 60:\n    print('Pass')\nelse:\n    print('Fail')",
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "",
-            "stdout": "Pass\n",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "grade = 75\nif grade >= 60:\n    print('Pass')\nelse:\n    print('Fail')"
-      }
-    },
-    {
-      "id": "2",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.2",
-      "language": "python",
-      "starterCode": "age = 17\n# Check eligibility\nif age >= 18:\n    print('Eligible to vote')\nelse:\n    print('Not eligible to vote')",
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "",
-            "stdout": "Not eligible to vote\n",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "age = 17\nif age >= 18:\n    print('Eligible to vote')\nelse:\n    print('Not eligible to vote')"
-      }
-    },
-    {
-      "id": "3",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.3",
-      "language": "python",
-      "starterCode": "temperature = 25\n# Check temperature\nif temperature > 30:\n    print('Hot')\nelif temperature >= 15:\n    print('Warm')\nelse:\n    print('Cold')",
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "",
-            "stdout": "Warm\n",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "temperature = 25\nif temperature > 30:\n    print('Hot')\nelif temperature >= 15:\n    print('Warm')\nelse:\n    print('Cold')"
-      }
-    },
-    {
-      "id": "4",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.4",
+      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.1",
       "optionIds": [
         "a",
         "b",
@@ -170,22 +107,98 @@
       "expected": {
         "kind": "multi_choice",
         "optionIds": [
-          "a",
-          "c",
-          "d"
+          "b"
         ]
       }
     },
     {
-      "id": "5",
+      "id": "2",
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.5",
-      "choiceCount": 3,
+      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.2",
+      "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
         "value": "else"
+      }
+    },
+    {
+      "id": "3",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.3",
+      "language": "python",
+      "starterCode": "score = int(input())\n# Your code here",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "12\n",
+            "stdout": "You failed.",
+            "match": "exact"
+          },
+          {
+            "stdin": "20\n",
+            "stdout": "You failed.",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "score = int(input())\nif score >= 50:\n    print('You passed!')\nelse:\n    print('You failed.')"
+      }
+    },
+    {
+      "id": "4",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.4",
+      "language": "python",
+      "starterCode": "age = 17\n# Your code here",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "12\n",
+            "stdout": "You are not eligible to vote.",
+            "match": "exact"
+          },
+          {
+            "stdin": "20\n",
+            "stdout": "You are not eligible to vote.",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "age = 17\nif age >= 18:\n    print('You are eligible to vote.')\nelse:\n    print('You are not eligible to vote.')"
+      }
+    },
+    {
+      "id": "5",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.5",
+      "language": "python",
+      "starterCode": "temperature = 25\n# Your code here",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "12\n",
+            "stdout": "It is warm.",
+            "match": "exact"
+          },
+          {
+            "stdin": "20\n",
+            "stdout": "It is warm.",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "temperature = 25\nif temperature > 30:\n    print('It is hot.')\nelif temperature >= 20:\n    print('It is warm.')\nelse:\n    print('It is cold.')"
       }
     }
   ]

@@ -1,0 +1,92 @@
+{
+  "title": "Accumulators and Counters",
+  "summary": "Build totals, counts, and running summaries in loops.",
+  "minutes": 25,
+  "sketchBlocks": [
+    {
+      "id": "sketch1",
+      "title": "Understanding Accumulators",
+      "bodyMarkdown": "Accumulators are variables that keep a running total or count. For example, if you want to find the total of numbers from 1 to 5, you can use an accumulator. Here's how it works:\n\n```python\n# Initialize the accumulator\nsum = 0\n\n# Loop through numbers 1 to 5\nfor number in range(1, 6):\n    sum += number  # Add each number to the accumulator\n\nprint(sum)  # Output: 15\n```\n\nIn this example, we start with `sum` set to 0. As we loop through each number, we add it to `sum`. After the loop, `sum` contains the total.\n\n**Try it yourself:** Modify the code to calculate the total of numbers from 1 to 10."
+    },
+    {
+      "id": "sketch2",
+      "title": "Using Counters",
+      "bodyMarkdown": "Counters are similar to accumulators but are used to count occurrences. For example, if you want to count how many times a specific letter appears in a string, you can use a counter:\n\n```python\n# Initialize the counter\ncount = 0\n\n# String to check\ntext = 'hello world'\n\n# Loop through each character in the string\nfor char in text:\n    if char == 'o':\n        count += 1  # Increment the counter if 'o' is found\n\nprint(count)  # Output: 2\n```\n\nIn this example, we count how many times the letter 'o' appears in the string. After the loop, `count` holds the total occurrences.\n\n**Try this:** Change the letter to count how many times 'l' appears."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "quiz1",
+      "kind": "code_input",
+      "title": "Calculate Total with Accumulator",
+      "prompt": "Write a program that calculates the total of numbers from 1 to 100 using an accumulator.",
+      "starterCode": "total = 0\n\n# Your code here\n\nprint(total)",
+      "solutionCode": "total = 0\nfor number in range(1, 101):\n    total += number\nprint(total)",
+      "tests": [
+        {
+          "input": "",
+          "output": "5050"
+        }
+      ]
+    },
+    {
+      "id": "quiz2",
+      "kind": "fill_blank_choice",
+      "title": "Complete the Counter Code",
+      "prompt": "Fill in the blank to count how many times the letter 'a' appears in the string 'banana'.\n\n```python\ncount = 0\ntext = 'banana'\nfor char in text:\n    if char == 'a':\n        count += 1\nprint(___)\n```",
+      "template": "print(___)",
+      "choices": [
+        "count",
+        "text",
+        "char"
+      ],
+      "correctValue": "count"
+    },
+    {
+      "id": "quiz3",
+      "kind": "single_choice",
+      "title": "What is an Accumulator?",
+      "prompt": "What does an accumulator do in programming?",
+      "options": [
+        "It counts occurrences of a value.",
+        "It stores a running total or summary.",
+        "It loops through a sequence of values.",
+        "It resets a variable to zero."
+      ],
+      "correctOptionIds": [
+        "b"
+      ]
+    },
+    {
+      "id": "quiz4",
+      "kind": "multi_choice",
+      "title": "Identify the Correct Uses of Counters",
+      "prompt": "Which of the following are correct uses of counters? (Select all that apply)",
+      "options": [
+        "Counting the number of even numbers in a list.",
+        "Calculating the total sum of a list.",
+        "Counting how many times a specific word appears in a text.",
+        "Tracking the number of iterations in a loop."
+      ],
+      "correctOptionIds": [
+        "a",
+        "c",
+        "d"
+      ]
+    },
+    {
+      "id": "quiz5",
+      "kind": "code_input",
+      "title": "Count Specific Characters",
+      "prompt": "Write a program that counts how many times the letter 'e' appears in the string 'experience'.",
+      "starterCode": "count = 0\ntext = 'experience'\n\n# Your code here\n\nprint(count)",
+      "solutionCode": "count = 0\ntext = 'experience'\nfor char in text:\n    if char == 'e':\n        count += 1\nprint(count)",
+      "tests": [
+        {
+          "input": "",
+          "output": "2"
+        }
+      ]
+    }
+  ]
+}
