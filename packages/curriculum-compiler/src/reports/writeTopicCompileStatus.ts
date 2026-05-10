@@ -16,15 +16,3 @@ export async function writeTopicCompileStatus(args: {
         JSON.stringify(args, null, 2),
     );
 }
-
-async function shouldResumeTopic(reportDir: string) {
-    const statusPath = path.join(reportDir, "compile-status.json");
-
-    try {
-        const status = JSON.parse(await fs.readFile(statusPath, "utf8"));
-
-        return status?.status === "success";
-    } catch {
-        return false;
-    }
-}

@@ -14,6 +14,13 @@
       "severity": "medium",
       "field": "sketchBlocks.2.bodyMarkdown",
       "message": "Added a short line-by-line explanation after a multi-line code example."
+    },
+    {
+      "code": "PYTHON_TESTS_DERIVED_FROM_SOLUTION",
+      "category": "recipe",
+      "severity": "high",
+      "field": "q5",
+      "message": "Derived stdin/stdout tests by running a no-input Python solution that already prints output."
     }
   ]
 }

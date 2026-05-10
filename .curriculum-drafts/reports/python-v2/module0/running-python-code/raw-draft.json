@@ -6,12 +6,12 @@
     {
       "id": "sketch_1",
       "title": "Introduction to Running Python Code",
-      "bodyMarkdown": "In this section, you'll learn how to run Python code using the ZoeSkoul browser code editor. To start, type your code in the editor and click the 'Run' button. The output will appear in the output panel below.\n\n**Example:**\n```python\nprint('Hello, World!')\n```\nThis code will display 'Hello, World!' in the output panel when you run it.\n\n**Your turn:** Try typing your own print statement and see what happens!"
+      "bodyMarkdown": "In this lesson, you'll learn how to run Python code using the ZoeSkoul browser code editor. To start, you can type a simple command like `print('Hello, World!')` in the code editor. This command will display the message 'Hello, World!' in the output panel when you click the Run button.\n\n### Example\n```python\nprint('Hello, World!')\n```\n\n### Your turn\nTry typing the command above in the code editor and click Run to see the output!"
     },
     {
       "id": "sketch_2",
-      "title": "Understanding Output",
-      "bodyMarkdown": "When you run your Python code, the output panel shows the results of your program. This is useful for checking if your code works as expected.\n\n**Example:**\nIf you run the following code:\n```python\nprint('Learning Python is fun!')\n```\nYou should see 'Learning Python is fun!' in the output panel.\n\n**Try this:** Modify the message in the print statement and run it again!"
+      "title": "Understanding Print Statements",
+      "bodyMarkdown": "The `print()` function is used to display output in Python. You can print strings, numbers, and even the results of expressions. For example, `print(2 + 3)` will output `5`.\n\n### Example\n```python\nprint('The sum of 2 and 3 is:', 2 + 3)\n```\n\n### Your turn\nModify the example to print the result of `4 * 5`."
     }
   ],
   "quizDraft": [
@@ -21,51 +21,51 @@
       "title": "What does the print function do?",
       "prompt": "Select the correct answer.",
       "options": [
-        "It saves a file.",
-        "It displays output on the screen.",
-        "It creates a new variable.",
-        "It runs a loop."
+        "It runs the program.",
+        "It displays output to the user.",
+        "It saves the code to a file.",
+        "It creates a new variable."
       ],
       "correctOptionIds": [
         "b"
       ],
       "hint": "Think about what happens when you want to show information to the user.",
       "help": {
-        "concept": "The print function is used to display output in Python.",
+        "concept": "The print function is used to output data to the console.",
         "hint_1": "Consider how you would show a message to someone.",
-        "hint_2": "Look for the option that describes showing information on the screen."
+        "hint_2": "Remember, print is about displaying information, not saving or running."
       }
     },
     {
       "id": "quiz_2",
       "kind": "single_choice",
-      "title": "What will the following code output?\n```python\nprint('Hello, Zoe!')\n```",
+      "title": "What will the following code output? `print('Hello' + ' World')`",
       "prompt": "Choose the correct output.",
       "options": [
-        "Hello, Zoe!",
-        "Hello Zoe!",
-        "Hello, Zoe",
-        "Zoe!"
+        "Hello World",
+        "HelloWorld",
+        "Hello, World!",
+        "Error"
       ],
       "correctOptionIds": [
-        "a"
+        "b"
       ],
-      "hint": "Pay attention to the punctuation in the print statement.",
+      "hint": "Look closely at how strings are combined in Python.",
       "help": {
-        "concept": "The print function outputs exactly what is inside the parentheses.",
-        "hint_1": "Look closely at the string and how it is formatted.",
-        "hint_2": "Think about how commas and spaces affect the output."
+        "concept": "In Python, using the `+` operator combines strings.",
+        "hint_1": "Think about whether there are any spaces between 'Hello' and 'World'.",
+        "hint_2": "Check if the output has any punctuation or spaces."
       }
     },
     {
       "id": "quiz_3",
       "kind": "multi_choice",
-      "title": "Which of the following are valid Python print statements?",
+      "title": "Which of the following are valid print statements?",
       "prompt": "Select all that apply.",
       "options": [
         "print('Hello')",
-        "print('Hello, World!')",
-        "print Hello",
+        "print(5 + 3)",
+        "print(Hello)",
         "print('Hello' + ' World')"
       ],
       "correctOptionIds": [
@@ -73,33 +73,32 @@
         "b",
         "d"
       ],
-      "hint": "Check the syntax of each option carefully.",
+      "hint": "Consider the syntax rules for strings and expressions in Python.",
       "help": {
         "concept": "Valid print statements must follow Python's syntax rules.",
-        "hint_1": "Look for the use of parentheses in the print function.",
-        "hint_2": "Remember that strings must be enclosed in quotes."
+        "hint_1": "Strings must be enclosed in quotes.",
+        "hint_2": "Check if any of the statements are missing quotes or have incorrect syntax."
       }
     },
     {
       "id": "quiz_4",
       "kind": "fill_blank_choice",
-      "title": "Complete the print statement: `print(___)`",
-      "prompt": "Fill in the blank with a valid string.",
-      "template": "print('___')",
+      "title": "Complete the print statement: `print('Hello, ___!')`",
+      "prompt": "Choose the correct word to fill in the blank.",
+      "template": "print('Hello, ___!')",
       "choices": [
-        "'Hello, World!'",
-        "'Python is great!'",
-        "'123'",
-        "'"
+        "World",
+        "Python",
+        "Everyone"
       ],
-      "correctValue": "'Hello, World!'"
+      "correctValue": "World"
     },
     {
       "id": "quiz_5",
       "kind": "code_input",
       "title": "Create a simple print program",
       "prompt": "Write a Python program that prints your name.",
-      "starterCode": "print('')",
+      "starterCode": "",
       "solutionCode": "print('Your Name')",
       "tests": [
         {

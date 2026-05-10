@@ -1,4 +1,5 @@
 import type { TopicAuthoringDraft } from "@zoeskoul/curriculum-contracts";
+import {RetryableTopicValidationError} from "../validate/RetryableTopicValidationError.js";
 
 function normalizeText(value: unknown): string {
     return typeof value === "string" ? value.trim() : "";
@@ -138,14 +139,14 @@ function makeSafeFillBlankHelp() {
 }
 function makeSafeDragReorderHelp() {
     return {
-        hint: "Read each piece and arrange them in the order Python would read the statement.",
+        hint: "Read each piece and arrange them in the order the statement should be understood.",
         help: {
             concept:
-                "The pieces should form a valid statement in the same order Python expects.",
+                "The pieces should form a valid statement in a logical order.",
             hint_1:
-                "Start with the keyword or expression that begins the statement.",
+                "Start with the piece that introduces the idea or action.",
             hint_2:
-                "Place dependent pieces after the part they belong to.",
+                "Place dependent pieces after the part they describe or complete.",
         },
     };
 }
@@ -157,10 +158,10 @@ function makeSafeCodeHelp(args: {
     const task = args.title || args.prompt || "this coding task";
 
     return {
-        hint: `Read the task "${task}" and identify what the program should print.`,
+        hint: `Read the task "${task}" and identify the required result.`,
         help: {
-            concept: `This coding exercise checks whether your code produces the requested output for: "${task}".`,
-            hint_1: "Use the Python statement or expression that matches the required output.",
+            concept: `This coding exercise checks whether your code produces the requested result for: "${task}".`,
+            hint_1: "Use the statement or expression that matches the required behavior.",
             hint_2: "Run the code and compare the output panel with the expected result.",
         },
     };
@@ -391,40 +392,26 @@ function rewriteInvalidFillBlankAsSingleBlank(args: {
     choices: string[];
     correctValue: string;
     reason: "missing_blank" | "multiple_blanks";
-}) {
-    const safe = makeSafeFillBlankHelp();
-
-    const rewrittenPrompt =
-        args.reason === "multiple_blanks"
-            ? "Choose the best value for the first missing blank in the statement."
-            : "Choose the best value for the missing blank in the statement.";
-
-    const rewrittenTemplate =
-        args.reason === "multiple_blanks"
-            ? "The first missing value is [blank1]."
-            : "The missing value is [blank1].";
-
-    const sanitized = stripAnswerLeakFromTexts({
-        hint: args.base.hint || safe.hint,
-        help: {
-            concept: args.base.help.concept || safe.help.concept,
-            hint_1: args.base.help.hint_1 || safe.help.hint_1,
-            hint_2: args.base.help.hint_2 || safe.help.hint_2,
+}): never {
+    throw new RetryableTopicValidationError({
+        code: "INVALID_FILL_BLANK_STRUCTURE",
+        message: [
+            `${args.base.id}: fill_blank_choice could not be safely repaired.`,
+            `Reason: ${args.reason}.`,
+            "",
+            "Regenerate this topic with a meaningful fill_blank_choice.",
+            "The prompt and template must include real course-specific context.",
+            "Do not use placeholder text like `The missing value is [blank1].`",
+        ].join("\n"),
+        details: {
+            exerciseId: args.base.id,
+            reason: args.reason,
+            prompt: args.base.prompt,
+            title: args.base.title,
+            choices: args.choices,
+            correctValue: args.correctValue,
         },
-        bannedAnswers: args.correctValue ? [args.correctValue] : [],
-        fallback: safe,
     });
-
-    return {
-        ...args.base,
-        kind: "fill_blank_choice" as const,
-        prompt: rewrittenPrompt,
-        template: rewrittenTemplate,
-        choices: args.choices,
-        correctValue: args.correctValue || args.choices[0] || "",
-        hint: sanitized.hint,
-        help: sanitized.help,
-    };
 }
 function dedupeCaseInsensitive(values: string[]): string[] {
     const seen = new Set<string>();
@@ -463,7 +450,7 @@ function ensureMinimumChoiceOptions(args: {
     options: string[];
     correctOptionIds: string[];
 } {
-    let options = dedupeCaseInsensitive(args.options);
+    const options = dedupeCaseInsensitive(args.options);
     let correctOptionIds = [...args.correctOptionIds];
 
     const correctTexts = resolveCorrectOptionTexts(options, correctOptionIds);
@@ -594,7 +581,8 @@ export function repairTopicAuthoringDraft(
                         title: base.title,
                         prompt: base.prompt,
                         options,
-                    }),                });
+                    }),
+                });
 
                 return {
                     ...base,
@@ -708,7 +696,8 @@ export function repairTopicAuthoringDraft(
                 fallback: makeSafeCodeHelp({
                     title: base.title,
                     prompt: base.prompt,
-                }),            });
+                }),
+            });
 
             return {
                 ...base,

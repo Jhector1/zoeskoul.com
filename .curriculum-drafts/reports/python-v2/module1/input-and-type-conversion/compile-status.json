@@ -1,0 +1,8 @@
+{
+  "reportDir": ".curriculum-drafts/reports/python-v2/module1/input-and-type-conversion",
+  "status": "failed",
+  "attempts": 3,
+  "finalAttempt": 2,
+  "errorCode": "INVALID_FILL_BLANK_STRUCTURE",
+  "errorMessage": "quiz3: fill_blank_choice could not be safely repaired.\nReason: multiple_blanks.\n\nRegenerate this topic with a meaningful fill_blank_choice.\nThe prompt and template must include real course-specific context.\nDo not use placeholder text like `The missing value is [blank1].`"
+}

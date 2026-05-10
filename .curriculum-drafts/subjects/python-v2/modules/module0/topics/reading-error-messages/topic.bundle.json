@@ -14,14 +14,14 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.python-v2.python-v2-0.reading-error-messages.cards.sketch0.title",
-      "sketchId": "1",
+      "sketchId": "sketch_1",
       "height": 420
     },
     {
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.python-v2.python-v2-0.reading-error-messages.cards.sketch1.title",
-      "sketchId": "2",
+      "sketchId": "sketch_2",
       "height": 420
     },
     {
@@ -47,9 +47,9 @@
         "maxAttempts": 10,
         "steps": [
           {
-            "id": "q5",
-            "titleKey": "topics.python-v2.python-v2-0.reading-error-messages.projectSteps.q5.title",
-            "exerciseKey": "q5",
+            "id": "quiz_5",
+            "titleKey": "topics.python-v2.python-v2-0.reading-error-messages.projectSteps.quiz_5.title",
+            "exerciseKey": "quiz_5",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
@@ -61,25 +61,25 @@
   ],
   "sketches": [
     {
-      "id": "1",
+      "id": "sketch_1",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-v2.python-v2-0.reading-error-messages.1.title",
-      "bodyKey": "sketches.python-v2.python-v2-0.reading-error-messages.1.bodyMarkdown"
+      "titleKey": "sketches.python-v2.python-v2-0.reading-error-messages.sketch_1.title",
+      "bodyKey": "sketches.python-v2.python-v2-0.reading-error-messages.sketch_1.bodyMarkdown"
     },
     {
-      "id": "2",
+      "id": "sketch_2",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-v2.python-v2-0.reading-error-messages.2.title",
-      "bodyKey": "sketches.python-v2.python-v2-0.reading-error-messages.2.bodyMarkdown"
+      "titleKey": "sketches.python-v2.python-v2-0.reading-error-messages.sketch_2.title",
+      "bodyKey": "sketches.python-v2.python-v2-0.reading-error-messages.sketch_2.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "q1",
+      "id": "quiz_1",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.reading-error-messages.quiz.q1",
+      "messageBase": "topics.python-v2.python-v2-0.reading-error-messages.quiz.quiz_1",
       "optionIds": [
         "a",
         "b",
@@ -92,11 +92,11 @@
       }
     },
     {
-      "id": "q2",
+      "id": "quiz_2",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.reading-error-messages.quiz.q2",
+      "messageBase": "topics.python-v2.python-v2-0.reading-error-messages.quiz.quiz_2",
       "optionIds": [
         "a",
         "b",
@@ -105,15 +105,15 @@
       ],
       "expected": {
         "kind": "single_choice",
-        "optionId": "c"
+        "optionId": "a"
       }
     },
     {
-      "id": "q3",
+      "id": "quiz_3",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.reading-error-messages.quiz.q3",
+      "messageBase": "topics.python-v2.python-v2-0.reading-error-messages.quiz.quiz_3",
       "optionIds": [
         "a",
         "b",
@@ -125,42 +125,41 @@
         "optionIds": [
           "a",
           "b",
-          "c",
-          "d"
+          "c"
         ]
       }
     },
     {
-      "id": "q4",
+      "id": "quiz_4",
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.reading-error-messages.quiz.q4",
+      "messageBase": "topics.python-v2.python-v2-0.reading-error-messages.quiz.quiz_4",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "error"
+        "value": "undefined"
       }
     },
     {
-      "id": "q5",
+      "id": "quiz_5",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.reading-error-messages.quiz.q5",
+      "messageBase": "topics.python-v2.python-v2-0.reading-error-messages.quiz.quiz_5",
       "language": "python",
-      "starterCode": "print(hello)",
+      "starterCode": "print('Hello World'",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
           {
             "stdin": "",
-            "stdout": "Hello, World!",
+            "stdout": "Hello World\n",
             "match": "exact"
           }
         ],
-        "solutionCode": "hello = 'Hello, World!'\nprint(hello)"
+        "solutionCode": "print('Hello World')"
       }
     }
   ]

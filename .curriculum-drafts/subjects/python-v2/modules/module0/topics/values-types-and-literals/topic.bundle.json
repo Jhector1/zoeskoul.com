@@ -88,7 +88,7 @@
       ],
       "expected": {
         "kind": "single_choice",
-        "optionId": "c"
+        "optionId": "b"
       }
     },
     {
@@ -105,7 +105,7 @@
       ],
       "expected": {
         "kind": "single_choice",
-        "optionId": "c"
+        "optionId": "d"
       }
     },
     {
@@ -125,7 +125,7 @@
         "optionIds": [
           "a",
           "b",
-          "d"
+          "c"
         ]
       }
     },
@@ -148,18 +148,18 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-0.values-types-and-literals.quiz.q5",
       "language": "python",
-      "starterCode": "// Write your answer below",
+      "starterCode": "# Create variables\nname = \"\"\nage = 0\nheight = 0.0\nis_student = False\nfavorite_color = None\n\n# Print the variables",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
           {
             "stdin": "",
-            "stdout": "Hello\n10\n3.5\nTrue\n",
+            "stdout": "Name: Alice\nAge: 30\nHeight: 5.5\nIs Student: True\nFavorite Color: None\n",
             "match": "exact"
           }
         ],
-        "solutionCode": "my_string = \"Hello\"\nmy_integer = 10\nmy_float = 3.5\nmy_boolean = True\n\nprint(my_string)\nprint(my_integer)\nprint(my_float)\nprint(my_boolean)"
+        "solutionCode": "# Create variables\nname = \"Alice\"\nage = 30\nheight = 5.5\nis_student = True\nfavorite_color = None\n\n# Print the variables\nprint(\"Name:\", name)\nprint(\"Age:\", age)\nprint(\"Height:\", height)\nprint(\"Is Student:\", is_student)\nprint(\"Favorite Color:\", favorite_color)"
       }
     }
   ]

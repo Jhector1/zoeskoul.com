@@ -260,10 +260,91 @@
             ]
           },
           "topics": [
-            "and-or-not"]
+            "and-or-not",
+            "truthiness-and-empty-values",
+            "checking-special-cases-first"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "python-v2-3",
+      "prefix": "pyv2_3",
+      "order": 3,
+      "titleKey": "modules.python-v2.python-v2-3.title",
+      "descriptionKey": "modules.python-v2.python-v2-3.description",
+      "weekStart": null,
+      "weekEnd": null,
+      "accessOverride": null,
+      "runtimeDefaults": {
+        "kind": "code",
+        "language": "python",
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false,
+        "supportsStdInStdOut": true,
+        "supportsPackageInstall": false
+      },
+      "meta": {
+        "estimatedMinutes": 136,
+        "prereqKeys": [
+          "modules.python-v2.python-v2-2.title"
+        ],
+        "outcomeKeys": [
+          "modules.python-v2.python-v2-3.outcomes.0",
+          "modules.python-v2.python-v2-3.outcomes.1",
+          "modules.python-v2.python-v2-3.outcomes.2",
+          "modules.python-v2.python-v2-3.outcomes.3"
+        ],
+        "whyKeys": [
+          "modules.python-v2.python-v2-3.why.0",
+          "modules.python-v2.python-v2-3.why.1"
+        ]
+      },
+      "sections": [
+        {
+          "slug": "python-v2-3-for-loops",
+          "order": 1,
+          "titleKey": "sections.python-v2.python-v2-3.python-v2-3-for-loops.title",
+          "descriptionKey": "sections.python-v2.python-v2-3.python-v2-3-for-loops.description",
+          "meta": {
+            "module": 3,
+            "weeksKey": "sections.python-v2.python-v2-3.python-v2-3-for-loops.weeks",
+            "bulletKeys": [
+              "sections.python-v2.python-v2-3.python-v2-3-for-loops.bullets.0",
+              "sections.python-v2.python-v2-3.python-v2-3-for-loops.bullets.1",
+              "sections.python-v2.python-v2-3.python-v2-3-for-loops.bullets.2",
+              "sections.python-v2.python-v2-3.python-v2-3-for-loops.bullets.3"
+            ]
+          },
+          "topics": [
+            "for-loops-over-text",
+            "range-and-counting",
+            "accumulators-and-counters"
+          ]
+        },
+        {
+          "slug": "python-v2-3-while-loops",
+          "order": 2,
+          "titleKey": "sections.python-v2.python-v2-3.python-v2-3-while-loops.title",
+          "descriptionKey": "sections.python-v2.python-v2-3.python-v2-3-while-loops.description",
+          "meta": {
+            "module": 3,
+            "weeksKey": "sections.python-v2.python-v2-3.python-v2-3-while-loops.weeks",
+            "bulletKeys": [
+              "sections.python-v2.python-v2-3.python-v2-3-while-loops.bullets.0",
+              "sections.python-v2.python-v2-3.python-v2-3-while-loops.bullets.1",
+              "sections.python-v2.python-v2-3.python-v2-3-while-loops.bullets.2",
+              "sections.python-v2.python-v2-3.python-v2-3-while-loops.bullets.3"
+            ]
+          },
+          "topics": [
+            "while-loop-basics",
+            "break-and-continue",
+            "loop-debugging"
+          ]
         }
       ]
     }
-
   ]
 }

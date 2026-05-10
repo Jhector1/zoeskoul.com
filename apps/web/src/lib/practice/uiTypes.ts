@@ -57,7 +57,11 @@ export type QItem = {
 
     reorder?: string[];
     reorderIds?: string[]; // legacy only
-
+    /**
+     * Controls whether wrong feedback is hidden after the learner edits
+     * a previously submitted answer.
+     */
+    feedbackDismissed?: boolean;
     voiceTranscript: string;
     voiceAudioId?: string;
 

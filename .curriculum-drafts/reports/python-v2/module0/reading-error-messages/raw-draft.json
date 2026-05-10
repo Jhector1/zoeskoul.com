@@ -4,122 +4,103 @@
   "minutes": 18,
   "sketchBlocks": [
     {
-      "id": "1",
+      "id": "sketch_1",
       "title": "Understanding Tracebacks",
-      "bodyMarkdown": "When a Python program encounters an error, it produces a traceback. This traceback shows the sequence of function calls that led to the error. Each line in the traceback indicates the file name, line number, and the code that was executed. \n\n**Example:**\n```\nTraceback (most recent call last):\n  File \"example.py\", line 3, in <module>\n    print(hello)\nNameError: name 'hello' is not defined\n```\nIn this example, the error occurs because the variable `hello` was not defined before it was used. \n\n**Your turn:** Try running a simple program with an intentional error to see how the traceback looks."
+      "bodyMarkdown": "When your Python program encounters an error, it generates a traceback. This traceback shows the sequence of function calls that led to the error, along with the line number where the error occurred. For example:\n\n```\nTraceback (most recent call last):\n  File \"example.py\", line 5, in <module>\n    print(hello)\nNameError: name 'hello' is not defined\n```\n\nIn this example, the error is a `NameError`, indicating that the variable `hello` was not defined. The traceback tells us that the error occurred in `example.py` on line 5. \n\n**Your turn:** Try running a Python program with an intentional error and observe the traceback."
     },
     {
-      "id": "2",
-      "title": "Locating the Error",
-      "bodyMarkdown": "To fix an error, first look at the last line of the traceback. This line usually contains the type of error and a description. The lines above it show where the error occurred in your code. \n\n**Example:**\nIf you see a `TypeError`, it means that an operation was applied to an object of an inappropriate type. Check the line number indicated in the traceback to find the problematic code. \n\n**Try this:** Modify your code to introduce a different error and observe how the traceback changes."
+      "id": "sketch_2",
+      "title": "Common Error Types",
+      "bodyMarkdown": "There are several common types of errors you might encounter in Python:\n\n1. **SyntaxError**: This occurs when Python encounters incorrect syntax. For example:\n   ```\n   print('Hello World'\n   ```\n   This will raise a `SyntaxError` because of the missing closing parenthesis.\n\n2. **TypeError**: This happens when an operation is applied to an object of inappropriate type. For example:\n   ```\n   print('Hello' + 5)\n   ```\n   This will raise a `TypeError` because you cannot concatenate a string and an integer.\n\n**Try this:** Create a small program that includes both a `SyntaxError` and a `TypeError` and run it to see the tracebacks."
     }
   ],
   "quizDraft": [
     {
-      "id": "q1",
+      "id": "quiz_1",
       "kind": "single_choice",
-      "title": "What does a traceback indicate?",
-      "prompt": "A traceback shows the sequence of function calls that led to an error.",
+      "title": "Identifying Error Types",
+      "prompt": "What type of error is raised when you try to use a variable that hasn't been defined?",
       "options": [
-        "The output of the program",
-        "The sequence of function calls that led to an error",
-        "The variables defined in the program",
-        "The syntax of the code"
+        "SyntaxError",
+        "NameError",
+        "TypeError",
+        "ValueError"
       ],
       "correctOptionIds": [
         "b"
       ],
-      "hint": "Think about what information is provided when an error occurs.",
+      "hint": "Think about what happens when Python can't find a variable.",
       "help": {
-        "concept": "A traceback provides a detailed report of the error, including where it occurred.",
-        "hint_1": "Look for the part of the traceback that describes the error.",
-        "hint_2": "Focus on the last line of the traceback for the main error message."
+        "concept": "A NameError occurs when you try to use a variable that hasn't been defined in the current scope.",
+        "hint_1": "This error specifically indicates that the name you are trying to use is not recognized.",
+        "hint_2": "Look for errors related to undefined variables in your code."
       }
     },
     {
-      "id": "q2",
+      "id": "quiz_2",
       "kind": "single_choice",
-      "title": "Where should you look to find the specific line of code that caused an error?",
-      "prompt": "Identify the part of the traceback that points to the error in your code.",
+      "title": "Understanding Tracebacks",
+      "prompt": "In a traceback, what does the line number indicate?",
       "options": [
-        "At the top of the traceback",
-        "In the middle of the traceback",
-        "At the bottom of the traceback",
-        "In the comments of the code"
+        "The line where the error was raised",
+        "The line where the program starts",
+        "The line where the function is defined",
+        "The line where the program ends"
       ],
       "correctOptionIds": [
-        "c"
+        "a"
       ],
-      "hint": "The last part of the traceback usually contains the line number.",
+      "hint": "The traceback shows the path the program took to reach the error.",
       "help": {
-        "concept": "The last line of the traceback indicates where the error occurred in your code.",
-        "hint_1": "Check the line number mentioned in the traceback.",
-        "hint_2": "The bottom line typically describes the error type and location."
+        "concept": "The line number in a traceback indicates where the error occurred in your code.",
+        "hint_1": "This helps you locate the exact point of failure.",
+        "hint_2": "Tracebacks provide a detailed path of function calls leading to the error."
       }
     },
     {
-      "id": "q3",
+      "id": "quiz_3",
       "kind": "multi_choice",
-      "title": "Which of the following are common types of errors indicated in a traceback?",
-      "prompt": "Select all that apply.",
+      "title": "Common Python Errors",
+      "prompt": "Which of the following are common types of errors in Python? (Select all that apply)",
       "options": [
         "SyntaxError",
-        "TypeError",
         "NameError",
-        "IndexError"
+        "TypeError",
+        "LogicError"
       ],
       "correctOptionIds": [
         "a",
         "b",
-        "c",
-        "d"
+        "c"
       ],
-      "hint": "Think about the different types of errors you might encounter in Python.",
+      "hint": "Think about the errors that can occur during code execution.",
       "help": {
-        "concept": "Tracebacks can indicate various types of errors that occur during execution.",
-        "hint_1": "Consider the common errors you have learned about.",
-        "hint_2": "All listed options are valid error types in Python."
+        "concept": "Common errors in Python include SyntaxError, NameError, and TypeError, while LogicError is not a standard error type.",
+        "hint_1": "SyntaxError occurs due to incorrect syntax, NameError for undefined variables, and TypeError for type mismatches.",
+        "hint_2": "LogicError is not a recognized error type in Python."
       }
     },
     {
-      "id": "q4",
+      "id": "quiz_4",
       "kind": "fill_blank_choice",
-      "title": "A traceback shows the sequence of function calls that led to an _____ .",
-      "prompt": "Fill in the blank with the correct word.",
-      "template": "A traceback shows the sequence of function calls that led to an _____ .",
+      "title": "Completing the Error Message",
+      "prompt": "A `NameError` occurs when you try to use a variable that is __________.",
+      "template": "A `NameError` occurs when you try to use a variable that is {blank}.",
       "choices": [
-        "error",
-        "output",
-        "exception",
-        "result"
+        "undefined",
+        "incorrect",
+        "out of scope",
+        "not callable"
       ],
-      "correctValue": "error"
+      "correctValue": "undefined"
     },
     {
-      "id": "q5",
+      "id": "quiz_5",
       "kind": "code_input",
-      "title": "Fix the Error",
-      "prompt": "The following code produces an error. Identify and fix the issue.",
-      "starterCode": "print(hello)",
-      "solutionCode": "hello = 'Hello, World!'\nprint(hello)",
-      "tests": [
-        {
-          "input": "",
-          "output": "Hello, World!"
-        }
-      ],
-      "hint": "Look for the variable that is not defined before it is used.",
-      "help": {
-        "concept": "The error occurs because the variable 'hello' is referenced before it is defined.",
-        "hint_1": "Define the variable before using it in the print statement.",
-        "hint_2": "Make sure to assign a value to 'hello' before the print function."
-      }
+      "title": "Fixing a Syntax Error",
+      "prompt": "Fix the syntax error in the following code:\n\n```python\nprint('Hello World'\n```",
+      "starterCode": "print('Hello World'",
+      "solutionCode": "print('Hello World')"
     }
-  ],
-  "projectDraft": {
-    "title": "Personal Introduction Program",
-    "stepIds": [
-      "q5"
-    ]
-  }
+  ]
 }

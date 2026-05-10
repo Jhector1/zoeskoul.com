@@ -14,14 +14,14 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.python-v2.python-v2-0.what-python-is.cards.sketch0.title",
-      "sketchId": "sketch_1",
+      "sketchId": "1",
       "height": 420
     },
     {
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.python-v2.python-v2-0.what-python-is.cards.sketch1.title",
-      "sketchId": "sketch_2",
+      "sketchId": "2",
       "height": 420
     },
     {
@@ -47,9 +47,9 @@
         "maxAttempts": 10,
         "steps": [
           {
-            "id": "quiz_5",
-            "titleKey": "topics.python-v2.python-v2-0.what-python-is.projectSteps.quiz_5.title",
-            "exerciseKey": "quiz_5",
+            "id": "q5",
+            "titleKey": "topics.python-v2.python-v2-0.what-python-is.projectSteps.q5.title",
+            "exerciseKey": "q5",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
@@ -61,25 +61,25 @@
   ],
   "sketches": [
     {
-      "id": "sketch_1",
+      "id": "1",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-v2.python-v2-0.what-python-is.sketch_1.title",
-      "bodyKey": "sketches.python-v2.python-v2-0.what-python-is.sketch_1.bodyMarkdown"
+      "titleKey": "sketches.python-v2.python-v2-0.what-python-is.1.title",
+      "bodyKey": "sketches.python-v2.python-v2-0.what-python-is.1.bodyMarkdown"
     },
     {
-      "id": "sketch_2",
+      "id": "2",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-v2.python-v2-0.what-python-is.sketch_2.title",
-      "bodyKey": "sketches.python-v2.python-v2-0.what-python-is.sketch_2.bodyMarkdown"
+      "titleKey": "sketches.python-v2.python-v2-0.what-python-is.2.title",
+      "bodyKey": "sketches.python-v2.python-v2-0.what-python-is.2.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "quiz_1",
+      "id": "q1",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.what-python-is.quiz.quiz_1",
+      "messageBase": "topics.python-v2.python-v2-0.what-python-is.quiz.q1",
       "optionIds": [
         "a",
         "b",
@@ -92,11 +92,11 @@
       }
     },
     {
-      "id": "quiz_2",
+      "id": "q2",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.what-python-is.quiz.quiz_2",
+      "messageBase": "topics.python-v2.python-v2-0.what-python-is.quiz.q2",
       "optionIds": [
         "a",
         "b",
@@ -105,15 +105,15 @@
       ],
       "expected": {
         "kind": "single_choice",
-        "optionId": "b"
+        "optionId": "d"
       }
     },
     {
-      "id": "quiz_3",
+      "id": "q3",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.what-python-is.quiz.quiz_3",
+      "messageBase": "topics.python-v2.python-v2-0.what-python-is.quiz.q3",
       "optionIds": [
         "a",
         "b",
@@ -130,36 +130,36 @@
       }
     },
     {
-      "id": "quiz_4",
+      "id": "q4",
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.what-python-is.quiz.quiz_4",
+      "messageBase": "topics.python-v2.python-v2-0.what-python-is.quiz.q4",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "automating"
+        "value": "automation"
       }
     },
     {
-      "id": "quiz_5",
+      "id": "q5",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.what-python-is.quiz.quiz_5",
+      "messageBase": "topics.python-v2.python-v2-0.what-python-is.quiz.q5",
       "language": "python",
-      "starterCode": "// Write your answer below",
+      "starterCode": "print('Your Name')",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
           {
             "stdin": "",
-            "stdout": "Hello, World!\n",
+            "stdout": "Zoe Skoul\n",
             "match": "exact"
           }
         ],
-        "solutionCode": "print('Hello, World!')"
+        "solutionCode": "print('Zoe Skoul')"
       }
     }
   ]

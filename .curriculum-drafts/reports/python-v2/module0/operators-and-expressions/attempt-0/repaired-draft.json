@@ -1,0 +1,126 @@
+{
+  "title": "Operators and Expressions",
+  "summary": "Combine values with arithmetic, comparison, and boolean operators.",
+  "minutes": 22,
+  "sketchBlocks": [
+    {
+      "id": "1",
+      "title": "Understanding Operators",
+      "bodyMarkdown": "In Python, operators are special symbols that perform operations on variables and values. For example, the `+` operator adds two numbers together. Here's a simple example:\n\n```python\nresult = 5 + 3\nprint(result)  # This will output 8\n```\n\nTry it yourself! Change the numbers and see what happens.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+    },
+    {
+      "id": "2",
+      "title": "Comparison Operators",
+      "bodyMarkdown": "Comparison operators compare two values and return a boolean result (True or False). For example, the `==` operator checks if two values are equal:\n\n```python\nis_equal = (5 == 5)\nprint(is_equal)  # This will output True\n```\n\nYour turn! Try comparing different values.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "q1",
+      "kind": "single_choice",
+      "title": "What does the `+` operator do?",
+      "prompt": "Choose the correct answer.",
+      "options": [
+        "Subtracts two numbers",
+        "Adds two numbers",
+        "Divides two numbers",
+        "Multiplies two numbers"
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Think about how you combine values.",
+      "help": {
+        "concept": "The `+` operator is used for addition in Python.",
+        "hint_1": "It's commonly used to add two numbers together.",
+        "hint_2": "Remember, it can also be used to concatenate strings."
+      }
+    },
+    {
+      "id": "q2",
+      "kind": "single_choice",
+      "title": "What will the expression `5 == 5` evaluate to?",
+      "prompt": "Choose the correct answer.",
+      "options": [
+        "True",
+        "False",
+        "None",
+        "Error"
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      }
+    },
+    {
+      "id": "q3",
+      "kind": "multi_choice",
+      "title": "Which of the following are comparison operators?",
+      "prompt": "Select all that apply.",
+      "options": [
+        "==",
+        "!=",
+        ">",
+        "+"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "hint": "Look for operators that compare values.",
+      "help": {
+        "concept": "Comparison operators are used to compare two values.",
+        "hint_1": "They return a boolean result.",
+        "hint_2": "Think about operators that check for equality or inequality."
+      }
+    },
+    {
+      "id": "q4",
+      "kind": "fill_blank_choice",
+      "title": "Fill in the blank: The operator `>` checks if the left value is _____ than the right value.",
+      "prompt": "Choose the best value for the first missing blank in the statement.",
+      "template": "The first missing value is [blank1].",
+      "choices": [
+        "greater",
+        "less",
+        "equal",
+        "not equal"
+      ],
+      "correctValue": "greater",
+      "hint": "Focus on the missing concept or keyword.",
+      "help": {
+        "concept": "This task checks the key idea behind fill in the blank: the operator `>` checks if the left value is _____ than the right value..",
+        "hint_1": "Look for the word or phrase that best matches the lesson concept.",
+        "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
+      }
+    },
+    {
+      "id": "q5",
+      "kind": "code_input",
+      "title": "Write a program to check if a number is even or odd.",
+      "prompt": "Use the modulus operator `%` to determine if a number is even or odd.",
+      "starterCode": "number = 10\n# Check if the number is even or odd",
+      "solutionCode": "number = 10\nif number % 2 == 0:\n    print('Even')\nelse:\n    print('Odd')",
+      "recipeType": "fixed_tests",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+        "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+      },
+      "tests": [
+        {
+          "stdin": "",
+          "stdout": "Even\n",
+          "match": "exact"
+        }
+      ]
+    }
+  ]
+}

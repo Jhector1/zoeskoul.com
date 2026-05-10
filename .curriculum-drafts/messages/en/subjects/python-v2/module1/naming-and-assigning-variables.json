@@ -10,7 +10,7 @@
               "title": "Understanding Variables"
             },
             "sketch1": {
-              "title": "Variable Naming Conventions"
+              "title": "Reassigning Variables"
             },
             "quiz": {
               "title": "Quiz"
@@ -20,84 +20,84 @@
             }
           },
           "projectSteps": {
-            "1": {
-              "title": "Variable Reassignment"
+            "q4": {
+              "title": "Create and print a variable"
             },
-            "5": {
-              "title": "Creating and Printing Variables"
+            "q5": {
+              "title": "Reassign a variable"
             }
           },
           "quiz": {
-            "1": {
-              "title": "Variable Reassignment",
-              "prompt": "Write a program that assigns a variable `score` to 10, then reassigns it to 20, and prints the value.",
-              "hint": "Break the task into the main code steps first.",
+            "q1": {
+              "title": "What is a variable in Python?",
+              "prompt": "A variable is a name that refers to a value.",
+              "hint": "Think about how we store information in a program.",
               "help": {
-                "concept": "This task checks whether you can apply variable reassignment in a working solution.",
-                "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
-                "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
+                "concept": "A variable allows us to store data that can be referenced later in the code.",
+                "hint_1": "Consider how you might use a name to refer to a number.",
+                "hint_2": "Remember the example where we assigned a number to a name."
               },
-              "starterCode": "score = 10\n# Reassign score here\n\nprint(score)"
+              "options": {
+                "a": "A way to store data",
+                "b": "A type of function",
+                "c": "A method for input",
+                "d": "A way to output data"
+              }
             },
-            "2": {
-              "title": "Variable Naming",
-              "prompt": "Choose the best value for the first missing blank in the statement.",
+            "q2": {
+              "title": "Which of the following are valid variable names in Python?",
+              "prompt": "Select all that apply.",
+              "hint": "Think about the rules for naming variables.",
+              "help": {
+                "concept": "Variable names must start with a letter or underscore and can contain letters, numbers, and underscores.",
+                "hint_1": "Avoid starting variable names with numbers.",
+                "hint_2": "Remember that spaces and special characters are not allowed."
+              },
+              "options": {
+                "a": "my_variable",
+                "b": "2nd_variable",
+                "c": "variable-name",
+                "d": "_privateVariable",
+                "e": "variable 1"
+              }
+            },
+            "q3": {
+              "title": "Fill in the blank: In Python, you can change the value of a variable using _____ .",
+              "prompt": "Complete the sentence.",
               "hint": "Focus on the missing concept or keyword.",
               "help": {
-                "concept": "This task checks the key idea behind variable naming.",
+                "concept": "This task checks the key idea behind fill in the blank: in python, you can change the value of a variable using _____ ..",
                 "hint_1": "Look for the word or phrase that best matches the lesson concept.",
                 "hint_2": "Compare the blank with the meaning of each choice, not just the wording."
               },
-              "template": "The first missing value is [blank1].",
+              "template": "In Python, you can change the value of a variable using _____ .",
               "choices": [
-                "greeting",
-                "x",
-                "value"
+                "reassignment",
+                "declaration",
+                "initialization"
               ]
             },
-            "3": {
-              "title": "Understanding Variable Assignment",
-              "prompt": "What does the following code do? `age = 30`.",
-              "hint": "Think about what happens when you assign a value to a variable.",
-              "help": {
-                "concept": "This code assigns the value 30 to the variable age.",
-                "hint_1": "The variable age now holds the value 30.",
-                "hint_2": "You can use age later in your program to refer to this value."
-              },
-              "options": {
-                "a": "It creates a variable called age.",
-                "b": "It prints the value of age.",
-                "c": "It assigns the value 30 to age.",
-                "d": "It deletes the variable age."
-              }
-            },
-            "4": {
-              "title": "Valid Variable Names",
-              "prompt": "Which of the following are valid variable names in Python? (Select all that apply)",
-              "hint": "Remember the rules for naming variables.",
-              "help": {
-                "concept": "Variable names must start with a letter or underscore and can contain letters, numbers, and underscores.",
-                "hint_1": "Check if the name starts with a letter or underscore.",
-                "hint_2": "Look for names that contain spaces or special characters."
-              },
-              "options": {
-                "a": "user_name",
-                "b": "2nd_user",
-                "c": "user-name",
-                "d": "_user",
-                "e": "user123"
-              }
-            },
-            "5": {
-              "title": "Creating and Printing Variables",
-              "prompt": "Create two variables: `first_name` and `last_name`, assign them your first and last name, and print them.",
+            "q4": {
+              "title": "Create and print a variable",
+              "prompt": "Write Python code to create a variable named `favorite_color` and assign it your favorite color. Then, print the variable.",
               "hint": "Break the task into the main code steps first.",
               "help": {
-                "concept": "This task checks whether you can apply creating and printing variables in a working solution.",
+                "concept": "This task checks whether you can apply create and print a variable in a working solution.",
                 "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
                 "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
               },
-              "starterCode": "# Create your variables here\n\n# Print your variables here"
+              "starterCode": "favorite_color = ''\n# Assign your favorite color here\nprint(favorite_color)"
+            },
+            "q5": {
+              "title": "Reassign a variable",
+              "prompt": "Write Python code to create a variable named `score`, assign it a value of `10`, then reassign it to `20` and print it.",
+              "hint": "Break the task into the main code steps first.",
+              "help": {
+                "concept": "This task checks whether you can apply reassign a variable in a working solution.",
+                "hint_1": "Identify the inputs, required steps, and expected result before writing the full solution.",
+                "hint_2": "Build the solution one piece at a time, then check that its behavior matches the prompt."
+              },
+              "starterCode": "score = 10\n# Reassign score to a new value\nprint(score)"
             }
           }
         }
@@ -110,11 +110,11 @@
         "naming-and-assigning-variables": {
           "1": {
             "title": "Understanding Variables",
-            "bodyMarkdown": "In Python, a variable is a name that refers to a value. For example, if you write `age = 25`, the variable `age` now holds the value `25`. You can change the value of a variable at any time, like this: `age = 30`. This is called reassignment. \n\n**Example:**\n```python\nname = 'Alice'\nage = 25\nprint(name, age)\n```\nThis code will output: `Alice 25`. \n\n**Your turn:** Try changing the value of `age` and see what happens!\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+            "bodyMarkdown": "In Python, a variable is a name that refers to a value. For example, if we write `age = 25`, we are creating a variable named `age` that holds the value `25`. This allows us to use `age` later in our code instead of the number `25`. \n\n**Example:**\n```python\nage = 25\nprint(age)  # This will output: 25\n```\n\n**Your turn:** Try creating a variable called `name` and assign it your name.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
           },
           "2": {
-            "title": "Variable Naming Conventions",
-            "bodyMarkdown": "When naming variables, it's important to choose clear and descriptive names. For example, instead of `x`, use `user_age`. This makes your code easier to understand. \n\n**Example:**\n```python\nuser_age = 30\nuser_name = 'Bob'\nprint(user_name, user_age)\n```\nThis code will output: `Bob 30`. \n\n**Try it yourself:** Create two variables for your name and age, then print them!\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+            "title": "Reassigning Variables",
+            "bodyMarkdown": "You can change the value of a variable at any time. This is called reassignment. For example, if we initially set `age = 25` and later want to update it to `26`, we can simply write:\n\n**Example:**\n```python\nage = 25\nage = 26\nprint(age)  # This will output: 26\n```\n\n**Try this:** Change the value of `age` to your current age.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
           }
         }
       }

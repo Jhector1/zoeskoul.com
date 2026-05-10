@@ -6,12 +6,12 @@
     {
       "id": "1",
       "title": "Understanding Operators",
-      "bodyMarkdown": "In Python, operators are special symbols that perform operations on variables and values. For example, the `+` operator adds two numbers together. Here's a simple example:\n\n```python\nresult = 5 + 3\nprint(result)  # This will output 8\n```\n\nTry it yourself: Change the numbers and see what happens!"
+      "bodyMarkdown": "In Python, operators are special symbols that perform operations on variables and values. For example, the `+` operator adds two numbers together. Here's a simple example:\n\n```python\nresult = 5 + 3\nprint(result)  # This will output 8\n```\n\n**Your turn:** Try changing the numbers and see what happens!"
     },
     {
       "id": "2",
       "title": "Comparison Operators",
-      "bodyMarkdown": "Comparison operators compare two values and return a boolean result (True or False). For example, the `==` operator checks if two values are equal:\n\n```python\nis_equal = (5 == 5)\nprint(is_equal)  # This will output True\n```\n\nYour turn: Try comparing different values!"
+      "bodyMarkdown": "Comparison operators compare two values and return a boolean result (True or False). For example, the `==` operator checks if two values are equal:\n\n```python\nis_equal = (5 == 5)\nprint(is_equal)  # This will output True\n```\n\n**Try this:** Change one of the values to see how the output changes!"
     }
   ],
   "quizDraft": [
@@ -19,7 +19,7 @@
       "id": "q1",
       "kind": "single_choice",
       "title": "What does the `+` operator do?",
-      "prompt": "Select the correct answer.",
+      "prompt": "Choose the correct answer.",
       "options": [
         "Subtracts two numbers",
         "Adds two numbers",
@@ -29,84 +29,78 @@
       "correctOptionIds": [
         "b"
       ],
-      "hint": "Think about how you combine numbers.",
+      "hint": "Think about how you combine two quantities.",
       "help": {
         "concept": "The `+` operator is used for addition in Python.",
-        "hint_1": "It's commonly used to add two values together.",
-        "hint_2": "Look for the operator that increases the value."
+        "hint_1": "It's commonly used to add numbers together.",
+        "hint_2": "Look for the option that describes combining values."
       }
     },
     {
       "id": "q2",
       "kind": "single_choice",
-      "title": "What will the expression `5 == 5` evaluate to?",
+      "title": "Which of the following is a comparison operator?",
       "prompt": "Choose the correct answer.",
       "options": [
-        "True",
-        "False",
-        "None",
-        "Error"
+        "+",
+        "-",
+        "==",
+        "*"
       ],
       "correctOptionIds": [
-        "a"
+        "c"
       ],
-      "hint": "Consider what it means for two values to be equal.",
+      "hint": "This operator checks for equality between two values.",
       "help": {
-        "concept": "The `==` operator checks for equality.",
-        "hint_1": "If both sides are the same, it returns True.",
-        "hint_2": "Think about how you would answer if asked if two things are the same."
+        "concept": "Comparison operators are used to compare values.",
+        "hint_1": "Look for the operator that checks if two values are the same.",
+        "hint_2": "It's not an arithmetic operator."
       }
     },
     {
       "id": "q3",
       "kind": "multi_choice",
-      "title": "Which of the following are comparison operators?",
+      "title": "Which of the following are valid arithmetic operators in Python?",
       "prompt": "Select all that apply.",
       "options": [
-        "==",
-        ">",
         "+",
-        "<="
+        "-",
+        "/",
+        "=="
       ],
       "correctOptionIds": [
         "a",
         "b",
-        "d"
+        "c"
       ],
-      "hint": "Look for operators that compare values.",
+      "hint": "Think about how you perform calculations.",
       "help": {
-        "concept": "Comparison operators evaluate the relationship between two values.",
-        "hint_1": "They return True or False based on the comparison.",
-        "hint_2": "Think about which operators check for equality or order."
+        "concept": "Arithmetic operators perform mathematical operations.",
+        "hint_1": "Look for operators that perform addition, subtraction, or division.",
+        "hint_2": "One of the options is not an arithmetic operator."
       }
     },
     {
       "id": "q4",
       "kind": "fill_blank_choice",
-      "title": "Fill in the blank: The operator `>` is used to check if one value is ______ than another.",
+      "title": "Fill in the blank: The operator `==` is used to check if two values are ______.",
       "prompt": "Choose the correct word.",
-      "template": "The operator `>` is used to check if one value is ___ than another.",
+      "template": "The operator `==` is used to check if two values are _____.",
       "choices": [
-        "greater",
-        "less",
         "equal",
-        "not equal"
+        "different",
+        "greater",
+        "less"
       ],
-      "correctValue": "greater"
+      "correctValue": "equal"
     },
     {
       "id": "q5",
       "kind": "code_input",
       "title": "Calculate the sum of two numbers.",
-      "prompt": "Write a program that adds two numbers and prints the result.",
-      "starterCode": "num1 = 10\nnum2 = 5\n# Add the two numbers here\nresult = ",
-      "solutionCode": "num1 = 10\nnum2 = 5\nresult = num1 + num2\nprint(result)  # This will output 15",
-      "tests": [
-        {
-          "input": "",
-          "output": "15\n"
-        }
-      ]
+      "prompt": "Write a program that takes two numbers and prints their sum.",
+      "starterCode": "num1 = 10\nnum2 = 5\n# Write your code here to calculate the sum\n",
+      "solutionCode": "num1 = 10\nnum2 = 5\nsum_result = num1 + num2\nprint(sum_result)  # This will output 15"
     }
   ]
 }

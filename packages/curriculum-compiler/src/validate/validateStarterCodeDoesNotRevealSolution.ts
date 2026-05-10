@@ -1,4 +1,5 @@
 import type { TopicAuthoringDraft } from "@zoeskoul/curriculum-contracts";
+import { RetryableTopicValidationError } from "./RetryableTopicValidationError.js";
 
 function stripPythonComments(source: string): string {
     return source
@@ -35,14 +36,16 @@ export function validateStarterCodeDoesNotRevealSolution(args: {
     }
 
     if (failures.length > 0) {
-        throw new Error(
-            [
+        throw new RetryableTopicValidationError({
+            code: "STARTER_CODE_REVEALS_SOLUTION",
+            message: [
                 `Starter code reveals solution at ${args.location}`,
                 "",
                 ...failures.map((failure) => `- ${failure}`),
                 "",
-                "Starter code should scaffold the task, not contain the completed solution.",
+                "Regenerate this topic. Starter code should scaffold the task, not contain the completed solution.",
             ].join("\n"),
-        );
+            details: { failures },
+        });
     }
 }

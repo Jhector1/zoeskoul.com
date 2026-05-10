@@ -1,0 +1,74 @@
+{
+  "subjectSlug": "python-v2",
+  "generatedAt": "2026-05-10T05:54:11.768Z",
+  "topics": [
+    {
+      "moduleSlug": "python-v2-0",
+      "sectionSlug": "python-v2-0-setup-and-first-programs",
+      "topicId": "what-python-is",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "python-v2-0",
+      "sectionSlug": "python-v2-0-setup-and-first-programs",
+      "topicId": "running-python-code",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "python-v2-0",
+      "sectionSlug": "python-v2-0-setup-and-first-programs",
+      "topicId": "print-comments-and-errors",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "python-v2-0",
+      "sectionSlug": "python-v2-0-values-and-expressions",
+      "topicId": "values-types-and-literals",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "python-v2-0",
+      "sectionSlug": "python-v2-0-values-and-expressions",
+      "topicId": "operators-and-expressions",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "python-v2-0",
+      "sectionSlug": "python-v2-0-values-and-expressions",
+      "topicId": "reading-error-messages",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "python-v2-1",
+      "sectionSlug": "python-v2-1-variables-and-assignment",
+      "topicId": "naming-and-assigning-variables",
+      "status": "success",
+      "attempts": 0,
+      "retryCodes": []
+    },
+    {
+      "moduleSlug": "python-v2-1",
+      "sectionSlug": "python-v2-1-variables-and-assignment",
+      "topicId": "input-and-type-conversion",
+      "status": "failed",
+      "attempts": 3,
+      "retryCodes": [
+        "INVALID_FILL_BLANK_STRUCTURE",
+        "INVALID_FILL_BLANK_STRUCTURE",
+        "INVALID_FILL_BLANK_STRUCTURE"
+      ]
+    }
+  ]
+}

@@ -2,7 +2,7 @@ import type {TopicSeed} from "@zoeskoul/curriculum-contracts";
 import type {SubjectShapePack} from "@zoeskoul/curriculum-profiles";
 import {renderExercisePolicyPrompt} from "./renderExercisePolicyPrompt.js";
 import { renderExerciseKindPromptRules } from "./exerciseKindPromptRules.js";
-import {TopicRetryContext} from "../types.js";
+import type { TopicRetryContext } from "../types.js";
 
 
 function renderRetryGuidance(retry?: TopicRetryContext) {
@@ -33,6 +33,14 @@ function renderRetryGuidance(retry?: TopicRetryContext) {
         "If the failure mentions workspace policy:",
         "- Do not mention files, .py filenames, terminals, command lines, package installation, or local workflows.",
         "",
+        "If the failure mentions INVALID_FILL_BLANK_STRUCTURE or multiple_blanks:",
+        "- Regenerate the fill_blank_choice with exactly ONE blank.",
+        "- Use only [blank1]. Do not use [blank2], [blank3], or multiple underscore blanks.",
+        "- The template must contain one missing part and enough context to answer it.",
+        "- Good example: `age = [blank1]` with choices `18`, `age`, `print`.",
+        "- Good example: `[blank1] = 10` with choices `score`, `10`, `print`.",
+        "- Bad example: `[blank1] = [blank2]`.",
+        "- Bad example: `____ = ____`.",
     ].join("\n");
 }
 function renderWorkspacePolicy(seed: TopicSeed) {
@@ -67,6 +75,7 @@ export function buildTopicAuthoringDraftPrompt(args: {
     seed: TopicSeed;
     locale: string;
     shape: SubjectShapePack;
+    retry?: TopicRetryContext;
 }) {
     const exercisePolicyRules = renderExercisePolicyPrompt({
         policy: args.seed.exercisePolicy,
@@ -124,6 +133,8 @@ export function buildTopicAuthoringDraftPrompt(args: {
             "Every exercise must include a real solution.",
             "Do not leave any solution field empty.",
             "",
+            renderRetryGuidance(args.retry),
+
             "The top-level object must contain exactly:",
             '- "title"',
             '- "summary"',
@@ -183,6 +194,21 @@ export function buildTopicAuthoringDraftPrompt(args: {
             "For code_input, hints may describe the target behavior, intermediate reasoning, or relevant inputs, but not the final full solution.",
             "",
             ...exerciseKindRules,
+            "",
+            "Strict fill_blank_choice rules:",
+            "- Each fill_blank_choice template must contain exactly ONE blank marker.",
+            "- Use `[blank1]` exactly once.",
+            "- Do not use `[blank2]`, `[blank3]`, or any second blank marker.",
+            "- Do not use multiple underscore blanks such as `____ = ____`.",
+            "- Do not create templates where both the variable name and value are missing.",
+            "- The template must include enough context to answer the one missing part.",
+            "- For variable-assignment topics, choose only ONE missing part:",
+            "  Good: `[blank1] = 10` with choices like `age`, `name`, `print`.",
+            "  Good: `age = [blank1]` with choices like `10`, `age`, `print`.",
+            "  Bad: `[blank1] = [blank2]`.",
+            "  Bad: `____ = ____`.",
+            "- The `correctValue` must be exactly the value that fills `[blank1]`.",
+            "- The choices must include the correctValue and plausible distractors.",
             "",
             "Publishing rule:",
             "- code_input authoring items are published as project practice automatically.",

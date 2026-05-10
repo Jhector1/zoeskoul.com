@@ -1,4 +1,6 @@
 import type { TopicAuthoringDraft } from "@zoeskoul/curriculum-contracts";
+import { RetryableTopicValidationError } from "./RetryableTopicValidationError.js";
+
 const GENERIC_HELP_PATTERNS = [
     /Focus on the (main )?concept/i,
     /not on copying final solution text/i,
@@ -6,13 +8,15 @@ const GENERIC_HELP_PATTERNS = [
     /Choose the option that matches the core idea/i,
     /Think about the role or idea being tested/i,
     /eliminate choices that describe something different/i,
-];export function validateGenericExerciseHelp(args: {
+];
+
+export function validateGenericExerciseHelp(args: {
     draft: TopicAuthoringDraft;
     location: string;
 }) {
     const failures: string[] = [];
 
-    for (const exercise of args.draft.quizDraft) {
+    for (const exercise of args.draft.quizDraft ?? []) {
         const texts = [
             exercise.hint,
             exercise.help?.concept,
@@ -32,14 +36,16 @@ const GENERIC_HELP_PATTERNS = [
     }
 
     if (failures.length > 0) {
-        throw new Error(
-            [
+        throw new RetryableTopicValidationError({
+            code: "GENERIC_EXERCISE_HELP",
+            message: [
                 `Generic exercise help detected at ${args.location}`,
                 "",
                 ...failures.map((x) => `- ${x}`),
                 "",
-                "Hints must be specific to the exercise, syntax, input, output, or concept.",
+                "Regenerate this topic. Hints must be specific to the exercise, syntax, input, output, or concept.",
             ].join("\n"),
-        );
+            details: { failures },
+        });
     }
 }

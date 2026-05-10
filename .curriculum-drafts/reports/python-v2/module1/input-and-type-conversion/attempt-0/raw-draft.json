@@ -1,0 +1,92 @@
+{
+  "title": "Input and Type Conversion",
+  "summary": "Use input, int, float, and str to handle user-entered values.",
+  "minutes": 25,
+  "sketchBlocks": [
+    {
+      "id": "sketch_1",
+      "title": "Getting User Input",
+      "bodyMarkdown": "In Python, you can use the `input()` function to get input from the user. This function always returns the input as a string. For example:\n\n```python\nname = input('What is your name? ')\nprint('Hello, ' + name)\n```\n\nIn this example, the program asks for the user's name and then greets them. \n\n**Try it yourself:** Modify the code to ask for the user's age and print it."
+    },
+    {
+      "id": "sketch_2",
+      "title": "Type Conversion",
+      "bodyMarkdown": "Sometimes, you need to convert the input to a different type. For example, if you want to treat the input as a number, you can use `int()` or `float()`. Here's how:\n\n```python\nage = input('How old are you? ')\nage = int(age)\nprint('In 5 years, you will be ' + str(age + 5))\n```\n\nIn this example, the input is converted from a string to an integer so we can perform arithmetic. \n\n**Your turn:** Change the code to ask for a decimal number and print it after adding 2.5."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "quiz_1",
+      "kind": "single_choice",
+      "title": "Understanding Input Types",
+      "prompt": "What does the `input()` function return?",
+      "options": [
+        "An integer",
+        "A float",
+        "A string",
+        "A list"
+      ],
+      "correctOptionIds": [
+        "c"
+      ],
+      "hint": "Think about the data type of user input.",
+      "help": {
+        "concept": "The `input()` function always returns data as a string, regardless of what the user enters.",
+        "hint_1": "Consider what happens when you enter a number.",
+        "hint_2": "Remember, you can convert this string to other types if needed."
+      }
+    },
+    {
+      "id": "quiz_2",
+      "kind": "multi_choice",
+      "title": "Type Conversion Functions",
+      "prompt": "Which of the following are valid type conversion functions in Python?",
+      "options": [
+        "int()",
+        "float()",
+        "str()",
+        "convert()"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "hint": "Look for functions that change data types.",
+      "help": {
+        "concept": "Python provides built-in functions to convert between types, such as `int()`, `float()`, and `str()`.",
+        "hint_1": "Think about how you would convert a string to a number.",
+        "hint_2": "Only one option is not a built-in function."
+      }
+    },
+    {
+      "id": "quiz_3",
+      "kind": "fill_blank_choice",
+      "title": "Completing Type Conversion",
+      "prompt": "To convert a string to a float, you use the function `______`.",
+      "template": "To convert a string to a float, you use the function `______`.",
+      "choices": [
+        "float()",
+        "int()",
+        "str()"
+      ],
+      "correctValue": "float()"
+    },
+    {
+      "id": "quiz_4",
+      "kind": "code_input",
+      "title": "Calculate Future Age",
+      "prompt": "Write a program that asks for the user's age and prints their age in 10 years.",
+      "starterCode": "age = input('Enter your age: ')\n# Convert age to an integer\n",
+      "solutionCode": "age = input('Enter your age: ')\nage = int(age)\nprint('In 10 years, you will be ' + str(age + 10))"
+    },
+    {
+      "id": "quiz_5",
+      "kind": "code_input",
+      "title": "Sum of Two Numbers",
+      "prompt": "Write a program that asks for two numbers and prints their sum.",
+      "starterCode": "num1 = input('Enter first number: ')\nnum2 = input('Enter second number: ')\n# Convert to float and calculate sum\n",
+      "solutionCode": "num1 = input('Enter first number: ')\nnum2 = input('Enter second number: ')\nnum1 = float(num1)\nnum2 = float(num2)\nprint('The sum is: ' + str(num1 + num2))"
+    }
+  ]
+}

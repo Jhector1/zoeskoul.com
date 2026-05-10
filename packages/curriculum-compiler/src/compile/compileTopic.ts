@@ -1,7 +1,8 @@
 // packages/curriculum-compiler/src/compile/compileTopic.ts
 
-import type { CourseBlueprint } from "@zoeskoul/curriculum-contracts";
-import type { AiProvider } from "@zoeskoul/curriculum-ai";
+import path from "node:path";
+import type { CourseBlueprint, TopicAuthoringDraft } from "@zoeskoul/curriculum-contracts";
+import type { AiProvider, TopicRetryContext } from "@zoeskoul/curriculum-ai";
 import { generateTopicAuthoringDraft } from "@zoeskoul/curriculum-ai";
 import {
     getProfileServices,
@@ -20,17 +21,86 @@ import {
 import { writeSubjectArtifacts } from "../write/writeSubjectArtifacts.js";
 import { writeTopicArtifacts } from "../write/writeTopicArtifacts.js";
 import { writeTopicReports } from "../reports/writeTopicReports.js";
+import { writeTopicAttemptReport } from "../reports/writeTopicAttemptReport.js";
+import { writeTopicCompileStatus } from "../reports/writeTopicCompileStatus.js";
 import { evaluateTopicDraft } from "../quality/evaluateTopicDraft.js";
 import type { CompileProgressCallback } from "./compileProgress.js";
 import { resolvePlan } from "../spec/resolvePlan.js";
 import { findTopicPlanNode } from "../plan/findTopicPlanNode.js";
 import { buildTopicSeedFromPlanNode } from "../seeds/buildTopicSeedFromPlanNode.js";
-import {resolveWorkspacePolicy} from "../policy/resolveWorkspacePolicy.js";
-import {validateWorkspacePolicy} from "../validate/validateWorkspacePolicy.js";
-import {validateTopicBundleIdentity} from "../validate/validateTopicBundleIdentity.js";
-import {validateTopicMessagesIdentity} from "../validate/validateTopicMessagesIdentity.js";
-import {validateGenericExerciseHelp} from "../validate/validateGenericExerciseHelp.js";
-import {validateStarterCodeDoesNotRevealSolution} from "../validate/validateStarterCodeDoesNotRevealSolution.js";
+import { resolveWorkspacePolicy } from "../policy/resolveWorkspacePolicy.js";
+import { validateWorkspacePolicy } from "../validate/validateWorkspacePolicy.js";
+import { validateTopicBundleIdentity } from "../validate/validateTopicBundleIdentity.js";
+import { validateTopicMessagesIdentity } from "../validate/validateTopicMessagesIdentity.js";
+import { validateGenericExerciseHelp } from "../validate/validateGenericExerciseHelp.js";
+import { validateStarterCodeDoesNotRevealSolution } from "../validate/validateStarterCodeDoesNotRevealSolution.js";
+import { validateNoDummyFillBlankQuestions } from "../validate/validateNoDummyFillBlankQuestions.js";
+import {
+    isRetryableTopicValidationError,
+    RetryableTopicValidationError,
+} from "../validate/RetryableTopicValidationError.js";
+
+const MAX_TOPIC_RETRIES = 2;
+
+function getTopicReportDir(args: {
+    subjectSlug: string;
+    moduleOrder: number;
+    topicId: string;
+}) {
+    return path.join(
+        ".curriculum-drafts",
+        "reports",
+        args.subjectSlug,
+        `module${args.moduleOrder}`,
+        args.topicId,
+    );
+}
+
+function errorCode(error: unknown) {
+    if (typeof error === "object" && error !== null && "code" in error) {
+        return String((error as any).code ?? "UNKNOWN");
+    }
+
+    return "UNKNOWN";
+}
+
+function errorMessage(error: unknown) {
+    return error instanceof Error ? error.message : String(error);
+}
+
+function formatReportErrors(args: {
+    title: string;
+    topicId: string;
+    moduleSlug: string;
+    sectionSlug: string;
+    reportDir: string;
+    messages: string[];
+}) {
+    return [
+        `${args.title} for topic "${args.topicId}"`,
+        `Module: ${args.moduleSlug}`,
+        `Section: ${args.sectionSlug}`,
+        `Report dir: ${args.reportDir}`,
+        ...args.messages.map((message) => `- ${message}`),
+    ].join("\n");
+}
+
+function throwRetryableReportFailure(args: {
+    code: string;
+    title: string;
+    topicId: string;
+    moduleSlug: string;
+    sectionSlug: string;
+    reportDir: string;
+    messages: string[];
+    details?: unknown;
+}): never {
+    throw new RetryableTopicValidationError({
+        code: args.code,
+        message: formatReportErrors(args),
+        details: args.details,
+    });
+}
 
 export async function compileTopic(args: {
     blueprint: CourseBlueprint;
@@ -45,7 +115,7 @@ export async function compileTopic(args: {
         (locale) => locale !== sourceLocale,
     );
 
-    const totalStages = 8 + extraLocales.length * 2;
+    const totalStages = 8 + extraLocales.length * 2 + MAX_TOPIC_RETRIES;
     let currentStage = 0;
 
     function advanceProgress(info: {
@@ -77,22 +147,15 @@ export async function compileTopic(args: {
         provider: args.provider,
     });
 
-    if (resolved.source === "spec") {
-        advanceProgress({
-            stage: "loaded course spec",
-            topicId: args.topicId,
-        });
-    } else if (resolved.source === "saved_plan") {
-        advanceProgress({
-            stage: "loaded saved plan",
-            topicId: args.topicId,
-        });
-    } else {
-        advanceProgress({
-            stage: "generated course plan",
-            topicId: args.topicId,
-        });
-    }
+    advanceProgress({
+        stage:
+            resolved.source === "spec"
+                ? "loaded course spec"
+                : resolved.source === "saved_plan"
+                  ? "loaded saved plan"
+                  : "generated course plan",
+        topicId: args.topicId,
+    });
 
     const node = findTopicPlanNode({
         plan: resolved.plan,
@@ -106,10 +169,7 @@ export async function compileTopic(args: {
     const shape = getSubjectShape(args.blueprint.profileId as "sql" | "python");
     const profileServices = getProfileServices(args.blueprint.profileId);
 
-    advanceProgress({
-        stage: "building subject manifest",
-        topicId: args.topicId,
-    });
+    advanceProgress({ stage: "building subject manifest", topicId: args.topicId });
 
     const subjectManifest = buildSubjectManifestFromPlan({
         blueprint: args.blueprint,
@@ -134,10 +194,7 @@ export async function compileTopic(args: {
     };
 
     for (const locale of extraLocales) {
-        advanceProgress({
-            stage: `translating subject messages (${locale})`,
-            topicId: args.topicId,
-        });
+        advanceProgress({ stage: `translating subject messages (${locale})`, topicId: args.topicId });
 
         subjectMessagesByLocale[locale] = await translateNonEmptyMessages({
             provider: args.provider,
@@ -149,10 +206,7 @@ export async function compileTopic(args: {
         });
     }
 
-    advanceProgress({
-        stage: "writing subject artifacts",
-        topicId: args.topicId,
-    });
+    advanceProgress({ stage: "writing subject artifacts", topicId: args.topicId });
 
     await writeSubjectArtifacts({
         subjectSlug: args.blueprint.subjectSlug,
@@ -168,226 +222,337 @@ export async function compileTopic(args: {
         topic: node.topic,
     });
 
-    advanceProgress({
-        stage: "generating topic draft",
-        topicId: node.topic.topicId,
-        moduleSlug: node.module.moduleSlug,
-        sectionSlug: node.section.sectionSlug,
-    });
-
-    const rawDraft = await generateTopicAuthoringDraft(args.provider, {
-        seed,
-        locale: sourceLocale,
-        shape,
-    });
-
-    advanceProgress({
-        stage: "evaluating topic draft",
-        topicId: node.topic.topicId,
-        moduleSlug: node.module.moduleSlug,
-        sectionSlug: node.section.sectionSlug,
-    });
-
-    const evaluation = await evaluateTopicDraft({
-        provider: args.provider,
-        seed,
-        rawDraft,
-        profileServices,
-    });
-
-    const draft = evaluation.draft;
-    const workspacePolicy = resolveWorkspacePolicy({
-        blueprint: args.blueprint,
-        moduleNumber: node.module.order - 1,
-        topicId: node.topic.topicId,
-    });
-    await writeTopicReports({
+    const reportDir = getTopicReportDir({
         subjectSlug: args.blueprint.subjectSlug,
         moduleOrder: node.moduleIndex,
         topicId: node.topic.topicId,
-        rawDraft,
-        repairedDraft: draft,
-        repairReport: evaluation.repairReport,
-        critiqueReport: evaluation.critiqueReport,
-        semanticReport: evaluation.semanticReport,
-    });
-    validateWorkspacePolicy({
-        text: JSON.stringify(evaluation.draft),
-        policy: workspacePolicy,
-        location: `${node.module.moduleSlug}/${node.topic.topicId}`,
     });
 
+    let previousError: unknown = null;
 
-    advanceProgress({
-        stage: "validating draft",
-        topicId: node.topic.topicId,
-        moduleSlug: node.module.moduleSlug,
-        sectionSlug: node.section.sectionSlug,
-    });
+    for (let attempt = 0; attempt <= MAX_TOPIC_RETRIES; attempt += 1) {
+        const retryContext: TopicRetryContext | undefined =
+            attempt > 0 && previousError instanceof Error
+                ? {
+                      attempt,
+                      maxRetries: MAX_TOPIC_RETRIES,
+                      previousErrorCode: errorCode(previousError),
+                      previousErrorMessage: previousError.message,
+                  }
+                : undefined;
 
-    assertTopicAuthoringDraft(draft);
-    validateStarterCodeDoesNotRevealSolution({
-        draft,
-        location: `${node.module.moduleSlug}/${node.section.sectionSlug}/${node.topic.topicId}`,
-    });
-    validateGenericExerciseHelp({
-        draft,
-        location: `${seed.moduleSlug}/${seed.sectionSlug}/${seed.topicId}`,
-    })
-    if (!evaluation.critiqueReport.ok) {
-        const critiqueErrors = evaluation.critiqueReport.issues.filter(
-            (issue) => issue.severity === "error",
-        );
+        const attemptArtifacts: {
+            rawDraft?: TopicAuthoringDraft;
+            repairedDraft?: TopicAuthoringDraft;
+            repairReport?: unknown;
+            critiqueReport?: unknown;
+            semanticReport?: unknown;
+            goldenReport?: unknown;
+        } = {};
 
-        if (critiqueErrors.length) {
-            throw new Error(
-                [
-                    `Critique failed for topic "${node.topic.topicId}"`,
-                    `Module: ${node.module.moduleSlug}`,
-                    `Section: ${node.section.sectionSlug}`,
-                    `Report dir: .curriculum-drafts/reports/${args.blueprint.subjectSlug}/module${node.moduleIndex}/${node.topic.topicId}`,
-                    ...critiqueErrors.map((x) => `- ${x.message}`),
-                ].join("\n"),
-            );
+        try {
+            advanceProgress({
+                stage: attempt > 0 ? `retrying topic draft (${attempt}/${MAX_TOPIC_RETRIES})` : "generating topic draft",
+                topicId: node.topic.topicId,
+                moduleSlug: node.module.moduleSlug,
+                sectionSlug: node.section.sectionSlug,
+            });
+
+            const rawDraft = await generateTopicAuthoringDraft(args.provider, {
+                seed,
+                locale: sourceLocale,
+                shape,
+                retry: retryContext,
+            });
+            attemptArtifacts.rawDraft = rawDraft;
+
+            advanceProgress({
+                stage: "evaluating topic draft",
+                topicId: node.topic.topicId,
+                moduleSlug: node.module.moduleSlug,
+                sectionSlug: node.section.sectionSlug,
+            });
+
+            const evaluation = await evaluateTopicDraft({
+                provider: args.provider,
+                seed,
+                rawDraft,
+                profileServices,
+            });
+
+            const draft = evaluation.draft;
+            attemptArtifacts.repairedDraft = draft;
+            attemptArtifacts.repairReport = evaluation.repairReport;
+            attemptArtifacts.critiqueReport = evaluation.critiqueReport;
+            attemptArtifacts.semanticReport = evaluation.semanticReport;
+
+            const workspacePolicy = resolveWorkspacePolicy({
+                blueprint: args.blueprint,
+                moduleNumber: node.module.order - 1,
+                topicId: node.topic.topicId,
+            });
+
+            validateWorkspacePolicy({
+                text: JSON.stringify(draft),
+                policy: workspacePolicy,
+                location: `${node.module.moduleSlug}/${node.topic.topicId}`,
+                retryable: true,
+            });
+
+            advanceProgress({
+                stage: "validating draft",
+                topicId: node.topic.topicId,
+                moduleSlug: node.module.moduleSlug,
+                sectionSlug: node.section.sectionSlug,
+            });
+
+            try {
+                assertTopicAuthoringDraft(draft);
+            } catch (error) {
+                throw new RetryableTopicValidationError({
+                    code: "INVALID_TOPIC_AUTHORING_DRAFT",
+                    message: error instanceof Error ? error.message : String(error),
+                    details: { topicId: node.topic.topicId },
+                });
+            }
+
+            validateStarterCodeDoesNotRevealSolution({
+                draft,
+                location: `${node.module.moduleSlug}/${node.section.sectionSlug}/${node.topic.topicId}`,
+            });
+            validateGenericExerciseHelp({
+                draft,
+                location: `${seed.moduleSlug}/${seed.sectionSlug}/${seed.topicId}`,
+            });
+            validateNoDummyFillBlankQuestions({
+                draft,
+                location: `${seed.moduleSlug}/${seed.sectionSlug}/${seed.topicId}`,
+            });
+
+            if (!evaluation.critiqueReport.ok) {
+                const critiqueErrors = evaluation.critiqueReport.issues.filter(
+                    (issue) => issue.severity === "error",
+                );
+
+                if (critiqueErrors.length) {
+                    throwRetryableReportFailure({
+                        code: "CRITIQUE_VALIDATION_FAILED",
+                        title: "Critique failed",
+                        topicId: node.topic.topicId,
+                        moduleSlug: node.module.moduleSlug,
+                        sectionSlug: node.section.sectionSlug,
+                        reportDir,
+                        messages: critiqueErrors.map((x) => x.message),
+                        details: evaluation.critiqueReport,
+                    });
+                }
+            }
+
+            if (!evaluation.semanticReport.ok) {
+                const semanticErrors = evaluation.semanticReport.issues.filter(
+                    (issue) => issue.severity === "error",
+                );
+
+                if (semanticErrors.length) {
+                    throwRetryableReportFailure({
+                        code: "SEMANTIC_VALIDATION_FAILED",
+                        title: "Semantic validation failed",
+                        topicId: node.topic.topicId,
+                        moduleSlug: node.module.moduleSlug,
+                        sectionSlug: node.section.sectionSlug,
+                        reportDir,
+                        messages: semanticErrors.map((x) => x.message),
+                        details: evaluation.semanticReport,
+                    });
+                }
+            }
+
+            advanceProgress({
+                stage: "building topic bundle",
+                topicId: node.topic.topicId,
+                moduleSlug: node.module.moduleSlug,
+                sectionSlug: node.section.sectionSlug,
+            });
+
+            const topicBundle = buildTopicBundleFromDraft({
+                shape,
+                seed,
+                draft,
+            });
+            validateTopicBundleIdentity({
+                seed,
+                topicBundle,
+                location: `${seed.moduleSlug}/${seed.sectionSlug}/${seed.topicId}`,
+            });
+
+            const goldenReport = await profileServices.validateGolden({
+                seed,
+                draft,
+                topicBundle,
+            });
+            attemptArtifacts.goldenReport = goldenReport;
+
+            if (!goldenReport.ok) {
+                const goldenErrors = goldenReport.issues.filter(
+                    (issue) => issue.severity === "error",
+                );
+
+                if (goldenErrors.length) {
+                    throwRetryableReportFailure({
+                        code: "GOLDEN_VALIDATION_FAILED",
+                        title: "Golden validation failed",
+                        topicId: node.topic.topicId,
+                        moduleSlug: node.module.moduleSlug,
+                        sectionSlug: node.section.sectionSlug,
+                        reportDir,
+                        messages: goldenErrors.map((x) => x.message),
+                        details: goldenReport,
+                    });
+                }
+            }
+
+            const sourceMessages = buildMessagesFromDraft({
+                shape,
+                seed,
+                draft,
+            });
+            validateTopicMessagesIdentity({
+                seed,
+                messages: sourceMessages,
+                location: `${seed.moduleSlug}/${seed.sectionSlug}/${seed.topicId}`,
+            });
+
+            assertNonEmptyMessages({
+                locale: sourceLocale,
+                label: `${args.blueprint.subjectSlug}/${node.topic.topicId} topic messages`,
+                messages: sourceMessages,
+            });
+
+            const messagesByLocale: Record<string, Record<string, unknown>> = {
+                [sourceLocale]: sourceMessages,
+            };
+
+            for (const locale of extraLocales) {
+                advanceProgress({
+                    stage: `translating topic messages (${locale})`,
+                    topicId: node.topic.topicId,
+                    moduleSlug: node.module.moduleSlug,
+                    sectionSlug: node.section.sectionSlug,
+                });
+
+                messagesByLocale[locale] = await translateNonEmptyMessages({
+                    provider: args.provider,
+                    shape,
+                    sourceLocale,
+                    locale,
+                    sourceMessages,
+                    label: `${args.blueprint.subjectSlug}/${node.topic.topicId} topic messages`,
+                });
+            }
+
+            advanceProgress({
+                stage: "writing topic artifacts",
+                topicId: node.topic.topicId,
+                moduleSlug: node.module.moduleSlug,
+                sectionSlug: node.section.sectionSlug,
+            });
+
+            await writeTopicArtifacts({
+                subjectSlug: args.blueprint.subjectSlug,
+                moduleOrder: node.moduleIndex,
+                topicId: node.topic.topicId,
+                topicBundle,
+                messagesByLocale,
+            });
+
+            await writeTopicReports({
+                subjectSlug: args.blueprint.subjectSlug,
+                moduleOrder: node.moduleIndex,
+                topicId: node.topic.topicId,
+                rawDraft,
+                repairedDraft: draft,
+                repairReport: evaluation.repairReport,
+                critiqueReport: evaluation.critiqueReport,
+                semanticReport: evaluation.semanticReport,
+                goldenReport,
+                topicBundle,
+            });
+
+            await writeTopicAttemptReport({
+                reportDir,
+                attempt,
+                status: "success",
+                ...attemptArtifacts,
+            });
+
+            await writeTopicCompileStatus({
+                reportDir,
+                status: "success",
+                attempts: attempt + 1,
+                finalAttempt: attempt,
+            });
+
+            advanceProgress({
+                stage: attempt > 0 ? "completed topic after retry" : "completed topic",
+                topicId: node.topic.topicId,
+                moduleSlug: node.module.moduleSlug,
+                sectionSlug: node.section.sectionSlug,
+            });
+
+            return {
+                topicId: node.topic.topicId,
+                subjectSlug: args.blueprint.subjectSlug,
+            };
+        } catch (error) {
+            previousError = error;
+
+            await writeTopicAttemptReport({
+                reportDir,
+                attempt,
+                status: "failed",
+                ...attemptArtifacts,
+                error,
+            });
+
+            const canRetry =
+                attempt < MAX_TOPIC_RETRIES &&
+                isRetryableTopicValidationError(error);
+
+            if (canRetry) {
+                advanceProgress({
+                    stage: `retryable topic failure (${attempt + 1}/${MAX_TOPIC_RETRIES})`,
+                    topicId: node.topic.topicId,
+                    moduleSlug: node.module.moduleSlug,
+                    sectionSlug: node.section.sectionSlug,
+                });
+                continue;
+            }
+            await writeTopicCompileStatus({
+                reportDir,
+                status: "failed",
+                attempts: attempt + 1,
+                finalAttempt: attempt,
+                errorCode: errorCode(error),
+                errorMessage: errorMessage(error),
+            });
+
+            if (isRetryableTopicValidationError(error)) {
+                throw new Error(
+                    [
+                        `Retryable topic generation failed after ${attempt + 1} attempt(s).`,
+                        `Topic: ${node.module.moduleSlug}/${node.section.sectionSlug}/${node.topic.topicId}`,
+                        `Last error code: ${error.code}`,
+                        "",
+                        error.message,
+                        "",
+                        `Report dir: ${reportDir}`,
+                    ].join("\n"),
+                );
+            }
+
+            throw error;
         }
     }
 
-    if (!evaluation.semanticReport.ok) {
-        const semanticErrors = evaluation.semanticReport.issues.filter(
-            (issue) => issue.severity === "error",
-        );
-
-        if (semanticErrors.length) {
-            throw new Error(
-                [
-                    `Semantic validation failed for topic "${node.topic.topicId}"`,
-                    `Module: ${node.module.moduleSlug}`,
-                    `Section: ${node.section.sectionSlug}`,
-                    `Report dir: .curriculum-drafts/reports/${args.blueprint.subjectSlug}/module${node.moduleIndex}/${node.topic.topicId}`,
-                    ...semanticErrors.map((x) => `- ${x.message}`),
-                ].join("\n"),
-            );
-        }
-    }
-
-    advanceProgress({
-        stage: "building topic bundle",
-        topicId: node.topic.topicId,
-        moduleSlug: node.module.moduleSlug,
-        sectionSlug: node.section.sectionSlug,
-    });
-
-    const topicBundle = buildTopicBundleFromDraft({
-        shape,
-        seed,
-        draft,
-    });
-    validateTopicBundleIdentity({
-        seed,
-        topicBundle,
-        location: `${seed.moduleSlug}/${seed.sectionSlug}/${seed.topicId}`,
-    });
-    const goldenReport = await profileServices.validateGolden({
-        seed,
-        draft,
-        topicBundle,
-    });
-
-    await writeTopicReports({
-        subjectSlug: args.blueprint.subjectSlug,
-        moduleOrder: node.moduleIndex,
-        topicId: node.topic.topicId,
-        rawDraft,
-        repairedDraft: draft,
-        repairReport: evaluation.repairReport,
-        critiqueReport: evaluation.critiqueReport,
-        semanticReport: evaluation.semanticReport,
-        goldenReport,
-        topicBundle,
-    });
-
-    if (!goldenReport.ok) {
-        const goldenErrors = goldenReport.issues.filter(
-            (issue) => issue.severity === "error",
-        );
-
-        if (goldenErrors.length) {
-            throw new Error(
-                [
-                    `Golden validation failed for topic "${node.topic.topicId}"`,
-                    `Module: ${node.module.moduleSlug}`,
-                    `Section: ${node.section.sectionSlug}`,
-                    `Report dir: .curriculum-drafts/reports/${args.blueprint.subjectSlug}/module${node.moduleIndex}/${node.topic.topicId}`,
-                    ...goldenErrors.map((x) => `- ${x.message}`),
-                ].join("\n"),
-            );
-        }
-    }
-
-    const sourceMessages = buildMessagesFromDraft({
-        shape,
-        seed,
-        draft,
-
-    });
-    validateTopicMessagesIdentity({
-        seed,
-        messages: sourceMessages,
-        location: `${seed.moduleSlug}/${seed.sectionSlug}/${seed.topicId}`,
-    });
-
-    assertNonEmptyMessages({
-        locale: sourceLocale,
-        label: `${args.blueprint.subjectSlug}/${node.topic.topicId} topic messages`,
-        messages: sourceMessages,
-    });
-
-    const messagesByLocale: Record<string, Record<string, unknown>> = {
-        [sourceLocale]: sourceMessages,
-    };
-
-    for (const locale of extraLocales) {
-        advanceProgress({
-            stage: `translating topic messages (${locale})`,
-            topicId: node.topic.topicId,
-            moduleSlug: node.module.moduleSlug,
-            sectionSlug: node.section.sectionSlug,
-        });
-
-        messagesByLocale[locale] = await translateNonEmptyMessages({
-            provider: args.provider,
-            shape,
-            sourceLocale,
-            locale,
-            sourceMessages,
-            label: `${args.blueprint.subjectSlug}/${node.topic.topicId} topic messages`,
-        });
-    }
-
-    advanceProgress({
-        stage: "writing topic artifacts",
-        topicId: node.topic.topicId,
-        moduleSlug: node.module.moduleSlug,
-        sectionSlug: node.section.sectionSlug,
-    });
-
-    await writeTopicArtifacts({
-        subjectSlug: args.blueprint.subjectSlug,
-        moduleOrder: node.moduleIndex,
-        topicId: node.topic.topicId,
-        topicBundle,
-        messagesByLocale,
-    });
-
-    advanceProgress({
-        stage: "completed topic",
-        topicId: node.topic.topicId,
-        moduleSlug: node.module.moduleSlug,
-        sectionSlug: node.section.sectionSlug,
-    });
-
-    return {
-        topicId: node.topic.topicId,
-        subjectSlug: args.blueprint.subjectSlug,
-    };
+    throw previousError;
 }

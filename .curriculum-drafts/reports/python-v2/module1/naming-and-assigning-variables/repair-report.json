@@ -19,14 +19,14 @@
       "code": "PYTHON_TESTS_DERIVED_FROM_SOLUTION",
       "category": "recipe",
       "severity": "high",
-      "field": "1",
+      "field": "q5",
       "message": "Derived stdin/stdout tests by running a no-input Python solution that already prints output."
     },
     {
       "code": "PYTHON_TESTS_DERIVED_FROM_SOLUTION",
       "category": "recipe",
       "severity": "high",
-      "field": "5",
+      "field": "q4",
       "message": "Derived stdin/stdout tests by running a no-input Python solution that already prints output."
     }
   ]

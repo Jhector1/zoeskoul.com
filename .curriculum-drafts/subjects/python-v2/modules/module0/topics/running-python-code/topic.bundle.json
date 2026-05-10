@@ -99,11 +99,12 @@
       "messageBase": "topics.python-v2.python-v2-0.running-python-code.quiz.quiz_2",
       "optionIds": [
         "a",
-        "b"
+        "b",
+        "c"
       ],
       "expected": {
         "kind": "single_choice",
-        "optionId": "a"
+        "optionId": "b"
       }
     },
     {
@@ -115,15 +116,13 @@
       "optionIds": [
         "a",
         "b",
-        "c",
-        "d"
+        "c"
       ],
       "expected": {
         "kind": "multi_choice",
         "optionIds": [
           "a",
-          "b",
-          "d"
+          "b"
         ]
       }
     },
@@ -133,10 +132,10 @@
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-0.running-python-code.quiz.quiz_4",
-      "choiceCount": 4,
+      "choiceCount": 3,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "'Hello, World!'"
+        "value": "World"
       }
     },
     {
@@ -146,7 +145,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-0.running-python-code.quiz.quiz_5",
       "language": "python",
-      "starterCode": "print('')",
+      "starterCode": "// Write your answer below",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",

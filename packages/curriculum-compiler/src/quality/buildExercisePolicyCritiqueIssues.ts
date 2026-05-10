@@ -102,7 +102,9 @@ function buildCountBasedIssues(args: {
             severity: delta <= 1 ? "warn" : "error",
             message: `Exercise policy targets ${expected} "${kind}" exercise(s), but the draft has ${actual}.`,
         });
-    }    const actualDominants = dominantKinds(toMix(counts));
+    }
+
+    const actualDominants = dominantKinds(toMix(counts));
 
     if (!actualDominants.includes(plannedCounts.dominantKind)) {
         issues.push({

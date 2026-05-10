@@ -14,21 +14,21 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.python-v2.python-v2-0.print-comments-and-errors.cards.sketch0.title",
-      "sketchId": "sketch_1",
+      "sketchId": "1",
       "height": 420
     },
     {
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.python-v2.python-v2-0.print-comments-and-errors.cards.sketch1.title",
-      "sketchId": "sketch_2",
+      "sketchId": "2",
       "height": 420
     },
     {
       "id": "sketch2",
       "kind": "sketch",
       "titleKey": "topics.python-v2.python-v2-0.print-comments-and-errors.cards.sketch2.title",
-      "sketchId": "sketch_3",
+      "sketchId": "3",
       "height": 420
     },
     {
@@ -54,9 +54,9 @@
         "maxAttempts": 10,
         "steps": [
           {
-            "id": "quiz_5",
-            "titleKey": "topics.python-v2.python-v2-0.print-comments-and-errors.projectSteps.quiz_5.title",
-            "exerciseKey": "quiz_5",
+            "id": "q5",
+            "titleKey": "topics.python-v2.python-v2-0.print-comments-and-errors.projectSteps.q5.title",
+            "exerciseKey": "q5",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
@@ -68,48 +68,31 @@
   ],
   "sketches": [
     {
-      "id": "sketch_1",
+      "id": "1",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-v2.python-v2-0.print-comments-and-errors.sketch_1.title",
-      "bodyKey": "sketches.python-v2.python-v2-0.print-comments-and-errors.sketch_1.bodyMarkdown"
+      "titleKey": "sketches.python-v2.python-v2-0.print-comments-and-errors.1.title",
+      "bodyKey": "sketches.python-v2.python-v2-0.print-comments-and-errors.1.bodyMarkdown"
     },
     {
-      "id": "sketch_2",
+      "id": "2",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-v2.python-v2-0.print-comments-and-errors.sketch_2.title",
-      "bodyKey": "sketches.python-v2.python-v2-0.print-comments-and-errors.sketch_2.bodyMarkdown"
+      "titleKey": "sketches.python-v2.python-v2-0.print-comments-and-errors.2.title",
+      "bodyKey": "sketches.python-v2.python-v2-0.print-comments-and-errors.2.bodyMarkdown"
     },
     {
-      "id": "sketch_3",
+      "id": "3",
       "archetype": "paragraph",
-      "titleKey": "sketches.python-v2.python-v2-0.print-comments-and-errors.sketch_3.title",
-      "bodyKey": "sketches.python-v2.python-v2-0.print-comments-and-errors.sketch_3.bodyMarkdown"
+      "titleKey": "sketches.python-v2.python-v2-0.print-comments-and-errors.3.title",
+      "bodyKey": "sketches.python-v2.python-v2-0.print-comments-and-errors.3.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "quiz_1",
+      "id": "q1",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.print-comments-and-errors.quiz.quiz_1",
-      "optionIds": [
-        "a",
-        "b",
-        "c",
-        "d"
-      ],
-      "expected": {
-        "kind": "single_choice",
-        "optionId": "a"
-      }
-    },
-    {
-      "id": "quiz_2",
-      "kind": "single_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.print-comments-and-errors.quiz.quiz_2",
+      "messageBase": "topics.python-v2.python-v2-0.print-comments-and-errors.quiz.q1",
       "optionIds": [
         "a",
         "b",
@@ -122,11 +105,28 @@
       }
     },
     {
-      "id": "quiz_3",
+      "id": "q2",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-0.print-comments-and-errors.quiz.q2",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "q3",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.print-comments-and-errors.quiz.quiz_3",
+      "messageBase": "topics.python-v2.python-v2-0.print-comments-and-errors.quiz.q3",
       "optionIds": [
         "a",
         "b",
@@ -137,41 +137,42 @@
         "kind": "multi_choice",
         "optionIds": [
           "a",
-          "b"
+          "b",
+          "c"
         ]
       }
     },
     {
-      "id": "quiz_4",
+      "id": "q4",
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.print-comments-and-errors.quiz.quiz_4",
-      "choiceCount": 3,
+      "messageBase": "topics.python-v2.python-v2-0.print-comments-and-errors.quiz.q4",
+      "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "World"
+        "value": "#"
       }
     },
     {
-      "id": "quiz_5",
+      "id": "q5",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python-v2.python-v2-0.print-comments-and-errors.quiz.quiz_5",
+      "messageBase": "topics.python-v2.python-v2-0.print-comments-and-errors.quiz.q5",
       "language": "python",
-      "starterCode": "print('Hello, World!'",
+      "starterCode": "print(\"Hello, World!\"",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
           {
             "stdin": "",
-            "stdout": "Hello, World!\n",
+            "stdout": "Hello, World!",
             "match": "exact"
           }
         ],
-        "solutionCode": "print('Hello, World!')"
+        "solutionCode": "print(\"Hello, World!\")"
       }
     }
   ]
