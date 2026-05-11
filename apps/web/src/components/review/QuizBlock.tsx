@@ -33,6 +33,10 @@ import { useTaggedT } from "@/i18n/tagged";
 import FlowNavigator, {
   type FlowNavMode,
 } from "@/components/review/navigation/FlowNavigator";
+import {
+    computeReviewQuizCompletionSummary,
+    shouldAutoCompleteReviewCard
+} from "@/components/review/quiz/reviewQuizCompletion";
 
 const LS_AUTO_ADV = "learnoir.quiz.autoAdvance";
 
@@ -489,56 +493,42 @@ export default function QuizBlock({
   //   return ok;
   // }
 
-  const summary = useMemo(() => {
-    let checkedCount = 0;
-    let correctCount = 0;
-    let denom = 0;
-    let excusedCount = 0;
+    const summary = useMemo(() => {
+        return computeReviewQuizCompletionSummary({
+            passScore,
+            requireAllCorrect: true,
+            questions: questions.map((q) => ({
+                id: q.id,
+                checked: isQuestionChecked(q),
+                ok: getQuestionOk(q),
+                excused: isExcused(q.id),
+            })),
+        });
+    }, [
+        questions,
+        local.checkedById,
+        local.answers,
+        practiceBank.practice,
+        passScore,
+        excusedById,
+    ]); // eslint-disable-line react-hooks/exhaustive-deps
+    useEffect(() => {
+        if (
+            !shouldAutoCompleteReviewCard({
+                prereqsMet,
+                locked,
+                isCompleted,
+                summary,
+            })
+        ) {
+            return;
+        }
 
-    for (const q of questions) {
-      if (isQuestionChecked(q)) checkedCount++;
+        if (autoKeyRef.current === resetKey) return;
+        autoKeyRef.current = resetKey;
 
-      if (isExcused(q.id)) {
-        excusedCount++;
-        continue;
-      }
-
-      denom++;
-      if (getQuestionOk(q) === true) correctCount++;
-    }
-
-    const allChecked = checkedCount >= questions.length && questions.length > 0;
-    const score = denom === 0 ? 1 : correctCount / denom;
-    const passed = allChecked && (denom === 0 ? true : score >= passScore);
-
-    return {
-      checkedCount,
-      correctCount,
-      total: questions.length,
-      denom,
-      score,
-      allChecked,
-      passed,
-      excusedCount,
-    };
-  }, [
-    questions,
-    local.checkedById,
-    local.answers,
-    practiceBank.practice,
-    passScore,
-    excusedById,
-  ]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  useEffect(() => {
-    if (!prereqsMet || locked || isCompleted) return;
-    if (!summary.passed) return;
-
-    if (autoKeyRef.current === resetKey) return;
-    autoKeyRef.current = resetKey;
-
-    onPassRef.current();
-  }, [prereqsMet, locked, isCompleted, summary.passed, resetKey]);
+        onPassRef.current();
+    }, [prereqsMet, locked, isCompleted, summary.passed, resetKey]);
 
   const nextState = useMemo<SavedQuizState>(() => {
     const base = initState;
